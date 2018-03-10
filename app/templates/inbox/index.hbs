@@ -1,0 +1,37 @@
+{{#data-table content=model isLoading=isLoadingModel noDataMessage="Geen documenten"
+     sort=sort page=page size=size class="documents-overview-demo" as |t|}}
+  {{#t.menu as |menu|}}
+    {{#menu.general}}
+      <div class="grid">
+        <div class="col--8-12">
+          <div class="search-box">
+            {{text-search filter=title placeholder="Zoek op zitting"}}
+          </div>
+        </div>
+        <div class="col--4-12">
+
+        </div>
+      </div>
+    {{/menu.general}}
+  {{/t.menu}}
+  {{#t.content as |c|}}
+    {{#c.header}}
+      <th class="data-table__header-title"><!-- Starred --></th>
+      {{th-sortable field='title' currentSorting=sort label='Zitting' class="data-table__header-title"}}
+      {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title"}}
+    {{/c.header}}
+    {{#c.body as |row|}}
+      <td>
+        <label class="checkbox checkbox--empty checkbox--star" {{action "toggleStar" row}}>
+          <input type="checkbox" class="checkbox__toggle" name="star" data-table-checkbox="" checked={{row.starred}}>
+          <span><i class="fa fa-star"></i></span>
+          <span class="u-visually-hidden">Voeg toe als favoriet</span>
+        </label>
+      </td>
+      <td>{{#link-to 'editor-documents.edit' row.id}}{{row.title}}{{/link-to}}</td>
+      <td>{{editor-status-pill status=(await row.status)}}</td>
+    {{/c.body}}
+  {{/t.content}}
+{{/data-table}}
+
+{{outlet}}

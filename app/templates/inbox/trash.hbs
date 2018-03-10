@@ -1,0 +1,51 @@
+{{#data-table content=model isLoading=isLoadingModel noDataMessage="Geen documenten"
+     sort=sort page=page size=size class="documents-overview-demo" as |t|}}
+  {{#t.menu as |menu|}}
+    {{#menu.general}}
+      <div class="grid">
+        <div class="col--8-12">
+          <div class="search-box">
+            {{text-search filter=title placeholder="Zoek op zitting"}}
+          </div>
+        </div>
+      </div>
+    {{/menu.general}}
+    {{#menu.selected as |selection datatable|}}
+      <div class="grid">
+        <div class="col--6-12">
+          <div class="search-box">
+            {{text-search filter=title placeholder="Zoek op zitting"}}
+          </div>
+        </div>
+        <div class="col--6-12">
+          <ul class="data-table__actions__list data-table__actions__list--right">
+            <li class="data-table__action" data-table-action="">
+              <button class="data-table__action__toggle data-table__action__toggle--contract-xs" {{action "moveToConcepts" selection datatable}}>
+                <i class="fa fa-rotate-left" aria-hidden="true"></i>
+                <span>Verplaats selectie terug naar ontwerpen</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    {{/menu.selected}}
+  {{/t.menu}}
+  {{#t.content as |c|}}
+    {{#c.header}}
+      <th class="data-table__header-title"><!-- Starred --></th>
+      {{th-sortable field='title' currentSorting=sort label='Zitting' class="data-table__header-title"}}
+      {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title"}}
+    {{/c.header}}
+    {{#c.body as |row|}}
+      <td>
+        <label class="checkbox checkbox--empty checkbox--star" {{action "toggleStar" row}}>
+          <input type="checkbox" class="checkbox__toggle" name="star" data-table-checkbox="" checked={{row.starred}}>
+          <span><i class="fa fa-star"></i></span>
+          <span class="u-visually-hidden">Voeg toe als favoriet</span>
+        </label>
+      </td>
+      <td>{{row.title}}</td>
+      <td>{{editor-status-pill status=(await row.status)}}</td>
+    {{/c.body}}
+  {{/t.content}}
+{{/data-table}}

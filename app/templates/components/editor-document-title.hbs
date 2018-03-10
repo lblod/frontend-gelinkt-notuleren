@@ -1,0 +1,26 @@
+{{#if readOnly}}
+  <h1 class="h3 sans-serif">
+    {{#link-to 'inbox.index'}}&leftarrow;{{/link-to}}
+    {{#if editorDocument.title}}
+      {{editorDocument.title}}
+    {{else}}
+      <span class="text-fade">Geen titel</span>
+    {{/if}}
+  </h1>
+{{else}}
+  {{#if active}}
+    <label for="input-field" class="form__label">Geef een titel in: </label>
+    {{input class="input-field" type="text" placeholder="Titel" value=editorDocument.title focus-out="toggleActive" autofocus="autofocus"}}
+  {{else}}
+    <h1 class="h3 sans-serif">
+      {{#link-to 'inbox.index'}}&leftarrow;{{/link-to}}
+      <a class="link-dark" onClick={{action "toggleActive"}}>
+        {{#if editorDocument.title}}
+          {{editorDocument.title}}
+        {{else}}
+          Klik hier om titel toe te voegen
+        {{/if}}
+      </a>
+    </h1>
+  {{/if}}
+{{/if}}

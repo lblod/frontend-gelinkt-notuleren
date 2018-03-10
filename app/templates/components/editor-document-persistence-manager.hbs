@@ -1,0 +1,19 @@
+{{#wu-button-group class="u-align-right"}}
+  {{#if isPublishAgendaAllowed}}
+    {{#if isTrashingAllowed}}
+      {{wu-button label="Verwijder concept" isNarrow=true isLink=true isDarkLink=true onClick=(action "sendToTrash")}}
+    {{/if}}
+    {{wu-button label="Publiceer agendapunten" isNarrow=true isAlt=true onClick=(action "publishAgenda")}}
+    {{wu-button label="Bewaar concept" isNarrow=true onClick=(action "save")}}
+  {{/if}}
+
+  {{#if isPublishBesluitenlijstAllowed}}
+    {{wu-button label="Publiceer besluitenlijst" isNarrow=true isAlt=true onClick=(action "publishBesluitenlijst")}}
+    {{wu-button label="Bewaar aanpassingen" isNarrow=true onClick=(action "save")}}
+  {{/if}}
+
+  {{#if isPublishSignedNotulenAllowed}}
+    {{wu-button label="Publiceer notulen" isNarrow=true isAlt=true onClick=(action "publishSignedNotulen")}}
+    {{wu-button label="Bewaar aanpassingen" isNarrow=true onClick=(action "save")}}
+  {{/if}}
+{{/wu-button-group}}

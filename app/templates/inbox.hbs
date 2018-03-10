@@ -1,0 +1,42 @@
+<div class="temporary-header">
+  <div class="grid">
+    <div class="col--6-12">
+      <div class="temporary-header__logo"></div>
+      <div class="temporary-header__vlaanderen">Vlaanderen</div>
+      <div class="temporary-header__name">demo-editor.lblod.info</div>
+    </div>
+    <div class="col--6-12 u-align-right">
+      <div class="temporary-header__info">
+        <p>Demo omgeving</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="app-view">
+  <div class="grid grid--collapse">
+    <div class="col--2-12 flex">
+      <div class="sidebar">
+        <div class="sidebar__header">
+          {{#wu-button isBlock=true onClick=(action "openNewDocument")}}Nieuw document{{/wu-button}}
+        </div>
+        <div class="sidebar__content">
+          <div class="side-menu">
+            <div class="side-menu__item">
+              {{#link-to 'inbox.index'}}Ontwerpen{{/link-to}}
+            </div>
+            <div class="side-menu__item">
+              {{#link-to 'inbox.archive'}}Goedgekeurde notulen{{/link-to}}
+            </div>
+            <div class="side-menu__item">
+              {{#link-to 'inbox.trash'}}Prullenbak{{/link-to}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col--10-12 flex">
+      {{outlet}}
+    </div>
+  </div>
+</div>

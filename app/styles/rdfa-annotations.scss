@@ -1,0 +1,111 @@
+/* annotation hovers */
+.annotation[typeof="besluit:AanstellingsBesluit"]:after {
+  content: "Aanstellingsbesluit"
+}
+
+.annotation[typeof="besluit:OntslagBesluit"]:after {
+  content: "Ontslagbesluit"
+}
+
+.annotation[typeof="besluit:Artikel"]:after {
+  content: "Artikel"
+}
+
+.annotation[typeof="besluit:Besluit"]:after {
+  content: "Besluit"
+}
+
+.annotation[typeof="mandaat:Mandataris"]:after {
+  content: "Mandataris"
+}
+
+.annotation[property="mandaat:bekrachtigtOntslagVan"][typeof="mandaat:Mandataris"]:after {
+  content: "Ontslagen mandataris"
+}
+
+.annotation[property="mandaat:bekrachtigtAanstellingVan"][typeof="mandaat:Mandataris"]:after {
+  content: "Aangestelde mandataris"
+}
+
+.annotation[datatype="xsd:date"][property="mandaat:start"]:after {
+  content: "Startdatum mandataris"
+}
+
+.annotation[datatype="xsd:date"][property="mandaat:einde"]:after {
+  content: "Einddatum mandataris"
+}
+
+.annotation[property="besluit:heeftAanwezigeBijStart"]:after {
+  content: "Aanwezige"
+}
+
+.annotation[property="besluit:heeftAanwezigeBijStart"][typeof="mandaat:Mandataris"]:after {
+  content: "Aanwezige mandataris"
+}
+
+.annotation[datatype="xsd:date"][property="dcterms:created"]:after {
+  content: "Creatiedatum"
+}
+
+.annotation[property="dc:title"]:after,
+.annotation[property="eli:title"]:after {
+  content: "Titel"
+}
+
+.annotation[property="eli:description"]:after {
+  content: "Beknopte beschrijving"
+}
+
+.annotation[property="eli:number"]:after {
+  content: "Nummer";
+  right: -65rem !important;
+}
+
+.annotation[property="prov:value"]:after {
+  content: "Inhoud"
+}
+
+.annotation[property="eli:cites"]:after {
+  content: "citeert"
+}
+
+.annotation[datatype="xsd:date"][property="dcterms:created"]:after {
+  content: "Creatiedatum"
+}
+
+.annotation[property="besluit:isGehoudenDoor"]:after {
+  content: "gehouden door Bestuursorgaan"
+}
+
+.annotation[property="besluit:geplandeStart"]:after {
+  content: "Geplande start"
+}
+
+.annotation[property="prov:atLocation"]:after {
+  content: "Locatie"
+}
+
+.annotation[property="prov:startedAtTime"]:after {
+  content: "Start tijdstip"
+}
+
+.annotation[property="prov:endedAtTime"]:after {
+  content: "Eind tijdstip"
+}
+
+.annotation[property="besluit:heeftAgendapunt"]:after,
+.annotation[property="besluit:behandelt"]:after {
+  content: "Behandeld agendapunt"
+}
+
+.annotation[property="besluit:gevolg"]:after {
+  content: "gevolg"
+}
+
+[typeof="besluit:Agendapunt"] .annotation[property="besluit:geplandOpenbaar"][content="true"]:after {
+  content: "Gepland openbaar"
+}
+
+[typeof="besluit:Agendapunt"] .annotation[property="besluit:geplandOpenbaar"][content="false"]:after {
+  content: "Niet gepland openbaar"
+}

@@ -1,0 +1,5 @@
+{{#if rdfaEditorContainerReady}}
+  {{rdfa-editor profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit")}}
+{{/if}}
+
+{{yield}}
