@@ -18,7 +18,7 @@ module.exports = function(environment) {
     },
 
     APP: {
-      'ember-rdfa-editor-date-plugin': {
+      '@lblod/ember-rdfa-editor-date-plugin': {
         allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY',  'DD.MM.YYYY'],
         outputDateFormat: 'D MMMM YYYY',
         moment: {

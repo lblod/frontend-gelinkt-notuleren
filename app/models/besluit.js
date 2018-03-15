@@ -1,5 +1,5 @@
 import Model from 'ember-data/model';
-import BesluitModelMixin from 'ember-rdfa-editor-citaten-plugin/mixins/besluit-model';
+import BesluitModelMixin from '@lblod/ember-rdfa-editor-citaten-plugin/mixins/besluit-model';
 import { belongsTo } from 'ember-data/relationships';
 
 export default Model.extend(BesluitModelMixin, {
