@@ -8,77 +8,47 @@
       publishSignedNotulen=(action "publishSignedNotulen")
       sendToTrash=(action "sendToTrash")
     }}
-  {{/app-chrome}}
+{{/app-chrome}}
 
 
-  {{#if validationErrors}}
-    {{#wu-modal title="Er zijn fouten bij de validatie" onClose=(action 'closeValidationModal')}}
-      <div class="modal-dialog__content">
-        Gelieve een titel op te geven.
-      </div>
-      <div class="modal-dialog__buttons">
-        {{wu-link-button label="OK" class="modal-dialog__button" onClick=(action 'closeValidationModal')}}
-      </div>
-    {{/wu-modal}}
-  {{/if}}
+{{#if validationErrors}}
+  {{#wu-modal title="Er zijn fouten bij de validatie" onClose=(action 'closeValidationModal') as |m|}}
+    {{#m.content}}
+      Gelieve een titel op te geven.
+    {{/m.content}}
+    {{#m.buttons as |b|}}
+      {{b.button label="OK" onClick=(action 'closeValidationModal')}}
+    {{/m.buttons}}
+  {{/wu-modal}}
+{{/if}}
 
-  {{#if modalTransitionToTrash}}
-    {{#wu-modal title="Uw concept wordt naar de prullenmand verplaatst." onClose=(action 'onClosePublishStatusModal')}}
-      <div class="modal-dialog__buttons">
-        {{wu-link-button label="OK" class="modal-dialog__button" onClick=(action 'terminatePublishFlow')}}
-        <a href="#" role="button" class="modal-dialog__button" {{action (action 'onClosePublishStatusModal')}}>
-          {{wu-icon "vi-cross" class="vi-u-link"}} Annuleren
-        </a>
-      </div>
-    {{/wu-modal}}
-  {{/if}}
-  {{#if modalTransitionToAgendaPublished}}
-    {{#wu-modal title="Uw agendapunten worden gepubliceerd" onClose=(action 'onClosePublishStatusModal')}}
-      <div class="modal-dialog__content">
-        Opgelet, dit is onomkeerbaar!
-      </div>
-      <div class="modal-dialog__buttons">
-        {{wu-link-button label="OK" class="modal-dialog__button" onClick=(action 'terminatePublishFlow')}}
-        <a href="#" role="button" class="modal-dialog__button" {{action (action 'onClosePublishStatusModal')}}>
-          {{wu-icon "vi-cross" class="vi-u-link"}} Annuleren
-        </a>
-      </div>
-    {{/wu-modal}}
-  {{/if}}
-  {{#if modalTransitionToBesluitenlijstPublished}}
-    {{#wu-modal title="De besluitenlijst wordt gepubliceerd" onClose=(action 'onClosePublishStatusModal')}}
-      <div class="modal-dialog__content">
-        Opgelet, dit is onomkeerbaar!
-      </div>
-      <div class="modal-dialog__buttons">
-        {{wu-link-button label="OK" class="modal-dialog__button" onClick=(action 'terminatePublishFlow')}}
-        <a href="#" role="button" class="modal-dialog__button" {{action (action 'onClosePublishStatusModal')}}>
-          {{wu-icon "vi-cross" class="vi-u-link"}} Annuleren
-        </a>
-      </div>
-    {{/wu-modal}}
-  {{/if}}
-  {{#if modalTransitionToSignedPublished}}
-    {{#wu-modal title="Uw notulen worden gepubliceerd" onClose=(action 'onClosePublishStatusModal')}}
-      <div class="modal-dialog__content">
-        Opgelet, dit is onomkeerbaar!
-      </div>
-      <div class="modal-dialog__buttons">
-        {{wu-link-button label="OK" class="modal-dialog__button" onClick=(action 'terminatePublishFlow')}}
-        <a href="#" role="button" class="modal-dialog__button" {{action (action 'onClosePublishStatusModal')}}>
-          {{wu-icon "vi-cross" class="vi-u-link"}} Annuleren
-        </a>
-      </div>
-    {{/wu-modal}}
-  {{/if}}
+{{#if modalTransitionToAgendaPublished}}
+  {{#wu-modal title="Uw agendapunten worden gepubliceerd" onClose=(action 'onClosePublishStatusModal') as |m|}}
+    {{#m.content}}
+      Opgelet, dit is onomkeerbaar!
+    {{/m.content}}
+    {{#m.buttons as |b|}}
+      {{b.button label="OK" onClick=(action 'terminatePublishFlow')}}
+      {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
+    {{/m.buttons}}
+  {{/wu-modal}}
+{{/if}}
 
+{{#if isProcessing}}
+  <div class="grid">
+    <div class="col--12-12 u-align-center">
+      <div class="loader"><span class="u-visually-hidden">Aan het verwerken</span></div>
+    </div>
+  </div>
+{{else}}
   {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit")}}
+{{/if}}
 
 {{#if showIntro}}
-  {{#wu-modal title="Annoteer je notulen hier" onClose=(action 'closeDialog')}}
-    <div class="modal-dialog__content">
+  {{#wu-modal title="Annoteer je notulen hier" onClose=(action 'closeDialog') as |m|}}
+    {{#m.content}}
       <p class="u-spacer--tiny">Voer "notulen" in om te vertrekken van een template.</p>
-    </div>
+    {{/m.content}}
   {{/wu-modal}}
 {{/if}}
 {{outlet}}
