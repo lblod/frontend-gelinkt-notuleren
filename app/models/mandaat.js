@@ -1,1 +1,1 @@
-export { default } from 'ember-rdfa-editor-mandataris-plugin/models/mandaat' ;
+export { default } from '@lblod/ember-rdfa-editor-mandataris-plugin/models/mandaat' ;
