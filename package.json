@@ -19,7 +19,7 @@
     "lint:js": "eslint ./*.js addon addon-test-support app config lib server test-support tests"
   },
   "devDependencies": {
-    "@lblod/ember-rdfa-editor": "^0.12.2",
+    "@lblod/ember-rdfa-editor": "^0.12.3",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.5.1",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.5.0",
     "@lblod/ember-rdfa-editor-date-plugin": "^0.6.2",
