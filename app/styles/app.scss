@@ -63,3 +63,27 @@
     color: #0F68C9;
   }
 }
+
+.editor-container {
+  .grid {
+    background-color: #F3F5F6;
+
+    .sidebar-wrapper {
+      position: relative;
+      transition: 0.5s;
+      left: 0;
+
+      &.col--collapsed {
+        left: -460px;
+      }
+
+      .sidebar {
+        background-color: #FFF;
+
+        .sidebar__header i {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
