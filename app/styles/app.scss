@@ -64,6 +64,7 @@
   }
 }
 
+/** Collapsable document structure */
 .editor-container {
   .grid {
     background-color: #F3F5F6;
@@ -73,8 +74,8 @@
       transition: 0.5s;
       left: 0;
 
-      &.col--collapsed {
-        left: -460px;
+      &.col--3-12.col--collapsed {
+        left: calc(-25% + 50px);
       }
 
       .sidebar {
