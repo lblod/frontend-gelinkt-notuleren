@@ -2,12 +2,14 @@ import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { removeNodeFromTree } from '../utils/dom-helpers';
 
 export default Mixin.create({
   ajax: service(),
 
   editorDocument: alias('model.editorDocument'),
   editorDocumentStatuses: alias('model.editorDocumentStatuses'),
+
   editorDomNode: null,
 
   validationErrors: false,
@@ -56,15 +58,29 @@ export default Mixin.create({
 
   async saveEditorDocument(editorDocument){
     let innerHtml = this.get('editorDomNode').innerHTML;
+  cleanUpEditorDocumentInnerHtml(innerHtml){
+    //for now only remove highlights
+    let template = document.createElement('template');
+    template.innerHTML = innerHtml;
+    let markTags = template.content.querySelectorAll('mark');
+    markTags.forEach( tag => {
+      removeNodeFromTree(tag);
+    });
+
+    return template.innerHTML;
+  },
+  async saveEditorDocument(editorDocument, newStatus, toNewDocument){
+    let documentToSave = toNewDocument ? this.get('store').createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
+    let origHtml = this.get('editorDomNode').innerHTML;
+    let innerHtml = this.cleanUpEditorDocumentInnerHtml(origHtml);
     let createdOn = editorDocument.get('createdOn') || new Date().toISOString();
     let title = editorDocument.get('title');
-    let status = editorDocument.get('status');
-    if(!status.get('id')){
-      status = this.get('editorDocumentStatuses').findBy('id', this.get('statusIdMap')['conceptStatusId']);
-    }
-    editorDocument.setProperties({content: innerHtml, status, createdOn, title});
-    await editorDocument.save();
-    return editorDocument;
+    let status = newStatus ? newStatus : editorDocument.get('status');
+    documentToSave.setProperties({content: innerHtml, status, createdOn, title});
+    await documentToSave.save();
+
+    documentToSave.set('content', origHtml); //don't redraw stripped stuff
+    return documentToSave;
   },
 
   async publishDocument(editorDocument, publishStatus){
