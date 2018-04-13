@@ -26,16 +26,8 @@ export default Component.extend({
       this.get('save')();
     },
 
-    publishAgenda(){
-      this.get('publishAgenda')();
-    },
-
-    publishBesluitenlijst(){
-      this.get('publishBesluitenlijst')();
-    },
-
-    publishSignedNotulen(){
-      this.get('publishSignedNotulen')();
+    publish(){
+      this.get('publish')();
     },
 
     sendToTrash(){

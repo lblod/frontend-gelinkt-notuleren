@@ -22,27 +22,48 @@ export default Mixin.create({
     signedPublishedStatusId: 'c272d47d756d4aeaa0be72081f1389c6'
   },
 
-  statusPublishApiEndPoint: {
-    agendaPublishedStatusId: editorDocumentId => `/publish/agenda/${editorDocumentId}`,
-    besluitenlijstPublishedStatusId: editorDocumentId => `/publish/decision/${editorDocumentId}`,
-    signedPublishedStatusId: editorDocumentId => `/publish/notule/${editorDocumentId}`
+  nextStatus: null,
+
+  getNextPublishStatus(currStatus){
+    if(currStatus.get('id') === this.get('statusIdMap')['agendaPublishedStatusId'])
+      return this.getStatusFor('besluitenlijstPublishedStatusId');
+
+    if(currStatus.get('id') === this.get('statusIdMap')['besluitenlijstPublishedStatusId'])
+      return this.getStatusFor('signedPublishedStatusId');
+
+    return this.getStatusFor('agendaPublishedStatusId');
+  },
+
+  getPublishApi(currStatus){
+    if(currStatus.get('id') === this.get('statusIdMap')['agendaPublishedStatusId'])
+      return editorDocumentId => `/publish/agenda/${editorDocumentId}`;
+
+    if(currStatus.get('id') === this.get('statusIdMap')['besluitenlijstPublishedStatusId'])
+      return editorDocumentId => `/publish/decision/${editorDocumentId}`;
+
+    if(currStatus.get('id') === this.get('statusIdMap')['signedPublishedStatusId'])
+      return editorDocumentId => `/publish/notule/${editorDocumentId}`;
   },
 
   isProcessing: false,
   displayPublishStatusModal: false,
-  publishModalStatus: '',
+
   modalTransitionToTrash: computed('displayPublishStatusModal', function(){
-    return this.get('publishModalStatus') === 'trashStatusId' && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.get('statusIdMap')['trashStatusId'] && this.get('displayPublishStatusModal');
   }),
   modalTransitionToAgendaPublished: computed('displayPublishStatusModal', function(){
-    return this.get('publishModalStatus') === 'agendaPublishedStatusId' && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.get('statusIdMap')['agendaPublishedStatusId'] && this.get('displayPublishStatusModal');
   }),
   modalTransitionToBesluitenlijstPublished: computed('displayPublishStatusModal', function(){
-    return this.get('publishModalStatus') === 'besluitenlijstPublishedStatusId' && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.get('statusIdMap')['besluitenlijstPublishedStatusId'] && this.get('displayPublishStatusModal');
   }),
   modalTransitionToSignedPublished: computed('displayPublishStatusModal', function(){
-    return this.get('publishModalStatus') === 'signedPublishedStatusId' && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.get('statusIdMap')['signedPublishedStatusId'] && this.get('displayPublishStatusModal');
   }),
+
+  getStatusFor(statusName){
+    return this.get('editorDocumentStatuses').findBy('id', this.get('statusIdMap')[statusName]);
+  },
 
   resetPublishStatusModal(){
      this.set('displayPublishStatusModal', false);
@@ -56,8 +77,6 @@ export default Mixin.create({
     return false;
   },
 
-  async saveEditorDocument(editorDocument){
-    let innerHtml = this.get('editorDomNode').innerHTML;
   cleanUpEditorDocumentInnerHtml(innerHtml){
     //for now only remove highlights
     let template = document.createElement('template');
@@ -69,6 +88,7 @@ export default Mixin.create({
 
     return template.innerHTML;
   },
+
   async saveEditorDocument(editorDocument, newStatus, toNewDocument){
     let documentToSave = toNewDocument ? this.get('store').createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
     let origHtml = this.get('editorDomNode').innerHTML;
@@ -84,26 +104,17 @@ export default Mixin.create({
   },
 
   async publishDocument(editorDocument, publishStatus){
-    await this.saveEditorDocument(editorDocument);
-    let newDocument = this.get('store').createRecord('editor-document');
-    newDocument.setProperties({
-      content: editorDocument.get('content'),
-      context: editorDocument.get('context'),
-      status: publishStatus,
-      createdOn: editorDocument.get('createdOn'),
-      title: editorDocument.get('title'),
-      previousVersion: editorDocument});
-    await newDocument.save();
-    return newDocument;
+    await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('conceptStatusId'));
+    return await this.saveEditorDocument(editorDocument, publishStatus, true);
   },
 
-  async publishFlow(newStatus){
+  async publishFlow(){
     this.set('isProcessing', true);
     try {
       let editorDocument = this.get('editorDocument');
-      let publishStatus = this.get('editorDocumentStatuses').findBy('id', this.get('statusIdMap')[newStatus]);
+      let publishStatus = this.get('nextStatus');
       let newDocument = await this.publishDocument(editorDocument, publishStatus);
-      let apiEndPoint = this.get('statusPublishApiEndPoint')[newStatus];
+      let apiEndPoint = this.getPublishApi(publishStatus);
       if(apiEndPoint){
         await this.get('ajax').post(apiEndPoint(newDocument.get('id')));
       }
@@ -135,23 +146,10 @@ export default Mixin.create({
 
    debug(info) {
       this.set('debug', info);
-    },
-
-   async saveNewEditorDocument(){
-     let editorDocument = this.get('editorDocument');
-
-     if(this.hasDocumentValidationErrors(editorDocument)){
-       this.set('validationErrors', true);
-       return;
-     }
-
-     await this.saveEditorDocument(editorDocument);
-     this.transitionToRoute('/editor-documents/' + editorDocument.get('id') + '/edit');
    },
 
-   async saveExistingEditorDocument(){
+   async save(){
      let editorDocument = this.get('editorDocument');
-
 
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);
@@ -162,34 +160,22 @@ export default Mixin.create({
    },
 
    sendToTrash(){
-     this.set('publishModalStatus', 'trashStatusId');
+     this.set('nextStatus', this.getStatusFor('trashStatusId'));
      this.set('displayPublishStatusModal', true);
    },
 
-   publishAgenda(){
+   publish(){
      if(this.hasDocumentValidationErrors(this.get('editorDocument'))){
        this.set('validationErrors', true);
        return;
      }
-
-     this.set('publishModalStatus', 'agendaPublishedStatusId');
-     this.set('displayPublishStatusModal', true);
-   },
-
-   publishBesluitenlijst(){
-     this.set('publishModalStatus', 'besluitenlijstPublishedStatusId');
-     this.set('displayPublishStatusModal', true);
-   },
-
-   publishSignedNotulen(){
-     this.set('publishModalStatus', 'signedPublishedStatusId');
+     this.set('nextStatus', this.getNextPublishStatus(this.get('editorDocument.status')));
      this.set('displayPublishStatusModal', true);
    },
 
    async terminatePublishFlow(){
-     let publishModalStatus = this.get('publishModalStatus');
      this.resetPublishStatusModal();
-     this.publishFlow(publishModalStatus);
+     this.publishFlow();
    },
 
    onClosePublishStatusModal(){
