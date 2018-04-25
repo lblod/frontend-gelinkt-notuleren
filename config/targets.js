@@ -1,3 +1,5 @@
+'use strict';
+
 const browsers = [
   'ie 11',
   'last 1 Chrome versions',
