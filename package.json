@@ -23,7 +23,7 @@
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.5.2",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.5.1",
     "@lblod/ember-rdfa-editor-date-plugin": "^0.7.1",
-    "@lblod/ember-rdfa-editor-mandataris-plugin": "^0.5.4",
+    "@lblod/ember-rdfa-editor-mandataris-plugin": "^0.6.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "^0.5.2",
     "@lblod/ember-vo-webuniversum": "^0.11.2",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.3",

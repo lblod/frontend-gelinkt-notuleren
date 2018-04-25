@@ -20,6 +20,7 @@ inflector.irregular("lidmaatschap","lidmaatschappen");
 inflector.irregular("mandaat","mandaten");
 inflector.irregular("mandataris","mandatarissen");
 inflector.irregular("persoon","personen");
+inflector.irregular("bestuursfunctie-code","bestuursfunctie-codes");
 inflector.irregular("identificator","identificatoren");
 inflector.irregular("rechtsgrond","rechtsgronden");
 inflector.irregular("rechtsgrond-aanstelling","rechtsgronden-aanstelling");
