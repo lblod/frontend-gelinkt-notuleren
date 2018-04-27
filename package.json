@@ -1,6 +1,6 @@
 {
   "name": "frontend-demo-editor",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": true,
   "description": "Demo application for the RDFa editor",
   "author": "redpencil.io",
