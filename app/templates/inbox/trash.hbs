@@ -1,5 +1,5 @@
 {{#data-table content=model isLoading=isLoadingModel noDataMessage="Geen documenten"
-     sort=sort page=page size=size class="documents-overview-demo" as |t|}}
+     sort=sort page=page size=size class="container-flex--contain" as |t|}}
   {{#t.menu as |menu|}}
     {{#menu.general}}
       <div class="grid">
@@ -32,20 +32,20 @@
   {{/t.menu}}
   {{#t.content as |c|}}
     {{#c.header}}
-      <th class="data-table__header-title"><!-- Starred --></th>
+      <!-- <th class="data-table__header-title"><!-- Starred </th> -->
       {{th-sortable field='title' currentSorting=sort label='Zitting' class="data-table__header-title"}}
-      {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title"}}
+      {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title u-align-right"}}
     {{/c.header}}
     {{#c.body as |row|}}
-      <td>
+<!--       <td>
         <label class="checkbox checkbox--empty checkbox--star" {{action "toggleStar" row}}>
           <input type="checkbox" class="checkbox__toggle" name="star" data-table-checkbox="" checked={{row.starred}}>
           <span><i class="fa fa-star"></i></span>
           <span class="u-visually-hidden">Voeg toe als favoriet</span>
         </label>
-      </td>
+      </td> -->
       <td>{{row.title}}</td>
-      <td>{{editor-status-pill status=(await row.status)}}</td>
+      <td class="u-align-right">{{editor-status-pill status=(await row.status)}}</td>
     {{/c.body}}
   {{/t.content}}
 {{/data-table}}
