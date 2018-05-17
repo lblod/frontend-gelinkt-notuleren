@@ -16,29 +16,33 @@
   </div>
 </div>
 
-<div class="app-view">
+<div class="container-flex--contain">
   <div class="grid grid--collapse">
-    <div class="col--2-12 flex">
-      <div class="sidebar">
-        <div class="sidebar__header">
-          {{#wu-button isBlock=true onClick=(action "openNewDocument")}}Nieuw document{{/wu-button}}
-        </div>
-        <div class="sidebar__content">
-          <div class="side-menu">
-            <div class="side-menu__item">
-              {{#link-to 'inbox.index'}}Ontwerpen{{/link-to}}
-            </div>
-            <div class="side-menu__item">
-              {{#link-to 'inbox.archive'}}Goedgekeurde notulen{{/link-to}}
-            </div>
-            <div class="side-menu__item">
-              {{#link-to 'inbox.trash'}}Prullenbak{{/link-to}}
+    <div class="col--2-12">
+      <div class="container-flex--contain">
+        <div class="sidebar">
+          <div class="sidebar__header">
+            {{#wu-button isBlock=true onClick=(action "openNewDocument")}}Nieuw document{{/wu-button}}
+          </div>
+          <div class="sidebar__content">
+            <div class="side-navigation">
+              <ul class="side-navigation__group">
+                <li class="side-navigation__item">
+                  {{#link-to 'inbox.index'}}Ontwerpen{{/link-to}}
+                </li>
+                <li class="side-navigation__item">
+                  {{#link-to 'inbox.archive'}}Goedgekeurde notulen{{/link-to}}
+                </li>
+                <li class="side-navigation__item">
+                  {{#link-to 'inbox.trash'}}Prullenbak{{/link-to}}
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col--10-12 flex">
+    <div class="col--10-12">
       {{outlet}}
     </div>
   </div>
