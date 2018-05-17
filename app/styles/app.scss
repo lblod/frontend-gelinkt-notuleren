@@ -28,42 +28,6 @@
 	margin-left: 0;
 }
 
-.side-menu__item a.active {
-  background-color: #F3F5F6;
-  box-shadow: inset 5px 0 #0F68C9;
-  font-weight: 500;
-
-  &:hover {
-    background-color: #E8EBEE;
-  }
-}
-
-
-.documents-overview-demo {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.documents-overview-demo [data-table] {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.documents-overview-demo .u-table-overflow {
-  flex: 1;
-  display: flex;
-  overflow-y: scroll;
-  overflow-x: hidden;
-
-  tr:hover td a {
-    color: #0F68C9;
-  }
-}
-
 /** Collapsable document structure */
 .editor-container {
   .grid {
