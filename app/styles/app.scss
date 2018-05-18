@@ -17,16 +17,17 @@
 
 .modal-dialog--hint {
   position: fixed !important;
-  top: 20rem !important;
+  top: 15rem !important;
   right: 5rem !important;
   left: auto !important;
+  max-height: 50vh;
 }
 
-.chrome > .grid,
-.editor > .grid {
-	width: 100%;
-	margin-left: 0;
-}
+// .chrome > .grid,
+// .editor > .grid {
+// 	width: 100%;
+// 	margin-left: 0;
+// }
 
 /** Collapsable document structure */
 .editor-container {
