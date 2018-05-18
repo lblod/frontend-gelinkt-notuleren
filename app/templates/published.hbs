@@ -16,57 +16,48 @@
   </div>
 </div>
 
-<div class="app-view">
+<div class="container-flex--contain">
   <div class="grid grid--collapse">
-    <div class="col--4-12 flex navigate-content">
-      <div class="documents-overview">
-        <div data-table="" class="js-data-table-bound">
-          <div class="u-table-overflow">
-            <table class="data-table data-table--blocks scroll">
-              <tbody>
+    <div class="col--3-12">
+      <div class="container-flex--contain">
+        <div class="sidebar">
+          <div class="sidebar__content">
+            <div class="side-navigation side-navigation--blocks">
+              <ul class="side-navigation__group">
                 {{#each model as |zitting|}}
-                  <tr onclick={{action "openZitting" zitting}} class="{{if (eq selectedZitting zitting) "data-table__element--active"}}">
-                    <td>
-                      <div class="grid grid-collapse">
-                        <div class="col--9-12 u-align-left">
-                          <strong>{{get (await zitting.bestuursorgaan) 'naam'}}, zitting van {{moment-format zitting.geplandeStart 'D MMMM YYYY'}}</strong>
-                        </div>
-                        <div class="col--3-12">
-                          <p>{{moment-format zitting.geplandeStart 'DD/MM/YYYY'}}</p>
-                        </div>
-                      </div>
-                      <div class="link-group link-group--bordered u-spacer--top--tiny u-align-left">
-                        {{#if zitting.agenda}}
-                          {{#link-to 'published.zitting.agenda' zitting.id class="link--icon"}}
-                            Agenda {{wu-icon "vi-document-small"}}
-                          {{/link-to}}
-                        {{else}}
-                          <a href="#" class="link--icon link--disabled">Agenda {{wu-icon "vi-clock"}}</a>
-                        {{/if}}
+                  <li onclick={{action "openZitting" zitting}} class="side-navigation__item {{if (eq selectedZitting zitting) "active"}}">
+                    <a href="#"><strong>{{get (await zitting.bestuursorgaan) 'naam'}}, zitting van {{moment-format zitting.geplandeStart 'D MMMM YYYY'}}</strong></a>
+                    <div class="link-group link-group--bordered link-group--tiny link-group--dark">
+                      {{#if zitting.agenda}}
+                        {{#link-to 'published.zitting.agenda' zitting.id class="link--icon"}}
+                          Agenda {{wu-icon "vi-document-small"}}
+                        {{/link-to}}
+                      {{else}}
+                        <a href="#" class="link--icon link--disabled">Agenda {{wu-icon "vi-clock"}}</a>
+                      {{/if}}
 
-                        {{#if zitting.behandeldeAgendapunten}}
-                          {{#link-to 'published.zitting.besluitenlijst.index' zitting.id class="link--icon"}}
-                            Besluitenlijst {{wu-icon "vi-document-small"}}
-                          {{/link-to}}
-                        {{else}}
-                          <a href="#" class="link--icon link--disabled">Besluitenlijst {{wu-icon "vi-clock"}}</a>
-                        {{/if}}
+                      {{#if zitting.behandeldeAgendapunten}}
+                        {{#link-to 'published.zitting.besluitenlijst.index' zitting.id class="link--icon"}}
+                          Besluitenlijst {{wu-icon "vi-document-small"}}
+                        {{/link-to}}
+                      {{else}}
+                        <a href="#" class="link--icon link--disabled">Besluitenlijst {{wu-icon "vi-clock"}}</a>
+                      {{/if}}
 
-                        {{#if zitting.notulen}}
-                          {{#link-to 'published.zitting.notulen' zitting.id class="link--icon"}}
-                            Notulen {{wu-icon "vi-document-small"}}
-                          {{/link-to}}
-                        {{else}}
-                          <a href="#" class="link--icon link--disabled">Notulen {{wu-icon "vi-clock"}}</a>
-                        {{/if}}
-                      </div>
-                    </td>
-                  </tr>
+                      {{#if zitting.notulen}}
+                        {{#link-to 'published.zitting.notulen' zitting.id class="link--icon"}}
+                          Notulen {{wu-icon "vi-document-small"}}
+                        {{/link-to}}
+                      {{else}}
+                        <a href="#" class="link--icon link--disabled">Notulen {{wu-icon "vi-clock"}}</a>
+                      {{/if}}
+                    </div>
+                  </li>
                 {{/each}}
-              </tbody>
-            </table>
+              </ul>
+            </div>
           </div>
-          <div class="data-table__actions data-table__actions--bottom">
+          <div class="sidebar__footer">
             {{number-pagination page=page size=size nbOfItems=model.length
                 total=model.meta.count links=model.meta.pagination}}
           </div>

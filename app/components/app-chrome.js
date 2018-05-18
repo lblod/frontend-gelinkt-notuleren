@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  classNames: ["chrome"],
+  classNames: ["editor-chrome"],
   tagName: "nav"
 });

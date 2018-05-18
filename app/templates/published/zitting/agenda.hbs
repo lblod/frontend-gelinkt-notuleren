@@ -1,16 +1,14 @@
-<div class="document-content">
+<div class="container-flex--scroll u-padding--round--large">
   <h1 class="h1">Agendapunten van {{get (await model.bestuursorgaan) 'naam'}}, zitting van {{moment-format model.geplandeStart 'D MMMM YYYY'}}</h1>
 
   <div class="annotation-structure">
     <ul class="clickable-box-list">
       {{#each model.agenda.agendapunten as |item index|}}
         <li class="{{unless model.notulen "not-active"}}">
-          <span class="annotation annotation--agendapunt annotation--agendapunt--{{if item.geplandOpenbaar "open" "besloten"}}">
-            {{#link-to 'published.zitting.notulen' disabledWhen=(not (await model.notulen))}}
-              <span class="list-number">{{inc index}}</span>
-              <span class="list-content">{{clean-spaces item.titel}}</span>
-            {{/link-to}}
-          </span>
+          {{#link-to 'published.zitting.notulen' disabledWhen=(not (await model.notulen)) class='annotation annotation--agendapunt annotation--agendapunt--{{if item.geplandOpenbaar "open" "besloten"}}'}}
+            <span class="list-number">{{inc index}}</span>
+            <span class="list-content">{{clean-spaces item.titel}}</span>
+          {{/link-to}}
         </li>
       {{else}}
         <li>Geen agendapunten</li>

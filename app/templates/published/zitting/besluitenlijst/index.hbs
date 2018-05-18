@@ -1,22 +1,23 @@
-<div class="document-content">
+<div class="container-flex--scroll u-padding--round--large">
   <h1 class="h1">Besluitenlijst van {{get (await model.bestuursorgaan) 'naam'}}, zitting van {{moment-format model.geplandeStart 'D MMMM YYYY'}}</h1>
   <div class="grid grid--is-stacked">
     {{#each model.behandeldeAgendapunten as |agendapunt|}}
       {{#each agendapunt.besluiten as |besluit|}}
         <div class="{{if besluit.isExpanded "col--12-12" "col--6-12"}}" {{action "toggleExpand" besluit}}>
-          <div class="info-tile annotation-structure {{if besluit.isExpanded "info-tile--capped--animation" "info-tile--capped"}}">
+          <div class="info-tile info-tile--expandable info-tile--capped annotation-structure annotation-structure--behandeling {{if besluit.isExpanded "info-tile--capped--animation" "info-tile--capped"}}">
             <div class="info-tile__header__wrapper">
               <h3 class="info-tile__header__title">{{clean-spaces besluit.titel}}</h3>
               <p class="info-tile__header__subtitle">{{clean-spaces besluit.beschrijving}}</p>
             </div>
+
             <p class="info-tile__header__subtitle">
               <strong>Besluit:</strong> {{agendapunt.gevolg.content}}
             </p>
-            <p class="u-show-less">
-              {{#link-to 'published.zitting.besluitenlijst.show' agendapunt.id}}
-                Bekijk volledige behandeling agendapunt
-              {{/link-to}}
-            </p>
+
+            {{#link-to 'published.zitting.besluitenlijst.show' agendapunt.id class="button button--alt button--alt--blue button--narrow button--small"}}
+              Bekijk volledige behandeling agendapunt
+            {{/link-to}}
+
           </div>
         </div>
       {{/each}}

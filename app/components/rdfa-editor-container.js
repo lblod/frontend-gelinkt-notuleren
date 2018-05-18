@@ -2,7 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   rdfaEditorContainerReady: false,
-  classNames: ['app-view'],
+  classNames: ['container-flex--contain'],
 
   setRdfaContext(element){
     element.setAttribute('vocab', JSON.parse(this.get('editorDocument.context'))['vocab']);

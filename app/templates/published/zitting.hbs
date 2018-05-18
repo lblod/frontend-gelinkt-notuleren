@@ -1,26 +1,24 @@
-<div class="col--8-12 flex view-content">
-  <div class="document-container">
-    <div class="document-navigation">
-      <nav class="tabs__wrapper">
-        <ul class="tabs" data-tabs-list="">
-          {{#if model.agenda}}
-            {{#link-to 'published.zitting.agenda' model.id tagName='li' class="tab" activeClass="tab--active"}}
-              <a class="tab__link">Agendapunten</a>
-            {{/link-to}}
-          {{/if}}
-          {{#if model.behandeldeAgendapunten}}
-            {{#link-to 'published.zitting.besluitenlijst.index' model.id tagName='li' class="tab" activeClass="tab--active"}}
-              <a class="tab__link">Besluitenlijst</a>
-            {{/link-to}}
-          {{/if}}
-          {{#if model.notulen}}
-            {{#link-to 'published.zitting.notulen' model.id tagName='li' class="tab" activeClass="tab--active"}}
-              <a class="tab__link">Notulen</a>
-            {{/link-to}}
-          {{/if}}
-        </ul>
-      </nav>
-    </div>
+<div class="col--9-12">
+  <div class="container-flex--contain">
+    <nav class="tabs__wrapper">
+      <ul class="tabs u-spacer--none" data-tabs-list="">
+        {{#if model.agenda}}
+          {{#link-to 'published.zitting.agenda' model.id tagName='li' class="tab" activeClass="tab--active"}}
+            <a class="tab__link">Agendapunten</a>
+          {{/link-to}}
+        {{/if}}
+        {{#if model.behandeldeAgendapunten}}
+          {{#link-to 'published.zitting.besluitenlijst.index' model.id tagName='li' class="tab" activeClass="tab--active"}}
+            <a class="tab__link">Besluitenlijst</a>
+          {{/link-to}}
+        {{/if}}
+        {{#if model.notulen}}
+          {{#link-to 'published.zitting.notulen' model.id tagName='li' class="tab" activeClass="tab--active"}}
+            <a class="tab__link">Notulen</a>
+          {{/link-to}}
+        {{/if}}
+      </ul>
+    </nav>
     {{outlet}}
   </div>
 </div>
