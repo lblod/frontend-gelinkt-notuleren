@@ -58,6 +58,9 @@
 
 .annotation[property="eli:number"]:after {
   content: "Nummer";
+}
+
+.editor .annotation[property="eli:number"]:after {
   right: -65rem !important;
 }
 
