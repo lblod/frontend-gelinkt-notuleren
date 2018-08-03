@@ -25,23 +25,23 @@ export default Mixin.create({
   nextStatus: null,
 
   getNextPublishStatus(currStatus){
-    if(currStatus.get('id') === this.get('statusIdMap')['agendaPublishedStatusId'])
+    if(currStatus.get('id') === this.statusIdMap['agendaPublishedStatusId'])
       return this.getStatusFor('besluitenlijstPublishedStatusId');
 
-    if(currStatus.get('id') === this.get('statusIdMap')['besluitenlijstPublishedStatusId'])
+    if(currStatus.get('id') === this.statusIdMap['besluitenlijstPublishedStatusId'])
       return this.getStatusFor('signedPublishedStatusId');
 
     return this.getStatusFor('agendaPublishedStatusId');
   },
 
   getPublishApi(currStatus){
-    if(currStatus.get('id') === this.get('statusIdMap')['agendaPublishedStatusId'])
+    if(currStatus.get('id') === this.statusIdMap['agendaPublishedStatusId'])
       return editorDocumentId => `/publish/agenda/${editorDocumentId}`;
 
-    if(currStatus.get('id') === this.get('statusIdMap')['besluitenlijstPublishedStatusId'])
+    if(currStatus.get('id') === this.statusIdMap['besluitenlijstPublishedStatusId'])
       return editorDocumentId => `/publish/decision/${editorDocumentId}`;
 
-    if(currStatus.get('id') === this.get('statusIdMap')['signedPublishedStatusId'])
+    if(currStatus.get('id') === this.statusIdMap['signedPublishedStatusId'])
       return editorDocumentId => `/publish/notule/${editorDocumentId}`;
   },
 
@@ -49,20 +49,20 @@ export default Mixin.create({
   displayPublishStatusModal: false,
 
   modalTransitionToTrash: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.get('statusIdMap')['trashStatusId'] && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.statusIdMap['trashStatusId'] && this.displayPublishStatusModal;
   }),
   modalTransitionToAgendaPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.get('statusIdMap')['agendaPublishedStatusId'] && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.statusIdMap['agendaPublishedStatusId'] && this.displayPublishStatusModal;
   }),
   modalTransitionToBesluitenlijstPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.get('statusIdMap')['besluitenlijstPublishedStatusId'] && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.statusIdMap['besluitenlijstPublishedStatusId'] && this.displayPublishStatusModal;
   }),
   modalTransitionToSignedPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.get('statusIdMap')['signedPublishedStatusId'] && this.get('displayPublishStatusModal');
+    return this.get('nextStatus.id') ===  this.statusIdMap['signedPublishedStatusId'] && this.displayPublishStatusModal;
   }),
 
   getStatusFor(statusName){
-    return this.get('editorDocumentStatuses').findBy('id', this.get('statusIdMap')[statusName]);
+    return this.editorDocumentStatuses.findBy('id', this.statusIdMap[statusName]);
   },
 
   resetPublishStatusModal(){
@@ -90,8 +90,8 @@ export default Mixin.create({
   },
 
   async saveEditorDocument(editorDocument, newStatus, toNewDocument){
-    let documentToSave = toNewDocument ? this.get('store').createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
-    let origHtml = this.get('editorDomNode').innerHTML;
+    let documentToSave = toNewDocument ? this.store.createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
+    let origHtml = this.editorDomNode.innerHTML;
     let innerHtml = this.cleanUpEditorDocumentInnerHtml(origHtml);
     let createdOn = editorDocument.get('createdOn') || new Date().toISOString();
     let title = editorDocument.get('title');
@@ -111,12 +111,12 @@ export default Mixin.create({
   async publishFlow(){
     this.set('isProcessing', true);
     try {
-      let editorDocument = this.get('editorDocument');
-      let publishStatus = this.get('nextStatus');
+      let editorDocument = this.editorDocument;
+      let publishStatus = this.nextStatus;
       let newDocument = await this.publishDocument(editorDocument, publishStatus);
       let apiEndPoint = this.getPublishApi(publishStatus);
       if(apiEndPoint){
-        await this.get('ajax').post(apiEndPoint(newDocument.get('id')));
+        await this.ajax.post(apiEndPoint(newDocument.get('id')));
       }
       this.set('isProcessing', false);
       this.transitionToRoute('/inbox');
@@ -149,7 +149,7 @@ export default Mixin.create({
    },
 
    async save(){
-     let editorDocument = this.get('editorDocument');
+     let editorDocument = this.editorDocument;
 
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);
@@ -165,7 +165,7 @@ export default Mixin.create({
    },
 
    publish(){
-     if(this.hasDocumentValidationErrors(this.get('editorDocument'))){
+     if(this.hasDocumentValidationErrors(this.editorDocument)){
        this.set('validationErrors', true);
        return;
      }

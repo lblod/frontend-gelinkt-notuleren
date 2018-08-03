@@ -7,7 +7,7 @@ export default Controller.extend(EditorDocumentBaseController, {
   actions: {
 
     async save(){
-      let editorDocument = this.get('editorDocument');
+      let editorDocument = this.editorDocument;
 
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);

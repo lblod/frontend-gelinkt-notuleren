@@ -23,15 +23,15 @@ export default Component.extend({
 
   actions:{
     save(){
-      this.get('save')();
+      this.save();
     },
 
     publish(){
-      this.get('publish')();
+      this.publish();
     },
 
     sendToTrash(){
-      this.get('sendToTrash')();
+      this.sendToTrash();
     }
   }
 });

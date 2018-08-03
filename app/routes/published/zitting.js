@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   model(params) {
-    return this.get('store').findRecord('zitting', params.id);
+    return this.store.findRecord('zitting', params.id);
   },
   afterModel(model) {
     this.controllerFor('published').set('selectedZitting', model);

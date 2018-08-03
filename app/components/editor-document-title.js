@@ -6,9 +6,9 @@ export default Component.extend({
   editorDocument: null,
   actions:{
     toggleActive(){
-      this.set('active', !this.get('active'));
+      this.set('active', !this.active);
 
-      if (this.get('active')) {
+      if (this.active) {
         schedule('afterRender', () => this.$('input').focus());
       }
    }

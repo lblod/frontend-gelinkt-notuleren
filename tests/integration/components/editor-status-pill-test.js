@@ -1,24 +1,26 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('editor-status-pill', 'Integration | Component | editor status pill', {
-  integration: true
-});
+module('Integration | Component | editor status pill', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  test('it renders', async function(assert) {
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{editor-status-pill}}`);
+    await render(hbs`{{editor-status-pill}}`);
 
-  assert.equal(this.$().text().trim(), '');
+    assert.equal(find('*').textContent.trim(), '');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#editor-status-pill}}
-      template block text
-    {{/editor-status-pill}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#editor-status-pill}}
+        template block text
+      {{/editor-status-pill}}
+    `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+    assert.equal(find('*').textContent.trim(), 'template block text');
+  });
 });

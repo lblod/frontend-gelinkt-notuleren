@@ -5,7 +5,7 @@ import DefaultQueryParamsMixin from 'ember-data-table/mixins/default-query-param
 export default Controller.extend(DefaultQueryParamsMixin, {
   statusIds: null,
   status: computed('statusIds', function() {
-    return this.get('statusIds').join(',');
+    return this.statusIds.join(',');
   }),
   init() {
     this._super(...arguments);

@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   moment: service(),
   beforeModel() {
-    this.get('moment').setTimeZone('Europe/Brussels');
-    this.get('moment').setLocale('nl');
+    this.moment.setTimeZone('Europe/Brussels');
+    this.moment.setLocale('nl');
   }
 });

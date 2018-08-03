@@ -22,13 +22,13 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.setRdfaContext(this.get('element'));
+    this.setRdfaContext(this.element);
     this.set('rdfaEditorContainerReady', true);
   },
 
   actions: {
     handleRdfaEditorInit(editor){
-      this.get('rdfaEditorContainerInit')(editor);
+      this.rdfaEditorContainerInit(editor);
     }
   }
 
