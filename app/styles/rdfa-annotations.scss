@@ -1,114 +1,51 @@
-/* annotation hovers */
-.annotation[typeof="besluit:AanstellingsBesluit"]:after {
-  content: "Aanstellingsbesluit"
+[typeof], [property] {
+    border: solid 4px rgba( 150,0,0,0.5 );
+    margin: 2px;
+    padding: 5px;
+    padding-top: 12px;
+    position: relative;
+    filter: hue-rotate(0deg);
+    transition: all 0.3s;
 }
 
-.annotation[typeof="besluit:OntslagBesluit"]:after {
-  content: "Ontslagbesluit"
+[typeof], [property] {
+    /* filter: contrast( 50% ); */
 }
 
-.annotation[typeof="besluit:Artikel"]:after {
-  content: "Artikel"
+[typeof] [typeof], [property] [property], [typeof] [property], [property] [typeof] {
+    filter: hue-rotate( 100deg ) /* contrast( 200% ) */;
 }
 
-.annotation[typeof="besluit:Besluit"]:after {
-  content: "Besluit"
+[property]::before, [typeof]::before {
+    position: absolute;
+    color: white;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 12px;
+    padding: 1px;
+    font-size: 9px;
+    background-color: rgba( 150,0,0,0.5 );
 }
 
-.annotation[typeof="mandaat:Mandataris"]:after {
-  content: "Mandataris"
+[typeof]:hover [typeof], [property]:hover [property], [typeof]:hover [property], [property]:hover [typeof] {
+    filter: hue-rotate( 100deg );
 }
 
-.annotation[property="mandaat:bekrachtigtOntslagVan"][typeof="mandaat:Mandataris"]:after {
-  content: "Ontslagen mandataris"
+[typeof]:hover [typeof]:hover, [property]:hover [property]:hover, [typeof]:hover [property]:hover, [property]:hover [typeof]:hover {
+    filter: hue-rotate( 100deg );
+    border-color: rgba( 200,0,0,0.75 );
 }
 
-.annotation[property="mandaat:bekrachtigtAanstellingVan"][typeof="mandaat:Mandataris"]:after {
-  content: "Aangestelde mandataris"
+[typeof]:hover [typeof]:hover::before, [property]:hover [property]:hover::before, [typeof]:hover [property]:hover::before, [property]:hover [typeof]:hover::before {
+    background-color: rgba( 200,0,0,0.75 );
 }
 
-.annotation[datatype="xsd:date"][property="mandaat:start"]:after {
-  content: "Startdatum mandataris"
+[property]::before {
+    content: attr(property);
 }
 
-.annotation[datatype="xsd:date"][property="mandaat:einde"]:after {
-  content: "Einddatum mandataris"
+[typeof]::before {
+    content: attr(typeof);
 }
 
-.annotation[property="besluit:heeftAanwezigeBijStart"]:after {
-  content: "Aanwezige"
-}
-
-.annotation[property="besluit:heeftAanwezigeBijStart"][typeof="mandaat:Mandataris"]:after {
-  content: "Aanwezige mandataris"
-}
-
-.annotation[datatype="xsd:date"][property="dcterms:created"]:after {
-  content: "Creatiedatum"
-}
-
-.annotation[property="dc:title"]:after,
-.annotation[property="eli:title"]:after {
-  content: "Titel"
-}
-
-.annotation[property="eli:description"]:after {
-  content: "Beknopte beschrijving"
-}
-
-.annotation[property="eli:number"]:after {
-  content: "Nummer";
-}
-
-.editor .annotation[property="eli:number"]:after {
-  right: -65rem !important;
-}
-
-.annotation[property="prov:value"]:after {
-  content: "Inhoud"
-}
-
-.annotation[property="eli:cites"]:after {
-  content: "citeert"
-}
-
-.annotation[datatype="xsd:date"][property="dcterms:created"]:after {
-  content: "Creatiedatum"
-}
-
-.annotation[property="besluit:isGehoudenDoor"]:after {
-  content: "gehouden door Bestuursorgaan"
-}
-
-.annotation[property="besluit:geplandeStart"]:after {
-  content: "Geplande start"
-}
-
-.annotation[property="prov:atLocation"]:after {
-  content: "Locatie"
-}
-
-.annotation[property="prov:startedAtTime"]:after {
-  content: "Start tijdstip"
-}
-
-.annotation[property="prov:endedAtTime"]:after {
-  content: "Eind tijdstip"
-}
-
-.annotation[property="besluit:heeftAgendapunt"]:after,
-.annotation[property="besluit:behandelt"]:after {
-  content: "Behandeld agendapunt"
-}
-
-.annotation[property="besluit:gevolg"]:after {
-  content: "gevolg"
-}
-
-[typeof="besluit:Agendapunt"] .annotation[property="besluit:geplandOpenbaar"][content="true"]:after {
-  content: "Gepland openbaar"
-}
-
-[typeof="besluit:Agendapunt"] .annotation[property="besluit:geplandOpenbaar"][content="false"]:after {
-  content: "Niet gepland openbaar"
-}
