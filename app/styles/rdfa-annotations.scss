@@ -1,4 +1,5 @@
-[typeof], [property] {
+.show-rdfa-blocks {
+  [typeof], [property] {
     border: solid 4px rgba( 150,0,0,0.5 );
     margin: 2px;
     padding: 5px;
@@ -6,46 +7,45 @@
     position: relative;
     filter: hue-rotate(0deg);
     transition: all 0.3s;
-}
+ }
+    [typeof], [property] {
+        /* filter: contrast( 50% ); */
+    }
 
-[typeof], [property] {
-    /* filter: contrast( 50% ); */
-}
+    [typeof] [typeof], [property] [property], [typeof] [property], [property] [typeof] {
+        filter: hue-rotate( 100deg ) /* contrast( 200% ) */;
+    }
 
-[typeof] [typeof], [property] [property], [typeof] [property], [property] [typeof] {
-    filter: hue-rotate( 100deg ) /* contrast( 200% ) */;
-}
+    [property]::before, [typeof]::before {
+        position: absolute;
+        color: white;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 12px;
+        padding: 1px;
+        font-size: 9px;
+        background-color: rgba( 150,0,0,0.5 );
+    }
 
-[property]::before, [typeof]::before {
-    position: absolute;
-    color: white;
-    left: 0;
-    top: 0;
-    right: 0;
-    height: 12px;
-    padding: 1px;
-    font-size: 9px;
-    background-color: rgba( 150,0,0,0.5 );
-}
+    [typeof]:hover [typeof], [property]:hover [property], [typeof]:hover [property], [property]:hover [typeof] {
+        filter: hue-rotate( 100deg );
+    }
 
-[typeof]:hover [typeof], [property]:hover [property], [typeof]:hover [property], [property]:hover [typeof] {
-    filter: hue-rotate( 100deg );
-}
+    [typeof]:hover [typeof]:hover, [property]:hover [property]:hover, [typeof]:hover [property]:hover, [property]:hover [typeof]:hover {
+        filter: hue-rotate( 100deg );
+        border-color: rgba( 200,0,0,0.75 );
+    }
 
-[typeof]:hover [typeof]:hover, [property]:hover [property]:hover, [typeof]:hover [property]:hover, [property]:hover [typeof]:hover {
-    filter: hue-rotate( 100deg );
-    border-color: rgba( 200,0,0,0.75 );
-}
+    [typeof]:hover [typeof]:hover::before, [property]:hover [property]:hover::before, [typeof]:hover [property]:hover::before, [property]:hover [typeof]:hover::before {
+        background-color: rgba( 200,0,0,0.75 );
+    }
 
-[typeof]:hover [typeof]:hover::before, [property]:hover [property]:hover::before, [typeof]:hover [property]:hover::before, [property]:hover [typeof]:hover::before {
-    background-color: rgba( 200,0,0,0.75 );
-}
+    [property]::before {
+        content: attr(property);
+    }
 
-[property]::before {
-    content: attr(property);
+    [typeof]::before {
+        content: attr(typeof);
+    }
 }
-
-[typeof]::before {
-    content: attr(typeof);
-}
-
