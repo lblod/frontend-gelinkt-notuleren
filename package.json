@@ -1,6 +1,6 @@
 {
   "name": "frontend-demo-editor",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "private": true,
   "description": "Demo application for the RDFa editor",
   "author": "redpencil.io",
@@ -19,7 +19,7 @@
     "lint:js": "eslint ."
   },
   "devDependencies": {
-    "@lblod/ember-rdfa-editor": "^0.14.4",
+    "@lblod/ember-rdfa-editor": "^0.14.5",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-date-plugin": "^0.7.2",
@@ -63,6 +63,7 @@
     "ember-promise-helpers": "^1.0.3",
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.3.0",
+    "ember-wormhole": "^0.5.4",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^5.2.1",
     "loader.js": "^4.2.3",
