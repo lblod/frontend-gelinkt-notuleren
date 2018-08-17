@@ -68,7 +68,9 @@
     </div>
   </div>
 {{else}}
-  {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit")}}
+  {{#toggle-rdfa-block class="container-flex--contain ember-view"}}
+    {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit")}}
+  {{/toggle-rdfa-block}}
 {{/if}}
 
 {{outlet}}
