@@ -1,5 +1,9 @@
-{{#if rdfaEditorContainerReady}}
-  {{rdfa-editor profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit")}}
-{{/if}}
+<button {{action "launchItAll" true}}>Visualiseer structuur</button>
+<button {{action "launchItAll" false}}>Visualiseer graph</button>
 
+{{#toggle-rdfa-block class="container-flex--contain ember-view"}}
+  {{#if rdfaEditorContainerReady}}
+    {{rdfa-editor class="rdfa-editor" profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit")}}
+  {{/if}}
+{{/toggle-rdfa-block}}
 {{yield}}

@@ -30,6 +30,7 @@
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.9",
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
+    "ember-auto-import": "^1.2.8",
     "ember-cli": "~3.3.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.6.0",
@@ -68,10 +69,12 @@
     "eslint-plugin-node": "^5.2.1",
     "loader.js": "^4.2.3",
     "postscribe": "^2.0.8",
-    "qunit-dom": "^0.6.2"
+    "qunit-dom": "^0.6.2",
+    "vis": "^4.21.0"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
