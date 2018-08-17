@@ -19,7 +19,7 @@
     "lint:js": "eslint ."
   },
   "devDependencies": {
-    "@lblod/ember-rdfa-editor": "^0.14.3",
+    "@lblod/ember-rdfa-editor": "^0.14.5",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-date-plugin": "^0.7.2",
@@ -29,6 +29,7 @@
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.9",
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
+    "ember-auto-import": "^1.2.8",
     "ember-cli": "~3.3.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.6.0",
@@ -60,16 +61,19 @@
     "ember-moment": "^7.6.0",
     "ember-mu-transform-helpers": "^1.0.0",
     "ember-promise-helpers": "^1.0.3",
+    "ember-require-module": "^0.3.0",
     "ember-resolver": "^4.0.0",
     "ember-source": "~3.3.0",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^5.2.1",
     "loader.js": "^4.2.3",
     "postscribe": "^2.0.8",
-    "qunit-dom": "^0.6.2"
+    "qunit-dom": "^0.6.2",
+    "vis": "^4.21.0"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }

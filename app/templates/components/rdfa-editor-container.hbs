@@ -1,5 +1,9 @@
+<button {{action "launchItAll"}}>Launch it all</button>
+
 {{#if rdfaEditorContainerReady}}
-  {{rdfa-editor profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit")}}
+  {{rdfa-editor class="rdfa-editor" profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit")}}
+  <div id="mynetwork" style="position: absolute; left: 0; right: 0; top: 100px; bottom: 0; z-index: 10">
+  </div>
 {{/if}}
 
 {{yield}}
