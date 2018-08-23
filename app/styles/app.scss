@@ -1,3 +1,4 @@
+@import 'colors';
 @import 'ember-vo-webuniversum-data-table';
 @import 'rdfa-annotations';
 
@@ -150,3 +151,624 @@
     font-style: italic;
   }
 }
+
+/* ==========================================================================
+  Annotations
+  Style the annotations here.
+ ========================================================================== */
+
+.annotation-snippet,
+.annotation-structure {
+
+  li,
+  p,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    position: relative;
+  }
+}
+
+
+.annotation-structure {
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+
+.annotation-structure--behandeling--open,
+.annotation-structure--behandeling--besloten {
+
+  &:after {
+    position: absolute;
+    font-weight: 400;
+    font-size: 1.5rem;
+    width: 22rem;
+    text-align: right;
+    color: $gray;
+    opacity: 0;
+    right: -999rem;
+    top: 0;
+    display: none;
+    border-bottom: 1px solid $blue-gray-lighter;
+  }
+
+  &:hover:after {
+    right: -22rem;
+    opacity: 1;
+    display: block;
+  }
+
+  &:before {
+    position: absolute;
+    font-family: "fontawesome";
+    left: -3rem;
+    font-size: 1.4rem;
+    top: 2px;
+    color: $gray-light;
+  }
+
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    .annotation {
+
+      padding-bottom: 2px;
+      border-bottom-color: darken($blue-gray-light, 5%);
+
+      &:hover {
+        color: $black;
+        background-color: rgba($primary-yellow, 0.5);
+      }
+
+      &:hover:after {
+        border-left: 1px solid $blue-gray-light;
+        border-bottom: none;
+        padding-left: 1rem;
+        right: -45.5rem;
+        text-align: left;
+      }
+
+      .annotation {
+        border-bottom-color: $blue-gray;
+        padding-bottom: 0;
+
+        &:hover {
+          background-color: rgba($primary-yellow, 0.8);
+        }
+
+        &:hover:after {
+          top: 2.2rem;
+        }
+      }
+
+    }
+  }
+}
+
+
+.annotation-structure--behandeling--open {
+
+  &:after {
+    content: "openbaar \a agendapunt";
+  }
+
+  // &:before {
+  //  content: "\f06e";
+  // }
+}
+
+.annotation-structure--behandeling--besloten {
+
+  &:after {
+    content: "besloten \a agendapunt";
+  }
+
+  // &:before {
+  //  content: "\f070";
+  // }
+}
+
+.annotation-structure--active {
+
+  &:before {
+    content: "";
+    position: absolute;
+    left: -2rem;
+    top: 0rem;
+    bottom: 0rem;
+    width: 2px;
+    border-left: 2px solid $blue-gray-lighter;
+    z-index: -1;
+    transition: width 200ms;
+  }
+}
+
+.annotation {
+  border-bottom: 1px solid rgba($blue-gray-light, 0.7);
+  cursor: pointer;
+  padding-bottom: 4px;
+
+  &:hover {
+    color: $black;
+    background-color: rgba($primary-yellow, 0.2);
+  }
+
+  &:after {
+    position: absolute;
+    font-weight: 400;
+    font-size: 1.5rem;
+    width: 22rem;
+    text-align: right;
+    color: $gray;
+    opacity: 0;
+    right: -999rem;
+    top: 0;
+    display: none;
+    border-bottom: 1px solid $blue-gray-lighter;
+  }
+
+  &:hover:after {
+    right: -22rem;
+    opacity: 1;
+    display: block;
+  }
+
+  &.highlight {
+    background-color: $primary-yellow;
+  }
+
+  + .annotation {
+    z-index: 2;
+  }
+
+  &.annotation--person {
+
+    &:after {
+      content: "person";
+    }
+  }
+
+  &.annotation--mandataris {
+
+    &:after {
+      content: "mandataris";
+    }
+  }
+
+  &.annotation--voorzitter {
+
+    &:after {
+      content: "voorzitter";
+    }
+  }
+
+  &.annotation--burgemeester {
+
+    &:after {
+      content: "burgemeester";
+    }
+  }
+
+  &.annotation--secretaris {
+
+    &:after {
+      content: "secretaris";
+    }
+  }
+
+  &.annotation--schepenen {
+
+    &:first-child {
+      margin-left: 10rem;
+    }
+
+    &:first-child:before {
+      content: "Schepenen:\02002";
+      position: absolute;
+      left: 0;
+      display: inline-block;
+      pointer-events: none;
+      font-weight: 500;
+      color: $gray-dark;
+    }
+  }
+
+  &.annotation--raadsleden {
+
+    &:after {
+      content: "raadsleden";
+    }
+  }
+
+  &.annotation--korpschef {
+
+    &:after {
+      content: "korpschef";
+    }
+  }
+
+  &.annotation--link {
+
+    &:after {
+      content: "link";
+    }
+  }
+
+  &.annotation--ground {
+
+    &:after {
+      content: "juridische grond";
+    }
+  }
+
+  &.annotation--motivation {
+
+    &:after {
+      content: "motivatie";
+    }
+  }
+
+  &.annotation--location {
+
+    &:after {
+      content: "locatie";
+    }
+  }
+
+  &.annotation--organ {
+
+    &:after {
+      content: "orgaan";
+    }
+  }
+
+  &.annotation--organisation {
+
+    &:after {
+      content: "organisatie";
+    }
+  }
+
+  &.annotation--logo {
+
+    &:after {
+      content: "logo stad";
+    }
+  }
+
+  &.annotation--date {
+
+    &:after {
+      content: "datum zitting";
+    }
+  }
+
+  &.annotation--article {
+
+    &:after {
+      content: "article";
+    }
+  }
+
+  &.annotation--content {
+
+    &:after {
+      content: "inhoud";
+    }
+  }
+
+  &.annotation--content--full-width {
+
+    &:after {
+      content: "inhoud";
+    }
+  }
+
+  &.annotation--number {
+
+    &:after {
+      content: "nummer";
+      right: -75rem;
+    }
+  }
+
+  .annotation.annotation--number:hover:after {
+    right: -88.3rem;
+  }
+
+  &.annotation--time {
+
+    &:after {
+      content: "tijd zitting";
+    }
+  }
+  &.annotation--agendapunt {
+    border-bottom: none;
+  }
+
+  &.annotation--agendapunt--open {
+
+    &:after {
+      content: "openbaar \a agendapunt";
+    }
+
+    // .annotation--agendapunt--open__icon {
+    //  top: 0.3rem;
+    // }
+    // &:before {
+    //  position: absolute;
+    //  content: "\f06e";
+    //  font-family: "fontawesome";
+    //  left: -3rem;
+    //  font-size: 1.4rem;
+    //  top: 2px;
+    //  color: $gray-light;
+    // }
+  }
+
+  &.annotation--agendapunt--besloten {
+
+    &:after {
+      content: "besloten \a agendapunt";
+    }
+
+    // .annotation--agendapunt--besloten__icon {
+    //  top: 0.3rem;
+    // }
+
+    // &:before {
+    //  position: absolute;
+    //  content: "\f070";
+    //  font-family: "fontawesome";
+    //  left: -3rem;
+    //  font-size: 1.4rem;
+    //  top: 2px;
+    //  color: darken($primary-yellow, 15%);
+    // }
+  }
+}
+
+.annotation .annotation {
+  padding-bottom: 2px;
+  border-bottom-color: darken($blue-gray-light, 5%);
+
+  &:hover {
+    color: $black;
+    background-color: rgba($primary-yellow, 0.5);
+  }
+
+  &:hover:after {
+    border-left: 1px solid $blue-gray-light;
+    border-bottom: none;
+    padding-left: 1rem;
+    right: -45.5rem;
+    text-align: left;
+  }
+}
+
+.annotation .annotation .annotation {
+  border-bottom-color: $blue-gray;
+  padding-bottom: 0;
+
+  &:hover {
+    background-color: rgba($primary-yellow, 0.8);
+  }
+
+  &:hover:after {
+    top: 2.2rem;
+  }
+}
+
+.annotation--agendapunt--besloten__icon,
+.annotation--agendapunt--open__icon {
+  font-size: 1.6rem;
+  position: absolute;
+    left: -3rem;
+    top: 0rem;
+    padding-left: 1px;
+}
+
+.annotation--agendapunt--besloten__icon {
+    color: darken($primary-yellow, 15%);
+}
+
+.annotation--agendapunt--open__icon {
+    color: $gray-light;
+}
+
+.annotation-structure--behandeling--open,
+.annotation-structure--behandeling--besloten {
+
+  .annotation--agendapunt--besloten__icon,
+  .annotation--agendapunt--open__icon {
+    top: 0.4rem;
+  }
+}
+
+
+/* Suggestions & targets
+ ========================================================================== */
+
+.annotation-suggestion__suggestion {
+  position: absolute;
+  z-index: 1;
+}
+
+p > .annotation-suggestion__target {
+  margin: 0 0.8rem;
+}
+
+.annotation-suggestion__target {
+  position: relative;
+  margin-bottom: 0.5rem;
+
+  &:before {
+    content:"";
+    display: block;
+    position: absolute;
+    left: -0.7rem;
+    right: -0.7rem;
+    top: -0.5rem;
+    bottom: -0.2rem;
+    border: 1px dashed $blue-gray-light;
+  }
+}
+
+
+
+
+/* Editing annotations warning
+ ========================================================================== */
+
+[data-flagged-remove="almost-complete"],
+[data-flagged-remove="complete"] {
+  min-height: 1.6rem;
+  display: inline;
+  cursor: text;
+  background-color: rgba($primary-blue, 0.25);
+  box-shadow: -2px 0 0 $primary-blue;
+}
+
+[data-flagged-remove="complete"] {
+  min-width: 8px;
+  display: inline-block;
+  box-shadow: -2px 0 0 black;
+}
+
+.annotation--edit {
+  [data-flagged-remove="almost-complete"],
+  [data-flagged-remove="complete"] {
+    background-color: transparent;
+  }
+}
+
+
+
+/* clickable box list
+ ========================================================================== */
+
+.clickable-box-list {
+  max-width: 600px;
+
+  li {
+    min-height: 7rem;
+  }
+
+  li > .annotation {
+    padding-bottom: 6px;
+
+    &:after {
+      top: -0.5rem;
+      right: -18rem;
+      width: 18rem;
+    }
+
+    .annotation {
+      padding-bottom: 4px;
+
+      &:after {
+        top: 2.2rem;
+        border-left: none;
+        border-bottom: 1px solid $blue-gray-lighter;
+        text-align: right;
+      }
+
+      .annotation {
+        padding-bottom: 0;
+
+        &:hover:after {
+          position: absolute;
+          top: 5rem;
+        }
+
+        .annotation:after {
+          content: normal;
+        }
+      }
+    }
+  }
+
+  a.annotation.annotation--agendapunt {
+    border: 1px solid $blue-gray-light;
+    padding: 1rem 2rem;
+    display: block;
+    margin-bottom: 1rem;
+    transition: all 200ms;
+    text-decoration: none;
+
+    .list-number {
+      text-decoration: none;
+      display: inline-block;
+      width: 10%;
+      vertical-align: top;
+      color: $gray;
+      font-size: 3rem;
+      position: relative;
+      top: -0.5rem;
+    }
+
+    .list-content {
+      display: inline-block;
+      width: 89%;
+    }
+
+    &:hover {
+      box-shadow: 2px 2px 5px $blue-gray-lighter, inset 5px 0 0 $primary-blue;
+      background-color: $white;
+
+      .list-number {
+        color: $gray-dark;
+      }
+    }
+
+    .annotation:hover:after {
+      right: -18rem;
+      width: 18rem;
+    }
+  }
+
+  li.not-active {
+
+    .annotation {
+      cursor: default;
+
+      .annotation {
+        pointer-events: default;
+      }
+    }
+
+    a.annotation.annotation--agendapunt {
+      background-color: $blue-gray-lightest;
+      box-shadow: none;
+      color: $gray;
+      // pointer-events: none;
+      cursor: default;
+
+      .list-content {
+        width: 70%;
+
+        &:after {
+          margin-top: 0.5rem;
+          content: "Inhoud nog niet publiek";
+          display: block;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    a.annotation.annotation--agendapunt:hover {
+      box-shadow: initial;
+      background-color: $blue-gray-lightest;
+    }
+  }
+}
+
