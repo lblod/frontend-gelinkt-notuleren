@@ -1,0 +1,45 @@
+/* ==========================================================================
+  Colors
+  Only define colors here. Don't use sass color functions, stick to hex values,
+  or the color component in styleguide won't regenerate automatically anymore.
+ ========================================================================== */
+
+/* Base colors
+ ========================================================================== */
+
+$primary-yellow:        #FEE539;
+$primary-blue:          #0F68C9;
+
+$black:                 #000;
+$white:                 #fff;
+
+/* Simple gray
+ ========================================================================== */
+
+$gray-dark:             #333333;
+$gray:                  #666666;
+$gray-light:            #B2B2B2;
+$gray-lighter:          #CCCCCC;
+$gray-lightest:         #DDDDDD;
+
+/* Blue gray
+ ========================================================================== */
+
+$blue-gray-dark:        #79838F;
+$blue-gray:             #A5B3C2;
+$blue-gray-light:       #CBD2DA;
+$blue-gray-lighter:     #E8EBEE;
+$blue-gray-lightest:    #F3F5F6;
+
+
+/* Alert colors
+ ========================================================================== */
+
+$red:                   #DB3434;
+$red-light:             #F33;
+
+$green:                 #8BAE00;
+$green-light:           #B3E000;
+
+$orange:                #FFC515;
+$orange-light:          #FFE843;
