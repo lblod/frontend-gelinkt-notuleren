@@ -6,6 +6,12 @@
   Some parts will be reused, but most of them will not.
  ========================================================================== */
 
+/* plusje aan de zijkant */
+.editor-commands {
+  position:fixed;
+  margin: 90px 0 0 35%;
+  width:100px
+}
 /* restyling annotation positions and styling for demo */
 
 .editor-hints .br-sample-markup {
