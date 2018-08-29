@@ -19,7 +19,7 @@
     "lint:js": "eslint ."
   },
   "devDependencies": {
-    "@lblod/ember-rdfa-editor": "^0.14.8",
+    "@lblod/ember-rdfa-editor": "^0.14.9",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-date-plugin": "^0.7.2",
