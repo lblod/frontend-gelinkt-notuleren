@@ -70,9 +70,6 @@ export default Component.extend({
 
       const visNodes = [];
       const visEdges = [];
-      const findNodeById = function( identifier ) {
-        return visNodes.findBy("id", identifier);
-      };
 
       const pushNode = function( resource, node ) {
         if( !visNodes.findBy("id", resource) ) {
@@ -138,14 +135,10 @@ export default Component.extend({
       //   }
       // };
 
-      const blah = Vis.foo;
-
       const editorNode = element.getElementsByClassName("rdfa-editor")[0];
-      const editorSize = editorNode.getBoundingClientRect();
 
       const nodes = new Vis.DataSet( visNodes );
       const edges = new Vis.DataSet( visEdges );
-      var container = document.getElementById('mynetwork');
       var data = {
         nodes: nodes,
         edges: edges
@@ -190,8 +183,7 @@ export default Component.extend({
       visNode.classList.add("vis-renderer");
       visNode.style=`position: absolute; left: 0; right: 0; top: 0; bottom: 0`;
 
-      var network = new Vis.Network(visNode, data, options);
-      console.log("find me!");
+      new Vis.Network(visNode, data, options);
     }
   }
 
