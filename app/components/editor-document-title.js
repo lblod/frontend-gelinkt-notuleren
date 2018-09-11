@@ -2,8 +2,6 @@ import { schedule } from '@ember/runloop';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import  { computed } from '@ember/object';
-import EmberObject, {  observer } from '@ember/object';
-
 
 export default Component.extend({
   active: false,
