@@ -1,4 +1,4 @@
-FROM madnificent/ember:3.0.0 as builder
+FROM madnificent/ember:3.4.1 as builder
 
 LABEL maintainer="info@redpencil.io"
 
@@ -9,6 +9,6 @@ COPY . .
 RUN ember build -prod
 
 
-FROM semtech/ember-proxy-service:1.3.0
+FROM semtech/ember-proxy-service:1.4.0
 
 COPY --from=builder /app/dist /app
