@@ -10,21 +10,16 @@ export default Component.extend({
   overruledTitle: '',
   generatedTitle: '',
 
-  allowManualOverrule: computed('generatedTitle', function(){
-    if(this.generatedTitle.length > 0){
-      return false;
-    }
-    return true;
-  }),
-
   title: computed('overruledTitle', 'generatedTitle', function(){
+    if(this.overruledTitle.length > 0){
+      this.set('editorDocument.title', this.overruledTitle);
+      this.set('overruledTitle', '');
+      return this.editorDocument.title;
+    }
+
     if(this.generatedTitle.length > 0){
       this.set('overruledTitle', '');
       this.set('editorDocument.title', this.generatedTitle);
-    }
-
-    if(this.overruledTitle.length > 0){
-      this.set('editorDocument.title', this.overruledTitle);
     }
 
     if(this.overruledTitle.length == 0 && this.generatedTitle.length == 0){
@@ -52,6 +47,7 @@ export default Component.extend({
       this.set('active', !this.active);
 
       if (this.active) {
+        this.set('overruledTitle', this.editorDocument.title);
         schedule('afterRender', () => this.$('input').focus());
       }
    }
