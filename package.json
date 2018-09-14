@@ -27,7 +27,7 @@
     "@lblod/ember-rdfa-editor-generic-model-plugin": "^0.1.0",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "^0.6.2",
-    "@lblod/ember-vo-webuniversum": "^0.14.1",
+    "@lblod/ember-vo-webuniversum": "^0.16.1",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.9",
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
