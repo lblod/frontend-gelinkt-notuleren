@@ -1,7 +1,9 @@
 @import 'colors';
 @import 'ember-vo-webuniversum-data-table';
+@import 'ember-vo-webuniversum';
 @import 'annotations';
 @import 'rdfa-annotations';
+@import 'editor';
 
 /* ==========================================================================
   Dirty temporary css for demo purposes.
@@ -15,12 +17,6 @@
   width:100px
 }
 /* restyling annotation positions and styling for demo */
-
-.editor-hints .br-sample-markup {
-	height: 200px;
-	overflow: scroll;
-	margin: 1em 0;
-}
 
 .modal-dialog--hint {
   position: fixed !important;

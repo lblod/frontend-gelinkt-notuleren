@@ -49,3 +49,19 @@
         content: attr(typeof);
     }
 }
+
+button.button.annotation-suggestion--trigger {
+    position: absolute;
+    background-color: $white;
+    color: $gray;
+    border: 1px solid $blue-gray-light;
+    width: 4rem;
+    height: 4rem;
+    padding: 0rem;
+    border-radius: 100%;
+    text-align: center;
+    right: 2rem;
+    margin-top: -1rem;
+    line-height: 0;
+    font-size: 3rem;
+}
