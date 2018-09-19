@@ -1,16 +1,13 @@
 {{#app-chrome editorDocument=editorDocument}}
   {{editor-document-persistence-manager
-      editorDocument=editorDocument
-      statusIdMap=statusIdMap
-      save=(action "save")
-      publish=(action "publish")
-      sendToTrash=(action "sendToTrash")
-    }}
+    editorDocument=editorDocument
+    statusIdMap=statusIdMap
+    save=(action "save")
+    publish=(action "publish")
+    sendToTrash=(action "sendToTrash")
+  }}
 {{/app-chrome}}
-
-{{#editor-toolbar}}
-{{/editor-toolbar}}
-
+{{#editor-toolbar}}{{/editor-toolbar}}
 {{#if validationErrors}}
   {{#wu-modal title="Er zijn fouten bij de validatie" onClose=(action 'closeValidationModal') as |m|}}
     {{#m.content}}
