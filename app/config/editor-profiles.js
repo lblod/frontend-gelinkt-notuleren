@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-date-overwrite-plugin",
     "rdfa-editor-date-manipulation-plugin",
     "rdfa-editor-document-title-plugin",
     "rdfa-editor-generic-model-plugin",
@@ -9,6 +10,7 @@ export default {
     "rdfa-editor-citaten-plugin"
   ],
   all: [
+    "rdfa-editor-date-overwrite-plugin",
     "rdfa-editor-date-manipulation-plugin",
     "rdfa-editor-document-title-plugin",
     "rdfa-editor-generic-model-plugin",
