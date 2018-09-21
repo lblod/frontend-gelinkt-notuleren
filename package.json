@@ -26,7 +26,7 @@
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-date-plugin": "^0.7.2",
-    "@lblod/ember-rdfa-editor-generic-model-plugin": "^0.1.0",
+    "@lblod/ember-rdfa-editor-generic-model-plugin": "^0.1.1",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "^0.6.1",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "^0.6.2",
     "@lblod/ember-vo-webuniversum": "^0.16.1",
