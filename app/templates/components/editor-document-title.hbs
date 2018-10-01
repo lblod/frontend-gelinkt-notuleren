@@ -8,7 +8,7 @@
   </h1>
 {{else}}
   {{#if active}}
-    {{input class="input-field input-field--block u-spacer--small" type="text" placeholder="Naamloos document" value=overruledTitle focus-out="toggleActive" autofocus="autofocus"}}
+    {{input class="input-field input-field--block u-spacer--small" type="text" placeholder="Naamloos document" value=overruledTitle focus-out=(action "toggleActive") autofocus="autofocus"}}
   {{else}}
     <h1 class="h3 sans-serif">
         <a class="link-dark link--edit" onClick={{action "toggleActive"}}>
