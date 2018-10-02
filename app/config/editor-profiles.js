@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-template-variables-manager-plugin",
     "rdfa-editor-date-overwrite-plugin",
     "rdfa-editor-date-manipulation-plugin",
     "rdfa-editor-document-title-plugin",
@@ -10,6 +11,7 @@ export default {
     "rdfa-editor-citaten-plugin"
   ],
   all: [
+    "rdfa-editor-template-variables-manager-plugin",
     "rdfa-editor-date-overwrite-plugin",
     "rdfa-editor-date-manipulation-plugin",
     "rdfa-editor-document-title-plugin",
@@ -18,7 +20,7 @@ export default {
     "rdfa-editor-standard-template-plugin",
     "mandataris-plugin",
     "rdfa-editor-date-plugin",
-    "rdfa-editor-citaten-plugin"
+    "rdfa-editor-citaten-plugin",
   ],
   none: []
 };
