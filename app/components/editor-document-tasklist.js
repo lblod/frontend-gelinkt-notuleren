@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   tasklistPlugin: service('rdfa-editor-document-tasklist-plugin'),
   store: service(),
+  classNames: ['tasklist'],
 
   async tasklistObserver(){
     //get tasksSolutions from documents
