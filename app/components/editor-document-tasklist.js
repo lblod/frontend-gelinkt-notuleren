@@ -35,6 +35,7 @@ export default Component.extend({
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
+    this.set('hasTasks', updatedTaskSolutions.length > 0);
   },
 
   async createTasklistSolution(tasklistUri){
