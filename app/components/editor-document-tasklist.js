@@ -1,10 +1,13 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   tasklistPlugin: service('rdfa-editor-document-tasklist-plugin'),
   store: service(),
   classNames: ['tasklist'],
+  classNameBindings: ['hasTasks:tasklist--open'],
+  hasTasks: true,
 
   async tasklistObserver(){
     //get tasksSolutions from documents
@@ -31,6 +34,7 @@ export default Component.extend({
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
+    this.toggleProperty('hasTasks');
   },
 
   async createTasklistSolution(tasklistUri){

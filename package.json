@@ -26,7 +26,7 @@
     "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
     "@lblod/ember-rdfa-editor-template-variables-manager-plugin": "^0.1.3",
-    "@lblod/ember-rdfa-editor": "^0.17.8",
+    "@lblod/ember-rdfa-editor": "^0.17.9",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.6.3",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.2",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "^0.1.1",
