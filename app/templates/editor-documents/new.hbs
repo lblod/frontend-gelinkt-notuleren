@@ -40,12 +40,4 @@
 {{else}}
     {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit")}}
 {{/if}}
-
-{{#if showIntro}}
-  {{#wu-modal title="Annoteer je notulen hier" onClose=(action 'closeDialog') as |m|}}
-    {{#m.content}}
-      <p class="u-spacer--tiny">Voer "notulen" in om te vertrekken van een template.</p>
-    {{/m.content}}
-  {{/wu-modal}}
-{{/if}}
 {{outlet}}
