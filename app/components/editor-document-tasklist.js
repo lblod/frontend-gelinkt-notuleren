@@ -6,8 +6,9 @@ export default Component.extend({
   tasklistPlugin: service('rdfa-editor-document-tasklist-plugin'),
   store: service(),
   classNames: ['tasklist'],
-  classNameBindings: ['hasTasks:tasklist--open'],
-  hasTasks: true,
+  classNameBindings: ['hasTasks:tasklist--open', 'isExpanded:tasklist--expanded'],
+  hasTasks: false,
+  isExpanded: false,
 
   async tasklistObserver(){
     //get tasksSolutions from documents
@@ -34,7 +35,6 @@ export default Component.extend({
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
-    this.toggleProperty('hasTasks');
   },
 
   async createTasklistSolution(tasklistUri){
@@ -91,5 +91,11 @@ export default Component.extend({
     if(this.tasklistPlugin)
       this.tasklistPlugin.addObserver('tasklistData.[]',
                                       this.tasklistObserver.bind(this));
+  },
+
+  actions: {
+    expandTasklist(){
+      this.toggleProperty('isExpanded');
+    }
   }
 });
