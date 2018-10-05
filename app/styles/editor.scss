@@ -165,11 +165,12 @@ button.button.annotation-suggestion--trigger:after {
 
 .tasklist {
     position: absolute;
-    left: -45rem;
+    left: -50rem;
     top: 0;
     bottom: 0;
     background: $white;
     min-width: 20rem;
+    max-width: 50rem;
     display: block;
     z-index: 1;
     border-right: 1px solid $blue-gray-lighter;
@@ -199,6 +200,7 @@ button.button.annotation-suggestion--trigger:after {
     width: 100%;
     right: 0;
     z-index: 10;
+    max-width: none;
 
     .vi-expand {
         display: none;
