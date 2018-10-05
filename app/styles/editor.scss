@@ -99,3 +99,114 @@
     .bijlage__size {
         color: $gray-light;
     }
+
+
+
+
+/* ==========================================================================
+  Annotations trigger
+  Style the annotations trigger here.
+ ========================================================================== */
+
+
+/* plusje aan de zijkant */
+// .editor-commands {
+//   position:fixed;
+//   margin: 90px 0 0 35%;
+//   width:100px
+// }
+
+button.button.annotation-suggestion--trigger {
+    position: fixed;
+    background-color: $white;
+    color: $gray;
+    border: 1px solid $blue-gray-light;
+    width: 4rem;
+    height: 4rem;
+    padding: 0rem;
+    border-radius: 100%;
+    text-align: center;
+    right: 2rem;
+    margin-top: -1rem;
+    line-height: 0;
+    font-size: 3rem;
+    z-index: 5;
+}
+
+
+/* ==========================================================================
+  Toolbar
+  Style the toolbar here.
+ ========================================================================== */
+
+.toolbar__annotations-switch {
+    position: fixed;
+    margin-top: 3.5rem;
+    right: 0;
+    z-index: 5;
+    display: block;
+    width: 20rem;
+}
+
+/* ==========================================================================
+  Tasklist
+  Style the tasklist here.
+ ========================================================================== */
+
+.tasklist {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: $white;
+    min-width: 20rem;
+    width: 30%;
+    display: block;
+    z-index: 1;
+    border-right: 1px solid $blue-gray-lighter;
+    box-shadow: 0.5rem 0.5rem 1rem $blue-gray-lighter;
+    display: flex;
+    flex-direction: column;
+}
+
+.tasklist__header {
+    border-bottom: 1px solid #E8EBEE;
+    padding: 0.5em 1em;
+}
+
+.tasklist__content {
+    border-bottom: 1px solid #E8EBEE;
+    padding: 0.5em 1em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    flex: 1 1 auto;
+}
+
+.tasklist-navigation {
+    padding: 2rem 0 1rem;
+
+    > .tasklist-navigation__group {
+        padding-left: 1rem;
+    }
+}
+
+.tasklist-navigation__group {
+    padding: 0 1rem 1rem 3rem;
+
+    &.accordion__content {
+        padding: 1rem 0 0 1.65rem;
+    }
+}
+.tasklist-navigation__item {
+    padding: 0 0 0.5rem 0;
+
+    > .tasklist-navigation__group {
+        margin-top: 1rem;
+    }
+
+    &.tasklist-navigation__item.js-accordion {
+        border-bottom: 1px solid $blue-gray-light;
+        padding-bottom: 2.5rem;
+        margin-bottom: 2.5rem;
+    }
+}
