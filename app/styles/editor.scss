@@ -177,12 +177,28 @@ button.button.annotation-suggestion--trigger:after {
     box-shadow: 0.5rem 0.5rem 1rem $blue-gray-lighter;
     display: flex;
     flex-direction: column;
+
+    i.vi-long-arrow + span,
+    .vi-long-arrow {
+        display: none;
+    }
 }
 
 .tasklist--open {
     width: 100%;
     right: 0;
     z-index: 10;
+
+    .vi-expand {
+        display: none;
+    }
+
+    i.vi-long-arrow + span,
+    .vi-long-arrow {
+        display: inline-block;
+    }
+
+
 }
 
 .tasklist__header {
