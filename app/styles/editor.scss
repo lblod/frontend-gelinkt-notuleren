@@ -165,18 +165,22 @@ button.button.annotation-suggestion--trigger:after {
 
 .tasklist {
     position: absolute;
-    left: 0;
+    left: -45rem;
     top: 0;
     bottom: 0;
     background: $white;
     min-width: 20rem;
-    width: 30%;
     display: block;
     z-index: 1;
     border-right: 1px solid $blue-gray-lighter;
     box-shadow: 0.5rem 0.5rem 1rem $blue-gray-lighter;
     display: flex;
     flex-direction: column;
+    transition: all 200ms;
+
+    a.button.button--link.button--link--dark {
+        text-decoration: none;
+    }
 
     i.vi-long-arrow + span,
     .vi-long-arrow {
@@ -185,6 +189,13 @@ button.button.annotation-suggestion--trigger:after {
 }
 
 .tasklist--open {
+    min-width: 20rem;
+    width: 30%;
+    left: 0;
+    transition: all 200ms;
+}
+
+.tasklist--expanded {
     width: 100%;
     right: 0;
     z-index: 10;
