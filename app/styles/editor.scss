@@ -17,9 +17,9 @@
 
     .editor__paper {
         background-color: $white;
-        margin: 4rem 0 5rem 2rem;
+        margin: 2rem 0 5rem 2rem;
         padding: 5rem 6.5rem 5rem 5rem;
-        width: 600px;
+        width: 650px;
         max-width: 90%;
         min-height: 950px;
         box-shadow: 0 2px 6px 0 $blue-gray-light;
@@ -110,27 +110,37 @@
 
 
 /* plusje aan de zijkant */
-// .editor-commands {
-//   position:fixed;
-//   margin: 90px 0 0 35%;
-//   width:100px
-// }
+.editor-commands {
+    margin-top: 2rem;
+    right: -11em;
+    width: 9em;
+    position: fixed;
+}
 
 button.button.annotation-suggestion--trigger {
-    position: fixed;
     background-color: $white;
     color: $gray;
     border: 1px solid $blue-gray-light;
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
     padding: 0rem;
+    line-height: 1;
     border-radius: 100%;
     text-align: center;
-    right: 2rem;
+    right: 20rem;
     margin-top: -1rem;
     line-height: 0;
     font-size: 3rem;
     z-index: 5;
+}
+
+button.button.annotation-suggestion--trigger:after {
+    content:"Voeg template in";
+    display: block;
+    position: absolute;
+    font-size: 1.4rem;
+    color: $gray-dark;
+    right: -7.8em;
 }
 
 
@@ -141,11 +151,11 @@ button.button.annotation-suggestion--trigger {
 
 .toolbar__annotations-switch {
     position: fixed;
-    margin-top: 3.5rem;
+    margin-top: 5rem;
     right: 0;
     z-index: 5;
     display: block;
-    width: 20rem;
+    width: 9em;
 }
 
 /* ==========================================================================
