@@ -15,6 +15,7 @@
         padding-top: 3.5rem;
         filter: hue-rotate(0deg);
         transition: all 0.3s;
+        display: inline-block;
 
         &:hover {
             border-color: darken($primary-yellow, 5%);
@@ -43,6 +44,7 @@
 
     .annotation[property]:before,
     .annotation[typeof]:before {
+        content:"poop";
         position: absolute;
         color: $gray-dark;
         left: 0;
@@ -70,11 +72,6 @@
             background-color: red !important;
         }
     }
-
-    [property]:active, [typeof]:active {
-        background-color: red;
-    }
-
 
     [property]:before {
         content: attr(property);
@@ -118,7 +115,6 @@
 
     [property="prov:atLocation"]:before {
         content: "Locatie zitting (" attr(property) ")";
-        display: block;
     }
 
     [property="besluit:heeftAgenda"]:before {
@@ -155,6 +151,10 @@
         content: "Agendapunt (" attr(property) ")";
     }
 
+    [property="ext:behandelt"]:before {
+        content: "Behandeling agendapunt (" attr(property) ")";
+    }
+
     [property="http://mu.semte.ch/vocabularies/ext/noHighlight"] {
         padding: 0;
         border: none;
@@ -163,5 +163,18 @@
         &:before {
             content: normal;
         }
+    }
+
+    [property="ext:metadata"]:before {
+        content: "Geen annotatie (" attr(property) ")";
+    }
+
+        [property="ext:metadata"]:hover:before {
+            right: -10rem !important;
+        }
+
+
+    [property="eli:description"]:before {
+        content: "Beschrijving (" attr(property) ")";
     }
 }

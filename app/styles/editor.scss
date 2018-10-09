@@ -19,7 +19,7 @@
         background-color: $white;
         margin: 2rem 0 5rem 2rem;
         padding: 5rem 6.5rem 5rem 5rem;
-        width: 650px;
+        width: 600px;
         max-width: 90%;
         min-height: 950px;
         box-shadow: 0 2px 6px 0 $blue-gray-light;
@@ -141,117 +141,4 @@ button.button.annotation-suggestion--trigger:after {
     font-size: 1.4rem;
     color: $gray-dark;
     right: -7.8em;
-}
-
-
-/* ==========================================================================
-  Toolbar
-  Style the toolbar here.
- ========================================================================== */
-
-.toolbar__annotations-switch {
-    position: fixed;
-    margin-top: 5rem;
-    right: 0;
-    z-index: 5;
-    display: block;
-    width: 9em;
-}
-
-/* ==========================================================================
-  Tasklist
-  Style the tasklist here.
- ========================================================================== */
-
-.tasklist {
-    position: absolute;
-    left: -50rem;
-    top: 0;
-    bottom: 0;
-    background: $white;
-    min-width: 20rem;
-    max-width: 50rem;
-    display: block;
-    z-index: 1;
-    border-right: 1px solid $blue-gray-lighter;
-    box-shadow: 0.5rem 0.5rem 1rem $blue-gray-lighter;
-    display: flex;
-    flex-direction: column;
-    transition: all 200ms;
-
-    a.button.button--link.button--link--dark {
-        text-decoration: none;
-    }
-
-    i.vi-long-arrow + span,
-    .vi-long-arrow {
-        display: none;
-    }
-}
-
-.tasklist--open {
-    min-width: 20rem;
-    width: 30%;
-    left: 0;
-    transition: all 200ms;
-}
-
-.tasklist--expanded {
-    width: 100%;
-    right: 0;
-    z-index: 10;
-    max-width: none;
-
-    .vi-expand {
-        display: none;
-    }
-
-    i.vi-long-arrow + span,
-    .vi-long-arrow {
-        display: inline-block;
-    }
-
-
-}
-
-.tasklist__header {
-    border-bottom: 1px solid #E8EBEE;
-    padding: 0.5em 1em;
-}
-
-.tasklist__content {
-    border-bottom: 1px solid #E8EBEE;
-    padding: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    flex: 1 1 auto;
-}
-
-.tasklist-navigation {
-    padding: 2rem 0 1rem;
-
-    > .tasklist-navigation__group {
-        padding-left: 1rem;
-    }
-}
-
-.tasklist-navigation__group {
-    padding: 0 1rem 1rem 3rem;
-
-    &.accordion__content {
-        padding: 1rem 0 0 1.65rem;
-    }
-}
-.tasklist-navigation__item {
-    padding: 0 0 0.5rem 0;
-
-    > .tasklist-navigation__group {
-        margin-top: 1rem;
-    }
-
-    &.tasklist-navigation__item.js-accordion {
-        border-bottom: 1px solid $blue-gray-light;
-        padding-bottom: 2.5rem;
-        margin-bottom: 2.5rem;
-    }
 }
