@@ -530,6 +530,24 @@
   margin-bottom: 2rem;
 }
 
+.article-content {
+
+  .data-table {
+    margin-top: 2rem;
+  }
+
+  .data-table.data-table--lined.data-table--zebra td.datatable--nested {
+    padding: 0;
+
+    > table tr {
+      background-color: inherit;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
 
 /* Suggestions & targets
  ==========================================================================
