@@ -518,10 +518,6 @@ ol.article-list > li {
   margin: 1rem 0 3rem;
 }
 
-  .article-number {
-    display: block;
-  }
-
   .article-content > ol,
   .article-content > ul {
     margin-top: 1.5rem;
@@ -529,6 +525,9 @@ ol.article-list > li {
   }
 
   .article-content {
+    display: block;
+    margin-top: 0.5rem;
+
     .data-table {
       margin-top: 2rem;
     }
