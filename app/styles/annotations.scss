@@ -513,41 +513,38 @@
   }
 }
 
-.annotation.annotation--article {
+ul.article-list > li,
+ol.article-list > li {
+  margin: 1rem 0 3rem;
+}
 
   .article-number {
     display: block;
   }
 
-  &:after {
-    content: "article";
-  }
-}
-
-.article-content > ol,
-.article-content > ul {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-}
-
-.article-content {
-
-  .data-table {
-    margin-top: 2rem;
+  .article-content > ol,
+  .article-content > ul {
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
   }
 
-  .data-table.data-table--lined.data-table--zebra td.datatable--nested {
-    padding: 0;
+  .article-content {
+    .data-table {
+      margin-top: 2rem;
+    }
 
-    > table tr {
-      background-color: inherit;
+    .data-table.data-table--lined.data-table--zebra td.datatable--nested {
+      padding: 0;
 
-      &:last-child {
-        border-bottom: none;
+      > table tr {
+        background-color: inherit;
+
+        &:last-child {
+          border-bottom: none;
+        }
       }
     }
   }
-}
 
 /* Suggestions & targets
  ==========================================================================

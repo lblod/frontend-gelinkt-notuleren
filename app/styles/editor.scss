@@ -45,6 +45,22 @@
         p, li {
             font-size: 1.6rem;
         }
+
+        ul,
+        ol {
+            &.bullet-list,
+            &.numbered-list {
+            margin-left: 0;
+
+                ul,
+                ol {
+                    &.bullet-list,
+                    &.numbered-list {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
     }
 
     .editor__paper.js-scrollspy__content {
