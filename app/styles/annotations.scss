@@ -3,15 +3,26 @@
   Style the annotations here.
  ========================================================================== */
 
-.annotation-structure {
+.editor__paper p,
+.editor__paper li,
+.editor__paper h1,
+.editor__paper h2,
+.editor__paper h3,
+.editor__paper h4,
+.editor__paper h5,
+.editor__paper h6 {
   position: relative;
+}
+
+.editor__paper p {
+  display: block;
 }
 
 .annotation {
   border-bottom: 1px solid rgba($blue-gray-light, 0.7);
   cursor: pointer;
   padding-bottom: 4px;
-  display: inline-block;
+  display: inline;
 
   &:hover {
     color: $black;
@@ -23,18 +34,17 @@
     font-weight: 400;
     font-size: 1.5rem;
     width: 10.5rem;
-    text-align: right;
     color: $gray;
     opacity: 0;
-    right: -1200rem;
     display: none;
     border-bottom: 1px solid $blue-gray-lighter;
     background-color: $white;
     padding: 0.3rem 0.7rem 0.2rem 1.4rem;
     border-right: 0.5rem solid $primary-yellow;
-    box-shadow: 0.2rem 0.2rem 0.2rem $blue-gray-lighter;
+    box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
     z-index: 10;
     font-family: "flanders-sans", sans-serif;
+    top: 0;
   }
 
   &:hover:after {
@@ -44,14 +54,45 @@
   }
 }
 
+.annotation .annotation {
+  padding-bottom: 2px;
+  border-bottom-color: darken($blue-gray-light, 5%);
+
+  &:hover {
+    color: $black;
+    background-color: rgba($primary-yellow, 0.5);
+  }
+
+  &:hover:after {
+    padding-left: 1rem;
+    right: -27rem;
+    width: 10rem;
+  }
+}
+
+.annotation .annotation .annotation {
+  border-bottom-color: $blue-gray;
+  padding-bottom: 0;
+
+  &:hover {
+    background-color: rgba($primary-yellow, 0.8);
+  }
+
+  &:hover:after {
+    top: 2.2rem;
+  }
+}
+
 .annotation.highlight {
   background-color: $primary-yellow;
 }
 
   /* text content */
 
+  // To find easily
   // [datatype*="xsd:date"] {
-  //   background-color: red;
+  //   background-color: blue;
+  //   color: white;
   // }
 
   [property="besluit:isGehoudenDoor"]:after {
@@ -88,6 +129,20 @@
 
   [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:title"]:after {
     content: "Besloten agendapunt";
+  }
+
+  [property="eli:description"]:after {
+    content: "Beschrijving";
+  }
+
+  [property="eli:cites"]:after {
+    content: "Referentie Vlaamse codex";
+  }
+
+  [property="eli:artikel"]:after {
+    content: "Artikel nummer";
+    position: absolute;
+    right: -10rem;
   }
 
 /* ==========================================================================
@@ -381,13 +436,6 @@
     }
   }
 
-  &.annotation--article {
-
-    &:after {
-      content: "article";
-    }
-  }
-
   &.annotation--content {
 
     &:after {
@@ -439,36 +487,7 @@
   }
 }
 
-.annotation .annotation {
-  padding-bottom: 2px;
-  border-bottom-color: darken($blue-gray-light, 5%);
-
-  &:hover {
-    color: $black;
-    background-color: rgba($primary-yellow, 0.5);
-  }
-
-  &:hover:after {
-    border-left: 1px solid $blue-gray-light;
-    border-bottom: none;
-    padding-left: 1rem;
-    right: -45.5rem;
-    text-align: left;
-  }
-}
-
-.annotation .annotation .annotation {
-  border-bottom-color: $blue-gray;
-  padding-bottom: 0;
-
-  &:hover {
-    background-color: rgba($primary-yellow, 0.8);
-  }
-
-  &:hover:after {
-    top: 2.2rem;
-  }
-} */
+*/
 
 [property="ext:behandelt"] {
   .annotation--agendapunt--besloten__icon,
@@ -494,6 +513,37 @@
   }
 }
 
+ul.article-list > li,
+ol.article-list > li {
+  margin: 1rem 0 3rem;
+}
+
+  .article-content > ol,
+  .article-content > ul {
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .article-content {
+    display: block;
+    margin-top: 0.5rem;
+
+    .data-table {
+      margin-top: 2rem;
+    }
+
+    .data-table.data-table--lined.data-table--zebra td.datatable--nested {
+      padding: 0;
+
+      > table tr {
+        background-color: inherit;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
 
 /* Suggestions & targets
  ==========================================================================

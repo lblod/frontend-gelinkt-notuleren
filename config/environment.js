@@ -31,6 +31,14 @@ module.exports = function(environment) {
       includeTimezone: 'all',
       includeLocales: ['nl'],
       allowEmpty: true
+    },
+    torii: {
+      disableRedirectInitializer: true,
+      providers: {
+        'acmidm-oauth2': {
+          logoutUrl: 'https://authenticatie-ti.vlaanderen.be/op/v1/logout'
+        }
+      }
     }
   };
 
