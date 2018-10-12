@@ -1,0 +1,13 @@
+/* ==========================================================================
+  Toolbar
+  Style the toolbar here.
+ ========================================================================== */
+
+.toolbar__annotations-switch {
+    position: fixed;
+    margin-top: 5rem;
+    right: 0;
+    z-index: 5;
+    display: block;
+    width: 9em;
+}

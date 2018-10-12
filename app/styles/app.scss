@@ -1,12 +1,19 @@
-@import 'colors';
 @import 'ember-vo-webuniversum-data-table';
 @import 'ember-vo-webuniversum';
-@import 'annotations';
-@import 'rdfa-annotations';
-@import 'editor';
 @import 'ember-rdfa-editor-template-variables-manager-plugin';
 @import 'ember-vo-tasklist';
 @import 'ember-rdfa-editor-document-tasklist-plugin';
+
+@import 'colors';
+@import 'shame';
+
+@import 'annotations';
+@import 'rdfa-annotations';
+
+@import 'editor';
+@import 'tasklist';
+@import 'toolbar';
+
 
 /* ==========================================================================
   Dirty temporary css for demo purposes.
@@ -53,104 +60,92 @@
 
 .editor__paper {
 
-  ul {
-    list-style-type: disc;
-    list-style: disc;
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+    font-family: flanders-serif,serif;
+    line-height: 1.1;
   }
-  ol {
-   list-style-type: decimal;
- }
 
- h1,
- h2,
- h3,
- h4,
- h5,
- h6 {
-  font-family: flanders-serif,serif;
-  line-height: 1.1;
-}
+  h1 {
+    line-height: 1;
+    font-weight: 300;
+    font-size: 4.8rem;
+    margin-bottom: 4rem;
+  }
 
-h1 {
-  line-height: 1;
-  font-weight: 300;
-  font-size: 4.8rem;
-  margin-bottom: 4rem;
-}
+    @media screen and (max-width: 767px) {
+      h1 {
+        font-size: 3.6rem;
+        margin-bottom: 3rem;
+      }
+    }
 
-@media screen and (max-width: 767px) {
- h1 {
-  font-size: 3.6rem;
-  margin-bottom: 3rem;
-}
-}
+  h2 {
+    font-size: 3.6rem;
+    font-weight: 500;
+    margin-bottom: 3rem;
+  }
 
-h2 {
-  font-size: 3.6rem;
-  font-weight: 500;
-  margin-bottom: 3rem;
-}
+    @media screen and (max-width: 767px) {
+       h2 {
+        font-size: 3rem;
+        margin-bottom: 2.4rem;
+      }
+    }
 
-@media screen and (max-width: 767px) {
- h2 {
-  font-size: 3rem;
-  margin-bottom: 2.4rem;
-}
-}
+  h3 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2.4rem;
+  }
 
-h3 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 2.4rem;
-}
+    @media screen and (max-width: 767px) {
+       h3 {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+      }
+    }
 
-@media screen and (max-width: 767px) {
- h3 {
-  font-size: 2.8rem;
-  margin-bottom: 2rem;
-}
-}
+  h4 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
 
-h4 {
-  font-size: 2.4rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
-}
+    @media screen and (max-width: 767px) {
+      h4 {
+        font-size: 2.4rem;
+        margin-bottom: 1.5rem;
+      }
+    }
 
-@media screen and (max-width: 767px) {
- h4 {
-  font-size: 2.4rem;
-  margin-bottom: 1.5rem;
-}
-}
+  h5 {
+    font-weight: 400;
+    font-size: 2.1rem;
+    margin-bottom: 1.5rem;
+  }
 
-h5 {
-  font-weight: 400;
-  font-size: 2.1rem;
-  margin-bottom: 1.5rem;
-}
+    @media screen and (max-width: 767px) {
+      h5 {
+        font-size: 2.1rem;
+        margin-bottom: 1rem;
+      }
+    }
 
-@media screen and (max-width: 767px) {
- h5 {
-  font-size: 2.1rem;
-  margin-bottom: 1rem;
-}
-}
-
-h6 {
-  font-weight: 500;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-}
-
-@media screen and (max-width: 767px) {
   h6 {
+    font-weight: 500;
     font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
-}
 
-em {
-  font-style: italic;
-}
+    @media screen and (max-width: 767px) {
+      h6 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+    }
 }

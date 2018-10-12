@@ -1,1 +1,6 @@
-export { default } from '@lblod/ember-rdfa-editor-mandataris-plugin/models/bestuurseenheid' ;
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+
+export default Model.extend({
+  naam: attr()
+});
