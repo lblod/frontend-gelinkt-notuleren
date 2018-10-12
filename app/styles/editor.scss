@@ -63,6 +63,15 @@
         }
     }
 
+    .editor__paper ul.bullet-list ul {
+        margin-top: 0.5rem;
+    }
+
+    .editor__paper ul.bullet-list ul > li {
+        margin-left: 2rem;
+        list-style-type: circle;
+    }
+
     .editor__paper.js-scrollspy__content {
         border-radius: 0;
     }
