@@ -39,6 +39,11 @@ module.exports = function(environment) {
           logoutUrl: 'https://authenticatie-ti.vlaanderen.be/op/v1/logout'
         }
       }
+    },
+    'vo-webuniversum': {
+      version: '2.8.3',
+      header: '//widgets.vlaanderen.be/widget/live/5d47450609154d5c86f588f3b36ce9ba',
+      footer: '//widgets.vlaanderen.be/widget/live/a6670dda202e46beb2832ae8f57f197e'
     }
   };
 

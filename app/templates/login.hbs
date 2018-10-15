@@ -1,1 +1,176 @@
-You probably want {{#link-to 'mock-login' class='button'}}mock-login{{/link-to}}
+{{wu-widget src=header class="vo-header-widget"}}
+<div class="page">
+  <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
+    <header class="content-header content-header--small content-header--half-image u-spacer">
+      <div class="content-header__wrapper">
+        <picture class="content-header__bg"><img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="" title=""></picture>
+        <div class="layout layout--wide">
+          <div class="content-header__content">
+            <div class="content-header__logo-wrapper"><a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase"><span class="content-header__entity-logo__prefix">Vlaanderen</span><span class="content-header__entity-logo__title">is lokaal bestuur</span></a></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="region">
+      <div class="layout layout--wide">
+        <div class="grid">
+          <div class="col--1-1--s col--8-12--m col--6-12">
+            <h1 class="h1 u-spacer--tiny">Gelinkt Notuleren</h1>
+            <h2 class="h4 sans-serif">Opmaken en publiceren van agenda's, notulen en besluiten voor Lokale Besturen.</h2>
+            <br>
+            <br>
+            <p class="u-spacer--tiny">Lukt het aanmelden niet? Neem contact op met uw interne beheerder. Indien er zich een probleem voordoet, contacteer <a href="https://overheid.vlaanderen.be/ict/ict-diensten/gebruikersbeheer">gebruikersbeheer Vlaanderen</a>.</p>
+            <p class="u-spacer--tiny">Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct staan indien deze niet verschijnt.</p>
+          </div>
+          <div class="col--1-1--s col--4-12--m col--6-12 u-align-right--tablet-portrait-up">
+            {{!-- {{acmidm-login}} --}}
+            {{#link-to 'mock-login' class='button'}}gebruik tijdelijk de mock-login{{/link-to}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="region region--alt">
+      <div class="layout layout--wide">
+        <h2 class="h3 u-spacer">De functionaliteiten van Gelinkt Notuleren</h2>
+        <div class="grid grid--is-stacked u-spacer">
+          <div class="col--6-12 col--3-12--xl col--6-12--l col--6-12--m col--6-12--s col--1-1--xs">
+            <div class="info-tile info-tile--m info-tile--center">
+              <div>
+                <div class="info-tile__header">
+                  <div class="info-tile__header__icon badge badge--accent badge--l badge--icon">
+                    <i class="badge__icon vi vi-edit" aria-hidden="true"></i>
+                  </div>
+                  <div class="info-tile__header__wrapper">
+                    <h3 class="info-tile__header__title">Notuleren</h3>
+                  </div>
+                </div>
+                <div class="info-tile__content u-align-left">
+                	<div class="grid grid--collapse grid--align-center">
+                		<div class="col--8-12 col--12-12--s">
+							<p>Notuleer uw zitting met behulp van het online tekstverwerkingsprogramma.</p>
+							<br>
+							<ul class="bullet-list u-spacer--none">
+								{{!-- <li>stel <strong>agenda's</strong> op, bereid <strong>agendapunten</strong> voor en <strong>notuleer</strong> uw zitting;</li> --}}
+								<li>Gebruik de de ingebouwde <strong>sjablonen</strong> om besluiten te vormen;</li>
+								<li>link naar de juiste <strong>wetgeving uit de Vlaamse codex</strong>;</li>                  	{{!-- <li>verwijs automatisch naar de juiste <strong>mandatarissen in uw bestuur</strong>.</li> --}}
+								<li>notuleer technisch conform de opgelegde <strong>standaarden</strong>;</li>
+							</ul>
+							{{!-- <p>De ingebouwde <strong>sjablonen</strong> helpen u op weg om eenvoudig besluiten te vormen. De tekstherkenning linkt automatisch naar de juiste <strong>wetgeving in de Vlaamse codex</strong>, en de juiste <strong>mandatarissen in uw bestuur</strong>.</p> --}}
+						</div>
+					</div>
+                </div>
+                <footer class="info-tile__footer">
+                  <p class="u-spacer--tiny">
+                    <a class="button button--narrow" href="https://gelinkt-notuleren.lokaalbestuur.vlaanderen.be/handleiding/#notuleren" target="_blank">Bekijk handleiding</a>
+                  </p>
+                </footer>
+              </div>
+            </div>
+          </div>
+
+          <div class="col--6-12 col--3-12--xl col--6-12--l col--6-12--m col--6-12--s col--1-1--xs">
+            <div class="info-tile info-tile--m info-tile--center">
+              <div>
+                <div class="info-tile__header">
+                  <div class="info-tile__header__icon badge badge--accent badge--l badge--icon">
+                    <i class="badge__icon vi vi-id" aria-hidden="true"></i>
+                  </div>
+                  <div class="info-tile__header__wrapper">
+                    <h3 class="info-tile__header__title">Ondertekenen &amp; Valideren</h3>
+                  </div>
+                </div>
+                <div class="info-tile__content u-align-left">
+                	<div class="grid grid--collapse grid--align-center">
+                		<div class="col--8-12 col--12-12--s">
+                 		<p>Uw documenten blijven online authentiek en veilig bewaard.</p>
+	                	<br>
+	                	<ul class="bullet-list u-spacer--none">
+		                  	<li>Enkel personen met de <strong>juiste bevoegdheid</strong> kunnen documenten ondertekenen;</li>
+		                  	<li>documenten worden online <strong>getekend en verzegeld</strong>;</li>
+		                  	<li>documenten kunnen op elk moment <strong>gevalideerd worden op echtheid</strong><!--  om misinformatie tegen te gaan -->.</li>
+		                  </ul>
+		              </div>
+		          </div>
+                </div>
+                <footer class="info-tile__footer">
+                  <p class="u-spacer--tiny">
+                    <a class="button button--narrow" href="https://gelinkt-notuleren.lokaalbestuur.vlaanderen.be/handleiding/#publiceren" target="_blank">Bekijk handleiding</a>
+                  </p>
+                </footer>
+              </div>
+            </div>
+          </div>
+
+          <div class="col--6-12 col--3-12--xl col--6-12--l col--6-12--m col--6-12--s col--1-1--xs">
+            <div class="info-tile info-tile--m info-tile--center">
+              <div>
+                <div class="info-tile__header">
+                  <div class="info-tile__header__icon badge badge--accent badge--l badge--icon">
+                    <i class="badge__icon vi vi-addressbook" aria-hidden="true"></i>
+                  </div>
+                  <div class="info-tile__header__wrapper">
+                    <h3 class="info-tile__header__title">Mandatenbeheer</h3>
+                  </div>
+                </div>
+                <div class="info-tile__content u-align-left">
+                	<div class="grid grid--collapse grid--align-center">
+                		<div class="col--8-12 col--12-12--s">
+		                	<p>Vul automatisch de mandatendatabank aan bij het publiceren van uw notulen.</p>
+		                	<br>
+		                	<ul class="bullet-list u-spacer--none">
+		                		<li>De tekstverwerker <strong>herkent automatisch de juiste mandatarissen</strong> in uw besluiten;</li>
+		                		<li>maak gebruik van sjablonen voor het <strong>wijzigen van mandaten</strong>;</li>
+		                		<li>wijzigingen in mandaten worden bij publicatie <strong>automatisch up-to-date gebracht in de mandatendatabank</strong>.</li>
+		                	</ul>
+		                </div>
+		            </div>
+                </div>
+                <footer class="info-tile__footer">
+                  <p class="u-spacer--tiny">
+                    <a class="button button--narrow" href="https://gelinkt-notuleren.lokaalbestuur.vlaanderen.be/handleiding/#mandatenbeheer" target="_blank">Bekijk handleiding</a>
+                  </p>
+                </footer>
+              </div>
+            </div>
+          </div>
+
+          <div class="col--6-12 col--3-12--xl col--6-12--l col--6-12--m col--6-12--s col--1-1--xs">
+            <div class="info-tile info-tile--m info-tile--center">
+              <div>
+                <div class="info-tile__header">
+                  <div class="info-tile__header__icon badge badge--accent badge--l badge--icon">
+                    <i class="badge__icon vi vi-news" aria-hidden="true"></i>
+                  </div>
+                  <div class="info-tile__header__wrapper">
+                    <h3 class="info-tile__header__title">Publiceren<!--  &amp; Melden --></h3>
+                  </div>
+                </div>
+                <div class="info-tile__content u-align-left">
+                	<div class="grid grid--collapse grid--align-center">
+                		<div class="col--8-12 col--12-12--s">
+		                	<p>Documenten worden met het juiste niveau van beveiliging online ter beschikking gesteld.</p>
+		                	<br>
+		                	<ul class="bullet-list u-spacer--none">
+		                		<li>Stel essentiële informatie ter beschikking voor de <strong>leden van uw bestuur</strong>;</li>
+		                		<li>breng <strong>toezichthoudende overheden</strong> op de hoogte en voldoe aan de <strong>publicatieplicht</strong> met de druk van een knop;</li>
+		                		<li>geef burgers eenvoudig toegang tot <strong>publieke informatie</strong>.</li>
+		                	</ul>
+		                </div>
+		            </div>
+                </div>
+                <footer class="info-tile__footer">
+                  <p class="u-spacer--tiny">
+                    <a class="button button--narrow" href="https://gelinkt-notuleren.lokaalbestuur.vlaanderen.be/handleiding/#publiceren" target="_blank">Bekijk handleiding</a>
+                  </p>
+                </footer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  {{wu-widget src=footer}}
+</div>
