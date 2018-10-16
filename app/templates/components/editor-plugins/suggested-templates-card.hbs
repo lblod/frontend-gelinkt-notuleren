@@ -1,0 +1,25 @@
+<div class="modal-dialog__header">
+  <div class="grid">
+    <div class="col--10-12">
+      <p>
+        <strong>U kan hier deze templates invoegen</strong>
+      </p>
+    </div>
+    <div class="col--2-12 u-align-right">
+      <a class="link--icon--close" href="#">
+        <span class="u-visually-hidden">Venster sluiten</span>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="modal-dialog__content modal-dialog__content--sectioned">
+  <ul class="link-list link-list--bordered">
+    {{#each templates as |template|}}
+      <li class="link-list__item">
+        <a
+          class=""
+          onclick={{action 'insert' template}}><i class="vi vi-arrow"></i> {{template.title}}</a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

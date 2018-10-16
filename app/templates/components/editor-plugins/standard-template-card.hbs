@@ -1,0 +1,16 @@
+<p class="u-spacer--tiny">
+	Wil u graag een template invoegen voor een
+	<strong>{{info.label}}</strong>?
+</p>
+
+{{#wu-button-group}}
+  {{wu-link-button
+    label="Voeg in"
+    size="small"
+    isNarrow=true
+    onClick=(action "insert")}}
+  <!-- {{wu-button label="Zoek verder" size="small" isAlt=true isNarrow=true command="ctrl + f" commandLocation="below" onClick=null}}
+       {{wu-button label="Negeer" size="tiny" isLink=true isDark=true isNarrow=true command="esc" commandLocation="below" onClick=null}} -->
+{{/wu-button-group}}
+
+{{yield}}
