@@ -10,7 +10,8 @@
 .editor__paper h3,
 .editor__paper h4,
 .editor__paper h5,
-.editor__paper h6 {
+.editor__paper h6,
+.annotation-structure {
   position: relative;
 }
 
@@ -505,11 +506,6 @@
 
   .annotation--agendapunt--open__icon {
       color: $gray-light;
-  }
-
-  .annotation--agendapunt--besloten__icon,
-  .annotation--agendapunt--open__icon {
-    top: -0.3rem;
   }
 }
 
