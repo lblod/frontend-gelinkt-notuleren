@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-scoped-bestuursorgaan-plugin",
     "rdfa-editor-document-tasklist-plugin",
     "rdfa-editor-template-variables-manager-plugin",
     "rdfa-editor-date-overwrite-plugin",
@@ -12,6 +13,7 @@ export default {
     "rdfa-editor-citaten-plugin"
   ],
   all: [
+    "rdfa-editor-scoped-bestuursorgaan-plugin",
     "rdfa-editor-document-tasklist-plugin",
     "rdfa-editor-template-variables-manager-plugin",
     "rdfa-editor-date-overwrite-plugin",
