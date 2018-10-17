@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-gemeenteraadsleden-aanstelling-plugin",
     "rdfa-editor-scoped-bestuursorgaan-plugin",
     "rdfa-editor-document-tasklist-plugin",
     "rdfa-editor-template-variables-manager-plugin",
@@ -13,6 +14,7 @@ export default {
     "rdfa-editor-citaten-plugin"
   ],
   all: [
+    "rdfa-editor-gemeenteraadsleden-aanstelling-plugin",
     "rdfa-editor-scoped-bestuursorgaan-plugin",
     "rdfa-editor-document-tasklist-plugin",
     "rdfa-editor-template-variables-manager-plugin",
