@@ -1,0 +1,47 @@
+{{#if loading}}
+  <div class="loader"><span class="u-visually-hidden">Aan het laden</span></div>
+{{else}}
+  {{#if results.length}}
+    <div class="modal-dialog__header">
+      <div class="grid">
+        <div class="col--10-12">
+          <strong>Voeg verwijzing naar de Vlaamse Codex in</strong>
+        </div>
+        <div class="col--2-12 u-align-right">
+          <a class="link--icon--close" href="#">
+            <span class="u-visually-hidden">Venster sluiten</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="modal-dialog__content modal-dialog__content--sectioned">
+      <ul class="link-list link-list--bordered">
+        {{#each results as |result|}}
+          <li class="link-list__item link-list__item--sidenotes">
+            <a {{action "insertHint" result.origModel}}>{{result.title}}...</a>
+            <a href="{{result.uri}}" target="_blank" class="link-list__item__sidenote">
+              <i class="vi vi-external"></i> Bekijk volledig document:
+              <br>
+              {{result.uri}}
+            </a>
+          </li>
+        {{/each}}
+      </ul>
+      <div class="pager search-box__pagination">
+        {{card-pagination pageSize=pageSize pageNumber=pageNumber total=totalSize prev=(action "prevPage") next=(action "nextPage")}}
+      </div>
+    </div>
+    <div class="u-visually-hidden modal-dialog__footer">
+      {{#wu-button-group}}
+        {{wu-button label="Uitgebreid zoeken" size="small" isNarrow=true isAlt=true command="ctrl + f" commandLocation="below" onClick=null}}
+        {{wu-button label="Negeer" size="tiny" isLink=true isDark=true isNarrow=true command="esc" commandLocation="below" onClick=null}}
+      {{/wu-button-group}}
+    </div>
+  {{else}}
+    <p>Geen referenties gevonden</p>
+  {{/if}}
+{{/if}}
+
+{{#each errors as |error|}}
+  <li class="error">! {{error}}</li>
+{{/each}}

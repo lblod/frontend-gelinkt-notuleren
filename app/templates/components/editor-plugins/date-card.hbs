@@ -1,0 +1,10 @@
+<p class="u-spacer--tiny">{{info.label}} <br>
+<strong>{{info.plainValue}}</strong></p>
+
+{{#wu-button-group}}
+  {{wu-button label="Juist" size="small" isNarrow=true command="ctrl + j" commandLocation="below" onClick=(action "insert")}}
+  {{wu-button label="Zoek verder" size="small" isAlt=true isNarrow=true command="ctrl + f" commandLocation="below" onClick=null}}
+  {{wu-button label="Negeer" size="tiny" isLink=true isDark=true isNarrow=true command="esc" commandLocation="below" onClick=null}}
+{{/wu-button-group}}
+
+{{yield}}

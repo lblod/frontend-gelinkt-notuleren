@@ -155,7 +155,7 @@ button.button.annotation-suggestion--trigger {
     margin-top: -1rem;
     line-height: 0;
     font-size: 3rem;
-    z-index: 5;
+    z-index: 900;
 }
 
 button.button.annotation-suggestion--trigger:after {
@@ -165,4 +165,5 @@ button.button.annotation-suggestion--trigger:after {
     font-size: 1.4rem;
     color: $gray-dark;
     right: -7.8em;
+    z-index: 900;
 }

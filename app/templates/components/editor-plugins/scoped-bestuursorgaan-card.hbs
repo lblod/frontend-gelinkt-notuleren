@@ -1,0 +1,32 @@
+<div class="modal-dialog__header">
+  <div class="grid">
+    <div class="col--10-12">
+      <strong>{{info.label}}</strong>
+    </div>
+    <div class="col--2-12 u-align-right">
+      <a class="link--icon--close" href="#">
+        <span class="u-visually-hidden">Venster sluiten</span>
+      </a>
+    </div>
+  </div>
+</div>
+<div class="modal-dialog__content modal-dialog__content--sectioned">
+    {{#if getBestuursorganen.isRunning}}
+      <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+    {{else}}
+      <ul class="link-list link-list--bordered">
+        {{#each bestuursorganenProperties as |bp| }}
+          <li class="link-list__item">
+            <a class="" onclick={{action 'refer' bp}}>{{!-- Voeg --}} {{bp.bestuursorgaan.naam}} {{!-- als {{bp.property.label}} toe --}}</a>
+
+{{!--             {{#wu-button-group}}
+              {{wu-button label="Voeg toe" size="small" isNarrow=true  commandLocation="below" onClick=(action "refer" bp)}}
+              {{wu-button label="Voeg uitgebreid toe" size="small" isNarrow=true  commandLocation="below" onClick=(action "extend" bp)}}
+            {{/wu-button-group}} --}}
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+</div>
+
+{{yield}}
