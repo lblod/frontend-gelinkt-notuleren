@@ -1,0 +1,24 @@
+<div class="modal-dialog__header">
+  <div class="grid">
+    <div class="col--10-12">
+      <p class="u-spacer--tiny">
+        {{info.label}} <br>
+        <strong>{{info.plainValue}}</strong>
+      </p>
+    </div>
+    <div class="col--2-12 u-align-right">
+      <a class="link--icon--close" href="#" {{action "remove" result.origModel}}>
+        <span class="u-visually-hidden">Venster sluiten</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-dialog__footer">
+  {{#wu-button-group}}
+    {{wu-button label="Voeg takenlijst in" isNarrow=true onClick=(action "insert")}}
+    {{wu-button label="Negeer" size="small" isLink=true isDark=true isNarrow=true onClick=(action "remove")}}
+  {{/wu-button-group}}
+</div>
+
+{{yield}}
