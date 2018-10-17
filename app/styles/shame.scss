@@ -7,3 +7,26 @@ em {
     background-color: red;
     color: white;
 }
+
+.modal-dialog__content li.link-list__item.link-list__item--sidenotes a:first-child {
+	border-bottom: none;
+	padding-bottom: 0.3rem;
+}
+
+.modal-dialog__content li.link-list__item a.link-list__item__sidenote {
+	padding-top: 0;
+	padding-left: 2.5rem;
+	padding-bottom: 1.2rem;
+	margin-top: 0.5rem;
+	color: $gray;
+	font-size: 80%;
+	line-height: 1.3;
+	display: block;
+	word-break: break-all;
+	border-bottom: $blue-gray-light;
+
+	&:hover {
+		background-color: transparent;
+		color: $black;
+	}
+}
