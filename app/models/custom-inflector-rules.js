@@ -52,5 +52,9 @@ inflector.irregular('dynamic-subform', 'dynamic-subforms');
 inflector.irregular('form-input', 'form-inputs');
 inflector.irregular('rdfs-property', 'rdfs-properties');
 inflector.irregular('rdfs-class', 'rdfs-classes');
+inflector.irregular('tasklist', 'tasklists');
+inflector.irregular('task', 'tasks');
+inflector.irregular('tasklist-solution', 'tasklist-solutions');
+inflector.irregular('task-solution', 'task-solutions');
 // Meet Ember Inspector's expectation of an export
 export default {};
