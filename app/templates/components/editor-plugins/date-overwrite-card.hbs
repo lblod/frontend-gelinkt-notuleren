@@ -1,0 +1,127 @@
+{{#if isDateTime}}
+	<div class="modal-dialog__header">
+    <div class="grid">
+      <div class="col--10-12">
+			  <p class="u-spacer--tiny">
+			    Pas datum en tijd aan <br>
+			    huidige datum <strong>{{info.plainValue}}</strong>
+			  </p>
+      </div>
+      <div class="col--2-12 u-align-right">
+        <a class="link--icon--close" href="#">
+          <span class="u-visually-hidden">Venster sluiten</span>
+        </a>
+      </div>
+    </div>
+	</div>
+
+	<div class="modal-dialog__content">
+		<form class="form">
+			<div class="form__row">
+				<label>Dag</label>
+				{{wu-datepicker
+				placeholder=placeholder
+				class="date-range__datepicker datepicker"
+				value=(mut updatedDate)
+				dateFormat=dateFormat
+				}}
+			</div>
+
+			<div class="form__row">
+		    <div class="double-input js-double-input">
+		      <div class="double-input__inputs">
+		        <div class="double-input__input">
+		        	<label>
+		        		Uur
+		          	{{input class="input-field input-field--block" placeholder="12"  data-double-input-label-highlight="1"  type="number" value=hours min=0 max=12}}
+		          </label>
+		        </div>
+		        <div class="double-input__input">
+		        	<label>
+		        		Minuten
+		          	{{input class="input-field input-field--block" placeholder="00"  data-double-input-label-highlight="2"  type="number" value=minutes min=0 max=59}}
+		          </label>
+		        </div>
+		      </div>
+		    </div>
+	    </div>
+		</form>
+	</div>
+
+	<div class="modal-dialog__footer">
+	  {{#wu-button-group}}
+      {{wu-button
+        label="Pas aan"
+        isNarrow=true
+        commandLocation="below"
+        onClick=(action "insertDateTime")
+      }}
+      {{wu-button
+        label="Verwerp wijzigingen"
+        class="button--alt"
+        isNarrow=true
+        commandLocation="below"
+        onClick=(action "removeHintsAtLocation")
+      }}
+	  {{/wu-button-group}}
+	</div>
+
+	{{else}}
+
+	<div class="modal-dialog__header">
+    <div class="grid">
+      <div class="col--10-12">
+			  <p class="u-spacer--tiny">
+			    {{info.label}} <br>
+			    <strong>{{info.plainValue}}</strong>
+			  </p>
+      </div>
+      <div class="col--2-12 u-align-right">
+        <a class="link--icon--close" href="#">
+          <span class="u-visually-hidden">Venster sluiten</span>
+        </a>
+      </div>
+    </div>
+	</div>
+
+	<div class="modal-dialog__content">
+	  {{wu-datepicker
+	    placeholder=placeholder
+	    class="date-range__datepicker datepicker input-field--block"
+	    value=(mut updatedDate)
+	    dateFormat=dateFormat
+	  }}
+{{!-- 	  {{#wu-button-group}}
+	    {{#if updatedDate}}
+	      {{wu-button
+	        label="Pas aan"
+	        size="small"
+	        isNarrow=true
+	        command="ctrl + j"
+	        commandLocation="below"
+	        onClick=(action "insert")
+	      }}
+	    {{/if}}
+	  {{/wu-button-group}} --}}
+	</div>
+
+	<div class="modal-dialog__footer">
+	  {{#wu-button-group}}
+      {{wu-button
+        label="Pas aan"
+        isNarrow=true
+        commandLocation="below"
+        onClick=(action "insertDateTime")
+      }}
+      {{wu-button
+        label="Verwerp wijzigingen"
+        class="button--alt"
+        isNarrow=true
+        commandLocation="below"
+        onClick=(action "insertDateTime")
+      }}
+	  {{/wu-button-group}}
+	</div>
+{{/if}}
+
+	{{yield}}
