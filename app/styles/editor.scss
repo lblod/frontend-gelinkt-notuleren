@@ -11,22 +11,33 @@
 .editor {
     background-color: $blue-gray-lightest;
     position: relative;
-    overflow-x: hidden;
     padding-bottom: 1rem;
 }
 
     .editor__paper {
+        position: relative;
         background-color: $white;
         margin: 2rem 0 5rem 2rem;
         padding: 5rem 6.5rem 5rem 5rem;
-        width: 600px;
-        max-width: 90%;
+        width: 70%;
+        min-width: 400px;
+        max-width: 750px;
         min-height: 950px;
         box-shadow: 0 2px 6px 0 $blue-gray-light;
 
         &:focus {
             outline: none;
         }
+    }
+
+    .tasklist + .container-flex--contain .editor__paper {
+        left: -20rem;
+        min-width: 600px;
+    }
+
+    .tasklist.tasklist--open + .container-flex--contain .editor__paper {
+        left: 0;
+        min-width: 470px;
     }
 
     .editor__annotations {
@@ -136,26 +147,26 @@
 
 /* plusje aan de zijkant */
 .editor-commands {
-    margin-top: 2rem;
-    right: -11em;
+    margin-top: 0.5rem;
+    right: 0;
     width: 9em;
     position: fixed;
+    z-index: 900;
 }
 
 button.button.annotation-suggestion--trigger {
     background-color: $white;
     color: $gray;
     border: 1px solid $blue-gray-light;
-    width: 3.3rem;
-    height: 3.3rem;
-    padding: 0.1rem;
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    padding: 0 0 0.45rem;
     border-radius: 100%;
     text-align: center;
-    right: 20rem;
     margin-top: -1rem;
     line-height: 0;
     font-size: 3rem;
-    z-index: 900;
 }
 
 button.button.annotation-suggestion--trigger:after {
@@ -164,6 +175,7 @@ button.button.annotation-suggestion--trigger:after {
     position: absolute;
     font-size: 1.4rem;
     color: $gray-dark;
-    right: -7.8em;
+    left: 3.65rem;
     z-index: 900;
+    top: 1.5rem;
 }
