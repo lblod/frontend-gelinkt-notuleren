@@ -26,7 +26,7 @@
     "@lblod/ember-mock-login": "^0.4.5",
     "@lblod/ember-rdfa-editor-gemeenteraadsleden-aanstelling-plugin": "0.1.0",
     "@lblod/ember-rdfa-editor": "^0.17.15",
-    "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "^0.1.0",
+    "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "^0.1.1",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.6.3",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.2",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "^0.1.2",
