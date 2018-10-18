@@ -719,3 +719,9 @@ p > .annotation-suggestion__target {
   }
 }
 */
+
+
+.annotation-suggestion__suggestion .modal-dialog + .modal-dialog {
+  right: 15rem !important;
+  top: 22rem !important;
+}
