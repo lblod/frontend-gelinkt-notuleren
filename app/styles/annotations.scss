@@ -490,7 +490,7 @@
 
 */
 
-[property="ext:behandelt"] {
+[typeof="besluit:BehandelingVanAgendapunt"] {
   .annotation--agendapunt--besloten__icon,
   .annotation--agendapunt--open__icon {
     font-size: 1.6rem;
