@@ -8,7 +8,7 @@
 			  </p>
       </div>
       <div class="col--2-12 u-align-right">
-        <a class="link--icon--close" href="#">
+        <a class="link--icon--close" href="#"> {{!-- TODO: action close {{action "remove" result.origModel}} --}}
           <span class="u-visually-hidden">Venster sluiten</span>
         </a>
       </div>
@@ -77,7 +77,7 @@
 			  </p>
       </div>
       <div class="col--2-12 u-align-right">
-        <a class="link--icon--close" href="#">
+        <a class="link--icon--close" href="#"> {{!-- TODO: action close {{action "remove" result.origModel}} --}}
           <span class="u-visually-hidden">Venster sluiten</span>
         </a>
       </div>
@@ -91,7 +91,7 @@
 	    value=(mut updatedDate)
 	    dateFormat=dateFormat
 	  }}
-{{!-- 	  {{#wu-button-group}}
+{{!-- TODO: make sure if clicking "okay" it doesn't say it's invalid 	— or keep the "if else" statement  {{#wu-button-group}}
 	    {{#if updatedDate}}
 	      {{wu-button
 	        label="Pas aan"
