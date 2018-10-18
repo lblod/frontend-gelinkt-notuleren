@@ -1,44 +1,91 @@
 <! -- SORRY MIET HACK ALERT !!! -->
 {{#if isDateTime }}
-  <div class="grid">
-    <form class="form col--12-12 col--1-1--s">
-      <div class="u-spacer--tiny">
-        Voeg <strong>{{info.plainValue}}</strong> op tijdstip
-        <div class="double-input js-double-input">
-          <div class="double-input__inputs">
-            <div class="double-input__input" style="width:30%">
-              {{input class="input-field input-field--block" placeholder="12" type="number" value=hour min=0 max=12}} uur
-            </div>
-            <div class="double-input__input" style="width:30%">
-              {{input class="input-field input-field--block" placeholder="00" type="number" value=minutes min=0 max=59}} minuten
-            </div>
-          </div>
-        </div>
-        <strong>{{info.rdfaProperty.label}}</strong> in.
+	<div class="modal-dialog__header">
+    <div class="grid">
+      <div class="col--10-12">
+			  <p class="u-spacer--tiny">
+        	Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in. Geef een tijdstip mee:
+			  </p>
       </div>
-    </form>
-  </div>
+      <div class="col--2-12 u-align-right">
+        <a class="link--icon--close" href="#"> {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+          <span class="u-visually-hidden">Venster sluiten</span>
+        </a>
+      </div>
+    </div>
+	</div>
+
+	<div class="modal-dialog__content">
+	  <form class="form">
+	    <div class="form__row">
+	      Tijdstip
+
+		    <div class="double-input js-double-input">
+		      <div class="double-input__inputs">
+		        <div class="double-input__input">
+		        	<label>
+		        		Uur
+	              {{input class="input-field input-field--block" placeholder="12" type="number" value=hour min=0 max=12}}
+		          </label>
+		        </div>
+		        <div class="double-input__input">
+		        	<label>
+		        		Minuten
+	              {{input class="input-field input-field--block" placeholder="00" type="number" value=minutes min=0 max=59}}
+		          </label>
+		        </div>
+		      </div>
+		    </div>
+	    </div>
+	  </form>
+	</div>
+
   {{#wu-button-group}}
     {{wu-button
-      label="voeg toe"
-      size="small"
+      label="Voeg toe"
       isNarrow=true
       onClick=(action "insertDateTime" info hour minutes)
+    }}
+    {{wu-button
+      label="Annuleer"
+      class="button--alt"
+      isNarrow=true
+      onClick=null
     }}
   {{/wu-button-group}}
 
 {{else}}
-  <div class="u-spacer--tiny">
-    Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in.
-  </div>
-  {{#wu-button-group}}
-    {{wu-button
-      label="voeg toe"
-      size="small"
-      isNarrow=true
-      onClick=(action "insert" info)
-    }}
-  {{/wu-button-group}}
+
+	<div class="modal-dialog__header">
+    <div class="grid">
+      <div class="col--10-12">
+			  <p class="u-spacer--tiny">
+			    Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in.
+			  </p>
+      </div>
+      <div class="col--2-12 u-align-right">
+        <a class="link--icon--close" href="#"> {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+          <span class="u-visually-hidden">Venster sluiten</span>
+        </a>
+      </div>
+    </div>
+	</div>
+
+	<div class="modal-dialog__footer">
+	  {{#wu-button-group}}
+	    {{wu-button
+	      label="Voeg toe"
+	      isNarrow=true
+	      onClick=(action "insert" info)
+	    }}
+	    {{wu-button
+	      label="Annuleer"
+	      class="button--alt"
+	      isNarrow=true
+	      onClick=null
+	    }}
+	  {{/wu-button-group}}
+	</div>
 
 {{/if}}
 {{yield}}
