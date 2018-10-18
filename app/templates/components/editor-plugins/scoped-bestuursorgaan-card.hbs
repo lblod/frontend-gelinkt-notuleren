@@ -11,22 +11,32 @@
   </div>
 </div>
 <div class="modal-dialog__content modal-dialog__content--sectioned">
-    {{#if getBestuursorganen.isRunning}}
-      <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
-    {{else}}
-      <ul class="link-list link-list--bordered">
-        {{#each bestuursorganenProperties as |bp| }}
-          <li class="link-list__item">
-            <a class="" onclick={{action 'refer' bp}}>{{!-- Voeg --}} {{bp.bestuursorgaan.naam}} {{!-- als {{bp.property.label}} toe --}}</a>
-
-{{!--             {{#wu-button-group}}
-              {{wu-button label="Voeg toe" size="small" isNarrow=true  commandLocation="below" onClick=(action "refer" bp)}}
-              {{wu-button label="Voeg uitgebreid toe" size="small" isNarrow=true  commandLocation="below" onClick=(action "extend" bp)}}
-            {{/wu-button-group}} --}}
-          </li>
-        {{/each}}
-      </ul>
-    {{/if}}
+  {{#if getBestuursorganen.isRunning}}
+    <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+  {{else}}
+    <ul class="link-list link-list--bordered">
+      {{#each bestuursorganenProperties as |bp| }}
+        <li class="link-list__item">
+          <a class="" onclick={{action 'refer' bp}}>
+            {{!-- Voeg --}}
+            {{bp.b.isTijdsspecialisatieVan.naam}}
+            {{#if bp.b.bindingEinde}}
+              (periode: {{bp.b.bindingStart}} - {{bp.p.bindingEinde}})
+            {{else}}
+              (periode: {{bp.b.bindingStart}} - nvt.)
+            {{/if}}
+            {{#if displayProperties}}
+              als {{bp.p.label}}
+            {{/if}}
+          </a>
+          {{!--             {{#wu-button-group}}
+          {{wu-button label="Voeg toe" size="small" isNarrow=true  commandLocation="below" onClick=(action "refer" bp)}}
+          {{wu-button label="Voeg uitgebreid toe" size="small" isNarrow=true  commandLocation="below" onClick=(action "extend" bp)}}
+          {{/wu-button-group}} --}}
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </div>
 
 {{yield}}
