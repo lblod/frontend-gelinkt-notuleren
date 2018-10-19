@@ -725,3 +725,30 @@ p > .annotation-suggestion__target {
   right: 15rem !important;
   top: 22rem !important;
 }
+
+.annotation-suggestion__suggestion .modal-dialog .modal-dialog {
+    padding: 0;
+    left: auto;
+    top: 25rem;
+    right: -15rem;
+}
+
+.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog {
+    padding: 0;
+    left: auto;
+    right: 25rem;
+}
+
+.annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog {
+    padding: 0;
+    left: auto;
+    top: 55rem;
+    right: -15rem;
+}
+
+.annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog {
+    padding: 0;
+    left: auto;
+    top: 55rem;
+    right: -15rem;
+}
