@@ -19,9 +19,6 @@
         background-color: $white;
         margin: 2rem 0 5rem 2rem;
         padding: 5rem 6.5rem 5rem 5rem;
-        width: 70%;
-        min-width: 400px;
-        max-width: 750px;
         min-height: 950px;
         box-shadow: 0 2px 6px 0 $blue-gray-light;
 
@@ -30,15 +27,28 @@
         }
     }
 
-    .tasklist + .container-flex--contain .editor__paper {
-        left: -20rem;
-        min-width: 600px;
-    }
+        .tasklist + .container-flex--contain .editor__paper {
+            left: -20rem;
+            min-width: 600px;
+            width: 70%;
+            max-width: 750px;
+        }
 
-    .tasklist.tasklist--open + .container-flex--contain .editor__paper {
-        left: 0;
-        min-width: 470px;
-    }
+        .tasklist.tasklist--open + .container-flex--contain .editor__paper {
+            left: 0;
+            min-width: 470px;
+        }
+
+
+        @media (min-width: 1600px) {
+            .tasklist + .container-flex--contain .editor__paper {
+                max-width: none;
+                width: 75%;
+            }
+        }
+
+
+
 
     .editor__annotations {
         padding-top: 7rem;
