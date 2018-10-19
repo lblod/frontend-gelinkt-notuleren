@@ -13,9 +13,8 @@ em {
 	padding-bottom: 0.3rem;
 }
 
-.modal-dialog__content li.link-list__item a.link-list__item__sidenote {
+.modal-dialog__content li.link-list__item .link-list__item__sidenote {
 	padding-top: 0;
-	padding-left: 2.5rem;
 	padding-bottom: 1.2rem;
 	margin-top: 0.5rem;
 	color: $gray;
@@ -29,4 +28,13 @@ em {
 		background-color: transparent;
 		color: $black;
 	}
+}
+
+.modal-dialog__content li.link-list__item span.link-list__item__sidenote {
+	cursor: default;
+	pointer-events: none;
+}
+
+mark table {
+	font-weight: normal;
 }
