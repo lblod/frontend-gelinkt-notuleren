@@ -39,4 +39,15 @@
   {{/if}}
 </div>
 
+
+<div class="modal-dialog__footer">
+  {{#wu-button-group}}
+    {{wu-button
+      label="Annuleer (todo)"
+      class="button--alt"
+      isNarrow=true
+      onClick=null}} {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+    <button class="button button--link button--link--dark button--small">Verwijder suggestie (todo)</button>
+  {{/wu-button-group}} {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+</div>
 {{yield}}

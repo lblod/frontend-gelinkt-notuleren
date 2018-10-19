@@ -2,7 +2,7 @@
 
     /* remove hover text when annotations are shown */
     .annotation:after {
-        content: normal !important;
+        content: normal;
     }
 
     [typeof],
@@ -22,54 +22,43 @@
         }
     }
 
+    [property]:not[property="besluit:geplandOpenbaar"] {
+
+        &:hover:before {
+            border-color: darken($primary-yellow, 5%);
+            position: relative;
+            z-index: 2;
+        }
+    }
+
     [property]:before,
     [typeof]:before {
         position: absolute;
         color: $gray-dark;
-        left: -1px !important;
-        top: -1px !important;
-        right: -1px !important;
+        left: -1px;
+        top: -1px;
+        right: -1px;
         min-height: 0;
         height: 2.2rem;
-        padding: 0.5rem !important;
+        padding: 0.5rem;
         line-height: 1.6rem;
         font-size: 1.3rem;
         font-family: "flanders-sans", sans-serif;
         font-weight: normal;
         background-color: rgba($gray-lighter, 0.5);
         overflow: hidden;
-        z-index: -1 !important;
-        transition: all 400ms;
-    }
-
-    .annotation[property]:before,
-    .annotation[typeof]:before {
-        position: absolute;
-        color: $gray-dark;
-        left: 0;
-        top: 0;
-        right: 0;
-        min-height: 0;
-        height: 2.2rem;
-        font-size: 1.3rem;
-        font-family: "flanders-sans", sans-serif;
-        font-weight: normal;
         transition: all 400ms;
     }
 
     [property]:hover:before,
     [typeof]:hover:before {
-        background-color: $primary-yellow !important;
-        height: auto !important;
+        background-color: $primary-yellow;
+        height: auto;
         min-height: 2rem;
-        overflow: visible !important;
-        z-index: 100 !important;
+        overflow: visible;
+        z-index: 100;
+        // position: relative;
         transition: all 400ms;
-
-        + [property]:hover:before,
-        + [typeof]:hover:before {
-            background-color: red !important;
-        }
     }
 
     [property]:before {
@@ -176,4 +165,42 @@
     [property="eli:description"]:before {
         content: "Beschrijving (" attr(property) ")";
     }
+
+    [property="eli:has_part"],
+    [property="besluit:gebeurtNa"],
+    [property="eli:language"] {
+        display: block;
+        width: 100%;
+        min-height: 2.2rem !important;
+        padding: 0;
+        margin-bottom: 2.2rem;
+
+        &:hover {
+            border-color: darken(mix($primary-yellow, $gray-lighter, 30%), 5%);
+            position: relative;
+        }
+
+        &:hover:before {
+            background-color: mix($primary-yellow, $gray-lighter, 30%) !important;
+        }
+    }
+
+        [property="eli:language"]:before {
+            content: "Gebruikte taal (" attr(property)") (" attr(resource)")";
+        }
+
+        [property="besluit:gebeurtNa"]:before {
+            content: "Volgt op behandeling agendapunt " attr(resource)" (" attr(property)")";
+        }
+
+        [property="eli:has_part"]:before {
+            // content: "Volgt op behandeling agendapunt " attr(resource)" (" attr(property)")";
+        }
+}
+
+/* make sure metadata is always hidden but still detectable */
+
+.show-rdfa-blocks [property="ext:metadata"],
+[property="ext:metadata"] {
+    display: none;
 }

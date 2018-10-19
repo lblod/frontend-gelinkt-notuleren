@@ -2,7 +2,7 @@
   <div class="grid">
     <div class="col--10-12">
       <p class="u-spacer--tiny">
-        {{info.label}} <br>
+        Volgende takenlijst is beschikbaar voor dit document: <br>
         <strong>{{info.plainValue}}</strong>
       </p>
     </div>
@@ -16,8 +16,18 @@
 
 <div class="modal-dialog__footer">
   {{#wu-button-group}}
-    {{wu-button label="Voeg takenlijst in" isNarrow=true onClick=(action "insert")}}
-    {{wu-button label="Negeer" size="small" isLink=true isDark=true isNarrow=true onClick=(action "remove")}}
+    {{#wu-button isNarrow=true onClick=(action 'insert')}}{{info.plainValue}}{{/wu-button}}
+    {{wu-button
+      label="Annuleer (todo)"
+      class="button--alt"
+      isNarrow=true
+      onClick=null}} {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+    {{wu-button
+      label="Verwijder suggestie"
+      class="button--link button--link--dark"
+      size="small"
+      isNarrow=true
+       onClick=(action "remove")}}
   {{/wu-button-group}}
 </div>
 
