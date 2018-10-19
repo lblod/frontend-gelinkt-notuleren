@@ -1,8 +1,7 @@
 <h3 class="h5 toggle toggle--arrow-down js-accordion__toggle">{{tasklistSolution.tasklist.name}}</h3>
-
 <ul class="tasklist-navigation__group accordion__content">
-	{{#each sortedTaskSolutions as |taskSolution|}}
-	  {{task-solution/edit taskSolution=taskSolution class="tasklist-navigation__item"}}
-	{{/each}}
-	{{yield}}
+  {{#each sortedTaskSolutions as |taskSolution|}}
+    {{task-solution/edit taskSolution=taskSolution class="tasklist-navigation__item"}}
+  {{/each}}
+  {{yield}}
 </ul>

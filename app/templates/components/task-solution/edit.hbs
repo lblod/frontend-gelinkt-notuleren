@@ -1,15 +1,15 @@
 <h4 class="h6 u-spacer--tiny">{{taskSolution.task.title}}</h4>
 
 <label class="checkbox checkbox--block">
-	{{input class="checkbox__toggle" type="checkbox" checked=taskSolution.status click=(action "toggleStatus") }}
-	<span></span>
-	{{{taskSolution.task.description}}}
+  {{input class="checkbox__toggle" type="checkbox" checked=taskSolution.status click=(action "toggleStatus") }}
+  <span></span>
+  {{{taskSolution.task.description}}}
 </label>
 
 <div class="tasklist-navigation__group">
-	{{#each sortedTaskSolutionChilds as |childSolution|}}
-		{{task-solution/edit taskSolution=childSolution class="tasklist-navigation__item"}}
-	{{/each}}
+  {{#each sortedTaskSolutionChilds as |childSolution|}}
+    {{task-solution/edit taskSolution=childSolution class="tasklist-navigation__item"}}
+  {{/each}}
 
-	{{yield}}
+  {{yield}}
 </div>

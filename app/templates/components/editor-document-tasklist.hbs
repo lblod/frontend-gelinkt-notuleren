@@ -21,7 +21,7 @@
   <div class="tasklist-navigation">
     <div class="tasklist-navigation__group">
       {{#each tasklistSolutions as |solution|}}
-        {{tasklist-solution/edit tasklistSolution=solution class="tasklist-navigation__item js-accordion js-accordion--open"}}
+        {{tasklist-solution/edit tasklistSolution=solution class="tasklist-navigation__item js-accordion"}}
       {{/each}}
       {{yield}}
     </div>
