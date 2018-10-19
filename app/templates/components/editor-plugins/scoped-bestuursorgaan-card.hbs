@@ -20,11 +20,7 @@
           <a class="" onclick={{action 'refer' bp}}>
             {{!-- Voeg --}}
             {{bp.b.isTijdsspecialisatieVan.naam}}
-            {{#if bp.b.bindingEinde}}
-              (periode: {{bp.b.bindingStart}} - {{bp.p.bindingEinde}})
-            {{else}}
-              (periode: {{bp.b.bindingStart}} - nvt.)
-            {{/if}}
+            (periode: {{moment-format bp.b.bindingStart 'DD/MM/YYYY'}} - {{#if bp.b.bindingEinde}}{{moment-format bp.b.bindingEinde 'DD/MM/YYYY'}}{{else}}nvt.{{/if}})
             {{#if displayProperties}}
               als {{bp.p.label}}
             {{/if}}
