@@ -2,7 +2,9 @@ import EditTasklistSolution from '@lblod/ember-vo-tasklist/components/tasklist-s
 export default EditTasklistSolution.extend({
   classNameBindings: ['open:js-accordion--open'],
   open: false,
-  click(){
-    this.toggleProperty('open');
+  actions: {
+    toggleOpen(){
+      this.toggleProperty('open');
+    }
   }
 });
