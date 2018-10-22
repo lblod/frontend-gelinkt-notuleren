@@ -4,6 +4,11 @@
   {{input class="checkbox__toggle" type="checkbox" checked=taskSolution.status click=(action "toggleStatus") }}
   <span></span>
   {{{taskSolution.task.description}}}
+  {{#if taskSolution.task.clickTarget}}
+    <a href="#" onClick={{action 'scrollTo' taskSolution.task.clickTarget}}>
+      ga naar verwijzing in het document
+    </a>
+  {{/if}}
 </label>
 
 <div class="tasklist-navigation__group">
