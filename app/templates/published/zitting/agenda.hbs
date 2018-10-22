@@ -1,5 +1,5 @@
 <div class="container-flex--scroll u-padding--round--large">
-  <h1 class="h1">Agendapunten van {{get (await model.bestuursorgaan) 'naam'}}, zitting van {{moment-format model.geplandeStart 'D MMMM YYYY'}}</h1>
+  <h1 class="h1">Agendapunten van {{get (await model.bestuursorgaan.isTijdsspecialisatieVan) 'naam'}}, zitting van {{moment-format model.geplandeStart 'D MMMM YYYY'}}</h1>
 
   <div class="annotation-structure">
     <ul class="clickable-box-list">

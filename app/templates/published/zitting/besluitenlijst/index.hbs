@@ -1,5 +1,5 @@
 <div class="container-flex--scroll u-padding--round--large">
-  <h1 class="h1">Besluitenlijst van {{get (await model.bestuursorgaan) 'naam'}}, zitting van {{moment-format model.geplandeStart 'D MMMM YYYY'}}</h1>
+  <h1 class="h1">Besluitenlijst van {{get (await model.bestuursorgaan.isTijdsspecialisatieVan) 'naam'}}, zitting van {{moment-format model.geplandeStart 'D MMMM YYYY'}}</h1>
   <div class="grid grid--is-stacked">
     {{#each model.behandeldeAgendapunten as |agendapunt|}}
       {{#each agendapunt.besluiten as |besluit|}}

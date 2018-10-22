@@ -26,7 +26,7 @@
               <ul class="side-navigation__group">
                 {{#each model as |zitting|}}
                   <li onclick={{action "openZitting" zitting}} class="side-navigation__item {{if (eq selectedZitting zitting) "active"}}">
-                    <a href="#"><strong>{{get (await zitting.bestuursorgaan) 'naam'}}, zitting van {{moment-format zitting.geplandeStart 'D MMMM YYYY'}}</strong></a>
+                    <a href="#"><strong>{{get (await zitting.bestuursorgaan.isTijdsspecialisatieVan) 'naam'}}, zitting van {{moment-format zitting.geplandeStart 'D MMMM YYYY'}}</strong></a>
                     <div class="link-group link-group--bordered link-group--tiny link-group--dark">
                       {{#if zitting.agenda}}
                         {{#link-to 'published.zitting.agenda' zitting.id class="link--icon"}}
