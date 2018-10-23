@@ -28,6 +28,7 @@ export default Component.extend({
                             ...newSolutionsNotInEditorDocument,
                             ...brandNewSolutions];
 
+    await this.addIndexes(updatedTaskSolutions.sort((a,b) => a.index > b.index));
 
     //update them in editorDocument
     this.editorDocument.tasklistSolutions.setObjects(updatedTaskSolutions);
@@ -40,7 +41,6 @@ export default Component.extend({
   async createTasklistSolution(tasklistUri){
     let tasklistSolution = this.store.createRecord('tasklist-solution');
     let tasklist = (await this.store.query('tasklist', {'filter[:uri:]': tasklistUri})).firstObject;
-    delete tasklist.uri;
     tasklistSolution.set('tasklist', tasklist);
     await tasklistSolution.save();
     return tasklistSolution;
@@ -75,6 +75,14 @@ export default Component.extend({
     return addedTasks;
   },
 
+  async addIndexes(sortedTasklists, currIndex = 0){
+    if(sortedTasklists.length == 0)
+      return sortedTasklists;
+    sortedTasklists[0].set('index', sortedTasklists[0].index || currIndex);
+    await sortedTasklists[0].save();
+    return  [sortedTasklists[0].index, ... await this.addIndexes(sortedTasklists.slice(1), currIndex + 1)];
+  },
+
   async updateAndCreateNewTaskLists(tasklists){
     let tasklistsNoSolution = tasklists.filter(ts => !ts.tasklistData.tasklistSolutionUri);
     return Promise.all(tasklistsNoSolution.map(async ts => {
@@ -87,7 +95,10 @@ export default Component.extend({
 
   async didReceiveAttrs(){
     this._super(...arguments);
-    this.set('tasklistSolutions', await this.editorDocument.tasklistSolutions);
+
+    let tasklistSolutions = await this.editorDocument.tasklistSolutions;
+    await this.addIndexes(tasklistSolutions.toArray().sort((a,b) => a.index > b.index));
+    this.set('tasklistSolutions', tasklistSolutions);
     if(this.tasklistPlugin)
       this.tasklistPlugin.addObserver('tasklistData.[]',
                                       this.tasklistObserver.bind(this));
