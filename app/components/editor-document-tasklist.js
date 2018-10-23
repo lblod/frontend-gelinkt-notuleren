@@ -101,6 +101,7 @@ export default Component.extend({
     let tasklistSolutions = await this.editorDocument.tasklistSolutions;
     await this.addIndexes(tasklistSolutions.toArray().sort((a,b) => a.index > b.index));
     this.set('tasklistSolutions', tasklistSolutions);
+    this.set('hasTasks', tasklistSolutions.length > 0);
     if(this.tasklistPlugin)
       this.tasklistPlugin.addObserver('tasklistData.[]',
                                       () => {return this.tasklistObserver.perform();});
