@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { task, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 
 export default Component.extend({
   tasklistPlugin: service('rdfa-editor-document-tasklist-plugin'),
@@ -11,7 +11,6 @@ export default Component.extend({
   isExpanded: false,
 
   tasklistObserver: task(function *(){
-    yield timeout(100);
     //get tasksSolutions from documents
     let updatedTaskSolutions = (yield this.editorDocument.tasklistSolutions).toArray();
 
@@ -38,7 +37,7 @@ export default Component.extend({
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
     this.set('hasTasks', updatedTaskSolutions.length > 0);
-  }).keepLatest(),
+  }).enqueue(),
 
   async createTasklistSolution(tasklistUri){
     let tasklistSolution = this.store.createRecord('tasklist-solution');
