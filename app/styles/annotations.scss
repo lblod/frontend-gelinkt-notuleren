@@ -104,59 +104,72 @@
       content: attr(typeof);
   }
 
-  [property="besluit:isGehoudenDoor"]:before {
+
+.annotation {
+
+  &[property="besluit:isGehoudenDoor"]:before {
     content: "Bestuur (" attr(property) ")";
   }
 
-  [property="besluit:isGehoudenDoor"]:after {
+  &[property="besluit:isGehoudenDoor"]:after {
     content: "Bestuur";
   }
 
-  [property="besluit:geplandeStart"]:after {
+  &[property="besluit:geplandeStart"]:after {
     content: "Datum zitting";
   }
 
-  [property="prov:atLocation"]:after {
+  &[property="prov:atLocation"]:after {
     content: "Locatie";
   }
 
-  [property="prov:startedAtTime"]:after {
+  &[property="prov:startedAtTime"]:after {
     content: "Start zitting";
   }
 
-  [property="prov:endedAtTime"]:after {
+  &[property="prov:endedAtTime"]:after {
     content: "Einde zitting";
   }
 
-  [typeof="mandaat:Mandataris"]:after {
+  &[typeof="mandaat:Mandataris"]:after {
     content: "Mandataris";
   }
 
-  [typeof="mandaat:Mandataris"][property="besluit:heeftAanwezigeBijStart"]:after {
+  &[property="besluit:heeftVoorzitter"]:after {
+    content: "Aanwezige voorzitter";
+  }
+
+  &[property="besluit:heeftSecretaris"]:after {
+    content: "Aanwezige algemeen directeur";
+  }
+
+  &[property="besluit:heeftAanwezigeBijStart"]:after,
+  &[typeof="mandaat:Mandataris"][property="besluit:heeftAanwezigeBijStart"]:after {
     content: "Aanwezige mandataris";
   }
 
-  [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:after {
+  &[property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:after {
     content: "Openbaar agendapunt";
   }
 
-  [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:title"]:after {
+  &[property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:title"]:after {
     content: "Besloten agendapunt";
   }
 
-  [property="eli:description"]:after {
+  &[property="eli:description"]:after {
     content: "Beschrijving";
   }
 
-  [property="eli:cites"]:after {
+  &[property="eli:cites"]:after {
     content: "Referentie Vlaamse codex";
   }
 
-  [property="eli:artikel"]:after {
+  &[property="eli:artikel"]:after {
     content: "Artikel nummer";
     position: absolute;
     right: -10rem;
   }
+}
 
 /* ==========================================================================
   Annotations
