@@ -20,10 +20,14 @@
 <div class="tasklist__content">
   <div class="tasklist-navigation">
     <div class="tasklist-navigation__group">
-      {{#each tasklistSolutions as |solution|}}
-        {{tasklist-solution/edit tasklistSolution=solution class="tasklist-navigation__item js-accordion"}}
-      {{/each}}
-      {{yield}}
+      {{#if tasklistObserver.isRunning}}
+        <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+      {{else}}
+        {{#each tasklistSolutions as |solution|}}
+          {{tasklist-solution/edit tasklistSolution=solution class="tasklist-navigation__item js-accordion"}}
+        {{/each}}
+        {{yield}}
+      {{/if}}
     </div>
   </div>
 </div>
