@@ -67,6 +67,12 @@
             font-size: 1.6rem;
         }
 
+        ul.smaller li,
+        a.smaller,
+        p.smaller {
+          font-size: 0.8em;
+        }
+
         ul,
         ol {
             &.bullet-list,

@@ -35,6 +35,27 @@ em {
 	pointer-events: none;
 }
 
+/* temporary fix for italics */
+
+p.u-font--italic {
+	font-style: italic;
+}
+
+/* temporary fix for marks that are bold */
+
 mark table {
 	font-weight: normal;
+	border: 4px solid $primary-yellow;
+
+	&:active {
+		opacity: 0.5;
+	}
+}
+
+.data-table--lined.data-table--tight {
+	th,
+	td {
+		font-size: 1.4rem;
+		padding: 0.8rem;
+	}
 }
