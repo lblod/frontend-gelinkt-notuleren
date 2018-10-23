@@ -10,7 +10,6 @@ export default Persoon.extend({
     alternatieveNaam: "http://xmlns.com/foaf/0.1/name",
     geslacht: "http://data.vlaanderen.be/ns/persoon#geslacht",
     isAangesteldAls: "http://data.vlaanderen.be/ns/mandaat#isAangesteldAls",
-    geboorte: "http://data.vlaanderen.be/ns/persoon#heeftGeboorte",
-    verkiezingsresultaten: "http://data.vlaanderen.be/ns/mandaat#isResultaatVan"
+    geboorte: "http://data.vlaanderen.be/ns/persoon#heeftGeboorte"
   }
 });
