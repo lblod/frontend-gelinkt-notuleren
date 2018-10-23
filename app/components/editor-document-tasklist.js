@@ -1,42 +1,44 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend({
   tasklistPlugin: service('rdfa-editor-document-tasklist-plugin'),
   store: service(),
   classNames: ['tasklist'],
   classNameBindings: ['hasTasks:tasklist--open', 'isExpanded:tasklist--expanded'],
-  hasTasks: false,
+  hasTasks: computed('tasklistSolutions', function() { return (this.tasklistSolutions || []).length > 0; }),
   isExpanded: false,
 
-  async tasklistObserver(){
+  tasklistObserver: task(function *(){
+    yield timeout(100);
     //get tasksSolutions from documents
-    let updatedTaskSolutions = (await this.editorDocument.tasklistSolutions).toArray();
+    let updatedTaskSolutions = (yield this.editorDocument.tasklistSolutions).toArray();
 
     //get new tasklists to display
     let tasklists = this.tasklistPlugin.tasklistData;
 
     //seek for taskSolutions not there in the editor document
     //push them to the updated list
-    let newSolutionsNotInEditorDocument = await this.updateNewTasklistSolutions(updatedTaskSolutions, tasklists);
+    let newSolutionsNotInEditorDocument = yield this.updateNewTasklistSolutions(updatedTaskSolutions, tasklists);
 
     //create the new tasksolutions, i.e. the ones with no solution
     //and update them in editorDocument.content
-    let brandNewSolutions = await this.updateAndCreateNewTaskLists(tasklists);
+    let brandNewSolutions = yield this.updateAndCreateNewTaskLists(tasklists);
 
     updatedTaskSolutions = [...updatedTaskSolutions,
                             ...newSolutionsNotInEditorDocument,
                             ...brandNewSolutions];
 
-    await this.addIndexes(updatedTaskSolutions.sort((a,b) => a.index > b.index));
+    updatedTaskSolutions = yield this.addIndexes(updatedTaskSolutions.sort((a,b) => a.index > b.index));
 
     //update them in editorDocument
     this.editorDocument.tasklistSolutions.setObjects(updatedTaskSolutions);
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
-    this.set('hasTasks', updatedTaskSolutions.length > 0);
-  },
+  }).keepLatest(),
 
   async createTasklistSolution(tasklistUri){
     let tasklistSolution = this.store.createRecord('tasklist-solution');
@@ -80,7 +82,7 @@ export default Component.extend({
       return sortedTasklists;
     sortedTasklists[0].set('index', sortedTasklists[0].index || currIndex);
     await sortedTasklists[0].save();
-    return  [sortedTasklists[0].index, ... await this.addIndexes(sortedTasklists.slice(1), currIndex + 1)];
+    return  [sortedTasklists[0], ... await this.addIndexes(sortedTasklists.slice(1), currIndex + 1)];
   },
 
   async updateAndCreateNewTaskLists(tasklists){
@@ -97,11 +99,11 @@ export default Component.extend({
     this._super(...arguments);
 
     let tasklistSolutions = await this.editorDocument.tasklistSolutions;
-    await this.addIndexes(tasklistSolutions.toArray().sort((a,b) => a.index > b.index));
+    tasklistSolutions = await this.addIndexes(tasklistSolutions.toArray().sort((a,b) => a.index > b.index));
     this.set('tasklistSolutions', tasklistSolutions);
     if(this.tasklistPlugin)
       this.tasklistPlugin.addObserver('tasklistData.[]',
-                                      this.tasklistObserver.bind(this));
+                                      () => {return this.tasklistObserver.perform();});
   },
 
   actions: {
