@@ -3,11 +3,11 @@
     <div class="col--10-12">
       <strong>Voeg verwijzing naar de Vlaamse Codex in</strong>
     </div>
-    <div class="col--2-12 u-align-right">
-      <a class="link--icon--close" href="#"> {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+{{!--     <div class="col--2-12 u-align-right">
+      <a class="link--icon--close" href="#">
         <span class="u-visually-hidden">Venster sluiten</span>
       </a>
-    </div>
+    </div> --}}
   </div>
 </div>
 
@@ -39,11 +39,11 @@
   {{/if}}
 </div>
 
-<div class="u-visually-hidden modal-dialog__footer">
+{{!-- <div class="u-visually-hidden modal-dialog__footer">
   {{#wu-button-group}}
-    {{wu-button label="Annuleer (todo)" size="tiny" isLink=true isDark=true isNarrow=true command="esc" commandLocation="below" onClick=null}} {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+    {{wu-button label="Annuleer (todo)" size="tiny" isLink=true isDark=true isNarrow=true command="esc" commandLocation="below" onClick=null}}
   {{/wu-button-group}}
-</div>
+</div> --}}
 
 {{#each errors as |error|}}
   <li class="error">! {{error}}</li>

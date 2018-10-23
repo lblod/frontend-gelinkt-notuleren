@@ -5,28 +5,28 @@
         {{info.plainValue}}
       </p>
     </div>
-    <div class="col--2-12 u-align-right">
-      <a class="link--icon--close" href="#"> {{!-- TODO: action close {{action "remove" result.origModel}} --}}
+{{!--     <div class="col--2-12 u-align-right">
+      <a class="link--icon--close" href="#">
         <span class="u-visually-hidden">Venster sluiten</span>
       </a>
-    </div>
+    </div> --}}
   </div>
 </div>
 
 <div class="modal-dialog__footer">
   {{#wu-button-group}}
     {{#wu-button isNarrow=true onClick=(action 'insert')}}Voeg takenlijst in{{/wu-button}}
-    {{wu-button
+{{!--     {{wu-button
       label="Annuleer (todo)"
       class="button--alt"
       isNarrow=true
-      onClick=null}} {{!-- TODO: action close {{action "remove" result.origModel}} --}}
-    {{wu-button
+      onClick=null}} --}}
+{{!--     {{wu-button
       label="Verwijder suggestie (todo)"
       class="button--link button--link--dark"
       size="small"
       isNarrow=true
-       onClick=(action "remove")}}
+       onClick=(action "remove")}} --}}
   {{/wu-button-group}}
 </div>
 
