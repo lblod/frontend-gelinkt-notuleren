@@ -96,6 +96,18 @@
   //   color: white;
   // }
 
+  .annotation[property]:after {
+    content: attr(property);
+  }
+
+  .annotation[typeof]:after {
+      content: attr(typeof);
+  }
+
+  [property="besluit:isGehoudenDoor"]:before {
+    content: "Bestuur (" attr(property) ")";
+  }
+
   [property="besluit:isGehoudenDoor"]:after {
     content: "Bestuur";
   }
@@ -600,7 +612,7 @@ p > .annotation-suggestion__target {
 
 
 /* clickable box list
- ==========================================================================
+ ========================================================================== */
 
 .clickable-box-list {
   max-width: 600px;
@@ -718,7 +730,23 @@ p > .annotation-suggestion__target {
     }
   }
 }
-*/
+
+.tabs__wrapper + .container-flex--scroll {
+
+  .annotation {
+    &:after {
+      width: auto;
+      box-shadow: 0 0 1px $blue-gray-light;
+    }
+
+    &:hover:after {
+      right: -30rem;
+    }
+  }
+}
+
+/* dialogues for suggestions
+ ========================================================================== */
 
 
 .annotation-suggestion__suggestion .modal-dialog + .modal-dialog {
