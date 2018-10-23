@@ -96,6 +96,14 @@
       content: attr(typeof);
   }
 
+  [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:after {
+    content: "Openbaar agendapunt";
+  }
+
+  [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:title"]:after {
+    content: "Besloten agendapunt";
+  }
+
 .annotation {
 
   &[property="besluit:isGehoudenDoor"]:before {
@@ -139,14 +147,6 @@
     content: "Aanwezige mandataris";
   }
 
-  &[property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:after {
-    content: "Openbaar agendapunt";
-  }
-
-  &[property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:title"]:after {
-    content: "Besloten agendapunt";
-  }
-
   &[property="eli:description"]:after {
     content: "Openbare beschrijving agendapunt";
   }
@@ -155,15 +155,34 @@
     content: "Referentie Vlaamse codex";
   }
 
+  &[property="prov:value"]:after,
   &[property="eli:artikel"]:after {
     content: "Artikel";
   }
 }
 
-// To remove
-.annotation[property*="ext:datumEedafleggingBurgemeester"] {
+// To check
+.annotation[property="ext:datumVerkiezing"]:after {
+  content: "Datum verkiezingen";
+}
+
+.annotation[property="ext:datumOmzendbrief"]:after,
+.annotation[type="xsd:date"]:after,
+.annotation[property="ext:datumGoedkeuringVerkiezing"]:after {
+  content: "Datum";
+}
+
+.annotation[typeof="besluit:Bestuurseenheid"]:after {
+  content: "Bestuurseenheid";
+}
+
+.annotation[property*="ext:datumEedafleggingBurgemeester"]:after {
   content: "datum";
 }
+
+// .annotation[property="mandaat:start"] {
+//   content: "Start mandaat";
+// }
 
 /* ==========================================================================
   Annotations
