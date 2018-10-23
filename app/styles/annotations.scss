@@ -88,14 +88,6 @@
   background-color: $primary-yellow;
 }
 
-  /* text content */
-
-  // To find easily
-  // [datatype*="xsd:date"] {
-  //   background-color: blue;
-  //   color: white;
-  // }
-
   .annotation[property]:after {
     content: attr(property);
   }
@@ -104,59 +96,74 @@
       content: attr(typeof);
   }
 
-  [property="besluit:isGehoudenDoor"]:before {
+.annotation {
+
+  &[property="besluit:isGehoudenDoor"]:before {
     content: "Bestuur (" attr(property) ")";
   }
 
-  [property="besluit:isGehoudenDoor"]:after {
+  &[property="besluit:isGehoudenDoor"]:after {
     content: "Bestuur";
   }
 
-  [property="besluit:geplandeStart"]:after {
+  &[property="besluit:geplandeStart"]:after {
     content: "Datum zitting";
   }
 
-  [property="prov:atLocation"]:after {
+  &[property="prov:atLocation"]:after {
     content: "Locatie";
   }
 
-  [property="prov:startedAtTime"]:after {
+  &[property="prov:startedAtTime"]:after {
     content: "Start zitting";
   }
 
-  [property="prov:endedAtTime"]:after {
+  &[property="prov:endedAtTime"]:after {
     content: "Einde zitting";
   }
 
-  [typeof="mandaat:Mandataris"]:after {
+  &[typeof="mandaat:Mandataris"]:after {
     content: "Mandataris";
   }
 
-  [typeof="mandaat:Mandataris"][property="besluit:heeftAanwezigeBijStart"]:after {
+  &[property="besluit:heeftVoorzitter"]:after {
+    content: "Aanwezige voorzitter";
+  }
+
+  &[property="besluit:heeftSecretaris"]:after {
+    content: "Aanwezige algemeen directeur";
+  }
+
+  &[property="besluit:heeftAanwezigeBijStart"]:after,
+  &[typeof="mandaat:Mandataris"][property="besluit:heeftAanwezigeBijStart"]:after {
     content: "Aanwezige mandataris";
   }
 
-  [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:after {
+  &[property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:after {
     content: "Openbaar agendapunt";
   }
 
-  [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:title"]:after {
+  &[property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:title"]:after {
     content: "Besloten agendapunt";
   }
 
-  [property="eli:description"]:after {
-    content: "Beschrijving";
+  &[property="eli:description"]:after {
+    content: "Openbare beschrijving agendapunt";
   }
 
-  [property="eli:cites"]:after {
+  &[property="eli:cites"]:after {
     content: "Referentie Vlaamse codex";
   }
 
-  [property="eli:artikel"]:after {
-    content: "Artikel nummer";
-    position: absolute;
-    right: -10rem;
+  &[property="eli:artikel"]:after {
+    content: "Artikel";
   }
+}
+
+// To remove
+.annotation[property*="ext:datumEedafleggingBurgemeester"] {
+  content: "datum";
+}
 
 /* ==========================================================================
   Annotations
@@ -609,141 +616,6 @@ p > .annotation-suggestion__target {
   }
 }
  */
-
-
-/* clickable box list
- ========================================================================== */
-
-.clickable-box-list {
-  max-width: 600px;
-
-  li {
-    min-height: 7rem;
-  }
-
-  li > .annotation {
-    padding-bottom: 6px;
-
-    &:after {
-      top: -0.5rem;
-      right: -18rem;
-      width: 18rem;
-    }
-
-    .annotation {
-      padding-bottom: 4px;
-
-      &:after {
-        top: 2.2rem;
-        border-left: none;
-        border-bottom: 1px solid $blue-gray-lighter;
-        text-align: right;
-      }
-
-      .annotation {
-        padding-bottom: 0;
-
-        &:hover:after {
-          position: absolute;
-          top: 5rem;
-        }
-
-        .annotation:after {
-          content: normal;
-        }
-      }
-    }
-  }
-
-  a.annotation.annotation--agendapunt {
-    border: 1px solid $blue-gray-light;
-    padding: 1rem 2rem;
-    display: block;
-    margin-bottom: 1rem;
-    transition: all 200ms;
-    text-decoration: none;
-
-    .list-number {
-      text-decoration: none;
-      display: inline-block;
-      width: 10%;
-      vertical-align: top;
-      color: $gray;
-      font-size: 3rem;
-      position: relative;
-      top: -0.5rem;
-    }
-
-    .list-content {
-      display: inline-block;
-      width: 89%;
-    }
-
-    &:hover {
-      box-shadow: 2px 2px 5px $blue-gray-lighter, inset 5px 0 0 $primary-blue;
-      background-color: $white;
-
-      .list-number {
-        color: $gray-dark;
-      }
-    }
-
-    .annotation:hover:after {
-      right: -18rem;
-      width: 18rem;
-    }
-  }
-
-  li.not-active {
-
-    .annotation {
-      cursor: default;
-
-      .annotation {
-        pointer-events: default;
-      }
-    }
-
-    a.annotation.annotation--agendapunt {
-      background-color: $blue-gray-lightest;
-      box-shadow: none;
-      color: $gray;
-      cursor: default;
-
-      .list-content {
-        width: 70%;
-
-        &:after {
-          margin-top: 0.5rem;
-          content: "Inhoud nog niet publiek";
-          display: block;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-size: 1.2rem;
-        }
-      }
-    }
-
-    a.annotation.annotation--agendapunt:hover {
-      box-shadow: initial;
-      background-color: $blue-gray-lightest;
-    }
-  }
-}
-
-.tabs__wrapper + .container-flex--scroll {
-
-  .annotation {
-    &:after {
-      width: auto;
-      box-shadow: 0 0 1px $blue-gray-light;
-    }
-
-    &:hover:after {
-      right: -30rem;
-    }
-  }
-}
 
 /* dialogues for suggestions
  ========================================================================== */
