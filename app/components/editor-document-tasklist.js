@@ -40,6 +40,15 @@ export default Component.extend({
     this.set('tasklistSolutions', updatedTaskSolutions);
   }).keepLatest(),
 
+  setUp: task(function *(){
+    let tasklistSolutions = yield this.editorDocument.tasklistSolutions;
+    tasklistSolutions = yield this.addIndexes(tasklistSolutions.toArray().sort(this.sortByIndexAsc));
+    this.set('tasklistSolutions', tasklistSolutions);
+    if(this.tasklistPlugin)
+      this.tasklistPlugin.addObserver('tasklistData.[]',
+                                      () => {return this.tasklistObserver.perform();});
+  }).keepLatest(),
+
   async createTasklistSolution(tasklistUri){
     let tasklistSolution = this.store.createRecord('tasklist-solution');
     let tasklist = (await this.store.query('tasklist', {'filter[:uri:]': tasklistUri})).firstObject;
@@ -95,16 +104,11 @@ export default Component.extend({
     }));
   },
 
-  async didReceiveAttrs(){
+  didReceiveAttrs(){
     this._super(...arguments);
-
-    let tasklistSolutions = await this.editorDocument.tasklistSolutions;
-    tasklistSolutions = await this.addIndexes(tasklistSolutions.toArray().sort(this.sortByIndexAsc));
-    this.set('tasklistSolutions', tasklistSolutions);
-    if(this.tasklistPlugin)
-      this.tasklistPlugin.addObserver('tasklistData.[]',
-                                      () => {return this.tasklistObserver.perform();});
+    this.setUp.perform();
   },
+
 
   sortByIndexAsc(a, b){
     if(a.index > b.index)
