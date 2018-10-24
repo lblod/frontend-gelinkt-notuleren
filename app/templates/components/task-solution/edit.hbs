@@ -1,20 +1,21 @@
-<h4 class="h6 u-spacer--tiny">{{taskSolution.task.title}}</h4>
-
 <label class="checkbox checkbox--block">
   {{input class="checkbox__toggle" type="checkbox" checked=taskSolution.status click=(action "toggleStatus") }}
   <span></span>
-  {{{taskSolution.task.description}}}
-  {{#if taskSolution.task.clickTarget}}
-    <a href="#" onClick={{action 'scrollTo' taskSolution.task.clickTarget}}>
-      ga naar verwijzing in het document
-    </a>
-  {{/if}}
+  <span style="font-weight: bold">{{taskSolution.task.title}}</span>
 </label>
+<div style="font-size: 0.8em">
+  {{#if taskSolution.task.clickTarget}}
+  <a href="#" onClick={{action 'scrollTo' taskSolution.task.clickTarget}}>
+    ga naar verwijzing in het document
+  </a>
+  {{/if}}
+</div>
+<div style="font-size: 0.8em"> {{{taskSolution.task.description}}} </div>
 
-<div class="tasklist-navigation__group">
+<ul class="tasklist-navigation__group">
   {{#each sortedTaskSolutionChilds as |childSolution|}}
     {{task-solution/edit taskSolution=childSolution class="tasklist-navigation__item"}}
   {{/each}}
 
   {{yield}}
-</div>
+</ul>
