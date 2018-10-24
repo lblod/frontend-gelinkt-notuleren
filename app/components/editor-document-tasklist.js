@@ -31,7 +31,7 @@ export default Component.extend({
                             ...newSolutionsNotInEditorDocument,
                             ...brandNewSolutions];
 
-    updatedTaskSolutions = yield this.addIndexes(updatedTaskSolutions.sort((a,b) => a.index > b.index));
+    updatedTaskSolutions = yield this.addIndexes(updatedTaskSolutions.sort(this.sortByIndexAsc));
 
     //update them in editorDocument
     this.editorDocument.tasklistSolutions.setObjects(updatedTaskSolutions);
@@ -99,11 +99,19 @@ export default Component.extend({
     this._super(...arguments);
 
     let tasklistSolutions = await this.editorDocument.tasklistSolutions;
-    tasklistSolutions = await this.addIndexes(tasklistSolutions.toArray().sort((a,b) => a.index > b.index));
+    tasklistSolutions = await this.addIndexes(tasklistSolutions.toArray().sort(this.sortByIndexAsc));
     this.set('tasklistSolutions', tasklistSolutions);
     if(this.tasklistPlugin)
       this.tasklistPlugin.addObserver('tasklistData.[]',
                                       () => {return this.tasklistObserver.perform();});
+  },
+
+  sortByIndexAsc(a, b){
+    if(a.index > b.index)
+      return 1;
+    if(a.index < b.index)
+      return -1;
+    return 0;
   },
 
   actions: {
