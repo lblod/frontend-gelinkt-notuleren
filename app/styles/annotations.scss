@@ -608,34 +608,6 @@ p > .annotation-suggestion__target {
 }
 */
 
-
-
-/* Editing annotations warning
- ==========================================================================
-
-[data-flagged-remove="almost-complete"],
-[data-flagged-remove="complete"] {
-  min-height: 1.6rem;
-  display: inline;
-  cursor: text;
-  background-color: rgba($primary-blue, 0.25);
-  box-shadow: -2px 0 0 $primary-blue;
-}
-
-[data-flagged-remove="complete"] {
-  min-width: 8px;
-  display: inline-block;
-  box-shadow: -2px 0 0 black;
-}
-
-.annotation--edit {
-  [data-flagged-remove="almost-complete"],
-  [data-flagged-remove="complete"] {
-    background-color: transparent;
-  }
-}
- */
-
 /* dialogues for suggestions
  ========================================================================== */
 
