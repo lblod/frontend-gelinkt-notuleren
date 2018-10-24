@@ -125,14 +125,23 @@
 
 .tabs__wrapper + .container-flex--scroll {
 
+  [property="ext:tasklistDataHintText"] {
+    display: none;
+  }
+
   .annotation {
     &:after {
-      width: auto;
+      width: 12rem;
       box-shadow: 0 0 1px $blue-gray-light;
     }
 
     &:hover:after {
-      right: -30rem;
+      right: -20rem;
+    }
+
+    .annotation:hover:after {
+      right: -32rem;
+      width: 12rem;
     }
   }
 }

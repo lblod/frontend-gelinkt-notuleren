@@ -1,16 +1,16 @@
 <label class="checkbox checkbox--block">
   {{input class="checkbox__toggle" type="checkbox" checked=taskSolution.status click=(action "toggleStatus") }}
   <span></span>
-  <span style="font-weight: bold">{{taskSolution.task.title}}</span>
+  <strong>{{taskSolution.task.title}}</strong>
 </label>
-<div style="font-size: 0.8em">
+<p class="smaller u-spacer--left">
   {{#if taskSolution.task.clickTarget}}
   <a href="#" onClick={{action 'scrollTo' taskSolution.task.clickTarget}}>
     ga naar verwijzing in het document
   </a>
   {{/if}}
-</div>
-<div style="font-size: 0.8em"> {{{taskSolution.task.description}}} </div>
+</p>
+<p class="smaller u-spacer--left"> {{{taskSolution.task.description}}} </p>
 
 <ul class="tasklist-navigation__group">
   {{#each sortedTaskSolutionChilds as |childSolution|}}
