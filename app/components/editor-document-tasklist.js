@@ -13,41 +13,50 @@ export default Component.extend({
 
   tasklistObserver: task(function *(){
     yield timeout(100);
-    //get tasksSolutions from documents
-    let updatedTaskSolutions = (yield this.editorDocument.tasklistSolutions).toArray();
 
     //get new tasklists to display
     let tasklists = this.tasklistPlugin.tasklistData;
 
-    //seek for taskSolutions not there in the editor document
-    //push them to the updated list
-    let newSolutionsNotInEditorDocument = yield this.updateNewTasklistSolutions(updatedTaskSolutions, tasklists);
+    if(!tasklists)
+      return;
+
+    tasklists = tasklists.toArray();
+
+    //match solutions
+    let existingSolutions = (yield this.findMatchingSolutions(tasklists)).sort(this.sortByIndexAsc);
 
     //create the new tasksolutions, i.e. the ones with no solution
     //and update them in editorDocument.content
     let brandNewSolutions = yield this.updateAndCreateNewTaskLists(tasklists);
 
-    updatedTaskSolutions = [...updatedTaskSolutions,
-                            ...newSolutionsNotInEditorDocument,
-                            ...brandNewSolutions];
+    let updatedTaskSolutions = [...existingSolutions, ...brandNewSolutions];
 
-    updatedTaskSolutions = yield this.addIndexes(updatedTaskSolutions.sort(this.sortByIndexAsc));
-
-    //update them in editorDocument
-    this.editorDocument.tasklistSolutions.setObjects(updatedTaskSolutions);
+    updatedTaskSolutions = yield this.addIndexes(updatedTaskSolutions, (existingSolutions[0] || {}).index || 0);
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
   }).keepLatest(),
 
-  setUp: task(function *(){
-    let tasklistSolutions = yield this.editorDocument.tasklistSolutions;
-    tasklistSolutions = yield this.addIndexes(tasklistSolutions.toArray().sort(this.sortByIndexAsc));
-    this.set('tasklistSolutions', tasklistSolutions);
-    if(this.tasklistPlugin)
-      this.tasklistPlugin.addObserver('tasklistData.[]',
-                                      () => {return this.tasklistObserver.perform();});
-  }).keepLatest(),
+  swapIndex: task(function*(indexA, indexB){
+    let solutionA = this.tasklistSolutions[indexA];
+    let solutionB = this.tasklistSolutions[indexB];
+    solutionA.set('index', indexB);
+    solutionB.set('index', indexA);
+    yield solutionA.save();
+    yield solutionB.save();
+    this.set('tasklistSolutions', this.tasklistSolutions.sort(this.sortByIndexAsc));
+    this.propertyDidChange('tasklistSolutions');
+  }),
+
+  async findMatchingSolutions(tasklists){
+    if(tasklists.length == 0)
+      return [];
+    let solution = await this.findTasklistSolution(tasklists[0].tasklistData.tasklistSolutionUri);
+    let remaining =  await this.findMatchingSolutions(tasklists.slice(1));
+    if(solution)
+      return [solution, ...remaining];
+    return remaining;
+  },
 
   async createTasklistSolution(tasklistUri){
     let tasklistSolution = this.store.createRecord('tasklist-solution');
@@ -58,32 +67,12 @@ export default Component.extend({
   },
 
   async findTasklistSolution(solutionUri){
+    if(!solutionUri)
+      return null;
     let tasklistSolution = (await this.store.query('tasklist-solution', { 'filter[:uri:]': solutionUri }));
     if(tasklistSolution)
       return tasklistSolution.firstObject;
     return null;
-  },
-
-  async updateNewTasklistSolutions(existingSolutions, tasklists){
-    //TODO: godfucking damn this looks ugly
-    //Basically, if a tasklist-solution exits in document content but not in document, it should be synced here
-    let tasklistsWithSolution = tasklists.filter(ts => ts.tasklistData.tasklistSolutionUri);
-
-    if(tasklistsWithSolution.length == 0)
-      return [];
-
-    let addedTasks = [];
-
-    Promise.all(tasklistsWithSolution
-                .map(async td => {
-                  let solution = existingSolutions.find(s => s.get('uri') == td.tasklistData.tasklistSolutionUri);
-                  let tasklistSolution = await this.findTasklistSolution(td.tasklistData.tasklistSolutionUri);
-                  if(!solution && tasklistSolution){
-                    addedTasks.push(solution);
-                  }
-                  return td;
-                }));
-    return addedTasks;
   },
 
   async addIndexes(sortedTasklists, currIndex = 0){
@@ -106,21 +95,32 @@ export default Component.extend({
 
   didReceiveAttrs(){
     this._super(...arguments);
-    this.setUp.perform();
+    if(this.tasklistPlugin){
+      this.tasklistObserver.perform(); //initial load
+      this.tasklistPlugin.addObserver('tasklistData.[]',
+                                      () => {return this.tasklistObserver.perform();});
+    }
   },
 
-
   sortByIndexAsc(a, b){
-    if(a.index > b.index)
-      return 1;
-    if(a.index < b.index)
-      return -1;
-    return 0;
+    return a.index - b.index;
   },
 
   actions: {
     expandTasklist(){
       this.toggleProperty('isExpanded');
+    },
+
+    moveUp(tasklistSolution){
+      if(tasklistSolution.index == 0)
+        return;
+      this.swapIndex.perform(tasklistSolution.index, tasklistSolution.index - 1);
+    },
+
+    moveDown(tasklistSolution){
+      if(tasklistSolution.index == this.tasklistSolutions.length)
+        return;
+      this.swapIndex.perform(tasklistSolution.index, tasklistSolution.index + 1);
     }
   }
 });

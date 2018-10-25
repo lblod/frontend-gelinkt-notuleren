@@ -24,7 +24,12 @@
         <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
       {{else}}
         {{#each tasklistSolutions as |solution|}}
-          {{tasklist-solution/edit tasklistSolution=solution class="tasklist-navigation__item js-accordion"}}
+          {{tasklist-solution/edit
+            tasklistSolution=solution
+            class="tasklist-navigation__item js-accordion"
+            onMoveUp=(action 'moveUp')
+            onMoveDown=(action 'moveDown')
+          }}
         {{/each}}
         {{yield}}
       {{/if}}

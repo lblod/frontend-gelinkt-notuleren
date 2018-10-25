@@ -12,6 +12,5 @@ export default Model.extend({
   origin: attr(),
   status: belongsTo('editor-document-status', {inverse: null }),
   previousVersion: belongsTo('editor-document', {inverse: 'nextVersion'}),
-  nextVersion: belongsTo('editor-document', {inverse: 'previousVersion'}),
-  tasklistSolutions: hasMany('tasklist-solution')
+  nextVersion: belongsTo('editor-document', {inverse: 'previousVersion'})
 });
