@@ -31,13 +31,22 @@ export default Component.extend({
                             ...newSolutionsNotInEditorDocument,
                             ...brandNewSolutions];
 
-    updatedTaskSolutions = yield this.addIndexes(updatedTaskSolutions.sort((a,b) => a.index > b.index));
+    updatedTaskSolutions = yield this.addIndexes(updatedTaskSolutions.sort(this.sortByIndexAsc));
 
     //update them in editorDocument
     this.editorDocument.tasklistSolutions.setObjects(updatedTaskSolutions);
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
+  }).keepLatest(),
+
+  setUp: task(function *(){
+    let tasklistSolutions = yield this.editorDocument.tasklistSolutions;
+    tasklistSolutions = yield this.addIndexes(tasklistSolutions.toArray().sort(this.sortByIndexAsc));
+    this.set('tasklistSolutions', tasklistSolutions);
+    if(this.tasklistPlugin)
+      this.tasklistPlugin.addObserver('tasklistData.[]',
+                                      () => {return this.tasklistObserver.perform();});
   }).keepLatest(),
 
   async createTasklistSolution(tasklistUri){
@@ -95,15 +104,18 @@ export default Component.extend({
     }));
   },
 
-  async didReceiveAttrs(){
+  didReceiveAttrs(){
     this._super(...arguments);
+    this.setUp.perform();
+  },
 
-    let tasklistSolutions = await this.editorDocument.tasklistSolutions;
-    tasklistSolutions = await this.addIndexes(tasklistSolutions.toArray().sort((a,b) => a.index > b.index));
-    this.set('tasklistSolutions', tasklistSolutions);
-    if(this.tasklistPlugin)
-      this.tasklistPlugin.addObserver('tasklistData.[]',
-                                      () => {return this.tasklistObserver.perform();});
+
+  sortByIndexAsc(a, b){
+    if(a.index > b.index)
+      return 1;
+    if(a.index < b.index)
+      return -1;
+    return 0;
   },
 
   actions: {
