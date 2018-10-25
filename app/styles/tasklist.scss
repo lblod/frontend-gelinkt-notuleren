@@ -90,6 +90,10 @@
 .tasklist-navigation__item {
     padding: 0 0 0.5rem 0;
 
+    .h6 {
+        font-weight: 400;
+    }
+
     > .tasklist-navigation__group {
         margin-top: 1rem;
     }
