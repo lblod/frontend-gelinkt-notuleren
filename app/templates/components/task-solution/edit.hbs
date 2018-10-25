@@ -13,9 +13,12 @@
 <p class="smaller u-spacer--left"> {{{taskSolution.task.description}}} </p>
 
 <ul class="tasklist-navigation__group">
-  {{#each sortedTaskSolutionChilds as |childSolution|}}
-    {{task-solution/edit taskSolution=childSolution class="tasklist-navigation__item"}}
-  {{/each}}
-
+  {{#if setChilds.isRunning}}
+    <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+  {{else}}
+    {{#each sortedTaskSolutionChilds as |childSolution|}}
+      {{task-solution/edit taskSolution=childSolution class="tasklist-navigation__item"}}
+    {{/each}}
+  {{/if}}
   {{yield}}
 </ul>

@@ -1,19 +1,23 @@
 <div class="grid">
-	<div class="col--8-12">
-		<h3 class="h5 toggle toggle--arrow-down js-accordion__toggle" onClick={{action 'toggleOpen'}}>{{tasklistSolution.tasklist.name}}</h3>
-	</div>
-	<div class="col--3-12 u-align--right">
+  <div class="col--8-12">
+    <h3 class="h5 toggle toggle--arrow-down js-accordion__toggle" onClick={{action 'toggleOpen'}}>{{tasklistSolution.tasklist.name}}</h3>
+  </div>
+  <div class="col--3-12 u-align--right">
     {{#wu-link-button class="button--link button--tiny" isNarrow=true onClick=(action "moveUp")}}
       <i class="vi vi-burger-alt button__icon vi-u-180deg vi-u-xs"></i>
     {{/wu-link-button}}
     {{#wu-link-button class="button--link button--tiny" isNarrow=true onClick=(action "moveDown")}}
       <i class="vi vi-burger-alt button__icon vi-u-xs"></i>
     {{/wu-link-button}}
-	</div>
+  </div>
 </div>
 <ul class="tasklist-navigation__group accordion__content">
-  {{#each sortedTaskSolutions as |taskSolution|}}
-    {{task-solution/edit taskSolution=taskSolution class="tasklist-navigation__item"}}
-  {{/each}}
+  {{#if setTaskSolutions.isRunning}}
+    <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+  {{else}}
+    {{#each sortedTaskSolutions as |taskSolution|}}
+      {{task-solution/edit taskSolution=taskSolution class="tasklist-navigation__item"}}
+    {{/each}}
+  {{/if}}
   {{yield}}
 </ul>
