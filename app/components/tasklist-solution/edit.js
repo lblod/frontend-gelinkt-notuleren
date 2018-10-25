@@ -5,6 +5,12 @@ export default EditTasklistSolution.extend({
   actions: {
     toggleOpen(){
       this.toggleProperty('open');
+    },
+    moveUp(){
+      this.onMoveUp(this.tasklistSolution);
+    },
+    moveDown(){
+      this.onMoveDown(this.tasklistSolution);
     }
   }
 });
