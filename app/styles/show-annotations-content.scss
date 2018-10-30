@@ -1,0 +1,277 @@
+/* ==========================================================================
+  Annotations
+  Content for annotations on show annotations
+ ========================================================================== */
+
+.show-rdfa-blocks {
+
+  /* -------------------- General tags ------------------------- */
+
+  [datatype="xsd:dateTime"]:before {
+    content: "Datum en tijd (" attr(property) ")";
+  }
+
+  [datatype="xsd:date"]:before {
+    content: "Datum (" attr(property) ")";
+  }
+
+  [property="ext:datumVerkiezing"]:before {
+    content: "Datum verkiezing (" attr(property) ")";
+  }
+
+  [property="ext:datumGoedkeuringVerkiezing"]:before {
+    content: "Datum goedkeuring verkiezing (" attr(property) ")";
+  }
+
+  [typeof="besluit:Bestuurseenheid"]:before {
+    content: "Bestuurs-eenheid (" attr(typeof) ")";
+  }
+
+
+  /* -------------------- Zitting ------------------------- */
+
+  [typeof="besluit:Zitting"] > [property="dc:title"]:before {
+    content: "Titel van de notulen (" attr(property) ")";
+  }
+
+//     [property="besluit:behandelt"]:before {
+//       // content: "Behandeling"; Momenteel niet gebruikt — fout aangegeven?
+//     }
+
+    // [property="besluit:isGehoudenDoor"]:before
+    [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
+      content: "Bestuurs-eenheid (" attr(property) ")";
+    }
+
+    [property="besluit:geplandeStart"]:before {
+      content: "Geplande start van de zitting (" attr(property) ")";
+    }
+
+//     [property="prov:startedAtTime"]:before {
+//       content: "Tijdstip waarop de zitting begint (" attr(property) ")";
+//     }
+
+//     [property="prov:endedAtTime"]:before {
+//       content: "Tijdstip waarop de zitting eindigt (" attr(property) ")";
+//     }
+
+    /* Aanwezigen en types */
+
+    [property="besluit:heeftAanwezigeBijStart"]:before {
+      content: "Aanwezige mandataris bij start (" attr(property) ")";
+    }
+
+    [property="besluit:heeftVoorzitter"]:before {
+      content: "Voorzitter (" attr(property) ")";
+    }
+
+    [property="besluit:heeftSecretaris"]:before {
+      content: "Algemeen directeur (" attr(property) ")";
+    }
+
+//     [property="besluit:heeftNotulen"]:before {
+//       // content: "Heeft notulen"; Momenteel niet gebruikt
+//     }
+
+//     [property="besluit:heeftZittingsverslag"]:before {
+//       // content: "Heeft zittingsverslag"; Momenteel niet gebruikt
+//     }
+
+//     [property="besluit:heeftAgenda"]:before {
+//       // content: "Agenda"; // zit niet in het model?
+//     }
+
+
+  /* -------------------- Agendapunt ------------------------- */
+
+  [typeof="besluit:Agenda"]:before {
+    content: "Agenda (" attr(typeof) ")"; // op hetzelfde niveau als onbestaande "heeftagenda"
+  }
+
+    [property="besluit:heeftAgendapunt"]:before {
+      content: "Agendapunt (" attr(property) ")";
+    }
+
+    [typeof="besluit:Agenda"] [property="dc:title"]:before {
+      content: "Titel agendapunt (" attr(property) ")";
+    }
+
+      [property="besluit:geplandOpenbaar"]:before {
+        content: "Openbaar agendapunt (" attr(property) ")";
+      }
+
+      [property="besluit:geplandBesloten"]:before {
+        content: "Besloten agendapunt (" attr(property) ")";
+      }
+
+//     [property="besluit:aangebrachtNa"]:before {
+//       // niet zichtbaar
+//     }
+
+//     [property="besluit:description"]:before {
+//       // hoe aanduiden? Herhalen in behandeling?
+//     }
+
+  /* -------------------- Behandeling agendapunt ------------------------- */
+
+  [typeof="besluit:BehandelingVanAgendapunt"]:before {
+    content: "Behandeling van agendapunt (" attr(property) ")";
+  }
+
+    [property="besluit:openbaar"]:before {
+      content: "Open agendapunt (" attr(property) ")";
+    }
+
+    [property="besluit:besloten"]:before {
+      content: "Besloten agendapunt (" attr(property) ")";
+    }
+
+    [typeof^="besluit:Besluit"]:before {
+      content: "Inhoud besluit (" attr(typeof) ")";
+    }
+
+      [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"]:before {
+        content: "Inhoud aanstellingsbesluit (" attr(typeof) ")";
+      }
+
+      [typeof^="besluit:Besluit"] [property="eli:title"]:before {
+        content: "Titel van agendapunt (" attr(property) ")";
+      }
+
+      [typeof^="besluit:Besluit"] [property="eli:description"]:before {
+        content: "Beschrijving van agendapunt (" attr(property) ")";
+      }
+
+        [property="besluit:motivering"]:before {
+          content: "Motivering (" attr(property) ")";
+        }
+
+        [property="eli:cites"]:before {
+          content: "Legale verschijning (" attr(property) ")";
+        }
+
+        [property="eli:artikel"]:before {
+          content: "Artikel (" attr(property) ")";
+        }
+
+        [property="prov:value"]:before {
+          content: "Besluit (" attr(property) ")";
+        }
+
+          [property="eli:has_part"]:before {
+            content: "Onderdeel (" attr(property) ")";
+          }
+
+          [property="eli:number"]:before {
+            content: "Nummer (" attr(property) ")";
+          }
+
+        [typeof="mandaat:Mandataris"]:before,
+        [property="ext:bekrachtigtAanstellingVan"]:before {
+          content: "Aanstelling mandataris (" attr(property) " " attr(typeof) ")";
+        }
+
+          [property="org:holds"]:before {
+            content: "Mandaat (" attr(property) ")";
+          }
+
+          [property="mandaat:start"]:before {
+            content: "Start mandaat (" attr(property) ")";
+          }
+
+//     [property="besluit:gebeurtNa"]:before {
+//       // niet zichtbaar
+//     }
+
+//     [property="besluit:heeftStemming"]:before {
+//       // content: "Behandeling van agendapunt met stemming (" attr(property) ")"; // niet gebruikt
+//     }
+
+//     [property="besluit:heeftAanwezige"]:before {
+//       content: "Aanwezige mandataris bij behandeling agendapunt (" attr(property) ")"; // niet gebruikt
+//     }
+
+//       [property="besluit:heeftVoorzitter"]:before {
+//         // content: "Voorzitter"; // in zitting herhaald
+//       }
+
+//       [property="besluit:heeftSecretaris"]:before {
+//         // content: "Algemeen directeur"; // in zitting herhaald
+//       }
+
+//     [property="eli:title"]:before {
+//       content: "Titel agendapunt"; // in zitting herhaald
+//     }
+
+    [property="dc:subject"]:before {
+      content: "Onderwerp (" attr(property) ")"; // wat moet hier in?
+    }
+
+
+//     [property="eli:title_short"]:before {
+//       // niet gebruikt
+//     }
+
+//     [property="eli:date_publication"]:before {
+//       // niet gebruikt
+//     }
+
+//     [property="eli:realizes"]:before {
+//       // niet gebruikt
+//     }
+
+//     [property="prov:wasGeneratedBy"]:before {
+//       // niet gebruikt
+//     }
+
+  /* -------------------- Stemming ------------------------- */
+
+  [typeof="besluit:Stemming"]:before {
+    content: "Stemming (" attr(typeof) ")";
+  }
+
+//     [property="besluit:Geheim"]:before {
+//       content: "Geheime stemming"; // wordt nu nog niet gebruikt
+//     }
+
+//     [property="besluit:Onderwerp"]:before {
+//       content: "Onderwerp stemming"; // wordt nu nog niet gebruikt
+//     }
+
+//   [property="besluit:Gevolg"]:before {
+//     content: "Gevolg stemming"; // wordt nu nog niet gebruikt
+//   }
+
+//     [property="besluit:aantalOnthouders"]:before {
+//       content: "Aantal onthouders"; // wordt nu nog niet gebruikt
+//     }
+
+//     [property="besluit:aantalTegenstanders"]:before {
+//       content: "Aantal tegenstanders"; // wordt nu nog niet gebruikt
+//     }
+
+//     [property="besluit:aantalVoorstanders"]:before {
+//       content: "Aantal voorstanders"; // wordt nu nog niet gebruikt
+//     }
+
+//   [typeof="besluit:Stemming"] [property="besluit:heeftAanwezige"]:before {
+//     content: "Aanwezige mandataris bij stemming"; // wordt nu nog niet gebruikt
+//   }
+
+//     [property="besluit:HeeftStemmer"]:before {
+//       content: "Heeft stemmer"; // wordt nu nog niet gebruikt
+//     }
+
+//     [property="besluit:HeeftOnthouder"]:before {
+//       content: "Heeft onthouder"; // wordt nu nog niet gebruikt
+//     }
+
+//     [property="besluit:HeeftTegenstander"]:before {
+//       content: "Heeft tegenstander"; // wordt nu nog niet gebruikt
+//     }
+
+//     [property="besluit:HeeftVoorstander"]:before {
+//       content: "Heeft voorstander"; // wordt nu nog niet gebruikt
+//     }
+
+}

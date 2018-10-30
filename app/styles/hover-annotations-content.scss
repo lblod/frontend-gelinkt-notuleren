@@ -1,0 +1,279 @@
+/* ==========================================================================
+  Annotations
+  Content for annotations on hover
+ ========================================================================== */
+
+
+.rdfa-editor:not(.show-rdfa-blocks) {
+  /* -------------------- General tags ------------------------- */
+
+  [datatype="xsd:date"]:before {
+    content: "Datum";
+  }
+
+  [property="ext:datumVerkiezing"]:before {
+    content: "Datum verkiezing";
+  }
+
+  [property="ext:datumGoedkeuringVerkiezing"]:before {
+    content: "Datum goedkeuring verkiezing";
+  }
+
+  [typeof="besluit:Bestuurseenheid"]:before {
+    content: "Bestuurs-eenheid";
+  }
+
+
+  /* -------------------- Zitting ------------------------- */
+
+  [typeof="besluit:Zitting"] > [property="dc:title"]:before {
+    content: "Titel van de notulen";
+  }
+
+    // [property="besluit:behandelt"]:before {
+    //   // content: "Behandeling"; Momenteel niet gebruikt — fout aangegeven?
+    // }
+
+    [property="besluit:geplandeStart"]:before {
+      content: "Geplande start van de zitting";
+    }
+
+    [property="prov:startedAtTime"]:before {
+      content: "Tijdstip waarop de zitting begint";
+    }
+
+    [property="prov:endedAtTime"]:before {
+      content: "Tijdstip waarop de zitting eindigt";
+    }
+
+    // [property="besluit:isGehoudenDoor"]:before
+    [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
+      content: "Bestuurs-eenheid";
+    }
+
+    [property="besluit:geplandeStart"]:before {
+      content: "Geplande start";
+    }
+
+    /* Aanwezigen en types */
+
+    [property="besluit:heeftAanwezigeBijStart"]:before {
+      content: "Aanwezige mandataris bij start";
+    }
+
+    [property="besluit:heeftVoorzitter"]:before {
+      content: "Voorzitter";
+    }
+
+    [property="besluit:heeftSecretaris"]:before {
+      content: "Algemeen directeur";
+    }
+
+    // [property="besluit:heeftNotulen"]:before {
+    //   // content: "Heeft notulen"; Momenteel niet gebruikt
+    // }
+
+    // [property="besluit:heeftZittingsverslag"]:before {
+    //   // content: "Heeft zittingsverslag"; Momenteel niet gebruikt
+    // }
+
+    // [property="besluit:heeftAgenda"]:before {
+    //   // content: "Agenda"; // zit niet in het model?
+    // }
+
+
+  /* -------------------- Agendapunt ------------------------- */
+
+  [typeof="besluit:Agenda"]:before {
+    content: "Agenda"; // op hetzelfde niveau als onbestaande "heeftagenda"
+  }
+
+    // [property="besluit:heeftAgendapunt"]:before {
+    //   // content: "Agendapunt"; wordt niet getoond, volgende niveau wel
+    // }
+
+    [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:before {
+      content: "Gepland openbaar agendapunt";
+    }
+
+    [property="besluit:heeftAgendapunt"] [property="besluit:geplandBesloten"] + [property="dc:title"]:before {
+      content: "Gepland besloten agendapunt";
+    }
+
+    // [property="besluit:aangebrachtNa"]:before {
+    //   // niet zichtbaar
+    // }
+
+    // [property="dc:title"]:before {
+    //   // niet zichtbaar
+    // }
+
+    // [property="besluit:description"]:before {
+    //   // hoe aanduiden? Herhalen in behandeling?
+    // }
+
+  /* -------------------- Behandeling agendapunt ------------------------- */
+
+  [typeof="besluit:BehandelingVanAgendapunt"]:before {
+    // content: "Behandeling van agendapunt"
+  }
+
+    [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
+        content: "\f06e \00A0 \00A0 Behandeling van open agendapunt";
+        font-family: fontawesome, flanders-sans, sans-serif;
+    }
+
+    [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:besloten"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
+        content: "\f07e \00A0 \00A0 Behandeling van besloten agendapunt";
+    }
+
+    [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"]:before {
+        content: "\f06e \00A0 \00A0 Behandeling van open agendapunt: Aanstellingsbesluit";
+        font-family: fontawesome, flanders-sans, sans-serif;
+    }
+
+      [typeof="mandaat:Mandataris"]:before,
+      [property="ext:bekrachtigtAanstellingVan"]:before {
+        content: "Aanstelling mandataris";
+      }
+
+      [property="org:holds"]:before {
+        content: "Mandaat";
+      }
+
+      [property="mandaat:start"]:before {
+        content: "Start mandaat";
+      }
+
+    // [property="besluit:gebeurtNa"]:before {
+    //   // niet zichtbaar
+    // }
+
+    // [property="prov:generated"]:before {
+    //   // niet zichtbaar
+    // }
+
+    // [property="besluit:heeftStemming"]:before {
+    //   // content: "Behandeling van agendapunt met stemming"; // niet gebruikt
+    // }
+
+    [property="besluit:heeftAanwezige"]:before {
+      content: "Aanwezige mandataris bij behandeling agendapunt"; // niet gebruikt
+    }
+
+      // [property="besluit:heeftVoorzitter"]:before {
+      //   // content: "Voorzitter"; // in zitting herhaald
+      // }
+
+      // [property="besluit:heeftSecretaris"]:before {
+      //   // content: "Algemeen directeur"; // in zitting herhaald
+      // }
+
+    [property="eli:title"]:before {
+      content: "Titel agendapunt";
+    }
+
+    [property="eli:description"]:before {
+      content: "Beschrijving agendapunt";
+    }
+
+    // [property="dc:subject"]:before {
+    //   // content: "Onderwerp"; // wat moet hier in?
+    // }
+
+    [property="besluit:motivering"]:before {
+      content: "Motivering";
+    }
+
+      [property="eli:cites"]:before {
+        content: "Legale verschijning";
+      }
+
+      [property="eli:artikel"]:before {
+        content: "Artikel";
+      }
+
+    [property="prov:value"]:before {
+      content: "Besluit";
+    }
+
+      // [property="eli:has_part"] [property="prov:value"]:before {
+      //   content: normal;
+      // }
+
+      [property="eli:has_part"]:before {
+        content: "Onderdeel";
+      }
+
+      [property="eli:number"]:before {
+        content: "Nummer";
+      }
+
+
+    // [property="eli:title_short"]:before {
+    //   // niet gebruikt
+    // }
+
+    // [property="eli:date_publication"]:before {
+    //   // niet gebruikt
+    // }
+
+    // [property="eli:realizes"]:before {
+    //   // niet gebruikt
+    // }
+
+    // [property="prov:wasGeneratedBy"]:before {
+    //   // niet gebruikt
+    // }
+
+  /* -------------------- Stemming ------------------------- */
+
+  [typeof="besluit:Stemming"]:before {
+    content: "Stemming";
+  }
+
+  //   [property="besluit:Geheim"]:before {
+  //     content: "Geheime stemming"; // wordt nu  nog niet gebruikt
+  //   }
+
+  //   [property="besluit:Onderwerp"]:before {
+  //     content: "Onderwerp stemming"; // wordt nu  nog niet gebruikt
+  //   }
+
+  // [property="besluit:Gevolg"]:before {
+  //   content: "Gevolg stemming"; // wordt nu  nog niet gebruikt
+  // }
+
+  //   [property="besluit:aantalOnthouders"]:before {
+  //     content: "Aantal onthouders"; // wordt nu  nog niet gebruikt
+  //   }
+
+  //   [property="besluit:aantalTegenstanders"]:before {
+  //     content: "Aantal tegenstanders"; // wordt nu  nog niet gebruikt
+  //   }
+
+  //   [property="besluit:aantalVoorstanders"]:before {
+  //     content: "Aantal voorstanders"; // wordt nu  nog niet gebruikt
+  //   }
+
+  // [typeof="besluit:Stemming"] [property="besluit:heeftAanwezige"]:before {
+  //   content: "Aanwezige mandataris bij stemming"; // wordt nu  nog niet gebruikt
+  // }
+
+  //   [property="besluit:HeeftStemmer"]:before {
+  //     content: "Heeft stemmer"; // wordt nu  nog niet gebruikt
+  //   }
+
+  //   [property="besluit:HeeftOnthouder"]:before {
+  //     content: "Heeft onthouder"; // wordt nu  nog niet gebruikt
+  //   }
+
+  //   [property="besluit:HeeftTegenstander"]:before {
+  //     content: "Heeft tegenstander"; // wordt nu  nog niet gebruikt
+  //   }
+
+  //   [property="besluit:HeeftVoorstander"]:before {
+  //     content: "Heeft voorstander"; // wordt nu  nog niet gebruikt
+  //   }
+}
+
