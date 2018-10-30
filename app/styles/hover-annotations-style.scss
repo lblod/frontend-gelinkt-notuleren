@@ -1,0 +1,262 @@
+/* ==========================================================================
+  Annotations
+  Style the annotations on hover here.
+ ========================================================================== */
+
+.rdfa-editor {
+
+  /* helpers to make sure you can see what's going on */
+
+  // [typeof],
+  // [property] {
+  //   background-color: red;
+  // }
+
+  // [property="ext:TODO"],
+  // [var="ext:TODO"],
+
+  // [typeof="besluit:Agenda"] [typeof="besluit:Agendapunt"],
+  // [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"],
+  // [property="besluit:heeftAgendapunt"] [typeof="besluit:Agendapunt"],
+  // [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"],
+  // [property="http://mu.semte.ch/vocabularies/ext/noHighlight"],
+  // [property="dc:subject"],
+  // [typeof="besluit:BehandelingVanAgendapunt"],
+
+  // [typeof="mandaat:Mandataris"],
+  // [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"] [property="ext:bekrachtigtAanstellingVan"]
+
+  //  {
+  //   background-color: transparent;
+  // }
+
+  /* make todo's visible */
+
+  [property="ext:TODO"],
+  [var="ext:TODO"] {
+    border: 1px solid purple;
+
+    &:after {
+      content: normal;
+    }
+
+    &:hover:after {
+      border-right: 0.5rem solid purple;
+      position: absolute;
+      font-weight: 400;
+      font-size: 1.3rem;
+      width: 7rem;
+      color: white;
+      background-color: purple;
+      padding: 0.5rem;
+      border-right: 0.5rem solid purple;
+      box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
+      z-index: 10;
+      font-family: "flanders-sans", sans-serif;
+      opacity: 1;
+      top: 0;
+      left: -10rem;
+    }
+  }
+
+  [property="ext:TODO"]:hover:after {
+    content: "property TODO";
+  }
+
+  [var="ext:TODO"]:hover:after {
+    content: "variabele TODO"
+  }
+
+  [property="ext:TODO"][var="ext:TODO"]:hover:after {
+    content: "variable and property TODO";
+  }
+}
+
+
+/* -------------------- annotations styles for big chunks of annotations ------------------------- */
+
+.rdfa-editor {
+
+  [typeof="besluit:Zitting"] > [property="dc:title"],
+
+  // [property="besluit:heeftAgenda"], temporary?
+  [typeof="besluit:Agenda"],
+
+  [property="besluit:motivering"],
+  [property="prov:value"],
+
+  [typeof^="besluit:Besluit"],
+  [typeof="besluit:Stemming"]
+  {
+    background-color: transparent;
+    position: relative;
+    display: block;
+
+    &:before,
+    &:after {
+      opacity: 0;
+      position: absolute;
+      top: -999rem;
+      left: -2.2rem;
+      transition: left 200ms;
+    }
+
+    &:before {
+      font-size: 1.3rem;
+      font-family: flanders-sans, sans-serif;
+      color: $gray;
+      font-weight: 400;
+      line-height: 1.4;
+      background-color: rgba($white, 0.9);
+      border: 1px solid $blue-gray-lighter;
+      padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+    }
+
+    &:after {
+      content: "";
+      bottom: -3px;
+      border-left: 2px solid $blue-gray-lighter;
+    }
+
+    &:hover:before,
+    &:hover:after {
+      top: -4rem;
+      opacity: 1;
+      left: -2rem;
+    }
+
+    &:hover:after {
+      left: -2rem;
+    }
+
+    // [property="besluit:Besluit"]
+
+    [property="prov:value"]:hover,
+    [property="besluit:motivering"]:hover,
+    [typeof="besluit:Stemming"]:hover
+    {
+      &:before,
+      &:after {
+        left: -1.1rem;
+      }
+    }
+  }
+}
+
+  /* -------------------- annotations styles for inline of annotations ------------------------- */
+
+.rdfa-editor {
+  [datatype="xsd:date"],
+
+  [property="besluit:behandelt"],
+  [property="besluit:geplandeStart"],
+  [property="prov:startedAtTime"],
+  // [typeof="bestuur:Bestuurseenheid"], tijdelijk vervangen door #isgehoudendoor ?
+  [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"],
+  [property="besluit:geplandeStart"],
+  [property="prov:endedAtTime"],
+  [property="besluit:heeftAanwezigeBijStart"],
+  [property="besluit:heeftVoorzitter"],
+  [property="besluit:heeftSecretaris"],
+
+  [property="besluit:heeftAgendapunt"] [property="dc:title"],
+  [typeof="besluit:Agendapunt"] [property="dc:title"],
+
+  [property="eli:title"],
+  [property="eli:description"],
+  [property="eli:cites"],
+  [property="eli:has_part"],
+  [property="eli:number"],
+  [property="eli:artikel"],
+
+  [typeof="mandaat:Mandataris"],
+  [property="mandaat:start"],
+  [property="org:holds"],
+
+  [property="besluit:Geheim"],
+  [property="besluit:Onderwerp"],
+  [property="besluit:Gevolg"]
+  [property="besluit:aantalOnthouders"],
+  [property="besluit:aantalTegenstanders"],
+  [property="besluit:aantalVoorstanders"],
+  [typeof="besluit:Stemming"] [property="besluit:heeftAanwezige"],
+  [property="besluit:HeeftStemmer"],
+  [property="besluit:HeeftOnthouder"],
+  [property="besluit:HeeftTegenstander"],
+  [property="besluit:HeeftVoorstander"],
+
+  [datatype="xsd:date"],
+  [typeof="besluit:Bestuurseenheid"]
+  {
+    background-color: transparent;
+    border-bottom: 1px solid rgba($blue-gray-light, 1) !important;
+    cursor: pointer;
+    // display: inline;
+    padding-bottom: 5px;
+
+    &:hover {
+      color: $black;
+      background-color: rgba($blue-gray, 0.2);
+    }
+
+    &:before {
+      position: absolute;
+      font-weight: 400;
+      font-size: 1.5rem;
+      width: 11rem;
+      color: $gray;
+      opacity: 0;
+      border: 1px solid $blue-gray-lighter;
+      background-color: $white;
+      padding: 0.5rem 0.7rem 0.4rem 1.4rem;
+      border-right: 0.5rem solid $primary-yellow;
+      box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
+      z-index: 10;
+      font-family: "flanders-sans", sans-serif;
+      transition: opacity 200ms;
+      top: -999rem;
+      left: -999rem;
+    }
+
+    &:hover:before {
+      opacity: 1;
+      top: 0;
+      left: auto;
+      right: -17.5rem;
+      margin-top: -2.2rem;
+    }
+
+    > [typeof],
+    > [property] {
+      padding-bottom: 3px;
+
+      &:hover:before {
+        padding-left: 1rem;
+        right: -28.5rem;
+        width: 11rem;
+        margin-top: 0;
+      }
+
+      > [typeof],
+      > [property] {
+        padding-bottom: 2px;
+
+        &:hover:before {
+          margin-top: 4rem;
+          right: -28.5rem;
+        }
+
+        > [typeof],
+        > [property] {
+          padding-bottom: 0;
+
+          &:hover:before {
+            border-right: 1px solid $blue-gray-lighter;
+            margin-top: 10rem;
+            right: -28.5rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+/* ==========================================================================
+  Annotations
+  Style the annotations when rdfa is shown here.
+ ========================================================================== */
+
+.rdfa-annotations.show-rdfa-blocks {
+
+    [property],
+    [typeof],
+    [datatype],
+    [property="dc:title"]
+    {
+        border: 1px solid $gray-lighter;
+        margin: 2px;
+        padding: 0.5rem;
+        padding-top: 3.5rem;
+        transition: all 0.3s;
+        display: inline-block;
+        position: relative;
+        background-color: $white;
+
+        &:hover {
+            background-color: $white;
+            border-color: $primary-yellow;
+        }
+
+        &:hover:after,
+        &:after {
+            content: normal;
+        }
+
+        &:before {
+            position: absolute;
+            color: $gray-dark;
+            left: -1px;
+            top: -1px;
+            right: -1px;
+            min-height: 0;
+            height: 2.2rem;
+            padding: 0.5rem;
+            line-height: 1.6rem;
+            font-size: 1.3rem;
+            font-family: "flanders-sans", sans-serif;
+            font-weight: normal;
+            background-color: rgba($gray-lighter, 0.5);
+            overflow: hidden;
+            opacity: 1;
+            width: auto;
+            min-width: 100%;
+            border: none;
+            box-shadow: none;
+        }
+
+        &:hover:before {
+            background-color: $primary-yellow !important;
+            height: auto !important;
+            min-height: 2rem !important;
+            overflow: visible;
+            z-index: 100;
+            transition: all 400ms;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            opacity: 1;
+            margin-top: 0;
+        }
+
+        [property],
+        [datatype],
+        [typeof] {
+
+            &:hover:before {
+                left: -1px;
+                right: -1px;
+                min-width: 100%;
+                width: auto;
+                padding-left: 0.5rem;
+            }
+        }
+    }
+
+    [typeof="besluit:Zitting"] {
+        border: none;
+        padding: 0;
+        margin: 0;
+
+        &:before {
+            content: normal;
+        }
+    }
+
+    [property="http://mu.semte.ch/vocabularies/ext/noHighlight"] {
+        border: none;
+        padding: 0;
+        margin: 0;
+
+        &:before {
+            content: normal;
+        }
+    }
+
+    [property="besluit:gebeurtNa"],
+    [property="eli:language"],
+    [property="ext:metadata"],
+    .ext_metadata {
+        display: none;
+    }
+
+    .annotation--agendapunt--open__icon {
+        position: relative;
+        left: auto;
+        display: block;
+    }
+
+    /* make sure small annotations extend wide enough on hover to be legible */
+
+    [property="eli:number"] {
+        vertical-align: top;
+    }
+
+    [typeof="mandaat:Mandataris"],
+    [property="ext:bekrachtigtAanstellingVan"],
+    [property="eli:number"],
+    [typeof="besluit:Bestuurseenheid"],
+    [property="eli:artikel"] {
+
+        &:hover:before {
+            right: -10rem !important;
+        }
+    }
+}
