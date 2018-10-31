@@ -23,9 +23,11 @@
         text-decoration: none;
     }
 
-    i.vi-long-arrow + span,
-    .vi-long-arrow {
-        display: none;
+    .tasklist__header {
+      i.vi-long-arrow + span,
+      .vi-long-arrow {
+          display: none;
+      }
     }
 }
 
@@ -47,16 +49,16 @@
     z-index: 901;
     max-width: none;
 
-    .vi-expand {
-        display: none;
+    .tasklist__header {
+      .vi-expand {
+          display: none;
+      }
+
+      i.vi-long-arrow + span,
+      .vi-long-arrow {
+          display: inline-block;
+      }
     }
-
-    i.vi-long-arrow + span,
-    .vi-long-arrow {
-        display: inline-block;
-    }
-
-
 }
 
 .tasklist__header {

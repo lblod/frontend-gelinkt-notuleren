@@ -50,11 +50,8 @@
       }
     }
 
-    /* -------------------- making sure text, headers, tables, mark, strong and em look well without classes in the editor ------------------------- */
 
-    p.u-font--italic {
-      font-style: italic;
-    }
+    /* -------------------- Table in editor ------------------------- */
 
     .data-table--lined.data-table--tight {
       th,
@@ -62,6 +59,21 @@
         font-size: 1.4rem;
         padding: 0.8rem;
       }
+    }
+
+    .editor__paper table th {
+      white-space: initial;
+    }
+
+    .editor__paper .data-table th,
+    .editor__paper .data-table td {
+      font-size: 1.4rem;
+    }
+
+    /* -------------------- making sure text, headers, tables, mark, strong and em look well without classes in the editor ------------------------- */
+
+    p.u-font--italic {
+      font-style: italic;
     }
 
     .editor__paper {
