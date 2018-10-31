@@ -24,7 +24,7 @@
     "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
     "@lblod/ember-mock-login": "^0.4.5",
-    "@lblod/ember-rdfa-editor-scroll-to-plugin": "^0.1.0",
+    "@lblod/ember-rdfa-editor-scroll-to-plugin": "^0.1.1",
     "@lblod/ember-rdfa-editor-gemeenteraadsleden-aanstelling-plugin": "0.3.0",
     "@lblod/ember-rdfa-editor": "^0.17.19",
     "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "^0.1.6",
