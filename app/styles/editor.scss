@@ -9,148 +9,296 @@
 }
 
 .editor {
-    background-color: $blue-gray-lightest;
-    position: relative;
-    padding-bottom: 1rem;
+  background-color: $blue-gray-lightest;
+  position: relative;
+  padding-bottom: 1rem;
+  // overflow-x: hidden;
 }
+
+  .editor__paper {
+    position: relative;
+    background-color: $white;
+    margin: 2rem 0 5rem 2rem;
+    padding: 6rem 6.5rem 5rem 5rem;
+    min-height: 950px;
+    box-shadow: 0 2px 6px 0 $blue-gray-light;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+    /* -------------------- Custom temporary widths ------------------------- */
+
+    .tasklist + .container-flex--contain .editor__paper {
+      left: -20rem;
+      min-width: 600px;
+      width: 70%;
+      max-width: 750px;
+    }
+
+    .tasklist.tasklist--open + .container-flex--contain .editor__paper {
+      left: 0;
+      min-width: 470px;
+    }
+
+
+    @media (min-width: 1600px) {
+      .tasklist + .container-flex--contain .editor__paper {
+        max-width: none;
+        width: 75%;
+      }
+    }
+
+    /* -------------------- making sure text, headers, tables, mark, strong and em look well without classes in the editor ------------------------- */
+
+    p.u-font--italic {
+      font-style: italic;
+    }
+
+    .data-table--lined.data-table--tight {
+      th,
+      td {
+        font-size: 1.4rem;
+        padding: 0.8rem;
+      }
+    }
 
     .editor__paper {
+
+      font-size: 1.6rem;
+
+      p, li {
+        font-size: 1.6rem;
         position: relative;
-        background-color: $white;
-        margin: 2rem 0 5rem 2rem;
-        padding: 5rem 6.5rem 5rem 5rem;
-        min-height: 950px;
-        box-shadow: 0 2px 6px 0 $blue-gray-light;
+      }
 
-        &:focus {
-            outline: none;
+      p {
+        display: block;
+      }
+
+      mark {
+        cursor: pointer;
+      }
+
+      mark table {
+        font-weight: normal;
+        border: 4px solid $primary-yellow;
+
+        &:active {
+          opacity: 0.5;
         }
-    }
+      }
 
-        .tasklist + .container-flex--contain .editor__paper {
-            left: -20rem;
-            min-width: 600px;
-            width: 70%;
-            max-width: 750px;
-        }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: flanders-serif,serif;
+        line-height: 1.1;
+        position: relative;
+      }
 
-        .tasklist.tasklist--open + .container-flex--contain .editor__paper {
-            left: 0;
-            min-width: 470px;
-        }
+      h1 {
+        line-height: 1;
+        font-weight: 300;
+        font-size: 4.8rem;
+        margin-bottom: 4rem;
+      }
 
-
-        @media (min-width: 1600px) {
-            .tasklist + .container-flex--contain .editor__paper {
-                max-width: none;
-                width: 75%;
-            }
-        }
-
-
-
-
-    .editor__annotations {
-        padding-top: 7rem;
-    }
-
-    .editor {
-        .h1 {
+        @media screen and (max-width: 767px) {
+          h1 {
+            font-size: 3.6rem;
             margin-bottom: 3rem;
+          }
         }
 
-        .h4 {
+      h2 {
+        font-size: 3.6rem;
+        font-weight: 500;
+        margin-bottom: 3rem;
+      }
+
+        @media screen and (max-width: 767px) {
+           h2 {
+            font-size: 3rem;
+            margin-bottom: 2.4rem;
+          }
+        }
+
+      h3 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 2.4rem;
+      }
+
+        @media screen and (max-width: 767px) {
+           h3 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+          }
+        }
+
+      h4 {
+        font-size: 2.4rem;
+        font-weight: 500;
+        margin-bottom: 2rem;
+      }
+
+        @media screen and (max-width: 767px) {
+          h4 {
+            font-size: 2.4rem;
+            margin-bottom: 1.5rem;
+          }
+        }
+
+      h5 {
+        font-weight: 400;
+        font-size: 2.1rem;
+        margin-bottom: 1.5rem;
+      }
+
+        @media screen and (max-width: 767px) {
+          h5 {
+            font-size: 2.1rem;
             margin-bottom: 1rem;
+          }
         }
 
-        p, li {
-            font-size: 1.6rem;
-        }
+      h6 {
+        font-weight: 500;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+      }
 
-        ul.smaller li,
-        a.smaller,
-        p.smaller {
-          font-size: 0.8em;
-        }
-
-        ul,
-        ol {
-            &.bullet-list,
-            &.numbered-list {
-            margin: 1rem 0 3rem;
-
-                ul,
-                ol {
-                    &.bullet-list,
-                    &.numbered-list {
-                        margin: 0.5rem 0 1.5rem;
-                    }
-                }
-            }
+        @media screen and (max-width: 767px) {
+          h6 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+          }
         }
     }
 
-    .editor__paper ul.bullet-list ul {
-        margin-top: 0.5rem;
+    /* -------------------- list styles inside the editor ------------------------- */
+
+    .editor__paper {
+      ul.bullet-list {
+        padding-left: 0;
+      }
     }
 
-    .editor__paper ul.bullet-list ul > li {
-        margin-left: 2rem;
-        list-style-type: circle;
-    }
+    /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */
 
-    .editor__paper.js-scrollspy__content {
-        border-radius: 0;
-    }
+    [typeof="besluit:BehandelingVanAgendapunt"],
+    [property="ext:behandelt"],
+    [property="besluit:heeftAgendapunt"],
+    [typeof="besluit:Agendapunt"] {
+      display: block !important;
+      position: relative;
 
-    .editor__paper--blankstate {
-        position: relative;
-        padding: 0.5rem 2rem 0.5rem 0.5rem;
-        margin-right: 1.5rem;
+      .annotation--agendapunt--besloten__icon,
+      .annotation--agendapunt--open__icon {
+        font-size: 1.6rem;
+        position: absolute;
+        left: -2.75rem;
+        top: 0;
+        padding-left: 1px;
+        z-index: 2;
 
-        > * {
-            position: relative;
-            z-index: 2;
-        }
+        // &:hover {
+        //   color: $primary-blue; // To be used when open/closed agendapunt plugin exists
+        // }
+      }
 
-        &:before {
-            content: "";
-            display: block;
-            position: absolute;
-            border: 1px dashed $blue-gray-light;
-            background-color: $blue-gray-lightest;
-            top: -1.5rem;
-            right: 0;
-            bottom: -2rem;
-            left: -2rem;
-            z-index: 1;
-        }
-    }
+      .annotation--agendapunt--besloten__icon {
+        color: darken($primary-yellow, 15%);
+      }
 
-.bijlagen__list li {
-    margin-bottom: 4rem;
-}
-
-    .bijlage__bestand {
-        border: 1px solid $blue-gray-light;
-        padding: 0.8rem 1rem 0.5rem;
-    }
-
-    .bijlage__sleepveld {
-        margin-top: 1rem;
-        background-color: $blue-gray-lightest;
-        border: 2px dashed $blue-gray-light;
-        padding: 1em;
-        text-align: center;
-
-        a {
-            display: block;
-        }
-    }
-
-    .bijlage__size {
+      .annotation--agendapunt--open__icon {
         color: $gray-light;
+      }
     }
+
+    [typeof="besluit:BehandelingVanAgendapunt"]:hover {
+      .annotation--agendapunt--besloten__icon,
+      .annotation--agendapunt--open__icon,
+      .annotation--agendapunt--persoonlijk__icon {
+        opacity: 0;
+        transition: all 200ms;
+        left: -2rem;
+      }
+    }
+
+    .rdfa-annotations.show-rdfa-blocks {
+
+      p[property="dc:subject"] {
+        display: block;
+      }
+
+      [typeof="besluit:BehandelingVanAgendapunt"]:hover {
+        .annotation--agendapunt--besloten__icon,
+        .annotation--agendapunt--open__icon,
+        .annotation--agendapunt--persoonlijk__icon {
+          opacity: 1;
+          left: auto;
+        }
+      }
+    }
+
+    /* -------------------- Unused css for now for blankstates ------------------------- */
+
+    // .editor__paper--blankstate {
+    //     position: relative;
+    //     padding: 0.5rem 2rem 0.5rem 0.5rem;
+    //     margin-right: 1.5rem;
+
+    //     > * {
+    //         position: relative;
+    //         z-index: 2;
+    //     }
+
+    //     &:before {
+    //         content: "";
+    //         display: block;
+    //         position: absolute;
+    //         border: 1px dashed $blue-gray-light;
+    //         background-color: $blue-gray-lightest;
+    //         top: -1.5rem;
+    //         right: 0;
+    //         bottom: -2rem;
+    //         left: -2rem;
+    //         z-index: 1;
+    //     }
+    // }
+
+    /* -------------------- Unused css for now for attachments ------------------------- */
+
+    // .bijlagen__list li {
+    //     margin-bottom: 4rem;
+    // }
+
+    //     .bijlage__bestand {
+    //         border: 1px solid $blue-gray-light;
+    //         padding: 0.8rem 1rem 0.5rem;
+    //     }
+
+    //     .bijlage__sleepveld {
+    //         margin-top: 1rem;
+    //         background-color: $blue-gray-lightest;
+    //         border: 2px dashed $blue-gray-light;
+    //         padding: 1em;
+    //         text-align: center;
+
+    //         a {
+    //             display: block;
+    //         }
+    //     }
+
+    //     .bijlage__size {
+    //         color: $gray-light;
+    //     }
 
 /* Editing annotations warning
  ========================================================================== */
@@ -182,7 +330,6 @@
   Annotations trigger
   Style the annotations trigger here.
  ========================================================================== */
-
 
 /* plusje aan de zijkant */
 .editor-commands {
@@ -217,4 +364,42 @@ button.button.annotation-suggestion--trigger:after {
     left: 3.65rem;
     z-index: 900;
     top: 1.5rem;
+}
+
+
+
+/* dialogues for suggestions
+ ========================================================================== */
+
+
+.annotation-suggestion__suggestion .modal-dialog + .modal-dialog {
+  right: 15rem !important;
+  top: 22rem !important;
+}
+
+.annotation-suggestion__suggestion .modal-dialog .modal-dialog {
+    padding: 0;
+    left: auto;
+    top: 25rem;
+    right: -15rem;
+}
+
+.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog {
+    padding: 0;
+    left: auto;
+    right: 25rem;
+}
+
+.annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog {
+    padding: 0;
+    left: auto;
+    top: 55rem;
+    right: -15rem;
+}
+
+.annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog {
+    padding: 0;
+    left: auto;
+    top: 55rem;
+    right: -15rem;
 }
