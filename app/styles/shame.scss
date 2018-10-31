@@ -1,12 +1,47 @@
 /* ==========================================================================
-    Monsters live here
-========================================================================== */
+  Dirty temporary css for demo purposes.
+  Some parts will be reused, but most of them will not.
+ ========================================================================== */
 
-em {
-    font-style: italic;
-    background-color: red;
-    color: white;
+/* restyling annotation positions and styling for demo */
+.modal-dialog--hint {
+  position: fixed !important;
+  top: 15rem !important;
+  right: 5rem !important;
+  left: auto !important;
+  max-height: 50vh;
 }
+
+/** Collapsable document structure */
+.editor-container {
+  background-color: $blue-gray-lightest;
+
+  .grid {
+
+    .sidebar-wrapper {
+      position: relative;
+      transition: 0.5s;
+      left: 0;
+
+      &.col--3-12.col--collapsed {
+        left: calc(-25% + 50px);
+      }
+
+      .sidebar {
+        background-color: #FFF;
+
+        .sidebar__header i {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+
+/* ==========================================================================
+    Modals
+========================================================================== */
 
 .modal-dialog__content li.link-list__item.link-list__item--sidenotes a:first-child {
 	border-bottom: none;
@@ -33,29 +68,4 @@ em {
 .modal-dialog__content li.link-list__item span.link-list__item__sidenote {
 	cursor: default;
 	pointer-events: none;
-}
-
-/* temporary fix for italics */
-
-p.u-font--italic {
-	font-style: italic;
-}
-
-/* temporary fix for marks that are bold */
-
-mark table {
-	font-weight: normal;
-	border: 4px solid $primary-yellow;
-
-	&:active {
-		opacity: 0.5;
-	}
-}
-
-.data-table--lined.data-table--tight {
-	th,
-	td {
-		font-size: 1.4rem;
-		padding: 0.8rem;
-	}
 }

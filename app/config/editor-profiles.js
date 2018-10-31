@@ -11,9 +11,9 @@ export default {
     "rdfa-editor-document-title-plugin",
     "rdfa-editor-generic-model-plugin",
     "rdfa-editor-standard-template-plugin",
-    "mandataris-plugin",
     "rdfa-editor-date-plugin",
-    "rdfa-editor-citaten-plugin"
+    "rdfa-editor-citaten-plugin",
+    "rdfa-editor-personen-plugin"
   ],
   all: [
     "rdfa-editor-fractievorming-plugin",
@@ -28,9 +28,9 @@ export default {
     "rdfa-editor-generic-model-plugin",
     "rdfa-editor-console-logger-plugin",
     "rdfa-editor-standard-template-plugin",
-    "mandataris-plugin",
     "rdfa-editor-date-plugin",
     "rdfa-editor-citaten-plugin",
+    "rdfa-editor-personen-plugin"
   ],
   none: []
 };

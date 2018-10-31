@@ -37,6 +37,7 @@
     "@lblod/ember-rdfa-editor-document-title-plugin": "^0.1.1",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "^0.1.6",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "^0.6.10",
+    "@lblod/ember-rdfa-editor-personen-plugin": "^0.1.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "^0.6.3",
     "@lblod/ember-rdfa-editor-template-variables-manager-plugin": "^0.1.3",
     "@lblod/ember-vo-tasklist": "^0.1.3",
