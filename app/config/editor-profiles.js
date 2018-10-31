@@ -1,6 +1,5 @@
 export default {
   default: [
-    "rdfa-editor-fractievorming-plugin",
     "rdfa-editor-scroll-to-plugin",
     "rdfa-editor-gemeenteraadsleden-aanstelling-plugin",
     "rdfa-editor-scoped-bestuursorgaan-plugin",
@@ -16,7 +15,6 @@ export default {
     "rdfa-editor-personen-plugin"
   ],
   all: [
-    "rdfa-editor-fractievorming-plugin",
     "rdfa-editor-scroll-to-plugin",
     "rdfa-editor-gemeenteraadsleden-aanstelling-plugin",
     "rdfa-editor-scoped-bestuursorgaan-plugin",
