@@ -33,6 +33,7 @@ Router.map(function() {
     path: '/*wildcard'
   });
   this.route('login');
+  this.route('zetelverdeling');
 });
 
 export default Router;
