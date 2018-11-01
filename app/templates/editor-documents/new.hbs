@@ -38,6 +38,6 @@
     </div>
   </div>
 {{else}}
-    {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit")}}
+    {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit") onUpdateTasklists=(action "updateTasklists")}}
 {{/if}}
 {{outlet}}

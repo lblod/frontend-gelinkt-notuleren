@@ -1,7 +1,7 @@
 <label class="checkbox checkbox--block">
-  {{input class="checkbox__toggle" type="checkbox" checked=taskSolution.status click=(action "toggleStatus") }}
+  {{input class="checkbox__toggle" type="checkbox" checked=taskStatus click=(action "toggleStatus") }}
   <span></span>
-  <strong>{{taskSolution.task.title}}</strong>
+  <strong>{{task.title}}</strong>
 </label>
 <p class="smaller u-spacer--left">
   {{#if taskSolution.task.clickTarget}}
@@ -10,14 +10,14 @@
   </a>
   {{/if}}
 </p>
-<p class="smaller u-spacer--left"> {{{taskSolution.task.description}}} </p>
+<p class="smaller u-spacer--left"> {{{task.description}}} </p>
 
 <ul class="tasklist-navigation__group">
   {{#if setChilds.isRunning}}
     <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
   {{else}}
-    {{#each sortedTaskSolutionChilds as |childSolution|}}
-      {{task-solution/edit taskSolution=childSolution class="tasklist-navigation__item"}}
+    {{#each sortedChilds as |childTask|}}
+      {{task-solution/edit tasklistSolution=tasklistSolution task=childTask class="tasklist-navigation__item"}}
     {{/each}}
   {{/if}}
   {{yield}}

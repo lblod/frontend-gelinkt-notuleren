@@ -16,7 +16,7 @@ export default Component.extend({
 
     //get new tasklists to display
     let tasklists = this.tasklistPlugin.tasklistData;
-
+    
     if(!tasklists)
       return;
 
@@ -37,6 +37,7 @@ export default Component.extend({
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
+    this.onUpdateTasklists(updatedTaskSolutions);
   }).keepLatest(),
 
   swapIndex: task(function*(indexA, indexB){

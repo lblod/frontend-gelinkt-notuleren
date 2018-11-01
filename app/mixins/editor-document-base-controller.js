@@ -90,6 +90,7 @@ export default Mixin.create({
   },
 
   async saveEditorDocument(editorDocument, newStatus, toNewDocument){
+    await this.saveTasklists();
     let documentToSave = toNewDocument ? this.store.createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
     let origHtml = this.editorDomNode.innerHTML;
     let innerHtml = this.cleanUpEditorDocumentInnerHtml(origHtml);
@@ -125,6 +126,16 @@ export default Mixin.create({
       this.set('isProcessing', false);
       alert('Fout bij publiceren: ' + e);
       throw e;
+    }
+  },
+
+  async saveTasklists(){
+    for(let tasklistSolution of this.tasklists){
+      let taskSolutions = await tasklistSolution.taskSolutions.toArray();
+      for(let taskSolution of taskSolutions){
+        await taskSolution.save();
+      }
+      await tasklistSolution.save();
     }
   },
 
@@ -184,6 +195,10 @@ export default Mixin.create({
 
    closeValidationModal(){
      this.set('validationErrors', false);
+   },
+
+   updateTasklists(tasklists){
+     this.set('tasklists', tasklists);
    }
 
  }

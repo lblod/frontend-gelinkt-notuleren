@@ -30,6 +30,10 @@ export default Component.extend({
   },
 
   actions: {
+    updateTasklists(tasklists){
+      this.onUpdateTasklists(tasklists);
+    },
+
     handleRdfaEditorInit(editor){
       this.rdfaEditorContainerInit(editor);
     },

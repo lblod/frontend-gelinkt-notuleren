@@ -15,8 +15,8 @@
   {{#if setTaskSolutions.isRunning}}
     <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
   {{else}}
-    {{#each sortedTaskSolutions as |taskSolution|}}
-      {{task-solution/edit taskSolution=taskSolution class="tasklist-navigation__item"}}
+    {{#each tasks as |task|}}
+      {{task-solution/edit tasklistSolution=tasklistSolution task=task class="tasklist-navigation__item"}}
     {{/each}}
   {{/if}}
   {{yield}}
