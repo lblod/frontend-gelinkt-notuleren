@@ -20,6 +20,8 @@ export default Component.extend({
     if(!tasklists)
       return;
 
+    this.set('rawTasklistsData', tasklists);
+
     tasklists = tasklists.toArray();
 
     //match solutions
@@ -78,8 +80,10 @@ export default Component.extend({
   async addIndexes(sortedTasklists, currIndex = 0){
     if(sortedTasklists.length == 0)
       return sortedTasklists;
-    sortedTasklists[0].set('index', sortedTasklists[0].index || currIndex);
-    await sortedTasklists[0].save();
+    if(!sortedTasklists[0].index){
+      sortedTasklists[0].set('index', sortedTasklists[0].index || currIndex);
+      await sortedTasklists[0].save();
+    }
     return  [sortedTasklists[0], ... await this.addIndexes(sortedTasklists.slice(1), currIndex + 1)];
   },
 
@@ -100,6 +104,12 @@ export default Component.extend({
       this.tasklistPlugin.addObserver('tasklistData.[]',
                                       () => {return this.tasklistObserver.perform();});
     }
+  },
+
+  willDestroyElement(){
+    if(this.tasklistPlugin)
+      this.tasklistPlugin.flushTaskData(this.rawTasklistsData);
+    this._super(...arguments);
   },
 
   sortByIndexAsc(a, b){
