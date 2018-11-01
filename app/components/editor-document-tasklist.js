@@ -16,7 +16,7 @@ export default Component.extend({
 
     //get new tasklists to display
     let tasklists = this.tasklistPlugin.tasklistData;
-    
+
     if(!tasklists)
       return;
 
@@ -45,8 +45,6 @@ export default Component.extend({
     let solutionB = this.tasklistSolutions[indexB];
     solutionA.set('index', indexB);
     solutionB.set('index', indexA);
-    yield solutionA.save();
-    yield solutionB.save();
     this.set('tasklistSolutions', this.tasklistSolutions.sort(this.sortByIndexAsc));
     this.propertyDidChange('tasklistSolutions');
   }),
@@ -93,6 +91,8 @@ export default Component.extend({
     return Promise.all(tasklistsNoSolution.map(async ts => {
       let tasklistSolution = await this.createTasklistSolution(ts.tasklistData.tasklistUri);
       //update document content
+      //TODO: I don't feel comfortable doing this on save as this triggers a shit load of stuff on the editor
+      // and could leave it in an inconsistent state on save...
       this.tasklistPlugin.setTaskSolutionUri(ts, tasklistSolution.uri);
       return tasklistSolution;
     }));
