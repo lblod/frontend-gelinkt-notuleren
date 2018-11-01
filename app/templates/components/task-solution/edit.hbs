@@ -4,8 +4,8 @@
   <strong>{{task.title}}</strong>
 </label>
 <p class="smaller u-spacer--left">
-  {{#if taskSolution.task.clickTarget}}
-  <a href="#" onClick={{action 'scrollTo' taskSolution.task.clickTarget}}>
+  {{#if task.clickTarget}}
+  <a href="#" onClick={{action 'scrollTo' task.clickTarget}}>
     <i class="vi vi-long-arrow vi-u-xs"></i> Ga naar verwijzing in het document
   </a>
   {{/if}}
