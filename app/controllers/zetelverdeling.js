@@ -15,7 +15,6 @@ export default Controller.extend({
         zetels[lijstnaam] = 1;
       }
     });
-    console.log(zetels);
     return zetels;
   })
 });
