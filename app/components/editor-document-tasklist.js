@@ -20,6 +20,8 @@ export default Component.extend({
     if(!tasklists)
       return;
 
+    this.set('rawTasklistsData', tasklists);
+
     tasklists = tasklists.toArray();
 
     //match solutions
@@ -35,6 +37,7 @@ export default Component.extend({
 
     //and put them in bucket to display
     this.set('tasklistSolutions', updatedTaskSolutions);
+    this.onUpdateTasklists(updatedTaskSolutions);
   }).keepLatest(),
 
   swapIndex: task(function*(indexA, indexB){
@@ -42,8 +45,6 @@ export default Component.extend({
     let solutionB = this.tasklistSolutions[indexB];
     solutionA.set('index', indexB);
     solutionB.set('index', indexA);
-    yield solutionA.save();
-    yield solutionB.save();
     this.set('tasklistSolutions', this.tasklistSolutions.sort(this.sortByIndexAsc));
     this.propertyDidChange('tasklistSolutions');
   }),
@@ -78,8 +79,10 @@ export default Component.extend({
   async addIndexes(sortedTasklists, currIndex = 0){
     if(sortedTasklists.length == 0)
       return sortedTasklists;
-    sortedTasklists[0].set('index', sortedTasklists[0].index || currIndex);
-    await sortedTasklists[0].save();
+    if(!sortedTasklists[0].index){
+      sortedTasklists[0].set('index', sortedTasklists[0].index || currIndex);
+      await sortedTasklists[0].save();
+    }
     return  [sortedTasklists[0], ... await this.addIndexes(sortedTasklists.slice(1), currIndex + 1)];
   },
 
@@ -88,6 +91,8 @@ export default Component.extend({
     return Promise.all(tasklistsNoSolution.map(async ts => {
       let tasklistSolution = await this.createTasklistSolution(ts.tasklistData.tasklistUri);
       //update document content
+      //TODO: I don't feel comfortable doing this on save as this triggers a shit load of stuff on the editor
+      // and could leave it in an inconsistent state on save...
       this.tasklistPlugin.setTaskSolutionUri(ts, tasklistSolution.uri);
       return tasklistSolution;
     }));
@@ -100,6 +105,12 @@ export default Component.extend({
       this.tasklistPlugin.addObserver('tasklistData.[]',
                                       () => {return this.tasklistObserver.perform();});
     }
+  },
+
+  willDestroyElement(){
+    if(this.tasklistPlugin)
+      this.tasklistPlugin.flushTaskData(this.rawTasklistsData);
+    this._super(...arguments);
   },
 
   sortByIndexAsc(a, b){

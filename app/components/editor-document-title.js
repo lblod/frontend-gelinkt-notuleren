@@ -2,6 +2,7 @@ import { schedule } from '@ember/runloop';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import  { computed } from '@ember/object';
+import { task } from 'ember-concurrency';
 
 export default Component.extend({
   active: false,
@@ -30,16 +31,16 @@ export default Component.extend({
 
   }),
 
-  titleObserver(){
+  titleObserver: task(function *(){
     this.set('generatedTitle', this.titlePlugin.title);
-  },
+  }).keepLatest(),
 
   didReceiveAttrs(){
     this._super(...arguments);
     this.set('overruledTitle', this.editorDocument.title || '');
 
     if(this.titlePlugin)
-      this.titlePlugin.addObserver('title', this.titleObserver.bind(this));
+      this.titlePlugin.addObserver('title', () => { return this.titleObserver.perform(); });
   },
 
   actions:{
