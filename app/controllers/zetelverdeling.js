@@ -5,7 +5,7 @@ export default Controller.extend({
   resultatenSortering: ['isResultaatVoor.lijstnaam'],
   resultaten: sort('model.resultaten', 'resultatenSortering'),
   zetels: computed('resultaten', function() {
-    const zetels = {};
+    const zetels = { totaal:0};
     this.model.resultaten.forEach((r) => {
       const lijstnaam = r.get('isResultaatVoor.lijstnaam');
       if (lijstnaam in zetels) {
@@ -14,6 +14,7 @@ export default Controller.extend({
       else {
         zetels[lijstnaam] = 1;
       }
+      zetels['totaal'] = zetels['totaal'] + 1;
     });
     return zetels;
   })
