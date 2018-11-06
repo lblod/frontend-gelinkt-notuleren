@@ -119,18 +119,19 @@
   }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
-        content: "\f06e \00A0 \00A0 Behandeling van open agendapunt";
+        content: "\f06e \00A0 \00A0 Behandeling van open agendapunt: Besluit";
         font-family: fontawesome, flanders-sans, sans-serif;
     }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:besloten"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
-        content: "\f07e \00A0 \00A0 Behandeling van besloten agendapunt";
+        content: "\f07e \00A0 \00A0 Behandeling van besloten agendapunt: Besluit";
     }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"]:before {
         content: "\f06e \00A0 \00A0 Behandeling van open agendapunt: Aanstellingsbesluit";
         font-family: fontawesome, flanders-sans, sans-serif;
     }
+
 
       [typeof="mandaat:Mandataris"]:before,
       [property="ext:bekrachtigtAanstellingVan"]:before {
@@ -170,11 +171,11 @@
       // }
 
     [property="eli:title"]:before {
-      content: "Titel agendapunt";
+      content: "Titel besluit";
     }
 
     [property="eli:description"]:before {
-      content: "Beschrijving agendapunt";
+      content: "Beschrijving besluit";
     }
 
     // [property="dc:subject"]:before {
@@ -186,20 +187,20 @@
     }
 
       [property="eli:cites"]:before {
-        content: "Legale verschijning";
-      }
-
-      [property="eli:artikel"]:before {
-        content: "Artikel";
+        content: "Citaat";
       }
 
     [property="prov:value"]:before {
-      content: "Besluit";
+      content: "Inhoud";
     }
 
       // [property="eli:has_part"] [property="prov:value"]:before {
       //   content: normal;
       // }
+
+      [property="eli:has_part"][typeof="besluit:Artikel"]:before {
+        content: "Artikel";
+      }
 
       [property="eli:has_part"]:before {
         content: "Onderdeel";
@@ -276,4 +277,3 @@
   //     content: "Heeft voorstander"; // wordt nu  nog niet gebruikt
   //   }
 }
-
