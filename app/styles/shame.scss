@@ -48,6 +48,10 @@ input.input-field {
   font-weight: normal;
 }
 
+.modal-dialog.modal-dialog--sectioned .modal-dialog__content {
+  max-height: 75vh;
+}
+
 
 /* ==========================================================================
     Modals
