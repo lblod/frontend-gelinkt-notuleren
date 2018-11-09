@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
     "rdfa-editor-fractievorming-plugin",
     "rdfa-editor-scroll-to-plugin",
@@ -17,6 +18,7 @@ export default {
     "rdfa-editor-personen-plugin"
   ],
   all: [
+    "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
     "rdfa-editor-fractievorming-plugin",
     "rdfa-editor-scroll-to-plugin",
