@@ -15,7 +15,7 @@
           <div class="annotation-structure"><!-- Behandeling van agendapunt -->
             <div class="annotation-structure"><!-- Document informatie -->
               <p class="text-fade uppercase u-spacer--small">Agendapunt van
-                {{get (await zitting.bestuursorgaan) 'naam'}},
+                {{get (await zitting.bestuursorgaan.isTijdsspecialisatieVan) 'naam'}},
                 <br>zitting van {{moment-format zitting.geplandeStart 'D MMMM YYYY'}}
               </p>
               {{{model.afgeleidUit}}}
