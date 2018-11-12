@@ -19,6 +19,7 @@
     content: "Datum goedkeuring verkiezing";
   }
 
+  [typeof="besluit:Bestuurseenheid"]:before,
   [typeof="besluit:Bestuurseenheid"]:before {
     content: "Bestuurs-eenheid";
   }

@@ -40,6 +40,11 @@
             </div>
           </div>
           <div class="sidebar__footer">
+            <p class="smaller">Momenteel ingelogd voor {{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}} als:
+              <ul class="bullet-list">
+                {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
+              </ul>
+            </p>
             {{acmidm-logout class="button button--alt button--block"}}
           </div>
         </div>

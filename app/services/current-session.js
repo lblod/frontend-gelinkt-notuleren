@@ -31,5 +31,9 @@ export default Service.extend({
   }),
   group: computed('_group', function() {
     return this.get('waitForIt').perform('_group');
+  }),
+  roles: computed('_roles', function() {
+    return this.get('waitForIt').perform('_roles');
   })
+
 });
