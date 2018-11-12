@@ -323,8 +323,8 @@
 [data-flagged-remove="complete"] {
   min-height: 1.6rem;
   display: inline;
-  cursor: text;
-  background-color: rgba($primary-blue, 0.25);
+  cursor: text !important;
+  background-color: rgba($primary-blue, 0.25) !important;
   box-shadow: -2px 0 0 $primary-blue;
 }
 
