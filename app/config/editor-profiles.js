@@ -14,7 +14,8 @@ export default {
     "rdfa-editor-standard-template-plugin",
     "rdfa-editor-date-plugin",
     "rdfa-editor-citaten-plugin",
-    "rdfa-editor-personen-plugin"
+    "rdfa-editor-personen-plugin",
+    "rdfa-editor-mandaat-plugin"
   ],
   all: [
     "rdfa-editor-aanwezigen-plugin",
@@ -32,7 +33,8 @@ export default {
     "rdfa-editor-standard-template-plugin",
     "rdfa-editor-date-plugin",
     "rdfa-editor-citaten-plugin",
-    "rdfa-editor-personen-plugin"
+    "rdfa-editor-personen-plugin",
+    "rdfa-editor-mandaat-plugin"
   ],
   none: []
 };
