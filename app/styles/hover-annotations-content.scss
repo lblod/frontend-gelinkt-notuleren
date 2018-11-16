@@ -116,20 +116,29 @@
   /* -------------------- Behandeling agendapunt ------------------------- */
 
   [typeof="besluit:BehandelingVanAgendapunt"]:before {
-    // content: "Behandeling van agendapunt"
+    content: "Behandeling van agendapunt"
   }
 
+  	[typeof="besluit:Besluit"]:before {
+  		content: "Besluit";
+  	}
+
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
-        content: "\f06e \00A0 \00A0 Behandeling van open agendapunt: Besluit";
+        content: "\f06e \00A0 \00A0 Open agendapunt";
         font-family: fontawesome, flanders-sans, sans-serif;
     }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:besloten"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
-        content: "\f07e \00A0 \00A0 Behandeling van besloten agendapunt: Besluit";
+        content: "\f07e \00A0 \00A0 Besloten agendapunt";
     }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"]:before {
-        content: "\f06e \00A0 \00A0 Behandeling van open agendapunt: Aanstellingsbesluit";
+        content: "\f06e \00A0 \00A0 Open agendapunt: aanstellingsbesluit";
+        font-family: fontawesome, flanders-sans, sans-serif;
+    }
+
+    [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:besloten"] + [property="dc:subject"] + [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"]:before {
+        content: "\f070 \00A0 \00A0 Open agendapunt: aanstellingsbesluit";
         font-family: fontawesome, flanders-sans, sans-serif;
     }
 
@@ -192,7 +201,7 @@
       }
 
     [property="prov:value"]:before {
-      content: "Inhoud";
+      content: "Besluit";
     }
 
       // [property="eli:has_part"] [property="prov:value"]:before {
