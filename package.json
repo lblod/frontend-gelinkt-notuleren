@@ -34,7 +34,7 @@
     "@lblod/ember-rdfa-editor-date-plugin": "^0.7.7",
     "@lblod/ember-rdfa-editor-document-tasklist-plugin": "^0.1.5",
     "@lblod/ember-rdfa-editor-document-title-plugin": "^0.1.1",
-    "@lblod/ember-rdfa-editor-fractievorming-plugin": "^0.1.4",
+    "@lblod/ember-rdfa-editor-fractievorming-plugin": "^0.1.5",
     "@lblod/ember-rdfa-editor-gemeenteraadsleden-aanstelling-plugin": "0.3.1",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "^0.1.6",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "^0.6.11",
