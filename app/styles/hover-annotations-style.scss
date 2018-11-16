@@ -170,6 +170,8 @@
   [property="eli:number"],
   [property="eli:artikel"],
 
+
+  [property="ext:bekrachtigtAanstellingVan"],
   [typeof="mandaat:Mandataris"],
   [property="mandaat:start"],
   [property="org:holds"],
@@ -262,4 +264,11 @@
       }
     }
   }
+}
+
+.rdfa-editor table {
+    [typeof]:before,
+    [property]:before {
+      content: normal !important;
+    }
 }
