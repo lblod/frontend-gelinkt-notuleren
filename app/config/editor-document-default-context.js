@@ -6,7 +6,8 @@ const defaultContext = {
     mandaat: 'http://data.vlaanderen.be/ns/mandaat#',
     besluit: 'http://data.vlaanderen.be/ns/besluit#',
     ext: 'http://mu.semte.ch/vocabularies/ext/',
-    person: 'http://www.w3.org/ns/person#'
+    person: 'http://www.w3.org/ns/person#',
+    persoon: 'http://data.vlaanderen.be/ns/persoon#'
   }
 };
 
