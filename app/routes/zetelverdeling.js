@@ -4,15 +4,26 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: service(),
   store: service(),
-  async model() {
+  async model(params) {
     const eenheid = await this.currentSession.group;
+    const eenheidType = await eenheid.classificatie;
+    var classificatie;
+    if (eenheidType.id === '5ab0e9b8a3b2ca7c5e000001')
+      classificatie = 'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005';
+    else if (eenheidType.id === '5ab0e9b8a3b2ca7c5e000000') // provincie
+      classificatie = 'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000c';
+    else if (eenheidType.id === '5ab0e9b8a3b2ca7c5e000003') // district
+      classificatie = 'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000a';
+    else
+      return {eenheid, resultaten: []};
     const bestuursorganen = await this.store.query('bestuursorgaan', {filter: {
       "is-tijdsspecialisatie-van": {
         bestuurseenheid: {':id:': eenheid.id},
-        "classificatie": {':uri:': 'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005'}
-      }
+        "classificatie": {':uri:': classificatie}
+      },
+      "binding-start": "2019-01-01"
     }});
-    const bestuursorgaan = bestuursorganen.find((r) =>  r.bindingStart == "2019-01-01");
+    const bestuursorgaan = bestuursorganen.firstObject;
     const resultaten = await this.store.query('verkiezingsresultaat', {
       filter: {
         'is-resultaat-voor': { 'rechtstreekse-verkiezing': {'stelt-samen': {':id:': bestuursorgaan.id }}},
