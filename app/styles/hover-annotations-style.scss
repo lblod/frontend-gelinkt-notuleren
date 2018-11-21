@@ -1,7 +1,24 @@
+
 /* ==========================================================================
   Annotations
   Style the annotations on hover here.
  ========================================================================== */
+
+/* discover what to type */
+
+.rdfa-editor {
+  span.mark-highlight-manual {
+    background-color: rgba($primary-blue, 0.4);
+    font-weight: 500;
+  }
+
+  .delete-me-mark-highlight-make-me-plugin {
+    background-color: pink;
+    font-weight: 500;
+  }
+}
+
+/* editor annotations styling */
 
 .rdfa-editor {
 
@@ -31,7 +48,8 @@
   // }
 
   /* make todo's visible */
-
+  .vartodo,
+  .propertytodo,
   [property="ext:TODO"],
   [var="ext:TODO"] {
     border: 1px solid purple;
@@ -172,8 +190,8 @@
   [property="eli:number"],
   [property="eli:artikel"],
 
-
   [property="ext:bekrachtigtAanstellingVan"],
+  [typeof="http://www.w3.org/ns/person#Person"],
   [typeof="mandaat:Mandataris"],
   [property="mandaat:start"],
   [property="org:holds"],
