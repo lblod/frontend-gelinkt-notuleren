@@ -148,6 +148,10 @@
         content: "Aanstelling mandataris";
       }
 
+      [typeof="http://www.w3.org/ns/person#Person"]:before {
+      	content: "Persoon";
+      }
+
       [property="org:holds"]:before {
         content: "Mandaat";
       }
