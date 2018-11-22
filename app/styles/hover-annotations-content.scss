@@ -93,12 +93,12 @@
     //   // content: "Agendapunt"; wordt niet getoond, volgende niveau wel
     // }
 
-    [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + [property="dc:title"]:before {
-      content: "Gepland openbaar agendapunt";
+    [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + span + [property="dc:title"]:before {
+      content: "Titel gepland openbaar agendapunt";
     }
 
-    [property="besluit:heeftAgendapunt"] [property="besluit:geplandBesloten"] + [property="dc:title"]:before {
-      content: "Gepland besloten agendapunt";
+    [property="besluit:heeftAgendapunt"] [property="besluit:geplandBesloten"] + span + [property="dc:title"]:before {
+      content: "Titel gepland besloten agendapunt";
     }
 
     // [property="besluit:aangebrachtNa"]:before {
