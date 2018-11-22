@@ -99,7 +99,7 @@
         }
     }
 
-    [property="besluit:aangebrachtNa"],
+    [property="besluit:aangebrachtNa"]
     [property="besluit:gebeurtNa"],
     [property="eli:language"],
     [property="ext:metadata"],
@@ -129,4 +129,12 @@
             right: -10rem !important;
         }
     }
+
+	[property^="ext:insert"] {
+		border-color: $primary-yellow;
+
+		&:before {
+			background-color: $primary-yellow;
+		}
+	}
 }
