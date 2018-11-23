@@ -59,6 +59,8 @@
         </label>
       </td> -->
       <td>{{row.title}}</td>
+      <td>{{moment-calendar row.updatedOn}}</td>
+      <td>{{moment-calendar row.createdOn}}</td>
       <td class="u-align-right">{{editor-status-pill status=(await row.status)}}</td>
     {{/c.body}}
   {{/t.content}}
