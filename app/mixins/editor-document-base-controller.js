@@ -94,10 +94,12 @@ export default Mixin.create({
     let documentToSave = toNewDocument ? this.store.createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
     let origHtml = this.editorDomNode.innerHTML;
     let innerHtml = this.cleanUpEditorDocumentInnerHtml(origHtml);
-    let createdOn = editorDocument.get('createdOn') || new Date().toISOString();
+    let createdOn = editorDocument.get('createdOn') || new Date();
+    let updatedOn = new Date();
     let title = editorDocument.get('title');
+    let content = editorDocument.get('content');
     let status = newStatus ? newStatus : editorDocument.get('status');
-    documentToSave.setProperties({content: innerHtml, status, createdOn, title});
+    documentToSave.setProperties({content: innerHtml, status, createdOn, updatedOn, title});
     await documentToSave.save();
 
     documentToSave.set('content', origHtml); //don't redraw stripped stuff
