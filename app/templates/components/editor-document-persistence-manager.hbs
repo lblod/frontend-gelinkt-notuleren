@@ -2,6 +2,8 @@
   {{#if isPublishAgendaAllowed}}
     {{#if isTrashingAllowed}}
       {{wu-button label="Verwijder concept" isNarrow=true isLink=true isDarkLink=true onClick=(action "sendToTrash")}}
+    {{else}}
+    	{{#link-to 'inbox.index' class="button button--narrow button--link button--link--dark"}}Verwijder document{{/link-to}}
     {{/if}}
     {{wu-button label="Publiceer agendapunten" isNarrow=true isAlt=true onClick=(action "publish")}}
     {{wu-button label="Bewaar concept" isNarrow=true onClick=(action "save")}}
