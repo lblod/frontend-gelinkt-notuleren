@@ -1,8 +1,10 @@
-import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import DefaultQueryParamsMixin from 'ember-data-table/mixins/default-query-params';
+import { computed } from '@ember/object';
 
 export default Controller.extend(DefaultQueryParamsMixin, {
+  currentSession: service(),
   statusIds: null,
   status: computed('statusIds', function() {
     return this.statusIds.join(',');

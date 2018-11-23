@@ -2,16 +2,21 @@
      sort=sort page=page size=size class="container-flex--contain" as |t|}}
   {{#t.menu as |menu|}}
     {{#menu.general}}
-      <div class="grid">
-        <div class="col--8-12">
-          <div class="search-box">
-            {{text-search filter=title placeholder="Zoek op zitting"}}
-          </div>
-        </div>
-        <div class="col--4-12">
-
-        </div>
-      </div>
+	    <div class="u-padding--round--tiny">
+	      <div class="grid">
+	        <div class="col--7-12">
+	          <h1 class="h1 u-spacer--none">Goedgekeurde notulen {{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</h1>
+{{!-- 	          <ul class="bullet-list">
+	            {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
+	          </ul> --}}
+	        </div>
+	        <div class="col--5-12">
+	          <div class="search-box u-spacer--top--tiny">
+	            {{text-search filter=title placeholder="Zoek naar zitting"}}
+	          </div>
+	        </div>
+	      </div>
+	    </div>
     {{/menu.general}}
   {{/t.menu}}
   {{#t.content as |c|}}

@@ -5,6 +5,12 @@
 
 .show-rdfa-blocks {
 
+  /* -------------------- Guiding tags ------------------------- */
+
+	[property^="ext:insert"]:before {
+		content: "Klik om de juiste optie selecteren";
+	}
+
   /* -------------------- General tags ------------------------- */
 
   [datatype="xsd:dateTime"]:before {

@@ -1,14 +1,43 @@
 <div class="grid u-spacer--tiny">
   <div class="col--6-12">
-    {{#link-to 'inbox.index' class="smaller link-dark"}}&leftarrow; Terug naar overzicht{{/link-to}}
+    {{#link-to 'inbox.index' class="smaller link-dark"}}&leftarrow; Terug naar overzicht notulen{{/link-to}}
+		<label class="pill pill--white u-spacer--left--tiny">
+		  <span>{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
+		</label>
   </div>
   <div class="col--6-12 u-align-right">
-    {{#if editorDocument.createdOn}}
-      <p class="small">
-        {{moment-from editorDocument.createdOn}} aangemaakt
-        {{editor-status-pill status=(await editorDocument.status)}}
-      </p>
-    {{/if}}
+    {{#if editorDocument.isNew}}
+	    <p class="smaller">
+				<label class="pill pill--primary-yellow">
+					<span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
+					<span>Concept niet bewaard</span>
+				</label>
+			</p>
+		{{else}}
+
+	    {{#if editorDocument.createdOn}}
+		    <p class="smaller">
+		      Bewaard {{moment-calendar editorDocument.createdOn}}
+		      {{editor-status-pill status=(await editorDocument.status)}}
+		    </p>
+	    {{else}}
+	    	<p class="smaller">
+		    	{{#if editorDocument.isDirty}}
+					  <span class="smaller u-padding--right--tiny">
+							<span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
+							<span>Wijzigingen niet bewaard</span>
+						</span>
+			    	{{editor-status-pill status=(await editorDocument.status)}}
+				  {{else}}
+					  <span class="smaller u-padding--right--tiny">
+							<span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
+							<span>Wijzigingen niet bewaard</span>
+						</span>
+			    	{{editor-status-pill status=(await editorDocument.status)}}
+			    {{/if}}
+			  </p>
+	    {{/if}}
+		{{/if}}
   </div>
 </div>
 <div class="grid">

@@ -38,7 +38,7 @@
     }
 
     .tasklist.tasklist--open + .container-flex--contain .editor__paper {
-      left: 0;
+      left: 20rem;
       min-width: 470px;
     }
 
@@ -57,6 +57,15 @@
       td {
         font-size: 1.4rem;
         padding: 0.8rem;
+      }
+
+      .button--small {
+      	font-size: 1.3rem;
+      	font-weight: 400;
+      }
+
+      .button-group .button {
+      	margin-bottom: 0.5rem;
       }
     }
 
@@ -341,46 +350,45 @@
   }
 }
 
-
 /* ==========================================================================
   Annotations trigger
   Style the annotations trigger here.
  ========================================================================== */
 
-/* plusje aan de zijkant */
-.editor-commands {
-    margin-top: 0.5rem;
-    right: 0;
-    width: 9em;
+	/* plusje aan de zijkant */
+	.editor-commands {
+    margin-top: 3rem;
+    width: 22rem;
     position: fixed;
     z-index: 900;
-}
+    right: 1rem;
+	}
 
-button.button.annotation-suggestion--trigger {
-    background-color: $white;
-    color: $gray;
-    border: 1px solid $blue-gray-light;
-    display: block;
-    width: 3rem;
-    height: 3rem;
-    padding: 0 0 0.45rem;
-    border-radius: 100%;
-    text-align: center;
-    margin-top: -1rem;
-    line-height: 0;
-    font-size: 3rem;
-}
+	button.button.annotation-suggestion--trigger {
+	    background-color: $white;
+	    color: $gray;
+	    border: 1px solid $blue-gray-light;
+	    display: block;
+	    width: 3rem;
+	    height: 3rem;
+	    padding: 0 0 0.45rem;
+	    border-radius: 100%;
+	    text-align: center;
+	    margin-top: -1rem;
+	    line-height: 0;
+	    font-size: 3rem;
+	}
 
-button.button.annotation-suggestion--trigger:after {
-    content:"Voeg sjabloon in";
-    display: block;
-    position: absolute;
-    font-size: 1.4rem;
-    color: $gray-dark;
-    left: 3.65rem;
-    z-index: 900;
-    top: 1.5rem;
-}
+	button.button.annotation-suggestion--trigger:after {
+	    content:"Voeg sjabloon in";
+	    display: block;
+	    position: absolute;
+	    font-size: 1.4rem;
+	    color: $gray-dark;
+	    left: 3.65rem;
+	    z-index: 900;
+	    top: 1.5rem;
+	}
 
 
 
@@ -418,4 +426,20 @@ button.button.annotation-suggestion--trigger:after {
     left: auto;
     top: 55rem;
     right: -15rem;
+}
+
+/* ==========================================================================
+  Loading events
+  Style the loading events here.
+ ========================================================================== */
+
+.editor-loading-events {
+	position: fixed;
+  width: 22rem;
+  bottom: 2rem;
+  right: 1rem;
+
+  i.vi.vi-check {
+  	color: $primary-blue;
+  }
 }
