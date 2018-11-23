@@ -3,6 +3,12 @@
   Some parts will be reused, but most of them will not.
  ========================================================================== */
 
+/* ember data table red color override */
+
+.data-table-menu {
+	color: $gray-dark;
+}
+
 /* restyling annotation positions and styling for demo */
 .modal-dialog--hint {
   position: fixed !important;
