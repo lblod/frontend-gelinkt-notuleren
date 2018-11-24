@@ -2,32 +2,46 @@
      sort=sort page=page size=size class="container-flex--contain" as |t|}}
   {{#t.menu as |menu|}}
     {{#menu.general}}
-      <div class="grid">
-        <div class="col--8-12">
-          <div class="search-box">
-            {{text-search filter=title placeholder="Zoek op zitting"}}
-          </div>
-        </div>
-      </div>
+	    <div class="u-padding--round--tiny">
+	      <div class="grid">
+	        <div class="col--7-12">
+	          <h1 class="h1 u-spacer--none">Prullenbak notulen {{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</h1>
+{{!-- 	          <ul class="bullet-list">
+	            {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
+	          </ul> --}}
+	        </div>
+	        <div class="col--5-12">
+	          <div class="search-box u-spacer--top--tiny">
+	            {{text-search filter=title placeholder="Zoek naar zitting"}}
+	          </div>
+	        </div>
+	      </div>
+	    </div>
     {{/menu.general}}
     {{#menu.selected as |selection datatable|}}
-      <div class="grid">
-        <div class="col--6-12">
-          <div class="search-box">
-            {{text-search filter=title placeholder="Zoek op zitting"}}
-          </div>
-        </div>
-        <div class="col--6-12">
-          <ul class="data-table__actions__list data-table__actions__list--right">
-            <li class="data-table__action" data-table-action="">
-              <button class="data-table__action__toggle data-table__action__toggle--contract-xs" {{action "moveToConcepts" selection datatable}}>
-                <i class="fa fa-rotate-left" aria-hidden="true"></i>
-                <span>Verplaats selectie terug naar ontwerpen</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
+	    <div class="u-padding--round--tiny">
+	      <div class="grid">
+	        <div class="col--7-12">
+	          <h1 class="h1 u-spacer--none">Prullenbak notulen {{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</h1>
+	          <ul class="data-table__actions__list u-spacer--top--tiny">
+	            <li class="data-table__action" data-table-action="">
+	              <button class="data-table__action__toggle data-table__action__toggle--contract-xs" {{action "moveToConcepts" selection datatable}}>
+	                <i class="fa fa-rotate-left" aria-hidden="true"></i>
+	                <span>Verplaats selectie terug naar ontwerpen</span>
+	              </button>
+	            </li>
+	          </ul>
+{{!-- 	          <ul class="bullet-list">
+	            {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
+	          </ul> --}}
+	        </div>
+	        <div class="col--5-12">
+	          <div class="search-box u-spacer--tb--tiny">
+	            {{text-search filter=title placeholder="Zoek naar zitting"}}
+	          </div>
+	        </div>
+	      </div>
+	    </div>
     {{/menu.selected}}
   {{/t.menu}}
   {{#t.content as |c|}}
@@ -45,6 +59,8 @@
         </label>
       </td> -->
       <td>{{row.title}}</td>
+      <td>{{moment-calendar row.updatedOn}}</td>
+      <td>{{moment-calendar row.createdOn}}</td>
       <td class="u-align-right">{{editor-status-pill status=(await row.status)}}</td>
     {{/c.body}}
   {{/t.content}}
