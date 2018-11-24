@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-installatievergadering-plugin", 
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
     "rdfa-editor-fractievorming-plugin",
@@ -19,6 +20,7 @@ export default {
     "rdfa-editor-mandaat-plugin"
   ],
   all: [
+    "rdfa-editor-installatievergadering-plugin",
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
     "rdfa-editor-fractievorming-plugin",
