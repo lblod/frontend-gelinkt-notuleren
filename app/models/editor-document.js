@@ -8,6 +8,7 @@ export default Model.extend({
   content: attr(),
   context: attr('string', { defaultValue: defaultContext}),
   createdOn: attr('datetime'),
+  updatedOn: attr('datetime'),
   starred: attr(),
   origin: attr(),
   status: belongsTo('editor-document-status', {inverse: null }),
