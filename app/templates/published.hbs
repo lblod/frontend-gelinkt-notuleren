@@ -44,7 +44,7 @@
                         <a href="#" class="link--icon link--disabled">Besluitenlijst {{wu-icon "vi-clock"}}</a>
                       {{/if}}
 
-                      {{#if zitting.notulen}}
+                      {{#if zitting.isPublished}}
                         {{#link-to 'published.zitting.notulen' zitting.id class="link--icon"}}
                           Notulen {{wu-icon "vi-document-small"}}
                         {{/link-to}}
