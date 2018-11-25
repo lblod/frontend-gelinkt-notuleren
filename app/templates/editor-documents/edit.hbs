@@ -131,14 +131,27 @@
 {{/if}}
 
 {{#if isProcessing}}
-	<div class="u-padding--round--large">
-	  <div class="grid">
-	    <div class="col--12-12 u-align-center">
-	    	<h2 class="u-spacer--top--large">Bezig met publiceren</h2>
-	      <div class="loader"><span class="u-visually-hidden">Aan het verwerken</span></div>
-	    </div>
-	  </div>
+<div class="editor-container container-flex--scroll">
+	<div class="editor">
+		<div class="grid grid--align-center">
+	    <div class="col--7-12">
+				<div class="editor__paper scanner">
+
+					<div class="scanner__text">
+						<div class="badge badge--accent badge--l badge--initials">
+							<span class="loader"><span class="u-visually-hidden">Aan het verwerken</span></span>
+						</div>
+						<h3 class="h3">Bezig met publiceren</h3>
+					</div>
+
+					<span class="scanner__bar"></span>
+
+					{{{editorDocument.content}}}
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 {{else}}
   {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit") onUpdateTasklists=(action "updateTasklists")}}
 {{/if}}
