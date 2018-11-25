@@ -9,7 +9,10 @@
 {{/app-chrome}}
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
-  {{#wu-modal title="Geef uw document een naam" onClose=(action 'closeValidationModal') as |m|}}
+  {{#wu-modal
+  	title="Geef uw document een naam"
+		dialog-class="modal-dialog--wide modal-dialog--sectioned"
+  	onClose=(action 'closeValidationModal') as |m|}}
     {{#m.content}}
       Klik op de titel om uw document een naam te geven.
     {{/m.content}}
@@ -20,7 +23,10 @@
 {{/if}}
 
 {{#if modalTransitionToTrash}}
-  {{#wu-modal title="Weet u zeker dat u uw document naar de prullenmand wil verplaatsen?" onClose=(action 'onClosePublishStatusModal') as |m|}}
+  {{#wu-modal
+  	title="Weet u zeker dat u uw document naar de prullenmand wil verplaatsen?"
+		dialog-class="modal-dialog--wide modal-dialog--sectioned"
+  	onClose=(action 'onClosePublishStatusModal') as |m|}}
     {{#m.buttons as |b|}}
       {{b.button label="Ja, verplaats naar prullenmand" onClick=(action 'terminatePublishFlow')}}
       {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
@@ -28,45 +34,111 @@
   {{/wu-modal}}
 {{/if}}
 {{#if modalTransitionToAgendaPublished}}
-  {{#wu-modal title="Uw agendapunten worden gepubliceerd" onClose=(action 'onClosePublishStatusModal') as |m|}}
+  {{#wu-modal
+  	title="Uw agenda wordt gepubliceerd"
+		dialog-class="modal-dialog--wide modal-dialog--sectioned"
+  	onClose=(action 'onClosePublishStatusModal') as |m|}}
     {{#m.content}}
-      De openbare punten worden publiek gemaakt. U kan deze actie niet omkeren.
+	    <div class="u-padding--round--small">
+		    <div class="grid">
+		    	<div class="col--4-12">
+		    		<h2 class="h6 uppercase text-fade u-spacer--bottom--small">Waar wordt de agenda gepubliceerd</h2>
+			      <p class="u-spacer">De openbare agenda worden publiek gemaakt, en is terug te vinden op <a href="#" target="_blank">link...</a>.</p>
+			      <p>De publicatie wordt voltooid binnen de 24 uur. U kan de publicatie niet omkeren.</p>
+			    </div>
+		    	<div class="col--7-12 push--1-12">
+		    		<h2 class="h6 uppercase text-fade u-spacer--bottom--small">Voorbeeld van uw publicatie</h2>
+		    		<div class="published-example published-example--agenda">
+			    		{{{editorDocument.content}}}
+		    		</div>
+		    	</div>
+		    </div>
+		  </div>
     {{/m.content}}
-    {{#m.buttons as |b|}}
-      {{b.button label="OK" onClick=(action 'terminatePublishFlow')}}
-      {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
-    {{/m.buttons}}
+    <div class="modal-dialog__footer">
+	    {{#m.buttons as |b|}}
+	      {{b.button label="Publiceer agendapunten" onClick=(action 'terminatePublishFlow')}}
+	      {{b.button label="Annuleer" class="button--alt button--narrow" onClick=(action 'onClosePublishStatusModal') icon="vi-cross"}}
+	    {{/m.buttons}}
+	  </div>
   {{/wu-modal}}
 {{/if}}
 {{#if modalTransitionToBesluitenlijstPublished}}
-  {{#wu-modal title="De besluitenlijst wordt gepubliceerd" onClose=(action 'onClosePublishStatusModal') as |m|}}
+  {{#wu-modal
+  	title="De besluitenlijst wordt gepubliceerd"
+		dialog-class="modal-dialog--wide modal-dialog--sectioned"
+  	onClose=(action 'onClosePublishStatusModal') as |m|}}
     {{#m.content}}
-      De openbare besluitenlijst wordt publiek gemaakt voor de burgers. De volledige besluitenlijst wordt beschikbaar gemaakt voor toezicht. U kan deze actie niet omkeren.
+	    <div class="u-padding--round--small">
+		    <div class="grid">
+		    	<div class="col--4-12">
+		    		<h2 class="h6 uppercase text-fade u-spacer--bottom--small">Waar wordt de besluitenlijst gepubliceerd</h2>
+		    		<ul class="bullet-list u-spacer--none">
+		    			<li>De openbare besluitenlijst wordt publiek gemaakt, en is terug te vinden op <a href="#" target="_blank">link...</a></li>
+		    			<li>De besluitenlijst wordt beschikbaar gemaakt voor de toezichthoudende overheid, op <a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a></li>
+		    			<li>De mandaten die behandeld worden in uw besluiten worden eveneens publiek gemaakt, en zijn terug te vinden op <a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a> en op <a href="http://mandaten.lokaalbestuur.vlaanderen.be" target="_blank">mandaten.lokaalbestuur.vlaanderen.be</a>.</li>
+		    		</ul>
+			      <p>De publicatie wordt voltooid binnen de 24 uur. U kan de publicatie niet omkeren.</p>
+			    </div>
+		    	<div class="col--7-12 push--1-12">
+		    		<h2 class="h6 uppercase text-fade u-spacer--bottom--small">Voorbeeld van uw publicatie</h2>
+		    		<div class="published-example published-example--besluitenlijst">
+			    		{{{editorDocument.content}}}
+		    		</div>
+		    	</div>
+		    </div>
+		  </div>
     {{/m.content}}
-    {{#m.buttons as |b|}}
-      {{b.button label="OK" onClick=(action 'terminatePublishFlow')}}
-      {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
-    {{/m.buttons}}
+    <div class="modal-dialog__footer">
+	    {{#m.buttons as |b|}}
+	      {{b.button label="Publiceer besluitenlijst" onClick=(action 'terminatePublishFlow')}}
+	      {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
+	    {{/m.buttons}}
+	  </div>
   {{/wu-modal}}
 {{/if}}
 {{#if modalTransitionToSignedPublished}}
-  {{#wu-modal title="Uw notulen worden gepubliceerd" onClose=(action 'onClosePublishStatusModal') as |m|}}
+  {{#wu-modal
+  	title="Uw notulen worden gepubliceerd"
+		dialog-class="modal-dialog--wide modal-dialog--sectioned"
+  	onClose=(action 'onClosePublishStatusModal') as |m|}}
     {{#m.content}}
-      De openbare notulen worden publiek gemaakt voor de burgers. De volledige notulen wordt beschikbaar gemaakt voor toezicht. U kan deze actie niet omkeren.
+	    <div class="u-padding--round--small">
+		    <div class="grid">
+		    	<div class="col--4-12">
+		    		<h2 class="h6 uppercase text-fade u-spacer--bottom--small">Waar worden de notulen gepubliceerd</h2>
+		    		<ul class="bullet-list u-spacer--none">
+		    			<li>De openbare notulen worden publiek gemaakt voor burgers, en is terug te vinden op <a href="#" target="_blank">link...</a></li>
+		    		</ul>
+			      <p>De publicatie wordt voltooid binnen de 24 uur. U kan de publicatie niet omkeren.</p>
+			    </div>
+		    	<div class="col--7-12 push--1-12">
+		    		<h2 class="h6 uppercase text-fade u-spacer--bottom--small">Voorbeeld van uw publicatie</h2>
+		    		<div class="published-example published-example--notulen">
+			    		{{{editorDocument.content}}}
+		    		</div>
+		    	</div>
+		    </div>
+		  </div>
     {{/m.content}}
-    {{#m.buttons as |b|}}
-      {{b.button label="OK" onClick=(action 'terminatePublishFlow')}}
-      {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
-    {{/m.buttons}}
+    <div class="modal-dialog__footer">
+	    {{#m.buttons as |b|}}
+	      {{b.button label="Publiceer notulen" onClick=(action 'terminatePublishFlow')}}
+	      {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
+	    {{/m.buttons}}
+	  </div>
   {{/wu-modal}}
 {{/if}}
 
 {{#if isProcessing}}
-  <div class="grid">
-    <div class="col--12-12 u-align-center">
-      <div class="loader"><span class="u-visually-hidden">Aan het verwerken</span></div>
-    </div>
-  </div>
+	<div class="u-padding--round--large">
+	  <div class="grid">
+	    <div class="col--12-12 u-align-center">
+	    	<h2 class="u-spacer--top--large">Bezig met publiceren</h2>
+	      <div class="loader"><span class="u-visually-hidden">Aan het verwerken</span></div>
+	    </div>
+	  </div>
+	</div>
 {{else}}
   {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit") onUpdateTasklists=(action "updateTasklists")}}
 {{/if}}
