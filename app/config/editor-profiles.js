@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-installatievergadering-plugin",
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
     "rdfa-editor-fractievorming-plugin",
@@ -14,11 +15,12 @@ export default {
     "rdfa-editor-generic-model-plugin",
     "rdfa-editor-standard-template-plugin",
     "rdfa-editor-date-plugin",
-    "rdfa-editor-citaten-plugin",
-    "rdfa-editor-personen-plugin",
-    "rdfa-editor-mandaat-plugin"
+//    "rdfa-editor-citaten-plugin",
+//    "rdfa-editor-mandaat-plugin",
+    "rdfa-editor-personen-plugin"
   ],
   all: [
+    "rdfa-editor-installatievergadering-plugin",
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
     "rdfa-editor-fractievorming-plugin",
@@ -34,9 +36,9 @@ export default {
     "rdfa-editor-console-logger-plugin",
     "rdfa-editor-standard-template-plugin",
     "rdfa-editor-date-plugin",
-    "rdfa-editor-citaten-plugin",
-    "rdfa-editor-personen-plugin",
-    "rdfa-editor-mandaat-plugin"
+    //    "rdfa-editor-citaten-plugin",
+    //    "rdfa-editor-mandaat-plugin",
+    "rdfa-editor-personen-plugin"
   ],
   none: []
 };
