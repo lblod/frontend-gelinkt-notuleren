@@ -216,44 +216,46 @@
 
     /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */
 
-    [typeof="besluit:BehandelingVanAgendapunt"],
-    [property="ext:behandelt"],
-    [property="besluit:heeftAgendapunt"],
-    [typeof="besluit:Agendapunt"] {
-      display: block !important;
-      position: relative;
+    .editor__paper {
+	    [typeof="besluit:BehandelingVanAgendapunt"],
+	    [property="ext:behandelt"],
+	    [property="besluit:heeftAgendapunt"],
+	    [typeof="besluit:Agendapunt"] {
+	      display: block !important;
+	      position: relative;
 
-      .annotation--agendapunt--besloten__icon,
-      .annotation--agendapunt--open__icon {
-        font-size: 1.6rem;
-        position: absolute;
-        left: -2.75rem;
-        top: 0;
-        padding-left: 1px;
-        z-index: 2;
+	      .annotation--agendapunt--besloten__icon,
+	      .annotation--agendapunt--open__icon {
+	        font-size: 1.6rem;
+	        position: absolute;
+	        left: -2.75rem;
+	        top: 0;
+	        padding-left: 1px;
+	        z-index: 2;
 
-        // &:hover {
-        //   color: $primary-blue; // To be used when open/closed agendapunt plugin exists
-        // }
-      }
+	        // &:hover {
+	        //   color: $primary-blue; // To be used when open/closed agendapunt plugin exists
+	        // }
+	      }
 
-      .annotation--agendapunt--besloten__icon {
-        color: darken($primary-yellow, 15%);
-      }
+	      .annotation--agendapunt--besloten__icon {
+	        color: darken($primary-yellow, 15%);
+	      }
 
-      .annotation--agendapunt--open__icon {
-        color: $gray-light;
-      }
-    }
+	      .annotation--agendapunt--open__icon {
+	        color: $gray-light;
+	      }
+	    }
 
-    [typeof="besluit:BehandelingVanAgendapunt"]:hover {
-      .annotation--agendapunt--besloten__icon,
-      .annotation--agendapunt--open__icon,
-      .annotation--agendapunt--persoonlijk__icon {
-        opacity: 0;
-        transition: all 200ms;
-        left: -2rem;
-      }
+	    [typeof="besluit:BehandelingVanAgendapunt"]:hover {
+	      .annotation--agendapunt--besloten__icon,
+	      .annotation--agendapunt--open__icon,
+	      .annotation--agendapunt--persoonlijk__icon {
+	        opacity: 0;
+	        transition: all 200ms;
+	        left: -2rem;
+	      }
+	    }
     }
 
     .rdfa-annotations.show-rdfa-blocks {

@@ -6,16 +6,9 @@
 
 /* discover what to type */
 
-.rdfa-editor {
-  span.mark-highlight-manual {
-    background-color: rgba($primary-blue, 0.4);
-    font-weight: 500;
-  }
-
-  .delete-me-mark-highlight-make-me-plugin {
-    background-color: pink;
-    font-weight: 500;
-  }
+span.mark-highlight-manual {
+  background-color: rgba($primary-blue, 0.4);
+  font-weight: 500;
 }
 
 /* editor annotations styling */
