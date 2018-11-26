@@ -45,7 +45,6 @@ export default Mixin.create({
       return editorDocumentId => `/publish/notule/${editorDocumentId}`;
   },
 
-  isProcessing: false,
   displayPublishStatusModal: false,
 
   modalTransitionToTrash: computed('displayPublishStatusModal', function(){
@@ -110,25 +109,22 @@ export default Mixin.create({
     return await this.saveEditorDocument(editorDocument, publishStatus, true);
   },
 
-  async publishFlow(){
-    this.set('isProcessing', true);
+  publishFlow: task(function *(){
     try {
       let editorDocument = this.editorDocument;
       let publishStatus = this.nextStatus;
-      let newDocument = await this.publishDocument(editorDocument, publishStatus);
+      let newDocument = yield this.publishDocument(editorDocument, publishStatus);
       let apiEndPoint = this.getPublishApi(publishStatus);
       if(apiEndPoint){
-        await this.ajax.post(apiEndPoint(newDocument.get('id')));
+        yield this.ajax.post(apiEndPoint(newDocument.get('id')));
       }
-      this.set('isProcessing', false);
       this.transitionToRoute('/inbox');
     }
     catch(e){
-      this.set('isProcessing', false);
       alert('Fout bij publiceren: ' + e);
       throw e;
     }
-  },
+  }),
 
   async saveTasklists(){
     for(let tasklistSolution of this.tasklists){
@@ -160,17 +156,6 @@ export default Mixin.create({
       this.set('debug', info);
    },
 
-   async save(){
-     let editorDocument = this.editorDocument;
-
-     if(this.hasDocumentValidationErrors(editorDocument)){
-       this.set('validationErrors', true);
-       return;
-     }
-
-     await this.saveEditorDocument(editorDocument);
-   },
-
    sendToTrash(){
      this.set('nextStatus', this.getStatusFor('trashStatusId'));
      this.set('displayPublishStatusModal', true);
@@ -185,9 +170,9 @@ export default Mixin.create({
      this.set('displayPublishStatusModal', true);
    },
 
-   async terminatePublishFlow(){
+   terminatePublishFlow(){
      this.resetPublishStatusModal();
-     this.publishFlow();
+     this.publishFlow.perform();
    },
 
    onClosePublishStatusModal(){
