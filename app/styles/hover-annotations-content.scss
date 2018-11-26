@@ -63,7 +63,7 @@
     }
 
     [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
-      content: "Voorzitter van de vergadering";
+      content: "Voorzitter van de zitting";
     }
 
     [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftSecretaris"]:before {
@@ -177,7 +177,7 @@
     }
 
       // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
-      //   content: "Voorzitter van de vergadering"; // in zitting herhaald
+      //   content: "Voorzitter van de zitting"; // in zitting herhaald
       // }
 
       // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftSecretaris"]:before {
