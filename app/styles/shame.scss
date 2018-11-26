@@ -3,6 +3,33 @@
   Some parts will be reused, but most of them will not.
  ========================================================================== */
 
+/* spans in link lists replacing data */
+
+li.link-list__item span {
+	display: block;
+	padding: 1rem 1.5rem;
+}
+
+li.link-list__item > button.button {
+	padding: 1rem 1.5rem;
+	background-color: transparent;
+	color: $primary-blue;
+	border: none;
+	height: auto;
+	display: block;
+	width: 100%;
+	text-align: left;
+
+	&:hover {
+		background-color: $blue-gray-lightest;
+	}
+
+	&.button--disabled {
+		color: $gray;
+		pointer-events: none;
+	}
+}
+
 /* ember data table red color override */
 
 .data-table-menu {
