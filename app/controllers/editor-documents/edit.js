@@ -1,7 +1,12 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
+import { next } from '@ember/runloop';
+import { task } from 'ember-concurrency';
+import { observer } from '@ember/object';
 
 export default Controller.extend(EditorDocumentBaseController, {
+  queryParams: ['scrollToLastSavePosition'],
+  scrollToLastSavePosition: null,
 
   save: task(function *() {
     let nearestNode = this.editor.currentNode.parentElement;
@@ -19,4 +24,25 @@ export default Controller.extend(EditorDocumentBaseController, {
     //I tried several different ways to make this smoother. But I couldn't
     next(() => { this.scrollToPlugin.scrollTo('last-save-position'); });
   }),
+
+  actions: {
+    handleRdfaEditorInit(editor){
+     if(editor){
+       this.set('editor', editor);
+       this.set('editorDomNode', editor.get('rootNode'));
+       if(this.scrollToLastSavePosition){
+         next(() => {
+           if(this.scrollToPlugin)
+             this.scrollToPlugin.scrollTo('last-save-position');
+         });
+      }
+       return;
+     }
+      this.set('editorDomNode', null);
+    },
+
+    save(){
+     this.save.perform();
+   }
+  }
 });

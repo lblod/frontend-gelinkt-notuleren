@@ -3,9 +3,12 @@ import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { removeNodeFromTree } from '../utils/dom-helpers';
+import { task } from 'ember-concurrency';
+import { next } from '@ember/runloop';
 
 export default Mixin.create({
   ajax: service(),
+  scrollToPlugin: service('rdfa-editor-scroll-to-plugin'),
 
   editorDocument: alias('model.editorDocument'),
   editorDocumentStatuses: alias('model.editorDocumentStatuses'),
@@ -96,6 +99,7 @@ export default Mixin.create({
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
+
     let status = newStatus ? newStatus : editorDocument.get('status');
     documentToSave.setProperties({content: innerHtml, status, createdOn, updatedOn, title});
     await documentToSave.save();
@@ -144,13 +148,6 @@ export default Mixin.create({
   },
 
  actions: {
-   handleRdfaEditorInit(editor){
-     if(editor){
-       this.set('editorDomNode', editor.get('rootNode'));
-       return;
-     }
-     this.set('editorDomNode', null);
-   },
 
    debug(info) {
       this.set('debug', info);
