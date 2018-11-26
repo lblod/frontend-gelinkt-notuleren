@@ -48,6 +48,9 @@ module.exports = function(environment) {
       version: '2.8.3',
       header: '//widgets.vlaanderen.be/widget/live/5d47450609154d5c86f588f3b36ce9ba',
       footer: '//widgets.vlaanderen.be/widget/live/a6670dda202e46beb2832ae8f57f197e'
+    },
+    publicatie: {
+      baseUrl: 'https://publicatie.gelinkt-notuleren.lblod.info/'
     }
   };
 
@@ -81,6 +84,7 @@ module.exports = function(environment) {
     ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/logout';
     ENV['vo-webuniversum']['header'] = '//widgets.vlaanderen.be/widget/live/423fc174cf074c52a9ffd3251cc2a72e';
     ENV['vo-webuniversum']['footer'] = '//widgets.vlaanderen.be/widget/live/3a70f9cfd28e44e5949e79a438eeeb8d';
+    ENV['publicatie']['baseUrl'] = 'https://publicatie.gelinkt-notuleren.vlaanderen.be/';
   }
 
   return ENV;
