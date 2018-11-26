@@ -62,11 +62,11 @@
       content: "Aanwezige mandataris bij start";
     }
 
-    [property="besluit:heeftVoorzitter"]:before {
-      content: "Voorzitter";
+    [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
+      content: "Voorzitter van de vergadering";
     }
 
-    [property="besluit:heeftSecretaris"]:before {
+    [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftSecretaris"]:before {
       content: "Algemeen directeur";
     }
 
@@ -176,12 +176,12 @@
       content: "Aanwezige mandataris bij agendapunt";
     }
 
-      // [property="besluit:heeftVoorzitter"]:before {
-      //   // content: "Voorzitter"; // in zitting herhaald
+      // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
+      //   content: "Voorzitter van de vergadering"; // in zitting herhaald
       // }
 
-      // [property="besluit:heeftSecretaris"]:before {
-      //   // content: "Algemeen directeur"; // in zitting herhaald
+      // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftSecretaris"]:before {
+      //   content: "Algemeen directeur"; // in zitting herhaald
       // }
 
     [property="eli:title"]:before {
