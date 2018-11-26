@@ -22,6 +22,11 @@ Router.map(function() {
   });
   this.route('login');
   this.route('zetelverdeling');
+
+  this.route('legaal', function() {
+    this.route('disclaimer');
+    this.route('cookieverklaring');
+  });
 });
 
 export default Router;
