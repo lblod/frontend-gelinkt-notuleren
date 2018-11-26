@@ -16,13 +16,9 @@ export default Controller.extend(EditorDocumentBaseController, {
        this.set('validationErrors', true);
        return;
      }
-    yield this.saveEditorDocument(editorDocument);
 
-    //Scroll to is done in next runloop.
-    //Reason: basically, we have a spinner hiding everything.
-    //The domNode of editor where it should scroll to is not visible. The scrolling does not work then.
-    //I tried several different ways to make this smoother. But I couldn't
-    next(() => { this.scrollToPlugin.scrollTo('last-save-position'); });
+    let savedDoc = yield this.saveEditorDocument(editorDocument);
+    this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
   }),
 
   actions: {

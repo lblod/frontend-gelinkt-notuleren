@@ -91,9 +91,9 @@ export default Mixin.create({
     return template.innerHTML;
   },
 
-  async saveEditorDocument(editorDocument, newStatus, toNewDocument){
+  async saveEditorDocument(editorDocument, newStatus){
     await this.saveTasklists();
-    let documentToSave = toNewDocument ? this.store.createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
+    let documentToSave = this.store.createRecord('editor-document', {previousVersion: editorDocument});
     let origHtml = this.editorDomNode.innerHTML;
     let innerHtml = this.cleanUpEditorDocumentInnerHtml(origHtml);
     let createdOn = editorDocument.get('createdOn') || new Date();
