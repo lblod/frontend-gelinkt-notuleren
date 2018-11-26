@@ -97,7 +97,6 @@ export default Mixin.create({
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
-    let content = editorDocument.get('content');
     let status = newStatus ? newStatus : editorDocument.get('status');
     documentToSave.setProperties({content: innerHtml, status, createdOn, updatedOn, title});
     await documentToSave.save();
