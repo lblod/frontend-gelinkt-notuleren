@@ -1,11 +1,11 @@
 {
-  "name": "frontend-demo-editor",
+  "name": "frontend-gelinkt-notuleren",
   "version": "0.8.2",
   "private": true,
-  "description": "Demo application for the RDFa editor",
+  "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lblod/frontend-demo-editor.git"
+    "url": "git+https://github.com/lblod/frontend-gelinkt-notuleren.git"
   },
   "license": "MIT",
   "author": "redpencil.io",
