@@ -26,8 +26,9 @@ export default Controller.extend(EditorDocumentBaseController, {
      if(editor){
        this.set('editor', editor);
        this.set('editorDomNode', editor.get('rootNode'));
-       if(this.scrollToLastSavePosition & this.scrollToPlugin){
+       if(this.scrollToLastSavePosition && this.scrollToPlugin){
          this.scrollToPlugin.scrollTo('last-save-position');
+         this.set('scrollToLastSavePosition', null);
       }
        return;
      }
