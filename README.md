@@ -1,10 +1,10 @@
 # frontend-gelinkt-notuleren
 
-This is the Gelinkt Notuleren application implementing the ember-rdfa-editor in the domain of notulen for local governments.  For demo purposes, we advise you to run the stack as per https://github.com/lblod/app-demo-editor.  The following describes the development setup.
+This is the Gelinkt Notuleren application implementing the ember-rdfa-editor in the domain of notulen for local governments.  For demo purposes, we advise you to run the stack as per https://github.com/lblod/app-gelinkt-notuleren.  The following describes the development setup.
 
 ## Setting up the backend
 
-Information on setting up the backend can be found at https://github.com/lblod/app-demo-editor
+Information on setting up the backend can be found at https://github.com/lblod/app-gelinkt-notuleren
 
 ## Running the frontend
 
