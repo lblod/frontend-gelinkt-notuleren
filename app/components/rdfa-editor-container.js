@@ -114,31 +114,6 @@ export default Component.extend({
 
       });
 
-      // const rectangles = scannedElements.map( function(node, idx) {
-      //   const result = richNodeClientRect( node.richNode );
-      //   if (result) {
-      //     return result;
-      //   } else {
-      //     console.log(`Could not get rectangle for ${idx} :: ${node}`);
-      //     return null;
-      //   }
-      // } );
-
-      // const makeNodeFromRichNode = function(richNode) {
-      //   let rect = richNodeClientRect(richNode);
-      //   if( rect ) {
-      //     const clientRect = richNodeClientRect( richNode );
-      //     const lastContext = richNode.contexts[richNode.contexts.length - 1];
-
-      //     const label = if( lastContext.
-
-      //     return {
-      //       x: clientRect.x,
-      //       y: clientRect.y,
-      //     };
-      //   }
-      // };
-
       const editorNode = element.getElementsByClassName("rdfa-editor")[0];
 
       const nodes = new Vis.DataSet( visNodes );
