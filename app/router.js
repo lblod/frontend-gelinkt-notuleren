@@ -16,24 +16,17 @@ Router.map(function() {
     this.route('archive');
     this.route('trash');
   });
-  this.route('besluiten', function() {
-    this.route('details', { path: '/:id/details' });
-  });
-  this.route('published', function() {
-    this.route('zitting', { path: '/:id' }, function() {
-      this.route('agenda');
-      this.route('besluitenlijst', function() {
-        this.route('show', { path: '/:behandeling_id' });
-      });
-      this.route('notulen');
-    });
-  });
   this.route('mock-login');
   this.route('route-not-found', {
     path: '/*wildcard'
   });
   this.route('login');
   this.route('zetelverdeling');
+
+  this.route('legaal', function() {
+    this.route('disclaimer');
+    this.route('cookieverklaring');
+  });
 });
 
 export default Router;
