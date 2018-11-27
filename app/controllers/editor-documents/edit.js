@@ -22,14 +22,15 @@ export default Controller.extend(EditorDocumentBaseController, {
   }),
 
   actions: {
+
     handleRdfaEditorInit(editor){
      if(editor){
        this.set('editor', editor);
        this.set('editorDomNode', editor.get('rootNode'));
        if(this.scrollToLastSavePosition && this.scrollToPlugin){
          this.scrollToPlugin.scrollTo('last-save-position');
-         this.set('scrollToLastSavePosition', null);
-      }
+       }
+       this.set('scrollToLastSavePosition', null);
        return;
      }
       this.set('editorDomNode', null);
