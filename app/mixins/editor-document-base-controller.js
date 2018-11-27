@@ -3,9 +3,12 @@ import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { removeNodeFromTree } from '../utils/dom-helpers';
+import { task } from 'ember-concurrency';
+import { next } from '@ember/runloop';
 
 export default Mixin.create({
   ajax: service(),
+  scrollToPlugin: service('rdfa-editor-scroll-to-plugin'),
 
   editorDocument: alias('model.editorDocument'),
   editorDocumentStatuses: alias('model.editorDocumentStatuses'),
@@ -45,7 +48,6 @@ export default Mixin.create({
       return editorDocumentId => `/publish/notule/${editorDocumentId}`;
   },
 
-  isProcessing: false,
   displayPublishStatusModal: false,
 
   modalTransitionToTrash: computed('displayPublishStatusModal', function(){
@@ -89,15 +91,15 @@ export default Mixin.create({
     return template.innerHTML;
   },
 
-  async saveEditorDocument(editorDocument, newStatus, toNewDocument){
+  async saveEditorDocument(editorDocument, newStatus){
     await this.saveTasklists();
-    let documentToSave = toNewDocument ? this.store.createRecord('editor-document', {previousVersion: editorDocument}) : editorDocument;
+    let documentToSave = this.store.createRecord('editor-document', {previousVersion: editorDocument});
     let origHtml = this.editorDomNode.innerHTML;
     let innerHtml = this.cleanUpEditorDocumentInnerHtml(origHtml);
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
-    let content = editorDocument.get('content');
+
     let status = newStatus ? newStatus : editorDocument.get('status');
     documentToSave.setProperties({content: innerHtml, status, createdOn, updatedOn, title});
     await documentToSave.save();
@@ -111,25 +113,22 @@ export default Mixin.create({
     return await this.saveEditorDocument(editorDocument, publishStatus, true);
   },
 
-  async publishFlow(){
-    this.set('isProcessing', true);
+  publishFlow: task(function *(){
     try {
       let editorDocument = this.editorDocument;
       let publishStatus = this.nextStatus;
-      let newDocument = await this.publishDocument(editorDocument, publishStatus);
+      let newDocument = yield this.publishDocument(editorDocument, publishStatus);
       let apiEndPoint = this.getPublishApi(publishStatus);
       if(apiEndPoint){
-        await this.ajax.post(apiEndPoint(newDocument.get('id')));
+        yield this.ajax.post(apiEndPoint(newDocument.get('id')));
       }
-      this.set('isProcessing', false);
       this.transitionToRoute('/inbox');
     }
     catch(e){
-      this.set('isProcessing', false);
       alert('Fout bij publiceren: ' + e);
       throw e;
     }
-  },
+  }),
 
   async saveTasklists(){
     for(let tasklistSolution of this.tasklists){
@@ -149,27 +148,9 @@ export default Mixin.create({
   },
 
  actions: {
-   handleRdfaEditorInit(editor){
-     if(editor){
-       this.set('editorDomNode', editor.get('rootNode'));
-       return;
-     }
-     this.set('editorDomNode', null);
-   },
 
    debug(info) {
       this.set('debug', info);
-   },
-
-   async save(){
-     let editorDocument = this.editorDocument;
-
-     if(this.hasDocumentValidationErrors(editorDocument)){
-       this.set('validationErrors', true);
-       return;
-     }
-
-     await this.saveEditorDocument(editorDocument);
    },
 
    sendToTrash(){
@@ -186,9 +167,9 @@ export default Mixin.create({
      this.set('displayPublishStatusModal', true);
    },
 
-   async terminatePublishFlow(){
+   terminatePublishFlow(){
      this.resetPublishStatusModal();
-     this.publishFlow();
+     this.publishFlow.perform();
    },
 
    onClosePublishStatusModal(){

@@ -4,7 +4,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Route.extend(AuthenticatedRouteMixin, {
   currentSession: service(),
   store: service(),
-  async model(params) {
+  async model() {
     const eenheid = await this.currentSession.group;
     const eenheidType = await eenheid.classificatie;
     var classificatie;
