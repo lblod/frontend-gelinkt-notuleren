@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'frontend-demo-editor',
+    modulePrefix: 'frontend-gelinkt-notuleren',
     environment,
     rootURL: '/',
     locationType: 'auto',

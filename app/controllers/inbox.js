@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import ENV from 'frontend-demo-editor/config/environment';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export default Controller.extend({
   init() {
