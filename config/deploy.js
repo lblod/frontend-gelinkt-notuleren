@@ -12,13 +12,13 @@ module.exports = function(deployTarget) {
     'ssh-index': {
       username: 'root',
       host: 'dock.semte.ch',
-      remoteDir: '/data/lblod/dev-demo-editor/demo-app',
+      remoteDir: '/data/lblod/dev-gelinkt-notuleren/gelinkt-notuleren-app',
       agent: process.env.SSH_AUTH_SOCK,
       port: 2275,
       allowOverwrite: true
     },
     'rsync': {
-      dest: '/data/lblod/dev-demo-editor/demo-app',
+      dest: '/data/lblod/dev-gelinkt-notuleren/gelinkt-notuleren-app',
       username: 'root',
       host: 'dock.semte.ch',
       port: 2275,
@@ -33,14 +33,14 @@ module.exports = function(deployTarget) {
     ENV['ssh-index'] = {
       username: 'root',
       host: 'dock.semte.ch',
-      remoteDir: '/data/lblod/demo-editor/demo-app',
+      remoteDir: '/data/lblod/gelinkt-notuleren/gelinkt-notuleren-app',
       agent: process.env.SSH_AUTH_SOCK,
       port: 2275,
       allowOverwrite: true
     };
 
     ENV['rsync'] = {
-      dest: '/data/lblod/demo-editor/demo-app',
+      dest: '/data/lblod/gelinkt-notuleren/gelinkt-notuleren-app',
       username: 'root',
       host: 'dock.semte.ch',
       port: 2275,
