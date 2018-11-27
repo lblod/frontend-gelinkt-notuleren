@@ -3,9 +3,24 @@
     <div class="layout layout--wide">
       <div class="grid">
         <div class="col--1-1--s col--8-12--m col--6-12">
-          <h1 class="h1 u-spacer--tiny">Gelinkt Notuleren</h1>
-          <h2 class="h4 sans-serif">Opmaken en publiceren van agenda's, notulen en besluiten voor Lokale Besturen.</h2>
-          <p>Neem contact op via email <a href="mailto:gelinktnotuleren@vlaanderen.be">gelinktnotuleren@vlaanderen.be</a>.</p>
+          <h1 class="h1 u-spacer--tiny">Contact</h1>
+          <form class="u-spacer--large js-formvalidation-bound">
+					  <div class="form__row">
+					    <label class="form__label form__label--large form__label--block" for="select">Waar gaat uw bericht over?</label>
+					    {{wu-radio-button label="Een vraag of probleem over de applicatie" value="GelinktNotuleren@vlaanderen.be?subject=Vraag of probleem - Gelinkt Notuleren" onChange=(action (mut mailto)) isBlock=true}}
+					    {{wu-radio-button label="Toezicht" value="GelinktNotuleren@vlaanderen.be?subject=Toezicht - Gelinkt Notuleren" onChange=(action (mut mailto)) isBlock=true}}
+					    {{wu-radio-button label="Mandatenbeheer" value="GelinktNotuleren@vlaanderen.be?subject=Mandatenbeheer - Gelinkt Notuleren" onChange=(action (mut mailto)) isBlock=true}}
+					    {{wu-radio-button label="Andere vraag of melding" value="GelinktNotuleren@vlaanderen.be?subject=Mandatenbeheer - Andere vraag of melding" onChange=(action (mut mailto)) isBlock=true}}
+					    <div class="form__error" aria-describedby="radio-buttons"></div>
+					  </div>
+
+					  {{#if mailto}}
+					    <a href={{concat "mailto:" mailto}} class="button button--large">Stel bericht op</a>
+					  {{else}}
+					    {{wu-button label="Stel bericht op" onClick=null size="large" disabled=true}}
+					  {{/if}}
+					</form>
+          <p class="u-spacer--large">Of neem rechtstreeks contact op via mail <a href="mailto:gelinktnotuleren@vlaanderen.be">GelinktNotuleren@vlaanderen.be</a>.</p>
         </div>
       </div>
     </div>
