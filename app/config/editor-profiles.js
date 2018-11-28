@@ -1,5 +1,6 @@
 export default {
   default: [
+    "rdfa-editor-schepenen-aanstelling-plugin",
     "rdfa-editor-installatievergadering-plugin",
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
@@ -20,6 +21,7 @@ export default {
     "rdfa-editor-personen-plugin"
   ],
   all: [
+    "rdfa-editor-schepenen-aanstelling-plugin",
     "rdfa-editor-installatievergadering-plugin",
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
