@@ -26,9 +26,9 @@
 
             <span class="link-list__item__sidenote uppercase">
               {{#if bp.b.bindingEinde}}
-                {{moment-format bp.b.bindingStart 'DD/MM/YYYY'}} - {{moment-format bp.b.bindingEinde 'DD/MM/YYYY'}}
+                Bestuursperiode: van {{moment-format bp.b.bindingStart 'DD/MM/YYYY'}} - {{moment-format bp.b.bindingEinde 'DD/MM/YYYY'}}
               {{else}}
-                Vanaf {{moment-format bp.b.bindingStart 'DD/MM/YYYY'}}
+                Bestuursperiode: vanaf {{moment-format bp.b.bindingStart 'DD/MM/YYYY'}}
               {{/if}}
             </span>
           </a>
