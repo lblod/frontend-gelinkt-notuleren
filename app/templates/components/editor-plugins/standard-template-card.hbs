@@ -1,37 +1,39 @@
-<div class="modal-dialog__header">
-  <div class="grid">
-    <div class="col--10-12">
-      <p>
-				Wil u graag een template invoegen voor een
-				<strong>{{info.label}}</strong>?
-      </p>
-    </div>
-{{!--     <div class="col--2-12 u-align-right">
-      <a class="link--icon--close" href="#">
-        <span class="u-visually-hidden">Venster sluiten</span>
-      </a>
-    </div> --}}
-  </div>
-</div>
+<div class="modal-dialog modal-dialog--small modal-dialog--sectioned">
+	<div class="modal-dialog__header">
+	  <div class="grid">
+	    <div class="col--10-12">
+	      <p>
+					Wil u graag een sjabloon invoegen voor een
+					<strong>{{info.label}}</strong>?
+	      </p>
+	    </div>
+	{{!--     <div class="col--2-12 u-align-right">
+	      <a class="link--icon--close" href="#">
+	        <span class="u-visually-hidden">Venster sluiten</span>
+	      </a>
+	    </div> --}}
+	  </div>
+	</div>
 
-<div class="modal-dialog__footer">
-	{{#wu-button-group}}
-	  {{wu-button
-	    label="Voeg in"
-	    isNarrow=true
-	    onClick=(action "insert")}}
-{{!-- 	  {{wu-button
-	    label="Annuleer (todo)"
-	    class="button--alt"
-	    isNarrow=true
-	    onClick=null}}
-	  {{wu-button
-	    label="Negeer suggestie (todo)"
-	    class="button--link button--link--dark"
-	    size="small"
-	    isNarrow=true
-	    onClick=null}} --}}
-	{{/wu-button-group}}
+	<div class="modal-dialog__footer">
+		{{#wu-button-group}}
+		  {{wu-button
+		    label="Voeg in"
+		    isNarrow=true
+		    onClick=(action "insert")}}
+	{{!-- 	  {{wu-button
+		    label="Annuleer (todo)"
+		    class="button--alt"
+		    isNarrow=true
+		    onClick=null}}
+		  {{wu-button
+		    label="Negeer suggestie (todo)"
+		    class="button--link button--link--dark"
+		    size="small"
+		    isNarrow=true
+		    onClick=null}} --}}
+		{{/wu-button-group}}
+	</div>
 </div>
 
 {{yield}}
