@@ -93,24 +93,30 @@ export default Mixin.create({
 
   async saveEditorDocument(editorDocument, newStatus){
     await this.saveTasklists();
-    let documentToSave = this.store.createRecord('editor-document', {previousVersion: editorDocument});
-    let origHtml = this.editorDomNode.innerHTML;
-    let innerHtml = this.cleanUpEditorDocumentInnerHtml(origHtml);
+
+    //create or extract properties
+    let cleanedHtml = this.cleanUpEditorDocumentInnerHtml(this.editorDomNode.innerHTML);
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
-
     let status = newStatus ? newStatus : editorDocument.get('status');
-    documentToSave.setProperties({content: innerHtml, status, createdOn, updatedOn, title});
+
+    //every save results in new document
+    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title});;
+
+    //Link the previous if provided editorDocument does exist in DB.
+    if(editorDocument.id)
+      documentToSave.set('previousVersion', editorDocument);
+
+    //save the document
     await documentToSave.save();
 
-    documentToSave.set('content', origHtml); //don't redraw stripped stuff
     return documentToSave;
   },
 
   async publishDocument(editorDocument, publishStatus){
-    await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('conceptStatusId'));
-    return await this.saveEditorDocument(editorDocument, publishStatus, true);
+    let savedDocument = await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('conceptStatusId'));
+    return await this.saveEditorDocument(savedDocument, publishStatus);
   },
 
   publishFlow: task(function *(){
