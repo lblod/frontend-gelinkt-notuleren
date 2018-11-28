@@ -4,7 +4,6 @@ import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { removeNodeFromTree } from '../utils/dom-helpers';
 import { task } from 'ember-concurrency';
-import { next } from '@ember/runloop';
 
 export default Mixin.create({
   ajax: service(),

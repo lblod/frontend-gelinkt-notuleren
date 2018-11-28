@@ -1,8 +1,6 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
-import { next } from '@ember/runloop';
 import { task } from 'ember-concurrency';
-import { observer } from '@ember/object';
 
 export default Controller.extend(EditorDocumentBaseController, {
   queryParams: ['scrollToLastSavePosition'],
