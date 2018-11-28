@@ -2,7 +2,7 @@
   <div class="modal-dialog__header">
     <div class="grid">
       <div class="col--10-12">
-        <strong>Voeg <strong>{{info.mandataris.isBestuurlijkeAliasVan.fullName}}</strong> ({{info.mandataris.bekleedt.bestuursfunctie.label}}) als</strong>
+        <strong>Wil u <strong>{{info.mandataris.isBestuurlijkeAliasVan.fullName}}</strong> ({{info.mandataris.bekleedt.bestuursfunctie.label}}) toevoegen?</strong>
       </div>
 {{!--       <div class="col--2-12 u-align-right">
         <a class="link--icon--close" href="#">
@@ -16,7 +16,7 @@
       {{#each mandatarisCombinedWithProperties as |mp| }}
         <li class="u-hr u-padding--round--tiny">
           <a class="button button--narrow" onclick={{action 'refer' mp}}> Voeg toe als {{mp.prop.label}}</a>
-          <a class="button button--narrow button--link" onclick={{action 'extend' mp}}>Voeg uitgebreide gegevens toe</a>
+          {{!-- <a class="button button--narrow button--link" onclick={{action 'extend' mp}}>Voeg uitgebreide gegevens toe</a> --}}
         </li>
       {{/each}}
     </ul>
