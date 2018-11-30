@@ -12,15 +12,18 @@ export default DS.JSONAPIAdapter.extend({
     const origAjax = this._super;
     const args = arguments;
     const sleep = async (time) => setTimeout(() => true, time);
-    const retry = (livesRemaining) => {
+    const retry = (livesSpent) => {
       return new Promise( async (resolve, reject) => {
-        await sleep(50);
-        if (livesRemaining > 0 )
-          origAjax.apply(this,args).then( (res) => resolve(res), () => retry(livesRemaining-1));
+        await sleep(50 * livesSpent);
+        if (livesSpent < maxRetries )
+          origAjax.apply(this,args).then( (res) => resolve(res), () => retry(livesSpent + 1).then(
+            (r) => resolve(r),
+            (r) => reject(r)
+          ));
         else
           origAjax.apply(this,args).then( (res) => resolve(res), (e) => reject(e));
       });
     };
-    return retry(maxRetries);
+    return retry(0);
   }
 });
