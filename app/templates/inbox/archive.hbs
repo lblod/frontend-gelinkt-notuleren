@@ -24,7 +24,6 @@
       <!-- <th class="data-table__header-title"><!-- Starred </th> -->
       {{th-sortable field='title' currentSorting=sort label='Zitting' class="data-table__header-title"}}
       {{th-sortable field='createdOn' currentSorting=sort label='Aangemaakt' class="data-table__header-title"}}
-      {{th-sortable field='updatedOn' currentSorting=sort label='Aangepast' class="data-table__header-title"}}
       {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title u-align-right"}}
     {{/c.header}}
     {{#c.body as |row|}}
@@ -35,8 +34,7 @@
           <span class="u-visually-hidden">Voeg toe als favoriet</span>
         </label>
       </td> -->
-      <td>{{row.title}}</td>
-      <td>{{moment-calendar row.origHtml}}</td>
+      <td>{{#link-to 'editor-documents.show' row.id}}{{row.title}}{{/link-to}}</td>
       <td>{{moment-calendar row.createdOn}}</td>
       <td class="u-align-right">{{editor-status-pill status=(await row.status)}}</td>
     {{/c.body}}
