@@ -1,10 +1,16 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
 import { task } from 'ember-concurrency';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export default Controller.extend(EditorDocumentBaseController, {
   queryParams: ['scrollToLastSavePosition'],
   scrollToLastSavePosition: null,
+
+  init() {
+    this._super(...arguments);
+    this.set('publicationUrl', ENV['publicatie']['baseUrl']);
+  },
 
   save: task(function *() {
     let nearestNode = this.editor.currentNode.parentElement;

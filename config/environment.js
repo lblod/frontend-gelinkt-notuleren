@@ -78,7 +78,7 @@ module.exports = function(environment) {
   }
 
   if (process.env.DEPLOY_ENV === 'production') {
-    ENV['torii']['providers']['acmidm-oauth2']['apiKey'] = '';
+    ENV['torii']['providers']['acmidm-oauth2']['apiKey'] = 'a004bb30-e68b-476b-a67d-121276c2b944';
     ENV['torii']['providers']['acmidm-oauth2']['baseUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/auth';
     ENV['torii']['providers']['acmidm-oauth2']['redirectUri'] = 'https://gelinkt-notuleren.vlaanderen.be/authorization/callback';
     ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/logout';

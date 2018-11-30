@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
-RUN ember build -prod
+RUN DEPLOY_ENV=production ember build -prod
 RUN git clone https://github.com/lblod/handleiding-gelinkt-notuleren.git handleiding \
       && rm -r handleiding/.git \
       && mv handleiding /app/dist/handleiding
