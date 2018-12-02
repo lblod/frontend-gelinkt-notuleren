@@ -28,10 +28,6 @@
 		background-color: $blue-gray-light;
 	}
 
-	&:before {
-		content: "Het sjabloon voor de politieraad is nog niet beschikbaar. U kan het op een later moment hier invoegen. ";
-	}
-
 	&:after {
 		text-transform: uppercase;
 		letter-spacing: 1px;
@@ -40,6 +36,14 @@
 		color: $gray;
 		content: "Pas deze tekst niet aan.";
 	}
+}
+
+.hide-for-launch--schepenen:before {
+	content: "Het sjabloon voor de schepenen is nog niet beschikbaar. U kan het op een later moment hier invoegen. ";
+}
+
+.hide-for-launch--politie:before {
+	content: "Het sjabloon voor de politieraad is nog niet beschikbaar. U kan het op een later moment hier invoegen. ";
 }
 
 
