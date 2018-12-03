@@ -41,7 +41,7 @@
     "@lblod/ember-rdfa-editor-mandaat-plugin": "0.1.0",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "^0.6.11",
     "@lblod/ember-rdfa-editor-personen-plugin": "^0.1.1",
-    "@lblod/ember-rdfa-editor-schepenen-aanstelling-plugin": "^0.1.2",
+    "@lblod/ember-rdfa-editor-schepenen-aanstelling-plugin": "^0.1.3",
     "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "^0.1.8",
     "@lblod/ember-rdfa-editor-scroll-to-plugin": "^0.1.4",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "^0.6.4",
