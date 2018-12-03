@@ -26,6 +26,12 @@ module.exports = function(environment) {
         }
       }
     },
+    browserUpdate: {
+      vs: {f:-3,o:-3,s:-3,c:-3},
+      style: 'corner',
+      l: 'nl',
+      shift_page_down: false
+    },
     moment: {
       outputFormat: 'DD-MM-YYYY hh:mm:ss',
       includeTimezone: 'all',
