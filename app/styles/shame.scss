@@ -39,11 +39,11 @@
 }
 
 .hide-for-launch--schepenen:before {
-		content: "Het sjabloon voor de schepenen is binnenkort beschikbaar. U kan het op een later moment hier invoegen.";
+	content: "Het sjabloon voor de schepenen is binnenkort beschikbaar. U kan het op een later moment hier invoegen.";
 }
 
 .hide-for-launch--politie:before {
-		content: "Het sjabloon voor de politieraad is binnenkort beschikbaar. U kan het op een later moment hier invoegen.";
+	content: "Het sjabloon voor de politieraad is binnenkort beschikbaar. U kan het op een later moment hier invoegen.";
 }
 
 /* spans in link lists replacing data */
@@ -186,4 +186,8 @@ input.input-field {
 .modal-dialog__content li.link-list__item span.link-list__item__sidenote {
 	cursor: default;
 	pointer-events: none;
+}
+
+.modal-dialog__content > .data-table {
+	margin-bottom: 22rem;
 }
