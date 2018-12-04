@@ -16,6 +16,7 @@
         padding-top: 3.5rem;
         transition: all 0.3s;
         display: inline-block;
+        max-width: 100%;
         position: relative;
         background-color: $white;
 
@@ -111,6 +112,7 @@
         position: relative;
         left: auto;
         display: block;
+        width: 100%;
     }
 
     /* make sure small annotations extend wide enough on hover to be legible */
