@@ -6,7 +6,7 @@ export default Model.extend({
   uri: attr(),
   lijstnaam: attr(),
   lijstnummer: attr(),
-  rechtstreekseVerkiezing: belongsTo('rechtstreekse-verkiezing', { inverse: null }),
+  rechtstreekseVerkiezing: belongsTo('rechtstreekse-verkiezing', { inverse: 'heeftLijst' }),
   kandidaten: hasMany('persoon', { inverse: 'isKandidaatVoor' }),
   rdfaBindings: {// eslint-disable-line ember/avoid-leaking-state-in-ember-objects
     lijstnaam: "http://www.w3.org/2004/02/skos/core#prefLabel",
