@@ -39,49 +39,6 @@ span.mark-highlight-manual {
   //  {
   //   background-color: transparent;
   // }
-
-  /* make todo's visible */
-  .vartodo,
-  .propertytodo,
-  [property="ext:TODO"],
-  [var="ext:TODO"] {
-    border: 1px solid purple;
-
-    &:after {
-      content: normal;
-    }
-
-    &:hover:after {
-      border-right: 0.5rem solid purple;
-      position: absolute;
-      font-weight: 400;
-      font-size: 1.3rem;
-      width: 7rem;
-      color: white;
-      background-color: purple;
-      padding: 0.5rem;
-      border-right: 0.5rem solid purple;
-      box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
-      z-index: 901;
-      font-family: "flanders-sans", sans-serif;
-      opacity: 1;
-      top: 0;
-      left: -10rem;
-      content: normal;
-    }
-  }
-
-  // [property="ext:TODO"]:hover:after {
-  //   content: "property TODO";
-  // }
-
-  // [var="ext:TODO"]:hover:after {
-  //   content: "variabele TODO"
-  // }
-
-  // [property="ext:TODO"][var="ext:TODO"]:hover:after {
-  //   content: "variable and property TODO";
-  // }
 }
 
 
@@ -280,6 +237,26 @@ span.mark-highlight-manual {
 }
 
 .rdfa-editor table {
+		[typeof],
+		[property] {
+			&:not(tr):not(td),
+			&:not(tr) {
+				display: inline !important;
+				border: none !important;
+				padding: 0 !important;
+				background-color: transparent !important;
+				margin: 0 !important;
+			}
+		}
+
+		tr {
+			display: table-row !important;
+		}
+
+		td {
+			display: table-cell !important;
+		}
+
     [typeof]:before,
     [property]:before {
       content: normal !important;
