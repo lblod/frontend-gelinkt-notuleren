@@ -7,6 +7,14 @@
 
   /* -------------------- Guiding tags ------------------------- */
 
+	.mark-highlight-manual:before {
+		content: "Typ hier de gevraagde informatie";
+	}
+
+	[data-editor-highlight="true"]:before {
+		content: "Klik om de juiste optie selecteren";
+	}
+
 	[property^="ext:insert"]:before {
 		content: "Klik om de juiste optie selecteren";
 	}
@@ -72,7 +80,15 @@
     }
 
     [property="besluit:heeftSecretaris"]:before {
-      content: "Algemeen directeur (" attr(property) ")";
+      content: "Secretaris van de zitting (" attr(property) ")";
+    }
+
+    [property="ext:secretarisTemporaryAsText"]:before {
+      content: "Secretaris van de zitting";
+    }
+
+    [property="org:role"]:before {
+    	content: "Mandaat";
     }
 
 //     [property="besluit:heeftNotulen"]:before {
@@ -177,12 +193,32 @@
           content: "Aanstelling mandataris (" attr(property) " " attr(typeof) ")";
         }
 
+          [property="ext:bekrachtigdOnverenigbaarheid"]:before {
+          	content: "Onverenigbaar (" attr(property) ")";
+          }
+
+		      [property="ext:bekrachtigdAfstandVanMandaatDoor"]:before {
+		      	content: "Afstand mandaat (" attr(property) ")";
+		      }
+
+		      [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
+		      	content: "Afwezig met kennisgeving (" attr(property) ")";
+		      }
+
+		      [property="ext:bekrachtigdAfwezigheid"]:before {
+		      	content: "Afwezig zonder kennisgeving (" attr(property) ")";
+		      }
+
           [property="org:holds"]:before {
             content: "Mandaat (" attr(property) ")";
           }
 
           [property="mandaat:start"]:before {
             content: "Start mandaat (" attr(property) ")";
+          }
+
+          [property="mandaat:rangorde"]:before {
+          	content: "Rangorde (" attr(property) ")";
           }
 
 //     [property="besluit:gebeurtNa"]:before {
