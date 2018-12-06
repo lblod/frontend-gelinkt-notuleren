@@ -66,6 +66,7 @@
       content: "Voorzitter van de zitting";
     }
 
+    [property="ext:secretarisTemporaryAsText"]:before,
     [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftSecretaris"]:before {
       content: "Secretaris van de zitting";
     }
@@ -146,6 +147,22 @@
       [typeof="mandaat:Mandataris"]:before,
       [property="ext:bekrachtigtAanstellingVan"]:before {
         content: "Aanstelling mandataris";
+      }
+
+      [property="ext:bekrachtigdOnverenigbaarheid"]:before {
+      	content: "Onverenigbaarheid";
+      }
+
+      [property="ext:bekrachtigdAfstandVanMandaatDoor"]:before {
+      	content: "Afstand mandaat";
+      }
+
+      [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
+      	content: "Afwezig met kennisgeving";
+      }
+
+      [property="ext:bekrachtigdAfwezigheid"]:before {
+      	content: "Afwezig zonder kennisgeving";
       }
 
       [typeof="http://www.w3.org/ns/person#Person"]:before {
