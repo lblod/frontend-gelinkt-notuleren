@@ -236,7 +236,7 @@ span.mark-highlight-manual {
   }
 }
 
-.rdfa-editor table {
+.rdfa-editor .data-table {
 		[typeof],
 		[property] {
 			&:not(tr):not(td),
@@ -255,6 +255,10 @@ span.mark-highlight-manual {
 
 		td {
 			display: table-cell !important;
+
+			&.u-hidden {
+				display: none !important;
+			}
 		}
 
     [typeof]:before,

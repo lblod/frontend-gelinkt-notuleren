@@ -171,6 +171,10 @@
 		th {
 			display: table-cell !important;
 		}
+
+		td.u-hidden {
+			display: none !important;
+		}
 	}
 
 	[data-editor-highlight="true"],
