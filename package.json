@@ -35,7 +35,7 @@
     "@lblod/ember-rdfa-editor-document-tasklist-plugin": "^0.1.5",
     "@lblod/ember-rdfa-editor-document-title-plugin": "^0.1.1",
     "@lblod/ember-rdfa-editor-fractievorming-plugin": "^0.1.8",
-    "@lblod/ember-rdfa-editor-gemeenteraadsleden-aanstelling-plugin": "0.6.4",
+    "@lblod/ember-rdfa-editor-gemeenteraadsleden-aanstelling-plugin": "0.7.0",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "^0.1.6",
     "@lblod/ember-rdfa-editor-installatievergadering-plugin": "^0.1.7",
     "@lblod/ember-rdfa-editor-mandaat-plugin": "0.1.0",
@@ -99,5 +99,8 @@
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
+  },
+  "dependencies": {
+    "eslint-plugin-ie11": "^1.0.0"
   }
 }
