@@ -7,6 +7,7 @@ import { task } from 'ember-concurrency';
 
 export default Mixin.create({
   ajax: service(),
+  currentSession: service(),
   scrollToPlugin: service('rdfa-editor-scroll-to-plugin'),
 
   editorDocument: alias('model.editorDocument'),
@@ -145,11 +146,16 @@ export default Mixin.create({
     }
   },
 
+  setEditorProfile: task(function *(){
+    const bestuurseenheid = yield this.get('currentSession.group');
+    this.set('profile', (yield bestuurseenheid.get('classificatie')).get('uri'));
+  }),
+
   profile: 'default',
 
   init() {
     this._super(...arguments);
-    this.set('profiles', ['default', 'all', 'none']);
+    this.setEditorProfile.perform();
   },
 
  actions: {
