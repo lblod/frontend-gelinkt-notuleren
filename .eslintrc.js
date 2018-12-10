@@ -5,7 +5,7 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    'ember'
+    'ember', 'ie11'
   ],
   extends: [
     'eslint:recommended',
@@ -15,6 +15,10 @@ module.exports = {
     browser: true
   },
   rules: {
+    'ie11/no-collection-args': ['error'],
+    'ie11/no-for-in-const': ['error'],
+    'ie11/no-loop-func': ['warn'],
+    'ie11/no-weak-collections': ['error']
   },
   overrides: [
     // node files
