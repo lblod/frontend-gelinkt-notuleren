@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import { runInDebug } from '@ember/debug';
 const maxRetries = 5;
 export default DS.JSONAPIAdapter.extend({
   init() {
