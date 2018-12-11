@@ -57,5 +57,6 @@ inflector.irregular('tasklist', 'tasklists');
 inflector.irregular('task', 'tasks');
 inflector.irregular('tasklist-solution', 'tasklist-solutions');
 inflector.irregular('task-solution', 'task-solutions');
+inflector.uncountable('sync');
 // Meet Ember Inspector's expectation of an export
 export default {};

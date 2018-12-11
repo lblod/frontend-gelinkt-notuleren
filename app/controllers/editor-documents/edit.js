@@ -2,11 +2,12 @@ import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
 import { task } from 'ember-concurrency';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend(EditorDocumentBaseController, {
   queryParams: ['scrollToLastSavePosition'],
   scrollToLastSavePosition: null,
-
+  store: service(),
   init() {
     this._super(...arguments);
     this.set('publicationUrl', ENV['publicatie']['baseUrl']);
@@ -21,10 +22,14 @@ export default Controller.extend(EditorDocumentBaseController, {
        return;
      }
 
-    let savedDoc = yield this.saveEditorDocument(editorDocument);
+    const savedDoc = yield this.saveEditorDocument(editorDocument);
+    return savedDoc;
+  }),
+  syncDocument: task(function * () {
+    yield this.save.perform();
+    const savedDoc = yield this.store.createRecord('sync', {document: this.editorDocument}).save();
     this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
   }),
-
   actions: {
 
     handleRdfaEditorInit(editor){
@@ -40,8 +45,12 @@ export default Controller.extend(EditorDocumentBaseController, {
       this.set('editorDomNode', null);
     },
 
-    save(){
-     this.save.perform();
+    async syncDocument() {
+      await this.syncDocument.perform();
+    },
+    async save(){
+      const savedDoc = await this.save.perform();
+      this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
    }
   }
 });

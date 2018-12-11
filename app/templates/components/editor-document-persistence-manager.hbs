@@ -1,4 +1,7 @@
 {{#wu-button-group class="u-align-right"}}
+  {{#if syncDocument}}
+    {{wu-button label='sync' onClick=syncDocument}}
+  {{/if}}
   {{#if isPublishAgendaAllowed}}
     {{#if isTrashingAllowed}}
       {{wu-button label="Verwijder concept" isNarrow=true isLink=true isDarkLink=true onClick=(action "sendToTrash")}}

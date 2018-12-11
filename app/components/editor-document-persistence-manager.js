@@ -25,7 +25,6 @@ export default Component.extend({
     save(){
       this.save();
     },
-
     publish(){
       this.publish();
     },
