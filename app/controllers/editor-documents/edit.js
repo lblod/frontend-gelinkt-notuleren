@@ -26,8 +26,8 @@ export default Controller.extend(EditorDocumentBaseController, {
     return savedDoc;
   }),
   syncDocument: task(function * () {
-    yield this.save.perform();
-    const savedDoc = yield this.store.createRecord('sync', {document: this.editorDocument}).save();
+    const savedDoc = yield this.save.perform();
+    yield this.store.createRecord('sync', {document: savedDoc }).save();
     this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
   }),
   actions: {
