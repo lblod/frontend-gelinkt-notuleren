@@ -46,6 +46,7 @@ export default {
 
   //OCMW
   "http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000002": [
+    "rdfa-editor-bijzonder-comite-aanstelling-plugin",
     "rdfa-editor-installatievergadering-plugin",
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
