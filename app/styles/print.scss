@@ -1,0 +1,84 @@
+/* ==========================================================================
+  Print
+  Style what printing looks like here.
+ ========================================================================== */
+
+@media print {
+	.toolbar__annotations-switch,
+	.sidebar,
+	.search-box,
+	.editor-commands,
+	.editor-loading-events,
+	.editor-chrome,
+	.tasklist.tasklist--open {
+		display: none;
+	}
+
+	.tasklist.tasklist--expanded {
+		display: block;
+	}
+
+	.data-table {
+		position: relative;
+		width: 100%;
+	}
+
+	.container,
+	.grid,
+	.container-flex--contain,
+	.container-flex--scroll,
+	.tasklist__content {
+		overflow: visible !important;
+		display: block;
+		position: static;
+		height: auto;
+		flex: none;
+		flex-direction: unset;
+		flex-wrap: unset;
+	}
+
+	.editor-container {
+
+		.grid--align-right {
+			justify-content: initial;
+		}
+
+		.col--2-12 {
+			display: none;
+		}
+
+		.col--8-12 {
+			width: 100%;
+			max-width: none;
+			flex-basis: 100%;
+		}
+	}
+
+	.editor {
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.tasklist.tasklist--open + .container-flex--contain .editor__paper,
+	.tasklist + .container-flex--contain .editor__paper,
+	.editor__paper {
+		width: 100% !important;
+		max-width: none;
+		min-height: none;
+		overflow: visible;
+		margin: 0;
+		box-shadow: none;
+		padding: 0;
+		position: static !important;
+		pointer-events: none;
+	}
+
+	.u-wide-on-print {
+		min-width: 100%;
+	}
+
+  @page {
+  	counter-increment: page;
+  	counter-reset: page 1;
+  }
+}
