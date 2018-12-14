@@ -3,49 +3,6 @@
   Some parts will be reused, but most of them will not.
  ========================================================================== */
 
-/* hide for launch classes */
-
-.hide-for-launch--schepenen,
-.hide-for-launch--politie {
-	pointer-events: none;
-	background-color: $blue-gray-lighter;
-	display: block;
-	margin: 4rem 0;
-	padding: 2rem;
-	width: 100%;
-	font-size: 1.8rem;
-
-	> div {
-		border: 1px dashed $blue-gray;
-		padding: 1rem;
-		margin: 1rem 0;
-		pointer-events: none;
-	}
-
-	mark {
-		font-size: 1.6rem;
-		pointer-events: none;
-		background-color: $blue-gray-light;
-	}
-
-	&:after {
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		font-weight: 500;
-		font-size: 1.4rem;
-		color: $gray;
-		content: "Pas deze tekst niet aan.";
-	}
-}
-
-.hide-for-launch--schepenen:before {
-	content: "Het sjabloon voor de schepenen is binnenkort beschikbaar. U kan het op een later moment hier invoegen.";
-}
-
-.hide-for-launch--politie:before {
-	content: "Het sjabloon voor de politieraad is binnenkort beschikbaar. U kan het op een later moment hier invoegen.";
-}
-
 /* spans in link lists replacing data */
 
 li.link-list__item span {
