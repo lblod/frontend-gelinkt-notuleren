@@ -1,6 +1,8 @@
 {{#wu-button-group class="u-align-right"}}
   {{#if syncDocument}}
-    {{wu-button label='sync' onClick=syncDocument}}
+    {{#wu-link-button class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=syncDocument}}
+      <i class="fa fa-rotate-right"></i> Herbruik gegevens in andere bestuurseenheden
+    {{/wu-link-button}}
   {{/if}}
   {{#if isPublishAgendaAllowed}}
     {{#if isTrashingAllowed}}
