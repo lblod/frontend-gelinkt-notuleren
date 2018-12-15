@@ -79,8 +79,9 @@ export default Mixin.create({
     return false;
   },
 
+  // TODO: move to ember-rdfa-editor
   cleanUpEditorDocumentInnerHtml(innerHtml){
-    //for now only remove highlights
+    // for now only remove highlights
     let template = document.createElement('template');
     template.innerHTML = innerHtml;
     let markTags = template.content.querySelectorAll('mark');
@@ -94,7 +95,7 @@ export default Mixin.create({
   async saveEditorDocument(editorDocument, newStatus){
     await this.saveTasklists();
 
-    //create or extract properties
+    // create or extract properties
     let cleanedHtml = this.cleanUpEditorDocumentInnerHtml(this.editorDomNode.innerHTML);
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
@@ -104,14 +105,14 @@ export default Mixin.create({
         await editorDocument.get('documentContainer') ||
         await this.store.createRecord('document-container').save();
 
-    //every save results in new document
+    // every save results in new document
     let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title, documentContainer});
 
-    //Link the previous if provided editorDocument does exist in DB.
+    // Link the previous if provided editorDocument does exist in DB.
     if(editorDocument.id)
       documentToSave.set('previousVersion', editorDocument);
 
-    //save the document
+    // save the document
     await documentToSave.save();
 
     // set the latest revision
