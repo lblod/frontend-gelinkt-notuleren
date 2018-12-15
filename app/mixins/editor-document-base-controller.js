@@ -114,6 +114,10 @@ export default Mixin.create({
     //save the document
     await documentToSave.save();
 
+    // set the latest revision
+    documentContainer.set('currentVersion', documentToSave);
+    await documentContainer.save();
+
     return documentToSave;
   },
 
