@@ -100,9 +100,12 @@ export default Mixin.create({
     let updatedOn = new Date();
     let title = editorDocument.get('title');
     let status = newStatus ? newStatus : editorDocument.get('status');
+    let documentContainer =
+        await editorDocument.get('documentContainer') ||
+        await this.store.createRecord('document-container').save();
 
     //every save results in new document
-    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title});
+    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title, documentContainer});
 
     //Link the previous if provided editorDocument does exist in DB.
     if(editorDocument.id)

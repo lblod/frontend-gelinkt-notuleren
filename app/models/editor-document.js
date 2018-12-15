@@ -13,5 +13,6 @@ export default Model.extend({
   origin: attr(),
   status: belongsTo('editor-document-status', {inverse: null }),
   previousVersion: belongsTo('editor-document', {inverse: 'nextVersion'}),
-  nextVersion: belongsTo('editor-document', {inverse: 'previousVersion'})
+  nextVersion: belongsTo('editor-document', {inverse: 'previousVersion'}),
+  documentContainer: belongsTo('document-container')
 });
