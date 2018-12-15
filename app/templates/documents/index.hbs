@@ -1,0 +1,22 @@
+<ul>
+  {{#each model as |document|}}
+    <li>
+      {{!-- We share the id here to match the route's model hook --}}
+      {{#link-to 'editor-documents.edit' document.currentVersion.id}}
+        {{document.currentVersion.title}} -- {{moment-from-now document.currentVersion.updatedOn}}
+      {{/link-to}}
+      <ul>
+        {{!-- We only fetch 20 random ones here, but sort them by date --}}
+        {{#each (sort-by "-updatedOn" document.revisions) as |revision|}}
+          <li>
+            {{!-- We use revision.id here to match the route's model hook --}}
+            -- {{#link-to 'editor-documents.show' revision.id}}
+            {{revision.id}} -- {{revision.title}} -- {{moment-from-now revision.updatedOn}}
+            {{/link-to}}
+              -- (alternative links: {{link-to 'show' 'editor-documents.show' revision.id}}, {{link-to 'edit version' 'editor-documents.edit' revision.id}})
+          </li>
+        {{/each}}
+      </ul>
+    </li>
+  {{/each}}
+</ul>

@@ -28,6 +28,7 @@ Router.map(function() {
     this.route('cookieverklaring');
   });
   this.route('contact');
+  this.route('documents', function() {});
 });
 
 export default Router;
