@@ -27,9 +27,13 @@ export default Controller.extend(EditorDocumentBaseController, {
   }),
   syncDocument: task(function * () {
     const savedDoc = yield this.save.perform();
-    yield this.store.createRecord('sync', {document: savedDoc }).save();
-    this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
+    /*
+     * THIS IS A HUGE PROBLEM: when saving and waiting for a second async task, the document fails.
+     */
+    this.store.createRecord('sync', { document: savedDoc }).save();
+    return savedDoc;
   }),
+
   actions: {
 
     handleRdfaEditorInit(editor){
