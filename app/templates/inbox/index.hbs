@@ -38,7 +38,8 @@
       <td>{{#link-to 'editor-documents.edit' row.id}}{{row.title}}{{/link-to}}</td>
       <td>{{moment-calendar row.createdOn}}</td>
       <td>{{moment-calendar row.updatedOn}}</td>
-      <td class="u-align-right">{{editor-status-pill status=(await row.status)}}</td>
+      <td class="u-align-right">{{editor-status-pill status=(await row.status)}} <br> {{document-link-to-published document=row}}
+      </td>
     {{/c.body}}
   {{/t.content}}
 {{/data-table}}
