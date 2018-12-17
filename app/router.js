@@ -28,7 +28,9 @@ Router.map(function() {
     this.route('cookieverklaring');
   });
   this.route('contact');
-  this.route('documents', function() {});
+  this.route('documents', function() {
+    this.route('show', { path: '/:id' }, function() {});
+  });
 });
 
 export default Router;

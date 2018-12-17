@@ -2,7 +2,7 @@
   {{#each model as |document|}}
     <li>
       {{!-- We share the id here to match the route's model hook --}}
-      {{#link-to 'editor-documents.edit' document.currentVersion.id}}
+      {{#link-to 'documents.show' document}}
         {{document.currentVersion.title}} -- {{moment-from-now document.currentVersion.updatedOn}}
       {{/link-to}}
       <ul>
