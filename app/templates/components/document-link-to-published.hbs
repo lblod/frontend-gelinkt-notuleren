@@ -3,7 +3,7 @@
 {{else}}
   {{#if linkText}}
     <div class="ember-view u-padding--top--tiny">
-      <a class="small link--dark" href={{baseUrl}} target="_blank" onClick={{action "goToPublication" baseUrl}}>{{linkText}}</a>
+      <a class="small link--dark" href={{baseUrl}} target="_blank" onClick={{action "goToPublication" baseUrl}}>{{{linkText}}}</a>
     </div>
   {{/if}}
 {{/if}}
