@@ -2,6 +2,8 @@
   <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
 {{else}}
   {{#if linkText}}
-    <a href={{baseUrl}} target="_blank" onClick={{action "goToPublication" baseUrl}}>{{linkText}}</a>
+    <div class="ember-view u-padding--top--tiny">
+      <a class="small link--dark" href={{baseUrl}} target="_blank" onClick={{action "goToPublication" baseUrl}}>{{linkText}}</a>
+    </div>
   {{/if}}
 {{/if}}
