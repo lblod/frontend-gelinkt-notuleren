@@ -30,16 +30,16 @@
      onClose=(action 'cancelSyncModal') as |m|}}
     {{#m.content}}
       <ul class="numbered-list">
-        <li>Klik op 'Hergebruik'</li>
-        <li>Meld u af</li>
+        <li>Klik onderaan op de knop 'Hergebruik gegevens'</li>
+        <li>Ga terug naar het overzicht, en meld u af</li>
         <li><strong>Meld u weer aan als OCMW</strong> om gebruik te kunnen maken van de gegevens in de eerste vergadering van de OCMW-raad.</li>
       </ul>
       <br>
-      <p class="small">U kan steeds gebruik maken van deze knop om informatie van het ene document naar het andere document over te brengen.</p>
+      <p class="small">De gegevens staan nu klaar voor hergebruik. U kan steeds gebruik maken van deze knop om informatie van het ene document naar het andere document over te brengen.</p>
     {{/m.content}}
     <div class="modal-dialog__footer">
       {{#m.buttons as |b|}}
-        {{b.button label="Hergebruik" onClick=(action 'syncDocument')}}
+        {{b.button label="Hergebruik gegevens" onClick=(action 'syncDocument')}}
         {{b.button label="Annuleren" onClick=(action 'cancelSyncModal') isLink=true icon="vi-cross"}}
       {{/m.buttons}}
     </div>
