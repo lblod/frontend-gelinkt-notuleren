@@ -1,25 +1,48 @@
 {{#app-chrome editorDocument=editorDocument}}
   {{editor-document-persistence-manager
-    editorDocument=editorDocument
-    statusIdMap=statusIdMap
-    save=(action "save")
-    syncDocument=(action "syncDocument")
-    publish=(action "publish")
-    sendToTrash=(action "sendToTrash")
+  editorDocument=editorDocument
+  statusIdMap=statusIdMap
+  save=(action "save")
+  onSync=(action "startSyncModal")
+  publish=(action "publish")
+  sendToTrash=(action "sendToTrash")
   }}
 {{/app-chrome}}
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
   {{#wu-modal
-    title="Geef uw document een naam"
-    dialog-class="modal-dialog--wide modal-dialog--sectioned"
-    onClose=(action 'closeValidationModal') as |m|}}
+     title="Geef uw document een naam"
+     dialog-class="modal-dialog--wide modal-dialog--sectioned"
+     onClose=(action 'closeValidationModal') as |m|}}
     {{#m.content}}
       Klik op de titel om uw document een naam te geven.
     {{/m.content}}
     {{#m.buttons as |b|}}
       {{b.button label="OK" onClick=(action 'closeValidationModal')}}
     {{/m.buttons}}
+  {{/wu-modal}}
+{{/if}}
+
+{{#if syncModalDisplay}}
+  {{#wu-modal
+     title="Herbruik gegevens in OCMW"
+     dialog-class="modal-dialog--sectioned"
+     onClose=(action 'cancelSyncModal') as |m|}}
+    {{#m.content}}
+      <ul class="numbered-list">
+        <li>Klik op 'Hergebruik'</li>
+        <li>Meld u af</li>
+        <li><strong>Meld u weer aan als OCMW</strong> om gebruik te kunnen maken van de gegevens in de eerste vergadering van de OCMW-raad.</li>
+      </ul>
+      <br>
+      <p class="small">U kan steeds gebruik maken van deze knop om informatie van het ene document naar het andere document over te brengen.</p>
+    {{/m.content}}
+    <div class="modal-dialog__footer">
+      {{#m.buttons as |b|}}
+        {{b.button label="Hergebruik" onClick=(action 'syncDocument')}}
+        {{b.button label="Annuleren" onClick=(action 'cancelSyncModal') isLink=true icon="vi-cross"}}
+      {{/m.buttons}}
+    </div>
   {{/wu-modal}}
 {{/if}}
 
