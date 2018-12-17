@@ -1,10 +1,20 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { task } from 'ember-concurrency';
+import { getOwner } from '@ember/application';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  currentSession: service(),
+
   tagName: 'span',
-  setStatus: task(function *(){
+  setProperties: task(function *(){
+    const bestuurseenheid = yield this.get('currentSession.group');
+    const classificatieLabel = (yield bestuurseenheid.get('classificatie')).label;
+    const bestuurseenheidNaam = bestuurseenheid.naam;
+    const config = getOwner(this).resolveRegistration('config:environment');
+    const baseHost = (config.publicatie || {}).baseUrl;
+    this.set('baseUrl', `${baseHost.replace(/\/$/, "")}/${bestuurseenheidNaam}/${classificatieLabel}`);
     this.set('status', yield this.get('document.status'));
   }),
 
@@ -31,7 +41,14 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.setStatus.perform();
+    this.setProperties.perform();
+  },
+
+  actions: {
+    goToPublication(link){
+      window.open(link, '_blank');
+    }
+
   }
 
 });

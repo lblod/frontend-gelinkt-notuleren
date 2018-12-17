@@ -1,3 +1,7 @@
-{{#if linkText}}
-  <a href="#">{{linkText}}</a>
+{{#if setProperties.isRunning}}
+  <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+{{else}}
+  {{#if linkText}}
+    <a href={{baseUrl}} target="_blank" onClick={{action "goToPublication" baseUrl}}>{{linkText}}</a>
+  {{/if}}
 {{/if}}
