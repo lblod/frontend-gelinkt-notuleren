@@ -2,3 +2,25 @@
 <p>
   {{model.currentVersion.title}}
 </p>
+<div vocab={{editorDocumentVocab}}
+  prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit#"
+  resource="#"
+  typeof="foaf:Document"
+  class="container-flex--contain">
+  <div class="editor-container">
+	  <div class="grid grid--collapse">
+		  <div class="col--12-12 flex">
+			  <div class="editor">
+				  <div class="grid">
+						<div class="col--7-12">
+              {{#let (await model.currentVersion) as |current|}}
+							  {{{current.content}}}
+              {{/let}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
