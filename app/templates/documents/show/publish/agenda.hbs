@@ -1,9 +1,17 @@
 <h1>Ready to sign the agenda of</h1>
 <p>
-  {{model.documentContainer.currentVersion.title}}
+  {{documentContainer.currentVersion.title}}
 </p>
 
 <h1>Current agenda</h1>
-<p>{{{model.agendaContents}}}</p>
+<p>{{{agendaContents}}}</p>
   
+<hr/>
+
+<h1>Signatures and publication</h1>
+<button {{action "applySignature" "mayor"}} /> <!-- makes current user sign in name of the Mayor -->
+<button {{action "applySignature" "secretary"}} /> <!-- makes the user sign in name of the Secretary -->
+
+<button {{action "publish"}} /> <!-- publishes the agenda -->
+
 {{outlet}}
