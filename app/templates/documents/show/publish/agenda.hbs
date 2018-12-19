@@ -5,13 +5,17 @@
 
 <h1>Current agenda</h1>
 <p>{{{agendaContents}}}</p>
-  
+
 <hr/>
 
 <h1>Signatures and publication</h1>
-<button {{action "applySignature" "mayor"}} /> <!-- makes current user sign in name of the Mayor -->
-<button {{action "applySignature" "secretary"}} /> <!-- makes the user sign in name of the Secretary -->
 
-<button {{action "publish"}} /> <!-- publishes the agenda -->
+<!-- In the following snippets, you can put the [[action ...]] bit (with the right braces) on any tag, no button needed -->
+<!-- Still need to figure out the names, they'll only be known when someone executes a signing request -->
+
+<button {{action "applySignature" "mayor"}}>Sign by mayor</button> <!-- makes current user sign in name of the Mayor -->
+<button {{action "applySignature" "secretary"}}>Sign by secretary</button> <!-- makes the user sign in name of the Secretary -->
+
+<button {{action "publish"}}>Publish</button> <!-- publishes the agenda -->
 
 {{outlet}}

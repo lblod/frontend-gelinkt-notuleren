@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
-import { task } from 'ember-concurrency';
+import { task, timeout } from 'ember-concurrency';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { inject as service } from '@ember/service';
 
@@ -19,17 +19,22 @@ export default Controller.extend(EditorDocumentBaseController, {
      let editorDocument = this.editorDocument;
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);
-       return;
+       return null;
      }
 
     const savedDoc = yield this.saveEditorDocument(editorDocument);
     return savedDoc;
   }),
+
   syncDocument: task(function * () {
     const savedDoc = yield this.save.perform();
-    yield this.store.createRecord('sync', {document: savedDoc }).save();
-    this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
+    /*
+     * THIS IS A HUGE PROBLEM: when saving and waiting for a second async task, the document fails.
+     */
+    this.store.createRecord('sync', { document: savedDoc }).save();
+    return savedDoc;
   }),
+
   actions: {
 
     handleRdfaEditorInit(editor){
@@ -46,11 +51,21 @@ export default Controller.extend(EditorDocumentBaseController, {
     },
 
     async syncDocument() {
-      await this.syncDocument.perform();
+      this.set('syncModalDisplay', false);
+      const savedDoc = await this.syncDocument.perform();
+      this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
     },
     async save(){
       const savedDoc = await this.save.perform();
       this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
-   }
+    },
+
+    startSyncModal(){
+      this.set('syncModalDisplay', true);
+    },
+
+    cancelSyncModal(){
+      this.set('syncModalDisplay', false);
+    }
   }
 });

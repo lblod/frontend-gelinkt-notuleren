@@ -31,7 +31,7 @@ export default Component.extend({
         return null;
       case "627aec5d144c422bbd1077022c9b45d1":
         // agenda publiek
-        return "ga naar gepubliceerde agenda";
+        return "Bekijk&nbsp;gepubliceerde&nbsp;agenda";
       case "b763390a63d548bb977fb4804293084a":
         // notulen publiek
         return "ga naar publieke notulen";

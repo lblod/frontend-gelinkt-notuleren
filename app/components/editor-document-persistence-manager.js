@@ -31,6 +31,10 @@ export default Component.extend({
 
     sendToTrash(){
       this.sendToTrash();
+    },
+
+    startSyncModal(){
+      this.onSync();
     }
   }
 });
