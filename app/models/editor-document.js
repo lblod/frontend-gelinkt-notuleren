@@ -4,6 +4,7 @@ import { belongsTo } from 'ember-data/relationships';
 import defaultContext from '../config/editor-document-default-context';
 
 export default Model.extend({
+  uri: attr(),
   title: attr(),
   content: attr(),
   context: attr('string', { defaultValue: defaultContext}),
