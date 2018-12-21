@@ -16,7 +16,7 @@ export default {
     "rdfa-editor-generic-model-plugin",
     "rdfa-editor-standard-template-plugin",
     "rdfa-editor-date-plugin",
-//    "rdfa-editor-citaten-plugin",
+   "rdfa-editor-citaten-plugin",
 //    "rdfa-editor-mandaat-plugin",
     "rdfa-editor-personen-plugin"
   ],
@@ -39,8 +39,8 @@ export default {
     "rdfa-editor-generic-model-plugin",
     "rdfa-editor-standard-template-plugin",
     "rdfa-editor-date-plugin",
-    //    "rdfa-editor-citaten-plugin",
-    //    "rdfa-editor-mandaat-plugin",
+    // "rdfa-editor-citaten-plugin",
+    // "rdfa-editor-mandaat-plugin",
     "rdfa-editor-personen-plugin"
   ],
 
@@ -60,7 +60,7 @@ export default {
     "rdfa-editor-generic-model-plugin",
     "rdfa-editor-standard-template-plugin",
     "rdfa-editor-date-plugin",
-    //    "rdfa-editor-citaten-plugin",
+     "rdfa-editor-citaten-plugin",
     //    "rdfa-editor-mandaat-plugin",
     "rdfa-editor-personen-plugin"
   ],
