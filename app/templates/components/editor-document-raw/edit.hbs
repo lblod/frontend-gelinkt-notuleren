@@ -1,0 +1,33 @@
+{{!-- title: attr(),
+   content: attr(),
+   context: attr('string', { defaultValue: defaultContext}),
+   createdOn: attr('datetime'),
+   updatedOn: attr('datetime'),
+   starred: attr(),
+   origin: attr(),
+   status: belongsTo('editor-document-status', {inverse: null }),
+   previousVersion: belongsTo('editor-document', {inverse: 'nextVersion'}),
+   nextVersion: belongsTo('editor-document', {inverse: 'previousVersion'}) --}}
+
+{{#if saveDocument.isRunning}}
+  <span class="loader"><span class="u-visually-hidden">Aan het verwerken</span></span>
+{{else}}
+  Title: {{input class="input-field input-field--block js-js-input-pattern-bound"  value=(mut document.title)}}
+  Context: {{input class="input-field input-field--block js-js-input-pattern-bound" value=(mut document.context)}}
+  {{#if document.previousVersion.id}}
+    {{#wu-link-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action "previous" ) }}
+      Previous version
+    {{/wu-link-button}}
+  {{/if}}
+  {{#if document.nextVersion.id}}
+    {{#wu-link-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action "next" )}}
+      Next version
+    {{/wu-link-button}}
+  {{/if}}
+  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'save') }}
+    save
+  {{/wu-button}}
+  <div contenteditable="true" id={{outputId}}>
+    {{document.content}}
+  </div>
+{{/if}}
