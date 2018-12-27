@@ -10,7 +10,8 @@ Router.map(function() {
   this.route('editor-documents', function() {
     this.route('edit', { path: '/:id/edit' });
     this.route('new');
-    this.route('show', { path: '/:id/show'});
+    this.route('show', { path: '/:id/show' });
+    this.route('raw', { path: '/:id/raw' });
   });
   this.route('inbox', function() {
     this.route('archive');

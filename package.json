@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "0.12.2",
+  "version": "0.12.7",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -27,7 +27,7 @@
     "@lblod/ember-mock-login": "^0.4.5",
     "@lblod/ember-rdfa-editor": "^0.18.5",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "^0.1.15",
-    "@lblod/ember-rdfa-editor-bijzonder-comite-aanstelling-plugin": "^0.2.0",
+    "@lblod/ember-rdfa-editor-bijzonder-comite-aanstelling-plugin": "^0.2.6",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.7.0",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.2",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "^0.1.2",
@@ -36,7 +36,7 @@
     "@lblod/ember-rdfa-editor-document-tasklist-plugin": "^0.1.5",
     "@lblod/ember-rdfa-editor-document-title-plugin": "^0.1.1",
     "@lblod/ember-rdfa-editor-fractievorming-plugin": "^0.1.11",
-    "@lblod/ember-rdfa-editor-gemeenteraadsleden-aanstelling-plugin": "0.7.4",
+    "@lblod/ember-rdfa-editor-gemeenteraadsleden-aanstelling-plugin": "0.7.6",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "^0.1.6",
     "@lblod/ember-rdfa-editor-installatievergadering-plugin": "^0.1.10",
     "@lblod/ember-rdfa-editor-mandaat-plugin": "0.1.0",
