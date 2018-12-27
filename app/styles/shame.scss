@@ -89,7 +89,7 @@ li.link-list__item > button.button {
       }
 
       .sidebar {
-        background-color: #FFF;
+        background-color: white;
 
         .sidebar__header i {
           cursor: pointer;
@@ -111,6 +111,15 @@ input.input-field {
 
 .modal-dialog.modal-dialog--sectioned .modal-dialog__content {
   max-height: 75vh;
+}
+
+.data-table--white tr {
+	background-color: white !important;
+}
+
+.data-table--bordered {
+	border-left: 1px solid $gray-lighter;
+	border-right: 1px solid $gray-lighter;
 }
 
 

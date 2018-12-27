@@ -8,7 +8,7 @@
 
 span.mark-highlight-manual {
   background-color: rgba($primary-blue, 0.4);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* editor annotations styling */
@@ -149,6 +149,7 @@ span.mark-highlight-manual {
   [typeof="mandaat:Mandataris"],
   [property="mandaat:start"],
   [property="org:holds"],
+  [property="ext:secretarisTemporaryAsText"],
 
   [property="besluit:Geheim"],
   [property="besluit:Onderwerp"],
