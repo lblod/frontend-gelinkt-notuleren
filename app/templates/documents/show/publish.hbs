@@ -1,14 +1,41 @@
-<div class="sidebar">Here starts the side-bar</div>
-<ul>
-  <li>{{link-to 'overview' 'documents.show.publish.overview' model}}</li>
-  <li>{{link-to 'agenda' 'documents.show.publish.agenda' model}}</li>
-  <li>Besluitenlijst</li>
-  <li>Individuele besluiten</li>
-  <li>Notulen</li>
-</ul>
-
-<p>Each of these subroutes will present the contents of the document with current title <quote>{{model.currentVersion.title}}</quote></p>
-
-<hr />
-
-{{outlet}}
+<div class="grid">
+	<div class="col--3-12">
+		{{!-- <div class="sidebar">Here starts the side-bar</div> --}}
+		<div class="u-padding--round">
+			<ul class="bullet-list">
+			  <li>
+			  	{{link-to 'Bekijk notulen' 'documents.show.publish.overview' model}}
+			  	<span class="pill">Status authenticatie</span>
+			  	<span class="pill">Status publicatie</span>
+			  </li>
+			  <li>
+			  	{{link-to 'Agenda' 'documents.show.publish.agenda' model}}
+			  	<span class="pill">Status authenticatie</span>
+			  	<span class="pill">Status publicatie</span>
+			  </li>
+			  <li>
+			  	Besluitenlijst
+			  	<span class="pill">Status authenticatie</span>
+			  	<span class="pill">Status publicatie</span>
+			  </li>
+			  <li>
+			  	Uittreksels
+			  	<span class="pill">Status authenticatie</span>
+			  	<span class="pill">Status publicatie</span>
+			  </li>
+			  <li>
+			  	Notulen
+			  	<span class="pill">Status authenticatie</span>
+			  	<span class="pill">Status publicatie</span>
+			  </li>
+			</ul>
+		</div>
+	</div>
+	<div class="col--9-12">
+		<div class="u-padding--round">
+			<p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p>
+			<hr />
+			{{outlet}}
+		</div>
+	</div>
+</div>
