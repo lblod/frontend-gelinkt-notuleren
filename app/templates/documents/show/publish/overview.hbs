@@ -1,30 +1,126 @@
-<h1 class="h3">This is an overview of document:
-	{{model.currentVersion.title}}
-</h1>
+<div class="grid">
+	<div class="col--6-12">
+		<h1 class="h1">Onderteken &amp; Publiceer</h1> {{!-- {{model.currentVersion.title}}  --}}
+	</div>
+	<div class="col--6-12 u-align-right">
 
-<div class="u-padding--top--large">
-	<div class="editor__paper">
-		<div vocab={{editorDocumentVocab}}
-		  prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit#"
-		  resource="#"
-		  typeof="foaf:Document"
-		  class="container-flex--contain">
-		  <div class="editor-container">
-			  <div class="grid grid--collapse">
-				  <div class="col--12-12 flex">
-					  <div class="editor">
-						  <div class="grid">
-								<div class="col--7-12">
-		              {{#let (await model.currentVersion) as |current|}}
-									  {{{current.content}}}
-		              {{/let}}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+		{{!-- <button class="button button--narrow" {{action "publish"}}>Publiceer</button> --}}
+		{{!-- publishes the agenda --}}
+	</div>
+</div>
+
+<h2 class="uppercase text-fade h6 sans-serif u-spacer--small">Voorvertoning</h2>
+<div class="grid">
+	<div class="col--8-12">
+		<div class="editor__paper u-spacer--none">
+			<div vocab={{editorDocumentVocab}}
+			  prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit#"
+			  resource="#"
+			  typeof="foaf:Document">
+	      {{#let (await model.currentVersion) as |current|}}
+				  {{{current.content}}}
+	      {{/let}}
 			</div>
 		</div>
+	</div>
+	<div class="col--4-12">
+		<div>
+			<div class="grid">
+				<div class="col--6-12">
+					<h3 class="h3">Onderteken</h3>
+				</div>
+				<div class="col--6-12 u-align-right">
+					<span class="pill">Niet ondertekend</span>
+				</div>
+			</div>
+			<p class="small u-spacer--tiny">Ondertekenen vereist door voorzitter en algemeen directeur.</p>
+			<button class="button button--block" {{action "applySignature" "chairman"}}>Onderteken</button>
+			<p class="text-fade smallest u-padding--round--tiny">Or, when not logged in as "ondertekenaar"</p>
+			<div class="button-group">
+				<button class="button button--block button--disabled" {{action "applySignature"}}>Onderteken</button>
+			</div>
+		</div>
+
+		<div class="u-hr u-spacer--tb"></div>
+
+		<div>
+			<div class="grid">
+				<div class="col--6-12">
+					<h3 class="h3">Publiceer</h3>
+				</div>
+				<div class="col--6-12 u-align-right">
+					<span class="pill">Niet gepubliceerd</span>
+				</div>
+			</div>
+			<p class="small u-spacer--tiny">Naar publieke besluitendatabank.</p>
+			<button class="button button--block" {{action "publish"}}>Publiceer</button>
+			<p class="text-fade smallest u-padding--round--tiny">Or, when not logged in as "publiceerder"</p>
+			<div class="button-group">
+				<button class="button button--block button--disabled" {{action "publish"}}>Publiceer</button>
+			</div>
+		</div>
+
+		<div class="u-hr u-spacer--tb"></div>
+
+		<div>
+			<div class="grid">
+				<div class="col--6-12">
+					<h3 class="h3">Onderteken</h3>
+				</div>
+				<div class="col--6-12 u-align-right">
+					<span class="pill pill--primary-yellow">Één ondertekening</span>
+				</div>
+			</div>
+			<p class="small u-spacer--tiny">Ondertekenen vereist door voorzitter en algemeen directeur. Ondertekend door Voornaam Familienaam.</p>
+			<div class="button-group">
+				<a href="#" class="button button--small button--block button--alt">Verifieer ondertekening</a>
+				<a href="#" class="button button--small button--block button--alt button--alt--warning">Maak ondertekening ongedaan</a>
+				<button class="button button--block" {{action "applySignature" "chairman"}}>Onderteken</button>
+				<p class="text-fade smallest u-padding--round--tiny">Or, when not logged in as "ondertekenaar", or when already signed</p>
+				<button class="button button--block button--disabled" {{action "applySignature"}}>Onderteken</button>
+			</div>
+		</div>
+
+		<div class="u-hr u-spacer--tb"></div>
+
+		<div>
+			<div class="grid">
+				<div class="col--6-12">
+					<h3 class="h3">Onderteken</h3>
+				</div>
+				<div class="col--6-12 u-align-right">
+					<span class="pill pill--primary-blue">Ondertekend</span>
+				</div>
+			</div>
+			<p class="small u-spacer--tiny">Ondertekenen vereist door voorzitter en algemeen directeur. Ondertekend door Voornaam Familienaam en Voornaam Familienaam.</p>
+			<div class="button-group">
+				<a href="#" class="button button--block button--alt">Verifieer ondertekeningen</a>
+				<a href="#" class="button button--block button--alt button--alt--warning">Maak ondertekeningen ongedaan</a>
+				<p class="text-fade smallest u-padding--round--tiny">Maybe when adapted? For instance with agenda. Need to check</p>
+				<button class="button button--block" {{action "publish"}}>Onderteken nieuwe versie</button>
+			</div>
+		</div>
+
+		<div class="u-hr u-spacer--tb"></div>
+
+		<div>
+			<div class="grid">
+				<div class="col--6-12">
+					<h3 class="h3">Publiceer</h3>
+				</div>
+				<div class="col--6-12 u-align-right">
+					<span class="pill pill--primary-blue">Gepubliceerd</span>
+				</div>
+			</div>
+			<p class="small u-spacer--tiny">Gepubliceerd door Voornaam Familienaam publieke besluitendatabank.</p>
+			<div class="button-group">
+				<a href="#" class="button button--block button--alt">Verifieer publicatie</a>
+				<a href="#" class="button button--block button--alt button--alt--warning">Maak publicatie ongedaan</a>
+				<p class="text-fade smallest u-padding--round--tiny">When possible, for instance with agenda. What about "burned" documents? Need to check.</p>
+				<button class="button button--block" {{action "publish"}}>Herpubliceer</button>
+			</div>
+		</div>
+
 	</div>
 </div>
 
