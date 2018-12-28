@@ -1,41 +1,57 @@
-<div class="grid">
-	<div class="col--3-12">
-		{{!-- <div class="sidebar">Here starts the side-bar</div> --}}
-		<div class="u-padding--round">
-			<ul class="bullet-list">
-			  <li>
-			  	{{link-to 'Bekijk notulen' 'documents.show.publish.overview' model}}
-			  	<span class="pill">Status authenticatie</span>
-			  	<span class="pill">Status publicatie</span>
-			  </li>
-			  <li>
-			  	{{link-to 'Agenda' 'documents.show.publish.agenda' model}}
-			  	<span class="pill">Status authenticatie</span>
-			  	<span class="pill">Status publicatie</span>
-			  </li>
-			  <li>
-			  	Besluitenlijst
-			  	<span class="pill">Status authenticatie</span>
-			  	<span class="pill">Status publicatie</span>
-			  </li>
-			  <li>
-			  	Uittreksels
-			  	<span class="pill">Status authenticatie</span>
-			  	<span class="pill">Status publicatie</span>
-			  </li>
-			  <li>
-			  	Notulen
-			  	<span class="pill">Status authenticatie</span>
-			  	<span class="pill">Status publicatie</span>
-			  </li>
-			</ul>
+<div class="container-flex--contain">
+	<div class="editor-chrome">
+		<div class="grid">
+			<div class="col--12-12">
+				{{link-to '← Terug naar notulen' 'editor-documents.edit' model.currentVersion.id class="smaller link-dark"}}
+			</div>
 		</div>
 	</div>
-	<div class="col--9-12">
-		<div class="u-padding--round">
-			<p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p>
-			<hr />
-			{{outlet}}
+	<div class="grid">
+		<div class="col--2-12">
+			<div class="container-flex--contain">
+				{{!-- <div class="sidebar">Here starts the side-bar</div> --}}
+				<div class="sidebar">
+					<div class="sidebar__content">
+						<div class="side-navigation side-navigation--block">
+							<ul class="side-navigation__group">
+								<li class="side-navigation__item">
+							  	{{link-to 'Bekijk notulen' 'documents.show.publish.overview' model}}
+							  	<span class="pill">Status authenticatie</span>
+							  	<span class="pill">Status publicatie</span>
+								</li>
+								<li class="side-navigation__item">
+							  	{{link-to 'Agenda' 'documents.show.publish.agenda' model}}
+							  	<span class="pill">Status authenticatie</span>
+							  	<span class="pill">Status publicatie</span>
+								</li>
+								<li class="side-navigation__item">
+							  	<a href="#">Besluitenlijst</a>
+							  	<span class="pill">Status authenticatie</span>
+							  	<span class="pill">Status publicatie</span>
+								</li>
+								<li class="side-navigation__item">
+							  	<a href="#">Uittreksels</a>
+							  	<span class="pill">Status authenticatie</span>
+							  	<span class="pill">Status publicatie</span>
+								</li>
+								<li class="side-navigation__item">
+							  	<a href="#">Notulen</a>
+							  	<span class="pill">Status authenticatie</span>
+							  	<span class="pill">Status publicatie</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col--10-12">
+			<div class="container-flex--scroll">
+				<div class="u-padding--round">
+					{{!-- <p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p> --}}
+					{{outlet}}
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
