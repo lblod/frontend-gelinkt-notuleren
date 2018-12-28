@@ -13,7 +13,7 @@
             {{#link-to 'editor-documents.show' revision.id}}
             	{{revision.id}} -- {{revision.title}}
             {{/link-to}} {{moment-from-now revision.updatedOn}}
-              -- (alternative links: {{link-to 'show' 'editor-documents.show' revision.id}}, {{link-to 'edit version' 'editor-documents.edit' revision.id}})
+              -- (alternative links: {{link-to 'show' 'editor-documents.show' revision.id}}, {{link-to 'edit version' 'editor-documents.edit' revision.id}}, {{link-to 'publish' 'documents.show.publish' revision.id}} test)
           </li>
         {{/each}}
       </ul>
