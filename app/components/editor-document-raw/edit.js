@@ -11,7 +11,7 @@ export default Component.extend({
    }),
 
   saveDocument: task(function * () {
-    this.document.set('content', document.getElementById(this.outputId).innerHTML);
+    this.document.set('content', document.getElementById(this.outputId).textContent);
     yield this.document.save();
   }),
 
