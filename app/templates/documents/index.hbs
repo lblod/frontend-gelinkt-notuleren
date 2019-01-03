@@ -4,7 +4,7 @@
       {{!-- We share the id here to match the route's model hook --}}
       {{#link-to 'documents.show' document}}
         {{document.currentVersion.title}}
-      {{/link-to}} -- {{moment-from-now document.currentVersion.updatedOn}}
+      {{/link-to}} -- {{moment-from-now document.currentVersion.updatedOn}} -- {{link-to 'publish' 'documents.show.publish' document}}
       <ul class="bullet-list">
         {{!-- We only fetch 20 random ones here, but sort them by date --}}
         {{#each (sort-by "-updatedOn" document.revisions) as |revision|}}
@@ -13,7 +13,7 @@
             {{#link-to 'editor-documents.show' revision.id}}
             	{{revision.id}} -- {{revision.title}}
             {{/link-to}} {{moment-from-now revision.updatedOn}}
-              -- (alternative links: {{link-to 'show' 'editor-documents.show' revision.id}}, {{link-to 'edit version' 'editor-documents.edit' revision.id}}, {{link-to 'publish' 'documents.show.publish' revision.id}} test)
+              -- (alternative links: {{link-to 'show' 'editor-documents.show' revision.id}}, {{link-to 'edit version' 'editor-documents.edit' revision.id}})
           </li>
         {{/each}}
       </ul>
