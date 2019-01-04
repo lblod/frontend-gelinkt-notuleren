@@ -1,0 +1,18 @@
+<h1>Manual</h1>
+<p>
+  Expects the following JSON:
+  [
+  {
+  "type": "besluit:Zitting",
+  "newUri": "http://new",
+  "oldUri": "http://old"
+  }
+  ]
+</p>
+{{textarea value=uriData}}
+{{#wu-link-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action "replace" ) }}
+  Replace
+{{/wu-link-button}}
+<p>
+  {{{resultLog}}}
+</p>

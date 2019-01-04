@@ -41,6 +41,10 @@ export default Component.extend(FileSaverMixin, {
 
   actions: {
 
+    toggleReplaceUris(){
+      this.toggleProperty('replaceUrisMode');
+    },
+
     toggleFileUpload(){
       this.toggleProperty('uploadFileMode');
     },

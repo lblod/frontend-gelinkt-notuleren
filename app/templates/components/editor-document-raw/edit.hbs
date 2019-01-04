@@ -50,4 +50,12 @@
     <input onchange={{action "uploadFileAndReplace"}} type="file"/>
   {{/if}}
 
+  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'toggleReplaceUris') }}
+    replace URIS
+  {{/wu-button}}
+
+  {{#if replaceUrisMode}}
+    {{editor-document-raw/replace-uris document=document }}
+  {{/if}}
+
 {{/if}}
