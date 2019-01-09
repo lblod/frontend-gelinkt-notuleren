@@ -120,10 +120,12 @@ export default Mixin.create({
   },
 
   publishFlow: task(function *(){
+    let newDocument = null;
     try {
+
       let editorDocument = this.editorDocument;
       let publishStatus = this.nextStatus;
-      let newDocument = yield this.publishDocument(editorDocument, publishStatus);
+      newDocument = yield this.publishDocument(editorDocument, publishStatus);
       let apiEndPoint = this.getPublishApi(publishStatus);
       if(apiEndPoint){
         yield this.ajax.post(apiEndPoint(newDocument.get('id')));
@@ -132,7 +134,18 @@ export default Mixin.create({
     }
     catch(e){
       alert('Fout bij publiceren: ' + e);
-      throw e;
+      console.log(e);
+
+      //rollback
+      if(newDocument){
+        newDocument.set('status', this.get('previousStatus'));
+        yield newDocument.save();
+        this.transitionToRoute('editor-documents.edit', newDocument.id, {queryParams: { scrollToLastSavePosition: true } });
+      }
+      else {
+        this.editorDocument.set('status', this.get('previousStatus'));
+        yield this.editorDocument.save();
+      }
     }
   }),
 
@@ -170,6 +183,7 @@ export default Mixin.create({
    },
 
    publish(){
+     this.set('previousStatus', this.get('editorDocument.status'));
      if(this.hasDocumentValidationErrors(this.editorDocument)){
        this.set('validationErrors', true);
        return;
