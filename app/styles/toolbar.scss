@@ -12,3 +12,44 @@
     width: 22rem;
     padding-left: 0.25rem;
 }
+
+
+/* ==========================================================================
+  Annotations trigger
+  Style the annotations trigger here.
+ ========================================================================== */
+
+	/* plusje aan de zijkant, moet naar toolbar */
+	.editor-commands {
+    margin-top: 3rem;
+    width: 22rem;
+    position: fixed;
+    z-index: 900;
+    right: 1rem;
+	}
+
+	button.button.annotation-suggestion--trigger {
+	    background-color: $white;
+	    color: $gray;
+	    border: 1px solid $blue-gray-light;
+	    display: block;
+	    width: 3rem;
+	    height: 3rem;
+	    padding: 0 0 0.45rem;
+	    border-radius: 100%;
+	    text-align: center;
+	    margin-top: -1rem;
+	    line-height: 0;
+	    font-size: 3rem;
+	}
+
+	button.button.annotation-suggestion--trigger:after {
+	    content:"Voeg sjabloon in";
+	    display: block;
+	    position: absolute;
+	    font-size: 1.4rem;
+	    color: $gray-dark;
+	    left: 3.65rem;
+	    z-index: 900;
+	    top: 1.5rem;
+	}
