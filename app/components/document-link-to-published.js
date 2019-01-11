@@ -24,7 +24,7 @@ export default Component.extend({
     switch(id) {
       case "c272d47d756d4aeaa0be72081f1389c6":
         // ondertekende notulen gepubliceerd
-        return "ga naar gepubliceerde en ondertekende notulen";
+        return "Bekijk&nbsp;gepubliceerde&nbsp;notulen";
       case "cfd751588a6c453296de9f9c0dff2af4":
       case "5A8304E8C093B00009000010":
         // concept
@@ -33,8 +33,8 @@ export default Component.extend({
         // agenda publiek
         return "Bekijk&nbsp;gepubliceerde&nbsp;agenda";
       case "b763390a63d548bb977fb4804293084a":
-        // notulen publiek
-        return "ga naar publieke notulen";
+        // Besluitenlijst publiek
+        return "Bekijk&nbsp;gepubliceerde&nbsp;besluitenlijst";
     }
     return null;
   }),
