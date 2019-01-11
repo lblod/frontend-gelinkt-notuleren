@@ -64,15 +64,6 @@ li.link-list__item > button.button {
 	}
 }
 
-/* restyling annotation positions and styling for demo */
-.modal-dialog--hint {
-  position: fixed !important;
-  top: 15rem !important;
-  right: 5rem !important;
-  left: auto !important;
-  max-height: 50vh;
-}
-
 /** Collapsable document structure */
 .editor-container {
   background-color: $blue-gray-lightest;
@@ -123,37 +114,89 @@ input.input-field {
 }
 
 
-/* ==========================================================================
-    Modals
-========================================================================== */
+// /* sidebar publish */
 
-.modal-dialog__content li.link-list__item.link-list__item--sidenotes a:first-child {
-	border-bottom: none;
-	padding-bottom: 0.3rem;
+// .sidebar .side-navigation__group--bordered {
+// 	padding-top: 0;
+// }
+
+// .side-navigation__group--bordered .side-navigation__item {
+// 	border-bottom: 1px solid $blue-gray-lighter;
+// }
+
+// .side-navigation__item {
+// 	position: relative;
+// }
+
+// .side-navigation__item .side-navigation__item__status-icons {
+// 	position: absolute;
+// 	right: 1rem;
+// 	top: 1.5rem;
+// }
+
+// .vi-u-badge--border {
+// 	border: 1px solid $blue-gray-light;
+// 	background-color: $white;
+// }
+
+// .side-navigation__item .side-navigation__item__status {
+// 	padding: 0 1.5rem 1rem;
+// }
+
+// .side-navigation__item a.active + .side-navigation__item__status {
+// 	background-color: $blue-gray-lightest;
+// 	box-shadow: inset 3px 0 0 $primary-blue;
+
+// 	.pill {
+// 		margin-bottom: 1rem;
+// 	}
+// }
+
+
+
+/* Side navigation block layout temporary fixes
+ ========================================================================== */
+
+
+.side-navigation--blocks .side-navigation__group {
+	padding: 0;
 }
 
-.modal-dialog__content li.link-list__item .link-list__item__sidenote {
+.side-navigation--blocks li {
+	border-bottom: 1px solid $gray-lighter;
+}
+
+.side-navigation--blocks li.active {
+	box-shadow: inset 0.3rem 0 0 $primary-blue;
+}
+
+.side-navigation--blocks li:hover {
+	box-shadow: inset 0.3rem 0 0 $primary-blue;
+	background: $blue-gray-lightest;
+	cursor: pointer;
+}
+
+.side-navigation--blocks a {
+	text-decoration: none !important;
+	color: $gray-dark;
+	padding-top: 1rem;
+}
+
+.side-navigation--blocks .link-group {
+	padding-left: 1.5rem;
+	padding-bottom: 1.5rem;
+}
+
+.side-navigation--blocks .active + .link-group {
+	background-color: $blue-gray-lightest;
+	box-shadow: inset 0.3rem 0 0 $primary-blue;
+}
+
+.side-navigation--blocks .link-group {
+	margin-left: 0;
+}
+
+.side-navigation--blocks .side-navigation__item {
 	padding-top: 0;
-	padding-bottom: 1.2rem;
-	margin-top: 0.5rem;
-	color: $gray;
-	font-size: 80%;
-	line-height: 1.3;
-	display: block;
-	word-break: break-all;
-	border-bottom: $blue-gray-light;
-
-	&:hover {
-		background-color: transparent;
-		color: $black;
-	}
-}
-
-.modal-dialog__content li.link-list__item span.link-list__item__sidenote {
-	cursor: default;
-	pointer-events: none;
-}
-
-.modal-dialog__content > .data-table {
-	margin-bottom: 22rem;
+	padding-bottom: 0;
 }
