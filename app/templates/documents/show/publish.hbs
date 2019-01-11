@@ -1,53 +1,77 @@
 <div class="container-flex--contain">
 	<div class="editor-chrome">
-		<div class="grid">
-			<div class="col--12-12">
-				{{link-to '← Terug naar notulen' 'editor-documents.edit' model.currentVersion.id class="smaller link-dark"}}
+		<div class="u-spacer--tiny">
+			<div class="grid">
+				<div class="col--9-12">
+					{{link-to '← Terug naar notulen' 'editor-documents.edit' model.currentVersion.id class="smaller link-dark"}}
+				</div>
+				<div class="col--3-12 u-align-right">
+					<span class="pill pill--primary-yellow">Agenda ondertekend</span>
+				</div>
 			</div>
 		</div>
+		<h1 class="h5 u-spacer--tiny">{{model.currentVersion.title}}</h1>
 	</div>
 	<div class="grid">
-		<div class="col--2-12">
+		<div class="col--3-12">
 			<div class="container-flex--contain">
 				{{!-- <div class="sidebar">Here starts the side-bar</div> --}}
 				<div class="sidebar">
 					<div class="sidebar__content">
-						<div class="side-navigation side-navigation--block">
+						<nav class="side-navigation side-navigation--blocks">
 							<ul class="side-navigation__group">
-								<li class="side-navigation__item">
+{{!-- 								<li class="side-navigation__item">
 							  	{{link-to 'Bekijk notulen' 'documents.show.publish.overview' model}}
-							  	<span class="pill">Status authenticatie</span>
-							  	<span class="pill">Status publicatie</span>
+								</li> --}}
+								<li class="side-navigation__item">
+							  	{{link-to 'Agenda' 'documents.show.publish.agenda' model class="h6"}}
+							  	<div class="link-group link-group--bordered link-group--tiny link-group--dark">
+							  		<a class="link--icon">Ondertekend <i class="vi vi-edit"></i></a>
+							  		<a class="link--icon link--disabled">Niet publiek <i class="vi vi-clock"></i></a>
+							  	</div>
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--action vi-edit" data-toggle="tooltip" title="Ondertekend" data-content="Ondertekend" data-placement="right" data-timer="25"></i> --}}
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--border vi-news" data-toggle="tooltip" title="Publiek" data-content="Publiek" data-placement="right" data-timer="25"></i> --}}
 								</li>
 								<li class="side-navigation__item">
-							  	{{link-to 'Agenda' 'documents.show.publish.agenda' model}}
-							  	<span class="pill">Status authenticatie</span>
-							  	<span class="pill">Status publicatie</span>
+							  	<a href="#" class="h6">Besluitenlijst</a>
+							  	<div class="link-group link-group--bordered link-group--tiny link-group--dark">
+							  		<a class="link--icon link--disabled">Niet ondertekend <i class="vi vi-clock"></i></a>
+							  		<a class="link--icon link--disabled">Niet publiek <i class="vi vi-clock"></i></a>
+							  	</div>
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--border vi-edit" data-toggle="tooltip" title="Niet ondertekend" data-content="Niet ondertekend" data-placement="right" data-timer="25"></i> --}}
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--border vi-news" data-toggle="tooltip" title="Niet publiek" data-content="Niet publiek" data-placement="right" data-timer="25"></i> --}}
 								</li>
 								<li class="side-navigation__item">
-							  	<a href="#">Besluitenlijst</a>
-							  	<span class="pill">Status authenticatie</span>
-							  	<span class="pill">Status publicatie</span>
+							  	<a href="#" class="h6">Uittreksels</a>
+							  	<div class="link-group link-group--bordered link-group--tiny link-group--dark">
+							  		<a class="link--icon link--disabled">Niet ondertekend <i class="vi vi-clock"></i></a>
+							  		<a class="link--icon link--disabled">Niet publiek <i class="vi vi-clock"></i></a>
+							  	</div>
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--border vi-edit" data-toggle="tooltip" title="Niet ondertekend" data-content="Niet ondertekend" data-placement="right" data-timer="25"></i> --}}
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--border vi-news" data-toggle="tooltip" title="Niet publiek" data-content="Niet publiek" data-placement="right" data-timer="25"></i> --}}
 								</li>
 								<li class="side-navigation__item">
-							  	<a href="#">Uittreksels</a>
-							  	<span class="pill">Status authenticatie</span>
-							  	<span class="pill">Status publicatie</span>
-								</li>
-								<li class="side-navigation__item">
-							  	<a href="#">Notulen</a>
-							  	<span class="pill">Status authenticatie</span>
-							  	<span class="pill">Status publicatie</span>
+							  	<a href="#" class="h6">Notulen</a>
+{{!-- 							  	<div class="side-navigation__item__status">
+								  	<span class="pill pill--small">Niet ondertekend</span>
+								  	<span class="pill pill--small">Niet publiek</span>
+								  </div> --}}
+							  	<div class="link-group link-group--bordered link-group--tiny link-group--dark">
+							  		<a class="link--icon link--disabled">Niet ondertekend <i class="vi vi-clock"></i></a>
+							  		<a class="link--icon link--disabled">Niet publiek <i class="vi vi-clock"></i></a>
+							  	</div>
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--border vi-edit" data-toggle="tooltip" title="Niet ondertekend" data-content="Niet ondertekend" data-placement="right" data-timer="25"></i> --}}
+							  		{{!-- <i class="vi vi-u-badge vi-u-badge--small vi-u-badge--border vi-news" data-toggle="tooltip" title="Niet publiek" data-content="Niet publiek" data-placement="right" data-timer="25"></i> --}}
 								</li>
 							</ul>
-						</div>
+						</nav>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col--10-12">
+		<div class="col--9-12">
 			<div class="container-flex--scroll">
-				<div class="u-padding--round">
+				<div class="u-padding--round--tiny">
 					{{!-- <p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p> --}}
 					{{outlet}}
 				</div>
