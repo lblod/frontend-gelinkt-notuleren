@@ -16,8 +16,7 @@
   {{/if}}
 
   {{#if isPublishSignedNotulenAllowed}}
-    {{wu-button label='Publiceer notulen' command='Publicatie beschikbaar vanaf 14.01.2019' commandLocation='below' disabled=true onClick=null}}
-    {{!-- {{wu-button label="Publiceer notulen" isNarrow=true isAlt=true onClick=(action "publish")}} --}}
+    {{wu-button label="Publiceer notulen" isNarrow=true isAlt=true onClick=(action "publish")}}
     {{wu-button label="Bewaar aanpassingen" isNarrow=true onClick=(action "save")}}
   {{/if}}
 {{/wu-button-group}}
