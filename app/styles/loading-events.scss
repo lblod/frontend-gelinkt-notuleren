@@ -1,0 +1,15 @@
+/* ==========================================================================
+  Loading events
+  Style the loading events here.
+ ========================================================================== */
+
+.editor-loading-events {
+	position: fixed;
+  width: 22rem;
+  bottom: 2rem;
+  right: 1rem;
+
+  i.vi.vi-check {
+  	color: $primary-blue;
+  }
+}
