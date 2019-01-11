@@ -9,7 +9,8 @@ export default Route.extend({
     return RSVP.hash({
       documentContainer: documentContainer,
       documentIdentifier: documentContainer.id,
-      agendaContents: this.getAgendaContents( documentContainer )
+      agendaContents: this.getAgendaContents( documentContainer ),
+      editorDocument: this.getEditorDocument( documentContainer )
     });
   },
   async getAgendaContents(documentContainer) {
@@ -18,5 +19,9 @@ export default Route.extend({
     const requestUrl = `/prepublish/agenda/${editorDocumentId}`;
     const response = await this.ajax.request( requestUrl );
     return response.data.attributes.content;
+  },
+  async getEditorDocument( documentContainer ) {
+    const editorDocument = await documentContainer.get('currentVersion');
+    return editorDocument;
   }
 });
