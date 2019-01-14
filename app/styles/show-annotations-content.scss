@@ -41,6 +41,10 @@
     content: "Bestuurs-eenheid (" attr(typeof) ")";
   }
 
+  [typeof="besluit:Bestuursorgaan"]:before {
+    content: "Bestuurs-orgaan (" attr(typeof) ")";
+  }
+
 
   /* -------------------- Zitting ------------------------- */
 
@@ -54,7 +58,7 @@
 
     // [property="besluit:isGehoudenDoor"]:before
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
-      content: "Bestuurs-eenheid (" attr(property) ")";
+      content: "Bestuurs-orgaan (" attr(property) ")";
     }
 
     [property="besluit:geplandeStart"]:before {
