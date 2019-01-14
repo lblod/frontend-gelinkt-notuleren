@@ -3,87 +3,86 @@
   Style the modals here.
  ========================================================================== */
 
-/* temporary fix for modals */
-
-.annotation-suggestion__suggestion .modal-dialog {
-	max-height: 70vh;
-	overflow-y: auto;
-}
-
-.annotation-suggestion__suggestion .modal-dialog li .modal-dialog--temporary-fix {
-	box-shadow: none;
-
-	.modal-dialog__header {
-		display: none;
-	}
-
-	.modal-dialog__link-list {
-		font-size: 1.4rem;
-		padding: 1rem;
-		border-bottom: 1px solid $blue-gray-light;
-
-		.button {
-			font-size: 1.4rem;
-			font-weight: 500;
-		}
-	}
-}
-
-.annotation-suggestion__suggestion .modal-dialog li:first-child .modal-dialog--temporary-fix {
-
-	.modal-dialog__header {
-		display: block;
-		font-weight: 500;
-		border-bottom: 1px solid $blue-gray;
-	}
-}
-
 /* temporary fix for multiple plugins triggered at once */
 
-.annotation-suggestion__suggestion .modal-dialog + .modal-dialog:not(.modal-dialog--temporary-fix) {
-  right: 15rem !important;
-  top: 22rem !important;
-}
+	.annotation-suggestion__suggestion .modal-dialog {
+		max-height: 70vh;
+		overflow-y: auto;
+	}
 
-.annotation-suggestion__suggestion .modal-dialog .modal-dialog:not(.modal-dialog--temporary-fix) {
-    padding: 0;
-    left: auto;
-    top: 25rem;
-    right: -15rem;
-}
+	.annotation-suggestion__suggestion .modal-dialog li .modal-dialog--temporary-fix {
+		box-shadow: none;
 
-.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-    padding: 0;
-    left: auto;
-    right: 25rem;
-}
+		.modal-dialog__header {
+			display: none;
+		}
 
-.annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-    padding: 0;
-    left: auto;
-    top: 55rem;
-    right: -15rem;
-}
+		.modal-dialog__link-list {
+			font-size: 1.4rem;
+			padding: 1rem;
+			border-bottom: 1px solid $blue-gray-light;
 
-.annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-    padding: 0;
-    left: auto;
-    top: 55rem;
-    right: 25rem;
-}
+			.button {
+				font-size: 1.4rem;
+				font-weight: 500;
+			}
+		}
+	}
 
-.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-    padding: 0;
-    left: auto;
-    top: 55rem;
-    right: 25rem;
-}
+	.annotation-suggestion__suggestion .modal-dialog li:first-child .modal-dialog--temporary-fix {
+
+		.modal-dialog__header {
+			display: block;
+			font-weight: 500;
+			border-bottom: 1px solid $blue-gray;
+		}
+	}
+
+	.annotation-suggestion__suggestion .modal-dialog + .modal-dialog:not(.modal-dialog--temporary-fix) {
+	  right: 15rem !important;
+	  top: 22rem !important;
+	}
+
+	.annotation-suggestion__suggestion .modal-dialog .modal-dialog:not(.modal-dialog--temporary-fix) {
+	    padding: 0;
+	    left: auto;
+	    top: 25rem;
+	    right: -15rem;
+	}
+
+	.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+	    padding: 0;
+	    left: auto;
+	    right: 25rem;
+	}
+
+	.annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+	    padding: 0;
+	    left: auto;
+	    top: 55rem;
+	    right: -15rem;
+	}
+
+	.annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+	    padding: 0;
+	    left: auto;
+	    top: 55rem;
+	    right: 25rem;
+	}
+
+	.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+	    padding: 0;
+	    left: auto;
+	    top: 55rem;
+	    right: 25rem;
+	}
 
 /* ==========================================================================
     Temporary modal fix
 ========================================================================== */
 
 /* restyling annotation positions and styling for demo */
+
 .modal-dialog--hint {
   position: fixed !important;
   top: 15rem !important;
