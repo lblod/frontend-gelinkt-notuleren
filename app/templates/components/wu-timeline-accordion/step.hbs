@@ -1,0 +1,141 @@
+<div class="step__icon"><i class="vi {{icon}}"></i></div>
+<div class="step__wrapper">
+	<div class="step__header js-accordion__toggle" {{action "toggleAccordion"}}>
+    {{#if title}}
+	    <div class="step__header__titles">
+	      <h3 class="step__title">{{title}}</h3>
+	    </div>
+    {{/if}}
+    {{#if pillName}}
+	    <div class="step__header__info">
+	      <span class="pill pill--{{pillColor}}">{{pillName}}</span>
+	      <i class="step__accordion-toggle"></i>
+	    </div>
+    {{/if}}
+	</div>
+	<div class="step__content-wrapper">
+	  <div class="step__content">
+			<div class="u-spacer--round--small">
+
+				<div class="u-hr u-hr--lighter u-padding--bottom u-spacer">
+					<div class="grid">
+						<div class="col--7-12">
+							<h4 class="h5">Voorvertoning ontwerpagenda</h4>
+						</div>
+						<div class="col--5-12 u-align-right">
+							<div class="popover js-popover u-spacer--right--tiny">
+								<a class="link--dark small js-popover__toggle" type="button">Opties</a>
+								<ul class="popover__content u-spacer--top--tiny u-align-left">
+									<li>
+										<p class="small u-padding--round--tiny">U ziet de versie die laatst gepubliceerd werd.
+										  <br>
+										  <br>
+										  Indien er een fout staat in de ontwerpagenda, kan u de publicatie en het ondertekenen nietig verklaren en opnieuw starten van de meest recente versie.
+										</p>
+									</li>
+								</ul>
+							</div>
+							<span class="pill pill--primary-blue pill--small">Publieke versie</span>
+						</div>
+					</div>
+					<div class="u-spacer--top--small">
+				    {{{agendaContents}}}
+				  </div>
+				</div>
+
+				<div class="u-hr u-hr--lighter u-padding--bottom u-spacer">
+					<div class="grid">
+						<div class="col--7-12">
+							<h4 class="h5">Onderteken</h4>
+						</div>
+						<div class="col--5-12 u-align-right">
+							<div class="popover js-popover u-spacer--right--tiny">
+								<a class="link--dark small js-popover__toggle" type="button">Opties</a>
+								<ul class="popover__content u-spacer--top--tiny">
+									<li>
+										<a class="popover__link" href="#">Verklaar ondertekeningen nietig</a>
+										<!-- Need modal for this one, hide if too much for now -->
+										<!-- <p class="smaller u-spacer">U kan dit document niet meer nietig verklaren, omdat de aanvullende agenda al gepubliceerd werd.</p> wss niet nodig -->
+									</li>
+								</ul>
+							</div>
+					    <span class="pill pill--small pill--primary-blue">Ondertekend</span>
+						</div>
+					</div>
+					<div class="u-spacer--top--small">
+						<div class="grid">
+							<div class="col--4-12">
+								<p class="smaller uppercase text-fade">Ondertekend door</p>
+								<p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
+							</div>
+							<div class="col--4-12">
+								<p class="smaller uppercase text-fade">Ondertekend door</p>
+								<p class="u-spacer--small">Gerard Vaes <br> 10/12/2018 18:05</p>
+							</div>
+						</div>
+				  </div>
+				</div>
+
+				<div class="u-padding--bottom u-spacer">
+					<div class="grid">
+						<div class="col--7-12">
+							<h4 class="h5">Publiceer</h4>
+						</div>
+						<div class="col--5-12 u-align-right">
+							<div class="popover js-popover u-spacer--right--tiny">
+								<a class="link--dark small js-popover__toggle" type="button">Opties</a>
+								<ul class="popover__content u-spacer--top--tiny">
+									<li>
+										<a class="popover__link" href="#">Verklaar laatste publicatie nietig</a>
+										<!-- Need modal for this one, hide if too much for now -->
+										<!-- <p class="smaller u-spacer">U kan dit document niet meer nietig verklaren, omdat de aanvullende agenda al gepubliceerd werd.</p> wss niet nodig -->
+									</li>
+								</ul>
+							</div>
+					    <span class="pill pill--small pill--primary-blue">Publiek</span>
+						</div>
+					</div>
+					<div class="u-spacer--top--small">
+
+						<div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
+							<div class="grid">
+								<div class="col--3-12">
+									<p class="smaller uppercase text-fade">Publicatie door</p>
+									<p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
+								</div>
+								<div class="col--6-12">
+									<p class="smallest uppercase text-fade">Link</p>
+									<a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda" class="small" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda</a>
+								</div>
+								<div class="col--3-12">
+									<p class="smaller uppercase text-fade">Type publicatie</p>
+									<p>Publiek voor iedereen</p>
+								</div>
+								<div class="col--12-12">
+									<p class="smaller uppercase u-spacer--top--small">Publicatie <span class="pill pill--small pill--red">nietig verklaard</span> door Patricia Florissoone op 11/12/2018 15:03</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="grid">
+							<div class="col--3-12">
+								<p class="smaller uppercase text-fade">Herpublicatie door</p>
+								<p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
+							</div>
+							<div class="col--6-12">
+								<p class="smallest uppercase text-fade">Link</p>
+								<a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda" class="small" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda</a>
+							</div>
+							<div class="col--3-12">
+								<p class="smaller uppercase text-fade">Type publicatie</p>
+								<p>Publiek voor iedereen</p>
+							</div>
+						</div>
+
+				  </div>
+				</div>
+
+		  </div>
+	  </div>
+	</div>
+</div>
