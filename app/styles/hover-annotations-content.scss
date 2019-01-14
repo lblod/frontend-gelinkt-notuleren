@@ -19,7 +19,10 @@
     content: "Datum goedkeuring verkiezing";
   }
 
-  [typeof="besluit:Bestuurseenheid"]:before,
+  [typeof="besluit:Bestuurseenheid"]:before {
+    content: "Bestuurs-eenheid";
+  }
+
   [typeof="besluit:Bestuursorgaan"]:before {
     content: "Bestuurs-orgaan";
   }
@@ -49,7 +52,7 @@
 
     // [property="besluit:isGehoudenDoor"]:before
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
-      content: "Bestuurs-eenheid";
+      content: "Bestuurs-orgaan";
     }
 
     [property="besluit:geplandeStart"]:before {
