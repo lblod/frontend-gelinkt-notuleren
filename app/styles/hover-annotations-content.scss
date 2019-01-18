@@ -4,7 +4,7 @@
  ========================================================================== */
 
 
-.rdfa-editor:not(.show-rdfa-blocks) {
+.rdfa-editor { //:not(.show-rdfa-blocks)
   /* -------------------- General tags ------------------------- */
 
   [datatype="xsd:date"]:before {
