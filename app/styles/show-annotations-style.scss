@@ -10,7 +10,8 @@
   [property],
   [typeof],
   [datatype],
-  [property="dc:title"] {
+  [property="dc:title"],
+  [property="eli:cites"] {
     border: 1px solid $gray-lighter;
     margin: 2px;
     padding: 0.5rem;
@@ -25,6 +26,7 @@
     &:hover {
       background-color: $white;
       border-color: $primary-yellow;
+      z-index: 100;
     }
 
     &:hover:after,
@@ -78,6 +80,16 @@
         min-width: 100%;
         width: auto;
         padding-left: 0.5rem;
+      	box-shadow: 1px 1px 10px rgba($gray-dark, 0.1);
+      }
+
+	    [property],
+	    [datatype],
+	    [typeof] {
+
+        &:hover:before {
+          margin-top: 0rem;
+        }
       }
     }
   }
@@ -177,6 +189,7 @@
 		}
 	}
 
+	[property="eli:cites"],
 	[data-editor-highlight="true"],
   [property],
   [typeof],
