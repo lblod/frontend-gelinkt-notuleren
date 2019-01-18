@@ -45,6 +45,9 @@
     content: "Bestuurs-orgaan (" attr(typeof) ")";
   }
 
+  [property="ext:scopedBestuursorgaanText"]:before {
+  	content: "Kies bestuursorgaan";
+  }
 
   /* -------------------- Zitting ------------------------- */
 
@@ -172,12 +175,13 @@
           content: "Motivering (" attr(property) ")";
         }
 
-        [property="eli:cites"]:before {
-          content: "Legale verschijning (" attr(property) ")";
-        }
+	      [property="eli:cites"]:before {
+	        content: "Citaat (" attr(property) ")";
+	      }
 
+				[property="eli:has_part"][typeof="besluit:Artikel"]:before,
         [property="eli:artikel"]:before {
-          content: "Artikel (" attr(property) ")";
+          content: "Artikel (" attr(typeof) ")";
         }
 
         [property="prov:value"]:before {
@@ -197,12 +201,16 @@
           content: "Aanstelling mandataris (" attr(property) " " attr(typeof) ")";
         }
 
-          [property="ext:bekrachtigdOnverenigbaarheid"]:before {
-          	content: "Onverenigbaar (" attr(property) ")";
-          }
+		      [typeof="ext:BesluitGemeenteraadsledenAfstandMandaat"]:before {
+		      	content: "Afstand mandaat";
+		      }
 
 		      [property="ext:bekrachtigdAfstandVanMandaatDoor"]:before {
 		      	content: "Afstand mandaat (" attr(property) ")";
+		      }
+
+		      [typeof="ext:BesluitGemeenteraadsledenAfwezigen"]:before {
+		      	content: "Afwezigen";
 		      }
 
 		      [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
@@ -213,8 +221,56 @@
 		      	content: "Afwezig zonder kennisgeving (" attr(property) ")";
 		      }
 
+		      [typeof="ext:BesluitGemeenteraadsledenVerkiezbaarheidsvoorwaarden"]:before {
+		      	content: "Verkiesbaarheidsvoorwaarden (" attr(typeof) ")";
+		      }
+
+		      [typeof="ext:BesluitGemeenteraadsledenOnverenigbaarheden"]:before {
+		      	content: "Onverenigbaarheden (" attr(typeof) ")";
+		      }
+
+          [property="ext:bekrachtigdOnverenigbaarheid"]:before {
+          	content: "Onverenigbaar (" attr(property) ")";
+          }
+
+          [typeof="ext:BesluitGemeenteraadsledenBurgemeester"]:before {
+          	content: "Eedaflegging Burgemeester (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitGemeenteraadsledenVerhindering"]:before {
+          	content: "Verhindering (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitFractieSplitwens"]:before {
+          	content: "Fractie splitsing (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitFractieVereniging"]:before {
+          	content: "Fractie vereniging (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitFractieSplitwensAkte"]:before {
+          	content: "Fractie splitsing akte (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitFractieSplitwensAkteVoorwaarden"]:before {
+          	content: "Fractie splitsing voorwaarden (" attr(typeof) ")";
+          }
+
+          [property="ext:fractievormingText"]:before {
+          	content: "Fractievorming besluit (" attr(property) ")";
+          }
+
+          [property="ext:fractievormingTable"]:before {
+          	content: "Fracties (" attr(property) ")";
+          }
+
           [property="org:holds"]:before {
             content: "Mandaat (" attr(property) ")";
+          }
+
+          [property="ext:mandatarisTabelInput"]:before {
+          	content: "Besluit mandatarissen";
           }
 
           [property="mandaat:start"]:before {
@@ -223,6 +279,50 @@
 
           [property="mandaat:rangorde"]:before {
           	content: "Rangorde (" attr(property) ")";
+          }
+
+          [property="mandaat:status"]:before {
+          	content: "Status mandaat (" attr(property) ")";
+          }
+
+          [property="ext:currentVoorzitterMandaat"]:before {
+          	content: "Mandaat voorzitter (" attr(property) ")";
+          }
+
+          [typeof="ext:BesluitVerkiezingVoorzitterEinddatum"]:before {
+          	content: "Voorzitter einddatum (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitVerkiezingVoorzitterVerhindering"]:before {
+          	content: "Verhindering voorzitter (" attr(typeof) ")";
+          }
+
+          [property="persoon:gebruikteVoornaam"]:before {
+          	content: "Voornaam";
+          }
+
+          [property="foaf:familyName"]:before {
+          	content: "Familienaam";
+          }
+
+          [property="ext:schepenenAanstellingText"]:before {
+          	content: "Aanstelling schepenen (" attr(property) ")";
+          }
+
+          [typeof="ext:BesluitPolitieraadStembiljetten"]:before {
+          	content: "Stembiljetten (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitPolitieraadOngeldigeStemmen"]:before {
+          	content: "Ongeldige stemmen (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitPolitieraadStakingStemmen"]:before {
+          	content: "Staking stemmen (" attr(typeof) ")";
+          }
+
+          [typeof="ext:BesluitPolitieraadVoldoendeLeden"]:before {
+          	content: "Leden (" attr(typeof) ")";
           }
 
 //     [property="besluit:gebeurtNa"]:before {
