@@ -42,6 +42,7 @@
 									</div>
 								</div>
 								<div class="u-spacer--top--small">
+									<p>Plaats, dag, tijdstip</p>
 				        	{{{agendaContents}}}
 				        </div>
 				      </div>
@@ -269,7 +270,16 @@
 
 									<div class="grid">
 										<div class="col--8-12">
-											<button class="button u-spacer--tb--tiny" {{action "publish"}}>Herpubliceer aanvullende agenda</button>
+											<div class="alert alert--warning alert--tiny">
+												<div class="alert__icon" aria-hidden="true"></div>
+												<div class="alert__content">
+									        <div class="alert__title">Om te publiceren is een tweede handtekening vereist</div>
+									        <div class="alert__content">
+									        	<p>U kan enkel publiceren zonder handtekening, of met twee handtekeningen.</p>
+									        </div>
+									      </div>
+											</div>
+											<button class="button u-spacer--tb--tiny" {{action "publish"}} disabled>Herpubliceer aanvullende agenda</button>
 											<p class="text-fade">De agenda wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal zichtbaar zijn voor iedereen zonder authenticatie.</p>
 										</div>
 									</div>
@@ -304,7 +314,7 @@
 							<div class="u-hr u-hr--lighter u-padding--bottom u-spacer">
 								<div class="grid">
 									<div class="col--7-12">
-										<h4 class="h5">Voorvertoning ontwerpagenda</h4>
+										<h4 class="h5">Voorvertoning spoedeisende agenda</h4>
 									</div>
 									<div class="col--5-12 u-align-right">
 										<span class="pill pill--small">Meest recente versie</span>
