@@ -40,7 +40,7 @@ export default Component.extend({
     this.onUpdateTasklists(updatedTaskSolutions);
   }).keepLatest(),
 
-  swapIndex: task(function*(indexA, indexB){
+  swapIndex: task(function*(indexA, indexB){ // eslint-disable-line require-yield
     let solutionA = this.tasklistSolutions[indexA];
     let solutionB = this.tasklistSolutions[indexB];
     solutionA.set('index', indexB);

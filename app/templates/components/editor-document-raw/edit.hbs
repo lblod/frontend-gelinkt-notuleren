@@ -1,18 +1,11 @@
-{{!-- title: attr(),
-   content: attr(),
-   context: attr('string', { defaultValue: defaultContext}),
-   createdOn: attr('datetime'),
-   updatedOn: attr('datetime'),
-   starred: attr(),
-   origin: attr(),
-   status: belongsTo('editor-document-status', {inverse: null }),
-   previousVersion: belongsTo('editor-document', {inverse: 'nextVersion'}),
-   nextVersion: belongsTo('editor-document', {inverse: 'previousVersion'}) --}}
-
-{{#if saveDocument.isRunning}}
+<h1> Make sure you know what you're doing ...</h1>
+<br>
+<br>
+{{#if isWorking}}
   <span class="loader"><span class="u-visually-hidden">Aan het verwerken</span></span>
 {{else}}
   Title: {{input class="input-field input-field--block js-js-input-pattern-bound"  value=(mut document.title)}}
+  Status: {{editor-document-status-selector document=document}}
   Context: {{input class="input-field input-field--block js-js-input-pattern-bound" value=(mut document.context)}}
   {{#if document.previousVersion.id}}
     {{#wu-link-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action "previous" ) }}
@@ -24,10 +17,45 @@
       Next version
     {{/wu-link-button}}
   {{/if}}
-  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'save') }}
-    save
+
+  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'toggleDisplayRaw') }}
+    display raw document (slow)
   {{/wu-button}}
-  <div contenteditable="true" id={{outputId}}>
-    {{document.content}}
-  </div>
+
+  {{#unless displayRaw}}
+    {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'save') }}
+      save
+    {{/wu-button}}
+  {{/unless}}
+
+  {{#if displayRaw}}
+    {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'update') }}
+      update changes
+    {{/wu-button}}
+
+    <div contenteditable="true" id={{outputId}}>
+      {{document.content}}
+    </div>
+  {{/if}}
+
+  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'generateFileDownload') }}
+    download raw
+  {{/wu-button}}
+
+  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'toggleFileUpload') }}
+    upload file and replace current raw content
+  {{/wu-button}}
+
+  {{#if uploadFileMode}}
+    <input onchange={{action "uploadFileAndReplace"}} type="file"/>
+  {{/if}}
+
+  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'toggleReplaceUris') }}
+    replace URIS
+  {{/wu-button}}
+
+  {{#if replaceUrisMode}}
+    {{editor-document-raw/replace-uris document=document }}
+  {{/if}}
+
 {{/if}}

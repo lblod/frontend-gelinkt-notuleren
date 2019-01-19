@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
-import { task, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { inject as service } from '@ember/service';
 
