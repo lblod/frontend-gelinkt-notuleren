@@ -134,7 +134,6 @@ export default Mixin.create({
     }
     catch(e){
       alert('Fout bij publiceren: ' + e);
-      console.log(e);
 
       //rollback
       if(newDocument){

@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { task, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import FileSaverMixin from 'ember-cli-file-saver/mixins/file-saver';
@@ -31,7 +31,6 @@ export default Component.extend(FileSaverMixin, {
       let content = '';
       reader.onload = event => {
         content = event.target.result;
-        console.log(event.target.result);
         this.document.set('content', content);
         resolve();
       };
