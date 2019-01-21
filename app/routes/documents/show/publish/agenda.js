@@ -10,7 +10,8 @@ export default Route.extend({
       documentContainer: documentContainer,
       documentIdentifier: documentContainer.id,
       agendaContents: this.getAgendaContents( documentContainer ),
-      editorDocument: this.getEditorDocument( documentContainer )
+      editorDocument: this.getEditorDocument( documentContainer ),
+      versionedAgendas: documentContainer.versionedAgendas
     });
   },
   async getAgendaContents(documentContainer) {
