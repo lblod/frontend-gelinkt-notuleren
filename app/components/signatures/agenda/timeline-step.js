@@ -15,10 +15,12 @@ export default Component.extend({
   mockAgenda: computed('agenda', 'currentEditorDocument', function(){
     if( this.agenda ) {
       // pick all info from the current agenda
-      return {
-        body: this.agenda.content,
-        usedEditorDocument: this.agenda.editorDocument.id
-      };
+      return PromiseProxyObject.create( {
+        promise: RSVP.hash( {
+          body: this.agenda.content,
+          signedId: this.agenda.editorDocument.then( (ed) => ed.id )
+        } )
+      } );
     } else {
       // create an agenda with dumped contents and put it in a promise proxy
       return PromiseProxyObject.create({

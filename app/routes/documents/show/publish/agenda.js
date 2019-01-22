@@ -9,20 +9,27 @@ export default Route.extend({
     return RSVP.hash({
       documentContainer: documentContainer,
       documentIdentifier: documentContainer.id,
-      agendaContents: this.getAgendaContents( documentContainer ),
       editorDocument: this.getEditorDocument( documentContainer ),
       versionedAgendas: documentContainer.versionedAgendas
     });
   },
-  async getAgendaContents(documentContainer) {
-    const editorDocument = await documentContainer.get('currentVersion');
-    const editorDocumentId = editorDocument.id;
-    const requestUrl = `/prepublish/agenda/${editorDocumentId}`;
-    const response = await this.ajax.request( requestUrl );
-    return response.data.attributes.content;
-  },
   async getEditorDocument( documentContainer ) {
     const editorDocument = await documentContainer.get('currentVersion');
     return editorDocument;
+  },
+  actions: {
+    async refreshModel(){
+      await this.controller.model.documentContainer.reload();
+      this.controller.set('model.editorDocument', await this.getEditorDocument(this.controller.model.documentContainer));
+      await this.controller.model.documentContainer.hasMany("versionedAgendas").reload();
+      this.controller.set('model.versionedAgendas', await this.controller.model.documentContainer.versionedAgendas);
+      this.controller.model.documentContainer.versionedAgendas.forEach( async (agenda) => {
+        await agenda.reload();
+        await agenda.hasMany("signedResources").reload();
+        await agenda.belongsTo("publishedResource").reload();
+      });
+
+      this.refresh();
+    }
   }
 });

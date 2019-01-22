@@ -34,9 +34,8 @@ export default Controller.extend({
      * agenda but haven't implemented this so far.
      */
     async applySignature(kind, documentId) {
-      console.log(`Applying signature ${kind} on ${documentId}`);
-      // const response = await this.ajax.post(`/signing/agenda/sign/${kind}/${this.model.editorDocument.id}`);
-      // return response;
+      await this.ajax.post(`/signing/agenda/sign/${kind}/${documentId}`);
+      this.send("refreshModel");
     },
     /**
      * Publishes the document.
