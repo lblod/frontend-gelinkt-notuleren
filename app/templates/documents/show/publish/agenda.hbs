@@ -1,10 +1,31 @@
-<div class="u-spacer--top">
+{{#each model.versionedAgendas as |agenda|}}
+  <h1>{{agenda.id}}</h1>
+{{/each}}
 
+<div class="u-spacer--top">
   {{#wu-timeline-accordion as |timeline|}}
     {{#each agendaInfo as |agenda|}}
       {{agenda-timeline-step agenda=agenda step=timeline.step}}
     {{/each}}
 
+    {{signatures/agenda/timeline-step
+      name="Ontwerpagenda"
+      step=timeline.step
+      agenda=ontwerpAgenda
+      currentEditorDocument=model.editorDocument
+      sign=(action "applySignature" "ontwerpagenda")
+      publish=(action "publish" "ontwerpagenda")
+    }}
+    
+    {{signatures/agenda/timeline-step
+      name="Aanvullende agenda"
+      step=timeline.step
+      agenda=aanvullendeAgenda
+      currentEditorDocument=model.editorDocument
+      sign=(action "applySignature" "aanvullendeagenda")
+      publish=(action "publish" "aanvullendeagenda")
+    }}
+    
 
     {{#timeline.step title="Ontwerpagenda" pillColor="primary-blue" pillName="gepubliceerd" icon="vi-news" as |step|}}
       {{#step.block title="Voorvertoning ontwerpagenda" pillColor="primary-blue" pillName="Publieke versie"}}
@@ -29,13 +50,13 @@
               </div>
               <div class="col--4-12">
               	<p class="smaller uppercase text-fade">Tweede handtekening vereist</p>
-              	<button class="button button--narrow button--small u-spacer--top--tiny" {{action "applySignature"}}>Onderteken aanvullende agenda</button> <!-- "chairman" -->
+              	<button class="button button--narrow button--small u-spacer--top--tiny" {{action "applySignature" "ontwerpagenda"}}>Onderteken ontwerpagenda</button>
               </div>
             {{else}}
               <div class="col--6-12">
                 <p class="smaller uppercase text-fade">Handtekeningen vereist door voorzitter en algemeen directeur met rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a></p>
                 <!-- dit verschilt voor verschillende organen -->
-                <button class="button u-spacer--top--tiny" {{action "applySignature"}}>Onderteken ontwerpagenda</button>
+                <button class="button u-spacer--top--tiny" {{action "applySignature" "ontwerpagenda"}}>Onderteken ontwerpagenda</button>
               </div>
             {{/if}}
           {{/if}}
@@ -68,7 +89,6 @@
 				</div>
       {{/step.block}}
     {{/timeline.step}}
-
     {{#timeline.step title="Aanvullende agenda" pillColor="primary-yellow" pillName="ondertekend" icon="vi-clock"}}
     {{/timeline.step}}
     {{#timeline.step title="Spoedeisende agenda" pillColor="gray" pillName="concept" icon="vi-edit"}}

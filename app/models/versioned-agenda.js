@@ -5,7 +5,9 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 export default Model.extend({
   state: attr(),
   content: attr(),
+  kind: attr(),
   signedResources: hasMany('signed-resource'),
-  pulishedResource: attr('has-one'),
-  editorDocument: attr('has-one')
+  pulishedResource: belongsTo('published-resource'),
+  documentContainer: belongsTo('document-container'),
+  editorDocument: belongsTo('editor-document')
 });
