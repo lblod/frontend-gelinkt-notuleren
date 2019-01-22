@@ -24,6 +24,10 @@ export default Controller.extend({
     return this.model.versionedAgendas.findBy( 'kind', 'aanvullendeagenda' );
   }),
 
+  spoedeisendeAgenda: computed('model.versionedAgendas', function() {
+    return this.model.versionedAgendas.findBy( 'kind', 'spoedeisendeagenda' );
+  }),
+
   actions: {
     /**
      * Applies the signatature for "mayor" or "secretary".
@@ -41,7 +45,8 @@ export default Controller.extend({
      * Publishes the document.
      */
     async publish(kind, documentId) {
-      console.log(`Publishing ${kind} on ${documentId}`);
+      await this.ajax.post(`/signing/agenda/publish/${kind}/${documentId}`);
+      this.send("refreshModel");
     }
   }
 });

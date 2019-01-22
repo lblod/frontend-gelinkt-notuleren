@@ -1,4 +1,4 @@
-{{#component step title=name pillColor="primary-blue" pillName="gepubliceerd" icon="vi-news" as |step|}}
+{{#component step title=name pillColor="primary-blue" pillName=pillName icon=iconName as |step|}}
   {{#step.block title="Voorvertoning ontwerpagenda" pillColor="primary-blue" pillName="Publieke versie"}}
     {{{mockAgenda.body}}}
   {{/step.block}}
@@ -36,10 +36,10 @@
       {{/if}}
 		</div>
   {{/step.block}}
-  {{#step.block title="Publiceer" pillColor="primary-blue" pillName=(if ontwerpagenda.published "Publiek" "Niet publiek")}}
+  {{#step.block title="Publiceer" pillColor="primary-blue" pillName=(if agenda.publishedResource "Publiek" "Niet publiek")}}
 		<div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
 			<div class="grid">
-        {{#if ontwerpagenda.published}}
+        {{#if agenda.publishedResource}}
 					<div class="col--3-12">
 						<p class="smaller uppercase text-fade">Publicatie door</p>
 						<p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>

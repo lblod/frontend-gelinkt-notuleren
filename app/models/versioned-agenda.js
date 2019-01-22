@@ -7,7 +7,7 @@ export default Model.extend({
   content: attr(),
   kind: attr(),
   signedResources: hasMany('signed-resource'),
-  pulishedResource: belongsTo('published-resource'),
+  publishedResource: belongsTo('published-resource'),
   documentContainer: belongsTo('document-container'),
   editorDocument: belongsTo('editor-document')
 });
