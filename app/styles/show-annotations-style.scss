@@ -94,6 +94,10 @@
     }
   }
 
+  [property="prov:value"] {
+  	display: block;
+  }
+
   [property],
   [typeof],
   [datatype],
