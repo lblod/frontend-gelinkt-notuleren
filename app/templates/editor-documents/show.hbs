@@ -2,21 +2,26 @@
 
 {{/app-chrome}}
 
+<div class="editor-container container-flex--scroll">
+  <div class="editor">
+    <div class="grid grid--align-center">
+      <div class="col--7-12">
+        <div class="editor__paper editor__paper--disabled">
 
-<div vocab={{editorDocumentVocab}}
-     prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit#"
-     resource="#"
-     typeof="foaf:Document"
-     class="container-flex--contain">
-  <div class="editor-container">
-	  <div class="grid grid--collapse">
-		  <div class="col--12-12 flex">
-			  <div class="editor">
-				  <div class="grid">
-						<div class="col--7-12">
-							{{{ editorDocument.content }}}
-						</div>
+					<div vocab={{editorDocumentVocab}}
+						prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit#"
+						resource="#"
+						typeof="foaf:Document"
+						class="container-flex--contain">
+						{{{ editorDocument.content }}}
 					</div>
+				</div>
+			</div>
+			<div class="col--5-12">
+				<div class="u-padding--round--large">
+					<i class="vi vi-check vi-u-badge vi-u-badge vi-u-badge--large vi-u-badge--action u-spacer--small"></i>
+					<h4 class="h4 u-spacer--small">Notulen publiek</h4>
+					<p class="text-fade smaller u-spacer--large">U kan de publieke notulen niet meer bewerken.</p>
 				</div>
 			</div>
 		</div>
