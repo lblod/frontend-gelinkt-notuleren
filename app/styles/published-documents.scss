@@ -188,16 +188,16 @@
 				margin-bottom: 1rem;
 			}
 
-			[typeof="besluit:Besluit"] > * {
+			[typeof^="besluit:Besluit"] > * {
 				display: none;
 			}
 
-			[typeof="besluit:Besluit"] > [property="eli:title"] {
+			[typeof^="besluit:Besluit"] > [property="eli:title"] {
 				display: block;
 				margin-bottom: 1rem;
 			}
 
-			[typeof="besluit:Besluit"] > [property="eli:description"] {
+			[typeof^="besluit:Besluit"] > [property="eli:description"] {
 				display: block;
 				padding-bottom: 2rem;
 				margin-bottom: 3rem;

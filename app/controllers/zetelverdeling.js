@@ -1,9 +1,10 @@
 import Controller from '@ember/controller';
 import { sort } from '@ember/object/computed';
 import { computed } from '@ember/object';
+
 export default Controller.extend({
   queryParams: ['type'],
-  resultatenSortering: ['isResultaatVoor.lijstnaam'],
+  resultatenSortering: Object.freeze(['isResultaatVoor.lijstnaam']),
   resultaten: sort('model.resultaten', 'resultatenSortering'),
   zetels: computed('resultaten', function() {
     const zetels = { totaal:0};
