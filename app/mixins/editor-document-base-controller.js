@@ -68,8 +68,8 @@ export default Mixin.create({
   },
 
   resetPublishStatusModal(){
-    this.set('displayPublishStatusModal', false);
-    this.set('publishModalStatus', '');
+     this.set('displayPublishStatusModal', false);
+     this.set('publishModalStatus', '');
   },
 
   hasDocumentValidationErrors(document){
@@ -100,10 +100,9 @@ export default Mixin.create({
     let updatedOn = new Date();
     let title = editorDocument.get('title');
     let status = newStatus ? newStatus : editorDocument.get('status');
-    let bestuurseenheid = this.bestuurseenheid;
 
     //every save results in new document
-    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title, bestuurseenheid});
+    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title});
 
     //Link the previous if provided editorDocument does exist in DB.
     if(editorDocument.id)
@@ -164,17 +163,11 @@ export default Mixin.create({
     this.set('profile', (yield bestuurseenheid.get('classificatie')).get('uri'));
   }),
 
-  setEditorBestuurseenheid: task(function *(){
-    const bestuurseenheid = yield this.get('currentSession.group');
-    this.set('bestuurseenheid', bestuurseenheid);
-  }),
-
   profile: 'default',
 
   init() {
     this._super(...arguments);
     this.setEditorProfile.perform();
-    this.setEditorBestuurseenheid.perform();
   },
 
  actions: {
