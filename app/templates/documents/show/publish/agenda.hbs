@@ -1,9 +1,5 @@
 <div class="u-spacer--top">
   {{#wu-timeline-accordion as |timeline|}}
-    {{#each agendaInfo as |agenda|}}
-      {{agenda-timeline-step agenda=agenda step=timeline.step}}
-    {{/each}}
-
     {{signatures/agenda/timeline-step
       name="Ontwerpagenda"
       step=timeline.step

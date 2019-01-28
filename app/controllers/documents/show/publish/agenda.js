@@ -9,13 +9,6 @@ export default Controller.extend({
   agendaContents: alias('model.agendaContents'),
   ajax: service(),
 
-  /**
-   * Ensures the agenda is at the current documentIdentifier.
-   */
-  async reinitiateAgenda(){
-
-  },
-
   ontwerpAgenda: computed('model.versionedAgendas', function() {
     return this.model.versionedAgendas.findBy( 'kind', 'ontwerpagenda' );
   }),
