@@ -6,5 +6,6 @@ export default Model.extend({
   content: attr(),
   createdOn: attr('datetime'),
   status: belongsTo('blockchain-status'),
+  gebruiker: belongsTo('gebruiker'),
   versionedAgenda: belongsTo('versioned-agenda')
 });

@@ -3,23 +3,23 @@
     {{{mockAgenda.body}}}
   {{/step.block}}
   {{#step.block title="Onderteken" pillColor="primary-blue" pillName="Ondertekend"}}
-		<div class="grid">
+    <div class="grid">
       {{#if (eq agenda.signedResources.length 2)}}
-        {{!-- Two signatures placed --}} 
-				<div class="col--4-12">
-					<p class="smaller uppercase text-fade">Ondertekend door</p>
-					<p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
-				</div>
-				<div class="col--4-12">
-					<p class="smaller uppercase text-fade">Ondertekend door</p>
-					<p class="u-spacer--small">Gerard Vaes <br> 10/12/2018 18:05</p>
-				</div>
+        {{!-- Two signatures placed --}}
+        {{#each agenda.signedResources as |signature|}}
+        <div class="col--4-12">
+          <p class="smaller uppercase text-fade">Ondertekend door</p>
+          <p class="u-spacer--small">{{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
+        </div>
+        {{/each}}
       {{else}}
         {{!-- One signature placed --}}
         {{#if (eq agenda.signedResources.length 1)}}
           <div class="col--4-12">
-            <p class="smaller uppercase text-fade">Ondertekend door</p>
-            <p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
+            {{#with agenda.signedResources.firstObject as |signature|}}
+              <p class="smaller uppercase text-fade">Ondertekend door</p>
+              <p class="u-spacer--small">{{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
+            {{/with}}
           </div>
           <div class="col--4-12">
             <p class="smaller uppercase text-fade">Tweede handtekening vereist</p>
@@ -34,24 +34,24 @@
           </div>
         {{/if}}
       {{/if}}
-		</div>
+    </div>
   {{/step.block}}
   {{#step.block title="Publiceer" pillColor="primary-blue" pillName=(if agenda.publishedResource "Publiek" "Niet publiek")}}
-		<div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
-			<div class="grid">
+    <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
+      <div class="grid">
         {{#if agenda.publishedResource}}
-					<div class="col--3-12">
-						<p class="smaller uppercase text-fade">Publicatie door</p>
-						<p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
-					</div>
-					<div class="col--6-12">
-						<p class="smallest uppercase text-fade">Link</p>
-						<a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda" class="small" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda</a>
-					</div>
-					<div class="col--3-12">
-						<p class="smaller uppercase text-fade">Type publicatie</p>
-						<p>Publiek voor iedereen</p>
-					</div>
+          <div class="col--3-12">
+            <p class="smaller uppercase text-fade">Publicatie door</p>
+            <p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
+          </div>
+          <div class="col--6-12">
+            <p class="smallest uppercase text-fade">Link</p>
+            <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda" class="small" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be/Aalst/Gemeente/addc9320-02de-11e9-9174-89295b788e5c/ontwerp-agenda</a>
+          </div>
+          <div class="col--3-12">
+            <p class="smaller uppercase text-fade">Type publicatie</p>
+            <p>Publiek voor iedereen</p>
+          </div>
         {{else}}
           <div class="col--8-12">
             <p class="smaller uppercase text-fade">Publicatie door <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a></p>
@@ -59,7 +59,7 @@
             <p class="text-fade small">De agenda wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal zichtbaar zijn voor iedereen zonder authenticatie.</p>
           </div>
         {{/if}}
-			</div>
-		</div>
+      </div>
+    </div>
   {{/step.block}}
 {{/component}}
