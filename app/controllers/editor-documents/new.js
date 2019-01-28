@@ -12,11 +12,11 @@ export default Controller.extend(EditorDocumentBaseController, {
   saveAndTransitionToEditMode: task(function * (){
     let nearestNode = this.editor.currentNode.parentElement;
     this.scrollToPlugin.addScrollToLocation(this.editor, nearestNode, 'last-save-position', true, false);
-     let editorDocument = this.editorDocument;
-     if(this.hasDocumentValidationErrors(editorDocument)){
-       this.set('validationErrors', true);
-       return;
-     }
+    let editorDocument = this.editorDocument;
+    if(this.hasDocumentValidationErrors(editorDocument)){
+      this.set('validationErrors', true);
+      return;
+    }
     let savedDoc = yield this.saveEditorDocument(editorDocument, this.getStatusFor('conceptStatusId'));
     this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
   }),
