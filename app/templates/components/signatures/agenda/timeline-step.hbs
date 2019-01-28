@@ -41,8 +41,10 @@
       <div class="grid">
         {{#if agenda.publishedResource}}
           <div class="col--3-12">
-            <p class="smaller uppercase text-fade">Publicatie door</p>
-            <p class="u-spacer--small">Patricia Florissoone <br> 10/12/2018 15:03</p>
+            {{#with agenda.publishedResource as |signature|}}
+              <p class="smaller uppercase text-fade">Ondertekend door</p>
+              <p class="u-spacer--small">{{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
+            {{/with}}
           </div>
           <div class="col--6-12">
             <p class="smallest uppercase text-fade">Link</p>
