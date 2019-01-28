@@ -9,10 +9,12 @@ export default Component.extend({
   tagName: '',
   ajax: inject(),
 
+  title: computed('agendaKind', function(){
+    return `Voorvertoning ${this.agendaKind}`;
+  }),
   status: computed('agenda.signedResources.length', 'agenda.publishedResource.createdOn', function(){
     let signedResourcesLength = get(this, 'agenda.signedResources.length');
     let isPublishedResource = get(this, 'agenda.publishedResource.id');
-
     if( isPublishedResource )
       return 'published';
     if( signedResourcesLength === 1 )
@@ -22,16 +24,41 @@ export default Component.extend({
 
     return 'concept';
   }),
-  
-  pillName: computed('status', function(){
+  agendaKind: computed('agenda.kind', function() {
+    if (this.agenda.kind == 'spoedeisendeagenda')
+      return "spoedeisende agenda";
+    if (this.agenda.kind == 'aanvullendeagenda')
+      return "aanvullende agenda";
+    if (this.agenda.kind == 'ontwerpagenda')
+      return "ontwerpagenda";
+    return this.agenda.kind;
+  }),
+  handtekeningStatus: computed('agenda.signedResources.length', function() {
+    const signedResourcesLength = get(this, 'agenda.signedResources.length');
+    if( signedResourcesLength === 1 )
+      return { label: 'Tweede handtekening vereist', color: 'primary-yellow'};
+    if ( signedResourcesLength === 2 )
+      return { label: 'Ondertekend', color: 'primary-blue'};
+    return {label: 'Niet ondertekend'};
+  }),
+
+  voorVertoningStatus: computed('status', function() {
     if( this.status == 'published' )
-      return 'gepubliceerd';
+      return { label: 'Publieke versie', color: 'primary-blue'};
+    if (this.status == 'firstSignature' || this.status == 'secondSignature')
+      return { label: 'Ondertekende versie', color: 'primary-yellow'};
+    return { label: 'Meest recente versie'};
+  }),
+
+  algemeneStatus: computed('status', function(){
+    if( this.status == 'published' )
+      return { label:'gepubliceerd', color: 'primary-blue' };
     if( this.status == 'firstSignature' )
-      return 'eerste handtekening';
+      return { label: 'eerste handtekening', color: 'primary-yellow'};
     if( this.status == 'secondSignature' )
-      return 'getekend';
+      return { label:'getekend', color: 'primary-yellow'};
     if( this.status == 'concept' )
-      return 'concept';
+      return { label: 'concept'};
     return 'concept';
   }),
 
