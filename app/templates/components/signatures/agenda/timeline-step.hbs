@@ -23,14 +23,14 @@
           </div>
           <div class="col--4-12">
             <p class="smaller uppercase text-fade">Tweede handtekening vereist</p>
-            <button class="button button--narrow button--small u-spacer--top--tiny" {{action (action sign mockAgenda.signedId)}}>Onderteken {{agendaKind}}</button>
+            <button class="button button--narrow button--small u-spacer--top--tiny" {{action (action sign mockAgenda.signedId)}}>Onderteken {{name}}</button>
           </div>
         {{else}}
           {{!-- No signatures placed --}}
           <div class="col--6-12">
             <p class="smaller uppercase text-fade">Handtekeningen vereist door voorzitter en algemeen directeur met rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a></p>
             <!-- dit verschilt voor verschillende organen -->
-            <button class="button u-spacer--top--tiny" {{action (action sign mockAgenda.signedId)}}>Onderteken {{agendaKind}}</button>
+            <button class="button u-spacer--top--tiny" {{action (action sign mockAgenda.signedId)}}>Onderteken {{name}}</button>
           </div>
         {{/if}}
       {{/if}}
@@ -57,7 +57,7 @@
         {{else}}
           <div class="col--8-12">
             <p class="smaller uppercase text-fade">Publicatie door <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a></p>
-            <button class="button u-spacer--tb--tiny" {{action publish mockAgenda.signedId}}>Publiceer {{agendaKind}}</button>
+            <button class="button u-spacer--tb--tiny" {{action publish mockAgenda.signedId}}>Publiceer {{name}}</button>
             <p class="text-fade small">De agenda wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal zichtbaar zijn voor iedereen zonder authenticatie.</p>
           </div>
         {{/if}}

@@ -10,7 +10,7 @@ export default Component.extend({
   ajax: inject(),
 
   title: computed('agendaKind', function(){
-    return `Voorvertoning ${this.agendaKind}`;
+    return `Voorvertoning ${this.name}`;
   }),
   status: computed('agenda.signedResources.length', 'agenda.publishedResource.createdOn', function(){
     let signedResourcesLength = get(this, 'agenda.signedResources.length');
@@ -23,19 +23,6 @@ export default Component.extend({
       return 'secondSignature';
 
     return 'concept';
-  }),
-  agendaKind: computed('agenda.kind', function() {
-    const agenda = this.agenda;
-    if (agenda) {
-      if (agenda.kind == 'spoedeisendeagenda')
-        return "spoedeisende agenda";
-      if (agenda.kind == 'aanvullendeagenda')
-        return "aanvullende agenda";
-      if (agenda.kind == 'ontwerpagenda')
-        return "ontwerpagenda";
-      return agenda.kind;
-    }
-    return '';
   }),
   handtekeningStatus: computed('agenda.signedResources.length', function() {
     const signedResourcesLength = get(this, 'agenda.signedResources.length');

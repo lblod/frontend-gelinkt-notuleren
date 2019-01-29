@@ -1,7 +1,7 @@
 <div class="u-spacer--top">
   {{#wu-timeline-accordion as |timeline|}}
     {{signatures/agenda/timeline-step
-      name="Ontwerpagenda"
+      name="ontwerpagenda"
       step=timeline.step
       agenda=ontwerpAgenda
       currentEditorDocument=model.editorDocument
@@ -10,16 +10,17 @@
     }}
 
     {{signatures/agenda/timeline-step
-      name="Aanvullende agenda"
+      name="aanvullende agenda"
       step=timeline.step
       agenda=aanvullendeAgenda
       currentEditorDocument=model.editorDocument
+      agendaKind="aanvullende agenda"
       sign=(action "applySignature" "aanvullendeagenda")
       publish=(action "publish" "aanvullendeagenda")
     }}
 
     {{signatures/agenda/timeline-step
-      name="Spoedeisende agenda"
+      name="spoedeisende agenda"
       step=timeline.step
       agenda=spoedeisendeAgenda
       currentEditorDocument=model.editorDocument
