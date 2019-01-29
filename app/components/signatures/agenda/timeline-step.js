@@ -25,13 +25,17 @@ export default Component.extend({
     return 'concept';
   }),
   agendaKind: computed('agenda.kind', function() {
-    if (this.agenda.kind == 'spoedeisendeagenda')
-      return "spoedeisende agenda";
-    if (this.agenda.kind == 'aanvullendeagenda')
-      return "aanvullende agenda";
-    if (this.agenda.kind == 'ontwerpagenda')
-      return "ontwerpagenda";
-    return this.agenda.kind;
+    const agenda = this.agenda;
+    if (agenda) {
+      if (agenda.kind == 'spoedeisendeagenda')
+        return "spoedeisende agenda";
+      if (agenda.kind == 'aanvullendeagenda')
+        return "aanvullende agenda";
+      if (agenda.kind == 'ontwerpagenda')
+        return "ontwerpagenda";
+      return agenda.kind;
+    }
+    return '';
   }),
   handtekeningStatus: computed('agenda.signedResources.length', function() {
     const signedResourcesLength = get(this, 'agenda.signedResources.length');
