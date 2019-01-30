@@ -18,27 +18,15 @@ export default Mixin.create({
   validationErrors: false,
 
   statusIdMap: {
-    trashStatusId: '5A8304E8C093B00009000010',
-    conceptStatusId: 'cfd751588a6c453296de9f9c0dff2af4',
-    agendaPublishedStatusId: '627aec5d144c422bbd1077022c9b45d1',
-    besluitenlijstPublishedStatusId: 'b763390a63d548bb977fb4804293084a',
-    signedPublishedStatusId: 'c272d47d756d4aeaa0be72081f1389c6'
+    trashStatusId: '5A8304E8C093B00009000010'
   },
 
   nextStatus: null,
 
 
-  modalTransitionToTrash: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['trashStatusId'] && this.displayPublishStatusModal;
-  }),
 
   getStatusFor(statusName){
     return this.editorDocumentStatuses.findBy('id', this.statusIdMap[statusName]);
-  },
-
-  resetPublishStatusModal(){
-     this.set('displayPublishStatusModal', false);
-     this.set('publishModalStatus', '');
   },
 
   hasDocumentValidationErrors(document){
@@ -91,40 +79,6 @@ export default Mixin.create({
     return documentToSave;
   },
 
-  async publishDocument(editorDocument, publishStatus){
-    let savedDocument = await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('conceptStatusId'));
-    return await this.saveEditorDocument(savedDocument, publishStatus);
-  },
-
-  publishFlow: task(function *(){
-    let newDocument = null;
-    try {
-
-      let editorDocument = this.editorDocument;
-      let publishStatus = this.nextStatus;
-      newDocument = yield this.publishDocument(editorDocument, publishStatus);
-      let apiEndPoint = this.getPublishApi(publishStatus);
-      if(apiEndPoint){
-        yield this.ajax.post(apiEndPoint(newDocument.get('id')));
-      }
-      this.transitionToRoute('/inbox');
-    }
-    catch(e){
-      alert('Fout bij publiceren: ' + e);
-
-      //rollback
-      if(newDocument){
-        newDocument.set('status', this.get('previousStatus'));
-        yield newDocument.save();
-        this.transitionToRoute('editor-documents.edit', newDocument.id, {queryParams: { scrollToLastSavePosition: true } });
-      }
-      else {
-        this.editorDocument.set('status', this.get('previousStatus'));
-        yield this.editorDocument.save();
-      }
-    }
-  }),
-
   async saveTasklists(){
     if (!this.tasklists)
       return;
@@ -156,8 +110,7 @@ export default Mixin.create({
    },
 
    sendToTrash(){
-     this.set('nextStatus', this.getStatusFor('trashStatusId'));
-     this.set('displayPublishStatusModal', true);
+     this.set('displayDeleteModal', true);
    },
 
    async publish(){
@@ -168,13 +121,16 @@ export default Mixin.create({
      this.transitionToRoute('documents.show.publish.index', containerId);
    },
 
-   terminatePublishFlow(){
-     this.resetPublishStatusModal();
-     this.publishFlow.perform();
+
+   async deleteDocument(){
+     this.set('displayDeleteModal', false);
+     const editorDocument = this.editorDocument;
+     const savedDocument = await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('trashStatusId'));
+     this.transitionToRoute('inbox');
    },
 
-   onClosePublishStatusModal(){
-     this.resetPublishStatusModal();
+   onCloseDeleteModal(){
+     this.set('displayDeleteModal', false);
    },
 
    closeValidationModal(){

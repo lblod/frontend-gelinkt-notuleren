@@ -5,7 +5,7 @@ export default DS.JSONAPIAdapter.extend({
     this._super(...arguments);
   },
   async ajax(url, method) {
-    if (method !== 'GET')
+    if (method === 'POST')
       return this._super(...arguments);
 
     const origAjax = this._super;

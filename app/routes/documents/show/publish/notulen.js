@@ -21,9 +21,9 @@ export default Route.extend({
     async refreshModel(){
       await this.controller.model.documentContainer.reload();
       this.controller.set('model.editorDocument', await this.getEditorDocument(this.controller.model.documentContainer));
-      await this.controller.model.documentContainer.hasMany("versionedAgendas").reload();
+      await this.controller.model.documentContainer.hasMany("versionedNotulen").reload();
       this.controller.set('model.versionedNotulen', await this.controller.model.documentContainer.versionedNotulen);
-      this.controller.model.documentContainer.versionedNotulens.forEach( async (notulen) => {
+      this.controller.model.documentContainer.versionedNotulen.forEach( async (notulen) => {
         await notulen.reload();
         await notulen.hasMany("signedResources").reload();
         await notulen.belongsTo("publishedResource").reload();

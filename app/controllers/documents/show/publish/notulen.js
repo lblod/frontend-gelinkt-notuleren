@@ -6,14 +6,14 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   documentContainer: alias('model.documentContainer'),
   documentIdentifier: alias('model.documentIdentifier'),
-  agendaContents: alias('model.notulenContents'),
+  notulenContents: alias('model.notulenContents'),
   ajax: service(),
 
   ontwerpNotulen: computed('model.versionedNotulen', function() {
-    return this.model.versionedAgendas.findBy( 'kind', 'ontwerpnotulen' );
+    return this.model.versionedNotulen.findBy( 'kind', 'ontwerpnotulen' );
   }),
   goedgekeurdeNotulen: computed('model.versionedNotulen', function() {
-    return this.model.versionedAgendas.findBy( 'kind', 'goedgekeurdenotulen' );
+    return this.model.versionedNotulen.findBy( 'kind', 'goedgekeurdenotulen' );
   }),
   actions: {
     /**
@@ -25,8 +25,10 @@ export default Controller.extend({
      * agenda but haven't implemented this so far.
      */
     async applySignature(kind, documentId) {
+      this.set('ontwerpNotulenLoading', true);
       await this.ajax.post(`/signing/notulen/sign/${kind}/${documentId}`);
       this.send("refreshModel");
+      this.set('ontwerpNotulenLoading', false);
     },
     /**
      * Publishes the document.

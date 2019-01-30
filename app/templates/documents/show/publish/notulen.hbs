@@ -1,12 +1,14 @@
 <div class="u-spacer--top">
   {{#wu-timeline-accordion as |timeline|}}
-    {{signatures/agenda/timeline-step
+    {{signatures/notulen/timeline-step
       name="ontwerpnotulen"
       step=timeline.step
-      agenda=ontwerpNotule
+      notulen=ontwerpNotulen
       currentEditorDocument=model.editorDocument
       sign=(action "applySignature" "ontwerpnotulen")
       publish=(action "publish" "ontwerpnotulen")
+      loading=ontwerpNotulenLoading
+      loadingText=loadingText
     }}
   {{/wu-timeline-accordion}}
 </div>

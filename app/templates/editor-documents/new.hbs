@@ -19,59 +19,7 @@
   {{/wu-modal}}
 {{/if}}
 
-{{#if modalTransitionToAgendaPublished}}
-  {{#wu-modal
-    title="Uw agenda wordt gepubliceerd"
-    dialog-class="modal-dialog--wide modal-dialog--sectioned"
-    onClose=(action 'onClosePublishStatusModal') as |m|}}
-    {{#m.content}}
-      <div class="u-padding--round--small">
-        <div class="grid">
-          <div class="col--4-12">
-            <h2 class="h6 uppercase text-fade u-spacer--bottom--small">Waar wordt de agenda gepubliceerd</h2>
-            <p class="u-spacer">De openbare agenda worden publiek gemaakt, en is terug te vinden op <a href="{{publicationUrl}}" target="_blank">{{publicationUrl}}</a>.</p>
-            <p>U kan de publicatie niet omkeren.</p>
-          </div>
-          <div class="col--7-12 push--1-12">
-            <h2 class="h6 uppercase text-fade u-spacer--bottom--small">Voorbeeld van uw publicatie</h2>
-            <div class="published-example published-example--agenda">
-              {{{editorDomNode.innerHTML}}}
-            </div>
-          </div>
-        </div>
-      </div>
-    {{/m.content}}
-    <div class="modal-dialog__footer">
-      {{#m.buttons as |b|}}
-        {{b.button label="Publiceer agenda" onClick=(action 'terminatePublishFlow')}}
-        {{b.button label="Annuleren" onClick=(action 'onClosePublishStatusModal') isLink=true icon="vi-cross"}}
-      {{/m.buttons}}
-    </div>
-  {{/wu-modal}}
-{{/if}}
-
-{{#if publishFlow.isRunning}}
-<div class="editor-container container-flex--scroll">
-  <div class="editor">
-    <div class="grid grid--align-center">
-      <div class="col--7-12">
-        <div class="editor__paper scanner">
-
-          <div class="scanner__text">
-            <div class="badge badge--accent badge--l badge--initials">
-              <span class="loader"><span class="u-visually-hidden">Aan het verwerken</span></span>
-            </div>
-            <h3 class="h3">Bezig met verwerken</h3>
-          </div>
-
-          <span class="scanner__bar"></span>
-          {{{editorDomNode.innerHTML}}}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{{else if saveAndTransitionToEditMode.isRunning}}
+{{#if saveAndTransitionToEditMode.isRunning}}
 <div class="editor-container container-flex--scroll">
   <div class="editor">
     <div class="grid grid--align-center">

@@ -50,11 +50,13 @@ export default Component.extend({
   }),
 
   iconName: computed('status', function(){
-    if( this.status == 'concept' )
+    if ( this.loading )
+      return 'loader';
+    if ( this.status == 'concept' )
       return 'vi-edit';
-    if( this.status == 'firstSignature' || this.status == 'secondSignature' )
+    if ( this.status == 'firstSignature' || this.status == 'secondSignature' )
       return 'vi-clock';
-    if( this.status == 'published' )
+    if ( this.status == 'published' )
       return 'vi-news';
 
     return 'vi-edit';
