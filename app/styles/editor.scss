@@ -32,6 +32,11 @@
     }
   }
 
+  // .rdfa-editor [content=""] {
+  // 	background-color: $primary-yellow;
+  // 	font-weight: 500;
+  // }
+
   /* -------------------- Custom temporary widths, needs to be restructured in grid ------------------------- */
 
   .tasklist + .container-flex--contain .editor__paper {
@@ -96,6 +101,18 @@
     p, li {
       font-size: 1.6rem;
       position: relative;
+
+      &.small {
+      	font-size: 0.9em;
+      }
+
+      &.smaller {
+      	font-size: 0.8em;
+      }
+
+      &.smallest {
+      	font-size: 0.7em;
+      }
     }
 
     p {
