@@ -11,6 +11,8 @@ export default Route.extend({
     if (! hasPublishedAgenda) {
       this.transitionTo('documents.show.publish.agenda');
     }
-    this.transitionTo('documents.show.publish.notulen');
+    else {
+      this.transitionTo('documents.show.publish.notulen');
+    }
   }
 });
