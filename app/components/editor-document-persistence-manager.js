@@ -8,19 +8,6 @@ export default Component.extend({
   isTrashingAllowed: computed('editorDocument.status', function() {
     return this.get('editorDocument.status.id');
   }),
-
-  isPublishAgendaAllowed: computed('editorDocument.status', function(){
-    return this.get('editorDocument.status.id') === this.get('statusIdMap.conceptStatusId') || !this.get('editorDocument.status.id');
-  }),
-
-  isPublishBesluitenlijstAllowed: computed('editorDocument.status', function(){
-    return this.get('editorDocument.status.id') === this.get('statusIdMap.agendaPublishedStatusId');
-  }),
-
-  isPublishSignedNotulenAllowed: computed('editorDocument.status', function(){
-    return this.get('editorDocument.status.id') === this.get('statusIdMap.besluitenlijstPublishedStatusId');
-  }),
-
   actions:{
     save(){
       this.save();

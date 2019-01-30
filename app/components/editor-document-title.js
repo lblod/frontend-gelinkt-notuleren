@@ -31,7 +31,7 @@ export default Component.extend({
 
   }),
 
-  titleObserver: task(function *(){
+  titleObserver: task(function *(){  // eslint-disable-line require-yield
     this.set('generatedTitle', this.titlePlugin.title);
   }).keepLatest(),
 

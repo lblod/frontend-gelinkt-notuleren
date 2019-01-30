@@ -1,0 +1,12 @@
+<div class="u-spacer--top">
+  {{#wu-timeline-accordion as |timeline|}}
+    {{signatures/agenda/timeline-step
+      name="ontwerpnotulen"
+      step=timeline.step
+      agenda=ontwerpNotule
+      currentEditorDocument=model.editorDocument
+      sign=(action "applySignature" "ontwerpnotulen")
+      publish=(action "publish" "ontwerpnotulen")
+    }}
+  {{/wu-timeline-accordion}}
+</div>

@@ -27,40 +27,9 @@ export default Mixin.create({
 
   nextStatus: null,
 
-  getNextPublishStatus(currStatus){
-    if(currStatus.get('id') === this.statusIdMap['agendaPublishedStatusId'])
-      return this.getStatusFor('besluitenlijstPublishedStatusId');
-
-    if(currStatus.get('id') === this.statusIdMap['besluitenlijstPublishedStatusId'])
-      return this.getStatusFor('signedPublishedStatusId');
-
-    return this.getStatusFor('agendaPublishedStatusId');
-  },
-
-  getPublishApi(currStatus){
-    if(currStatus.get('id') === this.statusIdMap['agendaPublishedStatusId'])
-      return editorDocumentId => `/publish/agenda/${editorDocumentId}`;
-
-    if(currStatus.get('id') === this.statusIdMap['besluitenlijstPublishedStatusId'])
-      return editorDocumentId => `/publish/decision/${editorDocumentId}`;
-
-    if(currStatus.get('id') === this.statusIdMap['signedPublishedStatusId'])
-      return editorDocumentId => `/publish/notule/${editorDocumentId}`;
-  },
-
-  displayPublishStatusModal: false,
 
   modalTransitionToTrash: computed('displayPublishStatusModal', function(){
     return this.get('nextStatus.id') ===  this.statusIdMap['trashStatusId'] && this.displayPublishStatusModal;
-  }),
-  modalTransitionToAgendaPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['agendaPublishedStatusId'] && this.displayPublishStatusModal;
-  }),
-  modalTransitionToBesluitenlijstPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['besluitenlijstPublishedStatusId'] && this.displayPublishStatusModal;
-  }),
-  modalTransitionToSignedPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['signedPublishedStatusId'] && this.displayPublishStatusModal;
   }),
 
   getStatusFor(statusName){
@@ -128,10 +97,12 @@ export default Mixin.create({
   },
 
   publishFlow: task(function *(){
+    let newDocument = null;
     try {
+
       let editorDocument = this.editorDocument;
       let publishStatus = this.nextStatus;
-      let newDocument = yield this.publishDocument(editorDocument, publishStatus);
+      newDocument = yield this.publishDocument(editorDocument, publishStatus);
       let apiEndPoint = this.getPublishApi(publishStatus);
       if(apiEndPoint){
         yield this.ajax.post(apiEndPoint(newDocument.get('id')));
@@ -140,11 +111,23 @@ export default Mixin.create({
     }
     catch(e){
       alert('Fout bij publiceren: ' + e);
-      throw e;
+
+      //rollback
+      if(newDocument){
+        newDocument.set('status', this.get('previousStatus'));
+        yield newDocument.save();
+        this.transitionToRoute('editor-documents.edit', newDocument.id, {queryParams: { scrollToLastSavePosition: true } });
+      }
+      else {
+        this.editorDocument.set('status', this.get('previousStatus'));
+        yield this.editorDocument.save();
+      }
     }
   }),
 
   async saveTasklists(){
+    if (!this.tasklists)
+      return;
     for(let tasklistSolution of this.tasklists){
       let taskSolutions = await tasklistSolution.taskSolutions.toArray();
       for(let taskSolution of taskSolutions){
@@ -177,13 +160,12 @@ export default Mixin.create({
      this.set('displayPublishStatusModal', true);
    },
 
-   publish(){
-     if(this.hasDocumentValidationErrors(this.editorDocument)){
-       this.set('validationErrors', true);
-       return;
-     }
-     this.set('nextStatus', this.getNextPublishStatus(this.get('editorDocument.status')));
-     this.set('displayPublishStatusModal', true);
+   async publish(){
+     const editorDocument = this.editorDocument;
+     const savedDocument = await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('conceptStatusId'));
+     const container = await savedDocument.get('documentContainer');
+     const containerId = container.id;
+     this.transitionToRoute('documents.show.publish.index', containerId);
    },
 
    terminatePublishFlow(){

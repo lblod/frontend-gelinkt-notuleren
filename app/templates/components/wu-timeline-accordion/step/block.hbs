@@ -1,0 +1,23 @@
+<div class="u-hr u-hr--lighter u-padding--bottom u-spacer">
+	<div class="grid">
+		<div class="col--7-12">
+			<h4 class="h5">{{title}}</h4>
+		</div>
+		<div class="col--5-12 u-align-right">
+			<div class="popover js-popover u-spacer--right--tiny">
+				<a class="link--dark small js-popover__toggle u-hidden" type="button">Opties</a>
+				<ul class="popover__content u-spacer--top--tiny">
+					<li>
+						<a class="popover__link" href="#">Verklaar ondertekeningen nietig</a>
+						Need modal for this one, hide if too much for now
+						<p class="smaller u-spacer">U kan dit document niet meer nietig verklaren, omdat de aanvullende agenda al gepubliceerd werd.</p> wss niet nodig
+					</li>
+				</ul>
+			</div>
+			<span class="pill pill--small pill--{{pillColor}}">{{pillName}}</span>
+		</div>
+	</div>
+	<div class="u-spacer--top--small">
+    {{yield}}
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<div class="step__icon"><i class="vi {{icon}}"></i></div>
+<div class="step__wrapper">
+	<div class="step__header js-accordion__toggle" {{action "toggleAccordion"}}>
+    {{#if title}}
+	    <div class="step__header__titles">
+	      <h3 class="step__title">{{title}}</h3>
+	    </div>
+    {{/if}}
+    {{#if pill}}
+	    <div class="step__header__info">
+	      <span class="pill pill--primary-blue">{{pill}}</span>
+	      <i class="step__accordion-toggle"></i>
+	    </div>
+    {{/if}}
+	</div>
+	<div class="step__content-wrapper">
+	  <div class="step__content">
+			<div class="u-spacer--round--small">
+        {{yield (hash block="wu-timeline-accordion/step/block")}}
+		  </div>
+	  </div>
+	</div>
+</div>

@@ -1,26 +1,12 @@
 {{#wu-button-group class="u-align-right"}}
-  {{#if isPublishAgendaAllowed}}
-    {{#if isTrashingAllowed}}
-      {{wu-button class="button button--narrow button--link button--link--dark ember-view"
-                 label="Verwijder concept" isNarrow=true isLink=true isDarkLink=true onClick=(action "sendToTrash")}}
-    {{else}}
-      {{#link-to 'inbox.index' class="button button--narrow button--link button--link--dark"}}Verwijder document{{/link-to}}
-    {{/if}}
-    {{wu-button label="Publiceer agendapunten" class="button--alt button button--narrow ember-view" isNarrow=true isAlt=true onClick=(action "publish")}}
-    {{wu-button class="button button--narrow ember-view" label="Bewaar concept" isNarrow=true onClick=(action "save")}}
+  {{#if isTrashingAllowed}}
+    {{wu-button class="button button--narrow button--link button--link--dark ember-view"
+      label="Verwijder concept" isNarrow=true isLink=true isDarkLink=true onClick=(action "sendToTrash")}}
+  {{else}}
+    {{#link-to 'inbox.index' class="button button--narrow button--link button--link--dark"}}Verwijder document{{/link-to}}
   {{/if}}
-
-  {{#if isPublishBesluitenlijstAllowed}}
-    {{wu-button label='Publiceer besluitenlijst' command='Publicatie beschikbaar vanaf 02.01.2019' commandLocation='below' disabled=true onClick=null}}
-    {{!-- {{wu-button label="Publiceer besluitenlijst" isNarrow=true isAlt=true onClick=(action "publish")}} --}}
-    {{wu-button label="Bewaar aanpassingen" isNarrow=true onClick=(action "save")}}
-  {{/if}}
-
-  {{#if isPublishSignedNotulenAllowed}}
-    {{wu-button label='Publiceer notulen' command='Publicatie beschikbaar vanaf 02.01.2019' commandLocation='below' disabled=true onClick=null}}
-    {{!-- {{wu-button label="Publiceer notulen" isNarrow=true isAlt=true onClick=(action "publish")}} --}}
-    {{wu-button label="Bewaar aanpassingen" isNarrow=true onClick=(action "save")}}
-  {{/if}}
+  {{wu-button label="Publiceren en ondertekenen"  class="button--alt button button--narrow" isNarrow=true isAlt=true onClick=(action 'publish')}}
+  {{wu-button class="button button--narrow ember-view" label="Bewaar concept" isNarrow=true onClick=(action "save")}}
 {{/wu-button-group}}
 
 {{#if onSync}}
