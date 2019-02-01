@@ -100,3 +100,9 @@
 .u-hr--lighter {
 	border-color: $blue-gray-lighter;
 }
+
+/* shame */
+
+.side-navigation__item a {
+	word-break: initial;
+}

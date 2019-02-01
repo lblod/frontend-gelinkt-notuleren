@@ -29,6 +29,14 @@ Router.map(function() {
     this.route('cookieverklaring');
   });
   this.route('contact');
+  this.route('documents', function() {
+    this.route('show', { path: '/:id' }, function() {
+      this.route('publish', function() {
+        this.route('overview');
+        this.route('agenda');
+      });
+    });
+  });
 });
 
 export default Router;

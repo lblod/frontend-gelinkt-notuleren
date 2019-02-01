@@ -23,7 +23,7 @@ export default Component.extend({
 
     switch(id) {
       case "c272d47d756d4aeaa0be72081f1389c6":
-        // notulen gepubliceerd
+        // ondertekende notulen gepubliceerd
         return "Bekijk&nbsp;publieke&nbsp;notulen";
       case "cfd751588a6c453296de9f9c0dff2af4":
       case "5A8304E8C093B00009000010":
