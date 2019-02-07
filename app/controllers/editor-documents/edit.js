@@ -53,11 +53,11 @@ export default Controller.extend(EditorDocumentBaseController, {
     async syncDocument() {
       this.set('syncModalDisplay', false);
       const savedDoc = await this.syncDocument.perform();
-      this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
+      this.set('editorDocument', savedDoc);
     },
     async save(){
       const savedDoc = await this.save.perform();
-      this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
+      this.set('editorDocument', savedDoc);
     },
 
     startSyncModal(){

@@ -2,10 +2,13 @@ import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
 
 export default Route.extend({
-  model(params){
-   return RSVP.hash({
-     editorDocument: this.store.findRecord('editor-document', params.id, {include: 'status'}),
-     editorDocumentStatuses: this.store.findAll('editor-document-status')
+  async model(params){
+    const container = await this.store.findRecord('document-container', params.id, { include: 'status' });
+    return RSVP.hash({
+      documentContainer: container,
+      editorDocument: container.get('currentVersion'),
+      editorDocumentStatuses: this.store.findAll('editor-document-status')
     });
-  }
+  },
+
 });
