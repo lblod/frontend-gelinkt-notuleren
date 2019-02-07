@@ -1,5 +1,4 @@
 import Mixin from '@ember/object/mixin';
-import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { removeNodeFromTree } from '../utils/dom-helpers';
@@ -74,6 +73,8 @@ export default Mixin.create({
     // set the latest revision
     documentContainer.set('currentVersion', documentToSave);
     documentContainer.set('status', status);
+    const bestuurseenheid = await this.currentSession.get('group');
+    documentContainer.set('publisher', bestuurseenheid);
     await documentContainer.save();
 
     return documentToSave;
