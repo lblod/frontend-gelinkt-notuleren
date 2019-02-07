@@ -11,7 +11,7 @@ export default Route.extend({
     });
   },
   actions: {
-    error(error, transition) {
+    error(error /*, transition */) {
       if (error.errors && error.errors[0].status === "404") {
         this.transitionTo('route-not-found');
       } else {

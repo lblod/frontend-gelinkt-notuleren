@@ -6,7 +6,7 @@ export default Controller.extend(DefaultQueryParamsMixin, {
   currentSession: service(),
   store: service(),
   actions: {
-    async moveToConcepts(documents, datatable) {
+    async moveToConcepts(documents /*, datatable */) {
       const conceptStatus = await this.store.findRecord('editor-document-status', 'c02542af-e6be-4cc6-be60-4530477109fc');
       for (const document of documents) {
         document.set('status', conceptStatus);

@@ -12,6 +12,7 @@ export default Component.extend({
   generatedTitle: '',
 
   title: computed('overruledTitle', 'generatedTitle', function(){
+    /* TODO: why isn't this an observer ? */
     if(this.overruledTitle.length > 0){
       this.set('editorDocument.title', this.overruledTitle);
       this.set('overruledTitle', '');
