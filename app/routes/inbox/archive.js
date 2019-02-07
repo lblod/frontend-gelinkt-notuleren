@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 
 export default Route.extend(DataTableRouteMixin, {
-  modelName: 'editor-document',
+  modelName: 'document-container',
   queryParams: {
     page: { refreshModel: true },
     size: { refreshModel: true },
@@ -13,14 +13,12 @@ export default Route.extend(DataTableRouteMixin, {
   },
   mergeQueryOptions(params) {
     const query = {
-      include: 'status',
-      'filter[:has-no:next-version]': 'true',
-      'filter[status][id]': 'c272d47d756d4aeaa0be72081f1389c6' // goedgekeurd
+      include: 'status,current-version',
+      'filter[status][:id:]': 'cda8ec80-8508-40e2-9bbb-bee6d9536abb' // gearchiveerd
     };
 
     if (params.title && params.title.length > 0)
-      query['filter[title]'] = params.title;
-
+      query['filter[current-version][title]'] = params.title;
     return query;
   }
 });
