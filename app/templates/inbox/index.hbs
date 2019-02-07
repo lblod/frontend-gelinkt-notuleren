@@ -29,7 +29,7 @@
     {{/c.header}}
     {{#c.body as |container|}}
       {{#with container.currentVersion as |row|}}
-      <td>{{#link-to 'documents.edit' container.id}}{{row.title}}{{/link-to}}</td>
+      <td>{{#link-to 'editor-documents.edit' container.id}}{{row.title}}{{/link-to}}</td>
       <td>{{moment-calendar row.createdOn}}</td>
       <td>{{moment-calendar row.updatedOn}}</td>
       <td class="u-align-right">{{editor-status-pill status=(await container.status)}} <br> {{document-link-to-published document=row}}
