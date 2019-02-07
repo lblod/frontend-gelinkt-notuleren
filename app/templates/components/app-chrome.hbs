@@ -18,7 +18,7 @@
       {{#if editorDocument.updatedOn}}
         <p class="smaller">
           Bewaard {{moment-calendar editorDocument.updatedOn}}
-          {{editor-status-pill status=(await editorDocument.status)}}
+          {{editor-status-pill status=(await documentContainer.status)}}
         </p>
       {{else}}
         <p class="smaller">
@@ -26,7 +26,7 @@
             <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
             <span>Wijzigingen niet bewaard</span>
           </span>
-          {{editor-status-pill status=(await editorDocument.status)}}
+          {{editor-status-pill status=(await documentContainer.status)}}
         </p>
       {{/if}}
     {{/if}}
@@ -37,6 +37,21 @@
     {{editor-document-title editorDocument=editorDocument readOnly=readOnly}}
   </div>
   <div class="col--6-12 u-align-right">
-    {{yield}}
+    {{#wu-button-group class="u-align-right"}}
+      {{#if editorDocument.isNew}}
+        {{#link-to 'inbox.index' class="button button--narrow button--link button--link--dark"}}Verwijder document{{/link-to}}
+      {{else}}
+        {{wu-button class="button button--narrow button--link button--link--dark ember-view"
+          label="Verwijder concept" isNarrow=true isLink=true isDarkLink=true onClick=sendToTrash}}
+      {{/if}}
+      {{wu-button label="Publiceren en ondertekenen"  class="button--alt button button--narrow" isNarrow=true isAlt=true onClick=publish}}
+      {{wu-button class="button button--narrow ember-view" label="Bewaar concept" isNarrow=true onClick=save}}
+    {{/wu-button-group}}
+
+    {{#if onSync}}
+      {{#wu-link-button class="button--small button--link u-spacer--top--small button button--narrow ember-view" isNarrow=true onClick=startSyncModal}}
+        <i class="fa fa-rotate-right"></i> Synchroniseer gegevens met OCMW
+      {{/wu-link-button}}
+    {{/if}}
   </div>
 </div>

@@ -1,11 +1,10 @@
-{{#app-chrome editorDocument=editorDocument}}
-  {{editor-document-persistence-manager
-    editorDocument=editorDocument
-    statusIdMap=statusIdMap
-    save=(action "save")
-    publish=(action "publish")
-    sendToTrash=(action "sendToTrash")
-  }}
+{{#app-chrome editorDocument=editorDocument
+   documentContainer=documentContainer
+   save=(action "save")
+   startSyncModal=(action "startSyncModal")
+   publish=(action "publish")
+   sendToTrash=(action "sendToTrash")
+}}
 {{/app-chrome}}
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
