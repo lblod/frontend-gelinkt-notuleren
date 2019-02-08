@@ -1,1 +1,12 @@
-{{outlet}}
+<div class="u-spacer--top">
+  {{#wu-timeline-accordion as |timeline|}}
+    {{signatures/besluitenlijst/timeline-step
+      name="besluitenlijst"
+      step=timeline.step
+      lijst=besluitenlijst
+      currentEditorDocument=model.editorDocument
+      sign=(action "applySignature" "besluitenlijst")
+      publish=(action "publish" "besluitenlijst")
+    }}
+  {{/wu-timeline-accordion}}
+</div>
