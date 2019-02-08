@@ -1,11 +1,10 @@
-{{#app-chrome editorDocument=editorDocument
+{{app-chrome editorDocument=editorDocument
    documentContainer=documentContainer
    save=(action "save")
    startSyncModal=(action "startSyncModal")
    publish=(action "publish")
    sendToTrash=(action "sendToTrash")
 }}
-{{/app-chrome}}1
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
   {{#wu-modal

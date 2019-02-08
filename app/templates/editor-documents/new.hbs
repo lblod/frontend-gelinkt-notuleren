@@ -1,11 +1,10 @@
-{{#app-chrome editorDocument=editorDocument
+{{app-chrome editorDocument=editorDocument
    documentContainer=documentContainer
    save=(action "save")
    startSyncModal=null
    publish=(action "publish")
    sendToTrash=(action "sendToTrash")
 }}
-{{/app-chrome}}
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
   {{#wu-modal title="Er zijn fouten bij de validatie" onClose=(action 'closeValidationModal') as |m|}}
