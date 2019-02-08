@@ -27,12 +27,12 @@
       {{th-sortable field='updatedOn' currentSorting=sort label='Aangepast' class="data-table__header-title"}}
       {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title u-align-right"}}
     {{/c.header}}
-    {{#c.body as |doc|}}
-      {{#with doc.currentVersion as |row|}}
-      <td>{{#link-to 'editor-documents.edit' row.id}}{{row.title}}{{/link-to}}</td>
+    {{#c.body as |container|}}
+      {{#with container.currentVersion as |row|}}
+      <td>{{#link-to 'editor-documents.edit' container.id}}{{row.title}}{{/link-to}}</td>
       <td>{{moment-calendar row.createdOn}}</td>
       <td>{{moment-calendar row.updatedOn}}</td>
-      <td class="u-align-right">{{editor-status-pill status=(await row.status)}} <br> {{document-link-to-published document=row}}
+      <td class="u-align-right">{{editor-status-pill status=(await container.status)}} <br> {{document-link-to-published document=row}}
       </td>
       {{/with}}
     {{/c.body}}

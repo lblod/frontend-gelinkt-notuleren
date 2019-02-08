@@ -1,5 +1,4 @@
 import Mixin from '@ember/object/mixin';
-import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { removeNodeFromTree } from '../utils/dom-helpers';
@@ -12,13 +11,15 @@ export default Mixin.create({
 
   editorDocument: alias('model.editorDocument'),
   editorDocumentStatuses: alias('model.editorDocumentStatuses'),
+  documentContainer: alias('model.documentContainer'),
 
   editorDomNode: null,
 
   validationErrors: false,
 
   statusIdMap: {
-    trashStatusId: '5A8304E8C093B00009000010'
+    trashStatusId: '5A8304E8C093B00009000010',
+    conceptStatusId: 'c02542af-e6be-4cc6-be60-4530477109fc'
   },
 
   nextStatus: null,
@@ -57,13 +58,10 @@ export default Mixin.create({
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
-    let status = newStatus ? newStatus : editorDocument.get('status');
-    let documentContainer =
-        await editorDocument.get('documentContainer') ||
-        await this.store.createRecord('document-container').save();
-
+    let documentContainer = this.documentContainer || await this.store.createRecord('document-container').save();
+    let status = newStatus ? newStatus : await documentContainer.get('status');
     // every save results in new document
-    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title, documentContainer});
+    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, createdOn, updatedOn, title, documentContainer});
 
     // Link the previous if provided editorDocument does exist in DB.
     if(editorDocument.id)
@@ -74,6 +72,9 @@ export default Mixin.create({
 
     // set the latest revision
     documentContainer.set('currentVersion', documentToSave);
+    documentContainer.set('status', status);
+    const bestuurseenheid = await this.currentSession.get('group');
+    documentContainer.set('publisher', bestuurseenheid);
     await documentContainer.save();
 
     return documentToSave;
@@ -97,7 +98,6 @@ export default Mixin.create({
   }),
 
   profile: 'default',
-
   init() {
     this._super(...arguments);
     this.setEditorProfile.perform();
@@ -123,9 +123,11 @@ export default Mixin.create({
 
 
    async deleteDocument(){
+     const container = this.documentContainer;
+     const deletedStatus = this.getStatusFor('trashStatusId');
+     container.set('status', deletedStatus);
+     await container.save();
      this.set('displayDeleteModal', false);
-     const editorDocument = this.editorDocument;
-     const savedDocument = await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('trashStatusId'));
      this.transitionToRoute('inbox');
    },
 

@@ -6,18 +6,13 @@ export default Controller.extend(DefaultQueryParamsMixin, {
   currentSession: service(),
   store: service(),
   actions: {
-    async moveToConcepts(documents, datatable) {
-      const conceptStatus = await this.store.findRecord('editor-document-status', 'cfd751588a6c453296de9f9c0dff2af4');
-      documents.forEach(function(document) {
+    async moveToConcepts(documents /*, datatable */) {
+      const conceptStatus = await this.store.findRecord('editor-document-status', 'c02542af-e6be-4cc6-be60-4530477109fc');
+      for (const document of documents) {
         document.set('status', conceptStatus);
-        document.save();
-      });
-      datatable.clearSelection();
+        await document.save();
+      }
       this.transitionToRoute('inbox.index');
-    },
-    toggleStar(document) {
-      document.set('starred', !document.get('starred'));
-      document.save();
     }
   }
 });
