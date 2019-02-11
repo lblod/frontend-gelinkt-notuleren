@@ -22,7 +22,7 @@ export default Controller.extend(EditorDocumentBaseController, {
        return null;
      }
 
-    const savedDoc = yield this.saveEditorDocument(editorDocument);
+    const savedDoc = yield this.saveEditorDocument.perform(editorDocument);
     return savedDoc;
   }),
 

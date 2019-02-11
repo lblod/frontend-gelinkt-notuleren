@@ -1,4 +1,5 @@
 import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { removeNodeFromTree } from '../utils/dom-helpers';
@@ -23,8 +24,9 @@ export default Mixin.create({
   },
 
   nextStatus: null,
-
-
+  saveIsRunning: computed('saveEditorDocument.isRunning', 'publish.isRunning', function() {
+    return this.saveEditorDocument.isRunning || this.publish.isRunning;
+  }),
 
   getStatusFor(statusName){
     return this.editorDocumentStatuses.findBy('id', this.statusIdMap[statusName]);
@@ -50,16 +52,16 @@ export default Mixin.create({
     return template.innerHTML;
   },
 
-  async saveEditorDocument(editorDocument, newStatus){
-    await this.saveTasklists();
+  saveEditorDocument: task(function *(editorDocument, newStatus){
+    yield this.saveTasklists();
 
     // create or extract properties
     let cleanedHtml = this.cleanUpEditorDocumentInnerHtml(this.editorDomNode.innerHTML);
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
-    let documentContainer = this.documentContainer || await this.store.createRecord('document-container').save();
-    let status = newStatus ? newStatus : await documentContainer.get('status');
+    let documentContainer = this.documentContainer || (yield this.store.createRecord('document-container').save());
+    let status = newStatus ? newStatus : yield documentContainer.get('status');
     // every save results in new document
     let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, createdOn, updatedOn, title, documentContainer});
 
@@ -68,17 +70,17 @@ export default Mixin.create({
       documentToSave.set('previousVersion', editorDocument);
 
     // save the document
-    await documentToSave.save();
+    yield documentToSave.save();
 
     // set the latest revision
     documentContainer.set('currentVersion', documentToSave);
     documentContainer.set('status', status);
-    const bestuurseenheid = await this.currentSession.get('group');
+    const bestuurseenheid = yield this.currentSession.get('group');
     documentContainer.set('publisher', bestuurseenheid);
-    await documentContainer.save();
+    yield documentContainer.save();
 
     return documentToSave;
-  },
+  }),
 
   async saveTasklists(){
     if (!this.tasklists)
@@ -91,6 +93,13 @@ export default Mixin.create({
       await tasklistSolution.save();
     }
   },
+  publish: task(function *(){
+    const editorDocument = this.editorDocument;
+    const savedDocument = yield this.saveEditorDocument.perform(editorDocument, editorDocument.get('id'));
+    const container = yield savedDocument.get('documentContainer');
+    const containerId = container.id;
+    this.transitionToRoute('documents.show.publish.index', containerId);
+  }),
 
   setEditorProfile: task(function *(){
     const bestuurseenheid = yield this.get('currentSession.group');
@@ -112,16 +121,9 @@ export default Mixin.create({
    sendToTrash(){
      this.set('displayDeleteModal', true);
    },
-
-   async publish(){
-     const editorDocument = this.editorDocument;
-     const savedDocument = await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('conceptStatusId'));
-     const container = await savedDocument.get('documentContainer');
-     const containerId = container.id;
-     this.transitionToRoute('documents.show.publish.index', containerId);
+   publish() {
+     this.publish.perform();
    },
-
-
    async deleteDocument(){
      const container = this.documentContainer;
      const deletedStatus = this.getStatusFor('trashStatusId');
