@@ -6,6 +6,9 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-babel': {
       includePolyfill: true
+    },
+    minifyCSS: {
+      enabled: false
     }
   });
 
