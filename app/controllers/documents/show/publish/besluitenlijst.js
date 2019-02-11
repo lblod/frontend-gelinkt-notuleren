@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
@@ -7,7 +6,7 @@ export default Controller.extend({
   documentContainer: alias('model.documentContainer'),
   documentIdentifier: alias('model.documentIdentifier'),
   ajax: service(),
-
+  besluitenlijst: alias('model.versionedBesluitenLijsten.firstObject'),
   actions: {
     /**
      * Applies the signatature for "mayor" or "secretary".

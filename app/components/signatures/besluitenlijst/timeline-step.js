@@ -13,7 +13,7 @@ export default Component.extend({
   // contents necessary in the template.  Our construction works this
   // way to keep the template somewhat cleaner.
   mockLijst: computed('lijst', 'currentEditorDocument', function(){
-    if( this.agenda ) {
+    if( this.lijst ) {
       // pick all info from the current agenda
       return PromiseProxyObject.create( {
         promise: RSVP.hash( {

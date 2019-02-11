@@ -7,5 +7,6 @@ export default Model.extend({
   status: belongsTo('editor-document-status', {inverse: null }),
   publisher: belongsTo('bestuurseenheid', {inverse: null }),
   versionedAgendas: hasMany('versioned-agenda'),
-  versionedNotulen: hasMany('versioned-notulen')
+  versionedNotulen: hasMany('versioned-notulen'),
+  versionedBesluitenLijsten: hasMany('versioned-besluiten-lijst')
 });
