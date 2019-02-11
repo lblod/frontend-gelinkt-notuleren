@@ -29,6 +29,7 @@ inflector.singular(/u([a-z])en$/,'uu$1');
 inflector.singular(/o([a-z])en$/,'oo$1');
 inflector.singular(/([auio])s$/,'$1s');
 inflector.irregular("agenda","agendas");
+inflector.uncountable('versioned-notulen');
 inflector.irregular("behandeling-van-agendapunt","behandelingen-van-agendapunten");
 inflector.irregular("rechtsgrond-aanstelling","rechtsgronden-aanstelling");
 inflector.irregular("rechtsgrond-artikel","rechtsgronden-artikel");

@@ -12,6 +12,7 @@ export default Mixin.create({
 
   editorDocument: alias('model.editorDocument'),
   editorDocumentStatuses: alias('model.editorDocumentStatuses'),
+  documentContainer: alias('model.documentContainer'),
 
   editorDomNode: null,
 
@@ -19,57 +20,16 @@ export default Mixin.create({
 
   statusIdMap: {
     trashStatusId: '5A8304E8C093B00009000010',
-    conceptStatusId: 'cfd751588a6c453296de9f9c0dff2af4',
-    agendaPublishedStatusId: '627aec5d144c422bbd1077022c9b45d1',
-    besluitenlijstPublishedStatusId: 'b763390a63d548bb977fb4804293084a',
-    signedPublishedStatusId: 'c272d47d756d4aeaa0be72081f1389c6'
+    conceptStatusId: 'c02542af-e6be-4cc6-be60-4530477109fc'
   },
 
   nextStatus: null,
-
-  getNextPublishStatus(currStatus){
-    if(currStatus.get('id') === this.statusIdMap['agendaPublishedStatusId'])
-      return this.getStatusFor('besluitenlijstPublishedStatusId');
-
-    if(currStatus.get('id') === this.statusIdMap['besluitenlijstPublishedStatusId'])
-      return this.getStatusFor('signedPublishedStatusId');
-
-    return this.getStatusFor('agendaPublishedStatusId');
-  },
-
-  getPublishApi(currStatus){
-    if(currStatus.get('id') === this.statusIdMap['agendaPublishedStatusId'])
-      return editorDocumentId => `/publish/agenda/${editorDocumentId}`;
-
-    if(currStatus.get('id') === this.statusIdMap['besluitenlijstPublishedStatusId'])
-      return editorDocumentId => `/publish/decision/${editorDocumentId}`;
-
-    if(currStatus.get('id') === this.statusIdMap['signedPublishedStatusId'])
-      return editorDocumentId => `/publish/notule/${editorDocumentId}`;
-  },
-
-  displayPublishStatusModal: false,
-
-  modalTransitionToTrash: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['trashStatusId'] && this.displayPublishStatusModal;
-  }),
-  modalTransitionToAgendaPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['agendaPublishedStatusId'] && this.displayPublishStatusModal;
-  }),
-  modalTransitionToBesluitenlijstPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['besluitenlijstPublishedStatusId'] && this.displayPublishStatusModal;
-  }),
-  modalTransitionToSignedPublished: computed('displayPublishStatusModal', function(){
-    return this.get('nextStatus.id') ===  this.statusIdMap['signedPublishedStatusId'] && this.displayPublishStatusModal;
+  saveIsRunning: computed('saveEditorDocument.isRunning', 'publish.isRunning', function() {
+    return this.saveEditorDocument.isRunning || this.publish.isRunning;
   }),
 
   getStatusFor(statusName){
     return this.editorDocumentStatuses.findBy('id', this.statusIdMap[statusName]);
-  },
-
-  resetPublishStatusModal(){
-     this.set('displayPublishStatusModal', false);
-     this.set('publishModalStatus', '');
   },
 
   hasDocumentValidationErrors(document){
@@ -92,71 +52,39 @@ export default Mixin.create({
     return template.innerHTML;
   },
 
-  async saveEditorDocument(editorDocument, newStatus){
-    await this.saveTasklists();
+  saveEditorDocument: task(function *(editorDocument, newStatus){
+    yield this.saveTasklists();
 
     // create or extract properties
     let cleanedHtml = this.cleanUpEditorDocumentInnerHtml(this.editorDomNode.innerHTML);
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
-    let status = newStatus ? newStatus : editorDocument.get('status');
-    let documentContainer =
-        await editorDocument.get('documentContainer') ||
-        await this.store.createRecord('document-container').save();
-
+    let documentContainer = this.documentContainer || (yield this.store.createRecord('document-container').save());
+    let status = newStatus ? newStatus : yield documentContainer.get('status');
     // every save results in new document
-    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, status, createdOn, updatedOn, title, documentContainer});
+    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, createdOn, updatedOn, title, documentContainer});
 
     // Link the previous if provided editorDocument does exist in DB.
     if(editorDocument.id)
       documentToSave.set('previousVersion', editorDocument);
 
     // save the document
-    await documentToSave.save();
+    yield documentToSave.save();
 
     // set the latest revision
     documentContainer.set('currentVersion', documentToSave);
-    await documentContainer.save();
+    documentContainer.set('status', status);
+    const bestuurseenheid = yield this.currentSession.get('group');
+    documentContainer.set('publisher', bestuurseenheid);
+    yield documentContainer.save();
 
     return documentToSave;
-  },
-
-  async publishDocument(editorDocument, publishStatus){
-    let savedDocument = await this.saveEditorDocument(editorDocument, editorDocument.get('id') ? null : this.getStatusFor('conceptStatusId'));
-    return await this.saveEditorDocument(savedDocument, publishStatus);
-  },
-
-  publishFlow: task(function *(){
-    let newDocument = null;
-    try {
-
-      let editorDocument = this.editorDocument;
-      let publishStatus = this.nextStatus;
-      newDocument = yield this.publishDocument(editorDocument, publishStatus);
-      let apiEndPoint = this.getPublishApi(publishStatus);
-      if(apiEndPoint){
-        yield this.ajax.post(apiEndPoint(newDocument.get('id')));
-      }
-      this.transitionToRoute('/inbox');
-    }
-    catch(e){
-      alert('Fout bij publiceren: ' + e);
-
-      //rollback
-      if(newDocument){
-        newDocument.set('status', this.get('previousStatus'));
-        yield newDocument.save();
-        this.transitionToRoute('editor-documents.edit', newDocument.id, {queryParams: { scrollToLastSavePosition: true } });
-      }
-      else {
-        this.editorDocument.set('status', this.get('previousStatus'));
-        yield this.editorDocument.save();
-      }
-    }
   }),
 
   async saveTasklists(){
+    if (!this.tasklists)
+      return;
     for(let tasklistSolution of this.tasklists){
       let taskSolutions = await tasklistSolution.taskSolutions.toArray();
       for(let taskSolution of taskSolutions){
@@ -165,6 +93,13 @@ export default Mixin.create({
       await tasklistSolution.save();
     }
   },
+  publish: task(function *(){
+    const editorDocument = this.editorDocument;
+    const savedDocument = yield this.saveEditorDocument.perform(editorDocument, editorDocument.get('id'));
+    const container = yield savedDocument.get('documentContainer');
+    const containerId = container.id;
+    this.transitionToRoute('documents.show.publish.index', containerId);
+  }),
 
   setEditorProfile: task(function *(){
     const bestuurseenheid = yield this.get('currentSession.group');
@@ -172,7 +107,6 @@ export default Mixin.create({
   }),
 
   profile: 'default',
-
   init() {
     this._super(...arguments);
     this.setEditorProfile.perform();
@@ -185,27 +119,22 @@ export default Mixin.create({
    },
 
    sendToTrash(){
-     this.set('nextStatus', this.getStatusFor('trashStatusId'));
-     this.set('displayPublishStatusModal', true);
+     this.set('displayDeleteModal', true);
+   },
+   publish() {
+     this.publish.perform();
+   },
+   async deleteDocument(){
+     const container = this.documentContainer;
+     const deletedStatus = this.getStatusFor('trashStatusId');
+     container.set('status', deletedStatus);
+     await container.save();
+     this.set('displayDeleteModal', false);
+     this.transitionToRoute('inbox');
    },
 
-   publish(){
-     this.set('previousStatus', this.get('editorDocument.status'));
-     if(this.hasDocumentValidationErrors(this.editorDocument)){
-       this.set('validationErrors', true);
-       return;
-     }
-     this.set('nextStatus', this.getNextPublishStatus(this.get('editorDocument.status')));
-     this.set('displayPublishStatusModal', true);
-   },
-
-   terminatePublishFlow(){
-     this.resetPublishStatusModal();
-     this.publishFlow.perform();
-   },
-
-   onClosePublishStatusModal(){
-     this.resetPublishStatusModal();
+   onCloseDeleteModal(){
+     this.set('displayDeleteModal', false);
    },
 
    closeValidationModal(){

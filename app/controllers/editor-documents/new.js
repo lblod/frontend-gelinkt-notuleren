@@ -17,8 +17,9 @@ export default Controller.extend(EditorDocumentBaseController, {
        this.set('validationErrors', true);
        return;
      }
-    let savedDoc = yield this.saveEditorDocument(editorDocument, this.getStatusFor('conceptStatusId'));
-    this.transitionToRoute('editor-documents.edit', savedDoc.id, {queryParams: { scrollToLastSavePosition: true } });
+    let savedDoc = yield this.saveEditorDocument.perform(editorDocument, this.getStatusFor('conceptStatusId'));
+    const container = yield savedDoc.get('documentContainer');
+    this.transitionToRoute('editor-documents.edit', container.id, {queryParams: { scrollToLastSavePosition: true } });
   }),
 
   actions: {
