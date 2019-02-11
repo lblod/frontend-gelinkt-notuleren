@@ -11,5 +11,14 @@ export default Model.extend({
   isBestuurlijkeAliasVan: belongsTo('persoon', {inverse: 'isAangesteldAls'}),
   tijdelijkeVervangingen: hasMany('mandataris', {inverse: null }),
   datumEedaflegging: attr('datetime'),
-  datumMinistrieelBesluit: attr('datetime')
+  datumMinistrieelBesluit: attr('datetime'),
+
+  rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
+    class: "http://data.vlaanderen.be/ns/mandaat#Mandataris",
+    start: "http://data.vlaanderen.be/ns/mandaat#start",
+    einde: "http://data.vlaanderen.be/ns/mandaat#einde",
+    rangorde: "http://data.vlaanderen.be/ns/mandaat#rangorde",
+    bekleedt: "http://www.w3.org/ns/org#holds",
+    isBestuurlijkeAliasVan: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan"
+  }
 });
