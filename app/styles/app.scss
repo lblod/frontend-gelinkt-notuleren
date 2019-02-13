@@ -16,6 +16,7 @@
 @import 'show-annotations-content';
 
 @import 'published-documents';
+@import 'publishing-documents';
 @import 'scrollto';
 
 @import 'annotation-suggestion-modals';
@@ -26,53 +27,6 @@
 @import 'wizard';
 
 @import 'print';
-
-.steps .agendapunten {
-	[typeof="besluit:Agendapunt"] {
-		display: block;
-		margin-bottom: 1rem;
-	}
-
-	[property="besluit:geplandOpenbaar"] {
-		display: inline-block;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		color: $gray-light;
-		font-weight: 400;
-		width: 2rem;
-
-		+ span {
-			display: inline-block;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			color: $gray-light;
-			font-weight: 400;
-			font-size: 1.2rem;
-		}
-	}
-
-	[property="besluit:geplandOpenbaar"][content="true"] + span {
-		&:before {
-			content: "Openbaar agendapunt — ";
-		}
-	}
-
-	[property="besluit:geplandOpenbaar"][content="false"] + span {
-		&:before {
-			content: "Besloten agendapunt — ";
-		}
-	}
-
-	[property="dc:title"] {
-		display: block;
-		margin-left: 2.3rem;
-		font-size: 1.8rem;
-	}
-}
-
-.step__content .u-hr {
-	border-color: $blue-gray-lighter;
-}
 
 /* shame */
 
