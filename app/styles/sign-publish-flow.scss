@@ -57,7 +57,7 @@
 }
 
 
-/* Style publishing animation
+/* Style agendapunten
  ========================================================================== */
 
 .steps .agendapunten {
@@ -103,6 +103,38 @@
 	}
 }
 
+
+/* Style besluitenlijst
+ ========================================================================== */
+
+.steps {
+
+	[typeof="http://data.vlaanderen.be/ns/besluit#Besluit"] {
+		margin-bottom: 2rem;
+		display: block;
+
+		[property="dct:title"] {
+			margin-bottom: 0.2rem;
+			font-size: 2.1rem;
+			font-weight: 400;
+		}
+
+		&:before {
+			content: "Besluit met korte openbare beschrijving";
+			display: block;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			color: $gray-light;
+			font-weight: 400;
+			font-size: 1.2rem;
+			margin-bottom: 0.5rem;
+		}
+
+		[property="eli:description"] {
+			display: block;
+		}
+	}
+}
 
 /* Style hr's — remove this style once new version of webuniversum is added
  ========================================================================== */
