@@ -11,6 +11,10 @@
 
 /* step styling override remove once webuniversum updated*/
 
+.step__title:first-letter {
+	text-transform: uppercase;
+}
+
 .step__content p + p {
 	margin-top: 0;
 }
