@@ -27,14 +27,12 @@
 
 @import 'print';
 
-
 .steps .agendapunten {
 	[typeof="besluit:Agendapunt"] {
 		display: block;
 		margin-bottom: 1rem;
 	}
 
-	[property="besluit:geplandBesloten"],
 	[property="besluit:geplandOpenbaar"] {
 		display: inline-block;
 		text-transform: uppercase;
@@ -53,13 +51,13 @@
 		}
 	}
 
-	[property="besluit:geplandOpenbaar"] + span {
+	[property="besluit:geplandOpenbaar"][content="true"] + span {
 		&:before {
 			content: "Openbaar agendapunt — ";
 		}
 	}
 
-	[property="besluit:geplandBesloten"] + span {
+	[property="besluit:geplandOpenbaar"][content="false"] + span {
 		&:before {
 			content: "Besloten agendapunt — ";
 		}
@@ -72,28 +70,7 @@
 	}
 }
 
-.step-info {
-	color: $gray;
-	padding: 1.5rem 0 2rem 8rem;
-	font-size: 1.6rem;
-	position: relative;
-
-	&:before {
-		display: block;
-    content: '';
-    position: absolute;
-    left: 2.5rem;
-    top: .4rem;
-    bottom: .4rem;
-    width: 3px;
-    background-size: 6px 6px;
-	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(50%, transparent), color-stop(50%, $blue-gray-lighter));
-	  background-image: -webkit-linear-gradient(transparent 50%, $blue-gray-lighter 50%);
-	  background-image: linear-gradient(transparent 50%, $blue-gray-lighter 50%);
-	}
-}
-
-.u-hr--lighter {
+.step__content .u-hr {
 	border-color: $blue-gray-lighter;
 }
 
