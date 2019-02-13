@@ -226,6 +226,15 @@
 
   /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */
 
+  [property="besluit:openbaar"] + [property="dc:subject"] {
+  	text-transform: uppercase;
+  	color: $gray-light;
+  	letter-spacing: 1px;
+  	font-size: 1.4rem;
+  	line-height: 1.8;
+  	display: block;
+  }
+
   .editor__paper {
     [typeof="besluit:BehandelingVanAgendapunt"],
     [property="ext:behandelt"],
@@ -257,6 +266,16 @@
         opacity: 0;
         transition: all 200ms;
         left: -2rem;
+      }
+
+      [property="besluit:geplandOpenbaar"] + [property="dc:subject"]:before,
+      [property="besluit:openbaar"] + [property="dc:subject"]:before {
+      	content: "openbaar";
+      }
+
+      [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:subject"]:before,
+      [property="besluit:openbaar"][content="false"] + [property="dc:subject"]:before {
+      	content: "besloten";
       }
     }
   }
