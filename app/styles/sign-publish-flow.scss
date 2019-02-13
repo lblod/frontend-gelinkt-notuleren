@@ -60,13 +60,14 @@
 /* Style agendapunten
  ========================================================================== */
 
-.steps .agendapunten {
+.steps {
 	[typeof="besluit:Agendapunt"] {
 		display: block;
 		margin-bottom: 1rem;
 	}
 
-	[property="besluit:geplandOpenbaar"] {
+	[property="besluit:geplandOpenbaar"],
+	[property="besluit:openbaar"] {
 		display: inline-block;
 		text-transform: uppercase;
 		letter-spacing: 1px;
@@ -84,19 +85,21 @@
 		}
 	}
 
-	[property="besluit:geplandOpenbaar"][content="true"] + span {
+	[property="besluit:geplandOpenbaar"][content="true"] + span,
+	[property="besluit:openbaar"][content="true"] + span {
 		&:before {
 			content: "Openbaar agendapunt — ";
 		}
 	}
 
-	[property="besluit:geplandOpenbaar"][content="false"] + span {
+	[property="besluit:geplandOpenbaar"][content="false"] + span,
+	[property="besluit:Openbaar"][content="false"] + span {
 		&:before {
 			content: "Besloten agendapunt — ";
 		}
 	}
 
-	[property="dc:title"] {
+	[typeof="besluit:Agendapunt"] [property="dc:title"] {
 		display: block;
 		margin-left: 2.3rem;
 		font-size: 1.8rem;
@@ -135,6 +138,87 @@
 		}
 	}
 }
+
+
+/* Style notulen
+ ========================================================================== */
+
+.steps [typeof="besluit:Zitting"] {
+
+	.mark-highlight-manual {
+		background-color: transparent;
+	}
+
+	> [property="dc:title"] {
+		margin-top: 3rem;
+	}
+
+	[property="ext:agendapuntenTable"] [property="besluit:heeftAgendapunt"] {
+		display: block;
+	}
+
+
+	[typeof="besluit:Artikel"] {
+		[property="eli:number"] {
+			display: block;
+		}
+	}
+
+	[property="dc:subject"] {
+		margin-bottom: 2rem;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		line-height: 1.1;
+		position: relative;
+	}
+
+	h1,
+	.h1 {
+		font-family: flanders-serif,serif;
+    line-height: 1;
+    font-weight: 300;
+    font-size: 4.8rem;
+    margin-bottom: 2rem;
+	}
+
+	h2,
+	.h2 {
+		font-size: 3.6rem;
+    font-weight: 500;
+    margin-bottom: 3rem;
+	}
+
+	h3,
+	.h3 {
+		font-size: 3rem;
+		font-weight: 500;
+	}
+
+	h4,
+	.h4 {
+		font-size: 2.4rem;
+		font-weight: 500;
+	}
+
+	h5,
+	.h5 {
+		font-size: 2.1rem;
+		font-weight: 500;
+	}
+
+	h6,
+	.h6 {
+		font-size: 1.8rem;
+		font-weight: 500;
+	}
+}
+
 
 /* Style hr's — remove this style once new version of webuniversum is added
  ========================================================================== */
