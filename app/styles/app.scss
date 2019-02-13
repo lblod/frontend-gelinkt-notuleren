@@ -34,7 +34,6 @@
 		margin-bottom: 1rem;
 	}
 
-	[property="besluit:geplandBesloten"],
 	[property="besluit:geplandOpenbaar"] {
 		display: inline-block;
 		text-transform: uppercase;
@@ -53,13 +52,13 @@
 		}
 	}
 
-	[property="besluit:geplandOpenbaar"] + span {
+	[property="besluit:geplandOpenbaar"][content="true"] + span {
 		&:before {
 			content: "Openbaar agendapunt — ";
 		}
 	}
 
-	[property="besluit:geplandBesloten"] + span {
+	[property="besluit:geplandOpenbaar"][content="false"] + span {
 		&:before {
 			content: "Besloten agendapunt — ";
 		}
