@@ -3,6 +3,13 @@
   Some parts will be reused, but most of them will not.
  ========================================================================== */
 
+/* side nav problem */
+
+.side-navigation__item a {
+	word-break: initial;
+}
+
+
 /* spans in link lists replacing data */
 
 li.link-list__item span {
