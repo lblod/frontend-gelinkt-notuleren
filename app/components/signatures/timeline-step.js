@@ -8,7 +8,7 @@ export default Component.extend({
   title: computed('name', function(){
     return `Voorvertoning ${this.name}`;
   }),
-  status: computed('document.signedResources.{length,createdOn}', function(){
+  status: computed('document.signedResources.{length,createdOn}', 'document.publishedResource.id', function(){
     let signedResourcesLength = get(this, 'document.signedResources.length');
     let isPublishedResource = get(this, 'document.publishedResource.id');
     if( isPublishedResource )
