@@ -119,6 +119,10 @@
       display: block;
     }
 
+		[typeof="besluit:Agendapunt"] {
+			margin-bottom: 0.5rem;
+		}
+
     mark {
       cursor: pointer;
     }
@@ -141,7 +145,7 @@
       font-family: flanders-serif,serif;
       line-height: 1.1;
       position: relative;
-      margin-bottom: 1em;
+      margin-bottom: 0;
     }
 
     .h1 {
@@ -152,78 +156,66 @@
       line-height: 1;
       font-weight: 300;
       font-size: 4.8rem;
-      margin-bottom: 4rem;
     }
 
       @media screen and (max-width: 767px) {
         h1:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
           font-size: 3.6rem;
-          margin-bottom: 3rem;
         }
       }
 
     h2:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
       font-size: 3.6rem;
       font-weight: 500;
-      margin-bottom: 3rem;
     }
 
       @media screen and (max-width: 767px) {
          h2:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
           font-size: 3rem;
-          margin-bottom: 2.4rem;
         }
       }
 
     h3:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
       font-size: 3rem;
       font-weight: 700;
-      margin-bottom: 2.4rem;
     }
 
       @media screen and (max-width: 767px) {
          h3:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
           font-size: 2.8rem;
-          margin-bottom: 2rem;
         }
       }
 
     h4:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
       font-size: 2.4rem;
       font-weight: 500;
-      margin-bottom: 2rem;
     }
 
       @media screen and (max-width: 767px) {
         h4:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
           font-size: 2.4rem;
-          margin-bottom: 1.5rem;
         }
       }
 
     h5:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
       font-weight: 400;
       font-size: 2.1rem;
-      margin-bottom: 1.5rem;
     }
 
       @media screen and (max-width: 767px) {
         h5:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
           font-size: 2.1rem;
-          margin-bottom: 1rem;
         }
       }
 
     h6:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
       font-weight: 500;
       font-size: 1.8rem;
-      margin-bottom: 1rem;
     }
 
       @media screen and (max-width: 767px) {
         h6:not(.h1):not(.h2):not(.h3):not(.h4):not(.h5):not(.h6) {
           font-size: 1.8rem;
-          margin-bottom: 0.5rem;
         }
       }
   }
@@ -238,6 +230,15 @@
 
   /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */
 
+  [property="besluit:openbaar"] + [property="dc:subject"] {
+  	text-transform: uppercase;
+  	color: $gray-light;
+  	letter-spacing: 1px;
+  	font-size: 1.4rem;
+  	line-height: 1.8;
+  	display: block;
+  }
+
   .editor__paper {
     [typeof="besluit:BehandelingVanAgendapunt"],
     [property="ext:behandelt"],
@@ -246,36 +247,39 @@
       display: block !important;
       position: relative;
 
-      .annotation--agendapunt--besloten__icon,
-      .annotation--agendapunt--open__icon {
+      [property="besluit:geplandOpenbaar"],
+      [property="besluit:openbaar"] {
         font-size: 1.6rem;
         position: absolute;
         left: -2.75rem;
         top: 0;
         padding-left: 1px;
         z-index: 2;
-
-        // &:hover {
-        //   color: $primary-blue; // To be used when open/closed agendapunt plugin exists
-        // }
-      }
-
-      .annotation--agendapunt--besloten__icon {
-        color: darken($primary-yellow, 15%);
-      }
-
-      .annotation--agendapunt--open__icon {
         color: $gray-light;
+      }
+
+      [property="besluit:geplandOpenbaar"][content="false"],
+      [property="besluit:openbaar"][content="false"] {
+        color: darken($primary-yellow, 15%);
       }
     }
 
     [typeof="besluit:BehandelingVanAgendapunt"]:hover {
-      .annotation--agendapunt--besloten__icon,
-      .annotation--agendapunt--open__icon,
-      .annotation--agendapunt--persoonlijk__icon {
+      [property="besluit:geplandOpenbaar"],
+      [property="besluit:openbaar"] {
         opacity: 0;
         transition: all 200ms;
         left: -2rem;
+      }
+
+      [property="besluit:geplandOpenbaar"] + [property="dc:subject"]:before,
+      [property="besluit:openbaar"] + [property="dc:subject"]:before {
+      	content: "openbaar";
+      }
+
+      [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:subject"]:before,
+      [property="besluit:openbaar"][content="false"] + [property="dc:subject"]:before {
+      	content: "besloten";
       }
     }
   }

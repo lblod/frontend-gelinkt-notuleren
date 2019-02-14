@@ -3,6 +3,22 @@
   Some parts will be reused, but most of them will not.
  ========================================================================== */
 
+/* side nav problem remove once webuniversum updated*/
+
+.side-navigation__item a {
+	word-break: initial;
+}
+
+/* step styling override remove once webuniversum updated*/
+
+.step__title:first-letter {
+	text-transform: uppercase;
+}
+
+.step__content p + p {
+	margin-top: 0;
+}
+
 /* spans in link lists replacing data */
 
 li.link-list__item span {
@@ -112,45 +128,6 @@ input.input-field {
 	border-left: 1px solid $gray-lighter;
 	border-right: 1px solid $gray-lighter;
 }
-
-
-// /* sidebar publish */
-
-// .sidebar .side-navigation__group--bordered {
-// 	padding-top: 0;
-// }
-
-// .side-navigation__group--bordered .side-navigation__item {
-// 	border-bottom: 1px solid $blue-gray-lighter;
-// }
-
-// .side-navigation__item {
-// 	position: relative;
-// }
-
-// .side-navigation__item .side-navigation__item__status-icons {
-// 	position: absolute;
-// 	right: 1rem;
-// 	top: 1.5rem;
-// }
-
-// .vi-u-badge--border {
-// 	border: 1px solid $blue-gray-light;
-// 	background-color: $white;
-// }
-
-// .side-navigation__item .side-navigation__item__status {
-// 	padding: 0 1.5rem 1rem;
-// }
-
-// .side-navigation__item a.active + .side-navigation__item__status {
-// 	background-color: $blue-gray-lightest;
-// 	box-shadow: inset 3px 0 0 $primary-blue;
-
-// 	.pill {
-// 		margin-bottom: 1rem;
-// 	}
-// }
 
 
 

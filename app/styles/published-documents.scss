@@ -4,60 +4,8 @@
  ========================================================================== */
 
 
-/* Style publishing animation
- ========================================================================== */
 
-.scanner {
-  backface-visibility: hidden;
-  position: relative;
-  pointer-events: none;
-
-  &:after {
-		content: "";
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		position: absolute;
-		background-color: rgba($white, 0.7);
-  }
-
-  .scanner__text {
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		padding-top: 20rem;
-		text-align: center;
-		z-index: 10;
-  }
-
-  .scanner__bar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    background-color: rgba($primary-yellow, 1);
-    z-index: 1;
-    animation: move 3s cubic-bezier(0.15, 0.44, 0.76, 0.64);
-    animation-iteration-count: infinite;
-    border-right: 1rem $primary-yellow solid;
-  }
-}
-
-@keyframes move {
-  0% {
-  	width: 0;
-  	background-color: rgba($white, 0.5);
-  }
-  100% {
-  	width: 100%;
-  	background-color: rgba($primary-yellow, 0.5);
-  }
-}
-
-/*
+/* Remove this styling once new flow has been incorporated
  ========================================================================== */
 
 .published-example {
