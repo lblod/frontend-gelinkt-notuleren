@@ -119,6 +119,10 @@
       display: block;
     }
 
+		[typeof="besluit:Agendapunt"] {
+			margin-bottom: 0.5rem;
+		}
+
     mark {
       cursor: pointer;
     }
