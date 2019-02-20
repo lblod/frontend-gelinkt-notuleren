@@ -39,13 +39,13 @@ export default Component.extend({
 
   algemeneStatus: computed('status', function(){
     if( this.status == 'published' )
-      return { label:'gepubliceerd', color: 'primary-blue' };
+      return { label:'Gepubliceerd', color: 'primary-blue' };
     if( this.status == 'firstSignature' )
-      return { label: 'eerste handtekening', color: 'primary-yellow'};
+      return { label: 'Eerste handtekening verkregen', color: 'primary-yellow'};
     if( this.status == 'secondSignature' )
-      return { label:'getekend', color: 'primary-yellow'};
+      return { label:'Getekend', color: 'primary-yellow'};
     if( this.status == 'concept' )
-      return { label: 'concept'};
+      return { label: 'Concept'};
     return 'concept';
   }),
 
