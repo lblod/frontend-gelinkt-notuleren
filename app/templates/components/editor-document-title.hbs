@@ -12,9 +12,9 @@
 	    {{input class="input-field input-field--block u-spacer--small" type="text" placeholder="Naamloos document" value=overruledTitle focus-out=(action "toggleActive") autofocus="autofocus"}}
 	  {{else}}
 	    <h1 onClick={{action "toggleActive"}}>
-        <span class="link--edit">
+        <a class="link--edit">
           {{title}}
-        </span>
+        </a>
 	    </h1>
 	  {{/if}}
 	{{/if}}
