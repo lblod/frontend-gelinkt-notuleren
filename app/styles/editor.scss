@@ -8,6 +8,18 @@
   border-bottom: 1px solid $blue-gray-light;
 }
 
+	.editor-chrome .link--edit {
+		width: 100%;
+		overflow: hidden;
+		max-height: 1.3em;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.editor-chrome .button {
+		margin-bottom: 0;
+	}
+
 .editor {
   background-color: $blue-gray-lightest;
   position: relative;
