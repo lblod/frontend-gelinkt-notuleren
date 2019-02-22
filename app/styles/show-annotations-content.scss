@@ -7,14 +7,6 @@
 
   /* -------------------- Guiding tags ------------------------- */
 
-	.mark-highlight-manual:before {
-		content: "Typ hier de gevraagde informatie";
-	}
-
-	[data-editor-highlight="true"]:before {
-		content: "Klik om de juiste optie selecteren";
-	}
-
 	[property^="ext:insert"]:before {
 		content: "Klik om de juiste optie selecteren";
 	}
