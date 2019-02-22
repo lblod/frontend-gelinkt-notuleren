@@ -1,0 +1,157 @@
+
+/* Editor guiding styles: CTA's and warnings
+ ========================================================================== */
+
+.editor__paper {
+
+	/* discover what to type */
+
+	span.mark-highlight-manual {
+	  background-color: rgba($blue-gray, 0.3);
+	  font-weight: 400;
+	  position: relative;
+	  display: inline-block;
+
+	  &:hover {
+	  	// background-color: transparent;
+		  background-color: rgba($blue-gray, 0.2);
+	  	transition: all 200ms;
+
+	  	// &:after {
+	  	// 	content: " ";
+	  	// 	position: absolute;
+	  	// 	border: 1px dashed $blue-gray-light;
+	  	// 	top: -0.1rem;
+	  	// 	right: -0.6rem;
+	  	// 	bottom: -0.1rem;
+	  	// 	left: -0.6rem;
+	  	// }
+	  }
+
+		&:before {
+			content: "Vul in";
+		}
+
+		&:hover:before {
+			// box-shadow: 1px 1px 3px $blue-gray-light;
+			font-size: 1.2rem;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			left: 0;
+			right: auto;
+			width: auto;
+			background-color: $white;
+			top: -0.5em;
+			padding: 0.2rem 0.3rem 0.1rem;
+			border: 1px solid $blue-gray-lighter !important;
+			color: $gray-dark;
+		}
+	}
+
+	/* click to input */
+
+	mark[data-editor-highlight="true"] {
+		background-color: rgba($primary-yellow, 0.9);
+
+		&:hover {
+			background-color: $primary-yellow;
+		}
+
+		&:before {
+			content: "Klik om de juiste optie selecteren";
+		}
+	}
+
+	[property="ext:agendapuntenTable"],
+	[property="ext:aanwezigenTable"],
+	.mark-highlight-manual,
+	[data-editor-highlight="true"] {
+
+    &:hover {
+      color: $black;
+      background-color: rgba($blue-gray, 0.2);
+    }
+
+    &:before {
+      position: absolute;
+      font-weight: 400;
+      font-size: 1.5rem;
+      width: 11rem;
+      color: $gray;
+      opacity: 0;
+      border: 1px solid $blue-gray-lighter;
+      background-color: $white;
+      padding: 0.5rem 0.7rem 0.4rem 1.4rem;
+      border-right: 0.5rem solid $blue-gray-light;
+      box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
+      z-index: 901;
+      font-family: "flanders-sans", sans-serif;
+      transition: opacity 200ms;
+      top: -999rem;
+      left: -999rem;
+    }
+
+    &:hover:before {
+      opacity: 1;
+      top: auto;
+      left: auto;
+      right: -17.5rem;
+      margin-top: -2.2rem;
+    }
+	}
+
+	/* Make clear agenda and aanwezigen can be edited */
+
+	[property="ext:insertAanwezigenText"],
+	[property="ext:insertAgendaText"] {
+		position: relative;
+		display: block;
+	}
+
+	[property="ext:agendapuntenTable"],
+	[property="ext:aanwezigenTable"] {
+		position: relative;
+		cursor: pointer;
+		transition: all 200ms;
+
+		&:before {
+			width: 20rem;
+		}
+
+		&:hover:before {
+			top: -4rem;
+			right: -26.5rem;
+		}
+	}
+
+	[property="ext:agendapuntenTable"]:before {
+		content: "Agendabeheer";
+	}
+
+	[property="ext:aanwezigenTable"]:before {
+		content: "Aanwezigenbeheer";
+	}
+}
+
+[data-flagged-remove="almost-complete"],
+[data-flagged-remove="complete"] {
+  min-height: 1.6rem;
+  display: inline;
+  cursor: text !important;
+  background-color: rgba($primary-blue, 0.25) !important;
+  box-shadow: -2px 0 0 $primary-blue;
+}
+
+[data-flagged-remove="complete"] {
+  min-width: 8px;
+  display: inline-block;
+  box-shadow: -2px 0 0 black;
+}
+
+.annotation--edit {
+  [data-flagged-remove="almost-complete"],
+  [data-flagged-remove="complete"] {
+    background-color: transparent;
+  }
+}
