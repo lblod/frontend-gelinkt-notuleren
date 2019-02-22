@@ -1,19 +1,21 @@
-{{#if readOnly}}
-  <h1 class="h4 sans-serif">
-    {{#if editorDocument.title}}
-      {{editorDocument.title}}
-    {{else}}
-      <span class="text-fade">Naamloos document</span>
-    {{/if}}
-  </h1>
-{{else}}
-  {{#if active}}
-    {{input class="input-field input-field--block u-spacer--small" type="text" placeholder="Naamloos document" value=overruledTitle focus-out=(action "toggleActive") autofocus="autofocus"}}
-  {{else}}
-    <h1 class="h3 sans-serif">
-        <a class="link-dark link--edit" onClick={{action "toggleActive"}}>
+<div class="u-spacer--top--tinier">
+	{{#if readOnly}}
+	  <h1>
+	    {{#if editorDocument.title}}
+	      {{editorDocument.title}}
+	    {{else}}
+	      <span class="text-fade">Naamloos document</span>
+	    {{/if}}
+	  </h1>
+	{{else}}
+	  {{#if active}}
+	    {{input class="input-field input-field--block u-spacer--small" type="text" placeholder="Naamloos document" value=overruledTitle focus-out=(action "toggleActive") autofocus="autofocus"}}
+	  {{else}}
+	    <h1 onClick={{action "toggleActive"}}>
+        <span class="link--edit">
           {{title}}
-        </a>
-    </h1>
-  {{/if}}
-{{/if}}
+        </span>
+	    </h1>
+	  {{/if}}
+	{{/if}}
+</div>
