@@ -14,6 +14,22 @@
 		max-height: 1.3em;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+
+		&:after {
+			opacity: 0;
+			transition: all 100ms;
+		}
+
+		&:hover {
+			box-shadow: 0 0 0 1px $blue-gray-lighter;
+
+			&:after {
+				opacity: 1;
+				top: 0;
+				bottom: 0;
+				padding: 0.2rem 0.5rem;
+			}
+		}
 	}
 
 	.editor-chrome .button {
@@ -43,11 +59,6 @@
       outline: none;
     }
   }
-
-  // .rdfa-editor [content=""] {
-  // 	background-color: $primary-yellow;
-  // 	font-weight: 500;
-  // }
 
   /* -------------------- Custom temporary widths, needs to be restructured in grid ------------------------- */
 
@@ -365,27 +376,3 @@
   //         color: $gray-light;
   //     }
 
-/* Editing annotations warning
- ========================================================================== */
-
-[data-flagged-remove="almost-complete"],
-[data-flagged-remove="complete"] {
-  min-height: 1.6rem;
-  display: inline;
-  cursor: text !important;
-  background-color: rgba($primary-blue, 0.25) !important;
-  box-shadow: -2px 0 0 $primary-blue;
-}
-
-[data-flagged-remove="complete"] {
-  min-width: 8px;
-  display: inline-block;
-  box-shadow: -2px 0 0 black;
-}
-
-.annotation--edit {
-  [data-flagged-remove="almost-complete"],
-  [data-flagged-remove="complete"] {
-    background-color: transparent;
-  }
-}
