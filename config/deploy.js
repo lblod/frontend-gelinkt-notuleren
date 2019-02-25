@@ -11,17 +11,17 @@ module.exports = function(deployTarget) {
     },
     'ssh-index': {
       username: 'root',
-      host: 'dock.semte.ch',
-      remoteDir: '/data/lblod/dev-gelinkt-notuleren/gelinkt-notuleren-app',
+      host: 'rpio-dev.s.redpencil.io',
+      remoteDir: '/data/app-gelinkt-notuleren/dev/gelinkt-notuleren-app',
       agent: process.env.SSH_AUTH_SOCK,
-      port: 2275,
+      port: 22,
       allowOverwrite: true
     },
     'rsync': {
-      dest: '/data/lblod/dev-gelinkt-notuleren/gelinkt-notuleren-app',
+      dest: '/data/app-gelinkt-notuleren/dev/gelinkt-notuleren-app',
       username: 'root',
-      host: 'dock.semte.ch',
-      port: 2275,
+      host: 'rpio-dev.s.redpencil.io',
+      port: 22,
       delete: false,
       privateKey: process.env.SSH_AUTH_SOCK,
       arg:['--verbose']
