@@ -1,9 +1,16 @@
 import { get } from '@ember/object';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
   tagName: '',
+  currentSession: service(),
+
+  async init() {
+    this._super(...arguments);
+    this.set('bestuurseenheid', await this.currentSession.group)
+  },
 
   title: computed('name', function(){
     return `Voorvertoning ${this.name}`;
