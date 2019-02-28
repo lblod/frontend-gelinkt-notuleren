@@ -95,7 +95,8 @@ export default Mixin.create({
   },
   publish: task(function *(){
     const editorDocument = this.editorDocument;
-    const savedDocument = yield this.saveEditorDocument.perform(editorDocument);
+    const status = this.getStatusFor('conceptStatusId');
+    const savedDocument = yield this.saveEditorDocument.perform(editorDocument, status);
     this.set('editorDocument', savedDocument);
     const container = yield savedDocument.get('documentContainer');
     const containerId = container.id;
