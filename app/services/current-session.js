@@ -8,10 +8,10 @@ export default Service.extend({
   store: service('store'),
   async load() {
     if (this.get('session.isAuthenticated')) {
-      const session = this.get('session');
-      const account = await this.get('store').find('account', get(session, 'data.authenticated.relationships.account.data.id'));
+      const session = this.session;
+      const account = await this.store.find('account', get(session, 'data.authenticated.relationships.account.data.id'));
       const user = await account.get('gebruiker');
-      const group = await this.get('store').find('bestuurseenheid', get(session, 'data.authenticated.relationships.group.data.id'));
+      const group = await this.store.find('bestuurseenheid', get(session, 'data.authenticated.relationships.group.data.id'));
       const roles = await get(session, 'data.authenticated.data.attributes.roles');
       this.set('_account', account);
       this.set('_user', user);
@@ -24,16 +24,16 @@ export default Service.extend({
     return this.get(property);
   }),
   account: computed('_account', function() {
-    return this.get('waitForIt').perform('_account');
+    return this.waitForIt.perform('_account');
   }),
   user: computed('_user', function() {
-    return this.get('waitForIt').perform('_user');
+    return this.waitForIt.perform('_user');
   }),
   group: computed('_group', function() {
-    return this.get('waitForIt').perform('_group');
+    return this.waitForIt.perform('_group');
   }),
   roles: computed('_roles', function() {
-    return this.get('waitForIt').perform('_roles');
+    return this.waitForIt.perform('_roles');
   })
 
 });

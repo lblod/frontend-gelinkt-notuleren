@@ -61,7 +61,7 @@ export default Mixin.create({
     let updatedOn = new Date();
     let title = editorDocument.get('title');
     let documentContainer = this.documentContainer || (yield this.store.createRecord('document-container').save());
-    let status = newStatus ? newStatus : yield documentContainer.get('status');
+    let status = newStatus ? newStatus : (yield documentContainer.get('status'));
     // every save results in new document
     let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, createdOn, updatedOn, title, documentContainer});
 
