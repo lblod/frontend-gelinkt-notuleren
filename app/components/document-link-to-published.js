@@ -15,7 +15,7 @@ export default Component.extend({
     const config = getOwner(this).resolveRegistration('config:environment');
     const baseHost = (config.publicatie || {}).baseUrl;
     this.set('baseUrl', `${baseHost.replace(/\/$/, "")}/${bestuurseenheidNaam}/${classificatieLabel}`);
-    this.set('status', yield this.get('document.status'));
+    this.set('status', (yield this.get('document.status')));
   }),
 
   linkText: computed('status', 'status.id', function() {

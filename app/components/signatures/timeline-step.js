@@ -9,7 +9,7 @@ export default Component.extend({
 
   async init() {
     this._super(...arguments);
-    this.set('bestuurseenheid', await this.currentSession.group)
+    this.set('bestuurseenheid', await this.currentSession.group);
   },
 
   title: computed('name', function(){

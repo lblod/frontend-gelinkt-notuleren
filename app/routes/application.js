@@ -23,6 +23,6 @@ export default Route.extend(ApplicationRouteMixin, {
   },
 
   _loadCurrentSession() {
-    return this.get('currentSession').load().catch(() => this.get('session').invalidate());
+    return this.currentSession.load().catch(() => this.session.invalidate());
   }
 });

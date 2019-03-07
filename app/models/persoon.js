@@ -15,7 +15,7 @@ export default Model.extend({
   verkiezingsresultaten: hasMany('verkiezingsresultaat', { inverse: null}),
 
   fullName: computed('gebruikteVoornaam', 'achternaam', function() {
-    return `${this.get('gebruikteVoornaam')} ${this.get('achternaam')}`;
+    return `${this.gebruikteVoornaam} ${this.achternaam}`;
   }),
 
   rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
