@@ -50,7 +50,7 @@
   [property="prov:value"],
 
   [typeof^="besluit:Besluit"],
-  [typeof="besluit:Stemming"]
+  [property="besluit:heeftStemming"]
   {
     background-color: transparent;
     position: relative;
@@ -97,7 +97,7 @@
 
     [property="prov:value"]:hover,
     [property="besluit:motivering"]:hover,
-    [typeof="besluit:Stemming"]:hover
+    [property="besluit:heeftStemming"]:hover
     {
       &:before,
       &:after {
@@ -144,18 +144,18 @@
   [property="org:holds"],
   [property="ext:secretarisTemporaryAsText"],
 
-  [property="besluit:Geheim"],
-  [property="besluit:Onderwerp"],
-  [property="besluit:Gevolg"]
+  [property="besluit:geheim"],
+  [property="besluit:onderwerp"],
+  [property="besluit:gevolg"],
   [property="besluit:aantalOnthouders"],
   [property="besluit:aantalTegenstanders"],
   [property="besluit:aantalVoorstanders"],
-  [typeof="besluit:Stemming"] [property="besluit:heeftAanwezige"],
+  [typeof="besluit:stemming"] [property="besluit:heeftAanwezige"],
   [property="besluit:heeftAanwezige"],
-  [property="besluit:HeeftStemmer"],
-  [property="besluit:HeeftOnthouder"],
-  [property="besluit:HeeftTegenstander"],
-  [property="besluit:HeeftVoorstander"],
+  [property="besluit:heeftStemmer"],
+  [property="besluit:heeftOnthouder"],
+  [property="besluit:heeftTegenstander"],
+  [property="besluit:heeftVoorstander"],
 
   [datatype="xsd:date"],
   [typeof="besluit:Bestuurseenheid"],

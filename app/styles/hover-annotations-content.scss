@@ -172,6 +172,10 @@
       	content: "Persoon";
       }
 
+      [property="mandaat:isBestuurlijkeAliasVan"]:before {
+      	content: "Mandataris";
+      }
+
       [property="org:holds"]:before {
         content: "Mandaat";
       }
@@ -188,12 +192,12 @@
     //   // niet zichtbaar
     // }
 
-    // [property="besluit:heeftStemming"]:before {
-    //   // content: "Behandeling van agendapunt met stemming"; // niet gebruikt
-    // }
+    [property="besluit:heeftStemming"]:before {
+      content: "Stemming bij behandeling van agendapunt";
+    }
 
     [property="besluit:heeftAanwezige"]:before {
-      content: "Aanwezige mandataris bij agendapunt";
+      content: "Aanwezige mandataris";
     }
 
       // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
@@ -263,51 +267,55 @@
 
   /* -------------------- Stemming ------------------------- */
 
-  [typeof="besluit:Stemming"]:before {
+  [typeof="besluit:stemming"]:before {
     content: "Stemming";
   }
 
-  //   [property="besluit:Geheim"]:before {
-  //     content: "Geheime stemming"; // wordt nu  nog niet gebruikt
-  //   }
+    [property="besluit:geheim"][content="false"]:before {
+      content: "Openbare stemming";
+    }
 
-  //   [property="besluit:Onderwerp"]:before {
-  //     content: "Onderwerp stemming"; // wordt nu  nog niet gebruikt
-  //   }
+    [property="besluit:geheim"][content="true"]:before {
+      content: "Geheime stemming";
+    }
 
-  // [property="besluit:Gevolg"]:before {
-  //   content: "Gevolg stemming"; // wordt nu  nog niet gebruikt
-  // }
+    [property="besluit:onderwerp"]:before {
+      content: "Onderwerp stemming";
+    }
 
-  //   [property="besluit:aantalOnthouders"]:before {
-  //     content: "Aantal onthouders"; // wordt nu  nog niet gebruikt
-  //   }
+  [property="besluit:gevolg"]:before {
+    content: "Gevolg stemming";
+  }
 
-  //   [property="besluit:aantalTegenstanders"]:before {
-  //     content: "Aantal tegenstanders"; // wordt nu  nog niet gebruikt
-  //   }
+    [property="besluit:aantalOnthouders"]:before {
+      content: "Aantal onthouders";
+    }
 
-  //   [property="besluit:aantalVoorstanders"]:before {
-  //     content: "Aantal voorstanders"; // wordt nu  nog niet gebruikt
-  //   }
+    [property="besluit:aantalTegenstanders"]:before {
+      content: "Aantal tegen-standers";
+    }
 
-  // [typeof="besluit:Stemming"] [property="besluit:heeftAanwezige"]:before {
-  //   content: "Aanwezige mandataris bij stemming"; // wordt nu  nog niet gebruikt
-  // }
+    [property="besluit:aantalVoorstanders"]:before {
+      content: "Aantal voor-standers";
+    }
 
-  //   [property="besluit:HeeftStemmer"]:before {
-  //     content: "Heeft stemmer"; // wordt nu  nog niet gebruikt
-  //   }
+  [property="besluit:heeftStemming"] [property="besluit:heeftAanwezige"]:before {
+    content: "Aanwezige bij stemming";
+  }
 
-  //   [property="besluit:HeeftOnthouder"]:before {
-  //     content: "Heeft onthouder"; // wordt nu  nog niet gebruikt
-  //   }
+    [property="besluit:heeftStemmer"]:before {
+      content: "Deelnemer stemming";
+    }
 
-  //   [property="besluit:HeeftTegenstander"]:before {
-  //     content: "Heeft tegenstander"; // wordt nu  nog niet gebruikt
-  //   }
+    [property="besluit:heeftOnthouder"]:before {
+      content: "Onthouder";
+    }
 
-  //   [property="besluit:HeeftVoorstander"]:before {
-  //     content: "Heeft voorstander"; // wordt nu  nog niet gebruikt
-  //   }
+    [property="besluit:heeftTegenstander"]:before {
+      content: "Tegen-stander";
+    }
+
+    [property="besluit:heeftVoorstander"]:before {
+      content: "Voor-stander";
+    }
 }
