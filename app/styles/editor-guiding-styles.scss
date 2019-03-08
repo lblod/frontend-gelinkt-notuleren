@@ -68,11 +68,6 @@
 	.mark-highlight-manual,
 	[data-editor-highlight="true"] {
 
-    &:hover {
-      color: $black;
-      background-color: rgba($blue-gray, 0.2);
-    }
-
     &:before {
       position: absolute;
       font-weight: 400;
@@ -98,6 +93,15 @@
       left: auto;
       right: -17.5rem;
       margin-top: -2.2rem;
+    }
+	}
+
+	.mark-highlight-manual,
+	[data-editor-highlight="true"] {
+
+    &:hover {
+      color: $black;
+      background-color: rgba($blue-gray, 0.2);
     }
 	}
 
