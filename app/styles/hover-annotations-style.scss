@@ -124,6 +124,7 @@
   [property="besluit:heeftVoorzitter"],
   [property="besluit:heeftSecretaris"],
 
+  [typeof="besluit:Agendapunt"],
   [property="besluit:heeftAgendapunt"] [property="dc:title"],
   [typeof="besluit:Agendapunt"] [property="dc:title"],
 
@@ -152,7 +153,7 @@
   [property="besluit:aantalOnthouders"],
   [property="besluit:aantalTegenstanders"],
   [property="besluit:aantalVoorstanders"],
-  [typeof="besluit:stemming"] [property="besluit:heeftAanwezige"],
+  [property="besluit:heeftAanwezige"],
   [property="besluit:heeftStemmer"],
   [property="besluit:heeftOnthouder"],
   [property="besluit:heeftTegenstander"],

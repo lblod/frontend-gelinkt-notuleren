@@ -219,6 +219,14 @@
       //   content: "Secretaris van de zitting"; // in zitting herhaald
       // }
 
+    [typeof="besluit:Agendapunt"]:before {
+    	content: "Agendapunt";
+    }
+
+    [property="dc:title"]:before {
+      content: "Titel";
+    }
+
     [property="eli:title"]:before {
       content: "Titel besluit";
     }

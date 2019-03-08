@@ -105,6 +105,14 @@
 
   /* -------------------- Agendapunt ------------------------- */
 
+  [typeof="besluit:Agendapunt"]:before {
+  	content: "Gepland agendapunt (" attr(property) ")";
+  }
+
+  [property="dc:title"]:before {
+    content: "Titel (" attr(property) ")";
+  }
+
   [typeof="besluit:Agenda"]:before {
     content: "Agenda (" attr(typeof) ")"; // op hetzelfde niveau als onbestaande "heeftagenda"
   }
