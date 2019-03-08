@@ -186,14 +186,4 @@
 		content: "Openbaar agendapunt:";
 		margin-left: 0.7rem;
 	}
-
-	[property="besluit:geplandBesloten"],
-	[property="besluit:besloten"] {
-		display: none;
-	}
-
-	[property="besluit:geplandBesloten"] ~ *,
-	[property="besluit:besloten"] ~ * {
-		display: none !important;
-	}
 }
