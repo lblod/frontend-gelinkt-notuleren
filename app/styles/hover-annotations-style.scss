@@ -120,6 +120,7 @@
   [property="besluit:geplandeStart"],
   [property="prov:endedAtTime"],
   [property="besluit:heeftAanwezigeBijStart"],
+  [property="ext:heeftAfwezigeBijStart"],
   [property="besluit:heeftVoorzitter"],
   [property="besluit:heeftSecretaris"],
 
@@ -140,6 +141,7 @@
   [property="ext:bekrachtigdAfstandVanMandaatDoor"],
   [typeof="http://www.w3.org/ns/person#Person"],
   [typeof="mandaat:Mandataris"],
+  [property="mandaat:isBestuurlijkeAliasVan"],
   [property="mandaat:start"],
   [property="org:holds"],
   [property="ext:secretarisTemporaryAsText"],
@@ -151,7 +153,6 @@
   [property="besluit:aantalTegenstanders"],
   [property="besluit:aantalVoorstanders"],
   [typeof="besluit:stemming"] [property="besluit:heeftAanwezige"],
-  [property="besluit:heeftAanwezige"],
   [property="besluit:heeftStemmer"],
   [property="besluit:heeftOnthouder"],
   [property="besluit:heeftTegenstander"],

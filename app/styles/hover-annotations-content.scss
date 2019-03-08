@@ -60,9 +60,12 @@
     }
 
     /* Aanwezigen en types */
-
     [property="besluit:heeftAanwezigeBijStart"]:before {
-      content: "Aanwezige mandataris bij start";
+      content: "Aanwezige bij start van de zitting";
+    }
+
+    [property="ext:heeftAfwezigeBijStart"]:before {
+    	content: "Afwezige bij start van zitting";
     }
 
     [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
@@ -172,6 +175,10 @@
       	content: "Persoon";
       }
 
+      [property="besluit:heeftAanwezigeBijStart"][typeof="http://www.w3.org/ns/person#Person"]:before {
+      	content: "Aanwezige persoon bij start";
+      }
+
       [property="mandaat:isBestuurlijkeAliasVan"]:before {
       	content: "Mandataris";
       }
@@ -197,7 +204,11 @@
     }
 
     [property="besluit:heeftAanwezige"]:before {
-      content: "Aanwezige mandataris";
+      content: "Aanwezige";
+    }
+
+    [property="besluit:heeftAfwezige"]:before {
+      content: "Afwezige";
     }
 
       // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
@@ -298,10 +309,6 @@
     [property="besluit:aantalVoorstanders"]:before {
       content: "Aantal voor-standers";
     }
-
-  [property="besluit:heeftStemming"] [property="besluit:heeftAanwezige"]:before {
-    content: "Aanwezige bij stemming";
-  }
 
     [property="besluit:heeftStemmer"]:before {
       content: "Deelnemer stemming";
