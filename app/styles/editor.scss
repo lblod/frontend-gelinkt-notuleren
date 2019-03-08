@@ -252,14 +252,21 @@
   }
 
   /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */
-
-  [property="besluit:openbaar"] + [property="dc:subject"] {
+  [property="dc:subject"] {
   	text-transform: uppercase;
   	color: $gray-light;
   	letter-spacing: 1px;
   	font-size: 1.4rem;
   	line-height: 1.8;
-  	display: block;
+  }
+
+  [property="besluit:geplandOpenbaar"],
+  [property="besluit:openbaar"] {
+  	text-transform: uppercase;
+  	color: $gray-light;
+  	letter-spacing: 1px;
+  	font-size: 1.4rem;
+  	line-height: 1.8;
   }
 
   .editor__paper {
@@ -270,41 +277,51 @@
       display: block !important;
       position: relative;
 
-      [property="besluit:geplandOpenbaar"],
-      [property="besluit:openbaar"] {
+      [property="besluit:geplandOpenbaar"] i,
+      [property="besluit:openbaar"] i {
         font-size: 1.6rem;
         position: absolute;
         left: -2.75rem;
-        top: 0;
+        top: 0.2rem;
         padding-left: 1px;
         z-index: 2;
         color: $gray-light;
       }
 
-      [property="besluit:geplandOpenbaar"][content="false"],
-      [property="besluit:openbaar"][content="false"] {
+      [property="besluit:geplandOpenbaar"][content="false"] i,
+      [property="besluit:openbaar"][content="false"] i {
         color: darken($primary-yellow, 15%);
       }
     }
 
-    [typeof="besluit:BehandelingVanAgendapunt"]:hover {
-      [property="besluit:geplandOpenbaar"],
-      [property="besluit:openbaar"] {
-        opacity: 0;
-        transition: all 200ms;
-        left: -2rem;
-      }
+    // [typeof="besluit:BehandelingVanAgendapunt"] > [property="besluit:openbaar"]:after {
+  		// content: "\E014";
+  		// color: $primary-blue;
+  		// font-family: vlaanderen_iconfont!important;
+	   //  font-style: normal;
+	   //  font-variant: normal;
+	   //  font-weight: 400;
+	   //  text-decoration: none;
+	   //  text-transform: none;
+	   //  position: absolute;
+	   //  opacity: 0;
+	   //  position: relative;
+	   //  top: 0.1rem;
+	   //  transition: opacity 200ms;
+	   //  font-size: 1.2rem;
+	   //  padding-left: 0.5rem;
+    // }
 
-      [property="besluit:geplandOpenbaar"] + [property="dc:subject"]:before,
-      [property="besluit:openbaar"] + [property="dc:subject"]:before {
-      	content: "openbaar";
-      }
+    // [typeof="besluit:BehandelingVanAgendapunt"] > [property="besluit:openbaar"]:hover {
+    // 	background-color: $blue-gray-lighter;
+    // 	border-radius: 3px;
+    // 	color: $gray;
+    // 	transition: all 200ms;
 
-      [property="besluit:geplandOpenbaar"][content="false"] + [property="dc:subject"]:before,
-      [property="besluit:openbaar"][content="false"] + [property="dc:subject"]:before {
-      	content: "besloten";
-      }
-    }
+    // 	&:after {
+	   //  	opacity: 1;
+    // 	}
+    // }
   }
 
   .rdfa-annotations.show-rdfa-blocks {
