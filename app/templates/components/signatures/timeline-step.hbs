@@ -33,7 +33,13 @@
           <div class="col--6-12">
             <p class="smaller uppercase text-fade">Handtekeningen vereist door voorzitter en algemeen directeur met rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a></p>
             <!-- dit verschilt voor verschillende organen -->
-            <button class="button u-spacer--top--tiny" {{action (action sign mockDocument.signedId)}}>Onderteken {{name}}</button>
+            {{#wu-button
+               class="button u-spacer--top--tiny"
+               onClick=(action sign mockDocument.signedId)
+               disabled=(not currentSession.canSign)
+            }}
+              Onderteken {{name}}
+            {{/wu-button}}
           </div>
         {{/if}}
       {{/if}}
@@ -57,7 +63,13 @@
         {{else}}
           <div class="col--8-12">
             <p class="smaller uppercase text-fade">Publicatie door <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a></p>
-            <button class="button u-spacer--tb--tiny" {{action publish mockDocument.signedId}}>Publiceer {{name}}</button>
+            {{#wu-button
+               class="button u-spacer--top--tiny"
+               onClick=(action publish mockDocument.signedId)
+               disabled=(not currentSession.canPublish)
+            }}
+              Publiceer {{name}}
+            {{/wu-button}}
             <p class="text-fade small">De agenda wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal zichtbaar zijn voor iedereen zonder authenticatie.</p>
           </div>
         {{/if}}

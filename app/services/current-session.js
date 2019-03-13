@@ -13,11 +13,19 @@ export default Service.extend({
       const user = await account.get('gebruiker');
       const group = await this.store.find('bestuurseenheid', get(session, 'data.authenticated.relationships.group.data.id'));
       const roles = await get(session, 'data.authenticated.data.attributes.roles');
+
       this.set('_account', account);
       this.set('_user', user);
       this.set('_group', group);
       this.set('_roles', roles);
+
+      this.set('canPublish', this.hasRole('GelinktNotuleren-publiceerder'));
+      this.set('canSign', this.hasRole('GelinktNotuleren-ondertekenaar'));
     }
+  },
+
+  hasRole(role) {
+    return this._roles.includes(role);
   },
   waitForIt: task(function * (property) {
     yield waitForProperty(this, property);
