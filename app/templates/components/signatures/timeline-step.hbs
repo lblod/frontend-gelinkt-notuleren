@@ -26,7 +26,14 @@
           </div>
           <div class="col--4-12">
             <p class="smaller uppercase text-fade">Tweede handtekening vereist</p>
-            <button class="button button--narrow button--small u-spacer--top--tiny" {{action (mut showSigningModal) true}}>Onderteken {{name}}</button>
+            {{#wu-button
+                 isSmall=true isNarrow=true
+                 class="button u-spacer--top--tiny"
+                 onClick=(action (mut showSigningModal) true)
+                 disabled=(not currentSession.canSign)
+            }}
+              Onderteken {{name}}
+            {{/wu-button}}
           </div>
         {{else}}
           {{!-- No signatures placed --}}
