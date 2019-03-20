@@ -35,17 +35,17 @@
             <!-- dit verschilt voor verschillende organen -->
             {{#wu-button
                class="button u-spacer--top--tiny"
-               onClick=(action (mut disabledOnderteken) false)
+               onClick=(action (mut showSigningModal) true)
                disabled=(not currentSession.canSign)
             }}
               Onderteken {{name}}
             {{/wu-button}}
           </div>
-          {{#unless disabledOnderteken}}
+          {{#if showSigningModal}}
             {{#wu-modal
-               title=(concat "Uw " currentRoute " wordt ondertekend")
+               title=(concat "Uw " name " wordt ondertekend")
                dialog-class="modal-dialog--wide modal-dialog--sectioned"
-               onClose=(action (mut disabledOnderteken) true)
+               onClose=(action (mut showPublishingModal) false)
                as |m|}}
               <div class="modal-dialog__header">
                 Header
@@ -56,9 +56,9 @@
                   {{{mockDocument.body}}}
                 </div>
                 <div class="col--6-12">
-                  <p>Waar wordt de {{currentRoute}} ondertekend</p>
+                  <p>Waar wordt de {{name}} ondertekend</p>
                   <p>
-                    De openbare {{currentRoute}} worden ondertekend gemaakt.
+                    De openbare {{name}} worden ondertekend gemaakt.
                   </p>
                   <p>U kan de onderteken niet omkeren.</p>
                 </div>
@@ -66,12 +66,12 @@
               {{/m.content}}
               <div class="modal-dialog__footer">
                 {{#m.buttons as |b|}}
-                  {{b.button label=(concat "Onderteken " currentRoute) onClick=(action sign mockDocument.signedId)}}
-                  {{b.button label="Annuleren" onClick=(action (mut disabledOnderteken) true) isLink=true icon="vi-cross"}}
+                  {{b.button label=(concat "Onderteken " name) onClick=(action sign mockDocument.signedId)}}
+                  {{b.button label="Annuleren" onClick=(action (mut showSigningModal) false) isLink=true icon="vi-cross"}}
                 {{/m.buttons}}
               </div>
             {{/wu-modal}}
-          {{/unless}}
+          {{/if}}
         {{/if}}
       {{/if}}
     </div>
@@ -96,18 +96,18 @@
             <p class="smaller uppercase text-fade">Publicatie door <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a></p>
             {{#wu-button
                class="button u-spacer--top--tiny"
-               onClick=(action (mut disabledPubliceer) false)
+               onClick=(action (mut showPublishingModal) true)
                disabled=(not currentSession.canPublish)
             }}
               Publiceer {{name}}
             {{/wu-button}}
             <p class="text-fade small">De {{name}} wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal zichtbaar zijn voor iedereen zonder authenticatie.</p>
           </div>
-          {{#unless disabledPubliceer}}
+          {{#if showPublishingModal}}
             {{#wu-modal
-               title=(concat "Uw " currentRoute " wordt gepubliceerd")
+               title=(concat "Uw " name " wordt gepubliceerd")
                dialog-class="modal-dialog--wide modal-dialog--sectioned"
-               onClose=(action (mut disabledPubliceer) true)
+               onClose=(action (mut showPublishingModal) false)
                as |m|}}
               <div class="modal-dialog__header">
                 Header
@@ -118,9 +118,9 @@
                   {{{mockDocument.body}}}
                 </div>
                 <div class="col--6-12">
-                  <p>Waar wordt de {{currentRoute}} gepubliceerd</p>
+                  <p>Waar wordt de {{name}} gepubliceerd</p>
                   <p>
-                    De openbare {{currentRoute}} worden publiek gemaakt, en is terug te
+                    De openbare {{name}} worden publiek gemaakt, en is terug te
                     vinden op <a href="https://publicatie.gelinkt-notuleren.lblod.info/">
                       https://publicatie.gelinkt-notuleren.lblod.info/</a>.
                   </p>
@@ -130,12 +130,12 @@
               {{/m.content}}
               <div class="modal-dialog__footer">
                 {{#m.buttons as |b|}}
-                  {{b.button label=(concat "Publiceer " currentRoute) onClick=(action publish mockDocument.signedId)}}
-                  {{b.button label="Annuleren" onClick=(action (mut disabledPubliceer) true) isLink=true icon="vi-cross"}}
+                  {{b.button label=(concat "Publiceer " name) onClick=(action publish mockDocument.signedId)}}
+                  {{b.button label="Annuleren" onClick=(action (mut showPublishingModal) false) isLink=true icon="vi-cross"}}
                 {{/m.buttons}}
               </div>
             {{/wu-modal}}
-          {{/unless}}
+          {{/if}}
         {{/if}}
       </div>
     </div>

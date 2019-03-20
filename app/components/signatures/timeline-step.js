@@ -6,14 +6,12 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   tagName: '',
   currentSession: service(),
-  disabledOnderteken: true,
-  disabledPubliceer: true,
-  router: service(),
+  showSigningModal: false,
+  showPublishingModal: false,
 
   async init() {
     this._super(...arguments);
     this.set('bestuurseenheid', await this.currentSession.group);
-    this.set('currentRoute', this.router.currentRouteName.split('.').get('lastObject'));
   },
 
   title: computed('name', function(){
