@@ -2,16 +2,25 @@ import { get } from '@ember/object';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { task, waitForProperty, timeout } from 'ember-concurrency';
 
 export default Component.extend({
   tagName: '',
   currentSession: service(),
   showSigningModal: false,
   showPublishingModal: false,
+  signingIsLoading: false,
+  publishingIsLoading: false,
 
   async init() {
     this._super(...arguments);
     this.set('bestuurseenheid', await this.currentSession.group);
+
+    const document = await this.document;
+    if(document) {
+      const publishedResource = await document.publishedResource;
+      console.log(await publishedResource.status);
+    }
   },
 
   title: computed('name', function(){
@@ -71,15 +80,40 @@ export default Component.extend({
     return 'vi-edit';
   }),
 
+  signTask: task(function* (signedId){
+    yield this.sign(signedId);
+  }),
+
+  waitSigningTask: task(function* (){
+    this.set('signingIsLoading', true);
+    const signature = this.get('document.signedResources.length');
+    yield waitForProperty(this, 'signTask.isIdle');
+    yield waitForProperty(this, 'document.signedResources.length', signature + 1);
+    this.set('signingIsLoading', false);
+    this.set('showSigningModal', false);
+  }),
+
+  publishTask: task(function* (signedId){
+    yield this.publish(signedId);
+  }),
+
+  waitPublishingTask: task(function* (){
+    this.set('publishingIsLoading', true);
+    yield waitForProperty(this, 'publishTask.isIdle');
+    yield waitForProperty(this, 'document.publishedResource.id');
+    this.set('publishingIsLoading', false);
+    this.set('showPublishingModal', false);
+  }),
+
   actions: {
     signDocument(signedId) {
-      this.sign(signedId);
-      this.set('showSigningModal', false);
+      this.signTask.perform(signedId);
+      this.waitSigningTask.perform();
     },
 
     publishDocument(signedId) {
-      this.publish(signedId);
-      this.set('showPublishingModal', false);
+      this.publishTask.perform(signedId);
+      this.waitPublishingTask.perform();
     }
   }
 });

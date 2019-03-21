@@ -70,8 +70,11 @@
             </div>
             {{/m.content}}
             <div class="modal-dialog__footer">
+              {{#if signingIsLoading}}
+                <p>Aan het laden ...</p>
+              {{/if}}
               {{#m.buttons as |b|}}
-                {{b.button label=(concat "Onderteken " name) onClick=(action 'signDocument' mockDocument.signedId)}}
+                {{b.button label=(concat "Onderteken " name) onClick=(action 'signDocument' mockDocument.signedId) disabled=signingIsLoading}}
                 {{b.button label="Annuleren" onClick=(action (mut showSigningModal) false) isLink=true icon="vi-cross"}}
               {{/m.buttons}}
             </div>
@@ -130,8 +133,11 @@
               </div>
               {{/m.content}}
               <div class="modal-dialog__footer">
+                {{#if publishingIsLoading}}
+                  <p>Aan het laden ...</p>
+                {{/if}}
                 {{#m.buttons as |b|}}
-                  {{b.button label=(concat "Publiceer " name) onClick=(action 'publishDocument' mockDocument.signedId)}}
+                  {{b.button label=(concat "Publiceer " name) onClick=(action 'publishDocument' mockDocument.signedId) disabled=publishingIsLoading}}
                   {{b.button label="Annuleren" onClick=(action (mut showPublishingModal) false) isLink=true icon="vi-cross"}}
                 {{/m.buttons}}
               </div>
