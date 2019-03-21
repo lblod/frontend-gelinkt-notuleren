@@ -69,5 +69,17 @@ export default Component.extend({
       return 'vi-news';
 
     return 'vi-edit';
-  })
+  }),
+
+  actions: {
+    signDocument(signedId) {
+      this.sign(signedId);
+      this.set('showSigningModal', false);
+    },
+
+    publishDocument(signedId) {
+      this.publish(signedId);
+      this.set('showPublishingModal', false);
+    }
+  }
 });

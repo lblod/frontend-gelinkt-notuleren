@@ -55,9 +55,6 @@
              dialog-class="modal-dialog--wide modal-dialog--sectioned"
              onClose=(action (mut showPublishingModal) false)
              as |m|}}
-            <div class="modal-dialog__header">
-              Header
-            </div>
             {{#m.content isSectioned=true}}
             <div class="grid">
               <div class="col--6-12">
@@ -74,7 +71,7 @@
             {{/m.content}}
             <div class="modal-dialog__footer">
               {{#m.buttons as |b|}}
-                {{b.button label=(concat "Onderteken " name) onClick=(action sign mockDocument.signedId)}}
+                {{b.button label=(concat "Onderteken " name) onClick=(action 'signDocument' mockDocument.signedId)}}
                 {{b.button label="Annuleren" onClick=(action (mut showSigningModal) false) isLink=true icon="vi-cross"}}
               {{/m.buttons}}
             </div>
@@ -116,9 +113,6 @@
                dialog-class="modal-dialog--wide modal-dialog--sectioned"
                onClose=(action (mut showPublishingModal) false)
                as |m|}}
-              <div class="modal-dialog__header">
-                Header
-              </div>
               {{#m.content isSectioned=true}}
               <div class="grid">
                 <div class="col--6-12">
@@ -137,7 +131,7 @@
               {{/m.content}}
               <div class="modal-dialog__footer">
                 {{#m.buttons as |b|}}
-                  {{b.button label=(concat "Publiceer " name) onClick=(action publish mockDocument.signedId)}}
+                  {{b.button label=(concat "Publiceer " name) onClick=(action 'publishDocument' mockDocument.signedId)}}
                   {{b.button label="Annuleren" onClick=(action (mut showPublishingModal) false) isLink=true icon="vi-cross"}}
                 {{/m.buttons}}
               </div>
