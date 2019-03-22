@@ -1,0 +1,15 @@
+{{outlet}}
+<div class="u-spacer--top">
+  {{#wu-timeline-accordion as |timeline|}}
+    {{#each behandelingen as |behandeling|}}
+    {{signatures/behandeling/timeline-step
+      name="besluit"
+      step=timeline.step
+      behandeling=behandeling
+      currentEditorDocument=model.editorDocument
+      sign=(action "applySignature" "behandeling")
+      publish=(action "publish" "behandeling")
+    }}
+    {{/each}}
+  {{/wu-timeline-accordion}}
+</div>

@@ -36,6 +36,7 @@ Router.map(function() {
         this.route('agenda');
         this.route('besluitenlijst');
         this.route('notulen');
+        this.route('uitreksels');
       });
     });
   });
