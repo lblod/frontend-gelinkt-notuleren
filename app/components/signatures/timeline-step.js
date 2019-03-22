@@ -2,25 +2,31 @@ import { get } from '@ember/object';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { task, waitForProperty, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 
 export default Component.extend({
   tagName: '',
   currentSession: service(),
+
+  /** Name of the kind of resource to sign/publish (e.g. 'agenda', 'besluitenlijst', ... */
+  name: null,
+  /** Name of the current selected step */
+  step: null,
+  /** Versioned document to be signed/published */
+  document: null,
+  /** Preview of versioned document together with current document id */
+  mockDocument: null,
+  /** Function to trigger the signing of the document */
+  sign: null,
+  /** Function to trigger the publication of the document */
+  publish: null,
+
   showSigningModal: false,
   showPublishingModal: false,
-  signingIsLoading: false,
-  publishingIsLoading: false,
 
   async init() {
     this._super(...arguments);
     this.set('bestuurseenheid', await this.currentSession.group);
-
-    const document = await this.document;
-    if(document) {
-      const publishedResource = await document.publishedResource;
-      console.log(await publishedResource.status);
-    }
   },
 
   title: computed('name', function(){
@@ -80,40 +86,17 @@ export default Component.extend({
     return 'vi-edit';
   }),
 
-  signTask: task(function* (signedId){
+  signDocument: task(function* (signedId){
+    this.set('showSigningModal', false);
     yield this.sign(signedId);
   }),
 
-  waitSigningTask: task(function* (){
-    this.set('signingIsLoading', true);
-    const signature = this.get('document.signedResources.length');
-    yield waitForProperty(this, 'signTask.isIdle');
-    yield waitForProperty(this, 'document.signedResources.length', signature + 1);
-    this.set('signingIsLoading', false);
-    this.set('showSigningModal', false);
-  }),
-
-  publishTask: task(function* (signedId){
+  publishDocument: task(function* (signedId){
+    this.set('showPublishingModal', false);
     yield this.publish(signedId);
   }),
 
-  waitPublishingTask: task(function* (){
-    this.set('publishingIsLoading', true);
-    yield waitForProperty(this, 'publishTask.isIdle');
-    yield waitForProperty(this, 'document.publishedResource.id');
-    this.set('publishingIsLoading', false);
-    this.set('showPublishingModal', false);
-  }),
-
   actions: {
-    signDocument(signedId) {
-      this.signTask.perform(signedId);
-      this.waitSigningTask.perform();
-    },
 
-    publishDocument(signedId) {
-      this.publishTask.perform(signedId);
-      this.waitPublishingTask.perform();
-    }
   }
 });

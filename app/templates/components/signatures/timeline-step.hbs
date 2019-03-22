@@ -30,7 +30,7 @@
                  isSmall=true isNarrow=true
                  class="button u-spacer--top--tiny"
                  onClick=(action (mut showSigningModal) true)
-                 disabled=(not currentSession.canSign)
+                 disabled=(or (not currentSession.canSign) signDocument.isRunning)
             }}
               Onderteken {{name}}
             {{/wu-button}}
@@ -41,9 +41,9 @@
             <p class="smaller uppercase text-fade">Handtekeningen vereist door voorzitter en algemeen directeur met rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a></p>
             <!-- dit verschilt voor verschillende organen -->
             {{#wu-button
-               class="button u-spacer--top--tiny"
-               onClick=(action (mut showSigningModal) true)
-               disabled=(not currentSession.canSign)
+                 class="button u-spacer--top--tiny"
+                 onClick=(action (mut showSigningModal) true)
+                 disabled=(or (not currentSession.canSign) signDocument.isRunning)
             }}
               Onderteken {{name}}
             {{/wu-button}}
@@ -70,11 +70,8 @@
             </div>
             {{/m.content}}
             <div class="modal-dialog__footer">
-              {{#if signingIsLoading}}
-                <p>Aan het laden ...</p>
-              {{/if}}
               {{#m.buttons as |b|}}
-                {{b.button label=(concat "Onderteken " name) onClick=(action 'signDocument' mockDocument.signedId) disabled=signingIsLoading}}
+                {{b.button label=(concat "Onderteken " name) onClick=(perform signDocument mockDocument.signedId) disabled=signDocument.isRunning}}
                 {{b.button label="Annuleren" onClick=(action (mut showSigningModal) false) isLink=true icon="vi-cross"}}
               {{/m.buttons}}
             </div>
@@ -102,9 +99,9 @@
           <div class="col--8-12">
             <p class="smaller uppercase text-fade">Publicatie door <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a></p>
             {{#wu-button
-               class="button u-spacer--top--tiny"
-               onClick=(action (mut showPublishingModal) true)
-               disabled=(not currentSession.canPublish)
+                 class="button u-spacer--top--tiny"
+                 onClick=(action (mut showPublishingModal) true)
+                 disabled=(or (not currentSession.canPublish) publishDocument.isRunning)
             }}
               Publiceer {{name}}
             {{/wu-button}}
@@ -125,19 +122,15 @@
                   <p>Waar wordt de {{name}} gepubliceerd</p>
                   <p>
                     De openbare {{name}} worden publiek gemaakt, en is terug te
-                    vinden op <a href="https://publicatie.gelinkt-notuleren.lblod.info/">
-                      https://publicatie.gelinkt-notuleren.lblod.info/</a>.
+                    vinden op <a href="https://publicatie.gelinkt-notuleren.lblod.info/">https://publicatie.gelinkt-notuleren.lblod.info/</a>.
                   </p>
                   <p>U kan de publicatie niet omkeren.</p>
                 </div>
               </div>
               {{/m.content}}
               <div class="modal-dialog__footer">
-                {{#if publishingIsLoading}}
-                  <p>Aan het laden ...</p>
-                {{/if}}
                 {{#m.buttons as |b|}}
-                  {{b.button label=(concat "Publiceer " name) onClick=(action 'publishDocument' mockDocument.signedId) disabled=publishingIsLoading}}
+                  {{b.button label=(concat "Publiceer " name) onClick=(perform publishDocument mockDocument.signedId) disabled=publishDocument.isRunning}}
                   {{b.button label="Annuleren" onClick=(action (mut showPublishingModal) false) isLink=true icon="vi-cross"}}
                 {{/m.buttons}}
               </div>

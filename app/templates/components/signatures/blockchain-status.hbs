@@ -1,0 +1,32 @@
+{{#if model.status.isPublished}}
+  <div class="grid grid--collapse">
+	  <div class="col--1-12">
+		  <i class="text-fade fa fa-lock vi-u-s"></i>
+	  </div>
+	  <div class="col--11-12">
+		  <p class="text-fade smaller uppercase">Blockchain hash<br><span class="smallest">{{model.hashValue}}</span></p>
+	  </div>
+  </div>
+{{else if model.status.publicationFailed}}
+  <div class="alert alert--error alert--small">
+	  <div class="grid grid--collapse">
+		  <div class="col--1-12">
+			  <i class="text-fade vi vi-warning vi-u-s"></i>
+		  </div>
+		  <div class="col--11-12">
+			  <p class="text-fade smaller uppercase">Versleuteling mislukt.</p>
+			  <p class="smaller">Neem contact op met <a href="mailto:GelinktNotuleren@vlaanderen.be">GelinktNotuleren@vlaanderen.be</a>.</p>
+		  </div>
+	  </div>
+  </div>
+{{else}}
+  <div class="grid grid--collapse">
+	  <div class="col--1-12">
+		  <i class="text-fade vi vi-clock vi-u-s"></i>
+	  </div>
+	  <div class="col--11-12">
+		  <p class="text-fade smaller uppercase">Bezig met versleutelen op de blockchain</p>
+		  <p class="smaller">Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.</p>
+	  </div>
+  </div>
+{{/if}}
