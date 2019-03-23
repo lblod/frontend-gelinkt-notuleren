@@ -1,4 +1,3 @@
-import { get } from '@ember/object';
 import { computed } from '@ember/object';
 import { alias, notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
