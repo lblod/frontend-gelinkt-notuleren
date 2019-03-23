@@ -1,0 +1,36 @@
+{{#wu-modal
+     title=(concat "Uw " name " wordt gepubliceerd")
+     dialog-class="modal-dialog--wide modal-dialog--sectioned"
+     onClose=(action cancel)
+     as |m|
+}}
+  {{#m.content isSectioned=true}}
+    <div class="grid">
+      <div class="col--6-12">
+        {{{mockDocument.body}}}
+      </div>
+      <div class="col--6-12">
+        <p>Waar wordt de {{name}} gepubliceerd</p>
+        <p>
+          De openbare {{name}} worden publiek gemaakt, en is terug te
+          vinden op <a href="https://publicatie.gelinkt-notuleren.lblod.info/">https://publicatie.gelinkt-notuleren.lblod.info/</a>.
+        </p>
+        <p>U kan de publicatie niet omkeren.</p>
+      </div>
+    </div>
+  {{/m.content}}
+  <div class="modal-dialog__footer">
+    {{#m.buttons as |b|}}
+      {{b.button
+          label=(concat "Publiceer " name)
+          onClick=(action confirm)
+      }}
+      {{b.button
+          label="Annuleren"
+          onClick=(action cancel)
+          isLink=true
+          icon="vi-cross"
+      }}
+    {{/m.buttons}}
+  </div>
+{{/wu-modal}}

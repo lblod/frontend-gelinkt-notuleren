@@ -26,56 +26,34 @@
           </div>
           <div class="col--4-12">
             <p class="smaller uppercase text-fade">Tweede handtekening vereist</p>
-            {{#wu-button
+            {{wu-button
+                 label=(concat "Onderteken " name)
                  isSmall=true isNarrow=true
                  class="button u-spacer--top--tiny"
                  onClick=(action (mut showSigningModal) true)
                  disabled=(or (not currentSession.canSign) signDocument.isRunning)
             }}
-              Onderteken {{name}}
-            {{/wu-button}}
           </div>
         {{else}}
           {{!-- No signatures placed --}}
           <div class="col--6-12">
             <p class="smaller uppercase text-fade">Handtekeningen vereist door voorzitter en algemeen directeur met rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a></p>
             <!-- dit verschilt voor verschillende organen -->
-            {{#wu-button
+            {{wu-button
+                label=(concat "Onderteken " name)
                  class="button u-spacer--top--tiny"
                  onClick=(action (mut showSigningModal) true)
                  disabled=(or (not currentSession.canSign) signDocument.isRunning)
             }}
-              Onderteken {{name}}
-            {{/wu-button}}
           </div>
         {{/if}}
         {{#if showSigningModal}}
-          {{#wu-modal
-             title=(concat "Uw " name " wordt ondertekend")
-             dialog-class="modal-dialog--wide modal-dialog--sectioned"
-             onClose=(action (mut showPublishingModal) false)
-             as |m|}}
-            {{#m.content isSectioned=true}}
-            <div class="grid">
-              <div class="col--6-12">
-                {{{mockDocument.body}}}
-              </div>
-              <div class="col--6-12">
-                <p>Waar wordt de {{name}} ondertekend</p>
-                <p>
-                  De openbare {{name}} worden ondertekend gemaakt.
-                </p>
-                <p>U kan de onderteken niet omkeren.</p>
-              </div>
-            </div>
-            {{/m.content}}
-            <div class="modal-dialog__footer">
-              {{#m.buttons as |b|}}
-                {{b.button label=(concat "Onderteken " name) onClick=(perform signDocument mockDocument.signedId) disabled=signDocument.isRunning}}
-                {{b.button label="Annuleren" onClick=(action (mut showSigningModal) false) isLink=true icon="vi-cross"}}
-              {{/m.buttons}}
-            </div>
-          {{/wu-modal}}
+          {{signatures/signature-confirmation
+              name=name
+              mockDocument=mockDocument
+              confirm=(perform signDocument mockDocument.signedId)
+              cancel=(action (mut showPublishingModal) false)
+              }}
         {{/if}}
       {{/if}}
     </div>
@@ -98,43 +76,21 @@
         {{else}}
           <div class="col--8-12">
             <p class="smaller uppercase text-fade">Publicatie door <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a></p>
-            {{#wu-button
+            {{wu-button
+                 label=(concat "Publiceer " name)
                  class="button u-spacer--top--tiny"
                  onClick=(action (mut showPublishingModal) true)
                  disabled=(or (not currentSession.canPublish) publishDocument.isRunning)
             }}
-              Publiceer {{name}}
-            {{/wu-button}}
             <p class="text-fade small">De {{name}} wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal zichtbaar zijn voor iedereen zonder authenticatie.</p>
           </div>
           {{#if showPublishingModal}}
-            {{#wu-modal
-               title=(concat "Uw " name " wordt gepubliceerd")
-               dialog-class="modal-dialog--wide modal-dialog--sectioned"
-               onClose=(action (mut showPublishingModal) false)
-               as |m|}}
-              {{#m.content isSectioned=true}}
-              <div class="grid">
-                <div class="col--6-12">
-                  {{{mockDocument.body}}}
-                </div>
-                <div class="col--6-12">
-                  <p>Waar wordt de {{name}} gepubliceerd</p>
-                  <p>
-                    De openbare {{name}} worden publiek gemaakt, en is terug te
-                    vinden op <a href="https://publicatie.gelinkt-notuleren.lblod.info/">https://publicatie.gelinkt-notuleren.lblod.info/</a>.
-                  </p>
-                  <p>U kan de publicatie niet omkeren.</p>
-                </div>
-              </div>
-              {{/m.content}}
-              <div class="modal-dialog__footer">
-                {{#m.buttons as |b|}}
-                  {{b.button label=(concat "Publiceer " name) onClick=(perform publishDocument mockDocument.signedId) disabled=publishDocument.isRunning}}
-                  {{b.button label="Annuleren" onClick=(action (mut showPublishingModal) false) isLink=true icon="vi-cross"}}
-                {{/m.buttons}}
-              </div>
-            {{/wu-modal}}
+            {{signatures/publication-confirmation
+                name=name
+                mockDocument=mockDocument
+                confirm=(perform publishDocument mockDocument.signedId)
+                cancel=(action (mut showPublishingModal) false)
+            }}
           {{/if}}
         {{/if}}
       </div>
