@@ -9,6 +9,20 @@ export default Component.extend({
   tagName: '',
   ajax: inject(),
 
+  /** Name of the resource to sign/publish (e.g. 'ontwerpagenda', 'aanvullende agenda', ... */
+  name: null,
+  /** Name of the current selected step */
+  step: null,
+  /** Versioned agenda to be signed/published */
+  agenda: null,
+  /** Editor document the agenda is derived from */
+  currentEditorDocument: null,
+  /** Function to trigger the signing of the agenda */
+  sign: null,
+  /** Function to trigger the publication of the agenda */
+  publish: null,
+
+
   // This is an agenda object proxy onto which we dump a bunch of
   // contents necessary in the template.  Our construction works this
   // way to keep the template somewhat cleaner.

@@ -1,0 +1,12 @@
+{{#if model.status.isPublished}}
+  <p class="text-fade smaller uppercase"><i class="fa fa-lock vi-u-s"></i> Blockchain hash</p>
+  <p class="small uppercase">{{model.hashValue}}</p>
+{{else if model.status.publicationFailed}}
+  <div class="alert alert--error alert--small">
+	  <p class="smaller uppercase u-spacer--bottom--tinier"><i class="vi vi-warning vi-u-s"></i> Versleuteling mislukt.</p>
+	  <p class="smaller">Neem contact op met <a href="mailto:GelinktNotuleren@vlaanderen.be">GelinktNotuleren@vlaanderen.be</a>.</p>
+  </div>
+{{else}}
+  <p class="text-fade smaller uppercase"><i class="vi vi-clock vi-u-s"></i> Bezig met handtekening versleutelen op de blockchain</p>
+  <p class="smaller">Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.</p>
+{{/if}}
