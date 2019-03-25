@@ -1,79 +1,112 @@
 {{#component step isOpen=isOpen title=name pill=algemeneStatus icon=iconName as |step|}}
-  {{#if loading}}
-    <div class="scanner__text">
-      <div class="badge badge--accent badge--l badge--initials">
-        <span class="loader"><span class="u-visually-hidden">{{loadingText}}</span></span>
-      </div>
-    </div>
-  {{/if}}
   {{#step.block title=title pillColor=voorVertoningStatus.color pillName=voorVertoningStatus.label}}
     {{{mockDocument.body}}}
   {{/step.block}}
-  {{#step.block title="Onderteken" pillColor=handtekeningStatus.color pillName=handtekeningStatus.label}}
-    <div class="grid">
-      {{#if (eq document.signedResources.length 2)}}
-        {{!-- Two signatures placed --}}
-        {{#each document.signedResources as |signature|}}
-          <div class="col--4-12">
-            {{signatures/signed-resource signature=signature}}
-          </div>
-        {{/each}}
-      {{else}}
-        {{!-- One signature placed --}}
-        {{#if (eq document.signedResources.length 1)}}
-          <div class="col--4-12">
-            {{signatures/signed-resource signature=document.signedResources.firstObject}}
-          </div>
-          <div class="col--4-12">
-            <p class="smaller uppercase text-fade">Tweede handtekening vereist</p>
-            <button class="button button--narrow button--small u-spacer--top--tiny" {{action (action sign mockDocument.signedId)}}>Onderteken {{name}}</button>
-          </div>
-        {{else}}
-          {{!-- No signatures placed --}}
-          <div class="col--6-12">
-            <p class="smaller uppercase text-fade">Handtekeningen vereist door voorzitter en algemeen directeur met rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a></p>
-            <!-- dit verschilt voor verschillende organen -->
-            {{#wu-button
-               class="button u-spacer--top--tiny"
-               onClick=(action sign mockDocument.signedId)
-               disabled=(not currentSession.canSign)
-            }}
-              Onderteken {{name}}
-            {{/wu-button}}
-          </div>
-        {{/if}}
-      {{/if}}
-    </div>
-  {{/step.block}}
-  {{#step.block title="Publiceer" pillColor=(if document.publishedResource "primary-blue") pillName=(if document.publishedResource "Publiek" "Niet publiek")}}
+  {{#step.block title=(concat "Onderteken " name) pillColor=handtekeningStatus.color pillName=handtekeningStatus.label}}
+  	<p class="u-spacer--small text-light">Ondertekenen kan enkel door de aangewezen personen met de rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a> binnen het orgaan.</p>
     <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
       <div class="grid">
-        {{#if document.publishedResource}}
-          <div class="col--3-12">
-            {{signatures/published-resource signature=document.publishedResource}}
-          </div>
-          <div class="col--6-12">
-            <p class="smallest uppercase text-fade">Link</p>
-            <p><a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}" class="small u-spacer--tb--tinier" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}</a></p>
-          </div>
-          <div class="col--3-12">
-            <p class="smaller uppercase text-fade">Type publicatie</p>
-            <p class="u-spacer--tb--tinier">Publiek voor iedereen</p>
-          </div>
-        {{else}}
-          <div class="col--8-12">
-            <p class="smaller uppercase text-fade">Publicatie door <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a></p>
-            {{#wu-button
-               class="button u-spacer--top--tiny"
-               onClick=(action publish mockDocument.signedId)
-               disabled=(not currentSession.canPublish)
-            }}
-              Publiceer {{name}}
-            {{/wu-button}}
-            <p class="text-fade small">De {{name}} wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal zichtbaar zijn voor iedereen zonder authenticatie.</p>
-          </div>
-        {{/if}}
-      </div>
-    </div>
+      {{#if (eq signaturesCount 2)}}
+        {{#each document.signedResources as |signature index|}}
+				  {{#if (eq index 0)}}
+	          <div class="col--5-12">
+	        		<p class="uppercase text-fade smaller">Eerste ondertekening</p>
+	            {{signatures/signed-resource signature=signature}}
+	          </div>
+          {{else}}
+	          <div class="col--5-12 push--1-12">
+	        		<p class="uppercase text-fade smaller">Tweede ondertekening</p>
+	            {{signatures/signed-resource signature=signature}}
+	          </div>
+          {{/if}}
+        {{/each}}
+      {{else if (eq signaturesCount 1)}}
+        <div class="col--5-12">
+        	<p class="uppercase text-fade smaller">Eerste ondertekening</p>
+        	{{signatures/signed-resource signature=document.signedResources.firstObject}}
+        </div>
+        <div class="col--5-12 push--1-12">
+        	<p class="uppercase text-fade smaller">Tweede ondertekening</p>
+          {{wu-button
+            label=(concat "Onderteken " name)
+            isNarrow=true
+            class="button u-spacer--top--tiny"
+            onClick=(action (mut showSigningModal) true)
+            isLoading=signDocument.isRunning
+            disabled=(or (not currentSession.canSign) signDocument.isRunning)
+          }}
+        </div>
+      {{else}} {{!-- No signatures placed --}}
+        <div class="col--5-12">
+        	<p class="uppercase text-fade smaller">Eerste ondertekening</p>
+          {{wu-button
+            label=(concat "Onderteken " name)
+            class="button u-spacer--top--tiny"
+            isNarrow=true
+            onClick=(action (mut showSigningModal) true)
+            isLoading=signDocument.isRunning
+            disabled=(or (not currentSession.canSign) signDocument.isRunning)
+          }}
+        </div>
+        <div class="col--5-12 push--1-12">
+        	<p class="uppercase text-fade smaller">Tweede ondertekening</p>
+          {{wu-button
+            label=(concat "Onderteken " name)
+            class="button u-spacer--top--tiny"
+            isNarrow=true
+            onClick=(action (mut showSigningModal) true)
+            isLoading=signDocument.isRunning
+            disabled=true
+          }}
+        </div>
+      {{/if}}
+      {{#if showSigningModal}}
+        {{signatures/signature-confirmation
+        name=name
+        mockDocument=mockDocument
+        confirm=(perform signDocument mockDocument.signedId)
+        cancel=(action (mut showSigningModal) false)
+        }}
+      {{/if}}
+	    </div>
+	  </div>
+  {{/step.block}}
+  {{#step.block title=(concat "Publiceer " name) pillColor=(if document.publishedResource "primary-blue") pillName=(if document.publishedResource "Publiek" "Niet publiek")}}
+  	<p class="u-spacer--bottom--tiny text-light">Publiceren kan enkel door personen met de rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a>.</p>
+    <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
+	    <div class="grid">
+	      {{#if isPublished}}
+	        <div class="col--6-12">
+	          {{signatures/published-resource signature=document.publishedResource}}
+	        </div>
+	        <div class="col--6-12">
+	          <p class="smaller uppercase text-fade">Link publicatie</p>
+	          <p class="u-spacer--bottom--small"><a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}"target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}</a></p>
+
+	          <p class="smaller uppercase text-fade">Type publicatie</p>
+	          <p class="u-spacer--tb--tinier">Publiek voor iedereen</p>
+	        </div>
+	      {{else}}
+	        <div class="col--12-12">
+	          {{wu-button
+	              label=(concat "Publiceer " name)
+	              class="button u-spacer--bottom--tiny"
+	              onClick=(action (mut showPublishingModal) true)
+	              isLoading=publishDocument.isRunning
+	              disabled=(or (not currentSession.canPublish) publishDocument.isRunning)
+	          }}
+	          <p class="text-fade small">De {{name}} wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie.</p>
+	        </div>
+	      {{/if}}
+	      {{#if showPublishingModal}}
+	        {{signatures/publication-confirmation
+	            name=name
+	            mockDocument=mockDocument
+	            confirm=(perform publishDocument mockDocument.signedId)
+	            cancel=(action (mut showPublishingModal) false)
+	        }}
+	      {{/if}}
+	    </div>
+	  </div>
   {{/step.block}}
 {{/component}}
