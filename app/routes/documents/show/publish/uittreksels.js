@@ -24,7 +24,7 @@ export default Route.extend({
     async refreshModel(){
       await this.controller.model.documentContainer.reload();
       this.controller.set('model.editorDocument', await this.getEditorDocument(this.controller.model.documentContainer));
-      await this.controller.model.documentContainer.hasMany("versionedBesluitenLijsten").reload();
+      await this.controller.model.documentContainer.hasMany("versionedBehandelingen").reload();
       this.refresh();
     }
   }

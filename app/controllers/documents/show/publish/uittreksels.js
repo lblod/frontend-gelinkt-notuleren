@@ -6,9 +6,15 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   documentContainer: alias('model.documentContainer'),
   documentIdentifier: alias('model.documentIdentifier'),
+  currentEditorDocument: alias('model.editorDocument'),
   ajax: service(),
   behandelingen: computed('model.behandelingen.data', function() {
-    return this.get('model.behandelingen.data').map((b) => b.attributes);
+    return this.get('model.behandelingen.data').map((b) => {
+      const attr = b.attributes;
+      attr.signedId = this.currentEditorDocument.id;
+      attr.encodedUri = encodeUriComponent(attr.behandeling);
+      return attr;
+    });
   }),
   actions: {
     /**
@@ -19,12 +25,15 @@ export default Controller.extend({
      * We should have support for removing the old signature of an
      * agenda but haven't implemented this so far.
      */
-    async applySignature(kind, documentId) {
+    async applySignature(behandeling, documentId) {
+      await this.ajax.post('/signing/behandeling/sign/${documentId}/${behandeling}');
+
     },
     /**
      * Publishes the document.
      */
-    async publish(kind, documentId) {
+    async publish(behandeling, documentId) {
+      await this.ajax.post('/signing/behandeling/publish/${documentId}/${behandeling}');
     }
   }
 
