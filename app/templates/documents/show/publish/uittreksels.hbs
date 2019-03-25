@@ -7,8 +7,8 @@
       step=timeline.step
       behandeling=behandeling
       currentEditorDocument=model.editorDocument
-      sign=(action "applySignature" behandeling.encodedUri)
-      publish=(action "publish" behandeling.encodedUri)
+      sign=(action "applySignature" behandeling.uri)
+      publish=(action "publish" behandeling.uri)
     }}
     {{/each}}
   {{/wu-timeline-accordion}}
