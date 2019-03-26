@@ -1,9 +1,7 @@
 import { inject } from '@ember/service';
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
-import PromiseProxyObject from 'frontend-gelinkt-notuleren/utils/promise-proxy-object';
-
-
+import Object from '@ember/object';
 export default Route.extend({
   ajax: inject(),
   async model(){
@@ -13,19 +11,15 @@ export default Route.extend({
       documentContainer: documentContainer,
       documentIdentifier: documentContainer.id,
       editorDocument: document,
-      behandelingen: this.ajax.request(`/prepublish/behandelingen/${document.id}`)
+      mockBehandelingen: this.ajax.request(`/prepublish/behandelingen/${document.id}`).then(
+        (res) => res.data.map(
+          (record) => Object.create(record.attributes)
+        )
+      )
     });
   },
   async getEditorDocument( documentContainer ) {
     const editorDocument = await documentContainer.get('currentVersion');
     return editorDocument;
-  },
-  actions: {
-    async refreshModel(){
-      await this.controller.model.documentContainer.reload();
-      this.controller.set('model.editorDocument', await this.getEditorDocument(this.controller.model.documentContainer));
-      await this.controller.model.documentContainer.hasMany("versionedBehandelingen").reload();
-      this.refresh();
-    }
   }
 });
