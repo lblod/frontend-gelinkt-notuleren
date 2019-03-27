@@ -20,6 +20,8 @@ export default Component.extend({
   sign: null,
   /** Function to trigger the publication of the document */
   publish: null,
+  /** Function to trigger the printing of the document */
+  print: null,
 
   showSigningModal: false,
   showPublishingModal: false,

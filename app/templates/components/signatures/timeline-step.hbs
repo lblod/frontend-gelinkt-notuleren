@@ -60,6 +60,15 @@
           }}
         </div>
       {{/if}}
+      {{#if print}}
+        {{wu-button
+            label=(concat "Print " name)
+            class="button u-spacer--top--tiny"
+            isNarrow=true
+            onClick=(action print document.id)
+            disabled=(not signaturesCount)
+        }}
+      {{/if}}
       {{#if showSigningModal}}
         {{signatures/signature-confirmation
         name=name

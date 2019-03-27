@@ -70,6 +70,9 @@ export default Controller.extend({
       const encodedUri = encodeURIComponent(encodeURIComponent(behandeling)); // TODO need to double encode, figure out why
       await this.ajax.post(`/signing/behandeling/publish/${documentId}/${encodedUri}`);
       await this.reload.perform(behandeling, documentId);
+    },
+    print(behandelingId) {
+      this.transitionToRoute('print.uittreksel', behandelingId);
     }
   }
 

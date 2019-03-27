@@ -1,0 +1,17 @@
+<h1 class="h1">Bekendmaking</h1>
+Zitting van {{bestuursorgaan.naam}}
+Geplande start {{moment-format geplandeStart 'L LT'}}
+
+<h2 class="h2">Besluit</h2>
+{{{model.content}}}
+
+{{#each model.signedResources as |signature|}}
+  <div>
+    Ondertekend door {{signature.gebruiker.fullName}} op {{moment-format signature.createdOn 'L LT'}}
+    {{#if signature.hashValue}}
+      met hash {{signature.hashValue}}
+    {{/if}}
+  </div>
+{{/each}}
+
+{{outlet}}
