@@ -1,0 +1,13 @@
+<div class="u-spacer--top">
+  {{#wu-timeline-accordion as |timeline|}}
+    {{#each behandelingen as |behandeling|}}
+      {{signatures/behandeling/timeline-step
+          name="besluit"
+          step=timeline.step
+          behandeling=behandeling
+          sign=(action "sign" behandeling.uri)
+          publish=(action "publish" behandeling.uri)
+      }}
+    {{/each}}
+  {{/wu-timeline-accordion}}
+</div>

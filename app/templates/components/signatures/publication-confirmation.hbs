@@ -1,0 +1,77 @@
+{{#wu-modal
+     title=(concat "Bevestig publicatie van " name)
+     dialog-class="modal-dialog--wide modal-dialog--sectioned"
+     onClose=(action cancel)
+     as |m|
+}}
+  {{#m.content isSectioned=true}}
+  <div class="grid u-padding--top">
+    <div class="col--7-12">
+    	<div class="u-padding--rl--small">
+	    	<h2 class="h6">Te publiceren document: {{name}}</h2>
+    	</div>
+    	<div class="editor__paper">
+        {{{mockDocument.body}}}
+      </div>
+    </div>
+    <div class="col--5-12">
+    	<div class="u-padding--rl--small">
+	    	<h2 class="h6 u-spacer--bottom--small">Publicatie</h2>
+        <p class="small u-spacer">Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers: <a href="https://publicatie.gelinkt-notuleren.lblod.info/">publicatie.gelinkt-notuleren.lblod.info</a>.</p>
+{{!--       	<ul class="bullet-list u-spacer small">
+      		<li>De publieke publicatiepagina:
+      			<br><a href="https://publicatie.gelinkt-notuleren.lblod.info/">publicatie.gelinkt-notuleren.lblod.info</a></li>
+      		<li>De publieke mandatendatabank:
+      			<br><a href="https://mandaten.lokaalbestuur.vlaanderen.be">mandaten.lokaalbestuur.vlaanderen.be</a></li>
+      		<li>Het interne mandatenbeheer:
+      			<br><a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a>
+      			<br>(niet toegankelijk voor burgers)</li>
+      		<li>Intern leidinggevendenbeheer:
+      			<br><a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a>
+      			<br>(niet toegankelijk voor burgers)</li>
+      	</ul> --}}
+
+	    	<h2 class="h6 u-spacer--bottom--small">Metagegevens bij publiceren</h2>
+				<ul class="u-spacer">
+					<li>
+						<label class="form__label">Publiceerder</label>
+						<p class="u-spacer--bottom--tiny">{{get (await currentSession.user) "fullName"}}</p>
+					</li>
+					<li>
+						<label class="form__label">Datum &amp; Tijd</label>
+						<p class="u-spacer--bottom--tiny smaller">Het moment waarop je op het publiceren bevestigd, wordt ook opgeslagen.</p>
+					</li>
+      		<li>
+      			<label class="form__label">Hash</label>
+      			<p class="u-spacer--bottom--tiny smaller">Bij het publiceren van een document, wordt ook de inhoud van het document omgezet in een unieke code of <em>hash</em>. Deze hash wordt bij elke versie van het document op het internet gevoegd, èn veilig bijgehouden op onze <a href="https://overheid.vlaanderen.be/informatie-vlaanderen/ontdek-onze-producten-en-diensten/blockchain-disruptieve-technologie" target="_blank"><i class="fa fa-link"></i> blockchain</a>. Zo kunnen we te allen tijde de echtheid van het document bevestigen.</p>
+      		</li>
+    		</ul>
+      </div>
+    </div>
+  </div>
+  {{/m.content}}
+  <div class="modal-dialog__footer">
+		<div class="alert alert--tiny alert--warning">
+			<div class="alert__icon" aria-hidden="true"></div>
+			<div class="alert__content">
+				<div class="alert__title">Publiceren is bindend en onomkeerbaar</div>
+				<div class="alert__message">
+					<p>Kijk de inhoud van het document goed na. Enkel bevoegde personen mogen het document publiceren.</p>
+				</div>
+			</div>
+		</div>
+
+    {{#m.buttons as |b|}}
+      {{b.button
+          label=(concat "Bevestig publicatie van " name)
+          onClick=(action confirm)
+      }}
+      {{b.button
+          label="Annuleren"
+          onClick=(action cancel)
+          isLink=true
+          icon="vi-cross"
+      }}
+    {{/m.buttons}}
+  </div>
+{{/wu-modal}}

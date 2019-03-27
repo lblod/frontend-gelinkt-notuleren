@@ -16,14 +16,10 @@ module.exports = function(environment) {
         Date: false
       }
     },
-
     APP: {
       '@lblod/ember-rdfa-editor-date-plugin': {
         allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY',  'DD.MM.YYYY'],
-        outputDateFormat: 'D MMMM YYYY',
-        moment: {
-          includeLocales: ['nl']
-        }
+        outputDateFormat: 'D MMMM YYYY'
       }
     },
     browserUpdate: {
@@ -34,7 +30,7 @@ module.exports = function(environment) {
     },
     moment: {
       outputFormat: 'DD-MM-YYYY hh:mm:ss',
-      includeTimezone: 'all',
+      includeTimezone: 'subset',
       includeLocales: ['nl'],
       allowEmpty: true
     },
