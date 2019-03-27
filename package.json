@@ -106,6 +106,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
+    "@lblod/marawa": "^0.2.0",
     "eslint-plugin-ie11": "^1.0.0"
   }
 }

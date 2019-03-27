@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import Scanner from '@lblod/ember-rdfa-editor/utils/rdfa-context-scanner';
+import ContextScanner from '@lblod/marawa/rdfa-context-scanner';
 import NodeWalker from '@lblod/ember-contenteditable-editor/utils/node-walker';
 import Vis from 'vis';
 
@@ -40,7 +40,7 @@ export default Component.extend({
     launchItAll(visualizeStructure){
       const fixedY = visualizeStructure;
       const element = this.element;
-      const scanner = Scanner.create();
+      const scanner = new ContextScanner();
 
       // START theft from rdfa-context-scanner
       const nodeWalker = NodeWalker.create();
