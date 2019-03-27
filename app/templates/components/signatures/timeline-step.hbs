@@ -30,7 +30,7 @@
           {{wu-button
             label=(concat "Onderteken " name)
             isNarrow=true
-            class="button u-spacer--top--tiny"
+            class="u-spacer--top--tiny"
             onClick=(action (mut showSigningModal) true)
             isLoading=signDocument.isRunning
             disabled=(or (not currentSession.canSign) signDocument.isRunning)
@@ -41,7 +41,7 @@
         	<p class="uppercase text-fade smaller">Eerste ondertekening</p>
           {{wu-button
             label=(concat "Onderteken " name)
-            class="button u-spacer--top--tiny"
+            class="u-spacer--top--tiny"
             isNarrow=true
             onClick=(action (mut showSigningModal) true)
             isLoading=signDocument.isRunning
@@ -52,22 +52,13 @@
         	<p class="uppercase text-fade smaller">Tweede ondertekening</p>
           {{wu-button
             label=(concat "Onderteken " name)
-            class="button u-spacer--top--tiny"
+            class="u-spacer--top--tiny"
             isNarrow=true
             onClick=(action (mut showSigningModal) true)
             isLoading=signDocument.isRunning
             disabled=true
           }}
         </div>
-      {{/if}}
-      {{#if print}}
-        {{wu-button
-            label=(concat "Print " name)
-            class="button u-spacer--top--tiny"
-            isNarrow=true
-            onClick=(action print document.id)
-            disabled=(not signaturesCount)
-        }}
       {{/if}}
       {{#if showSigningModal}}
         {{signatures/signature-confirmation
@@ -80,6 +71,24 @@
 	    </div>
 	  </div>
   {{/step.block}}
+  {{#if print}}
+	  {{#step.block title=(concat "Print " name) pillColor=(if document.printedResource "primary-blue") pillName=(if document.printedResource "Print gemaakt" "Geen print gemaakt")}}
+	  	<p class="u-spacer--bottom--tiny text-light">Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen &mdash; nadat het document ondertekend werd.</p>
+	    <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
+		    <div class="grid">
+		    	<div class="col--12-12">
+		        {{wu-button
+		            label=(concat "Print " name)
+		            class="u-spacer--tb--tiny"
+		            onClick=(action print document.id)
+		            disabled=(not signaturesCount)
+		        }}
+  					<p class="smaller">Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt.</p>
+			    </div>
+		    </div>
+		  </div>
+	  {{/step.block}}
+  {{/if}}
   {{#step.block title=(concat "Publiceer " name) pillColor=(if document.publishedResource "primary-blue") pillName=(if document.publishedResource "Publiek" "Niet publiek")}}
   	<p class="u-spacer--bottom--tiny text-light">Publiceren kan enkel door personen met de rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a>.</p>
     <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
@@ -99,12 +108,12 @@
 	        <div class="col--12-12">
 	          {{wu-button
 	              label=(concat "Publiceer " name)
-	              class="button u-spacer--bottom--tiny"
+	              class="u-spacer--bottom--tiny"
 	              onClick=(action (mut showPublishingModal) true)
 	              isLoading=publishDocument.isRunning
 	              disabled=(or (not currentSession.canPublish) publishDocument.isRunning)
 	          }}
-	          <p class="text-fade small">De {{name}} wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie.</p>
+	          <p class="small">Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie.</p>
 	        </div>
 	      {{/if}}
 	      {{#if showPublishingModal}}
