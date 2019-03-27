@@ -252,7 +252,8 @@
   }
 
   /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */
-  [property="dc:subject"] {
+  [property="ext:behandelt"] > span:first-child,
+  [property="besluit:gebeurtNa"] + span {
   	text-transform: uppercase;
   	color: $gray-light;
   	letter-spacing: 1px;

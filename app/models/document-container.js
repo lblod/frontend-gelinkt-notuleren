@@ -8,5 +8,6 @@ export default Model.extend({
   publisher: belongsTo('bestuurseenheid', {inverse: null }),
   versionedAgendas: hasMany('versioned-agenda'),
   versionedNotulen: hasMany('versioned-notulen'),
-  versionedBesluitenLijsten: hasMany('versioned-besluiten-lijst')
+  versionedBesluitenLijsten: hasMany('versioned-besluiten-lijst'),
+  versionedBehandelingen: hasMany('versioned-behandelingen')
 });
