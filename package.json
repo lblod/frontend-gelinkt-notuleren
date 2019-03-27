@@ -25,7 +25,7 @@
     "@ember/optional-features": "^0.6.3",
     "@lblod/ember-acmidm-login": "^0.1.4",
     "@lblod/ember-mock-login": "^0.4.5",
-    "@lblod/ember-rdfa-editor": "^0.20.0",
+    "@lblod/ember-rdfa-editor": "^0.21.0",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "^0.3.2",
     "@lblod/ember-rdfa-editor-agenda-plugin": "^0.3.1",
     "@lblod/ember-rdfa-editor-bijzonder-comite-aanstelling-plugin": "^0.2.9",
@@ -106,6 +106,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
+    "@lblod/marawa": "^0.2.0",
     "eslint-plugin-ie11": "^1.0.0"
   }
 }
