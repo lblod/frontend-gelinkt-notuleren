@@ -121,17 +121,6 @@
 			font-weight: 400;
 		}
 
-		&:before {
-			content: "Besluit met korte openbare beschrijving";
-			display: block;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			color: $gray-light;
-			font-weight: 400;
-			font-size: 1.4rem;
-			margin-bottom: 0.5rem;
-		}
-
 		[property="eli:description"] {
 			display: block;
 		}
@@ -144,6 +133,19 @@
   	font-size: 1.4rem;
   	line-height: 1.8;
   }
+
+	.besluiten {
+		[typeof="besluit:BehandelingVanAgendapunt"] {
+
+			[property="besluit:openbaar"][content="false"]:after {
+				content: "Besloten behandeling van agendapunt";
+			}
+
+			[property="besluit:openbaar"][content="true"]:after {
+				content: "Openbare behandeling van agendapunt";
+			}
+		}
+	}
 }
 
 
