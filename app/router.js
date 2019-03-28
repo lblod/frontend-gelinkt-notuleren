@@ -18,9 +18,6 @@ Router.map(function() {
     this.route('trash');
   });
   this.route('mock-login');
-  this.route('route-not-found', {
-    path: '/*wildcard'
-  });
   this.route('login');
   this.route('zetelverdeling');
 
@@ -39,6 +36,12 @@ Router.map(function() {
         this.route('uittreksels');
       });
     });
+  });
+  this.route('print', function() {
+    this.route('uittreksel', { path: '/uittreksel/:id' });
+  });
+  this.route('route-not-found', {
+    path: '/*wildcard'
   });
 });
 

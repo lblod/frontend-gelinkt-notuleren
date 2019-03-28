@@ -1,0 +1,73 @@
+<div class="container--flex-scroll">
+	<section class="u-padding--rl--small u-background--gray-lighter u-hide-on-print">
+		{{!-- <div class="u-padding--top--tiny">
+			<div class="grid">
+				<div class="col--6-12">
+					<a href="#" class="link--icon ember-view">
+						<small><i class="vi-arrow vi-u-180deg vi ember-view"></i> Terug naar ondertekenen &amp; publiceren</small>
+					</a>
+				</div>
+			</div>
+		</div> --}}
+		<div class="u-padding--tb">
+			<h1 class="h1 u-spacer--bottom">Uittreksel voor de zitting van {{bestuursorgaan.naam}}, op {{moment-format geplandeStart 'L LT'}}</h1>
+			<p>U kan deze pagina <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren-printen" target="_blank">opslaan als PDF, of printen</a>. Deze grijze balk zal er niet staan.</p>
+		</div>
+	</section>
+	<section class="u-padding--rl--small u-spacer--tb document-print" id="main">
+		<div class="grid">
+			<div class="col--8-12 u-wide-on-print">
+				<h1 class="h1 u-spacer--bottom--large">Uittreksel voor de zitting van {{bestuursorgaan.naam}}, op {{moment-format geplandeStart 'L LT'}}</h1>
+
+				<div class="document-print--uittreksel--blockchain-signature">
+					<div class="grid">
+						{{#each model.signedResources as |signature|}}
+					  	<div class="col--6-12">
+						    <p class="uppercase text-fade smaller u-spacer--bottom--tinier">Ondertekend door</p>
+						    <h3 class="h6">{{signature.gebruiker.fullName}}</h3>
+						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
+						    <p class="text-fade smaller uppercase"><i class="fa fa-lock vi-u-s"></i> Blockchain hash ondertekening</p>
+						    {{#if signature.hashValue}}
+							    <p class="uppercase small u-spacer--tiny word-break--break-word">
+							      {{signature.hashValue}}
+							    </p>
+						    {{else}}
+						    	<p class="smaller">Ondertekening werd nog niet versleuteld op de blockchain.</p>
+						    {{/if}}
+						  </div>
+						{{/each}}
+					</div>
+				</div>
+
+				<div class="u-hr u-spacer--tb"></div>
+
+				<div class="u-spacer--left--small">
+					{{{model.content}}}
+				</div>
+
+				<div class="u-hr u-spacer--bottom"></div>
+
+				<div class="document-print--uittreksel--blockchain-signature">
+					<div class="grid">
+						{{#each model.signedResources as |signature|}}
+					  	<div class="col--6-12">
+						    <p class="uppercase text-fade smaller u-spacer--bottom--tinier">Ondertekend door</p>
+						    <h3 class="h6">{{signature.gebruiker.fullName}}</h3>
+						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
+						    <p class="text-fade smaller uppercase"><i class="fa fa-lock vi-u-s"></i> Blockchain hash ondertekening</p>
+						    {{#if signature.hashValue}}
+							    <p class="uppercase small u-spacer--tiny word-break--break-word">
+							      {{signature.hashValue}}
+							    </p>
+						    {{else}}
+						    	<p class="smaller">Ondertekening werd nog niet versleuteld op de blockchain.</p>
+						    {{/if}}
+						  </div>
+						{{/each}}
+					</div>
+				</div>
+				{{outlet}}
+			</div>
+		</div>
+	</section>
+</div>

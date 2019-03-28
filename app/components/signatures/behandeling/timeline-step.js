@@ -12,5 +12,7 @@ export default Component.extend({
   /** Function to trigger the signing of the agenda */
   sign: null,
   /** Function to trigger the publication of the agenda */
-  publish: null
+  publish: null,
+  /** Function to trigger the printing of the document */
+  print: null
 });

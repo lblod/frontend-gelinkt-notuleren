@@ -121,19 +121,29 @@
 			font-weight: 400;
 		}
 
-		&:before {
-			content: "Besluit met korte openbare beschrijving";
-			display: block;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			color: $gray-light;
-			font-weight: 400;
-			font-size: 1.4rem;
-			margin-bottom: 0.5rem;
-		}
-
 		[property="eli:description"] {
 			display: block;
+		}
+	}
+
+  [typeof="besluit:Agendapunt"] [property="besluit:geplandOpenbaar"] + span {
+  	text-transform: uppercase;
+  	color: $gray-light;
+  	letter-spacing: 1px;
+  	font-size: 1.4rem;
+  	line-height: 1.8;
+  }
+
+	.besluiten {
+		[typeof="besluit:BehandelingVanAgendapunt"] {
+
+			[property="besluit:openbaar"][content="false"]:after {
+				content: "Besloten behandeling van agendapunt";
+			}
+
+			[property="besluit:openbaar"][content="true"]:after {
+				content: "Openbare behandeling van agendapunt";
+			}
 		}
 	}
 }
@@ -218,6 +228,13 @@
 	}
 }
 
+
+/* Style uittreksels
+ ========================================================================== */
+
+.steps .behandeling {
+	padding-left: 3rem;
+}
 
 /* Style hr's — remove this style once new version of webuniversum is added
  ========================================================================== */

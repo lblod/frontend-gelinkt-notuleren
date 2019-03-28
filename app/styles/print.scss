@@ -10,7 +10,8 @@
 	.editor-commands,
 	.editor-loading-events,
 	.editor-chrome,
-	.tasklist.tasklist--open {
+	.tasklist.tasklist--open,
+	.u-hide-on-print {
 		display: none;
 	}
 
@@ -28,13 +29,18 @@
 	.container-flex--contain,
 	.container-flex--scroll,
 	.tasklist__content {
-		overflow: visible !important;
+		overflow-y: visible !important;
 		display: block;
-		position: static;
 		height: auto;
-		flex: none;
-		flex-direction: unset;
-		flex-wrap: unset;
+	}
+
+	.document-print--uittreksel--blockchain-signature {
+		.col--6-12 {
+			width: 49%;
+			min-width: auto;
+			display: inline-block;
+			vertical-align: top;
+		}
 	}
 
 	.editor-container {
@@ -75,6 +81,9 @@
 
 	.u-wide-on-print {
 		min-width: 100%;
+		width: 100%;
+		max-width: none;
+		flex-basis: 100%;
 	}
 
   @page {
