@@ -49,7 +49,7 @@ export default Component.extend({
   }),
   handtekeningStatus: computed('signaturesCount', function() {
     if( this.signaturesCount == 1 )
-      return { label: 'Tweede handtekening vereist', color: 'primary-yellow'};
+      return { label: 'Tweede ondertekening vereist', color: 'primary-yellow'};
     if( this.signaturesCount == 2 )
       return { label: 'Ondertekend', color: 'primary-blue'};
     return { label: 'Niet ondertekend' };
@@ -67,7 +67,7 @@ export default Component.extend({
     if( this.status == 'published' )
       return { label:'Gepubliceerd', color: 'primary-blue' };
     if( this.status == 'firstSignature' )
-      return { label: 'Eerste handtekening verkregen', color: 'primary-yellow'};
+      return { label: 'Eerste ondertekening verkregen', color: 'primary-yellow'};
     if( this.status == 'secondSignature' )
       return { label:'Getekend', color: 'primary-yellow'};
     if( this.status == 'concept' )
