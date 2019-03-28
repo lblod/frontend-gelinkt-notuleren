@@ -117,7 +117,8 @@
     font-style: italic;
   }
 
-  .editor__paper {
+  .editor__paper,
+  .document-print {
 
     font-size: 1.6rem;
 
@@ -252,6 +253,7 @@
   }
 
   /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */
+  [typeof="besluit:Agendapunt"] > [property="dc:subject"],
   [property="ext:behandelt"] > span:first-child,
   [property="besluit:gebeurtNa"] + span {
   	text-transform: uppercase;
@@ -270,6 +272,7 @@
   	line-height: 1.8;
   }
 
+  .document-print,
   .editor__paper {
     [typeof="besluit:BehandelingVanAgendapunt"],
     [property="ext:behandelt"],
@@ -294,6 +297,8 @@
         color: darken($primary-yellow, 15%);
       }
     }
+
+  	/* -------------------- css for the toggle button of agendapunt behandeling openbaarheid  ------------------------- */
 
     // [typeof="besluit:BehandelingVanAgendapunt"] > [property="besluit:openbaar"]:after {
   		// content: "\E014";
