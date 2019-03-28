@@ -3,6 +3,28 @@
   Style what printing looks like here.
  ========================================================================== */
 
+.u-hide-on-print--show {
+	border-bottom: 3px dashed $blue-gray;
+	position: relative;
+	margin-bottom: 6rem;
+
+	&:before {
+		content: "\f070";
+		font-family: fontawesome;
+		position: absolute;
+		left: 2rem;
+		bottom: -1.6rem;
+		background-color: $blue-gray;
+		color: $white;
+		width: 3rem;
+		height: 3rem;
+		border-radius: 2rem;
+		display: block;
+		text-align: center;
+		padding-top: 0.15rem;
+	}
+}
+
 @media print {
 	.toolbar__annotations-switch,
 	.sidebar,

@@ -51,7 +51,7 @@
 
 	/* click to input */
 
-	mark[data-editor-highlight="true"] {
+	[data-editor-highlight="true"] {
 		background-color: rgba($primary-yellow, 0.9);
 
 		&:hover {
