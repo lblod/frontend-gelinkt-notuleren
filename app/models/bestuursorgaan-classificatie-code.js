@@ -1,6 +1,7 @@
 import Model from 'ember-data/model';
 import { collect } from '@ember/object/computed';
 import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
   // A string representation of this model, based on its attributes.
@@ -8,5 +9,6 @@ export default Model.extend({
   stringRep: collect.apply(this,['id', 'label', 'scopeNote']),
 
   label: attr(),
-  scopeNote: attr()
+  scopeNote: attr(),
+  standaardType: hasMany('bestuursfunctie-code', { inverse: 'standaardTypeVan' })
 });
