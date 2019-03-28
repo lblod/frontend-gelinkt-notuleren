@@ -28,7 +28,7 @@
 						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
 						    <p class="text-fade smaller uppercase"><i class="fa fa-lock vi-u-s"></i> Blockchain hash ondertekening</p>
 						    {{#if signature.hashValue}}
-							    <p class="uppercase small u-spacer--tiny">
+							    <p class="uppercase small u-spacer--tiny word-break--break-word">
 							      {{signature.hashValue}}
 							    </p>
 						    {{else}}
@@ -41,7 +41,7 @@
 
 				<div class="u-hr u-spacer--tb"></div>
 
-				<div>
+				<div class="u-spacer--left--small">
 					{{{model.content}}}
 				</div>
 
@@ -56,7 +56,7 @@
 						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
 						    <p class="text-fade smaller uppercase"><i class="fa fa-lock vi-u-s"></i> Blockchain hash ondertekening</p>
 						    {{#if signature.hashValue}}
-							    <p class="uppercase small u-spacer--tiny">
+							    <p class="uppercase small u-spacer--tiny word-break--break-word">
 							      {{signature.hashValue}}
 							    </p>
 						    {{else}}
