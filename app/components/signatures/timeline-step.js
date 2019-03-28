@@ -28,10 +28,18 @@ export default Component.extend({
 
   signaturesCount: alias('document.signedResources.length'),
   isPublished: notEmpty('document.publishedResource.id'),
+  isSignedByCurrentUser: true,
 
   async init() {
     this._super(...arguments);
     this.set('bestuurseenheid', await this.currentSession.group);
+    const currentUser = await this.currentSession.user;
+    let firstSignatureUser = null;
+    if(this.document) {
+      const signedResources = await this.document.signedResources;
+      firstSignatureUser = await signedResources.get('firstObject').get('gebruiker');
+    }
+    this.set('isSignedByCurrentUser', currentUser == firstSignatureUser);
   },
 
   title: computed('name', function(){
@@ -88,6 +96,7 @@ export default Component.extend({
 
   signDocument: task(function* (signedId){
     this.set('showSigningModal', false);
+    this.set('isSignedByCurrentUser', true);
     yield this.sign(signedId);
   }),
 

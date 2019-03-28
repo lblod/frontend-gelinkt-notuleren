@@ -33,7 +33,7 @@
             class="u-spacer--top--tiny"
             onClick=(action (mut showSigningModal) true)
             isLoading=signDocument.isRunning
-            disabled=(or (not currentSession.canSign) signDocument.isRunning)
+            disabled=(or (or (not currentSession.canSign) signDocument.isRunning) isSignedByCurrentUser)
           }}
         </div>
       {{else}} {{!-- No signatures placed --}}
