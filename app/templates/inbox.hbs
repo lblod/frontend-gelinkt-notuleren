@@ -1,7 +1,7 @@
 {{wu-widget src=header class="vo-header-widget"}}
 <div class="container-flex--contain">
   <div class="grid grid--collapse">
-    <div class="col--2-12 u-hide-on-print">
+    <div class="col--3-12 u-hide-on-print">
       <div class="container-flex--contain">
         <div class="sidebar">
           <div class="sidebar__header">
@@ -11,13 +11,19 @@
             <div class="side-navigation">
               <ul class="side-navigation__group">
                 <li class="side-navigation__item">
-                  {{#link-to 'inbox.index'}}Actieve documenten{{/link-to}}
+                  {{#link-to 'inbox.index'}}
+	                  <i class="vi vi-paper"></i>
+	                  Actieve documenten
+	                {{/link-to}}
                 </li>
 {{!--                 <li class="side-navigation__item">
                   {{#link-to 'inbox.archive'}}Gearchiveerde documenten{{/link-to}}
                 </li> --}}
                 <li class="side-navigation__item">
-                  {{#link-to 'inbox.trash'}}Prullenbak{{/link-to}}
+                  {{#link-to 'inbox.trash'}}
+	                  <i class="vi vi-trash"></i>
+	                  Prullenmand
+                  {{/link-to}}
                 </li>
               </ul>
             </div>
@@ -29,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="col--10-12 u-wide-on-print">
+    <div class="col--9-12 u-wide-on-print">
       {{outlet}}
     </div>
   </div>
