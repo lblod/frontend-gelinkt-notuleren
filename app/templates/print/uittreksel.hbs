@@ -1,12 +1,17 @@
 <div class="container--flex-scroll">
 	<section class="u-padding--rl--small u-background--gray-lighter u-hide-on-print u-hide-on-print--show">
-		<div class="grid">
-			<div class="col--6-12">
-				<div class="u-padding--tb--large">
-					<h1 class="h4 u-spacer--bottom--tiny">
-						<i class="vi vi-paper vi-u-m" aria-hidden="true"></i> Maak een print of PDF van een uittreksel
-					</h1>
-					<p>U kan deze pagina <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren-printen" target="_blank">opslaan als PDF, of printen</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.</p>
+		<div class="u-padding--top--tiny">
+			<div class="grid">
+				<div class="col--6-12">
+					{{#link-to 'documents.show.publish.uittreksels' model.documentContainer.id isDarkLink=true class="smaller link--dark"}}
+						<i class="vi-arrow vi-u-180deg vi vi-u-xs"></i> Terug naar ondertekenen &amp; publiceren
+					{{/link-to}}
+					<div class="u-padding--tb--large">
+						<h1 class="h4 u-spacer--bottom--tiny">
+							<i class="vi vi-paper vi-u-m" aria-hidden="true"></i> Maak een print of PDF van een uittreksel
+						</h1>
+						<p>U kan deze pagina <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren-printen" target="_blank">opslaan als PDF, of printen</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.</p>
+					</div>
 				</div>
 			</div>
 		</div>
