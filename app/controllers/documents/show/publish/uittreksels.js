@@ -9,6 +9,7 @@ import { task } from 'ember-concurrency';
 export default Controller.extend({
   currentEditorDocument: alias('model.editorDocument'),
   ajax: service(),
+
   behandelingen: computed('model.mockBehandelingen.@each.uuid', function() {
     return this.get('model.mockBehandelingen').map((attr) => {
       attr.signedId = this.currentEditorDocument.id;
