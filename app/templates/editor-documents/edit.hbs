@@ -46,9 +46,11 @@
 {{#if displayDeleteModal}}
   {{#wu-modal
      title="Weet u zeker dat u uw document naar de prullenmand wil verplaatsen?"
-     dialog-class="modal-dialog--wide modal-dialog--sectioned"
      onClose=(action 'onCloseDeleteModal') as |m|}}
-    <div class="modal-dialog__footer">
+		<div class="modal-dialog--content">
+			<p>U kan de publicaties niet meer opvolgen eens u het document naar de prullenbak verplaatst.</p>
+		</div>
+    <div class="modal-dialog__buttons">
       {{#m.buttons as |b|}}
         {{b.button label="Ja, verplaats naar prullenmand" onClick=(action 'deleteDocument')}}
         {{b.button label="Annuleren" onClick=(action 'onCloseDeleteModal') isLink=true icon="vi-cross"}}
