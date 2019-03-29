@@ -1,5 +1,5 @@
 import { computed } from '@ember/object';
-import { alias, notEmpty } from '@ember/object/computed';
+import { alias, notEmpty, or } from '@ember/object/computed';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
@@ -45,6 +45,8 @@ export default Component.extend({
   title: computed('name', function(){
     return `Voorvertoning ${this.name}`;
   }),
+  header: null,
+  headerWithDefault: or('header', 'name'),
   status: computed('signaturesCount', 'isPublished', function() {
     if( this.isPublished )
       return 'published';
