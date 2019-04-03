@@ -1,4 +1,33 @@
-<div class="u-padding--round--large">
-	<h1 class="h1">We kunnen de pagina niet vinden</h1>
-	<p>Er is iets fout gelopen. Het uittreksel dat je zoekt, bestaat niet of je hebt geen toegang.</p>
+<div class="container--flex-scroll">
+	<div class="page">
+	  <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
+	    <header class="content-header content-header--small content-header--half-image u-spacer--large">
+	      <div class="content-header__wrapper">
+	        <picture class="content-header__bg"><img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="" title=""></picture>
+	        <div class="layout layout--wide">
+	          <div class="content-header__content">
+	            <div class="content-header__logo-wrapper">
+	            	<a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase">
+	            		<span class="h1 content-header__entity-logo__prefix u-spacer--none">404</span>
+	            	</a>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </header>
+	  </div>
+	</div>
+	<section class="u-padding--rl--small">
+		<div class="grid">
+			<div class="col--6-12">
+				<div class="u-padding--round--large">
+					<h1 class="h2">We kunnen de pagina die u zoekt niet vinden</h1>
+					<p class="u-spacer">Er is iets fout gelopen. Het uittreksel dat u zoekt bestaat niet of u heeft geen toegang.</p>
+					{{#link-to 'inbox.index' tagName='button' class="button button--narrow"}}
+						<i class="vi-arrow vi-u-180deg vi vi-u-s"></i> Terug naar overzicht notulen
+					{{/link-to}}
+				</div>
+			</div>
+		</div>
+	</section>
 </div>

@@ -119,13 +119,11 @@
 
   .editor__paper,
   .document-print {
-
     font-size: 1.6rem;
 
     p, li {
       font-size: 1.6rem;
       position: relative;
-      display: block;
 
       &.small {
       	font-size: 0.9em;
@@ -138,6 +136,10 @@
       &.smallest {
       	font-size: 0.7em;
       }
+    }
+
+    p {
+      display: block;
     }
 
 		[typeof="besluit:Agendapunt"] {

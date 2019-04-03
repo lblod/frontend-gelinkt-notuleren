@@ -10,34 +10,30 @@
 			<div class="container-flex--contain">
 				<div class="sidebar">
 					<div class="sidebar__content">
-						<nav class="side-navigation"> {{!-- //  side-navigation--blocks --}}
+						<nav class="side-navigation">
 							<ul class="side-navigation__group">
 								<li class="side-navigation__item u-hr">
-							  	{{link-to 'Agenda' 'documents.show.publish.agenda' model class="u-padding--top--tiny"}}
-							  	{{#link-to 'documents.show.publish.agenda' model class="u-padding--bottom--small"}}
-										<div class="link-group link-group--bordered link-group--tiny link-group--dark">
-										</div>
+							  	{{#link-to 'documents.show.publish.agenda' model class="u-padding--tb--small"}}
+										<i class="vi vi-calendar"></i> Agenda
+										{{!-- pills met statussen --}}
 							  	{{/link-to}}
 								</li>
 								<li class="side-navigation__item u-hr">
-                  {{link-to 'Besluitenlijst' 'documents.show.publish.besluitenlijst' model class="u-padding--top--tiny"}}
-							  	{{#link-to 'documents.show.publish.besluitenlijst' model class="u-padding--bottom--small"}}
-										<div class="link-group link-group--bordered link-group--tiny link-group--dark">
-										</div>
+                  {{#link-to 'documents.show.publish.besluitenlijst' model class="u-padding--tb--small"}}
+										<i class="vi vi-list"></i> Besluitenlijst
+										{{!-- pills met statussen --}}
 							  	{{/link-to}}
 								</li>
                 <li class="side-navigation__item u-hr">
-                  {{link-to 'Uittreksels' 'documents.show.publish.uittreksels' model class="u-padding--top--tiny"}}
-							  	{{#link-to 'documents.show.publish.uittreksels' model class="u-padding--bottom--small"}}
-										<div class="link-group link-group--bordered link-group--tiny link-group--dark">
-										</div>
+                  {{#link-to 'documents.show.publish.uittreksels' model class="u-padding--tb--small"}}
+										<i class="vi vi-paper"></i> Uittreksels
+										{{!-- pills met statussen --}}
 							  	{{/link-to}}
 								</li>
                 <li class="side-navigation__item u-hr">
-                  {{link-to 'Notulen' 'documents.show.publish.notulen' model class="u-padding--top--tiny"}}
-							  	{{#link-to 'documents.show.publish.notulen' model class="u-padding--bottom--small"}}
-										<div class="link-group link-group--bordered link-group--tiny link-group--dark">
-										</div>
+                  {{#link-to 'documents.show.publish.notulen' model class="u-padding--tb--small"}}
+										<i class="vi vi-news"></i> Notulen
+										{{!-- pills met statussen --}}
 							  	{{/link-to}}
 								</li>
 							</ul>
