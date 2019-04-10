@@ -13,19 +13,8 @@
 	  display: inline-block;
 
 	  &:hover {
-	  	// background-color: transparent;
 		  background-color: rgba($blue-gray, 0.2);
 	  	transition: all 200ms;
-
-	  	// &:after {
-	  	// 	content: " ";
-	  	// 	position: absolute;
-	  	// 	border: 1px dashed $blue-gray-light;
-	  	// 	top: -0.1rem;
-	  	// 	right: -0.6rem;
-	  	// 	bottom: -0.1rem;
-	  	// 	left: -0.6rem;
-	  	// }
 	  }
 
 		&:before {
@@ -33,7 +22,6 @@
 		}
 
 		&:hover:before {
-			// box-shadow: 1px 1px 3px $blue-gray-light;
 			font-size: 1.2rem;
 			font-weight: 500;
 			text-transform: uppercase;
@@ -138,24 +126,26 @@
 	}
 }
 
-[data-flagged-remove="almost-complete"],
-[data-flagged-remove="complete"] {
-  min-height: 1.6rem;
-  display: inline;
-  cursor: text !important;
-  background-color: rgba($primary-blue, 0.25) !important;
-  box-shadow: -2px 0 0 $primary-blue;
-}
+.rdfa-editor {
+	[data-flagged-remove="almost-complete"],
+	[data-flagged-remove="complete"] {
+	  cursor: text;
+	  background-color: rgba($primary-blue, 0.25);
+	  box-shadow: -2px 0 0 $primary-blue;
+	  &:after {
+	  	content: "\000A0";
+	  }
+	}
 
-[data-flagged-remove="complete"] {
-  min-width: 8px;
-  display: inline-block;
-  box-shadow: -2px 0 0 black;
-}
+	[data-flagged-remove="complete"] {
+	  min-width: 8px;
+	  box-shadow: -2px 0 0 black;
+	}
 
-.annotation--edit {
-  [data-flagged-remove="almost-complete"],
-  [data-flagged-remove="complete"] {
-    background-color: transparent;
-  }
+	.annotation--edit {
+	  [data-flagged-remove="almost-complete"],
+	  [data-flagged-remove="complete"] {
+	    background-color: transparent;
+	  }
+	}
 }

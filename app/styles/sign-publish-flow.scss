@@ -152,6 +152,7 @@
  ========================================================================== */
 
 .steps [typeof="besluit:Zitting"] {
+	margin-bottom: 3rem;
 
 	.mark-highlight-manual {
 		background-color: transparent;
@@ -227,84 +228,94 @@
 	}
 }
 
+.behandeling-info--niet-publiek,
+.behandeling-info--publiek {
+	transition: all 200ms;
+}
 
-.steps .behandeling-container--publiek,
-.steps .behandeling-container--niet-publiek {
-	border-bottom: 1px dashed $blue-gray-light;
+.behandeling-info--publiek {
+	background-color: rgba($primary-blue, 0.2);
+	box-shadow: inset -4px 0 0 0 $primary-blue;
+}
 
-	&:first-child {
-		border-top: 1px dashed $blue-gray-light;
+.behandeling-info--niet-publiek {
+	background-color: $blue-gray-lighter;
+
+	.checkbox--switch+.checkbox--switch__label {
+		background-color: $gray-light;
+
+		&:after {
+			border-color: $gray-light;
+		}
 	}
+}
 
-	.checkbox--switch__wrapper {
-		margin: 2rem 0;
-	}
+.behandeling-container--publiek,
+.behandeling-container--niet-publiek {
 
 	.behandeling {
 		margin-bottom: 2rem;
-		padding: 1rem 0 0 4rem;
+		padding: 2rem 0 0 4.5rem;
 		transition: all 200ms;
+		border: 1px solid rgba($primary-blue, 0.2);
+	}
+
+	.checkbox--switch__wrapper {
+		display: block;
+		border-bottom: 1px solid rgba($blue-gray, 0.4);
+		padding: 0.5rem 0 1.5rem;
+		margin-bottom: 1.7rem;
 	}
 }
 
-.steps .behandeling-container--publiek .behandeling {
+.behandeling-container--niet-publiek .behandeling {
 	border: 1px solid rgba($blue-gray-lighter, 0.8);
-}
-
-.steps .behandeling-container--niet-publiek .behandeling {
-	border: 1px solid rgba($blue-gray-lighter, 0.8);
-	background-color: rgba($blue-gray-lightest, 0.6);
 
 	[property="eli:title"],
 	[property="eli:description"],
 	[property="besluit:openbaar"] {
 		position: relative;
-		background-color: rgba($primary-yellow, 0.7);
+		background-color: rgba($primary-blue, 0.2);
+		box-shadow: inset -4px 0 0 0 $primary-blue;
 		width: 100%;
 		display: block;
 		color: $black;
 
 		&:after {
 			content: "Publieke informatie";
-			position: absolute;
-			right: -10rem;
-			width: 10rem;
-			padding: 0 1.5rem;
-			font-size: 1.3rem;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			line-height: 1.1;
-			font-weight: 400;
+			border-right: 4px solid $primary-blue;
 		}
 	}
 }
 
-.behandeling-info--publiek,
-.behandeling-info--niet-publiek {
-	display: block;
-	background-color: $blue-gray-lighter;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	font-size: 1rem;
-	padding: 0.25rem 0.6rem 0.25rem;
-	margin-top: 2rem;
-	font-weight: 500;
-	color: $gray;
-}
 
-.behandeling-info--publiek {
-	background-color: rgba($primary-blue, 0.2);
-}
+[property="eli:title"],
+[property="eli:description"],
+[property="besluit:openbaar"],
+.behandeling-preview div[property^="ext:insert"],
+.steps div[property^="ext:insert"],
+.behandeling-preview [data-flagged-remove="complete"],
+.steps [data-flagged-remove="complete"] {
 
-.behandeling-info--niet-publiek {
-	background-color: rgba($primary-yellow, 0.6);
+	&:after {
+		position: absolute;
+		right: -11.5rem;
+		width: 9rem;
+		font-size: 1.3rem;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		line-height: 1.1;
+		font-weight: 400;
+		padding: 0 0.5rem 0 0;
+		font-family: 'flanders-sans', sans-serif;
+	}
 }
 
 
 /* Style uittreksels
  ========================================================================== */
 
-.steps .behandeling {
+.behandeling {
 	padding-left: 3rem;
 }
 
@@ -321,22 +332,27 @@
  ========================================================================== */
 
 .behandeling-preview div[property^="ext:insert"],
-.steps div[property^="ext:insert"] {
-	position: relative;
-	background-color: $blue-gray-lighter;
+.steps div[property^="ext:insert"],
+.behandeling-preview [data-flagged-remove="complete"],
+.steps [data-flagged-remove="complete"] {
+	background-color: $primary-yellow;
 
 	&:after {
 		content: "Informatie ontbreekt";
-		position: absolute;
-		right: -10rem;
-		width: 10rem;
-		padding: 0 1.5rem;
-		font-size: 1.3rem;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		line-height: 1.1;
-		font-weight: 400;
+		border-right: 4px solid $primary-yellow;
 	}
+}
+
+.behandeling-preview div[property^="ext:insert"],
+.steps div[property^="ext:insert"] {
+	position: relative;
+}
+
+.behandeling-preview [data-flagged-remove="complete"]:before,
+.steps [data-flagged-remove="complete"]:before {
+	content: "Leeg veld";
+	font-weight: 300;
+	color: $gray;
 }
 
 /* Behandeling preview publicatie
@@ -344,12 +360,17 @@
 
 .behandeling-preview {
 
+	[data-flagged-remove="complete"]:before,
 	div[property^="ext:insert"] {
-		background-color: rgba($primary-yellow, 0.5);
+		background-color: $primary-yellow;
+	}
 
-		&:after {
-			right: -20rem;
-		}
+	&.editor__paper span.mark-highlight-manual {
+		background-color: $white;
+	}
+
+	* {
+		pointer-events: none;
 	}
 
 	.behandeling-preview--niet-publiek > {
@@ -378,6 +399,7 @@
 				display: none;
 			}
 
+			[property="dc:subject"],
 			[property="eli:title"],
 			[property="eli:description"] {
 				display: block;

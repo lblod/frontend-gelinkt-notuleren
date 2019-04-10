@@ -7,17 +7,18 @@
   {{#m.content isSectioned=true}}
   <div class="grid u-padding--top--small">
     <div class="col--7-12">
-    	<div class="u-padding--rl--small">
-	    	<h2 class="h6">Te ondertekenen document: {{name}}</h2>
-    	</div>
     	<div class="editor__paper behandeling-preview">
-        {{{mockDocument.body}}}
+    		<div class="grid grid--collapse">
+    			<div class="col--11-12">
+        		{{{mockDocument.body}}}
+        	</div>
+        </div>
       </div>
     </div>
     <div class="col--5-12">
     	<div class="u-padding--rl--small">
-	    	<h2 class="h6 u-spacer--bottom--small">Ondertekenen</h2>
-				<div class="alert alert--tiny alert--warning">
+	    	<h2 class="h6 u-spacer--tb--small">Ondertekenen</h2>
+				<div class="alert alert--tiny">
 					<div class="alert__icon" aria-hidden="true"></div>
 					<div class="alert__content">
 						<div class="alert__title">Ondertekenen is bindend en onomkeerbaar</div>
