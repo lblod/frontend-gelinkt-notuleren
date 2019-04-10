@@ -21,8 +21,8 @@
   {{/t.menu}}
   {{#t.content as |c|}}
     {{#c.header}}
-      {{th-sortable field='title' currentSorting=sort label='Zitting' class="data-table__header-title"}}
-      {{th-sortable field='createdOn' currentSorting=sort label='Aangemaakt' class="data-table__header-title"}}
+      {{th-sortable field='currentVersion.title' currentSorting=sort label='Zitting' class="data-table__header-title"}}
+      {{th-sortable field='currentVersion.createdOn' currentSorting=sort label='Aangemaakt' class="data-table__header-title"}}
       {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title u-align-right"}}
     {{/c.header}}
     {{#c.body as |container|}}
