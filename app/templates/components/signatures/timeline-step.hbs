@@ -1,6 +1,10 @@
 {{#component step isOpen=isOpen title=headerWithDefault pill=algemeneStatus icon=iconName as |step|}}
   {{#step.block title=title pillColor=voorVertoningStatus.color pillName=voorVertoningStatus.label}}
-    {{{mockDocument.body}}}
+    {{#if hasBlock}}
+      {{yield}}
+    {{else}}
+      {{{mockDocument.body}}}
+    {{/if}}
   {{/step.block}}
   {{#step.block title=(concat "Onderteken " name) pillColor=handtekeningStatus.color pillName=handtekeningStatus.label}}
   	<p class="u-spacer--small text-light">Ondertekenen kan enkel door de aangewezen personen met de rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a> binnen het orgaan.</p>

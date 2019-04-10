@@ -1,9 +1,25 @@
-{{signatures/timeline-step
+{{#signatures/timeline-step
   name=name
   step=step
   document=notulen
   sign=sign
-  publish=publish
+  publish=(action publish publicBehandelingUris)
   mockDocument=mockNotulen
   isOpen=isOpen
 }}
+  {{#if (is-pending mockBehandelingen)}}
+    <div>Aan het laden...</div>
+  {{else}}
+    {{{zittingWrapper}}}
+    {{#if zittingWrapper}}
+      {{#ember-wormhole to=behandelingContainerId}}
+        {{signatures/notulen/behandelingen-list
+            isPublished=notulen
+            prepublishedBehandelingen=(await mockBehandelingen)
+            publicBehandelingUris=publicBehandelingUris
+            toggle=(action "togglePublicationStatus")
+        }}
+      {{/ember-wormhole}}
+    {{/if}}
+  {{/if}}
+{{/signatures/timeline-step}}

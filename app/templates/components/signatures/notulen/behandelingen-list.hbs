@@ -1,0 +1,31 @@
+{{#each prepublishedBehandelingen as |preview|}}
+  <div class="grid grid--collapse {{if (contains preview.behandeling publicBehandelingUris) "behandeling-container--publiek" "behandeling-container--niet-publiek"}}">
+    <div class="col--8-12">
+      {{#if (contains preview.behandeling publicBehandelingUris)}}
+	    	<p class="behandeling-info--publiek">Gehele inhoud wordt gepubliceerd</p>
+      {{else}}
+	    	<p class="behandeling-info--niet-publiek">Enkel titel en korte omschrijving worden gepubliceerd</p>
+      {{/if}}
+
+    	{{{preview.body}}}
+	  </div>
+    <div class="col--4-12 u-align-right">
+      {{#if isPublished}}
+        {{#if (contains preview.behandeling publicBehandelingUris)}}
+          <p>Publiek</p>
+        {{else}}
+          <p>Niet publiek</p>
+        {{/if}}
+      {{else}}
+        {{wu-switch
+            label=" Maak inhoud agendapunt publiek"
+            checked=(contains preview.behandeling publicBehandelingUris)
+            onClick=(action toggle preview)
+            class="checkbox--switch--small checkbox--switch__wrapper"
+        }}
+      {{/if}}
+    </div>
+  </div>
+{{/each}}
+
+{{yield}}
