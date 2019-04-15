@@ -231,6 +231,10 @@
       content: "Titel besluit";
     }
 
+    [property="eli:title_short"]:before {
+      content: "Citeer-opschrift (optioneel)";
+    }
+
     [property="eli:description"]:before {
       content: "Beschrijving besluit";
     }
