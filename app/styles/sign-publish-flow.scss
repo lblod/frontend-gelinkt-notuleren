@@ -271,6 +271,11 @@
 .behandeling-container--niet-publiek .behandeling {
 	border: 1px solid rgba($blue-gray-lighter, 0.8);
 
+	> * {
+		color: $gray;
+	}
+
+	[property="dc:subject"],
 	[property="eli:title"],
 	[property="eli:description"],
 	[property="besluit:openbaar"] {
@@ -288,29 +293,32 @@
 	}
 }
 
+.behandeling-preview,
+.steps {
+	[property="dc:subject"],
+	[property="eli:title"],
+	[property="eli:description"],
+	[property="besluit:openbaar"],
+	div[property^="ext:insert"],
+	div[property^="ext:insert"],
+	[data-flagged-remove="complete"],
+	[data-flagged-remove="complete"] {
+		margin-top: 0.5rem;
 
-[property="eli:title"],
-[property="eli:description"],
-[property="besluit:openbaar"],
-.behandeling-preview div[property^="ext:insert"],
-.steps div[property^="ext:insert"],
-.behandeling-preview [data-flagged-remove="complete"],
-.steps [data-flagged-remove="complete"] {
-
-	&:after {
-		position: absolute;
-		right: -11.5rem;
-		width: 9rem;
-		font-size: 1.3rem;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		line-height: 1.1;
-		font-weight: 400;
-		padding: 0 0.5rem 0 0;
-		font-family: 'flanders-sans', sans-serif;
+		&:after {
+			position: absolute;
+			right: -11.5rem;
+			width: 9rem;
+			font-size: 1.3rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			line-height: 1.1;
+			font-weight: 400;
+			padding: 0 0.5rem 0 0;
+			font-family: 'flanders-sans', sans-serif;
+		}
 	}
 }
-
 
 /* Style uittreksels
  ========================================================================== */
@@ -330,16 +338,20 @@
 
 /* Behandeling overview
  ========================================================================== */
+.behandeling-preview,
+.steps {
 
-.behandeling-preview div[property^="ext:insert"],
-.steps div[property^="ext:insert"],
-.behandeling-preview [data-flagged-remove="complete"],
-.steps [data-flagged-remove="complete"] {
-	background-color: $primary-yellow;
+	div[property^="ext:insert"],
+	div[property^="ext:insert"],
+	[data-flagged-remove="complete"],
+	[data-flagged-remove="complete"] {
+		background-color: $primary-yellow;
+		color: $black;
 
-	&:after {
-		content: "Informatie ontbreekt";
-		border-right: 4px solid $primary-yellow;
+		&:after {
+			content: "Informatie ontbreekt";
+			border-right: 4px solid $primary-yellow;
+		}
 	}
 }
 
