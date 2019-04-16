@@ -4,37 +4,6 @@
   Style the annotations on hover here.
  ========================================================================== */
 
-/* editor annotations styling */
-
-.rdfa-editor {
-
-  /* helpers to make sure you can see what's going on */
-
-  // [typeof],
-  // [property] {
-  //   background-color: red;
-  // }
-
-  // [property="ext:TODO"],
-  // [var="ext:TODO"],
-
-  // [typeof="besluit:Agenda"] [typeof="besluit:Agendapunt"],
-  // [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"],
-  // [property="besluit:heeftAgendapunt"] [typeof="besluit:Agendapunt"],
-  // [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"],
-  // [property="http://mu.semte.ch/vocabularies/ext/noHighlight"],
-  // [property="dc:subject"],
-  // [typeof="besluit:BehandelingVanAgendapunt"],
-
-  // [typeof="mandaat:Mandataris"],
-  // [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"] [property="ext:bekrachtigtAanstellingVan"]
-
-  //  {
-  //   background-color: transparent;
-  // }
-}
-
-
 /* -------------------- annotations styles for big chunks of annotations ------------------------- */
 
 .rdfa-editor {
@@ -129,6 +98,8 @@
   [typeof="besluit:Agendapunt"] [property="dc:title"],
 
   [property="eli:title"],
+  [property="dc:title"],
+  [property="ext:behandelt"] > [property="dc:subject"],
   [property="eli:title_short"],
   [property="eli:description"],
   [property="eli:cites"],
@@ -144,6 +115,8 @@
   [typeof="http://www.w3.org/ns/person#Person"],
   [typeof="mandaat:Mandataris"],
   [property="mandaat:isBestuurlijkeAliasVan"],
+	[property="persoon:gebruikteVoornaam"],
+	[property="foaf:familyName"],
   [property="mandaat:start"],
   [property="org:holds"],
   [property="ext:secretarisTemporaryAsText"],
@@ -164,10 +137,8 @@
   [typeof="besluit:Bestuurseenheid"],
   [typeof="besluit:Bestuursorgaan"]
   {
-    background-color: transparent;
-    border-bottom: 1px solid rgba($blue-gray-light, 1) !important;
+    border-bottom: 1px solid rgba($blue-gray-light, 1);
     cursor: pointer;
-    // display: inline;
     padding-bottom: 5px;
 
     &:hover {
@@ -203,7 +174,7 @@
     }
 
     > [typeof],
-    > [property] {
+    > [property]:not([property="dc:subject"]) {
       padding-bottom: 3px;
 
       &:hover:before {
