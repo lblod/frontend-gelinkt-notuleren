@@ -27,7 +27,7 @@
     "@lblod/ember-mock-login": "^0.4.5",
     "@lblod/ember-rdfa-editor": "^0.20.0",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "0.3.5",
-    "@lblod/ember-rdfa-editor-agenda-plugin": "^0.3.4",
+    "@lblod/ember-rdfa-editor-agenda-plugin": "^0.3.5",
     "@lblod/ember-rdfa-editor-bijzonder-comite-aanstelling-plugin": "^0.2.9",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.7.2",
     "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.2",
