@@ -314,7 +314,7 @@
     }
 
     [property="dc:subject"]:before {
-      content: "Onderwerp (" attr(property) ")"; // wat moet hier in?
+      content: "Onderwerp behandeling (" attr(property) ")";
     }
 
   /* -------------------- Stemming ------------------------- */
