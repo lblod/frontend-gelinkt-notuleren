@@ -206,35 +206,61 @@
       }
     }
   }
+
+  [property="persoon:gebruikteVoornaam"],
+  [property="foaf:familyName"],
+  [property="mandaat:isBestuurlijkeAliasVan"],
+  [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"] {
+  	display: inline-block;
+  }
+
+  [property="besluit:heeftStemming"],
+  [property="ext:behandelt"] {
+
+  	[property="mandaat:isBestuurlijkeAliasVan"],
+  	[property="besluit:heeftStemmer"],
+  	[property="besluit:heeftAanwezige"],
+  	[property="besluit:heeftVoorzitter"],
+  	[property="ext:secretarisTemporaryAsText"],
+  	[property="persoon:gebruikteVoornaam"],
+  	[property="foaf:familyName"],
+  	[property="org:holds"] {
+  		font-size: 12px !important;
+	  	line-height: 1 !important;
+	  	display: inline-block;
+	  	padding-bottom: 1px !important;
+  	}
+
+  }
 }
 
 .rdfa-editor .data-table {
-		[typeof],
-		[property] {
-			&:not(tr):not(td),
-			&:not(tr) {
-				display: inline !important;
-				border: none !important;
-				padding: 0 !important;
-				background-color: transparent !important;
-				margin: 0 !important;
-			}
+	[typeof],
+	[property] {
+		&:not(tr):not(td),
+		&:not(tr) {
+			display: inline !important;
+			border: none !important;
+			padding: 0 !important;
+			background-color: transparent !important;
+			margin: 0 !important;
 		}
+	}
 
-		tr {
-			display: table-row !important;
+	tr {
+		display: table-row !important;
+	}
+
+	td {
+		display: table-cell !important;
+
+		&.u-hidden {
+			display: none !important;
 		}
+	}
 
-		td {
-			display: table-cell !important;
-
-			&.u-hidden {
-				display: none !important;
-			}
-		}
-
-    [typeof]:before,
-    [property]:before {
-      content: normal !important;
-    }
+  [typeof]:before,
+  [property]:before {
+    content: normal !important;
+  }
 }
