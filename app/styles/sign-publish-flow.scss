@@ -136,6 +136,12 @@
 	.besluiten {
 		[typeof="besluit:BehandelingVanAgendapunt"] {
 
+			[property="besluit:openbaar"]:after {
+				position: relative;
+				left: 0;
+				width: auto;
+			}
+
 			[property="besluit:openbaar"][content="false"]:after {
 				content: "Besloten behandeling van agendapunt";
 			}
