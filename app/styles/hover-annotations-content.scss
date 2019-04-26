@@ -183,6 +183,14 @@
       	content: "Mandataris";
       }
 
+      	[property="persoon:gebruikteVoornaam"]:before {
+      		content: "Voornaam";
+      	}
+
+      	[property="foaf:familyName"]:before {
+      		content: "Familienaam";
+      	}
+
       [property="org:holds"]:before {
         content: "Mandaat";
       }
@@ -231,13 +239,17 @@
       content: "Titel besluit";
     }
 
+    [property="eli:title_short"]:before {
+      content: "Citeer-opschrift (optioneel)";
+    }
+
     [property="eli:description"]:before {
       content: "Beschrijving besluit";
     }
 
-    // [property="dc:subject"]:before {
-    //   // content: "Onderwerp"; // wat moet hier in?
-    // }
+    [property="ext:behandelt"] > [property="dc:subject"]:before {
+      content: "Onderwerp behandeling";
+    }
 
     [property="besluit:motivering"]:before {
       content: "Motivering";
@@ -257,6 +269,10 @@
 
       [property="eli:has_part"][typeof="besluit:Artikel"]:before {
         content: "Artikel";
+      }
+
+      [typeof="besluit:Artikel"] [property="prov:value"]:before {
+      	content: "Artikel"
       }
 
       [property="eli:has_part"]:before {

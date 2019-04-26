@@ -249,6 +249,24 @@
     ul.bullet-list {
       padding-left: 0;
     }
+
+
+    ol:not(.bullet-list):not(.numbered-list),
+    ul:not(.bullet-list):not(.numbered-list) {
+    	padding-left: 1.75em;
+
+    	li {
+    		list-style-type: initial;
+    	}
+    }
+
+    ol:not(.bullet-list):not(.numbered-list) li {
+    	list-style-type: decimal;
+    }
+
+    [property="besluit:heeftAgenda"] > ul:not(.bullet-list) li {
+    	list-style-type: none;
+    }
   }
 
   /* TODO DOUBLE CHECK WHEN RDFA IS FIXED */

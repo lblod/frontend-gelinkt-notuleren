@@ -11,8 +11,8 @@
 
 /* step styling override remove once webuniversum updated*/
 
-.step__title:first-letter {
-	text-transform: uppercase;
+.step__header > .grid {
+	width: 100%;
 }
 
 .step__content p + p {
