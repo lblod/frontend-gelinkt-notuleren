@@ -1,6 +1,14 @@
 {{#component step isOpen=isOpen title=headerWithDefault pill=algemeneStatus icon=iconName as |step|}}
   {{#step.block title=title pillColor=voorVertoningStatus.color pillName=voorVertoningStatus.label}}
-    {{{mockDocument.body}}}
+		<div class="grid">
+			<div class="col--10-12">
+		    {{#if hasBlock}}
+		      {{yield}}
+		    {{else}}
+		      {{{mockDocument.body}}}
+		    {{/if}}
+		  </div>
+		</div>
   {{/step.block}}
   {{#step.block title=(concat "Onderteken " name) pillColor=handtekeningStatus.color pillName=handtekeningStatus.label}}
   	<p class="u-spacer--small text-light">Ondertekenen kan enkel door de aangewezen personen met de rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a> binnen het orgaan.</p>
@@ -99,8 +107,8 @@
 	        </div>
 	        <div class="col--6-12">
 	          <p class="smaller uppercase text-fade">Link publicatie</p>
-	          <p class="u-spacer--bottom--small"><a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}"target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}</a></p>
-
+	          <p><a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}" target="_blank" class="word-break--break-word">publicatie.gelinkt-notuleren.vlaanderen.be/{{bestuurseenheid.naam}}/{{bestuurseenheid.classificatie.label}}</a></p>
+	          <p class="smaller u-spacer--bottom--small">Het kan tot 5 minuten duren voor u de publicatie kan zien op bovenstaande link.</p>
 	          <p class="smaller uppercase text-fade">Type publicatie</p>
 	          <p class="u-spacer--tb--tinier">Publiek voor iedereen</p>
 	        </div>
@@ -110,6 +118,7 @@
 	              label=(concat "Publiceer " name)
 	              class="u-spacer--bottom--tiny"
 	              onClick=(action (mut showPublishingModal) true)
+	              isNarrow=true
 	              isLoading=publishDocument.isRunning
 	              disabled=(or (not currentSession.canPublish) publishDocument.isRunning)
 	          }}

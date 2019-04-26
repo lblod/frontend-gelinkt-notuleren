@@ -47,10 +47,6 @@
     content: "Titel van de notulen (" attr(property) ")";
   }
 
-//     [property="besluit:behandelt"]:before {
-//       // content: "Behandeling"; Momenteel niet gebruikt — fout aangegeven?
-//     }
-
     // [property="besluit:isGehoudenDoor"]:before
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
       content: "Bestuurs-orgaan (" attr(property) ")";
@@ -59,14 +55,6 @@
     [property="besluit:geplandeStart"]:before {
       content: "Geplande start van de zitting (" attr(property) ")";
     }
-
-//     [property="prov:startedAtTime"]:before {
-//       content: "Tijdstip waarop de zitting begint (" attr(property) ")";
-//     }
-
-//     [property="prov:endedAtTime"]:before {
-//       content: "Tijdstip waarop de zitting eindigt (" attr(property) ")";
-//     }
 
     /* Aanwezigen en types */
 
@@ -89,19 +77,6 @@
     [property="org:role"]:before {
     	content: "Mandaat";
     }
-
-//     [property="besluit:heeftNotulen"]:before {
-//       // content: "Heeft notulen"; Momenteel niet gebruikt
-//     }
-
-//     [property="besluit:heeftZittingsverslag"]:before {
-//       // content: "Heeft zittingsverslag"; Momenteel niet gebruikt
-//     }
-
-//     [property="besluit:heeftAgenda"]:before {
-//       // content: "Agenda"; // zit niet in het model?
-//     }
-
 
   /* -------------------- Agendapunt ------------------------- */
 
@@ -133,15 +108,15 @@
         content: "Besloten agendapunt (" attr(property) ")";
       }
 
-//     [property="besluit:aangebrachtNa"]:before {
-//       // niet zichtbaar
-//     }
-
-//     [property="besluit:description"]:before {
-//       // hoe aanduiden? Herhalen in behandeling?
-//     }
+	    [property="eli:title_short"]:before {
+	      content: "Citeer-opschrift (" attr(property) ") - optioneel";
+	    }
 
   /* -------------------- Behandeling agendapunt ------------------------- */
+
+  [property="ext:behandelingVanAgendapuntenContainer"]:before {
+    content: "Behandelingen van agendapunten";
+  }
 
   [typeof="besluit:BehandelingVanAgendapunt"]:before {
     content: "Behandeling van agendapunt (" attr(property) ")";
@@ -211,6 +186,10 @@
 
 		      [typeof="ext:BesluitGemeenteraadsledenAfwezigen"]:before {
 		      	content: "Afwezigen";
+		      }
+
+		      [property="ext:heeftAfwezigeBijAgendapunt"]:before {
+		      	content: "Afwezige bij agendapunt";
 		      }
 
 		      [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
@@ -330,56 +309,22 @@
           	content: "Leden (" attr(typeof) ")";
           }
 
-//     [property="besluit:gebeurtNa"]:before {
-//       // niet zichtbaar
-//     }
-
     [property="besluit:heeftStemming"]:before {
       content: "Stemming bij behandeling van agendapunt (" attr(property) ")";
     }
 
-//     [property="besluit:heeftAanwezige"]:before {
-//       content: "Aanwezige mandataris bij behandeling agendapunt (" attr(property) ")"; // niet gebruikt
-//     }
-
-//       [property="besluit:heeftVoorzitter"]:before {
-//         // content: "Voorzitter"; // in zitting herhaald
-//       }
-
-//       [property="besluit:heeftSecretaris"]:before {
-//         // content: "Algemeen directeur"; // in zitting herhaald
-//       }
-
-//     [property="eli:title"]:before {
-//       content: "Titel agendapunt"; // in zitting herhaald
-//     }
-
     [property="dc:subject"]:before {
-      content: "Onderwerp (" attr(property) ")"; // wat moet hier in?
+      content: "Onderwerp behandeling (" attr(property) ")";
     }
-
-
-//     [property="eli:title_short"]:before {
-//       // niet gebruikt
-//     }
-
-//     [property="eli:date_publication"]:before {
-//       // niet gebruikt
-//     }
-
-//     [property="eli:realizes"]:before {
-//       // niet gebruikt
-//     }
-
-//     [property="prov:wasGeneratedBy"]:before {
-//       // niet gebruikt
-//     }
 
   /* -------------------- Stemming ------------------------- */
 
   [typeof="besluit:Stemming"]:before {
     content: "Stemming (" attr(typeof) ")";
   }
+  	[property="ext:stemmingTable"]:before {
+  		content: "Stemmingen";
+  	}
 
     [property="besluit:geheim"][content="false"]:before {
       content: "Openbare stemming";
@@ -429,4 +374,7 @@
       content: "Voor-stander";
     }
 
+  [property="ext:signatories"]:before {
+  	content: "Ondergetekend";
+  }
 }

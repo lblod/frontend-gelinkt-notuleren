@@ -34,8 +34,13 @@ export default Controller.extend({
     /**
      * Publishes the document.
      */
-    async publish(kind, documentId) {
-      await this.ajax.post(`/signing/notulen/publish/${kind}/${documentId}`);
+    async publish(kind, publicBehandelingUris, documentId) {
+      await this.ajax.post(`/signing/notulen/publish/${kind}/${documentId}`, {
+        contentType: 'application/vnd.api+json',
+        data: {
+          'public-behandeling-uris': publicBehandelingUris
+        }
+      });
       await this.reload.perform();
     }
   }
