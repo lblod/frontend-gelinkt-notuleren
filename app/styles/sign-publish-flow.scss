@@ -64,7 +64,6 @@
 
 	.besluiten,
 	.agendapunten,
-	[property="ext:behandelingVanAgendapuntenContainer"],
 	[property="ext:agendapuntenTable"] {
 		padding-left: 2.5rem;
 	}
@@ -137,6 +136,12 @@
 	.besluiten {
 		[typeof="besluit:BehandelingVanAgendapunt"] {
 
+			[property="besluit:openbaar"]:after {
+				position: relative;
+				left: 0;
+				width: auto;
+			}
+
 			[property="besluit:openbaar"][content="false"]:after {
 				content: "Besloten behandeling van agendapunt";
 			}
@@ -153,6 +158,7 @@
  ========================================================================== */
 
 .steps [typeof="besluit:Zitting"] {
+	margin-bottom: 3rem;
 
 	.mark-highlight-manual {
 		background-color: transparent;
@@ -228,17 +234,196 @@
 	}
 }
 
+.behandeling-info--niet-publiek,
+.behandeling-info--publiek {
+	transition: all 200ms;
+}
+
+.behandeling-info--publiek {
+	background-color: rgba($primary-blue, 0.2);
+	box-shadow: inset -4px 0 0 0 $primary-blue;
+}
+
+.behandeling-info--niet-publiek {
+	background-color: $blue-gray-lighter;
+
+	.checkbox--switch+.checkbox--switch__label {
+		background-color: $gray-light;
+
+		&:after {
+			border-color: $gray-light;
+		}
+	}
+}
+
+.behandeling-container--publiek,
+.behandeling-container--niet-publiek {
+
+	.behandeling {
+		margin-bottom: 2rem;
+		padding: 2rem 0 0 4.5rem;
+		transition: all 200ms;
+		border: 1px solid rgba($primary-blue, 0.2);
+	}
+
+	.checkbox--switch__wrapper {
+		display: block;
+		border-bottom: 1px solid rgba($blue-gray, 0.4);
+		padding: 0.5rem 0 1.5rem;
+		margin-bottom: 1.7rem;
+	}
+}
+
+.behandeling-container--niet-publiek .behandeling {
+	border: 1px solid rgba($blue-gray-lighter, 0.8);
+
+	> * {
+		color: $gray;
+	}
+
+	[property="dc:subject"],
+	[property="eli:title"],
+	[property="eli:description"],
+	[property="besluit:openbaar"] {
+		position: relative;
+		background-color: rgba($primary-blue, 0.2);
+		box-shadow: inset -4px 0 0 0 $primary-blue;
+		width: 100%;
+		display: block;
+		color: $black;
+
+		&:after {
+			content: "Publieke informatie";
+			border-right: 4px solid $primary-blue;
+		}
+	}
+}
+
+.behandeling-preview,
+.steps {
+	[property="dc:subject"],
+	[property="eli:title"],
+	[property="eli:description"],
+	[property="besluit:openbaar"],
+	div[property^="ext:insert"],
+	div[property^="ext:insert"],
+	[data-flagged-remove="complete"],
+	[data-flagged-remove="complete"] {
+		margin-top: 0.5rem;
+
+		&:after {
+			position: absolute;
+			right: -11.5rem;
+			width: 9rem;
+			font-size: 1.3rem;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			line-height: 1.1;
+			font-weight: 400;
+			padding: 0 0.5rem 0 0;
+			font-family: 'flanders-sans', sans-serif;
+		}
+	}
+}
 
 /* Style uittreksels
  ========================================================================== */
 
-.steps .behandeling {
+.behandeling {
 	padding-left: 3rem;
 }
+
 
 /* Style hr's — remove this style once new version of webuniversum is added
  ========================================================================== */
 
 .step__content .u-hr {
 	border-color: $blue-gray-lighter;
+}
+
+
+/* Behandeling overview
+ ========================================================================== */
+.behandeling-preview,
+.steps {
+
+	div[property^="ext:insert"],
+	div[property^="ext:insert"],
+	[data-flagged-remove="complete"],
+	[data-flagged-remove="complete"] {
+		background-color: $primary-yellow;
+		color: $black;
+
+		&:after {
+			content: "Informatie ontbreekt";
+			border-right: 4px solid $primary-yellow;
+		}
+	}
+}
+
+.behandeling-preview div[property^="ext:insert"],
+.steps div[property^="ext:insert"] {
+	position: relative;
+}
+
+.behandeling-preview [data-flagged-remove="complete"]:before,
+.steps [data-flagged-remove="complete"]:before {
+	content: "Leeg veld";
+	font-weight: 300;
+	color: $gray;
+}
+
+/* Behandeling preview publicatie
+ ========================================================================== */
+
+.behandeling-preview {
+
+	[data-flagged-remove="complete"]:before,
+	div[property^="ext:insert"] {
+		background-color: $primary-yellow;
+	}
+
+	&.editor__paper span.mark-highlight-manual {
+		background-color: $white;
+	}
+
+	* {
+		pointer-events: none;
+	}
+
+	.behandeling-preview--niet-publiek > {
+
+		div[property^="ext:insert"] {
+			display: none;
+		}
+
+		* {
+			display: none;
+		}
+
+		[property="besluit:gebeurtNa"] + span,
+		[property="besluit:openbaar"] {
+			display: inline-block;
+			margin-bottom: 1rem;
+		}
+
+		[property="prov:generated"] {
+			display: block;
+		}
+
+		[property="prov:generated"] > {
+
+			* {
+				display: none;
+			}
+
+			[property="dc:subject"],
+			[property="eli:title"],
+			[property="eli:description"] {
+				display: block;
+				margin-bottom: 1rem;
+			}
+
+		}
+	}
 }

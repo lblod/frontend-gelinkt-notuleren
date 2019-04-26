@@ -5,6 +5,7 @@ import Object from '@ember/object';
 
 export default Route.extend({
   ajax: inject(),
+
   async model(){
     const documentContainer = this.modelFor('documents.show');
     const document = await documentContainer.get('currentVersion');

@@ -13,19 +13,8 @@
 	  display: inline-block;
 
 	  &:hover {
-	  	// background-color: transparent;
 		  background-color: rgba($blue-gray, 0.2);
 	  	transition: all 200ms;
-
-	  	// &:after {
-	  	// 	content: " ";
-	  	// 	position: absolute;
-	  	// 	border: 1px dashed $blue-gray-light;
-	  	// 	top: -0.1rem;
-	  	// 	right: -0.6rem;
-	  	// 	bottom: -0.1rem;
-	  	// 	left: -0.6rem;
-	  	// }
 	  }
 
 		&:before {
@@ -33,7 +22,6 @@
 		}
 
 		&:hover:before {
-			// box-shadow: 1px 1px 3px $blue-gray-light;
 			font-size: 1.2rem;
 			font-weight: 500;
 			text-transform: uppercase;
@@ -138,24 +126,98 @@
 	}
 }
 
-[data-flagged-remove="almost-complete"],
-[data-flagged-remove="complete"] {
-  min-height: 1.6rem;
-  display: inline;
-  cursor: text !important;
-  background-color: rgba($primary-blue, 0.25) !important;
-  box-shadow: -2px 0 0 $primary-blue;
-}
+.rdfa-editor [typeof="besluit:Zitting"] {
+	[data-flagged-remove="almost-complete"],
+	[data-flagged-remove="complete"] {
+	  cursor: text;
+	  background-color: rgba($primary-blue, 0.25);
+	  box-shadow: -2px 0 0 $primary-blue;
 
-[data-flagged-remove="complete"] {
-  min-width: 8px;
-  display: inline-block;
-  box-shadow: -2px 0 0 black;
-}
+	  &:after {
+	  	content: "\000A0";
+	  }
+	}
 
-.annotation--edit {
-  [data-flagged-remove="almost-complete"],
-  [data-flagged-remove="complete"] {
-    background-color: transparent;
-  }
+	[data-flagged-remove="complete"],
+	[data-flagged-remove="complete"]:empty {
+		min-height: 1em;
+		min-width: 10em;
+		width: auto;
+
+		position: relative !important;
+		display: inline-block;
+
+		border: 0;
+	  box-shadow: -2px 0 0 black, 0 0.3rem 0 rgba($primary-blue, 0.25);
+		font-size: inherit;
+		transition: background-color 200ms;
+		line-height: inherit;
+
+		&:hover {
+			background-color: rgba($primary-blue, 0.15) !important;
+		}
+
+		&:before,
+		&:after {
+			color: mix($gray, $primary-blue, 70%);
+			transition: none;
+		}
+
+		&:hover:before,
+		&:hover:after {
+			color: mix($gray-lightest, $primary-blue);
+		}
+
+		&:after {
+			position: absolute;
+			content: "Vul in";
+			font-weight: 400;
+			width: 3em;
+			opacity: 1;
+			letter-spacing: inherit;
+			font-family: "flanders-sans", sans-serif;
+		}
+
+		&:before,
+		&:hover:before,
+		&:after {
+			left: 0 !important;
+			top: 0 !important;
+			font-size: inherit;
+			line-height: inherit;
+		}
+
+		&:before,
+		&:hover:before {
+			padding: 0 0 0 3em !important;
+			width: auto !important;
+			margin: 0 !important;
+
+			right: auto;
+			opacity: 1;
+			background-color: transparent;
+			border: 0;
+			box-shadow: none;
+			max-width: none;
+		}
+	}
+
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		&[data-flagged-remove="complete"],
+		&[data-flagged-remove="complete"]:empty {
+			display: block;
+			min-height: 1.2em;
+		}
+	}
+
+	li[data-flagged-remove="complete"] {
+		display: list-item;
+		min-height: 1.2em;
+	}
 }
