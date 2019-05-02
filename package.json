@@ -30,7 +30,6 @@
     "@lblod/ember-rdfa-editor-agenda-plugin": "^0.3.5",
     "@lblod/ember-rdfa-editor-bijzonder-comite-aanstelling-plugin": "^0.2.9",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.7.2",
-    "@lblod/ember-rdfa-editor-console-logger-plugin": "^0.6.2",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "^0.1.4",
     "@lblod/ember-rdfa-editor-date-overwrite-plugin": "^0.1.9",
     "@lblod/ember-rdfa-editor-date-plugin": "^0.7.8",
