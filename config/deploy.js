@@ -29,6 +29,7 @@ module.exports = function(deployTarget) {
   };
 
   if (deployTarget === 'futurenow') {
+    ENV.build.environment = 'development';
     ENV.rsync.dest = '/data/app-gelinkt-notuleren-dev/gelinkt-notuleren-futurenow-app';
     ENV['ssh-index'].remoteDir = '/data/app-gelinkt-notuleren-dev/gelinkt-notuleren-futurenow-app';
   }
