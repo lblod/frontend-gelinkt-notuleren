@@ -49,6 +49,7 @@
     "@lblod/ember-rdfa-editor-stemming-module-plugin": "^0.1.10",
     "@lblod/ember-rdfa-editor-template-variables-manager-plugin": "^0.2.0",
     "@lblod/ember-vo-tasklist": "^0.1.5",
+    "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "0.3.1",
     "@lblod/ember-vo-webuniversum": "^0.20.4",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.10",
     "@lblod/ember-vo-webuniversum-widget": "^0.1.2",
