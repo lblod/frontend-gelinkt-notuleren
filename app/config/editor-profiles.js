@@ -9,7 +9,7 @@ export default {
     "rdfa-editor-gemeenteraadsleden-aanstelling-plugin",
     "rdfa-editor-scoped-bestuursorgaan-plugin",
     "rdfa-editor-document-tasklist-plugin",
-//    "rdfa-editor-template-variables-manager-plugin",
+    "rdfa-editor-template-variables-manager-plugin",
     "rdfa-editor-date-overwrite-plugin",
     "rdfa-editor-date-manipulation-plugin",
     "rdfa-editor-document-title-plugin",
@@ -24,7 +24,7 @@ export default {
 
   //GEMEENTE
   "http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000001": [
-    "rdfa-editor-schepenen-aanstelling-plugin",
+//    "rdfa-editor-schepenen-aanstelling-plugin",
     "rdfa-editor-installatievergadering-plugin",
     "rdfa-editor-stemming-module-plugin",
     "rdfa-editor-aanwezigen-plugin",
@@ -33,7 +33,7 @@ export default {
     "rdfa-editor-gemeenteraadsleden-aanstelling-plugin",
     "rdfa-editor-scoped-bestuursorgaan-plugin",
     "rdfa-editor-document-tasklist-plugin",
-//    "rdfa-editor-template-variables-manager-plugin",
+    "rdfa-editor-template-variables-manager-plugin",
     "rdfa-editor-date-overwrite-plugin",
     "rdfa-editor-date-manipulation-plugin",
     "rdfa-editor-document-title-plugin",
@@ -55,7 +55,7 @@ export default {
     "rdfa-editor-scroll-to-plugin",
     "rdfa-editor-scoped-bestuursorgaan-plugin",
     "rdfa-editor-document-tasklist-plugin",
-//    "rdfa-editor-template-variables-manager-plugin",
+    "rdfa-editor-template-variables-manager-plugin",
     "rdfa-editor-date-overwrite-plugin",
     "rdfa-editor-date-manipulation-plugin",
     "rdfa-editor-document-title-plugin",
