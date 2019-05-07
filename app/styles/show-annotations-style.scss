@@ -113,6 +113,10 @@
 		background-color: $primary-yellow;
 	}
 
+	[data-editor-highlight="true"]:empty {
+		display: none;
+	}
+
   [typeof="besluit:Zitting"] {
     border: none;
     padding: 0;
