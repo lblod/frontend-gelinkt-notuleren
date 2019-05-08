@@ -5,8 +5,6 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(EditorDocumentBaseController, {
-  queryParams: ['scrollToLastSavePosition'],
-  scrollToLastSavePosition: null,
   store: service(),
   init() {
     this._super(...arguments);
@@ -14,8 +12,6 @@ export default Controller.extend(EditorDocumentBaseController, {
   },
 
   save: task(function *() {
-    let nearestNode = this.editor.currentNode.parentElement;
-    this.scrollToPlugin.addScrollToLocation(this.editor, nearestNode, 'last-save-position', true, false);
      let editorDocument = this.editorDocument;
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);
@@ -41,10 +37,6 @@ export default Controller.extend(EditorDocumentBaseController, {
      if(editor){
        this.set('editor', editor);
        this.set('editorDomNode', editor.get('rootNode'));
-       if(this.scrollToLastSavePosition && this.scrollToPlugin){
-         this.scrollToPlugin.scrollTo('last-save-position');
-       }
-       this.set('scrollToLastSavePosition', null);
        return;
      }
       this.set('editorDomNode', null);

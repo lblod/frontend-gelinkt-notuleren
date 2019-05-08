@@ -1,7 +1,9 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
-import { task } from 'ember-concurrency';
+import { task, waitForProperty } from 'ember-concurrency';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { warn } from '@ember/debug';
+import { computed } from '@ember/object';
 
 export default Controller.extend(EditorDocumentBaseController, {
   init() {
@@ -9,9 +11,12 @@ export default Controller.extend(EditorDocumentBaseController, {
     this.set('publicationUrl', ENV['publicatie']['baseUrl']);
   },
 
+  hasPerformedSaveAndTransitionToEditModeTask: computed('isTransitioningToEditRoute.performCount', function(){
+    return this.saveAndTransitionToEditMode.performCount > 0;
+  }),
+
   saveAndTransitionToEditMode: task(function * (){
     let nearestNode = this.editor.currentNode.parentElement;
-    this.scrollToPlugin.addScrollToLocation(this.editor, nearestNode, 'last-save-position', true, false);
      let editorDocument = this.editorDocument;
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);
@@ -19,7 +24,7 @@ export default Controller.extend(EditorDocumentBaseController, {
      }
     let savedDoc = yield this.saveEditorDocument.perform(editorDocument, this.getStatusFor('conceptStatusId'));
     const container = yield savedDoc.get('documentContainer');
-    this.transitionToRoute('editor-documents.edit', container.id, {queryParams: { scrollToLastSavePosition: true } });
+    this.transitionToRoute('editor-documents.edit', container.id);
   }),
 
   actions: {

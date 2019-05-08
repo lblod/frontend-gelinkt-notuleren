@@ -1,9 +1,9 @@
 {{app-chrome editorDocument=editorDocument
-   documentContainer=documentContainer
-   save=(action "save")
-   startSyncModal=null
-   publish=(action "publish")
-   sendToTrash=(action "sendToTrash")
+  documentContainer=documentContainer
+  save=(action "save")
+  startSyncModal=null
+  publish=(action "publish")
+  sendToTrash=(action "sendToTrash")
 }}
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
@@ -17,7 +17,7 @@
   {{/wu-modal}}
 {{/if}}
 
-{{#if saveIsRunning}}
+{{#if saveAndTransitionToEditMode.isRunning}}
 <div class="editor-container container-flex--scroll">
   <div class="editor">
     <div class="grid grid--align-center">
@@ -39,6 +39,17 @@
   </div>
 </div>
 {{else}}
-    {{rdfa-editor-container profile=profile editorDocument=editorDocument rdfaEditorContainerInit=(action "handleRdfaEditorInit") onUpdateTasklists=(action "updateTasklists")}}
+  {{!--
+     We don't want to rerender this component after having saved.
+     If it rerenders, while in transition to another route (edit-route), we have errors.
+     The component rerenders, the rdfa-editor-compoment rerenders too, it has async initialisation logic,
+     which works on an inconsistent state.
+   --}}
+  {{#unless hasPerformedSaveAndTransitionToEditModeTask}}
+    {{rdfa-editor-container
+      profile=profile
+      editorDocument=editorDocument
+      rdfaEditorContainerInit=(action "handleRdfaEditorInit") onUpdateTasklists=(action "updateTasklists")}}
+  {{/unless}}
 {{/if}}
 {{outlet}}

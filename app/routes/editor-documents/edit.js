@@ -6,8 +6,8 @@ export default Route.extend({
     const container = await this.store.findRecord('document-container', params.id, { include: 'status' });
     return RSVP.hash({
       documentContainer: container,
-      editorDocument: container.get('currentVersion'),
-      editorDocumentStatuses: this.store.findAll('editor-document-status')
+      editorDocument: await container.get('currentVersion'),
+      editorDocumentStatuses: await this.store.findAll('editor-document-status')
     });
   },
   actions: {
