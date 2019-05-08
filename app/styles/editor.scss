@@ -250,17 +250,68 @@
       padding-left: 0;
     }
 
+    ul,
+    ol {
+
+    	ol:before,
+	    ul:before {
+	    	content: "";
+	    	display: block;
+	    	position: absolute;
+	    	width: 1.5rem;
+	    	height: 1.5rem;
+	    	left: -2rem;
+	    	top: 0.5rem;
+	    	background-color: $white;
+	    	z-index: 1;
+	    }
+    }
 
     ol:not(.bullet-list):not(.numbered-list),
     ul:not(.bullet-list):not(.numbered-list) {
     	padding-left: 1.75em;
 
-    	li {
+    	> li {
     		list-style-type: initial;
     	}
     }
 
-    ol:not(.bullet-list):not(.numbered-list) li {
+    ul:not(.bullet-list):not(.numbered-list) li {
+
+    	> ul > li {
+    		list-style-type: circle;
+
+	    	> ul > li {
+	    		list-style-type: square;
+
+		    	> ul > li {
+		    		list-style-type: initial;
+
+			    	> ul > li {
+			    		list-style-type: circle;
+
+				    	> ul > li {
+				    		list-style-type: square;
+
+					    	> ul > li {
+					    		list-style-type: initial;
+
+						    	> ul > li {
+						    		list-style-type: circle;
+
+							    	> ul > li {
+							    		list-style-type: square;
+							    	}
+						    	}
+					    	}
+				    	}
+			    	}
+		    	}
+	    	}
+    	}
+    }
+
+    ol:not(.bullet-list):not(.numbered-list) > li {
     	list-style-type: decimal;
     }
 
