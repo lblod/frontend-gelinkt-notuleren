@@ -95,12 +95,6 @@
 
 	/* Make clear agenda and aanwezigen can be edited */
 
-	[property="ext:insertAanwezigenText"],
-	[property="ext:insertAgendaText"] {
-		position: relative;
-		display: block;
-	}
-
 	[property="ext:agendapuntenTable"],
 	[property="ext:aanwezigenTable"] {
 		position: relative;

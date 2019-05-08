@@ -84,7 +84,6 @@
   [property="besluit:behandelt"],
   [property="besluit:geplandeStart"],
   [property="prov:startedAtTime"],
-  // [typeof="bestuur:Bestuurseenheid"], tijdelijk vervangen door #isgehoudendoor ?
   [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"],
   [property="besluit:geplandeStart"],
   [property="prov:endedAtTime"],
@@ -209,7 +208,8 @@
 
   [property="persoon:gebruikteVoornaam"],
   [property="foaf:familyName"],
-  [property="mandaat:isBestuurlijkeAliasVan"] {
+  [property="mandaat:isBestuurlijkeAliasVan"],
+  [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"] {
   	display: inline-block;
   }
 
