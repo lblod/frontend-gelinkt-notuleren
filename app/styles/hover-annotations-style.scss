@@ -79,6 +79,14 @@
   /* -------------------- annotations styles for inline of annotations ------------------------- */
 
 .rdfa-editor {
+	span {
+		&[datatype],
+		&[property],
+		&[typeof] {
+			display: inline-block;
+		}
+	}
+
   [datatype="xsd:date"],
 
   [property="besluit:behandelt"],
@@ -139,7 +147,6 @@
     border-bottom: 1px solid rgba($blue-gray-light, 1);
     cursor: pointer;
     padding-bottom: 5px;
-    display: inline-block;
 
     &:hover {
       color: $black;
