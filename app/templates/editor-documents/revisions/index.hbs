@@ -21,12 +21,35 @@
         <td>{{revision.updatedOn}}</td>
         <td>
           <button onclick={{action "details" revision}}>details</button>
-          <button onclick={{action "restore" revision}}>herstel</button>
+          <button onclick={{action "confirmRevisionsToRemove" revision}}>herstel</button>
         </td>
       </tr>
     {{/each}}
 
   </table>
+{{/if}}
+
+{{#if showConfirmationModal}}
+  {{#wu-modal
+  title="Wenst u de versiegeschiedenis aan te passen?"
+  dialog-class="modal-dialog--sectioned"
+  onClose=(action 'cancelConfirmRevisionsToRemove') as |m|}}
+    {{#m.content}}
+      Bij het aanpassen van de versiegeschiedenis, gaan de volgende versies onherroepelijk verloren:
+      <ul class="numbered-list">
+        {{#each revisionsToRemove as |revision|}}
+          <li>{{revision.title}}, gewijzigd op: {{revision.updatedOn}}</li>
+        {{/each}}
+      </ul>
+      <br>
+    {{/m.content}}
+    <div class="modal-dialog__footer">
+      {{#m.buttons as |b|}}
+        {{b.button label="Pas versiegeschiedenis aan" onClick=(action 'restore')}}
+        {{b.button label="Annuleer" onClick=(action 'cancelConfirmRevisionsToRemove') isLink=true icon="vi-cross"}}
+      {{/m.buttons}}
+    </div>
+  {{/wu-modal}}
 {{/if}}
 
 {{outlet}}

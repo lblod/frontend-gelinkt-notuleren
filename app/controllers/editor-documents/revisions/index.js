@@ -4,6 +4,10 @@ import { A } from '@ember/array';
 
 export default Controller.extend({
 
+  showConfirmationModal: false,
+  revisionToRemove: null,
+  revisionsToRemove: null,
+
   fetchRevisions: task(function * () {
     let currDocument = this.model.editorDocument;
     let revisions = A([ currDocument ]);
@@ -15,11 +19,16 @@ export default Controller.extend({
     this.set('orderedRevisions', revisions);
   }),
 
-  cleanUpFutureVersions: task(function * (revision) {
+  setNewRevisionHistory: task(function * (revisionsToRemove, revision) {
     this.model.documentContainer.set('currentVersion', revision);
     yield this.model.documentContainer.save();
     this.set('model.editorDocument', revision);
+    yield Promise.all(revisionsToRemove.map( r => r.destroyRecord()));;
+    this.orderedRevisions.removeObjects(revisionsToRemove);
+    this.flushThingsToRemove();
+  }),
 
+  getRevisionsToRemove(revision){
     let revisionsToRemove = A();
 
     for(let r of this.orderedRevisions){
@@ -27,13 +36,29 @@ export default Controller.extend({
       revisionsToRemove.pushObject(r);
     }
 
-    yield Promise.all(revisionsToRemove.map( r => r.destroyRecord()));;
-    this.orderedRevisions.removeObjects(revisionsToRemove);
-  }),
+    return revisionsToRemove;
+  },
+
+  flushThingsToRemove(){
+    this.set('showConfirmationModal', false);
+    this.set('revisionToRemove', null);
+    this.set('revisionsToRemove', null);
+  },
 
   actions: {
-    restore(revision){
-      this.cleanUpFutureVersions.perform(revision);
+
+    cancelConfirmRevisionsToRemove(){
+      this.flushThingsToRemove();
+    },
+
+    confirmRevisionsToRemove(revision){
+      this.set('showConfirmationModal', true);
+      this.set('revisionsToRemove', this.getRevisionsToRemove(revision));
+      this.set('revisionToRemove', revision);
+    },
+
+    restore(){
+      this.setNewRevisionHistory.perform(this.revisionsToRemove, this.revisionToRemove);
     },
 
     details(revision){
