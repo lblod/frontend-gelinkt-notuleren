@@ -3,53 +3,59 @@
 <h3>Laatst gewijzigd: {{model.editorDocument.updatedOn}}</h3>
 <button onclick={{action "back"}}>terug naar document</button>
 
-
-{{#if fetchRevisions.isRunning}}
-  Aan het laden...
-
-{{else}}
-  <table style="width:100%">
-    <tr>
-      <th>Titel</th>
-      <th>Laatst gewijzigd</th>
-      <th>Actie</th>
-    </tr>
-
-    {{#each orderedRevisions as |revision|}}
-      <tr>
-        <td>{{revision.title}}</td>
-        <td>{{revision.updatedOn}}</td>
-        <td>
-          <button onclick={{action "details" revision}}>details</button>
-          <button onclick={{action "confirmRevisionsToRemove" revision}}>herstel</button>
-        </td>
-      </tr>
-    {{/each}}
-
-  </table>
-{{/if}}
-
-{{#if showConfirmationModal}}
-  {{#wu-modal
-  title="Wenst u de versiegeschiedenis aan te passen?"
-  dialog-class="modal-dialog--sectioned"
-  onClose=(action 'cancelConfirmRevisionsToRemove') as |m|}}
-    {{#m.content}}
-      Bij het aanpassen van de versiegeschiedenis, gaan de volgende versies onherroepelijk verloren:
-      <ul class="numbered-list">
-        {{#each revisionsToRemove as |revision|}}
-          <li>{{revision.title}}, gewijzigd op: {{revision.updatedOn}}</li>
-        {{/each}}
-      </ul>
-      <br>
-    {{/m.content}}
-    <div class="modal-dialog__footer">
-      {{#m.buttons as |b|}}
-        {{b.button label="Pas versiegeschiedenis aan" onClick=(action 'restore')}}
-        {{b.button label="Annuleer" onClick=(action 'cancelConfirmRevisionsToRemove') isLink=true icon="vi-cross"}}
-      {{/m.buttons}}
+<div style="width: 100%; float:left;">
+  {{#if revisionDetail}}
+    <div style="width: 55%; float:left;">
+      {{{ revisionDetail.content }}}
     </div>
-  {{/wu-modal}}
-{{/if}}
+  {{/if}}
+  <div style="float:left {{unless revisionDetail 'width:100%;'}}">
+    {{#if fetchRevisions.isRunning}}
+      Aan het laden...
+    {{else}}
+      <table>
+        <tr>
+          <th>Titel</th>
+          <th>Laatst gewijzigd</th>
+          <th>Actie</th>
+        </tr>
 
+        {{#each orderedRevisions as |revision|}}
+          <tr>
+            <td>{{revision.title}}</td>
+            <td>{{revision.updatedOn}}</td>
+            <td>
+              <button onclick={{action "details" revision}}>details</button>
+              <button onclick={{action "confirmRevisionsToRemove" revision}}>herstel</button>
+            </td>
+          </tr>
+        {{/each}}
+
+      </table>
+    {{/if}}
+
+    {{#if showConfirmationModal}}
+      {{#wu-modal
+      title="Wenst u de versiegeschiedenis aan te passen?"
+      dialog-class="modal-dialog--sectioned"
+      onClose=(action 'cancelConfirmRevisionsToRemove') as |m|}}
+        {{#m.content}}
+          Bij het aanpassen van de versiegeschiedenis, gaan de volgende versies onherroepelijk verloren:
+          <ul class="numbered-list">
+            {{#each revisionsToRemove as |revision|}}
+              <li>{{revision.title}}, gewijzigd op: {{revision.updatedOn}}</li>
+            {{/each}}
+          </ul>
+          <br>
+        {{/m.content}}
+        <div class="modal-dialog__footer">
+          {{#m.buttons as |b|}}
+            {{b.button label="Pas versiegeschiedenis aan" onClick=(action 'restore')}}
+            {{b.button label="Annuleer" onClick=(action 'cancelConfirmRevisionsToRemove') isLink=true icon="vi-cross"}}
+          {{/m.buttons}}
+        </div>
+      {{/wu-modal}}
+    {{/if}}
+  </div>
+</div>
 {{outlet}}

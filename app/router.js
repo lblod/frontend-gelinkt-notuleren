@@ -15,7 +15,6 @@ Router.map(function() {
 
     this.route('revisions', { path: '/:id/revisions' }, function() {
       this.route('index', { path: '/' });
-      this.route('details', { path: '/:document_id/details' });
     });
   });
   this.route('inbox', function() {

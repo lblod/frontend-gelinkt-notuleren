@@ -7,6 +7,7 @@ export default Controller.extend({
   showConfirmationModal: false,
   revisionToRemove: null,
   revisionsToRemove: null,
+  revisionDetail: null,
 
   fetchRevisions: task(function * () {
     let currDocument = this.model.editorDocument;
@@ -43,6 +44,7 @@ export default Controller.extend({
     this.set('showConfirmationModal', false);
     this.set('revisionToRemove', null);
     this.set('revisionsToRemove', null);
+    this.set('revisionDetail', null);
   },
 
   actions: {
@@ -62,7 +64,11 @@ export default Controller.extend({
     },
 
     details(revision){
-      this.transitionToRoute('editor-documents.revisions.details', revision.id);
+      this.set('revisionDetail', revision);
+    },
+
+    cancelDetails(){
+      this.set('revisionDetail', null);
     },
 
     back(revision){
