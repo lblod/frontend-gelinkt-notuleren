@@ -12,6 +12,11 @@ Router.map(function() {
     this.route('new');
     this.route('show', { path: '/:id/show' });
     this.route('raw', { path: '/:id/raw' });
+
+    this.route('revisions', { path: '/:id/revisions' }, function() {
+      this.route('index', { path: '/' });
+      this.route('details', { path: '/:document_id/details' });
+    });
   });
   this.route('inbox', function() {
     this.route('archive');

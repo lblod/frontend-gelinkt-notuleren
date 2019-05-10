@@ -1,0 +1,32 @@
+<h1>Versiegeschiedenis van document</h1>
+<h2>"{{model.editorDocument.title}}"</h2>
+<h3>Laatst gewijzigd: {{model.editorDocument.updatedOn}}</h3>
+<button onclick={{action "back"}}>terug naar document</button>
+
+
+{{#if fetchRevisions.isRunning}}
+  Aan het laden...
+
+{{else}}
+  <table style="width:100%">
+    <tr>
+      <th>Titel</th>
+      <th>Laatst gewijzigd</th>
+      <th>Actie</th>
+    </tr>
+
+    {{#each orderedRevisions as |revision|}}
+      <tr>
+        <td>{{revision.title}}</td>
+        <td>{{revision.updatedOn}}</td>
+        <td>
+          <button onclick={{action "details" revision}}>details</button>
+          <button onclick={{action "restore" revision}}>herstel</button>
+        </td>
+      </tr>
+    {{/each}}
+
+  </table>
+{{/if}}
+
+{{outlet}}
