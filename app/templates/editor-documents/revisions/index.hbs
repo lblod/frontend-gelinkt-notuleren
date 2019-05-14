@@ -1,61 +1,91 @@
-<h1>Versiegeschiedenis van document</h1>
-<h2>"{{model.editorDocument.title}}"</h2>
-<h3>Laatst gewijzigd: {{model.editorDocument.updatedOn}}</h3>
-<button onclick={{action "back"}}>terug naar document</button>
-
-<div style="width: 100%; float:left;">
-  {{#if revisionDetail}}
-    <div style="width: 55%; float:left;">
-      {{{ revisionDetail.content }}}
-    </div>
-  {{/if}}
-  <div style="float:left {{unless revisionDetail 'width:100%;'}}">
-    {{#if fetchRevisions.isRunning}}
-      Aan het laden...
-    {{else}}
-      <table>
-        <tr>
-          <th>Titel</th>
-          <th>Laatst gewijzigd</th>
-          <th>Actie</th>
-        </tr>
-
-        {{#each orderedRevisions as |revision|}}
-          <tr>
-            <td>{{revision.title}}</td>
-            <td>{{revision.updatedOn}}</td>
-            <td>
-              <button onclick={{action "details" revision}}>details</button>
-              <button onclick={{action "confirmRevisionsToRemove" revision}}>herstel</button>
-            </td>
-          </tr>
-        {{/each}}
-
-      </table>
-    {{/if}}
-
-    {{#if showConfirmationModal}}
-      {{#wu-modal
-      title="Wenst u de versiegeschiedenis aan te passen?"
-      dialog-class="modal-dialog--sectioned"
-      onClose=(action 'cancelConfirmRevisionsToRemove') as |m|}}
-        {{#m.content}}
-          Bij het aanpassen van de versiegeschiedenis, gaan de volgende versies onherroepelijk verloren:
-          <ul class="numbered-list">
-            {{#each revisionsToRemove as |revision|}}
-              <li>{{revision.title}}, gewijzigd op: {{revision.updatedOn}}</li>
-            {{/each}}
-          </ul>
-          <br>
-        {{/m.content}}
-        <div class="modal-dialog__footer">
-          {{#m.buttons as |b|}}
-            {{b.button label="Pas versiegeschiedenis aan" onClick=(action 'restore')}}
-            {{b.button label="Annuleer" onClick=(action 'cancelConfirmRevisionsToRemove') isLink=true icon="vi-cross"}}
-          {{/m.buttons}}
-        </div>
-      {{/wu-modal}}
-    {{/if}}
-  </div>
+<div class="editor-chrome">
+	<div class="u-spacer--small">
+		{{#wu-link-button isSmall=true isNarrow=true isDarkLink=true isLink=true onClick=(action "back")}}
+			&leftarrow; Terug naar laatste versie document
+	  {{/wu-link-button}}
+	</div>
+  <div class="grid">
+  	<div class="col--6-12 col--8-12--m col--12-12--s">
+			<h1 class="h4 u-spacer--tiny">Versiegeschiedenis {{model.editorDocument.title}}</h1>
+			<p class="small text-fade u-spacer--tiny">Laatst opgeslagen: {{moment-calendar model.editorDocument.updatedOn}} ({{model.editorDocument.updatedOn}})</p>
+		</div>
+	</div>
 </div>
+<div class="container-flex--contain">
+	<div class="grid grid--collapse">
+	  <div class="col--3-12 col--4-12--m col--6-12--s u-border--right">
+	  	<div class="container-flex--scroll">
+		    <div class="u-padding--round--small">
+	        {{!-- <h3 class="title--alt small u-spacer--none">Opgeslagen documentversies</h3> --}}
+			    {{#if fetchRevisions.isRunning}}
+			      Aan het laden...
+			    {{else}}
+		        {{#each orderedRevisions as |revision|}}
+							<div class="u-hr u-padding--bottom--small u-spacer--small">
+	            	<h4 class="h5 u-spacer--tiny">Versie van {{moment-calendar revision.updatedOn}}</h4>
+	            	<p class="small text-fade u-spacer--small">{{revision.updatedOn}}</p>
+	            	{{#wu-button-group}}
+	    						{{#wu-button isTiny="true" isNarrow="true" onClick=(action "details" revision) }}
+	    							<i class="fa fa-eye"></i> Bekijk versie
+	    						{{/wu-button}}
+	    						{{#wu-button isTiny="true" isAlt="true" isNarrow="true" onClick=(action "confirmRevisionsToRemove" revision) }}
+	    							<i class="fa fa-rotate-left"></i> Herstel versie
+	    						{{/wu-button}}
+								{{/wu-button-group}}
+							</div>
+		        {{/each}}
+			    {{/if}}
+			  </div>
+			</div>
+		</div>
+    <div class="col--9-12 col--8-12--m col--6-12--s">
+    	<div class="container-flex--scroll">
+	  		{{#if revisionDetail}}
+		  		<div class="editor">
+		    		<div class="u-padding--round">
+		    			<div class="editor__paper">
+					      {{{ revisionDetail.content }}}
+					    </div>
+				    </div>
+				  </div>
+			  {{else}}
+			  	<div class="u-padding--round">
+			  		<p class="text-fade">
+			  			Klik op "Bekijk documentversie" om de inhoud van een opgeslagen versie te bekijken.
+			  		</p>
+			  	</div>
+			  {{/if}}
+	    </div>
+    </div>
+	</div>
+</div>
+
+{{#if showConfirmationModal}}
+  {{#wu-modal
+  title="Bent u zeker dat u deze versie wil herstellen?"
+  dialog-class="modal-dialog--sectioned"
+  onClose=(action 'cancelConfirmRevisionsToRemove') as |m|}}
+    {{#m.content}}
+    	{{#if revisionsToRemove}}
+   			<p class="u-spacer--small">Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:</p>
+    		<ul class="numbered-list">
+	        {{#each revisionsToRemove as |revision|}}
+	          <li class="u-hr u-padding--bottom--small">
+	          	Versie van {{moment-calendar revision.updatedOn}}
+	          	<p class="text-fade">{{revision.title}}</p>
+	          </li>
+	        {{/each}}
+	      </ul>
+      {{else}}
+      	<p class="text-fade">Geen nieuwere versies om weer te geven.</p>
+      {{/if}}
+    {{/m.content}}
+    <div class="modal-dialog__footer">
+      {{#m.buttons as |b|}}
+        {{b.button label="Herstel versie en verwerp nieuwere versies" isNarrow=true isWarning=true onClick=(action 'restore')}}
+        {{b.button label="Annuleer" onClick=(action 'cancelConfirmRevisionsToRemove') isLink=true icon="vi-cross"}}
+      {{/m.buttons}}
+    </div>
+  {{/wu-modal}}
+{{/if}}
 {{outlet}}
