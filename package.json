@@ -80,7 +80,7 @@
     "ember-cli-string-helpers": "^1.7.0",
     "ember-cli-template-lint": "^1.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
-    "ember-cli-update": "^0.21.3",
+    "ember-cli-update": "^0.34.10",
     "ember-composable-helpers": "^2.1.0",
     "ember-data": "~3.4.0",
     "ember-export-application-global": "^2.0.0",
@@ -105,7 +105,7 @@
     "node": "6.* || 8.* || >= 10.*"
   },
   "dependencies": {
-    "@lblod/marawa": "^0.2.0",
+    "@lblod/marawa": "^0.3.3",
     "eslint-plugin-ie11": "^1.0.0"
   }
 }
