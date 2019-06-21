@@ -142,6 +142,10 @@
       display: block;
     }
 
+		em {
+			font-style: italic;
+		}
+
 		[typeof="besluit:Agendapunt"] {
 			margin-bottom: 0.5rem;
 		}
