@@ -12,6 +12,6 @@ module('Integration | Helper | behandeling-subject', function(hooks) {
 
     await render(hbs`{{behandeling-subject inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), '1234');
+    assert.dom(this.element).hasText('1234');
   });
 });
