@@ -1,7 +1,6 @@
 import { schedule } from '@ember/runloop';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import  { computed } from '@ember/object';
 import { task } from 'ember-concurrency';
 
 export default Component.extend({
@@ -11,29 +10,18 @@ export default Component.extend({
   overruledTitle: '',
   generatedTitle: '',
 
-  title: computed('overruledTitle', 'generatedTitle', function(){
-    /* TODO: why isn't this an observer ? */
-    if(this.overruledTitle.length > 0){
+  titleObserver: task(function *(){  // eslint-disable-line require-yield
+    if (this.titlePlugin)
+      this.set('generatedTitle', this.titlePlugin.title);
+    if (this.overruledTitle && this.overruledTitle.length > 0 ) {
       this.set('editorDocument.title', this.overruledTitle);
-      this.set('overruledTitle', '');
-      return this.editorDocument.title;
     }
-
-    if(this.generatedTitle.length > 0){
-      this.set('overruledTitle', '');
-      this.set('editorDocument.title', this.generatedTitle);
+    else if (this.titlePlugin && this.titlePlugin.title.length > 0) {
+      this.set('editorDocument.title', this.titlePlugin.title);
     }
-
-    if(this.overruledTitle.length == 0 && this.generatedTitle.length == 0){
+    else {
       this.set('editorDocument.title', 'Naamloos document');
     }
-
-    return this.editorDocument.title;
-
-  }),
-
-  titleObserver: task(function *(){  // eslint-disable-line require-yield
-    this.set('generatedTitle', this.titlePlugin.title);
   }).keepLatest(),
 
   didReceiveAttrs(){
@@ -45,12 +33,16 @@ export default Component.extend({
   },
 
   actions:{
+    updateTitle(){
+    },
     toggleActive(){
       this.set('active', !this.active);
-
-      if (this.active) {
-        this.set('overruledTitle', this.editorDocument.title);
+      if (this.active)
         schedule('afterRender', () => this.$('input').focus());
+      else {
+        this.set('overruledTitle', this.editorDocument.title);
+        if (this.generatedTitle.length > 0 && this.overruledTitle.length === 0)
+          this.set('editorDocument.title', this.generatedTitle);
       }
    }
   }

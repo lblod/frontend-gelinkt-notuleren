@@ -1,8 +1,7 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
-import { task, waitForProperty } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
-import { warn } from '@ember/debug';
 import { computed } from '@ember/object';
 
 export default Controller.extend(EditorDocumentBaseController, {
@@ -16,7 +15,6 @@ export default Controller.extend(EditorDocumentBaseController, {
   }),
 
   saveAndTransitionToEditMode: task(function * (){
-    let nearestNode = this.editor.currentNode.parentElement;
      let editorDocument = this.editorDocument;
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);

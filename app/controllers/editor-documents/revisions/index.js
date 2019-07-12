@@ -24,7 +24,7 @@ export default Controller.extend({
     this.model.documentContainer.set('currentVersion', revision);
     yield this.model.documentContainer.save();
     this.set('model.editorDocument', revision);
-    yield Promise.all(revisionsToRemove.map( r => r.destroyRecord()));;
+    yield Promise.all(revisionsToRemove.map( r => r.destroyRecord()));
     this.orderedRevisions.removeObjects(revisionsToRemove);
     this.flushThingsToRemove();
   }),
@@ -71,7 +71,7 @@ export default Controller.extend({
       this.set('revisionDetail', null);
     },
 
-    back(revision){
+    back(){
       this.transitionToRoute('editor-documents.edit', this.model.documentContainer.id);
     }
   }
