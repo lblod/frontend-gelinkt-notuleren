@@ -45,7 +45,7 @@
     "@lblod/ember-rdfa-editor-schepenen-aanstelling-plugin": "0.1.8",
     "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "0.3.4",
     "@lblod/ember-rdfa-editor-scroll-to-plugin": "0.2.0",
-    "@lblod/ember-rdfa-editor-standard-template-plugin": "0.6.6",
+    "@lblod/ember-rdfa-editor-standard-template-plugin": "0.7.1",
     "@lblod/ember-rdfa-editor-stemming-module-plugin": "0.1.11",
     "@lblod/ember-rdfa-editor-template-variables-manager-plugin": "0.2.1",
     "@lblod/ember-vo-tasklist": "0.1.5",
