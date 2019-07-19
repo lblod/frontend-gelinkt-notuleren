@@ -10,7 +10,9 @@
   {{#if (is-pending mockBehandelingen)}}
     <div>Aan het laden...</div>
   {{else}}
-    {{{zittingWrapper}}}
+  	<div class="document-publish">
+	    {{{zittingWrapper}}}
+	  </div>
     {{#if zittingWrapper}}
       {{#ember-wormhole to=behandelingContainerId}}
         {{signatures/notulen/behandelingen-list
