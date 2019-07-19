@@ -52,6 +52,8 @@
 		}
 	}
 
+	/* Highlight to-be-filled-out */
+
 	[property="ext:agendapuntenTable"],
 	[property="ext:aanwezigenTable"],
 	.mark-highlight-manual,
@@ -120,6 +122,8 @@
 		content: "Aanwezigenbeheer";
 	}
 }
+
+/* Flag removing annotations */
 
 .rdfa-editor [typeof="besluit:Zitting"] {
 	[data-flagged-remove="almost-complete"],
