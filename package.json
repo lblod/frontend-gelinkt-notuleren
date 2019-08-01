@@ -44,9 +44,10 @@
     "@lblod/ember-rdfa-editor-stemming-module-plugin": "0.1.11",
     "@lblod/ember-rdfa-editor-template-variables-manager-plugin": "0.2.1",
     "@lblod/ember-vo-tasklist": "0.1.5",
-    "@lblod/ember-vo-webuniversum": "^0.21.4",
+    "@lblod/ember-vo-webuniversum": "^0.22.1",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.10",
     "@lblod/ember-vo-webuniversum-widget": "^0.1.2",
+    "@lblod/marawa": "^0.4.1",
     "broccoli-asset-rev": "^3.0.0",
     "ember-ajax": "^5.0.0",
     "ember-auto-import": "^1.2.8",
@@ -76,6 +77,7 @@
     "ember-cli-uglify": "^2.1.0",
     "ember-cli-update": "^0.34.10",
     "ember-composable-helpers": "^2.1.0",
+    "ember-concurrency": "^1.0.0",
     "ember-data": "~3.10.0",
     "ember-export-application-global": "^2.0.0",
     "ember-load": "0.0.15",
@@ -89,6 +91,7 @@
     "ember-resolver": "^5.0.1",
     "ember-source": "~3.10.0",
     "ember-wormhole": "^0.5.4",
+    "eslint-plugin-ie11": "^1.0.0",
     "eslint-plugin-ember": "^6.2.0",
     "eslint-plugin-node": "^9.0.1",
     "loader.js": "^4.7.0",
@@ -99,8 +102,5 @@
   "engines": {
     "node": "8.* || >= 10.*"
   },
-  "dependencies": {
-    "@lblod/marawa": "^0.4.1",
-    "eslint-plugin-ie11": "^1.0.0"
-  }
+  "dependencies": {}
 }
