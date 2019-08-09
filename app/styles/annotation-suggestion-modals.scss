@@ -3,11 +3,18 @@
   Style the modals here.
  ========================================================================== */
 
+.modal-dialog.modal-dialog--sectioned .modal-dialog__content {
+  max-height: 75vh;
+}
+
 /* temporary fix for multiple plugins triggered at once */
 
+	.annotation-suggestion__suggestion .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog {
 		max-height: 70vh;
 		overflow-y: auto;
+		display: block;
+		position: fixed;
 	}
 
 	.annotation-suggestion__suggestion .modal-dialog li .modal-dialog--temporary-fix {
@@ -38,24 +45,28 @@
 		}
 	}
 
+	.annotation-suggestion__suggestion .modal-dialog + .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog + .modal-dialog:not(.modal-dialog--temporary-fix) {
 	  right: 15rem !important;
 	  top: 22rem !important;
 	}
 
+	.annotation-suggestion__suggestion .modal-dialog .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
-	    top: 25rem;
+	    top: 25rem !important;
 	    right: -15rem;
 	}
 
+	.annotation-suggestion__suggestion .modal-dialog li + li .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
-	    right: 25rem;
+	    right: 25rem !important;
 	}
 
+	.annotation-suggestion__suggestion .modal-dialog li + li + li .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
@@ -63,6 +74,7 @@
 	    right: -15rem;
 	}
 
+	.annotation-suggestion__suggestion .modal-dialog li + li + li + li .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
@@ -70,6 +82,7 @@
 	    right: 25rem;
 	}
 
+	.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;

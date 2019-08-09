@@ -21,32 +21,32 @@
 
 /* spans in link lists replacing data */
 
-li.link-list__item span {
-	display: block;
-	padding: 1rem 1.5rem;
-}
+// li.link-list__item span {
+// 	display: block;
+// 	padding: 1rem 1.5rem;
+// }
 
-li.link-list__item > button.button {
-	padding: 1rem 1.5rem;
-	background-color: transparent;
-	color: $primary-blue;
-	border: none;
-	height: auto;
-	display: block;
-	width: 100%;
-	text-align: left;
-  white-space: initial;
-  line-height: 1.4;
+// li.link-list__item > button.button {
+// 	padding: 1rem 1.5rem;
+// 	background-color: transparent;
+// 	color: $primary-blue;
+// 	border: none;
+// 	height: auto;
+// 	display: block;
+// 	width: 100%;
+// 	text-align: left;
+//   white-space: initial;
+//   line-height: 1.4;
 
-	&:hover {
-		background-color: $blue-gray-lightest;
-	}
+// 	&:hover {
+// 		background-color: $blue-gray-lightest;
+// 	}
 
-	&.button--disabled {
-		color: $gray;
-		pointer-events: none;
-	}
-}
+// 	&.button--disabled {
+// 		color: $gray;
+// 		pointer-events: none;
+// 	}
+// }
 
 /* ember data table red color override */
 
@@ -114,10 +114,6 @@ input.input-field {
 
 .data-table th .button {
   font-weight: normal;
-}
-
-.modal-dialog.modal-dialog--sectioned .modal-dialog__content {
-  max-height: 75vh;
 }
 
 .data-table--white tr {

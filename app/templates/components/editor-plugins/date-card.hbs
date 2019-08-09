@@ -1,95 +1,45 @@
-<div class="modal-dialog modal-dialog--small">
-	<! -- SORRY MIET HACK ALERT !!! -->
+<Say::Hint @size="small" @type="sectioned" as |hint|>
 	{{#if isDateTime }}
-		<div class="modal-dialog__header">
-	    <div class="grid">
-	      <div class="col--10-12">
-				  <p class="u-spacer--tiny">
-	        	Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in. Geef een tijdstip mee:
-				  </p>
-	      </div>
-{{!-- 	      <div class="col--2-12 u-align-right">
-	        <a class="link--icon--close" href="#">
-	          <span class="u-visually-hidden">Venster sluiten</span>
-	        </a>
-	      </div> --}}
-	    </div>
-		</div>
-
-		<div class="modal-dialog__content">
+	  <hint.header>
+	    Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in. Geef een tijdstip mee:
+	  </hint.header>
+	  <hint.content @padded="small">
 		  <form class="form">
 		    <div class="form__row">
-		      Tijdstip
-
 			    <div class="double-input js-double-input">
 			      <div class="double-input__inputs">
 			        <div class="double-input__input">
-			        	<label>
-			        		Uur
-		              {{input class="input-field input-field--block" placeholder="12" type="number" value=hour min=0 max=23}}
-			          </label>
+			        	<Say::Label>Tijdstip uur</Say::Label>
+		        		<Say::InputNumber @width="block" @type="number" @value={{this.hours}} @min="0" @max="24"></Say::InputNumber>
 			        </div>
 			        <div class="double-input__input">
-			        	<label>
-			        		Minuten
-		              {{input class="input-field input-field--block" placeholder="00" type="number" value=minutes min=0 max=59}}
-			          </label>
+			        	<Say::Label>minuten</Say::Label>
+		        		<Say::InputNumber @width="block" @type="number" @value={{this.minutes}} @min="0" @max="59"></Say::InputNumber>
 			        </div>
 			      </div>
 			    </div>
 		    </div>
 		  </form>
-		</div>
-
-		<div class="modal-dialog__footer">
-		  {{#wu-button-group}}
-		    {{wu-button
-		      label="Voeg toe"
-		      isNarrow=true
-		      onClick=(action "insertDateTime" info hour minutes)
-		    }}
-{{!-- 		    {{wu-button
-		      label="Annuleer (todo)"
-		      class="button--alt"
-		      isNarrow=true
-		      onClick=null
-		    }} --}}
-		  {{/wu-button-group}}
-		</div>
+	  </hint.content>
+	  <hint.footer>
+	  <Say::ActionGroup>
+			  <Say::Button @width="narrow" @onClick={{action "insertDateTime" info hours minutes}} @disabled={{this.isInvalidInput}}>Voeg annotatie toe</Say::Button>
+			  {{!-- <Say::Button @width="narrow" @style="alt" @onClick=null>Annuleer</Say::Button> --}}
+			</Say::ActionGroup>
+	  </hint.footer>
 
 	{{else}}
-
-		<div class="modal-dialog__header">
-	    <div class="grid">
-	      <div class="col--10-12">
-				  <p class="u-spacer--tiny">
-				    Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in.
-				  </p>
-	      </div>
-{{!-- 	      <div class="col--2-12 u-align-right">
-	        <a class="link--icon--close" href="#">
-	          <span class="u-visually-hidden">Venster sluiten</span>
-	        </a>
-	      </div> --}}
-	    </div>
-		</div>
-
-		<div class="modal-dialog__footer">
-		  {{#wu-button-group}}
-		    {{wu-button
-		      label="Voeg toe"
-		      isNarrow=true
-		      onClick=(action "insert" info)
-		    }}
-{{!-- 		    {{wu-button
-		      label="Annuleer"
-		      class="button--alt"
-		      isNarrow=true
-		      onClick=null
-		    }} --}}
-		  {{/wu-button-group}}
-		</div>
-
+	  <hint.header>
+	    Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in.
+	  </hint.header>
+	  <hint.footer>
+		  <Say::ActionGroup>
+			  <Say::Button @width="narrow" @onClick={{action "insert" info}} @disabled={{this.isInvalidInput}}>Voeg annotatie toe</Say::Button>
+			  {{!-- <Say::Button @width="narrow" @style="alt" @onClick=null>Verwerp wijzigingen</Say::Button> --}}
+			</Say::ActionGroup>
+	  </hint.footer>
 	{{/if}}
-	{{yield}}
-</div>
+
+</Say::Hint>
+
+{{yield}}
