@@ -1,45 +1,35 @@
 <Say::Hint @size="small" @type="sectioned" as |hint|>
 	{{#if isDateTime }}
-	  <hint.header>
+    <hint.header>
 	    Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in. Geef een tijdstip mee:
-	  </hint.header>
-	  <hint.content @padded="small">
-		  <form class="form">
-		    <div class="form__row">
-			    <div class="double-input js-double-input">
-			      <div class="double-input__inputs">
-			        <div class="double-input__input">
-			        	<Say::Label>Tijdstip uur</Say::Label>
-		        		<Say::InputNumber @width="block" @type="number" @value={{this.hours}} @min="0" @max="24"></Say::InputNumber>
-			        </div>
-			        <div class="double-input__input">
-			        	<Say::Label>minuten</Say::Label>
-		        		<Say::InputNumber @width="block" @type="number" @value={{this.minutes}} @min="0" @max="59"></Say::InputNumber>
-			        </div>
-			      </div>
-			    </div>
-		    </div>
-		  </form>
-	  </hint.content>
-	  <hint.footer>
-	  <Say::ActionGroup>
-			  <Say::Button @width="narrow" @onClick={{action "insertDateTime" info hours minutes}} @disabled={{this.isInvalidInput}}>Voeg annotatie toe</Say::Button>
+    </hint.header>
+    <hint.content @padded="small" as |content|>
+      <content.form @onSubmit={{action "insertDateTime"}} as |form|>
+        <form.time
+          @hours={{this.hours}} @onChangeHours={{fn (mut this.hours)}}
+          @minutes={{this.minutes}} @onChangeMinutes={{fn (mut this.minutes)}}
+        />
+	    </content.form>
+    </hint.content>
+    <hint.footer>
+	    <Say::ActionGroup>
+		    <Say::Button
+          @onClick={{action "insertDateTime"}}
+          @width="narrow" @disabled={{this.isInvalidInput}}>
+          Voeg annotatie toe
+        </Say::Button>
 			  {{!-- <Say::Button @width="narrow" @style="alt" @onClick=null>Annuleer</Say::Button> --}}
 			</Say::ActionGroup>
 	  </hint.footer>
-
 	{{else}}
-	  <hint.header>
-	    Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in.
-	  </hint.header>
-	  <hint.footer>
-		  <Say::ActionGroup>
-			  <Say::Button @width="narrow" @onClick={{action "insert" info}} @disabled={{this.isInvalidInput}}>Voeg annotatie toe</Say::Button>
-			  {{!-- <Say::Button @width="narrow" @style="alt" @onClick=null>Verwerp wijzigingen</Say::Button> --}}
-			</Say::ActionGroup>
-	  </hint.footer>
+    <hint.header>
+      Voeg <strong>{{info.plainValue}}</strong> als <strong>{{info.rdfaProperty.label}}</strong> in.
+    </hint.header>
+    <hint.footer>
+     	<Say::ActionGroup>
+     		<Say::Button @width="narrow" @onClick={{action "insertDate" info}} @disabled={{this.isInvalidInput}}>Voeg annotatie toe</Say::Button>
+     		{{!-- <Say::Button @width="narrow" @style="alt" @onClick=null>Verwerp wijzigingen</Say::Button> --}}
+     	</Say::ActionGroup>
+    </hint.footer>
 	{{/if}}
-
 </Say::Hint>
-
-{{yield}}
