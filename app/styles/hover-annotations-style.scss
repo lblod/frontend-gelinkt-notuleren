@@ -1,274 +1,316 @@
 
-/* ==========================================================================
-  Annotations
-  Style the annotations on hover here.
- ========================================================================== */
+// /* ==========================================================================
+//   Annotations
+//   Style the annotations on hover here.
+//  ========================================================================== */
 
-/* -------------------- annotations styles for big chunks of annotations ------------------------- */
 
-.rdfa-editor {
 
-  [typeof="besluit:Zitting"] > [property="dc:title"],
-
-  // [property="besluit:heeftAgenda"], temporary?
-  [typeof="besluit:Agenda"],
-  [typeof="besluit:BehandelingVanAgendapunt"],
-
-  [typeof="besluit:Besluit"],
-  [property="besluit:motivering"],
-  [property="prov:value"],
-
-  [typeof^="besluit:Besluit"],
-  [property="besluit:heeftStemming"]
-  {
-    background-color: transparent;
-    position: relative;
-    display: block;
-
-    &:before,
-    &:after {
-      opacity: 0;
-      position: absolute;
-      top: -999rem;
-      left: -2.2rem;
-      transition: left 200ms;
-    }
-
-    &:before {
-      font-size: 1.3rem;
-      font-family: flanders-sans, sans-serif;
-      color: $gray;
-      font-weight: 400;
-      line-height: 1.4;
-      background-color: rgba($white, 0.9);
-      border: 1px solid $blue-gray-lighter;
-      padding: 0.3rem 0.8rem 0.3rem 0.8rem;
-    }
-
-    &:after {
-      content: "";
-      bottom: -3px;
-      border-left: 2px solid $blue-gray-lighter;
-    }
-
-    &:hover:before,
-    &:hover:after {
-      top: -4rem;
-      opacity: 1;
-      left: -2rem;
-    }
-
-    &:hover:after {
-      left: -2rem;
-    }
-
-    // [property="besluit:Besluit"]
-
-    [property="prov:value"]:hover,
-    [property="besluit:motivering"]:hover,
-    [property="besluit:heeftStemming"]:hover
-    {
-      &:before,
-      &:after {
-        left: -1.1rem;
-      }
-    }
-  }
-}
-
-  /* -------------------- annotations styles for inline of annotations ------------------------- */
+// /* -------------------- annotations styles for big chunks of annotations ------------------------- */
 
 .rdfa-editor {
-	span {
-		&[datatype],
-		&[property],
-		&[typeof] {
-			display: inline;
-		}
+	[typeof="besluit:Zitting"],
+	[typeof="besluit:Agenda"],
+	[typeof="besluit:Artikel"],
+	[property="prov:value"],
+	[property="dc:title"],
+	[property="ext:behandelingVanAgendapuntenContainer"],
+	[property="ext:signatories"],
+	[property="ext:insertAanwezigenText"],
+	[property="ext:insertAgendaText"],
+	[data-editor-highlight="true"] {
+		position: relative;
 	}
 
-  [datatype="xsd:date"],
-
-  [property="besluit:behandelt"],
-  [property="besluit:geplandeStart"],
-  [property="prov:startedAtTime"],
-  [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"],
-  [property="besluit:geplandeStart"],
-  [property="prov:endedAtTime"],
-  [property="besluit:heeftAanwezigeBijStart"],
-  [property="ext:heeftAfwezigeBijStart"],
-  [property="besluit:heeftVoorzitter"],
-  [property="besluit:heeftSecretaris"],
-
-  [typeof="besluit:Agendapunt"],
-  [property="besluit:heeftAgendapunt"] [property="dc:title"],
-  [typeof="besluit:Agendapunt"] [property="dc:title"],
-
-  [property="eli:title"],
-  [property="dc:title"],
-  [property="ext:behandelt"] > [property="dc:subject"],
-  [property="eli:title_short"],
-  [property="eli:description"],
-  [property="eli:cites"],
-  [property="eli:has_part"],
-  [property="eli:number"],
-  [property="eli:artikel"],
-
-  [property="ext:bekrachtigtAanstellingVan"],
-  [property="ext:bekrachtigdOnverenigbaarheid"],
-  [property="ext:bekrachtigdAfwezigheidMetKennisGeving"],
-  [property="ext:bekrachtigdAfwezigheid"],
-  [property="ext:bekrachtigdAfstandVanMandaatDoor"],
-  [typeof="http://www.w3.org/ns/person#Person"],
-  [typeof="mandaat:Mandataris"],
-  [property="mandaat:isBestuurlijkeAliasVan"],
-	[property="persoon:gebruikteVoornaam"],
-	[property="foaf:familyName"],
-  [property="mandaat:start"],
-  [property="org:holds"],
-  [property="ext:secretarisTemporaryAsText"],
-
-  [property="besluit:geheim"],
-  [property="besluit:onderwerp"],
-  [property="besluit:gevolg"],
-  [property="besluit:aantalOnthouders"],
-  [property="besluit:aantalTegenstanders"],
-  [property="besluit:aantalVoorstanders"],
-  [property="besluit:heeftAanwezige"],
-  [property="besluit:heeftStemmer"],
-  [property="besluit:heeftOnthouder"],
-  [property="besluit:heeftTegenstander"],
-  [property="besluit:heeftVoorstander"],
-
-  [datatype="xsd:date"],
-  [typeof="besluit:Bestuurseenheid"],
-  [typeof="besluit:Bestuursorgaan"]
-  {
-    border-bottom: 1px solid rgba($blue-gray-light, 1);
-    cursor: pointer;
-    padding-bottom: 5px;
-
-    &:hover {
-      color: $black;
-      background-color: rgba($blue-gray, 0.2);
-    }
-
-    &:before {
-      position: absolute;
-      font-weight: 400;
-      font-size: 1.5rem;
-      width: 11rem;
-      color: $gray;
-      opacity: 0;
-      border: 1px solid $blue-gray-lighter;
-      background-color: $white;
-      padding: 0.5rem 0.7rem 0.4rem 1.4rem;
-      border-right: 0.5rem solid $primary-yellow;
-      box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
-      z-index: 901;
-      font-family: "flanders-sans", sans-serif;
-      transition: opacity 200ms;
-      top: -999rem;
-      left: -999rem;
-    }
-
-    &:hover:before {
-      opacity: 1;
-      top: 0;
-      left: auto;
-      right: -17.5rem;
-      margin-top: -2.2rem;
-    }
-
-    > [typeof],
-    > [property]:not([property="dc:subject"]) {
-      padding-bottom: 3px;
-
-      &:hover:before {
-        padding-left: 1rem;
-        right: -28.5rem;
-        width: 11rem;
-        margin-top: 0;
-      }
-
-      > [typeof],
-      > [property] {
-        padding-bottom: 2px;
-
-        &:hover:before {
-          margin-top: 4rem;
-          right: -28.5rem;
-        }
-
-        > [typeof],
-        > [property] {
-          padding-bottom: 0;
-
-          &:hover:before {
-            border-right: 1px solid $blue-gray-lighter;
-            margin-top: 10rem;
-            right: -28.5rem;
-          }
-        }
-      }
-    }
-  }
-
-  [property="persoon:gebruikteVoornaam"],
-  [property="foaf:familyName"],
-  [property="mandaat:isBestuurlijkeAliasVan"],
-  [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"] {
-  	display: inline-block;
-  }
-
-  [property="besluit:heeftStemming"],
-  [property="ext:behandelt"] {
-
-  	span.smaller,
-  	[property="mandaat:isBestuurlijkeAliasVan"],
-  	[property="besluit:heeftStemmer"],
-  	[property="besluit:heeftAanwezige"],
-  	[property="besluit:heeftVoorzitter"],
-  	[property="ext:secretarisTemporaryAsText"],
-  	[property="persoon:gebruikteVoornaam"],
-  	[property="foaf:familyName"],
-  	[property="org:holds"] {
-  		font-size: 12px !important;
-	  	line-height: 1 !important;
-	  	display: inline-block;
-	  	padding-bottom: 1px !important;
-  	}
-
-  }
+	[property="ext:signatories"],
+	[typeof="besluit:Artikel"],
+	[property="prov:value"] {
+		display: block;
+	}
 }
 
-.rdfa-editor .data-table {
-	[typeof],
-	[property] {
-		&:not(tr):not(td),
-		&:not(tr) {
-			display: inline !important;
-			border: none !important;
-			padding: 0 !important;
-			background-color: transparent !important;
-			margin: 0 !important;
-		}
-	}
+// .rdfa-editor {
 
-	tr {
-		display: table-row !important;
-	}
+//   [typeof="besluit:Zitting"] > [property="dc:title"],
 
-	td {
-		display: table-cell !important;
+//   // [property="besluit:heeftAgenda"], temporary?
+//   [typeof="besluit:Agenda"],
+//   [typeof="besluit:BehandelingVanAgendapunt"],
 
-		&.u-hidden {
-			display: none !important;
-		}
-	}
+//   [typeof="besluit:Besluit"],
+//   [property="besluit:motivering"],
+//   [property="prov:value"],
 
-  [typeof]:before,
-  [property]:before {
-    content: normal !important;
-  }
-}
+//   [typeof^="besluit:Besluit"],
+//   [property="besluit:heeftStemming"]
+//   {
+//     background-color: transparent;
+//     position: relative;
+//     display: block;
+
+//     &:before,
+//     &:after {
+//       opacity: 0;
+//       position: absolute;
+//       top: -999rem;
+//       left: -2.2rem;
+//       transition: left 200ms;
+//     }
+
+//     &:before {
+//       font-size: 1.3rem;
+//       font-family: flanders-sans, sans-serif;
+//       color: $gray;
+//       font-weight: 400;
+//       line-height: 1.4;
+//       background-color: rgba($white, 0.9);
+//       border: 1px solid $blue-gray-lighter;
+//       padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+//     }
+
+//     &:after {
+//       content: "";
+//       bottom: -3px;
+//       border-left: 2px solid $blue-gray-lighter;
+//     }
+
+//     &:hover:before,
+//     &:hover:after {
+//       top: -4rem;
+//       opacity: 1;
+//       left: -2rem;
+//     }
+
+//     &:hover:after {
+//       left: -2rem;
+//     }
+
+//     // [property="besluit:Besluit"]
+
+//     [property="prov:value"]:hover,
+//     [property="besluit:motivering"]:hover,
+//     [property="besluit:heeftStemming"]:hover
+//     {
+//       &:before,
+//       &:after {
+//         left: -1.1rem;
+//       }
+//     }
+//   }
+// }
+
+//   /* -------------------- annotations styles for inline of annotations ------------------------- */
+
+// // .rdfa-editor {
+// // 	span {
+// // 		&[datatype],
+// // 		&[property],
+// // 		&[typeof] {
+// // 			display: inline;
+// // 		}
+// // 	}
+
+// //   [datatype="xsd:date"],
+
+// //   [property="besluit:behandelt"],
+// //   [property="besluit:geplandeStart"],
+// //   [property="prov:startedAtTime"],
+// //   [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"],
+// //   [property="besluit:geplandeStart"],
+// //   [property="prov:endedAtTime"],
+// //   [property="besluit:heeftAanwezigeBijStart"],
+// //   [property="ext:heeftAfwezigeBijStart"],
+// //   [property="besluit:heeftVoorzitter"],
+// //   [property="besluit:heeftSecretaris"],
+
+// //   [typeof="besluit:Agendapunt"],
+// //   [property="besluit:heeftAgendapunt"] [property="dc:title"],
+// //   [typeof="besluit:Agendapunt"] [property="dc:title"],
+
+// //   [property="eli:title"],
+// //   [property="dc:title"],
+// //   [property="ext:behandelt"] > [property="dc:subject"],
+// //   [property="eli:title_short"],
+// //   [property="eli:description"],
+// //   [property="eli:cites"],
+// //   [property="eli:has_part"],
+// //   [property="eli:number"],
+// //   [property="eli:artikel"],
+
+// //   [property="ext:bekrachtigtAanstellingVan"],
+// //   [property="ext:bekrachtigdOnverenigbaarheid"],
+// //   [property="ext:bekrachtigdAfwezigheidMetKennisGeving"],
+// //   [property="ext:bekrachtigdAfwezigheid"],
+// //   [property="ext:bekrachtigdAfstandVanMandaatDoor"],
+// //   [typeof="http://www.w3.org/ns/person#Person"],
+// //   [typeof="mandaat:Mandataris"],
+// //   [property="mandaat:isBestuurlijkeAliasVan"],
+// // 	[property="persoon:gebruikteVoornaam"],
+// // 	[property="foaf:familyName"],
+// //   [property="mandaat:start"],
+// //   [property="org:holds"],
+// //   [property="ext:secretarisTemporaryAsText"],
+
+// //   [property="besluit:geheim"],
+// //   [property="besluit:onderwerp"],
+// //   [property="besluit:gevolg"],
+// //   [property="besluit:aantalOnthouders"],
+// //   [property="besluit:aantalTegenstanders"],
+// //   [property="besluit:aantalVoorstanders"],
+// //   [property="besluit:heeftAanwezige"],
+// //   [property="besluit:heeftStemmer"],
+// //   [property="besluit:heeftOnthouder"],
+// //   [property="besluit:heeftTegenstander"],
+// //   [property="besluit:heeftVoorstander"],
+
+// //   [datatype="xsd:date"],
+// //   [typeof="besluit:Bestuurseenheid"],
+// //   [typeof="besluit:Bestuursorgaan"]
+// //   {
+// //     // border-bottom: 1px solid rgba($blue-gray-light, 1);
+// //     // cursor: pointer;
+// //     // padding-bottom: 5px;
+
+// //     // &:hover {
+// //     //   color: $black;
+// //     //   background-color: rgba($blue-gray, 0.2);
+// //     // }
+
+// //    //  &:before {
+
+// // 			// /* positioning */
+// // 			// top: -999px;
+// // 			// opacity: 0;
+// // 			// position: absolute;
+// // 			// width: 11rem;
+// //    //    right: -17rem;
+// //    //    pointer-events: none;
+// //    //    text-align: left;
+// //    //    transition: opacity 200ms;
+// //    //    z-index: 901;
+
+// // 			// /* looks */
+// // 			// text-transform: uppercase;
+// // 			// letter-spacing: 1px;
+// // 			// font-weight: 600;
+// // 			// font-size: 1.4rem;
+// // 			// color: $blue-gray-dark;
+// // 			// line-height: 1.2;
+// //    //    font-family: "flanders-sans", sans-serif;
+
+// //    //    // position: absolute;
+// //    //    // font-weight: 400;
+// //    //    // font-size: 1.5rem;
+// //    //    // width: 11rem;
+// //    //    // color: $gray;
+// //    //    // opacity: 0;
+// //    //    // border: 1px solid $blue-gray-lighter;
+// //    //    // background-color: $white;
+// //    //    // padding: 0.5rem 0.7rem 0.4rem 1.4rem;
+// //    //    // border-right: 0.5rem solid $primary-yellow;
+// //    //    // box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
+// //    //    // font-family: "flanders-sans", sans-serif;
+// //    //    // top: -999rem;
+// //    //    // left: -999rem;
+// //    //  }
+
+// //     &:hover:before {
+// //       opacity: 1;
+// //       top: 0;
+// //       left: auto;
+// //       right: -17.5rem;
+// //       margin-top: -2.2rem;
+// //     }
+
+// //     > [typeof],
+// //     > [property]:not([property="dc:subject"]) {
+// //       padding-bottom: 3px;
+
+// //       &:hover:before {
+// //         // padding-left: 1rem;
+// //         right: -28.5rem;
+// //         width: 11rem;
+// //         margin-top: 0;
+// //       }
+
+// //       > [typeof],
+// //       > [property] {
+// //         padding-bottom: 2px;
+
+// //         &:hover:before {
+// //           margin-top: 4rem;
+// //           right: -28.5rem;
+// //         }
+
+// //         > [typeof],
+// //         > [property] {
+// //           padding-bottom: 0;
+
+// //           &:hover:before {
+// //             border-right: 1px solid $blue-gray-lighter;
+// //             margin-top: 10rem;
+// //             right: -28.5rem;
+// //           }
+// //         }
+// //       }
+// //     }
+// //   }
+
+// //   [property="persoon:gebruikteVoornaam"],
+// //   [property="foaf:familyName"],
+// //   [property="mandaat:isBestuurlijkeAliasVan"],
+// //   [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"] {
+// //   	display: inline-block;
+// //   }
+
+// //   [property="besluit:heeftStemming"],
+// //   [property="ext:behandelt"] {
+
+// //   	span.smaller,
+// //   	[property="mandaat:isBestuurlijkeAliasVan"],
+// //   	[property="besluit:heeftStemmer"],
+// //   	[property="besluit:heeftAanwezige"],
+// //   	[property="besluit:heeftVoorzitter"],
+// //   	[property="ext:secretarisTemporaryAsText"],
+// //   	[property="persoon:gebruikteVoornaam"],
+// //   	[property="foaf:familyName"],
+// //   	[property="org:holds"] {
+// //   		font-size: 12px !important;
+// // 	  	line-height: 1 !important;
+// // 	  	display: inline-block;
+// // 	  	padding-bottom: 1px !important;
+// //   	}
+
+// //   }
+// // }
+
+// .rdfa-editor .data-table {
+// 	[typeof],
+// 	[property] {
+// 		&:not(tr):not(td),
+// 		&:not(tr) {
+// 			display: inline !important;
+// 			border: none !important;
+// 			padding: 0 !important;
+// 			background-color: transparent !important;
+// 			margin: 0 !important;
+// 		}
+// 	}
+
+// 	tr {
+// 		display: table-row !important;
+// 	}
+
+// 	td {
+// 		display: table-cell !important;
+
+// 		&.u-hidden {
+// 			display: none !important;
+// 		}
+// 	}
+
+//   [typeof]:before,
+//   [property]:before {
+//     content: normal !important;
+//   }
+// }

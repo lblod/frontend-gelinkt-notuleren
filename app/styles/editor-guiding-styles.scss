@@ -9,82 +9,79 @@
 	span.mark-highlight-manual {
 	  background-color: rgba($blue-gray, 0.3);
 	  font-weight: 400;
-	  position: relative;
+	  // position: relative;
 	  display: inline-block;
 	  vertical-align: top;
 
-	  &:hover {
-		  background-color: rgba($blue-gray, 0.2);
-	  	transition: all 200ms;
+	  &:before {
+	  	opacity: 0;
+	  	content: "Vul in";
 	  }
 
-		&:before {
-			content: "Vul in";
-		}
+	  &:hover:before {
+	  	opacity: 1;
+	  }
 
-		&:hover:before {
-			font-size: 1.2rem;
-			font-weight: 500;
-			text-transform: uppercase;
-			letter-spacing: 1px;
-			left: 0;
-			right: auto;
-			width: auto;
-			background-color: $white;
-			top: -0.5em;
-			padding: 0.2rem 0.3rem 0.1rem;
-			border: 1px solid $blue-gray-lighter !important;
-			color: $gray-dark;
-		}
+	 //  &:hover {
+		//   background-color: rgba($blue-gray, 0.2);
+	 //  	transition: all 200ms;
+	 //  }
+
+		// &:before {
+		// 	content: "Vul in";
+		// }
+
+		// &:hover:before {
+		// 	font-size: 1.2rem;
+		// 	font-weight: 500;
+		// 	text-transform: uppercase;
+		// 	letter-spacing: 1px;
+		// 	left: 0;
+		// 	right: auto;
+		// 	width: auto;
+		// 	background-color: $white;
+		// 	top: -0.5em;
+		// 	padding: 0.2rem 0.3rem 0.1rem;
+		// 	border: 1px solid $blue-gray-lighter !important;
+		// 	color: $gray-dark;
+		// }
 	}
 
 	/* click to input */
 
-	[data-editor-highlight="true"] {
-		background-color: rgba($primary-yellow, 0.9);
-
-		&:hover {
-			background-color: $primary-yellow;
-		}
-
-		&:before {
-			content: "Klik om de juiste optie selecteren";
-		}
-	}
-
 	/* Highlight to-be-filled-out */
 
-	[property="ext:agendapuntenTable"],
-	[property="ext:aanwezigenTable"],
-	.mark-highlight-manual,
+	// [property="ext:agendapuntenTable"],
+	// [property="ext:aanwezigenTable"],
+	// .mark-highlight-manual,
 	[data-editor-highlight="true"] {
 
-    &:before {
-      position: absolute;
-      font-weight: 400;
-      font-size: 1.5rem;
-      width: 11rem;
-      color: $gray;
-      opacity: 0;
-      border: 1px solid $blue-gray-lighter;
-      background-color: $white;
-      padding: 0.5rem 0.7rem 0.4rem 1.4rem;
-      border-right: 0.5rem solid $blue-gray-light;
-      box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
-      z-index: 901;
-      font-family: "flanders-sans", sans-serif;
-      transition: opacity 200ms;
-      top: -999rem;
-      left: -999rem;
-    }
+    // &:before {
+    //   position: absolute;
+    //   font-weight: 400;
+    //   font-size: 1.5rem;
+    //   width: 11rem;
+    //   color: $gray;
+    //   opacity: 0;
+    //   border: 1px solid $blue-gray-lighter;
+    //   background-color: $white;
+    //   padding: 0.5rem 0.7rem 0.4rem 1.4rem;
+    //   border-right: 0.5rem solid $blue-gray-light;
+    //   box-shadow: 0.2rem 0.2rem 0.2rem rgba($blue-gray, 0.1);
+    //   z-index: 901;
+    //   font-family: "flanders-sans", sans-serif;
+    //   transition: opacity 200ms;
+    //   top: -999rem;
+    //   left: -999rem;
+    // }
 
-    &:hover:before {
-      opacity: 1;
-      top: auto;
-      left: auto;
-      right: -17.5rem;
-      margin-top: -2.2rem;
-    }
+    // &:hover:before {
+    //   opacity: 1;
+    //   top: auto;
+    //   left: auto;
+    //   right: -17.5rem;
+    //   margin-top: -2.2rem;
+    // }
 	}
 
 	.mark-highlight-manual,
@@ -98,29 +95,29 @@
 
 	/* Make clear agenda and aanwezigen can be edited */
 
-	[property="ext:agendapuntenTable"],
-	[property="ext:aanwezigenTable"] {
-		position: relative;
-		cursor: pointer;
-		transition: all 200ms;
+	// [property="ext:agendapuntenTable"],
+	// [property="ext:aanwezigenTable"] {
+	// 	position: relative;
+	// 	cursor: pointer;
+	// 	transition: all 200ms;
 
-		&:before {
-			width: 20rem;
-		}
+	// 	&:before {
+	// 		width: 20rem;
+	// 	}
 
-		&:hover:before {
-			top: -4rem;
-			right: -26.5rem;
-		}
-	}
+	// 	&:hover:before {
+	// 		top: -4rem;
+	// 		right: -26.5rem;
+	// 	}
+	// }
 
-	[property="ext:agendapuntenTable"]:before {
-		content: "Agendabeheer";
-	}
+	// [property="ext:agendapuntenTable"]:before {
+	// 	content: "Agendabeheer";
+	// }
 
-	[property="ext:aanwezigenTable"]:before {
-		content: "Aanwezigenbeheer";
-	}
+	// [property="ext:aanwezigenTable"]:before {
+	// 	content: "Aanwezigenbeheer";
+	// }
 }
 
 /* Flag removing annotations */

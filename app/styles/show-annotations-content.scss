@@ -3,7 +3,7 @@
   Content for annotations on show annotations
  ========================================================================== */
 
-.show-rdfa-blocks {
+.rdfa-editor {
 
   /* -------------------- Guiding tags ------------------------- */
 
@@ -14,27 +14,27 @@
   /* -------------------- General tags ------------------------- */
 
   [datatype="xsd:dateTime"]:before {
-    content: "Datum en tijd (" attr(property) ")";
+    content: "Datum en tijd (" attr(property) ")" !important;
   }
 
   [datatype="xsd:date"]:before {
-    content: "Datum (" attr(property) ")";
+    content: "Datum (" attr(property) ")" !important;
   }
 
   [property="ext:datumVerkiezing"]:before {
-    content: "Datum verkiezing (" attr(property) ")";
+    content: "Datum verkiezing (" attr(property) ")" !important;
   }
 
   [property="ext:datumGoedkeuringVerkiezing"]:before {
-    content: "Datum goedkeuring verkiezing (" attr(property) ")";
+    content: "Datum goedkeuring verkiezing (" attr(property) ")" !important;
   }
 
   [typeof="besluit:Bestuurseenheid"]:before {
-    content: "Bestuurs-eenheid (" attr(typeof) ")";
+    content: "Bestuurs-eenheid (" attr(typeof) ")" !important;
   }
 
   [typeof="besluit:Bestuursorgaan"]:before {
-    content: "Bestuurs-orgaan (" attr(typeof) ")";
+    content: "Bestuurs-orgaan (" attr(typeof) ")" !important;
   }
 
   [property="ext:scopedBestuursorgaanText"]:before {
@@ -44,30 +44,30 @@
   /* -------------------- Zitting ------------------------- */
 
   [typeof="besluit:Zitting"] > [property="dc:title"]:before {
-    content: "Titel van de notulen (" attr(property) ")";
+    content: "Titel van de notulen (" attr(property) ")" !important;
   }
 
     // [property="besluit:isGehoudenDoor"]:before
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
-      content: "Bestuurs-orgaan (" attr(property) ")";
+      content: "Bestuurs-orgaan (" attr(property) ")" !important;
     }
 
     [property="besluit:geplandeStart"]:before {
-      content: "Geplande start van de zitting (" attr(property) ")";
+      content: "Geplande start van de zitting (" attr(property) ")" !important;
     }
 
     /* Aanwezigen en types */
 
     [property="besluit:heeftAanwezigeBijStart"]:before {
-      content: "Aanwezige mandataris bij start (" attr(property) ")";
+      content: "Aanwezige mandataris bij start (" attr(property) ")" !important;
     }
 
     [property="besluit:heeftVoorzitter"]:before {
-      content: "Voorzitter (" attr(property) ")";
+      content: "Voorzitter (" attr(property) ")" !important;
     }
 
     [property="besluit:heeftSecretaris"]:before {
-      content: "Secretaris van de zitting (" attr(property) ")";
+      content: "Secretaris van de zitting (" attr(property) ")" !important;
     }
 
     [property="ext:secretarisTemporaryAsText"]:before {
@@ -81,31 +81,31 @@
   /* -------------------- Agendapunt ------------------------- */
 
   [typeof="besluit:Agendapunt"]:before {
-  	content: "Gepland agendapunt (" attr(property) ")";
+  	content: "Gepland agendapunt (" attr(property) ")" !important;
   }
 
   [property="dc:title"]:before {
-    content: "Titel (" attr(property) ")";
+    content: "Titel (" attr(property) ")" !important;
   }
 
   [typeof="besluit:Agenda"]:before {
-    content: "Agenda (" attr(typeof) ")"; // op hetzelfde niveau als onbestaande "heeftagenda"
+    content: "Agenda (" attr(typeof) ")" !important; // op hetzelfde niveau als onbestaande "heeftagenda"
   }
 
     [property="besluit:heeftAgendapunt"]:before {
-      content: "Agendapunt (" attr(property) ")";
+      content: "Agendapunt (" attr(property) ")" !important;
     }
 
     [typeof="besluit:Agenda"] [property="dc:title"]:before {
-      content: "Titel agendapunt (" attr(property) ")";
+      content: "Titel agendapunt (" attr(property) ")" !important;
     }
 
       [property="besluit:geplandOpenbaar"]:before {
-        content: "Openbaar agendapunt (" attr(property) ")";
+        content: "Openbaar agendapunt (" attr(property) ")" !important;
       }
 
       [property="besluit:geplandBesloten"]:before {
-        content: "Besloten agendapunt (" attr(property) ")";
+        content: "Besloten agendapunt (" attr(property) ")" !important;
       }
 
 	    [property="eli:title_short"]:before {
@@ -119,61 +119,61 @@
   }
 
   [typeof="besluit:BehandelingVanAgendapunt"]:before {
-    content: "Behandeling van agendapunt (" attr(property) ")";
+    content: "Behandeling van agendapunt (" attr(property) ")" !important;
   }
 
     [property="besluit:openbaar"]:before {
-      content: "Open agendapunt (" attr(property) ")";
+      content: "Open agendapunt (" attr(property) ")" !important;
     }
 
     [property="besluit:besloten"]:before {
-      content: "Besloten agendapunt (" attr(property) ")";
+      content: "Besloten agendapunt (" attr(property) ")" !important;
     }
 
     [typeof^="besluit:Besluit"]:before {
-      content: "Inhoud besluit (" attr(typeof) ")";
+      content: "Inhoud besluit (" attr(typeof) ")" !important;
     }
 
       [typeof="besluit:Besluit mandaat:Aanstellingsbesluit"]:before {
-        content: "Inhoud aanstellingsbesluit (" attr(typeof) ")";
+        content: "Inhoud aanstellingsbesluit (" attr(typeof) ")" !important;
       }
 
       [typeof^="besluit:Besluit"] [property="eli:title"]:before {
-        content: "Titel van agendapunt (" attr(property) ")";
+        content: "Titel van agendapunt (" attr(property) ")" !important;
       }
 
       [typeof^="besluit:Besluit"] [property="eli:description"]:before {
-        content: "Beschrijving van agendapunt (" attr(property) ")";
+        content: "Beschrijving van agendapunt (" attr(property) ")" !important;
       }
 
         [property="besluit:motivering"]:before {
-          content: "Motivering (" attr(property) ")";
+          content: "Motivering (" attr(property) ")" !important;
         }
 
 	      [property="eli:cites"]:before {
-	        content: "Citaat (" attr(property) ")";
+	        content: "Citaat (" attr(property) ")" !important;
 	      }
 
 				[property="eli:has_part"][typeof="besluit:Artikel"]:before,
         [property="eli:artikel"]:before {
-          content: "Artikel (" attr(typeof) ")";
+          content: "Artikel (" attr(typeof) ")" !important;
         }
 
         [property="prov:value"]:before {
-          content: "Besluit (" attr(property) ")";
+          content: "Besluit (" attr(property) ")" !important;
         }
 
           [property="eli:has_part"]:before {
-            content: "Onderdeel (" attr(property) ")";
+            content: "Onderdeel (" attr(property) ")" !important;
           }
 
           [property="eli:number"]:before {
-            content: "Nummer (" attr(property) ")";
+            content: "Nummer (" attr(property) ")" !important;
           }
 
         [typeof="mandaat:Mandataris"]:before,
         [property="ext:bekrachtigtAanstellingVan"]:before {
-          content: "Aanstelling mandataris (" attr(property) " " attr(typeof) ")";
+          content: "Aanstelling mandataris (" attr(property) " " attr(typeof) ")" !important;
         }
 
 		      [typeof="ext:BesluitGemeenteraadsledenAfstandMandaat"]:before {
@@ -181,7 +181,7 @@
 		      }
 
 		      [property="ext:bekrachtigdAfstandVanMandaatDoor"]:before {
-		      	content: "Afstand mandaat (" attr(property) ")";
+		      	content: "Afstand mandaat (" attr(property) ")" !important;
 		      }
 
 		      [typeof="ext:BesluitGemeenteraadsledenAfwezigen"]:before {
@@ -193,59 +193,59 @@
 		      }
 
 		      [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
-		      	content: "Afwezig met kennisgeving (" attr(property) ")";
+		      	content: "Afwezig met kennisgeving (" attr(property) ")" !important;
 		      }
 
 		      [property="ext:bekrachtigdAfwezigheid"]:before {
-		      	content: "Afwezig zonder kennisgeving (" attr(property) ")";
+		      	content: "Afwezig zonder kennisgeving (" attr(property) ")" !important;
 		      }
 
 		      [typeof="ext:BesluitGemeenteraadsledenVerkiezbaarheidsvoorwaarden"]:before {
-		      	content: "Verkiesbaarheidsvoorwaarden (" attr(typeof) ")";
+		      	content: "Verkiesbaarheidsvoorwaarden (" attr(typeof) ")" !important;
 		      }
 
 		      [typeof="ext:BesluitGemeenteraadsledenOnverenigbaarheden"]:before {
-		      	content: "Onverenigbaarheden (" attr(typeof) ")";
+		      	content: "Onverenigbaarheden (" attr(typeof) ")" !important;
 		      }
 
           [property="ext:bekrachtigdOnverenigbaarheid"]:before {
-          	content: "Onverenigbaar (" attr(property) ")";
+          	content: "Onverenigbaar (" attr(property) ")" !important;
           }
 
           [typeof="ext:BesluitGemeenteraadsledenBurgemeester"]:before {
-          	content: "Eedaflegging Burgemeester (" attr(typeof) ")";
+          	content: "Eedaflegging Burgemeester (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitGemeenteraadsledenVerhindering"]:before {
-          	content: "Verhindering (" attr(typeof) ")";
+          	content: "Verhindering (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitFractieSplitwens"]:before {
-          	content: "Fractie splitsing (" attr(typeof) ")";
+          	content: "Fractie splitsing (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitFractieVereniging"]:before {
-          	content: "Fractie vereniging (" attr(typeof) ")";
+          	content: "Fractie vereniging (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitFractieSplitwensAkte"]:before {
-          	content: "Fractie splitsing akte (" attr(typeof) ")";
+          	content: "Fractie splitsing akte (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitFractieSplitwensAkteVoorwaarden"]:before {
-          	content: "Fractie splitsing voorwaarden (" attr(typeof) ")";
+          	content: "Fractie splitsing voorwaarden (" attr(typeof) ")" !important;
           }
 
           [property="ext:fractievormingText"]:before {
-          	content: "Fractievorming besluit (" attr(property) ")";
+          	content: "Fractievorming besluit (" attr(property) ")" !important;
           }
 
           [property="ext:fractievormingTable"]:before {
-          	content: "Fracties (" attr(property) ")";
+          	content: "Fracties (" attr(property) ")" !important;
           }
 
           [property="org:holds"]:before {
-            content: "Mandaat (" attr(property) ")";
+            content: "Mandaat (" attr(property) ")" !important;
           }
 
           [property="ext:mandatarisTabelInput"]:before {
@@ -253,27 +253,27 @@
           }
 
           [property="mandaat:start"]:before {
-            content: "Start mandaat (" attr(property) ")";
+            content: "Start mandaat (" attr(property) ")" !important;
           }
 
           [property="mandaat:rangorde"]:before {
-          	content: "Rangorde (" attr(property) ")";
+          	content: "Rangorde (" attr(property) ")" !important;
           }
 
           [property="mandaat:status"]:before {
-          	content: "Status mandaat (" attr(property) ")";
+          	content: "Status mandaat (" attr(property) ")" !important;
           }
 
           [property="ext:currentVoorzitterMandaat"]:before {
-          	content: "Mandaat voorzitter (" attr(property) ")";
+          	content: "Mandaat voorzitter (" attr(property) ")" !important;
           }
 
           [typeof="ext:BesluitVerkiezingVoorzitterEinddatum"]:before {
-          	content: "Voorzitter einddatum (" attr(typeof) ")";
+          	content: "Voorzitter einddatum (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitVerkiezingVoorzitterVerhindering"]:before {
-          	content: "Verhindering voorzitter (" attr(typeof) ")";
+          	content: "Verhindering voorzitter (" attr(typeof) ")" !important;
           }
 
           [property="persoon:gebruikteVoornaam"]:before {
@@ -290,37 +290,37 @@
           }
 
           [property="ext:schepenenAanstellingText"]:before {
-          	content: "Aanstelling schepenen (" attr(property) ")";
+          	content: "Aanstelling schepenen (" attr(property) ")" !important;
           }
 
           [typeof="ext:BesluitPolitieraadStembiljetten"]:before {
-          	content: "Stembiljetten (" attr(typeof) ")";
+          	content: "Stembiljetten (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitPolitieraadOngeldigeStemmen"]:before {
-          	content: "Ongeldige stemmen (" attr(typeof) ")";
+          	content: "Ongeldige stemmen (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitPolitieraadStakingStemmen"]:before {
-          	content: "Staking stemmen (" attr(typeof) ")";
+          	content: "Staking stemmen (" attr(typeof) ")" !important;
           }
 
           [typeof="ext:BesluitPolitieraadVoldoendeLeden"]:before {
-          	content: "Leden (" attr(typeof) ")";
+          	content: "Leden (" attr(typeof) ")" !important;
           }
 
     [property="besluit:heeftStemming"]:before {
-      content: "Stemming bij behandeling van agendapunt (" attr(property) ")";
+      content: "Stemming bij behandeling van agendapunt (" attr(property) ")" !important;
     }
 
     [property="dc:subject"]:before {
-      content: "Onderwerp behandeling (" attr(property) ")";
+      content: "Onderwerp behandeling (" attr(property) ")" !important;
     }
 
   /* -------------------- Stemming ------------------------- */
 
   [typeof="besluit:Stemming"]:before {
-    content: "Stemming (" attr(typeof) ")";
+    content: "Stemming (" attr(typeof) ")" !important;
   }
   	[property="ext:stemmingTable"]:before {
   		content: "Stemmingen";

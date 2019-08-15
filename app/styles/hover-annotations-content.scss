@@ -7,6 +7,38 @@
 .rdfa-editor { //:not(.show-rdfa-blocks)
   /* -------------------- General tags ------------------------- */
 
+  /// rewind
+
+	[data-editor-highlight="true"] {
+		background-color: rgba($primary-yellow, 0.9);
+
+		&:hover {
+			background-color: $primary-yellow;
+		}
+
+		&:before {
+			content: "Klik om de juiste optie selecteren";
+		}
+	}
+
+  /// rewind
+
+  [typeof="besluit:Zitting"]{
+  	position: relative;
+
+  	&:hover {
+  		background-color: transparent !important;
+  	}
+  }
+
+  [property="ext:behandelt"]:hover {
+  	background-color: transparent !important;
+  }
+
+  [typeof="besluit:Zitting"]:before {
+  	content: "Zitting";
+  }
+
   [datatype="xsd:date"]:before {
     content: "Datum";
   }
@@ -23,15 +55,18 @@
     content: "Bestuurs-eenheid";
   }
 
+  [property="ext:scopedBestuursorgaanText"]:before {
+  	content: "Selecteer het bestuurs-orgaan";
+  }
+
   [typeof="besluit:Bestuursorgaan"]:before {
     content: "Bestuurs-orgaan";
   }
 
-
   /* -------------------- Zitting ------------------------- */
 
   [typeof="besluit:Zitting"] > [property="dc:title"]:before {
-    content: "Titel van de notulen";
+    content: "Titel";
   }
 
     // [property="besluit:behandelt"]:before {
@@ -60,6 +95,14 @@
     }
 
     /* Aanwezigen en types */
+    [property="ext:aanwezigenTable"]:before {
+    	content: "Aanwezigenlijst";
+    }
+
+    [property="ext:insertAanwezigenText"]:before {
+    	content: "Duid aanwezigen aan";
+    }
+
     [property="besluit:heeftAanwezigeBijStart"]:before {
       content: "Aanwezige bij start van de zitting";
     }
@@ -91,6 +134,18 @@
 
 
   /* -------------------- Agendapunt ------------------------- */
+
+  [property="ext:agendapuntenTable"]:before {
+  	content: "Agenda";
+  }
+
+  [property="ext:insertAgendaText"]:before {
+  	content: "Beheer agenda";
+  }
+
+  [property="ext:behandelingVanAgendapuntenContainer"]:before {
+  	content: "Behandeling agenda";
+  }
 
   [typeof="besluit:Agenda"]:before {
     content: "Agenda"; // op hetzelfde niveau als onbestaande "heeftagenda"
@@ -126,8 +181,30 @@
     content: "Behandeling van agendapunt"
   }
 
-  	[typeof="besluit:Besluit"]:before {
+  	[typeof="besluit:Besluit"]:before,
+  	[typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
+  	[typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
   		content: "Besluit";
+  	}
+
+  	[property="dc:subject"]:before {
+  		content: "Onderwerp";
+  	}
+
+  	[property="besluit:geplandOpenbaar"]:before {
+  		content: "Gepland openbaar";
+  	}
+
+  	[property="besluit:geplandOpenbaar"][content="false"]:before {
+  		content: "Gepland besloten";
+  	}
+
+  	[property="besluit:openbaar"]:before {
+  		content: "Openbare behandeling"
+  	}
+
+  	[property="besluit:openbaar"][content="false"]:before {
+  		content: "Besloten behandeling"
   	}
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
@@ -215,6 +292,7 @@
       content: "Aanwezige";
     }
 
+    [property="ext:heeftAfwezigeBijAgendapunt"]:before,
     [property="besluit:heeftAfwezige"]:before {
       content: "Afwezige";
     }
@@ -231,12 +309,9 @@
     	content: "Agendapunt";
     }
 
-    [property="dc:title"]:before {
-      content: "Titel";
-    }
-
+    [property="dc:title"]:before,
     [property="eli:title"]:before {
-      content: "Titel besluit";
+      content: "Titel";
     }
 
     [property="eli:title_short"]:before {
@@ -272,7 +347,7 @@
       }
 
       [typeof="besluit:Artikel"] [property="prov:value"]:before {
-      	content: "Artikel"
+      	content: "Inhoud artikel"
       }
 
       [property="eli:has_part"]:before {
@@ -348,5 +423,9 @@
 
     [property="besluit:heeftVoorstander"]:before {
       content: "Voor-stander";
+    }
+
+    [property="ext:signatories"]:before {
+    	content: "Ondertekenaars";
     }
 }

@@ -128,3 +128,261 @@ input.input-field {
 	border-left: 1px solid $gray-lighter;
 	border-right: 1px solid $gray-lighter;
 }
+
+
+/* test for cursor position */
+
+
+.rdfa-editor {
+	[property]:not([property=""]):not([property="http://mu.semte.ch/vocabularies/ext/noHighlight"]),
+	[typeof]:not([typeof=""]):not([property="http://mu.semte.ch/vocabularies/ext/noHighlight"]),
+  [data-editor-highlight="true"]:not(.mark-highlight-manual):not([property]):not([typeof]),
+	.mark-highlight-manual
+  {
+    border-bottom: 1px solid rgba($blue-gray-light, 1);
+    cursor: pointer;
+    padding-bottom: 5px;
+
+    &:hover:not([property="ext:behandelt"]):not([property="ext:behandelingVanAgendapuntenContainer"]):not([typeof="besluit:Besluit"]):not([typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]):not([typeof="besluit:Besluit ext:BesluitNieuweStijl"]) {
+      color: $black;
+      background-color: rgba($blue-gray, 0.2);
+    }
+
+    &:before {
+			/* positioning */
+			top: -999px;
+			opacity: 0;
+			position: absolute;
+			left: auto;
+			width: 22rem;
+      pointer-events: none;
+      text-align: left;
+      transition: opacity 200ms;
+      z-index: 901;
+
+			/* looks */
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			font-weight: 600;
+			font-size: 1.4rem;
+			color: $blue-gray-dark;
+			line-height: 1;
+      font-family: "flanders-sans", sans-serif;
+    }
+
+    &:hover:before {
+    	padding: 0 0 2rem 4rem;
+			top: 0;
+			opacity: 1;
+			right: -29.5rem;
+    }
+
+    &:hover:after {
+    	position: absolute;
+			top: 0;
+    	content: "";
+    	display: block;
+    	right: -10rem;
+    	width: 2.5rem;
+    	border-bottom: 1px solid $blue-gray;
+    	height: 4rem;
+    	margin-top: -3.5rem;
+    }
+
+	 	[typeof],
+	 	[property] {
+	 		padding-bottom: 3px;
+
+  		&:hover:before {
+				margin-top: 4rem;
+			}
+
+			&:hover:after {
+				margin-top: 0.5rem;
+	    	border-left: 1px solid $blue-gray;
+			}
+  	}
+
+		[typeof] [typeof],
+	 	[property] [property] {
+	 		padding-bottom: 2px;
+
+
+  		&:hover:before {
+      	margin-top: 8rem;
+      }
+
+      &:hover:after {
+      	margin-top: 4.5rem;
+      }
+  	}
+
+		[typeof] [typeof] [typeof],
+	 	[property] [property] [property] {
+	 		padding-bottom: 2px;
+
+  		&:hover:before {
+      	margin-top: 12rem;
+      }
+
+      &:hover:after {
+      	margin-top: 8.5rem;
+      }
+  	}
+
+		[typeof] [typeof] [typeof] [typeof],
+	 	[property] [property] [property] [property] {
+	 		padding-bottom: 2px;
+
+  		&:hover:before {
+      	margin-top: 16rem;
+      }
+
+      &:hover:after {
+      	margin-top: 12.5rem;
+      }
+  	}
+
+		[typeof] [typeof] [typeof] [typeof] [typeof],
+	 	[property] [property] [property] [property] [property] {
+	 		padding-bottom: 2px;
+
+  		&:hover:before {
+      	margin-top: 20rem;
+      }
+
+      &:hover:after {
+      	margin-top: 16.5rem;
+      }
+  	}
+
+		[typeof] [typeof] [typeof] [typeof] [typeof] [typeof],
+	 	[property] [property] [property] [property] [property] [property] {
+	 		padding-bottom: 0px;
+
+  		&:hover:before {
+      	margin-top: 24rem;
+      }
+
+      &:hover:after {
+      	margin-top: 20.5rem;
+      }
+  	}
+
+		[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof],
+	 	[property] [property] [property] [property] [property] [property] [property] {
+
+  		&:hover:before {
+      	margin-top: 28rem;
+      }
+
+      &:hover:after {
+      	margin-top: 24.5rem;
+      }
+  	}
+
+		[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof],
+	 	[property] [property] [property] [property] [property] [property] [property] [property] {
+
+  		&:hover:before {
+      	margin-top: 32rem;
+      }
+
+      &:hover:after {
+      	margin-top: 28.5rem;
+      }
+  	}
+  }
+}
+
+
+
+
+.rdfa-editor {
+
+  .mark-highlight-manual,
+  [data-editor-highlight="true"]:not(.mark-highlight-manual):not([property]):not([typeof]),
+  [property]:not([property=""]):not([typeof="besluit:Zitting"]):not([property="ext:metadata"]),
+  [typeof]:not([property=""]):not([typeof="besluit:Zitting"]):not([property="ext:metadata"]),
+  [property]:not([property=""]):not([typeof="besluit:Zitting"]):not([property="ext:metadata"]),
+  [typeof]:not([property=""]):not([typeof="besluit:Zitting"]):not([property="ext:metadata"]) {
+
+	  &[data-editor-position-level="0"],
+	  &[data-editor-position-level="1"],
+	  &[data-editor-position-level="2"],
+	  &[data-editor-position-level="3"],
+	  &[data-editor-position-level="4"] {
+	  	padding: 4.5rem 1rem 2rem 1rem;
+			position: relative;
+			margin: 0.5rem 0;
+			border-bottom: 0;
+			min-width: 14rem;
+
+			&:hover {
+	    	background-color: transparent !important;
+			}
+
+	    &:after {
+	    	content: "";
+	    	display: block;
+	    	left: -1px !important;
+	    	top: -1px !important;
+	    	right: -1px !important;
+	    	bottom: -1rem !important;
+	    	border: 1px solid $blue-gray !important;
+	    	height: auto;
+	    	width: 100%;
+	    	max-width: none;
+	    	position: absolute;
+	    	pointer-events: none;
+	    	margin-top: 0 !important;
+	    }
+
+	    &:hover:before,
+	    &:before {
+				opacity: 1 !important;
+	  		padding: 0.5rem 1rem;
+	  		background-color: $blue-gray-lightest;
+	    	left: 0 !important;
+	    	margin: 0 !important;
+	    	top: 0 !important;
+	    	right: auto !important;
+	    	width: calc(100% - 2px);
+	    	max-width: none;
+	    }
+
+	    // span {
+	    // 	display: inline-block;
+	    // }
+	  }
+
+		&[data-editor-position-level="1"] [property],
+		&[data-editor-position-level="1"] [typeof],
+		&[data-editor-position-level="1"] .mark-highlight-manual {
+
+		}
+
+	  &[data-editor-position-level="0"],
+	  &[data-editor-position-level="1"],
+	  &[data-editor-position-level="2"],
+	  &[data-editor-position-level="3"],
+	  &[data-editor-position-level="4"] {
+
+			[property],
+			[typeof],
+			.mark-highlight-manual {
+				background-color: transparent !important;
+			}
+	  }
+
+	  span {
+		  &[data-editor-position-level="0"],
+		  &[data-editor-position-level="1"],
+		  &[data-editor-position-level="2"],
+		  &[data-editor-position-level="3"],
+		  &[data-editor-position-level="4"] {
+		  	display: inline-block;
+		  }
+	  }
+  }
+}
