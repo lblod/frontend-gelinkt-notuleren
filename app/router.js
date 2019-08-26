@@ -47,7 +47,7 @@ Router.map(function() {
   this.route('route-not-found', {
     path: '/*wildcard'
   });
-  this.route('fetch-rdfa', function() {
+
   this.route('import', function() {
     this.route('new');
     this.route('edit');
