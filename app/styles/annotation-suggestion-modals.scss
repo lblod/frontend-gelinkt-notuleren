@@ -8,6 +8,8 @@
 	.annotation-suggestion__suggestion .modal-dialog {
 		max-height: 70vh;
 		overflow-y: auto;
+		display: block;
+		// position: fixed;
 	}
 
 	.annotation-suggestion__suggestion .modal-dialog li .modal-dialog--temporary-fix {
