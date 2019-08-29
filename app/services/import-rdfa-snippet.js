@@ -15,7 +15,7 @@ export default Service.extend({
     this.get('snippets').pushObject({source: params.source, target: params.source, data: await data.text()});
   },
 
-  getLastDownloadedSnipped(){
+  getLastDownloadedSnippet(){
     return this.get('snippets').lastObject;
   }
 });
