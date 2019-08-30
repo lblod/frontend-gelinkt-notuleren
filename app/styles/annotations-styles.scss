@@ -1,0 +1,140 @@
+/* ==========================================================================
+  Shared styling (hover, click, show, regular)
+ ========================================================================== */
+
+/* find me a home */
+
+[data-editor-highlight="true"] > [property],
+[data-editor-highlight="true"] > [typeof] {
+	margin: 0 !important;
+}
+
+/* styling the annotations */
+
+.rdfa-editor {
+
+	span { //	making sure elements are easier to style and handle
+		display: inline-block;
+	}
+
+	[property="prov:generated"] > [property="prov:value"],
+	[property="prov:generated"] > [property="besluit:motivering"],
+	[typeof="besluit:Zitting"],
+	[property^="ext"]:not([property="ext:heeftAfwezigeBijAgendapunt"]):not(span),
+	[data-editor-highlight="true"]:not(span) {
+		display: block;
+		position: relative;
+	}
+}
+
+[data-editor-highlight="true"],
+[property],
+[typeof],
+[data-type],
+.mark-highlight-manual
+{
+  border-bottom: 1px solid rgba($blue-gray-light, 1);
+  padding-bottom: 5px;
+
+  &:before { // invisible styling of annotations, before they are shown
+  	/* positioning */
+  	content:  attr(property) " " attr(typeof) " " attr(data-type);
+		top: -999px;
+		opacity: 0;
+		position: absolute;
+		left: auto;
+		width: 22rem;
+    pointer-events: none;
+    transition: opacity 200ms;
+    z-index: 901;
+
+		/* text */
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-weight: 600;
+		font-size: 1.4rem;
+		color: $blue-gray-dark;
+		line-height: 1;
+    font-family: "flanders-sans", sans-serif;
+  }
+
+  &:after {
+  	position: absolute;
+  	top: 0.5rem;
+  }
+
+  .mark-highlight-manual,
+ 	[typeof],
+ 	[property],
+	[data-type] {
+ 		padding-bottom: 3px;
+ 	}
+
+	[typeof] .mark-highlight-manual,
+ 	[property] .mark-highlight-manual,
+ 	[typeof] [data-type],
+ 	[property] [data-type],
+	[typeof] [typeof],
+ 	[property] [property] {
+ 		padding-bottom: 2px;
+ 	}
+
+	[typeof] [typeof] .mark-highlight-manual,
+	[property] [property] .mark-highlight-manual,
+ 	[typeof] [typeof] [data-type],
+ 	[property] [property] [data-type],
+	[typeof] [typeof] [typeof],
+	[property] [property] [property] {
+		padding-bottom: 1px;
+	}
+
+	[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] .mark-highlight-manual,
+	[property] [property] [property] [property] [property] [property] .mark-highlight-manual,
+ 	[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [data-type],
+ 	[property] [property] [property] [property] [property] [property] [property] [data-type],
+	[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof],
+	[property] [property] [property] [property] [property] [property] [property] {
+		border-bottom: 0;
+	}
+}
+
+
+/* making it easy to discover elements that need to be filled out / take action upon */
+
+[property^="ext:insert"],
+[data-editor-highlight="true"] {
+	background-color: rgba($primary-yellow, 0.9);
+
+	&:hover {
+		background-color: $primary-yellow;
+	}
+}
+
+.mark-highlight-manual,
+[data-editor-highlight="true"] {
+
+  &:hover {
+    color: $black;
+    background-color: rgba($blue-gray, 0.2);
+  }
+}
+
+span.mark-highlight-manual {
+  background-color: rgba($blue-gray, 0.3);
+}
+
+/* hide superfluous annotations */
+
+[property=""],
+[typeof=""],
+[property="ext:metadata"],
+[property="http://mu.semte.ch/vocabularies/ext/noHighlight"],
+[property="http://mu.semte.ch/vocabularies/ext/noHighlight"] {
+	border-bottom: 0;
+
+	&:after,
+	&:before {
+		content: normal !important;
+	}
+}
+

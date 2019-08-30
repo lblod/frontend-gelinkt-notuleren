@@ -1,0 +1,96 @@
+/* ==========================================================================
+  Annotations styles on show and click
+ ========================================================================== */
+
+.rdfa-annotations {
+	&.show-rdfa-blocks .mark-highlight-manual,
+	&.show-rdfa-blocks [data-editor-highlight="true"],
+	&.show-rdfa-blocks [data-type],
+	&.show-rdfa-blocks [property],
+	&.show-rdfa-blocks [typeof],
+	[data-editor-position-level="0"][property],
+	[data-editor-position-level="1"][property],
+	[data-editor-position-level="2"][property],
+	[data-editor-position-level="3"][property],
+	[data-editor-position-level="4"][property],
+	[data-editor-position-level="0"][typeof],
+	[data-editor-position-level="1"][typeof],
+	[data-editor-position-level="2"][typeof],
+	[data-editor-position-level="3"][typeof],
+	[data-editor-position-level="4"][typeof],
+	[data-editor-position-level="0"][data-type],
+	[data-editor-position-level="1"][data-type],
+	[data-editor-position-level="2"][data-type],
+	[data-editor-position-level="3"][data-type],
+	[data-editor-position-level="4"][data-type],
+	[data-editor-position-level="0"][data-editor-highlight="true"],
+	[data-editor-position-level="1"][data-editor-highlight="true"],
+	[data-editor-position-level="2"][data-editor-highlight="true"],
+	[data-editor-position-level="3"][data-editor-highlight="true"],
+	[data-editor-position-level="4"][data-editor-highlight="true"],
+	[data-editor-position-level="0"].mark-highlight-manual,
+	[data-editor-position-level="1"].mark-highlight-manual,
+	[data-editor-position-level="2"].mark-highlight-manual,
+	[data-editor-position-level="3"].mark-highlight-manual,
+	[data-editor-position-level="4"].mark-highlight-manual,
+	[data-editor-position-level="1"] > [property],
+	[data-editor-position-level="1"] > [typeof]
+	{
+  	padding: 4.5rem 1rem 0 1rem;
+		margin: 1rem 0 0.5rem 0;
+		min-width: 14rem;
+		position: relative;
+		border-bottom: 0;
+
+		&:hover {
+    	background-color: transparent !important;
+		}
+
+		&:hover:after,
+    &:after {
+    	content: "";
+    	display: block;
+    	left: -1px !important;
+    	top: -1px !important;
+    	right: -1px !important;
+    	bottom: 0 !important;
+    	border: 1px solid $blue-gray !important;
+    	height: auto;
+    	width: 100%;
+    	max-width: none;
+    	position: absolute;
+    	pointer-events: none;
+    	margin-top: 0 !important;
+    }
+
+    &:hover:before,
+    &:before {
+			opacity: 1 !important;
+  		padding: 0.5rem 1rem;
+  		background-color: $blue-gray-lightest;
+    	margin: 0 !important;
+    	left: -1px !important;
+    	top: -1px !important;
+    	right: -1px !important;
+    	border: 1px solid $blue-gray;
+    	border-bottom: 0;
+    	width: 100%;
+    	max-width: none;
+    }
+	}
+
+	[typeof="besluit:Zitting"],
+	[property="ext:metadata"] {
+		padding: 0 !important;
+		margin: 0 !important;
+		border: 0 !important;
+		background-color: transparent !important;
+
+		&:hover:after,
+		&:hover:before,
+		&:before,
+		&:after {
+			content: normal !important;
+		}
+	}
+}

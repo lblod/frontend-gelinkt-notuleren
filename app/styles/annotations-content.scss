@@ -1,41 +1,21 @@
 /* ==========================================================================
-  Annotations
-  Content for annotations on hover
+  Annotations content — on hover, click and show
  ========================================================================== */
 
 
 .rdfa-editor {
+  /* -------------------- Guiding tags ------------------------- */
+
+	[property^="ext:insert"]:before,
+	[data-editor-highlight="true"]:before {
+		content: "Klik om de juiste optie selecteren";
+	}
+
+	span.mark-highlight-manual:before {
+  	content: "Vul in";
+  }
+
   /* -------------------- General tags ------------------------- */
-
-	[data-editor-highlight="true"] {
-		background-color: rgba($primary-yellow, 0.9);
-
-		&:hover {
-			background-color: $primary-yellow;
-		}
-	}
-
-	[property="ext:behandelt"] [data-editor-highlight="true"] {
-		background-color: rgba($primary-yellow, 0.9);
-
-		&:before {
-			content: "Klik om de juiste optie selecteren";
-		}
-	}
-
-  /// rewind
-
-  [typeof="besluit:Zitting"]{
-  	position: relative;
-
-  	&:hover {
-  		// background-color: transparent !important;
-  	}
-  }
-
-  [property="ext:behandelt"]:hover {
-  	background-color: transparent !important;
-  }
 
   [typeof="besluit:Zitting"]:before {
   	content: "Zitting";
@@ -71,10 +51,6 @@
     content: "Titel";
   }
 
-    // [property="besluit:behandelt"]:before {
-    //   // content: "Behandeling"; Momenteel niet gebruikt — fout aangegeven?
-    // }
-
     [property="besluit:geplandeStart"]:before {
       content: "Geplande start van de zitting";
     }
@@ -87,7 +63,6 @@
       content: "Tijdstip waarop de zitting eindigt";
     }
 
-    // [property="besluit:isGehoudenDoor"]:before
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
       content: "Bestuurs-orgaan";
     }
@@ -122,18 +97,6 @@
       content: "Secretaris van de zitting";
     }
 
-    // [property="besluit:heeftNotulen"]:before {
-    //   // content: "Heeft notulen"; Momenteel niet gebruikt
-    // }
-
-    // [property="besluit:heeftZittingsverslag"]:before {
-    //   // content: "Heeft zittingsverslag"; Momenteel niet gebruikt
-    // }
-
-    // [property="besluit:heeftAgenda"]:before {
-    //   // content: "Agenda"; // zit niet in het model?
-    // }
-
 
   /* -------------------- Agendapunt ------------------------- */
 
@@ -153,10 +116,6 @@
     content: "Agenda"; // op hetzelfde niveau als onbestaande "heeftagenda"
   }
 
-    // [property="besluit:heeftAgendapunt"]:before {
-    //   // content: "Agendapunt"; wordt niet getoond, volgende niveau wel
-    // }
-
     [property="besluit:heeftAgendapunt"] [property="besluit:geplandOpenbaar"] + span + [property="dc:title"]:before {
       content: "Titel gepland openbaar agendapunt";
     }
@@ -164,18 +123,6 @@
     [property="besluit:heeftAgendapunt"] [property="besluit:geplandBesloten"] + span + [property="dc:title"]:before {
       content: "Titel gepland besloten agendapunt";
     }
-
-    // [property="besluit:aangebrachtNa"]:before {
-    //   // niet zichtbaar
-    // }
-
-    // [property="dc:title"]:before {
-    //   // niet zichtbaar
-    // }
-
-    // [property="besluit:description"]:before {
-    //   // hoe aanduiden? Herhalen in behandeling?
-    // }
 
   /* -------------------- Behandeling agendapunt ------------------------- */
 
@@ -274,17 +221,21 @@
         content: "Mandaat";
       }
 
+      [property="org:role"]:before {
+      	content: "Rol";
+      }
+
       [property="mandaat:start"]:before {
         content: "Start mandaat";
       }
 
-    // [property="besluit:gebeurtNa"]:before {
-    //   // niet zichtbaar
-    // }
+	    [property="skos:prefLabel"]:before {
+	    	content: "Naam rol";
+	    }
 
-    // [property="prov:generated"]:before {
-    //   // niet zichtbaar
-    // }
+    [property="ext:stemmingTable"]:before {
+      content: "Stemming";
+    }
 
     [property="besluit:heeftStemming"]:before {
       content: "Stemming bij behandeling van agendapunt";
@@ -298,14 +249,6 @@
     [property="besluit:heeftAfwezige"]:before {
       content: "Afwezige";
     }
-
-      // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
-      //   content: "Voorzitter van de zitting"; // in zitting herhaald
-      // }
-
-      // [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftSecretaris"]:before {
-      //   content: "Secretaris van de zitting"; // in zitting herhaald
-      // }
 
     [typeof="besluit:Agendapunt"]:before {
     	content: "Agendapunt";
@@ -340,10 +283,6 @@
       content: "Besluit";
     }
 
-      // [property="eli:has_part"] [property="prov:value"]:before {
-      //   content: normal;
-      // }
-
       [property="eli:has_part"][typeof="besluit:Artikel"]:before {
         content: "Artikel";
       }
@@ -359,23 +298,6 @@
       [property="eli:number"]:before {
         content: "Nummer";
       }
-
-
-    // [property="eli:title_short"]:before {
-    //   // niet gebruikt
-    // }
-
-    // [property="eli:date_publication"]:before {
-    //   // niet gebruikt
-    // }
-
-    // [property="eli:realizes"]:before {
-    //   // niet gebruikt
-    // }
-
-    // [property="prov:wasGeneratedBy"]:before {
-    //   // niet gebruikt
-    // }
 
   /* -------------------- Stemming ------------------------- */
 

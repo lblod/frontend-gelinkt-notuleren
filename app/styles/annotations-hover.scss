@@ -1,0 +1,167 @@
+/* ==========================================================================
+  Annotations styles on hover
+ ========================================================================== */
+
+.rdfa-editor {
+	.mark-highlight-manual,
+	[typeof],
+	[property],
+	[data-type],
+	[data-editor-highlight="true"] {
+
+		/* styling */
+
+		&:hover {
+		  color: $black;
+		  background-color: rgba($blue-gray, 0.2);
+		}
+
+		&[typeof="besluit:Zitting"],
+		&[property="ext:metadata"],
+		&[property="ext:behandelt"],
+		&[property="ext:behandelingVanAgendapuntenContainer"],
+		&[typeof="besluit:Besluit"],
+		&[typeof="besluit:Besluit ext:BesluitKlassiekeStijl"],
+		&[typeof="besluit:Besluit ext:BesluitNieuweStijl"],
+		&[property="ext:stemmingTable"],
+		&[property="besluit:heeftStemming"] {
+			&:hover {
+				background-color: transparent;
+			}
+		}
+
+		/* showing annotations */
+
+    &:hover:before {
+    	padding: 0 0 2rem 4rem;
+			top: 0;
+			opacity: 1;
+			right: -29.5rem;
+    }
+
+    &:hover:after {
+    	position: absolute;
+    	content: "";
+    	display: block;
+    	right: -10rem;
+    	width: 2.5rem;
+    	border-bottom: 1px solid $blue-gray;
+    	height: 4rem;
+    	top: -3.2rem;
+    }
+
+		/* positioning of pseudo class elements */
+
+	  .mark-highlight-manual,
+		[data-editor-highlight="true"],
+		[data-type],
+	 	[typeof],
+	 	[property] {
+	 		&:before,
+	 		&:after {
+	 			margin-top: 4rem;
+	 		}
+	 	}
+
+		[property],
+		[typeof] {
+			.mark-highlight-manual,
+			[data-editor-highlight="true"],
+			[data-type],
+			[typeof],
+			[property] {
+				&:before,
+				&:after {
+					margin-top: 8rem;
+				}
+		 		&:after {
+		 			border-left: 1px solid $blue-gray;
+		 		}
+			}
+		}
+
+		[property] [property],
+		[typeof] [typeof] {
+			.mark-highlight-manual,
+			[data-editor-highlight="true"],
+			[data-type],
+			[typeof],
+			[property] {
+				&:before,
+				&:after {
+					margin-top: 12rem;
+				}
+			}
+		}
+
+		[property] [property] [property],
+		[typeof] [typeof] [typeof] {
+			.mark-highlight-manual,
+			[data-editor-highlight="true"],
+			[data-type],
+			[typeof],
+			[property] {
+				&:before,
+				&:after {
+					margin-top: 16rem;
+				}
+			}
+		}
+
+		[property] [property] [property] [property],
+		[typeof] [typeof] [typeof] [typeof] {
+			.mark-highlight-manual,
+			[data-editor-highlight="true"],
+			[data-type],
+			[typeof],
+			[property] {
+				&:before,
+				&:after {
+					margin-top: 20rem;
+				}
+			}
+		}
+
+		[property] [property] [property] [property] [property],
+		[typeof] [typeof] [typeof] [typeof] [typeof] {
+			.mark-highlight-manual,
+			[data-editor-highlight="true"],
+			[data-type],
+			[typeof],
+			[property] {
+				&:before,
+				&:after {
+					margin-top: 24rem;
+				}
+			}
+		}
+
+		[property] [property] [property] [property] [property] [property],
+		[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] {
+			.mark-highlight-manual,
+			[data-editor-highlight="true"],
+			[data-type],
+			[typeof],
+			[property] {
+				&:before,
+				&:after {
+					margin-top: 28rem;
+				}
+			}
+		}
+
+		[property] [property] [property] [property] [property] [property] [property],
+		[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] {
+			.mark-highlight-manual,
+			[data-editor-highlight="true"],
+			[data-type],
+			[typeof],
+			[property] {
+				&:before,
+				&:after {
+					margin-top: 32rem;
+				}
+			}
+		}
+  }
+}

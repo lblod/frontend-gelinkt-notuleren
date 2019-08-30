@@ -9,10 +9,15 @@
 @import 'colors';
 @import 'shame';
 
-@import 'hover-annotations-style';
-@import 'hover-annotations-content';
-@import 'show-annotations-style';
-@import 'show-annotations-content';
+
+@import 'annotations-styles';
+@import 'annotations-hover';
+@import 'annotations-show';
+@import 'annotations-flag-remove';
+
+@import 'annotations-content';
+
+// @import 'show-annotations-content';
 
 @import 'published-documents';
 @import 'sign-publish-flow';
@@ -20,7 +25,6 @@
 
 @import 'annotation-suggestion-modals';
 @import 'editor';
-@import 'editor-guiding-styles';
 @import 'loading-events';
 @import 'tasklist';
 @import 'toolbar';
