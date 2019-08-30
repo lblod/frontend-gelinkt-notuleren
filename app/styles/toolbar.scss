@@ -12,8 +12,8 @@
 
 .toolbar__annotations-switch {
     position: fixed;
-    margin-top: 11rem;
-    right: 1rem;
+    margin-top: 0.75rem;
+    right: 11rem;
     z-index: 5;
     display: block;
     width: 22rem;
@@ -44,23 +44,29 @@
 	    color: $gray;
 	    border: 1px solid $blue-gray-light;
 	    display: block;
-	    width: 3rem;
+	    // width: 3rem;
 	    height: 3rem;
-	    padding: 0 0 0.45rem;
-	    border-radius: 100%;
-	    text-align: center;
+	    // padding: 0 0 0.45rem;
+	    // border-radius: 100%;
+	    text-align: left;
 	    margin-top: -1rem;
 	    line-height: 0;
 	    font-size: 3rem;
+	    top: -6.1rem;
+	    padding: 2px 3rem 0.2em 0.5rem;
+	    right: -7.8rem;
 	}
 
 	button.button.annotation-suggestion--trigger:after {
 	    content:"Voeg sjabloon in";
 	    display: block;
-	    position: absolute;
+	    // position: absolute;
 	    font-size: 1.4rem;
 	    color: $gray-dark;
-	    left: 3.65rem;
+	    // left: 3.65rem;
 	    z-index: 900;
-	    top: 1.5rem;
+	    // top: 1.5rem;
+	    position: relative;
+	    top: 0.3rem;
+	    left: 2rem;
 	}
