@@ -52,6 +52,10 @@ Router.map(function() {
     this.route('new');
     this.route('edit');
   });
+
+  this.route('release-notes', function() {
+    this.route('notes');
+  });
 });
 
 export default Router;
