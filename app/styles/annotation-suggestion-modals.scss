@@ -14,7 +14,6 @@
 		max-height: 70vh;
 		overflow-y: auto;
 		display: block;
-		position: fixed;
 	}
 
 	.annotation-suggestion__suggestion .modal-dialog li .modal-dialog--temporary-fix {
@@ -48,14 +47,14 @@
 	.annotation-suggestion__suggestion .modal-dialog + .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog + .modal-dialog:not(.modal-dialog--temporary-fix) {
 	  right: 15rem !important;
-	  top: 22rem !important;
+	  top: 22rem;
 	}
 
 	.annotation-suggestion__suggestion .modal-dialog .vl-modal-dialog,
 	.annotation-suggestion__suggestion .modal-dialog .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
-	    top: 25rem !important;
+	    top: 25rem;
 	    right: -15rem;
 	}
 
@@ -63,7 +62,7 @@
 	.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
-	    right: 25rem !important;
+	    right: 25rem;
 	}
 
 	.annotation-suggestion__suggestion .modal-dialog li + li + li .vl-modal-dialog,
