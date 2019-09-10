@@ -26,7 +26,7 @@
     "@lblod/ember-acmidm-login": "^0.1.4",
     "@lblod/ember-mock-login": "^0.4.5",
     "@lblod/ember-rdfa-editor": "0.27.0",
-    "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.3.0",
+    "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.4.0",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "0.4.3",
     "@lblod/ember-rdfa-editor-agenda-plugin": "0.4.3",
     "@lblod/ember-rdfa-editor-citaten-plugin": "0.7.3",
