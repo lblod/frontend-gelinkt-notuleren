@@ -38,30 +38,37 @@
 	{
   	padding: 4.5rem 1rem 0 1rem;
 		margin: 1rem 0 0.5rem 0;
-		min-width: 14rem;
+		min-width: 18rem;
 		position: relative;
 		border-bottom: 0;
 		display: inline-block;
 
 		&:hover {
-    	background-color: transparent !important;
+    	background-color: transparent;
 		}
+
+    &:hover:before,
+    &:before,
+		&:hover:after,
+    &:after {
+    	left: -1px !important;
+    	top: -1px !important;
+    	right: -1px !important;
+    	max-width: none;
+    	width: 100%;
+    	border: 1px solid $blue-gray;
+    }
 
 		&:hover:after,
     &:after {
     	content: "";
     	display: block;
-    	left: -1px !important;
-    	top: -1px !important;
-    	right: -1px !important;
     	bottom: 0 !important;
-    	border: 1px solid $blue-gray !important;
     	height: auto;
-    	width: 100%;
-    	max-width: none;
     	position: absolute;
     	pointer-events: none;
     	margin-top: 0 !important;
+    	border-top: 0;
     }
 
     &:hover:before,
@@ -70,21 +77,30 @@
   		padding: 0.5rem 1rem;
   		background-color: $blue-gray-lightest;
     	margin: 0 !important;
-    	left: -1px !important;
-    	top: -1px !important;
-    	right: -1px !important;
-    	border: 1px solid $blue-gray;
     	border-bottom: 0;
-    	width: 100%;
-    	max-width: none;
     }
 	}
+}
 
-	[typeof="besluit:Zitting"]:after {
-		border-color: transparent;
-		padding: 0;
+/* make zitting not stand out, as it would constantly be visible */
+
+.rdfa-annotations	[typeof="besluit:Zitting"] {
+	padding: 0 !important;
+	margin: 0 !important;
+	border: 0 !important;
+	background-color: transparent !important;
+
+	&:hover:after,
+	&:hover:before,
+	&:before,
+	&:after {
+		content: normal !important;
 	}
+}
 
+/* make sure icons looks normal when showing the rdfa annotations */
+
+.rdfa-annotations {
 	[typeof="besluit:Agendapunt"] [property="besluit:geplandOpenbaar"] i.fa,
 	[typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] i.fa {
 		position: relative;
@@ -94,9 +110,50 @@
 	}
 }
 
+/* only extra metadata on when hovering over fields, when "show annotations" has been switched on */
+
+.rdfa-annotations.show-rdfa-blocks {
+	[data-type],
+	[property],
+	[typeof]:not([typeof="besluit:Zitting"]) {
+
+		&:hover {
+			background-color: rgba($white, 0.4) !important;
+			transition: box-shadow 200ms;
+			position: relative;
+		}
+
+		&:after {
+			transition: top 200ms;
+		}
+
+		&:hover:before {
+			padding-top: 3.5em;
+			top: -3.5em !important;
+		}
+
+		&:hover:after {
+			content: attr(property) " " attr(typeof) " " attr(data-type);
+			top: -3.5em !important;
+			display: block;
+			padding-top: 3.5em;
+			color: $blue-gray-dark;
+			letter-spacing: 0.2px;
+			font-size: 1.3rem;
+			font-weight: 400;
+			font-family: "flanders-sans";
+			padding: 0.3rem 0 0 1rem;
+			text-transform: none;
+			z-index: 901;
+		}
+	}
+}
+
+/* hide superfluous elements */
+
 [property="besluit:gebeurtNa"],
 [property="besluit:aangebrachtNa"],
-[property="eli:language"],
+[property="eli:language"], // these three are metadata relevant to the document
 
 [typeof="ext:TasklistData"],
 [class="ext_scroll_to"],
@@ -104,6 +161,7 @@
 [property="ext:idInSnippet"],
 [property="ext:intentionUri"],
 [typeof="ext:Variable"],
-	[property="ext:metadata"] {
+	[property="ext:metadata"] { // these are elements to help us work with the document
 	display: none !important;
 }
+

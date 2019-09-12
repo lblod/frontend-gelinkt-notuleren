@@ -97,6 +97,22 @@
       content: "Secretaris van de zitting";
     }
 
+    [typeof="ext:BesluitGemeenteraadsledenAfstandMandaat"]:before {
+    	content: "Afstand van mandaat";
+    }
+
+    [typeof="ext:BesluitGemeenteraadsledenVerkiesbaarheidsvoorwaarden"]:before {
+    	content: "Verkiesbaarheidsvoorwaarden";
+    }
+
+    [typeof="ext:BesluitGemeenteraadsledenOnverenigbaarheden"]:before {
+    	content: "Onverenigbaarheden";
+    }
+
+    [typeof="ext:BesluitGemeenteraadsledenVerhindering"]:before {
+    	content: "Verhindering";
+    }
+
 
   /* -------------------- Agendapunt ------------------------- */
 
