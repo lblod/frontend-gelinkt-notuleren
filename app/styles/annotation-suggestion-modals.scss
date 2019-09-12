@@ -44,13 +44,13 @@
 		}
 	}
 
-	.annotation-suggestion__suggestion .modal-dialog + .vl-modal-dialog,
+	.annotation-suggestion__suggestion .modal-dialog + .vl-modal-dialog:not(.vl-modal-dialog--wide),
 	.annotation-suggestion__suggestion .modal-dialog + .modal-dialog:not(.modal-dialog--temporary-fix) {
 	  right: 15rem !important;
 	  top: 22rem;
 	}
 
-	.annotation-suggestion__suggestion .modal-dialog .vl-modal-dialog,
+	.annotation-suggestion__suggestion .modal-dialog .vl-modal-dialog:not(.vl-modal-dialog--wide),
 	.annotation-suggestion__suggestion .modal-dialog .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
@@ -58,14 +58,14 @@
 	    right: -15rem;
 	}
 
-	.annotation-suggestion__suggestion .modal-dialog li + li .vl-modal-dialog,
+	.annotation-suggestion__suggestion .modal-dialog li + li .vl-modal-dialog:not(.vl-modal-dialog--wide),
 	.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
 	    right: 25rem;
 	}
 
-	.annotation-suggestion__suggestion .modal-dialog li + li + li .vl-modal-dialog,
+	.annotation-suggestion__suggestion .modal-dialog li + li + li .vl-modal-dialog:not(.vl-modal-dialog--wide),
 	.annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
@@ -73,7 +73,7 @@
 	    right: -15rem;
 	}
 
-	.annotation-suggestion__suggestion .modal-dialog li + li + li + li .vl-modal-dialog,
+	.annotation-suggestion__suggestion .modal-dialog li + li + li + li .vl-modal-dialog:not(.vl-modal-dialog--wide),
 	.annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
@@ -81,7 +81,7 @@
 	    right: 25rem;
 	}
 
-	.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .vl-modal-dialog,
+	.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .vl-modal-dialog:not(.vl-modal-dialog--wide),
 	.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
 	    padding: 0;
 	    left: auto;
