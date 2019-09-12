@@ -56,11 +56,11 @@
     }
 
     [property="prov:startedAtTime"]:before {
-      content: "Tijdstip waarop de zitting begint";
+      content: "Tijdstip start zitting";
     }
 
     [property="prov:endedAtTime"]:before {
-      content: "Tijdstip waarop de zitting eindigt";
+      content: "Tijdstip einde zitting";
     }
 
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {

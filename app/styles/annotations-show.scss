@@ -41,6 +41,7 @@
 		min-width: 14rem;
 		position: relative;
 		border-bottom: 0;
+		display: inline-block;
 
 		&:hover {
     	background-color: transparent !important;
@@ -79,18 +80,30 @@
     }
 	}
 
-	[typeof="besluit:Zitting"],
-	[property="ext:metadata"] {
-		padding: 0 !important;
-		margin: 0 !important;
-		border: 0 !important;
-		background-color: transparent !important;
-
-		&:hover:after,
-		&:hover:before,
-		&:before,
-		&:after {
-			content: normal !important;
-		}
+	[typeof="besluit:Zitting"]:after {
+		border-color: transparent;
+		padding: 0;
 	}
+
+	[typeof="besluit:Agendapunt"] [property="besluit:geplandOpenbaar"] i.fa,
+	[typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] i.fa {
+		position: relative;
+		left: auto;
+		top: auto;
+		font-style: normal;
+	}
+}
+
+[property="besluit:gebeurtNa"],
+[property="besluit:aangebrachtNa"],
+[property="eli:language"],
+
+[typeof="ext:TasklistData"],
+[class="ext_scroll_to"],
+[property="ext:variableState"],
+[property="ext:idInSnippet"],
+[property="ext:intentionUri"],
+[typeof="ext:Variable"],
+	[property="ext:metadata"] {
+	display: none !important;
 }
