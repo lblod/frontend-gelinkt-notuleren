@@ -1,7 +1,51 @@
 {{#if hasSnippets}}
-  Er zijn snippets beschikbaar.
+	<div class="modal-dialog modal-dialog--snippet">
+		<div class="modal-dialog__header">
+			<h2 class="modal-dialog__title">
+				  Er zijn één of meerdere wegreglementen beschikbaar.
+			</h2>
+		</div>
+		<div class="modal-dialog__content">
+			<p class="u-spacer">Maak in de template van uw zitting een besluit aan met als type "wegenreglement". Daar zal u de tekst kunnen invoegen.</p>
+		</div>
+		<div class="modal-dialog__footer">
+			<button class="button button--narrow u-spacer--bottom--tiny">Meer informatie</button>
+			<button class="button button--alt button--narrow u-spacer--bottom--tiny">Begrepen</button>
+		</div>
+	</div>
 {{/if}}
+
 {{#if hasErrors}}
-  Er zijn problemen met het ophalen van snippets.
+	<div class="modal-dialog modal-dialog--snippet">
+		<div class="modal-dialog__header">
+			<h2 class="modal-dialog__title">
+				Er zijn één of meerdere wegreglementen beschikbaar.
+			</h2>
+		</div>
+		<div class="modal-dialog__content">
+			<p>Sla uw document op en vernieuw, of neem contact op via <a href="mailto:digitaalABB@vlaanderen.be">digitaalABB@vlaanderen.be</a>.</p>
+		</div>
+		<div class="modal-dialog__footer">
+			<button class="button button--tiny u-spacer--bottom--tiny">Meer informatie</button>
+			<button class="button button--alt button--tiny u-spacer--bottom--tiny">Begrepen</button>
+		</div>
+	</div>
+{{/if}}
+
+{{#if hasSnippets}}
+	<div class="editor-loading-events editor-loading-events--snippets">
+		<div class="editor-loading-events__snippets">
+	  	<div class="grid grid--collapse">
+				<div class="col--2-12 u-align-center">
+				<i class="vi vi-document vi-u-s"></i>
+				</div>
+				<div class="col--10-12">
+					<p class="small">
+						Wegreglement beschikbaar
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 {{/if}}
 {{yield}}
