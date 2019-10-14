@@ -16,7 +16,8 @@ export default {
 //    "rdfa-editor-mandaat-plugin",
     "rdfa-editor-personen-plugin",
     "rdfa-editor-agenda-plugin",
-    "rdfa-editor-import-snippet-plugin"
+    "rdfa-editor-import-snippet-plugin",
+    "rdfa-editor-roadsign-hint-plugin"
   ],
 
   //GEMEENTE
@@ -37,7 +38,8 @@ export default {
     // "rdfa-editor-mandaat-plugin",
     "rdfa-editor-personen-plugin",
     "rdfa-editor-agenda-plugin",
-    "rdfa-editor-import-snippet-plugin"
+    "rdfa-editor-import-snippet-plugin",
+    "rdfa-editor-roadsign-hint-plugin"
   ],
 
   //OCMW
@@ -58,7 +60,8 @@ export default {
     //    "rdfa-editor-mandaat-plugin",
     "rdfa-editor-personen-plugin",
     "rdfa-editor-agenda-plugin",
-    "rdfa-editor-import-snippet-plugin"
+    "rdfa-editor-import-snippet-plugin",
+    "rdfa-editor-roadsign-hint-plugin"
   ],
   none: []
 };

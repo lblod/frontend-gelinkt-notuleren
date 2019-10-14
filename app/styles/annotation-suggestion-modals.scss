@@ -123,3 +123,17 @@
 .modal-dialog__content > .data-table {
 	margin-bottom: 22rem;
 }
+
+.modal-dialog.modal-dialog--snippet {
+	padding: 2rem;
+	right: -7rem;
+	max-width: 40rem;
+	position: absolute;
+	top: 40rem;
+	left: auto;
+}
+
+.editor-loading-events--snippets .editor-loading-events__snippets {
+	position: absolute;
+	bottom: 5rem;
+}
