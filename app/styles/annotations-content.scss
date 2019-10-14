@@ -8,7 +8,7 @@
 
 	[property^="ext:insert"]:before,
 	[data-editor-highlight="true"]:before {
-		content: "Klik om de juiste optie selecteren";
+		content: "Selecteer de juiste optie";
 	}
 
 	span.mark-highlight-manual:before {
@@ -34,15 +34,15 @@
   }
 
   [typeof="besluit:Bestuurseenheid"]:before {
-    content: "Bestuurs-eenheid";
+    content: "Bestuurseenheid";
   }
 
   [property="ext:scopedBestuursorgaanText"]:before {
-  	content: "Selecteer het bestuurs-orgaan";
+  	content: "Selecteer het bestuursorgaan";
   }
 
   [typeof="besluit:Bestuursorgaan"]:before {
-    content: "Bestuurs-orgaan";
+    content: "Bestuursorgaan";
   }
 
   /* -------------------- Zitting ------------------------- */
@@ -64,7 +64,7 @@
     }
 
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
-      content: "Bestuurs-orgaan";
+      content: "Bestuursorgaan";
     }
 
     [property="besluit:geplandeStart"]:before {

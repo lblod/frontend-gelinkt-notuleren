@@ -3,6 +3,7 @@
  ========================================================================== */
 
 .rdfa-editor {
+
 	.mark-highlight-manual,
 	[typeof],
 	[property],
@@ -53,7 +54,7 @@
 		/* positioning of pseudo class elements */
 
 	  .mark-highlight-manual,
-		// [data-editor-highlight="true"],
+		[data-editor-highlight="true"],
 		[data-type],
 	 	[typeof],
 	 	[property] {
@@ -66,7 +67,7 @@
 		[property],
 		[typeof] {
 			.mark-highlight-manual,
-			// [data-editor-highlight="true"],
+			[data-editor-highlight="true"],
 			[data-type],
 			[typeof],
 			[property] {
@@ -83,7 +84,7 @@
 		[property] [property],
 		[typeof] [typeof] {
 			.mark-highlight-manual,
-			// [data-editor-highlight="true"],
+			[data-editor-highlight="true"],
 			[data-type],
 			[typeof],
 			[property] {
@@ -97,7 +98,7 @@
 		[property] [property] [property],
 		[typeof] [typeof] [typeof] {
 			.mark-highlight-manual,
-			// [data-editor-highlight="true"],
+			[data-editor-highlight="true"],
 			[data-type],
 			[typeof],
 			[property] {
@@ -111,7 +112,7 @@
 		[property] [property] [property] [property],
 		[typeof] [typeof] [typeof] [typeof] {
 			.mark-highlight-manual,
-			// [data-editor-highlight="true"],
+			[data-editor-highlight="true"],
 			[data-type],
 			[typeof],
 			[property] {
@@ -125,7 +126,7 @@
 		[property] [property] [property] [property] [property],
 		[typeof] [typeof] [typeof] [typeof] [typeof] {
 			.mark-highlight-manual,
-			// [data-editor-highlight="true"],
+			[data-editor-highlight="true"],
 			[data-type],
 			[typeof],
 			[property] {
@@ -139,7 +140,7 @@
 		[property] [property] [property] [property] [property] [property],
 		[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] {
 			.mark-highlight-manual,
-			// [data-editor-highlight="true"],
+			[data-editor-highlight="true"],
 			[data-type],
 			[typeof],
 			[property] {
@@ -153,7 +154,7 @@
 		[property] [property] [property] [property] [property] [property] [property],
 		[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] {
 			.mark-highlight-manual,
-			// [data-editor-highlight="true"],
+			[data-editor-highlight="true"],
 			[data-type],
 			[typeof],
 			[property] {
@@ -163,5 +164,98 @@
 				}
 			}
 		}
+
+		[data-editor-highlight="true"] [property]:before,
+		[data-editor-highlight="true"] [typeof]:before {
+			padding-top: 3.5rem;
+			max-height: 7rem;
+		  -webkit-line-clamp: 2;
+		}
+
+		[data-editor-highlight="true"] [property]:after,
+		[data-editor-highlight="true"] [typeof]:after {
+			top: 0;
+		}
   }
+}
+
+
+.rdfa-annotations:not(.show-rdfa-blocks) .rdfa-editor {
+	[data-editor-position-level="0"][property],
+	[data-editor-position-level="1"][property],
+	[data-editor-position-level="2"][property],
+	[data-editor-position-level="3"][property],
+	[data-editor-position-level="4"][property],
+	[data-editor-position-level="0"][typeof],
+	[data-editor-position-level="1"][typeof],
+	[data-editor-position-level="2"][typeof],
+	[data-editor-position-level="3"][typeof],
+	[data-editor-position-level="4"][typeof],
+	[data-editor-position-level="0"][data-type],
+	[data-editor-position-level="1"][data-type],
+	[data-editor-position-level="2"][data-type],
+	[data-editor-position-level="3"][data-type],
+	[data-editor-position-level="4"][data-type],
+	[data-editor-position-level="0"][data-editor-highlight="true"],
+	[data-editor-position-level="1"][data-editor-highlight="true"],
+	[data-editor-position-level="2"][data-editor-highlight="true"],
+	[data-editor-position-level="3"][data-editor-highlight="true"],
+	[data-editor-position-level="4"][data-editor-highlight="true"],
+	[data-editor-position-level="0"].mark-highlight-manual,
+	[data-editor-position-level="1"].mark-highlight-manual,
+	[data-editor-position-level="2"].mark-highlight-manual,
+	[data-editor-position-level="3"].mark-highlight-manual,
+	[data-editor-position-level="4"].mark-highlight-manual {
+
+		// position: relative;
+		// display: inline-block;
+
+    &:before {
+    	padding: 0 0 2rem 0rem;
+			opacity: 1;
+			left: -21.5rem;
+			right: auto;
+		  text-align: right;
+    	top: -4rem;
+
+			display: block;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			max-width: 15.5rem;
+			max-height: 2.5rem;
+		  display: -webkit-box;
+		  -webkit-line-clamp: 2;
+		  -webkit-box-orient: vertical;
+    }
+
+    &:after {
+    	position: absolute;
+    	content: "";
+    	display: block;
+    	left: -5.5rem;
+    	right: auto;
+    	width: 5rem;
+    	border-top: 1px solid $blue-gray;
+		  border-right: 1px solid $blue-gray;
+
+		  border-left: 0;
+    	border-bottom: 0;
+    	height: 100%;
+    	top: -3.7rem;
+    }
+
+		[data-editor-highlight="true"] [property]:before,
+		[data-editor-highlight="true"] [typeof]:before {
+			padding-top: 3.5rem;
+			max-height: 7rem;
+
+		  -webkit-line-clamp: 2;
+
+		}
+
+		[data-editor-highlight="true"] [property]:after,
+		[data-editor-highlight="true"] [typeof]:after {
+			top: 0;
+		}
+	}
 }

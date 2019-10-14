@@ -21,7 +21,10 @@
 	[property="prov:generated"] > [property="besluit:motivering"],
 	[typeof="besluit:Zitting"],
 	[property^="ext"]:not([property="ext:heeftAfwezigeBijAgendapunt"]):not(span),
-	[data-editor-highlight="true"]:not(span) {
+	[data-editor-highlight="true"]:not(span),
+	[typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"],
+	[typeof="besluit:Artikel"],
+	[typeof="mobiliteit:Opstelling"] {
 		display: block;
 		position: relative;
 	}
@@ -52,10 +55,18 @@
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		font-weight: 600;
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 		color: $blue-gray-dark;
 		line-height: 1;
     font-family: "flanders-sans", sans-serif;
+
+		display: block;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		max-height: 2.5rem;
+	  display: -webkit-box;
+	  -webkit-line-clamp: 2;
+	  -webkit-box-orient: vertical;
   }
 
   &:after {

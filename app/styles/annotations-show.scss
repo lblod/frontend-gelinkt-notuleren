@@ -2,12 +2,12 @@
   Annotations styles on show and click
  ========================================================================== */
 
-.rdfa-annotations {
-	&.show-rdfa-blocks .mark-highlight-manual,
-	&.show-rdfa-blocks [data-editor-highlight="true"],
-	&.show-rdfa-blocks [data-type],
-	&.show-rdfa-blocks [property],
-	&.show-rdfa-blocks [typeof],
+.rdfa-annotations.show-rdfa-blocks {
+	.mark-highlight-manual,
+	[data-editor-highlight="true"],
+	[data-type],
+	[property],
+	[typeof],
 	[data-editor-position-level="0"][property],
 	[data-editor-position-level="1"][property],
 	[data-editor-position-level="2"][property],
@@ -57,6 +57,7 @@
     	max-width: none;
     	width: 100%;
     	border: 1px solid $blue-gray;
+    	text-align: left;
     }
 
 		&:hover:after,
@@ -115,7 +116,35 @@
 .rdfa-annotations.show-rdfa-blocks {
 	[data-type],
 	[property],
-	[typeof]:not([typeof="besluit:Zitting"]) {
+	[typeof]:not([typeof="besluit:Zitting"]),
+
+	[data-editor-position-level="0"][property],
+	[data-editor-position-level="1"][property],
+	[data-editor-position-level="2"][property],
+	[data-editor-position-level="3"][property],
+	[data-editor-position-level="4"][property],
+	[data-editor-position-level="0"][typeof],
+	[data-editor-position-level="1"][typeof],
+	[data-editor-position-level="2"][typeof],
+	[data-editor-position-level="3"][typeof],
+	[data-editor-position-level="4"][typeof],
+	[data-editor-position-level="0"][data-type],
+	[data-editor-position-level="1"][data-type],
+	[data-editor-position-level="2"][data-type],
+	[data-editor-position-level="3"][data-type],
+	[data-editor-position-level="4"][data-type],
+	[data-editor-position-level="0"][data-editor-highlight="true"],
+	[data-editor-position-level="1"][data-editor-highlight="true"],
+	[data-editor-position-level="2"][data-editor-highlight="true"],
+	[data-editor-position-level="3"][data-editor-highlight="true"],
+	[data-editor-position-level="4"][data-editor-highlight="true"],
+	[data-editor-position-level="0"].mark-highlight-manual,
+	[data-editor-position-level="1"].mark-highlight-manual,
+	[data-editor-position-level="2"].mark-highlight-manual,
+	[data-editor-position-level="3"].mark-highlight-manual,
+	[data-editor-position-level="4"].mark-highlight-manual,
+	[data-editor-position-level="1"] > [property],
+	[data-editor-position-level="1"] > [typeof] {
 
 		&:hover {
 			background-color: rgba($white, 0.4) !important;
@@ -128,23 +157,24 @@
 		}
 
 		&:hover:before {
-			padding-top: 3.5em;
-			top: -3.5em !important;
+			padding-top: 4.3em;
+			top: -4em !important;
 		}
 
 		&:hover:after {
 			content: attr(property) " " attr(typeof) " " attr(data-type);
-			top: -3.5em !important;
+			top: -3.7em !important;
 			display: block;
-			padding-top: 3.5em;
+			padding-top: 3.7em;
 			color: $blue-gray-dark;
 			letter-spacing: 0.2px;
-			font-size: 1.3rem;
+			font-size: 1.2rem;
 			font-weight: 400;
 			font-family: "flanders-sans";
 			padding: 0.3rem 0 0 1rem;
 			text-transform: none;
 			z-index: 901;
+			line-height: 1;
 		}
 	}
 }

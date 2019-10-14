@@ -8,7 +8,7 @@
   /* -------------------- Guiding tags ------------------------- */
 
 	[property^="ext:insert"]:before {
-		content: "Klik om de juiste optie selecteren";
+		content: "Selecteer de juiste optie";
 	}
 
 	[property="ext:behandelt"] [data-editor-highlight="true"] > [property],
@@ -21,7 +21,7 @@
 		display: block;
 
 		&:before {
-			content: "Klik om de juiste optie selecteren";
+			content: "Selecteer de juiste optie";
 		}
 	}
 
@@ -44,11 +44,11 @@
   }
 
   [typeof="besluit:Bestuurseenheid"]:before {
-    content: "Bestuurs-eenheid" !important;
+    content: "Bestuurseenheid" !important;
   }
 
   [typeof="besluit:Bestuursorgaan"]:before {
-    content: "Bestuurs-orgaan" !important;
+    content: "Bestuursorgaan" !important;
   }
 
   [property="ext:scopedBestuursorgaanText"]:before {
@@ -63,7 +63,7 @@
 
     // [property="besluit:isGehoudenDoor"]:before
     [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
-      content: "Bestuurs-orgaan" !important;
+      content: "Bestuursorgaan" !important;
     }
 
     [property="besluit:geplandeStart"]:before {
