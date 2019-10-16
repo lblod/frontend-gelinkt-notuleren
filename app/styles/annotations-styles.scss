@@ -22,13 +22,14 @@
 [data-type],
 .mark-highlight-manual
 {
-  border-bottom: 1px solid rgba($blue-gray-light, 1);
+  border-bottom: 1px solid rgba($blue-gray-light, 0.8);
   padding-bottom: 5px;
 
-  &:before { // invisible styling of annotations, before they are shown
+  &:not([data-flagged-remove="complete"]):before { // invisible styling of annotations, before they are shown
   	/* positioning */
   	content:  attr(property) " " attr(typeof) " " attr(data-type);
 		top: -999px;
+		left: -50;
 		opacity: 0;
 		position: absolute;
 		left: auto;
@@ -101,6 +102,10 @@
 [property^="ext:insert"],
 [data-editor-highlight="true"] {
 	background-color: rgba($primary-yellow, 0.9);
+
+	&::selection {
+		background-color: darken($primary-yellow, 20%);
+	}
 
 	&:hover {
     color: $black;

@@ -14,7 +14,10 @@
 		min-width: 20rem;
 		position: relative;
 		border-bottom: 0;
-		display: inline-block;
+
+		&:not(p):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(div) {
+			display: inline-block;
+		}
 
 		&:hover {
     	background-color: transparent;
