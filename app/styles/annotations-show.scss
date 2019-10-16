@@ -7,38 +7,11 @@
 	[data-editor-highlight="true"],
 	[data-type],
 	[property],
-	[typeof],
-	[data-editor-position-level="0"][property],
-	[data-editor-position-level="1"][property],
-	[data-editor-position-level="2"][property],
-	[data-editor-position-level="3"][property],
-	[data-editor-position-level="4"][property],
-	[data-editor-position-level="0"][typeof],
-	[data-editor-position-level="1"][typeof],
-	[data-editor-position-level="2"][typeof],
-	[data-editor-position-level="3"][typeof],
-	[data-editor-position-level="4"][typeof],
-	[data-editor-position-level="0"][data-type],
-	[data-editor-position-level="1"][data-type],
-	[data-editor-position-level="2"][data-type],
-	[data-editor-position-level="3"][data-type],
-	[data-editor-position-level="4"][data-type],
-	[data-editor-position-level="0"][data-editor-highlight="true"],
-	[data-editor-position-level="1"][data-editor-highlight="true"],
-	[data-editor-position-level="2"][data-editor-highlight="true"],
-	[data-editor-position-level="3"][data-editor-highlight="true"],
-	[data-editor-position-level="4"][data-editor-highlight="true"],
-	[data-editor-position-level="0"].mark-highlight-manual,
-	[data-editor-position-level="1"].mark-highlight-manual,
-	[data-editor-position-level="2"].mark-highlight-manual,
-	[data-editor-position-level="3"].mark-highlight-manual,
-	[data-editor-position-level="4"].mark-highlight-manual,
-	[data-editor-position-level="1"] > [property],
-	[data-editor-position-level="1"] > [typeof]
-	{
+	[typeof] {
+
   	padding: 4.5rem 1rem 0 1rem;
 		margin: 1rem 0 0.5rem 0;
-		min-width: 18rem;
+		min-width: 20rem;
 		position: relative;
 		border-bottom: 0;
 		display: inline-block;
@@ -79,6 +52,7 @@
   		background-color: $blue-gray-lightest;
     	margin: 0 !important;
     	border-bottom: 0;
+    	max-height: 7rem;
     }
 	}
 }
@@ -114,37 +88,11 @@
 /* only extra metadata on when hovering over fields, when "show annotations" has been switched on */
 
 .rdfa-annotations.show-rdfa-blocks {
+	.mark-highlight-manual,
+	[data-editor-highlight="true"],
 	[data-type],
 	[property],
-	[typeof]:not([typeof="besluit:Zitting"]),
-
-	[data-editor-position-level="0"][property],
-	[data-editor-position-level="1"][property],
-	[data-editor-position-level="2"][property],
-	[data-editor-position-level="3"][property],
-	[data-editor-position-level="4"][property],
-	[data-editor-position-level="0"][typeof],
-	[data-editor-position-level="1"][typeof],
-	[data-editor-position-level="2"][typeof],
-	[data-editor-position-level="3"][typeof],
-	[data-editor-position-level="4"][typeof],
-	[data-editor-position-level="0"][data-type],
-	[data-editor-position-level="1"][data-type],
-	[data-editor-position-level="2"][data-type],
-	[data-editor-position-level="3"][data-type],
-	[data-editor-position-level="4"][data-type],
-	[data-editor-position-level="0"][data-editor-highlight="true"],
-	[data-editor-position-level="1"][data-editor-highlight="true"],
-	[data-editor-position-level="2"][data-editor-highlight="true"],
-	[data-editor-position-level="3"][data-editor-highlight="true"],
-	[data-editor-position-level="4"][data-editor-highlight="true"],
-	[data-editor-position-level="0"].mark-highlight-manual,
-	[data-editor-position-level="1"].mark-highlight-manual,
-	[data-editor-position-level="2"].mark-highlight-manual,
-	[data-editor-position-level="3"].mark-highlight-manual,
-	[data-editor-position-level="4"].mark-highlight-manual,
-	[data-editor-position-level="1"] > [property],
-	[data-editor-position-level="1"] > [typeof] {
+	[typeof] {
 
 		&:hover {
 			background-color: rgba($white, 0.4) !important;
@@ -157,7 +105,7 @@
 		}
 
 		&:hover:before {
-			padding-top: 4.3em;
+			padding-top: 3.3em;
 			top: -4em !important;
 		}
 
@@ -176,6 +124,11 @@
 			z-index: 901;
 			line-height: 1;
 		}
+	}
+
+	.mark-highlight-manual:hover:after,
+	[data-editor-highlight="true"]:hover:after {
+		content: "Actie vereist";
 	}
 }
 
