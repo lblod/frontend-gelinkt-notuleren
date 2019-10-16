@@ -147,9 +147,14 @@
   }
 
   	[typeof="besluit:Besluit"]:before,
+  	[typeof~="besluit:Besluit"]:before,
   	[typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
   	[typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
   		content: "Besluit";
+  	}
+
+  	[typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"]:before {
+  		content: "Besluit: Aanvullend reglement";
   	}
 
   	[property="dc:subject"]:before {
@@ -299,6 +304,10 @@
       content: "Besluit";
     }
 
+      [typeof~="besluit:Artikel"]:before {
+        content: "Artikel";
+      }
+
       [property="eli:has_part"][typeof="besluit:Artikel"]:before {
         content: "Artikel";
       }
@@ -314,6 +323,53 @@
       [property="eli:number"]:before {
         content: "Nummer";
       }
+
+		  /* Mobiliteit */
+
+			  [typeof="mobiliteit:Opstelling"]:before {
+			  	content: "Opstelling";
+			  }
+
+			  [typeof="locn:Geometry"]:before {
+			  	content: "Zone"; // : " attr(resource)
+			  }
+
+			  [property="geosparql:asWKT"]:before {
+			  	content: attr(content);
+			  }
+
+			  [property="mobiliteit:omvatVerkeersbord"]:before {
+			  	content: "Verkeersbord";
+			  }
+
+			  [property="mobiliteit:grafischeWeergave"]:before {
+			  	content: "Grafische weergave"; //: " attr(resource);
+			  }
+
+			  [property="mobiliteit:Verkeersbord.operationeleStatus"]:before,
+			  [property="mobiliteit:Opstelling.operationeleStatus"]:before {
+			  	content: "Operationele status";
+			  }
+
+			  [property="mobiliteit:isBeginZone"]:before {
+			  	content: "Duidt begin zone aan";
+			  }
+
+			  [property="mobiliteit:isEindeZone"]:before {
+			  	content: "Duidt einde zone aan";
+			  }
+
+			  [property="mobiliteit:heeftVerkeersbordconcept"]:before {
+			  	content: "Verkeersbord concept";
+			  }
+
+			  [property="mobiliteit:heeftVerkeersbordconcept"]:before {
+			  	content: "Verkeersbord concept";
+			  }
+
+			  [property="mobiliteit:realiseert"]:before {
+			  	content: "Realisatie";
+			  }
 
   /* -------------------- Stemming ------------------------- */
 
