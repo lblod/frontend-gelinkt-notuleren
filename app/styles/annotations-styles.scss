@@ -2,13 +2,6 @@
   Shared styling (hover, click, show, regular)
  ========================================================================== */
 
-/* find me a home */
-
-[data-editor-highlight="true"] > [property],
-[data-editor-highlight="true"] > [typeof] {
-	margin: 0 !important;
-}
-
 /* styling the annotations */
 
 .rdfa-editor {
@@ -17,22 +10,15 @@
 		display: inline-block;
 	}
 
-	[property="prov:generated"] > [property="prov:value"],
-	[property="prov:generated"] > [property="besluit:motivering"],
-	[typeof="besluit:Zitting"],
-	[property^="ext"]:not([property="ext:heeftAfwezigeBijAgendapunt"]):not(span),
-	[data-editor-highlight="true"]:not(span),
-	[typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"],
-	[typeof="besluit:Artikel"],
-	[typeof="mobiliteit:Opstelling"] {
-		display: block;
-		position: relative;
+	[property="prov:value"] > div > span,
+	[property="ext:behandelt"] > div > span {
+		display: block; // remove when span is gone from the template "nieuw generiek besluit"
 	}
 }
 
 [data-editor-highlight="true"],
 [property],
-[typeof],
+[typeof]:not([typeof="foaf:Document"]),
 [data-type],
 .mark-highlight-manual
 {
@@ -117,21 +103,15 @@
 	background-color: rgba($primary-yellow, 0.9);
 
 	&:hover {
+    color: $black;
 		background-color: $primary-yellow;
 	}
 }
 
-.mark-highlight-manual,
-[data-editor-highlight="true"] {
-
-  &:hover {
-    color: $black;
-    background-color: rgba($blue-gray, 0.2);
-  }
-}
-
 span.mark-highlight-manual {
-  background-color: rgba($blue-gray, 0.3);
+  // background-color: rgba($blue-gray, 0.3);
+  color: $gray !important;
+  font-style: italic;
 }
 
 /* hide superfluous annotations */
@@ -148,4 +128,3 @@ span.mark-highlight-manual {
 		content: normal !important;
 	}
 }
-
