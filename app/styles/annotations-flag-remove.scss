@@ -2,7 +2,7 @@
 /* Removing annotations
  ========================================================================== */
 
-.rdfa-editor [typeof="besluit:Zitting"] {
+.rdfa-editor {
 	[data-flagged-remove="almost-complete"][data-editor-position-level="0"],
 	[data-flagged-remove="almost-complete"]:hover {
 		box-shadow: -2px 0 0 black !important;
@@ -84,7 +84,7 @@
 	}
 }
 
-.rdfa-annotations.show-rdfa-blocks .rdfa-editor [typeof="besluit:Zitting"] {
+.rdfa-annotations.show-rdfa-blocks {
 	[data-flagged-remove="complete"][data-editor-position-level="0"],
 	[data-flagged-remove="complete"] {
 		border: 1px solid $blue-gray;

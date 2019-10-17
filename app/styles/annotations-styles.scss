@@ -29,7 +29,6 @@
   	/* positioning */
   	content:  attr(property) " " attr(typeof) " " attr(data-type);
 		top: -999px;
-		left: -50;
 		opacity: 0;
 		position: absolute;
 		left: auto;
