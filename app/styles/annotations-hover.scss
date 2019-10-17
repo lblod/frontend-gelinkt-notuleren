@@ -3,7 +3,7 @@
 //  ========================================================================== */
 
 
-.rdfa-annotations:not(.show-rdfa-blocks) .rdfa-editor {
+.rdfa-annotations:not(.show-rdfa-blocks) {
 
 	.mark-highlight-manual,
 	[typeof],
@@ -12,8 +12,10 @@
 	[data-editor-highlight="true"] {
 
 		&:before,
-		&:after {
-			transition: padding 400ms, opacity 400ms;
+		&:after,
+		&:hover:before,
+		&:hover:after {
+			transition: padding 400ms, opacity 400ms, left 200ms;
 		}
 
 		/* showing annotations text */
@@ -28,14 +30,13 @@
 			opacity: 1;
 			z-index: 100 !important;
 			padding-right: 0.5rem;
+			right: -29.5rem;
 	  }
 
 		&[data-editor-position-level]:before,
 	  &:hover:before {
-			padding: 0 0 2rem 0rem;
 			top: 0;
 			opacity: 1;
-			right: -29.5rem;
 
 			width: 15rem;
 			height: 2.5rem;
@@ -45,10 +46,7 @@
 
 			text-overflow: ellipsis;
 			overflow: hidden;
-	  }
 
-	  &:not([data-flagged-remove="complete"]):hover:before,
-		&:not([data-flagged-remove="complete"])[data-editor-position-level]:before {
 			text-align: right;
 			right: auto;
 			left: -23.5rem;
@@ -58,8 +56,6 @@
 
 	  &:not([data-editor-position-level]):hover:after {
 			left: -8.5rem;
-		  border-right: 0;
-		  border-top: 1px solid rgba($blue-gray, 0.7);
 	  }
 
 		&[data-editor-position-level]:after,
@@ -73,6 +69,10 @@
     	width: 5rem;
 		  border-right: 1px solid $blue-gray;
 		  border-top: 1px solid $blue-gray;
+		}
+
+	  &:not([data-editor-position-level]):hover:after {
+		  border-right: 0;
 		}
 
 		&[data-editor-position-level="0"]:after {
@@ -101,6 +101,8 @@
 			}
 		}
 
+		[property] .mark-highlight-manual,
+		[typeof] .mark-highlight-manual,
 		[property] [data-editor-highlight="true"],
 		[typeof] [data-editor-highlight="true"],
 		[property] [property],
@@ -246,8 +248,6 @@
 	[property="ext:insertStemmingText"],
 	[property="ext:aanwezigenTable"],
 	[property="ext:insertAanwezigenText"],
-	ul.bullet-list li > [data-editor-position-level],
-	ul.bullet-list li > [data-editor-position-level].mark-highlight-manual,
 	[property="prov:generated"] > [property="besluit:motivering"],
 	[property="prov:generated"] > [property="prov:value"],
 	[typeof="besluit:Artikel"] {
@@ -258,13 +258,11 @@
 			}
 		}
 
-		.mark-highlight-manual,
 		[data-editor-highlight="true"],
 		[data-type],
 		[typeof],
 		[property] {
 			&:not([data-flagged-remove]) {
-
 				&:before,
 				&:after {
 					margin-top: 4rem !important;
@@ -288,6 +286,8 @@
 			}
 		}
 
+		[property] [data-editor-highlight="true"],
+		[typeof] [data-editor-highlight="true"],
 		[property] [property],
 		[typeof] [typeof] {
 			.mark-highlight-manual,
@@ -388,37 +388,29 @@
 
 /* making sure list items annotations look good too */
 
-.rdfa-annotations:not(.show-rdfa-blocks) .rdfa-editor [typeof="besluit:Zitting"] {
-	ul[data-editor-position-level] {
-		&[property],
-		&[typeof],
-		&[data-type],
-		&[data-editor-highlight="true"],
-		&.mark-highlight-manual {
+.rdfa-annotations:not(.show-rdfa-blocks) {
+	ul {
 
-			&:before {
-				left: -23.5rem;
+		.mark-highlight-manual,
+		[typeof],
+		[property],
+		[data-type],
+		[data-editor-highlight="true"] {
+
+			&:not([data-editor-position-level]):hover:before {
+				left: -26.5rem;
 			}
 
-			&:after {
-	    	left: -7.5rem;
+			&:not([data-editor-position-level]):hover:after {
+	    	left: -10.5rem;
 			}
-		}
 
-		[data-editor-position-level] {
-			&[property],
-			&[typeof],
-			&[data-type],
-			&[data-editor-highlight="true"],
-			&.mark-highlight-manual {
+			&[data-editor-position-level]:before {
+				left: -25.5rem;
+			}
 
-				&:before {
-					left: -25.5rem;
-				}
-
-				&:after {
-		    	left: -9.5rem;
-				}
+			&[data-editor-position-level]:after {
+	    	left: -9.5rem;
 			}
 		}
   }
@@ -426,14 +418,14 @@
 
 /* display roadsign details */
 
-.rdfa-annotations:not(.show-rdfa-blocks) .rdfa-editor [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"] {
+.rdfa-annotations:not(.show-rdfa-blocks) [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"] {
 
  	[typeof="mobiliteit:Opstelling"] {
 		display: none;
 	}
 }
 
-.rdfa-annotations.show-rdfa-blocks .rdfa-editor [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"] {
+.rdfa-annotations.show-rdfa-blocks [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"] {
 
 	[typeof="mobiliteit:Opstelling"] {
 		display: block !important;
