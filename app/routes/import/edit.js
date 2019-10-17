@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { warn } from '@ember/debug';
 
 export default Route.extend({
   queryParams: {
@@ -10,14 +11,26 @@ export default Route.extend({
 
   async beforeModel(transition){
     await this.importRdfaSnippet.downloadSnippet(transition.to.queryParams);
-    if(transition.to.queryParams.target){
-      let documentContainer = (await this.store.query('document-container', {'filter[:uri:]': transition.to.queryParams.target})).firstObject;
-      if(documentContainer.id){
+
+    const documentContainerUri = transition.to.queryParams.target;
+
+    if (documentContainerUri) {
+      const documentContainers = await this.store.query('document-container', {
+        'filter[:uri:]': documentContainerUri,
+        page: { size: 1 }
+      });
+
+      if (documentContainers.length){
+        const documentContainer = documentContainers.firstObject;
         this.transitionTo('editor-documents.edit', documentContainer.id);
-        return;
+      } else {
+        warn(`No document container found with URI '${documentContainerUri}' to import snippet in. Redirecting to inbox.`, { id: 'document-container.not-found' });
+        this.transitionTo('inbox');
       }
+    } else {
+      warn(`No target document container specified to import snippet in. Redirecting to inbox.`, { id: 'document-container.no-target' });
+      this.transitionTo('inbox');
     }
-    this.transitionTo('inbox');
   }
 
 });
