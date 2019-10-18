@@ -2,15 +2,15 @@
   <div class="modal-dialog modal-dialog--snippet">
     <div class="modal-dialog__header">
       <h2 class="modal-dialog__title">
-          Er zijn één of meerdere wegreglementen beschikbaar.
+          Er is relevante informatie {{!-- met als type "type" --}} uit een externe bron beschikbaar.
       </h2>
     </div>
     <div class="modal-dialog__content">
-      <p class="u-spacer">Maak in de template van uw zitting een besluit aan met als type "wegenreglement". Daar zal u de tekst kunnen invoegen.</p>
+      <p class="u-spacer">Maak in de template van uw zitting een besluit aan. Daar zal u de informatie kunnen invoegen.</p>
     </div>
     <div class="modal-dialog__footer">
-      <button class="button button--narrow u-spacer--bottom--tiny" {{action "close"}}>Meer informatie</button>
-      <button class="button button--alt button--narrow u-spacer--bottom--tiny" {{action "close"}}>Begrepen</button>
+      <button class="button button--narrow u-spacer--bottom--tiny" {{action "close"}}>Begrepen</button>
+      {{!-- <button class="button button--alt button--narrow u-spacer--bottom--tiny" {{action "close"}}>Begrepen</button> --}}
     </div>
   </div>
 {{/if}}
@@ -19,7 +19,7 @@
   <div class="modal-dialog modal-dialog--snippet">
     <div class="modal-dialog__header">
       <h2 class="modal-dialog__title">
-        Er zijn één of meerdere wegreglementen beschikbaar.
+        Er is een probleem opgetreden met het ophalen van de informatie.
       </h2>
     </div>
     <div class="modal-dialog__content">
@@ -32,7 +32,7 @@
   </div>
 {{/if}}
 
-{{#if hasSnippets}}
+{{!-- {{#if hasSnippets}}
   <div class="editor-loading-events editor-loading-events--snippets">
     <div class="editor-loading-events__snippets">
       <div class="grid grid--collapse">
@@ -47,5 +47,5 @@
       </div>
     </div>
   </div>
-{{/if}}
+{{/if}} --}}
 {{yield}}
