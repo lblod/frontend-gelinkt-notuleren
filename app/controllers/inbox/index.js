@@ -5,6 +5,7 @@ import { computed } from '@ember/object';
 
 export default Controller.extend(DefaultQueryParamsMixin, {
   currentSession: service(),
+  sort: '-current-version.updated-on',
   statusIds: null,
   status: computed('statusIds', function() {
     return this.statusIds.join(',');
