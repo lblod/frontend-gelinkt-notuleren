@@ -91,6 +91,12 @@
 /* only extra metadata on when hovering over fields, when "show annotations" has been switched on */
 
 .rdfa-annotations.show-rdfa-blocks {
+
+	.mark-highlight-manual:hover:after,
+	[data-editor-highlight="true"]:hover:after {
+		content: "Actie vereist";
+	}
+
 	.mark-highlight-manual,
 	[data-editor-highlight="true"],
 	[data-type],
@@ -127,11 +133,6 @@
 			z-index: 901;
 			line-height: 1;
 		}
-	}
-
-	.mark-highlight-manual:hover:after,
-	[data-editor-highlight="true"]:hover:after {
-		content: "Actie vereist";
 	}
 }
 
