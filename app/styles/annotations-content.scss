@@ -3,7 +3,7 @@
  ========================================================================== */
 
 
-.rdfa-editor {
+.rdfa-editor .editor-container {
   /* -------------------- Guiding tags ------------------------- */
 
 	[property^="ext:insert"]:before,
@@ -330,6 +330,7 @@
 			  	content: "Opstelling";
 			  }
 
+			  [property="locn:geometry"]:before,
 			  [typeof="locn:Geometry"]:before {
 			  	content: "Zone"; // : " attr(resource)
 			  }
