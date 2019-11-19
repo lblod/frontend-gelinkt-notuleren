@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -25,13 +25,13 @@
     "@ember/optional-features": "^0.7.0",
     "@lblod/ember-acmidm-login": "^0.1.4",
     "@lblod/ember-mock-login": "^0.4.5",
-    "@lblod/ember-rdfa-editor": "0.29.0",
     "@lblod/ember-rdfa-editor-roadsign-hint-plugin": "0.3.1",
+    "@lblod/ember-rdfa-editor": "0.29.1",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.6.0",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "0.4.3",
     "@lblod/ember-rdfa-editor-agenda-plugin": "0.4.3",
     "@lblod/ember-rdfa-editor-citaten-plugin": "0.7.3",
-    "@lblod/ember-rdfa-editor-date-manipulation-plugin": "0.3.0",
+    "@lblod/ember-rdfa-editor-date-manipulation-plugin": "0.3.1",
     "@lblod/ember-rdfa-editor-date-overwrite-plugin": "0.3.0",
     "@lblod/ember-rdfa-editor-date-plugin": "0.9.0",
     "@lblod/ember-rdfa-editor-document-tasklist-plugin": "0.1.5",
