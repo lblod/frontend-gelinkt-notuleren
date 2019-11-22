@@ -20,10 +20,7 @@
 				{{info.label}}
 			</div>
 			<div class="col--4-12 u-align-right">
-			  {{wu-button
-			    label="Voeg in"
-			    isNarrow=true
-			    onClick=(action "insert")}}
+			  <WuButton @label="Voeg in" @isNarrow={{true}} @onClick={{action "insert"}} />
 			</div>
 		</div>
 			{{!-- 	{{#wu-button-group}}

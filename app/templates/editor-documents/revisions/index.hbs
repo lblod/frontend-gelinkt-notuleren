@@ -1,8 +1,8 @@
 <div class="editor-chrome">
 	<div class="u-spacer--small">
-		{{#wu-link-button isSmall=true isNarrow=true isDarkLink=true isLink=true onClick=(action "back")}}
+		<WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isDarkLink={{true}} @isLink={{true}} @onClick={{action "back"}}>
 			&leftarrow; Terug naar laatste versie document
-	  {{/wu-link-button}}
+	  </WuLinkButton>
 	</div>
   <div class="grid">
   	<div class="col--6-12 col--8-12--m col--12-12--s">
@@ -24,14 +24,14 @@
 							<div class="u-hr u-padding--bottom--small u-spacer--small">
 	            	<h4 class="h5 u-spacer--tiny">Versie van {{moment-calendar revision.updatedOn}}</h4>
 	            	<p class="small text-fade u-spacer--small">{{revision.updatedOn}}</p>
-	            	{{#wu-button-group}}
-	    						{{#wu-button isTiny="true" isNarrow="true" onClick=(action "details" revision) }}
+	            	<WuButtonGroup>
+	    						<WuButton @isTiny="true" @isNarrow="true" @onClick={{action "details" revision}}>
 	    							<i class="fa fa-eye"></i> Bekijk versie
-	    						{{/wu-button}}
-	    						{{#wu-button isTiny="true" isAlt="true" isNarrow="true" onClick=(action "confirmRevisionsToRemove" revision) }}
+	    						</WuButton>
+	    						<WuButton @isTiny="true" @isAlt="true" @isNarrow="true" @onClick={{action "confirmRevisionsToRemove" revision}}>
 	    							<i class="fa fa-rotate-left"></i> Herstel versie
-	    						{{/wu-button}}
-								{{/wu-button-group}}
+	    						</WuButton>
+								</WuButtonGroup>
 							</div>
 		        {{/each}}
 			    {{/if}}
@@ -61,11 +61,8 @@
 </div>
 
 {{#if showConfirmationModal}}
-  {{#wu-modal
-  title="Bent u zeker dat u deze versie wil herstellen?"
-  dialog-class="modal-dialog--sectioned"
-  onClose=(action 'cancelConfirmRevisionsToRemove') as |m|}}
-    {{#m.content}}
+  <WuModal @title="Bent u zeker dat u deze versie wil herstellen?" @dialog-class="modal-dialog--sectioned" @onClose={{action "cancelConfirmRevisionsToRemove"}} as |m|>
+    <m.content>
     	{{#if revisionsToRemove}}
    			<p class="u-spacer--small">Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:</p>
     		<ul class="numbered-list">
@@ -79,13 +76,13 @@
       {{else}}
       	<p class="text-fade">Geen nieuwere versies om weer te geven.</p>
       {{/if}}
-    {{/m.content}}
+    </m.content>
     <div class="modal-dialog__footer">
-      {{#m.buttons as |b|}}
-        {{b.button label="Herstel versie en verwerp nieuwere versies" isNarrow=true isWarning=true onClick=(action 'restore')}}
-        {{b.button label="Annuleer" onClick=(action 'cancelConfirmRevisionsToRemove') isLink=true icon="vi-cross"}}
-      {{/m.buttons}}
+      <m.buttons as |b|>
+        <b.button @label="Herstel versie en verwerp nieuwere versies" @isNarrow={{true}} @isWarning={{true}} @onClick={{action "restore"}} />
+        <b.button @label="Annuleer" @onClick={{action "cancelConfirmRevisionsToRemove"}} @isLink={{true}} @icon="vi-cross" />
+      </m.buttons>
     </div>
-  {{/wu-modal}}
+  </WuModal>
 {{/if}}
 {{outlet}}

@@ -1,12 +1,4 @@
-{{#signatures/timeline-step
-  name=name
-  step=step
-  document=notulen
-  sign=sign
-  publish=(action publish publicBehandelingUris)
-  mockDocument=mockNotulen
-  isOpen=isOpen
-}}
+<Signatures::TimelineStep @name={{name}} @step={{step}} @document={{notulen}} @sign={{sign}} @publish={{action publish publicBehandelingUris}} @mockDocument={{mockNotulen}} @isOpen={{isOpen}}>
   {{#if (is-pending mockBehandelingen)}}
     <div>Aan het laden...</div>
   {{else}}
@@ -14,14 +6,9 @@
 	    {{{zittingWrapper}}}
 	  </div>
     {{#if zittingWrapper}}
-      {{#ember-wormhole to=behandelingContainerId}}
-        {{signatures/notulen/behandelingen-list
-            isPublished=notulen
-            prepublishedBehandelingen=(await mockBehandelingen)
-            publicBehandelingUris=publicBehandelingUris
-            toggle=(action "togglePublicationStatus")
-        }}
-      {{/ember-wormhole}}
+      <EmberWormhole @to={{behandelingContainerId}}>
+        <Signatures::Notulen::BehandelingenList @isPublished={{notulen}} @prepublishedBehandelingen={{await mockBehandelingen}} @publicBehandelingUris={{publicBehandelingUris}} @toggle={{action "togglePublicationStatus"}} />
+      </EmberWormhole>
     {{/if}}
   {{/if}}
-{{/signatures/timeline-step}}
+</Signatures::TimelineStep>

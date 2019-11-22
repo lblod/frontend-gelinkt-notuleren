@@ -1,13 +1,5 @@
 <div class="u-spacer--top">
-  {{#wu-timeline-accordion as |timeline|}}
-    {{signatures/besluitenlijst/timeline-step
-      name="besluitenlijst"
-      step=timeline.step
-      lijst=besluitenlijst
-      currentEditorDocument=model.editorDocument
-      sign=(action "sign" "besluitenlijst")
-      publish=(action "publish" "besluitenlijst")
-      isOpen=true
-    }}
-  {{/wu-timeline-accordion}}
+  <WuTimelineAccordion as |timeline|>
+    <Signatures::Besluitenlijst::TimelineStep @name="besluitenlijst" @step={{timeline.step}} @lijst={{besluitenlijst}} @currentEditorDocument={{model.editorDocument}} @sign={{action "sign" "besluitenlijst"}} @publish={{action "publish" "besluitenlijst"}} @isOpen={{true}} />
+  </WuTimelineAccordion>
 </div>

@@ -1,4 +1,4 @@
-{{wu-widget src=header class="vo-header-widget"}}
+<WuWidget @src={{header}} @class="vo-header-widget" />
 <div class="page">
   <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
     <header class="content-header content-header--small content-header--half-image u-spacer">
@@ -14,6 +14,6 @@
     {{yield}}
   </div>
   {{#if showFooter}}
-    {{wu-widget src=footer}}
+    <WuWidget @src={{footer}} />
   {{/if}}
 </div>

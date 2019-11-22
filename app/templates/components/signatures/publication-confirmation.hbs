@@ -1,10 +1,5 @@
-{{#wu-modal
-     title=(concat "Bevestig publicatie van " name)
-     dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned"
-     onClose=(action cancel)
-     as |m|
-}}
-  {{#m.content isSectioned=true}}
+<WuModal @title={{concat "Bevestig publicatie van " name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{action cancel}} as |m|>
+  <m.content @isSectioned={{true}}>
   <div class="grid u-padding--top--small">
     <div class="col--12-12">
     	<div class="u-padding--rl--small">
@@ -63,20 +58,12 @@
       </div>
     </div>
   </div>
-  {{/m.content}}
+  </m.content>
   <div class="modal-dialog__footer">
 
-    {{#m.buttons as |b|}}
-      {{b.button
-          label=(concat "Bevestig publicatie van " name)
-          onClick=(action confirm)
-      }}
-      {{b.button
-          label="Annuleren"
-          onClick=(action cancel)
-          isLink=true
-          icon="vi-cross"
-      }}
-    {{/m.buttons}}
+    <m.buttons as |b|>
+      <b.button @label={{concat "Bevestig publicatie van " name}} @onClick={{action confirm}} />
+      <b.button @label="Annuleren" @onClick={{action cancel}} @isLink={{true}} @icon="vi-cross" />
+    </m.buttons>
   </div>
-{{/wu-modal}}
+</WuModal>

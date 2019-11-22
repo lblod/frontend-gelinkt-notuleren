@@ -1,36 +1,36 @@
-{{wu-widget src=header class="vo-header-widget"}}
+<WuWidget @src={{header}} @class="vo-header-widget" />
 <div class="container-flex--contain">
   <div class="grid grid--collapse">
     <div class="col--2-12 u-hide-on-print">
       <div class="container-flex--contain">
         <div class="sidebar">
           <div class="sidebar__header">
-            {{#wu-button isBlock=true onClick=(action "openNewDocument")}}Nieuwe zitting{{/wu-button}}
+            <WuButton @isBlock={{true}} @onClick={{action "openNewDocument"}}>Nieuwe zitting</WuButton>
           </div>
           <div class="sidebar__content">
             <div class="side-navigation">
               <ul class="side-navigation__group">
                 <li class="side-navigation__item">
-                  {{#link-to 'inbox.index'}}
+                  <LinkTo @route="inbox.index">
 	                  <i class="vi vi-paper"></i>
 	                  Actieve documenten
-	                {{/link-to}}
+	                </LinkTo>
                 </li>
 {{!--                 <li class="side-navigation__item">
                   {{#link-to 'inbox.archive'}}Gearchiveerde documenten{{/link-to}}
                 </li> --}}
                 <li class="side-navigation__item">
-                  {{#link-to 'inbox.trash'}}
+                  <LinkTo @route="inbox.trash">
 	                  <i class="vi vi-trash"></i>
 	                  Prullenmand
-                  {{/link-to}}
+                  </LinkTo>
                 </li>
               </ul>
             </div>
           </div>
           <div class="sidebar__footer u-align-center">
           	<a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren" target="_blank" class="button button--alt button--small button--block u-spacer--tb--tiny"><i class="vi vi-book vi-u-s"></i> Bekijk handleiding</a>
-            {{acmidm-logout class="button button--link button--small button--block"}}
+            <AcmidmLogout @class="button button--link button--small button--block" />
           </div>
         </div>
       </div>

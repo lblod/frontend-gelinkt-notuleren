@@ -1,5 +1,5 @@
 {{#component step isOpen=isOpen title=headerWithDefault pill=algemeneStatus icon=iconName as |step|}}
-  {{#step.block title=title pillColor=voorVertoningStatus.color pillName=voorVertoningStatus.label}}
+  <step.block @title={{title}} @pillColor={{voorVertoningStatus.color}} @pillName={{voorVertoningStatus.label}}>
 		<div class="grid">
 			<div class="col--10-12">
 		    {{#if hasBlock}}
@@ -9,8 +9,8 @@
 		    {{/if}}
 		  </div>
 		</div>
-  {{/step.block}}
-  {{#step.block title=(concat "Onderteken " name) pillColor=handtekeningStatus.color pillName=handtekeningStatus.label}}
+  </step.block>
+  <step.block @title={{concat "Onderteken " name}} @pillColor={{handtekeningStatus.color}} @pillName={{handtekeningStatus.label}}>
   	<p class="u-spacer--small text-light">Ondertekenen kan enkel door de aangewezen personen met de rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">ondertekenaar</a> binnen het orgaan.</p>
     <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
       <div class="grid">
@@ -19,91 +19,60 @@
 				  {{#if (eq index 0)}}
 	          <div class="col--5-12">
 	        		<p class="uppercase text-fade smaller">Eerste ondertekening</p>
-	            {{signatures/signed-resource signature=signature}}
+	            <Signatures::SignedResource @signature={{signature}} />
 	          </div>
           {{else}}
 	          <div class="col--5-12 push--1-12">
 	        		<p class="uppercase text-fade smaller">Tweede ondertekening</p>
-	            {{signatures/signed-resource signature=signature}}
+	            <Signatures::SignedResource @signature={{signature}} />
 	          </div>
           {{/if}}
         {{/each}}
       {{else if (eq signaturesCount 1)}}
         <div class="col--5-12">
         	<p class="uppercase text-fade smaller">Eerste ondertekening</p>
-        	{{signatures/signed-resource signature=document.signedResources.firstObject}}
+        	<Signatures::SignedResource @signature={{document.signedResources.firstObject}} />
         </div>
         <div class="col--5-12 push--1-12">
         	<p class="uppercase text-fade smaller">Tweede ondertekening</p>
-          {{wu-button
-            label=(concat "Onderteken " name)
-            isNarrow=true
-            class="u-spacer--top--tiny"
-            onClick=(action (mut showSigningModal) true)
-            isLoading=signDocument.isRunning
-            disabled=(or (or (not currentSession.canSign) signDocument.isRunning) isSignedByCurrentUser)
-          }}
+          <WuButton @label={{concat "Onderteken " name}} @isNarrow={{true}} @class="u-spacer--top--tiny" @onClick={{action (mut showSigningModal) true}} @isLoading={{signDocument.isRunning}} @disabled={{or (or (not currentSession.canSign) signDocument.isRunning) isSignedByCurrentUser}} />
         </div>
       {{else}} {{!-- No signatures placed --}}
         <div class="col--5-12">
         	<p class="uppercase text-fade smaller">Eerste ondertekening</p>
-          {{wu-button
-            label=(concat "Onderteken " name)
-            class="u-spacer--top--tiny"
-            isNarrow=true
-            onClick=(action (mut showSigningModal) true)
-            isLoading=signDocument.isRunning
-            disabled=(or (not currentSession.canSign) signDocument.isRunning)
-          }}
+          <WuButton @label={{concat "Onderteken " name}} @class="u-spacer--top--tiny" @isNarrow={{true}} @onClick={{action (mut showSigningModal) true}} @isLoading={{signDocument.isRunning}} @disabled={{or (not currentSession.canSign) signDocument.isRunning}} />
         </div>
         <div class="col--5-12 push--1-12">
         	<p class="uppercase text-fade smaller">Tweede ondertekening</p>
-          {{wu-button
-            label=(concat "Onderteken " name)
-            class="u-spacer--top--tiny"
-            isNarrow=true
-            onClick=(action (mut showSigningModal) true)
-            isLoading=signDocument.isRunning
-            disabled=true
-          }}
+          <WuButton @label={{concat "Onderteken " name}} @class="u-spacer--top--tiny" @isNarrow={{true}} @onClick={{action (mut showSigningModal) true}} @isLoading={{signDocument.isRunning}} @disabled={{true}} />
         </div>
       {{/if}}
       {{#if showSigningModal}}
-        {{signatures/signature-confirmation
-        name=name
-        mockDocument=mockDocument
-        confirm=(perform signDocument mockDocument.signedId)
-        cancel=(action (mut showSigningModal) false)
-        }}
+        <Signatures::SignatureConfirmation @name={{name}} @mockDocument={{mockDocument}} @confirm={{perform signDocument mockDocument.signedId}} @cancel={{action (mut showSigningModal) false}} />
       {{/if}}
 	    </div>
 	  </div>
-  {{/step.block}}
+  </step.block>
   {{#if print}}
-	  {{#step.block title=(concat "Print " name) pillName=Null}}
+	  <step.block @title={{concat "Print " name}} @pillName={{Null}}>
 	  	<p class="u-spacer--bottom--tiny text-light">Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen &mdash; nadat het document ondertekend werd.</p>
 	    <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
 		    <div class="grid">
 		    	<div class="col--12-12">
-		        {{wu-button
-		            label=(concat "Print " name)
-		            class="u-spacer--tb--tiny"
-		            onClick=(action print document.id)
-		            disabled=(not signaturesCount)
-		        }}
+		        <WuButton @label={{concat "Print " name}} @class="u-spacer--tb--tiny" @onClick={{action print document.id}} @disabled={{not signaturesCount}} />
   					<p class="smaller">Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt.</p>
 			    </div>
 		    </div>
 		  </div>
-	  {{/step.block}}
+	  </step.block>
   {{/if}}
-  {{#step.block title=(concat "Publiceer " name) pillColor=(if document.publishedResource "primary-blue") pillName=(if document.publishedResource "Publiek" "Niet publiek")}}
+  <step.block @title={{concat "Publiceer " name}} @pillColor={{if document.publishedResource "primary-blue"}} @pillName={{if document.publishedResource "Publiek" "Niet publiek"}}>
   	<p class="u-spacer--bottom--tiny text-light">Publiceren kan enkel door personen met de rol <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer" target="_blank">publiceerder</a>.</p>
     <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
 	    <div class="grid">
 	      {{#if isPublished}}
 	        <div class="col--6-12">
-	          {{signatures/published-resource signature=document.publishedResource}}
+	          <Signatures::PublishedResource @signature={{document.publishedResource}} />
 	        </div>
 	        <div class="col--6-12">
 	          <p class="smaller uppercase text-fade">Link publicatie</p>
@@ -114,26 +83,14 @@
 	        </div>
 	      {{else}}
 	        <div class="col--12-12">
-	          {{wu-button
-	              label=(concat "Publiceer " name)
-	              class="u-spacer--bottom--tiny"
-	              onClick=(action (mut showPublishingModal) true)
-	              isNarrow=true
-	              isLoading=publishDocument.isRunning
-	              disabled=(or (not currentSession.canPublish) publishDocument.isRunning)
-	          }}
+	          <WuButton @label={{concat "Publiceer " name}} @class="u-spacer--bottom--tiny" @onClick={{action (mut showPublishingModal) true}} @isNarrow={{true}} @isLoading={{publishDocument.isRunning}} @disabled={{or (not currentSession.canPublish) publishDocument.isRunning}} />
 	          <p class="small">Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie.</p>
 	        </div>
 	      {{/if}}
 	      {{#if showPublishingModal}}
-	        {{signatures/publication-confirmation
-	            name=name
-	            mockDocument=mockDocument
-	            confirm=(perform publishDocument mockDocument.signedId)
-	            cancel=(action (mut showPublishingModal) false)
-	        }}
+	        <Signatures::PublicationConfirmation @name={{name}} @mockDocument={{mockDocument}} @confirm={{perform publishDocument mockDocument.signedId}} @cancel={{action (mut showPublishingModal) false}} />
 	      {{/if}}
 	    </div>
 	  </div>
-  {{/step.block}}
+  </step.block>
 {{/component}}

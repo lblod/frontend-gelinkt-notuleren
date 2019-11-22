@@ -1,5 +1,5 @@
 <label class="checkbox checkbox--block">
-  {{input class="checkbox__toggle" type="checkbox" checked=taskStatus click=(action "toggleStatus") }}
+  <Input class="checkbox__toggle" @type="checkbox" @checked={{taskStatus}} @click={{action "toggleStatus"}} />
   <span></span>
   <strong>{{task.title}}</strong>
 </label>
@@ -17,7 +17,7 @@
     <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
   {{else}}
     {{#each sortedChilds as |childTask|}}
-      {{task-solution/edit tasklistSolution=tasklistSolution task=childTask class="tasklist-navigation__item"}}
+      <TaskSolution::Edit @tasklistSolution={{tasklistSolution}} @task={{childTask}} @class="tasklist-navigation__item" />
     {{/each}}
   {{/if}}
   {{yield}}

@@ -46,7 +46,7 @@ export default Component.extend({
     solutionA.set('index', indexB);
     solutionB.set('index', indexA);
     this.set('tasklistSolutions', this.tasklistSolutions.sort(this.sortByIndexAsc));
-    this.propertyDidChange('tasklistSolutions');
+    this.notifyPropertyChange('tasklistSolutions');
   }),
 
   async findMatchingSolutions(tasklists){

@@ -15,7 +15,7 @@
         <div class="col--1-1 col--10-12--m col--6-12--l">
           <h2 class="h4 u-spacer">Kies een bestuurseenheid om mee in te loggen.</h2>
           <input class="input-field input-field--block u-spacer--tiny js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{gemeente}} autofocus oninput={{perform updateSearch value='target.value'}}>
-          {{#mock-login as |login|}}
+          <MockLogin as |login|>
             {{#if queryStore.isRunning}}
               <div class="loader-wrapper">
                 <div class="loader">
@@ -24,20 +24,18 @@
               </div>
             {{else}}
               {{#if login.errorMessage}}
-                {{wu-alert title=login.errorMessage isWarning=true}}
+                <WuAlert @title={{login.errorMessage}} @isWarning={{true}} />
               {{/if}}
-              {{#login.each-account accounts=model as |account|}}
-                {{#wu-info-tile class="u-spacer--tiny" as |i|}}
-                  {{#i.content}}
+              <login.each-account @accounts={{model}} as |account|>
+                <WuInfoTile @class="u-spacer--tiny" as |i|>
+                  <i.content>
                     {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
-                  {{/i.content}}
-                {{/wu-info-tile}}
-              {{/login.each-account}}
-              {{number-pagination
-                page=page size=size nbOfItems=model.length
-                total=model.meta.count links=model.meta.pagination}}
+                  </i.content>
+                </WuInfoTile>
+              </login.each-account>
+              <NumberPagination @page={{page}} @size={{size}} @nbOfItems={{model.length}} @total={{model.meta.count}} @links={{model.meta.pagination}} />
             {{/if}}
-          {{/mock-login}}
+          </MockLogin>
         </div>
       </div>
     </div>

@@ -9,10 +9,10 @@
   }
   ]
 </p>
-{{textarea value=uriData}}
-{{#wu-link-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action "replace" ) }}
+<Textarea @value={{uriData}} />
+<WuLinkButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "replace"}}>
   Replace
-{{/wu-link-button}}
+</WuLinkButton>
 <p>
   {{{resultLog}}}
 </p>

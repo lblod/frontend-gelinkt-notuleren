@@ -1,3 +1,3 @@
 <p class="u-spacer--bottom--tiny">{{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
 
-{{signatures/blockchain-status model=signature}}
+<Signatures::BlockchainStatus @model={{signature}} />

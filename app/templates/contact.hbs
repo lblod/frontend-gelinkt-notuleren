@@ -1,4 +1,4 @@
-{{#vo-page}}
+<VoPage>
 
 	<section class="region">
 	  <div class="layout layout--wide">
@@ -6,19 +6,19 @@
 			<form class="u-spacer--large js-formvalidation-bound">
 			  <div class="form__row">
 			    <label class="form__label form__label--large form__label--block" for="select">Waar gaat uw bericht over?</label>
-			    {{wu-radio-button label="Een functionaliteit, bug of probleem" value="GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem" onChange=(action (mut mailto)) isBlock=true}}
-			    {{wu-radio-button label="Een inhoudelijke vraag" value="GelinktNotuleren@vlaanderen.be?subject=Inhoudelijke vraag" onChange=(action (mut mailto)) isBlock=true}}
+			    <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{action (mut mailto)}} @isBlock={{true}} />
+			    <WuRadioButton @label="Een inhoudelijke vraag" @value="GelinktNotuleren@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{action (mut mailto)}} @isBlock={{true}} />
 			    <div class="form__error" aria-describedby="radio-buttons"></div>
 			  </div>
 
 			  {{#if mailto}}
 			    <a href={{concat "mailto:" mailto}} class="button button--large">Bericht versturen</a>
 			  {{else}}
-			    {{wu-button label="Bericht versturen" onClick=null size="large" disabled=true}}
+			    <WuButton @label="Bericht versturen" @onClick={{null}} @size="large" @disabled={{true}} />
 			  {{/if}}
 			</form>
 	    <p class="u-spacer--large">Of neem rechtstreeks contact op via mail <a href="mailto:gelinktnotuleren@vlaanderen.be">GelinktNotuleren@vlaanderen.be</a>.</p>
 	  </div>
 	</section>
 
-{{/vo-page}}
+</VoPage>

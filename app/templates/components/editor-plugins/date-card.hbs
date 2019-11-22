@@ -26,13 +26,13 @@
 			        <div class="double-input__input">
 			        	<label>
 			        		Uur
-		              {{input class="input-field input-field--block" placeholder="12" type="number" value=hour min=0 max=23}}
+		              <Input class="input-field input-field--block" placeholder="12" @type="number" @value={{hour}} @min={{0}} @max={{23}} />
 			          </label>
 			        </div>
 			        <div class="double-input__input">
 			        	<label>
 			        		Minuten
-		              {{input class="input-field input-field--block" placeholder="00" type="number" value=minutes min=0 max=59}}
+		              <Input class="input-field input-field--block" placeholder="00" @type="number" @value={{minutes}} @min={{0}} @max={{59}} />
 			          </label>
 			        </div>
 			      </div>
@@ -42,19 +42,15 @@
 		</div>
 
 		<div class="modal-dialog__footer">
-		  {{#wu-button-group}}
-		    {{wu-button
-		      label="Voeg toe"
-		      isNarrow=true
-		      onClick=(action "insertDateTime" info hour minutes)
-		    }}
+		  <WuButtonGroup>
+		    <WuButton @label="Voeg toe" @isNarrow={{true}} @onClick={{action "insertDateTime" info hour minutes}} />
 {{!-- 		    {{wu-button
 		      label="Annuleer (todo)"
 		      class="button--alt"
 		      isNarrow=true
 		      onClick=null
 		    }} --}}
-		  {{/wu-button-group}}
+		  </WuButtonGroup>
 		</div>
 
 	{{else}}
@@ -75,19 +71,15 @@
 		</div>
 
 		<div class="modal-dialog__footer">
-		  {{#wu-button-group}}
-		    {{wu-button
-		      label="Voeg toe"
-		      isNarrow=true
-		      onClick=(action "insert" info)
-		    }}
+		  <WuButtonGroup>
+		    <WuButton @label="Voeg toe" @isNarrow={{true}} @onClick={{action "insert" info}} />
 {{!-- 		    {{wu-button
 		      label="Annuleer"
 		      class="button--alt"
 		      isNarrow=true
 		      onClick=null
 		    }} --}}
-		  {{/wu-button-group}}
+		  </WuButtonGroup>
 		</div>
 
 	{{/if}}

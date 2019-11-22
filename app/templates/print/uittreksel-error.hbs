@@ -23,9 +23,9 @@
 				<div class="u-padding--round--large">
 					<h1 class="h2">We kunnen de pagina die u zoekt niet vinden</h1>
 					<p class="u-spacer">Er is iets fout gelopen. Het uittreksel dat u zoekt bestaat niet of u heeft geen toegang.</p>
-					{{#link-to 'inbox.index' tagName='button' class="button button--narrow"}}
+					<LinkTo @route="inbox.index" @tagName="button" class="button button--narrow">
 						<i class="vi-arrow vi-u-180deg vi vi-u-s"></i> Terug naar overzicht notulen
-					{{/link-to}}
+					</LinkTo>
 				</div>
 			</div>
 		</div>

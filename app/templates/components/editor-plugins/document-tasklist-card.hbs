@@ -15,8 +15,8 @@
 </div>
 
 <div class="modal-dialog__footer">
-  {{#wu-button-group}}
-    {{#wu-button isNarrow=true onClick=(action 'insert')}}Voeg takenlijst in{{/wu-button}}
+  <WuButtonGroup>
+    <WuButton @isNarrow={{true}} @onClick={{action "insert"}}>Voeg takenlijst in</WuButton>
 {{!--     {{wu-button
       label="Annuleer (todo)"
       class="button--alt"
@@ -28,7 +28,7 @@
       size="small"
       isNarrow=true
        onClick=(action "remove")}} --}}
-  {{/wu-button-group}}
+  </WuButtonGroup>
 </div>
 
 {{yield}}

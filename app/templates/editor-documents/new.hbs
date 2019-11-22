@@ -1,20 +1,14 @@
-{{app-chrome editorDocument=editorDocument
-  documentContainer=documentContainer
-  save=(action "save")
-  startSyncModal=null
-  publish=(action "publish")
-  sendToTrash=(action "sendToTrash")
-}}
+<AppChrome @editorDocument={{editorDocument}} @documentContainer={{documentContainer}} @save={{action "save"}} @startSyncModal={{null}} @publish={{action "publish"}} @sendToTrash={{action "sendToTrash"}} />
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
-  {{#wu-modal title="Er zijn fouten bij de validatie" onClose=(action 'closeValidationModal') as |m|}}
-    {{#m.content}}
+  <WuModal @title="Er zijn fouten bij de validatie" @onClose={{action "closeValidationModal"}} as |m|>
+    <m.content>
       Gelieve een titel op te geven.
-    {{/m.content}}
-    {{#m.buttons as |b|}}
-      {{b.button label="OK" onClick=(action 'closeValidationModal')}}
-    {{/m.buttons}}
-  {{/wu-modal}}
+    </m.content>
+    <m.buttons as |b|>
+      <b.button @label="OK" @onClick={{action "closeValidationModal"}} />
+    </m.buttons>
+  </WuModal>
 {{/if}}
 
 {{#if saveAndTransitionToEditMode.isRunning}}
@@ -46,10 +40,7 @@
      which works on an inconsistent state.
    --}}
   {{#unless hasPerformedSaveAndTransitionToEditModeTask}}
-    {{rdfa-editor-container
-      profile=profile
-      editorDocument=editorDocument
-      rdfaEditorContainerInit=(action "handleRdfaEditorInit") onUpdateTasklists=(action "updateTasklists")}}
+    <RdfaEditorContainer @profile={{profile}} @editorDocument={{editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} />
   {{/unless}}
 {{/if}}
 {{outlet}}

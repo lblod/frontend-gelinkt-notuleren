@@ -1,2 +1,2 @@
 <h1>{{model.currentVersion.title}}</h1>
-<p>You may want to {{link-to 'show' 'editor-documents.show' model.currentVersion.id}}, {{link-to 'edit' 'editor-documents.edit' model.currentVersion.id}} or {{link-to 'publish' 'documents.show.publish' model}} this document.</p>
+<p>You may want to <LinkTo @route="editor-documents.show" @model={{model.currentVersion.id}}>show</LinkTo>, <LinkTo @route="editor-documents.edit" @model={{model.currentVersion.id}}>edit</LinkTo> or <LinkTo @route="documents.show.publish" @model={{model}}>publish</LinkTo> this document.</p>

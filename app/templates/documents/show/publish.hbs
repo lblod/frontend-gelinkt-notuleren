@@ -1,7 +1,7 @@
 <div class="container-flex--contain">
 	<div class="editor-chrome">
 		<div class="u-spacer--tiny">
-			{{link-to '← Terug naar notulen' 'editor-documents.edit' model.id class="smaller link-dark"}}
+			<LinkTo @route="editor-documents.edit" @model={{model.id}} class="smaller link-dark">← Terug naar notulen</LinkTo>
 		</div>
 		<h1 class="h5 u-spacer--tiny">{{model.currentVersion.title}}</h1>
 	</div>
@@ -13,28 +13,28 @@
 						<nav class="side-navigation">
 							<ul class="side-navigation__group">
 								<li class="side-navigation__item u-hr">
-							  	{{#link-to 'documents.show.publish.agenda' model class="u-padding--tb--small"}}
+							  	<LinkTo @route="documents.show.publish.agenda" @model={{model}} class="u-padding--tb--small">
 										<i class="vi vi-calendar"></i> Agenda
 										{{!-- pills met statussen --}}
-							  	{{/link-to}}
+							  	</LinkTo>
 								</li>
 								<li class="side-navigation__item u-hr">
-                  {{#link-to 'documents.show.publish.besluitenlijst' model class="u-padding--tb--small"}}
+                  <LinkTo @route="documents.show.publish.besluitenlijst" @model={{model}} class="u-padding--tb--small">
 										<i class="vi vi-list"></i> Besluitenlijst
 										{{!-- pills met statussen --}}
-							  	{{/link-to}}
+							  	</LinkTo>
 								</li>
                 <li class="side-navigation__item u-hr">
-                  {{#link-to 'documents.show.publish.uittreksels' model class="u-padding--tb--small"}}
+                  <LinkTo @route="documents.show.publish.uittreksels" @model={{model}} class="u-padding--tb--small">
 										<i class="vi vi-paper"></i> Uittreksels
 										{{!-- pills met statussen --}}
-							  	{{/link-to}}
+							  	</LinkTo>
 								</li>
                 <li class="side-navigation__item u-hr">
-                  {{#link-to 'documents.show.publish.notulen' model class="u-padding--tb--small"}}
+                  <LinkTo @route="documents.show.publish.notulen" @model={{model}} class="u-padding--tb--small">
 										<i class="vi vi-news"></i> Notulen
 										{{!-- pills met statussen --}}
-							  	{{/link-to}}
+							  	</LinkTo>
 								</li>
 							</ul>
 						</nav>

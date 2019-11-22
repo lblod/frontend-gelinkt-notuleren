@@ -1,7 +1,6 @@
-{{#data-table content=model isLoading=isLoadingModel noDataMessage="Geen documenten"
-     sort=sort page=page size=size class="container-flex--contain" as |t|}}
-  {{#t.menu as |menu|}}
-    {{#menu.general}}
+<DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+  <t.menu as |menu|>
+    <menu.general>
       <div class="u-padding--round--tiny">
         <div class="grid">
           <div class="col--7-12 u-wide-on-print">
@@ -12,24 +11,24 @@
           </div>
           <div class="col--5-12">
             <div class="search-box u-spacer--top--tiny">
-              {{text-search filter=title placeholder="Zoek naar zitting"}}
+              <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" />
             </div>
           </div>
         </div>
       </div>
-    {{/menu.general}}
-  {{/t.menu}}
-  {{#t.content as |c|}}
-    {{#c.header}}
+    </menu.general>
+  </t.menu>
+  <t.content as |c|>
+    <c.header>
       <!-- <th class="data-table__header-title"><!-- Starred </th> -->
-      {{th-sortable field='currentVersion.title' currentSorting=sort label='Zitting' class="data-table__header-title"}}
-      {{th-sortable field='currentVersion.createdOn' currentSorting=sort label='Aangemaakt' class="data-table__header-title"}}
-      {{th-sortable field='currentVersion.updatedOn' currentSorting=sort label='Aangepast' class="data-table__header-title"}}
-      {{th-sortable field='status' currentSorting=sort label='Status' class="data-table__header-title u-align-right"}}
-    {{/c.header}}
-    {{#c.body as |container|}}
+      <ThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Zitting" @class="data-table__header-title" />
+      <ThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" @class="data-table__header-title" />
+      <ThSortable @field="currentVersion.updatedOn" @currentSorting={{sort}} @label="Aangepast" @class="data-table__header-title" />
+      <ThSortable @field="status" @currentSorting={{sort}} @label="Status" @class="data-table__header-title u-align-right" />
+    </c.header>
+    <c.body as |container|>
       {{#with container.currentVersion as |row|}}
-      <td>{{#link-to 'editor-documents.edit' container.id}}{{row.title}}{{/link-to}}</td>
+      <td><LinkTo @route="editor-documents.edit" @model={{container.id}}>{{row.title}}</LinkTo></td>
       <td>
       	{{moment-calendar row.createdOn}}
       	<br>
@@ -40,11 +39,11 @@
       	<br>
       	<p class="smaller text-fade">{{moment-from-now document.currentVersion.updatedOn}}</p>
       </td>
-      <td class="u-align-right">{{editor-status-pill status=(await container.status)}} <br> {{document-link-to-published document=row}}
+      <td class="u-align-right"><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
       </td>
       {{/with}}
-    {{/c.body}}
-  {{/t.content}}
-{{/data-table}}
+    </c.body>
+  </t.content>
+</DataTable>
 
 {{outlet}}

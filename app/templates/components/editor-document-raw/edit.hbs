@@ -4,58 +4,58 @@
 {{#if isWorking}}
   <span class="loader"><span class="u-visually-hidden">Aan het verwerken</span></span>
 {{else}}
-  Title: {{input class="input-field input-field--block js-js-input-pattern-bound"  value=(mut document.title)}}
-  Status: {{editor-document-status-selector document=document}}
-  Context: {{input class="input-field input-field--block js-js-input-pattern-bound" value=(mut document.context)}}
+  Title: <Input class="input-field input-field--block js-js-input-pattern-bound" @value={{mut document.title}} />
+  Status: <EditorDocumentStatusSelector @document={{document}} />
+  Context: <Input class="input-field input-field--block js-js-input-pattern-bound" @value={{mut document.context}} />
   {{#if document.previousVersion.id}}
-    {{#wu-link-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action "previous" ) }}
+    <WuLinkButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "previous"}}>
       Previous version
-    {{/wu-link-button}}
+    </WuLinkButton>
   {{/if}}
   {{#if document.nextVersion.id}}
-    {{#wu-link-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action "next" )}}
+    <WuLinkButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "next"}}>
       Next version
-    {{/wu-link-button}}
+    </WuLinkButton>
   {{/if}}
 
-  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'toggleDisplayRaw') }}
+  <WuButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "toggleDisplayRaw"}}>
     display raw document (slow)
-  {{/wu-button}}
+  </WuButton>
 
   {{#unless displayRaw}}
-    {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'save') }}
+    <WuButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "save"}}>
       save
-    {{/wu-button}}
+    </WuButton>
   {{/unless}}
 
   {{#if displayRaw}}
-    {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'update') }}
+    <WuButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "update"}}>
       update changes
-    {{/wu-button}}
+    </WuButton>
 
     <div contenteditable="true" id={{outputId}}>
       {{document.content}}
     </div>
   {{/if}}
 
-  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'generateFileDownload') }}
+  <WuButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "generateFileDownload"}}>
     download raw
-  {{/wu-button}}
+  </WuButton>
 
-  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'toggleFileUpload') }}
+  <WuButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "toggleFileUpload"}}>
     upload file and replace current raw content
-  {{/wu-button}}
+  </WuButton>
 
   {{#if uploadFileMode}}
     <input onchange={{action "uploadFileAndReplace"}} type="file">
   {{/if}}
 
-  {{#wu-button  class="button--small button--link u-spacer--left--tiny" isNarrow=true onClick=(action 'toggleReplaceUris') }}
+  <WuButton @class="button--small button--link u-spacer--left--tiny" @isNarrow={{true}} @onClick={{action "toggleReplaceUris"}}>
     replace URIS
-  {{/wu-button}}
+  </WuButton>
 
   {{#if replaceUrisMode}}
-    {{editor-document-raw/replace-uris document=document }}
+    <EditorDocumentRaw::ReplaceUris @document={{document}} />
   {{/if}}
 
 {{/if}}

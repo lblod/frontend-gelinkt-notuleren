@@ -3,12 +3,12 @@
     <h3 class="h5 toggle toggle--arrow-down js-accordion__toggle" onClick={{action 'toggleOpen'}}>{{tasklistSolution.tasklist.name}}</h3>
   </div>
   <div class="col--3-12 u-align--right">
-    {{#wu-link-button class="button--link button--tiny" isNarrow=true onClick=(action "moveUp")}}
+    <WuLinkButton @class="button--link button--tiny" @isNarrow={{true}} @onClick={{action "moveUp"}}>
       <i class="vi vi-burger-alt button__icon vi-u-180deg vi-u-xs"></i>
-    {{/wu-link-button}}
-    {{#wu-link-button class="button--link button--tiny" isNarrow=true onClick=(action "moveDown")}}
+    </WuLinkButton>
+    <WuLinkButton @class="button--link button--tiny" @isNarrow={{true}} @onClick={{action "moveDown"}}>
       <i class="vi vi-burger-alt button__icon vi-u-xs"></i>
-    {{/wu-link-button}}
+    </WuLinkButton>
   </div>
 </div>
 <ul class="tasklist-navigation__group accordion__content">
@@ -16,7 +16,7 @@
     <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
   {{else}}
     {{#each tasks as |task|}}
-      {{task-solution/edit tasklistSolution=tasklistSolution task=task class="tasklist-navigation__item"}}
+      <TaskSolution::Edit @tasklistSolution={{tasklistSolution}} @task={{task}} @class="tasklist-navigation__item" />
     {{/each}}
   {{/if}}
   {{yield}}
