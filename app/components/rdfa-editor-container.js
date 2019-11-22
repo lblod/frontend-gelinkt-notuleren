@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import ContextScanner from '@lblod/marawa/rdfa-context-scanner';
-import NodeWalker from '@lblod/ember-contenteditable-editor/utils/node-walker';
+import NodeWalker from '@lblod/ember-rdfa-editor/utils/ce/node-walker';
 import Vis from 'vis';
 
 export default Component.extend({
