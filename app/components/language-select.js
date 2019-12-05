@@ -8,8 +8,8 @@ export default class LanguageSelect extends Component{
   ])
   selected = null
 
-  didReceiveAttrs() {
-    this._super(...arguments);
+  constructor() {
+    super(...arguments);
 
     if (!this.selected) {
       const defaultOption = this.options.find(o => o.id == 'nl');
@@ -20,6 +20,6 @@ export default class LanguageSelect extends Component{
   @action
   selectLanguage(language) {
     this.set('selected', language);
-    document.body.setAttribute('data--language', language.id)
+    document.body.setAttribute('data--language', language.id);
   }
-};
+}
