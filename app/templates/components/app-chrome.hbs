@@ -1,35 +1,43 @@
 <div class="grid u-spacer--tiny">
-  <div class="col--6-12">
+  <div class="col--8-12">
     <LinkTo @route="inbox.index" class="smaller link-dark">&leftarrow; Terug naar overzicht notulen</LinkTo>
     <label class="pill u-spacer--left--tiny">
       <span>{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
     </label>
   </div>
-  <div class="col--6-12 u-align-right">
-
-    {{#if editorDocument.isNew}}
-      <p class="smaller">
-        <label class="pill pill--primary-yellow">
-          <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-          <span>Concept niet bewaard</span>
-        </label>
-      </p>
-    {{else}}
-      {{#if editorDocument.updatedOn}}
-        <p class="smaller">
-          Bewaard {{moment-calendar editorDocument.updatedOn}}
-          <EditorStatusPill @status={{await documentContainer.status}} />
-        </p>
-      {{else}}
-        <p class="smaller">
-          <span class="smaller u-padding--right--tiny">
-            <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-            <span>Wijzigingen niet bewaard</span>
-          </span>
-          <EditorStatusPill @status={{await documentContainer.status}} />
-        </p>
-      {{/if}}
-    {{/if}}
+  <div class="col--4-12 u-align-right">
+  	<div class="grid grid--collapse">
+  		<div class="col--10-12 u-padding--right--small">
+		    {{#if editorDocument.isNew}}
+		      <p class="smaller">
+		        <label class="pill pill--primary-yellow">
+		          <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
+		          <span>Concept niet bewaard</span>
+		        </label>
+		      </p>
+		    {{else}}
+		      {{#if editorDocument.updatedOn}}
+		        <p class="smaller">
+		          Bewaard {{moment-calendar editorDocument.updatedOn}}
+		          <EditorStatusPill @status={{await documentContainer.status}} />
+		        </p>
+		      {{else}}
+		        <p class="smaller">
+		          <span class="smaller u-padding--right--tiny">
+		            <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
+		            <span>Wijzigingen niet bewaard</span>
+		          </span>
+		          <EditorStatusPill @status={{await documentContainer.status}} />
+		        </p>
+		      {{/if}}
+		    {{/if}}
+		  </div>
+  		<div class="col--2-12 u-align-left">
+		    {{#if features.languageSelect}}
+		      <LanguageSelect />
+		    {{/if}}
+		  </div>
+		</div>
   </div>
 </div>
 <div class="grid">
@@ -37,9 +45,6 @@
     <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
   </div>
   <div class="col--6-12 u-align-right">
-    {{#if features.languageSelect}}
-      <LanguageSelect />
-    {{/if}}
     <WuButtonGroup @class="u-align-right">
       {{#if editorDocument.isNew}}
         <LinkTo @route="inbox.index" class="button button--small button--narrow button--link button--link--dark">Verwijder concept</LinkTo>
