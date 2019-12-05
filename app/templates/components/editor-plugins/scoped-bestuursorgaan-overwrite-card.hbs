@@ -1,7 +1,10 @@
-<div class="modal-dialog__header">
+<div class="modal-dialog__header u-border--lighter--bottom u-padding--round--tiny">
   <div class="grid">
     <div class="col--10-12">
-      <strong>{{info.label}}</strong>
+    	{{info.label}}
+    </div>
+    <div class="col--2-12 u-align-right">
+    	<i class="fa fa-angle-down"></i>
     </div>
 {{!--     <div class="col--2-12 u-align-right">
       <a class="link--icon--close" href="#">
@@ -22,15 +25,15 @@
 
         <li class="link-list__item link-list__item--sidenotes">
           <a class="" onclick={{action 'refer' b}}>
-            {{b.isTijdsspecialisatieVan.naam}}
+            <p class="small">{{b.isTijdsspecialisatieVan.naam}}</p>
 
-            <span class="link-list__item__sidenote uppercase">
+            <p class="link-list__item__sidenote smallest">
               {{#if b.bindingEinde}}
                 {{moment-format b.bindingStart 'DD/MM/YYYY'}} - {{moment-format b.bindingEinde 'DD/MM/YYYY'}}
               {{else}}
                 Vanaf {{moment-format b.bindingStart 'DD/MM/YYYY'}}
               {{/if}}
-            </span>
+            </p>
           </a>
         </li>
       {{/each}}

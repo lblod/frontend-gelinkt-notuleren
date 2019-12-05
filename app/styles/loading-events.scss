@@ -3,13 +3,39 @@
   Style the loading events here.
  ========================================================================== */
 
-.editor-loading-events {
-	position: fixed;
-  width: 22rem;
-  top: 21rem;
-  right: 1rem;
+.editor__actionbar__loading-events {
+	min-height: 3rem;
+	// padding: 0.75rem 1rem 0.5rem;
+	// border-bottom: 1px solid $blue-gray-lighter;
 
-  i.vi.vi-check {
-  	color: $primary-blue;
-  }
+	p {
+		font-weight: 600;
+    color: $blue-gray-dark;
+    background: rgba(mix($white, $blue-gray-light, 50%), 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    padding: 0.75rem 1rem 0.5rem;
+    min-height: 3rem;
+    display: block;
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+
+		i {
+			font-size: 1.2rem;
+		}
+
+	  i.vi.vi-check {
+	  	color: $primary-blue;
+	  }
+	}
+
+	p.editor__actionbar__loading-events--loading {
+		bottom: 0;
+		z-index: 100;
+	}
 }
+

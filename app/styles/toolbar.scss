@@ -40,33 +40,51 @@
 	}
 
 	button.button.annotation-suggestion--trigger {
-	    background-color: $white;
-	    color: $gray;
-	    border: 1px solid $blue-gray-light;
-	    display: block;
-	    // width: 3rem;
-	    height: 3rem;
-	    // padding: 0 0 0.45rem;
-	    // border-radius: 100%;
-	    text-align: left;
-	    margin-top: -1rem;
-	    line-height: 0;
-	    font-size: 3rem;
-	    top: -6.1rem;
-	    padding: 2px 3rem 0.2em 0.5rem;
-	    right: -7.8rem;
+		text-align: left;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		color: $gray-dark;
+		background-color: $white;
+		font-weight: 500;
+		font-size: 1.5rem;
+
+		&:hover {
+			background-color: $blue-gray-lightest;
+		}
 	}
 
-	button.button.annotation-suggestion--trigger:after {
-	    content:"Voeg sjabloon in";
-	    display: block;
-	    // position: absolute;
-	    font-size: 1.4rem;
-	    color: $gray-dark;
-	    // left: 3.65rem;
-	    z-index: 900;
-	    // top: 1.5rem;
-	    position: relative;
-	    top: 0.3rem;
-	    left: 2rem;
+	button.button.annotation-suggestion--trigger i {
+    color: $primary-blue;
+    text-shadow: 0 1px 0 $primary-blue;
+    position: absolute;
+    top: 1rem;
+    right: 0.1rem;
 	}
+
+
+.editor__actionbar__hints__title {
+	font-weight: 600;
+	color: $blue-gray-dark;
+	background-color: $blue-gray-lightest;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 1.2rem;
+	padding: 0.75rem 1rem 0.5rem;
+}
+
+.editor__actionbar {
+	font-size: 1.6rem;
+	line-height: 1.2;
+
+	.small, .smaller, .smallest {
+		line-height: 1.1 !important;
+	}
+
+	strong {
+		font-size: 1.5rem;
+	}
+
+	a {
+		font-size: 1.4rem;
+	}
+}

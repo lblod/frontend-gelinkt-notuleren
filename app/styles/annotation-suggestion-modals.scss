@@ -3,6 +3,11 @@
   Style the modals here.
  ========================================================================== */
 
+.editor__actionbar {
+	background-color: $white;
+	border-left: $blue-gray-lighter;
+}
+
 /* temporary fix for multiple plugins triggered at once */
 
 	.annotation-suggestion__suggestion .modal-dialog {
@@ -93,25 +98,106 @@
   max-height: 50vh;
 }
 
+.text-highlight {
+	color: $primary-blue;
+	border: 1px solid $blue-gray-light;
+	border-radius: 3px;
+	background-color: $blue-gray-lightest;
+	margin: 0.5rem 0;
+	padding: 0.5rem;
+	display: block;
+}
+
+.modal-dialog__content li.link-list__item.link-list__item--sidenotes a {
+	padding: 1rem 3rem 2rem 0;
+	position: relative;
+
+	&:hover:after {
+		border: 1px solid mix($primary-blue, $blue-gray-light);
+		color: $primary-blue;
+		// background-color: $white;
+		transition: all 200ms;
+		background-color: $blue-gray-lightest;
+	}
+
+	&:after {
+		content: "\f067";
+		font-family: fontawesome;
+		position: absolute;
+		right: 0;
+		top: 1rem;
+		color: $gray;
+		font-size: 1.3rem;
+		width: 2rem;
+		padding-top: 0.4rem;
+		height: 2.1rem;
+		text-align: center;
+		border-radius: 3px;
+		border: 1px solid $blue-gray-light;
+		background-color: $blue-gray-lighter;
+	}
+}
+
 .modal-dialog__content li.link-list__item.link-list__item--sidenotes a:first-child {
 	border-bottom: none;
 	padding-bottom: 0.3rem;
 }
 
 .modal-dialog__content li.link-list__item .link-list__item__sidenote {
+	padding-left: 0;
 	padding-top: 0;
-	padding-bottom: 1.2rem;
-	margin-top: 0.5rem;
+	padding-bottom: 0.5rem;
 	color: $gray;
 	font-size: 80%;
 	line-height: 1.3;
 	display: block;
 	word-break: break-all;
 	border-bottom: $blue-gray-light;
+	font-size: 1.3rem;
 
 	&:hover {
 		background-color: transparent;
 		color: $black;
+	}
+}
+
+.modal-dialog__content li.link-list__item {
+	&:first-child {
+		border-top: 1px solid $blue-gray-lighter;
+	}
+
+	&:last-child {
+		border-bottom: 0;
+	}
+
+	a {
+		position: relative;
+		padding: 1.5rem 0;
+
+		&:hover:after {
+			border: 1px solid mix($primary-blue, $blue-gray-light);
+			color: $primary-blue;
+			// background-color: $white;
+			transition: all 200ms;
+			background-color: $blue-gray-lightest;
+		}
+
+		&:after {
+			content: "\f067";
+			font-family: fontawesome;
+			position: absolute;
+			right: 0;
+			top: 1rem;
+			color: $gray;
+			font-size: 1.3rem;
+			width: 2rem;
+			padding-top: 0.4rem;
+			height: 2.1rem;
+			text-align: center;
+			border-radius: 3px;
+			border: 1px solid $blue-gray-light;
+			background-color: $blue-gray-lighter;
+		}
 	}
 }
 

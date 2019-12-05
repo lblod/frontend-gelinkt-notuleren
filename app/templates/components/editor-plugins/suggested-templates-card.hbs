@@ -1,0 +1,15 @@
+<div class="modal-dialog__content u-padding--rl--tiny">
+	<ul class="link-list link-list--bordered">
+	  {{#each templates as |template|}}
+      <li class="link-list__item">
+    		<a class="small" onclick={{action 'insert' template}}>
+		      {{template.title}}
+		    </a>
+	    </li>
+	  {{/each}}
+	</ul>
+</div>
+{{!-- <div class="u-border--light--bottom u-border--light--top">
+	{{#wu-button isTiny=true isAlt=true isBlock=true class="u-background--gray-lightest u-border--none" onClick=(action 'closeHints')}} Klap sjablonen in <i class="fa fa-angle-up"></i> {{/wu-button}}
+</div>
+ --}}
