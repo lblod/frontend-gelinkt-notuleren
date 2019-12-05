@@ -3,18 +3,23 @@ import { inject as service } from '@ember/service';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
+const featureFlagRegex = /^feature\[(.+)\]$/;
+
 export default Route.extend(ApplicationRouteMixin, {
   moment: service(),
   currentSession: service(),
-  beforeModel() {
+  features: service(),
+
+  beforeModel(transition) {
     this.moment.setTimeZone('Europe/Brussels');
     this.moment.setLocale('nl');
-    return this._loadCurrentSession();
+    this.updateFeatureFlags(transition.to.queryParams);
+    return this.loadCurrentSession();
   },
 
   sessionAuthenticated() {
     this._super(...arguments);
-    this._loadCurrentSession();
+    this.loadCurrentSession();
   },
 
   sessionInvalidated() {
@@ -22,7 +27,23 @@ export default Route.extend(ApplicationRouteMixin, {
     window.location.replace(logoutUrl);
   },
 
-  _loadCurrentSession() {
+  loadCurrentSession() {
     return this.currentSession.load().catch(() => this.session.invalidate());
+  },
+
+  updateFeatureFlags(queryParams) {
+    const keys = Object.keys(queryParams);
+
+    for (let key of keys) {
+      const match = featureFlagRegex.exec(key);
+      if (match) {
+        const featureFlag = match[1];
+        const isEnabled = queryParams[key] == 'true';
+        if (isEnabled)
+          this.features.enable(featureFlag);
+        else
+          this.features.disable(featureFlag);
+      }
+    }
   }
 });
