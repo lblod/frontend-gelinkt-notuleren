@@ -22,6 +22,9 @@ module.exports = function(environment) {
         outputDateFormat: 'D MMMM YYYY'
       }
     },
+    featureFlags: {
+      'language-select': false
+    },
     browserUpdate: {
       vs: {f:-3,o:-3,s:-3,c:-3},
       style: 'corner',
