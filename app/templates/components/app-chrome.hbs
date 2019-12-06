@@ -5,9 +5,9 @@
       <span>{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
     </label>
   </div>
-  <div class="col--4-12 u-align-right">
-  	<div class="grid grid--collapse">
-  		<div class="col--10-12 u-padding--right--small">
+  <div class="col--4-12">
+  	<div class="grid grid--collapse grid--align-right">
+  		<div class="col--9-12 u-align-right">
 		    {{#if editorDocument.isNew}}
 		      <p class="smaller">
 		        <label class="pill pill--primary-yellow">
@@ -32,11 +32,11 @@
 		      {{/if}}
 		    {{/if}}
 		  </div>
-  		<div class="col--2-12 u-align-left">
-		    {{#if features.languageSelect}}
+		  {{#if features.languageSelect}}
+  			<div class="col--3-12 u-align-left u-padding--left--small">
 		      <LanguageSelect />
-		    {{/if}}
-		  </div>
+		  	</div>
+		  {{/if}}
 		</div>
   </div>
 </div>
