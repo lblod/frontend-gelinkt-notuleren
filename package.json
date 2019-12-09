@@ -45,7 +45,7 @@
     "@lblod/ember-rdfa-editor-stemming-module-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-template-variables-manager-plugin": "0.2.1",
     "@lblod/ember-vo-tasklist": "0.1.5",
-    "@lblod/ember-vo-webuniversum": "^0.22.5",
+    "@lblod/ember-vo-webuniversum": "^0.22.6",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.16",
     "@lblod/ember-vo-webuniversum-widget": "^0.1.2",
     "@lblod/marawa": "^0.6.0",
