@@ -38,7 +38,7 @@
     "@lblod/ember-rdfa-editor-mandaat-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "0.7.1",
     "@lblod/ember-rdfa-editor-personen-plugin": "0.3.0",
-    "@lblod/ember-rdfa-editor-roadsign-hint-plugin": "0.4.0",
+    "@lblod/ember-rdfa-editor-roadsign-hint-plugin": "0.4.1",
     "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "0.4.0",
     "@lblod/ember-rdfa-editor-scroll-to-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "0.7.2",
