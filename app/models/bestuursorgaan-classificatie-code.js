@@ -10,5 +10,6 @@ export default Model.extend({
 
   label: attr(),
   scopeNote: attr(),
-  standaardType: hasMany('bestuursfunctie-code', { inverse: 'standaardTypeVan' })
+  standaardType: hasMany('bestuursfunctie-code', { inverse: 'standaardTypeVan' }),
+  uri: attr()
 });
