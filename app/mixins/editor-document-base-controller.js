@@ -2,7 +2,6 @@ import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
-import { removeNodeFromTree } from '../utils/dom-helpers';
 import { task } from 'ember-concurrency';
 
 export default Mixin.create({
@@ -13,8 +12,6 @@ export default Mixin.create({
   editorDocument: alias('model.editorDocument'),
   editorDocumentStatuses: alias('model.editorDocumentStatuses'),
   documentContainer: alias('model.documentContainer'),
-
-  editorDomNode: null,
 
   validationErrors: false,
 
@@ -39,24 +36,11 @@ export default Mixin.create({
     return false;
   },
 
-  // TODO: move to ember-rdfa-editor
-  cleanUpEditorDocumentInnerHtml(innerHtml){
-    // for now only remove highlights
-    let template = document.createElement('template');
-    template.innerHTML = innerHtml;
-    let markTags = template.content.querySelectorAll('mark');
-    markTags.forEach( tag => {
-      removeNodeFromTree(tag);
-    });
-
-    return template.innerHTML;
-  },
-
   saveEditorDocument: task(function *(editorDocument, newStatus){
     yield this.saveTasklists();
 
     // create or extract properties
-    let cleanedHtml = this.cleanUpEditorDocumentInnerHtml(this.editorDomNode.innerHTML);
+    let cleanedHtml = this.editor.htmlContent;
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');

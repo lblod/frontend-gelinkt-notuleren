@@ -389,7 +389,7 @@
 /* making sure list items annotations look good too */
 
 .rdfa-annotations:not(.show-rdfa-blocks) {
-	ul {
+	ul:not(.article-list) {
 
 		.mark-highlight-manual,
 		[typeof],
