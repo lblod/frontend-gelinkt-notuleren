@@ -34,12 +34,7 @@ export default Controller.extend(EditorDocumentBaseController, {
   actions: {
 
     handleRdfaEditorInit(editor){
-     if(editor){
        this.set('editor', editor);
-       this.set('editorDomNode', editor.get('rootNode'));
-       return;
-     }
-      this.set('editorDomNode', null);
     },
 
     async syncDocument() {
