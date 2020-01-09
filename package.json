@@ -24,7 +24,7 @@
     "@ember/optional-features": "^1.1.0",
     "@lblod/ember-acmidm-login": "^0.2.1",
     "@lblod/ember-mock-login": "^0.4.5",
-    "@lblod/ember-rdfa-editor": "^0.32.4",
+    "@lblod/ember-rdfa-editor": "^0.33.0",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "0.5.1",
     "@lblod/ember-rdfa-editor-agenda-plugin": "0.5.1",
     "@lblod/ember-rdfa-editor-citaten-plugin": "0.9.5",
