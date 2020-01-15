@@ -8,7 +8,8 @@ const defaultContext = {
     ext: 'http://mu.semte.ch/vocabularies/ext/',
     person: 'http://www.w3.org/ns/person#',
     persoon: 'http://data.vlaanderen.be/ns/persoon#',
-    dateplugin: 'http://say.data.gift/manipulators/insertion/'
+    dateplugin: 'http://say.data.gift/manipulators/insertion/',
+    besluittype: 'https://data.vlaanderen.be/id/concept/BesluitType/'
   }
 };
 
