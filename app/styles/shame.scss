@@ -128,3 +128,26 @@ input.input-field {
 	border-left: 1px solid $gray-lighter;
 	border-right: 1px solid $gray-lighter;
 }
+
+/* temporary styling for import-export demo */
+
+.preview-list__image {
+  width: 16rem;
+  height: 20rem;
+  display: block;
+  box-shadow: 0 0 6px 0 #CBD2DA;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.preview-list__name {
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.description-data__value--placeholder {
+  font-style: italic;
+  // color: $gray;
+  font-weight: 300;
+  font-size: 1.4rem;
+}

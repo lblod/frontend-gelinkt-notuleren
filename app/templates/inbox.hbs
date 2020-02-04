@@ -5,28 +5,56 @@
       <div class="container-flex--contain">
         <div class="sidebar">
           <div class="sidebar__header">
-            <WuButton @isBlock={{true}} @onClick={{action "openNewDocument"}}>Nieuwe zitting</WuButton>
+            <div class="user-toggle__name--label">{{currentSession._user.voornaam}} {{currentSession._user.achternaam}}</div>
+            <div class="user-toggle__name">
+              {{currentSession._group.classificatie.label}} {{currentSession._group.naam}}
+            </div>
           </div>
           <div class="sidebar__content">
-            <div class="side-navigation">
+            <nav class="side-navigation" aria-labelledby="mainmenulabel">
+              <h2 id="mainmenulabel" class="u-visually-hidden">Hoofdmenu</h2>
               <ul class="side-navigation__group">
                 <li class="side-navigation__item">
                   <LinkTo @route="inbox.index">
-	                  <i class="vi vi-paper"></i>
-	                  Actieve documenten
-	                </LinkTo>
+                    <div class="grid grid--collapse">
+                      <div class="col--2-12">
+                        <i class="vi vi-paper"></i>
+                      </div>
+                      <div class="col--10-12">
+                        Notulen zitting
+                      </div>
+                    </div>
+                  </LinkTo>
+                </li>
+                <li class="side-navigation__item">
+                  <LinkTo @route="inbox.imported">
+                    <div class="grid grid--collapse">
+                      <div class="col--2-12">
+                        <i class="vi vi-arrow-bottom vi-u-180deg"></i>
+                      </div>
+                      <div class="col--10-12">
+                        Geïmporteerde HTML bestanden
+                      </div>
+                    </div>
+                  </LinkTo>
                 </li>
 {{!--                 <li class="side-navigation__item">
                   {{#link-to 'inbox.archive'}}Gearchiveerde documenten{{/link-to}}
                 </li> --}}
                 <li class="side-navigation__item">
                   <LinkTo @route="inbox.trash">
-	                  <i class="vi vi-trash"></i>
-	                  Prullenmand
+                    <div class="grid grid--collapse">
+                      <div class="col--2-12">
+                        <i class="vi vi-trash"></i>
+                      </div>
+                      <div class="col--10-12">
+                        Prullenmand
+                      </div>
+                    </div>
                   </LinkTo>
                 </li>
               </ul>
-            </div>
+            </nav>
           </div>
           <div class="sidebar__footer u-align-center">
           	<a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren" target="_blank" class="button button--alt button--small button--block u-spacer--tb--tiny"><i class="vi vi-book vi-u-s"></i> Bekijk handleiding</a>

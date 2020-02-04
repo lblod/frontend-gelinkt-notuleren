@@ -21,6 +21,9 @@ export default Controller.extend(DefaultQueryParamsMixin, {
     toggleStar(document) {
       document.set('starred', !document.get('starred'));
       document.save();
+    },
+    openNewDocument() {
+      this.transitionToRoute('editor-documents.new');
     }
   }
 });

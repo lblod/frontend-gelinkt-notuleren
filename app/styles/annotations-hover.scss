@@ -234,7 +234,7 @@
 	[typeof="besluit:Zitting"],
 	[property^="ext"]:not([property="ext:heeftAfwezigeBijAgendapunt"]):not(span),
 	[data-editor-highlight="true"]:not(li):not(span),
-	[typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"],
+	// [typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"],
 	[typeof="besluit:Artikel"],
 	[typeof="mobiliteit:Opstelling"] {
 		display: block;
