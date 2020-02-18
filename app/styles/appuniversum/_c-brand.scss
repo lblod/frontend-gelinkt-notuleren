@@ -63,5 +63,5 @@ $vl-brand-border               : $vl-neutral-light !default;
     font-weight: $vl-regular;
     color: $vl-brand-text;
     margin-left: -$vl-unit-small;
-    padding-bottom: .15ex; // Visual fix for low font baseline and no descenders
+    padding-bottom: .1ex; // Visual fix for low font baseline and no descenders
   }

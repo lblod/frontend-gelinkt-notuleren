@@ -49,6 +49,7 @@ $vl-header-border            : $vl-neutral-lighter !default;
     font-weight: $vl-regular;
     text-transform: uppercase;
     position: relative;
+    display: block;
     color: $vl-neutral-darker;
     text-decoration: underline;
     text-decoration-color: $vl-neutral-light;
