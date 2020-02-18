@@ -2,12 +2,21 @@
    #HEADER
    ================================== */
 
+/* Variables
+   ========================================================================== */
+
+$vl-header-bg                : $vl-white !default;
+$vl-header-border            : $vl-neutral-lighter !default;
+
+/* Component
+   ========================================================================== */
+
 .vl-c-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: $vl-header-bg;
-  border-bottom: 1px solid $vl-neutral-lighter;
+  border-bottom: 1px solid $vl-header-border;
 }
 
   .vl-c-header__title-group {
@@ -15,9 +24,19 @@
     align-items: center;
     color: $vl-neutral-darkest;
     text-decoration: none;
+  }
 
-    > * + * {
-      margin-left: $vl-unit;
+  .vl-c-header__title-link {
+    display: flex;
+    align-items: center;
+    color: $vl-neutral-darkest;
+    text-decoration: none;
+
+    &,
+    &:active,
+    &:hover,
+    &:focus {
+      color: $vl-neutral-darker;
     }
 
     &:focus {
@@ -27,22 +46,25 @@
 
   .vl-c-header__title {
     @include vl-font-size($vl-base);
-    font-weight: $vl-medium;
+    font-weight: $vl-regular;
     text-transform: uppercase;
     position: relative;
-    color: $vl-neutral-darkest;
+    color: $vl-neutral-darker;
     text-decoration: underline;
     text-decoration-color: $vl-neutral-light;
+    text-underline-offset: .3ex;
     transition: color $vl-transition;
+    letter-spacing: .03ex;
+    margin-left: $vl-unit + $vl-unit-small;
 
-    .vl-c-header__title-group:hover &,
-    .vl-c-header__title-group:focus & {
+    .vl-c-header__title-link:hover &,
+    .vl-c-header__title-link:focus & {
       color: $vl-action-hover-color;
       text-decoration: underline;
       text-decoration-color: $vl-action-underline-hover;
     }
 
-    .vl-c-header__title-group:focus & {
+    .vl-c-header__title-link:focus & {
       outline: $vl-outline;
     }
 
@@ -54,7 +76,57 @@
       width: 1px;
       height: 2.5rem;
       background-color: $vl-neutral-light;
-      margin-left: -$vl-unit-small;
+      margin-left: -$vl-unit + $vl-unit-tiny;
+    }
+  }
+
+  .vl-c-header__title-link {
+    display: flex;
+    align-items: center;
+    color: $vl-neutral-darkest;
+    text-decoration: none;
+
+    > * + * {
+      margin-left: $vl-unit + $vl-unit-small;
+    }
+
+    &,
+    &:active,
+    &:hover,
+    &:focus {
+      color: $vl-neutral-darker;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .vl-c-header__skiplink {
+    @include vl-font-size($vl-base,1);
+    font-weight: $vl-light;
+    position: relative;
+    transition: color $vl-transition;
+    letter-spacing: .03ex;
+    margin-left: $vl-unit-small;
+    padding: $vl-unit-tiny;
+    background-color: $vl-orange-lightest;
+    border-radius: $vl-radius;
+    top: -1000px;
+    left: -1000px;
+
+    &,
+    &:hover,
+    &:focus {
+      color: $vl-orange-darker;
+      text-decoration: underline;
+      text-decoration-color: $vl-orange-dark;
+    }
+
+    &:focus {
+      outline: $vl-outline;
+      top: 0;
+      left: 0;
     }
   }
 

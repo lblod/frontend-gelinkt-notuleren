@@ -5,7 +5,7 @@
 /* Variables
    ========================================================================== */
 
-$vl-button-height         : $vl-unit-large !default;
+$vl-button-height         : $vl-unit-large - $vl-unit-small !default;
 $vl-button-font-size      : $vl-h6 !default;
 $vl-button-border         : .2rem !default;
 
@@ -53,6 +53,10 @@ $vl-button-border         : .2rem !default;
   &:visited {
     background-color: $vl-action-visited-color;
   }
+}
+
+.vl-c-button--small {
+  @include vl-font-size($vl-base);
 }
 
 
