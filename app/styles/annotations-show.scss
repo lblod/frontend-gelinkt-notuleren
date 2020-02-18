@@ -3,137 +3,137 @@
  ========================================================================== */
 
 .rdfa-annotations.show-rdfa-blocks {
-	.mark-highlight-manual,
-	[data-editor-highlight="true"],
-	[data-type],
-	[property],
-	[typeof] {
+  .mark-highlight-manual,
+  [data-editor-highlight="true"],
+  [data-type],
+  [property],
+  [typeof] {
 
-  	padding: 4.5rem 1rem 0 1rem;
-		margin: 1rem 0 0.5rem 0;
-		min-width: 20rem;
-		position: relative;
-		border-bottom: 0;
+    padding: 4.5rem 1rem 0 1rem;
+    margin: 1rem 0 0.5rem 0;
+    min-width: 20rem;
+    position: relative;
+    border-bottom: 0;
 
-		&:not(p):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(div) {
-			display: inline-block;
-		}
+    &:not(p):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(div) {
+      display: inline-block;
+    }
 
-		&:hover {
-    	background-color: transparent;
-		}
+    &:hover {
+      background-color: transparent;
+    }
 
     &:hover:before,
     &:before,
-		&:hover:after,
+    &:hover:after,
     &:after {
-    	left: -1px !important;
-    	top: -1px !important;
-    	right: -1px !important;
-    	max-width: none;
-    	width: 100%;
-    	border: 1px solid $blue-gray;
-    	text-align: left;
+      left: -1px !important;
+      top: -1px !important;
+      right: -1px !important;
+      max-width: none;
+      width: 100%;
+      border: 1px solid $blue-gray;
+      text-align: left;
     }
 
-		&:hover:after,
+    &:hover:after,
     &:after {
-    	content: "";
-    	display: block;
-    	bottom: 0 !important;
-    	height: auto;
-    	position: absolute;
-    	pointer-events: none;
-    	margin-top: 0 !important;
-    	border-top: 0;
+      content: "";
+      display: block;
+      bottom: 0 !important;
+      height: auto;
+      position: absolute;
+      pointer-events: none;
+      margin-top: 0 !important;
+      border-top: 0;
     }
 
     &:hover:before,
     &:before {
-			opacity: 1 !important;
-  		padding: 0.5rem 1rem;
-  		background-color: $blue-gray-lightest;
-    	margin: 0 !important;
-    	border-bottom: 0;
-    	max-height: 7rem;
+      opacity: 1 !important;
+      padding: 0.5rem 1rem;
+      background-color: $blue-gray-lightest;
+      margin: 0 !important;
+      border-bottom: 0;
+      max-height: 7rem;
     }
-	}
+  }
 }
 
 /* make zitting not stand out, as it would constantly be visible */
 
 .rdfa-annotations	[typeof="besluit:Zitting"] {
-	padding: 0 !important;
-	margin: 0 !important;
-	border: 0 !important;
-	background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background-color: transparent !important;
 
-	&:hover:after,
-	&:hover:before,
-	&:before,
-	&:after {
-		content: normal !important;
-	}
+  &:hover:after,
+  &:hover:before,
+  &:before,
+  &:after {
+    content: normal !important;
+  }
 }
 
 /* make sure icons looks normal when showing the rdfa annotations */
 
 .rdfa-annotations {
-	[typeof="besluit:Agendapunt"] [property="besluit:geplandOpenbaar"] i.fa,
-	[typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] i.fa {
-		position: relative;
-		left: auto;
-		top: auto;
-		font-style: normal;
-	}
+  [typeof="besluit:Agendapunt"] [property="besluit:geplandOpenbaar"] i.fa,
+  [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] i.fa {
+    position: relative;
+    left: auto;
+    top: auto;
+    font-style: normal;
+  }
 }
 
 /* only extra metadata on when hovering over fields, when "show annotations" has been switched on */
 
 .rdfa-annotations.show-rdfa-blocks {
 
-	.mark-highlight-manual:hover:after,
-	[data-editor-highlight="true"]:hover:after {
-		content: "Actie vereist";
-	}
+  .mark-highlight-manual:hover:after,
+  [data-editor-highlight="true"]:hover:after {
+    content: "Actie vereist";
+  }
 
-	.mark-highlight-manual,
-	[data-editor-highlight="true"],
-	[data-type],
-	[property],
-	[typeof] {
+  .mark-highlight-manual,
+  [data-editor-highlight="true"],
+  [data-type],
+  [property],
+  [typeof] {
 
-		&:hover {
-			background-color: rgba($white, 0.4) !important;
-			transition: box-shadow 200ms;
-			position: relative;
-		}
+    &:hover {
+      background-color: rgba($white, 0.4) !important;
+      transition: box-shadow 200ms;
+      position: relative;
+    }
 
-		&:after {
-			transition: top 200ms;
-		}
+    &:after {
+      transition: top 200ms;
+    }
 
-		&:hover:before {
-			padding-top: 3.3em;
-			top: -4em !important;
-		}
+    &:hover:before {
+      padding-top: 3.3em;
+      top: -4em !important;
+    }
 
-		&:hover:after {
-			content: attr(property) " " attr(typeof) " " attr(data-type);
-			top: -3.7em !important;
-			display: block;
-			padding-top: 3.7em;
-			color: $blue-gray-dark;
-			letter-spacing: 0.2px;
-			font-size: 1.2rem;
-			font-weight: 400;
-			font-family: "flanders-sans";
-			padding: 0.3rem 0 0 1rem;
-			text-transform: none;
-			z-index: 901;
-			line-height: 1;
-		}
-	}
+    &:hover:after {
+      content: attr(property) " " attr(typeof) " " attr(data-type);
+      top: -3.7em !important;
+      display: block;
+      padding-top: 3.7em;
+      color: $blue-gray-dark;
+      letter-spacing: 0.2px;
+      font-size: 1.2rem;
+      font-weight: 400;
+      font-family: "flanders-sans";
+      padding: 0.3rem 0 0 1rem;
+      text-transform: none;
+      z-index: 901;
+      line-height: 1;
+    }
+  }
 }
 
 /* hide superfluous elements */
@@ -148,7 +148,7 @@
 [property="ext:idInSnippet"],
 [property="ext:intentionUri"],
 [typeof="ext:Variable"],
-	[property="ext:metadata"] { // these are elements to help us work with the document
-	display: none !important;
+  [property="ext:metadata"] { // these are elements to help us work with the document
+  display: none !important;
 }
 

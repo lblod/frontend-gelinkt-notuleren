@@ -1,0 +1,43 @@
+/* ==========================================================================
+   #BOX
+   ========================================================================== */
+
+/**
+ * The box object simply boxes off content. Extend with cosmetic styles in the
+ * Components layer.
+ *
+ * 1. So we can apply the `.vl-o-box` class to naturally-inline elements.
+ */
+
+.vl-o-box {
+  display: block; /* [1] */
+  padding: $vl-unit;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/* Size variants
+   ========================================================================== */
+
+.vl-o-box--flush {
+  padding: 0;
+}
+
+.vl-o-box--tiny {
+  padding: $vl-unit-tiny;
+}
+
+.vl-o-box--small {
+  padding: $vl-unit-small;
+}
+
+.vl-o-box--large {
+  padding: $vl-unit-large;
+}
+
+.vl-o-box--huge {
+  padding: $vl-unit-huge;
+}

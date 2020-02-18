@@ -6,19 +6,19 @@
 .rdfa-editor .editor-container {
   /* -------------------- Guiding tags ------------------------- */
 
-	[property^="ext:insert"]:before,
-	[data-editor-highlight="true"]:before {
-		content: "Selecteer de juiste optie";
-	}
+  [property^="ext:insert"]:before,
+  [data-editor-highlight="true"]:before {
+    content: "Selecteer de juiste optie";
+  }
 
-	span.mark-highlight-manual:before {
-  	content: "Vul in";
+  span.mark-highlight-manual:before {
+    content: "Vul in";
   }
 
   /* -------------------- General tags ------------------------- */
 
   [typeof="besluit:Zitting"]:before {
-  	content: "Zitting";
+    content: "Zitting";
   }
 
   [datatype="xsd:date"]:before {
@@ -38,7 +38,7 @@
   }
 
   [property="ext:scopedBestuursorgaanText"]:before {
-  	content: "Selecteer het bestuursorgaan";
+    content: "Selecteer het bestuursorgaan";
   }
 
   [typeof="besluit:Bestuursorgaan"]:before {
@@ -69,11 +69,11 @@
 
     /* Aanwezigen en types */
     [property="ext:aanwezigenTable"]:before {
-    	content: "Aanwezigenlijst";
+      content: "Aanwezigenlijst";
     }
 
     [property="ext:insertAanwezigenText"]:before {
-    	content: "Duid aanwezigen aan";
+      content: "Duid aanwezigen aan";
     }
 
     [property="besluit:heeftAanwezigeBijStart"]:before {
@@ -81,7 +81,7 @@
     }
 
     [property="ext:heeftAfwezigeBijStart"]:before {
-    	content: "Afwezige bij start van zitting";
+      content: "Afwezige bij start van zitting";
     }
 
     [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
@@ -94,34 +94,34 @@
     }
 
     [typeof="ext:BesluitGemeenteraadsledenAfstandMandaat"]:before {
-    	content: "Afstand van mandaat";
+      content: "Afstand van mandaat";
     }
 
     [typeof="ext:BesluitGemeenteraadsledenVerkiesbaarheidsvoorwaarden"]:before {
-    	content: "Verkiesbaarheidsvoorwaarden";
+      content: "Verkiesbaarheidsvoorwaarden";
     }
 
     [typeof="ext:BesluitGemeenteraadsledenOnverenigbaarheden"]:before {
-    	content: "Onverenigbaarheden";
+      content: "Onverenigbaarheden";
     }
 
     [typeof="ext:BesluitGemeenteraadsledenVerhindering"]:before {
-    	content: "Verhindering";
+      content: "Verhindering";
     }
 
 
   /* -------------------- Agendapunt ------------------------- */
 
   [property="ext:agendapuntenTable"]:before {
-  	content: "Agenda";
+    content: "Agenda";
   }
 
   [property="ext:insertAgendaText"]:before {
-  	content: "Beheer agenda";
+    content: "Beheer agenda";
   }
 
   [property="ext:behandelingVanAgendapuntenContainer"]:before {
-  	content: "Behandeling agenda";
+    content: "Behandeling agenda";
   }
 
   [typeof="besluit:Agenda"]:before {
@@ -142,36 +142,36 @@
     content: "Behandeling van agendapunt"
   }
 
-  	[typeof="besluit:Besluit"]:before,
-  	[typeof~="besluit:Besluit"]:before,
-  	[typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
-  	[typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
-  		content: "Besluit";
-  	}
+    [typeof="besluit:Besluit"]:before,
+    [typeof~="besluit:Besluit"]:before,
+    [typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
+    [typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
+      content: "Besluit";
+    }
 
-  	[typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"]:before {
-  		content: "Besluit: Aanvullend reglement";
-  	}
+    [typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"]:before {
+      content: "Besluit: Aanvullend reglement";
+    }
 
-  	[property="dc:subject"]:before {
-  		content: "Onderwerp";
-  	}
+    [property="dc:subject"]:before {
+      content: "Onderwerp";
+    }
 
-  	[property="besluit:geplandOpenbaar"]:before {
-  		content: "Gepland openbaar";
-  	}
+    [property="besluit:geplandOpenbaar"]:before {
+      content: "Gepland openbaar";
+    }
 
-  	[property="besluit:geplandOpenbaar"][content="false"]:before {
-  		content: "Gepland besloten";
-  	}
+    [property="besluit:geplandOpenbaar"][content="false"]:before {
+      content: "Gepland besloten";
+    }
 
-  	[property="besluit:openbaar"]:before {
-  		content: "Openbare behandeling"
-  	}
+    [property="besluit:openbaar"]:before {
+      content: "Openbare behandeling"
+    }
 
-  	[property="besluit:openbaar"][content="false"]:before {
-  		content: "Besloten behandeling"
-  	}
+    [property="besluit:openbaar"][content="false"]:before {
+      content: "Besloten behandeling"
+    }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
         content: "\f06e \00A0 \00A0 Open agendapunt";
@@ -199,56 +199,56 @@
       }
 
       [property="ext:bekrachtigdOnverenigbaarheid"]:before {
-      	content: "Onverenigbaarheid";
+        content: "Onverenigbaarheid";
       }
 
       [property="ext:bekrachtigdAfstandVanMandaatDoor"]:before {
-      	content: "Afstand mandaat";
+        content: "Afstand mandaat";
       }
 
       [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
-      	content: "Afwezig met kennisgeving";
+        content: "Afwezig met kennisgeving";
       }
 
       [property="ext:bekrachtigdAfwezigheid"]:before {
-      	content: "Afwezig zonder kennisgeving";
+        content: "Afwezig zonder kennisgeving";
       }
 
       [typeof="http://www.w3.org/ns/person#Person"]:before {
-      	content: "Persoon";
+        content: "Persoon";
       }
 
       [property="besluit:heeftAanwezigeBijStart"][typeof="http://www.w3.org/ns/person#Person"]:before {
-      	content: "Aanwezige persoon bij start";
+        content: "Aanwezige persoon bij start";
       }
 
       [property="mandaat:isBestuurlijkeAliasVan"]:before {
-      	content: "Mandataris";
+        content: "Mandataris";
       }
 
-      	[property="persoon:gebruikteVoornaam"]:before {
-      		content: "Voornaam";
-      	}
+        [property="persoon:gebruikteVoornaam"]:before {
+          content: "Voornaam";
+        }
 
-      	[property="foaf:familyName"]:before {
-      		content: "Familienaam";
-      	}
+        [property="foaf:familyName"]:before {
+          content: "Familienaam";
+        }
 
       [property="org:holds"]:before {
         content: "Mandaat";
       }
 
       [property="org:role"]:before {
-      	content: "Rol";
+        content: "Rol";
       }
 
       [property="mandaat:start"]:before {
         content: "Start mandaat";
       }
 
-	    [property="skos:prefLabel"]:before {
-	    	content: "Naam rol";
-	    }
+      [property="skos:prefLabel"]:before {
+        content: "Naam rol";
+      }
 
     [property="ext:stemmingTable"]:before {
       content: "Stemming";
@@ -268,7 +268,7 @@
     }
 
     [typeof="besluit:Agendapunt"]:before {
-    	content: "Agendapunt";
+      content: "Agendapunt";
     }
 
     [property="dc:title"]:before,
@@ -309,7 +309,7 @@
       }
 
       [typeof="besluit:Artikel"] [property="prov:value"]:before {
-      	content: "Inhoud artikel"
+        content: "Inhoud artikel"
       }
 
       [property="eli:has_part"]:before {
@@ -320,53 +320,53 @@
         content: "Nummer";
       }
 
-		  /* Mobiliteit */
+      /* Mobiliteit */
 
-			  [typeof="mobiliteit:Opstelling"]:before {
-			  	content: "Opstelling";
-			  }
+        [typeof="mobiliteit:Opstelling"]:before {
+          content: "Opstelling";
+        }
 
-			  [property="locn:geometry"]:before,
-			  [typeof="locn:Geometry"]:before {
-			  	content: "Zone"; // : " attr(resource)
-			  }
+        [property="locn:geometry"]:before,
+        [typeof="locn:Geometry"]:before {
+          content: "Zone"; // : " attr(resource)
+        }
 
-			  [property="geosparql:asWKT"]:before {
-			  	content: attr(content);
-			  }
+        [property="geosparql:asWKT"]:before {
+          content: attr(content);
+        }
 
-			  [property="mobiliteit:omvatVerkeersbord"]:before {
-			  	content: "Verkeersbord";
-			  }
+        [property="mobiliteit:omvatVerkeersbord"]:before {
+          content: "Verkeersbord";
+        }
 
-			  [property="mobiliteit:grafischeWeergave"]:before {
-			  	content: "Grafische weergave"; //: " attr(resource);
-			  }
+        [property="mobiliteit:grafischeWeergave"]:before {
+          content: "Grafische weergave"; //: " attr(resource);
+        }
 
-			  [property="mobiliteit:Verkeersbord.operationeleStatus"]:before,
-			  [property="mobiliteit:Opstelling.operationeleStatus"]:before {
-			  	content: "Operationele status";
-			  }
+        [property="mobiliteit:Verkeersbord.operationeleStatus"]:before,
+        [property="mobiliteit:Opstelling.operationeleStatus"]:before {
+          content: "Operationele status";
+        }
 
-			  [property="mobiliteit:isBeginZone"]:before {
-			  	content: "Duidt begin zone aan";
-			  }
+        [property="mobiliteit:isBeginZone"]:before {
+          content: "Duidt begin zone aan";
+        }
 
-			  [property="mobiliteit:isEindeZone"]:before {
-			  	content: "Duidt einde zone aan";
-			  }
+        [property="mobiliteit:isEindeZone"]:before {
+          content: "Duidt einde zone aan";
+        }
 
-			  [property="mobiliteit:heeftVerkeersbordconcept"]:before {
-			  	content: "Verkeersbord concept";
-			  }
+        [property="mobiliteit:heeftVerkeersbordconcept"]:before {
+          content: "Verkeersbord concept";
+        }
 
-			  [property="mobiliteit:heeftVerkeersbordconcept"]:before {
-			  	content: "Verkeersbord concept";
-			  }
+        [property="mobiliteit:heeftVerkeersbordconcept"]:before {
+          content: "Verkeersbord concept";
+        }
 
-			  [property="mobiliteit:realiseert"]:before {
-			  	content: "Realisatie";
-			  }
+        [property="mobiliteit:realiseert"]:before {
+          content: "Realisatie";
+        }
 
   /* -------------------- Stemming ------------------------- */
 
@@ -419,7 +419,7 @@
     }
 
     [property="ext:signatories"]:before {
-    	content: "Ondertekenaars";
+      content: "Ondertekenaars";
     }
 }
 
@@ -432,19 +432,19 @@
 [data--language="en"] .rdfa-editor .editor-container {
   /* -------------------- Guiding tags ------------------------- */
 
-	[property^="ext:insert"]:before,
-	[data-editor-highlight="true"]:before {
-		content: "Select an option";
-	}
+  [property^="ext:insert"]:before,
+  [data-editor-highlight="true"]:before {
+    content: "Select an option";
+  }
 
-	span.mark-highlight-manual:before {
-  	content: "Complete";
+  span.mark-highlight-manual:before {
+    content: "Complete";
   }
 
   /* -------------------- General tags ------------------------- */
 
   [typeof="besluit:Zitting"]:before {
-  	content: "Meeting";
+    content: "Meeting";
   }
 
   [datatype="xsd:date"]:before {
@@ -464,7 +464,7 @@
   }
 
   [property="ext:scopedBestuursorgaanText"]:before {
-  	content: "Select administrative unit";
+    content: "Select administrative unit";
   }
 
   [typeof="besluit:Bestuursorgaan"]:before {
@@ -495,11 +495,11 @@
 
     /* Aanwezigen en types */
     [property="ext:aanwezigenTable"]:before {
-    	content: "Attendees";
+      content: "Attendees";
     }
 
     [property="ext:insertAanwezigenText"]:before {
-    	content: "Complete attendees";
+      content: "Complete attendees";
     }
 
     [property="besluit:heeftAanwezigeBijStart"]:before {
@@ -507,7 +507,7 @@
     }
 
     [property="ext:heeftAfwezigeBijStart"]:before {
-    	content: "Absent at start of meeting";
+      content: "Absent at start of meeting";
     }
 
     [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
@@ -520,34 +520,34 @@
     }
 
     [typeof="ext:BesluitGemeenteraadsledenAfstandMandaat"]:before {
-    	content: "Withdrawal of representative";
+      content: "Withdrawal of representative";
     }
 
     [typeof="ext:BesluitGemeenteraadsledenVerkiesbaarheidsvoorwaarden"]:before {
-    	content: "Conditions of eligibility";
+      content: "Conditions of eligibility";
     }
 
     [typeof="ext:BesluitGemeenteraadsledenOnverenigbaarheden"]:before {
-    	content: "Incompatibilities";
+      content: "Incompatibilities";
     }
 
     [typeof="ext:BesluitGemeenteraadsledenVerhindering"]:before {
-    	content: "Foreclosure";
+      content: "Foreclosure";
     }
 
 
   /* -------------------- Agendapunt ------------------------- */
 
   [property="ext:agendapuntenTable"]:before {
-  	content: "Agenda";
+    content: "Agenda";
   }
 
   [property="ext:insertAgendaText"]:before {
-  	content: "Manage agenda";
+    content: "Manage agenda";
   }
 
   [property="ext:behandelingVanAgendapuntenContainer"]:before {
-  	content: "Discussion agenda";
+    content: "Discussion agenda";
   }
 
   [typeof="besluit:Agenda"]:before {
@@ -568,36 +568,36 @@
     content: "Discussion of agenda item"
   }
 
-  	[typeof="besluit:Besluit"]:before,
-  	[typeof~="besluit:Besluit"]:before,
-  	[typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
-  	[typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
-  		content: "Decision";
-  	}
+    [typeof="besluit:Besluit"]:before,
+    [typeof~="besluit:Besluit"]:before,
+    [typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
+    [typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
+      content: "Decision";
+    }
 
-  	[typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"]:before {
-  		content: "Decision: Additional regulations";
-  	}
+    [typeof="http://data.vlaanderen.be/ns/besluit#Besluit http://data.vlaanderen.be/ns/besluit#AanvullendReglement"]:before {
+      content: "Decision: Additional regulations";
+    }
 
-  	[property="dc:subject"]:before {
-  		content: "Subject";
-  	}
+    [property="dc:subject"]:before {
+      content: "Subject";
+    }
 
-  	[property="besluit:geplandOpenbaar"]:before {
-  		content: "Planned public";
-  	}
+    [property="besluit:geplandOpenbaar"]:before {
+      content: "Planned public";
+    }
 
-  	[property="besluit:geplandOpenbaar"][content="false"]:before {
-  		content: "Planned closed";
-  	}
+    [property="besluit:geplandOpenbaar"][content="false"]:before {
+      content: "Planned closed";
+    }
 
-  	[property="besluit:openbaar"]:before {
-  		content: "Public hearing"
-  	}
+    [property="besluit:openbaar"]:before {
+      content: "Public hearing"
+    }
 
-  	[property="besluit:openbaar"][content="false"]:before {
-  		content: "Closed hearing"
-  	}
+    [property="besluit:openbaar"][content="false"]:before {
+      content: "Closed hearing"
+    }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
         content: "\f06e \00A0 \00A0 Public agenda item";
@@ -625,56 +625,56 @@
       }
 
       [property="ext:bekrachtigdOnverenigbaarheid"]:before {
-      	content: "Incompatibilities";
+        content: "Incompatibilities";
       }
 
       [property="ext:bekrachtigdAfstandVanMandaatDoor"]:before {
-      	content: "Withdrawal representative";
+        content: "Withdrawal representative";
       }
 
       [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
-      	content: "Absent with notice";
+        content: "Absent with notice";
       }
 
       [property="ext:bekrachtigdAfwezigheid"]:before {
-      	content: "Absent without notice";
+        content: "Absent without notice";
       }
 
       [typeof="http://www.w3.org/ns/person#Person"]:before {
-      	content: "Person";
+        content: "Person";
       }
 
       [property="besluit:heeftAanwezigeBijStart"][typeof="http://www.w3.org/ns/person#Person"]:before {
-      	content: "Attendee at start of meeting";
+        content: "Attendee at start of meeting";
       }
 
       [property="mandaat:isBestuurlijkeAliasVan"]:before {
-      	content: "Representative";
+        content: "Representative";
       }
 
-      	[property="persoon:gebruikteVoornaam"]:before {
-      		content: "First name";
-      	}
+        [property="persoon:gebruikteVoornaam"]:before {
+          content: "First name";
+        }
 
-      	[property="foaf:familyName"]:before {
-      		content: "Last name";
-      	}
+        [property="foaf:familyName"]:before {
+          content: "Last name";
+        }
 
       [property="org:holds"]:before {
         content: "Respresentative";
       }
 
       [property="org:role"]:before {
-      	content: "Role";
+        content: "Role";
       }
 
       [property="mandaat:start"]:before {
         content: "Start mandate";
       }
 
-	    [property="skos:prefLabel"]:before {
-	    	content: "Name role";
-	    }
+      [property="skos:prefLabel"]:before {
+        content: "Name role";
+      }
 
     [property="ext:stemmingTable"]:before {
       content: "Voting";
@@ -694,7 +694,7 @@
     }
 
     [typeof="besluit:Agendapunt"]:before {
-    	content: "Agenda item";
+      content: "Agenda item";
     }
 
     [property="dc:title"]:before,
@@ -735,7 +735,7 @@
       }
 
       [typeof="besluit:Artikel"] [property="prov:value"]:before {
-      	content: "Content article"
+        content: "Content article"
       }
 
       [property="eli:has_part"]:before {
@@ -746,53 +746,53 @@
         content: "Number";
       }
 
-		  /* Mobiliteit */
+      /* Mobiliteit */
 
-			  [typeof="mobiliteit:Opstelling"]:before {
-			  	content: "Setup";
-			  }
+        [typeof="mobiliteit:Opstelling"]:before {
+          content: "Setup";
+        }
 
-			  [property="locn:geometry"]:before,
-			  [typeof="locn:Geometry"]:before {
-			  	content: "Zone"; // : " attr(resource)
-			  }
+        [property="locn:geometry"]:before,
+        [typeof="locn:Geometry"]:before {
+          content: "Zone"; // : " attr(resource)
+        }
 
-			  [property="geosparql:asWKT"]:before {
-			  	content: attr(content);
-			  }
+        [property="geosparql:asWKT"]:before {
+          content: attr(content);
+        }
 
-			  [property="mobiliteit:omvatVerkeersbord"]:before {
-			  	content: "Traffic sign";
-			  }
+        [property="mobiliteit:omvatVerkeersbord"]:before {
+          content: "Traffic sign";
+        }
 
-			  [property="mobiliteit:grafischeWeergave"]:before {
-			  	content: "Graphic representation"; //: " attr(resource);
-			  }
+        [property="mobiliteit:grafischeWeergave"]:before {
+          content: "Graphic representation"; //: " attr(resource);
+        }
 
-			  [property="mobiliteit:Verkeersbord.operationeleStatus"]:before,
-			  [property="mobiliteit:Opstelling.operationeleStatus"]:before {
-			  	content: "Operational status";
-			  }
+        [property="mobiliteit:Verkeersbord.operationeleStatus"]:before,
+        [property="mobiliteit:Opstelling.operationeleStatus"]:before {
+          content: "Operational status";
+        }
 
-			  [property="mobiliteit:isBeginZone"]:before {
-			  	content: "Indicates start of zone";
-			  }
+        [property="mobiliteit:isBeginZone"]:before {
+          content: "Indicates start of zone";
+        }
 
-			  [property="mobiliteit:isEindeZone"]:before {
-			  	content: "Indicates end of zone";
-			  }
+        [property="mobiliteit:isEindeZone"]:before {
+          content: "Indicates end of zone";
+        }
 
-			  [property="mobiliteit:heeftVerkeersbordconcept"]:before {
-			  	content: "Traffic sign concept";
-			  }
+        [property="mobiliteit:heeftVerkeersbordconcept"]:before {
+          content: "Traffic sign concept";
+        }
 
-			  [property="mobiliteit:heeftVerkeersbordconcept"]:before {
-			  	content: "Traffic sign concept";
-			  }
+        [property="mobiliteit:heeftVerkeersbordconcept"]:before {
+          content: "Traffic sign concept";
+        }
 
-			  [property="mobiliteit:realiseert"]:before {
-			  	content: "Realises";
-			  }
+        [property="mobiliteit:realiseert"]:before {
+          content: "Realises";
+        }
 
   /* -------------------- Stemming ------------------------- */
 
@@ -845,6 +845,6 @@
     }
 
     [property="ext:signatories"]:before {
-    	content: "Signatories";
+      content: "Signatories";
     }
 }

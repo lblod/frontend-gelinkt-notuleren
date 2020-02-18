@@ -1,0 +1,26 @@
+/* ==========================================================================
+   #FONT WEIGHTS
+   ========================================================================== */
+
+/**
+ * Utility classes to put specific font-size values onto elements. The below loop
+ * will generate us a suite of classes like:
+ *
+ *   .vl-u-light {}
+ *   .vl-u-regular {}
+ *   .vl-u-medium {}
+ *   .vl-u-bold {}
+ */
+
+$vl-font-weights: (
+  'light': $vl-light,
+  'regular': $vl-regular,
+  'medium': $vl-medium,
+  'bold': $vl-bold
+) !default;
+
+@each $font-weight-namespace, $font-weight in $vl-font-weights {
+  .vl-u-#{$font-weight-namespace} {
+    font-weight: $font-weight !important;
+  }
+}

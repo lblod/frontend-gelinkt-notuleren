@@ -1,0 +1,77 @@
+// ==================================
+// #GENERATE UTILITIES
+// ==================================
+
+// Headings
+// ---
+$vl-headings: (
+  'h1': $vl-h1,
+  'h2': $vl-h2,
+  'h3': $vl-h3,
+  'h4': $vl-h4,
+  'h5': $vl-h5,
+  'h6': $vl-h6
+);
+
+$vl-font-weights: (
+  'light': $vl-light,
+  'regular': $vl-regular,
+  'medium': $vl-medium,
+  'bold': $vl-bold
+);
+
+
+// Widths
+// ---
+$vl-fractions: 1 2 3 4 5 6;
+// Be aware that enabling offsets produces a large chunk of classes which might
+// bloat your CSS, depending of the amount of breakpoints you defined.
+// Only set this to `true` if you are absolutely sure about what you are doing.
+$vl-offsets: false;
+
+
+// Spacing
+// ---
+$vl-spacing-directions: (
+  null: null,
+  '-top': '-top',
+  '-right': '-right',
+  '-bottom': '-bottom',
+  '-left': '-left',
+);
+
+$vl-spacing-properties: (
+  'padding': 'padding',
+  'margin': 'margin',
+);
+
+$vl-spacing-sizes: (
+  null: $vl-unit,
+  '-tiny': $vl-unit-tiny,
+  '-small': $vl-unit-small,
+  '-large': $vl-unit-large,
+  '-huge': $vl-unit-huge,
+  '-none': 0
+);
+
+$vl-responsive-spacing-directions: (
+  null: null,
+  '-top': '-top',
+  '-right': '-right',
+  '-bottom': '-bottom',
+  '-left': '-left',
+);
+
+$vl-responsive-spacing-properties: (
+  'padding': 'padding',
+  'margin': 'margin',
+);
+
+$vl-responsive-spacing-sizes: (
+  null: $vl-unit,
+  '-tiny': $vl-unit-tiny,
+  '-small': $vl-unit-small,
+  '-large': $vl-unit-large,
+  '-huge': $vl-unit-huge,
+  '-none': 0
+);

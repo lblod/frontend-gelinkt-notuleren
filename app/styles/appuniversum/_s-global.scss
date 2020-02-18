@@ -1,0 +1,102 @@
+// ==================================
+// #GLOBAL
+// ==================================
+
+// The global settings file contains any project-wide variables; things that
+// need to be made available to the entire codebase.
+
+
+// Breakpoints
+// ---
+$mq-breakpoints: (
+  xsmall: 500px,
+  small: 767px,
+  medium: 1023px,
+  large: 1600px
+);
+// Uncomment line below to show breakpoint indicators
+// $mq-show-breakpoints: (xsmall, small, medium, large);
+
+
+// Typography
+// ---
+// Global font size and line height
+$vl-global-font-size: 1.4rem;
+$vl-global-line-height: 1.5;
+
+// Font families
+$vl-font: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$vl-font-secondary: "Flanders Art Serif";
+$vl-font-tertiary: courier, monospace;
+
+
+// Font styles
+$vl-light: 400;
+$vl-regular: 500;
+$vl-medium: 600;
+$vl-bold: 700;
+
+
+// Sizes
+$vl-base: $vl-global-font-size;
+$vl-font-size-ratio: 1.2;
+$vl-h6: $vl-global-font-size * $vl-font-size-ratio;
+$vl-h5: $vl-h6 * $vl-font-size-ratio;
+$vl-h4: $vl-h5 * $vl-font-size-ratio;
+$vl-h3: $vl-h4 * $vl-font-size-ratio;
+$vl-h2: $vl-h3 * $vl-font-size-ratio;
+$vl-h1: $vl-h2 * $vl-font-size-ratio;
+
+
+// Spacing units
+// ---
+$vl-unit-base: .6rem;
+$vl-unit-ratio: 2;
+$vl-unit-tiny: $vl-unit-base;
+$vl-unit-small: $vl-unit-tiny * $vl-unit-ratio;
+$vl-unit: $vl-unit-small * $vl-unit-ratio;
+$vl-unit-large: $vl-unit * $vl-unit-ratio;
+$vl-unit-huge: $vl-unit-large * $vl-unit-ratio;
+
+
+// Objects settings
+// ---
+// Layout
+$vl-layout-width: 1280px;
+$vl-layout-width-small: 768px;
+$vl-layout-width-large: 1600px;
+$vl-layout-breakpoint: medium;
+
+// Region
+$vl-region-breakpoint: medium;
+
+
+// UI
+// ---
+// Globals
+$vl-rotation: -20deg;
+$vl-radius: .4rem;
+$vl-border: .2rem;
+$vl-outline-border: $vl-border;
+$vl-outline-border-style: dashed;
+$vl-outline: $vl-outline-border $vl-outline-border-style $vl-outline-color;
+
+// Buttons
+$vl-button-height: $vl-unit-large;
+$vl-button-font-size: $vl-h6;
+$vl-button-border: .2rem;
+
+// Transitions
+$vl-duration: (1/8) + s;
+$vl-easing: cubic-bezier(0.190,  1.000, 0.220, 1.000);
+$vl-transition: $vl-duration $vl-easing;
+
+// Z-indexes
+$vl-z-index-alpha: 1;
+$vl-z-index-beta: 2;
+$vl-z-index-gamma: 3;
+
+
+
+
+

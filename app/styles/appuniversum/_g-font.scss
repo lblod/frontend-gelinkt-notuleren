@@ -1,0 +1,69 @@
+/* ==========================================================================
+   #FONT
+   ========================================================================== */
+
+/* Variables
+   ========================================================================== */
+
+$vl-font-location  : "https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/flandersart" !default;
+$vl-font-serif-name: "Flanders Art Serif" !default;
+$vl-font-sans-name: "Flanders Art Sans" !default;
+
+
+/* Content
+   ========================================================================== */
+
+@font-face {
+  font-family: $vl-font-serif-name;
+  src: url(#{$vl-font-location}/FlandersArtSerif-Light.woff2) format("woff2"),
+  url(#{$vl-font-location}/FlandersArtSerif-Light.woff) format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: $vl-font-serif-name;
+  src: url(#{$vl-font-location}/FlandersArtSerif-Regular.woff2) format("woff2"),
+  url(#{$vl-font-location}/FlandersArtSerif-Regular.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: $vl-font-serif-name;
+  src: url(#{$vl-font-location}/FlandersArtSerif-Medium.woff2) format("woff2"),
+  url(#{$vl-font-location}/FlandersArtSerif-Medium.woff) format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family:$vl-font-serif-name;
+  src: url(#{$vl-font-location}/FlandersArtSerif-Bold.woff2) format("woff2"),
+  url(#{$vl-font-location}/FlandersArtSerif-Bold.woff) format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: $vl-font-sans-name;
+  src: url(#{$vl-font-location}/FlandersArtSans-Medium.woff2) format("woff2"),
+  url(#{$vl-font-location}/FlandersArtSans-Medium.woff) format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: fallback;
+}
+
+// Icon font - @TODO: replace with svg iconset
+@font-face {
+  font-family: vlaanderen-icon;
+  src: url(https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/iconfont/3.9.1/vlaanderen-icon.woff2) format("woff2"),
+  url(https://cdn.milieuinfo.be/vlaanderen-font/LATEST/font/iconfont/3.9.1/vlaanderen-icon.woff) format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: fallback;
+}

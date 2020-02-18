@@ -1,0 +1,52 @@
+/* ==========================================================================
+   #SPACINGS
+   ========================================================================== */
+
+/**
+ * Utility classes to put specific spacing values onto elements. The below loop
+ * will generate us a suite of classes like:
+ *
+ *   .vl-u-margin-top {}
+ *   .vl-u-padding-left-large {}
+ *   .vl-u-margin-right-small {}
+ *   .vl-u-padding {}
+ *   .vl-u-padding-right-none {}
+ *   .vl-u-padding-horizontal {}
+ *   .vl-u-padding-vertical-small {}
+ */
+
+$vl-spacing-directions: (
+  null: null,
+  "-top": "-top",
+  "-right": "-right",
+  "-bottom": "-bottom",
+  "-left": "-left",
+  "-horizontal": "-left" "-right",
+  "-vertical": "-top" "-bottom",
+) !default;
+
+$vl-spacing-properties: (
+  "padding": "padding",
+  "margin": "margin",
+) !default;
+
+$vl-spacing-sizes: (
+  null: $vl-global-spacing-unit,
+  "-tiny": $vl-unit-tiny,
+  "-small": $vl-unit-small,
+  "-large": $vl-unit-large,
+  "-huge": $vl-unit-huge,
+  "-none": 0
+) !default;
+
+@each $property-namespace, $property in $vl-spacing-properties {
+  @each $direction-namespace, $direction-rules in $vl-spacing-directions {
+    @each $size-namespace, $size in $vl-spacing-sizes {
+      .vl-u-#{$property-namespace}#{$direction-namespace}#{$size-namespace} {
+        @each $direction in $direction-rules {
+          #{$property}#{$direction}: $size !important;
+        }
+      }
+    }
+  }
+}

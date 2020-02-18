@@ -5,79 +5,79 @@
 
 /* temporary fix for multiple plugins triggered at once */
 
-	.annotation-suggestion__suggestion .modal-dialog {
-		max-height: 70vh;
-		overflow-y: auto;
-		display: block;
-		// position: fixed;
-	}
+  .annotation-suggestion__suggestion .modal-dialog {
+    max-height: 70vh;
+    overflow-y: auto;
+    display: block;
+    // position: fixed;
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog li .modal-dialog--temporary-fix {
-		box-shadow: none;
+  .annotation-suggestion__suggestion .modal-dialog li .modal-dialog--temporary-fix {
+    box-shadow: none;
 
-		.modal-dialog__header {
-			display: none;
-		}
+    .modal-dialog__header {
+      display: none;
+    }
 
-		.modal-dialog__link-list {
-			font-size: 1.4rem;
-			padding: 1rem;
-			border-bottom: 1px solid $blue-gray-light;
+    .modal-dialog__link-list {
+      font-size: 1.4rem;
+      padding: 1rem;
+      border-bottom: 1px solid $blue-gray-light;
 
-			.button {
-				font-size: 1.4rem;
-				font-weight: 500;
-			}
-		}
-	}
+      .button {
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+    }
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog li:first-child .modal-dialog--temporary-fix {
+  .annotation-suggestion__suggestion .modal-dialog li:first-child .modal-dialog--temporary-fix {
 
-		.modal-dialog__header {
-			display: block;
-			font-weight: 500;
-			border-bottom: 1px solid $blue-gray;
-		}
-	}
+    .modal-dialog__header {
+      display: block;
+      font-weight: 500;
+      border-bottom: 1px solid $blue-gray;
+    }
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog + .modal-dialog:not(.modal-dialog--temporary-fix) {
-	  right: 15rem !important;
-	  top: 22rem !important;
-	}
+  .annotation-suggestion__suggestion .modal-dialog + .modal-dialog:not(.modal-dialog--temporary-fix) {
+    right: 15rem !important;
+    top: 22rem !important;
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog .modal-dialog:not(.modal-dialog--temporary-fix) {
-	    padding: 0;
-	    left: auto;
-	    top: 25rem;
-	    right: -15rem;
-	}
+  .annotation-suggestion__suggestion .modal-dialog .modal-dialog:not(.modal-dialog--temporary-fix) {
+      padding: 0;
+      left: auto;
+      top: 25rem;
+      right: -15rem;
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-	    padding: 0;
-	    left: auto;
-	    right: 25rem;
-	}
+  .annotation-suggestion__suggestion .modal-dialog li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+      padding: 0;
+      left: auto;
+      right: 25rem;
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-	    padding: 0;
-	    left: auto;
-	    top: 55rem;
-	    right: -15rem;
-	}
+  .annotation-suggestion__suggestion .modal-dialog li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+      padding: 0;
+      left: auto;
+      top: 55rem;
+      right: -15rem;
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-	    padding: 0;
-	    left: auto;
-	    top: 55rem;
-	    right: 25rem;
-	}
+  .annotation-suggestion__suggestion .modal-dialog li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+      padding: 0;
+      left: auto;
+      top: 55rem;
+      right: 25rem;
+  }
 
-	.annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
-	    padding: 0;
-	    left: auto;
-	    top: 55rem;
-	    right: 25rem;
-	}
+  .annotation-suggestion__suggestion .modal-dialog li + li + li + li + li .modal-dialog:not(.modal-dialog--temporary-fix) {
+      padding: 0;
+      left: auto;
+      top: 55rem;
+      right: 25rem;
+  }
 
 /* ==========================================================================
     Temporary modal fix
@@ -94,46 +94,46 @@
 }
 
 .modal-dialog__content li.link-list__item.link-list__item--sidenotes a:first-child {
-	border-bottom: none;
-	padding-bottom: 0.3rem;
+  border-bottom: none;
+  padding-bottom: 0.3rem;
 }
 
 .modal-dialog__content li.link-list__item .link-list__item__sidenote {
-	padding-top: 0;
-	padding-bottom: 1.2rem;
-	margin-top: 0.5rem;
-	color: $gray;
-	font-size: 80%;
-	line-height: 1.3;
-	display: block;
-	word-break: break-all;
-	border-bottom: $blue-gray-light;
+  padding-top: 0;
+  padding-bottom: 1.2rem;
+  margin-top: 0.5rem;
+  color: $gray;
+  font-size: 80%;
+  line-height: 1.3;
+  display: block;
+  word-break: break-all;
+  border-bottom: $blue-gray-light;
 
-	&:hover {
-		background-color: transparent;
-		color: $black;
-	}
+  &:hover {
+    background-color: transparent;
+    color: $black;
+  }
 }
 
 .modal-dialog__content li.link-list__item span.link-list__item__sidenote {
-	cursor: default;
-	pointer-events: none;
+  cursor: default;
+  pointer-events: none;
 }
 
 .modal-dialog__content > .data-table {
-	margin-bottom: 22rem;
+  margin-bottom: 22rem;
 }
 
 .modal-dialog.modal-dialog--snippet {
-	padding: 2rem;
-	right: -7rem;
-	max-width: 40rem;
-	position: absolute;
-	top: 40rem;
-	left: auto;
+  padding: 2rem;
+  right: -7rem;
+  max-width: 40rem;
+  position: absolute;
+  top: 40rem;
+  left: auto;
 }
 
 .editor-loading-events--snippets .editor-loading-events__snippets {
-	position: absolute;
-	bottom: 5rem;
+  position: absolute;
+  bottom: 5rem;
 }

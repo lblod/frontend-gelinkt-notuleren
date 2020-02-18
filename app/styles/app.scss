@@ -1,3 +1,59 @@
+/* ==================================
+   #APPUNIVERSUM POC
+   ================================== */
+
+/**
+ * A design universe for Flanders GOV applications
+ */
+
+/**
+ * CONTENTS
+ * ---
+ * SETTINGS: Project settings and variables
+ * TOOLS: Mixins
+ * GENERIC: Reset, global box-sizing and font-styles
+ * ELEMENTS: Plain html tag styling
+ * OBJECTS: OOCSS unstyled objects (namespace: '.vl-o-...')
+ * COMPONENTS: Components (namespace: '.vl-c-...')
+ * ADAPTOR: Map our namespaced components to webuniversum
+ * UTILITIES: Single function helper classes (namespace: '.vl-u-...')
+ */
+
+
+// WU VARIABLES (DEPRECATED)
+@import 'colors';
+
+// VARIABLES
+@import "appuniversum/s-colors";
+@import "appuniversum/s-global";
+@import "appuniversum/s-utilities";
+
+
+// MIXINS
+@import "appuniversum/t-font-size";
+@import "appuniversum/t-sass-mq";
+
+
+// GENERIC
+// @import "appuniversum/g-reset"; (BREAKING CHANGE | CONFLICT)
+// @import "appuniversum/g-box-sizing"; (BREAKING CHANGE | CONFLICT)
+// @import "appuniversum/g-font"; (BREAKING CHANGE | CONFLICT)
+
+
+// ELEMENTS (BREAKING CHANGE | CONFLICT)
+// @import "appuniversum/e-page"; (BREAKING CHANGE | CONFLICT)
+// @import "appuniversum/e-images"; (BREAKING CHANGE | CONFLICT)
+// @import "appuniversum/e-tables"; (BREAKING CHANGE | CONFLICT)
+
+
+// OBJECTS
+// @import "appuniversum/o-box";
+// @import "appuniversum/o-grid";
+// @import "appuniversum/o-layout";
+// @import "appuniversum/o-region";
+
+
+// WU COMPONENTS (DEPRECATED)
 @import 'ember-vo-webuniversum-data-table';
 @import 'ember-vo-webuniversum';
 @import 'ember-rdfa-editor-template-variables-manager-plugin';
@@ -6,21 +62,15 @@
 @import 'ember-rdfa-editor-scroll-to-plugin';
 @import 'ember-power-select';
 
-@import 'colors';
-@import 'shame';
-
-
+// CUSTOM COMPONENTS (DEPRECATED)
 @import 'annotations-styles';
 @import 'annotations-hover';
 @import 'annotations-flag-remove';
 @import 'annotations-show';
-
 @import 'annotations-content';
-
 @import 'published-documents';
 @import 'sign-publish-flow';
 @import 'scrollto';
-
 @import 'annotation-suggestion-modals';
 @import 'editor';
 @import 'loading-events';
@@ -28,4 +78,27 @@
 @import 'toolbar';
 @import 'wizard';
 
+// COMPONENTS
+// @import "appuniversum/c-brand";
+// @import "appuniversum/c-buttons";
+// @import "appuniversum/c-links";
+// @import "appuniversum/c-icons";
+// @import "appuniversum/c-header";
+
+
+// CUSTOM UTILITIES (DEPRECATED)
 @import 'print';
+
+// UTILITIES
+// @import "appuniversum/u-headings";
+// @import "appuniversum/u-font-weights";
+// @import "appuniversum/u-font-family";
+// @import "appuniversum/u-widths";
+// @import "appuniversum/u-spacings";
+// @import "appuniversum/u-responsive-spacings";
+// @import "appuniversum/u-hide";
+// @import "appuniversum/u-print"; (BREAKING CHANGE | CONFLICT)
+
+
+// TEMPORARY HACKS AND QUICKFIXES
+@import 'shame';

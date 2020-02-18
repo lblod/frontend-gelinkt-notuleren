@@ -1,0 +1,55 @@
+/* ==================================
+   #BRAND
+   ================================== */
+
+.vl-c-brand {
+  display: flex;
+  align-items: center;
+}
+
+  .vl-c-brand__logo {
+    position: relative;
+    width: $vl-unit-large - $vl-unit-tiny;
+    height: $vl-unit-large - $vl-unit-tiny;
+    padding: $vl-unit-tiny $vl-unit $vl-unit-tiny $vl-unit-tiny;
+    margin-right: $vl-unit - $vl-unit-tiny;
+    overflow: hidden;
+
+    svg {
+      fill: $vl-neutral-darkest;
+      height: 100%;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 0;
+      bottom: -.3rem;
+      border-top: 9rem solid
+      $vl-neutral-light;
+      border-left: 3.07818rem solid
+      transparent;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: -.1rem;
+      bottom: -.3rem;
+      border-top: 9rem solid
+      $vl-white;
+      border-left: 3.07818rem solid
+      transparent;
+    }
+  }
+
+  .vl-c-brand__logotype {
+    @include vl-font-size($vl-h6);
+    font-family: "Flanders Art Sans", sans-serif;
+    font-weight: $vl-medium;
+    color: $vl-neutral-darkest;
+    margin-left: -$vl-unit-small;
+    padding-bottom: .1ex;
+  }

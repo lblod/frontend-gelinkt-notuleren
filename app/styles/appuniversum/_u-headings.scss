@@ -1,0 +1,30 @@
+/* ==========================================================================
+   #HEADINGS
+   ========================================================================== */
+
+/**
+ * Utility classes to put specific font-size values onto elements. The below loop
+ * will generate us a suite of classes like:
+ *
+ *   .vl-u-h1 {}
+ *   .vl-u-h2 {}
+ *   .vl-u-h3 {}
+ *   .vl-u-h4 {}
+ *   .vl-u-h5 {}
+ *   .vl-u-h6 {}
+ */
+
+$vl-headings: (
+  'h1': $vl-h1,
+  'h2': $vl-h2,
+  'h3': $vl-h3,
+  'h4': $vl-h4,
+  'h5': $vl-h5,
+  'h6': $vl-h6
+) !default;
+
+@each $heading-namespace, $heading in $vl-headings {
+  .vl-u-#{$heading-namespace} {
+    @include vl-font-size($heading, $important: true);
+  }
+}

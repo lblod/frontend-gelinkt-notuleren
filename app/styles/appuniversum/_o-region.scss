@@ -1,0 +1,51 @@
+/* ==========================================================================
+   #REGION
+   ========================================================================== */
+
+/**
+ * Creates even spaced responsive region using the default spacing variables.
+ *
+ *   <div class="vl-o-region">
+ *     <div class="vl-o-layout">
+ *     </div>
+ *   </div>
+ *
+ */
+
+
+$vl-region-breakpoint: medium !default;
+
+
+
+/* Default classes.
+  ========================================================================== */
+
+.vl-o-region {
+  padding-top: $vl-unit-small;
+  padding-bottom: $vl-unit-small;
+
+  @include mq($vl-region-breakpoint) {
+    padding-top: $vl-unit;
+    padding-bottom: $vl-unit;
+  }
+}
+
+.vl-o-region-small {
+  padding-top: $vl-unit-tiny;
+  padding-bottom: $vl-unit-tiny;
+
+  @include mq($vl-region-breakpoint) {
+    padding-top: $vl-unit-small;
+    padding-bottom: $vl-unit-small;
+  }
+}
+
+.vl-o-region-large {
+  padding-top: $vl-unit;
+  padding-bottom: $vl-unit;
+
+  @include mq($vl-region-breakpoint) {
+    padding-top: $vl-unit-large;
+    padding-bottom: $vl-unit-large;
+  }
+}

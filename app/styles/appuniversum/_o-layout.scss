@@ -1,0 +1,43 @@
+/* ==========================================================================
+   #LAYOUT
+   ---
+   NOTICE: Adapted from https://github.com/inuitcss/inuitcss/blob/develop/objects/_objects.wrapper.scss
+   ========================================================================== */
+
+/**
+ * Page-level constraining and wrapping elements.
+ */
+
+$vl-layout-width      : 900px !default;
+$vl-layout-width-small: 600px !default;
+$vl-layout-width-large: 1200px !default;
+$vl-layout-breakpoint : medium !default;
+
+
+/* Default classes.
+  ========================================================================== */
+
+.vl-o-layout {
+   padding-right: $vl-unit;
+   padding-left: $vl-unit;
+   margin-right: auto;
+   margin-left: auto;
+   max-width: $vl-layout-width;
+
+   @include mq($vl-layout-breakpoint) {
+     padding-right: $vl-unit-large;
+     padding-left: $vl-unit-large;
+   }
+ }
+
+
+/* Size variants.
+  ========================================================================== */
+
+.vl-o-layout--small {
+  max-width: $vl-layout-width-small;
+}
+
+.vl-o-layout--large {
+  max-width: $vl-layout-width-large;
+}

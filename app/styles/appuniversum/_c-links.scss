@@ -1,0 +1,78 @@
+/* ==================================
+   #LINKS
+   ================================== */
+
+/* Component
+   ========================================================================== */
+
+.vl-c-link {
+  transition: color $vl-transition, text-decoration $vl-transition;
+  font-weight: $vl-regular;
+  text-decoration-color: $vl-action-underline;
+
+  &,
+  &:visited {
+    color: $vl-action-color;
+  }
+
+  &:hover,
+  &:focus {
+    color: $vl-action-hover-color;
+    text-decoration-color: $vl-action-underline-hover;
+  }
+
+  &:focus {
+    outline: $vl-outline;
+    outline-offset: $vl-unit-tiny/2;
+  }
+
+  .is-active > & {
+    color: $vl-action-active-color;
+    text-decoration: none;
+  }
+}
+
+.vl-c-link--neutral {
+  &,
+  &:visited {
+    color: $vl-neutral-dark;
+    text-decoration-color: $vl-neutral-light;
+  }
+
+  &:hover,
+  &:focus {
+    color: $vl-neutral;
+    text-decoration-color: $vl-neutral-lighter;
+  }
+
+  &:focus {
+    outline: $vl-outline;
+    outline-offset: $vl-unit-tiny/2;
+  }
+
+  .is-active > & {
+    color: $vl-action-active-color;
+    text-decoration: none;
+  }
+}
+
+.vl-c-link--icon {
+  position: relative;
+  padding-left: $vl-unit-small;
+
+  .vl-c-icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.vl-c-link--bare {
+  &,
+  &:visited,
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}

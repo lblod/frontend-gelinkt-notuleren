@@ -1,0 +1,64 @@
+/* ==================================
+   #HEADER
+   ================================== */
+
+.vl-c-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $vl-header-bg;
+  border-bottom: 1px solid $vl-neutral-lighter;
+}
+
+  .vl-c-header__title-group {
+    display: flex;
+    align-items: center;
+    color: $vl-neutral-darkest;
+    text-decoration: none;
+
+    > * + * {
+      margin-left: $vl-unit;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  .vl-c-header__title {
+    @include vl-font-size($vl-base);
+    font-weight: $vl-medium;
+    text-transform: uppercase;
+    position: relative;
+    color: $vl-neutral-darkest;
+    text-decoration: underline;
+    text-decoration-color: $vl-neutral-light;
+    transition: color $vl-transition;
+
+    .vl-c-header__title-group:hover &,
+    .vl-c-header__title-group:focus & {
+      color: $vl-action-hover-color;
+      text-decoration: underline;
+      text-decoration-color: $vl-action-underline-hover;
+    }
+
+    .vl-c-header__title-group:focus & {
+      outline: $vl-outline;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      transform: rotate($vl-rotation);
+      width: 1px;
+      height: 2.5rem;
+      background-color: $vl-neutral-light;
+      margin-left: -$vl-unit-small;
+    }
+  }
+
+
+  .vl-c-header__actions {
+    margin-right: $vl-unit-tiny/2;
+  }

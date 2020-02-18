@@ -1,0 +1,124 @@
+/* ==========================================================================
+   #RESPONSIVE-SPACINGS
+   ========================================================================== */
+
+/**
+ * Utility classes enhancing the normal spacing classes by adding responsiveness
+ * to them. By default, there are not responsive spacings defined. You can
+ * generate responsive spacings by adding entries to the following three Sass
+ * maps, e.g.:
+ *
+ *   $vl-responsive-spacing-directions: (
+ *     null: null,
+ *     bottom: bottom,
+ *   );
+ *
+ *   $vl-responsive-spacing-properties: (
+ *     "margin": "margin",
+ *   );
+ *
+ *   $vl-responsive-spacing-sizes: (
+ *     "-small": $vl-global-spacing-unit-small,
+ *   );
+ *
+ * This would bring us the following classes:
+ *
+ *   .vl-u-margin-small@xsmall {}
+ *   .vl-u-margin-small@small {}
+ *   .vl-u-margin-small@medium {}
+ *   .vl-u-margin-small@large {}
+ *   .vl-u-margin-bottom-small@xsmall {}
+ *   .vl-u-margin-bottom-small@small {}
+ *   .vl-u-margin-bottom-small@medium {}
+ *   .vl-u-margin-bottom-small@large {}
+ *
+ * You can change the generated CSS classes by further extending the Sass maps.
+ * If you want every ‘normal’ spacing (those from `utilities.spacings`) also as
+ * a responsive version, you can just mirror the ‘normal’ spacings:
+ *
+ *   $vl-responsive-spacing-directions: $vl-spacing-directions !default;
+ *
+ *   $vl-responsive-spacing-properties: $vl-spacing-properties !default;
+ *
+ *   $vl-responsive-spacing-sizes: $vl-spacing-sizes !default;
+ *
+ * BUT BE AWARE: This can generate a huge chunk of extra CSS, depending on the
+ * amount of breakpoints you defined. So please check your CSS’ output and
+ * filesize!
+ */
+
+
+
+// The responsive spacings just make sense and work properly when the ‘normal’
+// spacings are included, too. In case they're not, we set `_u-spacings`
+// to `null`.
+$vl-spacing-directions: null !default;
+
+// If the ‘normal’ spacings partial is not included, we provide an error message
+// to indicate this.
+@if $vl-spacing-directions == null {
+  @error "In order to use responsive spacings, you also need to include `_utilities.spacings.scss`!";
+}
+@else {
+
+
+
+// When using Sass-MQ, this defines the separator for the breakpoints suffix
+// in the class name. By default, we are generating the responsive suffixes
+// for the classes with a `@` symbol so you get classes like:
+//
+//   <div class="vl-u-margin-bottom@small">
+//
+// Be aware that since the `@` symbol is a reserved symbol in CSS, it has to be
+// escaped with a `\`. In the markup though, you write your classes without the
+// backslash (e.g. `vl-u-margin-bottom@small`).
+$vl-widths-breakpoint-separator: \@ !default;
+
+
+
+$vl-responsive-spacing-directions: null !default;
+
+$vl-responsive-spacing-properties: null !default;
+
+$vl-responsive-spacing-sizes: null !default;
+
+
+
+/* stylelint-disable max-nesting-depth */
+
+// Don't output anything if no responsive spacings are defined.
+@if ($vl-responsive-spacing-properties != null) {
+
+  @each $property-namespace, $property in $vl-responsive-spacing-properties {
+
+    @each $direction-namespace, $direction-rules in $vl-responsive-spacing-directions {
+
+      @each $size-namespace, $size in $vl-responsive-spacing-sizes {
+
+        @each $vl-bp-name, $vl-bp-value in $mq-breakpoints {
+
+          @include mq($from: $vl-bp-name) {
+
+            .vl-u-#{$property-namespace}#{$direction-namespace}#{$size-namespace}#{$vl-widths-breakpoint-separator}#{$vl-bp-name} {
+
+              @each $direction in $direction-rules {
+                #{$property}#{$direction}: $size !important;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+/* stylelint-enable max-nesting-depth */
+
+}
