@@ -15,8 +15,9 @@
  * ELEMENTS: Plain html tag styling
  * OBJECTS: OOCSS unstyled objects (namespace: '.vl-o-...')
  * COMPONENTS: Components (namespace: '.vl-c-...')
- * ADAPTOR: Map our namespaced components to webuniversum
+ * ADAPTOR: Map our namespaced components to webuniversum (namespace: '.vl-...')
  * UTILITIES: Single function helper classes (namespace: '.vl-u-...')
+ * SHAME: Temporary hacks and quickfixes
  */
 
 
@@ -81,7 +82,6 @@
 // COMPONENTS
 @import "appuniversum/c-brand";
 @import "appuniversum/c-header";
-@import "appuniversum/c-button";
 @import "appuniversum/c-button-link";
 @import "appuniversum/c-icon";
 @import "appuniversum/c-horizontal-list";

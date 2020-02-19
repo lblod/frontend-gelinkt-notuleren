@@ -24,19 +24,11 @@
           Bekijk handleiding
         </a>
       </li>
-      {{!-- <li class="vl-c-horizontal-list__item">
-        <AcmidmLogout @class="vl-c-button-link vl-c-button-link--action">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="vl-c-icon vl-c-icon--left" aria-hidden="true">
-            <path d="M24.2777778,1.5 L19.7222222,1.5 L19.7222222,24.2777778 L24.2777778,24.2777778 L24.2777778,1.5 Z M35.2794444,6.44277778 L32.045,9.67722222 C35.6438889,12.57 37.9444444,17.0116667 37.9444444,22 C37.9444444,30.815 30.815,37.9444444 22,37.9444444 C13.185,37.9444444 6.05555556,30.815 6.05555556,22 C6.05555556,17.0116667 8.35611111,12.57 11.9322222,9.65444444 L8.72055556,6.44277778 C4.30166667,10.2011111 1.5,15.7588889 1.5,22 C1.5,33.3205556 10.6794444,42.5 22,42.5 C33.3205556,42.5 42.5,33.3205556 42.5,22 C42.5,15.7588889 39.6983333,10.2011111 35.2794444,6.44277778 Z"/>
-          </svg>
-          <span>Afmelden</span>
-        </AcmidmLogout>
-      </li> --}}
       <li class="vl-c-horizontal-list__item">
         {{#wu-popover as |p| }}
           {{#p.toggle class="vl-c-popover__toggle" }}
             <div class="vl-c-popover__name">
-              John Doe - Gemeente Gent {{!-- @TODO: make dynamic --}}
+              {{currentSession._user.voornaam}} {{currentSession._user.achternaam}} - {{currentSession._group.classificatie.label}} {{currentSession._group.naam}}
             </div>
             <button class="vl-c-popover__button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="vl-c-icon vl-c-icon--large" aria-hidden="true">
@@ -46,6 +38,14 @@
             </button>
           {{/p.toggle}}
           {{#p.content tagName="ul" class="vl-c-popover__list"}}
+            {{!-- <li class="vl-c-popover__list-item">
+              <AcmidmSwitch @tagName="button" class="vl-c-button-link vl-c-button-link--action vl-c-button-link--block">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="vl-c-icon vl-c-icon--left" aria-hidden="true">
+                  <polygon points="32.269 33.981 32.269 25.423 11.731 25.423 11.731 33.981 -.25 22 11.731 10.019 11.731 18.577 32.269 18.577 32.269 10.019 44.25 22"/>
+                </svg>
+                <span>Wissel van bestuurseenheid</span>
+              </AcmidmSwitch>
+            </li> --}}
             <li class="vl-c-popover__list-item">
               <AcmidmLogout @class="vl-c-button-link vl-c-button-link--action vl-c-button-link--block">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="vl-c-icon vl-c-icon--left" aria-hidden="true">
