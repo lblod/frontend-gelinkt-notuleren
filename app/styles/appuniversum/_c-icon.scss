@@ -3,6 +3,7 @@
    ================================== */
 
 .vl-c-icon {
+  display: inline-block;
   width: .75em;
   height: .75em;
   position: relative;
@@ -10,4 +11,14 @@
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+}
+
+.vl-c-icon--left {
+  margin-right: $vl-unit-tiny;
+}
+
+.vl-c-icon--large {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
 }

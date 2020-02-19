@@ -1,0 +1,29 @@
+/* ==================================
+   #HORIZONTAL LIST
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+$vl-horizontal-list-spacing    : $vl-unit-tiny !default;
+$vl-horizontal-list-divider    : 1px dotted $vl-neutral-light !default;
+
+
+/* Component
+   ========================================================================== */
+
+.vl-c-horizontal-list {
+  display: flex;
+  align-items: center;
+}
+
+  .vl-c-horizontal-list__item {
+    display: flex;
+    align-items: center;
+
+    & + & {
+      margin-left: $vl-horizontal-list-spacing;
+      padding-left: $vl-horizontal-list-spacing;
+      border-left: $vl-horizontal-list-divider;
+    }
+  }

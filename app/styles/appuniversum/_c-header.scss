@@ -16,7 +16,7 @@ $vl-header-border            : $vl-neutral-lighter !default;
   justify-content: space-between;
   align-items: center;
   background-color: $vl-header-bg;
-  border-bottom: 1px solid $vl-header-border;
+  box-shadow: 0 1px 3px rgba($vl-neutral-darkest, .1), 0 4px 20px rgba($vl-neutral-darkest, .035), 0 1px 1px rgba($vl-neutral-darkest, .025);
 }
 
   .vl-c-header__title-group {
@@ -26,92 +26,41 @@ $vl-header-border            : $vl-neutral-lighter !default;
     text-decoration: none;
   }
 
-  .vl-c-header__title-link {
-    display: flex;
-    align-items: center;
-    color: $vl-neutral-darkest;
-    text-decoration: none;
-
-    &,
-    &:active,
-    &:hover,
-    &:focus {
-      color: $vl-neutral-darker;
-    }
-
-    &:focus {
-      outline: 0;
-    }
-  }
-
   .vl-c-header__title {
-    @include vl-font-size($vl-base);
+    @include vl-font-size($vl-base,.7);
     font-weight: $vl-regular;
     text-transform: uppercase;
     position: relative;
     display: block;
+    padding: $vl-unit-tiny;
     color: $vl-neutral-darker;
     text-decoration: underline;
     text-decoration-color: $vl-neutral-light;
     text-underline-offset: .3ex;
     transition: color $vl-transition;
     letter-spacing: .03ex;
-    margin-left: $vl-unit + $vl-unit-small;
 
-    .vl-c-header__title-link:hover &,
-    .vl-c-header__title-link:focus & {
+    &:hover,
+    &:focus {
       color: $vl-action-hover-color;
       text-decoration: underline;
       text-decoration-color: $vl-action-underline-hover;
     }
 
-    .vl-c-header__title-link:focus & {
+    &:focus {
       outline: $vl-outline;
-    }
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      transform: rotate($vl-rotation);
-      width: 1px;
-      height: 2.5rem;
-      background-color: $vl-neutral-light;
-      margin-left: -$vl-unit + $vl-unit-tiny;
-    }
-  }
-
-  .vl-c-header__title-link {
-    display: flex;
-    align-items: center;
-    color: $vl-neutral-darkest;
-    text-decoration: none;
-
-    > * + * {
-      margin-left: $vl-unit + $vl-unit-small;
-    }
-
-    &,
-    &:active,
-    &:hover,
-    &:focus {
-      color: $vl-neutral-darker;
-    }
-
-    &:focus {
-      outline: 0;
     }
   }
 
   .vl-c-header__skiplink {
-    @include vl-font-size($vl-base,1);
+    @include vl-font-size($vl-base,.7);
     font-weight: $vl-light;
     position: relative;
     transition: color $vl-transition;
     letter-spacing: .03ex;
     margin-left: $vl-unit-small;
     padding: $vl-unit-tiny;
-    background-color: $vl-orange-lightest;
+    background-color: $vl-neutral-lightest;
     border-radius: $vl-radius;
     top: -1000px;
     left: -1000px;
@@ -119,9 +68,9 @@ $vl-header-border            : $vl-neutral-lighter !default;
     &,
     &:hover,
     &:focus {
-      color: $vl-orange-darker;
+      color: $vl-neutral-darker;
       text-decoration: underline;
-      text-decoration-color: $vl-orange-dark;
+      text-decoration-color: $vl-neutral-light;
     }
 
     &:focus {
@@ -133,5 +82,7 @@ $vl-header-border            : $vl-neutral-lighter !default;
 
 
   .vl-c-header__actions {
-    margin-right: $vl-unit-tiny/2;
+    display: flex;
+    align-items: center;
+    padding: $vl-unit-tiny $vl-unit-small ;
   }

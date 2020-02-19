@@ -1,0 +1,126 @@
+/* ==================================
+   #POPOVER
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+
+/* Component
+   ========================================================================== */
+
+.vl-c-popover {
+  // @TODO: rework popover component (add tabindex, ...)
+}
+
+  .vl-c-popover__toggle {
+    @include vl-font-size($vl-base,1);
+    display: flex;
+    align-items: center;
+    cursor: default;
+    padding: 0 $vl-unit-tiny;
+    border-radius: $vl-radius;
+    text-decoration: none;
+    text-underline-offset: .3ex;
+    text-decoration-color: $vl-neutral-light;
+    color: $vl-action-color;
+    background-color: transparent;
+    transition: color $vl-transition, background-color $vl-transition;
+    cursor: pointer;
+
+    &:hover,
+    &:focus,
+    &:focus-within,
+    .js-popover--open & {
+      color: $vl-action-hover-color;
+      background-color: transparent;
+      background-color: $vl-neutral-lightest;
+    }
+
+    &:focus,
+    &:focus-within {
+      outline: $vl-outline;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+
+    &:visited {
+      background-color: transparent;
+    }
+  }
+
+  .vl-c-popover__name {
+    font-family: $vl-font;
+    font-weight: $vl-regular;
+    position: relative;
+  }
+
+  .vl-c-popover__button {
+    font-size: inherit;
+    color: inherit;
+    border: 0;
+    outline: 0;
+    appearance: none;
+    -webkit-appearance: none; // doesn't work without prefix on Safari iOS11
+    display: inline-flex;
+    align-items: center;
+    width: $vl-unit;
+    height: $vl-unit;
+    border-radius: 50%;
+    margin-right: -$vl-unit-tiny;
+    text-underline-offset: .3ex;
+  }
+
+  .vl-c-popover__list {
+    padding: 0;
+    margin-bottom: 0;
+    overflow: visible;
+
+    .js-popover--open & {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      width: 100%;
+      left: 0;
+      top: $vl-unit + $vl-unit-tiny;
+      box-shadow: 0 0 12px rgba($vl-neutral-darkest,.1), 0 0 2px rgba($vl-neutral-darkest,.05);
+      border-radius: $vl-radius;
+    }
+
+    &:after, &:before {
+      bottom: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &:after {
+      border-color: rgba($vl-white, 0);
+      border-bottom-color: $vl-white;
+      border-width: 4px;
+      margin-left: -4px;
+    }
+    &:before {
+      border-color: rgba($vl-white, 0);
+      border-bottom-color: $vl-neutral-lightest;
+      border-width: 5px;
+      margin-left: -5px;
+    }
+  }
+
+  .vl-c-popover__list-item {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: $vl-unit-tiny/2;
+
+    & + & {
+      border-top: 1px solid #000;
+    }
+  }

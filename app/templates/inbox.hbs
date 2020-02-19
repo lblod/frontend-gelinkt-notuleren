@@ -1,4 +1,3 @@
-{{!-- <WuWidget @src={{header}} @class="vo-header-widget" /> --}}
 <AuHeader @appTitle="Gelinkt Notuleren" />
 <div class="container-flex--contain">
   <div class="grid grid--collapse">
@@ -13,25 +12,21 @@
               <ul class="side-navigation__group">
                 <li class="side-navigation__item">
                   <LinkTo @route="inbox.index">
-	                  <i class="vi vi-paper"></i>
-	                  Actieve documenten
-	                </LinkTo>
+                    <i class="vi vi-paper"></i>
+                    Actieve documenten
+                  </LinkTo>
                 </li>
 {{!--                 <li class="side-navigation__item">
                   {{#link-to 'inbox.archive'}}Gearchiveerde documenten{{/link-to}}
                 </li> --}}
                 <li class="side-navigation__item">
                   <LinkTo @route="inbox.trash">
-	                  <i class="vi vi-trash"></i>
-	                  Prullenmand
+                    <i class="vi vi-trash"></i>
+                    Prullenmand
                   </LinkTo>
                 </li>
               </ul>
             </div>
-          </div>
-          <div class="sidebar__footer u-align-center">
-          	<a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren" target="_blank" class="button button--alt button--small button--block u-spacer--tb--tiny"><i class="vi vi-book vi-u-s"></i> Bekijk handleiding</a>
-            {{!-- <AcmidmLogout @class="button button--link button--small button--block" /> --}}
           </div>
         </div>
       </div>

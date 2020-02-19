@@ -55,11 +55,6 @@ $vl-button-border         : .2rem !default;
   }
 }
 
-.vl-c-button--small {
-  @include vl-font-size($vl-base);
-}
-
-
 // Secondary button
 .vl-c-button--secondary {
   background-color: transparent;
