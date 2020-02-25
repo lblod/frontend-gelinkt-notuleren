@@ -28,9 +28,9 @@ $au-select-text-bg           : $au-primary-lightest  !default;
  */
 
 html {
-  // font-family: $au-font;
+  font-family: $au-font;
   // font-size: 62.5%; /* [4] */
-  // overflow-y: scroll; /* [2] */
+  overflow-y: scroll; /* [2] */
   // min-height: 100%; /* [3] */
   // background-color: $au-page-bg;
   text-rendering: optimizeLegibility;

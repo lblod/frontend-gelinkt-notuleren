@@ -44,6 +44,12 @@ $au-header-underline-hover   : $au-primary-lighter !default;
     text-underline-offset: .3ex;
     transition: color $au-transition;
     letter-spacing: .03ex;
+    margin-left: -$au-unit-small - $au-unit-tiny;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: $au-unit-huge;
+
 
     &:hover,
     &:focus {
@@ -52,21 +58,27 @@ $au-header-underline-hover   : $au-primary-lighter !default;
       text-decoration-color: $au-header-underline-hover;
     }
 
-    &:focus {
-      outline: $au-outline;
+    @include mq(xsmall) {
+      width: auto;
+
+    }
+
+    @include mq(small) {
+      margin-left: 0;
     }
   }
 
   .au-c-header__skiplink {
     @include au-font-size($au-base,.7);
     font-weight: $au-light;
-    position: relative;
+    position: absolute;
     transition: color $au-transition;
     letter-spacing: .03ex;
     margin-left: $au-unit-small;
     padding: $au-unit-tiny;
     background-color: $au-neutral-lightest;
     border-radius: $au-radius;
+    z-index: $au-z-index-alpha;
     top: -1000px;
     left: -1000px;
 
@@ -79,9 +91,17 @@ $au-header-underline-hover   : $au-primary-lighter !default;
     }
 
     &:focus {
-      outline: $au-outline;
-      top: 0;
-      left: 0;
+      top: $au-unit-large;
+      left: -$au-unit-tiny;
+    }
+
+    @include mq(medium) {
+      position: relative;
+
+      &:focus {
+        top: 0;
+        left: 0;
+      }
     }
   }
 

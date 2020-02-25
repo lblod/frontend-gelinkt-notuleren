@@ -60,8 +60,8 @@ $au-brand-height               : $au-unit-large - $au-unit-tiny !default;
 
   .au-c-brand__logotype {
     @include au-font-size(1.8rem,1);
+    display: none;
     position: relative;
-    // top: -.1ex;
     font-family: "Flanders Art Sans", BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     font-weight: $au-regular;
     color: $au-brand-text;
@@ -79,5 +79,9 @@ $au-brand-height               : $au-unit-large - $au-unit-tiny !default;
       width: 1px;
       height: 2.3rem;
       background-color: $au-neutral-light;
+    }
+
+    @include mq(small) {
+      display: block;
     }
   }
