@@ -21,80 +21,77 @@ $mq-breakpoints: (
 // Typography
 // ---
 // Global font size and line height
-$vl-global-font-size: 1.4rem;
-$vl-global-line-height: 1.5;
+$au-global-font-size: 1.4rem;
+$au-global-line-height: 1.5;
 
 // Font families
-$vl-font: "Flanders Art Sans", BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // @TODO: remove Flanders Art Sans
-$vl-font-secondary: "Flanders Art Serif", serif;
-$vl-font-tertiary: courier, monospace;
+$au-font: "Flanders Art Sans", BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // @TODO remove Flanders Art Sans > use system fonts
+$au-font-secondary: "Flanders Art Serif";
+$au-font-tertiary: courier, monospace;
+
 
 // Font styles
-$vl-light: 400;
-$vl-regular: 500;
-$vl-medium: 600;
-$vl-bold: 700;
+$au-light: 400;
+$au-regular: 500;
+$au-medium: 600;
+$au-bold: 700;
+
 
 // Sizes
-$vl-base: $vl-global-font-size;
-$vl-font-size-ratio: 1.2;
-$vl-h6: $vl-global-font-size * $vl-font-size-ratio;
-$vl-h5: $vl-h6 * $vl-font-size-ratio;
-$vl-h4: $vl-h5 * $vl-font-size-ratio;
-$vl-h3: $vl-h4 * $vl-font-size-ratio;
-$vl-h2: $vl-h3 * $vl-font-size-ratio;
-$vl-h1: $vl-h2 * $vl-font-size-ratio;
+$au-base: $au-global-font-size;
+$au-font-size-ratio: 1.2;
+$au-h6: $au-global-font-size * $au-font-size-ratio;
+$au-h5: $au-h6 * $au-font-size-ratio;
+$au-h4: $au-h5 * $au-font-size-ratio;
+$au-h3: $au-h4 * $au-font-size-ratio;
+$au-h2: $au-h3 * $au-font-size-ratio;
+$au-h1: $au-h2 * $au-font-size-ratio;
 
 
 // Spacing units
 // ---
-$vl-unit-base: .6rem;
-$vl-unit-ratio: 2;
-$vl-unit-tiny: $vl-unit-base;
-$vl-unit-small: $vl-unit-tiny * $vl-unit-ratio;
-$vl-unit: $vl-unit-small * $vl-unit-ratio;
-$vl-unit-large: $vl-unit * $vl-unit-ratio;
-$vl-unit-huge: $vl-unit-large * $vl-unit-ratio;
+$au-unit-base: .6rem;
+$au-unit-ratio: 2;
+$au-unit-tiny: $au-unit-base;
+$au-unit-small: $au-unit-tiny * $au-unit-ratio;
+$au-unit: $au-unit-small * $au-unit-ratio;
+$au-unit-large: $au-unit * $au-unit-ratio;
+$au-unit-huge: $au-unit-large * $au-unit-ratio;
 
 
 // Objects settings
 // ---
 // Layout
-$vl-layout-width: 1280px;
-$vl-layout-width-small: 768px;
-$vl-layout-width-large: 1600px;
-$vl-layout-breakpoint: medium;
+$au-layout-width: 1280px;
+$au-layout-width-small: 768px;
+$au-layout-width-large: 1600px;
+$au-layout-breakpoint: medium;
 
 // Region
-$vl-region-breakpoint: medium;
+$au-region-breakpoint: medium;
 
 
 // UI
 // ---
 // Globals
-$vl-rotation: -18deg;
-$vl-radius: .4rem;
-$vl-border: .2rem;
-$vl-outline-border: $vl-border;
-$vl-outline-border-style: dashed;
-$vl-outline: $vl-outline-border $vl-outline-border-style $vl-outline-color;
+$au-rotation: -20deg;
+$au-radius: .4rem;
+$au-border: .2rem;
+$au-outline-border: $au-border;
+$au-outline-border-style: dashed;
+$au-outline: $au-outline-border $au-outline-border-style $au-outline-color;
 
 // Buttons
-$vl-button-height: $vl-unit-large - $vl-unit-small;
-$vl-button-font-size: $vl-h6;
-$vl-button-border: .2rem;
+$au-button-height: $au-unit-large;
+$au-button-font-size: $au-h6;
+$au-button-border: .2rem;
 
 // Transitions
-$vl-duration: (1/8) + s;
-$vl-easing: cubic-bezier(0.190,  1.000, 0.220, 1.000);
-$vl-transition: $vl-duration $vl-easing;
+$au-duration: (1/8) + s;
+$au-easing: cubic-bezier(0.190,  1.000, 0.220, 1.000);
+$au-transition: $au-duration $au-easing;
 
 // Z-indexes
-$vl-z-index-alpha: 1;
-$vl-z-index-beta: 2;
-$vl-z-index-gamma: 3;
-
-
-
-
-
+$au-z-index-alpha: 1;
+$au-z-index-beta: 2;
+$au-z-index-gamma: 3;

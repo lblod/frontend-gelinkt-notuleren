@@ -11,10 +11,10 @@
  * contains the basic structural elements, but classes should be complemented
  * with width utilities, for example:
  *
- *   <div class="vl-o-grid">
- *     <div class="vl-o-grid__item  u-1-of-2">
+ *   <div class="au-o-grid">
+ *     <div class="au-o-grid__item u-1-2">
  *     </div>
- *     <div class="vl-o-grid__item  u-1-of-2">
+ *     <div class="au-o-grid__item u-1-2">
  *     </div>
  *   </div>
  *
@@ -22,12 +22,12 @@
  * fluidly fill half of the width of the parent. We can have more complex
  * systems:
  *
- *   <div class="vl-o-grid">
- *     <div class="vl-o-grid__item  u-1/1  u-1/3@medium">
+ *   <div class="au-o-grid">
+ *     <div class="au-o-grid__item u-1-1 u-1-3@medium">
  *     </div>
- *     <div class="vl-o-grid__item  u-1/2  u-1/3@medium">
+ *     <div class="au-o-grid__item u-1-2 u-1-3@medium">
  *     </div>
- *     <div class="vl-o-grid__item  u-1/2  u-1/3@medium">
+ *     <div class="au-o-grid__item u-1-2 u-1-3@medium">
  *     </div>
  *   </div>
  *
@@ -37,23 +37,20 @@
  * 33.333% width at the medium breakpoint.
  *
  * We can also manipulate entire layout systems by adding a series of modifiers
- * to the `.vl-o-grid` block. For example:
+ * to the `.au-o-grid` block. For example:
  *
- *   <div class="vl-o-grid  vl-o-grid--reverse">
+ *   <div class="au-o-grid au-o-grid--reverse">
  *
  * This will reverse the displayed order of the system so that it runs in the
  * opposite order to our source, effectively flipping the system over.
  *
- *   <div class="vl-o-grid  vl-o-grid--[right|center]">
+ *   <div class="au-o-grid au-o-grid--[right|center]">
  *
  * This will cause the system to fill up from either the centre or the right
  * hand side. Default behaviour is to fill up the layout system from the left.
  *
  * There are plenty more options available to us: explore them below.
  */
-
-
-
 
 
 /* Default/mandatory classes.
@@ -66,14 +63,13 @@
  * 4. Use the negative margin trick for multi-row grids:
  */
 
-.vl-o-grid {
+.au-o-grid {
   display: flex; /* [3] */
   align-items: stretch; /* [3] */
   flex-wrap: wrap; /* [3] */
-  margin:  0; /* [2] */
   padding: 0; /* [2] */
   list-style: none; /* [1] */
-  margin: -$vl-unit; /* [4] */
+  margin: -$au-unit; /* [4] */
 }
 
 
@@ -82,69 +78,54 @@
    * 2. Gutters provided by padding:
    */
 
-  .vl-o-grid__item {
+  .au-o-grid__item {
     width: 100%; /* [1] */
-    padding: $vl-unit;
+    padding: $au-unit;
   }
-
-
-
 
 
 /* Gutter size modifiers.
    ========================================================================== */
 
-.vl-o-grid--tiny {
-  margin: -$vl-unit-tiny;
+.au-o-grid--tiny {
+  margin: -$au-unit-tiny;
 
-  > .vl-o-grid__item {
-    padding: $vl-unit-tiny;
+  > .au-o-grid__item {
+    padding: $au-unit-tiny;
   }
-
 }
 
+.au-o-grid--small {
+  margin: -$au-unit-small;
 
-.vl-o-grid--small {
-  margin: -$vl-unit-small;
-
-  > .vl-o-grid__item {
-    padding: $vl-unit-small;
+  > .au-o-grid__item {
+    padding: $au-unit-small;
   }
-
 }
 
+.au-o-grid--large {
+  margin: -$au-unit-large;
 
-.vl-o-grid--large {
-  margin: -$vl-unit-large;
-
-  > .vl-o-grid__item {
-    padding: $vl-unit-large;
+  > .au-o-grid__item {
+    padding: $au-unit-large;
   }
-
 }
 
+.au-o-grid--huge {
+  margin: -$au-unit-huge;
 
-.vl-o-grid--huge {
-  margin: -$vl-unit-huge;
-
-  > .vl-o-grid__item {
-    padding: $vl-unit-huge;
+  > .au-o-grid__item {
+    padding: $au-unit-huge;
   }
-
 }
 
-
-.vl-o-grid--flush {
+.au-o-grid--flush {
   margin: 0;
 
-  > .vl-o-grid__item {
+  > .au-o-grid__item {
     padding: 0;
   }
-
 }
-
-
-
 
 
 /* Vertical alignment modifiers.
@@ -154,29 +135,21 @@
  * Align all grid items to the middles of each other.
  */
 
-.vl-o-grid--middle {
-
-  > .vl-o-grid__item {
+.au-o-grid--middle {
+  > .au-o-grid__item {
     align-self: center;
   }
-
 }
-
 
 /**
  * Align all grid items to the bottoms of each other.
  */
 
-.vl-o-grid--bottom {
-
-  > .vl-o-grid__item {
+.au-o-grid--bottom {
+  > .au-o-grid__item {
     align-self: flex-end;
   }
-
 }
-
-
-
 
 
 /* Fill order modifiers.
@@ -186,7 +159,7 @@
  * Fill up the grid system from the centre.
  */
 
-.vl-o-grid--center {
+.au-o-grid--center {
   justify-content: center;
 }
 
@@ -195,7 +168,7 @@
  * Fill up the grid system from the right-hand side.
  */
 
- .vl-o-grid--right {
+.au-o-grid--right {
   justify-content: flex-end;
 }
 
@@ -204,6 +177,6 @@
  * Reverse the rendered order of the grid system.
  */
 
- .vl-o-grid--reverse {
+ .au-o-grid--reverse {
   flex-direction: row-reverse;
 }

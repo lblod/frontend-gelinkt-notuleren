@@ -3,7 +3,7 @@
 // ==================================
 
 // Tint & shade helper functions
-
+// ---
 // Makes a color lighter
 @function tint($color, $percent) {
   @return mix(#fff, $color, $percent);
@@ -14,67 +14,84 @@
   @return mix(#000, $color, $percent);
 }
 
-// Base colors
-$vl-white                    : #FFFFFF;
-$vl-black                    : #202326;
+// Color palette
+// ---
+$au-white                    : #FFFFFF;
+$au-black                    : #202326;
 
-$vl-neutral                  : #6D7783;
-$vl-neutral-light            : #CBD2DA;
-$vl-neutral-lighter          : #E8EBEE;
-$vl-neutral-lightest         : #F3F5F6;
-$vl-neutral-dark             : #545B63;
-$vl-neutral-darker           : #3b4146;
-$vl-neutral-darkest          : #202326;
+$au-gray                     : #6D7783;
+$au-gray-light               : #CBD2DA;
+$au-gray-lighter             : #E8EBEE;
+$au-gray-lightest            : #F3F5F6;
+$au-gray-dark                : #545B63;
+$au-gray-darker              : #3b4146;
+$au-gray-darkest             : #202326;
 
-$vl-yellow                   : #FEE539;
+$au-yellow                   : #FEE539;
 
-$vl-blue                     : #0F68C9;
-$vl-blue-light               : #1075E2;
-$vl-blue-lighter             : #AAD0F9;
-$vl-blue-lightest            : #DCECFD;
-$vl-blue-dark                : #0C56A6;
+$au-blue                     : #0F68C9;
+$au-blue-light               : #1075E2;
+$au-blue-lighter             : #AAD0F9;
+$au-blue-lightest            : #DCECFD;
+$au-blue-dark                : #0C56A6;
 
-$vl-red                      : #DB3434;
-$vl-red-light                : #FF3333;
-$vl-red-lighter              : #FBE6E6;
-$vl-red-lightest             : #FCF3F3;
-$vl-red-dark                 : #C32323;
-$vl-red-darker               : #470000;
+$au-red                      : #DB3434;
+$au-red-light                : #FF3333;
+$au-red-lighter              : #FBE6E6;
+$au-red-lightest             : #FCF3F3;
+$au-red-dark                 : #C32323;
+$au-red-darker               : #470000;
 
-$vl-green                    : #8BAE00;
-$vl-green-light              : #B3E000;
-$vl-green-lighter            : #E8EFC2;
-$vl-green-lightest           : #F7FAE5;
-$vl-green-dark               : #637A0B;
-$vl-green-darker             : #323D08;
+$au-green                    : #8BAE00;
+$au-green-light              : #B3E000;
+$au-green-lighter            : #E8EFC2;
+$au-green-lightest           : #F7FAE5;
+$au-green-dark               : #637A0B;
+$au-green-darker             : #323D08;
 
-$vl-orange                   : #FFC515;
-$vl-orange-light             : #FEE539;
-$vl-orange-lighter           : #FFF29B;
-$vl-orange-lightest          : #FFF9D5;
-$vl-orange-dark              : #7C6B3A;
-$vl-orange-darker            : #5C4F2B;
-
-
+$au-orange                   : #FFC515;
+$au-orange-light             : #FEE539;
+$au-orange-lighter           : #FFF29B;
+$au-orange-lightest          : #FFF9D5;
+$au-orange-dark              : #7C6B3A;
+$au-orange-darker            : #5C4F2B;
 
 
 // Semantic color variables
-$vl-header-bg                : $vl-white;
-$vl-header-border            : $vl-neutral-lighter;
-$vl-page-bg                  : $vl-white;
-$vl-select-text-color        : $vl-neutral-darkest;
-$vl-select-text-bg           : $vl-blue-lightest;
-$vl-action-color             : $vl-blue;
-$vl-action-fg-color          : $vl-white;
-$vl-action-hover-color       : $vl-blue-light;
-$vl-action-active-color      : $vl-blue-light;
-$vl-action-visited-color     : $vl-blue-dark;
-$vl-action-active-color      : $vl-blue-dark;
-$vl-action-underline         : $vl-blue-light;
-$vl-action-underline-hover   : $vl-blue-lighter;
-$vl-action-error-color       : $vl-red-dark;
-$vl-action-error-hover-color : $vl-red;
-$vl-action-disabled-color    : $vl-neutral-darker;
-$vl-action-disabled-fg-color : $vl-neutral-dark;
-$vl-outline-color            : $vl-orange;
+// ---
+$au-neutral                  : $au-gray;
+$au-neutral-light            : $au-gray-light;
+$au-neutral-lighter          : $au-gray-lighter ;
+$au-neutral-lightest         : $au-gray-lightest;
+$au-neutral-dark             : $au-gray-dark;
+$au-neutral-darker           : $au-gray-darker;
+$au-neutral-darkest          : $au-gray-darkest;
 
+$au-primary                  : $au-blue;
+$au-primary-light            : $au-blue-light;
+$au-primary-lighter          : $au-blue-lighter;
+$au-primary-lightest         : $au-blue-lightest;
+$au-primary-dark             : $au-blue-dark;
+
+$au-error                    : $au-red;
+$au-error-light              : $au-red-light;
+$au-error-lighter            : $au-red-lighter;
+$au-error-lightest           : $au-red-lightest;
+$au-error-dark               : $au-red-dark;
+$au-error-darker             : $au-red-darker;
+
+$au-success                  : $au-green;
+$au-success-light            : $au-green-light;
+$au-success-lighter          : $au-green-lighter;
+$au-success-lightest         : $au-green-lightest;
+$au-success-dark             : $au-green-dark;
+$au-success-darker           : $au-green-darker;
+
+$au-warning                  : $au-orange;
+$au-warning-light            : $au-orange-light;
+$au-warning-lighter          : $au-orange-lighter;
+$au-warning-lightest         : $au-orange-lightest;
+$au-warning-dark             : $au-orange-dark;
+$au-warning-darker           : $au-orange-darker;
+
+$au-outline-color            : $au-orange;

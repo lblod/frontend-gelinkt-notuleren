@@ -7,7 +7,7 @@
  * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
  */
 
-.vl-u-hidden-visually {
+.au-u-hidden-visually {
   border: 0 !important;
   clip: rect(0 0 0 0) !important;
   clip-path: inset(50%) !important;
@@ -20,11 +20,10 @@
   width: 1px !important;
 }
 
-
 /**
  * Hide visually and from screen readers.
  */
 
-.vl-u-hidden {
+.au-u-hidden {
   display: none !important;
 }

@@ -13,10 +13,9 @@
  * TOOLS: Mixins
  * GENERIC: Reset, global box-sizing and font-styles
  * ELEMENTS: Plain html tag styling
- * OBJECTS: OOCSS unstyled objects (namespace: '.vl-o-...')
- * COMPONENTS: Components (namespace: '.vl-c-...')
- * ADAPTOR: Map our namespaced components to webuniversum (namespace: '.vl-...')
- * UTILITIES: Single function helper classes (namespace: '.vl-u-...')
+ * OBJECTS: OOCSS unstyled objects (namespace: '.au-o-...')
+ * COMPONENTS: Components (namespace: '.au-c-...')
+ * UTILITIES: Single function helper classes (namespace: '.au-u-...')
  * SHAME: Temporary hacks and quickfixes
  */
 
@@ -42,16 +41,16 @@
 
 
 // ELEMENTS (BREAKING CHANGE | CONFLICT)
-@import "appuniversum/e-page"; // (BREAKING CHANGE | CONFLICT)
+@import "appuniversum/e-page"; // (IN PROGRESS | MERGING)
 // @import "appuniversum/e-images"; // (BREAKING CHANGE | CONFLICT)
 // @import "appuniversum/e-tables"; // (BREAKING CHANGE | CONFLICT)
 
 
 // OBJECTS
-// @import "appuniversum/o-box";
-// @import "appuniversum/o-grid";
-// @import "appuniversum/o-layout";
-// @import "appuniversum/o-region";
+@import "appuniversum/o-box";
+@import "appuniversum/o-grid";
+@import "appuniversum/o-layout";
+@import "appuniversum/o-region";
 
 
 // WU COMPONENTS (DEPRECATED)
@@ -84,9 +83,8 @@
 @import "appuniversum/c-header";
 @import "appuniversum/c-button-link";
 @import "appuniversum/c-icon";
-@import "appuniversum/c-horizontal-list";
+@import "appuniversum/c-list-horizontal"; // list-horizontal
 @import "appuniversum/c-popover";
-
 
 
 // CUSTOM UTILITIES (DEPRECATED)

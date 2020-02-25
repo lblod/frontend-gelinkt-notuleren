@@ -5,84 +5,89 @@
 /* Variables
    ========================================================================== */
 
-$vl-header-bg                : $vl-white !default;
-$vl-header-border            : $vl-neutral-lighter !default;
+$au-header-bg                : $au-white !default;
+$au-header-border            : $au-neutral-lighter !default;
+$au-header-color             : $au-primary !default;
+$au-header-hover-color       : $au-primary-light !default;
+$au-header-active-color      : $au-primary-dark !default;
+$au-header-underline         : $au-primary-light !default;
+$au-header-underline-hover   : $au-primary-lighter !default;
 
 /* Component
    ========================================================================== */
 
-.vl-c-header {
+.au-c-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: $vl-header-bg;
-  box-shadow: 0 1px 3px rgba($vl-neutral-darkest, .1), 0 4px 20px rgba($vl-neutral-darkest, .035), 0 1px 1px rgba($vl-neutral-darkest, .025);
+  background-color: $au-header-bg;
+  box-shadow: 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
 }
 
-  .vl-c-header__title-group {
+  .au-c-header__title-group {
     display: flex;
     align-items: center;
-    color: $vl-neutral-darkest;
+    color: $au-neutral-darkest;
     text-decoration: none;
   }
 
-  .vl-c-header__title {
-    @include vl-font-size($vl-base,.7);
-    font-weight: $vl-regular;
+  .au-c-header__title {
+    @include au-font-size($au-base,.7);
+    font-weight: $au-medium;
     text-transform: uppercase;
     position: relative;
     display: block;
-    padding: $vl-unit-tiny;
-    color: $vl-neutral-darker;
+    padding: $au-unit-tiny;
+    color: $au-neutral-darker;
     text-decoration: underline;
-    text-decoration-color: $vl-neutral-light;
+    text-decoration-color: $au-neutral-light;
     text-underline-offset: .3ex;
-    transition: color $vl-transition;
+    transition: color $au-transition;
     letter-spacing: .03ex;
 
     &:hover,
     &:focus {
-      color: $vl-action-hover-color;
+      color: $au-header-hover-color;
       text-decoration: underline;
-      text-decoration-color: $vl-action-underline-hover;
+      text-decoration-color: $au-header-underline-hover;
     }
 
     &:focus {
-      outline: $vl-outline;
+      outline: $au-outline;
     }
   }
 
-  .vl-c-header__skiplink {
-    @include vl-font-size($vl-base,.7);
-    font-weight: $vl-light;
+  .au-c-header__skiplink {
+    @include au-font-size($au-base,.7);
+    font-weight: $au-light;
     position: relative;
-    transition: color $vl-transition;
+    transition: color $au-transition;
     letter-spacing: .03ex;
-    margin-left: $vl-unit-small;
-    padding: $vl-unit-tiny;
-    background-color: $vl-neutral-lightest;
-    border-radius: $vl-radius;
+    margin-left: $au-unit-small;
+    padding: $au-unit-tiny;
+    background-color: $au-neutral-lightest;
+    border-radius: $au-radius;
     top: -1000px;
     left: -1000px;
 
     &,
     &:hover,
     &:focus {
-      color: $vl-neutral-darker;
+      color: $au-neutral-darker;
       text-decoration: underline;
-      text-decoration-color: $vl-neutral-light;
+      text-decoration-color: $au-neutral-light;
     }
 
     &:focus {
-      outline: $vl-outline;
+      outline: $au-outline;
       top: 0;
       left: 0;
     }
   }
 
 
-  .vl-c-header__actions {
+  .au-c-header__actions {
     display: flex;
     align-items: center;
-    padding: $vl-unit-tiny $vl-unit-small ;
+    padding: $au-unit-tiny $au-unit-small ;
   }

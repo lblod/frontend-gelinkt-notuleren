@@ -5,31 +5,31 @@
 /* Variables
    ========================================================================== */
 
-$vl-brand-color                : $vl-neutral-darkest !default;
-$vl-brand-bg                   : $vl-white !default;
-$vl-brand-text                 : $vl-neutral-darkest !default;
-$vl-brand-border               : $vl-neutral-light !default;
-$vl-brand-height               : $vl-unit-large - $vl-unit-tiny !default;
+$au-brand-color                : $au-neutral-darkest !default;
+$au-brand-bg                   : $au-white !default;
+$au-brand-text                 : $au-neutral-darkest !default;
+$au-brand-border               : $au-neutral-light !default;
+$au-brand-height               : $au-unit-large - $au-unit-tiny !default;
 
 /* Component
    ========================================================================== */
 
-.vl-c-brand {
+.au-c-brand {
   display: flex;
   align-items: center;
 }
 
-  .vl-c-brand__logo {
+  .au-c-brand__logo {
     position: relative;
-    width: $vl-unit-large - $vl-unit-tiny;
-    height: $vl-brand-height;
-    padding: $vl-unit-tiny $vl-unit-tiny $vl-unit-tiny $vl-unit-tiny*1.4;
-    margin-right: $vl-unit - $vl-unit-tiny;
+    width: $au-unit-large - $au-unit-tiny;
+    height: $au-brand-height;
+    padding: $au-unit-tiny $au-unit-tiny $au-unit-tiny $au-unit-tiny*1.4;
+    margin-right: $au-unit - $au-unit-tiny;
     overflow: hidden;
-    background-color: $vl-brand-bg;
+    background-color: $au-brand-bg;
 
     svg {
-      fill: $vl-brand-color;
+      fill: $au-brand-color;
       height: 100%;
     }
 
@@ -40,7 +40,7 @@ $vl-brand-height               : $vl-unit-large - $vl-unit-tiny !default;
       right: 0;
       bottom: -.3rem;
       border-top: 9rem solid
-      $vl-brand-border;
+      $au-brand-border;
       border-left: 3.07818rem solid
       transparent;
     }
@@ -52,32 +52,32 @@ $vl-brand-height               : $vl-unit-large - $vl-unit-tiny !default;
       right: -.1rem;
       bottom: -.3rem;
       border-top: 9rem solid
-      $vl-white;
+      $au-white;
       border-left: 3.07818rem solid
       transparent;
     }
   }
 
-  .vl-c-brand__logotype {
-    @include vl-font-size(1.8rem,1);
+  .au-c-brand__logotype {
+    @include au-font-size(1.8rem,1);
     position: relative;
-    top: -.1ex;
+    // top: -.1ex;
     font-family: "Flanders Art Sans", BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-weight: $vl-regular;
-    color: $vl-brand-text;
-    margin-left: -$vl-unit-small + $vl-unit-tiny/2;
-    margin-right: $vl-unit-small;
-    padding-right: $vl-unit-small + $vl-unit-tiny/2;
+    font-weight: $au-regular;
+    color: $au-brand-text;
+    margin-left: -$au-unit-small + $au-unit-tiny/2;
+    margin-right: $au-unit-small;
+    padding-right: $au-unit-small + $au-unit-tiny/2;
 
     &::after {
       content: "";
       display: block;
       position: absolute;
-      top: -.15rem;
+      top: -.2rem;
       right: 0;
-      transform: rotate($vl-rotation);
+      transform: rotate($au-rotation);
       width: 1px;
       height: 2.3rem;
-      background-color: $vl-neutral-light;
+      background-color: $au-neutral-light;
     }
   }

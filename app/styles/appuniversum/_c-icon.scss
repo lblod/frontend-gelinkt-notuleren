@@ -2,10 +2,20 @@
    #ICONS
    ================================== */
 
-.vl-c-icon {
+/* Variables
+   ========================================================================== */
+
+$au-icon-size        : 1rem !default;
+$au-icon-size-large  : 1.5rem !default;
+
+
+/* Component
+   ========================================================================== */
+
+.au-c-icon {
   display: inline-block;
-  width: .75em;
-  height: .75em;
+  width: $au-icon-size;
+  height: $au-icon-size;
   position: relative;
   vertical-align: baseline;
   stroke-width: 0;
@@ -13,12 +23,15 @@
   fill: currentColor;
 }
 
-.vl-c-icon--left {
-  margin-right: $vl-unit-tiny;
+
+/* Modifiers
+   ========================================================================== */
+
+.au-c-icon--large {
+  width: $au-icon-size-large;
+  height: $au-icon-size-large;
 }
 
-.vl-c-icon--large {
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
+.au-c-icon--left {
+  margin-right: $au-unit-tiny;
 }

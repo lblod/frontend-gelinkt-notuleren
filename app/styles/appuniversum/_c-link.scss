@@ -2,65 +2,79 @@
    #LINKS
    ================================== */
 
+/* Variables
+   ========================================================================== */
+
+$au-link-color             : $au-primary !default;
+$au-link-hover-color       : $au-primary-light !default;
+$au-link-active-color      : $au-primary-light !default;
+$au-link-visited-color     : $au-primary-dark !default;
+$au-link-active-color      : $au-primary-dark !default;
+$au-link-underline         : $au-primary-light !default;
+$au-link-underline-hover   : $au-primary-lighter !default;
+
+
 /* Component
    ========================================================================== */
 
-.vl-c-link {
-  transition: color $vl-transition, text-decoration $vl-transition;
-  font-weight: $vl-regular;
-  text-decoration-color: $vl-action-underline;
+.au-c-link {
+  transition: color $au-transition, text-decoration $au-transition;
+  font-weight: $au-regular;
+  text-decoration-color: $au-link-underline;
 
   &,
   &:visited {
-    color: $vl-action-color;
+    color: $au-link-color;
   }
 
   &:hover,
   &:focus {
-    color: $vl-action-hover-color;
-    text-decoration-color: $vl-action-underline-hover;
+    color: $au-link-hover-color;
+    text-decoration-color: $au-link-underline-hover;
   }
 
   &:focus {
-    outline: $vl-outline;
-    outline-offset: $vl-unit-tiny/2;
+    outline-offset: $au-unit-tiny/2;
   }
 
   .is-active > & {
-    color: $vl-action-active-color;
+    color: $au-link-active-color;
     text-decoration: none;
   }
 }
 
-.vl-c-link--neutral {
+
+/* Modifiers
+   ========================================================================== */
+
+.au-c-link--neutral {
   &,
   &:visited {
-    color: $vl-neutral-dark;
-    text-decoration-color: $vl-neutral-light;
+    color: $au-neutral-dark;
+    text-decoration-color: $au-neutral-light;
   }
 
   &:hover,
   &:focus {
-    color: $vl-neutral;
-    text-decoration-color: $vl-neutral-lighter;
+    color: $au-neutral;
+    text-decoration-color: $au-neutral-lighter;
   }
 
   &:focus {
-    outline: $vl-outline;
-    outline-offset: $vl-unit-tiny/2;
+    outline-offset: $au-unit-tiny/2;
   }
 
   .is-active > & {
-    color: $vl-action-active-color;
+    color: $au-link-active-color;
     text-decoration: none;
   }
 }
 
-.vl-c-link--icon {
+.au-c-link--icon {
   position: relative;
-  padding-left: $vl-unit-small;
+  padding-left: $au-unit-small;
 
-  .vl-c-icon {
+  .au-c-icon {
     position: absolute;
     left: 0;
     top: 50%;
@@ -68,7 +82,7 @@
   }
 }
 
-.vl-c-link--bare {
+.au-c-link--bare {
   &,
   &:visited,
   &:hover,

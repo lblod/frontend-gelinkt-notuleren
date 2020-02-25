@@ -5,47 +5,48 @@
 /**
  * Creates even spaced responsive region using the default spacing variables.
  *
- *   <div class="vl-o-region">
- *     <div class="vl-o-layout">
+ *   <div class="au-o-region">
+ *     <div class="au-o-layout">
  *     </div>
  *   </div>
  *
  */
 
+/* Variables
+  ========================================================================== */
 
-$vl-region-breakpoint: medium !default;
-
+ $au-region-breakpoint: medium !default;
 
 
 /* Default classes.
   ========================================================================== */
 
-.vl-o-region {
-  padding-top: $vl-unit-small;
-  padding-bottom: $vl-unit-small;
+.au-o-region {
+  padding-top: $au-unit-small;
+  padding-bottom: $au-unit-small;
 
-  @include mq($vl-region-breakpoint) {
-    padding-top: $vl-unit;
-    padding-bottom: $vl-unit;
+  @include mq($au-region-breakpoint) {
+    padding-top: $au-unit;
+    padding-bottom: $au-unit;
   }
 }
 
-.vl-o-region-small {
-  padding-top: $vl-unit-tiny;
-  padding-bottom: $vl-unit-tiny;
+.au-o-region-small {
+  padding-top: $au-unit-tiny;
+  padding-bottom: $au-unit-tiny;
 
-  @include mq($vl-region-breakpoint) {
-    padding-top: $vl-unit-small;
-    padding-bottom: $vl-unit-small;
+  @include mq($au-region-breakpoint) {
+    padding-top: $au-unit-small;
+    padding-bottom: $au-unit-small;
   }
 }
 
-.vl-o-region-large {
-  padding-top: $vl-unit;
-  padding-bottom: $vl-unit;
+.au-o-region-large {
+  padding-top: $au-unit;
+  padding-bottom: $au-unit;
 
-  @include mq($vl-region-breakpoint) {
-    padding-top: $vl-unit-large;
-    padding-bottom: $vl-unit-large;
+  @include mq($au-region-breakpoint) {
+    padding-top: $au-unit-large;
+    padding-bottom: $au-unit-large;
   }
 }

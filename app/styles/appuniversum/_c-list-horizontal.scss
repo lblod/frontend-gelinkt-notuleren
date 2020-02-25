@@ -5,25 +5,25 @@
 /* Variables
    ========================================================================== */
 
-$vl-horizontal-list-spacing    : $vl-unit-tiny !default;
-$vl-horizontal-list-divider    : 1px dotted $vl-neutral-light !default;
+$au-list-horizontal-spacing    : $au-unit-tiny !default;
+$au-list-horizontal-divider    : 1px dotted $au-neutral-light !default;
 
 
 /* Component
    ========================================================================== */
 
-.vl-c-horizontal-list {
+.au-c-list-horizontal {
   display: flex;
   align-items: center;
 }
 
-  .vl-c-horizontal-list__item {
+  .au-c-list-horizontal__item {
     display: flex;
     align-items: center;
 
     & + & {
-      margin-left: $vl-horizontal-list-spacing;
-      padding-left: $vl-horizontal-list-spacing;
-      border-left: $vl-horizontal-list-divider;
+      margin-left: $au-list-horizontal-spacing;
+      padding-left: $au-list-horizontal-spacing;
+      border-left: $au-list-horizontal-divider;
     }
   }

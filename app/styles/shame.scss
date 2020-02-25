@@ -129,3 +129,10 @@ input.input-field {
   border-left: 1px solid $gray-lighter;
   border-right: 1px solid $gray-lighter;
 }
+
+
+// Temporary styles for the sidebar footer
+.sidebar__footer {
+  padding: $au-unit-tiny $au-unit-small;
+  border-top: 0;
+}

@@ -6,21 +6,28 @@
  * Utility classes to put specific font-size values onto elements. The below loop
  * will generate us a suite of classes like:
  *
- *   .vl-u-light {}
- *   .vl-u-regular {}
- *   .vl-u-medium {}
- *   .vl-u-bold {}
+ *   .au-u-light {}
+ *   .au-u-regular {}
+ *   .au-u-medium {}
+ *   .au-u-bold {}
  */
 
-$vl-font-weights: (
-  'light': $vl-light,
-  'regular': $vl-regular,
-  'medium': $vl-medium,
-  'bold': $vl-bold
+/* Variables
+  ========================================================================== */
+
+$au-font-weights: (
+  'light': $au-light,
+  'regular': $au-regular,
+  'medium': $au-medium,
+  'bold': $au-bold
 ) !default;
 
-@each $font-weight-namespace, $font-weight in $vl-font-weights {
-  .vl-u-#{$font-weight-namespace} {
+
+/* Generate utility classes
+  ========================================================================== */
+
+@each $font-weight-namespace, $font-weight in $au-font-weights {
+  .au-u-#{$font-weight-namespace} {
     font-weight: $font-weight !important;
   }
 }

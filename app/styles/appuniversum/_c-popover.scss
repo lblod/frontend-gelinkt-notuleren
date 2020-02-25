@@ -5,41 +5,43 @@
 /* Variables
    ========================================================================== */
 
+$au-popover-color             : $au-primary !default;
+$au-popover-hover-color       : $au-primary-light !default;
 
 /* Component
    ========================================================================== */
 
-.vl-c-popover {
+.au-c-popover {
   // @TODO: rework popover component (add tabindex, ...)
 }
 
-  .vl-c-popover__toggle {
-    @include vl-font-size($vl-base,1);
+  .au-c-popover__toggle {
+    @include au-font-size($au-base,1);
     display: flex;
     align-items: center;
     cursor: default;
-    padding: 0 $vl-unit-tiny;
-    border-radius: $vl-radius;
+    padding: 0 $au-unit-tiny;
+    border-radius: $au-radius;
     text-decoration: none;
     text-underline-offset: .3ex;
-    text-decoration-color: $vl-neutral-light;
-    color: $vl-action-color;
+    text-decoration-color: $au-neutral-light;
+    color: $au-popover-color;
     background-color: transparent;
-    transition: color $vl-transition, background-color $vl-transition;
+    transition: color $au-transition, background-color $au-transition;
     cursor: pointer;
 
     &:hover,
     &:focus,
     &:focus-within,
     .js-popover--open & {
-      color: $vl-action-hover-color;
+      color: $au-popover-hover-color;
       background-color: transparent;
-      background-color: $vl-neutral-lightest;
+      background-color: $au-neutral-lightest;
     }
 
     &:focus,
     &:focus-within {
-      outline: $vl-outline;
+      outline: $au-outline;
     }
 
     &:active {
@@ -51,13 +53,13 @@
     }
   }
 
-  .vl-c-popover__name {
-    font-family: $vl-font;
-    font-weight: $vl-regular;
+  .au-c-popover__name {
+    font-family: $au-font;
+    font-weight: $au-regular;
     position: relative;
   }
 
-  .vl-c-popover__button {
+  .au-c-popover__button {
     font-size: inherit;
     color: inherit;
     border: 0;
@@ -66,14 +68,14 @@
     -webkit-appearance: none; // doesn't work without prefix on Safari iOS11
     display: inline-flex;
     align-items: center;
-    width: $vl-unit;
-    height: $vl-unit;
+    width: $au-unit;
+    height: $au-unit;
     border-radius: 50%;
-    margin-right: -$vl-unit-tiny;
+    margin-right: -$au-unit-tiny;
     text-underline-offset: .3ex;
   }
 
-  .vl-c-popover__list {
+  .au-c-popover__list {
     padding: 0;
     margin-bottom: 0;
     overflow: visible;
@@ -86,15 +88,15 @@
       left: auto;
       min-width: 100%;
       width: auto;
-      top: $vl-unit + $vl-unit-tiny;
-      box-shadow: 0 0 12px rgba($vl-neutral-darkest,.15), 0 0 2px rgba($vl-neutral-darkest,.1);
-      box-shadow: 0 1px 3px rgba($vl-neutral-darkest, .1), 0 2px 20px rgba($vl-neutral-darkest, .1), 0 1px 1px rgba($vl-neutral-darkest, .05);
-      border-radius: $vl-radius;
+      top: $au-unit + $au-unit-tiny;
+      box-shadow: 0 0 12px rgba($au-neutral-darkest,.15), 0 0 2px rgba($au-neutral-darkest,.1);
+      box-shadow: 0 1px 3px rgba($au-neutral-darkest, .1), 0 2px 20px rgba($au-neutral-darkest, .1), 0 1px 1px rgba($au-neutral-darkest, .05);
+      border-radius: $au-radius;
     }
 
     &:after, &:before {
       bottom: 100%;
-      right: $vl-unit-tiny*1.5;
+      right: $au-unit-tiny*1.5;
       border: solid transparent;
       content: " ";
       height: 0;
@@ -104,27 +106,27 @@
     }
 
     &:after {
-      border-color: rgba($vl-white, 0);
-      border-bottom-color: $vl-white;
+      border-color: rgba($au-white, 0);
+      border-bottom-color: $au-white;
       border-width: 4px;
       margin-left: -4px;
     }
 
     &:before {
-      border-color: rgba($vl-white, 0);
-      border-bottom-color: $vl-neutral-lighter;
+      border-color: rgba($au-white, 0);
+      border-bottom-color: $au-neutral-lighter;
       border-width: 4px;
       margin-left: -4px;
     }
   }
 
-  .vl-c-popover__list-item {
+  .au-c-popover__list-item {
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: $vl-unit-tiny/2;
+    padding: $au-unit-tiny/2;
 
     & + & {
-      border-top: 1px dotted $vl-neutral-light;
+      border-top: 1px dotted $au-neutral-light;
     }
   }

@@ -5,11 +5,11 @@
 // Generates a rem font-size (with pixel fallback) and a baseline-compatible
 // unitless line-height from a pixel font-size value. Basic usage is simply:
 //
-//   @include vl-font-size(1.4rem);
+//   @include au-font-size(1.4rem);
 //
 // You can force a specific line-height by passing it as the second argument:
 //
-//   @include vl-font-size(1.4rem, 1);
+//   @include au-font-size(1.4rem, 1);
 //
 // You can also modify the line-height by increments, while staying in the
 // baseline grid, by setting the `$modifier` parameter. It takes a positive
@@ -18,14 +18,14 @@
 // an absolute value. i.e.:
 //
 //   // add 2 lines:
-//   @include vl-font-size(1.4rem, $modifier: +2);
+//   @include au-font-size(1.4rem, $modifier: +2);
 //
 //   // subtract 1 line:
-//   @include vl-font-size(1.4rem, $modifier: -1);
+//   @include au-font-size(1.4rem, $modifier: -1);
 
-@mixin vl-font-size($font-size, $line-height: auto, $modifier: 0, $important: false) {
+@mixin au-font-size($font-size, $line-height: auto, $modifier: 0, $important: false) {
   // Set unit-tiny fallback size
-  $vl-unit-tiny: .6rem !default;
+  $au-unit-tiny: .6rem !default;
 
   // Check if font-size is a number and a rem unit
   @if (type-of($font-size) == number) {
@@ -37,12 +37,12 @@
   }
 
   // Check if unit is a number and a rem unit
-  @if (type-of($vl-unit-tiny) == number) {
-    @if (unit($vl-unit-tiny) != "rem") {
-      @error "`#{$vl-unit-tiny}` needs to be a rem value.";
+  @if (type-of($au-unit-tiny) == number) {
+    @if (unit($au-unit-tiny) != "rem") {
+      @error "`#{$au-unit-tiny}` needs to be a rem value.";
     }
   } @else {
-    @error "`#{$vl-unit-tiny}` needs to be a number.";
+    @error "`#{$au-unit-tiny}` needs to be a number.";
   }
 
   @if ($important == true) {
@@ -57,7 +57,7 @@
   $font-size-unitless: ($font-size / ($font-size * 0 + 1)) * 10;
 
   // Strip rem units from unit-tiny and set as baseline
-  $baseline: ($vl-unit-tiny / ($font-size * 0 + 1)) * 10;
+  $baseline: ($au-unit-tiny / ($font-size * 0 + 1)) * 10;
 
   // Provide pixel fallback for old IE
   font-size: $font-size-unitless + px $important;
