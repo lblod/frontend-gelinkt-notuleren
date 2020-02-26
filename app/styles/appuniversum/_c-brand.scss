@@ -17,6 +17,13 @@ $au-brand-height               : $au-unit-large - $au-unit-tiny !default;
 .au-c-brand {
   display: flex;
   align-items: center;
+  text-decoration: none;
+}
+
+.au-c-brand--link {
+  &:focus {
+    outline: none;
+  }
 }
 
   .au-c-brand__logo {
@@ -27,6 +34,7 @@ $au-brand-height               : $au-unit-large - $au-unit-tiny !default;
     margin-right: $au-unit - $au-unit-tiny;
     overflow: hidden;
     background-color: $au-brand-bg;
+    transition: background-color $au-transition;
 
     svg {
       fill: $au-brand-color;
@@ -56,6 +64,11 @@ $au-brand-height               : $au-unit-large - $au-unit-tiny !default;
       border-left: 3.07818rem solid
       transparent;
     }
+
+    .au-c-brand--link:hover &,
+    .au-c-brand--link:focus & {
+      background-color: $au-neutral-lightest;
+    }
   }
 
   .au-c-brand__logotype {
@@ -68,17 +81,28 @@ $au-brand-height               : $au-unit-large - $au-unit-tiny !default;
     margin-left: -$au-unit-small + $au-unit-tiny/2;
     margin-right: $au-unit-small;
     padding-right: $au-unit-small + $au-unit-tiny/2;
+    transition: color $au-transition;
+    bottom: .1rem;
 
     &::after {
       content: "";
       display: block;
       position: absolute;
-      top: -.2rem;
+      top: -.1rem;
       right: 0;
       transform: rotate($au-rotation);
       width: 1px;
       height: 2.3rem;
       background-color: $au-neutral-light;
+    }
+
+    .au-c-brand--link:hover &,
+    .au-c-brand--link:focus & {
+      color: $au-primary-light;
+    }
+
+    .au-c-brand--link:focus & {
+      outline: $au-outline;
     }
 
     @include mq(small) {

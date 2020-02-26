@@ -17,6 +17,8 @@ $au-header-underline-hover   : $au-primary-lighter !default;
    ========================================================================== */
 
 .au-c-header {
+  position: relative;
+  z-index: $au-z-index-alpha;
   font-family: $au-font-primary;
   display: flex;
   justify-content: space-between;
@@ -40,9 +42,6 @@ $au-header-underline-hover   : $au-primary-lighter !default;
     display: block;
     padding: $au-unit-tiny;
     color: $au-neutral-darker;
-    text-decoration: underline;
-    text-decoration-color: $au-neutral-light;
-    text-underline-offset: .3ex;
     transition: color $au-transition;
     letter-spacing: .03ex;
     margin-left: -$au-unit-small - $au-unit-tiny;
@@ -51,6 +50,19 @@ $au-header-underline-hover   : $au-primary-lighter !default;
     text-overflow: ellipsis;
     width: $au-unit-huge;
 
+    @include mq(xsmall) {
+      width: auto;
+    }
+
+    @include mq(small) {
+      margin-left: 0;
+    }
+  }
+
+  .au-c-header__title--link {
+    text-decoration: underline;
+    text-decoration-color: $au-neutral-light;
+    text-underline-offset: .3ex;
 
     &:hover,
     &:focus {
@@ -61,15 +73,6 @@ $au-header-underline-hover   : $au-primary-lighter !default;
 
     &:focus {
       outline: $au-outline;
-    }
-
-    @include mq(xsmall) {
-      width: auto;
-
-    }
-
-    @include mq(small) {
-      margin-left: 0;
     }
   }
 
