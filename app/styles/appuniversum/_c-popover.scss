@@ -55,6 +55,18 @@ $au-popover-underline-hover   : $au-primary-lighter !default;
 
   .au-c-popover__name {
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: $au-unit-large;
+
+    @include mq(xsmall) {
+      width: $au-unit-huge;
+    }
+
+    @include mq(small) {
+      width: auto;
+    }
   }
 
   .au-c-popover__button {
@@ -107,7 +119,7 @@ $au-popover-underline-hover   : $au-primary-lighter !default;
 
     &:after, &:before {
       bottom: 100%;
-      right: $au-unit-tiny*1.5;
+      right: $au-unit-tiny;
       border: solid transparent;
       content: " ";
       height: 0;
@@ -130,6 +142,10 @@ $au-popover-underline-hover   : $au-primary-lighter !default;
       margin-left: -4px;
     }
 
+    &:focus {
+      outline: 0;
+    }
+
     &.is-hidden {
       display: none;
     }
@@ -140,10 +156,10 @@ $au-popover-underline-hover   : $au-primary-lighter !default;
   }
 
   .au-c-popover__item {
-    @include au-font-size($au-base,1);
-    font-family: $au-font;
+    @include au-font-size($au-base,1.5);
+    font-family: $au-font-primary;
     font-weight: $au-regular;
-    padding: $au-unit-small;
+    padding: $au-unit-tiny $au-unit-small;
     border: 0;
     appearance: none;
     -webkit-appearance: none; // doesn't work without prefix on Safari iOS11
@@ -168,7 +184,7 @@ $au-popover-underline-hover   : $au-primary-lighter !default;
 
     &:focus {
       outline: .1rem dashed $au-neutral-light;
-      outline-offset: -$au-unit-tiny;
+      outline-offset: -$au-unit-tiny/2;
     }
 
     &:focus:not(:focus-visible) {

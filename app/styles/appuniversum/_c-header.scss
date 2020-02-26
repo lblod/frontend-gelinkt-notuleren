@@ -17,6 +17,7 @@ $au-header-underline-hover   : $au-primary-lighter !default;
    ========================================================================== */
 
 .au-c-header {
+  font-family: $au-font-primary;
   display: flex;
   justify-content: space-between;
   align-items: center;

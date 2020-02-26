@@ -5,25 +5,41 @@ import { tracked } from "@glimmer/tracking";
 export default class popover extends Component {
   // Track Popover state
   @tracked popoverOpen = false;
+  // Check for keyboard access
+  @tracked keyboardAccess = false;
 
   // Open Popover
   @action
-  togglePopover() {
+  openPopover() {
     // Toggle Popover view state
-    this.popoverOpen = !this.popoverOpen;
+    this.popoverOpen = true;
   }
 
   @action
   closePopover() {
-    // Close Popover view state
+    // Toggle Popover view state
     this.popoverOpen = false;
   }
 
   @action
   escapePopover(event) {
-    // Close Popover view state on escape keydown
+    // Toggle Popover view state and enable keyboardAccess on escape keydown
     if (event.keyCode === 27) {
       this.popoverOpen = false;
+      this.keyboardAccess = true;
+    }
+
+    // Enable keyboardAccess on tab keydown
+    if (event.keyCode === 9) {
+      this.keyboardAccess = true;
+    }
+  }
+
+  @action
+  tabPopover(event) {
+    // Enable keyboardAccess on enter keydown
+    if (event.keyCode === 13) {
+      this.keyboardAccess = true;
     }
   }
 
@@ -31,7 +47,22 @@ export default class popover extends Component {
   popoverFocus(element) {
     let menuItems = element.querySelectorAll('button');
 
-    // Focus first button
-    menuItems[0].focus();
+    if (this.keyboardAccess) {
+      // Focus first button
+      menuItems[0].focus();
+    } else {
+      // Focus popover
+      element.focus();
+    }
+  }
+
+  @action
+  buttonFocus(element) {
+    if (this.keyboardAccess) {
+      // Focus button on insert
+      element.focus();
+      // Disable keyboardAccess
+      this.keyboardAccess = false;
+    }
   }
 }
