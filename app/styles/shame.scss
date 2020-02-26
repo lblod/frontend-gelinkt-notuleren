@@ -131,8 +131,9 @@ input.input-field {
 }
 
 
-// Temporary styles for the sidebar footer
-.sidebar__footer {
-  padding: $au-unit-tiny $au-unit-small;
-  border-top: 0;
+// Temporary focus overrides for focus area's
+// @TODO: discuss where to put this or how to fix this focus style.
+#main:focus,
+#content:focus {
+  outline: 0;
 }

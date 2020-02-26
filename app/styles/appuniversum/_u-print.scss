@@ -2,12 +2,6 @@
    #PRINT
    ========================================================================== */
 
-/**
- * Very crude, reset-like styles taken from the HTML5 Boilerplate:
- * https://github.com/h5bp/html5-boilerplate/blob/5.3.0/dist/doc/css.md#print-styles
- * https://github.com/h5bp/html5-boilerplate/blob/master/dist/css/main.css#L205-L282
- */
-
 @media print {
 
   /**
@@ -84,4 +78,15 @@
     page-break-after: avoid;
   }
 
+  // Print utilities
+  .au-u-wide-on-print {
+    min-width: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    flex-basis: 100% !important;
+  }
+
+  .au-u-hide-on-print {
+    display: none !important;
+  }
 }

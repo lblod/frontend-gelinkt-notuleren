@@ -34,11 +34,11 @@
   .editor-chrome,
   .tasklist.tasklist--open,
   .u-hide-on-print {
-    display: none;
+    display: none !important;
   }
 
   .tasklist.tasklist--expanded {
-    display: block;
+    display: block !important;
   }
 
   .data-table {
@@ -102,10 +102,10 @@
   }
 
   .u-wide-on-print {
-    min-width: 100%;
-    width: 100%;
-    max-width: none;
-    flex-basis: 100%;
+    min-width: 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    flex-basis: 100% !important;
   }
 
   @page {

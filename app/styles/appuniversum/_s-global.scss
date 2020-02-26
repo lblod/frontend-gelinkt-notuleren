@@ -83,7 +83,7 @@ $au-outline-border-style: dashed;
 $au-outline: $au-outline-border $au-outline-border-style $au-outline-color;
 
 // Buttons
-$au-button-height: $au-unit-large;
+$au-button-height: $au-unit-large - $au-unit-small;
 $au-button-font-size: $au-h6;
 $au-button-border: .2rem;
 

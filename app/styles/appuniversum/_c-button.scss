@@ -5,7 +5,7 @@
 /* Variables
    ========================================================================== */
 
-$au-button-height            : $au-unit-large !default;
+$au-button-height            : $au-unit-large - $au-unit-small !default;
 $au-button-font-size         : $au-h6 !default;
 $au-button-border            : .2rem !default;
 $au-button-color             : $au-primary !default;
@@ -152,4 +152,9 @@ $au-button-disabled-fg-color : $au-neutral-dark !default;
       color: $au-button-disabled-color;
     }
   }
+}
+
+.au-c-button--block {
+  display: block;
+  width: 100%;
 }
