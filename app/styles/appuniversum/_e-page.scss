@@ -29,10 +29,10 @@ $au-select-text-bg           : $au-primary-lightest  !default;
 
 html {
   font-family: $au-font;
-  // font-size: 62.5%; /* [4] */
+  font-size: 62.5%; /* [4] */
   overflow-y: scroll; /* [2] */
-  // min-height: 100%; /* [3] */
-  // background-color: $au-page-bg;
+  min-height: 100%; /* [3] */
+  background-color: $au-page-bg;
   text-rendering: optimizeLegibility;
   font-feature-settings: 'kern';
   -webkit-overflow-scrolling: touch;
@@ -41,8 +41,8 @@ html {
 }
 
 body {
-  // font-size: $au-global-font-size; /* [4] */
-  // line-height: $au-global-line-height; /* [1] */
+  font-size: $au-global-font-size; /* [4] */
+  line-height: $au-global-line-height; /* [1] */
 }
 
 ::-moz-selection {
@@ -55,15 +55,11 @@ body {
   background-color: $au-select-text-bg;
 }
 
-:focus,
-a:focus,
-button:focus {
+:focus {
   outline: $au-outline;
 }
 
 // Only show outlines to keyboard users
-:focus:not(:focus-visible),
-a:focus:not(:focus-visible),
-button:focus:not(:focus-visible) {
+:focus:not(:focus-visible) {
   outline: none
 }

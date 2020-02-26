@@ -35,15 +35,13 @@
 
 
 // GENERIC
-// @import "appuniversum/g-reset"; // (BREAKING CHANGE | CONFLICT)
-// @import "appuniversum/g-box-sizing"; // (BREAKING CHANGE | CONFLICT)
-// @import "appuniversum/g-font"; // (BREAKING CHANGE | CONFLICT)
+@import "appuniversum/g-reset";
+@import "appuniversum/g-box-sizing";
+// @import "appuniversum/g-font"; // (BREAKING CHANGE | CONFLICT IN FONT WEIGHTS)
 
 
-// ELEMENTS (BREAKING CHANGE | CONFLICT)
-@import "appuniversum/e-page"; // (IN PROGRESS | MERGING)
-// @import "appuniversum/e-images"; // (BREAKING CHANGE | CONFLICT)
-// @import "appuniversum/e-tables"; // (BREAKING CHANGE | CONFLICT)
+// ELEMENTS
+@import "appuniversum/e-page";
 
 
 // OBJECTS
@@ -82,6 +80,8 @@
 @import "appuniversum/c-brand";
 @import "appuniversum/c-header";
 @import "appuniversum/c-button-link";
+// @import "appuniversum/c-button";
+// @import "appuniversum/c-link";
 @import "appuniversum/c-icon";
 @import "appuniversum/c-list-horizontal"; // list-horizontal
 @import "appuniversum/c-popover";

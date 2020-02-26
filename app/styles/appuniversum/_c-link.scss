@@ -34,6 +34,7 @@ $au-link-underline-hover   : $au-primary-lighter !default;
   }
 
   &:focus {
+    outline: $au-outline;
     outline-offset: $au-unit-tiny/2;
   }
 
@@ -60,10 +61,6 @@ $au-link-underline-hover   : $au-primary-lighter !default;
     text-decoration-color: $au-neutral-lighter;
   }
 
-  &:focus {
-    outline-offset: $au-unit-tiny/2;
-  }
-
   .is-active > & {
     color: $au-link-active-color;
     text-decoration: none;
@@ -72,14 +69,8 @@ $au-link-underline-hover   : $au-primary-lighter !default;
 
 .au-c-link--icon {
   position: relative;
-  padding-left: $au-unit-small;
-
-  .au-c-icon {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  display: inline-flex;
+  align-items: center;
 }
 
 .au-c-link--bare {

@@ -54,6 +54,7 @@ $au-button-disabled-fg-color : $au-neutral-dark !default;
   }
 
   &:focus {
+    outline: $au-outline;
     outline-offset: $au-unit-tiny/2;
   }
 

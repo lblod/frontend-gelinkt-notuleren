@@ -59,6 +59,10 @@ $au-header-underline-hover   : $au-primary-lighter !default;
       text-decoration-color: $au-header-underline-hover;
     }
 
+    &:focus {
+      outline: $au-outline;
+    }
+
     @include mq(xsmall) {
       width: auto;
 
@@ -92,6 +96,7 @@ $au-header-underline-hover   : $au-primary-lighter !default;
     }
 
     &:focus {
+      outline: $au-outline;
       top: $au-unit-large;
       left: -$au-unit-tiny;
     }
@@ -108,6 +113,7 @@ $au-header-underline-hover   : $au-primary-lighter !default;
 
 
   .au-c-header__actions {
+    @include au-font-size($au-base);
     display: flex;
     align-items: center;
     padding: $au-unit-tiny $au-unit-small ;

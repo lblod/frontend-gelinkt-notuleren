@@ -46,6 +46,10 @@ $au-button-link-underline-hover   : $au-primary-lighter !default;
     text-decoration-color: $au-button-link-underline-hover;
   }
 
+  &:focus {
+    outline: $au-outline;
+  }
+
   &:active {
     background-color: transparent;
   }
@@ -59,7 +63,7 @@ $au-button-link-underline-hover   : $au-primary-lighter !default;
 /* Modifiers
    ========================================================================== */
 
-.au-c-button-link--action {
+.au-c-button-link--neutral {
   color: $au-neutral-darker;
   text-decoration-color: $au-neutral-light;
 
