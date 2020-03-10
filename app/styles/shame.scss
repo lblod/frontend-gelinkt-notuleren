@@ -137,3 +137,14 @@ input.input-field {
 #content:focus {
   outline: 0;
 }
+
+
+// @TODO: port to appuniversum base
+// ---
+
+/**
+ * Stretch the grid in the available space
+ */
+ .au-o-grid--stretch {
+  height: 100%;
+}
