@@ -3,5 +3,8 @@
 // ==================================
 
 // Use 1.6rem as base font size until the complete project is refactored.
-$au-global-font-size: 1.6rem;
+$au-global-font-size: 1.8rem;
 $au-base: 1.5rem;
+
+// @TODO: add as new default
+$au-button-height: $au-unit-large - $au-unit-small;
