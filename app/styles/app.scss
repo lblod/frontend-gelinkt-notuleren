@@ -66,20 +66,16 @@
 
 
 // COMPONENTS (DEPRECATED)
-@import 'deprecated/annotations-styles';
-@import 'deprecated/annotations-hover';
-@import 'deprecated/annotations-flag-remove';
-@import 'deprecated/annotations-show';
-@import 'deprecated/annotations-content';
 @import 'deprecated/published-documents';
 @import 'deprecated/sign-publish-flow';
 @import 'deprecated/scrollto';
-@import 'deprecated/annotation-suggestion-modals';
-@import 'deprecated/editor';
 @import 'deprecated/loading-events';
 @import 'deprecated/tasklist';
-@import 'deprecated/toolbar';
 @import 'deprecated/wizard';
+
+
+// PROJECT COMPONENTS
+@import 'project/c-editor-chrome';
 
 
 // COMPONENTS
@@ -93,6 +89,19 @@
 @import "ember-appuniversum/c-popover";
 @import "ember-appuniversum/c-header";
 @import "ember-appuniversum/c-sidebar";
+
+
+// PLUGINS
+@import "say/p-editor";
+@import "say/p-toolbar";
+@import "say/p-rdfa";
+@import "say/p-typography";
+@import "say/p-annotations";
+@import "say/p-annotations-hover";
+@import "say/p-annotations-modal";
+@import "say/p-annotations-flag-remove";
+@import "say/p-annotations-content-nl";
+@import "say/p-annotations-content-en";
 
 
 // UTILITIES (DEPRECATED)

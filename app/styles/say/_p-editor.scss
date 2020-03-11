@@ -1,0 +1,39 @@
+/* ==================================
+   #SAY EDITOR STYLES
+   @TODO: needs to be ported to the say editor.
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+
+/* Component
+   ========================================================================== */
+
+.editor,
+.say-editor {
+  background-color: $au-neutral-lightest;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+  .editor__paper,
+  .say-editor__paper {
+    position: relative;
+    background-color: $au-white;
+    margin: 2rem 0 5rem 2rem;
+    padding: 6rem 6.5rem 5rem 5rem;
+    min-height: 950px;
+    box-shadow: 0 2px 6px 0 $blue-gray-light;
+    box-shadow: 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .editor__paper--disabled,
+  .say-editor__paper--disabled {
+    background-color: $blue-gray-lightest;
+    color: $gray !important;
+  }

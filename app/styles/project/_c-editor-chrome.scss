@@ -1,0 +1,48 @@
+/* ==================================
+   #EDITOR CHROME
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+
+
+/* Component
+   ========================================================================== */
+
+.editor-chrome, // REMOVE OLD CLASS WHEN REFACTOR IS COMPLETE
+.au-c-editor-chrome {
+  position: relative;
+  z-index: $au-z-index-alpha;
+  padding: $au-unit-tiny $au-unit-small;
+  background-color: $au-white;
+  box-shadow: 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
+}
+
+.editor-chrome .link--edit {
+  width: 100%;
+  overflow: hidden;
+  max-height: 1.3em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:after {
+    opacity: 0;
+    transition: all 100ms;
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 1px $blue-gray-lighter;
+
+    &:after {
+      opacity: 1;
+      top: 0;
+      bottom: 0;
+      padding: 0.2rem 0.5rem;
+    }
+  }
+}
+
+.editor-chrome .button {
+  margin-bottom: 0;
+}
