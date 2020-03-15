@@ -6,6 +6,8 @@
 .editor-chrome {
   padding: 1rem 1.5rem 1rem;
   border-bottom: 1px solid $blue-gray-light;
+  position: relative;
+  z-index: 2;
 }
 
   .editor-chrome .link--edit {
@@ -255,4 +257,3 @@
   //     .bijlage__size {
   //         color: $gray-light;
   //     }
-

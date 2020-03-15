@@ -1,0 +1,60 @@
+// ==================================
+// #SAY THEME
+// ==================================
+
+// Display options
+$say-layout-reverse    : false;
+$say-sidebar           : true;
+$say-annotations       : true;
+$say-paper             : true;
+$say-show-rdfa         : true;
+$say-hover-annotations : false;
+
+
+// Colors
+$say-primary                   : $au-blue;
+$say-primary-light             : $au-blue-light;
+$say-primary-lighter           : $au-blue-lighter;
+$say-primary-lightest          : $au-blue-lightest;
+$say-primary-dark              : $au-blue-dark;
+
+
+// Button
+$say-button-height             : $au-unit + $au-unit-tiny;
+$say-button-font-family        : $au-font;
+$say-button-font-size          : $au-base;
+$say-button-font-weight        : $au-regular;
+$say-button-border             : .1rem;
+$say-button-border-color       : $au-neutral-light;
+$say-button-border-hover-color : $au-neutral-light;
+$say-button-color              : $au-neutral-dark;
+$say-button-hover-color        : $au-neutral;
+$say-button-bg-color           : transparent;
+$say-button-bg-hover-color     : transparent;
+$say-button-radius             : 2rem;
+
+
+// Typography
+$say-font              : $au-font;
+$say-h1-font-family    : $au-font-secondary;
+$say-h1-font-weight    : $au-medium;
+$say-h1-font-size      : $au-h1;
+$say-h2-font-family    : $au-font-secondary;
+$say-h2-font-weight    : $au-medium;
+$say-h2-font-size      : $au-h2;
+$say-h3-font-family    : $au-font-secondary;
+$say-h3-font-weight    : $au-medium;
+$say-h3-font-size      : $au-h3;
+$say-h4-font-family    : $au-font;
+$say-h4-font-weight    : $au-medium;
+$say-h4-font-size      : $au-h4;
+$say-h5-font-family    : $au-font;
+$say-h5-font-weight    : $au-medium;
+$say-h5-font-size      : $au-h5;
+$say-h6-font-family    : $au-font;
+$say-h6-font-weight    : $au-medium;
+$say-h6-font-size      : $au-h6;
+$say-base-font-family  : $au-font;
+$say-base-font-weight  : $au-regular;
+$say-base-font-size    : $au-base;
+$say-typography-margin : $au-unit;

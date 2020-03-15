@@ -2,7 +2,7 @@
   #SAY ANNOTATIONS CONTENT - NL locale
   ================================== */
 
-.rdfa-editor .editor-container {
+.rdfa-annotations {
   /* -------------------- Guiding tags ------------------------- */
   [property^="ext:insert"]:before,
   [data-editor-highlight="true"]:before {
@@ -416,7 +416,7 @@
 }
 
 // Content on hover
-.rdfa-editor {
+.rdfa-annotations {
   /* -------------------- General tags ------------------------- */
   [data-editor-highlight="true"] {
     background-color: rgba($primary-yellow, 0.9);

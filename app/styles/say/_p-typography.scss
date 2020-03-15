@@ -5,7 +5,7 @@
 
 /* -------------------- making sure text, headers, tables, mark, strong and em look well without classes in the editor ------------------------- */
 
-.editor__paper,
+.say-editor__paper,
 .document-print {
   font-size: 1.6rem;
 
@@ -48,7 +48,7 @@
 }
 
 .document-print,
-.editor__paper {
+.say-editor__paper {
   [typeof="besluit:BehandelingVanAgendapunt"],
   [property="ext:behandelt"],
   [property="besluit:heeftAgendapunt"],
