@@ -1,17 +1,17 @@
-<div class="u-spacer--none">
-	{{#if readOnly}}
-	  <h1>
-	    {{#if editorDocument.title}}
-	      {{editorDocument.title}}
-	    {{else}}
-	      <span class="text-fade">Naamloos document</span>
-	    {{/if}}
-	  </h1>
-	{{else}}
-	  {{#if active}}
-	    <Input class="input-field input-field--block u-spacer--small" @type="text" placeholder="Naamloos document" @value={{mut editorDocument.title}} @focus-out={{action "toggleActive"}} @autofocus="autofocus" />
-	  {{else}}
-	    <h1 onClick={{action "toggleActive"}}>
+<div class="u-spacer--top--tinier">
+  {{#if readOnly}}
+    <h1>
+      {{#if editorDocument.title}}
+        {{editorDocument.title}}
+      {{else}}
+        <span class="text-fade">Naamloos document</span>
+      {{/if}}
+    </h1>
+  {{else}}
+    {{#if active}}
+      <Input class="input-field input-field--block u-spacer--small" @type="text" placeholder="Naamloos document" @value={{mut editorDocument.title}} @focus-out={{action "toggleActive"}} @autofocus="autofocus" />
+    {{else}}
+      <h1 onClick={{action "toggleActive"}}>
         <a class="link--edit">
           {{#if editorDocument.title}}
             {{editorDocument.title}}
@@ -19,7 +19,7 @@
             Naamloos document
           {{/if}}
         </a>
-	    </h1>
-	  {{/if}}
-	{{/if}}
+      </h1>
+    {{/if}}
+  {{/if}}
 </div>
