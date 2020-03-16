@@ -2,7 +2,11 @@
   #SAY ANNOTATIONS CONTENT - NL locale
   ================================== */
 
-.rdfa-annotations {
+.rdfa-annotations [data-editor-highlight="true"],
+.rdfa-annotations [property],
+.rdfa-annotations [typeof]:not([typeof="foaf:Document"]),
+.rdfa-annotations [data-type],
+.rdfa-annotations .mark-highlight-manual {
   /* -------------------- Guiding tags ------------------------- */
   [property^="ext:insert"]:before,
   [data-editor-highlight="true"]:before {
@@ -413,22 +417,8 @@
   [property="ext:signatories"]:before {
     content: "Ondertekenaars";
   }
-}
-
-// Content on hover
-.rdfa-annotations {
-  /* -------------------- General tags ------------------------- */
-  [data-editor-highlight="true"] {
-    background-color: rgba($primary-yellow, 0.9);
-
-    &:hover {
-      background-color: $primary-yellow;
-    }
-  }
 
   [property="ext:behandelt"] [data-editor-highlight="true"] {
-    background-color: rgba($primary-yellow, 0.9);
-
     &:before {
       content: "Selecteer de juiste optie";
     }
@@ -546,7 +536,6 @@
   [property="besluit:heeftAgendapunt"] [property="besluit:geplandBesloten"] + span + [property="dc:title"]:before {
     content: "Titel gepland besloten agendapunt";
   }
-
 
   /* -------------------- Behandeling agendapunt ------------------------- */
   [typeof="besluit:BehandelingVanAgendapunt"]:before {

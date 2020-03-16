@@ -78,8 +78,7 @@
 // PROJECT COMPONENTS
 @import 'project/c-editor-chrome';
 @import 'project/c-rdfa-editor';
-@import "project/c-annotations-content-nl";
-@import "project/c-annotations-content-en";
+
 
 
 // COMPONENTS
@@ -97,12 +96,8 @@
 
 // PLUGINS
 @import "ember-rdfa-editor";
-// @import "say/p-rdfa";
-// @import "say/p-typography";
-// @import "say/p-annotations";
-// @import "say/p-annotations-hover";
-// @import "say/p-annotations-modal";
-// @import "say/p-annotations-flag-remove";
+@import "project/p-annotations-content-nl";
+@import "project/p-annotations-content-en";
 
 
 // UTILITIES (DEPRECATED)

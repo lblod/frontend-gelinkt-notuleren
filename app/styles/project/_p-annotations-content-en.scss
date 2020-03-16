@@ -7,7 +7,11 @@
 // ENGLISH
 // ---
 
-[data--language="en"] .rdfa-annotations {
+[data--language="en"] .rdfa-annotations [data-editor-highlight="true"],
+[data--language="en"] .rdfa-annotations [property],
+[data--language="en"] .rdfa-annotations [typeof]:not([typeof="foaf:Document"]),
+[data--language="en"] .rdfa-annotations [data-type],
+[data--language="en"] .rdfa-annotations .mark-highlight-manual {
   /* -------------------- Guiding tags ------------------------- */
 
   [property^="ext:insert"]:before,

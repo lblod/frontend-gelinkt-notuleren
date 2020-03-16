@@ -8,7 +8,7 @@ $say-sidebar           : true;
 $say-annotations       : true;
 $say-paper             : true;
 $say-show-rdfa         : true;
-$say-hover-annotations : false;
+$say-hover-annotations : true;
 
 
 // Colors
@@ -33,11 +33,16 @@ $say-button-bg-color           : transparent;
 $say-button-bg-hover-color     : transparent;
 $say-button-radius             : 2rem;
 
+// Switch
+$say-switch-label-color  : $au-neutral-dark;
+$say-switch-color        : $au-neutral-light;
+$say-switch-active-color : $au-primary;
+
 
 // Typography
 $say-font              : $au-font;
 $say-h1-font-family    : $au-font-secondary;
-$say-h1-font-weight    : $au-medium;
+$say-h1-font-weight    : $au-regular;
 $say-h1-font-size      : $au-h1;
 $say-h2-font-family    : $au-font-secondary;
 $say-h2-font-weight    : $au-medium;
@@ -58,3 +63,10 @@ $say-base-font-family  : $au-font;
 $say-base-font-weight  : $au-regular;
 $say-base-font-size    : $au-base;
 $say-typography-margin : $au-unit;
+
+// Annotations
+$say-annotation-width            : $au-unit-huge*3;
+$say-annotation-offset           : $au-unit;
+$say-annotation-gutter           : -$au-unit;
+$say-annotation-width-content    : $say-annotation-width - $au-unit-large;
+$say-annotation-background-color : $au-neutral-lightest;
