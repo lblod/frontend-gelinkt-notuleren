@@ -3,12 +3,11 @@
 // ==================================
 
 // Display options
-$say-layout-reverse    : false;
-$say-sidebar           : true;
-$say-annotations       : true;
-$say-paper             : true;
-$say-show-rdfa         : true;
-$say-hover-annotations : true;
+$say-layout-reverse            : false;
+$say-paper                     : true;
+$say-paper-sidebar             : true;
+$say-show-rdfa                 : true;
+$say-hover-annotations         : true;
 
 
 // Colors
@@ -17,6 +16,8 @@ $say-primary-light             : $au-blue-light;
 $say-primary-lighter           : $au-blue-lighter;
 $say-primary-lightest          : $au-blue-lightest;
 $say-primary-dark              : $au-blue-dark;
+
+$say-outline-color             : $au-orange;
 
 
 // Button
@@ -67,6 +68,6 @@ $say-typography-margin : $au-unit;
 // Annotations
 $say-annotation-width            : $au-unit-huge*3;
 $say-annotation-offset           : $au-unit;
-$say-annotation-gutter           : -$au-unit;
+$say-annotation-gutter           : $au-unit;
 $say-annotation-width-content    : $say-annotation-width - $au-unit-large;
 $say-annotation-background-color : $au-neutral-lightest;
