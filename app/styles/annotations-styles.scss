@@ -16,13 +16,12 @@
   }
 
   // Imported HTML - Used for tables
-  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"],
-  table[property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] {
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] {
     position: relative;
     background-color: $gray-lightest-contrast;
-    outline-offset: .2rem;
     border-radius: .2rem;
     outline: 2px dashed $gray-lightest-contrast;
+    outline-offset: .2rem;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
     display: table;
