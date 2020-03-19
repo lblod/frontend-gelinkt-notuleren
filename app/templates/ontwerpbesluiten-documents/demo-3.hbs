@@ -297,17 +297,19 @@
         </div>
       </div>
     </div>
-    <div class="modal-dialog__content modal-dialog__content--sectioned" style="min-height:50vh;">
+    <table class="data-table" style="margin-bottom: 0;">
+      <thead class="ember-view">
+        <tr class="data-table__header">
+          <th class="data-table__header-title"><a>Titel ontwerpbesluit</a></th>
+          <th class="data-table__header-title"><a>Aangemaakt</a></th>
+          <th class="data-table__header-title"><a>Aangepast</a></th>
+          <th class="data-table__header-title u-align-right"><a>Status</a></th>
+        </tr>
+      </thead>
+    </table>
+    <div class="modal-dialog__content modal-dialog__content--sectioned" style="height:50vh;">
       <div class="container-flex--scroll data-table-content ember-view">
         <table class="data-table">
-          <thead class="ember-view">
-            <tr class="data-table__header">
-              <th class="data-table__header-title"><a>Titel ontwerpbesluit</a></th>
-              <th class="data-table__header-title"><a>Aangemaakt</a></th>
-              <th class="data-table__header-title"><a>Aangepast</a></th>
-              <th class="data-table__header-title u-align-right"><a>Status</a></th>
-            </tr>
-          </thead>
           <tbody>
             <tr>
               <td>Titel ontwerpbesluit</td>
@@ -431,6 +433,25 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+    </div>
+    <div class="modal-dialog__footer u-background--gray-lighter">
+      <div id="ember961" class="data-table-pagination ember-view">
+        <div class="pager">
+          <ul class="pager__list">
+            <li class="pager__element u-hidden-mobile">
+              <span class="u-visually-hidden">Rij </span><strong>1 - 10</strong> van 28
+            </li>
+            <li class="pager__element">
+              <a role="button" data-ember-action="" data-ember-action-962="962">
+                volgende
+                <span class="u-visually-hidden">  rijen</span>
+                <i id="ember963" class="vi-u-s vi-arrow vi ember-view"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
