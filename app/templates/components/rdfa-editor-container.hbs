@@ -3,6 +3,6 @@
 <button {{action "launchItAll" false}}>Visualiseer graph</button> --}}
 <EditorDocumentTasklist @editorDocument={{editorDocument}} @onUpdateTasklists={{action "updateTasklists"}} />
 {{#if rdfaEditorContainerReady}}
-  {{rdfa/rdfa-editor class="au-c-rdfa-editor" profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit") }}
+  {{rdfa/rdfa-editor class="au-c-rdfa-editor" profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit") editorOptions=(hash insertTemplateButton="true") }}
 {{/if}}
 {{yield}}
