@@ -21,7 +21,7 @@
     "test": "ember test"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "0.0.6",
+    "@appuniversum/ember-appuniversum": "0.0.7",
     "@ember/optional-features": "^1.1.0",
     "@lblod/ember-acmidm-login": "^0.2.1",
     "@lblod/ember-mock-login": "^0.4.5",
