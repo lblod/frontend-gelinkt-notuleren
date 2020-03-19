@@ -421,6 +421,12 @@
     [property="ext:signatories"]:before {
     	content: "Ondertekenaars";
     }
+
+    // Imported HTML block
+    [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"]::before,
+    [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"]:hover::before {
+      content: "Geïmporteerde data – niet aanpasbaar";
+    }
 }
 
 
@@ -846,5 +852,11 @@
 
     [property="ext:signatories"]:before {
     	content: "Signatories";
+    }
+
+    // Imported HTML block
+    [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"]::before,
+    [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"]:hover::before {
+      content: "Imported data – not editable";
     }
 }

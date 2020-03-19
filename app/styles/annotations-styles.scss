@@ -6,14 +6,78 @@
 
 .rdfa-editor .editor {
 
-	span { //	making sure elements are easier to style and handle
-		display: inline-block;
-	}
+  span { //	making sure elements are easier to style and handle
+    display: inline-block;
+  }
 
-	[property="prov:value"] > div > span,
-	[property="ext:behandelt"] > div > span {
-		display: block; // remove when span is gone from the template "nieuw generiek besluit"
-	}
+  [property="prov:value"] > div > span,
+  [property="ext:behandelt"] > div > span {
+    display: block; // remove when span is gone from the template "nieuw generiek besluit"
+  }
+
+  // Imported HTML - Used for tables
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] {
+    position: relative;
+    background-color: $gray-lightest-contrast;
+    border-radius: .2rem;
+    outline: 2px dashed $gray-lightest-contrast;
+    outline-offset: .2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    display: table;
+    width: 100%;
+
+    // Reset some table styles
+    th {
+      font-weight: 500;
+      border-bottom: 1px solid $gray-lighter;
+    }
+
+    th,
+    td {
+      padding: .6rem;
+      background-color: transparent !important;
+    }
+
+    th + th {
+      border-left: 1px solid $gray-lighter;
+    }
+
+    td + td {
+      border-left: 1px solid $gray-lighter;
+    }
+
+    tr + tr {
+      border-top: 1px solid $gray-lighter;
+    }
+
+    // Style links as plain text
+    a {
+      &,
+      &:hover,
+      &:visited,
+      &:focus {
+        text-decoration: none;
+        color: $gray-dark;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"],
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] * {
+    font-size: 1.5rem; // Set global font-size
+    cursor: not-allowed; // Show not-allowed cursor
+
+    // Disable selection
+    -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  }
 }
 
 [data-editor-highlight="true"],
@@ -26,73 +90,73 @@
   padding-bottom: 5px;
 
   &:not([data-flagged-remove="complete"]):before { // invisible styling of annotations, before they are shown
-  	/* positioning */
-  	content:  attr(property) " " attr(typeof) " " attr(data-type);
-		top: -999px;
-		opacity: 0;
-		position: absolute;
-		left: auto;
-		width: 22rem;
+    /* positioning */
+    content:  attr(property) " " attr(typeof) " " attr(data-type);
+    top: -999px;
+    opacity: 0;
+    position: absolute;
+    left: auto;
+    width: 22rem;
     pointer-events: none;
     transition: opacity 200ms;
     z-index: 901;
 
-		/* text */
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		font-weight: 600;
-		font-size: 1.2rem;
-		color: $blue-gray-dark;
-		line-height: 1;
+    /* text */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: $blue-gray-dark;
+    line-height: 1;
     font-family: "flanders-sans", sans-serif;
 
-		display: block;
-		text-overflow: ellipsis;
-		overflow: hidden;
-		max-height: 2.5rem;
-	  display: -webkit-box;
-	  -webkit-line-clamp: 2;
-	  -webkit-box-orient: vertical;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 2.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   &:after {
-  	position: absolute;
-  	top: 0.5rem;
+    position: absolute;
+    top: 0.5rem;
   }
 
   .mark-highlight-manual,
- 	[typeof],
- 	[property],
-	[data-type] {
- 		padding-bottom: 3px;
- 	}
+   [typeof],
+   [property],
+  [data-type] {
+     padding-bottom: 3px;
+   }
 
-	[typeof] .mark-highlight-manual,
- 	[property] .mark-highlight-manual,
- 	[typeof] [data-type],
- 	[property] [data-type],
-	[typeof] [typeof],
- 	[property] [property] {
- 		padding-bottom: 2px;
- 	}
+  [typeof] .mark-highlight-manual,
+   [property] .mark-highlight-manual,
+   [typeof] [data-type],
+   [property] [data-type],
+  [typeof] [typeof],
+   [property] [property] {
+     padding-bottom: 2px;
+   }
 
-	[typeof] [typeof] .mark-highlight-manual,
-	[property] [property] .mark-highlight-manual,
- 	[typeof] [typeof] [data-type],
- 	[property] [property] [data-type],
-	[typeof] [typeof] [typeof],
-	[property] [property] [property] {
-		padding-bottom: 1px;
-	}
+  [typeof] [typeof] .mark-highlight-manual,
+  [property] [property] .mark-highlight-manual,
+   [typeof] [typeof] [data-type],
+   [property] [property] [data-type],
+  [typeof] [typeof] [typeof],
+  [property] [property] [property] {
+    padding-bottom: 1px;
+  }
 
-	[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] .mark-highlight-manual,
-	[property] [property] [property] [property] [property] [property] .mark-highlight-manual,
- 	[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [data-type],
- 	[property] [property] [property] [property] [property] [property] [property] [data-type],
-	[typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof],
-	[property] [property] [property] [property] [property] [property] [property] {
-		border-bottom: 0;
-	}
+  [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] .mark-highlight-manual,
+  [property] [property] [property] [property] [property] [property] .mark-highlight-manual,
+   [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [data-type],
+   [property] [property] [property] [property] [property] [property] [property] [data-type],
+  [typeof] [typeof] [typeof] [typeof] [typeof] [typeof] [typeof],
+  [property] [property] [property] [property] [property] [property] [property] {
+    border-bottom: 0;
+  }
 }
 
 
@@ -100,16 +164,16 @@
 
 [property^="ext:insert"],
 [data-editor-highlight="true"] {
-	background-color: rgba($primary-yellow, 0.9);
+  background-color: rgba($primary-yellow, 0.9);
 
-	&::selection {
-		background-color: darken($primary-yellow, 20%);
-	}
+  &::selection {
+    background-color: darken($primary-yellow, 20%);
+  }
 
-	&:hover {
+  &:hover {
     color: $black;
-		background-color: $primary-yellow;
-	}
+    background-color: $primary-yellow;
+  }
 }
 
 span.mark-highlight-manual {
@@ -125,10 +189,10 @@ span.mark-highlight-manual {
 [property="ext:metadata"],
 [property="http://mu.semte.ch/vocabularies/ext/noHighlight"],
 [property="http://mu.semte.ch/vocabularies/ext/noHighlight"] {
-	border-bottom: 0;
+  border-bottom: 0;
 
-	&:after,
-	&:before {
-		content: normal !important;
-	}
+  &:after,
+  &:before {
+    content: normal !important;
+  }
 }
