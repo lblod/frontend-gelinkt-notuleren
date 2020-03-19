@@ -16,11 +16,11 @@
   }
 
   // Imported HTML - Used for tables
-  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] {
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"],
+  table[property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] {
     position: relative;
-    cursor: not-allowed;
-    border: 2px solid $white;
     background-color: $gray-lightest-contrast;
+    outline-offset: .2rem;
     border-radius: .2rem;
     outline: 2px dashed $gray-lightest-contrast;
     margin-top: 1.2rem;
@@ -28,6 +28,7 @@
     display: table;
     width: 100%;
 
+    // Reset some table styles
     th {
       font-weight: 500;
       border-bottom: 1px solid $gray-lighter;
@@ -50,13 +51,33 @@
     tr + tr {
       border-top: 1px solid $gray-lighter;
     }
+
+    // Style links as plain text
+    a {
+      &,
+      &:hover,
+      &:visited,
+      &:focus {
+        text-decoration: none;
+        color: $gray-dark;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
   }
 
-  // Set global font-size and show not-allowed cursor
   [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"],
   [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] * {
-    font-size: 1.5rem;
-    cursor: not-allowed;
+    font-size: 1.5rem; // Set global font-size
+    cursor: not-allowed; // Show not-allowed cursor
+
+    // Disable selection
+    -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   }
 }
 
