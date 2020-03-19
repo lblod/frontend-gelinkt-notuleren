@@ -14,6 +14,70 @@
   [property="ext:behandelt"] > div > span {
     display: block; // remove when span is gone from the template "nieuw generiek besluit"
   }
+
+  // Imported HTML - Used for tables
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] {
+    position: relative;
+    background-color: $au-neutral-lighter;
+    border-radius: .2rem;
+    outline: 2px dashed $au-neutral-light;
+    outline-offset: .2rem;
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    display: table;
+    width: 100%;
+
+    // Reset some table styles
+    th {
+      font-weight: 500;
+      border-bottom: 1px solid $au-neutral-light;
+    }
+
+    th,
+    td {
+      padding: .6rem;
+      background-color: transparent !important;
+    }
+
+    th + th {
+      border-left: 1px solid $au-neutral-light;
+    }
+
+    td + td {
+      border-left: 1px solid $au-neutral-light;
+    }
+
+    tr + tr {
+      border-top: 1px solid $au-neutral-light;
+    }
+
+    // Style links as plain text
+    a {
+      &,
+      &:hover,
+      &:visited,
+      &:focus {
+        text-decoration: none;
+        color: $au-neutral-darker;
+      }
+
+      &:focus {
+        outline: 0;
+      }
+    }
+  }
+
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"],
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] * {
+    font-size: 1.5rem; // Set global font-size
+    cursor: not-allowed; // Show not-allowed cursor
+
+    // Disable selection
+    -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  }
 }
 
 [data-editor-highlight="true"],
