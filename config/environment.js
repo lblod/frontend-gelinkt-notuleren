@@ -23,7 +23,8 @@ module.exports = function(environment) {
       }
     },
     featureFlags: {
-      'language-select': false
+      'language-select': false,
+      'editor-html-paste': true
     },
     browserUpdate: {
       vs: {f:-3,o:-3,s:-3,c:-3},

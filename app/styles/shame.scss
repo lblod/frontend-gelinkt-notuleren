@@ -107,6 +107,12 @@ li.link-list__item > button.button {
   }
 }
 
+/* temporary fix for besluittypes dropdown */
+
+.ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
+  z-index: 1006;
+}
+
 /* temporary demo fixes for fracties */
 
 input.input-field {
@@ -136,4 +142,27 @@ input.input-field {
 #main:focus,
 #content:focus {
   outline: 0;
+}
+
+/* temporary styling for import-export demo */
+
+.preview-list__image {
+  width: 16rem;
+  height: 20rem;
+  display: block;
+  box-shadow: 0 0 6px 0 #CBD2DA;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.preview-list__name {
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.description-data__value--placeholder {
+  font-style: italic;
+  // color: $gray;
+  font-weight: 300;
+  font-size: 1.4rem;
 }
