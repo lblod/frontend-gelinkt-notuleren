@@ -1,0 +1,45 @@
+<DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+  <t.menu as |menu|>
+    <menu.general>
+      <div class="u-padding--round--tiny">
+        <div class="grid">
+          <div class="col--5-12 u-wide-on-print">
+            <h1 class="h4 u-spacer--tiny">Ontwerpbesluiten</h1>
+            <TextSearch @filter={{title}} @placeholder="Zoek titel ontwerpbesluit" />
+          </div>
+          <div class="col--7-12">
+            <div class="u-align-right">
+              <LinkTo @route="ontwerpbesluiten-documents.demo-1-b" class="button button--link button--link--dark">Ontwerp invoegen kort</LinkTo>
+              <LinkTo @route="ontwerpbesluiten-documents.demo-1-a" class="button button--link button--link--dark">Ontwerp invoegen tussenstap</LinkTo>
+              <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
+              <LinkTo @route="ontwerpbesluiten-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </menu.general>
+  </t.menu>
+  <t.content as |c|>
+    <c.header>
+      <th class="data-table__header-title"><a>Titel ontwerpbesluit</a></th>
+      <th class="data-table__header-title"><a>Aangemaakt</a></th>
+      <th class="data-table__header-title"><a>Aangepast</a></th>
+      <th class="data-table__header-title u-align-right"><a>Status</a></th>
+    </c.header>
+    <tbody>
+      <tr>
+        <td><LinkTo @route="ontwerpbesluiten-documents.new">Titel ontwerpbesluit</LinkTo> </td>
+        <td>Vandaag om 16:41</td>
+        <td>09-03-2020</td>
+        <td class="u-align-right"><span class="pill--primary-blue pill">Concept</span></td>
+      </tr>
+      <tr>
+        <td><LinkTo @route="ontwerpbesluiten-documents.new">Titel ontwerpbesluit</LinkTo> </td>
+        <td>Vandaag om 16:41</td>
+        <td>09-03-2020</td>
+        <td class="u-align-right"><span class="pill ember-view">In notulen</span></td>
+      </tr>
+    </tbody>
+  </t.content>
+</DataTable>

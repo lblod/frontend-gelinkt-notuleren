@@ -1,39 +1,27 @@
 <div class="grid u-spacer--tiny">
-  <div class="col--8-12">
+  <div class="col--6-12">
     <LinkTo @route="inbox.index" class="smaller link-dark">&leftarrow; Terug naar overzicht notulen</LinkTo>
     <label class="pill u-spacer--left--tiny">
       <span>{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
     </label>
   </div>
-  <div class="col--4-12">
+  <div class="col--6-12">
     <div class="grid grid--collapse grid--align-right">
-      <div class="col--9-12 u-align-right">
-        {{#if editorDocument.isNew}}
-          <p class="smaller">
-            <label class="pill pill--primary-yellow">
-              <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-              <span>Concept niet bewaard</span>
-            </label>
-          </p>
-        {{else}}
-          {{#if editorDocument.updatedOn}}
-            <p class="smaller">
-              Bewaard {{moment-calendar editorDocument.updatedOn}}
-              <EditorStatusPill @status={{await documentContainer.status}} />
-            </p>
-          {{else}}
-            <p class="smaller">
-              <span class="smaller u-padding--right--tiny">
-                <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-                <span>Wijzigingen niet bewaard</span>
-              </span>
-              <EditorStatusPill @status={{await documentContainer.status}} />
-            </p>
+      <div class="col--10-12 u-align-right">
+        <WuButtonGroup>
+          {{#if startSyncModal}}
+            <WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @onClick={{startSyncModal}}>
+              <i class="fa fa-rotate-right"></i>Synchroniseer gegevens met OCMW
+            </WuLinkButton>
           {{/if}}
-        {{/if}}
+          {{!-- // Still needed? --}}
+          <WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @onClick=Null>
+            <i class="fa fa-retweet"></i>Exporteer als HTML
+          </WuLinkButton>
+        </WuButtonGroup>
       </div>
       {{#if features.languageSelect}}
-        <div class="col--3-12 u-align-left u-padding--left--small">
+        <div class="col--2-12 u-align-left u-padding--left--small">
           <LanguageSelect />
         </div>
       {{/if}}
@@ -43,6 +31,9 @@
 <div class="grid">
   <div class="col--6-12">
     <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
+    {{#unless editorDocument.isNew}}
+      <EditorStatusPill @status={{await documentContainer.status}} />
+    {{/unless}}
   </div>
   <div class="col--6-12 u-align-right">
     <WuButtonGroup @class="u-align-right">
@@ -55,10 +46,28 @@
       <WuButton @label="Bewaar concept" @isNarrow={{true}} @isSmall={{true}} @onClick={{save}} />
     </WuButtonGroup>
 
-    {{#if startSyncModal}}
-      <WuLinkButton @class="u-spacer--top--small" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @onClick={{startSyncModal}}>
-        <i class="fa fa-rotate-right"></i> Synchroniseer gegevens met OCMW
-      </WuLinkButton>
-    {{/if}}
+    <div class="u-spacer--top--tiny">
+      {{#if editorDocument.isNew}}
+        <p class="smaller">
+          <label class="pill pill--primary-yellow">
+            <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
+            <span>Concept niet bewaard</span>
+          </label>
+        </p>
+      {{else}}
+        {{#if editorDocument.updatedOn}}
+          <p class="smaller">
+            Bewaard {{moment-calendar editorDocument.updatedOn}}
+          </p>
+        {{else}}
+          <p class="smaller">
+            <span class="smaller u-padding--right--tiny">
+              <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
+              <span>Wijzigingen niet bewaard</span>
+            </span>
+          </p>
+        {{/if}}
+      {{/if}}
+    </div>
   </div>
 </div>

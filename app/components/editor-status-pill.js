@@ -20,6 +20,6 @@ export default Component.extend({
       // besluitenlijst publiek
       return "pill--primary-yellow";
     }
-    return null;
+    return "pill--primary-blue";
   })
 });
