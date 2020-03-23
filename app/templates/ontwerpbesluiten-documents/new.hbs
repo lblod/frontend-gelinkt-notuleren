@@ -117,6 +117,35 @@
         <div class="col--6-12">
           <div class="editor">
             <div contenteditable="true" class="editor__paper ember-view">
+
+              <div data-editor-highlight="true">Voeg sjabloon in voor besluit</div>
+
+              <br>
+              <br>
+              <hr>
+              OF
+              <hr>
+              <br>
+              <br>
+
+              <div property="ext:behandelingVanAgendapuntenContainer">
+              <span class="u-hidden">3ba2c5b9-f8b1-4dd8-9612-e844c05ae119</span>
+              <div property="ext:behandelt" resource="http://data.lblod.info/id/behandelingen-van-agendapunten/19cdc590-d7d7-4004-a956-fb95bd31ef20" typeof="besluit:BehandelingVanAgendapunt">
+              <span property="besluit:openbaar" datatype="xsd:boolean" content="false">
+              <i class="fa fa-eye-slash"></i>
+              <span>Besloten behandeling van agendapunt</span>
+              </span>
+              <h3 property="dc:subject" resource="http://data.lblod.info/id/agendapunten/9f9f7e29-831d-4eec-b609-5e1f0d5de063" class="h4"> Agendapunt </h3>
+              <br>
+              <br>
+              <div data-editor-highlight="true">Voeg sjabloon in voor besluit of vrij tekstveld (bijvoorbeeld voor een vraag, antwoord of tussenkomst)</div>
+              <br>
+              </div>
+              <span class="u-hidden">d0aca09b-1cc0-48e4-9531-908297d8f8fa</span>
+              </div>
+              <br>
+              <br>
+
             </div>
           </div>
         </div>
@@ -140,9 +169,92 @@
               </div>
             </div>
           </div>
+
           <div class="editor-hints">
             <div class="annotation-suggestion__suggestion">
+              <div class="modal-dialog modal-dialog--sectioned modal-dialog--small modal-dialog--static modal-dialog--hint">
+
+                <ul>
+                  <li>
+                    <div class="ember-view">
+                      <div class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
+                        <div class="modal-dialog__header">
+                          <div class="grid">
+                            <div class="col--10-12">
+                              <p>
+                                Voeg een besluit of <br>vrij tekstveld in:
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="ember-view">
+                      <ul class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
+                        <li class="modal-dialog__link-list">
+                          <div class="grid">
+                            <div class="col--6-12 u-padding--top--tinier">Besluitsjabloon</div>
+                            <div class="col--6-12 u-align-right">
+                              <LinkTo @route="ontwerpbesluiten-documents.demo-3" class="button button--narrow button--link"><i class="vi vi-arrow"></i></LinkTo>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="ember-view">
+                      <ul class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
+                        <li class="modal-dialog__link-list u-background--gray-lightest">
+                          <div class="grid">
+                            <div class="col--6-12 u-padding--top--tinier">Eigen ontwerpbesluit</div>
+                            <div class="col--6-12 u-align-right">
+                              <LinkTo @route="ontwerpbesluiten-documents.demo-3" class="button button--narrow button--link button--disabled"><i class="vi vi-arrow"></i></LinkTo>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="ember-view">
+                      <ul class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
+                        <li class="modal-dialog__link-list u-background--gray-lightest">
+                          <div class="grid">
+                            <div class="col--6-12 u-padding--top--tinier">Besluit uit extern notulenpakket</div>
+                            <div class="col--6-12 u-align-right">
+                              <LinkTo @route="ontwerpbesluiten-documents.demo-3" class="button button--narrow button--link button--disabled"><i class="vi vi-arrow"></i></LinkTo>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="ember-view">
+                      <div class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
+                        <li class="modal-dialog__link-list u-background--gray-lightest">
+                          <div class="grid">
+                            <div class="col--8-12">
+                              Vrij tekstveld (bijvoorbeeld voor een vraag, antwoord of tussenkomst)
+                            </div>
+                            <div class="col--4-12 u-align-right">
+                              <button class="button button--narrow button--disabled">Voeg in</button>
+                            </div>
+                          </div>
+                        </li>
+                      </div>
+                    </div>
+                  </li>
+
+                </ul>
+
+              </div>
             </div>
+
+
           </div>
 
         </div>
