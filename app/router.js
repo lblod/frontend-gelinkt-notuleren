@@ -20,6 +20,8 @@ Router.map(function() {
   this.route('inbox', function() {
     this.route('archive');
     this.route('trash');
+    this.route('imported');
+    this.route('ontwerpbesluiten');
   });
   this.route('mock-login');
   this.route('login');
@@ -51,5 +53,23 @@ Router.map(function() {
   this.route('import', function() {
     this.route('new');
     this.route('edit');
+  });
+
+  this.route('imported-documents', function() {
+    this.route('new');
+    this.route('show');
+    this.route('edit');
+    this.route('templates');
+    this.route('publish');
+  });
+
+  this.route('ontwerpbesluiten', function() {});
+
+  this.route('ontwerpbesluiten-documents', function() {
+    this.route('new');
+    this.route('demo-1-b');
+    this.route('demo-1-a');
+    this.route('demo-2');
+    this.route('demo-3');
   });
 });
