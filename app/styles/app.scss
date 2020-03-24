@@ -95,6 +95,10 @@
 @import "ember-appuniversum/c-sidebar";
 
 
+// PROJECT COMPONENTS (TO BE PORTED TO APPUNIVERSUM)
+@import "project/c-main-container";
+
+
 // UTILITIES (DEPRECATED)
 @import 'deprecated/print';
 

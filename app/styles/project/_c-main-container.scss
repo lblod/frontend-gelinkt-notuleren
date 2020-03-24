@@ -1,0 +1,24 @@
+/* ==================================
+   #MAIN CONTAINER
+   Fixed height container to contain the UI and handle scrolling.
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+$au-main-container-height: calc(100vh - #{$au-unit-large - $au-unit-tiny}) !default;
+
+/* Component
+  ========================================================================== */
+
+.au-c-main-container {
+  height: $au-main-container-height;
+  overflow: hidden;
+  position: relative;
+}
+
+  .au-c-main-container__content {
+    position: relative;
+    height: $au-main-container-height;
+    overflow: auto;
+  }
