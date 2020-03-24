@@ -1,3 +1,61 @@
+/* ==================================
+   #APPUNIVERSUM
+   ================================== */
+
+/**
+ * A design universe for Flanders GOV applications
+ */
+
+/**
+ * CONTENTS
+ * ---
+ * SETTINGS: Project settings and variables
+ * TOOLS: Mixins
+ * GENERIC: Reset, global box-sizing and font-styles
+ * ELEMENTS: Plain html tag styling
+ * OBJECTS: OOCSS unstyled objects (namespace: '.au-o-...')
+ * COMPONENTS: Components (namespace: '.au-c-...')
+ * UTILITIES: Single function helper classes (namespace: '.au-u-...')
+ * SHAME: Temporary hacks and quickfixes
+ */
+
+// WU VARIABLES (DEPRECATED)
+@import 'deprecated/colors';
+
+
+// VARIABLES
+@import "appuniversum/s-colors.scss";
+@import "appuniversum/s-global";
+@import "appuniversum/s-utilities";
+
+
+// PROJECT SPECIFIC VARIABLES
+@import "project/s-global";
+
+
+// MIXINS
+@import "appuniversum/t-font-size";
+@import "appuniversum/t-sass-mq";
+
+
+// GENERIC
+@import "appuniversum/g-reset";
+@import "appuniversum/g-box-sizing";
+@import "appuniversum/g-font";
+
+
+// ELEMENTS
+@import "appuniversum/e-page";
+
+
+// OBJECTS
+@import "appuniversum/o-box";
+@import "appuniversum/o-grid";
+@import "appuniversum/o-layout";
+@import "appuniversum/o-region";
+
+
+// WU COMPONENTS (DEPRECATED)
 @import 'ember-vo-webuniversum-data-table';
 @import 'ember-vo-webuniversum';
 @import 'ember-rdfa-editor-template-variables-manager-plugin';
@@ -6,26 +64,55 @@
 @import 'ember-rdfa-editor-scroll-to-plugin';
 @import 'ember-power-select';
 
-@import 'colors';
+
+// COMPONENTS (DEPRECATED)
+@import 'deprecated/annotations-styles';
+@import 'deprecated/annotations-hover';
+@import 'deprecated/annotations-flag-remove';
+@import 'deprecated/annotations-show';
+@import 'deprecated/annotations-content';
+@import 'deprecated/published-documents';
+@import 'deprecated/sign-publish-flow';
+@import 'deprecated/scrollto';
+@import 'deprecated/annotation-suggestion-modals';
+@import 'deprecated/editor';
+@import 'deprecated/loading-events';
+@import 'deprecated/tasklist';
+@import 'deprecated/toolbar';
+@import 'deprecated/wizard';
+
+
+// COMPONENTS
+@import "ember-appuniversum/c-brand";
+@import "ember-appuniversum/c-button";
+@import "ember-appuniversum/c-button-link";
+@import "ember-appuniversum/c-link";
+@import "ember-appuniversum/c-icon";
+@import "ember-appuniversum/c-list-horizontal";
+@import "ember-appuniversum/c-list-navigation";
+@import "ember-appuniversum/c-popover";
+@import "ember-appuniversum/c-header";
+@import "ember-appuniversum/c-sidebar";
+
+
+// PROJECT COMPONENTS (TO BE PORTED TO APPUNIVERSUM)
+@import "project/c-main-container";
+
+
+// UTILITIES (DEPRECATED)
+@import 'deprecated/print';
+
+
+// UTILITIES
+@import "appuniversum/u-headings";
+@import "appuniversum/u-font-weights";
+@import "appuniversum/u-font-family";
+@import "appuniversum/u-widths";
+@import "appuniversum/u-spacings";
+@import "appuniversum/u-responsive-spacings";
+@import "appuniversum/u-hide";
+@import "appuniversum/u-print";
+
+
+// TEMPORARY HACKS AND QUICKFIXES
 @import 'shame';
-
-
-@import 'annotations-styles';
-@import 'annotations-hover';
-@import 'annotations-flag-remove';
-@import 'annotations-show';
-
-@import 'annotations-content';
-
-@import 'published-documents';
-@import 'sign-publish-flow';
-@import 'scrollto';
-
-@import 'annotation-suggestion-modals';
-@import 'editor';
-@import 'loading-events';
-@import 'tasklist';
-@import 'toolbar';
-@import 'wizard';
-
-@import 'print';

@@ -1,83 +1,84 @@
 /* ==========================================================================
-  Dirty temporary css for demo purposes.
-  Some parts will be reused, but most of them will not.
- ========================================================================== */
+   #SHAME
+   Dirty temporary css for demo purposes.
+   Some parts will be reused, but most of them will not.
+   ========================================================================== */
 
 /* side nav problem remove once webuniversum updated*/
 
 .side-navigation__item a {
-	word-break: initial;
+  word-break: initial;
 }
 
 /* step styling override remove once webuniversum updated*/
 
 .step__header > .grid {
-	width: 100%;
+  width: 100%;
 }
 
 .step__content p + p {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 /* spans in link lists replacing data */
 
 li.link-list__item span {
-	display: block;
-	padding: 1rem 1.5rem;
+  display: block;
+  padding: 1rem 1.5rem;
 }
 
 li.link-list__item > button.button {
-	padding: 1rem 1.5rem;
-	background-color: transparent;
-	color: $primary-blue;
-	border: none;
-	height: auto;
-	display: block;
-	width: 100%;
-	text-align: left;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  color: $primary-blue;
+  border: none;
+  height: auto;
+  display: block;
+  width: 100%;
+  text-align: left;
   white-space: initial;
   line-height: 1.4;
 
-	&:hover {
-		background-color: $blue-gray-lightest;
-	}
+  &:hover {
+    background-color: $blue-gray-lightest;
+  }
 
-	&.button--disabled {
-		color: $gray;
-		pointer-events: none;
-	}
+  &.button--disabled {
+    color: $gray;
+    pointer-events: none;
+  }
 }
 
 /* ember data table red color override */
 
 .data-table-menu {
-	color: $gray-dark;
+  color: $gray-dark;
 }
 
 .badge--xs {
-	width: 2rem;
-	height: 2rem;
-	line-height: 0.9;
-	padding: 0.25rem 0.4rem;
-	text-align: center;
-	position: relative;
-	top: 0.6rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 0.9;
+  padding: 0.25rem 0.4rem;
+  text-align: center;
+  position: relative;
+  top: 0.6rem;
 
-	.vi {
-		font-size: 0.9rem;
-	}
+  .vi {
+    font-size: 0.9rem;
+  }
 }
 
 .pill {
-	.badge--xs {
-		position: relative;
-		top: 0.3rem;
-		margin-right: 0.5rem;
-		line-height: 1.1;
-		width: 1.6rem;
-		height: 1.6rem;
-		padding: 0 0.35rem;
-	}
+  .badge--xs {
+    position: relative;
+    top: 0.3rem;
+    margin-right: 0.5rem;
+    line-height: 1.1;
+    width: 1.6rem;
+    height: 1.6rem;
+    padding: 0 0.35rem;
+  }
 }
 
 /** Collapsable document structure */
@@ -127,12 +128,20 @@ input.input-field {
 }
 
 .data-table--white tr {
-	background-color: white !important;
+  background-color: white !important;
 }
 
 .data-table--bordered {
-	border-left: 1px solid $gray-lighter;
-	border-right: 1px solid $gray-lighter;
+  border-left: 1px solid $gray-lighter;
+  border-right: 1px solid $gray-lighter;
+}
+
+
+// Temporary focus overrides for focus area's
+// @TODO: discuss where to put this or how to fix this focus style.
+#main:focus,
+#content:focus {
+  outline: 0;
 }
 
 /* temporary styling for import-export demo */
@@ -156,4 +165,9 @@ input.input-field {
   // color: $gray;
   font-weight: 300;
   font-size: 1.4rem;
+}
+
+// Disable fixed scrollbars on html element > @TODO: port to appuniversum
+html {
+  overflow-y: auto;
 }
