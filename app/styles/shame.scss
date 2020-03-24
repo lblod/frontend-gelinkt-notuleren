@@ -166,3 +166,8 @@ input.input-field {
   font-weight: 300;
   font-size: 1.4rem;
 }
+
+// Disable fixed scrollbars on html element > @TODO: port to appuniversum
+html {
+  overflow-y: auto;
+}
