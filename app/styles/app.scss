@@ -80,7 +80,6 @@
 @import 'project/c-rdfa-editor';
 
 
-
 // COMPONENTS
 @import "ember-appuniversum/c-brand";
 @import "ember-appuniversum/c-button";
@@ -92,6 +91,10 @@
 @import "ember-appuniversum/c-popover";
 @import "ember-appuniversum/c-header";
 @import "ember-appuniversum/c-sidebar";
+
+
+// PROJECT COMPONENTS (TO BE PORTED TO APPUNIVERSUM)
+@import "project/c-main-container";
 
 
 // PLUGINS

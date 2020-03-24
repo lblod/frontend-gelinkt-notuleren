@@ -4,14 +4,19 @@
       <div class="u-padding--round--tiny">
         <div class="grid">
           <div class="col--7-12 u-wide-on-print">
-            <h1 class="h1 u-spacer--none">Notulen {{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</h1>
+            <h1 class="h4 u-spacer--tiny">Notulen zitting</h1>
+            <TextSearch @filter={{title}} @placeholder="Zoek titel notulen" />
 {{!--             <ul class="bullet-list">
               {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
             </ul> --}}
           </div>
           <div class="col--5-12">
-            <div class="search-box u-spacer--top--tiny">
-              <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" />
+            <div class="u-align-right">
+              <WuButtonGroup>
+                {{!-- <LinkTo @route="inbox.archive" class="button button--alt">Bekijk archief notulen</LinkTo> --}}
+                {{!-- <LinkTo @route="imported-documents.new" class="button button--alt">Importeer html bestand</LinkTo> --}}
+                {{!-- <WuButton @isNarrow={{true}} @onClick={{action "openNewDocument"}}>Nieuwe zitting</WuButton> --}}
+              </WuButtonGroup>
             </div>
           </div>
         </div>
@@ -21,7 +26,7 @@
   <t.content as |c|>
     <c.header>
       <!-- <th class="data-table__header-title"><!-- Starred </th> -->
-      <ThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Zitting" @class="data-table__header-title" />
+      <ThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Titel notulen" @class="data-table__header-title" />
       <ThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" @class="data-table__header-title" />
       <ThSortable @field="currentVersion.updatedOn" @currentSorting={{sort}} @label="Aangepast" @class="data-table__header-title" />
       <ThSortable @field="status" @currentSorting={{sort}} @label="Status" @class="data-table__header-title u-align-right" />
