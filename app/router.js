@@ -71,5 +71,6 @@ Router.map(function() {
     this.route('demo-1-a');
     this.route('demo-2');
     this.route('demo-3');
+    this.route('demo-besluitsjabloon');
   });
 });

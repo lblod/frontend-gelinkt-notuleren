@@ -116,7 +116,7 @@
       <div class="grid grid--collapse grid--align-center">
         <div class="col--6-12">
           <div class="editor">
-            <div contenteditable="true" id="ember439" class="editor__paper">
+            <div contenteditable="true" class="editor__paper ember-view">
               <div class="ext_metadata" contenteditable="false" property="ext:metadata"><div class="ext_variable" typeof="ext:Variable" resource="http://variables/c8cfecc4-8019-42e9-a7ab-c64fd165481a">
               <div property="ext:idInSnippet" content="a2ae8239-923d-41bc-ab97-7595e39d2f84">0</div>
               <div property="ext:intentionUri" content="http://zitting/geplande-start">a</div>
@@ -214,7 +214,7 @@
               <div property="ext:insertStemmingText" data-editor-highlight="true">Beheer de stemmingen bij dit agendapunt</div>
               <br>
               <br>
-              <div data-editor-highlight="true">Voeg besluit of vrij tekstveld (bijvoorbeeld voor een vraag, antwoord of tussenkomst)</div>
+              <div data-editor-highlight="true">Voeg sjabloon in voor besluit of vrij tekstveld (bijvoorbeeld voor een vraag, antwoord of tussenkomst)</div>
               <br>
               </div>
               <span class="u-hidden">d0aca09b-1cc0-48e4-9531-908297d8f8fa</span>
@@ -250,7 +250,7 @@
             </div>
           </div>
           <div class="editor-loading-events">
-            <div id="ember440" class="ember-view">
+            <div class="ember-view">
               <div class="grid grid--collapse">
                 <div class="col--2-12 u-align-center">
                   <i class="vi vi-check vi-u-s"></i>
@@ -265,94 +265,196 @@
           </div>
           <div class="editor-hints">
             <div class="annotation-suggestion__suggestion">
-              <div class="modal-dialog modal-dialog--sectioned modal-dialog--small modal-dialog--static modal-dialog--hint">
-
-                <ul>
-                  <li>
-                    <div class="ember-view">
-                      <div class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
-                        <div class="modal-dialog__header">
-                          <div class="grid">
-                            <div class="col--10-12">
-                              <p>
-                                Voeg een besluit of <br>vrij tekstveld in:
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="ember-view">
-                      <ul class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
-                        <li class="modal-dialog__link-list">
-                          <div class="grid">
-                            <div class="col--6-12 u-padding--top--tinier">Eigen ontwerpbesluit</div>
-                            <div class="col--6-12 u-align-right">
-                              <LinkTo @route="ontwerpbesluiten-documents.demo-3" class="button button--narrow button--link"><i class="vi vi-arrow"></i></LinkTo>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="ember-view">
-                      <ul class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
-                        <li class="modal-dialog__link-list u-background--gray-lightest">
-                          <div class="grid">
-                            <div class="col--6-12 u-padding--top--tinier">Besluitsjabloon</div>
-                            <div class="col--6-12 u-align-right">
-                              <LinkTo @route="ontwerpbesluiten-documents.demo-3" class="button button--narrow button--link button--disabled"><i class="vi vi-arrow"></i></LinkTo>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="ember-view">
-                      <ul class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
-                        <li class="modal-dialog__link-list u-background--gray-lightest">
-                          <div class="grid">
-                            <div class="col--6-12 u-padding--top--tinier">Besluit uit extern notulenpakket</div>
-                            <div class="col--6-12 u-align-right">
-                              <LinkTo @route="ontwerpbesluiten-documents.demo-3" class="button button--narrow button--link button--disabled"><i class="vi vi-arrow"></i></LinkTo>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="ember-view">
-                      <div class="modal-dialog modal-dialog--temporary-fix modal-dialog--sectioned modal-dialog--static modal-dialog--small">
-                        <li class="modal-dialog__link-list u-background--gray-lightest">
-                          <div class="grid">
-                            <div class="col--8-12">
-                              Vrij tekstveld (bijvoorbeeld voor een vraag, antwoord of tussenkomst)
-                            </div>
-                            <div class="col--4-12 u-align-right">
-                              <button class="button button--narrow button--disabled">Voeg in</button>
-                            </div>
-                          </div>
-                        </li>
-                      </div>
-                    </div>
-                  </li>
-
-                </ul>
-
-              </div>
             </div>
-
-
           </div>
+
         </div>
       </div>
 
     </div>
+  </div>
+</div>
+
+<div class="modal-overlay">
+  <div class="modal-dialog modal-dialog--sectioned modal-dialog--wide modal-dialog--static modal-dialog--hint">
+    <div class="modal-dialog__header">
+      <div class="grid">
+        <div class="col--6-12">
+          <h1 class="h3">Voeg een besluitsjabloon in</h1>
+          <div class="u-spacer--tb--tiny">
+            <div class="input-field-icon-container--block input-field-icon-container--left">
+              <input placeholder="Zoek titel besluitsjabloon" class="input-field input-field--block ember-text-field" type="text">
+              <i class="input-field__icon vi-magnifier vi ember-view"></i>
+            </div>
+          </div>
+        </div>
+        <div class="col--6-12 u-align-right" data-ember-action="" data-ember-action-838="838">
+          <div class="anti-jitter">
+            <LinkTo @route="ontwerpbesluiten-documents.new" class="link--icon--close">
+              <span class="u-visually-hidden">Venster sluiten</span>
+            </LinkTo>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="data-table" style="margin-bottom: 0;">
+      <thead class="ember-view">
+        <tr class="data-table__header">
+          <th class="data-table__header-title"><a>Besluitsjabloon</a></th>
+          <th class="data-table__header-title" style="width:25rem;"><a>Aangemaakt</a></th>
+          <th class="data-table__header-title" style="width:25rem;"><a>Aangepast</a></th>
+          <th class="data-table__header-title u-align-right" style="width:20rem;"><a>Status</a></th>
+        </tr>
+      </thead>
+    </table>
+    <div class="modal-dialog__content modal-dialog__content--sectioned" style="height:50vh;">
+      <div class="container-flex--scroll data-table-content ember-view">
+        <table class="data-table">
+          <tbody>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td style="width:25rem;">Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td style="width:25rem;">09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right" style="width:20rem;"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+            <tr>
+              <td><strong>Besluitsjabloon titel</strong><br>Korte inhoud of voorbeeld of beschrijving mogelijk</td>
+              <td>Vandaag om 16:41<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td>09-03-2020<br> <span class="text-fade">door Babette Claessens</span></td>
+              <td class="u-align-right"><a class="button button--alt button--narrow" href="#">Voeg in</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    <div class="modal-dialog__footer u-background--gray-lighter">
+      <div id="ember961" class="data-table-pagination ember-view">
+        <div class="pager">
+          <ul class="pager__list">
+            <li class="pager__element u-hidden-mobile">
+              <span class="u-visually-hidden">Rij </span><strong>1 - 10</strong> van 28
+            </li>
+            <li class="pager__element">
+              <a role="button" data-ember-action="" data-ember-action-962="962">
+                volgende
+                <span class="u-visually-hidden">  rijen</span>
+                <i id="ember963" class="vi-u-s vi-arrow vi ember-view"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
