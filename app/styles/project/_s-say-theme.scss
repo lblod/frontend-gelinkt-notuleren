@@ -2,52 +2,38 @@
 // #SAY THEME
 // ==================================
 
+// Define the look of the Say Editor by changing the variables.
+
+
+// UI
+// ---
 // Display options
-$say-layout-reverse              : false;
-$say-paper                       : true;
-$say-paper-sidebar               : true;
-$say-show-rdfa                   : true;
-$say-hover-annotations           : true;
+$say-paper                       : true; // True = displays a paper like background.
+$say-paper-sidebar               : true; // True = adds space for a sidebar to the right.
+$say-toolbar-bottom              : false; // True = position the toolbar at the bottom.
 
 
-// Colors
-$say-primary                     : $au-blue;
-$say-primary-light               : $au-blue-light;
-$say-primary-lighter             : $au-blue-lighter;
-$say-primary-lightest            : $au-blue-lightest;
-$say-primary-dark                : $au-blue-dark;
-$say-outline-color               : $au-orange;
+// EDITOR
+// ---
+// Editor spacing and background
+$say-editor-padding              : $au-unit;
+$say-editor-background           : $au-neutral-lightest;
 
-
-// Button
-$say-button-height               : $au-unit + $au-unit-tiny;
-$say-button-font-family          : $au-font;
-$say-button-font-size            : $au-base;
-$say-button-font-weight          : $au-regular;
-$say-button-border               : .1rem;
-$say-button-border-color         : $au-neutral-light;
-$say-button-border-hover-color   : $au-neutral-light;
-$say-button-color                : $au-neutral-darker;
-$say-button-hover-color          : $au-neutral;
-$say-button-bg-color             : transparent;
-$say-button-bg-hover-color       : transparent;
-$say-button-radius               : 0;
-
-// Switch
-$say-switch-label-color          : $au-neutral-dark;
-$say-switch-color                : $au-neutral-light;
-$say-switch-active-color         : $au-primary;
+// Paper spacing and background
+$say-paper-min-height            : calc(100vh + #{$au-unit});
+$say-paper-padding               : $au-unit-large;
+$say-paper-background            : $au-white;
+$say-paper-box-shadow            : 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
 
 // Typography
-$say-font                        : $au-font;
 $say-h1-font-family              : $au-font-secondary;
-$say-h1-font-weight              : $au-regular;
+$say-h1-font-weight              : $au-light;
 $say-h1-font-size                : $au-h1;
 $say-h2-font-family              : $au-font-secondary;
-$say-h2-font-weight              : $au-medium;
+$say-h2-font-weight              : $au-regular;
 $say-h2-font-size                : $au-h2;
 $say-h3-font-family              : $au-font-secondary;
-$say-h3-font-weight              : $au-medium;
+$say-h3-font-weight              : $au-regular;
 $say-h3-font-size                : $au-h3;
 $say-h4-font-family              : $au-font;
 $say-h4-font-weight              : $au-medium;
@@ -59,14 +45,49 @@ $say-h6-font-family              : $au-font;
 $say-h6-font-weight              : $au-medium;
 $say-h6-font-size                : $au-h6;
 $say-base-font-family            : $au-font;
-$say-base-font-weight            : $au-regular;
+$say-base-font-weight            : $au-light;
 $say-base-font-size              : $au-base;
-$say-typography-margin           : $au-unit;
+$say-small-font-size             : $au-base;
+$say-smaller-font-size           : 1.4rem;
+$say-smallest-font-size          : 1.3rem;
+$say-typography-margin           : $au-unit-small;
+$say-editor-private-color        : $au-orange-dark;
+$say-editor-highlight-color      : $au-orange-lighter;
+$say-editor-highlight-hover-color: $au-orange-lightest;
 
-// Annotations
+
+// TOOLBAR
+// ---
+$say-toolbar-background          : $au-neutral-lighter;
+$say-toolbar-border              : tint($au-neutral-light,30);
+$say-toolbar-height              : 44px;
+
+// Annotation switch styling
+$say-switch-label-color          : $au-neutral-dark;
+$say-switch-color                : $au-neutral-light;
+$say-switch-active-color         : $au-primary;
+
+// Button
+$say-button-height               : $au-unit + $au-unit-tiny;
+$say-button-font-family          : $au-font;
+$say-button-font-size            : $au-base;
+$say-button-font-weight          : $au-regular;
+$say-button-border               : .1rem;
+$say-button-border-color         : $au-neutral-light;
+$say-button-border-hover-color   : $au-neutral-light;
+$say-button-color                : $au-neutral-dark;
+$say-button-hover-color          : $au-neutral;
+$say-button-bg-color             : transparent;
+$say-button-bg-hover-color       : transparent;
+$say-button-radius               : 0;
+
+
+// ANNOTATIONS
+// ---
+// Annotation options
 $say-annotation-width            : $au-unit-huge*3;
 $say-annotation-offset           : $au-unit;
 $say-annotation-gutter           : $au-unit;
 $say-annotation-width-content    : $say-annotation-width - $au-unit-large;
+$say-annotation-text-color       : $au-neutral-dark;
 $say-annotation-background-color : $au-neutral-lightest;
-$say-annotation-text-color       : $au-neutral;
