@@ -4,53 +4,53 @@
  ========================================================================== */
 
 .modal-dialog.modal-dialog--sectioned.modal-dialog--wizard {
-	max-height: 95vh;
+  max-height: 95vh;
 
-	.modal-dialog__header {
-		border-bottom: 1px solid $blue-gray-light;
-	}
+  .modal-dialog__header {
+    border-bottom: 1px solid $blue-gray-light;
+  }
 
-	.modal-dialog__content {
-		max-height: 45vh;
-		padding: 0;
-	}
+  .modal-dialog__content {
+    max-height: 45vh;
+    padding: 0;
+  }
 }
 
 .modal-dialog.modal-dialog--sectioned.modal-dialog--wizard .wizard__panes {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .modal-dialog.modal-dialog--sectioned.modal-dialog--wizard  .progress-bar {
-	margin: 0;
-	padding: 1rem 1.5rem 0 1.5rem;
+  margin: 0;
+  padding: 1rem 1.5rem 0 1.5rem;
 }
 
 .modal-dialog.modal-dialog--sectioned.modal-dialog--wizard .wizard__heading {
-	padding: 0 1.5rem 1.5rem 1.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
 }
 
 .modal-dialog .progress-bar.progress-bar--numeric {
-	.progress-bar__step .progress-bar__bullet {
-		top: 1rem;
-		right: -0.2rem;
-		width: 3rem;
-		height: 3rem;
-		line-height: 1.25;
-		text-align: center;
-		display: block;
-	}
-	.progress-bar__step .progress-bar__bullet:after {
-		width: 3rem;
-		height: 3rem;
-	}
+  .progress-bar__step .progress-bar__bullet {
+    top: 1rem;
+    right: -0.2rem;
+    width: 3rem;
+    height: 3rem;
+    line-height: 1.25;
+    text-align: center;
+    display: block;
+  }
+  .progress-bar__step .progress-bar__bullet:after {
+    width: 3rem;
+    height: 3rem;
+  }
 
-	.progress-bar__step:before {
-		right: 2.8rem;
-	}
+  .progress-bar__step:before {
+    right: 2.8rem;
+  }
 }
 
 .modal-dialog.modal-dialog--sectioned.modal-dialog--wizard .modal-dialog__buttons {
-	margin: 0;
+  margin: 0;
   padding: 1.5rem 1.5rem 2.5rem;
   border-top: 1px solid $blue-gray-light;
 }

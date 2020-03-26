@@ -18,9 +18,9 @@
   // Imported HTML - Used for tables
   [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"] {
     position: relative;
-    background-color: $gray-lightest-contrast;
+    background-color: $au-neutral-lighter;
     border-radius: .2rem;
-    outline: 2px dashed $gray-lightest-contrast;
+    outline: 2px dashed $au-neutral-light;
     outline-offset: .2rem;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
@@ -30,7 +30,7 @@
     // Reset some table styles
     th {
       font-weight: 500;
-      border-bottom: 1px solid $gray-lighter;
+      border-bottom: 1px solid $au-neutral-light;
     }
 
     th,
@@ -40,15 +40,15 @@
     }
 
     th + th {
-      border-left: 1px solid $gray-lighter;
+      border-left: 1px solid $au-neutral-light;
     }
 
     td + td {
-      border-left: 1px solid $gray-lighter;
+      border-left: 1px solid $au-neutral-light;
     }
 
     tr + tr {
-      border-top: 1px solid $gray-lighter;
+      border-top: 1px solid $au-neutral-light;
     }
 
     // Style links as plain text
@@ -58,7 +58,7 @@
       &:visited,
       &:focus {
         text-decoration: none;
-        color: $gray-dark;
+        color: $au-neutral-darker;
       }
 
       &:focus {

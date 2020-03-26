@@ -7,38 +7,38 @@
 .rdfa-editor {
   /* -------------------- General tags ------------------------- */
 
-	[data-editor-highlight="true"] {
-		background-color: rgba($primary-yellow, 0.9);
+  [data-editor-highlight="true"] {
+    background-color: rgba($primary-yellow, 0.9);
 
-		&:hover {
-			background-color: $primary-yellow;
-		}
-	}
+    &:hover {
+      background-color: $primary-yellow;
+    }
+  }
 
-	[property="ext:behandelt"] [data-editor-highlight="true"] {
-		background-color: rgba($primary-yellow, 0.9);
+  [property="ext:behandelt"] [data-editor-highlight="true"] {
+    background-color: rgba($primary-yellow, 0.9);
 
-		&:before {
-			content: "Selecteer de juiste optie";
-		}
-	}
+    &:before {
+      content: "Selecteer de juiste optie";
+    }
+  }
 
   /// rewind
 
   [typeof="besluit:Zitting"]{
-  	position: relative;
+    position: relative;
 
-  	&:hover {
-  		// background-color: transparent !important;
-  	}
+    &:hover {
+      // background-color: transparent !important;
+    }
   }
 
   [property="ext:behandelt"]:hover {
-  	background-color: transparent !important;
+    background-color: transparent !important;
   }
 
   [typeof="besluit:Zitting"]:before {
-  	content: "Zitting";
+    content: "Zitting";
   }
 
   [datatype="xsd:date"]:before {
@@ -58,7 +58,7 @@
   }
 
   [property="ext:scopedBestuursorgaanText"]:before {
-  	content: "Selecteer het bestuursorgaan";
+    content: "Selecteer het bestuursorgaan";
   }
 
   [typeof="besluit:Bestuursorgaan"]:before {
@@ -98,11 +98,11 @@
 
     /* Aanwezigen en types */
     [property="ext:aanwezigenTable"]:before {
-    	content: "Aanwezigenlijst";
+      content: "Aanwezigenlijst";
     }
 
     [property="ext:insertAanwezigenText"]:before {
-    	content: "Duid aanwezigen aan";
+      content: "Duid aanwezigen aan";
     }
 
     [property="besluit:heeftAanwezigeBijStart"]:before {
@@ -110,7 +110,7 @@
     }
 
     [property="ext:heeftAfwezigeBijStart"]:before {
-    	content: "Afwezige bij start van zitting";
+      content: "Afwezige bij start van zitting";
     }
 
     [typeof="http://www.w3.org/ns/person#Person"][property="besluit:heeftVoorzitter"]:before {
@@ -138,15 +138,15 @@
   /* -------------------- Agendapunt ------------------------- */
 
   [property="ext:agendapuntenTable"]:before {
-  	content: "Agenda";
+    content: "Agenda";
   }
 
   [property="ext:insertAgendaText"]:before {
-  	content: "Beheer agenda";
+    content: "Beheer agenda";
   }
 
   [property="ext:behandelingVanAgendapuntenContainer"]:before {
-  	content: "Behandeling agenda";
+    content: "Behandeling agenda";
   }
 
   [typeof="besluit:Agenda"]:before {
@@ -183,31 +183,31 @@
     content: "Behandeling van agendapunt"
   }
 
-  	[typeof="besluit:Besluit"]:before,
-  	[typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
-  	[typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
-  		content: "Besluit";
-  	}
+    [typeof="besluit:Besluit"]:before,
+    [typeof="besluit:Besluit ext:BesluitKlassiekeStijl"]:before,
+    [typeof="besluit:Besluit ext:BesluitNieuweStijl"]:before {
+      content: "Besluit";
+    }
 
-  	[property="dc:subject"]:before {
-  		content: "Onderwerp";
-  	}
+    [property="dc:subject"]:before {
+      content: "Onderwerp";
+    }
 
-  	[property="besluit:geplandOpenbaar"]:before {
-  		content: "Gepland openbaar";
-  	}
+    [property="besluit:geplandOpenbaar"]:before {
+      content: "Gepland openbaar";
+    }
 
-  	[property="besluit:geplandOpenbaar"][content="false"]:before {
-  		content: "Gepland besloten";
-  	}
+    [property="besluit:geplandOpenbaar"][content="false"]:before {
+      content: "Gepland besloten";
+    }
 
-  	[property="besluit:openbaar"]:before {
-  		content: "Openbare behandeling"
-  	}
+    [property="besluit:openbaar"]:before {
+      content: "Openbare behandeling"
+    }
 
-  	[property="besluit:openbaar"][content="false"]:before {
-  		content: "Besloten behandeling"
-  	}
+    [property="besluit:openbaar"][content="false"]:before {
+      content: "Besloten behandeling"
+    }
 
     [typeof="besluit:BehandelingVanAgendapunt"] [property="besluit:openbaar"] + [property="dc:subject"] + [typeof="besluit:Besluit"]:before {
         content: "\f06e \00A0 \00A0 Open agendapunt";
@@ -235,40 +235,40 @@
       }
 
       [property="ext:bekrachtigdOnverenigbaarheid"]:before {
-      	content: "Onverenigbaarheid";
+        content: "Onverenigbaarheid";
       }
 
       [property="ext:bekrachtigdAfstandVanMandaatDoor"]:before {
-      	content: "Afstand mandaat";
+        content: "Afstand mandaat";
       }
 
       [property="ext:bekrachtigdAfwezigheidMetKennisGeving"]:before {
-      	content: "Afwezig met kennisgeving";
+        content: "Afwezig met kennisgeving";
       }
 
       [property="ext:bekrachtigdAfwezigheid"]:before {
-      	content: "Afwezig zonder kennisgeving";
+        content: "Afwezig zonder kennisgeving";
       }
 
       [typeof="http://www.w3.org/ns/person#Person"]:before {
-      	content: "Persoon";
+        content: "Persoon";
       }
 
       [property="besluit:heeftAanwezigeBijStart"][typeof="http://www.w3.org/ns/person#Person"]:before {
-      	content: "Aanwezige persoon bij start";
+        content: "Aanwezige persoon bij start";
       }
 
       [property="mandaat:isBestuurlijkeAliasVan"]:before {
-      	content: "Mandataris";
+        content: "Mandataris";
       }
 
-      	[property="persoon:gebruikteVoornaam"]:before {
-      		content: "Voornaam";
-      	}
+        [property="persoon:gebruikteVoornaam"]:before {
+          content: "Voornaam";
+        }
 
-      	[property="foaf:familyName"]:before {
-      		content: "Familienaam";
-      	}
+        [property="foaf:familyName"]:before {
+          content: "Familienaam";
+        }
 
       [property="org:holds"]:before {
         content: "Mandaat";
@@ -308,7 +308,7 @@
       // }
 
     [typeof="besluit:Agendapunt"]:before {
-    	content: "Agendapunt";
+      content: "Agendapunt";
     }
 
     [property="dc:title"]:before,
@@ -349,7 +349,7 @@
       }
 
       [typeof="besluit:Artikel"] [property="prov:value"]:before {
-      	content: "Inhoud artikel"
+        content: "Inhoud artikel"
       }
 
       [property="eli:has_part"]:before {
@@ -428,6 +428,6 @@
     }
 
     [property="ext:signatories"]:before {
-    	content: "Ondertekenaars";
+      content: "Ondertekenaars";
     }
 }

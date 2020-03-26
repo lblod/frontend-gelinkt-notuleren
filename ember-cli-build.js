@@ -10,13 +10,19 @@ module.exports = function(defaults) {
     minifyCSS: {
       enabled: false
     },
-		'ember-cli-uglify': {
-			uglify: {
-				compress: {
-					collapse_vars: false
-				}
-			}
-		}
+    'ember-cli-uglify': {
+      uglify: {
+        compress: {
+          collapse_vars: false
+        }
+      }
+    },
+    sassOptions: {
+      includePaths: [
+        'node_modules/@appuniversum/appuniversum',
+        'node_modules/@appuniversum/ember-appuniversum/app/styles',
+      ]
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

@@ -21,6 +21,7 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@appuniversum/ember-appuniversum": "0.0.8",
     "@ember/optional-features": "^1.1.0",
     "@lblod/ember-acmidm-login": "^0.2.1",
     "@lblod/ember-mock-login": "^0.4.5",
@@ -78,6 +79,7 @@
     "ember-cli-template-lint": "^1.0.0-beta.3",
     "ember-cli-uglify": "^3.0.0",
     "ember-cli-update": "^0.34.13",
+    "ember-click-outside": "^1.3.0",
     "ember-composable-helpers": "^2.4.0",
     "ember-concurrency": "^1.1.2",
     "ember-data": "~3.14.0",
