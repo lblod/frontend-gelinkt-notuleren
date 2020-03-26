@@ -5,28 +5,9 @@
 
 .scrollto-highlight {
   animation: bg 2s ease-in;
-  -webkit-animation: bg 2s ease-in;
-  -moz-animation: bg 2s ease-in;
-  -ms-animation: bg 2s ease-in;
-  -o-animation: bg 2s ease-in;
 }
 
-@-webkit-keyframes bg{
-  0%{
-    background: rgba($primary-yellow, 1);
-  }
-  20%{
-        background: rgba($primary-yellow, 0.8);
-  }
-  50%{
-        background: rgba($primary-yellow, 0.5);
-  }
-  100%{
-    background: rgba($primary-yellow, 0);
-  }
-}
-
-@-moz-keyframes bg{
+@keyframes bg{
   0%{
     background: rgba($primary-yellow, 1);
   }

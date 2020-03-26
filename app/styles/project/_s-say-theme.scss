@@ -86,8 +86,8 @@ $say-button-radius               : 0;
 // ---
 // Annotation options
 $say-annotation-width            : $au-unit-huge*3;
-$say-annotation-offset           : $au-unit;
+$say-annotation-offset           : $au-unit-large;
 $say-annotation-gutter           : $au-unit;
-$say-annotation-width-content    : $say-annotation-width - $au-unit-large;
+$say-annotation-width-content    : $say-annotation-width;
 $say-annotation-text-color       : $au-neutral-dark;
 $say-annotation-background-color : $au-neutral-lightest;

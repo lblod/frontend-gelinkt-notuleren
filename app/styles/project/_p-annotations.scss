@@ -3,6 +3,10 @@
   ================================== */
 
 .rdfa-annotations {
+  br {
+    @include say-font-size(.2rem,1);
+  }
+
   [typeof="besluit:Agendapunt"] {
     margin-bottom: $say-unit-small;
   }
@@ -88,13 +92,9 @@
   [property="ext:metadata"] {
     border-bottom: 0 !important;
 
-    &:after,
     &:before,
-    &[data-editor-position-level]:after,
     &[data-editor-position-level]:before,
-    &[data-editor-position-level]:hover:after,
     &[data-editor-position-level]:hover:before,
-    &:hover:after,
     &:hover:before {
       display: none !important;
       content: '' !important;
@@ -108,12 +108,8 @@
     display: inline !important;
     line-height: 1.3 !important;
 
-    &:before {
-      margin-top: 2.4rem !important;
-    }
-
     &:after {
-      margin-top: -3rem !important;
+      margin-top: -2rem !important;
     }
   }
 
@@ -129,7 +125,7 @@
   [property="dc:subject"],
   [typeof="http://data.vlaanderen.be/ns/besluit#Bestuursorgaan"],
   [data-editor-highlight="true"]
-  .mark-highlight-manual {
+  span.mark-highlight-manual {
     display: inline-block !important;
     margin-top: 0;
   }
