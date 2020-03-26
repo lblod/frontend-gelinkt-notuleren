@@ -1,4 +1,17 @@
 <p class="smaller uppercase text-fade">Gepubliceerd door</p>
 <p class="u-spacer--bottom--small">{{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
 
+{{#if submissionSucceeded}}
+	<p class="smaller uppercase text-fade">Melding</p>
+	<p class="">Automatisch gemeld door <br> Voornaam Familienaam <br> {{moment-format signature.createdOn 'L LT'}}</p>
+	<p class="u-spacer--bottom--small text-fade smaller">Bekijk melding op het <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p>
+{{else if submissionFailed}}
+	<p class="smaller uppercase text-fade">Melding</p>
+	<div class="alert alert--error alert--tiny">
+		<div class="alert__title">Automatische melding mislukt</div>
+		<div class="alert__message">
+			<p>Download het document en voltooi de melding via <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p>
+		</div>
+	</div>
+{{/if}}
 <Signatures::BlockchainStatus @model={{signature}} />
