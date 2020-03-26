@@ -1,5 +1,13 @@
 <div class="u-spacer--top">
   <WuTimelineAccordion as |timeline|>
-    <Signatures::Besluitenlijst::TimelineStep @name="besluitenlijst" @step={{timeline.step}} @lijst={{besluitenlijst}} @currentEditorDocument={{model.editorDocument}} @sign={{action "sign" "besluitenlijst"}} @publish={{action "publish" "besluitenlijst"}} @isOpen={{true}} />
+    <Signatures::Besluitenlijst::TimelineStep
+      @name="besluitenlijst"
+      @step={{timeline.step}}
+      @lijst={{besluitenlijst}}
+      @currentEditorDocument={{model.editorDocument}}
+      @signing={{action "sign" "besluitenlijst"}}
+      @publish={{action "publish" "besluitenlijst"}}
+      @isOpen={{true}}
+    />
   </WuTimelineAccordion>
 </div>

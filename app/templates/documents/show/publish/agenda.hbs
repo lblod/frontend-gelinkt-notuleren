@@ -1,9 +1,31 @@
 <div class="u-spacer--top">
   <WuTimelineAccordion as |timeline|>
-    <Signatures::Agenda::TimelineStep @name="ontwerpagenda" @step={{timeline.step}} @agenda={{ontwerpAgenda}} @currentEditorDocument={{model.editorDocument}} @sign={{action "sign" "ontwerpagenda"}} @publish={{action "publish" "ontwerpagenda"}} />
+    <Signatures::Agenda::TimelineStep
+      @name="ontwerpagenda"
+      @step={{timeline.step}}
+      @agenda={{ontwerpAgenda}}
+      @currentEditorDocument={{model.editorDocument}}
+      @signing={{action "sign" "ontwerpagenda"}}
+      @publish={{action "publish" "ontwerpagenda"}}
+    />
 
-    <Signatures::Agenda::TimelineStep @name="aanvullende agenda" @step={{timeline.step}} @agenda={{aanvullendeAgenda}} @currentEditorDocument={{model.editorDocument}} @agendaKind="aanvullende agenda" @sign={{action "sign" "aanvullendeagenda"}} @publish={{action "publish" "aanvullendeagenda"}} />
+    <Signatures::Agenda::TimelineStep
+      @name="aanvullende agenda"
+      @step={{timeline.step}}
+      @agenda={{aanvullendeAgenda}}
+      @currentEditorDocument={{model.editorDocument}}
+      @agendaKind="aanvullende agenda"
+      @signing={{action "sign" "aanvullendeagenda"}}
+      @publish={{action "publish" "aanvullendeagenda"}}
+    />
 
-    <Signatures::Agenda::TimelineStep @name="spoedeisende agenda" @step={{timeline.step}} @agenda={{spoedeisendeAgenda}} @currentEditorDocument={{model.editorDocument}} @sign={{action "sign" "spoedeisendeagenda"}} @publish={{action "publish" "spoedeisendeagenda"}} />
+    <Signatures::Agenda::TimelineStep
+      @name="spoedeisende agenda"
+      @step={{timeline.step}}
+      @agenda={{spoedeisendeAgenda}}
+      @currentEditorDocument={{model.editorDocument}}
+      @signing={{action "sign" "spoedeisendeagenda"}}
+      @publish={{action "publish" "spoedeisendeagenda"}}
+    />
   </WuTimelineAccordion>
 </div>

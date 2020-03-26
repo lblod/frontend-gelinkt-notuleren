@@ -1,7 +1,14 @@
 <div class="u-spacer--top">
   <WuTimelineAccordion as |timeline|>
     {{#each behandelingen as |behandeling|}}
-      <Signatures::Behandeling::TimelineStep @name="besluit" @step={{timeline.step}} @behandeling={{behandeling}} @sign={{action "sign" behandeling.uri}} @publish={{action "publish" behandeling.uri}} @print={{action "print"}} />
+      <Signatures::Behandeling::TimelineStep
+        @name="besluit"
+        @step={{timeline.step}}
+        @behandeling={{behandeling}}
+        @signing={{action "signing" behandeling.uri}}
+        @publish={{action "publish" behandeling.uri}}
+        @print={{action "print"}}
+      />
     {{/each}}
   </WuTimelineAccordion>
 </div>
