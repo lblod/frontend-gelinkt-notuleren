@@ -64,6 +64,14 @@
     content: "Tijdstip einde zitting";
   }
 
+  [property="prov:atLocation"]:before {
+    content: "Locatie";
+  }
+
+  [property="dc:description"]:before {
+    content: "Omschrijving";
+  }
+
   [property="http://data.vlaanderen.be/ns/besluit#isGehoudenDoor"]:before {
     content: "Bestuursorgaan";
   }

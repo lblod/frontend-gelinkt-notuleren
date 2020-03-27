@@ -140,7 +140,8 @@
   // Define block elements
   .h4[property="dc:subject"],
   [typeof="besluit:Agendapunt"],
-  [typeof="besluit:Besluit ext:BesluitNieuweStijl"] {
+  [typeof="besluit:Besluit ext:BesluitNieuweStijl"],
+  [property="ext:agendapuntenTable"] {
     position: relative !important;
     display: block !important;
 
@@ -150,9 +151,18 @@
     }
   }
 
+  // Format agenda points
+  [property="ext:agendapuntenTable"] {
+    [property="besluit:geplandOpenbaar"]:before,
+    [property="dc:subject"]:before {
+      margin-top: $au-unit - $au-unit-tiny/2;
+    }
+  }
+
   // Format members block
   [property="besluit:heeftAanwezigeBijStart"],
-  [property="ext:heeftAfwezigeBijStart"] {
+  [property="ext:heeftAfwezigeBijStart"],
+  [property="besluit:heeftAanwezige"] {
     &:hover:before {
       z-index: $au-z-index-gamma;
     }
