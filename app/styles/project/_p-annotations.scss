@@ -3,8 +3,14 @@
   ================================== */
 
 .rdfa-annotations {
-  br {
-    @include say-font-size(.2rem,1);
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6,
+  [property="dc:title"] {
+    margin-bottom: 0;
   }
 
   [typeof="besluit:Agendapunt"] {
@@ -141,5 +147,61 @@
       height: calc(100% - #{$say-unit});
       top: $say-unit;
     }
+  }
+
+  // Format members block
+  [property="besluit:heeftAanwezigeBijStart"],
+  [property="ext:heeftAfwezigeBijStart"] {
+    &:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+
+    [property="mandaat:isBestuurlijkeAliasVan"]:before {
+      margin-top: $au-unit - $au-unit-tiny/2;
+    }
+
+    [property="mandaat:isBestuurlijkeAliasVan"]:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:before,
+    [property="foaf:familyName"]:before {
+      margin-top: $au-unit * 2 - $au-unit-tiny - $au-unit-tiny/2;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:hover:before,
+    [property="foaf:familyName"]:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+  }
+
+  [property="besluit:heeftVoorzitter"],
+  [property="ext:secretarisTemporaryAsText"] {
+    &:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:before,
+    [property="foaf:familyName"]:before {
+      margin-top: $au-unit - $au-unit-tiny/2;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:hover:before,
+    [property="foaf:familyName"]:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+  }
+
+  // Vul in
+  span.mark-highlight-manual:before,
+  span.mark-highlight-manual:hover:before {
+    width: auto;
+    padding-left: $au-unit-tiny/2;
+    padding-right: $au-unit-tiny;
+    color: $au-orange-dark;
+    background: $au-orange-lighter;
+    z-index: 5;
+    border: 1px solid $au-orange-light !important;
+    margin-right: -$au-unit;
   }
 }
