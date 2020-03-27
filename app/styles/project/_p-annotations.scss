@@ -66,6 +66,7 @@
     &:after {
       @include say-font-size($say-tiny,1.2);
       font-family: $say-font;
+      font-style: italic;
       letter-spacing: .01rem;
       color: $say-neutral;
       pointer-events: none;
@@ -85,7 +86,7 @@
 
   // Add help text on highlights
   .mark-highlight-manual:after,
-  [data-editor-highlight="true"]:after {
+  [data-editor-highlight="true"]:not([contenteditable=""]):after {
     content: "Actie vereist";
   }
 }
