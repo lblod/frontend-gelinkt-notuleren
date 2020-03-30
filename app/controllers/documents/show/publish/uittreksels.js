@@ -59,7 +59,7 @@ export default Controller.extend({
      * We should have support for removing the old signature of an
      * uittreksel but haven't implemented this so far.
      */
-    async sign(behandeling, documentId) {
+    async signing(behandeling, documentId) {
       const encodedUri = encodeURIComponent(encodeURIComponent(behandeling)); // TODO need to double encode, figure out why
       await this.ajax.post(`/signing/behandeling/sign/${documentId}/${encodedUri}`);
       await this.reload.perform(behandeling, documentId);

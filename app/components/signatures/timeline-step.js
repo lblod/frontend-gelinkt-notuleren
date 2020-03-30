@@ -17,7 +17,7 @@ export default Component.extend({
   /** Preview of versioned document together with current document id */
   mockDocument: null,
   /** Function to trigger the signing of the document */
-  sign: null,
+  signing: null,
   /** Function to trigger the publication of the document */
   publish: null,
   /** Function to trigger the printing of the document */
@@ -40,6 +40,7 @@ export default Component.extend({
       firstSignatureUser = await signedResources.get('firstObject').get('gebruiker');
     }
     this.set('isSignedByCurrentUser', currentUser == firstSignatureUser);
+
   },
 
   title: computed('name', function(){
@@ -99,15 +100,11 @@ export default Component.extend({
   signDocument: task(function* (signedId){
     this.set('showSigningModal', false);
     this.set('isSignedByCurrentUser', true);
-    yield this.sign(signedId);
+    yield this.signing(signedId);
   }),
 
   publishDocument: task(function* (signedId){
     this.set('showPublishingModal', false);
     yield this.publish(signedId);
-  }),
-
-  actions: {
-
-  }
+  })
 });
