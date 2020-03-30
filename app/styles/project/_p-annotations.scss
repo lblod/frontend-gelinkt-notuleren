@@ -202,21 +202,4 @@
       z-index: $au-z-index-gamma;
     }
   }
-
-  // Vul in
-  span.mark-highlight-manual:before,
-  span.mark-highlight-manual:hover:before {
-    display: inline;
-    width: auto;
-    padding-top: $au-unit-tiny/2;
-    line-height: 1;
-    padding-bottom: $au-unit-tiny/2;
-    padding-left: $au-unit-tiny/2;
-    padding-right: $au-unit-tiny;
-    color: $au-orange-dark;
-    background: $au-orange-lighter;
-    z-index: 5;
-    border: 1px solid $au-orange-light !important;
-    margin-right: -$au-unit;
-  }
 }
