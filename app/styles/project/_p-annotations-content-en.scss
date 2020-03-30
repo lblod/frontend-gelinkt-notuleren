@@ -11,7 +11,9 @@
 [data--language="en"] .rdfa-annotations [property],
 [data--language="en"] .rdfa-annotations [typeof]:not([typeof="foaf:Document"]),
 [data--language="en"] .rdfa-annotations [data-type],
-[data--language="en"] .rdfa-annotations .mark-highlight-manual {
+[data--language="en"] .rdfa-annotations .mark-highlight-manual,
+[data--language="en"] .rdfa-annotations.show-rdfa-blocks,
+[data--language="en"] .rdfa-annotations:not(.show-rdfa-blocks) {
   /* -------------------- Guiding tags ------------------------- */
 
   [property^="ext:insert"]:before,

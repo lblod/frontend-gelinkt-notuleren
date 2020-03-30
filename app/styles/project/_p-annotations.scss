@@ -82,6 +82,13 @@
       background-color: transparent;
       opacity: 1;
     }
+
+    [data-flagged-remove="complete"][data-editor-position-level="0"],
+    [data-flagged-remove="complete"] {
+      &:after {
+        content: "Vul in:" attr(property) " " attr(typeof) " " attr(data-type);
+      }
+    }
   }
 
   // Add help text on highlights
@@ -89,6 +96,8 @@
   [data-editor-highlight="true"]:not([contenteditable=""]):after {
     content: "Actie vereist";
   }
+
+
 }
 
 // Hover annotation

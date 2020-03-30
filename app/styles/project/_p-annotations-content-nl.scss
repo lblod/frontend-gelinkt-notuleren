@@ -6,7 +6,9 @@
 .rdfa-annotations [property],
 .rdfa-annotations [typeof]:not([typeof="foaf:Document"]),
 .rdfa-annotations [data-type],
-.rdfa-annotations .mark-highlight-manual {
+.rdfa-annotations .mark-highlight-manual,
+.rdfa-annotations.show-rdfa-blocks,
+.rdfa-annotations:not(.show-rdfa-blocks) {
   /* -------------------- Guiding tags ------------------------- */
   [property^="ext:insert"]:before,
   [data-editor-highlight="true"]:before {
@@ -764,5 +766,9 @@
   [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"]::before,
   [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"]:hover::before {
     content: "Geïmporteerde data – niet aanpasbaar";
+  }
+
+  [property="http://lblod.data.gift/vocabularies/editor/isLumpNode"][data-flagged-remove="complete"]:before {
+    content: "Wil je deze blok verwijderen? Druk op backspace om te bevestigen.";
   }
 }
