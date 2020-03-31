@@ -83,14 +83,20 @@
 	        </div>
 	      {{else}}
 				  <div class="col--9-12">
-	          <WuButton @label={{concat "Publiceer en meld " name}} @class="u-spacer--bottom--small" @onClick={{action (mut showPublishingModal) true}} @isNarrow={{true}} @isLoading={{publishDocument.isRunning}} @disabled={{or (not currentSession.canPublish) publishDocument.isRunning}} />
+						{{#if isAgenda}}
+							<WuButton @label={{concat "Publiceer " name}} @class="u-spacer--bottom--small" @onClick={{action (mut showPublishingModal) true}} @isNarrow={{true}} @isLoading={{publishDocument.isRunning}} @disabled={{or (not currentSession.canPublish) publishDocument.isRunning}} />
+						{{else}}
+							<WuButton @label={{concat "Publiceer en meld " name}} @class="u-spacer--bottom--small" @onClick={{action (mut showPublishingModal) true}} @isNarrow={{true}} @isLoading={{publishDocument.isRunning}} @disabled={{or (not currentSession.canPublish) publishDocument.isRunning}} />
+						{{/if}}
 
 	          <p class="smaller uppercase text-fade">Gevolgen publicatie</p>
 	          <p class="small u-spacer--bottom--small">Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>, en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie.</p>
 
-	          <p class="smaller uppercase text-fade">Gevolgen melding</p>
-	          <p class="small u-spacer--bottom--small">Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p>
-	        </div>
+						{{#unless isAgenda}}
+							<p class="smaller uppercase text-fade">Gevolgen melding</p>
+							<p class="small u-spacer--bottom--small">Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p>
+						{{/unless}}
+					</div>
 	      {{/if}}
 	      {{#if showPublishingModal}}
 	        <Signatures::PublicationConfirmation @name={{name}} @mockDocument={{mockDocument}} @confirm={{perform publishDocument mockDocument.signedId}} @cancel={{action (mut showPublishingModal) false}} />

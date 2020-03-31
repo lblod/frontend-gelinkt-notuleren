@@ -29,6 +29,9 @@ export default Component.extend({
   signaturesCount: alias('document.signedResources.length'),
   isPublished: notEmpty('document.publishedResource.id'),
   isSignedByCurrentUser: true,
+  isAgenda: computed('name', function() {
+    return (this.name == 'ontwerpagenda') || (this.name == 'aanvullende agenda') || (this.name == 'spoedeisende agenda')
+  }),
 
   async init() {
     this._super(...arguments);
