@@ -1,0 +1,48 @@
+/* ==================================
+   #RDFA EDITOR
+   ================================== */
+
+// Contain height of editor
+.au-c-rdfa-editor {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+// Hide metadata
+.au-c-rdfa-editor {
+  [property="heeftNotulen"],
+  [property="ext:metadata"] {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+  }
+}
+
+.au-c-rdfa-scanner {
+  padding: $au-unit;
+  margin: $au-unit;
+  box-shadow: 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
+
+  *:before {
+    display: none;
+  }
+}
+
+.au-c-rdfa-publication {
+  padding: $au-unit $au-unit-large - $au-unit-tiny/2 $au-unit $au-unit;
+  margin-left: $au-unit;
+  margin-bottom: $au-unit;
+  box-shadow: 0 1px 3px rgba($au-neutral-darkest, .2), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
+
+  *:before {
+    display: none;
+  }
+}

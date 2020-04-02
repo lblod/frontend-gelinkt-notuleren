@@ -18,10 +18,16 @@ module.exports = function(defaults) {
       }
     },
     sassOptions: {
+      sourceMapEmbed: true,
       includePaths: [
         'node_modules/@appuniversum/appuniversum',
-        'node_modules/@appuniversum/ember-appuniversum/app/styles',
+        'node_modules/@appuniversum/ember-appuniversum/app/styles'
       ]
+    },
+    autoprefixer: {
+      enabled: true,
+      cascade: true,
+      sourcemap: true
     }
   });
 

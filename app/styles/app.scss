@@ -31,6 +31,7 @@
 
 // PROJECT SPECIFIC VARIABLES
 @import "project/s-global";
+@import "project/s-say-theme";
 
 
 // MIXINS
@@ -66,20 +67,17 @@
 
 
 // COMPONENTS (DEPRECATED)
-@import 'deprecated/annotations-styles';
-@import 'deprecated/annotations-hover';
-@import 'deprecated/annotations-flag-remove';
-@import 'deprecated/annotations-show';
-@import 'deprecated/annotations-content';
 @import 'deprecated/published-documents';
 @import 'deprecated/sign-publish-flow';
 @import 'deprecated/scrollto';
-@import 'deprecated/annotation-suggestion-modals';
-@import 'deprecated/editor';
 @import 'deprecated/loading-events';
 @import 'deprecated/tasklist';
-@import 'deprecated/toolbar';
 @import 'deprecated/wizard';
+
+
+// PROJECT COMPONENTS
+@import 'project/c-editor-chrome';
+@import 'project/c-rdfa-editor';
 
 
 // COMPONENTS
@@ -97,6 +95,13 @@
 
 // PROJECT COMPONENTS (TO BE PORTED TO APPUNIVERSUM)
 @import "project/c-main-container";
+
+
+// PLUGINS
+@import "ember-rdfa-editor";
+@import "project/p-annotations";
+@import "project/p-annotations-content-nl";
+@import "project/p-annotations-content-en";
 
 
 // UTILITIES (DEPRECATED)

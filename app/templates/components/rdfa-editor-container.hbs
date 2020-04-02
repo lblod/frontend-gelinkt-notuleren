@@ -2,9 +2,7 @@
 <button {{action "launchItAll" true}}>Visualiseer structuur</button>
 <button {{action "launchItAll" false}}>Visualiseer graph</button> --}}
 <EditorDocumentTasklist @editorDocument={{editorDocument}} @onUpdateTasklists={{action "updateTasklists"}} />
-<ToggleRdfaBlock class="rdfa-annotations container-flex--contain ember-view">
-  {{#if rdfaEditorContainerReady}}
-    {{rdfa/rdfa-editor class="rdfa-editor" profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit") }}
-  {{/if}}
-</ToggleRdfaBlock>
+{{#if rdfaEditorContainerReady}}
+  {{rdfa/rdfa-editor class="au-c-rdfa-editor" profile=profile value=editorDocument.content rdfaEditorInit=(action "handleRdfaEditorInit") editorOptions=(hash showToggleRdfaAnnotations="true" showInsertButton="true" showRdfa="true" showRdfaHighlight="true" showRdfaHover="true") toolbarOptions=(hash showTextStyleButtons="true" showListButtons="true" showIndentButtons="true") }}
+{{/if}}
 {{yield}}

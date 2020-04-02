@@ -1,0 +1,214 @@
+/* ==================================
+  #SAY ANNOTATIONS
+  ================================== */
+
+.rdfa-annotations {
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6,
+  [property="dc:title"] {
+    margin-bottom: 0;
+  }
+
+  [typeof="besluit:Agendapunt"] {
+    margin-bottom: $say-unit-small;
+  }
+
+  // Hide superfluous annotated fields
+  [property="heeftNotulen"],
+  [property="ext:metadata"],
+  [property="besluit:gebeurtNa"],
+  [property="besluit:aangebrachtNa"],
+  [property="eli:language"], // these three are metadata relevant to the document
+  [typeof="ext:TasklistData"],
+  [class="ext_scroll_to"],
+  [property="ext:variableState"],
+  [property="ext:idInSnippet"],
+  [property="ext:intentionUri"],
+  [typeof="ext:Variable"] {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
+  }
+
+  // Display roadsign details
+  [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"] {
+    [typeof="mobiliteit:Opstelling"] {
+      display: none;
+    }
+  }
+}
+
+// Show rdfa blocks
+.rdfa-annotations.show-rdfa-blocks {
+  [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"] {
+    [typeof="mobiliteit:Opstelling"] {
+      display: block !important;
+    }
+  }
+
+  [data-editor-highlight="true"],
+  [property],
+  [typeof]:not([typeof="foaf:Document"]),
+  [data-type],
+  .mark-highlight-manual {
+    // Style annotation blocks
+    &:after {
+      @include say-font-size($say-tiny,1.2);
+      font-family: $say-font;
+      font-style: italic;
+      letter-spacing: .01rem;
+      color: $say-neutral;
+      pointer-events: none;
+      content: attr(property) " " attr(typeof) " " attr(data-type);
+      position: relative;
+      right: auto;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      padding: $say-unit-tiny/2;
+      transition: none;
+      background-color: transparent;
+      opacity: 1;
+    }
+
+    [data-flagged-remove="complete"][data-editor-position-level="0"],
+    [data-flagged-remove="complete"] {
+      &:after {
+        content: "Vul in:" attr(property) " " attr(typeof) " " attr(data-type);
+      }
+    }
+  }
+
+  // Add help text on highlights
+  .mark-highlight-manual:after,
+  [data-editor-highlight="true"]:not([contenteditable=""]):after {
+    content: "Actie vereist";
+  }
+
+
+}
+
+// Hover annotation
+.rdfa-annotations-hover:not(.show-rdfa-blocks) {
+  // Hide superfluous annotations
+  [typeof="besluit:Zitting"],
+  [typeof="foaf:Document"],
+  [property="ext:metadata"] {
+    border-bottom: 0 !important;
+
+    &:before,
+    &[data-editor-position-level]:before,
+    &[data-editor-position-level]:hover:before,
+    &:hover:before {
+      display: none !important;
+      content: '' !important;
+      display: none !important;
+      opacity: 0 !important;
+    }
+  }
+
+  // Fix H1 spans > DIRTY FIX > @TODO: find something more elegant
+  [property="dc:title"] span {
+    display: inline !important;
+    line-height: 1.3 !important;
+
+    &:after {
+      margin-top: -2rem !important;
+    }
+  }
+
+  // Define inline block elements
+  [property="besluit:geplandeStart"],
+  [property="prov:atLocation"],
+  [property="prov:startedAtTime"],
+  [property="prov:endedAtTime"],
+  [property="persoon:gebruikteVoornaam"],
+  [property="foaf:familyName"],
+  [typeof="http://data.vlaanderen.be/ns/mandaat#Mandataris"],
+  [property="besluit:geplandOpenbaar"],
+  [property="dc:subject"],
+  [typeof="http://data.vlaanderen.be/ns/besluit#Bestuursorgaan"],
+  [data-editor-highlight="true"]
+  span.mark-highlight-manual {
+    display: inline-block !important;
+    margin-top: 0;
+  }
+
+  // Define block elements
+  .h4[property="dc:subject"],
+  [typeof="besluit:Agendapunt"],
+  [typeof="besluit:Besluit ext:BesluitNieuweStijl"],
+  [property="ext:agendapuntenTable"] {
+    position: relative !important;
+    display: block !important;
+
+    &:after {
+      height: calc(100% - #{$say-unit});
+      top: $say-unit;
+    }
+  }
+
+  // Format agenda points
+  [property="ext:agendapuntenTable"] {
+    [property="besluit:geplandOpenbaar"]:before,
+    [property="dc:subject"]:before {
+      margin-top: $au-unit - $au-unit-tiny/2;
+    }
+  }
+
+  // Format members block
+  [property="besluit:heeftAanwezigeBijStart"],
+  [property="ext:heeftAfwezigeBijStart"],
+  [property="besluit:heeftAanwezige"] {
+    &:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+
+    [property="mandaat:isBestuurlijkeAliasVan"]:before {
+      margin-top: $au-unit - $au-unit-tiny/2;
+    }
+
+    [property="mandaat:isBestuurlijkeAliasVan"]:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:before,
+    [property="foaf:familyName"]:before {
+      margin-top: $au-unit * 2 - $au-unit-tiny - $au-unit-tiny/2;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:hover:before,
+    [property="foaf:familyName"]:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+  }
+
+  [property="besluit:heeftVoorzitter"],
+  [property="ext:secretarisTemporaryAsText"] {
+    &:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:before,
+    [property="foaf:familyName"]:before {
+      margin-top: $au-unit - $au-unit-tiny/2;
+    }
+
+    [property="persoon:gebruikteVoornaam"]:hover:before,
+    [property="foaf:familyName"]:hover:before {
+      z-index: $au-z-index-gamma;
+    }
+  }
+}
