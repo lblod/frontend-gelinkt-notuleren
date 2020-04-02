@@ -11,8 +11,18 @@
   position: relative;
   pointer-events: none;
 
+  .badge {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .loader:before {
+    display: block;
+  }
+
   &:after {
     content: "";
+    display: block;
     left: 0;
     right: 0;
     top: 0;
@@ -30,6 +40,10 @@
     padding-top: 20rem;
     text-align: center;
     z-index: 10;
+
+    h3 {
+      margin-top: 0;
+    }
   }
 
   .scanner__bar {
@@ -42,6 +56,7 @@
     animation: move 3s cubic-bezier(0.15, 0.44, 0.76, 0.64);
     animation-iteration-count: infinite;
     border-right: 1rem $primary-yellow solid;
+    margin-top: 0;
   }
 }
 
