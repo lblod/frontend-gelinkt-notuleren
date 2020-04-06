@@ -14,7 +14,8 @@ export default Route.extend(DataTableRouteMixin, {
   mergeQueryOptions(params) {
     const query = {
       include: 'status,current-version',
-      'filter[status][:id:]': 'c02542af-e6be-4cc6-be60-4530477109fc' // actief
+      'filter[status][:id:]': 'c02542af-e6be-4cc6-be60-4530477109fc', // actief
+      'filter[folder][:id:]': '0239c9f9-d7eb-48d2-8195-00d2c281206b' // meeting minutes
     };
 
     if (params.title && params.title.length > 0)
