@@ -73,4 +73,9 @@ Router.map(function() {
     this.route('demo-2');
     this.route('demo-3');
   });
+
+  this.route('draft-decisions', function() {
+    this.route('new');
+    this.route('edit', { path: '/:id/edit' });
+  });
 });

@@ -7,7 +7,8 @@ export default Route.extend({
     return RSVP.hash({
       documentContainer: container,
       editorDocument: container.get('currentVersion'),
-      editorDocumentStatuses: this.store.findAll('editor-document-status')
+      editorDocumentStatuses: this.store.findAll('editor-document-status'),
+      editorDocumentFolders: this.store.findAll('editor-document-folder')
     });
   },
 

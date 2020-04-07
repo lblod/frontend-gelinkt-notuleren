@@ -14,7 +14,7 @@ export default Route.extend(DataTableRouteMixin, {
   mergeQueryOptions(params) {
     const query = {
       include: 'status,current-version',
-      'filter[folder][:id:]': 'ae5feaed-7b70-4533-9417-10fbbc480a4c' // draft decisions
+      'filter[folder][:id:]': 'ae5feaed-7b70-4533-9417-10fbbc480a4c' // decision drafts
     };
 
     if (params.title && params.title.length > 0)
