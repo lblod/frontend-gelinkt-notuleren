@@ -22,6 +22,7 @@ Router.map(function() {
     this.route('trash');
     this.route('imported');
     this.route('ontwerpbesluiten');
+    this.route('draft-decisions');
   });
   this.route('mock-login');
   this.route('login');

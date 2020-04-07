@@ -1,0 +1,47 @@
+<DataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage="Geen documenten" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |t|>
+  <t.menu as |menu|>
+    <menu.general>
+      <div class="u-padding--round--tiny">
+        <div class="grid">
+          <div class="col--5-12 u-wide-on-print">
+            <h1 class="h4 u-spacer--tiny">Ontwerpbesluiten</h1>
+            <TextSearch @filter={{this.title}} @placeholder="Zoek titel ontwerpbesluit" />
+          </div>
+          <div class="col--7-12">
+{{!--             <div class="u-align-right">
+              <LinkTo @route="ontwerpbesluiten-documents.demo-1-b" class="button button--link button--link--dark">Ontwerp invoegen kort</LinkTo>
+              <LinkTo @route="ontwerpbesluiten-documents.demo-1-a" class="button button--link button--link--dark">Ontwerp invoegen tussenstap</LinkTo>
+              <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
+              <LinkTo @route="ontwerpbesluiten-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
+            </div> --}}
+          </div>
+        </div>
+      </div>
+    </menu.general>
+  </t.menu>
+  <t.content as |c|>
+    <c.header>
+      <ThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label="Titel notulen" @class="data-table__header-title" />
+      <ThSortable @field="currentVersion.createdOn" @currentSorting={{this.sort}} @label="Aangemaakt" @class="data-table__header-title" />
+      <ThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label="Aangepast" @class="data-table__header-title" />
+      <ThSortable @field="status" @currentSorting={{this.sort}} @label="Status" @class="data-table__header-title u-align-right" />
+    </c.header>
+    <c.body as |container|>
+      {{#with container.currentVersion as |row|}}
+      <td><LinkTo @route="editor-documents.edit" @model={{container.id}}>{{row.title}}</LinkTo></td>
+      <td>
+      	{{moment-calendar row.createdOn}}
+      	<br>
+      	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
+      </td>
+      <td>
+      	{{moment-calendar row.updatedOn}}
+      	<br>
+      	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
+      </td>
+      <td class="u-align-right"><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
+      </td>
+      {{/with}}
+    </c.body>
+  </t.content>
+</DataTable>
