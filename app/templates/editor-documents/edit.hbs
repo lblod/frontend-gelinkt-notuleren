@@ -65,7 +65,7 @@
   </div>
 </div>
 {{else}}
-  <RdfaEditorContainer @profile={{profile}} @editorDocument={{editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} />
+  <RdfaEditorContainer @profile={{profile}} @editorDocument={{editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} @typeOfWrappingDiv="foaf:Document" />
 {{/if}}
 
 {{outlet}}
