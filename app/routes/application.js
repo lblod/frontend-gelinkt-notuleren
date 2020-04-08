@@ -15,7 +15,7 @@ export default Route.extend(ApplicationRouteMixin, {
     this.moment.setTimeZone('Europe/Brussels');
     this.moment.setLocale('nl');
     const userLocale = ( navigator.language || navigator.languages[0] )
-    this.intl.setLocale([userLocale]);
+    this.intl.setLocale([userLocale, 'en-us']);
     this.updateFeatureFlags(transition.to.queryParams);
     return this.loadCurrentSession();
   },
