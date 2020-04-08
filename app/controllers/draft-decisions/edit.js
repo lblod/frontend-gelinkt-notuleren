@@ -24,7 +24,7 @@ export default Controller.extend(EditorDocumentBaseController, {
 
   actions: {
     handleRdfaEditorInit(editor){
-       this.set('editor', editor);
+      this.set('editor', editor);
     },
 
     async exportHtml() {
@@ -43,6 +43,20 @@ export default Controller.extend(EditorDocumentBaseController, {
 
     cancelSyncModal() {
       this.set('syncModalDisplay', false);
+    },
+
+    download() {
+      const doc = this.editor.htmlContent
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(doc));
+      element.setAttribute('download', 'document.html');
+
+      element.style.display = 'none';
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
     }
   }
 });
