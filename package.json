@@ -29,7 +29,7 @@
     "@glimmer/tracking": "^1.0.0",
     "@lblod/ember-acmidm-login": "^0.2.1",
     "@lblod/ember-mock-login": "^0.4.5",
-    "@lblod/ember-rdfa-editor": "^0.36.0",
+    "@lblod/ember-rdfa-editor": "^0.36.2",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "0.5.1",
     "@lblod/ember-rdfa-editor-agenda-plugin": "0.5.1",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.1.6",
