@@ -4,11 +4,11 @@ import { task } from 'ember-concurrency';
 import { computed } from '@ember/object';
 
 export default Controller.extend(EditorDocumentBaseController, {
-  hasPerformedSaveAndTransitionToEditModeTask: computed('isTransitioningToEditRoute.performCount', function(){
+  hasPerformedSaveAndTransitionToEditModeTask: computed('isTransitioningToEditRoute.performCount', function() {
     return this.saveAndTransitionToEditMode.performCount > 0;
   }),
 
-  saveAndTransitionToEditMode: task(function * (){
+  saveAndTransitionToEditMode: task(function * () {
      let editorDocument = this.editorDocument;
      if(this.hasDocumentValidationErrors(editorDocument)){
        this.set('validationErrors', true);
@@ -20,10 +20,12 @@ export default Controller.extend(EditorDocumentBaseController, {
   }),
 
   actions: {
-    handleRdfaEditorInit(editor){
+    handleRdfaEditorInit(editor) {
+      editor.setHtmlContent('Voeg sjabloon in voor besluit of vrij tekstveld (bijvoorbeeld voor een vraag, antwoord of tussenkomst)');
       this.set('editor', editor);
     },
-    save(){
+
+    save() {
       this.saveAndTransitionToEditMode.perform();
     }
   }
