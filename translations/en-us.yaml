@@ -1,0 +1,9 @@
+inbox:
+  draftDecisions:
+    pageTitle: Draft decisions
+    searchPlaceholder: Type the title of a draft decision
+    noDataMessage: No documents
+    titleLabel: Document title
+    createdOnLabel: Created
+    updatedOnLabel: Modified
+    statusLabel: Status

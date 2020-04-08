@@ -1,11 +1,11 @@
-<DataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage="Geen documenten" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |t|>
-  <t.menu as |menu|>
+<DataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.draftDecisions.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
+  <table.menu as |menu|>
     <menu.general>
       <div class="u-padding--round--tiny">
         <div class="grid">
           <div class="col--5-12 u-wide-on-print">
-            <h1 class="h4 u-spacer--tiny">Ontwerpbesluiten</h1>
-            <TextSearch @filter={{this.title}} @placeholder="Zoek titel ontwerpbesluit" />
+            <h1 class="h4 u-spacer--tiny">{{t 'inbox.draftDecisions.pageTitle'}}</h1>
+            <TextSearch @filter={{this.title}} @placeholder={{t 'inbox.draftDecisions.searchPlaceholder'}} />
           </div>
           <div class="col--7-12">
             <div class="u-align-right">
@@ -18,13 +18,13 @@
         </div>
       </div>
     </menu.general>
-  </t.menu>
-  <t.content as |c|>
+  </table.menu>
+  <table.content as |c|>
     <c.header>
-      <ThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label="Titel notulen" @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.createdOn" @currentSorting={{this.sort}} @label="Aangemaakt" @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label="Aangepast" @class="data-table__header-title" />
-      <ThSortable @field="status" @currentSorting={{this.sort}} @label="Status" @class="data-table__header-title u-align-right" />
+      <ThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.titleLabel'}} @class="data-table__header-title" />
+      <ThSortable @field="currentVersion.createdOn" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.createdOnLabel'}} @class="data-table__header-title" />
+      <ThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.updatedOnLabel'}} @class="data-table__header-title" />
+      <ThSortable @field="status" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.statusLabel'}} @class="data-table__header-title u-align-right" />
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
@@ -43,5 +43,5 @@
       </td>
       {{/with}}
     </c.body>
-  </t.content>
+  </table.content>
 </DataTable>
