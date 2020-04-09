@@ -19,7 +19,6 @@ export default Controller.extend(EditorDocumentBaseController, {
 
   generateDocumentToDownload() {
     const context = JSON.parse(this.editorDocument.context)
-    console.log(context)
     let prefixes = Object.entries(context.prefix).map(([key, value]) => {
       return `${key}: ${value}`
     }).join(' ')
