@@ -17,6 +17,20 @@ export default Controller.extend(EditorDocumentBaseController, {
     return savedDoc;
   }),
 
+  generateDocumentToDownload() {
+    const context = JSON.parse(this.editorDocument.context)
+    console.log(context)
+    let prefixes = Object.entries(context.prefix).map(([key, value]) => {
+      return `${key}: ${value}`
+    }).join(' ')
+    const document = `
+      <div vocab="${context.vocab}" prefix="${prefixes}" typeof="foaf:Document" resource="#">
+        ${this.editor.htmlContent}
+      </div>
+    `
+    return document
+  },
+
   actions: {
     handleRdfaEditorInit(editor){
       this.set('editor', editor);
@@ -31,11 +45,14 @@ export default Controller.extend(EditorDocumentBaseController, {
       this.set('syncModalDisplay', false);
     },
 
+    
+
     download() {
-      const doc = this.editor.htmlContent
+      const doc = this.generateDocumentToDownload()
+      const title = this.editorDocument.title
       var element = document.createElement('a');
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(doc));
-      element.setAttribute('download', 'document.html');
+      element.setAttribute('download', `${title}.html`);
 
       element.style.display = 'none';
       document.body.appendChild(element);
