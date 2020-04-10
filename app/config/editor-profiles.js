@@ -18,7 +18,8 @@ export default {
     "rdfa-editor-agenda-plugin",
     "rdfa-editor-import-snippet-plugin",
     "rdfa-editor-roadsign-hint-plugin",
-    "rdfa-editor-besluit-type-plugin"
+    "rdfa-editor-besluit-type-plugin",
+    "rdfa-editor-import-draft-decisions-plugin"
   ],
 
   //GEMEENTE
@@ -41,7 +42,8 @@ export default {
     "rdfa-editor-agenda-plugin",
     "rdfa-editor-import-snippet-plugin",
     "rdfa-editor-roadsign-hint-plugin",
-    "rdfa-editor-besluit-type-plugin"
+    "rdfa-editor-besluit-type-plugin",
+    "rdfa-editor-import-draft-decisions-plugin"
   ],
 
   //OCMW
@@ -64,7 +66,8 @@ export default {
     "rdfa-editor-agenda-plugin",
     "rdfa-editor-import-snippet-plugin",
     "rdfa-editor-roadsign-hint-plugin",
-    "rdfa-editor-besluit-type-plugin"
+    "rdfa-editor-besluit-type-plugin",
+    "rdfa-editor-import-draft-decisions-plugin"
   ],
   none: []
 };

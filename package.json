@@ -40,6 +40,7 @@
     "@lblod/ember-rdfa-editor-document-tasklist-plugin": "0.1.5",
     "@lblod/ember-rdfa-editor-document-title-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "0.3.0",
+    "@lblod/ember-rdfa-editor-import-draft-decisions-plugin": "0.0.0",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.6.2",
     "@lblod/ember-rdfa-editor-mandaat-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "0.7.1",
