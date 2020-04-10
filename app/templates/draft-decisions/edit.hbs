@@ -1,4 +1,4 @@
-<AppChrome @documentType="draftDecisions" @editorDocument={{this.editorDocument}} @documentContainer={{this.documentContainer}} @save={{action "save"}} @sendToTrash={{action "sendToTrash"}} @exportHtmlFunction={{action "download"}} />
+<AppChrome @documentType="draftDecisions" @editorDocument={{this.editorDocument}} @documentContainer={{this.documentContainer}} @save={{action "save"}} @sendToTrash={{action "sendToTrash"}} @exportHtmlFunction={{action "download"}} @archive={{action 'archive'}} />
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if this.validationErrors}}
   <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{action "closeValidationModal"}} as |m|>

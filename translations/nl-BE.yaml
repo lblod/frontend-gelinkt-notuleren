@@ -3,7 +3,7 @@ inbox:
     pageTitle: Ontwerpbesluiten
     searchPlaceholder: Zoek titel ontwerpbesluit
     noDataMessage: Geen documenten
-    titleLabel: Titel notulen
+    titleLabel: Titel ontwerpbesluit
     createdOnLabel: Aangemaakt
     updatedOnLabel: Aangepast
     statusLabel: Status

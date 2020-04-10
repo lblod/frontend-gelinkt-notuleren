@@ -22,6 +22,17 @@ export default Controller.extend(EditorDocumentBaseController, {
     return savedDoc;
   }),
 
+  archive: task(function *() {
+    let editorDocument = this.editorDocument;
+    if(this.hasDocumentValidationErrors(editorDocument)){
+      this.set('validationErrors', true);
+      return null;
+    }
+
+    const savedDoc = yield this.saveEditorDocument.perform(editorDocument,  this.getStatusFor('gearchiveerdStatusId'));
+    return savedDoc;
+  }),
+
   syncDocument: task(function * () {
     const savedDoc = yield this.save.perform();
     /*
@@ -44,6 +55,11 @@ export default Controller.extend(EditorDocumentBaseController, {
     },
     async save(){
       const savedDoc = await this.save.perform();
+      this.set('editorDocument', savedDoc);
+    },
+
+    async archive() {
+      const savedDoc = await this.archive.perform();
       this.set('editorDocument', savedDoc);
     },
 
