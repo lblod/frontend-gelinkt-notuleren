@@ -3,7 +3,7 @@ inbox:
     pageTitle: Draft decisions
     searchPlaceholder: Type the title of a draft decision
     noDataMessage: No documents
-    titleLabel: Document title
+    titleLabel: Draft decision title
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
