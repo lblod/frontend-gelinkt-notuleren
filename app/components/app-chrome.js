@@ -13,9 +13,8 @@ export default Component.extend({
   }),
 
   documentStatus: computed('documentContainer.status', function(){
-    const status = this.documentContainer.get('status')
-    console.log(status)
-    return status
+    const status = this.documentContainer.get('status');
+    return status;
   }),
 
   isDraftDecisions: computed('typeDocument', function() {
