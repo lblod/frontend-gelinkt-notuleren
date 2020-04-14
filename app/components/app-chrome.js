@@ -12,6 +12,12 @@ export default Component.extend({
     return this.documentType === "meetingMinutes";
   }),
 
+  documentStatus: computed('documentContainer.status', function(){
+    const status = this.documentContainer.get('status')
+    console.log(status)
+    return status
+  }),
+
   isDraftDecisions: computed('typeDocument', function() {
     return this.documentType === "draftDecisions";
   })
