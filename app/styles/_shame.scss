@@ -167,7 +167,68 @@ input.input-field {
   font-size: 1.4rem;
 }
 
-// Disable fixed scrollbars on html element > @TODO: port to appuniversum
-html {
-  overflow-y: auto;
+// Fix ACMIDM login alerts/loading in header
+// @TODO: rework ACMIDM components to work with appuniversum classes
+.au-c-main-header__actions .alert {
+  position: absolute;
+  right: $au-unit-small;
+  max-width: 480px;
+  top: $au-unit-large + $au-unit-tiny;
+}
+
+// Position ACMIDM login loader
+.au-c-main-header__actions .u-padding--round--small {
+  position: absolute;
+  right: 0;
+  max-width: 480px;
+  top: $au-unit-large - $au-unit-tiny/2;
+  padding: 0;
+  background-color: $au-white;
+
+  .loader-wrapper {
+    padding: 0;
+  }
+}
+
+
+// Small text in a toolbar
+// @TODO: port to ember-appuniversum component
+.au-c-toolbar__group {
+  align-items: center;
+}
+
+.au-c-toolbar__group--small {
+  @include au-font-size($au-base);
+
+  > * + * {
+    margin-left: $au-unit-small;
+  }
+}
+
+.au-c-toolbar__group {
+  .link--edit,
+  .input-field--block  {
+    width: auto;
+    margin: 0;
+    display: block;
+    padding-top: $au-unit-tiny;
+    padding-bottom: $au-unit-tiny;
+    max-height: $au-unit-large;
+  }
+
+  .link--edit,
+  .link--edit:hover {
+    &::after {
+      top: auto;
+      bottom: auto;
+    }
+  }
+
+  .input-field--block {
+    width: $au-unit-huge*7;
+  }
+
+  .u-spacer--top--tinier {
+    margin: 0 !important;
+  }
 }

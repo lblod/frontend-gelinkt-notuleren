@@ -1,3 +1,9 @@
 <button {{action 'login'}} class="{{@styles}}">
   {{yield}}
 </button>
+{{#if isAuthenticating}}
+  {{wu-loader}}
+{{/if}}
+{{#if errorMessage}}
+  {{wu-alert title=errorMessage isError=true}}
+{{/if}}

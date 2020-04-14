@@ -1,48 +1,54 @@
-<div class="grid u-spacer--tiny">
-  <div class="col--6-12">
-    <LinkTo @route="inbox.index" class="smaller link-dark">&leftarrow; Terug naar overzicht notulen</LinkTo>
-    <label class="pill u-spacer--left--tiny">
-      <span>{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
-    </label>
-  </div>
-  <div class="col--6-12">
-    <div class="grid grid--collapse grid--align-right">
-      <div class="col--10-12 u-align-right">
-        <WuButtonGroup>
-          {{#if startSyncModal}}
-            <WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @onClick={{startSyncModal}}>
-              <i class="fa fa-rotate-right"></i>Synchroniseer gegevens met OCMW
-            </WuLinkButton>
-          {{/if}}
-          {{!-- // Still needed? --}}
-        </WuButtonGroup>
-      </div>
+<div class="au-o-box au-o-box--small au-u-padding-bottom-tiny">
+  <AuToolbar>
+    <AuToolbarGroup class="au-c-toolbar__group--small">
+      <AuLink @linkRoute="inbox.index" @skin="secondary">
+        <AuIcon @icon="arrow-left" @alignment="left" />
+        Terug naar overzicht notulen
+      </AuLink>
+      <AuPill>{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</AuPill>
+    </AuToolbarGroup>
+    <AuToolbarGroup class="au-c-toolbar__group--small">
+      <WuButtonGroup>
+        {{#if startSyncModal}}
+          <AuButton {{on "click" this.startSyncModal}} @skin="tertiary">
+            <AuIcon @icon="renew" @alignment="left" />
+            Synchroniseer gegevens met OCMW
+          </AuButton>
+        {{/if}}
+        {{!-- // Still needed? --}}
+      </WuButtonGroup>
       {{#if features.languageSelect}}
-        <div class="col--2-12 u-align-left u-padding--left--small">
-          <LanguageSelect />
-        </div>
+        <LanguageSelect />
       {{/if}}
-    </div>
-  </div>
+    </AuToolbarGroup>
+  </AuToolbar>
 </div>
-<div class="grid">
-  <div class="col--6-12">
-    <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
-    {{#unless editorDocument.isNew}}
-      <EditorStatusPill @status={{await documentContainer.status}} />
-    {{/unless}}
-  </div>
-  <div class="col--6-12 u-align-right">
-    <WuButtonGroup @class="u-align-right">
-      {{#if editorDocument.isNew}}
-        <LinkTo @route="inbox.index" class="button button--small button--narrow button--link button--link--dark">Verwijder concept</LinkTo>
-      {{else}}
-        <WuButton @label="Naar prullenmand" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{sendToTrash}} />
-      {{/if}}
-      <WuButton @label="Ondertekenen en publiceren" @isSmall={{true}} @isNarrow={{true}} @isAlt={{true}} @onClick={{publish}} />
-      <WuButton @label="Bewaar concept" @isNarrow={{true}} @isSmall={{true}} @onClick={{save}} />
-    </WuButtonGroup>
 
+<div class="au-o-box au-o-box--small au-u-padding-top-none">
+  <AuToolbar>
+    <AuToolbarGroup>
+      <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
+      {{#unless editorDocument.isNew}}
+        <EditorStatusPill @status={{await documentContainer.status}} />
+      {{/unless}}
+    </AuToolbarGroup>
+    <AuToolbarGroup class="au-c-toolbar__group--small">
+        {{#if editorDocument.isNew}}
+          <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert">
+            <AuIcon @icon="bin" @alignment="left" />
+            Verwijder concept
+          </LinkTo>
+        {{else}}
+          <AuButton {{on "click" this.sendToTrash}} @skin="tertiary" @alert="true">
+            <AuIcon @icon="bin" @alignment="left" />
+            Naar prullenmand
+          </AuButton>
+        {{/if}}
+        <AuButton {{on "click" this.publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
+        <AuButton {{on "click" this.save}}>Bewaar concept</AuButton>
+    </AuToolbarGroup>
+  </AuToolbar>
+  <AuToolbar @reverse="true">
     <div class="u-spacer--top--tiny">
       {{#if editorDocument.isNew}}
         <p class="smaller">
@@ -66,5 +72,5 @@
         {{/if}}
       {{/if}}
     </div>
-  </div>
+  </AuToolbar>
 </div>
