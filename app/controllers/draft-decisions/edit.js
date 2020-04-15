@@ -28,16 +28,16 @@ export default Controller.extend(EditorDocumentBaseController, {
  }),
 
   generateDocumentToDownload() {
-    const context = JSON.parse(this.editorDocument.context)
+    const context = JSON.parse(this.editorDocument.context);
     let prefixes = Object.entries(context.prefix).map(([key, value]) => {
-      return `${key}: ${value}`
-    }).join(' ')
+      return `${key}: ${value}`;
+    }).join(' ');
     const document = `
       <div vocab="${context.vocab}" prefix="${prefixes}" typeof="foaf:Document" resource="#">
         ${this.editor.htmlContent}
       </div>
-    `
-    return document
+    `;
+    return document;
   },
 
   actions: {
@@ -62,8 +62,8 @@ export default Controller.extend(EditorDocumentBaseController, {
     
 
     download() {
-      const doc = this.generateDocumentToDownload()
-      const title = this.editorDocument.title
+      const doc = this.generateDocumentToDownload();
+      const title = this.editorDocument.title;
       var element = document.createElement('a');
       element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(doc));
       element.setAttribute('download', `${title}.html`);
