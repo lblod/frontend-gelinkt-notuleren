@@ -1,0 +1,202 @@
+/* ==================================
+   #APP CHROME
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+$au-brand-divider-rotation     : -20deg !default;
+
+
+/* Component
+   ========================================================================== */
+
+.au-c-app-chrome {
+  position: relative;
+  z-index: 5;
+  background-color: $au-white;
+  box-shadow: 0 1px 3px rgba($au-gray-900, .1), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
+}
+
+.au-c-app-chrome__entity {
+  position: relative;
+  font-weight: $au-medium;
+  padding-left: $au-unit-small;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: .1rem;
+    left: .2rem;
+    transform: rotate($au-brand-divider-rotation);
+    width: .1rem;
+    height: 2.3rem;
+    background-color: $au-gray-300;
+  }
+}
+
+.au-c-app-chrome__status {
+  font-style: italic;
+  display: inline-flex;
+  align-items: center;
+  height: $au-unit;
+  line-height: $au-unit;
+  color: $au-gray-600;
+  padding: $au-unit-tiny/2;
+}
+
+
+// @TODO: port to ember-appuniversum component
+.au-c-toolbar--small {
+  @include au-font-size($au-base);
+}
+
+.au-c-toolbar__group {
+  align-items: center;
+}
+
+.au-c-toolbar__group--small {
+  @include au-font-size($au-base);
+
+  > * + * {
+    margin-left: $au-unit-small;
+  }
+}
+
+.au-c-toolbar__group {
+  .link--edit,
+  .input-field--block  {
+    width: auto;
+    margin: 0;
+    height: $au-unit-large - $au-unit-small;
+  }
+
+  h1 {
+    display: inline-flex;
+    width: auto;
+    max-width: $au-unit-huge;
+  }
+
+  .link--edit {
+    @include au-font-size($au-h4);
+    line-height: $au-unit-large - $au-unit-small;
+    display: block;
+    align-items: center;
+    max-width: $au-unit-huge;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 $au-unit .1rem 0;
+  }
+
+  .link--edit {
+    color: $au-gray-800;
+    border: 1px solid transparent;
+    transition: border $au-transition, color $au-transition;
+  }
+
+  .link--edit:hover {
+    text-decoration-color: tint($au-blue-600,80);
+    border: 1px solid $au-gray-200;
+  }
+
+  .link--edit::after {
+    top: auto;
+    bottom: auto;
+    right: $au-unit-tiny/2;
+    opacity: 0;
+    transition: opacity $au-transition;
+  }
+
+  .link--edit:hover::after {
+    opacity: 1;
+  }
+
+  .input-field--block {
+    width: $au-unit-huge;
+    padding-left: $au-unit-tiny;
+  }
+
+  .u-spacer--top--tinier {
+    margin: 0 !important;
+  }
+
+  // @TODO: find a better way to make the width flexible
+  @include mq(small) {
+    h1,
+    .link--edit {
+      max-width: $au-unit-huge * 1.5;
+    }
+
+    .input-field--block {
+      width: $au-unit-huge * 1.5;
+    }
+  }
+
+  @include mq(medium) {
+    h1,
+    .link--edit {
+      max-width: $au-unit-huge * 3.5;
+    }
+
+    .input-field--block {
+      width: $au-unit-huge * 3.5;
+    }
+  }
+
+  @include mq(1140px) {
+    h1,
+    .link--edit {
+      max-width: $au-unit-huge * 4.5;
+    }
+
+    .input-field--block {
+      width: $au-unit-huge * 4.5;
+    }
+  }
+
+  @include mq(1280px) {
+    h1,
+    .link--edit {
+      max-width: $au-unit-huge * 5.5;
+    }
+
+    .input-field--block {
+      width: $au-unit-huge * 5.5;
+    }
+  }
+
+  @include mq(1340px) {
+    h1,
+    .link--edit {
+      max-width: $au-unit-huge * 6.5;
+    }
+
+    .input-field--block {
+      width: $au-unit-huge * 6.5;
+    }
+  }
+
+  @include mq(large) {
+    h1,
+    .link--edit {
+      max-width: $au-unit-huge * 7.5;
+    }
+
+    .input-field--block {
+      width: $au-unit-huge * 7.5;
+    }
+  }
+
+  @include mq(1500px) {
+    h1,
+    .link--edit {
+      max-width: $au-unit-huge * 8.5;
+    }
+
+    .input-field--block {
+      width: $au-unit-huge * 8.5;
+    }
+  }
+}

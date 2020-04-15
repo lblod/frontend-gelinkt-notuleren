@@ -94,16 +94,16 @@ $say-switch-color                : $au-gray-300;
 $say-switch-active-color         : $au-blue-600;
 
 // Button
-$say-button-height               : $au-unit + $au-unit-tiny;
+$say-button-height               : $au-unit + $au-unit-small;
 $say-button-font-family          : $au-font;
 $say-button-font-size            : $au-base;
 $say-button-font-weight          : $au-regular;
 $say-button-border               : .1rem;
-$say-button-border-color         : $au-gray-300;
-$say-button-border-hover-color   : $au-gray-300;
-$say-button-color                : $au-gray-700;
-$say-button-hover-color          : $au-gray-600;
-$say-button-bg-color             : $au-white;
+$say-button-border-color         : transparent;
+$say-button-border-hover-color   : transparent;
+$say-button-color                : $au-blue-700;
+$say-button-hover-color          : $au-blue-600;
+$say-button-bg-color             : transparent;
 $say-button-bg-hover-color       : transparent;
 $say-button-radius               : 0;
 

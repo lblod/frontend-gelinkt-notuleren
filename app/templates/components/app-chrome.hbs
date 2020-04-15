@@ -1,76 +1,65 @@
-<div class="au-o-box au-o-box--small au-u-padding-bottom-tiny">
-  <AuToolbar>
-    <AuToolbarGroup class="au-c-toolbar__group--small">
+<div class="au-o-box au-o-box--small au-c-app-chrome">
+  <AuToolbar class="au-c-toolbar--small">
+    <AuToolbarGroup>
       <AuLink @linkRoute="inbox.index" @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
         Terug naar overzicht notulen
       </AuLink>
-      <AuPill>{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</AuPill>
+      <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
     </AuToolbarGroup>
-    <AuToolbarGroup class="au-c-toolbar__group--small">
-      <WuButtonGroup>
-        {{#if startSyncModal}}
-          <AuButton {{on "click" this.startSyncModal}} @skin="tertiary">
-            <AuIcon @icon="renew" @alignment="left" />
-            Synchroniseer gegevens met OCMW
-          </AuButton>
-        {{/if}}
-        {{!-- // Still needed? --}}
-      </WuButtonGroup>
+    <AuToolbarGroup>
+      {{#if startSyncModal}}
+        <AuButton {{on "click" this.startSyncModal}} @skin="tertiary">
+          <AuIcon @icon="renew" @alignment="left" />
+          Synchroniseer gegevens met OCMW
+        </AuButton>
+      {{/if}}
+      {{!-- // Still needed? --}}
       {{#if features.languageSelect}}
         <LanguageSelect />
       {{/if}}
+      {{#unless editorDocument.isNew}}
+        {{#if editorDocument.updatedOn}}
+          <p class="au-c-app-chrome__status">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            Bewaard {{moment-calendar editorDocument.updatedOn}}
+          </p>
+        {{else}}
+          <p class="au-c-app-chrome__status">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            Wijzigingen niet bewaard
+          </p>
+        {{/if}}
+      {{/unless}}
     </AuToolbarGroup>
   </AuToolbar>
-</div>
-
-<div class="au-o-box au-o-box--small au-u-padding-top-none">
-  <AuToolbar>
+  <AuToolbar class="au-u-margin-top-tiny">
     <AuToolbarGroup>
       <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
       {{#unless editorDocument.isNew}}
         <EditorStatusPill @status={{await documentContainer.status}} />
       {{/unless}}
+      {{#if editorDocument.isNew}}
+      <AuPill @skin="warning">
+        <AuIcon @icon="alert-triangle" @alignment="left" />
+        Concept niet bewaard
+      </AuPill>
+      {{/if}}
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--small">
-        {{#if editorDocument.isNew}}
-          <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert">
-            <AuIcon @icon="bin" @alignment="left" />
-            Verwijder concept
-          </LinkTo>
-        {{else}}
-          <AuButton {{on "click" this.sendToTrash}} @skin="tertiary" @alert="true">
-            <AuIcon @icon="bin" @alignment="left" />
-            Naar prullenmand
-          </AuButton>
-        {{/if}}
-        <AuButton {{on "click" this.publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
-        <AuButton {{on "click" this.save}}>Bewaar concept</AuButton>
-    </AuToolbarGroup>
-  </AuToolbar>
-  <AuToolbar @reverse="true">
-    <div class="u-spacer--top--tiny">
       {{#if editorDocument.isNew}}
-        <p class="smaller">
-          <label class="pill pill--primary-yellow">
-            <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-            <span>Concept niet bewaard</span>
-          </label>
-        </p>
+        <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert">
+          <AuIcon @icon="bin" @alignment="left" />
+          Verwijder concept
+        </LinkTo>
       {{else}}
-        {{#if editorDocument.updatedOn}}
-          <p class="smaller">
-            Bewaard {{moment-calendar editorDocument.updatedOn}}
-          </p>
-        {{else}}
-          <p class="smaller">
-            <span class="smaller u-padding--right--tiny">
-              <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-              <span>Wijzigingen niet bewaard</span>
-            </span>
-          </p>
-        {{/if}}
+        <AuButton {{on "click" this.sendToTrash}} @skin="tertiary" @alert="true">
+          <AuIcon @icon="bin" @alignment="left" />
+          Naar prullenmand
+        </AuButton>
       {{/if}}
-    </div>
+      <AuButton {{on "click" this.publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
+      <AuButton {{on "click" this.save}}>Bewaar concept</AuButton>
+    </AuToolbarGroup>
   </AuToolbar>
 </div>

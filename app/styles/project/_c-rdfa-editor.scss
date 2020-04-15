@@ -12,7 +12,8 @@
 // Hide metadata
 .au-c-rdfa-editor {
   [property="heeftNotulen"],
-  [property="ext:metadata"] {
+  [property="ext:metadata"],
+  [property="ext:templateVersion"] {
     border: 0 !important;
     clip: rect(0 0 0 0) !important;
     clip-path: inset(50%) !important;
