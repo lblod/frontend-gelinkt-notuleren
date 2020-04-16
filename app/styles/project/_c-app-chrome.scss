@@ -28,7 +28,7 @@ $au-brand-divider-rotation     : -20deg !default;
     display: block;
     position: absolute;
     top: .1rem;
-    left: .2rem;
+    left: 0;
     transform: rotate($au-brand-divider-rotation);
     width: .1rem;
     height: 2.3rem;
@@ -48,20 +48,8 @@ $au-brand-divider-rotation     : -20deg !default;
 
 
 // @TODO: port to ember-appuniversum component
-.au-c-toolbar--small {
-  @include au-font-size($au-base);
-}
-
 .au-c-toolbar__group {
-  align-items: center;
-}
-
-.au-c-toolbar__group--small {
-  @include au-font-size($au-base);
-
-  > * + * {
-    margin-left: $au-unit-small;
-  }
+  align-items: center !important; // Fix toolbar alignment
 }
 
 .au-c-toolbar__group {

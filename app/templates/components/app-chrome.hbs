@@ -1,5 +1,5 @@
 <div class="au-o-box au-o-box--small au-c-app-chrome">
-  <AuToolbar class="au-c-toolbar--small">
+  <AuToolbar>
     <AuToolbarGroup>
       <AuLink @linkRoute="inbox.index" @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
@@ -21,8 +21,7 @@
       {{#unless editorDocument.isNew}}
         {{#if editorDocument.updatedOn}}
           <p class="au-c-app-chrome__status">
-            <AuIcon @icon="alert-triangle" @alignment="left" />
-            Bewaard {{moment-calendar editorDocument.updatedOn}}
+            Bewaard op {{moment-calendar editorDocument.updatedOn}}
           </p>
         {{else}}
           <p class="au-c-app-chrome__status">
