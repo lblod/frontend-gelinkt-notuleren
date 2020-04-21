@@ -1,5 +1,5 @@
 <div class="au-o-box au-o-box--small au-c-app-chrome">
-  <AuToolbar>
+  <AuToolbar class="au-c-toolbar--wrap au-u-margin-bottom-small">
     <AuToolbarGroup>
       <AuLink @linkRoute="inbox.index" @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
@@ -8,32 +8,42 @@
       <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
     </AuToolbarGroup>
     <AuToolbarGroup>
-      {{#if startSyncModal}}
-        <AuButton {{on "click" this.startSyncModal}} @skin="tertiary">
-          <AuIcon @icon="renew" @alignment="left" />
-          Synchroniseer gegevens met OCMW
-        </AuButton>
-      {{/if}}
-      {{!-- // Still needed? --}}
-      {{#if features.languageSelect}}
-        <LanguageSelect />
-      {{/if}}
-      {{#unless editorDocument.isNew}}
+      <ul class="au-c-list-horizontal">
+        {{#unless editorDocument.isNew}}
         {{#if editorDocument.updatedOn}}
-          <p class="au-c-app-chrome__status">
+        <li class="au-c-list-horizontal__item">
+          <span class="au-c-app-chrome__status">
             Bewaard op {{moment-calendar editorDocument.updatedOn}}
-          </p>
+          </span>
+        </li>
         {{else}}
-          <p class="au-c-app-chrome__status">
+        <li class="au-c-list-horizontal__item">
+          <span class="au-c-app-chrome__status">
             <AuIcon @icon="alert-triangle" @alignment="left" />
             Wijzigingen niet bewaard
-          </p>
+          </span>
+        </li>
         {{/if}}
-      {{/unless}}
+        {{/unless}}
+        {{#if startSyncModal}}
+        <li class="au-c-list-horizontal__item">
+          <AuButton {{on "click" this.startSyncModal}} @skin="tertiary">
+            <AuIcon @icon="renew" @alignment="left" />
+            Synchroniseer gegevens met OCMW
+          </AuButton>
+        </li>
+        {{/if}}
+        {{!-- // Still needed? --}}
+        {{#if features.languageSelect}}
+        <li class="au-c-list-horizontal__item">
+          <LanguageSelect />
+        </li>
+        {{/if}}
+      </ul>
     </AuToolbarGroup>
   </AuToolbar>
-  <AuToolbar class="au-u-margin-top-tiny">
-    <AuToolbarGroup>
+  <AuToolbar class="au-c-toolbar--wrap">
+    <AuToolbarGroup class="au-c-toolbar__group--main au-c-toolbar__group--fill">
       <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
       {{#unless editorDocument.isNew}}
         <EditorStatusPill @status={{await documentContainer.status}} />
@@ -45,7 +55,7 @@
       </AuPill>
       {{/if}}
     </AuToolbarGroup>
-    <AuToolbarGroup class="au-c-toolbar__group--small">
+    <AuToolbarGroup class="au-c-toolbar__group--secondary au-c-toolbar__group--fill au-c-toolbar__group--small">
       {{#if editorDocument.isNew}}
         <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert">
           <AuIcon @icon="bin" @alignment="left" />

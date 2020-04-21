@@ -46,145 +46,107 @@ $au-brand-divider-rotation     : -20deg !default;
   padding: $au-unit-tiny/2;
 }
 
-
-// @TODO: port to ember-appuniversum component
-.au-c-toolbar__group {
-  align-items: center !important; // Fix toolbar alignment
-}
-
-.au-c-toolbar__group {
-  .link--edit,
-  .input-field--block  {
-    width: auto;
-    margin: 0;
-    height: $au-unit-large - $au-unit-small;
-  }
-
-  h1 {
-    display: inline-flex;
-    width: auto;
-    max-width: $au-unit-huge;
-  }
-
-  .link--edit {
-    @include au-font-size($au-h4);
-    line-height: $au-unit-large - $au-unit-small;
-    display: block;
-    align-items: center;
-    max-width: $au-unit-huge;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    padding: 0 $au-unit .1rem 0;
-  }
-
-  .link--edit {
-    color: $au-gray-800;
-    border: 1px solid transparent;
-    transition: border $au-transition, color $au-transition;
-  }
-
-  .link--edit:hover {
-    text-decoration-color: tint($au-blue-600,80);
-    border: 1px solid $au-gray-200;
-  }
-
-  .link--edit::after {
-    top: auto;
-    bottom: auto;
-    right: $au-unit-tiny/2;
-    opacity: 0;
-    transition: opacity $au-transition;
-  }
-
-  .link--edit:hover::after {
-    opacity: 1;
-  }
-
-  .input-field--block {
-    width: $au-unit-huge;
-    padding-left: $au-unit-tiny;
-  }
-
-  .u-spacer--top--tinier {
-    margin: 0 !important;
-  }
-
-  // @TODO: find a better way to make the width flexible
-  @include mq(small) {
-    h1,
-    .link--edit {
-      max-width: $au-unit-huge * 1.5;
-    }
-
-    .input-field--block {
-      width: $au-unit-huge * 1.5;
-    }
-  }
-
-  @include mq(medium) {
-    h1,
-    .link--edit {
-      max-width: $au-unit-huge * 3.5;
-    }
-
-    .input-field--block {
-      width: $au-unit-huge * 3.5;
-    }
-  }
+.au-c-app-chrome__title {
+  @include au-font-size($au-h4);
+  display: block;
+  position: relative;
+  height: $au-unit + $au-unit-small;
+  line-height: $au-unit + $au-unit-small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 $au-unit-tiny/2;
+  border: .1rem solid transparent;
+  border-radius: $au-radius;
+  max-width: $au-unit-huge * 3.5;
 
   @include mq(1140px) {
-    h1,
-    .link--edit {
-      max-width: $au-unit-huge * 4.5;
-    }
-
-    .input-field--block {
-      width: $au-unit-huge * 4.5;
-    }
+    max-width: $au-unit-huge * 4.5;
   }
 
   @include mq(1280px) {
-    h1,
-    .link--edit {
-      max-width: $au-unit-huge * 5.5;
-    }
-
-    .input-field--block {
-      width: $au-unit-huge * 5.5;
-    }
+    max-width: $au-unit-huge * 5.5;
   }
 
   @include mq(1340px) {
-    h1,
-    .link--edit {
-      max-width: $au-unit-huge * 6.5;
-    }
-
-    .input-field--block {
-      width: $au-unit-huge * 6.5;
-    }
+    max-width: $au-unit-huge * 6.5;
   }
 
   @include mq(large) {
-    h1,
-    .link--edit {
-      max-width: $au-unit-huge * 7.5;
-    }
-
-    .input-field--block {
-      width: $au-unit-huge * 7.5;
-    }
+    max-width: $au-unit-huge * 7.5;
   }
 
   @include mq(1500px) {
-    h1,
-    .link--edit {
-      max-width: $au-unit-huge * 8.5;
-    }
+    max-width: $au-unit-huge * 8.5;
+  }
+}
 
-    .input-field--block {
-      width: $au-unit-huge * 8.5;
-    }
+.au-c-app-chrome__title--edit {
+  transition: color $au-transition, border $au-transition;
+  color: $au-gray-800;
+
+  &:hover,
+  &:focus {
+    color: $au-gray-700;
+    border: .1rem solid $au-gray-200;
+  }
+
+  &:focus {
+    outline: .2rem dashed $au-yellow-400;
+  }
+}
+
+.au-c-app-chrome__title-fade {
+  color: $au-gray-600;
+}
+
+.au-c-app-chrome__title-input {
+  @include au-font-size($au-h4);
+  font-family: $au-font;
+  display: block;
+  width: 100%;
+  padding: 0 $au-unit-tiny/2;
+  height: $au-unit + $au-unit-small;
+  line-height: $au-unit + $au-unit-small;
+  border: .1rem solid $au-gray-300;
+  border-radius: $au-radius;
+  color: $au-gray-800;
+  width: $au-unit-huge * 3.5;
+
+  &:focus {
+    outline: 0;
+  }
+
+  @include mq(medium) {
+    width: $au-unit-huge * 3.5;
+  }
+
+  @include mq(1140px) {
+    width: $au-unit-huge * 4.5;
+  }
+
+  @include mq(1280px) {
+    width: $au-unit-huge * 5.5;
+  }
+
+  @include mq(1340px) {
+    width: $au-unit-huge * 6.5;
+  }
+
+  @include mq(large) {
+    width: $au-unit-huge * 7.5;
+  }
+
+  @include mq(1500px) {
+    width: $au-unit-huge * 8.5;
+  }
+}
+
+// Toolbar extensions
+.au-c-toolbar--wrap {
+  flex-wrap: wrap;
+
+  @include mq(medium) {
+    flex-wrap: nowrap;
   }
 }

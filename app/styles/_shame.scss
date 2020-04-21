@@ -195,6 +195,12 @@ input.input-field {
   padding-bottom: $au-unit-tiny;
 }
 
+// Toolbar alignment fix
+// @TODO: port to ember-appuniversum component
+.au-c-toolbar__group {
+  align-items: center !important; // Fix toolbar alignment
+}
+
 // Temporary footer brand fix
 // @TODO port to appuniversum brand component
 .au-c-main-footer {
