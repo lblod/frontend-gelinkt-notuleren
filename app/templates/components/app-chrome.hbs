@@ -46,7 +46,11 @@
       {{#if @editorDocument.isNew}}
         <LinkTo @route="inbox.index" class="button button--small button--narrow button--link button--link--dark">Verwijder concept</LinkTo>
       {{else}}
-        <WuButton @label="Archiveer" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{@archive}} />
+        {{#if isArchived}}
+          <WuButton @label="Prullenbak" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{@unarchive}} />
+        {{else}}
+          <WuButton @label="Archiveer" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{@archive}} />
+        {{/if}}
         <WuButton @label="Naar prullenmand" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{@sendToTrash}} />
       {{/if}}
       {{#if @publish}}

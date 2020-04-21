@@ -7,11 +7,11 @@ export default Controller.extend(EditorDocumentBaseController, {
   store: service(),
 
   save: task(function *() {
-     let editorDocument = this.editorDocument;
-     if(this.hasDocumentValidationErrors(editorDocument)){
-       this.set('validationErrors', true);
-       return null;
-     }
+    let editorDocument = this.editorDocument;
+    if(this.hasDocumentValidationErrors(editorDocument)){
+      this.set('validationErrors', true);
+      return null;
+    }
     const savedDoc = yield this.saveEditorDocument.perform(editorDocument);
     return savedDoc;
   }),
@@ -23,9 +23,20 @@ export default Controller.extend(EditorDocumentBaseController, {
       return null;
     }
 
-   const savedDoc = yield this.saveEditorDocument.perform(editorDocument,  this.getStatusFor('gearchiveerdStatusId'));
-   return savedDoc;
- }),
+    const savedDoc = yield this.saveEditorDocument.perform(editorDocument,  this.getStatusFor('gearchiveerdStatusId'));
+    return savedDoc;
+  }),
+
+  unarchive: task(function *() {
+    let editorDocument = this.editorDocument;
+    if(this.hasDocumentValidationErrors(editorDocument)){
+      this.set('validationErrors', true);
+      return null;
+    }
+
+    const savedDoc = yield this.saveEditorDocument.perform(editorDocument,  this.getStatusFor('actiefStatusId'));
+    return savedDoc;
+  }),
 
   generateDocumentToDownload() {
     const context = JSON.parse(this.editorDocument.context);
@@ -52,6 +63,11 @@ export default Controller.extend(EditorDocumentBaseController, {
 
     async archive() {
       const savedDoc = await this.archive.perform();
+      this.set('editorDocument', savedDoc);
+    },
+
+    async unarchive() {
+      const savedDoc = await this.unarchive.perform();
       this.set('editorDocument', savedDoc);
     },
 
