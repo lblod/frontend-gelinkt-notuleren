@@ -1,0 +1,31 @@
+/* ==================================
+   #CONTENT
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+$au-heading-1     : $au-h2 !default;
+$au-heading-2     : $au-h3 !default;
+$au-heading-3     : $au-h4 !default;
+$au-heading-4     : $au-h5 !default;
+
+
+/* Component
+   ========================================================================== */
+
+.au-c-content {
+  @include au-font-size($au-base);
+
+  > * + * {
+    margin-top: $au-unit-small;
+  }
+}
+
+.au-c-content--small {
+  @include au-font-size($au-base);
+
+  > * + * {
+    margin-top: $au-unit-small;
+  }
+}
