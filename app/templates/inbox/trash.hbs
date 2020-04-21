@@ -1,42 +1,32 @@
 <DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
-	    <div class="u-padding--round--tiny">
-	      <div class="grid">
-	        <div class="col--7-12 u-wide-on-print">
-	          <h1 class="h4 u-spacer--tiny">Prullenmand</h1>
-            <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" />
-{{!-- 	          <ul class="bullet-list">
-	            {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
-	          </ul> --}}
-	        </div>
-	      </div>
-	    </div>
+      <AuToolbar class="au-o-box au-o-box--small">
+        <h1 class="au-c-heading-1">Prullenmand</h1>
+        <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+      </AuToolbar>
+      {{!-- <ul class="bullet-list">
+        {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
+      </ul> --}}
     </menu.general>
     <menu.selected as |selection datatable|>
-	    <div class="u-padding--round--tiny">
-	      <div class="grid">
-	        <div class="col--7-12">
-	          <h1 class="h1 u-spacer--none">Prullenmand {{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</h1>
-	          <ul class="data-table__actions__list u-spacer--top--tiny">
-	            <li class="data-table__action" data-table-action>
-	              <button class="data-table__action__toggle data-table__action__toggle--contract-xs" {{action "moveToConcepts" selection datatable}}>
-	                <i class="fa fa-rotate-left" aria-hidden="true"></i>
-	                <span>Verplaats selectie terug naar ontwerpen</span>
-	              </button>
-	            </li>
-	          </ul>
-{{!-- 	          <ul class="bullet-list">
-	            {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
-	          </ul> --}}
-	        </div>
-	        <div class="col--5-12">
-	          <div class="search-box u-spacer--tb--tiny">
-	            <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" />
-	          </div>
-	        </div>
-	      </div>
-	    </div>
+      <AuToolbar class="au-o-box au-o-box--small">
+        <h1 class="au-c-heading-1">Prullenmand</h1>
+        <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+      </AuToolbar>
+      <div class="au-o-box au-o-box--small">
+        <ul class="data-table__actions__list">
+          <li class="data-table__action au-u-margin-bottom-none" data-table-action>
+            <AuButton @skin="secondary" {{action "moveToConcepts" selection datatable}}>
+              <AuIcon @icon="redo" @alignment="left" />
+              Verplaats selectie terug naar ontwerpen
+            </AuButton>
+          </li>
+        </ul>
+      </div>
+      {{!-- <ul class="bullet-list">
+        {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
+      </ul> --}}
     </menu.selected>
   </t.menu>
   <t.content as |c|>
