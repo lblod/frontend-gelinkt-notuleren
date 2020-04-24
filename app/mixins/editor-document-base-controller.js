@@ -87,16 +87,7 @@ export default Mixin.create({
     this.transitionToRoute('documents.show.publish.index', containerId);
   }),
 
-  setEditorProfile: task(function *(){
-    const bestuurseenheid = yield this.get('currentSession.group');
-    this.set('profile', (yield bestuurseenheid.get('classificatie')).get('uri'));
-  }),
-
   profile: 'default',
-  init() {
-    this._super(...arguments);
-    this.setEditorProfile.perform();
-  },
 
  actions: {
 
