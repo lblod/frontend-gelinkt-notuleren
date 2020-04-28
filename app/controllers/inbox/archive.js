@@ -4,6 +4,8 @@ import DefaultQueryParamsMixin from 'ember-data-table/mixins/default-query-param
 
 export default Controller.extend(DefaultQueryParamsMixin, {
   currentSession: service(),
+  sort: '-current-version.updated-on',
+
   actions: {
     toggleStar(document) {
       document.set('starred', !document.get('starred'));
