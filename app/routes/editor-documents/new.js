@@ -10,11 +10,12 @@ export default Route.extend({
     return RSVP.hash({
       editorDocument: this.store.createRecord('editor-document'),
       editorDocumentStatuses: this.store.findAll('editor-document-status'),
+      bestuurseenheidClassificatie: bestuurseenheid.get('classificatie')
      });
   },
 
   setupController(controller, model) {
     this._super(controller, model);
-    controller.set('profile', draftDecisionsProfile);
+    controller.set('profile', model.bestuurseenheidClassificatie.get('uri'));
   }
 });

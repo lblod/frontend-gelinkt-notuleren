@@ -12,12 +12,13 @@ export default Route.extend({
       documentContainer: container,
       editorDocument: await container.get('currentVersion'),
       editorDocumentStatuses: await this.store.findAll('editor-document-status'),
+      bestuurseenheidClassificatie: bestuurseenheid.get('classificatie')
     });
   },
 
   setupController(controller, model) {
     this._super(controller, model);
-    controller.set('profile', draftDecisionsProfile);
+    controller.set('profile', model.bestuurseenheidClassificatie.get('uri'));
   },
 
   actions: {
