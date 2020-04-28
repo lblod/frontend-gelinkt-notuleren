@@ -22,6 +22,7 @@ Router.map(function() {
     this.route('trash');
     this.route('imported');
     this.route('ontwerpbesluiten');
+    this.route('draft-decisions');
   });
   this.route('mock-login');
   this.route('login');
@@ -71,5 +72,10 @@ Router.map(function() {
     this.route('demo-1-a');
     this.route('demo-2');
     this.route('demo-3');
+  });
+
+  this.route('draft-decisions', function() {
+    this.route('new');
+    this.route('edit', { path: '/:id/edit' });
   });
 });

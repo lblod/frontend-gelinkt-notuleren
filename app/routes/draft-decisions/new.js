@@ -1,15 +1,17 @@
-import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
+import RSVP from 'rsvp';
 
 export default Route.extend({
-  async model(params){
-    const container = await this.store.findRecord('document-container', params.id, { include: 'status' });
+  model() {
     return RSVP.hash({
-      documentContainer: container,
-      editorDocument: container.get('currentVersion'),
+      editorDocument: this.store.createRecord('editor-document'),
       editorDocumentStatuses: this.store.findAll('editor-document-status'),
       editorDocumentFolders: this.store.findAll('editor-document-folder')
     });
   },
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set('profile', 'draftDecisionsProfile');
+  }
 });

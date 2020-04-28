@@ -15,12 +15,12 @@ export default Controller.extend(EditorDocumentBaseController, {
   }),
 
   saveAndTransitionToEditMode: task(function * (){
-     let editorDocument = this.editorDocument;
-     if(this.hasDocumentValidationErrors(editorDocument)){
-       this.set('validationErrors', true);
-       return;
-     }
-    let savedDoc = yield this.saveEditorDocument.perform(editorDocument, this.getStatusFor('conceptStatusId'));
+    let editorDocument = this.editorDocument;
+    if(this.hasDocumentValidationErrors(editorDocument)){
+      this.set('validationErrors', true);
+      return;
+    }
+    let savedDoc = yield this.saveEditorDocument.perform(editorDocument, this.getStatusFor('conceptStatusId'), this.getFolderFor('meetingMinutesId'));
     const container = yield savedDoc.get('documentContainer');
     this.transitionToRoute('editor-documents.edit', container.id);
   }),

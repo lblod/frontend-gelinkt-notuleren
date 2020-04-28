@@ -1,4 +1,4 @@
-<AppChrome @editorDocument={{editorDocument}} @documentContainer={{documentContainer}} @save={{action "save"}} @startSyncModal={{action "startSyncModal"}} @publish={{action "publish"}} @sendToTrash={{action "sendToTrash"}} />
+<AppChrome @documentType="meetingMinutes" @editorDocument={{editorDocument}} @documentContainer={{documentContainer}} @save={{action "save"}} @startSyncModal={{action "startSyncModal"}} @publish={{action "publish"}} @sendToTrash={{action "sendToTrash"}} @archive={{action 'archive'}} @unarchive={{action 'unarchive'}}/>
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
   <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{action "closeValidationModal"}} as |m|>
@@ -65,7 +65,7 @@
   </div>
 </div>
 {{else}}
-  <RdfaEditorContainer @profile={{profile}} @editorDocument={{editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} />
+  <RdfaEditorContainer @profile={{profile}} @editorDocument={{editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} @typeOfWrappingDiv="foaf:Document" />
 {{/if}}
 
 {{outlet}}

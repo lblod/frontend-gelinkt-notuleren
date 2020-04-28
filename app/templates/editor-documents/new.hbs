@@ -1,4 +1,4 @@
-<AppChrome @editorDocument={{editorDocument}} @documentContainer={{documentContainer}} @save={{action "save"}} @startSyncModal={{null}} @publish={{action "publish"}} @sendToTrash={{action "sendToTrash"}} />
+<AppChrome @documentType="meetingMinutes" @editorDocument={{editorDocument}} @documentContainer={{documentContainer}} @save={{action "save"}} @startSyncModal={{null}} @publish={{action "publish"}} @sendToTrash={{action "sendToTrash"}} />
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if validationErrors}}
   <WuModal @title="Er zijn fouten bij de validatie" @onClose={{action "closeValidationModal"}} as |m|>
@@ -39,7 +39,7 @@
      which works on an inconsistent state.
    --}}
   {{#unless hasPerformedSaveAndTransitionToEditModeTask}}
-    <RdfaEditorContainer @profile={{profile}} @editorDocument={{editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} />
+    <RdfaEditorContainer @profile={{profile}} @editorDocument={{editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} @typeOfWrappingDiv="foaf:Document" />
   {{/unless}}
 {{/if}}
 {{outlet}}
