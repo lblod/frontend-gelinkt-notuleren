@@ -25,9 +25,15 @@
       <ThSortable @field="status" @currentSorting={{sort}} @label="Status" @class="data-table__header-title u-align-right" />
     </c.header>
     <c.body as |container|>
-      <td><LinkTo @route="editor-documents.show" @model={{row.id}}>{{container.currentVersion.title}}</LinkTo></td>
-      <td>{{moment-calendar container.currentVersion.createdOn}}</td>
-      <td class="u-align-right"><EditorStatusPill @status={{container.status}} /></td>
+      {{#with container.currentVersion as |row|}}
+        {{#if (eq container.folder.name "meeting minutes")}}
+          <td><LinkTo @route="editor-documents.edit" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo></td>
+        {{else}}
+          <td><LinkTo @route="draft-decisions.edit" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo></td>
+        {{/if}}
+        <td>{{moment-calendar container.currentVersion.createdOn}}</td>
+        <td class="u-align-right"><EditorStatusPill @status={{container.status}} /></td>
+      {{/with}}
     </c.body>
   </t.content>
 </DataTable>

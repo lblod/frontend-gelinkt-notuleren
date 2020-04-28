@@ -17,6 +17,10 @@ export default Component.extend({
     return status;
   }),
 
+  isArchived: computed('documentStatus', function() {
+    return this.documentStatus.get('id') === "cda8ec80-8508-40e2-9bbb-bee6d9536abb";
+  }),
+
   isDraftDecisions: computed('typeDocument', function() {
     return this.documentType === "draftDecisions";
   })

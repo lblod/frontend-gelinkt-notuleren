@@ -12,11 +12,11 @@ export default Controller.extend(EditorDocumentBaseController, {
   },
 
   save: task(function *() {
-     let editorDocument = this.editorDocument;
-     if(this.hasDocumentValidationErrors(editorDocument)){
-       this.set('validationErrors', true);
-       return null;
-     }
+    let editorDocument = this.editorDocument;
+    if(this.hasDocumentValidationErrors(editorDocument)){
+      this.set('validationErrors', true);
+      return null;
+    }
 
     const savedDoc = yield this.saveEditorDocument.perform(editorDocument);
     return savedDoc;
@@ -33,6 +33,17 @@ export default Controller.extend(EditorDocumentBaseController, {
     return savedDoc;
   }),
 
+  unarchive: task(function *() {
+    let editorDocument = this.editorDocument;
+    if(this.hasDocumentValidationErrors(editorDocument)){
+      this.set('validationErrors', true);
+      return null;
+    }
+
+    const savedDoc = yield this.saveEditorDocument.perform(editorDocument,  this.getStatusFor('actiefStatusId'));
+    return savedDoc;
+  }),
+
   syncDocument: task(function * () {
     const savedDoc = yield this.save.perform();
     /*
@@ -45,7 +56,7 @@ export default Controller.extend(EditorDocumentBaseController, {
   actions: {
 
     handleRdfaEditorInit(editor){
-       this.set('editor', editor);
+      this.set('editor', editor);
     },
 
     async syncDocument() {
@@ -60,6 +71,11 @@ export default Controller.extend(EditorDocumentBaseController, {
 
     async archive() {
       const savedDoc = await this.archive.perform();
+      this.set('editorDocument', savedDoc);
+    },
+
+    async unarchive() {
+      const savedDoc = await this.unarchive.perform();
       this.set('editorDocument', savedDoc);
     },
 
