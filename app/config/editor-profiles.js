@@ -69,5 +69,10 @@ export default {
     "rdfa-editor-besluit-type-plugin",
     "rdfa-editor-import-draft-decisions-plugin"
   ],
+  draftDecisionsProfile: [
+    "rdfa-editor-standard-template-plugin",
+    "rdfa-editor-citaten-plugin",
+    "rdfa-editor-besluit-type-plugin"
+  ],
   none: []
 };

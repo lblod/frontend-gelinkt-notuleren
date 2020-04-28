@@ -11,6 +11,12 @@ export default Route.extend({
       editorDocumentFolders: await this.store.findAll('editor-document-folder')
     });
   },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set('profile', 'draftDecisionsProfile');
+  },
+
   actions: {
     error(error /*, transition */) {
       if (error.errors && error.errors[0].status === "404") {
