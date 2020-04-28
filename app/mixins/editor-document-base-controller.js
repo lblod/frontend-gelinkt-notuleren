@@ -104,49 +104,41 @@ export default Mixin.create({
     this.transitionToRoute('documents.show.publish.index', containerId);
   }),
 
-  setEditorProfile: task(function *(){
-    const bestuurseenheid = yield this.get('currentSession.group');
-    this.set('profile', (yield bestuurseenheid.get('classificatie')).get('uri'));
-  }),
-
   profile: 'default',
-  init() {
-    this._super(...arguments);
-    this.setEditorProfile.perform();
-  },
 
- actions: {
+  actions: {
+    debug(info) {
+       this.set('debug', info);
+    },
 
-   debug(info) {
-      this.set('debug', info);
-   },
+    sendToTrash(){
+      this.set('displayDeleteModal', true);
+    },
 
-   sendToTrash(){
-     this.set('displayDeleteModal', true);
-   },
-   publish() {
-     this.publish.perform();
-   },
-   async deleteDocument(){
-     const container = this.documentContainer;
-     const deletedStatus = this.getStatusFor('trashStatusId');
-     container.set('status', deletedStatus);
-     await container.save();
-     this.set('displayDeleteModal', false);
-     this.transitionToRoute('inbox');
-   },
+    publish() {
+      this.publish.perform();
+    },
 
-   onCloseDeleteModal(){
-     this.set('displayDeleteModal', false);
-   },
+    async deleteDocument(){
+      const container = this.documentContainer;
+      const deletedStatus = this.getStatusFor('trashStatusId');
+      container.set('status', deletedStatus);
+      await container.save();
+      this.set('displayDeleteModal', false);
+      this.transitionToRoute('inbox');
+    },
 
-   closeValidationModal(){
-     this.set('validationErrors', false);
-   },
+    onCloseDeleteModal(){
+      this.set('displayDeleteModal', false);
+    },
 
-   updateTasklists(tasklists){
-     this.set('tasklists', tasklists);
-   }
+    closeValidationModal(){
+      this.set('validationErrors', false);
+    },
 
- }
+    updateTasklists(tasklists){
+      this.set('tasklists', tasklists);
+    }
+
+  }
 });
