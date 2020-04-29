@@ -12,6 +12,7 @@ export default Route.extend({
       documentContainer: container,
       editorDocument: await container.get('currentVersion'),
       editorDocumentStatuses: await this.store.findAll('editor-document-status'),
+      editorDocumentFolders: await this.store.findAll('editor-document-folder'),
       bestuurseenheidClassificatie: bestuurseenheid.get('classificatie')
     });
   },

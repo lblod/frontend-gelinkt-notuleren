@@ -10,6 +10,7 @@ export default Route.extend({
     return RSVP.hash({
       editorDocument: this.store.createRecord('editor-document'),
       editorDocumentStatuses: this.store.findAll('editor-document-status'),
+      editorDocumentFolders: await this.store.findAll('editor-document-folder'),
       bestuurseenheidClassificatie: bestuurseenheid.get('classificatie')
      });
   },
