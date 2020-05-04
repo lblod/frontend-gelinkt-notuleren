@@ -1,15 +1,27 @@
 import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
+  currentSession: service(),
+
   async model(params){
+    const bestuurseenheid = await this.get('currentSession.group');
     const container = await this.store.findRecord('document-container', params.id, { include: 'status' });
     return RSVP.hash({
       documentContainer: container,
       editorDocument: await container.get('currentVersion'),
-      editorDocumentStatuses: await this.store.findAll('editor-document-status')
+      editorDocumentStatuses: await this.store.findAll('editor-document-status'),
+      editorDocumentFolders: await this.store.findAll('editor-document-folder'),
+      bestuurseenheidClassificatie: bestuurseenheid.get('classificatie')
     });
   },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set('profile', model.bestuurseenheidClassificatie.get('uri'));
+  },
+
   actions: {
     error(error /*, transition */) {
       if (error.errors && error.errors[0].status === "404") {

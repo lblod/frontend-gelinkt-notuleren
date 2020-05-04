@@ -15,7 +15,7 @@ export default Route.extend(DataTableRouteMixin, {
     const query = {
       include: 'status,current-version',
       'filter[status][:id:]': 'c02542af-e6be-4cc6-be60-4530477109fc', // actief
-      'filter[folder][:id:]': '0239c9f9-d7eb-48d2-8195-00d2c281206b' // meeting minutes
+      'filter[folder][:id:]': 'ae5feaed-7b70-4533-9417-10fbbc480a4c' // decision drafts
     };
 
     if (params.title && params.title.length > 0)

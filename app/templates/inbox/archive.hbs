@@ -1,21 +1,12 @@
 <DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
-	    <div class="u-padding--round--tiny">
-	      <div class="grid">
-	        <div class="col--7-12 u-wide-on-print">
-            <h1 class="h4 u-spacer--tiny">Archief</h1>
-            <TextSearch @filter={{title}} @placeholder="Zoek naar gearchiveerd document" />
-{{!-- 	          <ul class="bullet-list">
-	            {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
-	          </ul> --}}
-	        </div>
-	        <div class="col--5-12">
-	          <div class="search-box u-spacer--top--tiny">
-	          </div>
-	        </div>
-	      </div>
-	    </div>
+      <AuToolbar class="au-o-box au-o-box--small">
+        <h1 class="au-c-heading-1">Archief</h1>
+        <AuToolbarGroup>
+          <TextSearch @filter={{title}} @placeholder="Zoek naar gearchiveerd document" />
+        </AuToolbarGroup>
+      </AuToolbar>
     </menu.general>
   </t.menu>
   <t.content as |c|>
@@ -25,9 +16,15 @@
       <ThSortable @field="status" @currentSorting={{sort}} @label="Status" @class="data-table__header-title u-align-right" />
     </c.header>
     <c.body as |container|>
-      <td><LinkTo @route="editor-documents.show" @model={{row.id}}>{{container.currentVersion.title}}</LinkTo></td>
-      <td>{{moment-calendar container.currentVersion.createdOn}}</td>
-      <td class="u-align-right"><EditorStatusPill @status={{container.status}} /></td>
+      {{#with container.currentVersion as |row|}}
+        {{#if (eq container.folder.name "meeting minutes")}}
+          <td><LinkTo @route="editor-documents.edit" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo></td>
+        {{else}}
+          <td><LinkTo @route="draft-decisions.edit" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo></td>
+        {{/if}}
+        <td>{{moment-calendar container.currentVersion.createdOn}}</td>
+        <td class="u-align-right"><EditorStatusPill @status={{container.status}} /></td>
+      {{/with}}
     </c.body>
   </t.content>
 </DataTable>

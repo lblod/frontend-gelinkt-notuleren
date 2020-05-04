@@ -1,15 +1,10 @@
 import Controller from '@ember/controller';
 import EditorDocumentBaseController from '../../mixins/editor-document-base-controller';
 import { task } from 'ember-concurrency';
-import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(EditorDocumentBaseController, {
   store: service(),
-  init() {
-    this._super(...arguments);
-    this.set('publicationUrl', ENV['publicatie']['baseUrl']);
-  },
 
   save: task(function *() {
     let editorDocument = this.editorDocument;
@@ -17,7 +12,6 @@ export default Controller.extend(EditorDocumentBaseController, {
       this.set('validationErrors', true);
       return null;
     }
-
     const savedDoc = yield this.saveEditorDocument.perform(editorDocument);
     return savedDoc;
   }),
@@ -44,27 +38,25 @@ export default Controller.extend(EditorDocumentBaseController, {
     return savedDoc;
   }),
 
-  syncDocument: task(function * () {
-    const savedDoc = yield this.save.perform();
-    /*
-     * THIS IS A HUGE PROBLEM: when saving and waiting for a second async task, the document fails.
-     */
-    this.store.createRecord('sync', { document: savedDoc }).save();
-    return savedDoc;
-  }),
+  generateDocumentToDownload() {
+    const context = JSON.parse(this.editorDocument.context);
+    let prefixes = Object.entries(context.prefix).map(([key, value]) => {
+      return `${key}: ${value}`;
+    }).join(' ');
+    const document = `
+      <div vocab="${context.vocab}" prefix="${prefixes}" typeof="foaf:Document" resource="#">
+        ${this.editor.htmlContent}
+      </div>
+    `;
+    return document;
+  },
 
   actions: {
-
     handleRdfaEditorInit(editor){
       this.set('editor', editor);
     },
 
-    async syncDocument() {
-      this.set('syncModalDisplay', false);
-      const savedDoc = await this.syncDocument.perform();
-      this.set('editorDocument', savedDoc);
-    },
-    async save(){
+    async save() {
       const savedDoc = await this.save.perform();
       this.set('editorDocument', savedDoc);
     },
@@ -79,12 +71,25 @@ export default Controller.extend(EditorDocumentBaseController, {
       this.set('editorDocument', savedDoc);
     },
 
-    startSyncModal(){
-      this.set('syncModalDisplay', true);
+    cancelSyncModal() {
+      this.set('syncModalDisplay', false);
     },
 
-    cancelSyncModal(){
-      this.set('syncModalDisplay', false);
+    
+
+    download() {
+      const doc = this.generateDocumentToDownload();
+      const title = this.editorDocument.title;
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(doc));
+      element.setAttribute('download', `${title}.html`);
+
+      element.style.display = 'none';
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
     }
   }
 });

@@ -1,10 +1,17 @@
 <div class="au-o-box au-o-box--small au-c-app-chrome">
   <AuToolbar class="au-c-toolbar--wrap au-u-margin-bottom-small">
     <AuToolbarGroup>
+      {{#if this.isMeetingMinutes}}
       <AuLink @linkRoute="inbox.index" @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
         Terug naar overzicht notulen
       </AuLink>
+      {{else if this.isDraftDecisions}}
+      <AuLink @linkRoute="inbox.draft-decisions" @skin="secondary">
+        <AuIcon @icon="arrow-left" @alignment="left" />
+        Terug naar overzicht ontwerpbesluiten
+      </AuLink>
+      {{/if}}
       <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
     </AuToolbarGroup>
     <AuToolbarGroup>
@@ -33,7 +40,14 @@
           </AuButton>
         </li>
         {{/if}}
-        {{!-- // Still needed? --}}
+        {{#if @exportHtmlFunction}}
+        <li class="au-c-list-horizontal__item">
+          <AuButton {{on "click" this.exportHtmlFunction}} @skin="tertiary">
+            <i class="fa fa-retweet"></i>
+            Exporteer als HTML
+          </AuButton>
+        </li>
+        {{/if}}
         {{#if features.languageSelect}}
         <li class="au-c-list-horizontal__item">
           <LanguageSelect />
@@ -56,18 +70,33 @@
       {{/if}}
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--secondary au-c-toolbar__group--fill au-c-toolbar__group--small">
-      {{#if editorDocument.isNew}}
+      {{#if @editorDocument.isNew}}
         <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert">
           <AuIcon @icon="bin" @alignment="left" />
           Verwijder concept
         </LinkTo>
       {{else}}
+        {{#if isArchived}}
+          <AuButton {{on "click" this.unarchive}} @skin="tertiary">
+            <AuIcon @icon="document" @alignment="left" />
+            Maak actief
+          </AuButton>
+        {{else}}
+          <AuButton {{on "click" this.archive}} @skin="tertiary">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="au-c-icon au-c-icon--left" aria-hidden="true">
+              <path d="M29.3333333,1.83333333 L7.33333333,1.83333333 C5.3075,1.83333333 3.66666667,3.47416667 3.66666667,5.5 L3.66666667,31.1666667 L7.33333333,31.1666667 L7.33333333,5.5 L29.3333333,5.5 L29.3333333,1.83333333 Z M34.8333333,9.16666667 L14.6666667,9.16666667 C12.6408333,9.16666667 11,10.8075 11,12.8333333 L11,38.5 C11,40.5258333 12.6408333,42.1666667 14.6666667,42.1666667 L34.8333333,42.1666667 C36.8591667,42.1666667 38.5,40.5258333 38.5,38.5 L38.5,12.8333333 C38.5,10.8075 36.8591667,9.16666667 34.8333333,9.16666667 Z M34.8333333,38.5 L14.6666667,38.5 L14.6666667,12.8333333 L34.8333333,12.8333333 L34.8333333,38.5 Z"/>
+            </svg>
+            Archiveer
+          </AuButton>
+        {{/if}}
         <AuButton {{on "click" this.sendToTrash}} @skin="tertiary" @alert="true">
           <AuIcon @icon="bin" @alignment="left" />
           Naar prullenmand
         </AuButton>
       {{/if}}
-      <AuButton {{on "click" this.publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
+      {{#if @publish}}
+        <AuButton {{on "click" this.publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
+      {{/if}}
       <AuButton {{on "click" this.save}}>Bewaar concept</AuButton>
     </AuToolbarGroup>
   </AuToolbar>

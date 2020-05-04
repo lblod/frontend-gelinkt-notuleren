@@ -7,7 +7,7 @@ export default Component.extend({
   setRdfaContext(element){
     element.setAttribute('vocab', JSON.parse(this.get('editorDocument.context'))['vocab']);
     element.setAttribute('prefix', this.prefixToAttrString(JSON.parse(this.get('editorDocument.context'))['prefix']));
-    element.setAttribute('typeof', 'foaf:Document');
+    element.setAttribute('typeof', this.typeOfWrappingDiv);
     element.setAttribute('resource', '#');
   },
 

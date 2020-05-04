@@ -3,7 +3,12 @@
     <menu.general>
       <AuToolbar class="au-o-box au-o-box--small">
         <h1 class="au-c-heading-1">Notulen zitting</h1>
-        <TextSearch @filter={{title}} @placeholder="Zoek titel notulen" class="au-u-1-2@small" />
+        <AuToolbarGroup>
+          <TextSearch @filter={{title}} @placeholder="Zoek titel notulen" class="au-u-1-2@small" />
+          <AuButton {{action 'openNewDocument'}}>
+            Nieuwe zitting
+          </AuButton>
+        </AuToolbarGroup>
       </AuToolbar>
       {{!-- <ul class="bullet-list">
         {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}

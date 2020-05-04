@@ -10,18 +10,30 @@
   <div class="au-o-grid au-o-grid--flush au-o-grid--stretch">
     <div class="au-o-grid__item au-u-1-4@small au-u-1-5@medium au-u-1-6@large au-u-hide-on-print">
       <div class="au-c-sidebar">
-        <div class="au-c-sidebar__header">
+        {{!-- <div class="au-c-sidebar__header">
           <AuButton {{action 'openNewDocument'}} @width="block">
             Nieuwe zitting
           </AuButton>
-        </div>
+        </div> --}}
         <div class="au-c-sidebar__content">
           <nav>
             <ul class="au-c-list-navigation">
               <li class="au-c-list-navigation__item">
                 <AuNavigationLink @linkRoute="inbox.index">
                   <AuIcon @icon="documents" @alignment="left" />
-                  Actieve documenten
+                  Notulen
+                </AuNavigationLink>
+              </li>
+              <li class="au-c-list-navigation__item">
+                <AuNavigationLink @linkRoute="inbox.draft-decisions">
+                  <AuIcon @icon="documents" @alignment="left" />
+                  Ontwerpbesluiten
+                </AuNavigationLink>
+              </li>
+               <li class="au-c-list-navigation__item">
+                <AuNavigationLink @linkRoute="inbox.archive">
+                  <AuIcon @icon="documents" @alignment="left" />
+                  Archief
                 </AuNavigationLink>
               </li>
               <li class="au-c-list-navigation__item">

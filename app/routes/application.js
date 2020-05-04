@@ -9,10 +9,13 @@ export default Route.extend(ApplicationRouteMixin, {
   moment: service(),
   currentSession: service(),
   features: service(),
+  intl: service(),
 
   beforeModel(transition) {
     this.moment.setTimeZone('Europe/Brussels');
     this.moment.setLocale('nl');
+    const userLocale = ( navigator.language || navigator.languages[0] )
+    this.intl.setLocale([userLocale, 'en-us']);
     this.updateFeatureFlags(transition.to.queryParams);
     return this.loadCurrentSession();
   },
