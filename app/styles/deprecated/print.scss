@@ -3,7 +3,8 @@
   Style what printing looks like here.
  ========================================================================== */
 
-.u-hide-on-print--show {
+.u-hide-on-print--show,
+.au-u-hide-on-print--show {
   border-bottom: 3px dashed $blue-gray;
   position: relative;
   margin-bottom: 6rem;
@@ -32,8 +33,14 @@
   .editor-commands,
   .editor-loading-events,
   .editor-chrome,
+  .au-c-app-chrome,
   .tasklist.tasklist--open,
-  .u-hide-on-print {
+  .u-hide-on-print,
+  .au-u-hide-on-print,
+  .say-toolbar,
+  .say-container__aside,
+  .au-c-toolbar__group--search,
+  .au-c-main-header {
     display: none !important;
   }
 
@@ -82,17 +89,25 @@
     }
   }
 
-  .editor {
+  .say-container {
+    all: initial;
+  }
+
+  .editor,
+  .say-editor {
     background-color: transparent;
-    padding: 0;
+    padding: 0 !important;
   }
 
   .tasklist.tasklist--open + .container-flex--contain .editor__paper,
   .tasklist + .container-flex--contain .editor__paper,
-  .editor__paper {
+  .editor__paper,
+  .say-editor,
+  .say-editor__paper {
     width: 100% !important;
     max-width: none;
     min-height: none;
+    height: auto;
     overflow: visible;
     margin: 0;
     box-shadow: none;
@@ -101,7 +116,8 @@
     pointer-events: none;
   }
 
-  .u-wide-on-print {
+  .u-wide-on-print,
+  .au-u-wide-on-print {
     min-width: 100% !important;
     width: 100% !important;
     max-width: none !important;
