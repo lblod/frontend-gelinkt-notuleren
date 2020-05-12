@@ -93,7 +93,9 @@ $say-switch-label-color          : $au-neutral-dark;
 $say-switch-color                : $au-neutral-light;
 $say-switch-active-color         : $au-primary;
 
-// Button
+// BUTTON
+// ---
+
 $say-button-height                : $au-unit-large - $au-unit-small !default;
 $say-button-font-family           : $au-font !default;
 $say-button-font-size             : $au-base !default;
@@ -116,7 +118,7 @@ $say-button-secondary-bg-color            : $au-white !default;
 $say-button-secondary-bg-hover-color      : transparent !default;
 
 // Tertiary button
-$say-button-tertiary-height               : $au-unit !default;
+$say-button-tertiary-height               : $au-unit !default; // TODO think of height
 $say-button-tertiary-color                : $au-primary !default;
 $say-button-tertiary-hover-color          : $au-primary-light !default;
 $say-button-tertiary-border-color         : transparent !default;
