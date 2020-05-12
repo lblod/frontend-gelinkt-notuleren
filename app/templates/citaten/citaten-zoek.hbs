@@ -367,15 +367,18 @@
 
 <div class="modal-overlay">
   <div class="modal-dialog modal-dialog--wide modal-dialog--sectioned" tabindex="-1" role="document" aria-hidden="true">
-    <div class="modal-dialog__header">
+    <div class="modal-dialog__header u-padding--round">
       <div class="grid">
         <div class="col--10-12">
+          <p class="u-spacer--tiny">
+            <LinkTo @route="inbox.index" class="smaller link-dark">&leftarrow; Terug naar overzicht notulen</LinkTo>
+          </p>
           <h1 class="au-u-h3">Voeg een verwijzing toe</h1>
         </div>
-        <div class="col--2-12 u-align-right" data-ember-action="" data-ember-action-905="905">
+        <div class="col--2-12 u-align-right">
           <div class="anti-jitter">
             <a class="link--icon--close" href="#">
-              <span class="u-visually-hidden">Venster sluiten</span>
+              <span>Venster sluiten</span>
             </a>
           </div>
         </div>
@@ -384,24 +387,24 @@
     <div class="modal-dialog__content modal-dialog__content--sectioned">
       <div class="grid grid--collapse">
         <div class="col--3-12 u-background--gray-lightest u-padding--round--small">
-          <label for="search-codex">Zoekwoord</label>
-          <input class="input-field--block input-field" type="text" name="" id="search-codex">
+          <label class="say-label" for="search-codex">Zoekwoord</label>
+          <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
 
           <div class="form__row">
-            <input type="checkbox" name="" id="opschrift" checked>
-            <label for="opschrift">Zoek in opschrift</label>
+            <input class="say-checkbox" type="checkbox" name="" id="opschrift" checked>
+            <label class="say-label" for="opschrift">Zoek in opschrift</label>
           </div>
 
           <div class="form__row">
-            <input type="checkbox" name="" id="inhoud" checked>
-            <label for="inhoud">Zoek in inhoud</label>
+            <input class="say-checkbox" type="checkbox" name="" id="inhoud" checked>
+            <label class="say-label" for="inhoud">Zoek in inhoud</label>
           </div>
 
-          <div class="form__row">
-            <button class="au-c-button">Zoek?</button>
-          </div>
+{{!--           <div class="form__row">
+            <button class="say-button">Zoek (liever auto-search)</button>
+          </div> --}}
 
-          <hr class="u-hr">
+          <hr class="u-hr u-spacer--tb--small">
 
           <div class="form__row">
             Type document?
@@ -416,7 +419,18 @@
               <div class="grid grid--collapse">
                 <div class="col--10-12">
                   <p>Decreet over het lokaal bestuur <span style="background-color:yellow;">vaststelling</span></p>
-                  <p class="text-fade">DD/MM/YYYY</p>
+                  <p><strong>DD/MM/YYYY</strong></p>
+                </div>
+                <div class="col--2-12">
+                  <i class="fa fa-chevron"></i>
+                </div>
+              </div>
+            </li>
+            <li class="link-list__item link-list__item--capped u-padding--round--small">
+              <div class="grid grid--collapse">
+                <div class="col--10-12">
+                  <p>Decreet over het lokaal bestuur <span style="background-color:yellow;">vaststelling</span></p>
+                  <p><strong>DD/MM/YYYY</strong></p>
                 </div>
                 <div class="col--2-12">
                   <i class="fa fa-chevron"></i>
@@ -427,7 +441,7 @@
               <div class="grid grid--collapse">
                 <div class="col--10-12">
                   <p>Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)</p>
-                  <p class="text-fade">DD/MM/YYYY</p>
+                  <p><strong>DD/MM/YYYY</strong></p>
                 </div>
                 <div class="col--2-12">
                   <i class="fa fa-chevron"></i>
@@ -438,7 +452,18 @@
               <div class="grid grid--collapse">
                 <div class="col--10-12">
                   <p>Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)</p>
-                  <p class="text-fade">DD/MM/YYYY</p>
+                  <p><strong>DD/MM/YYYY</strong></p>
+                </div>
+                <div class="col--2-12">
+                  <i class="fa fa-chevron"></i>
+                </div>
+              </div>
+            </li>
+            <li class="link-list__item link-list__item--capped u-padding--round--small">
+              <div class="grid grid--collapse">
+                <div class="col--10-12">
+                  <p>Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)</p>
+                  <p><strong>DD/MM/YYYY</strong></p>
                 </div>
                 <div class="col--2-12">
                   <i class="fa fa-chevron"></i>
@@ -446,7 +471,28 @@
               </div>
             </li>
           </ul>
-          <div class="u-border--light--top u-padding--round--small u-background--gray-lightest">Pagination</div>
+          <div class="u-border--light--top u-padding--round--small">
+            <div class="grid">
+              <div class="col--6-12">
+                <span class="pager__element">
+                  <a class="say-button say-button--tertiary">
+                    <i class="fa fa-angle-left u-padding--right--tiny"></i> vorige <span class="u-visually-hidden"> 5 rijen</span>
+                  </a>
+                </span>
+                <span class="pager__element">
+                  <a class="say-button say-button--tertiary">
+                    volgende <span class="u-visually-hidden"> 5 rijen</span> <i class="fa fa-angle-right u-padding--left--tiny"></i>
+                  </a>
+                </span>
+              </div>
+              <div class="col--6-12 u-align-right">
+                <span class="pager__element">
+                  <span class="u-visually-hidden">Rij</span>
+                  <strong>Artikels 5 tot en met 10</strong> van 59 artikels
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
