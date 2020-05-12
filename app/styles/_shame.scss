@@ -209,7 +209,7 @@ input.input-field {
 }
 
 // Fix visited state on links acting as buttons
-// @TODO: port to ember-appuniversum component or create a link button
+// @TODO: port to ember-appuniversum component or convert link to button
 .au-c-button-link {
   @include au-font-size($au-button-font-size, $au-button-height - $au-button-border * 2);
   cursor: default;

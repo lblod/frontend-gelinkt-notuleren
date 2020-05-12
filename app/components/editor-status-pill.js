@@ -20,6 +20,6 @@ export default Component.extend({
       // besluitenlijst publiek
       return "warning";
     }
-    return "";
+    return "active";
   })
 });
