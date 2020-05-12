@@ -1,14 +1,16 @@
 <DataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.draftDecisions.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box au-o-box--small">
-        <h1 class="au-c-heading-1">{{t 'inbox.draftDecisions.pageTitle'}}</h1>
-        <AuToolbarGroup>
-          <TextSearch @filter={{this.title}} @placeholder={{t 'inbox.draftDecisions.searchPlaceholder'}} />
+      <AuToolbar class="au-o-box au-o-box--tiny">
+        <AuHeading>
+          {{t 'inbox.draftDecisions.pageTitle'}}
+        </AuHeading>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <TextSearch @filter={{this.title}} @placeholder={{t 'inbox.draftDecisions.searchPlaceholder'}} class="au-u-1-2@small" />
           {{!-- <LinkTo @route="ontwerpbesluiten-documents.demo-1-b" class="button button--link button--link--dark">Ontwerp invoegen kort</LinkTo>
           <LinkTo @route="ontwerpbesluiten-documents.demo-1-a" class="button button--link button--link--dark">Ontwerp invoegen tussenstap</LinkTo>
           <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo> --}}
-          <LinkTo @route="draft-decisions.new" class="au-c-button">Nieuw ontwerpbesluit</LinkTo>
+          <LinkTo @route="draft-decisions.new" class="au-c-button-link">Nieuw ontwerpbesluit</LinkTo>
         </AuToolbarGroup>
       </AuToolbar>
     </menu.general>

@@ -1,11 +1,11 @@
 <DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box au-o-box--small">
-        <h1 class="au-c-heading-1">Archief</h1>
-        <AuToolbarGroup>
-          <TextSearch @filter={{title}} @placeholder="Zoek naar gearchiveerd document" />
-        </AuToolbarGroup>
+      <AuToolbar class="au-o-box au-o-box--tiny">
+        <AuHeading>
+          Archief
+        </AuHeading>
+        <TextSearch @filter={{title}} @placeholder="Zoek naar gearchiveerd document" class="au-u-1-2@small" />
       </AuToolbar>
     </menu.general>
   </t.menu>

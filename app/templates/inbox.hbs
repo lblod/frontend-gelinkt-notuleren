@@ -7,56 +7,47 @@
 </AuMainHeader>
 
 <main id="main" class="au-c-main-container" tabindex="-1">
-  <div class="au-o-grid au-o-grid--flush au-o-grid--stretch">
-    <div class="au-o-grid__item au-u-1-4@small au-u-1-5@medium au-u-1-6@large au-u-hide-on-print">
-      <div class="au-c-sidebar">
-        {{!-- <div class="au-c-sidebar__header">
-          <AuButton {{action 'openNewDocument'}} @width="block">
-            Nieuwe zitting
-          </AuButton>
-        </div> --}}
-        <div class="au-c-sidebar__content">
-          <nav>
-            <ul class="au-c-list-navigation">
+  <div class="au-c-main-container__sidebar au-u-hide-on-print">
+    <div class="au-c-sidebar">
+      <div class="au-c-sidebar__content">
+        <nav>
+          <ul class="au-c-list-navigation">
+            <li class="au-c-list-navigation__item">
+              <AuNavigationLink @linkRoute="inbox.index">
+                <AuIcon @icon="documents" @alignment="left" />
+                Notulen
+              </AuNavigationLink>
+            </li>
+            <li class="au-c-list-navigation__item">
+              <AuNavigationLink @linkRoute="inbox.draft-decisions">
+                <AuIcon @icon="documents" @alignment="left" />
+                Ontwerpbesluiten
+              </AuNavigationLink>
+            </li>
               <li class="au-c-list-navigation__item">
-                <AuNavigationLink @linkRoute="inbox.index">
-                  <AuIcon @icon="documents" @alignment="left" />
-                  Notulen
-                </AuNavigationLink>
-              </li>
-              <li class="au-c-list-navigation__item">
-                <AuNavigationLink @linkRoute="inbox.draft-decisions">
-                  <AuIcon @icon="documents" @alignment="left" />
-                  Ontwerpbesluiten
-                </AuNavigationLink>
-              </li>
-               <li class="au-c-list-navigation__item">
-                <AuNavigationLink @linkRoute="inbox.archive">
-                  <AuIcon @icon="documents" @alignment="left" />
-                  Archief
-                </AuNavigationLink>
-              </li>
-              <li class="au-c-list-navigation__item">
-                <AuNavigationLink @linkRoute="inbox.trash">
-                  <AuIcon @icon="bin" @alignment="left" />
-                  Prullenmand
-                </AuNavigationLink>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="au-c-sidebar__footer">
-          <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/" target="_blank" rel="noopener noreferrer" class="au-c-link au-c-link--secondary au-c-link--icon">
-            <AuIcon @icon="manual" @alignment="left" />
-            Bekijk handleiding
-          </a>
-        </div>
+              <AuNavigationLink @linkRoute="inbox.archive">
+                <AuIcon @icon="documents" @alignment="left" />
+                Archief
+              </AuNavigationLink>
+            </li>
+            <li class="au-c-list-navigation__item">
+              <AuNavigationLink @linkRoute="inbox.trash">
+                <AuIcon @icon="bin" @alignment="left" />
+                Prullenmand
+              </AuNavigationLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="au-c-sidebar__footer">
+        <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/" target="_blank" rel="noopener noreferrer" class="au-c-link au-c-link--secondary au-c-link--icon">
+          <AuIcon @icon="manual" @alignment="left" />
+          Bekijk handleiding
+        </a>
       </div>
     </div>
-    <div id="content" class="au-o-grid__item au-u-3-4@small au-u-4-5@medium au-u-5-6@large au-u-wide-on-print" tabindex="-1">
-      <div class="au-c-main-container__content">
-        {{outlet}}
-      </div>
-    </div>
+  </div>
+  <div id="content" class="au-c-main-container__content au-u-wide-on-print" tabindex="-1">
+    {{outlet}}
   </div>
 </main>
