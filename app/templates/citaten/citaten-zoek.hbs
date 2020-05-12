@@ -387,30 +387,58 @@
     <div class="modal-dialog__content modal-dialog__content--sectioned">
       <div class="grid grid--collapse">
         <div class="col--3-12 u-background--gray-lightest u-padding--round--small">
-          <label class="say-label" for="search-codex">Zoekwoord</label>
-          <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+          <div class="form">
+            <div class="form__row">
+              <label class="say-label" for="search-codex">Zoekwoord</label>
+              <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+            </div>
 
-          <div class="form__row">
-            <input class="say-checkbox" type="checkbox" name="" id="opschrift" checked>
-            <label class="say-label" for="opschrift">Zoek in opschrift</label>
-          </div>
+            <div class="form__row">
+              <input class="say-checkbox" type="checkbox" name="" id="opschrift" checked>
+              <label class="say-label" for="opschrift">Zoek in opschrift</label>
+            </div>
 
-          <div class="form__row">
-            <input class="say-checkbox" type="checkbox" name="" id="inhoud" checked>
-            <label class="say-label" for="inhoud">Zoek in inhoud</label>
-          </div>
+            <div class="form__row">
+              <input class="say-checkbox" type="checkbox" name="" id="inhoud" checked>
+              <label class="say-label" for="inhoud">Zoek in inhoud</label>
+            </div>
 
-{{!--           <div class="form__row">
-            <button class="say-button">Zoek (liever auto-search)</button>
-          </div> --}}
+            <div class="form__row">
+              <button class="say-button">Zoek (liever auto-search)</button>
+            </div>
 
-          <hr class="u-hr u-spacer--tb--small">
+            <hr class="u-hr u-spacer--tb--small">
 
-          <div class="form__row">
-            Type document?
-          </div>
-          <div class="form__row">
-            Datum document / staatsblad?
+            <div class="form__row">
+              <label class="say-label" for="search-codex">Type document</label>
+              <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex" value="decreet">
+            </div>
+
+            <div class="form__row">
+              <label class="say-label" for="search-codex">Datum document</label>
+              <div class="grid">
+                <div class="col--5-12">
+                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+                </div>
+                <div class="col--1-12">tot</div>
+                <div class="col--5-12">
+                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+                </div>
+              </div>
+            </div>
+
+            <div class="form__row">
+              <label class="say-label" for="search-codex">Datum staatsblad</label>
+              <div class="grid">
+                <div class="col--5-12">
+                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+                </div>
+                <div class="col--1-12">tot</div>
+                <div class="col--5-12">
+                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col--9-12 u-border--light--right">
