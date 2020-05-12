@@ -1,119 +1,135 @@
-// ==================================
-// #SAY THEME
-// ==================================
+// // ==================================
+// // #SAY THEME
+// // ==================================
 
-// Define the look of the Say Editor by changing the variables.
+// // Define the look of the Say Editor by changing the variables.
 
-// Colors
-// ---
-$say-neutral                  : $au-neutral;
-$say-neutral-light            : $au-neutral-light;
-$say-neutral-lighter          : $au-neutral-lighter;
-$say-neutral-lightest         : $au-neutral-lightest;
-$say-neutral-dark             : $au-neutral-dark;
-$say-neutral-darker           : $au-neutral-darker;
-$say-neutral-darkest          : $au-neutral-darkest;
+// // Colors
+// // ---
+// $say-neutral                  : $au-neutral;
+// $say-neutral-light            : $au-neutral-light;
+// $say-neutral-lighter          : $au-neutral-lighter;
+// $say-neutral-lightest         : $au-neutral-lightest;
+// $say-neutral-dark             : $au-neutral-dark;
+// $say-neutral-darker           : $au-neutral-darker;
+// $say-neutral-darkest          : $au-neutral-darkest;
 
-$say-primary                  : $au-primary;
-$say-primary-light            : $au-primary-light;
-$say-primary-lighter          : $au-primary-lighter;
-$say-primary-lightest         : $au-primary-lightest;
-$say-primary-dark             : $au-primary-dark;
+// $say-primary                  : $au-primary;
+// $say-primary-light            : $au-primary-light;
+// $say-primary-lighter          : $au-primary-lighter;
+// $say-primary-lightest         : $au-primary-lightest;
+// $say-primary-dark             : $au-primary-dark;
 
-$say-outline-color            : $au-outline-color;
+// $say-outline-color            : $au-outline-color;
 
-// Font settings
-// ---
-$say-font    : $au-font;
-$say-light   : $au-light;
-$say-regular : $au-regular;
-$say-medium  : $au-medium;
-$say-bold    : $au-bold;
-
-
-// UI
-// ---
-// Display options
-$say-paper                       : true; // True = displays a paper like background.
-$say-paper-sidebar               : true; // True = adds space for a sidebar to the right.
-$say-toolbar-bottom              : false; // True = position the toolbar at the bottom.
+// // Font settings
+// // ---
+// $say-font    : $au-font;
+// $say-light   : $au-light;
+// $say-regular : $au-regular;
+// $say-medium  : $au-medium;
+// $say-bold    : $au-bold;
 
 
-// EDITOR
-// ---
-// Editor spacing and background
-$say-editor-padding              : $au-unit;
-$say-editor-background           : $au-neutral-lightest;
-
-// Paper spacing and background
-$say-paper-min-height            : calc(100vh + #{$au-unit});
-$say-paper-padding               : $au-unit-large;
-$say-paper-background            : $au-white;
-$say-paper-box-shadow            : 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
-
-// Typography
-$say-h1-font-family              : $au-font-secondary;
-$say-h1-font-weight              : $au-light;
-$say-h1-font-size                : $au-h1;
-$say-h2-font-family              : $au-font-secondary;
-$say-h2-font-weight              : $au-regular;
-$say-h2-font-size                : $au-h2;
-$say-h3-font-family              : $au-font-secondary;
-$say-h3-font-weight              : $au-regular;
-$say-h3-font-size                : $au-h3;
-$say-h4-font-family              : $au-font;
-$say-h4-font-weight              : $au-medium;
-$say-h4-font-size                : $au-h4;
-$say-h5-font-family              : $au-font;
-$say-h5-font-weight              : $au-medium;
-$say-h5-font-size                : $au-h5;
-$say-h6-font-family              : $au-font;
-$say-h6-font-weight              : $au-medium;
-$say-h6-font-size                : $au-h6;
-$say-base-font-family            : $au-font;
-$say-base-font-weight            : $au-regular;
-$say-base-font-size              : $au-base;
-$say-small-font-size             : $au-base;
-$say-smaller-font-size           : 1.4rem;
-$say-smallest-font-size          : 1.3rem;
-$say-typography-margin           : $au-unit-small;
-$say-editor-private-color        : $au-orange-dark;
-$say-editor-highlight-color      : $au-orange-lighter;
-$say-editor-highlight-hover-color: $au-orange-lightest;
+// // UI
+// // ---
+// // Display options
+// $say-paper                       : true; // True = displays a paper like background.
+// $say-paper-sidebar               : true; // True = adds space for a sidebar to the right.
+// $say-toolbar-bottom              : false; // True = position the toolbar at the bottom.
 
 
-// TOOLBAR
-// ---
-$say-toolbar-background          : $au-neutral-lighter;
-$say-toolbar-border              : tint($au-neutral-light,30);
-$say-toolbar-height              : 44px;
+// // EDITOR
+// // ---
+// // Editor spacing and background
+// $say-editor-padding              : $au-unit;
+// $say-editor-background           : $au-neutral-lightest;
 
-// Annotation switch styling
-$say-switch-label-color          : $au-neutral-dark;
-$say-switch-color                : $au-neutral-light;
-$say-switch-active-color         : $au-primary;
+// // Paper spacing and background
+// $say-paper-min-height            : calc(100vh + #{$au-unit});
+// $say-paper-padding               : $au-unit-large;
+// $say-paper-background            : $au-white;
+// $say-paper-box-shadow            : 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
 
-// Button
-$say-button-height               : $au-unit + $au-unit-tiny;
-$say-button-font-family          : $au-font;
-$say-button-font-size            : $au-base;
-$say-button-font-weight          : $au-regular;
-$say-button-border               : .1rem;
-$say-button-border-color         : $au-neutral-light;
-$say-button-border-hover-color   : $au-neutral-light;
-$say-button-color                : $au-neutral-dark;
-$say-button-hover-color          : $au-neutral;
-$say-button-bg-color             : $au-white;
-$say-button-bg-hover-color       : transparent;
-$say-button-radius               : 0;
+// // Typography
+// $say-h1-font-family              : $au-font-secondary;
+// $say-h1-font-weight              : $au-light;
+// $say-h1-font-size                : $au-h1;
+// $say-h2-font-family              : $au-font-secondary;
+// $say-h2-font-weight              : $au-regular;
+// $say-h2-font-size                : $au-h2;
+// $say-h3-font-family              : $au-font-secondary;
+// $say-h3-font-weight              : $au-regular;
+// $say-h3-font-size                : $au-h3;
+// $say-h4-font-family              : $au-font;
+// $say-h4-font-weight              : $au-medium;
+// $say-h4-font-size                : $au-h4;
+// $say-h5-font-family              : $au-font;
+// $say-h5-font-weight              : $au-medium;
+// $say-h5-font-size                : $au-h5;
+// $say-h6-font-family              : $au-font;
+// $say-h6-font-weight              : $au-medium;
+// $say-h6-font-size                : $au-h6;
+// $say-base-font-family            : $au-font;
+// $say-base-font-weight            : $au-regular;
+// $say-base-font-size              : $au-base;
+// $say-small-font-size             : $au-base;
+// $say-smaller-font-size           : 1.4rem;
+// $say-smallest-font-size          : 1.3rem;
+// $say-typography-margin           : $au-unit-small;
+// $say-editor-private-color        : $au-orange-dark;
+// $say-editor-highlight-color      : $au-orange-lighter;
+// $say-editor-highlight-hover-color: $au-orange-lightest;
 
 
-// ANNOTATIONS
-// ---
-// Annotation options
-$say-annotation-width            : $au-unit-huge*3;
-$say-annotation-offset           : $au-unit-large;
-$say-annotation-gutter           : $au-unit;
-$say-annotation-width-content    : $say-annotation-width;
-$say-annotation-text-color       : $au-neutral-dark;
-$say-annotation-background-color : $au-neutral-lightest;
+// // TOOLBAR
+// // ---
+// $say-toolbar-background          : $au-neutral-lighter;
+// $say-toolbar-border              : tint($au-neutral-light,30);
+// $say-toolbar-height              : 44px;
+
+// // Annotation switch styling
+// $say-switch-label-color          : $au-neutral-dark;
+// $say-switch-color                : $au-neutral-light;
+// $say-switch-active-color         : $au-primary;
+
+// // Button
+// $say-button-height                : $au-unit-large - $au-unit-small !default;
+// $say-button-font-family           : $au-font !default;
+// $say-button-font-size             : $au-base !default;
+// $say-button-font-weight           : $au-regular !default;
+// $say-button-border                : .1rem !default;
+// $say-button-border-color          : $au-primary !default;
+// $say-button-border-hover-color    : $au-primary-light !default;
+// $say-button-color                 : $au-white !default;
+// $say-button-hover-color           : $au-white !default;
+// $say-button-bg-color              : $au-primary !default;
+// $say-button-bg-hover-color        : $au-primary-light !default;
+// $say-button-radius                : 0 !default;
+
+// // Secondary button
+// $say-button-secondary-color               : $au-gray-darker !default;
+// $say-button-secondary-hover-color         : $au-gray-dark !default;
+// $say-button-secondary-border-color        : $au-neutral-light !default;
+// $say-button-secondary-border-hover-color  : $au-neutral-light !default;
+// $say-button-secondary-bg-color            : $au-white !default;
+// $say-button-secondary-bg-hover-color      : transparent !default;
+
+// // Tertiary button
+// $say-button-tertiary-height               : $au-unit !default;
+// $say-button-tertiary-color                : $au-primary !default;
+// $say-button-tertiary-hover-color          : $au-primary-light !default;
+// $say-button-tertiary-border-color         : transparent !default;
+// $say-button-tertiary-border-hover-color   : transparent !default;
+// $say-button-tertiary-bg-color             : $au-white !default;
+// $say-button-tertiary-bg-hover-color       : transparent !default;
+
+
+// // ANNOTATIONS
+// // ---
+// // Annotation options
+// $say-annotation-width            : $au-unit-huge*3;
+// $say-annotation-offset           : $au-unit-large;
+// $say-annotation-gutter           : $au-unit;
+// $say-annotation-text-color       : $au-gray;
+// $say-annotation-background-color : $au-gray-lightest;
