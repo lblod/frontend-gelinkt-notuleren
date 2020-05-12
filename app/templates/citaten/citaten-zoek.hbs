@@ -384,9 +384,9 @@
         </div>
       </div>
     </div>
-    <div class="modal-dialog__content modal-dialog__content--sectioned">
+    <div class="modal-dialog__content modal-dialog__content--sidebar-grid">
       <div class="grid grid--collapse">
-        <div class="col--3-12 u-background--gray-lightest u-padding--round--small">
+        <div class="col--3-12 u-background--gray-lightest u-padding--round--small u-border--light--right">
           <div class="form">
             <div class="form__row">
               <label class="say-label" for="search-codex">Zoekwoord</label>
@@ -407,7 +407,7 @@
               <button class="say-button">Zoek (liever auto-search)</button>
             </div>
 
-            <hr class="u-hr u-spacer--tb--small">
+            <hr class="u-spacer--tb--small">
 
             <div class="form__row">
               <label class="say-label" for="search-codex">Type document</label>
@@ -416,11 +416,11 @@
 
             <div class="form__row">
               <label class="say-label" for="search-codex">Datum document</label>
-              <div class="grid">
+              <div class="grid grid--collapse">
                 <div class="col--5-12">
                   <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
                 </div>
-                <div class="col--1-12">tot</div>
+                <div class="col--2-12 u-align-center">tot</div>
                 <div class="col--5-12">
                   <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
                 </div>
@@ -429,11 +429,11 @@
 
             <div class="form__row">
               <label class="say-label" for="search-codex">Datum staatsblad</label>
-              <div class="grid">
+              <div class="grid grid--collapse">
                 <div class="col--5-12">
                   <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
                 </div>
-                <div class="col--1-12">tot</div>
+                <div class="col--2-12 u-align-center">tot</div>
                 <div class="col--5-12">
                   <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
                 </div>
@@ -441,64 +441,96 @@
             </div>
           </div>
         </div>
-        <div class="col--9-12 u-border--light--right">
-          <ul class="link-list link-list--dark link-list--bordered">
-            <li class="link-list__item link-list__item--capped u-padding--round--small">
-              <div class="grid grid--collapse">
-                <div class="col--10-12">
-                  <p>Decreet over het lokaal bestuur <span style="background-color:yellow;">vaststelling</span></p>
-                  <p><strong>DD/MM/YYYY</strong></p>
-                </div>
-                <div class="col--2-12">
-                  <i class="fa fa-chevron"></i>
-                </div>
-              </div>
-            </li>
-            <li class="link-list__item link-list__item--capped u-padding--round--small">
-              <div class="grid grid--collapse">
-                <div class="col--10-12">
-                  <p>Decreet over het lokaal bestuur <span style="background-color:yellow;">vaststelling</span></p>
-                  <p><strong>DD/MM/YYYY</strong></p>
-                </div>
-                <div class="col--2-12">
-                  <i class="fa fa-chevron"></i>
-                </div>
-              </div>
-            </li>
-            <li class="link-list__item link-list__item--capped u-padding--round--small">
-              <div class="grid grid--collapse">
-                <div class="col--10-12">
-                  <p>Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)</p>
-                  <p><strong>DD/MM/YYYY</strong></p>
-                </div>
-                <div class="col--2-12">
-                  <i class="fa fa-chevron"></i>
-                </div>
-              </div>
-            </li>
-            <li class="link-list__item link-list__item--capped u-padding--round--small">
-              <div class="grid grid--collapse">
-                <div class="col--10-12">
-                  <p>Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)</p>
-                  <p><strong>DD/MM/YYYY</strong></p>
-                </div>
-                <div class="col--2-12">
-                  <i class="fa fa-chevron"></i>
-                </div>
-              </div>
-            </li>
-            <li class="link-list__item link-list__item--capped u-padding--round--small">
-              <div class="grid grid--collapse">
-                <div class="col--10-12">
-                  <p>Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)</p>
-                  <p><strong>DD/MM/YYYY</strong></p>
-                </div>
-                <div class="col--2-12">
-                  <i class="fa fa-chevron"></i>
-                </div>
-              </div>
-            </li>
-          </ul>
+
+        <div class="col--9-12">
+          <div class="container-flex--scroll">
+            <ul class="say-link-list say-link-list--large">
+              <li class="say-link-list__item say-link-list__item--arrow">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
+                    <g class="nav-right">
+                      <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
+                    </g>
+                  </svg>
+                  Decreet over het lokaal bestuur <span style="background-color:yellow;">vaststelling</span>
+                  <br>
+                  <strong>DD/MM/YYYY</strong>
+                </a>
+              </li>
+              <li class="say-link-list__item say-link-list__item--arrow">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
+                    <g class="nav-right">
+                      <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
+                    </g>
+                  </svg>
+                  Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
+                  <br>
+                  <strong>DD/MM/YYYY</strong>
+                </a>
+              </li>
+              <li class="say-link-list__item say-link-list__item--arrow">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
+                    <g class="nav-right">
+                      <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
+                    </g>
+                  </svg>
+                  Decreet over het lokaal bestuur <span style="background-color:yellow;">vaststelling</span>
+                  <br>
+                  <strong>DD/MM/YYYY</strong>
+                </a>
+              </li>
+              <li class="say-link-list__item say-link-list__item--arrow">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
+                    <g class="nav-right">
+                      <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
+                    </g>
+                  </svg>
+                  Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
+                  <br>
+                  <strong>DD/MM/YYYY</strong>
+                </a>
+              </li>
+              <li class="say-link-list__item say-link-list__item--arrow">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
+                    <g class="nav-right">
+                      <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
+                    </g>
+                  </svg>
+                  Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
+                  <br>
+                  <strong>DD/MM/YYYY</strong>
+                </a>
+              </li>
+              <li class="say-link-list__item say-link-list__item--arrow">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
+                    <g class="nav-right">
+                      <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
+                    </g>
+                  </svg>
+                  Decreet over het lokaal bestuur <span style="background-color:yellow;">vaststelling</span>
+                  <br>
+                  <strong>DD/MM/YYYY</strong>
+                </a>
+              </li>
+              <li class="say-link-list__item say-link-list__item--arrow">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
+                    <g class="nav-right">
+                      <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
+                    </g>
+                  </svg>
+                  Besluit van de Vlaamse Regering tot <span style="background-color:yellow;">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
+                  <br>
+                  <strong>DD/MM/YYYY</strong>
+                </a>
+              </li>
+            </ul>
+          </div>
           <div class="u-border--light--top u-padding--round--small">
             <div class="grid">
               <div class="col--6-12">
