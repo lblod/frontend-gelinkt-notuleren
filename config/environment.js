@@ -88,8 +88,6 @@ module.exports = function(environment) {
     ENV['torii']['providers']['acmidm-oauth2']['baseUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/auth';
     ENV['torii']['providers']['acmidm-oauth2']['redirectUri'] = 'https://gelinkt-notuleren.vlaanderen.be/authorization/callback';
     ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/logout';
-    ENV['vo-webuniversum']['header'] = '//widgets.vlaanderen.be/widget/live/423fc174cf074c52a9ffd3251cc2a72e';
-    ENV['vo-webuniversum']['footer'] = '//widgets.vlaanderen.be/widget/live/3a70f9cfd28e44e5949e79a438eeeb8d';
     ENV['publicatie']['baseUrl'] = 'https://publicatie.gelinkt-notuleren.vlaanderen.be/';
   }
 
