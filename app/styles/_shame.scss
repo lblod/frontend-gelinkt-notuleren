@@ -167,7 +167,87 @@ input.input-field {
   font-size: 1.4rem;
 }
 
-// Disable fixed scrollbars on html element > @TODO: port to appuniversum
-html {
-  overflow-y: auto;
+// Fix ACMIDM login alerts/loading in header
+// @TODO: rework ACMIDM components to work with appuniversum classes
+.au-c-main-header__actions .alert {
+  position: absolute;
+  right: $au-unit-small;
+  max-width: 480px;
+  top: $au-unit-large + $au-unit-tiny;
+}
+
+// Position ACMIDM login loader
+.au-c-main-header__actions .u-padding--round--small {
+  position: absolute;
+  right: 0;
+  max-width: 480px;
+  top: $au-unit-large - $au-unit-tiny/2;
+  padding: 0;
+  background-color: $au-white;
+
+  .loader-wrapper {
+    padding: 0;
+  }
+}
+
+.au-c-dropdown__menu [role="menuitem"] {
+  padding-top: $au-unit-tiny;
+  padding-bottom: $au-unit-tiny;
+}
+
+// Toolbar alignment fix
+// @TODO: port to ember-appuniversum component
+.au-c-toolbar__group {
+  align-items: center !important; // Fix toolbar alignment
+}
+
+// Right aligned toolbar group
+// @TODO: port to ember-appuniversum component
+.au-c-toolbar__group--search {
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+// Fix visited state on links acting as buttons
+// @TODO: port to ember-appuniversum component or convert link to button
+.au-c-button-link {
+  @include au-font-size($au-button-font-size, $au-button-height - $au-button-border * 2);
+  cursor: default;
+  font-family: $au-font;
+  font-weight: $au-regular;
+  height: $au-button-height;
+  text-decoration: none;
+  text-align: center;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 $au-unit-small .1rem; // Visually center the text in the button
+  border-radius: $au-button-radius;
+  border: $au-button-border solid $au-button-contrast-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color $au-transition, background-color $au-transition, border-color $au-transition, box-shadow $au-transition;
+
+  &,
+  &:visited {
+    color: $au-button-color;
+    background-color: $au-button-contrast-color;
+    box-shadow: inset 0px 0px 0px $au-button-border transparent;
+  }
+
+  &:hover,
+  &:focus {
+    color: $au-button-color;
+    background-color: $au-button-contrast-hover-color;
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: $au-outline;
+  }
+
+  &:active {
+    background-color: $au-button-contrast-active-color;
+  }
 }
