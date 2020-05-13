@@ -12,7 +12,8 @@
 // Hide metadata
 .au-c-rdfa-editor {
   [property="heeftNotulen"],
-  [property="ext:metadata"] {
+  [property="ext:metadata"],
+  [property="ext:templateVersion"] {
     border: 0 !important;
     clip: rect(0 0 0 0) !important;
     clip-path: inset(50%) !important;
@@ -29,7 +30,7 @@
 .au-c-rdfa-scanner {
   padding: $au-unit;
   margin: $au-unit;
-  box-shadow: 0 1px 3px rgba($au-neutral-darkest, .1), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
+  box-shadow: 0 1px 3px rgba($au-gray-900, .1), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
 
   *:before {
     display: none;
@@ -40,7 +41,7 @@
   padding: $au-unit $au-unit-large - $au-unit-tiny/2 $au-unit $au-unit;
   margin-left: $au-unit;
   margin-bottom: $au-unit;
-  box-shadow: 0 1px 3px rgba($au-neutral-darkest, .2), 0 4px 20px rgba($au-neutral-darkest, .035), 0 1px 1px rgba($au-neutral-darkest, .025);
+  box-shadow: 0 1px 3px rgba($au-gray-900, .2), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
 
   *:before {
     display: none;

@@ -1,21 +1,14 @@
 <div class="tasklist__header">
-  <div class="grid">
-        <div class="col--10-12">
-            <h2 class="h4 u-spacer--tb--tiny">Takenlijsten</h2>
-        </div>
-        <div class="col--2-12 u-align--right">
-            <div class="button-group">
-                <a class="u-spacer--none button button--link button--link--dark button--narrow" {{action "expandTasklist"}}>
-                    <i class="vi vi-expand u-padding--right--none vi-u-s"></i>
-                    <i class="vi vi-long-arrow vi-u-90deg"></i>
-                    <span>klap takenlijst in</span>
-                </a>
-{{!--                     <a class="u-spacer--none button button--link button--link--dark button--narrow">
-                    <i class="vi vi-cross u-padding--right--none vi-u-s delete-me-button-hide-checklist"></i>
-                </a> --}}
-            </div>
-        </div>
-    </div>
+  <AuToolbar>
+    <AuHeading @level="2" @skin="3">
+      Takenlijsten
+    </AuHeading>
+    <a class="u-spacer--none button button--link button--link--dark button--narrow" {{action "expandTasklist"}}>
+      <i class="vi vi-expand u-padding--right--none vi-u-s"></i>
+      <i class="vi vi-long-arrow vi-u-90deg"></i>
+      <span>klap takenlijst in</span>
+    </a>
+  </AuToolbar>
 </div>
 <div class="tasklist__content">
   <div class="tasklist-navigation">

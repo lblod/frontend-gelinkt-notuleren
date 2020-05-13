@@ -1,81 +1,99 @@
-<div class="grid u-spacer--tiny">
-  <div class="col--6-12">
-    {{#if this.isMeetingMinutes}}
-      <LinkTo @route="inbox.index" class="smaller link-dark">&leftarrow; Terug naar overzicht notulen</LinkTo>
-    {{else if this.isDraftDecisions}}
-      <LinkTo @route="inbox.draft-decisions" class="smaller link-dark">&leftarrow; Terug naar overzicht ontwerpbesluiten</LinkTo>
-    {{/if}}
-    <label class="pill u-spacer--left--tiny">
-      <span>{{get (await this.currentSession.group) 'classificatie.label'}} {{get (await this.currentSession.group) 'naam'}}</span>
-    </label>
-  </div>
-  <div class="col--6-12">
-    <div class="grid grid--collapse grid--align-right">
-      <div class="col--10-12 u-align-right">
-        <WuButtonGroup>
-          {{#if @exportHtmlFunction}}
-            <WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @onClick={{@exportHtmlFunction}}>
-              <i class="fa fa-retweet"></i>Exporteer als HTML
-            </WuLinkButton>
-          {{/if}}
-          {{!-- // Still needed? --}}
-        </WuButtonGroup>
-      </div>
-      {{#if features.languageSelect}}
-        <div class="col--2-12 u-align-left u-padding--left--small">
-          <LanguageSelect />
-        </div>
+<div class="au-o-box au-o-box--small au-c-app-chrome">
+  <AuToolbar class="au-c-toolbar--wrap au-u-margin-bottom-small">
+    <AuToolbarGroup>
+      {{#if this.isMeetingMinutes}}
+      <AuLink @linkRoute="inbox.index" @skin="secondary">
+        <AuIcon @icon="arrow-left" @alignment="left" />
+        Terug naar overzicht notulen
+      </AuLink>
+      {{else if this.isDraftDecisions}}
+      <AuLink @linkRoute="inbox.draft-decisions" @skin="secondary">
+        <AuIcon @icon="arrow-left" @alignment="left" />
+        Terug naar overzicht ontwerpbesluiten
+      </AuLink>
       {{/if}}
-    </div>
-  </div>
-</div>
-<div class="grid">
-  <div class="col--6-12">
-    <EditorDocumentTitle @editorDocument={{@editorDocument}} @readOnly={{@readOnly}} />
-    {{#unless @editorDocument.isNew}}
-      <EditorStatusPill @status={{documentStatus}} />
-    {{/unless}}
-  </div>
-  <div class="col--6-12 u-align-right">
-    <WuButtonGroup @class="u-align-right">
-      {{#if @editorDocument.isNew}}
-        <LinkTo @route="inbox.index" class="button button--small button--narrow button--link button--link--dark">Verwijder concept</LinkTo>
-      {{else}}
-        {{#if isArchived}}
-          <WuButton @label="Maak actief" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{@unarchive}} />
+      <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <ul class="au-c-list-horizontal au-u-padding-right-tiny">
+        {{#unless editorDocument.isNew}}
+        {{#if editorDocument.updatedOn}}
+        <li class="au-c-list-horizontal__item">
+          <span class="au-c-app-chrome__status">
+            Bewaard op {{moment-calendar editorDocument.updatedOn}}
+          </span>
+        </li>
         {{else}}
-          <WuButton @label="Archiveer" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{@archive}} />
+        <li class="au-c-list-horizontal__item">
+          <span class="au-c-app-chrome__status">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            Wijzigingen niet bewaard
+          </span>
+        </li>
         {{/if}}
-        <WuButton @label="Naar prullenmand" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick={{@sendToTrash}} />
+        {{/unless}}
+        {{#if features.languageSelect}}
+        <li class="au-c-list-horizontal__item">
+          <LanguageSelect />
+        </li>
+        {{/if}}
+      </ul>
+    </AuToolbarGroup>
+  </AuToolbar>
+  <AuToolbar class="au-c-toolbar--wrap">
+    <AuToolbarGroup class="au-c-toolbar__group--main au-c-toolbar__group--fill">
+      {{#unless editorDocument.isNew}}
+        <EditorStatusPill @status={{await documentContainer.status}} />
+      {{/unless}}
+      {{#if editorDocument.isNew}}
+      <AuPill @skin="warning">
+        <AuIcon @icon="alert-triangle" @alignment="left" />
+        Concept niet bewaard
+      </AuPill>
+      {{/if}}
+      <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
+    </AuToolbarGroup>
+    <AuToolbarGroup class="au-c-toolbar__group--secondary au-c-toolbar__group--fill au-c-toolbar__group--small">
+      {{#if @editorDocument.isNew}}
+        <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
+          <AuIcon @icon="bin" @alignment="left" />
+          Verwijder concept
+        </LinkTo>
+      {{else}}
+      <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+        {{#if startSyncModal}}
+          <AuButton {{on "click" this.startSyncModal}} @skin="tertiary" role="menuitem">
+            <AuIcon @icon="renew" @alignment="left" />
+            Synchroniseer gegevens met OCMW
+          </AuButton>
+        {{/if}}
+        {{#if @exportHtmlFunction}}
+          <AuButton {{on "click" this.exportHtmlFunction}} @skin="tertiary" role="menuitem">
+            <AuIcon @icon="export" @alignment="left" />
+            Exporteer als HTML
+          </AuButton>
+        {{/if}}
+        {{#if isArchived}}
+          <AuButton {{on "click" this.unarchive}} @skin="tertiary" role="menuitem">
+            <AuIcon @icon="document" @alignment="left" />
+            Maak actief
+          </AuButton>
+        {{else}}
+          <AuButton {{on "click" this.archive}} @skin="tertiary" role="menuitem">
+            <AuIcon @icon="archive" @alignment="left" />
+            Archiveer
+          </AuButton>
+        {{/if}}
+        <AuButton {{on "click" this.sendToTrash}} @skin="tertiary" @alert="true" role="menuitem">
+          <AuIcon @icon="bin" @alignment="left" />
+          Naar prullenmand
+        </AuButton>
+      </AuDropdown>
       {{/if}}
       {{#if @publish}}
-        <WuButton @label="Ondertekenen en publiceren" @isSmall={{true}} @isNarrow={{true}} @isAlt={{true}} @onClick={{@publish}} />
+        <AuButton {{on "click" this.publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
       {{/if}}
-      <WuButton @label="Bewaar concept" @isNarrow={{true}} @isSmall={{true}} @onClick={{@save}} />
-    </WuButtonGroup>
-
-    <div class="u-spacer--top--tiny">
-      {{#if @editorDocument.isNew}}
-        <p class="smaller">
-          <label class="pill pill--primary-yellow">
-            <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-            <span>Concept niet bewaard</span>
-          </label>
-        </p>
-      {{else}}
-        {{#if @editorDocument.updatedOn}}
-          <p class="smaller">
-            Bewaard {{moment-calendar @editorDocument.updatedOn}}
-          </p>
-        {{else}}
-          <p class="smaller">
-            <span class="smaller u-padding--right--tiny">
-              <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-              <span>Wijzigingen niet bewaard</span>
-            </span>
-          </p>
-        {{/if}}
-      {{/if}}
-    </div>
-  </div>
+      <AuButton {{on "click" this.save}}>Bewaar concept</AuButton>
+    </AuToolbarGroup>
+  </AuToolbar>
 </div>

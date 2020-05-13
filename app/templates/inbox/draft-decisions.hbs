@@ -1,22 +1,18 @@
 <DataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.draftDecisions.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <div class="u-padding--round--tiny">
-        <div class="grid">
-          <div class="col--5-12 u-wide-on-print">
-            <h1 class="h4 u-spacer--tiny">{{t 'inbox.draftDecisions.pageTitle'}}</h1>
-            <TextSearch @filter={{this.title}} @placeholder={{t 'inbox.draftDecisions.searchPlaceholder'}} />
-          </div>
-          <div class="col--7-12">
-            <div class="u-align-right">
-{{!--               <LinkTo @route="ontwerpbesluiten-documents.demo-1-b" class="button button--link button--link--dark">Ontwerp invoegen kort</LinkTo>
-              <LinkTo @route="ontwerpbesluiten-documents.demo-1-a" class="button button--link button--link--dark">Ontwerp invoegen tussenstap</LinkTo>
-              <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo> --}}
-              <LinkTo @route="draft-decisions.new" class="button">Nieuw ontwerpbesluit</LinkTo>
-            </div>
-          </div>
-        </div>
-      </div>
+      <AuToolbar class="au-o-box au-o-box--tiny">
+        <AuHeading @skin="2">
+          {{t 'inbox.draftDecisions.pageTitle'}}
+        </AuHeading>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <TextSearch @filter={{this.title}} @placeholder={{t 'inbox.draftDecisions.searchPlaceholder'}} class="au-u-1-2@small" />
+          {{!-- <LinkTo @route="ontwerpbesluiten-documents.demo-1-b" class="button button--link button--link--dark">Ontwerp invoegen kort</LinkTo>
+          <LinkTo @route="ontwerpbesluiten-documents.demo-1-a" class="button button--link button--link--dark">Ontwerp invoegen tussenstap</LinkTo>
+          <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo> --}}
+          <LinkTo @route="draft-decisions.new" class="au-c-button-link">Nieuw ontwerpbesluit</LinkTo>
+        </AuToolbarGroup>
+      </AuToolbar>
     </menu.general>
   </table.menu>
   <table.content as |c|>

@@ -5,7 +5,6 @@ import { computed } from '@ember/object';
 export default Component.extend({
   currentSession: service(),
   features: service(),
-  classNames: ["editor-chrome"],
   tagName: "nav",
 
   isMeetingMinutes: computed('typeDocument', function() {

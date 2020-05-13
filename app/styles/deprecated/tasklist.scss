@@ -4,125 +4,127 @@
  ========================================================================== */
 
 .tasklist {
-    position: absolute;
-    left: -50rem;
-    top: 0;
-    bottom: 0;
-    background: $white;
-    min-width: 20rem;
-    max-width: 50rem;
-    display: block;
-    z-index: 4;
-    border-right: 1px solid $blue-gray-lighter;
-    box-shadow: 0.5rem 0.5rem 1rem $blue-gray-lighter;
-    display: flex;
-    flex-direction: column;
-    transition: all 200ms;
+  position: absolute;
+  left: -50rem;
+  top: 44px;
+  bottom: 0;
+  background: $white;
+  min-width: $au-unit-huge*3 + $au-unit;
+  max-width: $au-unit-huge*3 + $au-unit;
+  display: block;
+  z-index: 9;
+  border-right: 1px solid $blue-gray-lighter;
+  box-shadow: 0 1px 3px rgba($au-gray-900, .1), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
+  display: flex;
+  flex-direction: column;
+  transition: all 200ms;
 
-    a.button.button--link.button--link--dark {
-        text-decoration: none;
-    }
-
-    .tasklist__header {
-      i.vi-long-arrow + span,
-      .vi-long-arrow {
-          display: none;
-      }
-    }
-}
-
-.task-description-indent-1{
-  width: 100%;
-  margin-left: 3%;
+  a.button.button--link.button--link--dark {
+    text-decoration: none;
   }
 
+  .tasklist__header {
+    i.vi-long-arrow + span,
+    .vi-long-arrow {
+      display: none;
+    }
+  }
+
+  .toggle.toggle--arrow-down {
+    @include au-font-size($au-h6);
+    font-weight: $au-regular;
+    color: $au-gray-700;
+    padding-left: $au-unit-small + $au-unit-tiny;
+  }
+
+  .toggle.toggle--arrow-down:before {
+    font-size: 1rem;
+    color: $au-gray-700;
+    top: .35rem;
+  }
+}
+
+.task-description-indent-1 {
+  width: 100%;
+  margin-left: 3%;
+}
+
 .tasklist--open {
-    min-width: 20rem;
-    width: 30%;
-    left: 0;
-    transition: all 200ms;
+  min-width: $au-unit-huge*3 + $au-unit;
+  width: $au-unit-huge*3 + $au-unit;
+  left: 0;
+  transition: all 200ms;
 }
 
 .tasklist--expanded {
-    width: 100%;
-    right: 0;
-    z-index: 1006;
-    max-width: none;
+  width: 100%;
+  right: 0;
+  z-index: 1006;
+  max-width: none;
 
-    .tasklist__header {
-      .vi-expand {
-          display: none;
-      }
-
-      i.vi-long-arrow + span,
-      .vi-long-arrow {
-          display: inline-block;
-      }
+  .tasklist__header {
+    .vi-expand {
+        display: none;
     }
+
+    i.vi-long-arrow + span,
+    .vi-long-arrow {
+      display: inline-block;
+    }
+  }
 }
 
 .tasklist__header {
-    border-bottom: 1px solid #E8EBEE;
-    padding: 0.5em 1em;
+  border-bottom: 1px solid $au-gray-200;
+  padding: $au-unit-small;
 }
 
 .tasklist__content {
-    border-bottom: 1px solid #E8EBEE;
-    padding: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    flex: 1 1 auto;
+  border-bottom: 1px solid $au-gray-200;
+  padding: $au-unit-small;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 1 1 auto;
 }
 
 .tasklist-navigation {
-    padding: 2rem 0 1rem;
+  padding: 0;
 
-    > .tasklist-navigation__group {
-        padding-left: 1rem;
-    }
+  > .tasklist-navigation__group {
+    padding-left: 0;
+  }
 }
 
 .tasklist-navigation__group {
-    padding: 0 1rem 1rem 3rem;
+  padding: 0;
 
-    &.accordion__content {
-        padding: 1rem 0 0 1.65rem;
-    }
+  &.accordion__content {
+    padding-left: $au-unit-small;
+  }
 }
+
 .tasklist-navigation__item {
-    padding: 0 0 0.5rem 0;
+  .h3 {
+    @include au-font-size($au-h5);
+    font-weight: $au-regular;
+  }
 
-    .h6 {
-        font-weight: 400;
-    }
+  .h6 {
+    @include au-font-size($au-h6);
+    font-weight: $au-regular;
+  }
 
-    > .tasklist-navigation__group {
-        margin-top: 1rem;
-    }
+  label {
+    @include au-font-size($au-base);
+  }
 
-    &.tasklist-navigation__item.js-accordion {
-        border-bottom: 1px solid $blue-gray-light;
-        padding-bottom: 2.5rem;
-        margin-bottom: 2.5rem;
-    }
-}
+  > .tasklist-navigation__group {
+    margin-top: $au-unit-small;
+  }
 
-// Moved here from editor.scss
-.tasklist + .container-flex--contain .editor__paper {
-  left: 0rem;
-  min-width: 600px;
-  width: 70%;
-  max-width: 750px;
-}
-
-.tasklist.tasklist--open + .container-flex--contain .editor__paper {
-  left: 20rem;
-  min-width: 470px;
-}
-
-@media (min-width: 1600px) {
-  .tasklist + .container-flex--contain .editor__paper {
-    max-width: none;
-    width: 75%;
+  &.tasklist-navigation__item.js-accordion + &.tasklist-navigation__item.js-accordion {
+    border-top: 1px solid $au-gray-200;
+    padding-top: $au-unit-small;
+    margin-top: $au-unit-small;
   }
 }
