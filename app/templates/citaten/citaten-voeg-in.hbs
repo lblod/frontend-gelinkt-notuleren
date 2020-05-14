@@ -1,63 +1,67 @@
-<nav class="editor-chrome">
-  <div class="grid u-spacer--tiny">
-    <div class="col--6-12">
-      <LinkTo @route="inbox.ontwerpbesluiten" class="smaller link-dark">&leftarrow; Terug naar overzicht ontwerpbesluiten</LinkTo>
-      <label class="pill u-spacer--left--tiny">
-        <span>Gemeente Aalst</span>
-        {{!-- Replace with generated pill --}}
-      </label>
-    </div>
-    <div class="col--6-12">
-      <div class="grid grid--collapse grid--align-right">
-        <div class="col--10-12 u-align-right">
-          <WuButtonGroup>
-            {{#if startSyncModal}}
-              <WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @onClick={{startSyncModal}}>
-                <i class="fa fa-rotate-right"></i>Synchroniseer gegevens met OCMW
-              </WuLinkButton>
-            {{/if}}
-            {{!-- // Still needed? --}}
-            <WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @onClick=Null>
-              <i class="fa fa-retweet"></i>Exporteer als HTML
-            </WuLinkButton>
-          </WuButtonGroup>
-        </div>
-        {{#if features.languageSelect}}
-          <div class="col--2-12 u-align-left u-padding--left--small">
-            <LanguageSelect />
-          </div>
+<nav>
+  <div class="au-o-box au-o-box--small au-c-app-chrome">
+    <AuToolbar class="au-c-toolbar--wrap au-u-margin-bottom-small">
+      <AuToolbarGroup>
+        <AuLink @linkRoute="inbox.index" @skin="secondary">
+          <AuIcon @icon="arrow-left" @alignment="left" />
+          Terug naar overzicht notulen
+        </AuLink>
+        <span class="au-c-app-chrome__entity">Gemeente Aalst</span>
+      </AuToolbarGroup>
+      <AuToolbarGroup>
+
+      </AuToolbarGroup>
+    </AuToolbar>
+    <AuToolbar class="au-c-toolbar--wrap">
+      <AuToolbarGroup class="au-c-toolbar__group--main au-c-toolbar__group--fill">
+        <AuPill @skin="action">
+          Concept
+        </AuPill>
+        <EditorDocumentTitle @editorDocument="Titel ontwerpbesluit" />
+      </AuToolbarGroup>
+      <AuToolbarGroup class="au-c-toolbar__group--secondary au-c-toolbar__group--fill au-c-toolbar__group--small">
+        {{#if @editorDocument.isNew}}
+          <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
+            <AuIcon @icon="bin" @alignment="left" />
+            Verwijder concept
+          </LinkTo>
+        {{else}}
+        <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+          {{#if startSyncModal}}
+            <AuButton {{on "click" this.startSyncModal}} @skin="tertiary" role="menuitem">
+              <AuIcon @icon="renew" @alignment="left" />
+              Synchroniseer gegevens met OCMW
+            </AuButton>
+          {{/if}}
+          {{#if @exportHtmlFunction}}
+            <AuButton {{on "click" this.exportHtmlFunction}} @skin="tertiary" role="menuitem">
+              <AuIcon @icon="export" @alignment="left" />
+              Exporteer als HTML
+            </AuButton>
+          {{/if}}
+          {{#if isArchived}}
+            <AuButton {{on "click" this.unarchive}} @skin="tertiary" role="menuitem">
+              <AuIcon @icon="document" @alignment="left" />
+              Maak actief
+            </AuButton>
+          {{else}}
+            <AuButton {{on "click" this.archive}} @skin="tertiary" role="menuitem">
+              <AuIcon @icon="archive" @alignment="left" />
+              Archiveer
+            </AuButton>
+          {{/if}}
+          <AuButton {{on "click" this.sendToTrash}} @skin="tertiary" @alert="true" role="menuitem">
+            <AuIcon @icon="bin" @alignment="left" />
+            Naar prullenmand
+          </AuButton>
+        </AuDropdown>
         {{/if}}
-      </div>
-    </div>
-  </div>
-  <div class="grid">
-    <div class="col--6-12">
-      <div class="u-spacer--top--tinier">
-        <h1>
-          Titel ontwerpbesluit
-        {{!-- Replace with generated titel --}}
-        </h1>
-      </div>
-      <span class="pill--primary-blue pill">Concept</span>
-        {{!-- Replace with generated pill --}}
-    </div>
-
-    <div class="col--6-12 u-align-right">
-      <WuButtonGroup @class="u-align-right">
-        {{!--Only for new ones: <LinkTo @route="inbox.ontwerpbesluiten" class="button button--small button--narrow button--link button--link--dark">Verwijder concept</LinkTo> --}}
-        <WuButton @label="Naar prullenmand" @isSmall={{true}} @isNarrow={{true}} @isLink={{true}} @isDarkLink={{true}} @onClick="Null" />
-        <WuButton @label="Bewaar ontwerpbesluit" @isNarrow={{true}} @isSmall={{true}} @onClick="Null" />
-      </WuButtonGroup>
-
-      <div class="u-spacer--top--tiny">
-        <p class="smaller">
-          <span class="smaller u-padding--right--tiny">
-            <span class="badge badge--accent badge--xs badge--initials"><i class="vi vi-warning"></i></span>
-            <span>Wijzigingen niet bewaard</span>
-          </span>
-        </p>
-      </div>
-    </div>
+        {{#if @publish}}
+          <AuButton {{on "click" this.publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
+        {{/if}}
+        <AuButton {{on "click" this.save}}>Bewaar concept</AuButton>
+      </AuToolbarGroup>
+    </AuToolbar>
   </div>
 </nav>
 
@@ -146,7 +150,7 @@
         <input id="toggle-1" class="say-switch__input" name="toggle" type="checkbox">
         <label class="say-switch__label" for="toggle-1">Toon annotaties</label>
       </div>
-      <button class="say-button">
+      <button class="say-button say-button--secondary">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" class="say-icon say-icon--left" aria-hidden="true">
           <polygon points="40.5 24.643 24.643 24.643 24.643 40.5 19.357 40.5 19.357 24.643 3.5 24.643 3.5 19.357 19.357 19.357 19.357 3.5 24.643 3.5 24.643 19.357 40.5 19.357"></polygon>
         </svg>
