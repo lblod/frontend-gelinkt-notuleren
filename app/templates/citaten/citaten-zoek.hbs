@@ -381,7 +381,7 @@
                 <path d="M8.11 15l-1.42 1.41L2 11.69 6.69 7l1.42 1.41-2.3 2.28H22v2H5.81L8.11 15z" class="Vector"/>
               </g>
             </svg>
-            Terug naar overzicht notuleren
+            Terug naar ontwerp
           </LinkTo>
         </p>
         <h1 class="say-modal__title" tabindex="-1">
@@ -398,56 +398,79 @@
         <div class="col--3-12 u-background--gray-lightest u-padding--round--small u-border--light--right">
           <div class="form">
             <div class="form__row">
-              <label class="say-label" for="search-codex">Zoekwoord</label>
-              <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+              <label class="say-label say-label--block" for="search-codex">Zoekwoord</label>
+              <input class="say-input say-input--block say-input--search" type="text" name="" id="search-codex">
             </div>
 
             <div class="form__row">
-              <input class="say-checkbox" type="checkbox" name="" id="opschrift" checked>
-              <label class="say-label" for="opschrift">Zoek in opschrift</label>
+              <div class="say-checkbox-wrapper">
+                <input class="say-checkbox" type="checkbox" name="" id="opschrift" checked>
+                <label class="say-label" for="opschrift">Zoek in opschrift</label>
+              </div>
             </div>
 
             <div class="form__row">
-              <input class="say-checkbox" type="checkbox" name="" id="inhoud" checked>
-              <label class="say-label" for="inhoud">Zoek in inhoud</label>
+              <div class="say-checkbox-wrapper">
+                <input class="say-checkbox" type="checkbox" name="" id="inhoud" checked>
+                <label class="say-label" for="inhoud">Zoek in inhoud</label>
+              </div>
             </div>
 
             <div class="form__row">
-              <button class="say-button">Zoek (liever auto-search)</button>
+              <button class="say-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left" aria-hidden="true">
+                  <path d="M21.701 20.301l-5.4-5.4a7.88 7.88 0 001.7-4.9 8.27 8.27 0 00-2.3-5.7 8.21 8.21 0 00-11.4 0 8.21 8.21 0 000 11.4 8.27 8.27 0 005.7 2.3 7.88 7.88 0 004.9-1.7l5.4 5.4 1.4-1.4zm-11.7-4.3a5.6 5.6 0 01-4.2-1.8 5.6 5.6 0 01-1.8-4.2 5.6 5.6 0 011.8-4.2 5.6 5.6 0 014.2-1.8 5.6 5.6 0 014.2 1.8 5.6 5.6 0 011.8 4.2 5.6 5.6 0 01-1.8 4.2 5.6 5.6 0 01-4.2 1.8z" class="Vector"></path>
+                </svg>
+                Zoek (liever auto-search)
+              </button>
             </div>
 
             <hr class="u-spacer--tb--small">
 
             <div class="form__row">
-              <label class="say-label" for="search-codex">Type document</label>
-              <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex" value="decreet">
+              <label class="say-label say-label--block" for="search-codex">Type document</label>
+              <select class="say-input say-input--block say-input--select" type="text" name="" id="search-codex" value="decreet">
+                <option value="Decreet">Decreet</option>
+                <option value="Decreet">Decreet</option>
+                <option value="Decreet">Decreet</option>
+                <option value="Decreet">Decreet</option>
+              </select>
             </div>
 
             <div class="form__row">
-              <label class="say-label" for="search-codex">Datum document</label>
-              <div class="grid grid--collapse">
-                <div class="col--5-12">
-                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+              <h3 class="say-label say-label--block">Filter op datum document <span class="say-help-text">&mdash; DD/MM/YYYY</span></h3>
+              <div class="grid">
+                <div class="col--2-12 say-u-align-center"><span aria-hidden="true">Van</span></div>
+                <div class="col--10-12">
+                  <label class="say-label say-u-hidden-visually" for="search-codex-datum-doc-van">Filter op datum document vanaf datum, geschreven in DD/MM/YYYY formaat</label>
+                  <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-doc-van" size="10">
                 </div>
-                <div class="col--2-12 u-align-center">tot</div>
-                <div class="col--5-12">
-                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="grid">
+                <div class="col--2-12 say-u-align-center"><span aria-hidden="true">Tot</span></div>
+                <div class="col--10-12">
+                  <label class="say-label say-u-hidden-visually" for="search-codex-datum-doc-tot">Filter op datum document vanaf datum, geschreven in DD/MM/YYYY formaat</label>
+                  <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-doc-tot" size="10">
                 </div>
               </div>
             </div>
 
             <div class="form__row">
-              <label class="say-label" for="search-codex">Datum staatsblad</label>
-              <div class="grid grid--collapse">
-                <div class="col--5-12">
-                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
-                </div>
-                <div class="col--2-12 u-align-center">tot</div>
-                <div class="col--5-12">
-                  <input class="say-input-field--block say-input-field input-field--block input-field" type="text" name="" id="search-codex">
-                </div>
+              <h3 class="say-label say-label--block">Filter op datum staatsblad <span class="say-help-text" aria-hidden="true">&mdash; DD/MM/YYYY</span></h3>
+              <div class="form__row">
+                <label class="say-label say-u-hidden-visually" for="search-codex-datum-staatsblad-van">Filter op datum staatsblad vanaf datum, geschreven in DD/MM/YYYY formaat</label>
+                <input class="say-input say-input--pre" aria-hidden="true" type="text" name="" value="van">
+                <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-staatsblad-van" size="10">
+              </div>
+              <div class="form__row">
+                <label class="say-label say-u-hidden-visually" for="search-codex-datum-staatsblad-tot">Filter op datum staatsblad tot datum, geschreven in DD/MM/YYYY formaat</label>
+                <input class="say-input say-input--pre" aria-hidden="true" type="text" name="" value="tot">
+                <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-staatsblad-tot" size="10">
               </div>
             </div>
+
           </div>
         </div>
         <div class="col--9-12">
@@ -544,18 +567,18 @@
               <div class="col--6-12">
                 <span class="pager__element">
                   <a class="say-button say-button--tertiary">
-                    <i class="fa fa-angle-left u-padding--right--tiny"></i> vorige <span class="u-visually-hidden"> 5 rijen</span>
+                    <i class="fa fa-angle-left u-padding--right--tiny"></i> vorige <span class="say-u-hidden-visually"> 5 rijen</span>
                   </a>
                 </span>
                 <span class="pager__element">
                   <a class="say-button say-button--tertiary">
-                    volgende <span class="u-visually-hidden"> 5 rijen</span> <i class="fa fa-angle-right u-padding--left--tiny"></i>
+                    volgende <span class="say-u-hidden-visually"> 5 rijen</span> <i class="fa fa-angle-right u-padding--left--tiny"></i>
                   </a>
                 </span>
               </div>
-              <div class="col--6-12 u-align-right">
+              <div class="col--6-12 say-u-align-right">
                 <span class="pager__element">
-                  <span class="u-visually-hidden">Rij</span>
+                  <span class="say-u-hidden-visually">Rij</span>
                   <strong>Artikels 5 tot en met 10</strong> van 59 artikels
                 </span>
               </div>
