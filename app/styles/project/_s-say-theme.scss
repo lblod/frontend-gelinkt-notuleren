@@ -85,6 +85,7 @@ $say-switch-label-color          : $au-gray-700;
 $say-switch-color                : $au-gray-300;
 $say-switch-active-color         : $au-blue-600;
 
+
 // BUTTON
 // ---
 
@@ -128,3 +129,33 @@ $say-annotation-gutter           : $au-unit;
 $say-annotation-width-content    : $say-annotation-width;
 $say-annotation-text-color       : $au-gray-700;
 $say-annotation-background-color : $au-gray-100;
+
+
+// INPUT
+// ---
+
+$say-input-height                    : $au-unit + $au-unit-small;
+$say-input-font-size                 : $au-h6;
+$say-input-color                     : $au-gray-1000;
+$say-input-border-color              : $au-gray-300;
+$say-input-focus-border-color        : $say-outline-color;
+$say-input-error-border              : $au-red-600;
+$say-input-background-color          : $au-white;
+$say-input-radius                    : 0;
+$say-input-disabled-background-color : $au-gray-100;
+$say-input-disabled-border-color     : $au-gray-600;
+$say-input-disabled-color            : $au-gray-700;
+
+
+// LABEL
+// ---
+
+$say-label-color                   : $au-gray-800 !default;
+
+
+// HELP TEXT
+// ---
+
+$say-help-text-color             : $au-gray-800 !default;
+$say-help-text-error-color       : $au-red-600 !default;
+$say-help-text-font-size         : 1.4rem !default;
