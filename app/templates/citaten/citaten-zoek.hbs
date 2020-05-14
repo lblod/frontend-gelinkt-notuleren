@@ -369,26 +369,31 @@
   </div>
 </div>
 
-<div class="modal-overlay">
-  <div class="modal-dialog modal-dialog--wide modal-dialog--sectioned" tabindex="-1" role="document" aria-hidden="true">
-    <div class="modal-dialog__header u-padding--round">
-      <div class="grid">
-        <div class="col--10-12">
-          <p class="u-spacer--tiny">
-            <LinkTo @route="inbox.index" class="smaller link-dark">&leftarrow; Terug naar overzicht notulen</LinkTo>
-          </p>
-          <h1 class="au-u-h3">Voeg een verwijzing toe</h1>
-        </div>
-        <div class="col--2-12 u-align-right">
-          <div class="anti-jitter">
-            <a class="link--icon--close" href="#">
-              <span>Venster sluiten</span>
-            </a>
-          </div>
-        </div>
+<div>
+  <span class="say-modal-backdrop is-visible" aria-hidden="true"></span>
+  <div class="say-modal say-modal--fullscreen is-visible" tabindex="-1" role="document">
+    <div class="say-modal__header">
+      <div>
+        <p class="say-modal__prefix">
+          <LinkTo @route="inbox.index" class="say-link say-link--secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="say-icon say-icon--left">
+              <g class="arrow-left">
+                <path d="M8.11 15l-1.42 1.41L2 11.69 6.69 7l1.42 1.41-2.3 2.28H22v2H5.81L8.11 15z" class="Vector"/>
+              </g>
+            </svg>
+            Terug naar overzicht notuleren
+          </LinkTo>
+        </p>
+        <h1 class="say-modal__title" tabindex="-1">
+          Voeg een verwijzing toe
+        </h1>
       </div>
+      <button type="button" {{on "click" this.closeModal}} class="say-modal__close">
+        <AuIcon @icon="cross" @size="large" />
+        <span class="au-u-hidden-visually">Venster sluiten</span>
+      </button>
     </div>
-    <div class="modal-dialog__content modal-dialog__content--sidebar-grid">
+    <div class="say-modal__body">
       <div class="grid grid--collapse">
         <div class="col--3-12 u-background--gray-lightest u-padding--round--small u-border--light--right">
           <div class="form">
@@ -445,12 +450,11 @@
             </div>
           </div>
         </div>
-
         <div class="col--9-12">
           <div class="container-flex--scroll">
             <ul class="say-link-list say-link-list--large">
               <li class="say-link-list__item say-link-list__item--arrow">
-                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
                     <g class="nav-right">
                       <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
@@ -462,7 +466,7 @@
                 </a>
               </li>
               <li class="say-link-list__item say-link-list__item--arrow">
-                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
                     <g class="nav-right">
                       <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
@@ -474,7 +478,7 @@
                 </a>
               </li>
               <li class="say-link-list__item say-link-list__item--arrow">
-                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
                     <g class="nav-right">
                       <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
@@ -486,7 +490,7 @@
                 </a>
               </li>
               <li class="say-link-list__item say-link-list__item--arrow">
-                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
                     <g class="nav-right">
                       <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
@@ -498,7 +502,7 @@
                 </a>
               </li>
               <li class="say-link-list__item say-link-list__item--arrow">
-                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
                     <g class="nav-right">
                       <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
@@ -510,7 +514,7 @@
                 </a>
               </li>
               <li class="say-link-list__item say-link-list__item--arrow">
-                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
                     <g class="nav-right">
                       <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
@@ -522,7 +526,7 @@
                 </a>
               </li>
               <li class="say-link-list__item say-link-list__item--arrow">
-                <a href="/citaten/citaten-voeg-in" class="say-link say-link--neutral">
+                <a href="/citaten/citaten-voeg-in" class="say-link say-link--secondary">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="au-c-icon au-c-icon--left au-c-icon--large" aria-hidden="true">
                     <g class="nav-right">
                       <path d="M8.429 21L7 19.5l7.143-7.5L7 4.5 8.429 3 17 12l-8.571 9z" class="Vector"/>
