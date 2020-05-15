@@ -395,11 +395,11 @@
     </div>
     <div class="say-modal__body">
       <div class="grid grid--collapse">
-        <div class="col--3-12 u-background--gray-lightest u-padding--round--small u-border--light--right">
+        <div class="col--4-12 u-background--gray-lightest u-padding--round--small u-border--light--right">
           <div class="form">
             <div class="form__row">
-              <label class="say-label say-label--block" for="search-codex">Zoekwoord</label>
-              <input class="say-input say-input--block say-input--search" type="text" name="" id="search-codex">
+              <label class="say-label say-label--block" for="search-codex">Zoekterm</label>
+              <input class="say-input say-input--search" type="text" name="" id="search-codex">
             </div>
 
             <div class="form__row">
@@ -429,51 +429,45 @@
 
             <div class="form__row">
               <label class="say-label say-label--block" for="search-codex">Type document</label>
-              <select class="say-input say-input--block say-input--select" type="text" name="" id="search-codex" value="decreet">
+              <select class="say-input say-input--select" name="" id="search-codex">
                 <option value="Decreet">Decreet</option>
-                <option value="Decreet">Decreet</option>
-                <option value="Decreet">Decreet</option>
-                <option value="Decreet">Decreet</option>
+                <option value="DecreetDecreet">DecreetDecreet</option>
+                <option value="DecreetDecreetDecreet">DecreetDecreetDecreet</option>
+                <option value="DecreetDecreetDecreetDecreet">DecreetDecreetDecreetDecreet</option>
               </select>
             </div>
 
             <div class="form__row">
-              <h3 class="say-label say-label--block">Filter op datum document <span class="say-help-text">&mdash; DD/MM/YYYY</span></h3>
-              <div class="grid">
-                <div class="col--2-12 say-u-align-center"><span aria-hidden="true">Van</span></div>
-                <div class="col--10-12">
-                  <label class="say-label say-u-hidden-visually" for="search-codex-datum-doc-van">Filter op datum document vanaf datum, geschreven in DD/MM/YYYY formaat</label>
-                  <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-doc-van" size="10">
-                </div>
+              <label class="say-label say-label--block" for="search-codex-datum-document-van">Filter op datum document</label>
+              <div class="form__row">
+                <label class="say-label say-u-hidden-visually" for="search-codex-datum-document-van">Filter op datum document vanaf datum:</label>
+                <input class="say-input say-input--pre" aria-hidden="true" type="text" name="" value="van">
+                <input class="say-input" type="date" name="" id="search-codex-datum-document-van">
               </div>
-            </div>
-            <div class="form__row">
-              <div class="grid">
-                <div class="col--2-12 say-u-align-center"><span aria-hidden="true">Tot</span></div>
-                <div class="col--10-12">
-                  <label class="say-label say-u-hidden-visually" for="search-codex-datum-doc-tot">Filter op datum document vanaf datum, geschreven in DD/MM/YYYY formaat</label>
-                  <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-doc-tot" size="10">
-                </div>
+              <div class="form__row">
+                <label class="say-label say-u-hidden-visually" for="search-codex-datum-document-tot">Filter op datum document tot datum:</label>
+                <input class="say-input say-input--pre" aria-hidden="true" type="text" name="" value="tot">
+                <input class="say-input" type="date" name="" id="search-codex-datum-document-tot">
               </div>
             </div>
 
             <div class="form__row">
-              <h3 class="say-label say-label--block">Filter op datum staatsblad <span class="say-help-text" aria-hidden="true">&mdash; DD/MM/YYYY</span></h3>
+              <label class="say-label say-label--block" for="search-codex-datum-staatsblad-van">Filter op datum staatsblad</label>
               <div class="form__row">
-                <label class="say-label say-u-hidden-visually" for="search-codex-datum-staatsblad-van">Filter op datum staatsblad vanaf datum, geschreven in DD/MM/YYYY formaat</label>
+                <label class="say-label say-u-hidden-visually" for="search-codex-datum-staatsblad-van">Filter op datum staatsblad vanaf datum:</label>
                 <input class="say-input say-input--pre" aria-hidden="true" type="text" name="" value="van">
-                <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-staatsblad-van" size="10">
+                <input class="say-input" type="date" name="" id="search-codex-datum-staatsblad-van">
               </div>
               <div class="form__row">
-                <label class="say-label say-u-hidden-visually" for="search-codex-datum-staatsblad-tot">Filter op datum staatsblad tot datum, geschreven in DD/MM/YYYY formaat</label>
+                <label class="say-label say-u-hidden-visually" for="search-codex-datum-staatsblad-tot">Filter op datum staatsblad tot datum:</label>
                 <input class="say-input say-input--pre" aria-hidden="true" type="text" name="" value="tot">
-                <input class="say-input say-input--calendar" type="text" name="" id="search-codex-datum-staatsblad-tot" size="10">
+                <input class="say-input" type="date" name="" id="search-codex-datum-staatsblad-tot">
               </div>
             </div>
 
           </div>
         </div>
-        <div class="col--9-12">
+        <div class="col--8-12">
           <div class="container-flex--scroll">
             <ul class="say-link-list say-link-list--large">
               <li class="say-link-list__item say-link-list__item--arrow">
