@@ -18,8 +18,12 @@
         </h1>
       </div>
       <button type="button" {{on "click" this.closeModal}} class="say-modal__close">
-        <AuIcon @icon="cross" @size="large" />
-        <span class="au-u-hidden-visually">Venster sluiten</span>
+        Venster sluiten
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--right say-icon--large">
+          <g class="cross">
+            <path fill-rule="evenodd" d="M12 13.414l-5.293 5.293-1.414-1.414L10.586 12 5.293 6.707l1.414-1.414L12 10.586l5.293-5.293 1.414 1.414L13.414 12l5.293 5.293-1.414 1.414L12 13.414z" class="Vector" clip-rule="evenodd"/>
+          </g>
+        </svg>
       </button>
     </div>
     <div class="say-modal__body">
@@ -30,21 +34,18 @@
               <label class="say-label say-label--block" for="search-codex">Zoekterm</label>
               <input class="say-input say-input--search say-input--block" type="text" name="" id="search-codex">
             </div>
-
             <div class="say-form__row">
               <div class="say-checkbox-wrapper">
                 <input class="say-checkbox" type="checkbox" name="" id="opschrift" checked>
                 <label class="say-label" for="opschrift">Zoek in opschrift</label>
               </div>
             </div>
-
             <div class="say-form__row">
               <div class="say-checkbox-wrapper">
                 <input class="say-checkbox" type="checkbox" name="" id="inhoud" checked>
                 <label class="say-label" for="inhoud">Zoek in inhoud</label>
               </div>
             </div>
-
             <div class="say-form__row">
               <button class="say-button">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--left" aria-hidden="true">
@@ -54,9 +55,7 @@
               </button>
             </div>
           </fieldset>
-
           <fieldset class="say-form__fieldset">
-
             <div class="say-form__row">
               <label class="say-label say-label--block" for="search-codex">Type document</label>
               <select class="say-input say-input--select" name="" id="search-codex">
@@ -66,7 +65,6 @@
                 <option value="DecreetDecreetDecreetDecreet">DecreetDecreetDecreetDecreet</option>
               </select>
             </div>
-
             <div class="say-form__row">
               <label class="say-label say-label--block" for="search-codex-datum-document-van">Filter op datum document</label>
               <div class="form__row">
@@ -80,7 +78,6 @@
                 <input class="say-input" type="date" name="" id="search-codex-datum-document-tot">
               </div>
             </div>
-
             <div class="say-form__row">
               <label class="say-label say-label--block" for="search-codex-datum-staatsblad-van">Filter op datum staatsblad</label>
               <div class="form__row">
@@ -99,7 +96,7 @@
       </div>
       <div class="say-modal__content">
         <ul class="say-link-list say-link-list--large">
-          <li class="say-link-list__item">
+          <li class="say-link-list__item say-link-list__item--insert">
             <a href="/citaten/citaten-voeg-in" class="say-link-list__link say-link-list__link--arrow">
               Decreet over het lokaal bestuur <span class="say-link__highlight">vaststelling</span>
               <br>
@@ -110,8 +107,14 @@
                 </g>
               </svg>
             </a>
+            <button class="say-link-list__insert">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--large" aria-hidden="true">
+                <path d="M14.4,8.35714846 L0,8.35714846 L0,10.7857161 L14.4,10.7857161 L14.4,8.35714846 Z M14.4,3.5 L0,3.5 L0,5.92856769 L14.4,5.92856769 L14.4,3.5 Z M19.2,13.2142838 L19.2,8.35714846 L16.8,8.35714846 L16.8,13.2142838 L12,13.2142838 L12,15.6428646 L16.8,15.6428646 L16.8,20.5 L19.2,20.5 L19.2,15.6428646 L24,15.6428646 L24,13.2142838 L19.2,13.2142838 Z M0,15.6428646 L9.6,15.6428646 L9.6,13.2142838 L0,13.2142838 L0,15.6428646 Z"/>
+              </svg>
+              <span class="say-u-hidden-visually">Voeg citaat in</span>
+            </button>
           </li>
-          <li class="say-link-list__item">
+          <li class="say-link-list__item say-link-list__item--insert">
             <a href="/citaten/citaten-voeg-in" class="say-link-list__link say-link-list__link--arrow">
               Besluit van de Vlaamse Regering tot <span class="say-link__highlight">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
               <br>
@@ -122,8 +125,14 @@
                 </g>
               </svg>
             </a>
+            <button class="say-link-list__insert">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--large" aria-hidden="true">
+                <path d="M14.4,8.35714846 L0,8.35714846 L0,10.7857161 L14.4,10.7857161 L14.4,8.35714846 Z M14.4,3.5 L0,3.5 L0,5.92856769 L14.4,5.92856769 L14.4,3.5 Z M19.2,13.2142838 L19.2,8.35714846 L16.8,8.35714846 L16.8,13.2142838 L12,13.2142838 L12,15.6428646 L16.8,15.6428646 L16.8,20.5 L19.2,20.5 L19.2,15.6428646 L24,15.6428646 L24,13.2142838 L19.2,13.2142838 Z M0,15.6428646 L9.6,15.6428646 L9.6,13.2142838 L0,13.2142838 L0,15.6428646 Z"/>
+              </svg>
+              <span class="say-u-hidden-visually">Voeg citaat in</span>
+            </button>
           </li>
-          <li class="say-link-list__item">
+          <li class="say-link-list__item say-link-list__item--insert">
             <a href="/citaten/citaten-voeg-in" class="say-link-list__link say-link-list__link--arrow">
               Decreet over het lokaal bestuur <span class="say-link__highlight">vaststelling</span>
               <br>
@@ -134,8 +143,14 @@
                 </g>
               </svg>
             </a>
+            <button class="say-link-list__insert">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--large" aria-hidden="true">
+                <path d="M14.4,8.35714846 L0,8.35714846 L0,10.7857161 L14.4,10.7857161 L14.4,8.35714846 Z M14.4,3.5 L0,3.5 L0,5.92856769 L14.4,5.92856769 L14.4,3.5 Z M19.2,13.2142838 L19.2,8.35714846 L16.8,8.35714846 L16.8,13.2142838 L12,13.2142838 L12,15.6428646 L16.8,15.6428646 L16.8,20.5 L19.2,20.5 L19.2,15.6428646 L24,15.6428646 L24,13.2142838 L19.2,13.2142838 Z M0,15.6428646 L9.6,15.6428646 L9.6,13.2142838 L0,13.2142838 L0,15.6428646 Z"/>
+              </svg>
+              <span class="say-u-hidden-visually">Voeg citaat in</span>
+            </button>
           </li>
-          <li class="say-link-list__item">
+          <li class="say-link-list__item say-link-list__item--insert">
             <a href="/citaten/citaten-voeg-in" class="say-link-list__link say-link-list__link--arrow">
               Besluit van de Vlaamse Regering tot <span class="say-link__highlight">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
               <br>
@@ -146,8 +161,14 @@
                 </g>
               </svg>
             </a>
+            <button class="say-link-list__insert">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--large" aria-hidden="true">
+                <path d="M14.4,8.35714846 L0,8.35714846 L0,10.7857161 L14.4,10.7857161 L14.4,8.35714846 Z M14.4,3.5 L0,3.5 L0,5.92856769 L14.4,5.92856769 L14.4,3.5 Z M19.2,13.2142838 L19.2,8.35714846 L16.8,8.35714846 L16.8,13.2142838 L12,13.2142838 L12,15.6428646 L16.8,15.6428646 L16.8,20.5 L19.2,20.5 L19.2,15.6428646 L24,15.6428646 L24,13.2142838 L19.2,13.2142838 Z M0,15.6428646 L9.6,15.6428646 L9.6,13.2142838 L0,13.2142838 L0,15.6428646 Z"/>
+              </svg>
+              <span class="say-u-hidden-visually">Voeg citaat in</span>
+            </button>
           </li>
-          <li class="say-link-list__item">
+          <li class="say-link-list__item say-link-list__item--insert">
             <a href="/citaten/citaten-voeg-in" class="say-link-list__link say-link-list__link--arrow">
               Besluit van de Vlaamse Regering tot <span class="say-link__highlight">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
               <br>
@@ -158,8 +179,14 @@
                 </g>
               </svg>
             </a>
+            <button class="say-link-list__insert">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--large" aria-hidden="true">
+                <path d="M14.4,8.35714846 L0,8.35714846 L0,10.7857161 L14.4,10.7857161 L14.4,8.35714846 Z M14.4,3.5 L0,3.5 L0,5.92856769 L14.4,5.92856769 L14.4,3.5 Z M19.2,13.2142838 L19.2,8.35714846 L16.8,8.35714846 L16.8,13.2142838 L12,13.2142838 L12,15.6428646 L16.8,15.6428646 L16.8,20.5 L19.2,20.5 L19.2,15.6428646 L24,15.6428646 L24,13.2142838 L19.2,13.2142838 Z M0,15.6428646 L9.6,15.6428646 L9.6,13.2142838 L0,13.2142838 L0,15.6428646 Z"/>
+              </svg>
+              <span class="say-u-hidden-visually">Voeg citaat in</span>
+            </button>
           </li>
-          <li class="say-link-list__item">
+          <li class="say-link-list__item say-link-list__item--insert">
             <a href="/citaten/citaten-voeg-in" class="say-link-list__link say-link-list__link--arrow">
               Decreet over het lokaal bestuur <span class="say-link__highlight">vaststelling</span>
               <br>
@@ -170,8 +197,14 @@
                 </g>
               </svg>
             </a>
+            <button class="say-link-list__insert">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--large" aria-hidden="true">
+                <path d="M14.4,8.35714846 L0,8.35714846 L0,10.7857161 L14.4,10.7857161 L14.4,8.35714846 Z M14.4,3.5 L0,3.5 L0,5.92856769 L14.4,5.92856769 L14.4,3.5 Z M19.2,13.2142838 L19.2,8.35714846 L16.8,8.35714846 L16.8,13.2142838 L12,13.2142838 L12,15.6428646 L16.8,15.6428646 L16.8,20.5 L19.2,20.5 L19.2,15.6428646 L24,15.6428646 L24,13.2142838 L19.2,13.2142838 Z M0,15.6428646 L9.6,15.6428646 L9.6,13.2142838 L0,13.2142838 L0,15.6428646 Z"/>
+              </svg>
+              <span class="say-u-hidden-visually">Voeg citaat in</span>
+            </button>
           </li>
-          <li class="say-link-list__item">
+          <li class="say-link-list__item say-link-list__item--insert">
             <a href="/citaten/citaten-voeg-in" class="say-link-list__link say-link-list__link--arrow">
               Besluit van de Vlaamse Regering tot <span class="say-link__highlight">vaststelling</span> van de tuchtprocedure voor het statutaire personeel van het lokaal bestuur en tot vaststelling van de werking, de samenstelling en de vergoeding van de leden van de Beroepscommissie voor Tuchtzaken (B.S.14/09/2018)
               <br>
@@ -182,6 +215,12 @@
                 </g>
               </svg>
             </a>
+            <button class="say-link-list__insert">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="say-icon say-icon--large" aria-hidden="true">
+                <path d="M14.4,8.35714846 L0,8.35714846 L0,10.7857161 L14.4,10.7857161 L14.4,8.35714846 Z M14.4,3.5 L0,3.5 L0,5.92856769 L14.4,5.92856769 L14.4,3.5 Z M19.2,13.2142838 L19.2,8.35714846 L16.8,8.35714846 L16.8,13.2142838 L12,13.2142838 L12,15.6428646 L16.8,15.6428646 L16.8,20.5 L19.2,20.5 L19.2,15.6428646 L24,15.6428646 L24,13.2142838 L19.2,13.2142838 Z M0,15.6428646 L9.6,15.6428646 L9.6,13.2142838 L0,13.2142838 L0,15.6428646 Z"/>
+              </svg>
+              <span class="say-u-hidden-visually">Voeg citaat in</span>
+            </button>
           </li>
         </ul>
         <div class="say-pagination say-pagination--large">
