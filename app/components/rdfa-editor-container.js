@@ -24,15 +24,5 @@ export default Component.extend({
     this._super(...arguments);
     this.setRdfaContext(this.element);
     this.set('rdfaEditorContainerReady', true);
-  },
-
-  actions: {
-    updateTasklists(tasklists){
-      this.onUpdateTasklists(tasklists);
-    },
-
-    handleRdfaEditorInit(editor){
-      this.rdfaEditorContainerInit(editor);
-    }
   }
 });
