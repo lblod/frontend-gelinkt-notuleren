@@ -56,7 +56,7 @@
     "@lblod/ember-vo-webuniversum": "^0.22.6",
     "@lblod/ember-vo-webuniversum-data-table": "^0.2.16",
     "@lblod/ember-vo-webuniversum-widget": "^0.1.2",
-    "@lblod/marawa": "^0.6.0",
+    "@lblod/marawa": "^0.7.1",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-ajax": "^5.0.0",
