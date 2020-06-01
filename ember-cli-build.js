@@ -28,6 +28,10 @@ module.exports = function(defaults) {
       enabled: true,
       cascade: true,
       sourcemap: true
+    },
+    flatpickr: {
+      locales: ['nl'],
+      theme: 'light'
     }
   });
 
