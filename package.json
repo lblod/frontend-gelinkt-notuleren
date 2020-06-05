@@ -34,7 +34,7 @@
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "0.7.0",
     "@lblod/ember-rdfa-editor-agenda-plugin": "~0.5.2",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.1.6",
-    "@lblod/ember-rdfa-editor-citaten-plugin": "0.11.0",
+    "@lblod/ember-rdfa-editor-citaten-plugin": "0.11.2",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "0.3.2",
     "@lblod/ember-rdfa-editor-date-overwrite-plugin": "0.3.3",
     "@lblod/ember-rdfa-editor-date-plugin": "0.9.0",
