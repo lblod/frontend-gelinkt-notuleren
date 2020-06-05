@@ -78,9 +78,4 @@ Router.map(function() {
     this.route('new');
     this.route('edit', { path: '/:id/edit' });
   });
-
-  this.route('citaten', function() {
-    this.route('citaten-voeg-in');
-    this.route('citaten-zoek');
-  });
 });
