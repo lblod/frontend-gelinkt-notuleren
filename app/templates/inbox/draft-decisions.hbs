@@ -1,7 +1,7 @@
-<DataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.draftDecisions.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.draftDecisions.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box au-o-box--tiny">
+      <AuToolbar class="au-o-box">
         <AuHeading @skin="2">
           {{t 'inbox.draftDecisions.pageTitle'}}
         </AuHeading>
@@ -17,10 +17,10 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <ThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.titleLabel'}} @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.createdOn" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.createdOnLabel'}} @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.updatedOnLabel'}} @class="data-table__header-title" />
-      <ThSortable @field="status" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.statusLabel'}} @class="data-table__header-title u-align-right" />
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.titleLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.createdOnLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.updatedOnLabel'}} />
+      <AuDataTableThSortable @field="status" @currentSorting={{this.sort}} @label={{t 'inbox.draftDecisions.statusLabel'}} />
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
@@ -35,9 +35,9 @@
       	<br>
       	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
       </td>
-      <td class="u-align-right"><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
+      <td><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
       </td>
       {{/with}}
     </c.body>
   </table.content>
-</DataTable>
+</AuDataTable>

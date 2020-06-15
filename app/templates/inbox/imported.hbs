@@ -1,35 +1,28 @@
-<DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+<AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
-      <div class="u-padding--round--tiny">
-        <div class="grid">
-          <div class="col--7-12 u-wide-on-print">
-            <AuHeading>
-              Geïmporteerde HTML bestanden
-            </AuHeading>
-            <TextSearch @filter={{title}} @placeholder="Zoek titel bestand" />
-          </div>
-          <div class="col--5-12">
-            <div class="u-align-right">
-              <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
-              <LinkTo @route="imported-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
-
-            </div>
-          </div>
-        </div>
-      </div>
+      <AuToolbar class="au-o-box au-u-padding-none">
+        <AuHeading @skin="2">
+          Geïmporteerde HTML bestanden
+        </AuHeading>
+        <TextSearch @filter={{title}} @placeholder="Zoek titel bestand" />
+      </AuToolbar>
+      <AuToolbar class="au-o-box">
+        <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
+        <LinkTo @route="imported-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
+      </AuToolbar>
     </menu.general>
   </t.menu>
   <t.content as |c|>
     <c.header>
-      <ThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Document" @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" @class="data-table__header-title" />
-      <ThSortable @field="status" @currentSorting={{sort}} @label="Status" @class="data-table__header-title u-align-right" />
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Document" />
+      <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" />
+      <AuDataTableThSortable @field="status" @currentSorting={{sort}} @label="Status" />
     </c.header>
     <c.body as |container|>
       <td><LinkTo @route="editor-documents.show" @model={{row.id}}>{{container.currentVersion.title}}</LinkTo></td>
       <td>{{moment-calendar container.currentVersion.createdOn}}</td>
-      <td class="u-align-right"><EditorStatusPill @status={{container.status}} /></td>
+      <td><EditorStatusPill @status={{container.status}} /></td>
     </c.body>
   </t.content>
-</DataTable>
+</AuDataTable>

@@ -1,7 +1,7 @@
-<DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+<AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box au-o-box--tiny">
+      <AuToolbar class="au-o-box">
         <AuHeading @skin="2">
           Archief
         </AuHeading>
@@ -11,9 +11,9 @@
   </t.menu>
   <t.content as |c|>
     <c.header>
-      <ThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Zitting" @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" @class="data-table__header-title" />
-      <ThSortable @field="status" @currentSorting={{sort}} @label="Status" @class="data-table__header-title u-align-right" />
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Zitting" />
+      <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" />
+      <AuDataTableThSortable @field="status" @currentSorting={{sort}} @label="Status" />
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
@@ -23,8 +23,8 @@
           <td><LinkTo @route="draft-decisions.edit" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo></td>
         {{/if}}
         <td>{{moment-calendar container.currentVersion.createdOn}}</td>
-        <td class="u-align-right"><EditorStatusPill @status={{container.status}} /></td>
+        <td><EditorStatusPill @status={{container.status}} /></td>
       {{/with}}
     </c.body>
   </t.content>
-</DataTable>
+</AuDataTable>
