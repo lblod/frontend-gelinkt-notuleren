@@ -206,6 +206,20 @@ input.input-field {
 .au-c-toolbar__group--search {
   flex-grow: 1;
   justify-content: flex-end;
+
+  > * + * {
+    margin-left: $au-unit-small;
+  }
+
+  input {
+    height: 100%;
+  }
+}
+
+.au-c-toolbar__group--actions {
+  > * + * {
+    margin-left: $au-unit-small;
+  }
 }
 
 // Fix visited state on links acting as buttons

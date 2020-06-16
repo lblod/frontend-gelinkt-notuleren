@@ -1,7 +1,7 @@
 <AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.draftDecisions.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box">
+      <AuToolbar @size="large">
         <AuToolbarGroup>
           <AuHeading @skin="2">
             {{t 'inbox.draftDecisions.pageTitle'}}

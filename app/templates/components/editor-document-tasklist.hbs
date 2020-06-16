@@ -1,13 +1,17 @@
 <div class="tasklist__header">
   <AuToolbar>
-    <AuHeading @level="2" @skin="3">
-      Takenlijsten
-    </AuHeading>
-    <a class="u-spacer--none button button--link button--link--dark button--narrow" {{action "expandTasklist"}}>
-      <i class="vi vi-expand u-padding--right--none vi-u-s"></i>
-      <i class="vi vi-long-arrow vi-u-90deg"></i>
-      <span>klap takenlijst in</span>
-    </a>
+    <AuToolbarGroup>
+      <AuHeading @level="2" @skin="3">
+        Takenlijsten
+      </AuHeading>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <a class="u-spacer--none button button--link button--link--dark button--narrow" {{action "expandTasklist"}}>
+        <i class="vi vi-expand u-padding--right--none vi-u-s"></i>
+        <i class="vi vi-long-arrow vi-u-90deg"></i>
+        <span>klap takenlijst in</span>
+      </a>
+    </AuToolbarGroup>
   </AuToolbar>
 </div>
 <div class="tasklist__content">
