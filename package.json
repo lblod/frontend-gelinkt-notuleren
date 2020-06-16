@@ -131,6 +131,6 @@
     "last 1 Edge version"
   ],
   "dependencies": {
-    "@appuniversum/appuniversum": "0.0.7"
+    "@appuniversum/appuniversum": "0.0.8"
   }
 }
