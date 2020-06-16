@@ -2,9 +2,11 @@
   <table.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box">
-        <AuHeading @skin="2">
-          {{t 'inbox.draftDecisions.pageTitle'}}
-        </AuHeading>
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            {{t 'inbox.draftDecisions.pageTitle'}}
+          </AuHeading>
+        </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
           <TextSearch @filter={{this.title}} @placeholder={{t 'inbox.draftDecisions.searchPlaceholder'}} class="au-u-1-2@small" />
           {{!-- <LinkTo @route="ontwerpbesluiten-documents.demo-1-b" class="button button--link button--link--dark">Ontwerp invoegen kort</LinkTo>

@@ -2,10 +2,14 @@
   <t.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box">
-        <AuHeading @skin="2">
-          Prullenmand
-        </AuHeading>
-        <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            Prullenmand
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+        </AuToolbarGroup>
       </AuToolbar>
       {{!-- <ul class="bullet-list">
         {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
@@ -13,21 +17,23 @@
     </menu.general>
     <menu.selected as |selection datatable|>
       <AuToolbar class="au-o-box au-u-padding-bottom-none">
-        <AuHeading @skin="2">
-          Prullenmand
-        </AuHeading>
-        <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            Prullenmand
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <TextSearch @filter={{title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+        </AuToolbarGroup>
       </AuToolbar>
-      <div class="au-o-box">
-        <ul class="data-table__actions__list">
-          <li class="data-table__action au-u-margin-bottom-none" data-table-action>
-            <AuButton @skin="secondary" {{action "moveToConcepts" selection datatable}}>
-              <AuIcon @icon="redo" @alignment="left" />
-              Herstel geselecteerde documenten
-            </AuButton>
-          </li>
-        </ul>
-      </div>
+      <AuToolbar class="au-o-box">
+        <AuToolbarGroup data-table-action>
+          <AuButton @skin="secondary" {{action "moveToConcepts" selection datatable}}>
+            <AuIcon @icon="redo" @alignment="left" />
+            Herstel geselecteerde documenten
+          </AuButton>
+        </AuToolbarGroup>
+      </AuToolbar>
       {{!-- <ul class="bullet-list">
         {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
       </ul> --}}

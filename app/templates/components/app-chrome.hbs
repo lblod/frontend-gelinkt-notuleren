@@ -1,5 +1,5 @@
-<div class="au-o-box au-o-box--small au-c-app-chrome">
-  <AuToolbar class="au-c-toolbar--wrap au-u-margin-bottom-small">
+<div class="au-o-box au-o-box--small au-u-padding-bottom-tiny au-c-app-chrome">
+  <AuToolbar class=" au-u-margin-bottom-tiny">
     <AuToolbarGroup>
       {{#if this.isMeetingMinutes}}
       <AuLink @linkRoute="inbox.index" @skin="secondary">
@@ -40,7 +40,7 @@
       </ul>
     </AuToolbarGroup>
   </AuToolbar>
-  <AuToolbar class="au-c-toolbar--wrap">
+  <AuToolbar class="">
     <AuToolbarGroup class="au-c-toolbar__group--main au-c-toolbar__group--fill">
       {{#unless editorDocument.isNew}}
         <EditorStatusPill @status={{await documentContainer.status}} />

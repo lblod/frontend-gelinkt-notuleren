@@ -2,10 +2,14 @@
   <t.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box">
-        <AuHeading @skin="2">
-          Archief
-        </AuHeading>
-        <TextSearch @filter={{title}} @placeholder="Zoek naar gearchiveerd document" class="au-u-1-2@small" />
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            Archief
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <TextSearch @filter={{title}} @placeholder="Zoek naar gearchiveerd document" class="au-u-1-2@small" />
+        </AuToolbarGroup>
       </AuToolbar>
     </menu.general>
   </t.menu>

@@ -2,9 +2,11 @@
   <t.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box">
-        <AuHeading @skin="2">
-          Notulen zitting
-        </AuHeading>
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            Notulen zitting
+          </AuHeading>
+        </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
           <TextSearch @filter={{title}} @placeholder="Zoek titel notulen" class="au-u-1-2@small" />
           <AuButton {{action 'openNewDocument'}}>
