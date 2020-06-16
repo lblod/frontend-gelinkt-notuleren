@@ -12,6 +12,7 @@ export default Route.extend(ApplicationRouteMixin, {
   intl: service(),
 
   beforeModel(transition) {
+    flatpickr.localize(flatpickr.l10ns.nl);
     this.moment.setTimeZone('Europe/Brussels');
     this.moment.setLocale('nl');
     const userLocale = ( navigator.language || navigator.languages[0] )

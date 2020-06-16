@@ -6,19 +6,11 @@
 
 // Colors
 // ---
-$say-neutral                  : $au-gray-600;
-$say-neutral-light            : $au-gray-300;
-$say-neutral-lighter          : $au-gray-200;
-$say-neutral-lightest         : $au-gray-100;
-$say-neutral-dark             : $au-gray-700;
-$say-neutral-darker           : $au-gray-800;
-$say-neutral-darkest          : $au-gray-900;
-
-$say-primary                  : $au-blue-700;
-$say-primary-light            : $au-blue-600;
-$say-primary-lighter          : $au-blue-300;
-$say-primary-lightest         : $au-blue-200;
-$say-primary-dark             : $au-blue-900;
+$say-primary-200              : $au-blue-200;
+$say-primary-300              : $au-blue-300;
+$say-primary-600              : $au-blue-600;
+$say-primary-700              : $au-blue-700;
+$say-primary-900              : $au-blue-900;
 
 $say-outline-color            : $au-yellow-400;
 
@@ -93,19 +85,39 @@ $say-switch-label-color          : $au-gray-700;
 $say-switch-color                : $au-gray-300;
 $say-switch-active-color         : $au-blue-600;
 
-// Button
-$say-button-height               : $au-unit + $au-unit-small;
-$say-button-font-family          : $au-font;
-$say-button-font-size            : $au-base;
-$say-button-font-weight          : $au-regular;
-$say-button-border               : .1rem;
-$say-button-border-color         : transparent;
-$say-button-border-hover-color   : transparent;
-$say-button-color                : $au-blue-700;
-$say-button-hover-color          : $au-blue-600;
-$say-button-bg-color             : transparent;
-$say-button-bg-hover-color       : transparent;
-$say-button-radius               : 0;
+
+// BUTTON
+// ---
+
+$say-button-height                : $au-unit + $au-unit-small;
+$say-button-font-family           : $au-font;
+$say-button-font-size             : $au-base;
+$say-button-font-weight           : $au-regular;
+$say-button-border                : .1rem;
+$say-button-border-color          : $au-blue-700;
+$say-button-border-hover-color    : $au-blue-600;
+$say-button-color                 : $au-white;
+$say-button-hover-color           : $au-white;
+$say-button-bg-color              : $au-blue-700;
+$say-button-bg-hover-color        : $au-blue-600;
+$say-button-radius                : 0;
+
+// Secondary button
+$say-button-secondary-color               : $au-blue-700;
+$say-button-secondary-hover-color         : $au-blue-600;
+$say-button-secondary-border-color        : transparent;
+$say-button-secondary-border-hover-color  : transparent;
+$say-button-secondary-bg-color            : transparent;
+$say-button-secondary-bg-hover-color      : transparent;
+
+// Tertiary button
+$say-button-tertiary-height               : $au-unit; // TODO think of height
+$say-button-tertiary-color                : $au-blue-700;
+$say-button-tertiary-hover-color          : $au-blue-600;
+$say-button-tertiary-border-color         : transparent;
+$say-button-tertiary-border-hover-color   : transparent;
+$say-button-tertiary-bg-color             : $au-white;
+$say-button-tertiary-bg-hover-color       : transparent;
 
 
 // ANNOTATIONS
@@ -117,3 +129,33 @@ $say-annotation-gutter           : $au-unit;
 $say-annotation-width-content    : $say-annotation-width;
 $say-annotation-text-color       : $au-gray-700;
 $say-annotation-background-color : $au-gray-100;
+
+
+// INPUT
+// ---
+
+$say-input-height                    : $au-unit + $au-unit-small;
+$say-input-font-size                 : $au-h6;
+$say-input-color                     : $au-gray-1000;
+$say-input-border-color              : $au-gray-300;
+$say-input-focus-border-color        : $say-outline-color;
+$say-input-error-border              : $au-red-600;
+$say-input-background-color          : $au-white;
+$say-input-radius                    : 0;
+$say-input-disabled-background-color : $au-gray-100;
+$say-input-disabled-border-color     : $au-gray-600;
+$say-input-disabled-color            : $au-gray-700;
+
+
+// LABEL
+// ---
+
+$say-label-color                   : $au-gray-800 !default;
+
+
+// HELP TEXT
+// ---
+
+$say-help-text-color             : $au-gray-800 !default;
+$say-help-text-error-color       : $au-red-600 !default;
+$say-help-text-font-size         : 1.4rem !default;

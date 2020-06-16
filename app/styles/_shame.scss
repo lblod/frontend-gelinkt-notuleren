@@ -22,7 +22,7 @@
 
 /* spans in link lists replacing data */
 
-li.link-list__item span {
+li.link-list__item > span {
   display: block;
   padding: 1rem 1.5rem;
 }
