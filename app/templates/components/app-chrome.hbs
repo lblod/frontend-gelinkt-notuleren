@@ -42,7 +42,7 @@
   </AuToolbar>
   <AuToolbar @size="small" class="au-u-padding-top-none">
     <AuToolbarGroup>
-      <div class="au-u-margin-right-small">
+      <div>
         {{#unless editorDocument.isNew}}
           <EditorStatusPill @status={{await documentContainer.status}} />
         {{/unless}}
