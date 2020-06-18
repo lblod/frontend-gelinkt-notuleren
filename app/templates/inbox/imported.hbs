@@ -1,15 +1,17 @@
 <AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
-      <AuToolbar @size="large" class="au-u-padding-none">
-        <AuHeading @skin="2">
-          Geïmporteerde HTML bestanden
-        </AuHeading>
-        <TextSearch @filter={{title}} @placeholder="Zoek titel bestand" />
-      </AuToolbar>
       <AuToolbar @size="large">
-        <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
-        <LinkTo @route="imported-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            Geïmporteerde HTML bestanden
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <TextSearch @filter={{title}} @placeholder="Zoek titel bestand" />
+          <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
+          <LinkTo @route="imported-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
+        </AuToolbarGroup>
       </AuToolbar>
     </menu.general>
   </t.menu>
