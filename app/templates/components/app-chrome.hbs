@@ -1,5 +1,5 @@
-<div class="au-o-box au-o-box--small au-c-app-chrome">
-  <AuToolbar class="au-c-toolbar--wrap au-u-margin-bottom-small">
+<div class="au-c-app-chrome">
+  <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
       {{#if this.isMeetingMinutes}}
       <AuLink @linkRoute="inbox.index" @skin="secondary">
@@ -40,20 +40,22 @@
       </ul>
     </AuToolbarGroup>
   </AuToolbar>
-  <AuToolbar class="au-c-toolbar--wrap">
-    <AuToolbarGroup class="au-c-toolbar__group--main au-c-toolbar__group--fill">
-      {{#unless editorDocument.isNew}}
-        <EditorStatusPill @status={{await documentContainer.status}} />
-      {{/unless}}
-      {{#if editorDocument.isNew}}
-      <AuPill @skin="warning">
-        <AuIcon @icon="alert-triangle" @alignment="left" />
-        Concept niet bewaard
-      </AuPill>
-      {{/if}}
+  <AuToolbar @size="small" class="au-u-padding-top-none">
+    <AuToolbarGroup>
+      <div>
+        {{#unless editorDocument.isNew}}
+          <EditorStatusPill @status={{await documentContainer.status}} />
+        {{/unless}}
+        {{#if editorDocument.isNew}}
+        <AuPill @skin="warning">
+          <AuIcon @icon="alert-triangle" @alignment="left" />
+          Concept niet bewaard
+        </AuPill>
+        {{/if}}
+      </div>
       <EditorDocumentTitle @editorDocument={{editorDocument}} @readOnly={{readOnly}} />
     </AuToolbarGroup>
-    <AuToolbarGroup class="au-c-toolbar__group--secondary au-c-toolbar__group--fill au-c-toolbar__group--small">
+    <AuToolbarGroup class="au-c-toolbar__group--actions">
       {{#if @editorDocument.isNew}}
         <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
           <AuIcon @icon="bin" @alignment="left" />

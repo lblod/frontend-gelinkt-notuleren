@@ -1,10 +1,12 @@
-<DataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+<AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box au-o-box--tiny">
-        <AuHeading @skin="2">
-          Notulen zitting
-        </AuHeading>
+      <AuToolbar @size="large">
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            Notulen zitting
+          </AuHeading>
+        </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
           <TextSearch @filter={{title}} @placeholder="Zoek titel notulen" class="au-u-1-2@small" />
           <AuButton {{action 'openNewDocument'}}>
@@ -25,29 +27,29 @@
   <t.content as |c|>
     <c.header>
       <!-- <th class="data-table__header-title"><!-- Starred </th> -->
-      <ThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Titel notulen" @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" @class="data-table__header-title" />
-      <ThSortable @field="currentVersion.updatedOn" @currentSorting={{sort}} @label="Aangepast" @class="data-table__header-title" />
-      <ThSortable @field="status" @currentSorting={{sort}} @label="Status" @class="data-table__header-title u-align-right" />
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Titel notulen" />
+      <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" />
+      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{sort}} @label="Aangepast" />
+      <AuDataTableThSortable @field="status" @currentSorting={{sort}} @label="Status" />
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
-      <td><LinkTo @route="editor-documents.edit" @model={{container.id}}>{{row.title}}</LinkTo></td>
+      <td><LinkTo @route="editor-documents.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo></td>
       <td>
-      	{{moment-calendar row.createdOn}}
-      	<br>
-      	<p class="smaller text-fade">{{moment-from-now document.currentVersion.updatedOn}}</p>
+        {{moment-calendar row.createdOn}}
+        <br>
+        <p class="smaller text-fade">{{moment-from-now document.currentVersion.updatedOn}}</p>
       </td>
       <td>
-      	{{moment-calendar row.updatedOn}}
-      	<br>
-      	<p class="smaller text-fade">{{moment-from-now document.currentVersion.updatedOn}}</p>
+        {{moment-calendar row.updatedOn}}
+        <br>
+        <p class="smaller text-fade">{{moment-from-now document.currentVersion.updatedOn}}</p>
       </td>
-      <td class="u-align-right"><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
+      <td><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
       </td>
       {{/with}}
     </c.body>
   </t.content>
-</DataTable>
+</AuDataTable>
 
 {{outlet}}
