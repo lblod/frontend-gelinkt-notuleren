@@ -25,6 +25,7 @@ export function initialize(appInstance) {
       const logEntry = store.createRecord('log-entry', {
         message: msg
       });
+      logEntry.save();
       console.log(logEntry);
     }
   
