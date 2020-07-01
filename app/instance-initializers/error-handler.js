@@ -1,8 +1,5 @@
-import Ember from 'ember';
-
 export function initialize(appInstance) {
   const store = appInstance.lookup('service:store');
-  console.log('Error handler initialized');
   window.onerror = async function (msg, url, lineNo, columnNo, error) {
     const logSource = await store.query('log-source', {
       filter: {
