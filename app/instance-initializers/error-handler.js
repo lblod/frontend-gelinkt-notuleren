@@ -1,5 +1,6 @@
 export function initialize(appInstance) {
   const store = appInstance.lookup('service:store');
+  
   window.onerror = async function (msg, url, lineNo, columnNo, error) {
     const logSource = await store.query('log-source', {
       filter: {
@@ -22,7 +23,7 @@ export function initialize(appInstance) {
     await logEntry.save();
   };
   
-    return false;
+  return false;
 }
 
 export default {
