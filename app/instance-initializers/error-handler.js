@@ -2,35 +2,30 @@ import Ember from 'ember';
 
 export function initialize(appInstance) {
   const store = appInstance.lookup('service:store');
-  console.log('Error handler initialized')
-  window.onerror = function (msg, url, lineNo, columnNo, error) {
-    var string = msg.toLowerCase();
-    var substring = "script error";
-    if (string.indexOf(substring) > -1){
-      alert('Script Error: See Browser Console for Detail');
-    } else {
-      var message = [
-        'Message: ' + msg,
-        'URL: ' + url,
-        'Line: ' + lineNo,
-        'Column: ' + columnNo,
-        'Error object: ' + JSON.stringify(error)
-      ].join(' - ');
-      
-
-
-      console.log('Error logged on the initializer');
-      console.log(message);
-      
-      const logEntry = store.createRecord('log-entry', {
-        message: msg
-      });
-      logEntry.save();
-      console.log(logEntry);
-    }
+  console.log('Error handler initialized');
+  window.onerror = async function (msg, url, lineNo, columnNo, error) {
+    const logSource = await store.query('log-source', {
+      filter: {
+        id: 'F400FB90-81F6-4F49-B4F5-CDFAD0DA1243'
+      }
+    });
+    const logLevel = await store.query('log-level', {
+      filter: {
+        id: '3af9ebe1-e6a8-495c-a392-16ced1f38ef1'
+      }
+    });
+    const logEntry = store.createRecord('log-entry', {
+      message: msg,
+      specificInformation: error.stack,
+      datetime: new Date(),
+      logSource: logSource.get('firstObject'),
+      resource: location.href,
+      logLevel: logLevel.get('firstObject'),
+    });
+    await logEntry.save();
+  };
   
     return false;
-  };
 }
 
 export default {
