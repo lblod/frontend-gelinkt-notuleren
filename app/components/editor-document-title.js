@@ -26,7 +26,10 @@ export default Component.extend({
 
   didReceiveAttrs(){
     this._super(...arguments);
-    this.set('overruledTitle', this.editorDocument.title || '');
+    if(this.editorDocument.title) {
+      this.set('overruledTitle', this.editorDocument.title);
+      this.set('generatedTitle', this.editorDocument.title);
+    }
 
     if(this.titlePlugin)
       this.titlePlugin.addObserver('title', () => { return this.titleObserver.perform(); });
