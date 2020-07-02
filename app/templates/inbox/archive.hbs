@@ -22,9 +22,9 @@
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
         {{#if (eq container.folder.name "meeting minutes")}}
-          <td><LinkTo @route="editor-documents.edit" @model={{container.id}} class="au-c-link">{{container.currentVersion.title}}</LinkTo></td>
+          <td><LinkTo @route="editor-documents.edit" @model={{container.id}} class="au-c-link">{{if container.currentVersion.title container.currentVersion.title 'Naamloos document'}}</LinkTo></td>
         {{else}}
-          <td><LinkTo @route="draft-decisions.edit" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo></td>
+          <td><LinkTo @route="draft-decisions.edit" @model={{container.id}}>{{if container.currentVersion.title container.currentVersion.title 'Naamloos document'}}</LinkTo></td>
         {{/if}}
         <td>{{moment-calendar container.currentVersion.createdOn}}</td>
         <td><EditorStatusPill @status={{container.status}} /></td>
