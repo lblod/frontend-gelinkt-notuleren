@@ -49,7 +49,7 @@
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
-        <td>{{if row.title row.title 'Naamloos document'}}</td>
+        <td>{{row.title}}</td>
         <td>{{moment-calendar row.updatedOn}}</td>
         <td>{{moment-calendar row.createdOn}}</td>
       {{/with}}

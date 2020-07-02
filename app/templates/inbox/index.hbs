@@ -34,7 +34,7 @@
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
-      <td><LinkTo @route="editor-documents.edit" @model={{container.id}} class="au-c-link">{{if row.title row.title 'Naamloos document'}}</LinkTo></td>
+      <td><LinkTo @route="editor-documents.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo></td>
       <td>
         {{moment-calendar row.createdOn}}
         <br>

@@ -22,7 +22,7 @@
       <AuDataTableThSortable @field="status" @currentSorting={{sort}} @label="Status" />
     </c.header>
     <c.body as |container|>
-      <td><LinkTo @route="editor-documents.show" @model={{row.id}} class="au-c-link">{{container.currentVersion.title ? container.currentVersion.title : 'Naamloos document'}}</LinkTo></td>
+      <td><LinkTo @route="editor-documents.show" @model={{row.id}} class="au-c-link">{{container.currentVersion.title}}</LinkTo></td>
       <td>{{moment-calendar container.currentVersion.createdOn}}</td>
       <td><EditorStatusPill @status={{container.status}} /></td>
     </c.body>
