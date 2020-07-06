@@ -12,9 +12,7 @@ export default Route.extend(ApplicationRouteMixin, {
   intl: service(),
 
   beforeModel(transition) {
-    flatpickr.localize(flatpickr.l10ns.nl);
-    this.moment.setTimeZone('Europe/Brussels');
-    this.moment.setLocale('nl');
+    
     this.updateFeatureFlags(transition.to.queryParams);
     return this.loadCurrentSession();
   },
