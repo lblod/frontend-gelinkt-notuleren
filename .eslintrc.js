@@ -10,6 +10,9 @@ module.exports = {
       legacyDecorators: true
     }
   },
+  "globals": {
+    "flatpickr": false
+  },
   plugins: [
     'ember'
   ],
