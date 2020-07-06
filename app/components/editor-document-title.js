@@ -44,9 +44,15 @@ export default Component.extend({
         schedule('afterRender', () => this.$('input').focus());
       else {
         this.set('overruledTitle', this.editorDocument.title);
-        if (this.generatedTitle.length > 0 && this.overruledTitle.trim().length === 0)
-          this.set('editorDocument.title', this.generatedTitle);
+        const overruledTitle = this.overruledTitle.slice().trim()
+        if(overruledTitle.length === 0) {
+          if(this.generatedTitle.length > 0) {
+            this.set('editorDocument.title', this.generatedTitle);
+          } else {
+            this.set('editorDocument.title', 'Naamloos document');
+          }
+        }
       }
-   }
+    }
   }
 });
