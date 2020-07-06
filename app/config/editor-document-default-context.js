@@ -9,7 +9,10 @@ const defaultContext = {
     person: 'http://www.w3.org/ns/person#',
     persoon: 'http://data.vlaanderen.be/ns/persoon#',
     dateplugin: 'http://say.data.gift/manipulators/insertion/',
-    besluittype: 'https://data.vlaanderen.be/id/concept/BesluitType/'
+    besluittype: 'https://data.vlaanderen.be/id/concept/BesluitType/',
+    dct: 'http://purl.org/dc/terms/',
+    mobiliteit: 'https://data.vlaanderen.be/ns/mobiliteit#',
+    lblodmow: 'http://data.lblod.info/vocabularies/mobiliteit/'
   }
 };
 

@@ -206,6 +206,16 @@ input.input-field {
 .au-c-toolbar__group--search {
   flex-grow: 1;
   justify-content: flex-end;
+
+  > * + * {
+    margin-left: $au-unit-small;
+  }
+}
+
+.au-c-toolbar__group--actions {
+  > * + * {
+    margin-left: $au-unit-small;
+  }
 }
 
 // Fix visited state on links acting as buttons
@@ -250,4 +260,23 @@ input.input-field {
   &:active {
     background-color: $au-button-contrast-active-color;
   }
+}
+
+// Ember a11y refocus
+#ember-a11y-refocus-nav-message {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+// Data table quick fix
+// @TODO port to appuniversum
+.au-c-data-table__header th {
+  border-radius: 0;
 }
