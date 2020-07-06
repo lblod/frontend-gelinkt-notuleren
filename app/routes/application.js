@@ -12,7 +12,6 @@ export default Route.extend(ApplicationRouteMixin, {
   intl: service(),
 
   beforeModel(transition) {
-    
     this.updateFeatureFlags(transition.to.queryParams);
     return this.loadCurrentSession();
   },

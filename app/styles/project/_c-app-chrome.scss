@@ -22,6 +22,7 @@ $au-brand-divider-rotation     : -20deg !default;
   position: relative;
   font-weight: $au-medium;
   padding-left: $au-unit-small;
+  margin-left: $au-unit-small;
 
   &::before {
     content: "";

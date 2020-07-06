@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -23,18 +23,18 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "0.0.19",
+    "@appuniversum/ember-appuniversum": "0.0.23",
     "@ember/optional-features": "^1.3.0",
     "@ember/render-modifiers": "^1.0.2",
     "@glimmer/component": "^1.0.0",
     "@glimmer/tracking": "^1.0.0",
     "@lblod/ember-acmidm-login": "^0.2.1",
     "@lblod/ember-mock-login": "^0.4.5",
-    "@lblod/ember-rdfa-editor": "~0.38.0",
+    "@lblod/ember-rdfa-editor": "^0.39.0",
     "@lblod/ember-rdfa-editor-aanwezigen-plugin": "0.7.0",
     "@lblod/ember-rdfa-editor-agenda-plugin": "~0.5.2",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.1.6",
-    "@lblod/ember-rdfa-editor-citaten-plugin": "0.11.2",
+    "@lblod/ember-rdfa-editor-citaten-plugin": "0.11.4",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "0.3.2",
     "@lblod/ember-rdfa-editor-date-overwrite-plugin": "0.3.3",
     "@lblod/ember-rdfa-editor-date-plugin": "0.9.0",
@@ -42,11 +42,11 @@
     "@lblod/ember-rdfa-editor-document-title-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "0.3.0",
     "@lblod/ember-rdfa-editor-import-draft-decisions-plugin": "0.1.5",
-    "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.6.4",
+    "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.7.3",
     "@lblod/ember-rdfa-editor-mandaat-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-mandataris-plugin": "0.7.1",
     "@lblod/ember-rdfa-editor-personen-plugin": "0.4.0",
-    "@lblod/ember-rdfa-editor-roadsign-hint-plugin": "0.4.1",
+    "@lblod/ember-rdfa-editor-roadsign-hint-plugin": "^0.5.0",
     "@lblod/ember-rdfa-editor-scoped-bestuursorgaan-plugin": "0.5.0",
     "@lblod/ember-rdfa-editor-scroll-to-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.7.5",
@@ -59,6 +59,7 @@
     "@lblod/marawa": "^0.6.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
+    "ember-a11y-refocus": "^1.0.0",
     "ember-ajax": "^5.0.0",
     "ember-auto-import": "^1.5.3",
     "ember-browser-update": "^0.1.0",
@@ -131,6 +132,6 @@
     "last 1 Edge version"
   ],
   "dependencies": {
-    "@appuniversum/appuniversum": "0.0.7"
+    "@appuniversum/appuniversum": "0.0.8"
   }
 }
