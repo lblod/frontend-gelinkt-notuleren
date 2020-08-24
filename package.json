@@ -91,7 +91,7 @@
     "ember-data": "~3.17.0",
     "ember-export-application-global": "^2.0.1",
     "ember-feature-flags": "^6.0.0",
-    "ember-fetch": "^7.0.1",
+    "ember-fetch": "^8.0.2",
     "ember-intl": "^4.3.0",
     "ember-jquery": "^1.0.5",
     "ember-load": "0.0.17",
