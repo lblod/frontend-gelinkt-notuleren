@@ -1,0 +1,17 @@
+Meeting form
+<div>
+  <WuAccordion @label="Meeting Details" >
+    <div>
+      Geplande start: <WuDatepicker/>
+    </div>
+    <div>
+      Locatie: <PowerSelect @onchange={{action "select"}}></PowerSelect>
+    </div>
+    <div>
+      Gestart op: <WuDatepicker/>
+    </div>
+    <div>
+      Beelindigd op: <WuDatepicker/>
+    </div>
+  </WuAccordion>
+</div>
