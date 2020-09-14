@@ -23,7 +23,7 @@ export default Controller.extend(DefaultQueryParamsMixin, {
       document.save();
     },
     openNewDocument() {
-      this.transitionToRoute('editor-documents.new');
+      this.transitionToRoute('meetings.new');
     }
   }
 });

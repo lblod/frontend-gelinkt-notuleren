@@ -82,6 +82,6 @@ Router.map(function() {
 
   this.route('meetings', function() {
     this.route('new');
-    this.route('edit');
+    this.route('edit', { path: '/:id/edit' });
   });
 });
