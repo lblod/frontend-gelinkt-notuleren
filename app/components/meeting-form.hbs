@@ -1,18 +1,16 @@
 Meeting form
 <div>
-  <WuAccordion @label="Meeting Details" >
     <div>
-      Geplande start: <WuDatepicker/>
+      Planned Start: <WuDatepicker @value={{mut this.plannedStart}} />
     </div>
     <div>
       Locatie: <PowerSelect @onchange={{action "select"}}></PowerSelect>
     </div>
     <div>
-      Gestart op: <WuDatepicker/>
+      Started at: <WuDatepicker @value={{mut this.startedAt}}/>
     </div>
     <div>
-      Beelindigd op: <WuDatepicker/>
+      Finished at: <WuDatepicker @value={{mut this.finishedAt}}/>
     </div>
-  </WuAccordion>
   <WuButton @onClick={{action "save"}}>Save</WuButton>
 </div>
