@@ -18,7 +18,7 @@ export default class MeetingForm extends Component{
 
   @action
   select() {
-    console.log('selected')
+    console.log('selected');
   }
   @action
   save() {
@@ -26,8 +26,7 @@ export default class MeetingForm extends Component{
       plannedStart: this.plannedStart,
       startedAt: this.startedAt,
       finishedAt: this.finishedAt
-    }
-    console.log('save')
-    this.args.save(info)
+    };
+    this.args.save(info);
   }
 }

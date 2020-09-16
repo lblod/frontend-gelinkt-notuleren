@@ -7,13 +7,12 @@ export default class MeetingsNewController extends Controller {
 
   @action
   async save(info) {
-    console.log('save from controller')
     const zitting = this.store.createRecord('zitting', {
       geplandeStart: info.plannedStart,
       gestartOpTijdstip: info.startedAt,
       geeindigdOpTijdstip: info.finishedAt,
       opLocatie: 'Gent',
-    })
-    await zitting.save()
+    });
+    await zitting.save();
   }
 }
