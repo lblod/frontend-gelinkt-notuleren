@@ -1,2 +1,8 @@
-Edit meeting route
-{{outlet}}
+<AuMainHeader @homeRoute="index" @appTitle="Gelinkt Notuleren" @contactRoute="contact">
+  <AuDropdown @dropdownTitle="{{currentSession._user.voornaam}} {{currentSession._user.achternaam}} - {{currentSession._group.classificatie.label}} {{currentSession._group.naam}}" @dropdownButtonLabel="Account settings" @alignment="right">
+    <AcmidmLogout @class="au-c-button au-c-button--tertiary" role="menuitem">
+      <AuIcon @icon="logout" @alignment="left" />Afmelden
+    </AcmidmLogout>
+  </AuDropdown>
+</AuMainHeader>
+<MeetingForm @save={{action "save"}} @model={{@model}}/>

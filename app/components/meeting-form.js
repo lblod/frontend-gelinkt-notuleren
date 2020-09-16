@@ -9,9 +9,11 @@ export default class MeetingForm extends Component{
 
   constructor() {
     super(...arguments);
-    this.plannedStart = this.args.plannedStart;
-    this.startedAt = this.args.startedAt;
-    this.finishedAt = this.args.finishedAt;
+    if(this.args.model) {
+      this.plannedStart = this.args.model.plannedStart;
+      this.startedAt = this.args.model.startedAt;
+      this.finishedAt = this.args.model.finishedAt;
+    }
   }
 
   @action
