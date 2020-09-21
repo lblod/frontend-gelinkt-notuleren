@@ -3,16 +3,16 @@ import { action } from "@ember/object";
 import { tracked } from '@glimmer/tracking';
 
 export default class MeetingForm extends Component{
-  @tracked plannedStart;
-  @tracked startedAt;
-  @tracked finishedAt;
+  geplandeStart;
+  gestartOpTijdstip;
+  geeindigdOpTijdstip;
 
   constructor() {
     super(...arguments);
-    if(this.args.model) {
-      this.plannedStart = this.args.model.plannedStart;
-      this.startedAt = this.args.model.startedAt;
-      this.finishedAt = this.args.model.finishedAt;
+    if(this.args.zitting) {
+      this.geplandeStart = this.args.zitting.geplandeStart;
+      this.gestartOpTijdstip = this.args.zitting.gestartOpTijdstip;
+      this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
     }
   }
 
@@ -23,9 +23,9 @@ export default class MeetingForm extends Component{
   @action
   save() {
     const info = {
-      plannedStart: this.plannedStart,
-      startedAt: this.startedAt,
-      finishedAt: this.finishedAt
+      geplandeStart: this.geplandeStart,
+      gestartOpTijdstip: this.gestartOpTijdstip,
+      geeindigdOpTijdstip: this.geeindigdOpTijdstip
     };
     this.args.save(info);
   }

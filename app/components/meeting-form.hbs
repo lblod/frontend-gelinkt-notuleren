@@ -1,16 +1,16 @@
 Meeting form
 <div>
     <div>
-      Planned Start: <WuDatepicker @value={{mut this.plannedStart}} />
+      Planned Start: <WuDatepicker @value={{mut this.geplandeStart}} />
     </div>
     <div>
-      Locatie: <PowerSelect @onchange={{action "select"}}></PowerSelect>
+      Locatie: <input type='text'>
     </div>
     <div>
-      Started at: <WuDatepicker @value={{mut this.startedAt}}/>
+      Started at: <WuDatepicker @value={{mut this.gestartOpTijdstip}}/>
     </div>
     <div>
-      Finished at: <WuDatepicker @value={{mut this.finishedAt}}/>
+      Finished at: <WuDatepicker @value={{mut this.geeindigdOpTijdstip}}/>
     </div>
   <WuButton @onClick={{action "save"}}>Save</WuButton>
 </div>
