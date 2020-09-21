@@ -10,5 +10,6 @@ export default class MeetingsEditController extends Controller {
     this.model.geeindigdOpTijdstip = info.geeindigdOpTijdstip;
     this.model.opLocatie = 'Gent';
     await this.model.save();
+    this.transitionToRoute('inbox.meetings');
   }
 }

@@ -14,5 +14,6 @@ export default class MeetingsNewController extends Controller {
       opLocatie: 'Gent',
     });
     await zitting.save();
+    this.transitionToRoute('inbox.meetings');
   }
 }
