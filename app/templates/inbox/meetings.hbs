@@ -35,10 +35,10 @@
     <c.body as |container|>
       <td><LinkTo @route="meetings.edit" @model={{container.id}} class="au-c-link">{{container.geplandeStart}}</LinkTo></td>
       <td>
-        {{container.gestartOpTijdstip}}
+        {{moment-calendar container.gestartOpTijdstip}}
       </td>
       <td>
-        {{container.geeindigdOpTijdstip}}
+        {{moment-calendar container.geeindigdOpTijdstip}}
       </td>
       <td>
         {{container.opLocatie}}
