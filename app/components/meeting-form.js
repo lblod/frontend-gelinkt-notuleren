@@ -3,10 +3,10 @@ import { action } from "@ember/object";
 import { tracked } from '@glimmer/tracking';
 
 export default class MeetingForm extends Component{
-  geplandeStart;
-  gestartOpTijdstip;
-  geeindigdOpTijdstip;
-  opLocatie;
+  @tracked geplandeStartDate;
+  @tracked gestartOpTijdstip;
+  @tracked geeindigdOpTijdstip;
+  @tracked opLocatie;
 
   constructor() {
     super(...arguments);
@@ -19,12 +19,11 @@ export default class MeetingForm extends Component{
   }
 
   @action
-  select() {
-    console.log('selected');
+  changeDate(property, value) {
+    this[property] = value;
   }
   @action
   save() {
-    console.log(this.opLocatie)
     const info = {
       geplandeStart: this.geplandeStart,
       gestartOpTijdstip: this.gestartOpTijdstip,

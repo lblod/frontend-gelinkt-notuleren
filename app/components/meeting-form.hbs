@@ -1,16 +1,19 @@
 Meeting form[@TN]
 <div>
     <div>
-      Planned Start[@TN]: <WuDatepicker @value={{mut this.geplandeStart}} />
+      Planned Start[@TN]:
+      <DateTimePicker @onChange={{action "changeDate" 'geplandeStart'}} @value={{this.geplandeStart}}/>
     </div>
     <div>
       Locatie[@TN]: <Input type='text' @value={{mut this.opLocatie}} />
     </div>
     <div>
-      Started at[@TN]: <WuDatepicker @value={{mut this.gestartOpTijdstip}}/>
+      Started at[@TN]: 
+        <DateTimePicker @onChange={{action "changeDate" 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
     </div>
     <div>
-      Finished at[@TN]: <WuDatepicker @value={{mut this.geeindigdOpTijdstip}}/>
+      Finished at[@TN]: 
+        <DateTimePicker @onChange={{action "changeDate" 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
     </div>
   <WuButton @onClick={{action "save"}}>Save[@TN]</WuButton>
 </div>
