@@ -15,5 +15,10 @@ Meeting form[@TN]
       Finished at[@TN]: 
         <DateTimePicker @onChange={{action "changeDate" 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
     </div>
+    <div>
+      <PowerSelect @selected={{this.bestuursorgaan}} @options={{this.bestuursorgaanOptions}} @onchange={{action "changeSelect"}} as |bestuursorgaan|>
+        {{bestuursorgaan.naam}}
+      </PowerSelect>
+    </div>
   <WuButton @onClick={{action "save"}}>Save[@TN]</WuButton>
 </div>

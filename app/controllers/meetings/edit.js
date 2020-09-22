@@ -9,6 +9,7 @@ export default class MeetingsEditController extends Controller {
     this.model.gestartOpTijdstip = info.gestartOpTijdstip;
     this.model.geeindigdOpTijdstip = info.geeindigdOpTijdstip;
     this.model.opLocatie = info.opLocatie;
+    this.model.bestuursorgaan = info.bestuursorgaan;
     await this.model.save();
     this.transitionToRoute('inbox.meetings');
   }

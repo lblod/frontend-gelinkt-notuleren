@@ -31,6 +31,7 @@
       <AuDataTableThSortable @field="gestartOpTijdstip" @currentSorting={{sort}} @label="gestartOpTijdstip" />
       <AuDataTableThSortable @field="geeindigdOpTijdstip" @currentSorting={{sort}} @label="geeindigdOpTijdstip" />
       <AuDataTableThSortable @field="opLocatie" @currentSorting={{sort}} @label="opLocatie" />
+      <AuDataTableThSortable @field="bestuursorgaan.naam" @currentSorting={{sort}} @label="bestuursorgaan" />
     </c.header>
     <c.body as |container|>
       <td><LinkTo @route="meetings.edit" @model={{container.id}} class="au-c-link">{{moment-format container.geplandeStart "MM/DD/YYYY hh:mm"}}</LinkTo></td>
@@ -42,6 +43,9 @@
       </td>
       <td>
         {{container.opLocatie}}
+      </td>
+      <td>
+        {{container.bestuursorgaan.naam}}
       </td>
     </c.body>
   </t.content>
