@@ -11,7 +11,7 @@ export default class MeetingsNewController extends Controller {
       geplandeStart: info.geplandeStart,
       gestartOpTijdstip: info.gestartOpTijdstip,
       geeindigdOpTijdstip: info.geeindigdOpTijdstip,
-      opLocatie: 'Gent',
+      opLocatie: info.opLocatie,
     });
     await zitting.save();
     this.transitionToRoute('inbox.meetings');

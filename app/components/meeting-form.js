@@ -6,6 +6,7 @@ export default class MeetingForm extends Component{
   geplandeStart;
   gestartOpTijdstip;
   geeindigdOpTijdstip;
+  opLocatie;
 
   constructor() {
     super(...arguments);
@@ -13,6 +14,7 @@ export default class MeetingForm extends Component{
       this.geplandeStart = this.args.zitting.geplandeStart;
       this.gestartOpTijdstip = this.args.zitting.gestartOpTijdstip;
       this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
+      this.opLocatie = this.args.zitting.opLocatie;
     }
   }
 
@@ -22,10 +24,12 @@ export default class MeetingForm extends Component{
   }
   @action
   save() {
+    console.log(this.opLocatie)
     const info = {
       geplandeStart: this.geplandeStart,
       gestartOpTijdstip: this.gestartOpTijdstip,
-      geeindigdOpTijdstip: this.geeindigdOpTijdstip
+      geeindigdOpTijdstip: this.geeindigdOpTijdstip,
+      opLocatie : this.opLocatie
     };
     this.args.save(info);
   }
