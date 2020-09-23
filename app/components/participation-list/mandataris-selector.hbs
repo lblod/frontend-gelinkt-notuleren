@@ -1,0 +1,14 @@
+{{#power-select
+   loadingMessage="Aan het laden..."
+   noMatchesMessage="Geen resultaten"
+   searchMessage="Typ om te zoeken"
+   renderInPlace=true
+   placeholder="Zoek op achternaam"
+   allowClear=true
+   search=(perform searchByName)
+   selected=mandataris
+   onchange=(action "select")
+   as |mandataris|}}
+  {{mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{mandataris.isBestuurlijkeAliasVan.achternaam}}, 
+  {{mandataris.bekleedt.bestuursfunctie.label}}
+{{/power-select}}

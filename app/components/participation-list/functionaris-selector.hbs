@@ -1,0 +1,14 @@
+{{#power-select
+   loadingMessage="Aan het laden..."
+   noMatchesMessage="Geen resultaten"
+   searchMessage="Typ om te zoeken"
+   renderInPlace=true
+   placeholder="Zoek op achternaam"
+   allowClear=true
+   search=(perform searchByName)
+   selected=functionaris
+   onchange=(action "select")
+   as |functionaris|}}
+  {{functionaris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{functionaris.isBestuurlijkeAliasVan.achternaam}},
+  {{functionaris.bekleedt.rol.label}}
+{{/power-select}}

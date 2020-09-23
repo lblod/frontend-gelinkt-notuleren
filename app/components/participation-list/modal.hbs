@@ -1,0 +1,48 @@
+
+{{#if loadData.isRunning}}
+  <p>Bezig met laden van de aanwezigenlijst</p>
+  <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+{{else}}
+  <div class="u-spacer">
+    <div class="grid">
+      <div class="col--6-12">
+        <label class="form__label">
+          Voorzitter van de zitting
+          <ParticipationList::MandatarisSelector
+            onSelect={{action "selectVoorzitter"}} 
+            mandataris={{voorzitter}}
+          />
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="u-spacer">
+    <div class="grid">
+      <div class="col--6-12">
+        <label class="form__label">
+          Secretaris van de zitting
+          <ParticipationList::FunctionarisSelector
+            @onSelect={{action "selectSecretaris"}} 
+            @functionaris={{secretaris}} 
+            @bestuurseenheid={{this.bestuurseenheid}}
+          />
+        </label>
+      </div>
+    </div>
+  </div>
+  {{#if tableDataReady}}
+    <label class="form__label">Aanwezige mandatarissen</label>
+    <div class="u-spacer--tb--tiny">
+      <ParticipationList::MandatariesTable
+        @overigeMandatarissenAanwezigen={{overigeMandatarissenAanwezigen}}
+        @overigeMandatarissenAfwezigen={{overigeMandatarissenAfwezigen}}
+        @cachedMandatarissen={{cachedMandatarissen}}
+      />
+    </div>
+  {{/if}}
+{{/if}}
+{{yield}}
+{{!-- 
+{{#if (is-equal viewMode 'createPerson')}}
+  {{aanwezigen-plugin/create-person onCancel=(action 'cancelCreatePerson') onCreate=(action 'finishCreatePerson')}}
+{{/if}} --}}
