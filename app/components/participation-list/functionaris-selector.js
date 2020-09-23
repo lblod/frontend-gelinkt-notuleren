@@ -10,6 +10,15 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
   }
   @task
   *searchByName(){
-
+    yield timeout(300);
+    const bestuurseenheid = yield this.args.bestuursorgaan.get('bestuurseenheid')
+    console.log(bestuurseenheid.uri)
+    let queryParams = {
+      sort: 'is-bestuurlijke-alias-van.achternaam',
+      'filter[bekleedt][bevat-in][is-tijdsspecialisatie-van][bestuurseenheid][:uri:]': bestuurseenheid.uri,
+      'filter[is-bestuurlijke-alias-van][achternaam]': searchData,
+      page: { size: 100 }
+    };
+    return yield this.store.query('functionaris', queryParams);
   }
 }

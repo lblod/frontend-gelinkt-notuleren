@@ -19,13 +19,12 @@
      as |m|}}
     {{#m.content isSectioned=false}}
       <ParticipationList::Modal
-        bestuurseenheid=bestuurseenheid
-        bestuursorgaan=bestuursorgaan
-        editMode=info.editMode
-        outputId=outputId
-        propertyToUse=info.propertyToUse
-        domTable=info.domNodeToUpdate
-        editTable=info.editMode
+        @bestuursorgaan={{this.args.bestuursorgaan}}
+        editMode={{info.editMode}}
+        outputId={{outputId}}
+        propertyToUse={{info.propertyToUse}}
+        domTable={{info.domNodeToUpdate}}
+        editTable={{info.editMode}}
       />
     {{/m.content}}
     <div class="modal-dialog__footer">
