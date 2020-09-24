@@ -6,7 +6,7 @@ import {task} from 'ember-concurrency-decorators'
 export default class ParticipationListFunctionarisSelectorComponent extends Component {
   @action
   select(value) {
-    this.args.onSelect(value)
+    this.args.onSelect(value);
   }
   @task
   *searchByName(searchData){

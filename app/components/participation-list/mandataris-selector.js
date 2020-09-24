@@ -8,7 +8,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
   @service store;
   @action
   select(value) {
-    this.args.onSelect(value)
+    this.args.onSelect(value);
   }
   @task
   *searchByName(searchData){

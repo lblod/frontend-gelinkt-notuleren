@@ -12,8 +12,8 @@ export default class ParticipationListModalComponent extends Component {
   @service store;
   
   constructor() {
-    super(...arguments)
-    this.fetchData()
+    super(...arguments);
+    this.fetchData();
   }
 
   async fetchData() {
@@ -21,37 +21,24 @@ export default class ParticipationListModalComponent extends Component {
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.uri,
     };
     const mandataris = await this.store.query('mandataris', queryParams);
-    console.log(mandataris)
-    this.mandataris = mandataris
+    this.mandataris = mandataris;
   }
 
   @action 
   togglePopup() {
-    this.args.togglePopup()
+    this.args.togglePopup();
   }
   @action
   selectVoorzitter(value){
-    console.log(value)
-    this.voorzitter = value
+    this.voorzitter = value;
   }
   @action
   selectSecretaris(value){
-    this.secretaris = value
+    this.secretaris = value;
   }
   @action
   updateMandatarisTable(presentMandataris) {
-    console.log('mandataris table')
-    console.log(presentMandataris)
     this.presentMandataris = presentMandataris;
-  }
-
-  @action
-  cancelCreatePerson(){
-    
-  }
-  @action
-  finishCreatePerson(){
-    
   }
   @action
   insert(){
@@ -59,8 +46,8 @@ export default class ParticipationListModalComponent extends Component {
       voorzitter: this.voorzitter,
       secretaris: this.secretaris,
       presentMandataris: this.presentMandataris
-    }
-    this.args.onSave(info)
-    this.args.togglePopup()
+    };
+    this.args.onSave(info);
+    this.args.togglePopup();
   }
 }

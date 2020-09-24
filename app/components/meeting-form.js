@@ -53,8 +53,7 @@ export default class MeetingForm extends Component{
     };
     let bestuursorganenInTijd = await this.store.query('bestuursorgaan', query);
     bestuursorganenInTijd = bestuursorganenInTijd.filter(b => this.allowedBestuursorgaanClassifications.includes(b.get('isTijdsspecialisatieVan.classificatie.uri')));
-    console.log(bestuursorganenInTijd)
-    this.bestuursorgaanOptions = bestuursorganenInTijd
+    this.bestuursorgaanOptions = bestuursorganenInTijd;
   }
 
   @action

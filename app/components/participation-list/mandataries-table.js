@@ -5,42 +5,25 @@ export default class ParticipationListMandatariesTableComponent extends Componen
   selectedMandatees = {}
   constructor() {
     super(...arguments);
-    console.log('table component')
     if(this.args.selected) {
       this.args.selected.forEach((mandataris) => {
-        this.selectedMandatees[mandataris.uri] = mandataris
-      })
+        this.selectedMandatees[mandataris.uri] = mandataris;
+      });
     } else {
       this.args.mandataris.forEach((mandataris) => {
-        this.selectedMandatees[mandataris.uri] = mandataris
-      })
+        this.selectedMandatees[mandataris.uri] = mandataris;
+      });
     }
-    this.args.onChange(Object.values(this.selectedMandatees))
-  }
-  @action
-  add() {
-
-  }
-  @action
-  selectAanwezige() {
-
-  }
-  @action
-  addAanwezige() {
-
-  }
-  @action
-  addAanwezigeCancel() {
-
+    this.args.onChange(Object.values(this.selectedMandatees));
   }
   @action
   toggleAanwezigheid(mandataris, selected){
     if(selected) {
-      this.selectedMandatees[mandataris.uri] = mandataris
+      this.selectedMandatees[mandataris.uri] = mandataris;
     } else {
-      this.selectedMandatees[mandataris.uri] = undefined
+      this.selectedMandatees[mandataris.uri] = undefined;
     }
-    const selectedMandatees = Object.values(this.selectedMandatees)
-    this.args.onChange(selectedMandatees.filter((mandataris) => mandataris))
+    const selectedMandatees = Object.values(this.selectedMandatees);
+    this.args.onChange(selectedMandatees.filter((mandataris) => mandataris));
   }
 }

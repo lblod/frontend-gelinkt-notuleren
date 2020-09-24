@@ -5,13 +5,12 @@ import { tracked } from '@glimmer/tracking';
 export default class ParticipationListMandatarisRowComponent extends Component {
   @tracked selected;
   constructor() {
-    super(...arguments)
-    console.log(this.args.selected)
-    this.selected = this.args.selectedMandatees[this.args.mandataris.uri]
+    super(...arguments);
+    this.selected = this.args.selectedMandatees[this.args.mandataris.uri];
   }
   @action
   toggle() {
-    this.selected = !this.selected
-    this.args.onToggleAanwezig(this.selected)
+    this.selected = !this.selected;
+    this.args.onToggleAanwezig(this.selected);
   }
 }
