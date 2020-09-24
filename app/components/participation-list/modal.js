@@ -40,6 +40,8 @@ export default class ParticipationListModalComponent extends Component {
   }
   @action
   updateMandatarisTable(presentMandataris) {
+    console.log('mandataris table')
+    console.log(presentMandataris)
     this.presentMandataris = presentMandataris;
   }
 

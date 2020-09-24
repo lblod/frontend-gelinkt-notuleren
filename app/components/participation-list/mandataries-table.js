@@ -2,7 +2,21 @@ import Component from '@glimmer/component';
 import { action } from "@ember/object";
 
 export default class ParticipationListMandatariesTableComponent extends Component {
-  selectedAanwezige = {}
+  selectedMandatees = {}
+  constructor() {
+    super(...arguments);
+    console.log('table component')
+    if(this.args.selected) {
+      this.args.selected.forEach((mandataris) => {
+        this.selectedMandatees[mandataris.uri] = mandataris
+      })
+    } else {
+      this.args.mandataris.forEach((mandataris) => {
+        this.selectedMandatees[mandataris.uri] = mandataris
+      })
+    }
+    this.args.onChange(Object.values(this.selectedMandatees))
+  }
   @action
   add() {
 
@@ -20,12 +34,13 @@ export default class ParticipationListMandatariesTableComponent extends Componen
 
   }
   @action
-  toggleAanwezigheid(aanwezige, selected){
+  toggleAanwezigheid(mandataris, selected){
     if(selected) {
-      this.selectedAanwezige[aanwezige.uri] = aanwezige
+      this.selectedMandatees[mandataris.uri] = mandataris
     } else {
-      this.selectedAanwezige[aanwezige.uri] = undefined
+      this.selectedMandatees[mandataris.uri] = undefined
     }
-    this.args.onChange(Object.values(this.selectedAanwezige))
+    const selectedMandatees = Object.values(this.selectedMandatees)
+    this.args.onChange(selectedMandatees.filter((mandataris) => mandataris))
   }
 }

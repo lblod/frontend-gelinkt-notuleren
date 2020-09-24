@@ -6,7 +6,8 @@ export default class ParticipationListMandatarisRowComponent extends Component {
   @tracked selected;
   constructor() {
     super(...arguments)
-    this.selected = this.args.selected
+    console.log(this.args.selected)
+    this.selected = this.args.selectedMandatees[this.args.mandataris.uri]
   }
   @action
   toggle() {

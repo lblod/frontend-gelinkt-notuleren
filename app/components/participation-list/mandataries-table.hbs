@@ -17,10 +17,11 @@
     {{#if loadData.isRunning}}
       <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
     {{else}}
-      {{#each this.args.mandataris as |aanwezige|}}
+      {{#each this.args.mandataris as |mandataris|}}
         <ParticipationList::MandatarisRow
-          @aanwezige={{aanwezige}}
-          @onToggleAanwezig={{action "toggleAanwezigheid" aanwezige}}
+          @mandataris={{mandataris}}
+          @selectedMandatees={{this.selectedMandatees}}
+          @onToggleAanwezig={{action "toggleAanwezigheid" mandataris}}
         />
       {{else}}
         <td colspan="4">Geen mandatarissen gevonden.</td>
