@@ -4,6 +4,7 @@ import { action } from "@ember/object";
 
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
+  @tracked info;
   constructor() {
     super(...arguments)
   }
@@ -12,7 +13,8 @@ export default class ParticipationListComponent extends Component {
     this.popup = !this.popup
   }
   @action
-  insert() {
-
+  onSave(info) {
+    console.log(info)
+    this.info = info
   }
 }

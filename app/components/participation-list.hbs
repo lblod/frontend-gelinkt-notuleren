@@ -1,4 +1,14 @@
 {{#if this.args.bestuursorgaan}}
+  {{#if this.info}}
+    Voorzitter: <br>
+    <ParticipationList::Person @person={{this.info.voorzitter}} /> <br>
+    Secretaris <br>
+    <ParticipationList::Person @person={{this.info.secretaris}} /> <br>
+    Mandatees: <br>
+    {{#each this.info.presentMandataris as |mandataris|}}
+      <ParticipationList::Person @person={{mandataris}} />,
+    {{/each}}
+  {{/if}}
   <div class="modal-dialog__footer">
     {{#wu-button-group}}
       {{wu-button
@@ -9,30 +19,17 @@
       }}
     {{/wu-button-group}}
   </div>
+  <ParticipationList::Modal
+    @bestuursorgaan={{this.args.bestuursorgaan}}
+    @show={{this.popup}}
+    @togglePopup={{action "togglePopup"}}
+    @onSave={{action "onSave"}}
+    editMode={{info.editMode}}
+    outputId={{outputId}}
+    propertyToUse={{info.propertyToUse}}
+    domTable={{info.domNodeToUpdate}}
+    editTable={{info.editMode}}
+  />
 {{/if}}
 
-{{# if popup}}
-  {{#wu-modal
-     title="Beheer aanwezigen"
-     dialog-class="modal-dialog--wide modal-dialog--sectioned"
-     onClose=(action 'togglePopup')
-     as |m|}}
-    {{#m.content isSectioned=false}}
-      <ParticipationList::Modal
-        @bestuursorgaan={{this.args.bestuursorgaan}}
-        editMode={{info.editMode}}
-        outputId={{outputId}}
-        propertyToUse={{info.propertyToUse}}
-        domTable={{info.domNodeToUpdate}}
-        editTable={{info.editMode}}
-      />
-    {{/m.content}}
-    <div class="modal-dialog__footer">
-      {{#wu-button-group}}
-        {{wu-button label="Voeg aanwezigen in" class="button button--narrow" onClick=(action 'insert')}}
-        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=(action 'togglePopup')}}
-      {{/wu-button-group}}
-    </div>
-  {{/wu-modal}}
-{{/if}}
 {{yield}}

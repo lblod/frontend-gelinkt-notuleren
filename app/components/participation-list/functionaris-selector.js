@@ -5,17 +5,15 @@ import {task} from 'ember-concurrency-decorators'
 
 export default class ParticipationListFunctionarisSelectorComponent extends Component {
   @action
-  select() {
-
+  select(value) {
+    this.args.onSelect(value)
   }
   @task
-  *searchByName(){
+  *searchByName(searchData){
     yield timeout(300);
-    const bestuurseenheid = yield this.args.bestuursorgaan.get('bestuurseenheid')
-    console.log(bestuurseenheid.uri)
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[bekleedt][bevat-in][is-tijdsspecialisatie-van][bestuurseenheid][:uri:]': bestuurseenheid.uri,
+      'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.uri,
       'filter[is-bestuurlijke-alias-van][achternaam]': searchData,
       page: { size: 100 }
     };

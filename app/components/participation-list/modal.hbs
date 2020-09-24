@@ -1,49 +1,66 @@
-
-{{#if loadData.isRunning}}
-  <p>Bezig met laden van de aanwezigenlijst</p>
-  <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
-{{else}}
-  <div class="u-spacer">
-    <div class="grid">
-      <div class="col--6-12">
-        <label class="form__label">
-          Voorzitter van de zitting
-          <ParticipationList::MandatarisSelector
-            onSelect={{action "selectVoorzitter"}} 
-            mandataris={{voorzitter}}
-            @bestuursorgaan={{this.args.bestuursorgaan}}
-          />
-        </label>
-      </div>
+{{#if this.args.show}}
+  {{#wu-modal
+    title="Beheer aanwezigen"
+    dialog-class="modal-dialog--wide modal-dialog--sectioned"
+    onClose=(action 'togglePopup')
+    as |m|}}
+      {{#m.content isSectioned=false}}
+        {{#if loadData.isRunning}}
+          <p>Bezig met laden van de aanwezigenlijst</p>
+          <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+        {{else}}
+          <div class="u-spacer">
+            <div class="grid">
+              <div class="col--6-12">
+                <label class="form__label">
+                  Voorzitter van de zitting
+                  <ParticipationList::MandatarisSelector
+                    @onSelect={{action "selectVoorzitter"}} 
+                    @mandataris={{this.voorzitter}}
+                    @bestuursorgaan={{this.args.bestuursorgaan}}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="u-spacer">
+            <div class="grid">
+              <div class="col--6-12">
+                <label class="form__label">
+                  Secretaris van de zitting
+                  <ParticipationList::FunctionarisSelector
+                    @onSelect={{action "selectSecretaris"}} 
+                    @functionaris={{secretaris}} 
+                    @bestuursorgaan={{this.args.bestuursorgaan}}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          {{#if tableDataReady}}
+            <label class="form__label">Aanwezige mandatarissen</label>
+            <div class="u-spacer--tb--tiny">
+              <ParticipationList::MandatariesTable
+                @mandataris={{mandataris}}
+                @overigeMandatarissenAanwezigen={{overigeMandatarissenAanwezigen}}
+                @overigeMandatarissenAfwezigen={{overigeMandatarissenAfwezigen}}
+                @cachedMandatarissen={{cachedMandatarissen}}
+                @onChange={{action "updateMandatarisTable"}}
+              />
+            </div>
+          {{/if}}
+        {{/if}}
+        {{yield}}
+        {{!-- 
+        {{#if (is-equal viewMode 'createPerson')}}
+          {{aanwezigen-plugin/create-person onCancel=(action 'cancelCreatePerson') onCreate=(action 'finishCreatePerson')}}
+        {{/if}} --}}
+    {{/m.content}}
+    <div class="modal-dialog__footer">
+      {{#wu-button-group}}
+        {{wu-button label="Voeg aanwezigen in" class="button button--narrow" onClick=(action 'insert')}}
+        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=(action 'togglePopup')}}
+      {{/wu-button-group}}
     </div>
-  </div>
-  <div class="u-spacer">
-    <div class="grid">
-      <div class="col--6-12">
-        <label class="form__label">
-          Secretaris van de zitting
-          <ParticipationList::FunctionarisSelector
-            @onSelect={{action "selectSecretaris"}} 
-            @functionaris={{secretaris}} 
-            @bestuurseenheid={{this.bestuurseenheid}}
-          />
-        </label>
-      </div>
-    </div>
-  </div>
-  {{#if tableDataReady}}
-    <label class="form__label">Aanwezige mandatarissen</label>
-    <div class="u-spacer--tb--tiny">
-      <ParticipationList::MandatariesTable
-        @overigeMandatarissenAanwezigen={{overigeMandatarissenAanwezigen}}
-        @overigeMandatarissenAfwezigen={{overigeMandatarissenAfwezigen}}
-        @cachedMandatarissen={{cachedMandatarissen}}
-      />
-    </div>
-  {{/if}}
+  {{/wu-modal}}
 {{/if}}
-{{yield}}
-{{!-- 
-{{#if (is-equal viewMode 'createPerson')}}
-  {{aanwezigen-plugin/create-person onCancel=(action 'cancelCreatePerson') onCreate=(action 'finishCreatePerson')}}
-{{/if}} --}}

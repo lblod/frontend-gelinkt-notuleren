@@ -9,11 +9,6 @@
           <div class="col--4-12">
             Actie
           </div>
-          <div class="col--8-12 u-align-right">
-            {{#wu-link-button class="button--small" isNarrow=true onClick=(action "add")}}
-              <i class="vi vi-plus vi-u-s"></i>Voeg mandataris toe
-            {{/wu-link-button}}
-          </div>
         </div>
       </th>
     </tr>
@@ -22,32 +17,10 @@
     {{#if loadData.isRunning}}
       <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
     {{else}}
-      {{#if addAanwezigeMode}}
-        <tr>
-          <td>
-            <ParticipationList::MandatarisSelector
-              @onSelect={{action "selectAanwezige"}}
-            />
-            <p class="u-spacer--top--tiny">U zoekt hier naar mandatarissen buiten de lijst van verkozenen.</p>
-          </td>
-          <td>{{newAanwezigeFunctie}}</td>
-          <td>{{moment-format newAanwezige.geboorte.datum 'DD/MM/YYYY'}}</td>
-          <td>
-            {{#wu-button-group}}
-              {{#wu-link-button class="button--small" isNarrow=true onClick=(action "addAanwezige")}}
-                <i class="vi vi-check vi-u-xs"></i>Voeg mandataris toe
-              {{/wu-link-button}}
-              {{#wu-link-button class="button--small button--alt" isNarrow=true onClick=(action "addAanwezigeCancel")}}
-                <i class="vi vi-cross vi-u-s"></i>Annuleer
-              {{/wu-link-button}}
-            {{/wu-button-group}}
-          </td>
-        </tr>
-      {{/if}}
-      {{#each aanwezigenToSelect as |aanwezige|}}
+      {{#each this.args.mandataris as |aanwezige|}}
         <ParticipationList::MandatarisRow
           @aanwezige={{aanwezige}}
-          @onToggleAanwezig={{action "toggleAanwezigheid"}}
+          @onToggleAanwezig={{action "toggleAanwezigheid" aanwezige}}
         />
       {{else}}
         <td colspan="4">Geen mandatarissen gevonden.</td>
