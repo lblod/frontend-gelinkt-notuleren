@@ -21,6 +21,11 @@ Meeting form[@TN]
         (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} - {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
       </PowerSelect>
     </div>
-    <ParticipationList @bestuursorgaan={{this.bestuursorgaan}}/>
+    <ParticipationList 
+      @bestuursorgaan={{this.bestuursorgaan}} 
+      @aanwezigenBijStart={{aanwezigenBijStart}} 
+      @voorzitter={{voorzitter}} 
+      @secretaris={{secretaris}}
+      @onSave={{action "saveParticipationList"}}/>
   <WuButton @onClick={{action "save"}}>Save[@TN]</WuButton>
 </div>

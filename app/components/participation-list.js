@@ -11,6 +11,6 @@ export default class ParticipationListComponent extends Component {
   }
   @action
   onSave(info) {
-    this.info = info;
+    this.args.onSave(info);
   }
 }

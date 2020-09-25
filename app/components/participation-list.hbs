@@ -1,11 +1,11 @@
 {{#if this.args.bestuursorgaan}}
-  {{#if this.info}}
+  {{#if this.args.voorzitter}}
     Voorzitter: <br>
-    <ParticipationList::Person @person={{this.info.voorzitter}} /> <br>
+    <ParticipationList::Person @person={{this.args.voorzitter}} /> <br>
     Secretaris <br>
-    <ParticipationList::Person @person={{this.info.secretaris}} /> <br>
+    <ParticipationList::Person @person={{this.args.secretaris}} /> <br>
     Mandatees: <br>
-    {{#each this.info.presentMandataris as |mandataris|}}
+    {{#each this.args.aanwezigenBijStart as |mandataris|}}
       <ParticipationList::Person @person={{mandataris}} />,
     {{/each}}
   {{/if}}
@@ -24,7 +24,7 @@
     @show={{this.popup}}
     @togglePopup={{action "togglePopup"}}
     @onSave={{action "onSave"}}
-    @presentMandataris={{this.info.presentMandataris}}
+    @aanwezigenBijStart={{this.args.aanwezigenBijStart}}
   />
 {{/if}}
 

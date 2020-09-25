@@ -10,6 +10,9 @@ export default class MeetingForm extends Component{
   @tracked opLocatie;
   @tracked bestuursorgaan;
   @tracked bestuursorgaanOptions;
+  @tracked aanwezigenBijStart;
+  @tracked voorzitter;
+  @tracked secretaris;
 
   @service store;
   @service currentSession;
@@ -39,6 +42,10 @@ export default class MeetingForm extends Component{
       this.gestartOpTijdstip = this.args.zitting.gestartOpTijdstip;
       this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
       this.opLocatie = this.args.zitting.opLocatie;
+      this.bestuursorgaan = this.args.zitting.bestuursorgaan;
+      this.secretaris = this.args.zitting.get('secretaris');
+      this.voorzitter = this.args.zitting.get('voorzitter');
+      this.aanwezigenBijStart = this.args.zitting.get('aanwezigenBijStart');
     }
     this.fetchBestuursorgaan();
   }
@@ -67,13 +74,23 @@ export default class MeetingForm extends Component{
   }
 
   @action
+  saveParticipationList({voorzitter, secretaris, aanwezigenBijStart}) {
+    this.voorzitter = voorzitter;
+    this.secretaris = secretaris;
+    this.aanwezigenBijStart = aanwezigenBijStart;
+  }
+
+  @action
   save() {
     const info = {
       geplandeStart: this.geplandeStart,
       gestartOpTijdstip: this.gestartOpTijdstip,
       geeindigdOpTijdstip: this.geeindigdOpTijdstip,
       opLocatie : this.opLocatie,
-      bestuursorgaan: this.bestuursorgaan
+      bestuursorgaan: this.bestuursorgaan,
+      voorzitter: this.voorzitter,
+      secretaris: this.secretaris,
+      aanwezigenBijStart: this.aanwezigenBijStart
     };
     this.args.save(info);
   }

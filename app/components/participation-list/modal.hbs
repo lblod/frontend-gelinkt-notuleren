@@ -30,7 +30,7 @@
                   Secretaris van de zitting
                   <ParticipationList::FunctionarisSelector
                     @onSelect={{action "selectSecretaris"}} 
-                    @functionaris={{secretaris}} 
+                    @functionaris={{this.secretaris}} 
                     @bestuursorgaan={{this.args.bestuursorgaan}}
                   />
                 </label>
@@ -42,7 +42,7 @@
             <div class="u-spacer--tb--tiny">
               <ParticipationList::MandatariesTable
                 @mandataris={{mandataris}}
-                @selected={{this.args.presentMandataris}}
+                @selected={{this.args.aanwezigenBijStart}}
                 @onChange={{action "updateMandatarisTable"}}
               />
             </div>

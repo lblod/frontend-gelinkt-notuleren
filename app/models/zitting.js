@@ -13,6 +13,9 @@ export default Model.extend({
   behandeldeAgendapunten: hasMany('behandeling-van-agendapunt', { inverse: null }),
   notulen: belongsTo('editor-document', { inverse: null }),
   agenda: belongsTo('agenda', { inverse: null }),
+  secretaris: belongsTo('mandataris', { inverse: null }),
+  voorzitter:  belongsTo('mandataris', { inverse: null }),
+  aanwezigenBijStart: hasMany('mandataris', { inverse: null }),
 
   isPublished: notEmpty('afgeleidUit')
 });
