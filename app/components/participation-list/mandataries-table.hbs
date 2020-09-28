@@ -21,7 +21,7 @@
         <ParticipationList::MandatarisRow
           @mandataris={{mandataris}}
           @selectedMandatees={{this.selectedMandatees}}
-          @onToggleAanwezig={{action "toggleAanwezigheid" mandataris}}
+          @onToggleAanwezig={{fn this.toggleAanwezigheid mandataris}}
         />
       {{else}}
         <td colspan="4">Geen mandatarissen gevonden.</td>
