@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class MeetingForm extends Component{
-  @tracked geplandeStartDate;
+  @tracked geplandeStart;
   @tracked gestartOpTijdstip;
   @tracked geeindigdOpTijdstip;
   @tracked opLocatie;
