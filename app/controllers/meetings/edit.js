@@ -12,11 +12,7 @@ export default class MeetingsEditController extends Controller {
     this.model.bestuursorgaan = info.bestuursorgaan;
     this.model.secretaris = info.secretaris;
     this.model.voorzitter = info.voorzitter;
-    if(info.aanwezigenBijStart) {
-      this.model.aanwezigenBijStart = info.aanwezigenBijStart;
-    } else {
-      this.model.aanwezigenBijStart = [];
-    }
+    this.model.aanwezigenBijStart = info.aanwezigenBijStart || [];
     await this.model.save();
     this.transitionToRoute('inbox.meetings');
   }
