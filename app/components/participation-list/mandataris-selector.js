@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from "@ember/object";
 import { timeout } from 'ember-concurrency';
-import {task} from 'ember-concurrency-decorators'
+import {task} from 'ember-concurrency-decorators';
 import { inject as service } from '@ember/service';
 
 export default class ParticipationListMandatarisSelectorComponent extends Component {

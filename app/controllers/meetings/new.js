@@ -15,7 +15,7 @@ export default class MeetingsNewController extends Controller {
       bestuursorgaan: info.bestuursorgaan,
       secretaris: info.secretaris,
       voorzitter: info.voorzitter,
-      aanwezigenBijStart: info.aanwezigenBijStart
+      aanwezigenBijStart: info.aanwezigenBijStart ? info.aanwezigenBijStart : []
     });
     await zitting.save();
     this.transitionToRoute('inbox.meetings');

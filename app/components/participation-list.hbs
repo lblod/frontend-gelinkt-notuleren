@@ -1,11 +1,15 @@
 {{#if this.args.bestuursorgaan}}
-  {{#if this.args.voorzitter}}
-    Voorzitter: <br>
+  {{#if this.hasParticipationInfo}}
+    Voorzitter[@TN]: <br>
     <ParticipationList::Person @person={{this.args.voorzitter}} /> <br>
-    Secretaris <br>
+    Secretaris[@TN]: <br>
     <ParticipationList::Person @person={{this.args.secretaris}} /> <br>
-    Mandatees: <br>
+    Aanwezigen Mandatees[@TN]: <br>
     {{#each this.args.aanwezigenBijStart as |mandataris|}}
+      <ParticipationList::Person @person={{mandataris}} />,
+    {{/each}} <br>
+    Not Aanwezigen Mandatees[@TN]: <br>
+    {{#each this.mandateesNotPresent as |mandataris|}}
       <ParticipationList::Person @person={{mandataris}} />,
     {{/each}}
   {{/if}}

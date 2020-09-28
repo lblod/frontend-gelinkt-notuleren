@@ -46,6 +46,10 @@ export default class MeetingForm extends Component{
       this.secretaris = this.args.zitting.get('secretaris');
       this.voorzitter = this.args.zitting.get('voorzitter');
       this.aanwezigenBijStart = this.args.zitting.get('aanwezigenBijStart');
+    } else {
+      this.geplandeStart = new Date();
+      this.gestartOpTijdstip = new Date();
+      this.geeindigdOpTijdstip = new Date();
     }
     this.fetchBestuursorgaan();
   }

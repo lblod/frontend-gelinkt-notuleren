@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from "@ember/object";
-import { tracked } from '@glimmer/tracking';
 
 export default class DateTimePicker extends Component{
   date;
@@ -14,8 +13,6 @@ export default class DateTimePicker extends Component{
       const hours = this.date.getHours();
       const minutes = this.date.getMinutes();
       this.timePart = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
-    } else {
-      this.date = new Date();
     }
   }
   @action
