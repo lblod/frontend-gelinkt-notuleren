@@ -1,4 +1,4 @@
-{{#if this.args.show}}
+{{#if @show}}
   {{#wu-modal
     title="Beheer aanwezigen"
     dialog-class="modal-dialog--wide modal-dialog--sectioned"
@@ -17,7 +17,7 @@
                   <ParticipationList::MandatarisSelector
                     @onSelect={{action "selectVoorzitter"}} 
                     @mandataris={{this.voorzitter}}
-                    @bestuursorgaan={{this.args.bestuursorgaan}}
+                    @bestuursorgaan={{@bestuursorgaan}}
                   />
                 </label>
               </div>
@@ -31,7 +31,7 @@
                   <ParticipationList::FunctionarisSelector
                     @onSelect={{action "selectSecretaris"}} 
                     @functionaris={{this.secretaris}} 
-                    @bestuursorgaan={{this.args.bestuursorgaan}}
+                    @bestuursorgaan={{@bestuursorgaan}}
                   />
                 </label>
               </div>
@@ -42,7 +42,7 @@
             <div class="u-spacer--tb--tiny">
               <ParticipationList::MandatariesTable
                 @mandataris={{mandataris}}
-                @selected={{this.args.aanwezigenBijStart}}
+                @selected={{@aanwezigenBijStart}}
                 @onChange={{action "updateMandatarisTable"}}
               />
             </div>

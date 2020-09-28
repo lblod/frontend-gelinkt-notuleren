@@ -6,7 +6,7 @@
   @placeholder="Zoek op achternaam"
   @allowClear={{true}}
   @search={{perform searchByName}}
-  @selected={{this.args.mandataris}}
+  @selected={{@mandataris}}
   @onchange={{action "select"}}
   as |mandataris|>
   {{mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{mandataris.isBestuurlijkeAliasVan.achternaam}}, 

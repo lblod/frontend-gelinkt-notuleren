@@ -17,7 +17,7 @@
     {{#if loadData.isRunning}}
       <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
     {{else}}
-      {{#each this.args.mandataris as |mandataris|}}
+      {{#each @mandataris as |mandataris|}}
         <ParticipationList::MandatarisRow
           @mandataris={{mandataris}}
           @selectedMandatees={{this.selectedMandatees}}
