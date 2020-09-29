@@ -14,19 +14,15 @@
     </tr>
   </thead>
   <tbody>
-    {{#if loadData.isRunning}}
-      <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+    {{#each @mandataris as |mandataris|}}
+      <ParticipationList::MandatarisRow
+        @mandataris={{mandataris}}
+        @selectedMandatees={{this.selectedMandatees}}
+        @onToggleAanwezig={{fn this.toggleAanwezigheid mandataris}}
+      />
     {{else}}
-      {{#each @mandataris as |mandataris|}}
-        <ParticipationList::MandatarisRow
-          @mandataris={{mandataris}}
-          @selectedMandatees={{this.selectedMandatees}}
-          @onToggleAanwezig={{fn this.toggleAanwezigheid mandataris}}
-        />
-      {{else}}
-        <td colspan="4">Geen mandatarissen gevonden.</td>
-      {{/each}}
-    {{/if}}
+      <td colspan="4">Geen mandatarissen gevonden.</td>
+    {{/each}}
   </tbody>
 </table>
 
