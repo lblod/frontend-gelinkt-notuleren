@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
+import {task} from 'ember-concurrency-decorators'
 
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
@@ -14,8 +15,8 @@ export default class ParticipationListComponent extends Component {
     super(...arguments);
   }
 
-  @action
-  async fetchMandataris() {
+  @task
+  *fetchMandataris() {
     const bestuursorgaanUri = this.args.bestuursorgaan && this.args.bestuursorgaan.get('uri');
     if(!bestuursorgaanUri) {
       return setTimeout(this.fetchMandataris.bind(this), 200);
@@ -23,7 +24,7 @@ export default class ParticipationListComponent extends Component {
     let queryParams = {
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri
     };
-    this.mandataris =  this.store.query('mandataris', queryParams);
+    this.mandataris =  yield this.store.query('mandataris', queryParams);
   }
   
   get hasParticipationInfo() {

@@ -1,5 +1,5 @@
 {{#if @bestuursorgaan}}
-  <div {{did-insert this.fetchMandataris}}>
+  <div {{did-insert (perform this.fetchMandataris)}}>
     {{#if this.hasParticipationInfo}}
       Voorzitter[@TN]: <br>
       <ParticipationList::Person @person={{@voorzitter}} /> <br>
@@ -15,14 +15,14 @@
       {{/each}}
     {{/if}}
     <div class="modal-dialog__footer">
-      {{#wu-button-group}}
-        {{wu-button
-          label="Beheer aanwezigen"
-          isNarrow=true
-          onClick=(action "togglePopup")
-          disabled=loadData.isRunning
-        }}
-      {{/wu-button-group}}
+      <WuButtonGroup>
+        <WuButton
+          @label="Beheer aanwezigen"
+          @isNarrow={{"true"}}
+          @onClick={{this.togglePopup}}
+          @disabled={{this.fetchMandataris.isRunning}}
+        />
+      </WuButtonGroup>
     </div>
     <ParticipationList::Modal
       @bestuursorgaan={{@bestuursorgaan}}
