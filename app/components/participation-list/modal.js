@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { action } from "@ember/object";
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import {task} from 'ember-concurrency-decorators'
 
 export default class ParticipationListModalComponent extends Component {
   tableDataReady = true
@@ -15,14 +16,14 @@ export default class ParticipationListModalComponent extends Component {
     super(...arguments);
     this.voorzitter = this.args.voorzitter;
     this.secretaris = this.args.secretaris;
-    this.fetchData();
   }
 
-  async fetchData() {
+  @task
+  *fetchData() {
     let queryParams = {
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
     };
-    const mandataris = await this.store.query('mandataris', queryParams);
+    const mandataris = yield this.store.query('mandataris', queryParams);
     this.mandataris = mandataris;
   }
 

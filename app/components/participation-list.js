@@ -12,9 +12,9 @@ export default class ParticipationListComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.fetchMandataris();
   }
 
+  @action
   async fetchMandataris() {
     const bestuursorgaanUri = this.args.bestuursorgaan && this.args.bestuursorgaan.get('uri');
     if(!bestuursorgaanUri) {

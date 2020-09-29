@@ -1,35 +1,37 @@
 {{#if @bestuursorgaan}}
-  {{#if this.hasParticipationInfo}}
-    Voorzitter[@TN]: <br>
-    <ParticipationList::Person @person={{@voorzitter}} /> <br>
-    Secretaris[@TN]: <br>
-    <ParticipationList::Person @person={{@secretaris}} /> <br>
-    Aanwezigen Mandatees[@TN]: <br>
-    {{#each @aanwezigenBijStart as |mandataris|}}
-      <ParticipationList::Person @person={{mandataris}} />,
-    {{/each}} <br>
-    Not Aanwezigen Mandatees[@TN]: <br>
-    {{#each this.mandateesNotPresent as |mandataris|}}
-      <ParticipationList::Person @person={{mandataris}} />,
-    {{/each}}
-  {{/if}}
-  <div class="modal-dialog__footer">
-    {{#wu-button-group}}
-      {{wu-button
-        label="Beheer aanwezigen"
-        isNarrow=true
-        onClick=(action "togglePopup")
-        disabled=loadData.isRunning
-      }}
-    {{/wu-button-group}}
+  <div {{did-insert this.fetchMandataris}}>
+    {{#if this.hasParticipationInfo}}
+      Voorzitter[@TN]: <br>
+      <ParticipationList::Person @person={{@voorzitter}} /> <br>
+      Secretaris[@TN]: <br>
+      <ParticipationList::Person @person={{@secretaris}} /> <br>
+      Aanwezigen Mandatees[@TN]: <br>
+      {{#each @aanwezigenBijStart as |mandataris|}}
+        <ParticipationList::Person @person={{mandataris}} />,
+      {{/each}} <br>
+      Not Aanwezigen Mandatees[@TN]: <br>
+      {{#each this.mandateesNotPresent as |mandataris|}}
+        <ParticipationList::Person @person={{mandataris}} />,
+      {{/each}}
+    {{/if}}
+    <div class="modal-dialog__footer">
+      {{#wu-button-group}}
+        {{wu-button
+          label="Beheer aanwezigen"
+          isNarrow=true
+          onClick=(action "togglePopup")
+          disabled=loadData.isRunning
+        }}
+      {{/wu-button-group}}
+    </div>
+    <ParticipationList::Modal
+      @bestuursorgaan={{@bestuursorgaan}}
+      @show={{this.popup}}
+      @togglePopup={{this.togglePopup}}
+      @onSave={{this.onSave}}
+      @aanwezigenBijStart={{@aanwezigenBijStart}}
+    />
   </div>
-  <ParticipationList::Modal
-    @bestuursorgaan={{@bestuursorgaan}}
-    @show={{this.popup}}
-    @togglePopup={{this.togglePopup}}
-    @onSave={{this.onSave}}
-    @aanwezigenBijStart={{@aanwezigenBijStart}}
-  />
 {{/if}}
 
 {{yield}}

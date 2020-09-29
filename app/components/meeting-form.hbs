@@ -1,5 +1,5 @@
 Meeting form[@TN]
-<div>
+<div {{did-insert this.fetchBestuursorgaan}}>
     <div>
       Planned Start[@TN]:
       <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>

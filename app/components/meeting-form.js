@@ -51,9 +51,9 @@ export default class MeetingForm extends Component{
       this.gestartOpTijdstip = new Date();
       this.geeindigdOpTijdstip = new Date();
     }
-    this.fetchBestuursorgaan();
   }
 
+  @action
   async fetchBestuursorgaan() {
     // TODO: Move select Bestuursorgaan to component
     const currentBestuurseenheid = await this.currentSession.get('group');
