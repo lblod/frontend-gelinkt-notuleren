@@ -18,9 +18,6 @@ export default class ParticipationListComponent extends Component {
   @task
   *fetchMandataris() {
     const bestuursorgaanUri = this.args.bestuursorgaan && this.args.bestuursorgaan.get('uri');
-    if(!bestuursorgaanUri) {
-      return setTimeout(this.fetchMandataris.bind(this), 200);
-    }
     let queryParams = {
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri
     };
