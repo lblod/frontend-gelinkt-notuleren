@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
-import {task} from 'ember-concurrency-decorators'
+import {task} from 'ember-concurrency-decorators';
 
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
@@ -33,7 +33,7 @@ export default class ParticipationListComponent extends Component {
 
   get mandateesNotPresent() {
     if(this.args.aanwezigenBijStart && this.mandataris) {
-      const aanwezigenUris = this.args.aanwezigenBijStart.map((mandataris) => mandataris.uri)
+      const aanwezigenUris = this.args.aanwezigenBijStart.map((mandataris) => mandataris.uri);
       const notPresent = this.mandataris.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
       return notPresent;
     }
