@@ -7,7 +7,7 @@
   @allowClear={{true}}
   @search={{perform searchByName}}
   @selected={{@mandataris}}
-  @onchange={{action "select"}}
+  @onchange={{this.select}}
   as |mandataris|>
   {{mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{mandataris.isBestuurlijkeAliasVan.achternaam}}, 
   {{mandataris.bekleedt.bestuursfunctie.label}}
