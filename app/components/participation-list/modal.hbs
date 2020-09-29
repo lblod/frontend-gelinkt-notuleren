@@ -38,16 +38,14 @@
                 </div>
               </div>
             </div>
-            {{#if tableDataReady}}
-              <label class="form__label">Aanwezige mandatarissen</label>
-              <div class="u-spacer--tb--tiny">
-                <ParticipationList::MandatarissenTable
-                  @mandataris={{mandataris}}
-                  @selected={{@aanwezigenBijStart}}
-                  @onChange={{this.updateMandatarisTable}}
-                />
-              </div>
-            {{/if}}
+            <label class="form__label">Aanwezige mandatarissen</label>
+            <div class="u-spacer--tb--tiny">
+              <ParticipationList::MandatarissenTable
+                @mandataris={{this.mandataris}}
+                @selected={{@aanwezigenBijStart}}
+                @onChange={{this.updateMandatarisTable}}
+              />
+            </div>
           {{/if}}
           {{yield}}
       {{/m.content}}

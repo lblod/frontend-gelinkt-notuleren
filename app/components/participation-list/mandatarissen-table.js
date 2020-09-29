@@ -14,6 +14,7 @@ export default class ParticipationListMandatariesTableComponent extends Componen
         this.selectedMandatees[mandataris.uri] = mandataris;
       });
     }
+    this.args.onChange(Object.values(this.selectedMandatees));
   }
   @action
   toggleAanwezigheid(mandataris, selected){
