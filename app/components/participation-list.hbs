@@ -2,16 +2,16 @@
   <div {{did-insert (perform this.fetchMandatees)}}>
     {{#if this.hasParticipationInfo}}
       Voorzitter[@TN]: <br>
-      <ParticipationList::Person @person={{@voorzitter}} /> <br>
+      {{@voorzitter.isBestuurlijkeAliasVan.fullName}} <br>
       Secretaris[@TN]: <br>
-      <ParticipationList::Person @person={{@secretaris}} /> <br>
+      {{@secretaris.isBestuurlijkeAliasVan.fullName}} <br>
       Aanwezigen Mandatees[@TN]: <br>
       {{#each @aanwezigenBijStart as |mandataris|}}
-        <ParticipationList::Person @person={{mandataris}} />,
+        {{mandataris.isBestuurlijkeAliasVan.fullName}},
       {{/each}} <br>
       Not Aanwezigen Mandatees[@TN]: <br>
       {{#each this.mandateesNotPresent as |mandataris|}}
-        <ParticipationList::Person @person={{mandataris}} />,
+        {{mandataris.isBestuurlijkeAliasVan.fullName}},
       {{/each}}
     {{/if}}
     <div class="modal-dialog__footer">
