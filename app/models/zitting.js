@@ -12,7 +12,8 @@ export default Model.extend({
   afgeleidUit: attr(),
   behandeldeAgendapunten: hasMany('behandeling-van-agendapunt', { inverse: null }),
   notulen: belongsTo('editor-document', { inverse: null }),
-  agenda: belongsTo('agenda', { inverse: null }),
+  agendas: hasMany('agenda', { inverse: null }),
+  agendapunten: hasMany('agendapunt', { inverse: null }),
 
   isPublished: notEmpty('afgeleidUit')
 });

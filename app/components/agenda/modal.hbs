@@ -1,0 +1,28 @@
+{{#wu-modal
+    title="Beheer Agenda"
+    dialog-class="modal-dialog--wide modal-dialog--sectioned"
+    onClose=@cancel
+    as |m|
+}}
+  {{#m.content isSectioned=true}}
+    {{#if this.isEditing}}
+      <Agenda::Edit @agendapunt={{this.currentlyEditing}}/>
+    {{else}}
+      <Agenda::List @agendapunten={{@agendapunten}} @edit={{this.edit}}/>
+    {{/if}}
+  {{/m.content}}
+
+  <div class="modal-dialog__footer">
+    {{#if this.isEditing}}
+      {{#wu-button-group}}
+        {{wu-button label="Bewaar agendapunt" class="button button--narrow" onClick=null}}
+        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=null}}
+      {{/wu-button-group}}
+    {{else}}
+      {{#wu-button-group}}
+        {{wu-button label="Voeg agenda in" class="button button--narrow" onClick=null}}
+        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=null}}
+      {{/wu-button-group}}
+    {{/if}}
+  </div>
+{{/wu-modal}}

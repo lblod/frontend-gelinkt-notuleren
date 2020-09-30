@@ -1,0 +1,28 @@
+{{!-- {{#each @zitting.agendapunten as |agendapunt|}}
+  <br>
+  order: <Input type="number" @value={{mut agendapunt.position}}/>
+  titel: <Input type='text' @value={{mut agendapunt.titel}}/>
+  beschrijving: <Input type='text' @value={{mut agendapunt.beschrijving}}/>
+  geplandOpenbaar: <Input type='checkbox' checked={{mut agendapunt.geplandOpenbaar}}/>
+  <button type="button" {{on "click" (fn this.deleteAgendapunt agendapunt)}}>Delete</button>
+{{/each}}
+<br>
+<button type="button" {{on "click" this.saveAgendapunten}}>Save</button>
+<button type="button" {{on "click" this.createAgendapunt}}>Add</button> --}}
+
+
+
+<div class="modal-dialog__footer">
+  {{#wu-button-group}}
+    {{wu-button
+      label="Beheer agenda"
+      isNarrow=true
+      onClick=(action (mut popup) true)
+    }}
+  {{/wu-button-group}}
+</div>
+
+
+{{#if this.popup}}
+  <Agenda::modal @agendapunten={{@zitting.agendapunten}} @cancel={{this.cancel}}/>
+{{/if}}

@@ -1,0 +1,74 @@
+<div style="height:70vh; max-height:none;">
+  <table class="data-table">
+    <thead>
+      <tr>
+        {{!-- <th class="u-align-right" style="max-width: 4rem;">Orde</th> --}}
+        <th>Volgorde</th>
+        <th style="width: 400px;">Titel agendapunt</th>
+        <th>Geplande openbaarheid</th>
+        <th>
+          <div class="grid">
+            <div class="col--2-12">Acties</div>
+            <div class="col--10-12 u-align-right">
+              {{#wu-button
+                  class="button"
+                  isNarrow=true
+                  isSmall=true
+                  onClick=null}}
+                <i class="vi vi-plus vi-u-xs"></i> Voeg agendapunt toe
+              {{/wu-button}}
+            </div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <SortableObjects @tagName={{"tbody"}} @sortableObjectList={{@agendapunten}} enableSort={{true}} useSwap={{true}} inPlace={{true}}>
+      {{#each @agendapunten as |agendapunt|}}
+        {{#draggable-object tagName="tr" content=agendapunt isSortable=true}}
+          {{!--  <td class="u-align-right">1</td> --}}
+          <td>
+            {{#wu-link-button
+              isTiny=true
+              isLink=true
+              isNarrow=true
+              onClick=null}}
+              <span style="cursor:pointer">
+                <i class="fa fa-bars"></i>
+              </span>
+            {{/wu-link-button}}
+          </td>
+          <td>
+            <p>{{agendapunt.titel}}</p>
+          </td>
+          <td>
+            {{if agendapunt.geplandOpenbaar "Openbaar" "Besloten"}}
+          </td>
+          <td>
+            {{#wu-button-group}}
+              <WuButton
+                @isSmall={{true}}
+                @isAlt={{true}}
+                @isNarrow={{true}}
+                @label={{"Bewerk"}}
+                @onClick={{fn @edit agendapunt}}>
+                <i class="vi vi-edit"></i> Bewerk agendapunt
+              </WuButton>
+            {{/wu-button-group}}
+          </td>
+        {{/draggable-object}}
+      {{else}}
+        <tr>
+          <td colspan="5">Geen agendapunten gevonden.
+              {{#wu-button
+                isNarrow=true
+                isLink=true
+                onClick=null}}
+                Voeg agendapunt toe
+              {{/wu-button}}
+            </td>
+        </tr>
+      {{/each}}
+    </SortableObjects>
+  </table>
+</div>
