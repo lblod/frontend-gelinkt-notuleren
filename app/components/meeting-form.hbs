@@ -5,10 +5,6 @@ Meeting form[@TN]
       <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
     </div>
     <div>
-      Agendapunten[@TN]:
-      <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
-    </div>
-    <div>
       Locatie[@TN]: <Input type='text' @value={{mut this.opLocatie}} />
     </div>
     <div>
@@ -36,5 +32,10 @@ Meeting form[@TN]
       @voorzitter={{this.voorzitter}}
       @secretaris={{this.secretaris}}
       @onSave={{this.saveParticipationList}}/>
+
+     <div>
+      Agendapunten[@TN]:
+      <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
+    </div>
   <WuButton @onClick={{this.save}}>Save[@TN]</WuButton>
 </div>
