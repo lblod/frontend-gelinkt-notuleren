@@ -4,12 +4,15 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class MeetingForm extends Component{
-  @tracked geplandeStartDate;
+  @tracked geplandeStart;
   @tracked gestartOpTijdstip;
   @tracked geeindigdOpTijdstip;
   @tracked opLocatie;
   @tracked bestuursorgaan;
   @tracked bestuursorgaanOptions;
+  @tracked aanwezigenBijStart;
+  @tracked voorzitter;
+  @tracked secretaris;
 
   @service store;
   @service currentSession;
@@ -39,10 +42,18 @@ export default class MeetingForm extends Component{
       this.gestartOpTijdstip = this.args.zitting.gestartOpTijdstip;
       this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
       this.opLocatie = this.args.zitting.opLocatie;
+      this.bestuursorgaan = this.args.zitting.bestuursorgaan;
+      this.secretaris = this.args.zitting.get('secretaris');
+      this.voorzitter = this.args.zitting.get('voorzitter');
+      this.aanwezigenBijStart = this.args.zitting.get('aanwezigenBijStart');
+    } else {
+      this.geplandeStart = new Date();
+      this.gestartOpTijdstip = new Date();
+      this.geeindigdOpTijdstip = new Date();
     }
-    this.fetchBestuursorgaan();
   }
 
+  @action
   async fetchBestuursorgaan() {
     // TODO: Move select Bestuursorgaan to component
     const currentBestuurseenheid = await this.currentSession.get('group');
@@ -53,18 +64,27 @@ export default class MeetingForm extends Component{
     };
     let bestuursorganenInTijd = await this.store.query('bestuursorgaan', query);
     bestuursorganenInTijd = bestuursorganenInTijd.filter(b => this.allowedBestuursorgaanClassifications.includes(b.get('isTijdsspecialisatieVan.classificatie.uri')));
-    console.log(bestuursorganenInTijd)
-    this.bestuursorgaanOptions = bestuursorganenInTijd
+    this.bestuursorgaanOptions = bestuursorganenInTijd;
   }
 
   @action
   changeSelect(value) {
     this.bestuursorgaan = value;
+    this.voorzitter = undefined;
+    this.secretaris = undefined;
+    this.aanwezigenBijStart = [];
   }
 
   @action
   changeDate(targetProperty, value) {
     this[targetProperty] = value;
+  }
+
+  @action
+  saveParticipationList({voorzitter, secretaris, aanwezigenBijStart}) {
+    this.voorzitter = voorzitter;
+    this.secretaris = secretaris;
+    this.aanwezigenBijStart = aanwezigenBijStart;
   }
 
   @action
@@ -74,7 +94,10 @@ export default class MeetingForm extends Component{
       gestartOpTijdstip: this.gestartOpTijdstip,
       geeindigdOpTijdstip: this.geeindigdOpTijdstip,
       opLocatie : this.opLocatie,
-      bestuursorgaan: this.bestuursorgaan
+      bestuursorgaan: this.bestuursorgaan,
+      voorzitter: this.voorzitter,
+      secretaris: this.secretaris,
+      aanwezigenBijStart: this.aanwezigenBijStart
     };
     this.args.save(info);
   }

@@ -1,0 +1,60 @@
+{{#if @show}}
+  <div {{did-insert (perform this.fetchData)}}>
+    {{#wu-modal
+      title="Beheer aanwezigen"
+      dialog-class="modal-dialog--wide modal-dialog--sectioned"
+      onClose=(action 'togglePopup')
+      as |m|}}
+        {{#m.content isSectioned=false}}
+          {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
+            <p>Bezig met laden van de aanwezigenlijst</p>
+            <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+          {{else}}
+            <div class="u-spacer">
+              <div class="grid">
+                <div class="col--6-12">
+                  <label class="form__label">
+                    Voorzitter van de zitting
+                    <ParticipationList::MandatarisSelector
+                      @onSelect={{this.selectVoorzitter}} 
+                      @mandataris={{this.voorzitter}}
+                      @bestuursorgaan={{@bestuursorgaan}}
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="u-spacer">
+              <div class="grid">
+                <div class="col--6-12">
+                  <label class="form__label">
+                    Secretaris van de zitting
+                    <ParticipationList::FunctionarisSelector
+                      @onSelect={{this.selectSecretaris}} 
+                      @functionaris={{this.secretaris}} 
+                      @bestuursorgaan={{@bestuursorgaan}}
+                    />
+                  </label>
+                </div>
+              </div>
+            </div>
+            <label class="form__label">Aanwezige mandatarissen</label>
+            <div class="u-spacer--tb--tiny">
+              <ParticipationList::MandatarissenTable
+                @mandataris={{this.mandataris}}
+                @selected={{@aanwezigenBijStart}}
+                @onChange={{this.updateMandatarisTable}}
+              />
+            </div>
+          {{/if}}
+          {{yield}}
+      {{/m.content}}
+      <div class="modal-dialog__footer">
+        {{#wu-button-group}}
+          {{wu-button label="Voeg aanwezigen in" class="button button--narrow" onClick=(action 'insert')}}
+          {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=(action 'togglePopup')}}
+        {{/wu-button-group}}
+      </div>
+    {{/wu-modal}}
+  </div>
+{{/if}}

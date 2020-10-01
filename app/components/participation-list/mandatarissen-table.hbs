@@ -1,0 +1,29 @@
+<table class="data-table data-table--lined data-table--zebra">
+  <thead>
+    <tr>
+      <th>Naam</th>
+      <th>Functie</th>
+      <th>Geboortedatum</th>
+      <th>
+        <div class="grid">
+          <div class="col--4-12">
+            Actie
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each @mandataris as |mandataris|}}
+      <ParticipationList::MandatarisRow
+        @mandataris={{mandataris}}
+        @selectedMandatees={{this.selectedMandatees}}
+        @onToggleAanwezig={{fn this.toggleAanwezigheid mandataris}}
+      />
+    {{else}}
+      <td colspan="4">Geen mandatarissen gevonden.</td>
+    {{/each}}
+  </tbody>
+</table>
+
+{{yield}}

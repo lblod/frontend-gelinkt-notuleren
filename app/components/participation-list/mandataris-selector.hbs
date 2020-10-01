@@ -1,0 +1,14 @@
+<PowerSelect
+  @loadingMessage="Aan het laden..."
+  @noMatchesMessage="Geen resultaten"
+  @searchMessage="Typ om te zoeken"
+  @renderInPlace={{true}}
+  @placeholder="Zoek op achternaam"
+  @allowClear={{true}}
+  @search={{perform searchByName}}
+  @selected={{@mandataris}}
+  @onchange={{this.select}}
+  as |mandataris|>
+  {{mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{mandataris.isBestuurlijkeAliasVan.achternaam}}, 
+  {{mandataris.bekleedt.bestuursfunctie.label}}
+</PowerSelect>

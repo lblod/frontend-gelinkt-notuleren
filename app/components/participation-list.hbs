@@ -1,0 +1,37 @@
+{{#if @bestuursorgaan}}
+  <div {{did-update (perform this.fetchMandatees)}}>
+    {{#if this.hasParticipationInfo}}
+      Voorzitter[@TN]: <br>
+      {{@voorzitter.isBestuurlijkeAliasVan.fullName}} <br>
+      Secretaris[@TN]: <br>
+      {{@secretaris.isBestuurlijkeAliasVan.fullName}} <br>
+      Aanwezigen Mandatees[@TN]: <br>
+      {{#each @aanwezigenBijStart as |mandataris|}}
+        {{mandataris.isBestuurlijkeAliasVan.fullName}},
+      {{/each}} <br>
+      Not Aanwezigen Mandatees[@TN]: <br>
+      {{#each this.mandateesNotPresent as |mandataris|}}
+        {{mandataris.isBestuurlijkeAliasVan.fullName}},
+      {{/each}}
+    {{/if}}
+    <div class="modal-dialog__footer">
+      <WuButtonGroup>
+        <WuButton
+          @label="Beheer aanwezigen"
+          @isNarrow={{"true"}}
+          @onClick={{this.togglePopup}}
+          @disabled={{this.fetchMandatees.isRunning}}
+        />
+      </WuButtonGroup>
+    </div>
+    <ParticipationList::Modal
+      @bestuursorgaan={{@bestuursorgaan}}
+      @show={{this.popup}}
+      @togglePopup={{this.togglePopup}}
+      @onSave={{this.onSave}}
+      @aanwezigenBijStart={{@aanwezigenBijStart}}
+    />
+  </div>
+{{/if}}
+
+{{yield}}

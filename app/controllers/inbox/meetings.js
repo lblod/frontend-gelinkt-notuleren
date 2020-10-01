@@ -5,6 +5,7 @@ import { computed } from '@ember/object';
 
 export default Controller.extend(DefaultQueryParamsMixin, {
   currentSession: service(),
+  sort: '-geplande-start',
   init() {
     this._super(...arguments);
   },
