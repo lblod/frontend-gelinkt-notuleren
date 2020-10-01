@@ -19,11 +19,12 @@ export default class ParticipationListComponent extends Component {
   *fetchMandatees() {
     const bestuursorgaanUri = this.args.bestuursorgaan && this.args.bestuursorgaan.get('uri');
     let queryParams = {
-      'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri
+      'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
+       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     this.mandataris =  yield this.store.query('mandataris', queryParams);
   }
-  
+
   get hasParticipationInfo() {
     return this.args.voorzitter || this.args.secretaris || this.args.aanwezigenBijStart;
   }
