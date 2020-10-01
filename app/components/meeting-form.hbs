@@ -19,6 +19,7 @@ Meeting form[@TN]
       <PowerSelect @selected={{this.bestuursorgaan}} @options={{this.bestuursorgaanOptions}} @onchange={{this.changeSelect}} as |bestuursorgaan|>
         {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
         (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} - {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
+        @placeholder="Selecteer bestuursorgaan"
       </PowerSelect>
     </div>
     <ParticipationList 
