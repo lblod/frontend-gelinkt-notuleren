@@ -8,24 +8,28 @@ Meeting form[@TN]
       Locatie[@TN]: <Input type='text' @value={{mut this.opLocatie}} />
     </div>
     <div>
-      Started at[@TN]: 
+      Started at[@TN]:
         <DateTimePicker @onChange={{fn this.changeDate 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
     </div>
     <div>
-      Finished at[@TN]: 
+      Finished at[@TN]:
         <DateTimePicker @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
     </div>
     <div>
-      <PowerSelect @selected={{this.bestuursorgaan}} @options={{this.bestuursorgaanOptions}} @onchange={{this.changeSelect}} as |bestuursorgaan|>
-        {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
-        (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} - {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
+      <PowerSelect
         @placeholder="Selecteer bestuursorgaan"
+        @selected={{this.bestuursorgaan}}
+        @options={{this.bestuursorgaanOptions}}
+        @onchange={{this.changeSelect}} as |bestuursorgaan|>
+          {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
+          (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
+          {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
       </PowerSelect>
     </div>
-    <ParticipationList 
-      @bestuursorgaan={{this.bestuursorgaan}} 
-      @aanwezigenBijStart={{this.aanwezigenBijStart}} 
-      @voorzitter={{this.voorzitter}} 
+    <ParticipationList
+      @bestuursorgaan={{this.bestuursorgaan}}
+      @aanwezigenBijStart={{this.aanwezigenBijStart}}
+      @voorzitter={{this.voorzitter}}
       @secretaris={{this.secretaris}}
       @onSave={{this.saveParticipationList}}/>
   <WuButton @onClick={{this.save}}>Save[@TN]</WuButton>
