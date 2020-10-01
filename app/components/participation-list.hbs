@@ -1,5 +1,5 @@
 {{#if @bestuursorgaan}}
-  <div {{did-insert (perform this.fetchMandatees)}}>
+  <div {{did-update (perform this.fetchMandatees)}}>
     {{#if this.hasParticipationInfo}}
       Voorzitter[@TN]: <br>
       {{@voorzitter.isBestuurlijkeAliasVan.fullName}} <br>

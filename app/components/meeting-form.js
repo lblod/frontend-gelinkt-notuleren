@@ -70,6 +70,9 @@ export default class MeetingForm extends Component{
   @action
   changeSelect(value) {
     this.bestuursorgaan = value;
+    this.voorzitter = undefined;
+    this.secretaris = undefined;
+    this.aanwezigenBijStart = [];
   }
 
   @action
