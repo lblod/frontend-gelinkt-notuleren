@@ -34,12 +34,12 @@
       <AuDataTableThSortable @field="bestuursorgaan.naam" @currentSorting={{sort}} @label="bestuursorgaan" />
     </c.header>
     <c.body as |container|>
-      <td><LinkTo @route="meetings.edit" @model={{container.id}} class="au-c-link">{{moment-format container.geplandeStart "MM/DD/YYYY HH:mm"}}</LinkTo></td>
+      <td><LinkTo @route="meetings.edit" @model={{container.id}} class="au-c-link">{{moment-format container.geplandeStart "DD/MM/YYYY HH:mm"}}</LinkTo></td>
       <td>
-        {{moment-format  container.gestartOpTijdstip "MM/DD/YYYY HH:mm"}}
+        {{moment-format  container.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}
       </td>
       <td>
-        {{moment-format container.geeindigdOpTijdstip "MM/DD/YYYY HH:mm"}}
+        {{moment-format container.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}
       </td>
       <td>
         {{container.opLocatie}}
