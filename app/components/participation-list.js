@@ -26,7 +26,7 @@ export default class ParticipationListComponent extends Component {
   }
 
   get hasParticipationInfo() {
-    return this.args.voorzitter || this.args.secretaris || this.args.aanwezigenBijStart;
+    return !!(this.args.voorzitter || this.args.secretaris || this.args.aanwezigenBijStart);
   }
 
   get mandateesNotPresent() {
