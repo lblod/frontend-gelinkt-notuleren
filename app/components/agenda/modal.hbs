@@ -6,22 +6,22 @@
 }}
   {{#m.content isSectioned=true}}
     {{#if this.isEditing}}
-      <Agenda::Edit @agendapunt={{this.currentlyEditing}}/>
+      <Agenda::Edit @agendapunt={{this.currentlyEditing}} @toggleEditing={{this.toggleEditing}}/>
     {{else}}
-      <Agenda::List @agendapunten={{@agendapunten}} @edit={{this.edit}}/>
+      <Agenda::List @agendapunten={{@agendapunten}} @createAgendapunt={{this.createAgendapunt}} @edit={{this.edit}}/>
     {{/if}}
   {{/m.content}}
 
   <div class="modal-dialog__footer">
     {{#if this.isEditing}}
       {{#wu-button-group}}
-        {{wu-button label="Bewaar agendapunt" class="button button--narrow" onClick=null}}
-        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=null}}
+        {{wu-button label="Bewaar agendapunt" class="button button--narrow" onClick=this.save}}
+        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=this.toggleEditing}}
       {{/wu-button-group}}
     {{else}}
       {{#wu-button-group}}
         {{wu-button label="Voeg agenda in" class="button button--narrow" onClick=null}}
-        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=null}}
+        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=@cancel}}
       {{/wu-button-group}}
     {{/if}}
   </div>
