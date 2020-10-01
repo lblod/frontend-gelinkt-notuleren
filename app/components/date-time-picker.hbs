@@ -1,2 +1,3 @@
 <WuDatepicker @onChange={{this.onChangeDate}} @value={{this.date}}/> 
-<Input type="time" @input={{this.onChangeTime}} @value={{this.timePart}}/>
+<Input type='number' @input={{fn this.onChangeTime 'hours'}} @value={{this.hours}} max={{24}} />
+<Input type='number' @input={{fn this.onChangeTime 'minutes'}} @value={{this.minutes}} max={{60}} />

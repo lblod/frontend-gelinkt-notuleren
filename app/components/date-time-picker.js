@@ -3,16 +3,15 @@ import { action } from "@ember/object";
 
 export default class DateTimePicker extends Component{
   date;
-  datePart;
-  timePart;
+  hours;
+  minutes;
 
   constructor() {
     super(...arguments);
     if(this.args.value) {
       this.date = new Date(this.args.value);
-      const hours = this.date.getHours();
-      const minutes = this.date.getMinutes();
-      this.timePart = `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+      this.hours = this.date.getHours();
+      this.minutes = this.date.getMinutes();
     }
   }
   @action
@@ -23,12 +22,16 @@ export default class DateTimePicker extends Component{
     this.args.onChange(this.date);
   }
   @action
-  onChangeTime(event) {
-    const time = event.target.value;
-    if(!time) return;
-    const [hour, minute] = time.split(':');
-    this.date.setHours(hour);
-    this.date.setMinutes(minute);
+  onChangeTime(type, event) {
+    const value = event.target.value;
+    console.log(value)
+    if(type === 'hours') {
+      if(value < 0 || value > 24) return;
+      this.date.setHours(value);
+    } else {
+      if(value < 0 || value > 60) return;
+      this.date.setMinutes(value)
+    }
     this.args.onChange(this.date);
   }
 }
