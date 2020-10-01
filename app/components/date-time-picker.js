@@ -24,13 +24,12 @@ export default class DateTimePicker extends Component{
   @action
   onChangeTime(type, event) {
     const value = event.target.value;
-    console.log(value)
     if(type === 'hours') {
       if(value < 0 || value > 24) return;
       this.date.setHours(value);
     } else {
       if(value < 0 || value > 60) return;
-      this.date.setMinutes(value)
+      this.date.setMinutes(value);
     }
     this.args.onChange(this.date);
   }
