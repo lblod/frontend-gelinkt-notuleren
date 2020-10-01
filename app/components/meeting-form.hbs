@@ -5,14 +5,18 @@ Meeting form[@TN]
       <DateTimePicker @onChange={{action "changeDate" 'geplandeStart'}} @value={{this.geplandeStart}}/>
     </div>
     <div>
+      Agendapunten[@TN]:
+      <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
+    </div>
+    <div>
       Locatie[@TN]: <Input type='text' @value={{mut this.opLocatie}} />
     </div>
     <div>
-      Started at[@TN]: 
+      Started at[@TN]:
         <DateTimePicker @onChange={{action "changeDate" 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
     </div>
     <div>
-      Finished at[@TN]: 
+      Finished at[@TN]:
         <DateTimePicker @onChange={{action "changeDate" 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
     </div>
     <div>

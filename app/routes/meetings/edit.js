@@ -1,7 +1,10 @@
 import Route from '@ember/routing/route';
 
 export default class MeetingsEditRoute extends Route {
-  model(params) {
-    return this.store.findRecord('zitting', params.id);
+  async model(params) {
+    var zitting=await this.store.findRecord('zitting', params.id);
+    await zitting.agendapunten;
+    zitting.agendapunten = zitting.agendapunten.sortBy('position');
+    return zitting;
   }
 }
