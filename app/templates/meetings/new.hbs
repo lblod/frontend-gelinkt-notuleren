@@ -5,4 +5,4 @@
     </AcmidmLogout>
   </AuDropdown>
 </AuMainHeader>
-<MeetingForm @save={{action "save"}}/>
+<MeetingForm @zitting={{@model}} @onCreateMeeting={{this.goToEditRoute}} />

@@ -23,7 +23,7 @@ Router.map(function() {
     this.route('imported');
     this.route('ontwerpbesluiten');
     this.route('draft-decisions');
-    this.route('meetings')
+    this.route('meetings');
   });
   this.route('mock-login');
   this.route('login');

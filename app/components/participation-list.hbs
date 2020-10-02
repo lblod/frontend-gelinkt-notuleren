@@ -1,15 +1,15 @@
 {{#if @bestuursorgaan}}
   <div {{did-update (perform this.fetchMandatees)}}>
     {{#if this.hasParticipationInfo}}
-      Voorzitter[@TN]: <br>
+      Voorzitter: <br>
       {{@voorzitter.isBestuurlijkeAliasVan.fullName}} <br>
-      Secretaris[@TN]: <br>
+      Secretaris: <br>
       {{@secretaris.isBestuurlijkeAliasVan.fullName}} <br>
-      Aanwezigen Mandatees[@TN]: <br>
+      Aanwezige mandatarissen: <br>
       {{#each @aanwezigenBijStart as |mandataris|}}
         {{mandataris.isBestuurlijkeAliasVan.fullName}},
       {{/each}} <br>
-      Not Aanwezigen Mandatees[@TN]: <br>
+      Afwezige mandatarissen: <br>
       {{#each this.mandateesNotPresent as |mandataris|}}
         {{mandataris.isBestuurlijkeAliasVan.fullName}},
       {{/each}}
@@ -17,7 +17,7 @@
     <div class="modal-dialog__footer">
       <WuButtonGroup>
         <WuButton
-          @label="Beheer aanwezigen"
+          @label="Beheer aanwezigen bij start van de zitting"
           @isNarrow={{"true"}}
           @onClick={{this.togglePopup}}
           @disabled={{this.fetchMandatees.isRunning}}
@@ -33,5 +33,3 @@
     />
   </div>
 {{/if}}
-
-{{yield}}
