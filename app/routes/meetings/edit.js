@@ -7,7 +7,7 @@ export default class MeetingsEditRoute extends Route {
                                                 {
                                                   include: 'aanwezigen-bij-start,agendapunten'
                                                 });
-    zitting.agendapunten = zitting.agendapunten.sortBy('position');
+    zitting.agendapunten = (await zitting.agendapunten).sortBy('position');
     return zitting;
   }
 }
