@@ -20,7 +20,8 @@ export default class ParticipationListModalComponent extends Component {
   @task
   *fetchData() {
     let queryParams = {
-      'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri')
+      'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
+       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandataris = yield this.store.query('mandataris', queryParams);
     this.mandataris = mandataris;

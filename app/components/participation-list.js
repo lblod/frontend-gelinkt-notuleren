@@ -16,7 +16,7 @@ export default class ParticipationListComponent extends Component {
   }
 
   @task
-  *fetchMandatees() {
+    *fetchMandatees() {
     const bestuursorgaanUri = this.args.bestuursorgaan && this.args.bestuursorgaan.get('uri');
     let queryParams = {
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
