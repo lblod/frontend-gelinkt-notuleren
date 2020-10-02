@@ -7,37 +7,34 @@ export default class AgendaModalComponent extends Component {
 
   @service store;
 
-  @tracked isEditing=false;
+  @tracked isEditing = false;
 
   @tracked currentlyEditing;
 
   @action
   async edit(agendapunt){
-    this.currentlyEditing=agendapunt;
+    this.currentlyEditing = agendapunt;
     this.toggleEditing();
   }
   @action
   async createAgendapunt(){
-    const agendapunt=this.store.createRecord('agendapunt');
-    agendapunt.titel="";
-    agendapunt.beschrijving="";
-    agendapunt.geplandOpenbaar=false;
-    agendapunt.position=0;
-    await agendapunt.save();
-
-    await this.args.zitting.agendapunten;
-    this.args.zitting.agendapunten.pushObject(agendapunt);
-    await this.args.zitting.save();
+    const agendapunt = this.store.createRecord('agendapunt');
+    agendapunt.titel = "";
+    agendapunt.beschrijving = "";
+    agendapunt.geplandOpenbaar = false;
+    agendapunt.position = 0;
     this.edit(agendapunt);
   }
   @action
   async toggleEditing(){
-    this.isEditing=!this.isEditing;
+    this.isEditing = !this.isEditing;
   }
   @action
   async save(){
-    await this.currentlyEditing;
-    await this.currentlyEditing.save();
+    const agendapunt = this.currentlyEditing;
+    await agendapunt.save();
+    this.args.zitting.agendapunten.pushObject(agendapunt);
+    await this.args.zitting.save();
     this.toggleEditing();
   }
 }
