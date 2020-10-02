@@ -37,6 +37,8 @@
       <span>Gepland openbaar agendapunt</span>
     </label>
   </div>
-  <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}}/>
 
+  {{#if @agendapunt.id}}
+    <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}}/>
+   {{/if}}
 </div>
