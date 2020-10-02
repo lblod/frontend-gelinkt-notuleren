@@ -49,6 +49,9 @@
       </div>
     {{/wu-modal}}
   {{else}}
+       <div>
+          Gehouden door: {{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}
+       </div>
       <div>
         Geplande start: {{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}
       </div>
