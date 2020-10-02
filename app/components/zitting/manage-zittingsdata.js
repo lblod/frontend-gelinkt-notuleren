@@ -63,7 +63,7 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this.zitting.geplandeStart = this.geplandeStart;
     this.zitting.gestartOpTijdstip = this.gestartOpTijdstip;
     this.zitting.geeindigdOpTijdstip = this.geeindigdOpTijdstip;
-    this.zitting.locatie = this.opLocatie;
+    this.zitting.opLocatie = this.opLocatie;
     this.zitting.bestuursorgaan = this.bestuursorgaan;
 
     if(!this.zitting.id){
