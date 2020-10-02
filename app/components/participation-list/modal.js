@@ -10,7 +10,7 @@ export default class ParticipationListModalComponent extends Component {
   @tracked secretaris;
   @tracked aanwezigenBijStart;
   @service store;
-  
+
   constructor() {
     super(...arguments);
     this.voorzitter = this.args.voorzitter;
@@ -27,7 +27,7 @@ export default class ParticipationListModalComponent extends Component {
     this.mandataris = mandataris;
   }
 
-  @action 
+  @action
   togglePopup() {
     this.args.togglePopup();
   }
