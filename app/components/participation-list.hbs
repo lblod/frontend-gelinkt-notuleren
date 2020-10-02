@@ -1,12 +1,15 @@
-{{#if @bestuursorgaan}}
-  <div {{did-update (perform this.fetchMandatees)}}>
+{{#if this.bestuursorgaan}}
+  {{#if this.loadData.isRunning}}
+    <p>Bezig met laden van de aanwezigenlijst</p>
+    <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+  {{else}}
     {{#if this.hasParticipationInfo}}
       Voorzitter: <br>
-      {{@voorzitter.isBestuurlijkeAliasVan.fullName}} <br>
+      {{this.voorzitter.isBestuurlijkeAliasVan.fullName}} <br>
       Secretaris: <br>
-      {{@secretaris.isBestuurlijkeAliasVan.fullName}} <br>
+      {{this.secretaris.isBestuurlijkeAliasVan.fullName}} <br>
       Aanwezige mandatarissen: <br>
-      {{#each @aanwezigenBijStart as |mandataris|}}
+      {{#each this.aanwezigenBijStart as |mandataris|}}
         {{mandataris.isBestuurlijkeAliasVan.fullName}},
       {{/each}} <br>
       Afwezige mandatarissen: <br>
@@ -25,11 +28,13 @@
       </WuButtonGroup>
     </div>
     <ParticipationList::Modal
-      @bestuursorgaan={{@bestuursorgaan}}
+      @bestuursorgaan={{this.bestuursorgaan}}
+      @voorzitter={{this.voorzitter}}
+      @secretaris={{this.secretaris}}
       @show={{this.popup}}
       @togglePopup={{this.togglePopup}}
       @onSave={{this.onSave}}
-      @aanwezigenBijStart={{@aanwezigenBijStart}}
+      @aanwezigenBijStart={{this.aanwezigenBijStart}}
     />
-  </div>
+  {{/if}}
 {{/if}}

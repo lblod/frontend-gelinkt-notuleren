@@ -9,10 +9,7 @@
 {{#if this.zitting.bestuursorgaan}}
   <AuHeading @skin="2" class="">Aanwezigen bij start van de zitting</AuHeading>
   <ParticipationList
-    @bestuursorgaan={{this.zitting.bestuursorgaan}}
-    @aanwezigenBijStart={{this.aanwezigenBijStart}}
-    @voorzitter={{this.voorzitter}}
-    @secretaris={{this.secretaris}}
+    @zitting={{@zitting}}
     @onSave={{this.saveParticipationList}}
   />
 
