@@ -50,10 +50,10 @@
           {{yield}}
       {{/m.content}}
       <div class="modal-dialog__footer">
-        {{#wu-button-group}}
-          {{wu-button label="Voeg aanwezigen in" class="button button--narrow" onClick=(action 'insert')}}
-          {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=(action 'togglePopup')}}
-        {{/wu-button-group}}
+        <AuButtonGroup>
+          <AuButton @class="button button--narrow" {{on "click" this.insert}}>Voeg aanwezigen in</AuButton>
+          <AuButton @class="button button--narrow" {{on "click" this.togglePopup}}>Annuleer</AuButton>
+        </AuButtonGroup>
       </div>
     {{/wu-modal}}
   </div>

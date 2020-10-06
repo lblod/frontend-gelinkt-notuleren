@@ -28,8 +28,9 @@ export default class ParticipationListModalComponent extends Component {
   }
 
   @action
-  togglePopup() {
-    this.args.togglePopup();
+  togglePopup(e) {
+    e.preventDefault();
+    this.args.togglePopup(e);
   }
   @action
   selectVoorzitter(value){
@@ -44,13 +45,14 @@ export default class ParticipationListModalComponent extends Component {
     this.aanwezigenBijStart = aanwezigenBijStart;
   }
   @action
-  insert(){
+  insert(e){
+    e.preventDefault();
     const info = {
       voorzitter: this.voorzitter,
       secretaris: this.secretaris,
       aanwezigenBijStart: this.aanwezigenBijStart
     };
     this.args.onSave(info);
-    this.args.togglePopup();
+    this.args.togglePopup(e);
   }
 }

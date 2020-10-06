@@ -18,14 +18,15 @@
       {{/each}}
     {{/if}}
     <div class="modal-dialog__footer">
-      <WuButtonGroup>
-        <WuButton
-          @label="Beheer aanwezigen bij start van de zitting"
+      <AuButtonGroup>
+        <AuButton
           @isNarrow={{"true"}}
-          @onClick={{this.togglePopup}}
+          {{on 'click' this.togglePopup}}
           @disabled={{this.fetchMandatees.isRunning}}
-        />
-      </WuButtonGroup>
+        >
+          Beheer aanwezigen bij start van de zitting
+        </AuButton>
+      </AuButtonGroup>
     </div>
     <ParticipationList::Modal
       @bestuursorgaan={{this.bestuursorgaan}}
