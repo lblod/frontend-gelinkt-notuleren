@@ -18,6 +18,11 @@
 
   <AuHeading @skin="2" class="">Agenda van de zitting </AuHeading>
   <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
+  {{#each @zitting.agendapunten as |agendapunt|}}
+    <div>
+      {{agendapunt.behandeling}}
+    </div>
+  {{/each}}
 {{else}}
   Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 {{/if}}

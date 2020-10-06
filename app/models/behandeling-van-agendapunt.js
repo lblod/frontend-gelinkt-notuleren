@@ -7,7 +7,7 @@ export default Model.extend({
   afgeleidUit: attr(),
   gevolg: attr('language-string'),
   vorigeBehandelingVanAgendapunt: belongsTo('behandeling-van-agendapunt', {inverse: null }),
-  onderwerp: belongsTo('agendapunt', {inverse: null }),
+  onderwerp: belongsTo('agendapunt', {inverse: 'behandeling' }),
   secretaris: belongsTo('mandataris', {inverse: null }),
   voorzitter: belongsTo('mandataris', {inverse: null }),
   besluiten: hasMany('besluit', {inverse: 'volgendUitBehandelingVanAgendapunt'}),

@@ -15,10 +15,4 @@ export default class ManageAgendaZittingComponent extends Component {
   cancel(){
     this.popup = false;
   }
-  get behandeldePunten() {
-    return this.store.query('behandeling-van-agendapunt', {
-      'filter[onderwerp][zitting][:id:]' : this.args.zitting.id
-    })
-
-  }
 }
