@@ -19,7 +19,9 @@
   <AuHeading @skin="2" class="">Agenda van de zitting </AuHeading>
   <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
   {{#each @zitting.agendapunten as |agendapunt|}}
-    <Voting::Modal @behandeling={{agendapunt.behandeling}} />
+    <div>
+      <BehandelingVanAgendapunt @behandeling={{agendapunt.behandeling}} />
+    </div>
   {{/each}}
 {{else}}
   Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
