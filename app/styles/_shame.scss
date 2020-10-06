@@ -280,3 +280,22 @@ input.input-field {
 .au-c-data-table__header th {
   border-radius: 0;
 }
+
+// Lists
+.au-c-list-divider {
+  cursor: not-allowed;
+  font-style: italic;
+
+  strong {
+    font-style: normal;
+    font-weight: 500;
+  }
+}
+
+.au-c-list-divider__item {
+  padding: $au-unit-tiny*1.5;
+
+  & + & {
+    border-top: .1rem dotted $au-gray-300;
+  }
+}

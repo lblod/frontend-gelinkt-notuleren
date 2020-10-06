@@ -1,20 +1,87 @@
-<AuHeading @skin="1" class="">Zitting</AuHeading>
+<div class="au-c-app-chrome">
+  <AuToolbar @size="small" class="au-u-padding-bottom-none">
+    <AuToolbarGroup>
+      <AuLink @linkRoute="inbox.meetings" @skin="secondary">Terug naar overzicht zittingen</AuLink>
+      <span class="au-c-app-chrome__entity">Gemeente Aalst</span>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <ul class="au-c-list-horizontal au-u-padding-right-tiny">
+        <li class="au-c-list-horizontal__item">
+          <span class="au-c-app-chrome__status">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            Wijzigingen niet bewaard
+          </span>
+        </li>
+      </ul>
+    </AuToolbarGroup>
+  </AuToolbar>
+  <AuToolbar @size="small" class="au-u-padding-top-none">
+    <AuToolbarGroup>
+      <div>
+        <AuPill @skin="action">
+          Concept
+        </AuPill>
+      </div>
+      <h1 class="au-c-app-chrome__title">Zitting gepland op 25/09/2020</h1>
+    </AuToolbarGroup>
+    <AuToolbarGroup class="au-c-toolbar__group--actions">
+      {{!-- <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
+        <AuIcon @icon="bin" @alignment="left" />
+        Verwijder concept
+      </LinkTo> --}}
 
-<AuHeading @skin="2" class="">Algemene informatie over de zitting</AuHeading>
-<Zitting::ManageZittingsdata
-  @zitting={{@zitting}}
-  @onCreate={{@onCreateMeeting}}
-/>
+      <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+        {{!-- <AuButton @skin="tertiary" role="menuitem" @icon="renew" @iconAlignment="left">
+          Synchroniseer gegevens met OCMW
+        </AuButton> --}}
 
-{{#if this.zitting.bestuursorgaan}}
-  <AuHeading @skin="2" class="">Aanwezigen bij start van de zitting</AuHeading>
-  <ParticipationList
-    @zitting={{@zitting}}
-    @onSave={{this.saveParticipationList}}
-  />
+        <AuButton @skin="tertiary" role="menuitem" @icon="export" @iconAlignment="left">
+          Exporteer als HTML
+        </AuButton>
 
-  <AuHeading @skin="2" class="">Agenda van de zitting </AuHeading>
-  <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
-{{else}}
-  Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
-{{/if}}
+        <AuButton @skin="tertiary" role="menuitem" @icon="archive" @iconAlignment="left">
+          Archiveer
+        </AuButton>
+        <AuButton @skin="tertiary" @alert="true" role="menuitem" @icon="bin" @iconAlignment="left">
+          Naar prullenmand
+        </AuButton>
+      </AuDropdown>
+
+      <AuButton @skin="secondary">Ondertekenen en publiceren</AuButton>
+      <AuButton>Bewaren</AuButton>
+    </AuToolbarGroup>
+  </AuToolbar>
+</div>
+
+<div id="content" class="au-c-body-container au-c-body-container--scroll">
+  <div class="au-c-meeting-chrome">
+    <div class="au-c-meeting-chrome__paper">
+      <AuHeading>Notulen van de <span class="au-c-meeting-chrome__highlight">Gemeenteraad Aalst</span>, van <span class="au-c-meeting-chrome__highlight">25/09/2020</span></AuHeading>
+      <AuHr @size="large"/>
+      <AuHeading @level="2" @skin="3">Algemene informatie over de zitting</AuHeading>
+      <Zitting::ManageZittingsdata
+        @zitting={{@zitting}}
+        @onCreate={{@onCreateMeeting}}
+      />
+
+      <AuHr @size="large"/>
+
+      {{#if this.zitting.bestuursorgaan}}
+        <AuHeading @level="2" @skin="3">Aanwezigen bij start van de zitting</AuHeading>
+        <ParticipationList
+          @zitting={{@zitting}}
+          @onSave={{this.saveParticipationList}}
+        />
+
+        <AuHr @size="large"/>
+
+        <AuHeading @level="2" @skin="3">Agenda van de zitting </AuHeading>
+        <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
+      {{else}}
+        <AuHelpText @skin="secondary">
+          Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+        </AuHelpText>
+      {{/if}}
+    </div>
+  </div>
+</div>

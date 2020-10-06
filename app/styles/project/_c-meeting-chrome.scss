@@ -1,0 +1,68 @@
+/* ==================================
+   #MEETING CHROME
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+
+/* Component
+   ========================================================================== */
+
+.au-c-meeting-chrome {
+  padding: $au-unit $au-unit/2;
+  width: 100%;
+  position: relative;
+  background-color: $au-gray-100;
+
+
+  @include mq(small) {
+    padding: $au-unit;
+  }
+
+  @include mq(medium) {
+    padding-right: 30%;
+  }
+
+  @include mq(large) {
+    padding-left: $au-unit-huge*3;
+    padding-right: 25%;
+  }
+}
+
+.au-c-meeting-chrome__paper {
+  @include au-font-size($au-h6);
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh + #{$au-unit});
+  background-color: $au-white;
+  padding: $au-unit-large;
+  box-shadow: 0 .1rem .3rem rgba($au-gray-900, .1), 0 .4rem 2rem rgba($au-gray-900, .035), 0 .1rem .1rem rgba($au-gray-900, .025);
+  cursor: default;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.au-c-meeting-chrome__card {
+  position: relative;
+  color: $au-gray-700;
+  border: .1rem dashed $au-gray-300;
+  background-color: $au-gray-100;
+  margin-top: $au-unit-small;
+  margin-bottom: $au-unit-large + $au-unit;
+
+  .au-c-button {
+    position: absolute;
+    top: 100%;
+    left: -.1rem;
+    width: calc(100% + .2rem);
+    border-color: $au-gray-300;
+  }
+}
+
+.au-c-meeting-chrome__highlight {
+  background-color: $au-yellow-200;
+  cursor: not-allowed;
+}
