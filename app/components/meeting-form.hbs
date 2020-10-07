@@ -20,7 +20,7 @@
   <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
   {{#each @zitting.agendapunten as |agendapunt|}}
     <div>
-      <BehandelingVanAgendapunt @behandeling={{agendapunt.behandeling}} />
+      <BehandelingVanAgendapunt @agendapunt={{agendapunt}} />
     </div>
   {{/each}}
 {{else}}

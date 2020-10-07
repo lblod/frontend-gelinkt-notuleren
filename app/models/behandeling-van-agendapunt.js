@@ -12,5 +12,6 @@ export default Model.extend({
   voorzitter: belongsTo('mandataris', {inverse: null }),
   besluiten: hasMany('besluit', {inverse: 'volgendUitBehandelingVanAgendapunt'}),
   aanwezigen: hasMany('mandataris', {inverse: null }),
+  documentContainer: belongsTo('document-container')
   // stemmingen: hasMany('stemming', {inverse: null }),
 });
