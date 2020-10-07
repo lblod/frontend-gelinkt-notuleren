@@ -3,6 +3,10 @@
     Title: <Input type='text' @value={{mut this.title}} />
     Openbaar: <Input type='checkbox' @value={{mut this.openbaar}} />
   </div>
+  <Behandeling::Participation
+    @behandeling={{@behandeling}}
+    @bestuursorgaan={{@bestuursorgaan}}
+  />
   <div>
     <BesluitDocumentContainer />
   </div>
