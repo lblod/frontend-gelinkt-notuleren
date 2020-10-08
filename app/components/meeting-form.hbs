@@ -1,7 +1,9 @@
 <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @linkRoute="inbox.meetings" @skin="secondary">Terug naar overzicht zittingen</AuLink>
+      <AuLink @linkRoute="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+        Terug naar overzicht zittingen
+      </AuLink>
       <span class="au-c-app-chrome__entity">Gemeente Aalst</span>
     </AuToolbarGroup>
     <AuToolbarGroup>
@@ -54,28 +56,70 @@
 </div>
 
 <div id="content" class="au-c-body-container au-c-body-container--scroll">
+  <div class="au-c-meeting-sidebar">
+    <ul class="au-c-list-divider">
+      <li class="au-c-list-divider__item">
+        <a href="#sectionOne" class="au-c-link au-c-link--secondary">
+          1. Algemene informatie over de zitting
+        </a>
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionTwo" class="au-c-link au-c-link--secondary">
+          2. Aanwezigen bij de start van de zitting
+        </a>
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionThree" class="au-c-link au-c-link--secondary">
+          3. Agenda van de zitting
+        </a>
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionFour" class="au-c-link au-c-link--secondary">
+          4. Behandeling van de agendapunten
+        </a>
+        {{!-- <ul class="au-c-list-divider">
+          <li class="au-c-list-divider__item">
+            <a href="#!" class="au-c-link au-c-link--secondary">
+              Speed limit in street xyz reduced
+            </a>
+          </li>
+        </ul> --}}
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionFive" class="au-c-link au-c-link--secondary">
+          5. Beëindiging van de zitting
+        </a>
+      </li>
+    </ul>
+  </div>
   <div class="au-c-meeting-chrome">
     <div class="au-c-meeting-chrome__paper">
       <AuHeading>Notulen van de <span class="au-c-meeting-chrome__highlight">Gemeenteraad Aalst</span>, van <span class="au-c-meeting-chrome__highlight">25/09/2020</span></AuHeading>
       <AuHr @size="large"/>
-      <AuHeading @level="2" @skin="3">Algemene informatie over de zitting</AuHeading>
+      <AuHeading id="sectionOne" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+        1. Algemene informatie over de zitting
+        <span class="au-c-onboarding">
+          <AuIcon @icon="info-circle"/>
+          Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
+        </span>
+      </AuHeading>
       <Zitting::ManageZittingsdata
         @zitting={{@zitting}}
         @onCreate={{@onCreateMeeting}}
       />
 
-      <AuHr @size="large"/>
-
       {{#if this.zitting.bestuursorgaan}}
-        <AuHeading @level="2" @skin="3">Aanwezigen bij start van de zitting</AuHeading>
+        <AuHeading id="sectionTwo" @level="2" @skin="3">
+          2. Aanwezigen bij start van de zitting
+        </AuHeading>
         <ParticipationList
           @zitting={{@zitting}}
           @onSave={{this.saveParticipationList}}
         />
 
-        <AuHr @size="large"/>
-
-        <AuHeading @level="2" @skin="3">Agenda van de zitting </AuHeading>
+        <AuHeading id="sectionThree" @level="2" @skin="3">
+          3. Agenda van de zitting
+        </AuHeading>
         <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
       {{else}}
         <AuHelpText @skin="secondary">

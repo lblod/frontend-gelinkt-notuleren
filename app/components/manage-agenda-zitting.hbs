@@ -1,20 +1,21 @@
-  <table>
+<div class="au-c-meeting-chrome-card">
+  <table class="au-c-meeting-chrome-table">
     <thead>
       <th>
-        titel
+        Titel
       </th>
       <th>
-        beschrijving
+        Beschrijving
       </th>
       <th>
-        geplandOpenbaar
+        Gepland openbaar
       </th>
     </thead>
     <tbody>
       {{#each @zitting.agendapunten as |agendapunt|}}
         <tr>
           <td>
-            {{agendapunt.titel}}
+            <strong>{{agendapunt.titel}}</strong>
           </td>
           <td>
             {{agendapunt.beschrijving}}
@@ -26,17 +27,16 @@
       {{/each}}
     </tbody>
   </table>
-
-<div class="modal-dialog__footer">
-  {{#wu-button-group}}
-    {{wu-button
-      label="Beheer agenda"
-      isNarrow=true
-      onClick=(action (mut popup) true)
-    }}
-  {{/wu-button-group}}
+  <AuButton
+    @width="block"
+    @skin="secondary"
+    @icon="pencil"
+    @iconAlignment="left"
+    {{on "click" (action (mut popup) true)}}
+  >
+    Beheer agenda
+  </AuButton>
 </div>
-
 
 {{#if this.popup}}
   <Agenda::modal @zitting={{@zitting}} @agendapunten={{@zitting.agendapunten}} @cancel={{this.cancel}}/>

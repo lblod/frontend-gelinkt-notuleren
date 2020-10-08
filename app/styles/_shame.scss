@@ -286,9 +286,33 @@ input.input-field {
   cursor: not-allowed;
   font-style: italic;
 
+  a,
+  h2 {
+    font-style: normal;
+  }
+
   strong {
     font-style: normal;
     font-weight: 500;
+    border-bottom: .2rem dotted $au-gray-300;
+  }
+
+  .au-c-list-divider {
+    padding-left: $au-unit - $au-unit-tiny*1.5;
+    border-left: .3rem solid $au-gray-300;
+    margin-top: $au-unit-tiny*1.5;
+  }
+
+  .au-c-list-divider .au-c-list-divider__item {
+    padding-left: 0;
+  }
+
+  .au-c-list-divider .au-c-list-divider__item:last-child {
+    padding-bottom: 0;
+  }
+
+  .au-c-list-divider .au-c-list-divider__item:first-child {
+    padding-top: 0;
   }
 }
 
@@ -297,5 +321,44 @@ input.input-field {
 
   & + & {
     border-top: .1rem dotted $au-gray-300;
+  }
+}
+
+.au-c-onboarding-wrapper {
+  position: relative;
+}
+
+.au-c-onboarding {
+  @include au-font-size(1.5rem,1.3);
+  font-family: $au-font;
+  font-weight: 400;
+  color: $au-gray-600;
+  position: absolute;
+  top: 0;
+  left: calc(100% + #{$au-unit-large + $au-unit});
+  width: $au-unit-huge*3;
+  display: none;
+  font-style: italic;
+  padding-left: $au-unit;
+  background-color: $au-gray-200;
+  border-radius: $au-radius;
+  padding-top: $au-unit-tiny;
+  padding-bottom: $au-unit-tiny;
+
+  .au-c-icon {
+    position: absolute;
+    top: .7rem;
+    left: .5rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  @include mq(medium) {
+    display: block;
+    width: $au-unit-huge*2.5;
+  }
+
+  @include mq(large) {
+    width: $au-unit-huge*3.5;
   }
 }
