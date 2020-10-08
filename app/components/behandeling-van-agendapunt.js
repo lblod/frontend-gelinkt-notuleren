@@ -7,6 +7,7 @@ import { inject as service } from '@ember/service';
 export default class BehandelingVanAgendapuntComponent extends Component {
   @tracked openbaar;
   @tracked document
+  @tracked documentContainer;
   @service store;
   @service currentSession;
   @tracked behandeling;
@@ -16,29 +17,40 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     super(...arguments);
     this.openbaar = this.args.behandeling.openbaar;
     this.behandeling = this.args.behandeling;
-    this.document = this.args.behandeling.document;
+    this.documentContainer = this.args.behandeling.documentContainer;
     this.tryToFetchDocument.perform();
   }
   @task
   *tryToFetchDocument() {
-    yield this.document;
-    if(!this.document.content) {
+    yield this.args.behandeling.documentContainer;
+    if(this.documentContainer.content) {
+      this.document = yield this.documentContainer.get('currentVersion');
+      if(!this.document) {
+        this.document = this.store.createRecord('editor-document');
+      }
+    } else {
       this.document = this.store.createRecord('editor-document');
+      this.documentContainer = this.store.createRecord('document-container');
+      this.documentContainer.currentVersion = this.document;
+      this.behandeling.documentContainer = this.documentContainer;
+      yield this.document.save();
+      yield this.documentContainer.save();
+      yield this.behandeling.save();
     }
   }
   @action
   async save(e) {
     e.stopPropagation();
     this.behandeling.openbaar = this.openbaar;
-    const newDocument = await this.saveEditorDocument.perform(this.document);
-    this.behandeling.document = newDocument;
-    this.document = newDocument;
+    await this.saveEditorDocument.perform(this.document);
     await this.behandeling.save();
   }
 
   @action
   handleRdfaEditorInit(editor){
-    editor.setHtmlContent(this.document.content.content);
+    if(this.document.content) {
+      editor.setHtmlContent(this.document.content.content);
+    }
     this.editor = editor;
   }
 
@@ -55,7 +67,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     let createdOn = editorDocument.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = editorDocument.get('title');
-    let documentContainer = this.documentContainer || (yield this.store.createRecord('document-container').save());
+    if(!this.documentContainer) {
+      this.documentContainer = (yield this.store.createRecord('document-container').save());
+    }
+    let documentContainer = yield this.documentContainer;
     let status = newStatus ? newStatus : (yield documentContainer.get('status'));
     let folder = newFolder ? newFolder : (yield documentContainer.get('folder'));
 
