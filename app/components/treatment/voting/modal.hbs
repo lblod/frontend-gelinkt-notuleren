@@ -1,0 +1,81 @@
+{{#unless this.editMode}}
+  <table class="data-table data-table--lined data-table--zebra">
+    <thead>
+      <tr>
+        <th style="max-width: 30rem;">Onderwerp</th>
+        <th>Type</th>
+        <th>Stemmen</th>
+        <th style="max-width: 30rem;">Gevolg</th>
+        <th>
+          <div class="grid">
+            <div class="col--4-12">
+              Actie
+            </div>
+            <div class="col--8-12 u-align--right">
+              <WuLinkButton class="button--small" isNarrow=true onClick={{this.add}}>
+                <i class="vi vi-plus vi-u-s"></i> Nieuwe stemming
+              </WuLinkButton>
+            </div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.stemmingen as |stemming| }}
+      <tr>
+        <td style="max-width: 30rem;">{{stemming.onderwerp}}</td>
+        <td>
+          {{#if stemming.geheim}}
+            Geheim
+          {{else}}
+            Openbaar
+          {{/if}}
+        </td>
+        <td>
+        	<p>Voorstanders: {{stemming.aantalVoorstanders}}</p>
+        	<p>Tegenstanders: {{stemming.aantalTegenstanders}}</p>
+        	<p>Onthouders: {{stemming.aantalOnthouders}}</p>
+        </td>
+        <td style="max-width: 30rem;">{{stemming.gevolg}}</td>
+        <td>
+          <WuButtonGroup>
+            <WuLinkButton class="button--small" isNarrow=true onClick={{this.edit stemming}}>
+              <i class="vi vi-edit vi-u-s"></i> Bewerk
+            </WuLinkButton>
+            <WuLinkButton class="button--small button--alt" isNarrow=true onClick={{this.remove stemming}}>
+              <i class="vi vi-cross vi-u-s"></i> Verwijder
+            </WuLinkButton>
+          </WuButtonGroup>
+        </td>
+      </tr>
+      {{else}}
+      <tr>
+      	<td colspan="5" style="background-color: white; height: 10rem;">
+	      	<p class="text-fade">Geen stemmingen gevonden</p>
+      	</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{else}}
+  {{#if this.create}}
+    <Treatment::Voting::Edit
+      stemming={{this.editStemming}}
+      onCancel={{this.cancel}}
+      onSave={{this.create}}
+      bestuursorgaan={{@bestuursorgaan}}
+      disableButtons={{this.disableButtons}}
+      />
+  {{/if}}
+  {{#if this.edit}}
+    <Treatment::Voting::Edit
+      stemming={{this.editStemming}}
+      onCancel={{this.cancel}}
+      onSave={{this.save}}
+      bestuursorgaan={{@bestuursorgaan}}
+      editMode={{this.edit}}
+      disableButtons={{this.disableButtons}}
+      />
+  {{/if}}
+{{/unless}}
+{{yield}}
