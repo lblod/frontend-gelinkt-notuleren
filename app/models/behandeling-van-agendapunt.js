@@ -12,5 +12,5 @@ export default class BehandelingVanAgendapunt extends Model {
   @belongsTo('mandataris', { inverse: null }) voorzitter;
   @hasMany('besluit', { inverse: 'volgendUitBehandelingVanAgendapunt' }) besluiten;
   @hasMany('mandataris', { inverse: null }) aanwezigen;
-  // stemmingen: hasMany('stemming', {inverse: null }),
+  @hasMany("stemming", {inverse: null}) stemmingen;
 }

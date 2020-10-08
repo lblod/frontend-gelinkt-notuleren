@@ -1,1 +1,11 @@
+{{#if @show}}
+  <WuModal
+    @title="Bewerk stemming"
+    @dialog-class="modal-dialog--wide modal-dialog--sectioned"
+    @onClose={{this.onCloseModal}}
+  >
+    EDIT
+
+  </WuModal>
+  {{/if}}
 {{yield}}

@@ -1,3 +1,4 @@
+import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import Component from '@glimmer/component';
 import {restartableTask} from "ember-concurrency-decorators";
@@ -8,6 +9,8 @@ import {restartableTask} from "ember-concurrency-decorators";
  * @typedef {Object} Args
  * @property {Behandeling} behandeling
  * @property {Bestuursorgaan} bestuursorgaan
+ * @property {boolean} show
+ * @property {() => void} onClose
  */
 
 /** @extends {Component<Args>} */
@@ -16,7 +19,8 @@ export default class TreatmentVotingModalComponent extends Component {
   @tracked create = false;
   @tracked edit = false;
   @tracked editMode = false;
-  @tracked editStemming;
+  @tracked stemmingToEdit;
+
   constructor(parent, args) {
     super(parent, args);
     this.fetchStemmingen.perform();
@@ -24,5 +28,19 @@ export default class TreatmentVotingModalComponent extends Component {
 
   @restartableTask
   /** @type {import("ember-concurrency").Task} */
-  fetchStemmingen = function * () {}
+  fetchStemmingen = function * () {
+    this.stemmingen = yield this.args.behandeling.stemmingen;
+  }
+
+  @action
+  addStemming(){
+    this.editMode = true}
+  @action
+  editStemming(stemming){}
+  @action
+  removeStemming(stemming){}
+  @action
+  onCancelEdit(){
+    this.editMode = false;
+  }
 }
