@@ -10,6 +10,9 @@ export default class AgendaModalComponent extends Component {
   @tracked isEditing = false;
 
   @tracked currentlyEditing;
+  get afterSave () {
+    return this.args.afterSave || (() => {});
+  }
 
   @action
   async edit(agendapunt) {
@@ -37,12 +40,20 @@ export default class AgendaModalComponent extends Component {
     await this.args.zitting.save();
     await this.createBehandeling(agendapunt);
     this.toggleEditing();
+    this.afterSave();
   }
+  /**
+   * @param {import("../../models/agendapunt").default} agendapunt
+   */
   async createBehandeling(agendapunt) {
+    /** @type {import("../../models/behandeling-van-agendapunt").default)} */
     const behandeling = this.store.createRecord('behandeling-van-agendapunt');
     behandeling.openbaar = agendapunt.geplandOpenbaar;
     behandeling.onderwerp = agendapunt;
+    behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
     await behandeling.save();
+    // agendapunt.behandeling = behandeling;
+    // await agendapunt.save();
   }
 
 }

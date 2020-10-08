@@ -1,10 +1,3 @@
-{{!-- <AuCard @expandable="true" @flex="true" @divided="true" as |c|>
-  <c.header>
-    <AuHeading>
-      Header
-    </AuHeading>
-  </c.header>
-  <c.content> --}}
     <div>
       {{@agendapunt.titel}}
       Openbaar: <Input type='checkbox' @value={{mut this.openbaar}} />
@@ -12,8 +5,10 @@
         Save
       </AuButton>
     </div>
+  <Behandeling::Participation
+    @behandeling={{@behandeling}}
+    @bestuursorgaan={{@bestuursorgaan}}
+  />
     <div>
       <BesluitDocumentContainer @document={{@agendapunt.behandeling.documentContainer}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}}/>
     </div>
-  {{!-- </c.content>
-</AuCard> --}}

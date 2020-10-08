@@ -1,0 +1,14 @@
+<div>
+  <WuButton @label="Aanwezigen" @onClick={{this.toggleModal}} />
+  <ParticipationList::Modal @show={{this.showParticipationModal}}
+    @aanwezigenBijStart={{this.behandeling.aanwezigen}}
+    @bestuursorgaan={{@bestuursorgaan}}
+    @onSave={{this.saveParticipants}}
+    @togglePopup={{this.toggleModal}}
+  />
+  {{#each this.behandeling.aanwezigen as |mandataris|}}
+    <div>
+      {{mandataris.isBestuurlijkeAliasVan.achternaam}}
+    </div>
+  {{/each}}
+</div>
