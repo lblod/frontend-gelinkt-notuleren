@@ -1,14 +1,16 @@
-    <div>
-      {{@agendapunt.titel}}
-      Openbaar: <Input type='checkbox' @value={{mut this.openbaar}} />
-      <AuButton {{on "click" this.save}}>
-        Save
-      </AuButton>
-    </div>
-  <Behandeling::Participation
-    @behandeling={{@behandeling}}
-    @bestuursorgaan={{@bestuursorgaan}}
-  />
-    <div>
-      <BesluitDocumentContainer @document={{@agendapunt.behandeling.documentContainer}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}}/>
-    </div>
+<div>
+  {{@behandeling.onderwerp.titel}}
+  Openbaar: <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
+  <AuButton {{on "click" this.save}}>
+    Save
+  </AuButton>
+</div>
+<Behandeling::Participation
+  @behandeling={{@behandeling}}
+  @bestuursorgaan={{@bestuursorgaan}}
+/>
+<div>
+  {{#if this.tryToFetchDocument.lastSuccessful}}
+    <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}}/>
+  {{/if}}
+</div>
