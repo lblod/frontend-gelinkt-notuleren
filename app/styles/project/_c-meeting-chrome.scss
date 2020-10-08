@@ -94,14 +94,7 @@
 
   tbody tr {
     border-bottom: .1rem solid $au-gray-300;
-  }
-
-  tbody tr:nth-child(odd) {
     background-color: $au-gray-100;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: $au-white;
   }
 
   th {

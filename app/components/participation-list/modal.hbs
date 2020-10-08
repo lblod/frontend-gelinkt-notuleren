@@ -5,56 +5,51 @@
       dialog-class="modal-dialog--wide modal-dialog--sectioned"
       onClose=(action 'togglePopup')
       as |m|}}
-        {{#m.content isSectioned=false}}
-          {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
-            <p>Bezig met laden van de aanwezigenlijst</p>
-            <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
-          {{else}}
-            <div class="u-spacer">
-              <div class="grid">
-                <div class="col--6-12">
-                  <label class="form__label">
-                    Voorzitter van de zitting
-                    <ParticipationList::MandatarisSelector
-                      @onSelect={{this.selectVoorzitter}} 
-                      @mandataris={{this.voorzitter}}
-                      @bestuursorgaan={{@bestuursorgaan}}
-                    />
-                  </label>
-                </div>
-              </div>
+      {{#m.content isSectioned=false}}
+        {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
+          <p>Bezig met laden van de aanwezigenlijst</p>
+          <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+        {{else}}
+          <div class="au-o-box au-o-box--small au-o-flow">
+            <div>
+              <AuLabel>
+                Voorzitter van de zitting
+              </AuLabel>
+              <ParticipationList::MandatarisSelector
+                @onSelect={{this.selectVoorzitter}}
+                @mandataris={{this.voorzitter}}
+                @bestuursorgaan={{@bestuursorgaan}}
+              />
             </div>
-            <div class="u-spacer">
-              <div class="grid">
-                <div class="col--6-12">
-                  <label class="form__label">
-                    Secretaris van de zitting
-                    <ParticipationList::FunctionarisSelector
-                      @onSelect={{this.selectSecretaris}} 
-                      @functionaris={{this.secretaris}} 
-                      @bestuursorgaan={{@bestuursorgaan}}
-                    />
-                  </label>
-                </div>
-              </div>
+
+            <div>
+              <AuLabel>Secretaris van de zitting</AuLabel>
+              <ParticipationList::FunctionarisSelector
+                @onSelect={{this.selectSecretaris}}
+                @functionaris={{this.secretaris}}
+                @bestuursorgaan={{@bestuursorgaan}}
+              />
             </div>
-            <label class="form__label">Aanwezige mandatarissen</label>
-            <div class="u-spacer--tb--tiny">
+            <div>
+              <AuLabel>Aanwezige mandatarissen</AuLabel>
               <ParticipationList::MandatarissenTable
                 @mandataris={{this.mandataris}}
                 @selected={{@aanwezigenBijStart}}
                 @onChange={{this.updateMandatarisTable}}
               />
             </div>
-          {{/if}}
-          {{yield}}
+          </div>
+        {{/if}}
+        {{yield}}
       {{/m.content}}
-      <div class="modal-dialog__footer">
-        <AuButtonGroup>
-          <AuButton @class="button button--narrow" {{on "click" this.insert}}>Voeg aanwezigen in</AuButton>
-          <AuButton @class="button button--narrow" {{on "click" this.togglePopup}}>Annuleer</AuButton>
-        </AuButtonGroup>
-      </div>
+      <AuToolbar @border="top" @size="large">
+        <AuToolbarGroup>
+          <AuButtonGroup>
+            <AuButton {{on "click" this.insert}}>Voeg aanwezigen in</AuButton>
+            <AuButton @skin="secondary" {{on "click" this.togglePopup}}>Annuleer</AuButton>
+          </AuButtonGroup>
+        </AuToolbarGroup>
+      </AuToolbar>
     {{/wu-modal}}
   </div>
 {{/if}}

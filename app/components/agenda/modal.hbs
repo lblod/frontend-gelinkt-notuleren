@@ -12,16 +12,20 @@
     {{/if}}
   {{/m.content}}
 
-  <div class="modal-dialog__footer">
+  <AuToolbar @border="top" @size="large">
     {{#if this.isEditing}}
-      {{#wu-button-group}}
-        {{wu-button label="Bewaar agendapunt" class="button button--narrow" onClick=this.save}}
-        {{wu-button label="Annuleer" class="button button--alt button--narrow" onClick=this.toggleEditing}}
-      {{/wu-button-group}}
+      <AuToolbarGroup>
+        <AuButtonGroup>
+          <AuButton {{on "click" this.save}}>Bewaar agendapunt</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.toggleEditing}}>Annuleer</AuButton>
+        </AuButtonGroup>
+      </AuToolbarGroup>
     {{else}}
-      {{#wu-button-group}}
-        {{wu-button label="Terug" class="button button--alt button--narrow" onClick=@cancel}}
-      {{/wu-button-group}}
+      <AuToolbarGroup>
+        <AuButtonGroup>
+          <AuButton @skin="secondary" {{on "click" @cancel}}>Sluit venster</AuButton>
+        </AuButtonGroup>
+      </AuToolbarGroup>
     {{/if}}
-  </div>
+  </AuToolbar>
 {{/wu-modal}}

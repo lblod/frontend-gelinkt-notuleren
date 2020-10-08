@@ -281,9 +281,12 @@ input.input-field {
   border-radius: 0;
 }
 
+.au-u-not-allowed {
+  cursor: not-allowed;
+}
+
 // Lists
 .au-c-list-divider {
-  cursor: not-allowed;
   font-style: italic;
 
   a,
@@ -360,5 +363,49 @@ input.input-field {
 
   @include mq(large) {
     width: $au-unit-huge*3.5;
+  }
+}
+
+
+.au-c-datepicker {
+  input,
+  .datepicker {
+    display: block;
+    width: 100%;
+  }
+}
+
+// Flow object @TODO: remove after appuniversum update
+.au-o-flow {
+  > * {
+    margin-bottom: 0;
+  }
+
+  > * + * {
+    margin-top: $au-unit;
+  }
+}
+
+.au-o-flow--tiny {
+  > * + * {
+    margin-top: $au-unit-tiny;
+  }
+}
+
+.au-o-flow--small {
+  > * + * {
+    margin-top: $au-unit-small;
+  }
+}
+
+.au-o-flow--large {
+  > * + * {
+    margin-top: $au-unit-large;
+  }
+}
+
+.au-o-flow--huge {
+  > * + * {
+    margin-top: $au-unit-huge;
   }
 }

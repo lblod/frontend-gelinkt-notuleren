@@ -7,50 +7,54 @@
         as |m|
     }}
       {{#m.content isSectioned=true}}
-        <div class="u-spacer">
-          <div class="grid">
-            <div class="col--6-12">
-              <label class="form__label">
-                Gehouden door:
-                <PowerSelect
-                  @placeholder="Selecteer bestuursorgaan"
-                  @selected={{this.bestuursorgaan}}
-                  @options={{this.bestuursorgaanOptions}}
-                  @onchange={{this.changeSelect}} as |bestuursorgaan|>
-                    {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
-                    (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
-                    {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
-                </PowerSelect>
-              </label>
-            </div>
-          </div>
+      <div class="au-o-box au-o-flow">
+        <div>
+          <AuLabel>Gehouden door:</AuLabel>
+          <PowerSelect
+            @placeholder="Selecteer bestuursorgaan"
+            @selected={{this.bestuursorgaan}}
+            @options={{this.bestuursorgaanOptions}}
+            @onchange={{this.changeSelect}} as |bestuursorgaan|>
+              {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
+              (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
+              {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
+          </PowerSelect>
         </div>
         <div>
-        Geplande start:
-        <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
-      </div>
-      <div>
-        Op locatie: <Input type='text' @value={{mut this.opLocatie}} />
-      </div>
-      <div>
-        Gestart op:
+          <AuLabel>Geplande start:</AuLabel>
+          <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
+        </div>
+        <div>
+          <AuLabel>Op locatie:</AuLabel>
+          <AuInput type='text' @value={{mut this.opLocatie}} />
+        </div>
+        <div>
+          <AuLabel>Gestart op:</AuLabel>
           <DateTimePicker @onChange={{fn this.changeDate 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
-      </div>
-      <div>
-        Beëindigd op:
+        </div>
+        <div>
+          <AuLabel>>Beëindigd op:</AuLabel>
           <DateTimePicker @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
+        </div>
       </div>
+
       {{/m.content}}
-      <div class="modal-dialog__footer">
-        {{#wu-button-group}}
-            <WuButton @onClick={{this.saveZittingsData}}>Voeg zittingsdata in</WuButton>
-            <WuButton @onClick={{this.toggleModal}} class="button button--alt">Terug</WuButton>
-        {{/wu-button-group}}
-      </div>
+      <AuToolbar @border="top" @size="large">
+        <AuToolbarGroup>
+          <AuButtonGroup>
+            <AuButton {{on "click" this.saveZittingsData}}>
+              Voeg zittingsdata in
+            </AuButton>
+            <AuButton {{on "click" this.toggleModal}} @skin="secondary">
+              Annuleer
+            </AuButton>
+          </AuButtonGroup>
+        </AuToolbarGroup>
+      </AuToolbar>
     {{/wu-modal}}
   {{else}}
     <div class="au-c-meeting-chrome-card">
-      <ul class="au-c-list-divider">
+      <ul class="au-c-list-divider au-u-not-allowed">
         <li class="au-c-list-divider__item">
           Gehouden door: <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
         </li>
