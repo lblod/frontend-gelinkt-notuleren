@@ -14,4 +14,8 @@ export default class TreatmentVotingEditComponent extends Component {
   onCloseModal() {
     this.args.onCancel && this.args.onCancel();
   }
+  @action
+  save(){}
+  @action
+  cancel(){}
 }

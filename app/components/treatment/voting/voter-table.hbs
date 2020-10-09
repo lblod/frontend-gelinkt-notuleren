@@ -1,0 +1,42 @@
+<table class="data-table data-table--lined data-table--zebra">
+  <thead>
+    <tr>
+      <th>
+        Naam
+      </th>
+      <th>
+        Hoedanigheid
+      </th>
+      <th>
+        <div class="grid">
+          <div class="col--6-12">
+            Actie
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#if this.isBusy}}
+      <p class="loader">
+        <span class="u-visually-hidden">
+          Bezig met laden...
+        </span>
+      </p>
+    {{else}}
+      {{#each this.rows as |row|}}
+        <Treatment::Voting::VoterRow/>
+      {{else}}
+        {{#unless this.initAddPersoon}}
+          <tr>
+            <td colspan="3" style="background-color: white; height: 10rem;">
+              <p class="text-fade">
+                Geen aanwezigen gevonden. Voeg een nieuwe aanwezige toe.
+              </p>
+            </td>
+          </tr>
+        {{/unless}}
+      {{/each}}
+    {{/if}}
+  </tbody>
+</table>

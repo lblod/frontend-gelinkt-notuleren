@@ -1,0 +1,57 @@
+{{#unless @public}}
+  <h4 class="h6 u-spacer--tb--small">
+    Geef aanwezigen en stemmers in
+  </h4>
+{{/unless}}
+<div class="u-spacer--tb--small">
+  <Treatment::Voting::VoterTable @public={{@public}} />
+</div>
+
+{{#unless @public}}
+  <div class="u-spacer--tb">
+    <h4 class="h6 u-spacer--bottom--tiny">
+      Geef aantal stemmen in
+    </h4>
+    <div class="grid">
+      <div class="col--4-12">
+        <label class="form__label">
+          Voorstanders
+        </label>
+        <Input
+          class="input-field input-field--block"
+          @placeholder="0"
+          @type="number"
+          @value={{this.aantalVoorstanders}}
+          @min={{0}}
+          @disabled={{this.viewModeOpenbaar}}
+        />
+      </div>
+      <div class="col--4-12">
+        <label class="form__label">
+          Tegenstanders
+        </label>
+        <Input
+          class="input-field input-field--block"
+          @placeholder="0"
+          @type="number"
+          @value={{this.aantalTegenstanders}}
+          @min={{0}}
+          @disabled={{this.viewModeOpenbaar}}
+        />
+      </div>
+      <div class="col--4-12">
+        <label class="form__label">
+          Onthouders
+        </label>
+        <Input
+          class="input-field input-field--block"
+          @placeholder="0"
+          @type="number"
+          @value={{this.aantalOnthouders}}
+          @min={{0}}
+          @disabled={{this.viewModeOpenbaar}}
+        />
+      </div>
+    </div>
+  </div>
+{{/unless}}

@@ -1,6 +1,7 @@
 <div>
   <WuButton @label="Aanwezigen" @onClick={{this.toggleModal}} />
-  <ParticipationList::Modal @show={{this.showParticipationModal}}
+  <ParticipationList::Modal
+    @show={{this.showParticipationModal}}
     @aanwezigenBijStart={{this.behandeling.aanwezigen}}
     @bestuursorgaan={{@bestuursorgaan}}
     @onSave={{this.saveParticipants}}
