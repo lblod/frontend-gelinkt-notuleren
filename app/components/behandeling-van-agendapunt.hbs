@@ -1,9 +1,13 @@
 <div>
-  {{@behandeling.onderwerp.titel}}
-  Openbaar: <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
-  <AuButton {{on "click" this.save}}>
-    Save
-  </AuButton>
+  <AuHeading>{{@behandeling.onderwerp.titel}}</AuHeading>
+  <div>
+    Openbaar: <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
+  </div>
+  <AuButtonGroup>
+    <AuButton {{on "click" this.save}}>
+      Save
+    </AuButton>
+  </AuButtonGroup>
 </div>
 <Behandeling::Participation
   @behandeling={{@behandeling}}

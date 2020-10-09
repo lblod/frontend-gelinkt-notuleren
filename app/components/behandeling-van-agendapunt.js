@@ -49,7 +49,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @action
   handleRdfaEditorInit(editor){
     if(this.document.content) {
-      editor.setHtmlContent(this.document.content.content);
+      editor.setHtmlContent(this.document.get('content'));
     }
     this.editor = editor;
   }
