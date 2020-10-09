@@ -25,15 +25,12 @@
         Het onderwerp van een stemming kan bijvoorbeeld zijn: het voorstel van besluit, een amendement, de al dan niet behandeling van een agendapunt, de open of besloten behandeling van een agendapunt, een verdaging, een tussenkomst.
       </p>
 
-      <label class="checkbox checkbox--block u-spacer--tb--tiny">
+      <label >
         <Input
-          class="checkbox__toggle"
-          type="checkbox"
+          @type="checkbox"
           @checked={{this.geheim}}
         />
-        <span>
           Maak stemming geheim
-        </span>
       </label>
     </div>
 
@@ -43,7 +40,7 @@
       2. Beheer aanwezigen en stemmen
     </h3>
     <div class="form__row u-spacer">
-      <Treatment::Voting::ManageVoters />
+      <Treatment::Voting::ManageVoters @public={{this.public}}/>
     </div>
 
     <h3
@@ -61,7 +58,7 @@
         @cols="40"
         @rows="4"
         @placeholder="Typ hier..."
-        @value={{this.gevolg}}
+        @value={{this.gevolg.content}}
       />
       <p class="smaller text-fade">
         Het gevolg van een stemming kan bijvoorbeeld goedgekeurd, afgekeurd of verdaagd zijn.

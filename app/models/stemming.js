@@ -9,6 +9,7 @@ export default class StemmingModel extends Model {
   // @attr title;
   @attr("language-string") gevolg;
   @attr("language-string") onderwerp;
+  /** @type {import("ember-data").DS.RecordArray} */
   @hasMany("mandataris", { inverse: null }) aanwezigen;
   @hasMany("mandataris", { inverse: null }) onthouders;
   @hasMany("mandataris", { inverse: null }) stemmers;

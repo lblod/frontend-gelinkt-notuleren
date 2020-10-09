@@ -19,11 +19,17 @@ export default class TreatmentVotingEditComponent extends Component {
   @tracked stemming
   /** @type {string} */
   @tracked onderwerp
+  /** @type {boolean} */
+  @tracked public
+  /** @type {string} */
+  @tracked gevolg
 
   constructor(parent, args) {
     super(parent, args);
     this.stemming = this.args.stemming;
     this.onderwerp = this.args.stemming.onderwerp;
+    this.public = this.args.stemming.geheim;
+    this.gevolg = this.args.stemming.gevolg;
   }
 
   @action
@@ -33,6 +39,8 @@ export default class TreatmentVotingEditComponent extends Component {
   @action
   save(){
     this.stemming.onderwerp = this.onderwerp;
+    this.stemming.geheim = this.public;
+    this.stemming.gevolg = this.gevolg;
     this.args.onSave && this.args.onSave(this.stemming);
   }
   @action
