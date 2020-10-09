@@ -77,5 +77,15 @@ export default {
     "rdfa-editor-roadsign-hint-plugin"
 
   ],
+  newFlowProfile: [
+    "rdfa-editor-date-overwrite-plugin",
+    "rdfa-editor-date-manipulation-plugin",
+    "rdfa-editor-standard-template-plugin",
+    "rdfa-editor-date-plugin",
+    "rdfa-editor-citaten-plugin",
+    "rdfa-editor-import-snippet-plugin",
+    "rdfa-editor-besluit-type-plugin",
+    "rdfa-editor-import-draft-decisions-plugin"
+  ],
   none: []
 };
