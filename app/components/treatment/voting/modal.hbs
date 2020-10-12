@@ -6,7 +6,6 @@
   >
     {{#if this.editMode}}
     <Treatment::Voting::Edit
-      @stemming={{this.stemmingToEdit}}
       @onCancel={{this.onCancelEdit}}
       @onSave={{perform this.saveStemming}}
       @bestuursorgaan={{@bestuursorgaan}}
@@ -80,7 +79,7 @@
                   <WuLinkButton
                     class="button--small"
                     @isNarrow={{true}}
-                    @onClick={{fn this.editStemming stemming}}
+                    @onClick={{fn this.toggleEditStemming stemming}}
                   >
                     <i class="vi vi-edit vi-u-s"></i>
                     Bewerk

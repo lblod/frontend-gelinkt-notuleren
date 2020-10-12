@@ -1,6 +1,6 @@
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import Component from '@glimmer/component';
+import { action } from "@ember/object";
+import Component from "@glimmer/component";
+import { inject as service } from "@ember/service";
 /**
  * @typedef {import("../../../models/stemming").default} Stemming
  */
@@ -15,34 +15,17 @@ import Component from '@glimmer/component';
 
 /** @extends {Component<Args>} */
 export default class TreatmentVotingEditComponent extends Component {
-  /** @type {Stemming} */
-  @tracked stemming
-  /** @type {string} */
-  @tracked onderwerp
-  /** @type {boolean} */
-  @tracked public
-  /** @type {string} */
-  @tracked gevolg
 
-  constructor(parent, args) {
-    super(parent, args);
-    this.stemming = this.args.stemming;
-    this.onderwerp = this.args.stemming.onderwerp;
-    this.public = this.args.stemming.geheim;
-    this.gevolg = this.args.stemming.gevolg;
-  }
+  @service editStemming;
 
   @action
-  onCloseModal() {
+  save() {
+    this.args.onSave && this.args.onSave();
+  }
+  @action
+  cancel() {
     this.args.onCancel && this.args.onCancel();
+
   }
-  @action
-  save(){
-    this.stemming.onderwerp = this.onderwerp;
-    this.stemming.geheim = this.public;
-    this.stemming.gevolg = this.gevolg;
-    this.args.onSave && this.args.onSave(this.stemming);
-  }
-  @action
-  cancel(){}
+
 }

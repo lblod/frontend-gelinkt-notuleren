@@ -22,8 +22,8 @@ export default class TreatmentVotingModalComponent extends Component {
   @tracked edit = false;
   @tracked editMode = false;
   /** @type {Stemming} */
-  @tracked stemmingToEdit;
   @service store;
+  @service editStemming;
 
   constructor(parent, args) {
     super(parent, args);
@@ -38,11 +38,12 @@ export default class TreatmentVotingModalComponent extends Component {
 
   @task
   /** @type {import("ember-concurrency").Task} */
-  saveStemming = function* (stemming) {
-    yield stemming.save();
-    this.args.behandeling.stemmingen.pushObject(stemming);
+  saveStemming = function* () {
+    yield this.editStemming.saveTask.perform();
+    this.args.behandeling.stemmingen.pushObject(this.editStemming.stemming);
     yield this.args.behandeling.save();
     yield this.fetchStemmingen.perform();
+    this.onCancelEdit();
   };
 
   @task
@@ -52,7 +53,7 @@ export default class TreatmentVotingModalComponent extends Component {
     function* () {
       const aanwezigen = yield this.args.behandeling.aanwezigen;
 
-      this.stemmingToEdit = this.store.createRecord("stemming", {
+      const stemmingToEdit = this.store.createRecord("stemming", {
         onderwerp: {
           content: "",
           language: "nl",
@@ -67,18 +68,23 @@ export default class TreatmentVotingModalComponent extends Component {
         },
       });
       this.editMode = true;
-      this.stemmingToEdit.aanwezigen.pushObjects(aanwezigen);
+      stemmingToEdit.aanwezigen.pushObjects(aanwezigen);
+      stemmingToEdit.stemmers.pushObjects(aanwezigen);
+      this.editStemming.stemming = stemmingToEdit;
     };
   @action
-  editStemming(stemming) {
-    this.stemmingToEdit = stemming;
+  toggleEditStemming(stemming) {
+    this.editStemming.stemming = stemming;
     this.editMode = true;
   }
   @action
-  removeStemming(stemming) {}
+  removeStemming(stemming) {
+    stemming.deleteRecord();
+    stemming.save();
+  }
   @action
   onCancelEdit() {
     this.editMode = false;
-    this.stemmingToEdit = null;
+    this.editStemming.stemming = null;
   }
 }

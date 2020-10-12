@@ -20,10 +20,10 @@ export default class MeetingForm extends Component {
     this.voorzitter = this.args.zitting.get('voorzitter');
     this.aanwezigenBijStart = this.args.zitting.get('aanwezigenBijStart');
     this.fetchBehandelingen.perform();
-       
+
   }
 
-  /** @type {import('ember-concurrency').Task} */
+  /** @type {import("ember-concurrency")} */
   @task
   fetchBehandelingen = function*() {
     /** @type {import("../models/agendapunt").default[]} */

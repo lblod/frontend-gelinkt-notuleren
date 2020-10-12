@@ -1,69 +1,30 @@
-<td>
-  {{#unless initAddPersoon}}
-    {{row.persoon.gebruikteVoornaam}} {{row.persoon.achternaam}}
-  {{else}}
-    {{editor-plugins/select-new-persoon-stemmer
-      bestuursorgaan=bestuursorgaan
-      onSelect=(action "selectNewPersoon")
-    }}
-  {{/unless}}
-</td>
-
-<td>
-  {{#unless initAddPersoon}}
-    {{editor-plugins/mandataris-selector
-      mandatarissen=row.mandatarissen
-      mandataris=row.selectedMandataris
-      onChange=(action "updateMandatarisAanwezige")
-    }}
-  {{/unless}}
-</td>
-
-<td>
-  {{#unless initAddPersoon}}
-    {{#wu-button-group}}
-      {{#unless row.isAanwezigeStemmer}}
-        {{#wu-link-button
-          isSmall=true
-          isNarrow=true
-          onClick=(action "addStemmer")
-        }}
-          <i class="vi vi-plus vi-u-s"></i>
-          Geef stemrecht
-        {{/wu-link-button}}
+<tr>
+  {{#if this.fetchPersoon.lastSuccessful}}
+  <td>
+    {{this.persoon.gebruikteVoornaam}} {{this.persoon.achternaam}}
+  </td>
+  <td>
+    {{@row.[0].bekleedt.bestuursfunctie.label}}
+  </td>
+  <td>
+    {{#if @manageVotes}}
+    <PowerSelect @searchEnabled={{false}} @options={{this.voteOptions}} @selected={{this.selectedVote}}
+      @onchange={{this.onSelectVote}} as |singleselect|>
+      {{singleselect}}
+    </PowerSelect>
+    {{else}}
+    <WuButtonGroup>
+      {{#if this.isVoting}}
+      <WuLinkButton @isWarning={{ true }} @isSmall={{ true }} @isNarrow={{ true }} @onClick={{this.removeStemmer}}>
+        <i class="vi vi-cross vi-u-s"></i> Verwijder stemrecht
+      </WuLinkButton>
       {{else}}
-        {{#wu-link-button
-          isWarning=true
-          isSmall=true
-          isNarrow=true
-          onClick=(action "removeStemmer")
-        }}
-          <i class="vi vi-cross vi-u-s"></i>
-          Verwijder stemrecht
-        {{/wu-link-button}}
-      {{/unless}}
-    {{/wu-button-group}}
-  {{else}}
-    {{#wu-button-group}}
-      {{#if newPersoon}}
-        {{#wu-link-button
-          isSmall=true
-          isNarrow=true
-          onClick=(action "saveNewPersoon")
-        }}
-          <i class="vi vi-plus vi-u-s"></i>
-          Bevestig aanwezige
-        {{/wu-link-button}}
+      <WuLinkButton @isSmall={{ true }} @isNarrow={{ true }} @onClick={{this.addStemmer}}>
+        <i class="vi vi-plus vi-u-s"></i> Geef stemrecht
+      </WuLinkButton>
       {{/if}}
-      {{#wu-link-button
-        isSmall=true
-        isAlt=true
-        isNarrow=true
-        onClick=(action "cancelAddPersoon")
-      }}
-        <i class="vi vi-cross vi-u-s"></i>
-        Annuleer
-      {{/wu-link-button}}
-    {{/wu-button-group}}
-  {{/unless}}
-</td>
+    </WuButtonGroup>
+    {{/if}}
+  </td>
+  {{/if}}
+</tr>

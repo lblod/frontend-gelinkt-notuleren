@@ -17,26 +17,29 @@
     </tr>
   </thead>
   <tbody>
-    {{#if this.isBusy}}
-      <p class="loader">
-        <span class="u-visually-hidden">
-          Bezig met laden...
-        </span>
-      </p>
+    {{#if this.editStemming.fetchVoters.isRunning}}
+    <p class="loader">
+      <span class="u-visually-hidden">
+        Bezig met laden...
+      </span>
+    </p>
     {{else}}
-      {{#each this.rows as |row|}}
-        <Treatment::Voting::VoterRow/>
-      {{else}}
-        {{#unless this.initAddPersoon}}
-          <tr>
-            <td colspan="3" style="background-color: white; height: 10rem;">
-              <p class="text-fade">
-                Geen aanwezigen gevonden. Voeg een nieuwe aanwezige toe.
-              </p>
-            </td>
-          </tr>
-        {{/unless}}
-      {{/each}}
+    {{#each this.editStemming.votingMap as |row|}}
+    <Treatment::Voting::VoterRow 
+    @row={{row}} 
+    @onVoteChange={{this.editStemming.setVote}} 
+    @manageVotes={{@manageVotes}}
+    />
+
+    {{else}}
+    <tr>
+      <td colspan="3" style="background-color: white; height: 10rem;">
+        <p class="text-fade">
+          Geen aanwezigen gevonden. Voeg een nieuwe aanwezige toe.
+        </p>
+      </td>
+    </tr>
+    {{/each}}
     {{/if}}
   </tbody>
 </table>
