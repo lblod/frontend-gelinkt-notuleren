@@ -10,8 +10,10 @@ export default class AgendaModalComponent extends Component {
   @tracked isEditing = false;
 
   @tracked currentlyEditing;
-  get afterSave () {
-    return this.args.afterSave || (() => {});
+
+  isNew = false;
+  get afterSave() {
+    return this.args.afterSave || (() => { });
   }
 
   @action
@@ -26,6 +28,7 @@ export default class AgendaModalComponent extends Component {
     agendapunt.beschrijving = "";
     agendapunt.geplandOpenbaar = false;
     agendapunt.position = 0;
+    this.isNew = true;
     this.edit(agendapunt);
   }
   @action
@@ -38,7 +41,10 @@ export default class AgendaModalComponent extends Component {
     await agendapunt.save();
     this.args.zitting.agendapunten.pushObject(agendapunt);
     await this.args.zitting.save();
-    await this.createBehandeling(agendapunt);
+    if (this.isNew) {
+      await this.createBehandeling(agendapunt);
+      this.isNew = false;
+    }
     this.toggleEditing();
     this.afterSave();
   }
