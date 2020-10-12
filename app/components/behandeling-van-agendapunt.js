@@ -29,8 +29,11 @@ export default class BehandelingVanAgendapuntComponent extends Component {
         this.document = this.store.createRecord('editor-document');
       }
     } else {
-      this.document = this.store.createRecord('editor-document');
-      this.documentContainer = this.store.createRecord('document-container');
+      yield this.behandeling.onderwerp;
+      this.document = this.store.createRecord('editor-document', {title: this.behandeling.onderwerp.get('titel')});
+      const draftDecisionFolder = yield this.store.findRecord('editor-document-folder', 'ae5feaed-7b70-4533-9417-10fbbc480a4c');
+      const activeStatus = yield this.store.findRecord('editor-document-status', 'c02542af-e6be-4cc6-be60-4530477109fc');
+      this.documentContainer = this.store.createRecord('document-container',{folder: draftDecisionFolder, status: activeStatus});
       this.documentContainer.currentVersion = this.document;
       this.behandeling.documentContainer = this.documentContainer;
       yield this.document.save();
