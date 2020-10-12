@@ -61,7 +61,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   @task
   *saveEditorDocument(editorDocument, newStatus, newFolder) {
-    yield this.saveTasklists();
     // create or extract properties
     let cleanedHtml = this.editor.htmlContent;
     let createdOn = editorDocument.get('createdOn') || new Date();
@@ -93,16 +92,5 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     yield documentContainer.save();
 
     return documentToSave;
-  }
-  async saveTasklists(){
-    if (!this.tasklists)
-      return;
-    for(let tasklistSolution of this.tasklists){
-      let taskSolutions = await tasklistSolution.taskSolutions.toArray();
-      for(let taskSolution of taskSolutions){
-        await taskSolution.save();
-      }
-      await tasklistSolution.save();
-    }
   }
 }
