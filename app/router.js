@@ -21,9 +21,9 @@ Router.map(function() {
     this.route('archive');
     this.route('trash');
     this.route('imported');
-    this.route('ontwerpbesluiten');
     this.route('draft-decisions');
     this.route('meetings');
+    this.route('notulen');
   });
   this.route('mock-login');
   this.route('login');
