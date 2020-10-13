@@ -14,7 +14,14 @@
   />
 
   <AuHeading @skin="2" class="">Agenda van de zitting </AuHeading>
-  <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
+  <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchBehandelingen}}> </ManageAgendaZitting>
+  {{#if this.fetchBehandelingen.lastSuccessful}}
+    {{#each this.behandelingen as |behandeling|}}
+      <div>
+        <BehandelingVanAgendapunt @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
+      </div>
+    {{/each}}
+  {{/if}}
 {{else}}
   Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 {{/if}}

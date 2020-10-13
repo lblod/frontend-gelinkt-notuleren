@@ -1,43 +1,43 @@
-  <table>
-    <thead>
-      <th>
-        titel
-      </th>
-      <th>
-        beschrijving
-      </th>
-      <th>
-        geplandOpenbaar
-      </th>
-    </thead>
-    <tbody>
-      {{#each @zitting.agendapunten as |agendapunt|}}
-        <tr>
-          <td>
-            {{agendapunt.titel}}
-          </td>
-          <td>
-            {{agendapunt.beschrijving}}
-          </td>
-          <td>
-            {{agendapunt.geplandOpenbaar}}
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+<table>
+  <thead>
+    <th>
+      titel
+    </th>
+    <th>
+      beschrijving
+    </th>
+    <th>
+      geplandOpenbaar
+    </th>
+  </thead>
+  <tbody>
+    {{#each @zitting.agendapunten as |agendapunt|}}
+      <tr>
+        <td>
+          {{agendapunt.titel}}
+        </td>
+        <td>
+          {{agendapunt.beschrijving}}
+        </td>
+        <td>
+          {{agendapunt.geplandOpenbaar}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
 
 <div class="modal-dialog__footer">
   {{#wu-button-group}}
     {{wu-button
-      label="Beheer agenda"
-      isNarrow=true
-      onClick=(action (mut popup) true)
+        label="Beheer agenda"
+        isNarrow=true
+        onClick=(action (mut popup) true)
     }}
   {{/wu-button-group}}
 </div>
 
 
 {{#if this.popup}}
-  <Agenda::modal @zitting={{@zitting}} @agendapunten={{@zitting.agendapunten}} @cancel={{this.cancel}}/>
+  <Agenda::modal @zitting={{@zitting}} @agendapunten={{@zitting.agendapunten}} @afterSave={{@onChange}} @cancel={{this.cancel}}/>
 {{/if}}
