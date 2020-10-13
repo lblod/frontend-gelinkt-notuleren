@@ -8,38 +8,53 @@ export default class ParticipationListComponent extends Component {
   @tracked popup = false;
   @tracked info;
   @tracked mandataris;
+  @tracked voorzitter;
+  @tracked secretaris;
+  @tracked aanwezigenBijStart;
+  @tracked bestuursorgaan;
+  @tracked mandatees;
 
   @service store;
 
   constructor() {
     super(...arguments);
+    this.voorzitter = this.args.zitting.voorzitter;
+    this.secretaris = this.args.zitting.secretaris;
+    this.aanwezigenBijStart = this.args.zitting.aanwezigenBijStart;
+    this.bestuursorgaan = this.args.zitting.bestuursorgaan;
+    this.loadData.perform();
+  }
+  @task
+  *loadData() {
+    yield this.fetchMandatees();
   }
 
-  @task
-    *fetchMandatees() {
-    const bestuursorgaanUri = this.args.bestuursorgaan && this.args.bestuursorgaan.get('uri');
+  async fetchMandatees() {
+    const bestuursorgaanUri = this.bestuursorgaan && this.bestuursorgaan.get('uri');
     let queryParams = {
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
-       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
+      include: 'is-bestuurlijke-alias-van',
+      page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    this.mandataris =  yield this.store.query('mandataris', queryParams);
+    this.mandatees = await this.store.query('mandataris', queryParams);
   }
 
   get hasParticipationInfo() {
-    return !!(this.args.voorzitter || this.args.secretaris || this.args.aanwezigenBijStart);
+    return !!(this.voorzitter.content || this.secretaris.content || this.aanwezigenBijStart.content.length);
   }
 
   get mandateesNotPresent() {
-    if(this.args.aanwezigenBijStart && this.mandataris) {
-      const aanwezigenUris = this.args.aanwezigenBijStart.map((mandataris) => mandataris.uri);
-      const notPresent = this.mandataris.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
+    if(this.aanwezigenBijStart && this.mandatees) {
+      const aanwezigenUris = this.aanwezigenBijStart.map((mandataris) => mandataris.uri);
+      const notPresent = this.mandatees.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
       return notPresent;
     }
-    return undefined;
+    return [];
   }
 
   @action
-  togglePopup() {
+  togglePopup(e) {
+    e.preventDefault()
     this.popup = !this.popup;
   }
   @action

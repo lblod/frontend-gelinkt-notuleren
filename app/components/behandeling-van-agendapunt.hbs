@@ -1,7 +1,7 @@
 <div>
+  <AuHeading>{{@behandeling.onderwerp.titel}}</AuHeading>
   <div>
-    Title: <Input type='text' @value={{mut this.title}} />
-    Openbaar: <Input type='checkbox' @value={{mut this.openbaar}} />
+    Openbaar: <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
   </div>
   <Treatment::Participation
     @behandeling={{@behandeling}}
@@ -11,4 +11,18 @@
   <div>
     <BesluitDocumentContainer />
   </div>
+  <AuButtonGroup>
+    <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}}>
+      {{t "behandelingVanAgendapunten.saveButton"}}
+    </AuButton>
+  </AuButtonGroup>
 </div>
+<Behandeling::Participation
+  @behandeling={{@behandeling}}
+  @bestuursorgaan={{@bestuursorgaan}}
+/>
+<div>
+  {{#if this.tryToFetchDocument.lastSuccessful}}
+    <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
+  {{/if}}
+</div> 

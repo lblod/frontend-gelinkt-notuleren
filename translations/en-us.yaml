@@ -7,3 +7,5 @@ inbox:
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
+behandelingVanAgendapunten:
+  saveButton: Save
