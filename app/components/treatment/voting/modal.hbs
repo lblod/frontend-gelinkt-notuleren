@@ -5,12 +5,12 @@
     @onClose={{@onClose}}
   >
     {{#if this.editMode}}
-    <Treatment::Voting::Edit
-      @onCancel={{this.onCancelEdit}}
-      @onSave={{perform this.saveStemming}}
-      @bestuursorgaan={{@bestuursorgaan}}
-      @disableButtons={{this.disableButtons}}
-    />
+      <Treatment::Voting::Edit
+        @onCancel={{this.onCancelEdit}}
+        @onSave={{perform this.saveStemming}}
+        @bestuursorgaan={{@bestuursorgaan}}
+        @disableButtons={{this.disableButtons}}
+      />
     {{/if}}
     <table class="data-table data-table--lined data-table--zebra">
       <thead>
@@ -51,7 +51,13 @@
           {{#each this.stemmingen as |stemming|}}
             <tr>
               <td style="max-width: 30rem;">
-                {{stemming.onderwerp}}
+                {{#if stemming.onderwerp.content}}
+                  {{stemming.onderwerp}}
+                {{else}}
+                  <i class="text-fade">
+                    Geen onderwerp
+                  </i>
+                {{/if}}
               </td>
               <td>
                 {{#if stemming.geheim}}
@@ -72,7 +78,13 @@
                 </p>
               </td>
               <td style="max-width: 30rem;">
-                {{stemming.gevolg}}
+                {{#if stemming.gevolg.content}}
+                  {{stemming.gevolg}}
+                {{else}}
+                  <i class="text-fade">
+                    Geen gevolg
+                  </i>
+                {{/if}}
               </td>
               <td>
                 <WuButtonGroup>

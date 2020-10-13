@@ -9,6 +9,7 @@
   <td>
     {{#if @manageVotes}}
     <select {{on "change" this.onSelectVote}} >
+      <option value="">Selecteer</option>
       {{#each this.voteOptions as |voteOption|}}
         <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
         {{/each}}
