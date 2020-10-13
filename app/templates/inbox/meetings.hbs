@@ -4,48 +4,32 @@
       <AuToolbar @size="large">
         <AuToolbarGroup>
           <AuHeading @skin="2">
-            Notulen zitting
+            Zittingen
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
-          <TextSearch @filter={{title}} @placeholder="Zoek titel notulen" class="au-u-1-2@small" />
           <AuButton {{action 'openNewDocument'}}>
             Nieuwe zitting
           </AuButton>
         </AuToolbarGroup>
       </AuToolbar>
-      {{!-- <ul class="bullet-list">
-        {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
-      </ul> --}}
-      {{!-- <WuButtonGroup> --}}
-        {{!-- <LinkTo @route="inbox.archive" class="button button--alt">Bekijk archief notulen</LinkTo> --}}
-        {{!-- <LinkTo @route="imported-documents.new" class="button button--alt">Importeer html bestand</LinkTo> --}}
-        {{!-- <WuButton @isNarrow={{true}} @onClick={{action "openNewDocument"}}>Nieuwe zitting</WuButton> --}}
-      {{!-- </WuButtonGroup> --}}
     </menu.general>
   </t.menu>
   <t.content as |c|>
     <c.header>
-      <!-- <th class="data-table__header-title"><!-- Starred </th> -->
-      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{sort}} @label="Start" />
-      <AuDataTableThSortable @field="gestartOpTijdstip" @currentSorting={{sort}} @label="gestartOpTijdstip" />
-      <AuDataTableThSortable @field="geeindigdOpTijdstip" @currentSorting={{sort}} @label="geeindigdOpTijdstip" />
-      <AuDataTableThSortable @field="opLocatie" @currentSorting={{sort}} @label="opLocatie" />
+      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">zitting</span></th>
       <AuDataTableThSortable @field="bestuursorgaan.naam" @currentSorting={{sort}} @label="bestuursorgaan" />
+      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{sort}} @label="tijdstip" />
+      <AuDataTableThSortable @field="opLocatie" @currentSorting={{sort}} @label="locatie" />
     </c.header>
-    <c.body as |container|>
-      <td><LinkTo @route="meetings.edit" @model={{container.id}} class="au-c-link">{{moment-format container.geplandeStart "DD/MM/YYYY HH:mm"}}</LinkTo></td>
+    <c.body as |meeting|>
       <td>
-        {{moment-format  container.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}
+        <LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">Zitting van {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} op {{moment-format meeting.geplandeStart "DD/MM/YYYY HH:mm"}}</LinkTo>
       </td>
+      <td>{{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</td>
+      <td>{{moment-format meeting.geplandeStart "DD/MM/YYYY HH:mm"}}</td>
       <td>
-        {{moment-format container.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}
-      </td>
-      <td>
-        {{container.opLocatie}}
-      </td>
-      <td>
-        {{container.bestuursorgaan.isTijdsspecialisatieVan.naam}}
+        {{meeting.opLocatie}}
       </td>
     </c.body>
   </t.content>
