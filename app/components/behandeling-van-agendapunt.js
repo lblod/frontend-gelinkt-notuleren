@@ -76,24 +76,40 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     let status = newStatus ? newStatus : (yield documentContainer.get('status'));
     let folder = newFolder ? newFolder : (yield documentContainer.get('folder'));
 
-    // every save results in new document
-    let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, createdOn, updatedOn, title, documentContainer});
+    if(status.isLoaded && folder.isLoaded) {
 
-    // Link the previous if provided editorDocument does exist in DB.
-    if(editorDocument.get('id'))
-      documentToSave.set('previousVersion', editorDocument);
+      // every save results in new document
+      let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, createdOn, updatedOn, title, documentContainer});
 
-    // save the document
-    yield documentToSave.save();
+      // Link the previous if provided editorDocument does exist in DB.
+      if(editorDocument.get('id'))
+        documentToSave.set('previousVersion', editorDocument);
 
-    // set the latest revision
-    documentContainer.set('currentVersion', documentToSave);
-    documentContainer.set('status', status);
-    documentContainer.set('folder', folder);
-    const bestuurseenheid = yield this.currentSession.get('group');
-    documentContainer.set('publisher', bestuurseenheid);
-    yield documentContainer.save();
+      try {
+        // save the document
+        yield documentToSave.save();
+      }catch(e) {
+        console.error('Error saving the document');
+        console.error(e);
+      }
 
-    return documentToSave;
+      // set the latest revision
+      documentContainer.set('currentVersion', documentToSave);
+      documentContainer.set('status', status);
+      documentContainer.set('folder', folder);
+      const bestuurseenheid = yield this.currentSession.get('group');
+      documentContainer.set('publisher', bestuurseenheid);
+
+      try {
+        yield documentContainer.save();
+      }catch(e) {
+        console.error('Error saving the document container');
+        console.error(e);
+      }
+
+      return documentToSave;
+    } else {
+      console.error(`The status or the folder didn't correctly load`);
+    }
   }
 }
