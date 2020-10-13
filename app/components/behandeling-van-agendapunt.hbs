@@ -16,12 +16,6 @@
       {{t "behandelingVanAgendapunten.saveButton"}}
     </AuButton>
   </AuButtonGroup>
-</div>
-<Behandeling::Participation
-  @behandeling={{@behandeling}}
-  @bestuursorgaan={{@bestuursorgaan}}
-/>
-<div>
   {{#if this.tryToFetchDocument.lastSuccessful}}
     <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
   {{/if}}
