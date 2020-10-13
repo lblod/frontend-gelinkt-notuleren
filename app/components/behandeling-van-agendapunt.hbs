@@ -4,7 +4,7 @@
     Openbaar: <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
   </div>
   <AuButtonGroup>
-    <AuButton {{on "click" this.save}}>
+    <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}}>
       Save
     </AuButton>
   </AuButtonGroup>
@@ -15,6 +15,6 @@
 />
 <div>
   {{#if this.tryToFetchDocument.lastSuccessful}}
-    <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}}/>
+    <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
   {{/if}}
-</div>
+</div> 

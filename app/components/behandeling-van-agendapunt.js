@@ -45,8 +45,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   async save(e) {
     e.stopPropagation();
     this.behandeling.openbaar = this.openbaar;
-    await this.saveEditorDocument.perform(this.document);
+    const document = await this.saveEditorDocument.perform(this.document);
+    this.document = document;
     await this.behandeling.save();
+    
   }
 
   @action
