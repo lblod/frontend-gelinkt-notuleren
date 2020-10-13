@@ -11,7 +11,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service store;
   @service currentSession;
   @tracked behandeling;
-  editor;
+  @tracked editor;
 
   constructor() {
     super(...arguments);
