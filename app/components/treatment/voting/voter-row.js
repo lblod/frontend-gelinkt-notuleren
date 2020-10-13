@@ -52,7 +52,11 @@ export default class TreatmentVotingVoterRowComponent extends Component {
   }
 
   @action
-  onSelectVote(vote) {
+  /**
+   * @param {Event} event
+   */
+  onSelectVote(event) {
+    const vote = event.target.value;
     this.args.onVoteChange(this.args.row[0], vote);
   }
 

@@ -8,10 +8,11 @@
   </td>
   <td>
     {{#if @manageVotes}}
-    <PowerSelect @searchEnabled={{false}} @options={{this.voteOptions}} @selected={{this.selectedVote}}
-      @onchange={{this.onSelectVote}} as |singleselect|>
-      {{singleselect}}
-    </PowerSelect>
+    <select {{on "change" this.onSelectVote}} >
+      {{#each this.voteOptions as |voteOption|}}
+        <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
+        {{/each}}
+    </select>
     {{else}}
     <WuButtonGroup>
       {{#if this.isVoting}}
