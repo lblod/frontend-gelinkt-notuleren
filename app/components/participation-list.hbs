@@ -1,41 +1,55 @@
 {{#if this.bestuursorgaan}}
-  {{#if this.loadData.isRunning}}
-    <p>Bezig met laden van de aanwezigenlijst</p>
-    <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
-  {{else}}
-    {{#if this.hasParticipationInfo}}
-      Voorzitter: <br>
-      {{this.voorzitter.isBestuurlijkeAliasVan.fullName}} <br>
-      Secretaris: <br>
-      {{this.secretaris.isBestuurlijkeAliasVan.fullName}} <br>
-      Aanwezige mandatarissen: <br>
-      {{#each this.aanwezigenBijStart as |mandataris|}}
-        {{mandataris.isBestuurlijkeAliasVan.fullName}},
-      {{/each}} <br>
-      Afwezige mandatarissen: <br>
-      {{#each this.mandateesNotPresent as |mandataris|}}
-        {{mandataris.isBestuurlijkeAliasVan.fullName}},
-      {{/each}}
+  <div class="au-c-meeting-chrome-card">
+    {{#if this.loadData.isRunning}}
+      <p>Bezig met laden van de aanwezigenlijst</p>
+      <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+    {{else}}
+      {{#if this.hasParticipationInfo}}
+        <ul class="au-c-list-divider">
+          <li class="au-c-list-divider__item">
+            Voorzitter: <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+          </li>
+          <li class="au-c-list-divider__item">
+            Secretaris: <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+          </li>
+          <li class="au-c-list-divider__item">
+            Secretaris: <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+          </li>
+          <li class="au-c-list-divider__item">
+            Aanwezige mandatarissen:
+            {{#each this.aanwezigenBijStart as |mandataris|}}
+              <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
+            {{/each}}
+          </li>
+          <li class="au-c-list-divider__item">
+            Afwezige mandatarissen:
+            {{#each this.mandateesNotPresent as |mandataris|}}
+              <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
+            {{/each}}
+          </li>
+        </ul>
+      {{/if}}
+
+      <AuButton
+        @width="block"
+        @skin="secondary"
+        @icon="pencil"
+        @iconAlignment="left"
+        {{on 'click' this.togglePopup}}
+        @disabled={{this.fetchMandatees.isRunning}}
+      >
+        Beheer aanwezigen bij start van de zitting
+      </AuButton>
+
+      <ParticipationList::Modal
+        @bestuursorgaan={{this.bestuursorgaan}}
+        @voorzitter={{this.voorzitter}}
+        @secretaris={{this.secretaris}}
+        @show={{this.popup}}
+        @togglePopup={{this.togglePopup}}
+        @onSave={{this.onSave}}
+        @aanwezigenBijStart={{this.aanwezigenBijStart}}
+      />
     {{/if}}
-    <div class="modal-dialog__footer">
-      <AuButtonGroup>
-        <AuButton
-          @isNarrow={{"true"}}
-          {{on 'click' this.togglePopup}}
-          @disabled={{this.fetchMandatees.isRunning}}
-        >
-          Beheer aanwezigen bij start van de zitting
-        </AuButton>
-      </AuButtonGroup>
-    </div>
-    <ParticipationList::Modal
-      @bestuursorgaan={{this.bestuursorgaan}}
-      @voorzitter={{this.voorzitter}}
-      @secretaris={{this.secretaris}}
-      @show={{this.popup}}
-      @togglePopup={{this.togglePopup}}
-      @onSave={{this.onSave}}
-      @aanwezigenBijStart={{this.aanwezigenBijStart}}
-    />
-  {{/if}}
+  </div>
 {{/if}}

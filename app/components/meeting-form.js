@@ -12,6 +12,7 @@ export default class MeetingForm extends Component {
   @tracked zitting;
   @tracked behandelingen;
   @service store;
+  @service currentSession;
 
   constructor() {
     super(...arguments);
