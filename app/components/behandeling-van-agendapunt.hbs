@@ -10,9 +10,6 @@
     @bestuursorgaan={{@bestuursorgaan}}
   />
   <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>
-  <div>
-    <BesluitDocumentContainer />
-  </div>
   <AuButtonGroup>
     <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}}>
       {{t "behandelingVanAgendapunten.saveButton"}}
