@@ -1,27 +1,127 @@
-<AuHeading @skin="1" class="">Zitting</AuHeading>
-
-<AuHeading @skin="2" class="">Algemene informatie over de zitting</AuHeading>
-<Zitting::ManageZittingsdata
-  @zitting={{@zitting}}
-  @onCreate={{@onCreateMeeting}}
-/>
-
-{{#if this.zitting.bestuursorgaan}}
-  <AuHeading @skin="2" class="">Aanwezigen bij start van de zitting</AuHeading>
-  <ParticipationList
-    @zitting={{@zitting}}
-    @onSave={{this.saveParticipationList}}
-  />
-
-  <AuHeading @skin="2" class="">Agenda van de zitting </AuHeading>
-  <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchBehandelingen}}> </ManageAgendaZitting>
-  {{#if this.fetchBehandelingen.lastSuccessful}}
-    {{#each this.behandelingen as |behandeling|}}
+<div class="au-c-app-chrome">
+  <AuToolbar @size="small" class="au-u-padding-bottom-none">
+    <AuToolbarGroup>
+      <AuLink @linkRoute="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+        Terug naar overzicht zittingen
+      </AuLink>
+      <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <ul class="au-c-list-horizontal au-u-padding-right-tiny">
+        <li class="au-c-list-horizontal__item">
+          {{!--
+          <span class="au-c-app-chrome__status">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            Wijzigingen niet bewaard
+          </span>
+          --}}
+        </li>
+      </ul>
+    </AuToolbarGroup>
+  </AuToolbar>
+  <AuToolbar @size="small" class="au-u-padding-top-none">
+    <AuToolbarGroup>
       <div>
-        <BehandelingVanAgendapunt @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
+        <AuPill @skin="action">
+          {{!-- Concept  --}}
+        </AuPill>
       </div>
-    {{/each}}
-  {{/if}}
-{{else}}
-  Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
-{{/if}}
+      <h1 class="au-c-app-chrome__title">Zitting gepland op {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
+    </AuToolbarGroup>
+    <AuToolbarGroup class="au-c-toolbar__group--actions">
+      <AuButton @skin="secondary">Ondertekenen en publiceren</AuButton>
+      {{!-- <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+
+           </AuDropdown> --}}
+    </AuToolbarGroup>
+  </AuToolbar>
+</div>
+
+<div id="content" class="au-c-body-container au-c-body-container--scroll">
+  <div class="au-c-meeting-sidebar">
+    <ul class="au-c-list-divider">
+      <li class="au-c-list-divider__item">
+        <a href="#sectionOne" class="au-c-link au-c-link--secondary">
+          1. Algemene informatie over de zitting
+        </a>
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionTwo" class="au-c-link au-c-link--secondary">
+          2. Aanwezigen bij de start van de zitting
+        </a>
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionThree" class="au-c-link au-c-link--secondary">
+          3. Agenda van de zitting
+        </a>
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionFour" class="au-c-link au-c-link--secondary">
+          4. Behandeling van de agendapunten
+        </a>
+        {{#if this.fetchBehandelingen.lastSuccessful}}
+          <ul class="au-c-list-divider">
+            {{#each this.behandelingen as |behandeling|}}
+              <li class="au-c-list-divider__item">
+                <a href="#behandeling-{{behandeling.id}}" class="au-c-link au-c-link--secondary">
+                  {{behandeling.onderwerp.titel}}
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </li>
+      <li class="au-c-list-divider__item">
+        <a href="#sectionFive" class="au-c-link au-c-link--secondary">
+          5. Beëindiging van de zitting
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="au-c-meeting-chrome">
+    <div class="au-c-meeting-chrome__paper">
+      <AuHeading>Notulen van <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</span>, van <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span></AuHeading>
+      <AuHr @size="large"/>
+      <AuHeading id="sectionOne" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+        1. Algemene informatie over de zitting
+        <span class="au-c-onboarding">
+          <AuIcon @icon="info-circle"/>
+          Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
+        </span>
+      </AuHeading>
+      <Zitting::ManageZittingsdata
+        @zitting={{@zitting}}
+        @onCreate={{@onCreateMeeting}}
+      />
+
+      {{#if this.zitting.bestuursorgaan}}
+        <AuHeading id="sectionTwo" @level="2" @skin="3">
+          2. Aanwezigen bij start van de zitting
+        </AuHeading>
+        <ParticipationList
+          @zitting={{@zitting}}
+          @onSave={{this.saveParticipationList}}
+        />
+
+        <AuHeading id="sectionThree" @level="2" @skin="3">
+          3. Agenda van de zitting
+        </AuHeading>
+        <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
+        <AuHeading id="sectionFour" @level="2" @skin="3">
+          4. Behandeling van de agendapunten
+        </AuHeading>
+        {{#if this.fetchBehandelingen.lastSuccessful}}
+          {{#each this.behandelingen as |behandeling|}}
+            <div>
+              <BehandelingVanAgendapunt @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
+            </div>
+          {{/each}}
+        {{/if}}
+      {{else}}
+        <AuHelpText @skin="secondary">
+          Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+        </AuHelpText>
+      {{/if}}
+    </div>
+  </div>
+</div>

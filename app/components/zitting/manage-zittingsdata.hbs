@@ -49,21 +49,25 @@
       </div>
     {{/wu-modal}}
   {{else}}
-       <div>
-          Gehouden door: {{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}
-       </div>
-      <div>
-        Geplande start: {{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}
-      </div>
-      <div>
-        Op locatie: {{this.opLocatie}}
-      </div>
-      <div>
-        Gestart op: {{moment-format this.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}
-      </div>
-      <div>
-        Beëindigd op: {{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}
-      </div>
-      <WuButton @onClick={{this.toggleModal}}>Beheer algemene zittingsdata</WuButton>
+    <div class="au-c-meeting-chrome-card">
+      <ul class="au-c-list-divider">
+        <li class="au-c-list-divider__item">
+          Gehouden door: <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
+        </li>
+        <li class="au-c-list-divider__item">
+          Geplande start: <strong>{{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}</strong>
+        </li>
+        <li class="au-c-list-divider__item">
+          Op locatie: <strong>{{this.opLocatie}}</strong>
+        </li>
+        <li class="au-c-list-divider__item">
+          Gestart op: <strong>{{moment-format this.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+        </li>
+        <li class="au-c-list-divider__item">
+          Beëindigd op: <strong>{{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+        </li>
+      </ul>
+      <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">Beheer algemene zittingsdata</AuButton>
+    </div>
   {{/if}}
 </div>

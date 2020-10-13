@@ -1,5 +1,7 @@
 <div>
-  <AuHeading>{{@behandeling.onderwerp.titel}}</AuHeading>
+  <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
+    {{@behandeling.onderwerp.titel}}
+  </AuHeading>
   <div>
     Openbaar: <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
   </div>
