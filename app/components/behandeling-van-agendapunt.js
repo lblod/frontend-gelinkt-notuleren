@@ -78,7 +78,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     let status = newStatus ? newStatus : (yield documentContainer.get('status'));
     let folder = newFolder ? newFolder : (yield documentContainer.get('folder'));
 
-    if(status.isLoaded && folder.isLoaded) {
+    if(status && status.isLoaded && folder && folder.isLoaded) {
 
       // every save results in new document
       let documentToSave = this.store.createRecord('editor-document', {content: cleanedHtml, createdOn, updatedOn, title, documentContainer});
