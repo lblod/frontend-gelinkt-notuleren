@@ -7,18 +7,18 @@
   <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
     Titel agendapunt
     {{textarea
-      class="textarea textarea--block u-spacer--tiny"
-      rows="4"
-      value=(mut @agendapunt.titel)
+        class="textarea textarea--block u-spacer--tiny"
+        rows="4"
+        value=(mut @agendapunt.titel)
     }}
   </label>
 
   <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
     Beschrijving agendapunt
     {{textarea
-      class="textarea textarea--block u-spacer--tiny"
-      rows="4"
-      value=(mut @agendapunt.beschrijving)
+        class="textarea textarea--block u-spacer--tiny"
+        rows="4"
+        value=(mut @agendapunt.beschrijving)
     }}
   </label>
 
@@ -40,5 +40,5 @@
 
   {{#if this.isEditMode}}
     <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}}/>
-   {{/if}}
+  {{/if}}
 </div>
