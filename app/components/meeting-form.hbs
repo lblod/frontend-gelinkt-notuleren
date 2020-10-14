@@ -117,6 +117,10 @@
             </div>
           {{/each}}
         {{/if}}
+        <AuHeading id="sectionFive" @level="2" @skin="3">
+          5. {{t "meetingForm.submitLabel"}}
+          <AuLink @linkRoute="meetings.publish" @model={{@zitting.id}}>{{t "meetingForm.submitLabel"}}</AuLink>
+        </AuHeading>
       {{else}}
         <AuHelpText @skin="secondary">
           Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.

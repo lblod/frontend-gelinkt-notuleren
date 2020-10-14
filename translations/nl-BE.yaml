@@ -9,3 +9,5 @@ inbox:
     statusLabel: Status
 behandelingVanAgendapunten:
   saveButton: Opslaan
+meetingForm:
+  submitLabel: Onderteken en Publiceer
