@@ -4,15 +4,17 @@
       <AuLink @linkRoute="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
         Terug naar overzicht zittingen
       </AuLink>
-      <span class="au-c-app-chrome__entity">Gemeente Aalst</span>
+      <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
     </AuToolbarGroup>
     <AuToolbarGroup>
       <ul class="au-c-list-horizontal au-u-padding-right-tiny">
         <li class="au-c-list-horizontal__item">
+          {{!--
           <span class="au-c-app-chrome__status">
             <AuIcon @icon="alert-triangle" @alignment="left" />
             Wijzigingen niet bewaard
           </span>
+          --}}
         </li>
       </ul>
     </AuToolbarGroup>
@@ -21,36 +23,16 @@
     <AuToolbarGroup>
       <div>
         <AuPill @skin="action">
-          Concept
+          {{!-- Concept  --}}
         </AuPill>
       </div>
-      <h1 class="au-c-app-chrome__title">Zitting gepland op 25/09/2020</h1>
+      <h1 class="au-c-app-chrome__title">Zitting gepland op {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
-      {{!-- <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
-        <AuIcon @icon="bin" @alignment="left" />
-        Verwijder concept
-      </LinkTo> --}}
-
-      <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
-        {{!-- <AuButton @skin="tertiary" role="menuitem" @icon="renew" @iconAlignment="left">
-          Synchroniseer gegevens met OCMW
-        </AuButton> --}}
-
-        <AuButton @skin="tertiary" role="menuitem" @icon="export" @iconAlignment="left">
-          Exporteer als HTML
-        </AuButton>
-
-        <AuButton @skin="tertiary" role="menuitem" @icon="archive" @iconAlignment="left">
-          Archiveer
-        </AuButton>
-        <AuButton @skin="tertiary" @alert="true" role="menuitem" @icon="bin" @iconAlignment="left">
-          Naar prullenmand
-        </AuButton>
-      </AuDropdown>
-
       <AuButton @skin="secondary">Ondertekenen en publiceren</AuButton>
-      <AuButton>Bewaren</AuButton>
+      {{!-- <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+
+           </AuDropdown> --}}
     </AuToolbarGroup>
   </AuToolbar>
 </div>
@@ -77,13 +59,17 @@
         <a href="#sectionFour" class="au-c-link au-c-link--secondary">
           4. Behandeling van de agendapunten
         </a>
-        {{!-- <ul class="au-c-list-divider">
-          <li class="au-c-list-divider__item">
-            <a href="#!" class="au-c-link au-c-link--secondary">
-              Speed limit in street xyz reduced
-            </a>
-          </li>
-        </ul> --}}
+        {{#if this.fetchBehandelingen.lastSuccessful}}
+          <ul class="au-c-list-divider">
+            {{#each this.behandelingen as |behandeling|}}
+              <li class="au-c-list-divider__item">
+                <a href="#behandeling-{{behandeling.id}}" class="au-c-link au-c-link--secondary">
+                  {{behandeling.onderwerp.titel}}
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
       </li>
       <li class="au-c-list-divider__item">
         <a href="#sectionFive" class="au-c-link au-c-link--secondary">
@@ -94,7 +80,7 @@
   </div>
   <div class="au-c-meeting-chrome">
     <div class="au-c-meeting-chrome__paper">
-      <AuHeading>Notulen van de <span class="au-c-meeting-chrome__highlight">Gemeenteraad Aalst</span>, van <span class="au-c-meeting-chrome__highlight">25/09/2020</span></AuHeading>
+      <AuHeading>Notulen van <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</span>, van <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span></AuHeading>
       <AuHr @size="large"/>
       <AuHeading id="sectionOne" @level="2" @skin="3" class="au-c-onboarding-wrapper">
         1. Algemene informatie over de zitting
@@ -120,7 +106,17 @@
         <AuHeading id="sectionThree" @level="2" @skin="3">
           3. Agenda van de zitting
         </AuHeading>
-        <ManageAgendaZitting @zitting={{@zitting}}> </ManageAgendaZitting>
+        <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchBehandelingen}}> </ManageAgendaZitting>
+        <AuHeading id="sectionFour" @level="2" @skin="3">
+          4. Behandeling van de agendapunten
+        </AuHeading>
+        {{#if this.fetchBehandelingen.lastSuccessful}}
+          {{#each this.behandelingen as |behandeling|}}
+            <div>
+              <BehandelingVanAgendapunt @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
+            </div>
+          {{/each}}
+        {{/if}}
       {{else}}
         <AuHelpText @skin="secondary">
           Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
