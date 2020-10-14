@@ -14,7 +14,7 @@ import Component from '@glimmer/component';
  */
 
 /** @extends {Component<Args>} */
-export default class BehandelingParticipationComponent extends Component {
+export default class TreatmentParticipationComponent extends Component {
   @tracked showParticipationModal = false;
   @tracked behandeling;
 

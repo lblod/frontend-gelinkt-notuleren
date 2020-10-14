@@ -4,6 +4,8 @@ import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency-decorators';
 import { inject as service } from '@ember/service';
 
+/** @typedef {import("../models/agendapunt").default[]} Agendapunt */
+
 export default class MeetingForm extends Component {
 
   @tracked aanwezigenBijStart;
@@ -21,13 +23,12 @@ export default class MeetingForm extends Component {
     this.voorzitter = this.args.zitting.get('voorzitter');
     this.aanwezigenBijStart = this.args.zitting.get('aanwezigenBijStart');
     this.fetchBehandelingen.perform();
-       
+
   }
 
-  /** @type {import('ember-concurrency').Task} */
   @task
   fetchBehandelingen = function*() {
-    /** @type {import("../models/agendapunt").default[]} */
+    /** @type {Agendapunt} */
     const agenda = yield this.zitting.agendapunten;
     const behandelingen = yield this.store.query('behandeling-van-agendapunt', {
       'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(",")

@@ -5,11 +5,7 @@
   <div class="au-u-margin-top-small">
     Zichtbaarheid: <AuLabel><Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;maak agendapunt openbaar</AuLabel>
   </div>
-  {{!-- <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}} @skin="secondary" @width="block">
-    {{t "behandelingVanAgendapunten.saveButton"}}
-  </AuButton> --}}
-
-  <Behandeling::Participation
+  <Treatment::Participation
     @behandeling={{@behandeling}}
     @bestuursorgaan={{@bestuursorgaan}}
   />
@@ -17,4 +13,10 @@
   {{#if this.tryToFetchDocument.lastSuccessful}}
     <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
   {{/if}}
+  <AuButtonGroup>
+    <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>
+    <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}}>
+      {{t "behandelingVanAgendapunten.saveButton"}}
+    </AuButton>
+  </AuButtonGroup>
 </div>
