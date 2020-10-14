@@ -1,22 +1,20 @@
-<div>
+<div class="au-c-meeting-chrome-editable">
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
     {{@behandeling.onderwerp.titel}}
   </AuHeading>
-  <div>
-    Openbaar: <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
+  <div class="au-u-margin-top-small">
+    Zichtbaarheid: <AuLabel><Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;maak agendapunt openbaar</AuLabel>
   </div>
-  <AuButtonGroup>
-    <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}}>
-      {{t "behandelingVanAgendapunten.saveButton"}}
-    </AuButton>
-  </AuButtonGroup>
-</div>
-<Behandeling::Participation
-  @behandeling={{@behandeling}}
-  @bestuursorgaan={{@bestuursorgaan}}
-/>
-<div>
+  {{!-- <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}} @skin="secondary" @width="block">
+    {{t "behandelingVanAgendapunten.saveButton"}}
+  </AuButton> --}}
+
+  <Behandeling::Participation
+    @behandeling={{@behandeling}}
+    @bestuursorgaan={{@bestuursorgaan}}
+  />
+
   {{#if this.tryToFetchDocument.lastSuccessful}}
     <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
   {{/if}}
-</div> 
+</div>

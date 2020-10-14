@@ -21,11 +21,11 @@
   </AuToolbar>
   <AuToolbar @size="small" class="au-u-padding-top-none">
     <AuToolbarGroup>
-      <div>
+      {{!-- <div>
         <AuPill @skin="action">
-          {{!-- Concept  --}}
+          Concept
         </AuPill>
-      </div>
+      </div> --}}
       <h1 class="au-c-app-chrome__title">Zitting gepland op {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
@@ -45,7 +45,7 @@
           1. Algemene informatie over de zitting
         </a>
       </li>
-      <li class="au-c-list-divider__item">
+      <li class="au-c-list-divider__item has-error">
         <a href="#sectionTwo" class="au-c-link au-c-link--secondary">
           2. Aanwezigen bij de start van de zitting
         </a>
@@ -95,8 +95,12 @@
       />
 
       {{#if this.zitting.bestuursorgaan}}
-        <AuHeading id="sectionTwo" @level="2" @skin="3">
+        <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper">
           2. Aanwezigen bij start van de zitting
+          <span class="au-c-onboarding au-c-onboarding--error">
+            <AuIcon @icon="alert-triangle"/>
+            Vul een secretaris in om de zitting te kunnen publiceren.
+          </span>
         </AuHeading>
         <ParticipationList
           @zitting={{@zitting}}
