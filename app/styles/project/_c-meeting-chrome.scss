@@ -131,11 +131,13 @@
   }
 
   .say-container__aside {
-    position: absolute;
-    left: calc(100% + #{$au-unit-large});
-    width: $au-unit-huge*4;
-    height: 100%;
-    overflow: visible;
+    @include mq(medium) {
+      position: absolute;
+      left: calc(100% + #{$au-unit-large});
+      width: $au-unit-huge*4;
+      height: 100%;
+      overflow: visible;
+    }
 
     @include mq(large) {
       width: $au-unit-huge*4.5;
