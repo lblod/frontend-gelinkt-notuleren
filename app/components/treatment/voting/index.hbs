@@ -1,0 +1,7 @@
+<WuButton @label="Beheer stemming" @onClick={{this.toggleModal}}/>
+<Treatment::Voting::Modal
+  @behandeling={{@behandeling}}
+  @bestuursorgaan={{@bestuursorgaan}}
+  @show={{this.showModal}}
+  @onClose={{this.toggleModal}}
+/>

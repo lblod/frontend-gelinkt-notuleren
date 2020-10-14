@@ -1,0 +1,65 @@
+<WuModal @title="Bewerk stemming" @dialog-class="modal-dialog--wide" @onClose={{this.cancel}}>
+  <div class="u-padding--round--small">
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      1. Geef onderwerp in
+    </h3>
+    <div class="form__row u-spacer">
+      <label class="form__label">
+        De raad stemt,
+      </label>
+      <Input class="textarea textarea--block" @type="textarea" @cols="40" @rows="4" @placeholder="Typ hier..."
+        @value={{this.editStemming.stemming.onderwerp.content}} />
+      <p class="smaller text-fade">
+        Het onderwerp van een stemming kan bijvoorbeeld zijn: het voorstel van besluit, een amendement, de al dan niet
+        behandeling van een agendapunt, de open of besloten behandeling van een agendapunt, een verdaging, een
+        tussenkomst.
+      </p>
+
+      <label>
+        <Input @type="checkbox" @checked={{this.editStemming.stemming.geheim}} />
+        Maak stemming geheim
+      </label>
+    </div>
+
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      2. Beheer aanwezigen en stemmen
+    </h3>
+    <div class="form__row u-spacer">
+      <Treatment::Voting::ManageVoters />
+    </div>
+
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      3. Geef gevolg in
+    </h3>
+    <div class="form__row u-spacer">
+      <label class="form__label">
+        Met als gevolg,
+      </label>
+      <Input @type="textarea" class="textarea textarea--block" @cols="40" @rows="4" @placeholder="Typ hier..."
+        @value={{this.editStemming.stemming.gevolg.content}} />
+      <p class="smaller text-fade">
+        Het gevolg van een stemming kan bijvoorbeeld goedgekeurd, afgekeurd of verdaagd zijn.
+      </p>
+    </div>
+
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      4. Bewaar stemming
+    </h3>
+    <p class="smaller u-spacer">
+      Uw wijzigingen worden niet ingevoegd tot u op
+      <strong>
+        Bewaar stemming
+      </strong>
+      klikt.
+    </p>
+    <AuButtonGroup class="u-spacer">
+      <AuButton @isNarrow={{true}} {{on "click" this.save}}>
+        <i class="vi vi-check vi-u-s"></i>
+        Bewaar stemming
+      </AuButton>
+      <AuButton @isNarrow={{true}} @isAlt={{true}} {{on "click" this.cancel}}>
+        Annuleer
+      </AuButton>
+    </AuButtonGroup>
+  </div>
+</WuModal>
