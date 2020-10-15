@@ -9,3 +9,29 @@ inbox:
     statusLabel: Status
 behandelingVanAgendapunten:
   saveButton: Save
+meetingForm:
+  backButton: Back to meetings
+  scheduledText: Meeting scheduled on
+  publishButton: Sign and publish
+  firstSectionTitle: 1. General information about the meeting
+  secondSectionTitle: 2. Attendance at the start of the meeting
+  thirdSectionTitle: 3. Agenda of the meeting
+  fourthSectionTitle: 4. Treatment of the agenda items
+  fifthSectionTitle: 5. End of the meeting
+  meetingHeadingPartOne: Meeting minutes of
+  meetingHeadingPartTwo: of
+  firstSectionNotFilledWarning: Before you can start the meeting it is necessary to set a date, location and governing body.
+  bestuursorganNotSelectedWarning: Before you can proceed, the meeting must first have information about the governing body.
+manageZittingsData:
+  modalTitle: Manage general information about the meeting
+  bestuursorganLabel: "Held by:"
+  geplandeStartLabel: "Scheduled start:"
+  opLocatieLabel: "On location:"
+  gestartOpTijdstipLabel: "Started at:"
+  geeindigdOpTijdstipLabel: "Finished at:"
+  saveButton: Insert meeting data
+  cancelButton: Back
+  openModalButton: Manage general data of the meeting
+  selectPlaceholder: Select governing body
+
+  

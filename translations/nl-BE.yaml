@@ -9,3 +9,27 @@ inbox:
     statusLabel: Status
 behandelingVanAgendapunten:
   saveButton: Opslaan
+meetingForm:
+  backButton: Terug naar overzicht zittingen
+  scheduledText: Zitting gepland op
+  publishButton: Ondertekenen en publiceren
+  firstSectionTitle: 1. Algemene informatie over de zitting
+  secondSectionTitle: 2. Aanwezigen bij de start van de zitting
+  thirdSectionTitle: 3. Agenda van de zitting
+  fourthSectionTitle: 4. Behandeling van de agendapunten
+  fifthSectionTitle: 5. Beëindiging van de zitting
+  meetingHeadingPartOne: Notulen van
+  meetingHeadingPartTwo: van
+  firstSectionNotFilledWarning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
+  bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+manageZittingsData:
+  modalTitle: Beheer algemene informatie over de zitting
+  bestuursorganLabel: "Gehouden door:"
+  geplandeStartLabel: "Geplande start:"
+  opLocatieLabel: "Op locatie:"
+  gestartOpTijdstipLabel: "Gestart op:"
+  geeindigdOpTijdstipLabel: "Beëindigd op:"
+  saveButton: Voeg zittingsdata in
+  cancelButton: Terug
+  openModalButton: Beheer algemene zittingsdata
+  selectPlaceholder: Selecteer bestuursorgaan
