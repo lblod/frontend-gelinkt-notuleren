@@ -29,7 +29,9 @@ export default class ParticipationListModalComponent extends Component {
 
   @action
   togglePopup(e) {
-    e.preventDefault();
+    if(e) {
+      e.preventDefault();
+    }
     this.args.togglePopup(e);
   }
   @action
