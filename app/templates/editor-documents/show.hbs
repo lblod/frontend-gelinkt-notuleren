@@ -1,3 +1,4 @@
+
 <AppChrome @documentType="meetingMinutes" @editorDocument={{editorDocument}} @readOnly={{true}} @documentContainer={{documentContainer}} @save={{null}} @startSyncModal={{null}} @publish={{null}} @sendToTrash={{null}}>
 
 </AppChrome>
@@ -19,10 +20,16 @@
 			</div>
 			<div class="col--5-12">
 				<div class="u-padding--round--large">
-					<i class="vi vi-check vi-u-badge vi-u-badge vi-u-badge--large vi-u-badge--action u-spacer--small"></i>
-					<h4 class="h4 u-spacer--small">Notulen publiek</h4>
-					<p class="text-fade smaller u-spacer--large">U kan de publieke notulen niet meer bewerken.</p>
-				</div>
+          {{#if (eq documentContainer.status.name "gearchiveerd")}}
+            <i class="vi vi-check vi-u-badge vi-u-badge vi-u-badge--large vi-u-badge--action u-spacer--small"></i>
+            <h4 class="h4 u-spacer--small">Gearchiveerd[@TN]{{container.folder.name}}/{{container.status.name}}</h4>
+            <p class="text-fade smaller u-spacer--large">U kan de gearchiveerd document niet meer bewerken.[@TN]</p>
+          {{else}}
+            <i class="vi vi-check vi-u-badge vi-u-badge vi-u-badge--large vi-u-badge--action u-spacer--small"></i>
+            <h4 class="h4 u-spacer--small">Notulen publiek</h4>
+            <p class="text-fade smaller u-spacer--large">U kan de publieke notulen niet meer bewerken.</p>
+          {{/if}}
+        </div>
 			</div>
 		</div>
 	</div>
