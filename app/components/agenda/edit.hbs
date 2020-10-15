@@ -39,6 +39,7 @@
   </div>
 
   {{#if this.isEditMode}}
+    <Agenda::Move @agendapunt={{@agendapunt}} @agendapunten={{@agendapunten}}/>
     <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}}/>
    {{/if}}
 </div>

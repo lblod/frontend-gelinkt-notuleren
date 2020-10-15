@@ -15,6 +15,24 @@
         {{location.name}}
       {{/power-select}}
     </div>
+    {{#if showAfterAgendapuntOptions}}
+      <div class="col--6-12">
+        {{#power-select
+             class="js-select u-spacer--small"
+             renderInPlace=true
+             placeholder="Selecteer agendapunt"
+             searchPlaceholder="Zoek op titel"
+             verticalPosition="above"
+             options=this.afterAgendapuntOptions
+             searchField="titel"
+             selected=this.selectedAfterAgendapunt
+             onchange=this.selectAfterAgendapunt
+             verticalPosition="above"
+             as |a|}}
+          {{a.titel}}
+        {{/power-select}}
+      </div>
+    {{/if}}
   </div>
 </label>
 {{yield}}
