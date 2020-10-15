@@ -1,0 +1,20 @@
+<label class="form__label">Verplaats agendapunt
+  <div class="grid">
+    <div class="col--6-12">
+      {{#power-select
+           class="select select--block u-spacer--tiny"
+           renderInPlace=true
+           placeholder="Achteraan in agenda"
+           options=this.locationOptions
+           verticalPosition="above"
+           searchEnabled=false
+           selected=this.selectedLocation
+           allowClear=true
+           onchange=this.selectLocation
+           as |location|}}
+        {{location.name}}
+      {{/power-select}}
+    </div>
+  </div>
+</label>
+{{yield}}
