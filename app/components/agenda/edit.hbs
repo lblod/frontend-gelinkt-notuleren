@@ -1,11 +1,11 @@
 <div class="u-padding--round--small u-background--gray-lightest">
-  <h2 class="h5">Bewerk agendapunt</h2>
+  <h2 class="h5">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</h2>
 </div>
 
 <div class="u-padding--round--small">
 
   <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
-    Titel agendapunt
+    {{t "manageAgendaZittingModal.titleLabel"}}
     {{textarea
         class="textarea textarea--block u-spacer--tiny"
         rows="4"
@@ -14,7 +14,7 @@
   </label>
 
   <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
-    Beschrijving agendapunt
+    {{t "manageAgendaZittingModal.beschrijvingLabel"}}
     {{textarea
         class="textarea textarea--block u-spacer--tiny"
         rows="4"
@@ -23,18 +23,18 @@
   </label>
 
   <label class="form__label form__label--block u-spacer--tiny">
-    Geplande openbaarheid
+    {{t "manageAgendaZittingModal.geplandOpenbaar"}}
   </label>
   <div class="u-spacer--small">
     <label class="radio">
       <input class="radio__toggle" type="radio" name="geslotenAgendapunt" checked={{not @agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
       <span></span>
-      <span>Gepland besloten agendapunt</span>
+      <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
     </label>
     <label class="radio">
       <input class="radio__toggle" type="radio" name="openAgendapunt" checked={{@agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
       <span></span>
-      <span>Gepland openbaar agendapunt</span>
+      <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
     </label>
   </div>
 

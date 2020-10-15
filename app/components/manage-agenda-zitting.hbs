@@ -2,13 +2,13 @@
   <table class="au-c-meeting-chrome-table">
     <thead>
       <th>
-        Titel
+        {{t "manageAgendaZitting.titelLabel"}}
       </th>
       <th>
-        Beschrijving
+        {{t "manageAgendaZitting.beschrijvingLabel"}}
       </th>
       <th>
-        Gepland openbaar
+        {{t "manageAgendaZitting.geplandOpenbaar"}}
       </th>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
     @iconAlignment="left"
     {{on "click" (action (mut popup) true)}}
   >
-    Beheer agenda
+    {{t "manageAgendaZitting.openModalButton"}}
   </AuButton>
 </div>
 

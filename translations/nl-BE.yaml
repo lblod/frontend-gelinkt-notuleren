@@ -59,3 +59,36 @@ participationListModalTable:
   actieLabel: Actie
   checkboxLabel: Aanwezig
   noDataMessage: Geen mandatarissen gevonden.
+manageAgendaZitting:
+  titelLabel: Titel
+  beschrijvingLabel: Beschrijving
+  geplandOpenbaar: Gepland openbaar
+  openModalButton: Beheer agenda
+manageAgendaZittingModal:
+  modalTitle: Beheer Agenda
+  saveButton: Bewaar agendapunt
+  cancelEditingButton: Annuleer
+  cancelButton: Terug
+  orderLabel: Volgorde
+  titleLabel: Titel agendapunt
+  beschrijvingLabel: Beschrijving agendapunt
+  geplandOpenbaar: Geplande openbaarheid
+  actionsLabel: Acties
+  createItemButton: Voeg agendapunt toe
+  editItemButton: Bewerk agendapunt
+  noDataMessage: Geen agendapunten gevonden.
+  geplandOpenbaarTrueLabel: Openbaar
+  geplandOpenbaarFalseLabel: Besloten
+manageAgendaZittingModalEdit:
+  modalSubtitle: Bewerk agendapunt
+  geplandOpenbaarTrueLabel: Gepland openbaar agendapunt
+  geplandOpenbaarFalseLabel: Gepland besloten agendapunt
+manageAgendaZittingModalDelete:
+  modalSubtitle: Verwijder agendapunt
+  toggleEditButton: Behoud agendapunt en behandeling
+  deleteButton: Verwijder agendapunt
+  toggleWarningButton: Verwijder het agendapunt en de behandeling van het agendapunt
+  warningPartOne: U kan deze actie niet ongedaan maken.
+  warningPartTwo: U verwijdert het agendapunt uit de agenda, en de volledige behandeling van het agendapunt.
+  agreeQuestion: Bent u zeker dat u het agendapunt en de behandeling wil verwijderen?
+  checkboxLabel: Ik begrijp dat het agendapunt en de behandeling van het agendapunt onomkeerbaar verwijderd worden.

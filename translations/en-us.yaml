@@ -59,4 +59,36 @@ participationListModalTable:
   actieLabel: Action
   checkboxLabel: Present
   noDataMessage: No mandataries were found.
-  
+manageAgendaZitting:
+  titelLabel: Title
+  beschrijvingLabel: Description
+  geplandOpenbaar: Planned public
+  openModalButton: Manage agenda
+manageAgendaZittingModal:
+  modalTitle: Manage agenda
+  saveButton: Save agenda item
+  cancelEditingButton: Cancel
+  cancelButton: Back
+  orderLabel: Order
+  titleLabel: Agenda item title
+  beschrijvingLabel: Agenda item description
+  geplandOpenbaar: Planned visibility
+  actionsLabel: Actions
+  createItemButton: Add agenda item
+  editItemButton: Edit agenda item
+  noDataMessage: No agenda items found.
+  geplandOpenbaarTrueLabel: Public
+  geplandOpenbaarFalseLabel: Private
+manageAgendaZittingModalEdit:
+  modalSubtitle: Edit agenda item
+  geplandOpenbaarTrueLabel: Public
+  geplandOpenbaarFalseLabel: Private
+manageAgendaZittingModalDelete:
+  modalSubtitle: Delete agenda item
+  toggleEditButton: Retain agenda item and treatment
+  deleteButton: Delete agenda item
+  toggleWarningButton: Delete the agenda item and the treatment of the agenda item
+  warningPartOne: You cannot undo this action.
+  warningPartTwo: You are going to remove the agenda item from the agenda, and the complete treatment of the agenda item.
+  agreeQuestion: Are you sure you want to delete the agenda item and the treatment?
+  checkboxLabel: I understand that the agenda item and the treatment of the agenda item will be irreversibly removed.
