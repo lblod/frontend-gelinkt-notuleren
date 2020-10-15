@@ -33,5 +33,30 @@ manageZittingsData:
   cancelButton: Back
   openModalButton: Manage general data of the meeting
   selectPlaceholder: Select governing body
-
+participationList:
+  loadingTitle: Loading the attendee list
+  loadingLoader: Loading
+  voorzitterLabel: "Chairman:"
+  secretarisLabel: "Secretary:"
+  presentLabel: "Present mandataries:"
+  notPresentLabel: "Absent mandataries:"
+  openModalButton: Manage attendees at the start of the session
+participationListModal:
+  voorzitterLabel: Chairman of the meeting
+  secretarisLabel: Secretary of the meeting
+  presentLabel: Present mandataries
+  saveButton: Insert attendees
+  cancelButton: Cancel
+participationListModalSelector:
+  loadingMessage: Loading...
+  noMatchesMessage: No results
+  searchMessage: Type to search
+  placeholder: Search by last name
+participationListModalTable:
+  naamLabel: Name
+  functieLabel: Position
+  geboortedatumLabel: Birthdate
+  actieLabel: Action
+  checkboxLabel: Present
+  noDataMessage: No mandataries were found.
   

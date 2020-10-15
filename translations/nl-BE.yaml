@@ -33,3 +33,29 @@ manageZittingsData:
   cancelButton: Terug
   openModalButton: Beheer algemene zittingsdata
   selectPlaceholder: Selecteer bestuursorgaan
+participationList:
+  loadingTitle: Bezig met laden van de aanwezigenlijst
+  loadingLoader: Aan het laden
+  voorzitterLabel: "Voorzitter:"
+  secretarisLabel: "Secretaris:"
+  presentLabel: "Aanwezige mandatarissen:"
+  notPresentLabel: "Afwezige mandatarissen:"
+  openModalButton: Beheer aanwezigen bij start van de zitting
+participationListModal:
+  voorzitterLabel: Voorzitter van de zitting
+  secretarisLabel: Secretaris van de zitting
+  presentLabel: Aanwezige mandatarissen
+  saveButton: Voeg aanwezigen in
+  cancelButton: Annuleer
+participationListModalSelector:
+  loadingMessage: Aan het laden...
+  noMatchesMessage: Geen resultaten
+  searchMessage: Typ om te zoeken
+  placeholder: Zoek op achternaam
+participationListModalTable:
+  naamLabel: Naam
+  functieLabel: Functie
+  geboortedatumLabel: Geboortedatum
+  actieLabel: Actie
+  checkboxLabel: Aanwezig
+  noDataMessage: Geen mandatarissen gevonden.

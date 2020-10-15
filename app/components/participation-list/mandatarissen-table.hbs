@@ -1,13 +1,13 @@
 <table class="data-table data-table--lined data-table--zebra">
   <thead>
     <tr>
-      <th>Naam</th>
-      <th>Functie</th>
-      <th>Geboortedatum</th>
+      <th>{{t "participationListModalTable.naamLabel"}}</th>
+      <th>{{t "participationListModalTable.functieLabel"}}</th>
+      <th>{{t "participationListModalTable.geboortedatumLabel"}}</th>
       <th>
         <div class="grid">
           <div class="col--4-12">
-            Actie
+            {{t "participationListModalTable.actieLabel"}}
           </div>
         </div>
       </th>
@@ -21,7 +21,7 @@
         @onToggleAanwezig={{fn this.toggleAanwezigheid mandataris}}
       />
     {{else}}
-      <td colspan="4">Geen mandatarissen gevonden.</td>
+      <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
     {{/each}}
   </tbody>
 </table>
