@@ -9,6 +9,8 @@ inbox:
     statusLabel: Status
 behandelingVanAgendapunten:
   saveButton: Save
+  openbaarLabel: "Public:"
+  participationListButton: Attendees
 meetingForm:
   backButton: Back to meetings
   scheduledText: Meeting scheduled on
@@ -92,3 +94,58 @@ manageAgendaZittingModalDelete:
   warningPartTwo: You are going to remove the agenda item from the agenda, and the complete treatment of the agenda item.
   agreeQuestion: Are you sure you want to delete the agenda item and the treatment?
   checkboxLabel: I understand that the agenda item and the treatment of the agenda item will be irreversibly removed.
+voting:
+  openModalButton: Manage voting
+votingModal:
+  modalTitle: Manage voting
+  onderwerpLabel: Subject
+  typeLabel: Type
+  stemmenLabel: Votes
+  gevolgLabel: Result
+  actionsLabel: Actions
+  createVotingButton: New voting
+  subjectNotFound: No subject
+  geheimTrueLabel: Secret
+  geheimFalseLabel: Public
+  aantalVoorstandersLabel: "Supporters:"
+  aantalTegenstandersLabel: "Objectors:"
+  aantalOnthoudersLabel: "Abstentions:"
+  gevolgNotFound: No consequences
+  toggleEditButton: Edit
+  deleteButton: Delete
+  noDataMessage: No votes found
+votingEdit:
+  firstStepTitle: 1. Enter subject
+  firstStepIntroduction: The board votes,
+  firstStepExplanation: "The subject of a vote can be, for example: the proposal of decision, an amendment, whether or not
+  to treat an agenda item, the open or closed treatment of an agenda item, an adjournment, a
+  intervention."
+  privateVotingCheckbox: Make voting secret
+  secondStep: 2. Manage attendees and votes
+  thirdStep: 3. Enter Result
+  thirdStepIntroduction: As a result,
+  thirdStepExplanation: For example, the result of a vote may be approved, rejected or adjourned.
+  fourthStepTitle: 4. Save voting
+  fourthStepExplanationPartOne: Your changes will not be inserted until you click on the
+  fourthStepExplanationPartTwo: button.
+  saveButton: Save voting
+  cancelButton: Cancel
+  inputPlaceholder: Start typing here...
+  naamLabel: Name
+  hoedanigheidLabel: Position
+  actionsLabel: Actions
+  loadingText: Loading...
+  noDataMessage: No attendees found. Add a new attendee.
+  selectPlaceholder: Select
+  addItemButton: Add voter
+  removeItemButton: Remove voter
+votingManageVoting:
+  title: Enter attendees and voters
+  subtitle: Enter number of votes
+  setUnaniemVoorstanderButton: Unanimous support
+  setUnaniemTegenstanderButton: Unanimous opposition
+  setUnaniemOnthouderButton: Unanimous abstention
+  saveVotesButton: Save voting
+  cancelVotesButton: Cancel
+  startManageVotesButton: Manage voting
+  
