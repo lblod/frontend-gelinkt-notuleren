@@ -1,1 +1,29 @@
-{{outlet}}
+<div class="u-spacer--top">
+  {{#if this.initializeAgendas.lastSuccessful}}
+  <WuTimelineAccordion as |timeline|>
+    <Signatures::Agenda::TimelineStep
+            @name="ontwerpagenda"
+            @step={{timeline.step}}
+            @agenda={{this.ontwerpAgenda}}
+            @signing={{perform this.createSignedResource "ontwerpagenda"}}
+            @publish={{perform this.publish "ontwerpagenda"}}
+    />
+
+    <Signatures::Agenda::TimelineStep
+            @name="aanvullende agenda"
+            @step={{timeline.step}}
+            @agenda={{this.aanvullendeAgenda}}
+            @signing={{perform this.createSignedResource "aanvullendeagenda"}}
+            @publish={{perform this.publish "aanvullendeagenda"}}
+    />
+
+    <Signatures::Agenda::TimelineStep
+            @name="spoedeisende agenda"
+            @step={{timeline.step}}
+            @agenda={{this.spoedeisendeAgenda}}
+            @signing={{perform this.createSignedResource "spoedeisendeagenda"}}
+            @publish={{perform this.publish "spoedeisendeagenda"}}
+    />
+  </WuTimelineAccordion>
+  {{/if}}
+</div>
