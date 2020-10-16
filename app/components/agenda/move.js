@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { set } from '@ember/object';
 
 export default class AgendaMoveComponent extends Component {
 
@@ -23,10 +24,37 @@ export default class AgendaMoveComponent extends Component {
   @action
   selectAfterAgendapunt(option){
     this.selectedAfterAgendapunt=option;
+    const apIndex=this.args.agendapunten.indexOf(this.args.agendapunt);
+    const apAfterIndex=this.args.agendapunten.indexOf(option);
+
+    if(apIndex>apAfterIndex){
+
+      this.args.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
+
+      this.args.agendapunten.forEach(function(e, i){
+        if(i>apAfterIndex && i<apIndex){
+          this.args.agendapunten.objectAt(i).position+=1;
+        }
+      }.bind(this));
+    }
+
+    else if(apIndex<apAfterIndex){
+
+      this.args.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
+
+      this.args.agendapunten.forEach(function(e, i){
+        if(i<apAfterIndex && i>apIndex){
+          this.args.agendapunten.objectAt(i).position-=1;
+        }
+      }.bind(this));
+
+    }
+    this.args.zitting.agendapunten=this.args.zitting.agendapunten.sortBy('position');
+
   }
 
   @action
-  selectLocation(option){
+  async selectLocation(option){
     this.selectedLocation=option;
     this.showAfterAgendapuntOptions=false;
 
@@ -34,17 +62,31 @@ export default class AgendaMoveComponent extends Component {
 
     if(option.code=='start'){
 
+      this.args.agendapunt.position=0;
+
+      this.args.agendapunten.forEach(function(e, i){
+        if(i<index){
+          this.args.agendapunten.objectAt(i).position+=1;
+        }
+      }.bind(this));
     }
+
     else if(option.code=='end'){
 
-    }
-    else if(option.code=='after'){
-      this.selectedAfterAgendapunt=
-        index==0?
-          null:
-          this.args.agendapunten.objectAt(index-1);
+      this.args.agendapunt.position=this.args.agendapunten.length-1;
 
+      this.args.agendapunten.forEach(function(e, i){
+        if(i>index){
+          this.args.agendapunten.objectAt(i).position-=1;
+        }
+      }.bind(this));
+    }
+
+    else if(option.code=='after'){
       this.showAfterAgendapuntOptions=true;
     }
+
+    //this is done with zitting because ember complains about imutability
+    this.args.zitting.agendapunten=this.args.zitting.agendapunten.sortBy('position');
   }
 }
