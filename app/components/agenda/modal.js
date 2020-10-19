@@ -12,6 +12,7 @@ export default class AgendaModalComponent extends Component {
   @tracked currentlyEditing;
 
   isNew = false;
+
   get afterSave() {
     return this.args.afterSave || (() => { });
   }

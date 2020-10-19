@@ -1,0 +1,68 @@
+{{#if @secret}}
+<h4 class="h6 u-spacer--tb--small">
+  Geef aanwezigen en stemmers in
+</h4>
+{{/if}}
+<div class="u-spacer--tb--small">
+  <Treatment::Voting::VoterTable @manageVotes={{this.manageVotes}} />
+</div>
+
+{{#if this.editStemming.stemming.geheim}}
+<div class="u-spacer--tb">
+  <h4 class="h6 u-spacer--bottom--tiny">
+    Geef aantal stemmen in
+  </h4>
+  <div class="grid">
+    <div class="col--4-12">
+      <label class="form__label">
+        Voorstanders
+      </label>
+      <Input class="input-field input-field--block" @placeholder="0" @type="number"
+        @value={{this.editStemming.stemming.aantalVoorstanders}} @min={{0}}
+        @disabled={{not this.editStemming.stemming.geheim}} />
+    </div>
+    <div class="col--4-12">
+      <label class="form__label">
+        Tegenstanders
+      </label>
+      <Input class="input-field input-field--block" @placeholder="0" @type="number"
+        @value={{this.editStemming.stemming.aantalTegenstanders}} @min={{0}}
+        @disabled={{not this.editStemming.stemming.geheim}} />
+    </div>
+    <div class="col--4-12">
+      <label class="form__label">
+        Onthouders
+      </label>
+      <Input class="input-field input-field--block" @placeholder="0" @type="number"
+        @value={{this.editStemming.stemming.aantalOnthouders}} @min={{0}}
+        @disabled={{not this.editStemming.stemming.geheim}} />
+    </div>
+  </div>
+</div>
+{{else}}
+
+{{#if this.manageVotes}}
+<AuButtonGroup class="u-spacer--tb">
+  <AuButton @isNarrow={{true}} @isSmall={{true}} @isAltBlue={{true}} @isAlt={{true}}
+    {{on "click" this.editStemming.setUnaniemVoorstander}}>Geef unaniem voorstander in <i
+      class="vi vi-check vi-u-s"></i>
+  </AuButton>
+
+  <AuButton @isNarrow={{true}} @isSmall={{true}} @isAltBlue={{true}} @isAlt={{true}}
+    {{on "click" this.editStemming.setUnaniemTegenstander}}>Geef unaniem tegenstander in <i
+      class="vi vi-check vi-u-s"></i>
+  </AuButton>
+
+  <AuButton @isNarrow={{true}} @isSmall={{true}} @isAltBlue={{true}} @isAlt={{true}}
+    {{on "click" this.editStemming.setUnaniemOnthouder}}>Geef unaniem onthouder in <i class="vi vi-check vi-u-s"></i>
+  </AuButton>
+</AuButtonGroup>
+<AuButtonGroup>
+  <AuButton {{on "click" this.saveVotes}}>Stemmen opslaan</AuButton>
+  <AuButton {{on "click" this.cancelVotes}}>Annuleer</AuButton>
+</AuButtonGroup>
+{{else}}
+<AuButton {{on "click" this.startManageVotes}}>Beheer stemmen</AuButton>
+{{/if}}
+
+{{/if}}

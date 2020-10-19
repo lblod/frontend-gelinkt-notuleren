@@ -54,7 +54,9 @@ export default class ParticipationListComponent extends Component {
 
   @action
   togglePopup(e) {
-    e.preventDefault()
+    if(e) {
+      e.preventDefault();
+    }
     this.popup = !this.popup;
   }
   @action
