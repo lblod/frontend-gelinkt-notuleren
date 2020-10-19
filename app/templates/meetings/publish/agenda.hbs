@@ -6,7 +6,7 @@
             @step={{timeline.step}}
             @agenda={{this.ontwerpAgenda}}
             @signing={{perform this.createSignedResource "ontwerpagenda"}}
-            @publish={{perform this.publish "ontwerpagenda"}}
+            @publish={{perform this.createPublishedResource "ontwerpagenda"}}
     />
 
     <Signatures::Agenda::TimelineStep
@@ -14,7 +14,7 @@
             @step={{timeline.step}}
             @agenda={{this.aanvullendeAgenda}}
             @signing={{perform this.createSignedResource "aanvullendeagenda"}}
-            @publish={{perform this.publish "aanvullendeagenda"}}
+            @publish={{perform this.createPublishedResource "aanvullendeagenda"}}
     />
 
     <Signatures::Agenda::TimelineStep
@@ -22,7 +22,7 @@
             @step={{timeline.step}}
             @agenda={{this.spoedeisendeAgenda}}
             @signing={{perform this.createSignedResource "spoedeisendeagenda"}}
-            @publish={{perform this.publish "spoedeisendeagenda"}}
+            @publish={{perform this.createPublishedResource "spoedeisendeagenda"}}
     />
   </WuTimelineAccordion>
   {{/if}}
