@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import {task} from "ember-concurrency-decorators";
+import {restartableTask} from "ember-concurrency-decorators";
 
 export default class AgendaListComponent extends Component {
   constructor(...args) {
@@ -7,7 +7,7 @@ export default class AgendaListComponent extends Component {
   }
 
   // Note agendas with more than 50 points are super common!
-  @task
+  @restartableTask
   * sort() {
     this.args.agendapunten.forEach(function (agendapunt, index, agendapunten) {
       agendapunt.position = index;
