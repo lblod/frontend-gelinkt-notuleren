@@ -9,3 +9,5 @@ inbox:
     statusLabel: Status
 behandelingVanAgendapunten:
   saveButton: Save
+meetingForm:
+  submitLabel: Sign and publish
