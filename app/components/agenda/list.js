@@ -1,23 +1,25 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
+import {task} from "ember-concurrency-decorators";
+
 export default class AgendaListComponent extends Component {
-  constructor(...args){
+  constructor(...args) {
     super(...args);
   }
 
-  //TODO: make sure the behandeltNa property is properly set
-  //TODO 2: make this into a task as it will be slow for many agendapoints. So you can add a spinner the user knows he has to wait
   // Note agendas with more than 50 points are super common!
-  //TODO: no async for each please.
-  //TODO: i am not sure to undertand the logic (the index == new position so?)
-  @action
-  async sort(){
-    this.args.agendapunten.forEach(async function(agendapunt, index){
-      const position = this.args.agendapunten.indexOf(agendapunt);
-      this.args.agendapunten.objectAt(index).position = position;
-      await this.args.agendapunten.objectAt(index).save();
-    }.bind(this));
+  @task
+  * sort() {
+    this.args.agendapunten.forEach(function (agendapunt, index, agendapunten) {
+      agendapunt.position = index;
+      if (index > 0) {
+        agendapunt.vorigeAgendapunt = agendapunten.objectAt(index - 1);
+        agendapunt.behandeling.vorigeBehandelingVanAgendapunt = agendapunten.objectAt(index - 1).behandeling;
+      }
+    });
+    // bit of a strange construction, but this gets us out of the
+    // PromiseManyArray into a ManyArray, which has a save method.
+    // keep in mind that this still sends N requests, but in parallel
+    yield this.args.agendapunten.then(arr => arr.save());
     this.args.onSort();
   }
 }

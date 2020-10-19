@@ -22,7 +22,7 @@
       </tr>
     </thead>
 
-    <SortableObjects @tagName={{"tbody"}} @sortEndAction={{this.sort}} @sortableObjectList={{@agendapunten}} enableSort={{true}} useSwap={{true}} inPlace={{true}}>
+    <SortableObjects @tagName={{"tbody"}} @sortEndAction={{perform this.sort}} @sortableObjectList={{@agendapunten}} enableSort={{true}} useSwap={{true}} inPlace={{true}}>
       {{#each @agendapunten as |agendapunt|}}
         {{#draggable-object tagName="tr" content=agendapunt isSortable=true}}
           {{!--  <td class="u-align-right">1</td> --}}
