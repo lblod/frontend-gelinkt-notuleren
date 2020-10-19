@@ -33,11 +33,14 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get isPublished() {
-    return !!this.args.document.publishedResource.id;
+    if(this.args.document && this.args.document.publishedResource) {
+      return !! this.args.document.publishedResource.get("id");
+    }
+    return false;
   }
 
   get signaturesCount() {
-    return this.args.document.signedResources.length;
+    return this.args.document.signedResources && this.args.document.signedResources.length;
 
   }
 
@@ -49,7 +52,7 @@ export default class SignaturesTimelineStep extends Component {
     if (this.args.document) {
       const signedResources = yield this.args.document.signedResources;
       if (signedResources.length > 0) {
-        firstSignatureUser = yield signedResources[0].gebruiker;
+        firstSignatureUser = yield signedResources.firstObject.gebruiker;
       }
     }
     this.isSignedByCurrentUser = currentUser === firstSignatureUser;
