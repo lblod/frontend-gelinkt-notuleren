@@ -21,7 +21,7 @@ export default class MeetingForm extends Component {
     this.voorzitter = this.args.zitting.get('voorzitter');
     this.aanwezigenBijStart = this.args.zitting.get('aanwezigenBijStart');
     this.fetchBehandelingen.perform();
-       
+
   }
 
   /** @type {import('ember-concurrency').Task} */
@@ -30,7 +30,8 @@ export default class MeetingForm extends Component {
     /** @type {import("../models/agendapunt").default[]} */
     const agenda = yield this.zitting.agendapunten;
     const behandelingen = yield this.store.query('behandeling-van-agendapunt', {
-      'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(",")
+      'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(","),
+      sort: 'onderwerp.position'
     })
     this.behandelingen = behandelingen;
 

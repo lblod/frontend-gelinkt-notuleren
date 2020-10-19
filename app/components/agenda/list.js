@@ -18,5 +18,6 @@ export default class AgendaListComponent extends Component {
       this.args.agendapunten.objectAt(index).position = position;
       await this.args.agendapunten.objectAt(index).save();
     }.bind(this));
+    this.args.onSort();
   }
 }
