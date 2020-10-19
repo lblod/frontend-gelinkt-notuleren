@@ -116,11 +116,12 @@ export default class MeetingsPublishAgendaController extends Controller {
   * createSignedResource(agendaType) {
 
     const id = this.model.id;
-    const response = yield this.ajax.post(
+    yield this.ajax.post(
       `/signing/agenda/sign/${agendaType}/${id}`
     );
     yield this.initializeAgendas.perform();
   }
+
   /**
    * @param {string} agendaType
    * @this {MeetingsPublishAgendaController}
@@ -128,7 +129,7 @@ export default class MeetingsPublishAgendaController extends Controller {
   @task
   * createPublishedResource(agendaType) {
     const id = this.model.id;
-    const response = yield this.ajax.post(
+    yield this.ajax.post(
       `/signing/agenda/publish/${agendaType}/${id}`
     );
     yield this.initializeAgendas.perform();

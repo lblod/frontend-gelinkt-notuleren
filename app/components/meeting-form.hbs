@@ -1,10 +1,12 @@
 <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @linkRoute="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+      <AuLink @linkRoute="meetings.edit" @model={{undefined}} @skin="secondary" @icon="arrow-left" @iconAlignment="left">
         Terug naar overzicht zittingen
       </AuLink>
+      <LinkTo @route="meetings.edit" >TEST</LinkTo>
       <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
+
     </AuToolbarGroup>
     <AuToolbarGroup>
       <ul class="au-c-list-horizontal au-u-padding-right-tiny">
@@ -29,7 +31,7 @@
       <h1 class="au-c-app-chrome__title">Zitting gepland op {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
-      <AuButton @skin="secondary">Ondertekenen en publiceren</AuButton>
+      <AuButton @skin="secondary" {{on "click" this.goToPublish}}>{{t "meetingForm.submitLabel"}}</AuButton>
       {{!-- <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
 
            </AuDropdown> --}}
@@ -117,10 +119,6 @@
             </div>
           {{/each}}
         {{/if}}
-        <AuHeading id="sectionFive" @level="2" @skin="3">
-          5. {{t "meetingForm.submitLabel"}}
-          <AuLink @linkRoute="meetings.publish" @model={{@zitting.id}}>{{t "meetingForm.submitLabel"}}</AuLink>
-        </AuHeading>
       {{else}}
         <AuHelpText @skin="secondary">
           Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
