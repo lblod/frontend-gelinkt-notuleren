@@ -31,7 +31,8 @@ export default class MeetingForm extends Component {
     /** @type {Agendapunt} */
     const agenda = yield this.zitting.agendapunten;
     const behandelingen = yield this.store.query('behandeling-van-agendapunt', {
-      'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(",")
+      'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(","),
+      sort: 'onderwerp.position'
     })
     this.behandelingen = behandelingen;
 
