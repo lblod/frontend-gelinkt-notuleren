@@ -11,5 +11,6 @@ behandelingVanAgendapunten:
   saveButton: Save
 meetingForm:
   submitLabel: Sign and publish
+  incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
 publish:
   backToMeeting: Back to meeting
