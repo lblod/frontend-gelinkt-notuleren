@@ -26,6 +26,10 @@ export default class MeetingForm extends Component {
     this.fetchBehandelingen.perform();
 
   }
+  get isComplete() {
+    return this.args.zitting.bestuursorgaan && this.behandelingen;
+
+  }
 
   @task
   fetchBehandelingen = function* () {

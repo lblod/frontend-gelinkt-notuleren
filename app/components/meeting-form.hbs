@@ -30,7 +30,7 @@
       <h1 class="au-c-app-chrome__title">Zitting gepland op {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
-      {{#if (and this.zitting.bestuursorgaan this.zitting.agendapunten)}}
+      {{#if this.isComplete}}
         <AuButton @skin="secondary" {{on "click" this.goToPublish}}>
           {{t "meetingForm.submitLabel"}}
         </AuButton>
