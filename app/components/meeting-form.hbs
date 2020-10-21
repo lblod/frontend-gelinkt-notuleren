@@ -30,10 +30,17 @@
       <h1 class="au-c-app-chrome__title">Zitting gepland op {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
-      <AuButton @skin="secondary" {{on "click" this.goToPublish}}>{{t "meetingForm.submitLabel"}}</AuButton>
-      {{!-- <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
-
-           </AuDropdown> --}}
+      {{#if (and this.zitting.bestuursorgaan this.zitting.agendapunten)}}
+        <AuButton @skin="secondary" {{on "click" this.goToPublish}}>
+          {{t "meetingForm.submitLabel"}}
+        </AuButton>
+      {{else}}
+          <span>
+          <AuIcon @icon="info-circle"/>
+          Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1
+          agendapunt toe te voegen.
+        </span>
+      {{/if}}
     </AuToolbarGroup>
   </AuToolbar>
 </div>
