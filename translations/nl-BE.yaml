@@ -11,3 +11,5 @@ behandelingVanAgendapunten:
   saveButton: Opslaan
 meetingForm:
   submitLabel: Ondertekenen en publiceren
+publish:
+  backToMeeting: Terug naar zitting
