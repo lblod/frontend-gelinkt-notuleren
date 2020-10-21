@@ -11,3 +11,5 @@ behandelingVanAgendapunten:
   saveButton: Save
 meetingForm:
   submitLabel: Sign and publish
+publish:
+  backToMeeting: Back to meeting

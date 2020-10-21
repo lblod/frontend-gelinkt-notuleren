@@ -51,7 +51,7 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @return {Generator<*, void, *>}
    */
   @task
-  *initializeAgenda(type) {
+  * initializeAgenda(type) {
     const agendas = yield this.store.query("agenda",
       {
         'filter[zitting][:id:]': this.model.id,
