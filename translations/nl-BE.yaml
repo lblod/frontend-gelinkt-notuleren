@@ -9,3 +9,8 @@ inbox:
     statusLabel: Status
 behandelingVanAgendapunten:
   saveButton: Opslaan
+meetingForm:
+  submitLabel: Ondertekenen en publiceren
+  incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
+publish:
+  backToMeeting: Terug naar zitting

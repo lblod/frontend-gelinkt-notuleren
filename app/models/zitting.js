@@ -12,7 +12,7 @@ export default Model.extend({
   afgeleidUit: attr(),
   behandeldeAgendapunten: hasMany('behandeling-van-agendapunt', { inverse: null }),
   notulen: belongsTo('editor-document', { inverse: null }),
-  agendas: hasMany('agenda', { inverse: null }),
+  publicatieAgendas: hasMany('agenda', { inverse: null }),
   agendapunten: hasMany('agendapunt', { inverse: null }),
   secretaris: belongsTo('mandataris', { inverse: null }),
   voorzitter:  belongsTo('mandataris', { inverse: null }),

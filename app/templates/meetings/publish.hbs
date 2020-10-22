@@ -1,0 +1,45 @@
+<div class="container-flex--contain">
+  <div class="au-o-box au-o-box--small au-c-app-chrome">
+    <div class="u-spacer--tiny">
+      <LinkTo
+        @route="meetings.edit"
+        @model={{@model.id}}
+        class="smaller link-dark"
+      >
+        ← {{t "publish.backToMeeting"}}
+      </LinkTo>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col--3-12">
+      <div class="container-flex--contain">
+        <div class="sidebar">
+          <div class="sidebar__content">
+            <nav class="side-navigation">
+              <ul class="side-navigation__group">
+                <li class="side-navigation__item u-hr">
+                  <LinkTo
+                    @route="meetings.publish.agenda"
+                    @model={{@model.id}}
+                    class="u-padding--tb--small"
+                  >
+                    <i class="vi vi-calendar"></i>
+                    Agenda
+                  </LinkTo>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col--9-12">
+      <div class="container-flex--scroll">
+        <div class="u-padding--round--tiny">
+          {{!-- <p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p> --}}
+          {{outlet}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

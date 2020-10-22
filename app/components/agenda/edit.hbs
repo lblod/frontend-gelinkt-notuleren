@@ -40,6 +40,6 @@
 
   {{#if this.isEditMode}}
     <Agenda::Move @agendapunt={{@agendapunt}} @agendapunten={{@agendapunten}} @zitting={{@zitting}}/>
-    <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}}/>
+    <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}}/>
   {{/if}}
 </div>

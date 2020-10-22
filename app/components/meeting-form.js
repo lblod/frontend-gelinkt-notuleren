@@ -1,8 +1,8 @@
 import Component from '@glimmer/component';
-import { action } from "@ember/object";
-import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency-decorators';
-import { inject as service } from '@ember/service';
+import {action} from "@ember/object";
+import {tracked} from '@glimmer/tracking';
+import {task} from 'ember-concurrency-decorators';
+import {inject as service} from '@ember/service';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
@@ -15,6 +15,7 @@ export default class MeetingForm extends Component {
   @tracked behandelingen;
   @service store;
   @service currentSession;
+  @service router;
 
   constructor() {
     super(...arguments);
@@ -25,25 +26,33 @@ export default class MeetingForm extends Component {
     this.fetchBehandelingen.perform();
 
   }
-
-  @task
-  fetchBehandelingen = function*() {
-    /** @type {Agendapunt} */
-    const agenda = yield this.zitting.agendapunten;
-    const behandelingen = yield this.store.query('behandeling-van-agendapunt', {
-      'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(","),
-      sort: 'onderwerp.position'
-    })
-    this.behandelingen = behandelingen;
+  get isComplete() {
+    return this.args.zitting.bestuursorgaan && this.behandelingen;
 
   }
 
+  @task
+  fetchBehandelingen = function* () {
+    /** @type {Agendapunt} */
+    const agenda = yield this.zitting.agendapunten;
+    const behandelingen = yield this.store.query('behandeling-van-agendapunt', {
+      'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(",")
+    });
+    this.behandelingen = behandelingen;
+
+  };
+
   @action
-  async saveParticipationList({ voorzitter, secretaris, aanwezigenBijStart }) {
+  async saveParticipationList({voorzitter, secretaris, aanwezigenBijStart}) {
     this.zitting.voorzitter = voorzitter;
     this.zitting.secretaris = secretaris;
     this.zitting.aanwezigenBijStart = aanwezigenBijStart;
     await this.zitting.save();
+  }
+
+  @action
+  goToPublish() {
+    this.router.transitionTo("meetings.publish.agenda", this.args.zitting.id);
   }
 
 }
