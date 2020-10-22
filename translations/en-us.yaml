@@ -7,10 +7,10 @@ inbox:
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
-behandelingVanAgendapunten:
-  saveButton: Save
 publish:
   backToMeeting: Back to meeting
+behandelingVanAgendapunten:
+  saveButton: Save
   openbaarLabel: "Public:"
   participationListButton: Attendees
 meetingForm:
