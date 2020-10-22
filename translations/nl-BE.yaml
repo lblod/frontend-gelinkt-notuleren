@@ -9,9 +9,12 @@ inbox:
     statusLabel: Status
 behandelingVanAgendapunten:
   saveButton: Opslaan
+publish:
+  backToMeeting: Terug naar zitting
   openbaarLabel: "Openbaar:"
   participationListButton: Aanwezigen
 meetingForm:
+  incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
   backButton: Terug naar overzicht zittingen
   scheduledText: Zitting gepland op
   publishButton: Ondertekenen en publiceren

@@ -6,7 +6,7 @@
 }}
   {{#m.content isSectioned=true}}
     {{#if this.isEditing}}
-      <Agenda::Edit @agendapunt={{this.currentlyEditing}} @toggleEditing={{this.toggleEditing}}/>
+      <Agenda::Edit @afterSave={{@afterSave}} @agendapunt={{this.currentlyEditing}} @toggleEditing={{this.toggleEditing}}/>
     {{else}}
       <Agenda::List @agendapunten={{@agendapunten}} @createAgendapunt={{this.createAgendapunt}} @edit={{this.edit}}/>
     {{/if}}

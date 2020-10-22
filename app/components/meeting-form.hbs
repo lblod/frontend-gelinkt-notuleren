@@ -5,6 +5,7 @@
         {{t "meetingForm.backButton"}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
+
     </AuToolbarGroup>
     <AuToolbarGroup>
       <ul class="au-c-list-horizontal au-u-padding-right-tiny">
@@ -29,10 +30,16 @@
       <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
-      <AuButton @skin="secondary">{{t "meetingForm.publishButton"}}</AuButton>
-      {{!-- <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
-
-           </AuDropdown> --}}
+      {{#if this.isComplete}}
+        <AuButton @skin="secondary" {{on "click" this.goToPublish}}>
+          {{t "meetingForm.publishButton"}}
+        </AuButton>
+      {{else}}
+          <span>
+          <AuIcon @icon="info-circle"/>
+            {{t "meetingForm.incompleteWarning"}}
+        </span>
+      {{/if}}
     </AuToolbarGroup>
   </AuToolbar>
 </div>

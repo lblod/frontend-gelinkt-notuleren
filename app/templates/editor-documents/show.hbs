@@ -1,6 +1,39 @@
-<AppChrome @documentType="meetingMinutes" @editorDocument={{editorDocument}} @readOnly={{true}} @documentContainer={{documentContainer}} @save={{null}} @startSyncModal={{null}} @publish={{null}} @sendToTrash={{null}}>
 
-</AppChrome>
+<div class="au-c-app-chrome">
+  <AuToolbar @size="small" class="au-u-padding-bottom-none">
+    <AuToolbarGroup>
+      {{#if (eq documentContainer.status.name "gearchiveerd")}}
+        <AuLink @linkRoute="inbox.archive" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+          Terug naar archiev [@TN]
+        </AuLink>
+      {{/if}}
+      <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <ul class="au-c-list-horizontal au-u-padding-right-tiny">
+        <li class="au-c-list-horizontal__item">
+          {{!--
+          <span class="au-c-app-chrome__status">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            Wijzigingen niet bewaard
+          </span>
+          --}}
+        </li>
+      </ul>
+    </AuToolbarGroup>
+  </AuToolbar>
+  <AuToolbar @size="small" class="au-u-padding-top-none">
+    <AuToolbarGroup>
+      <div>
+        <AuPill @skin="action">
+          {{!-- Concept  --}}
+        </AuPill>
+      </div>
+      <h1 class="au-c-app-chrome__title">{{editorDocument.title}}</h1>
+    </AuToolbarGroup>
+  </AuToolbar>
+</div>
+
 
 <div class="editor-container container-flex--scroll">
   <div class="editor">
@@ -19,10 +52,16 @@
 			</div>
 			<div class="col--5-12">
 				<div class="u-padding--round--large">
-					<i class="vi vi-check vi-u-badge vi-u-badge vi-u-badge--large vi-u-badge--action u-spacer--small"></i>
-					<h4 class="h4 u-spacer--small">Notulen publiek</h4>
-					<p class="text-fade smaller u-spacer--large">U kan de publieke notulen niet meer bewerken.</p>
-				</div>
+          {{#if (eq documentContainer.status.name "gearchiveerd")}}
+            <i class="vi vi-check vi-u-badge vi-u-badge vi-u-badge--large vi-u-badge--action u-spacer--small"></i>
+            <h4 class="h4 u-spacer--small">Gearchiveerd[@TN]</h4>
+            <p class="text-fade smaller u-spacer--large">U kan de gearchiveerd document niet meer bewerken.[@TN]</p>
+          {{else}}
+            <i class="vi vi-check vi-u-badge vi-u-badge vi-u-badge--large vi-u-badge--action u-spacer--small"></i>
+            <h4 class="h4 u-spacer--small">Notulen publiek</h4>
+            <p class="text-fade smaller u-spacer--large">U kan de publieke notulen niet meer bewerken.</p>
+          {{/if}}
+        </div>
 			</div>
 		</div>
 	</div>
