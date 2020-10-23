@@ -1,9 +1,9 @@
 <PowerSelect
-  @loadingMessage="Aan het laden..."
-  @noMatchesMessage="Geen resultaten"
-  @searchMessage="Typ om te zoeken"
+  @loadingMessage={{t "participationListModalSelector.loadingMessage"}}
+  @noMatchesMessage={{t "participationListModalSelector.noMatchesMessage"}}
+  @searchMessage={{t "participationListModalSelector.searchMessage"}}
   @renderInPlace={{true}}
-  @placeholder="Zoek op achternaam"
+  @placeholder={{t "participationListModalSelector.placeholder"}}
   @allowClear={{true}}
   @search={{perform searchByName}}
   @selected={{@mandataris}}

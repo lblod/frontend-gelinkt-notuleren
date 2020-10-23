@@ -1,28 +1,25 @@
 {{#if this.bestuursorgaan}}
   <div class="au-c-meeting-chrome-card">
     {{#if this.loadData.isRunning}}
-      <p>Bezig met laden van de aanwezigenlijst</p>
-      <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+      <p>{{t "participationList.loadingTitle"}}</p>
+      <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
     {{else}}
       {{#if this.hasParticipationInfo}}
         <ul class="au-c-list-divider">
           <li class="au-c-list-divider__item">
-            Voorzitter: <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+            {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
           </li>
           <li class="au-c-list-divider__item">
-            Secretaris: <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+            {{t "participationList.secretarisLabel"}} <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
           </li>
           <li class="au-c-list-divider__item">
-            Secretaris: <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
-          </li>
-          <li class="au-c-list-divider__item">
-            Aanwezige mandatarissen:
+            {{t "participationList.presentLabel"}}
             {{#each this.aanwezigenBijStart as |mandataris|}}
               <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
             {{/each}}
           </li>
           <li class="au-c-list-divider__item">
-            Afwezige mandatarissen:
+            {{t "participationList.notPresentLabel"}}
             {{#each this.mandateesNotPresent as |mandataris|}}
               <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
             {{/each}}
@@ -38,7 +35,7 @@
         {{on 'click' this.togglePopup}}
         @disabled={{this.fetchMandatees.isRunning}}
       >
-        Beheer aanwezigen bij start van de zitting
+        {{t "participationList.openModalButton"}}
       </AuButton>
 
       <ParticipationList::Modal

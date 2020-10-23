@@ -2,7 +2,7 @@
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
       <AuLink @linkRoute="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
-        Terug naar overzicht zittingen
+        {{t "meetingForm.backButton"}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
 
@@ -27,12 +27,12 @@
           {{!-- Concept  --}}
         </AuPill>
       </div>
-      <h1 class="au-c-app-chrome__title">Zitting gepland op {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
+      <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
       {{#if this.isComplete}}
         <AuButton @skin="secondary" {{on "click" this.goToPublish}}>
-          {{t "meetingForm.submitLabel"}}
+          {{t "meetingForm.publishButton"}}
         </AuButton>
       {{else}}
           <span>
@@ -49,22 +49,22 @@
     <ul class="au-c-list-divider">
       <li class="au-c-list-divider__item">
         <a href="#sectionOne" class="au-c-link au-c-link--secondary">
-          1. Algemene informatie over de zitting
+          {{t "meetingForm.firstSectionTitle"}}
         </a>
       </li>
       <li class="au-c-list-divider__item">
         <a href="#sectionTwo" class="au-c-link au-c-link--secondary">
-          2. Aanwezigen bij de start van de zitting
+          {{t "meetingForm.secondSectionTitle"}}
         </a>
       </li>
       <li class="au-c-list-divider__item">
         <a href="#sectionThree" class="au-c-link au-c-link--secondary">
-          3. Agenda van de zitting
+          {{t "meetingForm.thirdSectionTitle"}}
         </a>
       </li>
       <li class="au-c-list-divider__item">
         <a href="#sectionFour" class="au-c-link au-c-link--secondary">
-          4. Behandeling van de agendapunten
+          {{t "meetingForm.fourthSectionTitle"}}
         </a>
         {{#if this.fetchBehandelingen.lastSuccessful}}
           <ul class="au-c-list-divider">
@@ -80,20 +80,20 @@
       </li>
       <li class="au-c-list-divider__item">
         <a href="#sectionFive" class="au-c-link au-c-link--secondary">
-          5. Beëindiging van de zitting
+          {{t "meetingForm.fifthSectionTitle"}}
         </a>
       </li>
     </ul>
   </div>
   <div class="au-c-meeting-chrome">
     <div class="au-c-meeting-chrome__paper">
-      <AuHeading>Notulen van <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</span>, van <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span></AuHeading>
+      <AuHeading>{{t "meetingForm.meetingHeadingPartOne"}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</span>, {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span></AuHeading>
       <AuHr @size="large"/>
       <AuHeading id="sectionOne" @level="2" @skin="3" class="au-c-onboarding-wrapper">
-        1. Algemene informatie over de zitting
+        {{t "meetingForm.firstSectionTitle"}}
         <span class="au-c-onboarding">
           <AuIcon @icon="info-circle"/>
-          Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
+          {{t "meetingForm.firstSectionNotFilledWarning"}}
         </span>
       </AuHeading>
       <Zitting::ManageZittingsdata
@@ -103,7 +103,7 @@
 
       {{#if this.zitting.bestuursorgaan}}
         <AuHeading id="sectionTwo" @level="2" @skin="3">
-          2. Aanwezigen bij start van de zitting
+          {{t "meetingForm.secondSectionTitle"}}
         </AuHeading>
         <ParticipationList
           @zitting={{@zitting}}
@@ -111,11 +111,11 @@
         />
 
         <AuHeading id="sectionThree" @level="2" @skin="3">
-          3. Agenda van de zitting
+          {{t "meetingForm.thirdSectionTitle"}}
         </AuHeading>
         <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchBehandelingen}}> </ManageAgendaZitting>
         <AuHeading id="sectionFour" @level="2" @skin="3">
-          4. Behandeling van de agendapunten
+          {{t "meetingForm.fourthSectionTitle"}}
         </AuHeading>
         {{#if this.fetchBehandelingen.lastSuccessful}}
           {{#each this.behandelingen as |behandeling|}}
@@ -126,7 +126,7 @@
         {{/if}}
       {{else}}
         <AuHelpText @skin="secondary">
-          Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+          {{t "meetingForm.bestuursorganNotSelectedWarning"}}
         </AuHelpText>
       {{/if}}
     </div>
