@@ -1,10 +1,9 @@
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
+import { inject as service } from "@ember/service";
 
 export default class AgendaModalComponent extends Component {
-
   @service store;
 
   @tracked isEditing = false;
@@ -14,7 +13,7 @@ export default class AgendaModalComponent extends Component {
   isNew = false;
 
   get afterSave() {
-    return this.args.afterSave || (() => { });
+    return this.args.afterSave || (() => {});
   }
 
   @action
@@ -24,7 +23,7 @@ export default class AgendaModalComponent extends Component {
   }
   @action
   async createAgendapunt() {
-    const agendapunt = this.store.createRecord('agendapunt');
+    const agendapunt = this.store.createRecord("agendapunt");
     agendapunt.titel = "";
     agendapunt.beschrijving = "";
     agendapunt.geplandOpenbaar = false;
@@ -54,15 +53,21 @@ export default class AgendaModalComponent extends Component {
    */
   async createBehandeling(agendapunt) {
     /** @type {import("../../models/behandeling-van-agendapunt").default)} */
-    const behandeling = this.store.createRecord('behandeling-van-agendapunt');
+    const behandeling = this.store.createRecord("behandeling-van-agendapunt");
     behandeling.openbaar = agendapunt.geplandOpenbaar;
     behandeling.onderwerp = agendapunt;
-    behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
-    behandeling.voorzitter = this.args.zitting.voorzitter;
-    behandeling.secretaris = this.args.zitting.secretaris;
+    const previous = await agendapunt.vorigeAgendapunt;
+    if (previous) {
+      behandeling.aanwezigen = previous.behandeling.aanwezigenBijStart;
+      behandeling.voorzitter = previous.behandeling.voorzitter;
+      behandeling.secretaris = previous.behandeling.secretaris;
+    } else {
+      behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
+      behandeling.voorzitter = this.args.zitting.voorzitter;
+      behandeling.secretaris = this.args.zitting.secretaris;
+    }
     await behandeling.save();
     // agendapunt.behandeling = behandeling;
     // await agendapunt.save();
   }
-
 }
