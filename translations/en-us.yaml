@@ -44,13 +44,13 @@ participationList:
   loadingLoader: Loading
   voorzitterLabel: "Chairman:"
   secretarisLabel: "Secretary:"
-  presentLabel: "Present mandataries:"
-  notPresentLabel: "Absent mandataries:"
+  presentLabel: "Present mandatees:"
+  notPresentLabel: "Absent mandatees:"
   openModalButton: Manage attendees at the start of the session
 participationListModal:
   voorzitterLabel: Chairman of the meeting
   secretarisLabel: Secretary of the meeting
-  presentLabel: Present mandataries
+  presentLabel: Present mandatees
   saveButton: Insert attendees
   cancelButton: Cancel
 participationListModalSelector:
@@ -64,7 +64,7 @@ participationListModalTable:
   geboortedatumLabel: Birthdate
   actieLabel: Action
   checkboxLabel: Present
-  noDataMessage: No mandataries were found.
+  noDataMessage: No mandatees were found.
 manageAgendaZitting:
   titelLabel: Title
   beschrijvingLabel: Description
