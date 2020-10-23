@@ -7,50 +7,54 @@
         as |m|
     }}
       {{#m.content isSectioned=true}}
-        <div class="u-spacer">
-          <div class="grid">
-            <div class="col--6-12">
-              <label class="form__label">
-                {{t "manageZittingsData.bestuursorganLabel"}}
-                <PowerSelect
-                  @placeholder={{t "manageZittingsData.selectPlaceholder"}}
-                  @selected={{this.bestuursorgaan}}
-                  @options={{this.bestuursorgaanOptions}}
-                  @onchange={{this.changeSelect}} as |bestuursorgaan|>
-                    {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
-                    (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
-                    {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
-                </PowerSelect>
-              </label>
-            </div>
-          </div>
+      <div class="au-o-box au-o-flow">
+        <div>
+          <AuLabel>{{t "manageZittingsData.bestuursorganLabel"}}</AuLabel>
+          <PowerSelect
+            @placeholder={{t "manageZittingsData.selectPlaceholder"}}
+                         @selected={{this.bestuursorgaan}}
+            @options={{this.bestuursorgaanOptions}}
+                         @onchange={{this.changeSelect}} as |bestuursorgaan|>
+              {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
+              (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
+              {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
+          </PowerSelect>
         </div>
         <div>
-        {{t "manageZittingsData.geplandeStartLabel"}}
-        <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
-      </div>
-      <div>
-        {{t "manageZittingsData.opLocatieLabel"}} <Input type='text' @value={{mut this.opLocatie}} />
-      </div>
-      <div>
-        {{t "manageZittingsData.gestartOpTijdstipLabel"}}
+          <AuLabel>{{t "manageZittingsData.geplandeStartLabel"}}</AuLabel>
+          <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
+        </div>
+        <div>
+          <AuLabel>{{t "manageZittingsData.opLocatieLabel"}}</AuLabel>
+          <AuInput type='text' @value={{mut this.opLocatie}} />
+        </div>
+        <div>
+          <AuLabel>{{t "manageZittingsData.gestartOpTijdstipLabel"}}</AuLabel>
           <DateTimePicker @onChange={{fn this.changeDate 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
-      </div>
-      <div>
-        {{t "manageZittingsData.geeindigdOpTijdstipLabel"}}
+        </div>
+        <div>
+          <AuLabel>{{t "manageZittingsData.geeindigdOpTijdstipLabel"}}</AuLabel>
           <DateTimePicker @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
+        </div>
       </div>
+
       {{/m.content}}
-      <div class="modal-dialog__footer">
-        {{#wu-button-group}}
-            <WuButton @onClick={{this.saveZittingsData}}>{{t "manageZittingsData.saveButton"}}</WuButton>
-            <WuButton @onClick={{this.toggleModal}} class="button button--alt">{{t "manageZittingsData.cancelButton"}}</WuButton>
-        {{/wu-button-group}}
-      </div>
+      <AuToolbar @border="top" @size="large">
+        <AuToolbarGroup>
+          <AuButtonGroup>
+            <AuButton {{on "click" this.saveZittingsData}}>
+              {{t "manageZittingsData.saveButton"}}
+            </AuButton>
+            <AuButton {{on "click" this.toggleModal}} @skin="secondary">
+              {{t "manageZittingsData.cancelButton"}}
+            </AuButton>
+          </AuButtonGroup>
+        </AuToolbarGroup>
+      </AuToolbar>
     {{/wu-modal}}
   {{else}}
     <div class="au-c-meeting-chrome-card">
-      <ul class="au-c-list-divider">
+      <ul class="au-c-list-divider au-u-not-allowed">
         <li class="au-c-list-divider__item">
           {{t "manageZittingsData.bestuursorganLabel"}} <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
         </li>

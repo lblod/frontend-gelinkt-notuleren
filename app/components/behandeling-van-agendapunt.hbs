@@ -1,21 +1,22 @@
-<div>
+<div class="au-c-meeting-chrome-editable">
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
     {{@behandeling.onderwerp.titel}}
   </AuHeading>
-  <div>
-    {{t "behandelingVanAgendapunten.openbaarLabel"}} <Input @type='checkbox' @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} />
+   <div class="au-u-margin-top-small">
+       {{t "behandelingVanAgendapunten.visibility"}} <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
   </div>
   <Treatment::Participation
     @behandeling={{@behandeling}}
     @bestuursorgaan={{@bestuursorgaan}}
   />
-  <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>
+
+  {{#if this.tryToFetchDocument.lastSuccessful}}
+    <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
+  {{/if}}
   <AuButtonGroup>
+    <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>
     <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}}>
       {{t "behandelingVanAgendapunten.saveButton"}}
     </AuButton>
   </AuButtonGroup>
-  {{#if this.tryToFetchDocument.lastSuccessful}}
-    <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
-  {{/if}}
-</div> 
+</div>

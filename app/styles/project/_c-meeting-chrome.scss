@@ -15,18 +15,17 @@
   position: relative;
   background-color: $au-gray-100;
 
-
   @include mq(small) {
     padding: $au-unit;
   }
 
   @include mq(medium) {
-    padding-right: 30%;
+    padding-right: $au-unit-huge*4;
   }
 
   @include mq(large) {
     padding-left: $au-unit-huge*4;
-    padding-right: 25%;
+    padding-right: $au-unit-huge*4.5;
   }
 }
 
@@ -63,6 +62,99 @@
   }
 }
 
+.au-c-meeting-chrome-editable {
+  position: relative;
+  padding-top: $au-unit-small;
+  color: $au-gray-700;
+  border-top: .1rem dashed $au-gray-300;
+  margin-top: $au-unit-small;
+  margin-bottom: $au-unit-large + $au-unit;
+
+  .container-flex--contain {
+    overflow: visible;
+    margin-top: -$au-unit;
+    border: .1rem solid $au-gray-200;
+  }
+
+  .say-container {
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .say-container__main {
+    overflow: visible !important;
+  }
+
+  .au-c-rdfa-editor {
+    overflow: visible !important;
+  }
+
+  .tasklist {
+    display: none;
+  }
+
+  .say-editor {
+    background-color: transparent;
+    padding: $au-unit-small + $au-unit-tiny !important;
+
+    overflow: visible !important;
+  }
+
+  .say-editor__paper,
+  .say-editor__inner {
+    min-height: $au-unit-huge * 2 !important;
+    overflow: visible !important;
+  }
+
+  .say-editor__paper {
+    box-shadow: none;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .say-editor:not(.show-rdfa-blocks) {
+    *:after {
+      display: none !important;
+    }
+
+    *:before {
+      display: none !important;
+    }
+  }
+
+  .say-toolbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .say-container__aside {
+    @include mq(medium) {
+      position: absolute;
+      left: calc(100% + #{$au-unit-large});
+      width: $au-unit-huge*4;
+      height: 100%;
+      overflow: visible;
+    }
+
+    @include mq(large) {
+      width: $au-unit-huge*4.5;
+    }
+  }
+
+  .say-editor-hints {
+    position: sticky;
+    top: 0;
+  }
+
+  .say-editor-hints__list {
+    position: sticky;
+    top: 0;
+  }
+}
+
 .au-c-meeting-chrome__highlight {
   background-color: $au-yellow-200;
   cursor: not-allowed;
@@ -94,14 +186,7 @@
 
   tbody tr {
     border-bottom: .1rem solid $au-gray-300;
-  }
-
-  tbody tr:nth-child(odd) {
     background-color: $au-gray-100;
-  }
-
-  tbody tr:nth-child(even) {
-    background-color: $au-white;
   }
 
   th {
