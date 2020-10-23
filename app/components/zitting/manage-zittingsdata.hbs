@@ -1,7 +1,7 @@
 <div {{did-insert this.fetchBestuursorgaan}}>
   {{#if this.showModal}}
     {{#wu-modal
-        title="Beheer algemene informatie over de zitting"
+        title=(t "manageZittingsData.modalTitle")
         dialog-class="modal-dialog--wide modal-dialog--sectioned"
         onClose=this.toggleModal
         as |m|
@@ -11,9 +11,9 @@
           <div class="grid">
             <div class="col--6-12">
               <label class="form__label">
-                Gehouden door:
+                {{t "manageZittingsData.bestuursorganLabel"}}
                 <PowerSelect
-                  @placeholder="Selecteer bestuursorgaan"
+                  @placeholder={{t "manageZittingsData.selectPlaceholder"}}
                   @selected={{this.bestuursorgaan}}
                   @options={{this.bestuursorgaanOptions}}
                   @onchange={{this.changeSelect}} as |bestuursorgaan|>
@@ -26,25 +26,25 @@
           </div>
         </div>
         <div>
-        Geplande start:
+        {{t "manageZittingsData.geplandeStartLabel"}}
         <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
       </div>
       <div>
-        Op locatie: <Input type='text' @value={{mut this.opLocatie}} />
+        {{t "manageZittingsData.opLocatieLabel"}} <Input type='text' @value={{mut this.opLocatie}} />
       </div>
       <div>
-        Gestart op:
+        {{t "manageZittingsData.gestartOpTijdstipLabel"}}
           <DateTimePicker @onChange={{fn this.changeDate 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
       </div>
       <div>
-        Beëindigd op:
+        {{t "manageZittingsData.geeindigdOpTijdstipLabel"}}
           <DateTimePicker @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
       </div>
       {{/m.content}}
       <div class="modal-dialog__footer">
         {{#wu-button-group}}
-            <WuButton @onClick={{this.saveZittingsData}}>Voeg zittingsdata in</WuButton>
-            <WuButton @onClick={{this.toggleModal}} class="button button--alt">Terug</WuButton>
+            <WuButton @onClick={{this.saveZittingsData}}>{{t "manageZittingsData.saveButton"}}</WuButton>
+            <WuButton @onClick={{this.toggleModal}} class="button button--alt">{{t "manageZittingsData.cancelButton"}}</WuButton>
         {{/wu-button-group}}
       </div>
     {{/wu-modal}}
@@ -52,22 +52,22 @@
     <div class="au-c-meeting-chrome-card">
       <ul class="au-c-list-divider">
         <li class="au-c-list-divider__item">
-          Gehouden door: <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
+          {{t "manageZittingsData.bestuursorganLabel"}} <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
         </li>
         <li class="au-c-list-divider__item">
-          Geplande start: <strong>{{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}</strong>
+          {{t "manageZittingsData.geplandeStartLabel"}} <strong>{{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}</strong>
         </li>
         <li class="au-c-list-divider__item">
-          Op locatie: <strong>{{this.opLocatie}}</strong>
+          {{t "manageZittingsData.opLocatieLabel"}} <strong>{{this.opLocatie}}</strong>
         </li>
         <li class="au-c-list-divider__item">
-          Gestart op: <strong>{{moment-format this.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+          {{t "manageZittingsData.gestartOpTijdstipLabel"}} <strong>{{moment-format this.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
         </li>
         <li class="au-c-list-divider__item">
-          Beëindigd op: <strong>{{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+          {{t "manageZittingsData.geeindigdOpTijdstipLabel"}} <strong>{{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
         </li>
       </ul>
-      <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">Beheer algemene zittingsdata</AuButton>
+      <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">{{t "manageZittingsData.openModalButton"}}</AuButton>
     </div>
   {{/if}}
 </div>

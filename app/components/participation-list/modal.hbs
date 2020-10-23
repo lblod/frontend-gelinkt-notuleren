@@ -7,14 +7,14 @@
       as |m|}}
         {{#m.content isSectioned=false}}
           {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
-            <p>Bezig met laden van de aanwezigenlijst</p>
-            <p class="loader"><span class="u-visually-hidden">Aan het laden</span></p>
+            <p>{{t "participationList.loadingTitle"}}</p>
+            <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
           {{else}}
             <div class="u-spacer">
               <div class="grid">
                 <div class="col--6-12">
                   <label class="form__label">
-                    Voorzitter van de zitting
+                    {{t "participationListModal.voorzitterLabel"}}
                     <ParticipationList::MandatarisSelector
                       @onSelect={{this.selectVoorzitter}} 
                       @mandataris={{this.voorzitter}}
@@ -28,7 +28,7 @@
               <div class="grid">
                 <div class="col--6-12">
                   <label class="form__label">
-                    Secretaris van de zitting
+                    {{t "participationListModal.secretarisLabel"}}
                     <ParticipationList::FunctionarisSelector
                       @onSelect={{this.selectSecretaris}} 
                       @functionaris={{this.secretaris}} 
@@ -38,7 +38,7 @@
                 </div>
               </div>
             </div>
-            <label class="form__label">Aanwezige mandatarissen</label>
+            <label class="form__label">{{t "participationListModal.presentLabel"}}</label>
             <div class="u-spacer--tb--tiny">
               <ParticipationList::MandatarissenTable
                 @mandataris={{this.mandataris}}
@@ -51,8 +51,8 @@
       {{/m.content}}
       <div class="modal-dialog__footer">
         <AuButtonGroup>
-          <AuButton @class="button button--narrow" {{on "click" this.insert}}>Voeg aanwezigen in</AuButton>
-          <AuButton @class="button button--narrow" {{on "click" this.togglePopup}}>Annuleer</AuButton>
+          <AuButton @class="button button--narrow" {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
+          <AuButton @class="button button--narrow" {{on "click" this.togglePopup}}>{{t "participationListModal.cancelButton"}}</AuButton>
         </AuButtonGroup>
       </div>
     {{/wu-modal}}

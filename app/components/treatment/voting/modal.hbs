@@ -1,6 +1,6 @@
 {{#if @show}}
   <WuModal
-    @title="Beheer stemming"
+    @title={{t "votingModal.modalTitle"}}
     @dialog-class="modal-dialog--wide modal-dialog--sectioned"
     @onClose={{@onClose}}
   >
@@ -16,21 +16,21 @@
       <thead>
         <tr>
           <th style="max-width: 30rem;">
-            Onderwerp
+            {{t "votingModal.onderwerpLabel"}}
           </th>
           <th>
-            Type
+            {{t "votingModal.typeLabel"}}
           </th>
           <th>
-            Stemmen
+            {{t "votingModal.stemmenLabel"}}
           </th>
           <th style="max-width: 30rem;">
-            Gevolg
+            {{t "votingModal.gevolgLabel"}}
           </th>
           <th>
             <div class="grid">
               <div class="col--4-12">
-                Actie
+                {{t "votingModal.actionsLabel"}}
               </div>
               <div class="col--8-12 u-align--right">
                 <WuLinkButton
@@ -39,7 +39,7 @@
                   @onClick={{perform this.addStemming}}
                 >
                   <i class="vi vi-plus vi-u-s"></i>
-                  Nieuwe stemming
+                  {{t "votingModal.createVotingButton"}}
                 </WuLinkButton>
               </div>
             </div>
@@ -55,26 +55,26 @@
                   {{stemming.onderwerp}}
                 {{else}}
                   <i class="text-fade">
-                    Geen onderwerp
+                    {{t "votingModal.subjectNotFound"}}
                   </i>
                 {{/if}}
               </td>
               <td>
                 {{#if stemming.geheim}}
-                  Geheim
+                  {{t "votingModal.geheimTrueLabel"}}
                 {{else}}
-                  Openbaar
+                  {{t "votingModal.geheimFalseLabel"}}
                 {{/if}}
               </td>
               <td>
                 <p>
-                  Voorstanders: {{stemming.aantalVoorstanders}}
+                  {{t "votingModal.aantalVoorstandersLabel"}} {{stemming.aantalVoorstanders}}
                 </p>
                 <p>
-                  Tegenstanders: {{stemming.aantalTegenstanders}}
+                  {{t "votingModal.aantalTegenstandersLabel"}} {{stemming.aantalTegenstanders}}
                 </p>
                 <p>
-                  Onthouders: {{stemming.aantalOnthouders}}
+                  {{t "votingModal.aantalOnthoudersLabel"}} {{stemming.aantalOnthouders}}
                 </p>
               </td>
               <td style="max-width: 30rem;">
@@ -82,7 +82,7 @@
                   {{stemming.gevolg}}
                 {{else}}
                   <i class="text-fade">
-                    Geen gevolg
+                    {{t "votingModal.gevolgNotFound"}}
                   </i>
                 {{/if}}
               </td>
@@ -94,7 +94,7 @@
                     @onClick={{fn this.toggleEditStemming stemming}}
                   >
                     <i class="vi vi-edit vi-u-s"></i>
-                    Bewerk
+                    {{t "votingModal.toggleEditButton"}}
                   </WuLinkButton>
                   <WuLinkButton
                     class="button--small button--alt"
@@ -102,7 +102,7 @@
                     @onClick={{fn this.removeStemming stemming}}
                   >
                     <i class="vi vi-cross vi-u-s"></i>
-                    Verwijder
+                    {{t "votingModal.deleteButton"}}
                   </WuLinkButton>
                 </WuButtonGroup>
               </td>
@@ -111,7 +111,7 @@
             <tr>
               <td colspan="5" style="background-color: white; height: 10rem;">
                 <p class="text-fade">
-                  Geen stemmingen gevonden
+                  {{t "votingModal.noDataMessage"}}
                 </p>
               </td>
             </tr>

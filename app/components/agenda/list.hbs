@@ -2,19 +2,19 @@
   <table class="data-table">
     <thead>
       <tr>
-        <th>Volgorde</th>
-        <th style="width: 400px;">Titel agendapunt</th>
-        <th>Geplande openbaarheid</th>
+        <th>{{t "manageAgendaZittingModal.orderLabel"}}</th>
+        <th style="width: 400px;">{{t "manageAgendaZittingModal.titleLabel"}}</th>
+        <th>{{t "manageAgendaZittingModal.geplandOpenbaar"}}</th>
         <th>
           <div class="grid">
-            <div class="col--2-12">Acties</div>
+            <div class="col--2-12">{{t "manageAgendaZittingModal.actionsLabel"}}</div>
             <div class="col--10-12 u-align-right">
               {{#wu-button
                   class="button"
                   isNarrow=true
                   isSmall=true
                   onClick=@createAgendapunt}}
-                <i class="vi vi-plus vi-u-xs"></i> Voeg agendapunt toe
+                <i class="vi vi-plus vi-u-xs"></i> {{t "manageAgendaZittingModal.createItemButton"}}
               {{/wu-button}}
             </div>
           </div>
@@ -41,7 +41,7 @@
             <p>{{agendapunt.titel}}</p>
           </td>
           <td>
-            {{if agendapunt.geplandOpenbaar "Openbaar" "Besloten"}}
+            {{if agendapunt.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel") (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
           </td>
           <td>
             {{#wu-button-group}}
@@ -51,19 +51,19 @@
                 @isNarrow={{true}}
                 @label={{"Bewerk"}}
                 @onClick={{fn @edit agendapunt}}>
-                <i class="vi vi-edit"></i> Bewerk agendapunt
+                <i class="vi vi-edit"></i> {{t "manageAgendaZittingModal.editItemButton"}}
               </WuButton>
             {{/wu-button-group}}
           </td>
         {{/draggable-object}}
       {{else}}
         <tr>
-          <td colspan="5">Geen agendapunten gevonden.
+          <td colspan="5">{{t "manageAgendaZittingModal.noDataMessage"}}
               {{#wu-button
                 isNarrow=true
                 isLink=true
                 onClick=@createAgendapunt}}
-                Voeg agendapunt toe
+                {{t "manageAgendaZittingModal.createItemButton"}}
               {{/wu-button}}
             </td>
         </tr>

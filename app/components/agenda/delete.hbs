@@ -1,32 +1,32 @@
 <div class="u-padding--round--small u-background--gray-lightest u-spacer--tb--large">
-  <h3 class="h5 u-spacer--tiny">Verwijder agendapunt</h3>
+  <h3 class="h5 u-spacer--tiny">{{t "manageAgendaZittingModalDelete.modalSubtitle"}}</h3>
   <p class="small u-spacer--small">
-    <strong>U kan deze actie niet ongedaan maken.</strong> U verwijdert het agendapunt uit de agenda, en de volledige behandeling van het agendapunt.
+    <strong>{{t "manageAgendaZittingModalDelete.warningPartOne"}}</strong> {{t "manageAgendaZittingModalDelete.warningPartTwo"}}
   </p>
 
   {{#if isShowingWarning}}
     <div class="u-hr u-spacer"></div>
     <div class="u-spacer--top--tiny" id="isShowingWarning-verwijder-agendapunt">
       <div class="u-spacer">
-        <p class="small"><strong>Bent u zeker dat u het agendapunt en de behandeling wil verwijderen?</strong></p>
+        <p class="small"><strong>{{t "manageAgendaZittingModalDelete.agreeQuestion"}}</strong></p>
         <label class="checkbox checkbox--block">
           {{input class="checkbox__toggle" type="checkbox" checked=this.hasAgreed}}
           <span></span>
-          <span>Ik begrijp dat het agendapunt en de behandeling van het agendapunt onomkeerbaar verwijderd worden.</span>
+          <span>{{t "manageAgendaZittingModalDelete.checkboxLabel"}}</span>
         </label>
       </div>
 
       {{#wu-button
            onClick=@toggleEditing
            class="button button--alt button--narrow"}}
-        Behoud agendapunt en behandeling
+        {{t "manageAgendaZittingModalDelete.toggleEditButton"}}
       {{/wu-button}}
       <span></span>
       {{#wu-button
            onClick=this.delete
            disabled=(if this.hasAgreed false true)
            class="button button--alt button--alt--warning button--narrow"}}
-        Verwijder agendapunt
+        {{t "manageAgendaZittingModalDelete.deleteButton"}}
       {{/wu-button}}
     </div>
   {{else}}
@@ -34,7 +34,7 @@
       {{#wu-button
            onClick=this.toggleWarning
            class="button button--alt button--alt--warning button--narrow"}}
-        Verwijder het agendapunt en de behandeling van het agendapunt
+        {{t "manageAgendaZittingModalDelete.toggleWarningButton"}}
       {{/wu-button}}
     </div>
   {{/if}}

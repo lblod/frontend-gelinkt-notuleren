@@ -7,10 +7,148 @@ inbox:
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
-behandelingVanAgendapunten:
-  saveButton: Save
-meetingForm:
-  submitLabel: Sign and publish
-  incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
 publish:
   backToMeeting: Back to meeting
+behandelingVanAgendapunten:
+  saveButton: Save
+  openbaarLabel: "Public:"
+  participationListButton: Attendees
+meetingForm:
+  incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
+  backButton: Back to meetings
+  scheduledText: Meeting scheduled on
+  publishButton: Sign and publish
+  firstSectionTitle: 1. General information about the meeting
+  secondSectionTitle: 2. Attendance at the start of the meeting
+  thirdSectionTitle: 3. Agenda of the meeting
+  fourthSectionTitle: 4. Treatment of the agenda items
+  fifthSectionTitle: 5. End of the meeting
+  meetingHeadingPartOne: Meeting minutes of
+  meetingHeadingPartTwo: of
+  firstSectionNotFilledWarning: Before you can start the meeting it is necessary to set a date, location and governing body.
+  bestuursorganNotSelectedWarning: Before you can proceed, the meeting must first have information about the governing body.
+manageZittingsData:
+  modalTitle: Manage general information about the meeting
+  bestuursorganLabel: "Held by:"
+  geplandeStartLabel: "Scheduled start:"
+  opLocatieLabel: "On location:"
+  gestartOpTijdstipLabel: "Started at:"
+  geeindigdOpTijdstipLabel: "Finished at:"
+  saveButton: Insert meeting data
+  cancelButton: Back
+  openModalButton: Manage general data of the meeting
+  selectPlaceholder: Select governing body
+participationList:
+  loadingTitle: Loading the attendee list
+  loadingLoader: Loading
+  voorzitterLabel: "Chairman:"
+  secretarisLabel: "Secretary:"
+  presentLabel: "Present mandataries:"
+  notPresentLabel: "Absent mandataries:"
+  openModalButton: Manage attendees at the start of the session
+participationListModal:
+  voorzitterLabel: Chairman of the meeting
+  secretarisLabel: Secretary of the meeting
+  presentLabel: Present mandataries
+  saveButton: Insert attendees
+  cancelButton: Cancel
+participationListModalSelector:
+  loadingMessage: Loading...
+  noMatchesMessage: No results
+  searchMessage: Type to search
+  placeholder: Search by last name
+participationListModalTable:
+  naamLabel: Name
+  functieLabel: Position
+  geboortedatumLabel: Birthdate
+  actieLabel: Action
+  checkboxLabel: Present
+  noDataMessage: No mandataries were found.
+manageAgendaZitting:
+  titelLabel: Title
+  beschrijvingLabel: Description
+  geplandOpenbaar: Planned public
+  openModalButton: Manage agenda
+manageAgendaZittingModal:
+  modalTitle: Manage agenda
+  saveButton: Save agenda item
+  cancelEditingButton: Cancel
+  cancelButton: Back
+  orderLabel: Order
+  titleLabel: Agenda item title
+  beschrijvingLabel: Agenda item description
+  geplandOpenbaar: Planned visibility
+  actionsLabel: Actions
+  createItemButton: Add agenda item
+  editItemButton: Edit agenda item
+  noDataMessage: No agenda items found.
+  geplandOpenbaarTrueLabel: Public
+  geplandOpenbaarFalseLabel: Private
+manageAgendaZittingModalEdit:
+  modalSubtitle: Edit agenda item
+  geplandOpenbaarTrueLabel: Public
+  geplandOpenbaarFalseLabel: Private
+manageAgendaZittingModalDelete:
+  modalSubtitle: Delete agenda item
+  toggleEditButton: Retain agenda item and treatment
+  deleteButton: Delete agenda item
+  toggleWarningButton: Delete the agenda item and the treatment of the agenda item
+  warningPartOne: You cannot undo this action.
+  warningPartTwo: You are going to remove the agenda item from the agenda, and the complete treatment of the agenda item.
+  agreeQuestion: Are you sure you want to delete the agenda item and the treatment?
+  checkboxLabel: I understand that the agenda item and the treatment of the agenda item will be irreversibly removed.
+voting:
+  openModalButton: Manage voting
+votingModal:
+  modalTitle: Manage voting
+  onderwerpLabel: Subject
+  typeLabel: Type
+  stemmenLabel: Votes
+  gevolgLabel: Result
+  actionsLabel: Actions
+  createVotingButton: New voting
+  subjectNotFound: No subject
+  geheimTrueLabel: Secret
+  geheimFalseLabel: Public
+  aantalVoorstandersLabel: "Supporters:"
+  aantalTegenstandersLabel: "Objectors:"
+  aantalOnthoudersLabel: "Abstentions:"
+  gevolgNotFound: No consequences
+  toggleEditButton: Edit
+  deleteButton: Delete
+  noDataMessage: No votes found
+votingEdit:
+  firstStepTitle: 1. Enter subject
+  firstStepIntroduction: The board votes,
+  firstStepExplanation: "The subject of a vote can be, for example: the proposal of decision, an amendment, whether or not
+  to treat an agenda item, the open or closed treatment of an agenda item, an adjournment, a
+  intervention."
+  privateVotingCheckbox: Make voting secret
+  secondStep: 2. Manage attendees and votes
+  thirdStep: 3. Enter Result
+  thirdStepIntroduction: As a result,
+  thirdStepExplanation: For example, the result of a vote may be approved, rejected or adjourned.
+  fourthStepTitle: 4. Save voting
+  fourthStepExplanationPartOne: Your changes will not be inserted until you click on the
+  fourthStepExplanationPartTwo: button.
+  saveButton: Save voting
+  cancelButton: Cancel
+  inputPlaceholder: Start typing here...
+  naamLabel: Name
+  hoedanigheidLabel: Position
+  actionsLabel: Actions
+  loadingText: Loading...
+  noDataMessage: No attendees found. Add a new attendee.
+  selectPlaceholder: Select
+  addItemButton: Add voter
+  removeItemButton: Remove voter
+votingManageVoting:
+  title: Enter attendees and voters
+  subtitle: Enter number of votes
+  setUnaniemVoorstanderButton: Unanimous support
+  setUnaniemTegenstanderButton: Unanimous opposition
+  setUnaniemOnthouderButton: Unanimous abstention
+  saveVotesButton: Save voting
+  cancelVotesButton: Cancel
+  startManageVotesButton: Manage voting
+

@@ -2,15 +2,15 @@
   <thead>
     <tr>
       <th>
-        Naam
+        {{t "votingEdit.naamLabel"}}
       </th>
       <th>
-        Hoedanigheid
+        {{t "votingEdit.hoedanigheidLabel"}}
       </th>
       <th>
         <div class="grid">
           <div class="col--6-12">
-            Actie
+            {{t "votingEdit.actionsLabel"}}
           </div>
         </div>
       </th>
@@ -20,7 +20,7 @@
     {{#if this.editStemming.fetchVoters.isRunning}}
     <p class="loader">
       <span class="u-visually-hidden">
-        Bezig met laden...
+        {{t "votingEdit.loadingText"}}
       </span>
     </p>
     {{else}}
@@ -35,7 +35,7 @@
     <tr>
       <td colspan="3" style="background-color: white; height: 10rem;">
         <p class="text-fade">
-          Geen aanwezigen gevonden. Voeg een nieuwe aanwezige toe.
+          {{t "votingEdit.noDataMessage"}}
         </p>
       </td>
     </tr>
