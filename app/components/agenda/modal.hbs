@@ -41,7 +41,7 @@
     {{else}}
       <AuToolbarGroup>
         <AuButtonGroup>
-          <AuButton {{on "click" this.saveAll}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
+          <AuButton {{on "click" (perform this.saveAll)}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
           <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
         </AuButtonGroup>
       </AuToolbarGroup>

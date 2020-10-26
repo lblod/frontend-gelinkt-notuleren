@@ -17,6 +17,8 @@ export default class AgendaModalComponent extends Component {
 
   @tracked agendapunten = this.args.agendapunten;
 
+  toBeDeleted=[];
+
   @action
   async cancel(){
     this.args.agendapunten.forEach((agendapunt)=>{
@@ -54,6 +56,7 @@ export default class AgendaModalComponent extends Component {
   @action
   async delete(){
     this.agendapunten.removeObject(this.currentlyEditing);
+    this.toBeDeleted.push(this.currentlyEditing);
     this.cancelEditing();
   }
 
@@ -67,6 +70,7 @@ export default class AgendaModalComponent extends Component {
     this.toggleEditing();
     if(this.isNew){
       this.agendapunten.removeObject(this.currentlyEditing);
+      this.toBeDeleted.push(this.currentlyEditing);
       this.isNew=false;
     }
     else{
@@ -75,9 +79,11 @@ export default class AgendaModalComponent extends Component {
     this.showAfterAgendapuntOptions=false;
   }
 
-  @action
-  async saveAll(){
-    await this.agendapunten.then(arr => arr.save());
+  @restartableTask
+  * saveAll(){
+    this.args.cancel();
+    yield this.toBeDeleted.forEach(arr => arr.destroyRecord());
+    yield this.agendapunten.then(arr => arr.save());
     this.args.afterSave();
   }
 
@@ -164,6 +170,7 @@ export default class AgendaModalComponent extends Component {
     }
 
     this.agendapunten=this.agendapunten.sortBy('position');
+    this.updateVorigeAgendaPunten();
   }
 
   @action
@@ -199,6 +206,7 @@ export default class AgendaModalComponent extends Component {
     }
 
     this.agendapunten=this.agendapunten.sortBy('position');
+    this.updateVorigeAgendaPunten();
   }
 
 
