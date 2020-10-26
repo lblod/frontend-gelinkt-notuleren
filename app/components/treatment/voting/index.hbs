@@ -1,4 +1,7 @@
-<WuButton @label={{t "voting.openModalButton"}} @onClick={{this.toggleModal}}/>
+<AuButton {{on "click" this.toggleModal}} @skin="secondary">
+  {{t "voting.openModalButton"}}
+</AuButton>
+
 <Treatment::Voting::Modal
   @behandeling={{@behandeling}}
   @bestuursorgaan={{@bestuursorgaan}}
