@@ -8,14 +8,14 @@
            options=this.locationOptions
            verticalPosition="above"
            searchEnabled=false
-           selected=this.selectedLocation
+           selected=@selectedLocation
            allowClear=true
-           onchange=this.selectLocation
+           onchange=@selectLocation
            as |location|}}
         {{location.name}}
       {{/power-select}}
     </div>
-    {{#if showAfterAgendapuntOptions}}
+    {{#if @showAfterAgendapuntOptions}}
       <div class="col--6-12">
         {{#power-select
              class="js-select u-spacer--small"
@@ -23,10 +23,10 @@
              placeholder="Selecteer agendapunt"
              searchPlaceholder="Zoek op titel"
              verticalPosition="above"
-             options=this.afterAgendapuntOptions
+             options=@afterAgendapuntOptions
              searchField="titel"
-             selected=this.selectedAfterAgendapunt
-             onchange=this.selectAfterAgendapunt
+             selected=@selectedAfterAgendapunt
+             onchange=@selectAfterAgendapunt
              verticalPosition="above"
              as |a|}}
           {{a.titel}}

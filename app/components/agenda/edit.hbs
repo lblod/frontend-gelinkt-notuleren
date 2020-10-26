@@ -38,8 +38,17 @@
     </label>
   </div>
 
-  <Agenda::Move @agendapunt={{@agendapunt}} @agendapunten={{@agendapunten}} @zitting={{@zitting}}/>
-  {{#if this.isEditMode}}
-    <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}}/>
-  {{/if}}
+  <Agenda::Move
+  @afterAgendapuntOptions={{@afterAgendapuntOptions}}
+  @agendapunt={{@agendapunt}}
+  @agendapunten={{@agendapunten}}
+  @selectedLocation={{@selectedLocation}}
+  @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
+  @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
+  @selectAfterAgendapunt={{@selectAfterAgendapunt}}
+  @selectLocation={{@selectLocation}}
+  />
+  {{#unless @isNew}}
+    <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
+  {{/unless}}
 </div>

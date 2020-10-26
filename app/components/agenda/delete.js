@@ -12,10 +12,10 @@ export default class AgendaDeleteComponent extends Component {
     this.isShowingWarning=!this.isShowingWarning;
   }
 
-  @action
-  async delete(){
-    await this.args.agendapunt.deleteRecord();
-    this.args.toggleEditing();
-  }
+  // @action
+  // async delete(){
+  //   await this.args.zitting.agendapunten.removeObject(this.args.agendapunt);
+  //   this.args.toggleEditing();
+  // }
 
 }

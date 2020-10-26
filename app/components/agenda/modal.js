@@ -13,9 +13,17 @@ export default class AgendaModalComponent extends Component {
 
   @tracked currentlyEditing;
 
-  @tracked beforeEditingState;
-
   @tracked isNew = false;
+
+  @tracked agendapunten = this.args.agendapunten;
+
+  @action
+  async cancel(){
+    this.args.agendapunten.forEach((agendapunt)=>{
+      agendapunt.rollbackAttributes();
+    });
+    this.args.cancel();
+  }
 
   @action
   async createAgendapunt() {
@@ -23,16 +31,30 @@ export default class AgendaModalComponent extends Component {
     agendapunt.titel = "";
     agendapunt.beschrijving = "";
     agendapunt.geplandOpenbaar = false;
-    agendapunt.position = this.args.zitting.agendapunten.length;
-    this.args.zitting.agendapunten.pushObject(agendapunt);
-    this.isNew = true;
+    agendapunt.position = this.agendapunten.length;
+    this.agendapunten.pushObject(agendapunt);
     this.edit(agendapunt);
+    this.isNew = true;
   }
 
   @action
   async edit(agendapunt) {
+
+    this.afterAgendapuntOptions=this.agendapunten.filter((ap)=>{
+      return ap != agendapunt;
+    });
+
+    this.selectedLocation=null;
+    this.selectedAfterAgendapunt=null;
+
     this.currentlyEditing = agendapunt;
     this.toggleEditing();
+  }
+
+  @action
+  async delete(){
+    this.agendapunten.removeObject(this.currentlyEditing);
+    this.cancelEditing();
   }
 
   @action
@@ -40,32 +62,34 @@ export default class AgendaModalComponent extends Component {
     this.isEditing = !this.isEditing;
   }
 
-  @action cancelEditing(){
+  @action
+  async cancelEditing(){
     this.toggleEditing();
     if(this.isNew){
-      this.currentlyEditing.deleteRecord();
+      this.agendapunten.removeObject(this.currentlyEditing);
+      this.isNew=false;
     }
-    this.isNew=false;
+    else{
+      this.currentlyEditing.rollbackAttributes();
+    }
+    this.showAfterAgendapuntOptions=false;
   }
 
   @action
   async saveAll(){
-    await this.args.zitting.agendapunten.then(arr => arr.save());
+    await this.agendapunten.then(arr => arr.save());
     this.args.afterSave();
   }
 
   @action
   async save() {
-    const agendapunt = this.currentlyEditing;
-    await agendapunt.save();
-    this.args.zitting.agendapunten.pushObject(agendapunt);
-    await this.args.zitting.save();
     if (this.isNew) {
-      await this.createBehandeling(agendapunt);
+      this.createBehandeling(this.currentlyEditing);
       this.isNew = false;
     }
+    this.showAfterAgendapuntOptions=false;
     this.toggleEditing();
-    // this.afterSave();
+    this.updateVorigeAgendaPunten();
   }
   /**
    * @param {import("../../models/agendapunt").default} agendapunt
@@ -76,27 +100,106 @@ export default class AgendaModalComponent extends Component {
     behandeling.openbaar = agendapunt.geplandOpenbaar;
     behandeling.onderwerp = agendapunt;
     behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
-    // await behandeling.save();
-    // // agendapunt.behandeling = behandeling;
-    // // await agendapunt.save();
+    agendapunt.behandeling = behandeling;
   }
 
+  //this assumes everything is sorted
+  @action
+  async updateVorigeAgendaPunten(){
+    this.agendapunten.forEach((agendapunt, i)=>{
+      if(i>0){
+        agendapunt.vorigeAgendapunt=this.agendapunten[i-1];
+      }
+    });
+  }
 
-  // Note agendas with more than 50 points are super common!
   @action
   async sort() {
-    this.args.agendapunten.forEach(function (agendapunt, index, agendapunten) {
+    this.agendapunten.forEach((agendapunt, index, agendapunten)=>{
       agendapunt.position = index;
       if (index > 0) {
         agendapunt.vorigeAgendapunt = agendapunten.objectAt(index - 1);
         agendapunt.behandeling.vorigeBehandelingVanAgendapunt = agendapunten.objectAt(index - 1).behandeling;
       }
     });
-    // bit of a strange construction, but this gets us out of the
-    // PromiseManyArray into a ManyArray, which has a save method.
-    // keep in mind that this still sends N requests, but in parallel
-    // yield this.args.agendapunten.then(arr => arr.save());
-    // this.afterSave();
+    this.updateVorigeAgendaPunten();
   }
+
+  //edit screen sorting
+
+  @tracked showAfterAgendapuntOptions=false;
+
+  @tracked selectedAfterAgendapunt;
+
+  @tracked selectedLocation;
+
+  @tracked afterAgendapuntOptions;
+
+  @action
+  selectAfterAgendapunt(option){
+    this.selectedAfterAgendapunt=option;
+    const apIndex=this.agendapunten.indexOf(this.currentlyEditing);
+    const apAfterIndex=this.agendapunten.indexOf(option);
+
+    if(apIndex>apAfterIndex){
+
+      this.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
+
+      this.agendapunten.forEach((e, i)=>{
+        if(i>apAfterIndex && i<apIndex){
+          this.agendapunten.objectAt(i).position+=1;
+        }
+      });
+    }
+
+    else if(apIndex<apAfterIndex){
+
+      this.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
+
+      this.agendapunten.forEach((e, i)=>{
+        if(i<apAfterIndex && i>apIndex){
+          this.agendapunten.objectAt(i).position-=1;
+        }
+      });
+    }
+
+    this.agendapunten=this.agendapunten.sortBy('position');
+  }
+
+  @action
+  async selectLocation(option){
+    this.selectedLocation=option;
+    this.showAfterAgendapuntOptions=false;
+
+    const index=this.agendapunten.indexOf(this.currentlyEditing);
+
+    if(option.code=='start'){
+
+      this.currentlyEditing.position=0;
+
+      this.agendapunten.forEach((e, i)=>{
+        if(i<index){
+          this.agendapunten.objectAt(i).position+=1;
+        }
+      });
+    }
+
+    else if(option.code=='end'){
+      this.currentlyEditing.position=this.agendapunten.length-1;
+
+      this.agendapunten.forEach((e, i)=>{
+        if(i>index){
+          this.agendapunten.objectAt(i).position-=1;
+        }
+      });
+    }
+
+    else if(option.code=='after'){
+      this.showAfterAgendapuntOptions=true;
+    }
+
+    this.agendapunten=this.agendapunten.sortBy('position');
+  }
+
 
 }
