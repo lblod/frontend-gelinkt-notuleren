@@ -14,9 +14,8 @@ export default class AgendaDeleteComponent extends Component {
 
   @action
   async delete(){
-    await this.args.agendapunt.destroyRecord();
+    await this.args.agendapunt.deleteRecord();
     this.args.toggleEditing();
-    this.args.afterSave();
   }
 
 }

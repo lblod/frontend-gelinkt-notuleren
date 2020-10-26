@@ -38,8 +38,8 @@
     </label>
   </div>
 
+  <Agenda::Move @agendapunt={{@agendapunt}} @agendapunten={{@agendapunten}} @zitting={{@zitting}}/>
   {{#if this.isEditMode}}
-    <Agenda::Move @agendapunt={{@agendapunt}} @agendapunten={{@agendapunten}} @zitting={{@zitting}}/>
     <Agenda::Delete @toggleEditing={{@toggleEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}}/>
   {{/if}}
 </div>

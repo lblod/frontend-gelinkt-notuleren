@@ -8,7 +8,7 @@
     {{#if this.isEditing}}
       <Agenda::Edit @afterSave={{@afterSave}} @agendapunt={{this.currentlyEditing}} @toggleEditing={{this.toggleEditing}} @agendapunten={{@agendapunten}} @zitting={{@zitting}}/>
     {{else}}
-      <Agenda::List @agendapunten={{@agendapunten}} @createAgendapunt={{this.createAgendapunt}} @onSort={{@afterSave}} @edit={{this.edit}} @zitting={{@zitting}}/>
+      <Agenda::List @agendapunten={{@agendapunten}} @createAgendapunt={{this.createAgendapunt}} @onSort={{@afterSave}} @edit={{this.edit}} @zitting={{@zitting}} @sort={{this.sort}}/>
     {{/if}}
   {{/m.content}}
 
@@ -16,10 +16,11 @@
     {{#if this.isEditing}}
       {{#wu-button-group}}
         {{wu-button label=(t "manageAgendaZittingModal.saveButton") class="button button--narrow" onClick=this.save}}
-        {{wu-button label=(t "manageAgendaZittingModal.cancelEditingButton") class="button button--alt button--narrow" onClick=this.toggleEditing}}
+        {{wu-button label=(t "manageAgendaZittingModal.cancelEditingButton") class="button button--alt button--narrow" onClick=this.cancelEditing}}
       {{/wu-button-group}}
     {{else}}
       {{#wu-button-group}}
+        {{wu-button label=(t "manageAgendaZittingModal.saveAllButton") class="button button--narrow" onClick=this.saveAll}}
         {{wu-button label=(t "manageAgendaZittingModal.cancelButton") class="button button--alt button--narrow" onClick=@cancel}}
       {{/wu-button-group}}
     {{/if}}
