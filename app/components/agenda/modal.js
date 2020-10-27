@@ -166,15 +166,11 @@ export default class AgendaModalComponent extends Component {
     }
 
     else if(apIndex<apAfterIndex){
-      if(apAfterIndex==this.zitting.agendapunten.length-1){
-        this.zitting.agendapunten.objectAt(apIndex).position=apAfterIndex
-      }
-      else{
-        this.zitting.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
-      }
+      this.zitting.agendapunten.objectAt(apIndex).position=apAfterIndex
+
       this.zitting.agendapunten.forEach((e, i)=>{
 
-        if(i<apAfterIndex && i>apIndex){
+        if(i<=apAfterIndex && i>apIndex){
           this.zitting.agendapunten.objectAt(i).position-=1;
         }
       });
