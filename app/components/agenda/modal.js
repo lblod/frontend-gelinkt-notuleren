@@ -17,6 +17,8 @@ export default class AgendaModalComponent extends Component {
 
   @tracked agendapunten = this.args.agendapunten;
 
+  @tracked zitting=this.args.zitting;
+
   toBeDeleted=[];
 
   @action
@@ -33,8 +35,8 @@ export default class AgendaModalComponent extends Component {
     agendapunt.titel = "";
     agendapunt.beschrijving = "";
     agendapunt.geplandOpenbaar = false;
-    agendapunt.position = this.agendapunten.length;
-    this.agendapunten.pushObject(agendapunt);
+    agendapunt.position = this.zitting.agendapunten.length;
+    this.zitting.agendapunten.pushObject(agendapunt);
     this.edit(agendapunt);
     this.isNew = true;
   }
@@ -42,7 +44,7 @@ export default class AgendaModalComponent extends Component {
   @action
   async edit(agendapunt) {
 
-    this.afterAgendapuntOptions=this.agendapunten.filter((ap)=>{
+    this.afterAgendapuntOptions=this.zitting.agendapunten.filter((ap)=>{
       return ap != agendapunt;
     });
 
@@ -55,7 +57,7 @@ export default class AgendaModalComponent extends Component {
 
   @action
   async delete(){
-    this.agendapunten.removeObject(this.currentlyEditing);
+    this.zitting.agendapunten.removeObject(this.currentlyEditing);
     this.toBeDeleted.push(this.currentlyEditing);
     this.cancelEditing();
   }
@@ -69,7 +71,7 @@ export default class AgendaModalComponent extends Component {
   async cancelEditing(){
     this.toggleEditing();
     if(this.isNew){
-      this.agendapunten.removeObject(this.currentlyEditing);
+      this.zitting.agendapunten.removeObject(this.currentlyEditing);
       this.toBeDeleted.push(this.currentlyEditing);
       this.isNew=false;
     }
@@ -79,11 +81,13 @@ export default class AgendaModalComponent extends Component {
     this.showAfterAgendapuntOptions=false;
   }
 
-  @restartableTask
-  * saveAll(){
+  @action
+  async saveAll(){
     this.args.cancel();
-    yield this.toBeDeleted.forEach(arr => arr.destroyRecord());
-    yield this.agendapunten.then(arr => arr.save());
+    await this.toBeDeleted.forEach(e => e.destroyRecord());
+    await this.zitting.agendapunten.forEach(async function(e){
+      e.save();
+    });
     this.args.afterSave();
   }
 
@@ -105,23 +109,23 @@ export default class AgendaModalComponent extends Component {
     const behandeling = this.store.createRecord('behandeling-van-agendapunt');
     behandeling.openbaar = agendapunt.geplandOpenbaar;
     behandeling.onderwerp = agendapunt;
-    behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
+    behandeling.aanwezigen = this.zitting.aanwezigenBijStart;
     agendapunt.behandeling = behandeling;
   }
 
   //this assumes everything is sorted
   @action
   async updateVorigeAgendaPunten(){
-    this.agendapunten.forEach((agendapunt, i)=>{
+    this.zitting.agendapunten.forEach((agendapunt, i)=>{
       if(i>0){
-        agendapunt.vorigeAgendapunt=this.agendapunten[i-1];
+        agendapunt.vorigeAgendapunt=this.zitting.agendapunten[i-1];
       }
     });
   }
 
   @action
   async sort() {
-    this.agendapunten.forEach((agendapunt, index, agendapunten)=>{
+    this.zitting.agendapunten.forEach((agendapunt, index, agendapunten)=>{
       agendapunt.position = index;
       if (index > 0) {
         agendapunt.vorigeAgendapunt = agendapunten.objectAt(index - 1);
@@ -144,32 +148,32 @@ export default class AgendaModalComponent extends Component {
   @action
   selectAfterAgendapunt(option){
     this.selectedAfterAgendapunt=option;
-    const apIndex=this.agendapunten.indexOf(this.currentlyEditing);
-    const apAfterIndex=this.agendapunten.indexOf(option);
+    const apIndex=this.zitting.agendapunten.indexOf(this.currentlyEditing);
+    const apAfterIndex=this.zitting.agendapunten.indexOf(option);
 
     if(apIndex>apAfterIndex){
 
-      this.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
+      this.zitting.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
 
-      this.agendapunten.forEach((e, i)=>{
+      this.zitting.agendapunten.forEach((e, i)=>{
         if(i>apAfterIndex && i<apIndex){
-          this.agendapunten.objectAt(i).position+=1;
+          this.zitting.agendapunten.objectAt(i).position+=1;
         }
       });
     }
 
     else if(apIndex<apAfterIndex){
 
-      this.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
+      this.zitting.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
 
-      this.agendapunten.forEach((e, i)=>{
+      this.zitting.agendapunten.forEach((e, i)=>{
         if(i<apAfterIndex && i>apIndex){
-          this.agendapunten.objectAt(i).position-=1;
+          this.zitting.agendapunten.objectAt(i).position-=1;
         }
       });
     }
 
-    this.agendapunten=this.agendapunten.sortBy('position');
+    this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
     this.updateVorigeAgendaPunten();
   }
 
@@ -178,25 +182,26 @@ export default class AgendaModalComponent extends Component {
     this.selectedLocation=option;
     this.showAfterAgendapuntOptions=false;
 
-    const index=this.agendapunten.indexOf(this.currentlyEditing);
+    const index=this.zitting.agendapunten.indexOf(this.currentlyEditing);
 
     if(option.code=='start'){
 
       this.currentlyEditing.position=0;
 
-      this.agendapunten.forEach((e, i)=>{
+      this.zitting.agendapunten.forEach((e, i)=>{
         if(i<index){
-          this.agendapunten.objectAt(i).position+=1;
+          this.zitting.agendapunten.objectAt(i).position+=1;
         }
       });
     }
 
     else if(option.code=='end'){
-      this.currentlyEditing.position=this.agendapunten.length-1;
 
-      this.agendapunten.forEach((e, i)=>{
+      this.currentlyEditing.position=this.zitting.agendapunten.length-1;
+
+      this.zitting.agendapunten.forEach((e, i)=>{
         if(i>index){
-          this.agendapunten.objectAt(i).position-=1;
+          this.zitting.agendapunten.objectAt(i).position-=1;
         }
       });
     }
@@ -205,7 +210,7 @@ export default class AgendaModalComponent extends Component {
       this.showAfterAgendapuntOptions=true;
     }
 
-    this.agendapunten=this.agendapunten.sortBy('position');
+    this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
     this.updateVorigeAgendaPunten();
   }
 
