@@ -1,5 +1,4 @@
-<div>
-  <WuButton @label={{t "behandelingVanAgendapunten.participationListButton"}} @onClick={{this.toggleModal}} />
+<div class="au-c-meeting-chrome-card">
   <ParticipationList::Modal
     @show={{this.showParticipationModal}}
     @aanwezigenBijStart={{this.behandeling.aanwezigen}}
@@ -9,9 +8,16 @@
     @voorzitter={{this.behandeling.voorzitter}}
     @secretaris={{this.behandeling.secretaris}}
   />
-  {{#each this.behandeling.aanwezigen as |mandataris|}}
-    <div>
-      {{mandataris.isBestuurlijkeAliasVan.achternaam}}
-    </div>
-  {{/each}}
+  <ul class="au-c-list-divider">
+    <li class="au-c-list-divider__item">
+      Aanwezige mandatarissen:
+      {{#each this.behandeling.aanwezigen as |mandataris|}}
+
+        <strong>{{mandataris.isBestuurlijkeAliasVan.achternaam}}</strong>
+      {{/each}}
+    </li>
+  </ul>
+  <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">
+    {{t "behandelingVanAgendapunten.participationListButton"}}
+  </AuButton>
 </div>

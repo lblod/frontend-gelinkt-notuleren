@@ -11,8 +11,9 @@ publish:
   backToMeeting: Back to meeting
 behandelingVanAgendapunten:
   saveButton: Save
-  openbaarLabel: "Public:"
+  openbaarLabel: "make agendapoint public"
   participationListButton: Attendees
+  visibility: "visibility"
 meetingForm:
   incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
   backButton: Back to meetings

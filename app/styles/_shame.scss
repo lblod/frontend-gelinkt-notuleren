@@ -281,9 +281,12 @@ input.input-field {
   border-radius: 0;
 }
 
+.au-u-not-allowed {
+  cursor: not-allowed;
+}
+
 // Lists
 .au-c-list-divider {
-  cursor: not-allowed;
   font-style: italic;
 
   a,
@@ -318,9 +321,33 @@ input.input-field {
 
 .au-c-list-divider__item {
   padding: $au-unit-tiny*1.5;
+  position: relative;
 
   & + & {
     border-top: .1rem dotted $au-gray-300;
+  }
+
+  &.has-error {
+    padding-left: $au-unit + $au-unit-tiny;
+  }
+
+  &.has-error:before {
+    content: "!";
+    font-size: $au-label-error-badge-font-size;
+    font-style: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $au-white;
+    position: absolute;
+    top: 50%;
+    left: $au-unit-tiny/2;
+    transform: translateY(-50%);
+    background-color: $au-label-error-badge-color;
+    width: $au-unit-small * 1.5;
+    height: $au-unit-small * 1.5 - .05rem;
+    border-radius: $au-unit-small * 1.5;
+    margin-right: $au-unit-tiny;
   }
 }
 
@@ -339,7 +366,7 @@ input.input-field {
   width: $au-unit-huge*3;
   display: none;
   font-style: italic;
-  padding-left: $au-unit;
+  padding-left: $au-unit + $au-unit-tiny/2;
   background-color: $au-gray-200;
   border-radius: $au-radius;
   padding-top: $au-unit-tiny;
@@ -347,7 +374,7 @@ input.input-field {
 
   .au-c-icon {
     position: absolute;
-    top: .7rem;
+    top: .75rem;
     left: .5rem;
     width: 1.6rem;
     height: 1.6rem;
@@ -361,4 +388,65 @@ input.input-field {
   @include mq(large) {
     width: $au-unit-huge*3.5;
   }
+}
+
+.au-c-onboarding--error {
+  color: $au-red-600;
+  border: .1rem solid $au-red-200;
+  background-color: $au-red-100;
+  font-weight: $au-medium;
+  font-style: normal;
+
+  .au-c-icon {
+    color: $au-red-600;
+  }
+}
+
+
+.au-c-datepicker {
+  input,
+  .datepicker {
+    display: block;
+    width: 100%;
+  }
+}
+
+// Flow object @TODO: remove after appuniversum update
+.au-o-flow {
+  > * {
+    margin-bottom: 0;
+  }
+
+  > * + * {
+    margin-top: $au-unit;
+  }
+}
+
+.au-o-flow--tiny {
+  > * + * {
+    margin-top: $au-unit-tiny;
+  }
+}
+
+.au-o-flow--small {
+  > * + * {
+    margin-top: $au-unit-small;
+  }
+}
+
+.au-o-flow--large {
+  > * + * {
+    margin-top: $au-unit-large;
+  }
+}
+
+.au-o-flow--huge {
+  > * + * {
+    margin-top: $au-unit-huge;
+  }
+}
+
+.au-hr-dotted {
+  border: 0;
+  border-top: .1rem dotted $au-gray-200;
 }

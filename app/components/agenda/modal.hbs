@@ -12,16 +12,20 @@
     {{/if}}
   {{/m.content}}
 
-  <div class="modal-dialog__footer">
+  <AuToolbar @border="top" @size="large">
     {{#if this.isEditing}}
-      {{#wu-button-group}}
-        {{wu-button label=(t "manageAgendaZittingModal.saveButton") class="button button--narrow" onClick=this.save}}
-        {{wu-button label=(t "manageAgendaZittingModal.cancelEditingButton") class="button button--alt button--narrow" onClick=this.toggleEditing}}
-      {{/wu-button-group}}
+      <AuToolbarGroup>
+        <AuButtonGroup>
+          <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.toggleEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+        </AuButtonGroup>
+      </AuToolbarGroup>
     {{else}}
-      {{#wu-button-group}}
-        {{wu-button label=(t "manageAgendaZittingModal.cancelButton") class="button button--alt button--narrow" onClick=@cancel}}
-      {{/wu-button-group}}
+      <AuToolbarGroup>
+        <AuButtonGroup>
+          <AuButton @skin="secondary" {{on "click" @cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+        </AuButtonGroup>
+      </AuToolbarGroup>
     {{/if}}
-  </div>
+  </AuToolbar>
 {{/wu-modal}}
