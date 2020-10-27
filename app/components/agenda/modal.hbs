@@ -12,7 +12,7 @@
         @agendapunt={{this.currentlyEditing}}
         @cancelEditing={{this.cancelEditing}}
         @isNew={{this.isNew}}
-        @agendapunten={{this.agendapunten}}
+        @agendapunten={{@zitting.agendapunten}}
 
         @afterAgendapuntOptions={{this.afterAgendapuntOptions}}
         @selectedLocation={{this.selectedLocation}}
@@ -23,7 +23,7 @@
       />
     {{else}}
       <Agenda::List
-        @agendapunten={{this.agendapunten}}
+        @agendapunten={{@zitting.agendapunten}}
         @createAgendapunt={{this.createAgendapunt}}
         @edit={{this.edit}}
         @sort={{this.sort}}/>
@@ -41,7 +41,7 @@
     {{else}}
       <AuToolbarGroup>
         <AuButtonGroup>
-          <AuButton {{on "click" this.saveAll}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
+          <AuButton {{on "click" (perform this.saveAll)}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
           <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
         </AuButtonGroup>
       </AuToolbarGroup>
