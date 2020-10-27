@@ -89,9 +89,13 @@ export default class ZittingManageZittingsdataComponent extends Component {
   }
 
   @action
-  toggleModal() {
+  cancel() {
     this.zitting.rollbackAttributes();
     this.initializeState();
+    this.toggleModal();
+  }
+  @action
+  toggleModal() {
     this.showModal = !this.showModal;
   }
 
