@@ -39,6 +39,8 @@ manageZittingsData:
   cancelButton: Back
   openModalButton: Manage general data of the meeting
   selectPlaceholder: Select governing body
+participation:
+  presentLabel: "Present mandatees:"
 participationList:
   loadingTitle: Loading the attendee list
   loadingLoader: Loading
@@ -154,3 +156,29 @@ votingManageVoting:
   cancelVotesButton: Cancel
   startManageVotesButton: Manage voting
 
+
+timelineStep:
+  signingRestrictionInfo: "Signing is only possible by authorized persons which have been assigned to the "
+  signingRestrictionRole: "signer role"
+  signingRestrictionEnd: " within the organization."
+  firstSignature: First signature
+  secondSignature: Second signature
+  signButtonLabel: "Sign {name}"
+  printButtonLabel: "Print {name}"
+  printInfo: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
+  secondPrintInfo: "Printing is only possible after the document has been signed. This print will not be made available externally."
+  publishButtonLabel: "Publish {name}"
+  publishNotifyButtonLabel: "Publish and notify {name}"
+  publishRestrictionInfo: "Publishing is only possible by persons with the "
+  publishRestrictionRole: "publisher"
+  publishRestrictionEnd: " role."
+  linkPublish: "Link publication"
+  timingWarning: "It can take up to 5 minutes before the publication is visible on the above link."
+  publicationType: Publication type
+  publicForAll: Visible for everyone
+  publicationConsequences: Consequences publication
+  previewInfo: "The document will be published as seen in the preview above to "
+  previewInfoEnd: ", and will be publicly available to anyone, without authentication."
+  notifyConsequences: Consequences notification
+  notifyInfo: "A notification will be sent for this document to the authoritative government and will be visible in the "
+  localLoket: "Loket voor Lokale Besturen"
