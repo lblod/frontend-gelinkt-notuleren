@@ -73,6 +73,7 @@ manageAgendaZitting:
 manageAgendaZittingModal:
   modalTitle: Manage agenda
   saveButton: Save agenda item
+  saveAllButton: Save agenda
   cancelEditingButton: Cancel
   cancelButton: Back
   orderLabel: Order

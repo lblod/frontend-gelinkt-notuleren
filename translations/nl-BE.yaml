@@ -73,6 +73,7 @@ manageAgendaZitting:
 manageAgendaZittingModal:
   modalTitle: Beheer Agenda
   saveButton: Bewaar agendapunt
+  saveAllButton: Bewaar agenda
   cancelEditingButton: Annuleer
   cancelButton: Terug
   orderLabel: Volgorde

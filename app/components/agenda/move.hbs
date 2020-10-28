@@ -1,0 +1,38 @@
+<label class="form__label">Verplaats agendapunt
+  <div class="grid">
+    <div class="col--6-12">
+      {{#power-select
+           class="select select--block u-spacer--tiny"
+           renderInPlace=true
+           placeholder="Selecteer positie[@TN]"
+           options=this.locationOptions
+           verticalPosition="above"
+           searchEnabled=false
+           selected=@selectedLocation
+           allowClear=true
+           onchange=@selectLocation
+           as |location|}}
+        {{location.name}}
+      {{/power-select}}
+    </div>
+    {{#if @showAfterAgendapuntOptions}}
+      <div class="col--6-12">
+        {{#power-select
+             class="js-select u-spacer--small"
+             renderInPlace=true
+             placeholder="Selecteer agendapunt"
+             searchPlaceholder="Zoek op titel"
+             verticalPosition="above"
+             options=@afterAgendapuntOptions
+             searchField="titel"
+             selected=@selectedAfterAgendapunt
+             onchange=@selectAfterAgendapunt
+             verticalPosition="above"
+             as |a|}}
+          {{a.titel}}
+        {{/power-select}}
+      </div>
+    {{/if}}
+  </div>
+</label>
+{{yield}}

@@ -1,14 +1,32 @@
 {{#wu-modal
     title=(t "manageAgendaZittingModal.modalTitle")
     dialog-class="modal-dialog--wide modal-dialog--sectioned"
-    onClose=@cancel
+    onClose=this.cancel
     as |m|
 }}
   {{#m.content isSectioned=true}}
     {{#if this.isEditing}}
-      <Agenda::Edit @afterSave={{@afterSave}} @agendapunt={{this.currentlyEditing}} @toggleEditing={{this.toggleEditing}}/>
+      <Agenda::Edit
+        @delete={{this.delete}}
+
+        @agendapunt={{this.currentlyEditing}}
+        @cancelEditing={{this.cancelEditing}}
+        @isNew={{this.isNew}}
+        @agendapunten={{@zitting.agendapunten}}
+
+        @afterAgendapuntOptions={{this.afterAgendapuntOptions}}
+        @selectedLocation={{this.selectedLocation}}
+        @showAfterAgendapuntOptions={{this.showAfterAgendapuntOptions}}
+        @selectedAfterAgendapunt={{this.selectedAfterAgendapunt}}
+        @selectAfterAgendapunt={{this.selectAfterAgendapunt}}
+        @selectLocation={{this.selectLocation}}
+      />
     {{else}}
-      <Agenda::List @agendapunten={{@agendapunten}} @createAgendapunt={{this.createAgendapunt}} @edit={{this.edit}}/>
+      <Agenda::List
+        @agendapunten={{@zitting.agendapunten}}
+        @createAgendapunt={{this.createAgendapunt}}
+        @edit={{this.edit}}
+        @sort={{this.sort}}/>
     {{/if}}
   {{/m.content}}
 
@@ -17,13 +35,14 @@
       <AuToolbarGroup>
         <AuButtonGroup>
           <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
-          <AuButton @skin="secondary" {{on "click" this.toggleEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
         </AuButtonGroup>
       </AuToolbarGroup>
     {{else}}
       <AuToolbarGroup>
         <AuButtonGroup>
-          <AuButton @skin="secondary" {{on "click" @cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+          <AuButton {{on "click" (perform this.saveAll)}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
         </AuButtonGroup>
       </AuToolbarGroup>
     {{/if}}
