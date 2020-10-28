@@ -51,7 +51,7 @@
           {{#each this.stemmingen as |stemming|}}
             <tr>
               <td style="max-width: 30rem;">
-                {{#if stemming.onderwerp.content}}
+                {{#if stemming.onderwerp}}
                   {{stemming.onderwerp}}
                 {{else}}
                   <i class="text-fade">
@@ -78,7 +78,7 @@
                 </p>
               </td>
               <td style="max-width: 30rem;">
-                {{#if stemming.gevolg.content}}
+                {{#if stemming.gevolg}}
                   {{stemming.gevolg}}
                 {{else}}
                   <i class="text-fade">

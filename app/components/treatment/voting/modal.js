@@ -57,18 +57,12 @@ export default class TreatmentVotingModalComponent extends Component {
       const aanwezigen = yield this.args.behandeling.aanwezigen;
 
       const stemmingToEdit = this.store.createRecord("stemming", {
-        onderwerp: {
-          content: "",
-          language: "nl",
-        },
+        onderwerp: "",
         geheim: false,
         aantalVoorstanders: 0,
         aantalTegenstanders: 0,
         aantalOnthouders: 0,
-        gevolg: {
-          content: "",
-          language: "nl",
-        },
+        gevolg: "",
       });
       this.editMode = true;
       stemmingToEdit.aanwezigen.pushObjects(aanwezigen);
