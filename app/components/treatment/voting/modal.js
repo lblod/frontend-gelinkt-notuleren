@@ -82,6 +82,7 @@ export default class TreatmentVotingModalComponent extends Component {
   @action
   onCancelEdit() {
     this.editMode = false;
+    this.editStemming.stemming.rollbackAttributes();
     this.editStemming.stemming = null;
   }
 }
