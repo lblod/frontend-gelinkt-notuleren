@@ -122,15 +122,9 @@ export default class AgendaModalComponent extends Component {
     behandeling.openbaar = agendapunt.geplandOpenbaar;
     behandeling.onderwerp = agendapunt;
     const previous = await agendapunt.vorigeAgendapunt;
-    if (previous) {
-      behandeling.aanwezigen = previous.behandeling.aanwezigenBijStart;
-      behandeling.voorzitter = previous.behandeling.voorzitter;
-      behandeling.secretaris = previous.behandeling.secretaris;
-    } else {
-      behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
-      behandeling.voorzitter = this.args.zitting.voorzitter;
-      behandeling.secretaris = this.args.zitting.secretaris;
-    }
+    behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
+    behandeling.voorzitter = this.args.zitting.voorzitter;
+    behandeling.secretaris = this.args.zitting.secretaris;
     this.unsavedBehandelingen.push(behandeling);
     // agendapunt.behandeling = behandeling;
     // await agendapunt.save();
