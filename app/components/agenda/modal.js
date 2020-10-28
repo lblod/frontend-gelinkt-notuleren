@@ -1,10 +1,11 @@
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
-import { set } from '@ember/object';
-import {restartableTask} from "ember-concurrency-decorators";
-import zitting from '../../models/zitting';
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { action } from "@ember/object";
+import { inject as service } from "@ember/service";
+import { set } from "@ember/object";
+import { restartableTask } from "ember-concurrency-decorators";
+import zitting from "../../models/zitting";
+import RSVP from "rsvp";
 
 export default class AgendaModalComponent extends Component {
   @service store;
@@ -17,23 +18,24 @@ export default class AgendaModalComponent extends Component {
 
   @tracked agendapunten = this.args.agendapunten;
 
-  @tracked zitting=this.args.zitting;
+  @tracked zitting = this.args.zitting;
 
-  toBeDeleted=[];
+  toBeDeleted = [];
+  unsavedBehandelingen = [];
 
   get afterSave() {
     return this.args.afterSave || (() => {});
   }
 
   @action
-  async cancel(){
-    this.args.agendapunten.forEach((agendapunt)=>{
+  async cancel() {
+    this.args.agendapunten.forEach((agendapunt) => {
       agendapunt.rollbackAttributes();
     });
-    this.toBeDeleted.forEach((ap)=>{
+    this.toBeDeleted.forEach((ap) => {
       this.zitting.agendapunten.pushObject(ap);
     });
-    this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
+    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
     this.args.cancel();
   }
 
@@ -51,20 +53,19 @@ export default class AgendaModalComponent extends Component {
 
   @action
   async edit(agendapunt) {
-
-    this.afterAgendapuntOptions=this.zitting.agendapunten.filter((ap)=>{
+    this.afterAgendapuntOptions = this.zitting.agendapunten.filter((ap) => {
       return ap != agendapunt;
     });
 
-    this.selectedLocation=null;
-    this.selectedAfterAgendapunt=null;
+    this.selectedLocation = null;
+    this.selectedAfterAgendapunt = null;
 
     this.currentlyEditing = agendapunt;
     this.toggleEditing();
   }
 
   @action
-  async delete(){
+  async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
     this.toBeDeleted.push(this.currentlyEditing);
     this.cancelEditing();
@@ -76,27 +77,31 @@ export default class AgendaModalComponent extends Component {
   }
 
   @action
-  async cancelEditing(){
+  async cancelEditing() {
     this.toggleEditing();
-    if(this.isNew){
+    if (this.isNew) {
       this.zitting.agendapunten.removeObject(this.currentlyEditing);
       this.toBeDeleted.push(this.currentlyEditing);
-      this.isNew=false;
-    }
-    else{
+      this.isNew = false;
+    } else {
       this.currentlyEditing.rollbackAttributes();
     }
-    this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
-    this.showAfterAgendapuntOptions=false;
+    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
+    this.showAfterAgendapuntOptions = false;
   }
 
   @restartableTask
-  * saveAll(){
-    this.updateVorigeAgendaPunten();
-    this.args.cancel();
-    yield this.toBeDeleted.forEach(e=>e.destroyRecord());
-    yield this.zitting.agendapunten.then(e=>e.save());
+  *saveAll() {
+    const promises = this.unsavedBehandelingen.map((b) => b.save());
+    yield RSVP.all(promises);
+    yield this.updateVorigeAgendaPunten();
+    yield RSVP.all(
+      this.zitting.agendapunten.map((a) => a.behandeling.then((b) => b.save()))
+    );
+    yield this.zitting.agendapunten.then((a) => a.save());
+    this.toBeDeleted.forEach((e) => e.destroyRecord());
     this.args.afterSave();
+    this.args.cancel();
   }
 
   @action
@@ -105,7 +110,7 @@ export default class AgendaModalComponent extends Component {
       this.createBehandeling(this.currentlyEditing);
       this.isNew = false;
     }
-    this.showAfterAgendapuntOptions=false;
+    this.showAfterAgendapuntOptions = false;
     this.toggleEditing();
   }
   /**
@@ -126,36 +131,38 @@ export default class AgendaModalComponent extends Component {
       behandeling.voorzitter = this.args.zitting.voorzitter;
       behandeling.secretaris = this.args.zitting.secretaris;
     }
-    await behandeling.save();
+    this.unsavedBehandelingen.push(behandeling);
     // agendapunt.behandeling = behandeling;
     // await agendapunt.save();
   }
 
   //this assumes everything is sorted
   @action
-  async updateVorigeAgendaPunten(){
-    this.zitting.agendapunten.forEach((agendapunt, i)=>{
-      if(i>0){
-        agendapunt.vorigeAgendapunt = this.zitting.agendapunten.objectAt(i- 1);
-        agendapunt.behandeling.vorigeBehandelingVanAgendapunt = this.zitting.agendapunten.objectAt(i - 1).behandeling;
-      }
-      else{
-        agendapunt.vorigeAgendapunt=null;
-        agendapunt.behandeling.vorigeBehandelingVanAgendapunt=null;
+  async updateVorigeAgendaPunten() {
+    this.zitting.agendapunten.forEach((agendapunt, i, agendapunten) => {
+      if (i > 0) {
+        agendapunt.vorigeAgendapunt = agendapunten.objectAt(i - 1);
+        agendapunt.behandeling.set(
+          "vorigeBehandelingVanAgendapunt",
+          agendapunten.objectAt(i - 1).behandeling
+        );
+      } else {
+        agendapunt.vorigeAgendapunt = null;
+        agendapunt.behandeling.vorigeBehandelingVanAgendapunt = null;
       }
     });
   }
 
   @action
   async sort() {
-    this.zitting.agendapunten.forEach((agendapunt, index)=>{
+    this.zitting.agendapunten.forEach((agendapunt, index) => {
       agendapunt.position = index;
     });
   }
 
   //edit screen sorting
 
-  @tracked showAfterAgendapuntOptions=false;
+  @tracked showAfterAgendapuntOptions = false;
 
   @tracked selectedAfterAgendapunt;
 
@@ -164,72 +171,59 @@ export default class AgendaModalComponent extends Component {
   @tracked afterAgendapuntOptions;
 
   @action
-  selectAfterAgendapunt(option){
+  selectAfterAgendapunt(option) {
+    this.selectedAfterAgendapunt = option;
+    const apIndex = this.zitting.agendapunten.indexOf(this.currentlyEditing);
+    const apAfterIndex = this.zitting.agendapunten.indexOf(option);
 
-    this.selectedAfterAgendapunt=option;
-    const apIndex=this.zitting.agendapunten.indexOf(this.currentlyEditing);
-    const apAfterIndex=this.zitting.agendapunten.indexOf(option);
+    if (apIndex > apAfterIndex) {
+      this.zitting.agendapunten.objectAt(apIndex).position = apAfterIndex + 1;
 
-    if(apIndex>apAfterIndex){
+      this.zitting.agendapunten.forEach((e, i) => {
+        if (i > apAfterIndex && i < apIndex) {
+          this.zitting.agendapunten.objectAt(i).position += 1;
+        }
+      });
+    } else if (apIndex < apAfterIndex) {
+      this.zitting.agendapunten.objectAt(apIndex).position = apAfterIndex;
 
-      this.zitting.agendapunten.objectAt(apIndex).position=apAfterIndex+1;
-
-      this.zitting.agendapunten.forEach((e, i)=>{
-        if(i>apAfterIndex && i<apIndex){
-          this.zitting.agendapunten.objectAt(i).position+=1;
+      this.zitting.agendapunten.forEach((e, i) => {
+        if (i <= apAfterIndex && i > apIndex) {
+          this.zitting.agendapunten.objectAt(i).position -= 1;
         }
       });
     }
 
-    else if(apIndex<apAfterIndex){
-      this.zitting.agendapunten.objectAt(apIndex).position=apAfterIndex
-
-      this.zitting.agendapunten.forEach((e, i)=>{
-
-        if(i<=apAfterIndex && i>apIndex){
-          this.zitting.agendapunten.objectAt(i).position-=1;
-        }
-      });
-
-    }
-
-    this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
+    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
   }
 
   @action
-  async selectLocation(option){
-    this.selectedLocation=option;
-    this.showAfterAgendapuntOptions=false;
+  async selectLocation(option) {
+    this.selectedLocation = option;
+    this.showAfterAgendapuntOptions = false;
 
-    const index=this.zitting.agendapunten.indexOf(this.currentlyEditing);
+    const index = this.zitting.agendapunten.indexOf(this.currentlyEditing);
 
-    if(option.code=='start'){
+    if (option.code == "start") {
+      this.currentlyEditing.position = 0;
 
-      this.currentlyEditing.position=0;
-
-      this.zitting.agendapunten.forEach((e, i)=>{
-        if(i<index){
-          this.zitting.agendapunten.objectAt(i).position+=1;
+      this.zitting.agendapunten.forEach((e, i) => {
+        if (i < index) {
+          this.zitting.agendapunten.objectAt(i).position += 1;
         }
       });
-    }
+    } else if (option.code == "end") {
+      this.currentlyEditing.position = this.zitting.agendapunten.length - 1;
 
-    else if(option.code=='end'){
-      this.currentlyEditing.position=this.zitting.agendapunten.length-1;
-
-      this.zitting.agendapunten.forEach((e, i)=>{
-        if(i>index){
-          this.zitting.agendapunten.objectAt(i).position-=1;
+      this.zitting.agendapunten.forEach((e, i) => {
+        if (i > index) {
+          this.zitting.agendapunten.objectAt(i).position -= 1;
         }
       });
+    } else if (option.code == "after") {
+      this.showAfterAgendapuntOptions = true;
     }
 
-    else if(option.code=='after'){
-      this.showAfterAgendapuntOptions=true;
-    }
-
-    this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
+    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
   }
-
-
 }
