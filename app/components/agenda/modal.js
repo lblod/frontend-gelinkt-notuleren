@@ -27,6 +27,9 @@ export default class AgendaModalComponent extends Component {
     this.args.agendapunten.forEach((agendapunt)=>{
       agendapunt.rollbackAttributes();
     });
+    this.toBeDeleted.forEach((ap)=>{
+      this.zitting.agendapunten.pushObject(ap);
+    });
     this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
     this.args.cancel();
   }
