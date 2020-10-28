@@ -89,6 +89,7 @@ export default class AgendaModalComponent extends Component {
 
   @restartableTask
   * saveAll(){
+    this.updateVorigeAgendaPunten();
     this.args.cancel();
     yield this.toBeDeleted.forEach(e=>e.destroyRecord());
     yield this.zitting.agendapunten.then(e=>e.save());
@@ -103,7 +104,6 @@ export default class AgendaModalComponent extends Component {
     }
     this.showAfterAgendapuntOptions=false;
     this.toggleEditing();
-    this.updateVorigeAgendaPunten();
   }
   /**
    * @param {import("../../models/agendapunt").default} agendapunt
@@ -137,7 +137,6 @@ export default class AgendaModalComponent extends Component {
     this.zitting.agendapunten.forEach((agendapunt, index)=>{
       agendapunt.position = index;
     });
-    this.updateVorigeAgendaPunten();
   }
 
   //edit screen sorting
@@ -181,7 +180,6 @@ export default class AgendaModalComponent extends Component {
     }
 
     this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
-    this.updateVorigeAgendaPunten();
   }
 
   @action
@@ -217,7 +215,6 @@ export default class AgendaModalComponent extends Component {
     }
 
     this.zitting.agendapunten=this.zitting.agendapunten.sortBy('position');
-    this.updateVorigeAgendaPunten();
   }
 
 
