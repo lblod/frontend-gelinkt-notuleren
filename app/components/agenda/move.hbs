@@ -1,36 +1,36 @@
-<label class="form__label">Verplaats agendapunt
+<label class="form__label">{{t "manageAgendaZittingModalMove.title"}}
   <div class="grid">
     <div class="col--6-12">
-      {{#power-select
-           class="select select--block u-spacer--tiny"
-           renderInPlace=true
-           placeholder="Selecteer positie[@TN]"
-           options=this.locationOptions
-           verticalPosition="above"
-           searchEnabled=false
-           selected=@selectedLocation
-           allowClear=true
-           onchange=@selectLocation
-           as |location|}}
+      <PowerSelect
+        @class="select select--block u-spacer--tiny"
+        @renderInPlace={{true}}
+        @placeholder={{t "manageAgendaZittingModalMove.positionSelectPlaceholder"}}
+        @options={{this.locationOptions}}
+        @verticalPosition="above"
+        @searchEnabled={{false}}
+        @selected={{@selectedLocation}}
+        @allowClear={{true}}
+        @onchange={{@selectLocation}}
+        as |location|>
         {{location.name}}
-      {{/power-select}}
+      </PowerSelect>
     </div>
     {{#if @showAfterAgendapuntOptions}}
       <div class="col--6-12">
-        {{#power-select
-             class="js-select u-spacer--small"
-             renderInPlace=true
-             placeholder="Selecteer agendapunt"
-             searchPlaceholder="Zoek op titel"
-             verticalPosition="above"
-             options=@afterAgendapuntOptions
-             searchField="titel"
-             selected=@selectedAfterAgendapunt
-             onchange=@selectAfterAgendapunt
-             verticalPosition="above"
-             as |a|}}
+        <PowerSelect
+          @class="js-select u-spacer--small"
+          @renderInPlace={{true}}
+          @placeholder={{t "manageAgendaZittingModalMove.agendapuntSelectPlaceholder"}}
+          @searchPlaceholder={{t "manageAgendaZittingModalMove.searchPlaceholder"}}
+          @verticalPosition="above"
+          @options={{@afterAgendapuntOptions}}
+          @searchField="titel"
+          @selected={{@selectedAfterAgendapunt}}
+          @onchange={{@selectAfterAgendapunt}}
+          @verticalPosition="above"
+          as |a|>
           {{a.titel}}
-        {{/power-select}}
+        </PowerSelect>
       </div>
     {{/if}}
   </div>
