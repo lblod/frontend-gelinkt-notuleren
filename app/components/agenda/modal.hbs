@@ -1,10 +1,10 @@
-{{#wu-modal
-    title=(t "manageAgendaZittingModal.modalTitle")
-    dialog-class="modal-dialog--wide modal-dialog--sectioned"
-    onClose=this.cancel
-    as |m|
-}}
-  {{#m.content isSectioned=true}}
+<WuModal
+    @title={{t "manageAgendaZittingModal.modalTitle"}}
+    @dialog-class="modal-dialog--wide modal-dialog--sectioned"
+    @onClose={{this.cancel}}
+    as |Modal|
+>
+   <Modal.content @isSectioned={{true}}>
     {{#if this.isEditing}}
       <Agenda::Edit
         @delete={{this.delete}}
@@ -28,7 +28,7 @@
         @edit={{this.edit}}
         @sort={{this.sort}}/>
     {{/if}}
-  {{/m.content}}
+   </Modal.content>
 
   <AuToolbar @border="top" @size="large">
     {{#if this.isEditing}}
@@ -47,4 +47,4 @@
       </AuToolbarGroup>
     {{/if}}
   </AuToolbar>
-{{/wu-modal}}
+</WuModal>

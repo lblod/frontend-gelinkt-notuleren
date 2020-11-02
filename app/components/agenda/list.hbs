@@ -41,16 +41,11 @@
               {{if agendapunt.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel") (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
             </td>
             <td>
-              {{#wu-button-group}}
-                <WuButton
-                  @isSmall={{true}}
-                  @isAlt={{true}}
-                  @isNarrow={{true}}
-                  @label={{"Bewerk"}}
-                  @onClick={{fn @edit agendapunt}}>
+            <AuButtonGroup>
+                <AuButton {{on "click" (fn @edit agendapunt)}}>
                   <i class="vi vi-edit"></i> {{t "manageAgendaZittingModal.editItemButton"}}
-                </WuButton>
-              {{/wu-button-group}}
+                </AuButton>
+            </AuButtonGroup>
             </td>
           {{/draggable-object}}
         {{/unless}}
