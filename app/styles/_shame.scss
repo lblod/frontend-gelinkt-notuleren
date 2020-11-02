@@ -110,7 +110,7 @@ li.link-list__item > button.button {
 /* temporary fix for besluittypes dropdown */
 
 .ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
-  z-index: 1006;
+  z-index: 1010;
 }
 
 /* temporary demo fixes for fracties */
@@ -279,4 +279,174 @@ input.input-field {
 // @TODO port to appuniversum
 .au-c-data-table__header th {
   border-radius: 0;
+}
+
+.au-u-not-allowed {
+  cursor: not-allowed;
+}
+
+// Lists
+.au-c-list-divider {
+  font-style: italic;
+
+  a,
+  h2 {
+    font-style: normal;
+  }
+
+  strong {
+    font-style: normal;
+    font-weight: 500;
+    border-bottom: .2rem dotted $au-gray-300;
+  }
+
+  .au-c-list-divider {
+    padding-left: $au-unit - $au-unit-tiny*1.5;
+    border-left: .3rem solid $au-gray-300;
+    margin-top: $au-unit-tiny*1.5;
+  }
+
+  .au-c-list-divider .au-c-list-divider__item {
+    padding-left: 0;
+  }
+
+  .au-c-list-divider .au-c-list-divider__item:last-child {
+    padding-bottom: 0;
+  }
+
+  .au-c-list-divider .au-c-list-divider__item:first-child {
+    padding-top: 0;
+  }
+}
+
+.au-c-list-divider__item {
+  padding: $au-unit-tiny*1.5;
+  position: relative;
+
+  & + & {
+    border-top: .1rem dotted $au-gray-300;
+  }
+
+  &.has-error {
+    padding-left: $au-unit + $au-unit-tiny;
+  }
+
+  &.has-error:before {
+    content: "!";
+    font-size: $au-label-error-badge-font-size;
+    font-style: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $au-white;
+    position: absolute;
+    top: 50%;
+    left: $au-unit-tiny/2;
+    transform: translateY(-50%);
+    background-color: $au-label-error-badge-color;
+    width: $au-unit-small * 1.5;
+    height: $au-unit-small * 1.5 - .05rem;
+    border-radius: $au-unit-small * 1.5;
+    margin-right: $au-unit-tiny;
+  }
+}
+
+.au-c-onboarding-wrapper {
+  position: relative;
+}
+
+.au-c-onboarding {
+  @include au-font-size(1.5rem,1.3);
+  font-family: $au-font;
+  font-weight: 400;
+  color: $au-gray-600;
+  position: absolute;
+  top: 0;
+  left: calc(100% + #{$au-unit-large + $au-unit});
+  width: $au-unit-huge*3;
+  display: none;
+  font-style: italic;
+  padding-left: $au-unit + $au-unit-tiny/2;
+  background-color: $au-gray-200;
+  border-radius: $au-radius;
+  padding-top: $au-unit-tiny;
+  padding-bottom: $au-unit-tiny;
+
+  .au-c-icon {
+    position: absolute;
+    top: .75rem;
+    left: .5rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  @include mq(medium) {
+    display: block;
+    width: $au-unit-huge*2.5;
+  }
+
+  @include mq(large) {
+    width: $au-unit-huge*3.5;
+  }
+}
+
+.au-c-onboarding--error {
+  color: $au-red-600;
+  border: .1rem solid $au-red-200;
+  background-color: $au-red-100;
+  font-weight: $au-medium;
+  font-style: normal;
+
+  .au-c-icon {
+    color: $au-red-600;
+  }
+}
+
+
+.au-c-datepicker {
+  input,
+  .datepicker {
+    display: block;
+    width: 100%;
+  }
+}
+
+// Flow object @TODO: remove after appuniversum update
+.au-o-flow {
+  > * {
+    margin-bottom: 0;
+  }
+
+  > * + * {
+    margin-top: $au-unit;
+  }
+}
+
+.au-o-flow--tiny {
+  > * + * {
+    margin-top: $au-unit-tiny;
+  }
+}
+
+.au-o-flow--small {
+  > * + * {
+    margin-top: $au-unit-small;
+  }
+}
+
+.au-o-flow--large {
+  > * + * {
+    margin-top: $au-unit-large;
+  }
+}
+
+.au-o-flow--huge {
+  > * + * {
+    margin-top: $au-unit-huge;
+  }
+}
+
+.au-hr-dotted {
+  border: 0;
+  border-top: .1rem dotted $au-gray-200;
 }

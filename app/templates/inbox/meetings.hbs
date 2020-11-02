@@ -1,0 +1,38 @@
+<AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+  <t.menu as |menu|>
+    <menu.general>
+      <AuToolbar @size="large">
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            Zittingen
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <AuButton {{action 'openNewDocument'}}>
+            Nieuwe zitting
+          </AuButton>
+        </AuToolbarGroup>
+      </AuToolbar>
+    </menu.general>
+  </t.menu>
+  <t.content as |c|>
+    <c.header>
+      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">zitting</span></th>
+      <AuDataTableThSortable @field="bestuursorgaan.naam" @currentSorting={{sort}} @label="bestuursorgaan" />
+      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{sort}} @label="tijdstip" />
+      <AuDataTableThSortable @field="opLocatie" @currentSorting={{sort}} @label="locatie" />
+    </c.header>
+    <c.body as |meeting|>
+      <td>
+        <LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">Zitting van {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} op {{moment-format meeting.geplandeStart "DD/MM/YYYY HH:mm"}}</LinkTo>
+      </td>
+      <td>{{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</td>
+      <td>{{moment-format meeting.geplandeStart "DD/MM/YYYY HH:mm"}}</td>
+      <td>
+        {{meeting.opLocatie}}
+      </td>
+    </c.body>
+  </t.content>
+</AuDataTable>
+
+{{outlet}}

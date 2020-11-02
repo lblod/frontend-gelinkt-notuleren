@@ -1,0 +1,45 @@
+<table class="data-table data-table--lined data-table--zebra">
+  <thead>
+    <tr>
+      <th>
+        {{t "votingEdit.naamLabel"}}
+      </th>
+      <th>
+        {{t "votingEdit.hoedanigheidLabel"}}
+      </th>
+      <th>
+        <div class="grid">
+          <div class="col--6-12">
+            {{t "votingEdit.actionsLabel"}}
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#if this.editStemming.fetchVoters.isRunning}}
+    <p class="loader">
+      <span class="u-visually-hidden">
+        {{t "votingEdit.loadingText"}}
+      </span>
+    </p>
+    {{else}}
+    {{#each this.editStemming.votingMap as |row|}}
+    <Treatment::Voting::VoterRow 
+    @row={{row}} 
+    @onVoteChange={{this.editStemming.setVote}} 
+    @manageVotes={{@manageVotes}}
+    />
+
+    {{else}}
+    <tr>
+      <td colspan="3" style="background-color: white; height: 10rem;">
+        <p class="text-fade">
+          {{t "votingEdit.noDataMessage"}}
+        </p>
+      </td>
+    </tr>
+    {{/each}}
+    {{/if}}
+  </tbody>
+</table>

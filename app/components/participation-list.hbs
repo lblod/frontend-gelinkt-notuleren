@@ -1,0 +1,58 @@
+{{#if this.bestuursorgaan}}
+  <div class="au-c-meeting-chrome-card">
+    {{#if this.loadData.isRunning}}
+      <p>{{t "participationList.loadingTitle"}}</p>
+      <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+    {{else}}
+      {{#if this.hasParticipationInfo}}
+        <ul class="au-c-list-divider">
+          <li class="au-c-list-divider__item">
+            {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+          </li>
+          <li class="au-c-list-divider__item">
+
+            {{t "participationList.secretarisLabel"}} <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+            {{!-- example error
+            <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
+              Er is nog geen secretaris aangeduid
+            </AuPill>
+            --}}
+          </li>
+          <li class="au-c-list-divider__item">
+            {{t "participationList.presentLabel"}}
+            {{#each this.aanwezigenBijStart as |mandataris|}}
+              <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
+            {{/each}}
+          </li>
+          <li class="au-c-list-divider__item">
+            {{t "participationList.notPresentLabel"}}
+            {{#each this.mandateesNotPresent as |mandataris|}}
+              <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
+            {{/each}}
+          </li>
+        </ul>
+      {{/if}}
+
+      <AuButton
+        @width="block"
+        @skin="secondary"
+        @icon="pencil"
+        @iconAlignment="left"
+        {{on 'click' this.togglePopup}}
+        @disabled={{this.fetchMandatees.isRunning}}
+      >
+        {{t "participationList.openModalButton"}}
+      </AuButton>
+
+      <ParticipationList::Modal
+        @bestuursorgaan={{this.bestuursorgaan}}
+        @voorzitter={{this.voorzitter}}
+        @secretaris={{this.secretaris}}
+        @show={{this.popup}}
+        @togglePopup={{this.togglePopup}}
+        @onSave={{this.onSave}}
+        @aanwezigenBijStart={{this.aanwezigenBijStart}}
+      />
+    {{/if}}
+  </div>
+{{/if}}

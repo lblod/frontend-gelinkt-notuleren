@@ -7,26 +7,16 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
-  this.route('editor-documents', function() {
-    this.route('edit', { path: '/:id/edit' });
-    this.route('new');
-    this.route('show', { path: '/:id/show' });
-    this.route('raw', { path: '/:id/raw' });
-
-    this.route('revisions', { path: '/:id/revisions' }, function() {
-      this.route('index', { path: '/' });
-    });
-  });
   this.route('inbox', function() {
     this.route('archive');
     this.route('trash');
     this.route('imported');
-    this.route('ontwerpbesluiten');
     this.route('draft-decisions');
+    this.route('meetings');
+    this.route('notulen');
   });
   this.route('mock-login');
   this.route('login');
-  this.route('zetelverdeling');
 
   this.route('legaal', function() {
     this.route('disclaimer');
@@ -57,6 +47,34 @@ Router.map(function() {
     this.route('edit');
   });
 
+  this.route('draft-decisions', function() {
+    this.route('new');
+    this.route('edit', { path: '/:id/edit' });
+  });
+
+  this.route('meetings', function() {
+    this.route('new');
+    this.route('edit', { path: '/:id/edit' });
+    this.route('publish',{path: '/:id/publish'}, function() {
+      this.route('agenda');
+    });
+  });
+
+  /* legacy */
+  this.route('zetelverdeling');
+  this.route('editor-documents', function() {
+    this.route('edit', { path: '/:id/edit' });
+    this.route('new');
+    this.route('show', { path: '/:id/show' });
+    this.route('raw', { path: '/:id/raw' });
+
+    this.route('revisions', { path: '/:id/revisions' }, function() {
+      this.route('index', { path: '/' });
+    });
+  });
+
+
+  /* design mocks */
   this.route('imported-documents', function() {
     this.route('new');
     this.route('show');
@@ -65,18 +83,4 @@ Router.map(function() {
     this.route('publish');
   });
 
-  this.route('ontwerpbesluiten', function() {});
-
-  this.route('ontwerpbesluiten-documents', function() {
-    this.route('new');
-    this.route('demo-1-b');
-    this.route('demo-1-a');
-    this.route('demo-2');
-    this.route('demo-3');
-  });
-
-  this.route('draft-decisions', function() {
-    this.route('new');
-    this.route('edit', { path: '/:id/edit' });
-  });
 });

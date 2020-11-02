@@ -1,0 +1,29 @@
+<table class="data-table data-table--lined data-table--zebra">
+  <thead>
+    <tr>
+      <th>{{t "participationListModalTable.naamLabel"}}</th>
+      <th>{{t "participationListModalTable.functieLabel"}}</th>
+      <th>{{t "participationListModalTable.geboortedatumLabel"}}</th>
+      <th>
+        <div class="grid">
+          <div class="col--4-12">
+            {{t "participationListModalTable.actieLabel"}}
+          </div>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each @mandataris as |mandataris|}}
+      <ParticipationList::MandatarisRow
+        @mandataris={{mandataris}}
+        @selectedMandatees={{this.selectedMandatees}}
+        @onToggleAanwezig={{fn this.toggleAanwezigheid mandataris}}
+      />
+    {{else}}
+      <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
+    {{/each}}
+  </tbody>
+</table>
+
+{{yield}}

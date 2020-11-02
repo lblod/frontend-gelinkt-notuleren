@@ -1,0 +1,255 @@
+/* ==================================
+   #MEETING CHROME
+   ================================== */
+
+/* Variables
+   ========================================================================== */
+
+
+/* Component
+   ========================================================================== */
+
+.au-c-meeting-chrome {
+  padding: $au-unit $au-unit/2;
+  width: 100%;
+  position: relative;
+  background-color: $au-gray-100;
+
+  @include mq(small) {
+    padding: $au-unit;
+  }
+
+  @include mq(medium) {
+    padding-right: $au-unit-huge*4;
+  }
+
+  @include mq(large) {
+    padding-left: $au-unit-huge*4;
+    padding-right: $au-unit-huge*4.5;
+  }
+}
+
+.au-c-meeting-chrome__paper {
+  @include au-font-size($au-h6);
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh + #{$au-unit});
+  background-color: $au-white;
+  padding: $au-unit-large;
+  box-shadow: 0 .1rem .3rem rgba($au-gray-900, .1), 0 .4rem 2rem rgba($au-gray-900, .035), 0 .1rem .1rem rgba($au-gray-900, .025);
+  cursor: default;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.au-c-meeting-chrome-card {
+  position: relative;
+  color: $au-gray-700;
+  border: .1rem dashed $au-gray-300;
+  background-color: $au-gray-100;
+  margin-top: $au-unit-small;
+  margin-bottom: $au-unit-large + $au-unit;
+
+  .au-c-button {
+    position: absolute;
+    top: calc(100% - .1rem);
+    left: -.1rem;
+    width: calc(100% + .2rem);
+    border-color: $au-gray-300;
+    background-color: $au-white;
+  }
+}
+
+.au-c-meeting-chrome-editable {
+  position: relative;
+  padding-top: $au-unit-small;
+  color: $au-gray-700;
+  border-top: .1rem dashed $au-gray-300;
+  margin-top: $au-unit-small;
+  margin-bottom: $au-unit-large + $au-unit;
+
+  .container-flex--contain {
+    overflow: visible;
+    margin-top: -$au-unit;
+    border: .1rem solid $au-gray-200;
+  }
+
+  .say-container {
+    position: relative;
+    overflow: visible !important;
+  }
+
+  .say-container__main {
+    overflow: visible !important;
+  }
+
+  .au-c-rdfa-editor {
+    overflow: visible !important;
+  }
+
+  .tasklist {
+    display: none;
+  }
+
+  .say-editor {
+    background-color: transparent;
+    padding: $au-unit-small + $au-unit-tiny !important;
+
+    overflow: visible !important;
+  }
+
+  .say-editor__paper,
+  .say-editor__inner {
+    min-height: $au-unit-huge * 2 !important;
+    overflow: visible !important;
+  }
+
+  .say-editor__paper {
+    box-shadow: none;
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .say-editor:not(.show-rdfa-blocks) {
+    *:after {
+      display: none !important;
+    }
+
+    *:before {
+      display: none !important;
+    }
+  }
+
+  .say-toolbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .say-container__aside {
+    @include mq(medium) {
+      position: absolute;
+      left: calc(100% + #{$au-unit-large});
+      width: $au-unit-huge*4;
+      height: 100%;
+      overflow: visible;
+    }
+
+    @include mq(large) {
+      width: $au-unit-huge*4.5;
+    }
+  }
+
+  .say-editor-hints {
+    position: sticky;
+    top: 0;
+  }
+
+  .say-editor-hints__list {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.au-c-meeting-chrome__highlight {
+  background-color: $au-yellow-200;
+  cursor: not-allowed;
+}
+
+.au-c-meeting-chrome-table {
+  cursor: not-allowed;
+  @include au-font-size($au-h6);
+  display: table;
+  position: relative;
+  min-width: 50rem;
+  width: 100%;
+  border-collapse: collapse;
+
+  strong {
+    font-style: normal;
+    font-weight: 500;
+    border-bottom: .2rem dotted $au-gray-300;
+  }
+
+  thead {
+    position: relative;
+    width: 100%;
+    z-index: $au-z-index-alpha;
+    border-top: 0;
+    border-bottom: .1rem solid $au-gray-300;
+    @include au-font-size($au-base,1.2);
+  }
+
+  tbody tr {
+    border-bottom: .1rem solid $au-gray-300;
+    background-color: $au-gray-100;
+  }
+
+  th {
+    font-weight: $au-medium;
+    text-align: left;
+    padding: $au-unit-tiny $au-unit-small;
+    border-radius: 0;
+  }
+
+  td {
+    padding: $au-unit-small;
+  }
+
+  th {
+    white-space: nowrap;
+  }
+
+  th,
+  td {
+    max-width: 55ch;
+    position: relative;
+  }
+
+  th.is-selectable,
+  td.is-selectable {
+    width: $au-unit-large + $au-unit-tiny;
+  }
+
+  th + th,
+  td + td {
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: .1rem;
+      left: -.1rem;
+      top: 0;
+      height: 100%;
+      border-left: .1rem dotted $au-gray-300;
+    }
+  }
+}
+
+.au-c-meeting-sidebar {
+  opacity: .7;
+  position: fixed;
+  z-index: 1;
+  top: $au-unit-huge;
+  left: 0;
+  bottom: 0;
+  display: none;
+  padding-top: $au-unit;
+  padding-left: $au-unit-small;
+  padding-right: $au-unit-small;
+  @include au-font-size($au-h6);
+  transition: opacity $au-transition;
+
+  @include mq(large) {
+    display: block;
+    width: $au-unit-huge*4;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+}

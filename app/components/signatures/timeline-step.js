@@ -1,113 +1,139 @@
-import { computed } from '@ember/object';
-import { alias, notEmpty, or } from '@ember/object/computed';
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { task } from 'ember-concurrency';
+import Component from "@glimmer/component";
+import {inject as service} from '@ember/service';
+import {task, restartableTask} from 'ember-concurrency-decorators';
+import {tracked} from "@glimmer/tracking";
+/**
+ * @typedef {Object} Args
+ * @property {string} name Name of the kind of resource to sign/publish (e.g. 'agenda', 'besluitenlijst', ...
+ * @property {string} step Name of the current selected step
+ * @property {Object} document Versioned document to be signed/published
+ * @property {Object} mockDocument Preview of versioned document together with current document id
+ * @property {Function} signing Function to trigger the signing of the document
+ * @property {Function} publish Function to trigger the publication of the document
+ * @property {Function} [print] Function to trigger the printing of the document
+ * @property {boolean} isOpen Flag to trigger opening or closing the fold
+ * */
 
-export default Component.extend({
-  tagName: '',
-  currentSession: service(),
+/**
+ * @extends {Component<Args>}
+ */
+export default class SignaturesTimelineStep extends Component {
+  @service currentSession;
 
-  /** Name of the kind of resource to sign/publish (e.g. 'agenda', 'besluitenlijst', ... */
-  name: null,
-  /** Name of the current selected step */
-  step: null,
-  /** Versioned document to be signed/published */
-  document: null,
-  /** Preview of versioned document together with current document id */
-  mockDocument: null,
-  /** Function to trigger the signing of the document */
-  signing: null,
-  /** Function to trigger the publication of the document */
-  publish: null,
-  /** Function to trigger the printing of the document */
-  print: null,
+  @tracked
+  showSigningModal = false;
+  @tracked
+  showPublishingModal = false;
+  @tracked
+  isSignedByCurrentUser = true;
 
-  showSigningModal: false,
-  showPublishingModal: false,
+  constructor(parent, args) {
+    super(parent, args);
+    this.initTask.perform();
+  }
 
-  signaturesCount: alias('document.signedResources.length'),
-  isPublished: notEmpty('document.publishedResource.id'),
-  isSignedByCurrentUser: true,
-  isAgenda: computed('name', function() {
-    return (this.name == 'ontwerpagenda') || (this.name == 'aanvullende agenda') || (this.name == 'spoedeisende agenda')
-  }),
-
-  async init() {
-    this._super(...arguments);
-    this.set('bestuurseenheid', await this.currentSession.group);
-    const currentUser = await this.currentSession.user;
-    let firstSignatureUser = null;
-    if(this.document) {
-      const signedResources = await this.document.signedResources;
-      firstSignatureUser = await signedResources.get('firstObject').get('gebruiker');
+  get isPublished() {
+    if(this.args.document && this.args.document.publishedResource) {
+      return !! this.args.document.publishedResource.get("id");
     }
-    this.set('isSignedByCurrentUser', currentUser == firstSignatureUser);
+    return false;
+  }
 
-  },
+  get signaturesCount() {
+    return this.args.document.signedResources && this.args.document.signedResources.length;
 
-  title: computed('name', function(){
-    return `Voorvertoning ${this.name}`;
-  }),
-  header: null,
-  headerWithDefault: or('header', 'name'),
-  status: computed('signaturesCount', 'isPublished', function() {
-    if( this.isPublished )
+  }
+
+  @restartableTask
+  * initTask() {
+    this.bestuurseenheid = yield this.currentSession.group;
+    const currentUser = yield this.currentSession.user;
+    let firstSignatureUser = null;
+    if (this.args.document) {
+      const signedResources = yield this.args.document.signedResources;
+      if (signedResources.length > 0) {
+        firstSignatureUser = yield signedResources.firstObject.gebruiker;
+      }
+    }
+    this.isSignedByCurrentUser = currentUser === firstSignatureUser;
+
+  }
+
+  get isAgenda() {
+    return (this.args.name === 'ontwerpagenda') || (this.args.name === 'aanvullende agenda') || (this.args.name === 'spoedeisende agenda');
+  }
+
+  get title() {
+    return `Voorvertoning ${this.args.name}`;
+  }
+
+
+  get headerWithDefault() {
+    return this.args.header || this.args.name;
+  }
+
+  get status() {
+    if (this.isPublished)
       return 'published';
-    if( this.signaturesCount == 1 )
+    if (this.signaturesCount === 1)
       return 'firstSignature';
-    if( this.signaturesCount == 2 )
+    if (this.signaturesCount === 2)
       return 'secondSignature';
-
     return 'concept';
-  }),
-  handtekeningStatus: computed('signaturesCount', function() {
-    if( this.signaturesCount == 1 )
-      return { label: 'Tweede ondertekening vereist', color: 'primary-yellow'};
-    if( this.signaturesCount == 2 )
-      return { label: 'Ondertekend', color: 'primary-blue'};
-    return { label: 'Niet ondertekend' };
-  }),
+  }
 
-  voorVertoningStatus: computed('status', function() {
-    if( this.status == 'published' )
-      return { label: 'Publieke versie', color: 'primary-blue'};
-    if (this.status == 'firstSignature' || this.status == 'secondSignature')
-      return { label: 'Ondertekende versie', color: 'primary-yellow' };
-    return { label: 'Meest recente versie' };
-  }),
+  get handtekeningStatus() {
 
-  algemeneStatus: computed('status', function(){
-    if( this.status == 'published' )
-      return { label:'Gepubliceerd', color: 'primary-blue' };
-    if( this.status == 'firstSignature' )
-      return { label: 'Eerste ondertekening verkregen', color: 'primary-yellow'};
-    if( this.status == 'secondSignature' )
-      return { label:'Getekend', color: 'primary-yellow'};
-    if( this.status == 'concept' )
-      return { label: 'Concept'};
+    if (this.signaturesCount === 1)
+      return {label: 'Tweede ondertekening vereist', color: 'primary-yellow'};
+    if (this.signaturesCount === 2)
+      return {label: 'Ondertekend', color: 'primary-blue'};
+    return {label: 'Niet ondertekend'};
+  }
+
+  get voorVertoningStatus() {
+    if (this.status === 'published')
+      return {label: 'Publieke versie', color: 'primary-blue'};
+    if (this.status === 'firstSignature' || this.status === 'secondSignature')
+      return {label: 'Ondertekende versie', color: 'primary-yellow'};
+    return {label: 'Meest recente versie'};
+
+  }
+
+  get algemeneStatus() {
+    if (this.status === 'published')
+      return {label: 'Gepubliceerd', color: 'primary-blue'};
+    if (this.status === 'firstSignature')
+      return {label: 'Eerste ondertekening verkregen', color: 'primary-yellow'};
+    if (this.status === 'secondSignature')
+      return {label: 'Getekend', color: 'primary-yellow'};
+    if (this.status === 'concept')
+      return {label: 'Concept'};
     return 'concept';
-  }),
+  }
 
-  iconName: computed('status', function(){
-    if ( this.status == 'concept' )
+
+  get iconName() {
+    if (this.status === 'concept')
       return 'vi-edit';
-    if ( this.status == 'firstSignature' || this.status == 'secondSignature' )
+    if (this.status === 'firstSignature' || this.status === 'secondSignature')
       return 'vi-clock';
-    if ( this.status == 'published' )
+    if (this.status === 'published')
       return 'vi-news';
 
     return 'vi-edit';
-  }),
+  }
 
-  signDocument: task(function* (signedId){
-    this.set('showSigningModal', false);
-    this.set('isSignedByCurrentUser', true);
-    yield this.signing(signedId);
-  }),
+  @task
+  * signDocument(signedId) {
+    this.showSigningModal = false;
+    this.isSignedByCurrentUser = true;
+    yield this.args.signing(signedId);
+  }
 
-  publishDocument: task(function* (signedId){
-    this.set('showPublishingModal', false);
-    yield this.publish(signedId);
-  })
-});
+  @task
+  * publishDocument(signedId) {
+    this.showPublishingModal = false;
+    yield this.args.publish(signedId);
+  }
+}

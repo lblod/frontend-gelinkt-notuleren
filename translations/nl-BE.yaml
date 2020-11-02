@@ -7,3 +7,183 @@ inbox:
     createdOnLabel: Aangemaakt
     updatedOnLabel: Aangepast
     statusLabel: Status
+publish:
+  backToMeeting: Terug naar zitting
+behandelingVanAgendapunten:
+  saveButton: Opslaan
+  openbaarLabel: "maak agendapunt openbaar"
+  participationListButton: Aanwezigen
+  visibility: "Zichtbaarheid:"
+  needsParticipants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
+meetingForm:
+  incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
+  backButton: Terug naar overzicht zittingen
+  scheduledText: Zitting gepland op
+  publishButton: Ondertekenen en publiceren
+  firstSectionTitle: 1. Algemene informatie over de zitting
+  secondSectionTitle: 2. Aanwezigen bij de start van de zitting
+  thirdSectionTitle: 3. Agenda van de zitting
+  fourthSectionTitle: 4. Behandeling van de agendapunten
+  fifthSectionTitle: 5. Beëindiging van de zitting
+  meetingHeadingPartOne: Notulen van
+  meetingHeadingPartTwo: van
+  firstSectionNotFilledWarning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
+  bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+manageZittingsData:
+  modalTitle: Beheer algemene informatie over de zitting
+  bestuursorganLabel: "Gehouden door:"
+  geplandeStartLabel: "Geplande start:"
+  opLocatieLabel: "Op locatie:"
+  gestartOpTijdstipLabel: "Gestart op:"
+  geeindigdOpTijdstipLabel: "Beëindigd op:"
+  saveButton: Voeg zittingsdata in
+  cancelButton: Terug
+  openModalButton: Beheer algemene zittingsdata
+  selectPlaceholder: Selecteer bestuursorgaan
+participation:
+  presentLabel: "Aanwezige mandatarissen:"
+participationList:
+  loadingTitle: Bezig met laden van de aanwezigenlijst
+  loadingLoader: Aan het laden
+  voorzitterLabel: "Voorzitter:"
+  secretarisLabel: "Secretaris:"
+  presentLabel: "Aanwezige mandatarissen:"
+  notPresentLabel: "Afwezige mandatarissen:"
+  openModalButton: Beheer aanwezigen bij start van de zitting
+participationListModal:
+  voorzitterLabel: Voorzitter van de zitting
+  secretarisLabel: Secretaris van de zitting
+  presentLabel: Aanwezige mandatarissen
+  saveButton: Voeg aanwezigen in
+  cancelButton: Annuleer
+participationListModalSelector:
+  loadingMessage: Aan het laden...
+  noMatchesMessage: Geen resultaten
+  searchMessage: Typ om te zoeken
+  placeholder: Zoek op achternaam
+participationListModalTable:
+  naamLabel: Naam
+  functieLabel: Functie
+  geboortedatumLabel: Geboortedatum
+  actieLabel: Actie
+  checkboxLabel: Aanwezig
+  noDataMessage: Geen mandatarissen gevonden.
+manageAgendaZitting:
+  titelLabel: Titel
+  beschrijvingLabel: Beschrijving
+  geplandOpenbaar: Gepland openbaar
+  openModalButton: Beheer agenda
+manageAgendaZittingModal:
+  modalTitle: Beheer Agenda
+  saveButton: Bewaar agendapunt
+  saveAllButton: Bewaar agenda
+  cancelEditingButton: Annuleer
+  cancelButton: Terug
+  orderLabel: Volgorde
+  titleLabel: Titel agendapunt
+  beschrijvingLabel: Beschrijving agendapunt
+  geplandOpenbaar: Geplande openbaarheid
+  actionsLabel: Acties
+  createItemButton: Voeg agendapunt toe
+  editItemButton: Bewerk agendapunt
+  noDataMessage: Geen agendapunten gevonden.
+  geplandOpenbaarTrueLabel: Openbaar
+  geplandOpenbaarFalseLabel: Besloten
+manageAgendaZittingModalEdit:
+  modalSubtitle: Bewerk agendapunt
+  geplandOpenbaarTrueLabel: Gepland openbaar agendapunt
+  geplandOpenbaarFalseLabel: Gepland besloten agendapunt
+manageAgendaZittingModalDelete:
+  modalSubtitle: Verwijder agendapunt
+  toggleEditButton: Behoud agendapunt en behandeling
+  deleteButton: Verwijder agendapunt
+  toggleWarningButton: Verwijder het agendapunt en de behandeling van het agendapunt
+  warningPartOne: U kan deze actie niet ongedaan maken.
+  warningPartTwo: U verwijdert het agendapunt uit de agenda, en de volledige behandeling van het agendapunt.
+  agreeQuestion: Bent u zeker dat u het agendapunt en de behandeling wil verwijderen?
+  checkboxLabel: Ik begrijp dat het agendapunt en de behandeling van het agendapunt onomkeerbaar verwijderd worden.
+manageAgendaZittingModalMove:
+  title: Verplaats agendapunt
+  positionSelectPlaceholder: Selecteer positie
+  agendapuntSelectPlaceholder: Selecteer agendapunt
+  searchPlaceholder: Zoek op titel
+voting:
+  openModalButton: Beheer stemming
+votingModal:
+  modalTitle: Beheer stemming
+  onderwerpLabel: Onderwerp
+  typeLabel: Type
+  stemmenLabel: Stemmen
+  gevolgLabel: Gevolg
+  actionsLabel: Actie
+  createVotingButton: Nieuwe stemming
+  subjectNotFound: Geen onderwerp
+  geheimTrueLabel: Geheim
+  geheimFalseLabel: Openbaar
+  aantalVoorstandersLabel: "Voorstanders:"
+  aantalTegenstandersLabel: "Tegenstanders:"
+  aantalOnthoudersLabel: "Onthouders:"
+  gevolgNotFound: Geen gevolg
+  toggleEditButton: Bewerk
+  deleteButton: Verwijder
+  noDataMessage: Geen stemmingen gevonden
+votingEdit:
+  firstStepTitle: 1. Geef onderwerp in
+  firstStepIntroduction: De raad stemt,
+  firstStepExplanation: "Het onderwerp van een stemming kan bijvoorbeeld zijn: het voorstel van besluit, een amendement, de al dan niet
+  behandeling van een agendapunt, de open of besloten behandeling van een agendapunt, een verdaging, een
+  tussenkomst."
+  privateVotingCheckbox: Maak stemming geheim
+  secondStep: 2. Beheer aanwezigen en stemmen
+  thirdStep: 3. Geef gevolg in
+  thirdStepIntroduction: Met als gevolg,
+  thirdStepExplanation: Het gevolg van een stemming kan bijvoorbeeld goedgekeurd, afgekeurd of verdaagd zijn.
+  fourthStepTitle: 4. Bewaar stemming
+  fourthStepExplanationPartOne: Uw wijzigingen worden niet ingevoegd tot u op
+  fourthStepExplanationPartTwo: klikt.
+  saveButton: Bewaar stemming
+  cancelButton: Annuleer
+  inputPlaceholder: Typ hier...
+  naamLabel: Naam
+  hoedanigheidLabel: Hoedanigheid
+  actionsLabel: Actie
+  loadingText: Bezig met laden...
+  noDataMessage: Geen aanwezigen gevonden. Voeg een nieuwe aanwezige toe.
+  selectPlaceholder: Selecteer
+  addItemButton: Geef stemrecht
+  removeItemButton: Verwijder stemrecht
+votingManageVoting:
+  title: Geef aanwezigen en stemmers in
+  subtitle: Geef aantal stemmen in
+  setUnaniemVoorstanderButton: Geef unaniem voorstander in
+  setUnaniemTegenstanderButton: Geef unaniem tegenstander in
+  setUnaniemOnthouderButton: Geef unaniem onthouder in
+  saveVotesButton: Stemmen opslaan
+  cancelVotesButton: Annuleer
+  startManageVotesButton: Beheer stemmen
+
+timelineStep:
+  signingRestrictionInfo: "Ondertekenen kan enkel door de aangezen personen met de rol "
+  signingRestrictionRole: "ondertekenaar"
+  signingRestrictionEnd: " binnen het orgaan."
+  firstSignature: Eerste ondertekening
+  secondSignature: Tweede ondertekening
+  signButtonLabel: "Onderteken {name}"
+  printButtonLabel: "Print {name}"
+  printInfo: "Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd."
+  secondPrintInfo: "Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt."
+  publishButtonLabel: "Publiceer {name}"
+  publishNotifyButtonLabel: "Publiceer en meld {name}"
+  publishRestrictionInfo: "Publiceren kan enkel door personen met de rol "
+  publishRestrictionRole: "publiceerder"
+  publishRestrictionEnd: "."
+  linkPublish: "Link publicate"
+  timingWarning: "Het kan tot 5 minuten duren voor u de publicatie kan zien op bovenstaande link."
+  publicationType: Type publicatie
+  publicForAll: Publiek voor iedereen
+  publicationConsequences: Gevolgen publicatie
+  previewInfo: "Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar "
+  previewInfoEnd: ", en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie."
+  notifyConsequences: Gevolgen melding
+  notifyInfo: "Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
+  localLoket: "Loket voor Lokale Besturen"

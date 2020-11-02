@@ -1,0 +1,123 @@
+{{#if @show}}
+  <WuModal
+    @title={{t "votingModal.modalTitle"}}
+    @dialog-class="modal-dialog--wide modal-dialog--sectioned"
+    @onClose={{@onClose}}
+  >
+    {{#if this.editMode}}
+      <Treatment::Voting::Edit
+        @onCancel={{this.onCancelEdit}}
+        @onSave={{perform this.saveStemming}}
+        @bestuursorgaan={{@bestuursorgaan}}
+        @disableButtons={{this.disableButtons}}
+      />
+    {{/if}}
+    <table class="data-table data-table--lined data-table--zebra">
+      <thead>
+        <tr>
+          <th style="max-width: 30rem;">
+            {{t "votingModal.onderwerpLabel"}}
+          </th>
+          <th>
+            {{t "votingModal.typeLabel"}}
+          </th>
+          <th>
+            {{t "votingModal.stemmenLabel"}}
+          </th>
+          <th style="max-width: 30rem;">
+            {{t "votingModal.gevolgLabel"}}
+          </th>
+          <th>
+            <div class="grid">
+              <div class="col--4-12">
+                {{t "votingModal.actionsLabel"}}
+              </div>
+              <div class="col--8-12 u-align--right">
+                <WuLinkButton
+                  class="button--small"
+                  @isNarrow={{true}}
+                  @onClick={{perform this.addStemming}}
+                >
+                  <i class="vi vi-plus vi-u-s"></i>
+                  {{t "votingModal.createVotingButton"}}
+                </WuLinkButton>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#if this.fetchStemmingen.lastSuccessful}}
+          {{#each this.stemmingen as |stemming|}}
+            <tr>
+              <td style="max-width: 30rem;">
+                {{#if stemming.onderwerp}}
+                  {{stemming.onderwerp}}
+                {{else}}
+                  <i class="text-fade">
+                    {{t "votingModal.subjectNotFound"}}
+                  </i>
+                {{/if}}
+              </td>
+              <td>
+                {{#if stemming.geheim}}
+                  {{t "votingModal.geheimTrueLabel"}}
+                {{else}}
+                  {{t "votingModal.geheimFalseLabel"}}
+                {{/if}}
+              </td>
+              <td>
+                <p>
+                  {{t "votingModal.aantalVoorstandersLabel"}} {{stemming.aantalVoorstanders}}
+                </p>
+                <p>
+                  {{t "votingModal.aantalTegenstandersLabel"}} {{stemming.aantalTegenstanders}}
+                </p>
+                <p>
+                  {{t "votingModal.aantalOnthoudersLabel"}} {{stemming.aantalOnthouders}}
+                </p>
+              </td>
+              <td style="max-width: 30rem;">
+                {{#if stemming.gevolg}}
+                  {{stemming.gevolg}}
+                {{else}}
+                  <i class="text-fade">
+                    {{t "votingModal.gevolgNotFound"}}
+                  </i>
+                {{/if}}
+              </td>
+              <td>
+                <WuButtonGroup>
+                  <WuLinkButton
+                    class="button--small"
+                    @isNarrow={{true}}
+                    @onClick={{fn this.toggleEditStemming stemming}}
+                  >
+                    <i class="vi vi-edit vi-u-s"></i>
+                    {{t "votingModal.toggleEditButton"}}
+                  </WuLinkButton>
+                  <WuLinkButton
+                    class="button--small button--alt"
+                    @isNarrow={{true}}
+                    @onClick={{fn this.removeStemming stemming}}
+                  >
+                    <i class="vi vi-cross vi-u-s"></i>
+                    {{t "votingModal.deleteButton"}}
+                  </WuLinkButton>
+                </WuButtonGroup>
+              </td>
+            </tr>
+          {{else}}
+            <tr>
+              <td colspan="5" style="background-color: white; height: 10rem;">
+                <p class="text-fade">
+                  {{t "votingModal.noDataMessage"}}
+                </p>
+              </td>
+            </tr>
+          {{/each}}
+        {{/if}}
+      </tbody>
+    </table>
+  </WuModal>
+{{/if}}

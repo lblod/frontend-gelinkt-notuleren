@@ -1,0 +1,55 @@
+{{#if @show}}
+  <div {{did-insert (perform this.fetchData)}}>
+    {{#wu-modal
+      title="Beheer aanwezigen"
+      dialog-class="modal-dialog--wide modal-dialog--sectioned"
+      onClose=(action 'togglePopup')
+      as |m|}}
+      {{#m.content isSectioned=false}}
+        {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
+          <p>{{t "participationList.loadingTitle"}}</p>
+          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
+        {{else}}
+          <div class="au-o-box au-o-box--small au-o-flow">
+            <div>
+              <AuLabel>
+                {{t "participationListModal.voorzitterLabel"}}
+              </AuLabel>
+              <ParticipationList::MandatarisSelector
+                @onSelect={{this.selectVoorzitter}}
+                @mandataris={{this.voorzitter}}
+                @bestuursorgaan={{@bestuursorgaan}}
+              />
+            </div>
+
+            <div>
+              <AuLabel>Secretaris van de zitting</AuLabel>
+              <ParticipationList::FunctionarisSelector
+                o@onSelect={{this.selectSecretaris}}
+                @functionaris={{this.secretaris}}
+                @bestuursorgaan={{@bestuursorgaan}}
+              />
+            </div>
+            <div>
+              <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
+              <ParticipationList::MandatarissenTable
+                @mandataris={{this.mandataris}}
+                @selected={{@aanwezigenBijStart}}
+                @onChange={{this.updateMandatarisTable}}
+              />
+            </div>
+          </div>
+        {{/if}}
+        {{yield}}
+      {{/m.content}}
+      <AuToolbar @border="top" @size="large">
+        <AuToolbarGroup>
+          <AuButtonGroup>
+            <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
+            <AuButton @skin="secondary" {{on "click" this.togglePopup}}>{{t "participationListModal.cancelButton"}}</AuButton>
+          </AuButtonGroup>
+        </AuToolbarGroup>
+      </AuToolbar>
+    {{/wu-modal}}
+  </div>
+{{/if}}

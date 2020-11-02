@@ -1,0 +1,12 @@
+<tr>
+  <td>{{@mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{@mandataris.isBestuurlijkeAliasVan.achternaam}}</td>
+  <td>{{@mandataris.bekleedt.bestuursfunctie.label}}</td>
+  <td>{{moment-format @mandataris.isBestuurlijkeAliasVan.geboorte.datum 'DD/MM/YYYY'}}</td>
+  <td>
+    <label class="checkbox checkbox--block">
+      <Input class="checkbox__toggle" @type="checkbox" @checked={{this.selected}} @click={{this.toggle}} />
+      <span></span>
+      <strong>{{t "participationListModalTable.checkboxLabel"}}</strong>
+    </label>
+  </td>
+</tr>

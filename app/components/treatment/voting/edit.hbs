@@ -1,0 +1,63 @@
+<WuModal @title="Bewerk stemming" @dialog-class="modal-dialog--wide" @onClose={{this.cancel}}>
+  <div class="u-padding--round--small">
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      {{t "votingEdit.firstStepTitle"}}
+    </h3>
+    <div class="form__row u-spacer">
+      <label class="form__label">
+        {{t "votingEdit.firstStepIntroduction"}}
+      </label>
+      <Input class="textarea textarea--block" @type="textarea" @cols="40" @rows="4" @placeholder={{t "votingEdit.inputPlaceholder"}}
+        @value={{this.editStemming.stemming.onderwerp}} />
+      <p class="smaller text-fade">
+        {{t "votingEdit.firstStepExplanation"}}
+      </p>
+
+      <label>
+        <Input @type="checkbox" @checked={{this.editStemming.stemming.geheim}} />
+        {{t "votingEdit.privateVotingCheckbox"}}
+      </label>
+    </div>
+
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      {{t "votingEdit.secondStep"}}
+    </h3>
+    <div class="form__row u-spacer">
+      <Treatment::Voting::ManageVoters />
+    </div>
+
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      {{t "votingEdit.thirdStep"}}
+    </h3>
+    <div class="form__row u-spacer">
+      <label class="form__label">
+        {{t "votingEdit.thirdStepIntroduction"}}
+      </label>
+      <Input @type="textarea" class="textarea textarea--block" @cols="40" @rows="4" @placeholder={{t "votingEdit.inputPlaceholder"}}
+        @value={{this.editStemming.stemming.gevolg}} />
+      <p class="smaller text-fade">
+        {{t "votingEdit.thirdStepExplanation"}}
+      </p>
+    </div>
+
+    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
+      {{t "votingEdit.fourthStepTitle"}}
+    </h3>
+    <p class="smaller u-spacer">
+      {{t "votingEdit.fourthStepExplanationPartOne"}}
+      <strong>
+        {{t "votingEdit.saveButton"}}
+      </strong>
+      {{t "votingEdit.fourthStepExplanationPartTwo"}}
+    </p>
+    <AuButtonGroup class="u-spacer">
+      <AuButton @isNarrow={{true}} {{on "click" this.save}}>
+        <i class="vi vi-check vi-u-s"></i>
+        {{t "votingEdit.saveButton"}}
+      </AuButton>
+      <AuButton @isNarrow={{true}} @isAlt={{true}} {{on "click" this.cancel}}>
+        {{t "votingEdit.cancelButton"}}
+      </AuButton>
+    </AuButtonGroup>
+  </div>
+</WuModal>

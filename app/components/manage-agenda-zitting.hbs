@@ -1,0 +1,43 @@
+<div class="au-c-meeting-chrome-card">
+  <table class="au-c-meeting-chrome-table">
+    <thead>
+      <th>
+        {{t "manageAgendaZitting.titelLabel"}}
+      </th>
+      <th>
+        {{t "manageAgendaZitting.beschrijvingLabel"}}
+      </th>
+      <th>
+        {{t "manageAgendaZitting.geplandOpenbaar"}}
+      </th>
+    </thead>
+    <tbody>
+      {{#each @zitting.agendapunten as |agendapunt|}}
+        <tr>
+          <td>
+            <strong>{{agendapunt.titel}}</strong>
+          </td>
+          <td>
+            {{agendapunt.beschrijving}}
+          </td>
+          <td>
+            {{agendapunt.geplandOpenbaar}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <AuButton
+    @width="block"
+    @skin="secondary"
+    @icon="pencil"
+    @iconAlignment="left"
+    {{on "click" (action (mut popup) true)}}
+  >
+    {{t "manageAgendaZitting.openModalButton"}}
+  </AuButton>
+</div>
+
+{{#if this.popup}}
+  <Agenda::modal @zitting={{@zitting}} @agendapunten={{@zitting.agendapunten}} @afterSave={{@onChange}} @cancel={{this.cancel}}/>
+{{/if}}
