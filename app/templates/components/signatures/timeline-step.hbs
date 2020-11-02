@@ -14,47 +14,47 @@
     </step.block>
     <step.block @title={{concat "Onderteken " @name}} @pillColor={{this.handtekeningStatus.color}}
                 @pillName={{this.handtekeningStatus.label}}>
-      <p class="u-spacer--small text-light">Ondertekenen kan enkel door de aangewezen personen met de rol <a
+      <p class="u-spacer--small text-light">{{t "timelineStep.signingRestrictionInfo"}}<a
               href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer"
-              target="_blank">ondertekenaar</a> binnen het orgaan.</p>
+              target="_blank">{{t "timelineStep.signingRestrictionRole"}}</a>{{t "timelineStep.signingRestrictionEnd"}}</p>
       <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
         <div class="grid">
           {{#if (eq this.signaturesCount 2)}}
             {{#each @document.signedResources as |signature index|}}
               {{#if (eq index 0)}}
                 <div class="col--5-12">
-                  <p class="uppercase text-fade smaller">Eerste ondertekening</p>
+                  <p class="uppercase text-fade smaller">{{t "timelineStep.firstSignature"}}</p>
                   <Signatures::SignedResource @signature={{signature}} />
                 </div>
               {{else}}
                 <div class="col--5-12 push--1-12">
-                  <p class="uppercase text-fade smaller">Tweede ondertekening</p>
+                  <p class="uppercase text-fade smaller">{{t "timelineStep.secondSignature"}}</p>
                   <Signatures::SignedResource @signature={{signature}} />
                 </div>
               {{/if}}
             {{/each}}
           {{else if (eq this.signaturesCount 1)}}
             <div class="col--5-12">
-              <p class="uppercase text-fade smaller">Eerste ondertekening</p>
+              <p class="uppercase text-fade smaller">{{t "timelineStep.firstSignature"}}</p>
               <Signatures::SignedResource @signature={{@document.signedResources.firstObject}} />
             </div>
             <div class="col--5-12 push--1-12">
-              <p class="uppercase text-fade smaller">Tweede ondertekening</p>
-              <WuButton @label={{concat "Onderteken " @name}} @isNarrow={{true}} @class="u-spacer--top--tiny"
+              <p class="uppercase text-fade smaller">{{t "timelineStep.secondSignature"}}</p>
+              <WuButton @label={{t "timelineStep.signButtonLabel" name=@name}} @isNarrow={{true}} @class="u-spacer--top--tiny"
                         @onClick={{fn (mut this.showSigningModal) true}} @isLoading={{this.signDocument.isRunning}}
                         @disabled={{or (or (not this.currentSession.canSign) this.signDocument.isRunning)
                                        this.isSignedByCurrentUser}} />
             </div>
           {{else}} {{!-- No signatures placed --}}
             <div class="col--5-12">
-              <p class="uppercase text-fade smaller">Eerste ondertekening</p>
-              <WuButton @label={{concat "Onderteken " @name}} @class="u-spacer--top--tiny" @isNarrow={{true}}
+              <p class="uppercase text-fade smaller">{{t "timelineStep.firstSignature"}}</p>
+              <WuButton @label={{t "timelineStep.signButtonLabel" name=@name}} @class="u-spacer--top--tiny" @isNarrow={{true}}
                         @onClick={{fn (mut this.showSigningModal) true}} @isLoading={{this.signDocument.isRunning}}
                         @disabled={{or (not this.currentSession.canSign) this.signDocument.isRunning}} />
             </div>
             <div class="col--5-12 push--1-12">
-              <p class="uppercase text-fade smaller">Tweede ondertekening</p>
-              <WuButton @label={{concat "Onderteken " @name}} @class="u-spacer--top--tiny" @isNarrow={{true}}
+              <p class="uppercase text-fade smaller">{{t "timelineStep.secondSignature"}}</p>
+              <WuButton @label={{t "timelineStep.signButtonLabel" name=@name}} @class="u-spacer--top--tiny" @isNarrow={{true}}
                         @onClick={{fn (mut this.showSigningModal) true}} @isLoading={{this.signDocument.isRunning}}
                         @disabled={{true}} />
             </div>
@@ -68,28 +68,25 @@
       </div>
     </step.block>
     {{#if @print}}
-      <step.block @title={{concat "Print " @name}} @pillName={{null}}>
-        <p class="u-spacer--bottom--tiny text-light">Een print (of PDF) maken kan op elk moment, door iedereen die
-          toegang
-          heeft tot de notulen &mdash; nadat het document ondertekend werd.</p>
+      <step.block @title={{t "timelineStep.printButtonLabel" name=@name}} @pillName={{null}}>
+        <p class="u-spacer--bottom--tiny text-light"></p>
         <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
           <div class="grid">
             <div class="col--12-12">
-              <WuButton @label={{concat "Print " @name}} @class="u-spacer--tb--tiny" @onClick={{fn this.print
+              <WuButton @label={{t "timelineStep.printButtonLabel" name=@name}} @class="u-spacer--tb--tiny" @onClick={{fn this.print
                                                                                                    @document.id}}
                         @disabled={{not this.signaturesCount}} />
-              <p class="smaller">Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern
-                beschikbaar gemaakt.</p>
+              <p class="smaller">{{t "timelineStep.secondPrintInfo"}}</p>
             </div>
           </div>
         </div>
       </step.block>
     {{/if}}
-    <step.block @title={{concat "Publiceer " @name}} @pillColor={{if @document.publishedResource "primary-blue"}}
+    <step.block @title={{t "timelineStep.publishButtonLabel" name=@name}} @pillColor={{if @document.publishedResource "primary-blue"}}
                 @pillName={{if @document.publishedResource "Publiek" "Niet publiek"}}>
-      <p class="u-spacer--bottom--tiny text-light">Publiceren kan enkel door personen met de rol <a
+      <p class="u-spacer--bottom--tiny text-light">{{t "timelineStep.publishRestrictionInfo"}}<a
               href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer"
-              target="_blank">publiceerder</a>.</p>
+              target="_blank">{{t "timelineStep.publishRestrictionRole"}}</a>{{t "timelineStep.publishRestrictionEnd"}}</p>
       <div class="u-background--gray-lightest u-padding--round--small u-spacer--tb--small">
         <div class="grid">
           {{#if this.isPublished}}
@@ -97,42 +94,37 @@
               <Signatures::PublishedResource @signature={{@document.publishedResource}} />
             </div>
             <div class="col--6-12">
-              <p class="smaller uppercase text-fade">Link publicatie</p>
+              <p class="smaller uppercase text-fade">{{t "timelineStep.linkPublish"}}</p>
               <p>
                 <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}"
                    target="_blank"
                    class="word-break--break-word">publicatie.gelinkt-notuleren.vlaanderen.be/{{this.bestuurseenheid.naam}}
                   /{{this.bestuurseenheid.classificatie.label}}</a></p>
-              <p class="smaller u-spacer--bottom--small">Het kan tot 5 minuten duren voor u de publicatie kan zien op
-                bovenstaande link.</p>
-              <p class="smaller uppercase text-fade">Type publicatie</p>
-              <p class="u-spacer--tb--tinier">Publiek voor iedereen</p>
+              <p class="smaller u-spacer--bottom--small">{{t "timelineStep.timingWarning"}}</p>
+              <p class="smaller uppercase text-fade">{{t "timelinseStep.publicationType"}}</p>
+              <p class="u-spacer--tb--tinier">{{t "timelineStep.publicForAll"}}</p>
             </div>
           {{else}}
             <div class="col--9-12">
               {{#if this.isAgenda}}
-                <WuButton @label={{concat "Publiceer " @name}} @class="u-spacer--bottom--small" @onClick={{fn
+                <WuButton @label={{t "timelineStep.publishButtonLabel" name=@name}} @class="u-spacer--bottom--small" @onClick={{fn
                         (mut this.showPublishingModal) true}} @isNarrow={{true}}
                           @isLoading={{this.publishDocument.isRunning}}
                           @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}} />
               {{else}}
-                <WuButton @label={{concat "Publiceer en meld " @name}} @class="u-spacer--bottom--small" @onClick={{fn
+                <WuButton @label={{t "timelineStep.publishNotifyButtonLabel" name=@name}} @class="u-spacer--bottom--small" @onClick={{fn
                         (mut this.showPublishingModal) true}} @isNarrow={{true}}
                           @isLoading={{this.publishDocument.isRunning}}
                           @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}} />
               {{/if}}
 
-              <p class="smaller uppercase text-fade">Gevolgen publicatie</p>
-              <p class="small u-spacer--bottom--small">Het document wordt gepubliceerd zoals bovenaan in de
-                voorvertoning
-                naar <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>,
-                en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie.</p>
+              <p class="smaller uppercase text-fade">{{t "timelineStep.publicationConsequences"}}</p>
+              <p class="small u-spacer--bottom--small">{{t "timelineStep.previewInfo"}}<a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>{{t "timelineStep.previewInfoEnd"}}</p>
 
               {{#unless this.isAgenda}}
-                <p class="smaller uppercase text-fade">Gevolgen melding</p>
-                <p class="small u-spacer--bottom--small">Het document wordt automatisch gemeld aan de toezichthoudende
-                  overheid, en zal zichtbaar zijn in het <a href="https://loket.lokaalbestuur.vlaanderen.be/"
-                                                            target="_blank">Loket voor Lokale Besturen</a>.</p>
+                <p class="smaller uppercase text-fade">{{t "timelineStep.notifyConsequences"}}</p>
+                <p class="small u-spacer--bottom--small">{{t "timelineStep.notifyInfo"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/"
+                                                            target="_blank">{{t "timelineStep.localLoket"}}</a>.</p>
               {{/unless}}
             </div>
           {{/if}}

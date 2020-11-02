@@ -39,9 +39,12 @@ export default class TreatmentVotingModalComponent extends Component {
   @task
   /** @type {import("ember-concurrency").Task} */
   saveStemming = function* () {
+    const isNew = this.editStemming.stemming.isNew;
     yield this.editStemming.saveTask.perform();
-    this.args.behandeling.stemmingen.pushObject(this.editStemming.stemming);
-    yield this.args.behandeling.save();
+    if (isNew) {
+      this.args.behandeling.stemmingen.pushObject(this.editStemming.stemming);
+      this.args.behandeling.save();
+    }
     yield this.fetchStemmingen.perform();
     this.onCancelEdit();
   };
@@ -54,18 +57,12 @@ export default class TreatmentVotingModalComponent extends Component {
       const aanwezigen = yield this.args.behandeling.aanwezigen;
 
       const stemmingToEdit = this.store.createRecord("stemming", {
-        onderwerp: {
-          content: "",
-          language: "nl",
-        },
+        onderwerp: "",
         geheim: false,
         aantalVoorstanders: 0,
         aantalTegenstanders: 0,
         aantalOnthouders: 0,
-        gevolg: {
-          content: "",
-          language: "nl",
-        },
+        gevolg: "",
       });
       this.editMode = true;
       stemmingToEdit.aanwezigen.pushObjects(aanwezigen);
@@ -85,6 +82,7 @@ export default class TreatmentVotingModalComponent extends Component {
   @action
   onCancelEdit() {
     this.editMode = false;
+    this.editStemming.stemming.rollbackAttributes();
     this.editStemming.stemming = null;
   }
 }

@@ -1,6 +1,6 @@
-import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
-import Component from '@glimmer/component';
+import { action } from "@ember/object";
+import { tracked } from "@glimmer/tracking";
+import Component from "@glimmer/component";
 /**
  * @typedef {import("../../models/mandataris").default} Mandataris
  * @typedef {import("../../models/behandeling-van-agendapunt").default} Behandeling
@@ -44,6 +44,5 @@ export default class TreatmentParticipationComponent extends Component {
     this.behandeling.secretaris = participants.secretaris;
     this.behandeling.aanwezigen = participants.aanwezigenBijStart;
     await this.behandeling.save();
-
   }
 }

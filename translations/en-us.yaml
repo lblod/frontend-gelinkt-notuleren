@@ -14,6 +14,7 @@ behandelingVanAgendapunten:
   openbaarLabel: "make agendapoint public"
   participationListButton: Attendees
   visibility: "visibility"
+  needsParticipants: Please configure the participants to this agenda-item before adding a voting.
 meetingForm:
   incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
   backButton: Back to meetings
@@ -39,6 +40,8 @@ manageZittingsData:
   cancelButton: Back
   openModalButton: Manage general data of the meeting
   selectPlaceholder: Select governing body
+participation:
+  presentLabel: "Present mandatees:"
 participationList:
   loadingTitle: Loading the attendee list
   loadingLoader: Loading
@@ -73,6 +76,7 @@ manageAgendaZitting:
 manageAgendaZittingModal:
   modalTitle: Manage agenda
   saveButton: Save agenda item
+  saveAllButton: Save agenda
   cancelEditingButton: Cancel
   cancelButton: Back
   orderLabel: Order
@@ -98,6 +102,11 @@ manageAgendaZittingModalDelete:
   warningPartTwo: You are going to remove the agenda item from the agenda, and the complete treatment of the agenda item.
   agreeQuestion: Are you sure you want to delete the agenda item and the treatment?
   checkboxLabel: I understand that the agenda item and the treatment of the agenda item will be irreversibly removed.
+manageAgendaZittingModalMove:
+  title: Move agenda item
+  positionSelectPlaceholder: Select position
+  agendapuntSelectPlaceholder: Select agenda item
+  searchPlaceholder: Search by title
 voting:
   openModalButton: Manage voting
 votingModal:
@@ -153,3 +162,29 @@ votingManageVoting:
   cancelVotesButton: Cancel
   startManageVotesButton: Manage voting
 
+
+timelineStep:
+  signingRestrictionInfo: "Signing is only possible by authorized persons which have been assigned to the "
+  signingRestrictionRole: "signer role"
+  signingRestrictionEnd: " within the organization."
+  firstSignature: First signature
+  secondSignature: Second signature
+  signButtonLabel: "Sign {name}"
+  printButtonLabel: "Print {name}"
+  printInfo: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
+  secondPrintInfo: "Printing is only possible after the document has been signed. This print will not be made available externally."
+  publishButtonLabel: "Publish {name}"
+  publishNotifyButtonLabel: "Publish and notify {name}"
+  publishRestrictionInfo: "Publishing is only possible by persons with the "
+  publishRestrictionRole: "publisher"
+  publishRestrictionEnd: " role."
+  linkPublish: "Link publication"
+  timingWarning: "It can take up to 5 minutes before the publication is visible on the above link."
+  publicationType: Publication type
+  publicForAll: Visible for everyone
+  publicationConsequences: Consequences publication
+  previewInfo: "The document will be published as seen in the preview above to "
+  previewInfoEnd: ", and will be publicly available to anyone, without authentication."
+  notifyConsequences: Consequences notification
+  notifyInfo: "A notification will be sent for this document to the authoritative government and will be visible in the "
+  localLoket: "Loket voor Lokale Besturen"

@@ -13,8 +13,12 @@ export default class ParticipationListModalComponent extends Component {
 
   constructor() {
     super(...arguments);
+    this.initializeState();
+  }
+  initializeState() {
     this.voorzitter = this.args.voorzitter;
     this.secretaris = this.args.secretaris;
+
   }
 
   @task
@@ -32,6 +36,7 @@ export default class ParticipationListModalComponent extends Component {
     if(e) {
       e.preventDefault();
     }
+    this.initializeState();
     this.args.togglePopup(e);
   }
   @action

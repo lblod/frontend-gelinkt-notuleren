@@ -1,0 +1,37 @@
+<label class="form__label">{{t "manageAgendaZittingModalMove.title"}}
+  <div class="grid">
+    <div class="col--6-12">
+      <PowerSelect
+        @class="select select--block u-spacer--tiny"
+        @renderInPlace={{true}}
+        @placeholder={{t "manageAgendaZittingModalMove.positionSelectPlaceholder"}}
+        @options={{this.locationOptions}}
+        @verticalPosition="above"
+        @searchEnabled={{false}}
+        @selected={{@selectedLocation}}
+        @allowClear={{true}}
+        @onchange={{@selectLocation}}
+        as |location|>
+        {{location.name}}
+      </PowerSelect>
+    </div>
+    {{#if @showAfterAgendapuntOptions}}
+      <div class="col--6-12">
+        <PowerSelect
+          @class="js-select u-spacer--small"
+          @renderInPlace={{true}}
+          @placeholder={{t "manageAgendaZittingModalMove.agendapuntSelectPlaceholder"}}
+          @searchPlaceholder={{t "manageAgendaZittingModalMove.searchPlaceholder"}}
+          @verticalPosition="above"
+          @options={{@afterAgendapuntOptions}}
+          @searchField="titel"
+          @selected={{@selectedAfterAgendapunt}}
+          @onchange={{@selectAfterAgendapunt}}
+          as |a|>
+          {{a.titel}}
+        </PowerSelect>
+      </div>
+    {{/if}}
+  </div>
+</label>
+{{yield}}

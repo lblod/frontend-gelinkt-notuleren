@@ -8,7 +8,7 @@
         {{t "votingEdit.firstStepIntroduction"}}
       </label>
       <Input class="textarea textarea--block" @type="textarea" @cols="40" @rows="4" @placeholder={{t "votingEdit.inputPlaceholder"}}
-        @value={{this.editStemming.stemming.onderwerp.content}} />
+        @value={{this.editStemming.stemming.onderwerp}} />
       <p class="smaller text-fade">
         {{t "votingEdit.firstStepExplanation"}}
       </p>
@@ -34,7 +34,7 @@
         {{t "votingEdit.thirdStepIntroduction"}}
       </label>
       <Input @type="textarea" class="textarea textarea--block" @cols="40" @rows="4" @placeholder={{t "votingEdit.inputPlaceholder"}}
-        @value={{this.editStemming.stemming.gevolg.content}} />
+        @value={{this.editStemming.stemming.gevolg}} />
       <p class="smaller text-fade">
         {{t "votingEdit.thirdStepExplanation"}}
       </p>

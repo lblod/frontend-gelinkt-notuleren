@@ -17,13 +17,13 @@
       </div>
 
       {{#wu-button
-           onClick=@toggleEditing
+           onClick=@cancelEditing
            class="button button--alt button--narrow"}}
         {{t "manageAgendaZittingModalDelete.toggleEditButton"}}
       {{/wu-button}}
       <span></span>
       {{#wu-button
-           onClick=this.delete
+           onClick=@delete
            disabled=(if this.hasAgreed false true)
            class="button button--alt button--alt--warning button--narrow"}}
         {{t "manageAgendaZittingModalDelete.deleteButton"}}

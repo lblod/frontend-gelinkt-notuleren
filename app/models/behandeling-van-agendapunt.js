@@ -5,7 +5,7 @@ import { belongsTo, hasMany } from 'ember-data/relationships';
 export default class BehandelingVanAgendapunt extends Model {
   @attr openbaar;
   @attr afgeleidUit;
-  @attr('language-string') gevolg;
+  @attr('string') gevolg;
   @belongsTo('behandeling-van-agendapunt', { inverse: null }) vorigeBehandelingVanAgendapunt;
   @belongsTo('agendapunt', { inverse: 'behandeling' }) onderwerp;
   @belongsTo('mandataris', { inverse: null }) secretaris;

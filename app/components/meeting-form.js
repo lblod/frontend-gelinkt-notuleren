@@ -1,13 +1,12 @@
-import Component from '@glimmer/component';
-import {action} from "@ember/object";
-import {tracked} from '@glimmer/tracking';
-import {task} from 'ember-concurrency-decorators';
-import {inject as service} from '@ember/service';
+import Component from "@glimmer/component";
+import { action } from "@ember/object";
+import { tracked } from "@glimmer/tracking";
+import { task } from "ember-concurrency-decorators";
+import { inject as service } from "@ember/service";
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
 export default class MeetingForm extends Component {
-
   @tracked aanwezigenBijStart;
   @tracked voorzitter;
   @tracked secretaris;
@@ -20,30 +19,28 @@ export default class MeetingForm extends Component {
   constructor() {
     super(...arguments);
     this.zitting = this.args.zitting;
-    this.secretaris = this.args.zitting.get('secretaris');
-    this.voorzitter = this.args.zitting.get('voorzitter');
-    this.aanwezigenBijStart = this.args.zitting.get('aanwezigenBijStart');
+    this.secretaris = this.args.zitting.get("secretaris");
+    this.voorzitter = this.args.zitting.get("voorzitter");
+    this.aanwezigenBijStart = this.args.zitting.get("aanwezigenBijStart");
     this.fetchBehandelingen.perform();
-
   }
   get isComplete() {
     return this.args.zitting.bestuursorgaan && this.behandelingen;
-
   }
 
   @task
   fetchBehandelingen = function* () {
     /** @type {Agendapunt} */
     const agenda = yield this.zitting.agendapunten;
-    const behandelingen = yield this.store.query('behandeling-van-agendapunt', {
-      'filter[onderwerp][:id:]': agenda.map(punt => punt.id).join(",")
+    const behandelingen = yield this.store.query("behandeling-van-agendapunt", {
+      "filter[onderwerp][:id:]": agenda.map((punt) => punt.id).join(","),
+      sort: "onderwerp.position",
     });
     this.behandelingen = behandelingen;
-
   };
 
   @action
-  async saveParticipationList({voorzitter, secretaris, aanwezigenBijStart}) {
+  async saveParticipationList({ voorzitter, secretaris, aanwezigenBijStart }) {
     this.zitting.voorzitter = voorzitter;
     this.zitting.secretaris = secretaris;
     this.zitting.aanwezigenBijStart = aanwezigenBijStart;
@@ -54,5 +51,4 @@ export default class MeetingForm extends Component {
   goToPublish() {
     this.router.transitionTo("meetings.publish.agenda", this.args.zitting.id);
   }
-
 }
