@@ -10,7 +10,7 @@ import {tracked} from "@glimmer/tracking";
  * @extends {Controller}
  * @property {Zitting} model
  */
-export default class MeetingsPublishAgendaController extends Controller {
+export default class MeetingsPublishBesluitenlijstController extends Controller {
   @service ajax;
 
   @tracked
@@ -31,6 +31,7 @@ export default class MeetingsPublishAgendaController extends Controller {
       'filter[zitting][:id:]': this.model.id,
       include: 'signed-resources,published-resource'
     });
+    console.log(behandelings)
     if(behandelings.length) {
       this.besluitenlijst = behandelings.firstObject;
     } else {
@@ -39,7 +40,6 @@ export default class MeetingsPublishAgendaController extends Controller {
         zitting: this.model,
         content: prePublish
       });
-      console.log(rslt)
       this.besluitenlijst = rslt;
     }
   }
@@ -59,13 +59,13 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @this {MeetingsPublishAgendaController}
    */
   @task
-  * createSignedResource(agendaType) {
+  * createSignedResource() {
 
     const id = this.model.id;
     yield this.ajax.post(
-      `/signing/agenda/sign/${agendaType}/${id}`
+      `/signing/besluitenlijst/sign/${id}`
     );
-    yield this.initializeAgendas.perform();
+    yield this.initializeBesluitenLijst.perform();
   }
 
   /**
@@ -73,12 +73,12 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @this {MeetingsPublishAgendaController}
    */
   @task
-  * createPublishedResource(agendaType) {
+  * createPublishedResource() {
     const id = this.model.id;
     yield this.ajax.post(
-      `/signing/agenda/publish/${agendaType}/${id}`
+      `/signing/besluitenlijst/publish/${id}`
     );
-    yield this.initializeAgendas.perform();
+    yield this.initializeBesluitenLijst.perform();
 
   }
 }
