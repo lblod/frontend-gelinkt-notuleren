@@ -2,7 +2,6 @@ import Controller from "@ember/controller";
 import {inject as service} from "@ember/service";
 import {task} from "ember-concurrency-decorators";
 import {tracked} from "@glimmer/tracking";
-/** @typedef {import("../../../models/agenda").default} Agenda */
 /** @typedef {import("../../../models/zitting").default} Zitting */
 
 
@@ -31,7 +30,6 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       'filter[zitting][:id:]': this.model.id,
       include: 'signed-resources,published-resource'
     });
-    console.log(behandelings)
     if(behandelings.length) {
       this.besluitenlijst = behandelings.firstObject;
     } else {
@@ -54,13 +52,8 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     return response.data.attributes.content;
   }
 
-  /**
-   * @param {string} agendaType
-   * @this {MeetingsPublishAgendaController}
-   */
   @task
   * createSignedResource() {
-
     const id = this.model.id;
     yield this.ajax.post(
       `/signing/besluitenlijst/sign/${id}`
@@ -68,10 +61,6 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     yield this.initializeBesluitenLijst.perform();
   }
 
-  /**
-   * @param {string} agendaType
-   * @this {MeetingsPublishAgendaController}
-   */
   @task
   * createPublishedResource() {
     const id = this.model.id;
