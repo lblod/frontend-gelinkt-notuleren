@@ -12,7 +12,7 @@
         </div>
       </div>
     </step.block>
-    <step.block @title={{concat "Onderteken " @name}} @pillColor={{this.handtekeningStatus.color}}
+    <step.block @title={{concat (t "timelineStep.signStepTitle") @name}} @pillColor={{this.handtekeningStatus.color}}
                 @pillName={{this.handtekeningStatus.label}}>
       <p class="u-spacer--small text-light">{{t "timelineStep.signingRestrictionInfo"}}<a
               href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#gebruikersbeheer"
@@ -101,7 +101,7 @@
                    class="word-break--break-word">publicatie.gelinkt-notuleren.vlaanderen.be/{{this.bestuurseenheid.naam}}
                   /{{this.bestuurseenheid.classificatie.label}}</a></p>
               <p class="smaller u-spacer--bottom--small">{{t "timelineStep.timingWarning"}}</p>
-              <p class="smaller uppercase text-fade">{{t "timelinseStep.publicationType"}}</p>
+              <p class="smaller uppercase text-fade">{{t "timelineStep.publicationType"}}</p>
               <p class="u-spacer--tb--tinier">{{t "timelineStep.publicForAll"}}</p>
             </div>
           {{else}}

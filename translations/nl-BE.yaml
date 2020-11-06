@@ -163,6 +163,7 @@ votingManageVoting:
   startManageVotesButton: Beheer stemmen
 
 timelineStep:
+  signStepTitle: "Onderteken "
   signingRestrictionInfo: "Ondertekenen kan enkel door de aangezen personen met de rol "
   signingRestrictionRole: "ondertekenaar"
   signingRestrictionEnd: " binnen het orgaan."
@@ -187,3 +188,44 @@ timelineStep:
   notifyConsequences: Gevolgen melding
   notifyInfo: "Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
   localLoket: "Loket voor Lokale Besturen"
+publicationConfirmation:
+  modalTitle: "Bevestig publicatie van "
+  alertFirstPart: Publiceren en melden is bindend en onomkeerbaar.
+  alertSecondPart: Kijk de inhoud van het document goed na — u kan het document achteraf
+  alertThirdPart: niet meer aanpassen.
+  alertFourthPart: Enkel bevoegde personen mogen het document publiceren.
+  publicationTitle: Publicatie
+  publicationSubtitle: "Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:"
+  reportingTitle: Melding
+  reportingSubtitle: Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het 
+  reportingLink: Loket voor Lokale Besturen
+  metadataTitle: Metagegevens bij publiceren
+  publisherLabel: Publiceerder
+  dateAndTimeLabel: "Datum & Tijd"
+  dateAndTimeMessage: Het moment waarop je op het publiceren bevestigd, wordt ook opgeslagen.
+  confirmButton: "Bevestig publicatie van "
+  cancelButton: Annuleren
+publishedResource:
+  publishedByLabel: Gepubliceerd door
+  reportLabel: Melding
+  reportText: Automatisch gemeld door
+  notificationText: Bekijk melding op het
+  reportFailedText: Automatische melding mislukt
+  downloadText: Download het document en voltooi de melding via
+signatureConfirmation:
+  modalTitle: "Bevestig ondertekenen van "
+  signLabel: Ondertekenen
+  signWarningTitle: Ondertekenen is bindend en onomkeerbaar
+  signWarningText: Kijk de inhoud van het document goed na. Enkel bevoegde personen mogen het document ondertekenen.
+  metadataLabel: Metagegevens bij ondertekenen
+  signerLabel: Ondertekenaar
+  timeLabel: Tijd
+  timeMessage: Het moment waarop je op het ondertekenen bevestigd, wordt ook opgeslagen.
+  confirmButton: "Bevestig ondertekenen van "
+  cancelButton: Annuleren
+blockchainStatus:
+  encryptedLabel: Versleuteld
+  encryptingLabel: Bezig met versleutelen
+  encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
+  
+
