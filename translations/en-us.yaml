@@ -9,6 +9,7 @@ inbox:
     statusLabel: Status
 publish:
   backToMeeting: Back to meeting
+  loadingMessage: Loading...
 behandelingVanAgendapunten:
   saveButton: Save
   openbaarLabel: "make agendapoint public"
@@ -228,3 +229,4 @@ blockchainStatus:
   encryptedLabel: Encrypted
   encryptingLabel: Encrypting
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
+  

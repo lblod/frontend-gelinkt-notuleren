@@ -10,5 +10,8 @@
     />
 
   </WuTimelineAccordion>
+  {{else}}
+    <p>{{t "publish.loadingMessage"}}</p>
+    <p class="loader"><span class="u-visually-hidden">{{t "publish.loadingMessage"}}</span></p>
   {{/if}}
 </div>

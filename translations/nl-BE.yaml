@@ -9,6 +9,7 @@ inbox:
     statusLabel: Status
 publish:
   backToMeeting: Terug naar zitting
+  loadingMessage: Bezig met laden...
 behandelingVanAgendapunten:
   saveButton: Opslaan
   openbaarLabel: "maak agendapunt openbaar"
@@ -227,5 +228,6 @@ blockchainStatus:
   encryptedLabel: Versleuteld
   encryptingLabel: Bezig met versleutelen
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
+  
   
 
