@@ -6,7 +6,7 @@ export default Component.extend({
   editorStatusClass: computed('status.id', function() {
     const id = this.get('status.id');
     switch(id) {
-    case "7186547b61414095aa2a4affefdcca67":
+    case "ef8e4e331c31430bbdefcdb2bdfbcc06":
       // ondertekende notulen gepubliceerd
       return "success";
     }
