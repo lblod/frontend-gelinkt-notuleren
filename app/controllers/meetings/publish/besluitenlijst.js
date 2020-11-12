@@ -26,7 +26,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
 
   @task
   * initializeBesluitenLijst() {
-    const behandelings = yield this.store.query('besluiten-lijst',{
+    const behandelings = yield this.store.query('versioned-besluiten-lijst',{
       'filter[zitting][:id:]': this.model.id,
       include: 'signed-resources,published-resource'
     });
@@ -34,7 +34,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       this.besluitenlijst = behandelings.firstObject;
     } else {
       const prePublish = yield this.createPrePublishedResource.perform();
-      const rslt = yield this.store.createRecord("besluiten-lijst", {
+      const rslt = yield this.store.createRecord("versioned-besluiten-lijst", {
         zitting: this.model,
         content: prePublish
       });

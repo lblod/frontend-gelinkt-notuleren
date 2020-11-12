@@ -5,6 +5,6 @@ export default DS.Model.extend({
   content: DS.attr(),
   signedResources: DS.hasMany('signed-resource'),
   publishedResource: DS.belongsTo('published-resource'),
-  documentContainer: DS.belongsTo('document-container'),
+  zitting: DS.belongsTo('zitting'),
   editorDocument: DS.belongsTo('editor-document')
 });
