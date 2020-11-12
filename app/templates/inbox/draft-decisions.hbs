@@ -37,7 +37,7 @@
       	<br>
       	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
       </td>
-      <td><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
+      <td><EditorStatusPill @status={{await container.ontwerpBesluitStatus}} /> <br> <DocumentLinkToPublished @document={{row}} />
       </td>
       {{/with}}
     </c.body>

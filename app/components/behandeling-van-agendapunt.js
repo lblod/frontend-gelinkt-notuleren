@@ -30,7 +30,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     if (this.documentContainer.content) {
       this.document = yield this.documentContainer.get("currentVersion");
       if (!this.document) {
-        this.document = this.store.createRecord("editor-document");
+        this.document = this.store.createRecord("editor-document");z
       }
     } else {
       yield this.behandeling.onderwerp;
@@ -49,6 +49,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
         folder: draftDecisionFolder,
         status: activeStatus,
       });
+      this.documentContainer.ontwerpBesluitStatus=yield this.store.findRecord("concept", "ef8e4e331c31430bbdefcdb2bdfbcc06");
       this.documentContainer.currentVersion = this.document;
       this.behandeling.documentContainer = this.documentContainer;
       yield this.document.save();

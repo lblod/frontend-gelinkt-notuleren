@@ -6,20 +6,29 @@ export default Component.extend({
   editorStatusClass: computed('status.id', function() {
     const id = this.get('status.id');
     switch(id) {
-    case "c272d47d756d4aeaa0be72081f1389c6":
+    case "7186547b61414095aa2a4affefdcca67":
       // ondertekende notulen gepubliceerd
       return "success";
-    case "cfd751588a6c453296de9f9c0dff2af4":
-    case "5A8304E8C093B00009000010":
-      // concept
-      return null;
-    case "627aec5d144c422bbd1077022c9b45d1":
-      // agenda publiek
-      return "warning";
-    case "b763390a63d548bb977fb4804293084a":
-      // besluitenlijst publiek
-      return "warning";
     }
     return "action";
   })
 });
+
+// import { computed } from '@ember/object';
+// import Component from '@ember/component';
+
+// export default Component.extend({
+//   tagName: '',
+//   editorStatusClass: computed('ontwerp-besluit-status.id', function() {
+//     const id = this.get('ontwerp-besluit-status.id');
+//     switch(id) {
+//       case "a1974d071e6a47b69b85313ebdcef9f7":
+//         return "concept";
+//       case "7186547b61414095aa2a4affefdcca67":
+//         return "gepubliceerd"
+//       case "ef8e4e331c31430bbdefcdb2bdfbcc06":
+//         return "geagendeerd";
+//     }
+//     return "action";
+//   })
+// });
