@@ -26,7 +26,13 @@
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
-      <td><LinkTo @route="draft-decisions.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo></td>
+      <td>
+        {{#if (eq container.ontwerpBesluitStatus.label "geagendeerd")}}
+          <LinkTo @route="meeting.edit" @model={{container.currentVersion.id}} class="au-c-link">{{row.title}}</LinkTo>
+        {{else}}
+          <LinkTo @route="draft-decisions.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo>
+        {{/if}}
+      </td>
       <td>
       	{{moment-calendar row.createdOn}}
       	<br>
@@ -37,7 +43,7 @@
       	<br>
       	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
       </td>
-      <td><EditorStatusPill @status={{await container.ontwerpBesluitStatus}} /> <br> <DocumentLinkToPublished @document={{row}} />
+      <td><EditorStatusPill @status={{container.ontwerpBesluitStatus}} /> <br> <DocumentLinkToPublished @document={{row}} />
       </td>
       {{/with}}
     </c.body>
