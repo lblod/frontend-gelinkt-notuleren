@@ -1,0 +1,17 @@
+<div class="u-spacer--top">
+  {{#if this.initializeBesluitenLijst.lastSuccessful}}
+  <WuTimelineAccordion as |timeline|>
+    <Signatures::Besluitenlijst::TimelineStep
+            @name="besluitenlijst"
+            @step={{timeline.step}}
+            @lijst={{this.besluitenlijst}}
+            @signing={{perform this.createSignedResource}}
+            @publish={{perform this.createPublishedResource}}
+    />
+
+  </WuTimelineAccordion>
+  {{else}}
+    <p>{{t "publish.loadingMessage"}}</p>
+    <p class="loader"><span class="u-visually-hidden">{{t "publish.loadingMessage"}}</span></p>
+  {{/if}}
+</div>

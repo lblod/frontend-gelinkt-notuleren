@@ -57,6 +57,7 @@ Router.map(function() {
     this.route('edit', { path: '/:id/edit' });
     this.route('publish',{path: '/:id/publish'}, function() {
       this.route('agenda');
+      this.route('besluitenlijst');
     });
   });
 

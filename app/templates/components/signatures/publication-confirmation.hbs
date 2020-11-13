@@ -1,4 +1,4 @@
-<WuModal @title={{concat "Bevestig publicatie van " name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{action cancel}} as |m|>
+<WuModal @title={{concat (t "publicationConfirmation.modalTitle") name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{action cancel}} as |m|>
   <m.content @isSectioned={{true}}>
   <div class="grid u-padding--top--small">
     <div class="col--12-12">
@@ -22,13 +22,13 @@
 					<div class="alert__icon" aria-hidden="true"></div>
 					<div class="alert__content">
 						<div class="alert__message">
-							<p><strong>Publiceren en melden is bindend en onomkeerbaar.</strong> Kijk de inhoud van het document goed na &mdash; u kan het document achteraf <strong>niet meer aanpassen</strong>. Enkel bevoegde personen mogen het document publiceren.</p>
+							<p><strong>{{t "publicationConfirmation.alertFirstPart"}}</strong> {{t "publicationConfirmation.alertSecondPart"}}<strong> {{t "publicationConfirmation.alertThirdPart"}}</strong> {{t "publicationConfirmation.alertFourthPart"}}</p>
 						</div>
 					</div>
 				</div>
 
-				<h2 class="h6 u-spacer--tb--small">Publicatie</h2>
-        <p class="small u-spacer">Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers: <a href="https://publicatie.gelinkt-notuleren.lblod.info/">publicatie.gelinkt-notuleren.lblod.info</a>.</p>
+				<h2 class="h6 u-spacer--tb--small">{{t "publicationConfirmation.publicationTitle"}}</h2>
+        <p class="small u-spacer">{{t "publicationConfirmation.publicationSubtitle"}} <a href="https://publicatie.gelinkt-notuleren.lblod.info/">publicatie.gelinkt-notuleren.lblod.info</a>.</p>
 {{!--       	<ul class="bullet-list u-spacer small">
       		<li>De publieke publicatiepagina:
       			<br><a href="https://publicatie.gelinkt-notuleren.lblod.info/">publicatie.gelinkt-notuleren.lblod.info</a></li>
@@ -43,20 +43,20 @@
       	</ul> --}}
 
 
-				<h2 class="h6 u-spacer--bottom--small">Melding</h2>
+				<h2 class="h6 u-spacer--bottom--small">{{t "publicationConfirmation.reportingTitle"}}</h2>
 				<ul class="u-spacer">
-					<li><p class="small u-spacer--bottom--tiny">Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p></li>
+					<li><p class="small u-spacer--bottom--tiny">{{t "publicationConfirmation.reportingSubtitle"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">{{t "publicationConfirmation.reportingLink"}}</a>.</p></li>
 				</ul>
 
-	    	<h2 class="h6 u-spacer--bottom--small">Metagegevens bij publiceren</h2>
+	    	<h2 class="h6 u-spacer--bottom--small">{{t "publicationConfirmation.metadataTitle"}}</h2>
 				<ul class="u-spacer">
 					<li>
-						<label class="form__label">Publiceerder</label>
+						<label class="form__label">{{t "publicationConfirmation.publisherLabel"}}</label>
 						<p class="u-spacer--bottom--tiny">{{get (await currentSession.user) "fullName"}}</p>
 					</li>
 					<li>
-						<label class="form__label">Datum &amp; Tijd</label>
-						<p class="u-spacer--bottom--tiny smaller">Het moment waarop je op het publiceren bevestigd, wordt ook opgeslagen.</p>
+						<label class="form__label">{{t "publicationConfirmation.dateAndTimeLabel"}}</label>
+						<p class="u-spacer--bottom--tiny smaller">{{t "publicationConfirmation.dateAndTimeMessage"}}</p>
 					</li>
 {{!--       		<li>
       			<label class="form__label">Hash</label>
@@ -70,8 +70,8 @@
   <div class="modal-dialog__footer">
 
     <m.buttons as |b|>
-      <b.button @label={{concat "Bevestig publicatie van " name}} @onClick={{action confirm}} />
-      <b.button @label="Annuleren" @onClick={{action cancel}} @isLink={{true}} @icon="vi-cross" />
+      <b.button @label={{concat (t "publicationConfirmation.confirmButton") name}} @onClick={{action confirm}} />
+      <b.button @label={{t "publicationConfirmation.cancelButton"}} @onClick={{action cancel}} @isLink={{true}} @icon="vi-cross" />
     </m.buttons>
   </div>
 </WuModal>

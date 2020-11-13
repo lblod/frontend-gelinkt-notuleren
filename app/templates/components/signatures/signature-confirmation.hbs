@@ -1,4 +1,4 @@
-<WuModal @title={{concat "Bevestig ondertekenen van " name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{action cancel}} as |m|>
+<WuModal @title={{concat (t "signatureConfirmation.modalTitle") name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{action cancel}} as |m|>
   <m.content @isSectioned={{true}}>
   <div class="grid u-padding--top--small">
     <div class="col--7-12">
@@ -12,25 +12,25 @@
     </div>
     <div class="col--5-12">
     	<div class="u-padding--rl--small">
-	    	<h2 class="h6 u-spacer--tb--small">Ondertekenen</h2>
+	    	<h2 class="h6 u-spacer--tb--small">{{t "signatureConfirmation.signLabel"}}</h2>
 				<div class="alert alert--tiny">
 					<div class="alert__icon" aria-hidden="true"></div>
 					<div class="alert__content">
-						<div class="alert__title">Ondertekenen is bindend en onomkeerbaar</div>
+						<div class="alert__title">{{t "signatureConfirmation.signWarningTitle"}}</div>
 						<div class="alert__message">
-							<p>Kijk de inhoud van het document goed na. Enkel bevoegde personen mogen het document ondertekenen.</p>
+							<p>{{t "signatureConfirmation.signWarningText"}}</p>
 						</div>
 					</div>
 				</div>
-	    	<h2 class="h6 u-spacer--bottom--small">Metagegevens bij ondertekenen</h2>
+	    	<h2 class="h6 u-spacer--bottom--small">{{t "signatureConfirmation.metadataLabel"}}</h2>
 				<ul>
 					<li>
-						<label class="form__label">Ondertekenaar</label>
+						<label class="form__label">{{t "signatureConfirmation.signerLabel"}}</label>
 						<p class="u-spacer--bottom--tiny">{{get (await currentSession.user) "fullName"}}</p>
 					</li>
 					<li>
-						<label class="form__label">Tijd</label>
-						<p class="u-spacer--bottom--tiny smaller">Het moment waarop je op het ondertekenen bevestigd, wordt ook opgeslagen.</p>
+						<label class="form__label">{{t "signatureConfirmation.timeLabel"}}</label>
+						<p class="u-spacer--bottom--tiny smaller">{{t "signatureConfirmation.timeMessage"}}</p>
 					</li>
 {{!--       		<li>
       			<label class="form__label">Hash</label>
@@ -43,8 +43,8 @@
   </m.content>
   <div class="modal-dialog__footer">
     <m.buttons as |b|>
-      <b.button @label={{concat "Bevestig ondertekenen van " name}} @onClick={{action confirm}} />
-      <b.button @label="Annuleren" @onClick={{action cancel}} @isLink={{true}} @icon="vi-cross" />
+      <b.button @label={{concat (t "signatureConfirmation.confirmButton") name}} @onClick={{action confirm}} />
+      <b.button @label={{t "signatureConfirmation.cancelButton"}} @onClick={{action cancel}} @isLink={{true}} @icon="vi-cross" />
     </m.buttons>
   </div>
 </WuModal>
