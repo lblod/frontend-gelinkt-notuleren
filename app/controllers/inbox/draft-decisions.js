@@ -17,14 +17,11 @@ export default class InboxDraftDecisionsController extends Controller.extend(Def
   @action
   async openZitting(documentContainer){
 
-    let behandeling=await this.store.query("behandeling-van-agendapunt", {"filter[document-container][:id:]": documentContainer.id });
-    behandeling=behandeling.firstObject;
+    const behandeling=(await this.store.query("behandeling-van-agendapunt", {"filter[document-container][:id:]": documentContainer.id })).firstObject;
 
-    let agendapunt=await this.store.query("agendapunt", {"filter[behandeling][:id:]": behandeling.id });
-    agendapunt=agendapunt.firstObject;
+    const agendapunt=(await this.store.query("agendapunt", {"filter[behandeling][:id:]": behandeling.id })).firstObject;
 
-    let zitting=await this.store.query("zitting", {"filter[agendapunten][:id:]": agendapunt.id });
-    zitting=zitting.firstObject;
+    const zitting=(await this.store.query("zitting", {"filter[agendapunten][:id:]": agendapunt.id })).firstObject;
 
     this.transitionToRoute('meetings.edit', zitting.id);
   }
