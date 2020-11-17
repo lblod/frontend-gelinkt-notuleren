@@ -58,6 +58,7 @@ Router.map(function() {
     this.route('publish',{path: '/:id/publish'}, function() {
       this.route('agenda');
       this.route('besluitenlijst');
+      this.route('uittreksels');
     });
   });
 

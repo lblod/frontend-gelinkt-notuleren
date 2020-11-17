@@ -1,0 +1,18 @@
+<div class="u-spacer--top">
+  {{#if this.initializeUittreksels.lastSuccessful}}
+  <WuTimelineAccordion as |timeline|>
+    {{#each this.uittreksels as |uittreksel|}}
+      <Signatures::Behandeling::TimelineStep
+        @name="test name"
+        @step={{timeline.step}}
+        @behandeling={{uittreksel}}
+        @signing={{perform this.createSignedResource "ontwerpagenda"}}
+        @publish={{perform this.createPublishedResource "ontwerpagenda"}}
+      />
+    {{/each}}
+  </WuTimelineAccordion>
+  {{else}}
+    <p>{{t "publish.loadingMessage"}}</p>
+    <p class="loader"><span class="u-visually-hidden">{{t "publish.loadingMessage"}}</span></p>
+  {{/if}}
+</div>
