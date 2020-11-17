@@ -29,10 +29,13 @@ export default class MeetingsPublishUittrekselsController extends Controller {
     } else {
       this.uittreksels = [];
       const prePublish = yield this.createPrePublishedResource.perform();
+      console.log(prePublish);
       for(const uittreksel of prePublish) {
+        const behandeling = yield this.store.findRecord('behandeling-van-agendapunt', uittreksel.data.attributes.behandeling);
         const rslt = yield this.store.createRecord("versioned-behandeling", {
           zitting: this.model,
-          content: uittreksel
+          content: uittreksel.data.attributes.content,
+          behandeling,
         });
         this.uittreksels.push(rslt);
       }
@@ -47,7 +50,7 @@ export default class MeetingsPublishUittrekselsController extends Controller {
     const response = yield this.ajax.request(
       `/prepublish/behandelingen/${id}`
     );
-    return response.data.attributes.content;
+    return response;
   }
 
   @task
