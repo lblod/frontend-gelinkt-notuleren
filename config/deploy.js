@@ -34,5 +34,25 @@ module.exports = function(deployTarget) {
     ENV['ssh-index'].remoteDir = '/data/app-gelinkt-notuleren-dev/gelinkt-notuleren-futurenow-app';
   }
 
+  if (deployTarget === 'demo') {
+    ENV['ssh-index'] = {
+      username: 'root',
+      host: 'demo-lblod.s.redpencil.io',
+      remoteDir: '/data/app-gelinkt-notuleren/gelinkt-notuleren-app',
+      agent: process.env.SSH_AUTH_SOCK,
+      port: 22,
+      allowOverwrite: true
+    };
+    ENV['rsync'] = {
+      dest: '/data/app-gelinkt-notuleren/gelinkt-notuleren-app',
+      username: 'root',
+      host: 'demo-lblod.s.redpencil.io',
+      port: 22,
+      delete: false,
+      privateKey: process.env.SSH_AUTH_SOCK,
+      arg:['--verbose']
+    };
+  }
+
   return ENV;
 };
