@@ -6,8 +6,8 @@
         @name={{uittreksel.behandeling.onderwerp.titel}}
         @step={{timeline.step}}
         @behandeling={{uittreksel}}
-        @signing={{perform this.createSignedResource "ontwerpagenda"}}
-        @publish={{perform this.createPublishedResource "ontwerpagenda"}}
+        @signing={{perform this.createSignedResource uittreksel.behandeling}}
+        @publish={{perform this.createPublishedResource uittreksel.behandeling}}
       />
     {{/each}}
   </WuTimelineAccordion>

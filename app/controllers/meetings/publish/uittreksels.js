@@ -54,19 +54,19 @@ export default class MeetingsPublishUittrekselsController extends Controller {
   }
 
   @task
-  * createSignedResource() {
+  * createSignedResource(behandeling) {
     const id = this.model.id;
     yield this.ajax.post(
-      `/signing/behandelingen/sign/${id}`
+      `/signing/behandeling/sign/${id}/${behandeling.get('id')}`
     );
     yield this.initializeUittreksels.perform();
   }
 
   @task
-  * createPublishedResource() {
+  * createPublishedResource(behandeling) {
     const id = this.model.id;
     yield this.ajax.post(
-      `/signing/behandelingen/publish/${id}`
+      `/signing/behandeling/publish/${id}/${behandeling.get('id')}`
     );
     yield this.initializeUittreksels.perform();
 
