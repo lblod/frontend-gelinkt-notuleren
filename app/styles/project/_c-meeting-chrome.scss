@@ -15,12 +15,16 @@
   position: relative;
   background-color: $au-gray-100;
 
+  @include mq($until: medium) {
+    overflow: hidden;
+  }
+
   @include mq(small) {
     padding: $au-unit;
   }
 
   @include mq(medium) {
-    padding-right: $au-unit-huge*4;
+    padding-left: $au-unit-huge*3;
   }
 
   @include mq(large) {
@@ -96,7 +100,6 @@
   .say-editor {
     background-color: transparent;
     padding: $au-unit-small + $au-unit-tiny !important;
-
     overflow: visible !important;
   }
 
@@ -131,15 +134,15 @@
   }
 
   .say-container__aside {
-    @include mq(medium) {
+      left: calc(100% - #{$au-unit-huge*3.5});
       position: absolute;
-      left: calc(100% + #{$au-unit-large});
-      width: $au-unit-huge*4;
+      width: $au-unit-huge*3.5;
       height: 100%;
       overflow: visible;
-    }
+
 
     @include mq(large) {
+      left: calc(100% + #{$au-unit-large});
       width: $au-unit-huge*4.5;
     }
   }
@@ -156,7 +159,9 @@
 }
 
 .au-c-meeting-chrome__highlight {
+  display: inline-block;
   background-color: $au-yellow-200;
+  margin-top: $au-unit-tiny/2;
   cursor: not-allowed;
 }
 
@@ -231,21 +236,25 @@
 }
 
 .au-c-meeting-sidebar {
+  @include au-font-size($au-h6);
   opacity: .7;
   position: fixed;
   z-index: 1;
   top: $au-unit-huge;
   left: 0;
   bottom: 0;
-  display: none;
   padding-top: $au-unit;
   padding-left: $au-unit-small;
   padding-right: $au-unit-small;
-  @include au-font-size($au-h6);
   transition: opacity $au-transition;
+  display: none;
+
+  @include mq(medium) {
+    display: block;
+    width: $au-unit-huge*3;
+  }
 
   @include mq(large) {
-    display: block;
     width: $au-unit-huge*4;
   }
 

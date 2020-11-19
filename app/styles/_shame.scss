@@ -351,56 +351,7 @@ input.input-field {
   }
 }
 
-.au-c-onboarding-wrapper {
-  position: relative;
-}
 
-.au-c-onboarding {
-  @include au-font-size(1.5rem,1.3);
-  font-family: $au-font;
-  font-weight: 400;
-  color: $au-gray-600;
-  position: absolute;
-  top: 0;
-  left: calc(100% + #{$au-unit-large + $au-unit});
-  width: $au-unit-huge*3;
-  display: none;
-  font-style: italic;
-  padding-left: $au-unit + $au-unit-tiny/2;
-  background-color: $au-gray-200;
-  border-radius: $au-radius;
-  padding-top: $au-unit-tiny;
-  padding-bottom: $au-unit-tiny;
-
-  .au-c-icon {
-    position: absolute;
-    top: .75rem;
-    left: .5rem;
-    width: 1.6rem;
-    height: 1.6rem;
-  }
-
-  @include mq(medium) {
-    display: block;
-    width: $au-unit-huge*2.5;
-  }
-
-  @include mq(large) {
-    width: $au-unit-huge*3.5;
-  }
-}
-
-.au-c-onboarding--error {
-  color: $au-red-600;
-  border: .1rem solid $au-red-200;
-  background-color: $au-red-100;
-  font-weight: $au-medium;
-  font-style: normal;
-
-  .au-c-icon {
-    color: $au-red-600;
-  }
-}
 
 
 .au-c-datepicker {
