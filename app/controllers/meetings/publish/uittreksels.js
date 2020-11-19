@@ -20,18 +20,18 @@ export default class MeetingsPublishUittrekselsController extends Controller {
 
   @task
   * initializeUittreksels() {
-    const uittreksels = yield this.store.query('versioned-behandeling',{
-      'filter[zitting][:id:]': this.model.id,
-      include: 'signed-resources,published-resource'
-    });
-    if(uittreksels.length) {
-      this.uittreksels = uittreksels;
-    } else {
-      this.uittreksels = [];
-      const prePublish = yield this.createPrePublishedResource.perform();
-      console.log(prePublish);
-      for(const uittreksel of prePublish) {
+    this.uittreksels = [];
+    const prePublish = yield this.createPrePublishedResource.perform();
+    for(const uittreksel of prePublish) {
+      const existingUittreksels = yield this.store.query('versioned-behandeling',{
+        'filter[behandeling][:id:]': uittreksel.data.attributes.behandeling,
+        include: 'signed-resources,published-resource'
+      });
+      if(existingUittreksels.length) {
+        this.uittreksels.push(existingUittreksels.firstObject);
+      } else {
         const behandeling = yield this.store.findRecord('behandeling-van-agendapunt', uittreksel.data.attributes.behandeling);
+
         const rslt = yield this.store.createRecord("versioned-behandeling", {
           zitting: this.model,
           content: uittreksel.data.attributes.content,
@@ -39,7 +39,6 @@ export default class MeetingsPublishUittrekselsController extends Controller {
         });
         this.uittreksels.push(rslt);
       }
-      console.log(this.uittreksels);
     }
   }
 
