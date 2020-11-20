@@ -28,9 +28,9 @@ export default class AgendaDraftImportComponent extends Component {
   async selectDraft(draft){
     this.selected=draft;
     await this.args.createBehandeling(this.args.agendapunt);
-    await this.args.agendapunt.behandeling
+    await this.args.agendapunt.behandeling;
     draft.ontwerpBesluitStatus=await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
-    draft.save
+    await draft.save();
     this.args.agendapunt.behandeling.set('documentContainer', draft);
   }
 }
