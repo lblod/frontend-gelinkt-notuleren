@@ -20,7 +20,7 @@ export default class MeetingsPublishUittrekselsController extends Controller {
 
   @task
   * initializeUittreksels() {
-    this.uittreksels = [];
+    const uittreksels = [];
     const prePublish = yield this.createPrePublishedResource.perform();
     for(const uittreksel of prePublish) {
       const existingUittreksels = yield this.store.query('versioned-behandeling',{
@@ -28,7 +28,7 @@ export default class MeetingsPublishUittrekselsController extends Controller {
         include: 'signed-resources,published-resource'
       });
       if(existingUittreksels.length) {
-        this.uittreksels.push(existingUittreksels.firstObject);
+        uittreksels.push(existingUittreksels.firstObject);
       } else {
         const behandeling = yield this.store.findRecord('behandeling-van-agendapunt', uittreksel.data.attributes.behandeling);
 
@@ -37,7 +37,8 @@ export default class MeetingsPublishUittrekselsController extends Controller {
           content: uittreksel.data.attributes.content,
           behandeling,
         });
-        this.uittreksels.push(rslt);
+        uittreksels.push(rslt);
+        this.uittreksels = uittreksels;
       }
     }
   }
