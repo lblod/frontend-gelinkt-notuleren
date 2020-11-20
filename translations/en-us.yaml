@@ -108,6 +108,9 @@ manageAgendaZittingModalMove:
   positionSelectPlaceholder: Select position
   agendapuntSelectPlaceholder: Select agenda item
   searchPlaceholder: Search by title
+manageAgendaZittingModalDraftImport:
+  title: Import a draft
+  default: Create a new draft
 voting:
   openModalButton: Manage voting
 votingModal:
@@ -229,4 +232,4 @@ blockchainStatus:
   encryptedLabel: Encrypted
   encryptingLabel: Encrypting
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
-  
+

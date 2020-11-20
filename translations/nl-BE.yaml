@@ -108,6 +108,9 @@ manageAgendaZittingModalMove:
   positionSelectPlaceholder: Selecteer positie
   agendapuntSelectPlaceholder: Selecteer agendapunt
   searchPlaceholder: Zoek op titel
+manageAgendaZittingModalDraftImport:
+  title: Ontwerpbesluit importeren
+  default: ontwerpbesluit opstellen
 voting:
   openModalButton: Beheer stemming
 votingModal:
@@ -198,7 +201,7 @@ publicationConfirmation:
   publicationTitle: Publicatie
   publicationSubtitle: "Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:"
   reportingTitle: Melding
-  reportingSubtitle: Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het 
+  reportingSubtitle: Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
   reportingLink: Loket voor Lokale Besturen
   metadataTitle: Metagegevens bij publiceren
   publisherLabel: Publiceerder
@@ -228,6 +231,6 @@ blockchainStatus:
   encryptedLabel: Versleuteld
   encryptingLabel: Bezig met versleutelen
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
-  
-  
+
+
 
