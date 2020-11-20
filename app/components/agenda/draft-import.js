@@ -9,23 +9,11 @@ export default class AgendaDraftImportComponent extends Component {
   constructor(...args){
     super(...args);
     this.getDrafts();
-    this.getCurrentDraft();
   }
   @service store;
   @tracked options;
   @tracked selected;
 
-  @action
-  async getCurrentDraft(){
-    const behandeling=await this.args.agendapunt.behandelingVanAgendapunt;
-
-    if(behandeling){
-      const container=await behandeling.documentContainer;
-    }
-    else{
-      this.args.createBehandeling(this.args.createBehandeling)
-    }
-  }
   @action
   async getDrafts(){
     const containers=await this.store.query('document-container', {
@@ -33,12 +21,16 @@ export default class AgendaDraftImportComponent extends Component {
       'filter[status][:id:]': 'c02542af-e6be-4cc6-be60-4530477109fc',
       'filter[folder][:id:]': 'ae5feaed-7b70-4533-9417-10fbbc480a4c'
     });
-    const filteredContainers=containers.filter(e=>e.get('ontwerpBesluitStatus.id')!='7186547b61414095aa2a4affefdcca67');
-    this.options=filteredContainers.map(e=>e.get('currentVersion'));
+    this.options=containers.filter(e=>e.get('ontwerpBesluitStatus.id')!='7186547b61414095aa2a4affefdcca67');//geagenderred status
+
   }
   @action
-  selectDraft(draft){
+  async selectDraft(draft){
     this.selected=draft;
-
+    await this.args.createBehandeling(this.args.agendapunt);
+    await this.args.agendapunt.behandeling
+    draft.ontwerpBesluitStatus=await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
+    draft.save
+    this.args.agendapunt.behandeling.set('documentContainer', draft);
   }
 }

@@ -116,16 +116,19 @@ export default class AgendaModalComponent extends Component {
   /**
    * @param {import("../../models/agendapunt").default} agendapunt
    */
+  @action
   async createBehandeling(agendapunt) {
     /** @type {import("../../models/behandeling-van-agendapunt").default)} */
-    const behandeling = this.store.createRecord("behandeling-van-agendapunt");
-    behandeling.openbaar = agendapunt.geplandOpenbaar;
-    behandeling.onderwerp = agendapunt;
-    const previous = await agendapunt.vorigeAgendapunt;
-    behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
-    behandeling.voorzitter = this.args.zitting.voorzitter;
-    behandeling.secretaris = this.args.zitting.secretaris;
-    this.unsavedBehandelingen.push(behandeling);
+    if(!agendapunt.behandeling.content){
+      const behandeling = this.store.createRecord("behandeling-van-agendapunt");
+      behandeling.openbaar = agendapunt.geplandOpenbaar;
+      behandeling.onderwerp = agendapunt;
+      const previous = await agendapunt.vorigeAgendapunt;
+      behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
+      behandeling.voorzitter = this.args.zitting.voorzitter;
+      behandeling.secretaris = this.args.zitting.secretaris;
+      this.unsavedBehandelingen.push(behandeling);
+    }
     // agendapunt.behandeling = behandeling;
     // await agendapunt.save();
   }

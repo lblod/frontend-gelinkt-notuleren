@@ -49,7 +49,9 @@
       @selectLocation={{@selectLocation}}
     />
   {{/if}}
-  <Agenda::DraftImport @agendapunt={{@agendapunt}}/>
+  {{#if @isNew}}
+    <Agenda::DraftImport @agendapunt={{@agendapunt}} @createBehandeling={{@createBehandeling}}/>
+  {{/if}}
   {{#unless @isNew}}
     <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
   {{/unless}}

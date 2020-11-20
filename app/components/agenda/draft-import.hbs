@@ -5,10 +5,10 @@
   @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}
   @options={{this.options}}
   @verticalPosition="above"
-  @searchEnabled={{false}}
+  @searchEnabled={{true}}
   @selected={{this.selected}}
   @allowClear={{true}}
   @onchange={{this.selectDraft}}
   as |option|>
-  {{option.title}}
+  {{option.currentVersion.title}}
 </PowerSelect>
