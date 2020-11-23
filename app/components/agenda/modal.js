@@ -68,14 +68,13 @@ export default class AgendaModalComponent extends Component {
   async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
 
-    const ap=await this.currentlyEditing;
-    const bh=await ap.behandeling;
-    const dc=await bh.documentContainer;
+    const behandeling=(await this.store.query('behandeling-van-agendapunt',  {"filter[onderwerp][:id:]": this.currentlyEditing.id})).firstObject;
+    const documentContainer=await behandeling.documentContainer;
 
-    dc.ontwerpBesluitStatus=
+    documentContainer.ontwerpBesluitStatus=
       await this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
 
-    await dc.save();
+    await documentContainer.save();
 
     this.toBeDeleted.push(this.currentlyEditing);
     this.cancelEditing();

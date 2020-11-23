@@ -30,7 +30,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     if (this.documentContainer.content) {
       this.document = yield this.documentContainer.get("currentVersion");
       if (!this.document) {
-        this.document = this.store.createRecord("editor-document");z
+        this.document = this.store.createRecord("editor-document");
       }
     } else {
       yield this.behandeling.onderwerp;

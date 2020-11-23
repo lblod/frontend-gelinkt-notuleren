@@ -28,7 +28,7 @@
       {{#with container.currentVersion as |row|}}
       <td>
         {{#if (eq container.ontwerpBesluitStatus.label "geagendeerd")}}
-          <AuLink {{on "click" (fn this.openZitting container)}} class="au-c-link">{{row.title}}</AuLink>
+          <ZittingLink @documentContainer={{container}}/>
         {{else}}
           <LinkTo @route="draft-decisions.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo>
         {{/if}}
