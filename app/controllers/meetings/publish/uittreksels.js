@@ -38,9 +38,9 @@ export default class MeetingsPublishUittrekselsController extends Controller {
           behandeling,
         });
         uittreksels.push(rslt);
-        this.uittreksels = uittreksels;
       }
     }
+    this.uittreksels = uittreksels;
   }
 
 
