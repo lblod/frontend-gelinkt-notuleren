@@ -28,14 +28,14 @@
       {{#with container.currentVersion as |row|}}
       <td><LinkTo @route="draft-decisions.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo></td>
       <td>
-      	{{moment-calendar row.createdOn}}
-      	<br>
-      	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
+        {{moment-calendar row.createdOn}}
+        <br>
+        <AuHelpText @skin="secondary">{{moment-from-now this.document.currentVersion.updatedOn}}</AuHelpText>
       </td>
       <td>
-      	{{moment-calendar row.updatedOn}}
-      	<br>
-      	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
+        {{moment-calendar row.updatedOn}}
+        <br>
+        <AuHelpText @skin="secondary">{{moment-from-now this.document.currentVersion.updatedOn}}</AuHelpText>
       </td>
       <td><EditorStatusPill @status={{await container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
       </td>
