@@ -19,7 +19,7 @@
     {{else}}
     <span>{{t "behandelingVanAgendapunten.needsParticipants"}}</span>
     {{/if}}
-    <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning "true" "false"}}>
+    <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning true false}}>
       {{t "behandelingVanAgendapunten.saveButton"}}
     </AuButton>
   </AuButtonGroup>

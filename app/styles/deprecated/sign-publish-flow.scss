@@ -165,6 +165,13 @@
         content: "Openbare behandeling van agendapunt";
       }
     }
+
+    // Temp fix for the label positionint
+    .annotation--agendapunt--open__icon {
+      display: block;
+      position: relative;
+      left: 0;
+    }
   }
 }
 
