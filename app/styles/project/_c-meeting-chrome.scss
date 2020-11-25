@@ -23,13 +23,13 @@
     padding: $au-unit;
   }
 
-  @include mq(medium) {
+  @include mq(1160px) {
     padding-left: $au-unit-huge*3;
   }
 
   @include mq(large) {
-    padding-left: $au-unit-huge*4;
-    padding-right: $au-unit-huge*4.5;
+    padding-left: $au-unit-huge*3.5;
+    padding-right: $au-unit-huge*4;
   }
 }
 
@@ -134,28 +134,34 @@
   }
 
   .say-container__aside {
-      left: calc(100% - #{$au-unit-huge*3.5});
-      position: absolute;
-      width: $au-unit-huge*3.5;
-      height: 100%;
-      overflow: visible;
+    left: calc(100% - #{$au-unit-huge*3.5});
+    position: absolute;
+    width: $au-unit-huge*3.5;
+    height: 100%;
+    overflow: visible;
+    padding: $au-unit-small;
 
 
     @include mq(large) {
       left: calc(100% + #{$au-unit-large});
-      width: $au-unit-huge*4.5;
+      width: $au-unit-huge*4;
     }
   }
 
   .say-editor-hints {
     position: sticky;
-    top: 0;
+    top: $au-unit + $au-unit-small + $au-unit-tiny;
   }
 
   .say-editor-hints__list {
     position: sticky;
     top: 0;
   }
+
+  .say-toast {
+    opacity: 0 !important;
+  }
+
 }
 
 .au-c-meeting-chrome__highlight {
@@ -249,13 +255,13 @@
   transition: opacity $au-transition;
   display: none;
 
-  @include mq(medium) {
+  @include mq(1160px) {
     display: block;
     width: $au-unit-huge*3;
   }
 
   @include mq(large) {
-    width: $au-unit-huge*4;
+    width: $au-unit-huge*3.5;
   }
 
   &:hover {
