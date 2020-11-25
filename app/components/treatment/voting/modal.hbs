@@ -33,14 +33,13 @@
                 {{t "votingModal.actionsLabel"}}
               </div>
               <div class="col--8-12 u-align--right">
-                <WuLinkButton
-                  class="button--small"
-                  @isNarrow={{true}}
-                  @onClick={{perform this.addStemming}}
+                <AuButton
+                  {{on "click" (perform this.addStemming)}}
+                  @icon="add"
+                  @iconAlignment="left"
                 >
-                  <i class="vi vi-plus vi-u-s"></i>
                   {{t "votingModal.createVotingButton"}}
-                </WuLinkButton>
+                </AuButton>
               </div>
             </div>
           </th>
@@ -87,24 +86,23 @@
                 {{/if}}
               </td>
               <td>
-                <WuButtonGroup>
-                  <WuLinkButton
-                    class="button--small"
-                    @isNarrow={{true}}
-                    @onClick={{fn this.toggleEditStemming stemming}}
+                <AuButtonGroup>
+                  <AuButton
+                    {{on "click" (fn this.toggleEditStemming stemming)}}
+                    @icon="pencil"
+                    @iconAlignment="left"
                   >
-                    <i class="vi vi-edit vi-u-s"></i>
                     {{t "votingModal.toggleEditButton"}}
-                  </WuLinkButton>
-                  <WuLinkButton
-                    class="button--small button--alt"
-                    @isNarrow={{true}}
-                    @onClick={{fn this.removeStemming stemming}}
+                  </AuButton>
+                  <AuButton
+                    {{on "click" (fn this.removeStemming stemming)}}
+                    @skin="secondary"
+                    @icon="bin"
+                    @iconAlignment="left"
                   >
-                    <i class="vi vi-cross vi-u-s"></i>
                     {{t "votingModal.deleteButton"}}
-                  </WuLinkButton>
-                </WuButtonGroup>
+                  </AuButton>
+                </AuButtonGroup>
               </td>
             </tr>
           {{else}}
