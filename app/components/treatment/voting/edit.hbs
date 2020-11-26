@@ -51,11 +51,10 @@
       {{t "votingEdit.fourthStepExplanationPartTwo"}}
     </p>
     <AuButtonGroup class="u-spacer">
-      <AuButton @isNarrow={{true}} {{on "click" this.save}}>
-        <i class="vi vi-check vi-u-s"></i>
+      <AuButton {{on "click" this.save}}>
         {{t "votingEdit.saveButton"}}
       </AuButton>
-      <AuButton @isNarrow={{true}} @isAlt={{true}} {{on "click" this.cancel}}>
+      <AuButton @skin="secondary" {{on "click" this.cancel}}>
         {{t "votingEdit.cancelButton"}}
       </AuButton>
     </AuButtonGroup>

@@ -105,24 +105,30 @@
 
         <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper">
           {{t "meetingForm.secondSectionTitle"}}
-          {{!-- voorbeeld error
-                     <span class="au-c-onboarding au-c-onboarding--error">
-                     <AuIcon @icon="alert-triangle"/>
-                     Vul een secretaris in om de zitting te kunnen publiceren.
-                     </span>
-                     --}}
+          <span class="au-c-onboarding">
+            <AuIcon @icon="info-circle"/>
+            {{t "meetingForm.secondSectionNotFilledWarning"}}
+          </span>
         </AuHeading>
         <ParticipationList
           @zitting={{@zitting}}
           @onSave={{this.saveParticipationList}}
         />
 
-        <AuHeading id="sectionThree" @level="2" @skin="3">
+        <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper">
           {{t "meetingForm.thirdSectionTitle"}}
+          <span class="au-c-onboarding">
+            <AuIcon @icon="info-circle"/>
+            {{t "meetingForm.thirdSectionNotFilledWarning"}}
+          </span>
         </AuHeading>
         <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchBehandelingen}}> </ManageAgendaZitting>
-        <AuHeading id="sectionFour" @level="2" @skin="3">
+        <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper">
           {{t "meetingForm.fourthSectionTitle"}}
+          <span class="au-c-onboarding">
+            <AuIcon @icon="info-circle"/>
+            {{t "meetingForm.fourthSectionNotFilledWarning"}}
+          </span>
         </AuHeading>
         {{#if this.fetchBehandelingen.lastSuccessful}}
           {{#each this.behandelingen as |behandeling|}}

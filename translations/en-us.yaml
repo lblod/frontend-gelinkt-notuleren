@@ -29,7 +29,10 @@ meetingForm:
   meetingHeadingPartOne: Meeting minutes of
   meetingHeadingPartTwo: of
   firstSectionNotFilledWarning: Before you can start the meeting it is necessary to set a date, location and governing body.
-  bestuursorganNotSelectedWarning: Before you can proceed, the meeting must first have information about the governing body.
+  secondSectionNotFilledWarning: Complete the attendance.
+  thirdSectionNotFilledWarning: Manage the agenda of your meeting. You can add new agenda items or add draft decisions.
+  fourthSectionNotFilledWarning: Manage your decision and votes.
+  bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
   modalTitle: Manage general information about the meeting
   bestuursorganLabel: "Held by:"
@@ -232,4 +235,3 @@ blockchainStatus:
   encryptedLabel: Encrypted
   encryptingLabel: Encrypting
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
-
