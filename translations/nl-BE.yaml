@@ -99,13 +99,13 @@ manageAgendaZittingModalEdit:
   geplandOpenbaarFalseLabel: Gepland besloten agendapunt
 manageAgendaZittingModalDelete:
   modalSubtitle: Verwijder agendapunt
-  toggleEditButton: Behoud agendapunt en behandeling
+  toggleEditButton: Behoud agendapunt
   deleteButton: Verwijder agendapunt
-  toggleWarningButton: Verwijder het agendapunt en de behandeling van het agendapunt
+  toggleWarningButton: Verwijder het agendapunt
   warningPartOne: U kan deze actie niet ongedaan maken.
-  warningPartTwo: U verwijdert het agendapunt uit de agenda, en de volledige behandeling van het agendapunt.
-  agreeQuestion: Bent u zeker dat u het agendapunt en de behandeling wil verwijderen?
-  checkboxLabel: Ik begrijp dat het agendapunt en de behandeling van het agendapunt onomkeerbaar verwijderd worden.
+  warningPartTwo: U verwijdert het agendapunt uit de agenda.
+  agreeQuestion: Bent u zeker dat u het agendapunt wil verwijderen?
+  checkboxLabel: Ik begrijp dat het agendapunt onomkeerbaar verwijderd worden.
 manageAgendaZittingModalMove:
   title: Verplaats agendapunt
   positionSelectPlaceholder: Selecteer positie

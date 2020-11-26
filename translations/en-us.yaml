@@ -99,13 +99,13 @@ manageAgendaZittingModalEdit:
   geplandOpenbaarFalseLabel: Private
 manageAgendaZittingModalDelete:
   modalSubtitle: Delete agenda item
-  toggleEditButton: Retain agenda item and treatment
+  toggleEditButton: Retain agenda item
   deleteButton: Delete agenda item
-  toggleWarningButton: Delete the agenda item and the treatment of the agenda item
+  toggleWarningButton: Delete the agenda item.
   warningPartOne: You cannot undo this action.
-  warningPartTwo: You are going to remove the agenda item from the agenda, and the complete treatment of the agenda item.
-  agreeQuestion: Are you sure you want to delete the agenda item and the treatment?
-  checkboxLabel: I understand that the agenda item and the treatment of the agenda item will be irreversibly removed.
+  warningPartTwo: You are going to remove the agenda item from the agenda.
+  agreeQuestion: Are you sure you want to delete the agenda item?
+  checkboxLabel: I understand that the agenda item will be irreversibly removed.
 manageAgendaZittingModalMove:
   title: Move agenda item
   positionSelectPlaceholder: Select position
