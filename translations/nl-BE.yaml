@@ -29,6 +29,9 @@ meetingForm:
   meetingHeadingPartOne: Notulen van
   meetingHeadingPartTwo: van
   firstSectionNotFilledWarning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
+  secondSectionNotFilledWarning: Zorg ervoor dat je de aanwezigenlijst correct aanvult voor je aan de stemmingen begint.
+  thirdSectionNotFilledWarning: Beheer hier de agenda van je zitting. Je kan nieuwe besluiten of reeds gemaakte ontwerpbesluiten toevoegen.
+  fourthSectionNotFilledWarning: Bewerk je besluiten en beheer de stemmingen.
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
   modalTitle: Beheer algemene informatie over de zitting
@@ -231,6 +234,3 @@ blockchainStatus:
   encryptedLabel: Versleuteld
   encryptingLabel: Bezig met versleutelen
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
-
-
-

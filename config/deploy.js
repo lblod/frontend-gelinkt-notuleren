@@ -49,7 +49,6 @@ module.exports = function(deployTarget) {
       host: 'demo-lblod.s.redpencil.io',
       port: 22,
       delete: false,
-      privateKey: process.env.SSH_AUTH_SOCK,
       arg:['--verbose']
     };
   }

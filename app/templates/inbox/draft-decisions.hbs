@@ -34,14 +34,14 @@
         {{/if}}
       </td>
       <td>
-      	{{moment-calendar row.createdOn}}
-      	<br>
-      	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
+        {{moment-calendar row.createdOn}}
+        <br>
+        <AuHelpText @skin="secondary">{{moment-from-now this.document.currentVersion.updatedOn}}</AuHelpText>
       </td>
       <td>
-      	{{moment-calendar row.updatedOn}}
-      	<br>
-      	<p class="smaller text-fade">{{moment-from-now this.document.currentVersion.updatedOn}}</p>
+        {{moment-calendar row.updatedOn}}
+        <br>
+        <AuHelpText @skin="secondary">{{moment-from-now this.document.currentVersion.updatedOn}}</AuHelpText>
       </td>
       <td>
         <EditorStatusPill @status={{container.ontwerpBesluitStatus}} /> <br> <DocumentLinkToPublished @document={{row}} />
