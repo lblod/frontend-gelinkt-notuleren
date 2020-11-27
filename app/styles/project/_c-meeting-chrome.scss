@@ -9,11 +9,16 @@
 /* Component
    ========================================================================== */
 
+.au-c-meeting {
+  background-color: $au-gray-100;
+}
+
 .au-c-meeting-chrome {
   padding: $au-unit $au-unit/2;
   width: 100%;
   position: relative;
-  background-color: $au-gray-100;
+  overflow: visible;
+  z-index: 2;
 
   @include mq($until: medium) {
     overflow: hidden;
@@ -24,11 +29,13 @@
   }
 
   @include mq(1160px) {
-    padding-left: $au-unit-huge*3;
+    left: $au-unit-huge*3;
+    width: calc(100% - #{$au-unit-huge*3});
   }
 
   @include mq(large) {
-    padding-left: $au-unit-huge*3.5;
+    left: $au-unit-huge*3.5;
+    width: calc(100% - #{$au-unit-huge*3.5});
     padding-right: $au-unit-huge*4;
   }
 }
@@ -82,6 +89,7 @@
 
   .say-container {
     position: relative;
+    z-index: 9;
     overflow: visible !important;
   }
 
@@ -139,6 +147,7 @@
     width: $au-unit-huge*3.5;
     height: 100%;
     overflow: visible;
+    z-index: 999;
     padding: $au-unit-small;
 
 
@@ -159,9 +168,20 @@
   }
 
   .say-toast {
+    display: none !important;
     opacity: 0 !important;
   }
 
+  .say-modal-backdrop {
+  }
+
+  .say-modal--fullscreen {
+    transform: translate(0) !important;
+    top: 96px + 20px;
+    left: 0;
+    height: calc(100% - 136px);
+    width: calc(100% - #{$au-unit-large});
+  }
 }
 
 .au-c-meeting-chrome__highlight {
@@ -245,7 +265,6 @@
   @include au-font-size($au-h6);
   opacity: .7;
   position: fixed;
-  z-index: 1;
   top: $au-unit-huge;
   left: 0;
   bottom: 0;
