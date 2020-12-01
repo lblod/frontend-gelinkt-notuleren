@@ -59,6 +59,7 @@ Router.map(function() {
       this.route('agenda');
       this.route('besluitenlijst');
       this.route('uittreksels');
+      this.route('notulen');
     });
   });
 
