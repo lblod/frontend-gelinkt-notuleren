@@ -30,7 +30,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     });
     if(notulen.length) {
       this.notulen = notulen.firstObject;
-      this.publicBehandelingUris = notulen.publicBehandelingen;
+      this.publicBehandelingUris = notulen.firstObject.publicBehandelingen;
     } else {
       const prePublish = yield this.createPrePublishedResource.perform();
       const rslt = yield this.store.createRecord("versioned-notulen", {
@@ -38,9 +38,9 @@ export default class MeetingsPublishNotulenController extends Controller {
         content: prePublish
       });
       this.notulen = rslt;
-      const behandelings = yield this.fetchBehandelings.perform();
-      this.behandelings = behandelings;
     }
+    const behandelings = yield this.fetchBehandelings.perform();
+    this.behandelings = behandelings;
   }
 
 
@@ -121,9 +121,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   @action
   togglePublicationStatus(behandeling) {
-    console.log(behandeling);
     const uri = behandeling.behandeling;
-    console.log(this);
     if (this.publicBehandelingUris.includes(uri))
       this.publicBehandelingUris.removeObject(uri);
     else
