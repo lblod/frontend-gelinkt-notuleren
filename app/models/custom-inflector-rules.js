@@ -59,6 +59,8 @@ inflector.irregular('task', 'tasks');
 inflector.irregular('tasklist-solution', 'tasklist-solutions');
 inflector.irregular('task-solution', 'task-solutions');
 inflector.irregular('blockchain-status', 'blockchain-statuses');
+inflector.irregular('concept', 'concepts');
+inflector.irregular('concept-scheme', 'concept-schemes');
 inflector.uncountable('sync');
 // Meet Ember Inspector's expectation of an export
 export default {};

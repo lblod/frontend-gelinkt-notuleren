@@ -1,3 +1,7 @@
-<AuPill @skin={{editorStatusClass}}>
-  {{capitalize status.name}}
+<AuPill @skin={{this.editorStatusClass}}>
+  {{#if @status.label}}
+    {{capitalize @status.label}}
+  {{else}}
+    Concept
+  {{/if}}
 </AuPill>

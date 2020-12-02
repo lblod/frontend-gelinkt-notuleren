@@ -37,17 +37,21 @@
       <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
     </label>
   </div>
-
-  <Agenda::Move
-  @afterAgendapuntOptions={{@afterAgendapuntOptions}}
-  @agendapunt={{@agendapunt}}
-  @agendapunten={{@agendapunten}}
-  @selectedLocation={{@selectedLocation}}
-  @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
-  @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
-  @selectAfterAgendapunt={{@selectAfterAgendapunt}}
-  @selectLocation={{@selectLocation}}
-  />
+  {{#if (gt @agendapunten.length 1)}}
+    <Agenda::Move
+      @afterAgendapuntOptions={{@afterAgendapuntOptions}}
+      @agendapunt={{@agendapunt}}
+      @agendapunten={{@agendapunten}}
+      @selectedLocation={{@selectedLocation}}
+      @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
+      @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
+      @selectAfterAgendapunt={{@selectAfterAgendapunt}}
+      @selectLocation={{@selectLocation}}
+    />
+  {{/if}}
+  {{#if @isNew}}
+    <Agenda::DraftImport @agendapunt={{@agendapunt}} @createBehandeling={{@createBehandeling}}/>
+  {{/if}}
   {{#unless @isNew}}
     <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
   {{/unless}}

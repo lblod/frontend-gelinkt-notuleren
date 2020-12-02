@@ -8,7 +8,6 @@ export default Model.extend({
   uri: attr(),
   signedResources: hasMany('signed-resource'),
   publishedResource: belongsTo('published-resource'),
-  documentContainer: belongsTo('document-container'),
-  editorDocument: belongsTo('editor-document'),
+  zitting: belongsTo('zitting'),
   behandeling: belongsTo('behandeling-van-agendapunt')
 });

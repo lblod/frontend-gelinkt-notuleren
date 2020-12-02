@@ -13,7 +13,7 @@ export default Route.extend(DataTableRouteMixin, {
   },
   mergeQueryOptions(params) {
     const query = {
-      include: 'status,current-version',
+      include: 'status,current-version,ontwerp-besluit-status',
       'filter[status][:id:]': 'c02542af-e6be-4cc6-be60-4530477109fc', // actief
       'filter[folder][:id:]': 'ae5feaed-7b70-4533-9417-10fbbc480a4c' // decision drafts
     };

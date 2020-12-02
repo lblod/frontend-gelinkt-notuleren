@@ -1,15 +1,15 @@
-import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import DefaultQueryParamsMixin from 'ember-data-table/mixins/default-query-params';
-import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import {action} from '@ember/object';
 
-export default Controller.extend(DefaultQueryParamsMixin, {
-  currentSession: service(),
-  sort: '-current-version.updated-on',
+export default class InboxDraftDecisionsController extends Controller.extend(DefaultQueryParamsMixin) {
+  @service currentSession;
+  @service store;
+  sort='-current-version.updated-on';
 
-  actions: {
-    openNewDocument() {
-      this.transitionToRoute('draft-decisions.new');
-    }
+  @action
+  openNewDocument() {
+    this.transitionToRoute('draft-decisions.new');
   }
-});
+}

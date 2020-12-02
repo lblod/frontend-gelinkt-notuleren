@@ -1,0 +1,15 @@
+<label class="form__label">{{t "manageAgendaZittingModalDraftImport.title"}}</label>
+<PowerSelect
+  @class="select select--block u-spacer--tiny"
+  @renderInPlace={{true}}
+  @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}
+  @options={{this.options}}
+  @verticalPosition="above"
+  @searchEnabled={{true}}
+  @selected={{this.selected}}
+  @allowClear={{true}}
+  @search={{perform this.getDrafts}}
+  @onchange={{this.selectDraft}}
+  as |option|>
+  {{option.currentVersion.title}}
+</PowerSelect>

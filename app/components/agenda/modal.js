@@ -67,6 +67,15 @@ export default class AgendaModalComponent extends Component {
   @action
   async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
+
+    const behandeling=(await this.store.query('behandeling-van-agendapunt',  {"filter[onderwerp][:id:]": this.currentlyEditing.id})).firstObject;
+    const documentContainer=await behandeling.documentContainer;
+
+    documentContainer.ontwerpBesluitStatus=
+      await this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
+
+    await documentContainer.save();
+
     this.toBeDeleted.push(this.currentlyEditing);
     this.cancelEditing();
   }
@@ -116,16 +125,19 @@ export default class AgendaModalComponent extends Component {
   /**
    * @param {import("../../models/agendapunt").default} agendapunt
    */
+  @action
   async createBehandeling(agendapunt) {
     /** @type {import("../../models/behandeling-van-agendapunt").default)} */
-    const behandeling = this.store.createRecord("behandeling-van-agendapunt");
-    behandeling.openbaar = agendapunt.geplandOpenbaar;
-    behandeling.onderwerp = agendapunt;
-    const previous = await agendapunt.vorigeAgendapunt;
-    behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
-    behandeling.voorzitter = this.args.zitting.voorzitter;
-    behandeling.secretaris = this.args.zitting.secretaris;
-    this.unsavedBehandelingen.push(behandeling);
+    if(!agendapunt.behandeling.content){
+      const behandeling = this.store.createRecord("behandeling-van-agendapunt");
+      behandeling.openbaar = agendapunt.geplandOpenbaar;
+      behandeling.onderwerp = agendapunt;
+      const previous = await agendapunt.vorigeAgendapunt;
+      behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
+      behandeling.voorzitter = this.args.zitting.voorzitter;
+      behandeling.secretaris = this.args.zitting.secretaris;
+      this.unsavedBehandelingen.push(behandeling);
+    }
     // agendapunt.behandeling = behandeling;
     // await agendapunt.save();
   }

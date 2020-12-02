@@ -49,6 +49,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
         folder: draftDecisionFolder,
         status: activeStatus,
       });
+      this.documentContainer.ontwerpBesluitStatus=yield this.store.findRecord("concept", "7186547b61414095aa2a4affefdcca67"); //geagendered status
       this.documentContainer.currentVersion = this.document;
       this.behandeling.documentContainer = this.documentContainer;
       yield this.document.save();
