@@ -21,7 +21,7 @@
             {{agendapunt.beschrijving}}
           </td>
           <td>
-            {{agendapunt.geplandOpenbaar}}
+            {{if agendapunt.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel") (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
           </td>
         </tr>
       {{/each}}
