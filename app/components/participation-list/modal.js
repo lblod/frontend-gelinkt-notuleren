@@ -30,7 +30,7 @@ export default class ParticipationListModalComponent extends Component {
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
-      'filter[:lt:einde]': today,
+      'filter[:lt:start]': today,
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandataris = yield this.store.query('mandataris', queryParams);
