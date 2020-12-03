@@ -2,7 +2,8 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
-import {task} from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency-decorators';
+import { get } from '@ember/object';
 
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
@@ -13,7 +14,6 @@ export default class ParticipationListComponent extends Component {
   @tracked aanwezigenBijStart;
   @tracked bestuursorgaan;
   @tracked mandatees;
-  @tracked hack;
 
   @service store;
 
@@ -25,6 +25,11 @@ export default class ParticipationListComponent extends Component {
     this.bestuursorgaan = this.args.zitting.bestuursorgaan;
     this.loadData.perform();
   }
+
+  get dataLoading() {
+    return this.loadData.isRunning || get(this.voorzitter, 'isLoading') || get(this.secretaris,'isLoading') || get(this.aanwezigenBijStart, 'isLoading') || get(this.bestuursorgaan, 'isLoading');
+  }
+
   @task
   *loadData() {
     yield this.fetchMandatees();
@@ -40,8 +45,9 @@ export default class ParticipationListComponent extends Component {
     this.mandatees = await this.store.query('mandataris', queryParams);
   }
 
+  // this is only called after loading has finished
   get hasParticipationInfo() {
-    return !!(this.voorzitter.content || this.secretaris.content || this.aanwezigenBijStart.content.length || this.hack);
+    return Boolean(this.aanwezigenBijStart.length > 0 || this.voorzitter.id || this.secretaris.id);
   }
 
   get mandateesNotPresent() {
@@ -59,11 +65,8 @@ export default class ParticipationListComponent extends Component {
       e.preventDefault();
     }
     this.popup = !this.popup;
-    if(this.popup){
-      //very bad
-      this.hack=true;
-    }
   }
+  
   @action
   onSave(info) {
     this.args.onSave(info);

@@ -1,16 +1,16 @@
 {{#if this.bestuursorgaan}}
   <div class="au-c-meeting-chrome-card">
-    {{#if this.loadData.isRunning}}
+    {{#if this.dataLoading}}
       <p>{{t "participationList.loadingTitle"}}</p>
       <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
     {{else}}
-      {{#if this.hasParticipationInfo}}
-        <ul class="au-c-list-divider">
+      {{#if hasParticipationInfo}}
+      <ul class="au-c-list-divider">
           <li class="au-c-list-divider__item">
             {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
           </li>
-          <li class="au-c-list-divider__item">
 
+          <li class="au-c-list-divider__item">
             {{t "participationList.secretarisLabel"}} <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
             {{!-- example error
             <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
@@ -32,7 +32,6 @@
           </li>
         </ul>
       {{/if}}
-
       <AuButton
         @width="block"
         @skin="secondary"
