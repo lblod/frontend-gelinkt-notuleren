@@ -12,8 +12,7 @@
     <li class="au-c-list-divider__item">
       {{t "participation.presentLabel"}}
       {{#each this.behandeling.aanwezigen as |mandataris|}}
-
-        <strong>{{mandataris.isBestuurlijkeAliasVan.achternaam}}</strong>
+          <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
       {{/each}}
     </li>
   </ul>
