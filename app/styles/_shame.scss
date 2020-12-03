@@ -407,3 +407,54 @@ input.input-field {
   width: calc(100% - #{$au-unit-large});
   max-width: calc(100% - #{$au-unit-large});
 }
+
+// // Missing modal styles
+// .au-c-modal-header {
+//   position: relative;
+//   z-index: 1;
+//   width: 100%;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: $au-unit-small;
+//   border-bottom: 1px solid $au-gray-300;
+
+//   @include mq(medium) {
+//     padding: $au-unit;
+//   }
+// }
+
+// .au-c-modal__title {
+//   @include au-font-size($au-h3);
+//   font-family: $au-font-secondary;
+//   font-weight: $au-medium;
+
+//   &:focus {
+//     outline: 0;
+//   }
+// }
+
+// .au-c-modal__close {
+//   position: absolute;
+//   z-index: 99;
+//   top: $au-unit;
+//   right: $au-unit;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   appearance: none;
+//   border: 0;
+//   padding: 0;
+//   text-align: center;
+//   color: $au-gray-700;
+//   transition: color $au-transition;
+
+//   &:hover,
+//   &:focus {
+//     color: $au-gray-600;
+//   }
+
+//   &:focus {
+//     outline: $au-outline;
+//   }
+// }
