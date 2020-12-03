@@ -50,14 +50,14 @@ export default class ParticipationListComponent extends Component {
     return Boolean(this.aanwezigenBijStart.length > 0 || this.voorzitter.id || this.secretaris.id);
   }
   get mandateesPresent(){
-    const sorted=this.aanwezigenBijStart.sortBy('isBestuurlijkeAliasVan.fullName');
+    const sorted=this.aanwezigenBijStart.sortBy('isBestuurlijkeAliasVan.achternaam');
     return sorted
   }
   get mandateesNotPresent() {
     if(this.aanwezigenBijStart && this.mandatees) {
       const aanwezigenUris = this.aanwezigenBijStart.map((mandataris) => mandataris.uri);
       const notPresent = this.mandatees.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
-      const sorted=notPresent.sortBy('isBestuurlijkeAliasVan.fullName');
+      const sorted=notPresent.sortBy('isBestuurlijkeAliasVan.achternaam');
       return sorted;
     }
     return [];

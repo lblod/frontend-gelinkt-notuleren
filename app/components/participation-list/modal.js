@@ -24,6 +24,7 @@ export default class ParticipationListModalComponent extends Component {
   @task
   *fetchData() {
     let queryParams = {
+      sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
        page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
