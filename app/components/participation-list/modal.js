@@ -23,12 +23,18 @@ export default class ParticipationListModalComponent extends Component {
 
   @task
   *fetchData() {
+    //kinda wierd depends on pc date can be spoofed
+    //not 100% sure this works
+    const today=(new Date).toISOString().split('T')[0]
+
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
-       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
+      'filter[:lt:einde]': today,
+      page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandataris = yield this.store.query('mandataris', queryParams);
+
     this.mandataris = mandataris;
   }
 
