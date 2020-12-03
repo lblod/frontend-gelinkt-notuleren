@@ -66,6 +66,9 @@
         <a href="#sectionFour" class="au-c-link au-c-link--secondary">
           {{t "meetingForm.fourthSectionTitle"}}
         </a>
+        {{#if this.fetchBehandelingen.isRunning}}
+          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+        {{/if}}
         {{#if this.fetchBehandelingen.lastSuccessful}}
           <ul class="au-c-list-divider">
             {{#each this.behandelingen as |behandeling|}}
@@ -130,6 +133,9 @@
             {{t "meetingForm.fourthSectionNotFilledWarning"}}
           </span>
         </AuHeading>
+        {{#if this.fetchBehandelingen.isRunning}}
+          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+        {{/if}}
         {{#if this.fetchBehandelingen.lastSuccessful}}
           {{#each this.behandelingen as |behandeling|}}
             <div>
