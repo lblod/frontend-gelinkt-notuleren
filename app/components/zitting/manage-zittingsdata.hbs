@@ -37,16 +37,14 @@
       </div>
     </Modal.Body>
     <Modal.Footer>
-      <AuToolbarGroup>
-        <AuButtonGroup>
-          <AuButton {{on "click" this.saveZittingsData}}>
-            {{t "manageZittingsData.saveButton"}}
-          </AuButton>
-          <AuButton {{on "click" this.cancel}} @skin="secondary">
-            {{t "manageZittingsData.cancelButton"}}
-          </AuButton>
-        </AuButtonGroup>
-      </AuToolbarGroup>
+      <AuButtonGroup>
+        <AuButton {{on "click" this.saveZittingsData}}>
+          {{t "manageZittingsData.saveButton"}}
+        </AuButton>
+        <AuButton {{on "click" this.cancel}} @skin="secondary">
+          {{t "manageZittingsData.cancelButton"}}
+        </AuButton>
+      </AuButtonGroup>
     </Modal.Footer>
   </AuModal>
   {{else}}
