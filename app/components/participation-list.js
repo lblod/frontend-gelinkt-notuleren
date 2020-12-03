@@ -38,6 +38,7 @@ export default class ParticipationListComponent extends Component {
   async fetchMandatees() {
     const bestuursorgaanUri = this.bestuursorgaan && this.bestuursorgaan.get('uri');
     let queryParams = {
+      sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
@@ -49,12 +50,16 @@ export default class ParticipationListComponent extends Component {
   get hasParticipationInfo() {
     return Boolean(this.aanwezigenBijStart.length > 0 || this.voorzitter.id || this.secretaris.id);
   }
-
+  get mandateesPresent(){
+    const sorted=this.aanwezigenBijStart.sortBy('isBestuurlijkeAliasVan.fullName');
+    return sorted
+  }
   get mandateesNotPresent() {
     if(this.aanwezigenBijStart && this.mandatees) {
       const aanwezigenUris = this.aanwezigenBijStart.map((mandataris) => mandataris.uri);
       const notPresent = this.mandatees.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
-      return notPresent;
+      const sorted=notPresent.sortBy('isBestuurlijkeAliasVan.fullName');
+      return sorted;
     }
     return [];
   }
@@ -66,7 +71,7 @@ export default class ParticipationListComponent extends Component {
     }
     this.popup = !this.popup;
   }
-  
+
   @action
   onSave(info) {
     this.args.onSave(info);
