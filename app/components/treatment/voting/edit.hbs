@@ -1,5 +1,9 @@
-<WuModal @title="Bewerk stemming" @dialog-class="modal-dialog--wide" @onClose={{this.cancel}}>
-  <div class="u-padding--round--small">
+<AuModal
+  @modalTitle="Bewerk stemming"
+  @modalOpen={{true}}
+  @size="fullscreen"
+  @closeModal={{this.cancel}} as |Modal| >
+  <Modal.Body>
     <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
       {{t "votingEdit.firstStepTitle"}}
     </h3>
@@ -50,7 +54,9 @@
       </strong>
       {{t "votingEdit.fourthStepExplanationPartTwo"}}
     </p>
-    <AuButtonGroup class="u-spacer">
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
       <AuButton {{on "click" this.save}}>
         {{t "votingEdit.saveButton"}}
       </AuButton>
@@ -58,5 +64,5 @@
         {{t "votingEdit.cancelButton"}}
       </AuButton>
     </AuButtonGroup>
-  </div>
-</WuModal>
+  </Modal.Footer>
+</AuModal>

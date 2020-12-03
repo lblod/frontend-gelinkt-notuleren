@@ -1,9 +1,9 @@
 {{#if @show}}
-  <WuModal
-    @title={{t "votingModal.modalTitle"}}
-    @dialog-class="modal-dialog--wide modal-dialog--sectioned"
-    @onClose={{@onClose}}
-  >
+  <AuModal
+    @modalTitle={{t "votingModal.modalTitle"}}
+    @modalOpen={{@show}}
+    @size="fullscreen"
+    @closeModal={{fn (mut @show) false}} as |Modal| >
     {{#if this.editMode}}
       <Treatment::Voting::Edit
         @onCancel={{this.onCancelEdit}}
@@ -117,5 +117,5 @@
         {{/if}}
       </tbody>
     </table>
-  </WuModal>
+  </AuModal>
 {{/if}}
