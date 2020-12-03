@@ -34,5 +34,6 @@ export default class ManageAgendaZittingComponent extends Component {
   @action
   cancel(){
     this.popup = false;
+    this.loadAgenda.perform();
   }
 }
