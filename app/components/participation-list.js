@@ -38,7 +38,6 @@ export default class ParticipationListComponent extends Component {
   async fetchMandatees() {
     const bestuursorgaanUri = this.bestuursorgaan && this.bestuursorgaan.get('uri');
     let queryParams = {
-      sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
