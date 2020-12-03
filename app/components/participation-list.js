@@ -41,7 +41,7 @@ export default class ParticipationListComponent extends Component {
     let queryParams = {
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
       include: 'is-bestuurlijke-alias-van',
-     'filter[:lt:einde]': today,
+     'filter[:gt:einde]': today,
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     this.mandatees = await this.store.query('mandataris', queryParams);
