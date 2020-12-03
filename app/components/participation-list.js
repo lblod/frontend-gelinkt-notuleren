@@ -13,6 +13,7 @@ export default class ParticipationListComponent extends Component {
   @tracked aanwezigenBijStart;
   @tracked bestuursorgaan;
   @tracked mandatees;
+  @tracked hack;
 
   @service store;
 
@@ -40,7 +41,7 @@ export default class ParticipationListComponent extends Component {
   }
 
   get hasParticipationInfo() {
-    return !!(this.voorzitter.content || this.secretaris.content || this.aanwezigenBijStart.content.length);
+    return !!(this.voorzitter.content || this.secretaris.content || this.aanwezigenBijStart.content.length || this.hack);
   }
 
   get mandateesNotPresent() {
@@ -58,6 +59,10 @@ export default class ParticipationListComponent extends Component {
       e.preventDefault();
     }
     this.popup = !this.popup;
+    if(this.popup){
+      //very bad
+      this.hack=true;
+    }
   }
   @action
   onSave(info) {
