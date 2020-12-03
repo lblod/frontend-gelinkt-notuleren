@@ -27,12 +27,12 @@
   </label>
   <div class="u-spacer--small">
     <label class="radio">
-      <input class="radio__toggle" type="radio" name="geslotenAgendapunt" checked={{not @agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
+      <input class="radio__toggle" type="radio" name="geslotenAgendapunt" checked={{@agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
       <span></span>
       <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
     </label>
     <label class="radio">
-      <input class="radio__toggle" type="radio" name="openAgendapunt" checked={{@agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
+      <input class="radio__toggle" type="radio" name="openAgendapunt" checked={{not @agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
       <span></span>
       <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
     </label>

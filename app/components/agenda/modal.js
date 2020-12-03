@@ -44,7 +44,7 @@ export default class AgendaModalComponent extends Component {
     const agendapunt = this.store.createRecord("agendapunt");
     agendapunt.titel = "";
     agendapunt.beschrijving = "";
-    agendapunt.geplandOpenbaar = false;
+    agendapunt.geplandOpenbaar = true;
     agendapunt.position = this.zitting.agendapunten.length;
     this.zitting.agendapunten.pushObject(agendapunt);
     this.edit(agendapunt);
