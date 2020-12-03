@@ -1,10 +1,9 @@
-<WuModal
-    @title={{t "manageAgendaZittingModal.modalTitle"}}
-    @dialog-class="modal-dialog--wide modal-dialog--sectioned"
-    @onClose={{this.cancel}}
-    as |Modal|
->
-   <Modal.content @isSectioned={{true}}>
+<AuModal
+  @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
+  @modalOpen={{true}}
+  @size="fullscreen"
+  @closeModal={{this.cancel}} as |Modal| >
+  <Modal.Body>
     {{#if this.isEditing}}
       <Agenda::Edit
         @delete={{this.delete}}
@@ -30,23 +29,18 @@
         @edit={{this.edit}}
         @sort={{this.sort}}/>
     {{/if}}
-   </Modal.content>
-
-  <AuToolbar @border="top" @size="large">
+  </Modal.Body>
+  <Modal.Footer>
     {{#if this.isEditing}}
-      <AuToolbarGroup>
-        <AuButtonGroup>
-          <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
-          <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
-        </AuButtonGroup>
-      </AuToolbarGroup>
+    <AuButtonGroup>
+      <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+    </AuButtonGroup>
     {{else}}
-      <AuToolbarGroup>
-        <AuButtonGroup>
-          <AuButton {{on "click" (perform this.saveAll)}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
-          <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
-        </AuButtonGroup>
-      </AuToolbarGroup>
+    <AuButtonGroup>
+      <AuButton {{on "click" (perform this.saveAll)}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+    </AuButtonGroup>
     {{/if}}
-  </AuToolbar>
-</WuModal>
+  </Modal.Footer>
+</AuModal>

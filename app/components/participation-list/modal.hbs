@@ -1,9 +1,9 @@
 {{#if @show}}
   <div {{did-insert (perform this.fetchData)}}>
     <AuModal
-    @modalTitle="Beheer aanwezigen"
-    @modalOpen={{@show}}
-    @closeModal={{fn (mut @show) false}} as |Modal| >
+      @modalTitle="Beheer aanwezigen"
+      @modalOpen={{@show}}
+      @closeModal={{fn (mut @show) false}} as |Modal| >
       <Modal.Body>
           {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
             <p>{{t "participationList.loadingTitle"}}</p>

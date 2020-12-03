@@ -39,5 +39,5 @@
 </div>
 
 {{#if this.popup}}
-  <Agenda::modal @zitting={{@zitting}} @agendapunten={{@zitting.agendapunten}} @afterSave={{@onChange}} @cancel={{this.cancel}}/>
+  <Agenda::modal @zitting={{@zitting}} @agendapunten={{@zitting.agendapunten}} @afterSave={{@onChange}} @cancel={{this.cancel}} @popup={{true}}/>
 {{/if}}
