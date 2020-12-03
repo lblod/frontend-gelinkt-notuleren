@@ -37,9 +37,11 @@ export default class ParticipationListComponent extends Component {
 
   async fetchMandatees() {
     const bestuursorgaanUri = this.bestuursorgaan && this.bestuursorgaan.get('uri');
+    const today=(new Date).toISOString().split('T')[0];
     let queryParams = {
       'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
       include: 'is-bestuurlijke-alias-van',
+     'filter[:lt:einde]': today,
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     this.mandatees = await this.store.query('mandataris', queryParams);
@@ -51,7 +53,7 @@ export default class ParticipationListComponent extends Component {
   }
   get mandateesPresent(){
     const sorted=this.aanwezigenBijStart.sortBy('isBestuurlijkeAliasVan.achternaam');
-    return sorted
+    return sorted;
   }
   get mandateesNotPresent() {
     if(this.aanwezigenBijStart && this.mandatees) {
