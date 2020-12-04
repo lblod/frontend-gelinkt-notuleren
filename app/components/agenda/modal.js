@@ -101,34 +101,38 @@ export default class AgendaModalComponent extends Component {
 
   @restartableTask
   *saveAll() {
-    debugger;
     yield this.zitting.agendapunten;
-    debugger;
     let previousAgendapoint = null;
-    for(let i; i < this.zitting.agendapunten.length; i++) {
-      debugger;
-      const agendapoint = this.zitting.agendapunten[i];
+    for(let i=0; i < this.zitting.agendapunten.length; i++) {
+      const agendapoint = yield this.zitting.agendapunten.objectAt(i);
+
       agendapoint.position = i;
       agendapoint.vorigeAgendapunt = previousAgendapoint;
       agendapoint.zitting=this.zitting;
 
-      yield agendapoint.behandeling.documentContainer.save();
-      debugger;
-      yield agendapoint.behandeling.save();
-      debugger;
+      const behandeling=yield agendapoint.behandeling;
+      const documentContainer=yield behandeling.documentContainer;
+      if(documentContainer){
+        yield documentContainer.save();
+      }
+      yield behandeling.save();
       yield agendapoint.save();
-      debugger;
+
       previousAgendapoint=agendapoint;
     }
-    for(let i; i < this.toBeDeleted.length; i++){
-      const agendaPoint=this.toBeDeleted[i];
-
-      yield agendaPoint.behandeling.documentContainer.ontwerpBesluitStatus=
-        yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
-
-      yield agendaPoint.behandeling.destroyRecord();
-      yield agendaPoint.destroyRecord();
+    for(let i=0; i < this.toBeDeleted.length; i++){
+      const agendapoint=yield this.toBeDeleted[i];
+      const behandeling=yield agendapoint.behandeling;
+      const documentContainer=yield behandeling.documentContainer;
+      if(documentContainer){
+        yield documentContainer.ontwerpBesluitStatus=
+          yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
+      }
+      yield behandeling.destroyRecord();
+      yield agendapoint.destroyRecord();
     }
+    this.args.afterSave();
+    this.args.cancel();
     // const promises = this.unsavedBehandelingen.map((b) => b.save());
     // yield RSVP.all(promises);
     // yield this.updateVorigeAgendaPunten();
