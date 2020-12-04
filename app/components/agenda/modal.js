@@ -68,13 +68,13 @@ export default class AgendaModalComponent extends Component {
   async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
 
-    const behandeling=(await this.store.query('behandeling-van-agendapunt',  {"filter[onderwerp][:id:]": this.currentlyEditing.id})).firstObject;
-    const documentContainer=await behandeling.documentContainer;
+    // const behandeling=(await this.store.query('behandeling-van-agendapunt',  {"filter[onderwerp][:id:]": this.currentlyEditing.id})).firstObject;
+    // const documentContainer=await behandeling.documentContainer;
 
-    documentContainer.ontwerpBesluitStatus=
-      await this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
+    // documentContainer.ontwerpBesluitStatus=
+    //   await this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
 
-    await documentContainer.save();
+    // await documentContainer.save();
 
     this.toBeDeleted.push(this.currentlyEditing);
     this.cancelEditing();
@@ -101,23 +101,61 @@ export default class AgendaModalComponent extends Component {
 
   @restartableTask
   *saveAll() {
-    const promises = this.unsavedBehandelingen.map((b) => b.save());
-    yield RSVP.all(promises);
-    yield this.updateVorigeAgendaPunten();
-    yield RSVP.all(
-      this.zitting.agendapunten.map((a) => a.behandeling.then((b) => b.save()))
-    );
-    yield this.zitting.agendapunten.then((a) => a.save());
-    this.toBeDeleted.forEach((e) => e.destroyRecord());
-    this.args.afterSave();
-    this.args.cancel();
+    debugger;
+    yield this.zitting.agendapunten;
+    debugger;
+    let previousAgendapoint = null;
+    for(let i; i < this.zitting.agendapunten.length; i++) {
+      debugger;
+      const agendapoint = this.zitting.agendapunten[i];
+      agendapoint.position = i;
+      agendapoint.vorigeAgendapunt = previousAgendapoint;
+      agendapoint.zitting=this.zitting;
+
+      yield agendapoint.behandeling.documentContainer.save();
+      debugger;
+      yield agendapoint.behandeling.save();
+      debugger;
+      yield agendapoint.save();
+      debugger;
+      previousAgendapoint=agendapoint;
+    }
+    for(let i; i < this.toBeDeleted.length; i++){
+      const agendaPoint=this.toBeDeleted[i];
+
+      yield agendaPoint.behandeling.documentContainer.ontwerpBesluitStatus=
+        yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
+
+      yield agendaPoint.behandeling.destroyRecord();
+      yield agendaPoint.destroyRecord();
+    }
+    // const promises = this.unsavedBehandelingen.map((b) => b.save());
+    // yield RSVP.all(promises);
+    // yield this.updateVorigeAgendaPunten();
+    // yield RSVP.all(
+    //   this.zitting.agendapunten.map((a) => a.behandeling.then((b) => b.save()))
+    // );
+    // debugger;
+    // yield RSVP.all(
+    //   this.unsavedDrafts.map(e=>e.save())
+    // )
+    // yield this.zitting.agendapunten.then((a) => a.save());
+    // this.toBeDeleted.forEach((e) => e.destroyRecord());
+    // this.args.afterSave();
+    // this.args.cancel();
   }
 
   @action
   async save() {
     if (this.isNew) {
       this.createBehandeling(this.currentlyEditing);
-      this.isNew = false;
+      if(this.selectedDraft){
+        await this.currentlyEditing.behandeling;
+        this.selectedDraft.ontwerpBesluitStatus=await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
+        this.currentlyEditing.behandeling.set('documentContainer', this.selectedDraft);
+        this.selectedDraft = null;
+        this.isNew = false;
+      }
     }
     this.showAfterAgendapuntOptions = false;
     this.toggleEditing();
@@ -232,4 +270,16 @@ export default class AgendaModalComponent extends Component {
 
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
   }
+  //edit screen importing
+  @tracked
+  unsavedDrafts=[];
+
+  @tracked
+  selectedDraft
+
+  @action
+  async selectDraft(draft){
+    this.selectedDraft=draft;
+  }
+
 }

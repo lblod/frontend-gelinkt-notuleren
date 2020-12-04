@@ -11,7 +11,6 @@ export default class AgendaDraftImportComponent extends Component {
   }
   @service store;
   @tracked options;
-  @tracked selected;
 
   @restartableTask
   * getDrafts(searchParams=''){
@@ -25,14 +24,7 @@ export default class AgendaDraftImportComponent extends Component {
     }
     const containers = yield this.store.query('document-container', query);
     this.options = containers.filter(e=>e.get('ontwerpBesluitStatus.id')!='7186547b61414095aa2a4affefdcca67');//geagenderred status
+    this.args.unsavedDrafts.forEach(e=>this.options.removeObject(e));
   }
-  @action
-  async selectDraft(draft){
-    this.selected=draft;
-    await this.args.createBehandeling(this.args.agendapunt);
-    await this.args.agendapunt.behandeling;
-    draft.ontwerpBesluitStatus=await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
-    await draft.save();
-    this.args.agendapunt.behandeling.set('documentContainer', draft);
-  }
+
 }
