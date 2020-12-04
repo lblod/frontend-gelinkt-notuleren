@@ -31,14 +31,14 @@
         @createAgendapunt={{this.createAgendapunt}}
         @edit={{this.edit}}
         @sort={{this.sort}}/>
+      {{#if this.error}}
+        <AuAlert @alertIcon="cross" @alertskin="error">
+          {{t "manageAgendaZittingModal.saveAllError"}}
+        </AuAlert>
+      {{/if}}
     {{/if}}
-   </Modal.content>
 
-   {{#if this.error}}
-     <AuAlert @alertIcon="cross" @alertskin="error">
-       {{t "manageAgendaZittingModal.saveAllError"}}
-     </AuAlert>
-   {{/if}}
+   </Modal.content>
   <AuToolbar @border="top" @size="large">
     {{#if this.isEditing}}
       <AuToolbarGroup>
