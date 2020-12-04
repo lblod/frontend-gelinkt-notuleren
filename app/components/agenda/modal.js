@@ -128,7 +128,7 @@ export default class AgendaModalComponent extends Component {
       this.error = e;
       throw e;
     }
-    this.args.afterSave();
+    this.afterSave(this.zitting.agendapunten);
     this.args.cancel();
   }
 
