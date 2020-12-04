@@ -34,6 +34,11 @@
     {{/if}}
    </Modal.content>
 
+   {{#if this.error}}
+     <AuAlert @alertIcon="cross" @alertskin="error">
+       {{t "manageAgendaZittingModal.saveAllError"}}
+     </AuAlert>
+   {{/if}}
   <AuToolbar @border="top" @size="large">
     {{#if this.isEditing}}
       <AuToolbarGroup>
@@ -45,7 +50,7 @@
     {{else}}
       <AuToolbarGroup>
         <AuButtonGroup>
-          <AuButton {{on "click" (perform this.saveAll)}} @alert={{this.saveAll.isError}} @loading={{this.saveAll.isRunning}} @disabled={{this.saveAll.isRunning}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
+          <AuButton {{on "click" (perform this.saveAll)}} @loading={{this.saveAll.isRunning}} @disabled={{this.saveAll.isRunning}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
           <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
         </AuButtonGroup>
       </AuToolbarGroup>
