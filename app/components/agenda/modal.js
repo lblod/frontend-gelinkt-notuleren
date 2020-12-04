@@ -9,17 +9,16 @@ import RSVP from "rsvp";
 
 export default class AgendaModalComponent extends Component {
   @service store;
-
   @tracked isEditing = false;
-
   @tracked currentlyEditing;
-
   @tracked isNew = false;
-
   @tracked agendapunten = this.args.agendapunten;
-
   @tracked zitting = this.args.zitting;
-
+  @tracked showAfterAgendapuntOptions = false;
+  @tracked selectedAfterAgendapunt;
+  @tracked selectedLocation;
+  @tracked afterAgendapuntOptions;
+  @tracked error;
   toBeDeleted = [];
   unsavedBehandelingen = [];
 
@@ -67,15 +66,6 @@ export default class AgendaModalComponent extends Component {
   @action
   async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
-
-    const behandeling=(await this.store.query('behandeling-van-agendapunt',  {"filter[onderwerp][:id:]": this.currentlyEditing.id})).firstObject;
-    const documentContainer=await behandeling.documentContainer;
-
-    documentContainer.ontwerpBesluitStatus=
-      await this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
-
-    await documentContainer.save();
-
     this.toBeDeleted.push(this.currentlyEditing);
     this.cancelEditing();
   }
@@ -101,14 +91,43 @@ export default class AgendaModalComponent extends Component {
 
   @restartableTask
   *saveAll() {
-    const promises = this.unsavedBehandelingen.map((b) => b.save());
-    yield RSVP.all(promises);
-    yield this.updateVorigeAgendaPunten();
-    yield RSVP.all(
-      this.zitting.agendapunten.map((a) => a.behandeling.then((b) => b.save()))
-    );
-    yield this.zitting.agendapunten.then((a) => a.save());
-    this.toBeDeleted.forEach((e) => e.destroyRecord());
+    // NOTE: huge try/catch because ember-concurrency error catching does not seem to catch promise rejections
+    try {
+      this.error = null;
+      yield this.zitting.agendapunten;
+      let previousAgendapoint = null;
+      for(let i=0; i < this.zitting.agendapunten.length; i++) {
+        const agendapoint = yield this.zitting.agendapunten.objectAt(i);
+
+        agendapoint.position = i;
+        agendapoint.vorigeAgendapunt = previousAgendapoint;
+        agendapoint.zitting = this.zitting;
+
+        const behandeling = yield agendapoint.behandeling;
+        const documentContainer = yield behandeling.documentContainer;
+        if(documentContainer){
+          yield documentContainer.save();
+        }
+        yield behandeling.save();
+        yield agendapoint.save();
+        previousAgendapoint = agendapoint;
+      }
+      for(let i=0; i < this.toBeDeleted.length; i++){
+        const agendapoint = yield this.toBeDeleted[i];
+        const behandeling = yield agendapoint.behandeling;
+        const documentContainer = yield behandeling.documentContainer;
+        if(documentContainer){
+          documentContainer.ontwerpBesluitStatus = this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
+          yield documentContainer.save();
+        }
+        yield behandeling.destroyRecord();
+        yield agendapoint.destroyRecord();
+      }
+    }
+    catch(e) {
+      this.error = e;
+      throw e;
+    }
     this.args.afterSave();
     this.args.cancel();
   }
@@ -117,7 +136,13 @@ export default class AgendaModalComponent extends Component {
   async save() {
     if (this.isNew) {
       this.createBehandeling(this.currentlyEditing);
-      this.isNew = false;
+      if(this.selectedDraft){
+        await this.currentlyEditing.behandeling;
+        this.selectedDraft.ontwerpBesluitStatus=await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
+        this.currentlyEditing.behandeling.set('documentContainer', this.selectedDraft);
+        this.selectedDraft = null;
+        this.isNew = false;
+      }
     }
     this.showAfterAgendapuntOptions = false;
     this.toggleEditing();
@@ -138,25 +163,6 @@ export default class AgendaModalComponent extends Component {
       behandeling.secretaris = this.args.zitting.secretaris;
       this.unsavedBehandelingen.push(behandeling);
     }
-    // agendapunt.behandeling = behandeling;
-    // await agendapunt.save();
-  }
-
-  //this assumes everything is sorted
-  @action
-  async updateVorigeAgendaPunten() {
-    this.zitting.agendapunten.forEach((agendapunt, i, agendapunten) => {
-      if (i > 0) {
-        agendapunt.vorigeAgendapunt = agendapunten.objectAt(i - 1);
-        agendapunt.behandeling.set(
-          "vorigeBehandelingVanAgendapunt",
-          agendapunten.objectAt(i - 1).behandeling
-        );
-      } else {
-        agendapunt.vorigeAgendapunt = null;
-        agendapunt.behandeling.vorigeBehandelingVanAgendapunt = null;
-      }
-    });
   }
 
   @action
@@ -165,16 +171,6 @@ export default class AgendaModalComponent extends Component {
       agendapunt.position = index;
     });
   }
-
-  //edit screen sorting
-
-  @tracked showAfterAgendapuntOptions = false;
-
-  @tracked selectedAfterAgendapunt;
-
-  @tracked selectedLocation;
-
-  @tracked afterAgendapuntOptions;
 
   @action
   selectAfterAgendapunt(option) {
@@ -232,4 +228,16 @@ export default class AgendaModalComponent extends Component {
 
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
   }
+  //edit screen importing
+  @tracked
+  unsavedDrafts=[];
+
+  @tracked
+  selectedDraft
+
+  @action
+  async selectDraft(draft){
+    this.selectedDraft=draft;
+  }
+
 }

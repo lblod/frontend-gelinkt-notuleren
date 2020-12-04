@@ -6,10 +6,10 @@
   @options={{this.options}}
   @verticalPosition="above"
   @searchEnabled={{true}}
-  @selected={{this.selected}}
+  @selected={{@selectedDraft}}
   @allowClear={{true}}
   @search={{perform this.getDrafts}}
-  @onchange={{this.selectDraft}}
+  @onchange={{@selectDraft}}
   as |option|>
   {{option.currentVersion.title}}
 </PowerSelect>

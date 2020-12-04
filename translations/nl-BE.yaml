@@ -93,6 +93,7 @@ manageAgendaZittingModal:
   noDataMessage: Geen agendapunten gevonden.
   geplandOpenbaarTrueLabel: Openbaar
   geplandOpenbaarFalseLabel: Besloten
+  saveAllError: er ging iets mis bij het bewaren van de agenda, gelieve opnieuw te proberen.
 manageAgendaZittingModalEdit:
   modalSubtitle: Bewerk agendapunt
   geplandOpenbaarTrueLabel: Gepland openbaar agendapunt
