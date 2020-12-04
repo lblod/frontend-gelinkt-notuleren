@@ -101,25 +101,23 @@ export default class AgendaModalComponent extends Component {
 
         agendapoint.position = i;
         agendapoint.vorigeAgendapunt = previousAgendapoint;
-        agendapoint.zitting=this.zitting;
+        agendapoint.zitting = this.zitting;
 
-        const behandeling=yield agendapoint.behandeling;
-        const documentContainer=yield behandeling.documentContainer;
+        const behandeling = yield agendapoint.behandeling;
+        const documentContainer = yield behandeling.documentContainer;
         if(documentContainer){
           yield documentContainer.save();
         }
-        let r=yield behandeling.save();
-        console.log(r);
+        yield behandeling.save();
         yield agendapoint.save();
-        previousAgendapoint=agendapoint;
+        previousAgendapoint = agendapoint;
       }
       for(let i=0; i < this.toBeDeleted.length; i++){
-        const agendapoint=yield this.toBeDeleted[i];
-        const behandeling=yield agendapoint.behandeling;
-        const documentContainer=yield behandeling.documentContainer;
+        const agendapoint = yield this.toBeDeleted[i];
+        const behandeling = yield agendapoint.behandeling;
+        const documentContainer = yield behandeling.documentContainer;
         if(documentContainer){
-          documentContainer.ontwerpBesluitStatus=
-            yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
+          documentContainer.ontwerpBesluitStatus = this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
           yield documentContainer.save();
         }
         yield behandeling.destroyRecord();
