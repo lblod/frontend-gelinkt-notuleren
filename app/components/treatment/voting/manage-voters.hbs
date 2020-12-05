@@ -41,7 +41,6 @@
 </div>
 {{else}}
 
-{{#if this.manageVotes}}
 <AuButtonGroup class="u-spacer--tb">
   <AuButton @isNarrow={{true}} @isSmall={{true}} @isAltBlue={{true}} @isAlt={{true}}
     {{on "click" this.editStemming.setUnaniemVoorstander}}>{{t "votingManageVoting.setUnaniemVoorstanderButton"}} <i
@@ -57,12 +56,5 @@
     {{on "click" this.editStemming.setUnaniemOnthouder}}>{{t "votingManageVoting.setUnaniemOnthouderButton"}} <i class="vi vi-check vi-u-s"></i>
   </AuButton>
 </AuButtonGroup>
-<AuButtonGroup>
-  <AuButton {{on "click" this.saveVotes}}>{{t "votingManageVoting.saveVotesButton"}}</AuButton>
-  <AuButton {{on "click" this.cancelVotes}}>{{t "votingManageVoting.cancelVotesButton"}}</AuButton>
-</AuButtonGroup>
-{{else}}
-<AuButton {{on "click" this.startManageVotes}}>{{t "votingManageVoting.startManageVotesButton"}}</AuButton>
-{{/if}}
 
 {{/if}}

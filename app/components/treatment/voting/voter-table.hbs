@@ -27,8 +27,8 @@
     {{#each this.editStemming.votingMap as |row|}}
     <Treatment::Voting::VoterRow 
     @row={{row}} 
-    @onVoteChange={{this.editStemming.setVote}} 
-    @manageVotes={{@manageVotes}}
+    @onVoteChange={{this.editStemming.setVote}}
+    @secret={{this.editStemming.stemming.geheim}}
     />
 
     {{else}}
