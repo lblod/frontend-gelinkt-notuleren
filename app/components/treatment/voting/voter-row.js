@@ -16,6 +16,7 @@ import { action } from '@ember/object';
 /** @extends {Component<Args>} */
 export default class TreatmentVotingVoterRowComponent extends Component {
   @tracked persoon;
+  @tracked busy = false;
   voteOptions = ["voor", "tegen", "onthouding"];
 
   constructor(parent, args) {
@@ -23,7 +24,7 @@ export default class TreatmentVotingVoterRowComponent extends Component {
     this.fetchPersoon.perform();
   }
   get isVoting() {
-    return this.args.row[1] !== "onthouding";
+    return this.args.row[1] !== "zalNietStemmen";
   }
   get bestuursFunctie() {
     return this.args.row[0].bekleedt.bestuursFunctie.label;
@@ -44,11 +45,15 @@ export default class TreatmentVotingVoterRowComponent extends Component {
   };
   @action
   addStemmer() {
+    this.busy = true;
     this.args.onVoteChange(this.args.row[0], "zalStemmen");
+    this.busy = false;
   }
   @action
   removeStemmer() {
-    this.args.onVoteChange(this.args.row[0], "onthouding");
+    this.busy = true;
+    this.args.onVoteChange(this.args.row[0], "zalNietStemmen");
+    this.busy = false;
   }
 
   @action

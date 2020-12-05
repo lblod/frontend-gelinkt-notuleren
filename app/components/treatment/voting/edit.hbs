@@ -51,7 +51,7 @@
       {{t "votingEdit.fourthStepExplanationPartTwo"}}
     </p>
     <AuButtonGroup class="u-spacer">
-      <AuButton {{on "click" this.save}}>
+      <AuButton @loading={{@saving}} {{on "click" this.save}}>
         {{t "votingEdit.saveButton"}}
       </AuButton>
       <AuButton @skin="secondary" {{on "click" this.cancel}}>

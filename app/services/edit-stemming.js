@@ -45,12 +45,11 @@ export default class EditStemmingService extends Service {
     this._stemming.stemmers.setObjects(stemmers);
     this._stemming.onthouders.setObjects(onthouders);
     if (!this._stemming.geheim) {
-
-    this._stemming.voorstanders.setObjects(voorstanders);
-    this._stemming.tegenstanders.setObjects(tegenstanders);
-    this._stemming.aantalOnthouders = onthouders.length;
-    this._stemming.aantalVoorstanders = voorstanders.length;
-    this._stemming.aantalTegenstanders = tegenstanders.length;
+      this._stemming.voorstanders.setObjects(voorstanders);
+      this._stemming.tegenstanders.setObjects(tegenstanders);
+      this._stemming.aantalOnthouders = onthouders.length;
+      this._stemming.aantalVoorstanders = voorstanders.length;
+      this._stemming.aantalTegenstanders = tegenstanders.length;
     } else {
       this._stemming.voorstanders.clear();
       this._stemming.tegenstanders.clear();
@@ -93,21 +92,27 @@ export default class EditStemmingService extends Service {
   @action
   setUnaniemVoorstander() {
     for (let key of this.votingMap.keys()) {
-      this.votingMap.set(key, "voor");
+      if (this.votingMap.get(key) !== "zalNietStemmen") {
+        this.votingMap.set(key, "voor");
+      }
     }
     this.refreshMap();
   }
   @action
   setUnaniemTegenstander() {
     for (let key of this.votingMap.keys()) {
-      this.votingMap.set(key, "tegen");
+      if (this.votingMap.get(key) !== "zalNietStemmen") {
+        this.votingMap.set(key, "tegen");
+      }
     }
     this.refreshMap();
   }
   @action
   setUnaniemOnthouder() {
     for (let key of this.votingMap.keys()) {
-      this.votingMap.set(key, "onthouding");
+      if (this.votingMap.get(key) !== "zalNietStemmen") {
+        this.votingMap.set(key, "onthouding");
+      }
     }
     this.refreshMap();
   }
