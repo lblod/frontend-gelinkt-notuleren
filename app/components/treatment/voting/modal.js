@@ -86,10 +86,10 @@ export default class TreatmentVotingModalComponent extends Component {
     this.editStemming.stemming = stemming;
     this.editMode = true;
   }
-  @action
-  removeStemming(stemming) {
+  @task
+  removeStemming = function* (stemming) {
     stemming.deleteRecord();
-    stemming.save();
+    yield stemming.save();
   }
   @action
   onCancelEdit() {

@@ -91,10 +91,11 @@
                     {{t "votingModal.toggleEditButton"}}
                   </AuButton>
                   <AuButton
-                    {{on "click" (fn this.removeStemming stemming)}}
+                    {{on "click" (fn (perform this.removeStemming) stemming)}}
                     @skin="secondary"
                     @icon="bin"
                     @iconAlignment="left"
+                    @loading={{ this.removeStemming.isRunning }}
                   >
                     {{t "votingModal.deleteButton"}}
                   </AuButton>
