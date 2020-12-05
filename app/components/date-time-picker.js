@@ -16,6 +16,9 @@ export default class DateTimePicker extends Component{
   }
   @action
   onChangeDate(date) {
+    if(!this.date) {
+      this.date = new Date();
+    }
     this.date.setDate(date.getDate());
     this.date.setMonth(date.getMonth());
     this.date.setFullYear(date.getFullYear());
@@ -24,6 +27,9 @@ export default class DateTimePicker extends Component{
   @action
   onChangeTime(type, event) {
     const value = event.target.value;
+    if(!this.date) {
+      this.date = new Date();
+    }
     if(type === 'hours') {
       if(value < 0 || value > 24) return;
       this.date.setHours(value);

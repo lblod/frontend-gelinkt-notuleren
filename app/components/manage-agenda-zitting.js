@@ -7,7 +7,7 @@ import { task } from 'ember-concurrency-decorators';
 export default class ManageAgendaZittingComponent extends Component {
   @service store;
   @tracked popup = false;
-  @tracked agendapoint = [];
+  @tracked agendapoints;
 
   constructor(...args){
     super(...args);
@@ -17,23 +17,28 @@ export default class ManageAgendaZittingComponent extends Component {
 
   @task
   *loadAgenda() {
-    this.agendapoints = new Array();
+    const agendapoints = new Array();
     const pageSize = 10;
     const firstPage = yield this.store.query('agendapunt', { "filter[zitting][:id:]": this.args.zitting.id , "page[size]": pageSize});
     const count = firstPage.meta.count;
-    firstPage.forEach(result => this.agendapoints.push(result));
+    firstPage.forEach(result => agendapoints.push(result));
     let pageNumber = 1;
     while (((pageNumber) * pageSize) < count) {
       const pageResults = yield this.store.query('agendapunt', { "filter[zitting][:id:]": this.args.zitting.id , "page[size]": pageSize, "page[number]": pageNumber});
-      pageResults.forEach(result => this.agendapoints.push(result));
+      pageResults.forEach(result => agendapoints.push(result));
       pageNumber++;
     }
-    this.agendapoints = this.agendapoints.sortBy('position');
+    this.agendapoints = agendapoints.sortBy('position');
   }
 
   @action
   cancel(){
     this.popup = false;
-    this.loadAgenda.perform();
+  }
+
+  @action
+  afterSave(agendapoints) {
+    this.agendapoints = agendapoints;
+    this.args.onChange();
   }
 }
