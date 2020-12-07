@@ -24,7 +24,7 @@
       </span>
     </p>
     {{else}}
-    {{#each this.editStemming.votingMap as |row|}}
+    {{#each this.voters as |row|}}
     <Treatment::Voting::VoterRow 
     @row={{row}} 
     @onVoteChange={{this.editStemming.setVote}}

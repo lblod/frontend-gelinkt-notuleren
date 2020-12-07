@@ -1,3 +1,4 @@
+import { inject as service } from "@ember/service";
 import Service from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
@@ -7,6 +8,8 @@ import { action } from "@ember/object";
 export default class EditStemmingService extends Service {
   /** @type {Stemming} */
   @tracked _stemming;
+
+  @service store;
 
   /** @type {Map<string, string>} */
   @tracked
@@ -58,10 +61,26 @@ export default class EditStemmingService extends Service {
   }
   @task
   *fetchVoters() {
-    const stemmers = yield this._stemming.stemmers;
-    const onthouders = yield this._stemming.onthouders;
-    const voorstanders = yield this._stemming.voorstanders;
-    const tegenstanders = yield this._stemming.tegenstanders;
+    const emptyStemmers =  yield this._stemming.stemmers;
+    const emptyOnthouders = yield this._stemming.onthouders;
+    const emptyVoorstanders = yield this._stemming.voorstanders;
+    const emptyTegenstanders = yield this._stemming.tegenstanders;
+    const stemmers = yield this.store.query("mandataris", {
+      "filter[:id:]": emptyStemmers.map(s => s.id).join(","),
+      include: "is-bestuurlijke-alias-van"
+    });
+    const onthouders = yield this.store.query("mandataris", {
+      "filter[:id:]": emptyOnthouders.map(s => s.id).join(","),
+      include: "is-bestuurlijke-alias-van"
+    });
+    const voorstanders = yield this.store.query("mandataris", {
+      "filter[:id:]": emptyVoorstanders.map(s => s.id).join(","),
+      include: "is-bestuurlijke-alias-van"
+    });
+    const tegenstanders = yield this.store.query("mandataris", {
+      "filter[:id:]": emptyTegenstanders.map(s => s.id).join(","),
+      include: "is-bestuurlijke-alias-van"
+    });
     stemmers.forEach((aanwezige) =>
       this.votingMap.set(aanwezige, "zalStemmen")
     );
