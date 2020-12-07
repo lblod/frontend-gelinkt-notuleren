@@ -13,37 +13,16 @@ export default class ParticipationListModalComponent extends Component {
 
   constructor() {
     super(...arguments);
-    this.initializeState();
-  }
-  initializeState() {
     this.voorzitter = this.args.voorzitter;
     this.secretaris = this.args.secretaris;
-
   }
 
-  @task
-  *fetchData() {
-    //kinda wierd depends on pc date can be spoofed
-    //not 100% sure this works
-    const today=(new Date).toISOString().split('T')[0]
-
-    let queryParams = {
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
-      'filter[:gt:einde]': today,
-      page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-    const mandataris = yield this.store.query('mandataris', queryParams);
-
-    this.mandataris = mandataris;
-  }
 
   @action
   togglePopup(e) {
     if(e) {
       e.preventDefault();
     }
-    this.initializeState();
     this.args.togglePopup(e);
   }
   @action

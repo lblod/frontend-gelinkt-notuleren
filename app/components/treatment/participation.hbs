@@ -1,8 +1,8 @@
 <div class="au-c-meeting-chrome-card">
   <ParticipationList::Modal
     @show={{this.showParticipationModal}}
-    @aanwezigenBijStart={{this.behandeling.aanwezigen}}
-    @bestuursorgaan={{@bestuursorgaan}}
+    @aanwezigenBijStart={{@aanwezigen}}
+    @possibleParticipants={{@possibleParticipants}}
     @onSave={{this.saveParticipants}}
     @togglePopup={{this.toggleModal}}
     @voorzitter={{this.behandeling.voorzitter}}

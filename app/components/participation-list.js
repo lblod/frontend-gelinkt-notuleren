@@ -4,61 +4,41 @@ import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency-decorators';
 import { get } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
   @tracked info;
-  @tracked mandataris;
   @tracked voorzitter;
   @tracked secretaris;
-  @tracked aanwezigenBijStart;
-  @tracked bestuursorgaan;
-  @tracked mandatees;
 
   @service store;
 
   constructor() {
     super(...arguments);
-    this.voorzitter = this.args.zitting.voorzitter;
-    this.secretaris = this.args.zitting.secretaris;
-    this.aanwezigenBijStart = this.args.zitting.aanwezigenBijStart;
-    this.bestuursorgaan = this.args.zitting.bestuursorgaan;
-    this.loadData.perform();
+    this.voorzitter = this.args.voorzitter;
+    this.secretaris = this.args.secretaris;
   }
-
-  get dataLoading() {
-    return this.loadData.isRunning || get(this.voorzitter, 'isLoading') || get(this.secretaris,'isLoading') || get(this.aanwezigenBijStart, 'isLoading') || get(this.bestuursorgaan, 'isLoading');
+  get aanwezigenBijStart() {
+    return this.args.aanwezigenBijStart ?? [];
   }
-
-  @task
-  *loadData() {
-    yield this.fetchMandatees();
-  }
-
-  async fetchMandatees() {
-    const bestuursorgaanUri = this.bestuursorgaan && this.bestuursorgaan.get('uri');
-    const today=(new Date).toISOString().split('T')[0];
-    let queryParams = {
-      'filter[bekleedt][bevat-in][:uri:]': bestuursorgaanUri,
-      include: 'is-bestuurlijke-alias-van',
-     'filter[:gt:einde]': today,
-      page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-    this.mandatees = await this.store.query('mandataris', queryParams);
+  get possibleParticipants() {
+    return this.args.possibleParticipants ?? [];
   }
 
   // this is only called after loading has finished
   get hasParticipationInfo() {
-    return Boolean(this.aanwezigenBijStart.length > 0 || this.voorzitter.id || this.secretaris.id);
+    return Boolean(this.aanwezigenBijStart.length > 0 || this.voorzitter || this.secretaris);
   }
+
   get mandateesPresent(){
     const sorted=this.aanwezigenBijStart.sortBy('isBestuurlijkeAliasVan.achternaam');
     return sorted;
   }
   get mandateesNotPresent() {
-    if(this.aanwezigenBijStart && this.mandatees) {
+    if(this.aanwezigenBijStart.length > 0 && this.possibleParticipants) {
       const aanwezigenUris = this.aanwezigenBijStart.map((mandataris) => mandataris.uri);
-      const notPresent = this.mandatees.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
+      const notPresent = this.possibleParticipants.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
       const sorted=notPresent.sortBy('isBestuurlijkeAliasVan.achternaam');
       return sorted;
     }
@@ -71,10 +51,5 @@ export default class ParticipationListComponent extends Component {
       e.preventDefault();
     }
     this.popup = !this.popup;
-  }
-
-  @action
-  onSave(info) {
-    this.args.onSave(info);
   }
 }

@@ -12,6 +12,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service currentSession;
   @tracked behandeling;
   @tracked editor;
+  @tracked aanwezigen = new Array();
 
   constructor() {
     super(...arguments);
@@ -19,9 +20,22 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.behandeling = this.args.behandeling;
     this.documentContainer = this.args.behandeling.documentContainer;
     this.tryToFetchDocument.perform();
+    this.fetchParticipants.perform();
   }
+
   get hasParticipants() {
-    return this.args.behandeling.aanwezigen.length;
+    return this.aanwezigen.length;
+  }
+
+  @task
+  *fetchParticipants() {
+    let queryParams = {
+      'filter[aanwezig-bij-behandeling]': this.behandeling.get('uri'),
+      include: 'is-bestuurlijke-alias-van',
+      page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
+    };
+    const aanwezigen = yield this.store.query('mandataris', queryParams);
+    this.aanwezigen = aanwezigen.sortBy('isBestuurlijkeAliasVan.achternaam');
   }
 
   @task

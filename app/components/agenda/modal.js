@@ -20,7 +20,6 @@ export default class AgendaModalComponent extends Component {
   @tracked afterAgendapuntOptions;
   @tracked error;
   toBeDeleted = [];
-  unsavedBehandelingen = [];
 
   get afterSave() {
     return this.args.afterSave || (() => {});
@@ -166,7 +165,6 @@ export default class AgendaModalComponent extends Component {
       behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
       behandeling.voorzitter = this.args.zitting.voorzitter;
       behandeling.secretaris = this.args.zitting.secretaris;
-      this.unsavedBehandelingen.push(behandeling);
     }
   }
 
