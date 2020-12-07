@@ -16,10 +16,7 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
 
   @service store;
   @service currentSession;
-  @action
-  select(value) {
-    this.args.onSelect(value);
-  }
+
   @task
   *loadData(){
     const group = yield this.currentSession.group;
