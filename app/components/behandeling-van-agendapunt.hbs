@@ -6,8 +6,8 @@
     {{t "behandelingVanAgendapunten.visibility"}} <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
   </div>
   <Treatment::Participation
-                 @behandeling={{@behandeling}}
-                 @bestuursorgaan={{@bestuursorgaan}}
+    @behandeling={{@behandeling}}
+    @possibleParticipants={{@possibleParticipants}}
   />
 
   <div class="au-u-padding-bottom-large">

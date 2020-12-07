@@ -1,13 +1,8 @@
-{{#if this.bestuursorgaan}}
-  <div class="au-c-meeting-chrome-card">
-    {{#if this.dataLoading}}
-      <p>{{t "participationList.loadingTitle"}}</p>
-      <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
-    {{else}}
-      {{#if hasParticipationInfo}}
+<div class="au-c-meeting-chrome-card">
+    {{#if hasParticipationInfo}}
       <ul class="au-c-list-divider">
-          <li class="au-c-list-divider__item">
-            {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+        <li class="au-c-list-divider__item">
+          {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
           </li>
 
           <li class="au-c-list-divider__item">
@@ -30,7 +25,7 @@
               <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
             {{/each}}
           </li>
-        </ul>
+      </ul>
       {{/if}}
       <AuButton
         @width="block"
@@ -44,14 +39,12 @@
       </AuButton>
 
       <ParticipationList::Modal
-        @bestuursorgaan={{this.bestuursorgaan}}
         @voorzitter={{this.voorzitter}}
         @secretaris={{this.secretaris}}
         @show={{this.popup}}
         @togglePopup={{this.togglePopup}}
-        @onSave={{this.onSave}}
+        @onSave={{@onSave}}
         @aanwezigenBijStart={{this.aanwezigenBijStart}}
+        @possibleParticipants={{this.possibleParticipants}}
       />
-    {{/if}}
-  </div>
-{{/if}}
+</div>

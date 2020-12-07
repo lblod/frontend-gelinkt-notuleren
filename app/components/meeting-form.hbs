@@ -102,46 +102,54 @@
       <Zitting::ManageZittingsdata
         @zitting={{@zitting}}
         @onCreate={{@onCreateMeeting}}
+        @onChange={{this.meetingInfoUpdate}}
       />
+      {{#if this.bestuursorgaan}}
+        {{#if this.loadData.isRunning}}
+          <p>{{t "participationList.loadingTitle"}}</p>
+          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
+        {{else}}
+          <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+            {{t "meetingForm.secondSectionTitle"}}
+            <span class="au-c-onboarding">
+              <AuIcon @icon="info-circle"/>
+              {{t "meetingForm.secondSectionNotFilledWarning"}}
+            </span>
+          </AuHeading>
+          <ParticipationList
+            @voorzitter={{this.voorzitter}}
+            @secretaris={{this.secretaris}}
+            @bestuursorgaan={{this.bestuursorgaan}}
+            @possibleParticipants={{this.possibleParticipants}}
+            @aanwezigenBijStart={{this.aanwezigenBijStart}}
+            @onSave={{this.saveParticipationList}}
+          />
 
-      {{#if this.zitting.bestuursorgaan}}
-
-        <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper">
-          {{t "meetingForm.secondSectionTitle"}}
-          <span class="au-c-onboarding">
-            <AuIcon @icon="info-circle"/>
-            {{t "meetingForm.secondSectionNotFilledWarning"}}
-          </span>
-        </AuHeading>
-        <ParticipationList
-          @zitting={{@zitting}}
-          @onSave={{this.saveParticipationList}}
-        />
-
-        <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper">
-          {{t "meetingForm.thirdSectionTitle"}}
-          <span class="au-c-onboarding">
-            <AuIcon @icon="info-circle"/>
-            {{t "meetingForm.thirdSectionNotFilledWarning"}}
-          </span>
-        </AuHeading>
-        <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchTreatments}}> </ManageAgendaZitting>
-        <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper">
-          {{t "meetingForm.fourthSectionTitle"}}
-          <span class="au-c-onboarding">
-            <AuIcon @icon="info-circle"/>
-            {{t "meetingForm.fourthSectionNotFilledWarning"}}
-          </span>
-        </AuHeading>
-        {{#if this.fetchTreatments.isRunning}}
-          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
-        {{/if}}
-        {{#if this.fetchTreatments.lastSuccessful}}
-          {{#each this.behandelingen as |behandeling|}}
-            <div>
-              <BehandelingVanAgendapunt @aanwezigenBijStart={{this.aanwezigenBijStart}} @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
-            </div>
-          {{/each}}
+          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+            {{t "meetingForm.thirdSectionTitle"}}
+            <span class="au-c-onboarding">
+              <AuIcon @icon="info-circle"/>
+              {{t "meetingForm.thirdSectionNotFilledWarning"}}
+            </span>
+          </AuHeading>
+          <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchTreatments}}> </ManageAgendaZitting>
+          <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+            {{t "meetingForm.fourthSectionTitle"}}
+            <span class="au-c-onboarding">
+              <AuIcon @icon="info-circle"/>
+              {{t "meetingForm.fourthSectionNotFilledWarning"}}
+            </span>
+          </AuHeading>
+          {{#if this.fetchTreatments.isRunning}}
+            <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+          {{/if}}
+          {{#if this.fetchTreatments.lastSuccessful}}
+            {{#each this.behandelingen as |behandeling|}}
+              <div>
+                <BehandelingVanAgendapunt @possibleParticipants={{this.possibleParticipants}} @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
+              </div>
+            {{/each}}
+          {{/if}}
         {{/if}}
       {{else}}
         <AuHelpText @skin="secondary">
