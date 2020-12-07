@@ -7,6 +7,7 @@
     @togglePopup={{this.toggleModal}}
     @voorzitter={{this.behandeling.voorzitter}}
     @secretaris={{this.behandeling.secretaris}}
+    @bestuursorgaan={{@bestuursorgaan}}
   />
   {{#if this.loadData.isRunning}}
     <p>{{t "participationList.loadingTitle"}}</p>

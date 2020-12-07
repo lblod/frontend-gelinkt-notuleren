@@ -2,11 +2,11 @@
     {{#if hasParticipationInfo}}
       <ul class="au-c-list-divider">
         <li class="au-c-list-divider__item">
-          {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+          {{t "participationList.voorzitterLabel"}} <strong>{{@voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
           </li>
 
           <li class="au-c-list-divider__item">
-            {{t "participationList.secretarisLabel"}} <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+            {{t "participationList.secretarisLabel"}} <strong>{{@secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
             {{!-- example error
             <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
               Er is nog geen secretaris aangeduid
@@ -39,11 +39,12 @@
       </AuButton>
 
       <ParticipationList::Modal
-        @voorzitter={{this.voorzitter}}
-        @secretaris={{this.secretaris}}
+        @voorzitter={{@voorzitter}}
+        @secretaris={{@secretaris}}
         @show={{this.popup}}
         @togglePopup={{this.togglePopup}}
         @onSave={{@onSave}}
+        @bestuursorgaan={{@bestuursorgaan}}
         @aanwezigenBijStart={{this.aanwezigenBijStart}}
         @possibleParticipants={{this.possibleParticipants}}
       />
