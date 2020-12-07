@@ -21,7 +21,6 @@ export default class TreatmentVotingVoterRowComponent extends Component {
 
   constructor(parent, args) {
     super(parent, args);
-    // this.fetchPersoon.perform();
   }
   get persoon() {
     return this.args.row[0].isBestuurlijkeAliasVan;
@@ -39,12 +38,6 @@ export default class TreatmentVotingVoterRowComponent extends Component {
     return this.args.row[1];
   }
 
-  // @task
-  // /** @type {Task<void, void>} */
-  // fetchPersoon = function* () {
-  //   this.persoon = yield this.args.row[0].isBestuurlijkeAliasVan;
-
-  // };
   @action
   addStemmer() {
     this.args.onVoteChange(this.args.row[0], "zalStemmen");
