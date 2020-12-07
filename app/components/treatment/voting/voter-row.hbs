@@ -1,35 +1,33 @@
 <tr>
-  {{#if this.fetchPersoon.lastSuccessful}}
-    <td>
-      {{this.persoon.gebruikteVoornaam}} {{this.persoon.achternaam}}
-    </td>
-    <td>
-      {{@row.[0].bekleedt.bestuursfunctie.label}}
-    </td>
-    <td>
-      <div class="flex">
-        {{#if (and this.isVoting (not @secret))}}
-          <td>
-        <select {{on "change" this.onSelectVote}}>
-          <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
-          {{#each this.voteOptions as |voteOption|}}
-            <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
-          {{/each}}
-        </select>
-          </td>
-        {{/if}}
+  <td>
+    {{this.persoon.gebruikteVoornaam}} {{this.persoon.achternaam}}
+  </td>
+  <td>
+    {{this.mandataris.bekleedt.bestuursfunctie.label}}
+  </td>
+  <td>
+    <div class="flex">
+      {{#if (and this.isVoting (not @secret))}}
         <td>
-          {{#if this.isVoting}}
-            <AuButton @alert={{ true }} @skin="secondary" @icon="cross" @iconAlignment="left" {{on "click" this.removeStemmer}}>
-              {{t "votingEdit.removeItemButton"}}
-            </AuButton>
-          {{else}}
-            <AuButton @alert={{ false }} @skin="secondary" @icon="add" @iconAlignment="left" {{on "click" this.addStemmer}}>
-              {{t "votingEdit.addItemButton"}}
-            </AuButton>
-          {{/if}}
+          <select {{on "change" this.onSelectVote}}>
+            <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
+            {{#each this.voteOptions as |voteOption|}}
+              <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
+            {{/each}}
+          </select>
         </td>
-      </div>
-    </td>
-  {{/if}}
+      {{/if}}
+      <td>
+        {{#if this.isVoting}}
+          <AuButton @alert={{ true }} @skin="secondary" @icon="cross" @iconAlignment="left" {{on "click" this.removeStemmer}}>
+            {{t "votingEdit.removeItemButton"}}
+          </AuButton>
+        {{else}}
+          <AuButton @alert={{ false }} @skin="secondary" @icon="add" @iconAlignment="left" {{on "click" this.addStemmer}}>
+            {{t "votingEdit.addItemButton"}}
+          </AuButton>
+        {{/if}}
+      </td>
+    </div>
+  </td>
 </tr>
