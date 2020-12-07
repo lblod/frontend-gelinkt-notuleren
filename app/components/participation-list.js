@@ -9,16 +9,9 @@ import { isEmpty } from '@ember/utils';
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
   @tracked info;
-  @tracked voorzitter;
-  @tracked secretaris;
 
   @service store;
 
-  constructor() {
-    super(...arguments);
-    this.voorzitter = this.args.voorzitter;
-    this.secretaris = this.args.secretaris;
-  }
   get aanwezigenBijStart() {
     return this.args.aanwezigenBijStart ?? [];
   }
@@ -28,7 +21,7 @@ export default class ParticipationListComponent extends Component {
 
   // this is only called after loading has finished
   get hasParticipationInfo() {
-    return Boolean(this.aanwezigenBijStart.length > 0 || this.voorzitter || this.secretaris);
+    return Boolean(this.aanwezigenBijStart.length > 0 || this.args.voorzitter || this.args.secretaris);
   }
 
   get mandateesPresent(){
