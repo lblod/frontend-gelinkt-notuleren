@@ -14,7 +14,7 @@ export default Model.extend({
   notulen: belongsTo('editor-document', { inverse: null }),
   publicatieAgendas: hasMany('agenda', { inverse: null }),
   agendapunten: hasMany('agendapunt', { inverse: 'zitting' }),
-  secretaris: belongsTo('mandataris', { inverse: null }),
+  secretaris: belongsTo('functionaris', { inverse: null }),
   voorzitter:  belongsTo('mandataris', { inverse: null }),
   aanwezigenBijStart: hasMany('mandataris', { inverse: null }),
   isPublished: notEmpty('afgeleidUit')

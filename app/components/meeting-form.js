@@ -41,6 +41,9 @@ export default class MeetingForm extends Component {
 
   @action
   async saveParticipationList({ voorzitter, secretaris, aanwezigenBijStart }) {
+    this.secretaris = secretaris;
+    this.voorzitter = voorzitter;
+    this.aanwezigenBijStart = aanwezigenBijStart;
     this.zitting.voorzitter = voorzitter;
     this.zitting.secretaris = secretaris;
     this.zitting.aanwezigenBijStart = aanwezigenBijStart;
