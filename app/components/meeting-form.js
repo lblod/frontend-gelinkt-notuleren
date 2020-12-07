@@ -22,22 +22,37 @@ export default class MeetingForm extends Component {
     this.secretaris = this.args.zitting.get("secretaris");
     this.voorzitter = this.args.zitting.get("voorzitter");
     this.aanwezigenBijStart = this.args.zitting.get("aanwezigenBijStart");
-    this.fetchBehandelingen.perform();
+    this.fetchTreatments.perform();
   }
   get isComplete() {
     return this.args.zitting.bestuursorgaan && this.behandelingen;
   }
 
   @task
-  fetchBehandelingen = function* () {
-    /** @type {Agendapunt} */
-    const agenda = yield this.zitting.agendapunten;
-    const behandelingen = yield this.store.query("behandeling-van-agendapunt", {
-      "filter[onderwerp][:id:]": agenda.map((punt) => punt.id).join(","),
-      sort: "onderwerp.position",
+  *fetchTreatments() {
+    const zitting = yield this.zitting;
+    const treatments = new Array();
+    const pageSize = 20;
+    const firstPage = yield this.store.query('behandeling-van-agendapunt', {
+      "filter[onderwerp][zitting][:id:]": this.args.zitting.id ,
+      "page[size]": pageSize,
+      sort: 'onderwerp.position'
     });
-    this.behandelingen = behandelingen;
-  };
+    const count = firstPage.meta.count;
+    firstPage.forEach(result => treatments.push(result));
+    let pageNumber = 1;
+    while (((pageNumber) * pageSize) < count) {
+      const pageResults = yield this.store.query('behandeling-van-agendapunt', {
+        "filter[onderwerp][zitting][:id:]": this.args.zitting.id ,
+        "page[size]": pageSize,
+        "page[number]": pageNumber,
+        sort: 'onderwerp.position'
+      });
+      pageResults.forEach(result => treatments.push(result));
+      pageNumber++;
+    }
+    this.behandelingen = treatments;
+  }
 
   @action
   async saveParticipationList({ voorzitter, secretaris, aanwezigenBijStart }) {

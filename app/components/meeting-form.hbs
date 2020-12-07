@@ -66,10 +66,10 @@
         <a href="#sectionFour" class="au-c-link au-c-link--secondary">
           {{t "meetingForm.fourthSectionTitle"}}
         </a>
-        {{#if this.fetchBehandelingen.isRunning}}
+        {{#if this.fetchTreatments.isRunning}}
           <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
         {{/if}}
-        {{#if this.fetchBehandelingen.lastSuccessful}}
+        {{#if this.fetchTreatments.lastSuccessful}}
           <ul class="au-c-list-divider">
             {{#each this.behandelingen as |behandeling|}}
               <li class="au-c-list-divider__item">
@@ -125,7 +125,7 @@
             {{t "meetingForm.thirdSectionNotFilledWarning"}}
           </span>
         </AuHeading>
-        <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchBehandelingen}}> </ManageAgendaZitting>
+        <ManageAgendaZitting @zitting={{@zitting}} @onChange={{perform this.fetchTreatments}}> </ManageAgendaZitting>
         <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper">
           {{t "meetingForm.fourthSectionTitle"}}
           <span class="au-c-onboarding">
@@ -133,13 +133,13 @@
             {{t "meetingForm.fourthSectionNotFilledWarning"}}
           </span>
         </AuHeading>
-        {{#if this.fetchBehandelingen.isRunning}}
+        {{#if this.fetchTreatments.isRunning}}
           <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
         {{/if}}
-        {{#if this.fetchBehandelingen.lastSuccessful}}
+        {{#if this.fetchTreatments.lastSuccessful}}
           {{#each this.behandelingen as |behandeling|}}
             <div>
-              <BehandelingVanAgendapunt @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
+              <BehandelingVanAgendapunt @aanwezigenBijStart={{this.aanwezigenBijStart}} @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
             </div>
           {{/each}}
         {{/if}}
