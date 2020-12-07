@@ -83,7 +83,7 @@ export default class AgendaModalComponent extends Component {
       this.toBeDeleted.push(this.currentlyEditing);
       this.isNew = false;
     } else {
-      this.currentlyEditing.rollbackAttributes();
+      // this.currentlyEditing.rollbackAttributes();
     }
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
     this.showAfterAgendapuntOptions = false;
@@ -104,23 +104,27 @@ export default class AgendaModalComponent extends Component {
         agendapoint.zitting = this.zitting;
 
         const behandeling = yield agendapoint.behandeling;
-        const documentContainer = yield behandeling.documentContainer;
-        if(documentContainer){
-          yield documentContainer.save();
+        if(behandeling){
+          const documentContainer = yield behandeling.documentContainer
+          if(documentContainer){
+            yield documentContainer.save();
+          }
+          yield behandeling.save();
         }
-        yield behandeling.save();
         yield agendapoint.save();
         previousAgendapoint = agendapoint;
       }
       for(let i=0; i < this.toBeDeleted.length; i++){
         const agendapoint = yield this.toBeDeleted[i];
         const behandeling = yield agendapoint.behandeling;
-        const documentContainer = yield behandeling.documentContainer;
-        if(documentContainer){
-          documentContainer.ontwerpBesluitStatus = this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
-          yield documentContainer.save();
+        if(behandeling){
+          const documentContainer = yield behandeling.documentContainer
+          if(documentContainer){
+            documentContainer.ontwerpBesluitStatus = this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
+            yield documentContainer.save();
+          }
+          yield behandeling.destroyRecord();
         }
-        yield behandeling.destroyRecord();
         yield agendapoint.destroyRecord();
       }
     }
@@ -137,12 +141,13 @@ export default class AgendaModalComponent extends Component {
     if (this.isNew) {
       this.createBehandeling(this.currentlyEditing);
       if(this.selectedDraft){
-        await this.currentlyEditing.behandeling;
-        this.selectedDraft.ontwerpBesluitStatus=await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
+        const behandeling=await this.currentlyEditing.behandeling;
+        this.selectedDraft.ontwerpBesluitStatus=
+          await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
         this.currentlyEditing.behandeling.set('documentContainer', this.selectedDraft);
         this.selectedDraft = null;
-        this.isNew = false;
       }
+      this.isNew = false;
     }
     this.showAfterAgendapuntOptions = false;
     this.toggleEditing();
