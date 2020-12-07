@@ -11,8 +11,6 @@ export default class ParticipationListComponent extends Component {
   @tracked info;
   @tracked voorzitter;
   @tracked secretaris;
-  @tracked aanwezigenBijStart;
-  @tracked possibleParticipants;
 
   @service store;
 
@@ -20,9 +18,12 @@ export default class ParticipationListComponent extends Component {
     super(...arguments);
     this.voorzitter = this.args.voorzitter;
     this.secretaris = this.args.secretaris;
-    console.log(this.args.aanwezigenBijStart);
-    this.aanwezigenBijStart = this.args.aanwezigenBijStart ? this.args.aanwezigenBijStart : new Array();
-    this.possibleParticipants = this.args.possibleParticipants ? this.args.possibleParticipants : new Array();;
+  }
+  get aanwezigenBijStart() {
+    return this.args.aanwezigenBijStart ?? [];
+  }
+  get possibleParticipants() {
+    return this.args.possibleParticipants ?? [];
   }
 
   // this is only called after loading has finished
