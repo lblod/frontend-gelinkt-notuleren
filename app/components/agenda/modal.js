@@ -120,7 +120,8 @@ export default class AgendaModalComponent extends Component {
         if(behandeling){
           const documentContainer = yield behandeling.documentContainer
           if(documentContainer){
-            documentContainer.ontwerpBesluitStatus = this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
+            documentContainer.ontwerpBesluitStatus =
+              yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
             yield documentContainer.save();
           }
           yield behandeling.destroyRecord();
