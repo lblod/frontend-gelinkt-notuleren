@@ -104,7 +104,7 @@ export default class AgendaModalComponent extends Component {
         agendapoint.zitting = this.zitting;
 
         const behandeling = yield agendapoint.behandeling;
-        const documentContainer = yield behandeling.documentContainer;
+        const documentContainer = behandeling.documentContainer ? yield behandeling.documentContainer : null;
         if(documentContainer){
           yield documentContainer.save();
         }
@@ -115,7 +115,7 @@ export default class AgendaModalComponent extends Component {
       for(let i=0; i < this.toBeDeleted.length; i++){
         const agendapoint = yield this.toBeDeleted[i];
         const behandeling = yield agendapoint.behandeling;
-        const documentContainer = yield behandeling.documentContainer;
+        const documentContainer = behandeling.documentContainer ? yield behandeling.documentContainer : null;
         if(documentContainer){
           documentContainer.ontwerpBesluitStatus = this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
           yield documentContainer.save();
