@@ -12,6 +12,8 @@ export default Model.extend({
   tijdelijkeVervangingen: hasMany('mandataris', {inverse: null }),
   datumEedaflegging: attr('datetime'),
   datumMinistrieelBesluit: attr('datetime'),
+  aanwezigBijBehandeling: hasMany('behandeling-van-agendapunt'),
+  aanwezigBijZitting: hasMany('zitting'),
 
   rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
     class: "http://data.vlaanderen.be/ns/mandaat#Mandataris",
