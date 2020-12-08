@@ -4,9 +4,6 @@ import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import { set } from "@ember/object";
 import { task, restartableTask } from "ember-concurrency-decorators";
-import zitting from "../../models/zitting";
-import RSVP from "rsvp";
-import documentContainer from "../../models/document-container";
 
 export default class AgendaModalComponent extends Component {
   @service store;
@@ -20,7 +17,19 @@ export default class AgendaModalComponent extends Component {
   @tracked afterAgendapuntOptions;
   @tracked error;
   toBeDeleted = [];
+  geagenderredStatus;
+  conceptStatus;
+  constructor(...args){
+    super(...args);
+    this.getStatus.perform();
+  }
 
+  @task
+  *getStatus(){
+    this.conceptStatus=yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');
+    this.geagenderredStatus=yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
+
+  }
   get afterSave() {
     return this.args.afterSave || (() => {});
   }
@@ -54,10 +63,6 @@ export default class AgendaModalComponent extends Component {
     this.afterAgendapuntOptions = this.zitting.agendapunten.filter((ap) => {
       return ap != agendapunt;
     });
-
-    this.selectedLocation = null;
-    this.selectedAfterAgendapunt = null;
-
     this.currentlyEditing = agendapunt;
     this.toggleEditing();
   }
@@ -70,28 +75,56 @@ export default class AgendaModalComponent extends Component {
     const agendapunt=await this.currentlyEditing;
     const behandeling=await agendapunt.behandeling;
     const documentContainer=await behandeling.documentContainer;
+    const ontwerpBesluitStatus=await documentContainer.ontwerpBesluitStatus;
+
+    if (ontwerpBesluitStatus.id==this.geagenderredStatus.id){
+      documentContainer.ontwerpBesluitStatus=this.conceptStatus;
+      //this shouldn't be here but I realy dont understand how things happen if it isn't
+      documentContainer.save();
+    }
 
     this.importedDrafts.removeObject(documentContainer);
-    this.cancelEditing();
+    this.toggleEditing();
+
   }
 
   @action
   async toggleEditing() {
     this.isEditing = !this.isEditing;
+    if(!this.isEditing){
+      this.selectedLocation = null;
+      this.selectedAfterAgendapunt = null;
+      this.showAfterAgendapuntOptions = false;
+
+      this.selectedDraft=null;
+
+      this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
+    }
   }
 
   @action
   async cancelEditing() {
-    this.toggleEditing();
+    this.save();
+    this.toggleEditing;
+  }
+
+  @action
+  async save() {
     if (this.isNew) {
-      this.zitting.agendapunten.removeObject(this.currentlyEditing);
-      this.toBeDeleted.push(this.currentlyEditing);
+      await this.createBehandeling(this.currentlyEditing);
+      if(this.selectedDraft){
+        const behandeling=await this.currentlyEditing.behandeling;
+        await this.selectedDraft;
+        this.selectedDraft.ontwerpBesluitStatus=this.geagenderredStatus;
+        //this shouldn't be here but I realy dont understand how things happen if it isn't
+        this.selectedDraft.save();
+        behandeling.documentContainer=await this.selectedDraft;
+        this.importedDrafts.pushObject(this.selectedDraft);
+        this.selectedDraft = null;
+      }
       this.isNew = false;
-    } else {
-      // this.currentlyEditing.rollbackAttributes();
     }
-    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
-    this.showAfterAgendapuntOptions = false;
+    this.toggleEditing();
   }
 
   @restartableTask
@@ -106,12 +139,13 @@ export default class AgendaModalComponent extends Component {
 
         agendapoint.position = i;
         agendapoint.vorigeAgendapunt = previousAgendapoint;
-        agendapoint.zitting = this.zitting;
+        agendapoint.zitting = yield this.zitting;
 
         const behandeling = yield agendapoint.behandeling;
         if(behandeling){
           const documentContainer = yield behandeling.documentContainer
           if(documentContainer){
+
             yield documentContainer.save();
           }
           yield behandeling.save();
@@ -125,8 +159,7 @@ export default class AgendaModalComponent extends Component {
         if(behandeling){
           const documentContainer = yield behandeling.documentContainer
           if(documentContainer){
-            documentContainer.ontwerpBesluitStatus =
-              yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
+              documentContainer.ontwerpBesluitStatus = this.conceptStatus;
             yield documentContainer.save();
           }
           yield behandeling.destroyRecord();
@@ -142,23 +175,7 @@ export default class AgendaModalComponent extends Component {
     this.args.cancel();
   }
 
-  @action
-  async save() {
-    if (this.isNew) {
-      this.createBehandeling(this.currentlyEditing);
-      if(this.selectedDraft){
-        const behandeling=await this.currentlyEditing.behandeling;
-        this.selectedDraft.ontwerpBesluitStatus=
-          await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
-        this.currentlyEditing.behandeling.set('documentContainer', this.selectedDraft);
-        this.importedDrafts.pushObject(this.selectedDraft);
-        this.selectedDraft = null;
-      }
-      this.isNew = false;
-    }
-    this.showAfterAgendapuntOptions = false;
-    this.toggleEditing();
-  }
+
   /**
    * @param {import("../../models/agendapunt").default} agendapunt
    */
