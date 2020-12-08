@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each @mandataris as |mandataris|}}
+    {{#each @possibleParticipants as |mandataris|}}
       <ParticipationList::MandatarisRow
         @mandataris={{mandataris}}
         @selectedMandatees={{this.selectedMandatees}}

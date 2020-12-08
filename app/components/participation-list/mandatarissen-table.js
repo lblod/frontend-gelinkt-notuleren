@@ -7,14 +7,14 @@ export default class ParticipationListMandatariesTableComponent extends Componen
     super(...arguments);
     this.generateSelected();
   }
-  @action 
+  @action
   generateSelected() {
     if(this.args.selected && this.args.selected.length) {
       this.args.selected.forEach((mandataris) => {
         this.selectedMandatees[mandataris.uri] = mandataris;
       });
     } else {
-      this.args.mandataris.forEach((mandataris) => {
+      this.args.possibleParticipants.forEach((mandataris) => {
         this.selectedMandatees[mandataris.uri] = mandataris;
       });
     }
