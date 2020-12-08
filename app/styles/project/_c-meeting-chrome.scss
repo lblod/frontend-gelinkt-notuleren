@@ -20,10 +20,6 @@
   overflow: visible;
   z-index: 2;
 
-  @include mq($until: medium) {
-    overflow: hidden;
-  }
-
   @include mq(small) {
     padding: $au-unit;
   }
