@@ -65,6 +65,10 @@ export default class EditStemmingService extends Service {
       this._stemming,
       "aanwezigen.is-bestuurlijke-alias-van"
     );
+    const stemmers = yield this.store.queryNestedRelationship(
+      this._stemming,
+      "stemmers.is-bestuurlijke-alias-van"
+    );
     const onthouders = yield this.store.queryNestedRelationship(
       this._stemming,
       "onthouders.is-bestuurlijke-alias-van"
