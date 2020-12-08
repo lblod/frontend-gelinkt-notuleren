@@ -76,17 +76,9 @@ export default class AgendaModalComponent extends Component {
     const agendapunt=await this.currentlyEditing;
     const behandeling=await agendapunt.behandeling;
     const documentContainer=await behandeling.documentContainer;
-    const ontwerpBesluitStatus=await documentContainer.ontwerpBesluitStatus;
-
-    if (ontwerpBesluitStatus.id==this.geagenderredStatus.id){
-      documentContainer.ontwerpBesluitStatus=this.conceptStatus;
-      //this shouldn't be here but I realy dont understand how things happen if it isn't
-      documentContainer.save();
-    }
 
     this.importedDrafts.removeObject(documentContainer);
     this.toggleEditing();
-
   }
 
   @action
@@ -115,9 +107,7 @@ export default class AgendaModalComponent extends Component {
       await this.createBehandeling(this.currentlyEditing);
       if(this.selectedDraft){
         const behandeling=await this.currentlyEditing.behandeling;
-        behandeling.documentContainer=this.selectedDraft;
-        const container = await behandeling.documentContainer;
-        container.ontwerpBesluitStatus = this.geagenderredStatus;
+        behandeling.documentContainer=await this.selectedDraft;
         this.importedDrafts.pushObject(this.selectedDraft);
         this.selectedDraft = null;
       }
@@ -142,9 +132,9 @@ export default class AgendaModalComponent extends Component {
 
         const behandeling = yield agendapoint.behandeling;
         if(behandeling){
-          const documentContainer = yield behandeling.documentContainer;
+          const documentContainer = yield behandeling.get("documentContainer");
           if(documentContainer){
-
+            documentContainer.ontwerpBesluitStatus=this.geagenderredStatus;
             yield documentContainer.save();
           }
           yield behandeling.save();
@@ -158,7 +148,7 @@ export default class AgendaModalComponent extends Component {
         if(behandeling){
           const documentContainer = yield behandeling.documentContainer
           if(documentContainer){
-              documentContainer.ontwerpBesluitStatus = this.conceptStatus;
+            documentContainer.ontwerpBesluitStatus = this.conceptStatus;
             yield documentContainer.save();
           }
           yield behandeling.destroyRecord();
