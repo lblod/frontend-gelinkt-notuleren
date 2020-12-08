@@ -42,6 +42,7 @@ export default class AgendaModalComponent extends Component {
     this.toBeDeleted.forEach((ap) => {
       this.zitting.agendapunten.pushObject(ap);
     });
+    this.importedDrafts=[];
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
     this.args.cancel();
   }

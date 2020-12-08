@@ -8,7 +8,7 @@ export default class BehandelingVanAgendapunt extends Model {
   @attr('string') gevolg;
   @belongsTo('behandeling-van-agendapunt', { inverse: null }) vorigeBehandelingVanAgendapunt;
   @belongsTo('agendapunt', { inverse: 'behandeling' }) onderwerp;
-  @belongsTo('mandataris', { inverse: null }) secretaris;
+  @belongsTo('functionaris', { inverse: null }) secretaris;
   @belongsTo('mandataris', { inverse: null }) voorzitter;
   @hasMany('besluit', { inverse: 'volgendUitBehandelingVanAgendapunt' }) besluiten;
   @hasMany('mandataris', { inverse: null }) aanwezigen;
