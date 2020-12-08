@@ -1,5 +1,5 @@
 {{#if @show}}
-  <div {{did-insert (perform this.fetchData)}}>
+  <div>
     {{#wu-modal
       title="Beheer aanwezigen"
       dialog-class="modal-dialog--wide modal-dialog--sectioned"
@@ -25,15 +25,14 @@
             <div>
               <AuLabel>Secretaris van de zitting</AuLabel>
               <ParticipationList::FunctionarisSelector
-                o@onSelect={{this.selectSecretaris}}
+                @onSelect={{this.selectSecretaris}}
                 @functionaris={{this.secretaris}}
-                @bestuursorgaan={{@bestuursorgaan}}
               />
             </div>
             <div>
               <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
               <ParticipationList::MandatarissenTable
-                @mandataris={{this.mandataris}}
+                @possibleParticipants={{@possibleParticipants}}
                 @selected={{@aanwezigenBijStart}}
                 @onChange={{this.updateMandatarisTable}}
               />

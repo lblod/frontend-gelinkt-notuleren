@@ -1,14 +1,12 @@
+{{#if loadData.isRunning}}
+  <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
+{{else}}
 <PowerSelect
-  @loadingMessage={{t "participationListModalSelector.loadingMessage"}}
-  @noMatchesMessage={{t "participationListModalSelector.noMatchesMessage"}}
-  @searchMessage={{t "participationListModalSelector.searchMessage"}}
-  @renderInPlace={{true}}
-  @placeholder={{t "participationListModalSelector.placeholder"}}
-  @allowClear={{true}}
-  @search={{perform searchByName}}
+  @options={{this.options}}
   @selected={{@functionaris}}
-  @onchange={{this.select}}
+  @onchange={{@onSelect}}
   as |functionaris| >
   {{functionaris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{functionaris.isBestuurlijkeAliasVan.achternaam}},
   {{functionaris.bekleedt.rol.label}}
 </PowerSelect>
+{{/if}}

@@ -1,4 +1,7 @@
 <div class="au-c-meeting-chrome-card">
+  {{#if this.loadAgenda.isRunning}}
+    <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+  {{else}}
   <table class="au-c-meeting-chrome-table">
     <thead>
       <th>
@@ -12,16 +15,16 @@
       </th>
     </thead>
     <tbody>
-      {{#each @zitting.agendapunten as |agendapunt|}}
+      {{#each this.agendapoints as |agendapoint|}}
         <tr>
           <td>
-            <strong>{{agendapunt.titel}}</strong>
+            <strong>{{agendapoint.titel}}</strong>
           </td>
           <td>
-            {{agendapunt.beschrijving}}
+            {{agendapoint.beschrijving}}
           </td>
           <td>
-            {{agendapunt.geplandOpenbaar}}
+            {{if agendapoint.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel") (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
           </td>
         </tr>
       {{/each}}
@@ -36,8 +39,9 @@
   >
     {{t "manageAgendaZitting.openModalButton"}}
   </AuButton>
+  {{/if}}
 </div>
 
 {{#if this.popup}}
-  <Agenda::modal @zitting={{@zitting}} @agendapunten={{@zitting.agendapunten}} @afterSave={{@onChange}} @cancel={{this.cancel}}/>
+  <Agenda::modal @zitting={{@zitting}} @agendapunten={{this.agendapoints}} @afterSave={{this.afterSave}} @cancel={{this.cancel}}/>
 {{/if}}

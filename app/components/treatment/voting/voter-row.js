@@ -10,24 +10,26 @@ import { action } from '@ember/object';
 /**
  * @typedef {Object} Args
  * @property {(boolean) => void} onIsVotingChange
- * @property {[Mandataris, string]} row
+ * @property {[Mandataris, string]} row Mandataris and isBestuurlijkeAliasVan should be fully resolved
  */
 
-/** @extends {Component<Args>} */
+/** @extends {Component<Args>}
+ * Ex
+ * */
 export default class TreatmentVotingVoterRowComponent extends Component {
-  @tracked persoon;
   voteOptions = ["voor", "tegen", "onthouding"];
 
   constructor(parent, args) {
     super(parent, args);
-    this.fetchPersoon.perform();
+  }
+  get persoon() {
+    return this.args.row[0].isBestuurlijkeAliasVan;
   }
   get isVoting() {
-    return this.args.row[1] !== "onthouding";
+    return this.args.row[1] !== "zalNietStemmen";
   }
-  get bestuursFunctie() {
-    return this.args.row[0].bekleedt.bestuursFunctie.label;
-
+  get mandataris() {
+    return this.args.row[0];
   }
   get selectedVote() {
     if (this.args.row[1] === "zalStemmen") {
@@ -36,19 +38,13 @@ export default class TreatmentVotingVoterRowComponent extends Component {
     return this.args.row[1];
   }
 
-  @task
-  /** @type {Task<void, void>} */
-  fetchPersoon = function* () {
-    this.persoon = yield this.args.row[0].isBestuurlijkeAliasVan;
-
-  };
   @action
   addStemmer() {
     this.args.onVoteChange(this.args.row[0], "zalStemmen");
   }
   @action
   removeStemmer() {
-    this.args.onVoteChange(this.args.row[0], "onthouding");
+    this.args.onVoteChange(this.args.row[0], "zalNietStemmen");
   }
 
   @action

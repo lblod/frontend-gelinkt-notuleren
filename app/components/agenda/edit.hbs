@@ -27,14 +27,14 @@
   </label>
   <div class="u-spacer--small">
     <label class="radio">
-      <input class="radio__toggle" type="radio" name="geslotenAgendapunt" checked={{not @agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
+      <input class="radio__toggle" type="radio" name="geslotenAgendapunt" checked={{@agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
       <span></span>
       <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
     </label>
     <label class="radio">
-      <input class="radio__toggle" type="radio" name="openAgendapunt" checked={{@agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
+      <input class="radio__toggle" type="radio" name="openAgendapunt" checked={{not @agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
       <span></span>
-      <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
+      <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
     </label>
   </div>
   {{#if (gt @agendapunten.length 1)}}
@@ -50,7 +50,7 @@
     />
   {{/if}}
   {{#if @isNew}}
-    <Agenda::DraftImport @agendapunt={{@agendapunt}} @createBehandeling={{@createBehandeling}}/>
+    <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @unsavedDrafts={{@unsavedDrafts}}/>
   {{/if}}
   {{#unless @isNew}}
     <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>

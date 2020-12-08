@@ -93,6 +93,7 @@ manageAgendaZittingModal:
   noDataMessage: No agenda items found.
   geplandOpenbaarTrueLabel: Public
   geplandOpenbaarFalseLabel: Private
+  saveAllError: something went wrong while persisting the agenda, please try again.
 manageAgendaZittingModalEdit:
   modalSubtitle: Edit agenda item
   geplandOpenbaarTrueLabel: Public

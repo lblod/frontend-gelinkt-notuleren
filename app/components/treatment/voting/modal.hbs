@@ -1,13 +1,8 @@
-{{#if @show}}
-  <WuModal
-    @title={{t "votingModal.modalTitle"}}
-    @dialog-class="modal-dialog--wide modal-dialog--sectioned"
-    @onClose={{@onClose}}
-  >
     {{#if this.editMode}}
       <Treatment::Voting::Edit
         @onCancel={{this.onCancelEdit}}
         @onSave={{perform this.saveStemming}}
+        @saving={{this.saveStemming.isRunning}}
         @bestuursorgaan={{@bestuursorgaan}}
         @disableButtons={{this.disableButtons}}
       />
@@ -37,6 +32,7 @@
                   {{on "click" (perform this.addStemming)}}
                   @icon="add"
                   @iconAlignment="left"
+                  @loading={{this.addStemming.isRunning}}
                 >
                   {{t "votingModal.createVotingButton"}}
                 </AuButton>
@@ -95,10 +91,11 @@
                     {{t "votingModal.toggleEditButton"}}
                   </AuButton>
                   <AuButton
-                    {{on "click" (fn this.removeStemming stemming)}}
+                    {{on "click" (fn (perform this.removeStemming) stemming)}}
                     @skin="secondary"
                     @icon="bin"
                     @iconAlignment="left"
+                    @loading={{ this.removeStemming.isRunning }}
                   >
                     {{t "votingModal.deleteButton"}}
                   </AuButton>
@@ -117,5 +114,3 @@
         {{/if}}
       </tbody>
     </table>
-  </WuModal>
-{{/if}}
