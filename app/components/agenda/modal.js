@@ -3,16 +3,16 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import { set } from "@ember/object";
-import { restartableTask } from "ember-concurrency-decorators";
+import { task, restartableTask } from "ember-concurrency-decorators";
 import zitting from "../../models/zitting";
 import RSVP from "rsvp";
+import documentContainer from "../../models/document-container";
 
 export default class AgendaModalComponent extends Component {
   @service store;
   @tracked isEditing = false;
   @tracked currentlyEditing;
   @tracked isNew = false;
-  @tracked agendapunten = this.args.agendapunten;
   @tracked zitting = this.args.zitting;
   @tracked showAfterAgendapuntOptions = false;
   @tracked selectedAfterAgendapunt;
@@ -27,7 +27,7 @@ export default class AgendaModalComponent extends Component {
 
   @action
   async cancel() {
-    this.args.agendapunten.forEach((agendapunt) => {
+    this.zitting.agendapunten.forEach((agendapunt) => {
       agendapunt.rollbackAttributes();
     });
     this.toBeDeleted.forEach((ap) => {
@@ -66,6 +66,12 @@ export default class AgendaModalComponent extends Component {
   async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
     this.toBeDeleted.push(this.currentlyEditing);
+
+    const agendapunt=await this.currentlyEditing;
+    const behandeling=await agendapunt.behandeling;
+    const documentContainer=await behandeling.documentContainer;
+
+    this.importedDrafts.removeObject(documentContainer);
     this.cancelEditing();
   }
 
@@ -145,6 +151,7 @@ export default class AgendaModalComponent extends Component {
         this.selectedDraft.ontwerpBesluitStatus=
           await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
         this.currentlyEditing.behandeling.set('documentContainer', this.selectedDraft);
+        this.importedDrafts.pushObject(this.selectedDraft);
         this.selectedDraft = null;
       }
       this.isNew = false;
@@ -234,10 +241,10 @@ export default class AgendaModalComponent extends Component {
   }
   //edit screen importing
   @tracked
-  unsavedDrafts=[];
+  importedDrafts=[];
 
   @tracked
-  selectedDraft
+  selectedDraft;
 
   @action
   async selectDraft(draft){

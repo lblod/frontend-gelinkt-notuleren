@@ -50,7 +50,7 @@
     />
   {{/if}}
   {{#if @isNew}}
-    <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @unsavedDrafts={{@unsavedDrafts}}/>
+    <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
   {{/if}}
   {{#unless @isNew}}
     <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
