@@ -134,7 +134,7 @@ export default class AgendaModalComponent extends Component {
       yield this.zitting.agendapunten;
       let previousAgendapoint = null;
       for(let i=0; i < this.zitting.agendapunten.length; i++) {
-        const agendapoint = yield this.zitting.agenda.documentContainerpunten.objectAt(i);
+        const agendapoint = yield this.zitting.agendapunten.objectAt(i);
 
         agendapoint.position = i;
         agendapoint.vorigeAgendapunt = previousAgendapoint;
