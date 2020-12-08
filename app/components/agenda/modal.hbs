@@ -1,59 +1,64 @@
-<WuModal
+{{#if this.getStatus.isRunning}}
+  <div>loading</div>
+{{else}}
+  <WuModal
     @title={{t "manageAgendaZittingModal.modalTitle"}}
     @dialog-class="modal-dialog--wide modal-dialog--sectioned"
     @onClose={{this.cancel}}
     as |Modal|
->
-   <Modal.content @isSectioned={{true}}>
-    {{#if this.isEditing}}
-      <Agenda::Edit
-        @delete={{this.delete}}
+  >
+    <Modal.content @isSectioned={{true}}>
+      {{#if this.isEditing}}
+        <Agenda::Edit
+          @delete={{this.delete}}
 
-        @agendapunt={{this.currentlyEditing}}
-        @cancelEditing={{this.cancelEditing}}
-        @isNew={{this.isNew}}
-        @agendapunten={{@zitting.agendapunten}}
+          @agendapunt={{this.currentlyEditing}}
+          @cancelEditing={{this.cancelEditing}}
+          @isNew={{this.isNew}}
+          @agendapunten={{this.zitting.agendapunten}}
 
-        @afterAgendapuntOptions={{this.afterAgendapuntOptions}}
-        @selectedLocation={{this.selectedLocation}}
-        @showAfterAgendapuntOptions={{this.showAfterAgendapuntOptions}}
-        @selectedAfterAgendapunt={{this.selectedAfterAgendapunt}}
-        @selectAfterAgendapunt={{this.selectAfterAgendapunt}}
-        @selectLocation={{this.selectLocation}}
+          @afterAgendapuntOptions={{this.afterAgendapuntOptions}}
+          @selectedLocation={{this.selectedLocation}}
+          @showAfterAgendapuntOptions={{this.showAfterAgendapuntOptions}}
+          @selectedAfterAgendapunt={{this.selectedAfterAgendapunt}}
+          @selectAfterAgendapunt={{this.selectAfterAgendapunt}}
+          @selectLocation={{this.selectLocation}}
 
-        @importedDrafts={{this.importedDrafts}}
-        @selectedDraft={{this.selectedDraft}}
-        @selectDraft={{this.selectDraft}}
-      />
-    {{else}}
-      <Agenda::List
-        @agendapunten={{@zitting.agendapunten}}
-        @createAgendapunt={{this.createAgendapunt}}
-        @edit={{this.edit}}
-        @sort={{this.sort}}/>
-      {{#if this.error}}
-        <AuAlert @alertIcon="cross" @alertskin="error">
-          {{t "manageAgendaZittingModal.saveAllError"}}
-        </AuAlert>
+          @importedDrafts={{this.importedDrafts}}
+          @selectedDraft={{this.selectedDraft}}
+          @selectDraft={{this.selectDraft}}
+        />
+      {{else}}
+        <Agenda::List
+          @agendapunten={{this.zitting.agendapunten}}
+          @createAgendapunt={{this.createAgendapunt}}
+          @edit={{this.edit}}
+          @sort={{this.sort}}/>
+        {{#if this.error}}
+          <AuAlert @alertIcon="cross" @alertskin="error">
+            {{t "manageAgendaZittingModal.saveAllError"}}
+          </AuAlert>
+        {{/if}}
       {{/if}}
-    {{/if}}
 
-   </Modal.content>
-  <AuToolbar @border="top" @size="large">
-    {{#if this.isEditing}}
-      <AuToolbarGroup>
-        <AuButtonGroup>
-          <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
-          <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
-        </AuButtonGroup>
-      </AuToolbarGroup>
-    {{else}}
-      <AuToolbarGroup>
-        <AuButtonGroup>
-          <AuButton {{on "click" (perform this.saveAll)}} @loading={{this.saveAll.isRunning}} @disabled={{this.saveAll.isRunning}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
-          <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
-        </AuButtonGroup>
-      </AuToolbarGroup>
-    {{/if}}
-  </AuToolbar>
-</WuModal>
+    </Modal.content>
+    <AuToolbar @border="top" @size="large">
+      {{#if this.isEditing}}
+        <AuToolbarGroup>
+          <AuButtonGroup>
+            <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
+            <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+          </AuButtonGroup>
+        </AuToolbarGroup>
+      {{else}}
+        <AuToolbarGroup>
+          <AuButtonGroup>
+            <AuButton {{on "click" (perform this.saveAll)}} @loading={{this.saveAll.isRunning}} @disabled={{this.saveAll.isRunning}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
+            <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+          </AuButtonGroup>
+        </AuToolbarGroup>
+      {{/if}}
+    </AuToolbar>
+  </WuModal>
+
+{{/if}}

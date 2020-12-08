@@ -115,11 +115,9 @@ export default class AgendaModalComponent extends Component {
       await this.createBehandeling(this.currentlyEditing);
       if(this.selectedDraft){
         const behandeling=await this.currentlyEditing.behandeling;
-        await this.selectedDraft;
-        this.selectedDraft.ontwerpBesluitStatus=this.geagenderredStatus;
-        //this shouldn't be here but I realy dont understand how things happen if it isn't
-        this.selectedDraft.save();
-        behandeling.documentContainer=await this.selectedDraft;
+        behandeling.documentContainer=this.selectedDraft;
+        const container = await behandeling.documentContainer;
+        container.ontwerpBesluitStatus = this.geagenderredStatus;
         this.importedDrafts.pushObject(this.selectedDraft);
         this.selectedDraft = null;
       }
@@ -136,7 +134,7 @@ export default class AgendaModalComponent extends Component {
       yield this.zitting.agendapunten;
       let previousAgendapoint = null;
       for(let i=0; i < this.zitting.agendapunten.length; i++) {
-        const agendapoint = yield this.zitting.agendapunten.objectAt(i);
+        const agendapoint = yield this.zitting.agenda.documentContainerpunten.objectAt(i);
 
         agendapoint.position = i;
         agendapoint.vorigeAgendapunt = previousAgendapoint;
@@ -144,7 +142,7 @@ export default class AgendaModalComponent extends Component {
 
         const behandeling = yield agendapoint.behandeling;
         if(behandeling){
-          const documentContainer = yield behandeling.documentContainer
+          const documentContainer = yield behandeling.documentContainer;
           if(documentContainer){
 
             yield documentContainer.save();
