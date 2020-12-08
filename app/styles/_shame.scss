@@ -407,3 +407,13 @@ input.input-field {
   width: calc(100% - #{$au-unit-large});
   max-width: calc(100% - #{$au-unit-large});
 }
+
+
+// Say modal tweaks
+.say-modal-backdrop {
+  z-index: 9998;
+}
+
+.modal-overlay {
+  z-index: 9999;
+}
