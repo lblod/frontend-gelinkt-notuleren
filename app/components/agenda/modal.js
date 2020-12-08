@@ -97,8 +97,13 @@ export default class AgendaModalComponent extends Component {
 
   @action
   async cancelEditing() {
-    this.save();
-    this.toggleEditing;
+    if(this.isNew){
+      this.currentlyEditing.deleteRecord();
+    }
+    else{
+      this.currentlyEditing.rollbackAttributes();
+    }
+    this.toggleEditing();
   }
 
   @action
