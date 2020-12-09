@@ -27,6 +27,27 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     return this.aanwezigen.length;
   }
 
+  /**
+   * @typedef {Object} ParticipantInfo
+   * @property {Mandataris} voorzitter
+   * @property {Mandataris} secretaris
+   * @property {Mandataris[]} aanwezigenBijStart
+   */
+
+  /**
+   * @param {ParticipantInfo} participants
+   */
+  @action
+  async saveParticipants(participants) {
+    this.behandeling.voorzitter = participants.voorzitter;
+    this.voorzitter = participants.voorzitter;
+    this.behandeling.secretaris = participants.secretaris;
+    this.secretaris = participants.secretaris;
+    this.behandeling.aanwezigen = participants.aanwezigenBijStart;
+    this.aanwezigen = participants.aanwezigenBijStart;
+    await this.behandeling.save();
+  }
+
   @task
   *fetchParticipants() {
     let queryParams = {
