@@ -109,9 +109,10 @@ export default class MeetingForm extends Component {
   }
 
   @action
-  meetingInfoUpdate(zitting) {
-    if (zitting.bestuursorgaan != this.bestuursorgaan) {
-      this.bestuursorgaan = zitting.bestuurorgaan;
+  async meetingInfoUpdate(zitting) {
+    const bestuursorgaan = await zitting.get("bestuursorgaan");
+    if (bestuursorgaan != this.bestuursorgaan) {
+      this.bestuursorgaan = bestuursorgaan;
       this.fetchPossibleParticipants.perform();
     }
   }

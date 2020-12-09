@@ -62,7 +62,7 @@ export default class TreatmentParticipationComponent extends Component {
     this.behandeling.secretaris = participants.secretaris;
     this.secretaris = participants.secretaris;
     this.behandeling.aanwezigen = participants.aanwezigenBijStart;
-    this.aanwezigenBijStart = participants.aanwezigen;
+    this.aanwezigen = participants.aanwezigenBijStart;
     await this.behandeling.save();
   }
 }

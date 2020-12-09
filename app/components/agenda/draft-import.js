@@ -23,8 +23,10 @@ export default class AgendaDraftImportComponent extends Component {
       query['filter[current-version][title]']=searchParams;
     }
     const containers = yield this.store.query('document-container', query);
-    this.options = containers.filter(e=>e.get('ontwerpBesluitStatus.id')!='7186547b61414095aa2a4affefdcca67');//geagenderred status
-    this.args.unsavedDrafts.forEach(e=>this.options.removeObject(e));
+    this.options = yield containers.filter(
+      e=>e.get('ontwerpBesluitStatus.id')!='7186547b61414095aa2a4affefdcca67' //geagenderred status
+    );
+    this.args.importedDrafts.forEach(e=>this.options.removeObject(e));
   }
 
 }

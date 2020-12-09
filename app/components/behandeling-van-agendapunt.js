@@ -30,7 +30,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @task
   *fetchParticipants() {
     let queryParams = {
-      'filter[aanwezig-bij-behandeling]': this.behandeling.get('uri'),
+      'filter[aanwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };

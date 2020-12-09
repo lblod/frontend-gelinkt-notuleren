@@ -3,16 +3,13 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import { set } from "@ember/object";
-import { restartableTask } from "ember-concurrency-decorators";
-import zitting from "../../models/zitting";
-import RSVP from "rsvp";
+import { task, restartableTask } from "ember-concurrency-decorators";
 
 export default class AgendaModalComponent extends Component {
   @service store;
   @tracked isEditing = false;
   @tracked currentlyEditing;
   @tracked isNew = false;
-  @tracked agendapunten = this.args.agendapunten;
   @tracked zitting = this.args.zitting;
   @tracked showAfterAgendapuntOptions = false;
   @tracked selectedAfterAgendapunt;
@@ -20,19 +17,32 @@ export default class AgendaModalComponent extends Component {
   @tracked afterAgendapuntOptions;
   @tracked error;
   toBeDeleted = [];
+  geagenderredStatus;
+  conceptStatus;
+  constructor(...args){
+    super(...args);
+    this.getStatus.perform();
+  }
 
+  @task
+  *getStatus(){
+    this.conceptStatus=yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');
+    this.geagenderredStatus=yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
+
+  }
   get afterSave() {
     return this.args.afterSave || (() => {});
   }
 
   @action
   async cancel() {
-    this.args.agendapunten.forEach((agendapunt) => {
+    this.zitting.agendapunten.forEach((agendapunt) => {
       agendapunt.rollbackAttributes();
     });
     this.toBeDeleted.forEach((ap) => {
       this.zitting.agendapunten.pushObject(ap);
     });
+    this.importedDrafts=[];
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
     this.args.cancel();
   }
@@ -54,10 +64,6 @@ export default class AgendaModalComponent extends Component {
     this.afterAgendapuntOptions = this.zitting.agendapunten.filter((ap) => {
       return ap != agendapunt;
     });
-
-    this.selectedLocation = null;
-    this.selectedAfterAgendapunt = null;
-
     this.currentlyEditing = agendapunt;
     this.toggleEditing();
   }
@@ -66,26 +72,53 @@ export default class AgendaModalComponent extends Component {
   async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
     this.toBeDeleted.push(this.currentlyEditing);
-    this.cancelEditing();
+
+    const agendapunt=await this.currentlyEditing;
+    const behandeling=await agendapunt.behandeling;
+    const documentContainer=await behandeling.documentContainer;
+
+    this.importedDrafts.removeObject(documentContainer);
+    this.toggleEditing();
   }
 
   @action
   async toggleEditing() {
     this.isEditing = !this.isEditing;
+    if(!this.isEditing){
+      this.selectedLocation = null;
+      this.selectedAfterAgendapunt = null;
+      this.showAfterAgendapuntOptions = false;
+
+      this.selectedDraft=null;
+
+      this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
+    }
   }
 
   @action
   async cancelEditing() {
-    this.toggleEditing();
-    if (this.isNew) {
-      this.zitting.agendapunten.removeObject(this.currentlyEditing);
-      this.toBeDeleted.push(this.currentlyEditing);
-      this.isNew = false;
-    } else {
-      // this.currentlyEditing.rollbackAttributes();
+    if(this.isNew){
+      this.currentlyEditing.deleteRecord();
     }
-    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
-    this.showAfterAgendapuntOptions = false;
+    else{
+      this.currentlyEditing.rollbackAttributes();
+    }
+    this.toggleEditing();
+  }
+
+  @action
+  async save() {
+    if (this.isNew) {
+      await this.createBehandeling(this.currentlyEditing);
+      if(this.selectedDraft){
+        const behandeling=await this.currentlyEditing.behandeling;
+        behandeling.documentContainer=await this.selectedDraft;
+        this.importedDrafts.pushObject(this.selectedDraft);
+        this.selectedDraft = null;
+      }
+      this.isNew = false;
+    }
+    this.toggleEditing();
   }
 
   @restartableTask
@@ -100,12 +133,13 @@ export default class AgendaModalComponent extends Component {
 
         agendapoint.position = i;
         agendapoint.vorigeAgendapunt = previousAgendapoint;
-        agendapoint.zitting = this.zitting;
+        agendapoint.zitting = yield this.zitting;
 
         const behandeling = yield agendapoint.behandeling;
         if(behandeling){
-          const documentContainer = yield behandeling.documentContainer
+          const documentContainer = yield behandeling.get("documentContainer");
           if(documentContainer){
+            documentContainer.ontwerpBesluitStatus=this.geagenderredStatus;
             yield documentContainer.save();
           }
           yield behandeling.save();
@@ -119,7 +153,7 @@ export default class AgendaModalComponent extends Component {
         if(behandeling){
           const documentContainer = yield behandeling.documentContainer
           if(documentContainer){
-            documentContainer.ontwerpBesluitStatus = this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'); //concept status
+            documentContainer.ontwerpBesluitStatus = this.conceptStatus;
             yield documentContainer.save();
           }
           yield behandeling.destroyRecord();
@@ -135,22 +169,7 @@ export default class AgendaModalComponent extends Component {
     this.args.cancel();
   }
 
-  @action
-  async save() {
-    if (this.isNew) {
-      this.createBehandeling(this.currentlyEditing);
-      if(this.selectedDraft){
-        const behandeling=await this.currentlyEditing.behandeling;
-        this.selectedDraft.ontwerpBesluitStatus=
-          await this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');//geagenderred status
-        this.currentlyEditing.behandeling.set('documentContainer', this.selectedDraft);
-        this.selectedDraft = null;
-      }
-      this.isNew = false;
-    }
-    this.showAfterAgendapuntOptions = false;
-    this.toggleEditing();
-  }
+
   /**
    * @param {import("../../models/agendapunt").default} agendapunt
    */
@@ -233,10 +252,10 @@ export default class AgendaModalComponent extends Component {
   }
   //edit screen importing
   @tracked
-  unsavedDrafts=[];
+  importedDrafts=[];
 
   @tracked
-  selectedDraft
+  selectedDraft;
 
   @action
   async selectDraft(draft){
