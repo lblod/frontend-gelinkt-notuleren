@@ -6,7 +6,7 @@
     {{t "behandelingVanAgendapunten.visibility"}} <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
   </div>
 
-  <AuHeading @level="4" @skin="6" class="au-u-margin-top">Deelnemers:</AuHeading>
+  <AuHeading @level="4" @skin="6" class="au-u-margin-top">Aanwezigen:</AuHeading>
   <Treatment::Participation
     @behandeling={{@behandeling}}
     @possibleParticipants={{@possibleParticipants}}
@@ -23,6 +23,7 @@
       </div>
     {{/if}}
   </div>
+
   {{#if this.tryToFetchDocument.lastSuccessful}}
     <div class="au-u-margin-top-small">
       <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
