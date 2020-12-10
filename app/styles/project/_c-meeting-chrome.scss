@@ -269,6 +269,7 @@
   padding-right: $au-unit-small;
   transition: opacity $au-transition;
   display: none;
+  overflow: auto;
 
   @include mq(1160px) {
     display: block;
