@@ -5,17 +5,22 @@
   <div class="au-u-margin-top-small">
     {{t "behandelingVanAgendapunten.visibility"}} <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
   </div>
+
+  <AuHeading @level="4" @skin="6" class="au-u-margin-top">Deelnemers:</AuHeading>
   <Treatment::Participation
     @behandeling={{@behandeling}}
     @possibleParticipants={{@possibleParticipants}}
     @bestuursorgaan={{@bestuursorgaan}}
   />
 
-  <div class="au-u-padding-bottom-large">
+  <AuHeading @level="4" @skin="6">Stemmingen:</AuHeading>
+  <div class="au-u-padding-bottom">
     {{#if this.hasParticipants}}
       <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>
     {{else}}
-      <span>{{t "behandelingVanAgendapunten.needsParticipants"}}</span>
+      <div class="au-c-meeting-chrome-card au-c-meeting-chrome-card--editable">
+        <span>{{t "behandelingVanAgendapunten.needsParticipants"}}</span>
+      </div>
     {{/if}}
   </div>
   {{#if this.tryToFetchDocument.lastSuccessful}}

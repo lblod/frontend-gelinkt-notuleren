@@ -427,3 +427,8 @@ input.input-field {
   border-bottom: 0;
   border-top: .1rem solid $au-gray-300;
 }
+
+// Temporary fix for voting table
+.data-table--border {
+  border: .1rem solid $au-gray-200;
+}
