@@ -3,38 +3,46 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 import { set } from "@ember/object";
-import { restartableTask } from "ember-concurrency-decorators";
-import zitting from "../../models/zitting";
-import RSVP from "rsvp";
+import { task, restartableTask } from "ember-concurrency-decorators";
 
 export default class AgendaModalComponent extends Component {
   @service store;
-
   @tracked isEditing = false;
-
   @tracked currentlyEditing;
-
   @tracked isNew = false;
-
-  @tracked agendapunten = this.args.agendapunten;
-
   @tracked zitting = this.args.zitting;
-
+  @tracked showAfterAgendapuntOptions = false;
+  @tracked selectedAfterAgendapunt;
+  @tracked selectedLocation;
+  @tracked afterAgendapuntOptions;
+  @tracked error;
   toBeDeleted = [];
-  unsavedBehandelingen = [];
+  geagenderredStatus;
+  conceptStatus;
+  constructor(...args){
+    super(...args);
+    this.getStatus.perform();
+  }
 
+  @task
+  *getStatus(){
+    this.conceptStatus=yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');
+    this.geagenderredStatus=yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
+
+  }
   get afterSave() {
     return this.args.afterSave || (() => {});
   }
 
   @action
   async cancel() {
-    this.args.agendapunten.forEach((agendapunt) => {
+    this.zitting.agendapunten.forEach((agendapunt) => {
       agendapunt.rollbackAttributes();
     });
     this.toBeDeleted.forEach((ap) => {
       this.zitting.agendapunten.pushObject(ap);
     });
+    this.importedDrafts=[];
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
     this.args.cancel();
   }
@@ -44,7 +52,7 @@ export default class AgendaModalComponent extends Component {
     const agendapunt = this.store.createRecord("agendapunt");
     agendapunt.titel = "";
     agendapunt.beschrijving = "";
-    agendapunt.geplandOpenbaar = false;
+    agendapunt.geplandOpenbaar = true;
     agendapunt.position = this.zitting.agendapunten.length;
     this.zitting.agendapunten.pushObject(agendapunt);
     this.edit(agendapunt);
@@ -56,10 +64,6 @@ export default class AgendaModalComponent extends Component {
     this.afterAgendapuntOptions = this.zitting.agendapunten.filter((ap) => {
       return ap != agendapunt;
     });
-
-    this.selectedLocation = null;
-    this.selectedAfterAgendapunt = null;
-
     this.currentlyEditing = agendapunt;
     this.toggleEditing();
   }
@@ -67,61 +71,112 @@ export default class AgendaModalComponent extends Component {
   @action
   async delete() {
     this.zitting.agendapunten.removeObject(this.currentlyEditing);
-
-    const behandeling=(await this.store.query('behandeling-van-agendapunt',  {"filter[onderwerp][:id:]": this.currentlyEditing.id})).firstObject;
-    const documentContainer=await behandeling.documentContainer;
-
-    documentContainer.ontwerpBesluitStatus=
-      await this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');//concept status
-
-    await documentContainer.save();
-
     this.toBeDeleted.push(this.currentlyEditing);
-    this.cancelEditing();
+
+    const agendapunt=await this.currentlyEditing;
+    const behandeling=await agendapunt.behandeling;
+    const documentContainer=await behandeling.documentContainer;
+    const ontwerpBesluitStatus=await documentContainer.ontwerpBesluitStatus;
+
+    if (ontwerpBesluitStatus.id==this.geagenderredStatus.id){
+      documentContainer.ontwerpBesluitStatus=this.conceptStatus;
+      //this shouldn't be here but I realy dont understand how things happen if it isn't
+      documentContainer.save();
+    }
+
+    this.importedDrafts.removeObject(documentContainer);
+    this.toggleEditing();
+
   }
 
   @action
   async toggleEditing() {
     this.isEditing = !this.isEditing;
+    if(!this.isEditing){
+      this.selectedLocation = null;
+      this.selectedAfterAgendapunt = null;
+      this.showAfterAgendapuntOptions = false;
+
+      this.selectedDraft=null;
+
+      this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
+    }
   }
 
   @action
   async cancelEditing() {
-    this.toggleEditing();
-    if (this.isNew) {
-      this.zitting.agendapunten.removeObject(this.currentlyEditing);
-      this.toBeDeleted.push(this.currentlyEditing);
-      this.isNew = false;
-    } else {
-      this.currentlyEditing.rollbackAttributes();
-    }
-    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
-    this.showAfterAgendapuntOptions = false;
-  }
-
-  @restartableTask
-  *saveAll() {
-    const promises = this.unsavedBehandelingen.map((b) => b.save());
-    yield RSVP.all(promises);
-    yield this.updateVorigeAgendaPunten();
-    yield RSVP.all(
-      this.zitting.agendapunten.map((a) => a.behandeling.then((b) => b.save()))
-    );
-    yield this.zitting.agendapunten.then((a) => a.save());
-    this.toBeDeleted.forEach((e) => e.destroyRecord());
-    this.args.afterSave();
-    this.args.cancel();
+    this.save();
+    this.toggleEditing;
   }
 
   @action
   async save() {
     if (this.isNew) {
-      this.createBehandeling(this.currentlyEditing);
+      await this.createBehandeling(this.currentlyEditing);
+      if(this.selectedDraft){
+        const behandeling=await this.currentlyEditing.behandeling;
+        await this.selectedDraft;
+        this.selectedDraft.ontwerpBesluitStatus=this.geagenderredStatus;
+        //this shouldn't be here but I realy dont understand how things happen if it isn't
+        this.selectedDraft.save();
+        behandeling.documentContainer=await this.selectedDraft;
+        this.importedDrafts.pushObject(this.selectedDraft);
+        this.selectedDraft = null;
+      }
       this.isNew = false;
     }
-    this.showAfterAgendapuntOptions = false;
     this.toggleEditing();
   }
+
+  @restartableTask
+  *saveAll() {
+    // NOTE: huge try/catch because ember-concurrency error catching does not seem to catch promise rejections
+    try {
+      this.error = null;
+      yield this.zitting.agendapunten;
+      let previousAgendapoint = null;
+      for(let i=0; i < this.zitting.agendapunten.length; i++) {
+        const agendapoint = yield this.zitting.agendapunten.objectAt(i);
+
+        agendapoint.position = i;
+        agendapoint.vorigeAgendapunt = previousAgendapoint;
+        agendapoint.zitting = yield this.zitting;
+
+        const behandeling = yield agendapoint.behandeling;
+        if(behandeling){
+          const documentContainer = yield behandeling.documentContainer
+          if(documentContainer){
+
+            yield documentContainer.save();
+          }
+          yield behandeling.save();
+        }
+        yield agendapoint.save();
+        previousAgendapoint = agendapoint;
+      }
+      for(let i=0; i < this.toBeDeleted.length; i++){
+        const agendapoint = yield this.toBeDeleted[i];
+        const behandeling = yield agendapoint.behandeling;
+        if(behandeling){
+          const documentContainer = yield behandeling.documentContainer
+          if(documentContainer){
+              documentContainer.ontwerpBesluitStatus = this.conceptStatus;
+            yield documentContainer.save();
+          }
+          yield behandeling.destroyRecord();
+        }
+        yield agendapoint.destroyRecord();
+      }
+    }
+    catch(e) {
+      this.error = e;
+      throw e;
+    }
+    this.afterSave(this.zitting.agendapunten);
+    this.args.cancel();
+  }
+
+
   /**
    * @param {import("../../models/agendapunt").default} agendapunt
    */
@@ -136,27 +191,7 @@ export default class AgendaModalComponent extends Component {
       behandeling.aanwezigen = this.args.zitting.aanwezigenBijStart;
       behandeling.voorzitter = this.args.zitting.voorzitter;
       behandeling.secretaris = this.args.zitting.secretaris;
-      this.unsavedBehandelingen.push(behandeling);
     }
-    // agendapunt.behandeling = behandeling;
-    // await agendapunt.save();
-  }
-
-  //this assumes everything is sorted
-  @action
-  async updateVorigeAgendaPunten() {
-    this.zitting.agendapunten.forEach((agendapunt, i, agendapunten) => {
-      if (i > 0) {
-        agendapunt.vorigeAgendapunt = agendapunten.objectAt(i - 1);
-        agendapunt.behandeling.set(
-          "vorigeBehandelingVanAgendapunt",
-          agendapunten.objectAt(i - 1).behandeling
-        );
-      } else {
-        agendapunt.vorigeAgendapunt = null;
-        agendapunt.behandeling.vorigeBehandelingVanAgendapunt = null;
-      }
-    });
   }
 
   @action
@@ -165,16 +200,6 @@ export default class AgendaModalComponent extends Component {
       agendapunt.position = index;
     });
   }
-
-  //edit screen sorting
-
-  @tracked showAfterAgendapuntOptions = false;
-
-  @tracked selectedAfterAgendapunt;
-
-  @tracked selectedLocation;
-
-  @tracked afterAgendapuntOptions;
 
   @action
   selectAfterAgendapunt(option) {
@@ -232,4 +257,16 @@ export default class AgendaModalComponent extends Component {
 
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
   }
+  //edit screen importing
+  @tracked
+  importedDrafts=[];
+
+  @tracked
+  selectedDraft;
+
+  @action
+  async selectDraft(draft){
+    this.selectedDraft=draft;
+  }
+
 }

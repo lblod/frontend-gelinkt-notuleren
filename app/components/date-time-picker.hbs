@@ -3,11 +3,11 @@
     <AuLabel>Datum</AuLabel>
     <WuDatepicker class="au-c-datepicker" @onChange={{this.onChangeDate}} @value={{this.date}}/>
   </div>
-  <div class="au-o-grid__item au-u-1-6">
+  <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
     <AuLabel>Uur</AuLabel>
     <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'hours'}} @value={{this.hours}} max={{24}} />
   </div>
-  <div class="au-o-grid__item au-u-1-6">
+  <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
     <AuLabel>Minuten</AuLabel>
     <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'minutes'}} @value={{this.minutes}} max={{60}} />
   </div>

@@ -5,8 +5,7 @@ export default class MeetingsNewRoute extends Route {
     const now = new Date();
     return this.store.createRecord('zitting', {
       geplandeStart: now,
-      gestartOpTijdstip: now,
-      geeindigdOpTijdstip: now
+      gestartOpTijdstip: now
     });
   }
 }

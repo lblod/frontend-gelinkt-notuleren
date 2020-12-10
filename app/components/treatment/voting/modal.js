@@ -3,6 +3,8 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
 import { task, restartableTask } from "ember-concurrency-decorators";
+import ManageAgendaZittingComponent from "../../manage-agenda-zitting";
+import { allSettled } from "ember-concurrency";
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
 /** @typedef {import("../../../models/bestuursorgaan").default} Bestuursorgaan*/
 /** @typedef {import("../../../models/stemming").default} Stemming*/
@@ -14,6 +16,8 @@ import { task, restartableTask } from "ember-concurrency-decorators";
  * @property {boolean} show
  * @property {() => void} onClose
  */
+
+const COUNCIL_MEMBER_URI = "http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011";
 
 /** @extends {Component<Args>} */
 export default class TreatmentVotingModalComponent extends Component {
@@ -49,12 +53,20 @@ export default class TreatmentVotingModalComponent extends Component {
     this.onCancelEdit();
   };
 
+
   @task
   /** @type {import("ember-concurrency").Task} */
   addStemming =
     /** @this {TreatmentVotingModalComponent} */
     function* () {
-      const aanwezigen = yield this.args.behandeling.aanwezigen;
+      const richTreatment = yield this.store.query("behandeling-van-agendapunt", {
+        "filter[:id:]": this.args.behandeling.id,
+        include: "aanwezigen.bekleedt.bestuursfunctie"
+      });
+      const participants = richTreatment.firstObject.aanwezigen.filter(
+        (mandatee) =>
+          mandatee.bekleedt.get("bestuursfunctie").get("uri") === COUNCIL_MEMBER_URI
+      );
 
       const stemmingToEdit = this.store.createRecord("stemming", {
         onderwerp: "",
@@ -65,8 +77,8 @@ export default class TreatmentVotingModalComponent extends Component {
         gevolg: "",
       });
       this.editMode = true;
-      stemmingToEdit.aanwezigen.pushObjects(aanwezigen);
-      stemmingToEdit.stemmers.pushObjects(aanwezigen);
+      stemmingToEdit.aanwezigen.pushObjects(participants);
+      stemmingToEdit.stemmers.pushObjects(participants);
       this.editStemming.stemming = stemmingToEdit;
     };
   @action
@@ -74,10 +86,10 @@ export default class TreatmentVotingModalComponent extends Component {
     this.editStemming.stemming = stemming;
     this.editMode = true;
   }
-  @action
-  removeStemming(stemming) {
+  @task
+  removeStemming = function* (stemming) {
     stemming.deleteRecord();
-    stemming.save();
+    yield stemming.save();
   }
   @action
   onCancelEdit() {

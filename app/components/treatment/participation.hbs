@@ -1,22 +1,35 @@
 <div class="au-c-meeting-chrome-card">
   <ParticipationList::Modal
     @show={{this.showParticipationModal}}
-    @aanwezigenBijStart={{this.behandeling.aanwezigen}}
-    @bestuursorgaan={{@bestuursorgaan}}
+    @aanwezigenBijStart={{@aanwezigen}}
+    @possibleParticipants={{@possibleParticipants}}
     @onSave={{this.saveParticipants}}
     @togglePopup={{this.toggleModal}}
     @voorzitter={{this.behandeling.voorzitter}}
     @secretaris={{this.behandeling.secretaris}}
+    @bestuursorgaan={{@bestuursorgaan}}
   />
+  {{#if this.loadData.isRunning}}
+    <p>{{t "participationList.loadingTitle"}}</p>
+    <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+
+  {{else}}
   <ul class="au-c-list-divider">
     <li class="au-c-list-divider__item">
-      {{t "participation.presentLabel"}}
-      {{#each this.behandeling.aanwezigen as |mandataris|}}
+      {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+    </li>
 
-        <strong>{{mandataris.isBestuurlijkeAliasVan.achternaam}}</strong>
+    <li class="au-c-list-divider__item">
+      {{t "participationList.secretarisLabel"}} <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+    </li>
+    <li class="au-c-list-divider__item">
+      {{t "participation.presentLabel"}}
+      {{#each this.sortedAanwezigen as |mandataris|}}
+          <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
       {{/each}}
     </li>
   </ul>
+  {{/if}}
   <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">
     {{t "behandelingVanAgendapunten.participationListButton"}}
   </AuButton>

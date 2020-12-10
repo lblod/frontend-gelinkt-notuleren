@@ -1,17 +1,12 @@
-{{#if this.bestuursorgaan}}
-  <div class="au-c-meeting-chrome-card">
-    {{#if this.loadData.isRunning}}
-      <p>{{t "participationList.loadingTitle"}}</p>
-      <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
-    {{else}}
-      {{#if this.hasParticipationInfo}}
-        <ul class="au-c-list-divider">
-          <li class="au-c-list-divider__item">
-            {{t "participationList.voorzitterLabel"}} <strong>{{this.voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+<div class="au-c-meeting-chrome-card">
+    {{#if hasParticipationInfo}}
+      <ul class="au-c-list-divider">
+        <li class="au-c-list-divider__item">
+          {{t "participationList.voorzitterLabel"}} <strong>{{@voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
           </li>
-          <li class="au-c-list-divider__item">
 
-            {{t "participationList.secretarisLabel"}} <strong>{{this.secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+          <li class="au-c-list-divider__item">
+            {{t "participationList.secretarisLabel"}} <strong>{{@secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
             {{!-- example error
             <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
               Er is nog geen secretaris aangeduid
@@ -20,7 +15,7 @@
           </li>
           <li class="au-c-list-divider__item">
             {{t "participationList.presentLabel"}}
-            {{#each this.aanwezigenBijStart as |mandataris|}}
+            {{#each this.mandateesPresent as |mandataris|}}
               <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
             {{/each}}
           </li>
@@ -30,9 +25,8 @@
               <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
             {{/each}}
           </li>
-        </ul>
+      </ul>
       {{/if}}
-
       <AuButton
         @width="block"
         @skin="secondary"
@@ -45,14 +39,13 @@
       </AuButton>
 
       <ParticipationList::Modal
-        @bestuursorgaan={{this.bestuursorgaan}}
-        @voorzitter={{this.voorzitter}}
-        @secretaris={{this.secretaris}}
+        @voorzitter={{@voorzitter}}
+        @secretaris={{@secretaris}}
         @show={{this.popup}}
         @togglePopup={{this.togglePopup}}
-        @onSave={{this.onSave}}
+        @onSave={{@onSave}}
+        @bestuursorgaan={{@bestuursorgaan}}
         @aanwezigenBijStart={{this.aanwezigenBijStart}}
+        @possibleParticipants={{this.possibleParticipants}}
       />
-    {{/if}}
-  </div>
-{{/if}}
+</div>

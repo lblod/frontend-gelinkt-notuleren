@@ -5,41 +5,39 @@
       @modalOpen={{@show}}
       @closeModal={{fn (mut @show) false}} as |Modal| >
       <Modal.Body>
-          {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
-            <p>{{t "participationList.loadingTitle"}}</p>
-            <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
-          {{else}}
-            <div class="au-o-flow">
-              <div>
-                <AuLabel>
-                  {{t "participationListModal.voorzitterLabel"}}
-                </AuLabel>
-                <ParticipationList::MandatarisSelector
-                  @onSelect={{this.selectVoorzitter}}
-                  @mandataris={{this.voorzitter}}
-                  @bestuursorgaan={{@bestuursorgaan}}
-                />
-              </div>
-
-              <div>
-                <AuLabel>Secretaris van de zitting</AuLabel>
-                <ParticipationList::FunctionarisSelector
-                  o@onSelect={{this.selectSecretaris}}
-                  @functionaris={{this.secretaris}}
-                  @bestuursorgaan={{@bestuursorgaan}}
-                />
-              </div>
-              <div>
-                <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
-                <ParticipationList::MandatarissenTable
-                  @mandataris={{this.mandataris}}
-                  @selected={{@aanwezigenBijStart}}
-                  @onChange={{this.updateMandatarisTable}}
-                />
-              </div>
+        {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
+          <p>{{t "participationList.loadingTitle"}}</p>
+          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
+        {{else}}
+          <div class="au-o-flow">
+            <div>
+              <AuLabel>
+                {{t "participationListModal.voorzitterLabel"}}
+              </AuLabel>
+              <ParticipationList::MandatarisSelector
+                @onSelect={{this.selectVoorzitter}}
+                @mandataris={{this.voorzitter}}
+                @bestuursorgaan={{@bestuursorgaan}}
+              />
             </div>
-          {{/if}}
-          {{yield}}
+            <div>
+              <AuLabel>Secretaris van de zitting</AuLabel>
+              <ParticipationList::FunctionarisSelector
+                @onSelect={{this.selectSecretaris}}
+                @functionaris={{this.secretaris}}
+              />
+            </div>
+            <div>
+              <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
+              <ParticipationList::MandatarissenTable
+                @possibleParticipants={{@possibleParticipants}}
+                @selected={{@aanwezigenBijStart}}
+                @onChange={{this.updateMandatarisTable}}
+              />
+            </div>
+          </div>
+        {{/if}}
+        {{yield}}
       </Modal.Body>
       <Modal.Footer>
         <AuButtonGroup>

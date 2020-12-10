@@ -77,6 +77,7 @@ export default class ZittingManageZittingsdataComponent extends Component {
     else {
       await this.zitting.save();
       this.showModal = !this.showModal;
+      this.args.onChange(this.zitting);
     }
   }
 

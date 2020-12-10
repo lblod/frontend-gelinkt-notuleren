@@ -110,7 +110,7 @@ li.link-list__item > button.button {
 /* temporary fix for besluittypes dropdown */
 
 .ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
-  z-index: 1010;
+  z-index: 9999;
 }
 
 /* temporary demo fixes for fracties */
@@ -412,4 +412,25 @@ input.input-field {
 .au-c-modal__footer {
   position: relative;
   z-index: 99;
+}
+
+// Say modal tweaks
+.say-modal-backdrop,
+.au-c-modal-backdrop {
+  z-index: 9998;
+}
+
+.modal-overlay,
+.au-c-modal {
+  z-index: 9999;
+}
+
+.pika-single {
+  z-index: 9999;
+}
+
+// Fix dropdown above
+.ember-basic-dropdown-content--above .ember-power-select-dropdown.ember-basic-dropdown-content--below, .ember-power-select-dropdown.ember-basic-dropdown-content--in-place {
+  border-bottom: 0;
+  border-top: .1rem solid $au-gray-300;
 }

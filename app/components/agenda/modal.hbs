@@ -20,7 +20,9 @@
         @selectAfterAgendapunt={{this.selectAfterAgendapunt}}
         @selectLocation={{this.selectLocation}}
 
-        @createBehandeling={{this.createBehandeling}}
+        @importedDrafts={{this.importedDrafts}}
+        @selectedDraft={{this.selectedDraft}}
+        @selectDraft={{this.selectDraft}}
       />
     {{else}}
       <Agenda::List
@@ -28,6 +30,11 @@
         @createAgendapunt={{this.createAgendapunt}}
         @edit={{this.edit}}
         @sort={{this.sort}}/>
+      {{#if this.error}}
+        <AuAlert @alertIcon="cross" @alertskin="error">
+          {{t "manageAgendaZittingModal.saveAllError"}}
+        </AuAlert>
+      {{/if}}
     {{/if}}
   </Modal.Body>
   <Modal.Footer>
@@ -37,10 +44,12 @@
       <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
     </AuButtonGroup>
     {{else}}
-    <AuButtonGroup>
-      <AuButton {{on "click" (perform this.saveAll)}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
-      <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
-    </AuButtonGroup>
+      <AuToolbarGroup>
+        <AuButtonGroup>
+          <AuButton {{on "click" (perform this.saveAll)}} @loading={{this.saveAll.isRunning}} @disabled={{this.saveAll.isRunning}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+        </AuButtonGroup>
+      </AuToolbarGroup>
     {{/if}}
   </Modal.Footer>
 </AuModal>

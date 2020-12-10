@@ -2,23 +2,28 @@
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
     {{@behandeling.onderwerp.titel}}
   </AuHeading>
-   <div class="au-u-margin-top-small">
-       {{t "behandelingVanAgendapunten.visibility"}} <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
+  <div class="au-u-margin-top-small">
+    {{t "behandelingVanAgendapunten.visibility"}} <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
   </div>
   <Treatment::Participation
     @behandeling={{@behandeling}}
+    @possibleParticipants={{@possibleParticipants}}
     @bestuursorgaan={{@bestuursorgaan}}
   />
 
+  <div class="au-u-padding-bottom-large">
+    {{#if this.hasParticipants}}
+      <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>
+    {{else}}
+      <span>{{t "behandelingVanAgendapunten.needsParticipants"}}</span>
+    {{/if}}
+  </div>
   {{#if this.tryToFetchDocument.lastSuccessful}}
-    <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
+    <div class="au-u-margin-top-small">
+      <BesluitDocumentContainer @document={{this.document}} @handleRdfaEditorInit={{this.handleRdfaEditorInit}} @saving={{this.saveEditorDocument.isRunning}} @editor={{this.editor}}/>
+    </div>
   {{/if}}
   <AuButtonGroup>
-    {{#if this.hasParticipants}}
-    <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>
-    {{else}}
-    <span>{{t "behandelingVanAgendapunten.needsParticipants"}}</span>
-    {{/if}}
     <AuButton {{on "click" this.save}} @disabled={{if this.saveEditorDocument.isRunning true false}}>
       {{t "behandelingVanAgendapunten.saveButton"}}
     </AuButton>
