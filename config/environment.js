@@ -43,11 +43,11 @@ module.exports = function(environment) {
       disableRedirectInitializer: true,
       providers: {
         'acmidm-oauth2': {
-          apiKey: '68b1585d-0e13-4817-820e-c475207673ed',
-          baseUrl: 'https://authenticatie-ti.vlaanderen.be/op/v1/auth',
+          apiKey: "{{OAUTH_API_KEY}}",
+          baseUrl: "{{OAUTH_BASE_URL}}",
           scope: 'openid rrn vo profile abb_gelinktNotuleren',
-          redirectUri: 'https://gelinkt-notuleren.lblod.info/authorization/callback',
-          logoutUrl: 'https://authenticatie-ti.vlaanderen.be/op/v1/logout'
+          redirectUri: "{{OAUTH_REDIRECT_URL}}",
+          logoutUrl: "{{OAUTH_LOGOUT_URL}}"
         }
       }
     },
@@ -57,7 +57,7 @@ module.exports = function(environment) {
       footer: '//widgets.vlaanderen.be/widget/live/a6670dda202e46beb2832ae8f57f197e'
     },
     publicatie: {
-      baseUrl: 'https://publicatie.gelinkt-notuleren.lblod.info/'
+      baseUrl: "{{PUBLICATION_BASE_URL}}"
     }
   };
 
@@ -83,14 +83,5 @@ module.exports = function(environment) {
   if (environment === 'production') {
 
   }
-
-  if (process.env.DEPLOY_ENV === 'production') {
-    ENV['torii']['providers']['acmidm-oauth2']['apiKey'] = 'a004bb30-e68b-476b-a67d-121276c2b944';
-    ENV['torii']['providers']['acmidm-oauth2']['baseUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/auth';
-    ENV['torii']['providers']['acmidm-oauth2']['redirectUri'] = 'https://gelinkt-notuleren.vlaanderen.be/authorization/callback';
-    ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'] = 'https://authenticatie.vlaanderen.be/op/v1/logout';
-    ENV['publicatie']['baseUrl'] = 'https://publicatie.gelinkt-notuleren.vlaanderen.be/';
-  }
-
   return ENV;
 };
