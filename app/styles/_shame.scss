@@ -408,13 +408,20 @@ input.input-field {
   max-width: calc(100% - #{$au-unit-large});
 }
 
+// Modal quick fixes
+.au-c-modal__footer {
+  position: relative;
+  z-index: 99;
+}
 
 // Say modal tweaks
-.say-modal-backdrop {
+.say-modal-backdrop,
+.au-c-modal-backdrop {
   z-index: 9998;
 }
 
-.modal-overlay {
+.modal-overlay,
+.au-c-modal {
   z-index: 9999;
 }
 

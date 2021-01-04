@@ -1,8 +1,9 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
-export default Component.extend({
-  isPublished: true,
-  prepublishedBehandelingen: null,
-  publicBehandelingUris: null,
-  toggle: null
-});
+
+export default class SignaturesNotulenBehandelingList extends Component {
+  get isPublished() {
+    return this.args.notulen.get('publishedResource');
+  }
+
+}

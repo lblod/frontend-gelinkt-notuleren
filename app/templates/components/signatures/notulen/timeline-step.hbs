@@ -1,14 +1,19 @@
-<Signatures::TimelineStep @name={{name}} @step={{step}} @document={{notulen}} @signing={{signing}} @publish={{action publish publicBehandelingUris}} @mockDocument={{mockNotulen}} @isOpen={{isOpen}}>
-  {{#if (is-pending mockBehandelingen)}}
-    <div>Aan het laden...</div>
-  {{else}}
-  	<div class="document-publish">
-	    {{{zittingWrapper}}}
-	  </div>
-    {{#if zittingWrapper}}
-      <EmberWormhole @to={{behandelingContainerId}}>
-        <Signatures::Notulen::BehandelingenList @isPublished={{notulen}} @prepublishedBehandelingen={{await mockBehandelingen}} @publicBehandelingUris={{publicBehandelingUris}} @toggle={{action "togglePublicationStatus"}} />
-      </EmberWormhole>
-    {{/if}}
+<Signatures::TimelineStep 
+  @name={{@name}} 
+  @step={{@step}} 
+  @document={{@notulen}} 
+  @signing={{@signing}} 
+  @publish={{@publish}} 
+  @mockDocument={{this.mockNotulen}} 
+  @isOpen={{this.isOpen}} 
+>
+  <div class="document-publish">
+    {{{@zittingWrapper}}}
+  </div>
+  {{#if @zittingWrapper}}
+    <EmberWormhole @to={{@behandelingContainerId}}>
+      <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{action @togglePublicationStatus}} />
+    </EmberWormhole>
   {{/if}}
 </Signatures::TimelineStep>
+

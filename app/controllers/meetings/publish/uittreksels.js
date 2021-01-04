@@ -24,13 +24,13 @@ export default class MeetingsPublishUittrekselsController extends Controller {
     const prePublish = yield this.createPrePublishedResource.perform();
     for(const uittreksel of prePublish) {
       const existingUittreksels = yield this.store.query('versioned-behandeling',{
-        'filter[behandeling][:id:]': uittreksel.data.attributes.behandeling,
+        'filter[behandeling][:id:]': uittreksel.data.attributes.uuid,
         include: 'signed-resources,published-resource'
       });
       if(existingUittreksels.length) {
         uittreksels.push(existingUittreksels.firstObject);
       } else {
-        const behandeling = yield this.store.findRecord('behandeling-van-agendapunt', uittreksel.data.attributes.behandeling);
+        const behandeling = yield this.store.findRecord('behandeling-van-agendapunt', uittreksel.data.attributes.uuid);
 
         const rslt = yield this.store.createRecord("versioned-behandeling", {
           zitting: this.model,

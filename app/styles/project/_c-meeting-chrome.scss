@@ -146,7 +146,6 @@
     z-index: 999;
     padding: $au-unit-small;
 
-
     @include mq(large) {
       left: calc(100% + #{$au-unit-large});
       width: $au-unit-huge*4;
@@ -166,9 +165,6 @@
   .say-toast {
     display: none !important;
     opacity: 0 !important;
-  }
-
-  .say-modal-backdrop {
   }
 
   .say-modal--fullscreen {
