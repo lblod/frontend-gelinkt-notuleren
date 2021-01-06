@@ -57,6 +57,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     };
     const aanwezigen = yield this.store.query('mandataris', queryParams);
     this.aanwezigen = aanwezigen.sortBy('isBestuurlijkeAliasVan.achternaam');
+    this.behandeling.aanwezigen = aanwezigen;
   }
 
   @task
