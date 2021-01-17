@@ -5,12 +5,21 @@
   <div class="au-u-margin-top-small">
     {{t "behandelingVanAgendapunten.visibility"}} <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
   </div>
-  <Treatment::Participation
-    @behandeling={{@behandeling}}
-    @possibleParticipants={{@possibleParticipants}}
-    @bestuursorgaan={{@bestuursorgaan}}
-  />
-
+  {{#if this.fetchParticipants.isRunning}}
+    <p>{{t "participationList.loadingTitle"}}</p>
+    <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
+  {{else}}
+    <ParticipationList
+      @voorzitter={{this.behandeling.voorzitter}}
+      @secretaris={{this.behandeling.secretaris}}
+      @bestuursorgaan={{@bestuursorgaan}}
+      @possibleParticipants={{@possibleParticipants}}
+      @aanwezigenBijStart={{this.aanwezigen}}
+      @onSave={{this.saveParticipants}}
+      @bestuursorgaan={{this.bestuursorgaan}}
+      @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
+   />
+  {{/if}}
   <div class="au-u-padding-bottom-large">
     {{#if this.hasParticipants}}
       <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}}/>

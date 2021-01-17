@@ -1,16 +1,15 @@
 {{#if @show}}
   <div>
-    {{#wu-modal
-      title="Beheer aanwezigen"
-      dialog-class="modal-dialog--wide modal-dialog--sectioned"
-      onClose=(action 'togglePopup')
-      as |m|}}
-      {{#m.content isSectioned=false}}
+    <AuModal
+      @modalTitle="Beheer aanwezigen"
+      @modalOpen={{@show}}
+      @closeModal={{fn (mut @show) false}} as |Modal| >
+      <Modal.Body>
         {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
           <p>{{t "participationList.loadingTitle"}}</p>
           <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
         {{else}}
-          <div class="au-o-box au-o-box--small au-o-flow">
+          <div class="au-o-flow">
             <div>
               <AuLabel>
                 {{t "participationListModal.voorzitterLabel"}}
@@ -21,7 +20,6 @@
                 @bestuursorgaan={{@bestuursorgaan}}
               />
             </div>
-
             <div>
               <AuLabel>Secretaris van de zitting</AuLabel>
               <ParticipationList::FunctionarisSelector
@@ -40,15 +38,13 @@
           </div>
         {{/if}}
         {{yield}}
-      {{/m.content}}
-      <AuToolbar @border="top" @size="large">
-        <AuToolbarGroup>
-          <AuButtonGroup>
-            <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
-            <AuButton @skin="secondary" {{on "click" this.togglePopup}}>{{t "participationListModal.cancelButton"}}</AuButton>
-          </AuButtonGroup>
-        </AuToolbarGroup>
-      </AuToolbar>
-    {{/wu-modal}}
+      </Modal.Body>
+      <Modal.Footer>
+        <AuButtonGroup>
+          <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.togglePopup}}>{{t "participationListModal.cancelButton"}}</AuButton>
+        </AuButtonGroup>
+      </Modal.Footer>
+    </AuModal>
   </div>
 {{/if}}

@@ -5,7 +5,6 @@
         {{t "meetingForm.backButton"}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
-
     </AuToolbarGroup>
     <AuToolbarGroup>
       <ul class="au-c-list-horizontal au-u-padding-right-tiny">
@@ -124,6 +123,7 @@
             @aanwezigenBijStart={{this.aanwezigenBijStart}}
             @onSave={{this.saveParticipationList}}
             @bestuursorgaan={{this.bestuursorgaan}}
+            @modalTitle={{t "participationList.openModalButton"}}
           />
 
           <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper">
