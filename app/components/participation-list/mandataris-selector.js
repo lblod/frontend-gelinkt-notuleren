@@ -3,6 +3,7 @@ import { action } from "@ember/object";
 import { timeout } from 'ember-concurrency';
 import {task} from 'ember-concurrency-decorators';
 import { inject as service } from '@ember/service';
+import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 
 export default class ParticipationListMandatarisSelectorComponent extends Component {
   @service store;
@@ -15,10 +16,12 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     yield timeout(300);
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
+      include: 'status',
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
       'filter[is-bestuurlijke-alias-van][achternaam]': searchData,
       page: { size: 100 }
     };
-    return yield this.store.query('mandataris', queryParams);
+    const mandatees = yield this.store.query('mandataris', queryParams);
+    return mandatees.filter((mandatee) => isValidMandateeForMeeting(mandatee, this.args.meeting));
   }
 }

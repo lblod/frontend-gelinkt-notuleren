@@ -63,10 +63,7 @@ export default class TreatmentVotingModalComponent extends Component {
         "filter[:id:]": this.args.behandeling.id,
         include: "aanwezigen.bekleedt.bestuursfunctie"
       });
-      const participants = richTreatment.firstObject.aanwezigen.filter(
-        (mandatee) =>
-          mandatee.bekleedt.get("bestuursfunctie").get("uri") === COUNCIL_MEMBER_URI
-      );
+      const participants = richTreatment.firstObject.aanwezigen;
 
       const stemmingToEdit = this.store.createRecord("stemming", {
         onderwerp: "",
