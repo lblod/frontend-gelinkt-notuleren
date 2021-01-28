@@ -50,8 +50,11 @@ participationList:
   loadingTitle: Bezig met laden van de aanwezigenlijst
   loadingLoader: Aan het laden
   voorzitterLabel: "Voorzitter:"
+  voorzitterError: "Er is nog geen voorzitter aangeduid"
   secretarisLabel: "Secretaris:"
+  secretarisError: "Er is nog geen secretaris aangeduid"
   presentLabel: "Aanwezige mandatarissen:"
+  presentError: "Er zijn nog geen aanwezige mandatarissen aangeduid"
   notPresentLabel: "Afwezige mandatarissen:"
   openModalButton: Beheer aanwezigen bij start van de zitting
 participationListModal:
