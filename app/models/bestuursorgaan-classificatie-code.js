@@ -11,5 +11,6 @@ export default Model.extend({
   label: attr(),
   scopeNote: attr(),
   standaardType: hasMany('bestuursfunctie-code', { inverse: 'standaardTypeVan' }),
+  isClassificatieVan: hasMany('bestuursorgaan', { inverse: null}),
   uri: attr()
 });
