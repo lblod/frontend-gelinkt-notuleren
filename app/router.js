@@ -24,17 +24,6 @@ Router.map(function() {
     this.route('toegankelijkheidsverklaring');
   });
   this.route('contact');
-  this.route('documents', function() {
-    this.route('show', { path: '/:id' }, function() {
-      this.route('publish', function() {
-        this.route('overview');
-        this.route('agenda');
-        this.route('besluitenlijst');
-        this.route('notulen');
-        this.route('uittreksels');
-      });
-    });
-  });
   this.route('print', function() {
     this.route('uittreksel', { path: '/uittreksel/:id' });
   });
