@@ -9,8 +9,16 @@ import { isEmpty } from '@ember/utils';
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
   @tracked info;
+  @tracked chairman;
+  @tracked secretary;
 
   @service store;
+
+  constructor() {
+    super(...arguments);
+    this.chairman = this.args.chairman ? this.args.chairman : this.args.defaultChairman;
+    this.secretary = this.args.secretary ? this.args.secretary : this.args.defaultSecretary;
+  }
 
   get aanwezigenBijStart() {
     return this.args.aanwezigenBijStart ?? [];

@@ -1,12 +1,12 @@
 <div class="au-c-meeting-chrome-card">
-    {{#if hasParticipationInfo}}
+  {{#if this.hasParticipationInfo}}
       <ul class="au-c-list-divider">
         <li class="au-c-list-divider__item">
-          {{t "participationList.voorzitterLabel"}} <strong>{{@voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
+          {{t "participationList.voorzitterLabel"}} <strong>{{@chairman.isBestuurlijkeAliasVan.fullName}}</strong>
           </li>
 
           <li class="au-c-list-divider__item">
-            {{t "participationList.secretarisLabel"}} <strong>{{@secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
+            {{t "participationList.secretarisLabel"}} <strong>{{@secretary.isBestuurlijkeAliasVan.fullName}}</strong>
             {{!-- example error
             <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
               Er is nog geen secretaris aangeduid
@@ -39,8 +39,8 @@
       </AuButton>
 
       <ParticipationList::Modal
-        @voorzitter={{@voorzitter}}
-        @secretaris={{@secretaris}}
+        @voorzitter={{this.chairman}}
+        @secretaris={{this.secretary}}
         @show={{this.popup}}
         @togglePopup={{this.togglePopup}}
         @onSave={{@onSave}}

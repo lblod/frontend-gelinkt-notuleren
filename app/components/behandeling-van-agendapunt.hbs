@@ -10,8 +10,10 @@
     <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
   {{else}}
     <ParticipationList
-      @voorzitter={{this.behandeling.voorzitter}}
-      @secretaris={{this.behandeling.secretaris}}
+      @chairman={{this.voorzitter}}
+      @secretary={{this.secretaris}}
+      @defaultSecretary={{@defaultSecretary}}
+      @defaultChairman={{@defaultChairman}}
       @bestuursorgaan={{@bestuursorgaan}}
       @possibleParticipants={{@possibleParticipants}}
       @aanwezigenBijStart={{this.aanwezigen}}

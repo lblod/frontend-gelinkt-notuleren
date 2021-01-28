@@ -51,13 +51,16 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @task
   *fetchParticipants() {
     let queryParams = {
+      sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[aanwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const aanwezigen = yield this.store.query('mandataris', queryParams);
-    this.aanwezigen = aanwezigen.sortBy('isBestuurlijkeAliasVan.achternaam');
+    this.aanwezigen = aanwezigen;
     this.behandeling.aanwezigen = aanwezigen;
+    this.voorzitter = yield this.behandeling.voorzitter;
+    this.secretaris = yield this.behandeling.secretaris;
   }
 
   @task

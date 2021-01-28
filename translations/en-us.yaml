@@ -13,7 +13,7 @@ publish:
 behandelingVanAgendapunten:
   saveButton: Save
   openbaarLabel: "make agendapoint public"
-  participationListButton: Attendees
+  participationListButton: Configure attendees of this agenda-item.
   visibility: "visibility"
   needsParticipants: Please configure the participants to this agenda-item before adding a voting.
 meetingForm:

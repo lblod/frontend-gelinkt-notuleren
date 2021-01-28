@@ -116,8 +116,8 @@
             </span>
           </AuHeading>
           <ParticipationList
-            @voorzitter={{this.voorzitter}}
-            @secretaris={{this.secretaris}}
+            @chairman={{this.voorzitter}}
+            @secretary={{this.secretaris}}
             @bestuursorgaan={{this.bestuursorgaan}}
             @possibleParticipants={{this.possibleParticipants}}
             @aanwezigenBijStart={{this.aanwezigenBijStart}}
@@ -150,6 +150,9 @@
               <div>
                 <BehandelingVanAgendapunt
                   @possibleParticipants={{this.possibleParticipants}}
+                  @defaultParticipants={{this.aanwezigenBijStart}}
+                  @defaultChairman={{this.voorzitter}}
+                  @defaultSecretary={{this.secretaris}}
                   @behandeling={{behandeling}}
                   @bestuursorgaan={{this.zitting.bestuursorgaan}}
                   @meeting={{this.zitting}}
