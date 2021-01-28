@@ -16,6 +16,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     yield timeout(300);
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
+      include: 'status',
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
       'filter[is-bestuurlijke-alias-van][achternaam]': searchData,
       page: { size: 100 }
