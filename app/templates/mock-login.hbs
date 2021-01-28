@@ -1,43 +1,34 @@
-<div class="page">
-  <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
-    <header class="content-header content-header--small content-header--half-image u-spacer--large">
-      <div class="content-header__wrapper">
-        <picture class="content-header__bg"><img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="" title=""></picture>
-        <div class="layout layout--wide">
-          <div class="content-header__content">
-            <div class="content-header__logo-wrapper"><a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase"><span class="content-header__entity-logo__prefix">Vlaanderen</span><span class="content-header__entity-logo__title">is lokaal bestuur</span></a></div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="col--9-12--s col--5-12--m col--6-12">
-      <div class="grid grid--align-right">
-        <div class="col--1-1 col--10-12--m col--6-12--l">
-          <h2 class="h4 u-spacer">Kies een bestuurseenheid om mee in te loggen.</h2>
-          <input class="input-field input-field--block u-spacer--tiny js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{gemeente}} autofocus oninput={{perform updateSearch value='target.value'}}>
+<div class="au-c-main-container" itemprop="mainContentOfPage">
+  <div class="au-c-main-container__content au-c-main-container__content--scroll">
+    <main id="content">
+      <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is gelinkt notuleren">
+        <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
+      </AuContentHeader>
+
+      <div class="au-o-region-large">
+        <div class="au-o-layout">
+          <AuHeading @skin="4">Kies een bestuurseenheid om mee in te loggen.</AuHeading>
+          <p class="au-u-margin-top-small au-u-margin-bottom">
+            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{gemeente}} autofocus oninput={{perform updateSearch value='target.value'}}>
+          </p>
+
           <MockLogin as |login|>
             {{#if queryStore.isRunning}}
-              <div class="loader-wrapper">
-                <div class="loader">
-                  <span class="u-visually-hidden">Aan het laden</span>
-                </div>
-              </div>
+              <AuLoader @size="small" />
             {{else}}
               {{#if login.errorMessage}}
-                <WuAlert @title={{login.errorMessage}} @isWarning={{true}} />
+                <AuAlert @alertIcon="alert-triangle" @alertTitle={{login.errorMessage}} @alertskin="warning" />
               {{/if}}
               <login.each-account @accounts={{model}} as |account|>
-                <WuInfoTile @class="u-spacer--tiny" as |i|>
-                  <i.content>
-                    {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
-                  </i.content>
-                </WuInfoTile>
+                <div class="au-o-box au-o-box--small au-c-card au-u-margin-bottom-small">
+                  <p>{{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}</p>
+                </div>
               </login.each-account>
               <NumberPagination @page={{page}} @size={{size}} @nbOfItems={{model.length}} @total={{model.meta.count}} @links={{model.meta.pagination}} />
             {{/if}}
           </MockLogin>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 </div>
