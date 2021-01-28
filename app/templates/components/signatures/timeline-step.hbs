@@ -96,9 +96,9 @@
             <div class="col--6-12">
               <p class="smaller uppercase text-fade">{{t "timelineStep.linkPublish"}}</p>
               <p>
-                <a href="https://publicatie.gelinkt-notuleren.vlaanderen.be/{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}"
+                <a href="{{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}"
                    target="_blank"
-                   class="word-break--break-word">publicatie.gelinkt-notuleren.vlaanderen.be/{{this.bestuurseenheid.naam}}
+                   class="word-break--break-word">{{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}
                   /{{this.bestuurseenheid.classificatie.label}}</a></p>
               <p class="smaller u-spacer--bottom--small">{{t "timelineStep.timingWarning"}}</p>
               <p class="smaller uppercase text-fade">{{t "timelineStep.publicationType"}}</p>
@@ -119,7 +119,7 @@
               {{/if}}
 
               <p class="smaller uppercase text-fade">{{t "timelineStep.publicationConsequences"}}</p>
-              <p class="small u-spacer--bottom--small">{{t "timelineStep.previewInfo"}}<a href="https://publicatie.gelinkt-notuleren.vlaanderen.be" target="_blank">publicatie.gelinkt-notuleren.vlaanderen.be</a>{{t "timelineStep.previewInfoEnd"}}</p>
+              <p class="small u-spacer--bottom--small">{{t "timelineStep.previewInfo"}}<a href="{{this.publicationBaseUrl}}" target="_blank">{{publicationBaseUrl}}</a>{{t "timelineStep.previewInfoEnd"}}</p>
 
               {{#unless this.isAgenda}}
                 <p class="smaller uppercase text-fade">{{t "timelineStep.notifyConsequences"}}</p>
