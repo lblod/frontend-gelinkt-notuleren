@@ -3,20 +3,29 @@
       <ul class="au-c-list-divider">
         <li class="au-c-list-divider__item">
           {{t "participationList.voorzitterLabel"}} <strong>{{@voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
-          </li>
+          {{#unless @voorzitter}}
+            <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
+              {{t "participationList.voorzitterError"}}
+            </AuPill>
+          {{/unless}}
+        </li>
 
           <li class="au-c-list-divider__item">
             {{t "participationList.secretarisLabel"}} <strong>{{@secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
-            {{!-- example error
-            <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
-              Er is nog geen secretaris aangeduid
-            </AuPill>
-            --}}
+            {{#unless @secretaris}}
+              <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
+                {{t "participationList.secretarisError"}}
+              </AuPill>
+            {{/unless}}
           </li>
           <li class="au-c-list-divider__item">
             {{t "participationList.presentLabel"}}
             {{#each this.mandateesPresent as |mandataris|}}
               <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
+            {{else}}
+              <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
+                {{t "participationList.presentError"}}
+              </AuPill>
             {{/each}}
           </li>
           <li class="au-c-list-divider__item">

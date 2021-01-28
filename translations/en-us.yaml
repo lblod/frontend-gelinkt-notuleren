@@ -50,8 +50,11 @@ participationList:
   loadingTitle: Loading the attendee list
   loadingLoader: Loading
   voorzitterLabel: "Chairman:"
+  voorzitterError: "No chairman has been assigned"
   secretarisLabel: "Secretary:"
+  secretarisError: "No secretary has been assigned"
   presentLabel: "Present mandatees:"
+  presentError: "No mandatees have been appointed"
   notPresentLabel: "Absent mandatees:"
   openModalButton: Manage attendees at the start of the session
 participationListModal:
