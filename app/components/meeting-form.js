@@ -69,9 +69,7 @@ export default class MeetingForm extends Component {
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandatees = yield this.store.query('mandataris', queryParams);
-    this.aanwezigenBijStart = Array.from(
-      mandatees.filter( (mandatee) => this.isValidMandateeForMeeting(mandatee) )
-    );
+    this.aanwezigenBijStart = mandatees;
   }
 
   @task
