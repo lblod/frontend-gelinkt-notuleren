@@ -28,8 +28,22 @@ export default class MeetingForm extends Component {
     this.zitting = this.args.zitting;
     this.loadData.perform();
   }
+
   get isComplete() {
     return this.loadData.lastSuccessful;
+  }
+
+  /**
+   * checks whether a mandatee can be a member of the meeting
+   * this means the meeting date should be between the mandatee's start and end
+   * the mandatee needs to have a "acting" (waarnemend) or "effective" (effectief) status
+   */
+  isValidMandateeForMeeting(mandatee) {
+    const startOfMeeting = this.zitting.gestartOpTijdstip ? this.zitting.gestartOpTijdstip : this.zitting.geplandeStart;
+    const hasValidStartDate = mandatee.start <= startOfMeeting;
+    const hasValidEndDate = isEmpty(mandatee.einde) || mandatee.einde > startOfMeeting;
+    const hasValidStatus = [statusEffectief, statusWaarnemend].includes(mandatee.get("status.id"));
+    return hasValidStartDate && hasValidEndDate && hasValidStatus;
   }
 
   @task
@@ -56,8 +70,7 @@ export default class MeetingForm extends Component {
     };
     const mandatees = yield this.store.query('mandataris', queryParams);
     this.aanwezigenBijStart = Array.from(
-      // TODO: should this not filter on meeting date?
-      mandatees.filter( (mandatee) => (isEmpty(mandatee.einde) || mandatee.einde > new Date()) && [statusEffectief, statusWaarnemend].includes(mandatee.get("status.id")))
+      mandatees.filter( (mandatee) => this.isValidMandateeForMeeting(mandatee) )
     );
   }
 
@@ -74,8 +87,7 @@ export default class MeetingForm extends Component {
     };
     const mandatees = yield this.store.query('mandataris', queryParams);
     this.possibleParticipants = Array.from(
-      // TODO: should this not filter on meeting date?
-      mandatees.filter( (mandatee) => (isEmpty(mandatee.einde) || mandatee.einde > new Date()) && [statusEffectief, statusWaarnemend].includes(mandatee.get("status.id")))
+      mandatees.filter( (mandatee) => this.isValidMandateeForMeeting(mandatee) )
     );
   }
 
