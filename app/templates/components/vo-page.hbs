@@ -10,19 +10,12 @@
 <div class="au-c-main-container">
   <div class="au-c-main-container__content au-c-main-container__content--scroll">
     <div class="page">
-      <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
-        <header class="content-header content-header--small content-header--half-image u-spacer">
-          <div class="content-header__wrapper">
-            <picture class="content-header__bg"><img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="" title=""></picture>
-            <div class="layout layout--wide">
-              <div class="content-header__content">
-                <div class="content-header__logo-wrapper"><a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase"><span class="content-header__entity-logo__prefix">Vlaanderen</span><span class="content-header__entity-logo__title">is gelinkt notuleren</span></a></div>
-              </div>
-            </div>
-          </div>
-        </header>
+      <main id="content">
+        <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is gelinkt notuleren">
+          <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
+        </AuContentHeader>
         {{yield}}
-      </div>
+      </main>
     </div>
 
     <AuMainFooter>
