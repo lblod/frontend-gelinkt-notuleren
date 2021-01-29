@@ -3,12 +3,13 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
 import { inject as service } from "@ember/service";
-import { isEmpty } from '@ember/utils';
+import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
 export default class MeetingForm extends Component {
   @tracked aanwezigenBijStart;
+  @tracked aanwezigenRoles;
   @tracked voorzitter;
   @tracked secretaris;
   @tracked zitting;
@@ -24,46 +25,52 @@ export default class MeetingForm extends Component {
     this.zitting = this.args.zitting;
     this.loadData.perform();
   }
+
   get isComplete() {
     return this.loadData.lastSuccessful;
   }
 
   @task
-    *loadData() {
-      if (this.zitting.get("id")) {
-        this.bestuursorgaan = yield this.zitting.get("bestuursorgaan");
-        this.secretaris = yield this.zitting.get("secretaris");
-        this.voorzitter = yield this.zitting.get("voorzitter");
-        if (this.bestuursorgaan) {
-          yield this.fetchPossibleParticipants.perform();
-        }
-        yield this.fetchParticipants.perform();
-        yield this.fetchTreatments.perform();
+  *loadData() {
+    if (this.zitting.get("id")) {
+      this.bestuursorgaan = yield this.zitting.get("bestuursorgaan");
+      this.secretaris = yield this.zitting.get("secretaris");
+      this.voorzitter = yield this.zitting.get("voorzitter");
+      if (this.bestuursorgaan) {
+        yield this.fetchPossibleParticipants.perform();
       }
+      yield this.fetchParticipants.perform();
+      yield this.fetchTreatments.perform();
+    }
   }
 
   @task
   *fetchParticipants() {
     let queryParams = {
-      include: 'is-bestuurlijke-alias-van',
+      include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[aanwezig-bij-zitting][:id:]': this.zitting.get('id'),
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandatees = yield this.store.query('mandataris', queryParams);
-    this.aanwezigenBijStart = Array.from(mandatees.filter( (mandatee) => isEmpty(mandatee.einde) || mandatee.einde > new Date()));
+    this.aanwezigenBijStart = mandatees;
   }
 
   @task
   *fetchPossibleParticipants() {
+    this.aanwezigenRoles = yield this.store.query('bestuursfunctie-code', { 'filter[standaard-type-van][is-classificatie-van][heeft-tijdsspecialisaties][:id:]': this.bestuursorgaan.id});
+    const stringifiedDefaultTypeIds = this.aanwezigenRoles.map(t => t.id).join(',');
     let queryParams = {
-      include: 'is-bestuurlijke-alias-van',
+      include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[bekleedt][bevat-in][:uri:]': this.bestuursorgaan.get('uri'),
+      'filter[bekleedt][bestuursfunctie][:id:]': stringifiedDefaultTypeIds,
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandatees = yield this.store.query('mandataris', queryParams);
-    this.possibleParticipants = Array.from(mandatees.filter( (mandatee) => isEmpty(mandatee.einde) || mandatee.einde > new Date()));
+    this.possibleParticipants = Array.from(
+      mandatees.filter( (mandatee) => isValidMandateeForMeeting(mandatee, this.zitting) )
+    );
   }
 
   @task

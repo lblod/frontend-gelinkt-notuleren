@@ -123,6 +123,7 @@
             @aanwezigenBijStart={{this.aanwezigenBijStart}}
             @onSave={{this.saveParticipationList}}
             @bestuursorgaan={{this.bestuursorgaan}}
+            @meeting={{this.zitting}}
             @modalTitle={{t "participationList.openModalButton"}}
           />
 
@@ -147,7 +148,12 @@
           {{#if this.fetchTreatments.lastSuccessful}}
             {{#each this.behandelingen as |behandeling|}}
               <div>
-                <BehandelingVanAgendapunt @possibleParticipants={{this.possibleParticipants}} @behandeling={{behandeling}} @bestuursorgaan={{this.zitting.bestuursorgaan}}/>
+                <BehandelingVanAgendapunt
+                  @possibleParticipants={{this.possibleParticipants}}
+                  @behandeling={{behandeling}}
+                  @bestuursorgaan={{this.zitting.bestuursorgaan}}
+                  @meeting={{this.zitting}}
+                />
               </div>
             {{/each}}
           {{/if}}

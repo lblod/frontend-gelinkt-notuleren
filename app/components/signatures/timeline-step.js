@@ -2,6 +2,8 @@ import Component from "@glimmer/component";
 import {inject as service} from '@ember/service';
 import {task, restartableTask} from 'ember-concurrency-decorators';
 import {tracked} from "@glimmer/tracking";
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
+
 /**
  * @typedef {Object} Args
  * @property {string} name Name of the kind of resource to sign/publish (e.g. 'agenda', 'besluitenlijst', ...
@@ -26,6 +28,8 @@ export default class SignaturesTimelineStep extends Component {
   showPublishingModal = false;
   @tracked
   isSignedByCurrentUser = true;
+
+  publicationBaseUrl = ENV.publication.baseUrl;
 
   constructor(parent, args) {
     super(parent, args);

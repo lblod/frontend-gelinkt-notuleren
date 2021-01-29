@@ -1,11 +1,11 @@
-<WuModal @title={{concat (t "signatureConfirmation.modalTitle") name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{action cancel}} as |m|>
+<WuModal @title={{concat (t "signatureConfirmation.modalTitle") @name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{@cancel}} as |m|>
   <m.content @isSectioned={{true}}>
   <div class="grid u-padding--top--small">
     <div class="col--7-12">
     	<div class="au-c-rdfa-publication say-content rdfa-annotations behandeling-preview">
     		<div class="grid grid--collapse">
     			<div class="col--11-12">
-        		{{{mockDocument.body}}}
+        		{{{@mockDocument.body}}}
         	</div>
         </div>
       </div>
@@ -43,8 +43,8 @@
   </m.content>
   <div class="modal-dialog__footer">
     <m.buttons as |b|>
-      <b.button @label={{concat (t "signatureConfirmation.confirmButton") name}} @onClick={{action confirm}} />
-      <b.button @label={{t "signatureConfirmation.cancelButton"}} @onClick={{action cancel}} @isLink={{true}} @icon="vi-cross" />
+      <b.button @label={{concat (t "signatureConfirmation.confirmButton") @name}} @onClick={{@confirm}} />
+      <b.button @label={{t "signatureConfirmation.cancelButton"}} @onClick={{@cancel}} @isLink={{true}} @icon="vi-cross" />
     </m.buttons>
   </div>
 </WuModal>

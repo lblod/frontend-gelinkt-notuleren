@@ -56,7 +56,7 @@ module.exports = function(environment) {
       header: '//widgets.vlaanderen.be/widget/live/5d47450609154d5c86f588f3b36ce9ba',
       footer: '//widgets.vlaanderen.be/widget/live/a6670dda202e46beb2832ae8f57f197e'
     },
-    publicatie: {
+    publication: {
       baseUrl: "{{PUBLICATION_BASE_URL}}"
     }
   };
