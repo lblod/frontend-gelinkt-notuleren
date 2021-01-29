@@ -59,7 +59,7 @@
   margin-top: $au-unit-small;
   margin-bottom: $au-unit-large + $au-unit;
 
-  .au-c-button {
+  > .au-c-button {
     position: absolute;
     top: calc(100% - .1rem);
     left: -.1rem;
@@ -67,6 +67,10 @@
     border-color: $au-gray-300;
     background-color: $au-white;
   }
+}
+
+.au-c-meeting-chrome-card--editable {
+  border: .1rem solid $au-gray-300;
 }
 
 .au-c-meeting-chrome-editable {
@@ -180,11 +184,11 @@
   display: inline-block;
   background-color: $au-yellow-200;
   margin-top: $au-unit-tiny/2;
-  cursor: not-allowed;
+  // cursor: not-allowed;
 }
 
 .au-c-meeting-chrome-table {
-  cursor: not-allowed;
+  // cursor: not-allowed;
   @include au-font-size($au-h6);
   display: table;
   position: relative;
@@ -265,6 +269,7 @@
   padding-right: $au-unit-small;
   transition: opacity $au-transition;
   display: none;
+  overflow: auto;
 
   @include mq(1160px) {
     display: block;
