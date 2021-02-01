@@ -36,12 +36,15 @@ export default class AgendaModalComponent extends Component {
 
   @action
   async cancel() {
-    this.zitting.agendapunten.forEach((agendapunt) => {
-      agendapunt.rollbackAttributes();
-    });
-    this.toBeDeleted.forEach((ap) => {
-      this.zitting.agendapunten.pushObject(ap);
-    });
+    // get a copy of the array
+    // because when rolling back attributes agendapoints get removed from the relationship
+    const agendapoints = this.zitting.agendapunten.map((ap) => ap);
+    for (const agendapoint of agendapoints) {
+      agendapoint.rollbackAttributes();
+    }
+    for (const agendapoint of this.toBeDeleted) {
+      this.zitting.agendapunten.pushObject(agendapoint);
+    }
     this.importedDrafts=[];
     this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
     this.args.cancel();
@@ -151,7 +154,7 @@ export default class AgendaModalComponent extends Component {
         const agendapoint = yield this.toBeDeleted[i];
         const behandeling = yield agendapoint.behandeling;
         if(behandeling){
-          const documentContainer = yield behandeling.documentContainer
+          const documentContainer = yield behandeling.documentContainer;
           if(documentContainer){
             documentContainer.ontwerpBesluitStatus = this.conceptStatus;
             yield documentContainer.save();
