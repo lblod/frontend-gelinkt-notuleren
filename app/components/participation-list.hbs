@@ -1,22 +1,24 @@
 <div class="au-c-meeting-chrome-card">
-    {{#if hasParticipationInfo}}
+  {{#if this.hasParticipationInfo}}
       <ul class="au-c-list-divider">
         <li class="au-c-list-divider__item">
-          {{t "participationList.voorzitterLabel"}} <strong>{{@voorzitter.isBestuurlijkeAliasVan.fullName}}</strong>
-          {{#unless @voorzitter}}
+          {{t "participationList.voorzitterLabel"}} <strong>{{@chairman.isBestuurlijkeAliasVan.fullName}}</strong>
+          {{#unless @chairman}}
             <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
               {{t "participationList.voorzitterError"}}
             </AuPill>
           {{/unless}}
-        </li>
+
+          </li>
 
           <li class="au-c-list-divider__item">
-            {{t "participationList.secretarisLabel"}} <strong>{{@secretaris.isBestuurlijkeAliasVan.fullName}}</strong>
-            {{#unless @secretaris}}
+            {{t "participationList.secretarisLabel"}} <strong>{{@secretary.isBestuurlijkeAliasVan.fullName}}</strong>
+            {{#unless @secretary}}
               <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
                 {{t "participationList.secretarisError"}}
               </AuPill>
             {{/unless}}
+
           </li>
           <li class="au-c-list-divider__item">
             {{t "participationList.presentLabel"}}
@@ -48,8 +50,8 @@
       </AuButton>
 
       <ParticipationList::Modal
-        @voorzitter={{@voorzitter}}
-        @secretaris={{@secretaris}}
+        @voorzitter={{this.chairman}}
+        @secretaris={{this.secretary}}
         @show={{this.popup}}
         @togglePopup={{this.togglePopup}}
         @onSave={{@onSave}}

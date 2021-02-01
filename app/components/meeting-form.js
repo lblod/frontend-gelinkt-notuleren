@@ -79,6 +79,7 @@ export default class MeetingForm extends Component {
     const treatments = new Array();
     const pageSize = 20;
     const firstPage = yield this.store.query('behandeling-van-agendapunt', {
+      include: "voorzitter,secretaris",
       "filter[onderwerp][zitting][:id:]": this.args.zitting.id ,
       "page[size]": pageSize,
       sort: 'onderwerp.position'

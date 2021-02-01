@@ -13,7 +13,7 @@ publish:
 behandelingVanAgendapunten:
   saveButton: Opslaan
   openbaarLabel: "maak agendapunt openbaar"
-  participationListButton: Aanwezigen
+  participationListButton: Beheer aanwezigen bij dit agendapunt
   visibility: "Zichtbaarheid:"
   needsParticipants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
 meetingForm:
