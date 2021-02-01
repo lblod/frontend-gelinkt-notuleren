@@ -5,7 +5,7 @@
     @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
     @modalOpen={{true}}
     @size="fullscreen"
-    @closeModal={{this.cancel}} as |Modal| >
+    @closeModal={{if this.isEditing this.cancelEditing this.cancel}} as |Modal| >
     <Modal.Body>
       {{#if this.isEditing}}
         <Agenda::Edit
