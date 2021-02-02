@@ -1,15 +1,42 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  rdfaEditorContainerReady: false,
-  classNames: ['container-flex--contain'],
+export default class RdfaEditorContainerComponent extends Component {
+  get editorOptions() {
+    return {
+      showToggleRdfaAnnotations: Boolean(this.args.showToggleRdfaAnnotations),
+      showInsertButton: true,
+      showRdfa: true,
+      showRdfaHighlight: true,
+      showRdfaHover: true
 
-  setRdfaContext(element){
-    element.setAttribute('vocab', JSON.parse(this.get('editorDocument.context'))['vocab']);
-    element.setAttribute('prefix', this.prefixToAttrString(JSON.parse(this.get('editorDocument.context'))['prefix']));
-    element.setAttribute('typeof', this.typeOfWrappingDiv);
-    element.setAttribute('resource', '#');
-  },
+    };
+  }
+
+  get documentContext() {
+    try {
+      return JSON.parse(this.args.editorDocument.context);
+    }
+    catch(e) {
+      return {
+        prefix: "",
+        typeof: "",
+        vocab: ""
+      };
+    }
+  }
+
+  get vocab() {
+    return this.documentContext['vocab'];
+  }
+
+  /**
+   * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
+   */
+  @action
+  setPrefix(element) {
+    element.setAttribute('prefix', this.prefixToAttrString(this.documentContext.prefix));
+  }
 
   prefixToAttrString(prefix){
     let attrString = '';
@@ -18,11 +45,5 @@ export default Component.extend({
       attrString += `${key}: ${uri} `;
     });
     return attrString;
-  },
-
-  didInsertElement() {
-    this._super(...arguments);
-    this.setRdfaContext(this.element);
-    this.set('rdfaEditorContainerReady', true);
   }
-});
+}

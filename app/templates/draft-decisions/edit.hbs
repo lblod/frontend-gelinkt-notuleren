@@ -42,7 +42,14 @@
   </div>
 </div>
 {{else}}
-  <RdfaEditorContainer @profile={{this.profile}} @editorDocument={{this.editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt" />
+  <RdfaEditorContainer
+    @profile={{this.profile}}
+    @editorDocument={{this.editorDocument}}
+    @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}}
+    @onUpdateTasklists={{action "updateTasklists"}}
+    @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
+    @showToggleRdfaAnnotations={{true}}
+  />
 {{/if}}
 
 {{outlet}}

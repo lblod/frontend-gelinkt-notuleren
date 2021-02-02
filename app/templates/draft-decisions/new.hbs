@@ -39,7 +39,14 @@
      which works on an inconsistent state.
    --}}
   {{#unless this.hasPerformedSaveAndTransitionToEditModeTask}}
-    <RdfaEditorContainer @profile={{this.profile}} @editorDocument={{this.editorDocument}} @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}} @onUpdateTasklists={{action "updateTasklists"}} @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt ext:draftDecision" />
+    <RdfaEditorContainer
+      @profile={{this.profile}}
+      @editorDocument={{this.editorDocument}}
+      @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}}
+      @onUpdateTasklists={{action "updateTasklists"}}
+      @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt ext:draftDecision"
+      @showToggleRdfaAnnotations={{true}}
+    />
   {{/unless}}
 {{/if}}
 {{outlet}}
