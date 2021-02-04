@@ -63,23 +63,28 @@ export default class EditStemmingService extends Service {
   *fetchVoters() {
     const aanwezigen = yield this.store.queryNestedRelationship(
       this._stemming,
-      "aanwezigen.is-bestuurlijke-alias-van"
+      "aanwezigen.is-bestuurlijke-alias-van",
+      {page: { size: 100 }}
     );
     const stemmers = yield this.store.queryNestedRelationship(
       this._stemming,
-      "stemmers.is-bestuurlijke-alias-van"
+      "stemmers.is-bestuurlijke-alias-van",
+      {page: { size: 100 }}
     );
     const onthouders = yield this.store.queryNestedRelationship(
       this._stemming,
-      "onthouders.is-bestuurlijke-alias-van"
+      "onthouders.is-bestuurlijke-alias-van",
+      {page: { size: 100 }}
     );
     const voorstanders = yield this.store.queryNestedRelationship(
       this._stemming,
-      "voorstanders.is-bestuurlijke-alias-van"
+      "voorstanders.is-bestuurlijke-alias-van",
+      {page: { size: 100 }}
     );
     const tegenstanders = yield this.store.queryNestedRelationship(
       this._stemming,
-      "tegenstanders.is-bestuurlijke-alias-van"
+      "tegenstanders.is-bestuurlijke-alias-van",
+      {page: { size: 100 }}
     );
     aanwezigen.forEach((aanwezige) =>
       this.votingMap.set(aanwezige, "zalNietStemmen")

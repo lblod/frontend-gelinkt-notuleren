@@ -37,7 +37,7 @@ export default class ExtendedStoreService extends Store {
    * @param {Model} modelInstance
    * @param {string} relationShipPath
    * */
-  async queryNestedRelationship(modelInstance, relationShipPath) {
+  async queryNestedRelationship(modelInstance, relationShipPath, options = {}) {
     const [firstRelationship, ...restInclude] =relationShipPath.split(".");
     const firstRelInfo = modelInstance.constructor.relationshipsByName.get(
       firstRelationship
@@ -50,6 +50,7 @@ export default class ExtendedStoreService extends Store {
         ? this.query(firstRelInfo.type, {
             "filter[:id:]": empty.map((rel) => rel.id).join(","),
             include: restInclude,
+            ...options
           })
         : [];
       return result;
@@ -58,6 +59,7 @@ export default class ExtendedStoreService extends Store {
         ? this.query(firstRelInfo.type, {
             "filter[:id:]": empty.id,
             include: restInclude,
+            ...options
           })
         : [];
       return result;
