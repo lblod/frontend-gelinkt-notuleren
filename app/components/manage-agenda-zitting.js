@@ -38,7 +38,7 @@ export default class ManageAgendaZittingComponent extends Component {
 
   @action
   afterSave(agendapoints) {
-    this.agendapoints = agendapoints;
+    this.agendapoints = agendapoints.map((agendapoint) => agendapoint);
     this.args.onChange();
   }
 }
