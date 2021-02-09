@@ -13,6 +13,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   beforeModel(transition) {
     this.updateFeatureFlags(transition.to.queryParams);
+    document.title = `Gelink Notuleren - ${ENV.environmentName}`;
     return this.loadCurrentSession();
   },
 
