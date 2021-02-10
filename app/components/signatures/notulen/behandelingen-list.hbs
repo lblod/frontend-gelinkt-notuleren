@@ -1,0 +1,27 @@
+{{#each @prepublishedBehandelingen as |preview|}}
+  <div class="{{if (contains preview.behandeling @publicBehandelingUris) "behandeling-container--publiek" "behandeling-container--niet-publiek"}}">
+    <div class="u-padding--round--small {{if (contains @preview.behandeling publicBehandelingUris) "behandeling-info--publiek" "behandeling-info--niet-publiek"}} ">
+      {{#if this.isPublished}}
+        {{#if (contains preview.behandeling @publicBehandelingUris)}}
+          <p><strong>Inhoud werd gepubliceerd</strong></p>
+          <p class="small">Alle informatie uit de behandeling van het agendapunt werd gepubliceerd.</p>
+        {{else}}
+          <p><strong>Inhoud werd niet gepubliceerd</strong></p>
+          <p class="small">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
+        {{/if}}
+      {{else}}
+        <WuSwitch @label=" Maak inhoud agendapunt publiek" @checked={{contains preview.behandeling @publicBehandelingUris}} @onClick={{action @toggle preview}} @class="checkbox--switch__wrapper" />
+        {{#if (contains preview.behandeling @publicBehandelingUris)}}
+          <p><strong>Inhoud wordt gepubliceerd</strong></p>
+          <p class="small">Alle informatie uit de behandeling van het agendapunt wordt gepubliceerd.</p>
+        {{else}}
+          <p><strong>Inhoud wordt niet gepubliceerd</strong></p>
+          <p class="small">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
+        {{/if}}
+      {{/if}}
+    </div>
+    {{{preview.content}}}
+  </div>
+{{/each}}
+
+{{yield}}

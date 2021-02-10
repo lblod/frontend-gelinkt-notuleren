@@ -89,28 +89,28 @@ export default class SignaturesTimelineStep extends Component {
   get handtekeningStatus() {
 
     if (this.signaturesCount === 1)
-      return {label: 'Tweede ondertekening vereist', color: 'primary-yellow'};
+      return {label: 'Tweede ondertekening vereist', color: 'warning'};
     if (this.signaturesCount === 2)
-      return {label: 'Ondertekend', color: 'primary-blue'};
-    return {label: 'Niet ondertekend'};
+      return {label: 'Ondertekend', color: 'action'};
+    return {label: 'Niet ondertekend', color: 'border'};
   }
 
   get voorVertoningStatus() {
     if (this.status === 'published')
-      return {label: 'Publieke versie', color: 'primary-blue'};
+      return {label: 'Publieke versie', color: 'action'};
     if (this.status === 'firstSignature' || this.status === 'secondSignature')
-      return {label: 'Ondertekende versie', color: 'primary-yellow'};
+      return {label: 'Ondertekende versie', color: 'success'};
     return {label: 'Meest recente versie'};
 
   }
 
   get algemeneStatus() {
     if (this.status === 'published')
-      return {label: 'Gepubliceerd', color: 'primary-blue'};
+      return {label: 'Gepubliceerd', color: 'action'};
     if (this.status === 'firstSignature')
-      return {label: 'Eerste ondertekening verkregen', color: 'primary-yellow'};
+      return {label: 'Eerste ondertekening verkregen', color: 'warning'};
     if (this.status === 'secondSignature')
-      return {label: 'Getekend', color: 'primary-yellow'};
+      return {label: 'Getekend', color: 'success'};
     if (this.status === 'concept')
       return {label: 'Concept'};
     return 'concept';
@@ -119,13 +119,13 @@ export default class SignaturesTimelineStep extends Component {
 
   get iconName() {
     if (this.status === 'concept')
-      return 'vi-edit';
+      return 'pencil';
     if (this.status === 'firstSignature' || this.status === 'secondSignature')
-      return 'vi-clock';
+      return 'message';
     if (this.status === 'published')
-      return 'vi-news';
+      return 'check';
 
-    return 'vi-edit';
+    return 'pencil';
   }
 
   @task

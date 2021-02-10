@@ -218,6 +218,16 @@ input.input-field {
   }
 }
 
+.au-c-toolbar__group--column {
+  flex-direction: column;
+  align-items: flex-start !important;
+
+  > * + * {
+    margin-left: 0;
+    margin-top: $au-unit-tiny;
+  }
+}
+
 // Fix visited state on links acting as buttons
 // @TODO: port to ember-appuniversum component or convert link to button
 .au-c-button-link {
@@ -433,4 +443,104 @@ input.input-field {
 .ember-basic-dropdown-content--above .ember-power-select-dropdown.ember-basic-dropdown-content--below, .ember-power-select-dropdown.ember-basic-dropdown-content--in-place {
   border-bottom: 0;
   border-top: .1rem solid $au-gray-300;
+}
+
+// Replace container class
+.au-c-app-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+
+  @include mq(medium) {
+    overflow: hidden;
+  }
+}
+
+.au-u-capitalize {
+  text-transform: capitalize;
+}
+
+// Editor preview
+.au-c-editor-preview {
+  padding: $au-unit-small;
+  border: .1rem solid $au-gray-200;
+  background-color: $au-gray-100;
+
+  h1 {
+    @include au-font-size($au-h2);
+    margin-bottom: $au-unit;
+  }
+
+  h2 {
+    @include au-font-size($au-h3);
+    margin-top: $au-unit;
+    margin-bottom: $au-unit-small;
+  }
+
+  h3 {
+    @include au-font-size($au-h4);
+    margin-bottom: $au-unit-tiny;
+    margin-top: $au-unit-small;
+    font-family: $au-font;
+
+    &:first-child {
+      margin-bottom: 0;
+    }
+  }
+
+  [property="besluit:behandelt"] {
+    display: block;
+    margin-bottom: $au-unit-small;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Override card > port to appuniversum cards
+.au-c-card--flex.au-c-card--expandable.au-c-card--publish {
+  padding: 0 !important;
+
+  > .au-c-card__header--clickable {
+    align-items: center;
+    padding: $au-unit-small;
+    margin-bottom: 0;
+  }
+
+  .au-c-card__header .au-c-toolbar--nowrap {
+    align-items: center;
+  }
+
+  .au-c-pill {
+    white-space: nowrap;
+  }
+
+  // Dirty fix for long buttons
+  .au-c-button {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+
+    .au-c-icon {
+      bottom: -.1ex;
+    }
+  }
+
+  > .au-c-card__content {
+    padding: $au-unit-small;
+  }
+
+  .au-c-card__toggle {
+    margin-left: $au-unit-small;
+  }
+}
+
+.au-c-modal--publish {
+  > .au-c-modal__body {
+    padding: 0;
+  }
 }

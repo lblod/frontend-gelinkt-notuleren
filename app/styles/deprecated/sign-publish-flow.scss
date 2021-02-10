@@ -204,56 +204,6 @@
   [property="dc:subject"] {
     margin-bottom: 2rem;
   }
-
-  // h1,
-  // h2,
-  // h3,
-  // h4,
-  // h5,
-  // h6 {
-  // 	line-height: 1.1;
-  // 	position: relative;
-  // }
-
-  // h1,
-  // .h1 {
-  // 	font-family: flanders-serif,serif;
- //    line-height: 1;
- //    font-weight: 300;
- //    font-size: 4.8rem;
- //    margin-bottom: 2rem;
-  // }
-
-  // h2,
-  // .h2 {
-  // 	font-size: 3.6rem;
- //    font-weight: 500;
- //    margin-bottom: 3rem;
-  // }
-
-  // h3,
-  // .h3 {
-  // 	font-size: 3rem;
-  // 	font-weight: 500;
-  // }
-
-  // h4,
-  // .h4 {
-  // 	font-size: 2.4rem;
-  // 	font-weight: 500;
-  // }
-
-  // h5,
-  // .h5 {
-  // 	font-size: 2.1rem;
-  // 	font-weight: 500;
-  // }
-
-  // h6,
-  // .h6 {
-  // 	font-size: 1.8rem;
-  // 	font-weight: 500;
-  // }
 }
 
 .behandeling-info--niet-publiek,
@@ -280,27 +230,30 @@
 
 .behandeling-container--publiek,
 .behandeling-container--niet-publiek {
+  margin-top: $au-unit-small;
+  margin-left: -$au-unit-small;
+  margin-right: -$au-unit-small;
+
 
   .behandeling {
     margin-bottom: 2rem;
-    padding: 2rem 0 0 4.5rem;
+    padding: 2rem 0 0 2rem;
     transition: all 200ms;
-    border: 1px solid rgba($primary-blue, 0.2);
+    border-bottom: .1rem solid $au-gray-200;
+    padding-right: 11.4rem;;
   }
 
   .checkbox--switch__wrapper {
     display: block;
-    border-bottom: 1px solid rgba($blue-gray, 0.4);
+    border-bottom: 1px solid $au-gray-300;
     padding: 0.5rem 0 1.5rem;
     margin-bottom: 1.7rem;
   }
 }
 
 .behandeling-container--niet-publiek .behandeling {
-  border: 1px solid rgba($blue-gray-lighter, 0.8);
-
   > * {
-    color: $gray;
+    color: $au-gray-400;
   }
 
   [property="dc:subject"],
@@ -308,13 +261,14 @@
   [property="eli:description"],
   [property="besluit:openbaar"] {
     position: relative;
-    background-color: rgba($primary-blue, 0.2);
-    box-shadow: inset -4px 0 0 0 $primary-blue;
+    background-color: rgba($au-blue-700, .2);
+    box-shadow: inset -4px 0 0 0 $au-blue-700;
     width: 100%;
     display: block;
-    color: $black;
+    color: $au-gray-900;
 
     &:after {
+      color: $au-blue-900;
       content: "Publieke informatie";
       border-right: 4px solid $primary-blue;
     }
@@ -322,7 +276,7 @@
 }
 
 .behandeling-preview,
-.steps {
+.au-c-editor-preview {
   [property="dc:subject"],
   [property="eli:title"],
   [property="eli:description"],
@@ -334,6 +288,7 @@
     margin-top: 0.5rem;
 
     &:after {
+      @include au-font-size($au-base,1);
       position: absolute;
       right: -11.5rem;
       width: 9rem;
@@ -342,7 +297,7 @@
       letter-spacing: 1px;
       line-height: 1.1;
       font-weight: 400;
-      padding: 0 0.5rem 0 0;
+      padding: 0 .2rem 0 0;
       font-family: 'flanders-sans', sans-serif;
     }
   }
