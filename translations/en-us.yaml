@@ -17,7 +17,9 @@ inbox:
     title: Recycle bin
 publish:
   backToMeeting: Back to meeting
+  headingPartOne: Meeting on
   loadingMessage: Loading...
+  excerptsErrorMessage: There are no excerpts available
 behandelingVanAgendapunten:
   saveButton: Save
   openbaarLabel: "make agendapoint public"

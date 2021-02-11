@@ -17,7 +17,9 @@ inbox:
     title: Prullenmand
 publish:
   backToMeeting: Terug naar zitting
+  headingPartOne: Zitting van
   loadingMessage: Bezig met laden...
+  excerptsErrorMessage: Er zijn geen uittreksels beschikbaar
 behandelingVanAgendapunten:
   saveButton: Opslaan
   openbaarLabel: "maak agendapunt openbaar"
@@ -183,7 +185,7 @@ votingManageVoting:
 
 timelineStep:
   signStepTitle: "Onderteken "
-  signingRestrictionInfo: "Ondertekenen kan enkel door de aangezen personen met de rol "
+  signingRestrictionInfo: "Ondertekenen kan enkel door de aangewezen personen met de rol "
   signingRestrictionRole: "ondertekenaar"
   signingRestrictionEnd: " binnen het orgaan."
   firstSignature: Eerste ondertekening
@@ -197,7 +199,7 @@ timelineStep:
   publishRestrictionInfo: "Publiceren kan enkel door personen met de rol "
   publishRestrictionRole: "publiceerder"
   publishRestrictionEnd: "."
-  linkPublish: "Link publicate"
+  linkPublish: "Link publicatie"
   timingWarning: "Het kan tot 5 minuten duren voor u de publicatie kan zien op bovenstaande link."
   publicationType: Type publicatie
   publicForAll: Publiek voor iedereen

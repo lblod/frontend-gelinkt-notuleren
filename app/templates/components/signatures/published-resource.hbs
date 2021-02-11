@@ -1,17 +1,15 @@
-<p class="smaller uppercase text-fade">{{t "publishedResource.publishedByLabel"}}</p>
-<p class="u-spacer--bottom--small">{{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
+<AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "publishedResource.publishedByLabel"}}</AuHeading>
+<p>{{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
 
 {{#if submissionSucceeded}}
-	<p class="smaller uppercase text-fade">{{t "publishedResource.reportLabel"}}</p>
-	<p class="">{{t "publishedResource.reportText"}} <br> {{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
-	<p class="u-spacer--bottom--small text-fade smaller">{{t "publishedResource.notificationText"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p>
+  <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny au-u-margin-top">{{t "publishedResource.reportLabel"}}</AuHeading>
+  <p>{{t "publishedResource.reportText"}} <br> {{signature.gebruiker.voornaam}} {{signature.gebruiker.achternaam}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
+  <p class="u-spacer--bottom--small text-fade smaller">{{t "publishedResource.notificationText"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p>
 {{else if submissionFailed}}
-	<p class="smaller uppercase text-fade">{{t "publishedResource.reportLabel"}}</p>
-	<div class="alert alert--error alert--tiny">
-		<div class="alert__title">{{t "publishedResource.reportFailedText"}}</div>
-		<div class="alert__message">
-			<p>{{t "publishedResource.downloadText"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">Loket voor Lokale Besturen</a>.</p>
-		</div>
-	</div>
+  <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny au-u-margin-top">{{t "publishedResource.reportLabel"}}</AuHeading>
+  <AuAlert @alertIcon="cross" @alertTitle="{{t "publishedResource.reportFailedText"}}" @alertskin="error" @alertsize="small">
+    <p>{{t "publishedResource.downloadText"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" class="au-c-link" rel="noopener noreferrer">Loket voor Lokale Besturen</a>.</p>
+  </AuAlert>
 {{/if}}
+
 <Signatures::BlockchainStatus @model={{signature}} />

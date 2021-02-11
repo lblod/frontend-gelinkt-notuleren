@@ -60,16 +60,10 @@
 // WU COMPONENTS (DEPRECATED)
 @import 'ember-vo-webuniversum-data-table';
 @import 'ember-vo-webuniversum';
-@import 'ember-rdfa-editor-template-variables-manager-plugin';
-@import 'ember-vo-tasklist';
-@import 'ember-rdfa-editor-document-tasklist-plugin';
-@import 'ember-rdfa-editor-scroll-to-plugin';
 @import 'ember-power-select';
 
 
 // COMPONENTS (DEPRECATED)
-@import 'deprecated/published-documents';
-@import 'deprecated/sign-publish-flow';
 @import 'deprecated/scrollto';
 @import 'deprecated/loading-events';
 @import 'deprecated/tasklist';
@@ -81,6 +75,7 @@
 @import 'project/c-meeting-chrome';
 @import 'project/c-rdfa-editor';
 @import "project/c-onboarding";
+@import 'project/c-editor-preview';
 @import "project/c-theme";
 
 

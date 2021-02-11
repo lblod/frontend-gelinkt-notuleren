@@ -5,9 +5,7 @@ import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 
 export default Mixin.create({
-  ajax: service(),
   currentSession: service(),
-  scrollToPlugin: service('rdfa-editor-scroll-to-plugin'),
 
   editorDocument: alias('model.editorDocument'),
   editorDocumentStatuses: alias('model.editorDocumentStatuses'),

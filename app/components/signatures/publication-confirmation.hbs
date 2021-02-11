@@ -1,77 +1,69 @@
-<WuModal @title={{concat (t "publicationConfirmation.modalTitle") @name}} @dialog-class="modal-dialog--wide modal-dialog--full modal-dialog--sectioned" @onClose={{@cancel}} as |m|>
-  <m.content @isSectioned={{true}}>
-  <div class="grid u-padding--top--small">
-    <div class="col--12-12">
-    	<div class="u-padding--rl--small">
-			</div>
-		</div>
-    <div class="col--7-12">
-      <div class="say-editor">
-        <div class="au-c-rdfa-publication say-content rdfa-annotations behandeling-preview">
-          <div class="grid grid--collapse">
-            <div class="col--11-12">
-              {{{@mockDocument.body}}}
-            </div>
+<AuModal
+  @modalTitle={{concat (t "publicationConfirmation.modalTitle") @name}}
+  @modalOpen={{true}}
+  @size="fullscreen"
+  @closeModal={{@cancel}}
+  class="au-c-modal--publish" as |Modal| >
+  <Modal.Body>
+    <div class="au-o-grid au-o-grid--flush au-o-grid--fixed">
+      <div class="au-o-grid__item au-u-1-3">
+        <div class="au-c-rdfa-publication-aside">
+          <div class="au-o-box">
+            <AuAlert @alertIcon="info-circle" @alertTitle={{t "publicationConfirmation.alertFirstPart"}}  @alertskin="info" @alertsize="small">
+              <p>{{t "publicationConfirmation.alertSecondPart"}}<strong> {{t "publicationConfirmation.alertThirdPart"}}</strong> {{t "publicationConfirmation.alertFourthPart"}}</p>
+            </AuAlert>
+
+            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "publicationConfirmation.publicationTitle"}}</AuHeading>
+            <p class="au-c-help-text au-c-help-text--large au-u-margin-bottom">{{t "publicationConfirmation.publicationSubtitle"}} <a href="{{this.publicationBaseUrl}}">{{this.publicationBaseUrl}}</a>.</p>
+
+            {{!-- <ul class="bullet-list u-spacer small">
+              <li>De publieke publicatiepagina:
+                <br><a href="https://publicatie.gelinkt-notuleren.lblod.info/">publicatie.gelinkt-notuleren.lblod.info</a></li>
+              <li>De publieke mandatendatabank:
+                <br><a href="https://mandaten.lokaalbestuur.vlaanderen.be">mandaten.lokaalbestuur.vlaanderen.be</a></li>
+              <li>Het interne mandatenbeheer:
+                <br><a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a>
+                <br>(niet toegankelijk voor burgers)</li>
+              <li>Intern leidinggevendenbeheer:
+                <br><a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a>
+                <br>(niet toegankelijk voor burgers)</li>
+            </ul> --}}
+
+            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "publicationConfirmation.reportingTitle"}}</AuHeading>
+            <p class="au-c-help-text au-c-help-text--large au-u-margin-bottom">{{t "publicationConfirmation.reportingSubtitle"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "publicationConfirmation.reportingLink"}}</a>.</p>
+
+            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "publicationConfirmation.metadataTitle"}}</AuHeading>
+
+            <ul>
+              <li>
+                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "publicationConfirmation.publisherLabel"}}</p>
+                <p class="au-c-help-text au-c-help-text--large">{{get (await currentSession.user) "fullName"}}</p>
+              </li>
+              <li class="au-u-margin-top-small">
+                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "publicationConfirmation.dateAndTimeLabel"}}</p>
+                <p class="au-c-help-text au-c-help-text--large">{{t "publicationConfirmation.dateAndTimeMessage"}}</p>
+              </li>
+              {{!-- <li class="au-u-margin-top-small">
+                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">Hash</p>
+                <p class="au-c-help-text au-c-help-text--large">Bij het publiceren van een document, wordt ook de inhoud van het document omgezet in een unieke code of <em>hash</em>. Deze hash wordt bij elke versie van het document op het internet gevoegd, èn veilig bijgehouden op onze <a href="https://overheid.vlaanderen.be/informatie-vlaanderen/ontdek-onze-producten-en-diensten/blockchain-disruptieve-technologie" target="_blank" rel="noopener noreferrer" class="au-c-link"><i class="fa fa-link"></i> blockchain</a>. Zo kunnen we te allen tijde de echtheid van het document bevestigen.</p>
+              </li> --}}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="au-o-grid__item au-u-2-3">
+        <div class="au-c-rdfa-publication-holder">
+          <div class="au-c-rdfa-publication say-content rdfa-annotations behandeling-preview">
+            {{{@mockDocument.body}}}
           </div>
         </div>
       </div>
     </div>
-    <div class="col--5-12">
-    	<div class="u-padding--rl--small">
-				<div class="alert alert--tiny">
-					<div class="alert__icon" aria-hidden="true"></div>
-					<div class="alert__content">
-						<div class="alert__message">
-							<p><strong>{{t "publicationConfirmation.alertFirstPart"}}</strong> {{t "publicationConfirmation.alertSecondPart"}}<strong> {{t "publicationConfirmation.alertThirdPart"}}</strong> {{t "publicationConfirmation.alertFourthPart"}}</p>
-						</div>
-					</div>
-				</div>
-
-				<h2 class="h6 u-spacer--tb--small">{{t "publicationConfirmation.publicationTitle"}}</h2>
-        <p class="small u-spacer">{{t "publicationConfirmation.publicationSubtitle"}} <a href="{{this.publicationBaseUrl}}">{{this.publicationBaseUrl}}</a>.</p>
-{{!--       	<ul class="bullet-list u-spacer small">
-      		<li>De publieke publicatiepagina:
-      			<br><a href="https://publicatie.gelinkt-notuleren.lblod.info/">publicatie.gelinkt-notuleren.lblod.info</a></li>
-      		<li>De publieke mandatendatabank:
-      			<br><a href="https://mandaten.lokaalbestuur.vlaanderen.be">mandaten.lokaalbestuur.vlaanderen.be</a></li>
-      		<li>Het interne mandatenbeheer:
-      			<br><a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a>
-      			<br>(niet toegankelijk voor burgers)</li>
-      		<li>Intern leidinggevendenbeheer:
-      			<br><a href="https://loket.lokaalbestuur.vlaanderen.be" target="_blank">loket.lokaalbestuur.vlaanderen.be</a>
-      			<br>(niet toegankelijk voor burgers)</li>
-      	</ul> --}}
-
-
-				<h2 class="h6 u-spacer--bottom--small">{{t "publicationConfirmation.reportingTitle"}}</h2>
-				<ul class="u-spacer">
-					<li><p class="small u-spacer--bottom--tiny">{{t "publicationConfirmation.reportingSubtitle"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank">{{t "publicationConfirmation.reportingLink"}}</a>.</p></li>
-				</ul>
-
-	    	<h2 class="h6 u-spacer--bottom--small">{{t "publicationConfirmation.metadataTitle"}}</h2>
-				<ul class="u-spacer">
-					<li>
-						<label class="form__label">{{t "publicationConfirmation.publisherLabel"}}</label>
-						<p class="u-spacer--bottom--tiny">{{get (await currentSession.user) "fullName"}}</p>
-					</li>
-					<li>
-						<label class="form__label">{{t "publicationConfirmation.dateAndTimeLabel"}}</label>
-						<p class="u-spacer--bottom--tiny smaller">{{t "publicationConfirmation.dateAndTimeMessage"}}</p>
-					</li>
-{{!--       		<li>
-      			<label class="form__label">Hash</label>
-      			<p class="u-spacer--bottom--tiny smaller">Bij het publiceren van een document, wordt ook de inhoud van het document omgezet in een unieke code of <em>hash</em>. Deze hash wordt bij elke versie van het document op het internet gevoegd, èn veilig bijgehouden op onze <a href="https://overheid.vlaanderen.be/informatie-vlaanderen/ontdek-onze-producten-en-diensten/blockchain-disruptieve-technologie" target="_blank"><i class="fa fa-link"></i> blockchain</a>. Zo kunnen we te allen tijde de echtheid van het document bevestigen.</p>
-      		</li> --}}
-    		</ul>
-      </div>
-    </div>
-  </div>
-  </m.content>
-  <div class="modal-dialog__footer">
-
-    <m.buttons as |b|>
-      <b.button @label={{concat (t "publicationConfirmation.confirmButton") @name}} @onClick={{@confirm}} />
-      <b.button @label={{t "publicationConfirmation.cancelButton"}} @onClick={{@cancel}} @isLink={{true}} @icon="vi-cross" />
-    </m.buttons>
-  </div>
-</WuModal>
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton {{on "click" @confirm}}>{{concat (t "publicationConfirmation.confirmButton") @name}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" @cancel}}>{{t "publicationConfirmation.cancelButton"}}</AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>

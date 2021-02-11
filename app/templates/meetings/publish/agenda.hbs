@@ -1,32 +1,32 @@
-<div class="u-spacer--top">
+<div class="au-o-box">
   {{#if this.initializeAgendas.lastSuccessful}}
-  <WuTimelineAccordion as |timeline|>
+  <ul>
     <Signatures::Agenda::TimelineStep
-            @name="ontwerpagenda"
-            @step={{timeline.step}}
-            @agenda={{this.ontwerpAgenda}}
-            @signing={{perform this.createSignedResource "ontwerpagenda"}}
-            @publish={{perform this.createPublishedResource "ontwerpagenda"}}
+      @name="ontwerpagenda"
+      @step={{timeline.step}}
+      @agenda={{this.ontwerpAgenda}}
+      @signing={{perform this.createSignedResource "ontwerpagenda"}}
+      @publish={{perform this.createPublishedResource "ontwerpagenda"}}
     />
 
     <Signatures::Agenda::TimelineStep
-            @name="aanvullende agenda"
-            @step={{timeline.step}}
-            @agenda={{this.aanvullendeAgenda}}
-            @signing={{perform this.createSignedResource "aanvullendeagenda"}}
-            @publish={{perform this.createPublishedResource "aanvullendeagenda"}}
+      @name="aanvullende agenda"
+      @step={{timeline.step}}
+      @agenda={{this.aanvullendeAgenda}}
+      @signing={{perform this.createSignedResource "aanvullendeagenda"}}
+      @publish={{perform this.createPublishedResource "aanvullendeagenda"}}
     />
 
     <Signatures::Agenda::TimelineStep
-            @name="spoedeisende agenda"
-            @step={{timeline.step}}
-            @agenda={{this.spoedeisendeAgenda}}
-            @signing={{perform this.createSignedResource "spoedeisendeagenda"}}
-            @publish={{perform this.createPublishedResource "spoedeisendeagenda"}}
+      @name="spoedeisende agenda"
+      @step={{timeline.step}}
+      @agenda={{this.spoedeisendeAgenda}}
+      @signing={{perform this.createSignedResource "spoedeisendeagenda"}}
+      @publish={{perform this.createPublishedResource "spoedeisendeagenda"}}
     />
-  </WuTimelineAccordion>
+  </ul>
   {{else}}
-    <p>{{t "publish.loadingMessage"}}</p>
-    <p class="loader"><span class="u-visually-hidden">{{t "publish.loadingMessage"}}</span></p>
+    <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
+    <AuLoader @size="small" />
   {{/if}}
 </div>

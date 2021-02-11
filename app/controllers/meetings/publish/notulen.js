@@ -1,11 +1,10 @@
 import Controller from '@ember/controller';
-import {inject as service} from "@ember/service";
 import {task} from "ember-concurrency-decorators";
 import {tracked} from "@glimmer/tracking";
 import { action } from '@ember/object';
+import { fetch } from 'fetch';
 
 export default class MeetingsPublishNotulenController extends Controller {
-  @service ajax;
 
   @tracked notulen;
 
@@ -47,42 +46,36 @@ export default class MeetingsPublishNotulenController extends Controller {
   @task
   *createPrePublishedResource() {
     const id = this.model.id;
-    const response = yield this.ajax.request(
-      `/prepublish/notulen/${id}`
-    );
-    return response.data.attributes.content;
+    const response = yield fetch(`/prepublish/notulen/${id}`);
+    return response.json().data.attributes.content;
   }
 
   @task
   *fetchBehandelings() {
     const id = this.model.id;
-    const responses = yield this.ajax.request(
-      `/prepublish/behandelingen/${id}`
-    );
-    return responses.map((response) => response.data.attributes);
+    const response = yield fetch(`/prepublish/behandelingen/${id}`);
+    const json = yield response.json();
+    return json.map((response) => response.data.attributes);
   }
 
   @task
   * createSignedResource() {
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/notulen/sign/${id}`
-    );
+    yield fetch(`/signing/notulen/sign/${id}`, { method: 'POST' });
     yield this.initializeNotulen.perform();
   }
 
   @task
   * createPublishedResource() {
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/notulen/publish/${id}`,
-      {
-        contentType: 'application/vnd.api+json',
-        data: {
-          'public-behandeling-uris': this.publicBehandelingUris
-        }
-      }
-    );
+    yield fetch(`/signing/notulen/publish/${id}`,
+                {
+                  headers: { "Content-Type": 'application/vnd.api+json' },
+                  body: JSON.stringify({
+                    'public-behandeling-uris': this.publicBehandelingUris
+                  }),
+                  method: 'POST'
+                });
     yield this.initializeNotulen.perform();
 
   }

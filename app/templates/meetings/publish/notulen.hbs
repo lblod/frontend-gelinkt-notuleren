@@ -1,23 +1,21 @@
-<div class="u-spacer--top">
+<div class="au-o-box">
   {{#if this.initializeNotulen.lastSuccessful}}
-  <WuTimelineAccordion as |timeline|>
+  <ul>
     <Signatures::Notulen::TimelineStep
-            @name="notulen"
-            @step={{timeline.step}}
-            @notulen={{this.notulen}}
-            @publicBehandelingUris={{publicBehandelingUris}}
-            @behandelings={{behandelings}}
-            @behandelingContainerId={{behandelingContainerId}}
-            @zittingWrapper={{zittingWrapper}}
-            @togglePublicationStatus={{togglePublicationStatus}}
-            @signing={{perform this.createSignedResource}}
-            @publish={{perform this.createPublishedResource}}
-
+      @name="notulen"
+      @step={{timeline.step}}
+      @notulen={{this.notulen}}
+      @publicBehandelingUris={{publicBehandelingUris}}
+      @behandelings={{behandelings}}
+      @behandelingContainerId={{behandelingContainerId}}
+      @zittingWrapper={{zittingWrapper}}
+      @togglePublicationStatus={{togglePublicationStatus}}
+      @signing={{perform this.createSignedResource}}
+      @publish={{perform this.createPublishedResource}}
     />
-
-  </WuTimelineAccordion>
+  </ul>
   {{else}}
-    <p>{{t "publish.loadingMessage"}}</p>
-    <p class="loader"><span class="u-visually-hidden">{{t "publish.loadingMessage"}}</span></p>
+    <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
+    <AuLoader @size="small" />
   {{/if}}
 </div>
