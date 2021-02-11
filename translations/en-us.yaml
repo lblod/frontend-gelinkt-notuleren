@@ -1,12 +1,20 @@
 inbox:
-  draftDecisions:
-    pageTitle: Draft decisions
-    searchPlaceholder: Type the title of a draft decision
+  menu:
+    meetings: Meetings
+    agendapoints: Agenda points
+    trash: Recycle bin
+    manual: View manual
+  agendapoints:
+    pageTitle: Agendapoints
+    searchPlaceholder: Type the title of a agendapoint
     noDataMessage: No documents
-    titleLabel: Draft decision title
+    titleLabel: Agendapoint title
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
+    new: Create agendapoint
+  trash:
+    title: Recycle bin
 publish:
   backToMeeting: Back to meeting
   loadingMessage: Loading...

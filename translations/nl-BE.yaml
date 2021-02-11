@@ -1,12 +1,20 @@
 inbox:
-  draftDecisions:
-    pageTitle: Ontwerpbesluiten
-    searchPlaceholder: Zoek titel ontwerpbesluit
+  menu:
+    meetings: Zittingen
+    agendapoints: Agendapunten
+    trash: Prullenmand
+    manual: Bekijk handleiding
+  agendapoints:
+    pageTitle: Agendapunten
+    searchPlaceholder: Zoek titel agendapunt
     noDataMessage: Geen documenten
-    titleLabel: Titel ontwerpbesluit
+    titleLabel: Titel agendapunt
     createdOnLabel: Aangemaakt
     updatedOnLabel: Aangepast
     statusLabel: Status
+    new: Nieuw agendapunt
+  trash:
+    title: Prullenmand
 publish:
   backToMeeting: Terug naar zitting
   loadingMessage: Bezig met laden...

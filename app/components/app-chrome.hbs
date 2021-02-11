@@ -1,0 +1,79 @@
+<nav>
+  <div class="au-c-app-chrome">
+  <AuToolbar @size="small" class="au-u-padding-bottom-none">
+    <AuToolbarGroup>
+      <AuLink @linkRoute="inbox.agendapoints" @skin="secondary">
+        <AuIcon @icon="arrow-left" @alignment="left" />
+        Terug naar overzicht agendapunten
+      </AuLink>
+      <span class="au-c-app-chrome__entity">{{get (await this.currentSession.group) 'classificatie.label'}} {{get (await this.currentSession.group) 'naam'}}</span>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <ul class="au-c-list-horizontal au-u-padding-right-tiny">
+        {{#unless @editorDocument.isNew}}
+        {{#if @editorDocument.updatedOn}}
+        <li class="au-c-list-horizontal__item">
+          <span class="au-c-app-chrome__status">
+            Bewaard op {{moment-calendar @editorDocument.updatedOn}}
+          </span>
+        </li>
+        {{else}}
+        <li class="au-c-list-horizontal__item">
+          <span class="au-c-app-chrome__status">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            Wijzigingen niet bewaard
+          </span>
+        </li>
+        {{/if}}
+        {{/unless}}
+        {{#if this.features.languageSelect}}
+        <li class="au-c-list-horizontal__item">
+          <LanguageSelect />
+        </li>
+        {{/if}}
+      </ul>
+    </AuToolbarGroup>
+  </AuToolbar>
+  <AuToolbar @size="small" class="au-u-padding-top-none">
+    <AuToolbarGroup>
+      <div>
+        {{#unless @editorDocument.isNew}}
+          <EditorStatusPill @status={{await @documentContainer.status}} />
+        {{/unless}}
+        {{#if @editorDocument.isNew}}
+        <AuPill @skin="warning">
+          <AuIcon @icon="alert-triangle" @alignment="left" />
+          Concept niet bewaard
+        </AuPill>
+        {{/if}}
+      </div>
+      <EditorDocumentTitle @editorDocument={{@editorDocument}} @readOnly={{@readOnly}} />
+    </AuToolbarGroup>
+    <AuToolbarGroup class="au-c-toolbar__group--actions">
+      {{#if @editorDocument.isNew}}
+        <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
+          <AuIcon @icon="bin" @alignment="left" />
+          Verwijder concept
+        </LinkTo>
+      {{else}}
+      <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+        {{#if @exportHtmlFunction}}
+          <AuButton {{on "click" @exportHtmlFunction}} @skin="tertiary" role="menuitem">
+            <AuIcon @icon="export" @alignment="left" />
+            Exporteer als HTML
+          </AuButton>
+        {{/if}}
+        <AuButton {{on "click" @sendToTrash}} @skin="tertiary" @alert="true" role="menuitem">
+          <AuIcon @icon="bin" @alignment="left" />
+          Naar prullenmand
+        </AuButton>
+      </AuDropdown>
+      {{/if}}
+      {{#if @publish}}
+        <AuButton {{on "click" @publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
+      {{/if}}
+      <AuButton {{on "click" @save}}>Bewaar</AuButton>
+    </AuToolbarGroup>
+  </AuToolbar>
+  </div>
+</nav>

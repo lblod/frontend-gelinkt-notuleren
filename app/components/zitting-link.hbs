@@ -1,1 +1,1 @@
-<AuLink {{on "click" this.openZitting}} class="au-c-link">{{this.agendapuntName}}</AuLink>
+<LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">Zitting van {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} op {{moment-format meeting.geplandeStart "DD/MM/YYYY HH:mm"}}</LinkTo>

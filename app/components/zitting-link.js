@@ -8,21 +8,18 @@ import { restartableTask } from "ember-concurrency-decorators";
 export default class ZittingLinkComponent extends Component {
   constructor(...args){
     super(...args);
-    this.getAgendapuntName.perform();
+    this.getMeeting.perform();
   }
   @service router;
   @service store;
 
-  @tracked agendapuntName;
+  @tracked meeting;
 
   @restartableTask
-  * getAgendapuntName(){
-    const agendapunt=(yield this.store.query('agendapunt', {'filter[behandeling][document-container][:id:]': this.args.documentContainer.id})).firstObject;
-    this.agendapuntName=agendapunt.titel;
-  }
-  @action
-  async openZitting(){
-    const zitting=(await this.store.query("zitting", {'filter[agendapunten][behandeling][document-container][:id:]':this.args.documentContainer.id})).firstObject;
-    this.router.transitionTo('meetings.edit', zitting.id);
+  * getMeeting(){
+    const result = yield this.store.query("zitting", {
+      'filter[agendapunten][behandeling][document-container][:id:]':this.args.documentContainer.id
+    });
+    this.meeting = result.firstObject;
   }
 }

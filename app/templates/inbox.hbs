@@ -15,25 +15,19 @@
             <li class="au-c-list-navigation__item">
               <AuNavigationLink @linkRoute="inbox.meetings">
                 <AuIcon @icon="documents" @alignment="left" />
-                Zittingen
+                {{t "inbox.menu.meetings"}}
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="inbox.draft-decisions">
+              <AuNavigationLink @linkRoute="inbox.agendapoints">
                 <AuIcon @icon="draft" @alignment="left" />
-                Ontwerpbesluiten
-              </AuNavigationLink>
-            </li>
-              <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="inbox.archive">
-                <AuIcon @icon="archive" @alignment="left" />
-                Archief
+                {{t "inbox.menu.agendapoints"}}
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
               <AuNavigationLink @linkRoute="inbox.trash">
                 <AuIcon @icon="bin" @alignment="left" />
-                Prullenmand
+                {{t "inbox.menu.trash"}}
               </AuNavigationLink>
             </li>
           </ul>
@@ -42,7 +36,7 @@
       <div class="au-c-sidebar__footer">
         <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/" target="_blank" rel="noopener noreferrer" class="au-c-link au-c-link--secondary au-c-link--icon">
           <AuIcon @icon="manual" @alignment="left" />
-          Bekijk handleiding
+          {{t "inbox.menu.manual"}}
         </a>
       </div>
     </div>

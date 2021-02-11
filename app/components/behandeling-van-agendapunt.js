@@ -81,14 +81,14 @@ export default class BehandelingVanAgendapuntComponent extends Component {
         "ae5feaed-7b70-4533-9417-10fbbc480a4c"
       );
       const activeStatus = yield this.store.findRecord(
-        "editor-document-status",
+        "concept",
         "c02542af-e6be-4cc6-be60-4530477109fc"
       );
       this.documentContainer = this.store.createRecord("document-container", {
         folder: draftDecisionFolder,
         status: activeStatus,
       });
-      this.documentContainer.ontwerpBesluitStatus=yield this.store.findRecord("concept", "7186547b61414095aa2a4affefdcca67"); //geagendered status
+      this.documentContainer.status=yield this.store.findRecord("concept", "7186547b61414095aa2a4affefdcca67"); //geagendeerd status
       this.documentContainer.currentVersion = this.document;
       this.behandeling.documentContainer = this.documentContainer;
       yield this.document.save();

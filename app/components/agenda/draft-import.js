@@ -24,7 +24,7 @@ export default class AgendaDraftImportComponent extends Component {
     }
     const containers = yield this.store.query('document-container', query);
     this.options = yield containers.filter(
-      e=>e.get('ontwerpBesluitStatus.id')!='7186547b61414095aa2a4affefdcca67' //geagenderred status
+      e=>e.get('status.id')!='7186547b61414095aa2a4affefdcca67' //geagendeerd status
     );
     this.args.importedDrafts.forEach(e=>this.options.removeObject(e));
   }

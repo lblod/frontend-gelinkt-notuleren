@@ -17,7 +17,7 @@ export default class AgendaModalComponent extends Component {
   @tracked afterAgendapuntOptions;
   @tracked error;
   toBeDeleted = [];
-  geagenderredStatus;
+  geagendeerdStatus;
   conceptStatus;
   constructor(...args){
     super(...args);
@@ -27,7 +27,7 @@ export default class AgendaModalComponent extends Component {
   @task
   *getStatus(){
     this.conceptStatus=yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');
-    this.geagenderredStatus=yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
+    this.geagendeerdStatus=yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
 
   }
   get afterSave() {
@@ -142,7 +142,7 @@ export default class AgendaModalComponent extends Component {
         if(behandeling){
           const documentContainer = yield behandeling.get("documentContainer");
           if(documentContainer){
-            documentContainer.ontwerpBesluitStatus=this.geagenderredStatus;
+            documentContainer.status=this.geagendeerdStatus;
             yield documentContainer.save();
           }
           yield behandeling.save();
@@ -156,7 +156,7 @@ export default class AgendaModalComponent extends Component {
         if(behandeling){
           const documentContainer = yield behandeling.documentContainer;
           if(documentContainer){
-            documentContainer.ontwerpBesluitStatus = this.conceptStatus;
+            documentContainer.status = this.conceptStatus;
             yield documentContainer.save();
           }
           yield behandeling.destroyRecord();
