@@ -260,6 +260,7 @@ export default class AgendaModalComponent extends Component {
   @action
   async selectDraft(draft){
     this.selectedDraft=draft;
+    this.currentlyEditing.titel = draft.get('currentVersion.title');
   }
 
 }

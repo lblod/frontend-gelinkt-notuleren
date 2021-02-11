@@ -3,7 +3,11 @@
 </div>
 
 <div class="u-padding--round--small">
-
+  {{#if @isNew}}
+    <div class="au-u-padding-top">
+      <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
+    </div>
+  {{/if}}
   <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
     {{t "manageAgendaZittingModal.titleLabel"}}
     {{textarea
@@ -48,11 +52,6 @@
       @selectAfterAgendapunt={{@selectAfterAgendapunt}}
       @selectLocation={{@selectLocation}}
     />
-  {{/if}}
-  {{#if @isNew}}
-    <div class="au-u-padding-top">
-      <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
-    </div>
   {{/if}}
   {{#unless @isNew}}
     <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>

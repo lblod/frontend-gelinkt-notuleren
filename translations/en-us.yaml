@@ -126,8 +126,8 @@ manageAgendaZittingModalMove:
   agendapuntSelectPlaceholder: Select agenda item
   searchPlaceholder: Search by title
 manageAgendaZittingModalDraftImport:
-  title: Import a draft
-  default: Create a new draft
+  title: Select draft agendapoint
+  default: Create a new agendapoint or select an existing one
 voting:
   openModalButton: Manage voting
 votingModal:
