@@ -1,22 +1,22 @@
 {{#each @prepublishedBehandelingen as |preview|}}
-  <div class="{{if (contains preview.behandeling @publicBehandelingUris) "behandeling-container--publiek" "behandeling-container--niet-publiek"}}">
-    <div class="u-padding--round--small {{if (contains @preview.behandeling publicBehandelingUris) "behandeling-info--publiek" "behandeling-info--niet-publiek"}} ">
+  <div class="au-c-editor-preview-treatment {{if (contains preview.behandeling @publicBehandelingUris) "au-c-editor-preview-treatment--public" "au-c-editor-preview-treatment--private"}}">
+    <div class="au-o-box au-c-editor-preview-treatment__info {{if (contains @preview.behandeling @publicBehandelingUris) "au-c-editor-preview-treatment__info--public" "au-c-editor-preview-treatment__info--private"}} ">
       {{#if this.isPublished}}
         {{#if (contains preview.behandeling @publicBehandelingUris)}}
           <p><strong>Inhoud werd gepubliceerd</strong></p>
-          <p class="small">Alle informatie uit de behandeling van het agendapunt werd gepubliceerd.</p>
+          <p class="au-c-help-text au-c-help-text--normal">Alle informatie uit de behandeling van het agendapunt werd gepubliceerd.</p>
         {{else}}
           <p><strong>Inhoud werd niet gepubliceerd</strong></p>
-          <p class="small">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
+          <p class="au-c-help-text au-c-help-text--normal">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
         {{/if}}
       {{else}}
         <WuSwitch @label=" Maak inhoud agendapunt publiek" @checked={{contains preview.behandeling @publicBehandelingUris}} @onClick={{action @toggle preview}} @class="checkbox--switch__wrapper" />
         {{#if (contains preview.behandeling @publicBehandelingUris)}}
           <p><strong>Inhoud wordt gepubliceerd</strong></p>
-          <p class="small">Alle informatie uit de behandeling van het agendapunt wordt gepubliceerd.</p>
+          <p class="au-c-help-text au-c-help-text--normal">Alle informatie uit de behandeling van het agendapunt wordt gepubliceerd.</p>
         {{else}}
           <p><strong>Inhoud wordt niet gepubliceerd</strong></p>
-          <p class="small">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
+          <p class="au-c-help-text au-c-help-text--normal">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
         {{/if}}
       {{/if}}
     </div>
