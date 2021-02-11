@@ -119,7 +119,7 @@ export default Mixin.create({
 
     async deleteDocument(){
       const container = this.documentContainer;
-      const deletedStatus = this.getStatusFor('trashStatusId');
+      const deletedStatus = await this.store.findRecord('concept', '5A8304E8C093B00009000010');
       container.set('status', deletedStatus);
       await container.save();
       this.set('displayDeleteModal', false);

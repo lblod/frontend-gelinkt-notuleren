@@ -14,7 +14,7 @@ export default Controller.extend(EditorDocumentBaseController, {
        this.set('validationErrors', true);
        return;
      }
-    let savedDoc = yield this.saveEditorDocument.perform(editorDocument, this.getStatusFor('conceptStatusId'), this.getFolderFor('draftDecisionsId'));
+    let savedDoc = yield this.saveEditorDocument.perform(editorDocument, this.model.conceptStatus, this.model.draftFolder);
     const container = yield savedDoc.get('documentContainer');
     this.transitionToRoute('draft-decisions.edit', container.id);
   }),

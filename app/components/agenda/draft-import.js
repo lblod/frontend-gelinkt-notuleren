@@ -16,9 +16,9 @@ export default class AgendaDraftImportComponent extends Component {
   * getDrafts(searchParams=''){
     const query={
       include: 'current-version,ontwerp-besluit-status',
-      'filter[status][:id:]': 'c02542af-e6be-4cc6-be60-4530477109fc',
+      'filter[status][:id:]': 'a1974d071e6a47b69b85313ebdcef9f7',
       'filter[folder][:id:]': 'ae5feaed-7b70-4533-9417-10fbbc480a4c'
-    }
+    };
     if(searchParams.length>1){
       query['filter[current-version][title]']=searchParams;
     }

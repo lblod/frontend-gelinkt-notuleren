@@ -32,7 +32,7 @@
         <AuHelpText @skin="secondary">{{moment-from-now this.document.currentVersion.updatedOn}}</AuHelpText>
       </td>
       <td>
-        <EditorStatusPill @status={{container.status}} /> <br> <DocumentLinkToPublished @document={{row}} />
+        <EditorStatusPill @status={{container.status}} />
       </td>
       <td>
         {{#if (eq container.status.label "geagendeerd")}}
