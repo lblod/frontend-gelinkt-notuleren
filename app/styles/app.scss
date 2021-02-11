@@ -68,8 +68,6 @@
 
 
 // COMPONENTS (DEPRECATED)
-@import 'deprecated/published-documents';
-@import 'deprecated/sign-publish-flow';
 @import 'deprecated/scrollto';
 @import 'deprecated/loading-events';
 @import 'deprecated/tasklist';
@@ -81,6 +79,7 @@
 @import 'project/c-meeting-chrome';
 @import 'project/c-rdfa-editor';
 @import "project/c-onboarding";
+@import 'project/c-editor-preview';
 @import "project/c-theme";
 
 

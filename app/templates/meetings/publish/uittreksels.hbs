@@ -1,6 +1,6 @@
-<div class="u-spacer--top">
+<div class="au-o-box">
   {{#if this.initializeUittreksels.lastSuccessful}}
-  <WuTimelineAccordion as |timeline|>
+  <ul>
     {{#each this.uittreksels as |uittreksel|}}
       <Signatures::Behandeling::TimelineStep
         @name={{uittreksel.behandeling.onderwerp.titel}}
@@ -9,10 +9,14 @@
         @signing={{perform this.createSignedResource uittreksel.behandeling}}
         @publish={{perform this.createPublishedResource uittreksel.behandeling}}
       />
+    {{else}}
+    <AuAlert @alertIcon="alert-triangle" @alertskin="warning" @alertsize="small">
+      {{t "publish.excerptsErrorMessage"}}
+    </AuAlert>
     {{/each}}
-  </WuTimelineAccordion>
+  </ul>
   {{else}}
-    <p>{{t "publish.loadingMessage"}}</p>
-    <p class="loader"><span class="u-visually-hidden">{{t "publish.loadingMessage"}}</span></p>
+    <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
+    <AuLoader @size="small" />
   {{/if}}
 </div>
