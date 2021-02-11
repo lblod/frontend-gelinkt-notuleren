@@ -434,3 +434,17 @@ input.input-field {
   border-bottom: 0;
   border-top: .1rem solid $au-gray-300;
 }
+
+// Align table cell right
+.au-u-table-right {
+  text-align: right;
+
+  .au-c-button {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+.au-c-modal--no-padding .au-c-modal__body {
+  padding: 0;
+}

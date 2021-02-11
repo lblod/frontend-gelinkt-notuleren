@@ -1,11 +1,13 @@
 {{#if this.getStatus.isRunning}}
-  <div>loading</div>
+  <AuLoader />
+  <AuHelpText>Loading</AuHelpText>
 {{else}}
   <AuModal
     @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
     @modalOpen={{true}}
     @size="fullscreen"
-    @closeModal={{if this.isEditing this.cancelEditing this.cancel}} as |Modal| >
+    @closeModal={{if this.isEditing this.cancelEditing this.cancel}}
+    class="au-c-modal--no-padding" as |Modal| >
     <Modal.Body>
       {{#if this.isEditing}}
         <Agenda::Edit
