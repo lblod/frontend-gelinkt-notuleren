@@ -47,7 +47,8 @@ export default class MeetingsPublishNotulenController extends Controller {
   *createPrePublishedResource() {
     const id = this.model.id;
     const response = yield fetch(`/prepublish/notulen/${id}`);
-    return response.json().data.attributes.content;
+    const json = yield response.json();
+    return json.data.attributes.content;
   }
 
   @task
