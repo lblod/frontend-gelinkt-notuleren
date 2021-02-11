@@ -1,9 +1,9 @@
 inbox:
   draftDecisions:
-    pageTitle: Ontwerpbesluiten
-    searchPlaceholder: Zoek titel ontwerpbesluit
+    pageTitle: Agendapunten
+    searchPlaceholder: Zoek titel agendapunt
     noDataMessage: Geen documenten
-    titleLabel: Titel ontwerpbesluit
+    titleLabel: Titel agendapunt
     createdOnLabel: Aangemaakt
     updatedOnLabel: Aangepast
     statusLabel: Status
@@ -30,7 +30,7 @@ meetingForm:
   meetingHeadingPartTwo: van
   firstSectionNotFilledWarning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
   secondSectionNotFilledWarning: Zorg ervoor dat je de aanwezigenlijst correct aanvult voor je aan de stemmingen begint.
-  thirdSectionNotFilledWarning: Beheer hier de agenda van je zitting. Je kan nieuwe besluiten of reeds gemaakte ontwerpbesluiten toevoegen.
+  thirdSectionNotFilledWarning: Beheer hier de agenda van je zitting. Je kan nieuwe besluiten of reeds gemaakte agendapunten toevoegen.
   fourthSectionNotFilledWarning: Bewerk je besluiten en beheer de stemmingen.
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
@@ -116,8 +116,8 @@ manageAgendaZittingModalMove:
   agendapuntSelectPlaceholder: Selecteer agendapunt
   searchPlaceholder: Zoek op titel
 manageAgendaZittingModalDraftImport:
-  title: Ontwerpbesluit importeren
-  default: ontwerpbesluit opstellen
+  title: Agendapunt importeren
+  default: agendapunt opstellen
 voting:
   openModalButton: Beheer stemming
 votingModal:

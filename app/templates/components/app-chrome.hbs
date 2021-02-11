@@ -9,7 +9,7 @@
       {{else if this.isDraftDecisions}}
       <AuLink @linkRoute="inbox.draft-decisions" @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
-        Terug naar overzicht ontwerpbesluiten
+        Terug naar overzicht agendapunten
       </AuLink>
       {{/if}}
       <span class="au-c-app-chrome__entity">{{get (await currentSession.group) 'classificatie.label'}} {{get (await currentSession.group) 'naam'}}</span>
