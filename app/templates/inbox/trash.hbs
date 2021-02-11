@@ -1,10 +1,10 @@
 <AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} as |t|>
-  <t.menu as |menu|>
+   <t.menu as |menu|>
     <menu.general>
       <AuToolbar @size="large">
         <AuToolbarGroup>
           <AuHeading @skin="2">
-            {{t "inbox.trash.title"}}
+            Prullenbak
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
@@ -16,7 +16,7 @@
       <AuToolbar @size="large" class="au-u-padding-bottom-none">
         <AuToolbarGroup>
           <AuHeading @skin="2">
-            {{t "inbox.trash.title"}}
+            Prullenbak
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
@@ -31,18 +31,13 @@
           </AuButton>
         </AuToolbarGroup>
       </AuToolbar>
-      {{!-- <ul class="bullet-list">
-        {{#each (await currentSession.roles) as |role|}}<li>{{role}}, </li>{{/each}}
-      </ul> --}}
     </menu.selected>
-  </t.menu>
-  <t.content as |c|>
+   </t.menu>
+   <t.content as |c|>
     <c.header>
-      <!-- <th class="data-table__header-title"><!-- Starred </th> -->
-      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Zitting" />
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Titel" />
       <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{sort}} @label="Aangepast" />
-      <AuDataTableThSortable @field="status" @currentSorting={{sort}} @label="Status" />
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
@@ -50,7 +45,7 @@
         <td>{{moment-calendar row.updatedOn}}</td>
         <td>{{moment-calendar row.createdOn}}</td>
       {{/with}}
-      <td><EditorStatusPill @status={{await container.status}} /></td>
     </c.body>
   </t.content>
 </AuDataTable>
+

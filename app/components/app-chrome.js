@@ -15,7 +15,7 @@ export default class AppChromeComponent extends Component {
     return status;
   }
 
-  get isConcept() {
-    return this.documentStatus.id == '7186547b61414095aa2a4affefdcca67';
+  get isNotAllowedToTrash() {
+    return this.documentStatus.get('id') != 'a1974d071e6a47b69b85313ebdcef9f7';
   }
 }

@@ -35,9 +35,7 @@
         <EditorStatusPill @status={{container.status}} />
       </td>
       <td>
-        {{#if (eq container.status.label "geagendeerd")}}
-          <ZittingLink @documentContainer={{container}}/>
-        {{/if}}
+        <ZittingLink @documentContainer={{container}}/>
       </td>
       {{/with}}
     </c.body>
