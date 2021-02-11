@@ -41,7 +41,7 @@ export default Component.extend({
     toggleActive(){
       this.set('active', !this.active);
       if (this.active)
-        schedule('afterRender', () => this.$('input').focus());
+        schedule('afterRender', () => this.element.querySelector('input').focus());
       else {
         this.set('overruledTitle', this.editorDocument.title);
         const overruledTitle = this.overruledTitle.slice().trim();

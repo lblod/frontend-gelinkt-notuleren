@@ -1,7 +1,7 @@
 import Controller from "@ember/controller";
-import {inject as service} from "@ember/service";
 import {task} from "ember-concurrency-decorators";
 import {tracked} from "@glimmer/tracking";
+import { fetch } from 'fetch';
 /** @typedef {import("../../../models/zitting").default} Zitting */
 
 
@@ -10,7 +10,6 @@ import {tracked} from "@glimmer/tracking";
  * @property {Zitting} model
  */
 export default class MeetingsPublishBesluitenlijstController extends Controller {
-  @service ajax;
 
   @tracked
   besluitenlijst;
@@ -46,28 +45,22 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   @task
   *createPrePublishedResource() {
     const id = this.model.id;
-    const response = yield this.ajax.request(
-      `/prepublish/besluitenlijst/${id}`
-    );
-    return response.data.attributes.content;
+    const response = yield fetch(`/prepublish/besluitenlijst/${id}`);
+    const json = yield response.json();
+    return json.data.attributes.content;
   }
 
   @task
   * createSignedResource() {
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/besluitenlijst/sign/${id}`
-    );
+    yield fetch(`/signing/besluitenlijst/sign/${id}`, { method: 'POST' });
     yield this.initializeBesluitenLijst.perform();
   }
 
   @task
   * createPublishedResource() {
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/besluitenlijst/publish/${id}`
-    );
+    yield fetch(`/signing/besluitenlijst/publish/${id}`, { method: 'POST' });
     yield this.initializeBesluitenLijst.perform();
-
   }
 }

@@ -1,11 +1,9 @@
 import Controller from '@ember/controller';
-import {inject as service} from "@ember/service";
 import {task} from "ember-concurrency-decorators";
 import {tracked} from "@glimmer/tracking";
+import { fetch } from 'fetch';
 
 export default class MeetingsPublishUittrekselsController extends Controller {
-  @service ajax;
-
   @tracked
   uittreksels = [];
 
@@ -47,27 +45,21 @@ export default class MeetingsPublishUittrekselsController extends Controller {
   @task
   *createPrePublishedResource() {
     const id = this.model.id;
-    const response = yield this.ajax.request(
-      `/prepublish/behandelingen/${id}`
-    );
-    return response;
+    const response = yield fetch(`/prepublish/behandelingen/${id}`);
+    return yield response.json();
   }
 
   @task
   * createSignedResource(behandeling) {
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/behandeling/sign/${id}/${behandeling.get('id')}`
-    );
+    yield fetch(`/signing/behandeling/sign/${id}/${behandeling.get('id')}`, { method: 'POST'});
     yield this.initializeUittreksels.perform();
   }
 
   @task
   * createPublishedResource(behandeling) {
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/behandeling/publish/${id}/${behandeling.get('id')}`
-    );
+    yield fetch(`/signing/behandeling/publish/${id}/${behandeling.get('id')}`, { method: 'POST' });
     yield this.initializeUittreksels.perform();
 
   }

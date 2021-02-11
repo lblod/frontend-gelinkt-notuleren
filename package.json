@@ -83,7 +83,6 @@
     "ember-feature-flags": "^6.0.0",
     "ember-fetch": "^8.0.2",
     "ember-intl": "^4.3.0",
-    "ember-jquery": "^1.0.5",
     "ember-load": "0.0.17",
     "ember-load-initializers": "^2.1.1",
     "ember-lodash": "^4.19.5",
