@@ -51,6 +51,7 @@ module.exports = function(environment) {
         }
       }
     },
+    environmentName: "{{ENVIRONMENT_NAME}}",
     'vo-webuniversum': {
       version: '2.8.3',
       header: '//widgets.vlaanderen.be/widget/live/5d47450609154d5c86f588f3b36ce9ba',
