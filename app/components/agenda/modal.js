@@ -141,8 +141,12 @@ export default class AgendaModalComponent extends Component {
         const behandeling = yield agendapoint.behandeling;
         if(behandeling){
           const documentContainer = yield behandeling.get("documentContainer");
-          if(documentContainer){
-            documentContainer.status=this.geagendeerdStatus;
+          if(documentContainer) {
+            const status = yield documentContainer.get('status');
+            if (status.get('id') != 'ef8e4e331c31430bbdefcdb2bdfbcc06') {
+              // it's not published, so we set the status
+              documentContainer.status=this.geagendeerdStatus;
+            }
             yield documentContainer.save();
           }
           yield behandeling.save();

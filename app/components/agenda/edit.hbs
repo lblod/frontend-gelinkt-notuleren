@@ -44,16 +44,17 @@
   {{#if (gt @agendapunten.length 1)}}
     <Agenda::Move
       @afterAgendapuntOptions={{@afterAgendapuntOptions}}
-      @agendapunt={{@agendapunt}}
+                              @agendapunt={{@agendapunt}}
       @agendapunten={{@agendapunten}}
-      @selectedLocation={{@selectedLocation}}
+                              @selectedLocation={{@selectedLocation}}
       @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
-      @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
+                              @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
       @selectAfterAgendapunt={{@selectAfterAgendapunt}}
-      @selectLocation={{@selectLocation}}
+                              @selectLocation={{@selectLocation}}
     />
   {{/if}}
   {{#unless @isNew}}
+    {{!-- TODO: don't allow delete on published agendapoints  --}}
     <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
   {{/unless}}
 </div>
