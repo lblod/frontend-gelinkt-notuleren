@@ -69,12 +69,17 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     if (this.documentContainer.content) {
       this.document = yield this.documentContainer.get("currentVersion");
       if (!this.document) {
-        this.document = this.store.createRecord("editor-document");
+        this.document = this.store.createRecord("editor-document", {
+          createdOn: new Date(),
+          updatedOn: new Date()
+        });
       }
     } else {
       yield this.behandeling.onderwerp;
       this.document = this.store.createRecord("editor-document", {
         title: this.behandeling.onderwerp.get("titel"),
+        createdOn: new Date(),
+        updatedOn: new Date()
       });
       const draftDecisionFolder = yield this.store.findRecord(
         "editor-document-folder",
