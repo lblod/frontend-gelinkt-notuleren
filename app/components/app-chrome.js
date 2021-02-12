@@ -1,26 +1,21 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 
-export default Component.extend({
-  currentSession: service(),
-  features: service(),
-  tagName: "nav",
+export default class AppChromeComponent extends Component {
+  @service currentSession;
+  @service features;
 
-  isMeetingMinutes: computed('typeDocument', function() {
-    return this.documentType === "meetingMinutes";
-  }),
+  get typeDocument() {
+    return this.args.documentType === "meetingMinutes";
+  }
 
-  documentStatus: computed('documentContainer.status', function(){
-    const status = this.documentContainer.get('status');
+  get documentStatus() {
+    const status = this.args.documentContainer.get('status');
     return status;
-  }),
+  }
 
-  isArchived: computed('documentStatus', function() {
-    return this.documentStatus.get('id') === "cda8ec80-8508-40e2-9bbb-bee6d9536abb";
-  }),
-
-  isDraftDecisions: computed('typeDocument', function() {
-    return this.documentType === "draftDecisions";
-  })
-});
+  get isNotAllowedToTrash() {
+    return this.documentStatus.get('id') != 'a1974d071e6a47b69b85313ebdcef9f7';
+  }
+}

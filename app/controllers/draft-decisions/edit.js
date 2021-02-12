@@ -16,28 +16,6 @@ export default Controller.extend(EditorDocumentBaseController, {
     return savedDoc;
   }),
 
-  archive: task(function *() {
-    let editorDocument = this.editorDocument;
-    if(this.hasDocumentValidationErrors(editorDocument)){
-      this.set('validationErrors', true);
-      return null;
-    }
-
-    const savedDoc = yield this.saveEditorDocument.perform(editorDocument,  this.getStatusFor('gearchiveerdStatusId'));
-    return savedDoc;
-  }),
-
-  unarchive: task(function *() {
-    let editorDocument = this.editorDocument;
-    if(this.hasDocumentValidationErrors(editorDocument)){
-      this.set('validationErrors', true);
-      return null;
-    }
-
-    const savedDoc = yield this.saveEditorDocument.perform(editorDocument,  this.getStatusFor('actiefStatusId'));
-    return savedDoc;
-  }),
-
   generateDocumentToDownload() {
     const context = JSON.parse(this.editorDocument.context);
     let prefixes = Object.entries(context.prefix).map(([key, value]) => {

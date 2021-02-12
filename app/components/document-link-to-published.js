@@ -13,7 +13,7 @@ export default Component.extend({
     const classificatieLabel = (yield bestuurseenheid.get('classificatie')).label;
     const bestuurseenheidNaam = bestuurseenheid.naam;
     const config = getOwner(this).resolveRegistration('config:environment');
-    const baseHost = (config.publicatie || {}).baseUrl;
+    const baseHost = (config.publication || {}).baseUrl;
     this.set('baseUrl', `${baseHost.replace(/\/$/, "")}/${bestuurseenheidNaam}/${classificatieLabel}`);
     this.set('status', (yield this.get('document.status')));
   }),

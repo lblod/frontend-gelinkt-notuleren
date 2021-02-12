@@ -1,7 +1,8 @@
 import Controller from "@ember/controller";
-import {inject as service} from "@ember/service";
 import {task} from "ember-concurrency-decorators";
 import {tracked} from "@glimmer/tracking";
+import fetch from 'fetch';
+
 /** @typedef {import("../../../models/agenda").default} Agenda */
 /** @typedef {import("../../../models/zitting").default} Zitting */
 
@@ -11,8 +12,6 @@ import {tracked} from "@glimmer/tracking";
  * @property {Zitting} model
  */
 export default class MeetingsPublishAgendaController extends Controller {
-  @service ajax;
-
   /** @type {string} */
   @tracked
   content;
@@ -71,17 +70,14 @@ export default class MeetingsPublishAgendaController extends Controller {
       });
       return rslt;
     }
-
-
   }
 
   @task
   * createPrePublishedResource() {
     const id = this.model.id;
-    const response = yield this.ajax.request(
-      `/prepublish/agenda/${id}`
-    );
-    return response.data.attributes.content;
+    const response = yield fetch(`/prepublish/agenda/${id}`);
+    const json = yield response.json();
+    return json.data.attributes.content;
   }
 
   /**
@@ -92,9 +88,7 @@ export default class MeetingsPublishAgendaController extends Controller {
   * createSignedResource(agendaType) {
 
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/agenda/sign/${agendaType}/${id}`
-    );
+    yield fetch(`/signing/agenda/sign/${agendaType}/${id}`, { method: 'POST'});
     yield this.initializeAgendas.perform();
   }
 
@@ -105,10 +99,7 @@ export default class MeetingsPublishAgendaController extends Controller {
   @task
   * createPublishedResource(agendaType) {
     const id = this.model.id;
-    yield this.ajax.post(
-      `/signing/agenda/publish/${agendaType}/${id}`
-    );
+    yield fetch(`/signing/agenda/publish/${agendaType}/${id}`, { method: 'POST'});
     yield this.initializeAgendas.perform();
-
   }
 }

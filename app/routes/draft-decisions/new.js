@@ -5,8 +5,8 @@ export default Route.extend({
   model() {
     return RSVP.hash({
       editorDocument: this.store.createRecord('editor-document'),
-      editorDocumentStatuses: this.store.findAll('editor-document-status'),
-      editorDocumentFolders: this.store.findAll('editor-document-folder')
+      conceptStatus: this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7'),
+      draftFolder: this.store.findRecord('editor-document-folder', 'ae5feaed-7b70-4533-9417-10fbbc480a4c')
     });
   },
 

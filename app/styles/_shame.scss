@@ -218,6 +218,16 @@ input.input-field {
   }
 }
 
+.au-c-toolbar__group--column {
+  flex-direction: column;
+  align-items: flex-start !important;
+
+  > * + * {
+    margin-left: 0;
+    margin-top: $au-unit-tiny;
+  }
+}
+
 // Fix visited state on links acting as buttons
 // @TODO: port to ember-appuniversum component or convert link to button
 .au-c-button-link {
@@ -447,4 +457,66 @@ input.input-field {
 
 .au-c-modal--no-padding .au-c-modal__body {
   padding: 0;
+}
+
+// Replace container class
+.au-c-app-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+
+  @include mq(medium) {
+    overflow: hidden;
+  }
+}
+
+.au-u-capitalize {
+  text-transform: capitalize;
+}
+
+// Override card > port to appuniversum cards
+.au-c-card--flex.au-c-card--expandable.au-c-card--publish {
+  padding: 0 !important;
+
+  > .au-c-card__header--clickable {
+    align-items: center;
+    padding: $au-unit-small;
+    margin-bottom: 0;
+  }
+
+  .au-c-card__header .au-c-toolbar--nowrap {
+    align-items: center;
+  }
+
+  .au-c-pill {
+    white-space: nowrap;
+  }
+
+  // Dirty fix for long buttons
+  .au-c-button {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+
+    .au-c-icon {
+      bottom: -.1ex;
+    }
+  }
+
+  > .au-c-card__content {
+    padding: $au-unit-small;
+  }
+
+  .au-c-card__toggle {
+    margin-left: $au-unit-small;
+  }
+}
+
+.au-c-modal--publish {
+  > .au-c-modal__body {
+    padding: 0;
+  }
 }

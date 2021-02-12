@@ -8,12 +8,9 @@ export default class Router extends EmberRouter {
 
 Router.map(function() {
   this.route('inbox', function() {
-    this.route('archive');
     this.route('trash');
-    this.route('imported');
-    this.route('draft-decisions');
+    this.route('agendapoints');
     this.route('meetings');
-    this.route('notulen');
   });
   this.route('mock-login');
   this.route('login');
@@ -36,7 +33,7 @@ Router.map(function() {
     this.route('edit');
   });
 
-  this.route('draft-decisions', function() {
+  this.route('draft-decisions', { path: '/agendapoints' }, function() {
     this.route('new');
     this.route('edit', { path: '/:id/edit' });
   });

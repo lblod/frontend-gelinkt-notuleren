@@ -3,7 +3,11 @@
 </div>
 
 <div class="u-padding--round--small">
-
+  {{#if @isNew}}
+    <div class="au-u-padding-top">
+      <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
+    </div>
+  {{/if}}
   <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
     {{t "manageAgendaZittingModal.titleLabel"}}
     {{textarea
@@ -40,21 +44,17 @@
   {{#if (gt @agendapunten.length 1)}}
     <Agenda::Move
       @afterAgendapuntOptions={{@afterAgendapuntOptions}}
-      @agendapunt={{@agendapunt}}
+                              @agendapunt={{@agendapunt}}
       @agendapunten={{@agendapunten}}
-      @selectedLocation={{@selectedLocation}}
+                              @selectedLocation={{@selectedLocation}}
       @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
-      @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
+                              @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
       @selectAfterAgendapunt={{@selectAfterAgendapunt}}
-      @selectLocation={{@selectLocation}}
+                              @selectLocation={{@selectLocation}}
     />
   {{/if}}
-  {{#if @isNew}}
-    <div class="au-u-padding-top">
-      <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
-    </div>
-  {{/if}}
   {{#unless @isNew}}
+    {{!-- TODO: don't allow delete on published agendapoints  --}}
     <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
   {{/unless}}
 </div>
