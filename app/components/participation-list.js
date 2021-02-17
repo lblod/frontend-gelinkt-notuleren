@@ -2,10 +2,21 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
-import { task } from 'ember-concurrency-decorators';
-import { get } from '@ember/object';
-import { isEmpty } from '@ember/utils';
 
+/**
+ * @typedef {Object} Args
+ * @property {Mandataris} chairman
+ * @property {Mandataris} secretary
+ * @property {BestuursOrgaan} bestuursorgaan
+ * @property {Array<Mandataris>} possibleParticipants
+ * @property {Array<Mandataris>} aanwezigenBijStart
+ * @property {Array<Mandataris>} afwezigenBijStart
+ * @property {Function} onSave
+ * @property {Zitting} meeting
+ * @property {string} modalTitle
+ */
+
+ /** @extends {Component<Args>} */
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
   @tracked info;
@@ -23,9 +34,9 @@ export default class ParticipationListComponent extends Component {
   get aanwezigenBijStart() {
     return this.args.aanwezigenBijStart ?? [];
   }
-  get possibleParticipants() {
-    return this.args.possibleParticipants ?? [];
-  }
+   get afwezigenBijStart() {
+     return this.args.afwezigenBijStart ?? [];
+   }
 
   // this is only called after loading has finished
   get hasParticipationInfo() {
@@ -37,13 +48,14 @@ export default class ParticipationListComponent extends Component {
     return sorted;
   }
   get mandateesNotPresent() {
-    if(this.aanwezigenBijStart.length > 0 && this.possibleParticipants) {
-      const aanwezigenUris = this.aanwezigenBijStart.map((mandataris) => mandataris.uri);
-      const notPresent = this.possibleParticipants.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
-      const sorted=notPresent.sortBy('isBestuurlijkeAliasVan.achternaam');
-      return sorted;
-    }
-    return [];
+    // if(this.aanwezigenBijStart.length > 0 && this.possibleParticipants) {
+    //   const aanwezigenUris = this.aanwezigenBijStart.map((mandataris) => mandataris.uri);
+    //   const notPresent = this.possibleParticipants.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
+    //   const sorted=notPresent.sortBy('isBestuurlijkeAliasVan.achternaam');
+    //   return sorted;
+    // }
+    const sorted = this.afwezigenBijStart.sortBy("isBestuurlijkeAliasVan.achternaam");
+    return sorted;
   }
 
   @action

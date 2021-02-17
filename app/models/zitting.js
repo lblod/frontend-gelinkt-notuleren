@@ -17,5 +17,6 @@ export default Model.extend({
   secretaris: belongsTo('functionaris', { inverse: null }),
   voorzitter:  belongsTo('mandataris', { inverse: null }),
   aanwezigenBijStart: hasMany('mandataris', { inverse: null }),
+  afwezigenBijStart: hasMany('mandataris', { inverse: null }),
   isPublished: notEmpty('afgeleidUit')
 });

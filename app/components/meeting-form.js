@@ -9,7 +9,7 @@ import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid
 
 export default class MeetingForm extends Component {
   @tracked aanwezigenBijStart;
-  @tracked aanwezigenRoles;
+  @tracked afwezigenBijStart
   @tracked voorzitter;
   @tracked secretaris;
   @tracked zitting;
@@ -36,9 +36,6 @@ export default class MeetingForm extends Component {
       this.bestuursorgaan = yield this.zitting.get("bestuursorgaan");
       this.secretaris = yield this.zitting.get("secretaris");
       this.voorzitter = yield this.zitting.get("voorzitter");
-      if (this.bestuursorgaan) {
-        yield this.fetchPossibleParticipants.perform();
-      }
       yield this.fetchParticipants.perform();
       yield this.fetchTreatments.perform();
     }
@@ -46,20 +43,32 @@ export default class MeetingForm extends Component {
 
   @task
   *fetchParticipants() {
-    let queryParams = {
+    if (this.bestuursorgaan) {
+      yield this.fetchPossibleParticipants.perform();
+    }
+    const participantQuery = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[aanwezig-bij-zitting][:id:]': this.zitting.get('id'),
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    const mandatees = yield this.store.query('mandataris', queryParams);
-    this.aanwezigenBijStart = mandatees;
+
+    const absenteeQuery = {
+      include: 'is-bestuurlijke-alias-van,status',
+      sort: 'is-bestuurlijke-alias-van.achternaam',
+      'filter[afwezig-bij-zitting][:id:]': this.zitting.get('id'),
+      page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
+    };
+    const present = yield this.store.query('mandataris', participantQuery);
+    const absent = yield this.store.query('mandataris', absenteeQuery);
+    this.aanwezigenBijStart = present;
+    this.afwezigenBijStart = absent;
   }
 
   @task
   *fetchPossibleParticipants() {
-    this.aanwezigenRoles = yield this.store.query('bestuursfunctie-code', { 'filter[standaard-type-van][is-classificatie-van][heeft-tijdsspecialisaties][:id:]': this.bestuursorgaan.id});
-    const stringifiedDefaultTypeIds = this.aanwezigenRoles.map(t => t.id).join(',');
+    const aanwezigenRoles = yield this.store.query('bestuursfunctie-code', { 'filter[standaard-type-van][is-classificatie-van][heeft-tijdsspecialisaties][:id:]': this.bestuursorgaan.id});
+    const stringifiedDefaultTypeIds = aanwezigenRoles.map(t => t.id).join(',');
     let queryParams = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
@@ -100,14 +109,21 @@ export default class MeetingForm extends Component {
     this.behandelingen = treatments;
   }
 
+  /**
+   * Persist the participants of the zitting
+   * @param {Object} info
+   * @return {Promise<void>}
+   */
   @action
-  async saveParticipationList({ voorzitter, secretaris, aanwezigenBijStart }) {
+  async saveParticipationList({ voorzitter, secretaris, aanwezigenBijStart, afwezigenBijStart }) {
     this.secretaris = secretaris;
     this.voorzitter = voorzitter;
     this.aanwezigenBijStart = aanwezigenBijStart;
+    this.afwezigenBijStart = afwezigenBijStart;
     this.zitting.voorzitter = voorzitter;
     this.zitting.secretaris = secretaris;
     this.zitting.aanwezigenBijStart = aanwezigenBijStart;
+    this.zitting.afwezigenBijStart =  afwezigenBijStart;
     await this.zitting.save();
   }
 

@@ -1,33 +1,17 @@
 import Component from '@glimmer/component';
-import { action } from "@ember/object";
 
-export default class ParticipationListMandatariesTableComponent extends Component {
-  selectedMandatees = {}
-  constructor() {
-    super(...arguments);
-    this.generateSelected();
-  }
-  @action
-  generateSelected() {
-    if(this.args.selected && this.args.selected.length) {
-      this.args.selected.forEach((mandataris) => {
-        this.selectedMandatees[mandataris.uri] = mandataris;
-      });
-    } else {
-      this.args.possibleParticipants.forEach((mandataris) => {
-        this.selectedMandatees[mandataris.uri] = mandataris;
-      });
-    }
-    this.args.onChange(Object.values(this.selectedMandatees));
-  }
-  @action
-  toggleAanwezigheid(mandataris, selected){
-    if(selected) {
-      this.selectedMandatees[mandataris.uri] = mandataris;
-    } else {
-      this.selectedMandatees[mandataris.uri] = undefined;
-    }
-    const selectedMandatees = Object.values(this.selectedMandatees);
-    this.args.onChange(selectedMandatees.filter((mandataris) => mandataris));
-  }
-}
+/**
+ * @callback toggleParticipation
+ * @param {Mandataris} mandataris
+ * @param {boolean} participates
+ */
+
+/**
+ * @typedef {Object} Args
+ * @property {Map<Mandataris, boolean>} selectedMandatees
+ * @property {Array<Mandataris>} possibleParticipants
+ * @property {toggleParticipation} toggleParticipation
+ */
+
+/** @extends {Component<Args>} */
+export default class ParticipationListMandatarissenTableComponent extends Component {}
