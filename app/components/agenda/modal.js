@@ -129,11 +129,10 @@ export default class AgendaModalComponent extends Component {
     // NOTE: huge try/catch because ember-concurrency error catching does not seem to catch promise rejections
     try {
       this.error = null;
-      yield this.zitting.agendapunten;
+      const agendapoints = this.zitting.agendapunten.filter((agendapoint) => ! agendapoint.get('isDeleted'));
       let previousAgendapoint = null;
-      for(let i=0; i < this.zitting.agendapunten.length; i++) {
-        const agendapoint = yield this.zitting.agendapunten.objectAt(i);
-
+      for(let i=0; i < agendapoints.length; i++) {
+        const agendapoint = yield agendapoints.objectAt(i);
         agendapoint.position = i;
         agendapoint.vorigeAgendapunt = previousAgendapoint;
         agendapoint.zitting = yield this.zitting;

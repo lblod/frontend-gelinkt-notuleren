@@ -32,6 +32,7 @@ export default Controller.extend(EditorDocumentBaseController, {
   actions: {
     handleRdfaEditorInit(editor){
       this.set('editor', editor);
+      this.editor.setHtmlContent(this.editorDocument.content);
     },
 
     async save() {

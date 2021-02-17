@@ -22,12 +22,10 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 export default class SignaturesTimelineStep extends Component {
   @service currentSession;
 
-  @tracked
-  showSigningModal = false;
-  @tracked
-  showPublishingModal = false;
-  @tracked
-  isSignedByCurrentUser = true;
+  @tracked showSigningModal = false;
+  @tracked showPublishingModal = false;
+  @tracked isSignedByCurrentUser = true;
+  @tracked signedResources = [];
 
   publicationBaseUrl = ENV.publication.baseUrl;
 
@@ -44,8 +42,7 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get signaturesCount() {
-    return this.args.document.signedResources && this.args.document.signedResources.length;
-
+    return this.signedResources.length;
   }
 
   @restartableTask
@@ -56,11 +53,11 @@ export default class SignaturesTimelineStep extends Component {
     if (this.args.document) {
       const signedResources = yield this.args.document.signedResources;
       if (signedResources.length > 0) {
+        this.signedResources = signedResources.sortBy('createdOn');
         firstSignatureUser = yield signedResources.firstObject.gebruiker;
       }
     }
     this.isSignedByCurrentUser = currentUser === firstSignatureUser;
-
   }
 
   get isAgenda() {
@@ -133,6 +130,8 @@ export default class SignaturesTimelineStep extends Component {
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
     yield this.args.signing(signedId);
+    const signedResources = yield this.args.document.signedResources;
+    this.signedResources = signedResources.sortBy('createdOn');
   }
 
   @task
