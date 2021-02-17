@@ -7,6 +7,9 @@ import { inject as service } from '@ember/service';
  * @typedef {Object} Args
  * @property {Mandataris} chairman
  * @property {Mandataris} secretary
+ * @property {Mandataris} [defaultSecretary]
+ * @property {Mandataris} [defaultChairman]
+ *
  * @property {BestuursOrgaan} bestuursorgaan
  * @property {Array<Mandataris>} possibleParticipants
  * @property {Array<Mandataris>} aanwezigenBijStart
