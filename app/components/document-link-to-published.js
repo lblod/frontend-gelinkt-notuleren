@@ -30,8 +30,8 @@ export default Component.extend({
         // concept
         return null;
       case "627aec5d144c422bbd1077022c9b45d1":
-        // agenda publiek
-        return "Bekijk&nbsp;publieke&nbsp;agenda";
+        // agenda-manager publiek
+        return "Bekijk&nbsp;publieke&nbsp;agenda-manager";
       case "b763390a63d548bb977fb4804293084a":
         // besluitenlijst publiek
         return "Bekijk&nbsp;publieke&nbsp;besluitenlijst";

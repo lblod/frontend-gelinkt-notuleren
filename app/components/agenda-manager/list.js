@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 
-export default class AgendaListComponent extends Component {
+export default class AgendaManagerListComponent extends Component {
   constructor(...args) {
     super(...args);
   }

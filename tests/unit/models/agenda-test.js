@@ -3,7 +3,7 @@ import { setupTest } from 'ember-qunit';
 
 import { run } from '@ember/runloop';
 
-module('Unit | Model | agenda', function(hooks) {
+module('Unit | Model | agenda-manager', function(hooks) {
   setupTest(hooks);
 
   test('it exists', function(assert) {

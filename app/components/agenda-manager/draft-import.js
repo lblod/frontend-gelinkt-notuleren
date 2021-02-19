@@ -4,7 +4,7 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import { restartableTask } from "ember-concurrency-decorators";
 
-export default class AgendaDraftImportComponent extends Component {
+export default class AgendaManagerDraftImportComponent extends Component {
   constructor(...args){
     super(...args);
     this.getDrafts.perform();

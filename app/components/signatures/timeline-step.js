@@ -6,7 +6,7 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 /**
  * @typedef {Object} Args
- * @property {string} name Name of the kind of resource to sign/publish (e.g. 'agenda', 'besluitenlijst', ...
+ * @property {string} name Name of the kind of resource to sign/publish (e.g. 'agenda-manager', 'besluitenlijst', ...
  * @property {string} step Name of the current selected step
  * @property {Object} document Versioned document to be signed/published
  * @property {Object} mockDocument Preview of versioned document together with current document id
@@ -61,7 +61,7 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get isAgenda() {
-    return (this.args.name === 'ontwerpagenda') || (this.args.name === 'aanvullende agenda') || (this.args.name === 'spoedeisende agenda');
+    return (this.args.name === 'ontwerpagenda') || (this.args.name === 'aanvullende agenda-manager') || (this.args.name === 'spoedeisende agenda-manager');
   }
 
   get title() {

@@ -3,14 +3,14 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | agenda/draft-import', function(hooks) {
+module('Integration | Component | agenda-manager/draft-import', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`<Agenda::DraftImport />`);
+    await render(hbs`<AgendaManager::DraftImport />`);
 
     assert.equal(this.element.textContent.trim(), '');
 

@@ -5,7 +5,7 @@
 <div class="u-padding--round--small">
   {{#if @isNew}}
     <div class="au-u-padding-top">
-      <Agenda::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
+      <AgendaManager::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
     </div>
   {{/if}}
   <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
@@ -42,7 +42,7 @@
     </label>
   </div>
   {{#if (gt @agendapunten.length 1)}}
-    <Agenda::Move
+    <AgendaManager::Move
       @afterAgendapuntOptions={{@afterAgendapuntOptions}}
                               @agendapunt={{@agendapunt}}
       @agendapunten={{@agendapunten}}
@@ -55,6 +55,6 @@
   {{/if}}
   {{#unless @isNew}}
     {{!-- TODO: don't allow delete on published agendapoints  --}}
-    <Agenda::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
+    <AgendaManager::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
   {{/unless}}
 </div>

@@ -5,7 +5,7 @@ import { inject as service } from "@ember/service";
 import { set } from "@ember/object";
 import { task, restartableTask } from "ember-concurrency-decorators";
 
-export default class AgendaModalComponent extends Component {
+export default class AgendaManagerModalComponent extends Component {
   @service store;
   @tracked isEditing = false;
   @tracked currentlyEditing;

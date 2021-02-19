@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency-decorators';
 
-export default class ManageAgendaZittingComponent extends Component {
+export default class AgendaManagerIndexComponent extends Component {
   @service store;
   @tracked popup = false;
   @tracked agendapoints;

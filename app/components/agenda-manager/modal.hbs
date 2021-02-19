@@ -8,7 +8,7 @@
     @closeModal={{if this.isEditing this.cancelEditing this.cancel}} as |Modal| >
     <Modal.Body>
       {{#if this.isEditing}}
-        <Agenda::Edit
+        <AgendaManager::Edit
           @delete={{this.delete}}
 
           @agendapunt={{this.currentlyEditing}}
@@ -28,7 +28,7 @@
           @selectDraft={{this.selectDraft}}
         />
       {{else}}
-        <Agenda::List
+        <AgendaManager::List
           @agendapunten={{this.zitting.agendapunten}}
           @createAgendapunt={{this.createAgendapunt}}
           @edit={{this.edit}}
