@@ -32,8 +32,8 @@
               <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
               <ParticipationList::MandatarissenTable
                 @possibleParticipants={{@possibleParticipants}}
-                @selected={{@aanwezigenBijStart}}
-                @onChange={{this.updateMandatarisTable}}
+                @selectedMandatees={{this.selectedMandatees}}
+                @toggleParticipation={{this.toggleParticipation}}
               />
             </div>
           </div>

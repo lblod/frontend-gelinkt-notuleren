@@ -12,7 +12,8 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service currentSession;
   @tracked behandeling;
   @tracked editor;
-  @tracked aanwezigen = new Array();
+  @tracked aanwezigen = [];
+  @tracked afwezigen = [];
 
   constructor() {
     super(...arguments);
@@ -32,6 +33,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
    * @property {Mandataris} voorzitter
    * @property {Mandataris} secretaris
    * @property {Mandataris[]} aanwezigenBijStart
+   * @property {Mandataris[]} afwezigenBijStart
    */
 
   /**
@@ -44,21 +46,32 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.behandeling.secretaris = participants.secretaris;
     this.secretaris = participants.secretaris;
     this.behandeling.aanwezigen = participants.aanwezigenBijStart;
+    this.behandeling.afwezigen = participants.afwezigenBijStart;
     this.aanwezigen = participants.aanwezigenBijStart;
+    this.afwezigen = participants.afwezigenBijStart;
     await this.behandeling.save();
   }
 
   @task
   *fetchParticipants() {
-    let queryParams = {
+    const participantQuery = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[aanwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    const aanwezigen = yield this.store.query('mandataris', queryParams);
+    const absenteeQuery = {
+      sort: 'is-bestuurlijke-alias-van.achternaam',
+      'filter[afwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
+      include: 'is-bestuurlijke-alias-van',
+      page: { size: 100 } //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
+    };
+    const aanwezigen = yield this.store.query('mandataris', participantQuery);
     this.aanwezigen = aanwezigen;
     this.behandeling.aanwezigen = aanwezigen;
+    const afwezigen = yield this.store.query('mandataris', absenteeQuery);
+    this.afwezigen = afwezigen;
+    this.behandeling.afwezigen = afwezigen;
     this.voorzitter = yield this.behandeling.voorzitter;
     this.secretaris = yield this.behandeling.secretaris;
   }
