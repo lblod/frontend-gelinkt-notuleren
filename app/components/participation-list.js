@@ -51,12 +51,6 @@ export default class ParticipationListComponent extends Component {
     return sorted;
   }
   get mandateesNotPresent() {
-    // if(this.aanwezigenBijStart.length > 0 && this.possibleParticipants) {
-    //   const aanwezigenUris = this.aanwezigenBijStart.map((mandataris) => mandataris.uri);
-    //   const notPresent = this.possibleParticipants.filter((mandataris) => !aanwezigenUris.includes(mandataris.uri));
-    //   const sorted=notPresent.sortBy('isBestuurlijkeAliasVan.achternaam');
-    //   return sorted;
-    // }
     const sorted = this.afwezigenBijStart.sortBy("isBestuurlijkeAliasVan.achternaam");
     return sorted;
   }
