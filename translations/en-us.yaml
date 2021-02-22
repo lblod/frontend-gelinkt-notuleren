@@ -25,6 +25,8 @@ behandelingVanAgendapunten:
   openbaarLabel: "make agendapoint public"
   participationListButton: Configure attendees of this agenda-item.
   visibility: "visibility"
+  votingTitle: "Voting"
+  contentTitle: "Content"
   needsParticipants: Please configure the participants to this agenda-item before adding a voting.
 meetingForm:
   incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
@@ -40,7 +42,7 @@ meetingForm:
   meetingHeadingPartTwo: of
   firstSectionNotFilledWarning: Before you can start the meeting it is necessary to set a date, location and governing body.
   secondSectionNotFilledWarning: Complete the attendance.
-  thirdSectionNotFilledWarning: Manage the agenda of your meeting. You can add new agenda items or add draft decisions.
+  thirdSectionNotFilledWarning: Manage the agenda of your meeting. You can add new agenda items or add existing agenda items.
   fourthSectionNotFilledWarning: Manage your decision and votes.
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
@@ -57,6 +59,7 @@ manageZittingsData:
 participation:
   presentLabel: "Present mandatees:"
 participationList:
+  blockTitle: "Participation"
   loadingTitle: Loading the attendee list
   loadingLoader: Loading
   voorzitterLabel: "Chairman:"

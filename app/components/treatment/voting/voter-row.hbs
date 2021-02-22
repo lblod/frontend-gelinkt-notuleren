@@ -5,29 +5,25 @@
   <td>
     {{this.mandataris.bekleedt.bestuursfunctie.label}}
   </td>
+  {{#if (and this.isVoting (not @secret))}}
+    <td>
+      <select {{on "change" this.onSelectVote}}>
+        <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
+        {{#each this.voteOptions as |voteOption|}}
+          <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
+        {{/each}}
+      </select>
+    </td>
+  {{/if}}
   <td>
-    <div class="flex">
-      {{#if (and this.isVoting (not @secret))}}
-        <td>
-          <select {{on "change" this.onSelectVote}}>
-            <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
-            {{#each this.voteOptions as |voteOption|}}
-              <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
-            {{/each}}
-          </select>
-        </td>
-      {{/if}}
-      <td>
-        {{#if this.isVoting}}
-          <AuButton @alert={{ true }} @skin="secondary" @icon="cross" @iconAlignment="left" {{on "click" this.removeStemmer}}>
-            {{t "votingEdit.removeItemButton"}}
-          </AuButton>
-        {{else}}
-          <AuButton @alert={{ false }} @skin="secondary" @icon="add" @iconAlignment="left" {{on "click" this.addStemmer}}>
-            {{t "votingEdit.addItemButton"}}
-          </AuButton>
-        {{/if}}
-      </td>
-    </div>
+    {{#if this.isVoting}}
+      <AuButton @alert={{ true }} @skin="secondary" @icon="cross" @iconAlignment="left" {{on "click" this.removeStemmer}}>
+        {{t "votingEdit.removeItemButton"}}
+      </AuButton>
+    {{else}}
+      <AuButton @alert={{ false }} @skin="secondary" @icon="add" @iconAlignment="left" {{on "click" this.addStemmer}}>
+        {{t "votingEdit.addItemButton"}}
+      </AuButton>
+    {{/if}}
   </td>
 </tr>
