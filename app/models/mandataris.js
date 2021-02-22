@@ -13,7 +13,9 @@ export default Model.extend({
   datumEedaflegging: attr('datetime'),
   datumMinistrieelBesluit: attr('datetime'),
   aanwezigBijBehandeling: hasMany('behandeling-van-agendapunt'),
+  afwezigBijBehandeling: hasMany('behandeling-van-agendapunt'),
   aanwezigBijZitting: hasMany('zitting'),
+  afwezigBijZitting: hasMany('zitting'),
   status: belongsTo('mandataris-status-code', {inverse: null}),
 
   rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects

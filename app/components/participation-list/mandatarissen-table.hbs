@@ -17,8 +17,8 @@
     {{#each @possibleParticipants as |mandataris|}}
       <ParticipationList::MandatarisRow
         @mandataris={{mandataris}}
-        @selectedMandatees={{this.selectedMandatees}}
-        @onToggleAanwezig={{fn this.toggleAanwezigheid mandataris}}
+        @selectedMandatees={{@selectedMandatees}}
+        @onToggleParticipation={{fn @toggleParticipation mandataris}}
       />
     {{else}}
       <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
