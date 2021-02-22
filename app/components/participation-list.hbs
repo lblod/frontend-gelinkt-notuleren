@@ -1,63 +1,64 @@
-<div class="au-c-meeting-chrome-card">
-  {{#if this.hasParticipationInfo}}
-      <ul class="au-c-list-divider">
-        <li class="au-c-list-divider__item">
-          {{t "participationList.voorzitterLabel"}} <strong>{{@chairman.isBestuurlijkeAliasVan.fullName}}</strong>
-          {{#unless @chairman}}
-            <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
-              {{t "participationList.voorzitterError"}}
-            </AuPill>
-          {{/unless}}
+{{#if this.hasParticipationInfo}}
+<div class="au-c-meeting-chrome-card au-u-margin-bottom-none">
+  <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "participationList.blockTitle"}}</AuHeading>
+  <ul class="au-c-list-divider">
+    <li class="au-c-list-divider__item">
+      {{t "participationList.voorzitterLabel"}} <strong>{{@chairman.isBestuurlijkeAliasVan.fullName}}</strong>
+      {{#unless @chairman}}
+        <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">
+          {{t "participationList.voorzitterError"}}
+        </AuPill>
+      {{/unless}}
+      </li>
 
-          </li>
+      <li class="au-c-list-divider__item">
+        {{t "participationList.secretarisLabel"}} <strong>{{@secretary.isBestuurlijkeAliasVan.fullName}}</strong>
+        {{#unless @secretary}}
+          <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
+            {{t "participationList.secretarisError"}}
+          </AuPill>
+        {{/unless}}
 
-          <li class="au-c-list-divider__item">
-            {{t "participationList.secretarisLabel"}} <strong>{{@secretary.isBestuurlijkeAliasVan.fullName}}</strong>
-            {{#unless @secretary}}
-              <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
-                {{t "participationList.secretarisError"}}
-              </AuPill>
-            {{/unless}}
-
-          </li>
-          <li class="au-c-list-divider__item">
-            {{t "participationList.presentLabel"}}
-            {{#each this.mandateesPresent as |mandataris|}}
-              <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
-            {{else}}
-              <AuPill @skin="error" @icon="alert-triangle" @iconAlignment="left">
-                {{t "participationList.presentError"}}
-              </AuPill>
-            {{/each}}
-          </li>
-          <li class="au-c-list-divider__item">
-            {{t "participationList.notPresentLabel"}}
-            {{#each this.mandateesNotPresent as |mandataris|}}
-              <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
-            {{/each}}
-          </li>
-      </ul>
-      {{/if}}
-      <AuButton
-        @width="block"
-        @skin="secondary"
-        @icon="pencil"
-        @iconAlignment="left"
-        {{on 'click' this.togglePopup}}
-        @disabled={{this.fetchMandatees.isRunning}}
-      >
-        {{@modalTitle}}
-      </AuButton>
-
-      <ParticipationList::Modal
-        @voorzitter={{this.chairman}}
-        @secretaris={{this.secretary}}
-        @show={{this.popup}}
-        @togglePopup={{this.togglePopup}}
-        @onSave={{@onSave}}
-        @bestuursorgaan={{@bestuursorgaan}}
-        @aanwezigenBijStart={{this.aanwezigenBijStart}}
-        @possibleParticipants={{this.possibleParticipants}}
-        @meeting={{@meeting}}
-      />
+      </li>
+      <li class="au-c-list-divider__item">
+        {{t "participationList.presentLabel"}}
+        {{#each this.mandateesPresent as |mandataris|}}
+          <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
+        {{else}}
+          <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">
+            {{t "participationList.presentError"}}
+          </AuPill>
+        {{/each}}
+      </li>
+      <li class="au-c-list-divider__item">
+        {{t "participationList.notPresentLabel"}}
+        {{#each this.mandateesNotPresent as |mandataris|}}
+          <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
+        {{/each}}
+      </li>
+  </ul>
 </div>
+{{/if}}
+<AuButton
+  @width="block"
+  @skin="secondary"
+  @icon="pencil"
+  @iconAlignment="left"
+  {{on 'click' this.togglePopup}}
+  @disabled={{this.fetchMandatees.isRunning}}
+  class="au-u-margin-top-small"
+>
+  {{@modalTitle}}
+</AuButton>
+
+  <ParticipationList::Modal
+    @voorzitter={{this.chairman}}
+    @secretaris={{this.secretary}}
+    @show={{this.popup}}
+    @togglePopup={{this.togglePopup}}
+    @onSave={{@onSave}}
+    @bestuursorgaan={{@bestuursorgaan}}
+    @aanwezigenBijStart={{this.aanwezigenBijStart}}
+    @possibleParticipants={{this.possibleParticipants}}
+    @meeting={{@meeting}}
+  />

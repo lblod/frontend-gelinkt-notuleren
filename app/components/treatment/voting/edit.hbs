@@ -4,56 +4,39 @@
   @size="fullscreen"
   @closeModal={{this.cancel}} as |Modal| >
   <Modal.Body>
-    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
-      {{t "votingEdit.firstStepTitle"}}
-    </h3>
-    <div class="form__row u-spacer">
-      <label class="form__label">
-        {{t "votingEdit.firstStepIntroduction"}}
-      </label>
-      <Input class="textarea textarea--block" @type="textarea" @cols="40" @rows="4" @placeholder={{t "votingEdit.inputPlaceholder"}}
-        @value={{this.editStemming.stemming.onderwerp}} />
-      <p class="smaller text-fade">
-        {{t "votingEdit.firstStepExplanation"}}
+    <AuHeading @level="3" @skin="4">{{t "votingEdit.firstStepTitle"}}</AuHeading>
+    <AuHr />
+    <div class="au-c-form">
+      <p>
+        <AuLabel for="voting-subject">{{t "votingEdit.firstStepIntroduction"}}</AuLabel>
+        <AuTextarea id="voting-subject" @width="block" @value={{this.editStemming.stemming.onderwerp}}></AuTextarea>
+        <AuHelpText @skin="secondary">{{t "votingEdit.firstStepExplanation"}}</AuHelpText>
       </p>
+      <p>
+        {{!-- <AuControlCheckbox @label={{t "votingEdit.privateVotingCheckbox"}} @identifier="akkoord" @checked={{this.editStemming.stemming.geheim}} /> --}}
 
-      <label>
-        <Input @type="checkbox" @checked={{this.editStemming.stemming.geheim}} />
-        {{t "votingEdit.privateVotingCheckbox"}}
-      </label>
+        <label class="au-c-label">
+          <Input @type="checkbox" @checked={{this.editStemming.stemming.geheim}} />&nbsp;
+          {{t "votingEdit.privateVotingCheckbox"}}
+        </label>
+      </p>
     </div>
 
-    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
-      {{t "votingEdit.secondStep"}}
-    </h3>
-    <div class="form__row u-spacer">
+    <AuHeading @level="3" @skin="4" class="au-u-margin-top-large">{{t "votingEdit.secondStep"}}</AuHeading>
+    <AuHr />
+    <div>
       <Treatment::Voting::ManageVoters />
     </div>
 
-    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
-      {{t "votingEdit.thirdStep"}}
-    </h3>
-    <div class="form__row u-spacer">
-      <label class="form__label">
-        {{t "votingEdit.thirdStepIntroduction"}}
-      </label>
-      <Input @type="textarea" class="textarea textarea--block" @cols="40" @rows="4" @placeholder={{t "votingEdit.inputPlaceholder"}}
-        @value={{this.editStemming.stemming.gevolg}} />
-      <p class="smaller text-fade">
-        {{t "votingEdit.thirdStepExplanation"}}
+    <AuHeading @level="3" @skin="4" class="au-u-margin-top-large">{{t "votingEdit.thirdStep"}}</AuHeading>
+    <AuHr />
+    <div class="au-c-form au-u-padding-bottom">
+      <p>
+        <AuLabel for="voting-consequence">{{t "votingEdit.thirdStepIntroduction"}}</AuLabel>
+        <AuTextarea id="voting-consequence" @width="block" @value={{this.editStemming.stemming.gevolg}}></AuTextarea>
+        <AuHelpText @skin="secondary">{{t "votingEdit.thirdStepExplanation"}}</AuHelpText>
       </p>
     </div>
-
-    <h3 class="u-background--gray-lighter u-padding--round--tiny u-spacer--tb--tiny">
-      {{t "votingEdit.fourthStepTitle"}}
-    </h3>
-    <p class="smaller u-spacer">
-      {{t "votingEdit.fourthStepExplanationPartOne"}}
-      <strong>
-        {{t "votingEdit.saveButton"}}
-      </strong>
-      {{t "votingEdit.fourthStepExplanationPartTwo"}}
-    </p>
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>
@@ -64,5 +47,12 @@
         {{t "votingEdit.cancelButton"}}
       </AuButton>
     </AuButtonGroup>
+    <AuHelpText>
+      {{t "votingEdit.fourthStepExplanationPartOne"}}
+      <strong>
+        {{t "votingEdit.saveButton"}}
+      </strong>
+      {{t "votingEdit.fourthStepExplanationPartTwo"}}
+    </AuHelpText>
   </Modal.Footer>
 </AuModal>

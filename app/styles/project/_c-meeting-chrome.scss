@@ -54,10 +54,10 @@
 .au-c-meeting-chrome-card {
   position: relative;
   color: $au-gray-700;
-  border: .1rem dashed $au-gray-300;
+  border: .1rem solid $au-gray-300;
   background-color: $au-gray-100;
   margin-top: $au-unit-small;
-  margin-bottom: $au-unit-large + $au-unit;
+  margin-bottom: $au-unit-huge + $au-unit;
 
   > .au-c-button {
     position: absolute;
@@ -67,19 +67,38 @@
     border-color: $au-gray-300;
     background-color: $au-white;
   }
+
+  & + .au-c-button {
+    position: relative;
+    margin-top: -.1rem !important; // Spacing hack as this button is used in multiple places
+    border-color: $au-gray-300;
+  }
 }
 
 .au-c-meeting-chrome-card--editable {
   border: .1rem solid $au-gray-300;
 }
 
+.au-c-meeting-chrome-card--editor {
+  background-color: $au-white;
+}
+
+.au-c-meeting-chrome-card__title {
+  background-color: $au-gray-200;
+  padding: $au-unit-tiny $au-unit-small;
+  border-bottom: .1rem solid $au-gray-300;
+}
+
+.au-c-meeting-chrome-card__title--inset {
+  margin-top: -$au-unit-small;
+  margin-left: -$au-unit-small;
+  margin-right: -$au-unit-small;
+}
+
 .au-c-meeting-chrome-editable {
   position: relative;
   padding-top: $au-unit-small;
   color: $au-gray-700;
-  border-top: .1rem dashed $au-gray-300;
-  margin-top: $au-unit-small;
-  margin-bottom: $au-unit-large + $au-unit;
 
   .container-flex--contain {
     overflow: visible;
@@ -282,5 +301,36 @@
 
   &:hover {
     opacity: 1;
+  }
+}
+
+.au-c-meeting-numbered-list {
+  counter-reset: list-number;
+
+  > li + li {
+    border-top: .1rem dashed $au-gray-300;
+  }
+
+  > li {
+    position: relative;
+    padding-bottom: $au-unit-small;
+  }
+
+  > li::before {
+    @include au-font-size(1.3rem);
+    content: counter(list-number);
+    counter-increment: list-number;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: -$au-unit - $au-unit-tiny;
+    top: $au-unit-small + $au-unit-tiny/1.6;
+    color: $au-gray-700;
+    font-weight: $au-medium;
+    width: $au-unit;
+    height: $au-unit;
+    background-color: $au-gray-200;
+    border-radius: $au-unit;
   }
 }

@@ -24,7 +24,9 @@ behandelingVanAgendapunten:
   saveButton: Opslaan
   openbaarLabel: "maak agendapunt openbaar"
   participationListButton: Beheer aanwezigen bij dit agendapunt
-  visibility: "Zichtbaarheid:"
+  visibility: "Zichtbaarheid"
+  votingTitle: "Stemming"
+  contentTitle: "Inhoud"
   needsParticipants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
 meetingForm:
   incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
@@ -57,6 +59,7 @@ manageZittingsData:
 participation:
   presentLabel: "Aanwezige mandatarissen:"
 participationList:
+  blockTitle: "Aanwezigen"
   loadingTitle: Bezig met laden van de aanwezigenlijst
   loadingLoader: Aan het laden
   voorzitterLabel: "Voorzitter:"

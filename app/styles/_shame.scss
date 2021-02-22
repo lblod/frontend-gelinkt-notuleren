@@ -291,10 +291,6 @@ input.input-field {
   border-radius: 0;
 }
 
-.au-u-not-allowed {
-  cursor: not-allowed;
-}
-
 // Lists
 .au-c-list-divider {
   font-style: italic;
@@ -316,20 +312,66 @@ input.input-field {
     margin-top: $au-unit-tiny*1.5;
   }
 
-  .au-c-list-divider .au-c-list-divider__item {
+  .au-c-list-numbered {
+    border-left: .3rem solid $au-gray-300;
+    margin-top: $au-unit-small;
+  }
+
+  .au-c-list-divider .au-c-list-divider__item,
+  .au-c-list-numbered .au-c-list-numbered__item {
     padding-left: 0;
   }
 
-  .au-c-list-divider .au-c-list-divider__item:last-child {
+  .au-c-list-divider .au-c-list-divider__item:last-child,
+  .au-c-list-numbered .au-c-list-numbered__item:last-child {
     padding-bottom: 0;
   }
 
-  .au-c-list-divider .au-c-list-divider__item:first-child {
+  .au-c-list-divider .au-c-list-divider__item:first-child,
+  .au-c-list-numbered .au-c-list-numbered__item:first-child {
     padding-top: 0;
   }
 }
 
 .au-c-list-divider__item {
+  padding: $au-unit-tiny*1.5;
+  position: relative;
+
+  & + & {
+    border-top: .1rem dotted $au-gray-300;
+  }
+
+  &.has-error {
+    padding-left: $au-unit + $au-unit-tiny;
+  }
+
+  &.has-error:before {
+    content: "!";
+    font-size: $au-label-error-badge-font-size;
+    font-style: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $au-white;
+    position: absolute;
+    top: 50%;
+    left: $au-unit-tiny/2;
+    transform: translateY(-50%);
+    background-color: $au-label-error-badge-color;
+    width: $au-unit-small * 1.5;
+    height: $au-unit-small * 1.5 - .05rem;
+    border-radius: $au-unit-small * 1.5;
+    margin-right: $au-unit-tiny;
+  }
+}
+
+.au-c-list-numbered {
+  list-style: decimal;
+  padding-left: $au-unit;
+  font-style: normal;
+}
+
+.au-c-list-numbered__item {
   padding: $au-unit-tiny*1.5;
   position: relative;
 
@@ -450,8 +492,17 @@ input.input-field {
   text-align: right;
 
   .au-c-button {
-    display: block;
+    display: flex;
     margin-left: auto;
+  }
+
+  .au-c-button-group {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .au-c-button-group .au-c-button {
+    margin-left: $au-unit-tiny;
   }
 }
 
@@ -518,5 +569,24 @@ input.input-field {
 .au-c-modal--publish {
   > .au-c-modal__body {
     padding: 0;
+  }
+}
+
+// Checkbox font size fix
+.au-c-control {
+  @include au-font-size($au-h6);
+}
+
+// Quick fix for standalone tables
+.au-c-table-border {
+  border: .1rem solid $au-gray-300;
+}
+
+// Quick fix for button group
+.au-c-button-group-fix {
+  display: flex;
+
+  .au-c-button {
+    display: inline-flex;
   }
 }
