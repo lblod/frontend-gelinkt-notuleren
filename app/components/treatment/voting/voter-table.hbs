@@ -1,4 +1,4 @@
-<table class="data-table data-table--lined data-table--zebra">
+<table class="data-table data-table--lined data-table--zebra au-c-table-border">
   <thead>
     <tr>
       <th>
@@ -7,36 +7,35 @@
       <th>
         {{t "votingEdit.hoedanigheidLabel"}}
       </th>
-      <th>
-        <div class="grid">
-          <div class="col--6-12">
-            {{t "votingEdit.actionsLabel"}}
-          </div>
-        </div>
+      {{#if (and this.isVoting (not @secret))}}
+      <th colspan="2">
+        {{t "votingEdit.actionsLabel"}}
       </th>
+      {{else}}
+      <th>
+        {{t "votingEdit.actionsLabel"}}
+      </th>
+      {{/if}}
     </tr>
   </thead>
   <tbody>
     {{#if this.editStemming.fetchVoters.isRunning}}
-    <p class="loader">
-      <span class="u-visually-hidden">
-        {{t "votingEdit.loadingText"}}
-      </span>
-    </p>
+    <div class="au-o-box">
+      <AuLoader @size="small" />
+      <AuHelpText>{{t "votingEdit.loadingText"}}</AuHelpText>
+    </div>
     {{else}}
     {{#each this.voters as |row|}}
-    <Treatment::Voting::VoterRow 
-    @row={{row}} 
+    <Treatment::Voting::VoterRow
+    @row={{row}}
     @onVoteChange={{this.editStemming.setVote}}
     @secret={{this.editStemming.stemming.geheim}}
     />
 
     {{else}}
     <tr>
-      <td colspan="3" style="background-color: white; height: 10rem;">
-        <p class="text-fade">
-          {{t "votingEdit.noDataMessage"}}
-        </p>
+      <td colspan="3">
+        <AuHelpText>{{t "votingEdit.noDataMessage"}}</AuHelpText>
       </td>
     </tr>
     {{/each}}
