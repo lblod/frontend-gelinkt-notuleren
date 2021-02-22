@@ -2,9 +2,16 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
-import { set } from "@ember/object";
 import { task, restartableTask } from "ember-concurrency-decorators";
 
+/** @typedef {import("./AgendaData").default} AgendaManagerData */
+
+/**
+ * @typedef {Object} Args
+ * @property {AgendaManagerData} agendaData
+ */
+
+ /** @extends {Component<Args>} */
 export default class AgendaManagerModalComponent extends Component {
   @service store;
   @tracked isEditing = false;
@@ -30,9 +37,6 @@ export default class AgendaManagerModalComponent extends Component {
     this.geagendeerdStatus=yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
 
   }
-  get afterSave() {
-    return this.args.afterSave || (() => {});
-  }
 
   @action
   async cancel() {
@@ -52,12 +56,6 @@ export default class AgendaManagerModalComponent extends Component {
 
   @action
   async createAgendapunt() {
-    const agendapunt = this.store.createRecord("agendapunt");
-    agendapunt.titel = "";
-    agendapunt.beschrijving = "";
-    agendapunt.geplandOpenbaar = true;
-    agendapunt.position = this.zitting.agendapunten.length;
-    this.zitting.agendapunten.pushObject(agendapunt);
     this.edit(agendapunt);
     this.isNew = true;
   }

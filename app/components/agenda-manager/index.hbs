@@ -1,47 +1,16 @@
 <div class="au-c-meeting-chrome-card">
-  {{#if this.loadAgenda.isRunning}}
+  {{#if this.agendaData.load.isRunning}}
     <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
   {{else}}
-  <table class="au-c-meeting-chrome-table">
-    <thead>
-      <th>
-        {{t "manageAgendaZitting.titelLabel"}}
-      </th>
-      <th>
-        {{t "manageAgendaZitting.beschrijvingLabel"}}
-      </th>
-      <th>
-        {{t "manageAgendaZitting.geplandOpenbaar"}}
-      </th>
-    </thead>
-    <tbody>
-      {{#each this.agendapoints as |agendapoint|}}
-        <tr>
-          <td>
-            <strong>{{agendapoint.titel}}</strong>
-          </td>
-          <td>
-            {{agendapoint.beschrijving}}
-          </td>
-          <td>
-            {{if agendapoint.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel") (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
-          </td>
-        </tr>
+    <AgendaManager::List @agendaData={{this.agendaData}}
+                         @createNewItem={{this.createNewItem}}
+                         @editItem={{this.editItem}}
+                         as |List|
+    >
+      {{#each this.agendaItems as |item|}}
+        <List.Item @item={{@item}}/>
       {{/each}}
-    </tbody>
-  </table>
-  <AuButton
-    @width="block"
-    @skin="secondary"
-    @icon="pencil"
-    @iconAlignment="left"
-    {{on "click" (action (mut popup) true)}}
-  >
-    {{t "manageAgendaZitting.openModalButton"}}
-  </AuButton>
+    </AgendaManager::List>
   {{/if}}
+  <AgendaManager::Edit @visible={{this.editModalVisible}} @item={{this.itemToEdit}} @onSave={{this.saveItem}}/>
 </div>
-
-{{#if this.popup}}
-  <AgendaManager::Modal @zitting={{@zitting}} @agendapunten={{this.agendapoints}} @afterSave={{this.afterSave}} @cancel={{this.cancel}}/>
-{{/if}}

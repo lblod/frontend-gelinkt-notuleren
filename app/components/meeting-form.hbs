@@ -131,7 +131,7 @@
               {{t "meetingForm.thirdSectionNotFilledWarning"}}
             </span>
           </AuHeading>
-          <AgendaManager @zitting={{@zitting}} @onChange={{perform this.fetchTreatments}}> </AgendaManager>
+          <AgendaManager @zittingId={{@zitting.id}} />
           <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper">
             {{t "meetingForm.fourthSectionTitle"}}
             <span class="au-c-onboarding">

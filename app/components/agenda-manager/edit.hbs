@@ -1,60 +1,83 @@
-<div class="u-padding--round--small u-background--gray-lightest">
-  <h2 class="h5">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</h2>
-</div>
-
-<div class="u-padding--round--small">
-  {{#if @isNew}}
-    <div class="au-u-padding-top">
-      <AgendaManager::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}} @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
+<AuModal @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
+         @modalOpen={{@visible}}
+         @size="fullscreen"
+         @closeModal={{@onCancel}} as |Modal|
+>
+  <Modal.Body>
+    <div class="u-padding--round--small u-background--gray-lightest">
+      <h2 class="h5">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</h2>
     </div>
-  {{/if}}
-  <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
-    {{t "manageAgendaZittingModal.titleLabel"}}
-    {{textarea
-        class="textarea textarea--block u-spacer--tiny"
-        rows="4"
-        value=(mut @agendapunt.titel)
-    }}
-  </label>
 
-  <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
-    {{t "manageAgendaZittingModal.beschrijvingLabel"}}
-    {{textarea
-        class="textarea textarea--block u-spacer--tiny"
-        rows="4"
-        value=(mut @agendapunt.beschrijving)
-    }}
-  </label>
+    <div class="u-padding--round--small">
+      {{#if @isNew}}
+        <div class="au-u-padding-top">
+          <AgendaManager::DraftImport @agendapunt={{@agendapunt}} @selectedDraft={{@selectedDraft}}
+                                      @selectDraft={{@selectDraft}} @importedDrafts={{@importedDrafts}}/>
+        </div>
+      {{/if}}
+      <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
+        {{t "manageAgendaZittingModal.titleLabel"}}
+        <TextArea
+                @class="textarea textarea--block u-spacer--tiny"
+                @rows="4"
+                @value={{@item.titel}}/>
+      </label>
 
-  <label class="form__label form__label--block u-spacer--tiny">
-    {{t "manageAgendaZittingModal.geplandOpenbaar"}}
-  </label>
-  <div class="u-spacer--small">
-    <label class="radio">
-      <input class="radio__toggle" type="radio" name="geslotenAgendapunt" checked={{@agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
-      <span></span>
-      <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
-    </label>
-    <label class="radio">
-      <input class="radio__toggle" type="radio" name="openAgendapunt" checked={{not @agendapunt.geplandOpenbaar}} onclick={{action "toggleGeplandOpenbaar"}}>
-      <span></span>
-      <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
-    </label>
-  </div>
-  {{#if (gt @agendapunten.length 1)}}
-    <AgendaManager::Move
-      @afterAgendapuntOptions={{@afterAgendapuntOptions}}
-                              @agendapunt={{@agendapunt}}
-      @agendapunten={{@agendapunten}}
-                              @selectedLocation={{@selectedLocation}}
-      @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
-                              @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
-      @selectAfterAgendapunt={{@selectAfterAgendapunt}}
-                              @selectLocation={{@selectLocation}}
-    />
-  {{/if}}
-  {{#unless @isNew}}
-    {{!-- TODO: don't allow delete on published agendapoints  --}}
-    <AgendaManager::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}} @afterSave={{@afterSave}} @zitting={{@zitting}}/>
-  {{/unless}}
-</div>
+      <label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
+        {{t "manageAgendaZittingModal.beschrijvingLabel"}}
+        <TextArea
+                @class="textarea textarea--block u-spacer--tiny"
+                @rows="4"
+                @value={{@item.beschrijving}}/>
+        }}
+      </label>
+
+      <label class="form__label form__label--block u-spacer--tiny">
+        {{t "manageAgendaZittingModal.geplandOpenbaar"}}
+      </label>
+      <div class="u-spacer--small">
+        <label class="radio">
+          <Input @class="radio__toggle" @type="radio" @name="geslotenAgendapunt"
+                 @checked={{@item.geplandOpenbaar}}
+            {{on "click" this.toggleGeplandOpenbaar}}/>
+          <span></span>
+          <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
+        </label>
+        <label class="radio">
+          <Input class="radio__toggle"
+                 @type="radio"
+                 @name="openAgendapunt"
+                 @checked={{not @item.geplandOpenbaar}}
+            {{on "click" this.toggleGeplandOpenbaar}}/>
+          <span></span>
+          <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
+        </label>
+      </div>
+      {{#if (gt @agendapunten.length 1)}}
+        <AgendaManager::Move
+                @afterAgendapuntOptions={{@afterAgendapuntOptions}}
+                @agendapunt={{@agendapunt}}
+                @agendapunten={{@agendapunten}}
+                @selectedLocation={{@selectedLocation}}
+                @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
+                @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
+                @selectAfterAgendapunt={{@selectAfterAgendapunt}}
+                @selectLocation={{@selectLocation}}
+        />
+      {{/if}}
+      {{#unless @isNew}}
+      {{!-- TODO: don't allow delete on published agendapoints  --}}
+        <AgendaManager::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}}
+                               @afterSave={{@afterSave}} @zitting={{@zitting}}/>
+      {{/unless}}
+    </div>
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton {{on "click" @onSave}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" @onCancel}}>
+        {{t "manageAgendaZittingModal.cancelButton"}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>

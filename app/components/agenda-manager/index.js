@@ -1,44 +1,55 @@
-import { inject as service } from '@ember/service';
+import {inject as service} from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { action } from '@ember/object';
-import { task } from 'ember-concurrency-decorators';
+import {tracked} from '@glimmer/tracking';
+import {action} from '@ember/object';
+import AgendaData from "./AgendaData";
 
+/** @typedef {import("./AgendaData").default} AgendaData */
+
+/**
+ * @typedef {Object} Args
+ * @property {string} zittingId
+ */
+
+
+/** @extends {Component<Args>} */
 export default class AgendaManagerIndexComponent extends Component {
   @service store;
+  /** @type AgendaData */
+  @tracked agendaData;
   @tracked popup = false;
-  @tracked agendapoints;
+  @tracked editModalVisible = false;
+  @tracked itemToEdit = null;
 
-  constructor(...args){
+  constructor(...args) {
     super(...args);
-    this.loadAgenda.perform();
+    this.agendaData = new AgendaData(this.store, args.zittingId);
+    this.agendaData.load.perform();
   }
 
-
-  @task
-  *loadAgenda() {
-    const agendapoints = new Array();
-    const pageSize = 10;
-    const firstPage = yield this.store.query('agendapunt', { "filter[zitting][:id:]": this.args.zitting.id , "page[size]": pageSize});
-    const count = firstPage.meta.count;
-    firstPage.forEach(result => agendapoints.push(result));
-    let pageNumber = 1;
-    while (((pageNumber) * pageSize) < count) {
-      const pageResults = yield this.store.query('agendapunt', { "filter[zitting][:id:]": this.args.zitting.id , "page[size]": pageSize, "page[number]": pageNumber});
-      pageResults.forEach(result => agendapoints.push(result));
-      pageNumber++;
-    }
-    this.agendapoints = agendapoints.sortBy('position');
+  get agendaItems() {
+    return this.agendaData.items;
   }
 
   @action
-  cancel(){
-    this.popup = false;
+  openModal() {
+    this.editModalVisible = true;
   }
 
   @action
-  afterSave(agendapoints) {
-    this.agendapoints = agendapoints.map((agendapoint) => agendapoint);
-    this.args.onChange();
+  createNewItem() {
+    console.log("click")
+    this.openModal();
   }
+
+  @action
+  /**
+   * @param {AgendaPunt} item
+   */
+  editItem(item) {
+    this.itemToEdit = item;
+    this.openModal();
+  }
+
+
 }

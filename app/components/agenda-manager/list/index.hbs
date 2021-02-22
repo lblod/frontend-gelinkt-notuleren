@@ -1,0 +1,35 @@
+<div style="height:70vh; max-height:none;">
+  <table class="data-table">
+    <thead>
+    <tr>
+      <th>{{t "manageAgendaZittingModal.orderLabel"}}</th>
+      <th style="width: 400px;">{{t "manageAgendaZittingModal.titleLabel"}}</th>
+      <th>{{t "manageAgendaZittingModal.geplandOpenbaar"}}</th>
+      <th>
+        <div class="grid">
+          <div class="col--2-12">{{t "manageAgendaZittingModal.actionsLabel"}}</div>
+          <div class="col--10-12 u-align-right">
+            <AuButton {{on "click" @createNewItem}} @icon="add" @iconAlignment="left">
+              {{t "manageAgendaZittingModal.createItemButton"}}
+            </AuButton>
+          </div>
+        </div>
+      </th>
+    </tr>
+    </thead>
+
+    <SortableObjects @tagName={{"tbody"}} @sortEndAction={{@sort}} @sortableObjectList={{this.agendaItems}}
+                     @enableSort={{true}} @useSwap={{true}} @inPlace={{true}}>
+        {{yield (hash
+                  Item=(component "agenda-manager/list/item" item=@item edit=@editItem)
+                )}}
+        <tr>
+          <td colspan="5">{{t "manageAgendaZittingModal.noDataMessage"}}
+            <AuButton {{on "click" @createNewItem}}>
+              {{t "manageAgendaZittingModal.createItemButton"}}
+            </AuButton>
+          </td>
+        </tr>
+    </SortableObjects>
+  </table>
+</div>

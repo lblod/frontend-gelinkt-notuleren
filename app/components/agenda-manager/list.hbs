@@ -21,33 +21,6 @@
     <SortableObjects @tagName={{"tbody"}} @sortEndAction={{@sort}} @sortableObjectList={{@agendapunten}} enableSort={{true}} useSwap={{true}} inPlace={{true}}>
       {{#each @agendapunten as |agendapunt|}}
         {{#unless agendapunt.isDeleted}}
-          {{#draggable-object tagName="tr" content=agendapunt isSortable=true}}
-            {{!--  <td class="u-align-right">1</td> --}}
-            <td>
-              {{#wu-link-button
-                isTiny=true
-                isLink=true
-                isNarrow=true
-                onClick=null}}
-                <span style="cursor:pointer">
-                  <i class="fa fa-bars"></i>
-                </span>
-              {{/wu-link-button}}
-            </td>
-            <td>
-              <p>{{agendapunt.titel}}</p>
-            </td>
-            <td>
-              {{if agendapunt.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel") (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
-            </td>
-            <td>
-            <AuButtonGroup>
-                <AuButton {{on "click" (fn @edit agendapunt)}}>
-                  <i class="vi vi-edit"></i> {{t "manageAgendaZittingModal.editItemButton"}}
-                </AuButton>
-            </AuButtonGroup>
-            </td>
-          {{/draggable-object}}
         {{/unless}}
       {{else}}
         <tr>
