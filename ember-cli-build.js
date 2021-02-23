@@ -10,8 +10,10 @@ module.exports = function(defaults) {
     minifyCSS: {
       enabled: false
     },
-    'ember-cli-uglify': {
-      uglify: {
+    'ember-cli-terser': {
+      enabled: true,
+      exclude: ['vendor.js', 'assets/vendor.js'],
+      terser: {
         compress: {
           collapse_vars: false
         }
