@@ -41,6 +41,10 @@
       {{/if}}
     </Modal.Body>
     <Modal.Footer>
+        <AuButtonGroup>
+          <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
+        </AuButtonGroup>
     </Modal.Footer>
   </AuModal>
 {{/if}}

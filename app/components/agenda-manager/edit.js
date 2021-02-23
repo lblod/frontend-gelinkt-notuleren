@@ -14,4 +14,18 @@ export default class AgendaManagerEditComponent extends Component {
   async toggleGeplandOpenbaar() {
     this.args.agendapunt.geplandOpenbaar = !this.args.agendapunt.geplandOpenbaar;
   }
+
+  get isNew() {
+    return this.args.item.isNew;
+  }
+  @action
+  save() {
+    this.args.onSave();
+    this.args.onClose();
+  }
+  @action
+  cancel() {
+    this.args.onCancel();
+    this.args.onClose();
+  }
 }

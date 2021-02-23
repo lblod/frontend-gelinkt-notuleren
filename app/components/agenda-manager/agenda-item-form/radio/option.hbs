@@ -1,0 +1,7 @@
+<label class="radio">
+  <Input @class="radio__toggle" @type="radio" @name="geslotenAgendapunt"
+         @checked={{@item.geplandOpenbaar}}
+    {{on "click" this.toggleGeplandOpenbaar}}/>
+  <span></span>
+  {{yield}}
+</label>

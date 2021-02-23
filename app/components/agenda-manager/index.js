@@ -1,8 +1,7 @@
-import {inject as service} from '@ember/service';
 import Component from '@glimmer/component';
+import {inject as service} from '@ember/service';
 import {tracked} from '@glimmer/tracking';
 import {action} from '@ember/object';
-import AgendaData from "./AgendaData";
 
 /** @typedef {import("./AgendaData").default} AgendaData */
 
@@ -14,22 +13,16 @@ import AgendaData from "./AgendaData";
 
 /** @extends {Component<Args>} */
 export default class AgendaManagerIndexComponent extends Component {
-  @service store;
   /** @type AgendaData */
-  @tracked agendaData;
   @tracked popup = false;
   @tracked editModalVisible = false;
   @tracked itemToEdit = null;
 
   constructor(...args) {
     super(...args);
-    this.agendaData = new AgendaData(this.store, args.zittingId);
-    this.agendaData.load.perform();
   }
 
-  get agendaItems() {
-    return this.agendaData.items;
-  }
+
 
   @action
   openModal() {
@@ -37,9 +30,19 @@ export default class AgendaManagerIndexComponent extends Component {
   }
 
   @action
-  createNewItem() {
-    console.log("click")
-    this.openModal();
+  closeModal() {
+    this.editModalVisible = false;
+  }
+
+  @action
+  createItem() {
+    const newItem = this.agendaData.createItem();
+    this.editItem(newItem);
+  }
+  @action
+  cancelEdit() {
+    this.closeModal();
+    this.itemToEdit = null;
   }
 
   @action

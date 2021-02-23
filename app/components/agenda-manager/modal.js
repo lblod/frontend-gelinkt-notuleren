@@ -31,81 +31,12 @@ export default class AgendaManagerModalComponent extends Component {
     this.getStatus.perform();
   }
 
-  @task
-  *getStatus(){
-    this.conceptStatus=yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');
-    this.geagendeerdStatus=yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
-
-  }
-
   @action
-  async cancel() {
-    // get a copy of the array
-    // because when rolling back attributes agendapoints get removed from the relationship
-    const agendapoints = this.zitting.agendapunten.map((ap) => ap);
-    for (const agendapoint of agendapoints) {
-      agendapoint.rollbackAttributes();
-    }
-    for (const agendapoint of this.toBeDeleted) {
-      this.zitting.agendapunten.pushObject(agendapoint);
-    }
-    this.importedDrafts=[];
-    this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
-    this.args.cancel();
+  save() {
+    this.args.onSave();
+    this.args.onClose();
   }
 
-  @action
-  async createAgendapunt() {
-    this.edit(agendapunt);
-    this.isNew = true;
-  }
-
-  @action
-  async edit(agendapunt) {
-    this.afterAgendapuntOptions = this.zitting.agendapunten.filter((ap) => {
-      return ap != agendapunt;
-    });
-    this.currentlyEditing = agendapunt;
-    this.toggleEditing();
-  }
-
-  @action
-  async delete() {
-    this.zitting.agendapunten.removeObject(this.currentlyEditing);
-    this.toBeDeleted.push(this.currentlyEditing);
-
-    const agendapunt=await this.currentlyEditing;
-    const behandeling=await agendapunt.behandeling;
-    const documentContainer=await behandeling.documentContainer;
-
-    this.importedDrafts.removeObject(documentContainer);
-    this.toggleEditing();
-  }
-
-  @action
-  async toggleEditing() {
-    this.isEditing = !this.isEditing;
-    if(!this.isEditing){
-      this.selectedLocation = null;
-      this.selectedAfterAgendapunt = null;
-      this.showAfterAgendapuntOptions = false;
-
-      this.selectedDraft=null;
-
-      this.zitting.agendapunten = this.zitting.agendapunten.sortBy("position");
-    }
-  }
-
-  @action
-  async cancelEditing() {
-    if(this.isNew){
-      this.currentlyEditing.deleteRecord();
-    }
-    else{
-      this.currentlyEditing.rollbackAttributes();
-    }
-    this.toggleEditing();
-  }
 
   @action
   async save() {
@@ -174,26 +105,6 @@ export default class AgendaManagerModalComponent extends Component {
   }
 
 
-  /**
-   * @param {import("../../models/agendapunt").default} agendapunt
-   */
-  @action
-  async createBehandeling(agendapunt) {
-    /** @type {import("../../models/behandeling-van-agendapunt").default)} */
-    if(!agendapunt.behandeling.content){
-      const behandeling = this.store.createRecord("behandeling-van-agendapunt");
-      behandeling.openbaar = agendapunt.geplandOpenbaar;
-      behandeling.onderwerp = agendapunt;
-      const previous = await agendapunt.vorigeAgendapunt;
-    }
-  }
-
-  @action
-  async sort() {
-    this.zitting.agendapunten.forEach((agendapunt, index) => {
-      agendapunt.position = index;
-    });
-  }
 
   @action
   selectAfterAgendapunt(option) {
