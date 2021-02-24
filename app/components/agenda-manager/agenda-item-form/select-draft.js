@@ -4,6 +4,9 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import { restartableTask } from "ember-concurrency-decorators";
 
+const DRAFT_STATUS_ID = "a1974d071e6a47b69b85313ebdcef9f7";
+const FOLDER_ID = "ae5feaed-7b70-4533-9417-10fbbc480a4c";
+
 export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Component {
   @service store;
   @tracked options;
@@ -18,8 +21,8 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
   * getDrafts(searchParams=''){
     const query={
       include: 'current-version,status',
-      'filter[status][:id:]': 'a1974d071e6a47b69b85313ebdcef9f7',
-      'filter[folder][:id:]': 'ae5feaed-7b70-4533-9417-10fbbc480a4c'
+      'filter[status][:id:]': DRAFT_STATUS_ID,
+      'filter[folder][:id:]': FOLDER_ID,
     };
     if(searchParams.length>1){
       query['filter[current-version][title]']=searchParams;
@@ -29,7 +32,8 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
   }
   @action
   select(value) {
-    this.args.model.behandeling.documentContainer = value;
+    this.selected = value;
+    this.args.model.set("behandeling.documentContainer", value);
     this.args.model.titel = value.get("currentVersion.title");
   }
 }

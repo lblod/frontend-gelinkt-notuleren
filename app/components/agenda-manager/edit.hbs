@@ -8,53 +8,56 @@
            @closeModal={{this.cancel}} as |Modal|
   >
     <Modal.Body>
+      {{#if this.submitTask.isRunning}}
+        <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+      {{else}}
+        <div class="u-padding--round--small u-background--gray-lightest">
+          <h2 class="h5">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</h2>
+        </div>
+        <div class="u-padding--round--small">
+          {{#if this.isNew}}
+            <div class="au-u-padding-top">
+              <Form.SelectDraft @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}>
+                {{t "manageAgendaZittingModalDraftImport.title"}}
+              </Form.SelectDraft>
+            </div>
+          {{/if}}
 
-      <div class="u-padding--round--small u-background--gray-lightest">
-        <h2 class="h5">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</h2>
-      </div>
-      <div class="u-padding--round--small">
-        {{#if this.isNew}}
-          <div class="au-u-padding-top">
-            <Form.SelectDraft @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}>
-              {{t "manageAgendaZittingModalDraftImport.title"}}
-            </Form.SelectDraft>
-          </div>
-        {{/if}}
+          <Form.Textarea @for="titel">
+            {{t "manageAgendaZittingModal.titleLabel"}}
+          </Form.Textarea>
 
-        <Form.Textarea @for="titel">
-          {{t "manageAgendaZittingModal.titleLabel"}}
-        </Form.Textarea>
-
-        <Form.Textarea @for="beschrijving">
-          {{t "manageAgendaZittingModal.beschrijvingLabel"}}
-        </Form.Textarea>
+          <Form.Textarea @for="beschrijving">
+            {{t "manageAgendaZittingModal.beschrijvingLabel"}}
+          </Form.Textarea>
 
 
-        <label class="form__label form__label--block u-spacer--tiny">
-          {{t "manageAgendaZittingModal.geplandOpenbaar"}}
-        </label>
+          <label class="form__label form__label--block u-spacer--tiny">
+            {{t "manageAgendaZittingModal.geplandOpenbaar"}}
+          </label>
 
-        <Form.Radio @for="geplandOpenbaar" @name="plannedPublic" as |Radio|>
-          <Radio.Option @value={{true}}
-          >
-            <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
-          </Radio.Option>
-          <Radio.Option @value={{false}}
-          >
-            <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
-          </Radio.Option>
-        </Form.Radio>
+          <Form.Radio @for="geplandOpenbaar" @name="plannedPublic" as |Radio|>
+            <Radio.Option @value={{true}}
+            >
+              <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
+            </Radio.Option>
+            <Radio.Option @value={{false}}
+            >
+              <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
+            </Radio.Option>
+          </Form.Radio>
 
-        {{#if (gt @agendaItems.length 1)}}
-          <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}}>
-            {{t "manageAgendaZittingModalMove.title"}}
-          </Form.SelectLocation>
-        {{/if}}
-        {{#unless this.isNew}}
-        {{!-- TODO: don't allow delete on published agendapoints  --}}
-          <AgendaManager::Delete @onDelete={{fn (perform this.deleteTask) @itemToEdit}} />
-        {{/unless}}
-      </div>
+          {{#if (gt @agendaItems.length 1)}}
+            <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}}>
+              {{t "manageAgendaZittingModalMove.title"}}
+            </Form.SelectLocation>
+          {{/if}}
+          {{#unless this.isNew}}
+          {{!-- TODO: don't allow delete on published agendapoints  --}}
+            <AgendaManager::Delete @onDelete={{fn (perform this.deleteTask) @itemToEdit}} @loading={{this.deleteTask.isRunning}}/>
+          {{/unless}}
+        </div>
+      {{/if}}
     </Modal.Body>
     <Modal.Footer>
       <AuButtonGroup>

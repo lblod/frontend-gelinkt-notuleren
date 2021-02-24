@@ -1,8 +1,12 @@
 import Component from '@glimmer/component';
-import {task, TrackedArray} from "ember-concurrency-decorators";
+import {task} from "ember-concurrency-decorators";
 import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
 import {action} from '@ember/object';
+
+const DRAFT_STATUS_ID = "a1974d071e6a47b69b85313ebdcef9f7";
+const SCHEDULED_STATUS_ID = "7186547b61414095aa2a4affefdcca67";
+const PUBLISHED_STATUS_ID = "ef8e4e331c31430bbdefcdb2bdfbcc06";
 
 export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
@@ -41,36 +45,49 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
   @task
   * saveItemTask(item) {
+    debugger;
     const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
+    const treatment = yield item.behandeling;
+    if (treatment) {
+      const container = yield treatment.documentContainer;
+      yield container.save();
+      yield treatment.save();
+    }
+
     if (item.isNew) {
       item.zitting = zitting;
-      const position = item.position ?? this.items.length;
-      this.items.splice(position, 0, item);
-      yield this.savePositionsTask.perform();
+      this.items.push(item);
     }
-    const treatment = yield item.behandeling;
+    this.repositionItem(item);
+    yield this.savePositionsTask.perform();
+
     if (!treatment) {
       const newTreatment = this.createBehandeling(item);
       yield newTreatment.save();
       item.behandeling = newTreatment;
+    } else {
+      const container = yield item.get("behandeling.documentContainer");
+      const status = yield container.get("status");
+      if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
+        // it's not published, so we set the status
+        container.status = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
+      }
+      yield container.save();
+
     }
     yield item.save();
-    yield this.saveItemsTask.perform();
-  }
-
-  @task
-  * saveItemsTask() {
-    const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
-    zitting.agendapunten = this.items;
-    yield zitting.save();
     yield this.args.onSave();
+    // yield this.saveItemsTask.perform();
+  }
+  repositionItem(item) {
+    if(item.changedAttributes()["position"]) {
+      const [oldPos, newPos] = item.changedAttributes()["position"];
+      const position = newPos ?? this.items.length;
+      this.items.splice(oldPos, 1);
+      this.items.splice(position, 0, item);
+    }
   }
 
-  @task
-  * loadStatusesTask() {
-    this.conceptStatus = yield this.store.findRecord('concept', 'a1974d071e6a47b69b85313ebdcef9f7');
-    this.geagendeerdStatus = yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
-  }
 
   /**
    * Create a new agenda item
@@ -82,14 +99,19 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     item.titel = "";
     item.beschrijving = "";
     item.geplandOpenbaar = true;
-    const treatment = this.createBehandeling(item);
-    item.behandeling = treatment;
+    item.behandeling = this.createBehandeling(item);
     return item;
   }
 
-
+  @action
   createBehandeling(agendapunt) {
-    const behandeling = this.store.createRecord("behandeling-van-agendapunt");
+    const documentContainer = this.store.createRecord("document-container");
+    const behandeling = this.store.createRecord("behandeling-van-agendapunt",
+      {
+        openbaar: agendapunt.geplandOpenbaar,
+        onderwerp: agendapunt,
+        documentContainer
+      });
     behandeling.openbaar = agendapunt.geplandOpenbaar;
     behandeling.onderwerp = agendapunt;
     return behandeling;
@@ -103,20 +125,33 @@ export default class AgendaManagerAgendaContextComponent extends Component {
   * deleteItemTask(item) {
     const index = this.items.indexOf(item);
     this.items.splice(index, 1);
-    item.deleteRecord();
-    yield item.save();
-    yield this.saveItemsTask.perform();
+    const behandeling = yield item.behandeling;
+    if (behandeling) {
+      const container = yield behandeling.documentContainer;
+      if (container) {
+        container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
+        yield container.save();
+      }
+
+      yield behandeling.destroyRecord();
+    }
+    yield item.destroyRecord();
+    yield this.args.onSave();
   }
 
   @task
   * onSortTask() {
     yield this.savePositionsTask.perform();
-    yield this.saveItemsTask.perform();
+    yield this.args.onSave();
   }
+
   @task
   * savePositionsTask() {
+    let previous = null;
     for (const [index, item] of this.items.entries()) {
       item.position = index;
+      item.vorigeAgendapunt = previous;
+      previous = item;
       yield item.save();
     }
 

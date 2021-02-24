@@ -5,13 +5,9 @@ import {task} from "ember-concurrency-decorators";
 export default class AgendaManagerEditComponent extends Component {
 
 
-  @action
-  async toggleGeplandOpenbaar() {
-    this.args.agendapunt.geplandOpenbaar = !this.args.agendapunt.geplandOpenbaar;
-  }
 
   get isNew() {
-    return this.args.item && this.args.item.isNew;
+    return this.args.itemToEdit && this.args.itemToEdit.isNew;
   }
   @task
   * submitTask(item) {

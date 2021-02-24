@@ -4,9 +4,9 @@ import { action } from '@ember/object';
 
 export default class AgendaManagerAgendaItemFormSelectLocationComponent extends Component {
   @tracked locationOptions = [
-    { code: 'start', name: 'Vooraan in agenda-manager' },
+    { code: 'start', name: 'Vooraan in agenda' },
     { code: 'after', name: 'Na agendapunt' },
-    { code: 'end', name: 'Achteraan in agenda-manager' }
+    { code: 'end', name: 'Achteraan in agenda' }
   ];
   @tracked selectedLocation;
   @tracked selectedAfterItem;
@@ -18,7 +18,7 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
   }
 
   get afterItemOptions() {
-    return this.args.agendaItems;
+    return this.args.agendaItems.sortBy("position");
   }
 
   @action selectLocation(value) {
@@ -32,7 +32,7 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
   }
   @action selectAfterItem(value) {
     this.selectedAfterItem = value;
-    this.args.model[this.args.for] = value.position + 1;
+    this.args.model[this.args.for] = value.position;
   }
 
 

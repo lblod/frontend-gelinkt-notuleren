@@ -1,28 +1,23 @@
-<tr>
-  <DraggableObject @tagName="tr" @content={{@item}} @isSortable={{true}}>
-    <td>
-      <AuButton
-              @isTiny={{true}}
-              @isLink={{true}}
-              @isNarrow={{true}}>
+<DraggableObject @tagName="tr" @content={{@item}} @isSortable={{true}}>
+  <td>
+    <AuButton>
                 <span style="cursor:pointer">
                   <i class="fa fa-bars"></i>
                 </span>
+    </AuButton>
+  </td>
+  <td>
+    <p>{{@item.titel}}</p>
+  </td>
+  <td>
+    {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
+         (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
+  </td>
+  <td class="au-u-table-right">
+    <AuButtonGroup>
+      <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
+        {{t "manageAgendaZittingModal.editItemButton"}}
       </AuButton>
-    </td>
-    <td>
-      <p>{{@item.titel}}</p>
-    </td>
-    <td>
-      {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
-           (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
-    </td>
-    <td>
-      <AuButtonGroup>
-        <AuButton {{on "click" @edit}}>
-          <i class="vi vi-edit"></i> {{t "manageAgendaZittingModal.editItemButton"}}
-        </AuButton>
-      </AuButtonGroup>
-    </td>
-  </DraggableObject>
-</tr>
+    </AuButtonGroup>
+  </td>
+</DraggableObject>

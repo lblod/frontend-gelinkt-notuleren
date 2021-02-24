@@ -24,6 +24,7 @@
       <AuButton
                 @disabled={{not this.hasAgreed}}
                 class="button button--alt button--alt--warning button--narrow"
+                @loading={{@loading}}
                 {{on "click" @onDelete}} >
           {{t "manageAgendaZittingModalDelete.deleteButton"}}
       </AuButton>
