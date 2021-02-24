@@ -107,9 +107,12 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     yield this.saveItemsTask.perform();
   }
 
-  @action onSort() {
-    this.items.forEach((item, index) => {
+  @task
+  * onSortTask() {
+    for (const [index, item] of this.items.entries()) {
       item.position = index;
-    });
+      yield item.save();
+    }
+    yield this.saveItemsTask.perform();
   }
 }
