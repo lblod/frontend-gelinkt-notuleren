@@ -1,5 +1,5 @@
 <AgendaManager::AgendaItemForm
-        @model={{@item}}
+        @model={{@itemToEdit}}
         @onSubmit={{perform this.submitTask}}
         as |Form|>
   <AuModal @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
@@ -15,9 +15,7 @@
       <div class="u-padding--round--small">
         {{#if this.isNew}}
           <div class="au-u-padding-top">
-            <Form.SelectDraft
-                    @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}
-            >
+            <Form.SelectDraft @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}>
               {{t "manageAgendaZittingModalDraftImport.title"}}
             </Form.SelectDraft>
           </div>
@@ -47,21 +45,14 @@
           </Radio.Option>
         </Form.Radio>
 
-        {{#if (gt @agendapunten.length 1)}}
-          <AgendaManager::Move
-                  @afterAgendapuntOptions={{@afterAgendapuntOptions}}
-                  @agendapunt={{@agendapunt}}
-                  @agendapunten={{@agendapunten}}
-                  @selectedLocation={{@selectedLocation}}
-                  @showAfterAgendapuntOptions={{@showAfterAgendapuntOptions}}
-                  @selectedAfterAgendapunt={{@selectedAfterAgendapunt}}
-                  @selectAfterAgendapunt={{@selectAfterAgendapunt}}
-                  @selectLocation={{@selectLocation}}
-          />
+        {{#if (gt @agendaItems.length 1)}}
+          <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}}>
+            {{t "manageAgendaZittingModalMove.title"}}
+          </Form.SelectLocation>
         {{/if}}
         {{#unless this.isNew}}
         {{!-- TODO: don't allow delete on published agendapoints  --}}
-          <AgendaManager::Delete @onDelete={{fn (perform this.deleteTask) @item}} />
+          <AgendaManager::Delete @onDelete={{fn (perform this.deleteTask) @itemToEdit}} />
         {{/unless}}
       </div>
     </Modal.Body>

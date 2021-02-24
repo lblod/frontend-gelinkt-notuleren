@@ -44,6 +44,9 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
     if (item.isNew) {
       item.zitting = zitting;
+      const position = item.position ?? this.items.length;
+      this.items.splice(position, 0, item);
+      yield this.savePositionsTask.perform();
     }
     const treatment = yield item.behandeling;
     if (!treatment) {
@@ -79,10 +82,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     item.titel = "";
     item.beschrijving = "";
     item.geplandOpenbaar = true;
-    item.position = this.items.length;
     const treatment = this.createBehandeling(item);
     item.behandeling = treatment;
-    this.items.push(item);
     return item;
   }
 
@@ -109,10 +110,15 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
   @task
   * onSortTask() {
+    yield this.savePositionsTask.perform();
+    yield this.saveItemsTask.perform();
+  }
+  @task
+  * savePositionsTask() {
     for (const [index, item] of this.items.entries()) {
       item.position = index;
       yield item.save();
     }
-    yield this.saveItemsTask.perform();
+
   }
 }

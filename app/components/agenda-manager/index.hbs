@@ -25,11 +25,12 @@
 
   </div>
   <AgendaManager::Edit @visible={{this.editModalVisible}}
-                       @item={{this.itemToEdit}}
+                       @itemToEdit={{this.itemToEdit}}
                        @saveTask={{agenda.saveItemTask}}
                        @onClose={{this.closeModal}}
                        @deleteTask={{agenda.deleteItemTask}}
                        @onCancel={{this.closeModal}}
+                       @agendaItems={{agenda.items}}
   />
 
 </AgendaManager::AgendaContext>
