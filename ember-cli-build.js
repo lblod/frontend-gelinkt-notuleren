@@ -2,7 +2,7 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-babel': {
       includePolyfill: true
@@ -11,13 +11,13 @@ module.exports = function(defaults) {
       enabled: false
     },
     'ember-cli-terser': {
-      enabled: true,
+      enabled: false,
       exclude: ['vendor.js', 'assets/vendor.js'],
       terser: {
         compress: {
           collapse_vars: false
-        }
-      }
+        },
+      },
     },
     sassOptions: {
       sourceMapEmbed: true,
@@ -34,7 +34,14 @@ module.exports = function(defaults) {
     flatpickr: {
       locales: ['nl'],
       theme: 'light'
-    }
+    },
+    sourcemaps: {
+      enabled: true,
+      extensions: ['js']
+    },
+    babel: {
+      sourceMaps: 'inline'
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated

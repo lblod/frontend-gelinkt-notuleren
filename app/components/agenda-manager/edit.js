@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
+import {task} from "ember-concurrency-decorators";
 
 export default class AgendaManagerEditComponent extends Component {
   // @tracked isEditMode = false;
@@ -16,11 +17,11 @@ export default class AgendaManagerEditComponent extends Component {
   }
 
   get isNew() {
-    return this.args.item.isNew;
+    return this.args.item && this.args.item.isNew;
   }
-  @action
-  save() {
-    this.args.onSave();
+  @task
+  * submit(item) {
+    yield this.args.saveTask.perform(item);
     this.args.onClose();
   }
   @action

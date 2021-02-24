@@ -1,0 +1,17 @@
+<label class="form__label">
+  {{yield}}
+</label>
+<PowerSelect
+        @class="select select--block u-spacer--tiny"
+        @renderInPlace={{true}}
+        @placeholder={{@placeholder}}
+        @options={{this.options}}
+        @verticalPosition="above"
+        @searchEnabled={{true}}
+        @selected={{this.selected}}
+        @allowClear={{true}}
+        @search={{perform this.getDrafts}}
+        @onchange={{this.select}}
+        as |option|>
+  {{option.currentVersion.title}}
+</PowerSelect>

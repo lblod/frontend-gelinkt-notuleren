@@ -35,8 +35,8 @@ export default class AgendaManagerIndexComponent extends Component {
   }
 
   @action
-  createItem() {
-    const newItem = this.agendaData.createItem();
+  createItem(newItemFactory) {
+    const newItem = newItemFactory();
     this.editItem(newItem);
   }
   @action

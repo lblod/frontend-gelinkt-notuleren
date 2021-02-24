@@ -1,18 +1,18 @@
 import Component from '@glimmer/component';
-import {task} from "ember-concurrency-decorators";
+import {task, TrackedArray} from "ember-concurrency-decorators";
 import {inject as service} from '@ember/service';
-import {tracked} from '@glimmer/tracking';
+import {tracked} from 'tracked-built-ins';
 import {action} from '@ember/object';
 
 export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
+  @tracked _newItem;
   items = tracked([]);
 
   constructor(...args) {
     super(...args);
     this.loadItemsTask.perform();
   }
-
 
   @task
   * loadItemsTask() {
@@ -36,12 +36,31 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       pageResults.forEach(result => agendaItems.push(result));
       pageNumber++;
     }
-    this.items = agendaItems.sortBy('position');
+    this.items = tracked(agendaItems.sortBy('position'));
+  }
+
+  @task
+  * saveItemTask(item) {
+    const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
+    if (item.isNew) {
+      item.zitting = zitting;
+    }
+    const treatment = yield item.behandeling;
+    if (!treatment) {
+      const newTreatment = this.createBehandeling(item);
+      yield newTreatment.save();
+      item.behandeling = newTreatment;
+    }
+    yield item.save();
+    yield this.saveItemsTask.perform();
   }
 
   @task
   * saveItemsTask() {
-
+    const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
+    zitting.agendapunten = this.items;
+    yield zitting.save();
+    yield this.args.onSave();
   }
 
   @task
@@ -50,29 +69,29 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     this.geagendeerdStatus = yield this.store.findRecord('concept', '7186547b61414095aa2a4affefdcca67');
   }
 
-  @action
   /**
    * Create a new agenda item
    * @return {Agendapunt} the newly created item
    */
+  @action
   createItem() {
     const item = this.store.createRecord("agendapunt");
     item.titel = "";
     item.beschrijving = "";
     item.geplandOpenbaar = true;
     item.position = this.items.length;
+    const treatment = this.createBehandeling(item);
+    item.behandeling = treatment;
     this.items.push(item);
     return item;
   }
 
-  @action
-  createBehandeling(agendapunt) {
 
-    if(!agendapunt.behandeling.content){
-      const behandeling = this.store.createRecord("behandeling-van-agendapunt");
-      behandeling.openbaar = agendapunt.geplandOpenbaar;
-      behandeling.onderwerp = agendapunt;
-    }
+  createBehandeling(agendapunt) {
+    const behandeling = this.store.createRecord("behandeling-van-agendapunt");
+    behandeling.openbaar = agendapunt.geplandOpenbaar;
+    behandeling.onderwerp = agendapunt;
+    return behandeling;
   }
 
   @action

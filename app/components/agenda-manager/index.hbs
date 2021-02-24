@@ -1,11 +1,11 @@
-<AgendaManager::AgendaContext @zittingId={{@zittingId}} as |agenda|>
+<AgendaManager::AgendaContext @zittingId={{@zittingId}} @onSave={{@onSave}} as |agenda|>
   <div class="au-c-meeting-chrome-card">
     {{#if agenda.loadItemsTask.isRunning}}
       <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
     {{else}}
       <AgendaManager::AgendaTable
               @onSort={{agenda.onSort}}
-              @onCreate={{fn this.editItem}}
+              @onCreate={{fn this.createItem agenda.createItem}}
               @items={{agenda.items}}
               as |Table|>
         <Table.Header/>
@@ -26,7 +26,7 @@
   </div>
   <AgendaManager::Edit @visible={{this.editModalVisible}}
                        @item={{this.itemToEdit}}
-                       @onSave={{perform agenda.saveItemsTask}}
+                       @saveTask={{agenda.saveItemTask}}
                        @onClose={{this.closeModal}}
                        @onCancel={{this.closeModal}}
   />
