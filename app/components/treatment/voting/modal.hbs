@@ -7,7 +7,7 @@
     @disableButtons={{this.disableButtons}}
   />
 {{/if}}
-<table class="data-table data-table--lined data-table--zebra">
+<table class="au-c-meeting-chrome-table">
   <thead>
     <tr>
       <th style="max-width: 30rem;">
@@ -22,22 +22,16 @@
       <th style="max-width: 30rem;">
         {{t "votingModal.gevolgLabel"}}
       </th>
-      <th>
-        <div class="grid">
-          <div class="col--4-12">
-            {{t "votingModal.actionsLabel"}}
-          </div>
-          <div class="col--8-12 u-align--right">
-            <AuButton
-              {{on "click" (perform this.addStemming)}}
-              @icon="add"
-              @iconAlignment="left"
-              @loading={{this.addStemming.isRunning}}
-            >
-              {{t "votingModal.createVotingButton"}}
-            </AuButton>
-          </div>
-        </div>
+      <th class="au-u-table-right">
+        <span class="au-u-hidden-visually">{{t "votingModal.actionsLabel"}}</span>
+        <AuButton
+          {{on "click" (perform this.addStemming)}}
+          @icon="add"
+          @iconAlignment="left"
+          @loading={{this.addStemming.isRunning}}
+        >
+          {{t "votingModal.createVotingButton"}}
+        </AuButton>
       </th>
     </tr>
   </thead>
@@ -49,39 +43,41 @@
             {{#if stemming.onderwerp}}
               {{stemming.onderwerp}}
             {{else}}
-              <i class="text-fade">
+              <AuHelpText @size="normal" @skin="tertiary">
                 {{t "votingModal.subjectNotFound"}}
-              </i>
+              </AuHelpText>
             {{/if}}
           </td>
           <td>
             {{#if stemming.geheim}}
-              {{t "votingModal.geheimTrueLabel"}}
+              <AuHelpText @size="normal">
+                {{t "votingModal.geheimTrueLabel"}}
+              </AuHelpText>
             {{else}}
-              {{t "votingModal.geheimFalseLabel"}}
+              <AuHelpText @size="normal">
+                {{t "votingModal.geheimFalseLabel"}}
+              </AuHelpText>
             {{/if}}
           </td>
           <td>
-            <p>
-              {{t "votingModal.aantalVoorstandersLabel"}} {{stemming.aantalVoorstanders}}
+            <p class="au-c-help-text au-c-help-text--normal">
+              {{t "votingModal.aantalVoorstandersLabel"}} <strong>{{stemming.aantalVoorstanders}}</strong>
             </p>
-            <p>
-              {{t "votingModal.aantalTegenstandersLabel"}} {{stemming.aantalTegenstanders}}
+            <p class="au-c-help-text au-c-help-text--normal">
+              {{t "votingModal.aantalTegenstandersLabel"}} <strong>{{stemming.aantalTegenstanders}}</strong>
             </p>
-            <p>
-              {{t "votingModal.aantalOnthoudersLabel"}} {{stemming.aantalOnthouders}}
+            <p class="au-c-help-text au-c-help-text--normal">
+              {{t "votingModal.aantalOnthoudersLabel"}} <strong>{{stemming.aantalOnthouders}}</strong>
             </p>
           </td>
           <td style="max-width: 30rem;">
             {{#if stemming.gevolg}}
               {{stemming.gevolg}}
             {{else}}
-              <i class="text-fade">
-                {{t "votingModal.gevolgNotFound"}}
-              </i>
+              <AuHelpText @size="normal" @skin="tertiary">{{t "votingModal.gevolgNotFound"}}</AuHelpText>
             {{/if}}
           </td>
-          <td>
+          <td class="au-u-table-right">
             <AuButtonGroup>
               <AuButton
                 {{on "click" (fn this.toggleEditStemming stemming)}}
@@ -104,10 +100,10 @@
         </tr>
       {{else}}
         <tr>
-          <td colspan="5" style="background-color: white; height: 10rem;">
-            <p class="text-fade">
+          <td colspan="5">
+            <AuHelpText @size="normal" @skin="tertiary">
               {{t "votingModal.noDataMessage"}}
-            </p>
+            </AuHelpText>
           </td>
         </tr>
       {{/each}}

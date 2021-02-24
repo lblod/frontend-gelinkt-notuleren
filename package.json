@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -24,14 +24,14 @@
   },
   "devDependencies": {
     "@appuniversum/appuniversum": "0.0.14",
-    "@appuniversum/ember-appuniversum": "0.1.4",
+    "@appuniversum/ember-appuniversum": "0.1.7",
     "@ember/optional-features": "^1.3.0",
     "@ember/render-modifiers": "^1.0.2",
     "@glimmer/component": "^1.0.1",
     "@glimmer/tracking": "^1.0.0",
     "@lblod/ember-acmidm-login": "^0.2.1",
     "@lblod/ember-mock-login": "^0.4.5",
-    "@lblod/ember-rdfa-editor": "^0.42.0-rc1.3",
+    "@lblod/ember-rdfa-editor": "^0.42.0-rc1.4",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.1.7",
     "@lblod/ember-rdfa-editor-citaten-plugin": "0.11.4",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "0.3.2",

@@ -21,11 +21,6 @@
   </AuToolbar>
   <AuToolbar @size="small" class="au-u-padding-top-none">
     <AuToolbarGroup>
-      {{!-- <div>
-        <AuPill @skin="action">
-          Concept
-        </AuPill>
-      </div> --}}
       <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
@@ -34,7 +29,7 @@
           {{t "meetingForm.publishButton"}}
         </AuButton>
       {{else}}
-          <span>
+        <span>
           <AuIcon @icon="info-circle"/>
             {{t "meetingForm.incompleteWarning"}}
         </span>
@@ -70,15 +65,15 @@
             <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
           {{/if}}
           {{#if this.fetchTreatments.lastSuccessful}}
-            <ul class="au-c-list-divider">
+            <ol class="au-c-list-numbered">
               {{#each this.behandelingen as |behandeling|}}
-                <li class="au-c-list-divider__item">
+                <li class="au-c-list-numbered__item">
                   <a href="#behandeling-{{behandeling.id}}" class="au-c-link au-c-link--secondary">
                     {{behandeling.onderwerp.titel}}
                   </a>
                 </li>
               {{/each}}
-            </ul>
+            </ol>
           {{/if}}
         </li>
       {{/unless}}
@@ -86,8 +81,11 @@
   </div>
   <div class="au-c-meeting-chrome">
     <div class="au-c-meeting-chrome__paper">
+      {{!-- Meeting title --}}
       <AuHeading>{{t "meetingForm.meetingHeadingPartOne"}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</span>, {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span></AuHeading>
       <AuHr @size="large"/>
+
+      {{!-- General Information --}}
       <AuHeading id="sectionOne" @level="2" @skin="3" class="au-c-onboarding-wrapper">
         {{t "meetingForm.firstSectionTitle"}}
         <span class="au-c-onboarding">
@@ -100,12 +98,15 @@
         @onCreate={{@onCreateMeeting}}
         @onChange={{this.meetingInfoUpdate}}
       />
+
       {{#if this.bestuursorgaan}}
         {{#if this.loadData.isRunning}}
-          <p>{{t "participationList.loadingTitle"}}</p>
-          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
+          <AuLoader @size="small" />
+          <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
         {{else}}
-          <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+
+          {{!-- Participation list --}}
+          <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.secondSectionTitle"}}
             <span class="au-c-onboarding">
               <AuIcon @icon="info-circle"/>
@@ -124,7 +125,8 @@
             @modalTitle={{t "participationList.openModalButton"}}
           />
 
-          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+          {{!-- Agenda --}}
+          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.thirdSectionTitle"}}
             <span class="au-c-onboarding">
               <AuIcon @icon="info-circle"/>
@@ -132,7 +134,9 @@
             </span>
           </AuHeading>
           <AgendaManager @zittingId={{@zitting.id}} @onSave={{perform this.fetchTreatments}} />
-          <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper">
+
+          {{!-- Treatment of agenda --}}
+          <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.fourthSectionTitle"}}
             <span class="au-c-onboarding">
               <AuIcon @icon="info-circle"/>
@@ -140,11 +144,14 @@
             </span>
           </AuHeading>
           {{#if this.fetchTreatments.isRunning}}
-            <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+            <AuLoader @size="small" />
+            <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
           {{/if}}
+
           {{#if this.fetchTreatments.lastSuccessful}}
+            <ol class="au-c-meeting-numbered-list">
             {{#each this.behandelingen as |behandeling|}}
-              <div>
+              <li>
                 <BehandelingVanAgendapunt
                   @possibleParticipants={{this.possibleParticipants}}
                   @defaultParticipants={{this.aanwezigenBijStart}}
@@ -154,12 +161,13 @@
                   @bestuursorgaan={{this.zitting.bestuursorgaan}}
                   @meeting={{this.zitting}}
                 />
-              </div>
+              </li>
             {{/each}}
+            </ol>
           {{/if}}
         {{/if}}
       {{else}}
-        <AuHelpText @skin="secondary">
+        <AuHelpText @size="large" @skin="secondary">
           {{t "meetingForm.bestuursorganNotSelectedWarning"}}
         </AuHelpText>
       {{/if}}
