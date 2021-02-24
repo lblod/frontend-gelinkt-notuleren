@@ -11,7 +11,6 @@ module.exports = function (defaults) {
       enabled: false
     },
     'ember-cli-terser': {
-      enabled: false,
       exclude: ['vendor.js', 'assets/vendor.js'],
       terser: {
         compress: {
