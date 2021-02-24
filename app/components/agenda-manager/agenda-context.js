@@ -94,14 +94,17 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     return behandeling;
   }
 
-  @action
   /**
    * Delete an agenda item
    * @param {Agendapunt} item the item to be deleted
    */
-  deleteItem(item) {
+  @task
+  * deleteItemTask(item) {
     const index = this.items.indexOf(item);
     this.items.splice(index, 1);
+    item.deleteRecord();
+    yield item.save();
+    yield this.saveItemsTask.perform();
   }
 
   @action onSort() {

@@ -11,5 +11,10 @@ export default class AgendaManagerDeleteComponent extends Component {
   toggleWarning(){
     this.isShowingWarning=!this.isShowingWarning;
   }
+  @action
+  reset() {
+    this.isShowingWarning = false;
+    this.hasAgreed = false;
+  }
 
 }

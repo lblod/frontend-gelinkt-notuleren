@@ -1,41 +1,41 @@
 <div class="u-padding--round--small u-background--gray-lightest u-spacer--tb--large">
   <h3 class="h5 u-spacer--tiny">{{t "manageAgendaZittingModalDelete.modalSubtitle"}}</h3>
   <p class="small u-spacer--small">
-    <strong>{{t "manageAgendaZittingModalDelete.warningPartOne"}}</strong> {{t "manageAgendaZittingModalDelete.warningPartTwo"}}
+    <strong>{{t "manageAgendaZittingModalDelete.warningPartOne"}}</strong> {{t
+          "manageAgendaZittingModalDelete.warningPartTwo"}}
   </p>
 
-  {{#if isShowingWarning}}
+  {{#if this.isShowingWarning}}
     <div class="u-hr u-spacer"></div>
     <div class="u-spacer--top--tiny" id="isShowingWarning-verwijder-agendapunt">
       <div class="u-spacer">
         <p class="small"><strong>{{t "manageAgendaZittingModalDelete.agreeQuestion"}}</strong></p>
         <label class="checkbox checkbox--block">
-          {{input class="checkbox__toggle" type="checkbox" checked=this.hasAgreed}}
+          <Input class="checkbox__toggle" @type="checkbox" @checked={{this.hasAgreed}} />
           <span></span>
           <span>{{t "manageAgendaZittingModalDelete.checkboxLabel"}}</span>
         </label>
       </div>
 
-      {{#wu-button
-           onClick=@cancelEditing
-           class="button button--alt button--narrow"}}
+      <AuButton class="button button--alt button--narrow" {{on "click" this.reset}} >
         {{t "manageAgendaZittingModalDelete.toggleEditButton"}}
-      {{/wu-button}}
+      </AuButton>
       <span></span>
-      {{#wu-button
-           onClick=@delete
-           disabled=(if this.hasAgreed false true)
-           class="button button--alt button--alt--warning button--narrow"}}
-        {{t "manageAgendaZittingModalDelete.deleteButton"}}
-      {{/wu-button}}
+      <AuButton
+                @disabled={{not this.hasAgreed}}
+                class="button button--alt button--alt--warning button--narrow"
+                {{on "click" @onDelete}} >
+          {{t "manageAgendaZittingModalDelete.deleteButton"}}
+      </AuButton>
     </div>
   {{else}}
     <div>
-      {{#wu-button
-           onClick=this.toggleWarning
-           class="button button--alt button--alt--warning button--narrow"}}
+    <AuButton
+              class="button button--alt button--alt--warning button--narrow"
+              {{on "click" this.toggleWarning}} >
         {{t "manageAgendaZittingModalDelete.toggleWarningButton"}}
-      {{/wu-button}}
+    </AuButton>
+
     </div>
   {{/if}}
 </div>

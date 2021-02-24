@@ -1,6 +1,6 @@
 <AgendaManager::AgendaItemForm
         @model={{@item}}
-        @onSubmit={{perform this.submit}}
+        @onSubmit={{perform this.submitTask}}
         as |Form|>
   <AuModal @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
            @modalOpen={{@visible}}
@@ -61,8 +61,7 @@
         {{/if}}
         {{#unless this.isNew}}
         {{!-- TODO: don't allow delete on published agendapoints  --}}
-          <AgendaManager::Delete @delete={{@delete}} @cancelEditing={{@cancelEditing}} @agendapunt={{@agendapunt}}
-                                 @afterSave={{@afterSave}} @zitting={{@zitting}}/>
+          <AgendaManager::Delete @onDelete={{fn (perform this.deleteTask) @item}} />
         {{/unless}}
       </div>
     </Modal.Body>
