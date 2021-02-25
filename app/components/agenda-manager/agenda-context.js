@@ -2,11 +2,8 @@ import Component from '@glimmer/component';
 import {task} from "ember-concurrency-decorators";
 import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
-import {action} from '@ember/object';
+import {DRAFT_STATUS_ID, PUBLISHED_STATUS_ID, SCHEDULED_STATUS_ID} from "../../utils/constants";
 
-const DRAFT_STATUS_ID = "a1974d071e6a47b69b85313ebdcef9f7";
-const SCHEDULED_STATUS_ID = "7186547b61414095aa2a4affefdcca67";
-const PUBLISHED_STATUS_ID = "ef8e4e331c31430bbdefcdb2bdfbcc06";
 
 export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
@@ -45,14 +42,9 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
   @task
   * saveItemTask(item) {
-    debugger;
     const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
     const treatment = yield item.behandeling;
-    if (treatment) {
-      const container = yield treatment.documentContainer;
-      yield container.save();
-      yield treatment.save();
-    }
+    yield treatment.saveAndPersistDocument();
 
     if (item.isNew) {
       item.zitting = zitting;
@@ -61,26 +53,21 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     this.repositionItem(item);
     yield this.savePositionsTask.perform();
 
-    if (!treatment) {
-      const newTreatment = this.createBehandeling(item);
-      yield newTreatment.save();
-      item.behandeling = newTreatment;
-    } else {
-      const container = yield item.get("behandeling.documentContainer");
-      const status = yield container.get("status");
-      if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
-        // it's not published, so we set the status
-        container.status = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
-      }
-      yield container.save();
-
+    const container = yield treatment.get("documentContainer");
+    const status = yield container.get("status");
+    if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
+      // it's not published, so we set the status
+      container.status = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
     }
+    yield container.save();
+
     yield item.save();
     yield this.args.onSave();
     // yield this.saveItemsTask.perform();
   }
+
   repositionItem(item) {
-    if(item.changedAttributes()["position"]) {
+    if (item.changedAttributes()["position"]) {
       const [oldPos, newPos] = item.changedAttributes()["position"];
       const position = newPos ?? this.items.length;
       this.items.splice(oldPos, 1);
@@ -93,27 +80,25 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * Create a new agenda item
    * @return {Agendapunt} the newly created item
    */
-  @action
-  createItem() {
-    const item = this.store.createRecord("agendapunt");
-    item.titel = "";
-    item.beschrijving = "";
-    item.geplandOpenbaar = true;
-    item.behandeling = this.createBehandeling(item);
+  @task
+  * createItemTask() {
+    const item = this.store.createRecord("agendapunt", {
+      titel: "",
+      beschrijving: "",
+      geplandOpenbaar: true,
+    });
+    item.behandeling = yield this.createBehandelingTask.perform(item);
     return item;
   }
 
-  @action
-  createBehandeling(agendapunt) {
-    const documentContainer = this.store.createRecord("document-container");
+  @task
+  * createBehandelingTask(agendapunt) {
     const behandeling = this.store.createRecord("behandeling-van-agendapunt",
       {
         openbaar: agendapunt.geplandOpenbaar,
         onderwerp: agendapunt,
-        documentContainer
       });
-    behandeling.openbaar = agendapunt.geplandOpenbaar;
-    behandeling.onderwerp = agendapunt;
+    yield behandeling.initializeDocument();
     return behandeling;
   }
 

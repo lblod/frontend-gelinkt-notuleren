@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import {inject as service} from '@ember/service';
 import {tracked} from '@glimmer/tracking';
 import {action} from '@ember/object';
+import {task} from "ember-concurrency-decorators";
 
 /** @typedef {import("./AgendaData").default} AgendaData */
 
@@ -34,9 +35,9 @@ export default class AgendaManagerIndexComponent extends Component {
     this.editModalVisible = false;
   }
 
-  @action
-  createItem(newItemFactory) {
-    const newItem = newItemFactory();
+  @task
+  * createItemTask(newItemTask) {
+    const newItem = yield newItemTask.perform();
     this.editItem(newItem);
   }
   @action
