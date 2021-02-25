@@ -1,7 +1,4 @@
-<label class="form__label form__label--block u-spacer--small" for="agendapunt-bewerk">
-  {{yield}}
-  <Textarea
-          @class="textarea textarea--block u-spacer--tiny"
-          @rows="4"
-          @value={{this.value}}/>
-</label>
+<p>
+  <AuLabel for={{@for}}>{{yield}}</AuLabel>
+  <AuTextarea id={{@for}} @value={{this.value}} @width="block"></AuTextarea>
+</p>

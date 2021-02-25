@@ -4,23 +4,22 @@
         as |Form|>
   <AuModal @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
            @modalOpen={{@visible}}
-           @size="fullscreen"
-           @closeModal={{this.cancel}} as |Modal|
+           @size="default"
+           @closeModal={{this.cancel}}
+           as |Modal|
   >
     <Modal.Body>
       {{#if this.submitTask.isRunning}}
-        <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+        <AuLoader />
+        <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
       {{else}}
-        <div class="u-padding--round--small u-background--gray-lightest">
-          <h2 class="h5">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</h2>
-        </div>
-        <div class="u-padding--round--small">
+        {{!-- <AuHeading @level="3" @skin="4">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</AuHeading>
+        <AuHr /> --}}
+        <div class="au-c-form">
           {{#if this.isNew}}
-            <div class="au-u-padding-top">
-              <Form.SelectDraft @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}>
-                {{t "manageAgendaZittingModalDraftImport.title"}}
-              </Form.SelectDraft>
-            </div>
+            <Form.SelectDraft @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}>
+              {{t "manageAgendaZittingModalDraftImport.title"}}
+            </Form.SelectDraft>
           {{/if}}
 
           <Form.Textarea @for="titel">
@@ -31,21 +30,23 @@
             {{t "manageAgendaZittingModal.beschrijvingLabel"}}
           </Form.Textarea>
 
-
-          <label class="form__label form__label--block u-spacer--tiny">
-            {{t "manageAgendaZittingModal.geplandOpenbaar"}}
-          </label>
-
-          <Form.Radio @for="geplandOpenbaar" @name="plannedPublic" as |Radio|>
-            <Radio.Option @value={{true}}
-            >
-              <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
-            </Radio.Option>
-            <Radio.Option @value={{false}}
-            >
-              <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
-            </Radio.Option>
-          </Form.Radio>
+          <div>
+            <AuLabel>
+              {{t "manageAgendaZittingModal.geplandOpenbaar"}}
+            </AuLabel>
+            <div class="au-c-radio-group">
+              <Form.Radio @for="geplandOpenbaar" @name="plannedPublic"  as |Radio|>
+                <Radio.Option @value={{true}}
+                >
+                  <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
+                </Radio.Option>
+                <Radio.Option @value={{false}}
+                >
+                  <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
+                </Radio.Option>
+              </Form.Radio>
+            </div>
+          </div>
 
           {{#if (gt @agendaItems.length 1)}}
             <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}}>

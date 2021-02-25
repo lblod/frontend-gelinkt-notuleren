@@ -1,8 +1,6 @@
-<div style="height:70vh; max-height:none;">
-  <table class="data-table">
-    {{yield (hash
-                    Header=(component "agenda-manager/agenda-table/header" onCreate=@onCreate )
-                    Body=(component "agenda-manager/agenda-table/body" items=@items onSort=@onSort onCreate=@onCreate )
-            )}}
-  </table>
-</div>
+<table class="au-c-meeting-chrome-table">
+  {{yield (hash
+    Header=(component "agenda-manager/agenda-table/header" onCreate=@onCreate )
+    Body=(component "agenda-manager/agenda-table/body" items=@items onSort=@onSort onCreate=@onCreate )
+  )}}
+</table>

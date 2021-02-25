@@ -1,7 +1,8 @@
 <AgendaManager::AgendaContext @zittingId={{@zittingId}} @onSave={{@onSave}} as |agenda|>
   <div class="au-c-meeting-chrome-card">
     {{#if agenda.loadItemsTask.isRunning}}
-      <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
+      <AuLoader />
+      <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
     {{else}}
       <AgendaManager::AgendaTable
               @onSort={{agenda.onSort}}

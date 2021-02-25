@@ -1,17 +1,13 @@
 <thead>
-<tr>
-  <th>{{t "manageAgendaZittingModal.orderLabel"}}</th>
-  <th style="width: 400px;">{{t "manageAgendaZittingModal.titleLabel"}}</th>
-  <th>{{t "manageAgendaZittingModal.geplandOpenbaar"}}</th>
-  <th>
-    <div class="grid">
-      <div class="col--2-12">{{t "manageAgendaZittingModal.actionsLabel"}}</div>
-      <div class="col--10-12 u-align-right">
-        <AuButton {{on "click" @onCreate}} @icon="add" @iconAlignment="left">
-          {{t "manageAgendaZittingModal.createItemButton"}}
-        </AuButton>
-      </div>
-    </div>
-  </th>
-</tr>
+  <tr>
+    <th>{{t "manageAgendaZittingModal.orderLabel"}}</th>
+    <th style="width: 400px;">{{t "manageAgendaZittingModal.titleLabel"}}</th>
+    <th>{{t "manageAgendaZittingModal.geplandOpenbaar"}}</th>
+    <th class="au-u-table-right">
+      <span class="au-u-hidden-visually">{{t "manageAgendaZittingModal.actionsLabel"}}</span>
+      <AuButton {{on "click" @onCreate}} @icon="add" @iconAlignment="left">
+        {{t "manageAgendaZittingModal.createItemButton"}}
+      </AuButton>
+    </th>
+  </tr>
 </thead>

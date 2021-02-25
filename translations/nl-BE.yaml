@@ -94,7 +94,7 @@ manageAgendaZitting:
   geplandOpenbaar: Gepland openbaar
   openModalButton: Beheer agenda
 manageAgendaZittingModal:
-  modalTitle: Beheer Agenda
+  modalTitle: Bewerk agendapunt
   saveButton: Bewaar agendapunt
   saveAllButton: Bewaar agenda
   cancelEditingButton: Annuleer

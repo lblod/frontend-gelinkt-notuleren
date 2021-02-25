@@ -1,8 +1,11 @@
-<label class="form__label">{{yield}}
-  <div class="grid">
-    <div class="col--6-12">
+<div class="au-u-margin-bottom">
+  <AuLabel>
+    {{yield}}
+  </AuLabel>
+  <div class="au-o-grid au-o-grid--tiny">
+    <div class="au-o-grid__item au-u-1-2">
       <PowerSelect
-              @class="select select--block u-spacer--tiny"
+              @class="select select--block"
               @renderInPlace={{true}}
               @placeholder={{t "manageAgendaZittingModalMove.positionSelectPlaceholder"}}
               @options={{this.locationOptions}}
@@ -16,9 +19,9 @@
       </PowerSelect>
     </div>
     {{#if this.showAfterItemOptions}}
-      <div class="col--6-12">
+      <div class="au-o-grid__item au-u-1-2">
         <PowerSelect
-                @class="js-select u-spacer--small"
+                @class="js-select"
                 @renderInPlace={{true}}
                 @placeholder={{t "manageAgendaZittingModalMove.agendapuntSelectPlaceholder"}}
                 @searchPlaceholder={{t "manageAgendaZittingModalMove.searchPlaceholder"}}
@@ -33,4 +36,4 @@
       </div>
     {{/if}}
   </div>
-</label>
+</div>

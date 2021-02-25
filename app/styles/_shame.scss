@@ -590,3 +590,10 @@ input.input-field {
     display: inline-flex;
   }
 }
+
+// Quick fix for radio groups
+.au-c-radio-group {
+  .au-c-control--radio {
+    margin-right: $au-unit-small;
+  }
+}
