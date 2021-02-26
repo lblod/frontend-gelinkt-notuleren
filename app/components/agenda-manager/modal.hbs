@@ -4,13 +4,13 @@
 {{else}}
   <AuModal
     @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
-    @modalOpen={{true}}
+    @modalOpen={{@modalActive}}
     @size="fullscreen"
     @closeModal={{if this.isEditing this.cancelEditing this.cancel}}
     class="au-c-modal--no-padding" as |Modal| >
     <Modal.Body>
       {{#if this.isEditing}}
-        <Agenda::Edit
+        <AgendaManager::Edit
           @delete={{this.delete}}
 
           @agendapunt={{this.currentlyEditing}}
@@ -30,7 +30,7 @@
           @selectDraft={{this.selectDraft}}
         />
       {{else}}
-        <Agenda::List
+        <AgendaManager::List
           @agendapunten={{this.zitting.agendapunten}}
           @createAgendapunt={{this.createAgendapunt}}
           @edit={{this.edit}}
@@ -43,17 +43,10 @@
       {{/if}}
     </Modal.Body>
     <Modal.Footer>
-      {{#if this.isEditing}}
         <AuButtonGroup>
           <AuButton {{on "click" this.save}}>{{t "manageAgendaZittingModal.saveButton"}}</AuButton>
           <AuButton @skin="secondary" {{on "click" this.cancelEditing}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
         </AuButtonGroup>
-      {{else}}
-        <AuButtonGroup>
-          <AuButton {{on "click" (perform this.saveAll)}} @loading={{this.saveAll.isRunning}} @disabled={{this.saveAll.isRunning}}>{{t "manageAgendaZittingModal.saveAllButton"}}</AuButton>
-          <AuButton @skin="secondary" {{on "click" this.cancel}}>{{t "manageAgendaZittingModal.cancelButton"}}</AuButton>
-        </AuButtonGroup>
-      {{/if}}
     </Modal.Footer>
   </AuModal>
 {{/if}}

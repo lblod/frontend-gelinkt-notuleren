@@ -1,0 +1,22 @@
+<DraggableObject @tagName="tr" @content={{@item}} @isSortable={{true}}>
+  <td>
+    <AuButton @skin="tertiary">
+      <span class="au-u-hidden-visually"></span>
+      <span style="cursor:pointer">
+        <i class="fa fa-bars"></i>
+      </span>
+    </AuButton>
+  </td>
+  <td>
+    <p>{{@item.titel}}</p>
+  </td>
+  <td>
+    {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
+         (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
+  </td>
+  <td class="au-u-table-right">
+    <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
+      {{t "manageAgendaZittingModal.editItemButton"}}
+    </AuButton>
+  </td>
+</DraggableObject>

@@ -1,0 +1,43 @@
+<div class="au-c-alert au-c-alert--info">
+  <div class="au-c-alert__content">
+    <AuHeading @level="4" @skin="5">{{t "manageAgendaZittingModalDelete.modalSubtitle"}}</AuHeading>
+    <AuHr />
+    <AuHelpText @size="large" class="au-u-margin-bottom">
+      <strong>{{t "manageAgendaZittingModalDelete.warningPartOne"}}</strong> {{t "manageAgendaZittingModalDelete.warningPartTwo"}}
+    </AuHelpText>
+
+    {{#if this.isShowingWarning}}
+      <div id="isShowingWarning-verwijder-agendapunt">
+        <div class="au-u-margin-bottom">
+          <AuLabel>
+            {{t "manageAgendaZittingModalDelete.agreeQuestion"}}
+          </AuLabel>
+          <label class="au-c-control au-c-control--checkbox">
+            <Input class="au-c-control__input" @type="checkbox" @checked={{this.hasAgreed}} />
+            <span class="au-c-control__indicator"></span>
+            {{t "manageAgendaZittingModalDelete.checkboxLabel"}}
+          </label>
+        </div>
+
+        <AuButtonGroup>
+          <AuButton {{on "click" this.reset}} >
+            {{t "manageAgendaZittingModalDelete.toggleEditButton"}}
+          </AuButton>
+          <AuButton
+              @disabled={{not this.hasAgreed}}
+              @alert={{true}} @skin="secondary"
+              @loading={{@loading}}
+              {{on "click" @onDelete}} >
+            {{t "manageAgendaZittingModalDelete.deleteButton"}}
+          </AuButton>
+        </AuButtonGroup>
+      </div>
+    {{else}}
+      <AuButtonGroup>
+        <AuButton @alert={{true}} @skin="secondary" {{on "click" this.toggleWarning}} >
+          {{t "manageAgendaZittingModalDelete.toggleWarningButton"}}
+        </AuButton>
+      </AuButtonGroup>
+    {{/if}}
+  </div>
+</div>

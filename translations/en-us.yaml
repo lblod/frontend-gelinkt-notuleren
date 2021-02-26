@@ -94,7 +94,7 @@ manageAgendaZitting:
   geplandOpenbaar: Planned public
   openModalButton: Manage agenda
 manageAgendaZittingModal:
-  modalTitle: Manage agenda
+  modalTitle: Edit agenda item
   saveButton: Save agenda item
   saveAllButton: Save agenda
   cancelEditingButton: Cancel
