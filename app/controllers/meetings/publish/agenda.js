@@ -44,6 +44,14 @@ export default class MeetingsPublishAgendaController extends Controller {
     this.spoedeisendeAgenda = yield this.initializeAgenda.perform("spoedeisendeagenda");
   }
 
+  @task
+  * reloadAgendas() {
+    this.ontwerpAgenda = yield this.initializeAgenda.perform("ontwerpagenda");
+    this.aanvullendeAgenda = yield this.initializeAgenda.perform("aanvullendeagenda");
+    this.spoedeisendeAgenda = yield this.initializeAgenda.perform("spoedeisendeagenda");
+  }
+
+
   /**
    * @this {MeetingsPublishAgendaController}
    * @param {string} type
@@ -89,7 +97,7 @@ export default class MeetingsPublishAgendaController extends Controller {
 
     const id = this.model.id;
     yield fetch(`/signing/agenda/sign/${agendaType}/${id}`, { method: 'POST'});
-    yield this.initializeAgendas.perform();
+    yield this.reloadAgendas.perform();
   }
 
   /**
@@ -100,6 +108,6 @@ export default class MeetingsPublishAgendaController extends Controller {
   * createPublishedResource(agendaType) {
     const id = this.model.id;
     yield fetch(`/signing/agenda/publish/${agendaType}/${id}`, { method: 'POST'});
-    yield this.initializeAgendas.perform();
+    yield this.reloadAgendas.perform();
   }
 }

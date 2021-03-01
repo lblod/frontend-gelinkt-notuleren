@@ -1,5 +1,5 @@
 <div class="au-o-box">
-  {{#if this.initializeUittreksels.lastSuccessful}}
+  {{#if this.initializeUittreksels.isIdle}}
   <ul>
     {{#each this.uittreksels as |uittreksel|}}
       <Signatures::Behandeling::TimelineStep
