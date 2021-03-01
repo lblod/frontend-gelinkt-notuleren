@@ -42,6 +42,18 @@ export default class MeetingsPublishNotulenController extends Controller {
     this.behandelings = behandelings;
   }
 
+  @task
+  *reloadNotulen() {
+    const notulen = yield this.store.query('versioned-notulen',{
+      'filter[zitting][:id:]': this.model.id,
+      include: 'signed-resources,published-resource'
+    });
+    this.notulen = notulen.firstObject;
+    this.publicBehandelingUris = notulen.firstObject.publicBehandelingen;
+    const behandelings = yield this.fetchBehandelings.perform();
+    this.behandelings = behandelings;
+  }
+
 
   @task
   *createPrePublishedResource() {
@@ -63,7 +75,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   * createSignedResource() {
     const id = this.model.id;
     yield fetch(`/signing/notulen/sign/${id}`, { method: 'POST' });
-    yield this.initializeNotulen.perform();
+    yield this.reloadNotulen.perform();
   }
 
   @task
@@ -77,7 +89,7 @@ export default class MeetingsPublishNotulenController extends Controller {
                   }),
                   method: 'POST'
                 });
-    yield this.initializeNotulen.perform();
+    yield this.reloadNotulen.perform();
 
   }
 

@@ -41,6 +41,15 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     }
   }
 
+  @task
+  * reloadBesluitenLijst() {
+    const behandelings = yield this.store.query('versioned-besluiten-lijst',{
+      'filter[zitting][:id:]': this.model.id,
+      include: 'signed-resources,published-resource'
+    });
+    this.besluitenlijst = behandelings.firstObject;
+  }
+
 
   @task
   *createPrePublishedResource() {
@@ -54,13 +63,13 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   * createSignedResource() {
     const id = this.model.id;
     yield fetch(`/signing/besluitenlijst/sign/${id}`, { method: 'POST' });
-    yield this.initializeBesluitenLijst.perform();
+    yield this.reloadBesluitenLijst.perform();
   }
 
   @task
   * createPublishedResource() {
     const id = this.model.id;
     yield fetch(`/signing/besluitenlijst/publish/${id}`, { method: 'POST' });
-    yield this.initializeBesluitenLijst.perform();
+    yield this.reloadBesluitenLijst.perform();
   }
 }
