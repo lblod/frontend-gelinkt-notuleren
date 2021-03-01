@@ -28,7 +28,7 @@ module.exports = function(environment) {
       'editor-extended-html-paste': true
     },
     browserUpdate: {
-      vs: {f:-3,o:-3,s:-3,c:-3},
+      vs: {f:-3,c:-3},
       style: 'corner',
       l: 'nl',
       shift_page_down: false
