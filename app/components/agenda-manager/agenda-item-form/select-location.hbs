@@ -1,0 +1,39 @@
+<div class="au-u-margin-bottom">
+  <AuLabel>
+    {{yield}}
+  </AuLabel>
+  <div class="au-o-grid au-o-grid--tiny">
+    <div class="au-o-grid__item au-u-1-2">
+      <PowerSelect
+              @class="select select--block"
+              @renderInPlace={{true}}
+              @placeholder={{t "manageAgendaZittingModalMove.positionSelectPlaceholder"}}
+              @options={{this.locationOptions}}
+              @verticalPosition="above"
+              @searchEnabled={{false}}
+              @selected={{this.selectedLocation}}
+              @allowClear={{true}}
+              @onchange={{this.selectLocation}}
+              as |location|>
+        {{location.name}}
+      </PowerSelect>
+    </div>
+    {{#if this.showAfterItemOptions}}
+      <div class="au-o-grid__item au-u-1-2">
+        <PowerSelect
+                @class="js-select"
+                @renderInPlace={{true}}
+                @placeholder={{t "manageAgendaZittingModalMove.agendapuntSelectPlaceholder"}}
+                @searchPlaceholder={{t "manageAgendaZittingModalMove.searchPlaceholder"}}
+                @verticalPosition="above"
+                @options={{this.afterItemOptions}}
+                @searchField="titel"
+                @selected={{this.selectedAfterItem}}
+                @onchange={{this.selectAfterItem}}
+                as |a|>
+          {{a.titel}}
+        </PowerSelect>
+      </div>
+    {{/if}}
+  </div>
+</div>

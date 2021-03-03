@@ -1,0 +1,37 @@
+<AgendaManager::AgendaContext @zittingId={{@zittingId}} @onSave={{@onSave}} as |agenda|>
+  <div class="au-c-meeting-chrome-card">
+    {{#if agenda.loadItemsTask.isRunning}}
+      <AuLoader />
+      <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
+    {{else}}
+      <AgendaManager::AgendaTable
+              @onSort={{agenda.onSort}}
+              @onCreate={{fn (perform this.createItemTask) agenda.createItemTask}}
+              @items={{agenda.items}}
+              as |Table|>
+        <Table.Header/>
+
+        <Table.Body as |Body|>
+          {{#each agenda.items as |item|}}
+            <Body.Row @item={{item}} @edit={{fn this.editItem item}} />
+          {{else}}
+            <Body.Empty/>
+          {{/each}}
+
+        </Table.Body>
+
+      </AgendaManager::AgendaTable>
+
+    {{/if}}
+
+  </div>
+  <AgendaManager::Edit @visible={{this.editModalVisible}}
+                       @itemToEdit={{this.itemToEdit}}
+                       @saveTask={{agenda.saveItemTask}}
+                       @onClose={{this.closeModal}}
+                       @deleteTask={{agenda.deleteItemTask}}
+                       @onCancel={{this.closeModal}}
+                       @agendaItems={{agenda.items}}
+  />
+
+</AgendaManager::AgendaContext>

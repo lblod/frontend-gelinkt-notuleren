@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
-module('Integration | Component | agenda-edit', function(hooks) {
+module('Integration | Component | agenda-manager-edit', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
