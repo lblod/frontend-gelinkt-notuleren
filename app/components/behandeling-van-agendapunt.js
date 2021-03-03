@@ -14,6 +14,8 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @tracked editor;
   @tracked aanwezigen = [];
   @tracked afwezigen = [];
+  @tracked voorzitter;
+  @tracked secretaris;
 
   constructor() {
     super(...arguments);
