@@ -2,23 +2,7 @@
   <section class="au-o-region-large">
     <div class="au-o-layout">
       <AuHeading class="au-u-margin-bottom">Contact</AuHeading>
-      <form class="au-c-form js-formvalidation-bound">
-        <AuLabel for="select">Waar gaat uw bericht over?</AuLabel>
-        <ul>
-          <li>
-            <WuRadioButton @label="Een functionaliteit, bug of probleem" @value="GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{action (mut mailto)}} @isBlock={{true}} />
-          </li>
-          <li>
-            <WuRadioButton @label="Een inhoudelijke vraag" @value="GelinktNotuleren@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{action (mut mailto)}} @isBlock={{true}} />
-          </li>
-        </ul>
-        {{#if mailto}}
-          <a href={{concat "mailto:" mailto}} class="au-c-button">Bericht versturen</a>
-        {{else}}
-          <AuButton @disabled="true">Stel bericht op</AuButton>
-        {{/if}}
-        <div class="form__error" aria-describedby="radio-buttons"></div>
-      </form>
+      <ContactForm />
       <p class="au-u-margin-top">Of neem rechtstreeks contact op via mail <a href="mailto:gelinktnotuleren@vlaanderen.be">GelinktNotuleren@vlaanderen.be</a>.</p>
     </div>
   </section>
