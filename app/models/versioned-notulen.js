@@ -1,13 +1,13 @@
-import DS from 'ember-data';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
-export default DS.Model.extend({
-  state: DS.attr(),
-  content: DS.attr(),
-  publicContent: DS.attr(),
-  publicBehandelingen: DS.attr('uri-set'),
-  kind: DS.attr(),
-  signedResources: DS.hasMany('signed-resource'),
-  publishedResource: DS.belongsTo('published-resource'),
-  documentContainer: DS.belongsTo('document-container'),
-  zitting: DS.belongsTo('zitting')
+export default Model.extend({
+  state: attr(),
+  content: attr(),
+  publicContent: attr(),
+  publicBehandelingen: attr('uri-set'),
+  kind: attr(),
+  signedResources: hasMany('signed-resource'),
+  publishedResource: belongsTo('published-resource'),
+  documentContainer: belongsTo('document-container'),
+  zitting: belongsTo('zitting')
 });

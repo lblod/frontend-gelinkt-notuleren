@@ -1,6 +1,4 @@
-import Model from 'ember-data/model';
-import attr from 'ember-data/attr';
-import { belongsTo, hasMany } from 'ember-data/relationships';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import {DRAFT_FOLDER_ID, SCHEDULED_STATUS_ID} from "../utils/constants";
 
 export default class BehandelingVanAgendapunt extends Model {

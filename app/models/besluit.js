@@ -1,5 +1,4 @@
-import Model from 'ember-data/model';
-import { belongsTo } from 'ember-data/relationships';
+import Model, { belongsTo } from '@ember-data/model';
 
 export default Model.extend({
   realisatie: belongsTo('rechtsgrond-besluit', { inverse: null }),
