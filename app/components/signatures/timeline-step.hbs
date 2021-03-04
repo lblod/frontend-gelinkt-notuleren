@@ -4,10 +4,10 @@
     <c.header @badgeIcon={{iconName}} @badgeSkin="brand">
       <AuToolbar @nowrap={{true}}>
         <AuHeading @level="2" @skin="3" class="au-u-capitalize">
-          {{headerWithDefault}}
+          {{this.headerWithDefault}}
         </AuHeading>
         {{#if algemeneStatus}}
-          <AuPill @skin="{{algemeneStatus.color}}" class="au-u-margin-left">{{algemeneStatus.label}}</AuPill>
+          <AuPill @skin="{{this.algemeneStatus.color}}" class="au-u-margin-left">{{this.algemeneStatus.label}}</AuPill>
         {{/if}}
       </AuToolbar>
     </c.header>
