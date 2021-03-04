@@ -1,0 +1,60 @@
+---
+kind: pipeline
+type: docker
+name: verify-pr
+steps:
+- name: build-dry-run
+  image: plugins/docker
+  settings:
+    repo: lblod/frontend-gelinkt-notuleren
+    dry_run: true
+    purge: true
+- name: test
+  image: danlynn/ember-cli:3.20.0
+  commands:
+  - npm install
+  - npm test
+trigger:
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: push-latest-build
+steps:
+- name: push-latest-build
+  image: plugins/docker
+  settings:
+    repo: lblod/frontend-gelinkt-notuleren
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    purge: true
+trigger:
+  branch:
+    - development
+---
+kind: pipeline
+type: docker
+name: release
+steps:
+- name: build-dry-run
+  image: plugins/docker
+  settings:
+    repo: lblod/frontend-gelinkt-notuleren
+    dry_run: true
+    purge: true
+- name: push-tagged-build
+  image: plugins/docker
+  settings:
+    repo: lblod/frontend-gelinkt-notuleren
+    tags: ${DRONE_TAG##v}
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    purge: true
+trigger:
+  event:
+    - tag
