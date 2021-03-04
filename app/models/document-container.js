@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import Model, { belongsTo, hasMany } from '@ember-data/model';
 
 export default Model.extend({
   revisions: hasMany( 'editor-document', { inverse: 'documentContainer' } ),
