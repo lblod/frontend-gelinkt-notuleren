@@ -1,0 +1,9 @@
+<button {{on "click" this.login}} type="submit" class="{{@styles}}">
+  {{yield}}
+</button>
+{{#if this.isAuthenticating}}
+  <AuLoader />
+{{/if}}
+{{#if this.errorMessage}}
+  <AuAlert @alertsize="small" @alertIcon="cross" @alertTitle={{this.errorMessage}} @alertskin="error" />
+{{/if}}
