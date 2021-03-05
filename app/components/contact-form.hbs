@@ -1,0 +1,19 @@
+{{yield}}
+<form class="au-c-form js-formvalidation-bound">
+  <AuLabel for="select">Waar gaat uw bericht over?</AuLabel>
+  <ul>
+    <li>
+      <AuControlRadio @label="Een functionaliteit, bug of probleem" @value="GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem" @name="type-vraag" @value="GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem" @onChange={{this.setMailto}} />
+
+    </li>
+    <li>
+      <AuControlRadio @label="Een inhoudelijke vraag" @name="type-vraag" @value="GelinktNotuleren@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{this.setMailto}} />
+    </li>
+  </ul>
+  {{#if mailto}}
+    <a href={{concat "mailto:" mailto}} class="au-c-button">Bericht versturen</a>
+  {{else}}
+    <AuButton @disabled="true">Stel bericht op</AuButton>
+  {{/if}}
+  <div class="form__error" aria-describedby="radio-buttons"></div>
+</form>
