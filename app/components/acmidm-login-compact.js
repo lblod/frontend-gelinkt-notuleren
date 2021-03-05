@@ -1,24 +1,28 @@
-import { warn } from '@ember/debug';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
-export default Component.extend({
-  session: service('session'),
-  actions: {
-    login() {
-      this.set('errorMessage', '');
-      this.set('isAuthenticating', true);
-      this.session.authenticate('authenticator:torii', 'acmidm-oauth2').catch((reason) => {
-        warn(reason.error || reason, { id: 'authentication.failure' });
+export default class AcmdidmLoginCompactComponent extends Component {
+  @service session;
+  @tracked errorMessage = '';
+  @tracked isAuthenticating = false;
 
-        if (reason.status == 403)
-          this.set('errorMessage', 'U heeft geen toegang tot deze applicatie.');
-        else
-          this.set('errorMessage', 'Fout bij het aanmelden. Gelieve opnieuw te proberen.');
-      })
-      .finally(() => {
-        this.set('isAuthenticating', false);
-      });
-    }
+  @action
+  login() {
+    this.errorMessage = '';
+    this.isAuthenticating = true;
+    this.session.authenticate('authenticator:torii', 'acmidm-oauth2').catch(
+      (reason) => {
+        if (reason.status == 403) {
+          this.errorMessage = 'U heeft geen toegang tot deze applicatie.';
+        }
+        else {
+          this.errorMessage = 'Fout bij het aanmelden. Gelieve opnieuw te proberen.';
+        }
+      }
+    ).finally(() => {
+      this.isAuthenticating = false;
+    });
   }
-});
+}
