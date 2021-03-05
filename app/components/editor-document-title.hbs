@@ -1,0 +1,14 @@
+{{#if @readOnly}}
+  <h1 class="au-c-app-chrome__title">
+    {{this.title}}
+  </h1>
+{{else}}
+  {{#if this.active}}
+    <Input class="au-c-app-chrome__title-input" @type="text" placeholder="Naamloos document" @value={{this.title}} {{on "input" this.setTitle}} @autofocus="autofocus" {{on "change" this.toggleActive}}  />
+  {{else}}
+    <h1 class="au-c-app-chrome__title">
+      {{this.title}} <AuButton {{on "click" this.toggleActive}} @icon="pencil" @skin="tertiary" @hideText={{true}} >titel wijzigen</AuButton>
+    </h1>
+  {{/if}}
+
+{{/if}}
