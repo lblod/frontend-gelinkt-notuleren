@@ -4,9 +4,12 @@
   </h1>
 {{else}}
   {{#if this.active}}
-    <Input class="au-c-app-chrome__title-input" @type="text" placeholder="Naamloos document" @value={{this.title}} {{on "input" this.setTitle}} @autofocus="autofocus" {{on "change" this.toggleActive}}  />
+    <div class="au-c-app-chrome__title-group">
+      <Input class="au-c-app-chrome__title-input" @type="text" @value={{this.title}} {{on "input" this.setTitle}} @autofocus="autofocus"  />
+      <AuButton class="au-c-app-chrome__title-button" {{on "click" this.toggleActive}} @skin="secondary" @icon="cross" @hideText={{true}}>Titel aanpassen</AuButton>
+    </div>
   {{else}}
-    <h1 class="au-c-app-chrome__title">
+    <h1 class="au-c-app-chrome__title au-c-app-chrome__title--edit">
       {{this.title}} <AuButton {{on "click" this.toggleActive}} @icon="pencil" @skin="tertiary" @hideText={{true}} >titel wijzigen</AuButton>
     </h1>
   {{/if}}
