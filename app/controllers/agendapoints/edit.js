@@ -4,19 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-
-function generateDocumentToDownload(editorDocument) {
-  const context = JSON.parse(editorDocument.context);
-  let prefixes = Object.entries(context.prefix).map(([key, value]) => {
-    return `${key}: ${value}`;
-  }).join(' ');
-  const document = `
-      <div vocab="${context.vocab}" prefix="${prefixes}" typeof="foaf:Document" resource="#">
-        ${editorDocument.content}
-      </div>
-    `;
-  return document;
-}
+import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 
 export default class AgendapointsEditController extends Controller {
   @service currentSession;
@@ -43,18 +31,7 @@ export default class AgendapointsEditController extends Controller {
   @action
   download() {
     this.editorDocument.content = this.editor.htmlContent;
-    const doc = generateDocumentToDownload(this.editorDocument);
-    const title = this.editorDocument.title;
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(doc));
-    element.setAttribute('download', `${title}.html`);
-
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
+    generateExportFromEditorDocument(this.editorDocument);
   }
 
   @action

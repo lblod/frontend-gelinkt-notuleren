@@ -63,13 +63,17 @@
             Exporteer als HTML
           </AuButton>
         {{/if}}
+        {{#if @sendToTrash}}
         <AuButton {{on "click" @sendToTrash}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
           <AuIcon @icon="bin" @alignment="left" />
           Naar prullenmand
         </AuButton>
+        {{/if}}
       </AuDropdown>
       {{/if}}
-      <AuButton {{on "click" @save.action}} @disabled={{@save.isRunning}}>Bewaar</AuButton>
+      {{#if @save}}
+        <AuButton {{on "click" @save.action}} @disabled={{@save.isRunning}}>Bewaar</AuButton>
+      {{/if}}
     </AuToolbarGroup>
   </AuToolbar>
   </div>
