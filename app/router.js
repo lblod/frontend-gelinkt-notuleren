@@ -49,8 +49,6 @@ Router.map(function() {
     });
   });
 
-  /* legacy */
-  this.route('zetelverdeling');
   this.route('editor-documents', function() {
     this.route('edit', { path: '/:id/edit' });
     this.route('new');
@@ -71,5 +69,4 @@ Router.map(function() {
     this.route('templates');
     this.route('publish');
   });
-
 });
