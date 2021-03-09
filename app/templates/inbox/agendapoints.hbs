@@ -8,7 +8,7 @@
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
-          <TextSearch @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
+          <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
           <LinkTo @route="draft-decisions.new" class="au-c-button-link">{{t "inbox.agendapoints.new"}}</LinkTo>
         </AuToolbarGroup>
       </AuToolbar>
