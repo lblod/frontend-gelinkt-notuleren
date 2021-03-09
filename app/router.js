@@ -37,6 +37,7 @@ Router.map(function() {
     this.route('new');
     this.route('edit', { path: '/:id/edit' });
     this.route('show', { path: ':id/show'});
+    this.route('revisions', { path: '/:id/revisions' });
   });
 
   this.route('meetings', function() {
@@ -54,10 +55,6 @@ Router.map(function() {
     this.route('edit', { path: '/:id/edit' });
     this.route('new');
     this.route('raw', { path: '/:id/raw' });
-
-    this.route('revisions', { path: '/:id/revisions' }, function() {
-      this.route('index', { path: '/' });
-    });
   });
 
 
