@@ -3,11 +3,13 @@ import {action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class EditorDocumentTitleComponent extends Component {
-  @tracked _active = false;
+  @tracked active = false;
   @tracked _title;
+  @tracked error = false;
 
-  get active() {
-    return this._active || (!this._title && ! this.args.title);
+  constructor() {
+    super(...arguments);
+    this.active = this.args.editActive;
   }
 
   get title() {
@@ -18,7 +20,7 @@ export default class EditorDocumentTitleComponent extends Component {
       return this.args.title;
     }
     else {
-      return "Naamloos document";
+      return "";
     }
   }
 
@@ -28,11 +30,18 @@ export default class EditorDocumentTitleComponent extends Component {
     if (this.args.onChange) {
       this.args.onChange(this._title);
     }
+    if (this._title) {
+      this.error = false;
+    }
   }
 
   @action
   toggleActive() {
-    this._active = ! this._active;
-    console.log(this._active);
+    if (this.active && ! this.title) {
+      this.error = true;
+    }
+    else {
+      this.active = ! this.active;
+    }
   }
 }
