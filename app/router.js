@@ -33,7 +33,7 @@ Router.map(function() {
     this.route('edit');
   });
 
-  this.route('draft-decisions', { path: '/agendapoints' }, function() {
+  this.route('agendapoints', function() {
     this.route('new');
     this.route('edit', { path: '/:id/edit' });
   });

@@ -1,17 +1,21 @@
-<AppChrome @documentType="draftDecisions" @editorDocument={{this.editorDocument}} @documentContainer={{this.documentContainer}} @save={{action "save"}} />
+<AppChrome
+  @editorDocument={{this.editorDocument}}
+  @documentContainer={{this.documentContainer}}
+  @save={{hash action=this.save isRunning=this.saveTask.isRunning}}
+/>
 
-{{#if this.validationErrors}}
-  <WuModal @title="Er zijn fouten bij de validatie" @onClose={{action "closeValidationModal"}} as |m|>
+{{#if this.hasDocumentValidationErrors}}
+  <WuModal @title="Er zijn fouten bij de validatie" @onClose={{this.closeValidationModal}} as |m|>
     <m.content>
       Gelieve een titel op te geven.
     </m.content>
     <m.buttons as |b|>
-      <b.button @label="OK" @onClick={{action "closeValidationModal"}} />
+      <b.button @label="OK" @onClick={{this.closeValidationModal}} />
     </m.buttons>
   </WuModal>
 {{/if}}
 
-{{#if this.saveAndTransitionToEditMode.isRunning}}
+{{#if this.saveTask.isRunning}}
   <div class="editor-container container-flex--scroll">
     <div class="editor">
       <div class="grid grid--align-center">
@@ -25,28 +29,19 @@
             </div>
 
             <span class="scanner__bar"></span>
-            {{{this.editor.htmlContent}}}
+            {{this.editorDocument.htmlSafeContent}}
           </div>
         </div>
       </div>
     </div>
   </div>
 {{else}}
-  {{!--
-     We don't want to rerender this component after having saved.
-     If it rerenders, while in transition to another route (edit-route), we have errors.
-     The component rerenders, the rdfa-editor-compoment rerenders too, it has async initialisation logic,
-     which works on an inconsistent state.
-   --}}
-  {{#unless this.hasPerformedSaveAndTransitionToEditModeTask}}
     <RdfaEditorContainer
       @profile={{this.profile}}
       @editorDocument={{this.editorDocument}}
-      @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}}
-      @onUpdateTasklists={{action "updateTasklists"}}
+      @rdfaEditorContainerInit={{this.handleRdfaEditorInit}}
       @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt ext:draftDecision"
       @showToggleRdfaAnnotations={{true}}
     />
-  {{/unless}}
 {{/if}}
 {{outlet}}

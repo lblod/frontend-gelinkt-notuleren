@@ -92,14 +92,7 @@ export default Mixin.create({
   },
 
   publish: task(function *(){
-    const editorDocument = this.editorDocument;
-    const status = this.getStatusFor('conceptStatusId');
-    const folder = this.getFolderFor('meetingMinutesId');
-    const savedDocument = yield this.saveEditorDocument.perform(editorDocument, status, folder);
-    this.set('editorDocument', savedDocument);
-    const container = yield savedDocument.get('documentContainer');
-    const containerId = container.id;
-    this.transitionToRoute('documents.show.publish.index', containerId);
+
   }),
 
   profile: 'default',
@@ -109,22 +102,12 @@ export default Mixin.create({
        this.set('debug', info);
     },
 
-    sendToTrash(){
-      this.set('displayDeleteModal', true);
-    },
 
     publish() {
       this.publish.perform();
     },
 
-    async deleteDocument(){
-      const container = this.documentContainer;
-      const deletedStatus = await this.store.findRecord('concept', '5A8304E8C093B00009000010');
-      container.set('status', deletedStatus);
-      await container.save();
-      this.set('displayDeleteModal', false);
-      this.transitionToRoute('inbox');
-    },
+
 
     onCloseDeleteModal(){
       this.set('displayDeleteModal', false);

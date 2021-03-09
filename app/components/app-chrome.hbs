@@ -51,7 +51,7 @@
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
       {{#if @editorDocument.isNew}}
-        <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
+        <LinkTo @route="inbox.agendapoints" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
           <AuIcon @icon="bin" @alignment="left" />
           Verwijder concept
         </LinkTo>
@@ -69,10 +69,7 @@
         </AuButton>
       </AuDropdown>
       {{/if}}
-      {{#if @publish}}
-        <AuButton {{on "click" @publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
-      {{/if}}
-      <AuButton {{on "click" @save}}>Bewaar</AuButton>
+      <AuButton {{on "click" @save.action}} @disabled={{@save.isRunning}}>Bewaar</AuButton>
     </AuToolbarGroup>
   </AuToolbar>
   </div>

@@ -6,15 +6,8 @@ export default Route.extend({
     const container = await this.store.findRecord('document-container', params.id, { include: 'status' });
     return RSVP.hash({
       documentContainer: container,
-      editorDocument: await container.get('currentVersion'),
-      editorDocumentStatuses: await this.store.findAll('editor-document-status'),
-      editorDocumentFolders: await this.store.findAll('editor-document-folder')
+      editorDocument: await container.get('currentVersion')
     });
-  },
-
-  setupController(controller, model) {
-    this._super(controller, model);
-    controller.set('profile', 'draftDecisionsProfile');
   },
 
   actions: {
