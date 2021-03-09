@@ -168,12 +168,19 @@ $au-brand-divider-rotation     : -20deg !default;
   border-top-right-radius: $au-radius;
   border-bottom-right-radius: $au-radius;
   border-left: 0;
+  padding-left: $au-unit-tiny;
+  padding-right: $au-unit-tiny;
 
   &:hover {
     border-color: $au-gray-300;
     box-shadow: none;
     background-color: $au-gray-100;
     color: $au-gray-800;
+  }
+
+  .au-c-icon {
+    width: 1.9rem;
+    height: 1.9rem;
   }
 }
 
