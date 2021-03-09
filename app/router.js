@@ -51,12 +51,6 @@ Router.map(function() {
     });
   });
 
-  this.route('editor-documents', function() {
-    this.route('edit', { path: '/:id/edit' });
-    this.route('new');
-    this.route('raw', { path: '/:id/raw' });
-  });
-
 
   /* design mocks */
   this.route('imported-documents', function() {
