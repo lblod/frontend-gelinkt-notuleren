@@ -27,7 +27,7 @@
         {{#if hasBlock}}
           {{yield}}
         {{else}}
-          {{{@mockDocument.body}}}
+          {{htmlSafe @mockDocument.body}}
         {{/if}}
       </div>
 
