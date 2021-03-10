@@ -47,7 +47,7 @@
         </AuPill>
         {{/if}}
       </div>
-      <EditorDocumentTitle @title={{@editorDocument.title}} @editActive=@editorDocument.isNew @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
+      <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
       {{#if @editorDocument.isNew}}
