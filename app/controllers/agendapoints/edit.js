@@ -61,20 +61,19 @@ export default class AgendapointsEditController extends Controller {
     }
     else {
       this.hasDocumentValidationErrors = false;
+      const html = this.editor.htmlContent;
+      const editorDocument = this.store.createRecord('editor-document');
+      editorDocument.content = html;
+      editorDocument.createdOn = new Date();
+      editorDocument.updatedOn = new Date();
+      editorDocument.title = this.editorDocument.title;
+      editorDocument.previousVersion = this.editorDocument;
+      yield editorDocument.save();
+      this._editorDocument = editorDocument;
+
+      const documentContainer = this.documentContainer;
+      documentContainer.currentVersion = editorDocument;
+      yield documentContainer.save();
     }
-
-    const html = this.editor.htmlContent;
-    const editorDocument = this.store.createRecord('editor-document');
-    editorDocument.content = html;
-    editorDocument.createdOn = new Date();
-    editorDocument.updatedOn = new Date();
-    editorDocument.title = this.editorDocument.title;
-    editorDocument.previousVersion = this.editorDocument;
-    yield editorDocument.save();
-    this._editorDocument = editorDocument;
-
-    const documentContainer = this.documentContainer;
-    documentContainer.currentVersion = editorDocument;
-    yield documentContainer.save();
   }
 }

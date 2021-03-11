@@ -6,7 +6,7 @@
   @exportHtmlFunction={{this.download}}
 />
 
-{{#if this.validationErrors}}
+{{#if this.hasDocumentValidationErrors}}
   <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{this.closeValidationModal}} as |m|>
     <m.content>
       Klik op de titel om uw document een naam te geven.
