@@ -1,7 +1,7 @@
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
-  @save={{hash action=this.save isRunning=this.saveTask.isRunning}}
+  @save={{hash action=(perform this.saveTask) isRunning=this.saveTask.isRunning}}
   @sendToTrash={{this.toggleDeleteModal}}
   @exportHtmlFunction={{this.download}}
 />

@@ -77,9 +77,4 @@ export default class AgendapointsEditController extends Controller {
     documentContainer.currentVersion = editorDocument;
     yield documentContainer.save();
   }
-
-  @action
-  async save() {
-    await this.saveTask.perform();
-  }
 }
