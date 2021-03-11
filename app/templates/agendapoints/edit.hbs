@@ -7,12 +7,12 @@
 />
 
 {{#if this.validationErrors}}
-  <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{action "closeValidationModal"}} as |m|>
+  <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{this.closeValidationModal}} as |m|>
     <m.content>
       Klik op de titel om uw document een naam te geven.
     </m.content>
     <m.buttons as |b|>
-      <b.button @label="OK" @onClick={{action "closeValidationModal"}} />
+      <b.button @label="OK" @onClick={{this.closeValidationModal}} />
     </m.buttons>
   </WuModal>
 {{/if}}
