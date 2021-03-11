@@ -1,10 +1,10 @@
-import DS from 'ember-data';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
-export default DS.Model.extend({
-  state: DS.attr(),
-  content: DS.attr(),
-  signedResources: DS.hasMany('signed-resource'),
-  publishedResource: DS.belongsTo('published-resource'),
-  zitting: DS.belongsTo('zitting'),
-  editorDocument: DS.belongsTo('editor-document')
+export default Model.extend({
+  state: attr(),
+  content: attr(),
+  signedResources: hasMany('signed-resource'),
+  publishedResource: belongsTo('published-resource'),
+  zitting: belongsTo('zitting'),
+  editorDocument: belongsTo('editor-document')
 });

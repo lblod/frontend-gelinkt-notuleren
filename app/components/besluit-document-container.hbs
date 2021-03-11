@@ -11,12 +11,12 @@
               <h3 class="h3">Bezig met opslaan</h3>
             </div>
             <span class="scanner__bar"></span>
-            {{{@editor.htmlContent}}}
+            {{html-safe @editor.htmlContent}}
           </div>
         </div>
       </div>
     </div>
   </div>
 {{else}}
-  <RdfaEditorContainer @profile={{this.profile}} @editorDocument={{@document}} @rdfaEditorContainerInit={{@handleRdfaEditorInit}} @onUpdateTasklists={{action "updateTasklists"}} @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt" />
+  <RdfaEditorContainer @profile={{this.profile}} @editorDocument={{@document}} @rdfaEditorContainerInit={{@handleRdfaEditorInit}} @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt" />
 {{/if}}

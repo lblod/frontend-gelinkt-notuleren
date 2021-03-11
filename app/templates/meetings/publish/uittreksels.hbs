@@ -4,7 +4,6 @@
     {{#each this.uittreksels as |uittreksel|}}
       <Signatures::Behandeling::TimelineStep
         @name={{uittreksel.behandeling.onderwerp.titel}}
-        @step={{timeline.step}}
         @behandeling={{uittreksel}}
         @signing={{perform this.createSignedResource uittreksel.behandeling}}
         @publish={{perform this.createPublishedResource uittreksel.behandeling}}

@@ -5,14 +5,15 @@
 </AuMainHeader>
 
 {{!-- Refocus after page navigation --}}
-{{navigation-narrator}}
+<NavigationNarrator />
 
 <div class="au-c-main-container">
   <div class="au-c-main-container__content au-c-main-container__content--scroll">
     <div class="page">
       <main id="content">
         <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is gelinkt notuleren">
-          <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="Foto van een laptop met daarop het vlaanderen logo.">
+          {{!-- template-lint-disable require-valid-alt-text  --}}
+          <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="een laptop met daarop het vlaanderen logo.">
         </AuContentHeader>
         {{yield}}
       </main>

@@ -3,7 +3,6 @@
   <ul>
     <Signatures::Agenda::TimelineStep
       @name="ontwerpagenda"
-      @step={{timeline.step}}
       @agenda={{this.ontwerpAgenda}}
       @signing={{perform this.createSignedResource "ontwerpagenda"}}
       @publish={{perform this.createPublishedResource "ontwerpagenda"}}
@@ -11,7 +10,6 @@
 
     <Signatures::Agenda::TimelineStep
       @name="aanvullende agenda"
-      @step={{timeline.step}}
       @agenda={{this.aanvullendeAgenda}}
       @signing={{perform this.createSignedResource "aanvullendeagenda"}}
       @publish={{perform this.createPublishedResource "aanvullendeagenda"}}
@@ -19,7 +17,6 @@
 
     <Signatures::Agenda::TimelineStep
       @name="spoedeisende agenda"
-      @step={{timeline.step}}
       @agenda={{this.spoedeisendeAgenda}}
       @signing={{perform this.createSignedResource "spoedeisendeagenda"}}
       @publish={{perform this.createPublishedResource "spoedeisendeagenda"}}

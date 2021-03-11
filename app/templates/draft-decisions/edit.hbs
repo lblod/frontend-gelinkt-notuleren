@@ -1,4 +1,8 @@
-<AppChrome @documentType="draftDecisions" @editorDocument={{this.editorDocument}} @documentContainer={{this.documentContainer}} @save={{action "save"}} @sendToTrash={{action "sendToTrash"}} @exportHtmlFunction={{action "download"}} />
+<AppChrome
+  @documentType="draftDecisions"
+  @editorDocument={{this.editorDocument}}
+  @documentContainer={{this.documentContainer}}
+  @save={{action "save"}} @sendToTrash={{action "sendToTrash"}} @exportHtmlFunction={{action "download"}} />
 {{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
 {{#if this.validationErrors}}
   <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{action "closeValidationModal"}} as |m|>
@@ -35,7 +39,7 @@
             <h3 class="h3">Bezig met opslaan</h3>
           </div>
           <span class="scanner__bar"></span>
-          {{{this.editor.htmlContent}}}
+          {{safeHTML this.editor.htmlContent}}
         </div>
       </div>
     </div>
