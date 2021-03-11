@@ -1,4 +1,4 @@
-<AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} as |t|>
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage="Geen documenten" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |t|>
    <t.menu as |menu|>
     <menu.general>
       <AuToolbar @size="large">
@@ -25,7 +25,7 @@
       </AuToolbar>
       <AuToolbar @size="large">
         <AuToolbarGroup data-table-action>
-          <AuButton @skin="secondary" {{action "moveToConcepts" selection datatable}}>
+          <AuButton @skin="secondary" {{on "click" (fn this.moveToConcepts selection datatable)}}>
             <AuIcon @icon="redo" @alignment="left" />
             Herstel geselecteerde documenten
           </AuButton>

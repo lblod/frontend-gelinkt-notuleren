@@ -7,7 +7,6 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 /**
  * @typedef {Object} Args
  * @property {string} name Name of the kind of resource to sign/publish (e.g. 'agenda', 'besluitenlijst', ...
- * @property {string} step Name of the current selected step
  * @property {Object} document Versioned document to be signed/published
  * @property {Object} mockDocument Preview of versioned document together with current document id
  * @property {Function} signing Function to trigger the signing of the document

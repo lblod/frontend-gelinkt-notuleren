@@ -6,7 +6,7 @@
       </AuLink>
       <span class="au-c-app-chrome__entity">{{t "publish.headingPartOne"}} {{moment-format this.model.geplandeStart "DD/MM/YYYY HH:mm"}}</span>
     </AuToolbarGroup>
-    <AuDropdown @dropdownTitle="{{currentSession._user.voornaam}} {{currentSession._user.achternaam}} - {{currentSession._group.classificatie.label}} {{currentSession._group.naam}}" @dropdownButtonLabel="Account settings" @alignment="right">
+    <AuDropdown @dropdownTitle="{{this.currentSession._user.voornaam}} {{this.currentSession._user.achternaam}} - {{this.currentSession._group.classificatie.label}} {{this.currentSession._group.naam}}" @dropdownButtonLabel="Account settings" @alignment="right">
     <AcmidmLogout @class="au-c-button au-c-button--tertiary" role="menuitem">
       <AuIcon @icon="logout" @alignment="left" />Afmelden
     </AcmidmLogout>

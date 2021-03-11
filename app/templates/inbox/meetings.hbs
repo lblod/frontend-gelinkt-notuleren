@@ -1,4 +1,4 @@
-<AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen zittingen" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage="Geen zittingen" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |t|>
   <t.menu as |menu|>
     <menu.general>
       <AuToolbar @size="large">
@@ -8,7 +8,7 @@
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
-          <AuButton {{action 'openNewDocument'}}>
+          <AuButton {{on "click" this.openNewDocument}}>
             Nieuwe zitting
           </AuButton>
         </AuToolbarGroup>
@@ -18,9 +18,9 @@
   <t.content as |c|>
     <c.header>
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">Zitting</span></th>
-      <AuDataTableThSortable @field="bestuursorgaan.naam" @currentSorting={{sort}} @label="Bestuursorgaan" />
-      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{sort}} @label="Tijdstip" />
-      <AuDataTableThSortable @field="opLocatie" @currentSorting={{sort}} @label="Locatie" />
+      <AuDataTableThSortable @field="bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label="Bestuursorgaan" />
+      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{this.sort}} @label="Tijdstip" />
+      <AuDataTableThSortable @field="opLocatie" @currentSorting={{this.sort}} @label="Locatie" />
     </c.header>
     <c.body as |meeting|>
       <td>
