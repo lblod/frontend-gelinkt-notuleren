@@ -19,7 +19,7 @@
 	  	<div class="container-flex--scroll">
 		    <div class="u-padding--round--small">
 	        {{!-- <h3 class="title--alt small u-spacer--none">Opgeslagen documentversies</h3> --}}
-		        {{#each orderedRevisions as |revision|}}
+		        {{#each this.orderedRevisions as |revision|}}
 							<div class="u-hr u-padding--bottom--small u-spacer--small">
 	            	<h4 class="h5 u-spacer--tiny">Versie van {{moment-calendar revision.updatedOn}}</h4>
 	            	<p class="small text-fade u-spacer--small">{{revision.updatedOn}}</p>
@@ -63,10 +63,10 @@
     @modalOpen={{this.showConfirmationModal}}
     @closeModal={{this.cancelConfirmRevisionsToRemove}} as |Modal| >
     <Modal.Body>
-      {{#if revisionsToRemove}}
+      {{#if this.revisionsToRemove}}
    			<p class="u-spacer--small">Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:</p>
     		<ul class="numbered-list">
-	        {{#each revisionsToRemove as |revision|}}
+	        {{#each this.revisionsToRemove as |revision|}}
 	          <li class="u-hr u-padding--bottom--small">
 	          	Versie van {{moment-calendar revision.updatedOn}}
 	          	<p class="text-fade">{{revision.title}}</p>

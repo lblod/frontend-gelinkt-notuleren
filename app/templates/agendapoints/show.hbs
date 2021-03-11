@@ -14,13 +14,8 @@
       </div>
       <div class="au-o-grid__item au-u-2-3@medium">
         <div class="editor__paper editor__paper--disabled editor__paper--full">
-          <div vocab={{editorDocumentVocab}}
-                     prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit#"
-               resource="#"
-               typeof="foaf:Document"
-               class="container-flex--contain">
-            {{ this.model.editorDocument.htmlSafeContent }}
-          </div>
+          {{!-- TODO: add wrapping vocab,prefix,type, etc --}}
+          {{ this.model.editorDocument.htmlSafeContent }}
         </div>
       </div>
 
