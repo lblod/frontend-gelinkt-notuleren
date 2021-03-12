@@ -1,4 +1,3 @@
-import { computed } from '@ember/object';
 import Component from '@glimmer/component';
 
 const CONCEPT_STATUS = "a1974d071e6a47b69b85313ebdcef9f7";

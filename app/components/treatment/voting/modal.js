@@ -3,8 +3,6 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
 import { task, restartableTask } from "ember-concurrency-decorators";
-import AgendaManagerIndexComponent from "../../agenda-manager";
-import { allSettled } from "ember-concurrency";
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
 /** @typedef {import("../../../models/bestuursorgaan").default} Bestuursorgaan*/
 /** @typedef {import("../../../models/stemming").default} Stemming*/
@@ -16,8 +14,6 @@ import { allSettled } from "ember-concurrency";
  * @property {boolean} show
  * @property {() => void} onClose
  */
-
-const COUNCIL_MEMBER_URI = "http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011";
 
 /** @extends {Component<Args>} */
 export default class TreatmentVotingModalComponent extends Component {

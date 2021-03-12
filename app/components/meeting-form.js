@@ -84,7 +84,6 @@ export default class MeetingForm extends Component {
 
   @task
   *fetchTreatments() {
-    const zitting = yield this.zitting;
     const treatments = new Array();
     const pageSize = 20;
     const firstPage = yield this.store.query('behandeling-van-agendapunt', {
