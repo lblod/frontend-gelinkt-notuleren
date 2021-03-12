@@ -1,18 +1,16 @@
 import Component from '@glimmer/component';
+import { DRAFT_STATUS_ID, PUBLISHED_STATUS_ID, PLANNED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 
-const CONCEPT_STATUS = "a1974d071e6a47b69b85313ebdcef9f7";
-const GEAGENDEERD_STATUS = "7186547b61414095aa2a4affefdcca67";
-const GEPUBLICEERD_STATUS = "ef8e4e331c31430bbdefcdb2bdfbcc06";
 export default class EditorDocumentStatusPillComponent extends Component {
   get editorStatusClass() {
     const statusId = this.args.status?.get('id');
-    if (statusId == CONCEPT_STATUS) {
+    if (statusId == DRAFT_STATUS_ID) {
       return "border";
     }
-    else if ( statusId == GEAGENDEERD_STATUS) {
+    else if (statusId == PLANNED_STATUS_ID) {
       return "action";
     }
-    else if ( statusId == GEPUBLICEERD_STATUS) {
+    else if (statusId == PUBLISHED_STATUS_ID) {
       return "success";
     }
     else {
