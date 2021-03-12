@@ -4,7 +4,7 @@ export default JSONAPIAdapter.extend({
   init() {
     this._super(...arguments);
   },
-  async ajax(url, method) {
+  ajax(url, method) {
     if (method === 'POST')
       return this._super(...arguments);
 
