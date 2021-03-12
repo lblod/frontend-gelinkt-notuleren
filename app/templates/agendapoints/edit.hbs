@@ -1,32 +1,34 @@
 <AppChrome
-  @documentType="draftDecisions"
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
-  @save={{action "save"}} @sendToTrash={{action "sendToTrash"}} @exportHtmlFunction={{action "download"}} />
-{{!-- Hide toolbar until implemented {{#editor-toolbar}}{{/editor-toolbar}} --}}
-{{#if this.validationErrors}}
-  <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{action "closeValidationModal"}} as |m|>
+  @save={{hash action=(perform this.saveTask) isRunning=this.saveTask.isRunning}}
+  @sendToTrash={{this.toggleDeleteModal}}
+  @exportHtmlFunction={{this.download}}
+/>
+
+{{#if this.hasDocumentValidationErrors}}
+  <WuModal @title="Geef uw document een naam" @dialog-class="modal-dialog--wide modal-dialog--sectioned" @onClose={{this.closeValidationModal}} as |m|>
     <m.content>
       Klik op de titel om uw document een naam te geven.
     </m.content>
     <m.buttons as |b|>
-      <b.button @label="OK" @onClick={{action "closeValidationModal"}} />
+      <b.button @label="OK" @onClick={{this.closeValidationModal}} />
     </m.buttons>
   </WuModal>
 {{/if}}
 
 {{#if this.displayDeleteModal}}
-  <WuModal @title="Wilt u dit document naar de prullenmand verplaatsen?" @onClose={{action "onCloseDeleteModal"}} as |m|>
+  <WuModal @title="Wilt u dit document naar de prullenmand verplaatsen?" @onClose={{this.toggleDeleteModal}} as |m|>
     <div class="modal-dialog__buttons">
       <m.buttons as |b|>
-        <b.button @label="Ja, verplaats naar prullenmand" @onClick={{action "deleteDocument"}} />
-        <b.button @label="Annuleren" @onClick={{action "onCloseDeleteModal"}} @isLink={{true}} @icon="vi-cross" />
+        <b.button @label="Ja, verplaats naar prullenmand" @onClick={{this.deleteDocument}} />
+        <b.button @label="Annuleren" @onClick={{this.toggleDeleteModal}} @isLink={{true}} @icon="vi-cross" />
       </m.buttons>
     </div>
   </WuModal>
 {{/if}}
 
-{{#if this.saveIsRunning}}
+{{#if this.saveTask.isRunning}}
 <div class="editor-container container-flex--scroll">
   <div class="editor">
     <div class="grid grid--align-center">
@@ -39,7 +41,7 @@
             <h3 class="h3">Bezig met opslaan</h3>
           </div>
           <span class="scanner__bar"></span>
-          {{safeHTML this.editor.htmlContent}}
+          {{this.editorDocument.htmlSafeContent}}
         </div>
       </div>
     </div>
@@ -48,8 +50,7 @@
 {{else}}
   <RdfaEditorContainer
     @profile={{this.profile}}
-    @rdfaEditorContainerInit={{action "handleRdfaEditorInit"}}
-    @onUpdateTasklists={{action "updateTasklists"}}
+    @rdfaEditorContainerInit={{this.handleRdfaEditorInit}}
     @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}

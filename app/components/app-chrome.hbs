@@ -47,11 +47,11 @@
         </AuPill>
         {{/if}}
       </div>
-      <EditorDocumentTitle @title={{@editorDocument.title}} @editActive=@editorDocument.isNew @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
+      <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
       {{#if @editorDocument.isNew}}
-        <LinkTo @route="inbox.index" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
+        <LinkTo @route="inbox.agendapoints" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
           <AuIcon @icon="bin" @alignment="left" />
           Verwijder concept
         </LinkTo>
@@ -63,16 +63,17 @@
             Exporteer als HTML
           </AuButton>
         {{/if}}
+        {{#if @sendToTrash}}
         <AuButton {{on "click" @sendToTrash}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
           <AuIcon @icon="bin" @alignment="left" />
           Naar prullenmand
         </AuButton>
+        {{/if}}
       </AuDropdown>
       {{/if}}
-      {{#if @publish}}
-        <AuButton {{on "click" @publish}} @skin="secondary">Ondertekenen en publiceren</AuButton>
+      {{#if @save}}
+        <AuButton {{on "click" @save.action}} @disabled={{@save.isRunning}}>Bewaar</AuButton>
       {{/if}}
-      <AuButton {{on "click" @save}}>Bewaar</AuButton>
     </AuToolbarGroup>
   </AuToolbar>
   </div>

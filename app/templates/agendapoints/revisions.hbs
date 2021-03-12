@@ -1,50 +1,48 @@
 <div class="au-o-box au-o-box--small au-c-app-chrome">
 	<div class="u-spacer--small">
-		<WuLinkButton @isSmall={{true}} @isNarrow={{true}} @isDarkLink={{true}} @isLink={{true}} @onClick={{action "back"}}>
-			&leftarrow; Terug naar laatste versie document
-	  </WuLinkButton>
+    <AuLink @linkRoute="agendapoints.edit" @model={{this.model.container.id}} @skin="secondary">
+      <AuIcon @icon="arrow-left" @alignment="left" />
+      Terug naar laatste versie document
+    </AuLink>
 	</div>
   <div class="grid">
   	<div class="col--6-12 col--8-12--m col--12-12--s">
-			<h1 class="h4 u-spacer--tiny">Versiegeschiedenis {{model.editorDocument.title}}</h1>
-			<p class="small text-fade u-spacer--tiny">Laatst opgeslagen: {{moment-calendar model.editorDocument.updatedOn}} ({{model.editorDocument.updatedOn}})</p>
+			<h1 class="h4 u-spacer--tiny">Versiegeschiedenis {{this.model.editorDocument.title}}</h1>
+			<p class="small text-fade u-spacer--tiny">Laatst opgeslagen: {{moment-calendar this.model.editorDocument.updatedOn}} ({{this.model.editorDocument.updatedOn}})</p>
 		</div>
 	</div>
 </div>
+
 <div class="container-flex--contain">
 	<div class="grid grid--collapse">
 	  <div class="col--3-12 col--4-12--m col--6-12--s u-border--right">
 	  	<div class="container-flex--scroll">
 		    <div class="u-padding--round--small">
 	        {{!-- <h3 class="title--alt small u-spacer--none">Opgeslagen documentversies</h3> --}}
-			    {{#if fetchRevisions.isRunning}}
-			      Aan het laden...
-			    {{else}}
-		        {{#each orderedRevisions as |revision|}}
+		        {{#each this.orderedRevisions as |revision|}}
 							<div class="u-hr u-padding--bottom--small u-spacer--small">
 	            	<h4 class="h5 u-spacer--tiny">Versie van {{moment-calendar revision.updatedOn}}</h4>
 	            	<p class="small text-fade u-spacer--small">{{revision.updatedOn}}</p>
-	            	<WuButtonGroup>
-	    						<WuButton @isTiny="true" @isNarrow="true" @onClick={{action "details" revision}}>
-	    							<i class="fa fa-eye"></i> Bekijk versie
-	    						</WuButton>
-	    						<WuButton @isTiny="true" @isAlt="true" @isNarrow="true" @onClick={{action "confirmRevisionsToRemove" revision}}>
-	    							<i class="fa fa-rotate-left"></i> Herstel versie
-	    						</WuButton>
-								</WuButtonGroup>
+                <AuButtonGroup>
+                  <AuButton @icon="eye" {{on "click" (fn this.details revision)}}>
+                    Bekijk versie
+                  </AuButton>
+                  <AuButton @icon="redo" @skin="secondary" {{on "click" (fn this.confirmRevisionsToRemove revision)}}>
+                    Herstel versie
+                  </AuButton>
+                </AuButtonGroup>
 							</div>
 		        {{/each}}
-			    {{/if}}
 			  </div>
 			</div>
 		</div>
     <div class="col--9-12 col--8-12--m col--6-12--s">
     	<div class="container-flex--scroll">
-	  		{{#if revisionDetail}}
+	  		{{#if this.revisionDetail}}
 		  		<div class="editor">
 		    		<div class="u-padding--round">
 		    			<div class="editor__paper">
-					      {{{ revisionDetail.content }}}
+					      {{this.revisionDetail.htmlSafeContent}}
 					    </div>
 				    </div>
 				  </div>
@@ -60,13 +58,15 @@
 	</div>
 </div>
 
-{{#if showConfirmationModal}}
-  <WuModal @title="Bent u zeker dat u deze versie wil herstellen?" @dialog-class="modal-dialog--sectioned" @onClose={{action "cancelConfirmRevisionsToRemove"}} as |m|>
-    <m.content>
-    	{{#if revisionsToRemove}}
+<AuModal
+    @modalTitle="Bent u zeker dat u deze versie wil herstellen?"
+    @modalOpen={{this.showConfirmationModal}}
+    @closeModal={{this.cancelConfirmRevisionsToRemove}} as |Modal| >
+    <Modal.Body>
+      {{#if this.revisionsToRemove}}
    			<p class="u-spacer--small">Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:</p>
     		<ul class="numbered-list">
-	        {{#each revisionsToRemove as |revision|}}
+	        {{#each this.revisionsToRemove as |revision|}}
 	          <li class="u-hr u-padding--bottom--small">
 	          	Versie van {{moment-calendar revision.updatedOn}}
 	          	<p class="text-fade">{{revision.title}}</p>
@@ -76,13 +76,12 @@
       {{else}}
       	<p class="text-fade">Geen nieuwere versies om weer te geven.</p>
       {{/if}}
-    </m.content>
-    <div class="modal-dialog__footer">
-      <m.buttons as |b|>
-        <b.button @label="Herstel versie en verwerp nieuwere versies" @isNarrow={{true}} @isWarning={{true}} @onClick={{action "restore"}} />
-        <b.button @label="Annuleer" @onClick={{action "cancelConfirmRevisionsToRemove"}} @isLink={{true}} @icon="vi-cross" />
-      </m.buttons>
-    </div>
-  </WuModal>
-{{/if}}
-{{outlet}}
+
+      </Modal.Body>
+      <Modal.Footer>
+        <AuButtonGroup>
+          <AuButton {{on "click" this.restore}}>Herstel versie en verwerp nieuwere versies</AuButton>
+          <AuButton @skin="secondary" {{on "click" this.cancelConfirmRevisionsToRemove}}>{{t "participationListModal.cancelButton"}}</AuButton>
+        </AuButtonGroup>
+      </Modal.Footer>
+</AuModal>

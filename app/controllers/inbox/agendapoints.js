@@ -10,6 +10,6 @@ export default class InboxDraftDecisionsController extends Controller.extend(Def
 
   @action
   openNewDocument() {
-    this.transitionToRoute('draft-decisions.new');
+    this.transitionToRoute('agendapoints.new');
   }
 }

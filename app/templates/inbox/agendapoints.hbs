@@ -9,7 +9,7 @@
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
           <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
-          <LinkTo @route="draft-decisions.new" class="au-c-button-link">{{t "inbox.agendapoints.new"}}</LinkTo>
+          <LinkTo @route="agendapoints.new" class="au-c-button-link">{{t "inbox.agendapoints.new"}}</LinkTo>
         </AuToolbarGroup>
       </AuToolbar>
     </menu.general>
@@ -24,7 +24,7 @@
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
       <td>
-          <LinkTo @route="draft-decisions.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo>
+          <LinkTo @route="agendapoints.edit" @model={{container.id}} class="au-c-link">{{row.title}}</LinkTo>
       </td>
       <td>
         {{moment-calendar row.updatedOn}}

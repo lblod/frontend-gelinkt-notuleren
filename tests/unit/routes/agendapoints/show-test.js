@@ -1,11 +1,11 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Route | editor-documents', function(hooks) {
+module('Unit | Route | agendapoints/show', function(hooks) {
   setupTest(hooks);
 
   test('it exists', function(assert) {
-    let route = this.owner.lookup('route:editor-documents');
+    let route = this.owner.lookup('route:agendapoints/show');
     assert.ok(route);
   });
 });
