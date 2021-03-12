@@ -1,16 +1,23 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 
-export default Model.extend({
-  voornaam: attr(),
-  achternaam: attr(),
-  rijksregisterNummer: attr(),
-  account: hasMany('account', { inverse: null}),
-  bestuurseenheden: hasMany('bestuurseenheid'),
-  group: computed('bestuurseenheden', function () {
-    return this.get('bestuurseenheden.firstObject');
-  }), // used for mock login
-  fullName: computed('voornaam', 'achternaam', function() {
+export default class UserModel extends Model {
+  @attr voornaam;
+  @attr achternaam;
+  @attr rijksregisterNummer;
+
+  @hasMany('account', { inverse: null })
+  account;
+
+  @hasMany('bestuurseenheden', { inverse: null })
+  bestuurseenheden;
+
+  // this is only used for mock login afaik
+  get group() {
+    return this.bestuurseenheden.firstObject;
+  }
+
+  get fullName() {
     return `${this.voornaam} ${this.achternaam}`.trim();
-  })
-});
+  }
+}
