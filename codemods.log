@@ -1,1 +1,2 @@
 2019-11-22T19:39:26.495Z [warn] WARNING: {{capitalize}} was not converted as it has positional parameters which can't be automatically converted. Source: app/templates/components/editor-status-pill.hbs
+2021-03-15T07:40:22.634Z [info] [/home/sergey/Desktop/editor-update/frontend-gelinkt-notuleren/app/components/snippets-notifier.js]: SUCCESS
