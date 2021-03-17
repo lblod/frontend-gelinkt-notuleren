@@ -145,7 +145,7 @@
       </AuToolbar>
       <div class="au-u-margin-top-none au-u-margin-bottom-large">
         <AuButton
-          {{ on 'click' (fn this.print @document.id)}}
+          {{ on 'click' (fn @print @document.id)}}
           @disabled={{not this.signaturesCount}}>
           {{t "timelineStep.printButtonLabel" name=@name}}
         </AuButton>
