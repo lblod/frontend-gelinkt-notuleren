@@ -137,7 +137,7 @@
       </div>
 
       {{!-- Print --}}
-      {{#if @print}}
+      {{#if this.canPrint}}
       <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
         <AuToolbarGroup>
           <AuHeading @level="2" @skin="4">{{t "timelineStep.printButtonLabel" name=@name}}</AuHeading>
