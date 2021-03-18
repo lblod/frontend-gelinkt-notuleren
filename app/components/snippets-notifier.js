@@ -1,8 +1,7 @@
 import { inject as service } from '@ember/service';
-// import { computed } from '@ember/object';
 import { tracked } from "@glimmer/tracking";
 import Component from '@glimmer/component';
-import { action, computed, get } from '@ember/object'
+import { action, computed, get } from '@ember/object';
 
 export default class SnippetsNotifier extends Component {
 
