@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import {task} from "ember-concurrency-decorators";
 import {tracked} from "@glimmer/tracking";
 import { fetch } from 'fetch';
+import { action } from '@ember/object';
 
 export default class MeetingsPublishUittrekselsController extends Controller {
   @tracked
@@ -86,5 +87,10 @@ export default class MeetingsPublishUittrekselsController extends Controller {
     yield fetch(`/signing/behandeling/publish/${id}/${behandeling.get('id')}`, { method: 'POST' });
     yield this.reloadUittreksels.perform();
 
+  }
+
+  @action
+  print(id) {
+    this.transitionToRoute('print.uittreksel', id);
   }
 }

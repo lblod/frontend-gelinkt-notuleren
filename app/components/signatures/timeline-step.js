@@ -40,6 +40,10 @@ export default class SignaturesTimelineStep extends Component {
     return false;
   }
 
+  get canPrint() {
+    return this.signedResources.length > 0 && this.args.print;
+  }
+
   get signaturesCount() {
     return this.signedResources.length;
   }

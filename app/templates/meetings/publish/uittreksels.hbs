@@ -7,6 +7,7 @@
         @behandeling={{uittreksel}}
         @signing={{perform this.createSignedResource uittreksel.behandeling}}
         @publish={{perform this.createPublishedResource uittreksel.behandeling}}
+        @print={{this.print}}
       />
     {{else}}
     <AuAlert @alertIcon="alert-triangle" @alertskin="warning" @alertsize="small">

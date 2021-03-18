@@ -137,7 +137,7 @@
       </div>
 
       {{!-- Print --}}
-      {{#if @print}}
+      {{#if this.canPrint}}
       <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
         <AuToolbarGroup>
           <AuHeading @level="2" @skin="4">{{t "timelineStep.printButtonLabel" name=@name}}</AuHeading>
@@ -145,7 +145,7 @@
       </AuToolbar>
       <div class="au-u-margin-top-none au-u-margin-bottom-large">
         <AuButton
-          {{ on 'click' (fn this.print @document.id)}}
+          {{ on 'click' (fn @print @document.id)}}
           @disabled={{not this.signaturesCount}}>
           {{t "timelineStep.printButtonLabel" name=@name}}
         </AuButton>
