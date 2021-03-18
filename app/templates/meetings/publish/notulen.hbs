@@ -4,11 +4,11 @@
     <Signatures::Notulen::TimelineStep
       @name="notulen"
       @notulen={{this.notulen}}
-      @publicBehandelingUris={{publicBehandelingUris}}
-      @behandelings={{behandelings}}
-      @behandelingContainerId={{behandelingContainerId}}
-      @zittingWrapper={{zittingWrapper}}
-      @togglePublicationStatus={{togglePublicationStatus}}
+      @publicBehandelingUris={{this.publicBehandelingUris}}
+      @behandelings={{this.behandelings}}
+      @behandelingContainerId={{this.behandelingContainerId}}
+      @zittingWrapper={{this.zittingWrapper}}
+      @togglePublicationStatus={{this.togglePublicationStatus}}
       @signing={{perform this.createSignedResource}}
       @publish={{perform this.createPublishedResource}}
     />
