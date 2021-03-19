@@ -3,14 +3,14 @@
 		<div class="u-padding--top--tiny">
 			<div class="grid">
 				<div class="col--6-12">
-					<LinkTo @route="meetings.publish.uittreksels" @model={{model.zitting.id}} @isDarkLink={{true}} class="smaller link--dark">
+					<LinkTo @route="meetings.publish.uittreksels" @model={{this.model.zitting.id}} @isDarkLink={{true}} class="smaller link--dark">
 						<i class="vi-arrow vi-u-180deg vi vi-u-xs"></i> Terug naar ondertekenen &amp; publiceren
 					</LinkTo>
 					<div class="u-padding--tb--large">
 						<h1 class="h4 u-spacer--bottom--tiny">
 							<i class="vi vi-paper vi-u-m" aria-hidden="true"></i> Maak een print of PDF van een uittreksel
 						</h1>
-						<p>U kan deze pagina opslaan als PDF, of printen. Bekijk hoe opslaan en printen werkt in Firefox of Chrome, in de <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren-printen" target="_blank">handleiding</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.</p>
+						<p>U kan deze pagina opslaan als PDF, of printen. Bekijk hoe opslaan en printen werkt in Firefox of Chrome, in de <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren-printen" target="_blank" rel="noopener noreferrer">handleiding</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.</p>
 					</div>
 				</div>
 			</div>
@@ -22,28 +22,19 @@
 				<h1 class="h1 u-spacer--bottom--small">
 					Uittreksel uit de notulen
 					<br>
-					{{bestuursorgaan.naam}}
+					{{this.bestuursorgaan.naam}}
 					<br>
-					zitting van {{moment-format geplandeStart 'L LT'}}
+					zitting van {{moment-format this.geplandeStart 'L LT'}}
 				</h1>
-				<p class="u-spacer--bottom--large">{{!-- Dit is een rechtsgeldig ondertekend document. --}}Het document slaat op de situatie zoals gekend bij het afleveren{{!-- , afgeleverd te {{locatie}} op {{datum}}, door {{naam}} --}}.</p>
+				<p class="u-spacer--bottom--large">Het document slaat op de situatie zoals gekend bij het afleveren.</p>
 
 				<div class="document-print--uittreksel--blockchain-signature">
 					<div class="grid">
-						{{#each model.signedResources as |signature|}}
+						{{#each this.model.signedResources as |signature|}}
 					  	<div class="col--6-12">
 						    <p class="uppercase text-fade smaller u-spacer--bottom--tinier">Ondertekend door</p>
 						    <h3 class="h6">{{signature.gebruiker.fullName}}</h3>
 						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
-						    {{!-- <p class="text-fade smaller uppercase"><i class="fa fa-lock vi-u-s"></i> Blockchain hash ondertekening</p> --}}
-						    {{!-- {{#if signature.hashValue}} --}}
-{{!-- 							    <p class="uppercase small u-spacer--tiny word-break--break-word">
-							      {{signature.hashValue}}
-							    </p> --}}
-						    {{!-- {{else}} --}}
-						    	{{!-- <p class="smaller">Ondertekening werd nog niet versleuteld op de blockchain.</p> --}}
-						    	{{!-- <p class="smaller">Nog niet ondertekend.</p> --}}
-						    {{!-- {{/if}} --}}
 						  </div>
 						{{/each}}
 					</div>
@@ -52,27 +43,18 @@
 				<div class="u-hr u-spacer--tb"></div>
 
 				<div class="u-spacer--left">
-					{{{model.content}}}
+					{{html-safe this.model.content}}
 				</div>
 
 				<div class="u-hr u-spacer--bottom"></div>
 
 				<div class="document-print--uittreksel--blockchain-signature u-spacer--bottom--large">
 					<div class="grid">
-						{{#each model.signedResources as |signature|}}
+						{{#each this.model.signedResources as |signature|}}
 					  	<div class="col--6-12">
 						    <p class="uppercase text-fade smaller u-spacer--bottom--tinier">Ondertekend door</p>
 						    <h3 class="h6">{{signature.gebruiker.fullName}}</h3>
 						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
-						    {{!-- <p class="text-fade smaller uppercase"><i class="fa fa-lock vi-u-s"></i> Blockchain hash ondertekening</p> --}}
-						    {{!-- {{#if signature.hashValue}} --}}
-{{!-- 							    <p class="uppercase small u-spacer--tiny word-break--break-word">
-							      {{signature.hashValue}}
-							    </p> --}}
-						    {{!-- {{else}} --}}
-						    	{{!-- <p class="smaller">Ondertekening werd nog niet versleuteld op de blockchain.</p> --}}
-						    	{{!-- <p class="smaller">Nog niet ondertekend.</p> --}}
-						    {{!-- {{/if}} --}}
 						  </div>
 						{{/each}}
 					</div>
