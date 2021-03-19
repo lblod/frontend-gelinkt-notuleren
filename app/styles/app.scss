@@ -140,6 +140,8 @@
 @import "appuniversum/u-spacings";
 @import "appuniversum/u-visible";
 @import "appuniversum/u-widths";
+// Extra project specific override styles
+@import 'project/u-print';
 
 
 // TEMPORARY HACKS AND QUICKFIXES
