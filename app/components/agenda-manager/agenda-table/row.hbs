@@ -15,8 +15,12 @@
          (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
   </td>
   <td class="au-u-table-right">
-    <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
-      {{t "manageAgendaZittingModal.editItemButton"}}
-    </AuButton>
+    {{#if this.published}}
+      {{t "manageAgendaZittingModal.apPublishedMsg"}}
+    {{else}}
+      <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
+        {{t "manageAgendaZittingModal.editItemButton"}}
+      </AuButton>
+    {{/if}}
   </td>
 </DraggableObject>

@@ -106,6 +106,7 @@ manageAgendaZittingModal:
   actionsLabel: Actions
   createItemButton: Add agenda item
   editItemButton: Edit agenda item
+  apPublishedMsg: Agenda point is published
   noDataMessage: No agenda items found.
   geplandOpenbaarTrueLabel: Public
   geplandOpenbaarFalseLabel: Private

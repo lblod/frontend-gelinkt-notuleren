@@ -106,6 +106,7 @@ manageAgendaZittingModal:
   actionsLabel: Acties
   createItemButton: Voeg agendapunt toe
   editItemButton: Bewerk agendapunt
+  apPublishedMsg: Agendapunt gepubliceerd
   noDataMessage: Geen agendapunten gevonden.
   geplandOpenbaarTrueLabel: Openbaar
   geplandOpenbaarFalseLabel: Besloten
