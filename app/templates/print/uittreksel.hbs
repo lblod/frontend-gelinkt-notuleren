@@ -1,66 +1,59 @@
-<div class="container--flex-scroll">
-	<section class="u-padding--rl--small u-background--gray-lighter u-hide-on-print u-hide-on-print--show">
-		<div class="u-padding--top--tiny">
-			<div class="grid">
-				<div class="col--6-12">
-					<LinkTo @route="meetings.publish.uittreksels" @model={{this.model.zitting.id}} @isDarkLink={{true}} class="smaller link--dark">
-						<i class="vi-arrow vi-u-180deg vi vi-u-xs"></i> Terug naar ondertekenen &amp; publiceren
-					</LinkTo>
-					<div class="u-padding--tb--large">
-						<h1 class="h4 u-spacer--bottom--tiny">
-							<i class="vi vi-paper vi-u-m" aria-hidden="true"></i> Maak een print of PDF van een uittreksel
-						</h1>
-						<p>U kan deze pagina opslaan als PDF, of printen. Bekijk hoe opslaan en printen werkt in Firefox of Chrome, in de <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren-printen" target="_blank" rel="noopener noreferrer">handleiding</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="u-padding--rl--small u-spacer--tb document-print" id="main">
-		<div class="grid">
-			<div class="col--8-12 u-wide-on-print">
-				<h1 class="h1 u-spacer--bottom--small">
-					Uittreksel uit de notulen
-					<br>
-					{{this.bestuursorgaan.naam}}
-					<br>
-					zitting van {{moment-format this.geplandeStart 'L LT'}}
-				</h1>
-				<p class="u-spacer--bottom--large">Het document slaat op de situatie zoals gekend bij het afleveren.</p>
+<div class="au-c-body-container au-c-body-container--scroll">
+  <section class="au-o-box u-background--gray-lighter u-hide-on-print u-hide-on-print--show">
+    <div class="au-o-grid">
+      <div class="au-o-grid__item au-u-3-4@medium au-u-1-2@large">
+        <AuContent>
+          <AuLink @linkRoute="meetings.publish.uittreksels" @model={{this.model.zitting.id}} @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+            Terug naar ondertekenen &amp; publiceren
+          </AuLink>
+          <AuHeading @skin="3">
+            <AuIcon @icon="document" @iconAlignment="left" />
+            Maak een print of PDF van een uittreksel
+          </AuHeading>
+          <p>U kan deze pagina opslaan als PDF, of printen. Bekijk hoe opslaan en printen werkt in Firefox of Chrome, in de <a href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren-printen" target="_blank" rel="noopener noreferrer" class="au-c-link">handleiding</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.</p>
+        </AuContent>
+      </div>
+    </div>
+  </section>
+  <section class="au-o-box" id="main">
+    <div class="au-o-grid">
+      <div class="au-o-grid__item au-u-3-4@large au-u-wide-on-print">
+        <AuHeading>
+          Uittreksel uit de notulen
+          <br>
+          {{this.bestuursorgaan.naam}}
+          <br>
+          zitting van {{moment-format this.geplandeStart 'L LT'}}
+        </AuHeading>
+        <p class="au-u-margin-top-small au-u-margin-bottom">Het document slaat op de situatie zoals gekend bij het afleveren.</p>
 
-				<div class="document-print--uittreksel--blockchain-signature">
-					<div class="grid">
-						{{#each this.model.signedResources as |signature|}}
-					  	<div class="col--6-12">
-						    <p class="uppercase text-fade smaller u-spacer--bottom--tinier">Ondertekend door</p>
-						    <h3 class="h6">{{signature.gebruiker.fullName}}</h3>
-						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
-						  </div>
-						{{/each}}
-					</div>
-				</div>
+        <div class="au-o-grid">
+          {{#each this.model.signedResources as |signature|}}
+            <div class="au-o-grid__item au-u-1-2@medium">
+              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">Ondertekend door</AuHeading>
+              <p>{{signature.gebruiker.fullName}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
+            </div>
+          {{/each}}
+        </div>
 
-				<div class="u-hr u-spacer--tb"></div>
+        <AuHr @size="large" />
 
-				<div class="u-spacer--left">
-					{{html-safe this.model.content}}
-				</div>
+        {{html-safe this.model.content}}
 
-				<div class="u-hr u-spacer--bottom"></div>
+        <AuHr @size="large" />
 
-				<div class="document-print--uittreksel--blockchain-signature u-spacer--bottom--large">
-					<div class="grid">
-						{{#each this.model.signedResources as |signature|}}
-					  	<div class="col--6-12">
-						    <p class="uppercase text-fade smaller u-spacer--bottom--tinier">Ondertekend door</p>
-						    <h3 class="h6">{{signature.gebruiker.fullName}}</h3>
-						    <p class="u-spacer--small">{{moment-format signature.createdOn 'L LT'}}</p>
-						  </div>
-						{{/each}}
-					</div>
-				</div>
-				{{outlet}}
-			</div>
-		</div>
-	</section>
+        <div class="au-o-grid">
+          {{#each this.model.signedResources as |signature|}}
+            <div class="au-o-grid__item au-u-1-2@medium">
+              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">Ondertekend door</AuHeading>
+              <p>{{signature.gebruiker.fullName}} <br> {{moment-format signature.createdOn 'L LT'}}</p>
+            </div>
+          {{/each}}
+        </div>
+
+        {{outlet}}
+
+      </div>
+    </div>
+  </section>
 </div>
