@@ -63,14 +63,14 @@
     height: auto;
   }
 
-  .document-print--uittreksel--blockchain-signature {
-    .col--6-12 {
-      width: 49%;
-      min-width: auto;
-      display: inline-block;
-      vertical-align: top;
-    }
-  }
+  // .document-print--uittreksel--blockchain-signature {
+  //   .col--6-12 {
+  //     width: 49%;
+  //     min-width: auto;
+  //     display: inline-block;
+  //     vertical-align: top;
+  //   }
+  // }
 
   .editor-container {
 
@@ -116,6 +116,10 @@
     pointer-events: none;
   }
 
+  .au-c-pill {
+    border-color: $au-gray-300 !important;
+  }
+
   .u-wide-on-print,
   .au-u-wide-on-print {
     min-width: 100% !important;
@@ -127,5 +131,100 @@
   @page {
     counter-increment: page;
     counter-reset: page 1;
+  }
+
+
+
+  // App container
+  .au-c-app-container,
+  .au-c-main-container,
+  .container--flex-scroll {
+    overflow: auto !important;
+    height: auto !important;
+  }
+
+  // Buttons
+  .au-c-card .au-c-button {
+    display: none !important;
+  }
+
+  .checkbox--switch__wrapper {
+    display: none !important;
+  }
+
+  // Links
+  .au-c-link {
+    display: block !important;
+    text-decoration: none !important;
+  }
+
+  // Tables
+  .au-c-data-table__sort {
+    display: none !important;
+  }
+
+  .au-c-data-table__header {
+    border-bottom: .2rem solid $au-gray-300;
+  }
+
+  .au-c-data-table__header-title--sortable {
+    text-decoration: none !important;
+  }
+
+  // Editor
+  .say-container__main * {
+    border-bottom: 0 !important;
+  }
+
+  .mark-highlight-manual {
+    display: none !important;
+  }
+
+  // [property="ext:hiddenBesluitType"] {
+  //   display: block !important;
+  // }
+
+  // Meeting print view
+  .au-c-meeting-chrome .au-c-heading--1 {
+    @include au-font-size($au-h2, $important: true);
+  }
+
+  .au-c-meeting-chrome .au-c-heading--3 {
+    @include au-font-size($au-h4, $important: true);
+  }
+
+  .au-c-onboarding {
+    display: none !important;
+  }
+
+  .au-c-meeting-chrome {
+    width: 100% !important;
+    left: 0 !important;
+    padding: 0 !important;
+  }
+
+  .au-c-meeting-chrome .au-c-button {
+    display: none !important;
+  }
+
+  .au-c-meeting-chrome strong {
+    border-bottom: 0 !important;
+  }
+
+  .au-c-meeting-chrome .au-u-margin-top-huge {
+    margin-top: $au-unit !important;
+  }
+
+  .au-c-meeting-chrome-card {
+    margin-bottom: $au-unit !important;
+  }
+
+  .au-c-meeting-chrome__paper {
+    padding: 0 !important;
+  }
+
+  // Publish
+  .au-c-editor-preview-treatment--private .behandeling [property="dc:subject"]:after, .au-c-editor-preview-treatment--private .behandeling [property="eli:title"]:after, .au-c-editor-preview-treatment--private .behandeling [property="eli:description"]:after, .au-c-editor-preview-treatment--private .behandeling [property="besluit:openbaar"]:after {
+    border-right-color: $au-gray-300 !important;
   }
 }

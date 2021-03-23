@@ -124,9 +124,6 @@
 @import "project/p-annotations-content-en";
 
 
-// UTILITIES (DEPRECATED)
-@import 'deprecated/print';
-
 
 // UTILITIES
 @import "appuniversum/u-align-text";
@@ -140,6 +137,8 @@
 @import "appuniversum/u-spacings";
 @import "appuniversum/u-visible";
 @import "appuniversum/u-widths";
+// Extra project specific override styles
+@import 'project/u-print';
 
 
 // TEMPORARY HACKS AND QUICKFIXES
