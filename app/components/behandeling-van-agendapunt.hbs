@@ -1,3 +1,10 @@
+{{#if this.published}}
+<div class="au-c-meeting-chrome-editable">
+  <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
+    <LinkTo @route="agendapoints.show" @model={{this.documentContainer.id}} class="au-c-link">{{@behandeling.onderwerp.titel}}</LinkTo>
+  </AuHeading>
+</div>
+{{else}}
 <div class="au-c-meeting-chrome-editable">
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
     {{@behandeling.onderwerp.titel}}
@@ -47,3 +54,4 @@
     </AuButton>
   </AuButtonGroup>
 </div>
+{{/if}}
