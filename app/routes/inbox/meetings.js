@@ -6,9 +6,19 @@ export default Route.extend(DataTableRouteMixin, {
   queryParams: {
     page: { refreshModel: true },
     size: { refreshModel: true },
-    sort: { refreshModel: true },
+    sort: { refreshModel: true  },
     filter: { refreshModel: true },
     // filter params
     title: { refreshModel: true }
   },
+  mergeQueryOptions(params) {
+    var sort;
+    if(!params.sort){
+      sort=params.sort;
+    }
+    else if(!params.sort.includes('geplande-start')){
+      sort=params.sort+',-geplande-start';
+    }
+    return { sort: sort };
+  }
 });
