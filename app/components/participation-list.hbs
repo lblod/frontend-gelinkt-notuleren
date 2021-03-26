@@ -38,6 +38,7 @@
   </ul>
 </div>
 {{/if}}
+{{#if (not @readOnly)}}
 <AuButton
   @width="block"
   @skin="secondary"
@@ -49,6 +50,7 @@
 >
   {{@modalTitle}}
 </AuButton>
+{{/if}}
 
 <ParticipationList::Modal
   @voorzitter={{this.chairman}}

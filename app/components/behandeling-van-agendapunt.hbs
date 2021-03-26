@@ -1,9 +1,47 @@
 {{#if this.published}}
 <div class="au-c-meeting-chrome-editable">
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
-    <LinkTo @route="agendapoints.show" @model={{this.documentContainer.id}} class="au-c-link">{{@behandeling.onderwerp.titel}}</LinkTo>
+    {{@behandeling.onderwerp.titel}}
+  </AuHeading>
+  <div class="au-o-box au-o-box--small au-c-meeting-chrome-card au-u-margin-bottom-none">
+    <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--inset au-u-margin-bottom-small">{{t "behandelingVanAgendapunten.visibility"}}</AuHeading>
+    {{#if this.openbaar}}
+      <AuLabel>&nbsp;{{t "behandelingVanAgendapunten.openbaarMsg"}}</AuLabel>
+    {{else}}
+      <AuLabel>&nbsp;{{t "behandelingVanAgendapunten.geenOpenbaarMsg"}}</AuLabel>
+    {{/if}}
+  </div>
+
+  {{#if this.fetchParticipants.isRunning}}
+    <AuLoader @size="small" />
+    <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
+  {{else}}
+    <ParticipationList
+      @chairman={{this.voorzitter}}
+      @secretary={{this.secretaris}}
+      @defaultSecretary={{@defaultSecretary}}
+      @defaultChairman={{@defaultChairman}}
+      @bestuursorgaan={{@bestuursorgaan}}
+      @possibleParticipants={{@possibleParticipants}}
+      @aanwezigenBijStart={{this.aanwezigen}}
+      @afwezigenBijStart={{this.afwezigen}}
+      @onSave={{this.saveParticipants}}
+      @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
+      @meeting={{@meeting}}
+      @readOnly={{this.published}}
+    />
+  {{/if}}
+  <br>
+  <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
+    <LinkTo @route="agendapoints.show" @model={{this.documentContainer.id}} class="au-c-link" target="_blank">{{@behandeling.onderwerp.titel}} - {{t "behandelingVanAgendapunten.documentLink"}}</LinkTo>
   </AuHeading>
 </div>
+
+
+
+
+
+
 {{else}}
 <div class="au-c-meeting-chrome-editable">
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
@@ -30,6 +68,7 @@
       @onSave={{this.saveParticipants}}
       @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
       @meeting={{@meeting}}
+      @readOnly={{this.published}}
    />
   {{/if}}
     {{#if this.hasParticipants}}

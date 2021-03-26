@@ -31,9 +31,9 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @task
   *getStatus(){
     const container=yield this.documentContainer;
-    if(container){
+    if(container.isLoaded){
       const status=yield container.status;
-      if(status){
+      if(status.isLoaded){
         if(status.id==PUBLISHED_STATUS_ID){
           this.published=true;
         }

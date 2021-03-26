@@ -21,8 +21,11 @@ publish:
   loadingMessage: Loading...
   excerptsErrorMessage: There are no excerpts available
 behandelingVanAgendapunten:
+  documentLink: "document link"
   saveButton: Save
   openbaarLabel: "make agendapoint public"
+  geenOpenbaarMsg: "agendapoint not public"
+  openbaarMsg: "agendapoint public"
   participationListButton: Configure attendees of this agenda-item.
   visibility: "visibility"
   votingTitle: "Voting"
