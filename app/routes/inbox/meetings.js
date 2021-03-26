@@ -19,6 +19,9 @@ export default Route.extend(DataTableRouteMixin, {
     else if(!params.sort.includes('geplande-start')){
       sort=params.sort+',-geplande-start';
     }
+    else{
+      sort=params.sort;
+    }
     return { sort: sort };
   }
 });
