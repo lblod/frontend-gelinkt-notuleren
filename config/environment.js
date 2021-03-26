@@ -20,6 +20,10 @@ module.exports = function(environment) {
       '@lblod/ember-rdfa-editor-date-plugin': {
         allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY',  'DD.MM.YYYY'],
         outputDateFormat: 'D MMMM YYYY'
+      },
+      analytics: {
+        appDomain: "{{ANALYTICS_APP_DOMAIN}}",
+        plausibleScript: "{{ANALYTICS_PLAUSIBLE_SCRIPT}}"
       }
     },
     featureFlags: {
