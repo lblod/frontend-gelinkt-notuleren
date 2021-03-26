@@ -5,10 +5,6 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class InboxMeetingsController extends Controller.extend(DefaultQueryParamsMixin) {
-  constructor(...args){
-    super(...args);
-  }
-
   @service currentSession;
   @tracked sort = '-geplande-start';
 
