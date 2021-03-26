@@ -34,10 +34,13 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
         }
       }
     });
+    const startOfMeeting = this.args.meeting.gestartOpTijdstip ? this.args.meeting.gestartOpTijdstip : this.args.meeting.geplandeStart;
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[bekleedt][bevat-in][:id:]': bestuursorganen.map((b) => b.id).join(','),
+      'filter[:lte:start]': startOfMeeting.toISOString()
     };
-    this.options = yield this.store.query('functionaris', queryParams);
+    const candidateOptions = yield this.store.query('functionaris', queryParams);
+    this.options = candidateOptions.reject((functionaris) => functionaris.einde && functionaris.einde < startOfMeeting);
   }
 }
