@@ -24,7 +24,7 @@ behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
   openbaarLabel: "maak agendapunt openbaar"
-  geenOpenbaarMsg: "agendapunt geen openbaar"
+  geenOpenbaarMsg: "agendapunt niet openbaar"
   openbaarMsg: "agendapunt openbaar"
   participationListButton: Beheer aanwezigen bij dit agendapunt
   visibility: "Zichtbaarheid"

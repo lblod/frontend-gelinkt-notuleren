@@ -16,7 +16,9 @@
   </td>
   <td class="au-u-table-right">
     {{#if this.published}}
-      {{t "manageAgendaZittingModal.apPublishedMsg"}}
+      <AuPill @skin="success">
+        {{t "manageAgendaZittingModal.apPublishedMsg"}}
+      </AuPill>
     {{else}}
       <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
         {{t "manageAgendaZittingModal.editItemButton"}}

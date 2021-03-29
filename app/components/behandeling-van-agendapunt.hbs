@@ -1,15 +1,23 @@
 {{#if this.published}}
 <div class="au-c-meeting-chrome-editable">
-  <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
-    {{@behandeling.onderwerp.titel}}
-  </AuHeading>
+  <AuToolbar>
+    <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
+      {{@behandeling.onderwerp.titel}}
+
+    </AuHeading>
+    <AuPill @skin="success">
+      {{t "manageAgendaZittingModal.apPublishedMsg"}}
+    </AuPill>
+  </AuToolbar>
   <div class="au-o-box au-o-box--small au-c-meeting-chrome-card au-u-margin-bottom-none">
     <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--inset au-u-margin-bottom-small">{{t "behandelingVanAgendapunten.visibility"}}</AuHeading>
+    <AuPill @skin="border">
     {{#if this.openbaar}}
-      <AuLabel>&nbsp;{{t "behandelingVanAgendapunten.openbaarMsg"}}</AuLabel>
+      {{t "behandelingVanAgendapunten.openbaarMsg"}}
     {{else}}
-      <AuLabel>&nbsp;{{t "behandelingVanAgendapunten.geenOpenbaarMsg"}}</AuLabel>
+      {{t "behandelingVanAgendapunten.geenOpenbaarMsg"}}
     {{/if}}
+    </AuPill>
   </div>
 
   {{#if this.fetchParticipants.isRunning}}
@@ -31,17 +39,16 @@
       @readOnly={{this.published}}
     />
   {{/if}}
-  <br>
-  <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
-    <LinkTo @route="agendapoints.show" @model={{this.documentContainer.id}} class="au-c-link" target="_blank">{{@behandeling.onderwerp.titel}} - {{t "behandelingVanAgendapunten.documentLink"}}</LinkTo>
-  </AuHeading>
+  <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
+    <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "behandelingVanAgendapunten.contentTitle"}}</AuHeading>
+    <div class="au-o-box au-o-box--small">
+      <LinkTo @route="agendapoints.show" @model={{this.documentContainer.id}} class="au-c-link" target="_blank">
+        <AuIcon @icon="document" @alignment="left"/>
+        {{@behandeling.onderwerp.titel}} - {{t "behandelingVanAgendapunten.documentLink"}}
+      </LinkTo>
+    </div>
+  </div>
 </div>
-
-
-
-
-
-
 {{else}}
 <div class="au-c-meeting-chrome-editable">
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
