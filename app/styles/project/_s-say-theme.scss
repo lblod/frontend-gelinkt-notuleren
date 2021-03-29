@@ -159,3 +159,9 @@ $say-label-color                   : $au-gray-800 !default;
 $say-help-text-color             : $au-gray-800 !default;
 $say-help-text-error-color       : $au-red-600 !default;
 $say-help-text-font-size         : 1.4rem !default;
+
+
+// DISABLED EDITOR
+.say-content--disabled {
+  cursor: default;
+}

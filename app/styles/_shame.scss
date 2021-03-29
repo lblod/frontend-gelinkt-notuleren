@@ -450,12 +450,6 @@ input.input-field {
   border-top: .1rem dotted $au-gray-200;
 }
 
-// Temp styles for archive
-.editor__paper--full {
-  width: calc(100% - #{$au-unit-large});
-  max-width: calc(100% - #{$au-unit-large});
-}
-
 // Modal quick fixes
 .au-c-modal__footer {
   position: relative;
