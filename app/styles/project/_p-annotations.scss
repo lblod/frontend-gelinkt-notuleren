@@ -212,3 +212,11 @@
     }
   }
 }
+
+// Disable certain annotations when editor is disabled/preview
+.rdfa-annotations--disabled {
+  .mark-highlight-manual,
+  .mark-highlight-manual::before {
+    display: none !important;
+  }
+}

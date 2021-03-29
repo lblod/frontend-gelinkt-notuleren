@@ -1,4 +1,5 @@
 import Component from "@glimmer/component";
+import { PUBLISHED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
 import { action } from "@ember/object";
@@ -16,6 +17,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @tracked afwezigen = [];
   @tracked voorzitter;
   @tracked secretaris;
+  @tracked published=false;
 
   constructor() {
     super(...arguments);
@@ -24,8 +26,20 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.documentContainer = this.args.behandeling.documentContainer;
     this.tryToFetchDocument.perform();
     this.fetchParticipants.perform();
+    this.getStatus.perform();
   }
-
+  @task
+  *getStatus(){
+    const container=yield this.documentContainer;
+    if(container.isLoaded){
+      const status=yield container.status;
+      if(status.isLoaded){
+        if(status.id==PUBLISHED_STATUS_ID){
+          this.published=true;
+        }
+      }
+    }
+  }
   get hasParticipants() {
     return this.aanwezigen.length;
   }

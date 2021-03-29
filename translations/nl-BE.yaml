@@ -21,8 +21,11 @@ publish:
   loadingMessage: Bezig met laden...
   excerptsErrorMessage: Er zijn geen uittreksels beschikbaar
 behandelingVanAgendapunten:
+  documentLink: "document link"
   saveButton: Opslaan
   openbaarLabel: "maak agendapunt openbaar"
+  geenOpenbaarMsg: "agendapunt niet openbaar"
+  openbaarMsg: "agendapunt openbaar"
   participationListButton: Beheer aanwezigen bij dit agendapunt
   visibility: "Zichtbaarheid"
   votingTitle: "Stemming"
@@ -106,6 +109,7 @@ manageAgendaZittingModal:
   actionsLabel: Acties
   createItemButton: Voeg agendapunt toe
   editItemButton: Bewerk agendapunt
+  apPublishedMsg: Agendapunt gepubliceerd
   noDataMessage: Geen agendapunten gevonden.
   geplandOpenbaarTrueLabel: Openbaar
   geplandOpenbaarFalseLabel: Besloten

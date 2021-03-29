@@ -5,20 +5,23 @@
   @readOnly={{true}}
 />
 
-<div class="editor-container container-flex--scroll">
-  <div class="editor">
-    <div class="au-o-grid au-o-grid--flush au-o-grid--reverse">
-      <div class="au-o-grid__item au-u-1-3@medium">
-        <div class="au-o-box">
+<div class="au-c-body-container">
+  <div class="au-c-rdfa-editor">
+    <div class="say-container say-container--sidebar-left">
+      <div class="say-container__main">
+        <div class="au-o-box au-o-box--small au-c-theme-gray-100">
+          <AuAlert @alertIcon="info-circle" @alertTitle="Niet editeerbaar"  @alertskin="info" @alertsize="small" class="au-u-margin-bottom-none">
+            <p>Dit artikel is reeds gepubliceerd. Gepubliceerde agendapunten zijn niet editeerbaar.</p>
+          </AuAlert>
+        </div>
+        <div class="say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled">
+          <div class="say-editor__paper">
+            <div class="say-editor__inner say-content say-content--disabled">
+              {{ this.model.editorDocument.htmlSafeContent }}
+            </div>
+          </div>
         </div>
       </div>
-      <div class="au-o-grid__item au-u-2-3@medium">
-        <div class="editor__paper editor__paper--disabled editor__paper--full">
-          {{!-- TODO: add wrapping vocab,prefix,type, etc --}}
-          {{ this.model.editorDocument.htmlSafeContent }}
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
