@@ -201,6 +201,11 @@
       p > span + span:before {
         content: ",";
       }
+
+      [property="besluit:heeftAanwezige"]:before,
+      p > span:before {
+        margin-left: -.4ex;
+      }
     }
   }
 }
