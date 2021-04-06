@@ -4,6 +4,7 @@
   @save={{hash action=(perform this.saveTask) isRunning=this.saveTask.isRunning}}
   @sendToTrash={{this.toggleDeleteModal}}
   @exportHtmlFunction={{this.download}}
+  @copyAgendapunt={{perform this.copyAgendapunt}}
 />
 
 {{#if this.hasDocumentValidationErrors}}
@@ -28,7 +29,7 @@
   </WuModal>
 {{/if}}
 
-{{#if this.saveTask.isRunning}}
+{{#if (or this.saveTask.isRunning this.copyAgendapunt.isRunning)}}
 <div class="editor-container container-flex--scroll">
   <div class="editor">
     <div class="grid grid--align-center">
@@ -38,7 +39,13 @@
             <div class="badge badge--l badge--initials">
               <span class="loader"><span class="u-visually-hidden">Aan het verwerken</span></span>
             </div>
-            <h3 class="h3">Bezig met opslaan</h3>
+            <h3 class="h3">
+              {{#if this.saveTask.isRunning}}
+                Bezig met opslaan
+              {{else}}  
+                Kopie aan het maken
+              {{/if}}
+            </h3>
           </div>
           <span class="scanner__bar"></span>
           {{this.editorDocument.htmlSafeContent}}
