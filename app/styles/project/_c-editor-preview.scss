@@ -183,6 +183,33 @@
   }
 }
 
+// Quickfix for mandatee lists
+.au-c-editor-preview {
+  .behandeling,
+  .notulen {
+    // Mandatees: present
+    [property="ext:aanwezigenTable"] {
+      span {
+        display: inline-block;
+      }
+
+      [property="besluit:heeftAanwezige"] {
+        display: inline-block;
+      }
+
+      [property="besluit:heeftAanwezige"] + [property="besluit:heeftAanwezige"]:before,
+      p > span + span:before {
+        content: ",";
+      }
+
+      [property="besluit:heeftAanwezige"]:before,
+      p > span:before {
+        margin-left: -.4ex;
+      }
+    }
+  }
+}
+
 
 /* Notulen treatment (public/private)
  ========================================================================== */
