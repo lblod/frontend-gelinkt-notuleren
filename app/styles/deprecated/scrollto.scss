@@ -9,15 +9,15 @@
 
 @keyframes bg{
   0%{
-    background: rgba($primary-yellow, 1);
+    background: rgba($au-yellow-300, 1);
   }
   20%{
-        background: rgba($primary-yellow, 0.8);
+        background: rgba($au-yellow-300, 0.8);
   }
   50%{
-        background: rgba($primary-yellow, 0.5);
+        background: rgba($au-yellow-300, 0.5);
   }
   100%{
-    background: rgba($primary-yellow, 0);
+    background: rgba($au-yellow-300, 0);
   }
 }

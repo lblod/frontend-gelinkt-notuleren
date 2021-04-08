@@ -19,9 +19,6 @@
  * SHAME: Temporary hacks and quickfixes
  */
 
-// WU VARIABLES (DEPRECATED)
-@import 'deprecated/colors';
-
 
 // VARIABLES
 @import "appuniversum/s-colors.scss";
@@ -58,15 +55,16 @@
 
 
 // WU COMPONENTS (DEPRECATED)
-@import 'ember-vo-webuniversum-data-table';
 @import 'ember-vo-webuniversum';
+@import 'ember-vo-webuniversum-data-table';
 @import 'ember-power-select';
 
 
+
 // COMPONENTS (DEPRECATED)
+@import 'deprecated/tasklist';
 @import 'deprecated/scrollto';
 @import 'deprecated/loading-events';
-@import 'deprecated/tasklist';
 @import 'deprecated/wizard';
 
 

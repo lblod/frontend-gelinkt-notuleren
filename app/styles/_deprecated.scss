@@ -12,7 +12,7 @@ li.link-list__item > span {
 li.link-list__item > button.button {
   padding: 1rem 1.5rem;
   background-color: transparent;
-  color: $primary-blue;
+  color: $au-blue-700;
   border: none;
   height: auto;
   display: block;
@@ -22,18 +22,18 @@ li.link-list__item > button.button {
   line-height: 1.4;
 
   &:hover {
-    background-color: $blue-gray-lightest;
+    background-color: $au-gray-100;
   }
 
   &.button--disabled {
-    color: $gray;
+    color: $au-gray-600;
     pointer-events: none;
   }
 }
 
 /* ember data table red color override */
 .data-table-menu {
-  color: $gray-dark;
+  color: $au-gray-700;
 }
 
 .badge--xs {
@@ -67,8 +67,8 @@ li.link-list__item > button.button {
 }
 
 .data-table--bordered {
-  border-left: 1px solid $gray-lighter;
-  border-right: 1px solid $gray-lighter;
+  border-left: 1px solid $au-gray-200;
+  border-right: 1px solid $au-gray-200;
 }
 
 /* temporary styling for import-export demo */

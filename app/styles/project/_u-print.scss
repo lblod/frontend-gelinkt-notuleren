@@ -5,7 +5,7 @@
 
 .u-hide-on-print--show,
 .au-u-hide-on-print--show {
-  border-bottom: 3px dashed $blue-gray;
+  border-bottom: 3px dashed $au-gray-300;
   position: relative;
   margin-bottom: 6rem;
 
@@ -15,8 +15,8 @@
     position: absolute;
     left: 2rem;
     bottom: -1.6rem;
-    background-color: $blue-gray;
-    color: $white;
+    background-color: $au-gray-300;
+    color: $au-white;
     width: 3rem;
     height: 3rem;
     border-radius: 2rem;
