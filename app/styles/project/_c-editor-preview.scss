@@ -289,6 +289,10 @@
   padding: $au-unit;
   border-bottom: .1rem solid $au-gray-300;
   background-color: $au-gray-200;
+
+  .au-c-toggle-switch__toggle {
+    background-color: $au-gray-300;
+  }
 }
 
 .au-c-editor-preview-treatment__info--private {
