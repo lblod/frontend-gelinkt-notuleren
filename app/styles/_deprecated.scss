@@ -1,0 +1,113 @@
+/* ==========================================================================
+   #DEPRECATED
+   Styles that are flagged to be removed
+   ========================================================================== */
+
+/* spans in link lists replacing data */
+li.link-list__item > span {
+  display: block;
+  padding: 1rem 1.5rem;
+}
+
+li.link-list__item > button.button {
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  color: $primary-blue;
+  border: none;
+  height: auto;
+  display: block;
+  width: 100%;
+  text-align: left;
+  white-space: initial;
+  line-height: 1.4;
+
+  &:hover {
+    background-color: $blue-gray-lightest;
+  }
+
+  &.button--disabled {
+    color: $gray;
+    pointer-events: none;
+  }
+}
+
+/* ember data table red color override */
+.data-table-menu {
+  color: $gray-dark;
+}
+
+.badge--xs {
+  width: 2rem;
+  height: 2rem;
+  line-height: 0.9;
+  padding: 0.25rem 0.4rem;
+  text-align: center;
+  position: relative;
+  top: 0.6rem;
+
+  .vi {
+    font-size: 0.9rem;
+  }
+}
+
+.pill {
+  .badge--xs {
+    position: relative;
+    top: 0.3rem;
+    margin-right: 0.5rem;
+    line-height: 1.1;
+    width: 1.6rem;
+    height: 1.6rem;
+    padding: 0 0.35rem;
+  }
+}
+
+.data-table--white tr {
+  background-color: white !important;
+}
+
+.data-table--bordered {
+  border-left: 1px solid $gray-lighter;
+  border-right: 1px solid $gray-lighter;
+}
+
+/* temporary styling for import-export demo */
+.preview-list__image {
+  width: 16rem;
+  height: 20rem;
+  display: block;
+  box-shadow: 0 0 6px 0 #CBD2DA;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.preview-list__name {
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+
+.description-data__value--placeholder {
+  font-style: italic;
+  // color: $gray;
+  font-weight: 300;
+  font-size: 1.4rem;
+}
+
+/* temporary fix for besluittypes dropdown */
+
+.ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
+  z-index: 9999;
+}
+
+/* temporary demo fixes for fracties */
+input.input-field {
+  padding-right: 0;
+}
+
+.data-table th .button {
+  font-weight: normal;
+}
+
+.modal-dialog.modal-dialog--sectioned .modal-dialog__content {
+  max-height: 75vh;
+}
