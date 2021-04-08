@@ -29,19 +29,23 @@
 {{/if}}
 
 {{#if this.saveTask.isRunning}}
-<div class="editor-container container-flex--scroll">
-  <div class="editor">
-    <div class="grid grid--align-center">
-      <div class="col--7-12">
-        <div class="au-c-rdfa-scanner say-content rdfa-annotations scanner">
-          <div class="scanner__text">
-            <div class="badge badge--l badge--initials">
-              <span class="loader"><span class="u-visually-hidden">Aan het verwerken</span></span>
+<div class="container-flex--contain">
+  <div class="au-c-rdfa-editor">
+    <div class="say-container say-container--sidebar-left">
+      <div class="say-container__main">
+        <div class="say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover">
+          <div class="say-editor__paper">
+            <div class="au-c-scanner">
+              <div class="au-c-scanner__text">
+                <AuLoader @size="small" />
+                <AuHelpText @size="large">Bezig met opslaan</AuHelpText>
+              </div>
+              <span class="au-c-scanner__bar"></span>
             </div>
-            <h3 class="h3">Bezig met opslaan</h3>
+            <div class="say-editor__inner say-content">
+              {{this.editorDocument.htmlSafeContent}}
+            </div>
           </div>
-          <span class="scanner__bar"></span>
-          {{this.editorDocument.htmlSafeContent}}
         </div>
       </div>
     </div>

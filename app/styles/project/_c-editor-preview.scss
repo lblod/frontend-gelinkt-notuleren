@@ -337,6 +337,74 @@
   color: $gray;
 }
 
+/* Style publishing animation
+ ========================================================================== */
+
+ .au-c-scanner {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  pointer-events: none;
+
+  &:after {
+    content: "";
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: rgba($white, 0.7);
+  }
+
+  .au-c-loader {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .au-c-loader::before {
+    height: .4rem !important;
+  }
+}
+
+.au-c-scanner__text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: $au-unit-huge;
+  text-align: center;
+  z-index: 10;
+}
+
+.au-c-scanner__bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: $au-yellow-300;
+  z-index: 1;
+  animation: move 3s cubic-bezier(0.15, 0.44, 0.76, 0.64);
+  animation-iteration-count: infinite;
+  border-right: 1rem $au-yellow-300 solid;
+  margin-top: 0;
+}
+
+@keyframes move {
+  0% {
+    width: 0;
+    background-color: rgba($white, .5);
+  }
+  100% {
+    width: 100%;
+    background-color: rgba($au-yellow-300, .5);
+  }
+}
+
 /* Behandeling preview publicatie
  ========================================================================== */
 
@@ -572,75 +640,5 @@
 //   [property="besluit:openbaar"]:after {
 //     content: "Openbaar agendapunt:";
 //     margin-left: 0.7rem;
-//   }
-// }
-
-
-
-/* Style publishing animation (deprecated - delete after testing)
- ========================================================================== */
-
-// .scanner {
-//   backface-visibility: hidden;
-//   position: relative;
-//   pointer-events: none;
-
-//   .badge {
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
-
-//   .loader:before {
-//     display: block;
-//   }
-
-//   &:after {
-//     content: "";
-//     display: block;
-//     left: 0;
-//     right: 0;
-//     top: 0;
-//     bottom: 0;
-//     position: absolute;
-//     background-color: rgba($white, 0.7);
-//   }
-
-//   .scanner__text {
-//     position: absolute;
-//     left: 0;
-//     top: 0;
-//     right: 0;
-//     bottom: 0;
-//     padding-top: 20rem;
-//     text-align: center;
-//     z-index: 10;
-
-//     h3 {
-//       margin-top: 0;
-//     }
-//   }
-
-//   .scanner__bar {
-//     position: absolute;
-//     left: 0;
-//     top: 0;
-//     height: 100%;
-//     background-color: rgba($primary-yellow, 1);
-//     z-index: 1;
-//     animation: move 3s cubic-bezier(0.15, 0.44, 0.76, 0.64);
-//     animation-iteration-count: infinite;
-//     border-right: 1rem $primary-yellow solid;
-//     margin-top: 0;
-//   }
-// }
-
-// @keyframes move {
-//   0% {
-//     width: 0;
-//     background-color: rgba($white, 0.5);
-//   }
-//   100% {
-//     width: 100%;
-//     background-color: rgba($primary-yellow, 0.5);
 //   }
 // }
