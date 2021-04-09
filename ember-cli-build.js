@@ -18,6 +18,9 @@ module.exports = function (defaults) {
         },
       },
     },
+    '@lblod/ember-vo-webuniversum': {
+      'shouldImportComponentCss': false,
+    },
     sassOptions: {
       sourceMapEmbed: true,
       includePaths: [
