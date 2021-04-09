@@ -63,6 +63,12 @@
             Exporteer als HTML
           </AuButton>
         {{/if}}
+        {{#if @copyAgendapunt}}
+          <AuButton {{on "click" @copyAgendapunt}} @skin="tertiary" role="menuitem">
+            <AuIcon @icon="export" @alignment="left" />
+            Copy Agendapunt
+          </AuButton>
+        {{/if}}
         {{#if @sendToTrash}}
         <AuButton {{on "click" @sendToTrash}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
           <AuIcon @icon="bin" @alignment="left" />

@@ -4,6 +4,7 @@
   @save={{hash action=(perform this.saveTask) isRunning=this.saveTask.isRunning}}
   @sendToTrash={{this.toggleDeleteModal}}
   @exportHtmlFunction={{this.download}}
+  @copyAgendapunt={{perform this.copyAgendapunt}}
 />
 
 {{#if this.hasDocumentValidationErrors}}
@@ -35,7 +36,7 @@
   </AuModal>
 {{/if}}
 
-{{#if this.saveTask.isRunning}}
+{{#if (or this.saveTask.isRunning this.copyAgendapunt.isRunning)}}
 <div class="container-flex--contain">
   <div class="au-c-rdfa-editor">
     <div class="say-container say-container--sidebar-left">
@@ -45,7 +46,13 @@
             <div class="au-c-scanner">
               <div class="au-c-scanner__text">
                 <AuLoader @size="small" />
-                <AuHelpText @size="large">Bezig met opslaan</AuHelpText>
+                <AuHelpText @size="large">
+                  {{#if this.saveTask.isRunning}}
+                    Bezig met opslaan
+                  {{else}}
+                    Kopie aan het maken
+                  {{/if}}
+                </AuHelpText>
               </div>
               <span class="au-c-scanner__bar"></span>
             </div>
