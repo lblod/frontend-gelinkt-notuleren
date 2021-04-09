@@ -34,6 +34,14 @@ export default class AgendapointsEditController extends Controller {
     generateExportFromEditorDocument(this.editorDocument);
   }
 
+  @task
+  *copyAgendapunt() {
+    const response = yield fetch(`/agendapoint-service/${this.documentContainer.id}/copy`, {method: 'POST'});
+    const json = yield response.json();
+    const agendapuntId = json.uuid;
+    yield this.transitionToRoute('agendapoints.edit', agendapuntId);
+  }
+
   @action
   toggleDeleteModal(){
     this.displayDeleteModal = ! this.displayDeleteModal;

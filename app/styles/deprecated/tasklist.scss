@@ -8,12 +8,12 @@
   left: -50rem;
   top: 44px;
   bottom: 0;
-  background: $white;
+  background: $au-white;
   min-width: $au-unit-huge*3 + $au-unit;
   max-width: $au-unit-huge*3 + $au-unit;
   display: block;
   z-index: 9;
-  border-right: 1px solid $blue-gray-lighter;
+  border-right: 1px solid $au-gray-200;
   box-shadow: 0 1px 3px rgba($au-gray-900, .1), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
   display: flex;
   flex-direction: column;

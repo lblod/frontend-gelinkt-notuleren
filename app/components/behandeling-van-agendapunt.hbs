@@ -1,3 +1,55 @@
+{{#if this.published}}
+<div class="au-c-meeting-chrome-editable">
+  <AuToolbar>
+    <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
+      {{@behandeling.onderwerp.titel}}
+
+    </AuHeading>
+    <AuPill @skin="success">
+      {{t "manageAgendaZittingModal.apPublishedMsg"}}
+    </AuPill>
+  </AuToolbar>
+  <div class="au-o-box au-o-box--small au-c-meeting-chrome-card au-u-margin-bottom-none">
+    <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--inset au-u-margin-bottom-small">{{t "behandelingVanAgendapunten.visibility"}}</AuHeading>
+    <AuPill @skin="border">
+    {{#if this.openbaar}}
+      {{t "behandelingVanAgendapunten.openbaarMsg"}}
+    {{else}}
+      {{t "behandelingVanAgendapunten.geenOpenbaarMsg"}}
+    {{/if}}
+    </AuPill>
+  </div>
+
+  {{#if this.fetchParticipants.isRunning}}
+    <AuLoader @size="small" />
+    <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
+  {{else}}
+    <ParticipationList
+      @chairman={{this.voorzitter}}
+      @secretary={{this.secretaris}}
+      @defaultSecretary={{@defaultSecretary}}
+      @defaultChairman={{@defaultChairman}}
+      @bestuursorgaan={{@bestuursorgaan}}
+      @possibleParticipants={{@possibleParticipants}}
+      @aanwezigenBijStart={{this.aanwezigen}}
+      @afwezigenBijStart={{this.afwezigen}}
+      @onSave={{this.saveParticipants}}
+      @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
+      @meeting={{@meeting}}
+      @readOnly={{this.published}}
+    />
+  {{/if}}
+  <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
+    <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "behandelingVanAgendapunten.contentTitle"}}</AuHeading>
+    <div class="au-o-box au-o-box--small">
+      <LinkTo @route="agendapoints.show" @model={{this.documentContainer.id}} class="au-c-link" target="_blank">
+        <AuIcon @icon="document" @alignment="left"/>
+        {{@behandeling.onderwerp.titel}} - {{t "behandelingVanAgendapunten.documentLink"}}
+      </LinkTo>
+    </div>
+  </div>
+</div>
+{{else}}
 <div class="au-c-meeting-chrome-editable">
   <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
     {{@behandeling.onderwerp.titel}}
@@ -23,6 +75,7 @@
       @onSave={{this.saveParticipants}}
       @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
       @meeting={{@meeting}}
+      @readOnly={{this.published}}
    />
   {{/if}}
     {{#if this.hasParticipants}}
@@ -47,3 +100,4 @@
     </AuButton>
   </AuButtonGroup>
 </div>
+{{/if}}

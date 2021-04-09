@@ -4,167 +4,11 @@
    Some parts will be reused, but most of them will not.
    ========================================================================== */
 
-/* side nav problem remove once webuniversum updated*/
-
-.side-navigation__item a {
-  word-break: initial;
-}
-
-/* step styling override remove once webuniversum updated*/
-
-.step__header > .grid {
-  width: 100%;
-}
-
-.step__content p + p {
-  margin-top: 0;
-}
-
-/* spans in link lists replacing data */
-
-li.link-list__item > span {
-  display: block;
-  padding: 1rem 1.5rem;
-}
-
-li.link-list__item > button.button {
-  padding: 1rem 1.5rem;
-  background-color: transparent;
-  color: $primary-blue;
-  border: none;
-  height: auto;
-  display: block;
-  width: 100%;
-  text-align: left;
-  white-space: initial;
-  line-height: 1.4;
-
-  &:hover {
-    background-color: $blue-gray-lightest;
-  }
-
-  &.button--disabled {
-    color: $gray;
-    pointer-events: none;
-  }
-}
-
-/* ember data table red color override */
-
-.data-table-menu {
-  color: $gray-dark;
-}
-
-.badge--xs {
-  width: 2rem;
-  height: 2rem;
-  line-height: 0.9;
-  padding: 0.25rem 0.4rem;
-  text-align: center;
-  position: relative;
-  top: 0.6rem;
-
-  .vi {
-    font-size: 0.9rem;
-  }
-}
-
-.pill {
-  .badge--xs {
-    position: relative;
-    top: 0.3rem;
-    margin-right: 0.5rem;
-    line-height: 1.1;
-    width: 1.6rem;
-    height: 1.6rem;
-    padding: 0 0.35rem;
-  }
-}
-
-/** Collapsable document structure */
-.editor-container {
-  background-color: $blue-gray-lightest;
-
-  .grid {
-
-    .sidebar-wrapper {
-      position: relative;
-      transition: 0.5s;
-      left: 0;
-
-      &.col--3-12.col--collapsed {
-        left: calc(-25% + 50px);
-      }
-
-      .sidebar {
-        background-color: white;
-
-        .sidebar__header i {
-          cursor: pointer;
-        }
-      }
-    }
-  }
-}
-
-/* temporary fix for besluittypes dropdown */
-
-.ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
-  z-index: 9999;
-}
-
-/* temporary demo fixes for fracties */
-
-input.input-field {
-  padding-right: 0;
-}
-
-.data-table th .button {
-  font-weight: normal;
-}
-
-.modal-dialog.modal-dialog--sectioned .modal-dialog__content {
-  max-height: 75vh;
-}
-
-.data-table--white tr {
-  background-color: white !important;
-}
-
-.data-table--bordered {
-  border-left: 1px solid $gray-lighter;
-  border-right: 1px solid $gray-lighter;
-}
-
-
 // Temporary focus overrides for focus area's
 // @TODO: discuss where to put this or how to fix this focus style.
 #main:focus,
 #content:focus {
   outline: 0;
-}
-
-/* temporary styling for import-export demo */
-
-.preview-list__image {
-  width: 16rem;
-  height: 20rem;
-  display: block;
-  box-shadow: 0 0 6px 0 #CBD2DA;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-
-.preview-list__name {
-  line-height: 1;
-  margin-bottom: 2rem;
-}
-
-.description-data__value--placeholder {
-  font-style: italic;
-  // color: $gray;
-  font-weight: 300;
-  font-size: 1.4rem;
 }
 
 // Fix ACMIDM login alerts/loading in header
@@ -214,16 +58,6 @@ input.input-field {
   }
 }
 
-.au-c-toolbar__group--column {
-  flex-direction: column;
-  align-items: flex-start !important;
-
-  > * + * {
-    margin-left: 0;
-    margin-top: $au-unit-tiny;
-  }
-}
-
 // Fix visited state on links acting as buttons
 // @TODO: port to ember-appuniversum component or convert link to button
 .au-c-button-link {
@@ -267,19 +101,6 @@ input.input-field {
     background-color: $au-button-contrast-active-color;
   }
 }
-
-// Ember a11y refocus
-#ember-a11y-refocus-nav-message {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 
 // Data table quick fix
 // @TODO port to appuniversum
@@ -399,9 +220,6 @@ input.input-field {
   }
 }
 
-
-
-
 .au-c-datepicker {
   input,
   .datepicker {
@@ -410,50 +228,9 @@ input.input-field {
   }
 }
 
-// Flow object @TODO: remove after appuniversum update
-.au-o-flow {
-  > * {
-    margin-bottom: 0;
-  }
-
-  > * + * {
-    margin-top: $au-unit;
-  }
-}
-
-.au-o-flow--tiny {
-  > * + * {
-    margin-top: $au-unit-tiny;
-  }
-}
-
-.au-o-flow--small {
-  > * + * {
-    margin-top: $au-unit-small;
-  }
-}
-
-.au-o-flow--large {
-  > * + * {
-    margin-top: $au-unit-large;
-  }
-}
-
-.au-o-flow--huge {
-  > * + * {
-    margin-top: $au-unit-huge;
-  }
-}
-
 .au-hr-dotted {
   border: 0;
   border-top: .1rem dotted $au-gray-200;
-}
-
-// Temp styles for archive
-.editor__paper--full {
-  width: calc(100% - #{$au-unit-large});
-  max-width: calc(100% - #{$au-unit-large});
 }
 
 // Modal quick fixes
@@ -592,4 +369,25 @@ input.input-field {
   .au-c-control--radio {
     margin-right: $au-unit-small;
   }
+}
+
+// Temp fix for data table search component
+.input-field-icon-container--block.input-field-icon-container--left {
+  @extend .au-c-input-wrapper;
+
+  .input-field.input-field--block {
+    @extend .au-c-input;
+    @extend .au-c-input--block;
+  }
+
+  .input-field__icon {
+    position: absolute;
+    left: $au-unit-small;
+    top: $au-unit-tiny - .1rem;
+  }
+}
+
+// Fix missing u-hidden
+.u-hidden {
+  @extend .au-u-hidden-visually;
 }
