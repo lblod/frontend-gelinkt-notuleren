@@ -370,3 +370,24 @@
     margin-right: $au-unit-small;
   }
 }
+
+// Temp fix for data table search component
+.input-field-icon-container--block.input-field-icon-container--left {
+  @extend .au-c-input-wrapper;
+
+  .input-field.input-field--block {
+    @extend .au-c-input;
+    @extend .au-c-input--block;
+  }
+
+  .input-field__icon {
+    position: absolute;
+    left: $au-unit-small;
+    top: $au-unit-tiny - .1rem;
+  }
+}
+
+// Fix missing u-hidden
+.u-hidden {
+  @extend .au-u-hidden-visually;
+}
