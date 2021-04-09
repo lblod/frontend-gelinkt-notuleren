@@ -10,7 +10,8 @@
           <p class="au-c-help-text au-c-help-text--normal">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
         {{/if}}
       {{else}}
-        <WuSwitch @label=" Maak inhoud agendapunt publiek" @checked={{contains preview.behandeling @publicBehandelingUris}} @onClick={{action @toggle preview}} @class="checkbox--switch__wrapper" />
+        <AuToggleSwitch @label="Maak inhoud agendapunt publiek" @checked={{contains preview.behandeling @publicBehandelingUris}} @onChange={{action @toggle preview}} />
+        <AuHr />
         {{#if (contains preview.behandeling @publicBehandelingUris)}}
           <p><strong>Inhoud wordt gepubliceerd</strong></p>
           <p class="au-c-help-text au-c-help-text--normal">Alle informatie uit de behandeling van het agendapunt wordt gepubliceerd.</p>
