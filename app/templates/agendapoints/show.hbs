@@ -17,6 +17,21 @@
         </div>
         <div class="say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled">
           <div class="say-editor__paper">
+            {{#if this.copyAgendapunt.isRunning}}
+            <div class="au-c-scanner">
+              <div class="au-c-scanner__text">
+                <AuLoader @size="small" />
+                <AuHelpText @size="large">
+                  {{#if this.saveTask.isRunning}}
+                    Bezig met opslaan
+                  {{else}}
+                    Kopie aan het maken
+                  {{/if}}
+                </AuHelpText>
+              </div>
+              <span class="au-c-scanner__bar"></span>
+            </div>
+            {{/if}}
             <div class="say-editor__inner say-content say-content--disabled">
               {{ this.model.editorDocument.htmlSafeContent }}
             </div>
@@ -26,5 +41,6 @@
     </div>
   </div>
 </div>
+
 
 {{outlet}}
