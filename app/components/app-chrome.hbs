@@ -57,16 +57,16 @@
         </LinkTo>
       {{else}}
       <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+        {{#if @copyAgendapunt}}
+          <AuButton {{on "click" @copyAgendapunt}} @skin="tertiary" role="menuitem">
+            <AuIcon @icon="copy" @alignment="left" />
+            Kopieer agendapunt
+          </AuButton>
+        {{/if}}
         {{#if @exportHtmlFunction}}
           <AuButton {{on "click" @exportHtmlFunction}} @skin="tertiary" role="menuitem">
             <AuIcon @icon="export" @alignment="left" />
             Exporteer als HTML
-          </AuButton>
-        {{/if}}
-        {{#if @copyAgendapunt}}
-          <AuButton {{on "click" @copyAgendapunt}} @skin="tertiary" role="menuitem">
-            <AuIcon @icon="export" @alignment="left" />
-            Copy Agendapunt
           </AuButton>
         {{/if}}
         {{#if @sendToTrash}}
