@@ -256,3 +256,5 @@ blockchainStatus:
   encryptedLabel: Encrypted
   encryptingLabel: Encrypting
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
+appChrome:
+  copyAgendapoint: Copy Agendapoint
