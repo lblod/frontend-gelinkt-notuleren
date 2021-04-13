@@ -255,3 +255,5 @@ blockchainStatus:
   encryptedLabel: Versleuteld
   encryptingLabel: Bezig met versleutelen
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
+appChrome:
+  copyAgendapoint: Kopieer agendapunt
