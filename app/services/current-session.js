@@ -1,3 +1,4 @@
+/* eslint-disable ember/require-computed-property-dependencies */
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import { get, computed } from '@ember/object';
@@ -7,7 +8,7 @@ export default Service.extend({
   session: service('session'),
   store: service('store'),
   async load() {
-    if (this.get('session.isAuthenticated')) {
+    if (this.session.isAuthenticated) {
       const session = this.session;
       const account = await this.store.find('account', get(session, 'data.authenticated.relationships.account.data.id'));
       const user = await account.get('gebruiker');
@@ -43,5 +44,4 @@ export default Service.extend({
   roles: computed('_roles', function() {
     return this.waitForIt.perform('_roles');
   })
-
 });

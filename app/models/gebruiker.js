@@ -1,5 +1,4 @@
 import Model, { attr, hasMany } from '@ember-data/model';
-import { computed } from '@ember/object';
 
 export default class UserModel extends Model {
   @attr voornaam;

@@ -68,6 +68,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     const id = this.model.id;
     const response = yield fetch(`/prepublish/behandelingen/${id}`);
     const json = yield response.json();
+
     return json.map((response) => response.data.attributes);
   }
 
@@ -93,7 +94,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   }
 
-  get zittingWrapper(){
+  get zittingWrapper() {
     if (this.notulen.content) {
       const div = document.createElement('div');
       div.innerHTML = this.notulen.content;
