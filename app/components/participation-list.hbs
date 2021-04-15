@@ -38,19 +38,20 @@
   </ul>
 </div>
 {{/if}}
-{{#if (not @readOnly)}}
-<AuButton
-  @width="block"
-  @skin="secondary"
-  @icon="pencil"
-  @iconAlignment="left"
-  {{on 'click' this.togglePopup}}
-  @disabled={{this.fetchMandatees.isRunning}}
-  class="au-u-margin-top-small"
->
-  {{@modalTitle}}
-</AuButton>
-{{/if}}
+
+{{#unless @readOnly}}
+  <AuButton
+    @width="block"
+    @skin="secondary"
+    @icon="pencil"
+    @iconAlignment="left"
+    {{on 'click' this.togglePopup}}
+    @disabled={{this.fetchMandatees.isRunning}}
+    class="au-u-margin-top-small"
+  >
+    {{@modalTitle}}
+  </AuButton>
+{{/unless}}
 
 <ParticipationList::Modal
   @voorzitter={{this.chairman}}

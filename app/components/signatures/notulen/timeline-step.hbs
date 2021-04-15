@@ -7,11 +7,11 @@
   @isOpen={{this.isOpen}}
 >
   <div class="au-c-document-publish">
-    {{{@zittingWrapper}}}
+    {{html-safe @zittingWrapper}}
   </div>
   {{#if @zittingWrapper}}
     <EmberWormhole @to={{@behandelingContainerId}}>
-      <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{action @togglePublicationStatus}} />
+      <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{@togglePublicationStatus}} />
     </EmberWormhole>
   {{/if}}
 </Signatures::TimelineStep>

@@ -10,7 +10,7 @@
           <p class="au-c-help-text au-c-help-text--normal">De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.</p>
         {{/if}}
       {{else}}
-        <AuToggleSwitch @label="Maak inhoud agendapunt publiek" @checked={{contains preview.behandeling @publicBehandelingUris}} @onChange={{action @toggle preview}} />
+        <AuToggleSwitch @label="Maak inhoud agendapunt publiek" @checked={{contains preview.behandeling @publicBehandelingUris}} @onChange={{fn @toggle preview}} />
         <AuHr />
         {{#if (contains preview.behandeling @publicBehandelingUris)}}
           <p><strong>Inhoud wordt gepubliceerd</strong></p>
@@ -21,7 +21,7 @@
         {{/if}}
       {{/if}}
     </div>
-    {{{preview.content}}}
+    {{html-safe preview.content}}
   </div>
 {{/each}}
 
