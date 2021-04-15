@@ -20,7 +20,7 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
 
   @task
   *loadData(){
-    const group = yield this.currentSession.group;
+    const group = this.currentSession.group;
     const adminUnitClassification = yield group.classificatie;
     let relevantBestuursOrgaanClassifications = `${ALGEMEEN_DIRECTEUR_CLASSIFICATION_ID},${ADJUNCT_ALGEMEEN_DIRECTEUR_CLASSIFICATION_ID}`;
     if (adminUnitClassification.id === PROVINCE_CLASSIFICATION_ID) {

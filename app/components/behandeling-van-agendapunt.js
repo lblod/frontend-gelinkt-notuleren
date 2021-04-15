@@ -189,7 +189,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       documentContainer.set("currentVersion", documentToSave);
       documentContainer.set("status", status);
       documentContainer.set("folder", folder);
-      const bestuurseenheid = yield this.currentSession.get("group");
+      const bestuurseenheid = this.currentSession.group;
       documentContainer.set("publisher", bestuurseenheid);
 
       try {
