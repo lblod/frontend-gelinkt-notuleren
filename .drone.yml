@@ -9,11 +9,11 @@ steps:
     repo: lblod/frontend-gelinkt-notuleren
     dry_run: true
     purge: true
-- name: test
+- name: lint
   image: danlynn/ember-cli:3.20.0
   commands:
   - npm install
-  - npm test
+  - npm run lint
 trigger:
   event:
     - pull_request
@@ -34,6 +34,9 @@ steps:
 trigger:
   branch:
     - development
+  event:
+    exclude:
+    - pull_request
 ---
 kind: pipeline
 type: docker
