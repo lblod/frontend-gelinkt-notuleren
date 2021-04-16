@@ -1,36 +1,29 @@
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { tracked } from "@glimmer/tracking";
 import Component from '@glimmer/component';
-import { action, computed, get } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default class SnippetsNotifier extends Component {
-
   @service importRdfaSnippet;
+  @tracked show = true;
 
-  @tracked show=true;
-
-  @computed('hasSnippets', 'show')
-  get showCard(){
+  get showCard() {
     return this.hasSnippets && this.show;
   }
 
-  @computed('importRdfaSnippet.snippets.[]')
-  get snippets(){
-    return get(this.importRdfaSnippet, 'snippets.[]');
+  get snippets() {
+    return this.importRdfaSnippet.snippets;
   }
 
-  @computed('importRdfaSnippet.errors.[]')
-  get errors(){
-    return get(this.importRdfaSnippet, 'errors.[]');
+  get errors() {
+    return this.importRdfaSnippet.errors;
   }
 
-  @computed('snippets.[]')
-  get hasSnippets(){
+  get hasSnippets() {
     return this.snippets.length > 0;
   }
 
-  @computed('errors.[]')
-  get hasErrors(){
+  get hasErrors() {
     return this.errors.length > 0;
   }
 
