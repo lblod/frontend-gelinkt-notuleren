@@ -3,10 +3,13 @@ kind: pipeline
 type: docker
 name: verify-pr
 steps:
-- name: lint
+- name: install
   image: danlynn/ember-cli:3.20.0
   commands:
   - npm install
+- name: lint
+  image: danlynn/ember-cli:3.20.0
+  commands:
   - npm run lint
 - name: test
   image: danlynn/ember-cli:3.20.0
