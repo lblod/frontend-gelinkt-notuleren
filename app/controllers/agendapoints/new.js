@@ -43,7 +43,7 @@ export default class AgendapointsNewController extends Controller {
       documentContainer.currentVersion = this.editorDocument;
       documentContainer.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
       documentContainer.folder = yield this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
-      documentContainer.publisher = yield this.currentSession.group;
+      documentContainer.publisher = this.currentSession.group;
       yield documentContainer.save();
 
       yield this.transitionToRoute('agendapoints.edit', documentContainer.id);

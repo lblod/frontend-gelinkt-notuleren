@@ -51,7 +51,7 @@ export default class ZittingManageZittingsdataComponent extends Component {
   @action
   async fetchBestuursorgaan() {
     // TODO: Move select Bestuursorgaan to component
-    const currentBestuurseenheid = await this.currentSession.get('group');
+    const currentBestuurseenheid = this.currentSession.group;
     let query = {
       'filter[is-tijdsspecialisatie-van][bestuurseenheid][id]': currentBestuurseenheid.id,
       'include':'is-tijdsspecialisatie-van,is-tijdsspecialisatie-van.bestuurseenheid,is-tijdsspecialisatie-van.classificatie',
