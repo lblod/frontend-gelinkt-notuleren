@@ -1,24 +1,16 @@
 import Route from '@ember/routing/route';
-import { computed } from '@ember/object';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
+import { inject as service } from '@ember/service';
 
-export default Route.extend(AuthenticatedRouteMixin, {
-  queryParams: {
+export default class ImportRoute extends Route {
+  @service session;
+
+  queryParams = {
     mock: { refreshModel: true },
-    source: { refreshModel: true }
-  },
+    source: { refreshModel: true },
+  };
 
   beforeModel(transition) {
-    this.set('mock', transition.to.queryParams.mock);
-    this._super(...arguments);
-  },
-
-  authenticationRoute: computed('mock', function() {
-    if (this.mock) {
-      return 'mock-login';
-    }
-    else {
-      return 'login'; // TODO read from configuration
-    }
-  })
-});
+    let loginRoute = transition.to.queryParams.mock ? 'mock-login' : 'login';
+    this.session.requireAuthentication(transition, loginRoute);
+  }
+}

@@ -1,17 +1,20 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-export default Route.extend({
-  queryParams: {
+
+export default class MockLoginRoute extends Route {
+  @service session;
+  @service store;
+
+  queryParams = {
     page: {
       refreshModel: true
     }
-  },
-  session: service(),
-  store: service(),
+  };
+
   beforeModel() {
-    if (this.session.isAuthenticated)
-      this.transitionTo('index');
-  },
+    this.session.prohibitAuthentication('index');
+  }
+
   model(params) {
     const filter = { provider: 'https://github.com/lblod/mock-login-service' };
     if (params.gemeente)
@@ -21,6 +24,6 @@ export default Route.extend({
       filter: filter,
       page: { size: 10, number: params.page },
       sort: 'gebruiker.achternaam'
-    }); 
+    });
   }
-});
+}
