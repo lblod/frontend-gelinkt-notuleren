@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 
-export default Controller.extend({
-  currentSession: service()
-});
+export default class MeetingsPublishController extends Controller {
+  @service currentSession;
+}

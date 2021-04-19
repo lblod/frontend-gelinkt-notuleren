@@ -1,15 +1,16 @@
-import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import { warn } from '@ember/debug';
 
-export default Route.extend({
-  queryParams: {
+export default class ImportEditRoute extends Route {
+  queryParams = {
     target: { refreshModel: true }
-  },
+  };
 
-  importRdfaSnippet: service(),
+  @service importRdfaSnippet;
+  @service store;
 
-  async beforeModel(transition){
+  async beforeModel(transition) {
     await this.importRdfaSnippet.downloadSnippet(transition.to.queryParams);
 
     const documentContainerUri = transition.to.queryParams.target;
@@ -32,5 +33,4 @@ export default Route.extend({
       this.transitionTo('inbox');
     }
   }
-
-});
+}
