@@ -22,15 +22,4 @@ export default class BestuursorgaanModel extends Model {
     isTijdsspecialisatieVan: "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
     bevat: "http://www.w3.org/ns/org#hasPost"
   }
-
-  // A string representation of this model, based on its attributes.
-  // This is what mu-cl-resources uses to search on, and how the model will be presented while editing relationships.
-  get stringRep() {
-    return [
-      this.id,
-      this.naam,
-      this.bindingEinde,
-      this.bindingStart,
-    ];
-  }
 }
