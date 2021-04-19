@@ -12,6 +12,5 @@ export default class KandidatenlijstModel extends Model {
     lijstnummer: "http://data.vlaanderen.be/ns/mandaat#lijstnummer",
     kandidaten: "http://data.vlaanderen.be/ns/mandaat#heeftKandidaat",
     rechtstreekseVerkiezing: "http://data.vlaanderen.be/ns/mandaat#behoortTot",
-    "lijsttype": "http://data.vlaanderen.be/ns/mandaat#lijsttype"
   }
 }
