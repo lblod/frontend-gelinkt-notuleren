@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "2.0.14",
+  "version": "2.0.16",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -90,6 +90,7 @@
     "ember-promise-helpers": "^1.0.9",
     "ember-qunit": "^4.6.0",
     "ember-resolver": "^8.0.0",
+    "ember-simple-auth": "^3.1.0",
     "ember-source": "~3.20.2",
     "ember-template-lint": "^2.9.1",
     "ember-truth-helpers": "^3.0.0",

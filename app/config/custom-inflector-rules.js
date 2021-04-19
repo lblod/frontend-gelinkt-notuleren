@@ -63,5 +63,3 @@ inflector.irregular('concept', 'concepts');
 inflector.irregular('concept-scheme', 'concept-schemes');
 inflector.irregular('intermission', 'intermissions');
 inflector.uncountable('sync');
-// Meet Ember Inspector's expectation of an export
-export default {};

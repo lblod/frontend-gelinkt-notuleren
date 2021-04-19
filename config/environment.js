@@ -87,7 +87,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    // Production build specific configuration
   }
+
   return ENV;
 };

@@ -12,15 +12,16 @@ export default JSONAPIAdapter.extend({
     const args = arguments;
     const sleep = (time) => new Promise( (resolve/*,reject*/) => setTimeout(() => resolve(true), time));
     const retry = (livesSpent) => {
-      return new Promise( async (resolve, reject) => {
-        await sleep(250 * livesSpent);
-        if (livesSpent < maxRetries )
-          origAjax.apply(this,args).then( (res) => resolve(res), () => retry(livesSpent + 1).then(
-            (r) => resolve(r),
-            (r) => reject(r)
-          ));
-        else
-          origAjax.apply(this,args).then( (res) => resolve(res), (e) => reject(e));
+      return new Promise((resolve, reject) => {
+        sleep(250 * livesSpent).then(() => {
+          if (livesSpent < maxRetries )
+            origAjax.apply(this,args).then( (res) => resolve(res), () => retry(livesSpent + 1).then(
+              (r) => resolve(r),
+              (r) => reject(r)
+            ));
+          else
+            origAjax.apply(this,args).then( (res) => resolve(res), (e) => reject(e));
+        });
       });
     };
     return retry(0);

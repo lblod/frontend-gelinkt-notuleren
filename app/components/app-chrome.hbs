@@ -6,7 +6,7 @@
         <AuIcon @icon="arrow-left" @alignment="left" />
         Terug naar overzicht agendapunten
       </AuLink>
-      <span class="au-c-app-chrome__entity">{{get (await this.currentSession.group) 'classificatie.label'}} {{get (await this.currentSession.group) 'naam'}}</span>
+      <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
     </AuToolbarGroup>
     <AuToolbarGroup>
       <ul class="au-c-list-horizontal au-u-padding-right-tiny">

@@ -1,47 +1,42 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
-import { get, computed } from '@ember/object';
-import { task, waitForProperty } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
 
-export default Service.extend({
-  session: service('session'),
-  store: service('store'),
+export default class CurrentSessionService extends Service {
+  @service session;
+  @service store;
+
+  @tracked account;
+  @tracked user;
+  @tracked group;
+  @tracked roles = [];
+
+  get canPublish() {
+    return this.hasRole('GelinktNotuleren-publiceerder');
+  }
+
+  get canSign() {
+    return this.hasRole('GelinktNotuleren-ondertekenaar');
+  }
+
   async load() {
-    if (this.get('session.isAuthenticated')) {
-      const session = this.session;
-      const account = await this.store.find('account', get(session, 'data.authenticated.relationships.account.data.id'));
-      const user = await account.get('gebruiker');
-      const group = await this.store.find('bestuurseenheid', get(session, 'data.authenticated.relationships.group.data.id'));
-      const roles = await get(session, 'data.authenticated.data.attributes.roles');
+    if (this.session.isAuthenticated) {
+      let accountId = this.session.data.authenticated.relationships.account.data.id;
+      this.account = await this.store.findRecord('account', accountId, {
+        include: 'gebruiker'
+      });
+      this.user = await this.account.get('gebruiker');
 
-      this.set('_account', account);
-      this.set('_user', user);
-      this.set('_group', group);
-      this.set('_roles', roles);
+      let groupId = this.session.data.authenticated.relationships.group.data.id;
+      this.group = await this.store.findRecord('bestuurseenheid', groupId, {
+        include: 'classificatie'
+      });
 
-      this.set('canPublish', this.hasRole('GelinktNotuleren-publiceerder'));
-      this.set('canSign', this.hasRole('GelinktNotuleren-ondertekenaar'));
+      this.roles = this.session.data.authenticated.data.attributes.roles;
     }
-  },
+  }
 
   hasRole(role) {
-    return this._roles.includes(role);
-  },
-  waitForIt: task(function * (property) {
-    yield waitForProperty(this, property);
-    return this.get(property);
-  }),
-  account: computed('_account', function() {
-    return this.waitForIt.perform('_account');
-  }),
-  user: computed('_user', function() {
-    return this.waitForIt.perform('_user');
-  }),
-  group: computed('_group', function() {
-    return this.waitForIt.perform('_group');
-  }),
-  roles: computed('_roles', function() {
-    return this.waitForIt.perform('_roles');
-  })
-
-});
+    return this.roles.includes(role);
+  }
+}

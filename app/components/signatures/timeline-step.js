@@ -50,8 +50,8 @@ export default class SignaturesTimelineStep extends Component {
 
   @restartableTask
   * initTask() {
-    this.bestuurseenheid = yield this.currentSession.group;
-    const currentUser = yield this.currentSession.user;
+    this.bestuurseenheid = this.currentSession.group;
+    const currentUser = this.currentSession.user;
     let firstSignatureUser = null;
     if (this.args.document) {
       const signedResources = yield this.args.document.signedResources;

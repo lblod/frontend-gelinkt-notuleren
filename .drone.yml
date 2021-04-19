@@ -3,17 +3,25 @@ kind: pipeline
 type: docker
 name: verify-pr
 steps:
+- name: install
+  image: danlynn/ember-cli:3.20.0
+  commands:
+  - npm install
+- name: lint
+  image: danlynn/ember-cli:3.20.0
+  commands:
+  - npm run lint
+- name: test
+  image: danlynn/ember-cli:3.20.0
+  failure: ignore
+  commands:
+  - npm run test:ember
 - name: build-dry-run
   image: plugins/docker
   settings:
     repo: lblod/frontend-gelinkt-notuleren
     dry_run: true
     purge: true
-- name: test
-  image: danlynn/ember-cli:3.20.0
-  commands:
-  - npm install
-  - npm test
 trigger:
   event:
     - pull_request
@@ -34,6 +42,9 @@ steps:
 trigger:
   branch:
     - development
+  event:
+    exclude:
+    - pull_request
 ---
 kind: pipeline
 type: docker
