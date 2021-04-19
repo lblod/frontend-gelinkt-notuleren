@@ -1,0 +1,59 @@
+
+<div class="au-c-meeting-chrome-card au-u-margin-bottom-none">
+  <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "manageIntermissions.title"}}</AuHeading>
+  <table class="au-c-meeting-chrome-table">
+    <thead>
+      <tr>
+        <th style="max-width: 30rem;">
+          {{t "manageIntermissions.interruptionStartLabel"}}
+        </th>
+        <th>
+          {{t "manageIntermissions.interruptionEndLabel"}}
+        </th>
+        <th>
+          {{t "manageIntermissions.commentLabel"}}
+        </th>
+        <th class="au-u-table-right">
+          <span class="au-u-hidden-visually">{{t "manageIntermissions.actionsLabel"}}</span>
+          <AuButton
+            {{on "click" this.addIntermission}}
+            @icon="add"
+            @iconAlignment="left"
+          >
+            {{t "manageIntermissions.addInterruptionLabel"}}
+          </AuButton>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if this.fetchIntermissions.lastSuccessful}}
+        {{#each this.intermissions as |intermission|}}
+          <tr>
+            <td>{{moment-format intermission.startedAt "hh:mm DD/MM/YYYY"}}</td>
+            <td>{{moment-format intermission.endedAt "hh:mm DD/MM/YYYY"}}</td>
+            <td>{{intermission.comment}}</td>
+            <td>
+              <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" (fn this.editIntermission intermission)}}>
+                {{t "manageIntermissions.editLabel"}}
+              </AuButton>
+            </td>
+          </tr>
+        {{else}}
+          <tr>
+            <td colspan="4">
+              <AuHelpText @size="normal" @skin="tertiary">
+                {{t "manageIntermissions.noDataMessage"}}
+              </AuHelpText>
+            </td>
+          </tr>
+        {{/each}}
+      {{/if}}
+    </tbody>
+  </table>
+  <ManageIntermissions::Edit 
+    @zitting={{@zitting}}
+    @intermissionToEdit={{this.intermissionToEdit}}
+    @visible={{this.showModal}}
+    @onClose={{this.closeEdit}}
+  />
+</div>

@@ -105,6 +105,10 @@
           <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
         {{else}}
 
+          <ManageIntermissions
+            @zitting={{@zitting}}
+          />
+
           {{!-- Participation list --}}
           <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.secondSectionTitle"}}

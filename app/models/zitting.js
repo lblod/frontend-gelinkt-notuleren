@@ -16,5 +16,6 @@ export default Model.extend({
   voorzitter:  belongsTo('mandataris', { inverse: null }),
   aanwezigenBijStart: hasMany('mandataris', { inverse: null }),
   afwezigenBijStart: hasMany('mandataris', { inverse: null }),
+  intermissions: hasMany('intermission', { inverse: 'zitting' }),
   isPublished: notEmpty('afgeleidUit')
 });

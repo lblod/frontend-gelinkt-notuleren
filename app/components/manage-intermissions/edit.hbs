@@ -1,0 +1,40 @@
+<AuModal 
+  @modalTitle={{t "manageIntermissions.modalTitle"}}
+  @modalOpen={{@visible}}
+  @size="default"
+  @closeModal={{this.cancel}}
+  as |Modal|
+>
+  <Modal.Body>
+    <div class="au-c-form">
+      <div>
+        <AuLabel>{{t "manageIntermissions.interruptionStartLabel"}}</AuLabel>
+        <DateTimePicker @onChange={{fn this.changeDate 'startedAt'}} @value={{this.startedAtExternal}}/>
+      </div>
+      <div>
+        <AuLabel>{{t "manageIntermissions.interruptionEndLabel"}}</AuLabel>
+        <DateTimePicker @onChange={{fn this.changeDate 'endedAt'}} @value={{this.endedAtExternal}}/>
+      </div>
+      <div>
+        <AuLabel>{{t "manageIntermissions.commentLabel"}}</AuLabel>
+        <AuTextarea @value={{this.commentExternal}} onChange={{fn this.changeProperty 'comment'}} @width="block"></AuTextarea>
+      </div>
+    </div>
+    {{#if @intermissionToEdit}}
+      <ManageIntermissions::Delete @onDelete={{fn (perform this.deleteTask) @intermissionToEdit}} @loading={{this.deleteTask.isRunning}}/>
+    {{/if}}
+    <Modal.Footer>
+      <AuButtonGroup>
+        <AuButton
+          @loading={{this.saveIntermission.isRunning}}
+          {{on "click" (perform this.saveIntermission)}}
+        >
+          {{t "manageIntermissions.saveLabel"}}
+        </AuButton>
+        <AuButton @skin="secondary" {{on "click" this.cancel}}>
+          {{t "manageIntermissions.cancelLabel"}}
+        </AuButton>
+      </AuButtonGroup>
+    </Modal.Footer>
+  </Modal.Body>
+</AuModal>
