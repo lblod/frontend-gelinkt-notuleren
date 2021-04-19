@@ -1,14 +1,14 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
-export default Model.extend({
-  start: attr('datetime'),
-  einde: attr('datetime'),
-  uri: attr(),
-  bekleedt: belongsTo('bestuursfunctie', {inverse: null }),
-  isBestuurlijkeAliasVan: belongsTo('persoon', {inverse: 'isAangesteldAls'}),
-  status: belongsTo('functionaris-status-code', {inverse: null }),
+export default class FunctionarisModel extends Model {
+  @attr('datetime') start;
+  @attr('datetime') einde;
+  @attr uri;
+  @belongsTo('bestuursfunctie', { inverse: null }) bekleedt;
+  @belongsTo('persoon', { inverse: 'isAangesteldAls'}) isBestuurlijkeAliasVan;
+  @belongsTo('functionaris-status-code', { inverse: null }) status;
 
-  rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
+  rdfaBindings = {
     class: "http://data.lblod.info/vocabularies/leidinggevenden/Functionaris",
     start: "http://data.vlaanderen.be/ns/mandaat#start",
     einde: "http://data.vlaanderen.be/ns/mandaat#einde",
@@ -16,4 +16,4 @@ export default Model.extend({
     isBestuurlijkeAliasVan: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan",
     status: "http://data.vlaanderen.be/ns/mandaat#status"
   }
-});
+}

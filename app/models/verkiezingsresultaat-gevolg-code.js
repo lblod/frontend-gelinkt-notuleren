@@ -1,6 +1,6 @@
 import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  label: attr(),
-  uri: attr()
-});
+export default class VerkiezingsresultaatGevolgCodeModel extends Model {
+  @attr label;
+  @attr uri;
+}

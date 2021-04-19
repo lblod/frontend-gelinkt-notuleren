@@ -1,9 +1,9 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
-export default Model.extend({
-  aantalNaamstemmen: attr(),
-  plaatsRangorde: attr(),
-  isResultaatVan: belongsTo('persoon', { inverse: null }),
-  isResultaatVoor: belongsTo('kandidatenlijst', { inverse: null }),
-  gevolg: belongsTo('verkiezingsresultaat-gevolg-code', { inverse: null })
-});
+export default class VerkiezingsresultaatModel extends Model {
+  @attr aantalNaamstemmen;
+  @attr plaatsRangorde;
+  @belongsTo('persoon', { inverse: null }) isResultaatVan;
+  @belongsTo('kandidatenlijst', { inverse: null }) isResultaatVoor;
+  @belongsTo('verkiezingsresultaat-gevolg-code', { inverse: null }) gevolg;
+}

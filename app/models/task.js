@@ -1,6 +1,7 @@
-import Task from '@lblod/ember-vo-tasklist/models/task' ;
+import BaseTaskModel from '@lblod/ember-vo-tasklist/models/task';
 import { attr } from '@ember-data/model';
-export default Task.extend({
-  uri: attr(),
-  clickTarget: attr()
-});
+
+export default class TaskModel extends BaseTaskModel {
+  @attr uri;
+  @attr clickTarget;
+}

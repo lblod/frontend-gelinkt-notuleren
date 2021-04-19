@@ -1,22 +1,18 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
-import { collect } from '@ember/object/computed';
 
-export default Model.extend({
-  // A string representation of this model, based on its attributes.
-  // This is what mu-cl-resources uses to search on, and how the model will be presented while editing relationships.
-  stringRep: collect.apply(this,['id', 'naam', 'bindingEinde', 'bindingStart']),
-  uri: attr(),
-  naam: attr(),
-  bindingEinde: attr('date'),
-  bindingStart: attr('date'),
-  bestuurseenheid: belongsTo('bestuurseenheid', { inverse: 'bestuursorganen' }),
-  classificatie: belongsTo('bestuursorgaan-classificatie-code', { inverse: null }),
-  isTijdsspecialisatieVan: belongsTo('bestuursorgaan', { inverse: 'heeftTijdsspecialisaties' }),
-  wordtSamengesteldDoor: belongsTo('rechtstreekse-verkiezing', { inverse: 'steltSamen' }),
-  heeftTijdsspecialisaties: hasMany('bestuursorgaan', { inverse: 'isTijdsspecialisatieVan' }),
-  bevat: hasMany('mandaat', { inverse: 'bevatIn' }),
+export default class BestuursorgaanModel extends Model {
+  @attr uri;
+  @attr naam;
+  @attr('date') bindingEinde;
+  @attr('date') bindingStart;
+  @belongsTo('bestuurseenheid', { inverse: 'bestuursorganen' }) bestuurseenheid;
+  @belongsTo('bestuursorgaan-classificatie-code', { inverse: null }) classificatie;
+  @belongsTo('bestuursorgaan', { inverse: 'heeftTijdsspecialisaties' }) isTijdsspecialisatieVan;
+  @belongsTo('rechtstreekse-verkiezing', { inverse: 'steltSamen' }) wordtSamengesteldDoor;
+  @hasMany('bestuursorgaan', { inverse: 'isTijdsspecialisatieVan' }) heeftTijdsspecialisaties;
+  @hasMany('mandaat', { inverse: 'bevatIn' }) bevat;
 
-  rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
+  rdfaBindings = {
     naam: "http://www.w3.org/2004/02/skos/core#prefLabel",
     class: "http://data.vlaanderen.be/ns/besluit#Bestuursorgaan",
     bindingStart: "http://data.vlaanderen.be/ns/mandaat#bindingStart",
@@ -26,5 +22,4 @@ export default Model.extend({
     isTijdsspecialisatieVan: "http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan",
     bevat: "http://www.w3.org/ns/org#hasPost"
   }
-
-});
+}

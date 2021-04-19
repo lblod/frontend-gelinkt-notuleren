@@ -1,11 +1,11 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  state: attr(),
-  content: attr(),
-  kind: attr(),
-  signedResources: hasMany('signed-resource'),
-  publishedResource: belongsTo('published-resource'),
-  documentContainer: belongsTo('document-container'),
-  editorDocument: belongsTo('editor-document')
-});
+export default class VersionedAgendaModel extends Model {
+  @attr state;
+  @attr content;
+  @attr kind;
+  @hasMany('signed-resource') signedResources;
+  @belongsTo('published-resource') publishedResource;
+  @belongsTo('document-container') documentContainer;
+  @belongsTo('editor-document') editorDocument;
+}

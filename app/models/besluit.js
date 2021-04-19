@@ -1,7 +1,7 @@
 import Model, { belongsTo } from '@ember-data/model';
 
-export default Model.extend({
-  realisatie: belongsTo('rechtsgrond-besluit', { inverse: null }),
-  volgendUitBehandelingVanAgendapunt: belongsTo('behandeling-van-agendapunt', { inverse: 'besluiten'}),
-  afgeleidUitNotule: belongsTo('editor-document', { inverse: null })
-});
+export default class BesluitModel extends Model {
+  @belongsTo('rechtsgrond-besluit', { inverse: null }) realistatie;
+  @belongsTo('behandeling-van-agendapunt', { inverse: 'besluiten' }) volgendUitBehandelingVanAgendapunt;
+  @belongsTo('editor-document', { inverse: null }) afgeleidUitNotule;
+}
