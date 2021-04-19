@@ -54,18 +54,11 @@
 @import "appuniversum/o-region";
 
 
-// WU COMPONENTS (DEPRECATED)
-@import 'ember-vo-webuniversum';
-// @import 'ember-vo-webuniversum-data-table'; // This imports the ember-data-table styles which make <duet-date-picker> not render correctly
-@import 'ember-power-select';
-
-
-
 // COMPONENTS (DEPRECATED)
-@import 'deprecated/tasklist';
-@import 'deprecated/scrollto';
-@import 'deprecated/loading-events';
-@import 'deprecated/wizard';
+/* @import 'deprecated/tasklist'; */
+/* @import 'deprecated/scrollto'; */
+/* @import 'deprecated/loading-events'; */
+/* @import 'deprecated/wizard'; */
 
 
 // COMPONENTS
