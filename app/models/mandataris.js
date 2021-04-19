@@ -1,22 +1,22 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  start: attr('datetime'),
-  einde: attr('datetime'),
-  rangorde: attr('language-string'),
-  uri: attr(),
-  bekleedt: belongsTo('mandaat', {inverse: null }),
-  isBestuurlijkeAliasVan: belongsTo('persoon', {inverse: 'isAangesteldAls'}),
-  tijdelijkeVervangingen: hasMany('mandataris', {inverse: null }),
-  datumEedaflegging: attr('datetime'),
-  datumMinistrieelBesluit: attr('datetime'),
-  aanwezigBijBehandeling: hasMany('behandeling-van-agendapunt'),
-  afwezigBijBehandeling: hasMany('behandeling-van-agendapunt'),
-  aanwezigBijZitting: hasMany('zitting'),
-  afwezigBijZitting: hasMany('zitting'),
-  status: belongsTo('mandataris-status-code', {inverse: null}),
+export default class MandatarisModel extends Model {
+  @attr('datetime') start;
+  @attr('datetime') einde;
+  @attr('language-string') rangorde;
+  @attr uri;
+  @attr('datetime') datumEedaflegging;
+  @attr('datetime') datumMinistrieelBesluit;
+  @belongsTo('mandaat', { inverse: null }) bekleedt;
+  @belongsTo('persoon', { inverse: 'isAangesteldAls' }) isBestuurlijkeAliasVan;
+  @hasMany('mandataris', { inverse: null }) tijdelijkeVervangingen;
+  @hasMany('behandeling-van-agendapunt') aanwezigBijBehandeling;
+  @hasMany('behandeling-van-agendapunt') afwezigBijBehandeling;
+  @hasMany('zitting') aanwezigBijZitting;
+  @hasMany('zitting') afwezigBijZitting;
+  @belongsTo('mandataris-status-code', { inverse: null }) status;
 
-  rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
+  rdfaBindings = {
     class: "http://data.vlaanderen.be/ns/mandaat#Mandataris",
     start: "http://data.vlaanderen.be/ns/mandaat#start",
     einde: "http://data.vlaanderen.be/ns/mandaat#einde",
@@ -24,4 +24,4 @@ export default Model.extend({
     bekleedt: "http://www.w3.org/ns/org#holds",
     isBestuurlijkeAliasVan: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan"
   }
-});
+}

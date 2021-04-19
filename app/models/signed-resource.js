@@ -1,12 +1,12 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 
-export default Model.extend({
-  content: attr(),
-  hashValue: attr(),
-  createdOn: attr('datetime'),
-  status: belongsTo('blockchain-status'),
-  gebruiker: belongsTo('gebruiker'),
-  versionedAgenda: belongsTo('versioned-agenda'),
-  versionedBesluitenLijst: belongsTo('versioned-besluiten-lijst'),
-  versionedNotulen: belongsTo('versioned-notulen')
-});
+export default class SignedResourceModel extends Model {
+  @attr content;
+  @attr hashValue;
+  @attr('datetime') createdOn;
+  @belongsTo('blockchain-status') status;
+  @belongsTo('gebruiker') gebruiker;
+  @belongsTo('versioned-agenda') versionedAgenda;
+  @belongsTo('versioned-besluiten-lijst') versionedBesluitenLijst;
+  @belongsTo('versioned-notulen') versionedNotulen;
+}

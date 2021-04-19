@@ -1,5 +1,6 @@
-import Tasksolution from '@lblod/ember-vo-tasklist/models/task-solution' ;
+import BaseTaskSolutionModel from '@lblod/ember-vo-tasklist/models/task-solution';
 import { attr } from '@ember-data/model';
-export default Tasksolution.extend({
-  uri: attr()
-});
+
+export default class TaskSolutionModel extends BaseTaskSolutionModel {
+  @attr uri;
+}

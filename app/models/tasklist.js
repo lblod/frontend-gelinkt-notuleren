@@ -1,5 +1,6 @@
-import Tasklist from '@lblod/ember-vo-tasklist/models/tasklist' ;
+import BaseTasklistModel from '@lblod/ember-vo-tasklist/models/tasklist';
 import { attr } from '@ember-data/model';
-export default Tasklist.extend({
-  uri: attr()
-});
+
+export default class TasklistModel extends BaseTasklistModel {
+  @attr uri;
+}
