@@ -1,5 +1,4 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
-import { isEmpty } from '@ember/utils';
 
 export default class ZittingModel extends Model {
   @attr('datetime') geplandeStart;
@@ -16,8 +15,4 @@ export default class ZittingModel extends Model {
   @belongsTo('mandataris', { inverse: null }) voorzitter;
   @hasMany('mandataris', { inverse: null }) aanwezigenBijStart;
   @hasMany('mandataris', { inverse: null }) afwezigenBijStart;
-
-  get isPublished() {
-    return !isEmpty(this.afgeleidUit);
-  }
 }
