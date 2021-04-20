@@ -1,0 +1,10 @@
+auDatePicker:
+  buttonLabel: "Choose a date"
+  selectedDateMessage: "Selected date is"
+  prevMonthLabel: "Previous month"
+  nextMonthLabel: "Next month"
+  monthSelectLabel: "Month"
+  yearSelectLabel: "Year"
+  closeLabel: "Close windows"
+  keyboardInstruction: "You can use arrow keys to navigate dates"
+  calendarHeading: "Choose a date"

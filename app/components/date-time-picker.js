@@ -1,7 +1,9 @@
 import Component from '@glimmer/component';
 import { action } from "@ember/object";
+import { inject as service } from '@ember/service';
 
 export default class DateTimePicker extends Component{
+  @service intl;
   date;
   hours;
   minutes;
@@ -13,6 +15,23 @@ export default class DateTimePicker extends Component{
       this.hours = this.date.getHours();
       this.minutes = this.date.getMinutes();
     }
+  }
+
+  get datePickerLocalization() {
+    return {
+      buttonLabel: this.intl.t('auDatePicker.buttonLabel'),
+      selectedDateMessage: this.intl.t('auDatePicker.selectedDateMessage'),
+      prevMonthLabel: this.intl.t('auDatePicker.prevMonthLabel'),
+      nextMonthLabel: this.intl.t('auDatePicker.nextMonthLabel'),
+      monthSelectLabel: this.intl.t('auDatePicker.monthSelectLabel'),
+      yearSelectLabel: this.intl.t('auDatePicker.yearSelectLabel'),
+      closeLabel: this.intl.t('auDatePicker.closeLabel'),
+      keyboardInstruction: this.intl.t('auDatePicker.keyboardInstruction'),
+      calendarHeading: this.intl.t('auDatePicker.calendarHeading'),
+      dayNames: getLocalizedDays(this.intl),
+      monthNames: getLocalizedMonths(this.intl),
+      monthNamesShort: getLocalizedMonths(this.intl, 'short'),
+    };
   }
 
   @action
@@ -44,4 +63,23 @@ export default class DateTimePicker extends Component{
     }
     this.args.onChange(this.date);
   }
+}
+
+function getLocalizedMonths(intl, monthFormat = 'long') {
+  let someYear = 2021;
+  return [...Array(12).keys()]
+    .map((monthIndex) => {
+      let date = new Date(someYear, monthIndex);
+      return intl.formatDate(date, { month: monthFormat });
+    });
+}
+
+function getLocalizedDays(intl, weekdayFormat = 'long') {
+  let someSunday = new Date('2021-01-03');
+  return [...Array(7).keys()]
+    .map((index) => {
+      let weekday = new Date(someSunday.getTime());
+      weekday.setDate(someSunday.getDate() + index);
+      return intl.formatDate(weekday, { weekday: weekdayFormat });
+    });
 }

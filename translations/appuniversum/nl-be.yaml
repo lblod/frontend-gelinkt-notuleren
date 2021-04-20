@@ -1,0 +1,10 @@
+auDatePicker:
+  buttonLabel: "Kies een datum"
+  selectedDateMessage: "De geselecteerde datum is"
+  prevMonthLabel: "Vorige maand"
+  nextMonthLabel: "Volgende maand"
+  monthSelectLabel: "Maand"
+  yearSelectLabel: "Jaar"
+  closeLabel: "Sluit venster"
+  keyboardInstruction: "Gebruik de pijltjestoetsen om te navigeren"
+  calendarHeading: "Kies een datum"
