@@ -123,7 +123,7 @@ $say-button-tertiary-bg-hover-color       : transparent;
 // ANNOTATIONS
 // ---
 // Annotation options
-$say-annotation-width            : $au-unit-huge*3;
+$say-annotation-width            : $au-unit-huge*1.5 !default;
 $say-annotation-offset           : $au-unit-large;
 $say-annotation-gutter           : $au-unit;
 $say-annotation-width-content    : $say-annotation-width;

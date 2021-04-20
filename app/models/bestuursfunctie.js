@@ -1,14 +1,13 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  uri: attr(),
-  rol: belongsTo('bestuursfunctie-code', { inverse: null }),
-  bevatIn: hasMany('bestuursorgaan', { inverse: 'bevat' }),
+export default class BestuursfunctieModel extends Model {
+  @attr uri;
+  @belongsTo('bestuursfunctie-code', { inverse: null }) rol;
+  @hasMany('bestuursorgaan', { inverse: 'bevat' }) bevatIn;
 
-  rdfaBindings: { // eslint-disable-line ember/avoid-leaking-state-in-ember-objects
+  rdfaBindings = {
     class: "http://data.lblod.info/vocabularies/leidinggevenden/Bestuursfunctie",
     rol: "http://www.w3.org/ns/org#role",
     bevatIn: "http://www.w3.org/ns/org#hasPost"
   }
-
-});
+}

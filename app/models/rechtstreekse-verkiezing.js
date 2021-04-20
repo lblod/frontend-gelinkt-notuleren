@@ -1,8 +1,8 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
-export default Model.extend({
-  datum: attr('date'),
-  geldigheid: attr('date'),
-  steltSamen: belongsTo('bestuursorgaan', { inverse: 'wordtSamengesteldDoor' }),
-  heeftLijst: hasMany('kandidatenlijst', { inverse: 'rechtstreekseVerkiezing' })
-});
+export default class RechtstreekseVerkiezingModel extends Model {
+  @attr('date') datum;
+  @attr('date') geldigheid;
+  @belongsTo('bestuursorgaan', { inverse: 'wordtSamengesteldDoor' }) steltSamen;
+  @hasMany('kandidatenlijst', { inverse: 'rechtstreekseVerkiezing' }) heeftLijst;
+}
