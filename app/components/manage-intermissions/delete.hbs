@@ -20,15 +20,17 @@
         </div>
 
         <AuButtonGroup>
-          <AuButton {{on "click" this.reset}} >
-            {{t "manageIntermissions.retainButton"}}
-          </AuButton>
+
           <AuButton
               @disabled={{not this.hasAgreed}}
-              @alert={{true}} @skin="secondary"
+              @alert={{true}}
+              @skin="primary"
               @loading={{@loading}}
               {{on "click" @onDelete}} >
             {{t "manageIntermissions.deleteButton"}}
+          </AuButton>
+          <AuButton @skin="secondary" {{on "click" this.reset}} >
+            {{t "manageIntermissions.retainButton"}}
           </AuButton>
         </AuButtonGroup>
       </div>

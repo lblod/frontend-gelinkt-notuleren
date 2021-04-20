@@ -32,7 +32,7 @@
             <td>{{moment-format intermission.startedAt "hh:mm DD/MM/YYYY"}}</td>
             <td>{{moment-format intermission.endedAt "hh:mm DD/MM/YYYY"}}</td>
             <td>{{intermission.comment}}</td>
-            <td>
+            <td class="au-u-table-right">
               <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" (fn this.editIntermission intermission)}}>
                 {{t "manageIntermissions.editLabel"}}
               </AuButton>
@@ -50,7 +50,7 @@
       {{/if}}
     </tbody>
   </table>
-  <ManageIntermissions::Edit 
+  <ManageIntermissions::Edit
     @zitting={{@zitting}}
     @intermissionToEdit={{this.intermissionToEdit}}
     @visible={{this.showModal}}

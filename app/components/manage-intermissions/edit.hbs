@@ -1,4 +1,4 @@
-<AuModal 
+<AuModal
   @modalTitle={{t "manageIntermissions.modalTitle"}}
   @modalOpen={{@visible}}
   @size="default"
@@ -16,7 +16,7 @@
         <DateTimePicker @onChange={{fn this.changeDate 'endedAt'}} @value={{this.endedAtExternal}}/>
       </div>
       <div>
-        <AuLabel>{{t "manageIntermissions.commentLabel"}}</AuLabel>
+        <AuLabel>{{t "manageIntermissions.commentLabel"}} <AuPill>Optioneel</AuPill></AuLabel>
         <AuTextarea @value={{this.commentExternal}} onChange={{fn this.changeProperty 'comment'}} @width="block"></AuTextarea>
       </div>
     </div>

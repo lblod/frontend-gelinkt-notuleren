@@ -259,12 +259,12 @@ appChrome:
   copyAgendapoint: Kopieer agendapunt
 manageIntermissions:
   interruptionStartLabel: Start onderbreking
-  interruptionEndLabel: End onderbreking
+  interruptionEndLabel: Einde onderbreking
   commentLabel: Opmerking
   actionsLabel: Acties
   addInterruptionLabel: Voeg onderbreking in
-  title: onderbrekingen
-  noDataMessage: Geen onderbreking
+  title: Onderbrekingen
+  noDataMessage: Geen onderbrekingen
   modalTitle: Voeg onderbreking in
   saveLabel: Voeg in
   cancelLabel: Terug
@@ -272,7 +272,7 @@ manageIntermissions:
   deleteCardTitle: Verwijder onderbreking
   warning: U kan deze actie niet ongedaan maken.
   toggleWarningButton: Verwijder onderbreking
-  agreeQuestion: Bent u zeker dat u het onderbreking wil verwijderen?
-  checkboxLabel: Ik begrijp dat het onderbreking onomkeerbaar verwijderd worden.
+  agreeQuestion: Bent u zeker dat u deze onderbreking wil verwijderen?
+  checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd worden.
   deleteButton: Verwijder onderbreking
-  retainButton: Verwijder het onderbreking
+  retainButton: Behoud onderbreking
