@@ -14,16 +14,21 @@ export default class DateTimePicker extends Component{
       this.minutes = this.date.getMinutes();
     }
   }
+
   @action
-  onChangeDate(date) {
-    if(!this.date) {
-      this.date = new Date();
+  onChangeDate(isoDate, date) {
+    let wasDateInputCleared = !date;
+    if (!wasDateInputCleared) {
+      if(!this.date) {
+        this.date = new Date();
+      }
+      this.date.setDate(date.getDate());
+      this.date.setMonth(date.getMonth());
+      this.date.setFullYear(date.getFullYear());
+      this.args.onChange(this.date);
     }
-    this.date.setDate(date.getDate());
-    this.date.setMonth(date.getMonth());
-    this.date.setFullYear(date.getFullYear());
-    this.args.onChange(this.date);
   }
+
   @action
   onChangeTime(type, event) {
     const value = event.target.value;

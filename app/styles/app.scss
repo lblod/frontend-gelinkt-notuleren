@@ -56,7 +56,7 @@
 
 // WU COMPONENTS (DEPRECATED)
 @import 'ember-vo-webuniversum';
-@import 'ember-vo-webuniversum-data-table';
+// @import 'ember-vo-webuniversum-data-table'; // This imports the ember-data-table styles which make <duet-date-picker> not render correctly
 @import 'ember-power-select';
 
 
