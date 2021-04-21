@@ -1,4 +1,3 @@
 import Route from '@ember/routing/route';
 
-export default Route.extend({
-});
+export default class ImportedDocumentsPublishRoute extends Route {}

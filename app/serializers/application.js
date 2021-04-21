@@ -1,9 +1,9 @@
 import JSONAPISerializer from '@ember-data/serializer/json-api';
 import DataTableSerializerMixin from 'ember-data-table/mixins/serializer';
 
-export default JSONAPISerializer.extend(DataTableSerializerMixin, {
-    serializeAttribute(snapshot, json, key, attributes) {
+export default class ApplicationSerializer extends JSONAPISerializer.extend(DataTableSerializerMixin) {
+  serializeAttribute(snapshot, json, key, attributes) {
     if (key !== 'uri')
-      this._super(snapshot, json, key, attributes);
-    }
-});
+      super.serializeAttribute(snapshot, json, key, attributes);
+  }
+}
