@@ -274,6 +274,6 @@ manageIntermissions:
   warning: U kan deze actie niet ongedaan maken.
   toggleWarningButton: Verwijder onderbreking
   agreeQuestion: Bent u zeker dat u deze onderbreking wil verwijderen?
-  checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd worden.
+  checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   deleteButton: Verwijder onderbreking
   retainButton: Behoud onderbreking
