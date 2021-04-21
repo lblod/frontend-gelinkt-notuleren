@@ -16,8 +16,8 @@
         <DateTimePicker @onChange={{fn this.changeDate 'endedAt'}} @value={{this.endedAtExternal}}/>
       </div>
       <div>
-        <AuLabel for="interruptionComment">{{t "manageIntermissions.commentLabel"}} <AuPill>Optioneel</AuPill></AuLabel>
-        <AuTextarea id="interruptionComment" @value={{this.commentExternal}} @width="block"></AuTextarea>
+        <AuLabel for="intermissionComment">{{t "manageIntermissions.commentLabel"}} <AuPill>Optioneel</AuPill></AuLabel>
+        <AuTextarea id="intermissionComment" @value={{this.commentExternal}} @width="block"></AuTextarea>
       </div>
     </div>
     {{#unless @intermissionToEdit.isNew}}
