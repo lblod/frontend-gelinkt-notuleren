@@ -12,11 +12,7 @@
           <AuLabel>
             {{t "manageIntermissions.agreeQuestion"}}
           </AuLabel>
-          <label class="au-c-control au-c-control--checkbox">
-            <Input class="au-c-control__input" @type="checkbox" @checked={{this.hasAgreed}} />
-            <span class="au-c-control__indicator"></span>
-            {{t "manageIntermissions.checkboxLabel"}}
-          </label>
+          <AuControlCheckbox @label="{{t "manageIntermissions.checkboxLabel"}}" @checked={{this.hasAgreed}} />
         </div>
 
         <AuButtonGroup>
