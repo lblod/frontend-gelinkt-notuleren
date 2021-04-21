@@ -8,7 +8,7 @@ import {DRAFT_STATUS_ID, PUBLISHED_STATUS_ID, SCHEDULED_STATUS_ID} from "../../u
 export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
   @tracked _newItem;
-  items = tracked([]);
+  @tracked items = tracked([]);
 
   constructor(...args) {
     super(...args);

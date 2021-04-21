@@ -1,12 +1,14 @@
 import Component from '@glimmer/component';
-import { action } from "@ember/object";
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
-export default class LanguageSelect extends Component{
+export default class LanguageSelect extends Component {
   options = Object.freeze([
     { id: 'nl', label: 'NL' },
     { id: 'en', label: 'EN' },
-  ])
-  selected = null
+  ]);
+
+  @tracked selected = null;
 
   constructor() {
     super(...arguments);
@@ -19,7 +21,7 @@ export default class LanguageSelect extends Component{
 
   @action
   selectLanguage(language) {
-    this.set('selected', language);
+    this.selected = language;
     document.body.setAttribute('data--language', language.id);
   }
 }
