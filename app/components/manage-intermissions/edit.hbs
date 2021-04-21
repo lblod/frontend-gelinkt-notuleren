@@ -20,9 +20,9 @@
         <AuTextarea id="interruptionComment" @value={{this.commentExternal}} onChange={{fn this.changeProperty 'comment'}} @width="block"></AuTextarea>
       </div>
     </div>
-    {{#if @intermissionToEdit}}
+    {{#unless @intermissionToEdit.isNew}}
       <ManageIntermissions::Delete @onDelete={{fn (perform this.deleteTask) @intermissionToEdit}} @loading={{this.deleteTask.isRunning}}/>
-    {{/if}}
+    {{/unless}}
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>
