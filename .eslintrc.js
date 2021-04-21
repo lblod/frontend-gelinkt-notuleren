@@ -26,8 +26,6 @@ module.exports = {
     browser: true,
   },
   rules: {
-    'ember/avoid-leaking-state-in-ember-objects': 'warn',
-    'ember/no-classic-classes': 'warn',
     'ember/no-mixins': 'warn',
     'semi': 'error', // Remove this rule once Prettier is enabled
   },
