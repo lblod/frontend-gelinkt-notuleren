@@ -266,7 +266,8 @@ manageIntermissions:
   title: Onderbrekingen
   noDataMessage: Geen onderbrekingen
   modalTitle: Voeg onderbreking in
-  saveLabel: Voeg in
+  insertLabel: Voeg in
+  saveLabel: Pas aan
   cancelLabel: Terug
   editLabel: Bewerk onderbreking
   deleteCardTitle: Verwijder onderbreking

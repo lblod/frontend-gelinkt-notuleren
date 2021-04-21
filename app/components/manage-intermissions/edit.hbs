@@ -17,7 +17,7 @@
       </div>
       <div>
         <AuLabel for="interruptionComment">{{t "manageIntermissions.commentLabel"}} <AuPill>Optioneel</AuPill></AuLabel>
-        <AuTextarea id="interruptionComment" @value={{this.commentExternal}} onChange={{fn this.changeProperty 'comment'}} @width="block"></AuTextarea>
+        <AuTextarea id="interruptionComment" @value={{this.commentExternal}} @width="block"></AuTextarea>
       </div>
     </div>
     {{#unless @intermissionToEdit.isNew}}
@@ -30,7 +30,11 @@
         @loading={{this.saveIntermission.isRunning}}
         {{on "click" (perform this.saveIntermission)}}
       >
-        {{t "manageIntermissions.saveLabel"}}
+        {{#if @intermissionToEdit.isNew}}
+          {{t "manageIntermissions.insertLabel"}}
+        {{else}}
+          {{t "manageIntermissions.saveLabel"}}
+        {{/if}}
       </AuButton>
       <AuButton @skin="secondary" {{on "click" this.cancel}}>
         {{t "manageIntermissions.cancelLabel"}}

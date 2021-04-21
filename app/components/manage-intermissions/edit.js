@@ -35,14 +35,13 @@ export default class manageIntermissionsEditComponent extends Component {
     }
   }
 
-  @action
-  cancel() {
-    this.args.onClose();
+  set commentExternal(value) {
+    this.comment = value;
   }
 
   @action
-  changeProperty(targetProperty, event) {
-    this[targetProperty] = event.target.value;
+  cancel() {
+    this.args.onClose();
   }
 
   @action

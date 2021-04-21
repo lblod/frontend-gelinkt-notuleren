@@ -267,6 +267,7 @@ manageIntermissions:
   title: Intermissions
   noDataMessage: No intermissions
   modalTitle: Intermission
+  insertLabel: Insert
   saveLabel: Save
   cancelLabel: Cancel
   editLabel: Edit Intermission
