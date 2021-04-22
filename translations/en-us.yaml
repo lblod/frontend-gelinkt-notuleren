@@ -275,6 +275,6 @@ manageIntermissions:
   warning: You cannot undo this action.
   toggleWarningButton: Delete Intermission
   agreeQuestion: Are you sure you want to delete the intermission?
-  checkboxLabel: I understand that the agenda item will be irreversibly removed.
+  checkboxLabel: I understand that the intermission will be irreversibly removed.
   retainButton: Retain intermission
   deleteButton: Delete intermission
