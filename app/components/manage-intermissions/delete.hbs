@@ -1,0 +1,39 @@
+<AuAlert @alertsize={{"tiny"}} class="au-u-margin-top au-u-margin-bottom-none">
+  <AuHeading @level="4" @skin="5">{{t "manageIntermissions.deleteCardTitle"}}</AuHeading>
+  <AuHr />
+  <AuHelpText @size="large" class="au-u-margin-bottom">
+    {{t "manageIntermissions.warning"}}
+  </AuHelpText>
+
+  {{#if this.isShowingWarning}}
+    <div>
+      <div class="au-u-margin-bottom">
+        <AuLabel>
+          {{t "manageIntermissions.agreeQuestion"}}
+        </AuLabel>
+        <AuControlCheckbox @label="{{t "manageIntermissions.checkboxLabel"}}" @checked={{this.hasAgreed}} />
+      </div>
+
+      <AuButtonGroup>
+
+        <AuButton
+            @disabled={{not this.hasAgreed}}
+            @alert={{true}}
+            @skin="primary"
+            @loading={{@loading}}
+            {{on "click" @onDelete}} >
+          {{t "manageIntermissions.deleteButton"}}
+        </AuButton>
+        <AuButton @skin="secondary" {{on "click" this.reset}} >
+          {{t "manageIntermissions.retainButton"}}
+        </AuButton>
+      </AuButtonGroup>
+    </div>
+  {{else}}
+    <AuButtonGroup>
+      <AuButton @alert={{true}} @skin="secondary" {{on "click" this.toggleWarning}} >
+        {{t "manageIntermissions.toggleWarningButton"}}
+      </AuButton>
+    </AuButtonGroup>
+  {{/if}}
+</AuAlert>

@@ -15,4 +15,6 @@ export default class ZittingModel extends Model {
   @belongsTo('mandataris', { inverse: null }) voorzitter;
   @hasMany('mandataris', { inverse: null }) aanwezigenBijStart;
   @hasMany('mandataris', { inverse: null }) afwezigenBijStart;
+  @hasMany('intermission', { inverse: 'zitting' }) intermissions;
 }
+  

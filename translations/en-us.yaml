@@ -258,3 +258,23 @@ blockchainStatus:
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
 appChrome:
   copyAgendapoint: Copy Agendapoint
+manageIntermissions:
+  interruptionStartLabel: Start
+  interruptionEndLabel: End
+  commentLabel: Comment
+  actionsLabel: Actions
+  addInterruptionLabel: Add Intermission
+  title: Intermissions
+  noDataMessage: No intermissions
+  modalTitle: Intermission
+  insertLabel: Insert
+  saveLabel: Save
+  cancelLabel: Cancel
+  editLabel: Edit Intermission
+  deleteCardTitle: Delete Intermission
+  warning: You cannot undo this action.
+  toggleWarningButton: Delete Intermission
+  agreeQuestion: Are you sure you want to delete the intermission?
+  checkboxLabel: I understand that the intermission will be irreversibly removed.
+  retainButton: Retain intermission
+  deleteButton: Delete intermission

@@ -257,3 +257,23 @@ blockchainStatus:
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
 appChrome:
   copyAgendapoint: Kopieer agendapunt
+manageIntermissions:
+  interruptionStartLabel: Start onderbreking
+  interruptionEndLabel: Einde onderbreking
+  commentLabel: Opmerking
+  actionsLabel: Acties
+  addInterruptionLabel: Voeg onderbreking in
+  title: Onderbrekingen
+  noDataMessage: Geen onderbrekingen
+  modalTitle: Voeg onderbreking in
+  insertLabel: Voeg in
+  saveLabel: Pas aan
+  cancelLabel: Terug
+  editLabel: Bewerk onderbreking
+  deleteCardTitle: Verwijder onderbreking
+  warning: U kan deze actie niet ongedaan maken.
+  toggleWarningButton: Verwijder onderbreking
+  agreeQuestion: Bent u zeker dat u deze onderbreking wil verwijderen?
+  checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
+  deleteButton: Verwijder onderbreking
+  retainButton: Behoud onderbreking
