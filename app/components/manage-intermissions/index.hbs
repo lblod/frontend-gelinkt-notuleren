@@ -30,7 +30,7 @@
         {{#each this.intermissions as |intermission|}}
           <tr>
             <td>{{moment-format intermission.startedAt "DD/MM/YYYY hh:mm"}}</td>
-            <td>{{moment-format intermission.endedAt "hh:mm DD/MM/YYYY"}}</td>
+            <td>{{moment-format intermission.endedAt "DD/MM/YYYY hh:mm"}}</td>
             <td>{{intermission.comment}}</td>
             <td class="au-u-table-right">
               <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" (fn this.editIntermission intermission)}}>

@@ -18,7 +18,7 @@ export default class manageIntermissionsComponent extends Component {
   @action
   addIntermission() {
     this.intermissionToEdit = this.store.createRecord("intermission", {
-      startedAt: new Date()
+      startedAt: this.args.zitting.geplandeStart
     });
     this.showModal = true;
   }
