@@ -4,7 +4,7 @@
 <PowerSelect
   @options={{this.options}}
   @selected={{@functionaris}}
-  @onchange={{@onSelect}}
+  @onChange={{@onSelect}}
   as |functionaris| >
   {{functionaris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{functionaris.isBestuurlijkeAliasVan.achternaam}},
   {{functionaris.bekleedt.rol.label}} (periode {{moment-format functionaris.start "MM/DD/YYYY"}}  - {{moment-format functionaris.einde "MM/DD/YYYY"}})

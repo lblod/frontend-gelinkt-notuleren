@@ -10,9 +10,10 @@
           <AuLabel>{{t "manageZittingsData.bestuursorganLabel"}}</AuLabel>
           <PowerSelect
             @placeholder={{t "manageZittingsData.selectPlaceholder"}}
-                          @selected={{this.bestuursorgaan}}
+            @selected={{this.bestuursorgaan}}
             @options={{this.bestuursorgaanOptions}}
-                          @onchange={{this.changeSelect}} as |bestuursorgaan|>
+            @onChange={{this.changeSelect}}
+            as |bestuursorgaan|>
               {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
               (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
               {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
