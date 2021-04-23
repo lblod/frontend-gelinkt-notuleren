@@ -1,14 +1,15 @@
 <PowerSelect
   @loadingMessage={{t "participationListModalSelector.loadingMessage"}}
   @noMatchesMessage={{t "participationListModalSelector.noMatchesMessage"}}
+  @searchEnabled={{true}}
   @searchMessage={{t "participationListModalSelector.searchMessage"}}
   @renderInPlace={{true}}
   @placeholder={{t "participationListModalSelector.placeholder"}}
   @allowClear={{true}}
   @search={{perform this.searchByName}}
   @selected={{@mandataris}}
-  @onchange={{this.select}}
+  @onChange={{this.select}}
   as |mandataris|>
-  {{mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{mandataris.isBestuurlijkeAliasVan.achternaam}}, 
+  {{mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{mandataris.isBestuurlijkeAliasVan.achternaam}},
   {{mandataris.bekleedt.bestuursfunctie.label}}
 </PowerSelect>
