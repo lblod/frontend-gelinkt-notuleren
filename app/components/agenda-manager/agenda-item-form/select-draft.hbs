@@ -3,17 +3,17 @@
     {{yield}}
   </AuLabel>
   <PowerSelect
-          @class="select select--block u-spacer--tiny"
-          @renderInPlace={{true}}
-          @placeholder={{@placeholder}}
-          @options={{this.options}}
-          @verticalPosition="below"
-          @searchEnabled={{true}}
-          @selected={{this.selected}}
-          @allowClear={{true}}
-          @search={{perform this.getDrafts}}
-          @onchange={{this.select}}
-          as |option|>
+    @class="select select--block u-spacer--tiny"
+    @renderInPlace={{true}}
+    @placeholder={{@placeholder}}
+    @options={{this.options}}
+    @verticalPosition="below"
+    @searchEnabled={{true}}
+    @selected={{this.selected}}
+    @allowClear={{true}}
+    @search={{perform this.getDrafts}}
+    @onChange={{this.select}}
+    as |option|>
     {{option.currentVersion.title}}
   </PowerSelect>
 </div>
