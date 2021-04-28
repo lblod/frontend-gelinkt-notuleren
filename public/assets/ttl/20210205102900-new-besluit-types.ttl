@@ -197,7 +197,7 @@
 <https://data.vlaanderen.be/id/concept/BesluitType/84121221-4217-40e3-ada2-cd1379b168e1> <http://www.w3.org/2004/02/skos/core#inScheme> <http://lblod.data.gift/concept-schemes/c93ccd41-aee7-488f-86d3-038de890d05a> .
 <https://data.vlaanderen.be/id/concept/BesluitType/84121221-4217-40e3-ada2-cd1379b168e1> <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/BesluitType> .
 <https://data.vlaanderen.be/id/concept/BesluitType/84121221-4217-40e3-ada2-cd1379b168e1> <http://www.w3.org/2004/02/skos/core#prefLabel> "Andere" .
-<https://data.vlaanderen.be/id/concept/BesluitType/84121221-4217-40e3-ada2-cd1379b168e1> <http://www.w3.org/2004/02/skos/core#topConceptOf> <http://lblod.data.gift/concept-schemes/c93ccd41-aee7-488f-86d3-038de890d05a> .
+<https://data.vlaanderen.be/id/concept/BesluitType/84121221-4217-40e3-ada2-cd1379b168e1> <http://www.w3.org/2004/02/skos/core#broader> <https://data.vlaanderen.be/id/concept/BesluitType/67378dd0-5413-474b-8996-d992ef81637a>.
 <https://data.vlaanderen.be/id/concept/BesluitType/849c66c2-ba33-4ac1-a693-be48d8ac7bc7> <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000001> .
 <https://data.vlaanderen.be/id/concept/BesluitType/849c66c2-ba33-4ac1-a693-be48d8ac7bc7> <http://mu.semte.ch/vocabularies/core/uuid> "849c66c2-ba33-4ac1-a693-be48d8ac7bc7" .
 <https://data.vlaanderen.be/id/concept/BesluitType/849c66c2-ba33-4ac1-a693-be48d8ac7bc7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
@@ -429,12 +429,18 @@ gemeentebedrijf.""" .
 <https://data.vlaanderen.be/id/concept/BesluitType/fb92601a-d189-4482-9922-ab0efc6bc935> <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/BesluitType> .
 <https://data.vlaanderen.be/id/concept/BesluitType/fb92601a-d189-4482-9922-ab0efc6bc935> <http://www.w3.org/2004/02/skos/core#prefLabel> "Gebruikersreglement" .
 <https://data.vlaanderen.be/id/concept/BesluitType/fb92601a-d189-4482-9922-ab0efc6bc935> <http://www.w3.org/2004/02/skos/core#topConceptOf> <http://lblod.data.gift/concept-schemes/c93ccd41-aee7-488f-86d3-038de890d05a> .
-<https://data.vlaanderen.be/id/concept/BesluitType/84121221-4217-40e3-ada2-cd1379b168e1> a <http://www.w3.org/2004/02/skos/core#Concept>,  <http://www.w3.org/2000/01/rdf-schema#Class>;
-  <http://www.w3.org/2004/02/skos/core#broader> <https://data.vlaanderen.be/id/concept/BesluitType/67378dd0-5413-474b-8996-d992ef81637a>;
-  <http://www.w3.org/2004/02/skos/core#definition> "Besluit met een reglementair of verordenend karakter dat geen aanvullend reglement van de politie op het wegverkeer inhoudt, noch een belasting- of retributiereglement, noch een delegatiereglement, noch een deontologische code, noch een gebruikersreglement, noch een huishoudelijk reglement, noch een personeelsreglement, noch een politiereglement, noch een reglement onderwijs, noch een reglement over subsidie, premie of erkenning, noch een tijdelijke politieverordening op het wegverkeer.";
+<https://data.vlaanderen.be/id/concept/BesluitType/e96ec8af-6480-4b32-876a-fefe5f0a3793> a <http://www.w3.org/2004/02/skos/core#Concept>,  <http://www.w3.org/2000/01/rdf-schema#Class>;
+  <http://www.w3.org/2004/02/skos/core#definition> "Niet inzendplichtige besluiten";
   <http://www.w3.org/2004/02/skos/core#inScheme> <https://data.vlaanderen.be/id/conceptscheme/BesluitType>;
+  <http://www.w3.org/2004/02/skos/core#topConceptOf> <http://lblod.data.gift/concept-schemes/c93ccd41-aee7-488f-86d3-038de890d05a> ;
   <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000000>;
   <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000001> ;
   <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000002> ;
   <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000003> ;
+  <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/36a82ba0-7ff1-4697-a9dd-2e94df73b721> ;
+  <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/80310756-ce0a-4a1b-9b8e-7c01b6cc7a2d> ;
+  <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/b156b67f-c5f4-4584-9b30-4c090be02fdc> ;
+  <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/cc4e2d67-603b-4784-9b61-e50bac1ec089> ;
+  <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/cd93f147-3ece-4308-acab-5c5ada3ec63d> ;
+  <http://lblod.data.gift/vocabularies/besluit/decidableBy> <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/d01bb1f6-2439-4e33-9c25-1fc295de2e71> ;
   <http://www.w3.org/2004/02/skos/core#prefLabel> "Andere" .
