@@ -21,7 +21,7 @@
   </div>
 
   {{#if this.fetchParticipants.isRunning}}
-    <AuLoader @size="small" />
+    <AuLoader @padding="small" />
     <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
   {{else}}
     <ParticipationList
@@ -60,7 +60,7 @@
   </div>
 
   {{#if this.fetchParticipants.isRunning}}
-    <AuLoader @size="small" />
+    <AuLoader @padding="small" />
     <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
   {{else}}
     <ParticipationList

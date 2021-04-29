@@ -101,7 +101,7 @@
 
       {{#if this.bestuursorgaan}}
         {{#if this.loadData.isRunning}}
-          <AuLoader @size="small" />
+          <AuLoader @padding="small" />
           <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
         {{else}}
 
@@ -148,7 +148,7 @@
             </span>
           </AuHeading>
           {{#if this.fetchTreatments.isRunning}}
-            <AuLoader @size="small" />
+            <AuLoader @padding="small" />
             <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
           {{/if}}
 
