@@ -20,7 +20,7 @@
 
           <MockLogin as |login|>
             {{#if this.queryStore.isRunning}}
-              <AuLoader @size="small" />
+              <AuLoader @padding="small" />
             {{else}}
               {{#if this.login.errorMessage}}
                 <AuAlert @alertIcon="alert-triangle" @alertTitle={{this.login.errorMessage}} @alertskin="warning" />
