@@ -26,7 +26,7 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
     if(value.code === "start") {
       this.args.model[this.args.for] = 0;
     }
-    else {
+    else if(!this.args.model.isNew){
       this.args.model[this.args.for] = this.args.agendaItems.length;
     }
   }
