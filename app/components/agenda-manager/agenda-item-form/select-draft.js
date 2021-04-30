@@ -17,6 +17,10 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
     this.getDrafts.perform();
   }
 
+  get agendaItem() {
+    return this.args.model;
+  }
+
   @restartableTask
   * getDrafts(searchParams=''){
     const query={
@@ -30,10 +34,15 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
     const containers = yield this.store.query('document-container', query);
     this.options = containers;
   }
+
   @action
-  select(value) {
-    this.selected = value;
-    this.args.model.set("behandeling.documentContainer", value);
-    this.args.model.titel = value.get("currentVersion.title");
+  select(draft) {
+    this.selected = draft;
+    this.agendaItem.set("behandeling.documentContainer", draft);
+    if (draft) {
+      this.agendaItem.titel = draft.get("currentVersion.title");
+    } else {
+      this.agendaItem.titel = '';
+    }
   }
 }
