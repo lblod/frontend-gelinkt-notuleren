@@ -7,6 +7,7 @@ import { fetch } from 'fetch';
 export default class MeetingsPublishNotulenController extends Controller {
 
   @tracked notulen;
+  @tracked errors;
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked publicBehandelingUris = [];
@@ -31,12 +32,13 @@ export default class MeetingsPublishNotulenController extends Controller {
       this.notulen = notulen.firstObject;
       this.publicBehandelingUris = notulen.firstObject.publicBehandelingen;
     } else {
-      const prePublish = yield this.createPrePublishedResource.perform();
+      const {content, errors} = yield this.createPrePublishedResource.perform();
       const rslt = yield this.store.createRecord("versioned-notulen", {
         zitting: this.model,
-        content: prePublish
+        content: content
       });
       this.notulen = rslt;
+      this.errors = errors;
     }
     const behandelings = yield this.fetchBehandelings.perform();
     this.behandelings = behandelings;
@@ -60,7 +62,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     const id = this.model.id;
     const response = yield fetch(`/prepublish/notulen/${id}`);
     const json = yield response.json();
-    return json.data.attributes.content;
+    return json.data.attributes;
   }
 
   @task

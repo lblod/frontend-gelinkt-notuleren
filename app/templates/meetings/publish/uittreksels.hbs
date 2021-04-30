@@ -3,10 +3,11 @@
   <ul>
     {{#each this.uittreksels as |uittreksel|}}
       <Signatures::Behandeling::TimelineStep
-        @name={{uittreksel.behandeling.onderwerp.titel}}
-        @behandeling={{uittreksel}}
-        @signing={{perform this.createSignedResource uittreksel.behandeling}}
-        @publish={{perform this.createPublishedResource uittreksel.behandeling}}
+        @name={{uittreksel.document.behandeling.onderwerp.titel}}
+        @behandeling={{uittreksel.document}}
+        @errors={{uittreksel.errors}}
+        @signing={{perform this.createSignedResource uittreksel.document.behandeling}}
+        @publish={{perform this.createPublishedResource uittreksel.document.behandeling}}
         @print={{this.print}}
       />
     {{else}}

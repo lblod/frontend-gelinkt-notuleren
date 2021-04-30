@@ -402,6 +402,20 @@
   }
 }
 
+/* Notulen preview missing data
+ ========================================================================== */
+
+ .is-required[content=""] {
+   background-color: red;
+   padding: 5px 5px;
+   border-radius: 5px;
+   display: inline-block;
+   &:after {
+     content: "Warning: You must fill this information";
+     color: white;
+   }
+ }
+
 /* Behandeling preview publicatie
  ========================================================================== */
 

@@ -4,6 +4,7 @@
     <Signatures::Besluitenlijst::TimelineStep
       @name="besluitenlijst"
       @lijst={{this.besluitenlijst}}
+      @errors={{this.errors}}
       @signing={{perform this.createSignedResource}}
       @publish={{perform this.createPublishedResource}}
     />
