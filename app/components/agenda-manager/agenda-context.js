@@ -69,7 +69,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     if (item.changedAttributes()["position"]) {
       let [oldPos, newPos] = item.changedAttributes()["position"];
       if(!oldPos && item.isNew){
-        oldPos=this.items.length-1;
+        oldPos = this.items.length-1;
       }
       const position = newPos ?? this.items.length;
       this.items.splice(oldPos, 1);
