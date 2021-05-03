@@ -4,7 +4,6 @@ import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
 import {DRAFT_STATUS_ID, PUBLISHED_STATUS_ID, SCHEDULED_STATUS_ID} from "../../utils/constants";
 
-
 export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
   @tracked _newItem;
@@ -71,8 +70,13 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       if(!oldPos && item.isNew){
         oldPos = this.items.length-1;
       }
-      const position = newPos ?? this.items.length;
-      this.items.splice(oldPos, 1);
+      let position = newPos || newPos === 0 ? newPos : this.items.length;
+      if (oldPos || oldPos === 0) {
+        this.items.splice(oldPos, 1);
+        if (oldPos < position) {
+          position = position -1;
+        }
+      }
       this.items.splice(position, 0, item);
     }
   }

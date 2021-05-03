@@ -32,7 +32,7 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
   }
   @action selectAfterItem(value) {
     this.selectedAfterItem = value;
-    this.args.model[this.args.for] = value.position;
+    this.args.model[this.args.for] = value.position + 1;
   }
 
 
