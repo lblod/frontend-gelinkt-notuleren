@@ -63,12 +63,14 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
     yield item.save();
     yield this.args.onSave();
-    // yield this.saveItemsTask.perform();
   }
 
   repositionItem(item) {
     if (item.changedAttributes()["position"]) {
-      const [oldPos, newPos] = item.changedAttributes()["position"];
+      let [oldPos, newPos] = item.changedAttributes()["position"];
+      if(!oldPos && item.isNew){
+        oldPos=this.items.length-1;
+      }
       const position = newPos ?? this.items.length;
       this.items.splice(oldPos, 1);
       this.items.splice(position, 0, item);
@@ -86,6 +88,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       titel: "",
       beschrijving: "",
       geplandOpenbaar: true,
+      position: this.items.length
     });
     item.behandeling = yield this.createBehandelingTask.perform(item);
     return item;
