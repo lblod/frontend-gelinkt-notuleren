@@ -20,10 +20,12 @@ export default class AgendaManagerAgendaTableRowComponent extends Component {
       include: 'document-container.status'
     })).firstObject;
 
-    const statusId = behandeling.get('documentContainer.status.id');
+    if(behandeling){
+      const statusId = behandeling.get('documentContainer.status.id');
 
-    if(statusId==PUBLISHED_STATUS_ID){
-      this.published=true;
+      if(statusId==PUBLISHED_STATUS_ID){
+        this.published=true;
+      }
     }
   }
 }
