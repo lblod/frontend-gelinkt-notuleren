@@ -45,7 +45,6 @@ export default class CurrentSessionService extends Service {
   }
 
   hasRole(role) {
-    debugger;
     return this.roles.includes(role);
   }
 }
