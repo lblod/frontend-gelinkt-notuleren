@@ -11,6 +11,14 @@ export default class CurrentSessionService extends Service {
   @tracked group;
   @tracked roles = [];
 
+  get canRead(){
+    return this.hasRole('GelinktNotuleren-lezer');
+  }
+
+  get canWrite(){
+    return this.hasRole('GelinktNotuleren-schrijver');
+  }
+
   get canPublish() {
     return this.hasRole('GelinktNotuleren-publiceerder');
   }
@@ -37,6 +45,7 @@ export default class CurrentSessionService extends Service {
   }
 
   hasRole(role) {
+    debugger;
     return this.roles.includes(role);
   }
 }

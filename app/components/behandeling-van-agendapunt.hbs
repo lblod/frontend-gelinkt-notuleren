@@ -1,4 +1,4 @@
-{{#if this.published}}
+{{#if (or this.published @readOnly)}}
 <div class="au-c-meeting-chrome-editable">
   <AuToolbar>
     <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
@@ -36,7 +36,7 @@
       @onSave={{this.saveParticipants}}
       @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
       @meeting={{@meeting}}
-      @readOnly={{this.published}}
+      @readOnly={{or this.published @readOnly}}
     />
   {{/if}}
   <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
@@ -75,7 +75,7 @@
       @onSave={{this.saveParticipants}}
       @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
       @meeting={{@meeting}}
-      @readOnly={{this.published}}
+      @readOnly={{or this.published @readOnly}}
    />
   {{/if}}
     {{#if this.hasParticipants}}
