@@ -405,16 +405,21 @@
 /* Notulen preview missing data
  ========================================================================== */
 
- .is-required[content=""] {
-   background-color: red;
-   padding: 5px 5px;
-   border-radius: 5px;
-   display: inline-block;
-   &:after {
-     content: "Warning: You must fill this information";
-     color: white;
-   }
- }
+.is-required[content=""] {
+  display: inline-block;
+  padding: $au-unit-tiny/2 $au-unit-tiny;
+  border-radius: $au-radius;
+  background-color: $au-red-600;
+
+  &:after {
+    content: "Deze informatie is vereist om te kunnen publiceren";
+    color: $au-white;
+  }
+
+  [data--language="en"] &:after {
+    content: "Warning: You must fill this information";
+  }
+}
 
 /* Behandeling preview publicatie
  ========================================================================== */

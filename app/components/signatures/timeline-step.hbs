@@ -31,11 +31,13 @@
         {{/if}}
       </div>
       {{#if (and @errors @errors.length)}}
-        <div>
+        <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertskin="error">
+          <ul>
           {{#each @errors as |error|}}
-            <p>{{error}}</p>
+            <li>{{error}}</li>
           {{/each}}
-        </div>
+          </ul>
+        </AuAlert>
       {{else}}
         {{!-- Sign --}}
         <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
