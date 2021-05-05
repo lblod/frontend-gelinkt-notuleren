@@ -67,7 +67,9 @@
         {{t "manageZittingsData.geeindigdOpTijdstipLabel"}} <strong>{{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
       </li>
     </ul>
-    <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">{{t "manageZittingsData.openModalButton"}}</AuButton>
+    {{#unless @readOnly}}
+      <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">{{t "manageZittingsData.openModalButton"}}</AuButton>
+    {{/unless}}
   </div>
   {{/if}}
 </div>
