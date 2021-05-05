@@ -20,4 +20,7 @@ export default class AgendapointsShowController extends Controller {
     yield this.transitionToRoute('agendapoints.edit', agendapuntId);
   }
 
+  get readOnly(){
+    return !this.currentSession.canWrite && this.currentSession.canRead;
+  }
 }

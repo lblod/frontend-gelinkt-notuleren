@@ -11,9 +11,11 @@
           (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
     </td>
     <td class="au-u-table-right">
-      <AuPill @skin="success">
-        {{t "manageAgendaZittingModal.apPublishedMsg"}}
-      </AuPill>
+      {{#if this.published}}
+        <AuPill @skin="success">
+          {{t "manageAgendaZittingModal.apPublishedMsg"}}
+        </AuPill>
+      {{/if}}
     </td>
   </tr>
 {{else}}

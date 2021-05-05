@@ -5,9 +5,11 @@
       {{@behandeling.onderwerp.titel}}
 
     </AuHeading>
-    <AuPill @skin="success">
-      {{t "manageAgendaZittingModal.apPublishedMsg"}}
-    </AuPill>
+    {{#if this.published}}
+      <AuPill @skin="success">
+        {{t "manageAgendaZittingModal.apPublishedMsg"}}
+      </AuPill>
+    {{/if}}
   </AuToolbar>
   <div class="au-o-box au-o-box--small au-c-meeting-chrome-card au-u-margin-bottom-none">
     <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--inset au-u-margin-bottom-small">{{t "behandelingVanAgendapunten.visibility"}}</AuHeading>

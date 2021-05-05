@@ -108,6 +108,7 @@
 
           <ManageIntermissions
             @zitting={{@zitting}}
+            @readOnly={{this.readOnly}}
           />
 
           {{!-- Participation list --}}
@@ -128,6 +129,7 @@
             @onSave={{this.saveParticipationList}}
             @meeting={{this.zitting}}
             @modalTitle={{t "participationList.openModalButton"}}
+            @readOnly={{this.readOnly}}
           />
 
           {{!-- Agenda --}}
