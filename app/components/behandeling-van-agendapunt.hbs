@@ -44,10 +44,7 @@
   <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
     <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "behandelingVanAgendapunten.contentTitle"}}</AuHeading>
     <div class="au-o-box au-o-box--small">
-      <LinkTo @route="agendapoints.show" @model={{this.documentContainer.id}} class="au-c-link" target="_blank">
-        <AuIcon @icon="document" @alignment="left"/>
-        {{@behandeling.onderwerp.titel}} - {{t "behandelingVanAgendapunten.documentLink"}}
-      </LinkTo>
+      {{{this.document.content}}}
     </div>
   </div>
 </div>
