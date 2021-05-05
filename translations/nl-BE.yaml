@@ -216,6 +216,7 @@ timelineStep:
   notifyConsequences: Gevolgen melding
   notifyInfo: "Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
   localLoket: "Loket voor Lokale Besturen"
+  publishWarning: "Vul de ontbrekende informatie aan om te publiceren"
 publicationConfirmation:
   modalTitle: "Bevestig publicatie van "
   alertFirstPart: Publiceren en melden is bindend en onomkeerbaar.

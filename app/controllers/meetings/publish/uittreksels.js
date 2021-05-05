@@ -8,6 +8,8 @@ export default class MeetingsPublishUittrekselsController extends Controller {
   @tracked
   uittreksels = [];
 
+  @tracked errors;
+
   constructor() {
     super(...arguments);
   }
@@ -36,7 +38,7 @@ export default class MeetingsPublishUittrekselsController extends Controller {
           content: uittreksel.data.attributes.content,
           behandeling,
         });
-        uittreksels.push(rslt);
+        uittreksels.push({document: rslt, errors: uittreksel.data.attributes.errors});
       }
     }
     this.uittreksels = uittreksels;
