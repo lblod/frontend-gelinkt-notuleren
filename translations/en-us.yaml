@@ -217,6 +217,7 @@ timelineStep:
   notifyConsequences: Consequences notification
   notifyInfo: "A notification will be sent for this document to the authoritative government and will be visible in the "
   localLoket: "Loket voor Lokale Besturen"
+  publishWarning: "Complete the missing information to publish"
 publicationConfirmation:
   modalTitle: "Confirm publication of "
   alertFirstPart: Publication and reporting is binding and irreversible.

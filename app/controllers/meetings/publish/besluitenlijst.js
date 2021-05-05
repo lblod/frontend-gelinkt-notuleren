@@ -13,6 +13,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
 
   @tracked
   besluitenlijst;
+  @tracked errors;
 
   constructor() {
     super(...arguments);
@@ -32,12 +33,13 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     if(behandelings.length) {
       this.besluitenlijst = behandelings.firstObject;
     } else {
-      const prePublish = yield this.createPrePublishedResource.perform();
+      const {content, errors} = yield this.createPrePublishedResource.perform();
       const rslt = yield this.store.createRecord("versioned-besluiten-lijst", {
         zitting: this.model,
-        content: prePublish
+        content: content
       });
       this.besluitenlijst = rslt;
+      this.errors = errors;
     }
   }
 
@@ -56,7 +58,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     const id = this.model.id;
     const response = yield fetch(`/prepublish/besluitenlijst/${id}`);
     const json = yield response.json();
-    return json.data.attributes.content;
+    return json.data.attributes;
   }
 
   @task
