@@ -91,6 +91,10 @@ participationListModalTable:
   actieLabel: Actie
   checkboxLabel: Aanwezig
   noDataMessage: Geen mandatarissen gevonden.
+manageFreeText:
+  before: Vrije tekst voor de zitting
+  after: Vrije tekst na de zitting
+  save: Opslaan
 manageAgendaZitting:
   titelLabel: Titel
   beschrijvingLabel: Beschrijving

@@ -91,6 +91,10 @@ participationListModalTable:
   actieLabel: Action
   checkboxLabel: Present
   noDataMessage: No mandatees were found.
+manageFreeText:
+  before: Free text before the meeting
+  after: Free text after the meeting
+  save: Save
 manageAgendaZitting:
   titelLabel: Title
   beschrijvingLabel: Description

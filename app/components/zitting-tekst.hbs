@@ -1,0 +1,15 @@
+{{#if (eq @position "before")}}
+  <AuAccordion @accordionIconOpen="nav-down" @accordionIconClosed="nav-right" @accordionButtonLabel={{t 'manageFreeText.before'}}>
+    <AuTextarea id="text" @value={{this.text}} @width="block" disabled={{this.saveText.isRunning}}></AuTextarea>
+    {{#unless @readOnly}}
+      <AuButton {{on "click" (perform this.saveText)}} @loading={{or this.saveText.isRunning @readOnly}} @width="block" @skin="secondary">{{t 'manageFreeText.save'}}</AuButton>
+    {{/unless}}
+  </AuAccordion>
+{{else}}
+  <AuAccordion @accordionIconOpen="nav-down" @accordionIconClosed="nav-right" @accordionButtonLabel={{t 'manageFreeText.after'}}>
+    <AuTextarea id="text" @value={{this.text}} @width="block" disabled={{or this.saveText.isRunning @readOnly}}></AuTextarea>
+    {{#unless @readOnly}}
+      <AuButton {{on "click" (perform this.saveText)}} @loading={{this.saveText.isRunning}} @width="block" @skin="secondary">{{t 'manageFreeText.save'}}</AuButton>
+    {{/unless}}
+  </AuAccordion>
+{{/if}}

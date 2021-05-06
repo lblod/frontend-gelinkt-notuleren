@@ -130,15 +130,16 @@
           />
 
           {{!-- Agenda --}}
-          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
+          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge au-u-margin-bottom-small">
             {{t "meetingForm.thirdSectionTitle"}}
             <span class="au-c-onboarding">
               <AuIcon @icon="info-circle"/>
               {{t "meetingForm.thirdSectionNotFilledWarning"}}
             </span>
           </AuHeading>
+          <ZittingTekst @zitting={{@zitting}} @position={{"intro"}} @readOnly={{true}}/>
           <AgendaManager @zittingId={{@zitting.id}} @onSave={{perform this.fetchTreatments}} />
-
+          <ZittingTekst @zitting={{@zitting}} @position={{"outro"}} @readOnly={{true}}/>
           {{!-- Treatment of agenda --}}
           <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.fourthSectionTitle"}}
