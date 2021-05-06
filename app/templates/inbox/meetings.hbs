@@ -8,9 +8,11 @@
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
-          <AuButton {{on "click" this.openNewDocument}}>
-            Nieuwe zitting
-          </AuButton>
+          {{#unless this.readOnly}}
+            <AuButton {{on "click" this.openNewDocument}}>
+              Nieuwe zitting
+            </AuButton>
+          {{/unless}}
         </AuToolbarGroup>
       </AuToolbar>
     </menu.general>
