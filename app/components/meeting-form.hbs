@@ -61,6 +61,11 @@
           <a href="#sectionFour" class="au-c-link au-c-link--secondary">
             {{t "meetingForm.fourthSectionTitle"}}
           </a>
+        </li>
+        <li class="au-c-list-divider__item">
+          <a href="#sectionFive" class="au-c-link au-c-link--secondary">
+            {{t "meetingForm.fifthSectionTitle"}}
+          </a>
           {{#if this.fetchTreatments.isRunning}}
             <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingLoader"}}</span></p>
           {{/if}}
@@ -75,6 +80,11 @@
               {{/each}}
             </ol>
           {{/if}}
+        </li>
+        <li class="au-c-list-divider__item">
+          <a href="#sectionSix" class="au-c-link au-c-link--secondary">
+            {{t "meetingForm.sixthSectionTitle"}}
+          </a>
         </li>
       {{/unless}}
     </ul>
@@ -176,7 +186,7 @@
             </ol>
           {{/if}}
           {{!-- End of meeting --}}
-          <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
+          <AuHeading id="sectionSix" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
               {{t "meetingForm.sixthSectionTitle"}}
           </AuHeading>
           <ZittingTextDocumentContainer @zitting={{@zitting}} @readOnly={{false}} @type={{"ext:outro"}}/>
