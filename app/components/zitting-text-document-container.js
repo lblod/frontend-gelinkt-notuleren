@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
 import { action } from "@ember/object";
 
