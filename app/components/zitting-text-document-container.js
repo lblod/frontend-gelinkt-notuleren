@@ -5,14 +5,11 @@ import { action } from "@ember/object";
 export default class ZittingTextDocumentContainerComponent extends Component {
   constructor(...args) {
     super(...args);
-    console.log(this.args.zitting);
-    this.getText.perform();
   }
 
   profile = 'none';
   editor;
   type = this.args.type;
-  text;
 
   editorOptions = {
     showToggleRdfaAnnotations: false,
@@ -22,33 +19,25 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     showRdfaHover: false
   };
 
-  @task
-  *getText() {
-    const zitting = yield this.args.zitting;
-    if(!zitting.intro){
-      zitting.intro="";
-    }
-    if(!zitting.outro){
-      zitting.outro="";
-    }
+  get text(){
+    const zitting = this.args.zitting;
     if (this.type === 'ext:intro') {
-      this.text = yield zitting.intro;
+      return zitting.intro;
     }
     else if (this.type === 'ext:outro') {
-      this.text = yield zitting.outro;
+      return zitting.outro;
     }
   }
 
   @task
   *saveText() {
-    const zitting = yield this.args.zitting;
-    this.text = this.editor.htmlContent;
+    const zitting = this.args.zitting;
 
     if (this.type === 'ext:intro') {
-      zitting.intro = this.text;
+      zitting.intro = this.editor.htmlContent;
     }
     else if (this.type === 'ext:outro') {
-      zitting.outro = this.text;
+      zitting.outro = this.editor.htmlContent;
     }
     yield zitting.save();
   }
