@@ -12,4 +12,7 @@ export default class InboxMeetingsController extends Controller.extend(DefaultQu
   openNewDocument() {
     this.transitionToRoute('meetings.new');
   }
+  get readOnly(){
+    return !this.currentSession.canWrite && this.currentSession.canRead;
+  }
 }

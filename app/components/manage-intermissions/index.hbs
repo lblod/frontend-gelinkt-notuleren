@@ -14,14 +14,16 @@
           {{t "manageIntermissions.commentLabel"}}
         </th>
         <th class="au-u-table-right">
-          <span class="au-u-hidden-visually">{{t "manageIntermissions.actionsLabel"}}</span>
-          <AuButton
-            {{on "click" this.addIntermission}}
-            @icon="add"
-            @iconAlignment="left"
-          >
-            {{t "manageIntermissions.addInterruptionLabel"}}
-          </AuButton>
+          {{#unless @readOnly}}
+            <span class="au-u-hidden-visually">{{t "manageIntermissions.actionsLabel"}}</span>
+            <AuButton
+              {{on "click" this.addIntermission}}
+              @icon="add"
+              @iconAlignment="left"
+            >
+              {{t "manageIntermissions.addInterruptionLabel"}}
+            </AuButton>
+          {{/unless}}
         </th>
       </tr>
     </thead>
@@ -33,9 +35,11 @@
             <td>{{moment-format intermission.endedAt "DD/MM/YYYY hh:mm"}}</td>
             <td>{{intermission.comment}}</td>
             <td class="au-u-table-right">
-              <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" (fn this.editIntermission intermission)}}>
-                {{t "manageIntermissions.editLabel"}}
-              </AuButton>
+              {{#unless @readOnly}}
+                <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" (fn this.editIntermission intermission)}}>
+                  {{t "manageIntermissions.editLabel"}}
+                </AuButton>
+              {{/unless}}
             </td>
           </tr>
         {{else}}

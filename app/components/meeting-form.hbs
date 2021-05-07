@@ -107,6 +107,7 @@
         @zitting={{@zitting}}
         @onCreate={{@onCreateMeeting}}
         @onChange={{this.meetingInfoUpdate}}
+        @readOnly={{this.readOnly}}
       />
 
       {{#if this.bestuursorgaan}}
@@ -117,6 +118,7 @@
 
           <ManageIntermissions
             @zitting={{@zitting}}
+            @readOnly={{this.readOnly}}
           />
 
           {{!-- Participation list --}}
@@ -137,6 +139,7 @@
             @onSave={{this.saveParticipationList}}
             @meeting={{this.zitting}}
             @modalTitle={{t "participationList.openModalButton"}}
+            @readOnly={{this.readOnly}}
           />
 
           {{!-- Agenda --}}
@@ -147,9 +150,8 @@
               {{t "meetingForm.thirdSectionNotFilledWarning"}}
             </span>
           </AuHeading>
-          <AgendaManager @zittingId={{@zitting.id}} @onSave={{perform this.fetchTreatments}} />
-          
-          {{!-- Start of meeting --}}
+          <AgendaManager @zittingId={{@zitting.id}} @onSave={{perform this.fetchTreatments}} @readOnly={{this.readOnly}}/>
+          {{!-- Treatment of agenda --}}
           <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.fourthSectionTitle"}}
             <span class="au-c-onboarding">
@@ -182,6 +184,7 @@
                   @defaultChairman={{this.voorzitter}}
                   @defaultSecretary={{this.secretaris}}
                   @behandeling={{behandeling}}
+                  @readOnly={{this.readOnly}}
                   @bestuursorgaan={{this.zitting.bestuursorgaan}}
                   @meeting={{this.zitting}}
                 />

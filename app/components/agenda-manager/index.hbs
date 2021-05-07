@@ -8,6 +8,7 @@
               @onSort={{agenda.onSort}}
               @onCreate={{fn (perform this.createItemTask) agenda.createItemTask}}
               @items={{agenda.items}}
+              @readOnly={{@readOnly}}
               as |Table|>
         <Table.Header/>
 

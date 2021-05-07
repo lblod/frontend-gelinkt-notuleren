@@ -6,9 +6,11 @@
     <th>{{t "manageAgendaZittingModal.geplandOpenbaar"}}</th>
     <th class="au-u-table-right">
       <span class="au-u-hidden-visually">{{t "manageAgendaZittingModal.actionsLabel"}}</span>
-      <AuButton {{on "click" @onCreate}} @icon="add" @iconAlignment="left">
-        {{t "manageAgendaZittingModal.createItemButton"}}
-      </AuButton>
+      {{#unless @readOnly}}
+        <AuButton {{on "click" @onCreate}} @icon="add" @iconAlignment="left">
+          {{t "manageAgendaZittingModal.createItemButton"}}
+        </AuButton>
+      {{/unless}}
     </th>
   </tr>
 </thead>

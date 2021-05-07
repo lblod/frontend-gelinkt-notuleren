@@ -1,4 +1,4 @@
-{{#if (eq this.editorStatus "published")}}
+{{#if (or (eq this.editorStatus "published") @readOnly)}}
   <LinkTo @route="agendapoints.show" @model={{@documentContainer.id}} class="au-c-link">{{@documentContainer.currentVersion.title}}</LinkTo>
 {{else}}
   <LinkTo @route="agendapoints.edit" @model={{@documentContainer.id}} class="au-c-link">{{@documentContainer.currentVersion.title}}</LinkTo>
