@@ -27,6 +27,9 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     else if (this.type === 'ext:outro') {
       return zitting.outro;
     }
+    else{
+      return "";
+    }
   }
 
   @task

@@ -22,7 +22,8 @@ export default class MeetingForm extends Component {
 
 
   get readOnly(){
-    return !this.currentSession.canWrite && this.currentSession.canRead;
+    // return !this.currentSession.canWrite && this.currentSession.canRead;
+    return true;
   }
 
   constructor() {
