@@ -5,6 +5,7 @@ import { action } from "@ember/object";
 export default class ZittingTextDocumentContainerComponent extends Component {
   constructor(...args) {
     super(...args);
+    console.log(this.args.zitting);
     this.getText.perform();
   }
 
@@ -15,7 +16,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   editorOptions = {
     showToggleRdfaAnnotations: false,
-    showInsertButton: true,
+    showInsertButton: false,
     showRdfa: false,
     showRdfaHighlight: false,
     showRdfaHover: false
@@ -23,9 +24,12 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   @task
   *getText() {
-    const zitting = yield this.args.zitting;    
-    if(zitting && !zitting.intro){
+    const zitting = yield this.args.zitting;
+    if(!zitting.intro){
       zitting.intro="";
+    }
+    if(!zitting.outro){
+      zitting.outro="";
     }
     if (this.type === 'ext:intro') {
       this.text = yield zitting.intro;

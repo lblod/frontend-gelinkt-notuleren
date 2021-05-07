@@ -1,11 +1,3 @@
-
-<AuPill @icon="info-circle" @iconAlignment="left" class="au-u-margin-top-small">
-  {{#if (eq @type "ext.intro")}}
-    {{t 'manageFreeText.before'}}
-  {{else}}
-    {{t 'manageFreeText.after'}}
-  {{/if}}
-</AuPill>
 <div class="au-c-meeting-chrome-editable">
 {{#if this.getText.lastSuccessful}}
   {{#if this.saveText.isRunning}}
