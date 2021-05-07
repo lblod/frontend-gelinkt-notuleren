@@ -130,22 +130,27 @@
           />
 
           {{!-- Agenda --}}
-          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge au-u-margin-bottom-small">
+          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.thirdSectionTitle"}}
             <span class="au-c-onboarding">
               <AuIcon @icon="info-circle"/>
               {{t "meetingForm.thirdSectionNotFilledWarning"}}
             </span>
           </AuHeading>
-          <ZittingTekst @zitting={{@zitting}} @position={{"intro"}} @readOnly={{true}}/>
           <AgendaManager @zittingId={{@zitting.id}} @onSave={{perform this.fetchTreatments}} />
-          <ZittingTekst @zitting={{@zitting}} @position={{"outro"}} @readOnly={{true}}/>
-          {{!-- Treatment of agenda --}}
+          
+          {{!-- Start of meeting --}}
           <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.fourthSectionTitle"}}
+          </AuHeading>
+          <ZittingTextDocumentContainer @zitting={{@zitting}} @readOnly={{false}} @type={{"ext:intro"}}/>
+          
+          {{!-- Treatment of agenda --}}
+          <AuHeading id="sectionFive" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
+            {{t "meetingForm.fifthSectionTitle"}}
             <span class="au-c-onboarding">
               <AuIcon @icon="info-circle"/>
-              {{t "meetingForm.fourthSectionNotFilledWarning"}}
+              {{t "meetingForm.fifthSectionNotFilledWarning"}}
             </span>
           </AuHeading>
           {{#if this.fetchTreatments.isRunning}}
@@ -170,6 +175,11 @@
             {{/each}}
             </ol>
           {{/if}}
+          {{!-- End of meeting --}}
+          <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
+              {{t "meetingForm.sixthSectionTitle"}}
+          </AuHeading>
+          <ZittingTextDocumentContainer @zitting={{@zitting}} @readOnly={{false}} @type={{"ext:outro"}}/>
         {{/if}}
       {{else}}
         <AuHelpText @size="large" @skin="secondary">

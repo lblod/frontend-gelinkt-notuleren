@@ -57,7 +57,7 @@
   border: .1rem solid $au-gray-300;
   background-color: $au-gray-100;
   margin-top: $au-unit-small;
-  margin-bottom: $au-unit-small;
+  margin-bottom: $au-unit-huge + $au-unit;
 
   > .au-c-button {
     position: absolute;
