@@ -20,6 +20,11 @@ export default class MeetingForm extends Component {
   @service currentSession;
   @service router;
 
+
+  get readOnly(){
+    return !this.currentSession.canWrite && this.currentSession.canRead;
+  }
+
   constructor() {
     super(...arguments);
     this.zitting = this.args.zitting;

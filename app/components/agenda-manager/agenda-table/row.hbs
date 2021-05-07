@@ -1,28 +1,44 @@
-<DraggableObject @tagName="tr" @content={{@item}} @isSortable={{true}}>
-  <td>
-    <AuButton @skin="tertiary" class="au-u-cursor-inherit">
-      <span class="au-u-hidden-visually"></span>
-      <span>
-        <i class="fa fa-bars"></i>
-      </span>
-    </AuButton>
-  </td>
-  <td>
-    <p>{{@item.titel}}</p>
-  </td>
-  <td>
-    {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
-         (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
-  </td>
-  <td class="au-u-table-right">
-    {{#if this.published}}
-      <AuPill @skin="success">
-        {{t "manageAgendaZittingModal.apPublishedMsg"}}
-      </AuPill>
-    {{else}}
+{{#if (or this.published @readOnly)}}
+  <tr>
+    <td>
+      {{@item.position}}
+    </td>
+    <td>
+      <p>{{@item.titel}}</p>
+    </td>
+    <td>
+      {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
+          (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
+    </td>
+    <td class="au-u-table-right">
+      {{#if this.published}}
+        <AuPill @skin="success">
+          {{t "manageAgendaZittingModal.apPublishedMsg"}}
+        </AuPill>
+      {{/if}}
+    </td>
+  </tr>
+{{else}}
+  <DraggableObject @tagName="tr" @content={{@item}} @isSortable={{true}}>
+    <td>
+      <AuButton @skin="tertiary" class="au-u-cursor-inherit">
+        <span class="au-u-hidden-visually"></span>
+        <span>
+          <i class="fa fa-bars"></i>
+        </span>
+      </AuButton>
+    </td>
+    <td>
+      <p>{{@item.titel}}</p>
+    </td>
+    <td>
+      {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
+          (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
+    </td>
+    <td class="au-u-table-right">
       <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
         {{t "manageAgendaZittingModal.editItemButton"}}
       </AuButton>
-    {{/if}}
-  </td>
-</DraggableObject>
+    </td>
+  </DraggableObject>
+{{/if}}

@@ -12,4 +12,7 @@ export default class InboxDraftDecisionsController extends Controller.extend(Def
   openNewDocument() {
     this.transitionToRoute('agendapoints.new');
   }
+  get readOnly(){
+    return !this.currentSession.canWrite && this.currentSession.canRead;
+  }
 }

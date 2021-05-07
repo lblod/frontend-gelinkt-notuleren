@@ -1,6 +1,6 @@
 <table class="au-c-meeting-chrome-table">
   {{yield (hash
-    Header=(component "agenda-manager/agenda-table/header" onCreate=@onCreate )
-    Body=(component "agenda-manager/agenda-table/body" items=@items onSort=@onSort onCreate=@onCreate )
+    Header=(component "agenda-manager/agenda-table/header" onCreate=@onCreate readOnly=@readOnly)
+    Body=(component "agenda-manager/agenda-table/body" items=@items onSort=@onSort onCreate=@onCreate readOnly=@readOnly)
   )}}
 </table>
