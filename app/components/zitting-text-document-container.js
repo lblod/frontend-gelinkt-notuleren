@@ -23,7 +23,10 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   @task
   *getText() {
-    const zitting = yield this.args.zitting;
+    const zitting = yield this.args.zitting;    
+    if(zitting && !zitting.intro){
+      zitting.intro="";
+    }
     if (this.type === 'ext:intro') {
       this.text = yield zitting.intro;
     }
