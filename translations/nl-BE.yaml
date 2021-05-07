@@ -96,8 +96,8 @@ participationListModalTable:
   checkboxLabel: Aanwezig
   noDataMessage: Geen mandatarissen gevonden.
 manageFreeText:
-  before: Vrije tekst voor de zitting
-  after: Vrije tekst na de zitting
+  before: Vrije tekstveld waar je de start van de zitting kan beschrijven
+  after: Vrije tekstveld waar je het einde van de zitting kan beschrijven
   save: Opslaan
 manageAgendaZitting:
   titelLabel: Titel
