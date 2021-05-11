@@ -1,20 +1,27 @@
 import Component from '@glimmer/component';
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class DateTimePicker extends Component{
   @service intl;
-  date;
-  hours;
-  minutes;
+  @tracked date;
 
   constructor() {
     super(...arguments);
     if(this.args.value) {
       this.date = new Date(this.args.value);
-      this.hours = this.date.getHours();
-      this.minutes = this.date.getMinutes();
+    } else {
+      this.date = new Date();
     }
+  }
+
+  get hours() {
+    return this.date.getHours();
+  }
+
+  get minutes() {
+    return this.date.getMinutes();
   }
 
   get datePickerLocalization() {
@@ -38,12 +45,13 @@ export default class DateTimePicker extends Component{
   onChangeDate(isoDate, date) {
     let wasDateInputCleared = !date;
     if (!wasDateInputCleared) {
-      if(!this.date) {
-        this.date = new Date();
-      }
-      this.date.setDate(date.getDate());
-      this.date.setMonth(date.getMonth());
-      this.date.setFullYear(date.getFullYear());
+      let newDate = new Date(this.date.getTime());
+
+      newDate.setDate(date.getDate());
+      newDate.setMonth(date.getMonth());
+      newDate.setFullYear(date.getFullYear());
+
+      this.date = newDate;
       this.args.onChange(this.date);
     }
   }
@@ -51,16 +59,15 @@ export default class DateTimePicker extends Component{
   @action
   onChangeTime(type, event) {
     const value = event.target.value;
-    if(!this.date) {
-      this.date = new Date();
-    }
+    let newDate = new Date(this.date.getTime());
+
     if(type === 'hours') {
-      if(value < 0 || value > 24) return;
-      this.date.setHours(value);
+      newDate.setHours(value);
     } else {
-      if(value < 0 || value > 60) return;
-      this.date.setMinutes(value);
+      newDate.setMinutes(value);
     }
+
+    this.date = newDate;
     this.args.onChange(this.date);
   }
 }

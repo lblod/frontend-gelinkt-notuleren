@@ -13,13 +13,29 @@
   <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
     {{#let (unique-id) as |id|}}
       <AuLabel for={{id}}>Uur</AuLabel>
-      <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'hours'}} @value={{this.hours}} max={{24}} id={{id}} />
+      <input
+        class="au-c-input au-c-input--block"
+        type='number'
+        value={{this.hours}}
+        min={{-1}}
+        max={{24}}
+        id={{id}}
+        {{on "input" (fn this.onChangeTime 'hours')}}
+      />
     {{/let}}
   </div>
   <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
     {{#let (unique-id) as |id|}}
       <AuLabel for={{id}}>Minuten</AuLabel>
-      <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'minutes'}} @value={{this.minutes}} max={{60}} id={{id}} />
+      <input
+        class="au-c-input au-c-input--block"
+        type='number'
+        value={{this.minutes}}
+        min={{-1}}
+        max={{60}}
+        id={{id}}
+        {{on "input" (fn this.onChangeTime 'minutes')}}
+      />
     {{/let}}
   </div>
 </div>
