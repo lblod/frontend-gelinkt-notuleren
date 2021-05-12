@@ -11,7 +11,6 @@ import {task} from "ember-concurrency-decorators";
 
 /** @extends {Component<Args>} */
 export default class AgendaManagerIndexComponent extends Component {
-  @tracked popup = false;
   @tracked editModalVisible = false;
   @tracked itemToEdit = null;
 
