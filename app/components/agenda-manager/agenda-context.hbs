@@ -1,8 +1,9 @@
 {{yield (hash
-                items=this.items
-                loadItemsTask=this.loadItemsTask
-                deleteItemTask=this.deleteItemTask
-                onSort=(perform this.onSortTask)
-                saveItemTask=this.saveItemTask
-                createItemTask=this.createItemTask
-        )}}
+  items=this.items
+  loadItemsTask=this.loadItemsTask
+  deleteItemTask=this.deleteItemTask
+  onSort=(perform this.onSortTask)
+  saveItemTask=this.saveItemTask
+  createItemTask=this.createItemTask
+  onCancel=(perform this.resetItemTask)
+)}}

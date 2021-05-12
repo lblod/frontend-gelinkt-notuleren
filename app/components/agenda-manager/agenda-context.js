@@ -132,6 +132,15 @@ export default class AgendaManagerAgendaContextComponent extends Component {
   }
 
   @task
+  * resetItemTask(agendaItem) {
+    let behandeling = yield agendaItem.behandeling;
+    behandeling.rollbackAttributes();
+    agendaItem.rollbackAttributes();
+
+    this.args.onCancel();
+  }
+
+  @task
   * onSortTask() {
     yield this.savePositionsTask.perform();
     yield this.args.onSave();
