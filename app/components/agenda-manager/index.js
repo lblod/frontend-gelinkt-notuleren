@@ -3,8 +3,6 @@ import {tracked} from '@glimmer/tracking';
 import {action} from '@ember/object';
 import {task} from "ember-concurrency-decorators";
 
-/** @typedef {import("./AgendaData").default} AgendaData */
-
 /**
  * @typedef {Object} Args
  * @property {string} zittingId
@@ -13,7 +11,6 @@ import {task} from "ember-concurrency-decorators";
 
 /** @extends {Component<Args>} */
 export default class AgendaManagerIndexComponent extends Component {
-  /** @type AgendaData */
   @tracked popup = false;
   @tracked editModalVisible = false;
   @tracked itemToEdit = null;
