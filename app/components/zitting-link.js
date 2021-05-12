@@ -17,7 +17,10 @@ export default class ZittingLinkComponent extends Component {
   @restartableTask
   * getMeeting(){
     const result = yield this.store.query("zitting", {
-      'filter[agendapunten][behandeling][document-container][:id:]':this.args.documentContainer.id
+      'filter[agendapunten][behandeling][document-container][:id:]': this.args.documentContainer.id,
+      // Including the agendapunten relationship ensures the cache returns the proper response.
+      // TODO: This is a workaround for a mu-cache issue. Remove the include once that's resolved.
+      'include': 'agendapunten'
     });
     this.meeting = result.firstObject;
   }
