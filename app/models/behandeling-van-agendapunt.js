@@ -34,11 +34,18 @@ export default class BehandelingVanAgendapunt extends Model {
     container.currentVersion = document;
     this.documentContainer = container;
   }
-  async saveAndPersistDocument(){
-    const agendaItem = await this.onderwerp;
-    const container = await this.documentContainer;
-    const document = await container.currentVersion;
 
+  async saveAndPersistDocument() {
+    const agendaItem = await this.onderwerp;
+    let container = await this.documentContainer;
+
+    // New treatments will not have a documentContainer unless the user selected a draft
+    if (!container) {
+      await this.initializeDocument();
+      container = await this.documentContainer;
+    }
+
+    const document = await container.currentVersion;
     document.title = agendaItem.titel;
 
     await document.save();

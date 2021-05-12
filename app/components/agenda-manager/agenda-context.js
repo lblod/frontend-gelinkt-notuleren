@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import {task} from "ember-concurrency-decorators";
+import {action} from '@ember/object';
 import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
 import {DRAFT_STATUS_ID, PUBLISHED_STATUS_ID, SCHEDULED_STATUS_ID} from "../../utils/constants";
@@ -81,32 +82,24 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     }
   }
 
-
   /**
    * Create a new agenda item
    * @return {Agendapunt} the newly created item
    */
-  @task
-  * createItemTask() {
-    const item = this.store.createRecord("agendapunt", {
+  @action
+  createAgendaItem() {
+    const agendaItem = this.store.createRecord("agendapunt", {
       titel: "",
       beschrijving: "",
       geplandOpenbaar: true,
       position: this.items.length
     });
-    item.behandeling = yield this.createBehandelingTask.perform(item);
-    return item;
-  }
-
-  @task
-  * createBehandelingTask(agendapunt) {
-    const behandeling = this.store.createRecord("behandeling-van-agendapunt",
-      {
-        openbaar: agendapunt.geplandOpenbaar,
-        onderwerp: agendapunt,
+    agendaItem.behandeling = this.store.createRecord("behandeling-van-agendapunt", {
+      openbaar: agendaItem.geplandOpenbaar,
+      onderwerp: agendaItem,
       });
-    yield behandeling.initializeDocument();
-    return behandeling;
+
+    return agendaItem;
   }
 
   /**

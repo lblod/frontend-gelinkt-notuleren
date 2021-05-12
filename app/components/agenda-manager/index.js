@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
 import {action} from '@ember/object';
-import {task} from "ember-concurrency-decorators";
 
 /**
  * @typedef {Object} Args
@@ -17,10 +16,10 @@ export default class AgendaManagerIndexComponent extends Component {
     return !!this.itemToEdit;
   }
 
-  @task
-  * createItemTask(newItemTask) {
-    const newItem = yield newItemTask.perform();
-    this.editItem(newItem);
+  @action
+  createAgendaItem(newAgendaItem) {
+    const agendaItem = newAgendaItem();
+    this.editItem(agendaItem);
   }
 
   @action

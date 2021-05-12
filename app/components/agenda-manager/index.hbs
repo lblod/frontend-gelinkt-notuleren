@@ -11,7 +11,7 @@
     {{else}}
       <AgendaManager::AgendaTable
               @onSort={{agenda.onSort}}
-              @onCreate={{fn (perform this.createItemTask) agenda.createItemTask}}
+              @onCreate={{fn this.createAgendaItem agenda.createAgendaItem}}
               @items={{agenda.items}}
               @readOnly={{@readOnly}}
               as |Table|>
