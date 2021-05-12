@@ -43,21 +43,25 @@ export default class ExtendedStoreService extends Store {
       firstRelationship
     );
     const isMany = firstRelInfo.kind === "hasMany";
+    const firstRelationshipData = (await this.query(modelInstance.get('constructor.modelName'), {
+      "filter[:id:]": modelInstance.id,
+      include: relationShipPath,
+      ...options
+    })).firstObject.get(firstRelationship);
 
-    const empty = await modelInstance[firstRelationship];
     if (isMany) {
-      const result = empty.length
+      const result = firstRelationshipData.length
         ? this.query(firstRelInfo.type, {
-            "filter[:id:]": empty.map((rel) => rel.id).join(","),
+            "filter[:id:]": firstRelationshipData.map((rel) => rel.id).join(","),
             include: restInclude,
             ...options
           })
         : [];
       return result;
     } else {
-      const result = empty
+      const result = firstRelationshipData
         ? this.query(firstRelInfo.type, {
-            "filter[:id:]": empty.id,
+            "filter[:id:]": firstRelationshipData.id,
             include: restInclude,
             ...options
           })
