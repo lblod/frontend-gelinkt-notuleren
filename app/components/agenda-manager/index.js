@@ -11,23 +11,10 @@ import {task} from "ember-concurrency-decorators";
 
 /** @extends {Component<Args>} */
 export default class AgendaManagerIndexComponent extends Component {
-  @tracked editModalVisible = false;
   @tracked itemToEdit = null;
 
-  constructor(...args) {
-    super(...args);
-  }
-
-
-
-  @action
-  openModal() {
-    this.editModalVisible = true;
-  }
-
-  @action
-  closeModal() {
-    this.editModalVisible = false;
+  get editModalVisible() {
+    return !!this.itemToEdit;
   }
 
   @task
@@ -35,9 +22,9 @@ export default class AgendaManagerIndexComponent extends Component {
     const newItem = yield newItemTask.perform();
     this.editItem(newItem);
   }
+
   @action
-  cancelEdit() {
-    this.closeModal();
+  stopEditing() {
     this.itemToEdit = null;
   }
 
@@ -47,8 +34,5 @@ export default class AgendaManagerIndexComponent extends Component {
    */
   editItem(item) {
     this.itemToEdit = item;
-    this.openModal();
   }
-
-
 }

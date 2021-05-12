@@ -1,7 +1,7 @@
 <AgendaManager::AgendaContext
   @zittingId={{@zittingId}}
   @onSave={{@onSave}}
-  @onCancel={{this.cancelEdit}}
+  @onCancel={{this.stopEditing}}
   as |agenda|
 >
   <div class="au-c-meeting-chrome-card">
@@ -31,14 +31,16 @@
     {{/if}}
   </div>
 
-  <AgendaManager::Edit
-    @visible={{this.editModalVisible}}
-    @itemToEdit={{this.itemToEdit}}
-    @saveTask={{agenda.saveItemTask}}
-    @onClose={{this.closeModal}}
-    @deleteTask={{agenda.deleteItemTask}}
-    @onCancel={{fn agenda.onCancel this.itemToEdit}}
-    @agendaItems={{agenda.items}}
-  />
+  {{#if this.editModalVisible}}
+    <AgendaManager::Edit
+      @visible={{this.editModalVisible}}
+      @itemToEdit={{this.itemToEdit}}
+      @saveTask={{agenda.saveItemTask}}
+      @onClose={{this.stopEditing}}
+      @deleteTask={{agenda.deleteItemTask}}
+      @onCancel={{fn agenda.onCancel this.itemToEdit}}
+      @agendaItems={{agenda.items}}
+    />
+  {{/if}}
 
 </AgendaManager::AgendaContext>
