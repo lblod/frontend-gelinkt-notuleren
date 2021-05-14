@@ -5,8 +5,7 @@ import { fetch } from 'fetch';
 import { action } from '@ember/object';
 
 export default class MeetingsPublishUittrekselsController extends Controller {
-  @tracked
-  uittreksels = [];
+  @tracked uittreksels = [];
 
   @tracked errors;
 
@@ -15,26 +14,29 @@ export default class MeetingsPublishUittrekselsController extends Controller {
   }
 
   initialize() {
+    this.uittreksels = [];
     this.initializeUittreksels.perform();
   }
 
+  get meeting() {
+    return this.model;
+  }
 
   @task
   * initializeUittreksels() {
     const uittreksels = [];
-    const prePublish = yield this.createPrePublishedResource.perform();
-    for(const uittreksel of prePublish) {
+    const previews = yield this.fetchExtractPreviews.perform();
+    for(const uittreksel of previews) {
       const existingUittreksels = yield this.store.query('versioned-behandeling',{
         'filter[behandeling][:id:]': uittreksel.data.attributes.uuid,
-        include: 'signed-resources,published-resource'
+        include: 'signed-resources,published-resource,behandeling'
       });
       if(existingUittreksels.length) {
-        uittreksels.push(existingUittreksels.firstObject);
+        uittreksels.push({document: existingUittreksels.firstObject});
       } else {
         const behandeling = yield this.store.findRecord('behandeling-van-agendapunt', uittreksel.data.attributes.uuid);
-
         const rslt = yield this.store.createRecord("versioned-behandeling", {
-          zitting: this.model,
+          zitting: this.meeting,
           content: uittreksel.data.attributes.content,
           behandeling,
         });
@@ -47,8 +49,8 @@ export default class MeetingsPublishUittrekselsController extends Controller {
   @task
   * reloadUittreksels() {
     const uittreksels = [];
-    const prePublish = yield this.createPrePublishedResource.perform();
-    for(const uittreksel of prePublish) {
+    const previews = yield this.fetchExtractPreviews.perform();
+    for(const uittreksel of previews) {
       const existingUittreksels = yield this.store.query('versioned-behandeling',{
         'filter[behandeling][:id:]': uittreksel.data.attributes.uuid,
         include: 'signed-resources,published-resource'
@@ -70,10 +72,10 @@ export default class MeetingsPublishUittrekselsController extends Controller {
 
 
   @task
-  *createPrePublishedResource() {
-    const id = this.model.id;
-    const response = yield fetch(`/prepublish/behandelingen/${id}`);
-    return yield response.json();
+  *fetchExtractPreviews() {
+    const response = yield fetch(`/prepublish/behandelingen/${this.meeting.id}`);
+    const json = yield response.json();
+    return json;
   }
 
   @task
