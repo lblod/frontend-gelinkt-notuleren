@@ -35,7 +35,7 @@
         </div>
       </div>
     {{else}}
-      <div class="container-flex--contain" resource="#" vocab="http://data.vlaanderen.be/ns/besluit#" typeOf={{@type}} prefix="ext: http://mu.semte.ch/vocabularies/ext/">
+      <div class="container-flex--contain" resource="#" vocab="http://data.vlaanderen.be/ns/besluit#" property={{@type}} prefix="ext: http://mu.semte.ch/vocabularies/ext/">
         <Rdfa::RdfaEditor class="au-c-rdfa-editor" 
           @profile={{this.profile}} 
           @rdfaEditorInit={{this.handleRdfaEditorInit}}
