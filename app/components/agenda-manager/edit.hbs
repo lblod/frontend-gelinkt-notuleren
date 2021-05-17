@@ -55,7 +55,15 @@
           {{/if}}
           {{#unless this.isNew}}
           {{!-- TODO: don't allow delete on published agendapoints  --}}
-            <AgendaManager::Delete @onDelete={{fn (perform this.deleteTask) @itemToEdit}} @loading={{this.deleteTask.isRunning}}/>
+            <AuButtonGroup>
+              <AuButton
+                @alert={{true}}
+                @skin="primary"
+                @loading={{this.deleteTask.isRunning}}
+                {{on "click" (perform this.deleteTask @itemToEdit)}} >
+                  {{t "manageAgendaZittingModalDelete.deleteButton"}}
+              </AuButton>
+            </AuButtonGroup>
           {{/unless}}
         </div>
       {{/if}}

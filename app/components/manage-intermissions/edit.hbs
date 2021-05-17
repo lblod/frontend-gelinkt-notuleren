@@ -21,7 +21,15 @@
       </div>
     </div>
     {{#unless @intermissionToEdit.isNew}}
-      <ManageIntermissions::Delete @onDelete={{fn (perform this.deleteTask) @intermissionToEdit}} @loading={{this.deleteTask.isRunning}}/>
+      <AuButtonGroup>
+        <AuButton
+          @alert={{true}}
+          @skin="primary"
+          @loading={{this.deleteTask.isRunning}}
+          {{on "click" (perform this.deleteTask @intermissionToEdit)}} >
+            {{t "manageIntermissions.deleteButton"}}
+        </AuButton>
+      </AuButtonGroup>
     {{/unless}}
   </Modal.Body>
   <Modal.Footer>
