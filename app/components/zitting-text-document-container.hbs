@@ -1,0 +1,58 @@
+<div class="au-c-meeting-chrome-editable">
+  {{#if @readOnly}}
+    <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
+      <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "behandelingVanAgendapunten.contentTitle"}}</AuHeading>
+      <div class="au-o-box au-o-box--small">
+        {{html-safe this.text}}
+      </div>
+    </div>
+  {{else}}
+  <div class="au-c-meeting-chrome-card au-c-meeting-chrome-card--editor au-u-margin-bottom-small au-u-margin-top-small">
+    <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title au-u-margin-bottom">
+      {{t "behandelingVanAgendapunten.contentTitle"}}
+    </AuHeading>
+    {{#if this.saveText.isRunning}}
+      <div class="container-flex--contain">
+        <div class="au-c-rdfa-editor">
+          <div class="say-container say-container--sidebar-left">
+            <div class="say-container__main">
+              <div class="au-c-scanner">
+                <div class="au-c-scanner__text">
+                  <AuLoader @padding="small" />
+                  <AuHelpText @size="large">Bezig met opslaan</AuHelpText>
+                </div>
+                <span class="au-c-scanner__bar"></span>
+              </div>
+              <div class="say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover">
+                <div class="say-editor__paper">
+                  <div class="say-editor__inner say-content">
+                    {{html-safe this.editor.htmlContent}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="container-flex--contain" resource="#" vocab="http://data.vlaanderen.be/ns/besluit#" property={{@type}} prefix="ext: http://mu.semte.ch/vocabularies/ext/">
+        <Rdfa::RdfaEditor class="au-c-rdfa-editor" 
+          @profile={{this.profile}} 
+          @rdfaEditorInit={{this.handleRdfaEditorInit}}
+          @editorOptions={{this.editorOptions}} 
+          @toolbarOptions={{hash 
+            showTextStyleButtons="true" 
+            showListButtons="true"
+            showIndentButtons="true"
+          }} 
+        />
+      </div>
+    {{/if}}
+  </div>
+  <AuButtonGroup>
+    <AuButton {{on "click" (perform this.saveText)}} @disabled={{this.saveText.isRunning}}>
+      {{t 'manageFreeText.save'}}
+    </AuButton>
+  </AuButtonGroup>
+  {{/if}}
+</div>

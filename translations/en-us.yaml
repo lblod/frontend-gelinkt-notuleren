@@ -39,14 +39,18 @@ meetingForm:
   firstSectionTitle: 1. General information about the meeting
   secondSectionTitle: 2. Attendance at the start of the meeting
   thirdSectionTitle: 3. Agenda of the meeting
-  fourthSectionTitle: 4. Treatment of the agenda items
-  fifthSectionTitle: 5. End of the meeting
+  fourthSectionTitle: 4. Free text (meeting intro).
+  fifthSectionTitle: 5. Treatment of the agenda items
+  sixthSectionTitle: 6. Free text (meeting outro).
+  seventhSectionTitle: 7. End of the meeting
   meetingHeadingPartOne: Meeting minutes of
   meetingHeadingPartTwo: of
   firstSectionNotFilledWarning: Before you can start the meeting it is necessary to set a date, location and governing body.
   secondSectionNotFilledWarning: Complete the attendance.
   thirdSectionNotFilledWarning: Manage the agenda of your meeting. You can add new agenda items or add existing agenda items.
-  fourthSectionNotFilledWarning: Manage your decision and votes.
+  fourthSectionNotFilledWarning: Fill out free text (meeting intro).
+  fifthSectionNotFilledWarning: Manage your decision and votes.
+  sixthSectionNotFilledWarning: Fill outFree text (meeting outro).
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
   modalTitle: Manage general information about the meeting
@@ -91,6 +95,10 @@ participationListModalTable:
   actieLabel: Action
   checkboxLabel: Present
   noDataMessage: No mandatees were found.
+manageFreeText:
+  before: Free text before the meeting
+  after: Free text after the meeting
+  save: Save
 manageAgendaZitting:
   titelLabel: Title
   beschrijvingLabel: Description
