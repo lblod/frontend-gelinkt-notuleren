@@ -20,33 +20,35 @@
         <AuTextarea id="intermissionComment" @value={{this.commentExternal}} @width="block"></AuTextarea>
       </div>
     </div>
-    {{#unless @intermissionToEdit.isNew}}
-      <AuButtonGroup>
-        <AuButton
-          @alert={{true}}
-          @skin="primary"
-          @loading={{this.deleteTask.isRunning}}
-          {{on "click" (perform this.deleteTask @intermissionToEdit)}} >
-            {{t "manageIntermissions.deleteButton"}}
-        </AuButton>
-      </AuButtonGroup>
-    {{/unless}}
   </Modal.Body>
   <Modal.Footer>
-    <AuButtonGroup>
+    <AuToolbar>
+      <AuButtonGroup>
+        <AuButton
+          @loading={{this.saveIntermission.isRunning}}
+          {{on "click" (perform this.saveIntermission)}}
+        >
+          {{#if @intermissionToEdit.isNew}}
+            {{t "manageIntermissions.insertLabel"}}
+          {{else}}
+            {{t "manageIntermissions.saveLabel"}}
+          {{/if}}
+        </AuButton>
+        <AuButton @skin="secondary" {{on "click" this.cancel}}>
+          {{t "manageIntermissions.cancelLabel"}}
+        </AuButton>
+      </AuButtonGroup>
+      {{#unless @intermissionToEdit.isNew}}
       <AuButton
-        @loading={{this.saveIntermission.isRunning}}
-        {{on "click" (perform this.saveIntermission)}}
-      >
-        {{#if @intermissionToEdit.isNew}}
-          {{t "manageIntermissions.insertLabel"}}
-        {{else}}
-          {{t "manageIntermissions.saveLabel"}}
-        {{/if}}
+        @alert={{true}}
+        @skin="tertiary"
+        @loading={{this.deleteTask.isRunning}}
+        @icon="bin"
+        @iconAlignment="left"
+        {{on "click" (perform this.deleteTask @intermissionToEdit)}} >
+          {{t "manageIntermissions.deleteButton"}}
       </AuButton>
-      <AuButton @skin="secondary" {{on "click" this.cancel}}>
-        {{t "manageIntermissions.cancelLabel"}}
-      </AuButton>
-    </AuButtonGroup>
+      {{/unless}}
+    </AuToolbar>
   </Modal.Footer>
 </AuModal>

@@ -53,28 +53,30 @@
               {{t "manageAgendaZittingModalMove.title"}}
             </Form.SelectLocation>
           {{/if}}
-          {{#unless this.isNew}}
-          {{!-- TODO: don't allow delete on published agendapoints  --}}
-            <AuButtonGroup>
-              <AuButton
-                @alert={{true}}
-                @skin="primary"
-                @loading={{this.deleteTask.isRunning}}
-                {{on "click" (perform this.deleteTask @itemToEdit)}} >
-                  {{t "manageAgendaZittingModalDelete.deleteButton"}}
-              </AuButton>
-            </AuButtonGroup>
-          {{/unless}}
         </div>
       {{/if}}
     </Modal.Body>
     <Modal.Footer>
+      <AuToolbar>
       <AuButtonGroup>
         <Form.Submit>{{t "manageAgendaZittingModal.saveButton"}}</Form.Submit>
         <AuButton @skin="secondary" {{on "click" this.cancel}}>
           {{t "manageAgendaZittingModal.cancelButton"}}
         </AuButton>
       </AuButtonGroup>
+      {{#unless this.isNew}}
+        {{!-- TODO: don't allow delete on published agendapoints  --}}
+        <AuButton
+          @alert={{true}}
+          @skin="tertiary"
+          @loading={{this.deleteTask.isRunning}}
+          @icon="bin"
+          @iconAlignment="left"
+          {{on "click" (perform this.deleteTask @itemToEdit)}} >
+            {{t "manageAgendaZittingModalDelete.deleteButton"}}
+        </AuButton>
+      {{/unless}}
+      </AuToolbar>
     </Modal.Footer>
   </AuModal>
 </AgendaManager::AgendaItemForm>
