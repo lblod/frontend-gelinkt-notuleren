@@ -18,7 +18,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
       sort: 'is-bestuurlijke-alias-van.achternaam',
       include: 'status',
       'filter[bekleedt][bevat-in][:uri:]': this.args.bestuursorgaan.get('uri'),
-      'filter[is-bestuurlijke-alias-van][achternaam]': searchData,
+      'filter[is-bestuurlijke-alias-van]': searchData,
       page: { size: 100 }
     };
     const mandatees = yield this.store.query('mandataris', queryParams);

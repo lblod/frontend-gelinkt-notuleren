@@ -87,7 +87,7 @@ participationListModalSelector:
   loadingMessage: Aan het laden...
   noMatchesMessage: Geen resultaten
   searchMessage: Typ om te zoeken
-  placeholder: Zoek op achternaam
+  placeholder: Zoek op naam
 participationListModalTable:
   naamLabel: Naam
   functieLabel: Functie

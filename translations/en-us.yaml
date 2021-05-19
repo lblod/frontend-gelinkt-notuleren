@@ -87,7 +87,7 @@ participationListModalSelector:
   loadingMessage: Loading...
   noMatchesMessage: No results
   searchMessage: Type to search
-  placeholder: Search by last name
+  placeholder: Search on name
 participationListModalTable:
   naamLabel: Name
   functieLabel: Position
