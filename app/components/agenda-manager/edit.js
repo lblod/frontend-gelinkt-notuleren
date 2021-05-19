@@ -17,7 +17,6 @@ export default class AgendaManagerEditComponent extends Component {
   @action
   cancel() {
     this.args.onCancel();
-    this.args.onClose();
   }
   @task
   * deleteTask(item) {

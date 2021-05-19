@@ -1,4 +1,10 @@
-<AgendaManager::AgendaContext @zittingId={{@zittingId}} @onSave={{@onSave}} as |agenda|>
+<AgendaManager::AgendaContext
+  @zittingId={{@zittingId}}
+  @onCreate={{this.editItem}}
+  @onSave={{@onSave}}
+  @onCancel={{this.stopEditing}}
+  as |agenda|
+>
   <div class="au-c-meeting-chrome-card">
     {{#if agenda.loadItemsTask.isRunning}}
       <AuLoader />
@@ -6,7 +12,7 @@
     {{else}}
       <AgendaManager::AgendaTable
               @onSort={{agenda.onSort}}
-              @onCreate={{fn (perform this.createItemTask) agenda.createItemTask}}
+              @onCreate={{agenda.createAgendaItem}}
               @items={{agenda.items}}
               @readOnly={{@readOnly}}
               as |Table|>
@@ -24,15 +30,18 @@
       </AgendaManager::AgendaTable>
 
     {{/if}}
-
   </div>
-  <AgendaManager::Edit @visible={{this.editModalVisible}}
-                       @itemToEdit={{this.itemToEdit}}
-                       @saveTask={{agenda.saveItemTask}}
-                       @onClose={{this.closeModal}}
-                       @deleteTask={{agenda.deleteItemTask}}
-                       @onCancel={{this.closeModal}}
-                       @agendaItems={{agenda.items}}
-  />
+
+  {{#if this.editModalVisible}}
+    <AgendaManager::Edit
+      @visible={{this.editModalVisible}}
+      @itemToEdit={{this.itemToEdit}}
+      @saveTask={{agenda.saveItemTask}}
+      @onClose={{this.stopEditing}}
+      @deleteTask={{agenda.deleteItemTask}}
+      @onCancel={{fn agenda.onCancel this.itemToEdit}}
+      @agendaItems={{agenda.items}}
+    />
+  {{/if}}
 
 </AgendaManager::AgendaContext>

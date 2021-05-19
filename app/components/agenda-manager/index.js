@@ -1,9 +1,6 @@
 import Component from '@glimmer/component';
 import {tracked} from '@glimmer/tracking';
 import {action} from '@ember/object';
-import {task} from "ember-concurrency-decorators";
-
-/** @typedef {import("./AgendaData").default} AgendaData */
 
 /**
  * @typedef {Object} Args
@@ -13,35 +10,14 @@ import {task} from "ember-concurrency-decorators";
 
 /** @extends {Component<Args>} */
 export default class AgendaManagerIndexComponent extends Component {
-  /** @type AgendaData */
-  @tracked popup = false;
-  @tracked editModalVisible = false;
   @tracked itemToEdit = null;
 
-  constructor(...args) {
-    super(...args);
-  }
-
-
-
-  @action
-  openModal() {
-    this.editModalVisible = true;
+  get editModalVisible() {
+    return !!this.itemToEdit;
   }
 
   @action
-  closeModal() {
-    this.editModalVisible = false;
-  }
-
-  @task
-  * createItemTask(newItemTask) {
-    const newItem = yield newItemTask.perform();
-    this.editItem(newItem);
-  }
-  @action
-  cancelEdit() {
-    this.closeModal();
+  stopEditing() {
     this.itemToEdit = null;
   }
 
@@ -51,8 +27,5 @@ export default class AgendaManagerIndexComponent extends Component {
    */
   editItem(item) {
     this.itemToEdit = item;
-    this.openModal();
   }
-
-
 }
