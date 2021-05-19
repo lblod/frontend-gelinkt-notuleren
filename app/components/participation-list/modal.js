@@ -30,7 +30,7 @@ export default class ParticipationListModalComponent extends Component {
   @tracked mandataris;
   @tracked secretaris;
   @service store;
-   selectedMandatees = tracked(Map)
+  selectedMandatees = new Map();
 
   constructor() {
     super(...arguments);
@@ -38,7 +38,6 @@ export default class ParticipationListModalComponent extends Component {
     this.secretaris = this.args.secretaris;
     this.generateSelected();
   }
-
 
   @action
   togglePopup(e) {
@@ -92,7 +91,7 @@ export default class ParticipationListModalComponent extends Component {
 
      possibleParticipants.forEach((participant) => {
        if(!this.selectedMandatees.has(participant)) {
-         this.selectedMandatees.set(participant, true);
+        this.selectedMandatees.set(participant, true);
        }
      });
    }
