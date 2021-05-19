@@ -30,14 +30,17 @@ export default class ParticipationListModalComponent extends Component {
   @tracked mandataris;
   @tracked secretaris;
   @service store;
-  selectedMandatees = tracked(Map)
-  selectedMandateesKeys = new Set();
+  selectedMandateesMap = new Map;
 
   constructor() {
     super(...arguments);
     this.voorzitter = this.args.voorzitter;
     this.secretaris = this.args.secretaris;
     this.generateSelected();
+  }
+
+  get selectedMandatees() {
+    return this.selectedMandateesMap;
   }
 
 
@@ -81,7 +84,6 @@ export default class ParticipationListModalComponent extends Component {
      if (aanwezigenBijStart && aanwezigenBijStart.length) {
        aanwezigenBijStart.forEach((mandataris) => {
          this.selectedMandatees.set(mandataris, true);
-         this.selectedMandateesKeys.add(mandataris);
        });
      }
 
@@ -89,13 +91,11 @@ export default class ParticipationListModalComponent extends Component {
      if (afwezigenBijStart && afwezigenBijStart.length) {
        afwezigenBijStart.forEach((mandataris) => {
          this.selectedMandatees.set(mandataris, false);
-         this.selectedMandateesKeys.add(mandataris);
        });
      }
 
      possibleParticipants.forEach((participant) => {
-       if(!this.selectedMandateesKeys.has(participant)) {
-        this.selectedMandateesKeys.add(participant);
+       if(!this.selectedMandatees.has(participant)) {
         this.selectedMandatees.set(participant, true);
        }
      });
