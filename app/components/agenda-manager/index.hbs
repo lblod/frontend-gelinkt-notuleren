@@ -1,5 +1,6 @@
 <AgendaManager::AgendaContext
   @zittingId={{@zittingId}}
+  @onCreate={{this.editItem}}
   @onSave={{@onSave}}
   @onCancel={{this.stopEditing}}
   as |agenda|
@@ -11,7 +12,7 @@
     {{else}}
       <AgendaManager::AgendaTable
               @onSort={{agenda.onSort}}
-              @onCreate={{fn this.createAgendaItem agenda.createAgendaItem}}
+              @onCreate={{agenda.createAgendaItem}}
               @items={{agenda.items}}
               @readOnly={{@readOnly}}
               as |Table|>

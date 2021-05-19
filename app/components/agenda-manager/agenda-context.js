@@ -99,6 +99,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       onderwerp: agendaItem,
       });
 
+    this.args.onCreate(agendaItem);
     return agendaItem;
   }
 
