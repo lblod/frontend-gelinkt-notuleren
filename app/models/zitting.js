@@ -6,8 +6,8 @@ export default class ZittingModel extends Model {
   @attr('datetime') geeindigdOpTijdstip;
   @attr opLocatie;
   @attr afgeleidUit;
-  @attr intro;
-  @attr outro;
+  @attr( { defaultValue: "" } ) intro;
+  @attr( { defaultValue: "" } ) outro;
   @belongsTo('bestuursorgaan', { inverse: null }) bestuursorgaan;
   @hasMany('behandeling-van-agendapunt', { inverse: null }) behandeldeAgendapunten;
   @belongsTo('editor-document', { inverse: null }) notulen;
