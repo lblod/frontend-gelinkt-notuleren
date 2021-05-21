@@ -14,8 +14,6 @@ export default class MeetingsNewRoute extends Route {
     return this.store.createRecord('zitting', {
       geplandeStart: now,
       gestartOpTijdstip: now,
-      intro: "",
-      outro: ""
     });
   }
 }
