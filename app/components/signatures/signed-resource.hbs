@@ -1,2 +1,3 @@
 <p>{{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
-{{moment-format @signature.createdOn 'L LT'}}</p>
+  {{moment-format @signature.createdOn 'L LT'}}</p>
+<p class="small uppercase word-break--break-word">{{@signature.hashValue}}</p>
