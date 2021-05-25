@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { action } from "@ember/object";
-import {task} from "ember-concurrency-decorators";
+import {task} from "ember-concurrency";
 
 export default class AgendaManagerEditComponent extends Component {
 

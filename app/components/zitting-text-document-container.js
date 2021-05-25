@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { task } from "ember-concurrency-decorators";
+import { task } from "ember-concurrency";
 import { action } from "@ember/object";
 
 export default class ZittingTextDocumentContainerComponent extends Component {

@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { task } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import RSVP from 'rsvp';
 export default class AgendapointsRevisionsRoute extends Route {
   async model(params) {

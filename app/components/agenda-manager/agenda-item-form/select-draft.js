@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { inject as service } from "@ember/service";
 import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
-import { restartableTask } from "ember-concurrency-decorators";
+import { restartableTask } from "ember-concurrency";
 
 const DRAFT_STATUS_ID = "a1974d071e6a47b69b85313ebdcef9f7";
 const FOLDER_ID = "ae5feaed-7b70-4533-9417-10fbbc480a4c";

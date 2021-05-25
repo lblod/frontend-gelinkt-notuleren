@@ -2,7 +2,7 @@ import { inject as service } from "@ember/service";
 import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import Component from "@glimmer/component";
-import { task, restartableTask } from "ember-concurrency-decorators";
+import { task, restartableTask } from "ember-concurrency";
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
 /** @typedef {import("../../../models/bestuursorgaan").default} Bestuursorgaan*/
 /** @typedef {import("../../../models/stemming").default} Stemming*/
