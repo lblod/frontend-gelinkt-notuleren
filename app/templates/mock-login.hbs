@@ -15,7 +15,7 @@
         <div class="au-o-layout">
           <AuHeading @skin="4">Kies een bestuurseenheid om mee in te loggen.</AuHeading>
           <p class="au-u-margin-top-small au-u-margin-bottom">
-            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
+            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} autofocus {{on "input" (perform this.updateSearch value='target.value')}}>
           </p>
 
           <MockLogin as |login|>

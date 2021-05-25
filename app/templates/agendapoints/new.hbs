@@ -8,7 +8,7 @@
   <AuModal
     @modalTitle="Er zijn fouten bij de validatie."
     @modalOpen={{true}}
-    @closeModal={{fn this.closeValidationModal}} as |Modal| >
+    @closeModal={{this.closeValidationModal}} as |Modal| >
     <Modal.Body>
       <p>Gelieve een titel op te geven</p>
     </Modal.Body>

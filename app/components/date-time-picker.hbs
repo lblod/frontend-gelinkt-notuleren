@@ -11,15 +11,15 @@
     {{/let}}
   </div>
   <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
-    {{#let (unique-id) as |id|}}
-      <AuLabel for={{id}}>Uur</AuLabel>
-      <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'hours'}} @value={{this.hours}} max={{24}} id={{id}} />
+    {{#let (unique-id) as |hoursId|}}
+      <AuLabel for={{hoursId}}>Uur</AuLabel>
+      <Input class="au-c-input au-c-input--block" @type='number' {{on "input" (fn this.onChangeTime 'hours')}} @value={{this.hours}} max={{24}} id={{hoursId}} />
     {{/let}}
   </div>
   <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
-    {{#let (unique-id) as |id|}}
-      <AuLabel for={{id}}>Minuten</AuLabel>
-      <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'minutes'}} @value={{this.minutes}} max={{60}} id={{id}} />
+    {{#let (unique-id) as |minutesId|}}
+      <AuLabel for={{minutesId}}>Minuten</AuLabel>
+      <Input class="au-c-input au-c-input--block" @type='number' {{on "input" (fn this.onChangeTime 'minutes')}} @value={{this.minutes}} max={{60}} id={{minutesId}} />
     {{/let}}
   </div>
 </div>
