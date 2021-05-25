@@ -88,7 +88,7 @@ export default class EditStemmingService extends Service {
 
       const voorstanders = stemming.voorstanders;
       
-      const tegenstanders = stemming.tegenstanders
+      const tegenstanders = stemming.tegenstanders;
 
       aanwezigen.forEach((aanwezige) =>
         this.votingMap.set(aanwezige, "zalNietStemmen")
