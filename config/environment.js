@@ -26,6 +26,9 @@ module.exports = function (environment) {
         plausibleScript: "{{ANALYTICS_PLAUSIBLE_SCRIPT}}"
       }
     },
+    manual: {
+      baseUrl: "{{MANUAL_BASE_URL}}"
+    },
     featureFlags: {
       'language-select': false,
       'editor-html-paste': true,
@@ -67,6 +70,7 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
+    ENV.manual.baseUrl="https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/";
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
