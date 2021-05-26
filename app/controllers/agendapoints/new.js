@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { task } from "ember-concurrency-decorators";
+import { task } from "ember-concurrency";
 import { DRAFT_FOLDER_ID, DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class AgendapointsNewController extends Controller {

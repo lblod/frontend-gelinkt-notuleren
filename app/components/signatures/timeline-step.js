@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import {inject as service} from '@ember/service';
-import {task, restartableTask} from 'ember-concurrency-decorators';
+import {task, restartableTask} from 'ember-concurrency';
 import {tracked} from "@glimmer/tracking";
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
