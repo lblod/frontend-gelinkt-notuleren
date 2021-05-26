@@ -27,7 +27,14 @@ module.exports = function (environment) {
       }
     },
     manual: {
-      baseUrl: "{{MANUAL_BASE_URL}}"
+      baseUrl: "{{MANUAL_BASE_URL}}",
+      notuleren: "{{MANUAL_NOTULEREN}}",
+      signing: "{{MANUAL_SIGNING}}",
+      publish: "{{MANUAL_PUBLISH}}",
+      mandatees: "{{MANUAL_MANDATEES}}",
+      signee: "{{MANUAL_SIGNEE}}",
+      publisher: "{{MANUAL_PUBLISHER}}",
+      print: "{{MANUAL_PRINT}}"
     },
     featureFlags: {
       'language-select': false,
@@ -71,6 +78,13 @@ module.exports = function (environment) {
 
   if (environment === 'development') {
     ENV.manual.baseUrl="https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/";
+    ENV.manual.notuleren="#notuleren";
+    ENV.manual.signing="#ondertekenen-en-publiceren";
+    ENV.manual.publish="#ondertekenen-en-publiceren";
+    ENV.manual.mandatees="#mandatenbeheer";
+    ENV.manual.signee="#gebruikersbeheer";
+    ENV.manual.publisher="#gebruikersbeheer";
+    ENV.manual.print="";
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

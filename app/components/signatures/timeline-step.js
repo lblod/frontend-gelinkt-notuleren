@@ -27,6 +27,9 @@ export default class SignaturesTimelineStep extends Component {
   @tracked signedResources = [];
 
   publicationBaseUrl = ENV.publication.baseUrl;
+  manualBaseUrl = ENV.manual.baseUrl;
+  manualSignee = ENV.manual.signee;
+  manualPublisher = ENV.manual.publisher;
 
   constructor(parent, args) {
     super(parent, args);

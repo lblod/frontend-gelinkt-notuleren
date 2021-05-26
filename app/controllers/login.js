@@ -3,4 +3,8 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export default class LoginController extends Controller {
   manualBaseUrl = ENV.manual.baseUrl;
+  manualNotuleren = ENV.manual.notuleren;
+  manualSigning = ENV.manual.signing;
+  manualPublish = ENV.manual.publish;
+  manualMandatees = ENV.manual.mandatees;
 }
