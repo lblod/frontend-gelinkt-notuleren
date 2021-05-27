@@ -1,0 +1,19 @@
+<AuModal
+        @modalOpen={{true}}
+        @size="fullscreen"
+        @closeModal={{this.closeModal}}
+>
+  {{#let @model.fetchOrCreateDocumentTask.lastSuccessful as |docResult|}}
+
+    <AuButton {{on "click" (perform this.saveDocumentTask this.document)}}>{{t
+            "behandelingVanAgendapunten.saveButton"}}</AuButton>
+    {{#if docResult}}
+      <BesluitDocumentContainer @document={{this.document}}
+                                @handleRdfaEditorInit={{fn this.handleRdfaEditorInit this.document}}
+                                @editor={{this.editor}}
+                                @saving={{this.saveDocumentTask.isRunning}}
+      />
+    {{/if}}
+
+  {{/let}}
+</AuModal>

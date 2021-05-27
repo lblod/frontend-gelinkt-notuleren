@@ -31,6 +31,7 @@ behandelingVanAgendapunten:
   votingTitle: "Stemming"
   contentTitle: "Inhoud"
   needsParticipants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
+  editDocument: "Bewerk document"
 meetingForm:
   incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
   backButton: Terug naar overzicht zittingen

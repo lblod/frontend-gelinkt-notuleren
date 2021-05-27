@@ -6,11 +6,13 @@ import { action } from "@ember/object";
 import { inject as service } from "@ember/service";
 
 export default class BehandelingVanAgendapuntComponent extends Component {
+  @service store;
+  @service currentSession;
+  @service router;
+
   @tracked openbaar;
   @tracked document;
   @tracked documentContainer;
-  @service store;
-  @service currentSession;
   @tracked behandeling;
   @tracked editor;
   @tracked aanwezigen = [];
@@ -147,61 +149,9 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.openbaar = e.target.checked;
   }
 
-  @task
-  *saveEditorDocument(editorDocument, newStatus, newFolder) {
-    // create or extract properties
-    let cleanedHtml = this.editor.htmlContent;
-    let createdOn = editorDocument.get("createdOn") || new Date();
-    let updatedOn = new Date();
-    let title = editorDocument.get("title");
-    if (!this.documentContainer) {
-      this.documentContainer = yield this.store
-        .createRecord("document-container")
-        .save();
-    }
-    let documentContainer = yield this.documentContainer;
-    let status = newStatus ? newStatus : yield documentContainer.get("status");
-    let folder = newFolder ? newFolder : yield documentContainer.get("folder");
-
-    if (status && status.isLoaded && folder && folder.isLoaded) {
-      // every save results in new document
-      let documentToSave = this.store.createRecord("editor-document", {
-        content: cleanedHtml,
-        createdOn,
-        updatedOn,
-        title,
-        documentContainer,
-      });
-
-      // Link the previous if provided editorDocument does exist in DB.
-      if (editorDocument.get("id"))
-        documentToSave.set("previousVersion", editorDocument);
-
-      try {
-        // save the document
-        yield documentToSave.save();
-      } catch (e) {
-        console.error("Error saving the document");
-        console.error(e);
-      }
-
-      // set the latest revision
-      documentContainer.set("currentVersion", documentToSave);
-      documentContainer.set("status", status);
-      documentContainer.set("folder", folder);
-      const bestuurseenheid = this.currentSession.group;
-      documentContainer.set("publisher", bestuurseenheid);
-
-      try {
-        yield documentContainer.save();
-      } catch (e) {
-        console.error("Error saving the document container");
-        console.error(e);
-      }
-
-      return documentToSave;
-    } else {
-      console.error(`The status or the folder didn't correctly load`);
-    }
+  @action
+  goToEdit() {
+    this.router.transitionTo('meetings.edit.treatment', this.args.meeting.id, this.args.behandeling.id);
   }
+
 }
