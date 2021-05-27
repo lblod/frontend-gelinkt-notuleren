@@ -21,7 +21,7 @@
     <div class="au-o-layout">
       <AuContent @skin="large" class="au-u-margin-bottom">
         <AuHeading @level="2" @skin="3" class="au-u-margin-bottom">De functionaliteiten van Gelinkt Notuleren</AuHeading>
-        <p>Alle functionaliteiten, samen met handige tips & tricks, kan u bekijken in handleiding. <a class="au-c-link" href="{{this.manualBaseUrl}}" target="_blank" rel="noopener noreferrer" >Bekijk de handleiding hier.</a></p>
+        <p>Alle functionaliteiten, samen met handige tips & tricks, kan u bekijken in handleiding. <a class="au-c-link" href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" >Bekijk de handleiding hier.</a></p>
       </AuContent>
       <div class="au-o-grid au-o-grid--small">
         <div class="au-o-grid__item au-u-1-2@small">
@@ -41,7 +41,7 @@
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{this.manualBaseUrl}}{{this.manualNotuleren}}" rel="noopener noreferrer" target="_blank">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.notuleren"}}" rel="noopener noreferrer" target="_blank">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
@@ -64,7 +64,7 @@
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{this.manualBaseUrl}}{{this.manualSigning}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.signing"}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
@@ -87,7 +87,7 @@
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{this.manualBaseUrl}}{{this.manualMandatees}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.mandatees"}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
@@ -110,7 +110,7 @@
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{this.manualBaseUrl}}{{this.manualPublish}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.publish"}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
