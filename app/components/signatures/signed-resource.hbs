@@ -1,3 +1,10 @@
-<p>{{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
-  {{moment-format @signature.createdOn 'L LT'}}</p>
-<p class="small uppercase word-break--break-word">{{@signature.hashValue}}</p>
+<p>
+  {{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
+  <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
+    <AuIcon @icon="calendar" />
+    {{moment-format @signature.createdOn 'L LT'}}
+  </AuHelpText>
+</p>
+<p class="au-u-margin-top-tiny">
+  <AuPill class="au-u-word-break-all">{{@signature.hashValue}}</AuPill>
+</p>
