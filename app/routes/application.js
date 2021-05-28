@@ -1,6 +1,5 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 const featureFlagRegex = /^feature\[(.+)\]$/;
 
@@ -10,9 +9,7 @@ export default class ApplicationRoute extends Route {
 
   beforeModel(transition) {
     this.updateFeatureFlags(transition.to.queryParams);
-    if(ENV.environmentName) {
-      document.title = `Gelinkt Notuleren - ${ENV.environmentName}`;
-    }
+
     return this.loadCurrentSession();
   }
 
