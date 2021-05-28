@@ -1,5 +1,12 @@
 <EmberLoadRemover />
 
+{{#let (config "environmentName") as |environmentName|}}
+  {{page-title (concat
+    "Gelinkt Notuleren"
+    (if environmentName (concat " - " environmentName))
+  )}}
+{{/let}}
+
 <div class="au-c-app-container">
   {{outlet}}
 
