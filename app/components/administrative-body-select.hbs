@@ -1,0 +1,18 @@
+<div class={{if @error "ember-power-select--error"}}>
+  <PowerSelect
+    @placeholder={{t "manageZittingsData.selectPlaceholder"}}
+    @selected={{@selected}}
+    @options={{this.administrativeBodyOptions}}
+    @onChange={{@onChange}}
+    @triggerId={{@id}}
+    as |administrativeBody|
+  >
+    {{administrativeBody.isTijdsspecialisatieVan.naam}}
+    (periode: {{moment-format administrativeBody.bindingStart "MM/DD/YYYY"}} -
+    {{#if administrativeBody.bindingEinde~}}
+      {{moment-format administrativeBody.bindingEinde "MM/DD/YYYY"}}
+    {{~else~}}
+      nvt.
+    {{~/if}})
+  </PowerSelect>
+</div>
