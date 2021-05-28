@@ -91,7 +91,7 @@
     <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
       <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "behandelingVanAgendapunten.contentTitle"}}</AuHeading>
       <div class="au-o-box au-o-box--small">
-        {{this.document.htmlSafeContent}}
+        {{this.documentContainer.currentVersion.htmlSafeContent}}
       </div>
     </div>
   {{/if}}
