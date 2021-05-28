@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { timeout } from 'ember-concurrency';
-import { task, restartableTask } from 'ember-concurrency-decorators';
+import { task, restartableTask } from 'ember-concurrency';
 
 export default class MockLoginController extends Controller {
   queryParams = ['gemeente', 'page'];

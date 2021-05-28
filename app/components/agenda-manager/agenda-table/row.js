@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { PUBLISHED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency-decorators';
+import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 
 export default class AgendaManagerAgendaTableRowComponent extends Component {

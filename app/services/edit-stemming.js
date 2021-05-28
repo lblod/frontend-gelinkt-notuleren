@@ -1,7 +1,7 @@
 import { inject as service } from "@ember/service";
 import Service from "@ember/service";
 import { tracked } from "@glimmer/tracking";
-import { task } from "ember-concurrency-decorators";
+import { task } from "ember-concurrency";
 import { action } from "@ember/object";
 /** @typedef {import("../models/stemming").default} Stemming */
 
@@ -61,46 +61,53 @@ export default class EditStemmingService extends Service {
   }
   @task
   *fetchVoters() {
-    const aanwezigen = yield this.store.queryNestedRelationship(
-      this._stemming,
-      "aanwezigen.is-bestuurlijke-alias-van",
-      {page: { size: 100 }}
-    );
-    const stemmers = yield this.store.queryNestedRelationship(
-      this._stemming,
-      "stemmers.is-bestuurlijke-alias-van",
-      {page: { size: 100 }}
-    );
-    const onthouders = yield this.store.queryNestedRelationship(
-      this._stemming,
-      "onthouders.is-bestuurlijke-alias-van",
-      {page: { size: 100 }}
-    );
-    const voorstanders = yield this.store.queryNestedRelationship(
-      this._stemming,
-      "voorstanders.is-bestuurlijke-alias-van",
-      {page: { size: 100 }}
-    );
-    const tegenstanders = yield this.store.queryNestedRelationship(
-      this._stemming,
-      "tegenstanders.is-bestuurlijke-alias-van",
-      {page: { size: 100 }}
-    );
-    aanwezigen.forEach((aanwezige) =>
-      this.votingMap.set(aanwezige, "zalNietStemmen")
-    );
-    stemmers.forEach((aanwezige) =>
-      this.votingMap.set(aanwezige, "zalStemmen")
-    );
-    onthouders.forEach((aanwezige) =>
-      this.votingMap.set(aanwezige, "onthouding")
-    );
-    voorstanders.forEach((aanwezige) => this.votingMap.set(aanwezige, "voor"));
-    tegenstanders.forEach((aanwezige) =>
-      this.votingMap.set(aanwezige, "tegen")
-    );
+    if(this._stemming.isNew) {
+      const aanwezigen = yield Promise.all(this._stemming.aanwezigen.map(async (aanwezige) => {
+        const queryResult = await this.store.query('mandataris', {
+          "filter[:id:]": aanwezige.id,
+          include: "is-bestuurlijke-alias-van",
+        });
+        return queryResult.firstObject;
+      }));
+      aanwezigen.forEach((aanwezige) =>
+        this.votingMap.set(aanwezige, "zalNietStemmen")
+      );
+    } else {
+      const stemmingId = this._stemming.id;
+      const stemming = (yield this.store.query('stemming', {
+        "filter[:id:]": stemmingId,
+        include: "aanwezigen.is-bestuurlijke-alias-van,stemmers.is-bestuurlijke-alias-van,onthouders.is-bestuurlijke-alias-van,voorstanders.is-bestuurlijke-alias-van,tegenstanders.is-bestuurlijke-alias-van",
+        page: { size: 100 }
+      })).firstObject;
+
+      const aanwezigen = stemming.aanwezigen;
+      
+      const stemmers = stemming.stemmers;
+      
+      const onthouders = stemming.onthouders;
+
+      const voorstanders = stemming.voorstanders;
+      
+      const tegenstanders = stemming.tegenstanders;
+
+      aanwezigen.forEach((aanwezige) =>
+        this.votingMap.set(aanwezige, "zalNietStemmen")
+      );
+      stemmers.forEach((aanwezige) =>
+        this.votingMap.set(aanwezige, "zalStemmen")
+      );
+      onthouders.forEach((aanwezige) =>
+        this.votingMap.set(aanwezige, "onthouding")
+      );
+      voorstanders.forEach((aanwezige) => this.votingMap.set(aanwezige, "voor"));
+      tegenstanders.forEach((aanwezige) =>
+        this.votingMap.set(aanwezige, "tegen")
+      );
+    }
+    
     this.refreshMap();
   }
+
 
   refreshMap() {
     // eslint-disable-next-line no-self-assign
