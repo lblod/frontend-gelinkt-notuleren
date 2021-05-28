@@ -21,7 +21,7 @@
     <div class="au-o-layout">
       <AuContent @skin="large" class="au-u-margin-bottom">
         <AuHeading @level="2" @skin="3" class="au-u-margin-bottom">De functionaliteiten van Gelinkt Notuleren</AuHeading>
-        <p>Alle functionaliteiten, samen met handige tips & tricks, kan u bekijken in handleiding. <a class="au-c-link" href="https://gelinkt-notuleren.vlaanderen.be/handleiding/" target="_blank" rel="noopener noreferrer" >Bekijk de handleiding hier.</a></p>
+        <p>Alle functionaliteiten, samen met handige tips & tricks, kan u bekijken in handleiding. <a class="au-c-link" href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" >Bekijk de handleiding hier.</a></p>
       </AuContent>
       <div class="au-o-grid au-o-grid--small">
         <div class="au-o-grid__item au-u-1-2@small">
@@ -34,21 +34,14 @@
             <c.content>
               <p>Notuleer uw zitting met behulp van het online tekstverwerkingsprogramma.</p>
               <ul>
-                {{!--
-                <li>stel <strong>agenda's</strong> op, bereid <strong>agendapunten</strong> voor en <strong>notuleer</strong> uw zitting;</li>
-                --}}
                 <li>Gebruik de de ingebouwde <strong>sjablonen</strong> om besluiten te vormen;</li>
                 <li>link naar de juiste <strong>wetgeving uit de Vlaamse codex</strong>;</li>
-                {{!--
-                <li>verwijs automatisch naar de juiste <strong>mandatarissen in uw bestuur</strong>.</li>
-                 --}}
                 <li>notuleer technisch conform de opgelegde <strong>standaarden</strong>;</li>
               </ul>
-              {{!-- <p>De ingebouwde <strong>sjablonen</strong> helpen u op weg om eenvoudig besluiten te vormen. De tekstherkenning linkt automatisch naar de juiste <strong>wetgeving in de Vlaamse codex</strong>, en de juiste <strong>mandatarissen in uw bestuur</strong>.</p> --}}
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#notuleren" rel="noopener noreferrer" target="_blank">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.notuleren"}}" rel="noopener noreferrer" target="_blank">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
@@ -71,7 +64,7 @@
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#ondertekenen-publiceren-printen" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.signing"}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
@@ -94,7 +87,7 @@
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#mandatenbeheer" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.mandatees"}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
@@ -117,7 +110,7 @@
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="https://gelinkt-notuleren.vlaanderen.be/handleiding/#publiceren" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
+                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.publish"}}" target="_blank" rel="noopener noreferrer">Bekijk de handleiding</a>
               </p>
             </c.footer>
           </AuCard>
