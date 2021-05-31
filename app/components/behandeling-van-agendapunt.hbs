@@ -87,14 +87,12 @@
       <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t "behandelingVanAgendapunten.needsParticipants"}}</AuPill>
     </div>
     {{/if}}
-  {{#if this.tryToFetchDocument.lastSuccessful}}
     <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
       <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "behandelingVanAgendapunten.contentTitle"}}</AuHeading>
       <div class="au-o-box au-o-box--small">
-        {{this.documentContainer.currentVersion.htmlSafeContent}}
+        {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
       </div>
     </div>
-  {{/if}}
   <AuButtonGroup>
     <AuButton {{on "click" this.goToEdit}}>
       {{t "behandelingVanAgendapunten.editDocument"}}

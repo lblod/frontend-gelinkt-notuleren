@@ -23,6 +23,8 @@ publish:
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save
+  saveAndQuit: Save and Quit
+  cancelEdit: Cancel
   openbaarLabel: "make agendapoint public"
   geenOpenbaarMsg: "agendapoint not public"
   openbaarMsg: "agendapoint public"

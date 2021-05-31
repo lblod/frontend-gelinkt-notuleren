@@ -1,53 +1,75 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { tracked } from "@glimmer/tracking";
+import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency-decorators';
 import { inject as service } from '@ember/service';
+
+const DRAFT_DECISION_FOLDER_ID = 'ae5feaed-7b70-4533-9417-10fbbc480a4c';
+const GEAGENDEERD_STATUS_ID = '7186547b61414095aa2a4affefdcca67';
 
 export default class MeetingsEditTreatmentController extends Controller {
   @service router;
   @service currentSession;
   @tracked editor;
-  @tracked document;
 
   @action
   closeModal() {
     this.router.transitionTo('meetings.edit', this.model.meetingId);
   }
 
+  /**
+   * @param {EditorDocument} document must be a resolved ember data model, not a proxy
+   * @param {Editor} editor
+   */
   @action
-  handleRdfaEditorInit(document, editor) {
-    console.log("DOCUMENT", document);
-    if (document.content) {
-      editor.setHtmlContent(document.get('content'));
+  handleRdfaEditorInit(editor) {
+    if (this.document.content) {
+      editor.setHtmlContent(this.document.content);
     }
     this.editor = editor;
   }
+
+  /**
+   *
+   * @return {EditorDocument | null}
+   */
+  get document() {
+    return this.model.treatment.get('documentContainer.currentVersion.content');
+  }
+
   get documentContainer() {
     return this.model.treatment.documentContainer;
   }
+
   set documentContainer(container) {
     this.model.treatment.documentContainer = container;
   }
+  @action
+  async saveAndQuit() {
+    await this.saveDocumentTask.perform();
+    this.closeModal();
+  }
+  @action
+  async cancel() {
+    const container = await this.documentContainer;
+    container.rollbackAttributes();
+    this.closeModal();
+  }
+
   @task
-  *saveDocumentTask(editorDocument) {
+  *saveDocumentTask() {
     // create or extract properties
     let cleanedHtml = this.editor.htmlContent;
-    let createdOn = editorDocument.get("createdOn") || new Date();
+    let createdOn = this.document.get('createdOn') || new Date();
     let updatedOn = new Date();
-    let title = editorDocument.get("title");
-    if (!this.documentContainer) {
-      this.documentContainer = yield this.store
-        .createRecord("document-container")
-        .save();
-    }
+    let title = this.document.get('title');
     let documentContainer = yield this.documentContainer;
-    let status = yield documentContainer.get("status");
-    let folder = yield documentContainer.get("folder");
+    let status = yield documentContainer.get('status');
+    let folder = yield documentContainer.get('folder');
 
     if (status && status.isLoaded && folder && folder.isLoaded) {
       // every save results in new document
-      let documentToSave = this.store.createRecord("editor-document", {
+      let documentToSave = this.store.createRecord('editor-document', {
         content: cleanedHtml,
         createdOn,
         updatedOn,
@@ -56,38 +78,68 @@ export default class MeetingsEditTreatmentController extends Controller {
       });
 
       // Link the previous if provided editorDocument does exist in DB.
-      if (editorDocument.get("id"))
-        documentToSave.set("previousVersion", editorDocument);
+      if (!this.document.get('isNew')) {
+        documentToSave.set('previousVersion', this.document);
+      }
 
       try {
         // save the document
         yield documentToSave.save();
       } catch (e) {
-        console.error("Error saving the document");
+        console.error('Error saving the document');
         console.error(e);
       }
 
       // set the latest revision
-      documentContainer.set("currentVersion", documentToSave);
-      documentContainer.set("status", status);
-      documentContainer.set("folder", folder);
+      documentContainer.set('currentVersion', documentToSave);
+      documentContainer.set('status', status);
+      documentContainer.set('folder', folder);
       const bestuurseenheid = this.currentSession.group;
-      documentContainer.set("publisher", bestuurseenheid);
+      documentContainer.set('publisher', bestuurseenheid);
 
       try {
         yield documentContainer.save();
       } catch (e) {
-        console.error("Error saving the document container");
+        console.error('Error saving the document container');
         console.error(e);
       }
-
-      this.document = documentToSave;
-      this.model.treatment.documentContainer = documentContainer;
-      this.model.treatment.save();
-
-
     } else {
       console.error(`The status or the folder didn't correctly load`);
+    }
+  }
+
+  @task
+  *fetchOrCreateDocumentTask() {
+    const { treatment } = this.model;
+    let container = yield treatment.documentContainer;
+    const draftDecisionFolder = yield this.store.findRecord(
+      'editor-document-folder',
+      DRAFT_DECISION_FOLDER_ID
+    );
+    const geagendeerdStatus = yield this.store.findRecord(
+      'concept',
+      GEAGENDEERD_STATUS_ID
+    ); //geagendeerd status
+
+    if (!container) {
+      container = this.store.createRecord('document-container', {
+        folder: draftDecisionFolder,
+        status: geagendeerdStatus,
+      });
+      yield container.save();
+      treatment.documentContainer = container;
+      yield treatment.save();
+    }
+    let document = yield container.currentVersion;
+    if (!document) {
+      const title = yield treatment.get('onderwerp.titel');
+      document = this.store.createRecord('editor-document', {
+        title,
+        createdOn: new Date(),
+        updatedOn: new Date(),
+      });
+      yield document.save();
+      container.currentVersion = document;
     }
   }
 }
