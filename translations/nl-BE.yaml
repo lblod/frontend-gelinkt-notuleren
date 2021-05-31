@@ -286,3 +286,5 @@ manageIntermissions:
   checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   deleteButton: Verwijder onderbreking
   retainButton: Behoud onderbreking
+requiredField:
+  required: Verplicht
