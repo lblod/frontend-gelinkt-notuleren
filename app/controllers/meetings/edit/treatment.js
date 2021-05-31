@@ -11,16 +11,20 @@ export default class MeetingsEditTreatmentController extends Controller {
   @service router;
   @service currentSession;
   @tracked editor;
+  @tracked documentContainer;
+  @tracked document;
+  @tracked initialContent;
+  @tracked confirmLeaveOpen;
+
+  get dirty() {
+    return this.document.content !== this.editor.htmlContent;
+  }
 
   @action
   closeModal() {
     this.router.transitionTo('meetings.edit', this.model.meetingId);
   }
 
-  /**
-   * @param {EditorDocument} document must be a resolved ember data model, not a proxy
-   * @param {Editor} editor
-   */
   @action
   handleRdfaEditorInit(editor) {
     if (this.document.content) {
@@ -29,21 +33,6 @@ export default class MeetingsEditTreatmentController extends Controller {
     this.editor = editor;
   }
 
-  /**
-   *
-   * @return {EditorDocument | null}
-   */
-  get document() {
-    return this.model.treatment.get('documentContainer.currentVersion.content');
-  }
-
-  get documentContainer() {
-    return this.model.treatment.documentContainer;
-  }
-
-  set documentContainer(container) {
-    this.model.treatment.documentContainer = container;
-  }
   @action
   async saveAndQuit() {
     await this.saveDocumentTask.perform();
@@ -55,7 +44,15 @@ export default class MeetingsEditTreatmentController extends Controller {
     container.rollbackAttributes();
     this.closeModal();
   }
+  @action
+  confirmLeave() {
+    this.confirmLeaveOpen = true;
+  }
 
+  @action
+  handleConfirmation() {
+
+  }
   @task
   *saveDocumentTask() {
     // create or extract properties
@@ -63,7 +60,7 @@ export default class MeetingsEditTreatmentController extends Controller {
     let createdOn = this.document.get('createdOn') || new Date();
     let updatedOn = new Date();
     let title = this.document.get('title');
-    let documentContainer = yield this.documentContainer;
+    let documentContainer = this.documentContainer;
     let status = yield documentContainer.get('status');
     let folder = yield documentContainer.get('folder');
 
@@ -85,6 +82,7 @@ export default class MeetingsEditTreatmentController extends Controller {
       try {
         // save the document
         yield documentToSave.save();
+        this.document = documentToSave;
       } catch (e) {
         console.error('Error saving the document');
         console.error(e);
@@ -141,5 +139,7 @@ export default class MeetingsEditTreatmentController extends Controller {
       yield document.save();
       container.currentVersion = document;
     }
+    this.documentContainer = container;
+    this.document = document;
   }
 }

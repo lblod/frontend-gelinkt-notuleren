@@ -24,7 +24,9 @@ behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
   saveAndQuit: Opslaan en Afsluiten
-  cancelEdit: Annuleren
+  cancel: Annuleren
+  leaveWithoutSaving: Weggaan zonder op te slaan
+  confirmLeaveWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
   openbaarLabel: "maak agendapunt openbaar"
   geenOpenbaarMsg: "agendapunt niet openbaar"
   openbaarMsg: "agendapunt openbaar"

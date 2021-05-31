@@ -18,7 +18,7 @@
       <AuButton @skin="secondary"
                 @loading={{this.saveDocumentTask.isRunning}}
         {{on "click" this.cancel}}>
-        {{t "behandelingVanAgendapunten.cancelEdit"}}
+        {{t "behandelingVanAgendapunten.cancel"}}
       </AuButton>
       <AuButton @loading={{this.saveDocumentTask.isRunning}}
         {{on "click" (perform this.saveDocumentTask)}}>
