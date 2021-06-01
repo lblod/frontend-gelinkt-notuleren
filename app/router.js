@@ -43,6 +43,8 @@ Router.map(function() {
   this.route('meetings', function() {
     this.route('new');
     this.route('edit', { path: '/:id/edit' }, function () {
+      this.route('intro');
+      this.route('outro');
       this.route('treatment', { path: ':treatment_id' });
     });
     this.route('publish',{path: '/:id/publish'}, function() {

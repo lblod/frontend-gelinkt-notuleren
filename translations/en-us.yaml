@@ -292,3 +292,7 @@ manageIntermissions:
   checkboxLabel: I understand that the intermission will be irreversibly removed.
   retainButton: Retain intermission
   deleteButton: Delete intermission
+rdfaEditorContainer:
+  defaultBusyText: Processing
+  saving: Saving
+  makingCopy: Making copy

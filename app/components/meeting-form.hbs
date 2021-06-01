@@ -159,8 +159,13 @@
                 {{t 'manageFreeText.before'}}
             </span>
           </AuHeading>
-          <ZittingTextDocumentContainer @zitting={{@zitting}} @readOnly={{this.readOnly}} @type="ext:intro"/>
-  
+        <ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}>
+          {{@zitting.intro}}
+        </ReadonlyTextBox>
+        {{#unless this.readOnly}}
+          <AuButton {{on "click" this.goToEditIntro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
+        {{/unless}}
+
           {{!-- Treatment of agenda --}}
           <AuHeading id="sectionFive" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.fifthSectionTitle"}}
@@ -200,7 +205,12 @@
                 {{t 'manageFreeText.after'}}
               </span>
           </AuHeading>
-          <ZittingTextDocumentContainer @zitting={{@zitting}} @readOnly={{this.readOnly}} @type="ext:outro"/>
+          <ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}>
+            {{@zitting.outro}}
+          </ReadonlyTextBox>
+          {{#unless this.readOnly}}
+            <AuButton {{on "click" this.goToEditOutro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
+          {{/unless}}
         {{/if}}
       {{else}}
         <AuHelpText @size="large" @skin="secondary">

@@ -36,15 +36,15 @@
       </div>
     {{else}}
       <div class="container-flex--contain" resource="#" vocab="http://data.vlaanderen.be/ns/besluit#" property={{@type}} prefix="ext: http://mu.semte.ch/vocabularies/ext/">
-        <Rdfa::RdfaEditor class="au-c-rdfa-editor" 
-          @profile={{this.profile}} 
+        <Rdfa::RdfaEditor class="au-c-rdfa-editor"
+          @profile={{this.profile}}
           @rdfaEditorInit={{this.handleRdfaEditorInit}}
-          @editorOptions={{this.editorOptions}} 
-          @toolbarOptions={{hash 
-            showTextStyleButtons="true" 
+          @editorOptions={{this.editorOptions}}
+          @toolbarOptions={{hash
+            showTextStyleButtons="true"
             showListButtons="true"
             showIndentButtons="true"
-          }} 
+          }}
         />
       </div>
     {{/if}}

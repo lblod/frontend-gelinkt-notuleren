@@ -29,6 +29,9 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.fetchParticipants.perform();
     this.getStatus.perform();
   }
+  get editable() {
+    return !(this.published || this.args.readOnly);
+  }
   @task
   *getStatus(){
     const container=yield this.documentContainer;

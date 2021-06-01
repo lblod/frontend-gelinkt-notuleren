@@ -291,3 +291,7 @@ manageIntermissions:
   checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   deleteButton: Verwijder onderbreking
   retainButton: Behoud onderbreking
+rdfaEditorContainer:
+  defaultBusyText: Bezig met verwerken
+  saving: Bezig met opslaan
+  makingCopy: Kopie aan het maken
