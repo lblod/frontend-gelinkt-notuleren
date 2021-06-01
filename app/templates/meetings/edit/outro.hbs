@@ -11,9 +11,19 @@
             @zitting={{@model}}/>
   </Modal.Body>
   <Modal.Footer>
-    <AuButton {{on "click" (perform this.saveTextTask)}}
-            @loading={{this.saveTextTask.isRunning}}>
-      {{t "meetings.edit.outro.save"}}
-    </AuButton>
+    <AuButtonGroup>
+      <AuButton @skin="secondary"
+                @loading={{this.saveTextTask.isRunning}}
+        {{on "click" this.cancel}}>
+        {{t "meetings.edit.outro.cancel"}}
+      </AuButton>
+      <AuButton {{on "click" (perform this.saveTextTask)}}
+              @loading={{this.saveTextTask.isRunning}}>
+        {{t "meetings.edit.outro.save"}}
+      </AuButton>
+      <AuButton @loading={{this.saveTextTask.isRunning}} {{on "click" this.saveAndQuit}}>
+        {{t "meetings.edit.outro.saveAndQuit"}}
+      </AuButton>
+    </AuButtonGroup>
   </Modal.Footer>
 </AuModal>

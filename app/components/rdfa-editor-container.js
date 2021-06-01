@@ -33,14 +33,14 @@ export default class RdfaEditorContainerComponent extends Component {
         return JSON.parse(this.args.editorDocument.context);
       } catch (e) {
         return {
-          prefix: '',
+          prefix: this.args.prefix ?? '',
           typeof: '',
           vocab: '',
         };
       }
     }
     return {
-      prefix: '',
+      prefix: this.args.prefix ?? '',
       typeof: '',
       vocab: '',
     };

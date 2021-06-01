@@ -1,8 +1,9 @@
 <RdfaEditorContainer
         @profile={{this.profile}}
         @rdfaEditorInit={{this.rdfaEditorInit}}
-        @typeOfWrappingDiv={{@type}}
         @editorOptions={{this.editorOptions}}
         @busy={{@saving}}
         @busyText={{t "rdfaEditorContainer.saving"}}
+        @prefix={{hash ext="http://mu.semte.ch/vocabularies/ext/"}}
+        @property={{@type}}
 />

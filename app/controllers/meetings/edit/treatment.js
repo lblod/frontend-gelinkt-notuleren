@@ -44,15 +44,6 @@ export default class MeetingsEditTreatmentController extends Controller {
     container.rollbackAttributes();
     this.closeModal();
   }
-  @action
-  confirmLeave() {
-    this.confirmLeaveOpen = true;
-  }
-
-  @action
-  handleConfirmation() {
-
-  }
   @task
   *saveDocumentTask() {
     // create or extract properties

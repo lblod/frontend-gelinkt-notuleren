@@ -300,7 +300,11 @@ meetings:
     intro:
       save: Opslaan
       confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+      saveAndQuit: Opslaan en afsluiten
+      cancel: Annuleren
     outro:
       save: Opslaan
       confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+      saveAndQuit: Opslaan en afsluiten
+      cancel: Annuleren
 

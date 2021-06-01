@@ -23,6 +23,16 @@ export default class MeetingsEditIntroController extends Controller {
     this.router.transitionTo('meetings.edit', this.model.id);
   }
 
+  @action
+  cancel() {
+    this.closeModal();
+  }
+  @action
+  async saveAndQuit() {
+    await this.saveTextTask.perform();
+    this.closeModal();
+  }
+
   @task
   *saveTextTask() {
     const zitting = this.model;
