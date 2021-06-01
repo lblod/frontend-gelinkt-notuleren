@@ -4,6 +4,19 @@ inbox:
     agendapoints: Agenda points
     trash: Recycle bin
     manual: View manual
+  meetings:
+    newMeeting: New meeting
+    new:
+      title: Create a new meeting
+      meeting:
+        administrativeBody: Held by
+        location: On location
+        plannedStart: Scheduled start
+        errors:
+          administrativeBody:
+            required: Please select an administrative body
+      save: Create meeting
+      cancel: Back
   agendapoints:
     pageTitle: Agendapoints
     searchPlaceholder: Type the title of a agendapoint
@@ -287,3 +300,5 @@ manageIntermissions:
   checkboxLabel: I understand that the intermission will be irreversibly removed.
   retainButton: Retain intermission
   deleteButton: Delete intermission
+requiredField:
+  required: Required

@@ -92,7 +92,10 @@
   <div class="au-c-meeting-chrome">
     <div class="au-c-meeting-chrome__paper">
       {{!-- Meeting title --}}
-      <AuHeading>{{t "meetingForm.meetingHeadingPartOne"}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</span>, {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span></AuHeading>
+      <AuHeading>
+        {{t "meetingForm.meetingHeadingPartOne"}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
+        {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span>
+      </AuHeading>
       <AuHr @size="large"/>
 
       {{!-- General Information --}}
@@ -105,7 +108,6 @@
       </AuHeading>
       <Zitting::ManageZittingsdata
         @zitting={{@zitting}}
-        @onCreate={{@onCreateMeeting}}
         @onChange={{this.meetingInfoUpdate}}
         @readOnly={{this.readOnly}}
       />
@@ -160,7 +162,7 @@
             </span>
           </AuHeading>
           <ZittingTextDocumentContainer @zitting={{@zitting}} @readOnly={{this.readOnly}} @type="ext:intro"/>
-  
+
           {{!-- Treatment of agenda --}}
           <AuHeading id="sectionFive" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
             {{t "meetingForm.fifthSectionTitle"}}

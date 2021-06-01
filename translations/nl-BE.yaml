@@ -4,6 +4,19 @@ inbox:
     agendapoints: Agendapunten
     trash: Prullenmand
     manual: Bekijk handleiding
+  meetings:
+    newMeeting: Nieuwe zitting
+    new:
+      title: Nieuwe zitting aanmaken
+      meeting:
+        administrativeBody: Gehouden door
+        location: Op locatie
+        plannedStart: Geplande start
+        errors:
+          administrativeBody:
+            required: Gelieve een bestuursorgaan te selecteren
+      save: Zitting aanmaken
+      cancel: Terug
   agendapoints:
     pageTitle: Agendapunten
     searchPlaceholder: Zoek titel agendapunt
@@ -286,3 +299,5 @@ manageIntermissions:
   checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   deleteButton: Verwijder onderbreking
   retainButton: Behoud onderbreking
+requiredField:
+  required: Verplicht
