@@ -4,6 +4,16 @@
          @closeModal={{this.closeModal}}
          as |Modal|>
   <Modal.Body>
+    <ZittingTextDocumentContainer
+            @onEditorInit={{this.initEditor}}
+            @saving={{this.saveTextTask.isRunning}}
+            @type="ext:intro"
+            @zitting={{@model}}/>
   </Modal.Body>
-  <Modal.Footer></Modal.Footer>
+  <Modal.Footer>
+    <AuButton {{on "click" (perform this.saveTextTask)}}
+            @loading={{this.saveTextTask.isRunning}}>
+      {{t "meetings.edit.intro.save"}}
+    </AuButton>
+  </Modal.Footer>
 </AuModal>

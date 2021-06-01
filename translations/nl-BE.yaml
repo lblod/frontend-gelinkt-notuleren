@@ -295,3 +295,12 @@ rdfaEditorContainer:
   defaultBusyText: Bezig met verwerken
   saving: Bezig met opslaan
   makingCopy: Kopie aan het maken
+meetings:
+  edit:
+    intro:
+      save: Opslaan
+      confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+    outro:
+      save: Opslaan
+      confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+

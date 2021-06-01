@@ -296,3 +296,12 @@ rdfaEditorContainer:
   defaultBusyText: Processing
   saving: Saving
   makingCopy: Making copy
+meetings:
+  edit:
+    intro:
+      save: Save
+      confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
+    outro:
+      save: Save
+      confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
+

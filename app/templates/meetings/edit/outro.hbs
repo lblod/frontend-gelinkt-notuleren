@@ -1,2 +1,19 @@
-{{page-title "Outro"}}
-{{outlet}}
+<AuModal @modalOpen={{true}}
+         @size="fullscreen"
+         @modalTitle={{t "meetingForm.sixthSectionTitle"}}
+         @closeModal={{this.closeModal}}
+         as |Modal|>
+  <Modal.Body>
+    <ZittingTextDocumentContainer
+            @onEditorInit={{this.initEditor}}
+            @saving={{this.saveTextTask.isRunning}}
+            @type="ext:outro"
+            @zitting={{@model}}/>
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButton {{on "click" (perform this.saveTextTask)}}
+            @loading={{this.saveTextTask.isRunning}}>
+      {{t "meetings.edit.outro.save"}}
+    </AuButton>
+  </Modal.Footer>
+</AuModal>
