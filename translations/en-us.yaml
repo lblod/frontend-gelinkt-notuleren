@@ -4,6 +4,19 @@ inbox:
     agendapoints: Agenda points
     trash: Recycle bin
     manual: View manual
+  meetings:
+    newMeeting: New meeting
+    new:
+      title: Create a new meeting
+      meeting:
+        administrativeBody: Held by
+        location: On location
+        plannedStart: Scheduled start
+        errors:
+          administrativeBody:
+            required: Please select an administrative body
+      save: Create meeting
+      cancel: Back
   agendapoints:
     pageTitle: Agendapoints
     searchPlaceholder: Type the title of a agendapoint
@@ -309,3 +322,5 @@ meetings:
       saveAndQuit: Save and quite
       cancel: Cancel
 
+requiredField:
+  required: Required

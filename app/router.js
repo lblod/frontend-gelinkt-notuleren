@@ -10,7 +10,9 @@ Router.map(function() {
   this.route('inbox', function() {
     this.route('trash');
     this.route('agendapoints');
-    this.route('meetings');
+    this.route('meetings', function() {
+      this.route('new');
+    });
   });
   this.route('mock-login');
   this.route('login');
@@ -41,7 +43,6 @@ Router.map(function() {
   });
 
   this.route('meetings', function() {
-    this.route('new');
     this.route('edit', { path: '/:id/edit' }, function () {
       this.route('intro');
       this.route('outro');
