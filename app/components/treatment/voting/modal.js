@@ -40,13 +40,18 @@ export default class TreatmentVotingModalComponent extends Component {
   /** @type {import("ember-concurrency").Task} */
   saveStemming = function* () {
     const isNew = this.editStemming.stemming.isNew;
-    if (isNew) {
+
+    if(isNew) {
       this.editStemming.stemming.position = this.args.behandeling.stemmingen.length;
+    }
+    yield this.editStemming.saveTask.perform();
+
+    if (isNew) {
       this.args.behandeling.stemmingen.pushObject(this.editStemming.stemming);
       this.args.behandeling.save();
     }
-    yield this.editStemming.saveTask.perform();
     yield this.fetchStemmingen.perform();
+    
     this.onCancelEdit();
   };
 
