@@ -396,3 +396,15 @@
 .au-u-cursor-inherit {
   cursor: inherit;
 }
+
+// Overrides for editor modal
+.au-c-modal--editor {
+  .au-c-modal__body {
+    padding: 0;
+  }
+
+  .au-c-modal__footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}

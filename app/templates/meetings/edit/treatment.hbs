@@ -2,6 +2,7 @@
          @size="fullscreen"
          @closeModal={{this.closeModal}}
          @modalTitle={{this.document.title}}
+         class="au-c-modal--editor"
          as |Modal|
 >
   <Modal.Body>
@@ -15,17 +16,19 @@
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>
-      <AuButton @skin="secondary"
-                @loading={{this.saveDocumentTask.isRunning}}
-        {{on "click" this.cancel}}>
-        {{t "behandelingVanAgendapunten.cancel"}}
-      </AuButton>
       <AuButton @loading={{this.saveDocumentTask.isRunning}}
         {{on "click" (perform this.saveDocumentTask)}}>
         {{t "behandelingVanAgendapunten.saveButton"}}
       </AuButton>
       <AuButton @loading={{this.saveDocumentTask.isRunning}} {{on "click" this.saveAndQuit}}>
         {{t "behandelingVanAgendapunten.saveAndQuit"}}
+      </AuButton>
+    </AuButtonGroup>
+    <AuButtonGroup>
+       <AuButton @skin="secondary"
+                @loading={{this.saveDocumentTask.isRunning}}
+        {{on "click" this.cancel}}>
+        {{t "behandelingVanAgendapunten.cancel"}}
       </AuButton>
     </AuButtonGroup>
   </Modal.Footer>

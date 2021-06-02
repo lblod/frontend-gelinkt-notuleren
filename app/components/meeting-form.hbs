@@ -165,7 +165,7 @@
           {{@zitting.intro}}
         </ReadonlyTextBox>
         {{#unless this.readOnly}}
-          <AuButton {{on "click" this.goToEditIntro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
+          <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEditIntro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
         {{/unless}}
           {{!-- Treatment of agenda --}}
           <AuHeading id="sectionFive" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
@@ -210,7 +210,7 @@
             {{@zitting.outro}}
           </ReadonlyTextBox>
           {{#unless this.readOnly}}
-            <AuButton {{on "click" this.goToEditOutro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
+            <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEditOutro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
           {{/unless}}
         {{/if}}
       {{else}}

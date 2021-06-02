@@ -2,6 +2,7 @@
          @size="fullscreen"
          @modalTitle={{t "meetingForm.fourthSectionTitle"}}
          @closeModal={{this.closeModal}}
+         class="au-c-modal--editor"
          as |Modal|>
   <Modal.Body>
     <ZittingTextDocumentContainer
@@ -11,17 +12,21 @@
             @zitting={{@model}}/>
   </Modal.Body>
   <Modal.Footer>
-    <AuButton @skin="secondary"
-              @loading={{this.saveTextTask.isRunning}}
-      {{on "click" this.cancel}}>
-      {{t "meetings.edit.intro.cancel"}}
-    </AuButton>
-    <AuButton {{on "click" (perform this.saveTextTask)}}
-            @loading={{this.saveTextTask.isRunning}}>
-      {{t "meetings.edit.intro.save"}}
-    </AuButton>
-    <AuButton @loading={{this.saveTextTask.isRunning}} {{on "click" this.saveAndQuit}}>
-      {{t "meetings.edit.intro.saveAndQuit"}}
-    </AuButton>
+    <AuButtonGroup>
+      <AuButton {{on "click" (perform this.saveTextTask)}}
+              @loading={{this.saveTextTask.isRunning}}>
+        {{t "meetings.edit.intro.save"}}
+      </AuButton>
+      <AuButton @loading={{this.saveTextTask.isRunning}} {{on "click" this.saveAndQuit}}>
+        {{t "meetings.edit.intro.saveAndQuit"}}
+      </AuButton>
+    </AuButtonGroup>
+    <AuButtonGroup>
+      <AuButton @skin="secondary"
+                @loading={{this.saveTextTask.isRunning}}
+        {{on "click" this.cancel}}>
+        {{t "meetings.edit.intro.cancel"}}
+      </AuButton>
+    </AuButtonGroup>
   </Modal.Footer>
 </AuModal>

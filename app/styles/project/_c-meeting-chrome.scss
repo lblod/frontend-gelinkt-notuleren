@@ -70,8 +70,12 @@
 
   & + .au-c-button {
     position: relative;
-    margin-top: -.1rem !important; // Spacing hack as this button is used in multiple places
+    margin-top: -$au-unit-small - .1rem !important; // Spacing hack as this button is used in multiple places
     border-color: $au-gray-300;
+  }
+
+  &.au-u-margin-bottom-none + .au-c-button {
+    margin-top: -.1rem !important; // Spacing hack as this button is used in multiple places
   }
 }
 

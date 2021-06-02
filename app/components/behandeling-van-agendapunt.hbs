@@ -79,9 +79,7 @@
   {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
 </ReadonlyTextBox>
 {{#if this.editable}}
-  <AuButtonGroup>
-    <AuButton {{on "click" this.goToEdit}}>
-      {{t "behandelingVanAgendapunten.editDocument"}}
-    </AuButton>
-  </AuButtonGroup>
+  <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEdit}}>
+    {{t "behandelingVanAgendapunten.editDocument"}}
+  </AuButton>
 {{/if}}
