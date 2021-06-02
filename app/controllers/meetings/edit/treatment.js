@@ -14,7 +14,11 @@ export default class MeetingsEditTreatmentController extends Controller {
   @tracked documentContainer;
   @tracked document;
   @tracked initialContent;
-  @tracked confirmLeaveOpen;
+
+  setup() {
+    this.editor = null;
+    this.fetchOrCreateDocumentTask.perform();
+  }
 
   get dirty() {
     return this.document.content !== this.editor.htmlContent;

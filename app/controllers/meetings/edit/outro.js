@@ -5,9 +5,8 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class MeetingsEditOutroController extends Controller {
-  @service router;
+  @service router
   @tracked editor;
-  @service intl;
 
   get dirty() {
     return this.model.outro !== this.editor.htmlContent;
@@ -16,26 +15,6 @@ export default class MeetingsEditOutroController extends Controller {
   @action
   initEditor(editor) {
     this.editor = editor;
-  }
-
-  addExitHandler() {
-    this.router.on('routeWillChange', this, this.confirm);
-  }
-
-  removeExitHandler() {
-    this.router.off('routeWillChange', this, this.confirm);
-  }
-
-  confirm(transition) {
-    if (transition.isAborted) {
-      return;
-    }
-    if (this.dirty &&
-      !window.confirm(
-        this.intl.t('meetings.edit.outro.confirmQuitWithoutSaving')
-      )) {
-      transition.abort();
-    }
   }
 
   @action

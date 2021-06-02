@@ -36,24 +36,4 @@ export default class MeetingsEditIntroController extends Controller {
     yield zitting.save();
   }
 
-  addExitHandler() {
-    this.router.on('routeWillChange', this, this.confirm);
-  }
-
-  removeExitHandler() {
-    this.router.off('routeWillChange', this, this.confirm);
-  }
-
-  confirm(transition) {
-    if (transition.isAborted) {
-      return;
-    }
-    if (this.dirty &&
-      !window.confirm(
-        this.intl.t('meetings.edit.intro.confirmQuitWithoutSaving')
-      )) {
-      transition.abort();
-    }
-  }
-
 }
