@@ -35,44 +35,15 @@
     </Modal.Footer>
   </AuModal>
 {{/if}}
-
-{{#if (or this.saveTask.isRunning this.copyAgendapunt.isRunning)}}
-<div class="container-flex--contain">
-  <div class="au-c-rdfa-editor">
-    <div class="say-container say-container--sidebar-left">
-      <div class="say-container__main">
-        <div class="say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover">
-          <div class="say-editor__paper">
-            <div class="au-c-scanner">
-              <div class="au-c-scanner__text">
-                <AuLoader @padding="small" />
-                <AuHelpText @size="large">
-                  {{#if this.saveTask.isRunning}}
-                    Bezig met opslaan
-                  {{else}}
-                    Kopie aan het maken
-                  {{/if}}
-                </AuHelpText>
-              </div>
-              <span class="au-c-scanner__bar"></span>
-            </div>
-            <div class="say-editor__inner say-content">
-              {{this.editorDocument.htmlSafeContent}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{{else}}
-  <RdfaEditorContainer
-    @profile={{this.profile}}
-    @rdfaEditorContainerInit={{this.handleRdfaEditorInit}}
-    @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
-    @showToggleRdfaAnnotations={{true}}
-    @editorDocument={{this.editorDocument}}
-  />
-{{/if}}
+<RdfaEditorContainer
+        @profile={{this.profile}}
+        @rdfaEditorInit={{this.handleRdfaEditorInit}}
+        @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
+        @showToggleRdfaAnnotations={{true}}
+        @editorDocument={{this.editorDocument}}
+        @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
+        @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
+                       (t "rdfaEditorContainer.saving")}}
+/>
 
 {{outlet}}

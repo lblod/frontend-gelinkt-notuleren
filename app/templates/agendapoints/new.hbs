@@ -18,36 +18,13 @@
   </AuModal>
 {{/if}}
 
-{{#if this.saveTask.isRunning}}
-  <div class="container-flex--contain">
-    <div class="au-c-rdfa-editor">
-      <div class="say-container say-container--sidebar-left">
-        <div class="say-container__main">
-          <div class="say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover">
-            <div class="say-editor__paper">
-              <div class="au-c-scanner">
-                <div class="au-c-scanner__text">
-                  <AuLoader @padding="small" />
-                  <AuHelpText @size="large">Bezig met opslaan</AuHelpText>
-                </div>
-                <span class="au-c-scanner__bar"></span>
-              </div>
-              <div class="say-editor__inner say-content">
-                {{html-safe this.editor.htmlContent}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-{{else}}
-    <RdfaEditorContainer
-      @profile={{this.profile}}
-      @editorDocument={{this.editorDocument}}
-      @rdfaEditorContainerInit={{this.handleRdfaEditorInit}}
-      @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt ext:draftDecision"
-      @showToggleRdfaAnnotations={{true}}
-    />
-{{/if}}
+<RdfaEditorContainer
+  @profile={{this.profile}}
+  @editorDocument={{this.editorDocument}}
+  @rdfaEditorInit={{this.handleRdfaEditorInit}}
+  @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt ext:draftDecision"
+  @showToggleRdfaAnnotations={{true}}
+  @busy={{this.saveTask.isRunning}}
+  @busyText={{t "rdfaEditorContainer.saving"}}
+/>
 {{outlet}}

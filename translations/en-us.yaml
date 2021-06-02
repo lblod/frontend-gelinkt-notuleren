@@ -36,6 +36,10 @@ publish:
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save
+  saveAndQuit: Save and Quit
+  cancel: Cancel
+  leaveWithoutSaving: Leave without saving
+  confirmLeaveWithoutSaving: Are you sure you would like to leave this page without saving your changes?
   openbaarLabel: "make agendapoint public"
   geenOpenbaarMsg: "agendapoint not public"
   openbaarMsg: "agendapoint public"
@@ -44,6 +48,7 @@ behandelingVanAgendapunten:
   votingTitle: "Voting"
   contentTitle: "Content"
   needsParticipants: Please configure the participants to this agenda-item before adding a voting.
+  editDocument: "Edit document"
 meetingForm:
   incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
   backButton: Back to meetings
@@ -300,5 +305,22 @@ manageIntermissions:
   checkboxLabel: I understand that the intermission will be irreversibly removed.
   retainButton: Retain intermission
   deleteButton: Delete intermission
+rdfaEditorContainer:
+  defaultBusyText: Processing
+  saving: Saving
+  makingCopy: Making copy
+meetings:
+  edit:
+    intro:
+      save: Save
+      confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
+      saveAndQuit: Save and quit
+      cancel: Cancel
+    outro:
+      save: Save
+      confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
+      saveAndQuit: Save and quite
+      cancel: Cancel
+
 requiredField:
   required: Required

@@ -135,6 +135,14 @@ export default class MeetingForm extends Component {
   goToPublish() {
     this.router.transitionTo("meetings.publish.agenda", this.args.zitting.id);
   }
+  @action
+  goToEditIntro() {
+    this.router.transitionTo("meetings.edit.intro", this.args.zitting.id);
+  }
+  @action
+  goToEditOutro() {
+    this.router.transitionTo("meetings.edit.outro", this.args.zitting.id);
+  }
 
   @action
   async meetingInfoUpdate(zitting) {

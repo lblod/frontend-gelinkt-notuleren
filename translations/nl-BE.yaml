@@ -36,6 +36,10 @@ publish:
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
+  saveAndQuit: Opslaan en Afsluiten
+  cancel: Annuleren
+  leaveWithoutSaving: Weggaan zonder op te slaan
+  confirmLeaveWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
   openbaarLabel: "maak agendapunt openbaar"
   geenOpenbaarMsg: "agendapunt niet openbaar"
   openbaarMsg: "agendapunt openbaar"
@@ -44,6 +48,7 @@ behandelingVanAgendapunten:
   votingTitle: "Stemming"
   contentTitle: "Inhoud"
   needsParticipants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
+  editDocument: "Bewerk document"
 meetingForm:
   incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
   backButton: Terug naar overzicht zittingen
@@ -299,5 +304,22 @@ manageIntermissions:
   checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   deleteButton: Verwijder onderbreking
   retainButton: Behoud onderbreking
+rdfaEditorContainer:
+  defaultBusyText: Bezig met verwerken
+  saving: Bezig met opslaan
+  makingCopy: Kopie aan het maken
+meetings:
+  edit:
+    intro:
+      save: Opslaan
+      confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+      saveAndQuit: Opslaan en afsluiten
+      cancel: Annuleren
+    outro:
+      save: Opslaan
+      confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+      saveAndQuit: Opslaan en afsluiten
+      cancel: Annuleren
+
 requiredField:
   required: Verplicht

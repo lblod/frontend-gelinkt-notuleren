@@ -1,26 +1,5 @@
-{{#if @saving}}
-  <div class="container-flex--contain">
-    <div class="au-c-rdfa-editor">
-      <div class="say-container say-container--sidebar-left">
-        <div class="say-container__main">
-          <div class="au-c-scanner">
-            <div class="au-c-scanner__text">
-              <AuLoader @padding="small" />
-              <AuHelpText @size="large">Bezig met opslaan</AuHelpText>
-            </div>
-            <span class="au-c-scanner__bar"></span>
-          </div>
-          <div class="say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover">
-            <div class="say-editor__paper">
-              <div class="say-editor__inner say-content">
-                {{html-safe @editor.htmlContent}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-{{else}}
-  <RdfaEditorContainer @profile={{this.profile}} @editorDocument={{@document}} @rdfaEditorContainerInit={{@handleRdfaEditorInit}} @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt" />
-{{/if}}
+<RdfaEditorContainer @profile={{this.profile}}
+                     @editorDocument={{@document}}
+                     @busy={{@saving}}
+                     @rdfaEditorInit={{@handleRdfaEditorInit}}
+                     @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"/>
