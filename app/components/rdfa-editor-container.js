@@ -52,6 +52,7 @@ export default class RdfaEditorContainerComponent extends Component {
 
   /**
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
+   * see https://github.com/emberjs/ember.js/issues/19369
    */
   @action
   setPrefix(element) {
