@@ -14,16 +14,16 @@
   <Modal.Footer>
     <AuButtonGroup>
       <AuButton {{on "click" (perform this.saveTextTask)}}
-              @loading={{this.saveTextTask.isRunning}}>
+              @disabled={{this.saveTextTask.isRunning}}>
         {{t "meetings.edit.intro.save"}}
       </AuButton>
-      <AuButton @loading={{this.saveTextTask.isRunning}} {{on "click" this.saveAndQuit}}>
+      <AuButton @disabled={{this.saveTextTask.isRunning}} {{on "click" this.saveAndQuit}}>
         {{t "meetings.edit.intro.saveAndQuit"}}
       </AuButton>
     </AuButtonGroup>
     <AuButtonGroup>
       <AuButton @skin="secondary"
-                @loading={{this.saveTextTask.isRunning}}
+                @disabled={{this.saveTextTask.isRunning}}
         {{on "click" this.cancel}}>
         {{t "meetings.edit.intro.cancel"}}
       </AuButton>
