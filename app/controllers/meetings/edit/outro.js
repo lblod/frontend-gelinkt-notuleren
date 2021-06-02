@@ -42,10 +42,7 @@ export default class MeetingsEditOutroController extends Controller {
   closeModal() {
     this.router.transitionTo('meetings.edit', this.model.id);
   }
-  @action
-  cancel() {
-    this.closeModal();
-  }
+
   @action
   async saveAndQuit() {
     await this.saveTextTask.perform();

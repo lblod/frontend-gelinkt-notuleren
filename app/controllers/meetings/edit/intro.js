@@ -24,10 +24,6 @@ export default class MeetingsEditIntroController extends Controller {
   }
 
   @action
-  cancel() {
-    this.closeModal();
-  }
-  @action
   async saveAndQuit() {
     await this.saveTextTask.perform();
     this.closeModal();

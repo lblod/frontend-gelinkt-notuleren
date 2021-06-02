@@ -38,12 +38,7 @@ export default class MeetingsEditTreatmentController extends Controller {
     await this.saveDocumentTask.perform();
     this.closeModal();
   }
-  @action
-  async cancel() {
-    const container = await this.documentContainer;
-    container.rollbackAttributes();
-    this.closeModal();
-  }
+
   @task
   *saveDocumentTask() {
     // create or extract properties
