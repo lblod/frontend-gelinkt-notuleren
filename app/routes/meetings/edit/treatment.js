@@ -10,7 +10,6 @@ export default class MeetingsEditTreatmentRoute extends Route {
       'behandeling-van-agendapunt',
       params.treatment_id
     );
-    console.log('ROUTER PARAMS', params);
     return {
       treatment,
       meetingId: this.paramsFor('meetings.edit').id,
