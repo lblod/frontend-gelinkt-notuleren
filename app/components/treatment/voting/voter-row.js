@@ -35,6 +35,9 @@ export default class TreatmentVotingVoterRowComponent extends Component {
     }
     return this.args.row[1];
   }
+  get showVoteSelect() {
+    return this.isVoting && !this.args.secret;
+  }
 
   @action
   addStemmer() {
