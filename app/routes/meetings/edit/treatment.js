@@ -2,7 +2,13 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
 export default class MeetingsEditTreatmentRoute extends Route {
-  @service intl;
+  @service currentSession;
+
+  beforeModel() {
+    if (!this.currentSession.canWrite) {
+      this.transitionTo('meetings.edit');
+    }
+  }
 
   async model(params) {
     const treatment = await this.store.findRecord(
