@@ -38,7 +38,7 @@ behandelingVanAgendapunten:
   saveButton: Save
   saveAndQuit: Save and Quit
   cancel: Cancel
-  leaveWithoutSaving: Leave wihout saving
+  leaveWithoutSaving: Leave without saving
   confirmLeaveWithoutSaving: Are you sure you would like to leave this page without saving your changes?
   openbaarLabel: "make agendapoint public"
   geenOpenbaarMsg: "agendapoint not public"
