@@ -162,7 +162,7 @@
             </span>
           </AuHeading>
         <ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}>
-          {{@zitting.intro}}
+          {{html-safe @zitting.intro}}
         </ReadonlyTextBox>
         {{#unless this.readOnly}}
           <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEditIntro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
@@ -207,7 +207,7 @@
               </span>
           </AuHeading>
           <ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}>
-            {{@zitting.outro}}
+            {{html-safe @zitting.outro}}
           </ReadonlyTextBox>
           {{#unless this.readOnly}}
             <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEditOutro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
