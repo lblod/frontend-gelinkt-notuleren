@@ -26,7 +26,7 @@ export default class MeetingsEditTreatmentController extends Controller {
 
   @action
   closeModal() {
-    this.router.transitionTo('meetings.edit', this.model.meetingId);
+    this.router.transitionTo('meetings.edit');
   }
 
   @action

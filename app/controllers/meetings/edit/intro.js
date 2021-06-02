@@ -20,7 +20,7 @@ export default class MeetingsEditIntroController extends Controller {
 
   @action
   closeModal() {
-    this.router.transitionTo('meetings.edit', this.model.id);
+    this.router.transitionTo('meetings.edit');
   }
 
   @action
