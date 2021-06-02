@@ -1,7 +1,7 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 
 export default class StemmingModel extends Model {
-
+  @attr("number") index;
   @attr("number") aantalOnthouders;
   @attr("number") aantalTegenstanders;
   @attr("number") aantalVoorstanders;
