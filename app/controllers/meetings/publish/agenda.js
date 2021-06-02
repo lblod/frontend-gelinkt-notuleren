@@ -7,11 +7,27 @@ import fetch from 'fetch';
 /** @typedef {import("../../../models/zitting").default} Zitting */
 
 
+// agenda kind uuid's as defined in the codelist
+// mapping ontwerp to "gepland"
+const KIND_GEPLAND_UUID = "bdf68a65-ce15-42c8-ae1b-19eeb39e20d0";
+const KIND_AANVULLENDE_UUID = "b122db75-fd93-4f03-b57a-2a9269289782";
+const KIND_SPOEDEISENDE_UUID = "8c143571-175c-4d13-acaa-9f471180a8c9";
+
+const KIND_LABEL_TO_UUID_MAP = new Map(Object.entries({
+  'gepland': KIND_GEPLAND_UUID,
+  'aanvullend': KIND_AANVULLENDE_UUID,
+  'spoedeisend': KIND_SPOEDEISENDE_UUID
+}));
+
 /**
  * @extends {Controller}
  * @property {Zitting} model
  */
 export default class MeetingsPublishAgendaController extends Controller {
+  kindGepland = KIND_GEPLAND_UUID;
+  kindAanvullend = KIND_AANVULLENDE_UUID;
+  kindSpoedeisend = KIND_SPOEDEISENDE_UUID;
+
   /** @type {string} */
   @tracked
   content;
@@ -36,19 +52,22 @@ export default class MeetingsPublishAgendaController extends Controller {
     this.initializeAgendas.perform();
   }
 
+  get meeting() {
+    return this.model;
+  }
 
   @task
   * initializeAgendas() {
-    this.ontwerpAgenda = yield this.initializeAgenda.perform("ontwerpagenda");
-    this.aanvullendeAgenda = yield this.initializeAgenda.perform("aanvullendeagenda");
-    this.spoedeisendeAgenda = yield this.initializeAgenda.perform("spoedeisendeagenda");
+    this.ontwerpAgenda = yield this.initializeAgenda.perform("gepland");
+    this.aanvullendeAgenda = yield this.initializeAgenda.perform("aanvullend");
+    this.spoedeisendeAgenda = yield this.initializeAgenda.perform("spoedeisend");
   }
 
   @task
   * reloadAgendas() {
-    this.ontwerpAgenda = yield this.initializeAgenda.perform("ontwerpagenda");
-    this.aanvullendeAgenda = yield this.initializeAgenda.perform("aanvullendeagenda");
-    this.spoedeisendeAgenda = yield this.initializeAgenda.perform("spoedeisendeagenda");
+    this.ontwerpAgenda = yield this.initializeAgenda.perform("gepland");
+    this.aanvullendeAgenda = yield this.initializeAgenda.perform("aanvullend");
+    this.spoedeisendeAgenda = yield this.initializeAgenda.perform("spoedeisend");
   }
 
 
@@ -61,7 +80,7 @@ export default class MeetingsPublishAgendaController extends Controller {
   * initializeAgenda(type) {
     const agendas = yield this.store.query("agenda",
       {
-        'filter[zitting][:id:]': this.model.id,
+        'filter[zitting][:id:]': this.meeting.id,
         'filter[agenda-type]': type,
         include: "signed-resources,published-resource"
       }
@@ -69,7 +88,7 @@ export default class MeetingsPublishAgendaController extends Controller {
     if (agendas.length) {
       return agendas.firstObject;
     } else {
-      const prePublish = yield this.createPrePublishedResource.perform();
+      const prePublish = yield this.createPrePublishedResource.perform(KIND_LABEL_TO_UUID_MAP.get(type));
       const rslt = yield this.store.createRecord("agenda", {
         agendaType: type,
         zitting: this.model,
@@ -81,9 +100,9 @@ export default class MeetingsPublishAgendaController extends Controller {
   }
 
   @task
-  * createPrePublishedResource() {
-    const id = this.model.id;
-    const response = yield fetch(`/prepublish/agenda/${id}`);
+  * createPrePublishedResource(kindUuid) {
+    const id = this.meeting.id;
+    const response = yield fetch(`/prepublish/agenda/${kindUuid}/${id}`);
     const json = yield response.json();
     return json.data.attributes.content;
   }
@@ -93,10 +112,9 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @this {MeetingsPublishAgendaController}
    */
   @task
-  * createSignedResource(agendaType) {
-
+  * createSignedResource(kindUuid) {
     const id = this.model.id;
-    yield fetch(`/signing/agenda/sign/${agendaType}/${id}`, { method: 'POST'});
+    yield fetch(`/signing/agenda/sign/${kindUuid}/${id}`, { method: 'POST'});
     yield this.reloadAgendas.perform();
   }
 
@@ -105,9 +123,9 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @this {MeetingsPublishAgendaController}
    */
   @task
-  * createPublishedResource(agendaType) {
+    * createPublishedResource(kindUuid) {
     const id = this.model.id;
-    yield fetch(`/signing/agenda/publish/${agendaType}/${id}`, { method: 'POST'});
+    yield fetch(`/signing/agenda/publish/${kindUuid}/${id}`, { method: 'POST'});
     yield this.reloadAgendas.perform();
   }
 }
