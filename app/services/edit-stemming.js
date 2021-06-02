@@ -70,7 +70,7 @@ export default class EditStemmingService extends Service {
         return queryResult.firstObject;
       }));
       aanwezigen.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, "zalNietStemmen")
+        this.votingMap.set(aanwezige, "zalStemmen")
       );
     } else {
       const stemmingId = this._stemming.id;
@@ -81,13 +81,13 @@ export default class EditStemmingService extends Service {
       })).firstObject;
 
       const aanwezigen = stemming.aanwezigen;
-      
+
       const stemmers = stemming.stemmers;
-      
+
       const onthouders = stemming.onthouders;
 
       const voorstanders = stemming.voorstanders;
-      
+
       const tegenstanders = stemming.tegenstanders;
 
       aanwezigen.forEach((aanwezige) =>
@@ -104,7 +104,7 @@ export default class EditStemmingService extends Service {
         this.votingMap.set(aanwezige, "tegen")
       );
     }
-    
+
     this.refreshMap();
   }
 

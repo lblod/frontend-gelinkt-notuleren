@@ -5,7 +5,7 @@
   <td>
     {{this.mandataris.bekleedt.bestuursfunctie.label}}
   </td>
-  {{#if (and this.isVoting (not @secret))}}
+  {{#if this.showVoteSelect}}
     <td>
       <select {{on "change" this.onSelectVote}}>
         <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
@@ -15,7 +15,7 @@
       </select>
     </td>
   {{/if}}
-  <td>
+  <td colspan="{{if this.showVoteSelect 1 2}}">
     {{#if this.isVoting}}
       <AuButton @alert={{ true }} @skin="secondary" @icon="cross" @iconAlignment="left" {{on "click" this.removeStemmer}}>
         {{t "votingEdit.removeItemButton"}}
