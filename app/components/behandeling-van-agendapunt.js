@@ -7,7 +7,6 @@ import { inject as service } from "@ember/service";
 
 export default class BehandelingVanAgendapuntComponent extends Component {
   @service store;
-  @service currentSession;
   @service router;
 
   @tracked openbaar;
