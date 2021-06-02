@@ -32,11 +32,11 @@ export default class RdfaEditorContainerComponent extends Component {
       try {
         return JSON.parse(this.args.editorDocument.context);
       } catch (e) {
-        return {
-          prefix: this.args.prefix ?? '',
-          typeof: '',
-          vocab: '',
-        };
+        console.warn(
+          'Error encountered during parsing of document context. ' +
+            'Reverting to default context.',
+          e
+        );
       }
     }
     return {
