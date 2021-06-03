@@ -211,7 +211,6 @@
           </ReadonlyTextBox>
           {{#unless this.readOnly}}
             <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEditOutro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
-            <AuLink @linkRoute="meetings.edit.outro">{{t "behandelingVanAgendapunten.editDocument"}}</AuLink>
           {{/unless}}
         {{/if}}
       {{else}}
