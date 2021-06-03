@@ -32,9 +32,9 @@
 
       {{html-safe @versionedTreatment.content}}
 
-      <AuHr @size="large"/>
 
       {{#if signatures.length}}
+        <AuHr @size="large"/>
         <div class="au-o-grid">
           {{#each signatures as |signature|}}
             <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>

@@ -5,16 +5,17 @@ import { fetch } from 'fetch';
 import { action } from '@ember/object';
 
 export default class MeetingsPublishUittrekselsController extends Controller {
-  @tracked uittreksels = [];
+  @tracked uittreksels;
+  @tracked documentToPrint;
+  @tracked showPrintModal;
 
   @tracked errors;
 
-  constructor() {
-    super(...arguments);
-  }
 
   initialize() {
     this.uittreksels = [];
+    this.documentToPrint = null;
+    this.showPrintModal = false;
     this.initializeUittreksels.perform();
   }
 
@@ -94,7 +95,12 @@ export default class MeetingsPublishUittrekselsController extends Controller {
   }
 
   @action
-  print(id) {
-    this.transitionToRoute('print.uittreksel', id);
+  print(versionedTreatment) {
+    if(versionedTreatment.isNew) {
+      this.transitionToRoute('print.uittreksel', versionedTreatment);
+    } else {
+      this.transitionToRoute('print.uittreksel', versionedTreatment.id);
+
+    }
   }
 }
