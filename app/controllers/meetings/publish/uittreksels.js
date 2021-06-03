@@ -24,6 +24,16 @@ export default class MeetingsPublishUittrekselsController extends Controller {
 
   @task
   * initializeUittreksels() {
+    yield this.fetchUittreksels.perform();
+  }
+
+  @task
+  * reloadUittreksels() {
+    yield this.fetchUittreksels.perform();
+  }
+
+  @task
+  *fetchUittreksels() {
     const uittreksels = [];
     const previews = yield this.fetchExtractPreviews.perform();
     for(const uittreksel of previews) {
@@ -41,30 +51,6 @@ export default class MeetingsPublishUittrekselsController extends Controller {
           behandeling,
         });
         uittreksels.push({document: rslt, errors: uittreksel.data.attributes.errors});
-      }
-    }
-    this.uittreksels = uittreksels;
-  }
-
-  @task
-  * reloadUittreksels() {
-    const uittreksels = [];
-    const previews = yield this.fetchExtractPreviews.perform();
-    for(const uittreksel of previews) {
-      const existingUittreksels = yield this.store.query('versioned-behandeling',{
-        'filter[behandeling][:id:]': uittreksel.data.attributes.uuid,
-        include: 'signed-resources,published-resource'
-      });
-      if(existingUittreksels.length) {
-        uittreksels.push(existingUittreksels.firstObject);
-      } else {
-        const behandeling = yield this.store.findRecord('behandeling-van-agendapunt', uittreksel.data.attributes.uuid);
-        const rslt = yield this.store.createRecord("versioned-behandeling", {
-          zitting: this.model,
-          content: uittreksel.data.attributes.content,
-          behandeling,
-        });
-        uittreksels.push(rslt);
       }
     }
     this.uittreksels = uittreksels;
