@@ -78,7 +78,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   * createSignedResource() {
     const id = this.model.id;
     yield fetch(`/signing/notulen/sign/${id}`, { method: 'POST' });
-    setTimeout(() => this.reloadNotulen.perform(), 500);
+    setTimeout(() => this.reloadNotulen.perform(), 1);
   }
 
   @task
@@ -92,7 +92,7 @@ export default class MeetingsPublishNotulenController extends Controller {
                   }),
                   method: 'POST'
                 });
-    setTimeout(() => this.reloadNotulen.perform(), 500);
+    setTimeout(() => this.reloadNotulen.perform(), 1);
   }
 
   get zittingWrapper() {
