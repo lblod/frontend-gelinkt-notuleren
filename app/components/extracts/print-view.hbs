@@ -1,8 +1,10 @@
 <PrintView as |Print|>
   <Print.Header as |Header|>
-    <Header.BackLink @linkRoute="meetings.publish.uittreksels" @model={{@versionedTreatment.id}}>
-      Terug naar ondertekenen & publiceren
-    </Header.BackLink>
+    {{#if @backLinkRoute}}
+      <Header.BackLink @linkRoute={{@backLinkRoute}} @model={{@model}} @models={{@models}}>
+        Terug naar ondertekenen & publiceren
+      </Header.BackLink>
+    {{/if}}
   </Print.Header>
   <Print.Body>
 
@@ -18,11 +20,13 @@
       <p class="au-u-margin-top-small au-u-margin-bottom">Het document slaat op de situatie zoals gekend bij het
         afleveren.</p>
 
-      <div class="au-o-grid">
-        {{#each signatures as |signature|}}
-          <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
-        {{/each}}
-      </div>
+      {{#if signatures.length}}
+        <div class="au-o-grid">
+          {{#each signatures as |signature|}}
+            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
+          {{/each}}
+        </div>
+      {{/if}}
 
       <AuHr @size="large"/>
 
@@ -30,11 +34,13 @@
 
       <AuHr @size="large"/>
 
-      <div class="au-o-grid">
-        {{#each signatures as |signature|}}
-          <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
-        {{/each}}
-      </div>
+      {{#if signatures.length}}
+        <div class="au-o-grid">
+          {{#each signatures as |signature|}}
+            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
+          {{/each}}
+        </div>
+      {{/if}}
     {{/let}}
   </Print.Body>
 </PrintView>
