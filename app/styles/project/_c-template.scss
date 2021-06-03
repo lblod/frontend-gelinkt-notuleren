@@ -1,0 +1,302 @@
+/* ==================================
+   #PUBLISHED TEMPLATE
+   ================================== */
+
+.au-c-template,
+.au-c-editor-preview {
+  h1 {
+    @include au-font-size($au-heading-2);
+    font-family: $au-font-secondary;
+    font-weight: $au-light;
+    color: $au-gray-900;
+  }
+
+  h2 {
+    @include au-font-size($au-heading-3);
+    font-family: $au-font-secondary;
+    font-weight: $au-medium;
+    color: $au-gray-900;
+  }
+
+  h3 {
+    @include au-font-size($au-heading-4);
+    font-family: $au-font;
+    font-weight: $au-medium;
+    color: $au-gray-900;
+  }
+
+  h4 {
+    @include au-font-size($au-heading-5);
+    font-family: $au-font;
+    font-weight: $au-medium;
+    color: $au-gray-900;
+  }
+
+  h5,
+  h6 {
+    @include au-font-size($au-heading-6);
+    font-family: $au-font;
+    font-weight: $au-medium;
+    color: $au-gray-900;
+  }
+
+  p + * {
+    margin-top: $au-unit-tiny;
+  }
+
+  h1 + *,
+  h2 + *,
+  h3 + *,
+  h4 + *,
+  h5 + *,
+  h6 + * {
+    margin-top: $au-unit-small;
+  }
+
+  div + h1,
+  div + h2,
+  div + h3,
+  div + h4,
+  div + h5,
+  div + h6 {
+    margin-top: $au-unit;
+  }
+
+  // Labels
+  [property="besluit:geplandOpenbaar"],
+  [property="besluit:openbaar"] {
+    @include au-font-size($au-h6, $important: true);
+    color: $au-gray-600 !important;
+    text-transform: initial !important;
+    letter-spacing: 0 !important;
+  }
+
+  [typeof="besluit:BehandelingVanAgendapunt"],
+  [property="ext:behandelt"],
+  [property="besluit:heeftAgendapunt"],
+  [typeof="besluit:Agendapunt"] {
+    display: block !important;
+    position: relative;
+  }
+}
+
+.au-c-template--agenda {
+  padding-left: 0 !important;
+
+  h2 {
+    @include au-font-size($au-heading-4);
+    font-family: $au-font;
+  }
+
+  [property="besluit:Agendapunt.type"] {
+    display: none;
+  }
+}
+
+.au-c-template--treatment,
+.au-c-rdfa-publication .behandeling {
+  [property="besluit:heeftAanwezige"] {
+    display: block;
+    margin-bottom: $au-unit-small;
+  }
+}
+
+.au-c-template--decision,
+.au-c-editor-preview .besluiten {
+  padding-left: 0 !important;
+
+  h3,
+  h4 {
+    @include au-font-size($au-h4, $important: true);
+    font-family: $au-font !important;
+    font-weight: $au-medium !important;
+  }
+
+  [typeof="besluit:BehandelingVanAgendapunt"] {
+    [property="prov:generated"]:not(:last-child) {
+      margin-bottom: $au-unit-small;
+      padding-bottom: $au-unit-small;
+      border-bottom: .1rem dotted $au-gray-300;
+    }
+
+    [property="besluit:openbaar"]:after {
+      position: relative;
+      left: 0;
+      width: auto;
+    }
+
+    [property="besluit:openbaar"][content="false"]:after {
+      content: "Besloten behandeling van agendapunt";
+    }
+
+    [property="besluit:openbaar"][content="true"]:after {
+      content: "Openbare behandeling van agendapunt";
+    }
+
+    [property="besluit:openbaar"][content="false"]:before,
+    [property="besluit:openbaar"][content="true"]:before {
+      display: inline-block;
+      content: "";
+      width: 18px;
+      height: 18px;
+      background-size: 100%;
+      margin-right: .3rem;
+      vertical-align: middle;
+      position: relative;
+      bottom: .2ex;
+    }
+
+    [property="besluit:openbaar"][content="false"]:before {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSIjNjk3MTdDIiBkPSJNNC43MDcsMy4yOTMgQzQuMzE0NjIxMTEsMi45MTQwMjc3OSAzLjY5MDkxNTIyLDIuOTE5NDQ3NjMgMy4zMDUxODE0MiwzLjMwNTE4MTQyIEMyLjkxOTQ0NzYzLDMuNjkwOTE1MjIgMi45MTQwMjc3OSw0LjMxNDYyMTExIDMuMjkzLDQuNzA3IEw1LjcxNyw3LjEzMSBDNC4yODcsOC4yMDcgMy4wMzksOS42ODUgMi4xMDYsMTEuNTUzIEMxLjk2NTM3ODYxLDExLjgzNDQxMDggMS45NjUzNzg2MSwxMi4xNjU1ODkyIDIuMTA2LDEyLjQ0NyBDNC4yNjQsMTYuNzY0IDguMDk2LDE5IDEyLDE5IEMxMy41NTUsMTkgMTUuMSwxOC42NDUgMTYuNTMsMTcuOTQ1IEwxOS4yOTMsMjAuNzA3IEMxOS42ODUzNzg5LDIxLjA4NTk3MjIgMjAuMzA5MDg0OCwyMS4wODA1NTI0IDIwLjY5NDgxODYsMjAuNjk0ODE4NiBDMjEuMDgwNTUyNCwyMC4zMDkwODQ4IDIxLjA4NTk3MjIsMTkuNjg1Mzc4OSAyMC43MDcsMTkuMjkzIEw0LjcwNywzLjI5MyBaIE0xNS4wMTQsMTYuNDI4IEMxNC4wMzQsMTYuODExIDEzLjAxNCwxNyAxMiwxNyBDOS4wMzEsMTcgNS45OTgsMTUuMzggNC4xMywxMiBDNC45NDcsMTAuNTIxIDUuOTg4LDkuMzggNy4xNDgsOC41NjMgTDkuMjkyLDEwLjcwNyBDOC43NDI5NDU1OCwxMS44NTQ1NDA3IDguOTc3MzQwMDUsMTMuMjIzNTk4OCA5Ljg3Njg3MDYzLDE0LjEyMzEyOTQgQzEwLjc3NjQwMTIsMTUuMDIyNjU5OSAxMi4xNDU0NTkzLDE1LjI1NzA1NDQgMTMuMjkzLDE0LjcwOCBMMTUuMDEzLDE2LjQyOCBMMTUuMDE0LDE2LjQyOCBaIE0xOC41NTIsMTMuODk2IEMxOS4wMzUsMTMuMzQgMTkuNDc4LDEyLjcwOSAxOS44NywxMiBDMTguMDAyLDguNjIgMTQuOTcsNyAxMiw3IEMxMS44ODgsNyAxMS43NzYsNy4wMDIgMTEuNjY0LDcuMDA3IEw5Ljg3OSw1LjIyMyBDMTAuNTc2MjgyNCw1LjA3NDg2NDI4IDExLjI4NzE1NTcsNS4wMDAxMjM3MSAxMiw1IEMxNS45MDMsNSAxOS43MzYsNy4yMzYgMjEuODk0LDExLjU1MyBDMjIuMDM0NjIxNCwxMS44MzQ0MTA4IDIyLjAzNDYyMTQsMTIuMTY1NTg5MiAyMS44OTQsMTIuNDQ3IEMyMS4zODE0NDU1LDEzLjQ4MjY4OTEgMjAuNzM0MTY2NywxNC40NDYwNDE2IDE5Ljk2OSwxNS4zMTIgTDE4LjU1MiwxMy44OTYgTDE4LjU1MiwxMy44OTYgWiIvPgo8L3N2Zz4K");
+    }
+
+    [property="besluit:openbaar"][content="true"]:before {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSIjNjk3MTdDIiBkPSJNMTIsNSBDMTUuOTA0LDUgMTkuNzM2LDcuMjM2IDIxLjg5NCwxMS41NTMgQzIyLjAzNDYyMTQsMTEuODM0NDEwOCAyMi4wMzQ2MjE0LDEyLjE2NTU4OTIgMjEuODk0LDEyLjQ0NyBDMTkuNzM2LDE2Ljc2NCAxNS45MDMsMTkgMTIsMTkgQzguMDk2LDE5IDQuMjY0LDE2Ljc2NCAyLjEwNiwxMi40NDcgQzEuOTY1Mzc4NjEsMTIuMTY1NTg5MiAxLjk2NTM3ODYxLDExLjgzNDQxMDggMi4xMDYsMTEuNTUzIEM0LjI2NCw3LjIzNiA4LjA5Nyw1IDEyLDUgWiBNMTIsNyBDOS4wMyw3IDUuOTk4LDguNjIgNC4xMywxMiBDNS45OTgsMTUuMzggOS4wMzEsMTcgMTIsMTcgQzE0Ljk2OSwxNyAxOC4wMDIsMTUuMzggMTkuODcsMTIgQzE4LjAwMiw4LjYyIDE0Ljk2OSw3IDEyLDcgWiBNMTIsOSBDMTMuNjU2ODU0Miw5IDE1LDEwLjM0MzE0NTggMTUsMTIgQzE1LDEzLjY1Njg1NDIgMTMuNjU2ODU0MiwxNSAxMiwxNSBDMTAuMzQzMTQ1OCwxNSA5LDEzLjY1Njg1NDIgOSwxMiBDOSwxMC4zNDMxNDU4IDEwLjM0MzE0NTgsOSAxMiw5IFoiLz4KPC9zdmc+Cg==");
+    }
+  }
+}
+
+.au-c-template--notes,
+.au-c-rdfa-publication .notulen {
+  * + h2 {
+    margin-top: $au-unit;
+  }
+
+  [typeof="besluit:Zitting"] {
+    > [property="dc:title"] {
+      margin-bottom: $au-unit;
+    }
+  }
+
+  [property="dc:subject"] {
+    @include au-font-size($au-h6);
+    color: $au-gray-600;
+    text-transform: initial;
+    letter-spacing: 0;
+    position: relative;
+  }
+
+  .mark-highlight-manual {
+    background-color: transparent;
+  }
+
+  [property="ext:agendapuntenTable"] [property="besluit:heeftAgendapunt"] {
+    display: block;
+  }
+
+  [typeof="besluit:Artikel"] {
+    [property="eli:number"] {
+      display: block;
+    }
+  }
+
+  // Mandatees: present -> Deprecated, present for old data
+  [property="ext:aanwezigenTable"] {
+    span {
+      display: inline-block;
+    }
+
+    [property="besluit:heeftAanwezige"] {
+      display: inline-block;
+    }
+
+    [property="besluit:heeftAanwezige"] + [property="besluit:heeftAanwezige"]:before,
+    p > span + span:before {
+      content: ",";
+    }
+
+    [property="besluit:heeftAanwezige"]:before,
+    p > span:before {
+      margin-left: -.4ex;
+    }
+  }
+}
+
+// List
+.au-c-template-list {
+  margin-left: 0 !important;
+}
+
+.au-c-template-list__item {
+  margin-top: $au-unit-small !important;
+  padding-top: $au-unit-small !important;
+  border-top: .1rem dotted $au-gray-300;
+  color: $au-gray-600;
+}
+
+.au-c-template-list-container {
+  & + p,
+  p + & {
+    margin-top: $au-unit-small;
+  }
+
+  > *:first-child:after {
+    content: ":";
+    margin-left: -.2em;
+  }
+
+  > * {
+    display: inline;
+  }
+
+  * + * {
+    margin-top: 0;
+  }
+}
+
+.au-c-template-list-inline {
+  list-style: none;
+  margin-left: 0 !important;
+}
+
+.au-c-template-list-inline__item {
+  display: inline;
+  margin-right: $au-unit-tiny;
+
+  &:after {
+    content: ",";
+    margin-left: -.2em;
+  }
+
+  &:last-child:after {
+    content: ""
+  }
+}
+
+.au-c-template-content {
+  margin-bottom: $au-unit;
+}
+
+// Public and private labels
+.au-c-template-public,
+.au-c-template-private {
+  @include au-font-size($au-h6);
+  color: $au-gray-600;
+  text-transform: initial;
+  letter-spacing: 0;
+  position: relative;
+
+  &:before {
+    display: inline-block;
+    content: "";
+    width: 18px;
+    height: 18px;
+    background-size: 100%;
+    margin-right: .3rem;
+    vertical-align: middle;
+    position: relative;
+    bottom: .2ex;
+  }
+}
+
+.au-c-template-public {
+  &:before {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSIjNjk3MTdDIiBkPSJNMTIsNSBDMTUuOTA0LDUgMTkuNzM2LDcuMjM2IDIxLjg5NCwxMS41NTMgQzIyLjAzNDYyMTQsMTEuODM0NDEwOCAyMi4wMzQ2MjE0LDEyLjE2NTU4OTIgMjEuODk0LDEyLjQ0NyBDMTkuNzM2LDE2Ljc2NCAxNS45MDMsMTkgMTIsMTkgQzguMDk2LDE5IDQuMjY0LDE2Ljc2NCAyLjEwNiwxMi40NDcgQzEuOTY1Mzc4NjEsMTIuMTY1NTg5MiAxLjk2NTM3ODYxLDExLjgzNDQxMDggMi4xMDYsMTEuNTUzIEM0LjI2NCw3LjIzNiA4LjA5Nyw1IDEyLDUgWiBNMTIsNyBDOS4wMyw3IDUuOTk4LDguNjIgNC4xMywxMiBDNS45OTgsMTUuMzggOS4wMzEsMTcgMTIsMTcgQzE0Ljk2OSwxNyAxOC4wMDIsMTUuMzggMTkuODcsMTIgQzE4LjAwMiw4LjYyIDE0Ljk2OSw3IDEyLDcgWiBNMTIsOSBDMTMuNjU2ODU0Miw5IDE1LDEwLjM0MzE0NTggMTUsMTIgQzE1LDEzLjY1Njg1NDIgMTMuNjU2ODU0MiwxNSAxMiwxNSBDMTAuMzQzMTQ1OCwxNSA5LDEzLjY1Njg1NDIgOSwxMiBDOSwxMC4zNDMxNDU4IDEwLjM0MzE0NTgsOSAxMiw5IFoiLz4KPC9zdmc+Cg==");
+  }
+}
+
+.au-c-template-private {
+  &:before {
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSIjNjk3MTdDIiBkPSJNNC43MDcsMy4yOTMgQzQuMzE0NjIxMTEsMi45MTQwMjc3OSAzLjY5MDkxNTIyLDIuOTE5NDQ3NjMgMy4zMDUxODE0MiwzLjMwNTE4MTQyIEMyLjkxOTQ0NzYzLDMuNjkwOTE1MjIgMi45MTQwMjc3OSw0LjMxNDYyMTExIDMuMjkzLDQuNzA3IEw1LjcxNyw3LjEzMSBDNC4yODcsOC4yMDcgMy4wMzksOS42ODUgMi4xMDYsMTEuNTUzIEMxLjk2NTM3ODYxLDExLjgzNDQxMDggMS45NjUzNzg2MSwxMi4xNjU1ODkyIDIuMTA2LDEyLjQ0NyBDNC4yNjQsMTYuNzY0IDguMDk2LDE5IDEyLDE5IEMxMy41NTUsMTkgMTUuMSwxOC42NDUgMTYuNTMsMTcuOTQ1IEwxOS4yOTMsMjAuNzA3IEMxOS42ODUzNzg5LDIxLjA4NTk3MjIgMjAuMzA5MDg0OCwyMS4wODA1NTI0IDIwLjY5NDgxODYsMjAuNjk0ODE4NiBDMjEuMDgwNTUyNCwyMC4zMDkwODQ4IDIxLjA4NTk3MjIsMTkuNjg1Mzc4OSAyMC43MDcsMTkuMjkzIEw0LjcwNywzLjI5MyBaIE0xNS4wMTQsMTYuNDI4IEMxNC4wMzQsMTYuODExIDEzLjAxNCwxNyAxMiwxNyBDOS4wMzEsMTcgNS45OTgsMTUuMzggNC4xMywxMiBDNC45NDcsMTAuNTIxIDUuOTg4LDkuMzggNy4xNDgsOC41NjMgTDkuMjkyLDEwLjcwNyBDOC43NDI5NDU1OCwxMS44NTQ1NDA3IDguOTc3MzQwMDUsMTMuMjIzNTk4OCA5Ljg3Njg3MDYzLDE0LjEyMzEyOTQgQzEwLjc3NjQwMTIsMTUuMDIyNjU5OSAxMi4xNDU0NTkzLDE1LjI1NzA1NDQgMTMuMjkzLDE0LjcwOCBMMTUuMDEzLDE2LjQyOCBMMTUuMDE0LDE2LjQyOCBaIE0xOC41NTIsMTMuODk2IEMxOS4wMzUsMTMuMzQgMTkuNDc4LDEyLjcwOSAxOS44NywxMiBDMTguMDAyLDguNjIgMTQuOTcsNyAxMiw3IEMxMS44ODgsNyAxMS43NzYsNy4wMDIgMTEuNjY0LDcuMDA3IEw5Ljg3OSw1LjIyMyBDMTAuNTc2MjgyNCw1LjA3NDg2NDI4IDExLjI4NzE1NTcsNS4wMDAxMjM3MSAxMiw1IEMxNS45MDMsNSAxOS43MzYsNy4yMzYgMjEuODk0LDExLjU1MyBDMjIuMDM0NjIxNCwxMS44MzQ0MTA4IDIyLjAzNDYyMTQsMTIuMTY1NTg5MiAyMS44OTQsMTIuNDQ3IEMyMS4zODE0NDU1LDEzLjQ4MjY4OTEgMjAuNzM0MTY2NywxNC40NDYwNDE2IDE5Ljk2OSwxNS4zMTIgTDE4LjU1MiwxMy44OTYgTDE4LjU1MiwxMy44OTYgWiIvPgo8L3N2Zz4K");
+  }
+}
