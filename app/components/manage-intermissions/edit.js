@@ -73,7 +73,7 @@ export default class manageIntermissionsEditComponent extends Component {
     this.startedAt = '';
     this.endedAt = '';
     this.comment = '';
-    this.locationToBeSet=null;
+    this.locationToBeSet = null;
     this.args.onClose();
   }
 
