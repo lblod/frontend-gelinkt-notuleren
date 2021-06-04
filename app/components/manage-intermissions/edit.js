@@ -92,40 +92,40 @@ export default class manageIntermissionsEditComponent extends Component {
   ];
 
   @tracked locationToBeSet;
-  
-  get selectedLocation(){
-    if(this.locationToBeSet){
+
+  get selectedLocation() {
+    if (this.locationToBeSet) {
       return this.locationToBeSet;
-    }else{
-      return this.locationOptions.find(e=>e.code==this.args.intermissionToEdit.position);
+    } else {
+      return this.locationOptions.find(e => e.code == this.args.intermissionToEdit.position);
     }
   }
-  set selectedLocation(value){
-    this.locationToBeSet=value;
-    if(this.selectedAp.content){
-      this.args.intermissionToEdit.position=this.selectedLocation.code;
+  set selectedLocation(value) {
+    this.locationToBeSet = value;
+    if (this.selectedAp.content) {
+      this.args.intermissionToEdit.position = this.selectedLocation.code;
     }
-    if(!value){
-      this.locationToBeSet=null;
-      this.args.intermissionToEdit.position=null;
-      this.selectedAp=null;
+    if (!value) {
+      this.locationToBeSet = null;
+      this.args.intermissionToEdit.position = null;
+      this.selectedAp = null;
     }
   }
-  
-  get selectedAp(){
+
+  get selectedAp() {
     return this.args.intermissionToEdit.onderwerp;
   }
-  set selectedAp(value){
-    this.args.intermissionToEdit.position=this.selectedLocation.code;
-    this.args.intermissionToEdit.onderwerp=value;
+  set selectedAp(value) {
+    this.args.intermissionToEdit.position = this.selectedLocation.code;
+    this.args.intermissionToEdit.onderwerp = value;
   }
 
-  @action selectAp(value){
-    this.selectedAp=value;
+  @action selectAp(value) {
+    this.selectedAp = value;
   }
 
-  @action selectLocation(value){
-    this.selectedLocation=value;
+  @action selectLocation(value) {
+    this.selectedLocation = value;
   }
 
 }

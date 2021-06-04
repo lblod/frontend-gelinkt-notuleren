@@ -42,12 +42,12 @@
                   {{t "manageIntermissions.duringAp"}}
                 {{/if}}
                 {{#if (eq intermission.position "before")}}
-                  {{t "manageIntermissions.duringAp"}}
+                  {{t "manageIntermissions.beforeAp"}}
                 {{/if}}
                 {{#if (eq intermission.position "after")}}
-                  {{t "manageIntermissions.duringAp"}}
+                  {{t "manageIntermissions.afterAp"}}
                 {{/if}}
-                {{intermission.onderwerp.titel}}
+                <strong>{{intermission.onderwerp.titel}}</strong>
               {{/if}}
             </td>
             <td>{{intermission.comment}}</td>
