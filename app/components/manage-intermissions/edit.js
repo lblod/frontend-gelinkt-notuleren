@@ -86,11 +86,11 @@ export default class manageIntermissionsEditComponent extends Component {
   }
 
   //position stuff
-  @tracked locationOptions = [
+  get locationOptions(){return [
     { code: 'during', name: this.intl.t('manageIntermissions.duringAp') },
     { code: 'before', name: this.intl.t('manageIntermissions.beforeAp') },
-    { code: 'after', name: this.intl.t('manageIntermissions.afterAp') }
-  ];
+    { code: 'after', name: this.intl.t('manageIntermissions.afterAp') }]
+  };
 
   @tracked locationToBeSet;
 
