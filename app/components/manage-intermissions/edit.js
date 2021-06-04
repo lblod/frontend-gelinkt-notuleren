@@ -98,7 +98,7 @@ export default class manageIntermissionsEditComponent extends Component {
     if (this.locationToBeSet) {
       return this.locationToBeSet;
     } else {
-      return this.locationOptions.find(e => e.code == this.args.intermissionToEdit.position);
+      return this.locationOptions.find(e => e.code === this.args.intermissionToEdit.position);
     }
   }
   set selectedLocation(value) {
