@@ -16,6 +16,43 @@
         <DateTimePicker @onChange={{fn this.changeDate 'endedAt'}} @value={{this.endedAtExternal}}/>
       </div>
       <div>
+        {{#if @zitting.agendapunten}}
+          <AuLabel>{{t "manageIntermissions.position"}}</AuLabel>
+          <div class="au-o-grid au-o-grid--tiny">
+            <div class="au-o-grid__item au-u-1-2">
+              <PowerSelect
+                @renderInPlace={{true}}
+                @placeholder={{t "manageAgendaZittingModalMove.positionSelectPlaceholder"}}
+                @options={{this.locationOptions}}
+                @verticalPosition="above"
+                @selected={{this.selectedLocation}}
+                @onChange={{this.selectLocation}}
+                @allowClear={{true}}
+                as |location|>
+                {{location.name}}
+              </PowerSelect>
+            </div>
+            <div class="au-o-grid__item au-u-1-2">
+              {{#if this.selectedLocation}}
+                <PowerSelect
+                  @renderInPlace={{true}}
+                  @placeholder={{t "manageAgendaZittingModalMove.agendapuntSelectPlaceholder"}}
+                  @searchEnabled={{true}}
+                  @searchPlaceholder={{t "manageAgendaZittingModalMove.searchPlaceholder"}}
+                  @verticalPosition="above"
+                  @options={{@zitting.agendapunten}}
+                  @searchField="titel"
+                  @selected={{this.selectedAp}}
+                  @onChange={{this.selectAp}}
+                  as |a|>
+                  {{a.titel}}
+                </PowerSelect>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div>
         <AuLabel for="intermissionComment">{{t "manageIntermissions.commentLabel"}} <AuPill>Optioneel</AuPill></AuLabel>
         <AuTextarea id="intermissionComment" @value={{this.commentExternal}} @width="block"></AuTextarea>
       </div>

@@ -11,7 +11,10 @@
           {{t "manageIntermissions.interruptionEndLabel"}}
         </th>
         <th>
-          {{t "manageIntermissions.commentLabel"}}
+          {{t "manageIntermissions.position"}}
+        </th>
+        <th>
+          <strong>{{t "manageIntermissions.commentLabel"}}</strong>
         </th>
         <th class="au-u-table-right">
           {{#unless @readOnly}}
@@ -33,6 +36,20 @@
           <tr>
             <td>{{moment-format intermission.startedAt "DD/MM/YYYY hh:mm"}}</td>
             <td>{{moment-format intermission.endedAt "DD/MM/YYYY hh:mm"}}</td>
+            <td>
+              {{#if intermission.position}}
+                {{#if (eq intermission.position "during")}}
+                  {{t "manageIntermissions.duringAp"}}
+                {{/if}}
+                {{#if (eq intermission.position "before")}}
+                  {{t "manageIntermissions.duringAp"}}
+                {{/if}}
+                {{#if (eq intermission.position "after")}}
+                  {{t "manageIntermissions.duringAp"}}
+                {{/if}}
+                {{intermission.onderwerp.titel}}
+              {{/if}}
+            </td>
             <td>{{intermission.comment}}</td>
             <td class="au-u-table-right">
               {{#unless @readOnly}}
