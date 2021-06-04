@@ -304,9 +304,9 @@ manageIntermissions:
   checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   deleteButton: Verwijder onderbreking
   retainButton: Behoud onderbreking
-  beforeAp: "Voor:"
-  duringAp: "Tijdens:"
-  afterAp: "Na:"
+  beforeAp: "Voor"
+  duringAp: "Tijdens"
+  afterAp: "Na"
   position: "Plaats"
 rdfaEditorContainer:
   defaultBusyText: Bezig met verwerken

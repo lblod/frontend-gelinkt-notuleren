@@ -9,6 +9,7 @@ export default class manageIntermissionsEditComponent extends Component {
   @tracked endedAt;
   @tracked comment;
   @service store;
+  @service intl;
 
   constructor(...args){
     super(...args);
@@ -86,9 +87,9 @@ export default class manageIntermissionsEditComponent extends Component {
 
   //position stuff
   @tracked locationOptions = [
-    { code: 'during', name: 'Tijdens agendapunt' },
-    { code: 'before', name: 'Voor agendapunt' },
-    { code: 'after', name: 'Na agendapunt' }
+    { code: 'during', name: this.intl.t('manageIntermissions.duringAp') },
+    { code: 'before', name: this.intl.t('manageIntermissions.beforeAp') },
+    { code: 'after', name: this.intl.t('manageIntermissions.afterAp') }
   ];
 
   @tracked locationToBeSet;
