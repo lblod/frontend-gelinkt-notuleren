@@ -47,7 +47,9 @@
                 {{#if (eq intermission.position "after")}}
                   {{t "manageIntermissions.afterAp"}}: 
                 {{/if}}
-                <strong>{{intermission.onderwerp.titel}}</strong>
+                <a href="#behandeling-{{intermission.onderwerp.behandeling.id}}" class="au-c-link au-c-link--secondary">
+                  {{intermission.onderwerp.titel}}
+                </a>
               {{/if}}
             </td>
             <td>{{intermission.comment}}</td>
