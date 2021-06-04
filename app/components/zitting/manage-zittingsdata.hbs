@@ -1,31 +1,48 @@
-<div {{did-insert this.fetchBestuursorgaan}}>
-  {{#if this.showModal}}
+<div class="au-c-meeting-chrome-card au-u-margin-bottom-large">
+  <ul class="au-c-list-divider">
+    <li class="au-c-list-divider__item">
+      {{t "manageZittingsData.bestuursorganLabel"}} <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
+    </li>
+    <li class="au-c-list-divider__item">
+      {{t "manageZittingsData.geplandeStartLabel"}} <strong>{{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}</strong>
+    </li>
+    <li class="au-c-list-divider__item">
+      {{t "manageZittingsData.opLocatieLabel"}} <strong>{{this.opLocatie}}</strong>
+    </li>
+    <li class="au-c-list-divider__item">
+      {{t "manageZittingsData.gestartOpTijdstipLabel"}} <strong>{{moment-format this.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+    </li>
+    <li class="au-c-list-divider__item">
+      {{t "manageZittingsData.geeindigdOpTijdstipLabel"}} <strong>{{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+    </li>
+  </ul>
+  {{#unless @readOnly}}
+    <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">{{t "manageZittingsData.openModalButton"}}</AuButton>
+  {{/unless}}
+</div>
+
+{{#if this.showModal}}
   <AuModal
     @modalTitle={{t "manageZittingsData.modalTitle"}}
     @modalOpen={{this.showModal}}
-    @closeModal={{fn (mut this.showModal) false}} as |Modal| >
+    @closeModal={{this.cancel}} as |Modal| >
     <Modal.Body>
       <div class="au-o-flow">
         <div>
           <AuLabel>{{t "manageZittingsData.bestuursorganLabel"}}</AuLabel>
-          <PowerSelect
-            @placeholder={{t "manageZittingsData.selectPlaceholder"}}
-            @selected={{this.bestuursorgaan}}
-            @options={{this.bestuursorgaanOptions}}
-            @onChange={{this.changeSelect}}
-            as |bestuursorgaan|>
-              {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
-              (periode: {{moment-format bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
-              {{#if bestuursorgaan.bindingEinde}}{{moment-format bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
-          </PowerSelect>
+          {{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}
+          (periode: {{moment-format this.bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
+          {{#if this.bestuursorgaan.bindingEinde}}{{moment-format this.bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
+        </div>
+        <div>
+          {{#let (unique-id) as |id|}}
+            <AuLabel for={{id}}>{{t "manageZittingsData.opLocatieLabel"}}</AuLabel>
+            <AuInput type='text' @value={{mut this.opLocatie}} @width="block" id={{id}} />
+          {{/let}}
         </div>
         <div>
           <AuLabel>{{t "manageZittingsData.geplandeStartLabel"}}</AuLabel>
           <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
-        </div>
-        <div>
-          <AuLabel>{{t "manageZittingsData.opLocatieLabel"}}</AuLabel>
-          <AuInput type='text' @value={{mut this.opLocatie}} />
         </div>
         <div>
           <AuLabel>{{t "manageZittingsData.gestartOpTijdstipLabel"}}</AuLabel>
@@ -48,28 +65,4 @@
       </AuButtonGroup>
     </Modal.Footer>
   </AuModal>
-  {{else}}
-  <div class="au-c-meeting-chrome-card au-u-margin-bottom-large">
-    <ul class="au-c-list-divider">
-      <li class="au-c-list-divider__item">
-        {{t "manageZittingsData.bestuursorganLabel"}} <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
-      </li>
-      <li class="au-c-list-divider__item">
-        {{t "manageZittingsData.geplandeStartLabel"}} <strong>{{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}</strong>
-      </li>
-      <li class="au-c-list-divider__item">
-        {{t "manageZittingsData.opLocatieLabel"}} <strong>{{this.opLocatie}}</strong>
-      </li>
-      <li class="au-c-list-divider__item">
-        {{t "manageZittingsData.gestartOpTijdstipLabel"}} <strong>{{moment-format this.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
-      </li>
-      <li class="au-c-list-divider__item">
-        {{t "manageZittingsData.geeindigdOpTijdstipLabel"}} <strong>{{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
-      </li>
-    </ul>
-    {{#unless @readOnly}}
-      <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">{{t "manageZittingsData.openModalButton"}}</AuButton>
-    {{/unless}}
-  </div>
-  {{/if}}
-</div>
+{{/if}}

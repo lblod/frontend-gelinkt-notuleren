@@ -7,209 +7,36 @@
   padding: $au-unit-small;
   border: .1rem solid $au-gray-200;
   background-color: $au-gray-100;
+
+  h5 {
+    font-weight: $au-medium;
+  }
 }
 
 .au-c-editor-preview,
 .au-c-rdfa-publication {
-  .besluiten,
-  .behandeling,
-  .agendapunten,
-  .notulen,
-  [property="ext:agendapuntenTable"] {
-    padding-left: $au-unit;
-  }
-
   // Labels
-  [property="dc:subject"],
   [property="besluit:geplandOpenbaar"],
   [property="besluit:openbaar"] {
-    color: $au-gray-600 !important;
+    @include au-font-size($au-h6);
+    color: $au-gray-600;
+    text-transform: initial;
+    letter-spacing: 0;
   }
 
+  // Hide webuniversum icons
   [typeof="besluit:BehandelingVanAgendapunt"],
   [property="ext:behandelt"],
   [property="besluit:heeftAgendapunt"],
   [typeof="besluit:Agendapunt"] {
-    display: block !important;
-    position: relative;
-
     [property="besluit:geplandOpenbaar"] i,
     [property="besluit:geplandOpenbaar"] em,
     [property="besluit:openbaar"] i,
     [property="besluit:openbaar"] em {
-      font-size: 1.6rem;
-      position: absolute;
-      left: -$au-unit;
-      top: .3rem;
-      color: currentColor;
-      opacity: .7;
-      font-style: normal;
-    }
-
-    [property="besluit:geplandOpenbaar"][content="false"] i,
-    [property="besluit:openbaar"][content="false"] i {
-      color: $au-yellow-600;
+      display: none;
     }
   }
 }
-
-/* Style agendapunten
- ========================================================================== */
-.steps, // @TODO: Remove class after cleanup
-.au-c-editor-preview,
-.au-c-rdfa-publication {
-  [typeof="besluit:Agendapunt"] {
-    display: block;
-    margin-bottom: $au-unit-small;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  [typeof="besluit:Agendapunt"] [property="dc:title"] {
-    @include au-font-size($au-h5);
-    display: block;
-    font-weight: $au-medium;
-    margin-bottom: 0;
-  }
-}
-
-
-/* Style besluitenlijst
- ========================================================================== */
-.steps,
-.au-c-editor-preview,
-.au-c-rdfa-publication {
-  .besluiten {
-    h3,
-    h4 {
-      @include au-font-size($au-h5, $important: true);
-      font-weight: $au-medium !important;
-      font-family: $au-font !important;
-    }
-
-    [property="prov:generated"],
-    [property="besluit:heeftStemming"] {
-      margin-bottom: $au-unit-small;
-    }
-
-    [typeof="besluit:BehandelingVanAgendapunt"] {
-      [property="besluit:openbaar"]:after {
-        position: relative;
-        left: 0;
-        width: auto;
-      }
-
-      [property="besluit:openbaar"][content="false"]:after {
-        content: "Besloten behandeling van agendapunt";
-      }
-
-      [property="besluit:openbaar"][content="true"]:after {
-        content: "Openbare behandeling van agendapunt";
-      }
-    }
-
-    // Temp fix for the label positioning
-    .annotation--agendapunt--open__icon {
-      display: block;
-      position: relative;
-      left: 0;
-      color: $au-gray-600;
-    }
-  }
-}
-
-/* Style uittreksels
- ========================================================================== */
-.steps,
-.au-c-editor-preview,
-.au-c-rdfa-publication {
-  .behandeling {
-    [property="besluit:heeftAanwezige"] {
-      display: block;
-      margin-bottom: $au-unit-small;
-    }
-  }
-}
-
-
-
-/* Style notulen
- ========================================================================== */
-.steps [typeof="besluit:Zitting"],
-.au-c-editor-preview,
-.au-c-rdfa-publication {
-  .notulen {
-    margin-bottom: $au-unit;
-
-    h1 {
-      margin-top: $au-unit-small;
-    }
-
-    h2 {
-      @include au-font-size($au-h3, $important: true);
-      margin-top: $au-unit;
-      font-weight: $au-medium;
-      margin-bottom: $au-unit-small;
-    }
-
-    h3,
-    h4 {
-      @include au-font-size($au-h5, $important: true);
-      font-weight: $au-medium !important;
-      font-family: $au-font !important;
-    }
-  }
-
-  [typeof="besluit:Zitting"] {
-    > [property="dc:title"] {
-      margin-bottom: $au-unit;
-    }
-  }
-
-  .mark-highlight-manual {
-    background-color: transparent;
-  }
-
-  [property="ext:agendapuntenTable"] [property="besluit:heeftAgendapunt"] {
-    display: block;
-  }
-
-  [typeof="besluit:Artikel"] {
-    [property="eli:number"] {
-      display: block;
-    }
-  }
-}
-
-// Quickfix for mandatee lists
-.au-c-editor-preview {
-  .behandeling,
-  .notulen {
-    // Mandatees: present
-    [property="ext:aanwezigenTable"] {
-      span {
-        display: inline-block;
-      }
-
-      [property="besluit:heeftAanwezige"] {
-        display: inline-block;
-      }
-
-      [property="besluit:heeftAanwezige"] + [property="besluit:heeftAanwezige"]:before,
-      p > span + span:before {
-        content: ",";
-      }
-
-      [property="besluit:heeftAanwezige"]:before,
-      p > span:before {
-        margin-left: -.4ex;
-      }
-    }
-  }
-}
-
 
 /* Notulen treatment (public/private)
  ========================================================================== */
@@ -221,7 +48,7 @@
 
   .behandeling {
     margin-top: $au-unit;
-    padding-left: $au-unit*2;
+    padding-left: $au-unit;
     transition: all 200ms;
     padding-right: 11.4rem;
 
@@ -306,8 +133,8 @@
 
 /* Behandeling overview
  ========================================================================== */
-.behandeling-preview,
-.steps {
+
+.behandeling-preview {
   div[property^="ext:insert"],
   div[property^="ext:insert"],
   [data-flagged-remove="complete"],
@@ -337,7 +164,7 @@
 /* Style publishing animation
  ========================================================================== */
 
- .au-c-scanner {
+.au-c-scanner {
   position: absolute !important;
   top: 0;
   left: 0;
@@ -420,241 +247,3 @@
     content: "Warning: You must fill this information";
   }
 }
-
-/* Behandeling preview publicatie
- ========================================================================== */
-
-.behandeling-preview {
-
-  // [data-flagged-remove="complete"]:before,
-  // div[property^="ext:insert"] {
-  //   background-color: $au-yellow-300;
-  // }
-
-  // &.editor__paper span.mark-highlight-manual {
-  //   background-color: $au-white;
-  // }
-
-  // * {
-  //   pointer-events: none;
-  // }
-
-  // .behandeling-preview--niet-publiek > {
-
-  //   div[property^="ext:insert"] {
-  //     display: none;
-  //   }
-
-  //   * {
-  //     display: none;
-  //   }
-
-  //   [property="besluit:gebeurtNa"] + span,
-  //   [property="besluit:openbaar"] {
-  //     display: inline-block;
-  //     margin-bottom: 1rem;
-  //   }
-
-  //   [property="prov:generated"] {
-  //     display: block;
-  //   }
-
-  //   [property="prov:generated"] > {
-
-  //     * {
-  //       display: none;
-  //     }
-
-  //     [property="dc:subject"],
-  //     [property="eli:title"],
-  //     [property="eli:description"] {
-  //       display: block;
-  //       margin-bottom: 1rem;
-  //     }
-
-  //   }
-  // }
-}
-
-
-/* Remove this styling once new flow has been incorporated  (deprecated - delete after testing)
- ========================================================================== */
-
-// .published-example {
-//   position: relative;
-//   background-color: $au-white;
-//   padding: 4rem 4rem 4rem 6rem;
-//   box-shadow: 0 2px 6px 0 $blue-gray-light;
-//   margin-bottom: 4rem;
-
-//   .mark-highlight-manual {
-//     background-color: transparent;
-//     font-weight: inherit;
-//   }
-// }
-
-// .published-example--agenda {
-//   &:after {
-//     content: "Geen inhoud te publiceren. Voeg een sjabloon in, bewerk en sla op.";
-//     display: block;
-//     position: absolute;
-//     top: 4rem;
-//     left: 6rem;
-//     right: 4rem;
-//     font-size: 1.6rem;
-//     color: $au-gray-600;
-//     z-index: 1011;
-//   }
-
-//   [typeof="besluit:Zitting"] > * {
-//     display: none;
-//     position: relative;
-//     z-index: 1012;
-//   }
-
-//   > [typeof="besluit:Zitting"] {
-//     > [property="besluit:heeftAgenda"] {
-//       display: block !important;
-//       background-color: $au-white;
-//       position: relative;
-
-//       [property="besluit:geplandOpenbaar"] {
-//         color: $au-gray-600;
-//         font-size: 1.4rem;
-//       }
-
-//       [property="besluit:geplandOpenbaar"] ~ [property="dc:title"] {
-//         display: block;
-//         margin-bottom: 2rem;
-//         line-height: 1.4;
-//       }
-
-//       [property="besluit:geplandOpenbaar"] + span,
-//       [property="besluit:geplandOpenbaar"]:after,
-//       [property="dc:subject"] {
-//         display: inline-block;
-//         // color: rgba($au-gray-600, 0.7);
-//         font-size: 1.4rem;
-//         text-transform: uppercase;
-//         letter-spacing: 1px;
-//         font-weight: 500;
-//       }
-
-//       [property="besluit:geplandOpenbaar"]:after {
-//         content: "Openbaar agendapunt:";
-//         margin-left: 0.7rem;
-//       }
-
-//       h3,
-//       h4,
-//       [property="besluit:geplandBesloten"] {
-//         display: none;
-//       }
-
-//       [property="besluit:geplandBesloten"] ~ * {
-//         display: none !important;
-//       }
-//     }
-//   }
-// }
-
-// .published-example--besluitenlijst {
-
-//   [typeof="besluit:Zitting"] > * {
-//     display: none;
-//   }
-
-//   > [typeof="besluit:Zitting"] {
-//     > [typeof="besluit:BehandelingVanAgendapunt"] {
-//       display: block;
-//     }
-//   }
-
-//   > [typeof="besluit:Zitting"] {
-
-//     > [typeof="besluit:BehandelingVanAgendapunt"] {
-
-//       > br,
-//       > h3,
-//       > h4,
-//       > p,
-//       > [property="ext:insertAanwezigenText"],
-//       [data-editor-highlight="true"] {
-//         display: none;
-//       }
-
-//       > [property="besluit:openbaar"] {
-//         color: $au-gray-600;
-//         font-size: 1.4rem;
-//       }
-
-//       > [property="besluit:openbaar"]:after,
-//       > [property="dc:subject"] {
-//         display: inline-block;
-//         // color: rgba($au-gray-600, 0.7);
-//         font-size: 1.4rem;
-//         text-transform: uppercase;
-//         letter-spacing: 1px;
-//         font-weight: 500;
-//       }
-
-//       > [property="besluit:openbaar"]:after {
-//         content: "Openbaar agendapunt:";
-//         margin-left: 0.7rem;
-//       }
-
-//       > [property="dc:subject"] {
-//         margin-bottom: 1rem;
-//       }
-
-//       [typeof^="besluit:Besluit"] > * {
-//         display: none;
-//       }
-
-//       [typeof^="besluit:Besluit"] > [property="eli:title"] {
-//         display: block;
-//         margin-bottom: 1rem;
-//       }
-
-//       [typeof^="besluit:Besluit"] > [property="eli:description"] {
-//         display: block;
-//         padding-bottom: 2rem;
-//         margin-bottom: 3rem;
-//         border-bottom: 1px solid $au-gray-100;
-//       }
-//     }
-//   }
-// }
-
-// .published-example--notulen {
-
-//   [property="besluit:geplandOpenbaar"],
-//   [property="besluit:openbaar"] {
-//     color: $au-gray-600;
-//     font-size: 1.4rem;
-//   }
-
-//   [property="besluit:geplandOpenbaar"] ~ [property="dc:title"] {
-//     display: block;
-//     margin-bottom: 2rem;
-//     line-height: 1.4;
-//   }
-
-//   [property="besluit:geplandOpenbaar"] + span,
-//   [property="besluit:geplandOpenbaar"]:after,
-//   [property="besluit:openbaar"]:after,
-//   [property="dc:subject"] {
-//     display: inline-block;
-//     // color: rgba($au-gray-600, 0.7);
-//     font-size: 1.4rem;
-//     text-transform: uppercase;
-//     letter-spacing: 1px;
-//     font-weight: 500;
-//   }
-
-//   [property="besluit:geplandOpenbaar"]:after,
-//   [property="besluit:openbaar"]:after {
-//     content: "Openbaar agendapunt:";
-//     margin-left: 0.7rem;
-//   }
-// }

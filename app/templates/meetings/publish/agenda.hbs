@@ -1,26 +1,25 @@
 <div class="au-o-box">
   {{#if this.initializeAgendas.isIdle}}
-  <ul>
-    <Signatures::Agenda::TimelineStep
-      @name="ontwerpagenda"
-      @agenda={{this.ontwerpAgenda}}
-      @signing={{perform this.createSignedResource "ontwerpagenda"}}
-      @publish={{perform this.createPublishedResource "ontwerpagenda"}}
-    />
+    <ul>
+      <Signatures::Agenda::TimelineStep
+        @name="ontwerpagenda"
+        @agenda={{this.ontwerpAgenda}}
+        @signing={{perform this.createSignedResource this.kindGepland}}
+        @publish={{perform this.createPublishedResource this.kindGepland}}
+      />
+      <Signatures::Agenda::TimelineStep
+        @name="aanvullende agenda"
+        @agenda={{this.aanvullendeAgenda}}
+        @signing={{perform this.createSignedResource this.kindAanvullend}}
+        @publish={{perform this.createPublishedResource this.kindAanvullend}}
+      />
 
-    <Signatures::Agenda::TimelineStep
-      @name="aanvullende agenda"
-      @agenda={{this.aanvullendeAgenda}}
-      @signing={{perform this.createSignedResource "aanvullendeagenda"}}
-      @publish={{perform this.createPublishedResource "aanvullendeagenda"}}
-    />
-
-    <Signatures::Agenda::TimelineStep
-      @name="spoedeisende agenda"
-      @agenda={{this.spoedeisendeAgenda}}
-      @signing={{perform this.createSignedResource "spoedeisendeagenda"}}
-      @publish={{perform this.createPublishedResource "spoedeisendeagenda"}}
-    />
+      <Signatures::Agenda::TimelineStep
+        @name="spoedeisende agenda"
+        @agenda={{this.spoedeisendeAgenda}}
+        @signing={{perform this.createSignedResource this.kindSpoedeisend}}
+        @publish={{perform this.createPublishedResource this.kindSpoedeisend}}
+      />
   </ul>
   {{else}}
     <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from "@ember/object";
 import { timeout } from 'ember-concurrency';
-import {task} from 'ember-concurrency-decorators';
+import {task} from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 

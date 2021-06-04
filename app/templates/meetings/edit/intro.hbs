@@ -1,0 +1,33 @@
+<AuModal @modalOpen={{true}}
+         @size="fullscreen"
+         @modalTitle={{t "meetingForm.fourthSectionTitle"}}
+         @closeModal={{this.closeModal}}
+         class="au-c-modal--editor"
+         as |Modal|>
+  <Modal.Body>
+    <ZittingTextDocumentContainer
+            @onEditorInit={{this.initEditor}}
+            @saving={{this.saveTextTask.isRunning}}
+            @type="ext:intro"
+            @zitting={{@model}}/>
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton {{on "click" (perform this.saveTextTask)}}
+              @disabled={{this.saveTextTask.isRunning}}>
+        {{t "meetings.edit.intro.save"}}
+      </AuButton>
+      <AuButton @disabled={{this.saveTextTask.isRunning}} {{on "click" this.saveAndQuit}}>
+        {{t "meetings.edit.intro.saveAndQuit"}}
+      </AuButton>
+    </AuButtonGroup>
+    <AuButtonGroup>
+      <AuButton @skin="secondary"
+                @disabled={{this.saveTextTask.isRunning}}
+        {{on "click" this.closeModal}}>
+        {{t "meetings.edit.intro.cancel"}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>
+<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "meetings.edit.intro.confirmQuitWithoutSaving"}}/>

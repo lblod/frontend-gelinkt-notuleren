@@ -1,7 +1,7 @@
 import Component from "@glimmer/component";
 import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
-import { task } from "ember-concurrency-decorators";
+import { task } from "ember-concurrency";
 import { inject as service } from "@ember/service";
 import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 
@@ -134,6 +134,14 @@ export default class MeetingForm extends Component {
   @action
   goToPublish() {
     this.router.transitionTo("meetings.publish.agenda", this.args.zitting.id);
+  }
+  @action
+  goToEditIntro() {
+    this.router.transitionTo("meetings.edit.intro", this.args.zitting.id);
+  }
+  @action
+  goToEditOutro() {
+    this.router.transitionTo("meetings.edit.outro", this.args.zitting.id);
   }
 
   @action

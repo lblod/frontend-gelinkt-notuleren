@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { task } from "ember-concurrency-decorators";
+import { task } from "ember-concurrency";
 import { action } from "@ember/object";
 
 export default class ZittingTextDocumentContainerComponent extends Component {
@@ -46,9 +46,10 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   @action
-  handleRdfaEditorInit(editor) {
+  rdfaEditorInit(editor) {
     editor.setHtmlContent(this.text);
     this.editor = editor;
+    this.args.onEditorInit(editor);
   }
 
 }

@@ -1,0 +1,36 @@
+<AuModal @modalOpen={{true}}
+         @size="fullscreen"
+         @closeModal={{this.closeModal}}
+         @modalTitle={{this.document.title}}
+         class="au-c-modal--editor"
+         as |Modal|
+>
+  <Modal.Body>
+    {{#if this.document}}
+      <BesluitDocumentContainer @document={{this.document}}
+                                @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
+                                @editor={{this.editor}}
+                                @saving={{this.saveDocumentTask.isRunning}}
+      />
+    {{/if}}
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton @disabled={{this.saveDocumentTask.isRunning}}
+        {{on "click" (perform this.saveDocumentTask)}}>
+        {{t "behandelingVanAgendapunten.saveButton"}}
+      </AuButton>
+      <AuButton @disabled={{this.saveDocumentTask.isRunning}} {{on "click" this.saveAndQuit}}>
+        {{t "behandelingVanAgendapunten.saveAndQuit"}}
+      </AuButton>
+    </AuButtonGroup>
+    <AuButtonGroup>
+       <AuButton @skin="secondary"
+                @disabled={{this.saveDocumentTask.isRunning}}
+        {{on "click" this.closeModal}}>
+        {{t "behandelingVanAgendapunten.cancel"}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>
+<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>
