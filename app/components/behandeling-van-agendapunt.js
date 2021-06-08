@@ -37,12 +37,12 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     return !(this.published || this.args.readOnly);
   }
 
-  get documentContainer() {
-    return this.args.behandeling.documentContainer;
-  }
-
   get openbaar() {
     return this.args.behandeling.openbaar;
+  }
+
+  set openbaar(value) {
+    this.args.behandeling.openbaar = value;
   }
 
   get defaultChairman() {
@@ -59,10 +59,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   get defaultAbsentees() {
     return this.args.meeting.afwezigenBijStart;
-  }
-
-  set openbaar(value) {
-    this.args.behandeling.openbaar = value;
   }
 
   get hasParticipants() {
@@ -94,15 +90,19 @@ export default class BehandelingVanAgendapuntComponent extends Component {
    * @param {ParticipantInfo} participants
    */
   @action
-  async saveParticipants(participants) {
-    this.args.behandeling.voorzitter = participants.chairman;
-    this.chairman = participants.chairman;
-    this.args.behandeling.secretaris = participants.secretary;
-    this.secretary = participants.secretary;
-    this.args.behandeling.aanwezigen = participants.participants;
-    this.args.behandeling.afwezigen = participants.absentees;
-    this.participants = participants.participants;
-    this.absentees = participants.absentees;
+  async saveParticipants({chairman, secretary, participants, absentees}) {
+    this.chairman = chairman;
+    this.args.behandeling.voorzitter = chairman;
+
+    this.secretary = secretary;
+    this.args.behandeling.secretaris = secretary;
+
+    this.participants = participants;
+    this.args.behandeling.aanwezigen = participants;
+
+    this.absentees = absentees;
+    this.args.behandeling.afwezigen = absentees;
+
     await this.args.behandeling.save();
   }
 
@@ -124,23 +124,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.absentees = yield this.store.query('mandataris', absenteeQuery);
     this.chairman = yield this.args.behandeling.voorzitter;
     this.secretary = yield this.args.behandeling.secretaris;
-  }
-
-  @action
-  async save(e) {
-    e.stopPropagation();
-    this.args.behandeling.openbaar = this.openbaar;
-    const document = await this.saveEditorDocument.perform(this.document);
-    this.document = document;
-    await this.args.behandeling.save();
-  }
-
-  @action
-  handleRdfaEditorInit(editor) {
-    if (this.document.content) {
-      editor.setHtmlContent(this.document.get('content'));
-    }
-    this.editor = editor;
   }
 
   @action

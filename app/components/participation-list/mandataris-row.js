@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from "@ember/object";
-import { tracked } from '@glimmer/tracking';
 
 /**
  * @callback onToggleParticipation
@@ -16,14 +15,11 @@ import { tracked } from '@glimmer/tracking';
 
  /** @extends {Component<Args>} */
 export default class ParticipationListMandatarisRowComponent extends Component {
-  @tracked selected;
-  constructor() {
-    super(...arguments);
-    this.selected = this.args.selectedMandatees.get(this.args.mandataris);
+  get selected() {
+    return this.args.selectedMandatees.get(this.args.mandataris);
   }
   @action
   toggle() {
-    this.selected = !this.selected;
-    this.args.onToggleParticipation(this.selected);
+    this.args.onToggleParticipation(!this.selected);
   }
 }

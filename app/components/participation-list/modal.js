@@ -29,7 +29,7 @@ export default class ParticipationListModalComponent extends Component {
   @tracked chairman;
   @tracked secretary;
   @service store;
-  selectedMandatees = new Map();
+  @tracked selectedMandatees = new Map();
 
   constructor() {
     super(...arguments);
@@ -60,7 +60,7 @@ export default class ParticipationListModalComponent extends Component {
       absentees,
     };
     this.args.onSave(info);
-    this.args.togglePopup(e);
+    this.args.onCloseModal();
   }
 
   /**
@@ -86,6 +86,7 @@ export default class ParticipationListModalComponent extends Component {
         this.selectedMandatees.set(participant, true);
       }
     });
+    this.selectedMandatees = this.selectedMandatees;
   }
 
   /**
