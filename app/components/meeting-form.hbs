@@ -134,10 +134,11 @@
           <ParticipationList
             @chairman={{this.voorzitter}}
             @secretary={{this.secretaris}}
-            @bestuursorgaan={{this.bestuursorgaan}}
-            @aanwezigenBijStart={{this.aanwezigenBijStart}}
-            @afwezigenBijStart={{this.afwezigenBijStart}}
+            @participants={{this.aanwezigenBijStart}}
+            @defaultParticipants={{this.possibleParticipants}}
+            @absentees={{this.afwezigenBijStart}}
             @possibleParticipants={{this.possibleParticipants}}
+            @bestuursorgaan={{this.bestuursorgaan}}
             @onSave={{this.saveParticipationList}}
             @meeting={{this.zitting}}
             @modalTitle={{t "participationList.openModalButton"}}
@@ -186,9 +187,6 @@
               <li>
                 <BehandelingVanAgendapunt
                   @possibleParticipants={{this.possibleParticipants}}
-                  @defaultParticipants={{this.aanwezigenBijStart}}
-                  @defaultChairman={{this.voorzitter}}
-                  @defaultSecretary={{this.secretaris}}
                   @behandeling={{behandeling}}
                   @readOnly={{this.readOnly}}
                   @bestuursorgaan={{this.zitting.bestuursorgaan}}

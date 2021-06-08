@@ -45,17 +45,20 @@
   <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
 {{else}}
   <ParticipationList
-          @chairman={{this.voorzitter}}
-          @secretary={{this.secretaris}}
-          @defaultSecretary={{@defaultSecretary}}
-          @defaultChairman={{@defaultChairman}}
-          @bestuursorgaan={{@bestuursorgaan}}
+          @chairman={{this.chairman}}
+          @defaultChairman={{this.defaultChairman}}
+          @secretary={{this.secretary}}
+          @defaultSecretary={{this.defaultSecretary}}
+          @participants={{this.participants}}
+          @defaultParticipants={{this.defaultParticipants}}
+          @absentees={{this.absentees}}
+          @defaultAbsentees={{this.defaultAbsentees}}
           @possibleParticipants={{@possibleParticipants}}
-          @aanwezigenBijStart={{this.aanwezigen}}
-          @afwezigenBijStart={{this.afwezigen}}
+
+          @bestuursorgaan={{@bestuursorgaan}}
           @onSave={{this.saveParticipants}}
-          @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
           @meeting={{@meeting}}
+          @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
           @readOnly={{not this.editable}}
   />
 {{/if}}

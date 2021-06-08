@@ -119,15 +119,15 @@ export default class MeetingForm extends Component {
    * @return {Promise<void>}
    */
   @action
-  async saveParticipationList({ voorzitter, secretaris, aanwezigenBijStart, afwezigenBijStart }) {
-    this.secretaris = secretaris;
-    this.voorzitter = voorzitter;
-    this.aanwezigenBijStart = aanwezigenBijStart;
-    this.afwezigenBijStart = afwezigenBijStart;
-    this.zitting.voorzitter = voorzitter;
-    this.zitting.secretaris = secretaris;
-    this.zitting.aanwezigenBijStart = aanwezigenBijStart;
-    this.zitting.afwezigenBijStart =  afwezigenBijStart;
+  async saveParticipationList({ chairman, secretary, participants, absentees }) {
+    this.secretaris = secretary;
+    this.voorzitter = chairman;
+    this.aanwezigenBijStart = participants;
+    this.afwezigenBijStart = absentees;
+    this.zitting.voorzitter = chairman;
+    this.zitting.secretaris = secretary;
+    this.zitting.aanwezigenBijStart = participants;
+    this.zitting.afwezigenBijStart =  absentees;
     await this.zitting.save();
   }
 

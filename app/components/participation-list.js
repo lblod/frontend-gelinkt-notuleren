@@ -1,63 +1,78 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 /**
  * @typedef {Object} Args
  * @property {Mandataris} chairman
- * @property {Mandataris} secretary
- * @property {Mandataris} [defaultSecretary]
  * @property {Mandataris} [defaultChairman]
+ * @property {Functionaris} secretary
+ * @property {Functionaris} [defaultSecretary]
+ * @property {Array<Mandataris>} [participants]
+ * @property {Array<Mandataris>} [defaultParticipants]
+ * @property {Array<Mandataris>} [absentees]
+ * @property {Array<Mandataris>} [defaultAbsentees]
+ * @property {Array<Mandataris>} [possibleParticipants]
  *
  * @property {BestuursOrgaan} bestuursorgaan
- * @property {Array<Mandataris>} possibleParticipants
- * @property {Array<Mandataris>} aanwezigenBijStart
- * @property {Array<Mandataris>} afwezigenBijStart
  * @property {Function} onSave
  * @property {Zitting} meeting
  * @property {string} modalTitle
+ * @property {boolean} readOnly
  */
 
- /** @extends {Component<Args>} */
+/** @extends {Component<Args>} */
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
-  @tracked info;
-  @tracked chairman;
-  @tracked secretary;
 
   @service store;
 
-  constructor() {
-    super(...arguments);
-    this.chairman = this.args.chairman ? this.args.chairman : this.args.defaultChairman;
-    this.secretary = this.args.secretary ? this.args.secretary : this.args.defaultSecretary;
+  get chairman() {
+    return this.args.chairman;
   }
 
-  get aanwezigenBijStart() {
-    return this.args.aanwezigenBijStart ?? [];
-  }
-   get afwezigenBijStart() {
-     return this.args.afwezigenBijStart ?? [];
-   }
-
-  // this is only called after loading has finished
-  get hasParticipationInfo() {
-    return Boolean(this.aanwezigenBijStart.length > 0 || this.args.voorzitter || this.args.secretaris);
+  get defaultedChairman() {
+    return this.chairman ?? this.args.defaultChairman;
   }
 
-  get mandateesPresent(){
-    const sorted=this.aanwezigenBijStart.sortBy('isBestuurlijkeAliasVan.achternaam');
-    return sorted;
+  get secretary() {
+    return this.args.secretary;
   }
-  get mandateesNotPresent() {
-    const sorted = this.afwezigenBijStart.sortBy("isBestuurlijkeAliasVan.achternaam");
-    return sorted;
+
+  get defaultedSecretary() {
+    return this.secretary ?? this.args.defaultSecretary;
+  }
+
+  get participantsEmpty() {
+    return !this.args.participants?.length && !this.args.absentees?.length;
+  }
+
+  get participants() {
+    return this.args.participants?.sortBy('isBestuurlijkeAliasVan.achternaam');
+  }
+
+  get defaultedParticipants() {
+    if (!this.participants || this.participantsEmpty) {
+      return this.args.defaultParticipants;
+    }
+    return this.participants;
+  }
+
+  get absentees() {
+    return this.args.absentees?.sortBy('isBestuurlijkeAliasVan.achternaam');
+  }
+
+  get defaultedAbsentees() {
+    if (!this.absentees || this.participantsEmpty) {
+      return this.args.defaultAbsentees;
+    }
+    return this.absentees;
   }
 
   @action
   togglePopup(e) {
-    if(e) {
+    if (e) {
       e.preventDefault();
     }
     this.popup = !this.popup;
