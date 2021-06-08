@@ -22,12 +22,15 @@ export default class MeetingsPublishUittrekselsController extends Controller {
     return this.model;
   }
 
-  get uittreksels() {
+  get extracts() {
     return this.publish.treatmentExtracts;
   }
 
   get isLoading() {
     return this.loadExtractsTask.isRunning;
+  }
+  get isEmpty() {
+    return !this.extracts?.length;
   }
 
   @task
