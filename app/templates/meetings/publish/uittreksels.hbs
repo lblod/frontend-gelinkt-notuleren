@@ -1,23 +1,22 @@
 <div class="au-o-box">
-  {{#if this.initializeUittreksels.isIdle}}
-  <ul>
-    {{#each this.uittreksels as |uittreksel|}}
-      <Signatures::Behandeling::TimelineStep
-        @name={{uittreksel.document.behandeling.onderwerp.titel}}
-        @behandeling={{uittreksel.document}}
-        @errors={{uittreksel.errors}}
-        @signing={{perform this.createSignedResource uittreksel.document.behandeling}}
-        @publish={{perform this.createPublishedResource uittreksel.document.behandeling}}
-        @print={{this.print}}
-      />
-    {{else}}
-    <AuAlert @alertIcon="alert-triangle" @alertskin="warning" @alertsize="small">
-      {{t "publish.excerptsErrorMessage"}}
-    </AuAlert>
-    {{/each}}
-  </ul>
-  {{else}}
+  {{#if this.isLoading}}
     <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
-    <AuLoader @padding="small" />
+    <AuLoader @padding="small"/>
+  {{else}}
+    <ul>
+      {{#each this.uittreksels as |uittreksel|}}
+        <Signatures::Behandeling::TimelineStep
+                @name={{uittreksel.document.behandeling.onderwerp.titel}}
+                @extract={{uittreksel}}
+                @signing={{perform this.createSignedResourceTask uittreksel.document.behandeling}}
+                @publish={{perform this.createPublishedResourceTask uittreksel.document.behandeling}}
+                @print={{this.print}}
+        />
+      {{else}}
+        <AuAlert @alertIcon="alert-triangle" @alertskin="warning" @alertsize="small">
+          {{t "publish.excerptsErrorMessage"}}
+        </AuAlert>
+      {{/each}}
+    </ul>
   {{/if}}
 </div>
