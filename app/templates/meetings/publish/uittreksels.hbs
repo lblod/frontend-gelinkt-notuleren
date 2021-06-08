@@ -10,7 +10,7 @@
                 @extract={{extract}}
                 @signing={{perform this.createSignedResourceTask extract.document.behandeling}}
                 @publish={{perform this.createPublishedResourceTask extract.document.behandeling}}
-                @print={{this.print}}
+                @print={{fn this.print extract}}
         />
       {{else}}
         <AuAlert @alertIcon="alert-triangle" @alertskin="warning" @alertsize="small">
