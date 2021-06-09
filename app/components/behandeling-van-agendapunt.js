@@ -1,10 +1,10 @@
 import Component from '@glimmer/component';
-import {PUBLISHED_STATUS_ID} from 'frontend-gelinkt-notuleren/utils/constants';
+import {PUBLISHED_STATUS_ID} from '../utils/constants';
 import {tracked} from '@glimmer/tracking';
 import {task} from 'ember-concurrency';
 import {action} from '@ember/object';
 import {inject as service} from '@ember/service';
-
+/** @typedef {import("../models/mandataris").default} Mandataris  */
 /**
  * @typedef {Object} Args
  * @property {Behandeling} behandeling
@@ -23,9 +23,9 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @tracked editor;
   @tracked participants = [];
   @tracked absentees = [];
+  @tracked published = false;
   @tracked chairman;
   @tracked secretary;
-  @tracked published = false;
 
   constructor() {
     super(...arguments);
@@ -35,6 +35,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   get editable() {
     return !(this.published || this.args.readOnly);
+  }
+
+  get documentContainer() {
+    return this.args.behandeling.documentContainer;
   }
 
   get openbaar() {
@@ -91,11 +95,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
    */
   @action
   async saveParticipants({chairman, secretary, participants, absentees}) {
-    this.chairman = chairman;
     this.args.behandeling.voorzitter = chairman;
-
-    this.secretary = secretary;
+    this.chairman = chairman;
     this.args.behandeling.secretaris = secretary;
+    this.secretary = secretary;
 
     this.participants = participants;
     this.args.behandeling.aanwezigen = participants;

@@ -2,12 +2,17 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+/**
+ * @typedef {import("../models/mandataris").default} Mandataris
+ * @typedef {import("../models/functionaris").default} Functionaris
+ * @typedef {import("../models/bestuursorgaan").default} BestuursOrgaan
+ * */
 
 /**
  * @typedef {Object} Args
- * @property {Mandataris} chairman
+ * @property {Mandataris} [chairman] must be resolved
  * @property {Mandataris} [defaultChairman]
- * @property {Functionaris} secretary
+ * @property {Functionaris} [secretary] must be resolved
  * @property {Functionaris} [defaultSecretary]
  * @property {Array<Mandataris>} [participants]
  * @property {Array<Mandataris>} [defaultParticipants]

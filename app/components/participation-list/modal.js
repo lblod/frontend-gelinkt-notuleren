@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
 import { inject as service } from '@ember/service';
+import { localCopy } from 'tracked-toolbox';
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
 /** @typedef {import("../../models/bestuursorgaan").default} BestuursOrgaan */
@@ -12,8 +13,8 @@ import { inject as service } from '@ember/service';
 
 /**
  * @typedef {Object} Args
- * @property {Mandataris} chairman
- * @property {Mandataris} secretary
+ * @property {Mandataris} chairman must be resolved
+ * @property {Mandataris} secretary must be resolved
  * @property {boolean} show
  * @property {Function} onCloseModal
  * @property {onSave} onSave
@@ -26,18 +27,15 @@ import { inject as service } from '@ember/service';
 
 /** @extends {Component<Args>} */
 export default class ParticipationListModalComponent extends Component {
-  @tracked chairman;
-  @tracked secretary;
+  @localCopy('args.chairman') chairman;
+  @localCopy('args.secretary') secretary;
   @service store;
   @tracked selectedMandatees = new Map();
 
   constructor() {
     super(...arguments);
-    this.chairman = this.args.chairman;
-    this.secretary = this.args.secretary;
     this.generateSelected();
   }
-
 
   @action
   selectChairman(value) {

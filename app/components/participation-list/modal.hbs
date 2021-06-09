@@ -1,37 +1,43 @@
 <AuModal
         @modalTitle="Beheer aanwezigen"
         @modalOpen={{@show}}
-        @closeModal={{@onCloseModal}} as |Modal|>
+        @closeModal={{@onCloseModal}}
+        as |Modal|>
   <Modal.Body>
-    <div class="au-o-flow">
-      <div>
-        <AuLabel>
-          {{t "participationListModal.voorzitterLabel"}}
-        </AuLabel>
-        <ParticipationList::MandatarisSelector
-                @onSelect={{this.selectChairman}}
-                @mandataris={{this.chairman}}
-                @meeting={{@meeting}}
-                @bestuursorgaan={{@bestuursorgaan}}
-        />
+    {{#if this.loadDataTask.isRunning}}
+      <AuLoader @padding="small"/>
+      <AuHelpText>LOADING</AuHelpText>
+    {{else}}
+      <div class="au-o-flow">
+        <div>
+          <AuLabel>
+            {{t "participationListModal.voorzitterLabel"}}
+          </AuLabel>
+          <ParticipationList::MandatarisSelector
+                  @onSelect={{this.selectChairman}}
+                  @mandataris={{this.chairman}}
+                  @meeting={{@meeting}}
+                  @bestuursorgaan={{@bestuursorgaan}}
+          />
+        </div>
+        <div>
+          <AuLabel>Secretaris van de zitting</AuLabel>
+          <ParticipationList::FunctionarisSelector
+                  @onSelect={{this.selectSecretary}}
+                  @functionaris={{this.secretary}}
+                  @meeting={{@meeting}}
+          />
+        </div>
+        <div>
+          <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
+          <ParticipationList::MandatarissenTable
+                  @possibleParticipants={{@possibleParticipants}}
+                  @selectedMandatees={{this.selectedMandatees}}
+                  @toggleParticipation={{this.toggleParticipation}}
+          />
+        </div>
       </div>
-      <div>
-        <AuLabel>Secretaris van de zitting</AuLabel>
-        <ParticipationList::FunctionarisSelector
-                @onSelect={{this.selectSecretary}}
-                @functionaris={{this.secretary}}
-                @meeting={{@meeting}}
-        />
-      </div>
-      <div>
-        <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
-        <ParticipationList::MandatarissenTable
-                @possibleParticipants={{@possibleParticipants}}
-                @selectedMandatees={{this.selectedMandatees}}
-                @toggleParticipation={{this.toggleParticipation}}
-        />
-      </div>
-    </div>
+    {{/if}}
     {{yield}}
   </Modal.Body>
   <Modal.Footer>
