@@ -16,6 +16,15 @@ export class Extract {
   }
 }
 
+/**
+ * WIP service to abstract away the api calls need for the publication flow
+ *
+ * Expects the developer to manage when to update the treatment extracts.
+ *
+ * TODO: build out the rest of the api
+ * TODO: consider getting rid of the state altogether
+ *
+ */
 export default class PublishService extends Service {
   @tracked treatmentExtractsMap;
   @service store;
@@ -34,12 +43,14 @@ export default class PublishService extends Service {
   }
 
   get loadExtractsTask() {
+    // for background, see https://github.com/machty/ember-concurrency/issues/161
     return this._loadExtractsTask.unlinked();
   }
 
   /**
    * Combine saved extracts with newly created ones and expose them as one map keyed by the
    * id of the treatment
+   * TODO: proper pagination
    * @param meetingId
    * @return {Generator<*, void, *>}
    */
@@ -51,10 +62,12 @@ export default class PublishService extends Service {
       this.store.query('behandeling-van-agendapunt', {
         'filter[onderwerp][zitting][:id:]': meetingId,
         include: 'onderwerp',
+        page: { size: 1000 },
       }),
       this.store.query('versioned-behandeling', {
         'filter[zitting][:id:]': meetingId,
         include: 'behandeling.onderwerp,signed-resources,published-resource',
+        page: { size: 1000 },
       }),
     ]);
 
