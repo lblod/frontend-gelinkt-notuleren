@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
-import {PUBLISHED_STATUS_ID} from '../utils/constants';
-import {tracked} from '@glimmer/tracking';
-import {task} from 'ember-concurrency';
-import {action} from '@ember/object';
-import {inject as service} from '@ember/service';
+import { PUBLISHED_STATUS_ID } from '../utils/constants';
+import { tracked } from '@glimmer/tracking';
+import { task } from 'ember-concurrency';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { use } from 'ember-could-get-used-to-this';
+import RelationshipResource from '../helpers/relationship-resource';
+
 /** @typedef {import("../models/mandataris").default} Mandataris  */
 /**
  * @typedef {Object} Args
@@ -26,6 +29,17 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @tracked published = false;
   @tracked chairman;
   @tracked secretary;
+  @tracked defaultSecretary;
+  /** @type {RelationshipResourceValue} */
+  @use meetingChairmanData = new RelationshipResource(() => [
+    this.args.meeting,
+    'voorzitter',
+  ]);
+  /** @type {RelationshipResourceValue} */
+  @use meetingSecretaryData = new RelationshipResource(() => [
+    this.args.meeting,
+    'secretaris',
+  ]);
 
   constructor() {
     super(...arguments);
@@ -49,14 +63,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.args.behandeling.openbaar = value;
   }
 
-  get defaultChairman() {
-    return this.args.meeting.voorzitter;
-  }
-
-  get defaultSecretary() {
-    return this.args.meeting.secretaris;
-  }
-
   get defaultParticipants() {
     return this.args.meeting.aanwezigenBijStart;
   }
@@ -67,6 +73,22 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   get hasParticipants() {
     return this.participants.length;
+  }
+
+  get isLoading() {
+    return (
+      this.fetchParticipants.isRunning ||
+      this.meetingChairmanData.isRunning ||
+      this.meetingSecretaryData.isRunning
+    );
+  }
+
+  get defaultChairman() {
+    return this.meetingChairmanData.value;
+  }
+
+  get defaultSecretary() {
+    return this.meetingSecretaryData.value;
   }
 
   @task
@@ -83,18 +105,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   /**
-   * @typedef {Object} ParticipantInfo
-   * @property {Mandataris} chairman
-   * @property {Mandataris} secretary
-   * @property {Mandataris[]} participants
-   * @property {Mandataris[]} absentees
-   */
-
-  /**
-   * @param {ParticipantInfo} participants
+   * @param {ParticipantInfo} info
    */
   @action
-  async saveParticipants({chairman, secretary, participants, absentees}) {
+  async saveParticipants({ chairman, secretary, participants, absentees }) {
     this.args.behandeling.voorzitter = chairman;
     this.chairman = chairman;
     this.args.behandeling.secretaris = secretary;

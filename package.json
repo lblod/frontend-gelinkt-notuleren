@@ -76,6 +76,7 @@
     "ember-composable-helpers": "^4.4.1",
     "ember-concurrency": "^2.0.2",
     "ember-config-helper": "^0.1.3",
+    "ember-could-get-used-to-this": "^1.0.1",
     "ember-data": "~3.24.0",
     "ember-drag-drop": "^0.8.2",
     "ember-export-application-global": "^2.0.1",

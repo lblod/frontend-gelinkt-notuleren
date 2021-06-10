@@ -10,9 +10,9 @@ import { inject as service } from '@ember/service';
 
 /**
  * @typedef {Object} Args
- * @property {Mandataris} [chairman] must be resolved
+ * @property {Mandataris} [chairman]
  * @property {Mandataris} [defaultChairman]
- * @property {Functionaris} [secretary] must be resolved
+ * @property {Functionaris} [secretary]
  * @property {Functionaris} [defaultSecretary]
  * @property {Array<Mandataris>} [participants]
  * @property {Array<Mandataris>} [defaultParticipants]
@@ -21,13 +21,18 @@ import { inject as service } from '@ember/service';
  * @property {Array<Mandataris>} [possibleParticipants]
  *
  * @property {BestuursOrgaan} bestuursorgaan
- * @property {Function} onSave
+ * @property {OnSave} onSave
  * @property {Zitting} meeting
  * @property {string} modalTitle
  * @property {boolean} readOnly
  */
 
-/** @extends {Component<Args>} */
+/**
+ * Manage participants, absentees, chairman and secretary.
+ * This component expects its arguments to be resolved
+ *
+ * @extends {Component<Args>}
+ */
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
 

@@ -5,10 +5,20 @@ import { inject as service } from '@ember/service';
 import { localCopy } from 'tracked-toolbox';
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
+/** @typedef {import("../../models/functionaris").default} Functionaris */
 /** @typedef {import("../../models/bestuursorgaan").default} BestuursOrgaan */
 
-/** @callback onSave
- * @param {Object} info
+/**
+ * @typedef {Object} ParticipantInfo
+ * @property {Mandataris} chairman
+ * @property {Functionaris} secretary
+ * @property {Mandataris[]} participants
+ * @property {Mandataris[]} absentees
+ */
+
+/**
+ * @callback OnSave
+ * @param {ParticipantInfo} info
  */
 
 /**
@@ -17,7 +27,7 @@ import { localCopy } from 'tracked-toolbox';
  * @property {Mandataris} secretary must be resolved
  * @property {boolean} show
  * @property {Function} onCloseModal
- * @property {onSave} onSave
+ * @property {OnSave} onSave
  * @property {BestuursOrgaan} bestuursOrgaan
  * @property {Array<Mandataris>} participants
  * @property {Array<Mandataris>} absentees
@@ -47,9 +57,11 @@ export default class ParticipationListModalComponent extends Component {
     this.secretary = value;
   }
 
+  /**
+   * Save the selected participant config and close the modal
+   */
   @action
-  insert(e) {
-    e.preventDefault();
+  insert() {
     const { participants, absentees } = this.collectParticipantsAndAbsentees();
     const info = {
       chairman: this.chairman,

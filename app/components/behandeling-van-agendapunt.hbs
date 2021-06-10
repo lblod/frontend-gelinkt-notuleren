@@ -13,7 +13,8 @@
     </div>
   </div>
 {{else}}
-  <div class="au-c-meeting-chrome-editable">
+  <div class="au-c-meeting-chrome-editable"
+  >
     <AuToolbar>
       <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
         {{@behandeling.onderwerp.titel}}
@@ -40,7 +41,7 @@
 
 {{/if}}
 
-{{#if this.fetchParticipants.isRunning}}
+{{#if this.isLoading}}
   <AuLoader @padding="small"/>
   <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
 {{else}}
@@ -78,7 +79,8 @@
 {{/if}}
 
 
-<ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}>
+<ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}
+>
   {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
 </ReadonlyTextBox>
 {{#if this.editable}}
