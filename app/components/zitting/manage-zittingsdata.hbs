@@ -25,7 +25,7 @@
   <AuModal
     @modalTitle={{t "manageZittingsData.modalTitle"}}
     @modalOpen={{this.showModal}}
-    @closeModal={{fn (mut this.showModal) false}} as |Modal| >
+    @closeModal={{this.cancel}} as |Modal| >
     <Modal.Body>
       <div class="au-o-flow">
         <div>

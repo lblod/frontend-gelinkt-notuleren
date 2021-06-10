@@ -1,0 +1,19 @@
+<section class="au-o-box u-background--gray-lighter u-hide-on-print u-hide-on-print--show">
+  <div class="au-o-grid">
+    <div class="au-o-grid__item au-u-3-4@medium au-u-1-2@large">
+      <AuContent>
+        {{yield (hash
+                        BackLink=(component "au-link" iconAlignment="left" skin="secondary" icon="arrow-left")
+                )}}
+        <AuHeading @skin="3">
+          <AuIcon @icon="document" @iconAlignment="left"/>
+          Maak een print of PDF van een uittreksel
+        </AuHeading>
+        <p>U kan deze pagina opslaan als PDF, of printen. Bekijk hoe opslaan en printen werkt in Firefox of Chrome, in
+          de <a href="{{config "manual.baseUrl"}}{{config "manual.print"}}" target="_blank" rel="noopener noreferrer"
+                class="au-c-link">handleiding</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te
+          zien zijn.</p>
+      </AuContent>
+    </div>
+  </div>
+</section>
