@@ -328,3 +328,8 @@ meetings:
 
 requiredField:
   required: Required
+
+dateTimePicker:
+  date: Date
+  hours: Hour
+  minutes: Minutes

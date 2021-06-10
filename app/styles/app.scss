@@ -68,15 +68,6 @@
 @import 'deprecated/wizard';
 
 
-// PROJECT COMPONENTS
-@import 'project/c-app-chrome';
-@import 'project/c-meeting-chrome';
-@import 'project/c-rdfa-editor';
-@import "project/c-onboarding";
-@import 'project/c-editor-preview';
-@import "project/c-theme";
-
-
 // COMPONENTS
 @import "ember-appuniversum/c-alert";
 @import "ember-appuniversum/c-badge";
@@ -113,6 +104,16 @@
 @import "ember-appuniversum/c-timepicker";
 @import "ember-appuniversum/c-toolbar";
 @import "ember-appuniversum/c-toggle-switch";
+
+
+// PROJECT COMPONENTS
+@import 'project/c-app-chrome';
+@import 'project/c-meeting-chrome';
+@import 'project/c-rdfa-editor';
+@import "project/c-onboarding";
+@import 'project/c-editor-preview';
+@import "project/c-template";
+@import "project/c-theme";
 
 
 // PLUGINS

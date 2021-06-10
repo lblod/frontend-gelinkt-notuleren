@@ -408,3 +408,11 @@
     justify-content: space-between;
   }
 }
+
+
+// Bugfix on main-container
+.au-c-main-container {
+  @include mq(medium) {
+    flex-wrap: nowrap !important;
+  }
+}
