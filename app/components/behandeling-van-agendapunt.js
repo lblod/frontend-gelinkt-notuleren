@@ -29,7 +29,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @tracked published = false;
   @tracked chairman;
   @tracked secretary;
-  @tracked defaultSecretary;
   /** @type {RelationshipResourceValue} */
   @use meetingChairmanData = new RelationshipResource(() => [
     this.args.meeting,
@@ -39,6 +38,16 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @use meetingSecretaryData = new RelationshipResource(() => [
     this.args.meeting,
     'secretaris',
+  ]);
+  /** @type {RelationshipResourceValue} */
+  @use meetingParticipantsData = new RelationshipResource(() => [
+    this.args.meeting,
+    'aanwezigenBijStart',
+  ]);
+  /** @type {RelationshipResourceValue} */
+  @use meetingAbsenteeData = new RelationshipResource(() => [
+    this.args.meeting,
+    'afwezigenBijStart',
   ]);
 
   constructor() {
@@ -64,11 +73,11 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   get defaultParticipants() {
-    return this.args.meeting.aanwezigenBijStart;
+    return this.meetingParticipantsData.value;
   }
 
   get defaultAbsentees() {
-    return this.args.meeting.afwezigenBijStart;
+    return this.meetingAbsenteeData.value;
   }
 
   get hasParticipants() {

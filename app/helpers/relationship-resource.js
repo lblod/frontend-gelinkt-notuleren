@@ -1,5 +1,5 @@
 import { Resource } from 'ember-could-get-used-to-this';
-import { restartableTask } from 'ember-concurrency';
+import { task, restartableTask } from 'ember-concurrency';
 
 /**
  * @callback DependencySetup
@@ -74,7 +74,7 @@ export default class RelationshipResource extends Resource {
     this.resolveTask.cancelAll();
   }
 
-  @restartableTask
+  @task
   *resolveTask() {
     const [model, relationshipPath] = this.args.positional;
     return yield model.get(relationshipPath);

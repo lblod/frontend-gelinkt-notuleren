@@ -15,9 +15,6 @@ import { action } from "@ember/object";
 
  /** @extends {Component<Args>} */
 export default class ParticipationListMandatarisRowComponent extends Component {
-  get selected() {
-    return this.args.selectedMandatees.get(this.args.mandataris);
-  }
   @action
   toggle() {
     this.args.onToggleParticipation(!this.selected);

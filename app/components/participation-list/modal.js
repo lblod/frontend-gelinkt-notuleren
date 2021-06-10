@@ -3,6 +3,54 @@ import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
 import { inject as service } from '@ember/service';
 import { localCopy } from 'tracked-toolbox';
+import { Resource, use } from 'ember-could-get-used-to-this';
+
+class ParticipationMap extends Resource {
+  /**
+   * @callback DependencyConfig
+   * @returns {[Mandataris[], Mandataris[], Mandataris[]]}}
+   */
+
+  /**
+   * @param {DependencyConfig} dependencies
+   */
+  // eslint-disable-next-line no-unused-vars
+  constructor(dependencies) {
+    super(...arguments);
+  }
+
+  /** @type {Map} */
+  participationMap = tracked(Map);
+
+  get value() {
+    return this.participationMap;
+  }
+
+  setup() {
+    this.participationMap.clear();
+    const [participants, absentees, possibleParticipants] =
+      this.args.positional;
+    if (participants && absentees && possibleParticipants) {
+      if (participants.length) {
+        participants.forEach((mandataris) => {
+          this.participationMap.set(mandataris, true);
+        });
+      }
+
+      if (absentees.length) {
+        absentees.forEach((mandataris) => {
+          this.participationMap.set(mandataris, false);
+        });
+      }
+
+      possibleParticipants.forEach((participant) => {
+        if (!this.participationMap.has(participant)) {
+          this.participationMap.set(participant, true);
+        }
+      });
+    }
+  }
+}
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
 /** @typedef {import("../../models/functionaris").default} Functionaris */
@@ -40,12 +88,12 @@ export default class ParticipationListModalComponent extends Component {
   @localCopy('args.chairman') chairman;
   @localCopy('args.secretary') secretary;
   @service store;
-  @tracked selectedMandatees = new Map();
 
-  constructor() {
-    super(...arguments);
-    this.generateSelected();
-  }
+  @use participationMap = new ParticipationMap(() => [
+    this.args.participants,
+    this.args.absentees,
+    this.args.possibleParticipants,
+  ]);
 
   @action
   selectChairman(value) {
@@ -73,30 +121,11 @@ export default class ParticipationListModalComponent extends Component {
     this.args.onCloseModal();
   }
 
-  /**
-   * Convert from the two lists into a map which holds participation per mandatee
-   */
-  generateSelected() {
-    const { participants, absentees, possibleParticipants } = this.args;
-
-    if (participants && participants.length) {
-      participants.forEach((mandataris) => {
-        this.selectedMandatees.set(mandataris, true);
-      });
-    }
-
-    if (absentees && absentees.length) {
-      absentees.forEach((mandataris) => {
-        this.selectedMandatees.set(mandataris, false);
-      });
-    }
-
-    possibleParticipants.forEach((participant) => {
-      if (!this.selectedMandatees.has(participant)) {
-        this.selectedMandatees.set(participant, true);
-      }
-    });
-    this.selectedMandatees = this.selectedMandatees;
+  get participants() {
+    return this.args.possibleParticipants.map((participant) => [
+      participant,
+      this.participationMap.get(participant),
+    ]);
   }
 
   /**
@@ -106,7 +135,7 @@ export default class ParticipationListModalComponent extends Component {
   collectParticipantsAndAbsentees() {
     const participants = [];
     const absentees = [];
-    for (const [mandatee, participates] of this.selectedMandatees.entries()) {
+    for (const [mandatee, participates] of this.participants) {
       if (participates) {
         participants.push(mandatee);
       } else {
@@ -123,7 +152,9 @@ export default class ParticipationListModalComponent extends Component {
    * @param {boolean} selected
    */
   @action
-  toggleParticipation(mandataris, selected) {
-    this.selectedMandatees.set(mandataris, selected);
+  toggleParticipant(mandataris) {
+    console.log('TOGGLING');
+    const participating = this.participationMap.get(mandataris);
+    this.participationMap.set(mandataris, !participating);
   }
 }

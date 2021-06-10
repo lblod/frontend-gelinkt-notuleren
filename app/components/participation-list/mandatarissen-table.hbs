@@ -1,28 +1,24 @@
 <table class="data-table data-table--lined data-table--zebra au-c-table-border">
   <thead>
-    <tr>
-      <th>{{t "participationListModalTable.naamLabel"}}</th>
-      <th>{{t "participationListModalTable.functieLabel"}}</th>
-      <th>{{t "participationListModalTable.geboortedatumLabel"}}</th>
-      <th>
-        <div class="grid">
-          <div class="col--4-12">
-            {{t "participationListModalTable.actieLabel"}}
-          </div>
+  <tr>
+    <th>{{t "participationListModalTable.naamLabel"}}</th>
+    <th>{{t "participationListModalTable.functieLabel"}}</th>
+    <th>{{t "participationListModalTable.geboortedatumLabel"}}</th>
+    <th>
+      <div class="grid">
+        <div class="col--4-12">
+          {{t "participationListModalTable.actieLabel"}}
         </div>
-      </th>
-    </tr>
+      </div>
+    </th>
+  </tr>
   </thead>
   <tbody>
-    {{#each @possibleParticipants as |mandataris|}}
-      <ParticipationList::MandatarisRow
-        @mandataris={{mandataris}}
-        @selectedMandatees={{@selectedMandatees}}
-        @onToggleParticipation={{fn @toggleParticipation mandataris}}
-      />
-    {{else}}
-      <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
-    {{/each}}
+  {{#if (has-block)}}
+    {{yield (hash Row=(component "participation-list/mandataris-row" toggle=@toggleParticipant))}}
+  {{else }}
+    <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
+  {{/if}}
   </tbody>
 </table>
 

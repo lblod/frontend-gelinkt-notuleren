@@ -27,10 +27,12 @@
       <div>
         <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
         <ParticipationList::MandatarissenTable
-                @possibleParticipants={{@possibleParticipants}}
-                @selectedMandatees={{this.selectedMandatees}}
-                @toggleParticipation={{this.toggleParticipation}}
-        />
+                @toggleParticipant={{this.toggleParticipant}}
+                as |Table|>
+          {{#each this.participants as |participant| }}
+            <Table.Row @mandataris={{participant.[0]}} @selected={{participant.[1]}}/>
+          {{/each}}
+        </ParticipationList::MandatarissenTable>
       </div>
     </div>
     {{yield}}
