@@ -93,13 +93,11 @@ export default class manageIntermissionsEditComponent extends Component {
       { code: 'after', name: this.intl.t('manageIntermissions.afterAp'), conceptUuid: "267a09cc-5380-492d-93ad-697b9e99f032" }
     ];
   }
-
-  //this is stupid... I might be stupid
-  get hack() {
+  @action
+  updatedIntermission(element, [intermissionToEdit]){
     this.args.intermissionToEdit;
     console.log('intermissionToEdit has updated');
     this.fetchPosition.perform();
-    return "";
   }
 
   @task

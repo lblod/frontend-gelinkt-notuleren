@@ -1,3 +1,5 @@
+
+<div {{did-update this.updatedIntermission @intermissionToEdit}}>
 <AuModal
   @modalTitle={{t "manageIntermissions.modalTitle"}}
   @modalOpen={{@visible}}
@@ -15,7 +17,6 @@
         <AuLabel>{{t "manageIntermissions.interruptionEndLabel"}}</AuLabel>
         <DateTimePicker @onChange={{fn this.changeDate 'endedAt'}} @value={{this.endedAtExternal}}/>
       </div>
-      {{this.hack}}
       <div>
         {{#if @zitting.agendapunten}}
           <AuLabel>{{t "manageIntermissions.position"}}</AuLabel>
@@ -90,3 +91,4 @@
     </AuToolbar>
   </Modal.Footer>
 </AuModal>
+</div>
