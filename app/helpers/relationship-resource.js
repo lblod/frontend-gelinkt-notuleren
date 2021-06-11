@@ -1,5 +1,5 @@
 import { Resource } from 'ember-could-get-used-to-this';
-import { task, restartableTask } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 
 /**
  * @callback DependencySetup
@@ -63,10 +63,6 @@ export default class RelationshipResource extends Resource {
   }
 
   setup() {
-    this.update();
-  }
-
-  update() {
     this.resolveTask.perform();
   }
 
