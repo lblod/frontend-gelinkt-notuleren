@@ -152,7 +152,7 @@
           </AuToolbarGroup>
         </AuToolbar>
         <div class="au-u-margin-top-none au-u-margin-bottom-large">
-          <AuButton {{ on 'click' (fn @print @document)}} >
+          <AuButton {{ on 'click' @print }} >
             {{t "timelineStep.printButtonLabel" name=@name}}
           </AuButton>
         </div>
