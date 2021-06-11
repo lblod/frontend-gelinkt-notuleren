@@ -12,7 +12,7 @@
   </div>
   {{#if @zittingWrapper}}
     <EmberWormhole @to={{@behandelingContainerId}}>
-      <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{@togglePublicationStatus}} />
+      <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{@togglePublicationStatus}} @toggleAll={{@toggleAllPublicationStatus}}/>
     </EmberWormhole>
   {{/if}}
 </Signatures::TimelineStep>

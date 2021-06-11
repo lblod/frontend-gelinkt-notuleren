@@ -129,6 +129,12 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   @action
+  toggleAllPublicationStatus() {
+    this.publicBehandelingUris = this.behandelings.map((behandeling) => behandeling.behandeling)
+    this.updateNotulenPreview();
+  }
+
+  @action
   togglePublicationStatus(behandeling) {
     const uri = behandeling.behandeling;
     if (this.publicBehandelingUris.includes(uri))

@@ -1,3 +1,4 @@
+<button {{on "click" @toggleAll}}>Toggle All Public</button>
 {{#each @prepublishedBehandelingen as |preview|}}
   <div class="au-c-editor-preview-treatment {{if (contains preview.behandeling @publicBehandelingUris) "au-c-editor-preview-treatment--public" "au-c-editor-preview-treatment--private"}}">
     <div class="au-o-box au-c-editor-preview-treatment__info {{if (contains @preview.behandeling @publicBehandelingUris) "au-c-editor-preview-treatment__info--public" "au-c-editor-preview-treatment__info--private"}} ">
