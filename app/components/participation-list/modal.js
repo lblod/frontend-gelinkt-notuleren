@@ -1,127 +1,130 @@
 import Component from '@glimmer/component';
-import { action } from "@ember/object";
-import { tracked } from 'tracked-built-ins';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { localCopy } from 'tracked-toolbox';
+import { use } from 'ember-could-get-used-to-this';
+import ParticipationMap from '../../helpers/participant-map';
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
+/** @typedef {import("../../models/functionaris").default} Functionaris */
 /** @typedef {import("../../models/bestuursorgaan").default} BestuursOrgaan */
 
-/** @callback onSave
- * @param {Object} info
+/**
+ * @typedef {Object} ParticipantInfo
+ * @property {Mandataris} chairman
+ * @property {Functionaris} secretary
+ * @property {Mandataris[]} participants
+ * @property {Mandataris[]} absentees
+ */
+
+/**
+ * @callback OnSave
+ * @param {ParticipantInfo} info
  */
 
 /**
  * @typedef {Object} Args
- * @property {Mandataris} voorzitter
- * @property {Mandataris} secretaris
+ * @property {Mandataris} chairman must be resolved
+ * @property {Mandataris} secretary must be resolved
  * @property {boolean} show
- * @property {Function} togglePopup
- * @property {onSave} onSave
+ * @property {Function} onCloseModal
+ * @property {OnSave} onSave
  * @property {BestuursOrgaan} bestuursOrgaan
- * @property {Array<Mandataris>} aanwezigenBijStart
- * @property {Array<Mandataris>} afwezigenBijStart
+ * @property {Array<Mandataris>} participants
+ * @property {Array<Mandataris>} absentees
  * @property {Array<Mandataris>} possibleParticipants
  * @property {Zitting} meeting
  */
 
- /** @extends {Component<Args>} */
+/** @extends {Component<Args>} */
 export default class ParticipationListModalComponent extends Component {
-  @tracked voorzitter;
-  @tracked mandataris;
-  @tracked secretaris;
+  @localCopy('args.chairman') chairman;
+  @localCopy('args.secretary') secretary;
   @service store;
-  selectedMandatees = new Map();
 
-  constructor() {
-    super(...arguments);
-    this.voorzitter = this.args.voorzitter;
-    this.secretaris = this.args.secretaris;
-    this.generateSelected();
+  /** @type {Map} */
+  @use participationMap = new ParticipationMap(() => ({
+    named: {
+      // we depend on the show state here to make sure that upon opening/closing the modal
+      // we reset the state
+      active: this.args.show,
+      participants: this.args.participants,
+      absentees: this.args.absentees,
+      possibleParticipants: this.args.possibleParticipants,
+    },
+  }));
+
+  /**
+   * Get a list of possible mandatees with their participation
+   *
+   * We use possibleParticipants here to map over cause it's already sorted.
+   * @returns {{person: Mandataris, participating: boolean}[]}
+   */
+  get participants() {
+    return this.args.possibleParticipants.map((participant) => ({
+      person: participant,
+      participating: this.participationMap.get(participant),
+    }));
   }
 
   @action
-  togglePopup(e) {
-    if(e) {
-      e.preventDefault();
-    }
-    this.args.togglePopup(e);
-  }
-  @action
-  selectVoorzitter(value){
-    this.voorzitter = value;
-  }
-  @action
-  selectSecretaris(value){
-    this.secretaris = value;
+  selectChairman(value) {
+    this.chairman = value;
   }
 
   @action
-  insert(e){
-    e.preventDefault();
-    const {participants, absentees} = this.collectParticipantsAndAbsentees();
+  selectSecretary(value) {
+    this.secretary = value;
+  }
+
+  /**
+   * Save the selected participant config and close the modal
+   */
+  @action
+  insert() {
+    const { participants, absentees } = this.collectParticipantsAndAbsentees();
     const info = {
-      voorzitter: this.voorzitter,
-      secretaris: this.secretaris,
-      aanwezigenBijStart: participants,
-      afwezigenBijStart: absentees
+      chairman: this.chairman,
+      secretary: this.secretary,
+      participants,
+      absentees,
     };
     this.args.onSave(info);
-    this.args.togglePopup(e);
+    this.args.onCloseModal();
   }
 
-   /**
-    * Convert from the two lists into a map which holds participation per mandatee
-    */
-   generateSelected() {
-     const {aanwezigenBijStart, afwezigenBijStart, possibleParticipants} = this.args;
+  /**
+   * Convert from the map back to two lists
+   * @return {{absentees: [], participants: []}}
+   */
+  collectParticipantsAndAbsentees() {
+    const participants = [];
+    const absentees = [];
+    for (const { person, participating } of this.participants) {
+      if (participating) {
+        participants.push(person);
+      } else {
+        absentees.push(person);
+      }
+    }
 
+    return { participants, absentees };
+  }
 
-     if (aanwezigenBijStart && aanwezigenBijStart.length) {
-       aanwezigenBijStart.forEach((mandataris) => {
-         this.selectedMandatees.set(mandataris, true);
-       });
-     }
+  /**
+   * Toggle the participation of a single mandataris
+   * @param {Mandataris} mandataris
+   * @param {boolean} selected
+   */
+  @action
+  toggleParticipant(mandataris, selected) {
+    this.participationMap.set(mandataris, !selected);
+  }
 
-
-     if (afwezigenBijStart && afwezigenBijStart.length) {
-       afwezigenBijStart.forEach((mandataris) => {
-         this.selectedMandatees.set(mandataris, false);
-       });
-     }
-
-     possibleParticipants.forEach((participant) => {
-       if(!this.selectedMandatees.has(participant)) {
-        this.selectedMandatees.set(participant, true);
-       }
-     });
-   }
-
-   /**
-    * Convert from the map back to two lists
-    * @return {{absentees: [], participants: []}}
-    */
-   collectParticipantsAndAbsentees() {
-     const participants = [];
-     const absentees = [];
-     for (const [mandatee, participates] of this.selectedMandatees.entries()) {
-       if(participates) {
-         participants.push(mandatee);
-       } else {
-         absentees.push(mandatee);
-       }
-
-     }
-
-     return {participants, absentees};
-   }
-
-   /**
-    * Toggle the participation of a single mandataris
-    * @param {Mandataris} mandataris
-    * @param {boolean} selected
-    */
-   @action
-   toggleParticipation(mandataris, selected) {
-     this.selectedMandatees.set(mandataris, selected);
-   }
+  @action
+  onCancel() {
+    this.chairman = this.args.chairman;
+    this.secretary = this.args.secretary;
+    this.args.onCloseModal();
+  }
 }

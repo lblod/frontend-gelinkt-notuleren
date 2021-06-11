@@ -1,19 +1,18 @@
 
-{{#if this.hasParticipationInfo}}
 <div class="au-c-meeting-chrome-card au-u-margin-bottom-none">
   <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t "participationList.blockTitle"}}</AuHeading>
   <ul class="au-c-list-divider">
     <li class="au-c-list-divider__item">
-      {{t "participationList.voorzitterLabel"}} <strong>{{@chairman.isBestuurlijkeAliasVan.fullName}}</strong>
-      {{#unless @chairman}}
+      {{t "participationList.voorzitterLabel"}} <strong>{{this.chairman.isBestuurlijkeAliasVan.fullName}}</strong>
+      {{#unless this.chairman}}
         <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">
           {{t "participationList.voorzitterError"}}
         </AuPill>
       {{/unless}}
     </li>
     <li class="au-c-list-divider__item">
-      {{t "participationList.secretarisLabel"}} <strong>{{@secretary.isBestuurlijkeAliasVan.fullName}}</strong>
-      {{#unless @secretary}}
+      {{t "participationList.secretarisLabel"}} <strong>{{this.secretary.isBestuurlijkeAliasVan.fullName}}</strong>
+      {{#unless this.secretary}}
         <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">
           {{t "participationList.secretarisError"}}
         </AuPill>
@@ -21,7 +20,7 @@
     </li>
     <li class="au-c-list-divider__item">
       {{t "participationList.presentLabel"}}
-      {{#each this.mandateesPresent as |mandataris|}}
+      {{#each this.participants as |mandataris|}}
         <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
       {{else}}
         <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">
@@ -31,13 +30,12 @@
     </li>
     <li class="au-c-list-divider__item">
       {{t "participationList.notPresentLabel"}}
-      {{#each this.mandateesNotPresent as |mandataris|}}
+      {{#each this.absentees as |mandataris|}}
         <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
       {{/each}}
     </li>
   </ul>
 </div>
-{{/if}}
 
 {{#unless @readOnly}}
   <AuButton
@@ -46,7 +44,6 @@
     @icon="pencil"
     @iconAlignment="left"
     {{on 'click' this.togglePopup}}
-    @disabled={{this.fetchMandatees.isRunning}}
     class="au-u-margin-top-small"
   >
     {{@modalTitle}}
@@ -54,14 +51,15 @@
 {{/unless}}
 
 <ParticipationList::Modal
-  @voorzitter={{this.chairman}}
-  @secretaris={{this.secretary}}
+  @chairman={{this.defaultedChairman}}
+  @secretary={{this.defaultedSecretary}}
+  @participants={{this.defaultedParticipants}}
+  @absentees={{this.defaultedAbsentees}}
+  @possibleParticipants={{@possibleParticipants}}
+
   @show={{this.popup}}
-  @togglePopup={{this.togglePopup}}
+  @onCloseModal={{this.togglePopup}}
   @onSave={{@onSave}}
   @bestuursorgaan={{@bestuursorgaan}}
-  @aanwezigenBijStart={{this.aanwezigenBijStart}}
-  @afwezigenBijStart={{this.afwezigenBijStart}}
-  @possibleParticipants={{@possibleParticipants}}
   @meeting={{@meeting}}
 />
