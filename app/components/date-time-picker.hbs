@@ -1,7 +1,7 @@
 <div class="au-o-grid au-o-grid--small">
   <div class="au-o-grid__item au-u-2-6">
     {{#let (unique-id) as |id|}}
-      <AuLabel for={{id}}>Datum</AuLabel>
+      <AuLabel for={{id}}>{{t "dateTimePicker.date"}}</AuLabel>
       <AuDatePicker
         @id={{id}}
         @onChange={{this.onChangeDate}}
@@ -12,13 +12,13 @@
   </div>
   <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
     {{#let (unique-id) as |id|}}
-      <AuLabel for={{id}}>Uur</AuLabel>
+      <AuLabel for={{id}}>{{t "dateTimePicker.hours"}}</AuLabel>
       <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'hours'}} @value={{this.hours}} max={{24}} id={{id}} />
     {{/let}}
   </div>
   <div class="au-o-grid__item au-u-2-6 au-u-1-6@medium">
     {{#let (unique-id) as |id|}}
-      <AuLabel for={{id}}>Minuten</AuLabel>
+      <AuLabel for={{id}}>{{t "dateTimePicker.minutes"}}</AuLabel>
       <Input class="au-c-input au-c-input--block" type='number' @input={{fn this.onChangeTime 'minutes'}} @value={{this.minutes}} max={{60}} id={{id}} />
     {{/let}}
   </div>
