@@ -94,7 +94,7 @@ export default class manageIntermissionsEditComponent extends Component {
     ];
   }
   @action
-  updatedIntermission(element, [intermissionToEdit]){
+  updatedIntermission(){
     this.args.intermissionToEdit;
     this.fetchPosition.perform();
   }
