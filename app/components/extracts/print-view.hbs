@@ -1,0 +1,46 @@
+<PrintView as |Print|>
+  <Print.Header as |Header|>
+    {{#if @backLinkRoute}}
+      <Header.BackLink @linkRoute={{@backLinkRoute}} @model={{@linkModel}} @models={{@linkModels}}>
+        Terug naar ondertekenen & publiceren
+      </Header.BackLink>
+    {{/if}}
+  </Print.Header>
+  <Print.Body>
+
+    {{#let @versionedTreatment.signedResources
+           @versionedTreatment.zitting as |signatures meeting|}}
+      <AuHeading>
+        Uittreksel uit de notulen
+        <br>
+        {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}
+        <br>
+        zitting van {{moment-format meeting.geplandeStart 'L LT'}}
+      </AuHeading>
+      <p class="au-u-margin-top-small au-u-margin-bottom">Het document slaat op de situatie zoals gekend bij het
+        afleveren.</p>
+
+      {{#if signatures.length}}
+        <div class="au-o-grid">
+          {{#each signatures as |signature|}}
+            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
+          {{/each}}
+        </div>
+      {{/if}}
+
+      <AuHr @size="large"/>
+
+      {{html-safe @versionedTreatment.content}}
+
+
+      {{#if signatures.length}}
+        <AuHr @size="large"/>
+        <div class="au-o-grid">
+          {{#each signatures as |signature|}}
+            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
+          {{/each}}
+        </div>
+      {{/if}}
+    {{/let}}
+  </Print.Body>
+</PrintView>

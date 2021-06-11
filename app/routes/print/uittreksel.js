@@ -1,19 +1,21 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default class PrintUittrekselRoute extends Route {
+  @service publish;
+
   async model(params) {
-    return this.store.find('versioned-behandeling', params.id);
-  }
+    const { treatment_id: treatmentId, meeting_id: meetingId } = params;
+    const extract = this.publish.treatmentExtractsMap.get(treatmentId);
 
-  async afterModel(model) {
-    this.zitting = await model.get('zitting');
-    const tijdsspecialisatie = await this.zitting.get('bestuursorgaan');
-    this.bestuursorgaan = tijdsspecialisatie.get('isTijdsspecialisatieVan');
-  }
-
-  setupController(controller, model) {
-    super.setupController(controller, model);
-    controller.bestuursorgaan = this.bestuursorgaan;
-    controller.geplandeStart = this.zitting.geplandeStart;
+    if (extract) {
+      return { document: extract.document, meetingId };
+    } else {
+      await this.publish.loadExtractsTask.perform(meetingId);
+      return {
+        document: this.publish.treatmentExtractsMap.get(treatmentId)?.document,
+        meetingId,
+      };
+    }
   }
 }

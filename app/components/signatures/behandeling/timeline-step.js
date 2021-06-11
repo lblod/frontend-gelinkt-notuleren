@@ -3,8 +3,8 @@ import Component from '@glimmer/component';
 export default class SignaturesBesluitenlijstTimelineStep extends Component {
   get mockBehandeling() {
     return {
-      body: this.args.behandeling.content,
-      signedId: this.args.behandeling.zitting.get('id')
+      body: this.args.extract.document.content,
+      signedId: this.args.extract.document.zitting.get('id')
     };
   }
 }
