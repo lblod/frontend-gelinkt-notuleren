@@ -42,25 +42,26 @@ export default class ParticipationMap extends Resource {
     // https://github.com/pzuraq/ember-could-get-used-to-this/pull/37#issuecomment-814157755
     const map = new Map();
     const { participants, absentees, possibleParticipants } = this.args.named;
-    if (participants && absentees && possibleParticipants) {
-      if (participants.length) {
-        participants.forEach((mandataris) => {
-          map.set(mandataris, true);
-        });
-      }
 
-      if (absentees.length) {
-        absentees.forEach((mandataris) => {
-          map.set(mandataris, false);
-        });
-      }
+    // While it may be tempting to refactor this into setting the possible participants
+    // all to true and then just setting absentees to false,
+    // the logic is like this to better represent the data the user actually selected
+    // even if that data would be technically impossible in the real world
+    if (participants && absentees) {
+      participants.forEach((mandataris) => {
+        map.set(mandataris, true);
+      });
 
-      possibleParticipants.forEach((participant) => {
-        if (!map.has(participant)) {
-          map.set(participant, true);
-        }
+      absentees.forEach((mandataris) => {
+        map.set(mandataris, false);
       });
     }
+
+    possibleParticipants?.forEach((participant) => {
+      if (!map.has(participant)) {
+        map.set(participant, true);
+      }
+    });
     this.participationMap = new TrackedMap(map);
   }
 }
