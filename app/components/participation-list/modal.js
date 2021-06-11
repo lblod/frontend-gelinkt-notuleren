@@ -1,12 +1,10 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { tracked } from 'tracked-built-ins';
-import {cached} from 'ember-cached-decorator-polyfill';
+import { cached } from 'ember-cached-decorator-polyfill';
 import { inject as service } from '@ember/service';
 import { localCopy } from 'tracked-toolbox';
-import { Resource, use } from 'ember-could-get-used-to-this';
-import ParticipationMap from "../../helpers/participant-map";
-
+import { use } from 'ember-could-get-used-to-this';
+import ParticipationMap from '../../helpers/participant-map';
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
 /** @typedef {import("../../models/functionaris").default} Functionaris */
@@ -46,11 +44,13 @@ export default class ParticipationListModalComponent extends Component {
   @service store;
 
   /** @type {Map} */
-  @cached @use participationMap = new ParticipationMap(() => [
-    this.args.participants,
-    this.args.absentees,
-    this.args.possibleParticipants,
-  ]);
+  @cached @use participationMap = new ParticipationMap(() => ({
+    named: {
+      participants: this.args.participants,
+      absentees: this.args.absentees,
+      possibleParticipants: this.args.possibleParticipants,
+    },
+  }));
 
   @action
   selectChairman(value) {
@@ -78,8 +78,13 @@ export default class ParticipationListModalComponent extends Component {
     this.args.onCloseModal();
   }
 
+  /**
+   * Get a list of possible mandatees with their participation
+   *
+   * We use possibleParticipants here to map over cause it's already sorted.
+   * @returns {{person: Mandataris, participating: boolean}[]}
+   */
   get participants() {
-    console.log('rerunning getter');
     return this.args.possibleParticipants.map((participant) => ({
       person: participant,
       participating: this.participationMap.get(participant),
@@ -93,7 +98,7 @@ export default class ParticipationListModalComponent extends Component {
   collectParticipantsAndAbsentees() {
     const participants = [];
     const absentees = [];
-    for (const {person, participating} of this.participants) {
+    for (const { person, participating } of this.participants) {
       if (participating) {
         participants.push(person);
       } else {
@@ -111,8 +116,6 @@ export default class ParticipationListModalComponent extends Component {
    */
   @action
   toggleParticipant(mandataris, selected) {
-    console.log(this.participationMap);
     this.participationMap.set(mandataris, !selected);
-    console.log(this.participationMap);
   }
 }
