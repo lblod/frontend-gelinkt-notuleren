@@ -8,7 +8,7 @@ import { Resource } from 'ember-could-get-used-to-this';
 export default class ParticipationMap extends Resource {
   /**
    * @callback DependencyConfig
-   * @returns {{participants: Mandataris[], absentees: Mandataris[], possibleParticipants: Mandataris[]}}
+   * @returns {{active: boolean, participants: Mandataris[], absentees: Mandataris[], possibleParticipants: Mandataris[]}}
    */
 
   /**
@@ -41,27 +41,30 @@ export default class ParticipationMap extends Resource {
     // more info about this footgun here:
     // https://github.com/pzuraq/ember-could-get-used-to-this/pull/37#issuecomment-814157755
     const map = new Map();
-    const { participants, absentees, possibleParticipants } = this.args.named;
+    const { active, participants, absentees, possibleParticipants } =
+      this.args.named;
 
     // While it may be tempting to refactor this into setting the possible participants
     // all to true and then just setting absentees to false,
     // the logic is like this to better represent the data the user actually selected
     // even if that data would be technically impossible in the real world
-    if (participants && absentees) {
-      participants.forEach((mandataris) => {
-        map.set(mandataris, true);
-      });
+    if (active) {
+      if (participants && absentees) {
+        participants.forEach((mandataris) => {
+          map.set(mandataris, true);
+        });
 
-      absentees.forEach((mandataris) => {
-        map.set(mandataris, false);
+        absentees.forEach((mandataris) => {
+          map.set(mandataris, false);
+        });
+      }
+
+      possibleParticipants?.forEach((participant) => {
+        if (!map.has(participant)) {
+          map.set(participant, true);
+        }
       });
     }
-
-    possibleParticipants?.forEach((participant) => {
-      if (!map.has(participant)) {
-        map.set(participant, true);
-      }
-    });
     this.participationMap = new TrackedMap(map);
   }
 }

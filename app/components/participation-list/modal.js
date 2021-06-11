@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { cached } from 'ember-cached-decorator-polyfill';
 import { inject as service } from '@ember/service';
 import { localCopy } from 'tracked-toolbox';
 import { use } from 'ember-could-get-used-to-this';
@@ -44,13 +43,29 @@ export default class ParticipationListModalComponent extends Component {
   @service store;
 
   /** @type {Map} */
-  @cached @use participationMap = new ParticipationMap(() => ({
+  @use participationMap = new ParticipationMap(() => ({
     named: {
+      // we depend on the show state here to make sure that upon opening/closing the modal
+      // we reset the state
+      active: this.args.show,
       participants: this.args.participants,
       absentees: this.args.absentees,
       possibleParticipants: this.args.possibleParticipants,
     },
   }));
+
+  /**
+   * Get a list of possible mandatees with their participation
+   *
+   * We use possibleParticipants here to map over cause it's already sorted.
+   * @returns {{person: Mandataris, participating: boolean}[]}
+   */
+  get participants() {
+    return this.args.possibleParticipants.map((participant) => ({
+      person: participant,
+      participating: this.participationMap.get(participant),
+    }));
+  }
 
   @action
   selectChairman(value) {
@@ -79,19 +94,6 @@ export default class ParticipationListModalComponent extends Component {
   }
 
   /**
-   * Get a list of possible mandatees with their participation
-   *
-   * We use possibleParticipants here to map over cause it's already sorted.
-   * @returns {{person: Mandataris, participating: boolean}[]}
-   */
-  get participants() {
-    return this.args.possibleParticipants.map((participant) => ({
-      person: participant,
-      participating: this.participationMap.get(participant),
-    }));
-  }
-
-  /**
    * Convert from the map back to two lists
    * @return {{absentees: [], participants: []}}
    */
@@ -117,5 +119,12 @@ export default class ParticipationListModalComponent extends Component {
   @action
   toggleParticipant(mandataris, selected) {
     this.participationMap.set(mandataris, !selected);
+  }
+
+  @action
+  onCancel() {
+    this.chairman = this.args.chairman;
+    this.secretary = this.args.secretary;
+    this.args.onCloseModal();
   }
 }

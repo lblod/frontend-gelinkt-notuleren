@@ -1,7 +1,7 @@
 <AuModal
         @modalTitle="Beheer aanwezigen"
         @modalOpen={{@show}}
-        @closeModal={{@onCloseModal}}
+        @closeModal={{this.onCancel}}
         as |Modal|>
   <Modal.Body>
     <div class="au-o-flow">
@@ -41,8 +41,9 @@
   <Modal.Footer>
     <AuButtonGroup>
       <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
-      <AuButton @skin="secondary" {{on "click" @onCloseModal}}>{{t
-              "participationListModal.cancelButton"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" this.onCancel}}>
+        {{t "participationListModal.cancelButton"}}
+      </AuButton>
     </AuButtonGroup>
   </Modal.Footer>
 </AuModal>
