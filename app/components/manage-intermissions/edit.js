@@ -92,7 +92,7 @@ export default class manageIntermissionsEditComponent extends Component {
       { code: 'during', name: this.intl.t('manageIntermissions.duringAp'), conceptUuid: "4790eec5-acd2-4c1d-8e91-90bb2998f87c" },
       { code: 'after', name: this.intl.t('manageIntermissions.afterAp'), conceptUuid: "267a09cc-5380-492d-93ad-697b9e99f032" }
     ];
-  };
+  }
 
   //this is stupid... I might be stupid
   get hack() {
