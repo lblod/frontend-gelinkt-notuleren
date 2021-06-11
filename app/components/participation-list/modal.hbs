@@ -26,11 +26,12 @@
       </div>
       <div>
         <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
-        <ParticipationList::MandatarissenTable
-                @toggleParticipant={{this.toggleParticipant}}
-                as |Table|>
+        <ParticipationList::MandatarissenTable @toggleParticipant={{this.toggleParticipant}}
+                                               as |Table|>
           {{#each this.participants as |participant| }}
-            <Table.Row @mandataris={{participant.[0]}} @selected={{participant.[1]}}/>
+            <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}}/>
+          {{else}}
+            <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
           {{/each}}
         </ParticipationList::MandatarissenTable>
       </div>

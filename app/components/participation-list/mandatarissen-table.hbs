@@ -14,11 +14,7 @@
   </tr>
   </thead>
   <tbody>
-  {{#if (has-block)}}
-    {{yield (hash Row=(component "participation-list/mandataris-row" toggle=@toggleParticipant))}}
-  {{else }}
-    <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
-  {{/if}}
+  {{yield (hash Row=(component "participation-list/mandataris-row" toggle=@toggleParticipant))}}
   </tbody>
 </table>
 

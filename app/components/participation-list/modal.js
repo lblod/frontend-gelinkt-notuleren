@@ -1,56 +1,12 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
+import {cached} from 'ember-cached-decorator-polyfill';
 import { inject as service } from '@ember/service';
 import { localCopy } from 'tracked-toolbox';
 import { Resource, use } from 'ember-could-get-used-to-this';
+import ParticipationMap from "../../helpers/participant-map";
 
-class ParticipationMap extends Resource {
-  /**
-   * @callback DependencyConfig
-   * @returns {[Mandataris[], Mandataris[], Mandataris[]]}}
-   */
-
-  /**
-   * @param {DependencyConfig} dependencies
-   */
-  // eslint-disable-next-line no-unused-vars
-  constructor(dependencies) {
-    super(...arguments);
-  }
-
-  /** @type {Map} */
-  participationMap = tracked(Map);
-
-  get value() {
-    return this.participationMap;
-  }
-
-  setup() {
-    this.participationMap.clear();
-    const [participants, absentees, possibleParticipants] =
-      this.args.positional;
-    if (participants && absentees && possibleParticipants) {
-      if (participants.length) {
-        participants.forEach((mandataris) => {
-          this.participationMap.set(mandataris, true);
-        });
-      }
-
-      if (absentees.length) {
-        absentees.forEach((mandataris) => {
-          this.participationMap.set(mandataris, false);
-        });
-      }
-
-      possibleParticipants.forEach((participant) => {
-        if (!this.participationMap.has(participant)) {
-          this.participationMap.set(participant, true);
-        }
-      });
-    }
-  }
-}
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
 /** @typedef {import("../../models/functionaris").default} Functionaris */
@@ -89,7 +45,8 @@ export default class ParticipationListModalComponent extends Component {
   @localCopy('args.secretary') secretary;
   @service store;
 
-  @use participationMap = new ParticipationMap(() => [
+  /** @type {Map} */
+  @cached @use participationMap = new ParticipationMap(() => [
     this.args.participants,
     this.args.absentees,
     this.args.possibleParticipants,
@@ -122,10 +79,11 @@ export default class ParticipationListModalComponent extends Component {
   }
 
   get participants() {
-    return this.args.possibleParticipants.map((participant) => [
-      participant,
-      this.participationMap.get(participant),
-    ]);
+    console.log('rerunning getter');
+    return this.args.possibleParticipants.map((participant) => ({
+      person: participant,
+      participating: this.participationMap.get(participant),
+    }));
   }
 
   /**
@@ -135,11 +93,11 @@ export default class ParticipationListModalComponent extends Component {
   collectParticipantsAndAbsentees() {
     const participants = [];
     const absentees = [];
-    for (const [mandatee, participates] of this.participants) {
-      if (participates) {
-        participants.push(mandatee);
+    for (const {person, participating} of this.participants) {
+      if (participating) {
+        participants.push(person);
       } else {
-        absentees.push(mandatee);
+        absentees.push(person);
       }
     }
 
@@ -152,9 +110,9 @@ export default class ParticipationListModalComponent extends Component {
    * @param {boolean} selected
    */
   @action
-  toggleParticipant(mandataris) {
-    console.log('TOGGLING');
-    const participating = this.participationMap.get(mandataris);
-    this.participationMap.set(mandataris, !participating);
+  toggleParticipant(mandataris, selected) {
+    console.log(this.participationMap);
+    this.participationMap.set(mandataris, !selected);
+    console.log(this.participationMap);
   }
 }
