@@ -11,7 +11,12 @@ export default class ParticipationMap extends Resource {
    * @returns {{participants: Mandataris[], absentees: Mandataris[], possibleParticipants: Mandataris[]}}
    */
 
-  /** @type {Map} */
+  /**
+   * Backing state for the Resource's value
+   * Apparently does not need to be tracked because of the resource's own
+   * tracking context
+   * @type {Map}
+   * */
   participationMap;
 
   /**
