@@ -15,6 +15,7 @@
         <AuLabel>{{t "manageIntermissions.interruptionEndLabel"}}</AuLabel>
         <DateTimePicker @onChange={{fn this.changeDate 'endedAt'}} @value={{this.endedAtExternal}}/>
       </div>
+      {{this.hack}}
       <div>
         {{#if @zitting.agendapunten}}
           <AuLabel>{{t "manageIntermissions.position"}}</AuLabel>
@@ -23,17 +24,17 @@
               <PowerSelect
                 @renderInPlace={{true}}
                 @placeholder={{t "manageAgendaZittingModalMove.positionSelectPlaceholder"}}
-                @options={{this.locationOptions}}
+                @options={{this.positionOptions}}
                 @verticalPosition="above"
-                @selected={{this.selectedLocation}}
-                @onChange={{this.selectLocation}}
+                @selected={{this.selectedPosition}}
+                @onChange={{this.selectPosition}}
                 @allowClear={{true}}
                 as |location|>
                 {{location.name}}
               </PowerSelect>
             </div>
             <div class="au-o-grid__item au-u-1-2">
-              {{#if this.selectedLocation}}
+              {{#if this.selectedPosition}}
                 <PowerSelect
                   @renderInPlace={{true}}
                   @placeholder={{t "manageAgendaZittingModalMove.agendapuntSelectPlaceholder"}}

@@ -10,7 +10,7 @@ export default class manageIntermissionsEditComponent extends Component {
   @tracked comment;
   @service store;
   @service intl;
-
+ 
   constructor(...args){
     super(...args);
   }
@@ -68,12 +68,13 @@ export default class manageIntermissionsEditComponent extends Component {
     if(intermission.isNew) {
       this.args.zitting.intermissions.pushObject(intermission);
     }
+    yield this.savePosition.perform();
+    
     yield intermission.save();
     yield this.args.zitting.save();
     this.startedAt = '';
     this.endedAt = '';
     this.comment = '';
-    this.locationToBeSet = null;
     this.args.onClose();
   }
 
@@ -86,47 +87,137 @@ export default class manageIntermissionsEditComponent extends Component {
   }
 
   //position stuff
-  get locationOptions(){return [
-    { code: 'during', name: this.intl.t('manageIntermissions.duringAp') },
-    { code: 'before', name: this.intl.t('manageIntermissions.beforeAp') },
-    { code: 'after', name: this.intl.t('manageIntermissions.afterAp') }]
+  get positionOptions(){
+    return [
+      { code: 'before', name: this.intl.t('manageIntermissions.beforeAp'), conceptUuid: "9c9be842-236f-4738-b642-f4064c86db51"},
+      { code: 'during', name: this.intl.t('manageIntermissions.duringAp'), conceptUuid: "4790eec5-acd2-4c1d-8e91-90bb2998f87c"},
+      { code: 'after', name: this.intl.t('manageIntermissions.afterAp'), conceptUuid: "267a09cc-5380-492d-93ad-697b9e99f032"}
+    ];
   };
 
-  @tracked locationToBeSet;
-
-  get selectedLocation() {
-    if (this.locationToBeSet) {
-      return this.locationToBeSet;
-    } else {
-      return this.locationOptions.find(e => e.code === this.args.intermissionToEdit.position);
-    }
-  }
-  set selectedLocation(value) {
-    this.locationToBeSet = value;
-    if (this.selectedAp.content) {
-      this.args.intermissionToEdit.position = this.selectedLocation.code;
-    }
-    if (!value) {
-      this.locationToBeSet = null;
-      this.args.intermissionToEdit.position = null;
-      this.selectedAp = null;
-    }
+  //this is stupid... I might be stupid
+  get hack(){
+    this.args.intermissionToEdit;
+    console.log('intermissionToEdit has updated');
+    this.fetchPosition.perform();
+    return "";
   }
 
-  get selectedAp() {
-    return this.args.intermissionToEdit.onderwerp;
+  @task
+  *savePosition(){    
+    const intermission=yield this.args.intermissionToEdit;
+    let agendaPos=yield intermission.agendaPosition;
+    if(!agendaPos){
+      agendaPos=yield this.store.createRecord('agenda-position');
+      yield agendaPos.save();
+      intermission.agendaPosition=agendaPos;
+    }
+    agendaPos.agendapoint=this.selectedAp;
+    if(this.selectedAp && this.selectedPosition){
+      agendaPos.position=yield this.store.findRecord('concept', this.selectedPosition.conceptUuid);
+    }
+    else{
+      agendaPos.position=null;
+    }
+    yield agendaPos.save();
   }
-  set selectedAp(value) {
-    this.args.intermissionToEdit.position = this.selectedLocation.code;
-    this.args.intermissionToEdit.onderwerp = value;
+
+  @task
+  *fetchPosition(){    
+    const intermission=yield this.args.intermissionToEdit;
+    const agendaPos=yield intermission.agendaPosition;
+    if(agendaPos){
+      const posConcept=yield agendaPos.position;
+      if(posConcept){
+        this.selectedPosition=this.positionOptions.find(e=>e.conceptUuid === posConcept.id);
+      }
+      else{
+        this.selectedPosition=null;
+      }
+      const posAp=yield agendaPos.agendapoint;
+      if(posAp){
+        this.selectedAp=posAp;
+      }
+      else{
+        this.selectedAp=null;
+      }
+    }
+    else{
+      this.selectedAp=null;
+      this.selectedPosition=null;
+    }
   }
+  
+  @tracked selectedPosition;
+
+  @tracked selectedAp;
 
   @action selectAp(value) {
     this.selectedAp = value;
   }
 
-  @action selectLocation(value) {
-    this.selectedLocation = value;
+  @action selectPosition(value) {
+    this.selectedPosition = value;
+    if(!value){
+      this.selectedAp=null;
+    }
   }
+
+  // @task
+  // *fetchAPos(){
+  //   const intermission = yield this.args.intermissionToEdit;
+  //   const agendaPos = yield intermission.agendaPosition;
+  //   if(!agendaPos){
+  //     const newAPos =
+  //       yield this.store.createRecord('agenda-position');
+  //     intermission.agendaPosition = newAPos;
+  //   }
+  // }
+
+  // selectedPosValue;
+  
+  // @task 
+  // *setPosition(){
+  //   const intermission=this.args.intermissionToEdit;
+  //   const agendaPosition=intermission.agendaPosition.content;
+  //   agendaPosition.position=yield this.store.findRecord('concept', this.selectedPosValue.conceptUuid);
+  // }
+
+  // get selectedAp(){
+    
+  // };
+
+  // set selectedAp(value){
+
+  // };
+
+  // get selectedPosition(){
+  //   this.fetchAPos.perform();
+  //   const intermission=this.args.intermissionToEdit;
+  //   const agendaPosition=intermission.agendaPosition.content;
+  //   if(agendaPosition && agendaPosition.position && agendaPosition.position.content){
+  //     return this.positionOptions.find(e=>e.conceptUuid===agendaPosition.position.content.id);
+  //   }
+  //   else{
+  //     return null;
+  //   }
+  // }
+  
+  // set selectedPosition(value){
+  //   const intermission=this.args.intermissionToEdit;
+  //   const agendaPosition=intermission.agendaPosition.content;
+  //   if(agendaPosition){
+  //     this.selectedPosValue=value;
+  //     this.setPosition.perform();
+  //   }
+  // }
+
+  // @action selectAp(value) {
+  //   this.selectedAp = value;
+  // }
+
+  // @action selectPosition(value) {
+  //   this.selectedPosition = value;
+  // }
 
 }
