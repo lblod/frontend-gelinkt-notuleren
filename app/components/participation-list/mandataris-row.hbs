@@ -4,7 +4,7 @@
   <td>{{moment-format @mandataris.isBestuurlijkeAliasVan.geboorte.datum 'DD/MM/YYYY'}}</td>
   <td>
     <label class="checkbox checkbox--block">
-      <Input class="checkbox__toggle" @type="checkbox" @checked={{this.selected}} @click={{this.toggle}} />
+      <input class="checkbox__toggle" type="checkbox" checked={{@selected}} {{on "input" (fn @toggle @mandataris @selected)}} />
       <span></span>
       <strong>{{t "participationListModalTable.checkboxLabel"}}</strong>
     </label>

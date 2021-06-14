@@ -32,6 +32,7 @@ publish:
   backToMeeting: Back to meeting
   headingPartOne: Meeting on
   loadingMessage: Loading...
+  updatingMessage: Updating...
   excerptsErrorMessage: There are no excerpts available
 behandelingVanAgendapunten:
   documentLink: "document link"

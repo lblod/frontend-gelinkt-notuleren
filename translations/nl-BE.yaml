@@ -32,6 +32,7 @@ publish:
   backToMeeting: Terug naar zitting
   headingPartOne: Zitting van
   loadingMessage: Bezig met laden...
+  updatingMessage: Bezig met bijwerken...
   excerptsErrorMessage: Er zijn geen uittreksels beschikbaar
 behandelingVanAgendapunten:
   documentLink: "document link"

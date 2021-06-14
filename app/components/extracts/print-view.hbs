@@ -1,7 +1,7 @@
 <PrintView as |Print|>
   <Print.Header as |Header|>
     {{#if @backLinkRoute}}
-      <Header.BackLink @linkRoute={{@backLinkRoute}} @model={{@model}} @models={{@models}}>
+      <Header.BackLink @linkRoute={{@backLinkRoute}} @model={{@linkModel}} @models={{@linkModels}}>
         Terug naar ondertekenen & publiceren
       </Header.BackLink>
     {{/if}}

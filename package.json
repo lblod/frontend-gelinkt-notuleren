@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -54,6 +54,7 @@
     "ember-a11y-refocus": "^1.0.0",
     "ember-auto-import": "^1.11.3",
     "ember-browser-update": "^0.1.0",
+    "ember-cached-decorator-polyfill": "^0.1.3",
     "ember-cli": "~3.24.0",
     "ember-cli-app-version": "^4.0.0",
     "ember-cli-autoprefixer": "^1.0.0",
@@ -76,6 +77,7 @@
     "ember-composable-helpers": "^4.4.1",
     "ember-concurrency": "^2.0.2",
     "ember-config-helper": "^0.1.3",
+    "ember-could-get-used-to-this": "^1.0.1",
     "ember-data": "~3.24.0",
     "ember-drag-drop": "^0.8.2",
     "ember-export-application-global": "^2.0.1",
@@ -109,7 +111,8 @@
     "prettier": "^2.2.1",
     "qunit": "^2.13.0",
     "qunit-dom": "^1.6.0",
-    "tracked-built-ins": "^1.0.2"
+    "tracked-built-ins": "^1.0.2",
+    "tracked-toolbox": "^1.2.3"
   },
   "engines": {
     "node": "10.* || >= 12"
@@ -125,5 +128,10 @@
     "last 1 Safari version",
     "last 1 iOS version",
     "last 1 Edge version"
-  ]
+  ],
+  "release-it": {
+    "npm": {
+      "publish": false
+    }
+  }
 }

@@ -24,7 +24,7 @@ Router.map(function() {
   });
   this.route('contact');
   this.route('print', function() {
-    this.route('uittreksel', { path: '/uittreksel/:id' });
+    this.route('uittreksel', { path: 'uittreksel/:meeting_id/:treatment_id' });
   });
   this.route('route-not-found', {
     path: '/*wildcard'
