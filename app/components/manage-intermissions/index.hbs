@@ -37,18 +37,18 @@
             <td>{{moment-format intermission.startedAt "DD/MM/YYYY hh:mm"}}</td>
             <td>{{moment-format intermission.endedAt "DD/MM/YYYY hh:mm"}}</td>
             <td>
-              {{#if intermission.position}}
-                {{#if (eq intermission.position "during")}}
+              {{#if intermission.agendaPosition}}
+                {{#if (eq intermission.agendaPosition.position.label "during")}}
                   {{t "manageIntermissions.duringAp"}}: 
                 {{/if}}
-                {{#if (eq intermission.position "before")}}
+                {{#if (eq intermission.agendaPosition.position.label "before")}}
                   {{t "manageIntermissions.beforeAp"}}: 
                 {{/if}}
-                {{#if (eq intermission.position "after")}}
+                {{#if (eq intermission.agendaPosition.position.label "after")}}
                   {{t "manageIntermissions.afterAp"}}: 
                 {{/if}}
-                <a href="#behandeling-{{intermission.onderwerp.behandeling.id}}" class="au-c-link au-c-link--secondary">
-                  {{intermission.onderwerp.titel}}
+                <a href="#behandeling-{{intermission.agendaPosition.agendapoint.behandeling.id}}" class="au-c-link au-c-link--secondary">
+                  {{intermission.agendaPosition.agendapoint.titel}}
                 </a>
               {{/if}}
             </td>

@@ -3,6 +3,7 @@ import { task } from "ember-concurrency";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import { inject as service } from '@ember/service';
+import {BEFORE_POS_ID, DURING_POS_ID, AFTER_POS_ID}  from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class manageIntermissionsEditComponent extends Component {
   @tracked startedAt;
@@ -88,14 +89,13 @@ export default class manageIntermissionsEditComponent extends Component {
   //position stuff
   get positionOptions() {
     return [
-      { code: 'before', name: this.intl.t('manageIntermissions.beforeAp'), conceptUuid: "9c9be842-236f-4738-b642-f4064c86db51" },
-      { code: 'during', name: this.intl.t('manageIntermissions.duringAp'), conceptUuid: "4790eec5-acd2-4c1d-8e91-90bb2998f87c" },
-      { code: 'after', name: this.intl.t('manageIntermissions.afterAp'), conceptUuid: "267a09cc-5380-492d-93ad-697b9e99f032" }
+      { code: 'before', name: this.intl.t('manageIntermissions.beforeAp'), conceptUuid: BEFORE_POS_ID },
+      { code: 'during', name: this.intl.t('manageIntermissions.duringAp'), conceptUuid: DURING_POS_ID },
+      { code: 'after', name: this.intl.t('manageIntermissions.afterAp'), conceptUuid: AFTER_POS_ID }
     ];
   }
   @action
   updatedIntermission(){
-    this.args.intermissionToEdit;
     this.fetchPosition.perform();
   }
 
