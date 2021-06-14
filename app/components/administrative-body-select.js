@@ -21,6 +21,17 @@ const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
   "http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000008" //	"Vast Bureau"
 ];
 
+/**
+ * @typedef {Object} Args
+ *
+ * @property {string} id Input id so it can be linked with a label
+ * @property {BestuursOrgaan} selected which governing body is currently selected
+ * @property {(administrativeBody: BestuursOrgaan) => void} onChange change handler called when a body is selected
+ * @property {(endDate: string) => boolean} endDateFilter filter function to restrict shown bodies by their end date
+ * @property {boolean} error whether there is a form value error and we should render as such
+ */
+
+ /** @extends {Component<Args>} */
 export default class AdministrativeBodySelectComponent extends Component {
   @service currentSession;
   @service store;
@@ -45,9 +56,24 @@ export default class AdministrativeBodySelectComponent extends Component {
       'sort': '-binding-start'
     });
 
-    this.administrativeBodyOptions = administrativeBodiesInTime.filter((administrativeBodyInTime) => {
-      let classificationUrl = administrativeBodyInTime.get('isTijdsspecialisatieVan.classificatie.uri');
-      return VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS.includes(classificationUrl);
-    });
+    this.administrativeBodyOptions = administrativeBodiesInTime.filter(
+      (administrativeBodyInTime) => {
+        const classificationUrl = administrativeBodyInTime.get(
+          'isTijdsspecialisatieVan.classificatie.uri'
+        );
+        const bodyIsValid =
+          VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS.includes(classificationUrl);
+        // shortcutting to avoid work
+        if (!bodyIsValid) {
+          return false;
+        }
+
+        const endDate = administrativeBodyInTime.bindingEinde;
+        if(this.args.endDateFilter) {
+          return this.args.endDateFilter(endDate);
+        }
+        return true;
+      }
+    );
   }
 }
