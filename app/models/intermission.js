@@ -5,4 +5,5 @@ export default class IntermissionModel extends Model {
   @attr("datetime") endedAt;
   @attr comment;
   @belongsTo('zitting', { inverse: 'intermissions' }) zitting;
+  @belongsTo('agenda-position') agendaPosition;
 }
