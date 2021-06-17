@@ -20,7 +20,6 @@
             @id={{id}}
             @selected={{this.meeting.bestuursorgaan}}
             @onChange={{this.updateAdministrativeBody}}
-            @endDateFilter={{this.dateIsLessThanTwoMonthsAgo}}
             @error={{if errors true false}}
           />
           {{#each errors as |error|}}

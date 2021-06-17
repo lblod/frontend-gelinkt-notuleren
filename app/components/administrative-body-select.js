@@ -2,6 +2,7 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
+import moment from 'moment';
 
 const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
   "http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005", //	"Gemeenteraad"
@@ -27,7 +28,6 @@ const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
  * @property {string} id Input id so it can be linked with a label
  * @property {BestuursOrgaan} selected which governing body is currently selected
  * @property {(administrativeBody: BestuursOrgaan) => void} onChange change handler called when a body is selected
- * @property {(endDate: string) => boolean} endDateFilter filter function to restrict shown bodies by their end date
  * @property {boolean} error whether there is a form value error and we should render as such
  */
 
@@ -43,6 +43,10 @@ export default class AdministrativeBodySelectComponent extends Component {
     this.fetchAdministrativeBodies.perform();
   }
 
+  /**
+   * Fetch bodies which are of the right classification, and whose
+   * end date is not older than 2 months before the current date
+   */
   @task
   * fetchAdministrativeBodies() {
     let currentAdministrativeUnitId = this.currentSession.group.id;
@@ -69,10 +73,10 @@ export default class AdministrativeBodySelectComponent extends Component {
         }
 
         const endDate = administrativeBodyInTime.bindingEinde;
-        if(this.args.endDateFilter) {
-          return this.args.endDateFilter(endDate);
+        if(!endDate) {
+          return true;
         }
-        return true;
+        return moment(endDate).isAfter(moment().subtract(2, 'months'));
       }
     );
   }

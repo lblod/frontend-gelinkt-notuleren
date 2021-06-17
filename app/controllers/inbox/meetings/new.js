@@ -2,7 +2,6 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { dropTask } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
-import moment from 'moment';
 
 export default class InboxMeetingsNewController extends Controller {
   @service router;
@@ -40,15 +39,5 @@ export default class InboxMeetingsNewController extends Controller {
     // More info: https://github.com/emberjs/ember.js/issues/19497
     // TODO use the router service once the bug is fixed
     this.replaceRoute('inbox.meetings');
-  }
-  /**
-   * @param {string | null} [endDate]
-   */
-  @action
-  dateIsLessThanTwoMonthsAgo(endDate) {
-    if(!endDate) {
-      return true;
-    }
-    return moment(endDate).isAfter(moment().subtract(2, 'months'));
   }
 }
