@@ -306,6 +306,10 @@ manageIntermissions:
   checkboxLabel: I understand that the intermission will be irreversibly removed.
   retainButton: Retain intermission
   deleteButton: Delete intermission
+  beforeAp: "Intermission before agenda item:"
+  duringAp: "Intermission during agenda item:"
+  afterAp: "Intermission after agenda item:"
+  position: "Position"
 rdfaEditorContainer:
   defaultBusyText: Processing
   saving: Saving
