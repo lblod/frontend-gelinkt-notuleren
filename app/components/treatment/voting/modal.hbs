@@ -24,17 +24,19 @@
       <th style="max-width: 30rem;">
         {{t "votingModal.gevolgLabel"}}
       </th>
-      <th class="au-u-table-right">
-        <span class="au-u-hidden-visually">{{t "votingModal.actionsLabel"}}</span>
-        <AuButton
-          {{on "click" (perform this.addStemming)}}
-          @icon="add"
-          @iconAlignment="left"
-          @loading={{this.addStemming.isRunning}}
-        >
-          {{t "votingModal.createVotingButton"}}
-        </AuButton>
-      </th>
+      {{#unless @readOnly}}
+        <th class="au-u-table-right">
+          <span class="au-u-hidden-visually">{{t "votingModal.actionsLabel"}}</span>
+            <AuButton
+              {{on "click" (perform this.addStemming)}}
+              @icon="add"
+              @iconAlignment="left"
+              @loading={{this.addStemming.isRunning}}
+            >
+              {{t "votingModal.createVotingButton"}}
+            </AuButton>
+        </th>
+      {{/unless}}
     </tr>
   </thead>
   <tbody>
@@ -79,26 +81,28 @@
               <AuHelpText @size="normal" @skin="tertiary">{{t "votingModal.gevolgNotFound"}}</AuHelpText>
             {{/if}}
           </td>
-          <td class="au-u-table-right">
-            <AuButtonGroup>
-              <AuButton
-                {{on "click" (fn this.toggleEditStemming stemming)}}
-                @icon="pencil"
-                @iconAlignment="left"
-              >
-                {{t "votingModal.toggleEditButton"}}
-              </AuButton>
-              <AuButton
-                {{on "click" (fn (perform this.removeStemming) stemming)}}
-                @skin="secondary"
-                @icon="bin"
-                @iconAlignment="left"
-                @loading={{ this.removeStemming.isRunning }}
-              >
-                {{t "votingModal.deleteButton"}}
-              </AuButton>
-            </AuButtonGroup>
-          </td>
+          {{#unless @readOnly}}
+            <td class="au-u-table-right">
+              <AuButtonGroup>
+                <AuButton
+                  {{on "click" (fn this.toggleEditStemming stemming)}}
+                  @icon="pencil"
+                  @iconAlignment="left"
+                >
+                  {{t "votingModal.toggleEditButton"}}
+                </AuButton>
+                <AuButton
+                  {{on "click" (fn (perform this.removeStemming) stemming)}}
+                  @skin="secondary"
+                  @icon="bin"
+                  @iconAlignment="left"
+                  @loading={{ this.removeStemming.isRunning }}
+                >
+                  {{t "votingModal.deleteButton"}}
+                </AuButton>
+              </AuButtonGroup>
+            </td>
+          {{/unless}}
         </tr>
       {{else}}
         <tr>
