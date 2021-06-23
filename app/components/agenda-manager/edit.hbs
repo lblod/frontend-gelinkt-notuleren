@@ -29,8 +29,8 @@
           <Form.Textarea @for="beschrijving">
             {{t "manageAgendaZittingModal.beschrijvingLabel"}}
           </Form.Textarea>
-          {{#if this.args.itemToEdit.behandeling.documentContainer.currentVersion.content}}
-            <AuButton {{on "click" (perform copyDescription)}}>{{t "manageAgendaZittingModal.copyDescriptionLabel"}}</AuButton>
+          {{#if @itemToEdit.behandeling.documentContainer.currentVersion.content}}
+            <AuButton {{on "click" (perform this.copyDescription)}}>{{t "manageAgendaZittingModal.copyDescriptionLabel"}}</AuButton>
           {{/if}}
 
           <div>
