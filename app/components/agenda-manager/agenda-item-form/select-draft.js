@@ -9,6 +9,7 @@ const FOLDER_ID = "ae5feaed-7b70-4533-9417-10fbbc480a4c";
 
 export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Component {
   @service store;
+  @service documentService;
   @tracked options;
   @tracked selected;
 
@@ -37,10 +38,13 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
 
   @action
   select(draft) {
+    
     this.selected = draft;
     this.agendaItem.set("behandeling.documentContainer", draft);
     if (draft) {
-      this.agendaItem.titel = draft.get("currentVersion.title");
+      const document = draft.get('currentVersion');
+      this.agendaItem.titel = document.get('title');
+      this.agendaItem.beschrijving = this.documentService.getDescription(document.get('content').content);
     } else {
       this.agendaItem.titel = '';
     }
