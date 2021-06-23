@@ -152,9 +152,12 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.secretary = yield this.args.behandeling.secretaris;
   }
 
-  @action
-  toggleOpenbaar(e) {
-    this.openbaar = e.target.checked;
+  @task
+  *toggleOpenbaar(e) {
+    const openbaar = e.target.checked;
+    this.args.behandeling.openbaar = openbaar;
+    yield this.args.behandeling.save();
+    this.openbaar = openbaar;
   }
 
   @action
