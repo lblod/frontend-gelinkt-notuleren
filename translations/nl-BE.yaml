@@ -132,7 +132,7 @@ manageAgendaZittingModal:
   orderLabel: Volgorde
   titleLabel: Titel agendapunt
   beschrijvingLabel: Beschrijving agendapunt
-  copyDescriptionLabel: Copy description from decision
+  copyDescriptionLabel: Beschrijving van besluit overnemen
   geplandOpenbaar: Geplande openbaarheid
   actionsLabel: Acties
   createItemButton: Voeg agendapunt toe
