@@ -1,9 +1,11 @@
 import Component from "@glimmer/component";
 import { action } from "@ember/object";
 import {task} from "ember-concurrency";
+import { inject as service } from "@ember/service";
 
 export default class AgendaManagerEditComponent extends Component {
 
+  @service documentService;
 
 
   get isNew() {
@@ -22,5 +24,13 @@ export default class AgendaManagerEditComponent extends Component {
   * deleteTask(item) {
     yield this.args.deleteTask.perform(item);
     this.args.onClose();
+  }
+  @task
+  *copyDescription() {
+    const behandeling = yield this.args.itemToEdit.behandeling;
+    const documentContainer = yield behandeling.documentContainer;
+    const currentVersion = yield documentContainer.currentVersion;
+    const description = this.documentService.getDescription(currentVersion.content);
+    this.args.itemToEdit.beschrijving = description;
   }
 }

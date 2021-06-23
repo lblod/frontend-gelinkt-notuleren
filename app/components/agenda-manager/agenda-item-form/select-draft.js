@@ -2,14 +2,13 @@ import Component from '@glimmer/component';
 import { inject as service } from "@ember/service";
 import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
-import { restartableTask, task } from "ember-concurrency";
+import { restartableTask } from "ember-concurrency";
 
 const DRAFT_STATUS_ID = "a1974d071e6a47b69b85313ebdcef9f7";
 const FOLDER_ID = "ae5feaed-7b70-4533-9417-10fbbc480a4c";
 
 export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Component {
   @service store;
-  @service documentService;
   @tracked options;
   @tracked selected;
 
@@ -41,15 +40,9 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
     this.selected = draft;
     this.agendaItem.set("behandeling.documentContainer", draft);
     if (draft) {
-      this.setAgendaItem.perform(draft);
+      this.agendaItem.titel = draft.get("currentVersion.title");
     } else {
       this.agendaItem.titel = '';
     }
-  }
-  @task
-  *setAgendaItem(draft) {
-    const currentVersion = yield draft.currentVersion;
-    this.agendaItem.titel = currentVersion.title;
-    this.agendaItem.beschrijving = this.documentService.getDescription(currentVersion.content);
   }
 }

@@ -7,8 +7,10 @@ export default class DocumentService extends Service {
     node.innerHTML = html;
     const contexts = analyse(node).map((c) => c.context);
     const triples = this.cleanupTriples(contexts.flat());
-    const firstDecision = triples.filter((t) => t.predicate === "a" && t.object === "http://data.vlaanderen.be/ns/besluit#Besluit")[0].subject;
-    const descriptionOfFirstDecision = triples.filter((t) => t.predicate === 'eli:description' && t.subject === firstDecision)[0].object;
+    const decisionUris = triples.filter((t) => t.predicate === "a" && t.object === "http://data.vlaanderen.be/ns/besluit#Besluit");
+    const firstDecision = decisionUris[0];
+    if(!firstDecision) return '';
+    const descriptionOfFirstDecision = triples.filter((t) => t.predicate === 'eli:description' && t.subject === firstDecision.subject)[0].object;
     return descriptionOfFirstDecision;
   }
   cleanupTriples(triples) {
