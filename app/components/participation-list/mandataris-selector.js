@@ -49,7 +49,8 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
       'filter[bekleedt][bevat-in][is-tijdsspecialisatie-van][classificatie][:uri:]':
         GOVERNOR_CLASSIFICATION,
       'filter[is-bestuurlijke-alias-van]': searchData,
-      'filter[bekleedt][bevat-in][bestuurseenheid][:uri:]': adminUnit.uri,
+      'filter[bekleedt][bevat-in][is-tijdsspecialisatie-van][bestuurseenheid][:uri:]':
+        adminUnit.uri,
     };
     return this.store.query('mandataris', queryParams);
   }
@@ -67,7 +68,9 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     const isDeputation = yield this.isDeputation(this.adminBody);
     let mandatees;
     if (isDeputation) {
-      const adminUnit = yield this.adminBody.bestuurseenheid;
+      const adminUnit = yield this.args.bestuursorgaan.get(
+        'isTijdsspecialisatieVan.bestuurseenheid'
+      );
       const [mandateeResults, governorResults] = yield all([
         this.searchMandateesOfAdminBodyByName(this.adminBody, searchData),
         this.searchGovernorsAdminUnitByName(adminUnit, searchData),
