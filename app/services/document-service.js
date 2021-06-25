@@ -2,15 +2,19 @@ import Service from '@ember/service';
 import {analyse} from '@lblod/marawa/rdfa-context-scanner';
 
 export default class DocumentService extends Service {
-  getDescription(html) {
+  getDescription(editorDocument) {
     const node = document.createElement('body');
-    node.innerHTML = html;
+    const context = JSON.parse(editorDocument.context);
+    const prefixes = this.convertPrefixesToString(context.prefix);
+    node.setAttribute('vocab', context.vocab);
+    node.setAttribute('prefix', prefixes);
+    node.innerHTML = editorDocument.content;
     const contexts = analyse(node).map((c) => c.context);
     const triples = this.cleanupTriples(contexts.flat());
     const decisionUris = triples.filter((t) => t.predicate === "a" && t.object === "http://data.vlaanderen.be/ns/besluit#Besluit");
     const firstDecision = decisionUris[0];
     if(!firstDecision) return '';
-    const descriptionOfFirstDecision = triples.filter((t) => t.predicate === 'eli:description' && t.subject === firstDecision.subject)[0].object;
+    const descriptionOfFirstDecision = triples.filter((t) => t.predicate === 'http://data.europa.eu/eli/ontology#description' && t.subject === firstDecision.subject)[0].object;
     return descriptionOfFirstDecision;
   }
   cleanupTriples(triples) {
@@ -20,5 +24,12 @@ export default class DocumentService extends Service {
       cleantriples[hash]=triple;
     }
     return Object.keys(cleantriples).map( (k) => cleantriples[k]);
+  }
+  convertPrefixesToString(prefix) {
+    let prefixesString = '';
+    for(let prefixKey in prefix) {
+      prefixesString += `${prefixKey}: ${prefix[prefixKey]} `;
+    }
+    return prefixesString;
   }
 }

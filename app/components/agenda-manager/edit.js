@@ -30,7 +30,7 @@ export default class AgendaManagerEditComponent extends Component {
     const behandeling = yield this.args.itemToEdit.behandeling;
     const documentContainer = yield behandeling.documentContainer;
     const currentVersion = yield documentContainer.currentVersion;
-    const description = this.documentService.getDescription(currentVersion.content);
+    const description = this.documentService.getDescription(currentVersion);
     this.args.itemToEdit.beschrijving = description;
   }
 }
