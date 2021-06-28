@@ -114,6 +114,9 @@
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3"
   },
+  "dependencies": {
+    "@lblod/ember-vo-mu-file-upload": "git://github.com/lblod/ember-vo-mu-file-upload.git#feature/configurable-model-name"
+  },
   "engines": {
     "node": "10.* || >= 12"
   },
