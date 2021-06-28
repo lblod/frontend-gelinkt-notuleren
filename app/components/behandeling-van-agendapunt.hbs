@@ -8,8 +8,11 @@
       <AuHeading @level="4" @skin="6"
                  class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--inset au-u-margin-bottom-small">{{t
               "behandelingVanAgendapunten.visibility"}}</AuHeading>
-      <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" this.toggleOpenbaar}} /> &nbsp;{{t
-              "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
+      <AuLabel><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" (perform this.toggleOpenbaar)}} /> &nbsp;{{t
+                                                                                                                          "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
+      {{#if this.toggleOpenbaar.isRunning}}
+        <AuLoader @padding="small"/>
+      {{/if}}
     </div>
   </div>
 {{else}}

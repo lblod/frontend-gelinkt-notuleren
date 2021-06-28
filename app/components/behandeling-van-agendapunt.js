@@ -20,8 +20,6 @@ import RelationshipResource from '../helpers/relationship-resource';
 export default class BehandelingVanAgendapuntComponent extends Component {
   @service store;
   @service router;
-
-  @tracked openbaar;
   @tracked document;
   @tracked editor;
   @tracked participants = [];
@@ -152,9 +150,11 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.secretary = yield this.args.behandeling.secretaris;
   }
 
-  @action
-  toggleOpenbaar(e) {
-    this.openbaar = e.target.checked;
+  @task
+  *toggleOpenbaar(e) {
+    const openbaar = e.target.checked;
+    this.args.behandeling.openbaar = openbaar;
+    yield this.args.behandeling.save();
   }
 
   @action
