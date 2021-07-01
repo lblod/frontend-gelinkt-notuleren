@@ -84,4 +84,9 @@ export default class AgendapointsEditController extends Controller {
       yield documentContainer.save();
     }
   }
+
+  @tracked uploading=false;
+  @action toggleUpload(){
+    this.uploading=!this.uploading;
+  }
 }

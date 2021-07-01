@@ -6,12 +6,16 @@
          as |Modal|
 >
   <Modal.Body>
-    {{#if this.document}}
-      <BesluitDocumentContainer @document={{this.document}}
-                                @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
-                                @editor={{this.editor}}
-                                @saving={{this.saveDocumentTask.isRunning}}
-      />
+    {{#if this.uploading}}
+      <DocumentAttachments @documentContainer={{this.documentContainer}}/>
+    {{else}}
+      {{#if this.document}}
+        <BesluitDocumentContainer @document={{this.document}}
+                                  @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
+                                  @editor={{this.editor}}
+                                  @saving={{this.saveDocumentTask.isRunning}}
+        />
+      {{/if}}
     {{/if}}
   </Modal.Body>
   <Modal.Footer>
@@ -23,6 +27,15 @@
       <AuButton @disabled={{this.saveDocumentTask.isRunning}} {{on "click" this.saveAndQuit}}>
         {{t "behandelingVanAgendapunten.saveAndQuit"}}
       </AuButton>
+      {{#if this.uploading}}
+        <AuButton @skin="secondary" @icon="arrow-left" {{on "click" this.toggleUpload}}>
+          Return To Document
+        </AuButton>
+      {{else}}
+        <AuButton @icon="attachment" {{on "click" this.toggleUpload}}>
+          Attachments
+        </AuButton>
+      {{/if}}
     </AuButtonGroup>
     <AuButtonGroup>
        <AuButton @skin="secondary"

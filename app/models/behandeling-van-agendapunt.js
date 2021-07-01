@@ -13,7 +13,6 @@ export default class BehandelingVanAgendapunt extends Model {
   @hasMany('mandataris', { inverse: null }) aanwezigen;
   @hasMany('mandataris', { inverse: null }) afwezigen;
   @hasMany("stemming", {inverse: null}) stemmingen;
-  @hasMany("file-resource", {inverse: null}) attachments;
   @belongsTo('document-container') documentContainer;
 
   async initializeDocument() {

@@ -80,6 +80,15 @@
       {{#if @save}}
         <AuButton {{on "click" @save.action}} @disabled={{@save.isRunning}}>Bewaar</AuButton>
       {{/if}}
+      {{#if @uploading}}
+        <AuButton @skin="secondary" @icon="arrow-left" {{on "click" @toggleUpload}}>
+          Return To Document
+        </AuButton>
+      {{else}}
+        <AuButton @icon="attachment" {{on "click" @toggleUpload}}>
+          Attachments
+        </AuButton>
+      {{/if}}
     </AuToolbarGroup>
   </AuToolbar>
   </div>

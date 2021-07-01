@@ -64,4 +64,5 @@ inflector.irregular('concept-scheme', 'concept-schemes');
 inflector.irregular('intermission', 'intermissions');
 inflector.irregular('agenda-position', 'agenda-positions');
 inflector.irregular('file-resource', 'file-resources');
+inflector.irregular('attachment', 'attachments');
 inflector.uncountable('sync');

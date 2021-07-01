@@ -5,6 +5,8 @@
   @sendToTrash={{this.toggleDeleteModal}}
   @exportHtmlFunction={{this.download}}
   @copyAgendapunt={{perform this.copyAgendapunt}}
+  @uploading={{this.uploading}}
+  @toggleUpload={{this.toggleUpload}}
 />
 
 {{#if this.hasDocumentValidationErrors}}
@@ -35,15 +37,19 @@
     </Modal.Footer>
   </AuModal>
 {{/if}}
-<RdfaEditorContainer
-        @profile={{this.profile}}
-        @rdfaEditorInit={{this.handleRdfaEditorInit}}
-        @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
-        @showToggleRdfaAnnotations={{true}}
-        @editorDocument={{this.editorDocument}}
-        @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-        @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
-                       (t "rdfaEditorContainer.saving")}}
-/>
+{{#if this.uploading}}
+  <DocumentAttachments @documentContainer={{this.documentContainer}}/>
+{{else}}
+  <RdfaEditorContainer
+          @profile={{this.profile}}
+          @rdfaEditorInit={{this.handleRdfaEditorInit}}
+          @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
+          @showToggleRdfaAnnotations={{true}}
+          @editorDocument={{this.editorDocument}}
+          @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
+          @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
+                        (t "rdfaEditorContainer.saving")}}
+  />
+{{/if}}
 
 {{outlet}}

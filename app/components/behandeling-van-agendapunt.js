@@ -165,12 +165,4 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       this.args.behandeling.id
     );
   }
-  @task
-  *uploadedAttachement(fileResource){
-    const behandeling=yield this.args.behandeling;
-    yield behandeling.attachments;
-    debugger;
-    behandeling.attachments.addObject(fileResource);
-    yield behandeling.save();
-  }
 }
