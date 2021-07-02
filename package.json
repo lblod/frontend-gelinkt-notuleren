@@ -35,7 +35,7 @@
     "@glimmer/tracking": "^1.0.3",
     "@lblod/ember-acmidm-login": "^1.1.1",
     "@lblod/ember-mock-login": "0.5.0",
-    "@lblod/ember-rdfa-editor": "^0.44.0",
+    "@lblod/ember-rdfa-editor": "^0.45.0",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.2.1",
     "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.2",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "0.3.2",
@@ -43,7 +43,7 @@
     "@lblod/ember-rdfa-editor-date-plugin": "0.9.0",
     "@lblod/ember-rdfa-editor-document-title-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "0.3.0",
-    "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.7.3",
+    "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.7.4",
     "@lblod/ember-rdfa-editor-roadsign-hint-plugin": "^0.5.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.8.0",
     "@lblod/ember-vo-webuniversum": "0.23.0",
@@ -111,6 +111,8 @@
     "prettier": "^2.2.1",
     "qunit": "^2.13.0",
     "qunit-dom": "^1.6.0",
+    "release-it": "^14.10.0",
+    "release-it-lerna-changelog": "^3.1.0",
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3"
   },
@@ -128,10 +130,5 @@
     "last 1 Safari version",
     "last 1 iOS version",
     "last 1 Edge version"
-  ],
-  "release-it": {
-    "npm": {
-      "publish": false
-    }
-  }
+  ]
 }

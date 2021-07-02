@@ -132,6 +132,7 @@ manageAgendaZittingModal:
   orderLabel: Order
   titleLabel: Agenda item title
   beschrijvingLabel: Agenda item description
+  copyDescriptionLabel: Copy description from decision
   geplandOpenbaar: Planned visibility
   actionsLabel: Actions
   createItemButton: Add agenda item
