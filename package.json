@@ -111,6 +111,8 @@
     "prettier": "^2.2.1",
     "qunit": "^2.13.0",
     "qunit-dom": "^1.6.0",
+    "release-it": "^14.10.0",
+    "release-it-lerna-changelog": "^3.1.0",
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3"
   },
@@ -128,10 +130,5 @@
     "last 1 Safari version",
     "last 1 iOS version",
     "last 1 Edge version"
-  ],
-  "release-it": {
-    "npm": {
-      "publish": false
-    }
-  }
+  ]
 }
