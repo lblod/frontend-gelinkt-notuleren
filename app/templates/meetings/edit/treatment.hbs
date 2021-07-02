@@ -29,11 +29,11 @@
       </AuButton>
       {{#if this.uploading}}
         <AuButton @skin="secondary" @icon="arrow-left" {{on "click" this.toggleUpload}}>
-          Return To Document
+          {{t "attachments.return"}}
         </AuButton>
       {{else}}
         <AuButton @icon="attachment" {{on "click" this.toggleUpload}}>
-          Attachments
+          {{t "attachments.attachments"}}
         </AuButton>
       {{/if}}
     </AuButtonGroup>

@@ -82,12 +82,14 @@
       {{/if}}
       {{#if @uploading}}
         <AuButton @skin="secondary" @icon="arrow-left" {{on "click" @toggleUpload}}>
-          Return To Document
+          {{t "attachments.return"}}
         </AuButton>
       {{else}}
-        <AuButton @icon="attachment" {{on "click" @toggleUpload}}>
-          Attachments
-        </AuButton>
+        {{#if @toggleUpload}}
+          <AuButton @icon="attachment" {{on "click" @toggleUpload}}>
+            {{t "attachments.attachments"}}
+          </AuButton>
+        {{/if}}
       {{/if}}
     </AuToolbarGroup>
   </AuToolbar>

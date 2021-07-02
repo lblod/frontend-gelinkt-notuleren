@@ -24,6 +24,7 @@ export default class AgendapointsEditController extends Controller {
 
   @action
   handleRdfaEditorInit(editor) {
+    this.uploading=false;
     this.editor = editor;
     editor.setHtmlContent(this.editorDocument.content);
   }

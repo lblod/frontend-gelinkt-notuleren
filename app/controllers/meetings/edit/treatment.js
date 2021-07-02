@@ -26,6 +26,7 @@ export default class MeetingsEditTreatmentController extends Controller {
 
   @action
   closeModal() {
+    this.uploading=false;
     this.router.transitionTo('meetings.edit');
   }
 
