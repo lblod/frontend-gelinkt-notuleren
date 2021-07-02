@@ -53,6 +53,27 @@ trigger:
 ---
 kind: pipeline
 type: docker
+name: push-latest-build
+steps:
+- name: push-latest-build
+  image: plugins/docker
+  settings:
+    repo: lblod/frontend-gelinkt-notuleren
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    purge: true
+    tags: futurenow
+trigger:
+  branch:
+    - futurenow
+  event:
+    exclude:
+    - pull_request
+--
+kind: pipeline
+type: docker
 name: release
 steps:
 - name: build-dry-run
