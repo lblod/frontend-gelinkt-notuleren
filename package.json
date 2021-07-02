@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
