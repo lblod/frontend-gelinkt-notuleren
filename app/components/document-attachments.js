@@ -21,11 +21,11 @@ export default class DocumentAttachmentsComponent extends Component {
   }
 
   @task
-  *uploadedAttachement(fileResource) {
+  *uploadedAttachement(file) {
     const documentContainer = yield this.args.documentContainer;
     const newAttachment = yield this.store.createRecord('attachment');
 
-    newAttachment.fileResource = fileResource;
+    newAttachment.file = file;
     newAttachment.documentContainer = documentContainer;
 
     yield newAttachment.save();
@@ -36,9 +36,8 @@ export default class DocumentAttachmentsComponent extends Component {
 
   @task
   *deleteAttachment(attachment) {
-    const fileResource = yield attachment.fileResource;
-    const fileId = fileResource.id;
-    yield fetch(`/files/${fileId}`, { method: 'DELETE' });
+    const file = yield attachment.file;
+    file.destroyRecord();
     yield attachment.destroyRecord();
   }
 }

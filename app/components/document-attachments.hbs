@@ -1,7 +1,7 @@
 <AuFileUpload 
   @title={{t "attachments.attach" }} 
   @helpTextDragDrop={{t "attachments.drag" }}
-  @modelName={{"file-resource"}} 
+  @modelName={{"file"}} 
   @endPoint={{"/files"}} 
   @onFinishUpload={{perform this.uploadedAttachement}}
   @maxFileSizeMB="1024" 
@@ -19,10 +19,10 @@
   <tbody>
     {{#each this.attachments as |attachment|}}
     <tr>
-      <td>{{attachment.fileResource.name}}</td>
-      <td>{{attachment.fileResource.humanReadableSize}}</td>
+      <td>{{attachment.file.name}}</td>
+      <td>{{attachment.file.humanReadableSize}}</td>
       <td>
-        <a href={{attachment.fileResource.downloadLink}} target="_blank" rel="noopener noreferrer">
+        <a href={{attachment.file.downloadLink}} target="_blank" rel="noopener noreferrer">
           <AuIcon @icon="download" @size="large" @ariaHidden={{true}} />
         </a>
       </td>
