@@ -6,16 +6,18 @@
          as |Modal|
 >
   <Modal.Body>
-    {{#if this.uploading}}
+    <div class={{if this.uploading "" "au-u-hidden"}}>
       <DocumentAttachments @documentContainer={{this.documentContainer}}/>
-    {{else}}
-      {{#if this.document}}
-        <BesluitDocumentContainer @document={{this.document}}
+    </div>
+    {{#if this.document}}
+      <div class={{if this.uploading "au-u-hidden" ""}}>
+        <BesluitDocumentContainer class={{if this.uploading ".au-u-hidden" ""}}
+                                  @document={{this.document}}
                                   @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
                                   @editor={{this.editor}}
                                   @saving={{this.saveDocumentTask.isRunning}}
         />
-      {{/if}}
+      </div>
     {{/if}}
   </Modal.Body>
   <Modal.Footer>

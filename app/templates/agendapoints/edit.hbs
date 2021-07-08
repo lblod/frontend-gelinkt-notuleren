@@ -37,9 +37,11 @@
     </Modal.Footer>
   </AuModal>
 {{/if}}
-{{#if this.uploading}}
+<div class={{if this.uploading "" "au-u-hidden"}}>
   <DocumentAttachments @documentContainer={{this.documentContainer}}/>
-{{else}}
+</div>
+
+<div class={{if this.uploading "au-u-hidden" ""}}>
   <RdfaEditorContainer
           @profile={{this.profile}}
           @rdfaEditorInit={{this.handleRdfaEditorInit}}
@@ -50,6 +52,6 @@
           @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
                         (t "rdfaEditorContainer.saving")}}
   />
-{{/if}}
+</div>
 
 {{outlet}}
