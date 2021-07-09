@@ -334,3 +334,13 @@ dateTimePicker:
   date: Datum
   hours: Uur
   minutes: Minuten
+
+attachments:
+  attachments: Bijlagen
+  return: Terug naar document
+  attach: Voeg een bestand toe
+  drag: Sleep de bestanden naar hier om toe te voegen
+  filename: Bestandsnaam
+  filesize: Bestandsgrootte
+  download: Downloaden
+  delete: Verwijderen

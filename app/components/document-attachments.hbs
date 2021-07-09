@@ -1,0 +1,36 @@
+<AuFileUpload 
+  @title={{t "attachments.attach" }} 
+  @helpTextDragDrop={{t "attachments.drag" }}
+  @modelName={{"file"}} 
+  @endPoint={{"/files"}} 
+  @onFinishUpload={{perform this.uploadedAttachement}}
+  @maxFileSizeMB="1024" 
+  @multiple={{true}} />
+{{#if @documentContainer.attachments}}
+<table class="au-c-meeting-chrome-table">
+  <thead>
+    <tr>
+      <th>{{t "attachments.filename"}}</th>
+      <th>{{t "attachments.filesize"}}</th>
+      <th>{{t "attachments.download"}}</th>
+      <th>{{t "attachments.delete"}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.attachments as |attachment|}}
+    <tr>
+      <td>{{attachment.file.name}}</td>
+      <td>{{attachment.file.humanReadableSize}}</td>
+      <td>
+        <a href={{attachment.file.downloadLink}} target="_blank" rel="noopener noreferrer">
+          <AuIcon @icon="download" @size="large" @ariaHidden={{true}} />
+        </a>
+      </td>
+      <td>
+        <AuIcon @icon="bin" @size="large" @ariaHidden={{true}} {{on "click" (perform this.deleteAttachment attachment)}} />
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}

@@ -24,6 +24,7 @@ export default class AgendapointsEditController extends Controller {
 
   @action
   handleRdfaEditorInit(editor) {
+    this.uploading=false;
     this.editor = editor;
     editor.setHtmlContent(this.editorDocument.content);
   }
@@ -83,5 +84,10 @@ export default class AgendapointsEditController extends Controller {
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
     }
+  }
+
+  @tracked uploading=false;
+  @action toggleUpload(){
+    this.uploading=!this.uploading;
   }
 }

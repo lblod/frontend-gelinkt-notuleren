@@ -335,3 +335,13 @@ dateTimePicker:
   date: Date
   hours: Hour
   minutes: Minutes
+
+attachments:
+  attachments: Attachments
+  return: Return to document
+  attach: Attach a file
+  drag: Drag a file here to attach it
+  filename: Filename
+  filesize: Filesize
+  download: Download
+  delete: Delete

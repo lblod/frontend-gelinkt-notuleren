@@ -26,6 +26,7 @@ export default class MeetingsEditTreatmentController extends Controller {
 
   @action
   closeModal() {
+    this.uploading=false;
     this.router.transitionTo('meetings.edit');
   }
 
@@ -131,5 +132,10 @@ export default class MeetingsEditTreatmentController extends Controller {
     }
     this.documentContainer = container;
     this.document = document;
+  }
+
+  @tracked uploading=false;
+  @action toggleUpload(){
+    this.uploading=!this.uploading;
   }
 }
