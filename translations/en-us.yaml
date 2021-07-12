@@ -345,3 +345,6 @@ attachments:
   filesize: Filesize
   download: Download
   delete: Delete
+  type: Type
+  decision: Decision
+  typePlaceholder: none

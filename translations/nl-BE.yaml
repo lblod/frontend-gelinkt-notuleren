@@ -344,3 +344,7 @@ attachments:
   filesize: Bestandsgrootte
   download: Downloaden
   delete: Verwijderen
+  type: Type
+  decision: Besluit
+  typePlaceholder: geen
+  regulatory: regelgevend

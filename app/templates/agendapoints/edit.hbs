@@ -37,10 +37,11 @@
     </Modal.Footer>
   </AuModal>
 {{/if}}
-<div class={{if this.uploading "" "au-u-hidden"}}>
-  <DocumentAttachments @documentContainer={{this.documentContainer}}/>
-</div>
-
+{{#if this.documentContainer}}
+  <div class={{if this.uploading "" "au-u-hidden"}}>
+    <DocumentAttachments @documentContainer={{this.documentContainer}}/>
+  </div>
+{{/if}}
 <div class={{if this.uploading "au-u-hidden" ""}}>
   <RdfaEditorContainer
           @profile={{this.profile}}

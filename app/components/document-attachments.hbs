@@ -14,6 +14,8 @@
       <th>{{t "attachments.filesize"}}</th>
       <th>{{t "attachments.download"}}</th>
       <th>{{t "attachments.delete"}}</th>
+      <th>{{t "attachments.type"}}</th>
+      <th>{{t "attachments.decision"}}</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +30,19 @@
       </td>
       <td>
         <AuIcon @icon="bin" @size="large" @ariaHidden={{true}} {{on "click" (perform this.deleteAttachment attachment)}} />
+      </td>
+      <td>
+        <select {{on "change" (perform this.onSelectType attachment)}}>
+          <option value="">{{t "attachments.typePlaceholder"}}</option>
+          {{#each this.typeOptions as |typeOption|}}
+            <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}</option>
+          {{/each}}
+        </select>
+      </td>
+      <td>
+        <select>
+          <option value="">{{t "attachments.typePlaceholder"}}</option>
+        </select>
       </td>
     </tr>
     {{/each}}
