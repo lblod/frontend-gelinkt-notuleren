@@ -5,14 +5,17 @@ import { inject as service } from '@ember/service';
 import {REGULATORY_TYPE_ID}  from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class DocumentAttachmentsComponent extends Component {
+  @service documentService
   constructor(...args) {
     super(...args);
     this.fetchAttachments.perform();
+    this.fetchDecisions.perform();
   }
 
   @service store;
   @service intl;
   @tracked attachments;
+  @tracked decisions;
 
   typeOptions=[{
     id: REGULATORY_TYPE_ID,
@@ -35,12 +38,26 @@ export default class DocumentAttachmentsComponent extends Component {
   }
 
   @task
+  *onSelectDecision(attachment, event) {
+    const selectedId = event.target.value;
+    attachment.decision = selectedId;
+    yield attachment.save();
+  }
+
+  @task
   *fetchAttachments() {
     this.attachments = yield this.store.query('attachment', {
       page: { size: 100 },
       'filter[document-container][:id:]': this.args.documentContainer.id,
       include: "type"
     });
+  }
+
+  @task
+  *fetchDecisions() {
+    const documentContainer = yield this.args.documentContainer;
+    const currentVersion = yield documentContainer.currentVersion;
+    this.decisions = this.documentService.getDecisions(currentVersion);
   }
 
   @task

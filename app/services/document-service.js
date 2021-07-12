@@ -32,4 +32,24 @@ export default class DocumentService extends Service {
     }
     return prefixesString;
   }
+  getDecisions(editorDocument) {
+    const node = document.createElement('body');
+    const context = JSON.parse(editorDocument.context);
+    const prefixes = this.convertPrefixesToString(context.prefix);
+    node.setAttribute('vocab', context.vocab);
+    node.setAttribute('prefix', prefixes);
+    node.innerHTML = editorDocument.content;
+    const contexts = analyse(node).map((c) => c.context);
+    const triples = this.cleanupTriples(contexts.flat());
+    const decisionUris = triples.filter((t) => t.predicate === "a" && t.object === "http://data.vlaanderen.be/ns/besluit#Besluit");
+    const decisions = decisionUris.map((decisionUriTriple) => {
+      const uri =  decisionUriTriple.subject;
+      const title = triples.filter((t) => t.predicate === 'http://data.europa.eu/eli/ontology#title' && t.subject === uri)[0].object;
+      return {
+        uri,
+        title
+      }
+    })
+    return decisions;
+  }
 }

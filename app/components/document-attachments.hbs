@@ -40,8 +40,11 @@
         </select>
       </td>
       <td>
-        <select>
+        <select {{on "change" (perform this.onSelectDecision attachment)}}>
           <option value="">{{t "attachments.typePlaceholder"}}</option>
+          {{#each this.decisions as |decisionOption|}}
+            <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>{{decisionOption.title}}</option>
+          {{/each}}
         </select>
       </td>
     </tr>
