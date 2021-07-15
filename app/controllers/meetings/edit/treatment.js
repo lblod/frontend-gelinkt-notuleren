@@ -144,10 +144,8 @@ export default class MeetingsEditTreatmentController extends Controller {
 
   @task
   *fetchDecisions() {
-    console.log('fetching')
     const documentContainer = yield this.documentContainer;
     const currentVersion = yield documentContainer.currentVersion;
     this.decisions = this.documentService.getDecisions(currentVersion);
-    console.log(this.decisions)
   }
 }

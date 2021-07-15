@@ -48,8 +48,8 @@ export default class DocumentService extends Service {
       return {
         uri,
         title
-      }
-    })
+      };
+    });
     return decisions;
   }
 }
