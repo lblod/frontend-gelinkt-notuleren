@@ -5,11 +5,9 @@ import { inject as service } from '@ember/service';
 import {REGULATORY_TYPE_ID}  from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class DocumentAttachmentsComponent extends Component {
-  @service documentService
   constructor(...args) {
     super(...args);
     this.fetchAttachments.perform();
-    this.fetchDecisions.perform();
   }
 
   @service store;
@@ -51,13 +49,6 @@ export default class DocumentAttachmentsComponent extends Component {
       'filter[document-container][:id:]': this.args.documentContainer.id,
       include: "type"
     });
-  }
-
-  @task
-  *fetchDecisions() {
-    const documentContainer = yield this.args.documentContainer;
-    const currentVersion = yield documentContainer.currentVersion;
-    this.decisions = this.documentService.getDecisions(currentVersion);
   }
 
   @task
