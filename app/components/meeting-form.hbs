@@ -166,7 +166,9 @@
           {{html-safe @zitting.intro}}
         </ReadonlyTextBox>
         {{#unless this.readOnly}}
-          <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEditIntro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
+          <AuLink @linkRoute="meetings.edit.intro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
+            {{t "behandelingVanAgendapunten.editDocument"}}
+          </AuLink>
         {{/unless}}
           {{!-- Treatment of agenda --}}
           <AuHeading id="sectionFive" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
@@ -208,7 +210,9 @@
             {{html-safe @zitting.outro}}
           </ReadonlyTextBox>
           {{#unless this.readOnly}}
-            <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEditOutro}}>{{t "behandelingVanAgendapunten.editDocument"}}</AuButton>
+            <AuLink @linkRoute="meetings.edit.outro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
+              {{t "behandelingVanAgendapunten.editDocument"}}
+            </AuLink>
           {{/unless}}
         {{/if}}
       {{else}}
