@@ -1,3 +1,21 @@
+## 2.9.0 (2021-07-16)
+
+#### :rocket: Enhancement
+* [#146](https://github.com/lblod/frontend-gelinkt-notuleren/pull/146) updated app universum and changed from au button to au link ([@lagartoverde](https://github.com/lagartoverde))
+* [#149](https://github.com/lblod/frontend-gelinkt-notuleren/pull/149) Put voting modal buttons first ([@lagartoverde](https://github.com/lagartoverde))
+* [#148](https://github.com/lblod/frontend-gelinkt-notuleren/pull/148) Feature/show agendapoints as 1 based ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#151](https://github.com/lblod/frontend-gelinkt-notuleren/pull/151) Fixed behandeling publishing status was not being updated properly without page refresh ([@lagartoverde](https://github.com/lagartoverde))
+* [#127](https://github.com/lblod/frontend-gelinkt-notuleren/pull/127) Bugfix/error publishing notulen ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :house: Internal
+* [#153](https://github.com/lblod/frontend-gelinkt-notuleren/pull/153) Bump editor to 0.46.1 ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 2
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.8.0 (2021-07-02)
 
 #### :rocket: Enhancement
