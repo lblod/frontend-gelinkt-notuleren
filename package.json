@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@appuniversum/appuniversum": "0.0.15",
-    "@appuniversum/ember-appuniversum": "0.4.4",
+    "@appuniversum/ember-appuniversum": "0.4.6",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.1.4",
@@ -35,7 +35,7 @@
     "@glimmer/tracking": "^1.0.3",
     "@lblod/ember-acmidm-login": "^1.1.1",
     "@lblod/ember-mock-login": "0.5.0",
-    "@lblod/ember-rdfa-editor": "^0.45.0",
+    "@lblod/ember-rdfa-editor": "^0.46.1",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.2.1",
     "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.2",
     "@lblod/ember-rdfa-editor-date-manipulation-plugin": "0.3.2",
@@ -47,7 +47,6 @@
     "@lblod/ember-rdfa-editor-roadsign-hint-plugin": "^0.5.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.8.0",
     "@lblod/ember-vo-webuniversum": "0.23.0",
-    "@lblod/ember-vo-webuniversum-data-table": "^0.2.16",
     "@lblod/ember-vo-webuniversum-widget": "^0.1.2",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",

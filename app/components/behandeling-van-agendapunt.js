@@ -100,13 +100,17 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   @task
   *getStatus() {
-    const container = yield this.documentContainer;
-    if (container.isLoaded) {
-      const status = yield container.status;
-      if (status.isLoaded) {
-        if (status.id === PUBLISHED_STATUS_ID) {
-          this.published = true;
-        }
+    const behandeling=(yield this.store.query("behandeling-van-agendapunt", {
+      "filter[:id:]": this.args.behandeling.id,
+      include: 'document-container.status'
+    })).firstObject;
+
+    if(behandeling){
+      const status = yield behandeling.get('documentContainer.status');
+      const statusId = status.id;
+
+      if(statusId === PUBLISHED_STATUS_ID){
+        this.published = true;
       }
     }
   }
@@ -155,14 +159,5 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     const openbaar = e.target.checked;
     this.args.behandeling.openbaar = openbaar;
     yield this.args.behandeling.save();
-  }
-
-  @action
-  goToEdit() {
-    this.router.transitionTo(
-      'meetings.edit.treatment',
-      this.args.meeting.id,
-      this.args.behandeling.id
-    );
   }
 }

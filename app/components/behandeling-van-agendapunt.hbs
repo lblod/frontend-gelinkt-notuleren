@@ -87,7 +87,7 @@
   {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
 </ReadonlyTextBox>
 {{#if this.editable}}
-  <AuButton @width="block" @skin="secondary" @icon="pencil" @iconAlignment="left" {{on "click" this.goToEdit}}>
+  <AuLink @linkRoute="meetings.edit.treatment" @models={{array @meeting.id @behandeling.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
     {{t "behandelingVanAgendapunten.editDocument"}}
-  </AuButton>
+  </AuLink>
 {{/if}}
