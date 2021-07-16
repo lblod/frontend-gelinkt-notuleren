@@ -106,10 +106,11 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     })).firstObject;
 
     if(behandeling){
-      const statusId = behandeling.get('documentContainer.status.id');
+      const status = yield behandeling.get('documentContainer.status');
+      const statusId = status.id;
 
-      if(statusId==PUBLISHED_STATUS_ID){
-        this.published=true;
+      if(statusId === PUBLISHED_STATUS_ID){
+        this.published = true;
       }
     }
   }
