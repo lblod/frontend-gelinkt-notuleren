@@ -156,13 +156,4 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.args.behandeling.openbaar = openbaar;
     yield this.args.behandeling.save();
   }
-
-  @action
-  goToEdit() {
-    this.router.transitionTo(
-      'meetings.edit.treatment',
-      this.args.meeting.id,
-      this.args.behandeling.id
-    );
-  }
 }
