@@ -32,7 +32,7 @@
         <AuIcon @icon="bin" @size="large" @ariaHidden={{true}} {{on "click" (perform this.deleteAttachment attachment)}} />
       </td>
       <td>
-        <select {{on "change" (perform this.onSelectType attachment)}}>
+        <select {{on "change" (perform this.onSelectType attachment)}} disabled={{eq attachment.decision ""}}>
           <option value="">{{t "attachments.typePlaceholder"}}</option>
           {{#each this.typeOptions as |typeOption|}}
             <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}</option>
