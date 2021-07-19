@@ -13,6 +13,9 @@ export default class AgendapointsEditController extends Controller {
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
   profile = 'draftDecisionsProfile';
+  @tracked uploading=false;
+  @tracked decisions = [];
+  @service documentService;
 
   get editorDocument() {
     return this._editorDocument || this.model.editorDocument;
@@ -86,8 +89,15 @@ export default class AgendapointsEditController extends Controller {
     }
   }
 
-  @tracked uploading=false;
   @action toggleUpload(){
     this.uploading=!this.uploading;
+    this.fetchDecisions.perform();
+  }
+
+  @task
+  *fetchDecisions() {
+    const documentContainer = yield this.documentContainer;
+    const currentVersion = yield documentContainer.currentVersion;
+    this.decisions = this.documentService.getDecisions(currentVersion);
   }
 }
