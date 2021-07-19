@@ -13,7 +13,7 @@ export default class AgendapointsEditController extends Controller {
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
   profile = 'draftDecisionsProfile';
-  @tracked uploading=false;
+  @tracked uploading = false;
   @tracked decisions = [];
   @service documentService;
 

@@ -14,7 +14,7 @@ export default class MeetingsEditTreatmentController extends Controller {
   @tracked documentContainer;
   @tracked document;
   @tracked initialContent;
-  @tracked uploading=false;
+  @tracked uploading = false;
   @tracked decisions = [];
   @service documentService;
 
