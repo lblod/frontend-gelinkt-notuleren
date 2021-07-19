@@ -128,6 +128,27 @@
     display: block !important;
     position: relative;
   }
+
+  // Fix overlapping text
+  [property="besluit:geplandOpenbaar"]:before,
+  [property="besluit:openbaar"]:before {
+    content: "" !important;
+    color: $au-gray-600 !important;
+  }
+
+  [property="besluit:geplandOpenbaar"][content="false"]:before,
+  [property="besluit:openbaar"][content="false"]:before {
+    content: "" !important;
+    color: $au-gray-600 !important;
+  }
+
+  [property="besluit:geplandOpenbaar"]:after,
+  [property="besluit:openbaar"]:after,
+  [property="besluit:geplandOpenbaar"][content="false"]:after,
+  [property="besluit:openbaar"][content="false"]:after  {
+    color: $au-gray-600 !important;
+  }
+  // End fix overlapping text
 }
 
 .au-c-template--agenda {
