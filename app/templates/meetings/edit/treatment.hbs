@@ -6,9 +6,11 @@
          as |Modal|
 >
   <Modal.Body>
-    <div class={{if this.uploading "" "au-u-hidden"}}>
-      <DocumentAttachments @documentContainer={{this.documentContainer}}/>
-    </div>
+    {{#if this.documentContainer}}
+      <div class={{if this.uploading "" "au-u-hidden"}}>
+        <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
+      </div>
+    {{/if}}
     {{#if this.document}}
       <div class={{if this.uploading "au-u-hidden" ""}}>
         <BesluitDocumentContainer class={{if this.uploading ".au-u-hidden" ""}}

@@ -14,6 +14,9 @@ export default class MeetingsEditTreatmentController extends Controller {
   @tracked documentContainer;
   @tracked document;
   @tracked initialContent;
+  @tracked uploading = false;
+  @tracked decisions = [];
+  @service documentService;
 
   setup() {
     this.editor = null;
@@ -134,8 +137,15 @@ export default class MeetingsEditTreatmentController extends Controller {
     this.document = document;
   }
 
-  @tracked uploading=false;
   @action toggleUpload(){
     this.uploading=!this.uploading;
+    this.fetchDecisions.perform();
+  }
+
+  @task
+  *fetchDecisions() {
+    const documentContainer = yield this.documentContainer;
+    const currentVersion = yield documentContainer.currentVersion;
+    this.decisions = this.documentService.getDecisions(currentVersion);
   }
 }
