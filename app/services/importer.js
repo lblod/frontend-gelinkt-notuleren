@@ -1,18 +1,40 @@
 import Service from '@ember/service';
 import {analyse} from '@lblod/marawa/rdfa-context-scanner';
 
-const meetingKeys = {
-  'http://data.vlaanderen.be/ns/besluit#geplandeStart': 'geplandeStart',
-  'http://www.w3.org/ns/prov#endedAtTime': 'geeindigdOpTijdstip',
-  'http://www.w3.org/ns/prov#startedAtTime': 'gestartOpTijdstip',
-  'http://www.w3.org/ns/prov#atLocation': 'opLocatie'
-}
-
-const agendapointKeys = {}
-
-const behandelingKeys = {
-  'http://data.vlaanderen.be/ns/besluit#openbaar': 'openbaar'
-}
+const keys = {
+  'http://data.vlaanderen.be/ns/besluit#Zitting': {
+    'http://data.vlaanderen.be/ns/besluit#geplandeStart': 'geplandeStart',
+    'http://www.w3.org/ns/prov#endedAtTime': 'geeindigdOpTijdstip',
+    'http://www.w3.org/ns/prov#startedAtTime': 'gestartOpTijdstip',
+    'http://www.w3.org/ns/prov#atLocation': 'opLocatie'
+  },
+  'http://data.vlaanderen.be/ns/besluit#Agendapunt': {
+    'http://purl.org/dc/terms/title': 'titel',
+    'http://purl.org/dc/terms/description': 'beschrijving',
+    'http://data.vlaanderen.be/ns/besluit#geplandOpenbaar': 'geplandOpenbaar'
+  },
+  'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt': {
+    'http://data.vlaanderen.be/ns/besluit#openbaar': 'openbaar'
+  },
+  'http://data.vlaanderen.be/ns/mandaat#Mandataris': {
+    'http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan': 'isBestuurlijkeAliasVan',
+    'http://www.w3.org/ns/org#holds': 'bekleedt'
+  },
+  'http://data.lblod.info/vocabularies/leidinggevenden/Functionaris': {
+    'http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan': 'isBestuurlijkeAliasVan',
+    'http://www.w3.org/ns/org#holds': 'bekleedt'
+  },
+  'http://www.w3.org/ns/person#Person': {
+    'http://data.vlaanderen.be/ns/persoon#gebruikteVoornaam': 'gebruikteVoornaam',
+    'http://xmlns.com/foaf/0.1/familyName': 'achternaam'
+  },
+  'http://data.vlaanderen.be/ns/mandaat#Mandaat': {
+    'http://www.w3.org/ns/org#role': 'bestuursfunctie'
+  },
+  'http://www.w3.org/2004/02/skos/core#Concept': {
+    'http://www.w3.org/2004/02/skos/core#prefLabel': 'label'
+  }
+};
 
 export default class Importer extends Service {
   extractTriplesFromHTML(html) {
@@ -24,56 +46,43 @@ export default class Importer extends Service {
   }
   importDocument(html) {
     const triples = this.extractTriplesFromHTML(html);
-    let meetingUri = '';
-    const agendapointUris = [];
-    const behandelingUris = [];
 
+    const uris = {};
     for(let triple of triples) {
       if(triple.predicate === 'a') {
-        if(triple.object === 'http://data.vlaanderen.be/ns/besluit#Zitting') {
-          meetingUri = triple.subject;
-        } else if(triple.object === 'http://data.vlaanderen.be/ns/besluit#Agendapunt') {
-          agendapointUris.push(triple.subject)
-        }else if(triple.object === 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt') {
-          behandelingUris.push(triple.subject)
+        console.log(triple.object)
+        if(uris[triple.object]) {
+          uris[triple.object].push(triple.subject);
+        } else {
+          uris[triple.object] = [triple.subject];
         }
       }
     }
 
-    const meetingTriples = [];
-    const agendapointTriples = {};
-    const behandelingTriples = {};
+    const triplesByType = {};
     for(let triple of triples) {
-      if(triple.subject === meetingUri) {
-        meetingTriples.push(triple);
-      } else if(agendapointUris.includes(triple.subject)) {
-        if(agendapointTriples[triple.subject]) {
-          agendapointTriples[triple.subject].push(triple)
-        } else {
-          agendapointTriples[triple.subject] = [triple]
-        }
-      } else if(behandelingUris.includes(triple.subject)) {
-        if(behandelingTriples[triple.subject]) {
-          behandelingTriples[triple.subject].push(triple)
-        } else {
-          behandelingTriples[triple.subject] = [triple]
+      for(let type in uris) {
+        if(!triplesByType[type]) triplesByType[type] = {};
+        if(uris[type].includes(triple.subject)) {
+          if(triplesByType[type][triple.subject]) {
+            triplesByType[type][triple.subject].push(triple);
+          } else {
+            triplesByType[type][triple.subject] = [triple];
+          }
         }
       }
     }
-    console.log(meetingTriples)
-    console.log(agendapointTriples)
-    console.log(behandelingTriples)
-    const meeting = this.processTriples(meetingTriples, meetingKeys);
-    console.log(meeting)
-    const agendapoints = {};
-    for(let key in agendapointTriples) {
-      agendapoints[key] = this.processTriples(agendapointTriples[key], agendapointKeys)
+
+    const processedModels = {};
+    for(let type in triplesByType) {
+      //if(!keys[type]) continue;
+      if(!processedModels[type]) processedModels[type] = {};
+      for(let uri in triplesByType[type]) {
+        if(!keys[type]) continue;
+        processedModels[type][uri] = this.processTriples(triplesByType[type][uri], keys[type]);
+      }
     }
-    const behandelings = {};
-    for(let key in behandelingTriples) {
-      behandelings[key] = this.processTriples(behandelingTriples[key], behandelingKeys)
-    }
-    console.log(behandelings)
+    console.log(processedModels);
   }
   cleanupTriples(triples) {
     const cleantriples = {};
@@ -84,7 +93,8 @@ export default class Importer extends Service {
     return Object.keys(cleantriples).map( (k) => cleantriples[k]);
   }
   processTriples(triples, triplesMap) {
-    const resultObject = {}
+    //TODO: support fields with multiple entries (Each entry can be a map to avoid duplication)
+    const resultObject = {};
     for(let triple of triples) {
       const key = triplesMap[triple.predicate];
       if(!key) continue;
