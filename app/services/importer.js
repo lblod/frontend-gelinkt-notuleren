@@ -12,12 +12,15 @@ const keys = {
     'http://mu.semte.ch/vocabularies/ext/heeftAfwezigeBijStart': 'afwezigenBijStart',
     'http://data.vlaanderen.be/ns/besluit#heeftVoorzitter': 'voorzitter',
     'http://data.vlaanderen.be/ns/besluit#heeftSecretaris': 'secretaris',
-    'http://data.vlaanderen.be/ns/besluit#behandelt': 'agendapunten'
+    'http://data.vlaanderen.be/ns/besluit#behandelt': 'agendapunten',
+    'http://data.vlaanderen.be/ns/besluit#isGehoudenDoor': 'bestuursorgaan',
+
   },
   'http://data.vlaanderen.be/ns/besluit#Agendapunt': {
     'http://purl.org/dc/terms/title': 'titel',
     'http://purl.org/dc/terms/description': 'beschrijving',
-    'http://data.vlaanderen.be/ns/besluit#geplandOpenbaar': 'geplandOpenbaar'
+    'http://data.vlaanderen.be/ns/besluit#geplandOpenbaar': 'geplandOpenbaar',
+    'http://purl.org/dc/terms/subject': 'onderwerp'
   },
   'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt': {
     'http://data.vlaanderen.be/ns/besluit#openbaar': 'openbaar',
@@ -25,8 +28,7 @@ const keys = {
     'http://data.vlaanderen.be/ns/besluit#heeftAanwezigeBijStart': 'aanwezigenBijStart',
     'http://mu.semte.ch/vocabularies/ext/heeftAfwezigeBijStart': 'afwezigenBijStart',
     'http://data.vlaanderen.be/ns/besluit#heeftVoorzitter': 'voorzitter',
-    'http://data.vlaanderen.be/ns/besluit#heeftSecretaris': 'secretaris',
-    'http://www.w3.org/ns/prov#generated': 'generated'
+    'http://data.vlaanderen.be/ns/besluit#heeftSecretaris': 'secretaris'
   },
   'http://data.vlaanderen.be/ns/mandaat#Mandataris': {
     'http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan': 'isBestuurlijkeAliasVan',
@@ -58,7 +60,7 @@ const keys = {
     'http://data.vlaanderen.be/ns/besluit#aantalVoorstanders': 'aantalVoorstanders',
     'http://data.vlaanderen.be/ns/besluit#aantalTegenstanders': 'aantalTegenstanders',
     'http://data.vlaanderen.be/ns/besluit#aantalOnthouders': 'aantalOnthouders',
-  }
+  },
 };
 
 export default class Importer extends Service {
@@ -107,6 +109,9 @@ export default class Importer extends Service {
       }
     }
     console.log(processedModels);
+    await this.processAgendapoints(processedModels);
+    await this.processVotes(processedModels);
+    await this.processBehandelings(processedModels);
     await this.processMeetings(processedModels);
   }
   cleanupTriples(triples) {
@@ -136,7 +141,7 @@ export default class Importer extends Service {
     return resultObject;
   }
   async processMeetings(models) {
-    const zittingType = 'http://data.vlaanderen.be/ns/besluit#Zitting'
+    const zittingType = 'http://data.vlaanderen.be/ns/besluit#Zitting';
     for(let uri in models[zittingType]) {
       const zittingRecord = await this.store.createRecord('zitting', {});
       const zittingData = models[zittingType][uri];
@@ -144,7 +149,11 @@ export default class Importer extends Service {
       await this.linkMandataris(zittingData, 'afwezigenBijStart', true);
       await this.linkMandataris(zittingData, 'voorzitter');
       await this.linkMandataris(zittingData, 'secretaris');
-      zittingData.agendapunten = undefined;
+      await this.linkModels(zittingData, 'agendapunten', 'http://data.vlaanderen.be/ns/besluit#Agendapunt', models, true);
+      const bestuursorgaanQuery = await this.store.query('bestuursorgaan', {
+        'filter[:uri:]': zittingData.bestuursorgaan
+      });
+      zittingData.bestuursorgaan = bestuursorgaanQuery.firstObject;
       for(let key in zittingData) {
         if(Array.isArray(zittingData[key])) {
           for(let record of zittingData[key]) {
@@ -185,6 +194,103 @@ export default class Importer extends Service {
         data[key].push(mandatarisData.firstObject);
       } else {
         data[key] = mandatarisData.firstObject;
+      }
+      
+    }
+  }
+  async processVotes(models) {
+    const voteType = 'http://data.vlaanderen.be/ns/besluit#Stemming';
+    for(let uri in models[voteType]) {
+      const voteRecord = await this.store.createRecord('stemming', {});
+      const voteData = models[voteType][uri];
+      await this.linkMandataris(voteData, 'aanwezigen', true);
+      await this.linkMandataris(voteData, 'stemmers', true);
+      await this.linkMandataris(voteData, 'voorstanders', true);
+      await this.linkMandataris(voteData, 'tegenstanders', true);
+      await this.linkMandataris(voteData, 'onthouders', true);
+      for(let key in voteData) {
+        if(Array.isArray(voteData[key])) {
+          for(let record of voteData[key]) {
+            voteRecord[key].pushObject(record);
+          }
+        } else {
+          if(voteData[key]) {
+            voteRecord[key] = voteData[key];
+          }
+        }
+      }
+      models[voteType][uri] = voteRecord;
+      await voteRecord.save();
+      console.log(voteRecord);
+    }
+  }
+  async processBehandelings(models) {
+    const behandelingType = 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt';
+    for(let uri in models[behandelingType]) {
+      const behandelingRecord = await this.store.createRecord('behandeling-van-agendapunt', {});
+      const behandelingData = models[behandelingType][uri];
+      await this.linkMandataris(behandelingData, 'aanwezigen', true);
+      await this.linkMandataris(behandelingData, 'afwezigen', true);
+      await this.linkMandataris(behandelingData, 'voorzitter');
+      await this.linkMandataris(behandelingData, 'secretaris');
+      await this.linkModels(behandelingData, 'stemmingen', 'http://data.vlaanderen.be/ns/besluit#Stemming', models, true);
+      await this.linkModels(behandelingData, 'onderwerp', 'http://data.vlaanderen.be/ns/besluit#Agendapunt', models);
+      for(let key in behandelingData) {
+        if(Array.isArray(behandelingData[key])) {
+          for(let record of behandelingData[key]) {
+            behandelingRecord[key].pushObject(record);
+          }
+        } else {
+          if(behandelingData[key]) {
+            behandelingRecord[key] = behandelingData[key];
+          }
+        }
+      }
+      models[behandelingType][uri] = behandelingRecord;
+      await behandelingRecord.save();
+      console.log(behandelingRecord);
+    }
+  }
+  async processAgendapoints(models){
+    const agendapointType = 'http://data.vlaanderen.be/ns/besluit#Agendapunt';
+    for(let uri in models[agendapointType]) {
+      const agendapointRecord = await this.store.createRecord('agendapunt', {});
+      const agendapointData = models[agendapointType][uri];
+      for(let key in agendapointData) {
+        if(Array.isArray(agendapointData[key])) {
+          for(let record of agendapointData[key]) {
+            agendapointRecord[key].pushObject(record);
+          }
+        } else {
+          if(agendapointData[key]) {
+            agendapointRecord[key] = agendapointData[key];
+          }
+        }
+      }
+      models[agendapointType][uri] = agendapointRecord;
+      await agendapointRecord.save();
+      console.log(agendapointRecord);
+    }
+  }
+  async linkModels(data, key, modelType, models, isArray) {
+    const previousData = data[key];
+    if(isArray) {
+      data[key] = [];
+    }
+    if(Array.isArray(previousData)) {
+      for(let uri of previousData) {
+        const model = models[modelType][uri];
+        if(model) {
+          data[key].push(model);
+        }
+      }
+    } else {
+      const model = models[modelType][previousData];
+      if(isArray) {
+        console.log(model);
+        data[key].push(model);
+      } else {
+        data[key] = model;
       }
       
     }
