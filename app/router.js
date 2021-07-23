@@ -65,4 +65,8 @@ Router.map(function() {
     this.route('templates');
     this.route('publish');
   });
+
+  this.route('imports', function() {
+    this.route('new');
+  });
 });

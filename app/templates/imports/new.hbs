@@ -1,0 +1,51 @@
+<h3>Import</h3>
+<div class="au-c-form">
+  <ul>
+    <li>
+      <AuControlRadio @label="meeting" @name="type-selector" @value="meeting" @identifier="meeting" {{on "click" this.select}}/>
+    </li>
+    <li>
+      <AuControlRadio @label="draft" @name="type-selector" @value="draft" @identifier="draft" {{on "click" this.select}}/>
+    </li>
+  </ul>
+</div>
+{{#if this.selectedType}}
+  <h3>Type</h3>
+  <div class="au-c-form">
+    <ul>
+      <li>
+        <AuControlRadio @label="url" @name="import-selector" @value="url" @identifier="url" {{on "click" this.selectImport}}/>
+      </li>
+      <li>
+        <AuControlRadio @label="upload" @name="import-selector" @value="upload" @identifier="upload" {{on "click" this.selectImport}}/>
+      </li>
+    </ul>
+  </div>
+{{/if}}
+{{#if (eq this.selectedImport "url")}}
+  <h3>Url</h3>
+  <div class="au-c-form">
+    <p>
+      <AuInput id="input-block" {{on "change" this.updateUrl}} @width="block"/>
+    </p>
+    <AuButton {{on "click" (perform this.fetchHtml)}}>
+      Fetch HTML
+    </AuButton>
+  </div>
+{{else if (eq this.selectedImport "upload")}}
+  <h3>Upload</h3>
+  <div class="au-c-form">
+    <input
+      multiple="true"
+      {{on "change" this.upload}}
+      accept=".html"
+      type="file"
+    />
+  </div>
+{{/if}}
+{{#if this.ready}}
+    <code style="overflow: auto;">
+      {{this.htmlString}}
+    </code>
+{{/if}}
+
