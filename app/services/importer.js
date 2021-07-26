@@ -20,15 +20,16 @@ const keys = {
     'http://purl.org/dc/terms/title': 'titel',
     'http://purl.org/dc/terms/description': 'beschrijving',
     'http://data.vlaanderen.be/ns/besluit#geplandOpenbaar': 'geplandOpenbaar',
-    'http://purl.org/dc/terms/subject': 'onderwerp'
+    
   },
   'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt': {
     'http://data.vlaanderen.be/ns/besluit#openbaar': 'openbaar',
     'http://data.vlaanderen.be/ns/besluit#heeftStemming': 'stemmingen',
-    'http://data.vlaanderen.be/ns/besluit#heeftAanwezigeBijStart': 'aanwezigenBijStart',
-    'http://mu.semte.ch/vocabularies/ext/heeftAfwezigeBijStart': 'afwezigenBijStart',
+    'http://data.vlaanderen.be/ns/besluit#heeftAanwezige': 'aanwezigen',
+    'http://mu.semte.ch/vocabularies/ext/heeftAfwezige': 'afwezigen',
     'http://data.vlaanderen.be/ns/besluit#heeftVoorzitter': 'voorzitter',
-    'http://data.vlaanderen.be/ns/besluit#heeftSecretaris': 'secretaris'
+    'http://data.vlaanderen.be/ns/besluit#heeftSecretaris': 'secretaris',
+    'http://purl.org/dc/terms/subject': 'onderwerp'
   },
   'http://data.vlaanderen.be/ns/mandaat#Mandataris': {
     'http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan': 'isBestuurlijkeAliasVan',
@@ -70,10 +71,10 @@ export default class Importer extends Service {
     node.innerHTML = html;
     const contexts = analyse(node).map((c) => c.context);
     const triples = this.cleanupTriples(contexts.flat());
-    return triples;
+    return {triples, node};
   }
   async importDocument(html) {
-    const triples = this.extractTriplesFromHTML(html);
+    const {triples, node} = this.extractTriplesFromHTML(html);
 
     const uris = {};
     for(let triple of triples) {
@@ -108,11 +109,18 @@ export default class Importer extends Service {
         processedModels[type][uri] = this.processTriples(triplesByType[type][uri], keys[type]);
       }
     }
-    console.log(processedModels);
     await this.processAgendapoints(processedModels);
     await this.processVotes(processedModels);
-    await this.processBehandelings(processedModels);
+    await this.processBehandelings(processedModels, node);
     await this.processMeetings(processedModels);
+
+    //Validation
+
+    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Zitting');
+    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Agendapunt');
+    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Stemming');
+    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt');
+    
   }
   cleanupTriples(triples) {
     const cleantriples = {};
@@ -127,15 +135,24 @@ export default class Importer extends Service {
     for(let triple of triples) {
       const key = triplesMap[triple.predicate];
       if(!key) continue;
-      if(resultObject[key] && resultObject[key] !== triple.object) {
+      let value = triple.object;
+      console.log(triple.datatype)
+      if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#dateTime') {
+        value = new Date(triple.object);
+      } else if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#boolean') {
+        value = Boolean(triple.object);
+      } else if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#integer') {
+        value = Number(triple.object);
+      }
+      if(resultObject[key] && resultObject[key] !== value) {
         if(!Array.isArray(resultObject[key])) {
           resultObject[key] = [resultObject[key]];
         }
-        if(!resultObject[key].includes(triple.object)) {  
-          resultObject[key].push(triple.object);
+        if(!resultObject[key].includes(value)) {  
+          resultObject[key].push(value);
         }
       } else {
-        resultObject[key] = triple.object;
+        resultObject[key] = value;
       }
     }
     return resultObject;
@@ -150,6 +167,7 @@ export default class Importer extends Service {
       await this.linkMandataris(zittingData, 'voorzitter');
       await this.linkMandataris(zittingData, 'secretaris');
       await this.linkModels(zittingData, 'agendapunten', 'http://data.vlaanderen.be/ns/besluit#Agendapunt', models, true);
+      console.log(zittingData);
       const bestuursorgaanQuery = await this.store.query('bestuursorgaan', {
         'filter[:uri:]': zittingData.bestuursorgaan
       });
@@ -165,9 +183,7 @@ export default class Importer extends Service {
           }
         }
       }
-      console.log(zittingRecord)
-      await zittingRecord.save();
-      console.log(zittingRecord);
+      models[zittingType][uri] = zittingRecord;
     }
   }
 
@@ -220,11 +236,9 @@ export default class Importer extends Service {
         }
       }
       models[voteType][uri] = voteRecord;
-      await voteRecord.save();
-      console.log(voteRecord);
     }
   }
-  async processBehandelings(models) {
+  async processBehandelings(models, htmlNode) {
     const behandelingType = 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt';
     for(let uri in models[behandelingType]) {
       const behandelingRecord = await this.store.createRecord('behandeling-van-agendapunt', {});
@@ -235,6 +249,7 @@ export default class Importer extends Service {
       await this.linkMandataris(behandelingData, 'secretaris');
       await this.linkModels(behandelingData, 'stemmingen', 'http://data.vlaanderen.be/ns/besluit#Stemming', models, true);
       await this.linkModels(behandelingData, 'onderwerp', 'http://data.vlaanderen.be/ns/besluit#Agendapunt', models);
+      behandelingData.documentContainer = await this.buildDocument(htmlNode, uri);
       for(let key in behandelingData) {
         if(Array.isArray(behandelingData[key])) {
           for(let record of behandelingData[key]) {
@@ -247,8 +262,6 @@ export default class Importer extends Service {
         }
       }
       models[behandelingType][uri] = behandelingRecord;
-      await behandelingRecord.save();
-      console.log(behandelingRecord);
     }
   }
   async processAgendapoints(models){
@@ -268,8 +281,6 @@ export default class Importer extends Service {
         }
       }
       models[agendapointType][uri] = agendapointRecord;
-      await agendapointRecord.save();
-      console.log(agendapointRecord);
     }
   }
   async linkModels(data, key, modelType, models, isArray) {
@@ -294,5 +305,22 @@ export default class Importer extends Service {
       }
       
     }
+  }
+  async saveModel(models, modelType) {
+    for(let uri in models[modelType]) {
+      const record = models[modelType][uri];
+      console.log(record);
+      await record.save();
+    }
+  }
+  async buildDocument(htmlNode, uri) {
+    const node = htmlNode.querySelector(`[resource="${uri}"]`);
+    const documentHtml = node.innerHTML;
+    const editorDocument = this.store.createRecord('editor-document', {content: documentHtml});
+    const documentContainer = this.store.createRecord('document-container', {})
+    documentContainer.currentVersion = editorDocument;
+    await editorDocument.save();
+    await documentContainer.save();
+    return documentContainer;
   }
 }
