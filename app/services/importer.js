@@ -14,13 +14,11 @@ const keys = {
     'http://data.vlaanderen.be/ns/besluit#heeftSecretaris': 'secretaris',
     'http://data.vlaanderen.be/ns/besluit#behandelt': 'agendapunten',
     'http://data.vlaanderen.be/ns/besluit#isGehoudenDoor': 'bestuursorgaan',
-
   },
   'http://data.vlaanderen.be/ns/besluit#Agendapunt': {
     'http://purl.org/dc/terms/title': 'titel',
     'http://purl.org/dc/terms/description': 'beschrijving',
     'http://data.vlaanderen.be/ns/besluit#geplandOpenbaar': 'geplandOpenbaar',
-    
   },
   'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt': {
     'http://data.vlaanderen.be/ns/besluit#openbaar': 'openbaar',
@@ -114,7 +112,10 @@ export default class Importer extends Service {
     await this.processBehandelings(processedModels, node);
     await this.processMeetings(processedModels);
 
+    console.log(processedModels)
+
     //Validation
+    await this.validateAgendapointsAndBehandelings(processedModels);
 
     await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Zitting');
     await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Agendapunt');
@@ -136,7 +137,6 @@ export default class Importer extends Service {
       const key = triplesMap[triple.predicate];
       if(!key) continue;
       let value = triple.object;
-      console.log(triple.datatype)
       if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#dateTime') {
         value = new Date(triple.object);
       } else if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#boolean') {
@@ -167,7 +167,6 @@ export default class Importer extends Service {
       await this.linkMandataris(zittingData, 'voorzitter');
       await this.linkMandataris(zittingData, 'secretaris');
       await this.linkModels(zittingData, 'agendapunten', 'http://data.vlaanderen.be/ns/besluit#Agendapunt', models, true);
-      console.log(zittingData);
       const bestuursorgaanQuery = await this.store.query('bestuursorgaan', {
         'filter[:uri:]': zittingData.bestuursorgaan
       });
@@ -298,7 +297,6 @@ export default class Importer extends Service {
     } else {
       const model = models[modelType][previousData];
       if(isArray) {
-        console.log(model);
         data[key].push(model);
       } else {
         data[key] = model;
@@ -315,12 +313,56 @@ export default class Importer extends Service {
   }
   async buildDocument(htmlNode, uri) {
     const node = htmlNode.querySelector(`[resource="${uri}"]`);
-    const documentHtml = node.innerHTML;
+    const documentHtml = this.removeUnnecessaryHTML(node);
     const editorDocument = this.store.createRecord('editor-document', {content: documentHtml});
     const documentContainer = this.store.createRecord('document-container', {})
     documentContainer.currentVersion = editorDocument;
     await editorDocument.save();
     await documentContainer.save();
     return documentContainer;
+  }
+  removeUnnecessaryHTML(node) {
+    const childrensToInclude = [];
+    const propertiesToRemove = ['besluit:openbaar', 'dc:subject', 'ext:aanwezigenTable', 'ext:stemmingTable'];
+    for(let child of node.children) {
+      const property = child.getAttribute('property');
+      if(!propertiesToRemove.includes(property)) {
+        childrensToInclude.push(child);
+      }
+    }
+    let finalHTML = '';
+    for(let child of childrensToInclude) {
+      finalHTML += child.outerHTML;
+    }
+    return finalHTML;
+  }
+  validateAgendapointsAndBehandelings(models) {
+    const behandelingType = 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt';
+    const agendapointType = 'http://data.vlaanderen.be/ns/besluit#Agendapunt';
+    const agendapointsWithBehandeling = [];
+
+    for(let uri in models[behandelingType]) {
+      const behandelingModel = models[behandelingType][uri];
+      if(behandelingModel.onderwerp) {
+        agendapointsWithBehandeling.push(behandelingModel.onderwerp);
+      } else {
+        const agendapunt = this.store.createRecord("agendapunt", {
+          geplandOpenbaar: behandelingModel.openbaar,
+        });
+        models[agendapointType][`http://new-agendapoint/for/${behandelingModel.id}`] = agendapunt;
+        behandelingModel.onderwerp = agendapunt;
+        agendapointsWithBehandeling.push(agendapunt);
+      }
+    }
+    
+    for(let uri in models[agendapointType]) {
+      const agendapoint = models[agendapointType][uri];
+      if(!agendapointsWithBehandeling.includes(agendapoint)) {
+        models[behandelingType][`http://new-behandeling/for/${agendapoint.id}`] = this.store.createRecord("behandeling-van-agendapunt", {
+          openbaar: agendapoint.geplandOpenbaar,
+          onderwerp: agendapoint,
+        });
+      }
+    }
   }
 }
