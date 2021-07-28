@@ -36,6 +36,11 @@ export default class MeetingForm extends Component {
   }
 
   @task
+  *deleteMeeting(){
+    this.zitting.destroyRecord();
+  }
+  
+  @task
   *loadData() {
     if (this.zitting.get("id")) {
       this.bestuursorgaan = yield this.zitting.get("bestuursorgaan");

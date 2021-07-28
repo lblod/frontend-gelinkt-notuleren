@@ -24,6 +24,10 @@
       <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
+      <AuButton {{on "click" (perform this.deleteMeeting)}} @skin="tertiary" @alert="true" role="menuitem">
+        <AuIcon @icon="bin" @alignment="left" />
+        Naar prullenmand
+      </AuButton>
       {{#if this.isComplete}}
         <AuButton @skin="secondary" {{on "click" this.goToPublish}}>
           {{t "meetingForm.publishButton"}}
