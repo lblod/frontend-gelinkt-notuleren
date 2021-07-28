@@ -1,0 +1,6 @@
+<AuButton @icon="download" @iconAlignment="left" @skin="secondary" {{on "click" this.toggleModal}}>
+  Import
+</AuButton>
+{{#if (eq @type 'meeting')}}
+  <ImportWizard::ImportMeeting @visible={{this.visible}} @toggleModal={{this.toggleModal}}/>
+{{/if}}

@@ -9,6 +9,7 @@
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--search">
           {{#unless this.readOnly}}
+            <ImportWizard @type='meeting'/>
             <LinkTo @route="inbox.meetings.new" class="au-c-button">
               {{t "inbox.meetings.newMeeting"}}
             </LinkTo>

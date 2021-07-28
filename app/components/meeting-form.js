@@ -34,11 +34,6 @@ export default class MeetingForm extends Component {
   get isComplete() {
     return ! this.zitting.isNew && this.behandelingen?.length > 0;
   }
-
-  @task
-  *deleteMeeting(){
-    this.zitting.destroyRecord();
-  }
   
   @task
   *loadData() {
