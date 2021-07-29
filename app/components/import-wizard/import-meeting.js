@@ -5,52 +5,34 @@ import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
 
 export default class ImportWizardImportMeetingComponent extends Component {
-  @tracked selectedImport;
+  @tracked step = 'selectDocument'
   @tracked htmlString;
-  @tracked url;
-  @tracked ready=false;
-  
-  @action 
-  selectImport(event){
-    this.selectedImport=event.target.value;
-    this.ready=false;
-  }
-  
-  @task
-  *upload(event){
-    const reader = new FileReader();
-    const file = event.target.files[0];
-    reader.onload=e=>{
-      this.htmlString=e.target.result;
-      this.sanitizeHtml();
-    }
-    if (file) {
-      yield reader.readAsText(file);
-    } 
-  }
+  @tracked readyForNextStep = false;
+  @service importer;
+  @tracked nextStepButtonLoading = false;
+  @tracked meeting;
+  @service router;
 
   @action
-  updateUrl(event){
-    this.url=event.target.value
-    this.ready=false;
+  updateHtml(htmlString) {
+    this.htmlString = htmlString;
+    this.readyForNextStep = true;
   }
-
-  @task
-  *fetchHtml(){
-    const options={
-      method: 'POST'
-    }
-    const response=yield fetch("/cors-proxy?url="+this.url, options)
-    this.htmlString=yield response.text();
-    this.sanitizeHtml();
-  }
-
   @action
-  sanitizeHtml(){
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(this.htmlString, "text/html");
-    this.htmlString = doc.documentElement.outerHTML
-    this.ready=true;
-    console.log(this.htmlString);
-  };
+  async goToNextStep() {
+    if(this.step === 'selectDocument') {
+      this.step = 'previewHtml';
+    } else if(this.step === 'previewHtml') {
+      this.nextStepButtonLoading = true;
+      await this.importer.importDocument(this.htmlString);
+      this.nextStepButtonLoading = false;
+      this.meeting = this.importer.meeting;
+      this.step = 'confirmationForm';
+    } else if(this.step === 'confirmationForm') {
+      this.nextStepButtonLoading = true;
+      await this.importer.confirmImport();
+      this.nextStepButtonLoading = false;
+      this.router.transitionTo("meetings.edit", this.meeting.id);
+    }
+  }
 }

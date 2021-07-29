@@ -1,0 +1,33 @@
+<form class="au-o-flow" id="create-meeting-form">
+  <div>
+    {{#let (unique-id) @meeting.errors.bestuursorgaan as |id errors|}}
+      <AuLabel
+        @error={{if errors true false}}
+        for={{id}}
+      >
+        {{t "inbox.meetings.new.meeting.administrativeBody"}} <RequiredField />
+      </AuLabel>
+      <AdministrativeBodySelect
+        @id={{id}}
+        @selected={{@meeting.bestuursorgaan}}
+        @onChange={{this.updateAdministrativeBody}}
+        @error={{if errors true false}}
+      />
+      {{#each errors as |error|}}
+        <AuHelpText @error={{true}}>
+          {{t error.message}}
+        </AuHelpText>
+      {{/each}}
+    {{/let}}
+  </div>
+  <div>
+    {{#let (unique-id) as |id|}}
+      <AuLabel for={{id}}>{{t "inbox.meetings.new.meeting.location"}}</AuLabel>
+      <AuInput @value={{@meeting.opLocatie}} @width="block" id={{id}} type="text" />
+    {{/let}}
+  </div>
+  <div>
+    <AuLabel>{{t "inbox.meetings.new.meeting.plannedStart"}}</AuLabel>
+    <DateTimePicker @onChange={{fn (mut @meeting.geplandeStart)}} @value={{@meeting.geplandeStart}}/>
+  </div>
+</form>

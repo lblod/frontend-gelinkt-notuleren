@@ -2,6 +2,8 @@ import Service from '@ember/service';
 import {analyse} from '@lblod/marawa/rdfa-context-scanner';
 import { inject as service } from '@ember/service';
 
+const ZITTING_TYPE = 'http://data.vlaanderen.be/ns/besluit#Zitting';
+
 const keys = {
   'http://data.vlaanderen.be/ns/besluit#Zitting': {
     'http://data.vlaanderen.be/ns/besluit#geplandeStart': 'geplandeStart',
@@ -115,13 +117,19 @@ export default class Importer extends Service {
     console.log(processedModels)
 
     //Validation
-    await this.validateAgendapointsAndBehandelings(processedModels);
-
-    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Zitting');
-    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Agendapunt');
-    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#Stemming');
-    await this.saveModel(processedModels, 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt');
+    //await this.validateAgendapointsAndBehandelings(processedModels);
+    this.processedModels = processedModels;
+    for(let uri in processedModels[ZITTING_TYPE]) {
+      this.meeting = processedModels[ZITTING_TYPE][uri];
+      break;
+    }
     
+  }
+  async confirmImport(){
+    await this.saveModel(this.processedModels, ZITTING_TYPE);
+    await this.saveModel(this.processedModels, 'http://data.vlaanderen.be/ns/besluit#Agendapunt');
+    await this.saveModel(this.processedModels, 'http://data.vlaanderen.be/ns/besluit#Stemming');
+    await this.saveModel(this.processedModels, 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt');
   }
   cleanupTriples(triples) {
     const cleantriples = {};
