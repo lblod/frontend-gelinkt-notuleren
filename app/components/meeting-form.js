@@ -37,7 +37,8 @@ export default class MeetingForm extends Component {
 
   @task
   *deleteMeeting(){
-    this.zitting.destroyRecord();
+    yield this.zitting.destroyRecord();
+    this.router.transitionTo("inbox.meetings.index"); 
   }
   
   @task
