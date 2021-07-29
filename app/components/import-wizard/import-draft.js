@@ -70,7 +70,6 @@ export default class ImportWizardImportDraftComponent extends Component {
     rootNode.normalize();
     
     const cleanedHtml = DomPurify.sanitize(rootNode.innerHTML, {ALLOWED_TAGS: LIMITED_SAFE_TAGS, ALLOWED_ATTR: DEFAULT_SAFE_ATTRIBUTES, ADD_URI_SAFE_ATTR: DEFAULT_URI_SAFE_ATTRIBUTES});
-    debugger;
     
     const editorDocument=this.store.createRecord('editor-document');
     editorDocument.title='imported'
