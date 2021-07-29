@@ -34,12 +34,6 @@ export default class MeetingForm extends Component {
   get isComplete() {
     return ! this.zitting.isNew && this.behandelingen?.length > 0;
   }
-
-  @task
-  *deleteMeeting(){
-    yield this.zitting.destroyRecord();
-    this.router.transitionTo("inbox.meetings.index"); 
-  }
   
   @task
   *loadData() {
