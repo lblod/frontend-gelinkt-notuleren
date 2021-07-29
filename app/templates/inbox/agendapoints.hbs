@@ -10,6 +10,7 @@
         <AuToolbarGroup class="au-c-toolbar__group--search">
           <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
           {{#unless this.readOnly}}
+            <ImportWizard @type='draft'/>
             <LinkTo @route="agendapoints.new" class="au-c-button-link">{{t "inbox.agendapoints.new"}}</LinkTo>
           {{/unless}}
         </AuToolbarGroup>

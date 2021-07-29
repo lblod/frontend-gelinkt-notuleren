@@ -3,4 +3,6 @@
 </AuButton>
 {{#if (eq @type 'meeting')}}
   <ImportWizard::ImportMeeting @visible={{this.visible}} @toggleModal={{this.toggleModal}}/>
+{{else}}
+  <ImportWizard::ImportDraft @visible={{this.visible}} @toggleModal={{this.toggleModal}}/>
 {{/if}}
