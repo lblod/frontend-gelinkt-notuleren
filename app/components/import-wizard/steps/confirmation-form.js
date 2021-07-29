@@ -8,7 +8,7 @@ export default class SelectDocumentComponent extends Component {
 
   @action
   updateAdministrativeBody(administrativeBody) {
-    this.meeting.bestuursorgaan = administrativeBody;
-    this.meeting.errors.remove('bestuursorgaan');
+    this.args.meeting.bestuursorgaan = administrativeBody;
+    this.args.meeting.errors.remove('bestuursorgaan');
   }
 }

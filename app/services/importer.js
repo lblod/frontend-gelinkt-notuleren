@@ -147,6 +147,10 @@ export default class Importer extends Service {
       let value = triple.object;
       if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#dateTime') {
         value = new Date(triple.object);
+        if(isNaN(value)) {
+          //Date is invalid
+          continue;
+        }
       } else if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#boolean') {
         value = Boolean(triple.object);
       } else if(triple.datatype === 'http://www.w3.org/2001/XMLSchema#integer') {
@@ -201,24 +205,31 @@ export default class Importer extends Service {
     }
     if(Array.isArray(previousData)) {
       for(let uri of previousData) {
-        const mandatarisData = await this.store.query('mandataris', {
-          'filter[:uri:]': uri
-        });
-        const mandataris = mandatarisData.firstObject;
-        if(mandataris) {
-          data[key].push(mandataris);
+        try {
+          const mandatarisData = await this.store.query('mandataris', {
+            'filter[:uri:]': uri
+          });
+          const mandataris = mandatarisData.firstObject;
+          if(mandataris) {
+            data[key].push(mandataris);
+          }
+        } catch(e) {
+          console.log(e);
         }
       }
     } else {
-      const mandatarisData = await this.store.query('mandataris', {
-        'filter[:uri:]': data[key]
-      });
-      if(isArray) {
-        data[key].push(mandatarisData.firstObject);
-      } else {
-        data[key] = mandatarisData.firstObject;
+      try {
+        const mandatarisData = await this.store.query('mandataris', {
+          'filter[:uri:]': data[key]
+        });
+        if(isArray) {
+          data[key].push(mandatarisData.firstObject);
+        } else {
+          data[key] = mandatarisData.firstObject;
+        }
+      } catch(e) {
+        console.log(e);
       }
-      
     }
   }
   async processVotes(models) {
@@ -291,21 +302,28 @@ export default class Importer extends Service {
     }
   }
   async linkModels(data, key, modelType, models, isArray) {
+    
     const previousData = data[key];
     if(isArray) {
       data[key] = [];
     }
     if(Array.isArray(previousData)) {
       for(let uri of previousData) {
+        if(!models[modelType]) continue;
         const model = models[modelType][uri];
         if(model) {
           data[key].push(model);
         }
       }
     } else {
-      const model = models[modelType][previousData];
+      let model;
+      if(models[modelType]) {
+        model = models[modelType][previousData];
+      }
       if(isArray) {
-        data[key].push(model);
+        if(model) {
+          data[key].push(model);
+        }
       } else {
         data[key] = model;
       }
