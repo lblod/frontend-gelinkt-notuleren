@@ -1,0 +1,53 @@
+<AuModal 
+@modalTitle="Import meeting" 
+@modalOpen={{@visible}} 
+@closeModal={{@toggleModal}} as |Modal| >
+  <Modal.Body>
+    <h3><strong>Type</strong></h3>
+    <br>
+    <div class="au-c-form">
+      <ul>
+        <li>
+          <AuControlRadio @label="url" @name="import-selector" @value="url" @identifier="url" {{on "click" this.selectImport}}/>
+        </li>
+        <li>
+          <AuControlRadio @label="upload" @name="import-selector" @value="upload" @identifier="upload" {{on "click" this.selectImport}}/>
+        </li>
+      </ul>
+    </div>
+    {{#if (eq this.selectedImport "url")}}
+      <br>
+      <h3><strong>Url</strong></h3>
+      <br>
+      <div class="au-c-form">
+        <p>
+          <AuInput id="input-block" {{on "change" this.updateUrl}} @width="block"/>
+        </p>
+        <AuButton {{on "click" (perform this.fetchHtml)}}>
+          Fetch HTML
+        </AuButton>
+      </div>
+    {{else if (eq this.selectedImport "upload")}}
+      <br>
+      <h3><strong>Upload</strong></h3>
+      <br>
+      <div class="au-c-form">
+        <input
+          multiple="true"
+          {{on "change" (perform this.upload)}}
+          accept=".html"
+          type="file"
+        />
+      </div>
+    {{/if}}
+  </Modal.Body>
+    
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton @skin="secondary">Back</AuButton>
+      <AuButton @disabled={{not this.ready}} @loading={{or this.fetchHtml.isRunning this.upload.isRunning}}>
+        Next
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>
