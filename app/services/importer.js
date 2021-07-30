@@ -403,8 +403,12 @@ export default class Importer extends Service {
     const document = parser.parseFromString(htmlString, "text/html");
     const rootNode = document.body;
     const behandelingNode = rootNode.querySelector('[typeof="besluit:BehandelingVanAgendapunt"]');
+    let nodeToImport = rootNode;
+    if(behandelingNode) {
+      nodeToImport = behandelingNode;
+    }
     
-    const cleanedHtml = this.removeUnnecessaryHTML(behandelingNode);
+    const cleanedHtml = this.removeUnnecessaryHTML(nodeToImport);
     
     const editorDocument = this.store.createRecord('editor-document');
     editorDocument.title = 'imported';
