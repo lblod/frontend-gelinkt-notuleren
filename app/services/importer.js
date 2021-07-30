@@ -65,7 +65,12 @@ const keys = {
 };
 
 export default class Importer extends Service {
+
   @service store;
+  @service currentSession;
+  processedModels = {};
+  meeting;
+
   extractTriplesFromHTML(html) {
     const node = document.createElement('body');
     node.innerHTML = html;
@@ -114,15 +119,15 @@ export default class Importer extends Service {
     await this.processBehandelings(processedModels, node);
     await this.processMeetings(processedModels);
 
-    console.log(processedModels)
-
-    //Validation
-    //await this.validateAgendapointsAndBehandelings(processedModels);
-    this.processedModels = processedModels;
     for(let uri in processedModels[ZITTING_TYPE]) {
       this.meeting = processedModels[ZITTING_TYPE][uri];
       break;
     }
+    //Validation
+    await this.validateMeeting(this.meeting);
+    //await this.validateAgendapointsAndBehandelings(processedModels);
+    this.processedModels = processedModels;
+    
     
   }
   async confirmImport(){
@@ -390,5 +395,20 @@ export default class Importer extends Service {
         });
       }
     }
+  }
+  async validateMeeting(meeting) {
+    const bestuursorgaan = meeting.bestuursorgaan;
+    let currentAdministrativeUnitId = this.currentSession.group.id;
+    if(bestuursorgaan) {
+      const anotherBestuursorgaan = await bestuursorgaan.get('isTijdsspecialisatieVan');
+      const bestuurseenheid = await anotherBestuursorgaan.get('bestuurseenheid');
+      if(bestuurseenheid.get('id') !== currentAdministrativeUnitId) {
+        throw new Error('Can\'t import meeting because you are not in the correct administrative unit');
+      }
+    }
+  }
+  reset() {
+    this.processedModels = {};
+    this.meeting = undefined;
   }
 }
