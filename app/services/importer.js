@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import {analyse} from '@lblod/marawa/rdfa-context-scanner';
 import { inject as service } from '@ember/service';
+import {DRAFT_STATUS_ID} from '../utils/constants';
 
 const MEETING_TYPE = 'http://data.vlaanderen.be/ns/besluit#Zitting';
 const AGENDAPOINT_TYPE = 'http://data.vlaanderen.be/ns/besluit#Agendapunt';
@@ -319,15 +320,16 @@ export default class Importer extends Service {
   async saveModel(models, modelType) {
     for(let uri in models[modelType]) {
       const record = models[modelType][uri];
-      console.log(record);
       await record.save();
     }
   }
   async buildDocument(htmlNode, uri) {
     const node = htmlNode.querySelector(`[resource="${uri}"]`);
     const documentHtml = this.removeUnnecessaryHTML(node);
-    const editorDocument = this.store.createRecord('editor-document', {content: documentHtml});
-    const documentContainer = this.store.createRecord('document-container', {})
+    const status = await this.store.findRecord('concept', DRAFT_STATUS_ID);
+    const currentDate = new Date();
+    const editorDocument = this.store.createRecord('editor-document', {content: documentHtml, createdOn: currentDate, updatedOn: currentDate});
+    const documentContainer = this.store.createRecord('document-container', {status});
     documentContainer.currentVersion = editorDocument;
     await editorDocument.save();
     await documentContainer.save();
@@ -348,7 +350,7 @@ export default class Importer extends Service {
     }
     return finalHTML;
   }
-  validateAgendapointsAndBehandelings(models) {;
+  validateAgendapointsAndBehandelings(models) {
     const agendapointsWithBehandeling = [];
 
     for(let uri in models[TREATMENT_TYPE]) {
@@ -386,7 +388,7 @@ export default class Importer extends Service {
       }
     }
   }
-  reset() {
+  reset() {
     this.processedModels = {};
     this.meeting = undefined;
   }
