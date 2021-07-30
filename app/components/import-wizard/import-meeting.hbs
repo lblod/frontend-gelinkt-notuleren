@@ -14,7 +14,7 @@
     
   <Modal.Footer>
     <AuButtonGroup>
-      <AuButton @skin="secondary">Back</AuButton>
+      <AuButton @skin="secondary" {{on "click" this.goToPreviousStep}}>Back</AuButton>
       <AuButton @disabled={{not this.readyForNextStep}} {{on "click" this.goToNextStep}} @loading={{this.nextStepButtonLoading}}>
         Next
       </AuButton>
