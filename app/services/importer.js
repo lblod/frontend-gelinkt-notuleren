@@ -419,5 +419,6 @@ export default class Importer extends Service {
     documentContainer.folder = await this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
     documentContainer.publisher = this.currentSession.group;
     await documentContainer.save();
+    return documentContainer;
   }
 }

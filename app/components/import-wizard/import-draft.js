@@ -59,10 +59,10 @@ export default class ImportWizardImportDraftComponent extends Component {
 
   @task
   *createDoc(){
-    yield this.importer.importTreatment(this.htmlString);
+    const documentContainer = yield this.importer.importTreatment(this.htmlString);
 
     this.args.toggleModal();
 
-    this.router.transitionTo('inbox.agendapoints');
+    this.router.transitionTo('agendapoints.edit', documentContainer.id);
   }
 }
