@@ -2,10 +2,13 @@ import Service from '@ember/service';
 import {analyse} from '@lblod/marawa/rdfa-context-scanner';
 import { inject as service } from '@ember/service';
 
-const ZITTING_TYPE = 'http://data.vlaanderen.be/ns/besluit#Zitting';
+const MEETING_TYPE = 'http://data.vlaanderen.be/ns/besluit#Zitting';
+const AGENDAPOINT_TYPE = 'http://data.vlaanderen.be/ns/besluit#Agendapunt';
+const TREATMENT_TYPE = 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt';
+const VOTING_TYPE = 'http://data.vlaanderen.be/ns/besluit#Stemming';
 
 const keys = {
-  'http://data.vlaanderen.be/ns/besluit#Zitting': {
+  [MEETING_TYPE]: {
     'http://data.vlaanderen.be/ns/besluit#geplandeStart': 'geplandeStart',
     'http://www.w3.org/ns/prov#endedAtTime': 'geeindigdOpTijdstip',
     'http://www.w3.org/ns/prov#startedAtTime': 'gestartOpTijdstip',
@@ -17,12 +20,12 @@ const keys = {
     'http://data.vlaanderen.be/ns/besluit#behandelt': 'agendapunten',
     'http://data.vlaanderen.be/ns/besluit#isGehoudenDoor': 'bestuursorgaan',
   },
-  'http://data.vlaanderen.be/ns/besluit#Agendapunt': {
+  [AGENDAPOINT_TYPE]: {
     'http://purl.org/dc/terms/title': 'titel',
     'http://purl.org/dc/terms/description': 'beschrijving',
     'http://data.vlaanderen.be/ns/besluit#geplandOpenbaar': 'geplandOpenbaar',
   },
-  'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt': {
+  [TREATMENT_TYPE]: {
     'http://data.vlaanderen.be/ns/besluit#openbaar': 'openbaar',
     'http://data.vlaanderen.be/ns/besluit#heeftStemming': 'stemmingen',
     'http://data.vlaanderen.be/ns/besluit#heeftAanwezige': 'aanwezigen',
@@ -31,25 +34,7 @@ const keys = {
     'http://data.vlaanderen.be/ns/besluit#heeftSecretaris': 'secretaris',
     'http://purl.org/dc/terms/subject': 'onderwerp'
   },
-  'http://data.vlaanderen.be/ns/mandaat#Mandataris': {
-    'http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan': 'isBestuurlijkeAliasVan',
-    'http://www.w3.org/ns/org#holds': 'bekleedt'
-  },
-  'http://data.lblod.info/vocabularies/leidinggevenden/Functionaris': {
-    'http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan': 'isBestuurlijkeAliasVan',
-    'http://www.w3.org/ns/org#holds': 'bekleedt'
-  },
-  'http://www.w3.org/ns/person#Person': {
-    'http://data.vlaanderen.be/ns/persoon#gebruikteVoornaam': 'gebruikteVoornaam',
-    'http://xmlns.com/foaf/0.1/familyName': 'achternaam'
-  },
-  'http://data.vlaanderen.be/ns/mandaat#Mandaat': {
-    'http://www.w3.org/ns/org#role': 'bestuursfunctie'
-  },
-  'http://www.w3.org/2004/02/skos/core#Concept': {
-    'http://www.w3.org/2004/02/skos/core#prefLabel': 'label'
-  },
-  'http://data.vlaanderen.be/ns/besluit#Stemming': {
+  [VOTING_TYPE]: {
     'http://data.vlaanderen.be/ns/besluit#geheim': 'geheim',
     'http://data.vlaanderen.be/ns/besluit#onderwerp': 'onderwerp',
     'http://data.vlaanderen.be/ns/besluit#heeftAanwezige': 'aanwezigen',
@@ -119,8 +104,8 @@ export default class Importer extends Service {
     await this.processBehandelings(processedModels, node);
     await this.processMeetings(processedModels);
 
-    for(let uri in processedModels[ZITTING_TYPE]) {
-      this.meeting = processedModels[ZITTING_TYPE][uri];
+    for(let uri in processedModels[MEETING_TYPE]) {
+      this.meeting = processedModels[MEETING_TYPE][uri];
       break;
     }
     //Validation
@@ -131,10 +116,10 @@ export default class Importer extends Service {
     
   }
   async confirmImport(){
-    await this.saveModel(this.processedModels, ZITTING_TYPE);
-    await this.saveModel(this.processedModels, 'http://data.vlaanderen.be/ns/besluit#Agendapunt');
-    await this.saveModel(this.processedModels, 'http://data.vlaanderen.be/ns/besluit#Stemming');
-    await this.saveModel(this.processedModels, 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt');
+    await this.saveModel(this.processedModels, MEETING_TYPE);
+    await this.saveModel(this.processedModels, AGENDAPOINT_TYPE);
+    await this.saveModel(this.processedModels, VOTING_TYPE);
+    await this.saveModel(this.processedModels, TREATMENT_TYPE);
   }
   cleanupTriples(triples) {
     const cleantriples = {};
@@ -175,15 +160,14 @@ export default class Importer extends Service {
     return resultObject;
   }
   async processMeetings(models) {
-    const zittingType = 'http://data.vlaanderen.be/ns/besluit#Zitting';
-    for(let uri in models[zittingType]) {
+    for(let uri in models[MEETING_TYPE]) {
       const zittingRecord = await this.store.createRecord('zitting', {});
-      const zittingData = models[zittingType][uri];
+      const zittingData = models[MEETING_TYPE][uri];
       await this.linkMandataris(zittingData, 'aanwezigenBijStart', true);
       await this.linkMandataris(zittingData, 'afwezigenBijStart', true);
       await this.linkMandataris(zittingData, 'voorzitter');
       await this.linkMandataris(zittingData, 'secretaris');
-      await this.linkModels(zittingData, 'agendapunten', 'http://data.vlaanderen.be/ns/besluit#Agendapunt', models, true);
+      await this.linkModels(zittingData, 'agendapunten', AGENDAPOINT_TYPE, models, true);
       const bestuursorgaanQuery = await this.store.query('bestuursorgaan', {
         'filter[:uri:]': zittingData.bestuursorgaan
       });
@@ -199,7 +183,7 @@ export default class Importer extends Service {
           }
         }
       }
-      models[zittingType][uri] = zittingRecord;
+      models[MEETING_TYPE][uri] = zittingRecord;
     }
   }
 
@@ -238,10 +222,9 @@ export default class Importer extends Service {
     }
   }
   async processVotes(models) {
-    const voteType = 'http://data.vlaanderen.be/ns/besluit#Stemming';
-    for(let uri in models[voteType]) {
+    for(let uri in models[VOTING_TYPE]) {
       const voteRecord = await this.store.createRecord('stemming', {});
-      const voteData = models[voteType][uri];
+      const voteData = models[VOTING_TYPE][uri];
       await this.linkMandataris(voteData, 'aanwezigen', true);
       await this.linkMandataris(voteData, 'stemmers', true);
       await this.linkMandataris(voteData, 'voorstanders', true);
@@ -258,20 +241,19 @@ export default class Importer extends Service {
           }
         }
       }
-      models[voteType][uri] = voteRecord;
+      models[VOTING_TYPE][uri] = voteRecord;
     }
   }
   async processBehandelings(models, htmlNode) {
-    const behandelingType = 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt';
-    for(let uri in models[behandelingType]) {
+    for(let uri in models[TREATMENT_TYPE]) {
       const behandelingRecord = await this.store.createRecord('behandeling-van-agendapunt', {});
-      const behandelingData = models[behandelingType][uri];
+      const behandelingData = models[TREATMENT_TYPE][uri];
       await this.linkMandataris(behandelingData, 'aanwezigen', true);
       await this.linkMandataris(behandelingData, 'afwezigen', true);
       await this.linkMandataris(behandelingData, 'voorzitter');
       await this.linkMandataris(behandelingData, 'secretaris');
-      await this.linkModels(behandelingData, 'stemmingen', 'http://data.vlaanderen.be/ns/besluit#Stemming', models, true);
-      await this.linkModels(behandelingData, 'onderwerp', 'http://data.vlaanderen.be/ns/besluit#Agendapunt', models);
+      await this.linkModels(behandelingData, 'stemmingen', VOTING_TYPE, models, true);
+      await this.linkModels(behandelingData, 'onderwerp', AGENDAPOINT_TYPE, models);
       behandelingData.documentContainer = await this.buildDocument(htmlNode, uri);
       for(let key in behandelingData) {
         if(Array.isArray(behandelingData[key])) {
@@ -284,14 +266,13 @@ export default class Importer extends Service {
           }
         }
       }
-      models[behandelingType][uri] = behandelingRecord;
+      models[TREATMENT_TYPE][uri] = behandelingRecord;
     }
   }
   async processAgendapoints(models){
-    const agendapointType = 'http://data.vlaanderen.be/ns/besluit#Agendapunt';
-    for(let uri in models[agendapointType]) {
+    for(let uri in models[AGENDAPOINT_TYPE]) {
       const agendapointRecord = await this.store.createRecord('agendapunt', {});
-      const agendapointData = models[agendapointType][uri];
+      const agendapointData = models[AGENDAPOINT_TYPE][uri];
       for(let key in agendapointData) {
         if(Array.isArray(agendapointData[key])) {
           for(let record of agendapointData[key]) {
@@ -303,7 +284,7 @@ export default class Importer extends Service {
           }
         }
       }
-      models[agendapointType][uri] = agendapointRecord;
+      models[AGENDAPOINT_TYPE][uri] = agendapointRecord;
     }
   }
   async linkModels(data, key, modelType, models, isArray) {
@@ -367,29 +348,27 @@ export default class Importer extends Service {
     }
     return finalHTML;
   }
-  validateAgendapointsAndBehandelings(models) {
-    const behandelingType = 'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt';
-    const agendapointType = 'http://data.vlaanderen.be/ns/besluit#Agendapunt';
+  validateAgendapointsAndBehandelings(models) {;
     const agendapointsWithBehandeling = [];
 
-    for(let uri in models[behandelingType]) {
-      const behandelingModel = models[behandelingType][uri];
+    for(let uri in models[TREATMENT_TYPE]) {
+      const behandelingModel = models[TREATMENT_TYPE][uri];
       if(behandelingModel.onderwerp) {
         agendapointsWithBehandeling.push(behandelingModel.onderwerp);
       } else {
         const agendapunt = this.store.createRecord("agendapunt", {
           geplandOpenbaar: behandelingModel.openbaar,
         });
-        models[agendapointType][`http://new-agendapoint/for/${behandelingModel.id}`] = agendapunt;
+        models[AGENDAPOINT_TYPE][`http://new-agendapoint/for/${behandelingModel.id}`] = agendapunt;
         behandelingModel.onderwerp = agendapunt;
         agendapointsWithBehandeling.push(agendapunt);
       }
     }
     
-    for(let uri in models[agendapointType]) {
-      const agendapoint = models[agendapointType][uri];
+    for(let uri in models[AGENDAPOINT_TYPE]) {
+      const agendapoint = models[AGENDAPOINT_TYPE][uri];
       if(!agendapointsWithBehandeling.includes(agendapoint)) {
-        models[behandelingType][`http://new-behandeling/for/${agendapoint.id}`] = this.store.createRecord("behandeling-van-agendapunt", {
+        models[TREATMENT_TYPE][`http://new-behandeling/for/${agendapoint.id}`] = this.store.createRecord("behandeling-van-agendapunt", {
           openbaar: agendapoint.geplandOpenbaar,
           onderwerp: agendapoint,
         });
