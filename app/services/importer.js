@@ -1,7 +1,8 @@
 import Service from '@ember/service';
 import {analyse} from '@lblod/marawa/rdfa-context-scanner';
 import { inject as service } from '@ember/service';
-import {DRAFT_STATUS_ID} from '../utils/constants';
+import {DRAFT_STATUS_ID, DRAFT_FOLDER_ID} from '../utils/constants';
+import DomPurify from 'dompurify';
 
 const MEETING_TYPE = 'http://data.vlaanderen.be/ns/besluit#Zitting';
 const AGENDAPOINT_TYPE = 'http://data.vlaanderen.be/ns/besluit#Agendapunt';
@@ -57,9 +58,10 @@ export default class Importer extends Service {
   processedModels = {};
   meeting;
 
-  extractTriplesFromHTML(html) {
-    const node = document.createElement('body');
-    node.innerHTML = html;
+  extractTriplesFromHTML(htmlString) {
+    const parser = new DOMParser();
+    const document = parser.parseFromString(htmlString, "text/html");
+    const node = document.body;
     const contexts = analyse(node).map((c) => c.context);
     const triples = this.cleanupTriples(contexts.flat());
     return {triples, node};
@@ -327,28 +329,32 @@ export default class Importer extends Service {
     const node = htmlNode.querySelector(`[resource="${uri}"]`);
     const documentHtml = this.removeUnnecessaryHTML(node);
     const status = await this.store.findRecord('concept', DRAFT_STATUS_ID);
+    const folder = await this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
     const currentDate = new Date();
     const editorDocument = this.store.createRecord('editor-document', {content: documentHtml, createdOn: currentDate, updatedOn: currentDate});
-    const documentContainer = this.store.createRecord('document-container', {status});
+    const documentContainer = this.store.createRecord('document-container', {status, folder});
     documentContainer.currentVersion = editorDocument;
     await editorDocument.save();
     await documentContainer.save();
     return documentContainer;
   }
   removeUnnecessaryHTML(node) {
-    const childrensToInclude = [];
+    node.normalize();
+
+    const LIMITED_SAFE_TAGS = ['a', 'p', 'br', 'ol', 'ul', 'li', 'strong', 'u', 'em', 's', 'b', 'table', 'thead', 'tbody', 'th', 'tr', 'td', 'div', 'span'];
+    const DEFAULT_URI_SAFE_ATTRIBUTES = ['about', 'property', 'datatype', 'typeof', 'resource', 'vocab', 'prefix'];
+    const DEFAULT_SAFE_ATTRIBUTES = ['colspan', 'rowspan', 'title', 'alt', 'cellspacing', 'axis', 'about', 'property', 'datatype', 'typeof', 'resource', 'rel', 'rev', 'content', 'vocab', 'prefix', 'href', 'src'];
     const propertiesToRemove = ['besluit:openbaar', 'dc:subject', 'ext:aanwezigenTable', 'ext:stemmingTable'];
+
     for(let child of node.children) {
       const property = child.getAttribute('property');
-      if(!propertiesToRemove.includes(property)) {
-        childrensToInclude.push(child);
+      if(propertiesToRemove.includes(property)) {
+        node.removeChild(child);
       }
     }
-    let finalHTML = '';
-    for(let child of childrensToInclude) {
-      finalHTML += child.outerHTML;
-    }
-    return finalHTML;
+    console.log(node)
+    const cleanedHtml = DomPurify.sanitize(node.innerHTML, {ALLOWED_TAGS: LIMITED_SAFE_TAGS, ALLOWED_ATTR: DEFAULT_SAFE_ATTRIBUTES, ADD_URI_SAFE_ATTR: DEFAULT_URI_SAFE_ATTRIBUTES});
+    return cleanedHtml;
   }
   validateAgendapointsAndBehandelings(models) {
     const agendapointsWithBehandeling = [];
@@ -391,5 +397,27 @@ export default class Importer extends Service {
   reset() {
     this.processedModels = {};
     this.meeting = undefined;
+  }
+  async importTreatment(htmlString) {
+    const parser = new DOMParser();
+    const document = parser.parseFromString(htmlString, "text/html");
+    const rootNode = document.body;
+    const behandelingNode = rootNode.querySelector('[typeof="besluit:BehandelingVanAgendapunt"]');
+    
+    const cleanedHtml = this.removeUnnecessaryHTML(behandelingNode);
+    
+    const editorDocument = this.store.createRecord('editor-document');
+    editorDocument.title = 'imported';
+    editorDocument.content = cleanedHtml;
+    editorDocument.createdOn = new Date();
+    editorDocument.updatedOn = new Date();
+    await editorDocument.save();
+
+    const documentContainer = this.store.createRecord('document-container');
+    documentContainer.currentVersion = editorDocument;
+    documentContainer.status = await this.store.findRecord('concept', DRAFT_STATUS_ID);
+    documentContainer.folder = await this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
+    documentContainer.publisher = this.currentSession.group;
+    await documentContainer.save();
   }
 }
