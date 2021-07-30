@@ -1,0 +1,18 @@
+<AuButton {{on "click" (fn (mut this.displayDeleteModal) true)}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
+  <AuIcon @icon="bin" @alignment="left" />
+  Naar prullenmand
+</AuButton>
+{{#if this.displayDeleteModal}}
+  <AuModal
+    @modalTitle="Are you sure you want to delete this meeting"
+    @modalOpen={{this.displayDeleteModal}}
+    @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
+    <Modal.Body>
+      <p>This action cannot be undone</p>
+    </Modal.Body>
+    <Modal.Footer>
+      <AuButton {{on "click" (perform this.deleteMeeting)}}>Yes, Delete this meeting</AuButton>
+      <AuButton @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>Back</AuButton>
+    </Modal.Footer>
+  </AuModal>
+{{/if}}
