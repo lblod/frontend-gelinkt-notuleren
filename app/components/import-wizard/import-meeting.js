@@ -19,22 +19,24 @@ export default class ImportWizardImportMeetingComponent extends Component {
     this.readyForNextStep = true;
   }
 
-  @action
-  async goToNextStep() {
+  @task 
+  *goToNextStep() {
     if(this.step === 'selectDocument') {
       this.step = 'previewHtml';
     } else if(this.step === 'previewHtml') {
       this.readyForNextStep = false;
       this.nextStepButtonLoading = true;
-      await this.importer.importDocument(this.htmlString);
+      yield this.importer.importDocument(this.htmlString);
       this.nextStepButtonLoading = false;
       this.readyForNextStep = true;
       this.meeting = this.importer.meeting;
       this.step = 'confirmationForm';
     } else if(this.step === 'confirmationForm') {
+      this.readyForNextStep = false;
       this.nextStepButtonLoading = true;
-      await this.importer.confirmImport();
+      yield this.importer.confirmImport();
       this.nextStepButtonLoading = false;
+      this.readyForNextStep = true;
       this.router.transitionTo("meetings.edit", this.meeting.id);
     }
   }
