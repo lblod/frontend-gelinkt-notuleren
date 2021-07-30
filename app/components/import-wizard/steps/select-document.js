@@ -1,7 +1,6 @@
 import Component from '@glimmer/component';
 import {task} from "ember-concurrency";
 import {action} from '@ember/object';
-import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
 
 export default class SelectDocumentComponent extends Component {
@@ -38,8 +37,8 @@ export default class SelectDocumentComponent extends Component {
   *fetchHtml(){
     const options={
       method: 'POST'
-    }
-    const response=yield fetch("/cors-proxy?url="+this.url, options)
+    };
+    const response=yield fetch("/cors-proxy?url="+this.url, options);
     this.htmlString=yield response.text();
     this.sanitizeHtml();
   }
