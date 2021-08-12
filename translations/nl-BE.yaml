@@ -337,7 +337,7 @@ dateTimePicker:
 
 attachments:
   attachments: Bijlagen
-  return: Terug naar document
+  return: Document
   attach: Voeg een bestand toe
   drag: Sleep de bestanden naar hier om toe te voegen
   filename: Bestandsnaam

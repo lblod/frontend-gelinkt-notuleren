@@ -1,38 +1,13 @@
-.c-attachments-container{
-  padding: 10px 50px;
-}
-.c-attachments-table{
-  tr:nth-child(even) {
-    background-color: #EFEFEF
-  }
-  tr:nth-child(odd) {
-    background-color: #FFF
-  }
-}
-.c-attachments-select{
-  width: 100%; 
-  padding: 10px;
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 0px;
+.au-c-attachments-select {
+  @include au-font-size($au-base);
+  font-family: $au-font;
+  width: 100%;
+  padding: $au-unit-tiny;
+  background-color: $au-white;
+  border: 1px solid $au-gray-400;
+  border-radius: .2rem;
 }
 
-.c-attachments-delete{
-  color: red;
-}
-
-.c-attachments-delete:visited{
-  color: red;
-}
-
-.c-attachments-delete:hover{
-  color: red;
-}
-
-.c-attachments-delete:focus{
-  color: red;
-}
-
-.c-attachments-select-cell{
-  width: 200px;
+.au-c-attachments-select-cell {
+  min-width: 150px;
 }

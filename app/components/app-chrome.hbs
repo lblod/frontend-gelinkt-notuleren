@@ -50,6 +50,27 @@
       <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
+      {{#if @uploading}}
+        <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+          <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" @toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
+            {{t "attachments.return"}}
+          </AuButton>
+          <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
+            {{t "attachments.attachments"}}
+          </AuButton>
+        </AuButtonGroup>
+      {{else}}
+        {{#if @toggleUpload}}
+          <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+            <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
+              {{t "attachments.return"}}
+            </AuButton>
+            <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" @toggleUpload}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
+              {{t "attachments.attachments"}}
+            </AuButton>
+          </AuButtonGroup>
+        {{/if}}
+      {{/if}}
       {{#if @editorDocument.isNew}}
         <LinkTo @route="inbox.agendapoints" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
           <AuIcon @icon="bin" @alignment="left" />
@@ -77,19 +98,9 @@
         {{/if}}
       </AuDropdown>
       {{/if}}
+
       {{#if @save}}
         <AuButton {{on "click" @save.action}} @disabled={{@save.isRunning}}>Bewaar</AuButton>
-      {{/if}}
-      {{#if @uploading}}
-        <AuButton @skin="secondary" @icon="arrow-left" {{on "click" @toggleUpload}}>
-          {{t "attachments.return"}}
-        </AuButton>
-      {{else}}
-        {{#if @toggleUpload}}
-          <AuButton @icon="attachment" {{on "click" @toggleUpload}}>
-            {{t "attachments.attachments"}}
-          </AuButton>
-        {{/if}}
       {{/if}}
     </AuToolbarGroup>
   </AuToolbar>
