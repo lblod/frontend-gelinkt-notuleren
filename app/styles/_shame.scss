@@ -416,3 +416,11 @@
     flex-wrap: nowrap !important;
   }
 }
+
+// FIX NBSP ISSUE
+.say-content,
+.au-c-editor-preview,
+.au-c-template {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
