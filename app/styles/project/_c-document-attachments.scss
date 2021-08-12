@@ -1,0 +1,38 @@
+.c-attachments-container{
+  padding: 10px 50px;
+}
+.c-attachments-table{
+  tr:nth-child(even) {
+    background-color: #EFEFEF
+  }
+  tr:nth-child(odd) {
+    background-color: #FFF
+  }
+}
+.c-attachments-select{
+  width: 100%; 
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 0px;
+}
+
+.c-attachments-delete{
+  color: red;
+}
+
+.c-attachments-delete:visited{
+  color: red;
+}
+
+.c-attachments-delete:hover{
+  color: red;
+}
+
+.c-attachments-delete:focus{
+  color: red;
+}
+
+.c-attachments-select-cell{
+  width: 200px;
+}

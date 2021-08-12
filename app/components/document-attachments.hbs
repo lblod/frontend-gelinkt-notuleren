@@ -1,54 +1,56 @@
-<AuFileUpload 
-  @title={{t "attachments.attach" }} 
-  @helpTextDragDrop={{t "attachments.drag" }}
-  @modelName={{"file"}} 
-  @endPoint={{"/files"}} 
-  @onFinishUpload={{perform this.uploadedAttachement}}
-  @maxFileSizeMB="1024" 
-  @multiple={{true}} />
-{{#if @documentContainer.attachments}}
-<table class="au-c-meeting-chrome-table">
-  <thead>
-    <tr>
-      <th>{{t "attachments.filename"}}</th>
-      <th>{{t "attachments.filesize"}}</th>
-      <th>{{t "attachments.download"}}</th>
-      <th>{{t "attachments.delete"}}</th>
-      <th>{{t "attachments.type"}}</th>
-      <th>{{t "attachments.decision"}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each this.attachments as |attachment|}}
-    <tr>
-      <td>{{attachment.file.name}}</td>
-      <td>{{attachment.file.humanReadableSize}}</td>
-      <td>
-        <a href={{attachment.file.downloadLink}} target="_blank" rel="noopener noreferrer">
-          <AuIcon @icon="download" @size="large" @ariaHidden={{true}} />
-        </a>
-      </td>
-      <td>
-        <AuIcon @icon="bin" @size="large" @ariaHidden={{true}} {{on "click" (perform this.deleteAttachment attachment)}} />
-      </td>
-      <td>
-        <select {{on "change" (perform this.onSelectType attachment)}} disabled={{eq attachment.decision ""}}>
-          <option value="">{{t "attachments.typePlaceholder"}}</option>
-          {{#each this.typeOptions as |typeOption|}}
-            <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}</option>
-          {{/each}}
-        </select>
-      </td>
-      <td>
-        <select {{on "change" (perform this.onSelectDecision attachment)}}>
-          <option value="">{{t "attachments.typePlaceholder"}}</option>
-          {{#each @decisions as |decisionOption|}}
-            <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>{{decisionOption.title}}</option>
-          {{/each}}
-        </select>
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
-{{/if}}
+<div class="c-attachments-container">
+  <AuFileUpload @title={{t "attachments.attach" }} @helpTextDragDrop={{t "attachments.drag" }} @modelName={{"file"}}
+    @endPoint={{"/files"}} @onFinishUpload={{perform this.uploadedAttachement}} @maxFileSizeMB="1024"
+    @multiple={{true}} />
+  <br>
+  <br>
+  {{#if @documentContainer.attachments}}
+  <table class="au-c-meeting-chrome-table">
+    <thead>
+      <tr>
+        <th>{{t "attachments.filename"}}</th>
+        <th>{{t "attachments.filesize"}}</th>
+        <th>{{t "attachments.type"}}</th>
+        <th>{{t "attachments.decision"}}</th>
+        {{!-- <th>{{t "attachments.delete"}}</th> --}}
+      </tr>
+    </thead>
+    <tbody class="c-attachments-table">
+      {{#each this.attachments as |attachment|}}
+      <tr>
+        <td>
+          <a href={{attachment.file.downloadLink}} target="_blank" rel="noopener noreferrer">
+            {{attachment.file.name}}
+          </a>
+        </td>
+        <td>{{attachment.file.humanReadableSize}}</td>
+
+        <td class="c-attachments-select-cell">
+          <select class="c-attachments-select" {{on "change" (perform this.onSelectType attachment)}} disabled={{eq attachment.decision "" }}>
+            <option value="">{{t "attachments.typePlaceholder"}}</option>
+            {{#each this.typeOptions as |typeOption|}}
+            <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}
+            </option>
+            {{/each}}
+          </select>
+        </td>
+        <td class="c-attachments-select-cell">
+          <select class="c-attachments-select" {{on "change" (perform this.onSelectDecision attachment)}}>
+            <option value="">{{t "attachments.typePlaceholder"}}</option>
+            {{#each @decisions as |decisionOption|}}
+            <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>
+              {{decisionOption.title}}</option>
+            {{/each}}
+          </select>
+        </td>
+        <td>
+          <AuLink class="c-attachments-delete" @alert={{true}} @icon="bin" @iconAlignment="left" {{on "click" (perform this.deleteAttachment attachment)}}>
+            {{t "attachments.delete"}}
+          </AuLink>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{/if}}
+</div>
