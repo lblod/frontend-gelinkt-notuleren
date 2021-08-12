@@ -26,7 +26,7 @@
         <td>{{attachment.file.humanReadableSize}}</td>
 
         <td class="c-attachments-select-cell">
-          <select class="c-attachments-select" {{on "change" (perform this.onSelectType attachment)}} disabled={{eq attachment.decision "" }}>
+          <select class="c-attachments-select" {{on "change" (perform this.onSelectType attachment)}} disabled={{not attachment.decision}}>
             <option value="">{{t "attachments.typePlaceholder"}}</option>
             {{#each this.typeOptions as |typeOption|}}
             <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}
