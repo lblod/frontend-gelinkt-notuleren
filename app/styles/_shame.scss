@@ -455,3 +455,9 @@
 .au-c-custom-select-cell {
   min-width: 150px;
 }
+
+// Fix data table search
+.au-c-data-table .data-table-search input {
+  @extend .au-c-input;
+  @extend .au-c-input--block;
+}
