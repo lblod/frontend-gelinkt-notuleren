@@ -1,18 +1,18 @@
 <AuButton {{on "click" (fn (mut this.displayDeleteModal) true)}} @skin="tertiary" @alert="true" role="menuitem">
   <AuIcon @icon="bin" @alignment="left" />
-  Delete
+  {{t "meetings.delete.delete"}}
 </AuButton>
 {{#if this.displayDeleteModal}}
   <AuModal
-    @modalTitle="Are you sure you want to delete this meeting"
+    @modalTitle={{t "meetings.delete.confirmMessage"}}
     @modalOpen={{this.displayDeleteModal}}
     @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
     <Modal.Body>
-      <p>This action cannot be undone</p>
+      <p>{{t "meetings.delete.warning"}}</p>
     </Modal.Body>
     <Modal.Footer>
-      <AuButton @disabled={{this.deleteMeeting.isRunning}} @alert={{true}} {{on "click" (perform this.deleteMeeting)}}>Yes, Delete this meeting</AuButton>
-      <AuButton @loading={{this.deleteMeeting.isRunning}} @disabled={{this.deleteMeeting.isRunning}} @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>Back</AuButton>
+      <AuButton @disabled={{this.deleteMeeting.isRunning}} @alert={{true}} {{on "click" (perform this.deleteMeeting)}}>{{t "meetings.delete.confirmButton"}}</AuButton>
+      <AuButton @loading={{this.deleteMeeting.isRunning}} @disabled={{this.deleteMeeting.isRunning}} @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>{{t "meetings.delete.back"}}</AuButton>
     </Modal.Footer>
   </AuModal>
 {{/if}}

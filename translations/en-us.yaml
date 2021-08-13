@@ -316,6 +316,12 @@ rdfaEditorContainer:
   saving: Saving
   makingCopy: Making copy
 meetings:
+  delete:
+    delete: Delete
+    confirmMessage: Are you sure you want to delete this meeting
+    warning: This action cannot be undone
+    confirmButton: Yes, Delete this meeting
+    back: Back
   edit:
     intro:
       save: Save

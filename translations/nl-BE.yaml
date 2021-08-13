@@ -315,6 +315,12 @@ rdfaEditorContainer:
   saving: Bezig met opslaan
   makingCopy: Kopie aan het maken
 meetings:
+  delete:
+    delete: Verwijderen
+    confirmMessage: Weet u zeker dat u deze zitting wilt verwijderen?
+    warning: Deze actie kan niet ongedaan gemaakt worden
+    confirmButton: Ja, deze zitting verwijderen
+    back: Terug
   edit:
     intro:
       save: Opslaan
