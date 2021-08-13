@@ -6,11 +6,11 @@ import { inject as service } from '@ember/service';
 
 export default class DeleteMeetingComponent extends Component {
   @service router;
-  @tracked displayDeleteModal=false;
+  @tracked displayDeleteModal = false;
   @task
-  *deleteMeeting(){
+  *deleteMeeting() {
     yield this.args.meeting.destroyRecord();
-    this.displayDeleteModal=false;
+    this.displayDeleteModal = false;
     this.router.transitionTo('inbox.meetings');
   }
 }
