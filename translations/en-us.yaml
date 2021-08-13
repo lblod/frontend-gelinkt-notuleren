@@ -348,3 +348,5 @@ attachments:
   type: Type
   decision: Decision
   typePlaceholder: none
+  regulatory: regulatory
+  saveAndGo: Save and go to attachments

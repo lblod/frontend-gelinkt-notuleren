@@ -60,13 +60,13 @@
           </AuButton>
         </AuButtonGroup>
       {{else}}
-        {{#if @toggleUpload}}
+        {{#if @toggleUploadAndSave}}
           <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
             <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
               {{t "attachments.return"}}
             </AuButton>
-            <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" @toggleUpload}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
-              {{t "attachments.attachments"}}
+            <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform @toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
+              {{t "attachments.saveAndGo"}}
             </AuButton>
           </AuButtonGroup>
         {{/if}}
