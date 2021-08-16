@@ -1,5 +1,5 @@
 import Service, { inject as service } from '@ember/service';
-import { task, all } from 'ember-concurrency';
+import { task, all, timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
 export class Extract {
@@ -57,7 +57,23 @@ export default class PublishService extends Service {
   @task
   *_loadExtractsTask(meetingId) {
     const [newExtracts, meeting, treatments, versionedTreatments] = yield all([
-      fetch(`/prepublish/behandelingen/${meetingId}`).then((res) => res.json()),
+      new Promise( async (accept, reject) => {
+        let uuidResp = await fetch(`/prepublish/behandelingen/${meetingId}`);
+        let jobId = (await uuidResp.json()).data.attributes.jobId;
+
+        let maxIterations = 600;
+        let resp;
+        do {
+          await timeout(1000);
+          resp = await fetch(`/prepublish/job-result/${jobId}`);
+        } while( resp.status == "404" && maxIterations-- > 0 )
+
+        if (resp.status != 200) {
+          reject(await resp.json());
+        } else {
+          accept(await resp.json());
+        }
+      }),
       this.store.findRecord('zitting', meetingId),
       this.store.query('behandeling-van-agendapunt', {
         'filter[onderwerp][zitting][:id:]': meetingId,
