@@ -57,7 +57,7 @@ export default class PublishService extends Service {
   @task
   *_loadExtractsTask(meetingId) {
     const [newExtracts, meeting, treatments, versionedTreatments] = yield all([
-      new Promise( async (accept, reject) => {
+      async () => {
         let uuidResp = await fetch(`/prepublish/behandelingen/${meetingId}`);
         let jobId = (await uuidResp.json()).data.attributes.jobId;
 
@@ -66,14 +66,14 @@ export default class PublishService extends Service {
         do {
           await timeout(1000);
           resp = await fetch(`/prepublish/job-result/${jobId}`);
-        } while( resp.status == "404" && maxIterations-- > 0 )
+        } while( resp.status == "404" && maxIterations-- > 0 );
 
         if (resp.status != 200) {
-          reject(await resp.json());
+          throw new Error(await resp.text());
         } else {
-          accept(await resp.json());
+          return await resp.json();
         }
-      }),
+      },
       this.store.findRecord('zitting', meetingId),
       this.store.query('behandeling-van-agendapunt', {
         'filter[onderwerp][zitting][:id:]': meetingId,
