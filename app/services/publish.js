@@ -57,23 +57,7 @@ export default class PublishService extends Service {
   @task
   *_loadExtractsTask(meetingId) {
     const [newExtracts, meeting, treatments, versionedTreatments] = yield all([
-      async () => {
-        let uuidResp = await fetch(`/prepublish/behandelingen/${meetingId}`);
-        let jobId = (await uuidResp.json()).data.attributes.jobId;
-
-        let maxIterations = 600;
-        let resp;
-        do {
-          await timeout(1000);
-          resp = await fetch(`/prepublish/job-result/${jobId}`);
-        } while( resp.status == "404" && maxIterations-- > 0 );
-
-        if (resp.status != 200) {
-          throw new Error(await resp.text());
-        } else {
-          return await resp.json();
-        }
-      },
+      this.pollForPrepublisherResults(meetingId),
       this.store.findRecord('zitting', meetingId),
       this.store.query('behandeling-van-agendapunt', {
         'filter[onderwerp][zitting][:id:]': meetingId,
@@ -131,5 +115,24 @@ export default class PublishService extends Service {
       }
     }
     this.treatmentExtractsMap = extractMap;
+  }
+
+  async pollForPrepublisherResults(meetingId) {
+    let uuidResp = await fetch(`/prepublish/behandelingen/${meetingId}`);
+    let jobId = (await uuidResp.json()).data.attributes.jobId;
+
+    let maxIterations = 600;
+    let resp;
+    do {
+      await timeout(1000);
+      resp = await fetch(`/prepublish/job-result/${jobId}`);
+      maxIterations--;
+    } while (resp.status === 404 && maxIterations > 0);
+
+    if (resp.status !== 200) {
+      throw new Error(await resp.text());
+    } else {
+      return await resp.json();
+    }
   }
 }
