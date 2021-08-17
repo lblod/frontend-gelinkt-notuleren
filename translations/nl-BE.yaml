@@ -230,7 +230,7 @@ timelineStep:
   printInfo: "Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd."
   secondPrintInfo: "Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt."
   publishButtonLabel: "Publiceer {name}"
-  publishNotifyButtonLabel: "Publiceer en meld {name}"
+  publishNotifyButtonLabel: "Publiceer (en meld) {name}"
   publishRestrictionInfo: "Publiceren kan enkel door personen met de rol "
   publishRestrictionRole: "publiceerder"
   publishRestrictionEnd: "."

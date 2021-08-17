@@ -231,7 +231,7 @@ timelineStep:
   printInfo: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
   secondPrintInfo: "Printing is only possible after the document has been signed. This print will not be made available externally."
   publishButtonLabel: "Publish {name}"
-  publishNotifyButtonLabel: "Publish and notify {name}"
+  publishNotifyButtonLabel: "Publish (and notify) {name}"
   publishRestrictionInfo: "Publishing is only possible by persons with the "
   publishRestrictionRole: "publisher"
   publishRestrictionEnd: " role."
