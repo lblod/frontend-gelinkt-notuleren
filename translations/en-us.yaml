@@ -231,7 +231,7 @@ timelineStep:
   printInfo: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
   secondPrintInfo: "Printing is only possible after the document has been signed. This print will not be made available externally."
   publishButtonLabel: "Publish {name}"
-  publishNotifyButtonLabel: "Publish and notify {name}"
+  publishNotifyButtonLabel: "Publish (and notify) {name}"
   publishRestrictionInfo: "Publishing is only possible by persons with the "
   publishRestrictionRole: "publisher"
   publishRestrictionEnd: " role."
@@ -243,7 +243,7 @@ timelineStep:
   previewInfo: "The document will be published as seen in the preview above to "
   previewInfoEnd: ", and will be publicly available to anyone, without authentication."
   notifyConsequences: Consequences notification
-  notifyInfo: "A notification will be sent for this document to the authoritative government and will be visible in the "
+  notifyInfo: "If applicable, a notification will be sent for this document to the authoritative government and will be visible in the "
   localLoket: "Loket voor Lokale Besturen"
   publishWarning: "Complete the missing information to publish"
 publicationConfirmation:
@@ -255,7 +255,7 @@ publicationConfirmation:
   publicationTitle: Publication
   publicationSubtitle: "The document and its content are made public on the publication page, freely accessible to citizens:"
   reportingTitle: Reporting
-  reportingSubtitle: The document will be automatically reported to the supervising authority, and will be visible in the
+  reportingSubtitle: If applicable, document will be automatically reported to the supervising authority, and will be visible in the
   reportingLink: Loket voor Lokale Besturen
   metadataTitle: Publishing metadata
   publisherLabel: Publisher
