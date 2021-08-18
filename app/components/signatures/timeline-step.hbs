@@ -52,7 +52,7 @@
         </AuToolbar>
         <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
           {{#if (eq this.signaturesCount 2)}}
-            {{#each @document.signedResources as |signature index|}}
+            {{#each @signedResources as |signature index|}}
               {{#if (eq index 0)}}
                 <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
                   <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
@@ -68,7 +68,7 @@
           {{else if (eq this.signaturesCount 1)}}
             <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
               <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
-              <Signatures::SignedResource @signature={{@document.signedResources.firstObject}} />
+              <Signatures::SignedResource @signature={{@signedResources.firstObject}} />
             </div>
             <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
               <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
@@ -164,15 +164,15 @@
             <AuHeading @level="2" @skin="4">{{t "timelineStep.publishButtonLabel" name=@name}}</AuHeading>
           </AuToolbarGroup>
           <AuToolbarGroup>
-            <AuPill @skin={{if @document.publishedResource "success"}} class="au-u-margin-left">
-              {{if @document.publishedResource "Publiek" "Niet publiek"}}
+            <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
+              {{if @publishedResource "Publiek" "Niet publiek"}}
             </AuPill>
           </AuToolbarGroup>
         </AuToolbar>
         <div class="au-o-grid au-u-margin-top-none">
           {{#if this.isPublished}}
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
-            <Signatures::PublishedResource @publication={{@document.publishedResource}} />
+            <Signatures::PublishedResource @publication={{@publishedResource}} />
           </div>
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.linkPublish"}}</AuHeading>

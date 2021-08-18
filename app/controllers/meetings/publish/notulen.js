@@ -8,6 +8,8 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   @tracked notulen;
   @tracked errors;
+  @tracked signedResources = [];
+  @tracked publishedResource;
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked publicBehandelingUris = [];
@@ -24,13 +26,23 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   @task
   * initializeNotulen() {
-    const notulen = yield this.store.query('versioned-notulen',{
+    const versionedNotulens = yield this.store.query('versioned-notulen',{
       'filter[zitting][:id:]': this.model.id,
       include: 'signed-resources,published-resource'
     });
-    if(notulen.length) {
-      this.notulen = notulen.firstObject;
-      this.publicBehandelingUris = notulen.firstObject.publicBehandelingen;
+    if(versionedNotulens.length) {
+      yield Promise.all(versionedNotulens.map(async (notulen) => {
+        const publishedResource = await notulen.publishedResource;
+        const signedResources = await notulen.signedResources;
+        if(publishedResource) {
+          this.publishedResource = publishedResource;
+          this.publicBehandelingUris = notulen.publicBehandelingen || [];
+          this.notulen = notulen;
+        }
+        if(signedResources.length) {
+          this.signedResources = signedResources;
+        }
+      }));
     } else {
       const {content, errors} = yield this.createPrePublishedResource.perform();
       const rslt = yield this.store.createRecord("versioned-notulen", {
@@ -51,7 +63,8 @@ export default class MeetingsPublishNotulenController extends Controller {
       include: 'signed-resources,published-resource'
     });
     this.notulen = notulen.firstObject;
-    this.publicBehandelingUris = notulen.firstObject.publicBehandelingen;
+    this.publicBehandelingUris = notulen.firstObject.publicBehandelingen || [];
+    
     const behandelings = yield this.fetchBehandelings.perform();
     this.behandelings = behandelings;
   }
