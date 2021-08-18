@@ -52,6 +52,8 @@ export default class MeetingsPublishNotulenController extends Controller {
         zitting: this.model,
         content: content
       });
+      this.publishedResource = undefined;
+      this.signedResources = [];
       this.notulen = rslt;
       this.errors = errors;
     }
