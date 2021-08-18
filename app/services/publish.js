@@ -135,4 +135,7 @@ export default class PublishService extends Service {
       return await resp.json();
     }
   }
+  async fetchTreatmentPreviews(meetingId) {
+    return this.pollForPrepublisherResults(meetingId);
+  }
 }
