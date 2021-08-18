@@ -41,6 +41,9 @@ export default class MeetingsPublishNotulenController extends Controller {
         }
         if(signedResources.length) {
           this.signedResources = signedResources;
+          if(!this.notulen) {
+            this.notulen = notulen;
+          }
         }
       }));
     } else {
@@ -58,12 +61,27 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   @task
   *reloadNotulen() {
-    const notulen = yield this.store.query('versioned-notulen',{
+    const versionedNotulens = yield this.store.query('versioned-notulen',{
       'filter[zitting][:id:]': this.model.id,
       include: 'signed-resources,published-resource'
     });
-    this.notulen = notulen.firstObject;
-    this.publicBehandelingUris = notulen.firstObject.publicBehandelingen || [];
+    if(versionedNotulens.length) {
+      yield Promise.all(versionedNotulens.map(async (notulen) => {
+        const publishedResource = await notulen.publishedResource;
+        const signedResources = await notulen.signedResources;
+        if(publishedResource) {
+          this.publishedResource = publishedResource;
+          this.publicBehandelingUris = notulen.publicBehandelingen || [];
+          this.notulen = notulen;
+        }
+        if(signedResources.length) {
+          this.signedResources = signedResources;
+          if(!this.notulen) {
+            this.notulen = notulen;
+          }
+        }
+      }));
+    }
     
     const behandelings = yield this.fetchBehandelings.perform();
     this.behandelings = behandelings;
