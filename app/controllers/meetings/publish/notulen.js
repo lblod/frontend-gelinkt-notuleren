@@ -1,3 +1,4 @@
+import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import {task} from "ember-concurrency";
 import {tracked} from "@glimmer/tracking";
@@ -14,6 +15,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked publicBehandelingUris = [];
   @tracked behandelings;
+  @service publish;
 
   constructor() {
     super(...arguments);
@@ -101,10 +103,9 @@ export default class MeetingsPublishNotulenController extends Controller {
   @task
   *fetchBehandelings() {
     const id = this.model.id;
-    const response = yield fetch(`/prepublish/behandelingen/${id}`);
-    const json = yield response.json();
+    const response = yield this.publish.fetchTreatmentPreviews(id);
 
-    return json.map((response) => response.data.attributes);
+    return response.map((res) => res.data.attributes);
   }
 
   @task
