@@ -1,0 +1,58 @@
+{{#if this.extract}}
+  {{log this.extract.document.signedResources.length}}
+  <Signatures::TimelineStep
+    @name={{this.title}}
+    @document={{this.extract.document}}
+    @signedResources={{this.extract.document.signedResources}}
+    @publishedResource={{this.extract.document.publishedResource}}
+    @errors={{this.extract.errors}}
+    @signing={{perform this.createSignedResourceTask extract.document.behandeling}}
+    @publish={{perform this.createPublishedResourceTask extract.document.behandeling}}
+    @print={{fn this.print extract}}
+    @sectionOpen={{true}}
+    @mockDocument={{this.mockBehandeling}}
+  />
+{{else}}
+  <article class="au-o-box au-c-card au-c-card--fill au-c-card--flex au-c-card--expandable au-c-card--divided   au-u-margin-bottom-small au-c-card--publish">
+    <div
+      class="au-c-card__header au-c-card__header--clickable"
+      role="button"
+      {{on "click" (perform this.loadExtract)}}
+    >
+      <AuBadge @skin="brand" @icon="pencil" />
+        <AuToolbar @nowrap={{true}}>
+          <AuHeading @level="2" @skin="3" class="au-u-capitalize">
+          {{this.title}}
+          </AuHeading>
+        </AuToolbar>
+         <AuButtonGroup>
+        <AuButton class="au-c-card__toggle" @size="small" @skin="tertiary" aria-hidden="true" focusable="false" aria-expanded={{if this.sectionOpen "true" "false"}} >
+          {{#if this.sectionOpen}}
+            <AuIcon @icon="nav-up" @alignment="left" @size="large" @ariaHidden="true" />
+            <span class="au-u-hidden-visually au-c-card__toggle-false">
+              Verberg
+            </span>
+          {{else}}
+            <AuIcon @icon="nav-down" @alignment="left" @size="large" @ariaHidden="true" />
+            <span class="au-u-hidden-visually au-c-card__toggle-true">
+              Toon
+            </span>
+          {{/if}}
+        </AuButton>
+      </AuButtonGroup>
+    </div>
+    {{#if this.sectionOpen}}
+      <AuContent class="au-c-card__content" tabindex="0">
+        {{#if this.loadExtract.isRunning}}
+          <AuLoader />
+        {{/if}}
+        {{#if this.error}}
+          <AuAlert @alertIcon="cross" @alertTitle={{t "publish.excerptErrorMessage"}} @alertskin="error" @alertsize="small">
+            <code>{{this.error}}</code>
+          </AuAlert>
+          <AuButton {{on "click" (perform this.loadExtract)}}>{{t "publish.retry"}}</AuButton>
+        {{/if}}
+      </AuContent>
+    {{/if}}
+  </article>
+{{/if}}

@@ -1,6 +1,6 @@
 {{#if this.initTask.lastSuccessful}}
 <li>
-  <AuCard @divided={{true}} @flex={{true}} @expandable={{true}} class="au-u-margin-bottom-small au-c-card--publish" as |c| >
+  <AuCard @divided={{true}} @flex={{true}} @expandable={{true}} class="au-u-margin-bottom-small au-c-card--publish" @sectionOpen={{@sectionOpen}} as |c| >
     <c.header @badgeIcon={{this.iconName}} @badgeSkin="brand">
       <AuToolbar @nowrap={{true}}>
         <AuHeading @level="2" @skin="3" class="au-u-capitalize">

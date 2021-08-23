@@ -33,7 +33,9 @@ publish:
   headingPartOne: Zitting van
   loadingMessage: Bezig met laden...
   updatingMessage: Bezig met bijwerken...
-  excerptsErrorMessage: Er zijn geen uittreksels beschikbaar
+  noExcerptsMessage: Er zijn geen uittreksels beschikbaar.
+  excerptErrorMessage: Er liep iets fout bij het laden van het uittreksel.
+  retry: opnieuw proberen
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
