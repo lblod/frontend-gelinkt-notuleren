@@ -35,6 +35,10 @@ publish:
   updatingMessage: Updating...
   noExcerptsMessage: There are no excerpts available.
   retry: "retry"
+  excerpts: Excerpts
+  position: position
+  statusLabel: status
+  agendapoint: agendapoint
   excerptErrorMessage: Something went wrong fetching the excerpt. 
 behandelingVanAgendapunten:
   documentLink: "document link"

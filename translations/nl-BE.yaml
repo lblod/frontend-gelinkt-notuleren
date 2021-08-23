@@ -36,6 +36,10 @@ publish:
   noExcerptsMessage: Er zijn geen uittreksels beschikbaar.
   excerptErrorMessage: Er liep iets fout bij het laden van het uittreksel.
   retry: opnieuw proberen
+  excerpts: Uittreksels
+  position: positie
+  statusLabel: status
+  agendapoint: agendapunt
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan

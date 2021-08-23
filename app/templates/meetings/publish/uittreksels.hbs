@@ -1,11 +1,1 @@
-<div class="au-o-box">
-  {{#if this.agendapoints.length}}
-    {{#each this.agendapoints as |agendapoint|}}
-      <ExtractPreview @meeting={{this.meeting}} @agendapoint={{agendapoint}} />
-    {{/each}}
-{{else}}
-    <AuAlert @alertIcon="alert-triangle" @alertskin="warning" @alertsize="small">
-      {{t "publish.excerptsErrorMessage"}}
-    </AuAlert>
-  {{/if}}
-</div>
+{{outlet}}

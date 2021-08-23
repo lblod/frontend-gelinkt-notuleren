@@ -51,7 +51,9 @@ Router.map(function() {
     this.route('publish',{path: '/:id/publish'}, function() {
       this.route('agenda');
       this.route('besluitenlijst');
-      this.route('uittreksels');
+      this.route('uittreksels', function() {
+        this.route('show', {path: '/:treatment_id'});
+      });
       this.route('notulen');
     });
   });

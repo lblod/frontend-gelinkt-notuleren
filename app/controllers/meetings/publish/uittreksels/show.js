@@ -1,25 +1,23 @@
-import Component from '@glimmer/component';
+import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { fetch } from 'fetch';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Extract } from 'frontend-gelinkt-notuleren/services/publish';
-
-export default class ExtractPreviewComponent extends Component {
+export default class MeetingsPublishUittrekselsShowController extends Controller {
   @tracked error;
   @tracked extract;
-  @tracked sectionOpen = false;
   @service publish;
   @service store;
   @service router;
 
   get agendapoint() {
-    return  this.args.agendapoint;
+    return  this.model.get('onderwerp');
   }
 
   get meeting() {
-    return this.args.meeting;
+    return this.model.get('onderwerp.zitting');
   }
 
   get title() {
@@ -38,7 +36,7 @@ export default class ExtractPreviewComponent extends Component {
     *_createSignedResourceTask(behandeling) {
       try {
         this.error = null;
-        const result = yield fetch(`/signing/behandeling/sign/${this.meeting.id}/${behandeling.get('id')}`, {
+        const result = yield fetch(`/signing/behandeling/sign/${this.meeting.get('id')}/${behandeling.get('id')}`, {
           method: 'POST',
         });
         if (! result.ok) {
@@ -78,7 +76,7 @@ export default class ExtractPreviewComponent extends Component {
   print(extract) {
     this.router.transitionTo(
       'print.uittreksel',
-      this.meeting.id,
+      this.meeting.get('id'),
       extract.treatmentId
     );
   }
@@ -86,7 +84,7 @@ export default class ExtractPreviewComponent extends Component {
   get mockBehandeling() {
     return {
       body: this.extract.document.content,
-      signedId: this.meeting.id
+      signedId: this.meeting.get('id')
     };
   }
 
@@ -95,8 +93,7 @@ export default class ExtractPreviewComponent extends Component {
       try {
         this.extract = null;
         this.error = null;
-        this.sectionOpen = true;
-        const treatment = yield this.agendapoint.get('behandeling');
+        const treatment = this.model;
         const versionedTreatments = yield this.store.query('versioned-behandeling',
                                                            {
                                                              filter: { behandeling: {":id:": treatment.id}},
@@ -105,7 +102,7 @@ export default class ExtractPreviewComponent extends Component {
         if (versionedTreatments.length > 0 ) {
           this.extract = new Extract(
             treatment.id,
-            this.agendapoint.position,
+            this.agendapoint.get('position'),
             versionedTreatments.get('firstObject'),
             []
           );
@@ -123,7 +120,7 @@ export default class ExtractPreviewComponent extends Component {
           );
           this.extract = new Extract(
             treatment.id,
-            this.agendapoint.position,
+            this.agendapoint.get('position'),
             versionedTreatment,
             extractPreview.meta?.validationErrors
           );
@@ -134,3 +131,4 @@ export default class ExtractPreviewComponent extends Component {
       }
     }
 }
+

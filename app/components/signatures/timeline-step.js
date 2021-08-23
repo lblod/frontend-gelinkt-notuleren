@@ -31,6 +31,7 @@ export default class SignaturesTimelineStep extends Component {
   constructor(parent, args) {
     super(parent, args);
     this.initTask.perform();
+    this.expandable = this.args.isOpen ? false : true;
   }
 
   get isPublished() {
