@@ -1,0 +1,30 @@
+<AuDataTable @content={{this.model}} @noDataMessage={{t "publish.noExcerptsMessage"}} @size={{20}} @sort={{this.sort}} @page={{this.page}} @class="container-flex--contain" as |table|>
+  <table.menu as |menu|>
+    <menu.general>
+      <AuToolbar @size="large">
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            {{t "publish.excerpts"}}
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--search">
+          <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
+        </AuToolbarGroup>
+      </AuToolbar>
+    </menu.general>
+  </table.menu>
+  <table.content as |c|>
+    <c.header>
+      <AuDataTableThSortable @field="position" @currentSorting={{this.sort}} @label={{t 'publish.position'}} />
+      <AuDataTableThSortable @field="titel" @currentSorting={{this.sort}} @label={{t 'publish.agendapoint'}} />
+      <AuDataTableThSortable @field="behandeling.documentContainer.status" @currentSorting={{this.sort}} @label={{t 'publish.statusLabel'}} colspan="2" />
+    </c.header>
+
+    <c.body as  |agendapoint|>
+      <td>{{agendapoint.position}}</td>
+      <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{agendapoint.titel}}</AuLink></td>
+      <td><EditorStatusPill @status={{agendapoint.behandeling.documentContainer.status}} /></td>
+      <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right">{{t 'publish.publishButtonLabel'}}</AuLink></td>
+    </c.body>
+  </table.content>
+</AuDataTable>

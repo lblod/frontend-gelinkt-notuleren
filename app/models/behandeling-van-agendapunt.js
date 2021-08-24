@@ -14,6 +14,7 @@ export default class BehandelingVanAgendapunt extends Model {
   @hasMany('mandataris', { inverse: null }) afwezigen;
   @hasMany("stemming", {inverse: null}) stemmingen;
   @belongsTo('document-container') documentContainer;
+  @belongsTo('versioned-behandeling') versionedBehandeling;
 
   async initializeDocument() {
     const agendaItem = await this.onderwerp;

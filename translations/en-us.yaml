@@ -33,7 +33,15 @@ publish:
   headingPartOne: Meeting on
   loadingMessage: Loading...
   updatingMessage: Updating...
-  excerptsErrorMessage: There are no excerpts available
+  noExcerptsMessage: There are no excerpts available.
+  retry: "retry"
+  excerpts: Excerpts
+  excerptsOverview: All excerpts
+  position: Position
+  statusLabel: Status
+  agendapoint: Agendapoint
+  excerptErrorMessage: Something went wrong fetching the excerpt.
+  publishButtonLabel: Sign and publish
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save
