@@ -36,10 +36,12 @@ publish:
   noExcerptsMessage: There are no excerpts available.
   retry: "retry"
   excerpts: Excerpts
-  position: position
-  statusLabel: status
-  agendapoint: agendapoint
-  excerptErrorMessage: Something went wrong fetching the excerpt. 
+  excerptsOverview: All excerpts
+  position: Position
+  statusLabel: Status
+  agendapoint: Agendapoint
+  excerptErrorMessage: Something went wrong fetching the excerpt.
+  publishButtonLabel: Sign and publish
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save

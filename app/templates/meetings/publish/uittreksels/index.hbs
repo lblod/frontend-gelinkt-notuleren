@@ -17,13 +17,14 @@
     <c.header>
       <AuDataTableThSortable @field="position" @currentSorting={{this.sort}} @label={{t 'publish.position'}} />
       <AuDataTableThSortable @field="titel" @currentSorting={{this.sort}} @label={{t 'publish.agendapoint'}} />
-      <AuDataTableThSortable @field="behandeling.documentContainer.status" @currentSorting={{this.sort}} @label={{t 'publish.statusLabel'}} />
+      <AuDataTableThSortable @field="behandeling.documentContainer.status" @currentSorting={{this.sort}} @label={{t 'publish.statusLabel'}} colspan="2" />
     </c.header>
 
     <c.body as  |agendapoint|>
       <td>{{agendapoint.position}}</td>
       <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{agendapoint.titel}}</AuLink></td>
       <td><EditorStatusPill @status={{agendapoint.behandeling.documentContainer.status}} /></td>
+      <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right">{{t 'publish.publishButtonLabel'}}</AuLink></td>
     </c.body>
   </table.content>
 </AuDataTable>

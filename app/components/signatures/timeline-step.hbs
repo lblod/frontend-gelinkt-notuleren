@@ -1,250 +1,248 @@
 {{#if this.initTask.lastSuccessful}}
-<li>
-  <AuCard @divided={{true}} @flex={{true}} @expandable={{this.expandable}} class="au-u-margin-bottom-small au-c-card--publish" as |c| >
-    <c.header @badgeIcon={{this.iconName}} @badgeSkin="brand">
-      <AuToolbar @nowrap={{true}}>
-        <AuHeading @level="2" @skin="3" class="au-u-capitalize">
-          {{this.headerWithDefault}}
-        </AuHeading>
-        {{#if this.algemeneStatus}}
-          <AuPill @skin="{{this.algemeneStatus.color}}" class="au-u-margin-left">{{this.algemeneStatus.label}}</AuPill>
-        {{/if}}
-      </AuToolbar>
-    </c.header>
-    <c.content>
-      {{!-- Preview --}}
-      <AuToolbar @nowrap={{true}}>
+<AuCard @divided={{true}} @flex={{true}} @expandable={{this.expandable}} class="au-u-margin-bottom-small au-c-card--publish" as |c| >
+  <c.header @badgeIcon={{this.iconName}} @badgeSkin="brand">
+    <AuToolbar @nowrap={{true}}>
+      <AuHeading @level="2" @skin="3" class="au-u-capitalize">
+        {{this.headerWithDefault}}
+      </AuHeading>
+      {{#if this.algemeneStatus}}
+        <AuPill @skin="{{this.algemeneStatus.color}}" class="au-u-margin-left">{{this.algemeneStatus.label}}</AuPill>
+      {{/if}}
+    </AuToolbar>
+  </c.header>
+  <c.content>
+    {{!-- Preview --}}
+    <AuToolbar @nowrap={{true}}>
+      <AuToolbarGroup>
+        <AuHeading @level="2" @skin="4">{{this.title}}</AuHeading>
+      </AuToolbarGroup>
+      <AuToolbarGroup>
+        <AuPill @skin={{this.voorVertoningStatus.color}} class="au-u-margin-left">
+          {{this.voorVertoningStatus.label}}
+        </AuPill>
+      </AuToolbarGroup>
+    </AuToolbar>
+    <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">
+      {{#if hasBlock}}
+        {{yield}}
+      {{else}}
+        {{html-safe @mockDocument.body}}
+      {{/if}}
+    </div>
+    {{#if (and @errors @errors.length)}}
+      <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertskin="error">
+        <ul>
+        {{#each @errors as |error|}}
+          <li>{{error}}</li>
+        {{/each}}
+        </ul>
+      </AuAlert>
+    {{else}}
+      {{!-- Sign --}}
+      <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
         <AuToolbarGroup>
-          <AuHeading @level="2" @skin="4">{{this.title}}</AuHeading>
+          <AuHeading @level="2" @skin="4">{{concat (t "timelineStep.signStepTitle") @name}}</AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup>
-          <AuPill @skin={{this.voorVertoningStatus.color}} class="au-u-margin-left">
-            {{this.voorVertoningStatus.label}}
+          <AuPill @skin={{this.handtekeningStatus.color}} class="au-u-margin-left">
+            {{this.handtekeningStatus.label}}
           </AuPill>
         </AuToolbarGroup>
       </AuToolbar>
-      <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">
-        {{#if hasBlock}}
-          {{yield}}
-        {{else}}
-          {{html-safe @mockDocument.body}}
+      <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
+        {{#if (eq this.signaturesCount 2)}}
+          {{#each @signedResources as |signature index|}}
+            {{#if (eq index 0)}}
+              <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
+                <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
+                <Signatures::SignedResource @signature={{signature}} />
+              </div>
+            {{else}}
+              <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
+                <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
+                <Signatures::SignedResource @signature={{signature}} />
+              </div>
+            {{/if}}
+          {{/each}}
+        {{else if (eq this.signaturesCount 1)}}
+          <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+            <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
+            <Signatures::SignedResource @signature={{@signedResources.firstObject}} />
+          </div>
+          <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+            <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
+            <AuButton
+              {{on "click" (fn (mut this.showSigningModal) true)}}
+              @skin="secondary"
+              @icon="pencil"
+              @iconAlignment="left"
+              @loading={{this.signDocument.isRunning}}
+              @disabled={{or (or (not this.currentSession.canSign) this.signDocument.isRunning) this.isSignedByCurrentUser}}
+            >
+              {{t "timelineStep.signButtonLabel" name=@name}}
+            </AuButton>
+          </div>
+          <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
+            <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+            {{t "timelineStep.signingRestrictionInfo"}}
+              <a
+                href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="au-c-link">
+                  {{t "timelineStep.signingRestrictionRole"}}
+              </a>
+              {{t "timelineStep.signingRestrictionEnd"}}
+            </AuHelpText>
+          </div>
+        {{else}} {{!-- No signatures placed --}}
+          <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+            <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
+            <AuButton
+              {{on "click" (fn (mut this.showSigningModal) true)}}
+              @skin="secondary"
+              @icon="pencil"
+              @iconAlignment="left"
+              @loading={{this.signDocument.isRunning}}
+              @disabled={{or (not this.currentSession.canSign) this.signDocument.isRunning}}
+            >
+              {{t "timelineStep.signButtonLabel" name=@name}}
+            </AuButton>
+          </div>
+          <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+            <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
+            <AuButton
+              {{on "click" (fn (mut this.showSigningModal) true)}}
+              @skin="secondary"
+              @icon="pencil"
+              @iconAlignment="left"
+              @disabled={{true}}
+            >
+              {{t "timelineStep.signButtonLabel" name=@name}}
+            </AuButton>
+          </div>
+          <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
+            <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+            {{t "timelineStep.signingRestrictionInfo"}}
+              <a
+                href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="au-c-link">
+                  {{t "timelineStep.signingRestrictionRole"}}
+              </a>
+              {{t "timelineStep.signingRestrictionEnd"}}
+            </AuHelpText>
+          </div>
+        {{/if}}
+        {{#if this.showSigningModal}}
+          <Signatures::SignatureConfirmation
+            @name={{@name}} @mockDocument={{@mockDocument}}
+            @confirm={{perform this.signDocument @mockDocument.signedId}}
+            @cancel={{fn (mut this.showSigningModal) false}} />
         {{/if}}
       </div>
-      {{#if (and @errors @errors.length)}}
-        <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertskin="error">
-          <ul>
-          {{#each @errors as |error|}}
-            <li>{{error}}</li>
-          {{/each}}
-          </ul>
-        </AuAlert>
-      {{else}}
-        {{!-- Sign --}}
-        <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
-          <AuToolbarGroup>
-            <AuHeading @level="2" @skin="4">{{concat (t "timelineStep.signStepTitle") @name}}</AuHeading>
-          </AuToolbarGroup>
-          <AuToolbarGroup>
-            <AuPill @skin={{this.handtekeningStatus.color}} class="au-u-margin-left">
-              {{this.handtekeningStatus.label}}
-            </AuPill>
-          </AuToolbarGroup>
-        </AuToolbar>
-        <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
-          {{#if (eq this.signaturesCount 2)}}
-            {{#each @signedResources as |signature index|}}
-              {{#if (eq index 0)}}
-                <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
-                  <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
-                  <Signatures::SignedResource @signature={{signature}} />
-                </div>
-              {{else}}
-                <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
-                  <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
-                  <Signatures::SignedResource @signature={{signature}} />
-                </div>
-              {{/if}}
-            {{/each}}
-          {{else if (eq this.signaturesCount 1)}}
-            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
-              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
-              <Signatures::SignedResource @signature={{@signedResources.firstObject}} />
-            </div>
-            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
-              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
-              <AuButton
-                {{on "click" (fn (mut this.showSigningModal) true)}}
-                @skin="secondary"
-                @icon="pencil"
-                @iconAlignment="left"
-                @loading={{this.signDocument.isRunning}}
-                @disabled={{or (or (not this.currentSession.canSign) this.signDocument.isRunning) this.isSignedByCurrentUser}}
-              >
-                {{t "timelineStep.signButtonLabel" name=@name}}
-              </AuButton>
-            </div>
-            <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
-              <AuHelpText @skin="secondary" class="au-u-margin-top-none">
-              {{t "timelineStep.signingRestrictionInfo"}}
-                <a
-                  href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="au-c-link">
-                    {{t "timelineStep.signingRestrictionRole"}}
-                </a>
-                {{t "timelineStep.signingRestrictionEnd"}}
-              </AuHelpText>
-            </div>
-          {{else}} {{!-- No signatures placed --}}
-            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
-              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
-              <AuButton
-                {{on "click" (fn (mut this.showSigningModal) true)}}
-                @skin="secondary"
-                @icon="pencil"
-                @iconAlignment="left"
-                @loading={{this.signDocument.isRunning}}
-                @disabled={{or (not this.currentSession.canSign) this.signDocument.isRunning}}
-              >
-                {{t "timelineStep.signButtonLabel" name=@name}}
-              </AuButton>
-            </div>
-            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
-              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
-              <AuButton
-                {{on "click" (fn (mut this.showSigningModal) true)}}
-                @skin="secondary"
-                @icon="pencil"
-                @iconAlignment="left"
-                @disabled={{true}}
-              >
-                {{t "timelineStep.signButtonLabel" name=@name}}
-              </AuButton>
-            </div>
-            <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
-              <AuHelpText @skin="secondary" class="au-u-margin-top-none">
-              {{t "timelineStep.signingRestrictionInfo"}}
-                <a
-                  href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="au-c-link">
-                    {{t "timelineStep.signingRestrictionRole"}}
-                </a>
-                {{t "timelineStep.signingRestrictionEnd"}}
-              </AuHelpText>
-            </div>
-          {{/if}}
-          {{#if this.showSigningModal}}
-            <Signatures::SignatureConfirmation
-              @name={{@name}} @mockDocument={{@mockDocument}}
-              @confirm={{perform this.signDocument @mockDocument.signedId}}
-              @cancel={{fn (mut this.showSigningModal) false}} />
-          {{/if}}
-        </div>
 
-        {{!-- Print --}}
-        {{#if this.canPrint}}
-        <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
-          <AuToolbarGroup>
-            <AuHeading @level="2" @skin="4">{{t "timelineStep.printButtonLabel" name=@name}}</AuHeading>
-          </AuToolbarGroup>
-        </AuToolbar>
-        <div class="au-u-margin-top-none au-u-margin-bottom-large">
-          <AuButton {{ on 'click' @print }} >
-            {{t "timelineStep.printButtonLabel" name=@name}}
-          </AuButton>
+      {{!-- Print --}}
+      {{#if this.canPrint}}
+      <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
+        <AuToolbarGroup>
+          <AuHeading @level="2" @skin="4">{{t "timelineStep.printButtonLabel" name=@name}}</AuHeading>
+        </AuToolbarGroup>
+      </AuToolbar>
+      <div class="au-u-margin-top-none au-u-margin-bottom-large">
+        <AuButton {{ on 'click' @print }} >
+          {{t "timelineStep.printButtonLabel" name=@name}}
+        </AuButton>
+      </div>
+      {{/if}}
+
+      {{!-- Publish --}}
+      <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
+        <AuToolbarGroup>
+          <AuHeading @level="2" @skin="4">{{t "timelineStep.publishButtonLabel" name=@name}}</AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup>
+          <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
+            {{if @publishedResource "Publiek" "Niet publiek"}}
+          </AuPill>
+        </AuToolbarGroup>
+      </AuToolbar>
+      <div class="au-o-grid au-u-margin-top-none">
+        {{#if this.isPublished}}
+        <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
+          <Signatures::PublishedResource @publication={{@publishedResource}} />
+        </div>
+        <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
+          <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.linkPublish"}}</AuHeading>
+          <p>
+            <a href="{{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="au-c-link">
+              {{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}
+            </a>
+          </p>
+          <AuHelpText @skin="secondary" class="au-u-margin-bottom-small">{{t "timelineStep.timingWarning"}}</AuHelpText>
+          <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.publicationType"}}</AuHeading>
+          <p>{{t "timelineStep.publicForAll"}}</p>
+        </div>
+        {{else}}
+        <div class="au-o-grid__item au-u-padding-top-none">
+          {{#if this.isAgenda}}
+            <AuButton
+              {{on "click" (fn (mut this.showPublishingModal) true)}}
+              @icon="upload"
+              @iconAlignment="left"
+              @loading={{this.publishDocument.isRunning}}
+              @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
+            >
+              {{t "timelineStep.publishButtonLabel" name=@name}}
+            </AuButton>
+          {{else}}
+            <AuButton
+              {{on "click" (fn (mut this.showPublishingModal) true)}}
+              @icon="upload"
+              @iconAlignment="left"
+              @loading={{this.publishDocument.isRunning}}
+              @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
+            >
+              {{t "timelineStep.publishNotifyButtonLabel" name=@name}}
+            </AuButton>
+          {{/if}}
+
+          <AuHelpText @skin="secondary" class="au-u-margin-top-small">
+            {{t "timelineStep.publishRestrictionInfo"}}
+            <a
+              href="{{config "manual.baseUrl"}}{{config "manual.publisher"}}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="au-c-link">
+              {{t "timelineStep.publishRestrictionRole"}}
+            </a>
+            {{t "timelineStep.publishRestrictionEnd"}}
+          </AuHelpText>
+
+          <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.publicationConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
+            <p>{{t "timelineStep.previewInfo"}}<a href="{{this.publicationBaseUrl}}" target="_blank" rel="noopener noreferrer" class="au-c-link">{{this.publicationBaseUrl}}</a>{{t "timelineStep.previewInfoEnd"}}</p>
+          </AuAlert>
+
+          {{#unless this.isAgenda}}
+            <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.notifyConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
+              <p>{{t "timelineStep.notifyInfo"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "timelineStep.localLoket"}}</a>.</p>
+            </AuAlert>
+          {{/unless}}
         </div>
         {{/if}}
-
-        {{!-- Publish --}}
-        <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
-          <AuToolbarGroup>
-            <AuHeading @level="2" @skin="4">{{t "timelineStep.publishButtonLabel" name=@name}}</AuHeading>
-          </AuToolbarGroup>
-          <AuToolbarGroup>
-            <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
-              {{if @publishedResource "Publiek" "Niet publiek"}}
-            </AuPill>
-          </AuToolbarGroup>
-        </AuToolbar>
-        <div class="au-o-grid au-u-margin-top-none">
-          {{#if this.isPublished}}
-          <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
-            <Signatures::PublishedResource @publication={{@publishedResource}} />
-          </div>
-          <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
-            <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.linkPublish"}}</AuHeading>
-            <p>
-              <a href="{{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="au-c-link">
-                {{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}
-              </a>
-            </p>
-            <AuHelpText @skin="secondary" class="au-u-margin-bottom-small">{{t "timelineStep.timingWarning"}}</AuHelpText>
-            <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.publicationType"}}</AuHeading>
-            <p>{{t "timelineStep.publicForAll"}}</p>
-          </div>
-          {{else}}
-          <div class="au-o-grid__item au-u-padding-top-none">
-            {{#if this.isAgenda}}
-              <AuButton
-                {{on "click" (fn (mut this.showPublishingModal) true)}}
-                @icon="upload"
-                @iconAlignment="left"
-                @loading={{this.publishDocument.isRunning}}
-                @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
-              >
-                {{t "timelineStep.publishButtonLabel" name=@name}}
-              </AuButton>
-            {{else}}
-              <AuButton
-                {{on "click" (fn (mut this.showPublishingModal) true)}}
-                @icon="upload"
-                @iconAlignment="left"
-                @loading={{this.publishDocument.isRunning}}
-                @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
-              >
-                {{t "timelineStep.publishNotifyButtonLabel" name=@name}}
-              </AuButton>
-            {{/if}}
-
-            <AuHelpText @skin="secondary" class="au-u-margin-top-small">
-              {{t "timelineStep.publishRestrictionInfo"}}
-              <a
-                href="{{config "manual.baseUrl"}}{{config "manual.publisher"}}"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="au-c-link">
-                {{t "timelineStep.publishRestrictionRole"}}
-              </a>
-              {{t "timelineStep.publishRestrictionEnd"}}
-            </AuHelpText>
-
-            <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.publicationConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
-              <p>{{t "timelineStep.previewInfo"}}<a href="{{this.publicationBaseUrl}}" target="_blank" rel="noopener noreferrer" class="au-c-link">{{this.publicationBaseUrl}}</a>{{t "timelineStep.previewInfoEnd"}}</p>
-            </AuAlert>
-
-            {{#unless this.isAgenda}}
-              <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.notifyConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
-                <p>{{t "timelineStep.notifyInfo"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "timelineStep.localLoket"}}</a>.</p>
-              </AuAlert>
-            {{/unless}}
-          </div>
-          {{/if}}
-          {{#if this.showPublishingModal}}
-            <Signatures::PublicationConfirmation
-              @name={{@name}}
-              @mockDocument={{@mockDocument}}
-              @confirm={{perform this.publishDocument @mockDocument.signedId}}
-              @cancel={{fn (mut this.showPublishingModal) false}} />
-          {{/if}}
-        </div>
-      {{/if}}
-    </c.content>
-  </AuCard>
-</li>
+        {{#if this.showPublishingModal}}
+          <Signatures::PublicationConfirmation
+            @name={{@name}}
+            @mockDocument={{@mockDocument}}
+            @confirm={{perform this.publishDocument @mockDocument.signedId}}
+            @cancel={{fn (mut this.showPublishingModal) false}} />
+        {{/if}}
+      </div>
+    {{/if}}
+  </c.content>
+</AuCard>
 {{/if}}

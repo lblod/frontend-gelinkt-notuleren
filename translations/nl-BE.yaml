@@ -37,9 +37,11 @@ publish:
   excerptErrorMessage: Er liep iets fout bij het laden van het uittreksel.
   retry: opnieuw proberen
   excerpts: Uittreksels
-  position: positie
-  statusLabel: status
-  agendapoint: agendapunt
+  excerptsOverview: Alle uittreksels
+  position: Positie
+  statusLabel: Status
+  agendapoint: Agendapunt
+  publishButtonLabel: Onderteken en publiceer
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan

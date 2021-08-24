@@ -424,3 +424,9 @@
   overflow-wrap: break-word;
   word-break: break-word;
 }
+
+// Fix data-table text search
+.data-table-search .ember-text-field {
+  @extend .au-c-input;
+  @extend .au-c-input--block;
+}

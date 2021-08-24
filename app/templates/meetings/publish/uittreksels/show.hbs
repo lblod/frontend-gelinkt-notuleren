@@ -8,17 +8,20 @@
   </AuAlert>
   <AuButton {{on "click" (perform this.loadExtract)}}>{{t "publish.retry"}}</AuButton>
 {{else if this.extract}}
-  <Signatures::TimelineStep
-    @name={{this.agendapoint.titel}}
-    @document={{this.extract.document}}
-    @signedResources={{this.extract.document.signedResources}}
-    @publishedResource={{this.extract.document.publishedResource}}
-    @errors={{this.extract.errors}}
-    @signing={{perform this.createSignedResourceTask this.extract.document.behandeling}}
-    @publish={{perform this.createPublishedResourceTask this.extract.document.behandeling}}
-    @print={{fn this.print this.extract}}
-    @isOpen={{true}}
-    @mockDocument={{this.mockBehandeling}}
-  />
+<div class="au-u-margin-bottom-small">
+  <AuLink @linkRoute="meetings.publish.uittreksels" @skin="secondary" @icon="arrow-left" @iconAlignment="left">{{t "publish.excerptsOverview"}}</AuLink>
+</div>
+<Signatures::TimelineStep
+  @name={{this.agendapoint.titel}}
+  @document={{this.extract.document}}
+  @signedResources={{this.extract.document.signedResources}}
+  @publishedResource={{this.extract.document.publishedResource}}
+  @errors={{this.extract.errors}}
+  @signing={{perform this.createSignedResourceTask this.extract.document.behandeling}}
+  @publish={{perform this.createPublishedResourceTask this.extract.document.behandeling}}
+  @print={{fn this.print this.extract}}
+  @isOpen={{true}}
+  @mockDocument={{this.mockBehandeling}}
+/>
 {{/if}}
 </div>
