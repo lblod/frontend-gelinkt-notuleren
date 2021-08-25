@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import {task} from "ember-concurrency";
+import {task, all} from "ember-concurrency";
 import {action} from '@ember/object';
 import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
@@ -22,7 +22,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
     const firstPage = yield this.store.query('agendapunt', {
       "filter[zitting][:id:]": this.args.zittingId,
-      "page[size]": pageSize
+      "page[size]": pageSize,
+      include: "vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt"
     });
     const count = firstPage.meta.count;
     firstPage.forEach(result => agendaItems.push(result));
@@ -32,7 +33,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       const pageResults = yield this.store.query('agendapunt', {
         "filter[zitting][:id:]": this.args.zittingId,
         "page[size]": pageSize,
-        "page[number]": pageNumber
+        "page[number]": pageNumber,
+      include: "vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt"
       });
       pageResults.forEach(result => agendaItems.push(result));
       pageNumber++;
@@ -40,47 +42,6 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     this.items = tracked(agendaItems.sortBy('position'));
   }
 
-  @task
-  * saveItemTask(item) {
-    const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
-    const treatment = yield item.behandeling;
-    yield treatment.saveAndPersistDocument();
-
-    if (item.isNew) {
-      item.zitting = zitting;
-      this.items.push(item);
-    }
-    this.repositionItem(item);
-    yield this.savePositionsTask.perform();
-
-    const container = yield treatment.get("documentContainer");
-    const status = yield container.get("status");
-    if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
-      // it's not published, so we set the status
-      container.status = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
-    }
-    yield container.save();
-
-    yield item.save();
-    yield this.args.onSave();
-  }
-
-  repositionItem(item) {
-    if (item.changedAttributes()["position"]) {
-      let [oldPos, newPos] = item.changedAttributes()["position"];
-      if(!oldPos && item.isNew){
-        oldPos = this.items.length-1;
-      }
-      let position = newPos || newPos === 0 ? newPos : this.items.length;
-      if (oldPos || oldPos === 0) {
-        this.items.splice(oldPos, 1);
-        if (oldPos < position) {
-          position = position -1;
-        }
-      }
-      this.items.splice(position, 0, item);
-    }
-  }
 
   /**
    * Create a new agenda item
@@ -103,26 +64,62 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     return agendaItem;
   }
 
+  @task
+  * updateItemTask(item) {
+    const treatment = yield item.behandeling;
+    yield treatment.saveAndPersistDocument();
+
+    if (item.isNew) {
+      const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
+      item.zitting = zitting;
+    }
+
+    yield this.updatePositionTask.perform(item);
+
+    const container = yield treatment.get("documentContainer");
+    const status = yield container.get("status");
+    if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
+      // it's not published, so we set the status
+      container.status = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
+    }
+    yield container.save();
+
+    yield this.saveItemsTask.perform();
+  }
+
   /**
    * Delete an agenda item
    * @param {Agendapunt} item the item to be deleted
    */
   @task
   * deleteItemTask(item) {
-    const index = this.items.indexOf(item);
+    const index = item.position;
+
     this.items.splice(index, 1);
-    const behandeling = yield item.behandeling;
-    if (behandeling) {
-      const container = yield behandeling.documentContainer;
+
+    const treatment = yield item.behandeling;
+    if (treatment) {
+      const container = yield treatment.documentContainer;
       if (container) {
         container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
         yield container.save();
       }
-
-      yield behandeling.destroyRecord();
+      yield treatment.destroyRecord();
     }
     yield item.destroyRecord();
-    yield this.args.onSave();
+    yield this.repairPositionsTask.perform();
+    yield this.saveItemsTask.perform();
+  }
+
+
+  /**
+   * Handles a rearrangement of the this.items array
+   * Takes the array index as source of truth.
+   */
+  @task
+  * onSortTask() {
+    yield this.repairPositionsTask.perform();
+    yield this.saveItemsTask.perform();
   }
 
   @task
@@ -134,21 +131,75 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     this.args.onCancel();
   }
 
+
+  /**
+   * Take item.position as source of truth and update the linked list and the this.items
+   * array to reflect the new position
+   *
+   * @param {Agendapunt} item
+   * @private
+   */
   @task
-  * onSortTask() {
-    yield this.savePositionsTask.perform();
-    yield this.args.onSave();
+  * updatePositionTask(item) {
+    const position = item.position;
+
+    if(this.items[position] !== item) {
+      const oldIndex = this.items.indexOf(item);
+      if(oldIndex > -1) {
+        this.items.splice(oldIndex, 1);
+      }
+      this.items.splice(position, 0, item);
+      this.repairPositionsTask.perform();
+    }
   }
 
+
+  /**
+   * Take the this.items array index as source of truth and
+   * update the item position and links
+   * Only updates when necessary, does not persist the changes
+   *
+   * @param {number} [from]
+   * @param {number} [to]
+   * @private
+   * */
   @task
-  * savePositionsTask() {
+  * repairPositionsTask(){
     let previous = null;
     for (const [index, item] of this.items.entries()) {
-      item.position = index;
-      item.vorigeAgendapunt = previous;
+      if(item.position !== index || item.vorigeAgendapunt !== previous) {
+        item.position = index;
+        item.vorigeAgendapunt = previous;
+        const treatment = yield item.treatment;
+        if(treatment) {
+          const previousTreatment = yield previous.treatment;
+          treatment.vorigeBehandelingVanAgendapunt = previousTreatment;
+        }
+      }
       previous = item;
-      yield item.save();
     }
+  }
 
+  /**
+   * Save all items with changed attributes in the array
+   * @private
+   */
+  @task
+  * saveItemsTask() {
+    const treatmentPromises = [];
+    const itemPromises = [];
+    for(const item of this.items) {
+      const treatment = yield item.treatment;
+      // hasDirtyAttributes is also true for new records
+      if(treatment && treatment.hasDirtyAttributes) {
+        treatmentPromises.push(treatment.save());
+      }
+      if(item.hasDirtyAttributes) {
+        itemPromises.push(item.save());
+      }
+    }
+    yield all(treatmentPromises);
+    yield all(itemPromises);
+    yield this.args.onSave();
   }
 }
