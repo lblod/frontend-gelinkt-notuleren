@@ -81,7 +81,6 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   @task
   *createPrePublishedResource() {
     const id = this.model.id;
-    const response = yield fetch(`/prepublish/besluitenlijst/${id}`);
     const json = yield this.pollForPrepublisherResults(id);
     return json.data.attributes;
   }
