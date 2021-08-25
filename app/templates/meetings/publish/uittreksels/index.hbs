@@ -21,7 +21,7 @@
     </c.header>
 
     <c.body as  |agendapoint|>
-      <td>{{agendapoint.position}}</td>
+      <td>{{inc agendapoint.position}}</td>
       <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{agendapoint.titel}}</AuLink></td>
       <td><EditorStatusPill @status={{agendapoint.behandeling.documentContainer.status}} /></td>
       <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right">{{t 'publish.publishButtonLabel'}}</AuLink></td>
