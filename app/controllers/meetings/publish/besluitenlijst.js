@@ -53,10 +53,10 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     let uuidResp = await fetch(`/prepublish/besluitenlijst/${meetingId}`);
     let jobId = (await uuidResp.json()).data.attributes.jobId;
 
-    let maxIterations = 200;
+    let maxIterations = 600;
     let resp;
     do {
-      await timeout(3000);
+      await timeout(1000);
       resp = await fetch(`/prepublish/job-result/${jobId}`);
       maxIterations--;
     } while (resp.status === 404 && maxIterations > 0);
