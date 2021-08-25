@@ -88,7 +88,17 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   @task
   * createSignedResource() {
     const id = this.model.id;
-    yield fetch(`/signing/besluitenlijst/sign/${id}`, { method: 'POST' });
+    const result = yield fetch(`/signing/besluitenlijst/sign/${id}`, { method: 'POST' });
+    const json = yield result.json();
+    const taskId = json.data.attributes.id;
+    let maxIterations  = 600;
+    let status;
+    do {
+      yield timeout(1000);
+      const result = yield fetch(`/tasks/${taskId}`);
+      const json = yield result.json();
+      status = json.data.attributes.status;
+    } while (status != "success")
     yield this.reloadBesluitenLijst.perform();
   }
 
