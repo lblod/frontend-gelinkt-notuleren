@@ -33,6 +33,7 @@ publish:
   headingPartOne: Meeting on
   loadingMessage: Loading...
   updatingMessage: Updating...
+  decisionListErrorMessage: Something went wrong while fetching the decision list.
   noExcerptsMessage: There are no excerpts available.
   retry: "retry"
   excerpts: Excerpts

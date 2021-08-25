@@ -1,16 +1,20 @@
 <div class="au-o-box">
-  {{#if this.initializeBesluitenLijst.isIdle}}
+  {{#if this.initializeBesluitenLijst.isRunning}}
+    <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
+    <AuLoader @padding="small" />
+  {{else if this.error}}
+    <AuAlert @alertIcon="cross" @alertTitle={{t "publish.decisionListErrorMessage"}} @alertskin="error" @alertsize="small">
+      <code>{{this.error}}</code>
+    </AuAlert>
+  {{else}}
   <ul>
     <Signatures::Besluitenlijst::TimelineStep
       @name="besluitenlijst"
       @lijst={{this.besluitenlijst}}
-      @errors={{this.errors}}
+      @errors={{this.validationErrors}}
       @signing={{perform this.createSignedResource}}
       @publish={{perform this.createPublishedResource}}
     />
   </ul>
-  {{else}}
-    <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
-    <AuLoader @padding="small" />
   {{/if}}
 </div>

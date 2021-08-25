@@ -1,5 +1,5 @@
 import Controller from "@ember/controller";
-import {task} from "ember-concurrency";
+import {task, timeout} from "ember-concurrency";
 import {tracked} from "@glimmer/tracking";
 import { fetch } from 'fetch';
 /** @typedef {import("../../../models/zitting").default} Zitting */
@@ -13,7 +13,8 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
 
   @tracked
   besluitenlijst;
-  @tracked errors;
+  @tracked validationErrors;
+  @tracked error;
 
   constructor() {
     super(...arguments);
@@ -25,21 +26,45 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
 
 
   @task
-  * initializeBesluitenLijst() {
-    const behandelings = yield this.store.query('versioned-besluiten-lijst',{
-      'filter[zitting][:id:]': this.model.id,
-      include: 'signed-resources,published-resource'
-    });
-    if(behandelings.length) {
-      this.besluitenlijst = behandelings.firstObject;
+    * initializeBesluitenLijst() {
+      try {
+        const behandelings = yield this.store.query('versioned-besluiten-lijst',{
+          'filter[zitting][:id:]': this.model.id,
+          include: 'signed-resources,published-resource'
+        });
+        if(behandelings.length) {
+          this.besluitenlijst = behandelings.firstObject;
+        } else {
+          const {content, errors} = yield this.createPrePublishedResource.perform();
+          const rslt = yield this.store.createRecord("versioned-besluiten-lijst", {
+            zitting: this.model,
+            content: content
+          });
+          this.besluitenlijst = rslt;
+          this.validationErrors = errors;
+        }
+      }
+      catch(e) {
+        this.error = e;
+      }
+  }
+
+  async pollForPrepublisherResults(meetingId) {
+    let uuidResp = await fetch(`/prepublish/besluitenlijst/${meetingId}`);
+    let jobId = (await uuidResp.json()).data.attributes.jobId;
+
+    let maxIterations = 200;
+    let resp;
+    do {
+      await timeout(3000);
+      resp = await fetch(`/prepublish/job-result/${jobId}`);
+      maxIterations--;
+    } while (resp.status === 404 && maxIterations > 0);
+
+    if (resp.status !== 200) {
+      throw new Error(await resp.text());
     } else {
-      const {content, errors} = yield this.createPrePublishedResource.perform();
-      const rslt = yield this.store.createRecord("versioned-besluiten-lijst", {
-        zitting: this.model,
-        content: content
-      });
-      this.besluitenlijst = rslt;
-      this.errors = errors;
+      return await resp.json();
     }
   }
 
@@ -57,7 +82,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   *createPrePublishedResource() {
     const id = this.model.id;
     const response = yield fetch(`/prepublish/besluitenlijst/${id}`);
-    const json = yield response.json();
+    const json = yield this.pollForPrepublisherResults(id);
     return json.data.attributes;
   }
 

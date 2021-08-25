@@ -33,6 +33,7 @@ publish:
   headingPartOne: Zitting van
   loadingMessage: Bezig met laden...
   updatingMessage: Bezig met bijwerken...
+  decisionListErrorMessage: Er liep iets fout bij het laden van de besluitenlijst.
   noExcerptsMessage: Er zijn geen uittreksels beschikbaar.
   excerptErrorMessage: Er liep iets fout bij het laden van het uittreksel.
   retry: opnieuw proberen
