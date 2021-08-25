@@ -122,7 +122,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
             treatment.id,
             this.agendapoint.get('position'),
             versionedTreatment,
-            extractPreview.meta?.validationErrors
+            extractPreview.validationErrors
           );
         }
       }
