@@ -9,6 +9,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
   @tracked _newItem;
   @tracked items = tracked([]);
+  changeSet = new Set();
 
   constructor(...args) {
     super(...args);
@@ -55,6 +56,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       geplandOpenbaar: true,
       position: this.items.length
     });
+
     agendaItem.behandeling = this.store.createRecord("behandeling-van-agendapunt", {
       openbaar: agendaItem.geplandOpenbaar,
       onderwerp: agendaItem,
@@ -64,6 +66,12 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     return agendaItem;
   }
 
+  /**
+   * Update and persist an item. Makes sure the local tracking array,
+   * links and position properties of all items are in sync.
+   *
+   * @param {Agendapunt} item
+   */
   @task
   * updateItemTask(item) {
     const treatment = yield item.behandeling;
@@ -71,7 +79,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
     if (item.isNew) {
       const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
-      item.zitting = zitting;
+      this.setProperty(item, "zitting", zitting);
     }
 
     yield this.updatePositionTask.perform(item);
@@ -80,9 +88,9 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     const status = yield container.get("status");
     if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
       // it's not published, so we set the status
-      container.status = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
+      const conceptStatus = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
+      this.setProperty(container, "status", conceptStatus);
     }
-    yield container.save();
 
     yield this.saveItemsTask.perform();
   }
@@ -101,8 +109,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     if (treatment) {
       const container = yield treatment.documentContainer;
       if (container) {
-        container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
-        yield container.save();
+        const draftStatus = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
+        this.setProperty(container, "status", draftStatus);
       }
       yield treatment.destroyRecord();
     }
@@ -149,7 +157,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
         this.items.splice(oldIndex, 1);
       }
       this.items.splice(position, 0, item);
-      this.repairPositionsTask.perform();
+      yield this.repairPositionsTask.perform();
     }
   }
 
@@ -167,13 +175,14 @@ export default class AgendaManagerAgendaContextComponent extends Component {
   * repairPositionsTask(){
     let previous = null;
     for (const [index, item] of this.items.entries()) {
-      if(item.position !== index || item.vorigeAgendapunt !== previous) {
-        item.position = index;
-        item.vorigeAgendapunt = previous;
+      const previousItem = yield item.vorigeAgendapunt;
+      if(item.position !== index || previousItem !== previous) {
+        this.setProperty(item, "position", index);
+        this.setProperty(item, "vorigeAgendapunt", previous);
         const treatment = yield item.treatment;
         if(treatment) {
           const previousTreatment = yield previous.treatment;
-          treatment.vorigeBehandelingVanAgendapunt = previousTreatment;
+          this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
         }
       }
       previous = item;
@@ -186,20 +195,26 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * saveItemsTask() {
-    const treatmentPromises = [];
-    const itemPromises = [];
-    for(const item of this.items) {
-      const treatment = yield item.treatment;
-      // hasDirtyAttributes is also true for new records
-      if(treatment && treatment.hasDirtyAttributes) {
-        treatmentPromises.push(treatment.save());
-      }
-      if(item.hasDirtyAttributes) {
-        itemPromises.push(item.save());
-      }
-    }
-    yield all(treatmentPromises);
-    yield all(itemPromises);
+    yield all([...this.changeSet].map(model => model.save()));
+    this.changeSet.clear();
     yield this.args.onSave();
+  }
+
+
+  /**
+   * Set a property on an ember data model and track its changes.
+   * The reason for this is that hasDirtyAttributes does not track
+   * relationship changes.
+   *
+   * @param {Model} model
+   * @param {string} property
+   * @param {unknown} value
+   * @private
+   */
+  setProperty(model, property, value) {
+    if(value !== model.get(property)) {
+      this.changeSet.add(model);
+    }
+    model.set(property, value);
   }
 }
