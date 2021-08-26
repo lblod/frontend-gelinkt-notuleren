@@ -93,12 +93,14 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     const taskId = json.data.id;
     let maxIterations  = 600;
     let status;
+    let iteration = 0;
     do {
       yield timeout(1000);
       const result = yield fetch(`/publication-tasks/${taskId}`);
       const json = yield result.json();
       status = json.data.status;
-    } while (status != "http://lblod.data.gift/besluit-publicatie-melding-statuses/success");
+      iteration++;
+    } while (status != "http://lblod.data.gift/besluit-publicatie-melding-statuses/success" || iteration > maxIterations);
     yield this.reloadBesluitenLijst.perform();
   }
 
@@ -110,12 +112,14 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     const taskId = json.data.id;
     let maxIterations  = 600;
     let status;
+    let iteration = 0;
     do {
       yield timeout(1000);
       const result = yield fetch(`/publication-tasks/${taskId}`);
       const json = yield result.json();
       status = json.data.status;
-    } while (status != "http://lblod.data.gift/besluit-publicatie-melding-statuses/success");
+      iteration++;
+    } while (status != "http://lblod.data.gift/besluit-publicatie-melding-statuses/success" || iteration > maxIterations);
     yield this.reloadBesluitenLijst.perform()
   }
 }
