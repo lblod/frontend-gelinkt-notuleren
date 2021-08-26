@@ -7,6 +7,7 @@
   @copyAgendapunt={{perform this.copyAgendapunt}}
   @uploading={{this.uploading}}
   @toggleUpload={{this.toggleUpload}}
+  @toggleUploadAndSave={{this.toggleUploadAndSave}}
 />
 
 {{#if this.hasDocumentValidationErrors}}
@@ -38,11 +39,11 @@
   </AuModal>
 {{/if}}
 {{#if this.documentContainer}}
-  <div class={{if this.uploading "" "au-u-hidden"}}>
+  <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class={{if this.uploading "au-c-body-container au-c-body-container--scroll" "au-u-hidden"}}>
     <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
   </div>
 {{/if}}
-<div class={{if this.uploading "au-u-hidden" ""}}>
+<div class={{if this.uploading "au-u-hidden" "au-c-body-container au-c-body-container--scroll"}} id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
   <RdfaEditorContainer
           @profile={{this.profile}}
           @rdfaEditorInit={{this.handleRdfaEditorInit}}

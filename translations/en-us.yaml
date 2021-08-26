@@ -338,7 +338,7 @@ dateTimePicker:
 
 attachments:
   attachments: Attachments
-  return: Return to document
+  return: Document
   attach: Attach a file
   drag: Drag a file here to attach it
   filename: Filename
@@ -348,3 +348,5 @@ attachments:
   type: Type
   decision: Decision
   typePlaceholder: none
+  regulatory: regulatory
+  saveAndGo: Save and go to attachments

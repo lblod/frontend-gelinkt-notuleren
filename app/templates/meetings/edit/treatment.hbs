@@ -7,12 +7,12 @@
 >
   <Modal.Body>
     {{#if this.documentContainer}}
-      <div class={{if this.uploading "" "au-u-hidden"}}>
+      <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2"  class={{if this.uploading "" "au-u-hidden"}}>
         <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
       </div>
     {{/if}}
     {{#if this.document}}
-      <div class={{if this.uploading "au-u-hidden" ""}}>
+      <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1"  class={{if this.uploading "au-u-hidden" ""}}>
         <BesluitDocumentContainer class={{if this.uploading ".au-u-hidden" ""}}
                                   @document={{this.document}}
                                   @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
@@ -23,6 +23,25 @@
     {{/if}}
   </Modal.Body>
   <Modal.Footer>
+    {{#if this.uploading}}
+      <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+        <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" this.toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
+          {{t "attachments.return"}}
+        </AuButton>
+        <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
+          {{t "attachments.attachments"}}
+        </AuButton>
+      </AuButtonGroup>
+    {{else}}
+      <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+        <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
+          {{t "attachments.return"}}
+        </AuButton>
+        <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
+          {{t "attachments.saveAndGo"}}
+        </AuButton>
+      </AuButtonGroup>
+    {{/if}}
     <AuButtonGroup>
       <AuButton @disabled={{this.saveDocumentTask.isRunning}}
         {{on "click" (perform this.saveDocumentTask)}}>
@@ -31,18 +50,7 @@
       <AuButton @disabled={{this.saveDocumentTask.isRunning}} {{on "click" this.saveAndQuit}}>
         {{t "behandelingVanAgendapunten.saveAndQuit"}}
       </AuButton>
-      {{#if this.uploading}}
-        <AuButton @skin="secondary" @icon="arrow-left" {{on "click" this.toggleUpload}}>
-          {{t "attachments.return"}}
-        </AuButton>
-      {{else}}
-        <AuButton @icon="attachment" {{on "click" this.toggleUpload}}>
-          {{t "attachments.attachments"}}
-        </AuButton>
-      {{/if}}
-    </AuButtonGroup>
-    <AuButtonGroup>
-       <AuButton @skin="secondary"
+      <AuButton @skin="secondary"
                 @disabled={{this.saveDocumentTask.isRunning}}
         {{on "click" this.closeModal}}>
         {{t "behandelingVanAgendapunten.cancel"}}

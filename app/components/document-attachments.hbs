@@ -1,54 +1,59 @@
-<AuFileUpload 
-  @title={{t "attachments.attach" }} 
-  @helpTextDragDrop={{t "attachments.drag" }}
-  @modelName={{"file"}} 
-  @endPoint={{"/files"}} 
-  @onFinishUpload={{perform this.uploadedAttachement}}
-  @maxFileSizeMB="1024" 
-  @multiple={{true}} />
+<div class="au-o-box au-c-theme-gray-200">
+  <AuFileUpload @title={{t "attachments.attach" }} @helpTextDragDrop={{t "attachments.drag" }} @modelName={{"file"}}
+    @endPoint={{"/files"}} @onFinishUpload={{perform this.uploadedAttachement}} @maxFileSizeMB="1024"
+    @multiple={{true}} />
+</div>
+
 {{#if @documentContainer.attachments}}
-<table class="au-c-meeting-chrome-table">
-  <thead>
-    <tr>
-      <th>{{t "attachments.filename"}}</th>
-      <th>{{t "attachments.filesize"}}</th>
-      <th>{{t "attachments.download"}}</th>
-      <th>{{t "attachments.delete"}}</th>
-      <th>{{t "attachments.type"}}</th>
-      <th>{{t "attachments.decision"}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each this.attachments as |attachment|}}
-    <tr>
-      <td>{{attachment.file.name}}</td>
-      <td>{{attachment.file.humanReadableSize}}</td>
-      <td>
-        <a href={{attachment.file.downloadLink}} target="_blank" rel="noopener noreferrer">
-          <AuIcon @icon="download" @size="large" @ariaHidden={{true}} />
-        </a>
-      </td>
-      <td>
-        <AuIcon @icon="bin" @size="large" @ariaHidden={{true}} {{on "click" (perform this.deleteAttachment attachment)}} />
-      </td>
-      <td>
-        <select {{on "change" (perform this.onSelectType attachment)}} disabled={{eq attachment.decision ""}}>
-          <option value="">{{t "attachments.typePlaceholder"}}</option>
-          {{#each this.typeOptions as |typeOption|}}
-            <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}</option>
-          {{/each}}
-        </select>
-      </td>
-      <td>
-        <select {{on "change" (perform this.onSelectDecision attachment)}}>
-          <option value="">{{t "attachments.typePlaceholder"}}</option>
-          {{#each @decisions as |decisionOption|}}
-            <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>{{decisionOption.title}}</option>
-          {{/each}}
-        </select>
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="au-c-data-table">
+  <div class="au-c-data-table__wrapper">
+    <table class="au-c-data-table__table">
+      <thead class="au-c-data-table__header">
+        <tr>
+          <th>{{t "attachments.filename"}}</th>
+          <th>{{t "attachments.filesize"}}</th>
+          <th>{{t "attachments.type"}}</th>
+          <th colspan="2">{{t "attachments.decision"}}</th>
+          {{!-- <th>{{t "attachments.delete"}}</th> --}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.attachments as |attachment|}}
+        <tr>
+          <td>
+            <a href={{attachment.file.downloadLink}} target="_blank" rel="noopener noreferrer">
+              {{attachment.file.name}}
+            </a>
+          </td>
+          <td>{{attachment.file.humanReadableSize}}</td>
+
+          <td class="au-c-custom-select-cell">
+            <select class="au-c-custom-select" {{on "change" (perform this.onSelectType attachment)}} disabled={{not attachment.decision}}>
+              <option value="">{{t "attachments.typePlaceholder"}}</option>
+              {{#each this.typeOptions as |typeOption|}}
+              <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}
+              </option>
+              {{/each}}
+            </select>
+          </td>
+          <td class="au-c-custom-select-cell">
+            <select class="au-c-custom-select" {{on "change" (perform this.onSelectDecision attachment)}}>
+              <option value="">{{t "attachments.typePlaceholder"}}</option>
+              {{#each @decisions as |decisionOption|}}
+              <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>
+                {{decisionOption.title}}</option>
+              {{/each}}
+            </select>
+          </td>
+          <td class="au-u-text-right">
+            <AuButton @skin="tertiary" @alert={{true}} @icon="bin" @iconAlignment="left" {{on "click" (perform this.deleteAttachment attachment)}}>
+              {{t "attachments.delete"}}
+            </AuButton>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
 {{/if}}
