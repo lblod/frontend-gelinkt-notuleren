@@ -56,7 +56,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     *_createPublishedResourceTask(behandeling) {
       try {
         this.error = null;
-        const result = yield fetch(`/signing/behandeling/publish/${this.meeting.id}/${behandeling.get('id')}`, {
+        const result = yield fetch(`/signing/behandeling/publish/${this.meeting.get('id')}/${behandeling.get('id')}`, {
         method: 'POST',
         });
         if (! result.ok) {
