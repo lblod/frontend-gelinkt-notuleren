@@ -90,22 +90,32 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     const id = this.model.id;
     const result = yield fetch(`/signing/besluitenlijst/sign/${id}`, { method: 'POST' });
     const json = yield result.json();
-    const taskId = json.data.attributes.id;
+    const taskId = json.data.id;
     let maxIterations  = 600;
     let status;
     do {
       yield timeout(1000);
-      const result = yield fetch(`/tasks/${taskId}`);
+      const result = yield fetch(`/publication-tasks/${taskId}`);
       const json = yield result.json();
-      status = json.data.attributes.status;
-    } while (status != "success")
+      status = json.data.status;
+    } while (status != "http://lblod.data.gift/besluit-publicatie-melding-statuses/success");
     yield this.reloadBesluitenLijst.perform();
   }
 
   @task
   * createPublishedResource() {
     const id = this.model.id;
-    yield fetch(`/signing/besluitenlijst/publish/${id}`, { method: 'POST' });
-    yield this.reloadBesluitenLijst.perform();
+    const result = yield fetch(`/signing/besluitenlijst/publish/${id}`, { method: 'POST' });
+    const json = yield result.json();
+    const taskId = json.data.id;
+    let maxIterations  = 600;
+    let status;
+    do {
+      yield timeout(1000);
+      const result = yield fetch(`/publication-tasks/${taskId}`);
+      const json = yield result.json();
+      status = json.data.status;
+    } while (status != "http://lblod.data.gift/besluit-publicatie-melding-statuses/success");
+    yield this.reloadBesluitenLijst.perform()
   }
 }
