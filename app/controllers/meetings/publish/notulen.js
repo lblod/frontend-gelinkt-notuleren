@@ -16,6 +16,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @tracked publicBehandelingUris = [];
   @tracked behandelings;
   @service publish;
+  @service muTask;
 
   constructor() {
     super(...arguments);
@@ -110,7 +111,8 @@ export default class MeetingsPublishNotulenController extends Controller {
   @task
   * createSignedResource() {
     const id = this.model.id;
-    yield fetch(`/signing/notulen/sign/${id}`, { method: 'POST' });
+    const taskId = yield this.muTask.fetchTaskifiedEndpoint(`/signing/notulen/sign/${id}`, { method: 'POST' });
+    yield this.muTask.waitForMuTaskTask.perform(taskId);
     setTimeout(() => this.reloadNotulen.perform(), 1);
   }
 

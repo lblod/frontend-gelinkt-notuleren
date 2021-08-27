@@ -142,6 +142,6 @@ export default class PublishService extends Service {
   }
 
   async fetchTreatmentPreviews(meetingId) {
-    return this.fetchJobTask(`/prepublish/behandelingen/${meetingId}`);
+    return this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`);
   }
 }
