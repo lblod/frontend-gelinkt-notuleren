@@ -3,7 +3,6 @@ import Controller from '@ember/controller';
 import {task} from "ember-concurrency";
 import {tracked} from "@glimmer/tracking";
 import { action } from '@ember/object';
-import { fetch } from 'fetch';
 
 export default class MeetingsPublishNotulenController extends Controller {
 

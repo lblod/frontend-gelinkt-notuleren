@@ -120,6 +120,6 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       status = json.data.status;
       iteration++;
     } while (status != "http://lblod.data.gift/besluit-publicatie-melding-statuses/success" || iteration > maxIterations);
-    yield this.reloadBesluitenLijst.perform()
+    yield this.reloadBesluitenLijst.perform();
   }
 }

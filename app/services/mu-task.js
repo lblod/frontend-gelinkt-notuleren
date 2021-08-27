@@ -22,7 +22,7 @@ export default class MuTaskService extends Service {
   @task
   * waitForMuTaskTask(taskId, pollDelayMs = 1000, timeoutMs = 300000) {
     let resp;
-    let currentStatus
+    let currentStatus;
     const startTime = Date.now();
     do {
       yield timeout(pollDelayMs);
@@ -44,7 +44,7 @@ export default class MuTaskService extends Service {
     if(currentStatus === TASK_STATUS_SUCCESS) {
       return task;
     } else if(currentStatus === TASK_STATUS_FAILURE) {
-      throw new Error("Task failed.")
+      throw new Error("Task failed.");
     } else if (currentStatus === TASK_STATUS_RUNNING) {
       throw new Error("Task timed out.");
     } else {
