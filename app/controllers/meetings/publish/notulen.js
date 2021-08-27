@@ -119,14 +119,12 @@ export default class MeetingsPublishNotulenController extends Controller {
   @task
   * createPublishedResource() {
     const id = this.model.id;
-    yield fetch(`/signing/notulen/publish/${id}`,
-                {
-                  headers: { "Content-Type": 'application/vnd.api+json' },
-                  body: JSON.stringify({
-                    'public-behandeling-uris': this.publicBehandelingUris
-                  }),
-                  method: 'POST'
-                });
+    const taskId = yield this.muTask.fetchTaskifiedEndpoint(
+      `/signing/notulen/publish/${id}`,
+      {headers: { "Content-Type": 'application/vnd.api+json' },
+       body: JSON.stringify({'public-behandeling-uris': this.publicBehandelingUris}),
+       method: 'POST'});
+    yield this.muTask.waitForMuTaskTask.perform(taskId);
     setTimeout(() => this.reloadNotulen.perform(), 1);
   }
 
