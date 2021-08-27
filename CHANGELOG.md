@@ -1,4 +1,17 @@
 
+## 2.10.0 (2021-08-27)
+
+#### :rocket: Enhancement
+* [#164](https://github.com/lblod/frontend-gelinkt-notuleren/pull/164) async preview, signing and publication of a decision list ([@nvdk](https://github.com/nvdk))
+* [#163](https://github.com/lblod/frontend-gelinkt-notuleren/pull/163) lazy load uittreksels ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#165](https://github.com/lblod/frontend-gelinkt-notuleren/pull/165) Fix a bug where agenda items would have incorrect links to previous agenda items ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 2
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.9.1 (2021-08-18)
 
 #### :rocket: Enhancement
