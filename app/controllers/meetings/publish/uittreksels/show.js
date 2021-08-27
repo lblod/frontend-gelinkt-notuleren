@@ -4,7 +4,6 @@ import { tracked } from '@glimmer/tracking';
 import { fetch } from 'fetch';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { Extract } from 'frontend-gelinkt-notuleren/services/publish';
 export default class MeetingsPublishUittrekselsShowController extends Controller {
   @tracked error;
   @tracked extract;
@@ -56,7 +55,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     *_createPublishedResourceTask(behandeling) {
       try {
         this.error = null;
-        const result = yield fetch(`/signing/behandeling/publish/${this.meeting.id}/${behandeling.get('id')}`, {
+        const result = yield fetch(`/signing/behandeling/publish/${this.meeting.get('id')}/${behandeling.get('id')}`, {
         method: 'POST',
         });
         if (! result.ok) {
@@ -94,37 +93,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         this.extract = null;
         this.error = null;
         const treatment = this.model;
-        const versionedTreatments = yield this.store.query('versioned-behandeling',
-                                                           {
-                                                             filter: { behandeling: {":id:": treatment.id}},
-                                                             include: 'behandeling.onderwerp,signed-resources,published-resource'
-                                                           });
-        if (versionedTreatments.length > 0 ) {
-          this.extract = new Extract(
-            treatment.id,
-            this.agendapoint.get('position'),
-            versionedTreatments.get('firstObject'),
-            []
-          );
-      }
-        else {
-          const extractPreview = this.store.createRecord('extract-preview', {treatment});
-          yield extractPreview.save();
-          const versionedTreatment = this.store.createRecord(
-            'versioned-behandeling',
-            {
-              zitting: this.agendapoint.meeting,
-              content: extractPreview.html,
-              behandeling: treatment,
-            }
-          );
-          this.extract = new Extract(
-            treatment.id,
-            this.agendapoint.get('position'),
-            versionedTreatment,
-            extractPreview.validationErrors
-          );
-        }
+        this.extract = yield this.publish.fetchExtract(treatment);
       }
       catch(e) {
         this.error = e;

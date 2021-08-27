@@ -144,4 +144,40 @@ export default class PublishService extends Service {
   async fetchTreatmentPreviews(meetingId) {
     return this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`);
   }
+
+  async fetchExtract(treatment) {
+    const agendapoint = await treatment.get('onderwerp');
+    const meeting = await agendapoint.get('zitting');
+    const versionedTreatments = await this.store.query('versioned-behandeling',
+                                                       {
+                                                         filter: { behandeling: {":id:": treatment.id}},
+                                                         include: 'behandeling.onderwerp,signed-resources,published-resource'
+                                                       });
+    if (versionedTreatments.length > 0 ) {
+      return new Extract(
+        treatment.id,
+        agendapoint.get('position'),
+        versionedTreatments.get('firstObject'),
+        []
+      );
+    }
+    else {
+      const extractPreview = this.store.createRecord('extract-preview', {treatment});
+      await extractPreview.save();
+      const versionedTreatment = this.store.createRecord(
+        'versioned-behandeling',
+        {
+          zitting: meeting,
+          content: extractPreview.html,
+          behandeling: treatment,
+        }
+      );
+      return new Extract(
+        treatment.id,
+        agendapoint.get('position'),
+        versionedTreatment,
+        extractPreview.validationErrors
+      );
+    }
+  }
 }

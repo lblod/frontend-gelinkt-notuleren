@@ -6,16 +6,8 @@ export default class PrintUittrekselRoute extends Route {
 
   async model(params) {
     const { treatment_id: treatmentId, meeting_id: meetingId } = params;
-    const extract = this.publish.treatmentExtractsMap.get(treatmentId);
-
-    if (extract) {
-      return { document: extract.document, meetingId };
-    } else {
-      await this.publish.loadExtractsTask.perform(meetingId);
-      return {
-        document: this.publish.treatmentExtractsMap.get(treatmentId)?.document,
-        meetingId,
-      };
-    }
+    const treatment = await this.store.findRecord('behandeling-van-agendapunt', treatmentId, { include: 'onderwerp.zitting'});
+    const extract = await this.publish.fetchExtract(treatment);
+    return { document: extract.document, meetingId, treatmentId };
   }
 }
