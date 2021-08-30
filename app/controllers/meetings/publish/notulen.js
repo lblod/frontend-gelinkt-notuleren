@@ -3,7 +3,6 @@ import Controller from '@ember/controller';
 import {task} from "ember-concurrency";
 import {tracked} from "@glimmer/tracking";
 import { action } from '@ember/object';
-import { fetch } from 'fetch';
 
 export default class MeetingsPublishNotulenController extends Controller {
 
@@ -16,6 +15,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @tracked publicBehandelingUris = [];
   @tracked behandelings;
   @service publish;
+  @service muTask;
 
   constructor() {
     super(...arguments);
@@ -95,8 +95,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @task
   *createPrePublishedResource() {
     const id = this.model.id;
-    const response = yield fetch(`/prepublish/notulen/${id}`);
-    const json = yield response.json();
+    const json = yield this.publish.fetchJobTask.perform(`/prepublish/notulen/${id}`);
     return json.data.attributes;
   }
 
@@ -111,21 +110,20 @@ export default class MeetingsPublishNotulenController extends Controller {
   @task
   * createSignedResource() {
     const id = this.model.id;
-    yield fetch(`/signing/notulen/sign/${id}`, { method: 'POST' });
+    const taskId = yield this.muTask.fetchTaskifiedEndpoint(`/signing/notulen/sign/${id}`, { method: 'POST' });
+    yield this.muTask.waitForMuTaskTask.perform(taskId);
     setTimeout(() => this.reloadNotulen.perform(), 1);
   }
 
   @task
   * createPublishedResource() {
     const id = this.model.id;
-    yield fetch(`/signing/notulen/publish/${id}`,
-                {
-                  headers: { "Content-Type": 'application/vnd.api+json' },
-                  body: JSON.stringify({
-                    'public-behandeling-uris': this.publicBehandelingUris
-                  }),
-                  method: 'POST'
-                });
+    const taskId = yield this.muTask.fetchTaskifiedEndpoint(
+      `/signing/notulen/publish/${id}`,
+      {headers: { "Content-Type": 'application/vnd.api+json' },
+       body: JSON.stringify({'public-behandeling-uris': this.publicBehandelingUris}),
+       method: 'POST'});
+    yield this.muTask.waitForMuTaskTask.perform(taskId);
     setTimeout(() => this.reloadNotulen.perform(), 1);
   }
 
