@@ -1,3 +1,24 @@
+
+## 2.9.1 (2021-08-18)
+
+#### :rocket: Enhancement
+* [#160](https://github.com/lblod/frontend-gelinkt-notuleren/pull/160) Consume job for prepublishing ([@madnificent](https://github.com/madnificent))
+* [#161](https://github.com/lblod/frontend-gelinkt-notuleren/pull/161) Improve wording around notification ([@abeforgit](https://github.com/abeforgit))
+* [#156](https://github.com/lblod/frontend-gelinkt-notuleren/pull/156) Update the hostname in the footer ([@Windvis](https://github.com/Windvis))
+
+#### :bug: Bug Fix
+* [#162](https://github.com/lblod/frontend-gelinkt-notuleren/pull/162) BUGFIX: now you can sign and publish the same document and will be shown as such ([@lagartoverde](https://github.com/lagartoverde))
+* [#160](https://github.com/lblod/frontend-gelinkt-notuleren/pull/160) Consume job for prepublishing ([@madnificent](https://github.com/madnificent))
+* [#158](https://github.com/lblod/frontend-gelinkt-notuleren/pull/158) Fix print view overflow issue when &nbsp is used in text ([@Dietr](https://github.com/Dietr))
+
+#### Committers: 5
+- Aad Versteden ([@madnificent](https://github.com/madnificent))
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- Sam Van Campenhout ([@Windvis](https://github.com/Windvis))
+
+
 ## 2.9.0 (2021-07-16)
 
 #### :rocket: Enhancement

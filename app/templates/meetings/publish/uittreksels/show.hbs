@@ -1,0 +1,27 @@
+{{page-title this.model.agendapoint.title}}
+<div class="au-o-box">
+  {{#if this.loadExtract.isRunning}}
+  <AuLoader />
+{{else if this.error}}
+  <AuAlert @alertIcon="cross" @alertTitle={{t "publish.excerptErrorMessage"}} @alertskin="error" @alertsize="small">
+    <code>{{this.error}}</code>
+  </AuAlert>
+  <AuButton {{on "click" (perform this.loadExtract)}}>{{t "publish.retry"}}</AuButton>
+{{else if this.extract}}
+<div class="au-u-margin-bottom-small">
+  <AuLink @linkRoute="meetings.publish.uittreksels" @skin="secondary" @icon="arrow-left" @iconAlignment="left">{{t "publish.excerptsOverview"}}</AuLink>
+</div>
+<Signatures::TimelineStep
+  @name={{this.agendapoint.titel}}
+  @document={{this.extract.document}}
+  @signedResources={{this.extract.document.signedResources}}
+  @publishedResource={{this.extract.document.publishedResource}}
+  @errors={{this.extract.errors}}
+  @signing={{perform this.createSignedResourceTask this.extract.document.behandeling}}
+  @publish={{perform this.createPublishedResourceTask this.extract.document.behandeling}}
+  @print={{fn this.print this.extract}}
+  @isOpen={{true}}
+  @mockDocument={{this.mockBehandeling}}
+/>
+{{/if}}
+</div>

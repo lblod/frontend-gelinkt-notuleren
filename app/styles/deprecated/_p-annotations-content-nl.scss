@@ -165,13 +165,13 @@
     content: "Onderwerp";
   }
 
-  [property="besluit:geplandOpenbaar"]:before {
-    content: "Gepland openbaar";
-  }
+  // [property="besluit:geplandOpenbaar"]:before {
+  //   content: "Gepland openbaar";
+  // }
 
-  [property="besluit:geplandOpenbaar"][content="false"]:before {
-    content: "Gepland besloten";
-  }
+  // [property="besluit:geplandOpenbaar"][content="false"]:before {
+  //   content: "Gepland besloten";
+  // }
 
   [property="besluit:openbaar"]:before {
     content: "Openbare behandeling"
@@ -562,13 +562,13 @@
     content: "Onderwerp";
   }
 
-  [property="besluit:geplandOpenbaar"]:before {
-    content: "Gepland openbaar";
-  }
+  // [property="besluit:geplandOpenbaar"]:before {
+  //   content: "Gepland openbaar";
+  // }
 
-  [property="besluit:geplandOpenbaar"][content="false"]:before {
-    content: "Gepland besloten";
-  }
+  // [property="besluit:geplandOpenbaar"][content="false"]:before {
+  //   content: "Gepland besloten";
+  // }
 
   [property="besluit:openbaar"]:before {
     content: "Openbare behandeling"
