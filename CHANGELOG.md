@@ -1,4 +1,12 @@
 
+## 2.11.0 (2021-08-30)
+
+#### :rocket: Enhancement
+* [#167](https://github.com/lblod/frontend-gelinkt-notuleren/pull/167) Use task flow for preview, signing and publication of notulen ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
 ## 2.10.0 (2021-08-27)
 
 #### :rocket: Enhancement
