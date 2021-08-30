@@ -48,6 +48,30 @@ export default class PublishService extends Service {
   }
 
   /**
+   * @param {string} jobUrl
+   * @param {string} statusUrl*/
+  @task
+  * fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600 ) {
+    const job = yield fetch(jobUrl);
+    const jobData = yield job.json();
+    const jobId = jobData.data.attributes.jobId;
+
+    let resp;
+    do {
+      yield timeout(pollingDelayMs);
+      resp = yield fetch(`/prepublish/job-result/${jobId}`);
+      maxIterations--;
+    } while (resp.status === 404 && maxIterations > 0);
+
+    if (resp.status !== 200) {
+      throw new Error(yield resp.text());
+    } else {
+      return yield resp.json();
+    }
+
+  }
+
+  /**
    * Combine saved extracts with newly created ones and expose them as one map keyed by the
    * id of the treatment
    * TODO: proper pagination
@@ -57,7 +81,7 @@ export default class PublishService extends Service {
   @task
   *_loadExtractsTask(meetingId) {
     const [newExtracts, meeting, treatments, versionedTreatments] = yield all([
-      this.pollForPrepublisherResults(meetingId),
+      this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`),
       this.store.findRecord('zitting', meetingId),
       this.store.query('behandeling-van-agendapunt', {
         'filter[onderwerp][zitting][:id:]': meetingId,
@@ -117,26 +141,8 @@ export default class PublishService extends Service {
     this.treatmentExtractsMap = extractMap;
   }
 
-  async pollForPrepublisherResults(meetingId) {
-    let uuidResp = await fetch(`/prepublish/behandelingen/${meetingId}`);
-    let jobId = (await uuidResp.json()).data.attributes.jobId;
-
-    let maxIterations = 600;
-    let resp;
-    do {
-      await timeout(1000);
-      resp = await fetch(`/prepublish/job-result/${jobId}`);
-      maxIterations--;
-    } while (resp.status === 404 && maxIterations > 0);
-
-    if (resp.status !== 200) {
-      throw new Error(await resp.text());
-    } else {
-      return await resp.json();
-    }
-  }
   async fetchTreatmentPreviews(meetingId) {
-    return this.pollForPrepublisherResults(meetingId);
+    return this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`);
   }
 
   async fetchExtract(treatment) {
