@@ -38,8 +38,9 @@ module.exports = function (environment) {
     },
     featureFlags: {
       'language-select': false,
-      'editor-html-paste': true,
-      'editor-extended-html-paste': true
+      'editor-html-paste': "{{FEATURE_FLAG_EDITOR_HTML_PASTE}}",
+      'editor-extended-html-paste': "{{FEATURE_FLAG_EDITOR_EXTENDED_HTML_PASTE}}",
+      'editor-cut': "{{FEATURE_FLAG_EDITOR_CUT}}"
     },
     browserUpdate: {
       vs: {f:-3,c:-3},
