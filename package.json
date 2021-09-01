@@ -48,6 +48,7 @@
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.8.0",
     "@lblod/ember-vo-webuniversum": "0.23.0",
     "@lblod/ember-vo-webuniversum-widget": "^0.1.2",
+    "@lblod/ember-vo-mu-file-upload": "0.7.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-a11y-refocus": "^1.0.0",
@@ -115,9 +116,7 @@
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3"
   },
-  "dependencies": {
-    "@lblod/ember-vo-mu-file-upload": "git://github.com/lblod/ember-vo-mu-file-upload.git#feature/configurable-model-name"
-  },
+  "dependencies": {},
   "engines": {
     "node": "10.* || >= 12"
   },
