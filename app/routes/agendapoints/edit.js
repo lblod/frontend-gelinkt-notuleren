@@ -23,6 +23,7 @@ export default class AgendapointsEditRoute extends Route {
   }
   setupController(controller, model) {
     super.setupController(controller, model);
+    controller.uploading=false;
     controller._editorDocument = null;
   }
 
