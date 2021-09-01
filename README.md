@@ -43,3 +43,6 @@ This frontend can be configured at runtime. It will get the environment variable
 ### other
 * `EMBER_PUBLICATION_BASE_URL`: url of the linked [publication platform](https://github.com/lblod/app-gn-publicatie/), e.g. "https://publicatie.gelinkt-notuleren.vlaanderen.be/"
 * `EMBER_ENVIRONMENT_NAME`: name of the environment, appended to the document title.
+* `EMBER_FEATURE_FLAG_HTML_PASTE`: enable/disable basic html paste (only pasting elements and attributes supported by the editor) default true
+* `EMBER_FEATURE_FLAG_EXTENDED_HTML_PASTE`: enable/disable extended paste (allow pasting elements and attributes that can not be created or managed by the editor) default true
+* `EMBER_FEATURE_FLAG_CUT`: enable/disable extended paste (allow pasting elements and attributes that can not be created or managed by the editor) default true

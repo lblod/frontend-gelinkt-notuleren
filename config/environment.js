@@ -38,9 +38,9 @@ module.exports = function (environment) {
     },
     featureFlags: {
       'language-select': false,
-      'editor-html-paste': "{{FEATURE_FLAG_EDITOR_HTML_PASTE}}",
-      'editor-extended-html-paste': "{{FEATURE_FLAG_EDITOR_EXTENDED_HTML_PASTE}}",
-      'editor-cut': "{{FEATURE_FLAG_EDITOR_CUT}}"
+      'editor-html-paste': true,
+      'editor-extended-html-paste': true,
+      'editor-cut': true,
     },
     browserUpdate: {
       vs: {f:-3,c:-3},
@@ -107,12 +107,9 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     // Production build specific configuration
-    ENV.featureFlags['editor-html-paste'] =
-      '{{FEATURE_FLAG_EDITOR_HTML_PASTE}}';
-    ENV.featureFlags['editor-extended-html-paste'] =
-      '{{FEATURE_FLAG_EDITOR_EXTENDED_HTML_PASTE}}';
-    ENV.featureFlags['editor-cut'] = '{{FEATURE_FLAG_EDITOR_CUT}}';
+    ENV.featureFlags['editor-html-paste'] =  '{{FEATURE_FLAG_EDITOR_HTML_PASTE}}' === "true";
+    ENV.featureFlags['editor-extended-html-paste'] = '{{FEATURE_FLAG_EDITOR_EXTENDED_HTML_PASTE}}' === "true";
+    ENV.featureFlags['editor-cut'] = '{{FEATURE_FLAG_EDITOR_CUT}}' === "true";
   }
-
   return ENV;
 };
