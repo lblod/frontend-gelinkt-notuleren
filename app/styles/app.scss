@@ -30,7 +30,6 @@
 @import "project/s-global";
 @import "project/s-say-theme";
 
-
 // MIXINS
 @import "appuniversum/t-font-size";
 @import "appuniversum/t-sass-mq";
@@ -114,6 +113,8 @@
 @import 'project/c-editor-preview';
 @import "project/c-template";
 @import "project/c-theme";
+@import "project/c-upload";
+
 
 
 // PLUGINS
