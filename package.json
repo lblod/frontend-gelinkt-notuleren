@@ -26,8 +26,8 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
-    "@appuniversum/appuniversum": "0.0.15",
-    "@appuniversum/ember-appuniversum": "0.4.4",
+    "@appuniversum/appuniversum": "0.1.5",
+    "@appuniversum/ember-appuniversum": "0.5.4",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.1.4",

@@ -54,13 +54,6 @@
 @import "appuniversum/o-region";
 
 
-// COMPONENTS (DEPRECATED)
-/* @import 'deprecated/tasklist'; */
-/* @import 'deprecated/scrollto'; */
-/* @import 'deprecated/loading-events'; */
-/* @import 'deprecated/wizard'; */
-
-
 // COMPONENTS
 @import "ember-appuniversum/c-alert";
 @import "ember-appuniversum/c-badge";
@@ -109,13 +102,6 @@
 @import "project/c-theme";
 
 
-// PLUGINS
-@import "ember-rdfa-editor";
-@import "ember-appuniversum/p-ember-power-select";
-@import "ember-appuniversum/p-duet-datepicker";
-@import "project/p-annotations";
-
-
 // UTILITIES
 @import "appuniversum/u-align-text";
 @import "appuniversum/u-break-word";
@@ -131,6 +117,13 @@
 @import "appuniversum/u-widths";
 // Extra project specific override styles
 @import 'project/u-print';
+
+
+// PLUGINS
+@import "ember-rdfa-editor";
+@import "ember-appuniversum/p-ember-power-select";
+@import "ember-appuniversum/p-duet-datepicker";
+@import "project/p-annotations";
 
 
 // TEMPORARY HACKS AND QUICKFIXES
