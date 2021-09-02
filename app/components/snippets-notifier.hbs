@@ -1,31 +1,25 @@
 {{#if this.showCard}}
-  <div class="modal-dialog modal-dialog--snippet">
-    <div class="modal-dialog__header">
-      <h2 class="modal-dialog__title">
-          Er is relevante informatie {{!-- met als type "type" --}} uit een externe bron beschikbaar.
-      </h2>
-    </div>
-    <div class="modal-dialog__content">
-      <p class="u-spacer">Maak in de template van uw zitting een besluit aan. Daar zal u de informatie kunnen invoegen.</p>
-    </div>
-    <div class="modal-dialog__footer">
-      <button type="submit" class="button button--narrow u-spacer--bottom--tiny" {{on "click" this.close}}>Begrepen</button>
-    </div>
-  </div>
-{{/if}}
-
-{{#if this.hasErrors}}
-  <div class="modal-dialog modal-dialog--snippet">
-    <div class="modal-dialog__header">
-      <h2 class="modal-dialog__title">
-        Er is een probleem opgetreden met het ophalen van de informatie.
-      </h2>
-    </div>
-    <div class="modal-dialog__content">
-      <p>Sla uw document op en vernieuw, of neem contact op via <a href="mailto:digitaalABB@vlaanderen.be">digitaalABB@vlaanderen.be</a>.</p>
-    </div>
-    <div class="modal-dialog__footer">
-      <button type="submit" class="button button--alt button--tiny u-spacer--bottom--tiny" {{on "click" this.close}}>Begrepen</button>
-    </div>
-  </div>
+  <AuModal
+    @modalTitle="Er is relevante informatie uit een externe bron beschikbaar."
+    @modalOpen={{this.showCard}}
+    @closeModal={{this.close}} as |Modal|>
+    <Modal.Body>
+      <p>Maak in de template van uw zitting een besluit aan. Daar zal u de informatie kunnen invoegen.</p>
+    </Modal.Body>
+    <Modal.Footer>
+      <AuButton {{on "click" this.close}}>Begrepen</AuButton>
+    </Modal.Footer>
+  </AuModal>
+{{else if this.hasErrors}}
+  <AuModal
+    @modalTitle="Er is een probleem opgetreden met het ophalen van de informatie."
+    @modalOpen={{this.showCard}}
+    @closeModal={{this.close}} as |Modal|>
+    <Modal.Body>
+      <p>Sla uw document op en vernieuw, of neem contact op via <a href="mailto:digitaalABB@vlaanderen.be" class="au-c-link">digitaalABB@vlaanderen.be</a>.</p>
+    </Modal.Body>
+    <Modal.Footer>
+      <AuButton {{on "click" this.close}}>Begrepen</AuButton>
+    </Modal.Footer>
+  </AuModal>
 {{/if}}

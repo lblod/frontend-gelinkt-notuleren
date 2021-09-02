@@ -72,7 +72,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0 $au-unit-small .1rem; // Visually center the text in the button
-  border-radius: $au-button-radius;
+  border-radius: $au-radius;
   border: $au-button-border solid $au-button-contrast-color;
   white-space: nowrap;
   overflow: hidden;
@@ -468,10 +468,4 @@
 .au-c-template {
   overflow-wrap: break-word;
   word-break: break-word;
-}
-
-// Fix data-table text search
-.data-table-search .ember-text-field {
-  @extend .au-c-input;
-  @extend .au-c-input--block;
 }
