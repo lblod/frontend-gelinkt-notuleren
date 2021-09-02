@@ -33,7 +33,7 @@
     "@ember/test-helpers": "^2.1.4",
     "@glimmer/component": "^1.0.3",
     "@glimmer/tracking": "^1.0.3",
-    "@lblod/ember-acmidm-login": "^1.1.1",
+    "@lblod/ember-acmidm-login": "^1.2.0",
     "@lblod/ember-mock-login": "0.5.0",
     "@lblod/ember-rdfa-editor": "^0.47.0",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.2.1",
