@@ -72,7 +72,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0 $au-unit-small .1rem; // Visually center the text in the button
-  border-radius: $au-button-radius;
+  border-radius: $au-radius;
   border: $au-button-border solid $au-button-contrast-color;
   white-space: nowrap;
   overflow: hidden;
