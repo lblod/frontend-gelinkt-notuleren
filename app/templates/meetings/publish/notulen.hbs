@@ -1,9 +1,11 @@
 <div class="au-o-box">
-  {{#if this.initializeNotulen.isIdle}}
+  {{#if (and this.initializeNotulen.isIdle this.reloadNotulen.isIdle)}}
   <ul>
     <Signatures::Notulen::TimelineStep
       @name="notulen"
       @notulen={{this.notulen}}
+      @publishedResource={{this.publishedResource}}
+      @signedResources={{this.signedResources}}
       @errors={{this.errors}}
       @publicBehandelingUris={{this.publicBehandelingUris}}
       @behandelings={{this.behandelings}}

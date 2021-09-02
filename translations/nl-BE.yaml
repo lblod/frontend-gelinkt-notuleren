@@ -32,7 +32,17 @@ publish:
   backToMeeting: Terug naar zitting
   headingPartOne: Zitting van
   loadingMessage: Bezig met laden...
-  excerptsErrorMessage: Er zijn geen uittreksels beschikbaar
+  updatingMessage: Bezig met bijwerken...
+  decisionListErrorMessage: Er liep iets fout bij het laden van de besluitenlijst.
+  noExcerptsMessage: Er zijn geen uittreksels beschikbaar.
+  excerptErrorMessage: Er liep iets fout bij het laden van het uittreksel.
+  retry: opnieuw proberen
+  excerpts: Uittreksels
+  excerptsOverview: Alle uittreksels
+  position: Positie
+  statusLabel: Status
+  agendapoint: Agendapunt
+  publishButtonLabel: Onderteken en publiceer
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
@@ -131,6 +141,7 @@ manageAgendaZittingModal:
   orderLabel: Volgorde
   titleLabel: Titel agendapunt
   beschrijvingLabel: Beschrijving agendapunt
+  copyDescriptionLabel: Beschrijving van besluit overnemen
   geplandOpenbaar: Geplande openbaarheid
   actionsLabel: Acties
   createItemButton: Voeg agendapunt toe
@@ -228,7 +239,7 @@ timelineStep:
   printInfo: "Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd."
   secondPrintInfo: "Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt."
   publishButtonLabel: "Publiceer {name}"
-  publishNotifyButtonLabel: "Publiceer en meld {name}"
+  publishNotifyButtonLabel: "Publiceer (en meld) {name}"
   publishRestrictionInfo: "Publiceren kan enkel door personen met de rol "
   publishRestrictionRole: "publiceerder"
   publishRestrictionEnd: "."
@@ -240,7 +251,7 @@ timelineStep:
   previewInfo: "Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar "
   previewInfoEnd: ", en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie."
   notifyConsequences: Gevolgen melding
-  notifyInfo: "Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
+  notifyInfo: "Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
   localLoket: "Loket voor Lokale Besturen"
   publishWarning: "Vul de ontbrekende informatie aan om te publiceren"
 publicationConfirmation:
@@ -252,7 +263,7 @@ publicationConfirmation:
   publicationTitle: Publicatie
   publicationSubtitle: "Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:"
   reportingTitle: Melding
-  reportingSubtitle: Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
+  reportingSubtitle: Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
   reportingLink: Loket voor Lokale Besturen
   metadataTitle: Metagegevens bij publiceren
   publisherLabel: Publiceerder
@@ -304,6 +315,10 @@ manageIntermissions:
   checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   deleteButton: Verwijder onderbreking
   retainButton: Behoud onderbreking
+  beforeAp: "Voor"
+  duringAp: "Tijdens"
+  afterAp: "Na"
+  position: "Plaats"
 rdfaEditorContainer:
   defaultBusyText: Bezig met verwerken
   saving: Bezig met opslaan
@@ -328,3 +343,18 @@ dateTimePicker:
   date: Datum
   hours: Uur
   minutes: Minuten
+
+attachments:
+  attachments: Bijlagen
+  return: Document
+  attach: Voeg een bestand toe
+  drag: Sleep de bestanden naar hier om toe te voegen
+  filename: Bestandsnaam
+  filesize: Bestandsgrootte
+  download: Downloaden
+  delete: Verwijderen
+  type: Type
+  decision: Besluit
+  typePlaceholder: geen
+  regulatory: regelgevend
+  saveAndGo: Opslaan en bijlagen toevoegen

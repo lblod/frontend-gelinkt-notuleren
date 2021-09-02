@@ -31,11 +31,12 @@ export default class SignaturesTimelineStep extends Component {
   constructor(parent, args) {
     super(parent, args);
     this.initTask.perform();
+    this.expandable = this.args.isOpen ? false : true;
   }
 
   get isPublished() {
-    if(this.args.document && this.args.document.publishedResource) {
-      return !! this.args.document.publishedResource.get("id");
+    if(this.args.publishedResource) {
+      return !! this.args.publishedResource.get("id");
     }
     return false;
   }
@@ -53,8 +54,8 @@ export default class SignaturesTimelineStep extends Component {
     this.bestuurseenheid = this.currentSession.group;
     const currentUser = this.currentSession.user;
     let firstSignatureUser = null;
-    if (this.args.document) {
-      const signedResources = yield this.args.document.signedResources;
+    if (this.args.signedResources) {
+      const signedResources = yield this.args.signedResources;
       if (signedResources.length > 0) {
         this.signedResources = signedResources.sortBy('createdOn');
         firstSignatureUser = yield signedResources.firstObject.gebruiker;
@@ -133,7 +134,7 @@ export default class SignaturesTimelineStep extends Component {
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
     yield this.args.signing(signedId);
-    const signedResources = yield this.args.document.signedResources;
+    const signedResources = yield this.args.signedResources;
     this.signedResources = signedResources.sortBy('createdOn');
   }
 

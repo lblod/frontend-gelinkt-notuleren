@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import {task} from "ember-concurrency";
+import {task, all} from "ember-concurrency";
 import {action} from '@ember/object';
 import {inject as service} from '@ember/service';
 import {tracked} from 'tracked-built-ins';
@@ -9,6 +9,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
   @tracked _newItem;
   @tracked items = tracked([]);
+  changeSet = new Set();
 
   constructor(...args) {
     super(...args);
@@ -22,7 +23,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
     const firstPage = yield this.store.query('agendapunt', {
       "filter[zitting][:id:]": this.args.zittingId,
-      "page[size]": pageSize
+      "page[size]": pageSize,
+      include: "vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt"
     });
     const count = firstPage.meta.count;
     firstPage.forEach(result => agendaItems.push(result));
@@ -32,7 +34,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       const pageResults = yield this.store.query('agendapunt', {
         "filter[zitting][:id:]": this.args.zittingId,
         "page[size]": pageSize,
-        "page[number]": pageNumber
+        "page[number]": pageNumber,
+      include: "vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt"
       });
       pageResults.forEach(result => agendaItems.push(result));
       pageNumber++;
@@ -40,47 +43,6 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     this.items = tracked(agendaItems.sortBy('position'));
   }
 
-  @task
-  * saveItemTask(item) {
-    const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
-    const treatment = yield item.behandeling;
-    yield treatment.saveAndPersistDocument();
-
-    if (item.isNew) {
-      item.zitting = zitting;
-      this.items.push(item);
-    }
-    this.repositionItem(item);
-    yield this.savePositionsTask.perform();
-
-    const container = yield treatment.get("documentContainer");
-    const status = yield container.get("status");
-    if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
-      // it's not published, so we set the status
-      container.status = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
-    }
-    yield container.save();
-
-    yield item.save();
-    yield this.args.onSave();
-  }
-
-  repositionItem(item) {
-    if (item.changedAttributes()["position"]) {
-      let [oldPos, newPos] = item.changedAttributes()["position"];
-      if(!oldPos && item.isNew){
-        oldPos = this.items.length-1;
-      }
-      let position = newPos || newPos === 0 ? newPos : this.items.length;
-      if (oldPos || oldPos === 0) {
-        this.items.splice(oldPos, 1);
-        if (oldPos < position) {
-          position = position -1;
-        }
-      }
-      this.items.splice(position, 0, item);
-    }
-  }
 
   /**
    * Create a new agenda item
@@ -94,6 +56,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       geplandOpenbaar: true,
       position: this.items.length
     });
+
     agendaItem.behandeling = this.store.createRecord("behandeling-van-agendapunt", {
       openbaar: agendaItem.geplandOpenbaar,
       onderwerp: agendaItem,
@@ -104,25 +67,67 @@ export default class AgendaManagerAgendaContextComponent extends Component {
   }
 
   /**
+   * Update and persist an item. Makes sure the local tracking array,
+   * links and position properties of all items are in sync.
+   *
+   * @param {Agendapunt} item
+   */
+  @task
+  * updateItemTask(item) {
+    const treatment = yield item.behandeling;
+    yield treatment.saveAndPersistDocument();
+
+    if (item.isNew) {
+      const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
+      this.setProperty(item, "zitting", zitting);
+    }
+
+    yield this.updatePositionTask.perform(item);
+
+    const container = yield treatment.get("documentContainer");
+    const status = yield container.get("status");
+    if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
+      // it's not published, so we set the status
+      const conceptStatus = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
+      this.setProperty(container, "status", conceptStatus);
+    }
+
+    yield this.saveItemsTask.perform();
+  }
+
+  /**
    * Delete an agenda item
    * @param {Agendapunt} item the item to be deleted
    */
   @task
   * deleteItemTask(item) {
-    const index = this.items.indexOf(item);
-    this.items.splice(index, 1);
-    const behandeling = yield item.behandeling;
-    if (behandeling) {
-      const container = yield behandeling.documentContainer;
-      if (container) {
-        container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
-        yield container.save();
-      }
+    const index = item.position;
 
-      yield behandeling.destroyRecord();
+    this.items.splice(index, 1);
+
+    const treatment = yield item.behandeling;
+    if (treatment) {
+      const container = yield treatment.documentContainer;
+      if (container) {
+        const draftStatus = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
+        this.setProperty(container, "status", draftStatus);
+      }
+      yield treatment.destroyRecord();
     }
     yield item.destroyRecord();
-    yield this.args.onSave();
+    yield this.repairPositionsTask.perform();
+    yield this.saveItemsTask.perform();
+  }
+
+
+  /**
+   * Handles a rearrangement of the this.items array
+   * Takes the array index as source of truth.
+   */
+  @task
+  * onSortTask() {
+    yield this.repairPositionsTask.perform();
+    yield this.saveItemsTask.perform();
   }
 
   @task
@@ -134,21 +139,82 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     this.args.onCancel();
   }
 
+
+  /**
+   * Take item.position as source of truth and update the linked list and the this.items
+   * array to reflect the new position
+   *
+   * @param {Agendapunt} item
+   * @private
+   */
   @task
-  * onSortTask() {
-    yield this.savePositionsTask.perform();
+  * updatePositionTask(item) {
+    const position = item.position;
+
+    if(this.items[position] !== item) {
+      const oldIndex = this.items.indexOf(item);
+      if(oldIndex > -1) {
+        this.items.splice(oldIndex, 1);
+      }
+      this.items.splice(position, 0, item);
+      yield this.repairPositionsTask.perform();
+    }
+  }
+
+
+  /**
+   * Take the this.items array index as source of truth and
+   * update the item position and links
+   * Only updates when necessary, does not persist the changes
+   *
+   * @param {number} [from]
+   * @param {number} [to]
+   * @private
+   * */
+  @task
+  * repairPositionsTask(){
+    let previous = null;
+    for (const [index, item] of this.items.entries()) {
+      const previousItem = yield item.vorigeAgendapunt;
+      if(item.position !== index || previousItem !== previous) {
+        this.setProperty(item, "position", index);
+        this.setProperty(item, "vorigeAgendapunt", previous);
+        const treatment = yield item.treatment;
+        if(treatment) {
+          const previousTreatment = yield previous.treatment;
+          this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
+        }
+      }
+      previous = item;
+    }
+  }
+
+  /**
+   * Save all items with changed attributes in the array
+   * @private
+   */
+  @task
+  * saveItemsTask() {
+    yield all([...this.changeSet].map(model => model.save()));
+    this.changeSet.clear();
     yield this.args.onSave();
   }
 
-  @task
-  * savePositionsTask() {
-    let previous = null;
-    for (const [index, item] of this.items.entries()) {
-      item.position = index;
-      item.vorigeAgendapunt = previous;
-      previous = item;
-      yield item.save();
-    }
 
+  /**
+   * Set a property on an ember data model and track its changes.
+   * The reason for this is that hasDirtyAttributes does not track
+   * relationship changes.
+   *
+   * @param {Model} model
+   * @param {string} property
+   * @param {unknown} value
+   * @private
+   */
+  setProperty(model, property, value) {
+    if(value !== model.get(property)) {
+      this.changeSet.add(model);
+    }
+    model.set(property, value);
   }
 }

@@ -24,7 +24,7 @@ Router.map(function() {
   });
   this.route('contact');
   this.route('print', function() {
-    this.route('uittreksel', { path: '/uittreksel/:id' });
+    this.route('uittreksel', { path: 'uittreksel/:meeting_id/:treatment_id' });
   });
   this.route('route-not-found', {
     path: '/*wildcard'
@@ -51,7 +51,9 @@ Router.map(function() {
     this.route('publish',{path: '/:id/publish'}, function() {
       this.route('agenda');
       this.route('besluitenlijst');
-      this.route('uittreksels');
+      this.route('uittreksels', function() {
+        this.route('show', {path: '/:treatment_id'});
+      });
       this.route('notulen');
     });
   });

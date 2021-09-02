@@ -1,18 +1,21 @@
-<Signatures::TimelineStep
-  @name={{@name}}
-  @document={{@notulen}}
-  @errors={{@errors}}
-  @signing={{@signing}}
-  @publish={{@publish}}
-  @mockDocument={{this.mockNotulen}}
-  @isOpen={{this.isOpen}}
->
-  <div class="au-c-document-publish">
-    {{html-safe @zittingWrapper}}
-  </div>
-  {{#if @zittingWrapper}}
-    <EmberWormhole @to={{@behandelingContainerId}}>
-      <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{@togglePublicationStatus}} @toggleAll={{@toggleAllPublicationStatus}}/>
-    </EmberWormhole>
-  {{/if}}
-</Signatures::TimelineStep>
+<li>
+  <Signatures::TimelineStep
+    @name={{@name}}
+    @signedResources={{@signedResources}}
+    @publishedResource={{@publishedResource}}
+    @errors={{@errors}}
+    @signing={{@signing}}
+    @publish={{@publish}}
+    @mockDocument={{this.mockNotulen}}
+    @isOpen={{true}}
+  >
+    <div class="au-c-document-publish">
+      {{html-safe @zittingWrapper}}
+    </div>
+    {{#if @zittingWrapper}}
+      <EmberWormhole @to={{@behandelingContainerId}}>
+        <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{@togglePublicationStatus}} @toggleAll={{@toggleAllPublicationStatus}} />
+      </EmberWormhole>
+    {{/if}}
+  </Signatures::TimelineStep>
+</li>

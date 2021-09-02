@@ -62,4 +62,8 @@ inflector.irregular('blockchain-status', 'blockchain-statuses');
 inflector.irregular('concept', 'concepts');
 inflector.irregular('concept-scheme', 'concept-schemes');
 inflector.irregular('intermission', 'intermissions');
+inflector.irregular('agenda-position', 'agenda-positions');
+inflector.irregular('file', 'files');
+inflector.irregular('attachment', 'attachments');
+inflector.irregular('extract-preview', 'extract-previews');
 inflector.uncountable('sync');

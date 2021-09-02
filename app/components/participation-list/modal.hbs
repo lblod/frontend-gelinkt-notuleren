@@ -1,52 +1,49 @@
-{{#if @show}}
-  <div>
-    <AuModal
-      @modalTitle="Beheer aanwezigen"
-      @modalOpen={{@show}}
-      @closeModal={{fn (mut @show) false}} as |Modal| >
-      <Modal.Body>
-        {{#if (or (eq this.fetchData.performCount 0) this.fetchData.isRunning)}}
-          <p>{{t "participationList.loadingTitle"}}</p>
-          <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
-        {{else}}
-          <div class="au-o-flow">
-            <div>
-              <AuLabel>
-                {{t "participationListModal.voorzitterLabel"}}
-              </AuLabel>
-              <ParticipationList::MandatarisSelector
-                @onSelect={{this.selectVoorzitter}}
-                @mandataris={{this.voorzitter}}
+<AuModal
+        @modalTitle="Beheer aanwezigen"
+        @modalOpen={{@show}}
+        @closeModal={{this.onCancel}}
+        as |Modal|>
+  <Modal.Body>
+    <div class="au-o-flow">
+      <div>
+        <AuLabel>
+          {{t "participationListModal.voorzitterLabel"}}
+        </AuLabel>
+        <ParticipationList::MandatarisSelector
+                @onSelect={{this.selectChairman}}
+                @mandataris={{this.chairman}}
                 @meeting={{@meeting}}
                 @bestuursorgaan={{@bestuursorgaan}}
-              />
-            </div>
-            <div>
-              <AuLabel>Secretaris van de zitting</AuLabel>
-              <ParticipationList::FunctionarisSelector
-                @onSelect={{this.selectSecretaris}}
-                @functionaris={{this.secretaris}}
+        />
+      </div>
+      <div>
+        <AuLabel>Secretaris van de zitting</AuLabel>
+        <ParticipationList::FunctionarisSelector
+                @onSelect={{this.selectSecretary}}
+                @functionaris={{this.secretary}}
                 @meeting={{@meeting}}
-              />
-            </div>
-            <div>
-              <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
-              <ParticipationList::MandatarissenTable
-                @possibleParticipants={{@possibleParticipants}}
-                @selectedMandatees={{this.selectedMandatees}}
-                @toggleParticipation={{this.toggleParticipation}}
-              />
-            </div>
-          </div>
-        {{/if}}
-        {{yield}}
-      </Modal.Body>
-      <Modal.Footer>
-        <AuButtonGroup>
-          <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
-          <AuButton @skin="secondary" {{on "click" this.togglePopup}}>{{t "participationListModal.cancelButton"}}</AuButton>
-        </AuButtonGroup>
-      </Modal.Footer>
-    </AuModal>
-  </div>
-{{/if}}
+        />
+      </div>
+      <div>
+        <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
+        <ParticipationList::MandatarissenTable @toggleParticipant={{this.toggleParticipant}}
+                                               as |Table|>
+          {{#each this.participants as |participant| }}
+            <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}}/>
+          {{else}}
+            <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
+          {{/each}}
+        </ParticipationList::MandatarissenTable>
+      </div>
+    </div>
+    {{yield}}
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" this.onCancel}}>
+        {{t "participationListModal.cancelButton"}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>

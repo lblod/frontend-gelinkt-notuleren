@@ -32,7 +32,17 @@ publish:
   backToMeeting: Back to meeting
   headingPartOne: Meeting on
   loadingMessage: Loading...
-  excerptsErrorMessage: There are no excerpts available
+  updatingMessage: Updating...
+  decisionListErrorMessage: Something went wrong while fetching the decision list.
+  noExcerptsMessage: There are no excerpts available.
+  retry: "retry"
+  excerpts: Excerpts
+  excerptsOverview: All excerpts
+  position: Position
+  statusLabel: Status
+  agendapoint: Agendapoint
+  excerptErrorMessage: Something went wrong fetching the excerpt.
+  publishButtonLabel: Sign and publish
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save
@@ -131,6 +141,7 @@ manageAgendaZittingModal:
   orderLabel: Order
   titleLabel: Agenda item title
   beschrijvingLabel: Agenda item description
+  copyDescriptionLabel: Copy description from decision
   geplandOpenbaar: Planned visibility
   actionsLabel: Actions
   createItemButton: Add agenda item
@@ -229,7 +240,7 @@ timelineStep:
   printInfo: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
   secondPrintInfo: "Printing is only possible after the document has been signed. This print will not be made available externally."
   publishButtonLabel: "Publish {name}"
-  publishNotifyButtonLabel: "Publish and notify {name}"
+  publishNotifyButtonLabel: "Publish (and notify) {name}"
   publishRestrictionInfo: "Publishing is only possible by persons with the "
   publishRestrictionRole: "publisher"
   publishRestrictionEnd: " role."
@@ -241,7 +252,7 @@ timelineStep:
   previewInfo: "The document will be published as seen in the preview above to "
   previewInfoEnd: ", and will be publicly available to anyone, without authentication."
   notifyConsequences: Consequences notification
-  notifyInfo: "A notification will be sent for this document to the authoritative government and will be visible in the "
+  notifyInfo: "If applicable, a notification will be sent for this document to the authoritative government and will be visible in the "
   localLoket: "Loket voor Lokale Besturen"
   publishWarning: "Complete the missing information to publish"
 publicationConfirmation:
@@ -253,7 +264,7 @@ publicationConfirmation:
   publicationTitle: Publication
   publicationSubtitle: "The document and its content are made public on the publication page, freely accessible to citizens:"
   reportingTitle: Reporting
-  reportingSubtitle: The document will be automatically reported to the supervising authority, and will be visible in the
+  reportingSubtitle: If applicable, document will be automatically reported to the supervising authority, and will be visible in the
   reportingLink: Loket voor Lokale Besturen
   metadataTitle: Publishing metadata
   publisherLabel: Publisher
@@ -305,6 +316,10 @@ manageIntermissions:
   checkboxLabel: I understand that the intermission will be irreversibly removed.
   retainButton: Retain intermission
   deleteButton: Delete intermission
+  beforeAp: "Intermission before agenda item:"
+  duringAp: "Intermission during agenda item:"
+  afterAp: "Intermission after agenda item:"
+  position: "Position"
 rdfaEditorContainer:
   defaultBusyText: Processing
   saving: Saving
@@ -329,3 +344,18 @@ dateTimePicker:
   date: Date
   hours: Hour
   minutes: Minutes
+
+attachments:
+  attachments: Attachments
+  return: Document
+  attach: Attach a file
+  drag: Drag a file here to attach it
+  filename: Filename
+  filesize: Filesize
+  download: Download
+  delete: Delete
+  type: Type
+  decision: Decision
+  typePlaceholder: none
+  regulatory: regulatory
+  saveAndGo: Save and go to attachments

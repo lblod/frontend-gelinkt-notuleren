@@ -1,5 +1,5 @@
 <Extracts::PrintView
-        @versionedTreatment={{this.model}}
-        @backLinkRoute="meetings.publish.uittreksels"
-        @model={{this.model.zitting.id}}
+        @versionedTreatment={{@model.document}}
+        @backLinkRoute="meetings.publish.uittreksels.show"
+        @linkModels={{array @model.meetingId @model.treatmentId}}
 />
