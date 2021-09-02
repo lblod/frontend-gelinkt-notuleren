@@ -34,8 +34,8 @@
       {{#if this.fetchIntermissions.lastSuccessful}}
         {{#each this.intermissions as |intermission|}}
           <tr>
-            <td>{{moment-format intermission.startedAt "DD/MM/YYYY hh:mm"}}</td>
-            <td>{{moment-format intermission.endedAt "DD/MM/YYYY hh:mm"}}</td>
+            <td>{{moment-format intermission.startedAt "DD/MM/YYYY HH:mm"}}</td>
+            <td>{{moment-format intermission.endedAt "DD/MM/YYYY HH:mm"}}</td>
             <td>
               {{#if intermission.agendaPosition}}
                 {{#if (eq intermission.agendaPosition.position.label "during")}}
