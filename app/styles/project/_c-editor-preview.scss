@@ -111,6 +111,15 @@
   }
 }
 
+.au-c-editor-preview-treatment-toggle-box {
+  border: .1rem solid $au-gray-300;
+  background-color: $au-gray-200;
+
+  .au-c-toggle-switch__toggle {
+    background-color: $au-gray-300;
+  }
+}
+
 .au-c-editor-preview-treatment__info {
   transition: all 200ms;
   padding: $au-unit;
