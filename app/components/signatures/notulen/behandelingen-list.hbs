@@ -1,10 +1,4 @@
-<button type="button" {{on "click" @toggleAll}}>
-  {{#if @allBehandelingPublic}}
-    {{t "publish.toggleAllPrivateLabel"}}
-  {{else}}
-    {{t "publish.toggleAllPublicLabel"}}
-  {{/if}}
-</button>
+<AuToggleSwitch @label={{t "publish.toggleAllPublicLabel"}} @checked={{@allBehandelingPublic}} @onChange={{fn @toggleAll}} />
 {{#each @prepublishedBehandelingen as |preview|}}
   <div class="au-c-editor-preview-treatment {{if (contains preview.behandeling @publicBehandelingUris) "au-c-editor-preview-treatment--public" "au-c-editor-preview-treatment--private"}}">
     <div class="au-o-box au-c-editor-preview-treatment__info {{if (contains @preview.behandeling @publicBehandelingUris) "au-c-editor-preview-treatment__info--public" "au-c-editor-preview-treatment__info--private"}} ">

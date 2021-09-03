@@ -44,7 +44,6 @@ publish:
   excerptErrorMessage: Something went wrong fetching the excerpt.
   publishButtonLabel: Sign and publish
   toggleAllPublicLabel: Toggle all public
-  toggleAllPrivateLabel: Toggle all private
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save

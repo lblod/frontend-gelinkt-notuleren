@@ -44,7 +44,6 @@ publish:
   agendapoint: Agendapunt
   publishButtonLabel: Onderteken en publiceer
   toggleAllPublicLabel: Alles publiek
-  toggleAllPrivateLabel: Alles niet publiek
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
