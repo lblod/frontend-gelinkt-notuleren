@@ -43,6 +43,7 @@ publish:
   agendapoint: Agendapoint
   excerptErrorMessage: Something went wrong fetching the excerpt.
   publishButtonLabel: Sign and publish
+  toggleAllPublicLabel: Toggle all public
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save
