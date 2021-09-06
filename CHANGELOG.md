@@ -1,5 +1,13 @@
 
 
+## 2.13.0 (2021-09-03)
+
+#### :rocket: Enhancement
+* [#171](https://github.com/lblod/frontend-gelinkt-notuleren/pull/171) added a toggle to toggle all agendapoints to be public/private in notulen preview ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.12.0 (2021-09-01)
 
 #### :rocket: Enhancement
