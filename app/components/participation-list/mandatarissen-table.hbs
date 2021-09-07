@@ -1,17 +1,17 @@
-<table class="data-table data-table--lined data-table--zebra au-c-table-border">
+<table class="au-c-table-border">
   <thead>
-  <tr>
-    <th>{{t "participationListModalTable.naamLabel"}}</th>
-    <th>{{t "participationListModalTable.functieLabel"}}</th>
-    <th>{{t "participationListModalTable.geboortedatumLabel"}}</th>
-    <th>
-      <div class="grid">
-        <div class="col--4-12">
-          {{t "participationListModalTable.actieLabel"}}
+    <tr>
+      <th>{{t "participationListModalTable.naamLabel"}}</th>
+      <th>{{t "participationListModalTable.functieLabel"}}</th>
+      <th>{{t "participationListModalTable.geboortedatumLabel"}}</th>
+      <th>
+        <div class="grid">
+          <div class="col--4-12">
+            {{t "participationListModalTable.actieLabel"}}
+          </div>
         </div>
-      </div>
-    </th>
-  </tr>
+      </th>
+    </tr>
   </thead>
   <tbody>
   {{yield (hash Row=(component "participation-list/mandataris-row" toggle=@toggleParticipant))}}
