@@ -21,7 +21,7 @@ export default class MeetingsPublishUittrekselsRoute extends Route.extend(DataTa
   mergeQueryOptions(params) {
     console.log(params);
     const query = {
-      include: 'behandeling.document-container.status',
+      include: 'behandeling.versioned-behandeling',
       filter: { zitting: { ":id:": this.meetingId}}
     };
 
