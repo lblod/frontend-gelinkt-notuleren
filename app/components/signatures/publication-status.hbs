@@ -1,3 +1,7 @@
-<AuPill @skin={{this.publicationStatus.color}} class="au-u-margin-left">
-  {{this.publicationStatus.label}}
-</AuPill>
+<div {{did-insert loadResource}}>
+  {{#if this.ready}}
+    <AuPill @skin={{this.publicationStatus.color}} class="au-u-margin-left" >
+      {{this.publicationStatus.label}}
+    </AuPill>
+  {{/if}}
+</div>
