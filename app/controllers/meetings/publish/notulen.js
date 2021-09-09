@@ -34,10 +34,10 @@ export default class MeetingsPublishNotulenController extends Controller {
       include: 'signed-resources,published-resource'
     });
     if(versionedNotulens.length) {
+      let notulenSet = false;
       yield Promise.all(versionedNotulens.map(async (notulen) => {
         const publishedResource = await notulen.publishedResource;
         const signedResources = await notulen.signedResources;
-        let notulenSet = false;
         if(publishedResource) {
           this.publishedResource = publishedResource;
           this.publicBehandelingUris = notulen.publicBehandelingen || [];
