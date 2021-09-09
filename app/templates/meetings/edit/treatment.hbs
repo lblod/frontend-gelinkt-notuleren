@@ -23,24 +23,26 @@
     {{/if}}
   </Modal.Body>
   <Modal.Footer>
-    {{#if this.uploading}}
-      <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
-        <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" this.toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
-          {{t "attachments.return"}}
-        </AuButton>
-        <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
-          {{t "attachments.attachments"}} (<strong>{{this.documentContainer.attachments.length}}</strong>)
-        </AuButton>
-      </AuButtonGroup>
-    {{else}}
-      <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
-        <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
-          {{t "attachments.return"}}
-        </AuButton>
-        <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
-          {{t "attachments.saveAndGo"}} (<strong>{{this.documentContainer.attachments.length}}</strong>)
-        </AuButton>
-      </AuButtonGroup>
+    {{#if (feature-flag 'attachments')}}
+      {{#if this.uploading}}
+        <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+          <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" this.toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
+            {{t "attachments.return"}}
+          </AuButton>
+          <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
+            {{t "attachments.attachments"}} (<strong>{{this.documentContainer.attachments.length}}</strong>)
+          </AuButton>
+        </AuButtonGroup>
+      {{else}}
+        <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+          <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
+            {{t "attachments.return"}}
+          </AuButton>
+          <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
+            {{t "attachments.saveAndGo"}} (<strong>{{this.documentContainer.attachments.length}}</strong>)
+          </AuButton>
+        </AuButtonGroup>
+      {{/if}}
     {{/if}}
     <AuButtonGroup>
       <AuButton @disabled={{this.saveDocumentTask.isRunning}}

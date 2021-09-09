@@ -60,7 +60,7 @@
           </AuButton>
         </AuButtonGroup>
       {{else}}
-        {{#if @toggleUploadAndSave}}
+        {{#if (and @toggleUploadAndSave (feature-flag 'attachments'))}}
           <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
             <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
               {{t "attachments.return"}}

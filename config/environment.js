@@ -39,7 +39,8 @@ module.exports = function (environment) {
     featureFlags: {
       'language-select': false,
       'editor-html-paste': true,
-      'editor-extended-html-paste': true
+      'editor-extended-html-paste': true,
+      'attachments': false
     },
     browserUpdate: {
       vs: {f:-3,c:-3},
