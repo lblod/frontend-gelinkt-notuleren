@@ -14,6 +14,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked publicBehandelingUris = [];
   @tracked behandelings;
+  @tracked allBehandelingPublic = false;
   @service publish;
   @service muTask;
 
@@ -157,6 +158,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     });
 
     this.notulen.set('body', div.innerHTML);
+    this.allBehandelingPublic = this.behandelings.length === this.publicBehandelingUris.length;
   }
 
   @action
@@ -167,5 +169,15 @@ export default class MeetingsPublishNotulenController extends Controller {
     else
       this.publicBehandelingUris.pushObject(uri);
     this.updateNotulenPreview();
+  }
+  @action
+  toggleAllPublicationStatus() {
+    if(!this.allBehandelingPublic) {
+      this.publicBehandelingUris = this.behandelings.map((behandeling) => behandeling.behandeling);
+      this.updateNotulenPreview();
+    } else {
+      this.publicBehandelingUris = [];
+      this.updateNotulenPreview();
+    }
   }
 }

@@ -72,7 +72,7 @@
   display: inline-flex;
   align-items: center;
   padding: 0 $au-unit-small .1rem; // Visually center the text in the button
-  border-radius: $au-button-radius;
+  border-radius: $au-radius;
   border: $au-button-border solid $au-button-contrast-color;
   white-space: nowrap;
   overflow: hidden;
@@ -352,7 +352,18 @@
 
 // Quick fix for standalone tables
 .au-c-table-border {
+  @extend .au-c-data-table__table;
+  @extend .au-c-data-table__table--small;
   border: .1rem solid $au-gray-300;
+
+  thead {
+    border-bottom: .1rem solid $au-gray-300;
+  }
+
+  th,
+  td {
+    padding: $au-unit-tiny !important;
+  }
 }
 
 // Quick fix for button group
@@ -406,6 +417,7 @@
   .au-c-modal__footer {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 
@@ -417,16 +429,54 @@
   }
 }
 
+// Quickfix for inline button group
+.au-c-button-group--inline {
+  align-items: center;
+
+  .au-c-button {
+    display: inline-flex;
+  }
+
+  .au-c-button.is-active {
+    user-select: none;
+  }
+
+  .au-c-button.is-active:hover {
+    box-shadow: none;
+    border-color: $au-gray-400;
+  }
+}
+
+// Fix data-table header on chrome
+.au-c-data-table__header th {
+  box-shadow: inset 0 -0.2rem 0 0 $au-gray-300;
+}
+
+// Custom select
+.au-c-custom-select {
+  @include au-font-size($au-base);
+  font-family: $au-font;
+  width: 100%;
+  padding: $au-unit-tiny;
+  background-color: $au-white;
+  border: 1px solid $au-gray-400;
+  border-radius: .2rem;
+}
+
+.au-c-custom-select-cell {
+  min-width: 150px;
+}
+
+// Fix data table search
+.au-c-data-table .data-table-search input {
+  @extend .au-c-input;
+  @extend .au-c-input--block;
+}
+
 // FIX NBSP ISSUE
 .say-content,
 .au-c-editor-preview,
 .au-c-template {
   overflow-wrap: break-word;
   word-break: break-word;
-}
-
-// Fix data-table text search
-.data-table-search .ember-text-field {
-  @extend .au-c-input;
-  @extend .au-c-input--block;
 }

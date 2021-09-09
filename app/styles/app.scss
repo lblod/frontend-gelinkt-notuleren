@@ -30,7 +30,6 @@
 @import "project/s-global";
 @import "project/s-say-theme";
 
-
 // MIXINS
 @import "appuniversum/t-font-size";
 @import "appuniversum/t-sass-mq";
@@ -52,20 +51,6 @@
 @import "appuniversum/o-grid";
 @import "appuniversum/o-layout";
 @import "appuniversum/o-region";
-
-
-// WU COMPONENTS (DEPRECATED)
-@import 'ember-vo-webuniversum';
-// @import 'ember-vo-webuniversum-data-table'; // This imports the ember-data-table styles which make <duet-date-picker> not render correctly
-@import 'ember-power-select';
-
-
-
-// COMPONENTS (DEPRECATED)
-@import 'deprecated/tasklist';
-@import 'deprecated/scrollto';
-@import 'deprecated/loading-events';
-@import 'deprecated/wizard';
 
 
 // COMPONENTS
@@ -114,13 +99,8 @@
 @import 'project/c-editor-preview';
 @import "project/c-template";
 @import "project/c-theme";
+@import "project/c-upload";
 
-
-// PLUGINS
-@import "ember-rdfa-editor";
-@import "ember-appuniversum/p-ember-power-select";
-@import "ember-appuniversum/p-duet-datepicker";
-@import "project/p-annotations";
 
 
 // UTILITIES
@@ -138,6 +118,13 @@
 @import "appuniversum/u-widths";
 // Extra project specific override styles
 @import 'project/u-print';
+
+
+// PLUGINS
+@import "ember-rdfa-editor";
+@import "ember-appuniversum/p-ember-power-select";
+@import "ember-appuniversum/p-duet-datepicker";
+@import "project/p-annotations";
 
 
 // TEMPORARY HACKS AND QUICKFIXES

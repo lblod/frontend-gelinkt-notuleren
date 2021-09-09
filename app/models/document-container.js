@@ -10,4 +10,5 @@ export default class DocumentContainerModel extends Model {
   @hasMany('versioned-notulen') versionedNotulen;
   @hasMany('versioned-besluiten-lijst') versionedBesluitenLijsten;
   @hasMany('versioned-behandelingen') versionedBehandelingen;
+  @hasMany('attachment', {inverse: "documentContainer"}) attachments;
 }

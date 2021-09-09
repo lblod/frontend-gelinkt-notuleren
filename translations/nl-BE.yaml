@@ -43,6 +43,7 @@ publish:
   statusLabel: Status
   agendapoint: Agendapunt
   publishButtonLabel: Onderteken en publiceer
+  toggleAllPublicLabel: Maak de inhoud van alle agendapunten publiek
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
@@ -343,3 +344,18 @@ dateTimePicker:
   date: Datum
   hours: Uur
   minutes: Minuten
+
+attachments:
+  attachments: Bijlagen
+  return: Document
+  attach: Voeg een bestand toe
+  drag: Sleep de bestanden naar hier om toe te voegen
+  filename: Bestandsnaam
+  filesize: Bestandsgrootte
+  download: Downloaden
+  delete: Verwijderen
+  type: Type
+  decision: Besluit
+  typePlaceholder: geen
+  regulatory: regelgevend
+  saveAndGo: Opslaan en bijlagen toevoegen

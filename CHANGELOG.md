@@ -1,4 +1,29 @@
 
+
+## 2.13.0 (2021-09-03)
+
+#### :rocket: Enhancement
+* [#171](https://github.com/lblod/frontend-gelinkt-notuleren/pull/171) added a toggle to toggle all agendapoints to be public/private in notulen preview ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.12.0 (2021-09-01)
+
+#### :rocket: Enhancement
+* [#150](https://github.com/lblod/frontend-gelinkt-notuleren/pull/150) full support for file attachments ([@nvdk](https://github.com/nvdk))
+* [#157](https://github.com/lblod/frontend-gelinkt-notuleren/pull/157) Improve file upload UI ([@Asergey91](https://github.com/Asergey91))
+* [#152](https://github.com/lblod/frontend-gelinkt-notuleren/pull/152) Feature/file upload ([@Asergey91](https://github.com/Asergey91))
+* [#143](https://github.com/lblod/frontend-gelinkt-notuleren/pull/143) Feature/file upload ([@Asergey91](https://github.com/Asergey91))
+
+#### :house: Internal
+* [#168](https://github.com/lblod/frontend-gelinkt-notuleren/pull/168) Bump editor to v0.47.0 ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 3
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.11.0 (2021-08-30)
 
 #### :rocket: Enhancement
