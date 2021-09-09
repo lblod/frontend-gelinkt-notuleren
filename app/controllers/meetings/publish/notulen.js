@@ -34,6 +34,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       include: 'signed-resources,published-resource'
     });
     if(versionedNotulens.length) {
+      let notulenSet = false;
       yield Promise.all(versionedNotulens.map(async (notulen) => {
         const publishedResource = await notulen.publishedResource;
         const signedResources = await notulen.signedResources;
@@ -41,10 +42,11 @@ export default class MeetingsPublishNotulenController extends Controller {
           this.publishedResource = publishedResource;
           this.publicBehandelingUris = notulen.publicBehandelingen || [];
           this.notulen = notulen;
+          notulenSet = true;
         }
         if(signedResources.length) {
           this.signedResources = signedResources;
-          if(!this.notulen) {
+          if(!notulenSet) {
             this.notulen = notulen;
           }
         }
