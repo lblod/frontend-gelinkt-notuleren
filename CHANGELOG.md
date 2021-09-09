@@ -1,5 +1,30 @@
 
 
+
+## 2.14.0 (2021-09-09)
+
+#### :rocket: Enhancement
+* [#177](https://github.com/lblod/frontend-gelinkt-notuleren/pull/177) Calculated status based on the actual publication status of the extract ([@lagartoverde](https://github.com/lagartoverde))
+* [#171](https://github.com/lblod/frontend-gelinkt-notuleren/pull/171) added a toggle to toggle all agendapoints to be public/private in notulen preview ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#178](https://github.com/lblod/frontend-gelinkt-notuleren/pull/178) Fix notulen was not correctly reloaded under a very specific scenario ([@lagartoverde](https://github.com/lagartoverde))
+* [#180](https://github.com/lblod/frontend-gelinkt-notuleren/pull/180) [HOTFIX] Add updated items to changeset  ([@nvdk](https://github.com/nvdk))
+* [#175](https://github.com/lblod/frontend-gelinkt-notuleren/pull/175) Fixed page numbers in extract publication table ([@lagartoverde](https://github.com/lagartoverde))
+* [#174](https://github.com/lblod/frontend-gelinkt-notuleren/pull/174) Add styling for tables still relying on webuniversum css ([@Dietr](https://github.com/Dietr))
+
+#### :house: Internal
+* [#176](https://github.com/lblod/frontend-gelinkt-notuleren/pull/176) Hide attachments behind feature flag ([@lagartoverde](https://github.com/lagartoverde))
+* [#181](https://github.com/lblod/frontend-gelinkt-notuleren/pull/181) Remove requirebranch config ([@abeforgit](https://github.com/abeforgit))
+* [#86](https://github.com/lblod/frontend-gelinkt-notuleren/pull/86) remove vo-webuniversum ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 2.13.0 (2021-09-03)
 
 #### :rocket: Enhancement
