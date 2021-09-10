@@ -40,6 +40,7 @@ module.exports = function (environment) {
       'language-select': false,
       'editor-html-paste': true,
       'editor-extended-html-paste': true,
+      'acmidm-switch': false
       'attachments': false
     },
     browserUpdate: {
@@ -62,7 +63,8 @@ module.exports = function (environment) {
           baseUrl: "{{OAUTH_BASE_URL}}",
           scope: 'openid rrn vo profile abb_gelinktNotuleren',
           redirectUri: "{{OAUTH_REDIRECT_URL}}",
-          logoutUrl: "{{OAUTH_LOGOUT_URL}}"
+          logoutUrl: "{{OAUTH_LOGOUT_URL}}",
+          returnUrl: "{{OAUTH_SWITCH_URL}}"
         }
       }
     },
