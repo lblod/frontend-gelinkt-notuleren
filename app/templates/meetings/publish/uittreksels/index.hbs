@@ -1,4 +1,4 @@
-<AuDataTable @content={{this.model}} @noDataMessage={{t "publish.noExcerptsMessage"}} @sort={{this.sort}} @page={{this.page}} @class="container-flex--contain" as |table|>
+<AuDataTable @content={{this.model}} @noDataMessage={{t "publish.noExcerptsMessage"}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
   <table.menu as |menu|>
     <menu.general>
       <AuToolbar @size="large">
@@ -23,7 +23,9 @@
     <c.body as  |agendapoint|>
       <td>{{inc agendapoint.position}}</td>
       <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{agendapoint.titel}}</AuLink></td>
-      <td><EditorStatusPill @status={{agendapoint.behandeling.documentContainer.status}} /></td>
+      <td>
+        <Signatures::PublicationStatus @versionedResource={{agendapoint.behandeling.versionedBehandeling}} />
+      </td>
       <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right">{{t 'publish.publishButtonLabel'}}</AuLink></td>
     </c.body>
   </table.content>

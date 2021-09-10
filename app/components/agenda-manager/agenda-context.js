@@ -92,6 +92,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       this.setProperty(container, "status", conceptStatus);
     }
 
+    this.changeSet.add(item);
     yield this.saveItemsTask.perform();
   }
 
