@@ -40,7 +40,7 @@ module.exports = function (environment) {
       'language-select': false,
       'editor-html-paste': true,
       'editor-extended-html-paste': true,
-      'acmidm-switch': false
+      'acmidm-switch': false,
       'attachments': false
     },
     browserUpdate: {
