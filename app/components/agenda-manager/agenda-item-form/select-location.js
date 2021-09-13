@@ -35,5 +35,7 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
     this.args.model[this.args.for] = value.position + 1;
   }
 
-
+  searchMatcher(agendapoint, term) {
+    return `${agendapoint.position + 1}. ${agendapoint.titel}`.indexOf(term);
+  }
 }
