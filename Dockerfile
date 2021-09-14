@@ -10,5 +10,5 @@ RUN ember build -prod
 
 FROM semtech/ember-proxy-service:1.5.1
 ENV STATIC_FOLDERS_REGEX "^/(assets|font|files|handleiding|@appuniversum)/"
-COPY ./proxy/torii-authorization.conf /config/torii-authorization.conf
+COPY ./proxy/* /config/
 COPY --from=builder /app/dist /app
