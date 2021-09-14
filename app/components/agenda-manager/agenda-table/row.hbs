@@ -21,11 +21,8 @@
 {{else}}
   <DraggableObject @tagName="tr" @content={{@item}} @isSortable={{true}}>
     <td>
-      <AuButton @skin="tertiary" class="au-u-cursor-inherit">
-        <span class="au-u-hidden-visually"></span>
-        <span>
-          <i class="fa fa-bars"></i>
-        </span>
+      <AuButton @icon="drag" @skin="tertiary" @hideText={{true}} class="au-c-button--drag">
+        Sleep
       </AuButton>
     </td>
     <td>
