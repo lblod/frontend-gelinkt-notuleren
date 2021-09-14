@@ -1,6 +1,21 @@
 
 
 
+## 2.15.0 (2021-09-14)
+
+#### :rocket: Enhancement
+* [#172](https://github.com/lblod/frontend-gelinkt-notuleren/pull/172) Feature/acmidm switch ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#183](https://github.com/lblod/frontend-gelinkt-notuleren/pull/183) bugfix: allow large file uploads ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#184](https://github.com/lblod/frontend-gelinkt-notuleren/pull/184) Fix/drag icon ([@Dietr](https://github.com/Dietr))
+
+#### Committers: 2
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.14.0 (2021-09-09)
 
 #### :rocket: Enhancement
