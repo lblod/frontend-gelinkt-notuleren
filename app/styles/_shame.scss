@@ -102,6 +102,17 @@
   }
 }
 
+// Drag button
+.au-c-button--drag {
+  cursor: grab;
+
+  .au-c-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    bottom: 0;
+  }
+}
+
 // Data table quick fix
 // @TODO port to appuniversum
 .au-c-data-table__header th {
@@ -390,11 +401,6 @@
 // Fix missing u-hidden
 .u-hidden {
   @extend .au-u-hidden-visually;
-}
-
-// Cursor utils
-.au-u-cursor-inherit {
-  cursor: inherit;
 }
 
 // Overrides for editor modal
