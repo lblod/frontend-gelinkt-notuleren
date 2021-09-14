@@ -363,7 +363,18 @@
 
 // Quick fix for standalone tables
 .au-c-table-border {
+  @extend .au-c-data-table__table;
+  @extend .au-c-data-table__table--small;
   border: .1rem solid $au-gray-300;
+
+  thead {
+    border-bottom: .1rem solid $au-gray-300;
+  }
+
+  th,
+  td {
+    padding: $au-unit-tiny !important;
+  }
 }
 
 // Quick fix for button group
