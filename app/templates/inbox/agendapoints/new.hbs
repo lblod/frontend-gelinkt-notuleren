@@ -1,0 +1,23 @@
+{{page-title (t "inbox.agendapoints.new.title")}}
+<DocumentCreator @onRollback={{this.cancelAgendapointCreation}} @onCreate={{this.redirectToAgendapoint}} as |creator|>
+  <AuModal
+    @modalTitle={{t "inbox.agendapoints.new.title"}}
+    @modalOpen={{true}}
+    @closeModal={{creator.rollback}}
+    as |Modal|
+  >
+    <Modal.Body>
+      <creator.form />
+    </Modal.Body>
+    <Modal.Footer>
+      <AuButtonGroup>
+        <AuButton {{on "click" creator.create}} @isLoading={{creator.isSaving}}>
+          {{t "inbox.agendapoints.new.create"}}
+        </AuButton>
+        <AuButton {{on "click" creator.rollback}} @skin="secondary">
+          {{t "inbox.agendapoints.new.cancel"}}
+        </AuButton>
+      </AuButtonGroup>
+    </Modal.Footer>
+  </AuModal>
+</DocumentCreator>

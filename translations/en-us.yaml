@@ -25,7 +25,10 @@ inbox:
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
-    new: Create agendapoint
+    new:
+      title: Create agendapoint
+      create: Save
+      cancel: Back
   trash:
     title: Recycle bin
 publish:

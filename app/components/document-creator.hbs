@@ -1,0 +1,24 @@
+{{#if this.ensureTemplates.isRunning}}
+  {{yield (hash
+    form=(component "au-loader")
+    create=this.create
+    rollback=this.rollback
+    )
+  }}
+{{else}}
+  {{yield (hash
+    form=
+    (component
+    "document-creator/form"
+    title=this.title
+    invalidTitle=this.invalidTitle
+    updateTitle=this.updateTitle
+    selectedTemplate=this.template
+    options=this.templateOptions
+    onSelectTemplate=this.onSelectTemplate
+    )
+    create=this.create
+    rollback=this.rollback
+    )
+  }}
+{{/if}}
