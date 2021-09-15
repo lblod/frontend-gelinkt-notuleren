@@ -57,6 +57,7 @@
           </AuButton>
           <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
             {{t "attachments.attachments"}}
+            (<strong>{{if @documentContainer.attachments.length @documentContainer.attachments.length 0}}</strong>)
           </AuButton>
         </AuButtonGroup>
       {{else}}
@@ -67,6 +68,7 @@
             </AuButton>
             <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform @toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
               {{t "attachments.saveAndGo"}}
+              (<strong>{{if @documentContainer.attachments.length @documentContainer.attachments.length 0}}</strong>)
             </AuButton>
           </AuButtonGroup>
         {{/if}}
