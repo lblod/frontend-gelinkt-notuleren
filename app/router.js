@@ -7,6 +7,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
+  this.route('switch-login');
   this.route('inbox', function() {
     this.route('trash');
     this.route('agendapoints');
