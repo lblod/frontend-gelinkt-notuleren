@@ -21,12 +21,12 @@ export default class DocumentAttachmentsComponent extends Component {
   }];
 
   @tracked selectedType;
-  
+
   @task
   *onSelectType(attachment, event){
     const selectedId=event.target.value;
     if(!selectedId){
-      attachment.type=null;  
+      attachment.type=null;
     }
     else{
       const concept=yield this.store.findRecord('concept', selectedId);
@@ -52,7 +52,8 @@ export default class DocumentAttachmentsComponent extends Component {
   }
 
   @task
-  *uploadedAttachement(file) {
+  *uploadedAttachement(fileId) {
+    const file = yield this.store.findRecord('file', fileId);
     const documentContainer = yield this.args.documentContainer;
     const newAttachment = yield this.store.createRecord('attachment');
 
