@@ -12,7 +12,7 @@ export default class DocumentCreatorComponent extends Component {
   @tracked template
   @tracked templateOptions = [];
   @tracked invalidTitle;
-  @tracked invalidTemplate;
+  @tracked errorSaving;
 
   @service store;
   @service rdfaEditorStandardTemplatePlugin;
@@ -36,12 +36,7 @@ export default class DocumentCreatorComponent extends Component {
   @action
   updateTitle(event) {
     this.title = event.target.value;
-    if (this.title.length === 0) {
-      this.invalidTitle = true;
-    }
-    else {
-      this.invalidTitle = false;
-    }
+    this.validateTitle();
   }
 
   @action
@@ -49,15 +44,28 @@ export default class DocumentCreatorComponent extends Component {
     this.template = template;
   }
 
-  get validForm() {
-    return this.title?.length > 0 && this.template;
+  get isSaving() {
+    return this.persistDocument.isRunning;
+  }
+
+  validateTitle() {
+    if (this.title?.length > 0) {
+      this.invalidTitle = false;
+    }
+    else {
+      this.invalidTitle = true;
+    }
+  }
+
+  validateForm() {
+    this.validateTitle();
+    return ! this.invalidTitle;
   }
 
   @action
   async create() {
-    if (this.validForm) {
-      await this.template.reload(); // templatesForContext does not return body of template
-      const container = await this.persistAgendapoint.perform();
+    if (this.validateForm()) {
+      const container = await this.persistDocument.perform();
       if (this.args.onCreate) {
         this.args.onCreate(container);
       }
@@ -71,9 +79,9 @@ export default class DocumentCreatorComponent extends Component {
     this.templateOptions = this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt']);
   }
 
-  buildTemplate() {
+  async buildTemplate() {
     if (this.template) {
-      console.log(this.template.body, this.template);
+      await this.template.reload(); // templatesForContext does not return body of template
       return instantiateUuids(this.template.body);
     }
     else
@@ -81,22 +89,28 @@ export default class DocumentCreatorComponent extends Component {
   }
 
   @task
-  *persistAgendapoint() {
-    const creationDate = new Date();
-    const generatedTemplate = this.buildTemplate();
-    const editorDocument = this.store.createRecord('editor-document', {
-      createdOn: creationDate,
-      updatedOn: creationDate,
-      content: generatedTemplate,
-      title: this.title
-    });
-    yield editorDocument.save();
-    const container = this.store.createRecord('document-container');
-    container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
-    container.folder = yield this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
-    container.publisher = this.currentSession.group;
-    container.currentVersion = editorDocument;
-    yield container.save();
-    return container;
+  *persistDocument() {
+    try {
+      this.errorSaving=null;
+      const creationDate = new Date();
+      const generatedTemplate = yield this.buildTemplate();
+      const editorDocument = this.store.createRecord('editor-document', {
+        createdOn: creationDate,
+        updatedOn: creationDate,
+        content: generatedTemplate,
+        title: this.title
+      });
+      yield editorDocument.save();
+      const container = this.store.createRecord('document-container');
+      container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
+      container.folder = yield this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
+      container.publisher = this.currentSession.group;
+      container.currentVersion = editorDocument;
+      yield container.save();
+      return container;
+    }
+    catch(e) {
+      this.errorSaving = e.message;
+    }
   }
 }

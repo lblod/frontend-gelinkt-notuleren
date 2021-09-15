@@ -27,6 +27,7 @@ inbox:
     statusLabel: Status
     new:
       title: Nieuw agendapunt
+      errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
       create: Opslaan
       cancel: Terug
   trash:

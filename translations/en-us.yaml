@@ -27,6 +27,7 @@ inbox:
     statusLabel: Status
     new:
       title: Create agendapoint
+      errorSaving: Something went wrong while creating the agendapoint
       create: Save
       cancel: Back
   trash:

@@ -8,10 +8,17 @@
   >
     <Modal.Body>
       <creator.form />
+
+      {{#if creator.errorSaving}}
+        <AuAlert @alertIcon="cross" @alertTitle={{t "inbox.agendapoints.new.errorSaving"}} @alertskin="error" @closable={{true}}>
+          {{creator.errorSaving}}
+        </AuAlert>
+      {{/if}}
+
     </Modal.Body>
     <Modal.Footer>
       <AuButtonGroup>
-        <AuButton {{on "click" creator.create}} @isLoading={{creator.isSaving}}>
+        <AuButton {{on "click" creator.create}} @isLoading={{creator.isSaving}} @disabled={{creator.isSaving}}>
           {{t "inbox.agendapoints.new.create"}}
         </AuButton>
         <AuButton {{on "click" creator.rollback}} @skin="secondary">
