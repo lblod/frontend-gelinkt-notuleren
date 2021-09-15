@@ -86,7 +86,7 @@ export default class DocumentCreatorComponent extends Component {
     const generatedTemplate = this.buildTemplate();
     const editorDocument = this.store.createRecord('editor-document', {
       createdOn: creationDate,
-      modifiedOn: creationDate,
+      updatedOn: creationDate,
       content: generatedTemplate,
       title: this.title
     });
