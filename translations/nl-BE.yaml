@@ -28,7 +28,7 @@ inbox:
     new:
       title: Nieuw agendapunt
       errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
-      create: Opslaan
+      create: Aanmaken
       cancel: Terug
   trash:
     title: Prullenmand

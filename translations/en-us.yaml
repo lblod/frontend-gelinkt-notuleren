@@ -28,7 +28,7 @@ inbox:
     new:
       title: Create agendapoint
       errorSaving: Something went wrong while creating the agendapoint
-      create: Save
+      create: Create
       cancel: Back
   trash:
     title: Recycle bin
@@ -364,3 +364,7 @@ attachments:
   typePlaceholder: none
   regulatory: regulatory
   saveAndGo: Save and go to attachments
+documentCreator:
+  titleField: Agendapoint title
+  template: Template
+  templateSelectPlaceholder: Select a template
