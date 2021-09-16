@@ -330,12 +330,12 @@ meetings:
     intro:
       save: Save
       confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
-      saveAndQuit: Save and quit
+      saveAndQuit: Save and Quit
       cancel: Cancel
     outro:
       save: Save
       confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
-      saveAndQuit: Save and quite
+      saveAndQuit: Save and Quit
       cancel: Cancel
 
 requiredField:
