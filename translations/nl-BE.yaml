@@ -25,7 +25,11 @@ inbox:
     createdOnLabel: Aangemaakt
     updatedOnLabel: Aangepast
     statusLabel: Status
-    new: Nieuw agendapunt
+    new:
+      title: Nieuw agendapunt
+      errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
+      create: Aanmaken
+      cancel: Terug
   trash:
     title: Prullenmand
 publish:
@@ -359,3 +363,7 @@ attachments:
   typePlaceholder: geen
   regulatory: regelgevend
   saveAndGo: Opslaan en bijlagen toevoegen
+documentCreator:
+  titleField: Titel agendapunt
+  template: Sjabloon
+  templateSelectPlaceholder: Kies een sjabloon

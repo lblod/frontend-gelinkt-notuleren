@@ -25,7 +25,11 @@ inbox:
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
-    new: Create agendapoint
+    new:
+      title: Create agendapoint
+      errorSaving: Something went wrong while creating the agendapoint
+      create: Create
+      cancel: Back
   trash:
     title: Recycle bin
 publish:
@@ -360,3 +364,7 @@ attachments:
   typePlaceholder: none
   regulatory: regulatory
   saveAndGo: Save and go to attachments
+documentCreator:
+  titleField: Agendapoint title
+  template: Template
+  templateSelectPlaceholder: Select a template

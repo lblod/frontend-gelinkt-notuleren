@@ -10,7 +10,7 @@
         <AuToolbarGroup class="au-c-toolbar__group--search">
           <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
           {{#unless this.readOnly}}
-            <LinkTo @route="agendapoints.new" class="au-c-button-link">{{t "inbox.agendapoints.new"}}</LinkTo>
+            <LinkTo @route="inbox.agendapoints.new" class="au-c-button-link">{{t "inbox.agendapoints.new.title"}}</LinkTo>
           {{/unless}}
         </AuToolbarGroup>
       </AuToolbar>
@@ -43,3 +43,4 @@
     </c.body>
   </table.content>
 </AuDataTable>
+{{outlet}}
