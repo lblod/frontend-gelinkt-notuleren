@@ -30,7 +30,8 @@
             {{t "attachments.return"}}
           </AuButton>
           <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
-            {{t "attachments.attachments"}} (<strong>{{this.documentContainer.attachments.length}}</strong>)
+            {{t "attachments.attachments"}}
+            (<strong>{{if this.documentContainer.attachments.length this.documentContainer.attachments.length 0}}</strong>)
           </AuButton>
         </AuButtonGroup>
       {{else}}
@@ -39,7 +40,8 @@
             {{t "attachments.return"}}
           </AuButton>
           <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
-            {{t "attachments.saveAndGo"}} (<strong>{{this.documentContainer.attachments.length}}</strong>)
+            {{t "attachments.saveAndGo"}}
+            (<strong>{{if this.documentContainer.attachments.length this.documentContainer.attachments.length 0}}</strong>)
           </AuButton>
         </AuButtonGroup>
       {{/if}}
