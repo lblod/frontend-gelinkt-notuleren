@@ -1,6 +1,27 @@
 
 
 
+## 2.16.0 (2021-09-17)
+
+#### :rocket: Enhancement
+* [#182](https://github.com/lblod/frontend-gelinkt-notuleren/pull/182) added agendapoint position to the select and the search ([@lagartoverde](https://github.com/lagartoverde))
+* [#191](https://github.com/lblod/frontend-gelinkt-notuleren/pull/191) improved flow for creating agendapoints ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#188](https://github.com/lblod/frontend-gelinkt-notuleren/pull/188) correctly delete vote ([@nvdk](https://github.com/nvdk))
+* [#192](https://github.com/lblod/frontend-gelinkt-notuleren/pull/192) Fix typo in outro component ([@lagartoverde](https://github.com/lagartoverde))
+* [#190](https://github.com/lblod/frontend-gelinkt-notuleren/pull/190) added attachment counter to ap edit route, fixed bug with undefined length ([@Asergey91](https://github.com/Asergey91))
+* [#187](https://github.com/lblod/frontend-gelinkt-notuleren/pull/187) Bugfix/missing router config for switch login route ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#189](https://github.com/lblod/frontend-gelinkt-notuleren/pull/189) use generator methods instead of fields in vote modal ([@nvdk](https://github.com/nvdk))
+* [#185](https://github.com/lblod/frontend-gelinkt-notuleren/pull/185) use au-file-upload from appuniversum ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 3
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.15.0 (2021-09-14)
 
 #### :rocket: Enhancement
