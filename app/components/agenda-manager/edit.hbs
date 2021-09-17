@@ -52,7 +52,7 @@
           </div>
 
           {{#if (gt @agendaItems.length 1)}}
-            <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}}>
+            <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}} @currentItem={{@itemToEdit}}>
               {{t "manageAgendaZittingModalMove.title"}}
             </Form.SelectLocation>
           {{/if}}

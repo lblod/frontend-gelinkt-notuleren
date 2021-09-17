@@ -18,19 +18,22 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
   }
 
   get afterItemOptions() {
-    return this.args.agendaItems.sortBy("position");
+    return this.args.agendaItems.sortBy("position").reject((x) => x === this.args.currentItem);
   }
 
-  @action selectLocation(value) {
+  @action
+  selectLocation(value) {
     this.selectedLocation = value;
     if(value.code === "start") {
       this.args.model[this.args.for] = 0;
     }
-    else {
-      this.args.model[this.args.for] = this.args.agendaItems.length;
+    else if (value.code === "end"){
+      this.args.model[this.args.for] = this.args.agendaItems.length - 1;
     }
   }
-  @action selectAfterItem(value) {
+
+  @action
+  selectAfterItem(value) {
     this.selectedAfterItem = value;
     this.args.model[this.args.for] = value.position + 1;
   }
