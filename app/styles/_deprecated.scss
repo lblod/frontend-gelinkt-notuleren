@@ -111,3 +111,14 @@ input.input-field {
 .modal-dialog.modal-dialog--sectioned .modal-dialog__content {
   max-height: 75vh;
 }
+
+
+.container-flex--contain {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
