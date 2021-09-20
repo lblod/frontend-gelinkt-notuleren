@@ -82,7 +82,7 @@
 {{/if}}
 
 
-<ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}
+<ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}} @attachments={{@behandeling.documentContainer.attachments}}
 >
   {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
 </ReadonlyTextBox>
