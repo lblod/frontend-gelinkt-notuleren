@@ -104,6 +104,12 @@
   border-bottom: .1rem solid $au-gray-300;
 }
 
+.au-c-meeting-chrome-card__title--flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .au-c-meeting-chrome-card__title--inset {
   margin-top: -$au-unit-small;
   margin-left: -$au-unit-small;
