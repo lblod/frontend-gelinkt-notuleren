@@ -1,6 +1,22 @@
 
 
 
+## 2.17.0 (2021-09-24)
+
+#### :rocket: Enhancement
+* [#197](https://github.com/lblod/frontend-gelinkt-notuleren/pull/197) added an overview of attachments in meeting interface ([@Asergey91](https://github.com/Asergey91))
+* [#193](https://github.com/lblod/frontend-gelinkt-notuleren/pull/193) Feature/enable acmidm switch ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#198](https://github.com/lblod/frontend-gelinkt-notuleren/pull/198) Fix issue with double characters ([@abeforgit](https://github.com/abeforgit))
+* [#195](https://github.com/lblod/frontend-gelinkt-notuleren/pull/195) fix editor scrolling issue ([@Dietr](https://github.com/Dietr))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.16.0 (2021-09-17)
 
 #### :rocket: Enhancement
