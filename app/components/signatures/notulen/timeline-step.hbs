@@ -13,9 +13,9 @@
       {{html-safe @zittingWrapper}}
     </div>
     {{#if @zittingWrapper}}
-      <EmberWormhole @to={{@behandelingContainerId}}>
+      {{#in-element this.containerElement}}
         <Signatures::Notulen::BehandelingenList @notulen={{@notulen}} @prepublishedBehandelingen={{@behandelings}} @publicBehandelingUris={{@publicBehandelingUris}} @toggle={{@togglePublicationStatus}} @toggleAll={{@toggleAllPublicationStatus}} @allBehandelingPublic={{@allBehandelingPublic}} />
-      </EmberWormhole>
+      {{/in-element}}
     {{/if}}
   </Signatures::TimelineStep>
 </li>
