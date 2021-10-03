@@ -1,6 +1,6 @@
 <label class="au-c-control au-c-control--radio">
-  <Input class="au-c-control__input" @type="radio" @name={{@name}}
-         checked={{eq @selectedOption @value}} @value={{@value}}
+  <input class="au-c-control__input" type="radio" name={{@name}}
+         checked={{eq @selectedOption @value}} value={{@value}}
     {{on "click" (fn @selectOption @value)}}/>
   <span class="au-c-control__indicator"></span>
   {{yield}}
