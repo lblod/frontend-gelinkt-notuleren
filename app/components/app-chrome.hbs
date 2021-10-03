@@ -38,7 +38,7 @@
     <AuToolbarGroup>
       <div>
         {{#unless @editorDocument.isNew}}
-          <EditorStatusPill @status={{await @documentContainer.status}} />
+          <EditorStatusPill @status={{@documentContainer.status}} />
         {{/unless}}
         {{#if @editorDocument.isNew}}
         <AuPill @skin="warning">
