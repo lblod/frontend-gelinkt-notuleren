@@ -14,7 +14,7 @@
   <AuModal
     @modalTitle="Geef uw document een naam"
     @modalOpen={{true}}
-    @closeModal={{fn this.closeValidationModal}} as |Modal| >
+    @closeModal={{this.closeValidationModal}} as |Modal| >
     <Modal.Body>
       <p>Klik op de titel om uw document een naam te geven.</p>
     </Modal.Body>
