@@ -73,7 +73,7 @@
     "ember-intl": "^5.6.2",
     "ember-load": "0.0.17",
     "ember-load-initializers": "^2.1.2",
-    "ember-maybe-import-regenerator": "^0.1.6",
+    "ember-maybe-import-regenerator": "^1.0.0",
     "ember-modifier": "^1.0.3",
     "ember-moment": "^8.0.1",
     "ember-page-title": "^6.2.2",

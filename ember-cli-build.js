@@ -5,7 +5,7 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-babel': {
-      includePolyfill: true
+      includePolyfill: false
     },
     minifyCSS: {
       enabled: false
@@ -17,9 +17,6 @@ module.exports = function (defaults) {
           collapse_vars: false
         },
       },
-    },
-    '@lblod/ember-vo-webuniversum': {
-      'shouldImportComponentCss': false,
     },
     sassOptions: {
       sourceMapEmbed: true,
