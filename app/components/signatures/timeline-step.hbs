@@ -23,7 +23,7 @@
       </AuToolbarGroup>
     </AuToolbar>
     <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">
-      {{#if hasBlock}}
+      {{#if (has-block)}}
         {{yield}}
       {{else}}
         {{html-safe @mockDocument.body}}
