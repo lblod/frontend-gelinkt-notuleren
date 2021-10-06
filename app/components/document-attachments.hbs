@@ -18,6 +18,16 @@
         </tr>
       </thead>
       <tbody>
+        {{#if (not @decisions.length)}}
+          <tr>
+            <td colspan="5">
+              <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "attachments.noDecisionsFound"}} @alertskin="warning">
+                <p>{{t "attachments.decisionRequired"}}</p>
+              </AuAlert>
+
+            </td>
+          </tr>
+        {{/if}}
         {{#each this.attachments as |attachment|}}
         <tr>
           <td>

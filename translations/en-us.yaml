@@ -364,6 +364,8 @@ attachments:
   typePlaceholder: none
   regulatory: regulatory
   saveAndGo: Save and go to attachments
+  noDecisonsFound: No decisions found
+  decisionRequired: Only attachments linked to a decision are included in the publication.
 documentCreator:
   titleField: Agendapoint title
   template: Template
