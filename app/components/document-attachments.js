@@ -14,22 +14,15 @@ export default class DocumentAttachmentsComponent extends Component {
   @service intl;
   @tracked attachments;
   @tracked decisions;
-
-  typeOptions=[{
-    id: REGULATORY_TYPE_ID,
-    label: this.intl.t("attachments.regulatory")
-  }];
-
-  @tracked selectedType;
+  regulatoryTypeId = REGULATORY_TYPE_ID;
 
   @task
-  *onSelectType(attachment, event){
-    const selectedId=event.target.value;
-    if(!selectedId){
+  *updateAttachmentIsRegulatory(attachment, isRegulatory) {
+    if(!isRegulatory){
       attachment.type=null;
     }
     else{
-      const concept=yield this.store.findRecord('concept', selectedId);
+      const concept=yield this.store.findRecord('concept', REGULATORY_TYPE_ID);
       attachment.type=concept;
     }
     yield attachment.save();
@@ -59,6 +52,9 @@ export default class DocumentAttachmentsComponent extends Component {
 
     newAttachment.file = file;
     newAttachment.documentContainer = documentContainer;
+    if (this.args.decisions.length === 1) {
+      newAttachment.decision = this.args.decisions[0];
+    }
 
     yield newAttachment.save();
 
