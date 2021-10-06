@@ -449,7 +449,7 @@
 
   .au-c-button.is-active:hover {
     box-shadow: none;
-    border-color: $au-gray-400;
+    border-color: $au-blue-600;
   }
 }
 
@@ -485,4 +485,91 @@
 .au-c-template {
   overflow-wrap: break-word;
   word-break: break-word;
+}
+
+// Button tooltip POC
+.has-tooltip {
+  position: relative;
+  overflow: visible;
+}
+
+.au-c-button__tooltip {
+  @include au-font-size($au-base);
+  display: none;
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: $au-z-index-beta;
+  color: $au-white;
+  background-color: $au-blue-900;
+  border-radius: $au-radius;
+  padding: 0 $au-unit-tiny $au-unit-tiny*.3;
+
+  &:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: .4rem;
+    margin-left: -.2rem;
+  }
+
+  &:before {
+    border-color: rgba($au-white, 0);
+    border-bottom-color: $au-blue-900;
+  }
+
+  .has-tooltip:hover > &,
+  .has-tooltip:focus > & {
+    display: block;
+  }
+}
+
+.au-c-button__tooltip--top {
+  bottom: calc(100% + .8rem);
+
+  &:before {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: .4rem;
+    margin-left: -.2rem;
+  }
+
+  &:before {
+    border-color: rgba($au-white, 0);
+    border-top-color: $au-blue-900;
+  }
+}
+
+.au-c-button__tooltip--bottom {
+  top: calc(100% + .8rem);
+
+  &:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: .4rem;
+    margin-left: -.2rem;
+  }
+
+  &:before {
+    border-color: rgba($au-white, 0);
+    border-bottom-color: $au-blue-900;
+  }
 }
