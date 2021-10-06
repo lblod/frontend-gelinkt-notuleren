@@ -12,8 +12,8 @@
         <tr>
           <th>{{t "attachments.filename"}}</th>
           <th>{{t "attachments.filesize"}}</th>
-          <th>{{t "attachments.type"}}</th>
-          <th colspan="2">{{t "attachments.decision"}}</th>
+          <th>{{t "attachments.decision"}}</th>
+          <th colspan="2">{{t "attachments.type"}}</th>
           {{!-- <th>{{t "attachments.delete"}}</th> --}}
         </tr>
       </thead>
@@ -26,22 +26,21 @@
             </a>
           </td>
           <td>{{attachment.file.humanReadableSize}}</td>
-
-          <td class="au-c-custom-select-cell">
-            <select class="au-c-custom-select" {{on "change" (perform this.onSelectType attachment)}} disabled={{not attachment.decision}}>
-              <option value="">{{t "attachments.typePlaceholder"}}</option>
-              {{#each this.typeOptions as |typeOption|}}
-              <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}
-              </option>
-              {{/each}}
-            </select>
-          </td>
           <td class="au-c-custom-select-cell">
             <select class="au-c-custom-select" {{on "change" (perform this.onSelectDecision attachment)}}>
               <option value="">{{t "attachments.typePlaceholder"}}</option>
               {{#each @decisions as |decisionOption|}}
               <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>
                 {{decisionOption.title}}</option>
+              {{/each}}
+            </select>
+          </td>
+          <td class="au-c-custom-select-cell">
+            <select class="au-c-custom-select" {{on "change" (perform this.onSelectType attachment)}} disabled={{not attachment.decision}}>
+              <option value="">{{t "attachments.typePlaceholder"}}</option>
+              {{#each this.typeOptions as |typeOption|}}
+              <option value={{typeOption.id}} selected={{eq attachment.type.id typeOption.id}}>{{typeOption.label}}
+              </option>
               {{/each}}
             </select>
           </td>
