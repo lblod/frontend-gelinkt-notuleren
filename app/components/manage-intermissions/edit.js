@@ -158,4 +158,8 @@ export default class manageIntermissionsEditComponent extends Component {
       this.selectedAp = null;
     }
   }
+
+  searchMatcher(agendapoint, term) {
+    return `${agendapoint.position + 1}. ${agendapoint.titel}`.indexOf(term);
+  }
 }
