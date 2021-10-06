@@ -41,7 +41,7 @@ module.exports = function (environment) {
       'editor-html-paste': true,
       'editor-extended-html-paste': true,
       'acmidm-switch': true,
-      'attachments': false
+      'attachments': true
     },
     browserUpdate: {
       vs: {f:-3,c:-3},
