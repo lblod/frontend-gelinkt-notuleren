@@ -364,7 +364,7 @@ attachments:
   regulatory: regelgevend
   saveAndGo: Opslaan en bijlagen toevoegen
   noDecisionsFound: Geen besluiten gevonden
-  decisionRequired: enkel bijlagen bij een besluit worden opgenomen in de publicatie.
+  decisionRequired: Enkel bijlagen bij een besluit worden opgenomen in de publicatie.
 documentCreator:
   titleField: Titel agendapunt
   template: Sjabloon
