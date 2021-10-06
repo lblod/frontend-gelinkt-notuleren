@@ -1,6 +1,22 @@
 
 
 
+## 2.18.0 (2021-10-06)
+
+#### :rocket: Enhancement
+* [#204](https://github.com/lblod/frontend-gelinkt-notuleren/pull/204) Only save document if it's in a dirty state ([@lagartoverde](https://github.com/lagartoverde))
+* [#203](https://github.com/lblod/frontend-gelinkt-notuleren/pull/203) Change column order in attachments table ([@lagartoverde](https://github.com/lagartoverde))
+* [#202](https://github.com/lblod/frontend-gelinkt-notuleren/pull/202) Add numbering to agendapoints in intermission select and fixed ordering ([@lagartoverde](https://github.com/lagartoverde))
+* [#201](https://github.com/lblod/frontend-gelinkt-notuleren/pull/201) Add tooltip on attachment button ([@Dietr](https://github.com/Dietr))
+
+#### :house: Internal
+* [#199](https://github.com/lblod/frontend-gelinkt-notuleren/pull/199) bump ember auto import ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 3
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.17.0 (2021-09-24)
 
 #### :rocket: Enhancement
