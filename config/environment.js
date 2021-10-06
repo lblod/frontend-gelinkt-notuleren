@@ -83,6 +83,7 @@ module.exports = function (environment) {
     ENV.manual.signee="#gebruikersbeheer";
     ENV.manual.publisher="#gebruikersbeheer";
     ENV.manual.print="";
+    ENV.featureFlags.attachments = true;
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
