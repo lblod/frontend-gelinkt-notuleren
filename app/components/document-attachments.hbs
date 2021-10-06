@@ -1,4 +1,4 @@
-<div class="au-o-box au-c-theme-gray-200">
+<div class="au-o-box au-o-box--small au-c-theme-gray-200">
   <AuFileUpload @title={{t "attachments.attach" }} @helpTextDragDrop={{t "attachments.drag" }} @modelName={{"file"}}
     @endPoint={{"/files"}} @onFinishUpload={{perform this.uploadedAttachement}} @maxFileSizeMB="1024"
     @multiple={{true}} />
@@ -50,3 +50,11 @@
   </div>
 </div>
 {{/if}}
+
+{{#unless @decisions.length}}
+<AuToolbar @border="top" @nowrap="true" @size="small">
+  <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "attachments.noDecisionsFound"}} @alertskin="warning" class="au-u-margin-bottom-none au-u-1-1">
+    <p>{{t "attachments.decisionRequired"}}</p>
+  </AuAlert>
+</AuToolbar>
+{{/unless}}
