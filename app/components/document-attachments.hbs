@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        {{#if (not @decisions.length)}}
+        {{#unless @decisions.length}}
           <tr>
             <td colspan="5">
               <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "attachments.noDecisionsFound"}} @alertskin="warning">
@@ -27,7 +27,7 @@
 
             </td>
           </tr>
-        {{/if}}
+        {{/unless}}
         {{#each this.attachments as |attachment|}}
         <tr>
           <td>
