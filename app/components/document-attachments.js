@@ -16,8 +16,6 @@ export default class DocumentAttachmentsComponent extends Component {
   @tracked decisions;
   regulatoryTypeId = REGULATORY_TYPE_ID;
 
-  @tracked selectedType;
-
   @task
   *updateAttachmentIsRegulatory(attachment, isRegulatory) {
     if(!isRegulatory){
