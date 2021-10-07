@@ -17,6 +17,10 @@ export default class AgendapointsEditController extends Controller {
   @tracked decisions = [];
   @service documentService;
 
+  get dirty() {
+    return this.editorDocument.content !== this.editor.htmlContent;
+  }
+
   get editorDocument() {
     return this._editorDocument || this.model.editorDocument;
   }
@@ -95,7 +99,9 @@ export default class AgendapointsEditController extends Controller {
   
   @task 
   *toggleUploadAndSave(){
-    yield this.saveTask.perform();
+    if(this.dirty) {
+      yield this.saveTask.perform();
+    }
     yield this.fetchDecisions.perform();
     this.uploading=!this.uploading;
   }

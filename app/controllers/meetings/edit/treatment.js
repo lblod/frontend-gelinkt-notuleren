@@ -144,7 +144,9 @@ export default class MeetingsEditTreatmentController extends Controller {
   
   @task 
   *toggleUploadAndSave(){
-    yield this.saveDocumentTask.perform();
+    if(this.dirty) {
+      yield this.saveDocumentTask.perform();
+    }
     this.uploading=!this.uploading;
     this.fetchDecisions.perform();
   }

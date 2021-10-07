@@ -39,9 +39,10 @@
           <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
             {{t "attachments.return"}}
           </AuButton>
-          <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
-            {{t "attachments.saveAndGo"}}
+          <AuButton class="au-u-margin-bottom-none has-tooltip" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
+            {{t "attachments.attachments"}}
             (<strong>{{if this.documentContainer.attachments.length this.documentContainer.attachments.length 0}}</strong>)
+            <span class="au-c-button__tooltip au-c-button__tooltip--top">{{t "attachments.saveAndGo"}}</span>
           </AuButton>
         </AuButtonGroup>
       {{/if}}

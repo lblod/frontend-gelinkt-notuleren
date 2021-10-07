@@ -42,12 +42,13 @@
                   @searchEnabled={{true}}
                   @searchPlaceholder={{t "manageAgendaZittingModalMove.searchPlaceholder"}}
                   @verticalPosition="above"
-                  @options={{@zitting.agendapunten}}
+                  @options={{sort-by "position" @zitting.agendapunten}}
                   @searchField="titel"
                   @selected={{this.selectedAp}}
                   @onChange={{this.selectAp}}
+                  @matcher={{this.searchMatcher}}
                   as |a|>
-                  {{a.titel}}
+                  {{add a.position 1}}. {{a.titel}}
                 </PowerSelect>
               {{/if}}
             </div>
