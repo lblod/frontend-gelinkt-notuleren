@@ -78,6 +78,8 @@ meetingForm:
   sixthSectionTitle: 6. Einde van de zitting
   seventhSectionTitle: 7. Beëindiging van de zitting
   meetingHeadingPartOne: Notulen van
+  meetingHeadingArticleGendered: de
+  meetingHeadingArticleUngendered: het
   meetingHeadingPartTwo: van
   firstSectionNotFilledWarning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
   secondSectionNotFilledWarning: Zorg ervoor dat je de aanwezigenlijst correct aanvult voor je aan de stemmingen begint.
