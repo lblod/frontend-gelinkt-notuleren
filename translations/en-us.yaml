@@ -25,6 +25,7 @@ inbox:
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
+    attachmentsLabel: Attachments
     new:
       title: Create agendapoint
       errorSaving: Something went wrong while creating the agendapoint

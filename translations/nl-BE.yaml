@@ -25,6 +25,7 @@ inbox:
     createdOnLabel: Aangemaakt
     updatedOnLabel: Aangepast
     statusLabel: Status
+    attachmentsLabel: Bijlagen
     new:
       title: Nieuw agendapunt
       errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
