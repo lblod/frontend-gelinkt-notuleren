@@ -42,7 +42,7 @@ export default class MeetingForm extends Component {
     if (this.zitting.get("id")) {
       this.bestuursorgaan = yield this.zitting.get("bestuursorgaan");
       const specialisedBestuursorgaan = yield this.bestuursorgaan.get("isTijdsspecialisatieVan");
-      const classification = yield specialisedBestuursorgaa.get('classificatie');
+      const classification = yield specialisedBestuursorgaan.get('classificatie');
       this.headerArticleTranslationString = articlesBasedOnClassifcationMap[classification.get('uri')];
       console.log(this.headerArticleTranslationString);
       this.secretaris = yield this.zitting.get("secretaris");
