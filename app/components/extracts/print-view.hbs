@@ -23,7 +23,7 @@
       {{#if signatures.length}}
         <div class="au-o-grid">
           {{#each signatures as |signature|}}
-            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
+            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}} @hashValue={{signature.hashValue}}/>
           {{/each}}
         </div>
       {{/if}}
