@@ -20,7 +20,7 @@
     <c.header>
       <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.titleLabel'}} />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.updatedOnLabel'}} />
-      <AuDataTableThSortable @field="status" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
+      <AuDataTableThSortable @field="status.label" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">Zitting</span></th>
     </c.header>
     <c.body as |container|>
