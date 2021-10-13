@@ -93,7 +93,7 @@
     <div class="au-c-meeting-chrome__paper">
       {{!-- Meeting title --}}
       <AuHeading>
-        {{t "meetingForm.meetingHeadingPartOne"}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
+        {{t "meetingForm.meetingHeadingPartOne"}} {{t this.headerArticleTranslationString}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
         {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span>
       </AuHeading>
       <AuHr @size="large"/>
