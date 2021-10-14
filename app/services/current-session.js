@@ -11,11 +11,11 @@ export default class CurrentSessionService extends Service {
   @tracked group;
   @tracked roles = [];
 
-  get canRead(){
+  get canRead() {
     return this.hasRole('GelinktNotuleren-lezer');
   }
 
-  get canWrite(){
+  get canWrite() {
     return this.hasRole('GelinktNotuleren-schrijver');
   }
 
@@ -29,15 +29,16 @@ export default class CurrentSessionService extends Service {
 
   async load() {
     if (this.session.isAuthenticated) {
-      let accountId = this.session.data.authenticated.relationships.account.data.id;
+      let accountId =
+        this.session.data.authenticated.relationships.account.data.id;
       this.account = await this.store.findRecord('account', accountId, {
-        include: 'gebruiker'
+        include: 'gebruiker',
       });
       this.user = await this.account.get('gebruiker');
 
       let groupId = this.session.data.authenticated.relationships.group.data.id;
       this.group = await this.store.findRecord('bestuurseenheid', groupId, {
-        include: 'classificatie'
+        include: 'classificatie',
       });
 
       this.roles = this.session.data.authenticated.data.attributes.roles;

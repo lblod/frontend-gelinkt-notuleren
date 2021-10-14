@@ -29,7 +29,7 @@ export default class MeetingsEditTreatmentController extends Controller {
 
   @action
   closeModal() {
-    this.uploading=false;
+    this.uploading = false;
     this.router.transitionTo('meetings.edit');
   }
 
@@ -137,17 +137,17 @@ export default class MeetingsEditTreatmentController extends Controller {
     this.document = document;
   }
 
-  @action toggleUpload(){
-    this.uploading=!this.uploading;
+  @action toggleUpload() {
+    this.uploading = !this.uploading;
     this.fetchDecisions.perform();
   }
-  
-  @task 
-  *toggleUploadAndSave(){
-    if(this.dirty) {
+
+  @task
+  *toggleUploadAndSave() {
+    if (this.dirty) {
       yield this.saveDocumentTask.perform();
     }
-    this.uploading=!this.uploading;
+    this.uploading = !this.uploading;
     this.fetchDecisions.perform();
   }
 

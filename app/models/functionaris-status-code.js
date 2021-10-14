@@ -5,7 +5,8 @@ export default class FunctionarisStatusCodeModel extends Model {
   @attr label;
 
   rdfaBindings = {
-    class: "http://data.lblod.info/vocabularies/leidinggevenden/FunctionarisStatusCode",
-    label: "http://www.w3.org/2004/02/skos/core#prefLabel"
-  }
+    class:
+      'http://data.lblod.info/vocabularies/leidinggevenden/FunctionarisStatusCode',
+    label: 'http://www.w3.org/2004/02/skos/core#prefLabel',
+  };
 }

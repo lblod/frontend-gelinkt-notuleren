@@ -5,16 +5,16 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     'ember-cli-babel': {
-      includePolyfill: false
+      includePolyfill: false,
     },
     minifyCSS: {
-      enabled: false
+      enabled: false,
     },
     'ember-cli-terser': {
       exclude: ['vendor.js', 'assets/vendor.js'],
       terser: {
         compress: {
-          collapse_vars: false
+          collapse_vars: false,
         },
       },
     },
@@ -22,24 +22,24 @@ module.exports = function (defaults) {
       sourceMapEmbed: true,
       includePaths: [
         'node_modules/@appuniversum/appuniversum',
-        'node_modules/@appuniversum/ember-appuniversum/app/styles'
-      ]
+        'node_modules/@appuniversum/ember-appuniversum/app/styles',
+      ],
     },
     autoprefixer: {
       enabled: true,
       cascade: true,
-      sourcemap: true
+      sourcemap: true,
     },
     flatpickr: {
       locales: ['nl'],
-      theme: 'light'
+      theme: 'light',
     },
     sourcemaps: {
       enabled: true,
-      extensions: ['js']
+      extensions: ['js'],
     },
     babel: {
-      sourceMaps: 'inline'
+      sourceMaps: 'inline',
     },
   });
 

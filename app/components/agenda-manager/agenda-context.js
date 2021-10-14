@@ -1,9 +1,13 @@
 import Component from '@glimmer/component';
-import {task, all} from "ember-concurrency";
-import {action} from '@ember/object';
-import {inject as service} from '@ember/service';
-import {tracked} from 'tracked-built-ins';
-import {DRAFT_STATUS_ID, PUBLISHED_STATUS_ID, SCHEDULED_STATUS_ID} from "../../utils/constants";
+import { task, all } from 'ember-concurrency';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { tracked } from 'tracked-built-ins';
+import {
+  DRAFT_STATUS_ID,
+  PUBLISHED_STATUS_ID,
+  SCHEDULED_STATUS_ID,
+} from '../../utils/constants';
 
 export default class AgendaManagerAgendaContextComponent extends Component {
   @service store;
@@ -17,32 +21,33 @@ export default class AgendaManagerAgendaContextComponent extends Component {
   }
 
   @task
-  * loadItemsTask() {
+  *loadItemsTask() {
     const agendaItems = [];
     const pageSize = 10;
 
     const firstPage = yield this.store.query('agendapunt', {
-      "filter[zitting][:id:]": this.args.zittingId,
-      "page[size]": pageSize,
-      include: "vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt"
+      'filter[zitting][:id:]': this.args.zittingId,
+      'page[size]': pageSize,
+      include:
+        'vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt',
     });
     const count = firstPage.meta.count;
-    firstPage.forEach(result => agendaItems.push(result));
+    firstPage.forEach((result) => agendaItems.push(result));
     let pageNumber = 1;
 
-    while (((pageNumber) * pageSize) < count) {
+    while (pageNumber * pageSize < count) {
       const pageResults = yield this.store.query('agendapunt', {
-        "filter[zitting][:id:]": this.args.zittingId,
-        "page[size]": pageSize,
-        "page[number]": pageNumber,
-      include: "vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt"
+        'filter[zitting][:id:]': this.args.zittingId,
+        'page[size]': pageSize,
+        'page[number]': pageNumber,
+        include:
+          'vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt',
       });
-      pageResults.forEach(result => agendaItems.push(result));
+      pageResults.forEach((result) => agendaItems.push(result));
       pageNumber++;
     }
     this.items = tracked(agendaItems.sortBy('position'));
   }
-
 
   /**
    * Create a new agenda item
@@ -50,17 +55,20 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @action
   createAgendaItem() {
-    const agendaItem = this.store.createRecord("agendapunt", {
-      titel: "",
-      beschrijving: "",
+    const agendaItem = this.store.createRecord('agendapunt', {
+      titel: '',
+      beschrijving: '',
       geplandOpenbaar: true,
-      position: this.items.length
+      position: this.items.length,
     });
 
-    agendaItem.behandeling = this.store.createRecord("behandeling-van-agendapunt", {
-      openbaar: agendaItem.geplandOpenbaar,
-      onderwerp: agendaItem,
-      });
+    agendaItem.behandeling = this.store.createRecord(
+      'behandeling-van-agendapunt',
+      {
+        openbaar: agendaItem.geplandOpenbaar,
+        onderwerp: agendaItem,
+      }
+    );
 
     this.args.onCreate(agendaItem);
     return agendaItem;
@@ -73,23 +81,29 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * @param {Agendapunt} item
    */
   @task
-  * updateItemTask(item) {
+  *updateItemTask(item) {
     const treatment = yield item.behandeling;
     yield treatment.saveAndPersistDocument();
 
     if (item.isNew) {
-      const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
-      this.setProperty(item, "zitting", zitting);
+      const zitting = yield this.store.findRecord(
+        'zitting',
+        this.args.zittingId
+      );
+      this.setProperty(item, 'zitting', zitting);
     }
 
     yield this.updatePositionTask.perform(item);
 
-    const container = yield treatment.get("documentContainer");
-    const status = yield container.get("status");
-    if (!status || status.get("id") !== PUBLISHED_STATUS_ID) {
+    const container = yield treatment.get('documentContainer');
+    const status = yield container.get('status');
+    if (!status || status.get('id') !== PUBLISHED_STATUS_ID) {
       // it's not published, so we set the status
-      const conceptStatus = yield this.store.findRecord('concept', SCHEDULED_STATUS_ID);
-      this.setProperty(container, "status", conceptStatus);
+      const conceptStatus = yield this.store.findRecord(
+        'concept',
+        SCHEDULED_STATUS_ID
+      );
+      this.setProperty(container, 'status', conceptStatus);
     }
 
     this.changeSet.add(item);
@@ -101,7 +115,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * @param {Agendapunt} item the item to be deleted
    */
   @task
-  * deleteItemTask(item) {
+  *deleteItemTask(item) {
     const index = item.position;
 
     this.items.splice(index, 1);
@@ -110,8 +124,11 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     if (treatment) {
       const container = yield treatment.documentContainer;
       if (container) {
-        const draftStatus = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
-        this.setProperty(container, "status", draftStatus);
+        const draftStatus = yield this.store.findRecord(
+          'concept',
+          DRAFT_STATUS_ID
+        );
+        this.setProperty(container, 'status', draftStatus);
       }
       yield treatment.destroyRecord();
     }
@@ -120,26 +137,24 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     yield this.saveItemsTask.perform();
   }
 
-
   /**
    * Handles a rearrangement of the this.items array
    * Takes the array index as source of truth.
    */
   @task
-  * onSortTask() {
+  *onSortTask() {
     yield this.repairPositionsTask.perform();
     yield this.saveItemsTask.perform();
   }
 
   @task
-  * resetItemTask(agendaItem) {
+  *resetItemTask(agendaItem) {
     let behandeling = yield agendaItem.behandeling;
     behandeling.rollbackAttributes();
     agendaItem.rollbackAttributes();
 
     this.args.onCancel();
   }
-
 
   /**
    * Take item.position as source of truth and update the linked list and the this.items
@@ -149,19 +164,18 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * @private
    */
   @task
-  * updatePositionTask(item) {
+  *updatePositionTask(item) {
     const position = item.position;
 
-    if(this.items[position] !== item) {
+    if (this.items[position] !== item) {
       const oldIndex = this.items.indexOf(item);
-      if(oldIndex > -1) {
+      if (oldIndex > -1) {
         this.items.splice(oldIndex, 1);
       }
       this.items.splice(position, 0, item);
       yield this.repairPositionsTask.perform();
     }
   }
-
 
   /**
    * Take the this.items array index as source of truth and
@@ -173,17 +187,21 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * @private
    * */
   @task
-  * repairPositionsTask(){
+  *repairPositionsTask() {
     let previous = null;
     for (const [index, item] of this.items.entries()) {
       const previousItem = yield item.vorigeAgendapunt;
-      if(item.position !== index || previousItem !== previous) {
-        this.setProperty(item, "position", index);
-        this.setProperty(item, "vorigeAgendapunt", previous);
+      if (item.position !== index || previousItem !== previous) {
+        this.setProperty(item, 'position', index);
+        this.setProperty(item, 'vorigeAgendapunt', previous);
         const treatment = yield item.treatment;
-        if(treatment) {
+        if (treatment) {
           const previousTreatment = yield previous.treatment;
-          this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
+          this.setProperty(
+            treatment,
+            'vorigeBehandelingVanAgendapunt',
+            previousTreatment
+          );
         }
       }
       previous = item;
@@ -195,12 +213,11 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * @private
    */
   @task
-  * saveItemsTask() {
-    yield all([...this.changeSet].map(model => model.save()));
+  *saveItemsTask() {
+    yield all([...this.changeSet].map((model) => model.save()));
     this.changeSet.clear();
     yield this.args.onSave();
   }
-
 
   /**
    * Set a property on an ember data model and track its changes.
@@ -213,7 +230,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * @private
    */
   setProperty(model, property, value) {
-    if(value !== model.get(property)) {
+    if (value !== model.get(property)) {
       this.changeSet.add(model);
     }
     model.set(property, value);

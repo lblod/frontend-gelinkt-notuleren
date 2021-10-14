@@ -4,6 +4,7 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export default class SessionService extends BaseSessionService {
   @service currentSession;
+  @service store;
 
   handleAuthentication(routeAfterAuthentication) {
     super.handleAuthentication(routeAfterAuthentication);

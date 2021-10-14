@@ -28,7 +28,7 @@ export default class SnippetsNotifier extends Component {
   }
 
   @action
-  close(){
-    this.show=false;
+  close() {
+    this.show = false;
   }
 }

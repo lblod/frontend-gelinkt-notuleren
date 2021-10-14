@@ -1,6 +1,6 @@
-import { action } from "@ember/object";
-import Component from "@glimmer/component";
-import { inject as service } from "@ember/service";
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
 /**
  * @typedef {import("../../../models/stemming").default} Stemming
  */
@@ -15,7 +15,6 @@ import { inject as service } from "@ember/service";
 
 /** @extends {Component<Args>} */
 export default class TreatmentVotingEditComponent extends Component {
-
   @service editStemming;
 
   @action
@@ -25,7 +24,5 @@ export default class TreatmentVotingEditComponent extends Component {
   @action
   cancel() {
     this.args.onCancel && this.args.onCancel();
-
   }
-
 }

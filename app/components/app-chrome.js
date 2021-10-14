@@ -13,7 +13,9 @@ export default class AppChromeComponent extends Component {
   }
 
   get isNotAllowedToTrash() {
-    return (! this.documentStatus) || this.documentStatus.get('id') != DRAFT_STATUS_ID;
+    return (
+      !this.documentStatus || this.documentStatus.get('id') != DRAFT_STATUS_ID
+    );
   }
 
   @action

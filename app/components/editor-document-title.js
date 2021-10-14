@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import {action } from '@ember/object';
+import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class EditorDocumentTitleComponent extends Component {
@@ -28,11 +28,10 @@ export default class EditorDocumentTitleComponent extends Component {
 
   @action
   toggleActive() {
-    if (this.active && ! this.title) {
+    if (this.active && !this.title) {
       this.error = true;
-    }
-    else {
-      this.active = ! this.active;
+    } else {
+      this.active = !this.active;
     }
   }
 }

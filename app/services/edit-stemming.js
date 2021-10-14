@@ -1,8 +1,8 @@
-import { inject as service } from "@ember/service";
-import Service from "@ember/service";
-import { tracked } from "@glimmer/tracking";
-import { task } from "ember-concurrency";
-import { action } from "@ember/object";
+import { inject as service } from '@ember/service';
+import Service from '@ember/service';
+import { tracked } from '@glimmer/tracking';
+import { task } from 'ember-concurrency';
+import { action } from '@ember/object';
 /** @typedef {import("../models/stemming").default} Stemming */
 
 export default class EditStemmingService extends Service {
@@ -34,13 +34,13 @@ export default class EditStemmingService extends Service {
     const voorstanders = [];
     const tegenstanders = [];
     for (let [voter, vote] of this.votingMap) {
-      if (vote !== "zalNietStemmen") {
+      if (vote !== 'zalNietStemmen') {
         stemmers.push(voter);
-        if (vote === "voor") {
+        if (vote === 'voor') {
           voorstanders.push(voter);
-        } else if (vote === "tegen") {
+        } else if (vote === 'tegen') {
           tegenstanders.push(voter);
-        } else if (vote === "onthouding") {
+        } else if (vote === 'onthouding') {
           onthouders.push(voter);
         }
       }
@@ -61,23 +61,26 @@ export default class EditStemmingService extends Service {
   }
   @task
   *fetchVoters() {
-    if(this._stemming.isNew) {
-      const aanwezigen = yield Promise.all(this._stemming.aanwezigen.map(async (aanwezige) => {
-        const queryResult = await this.store.query('mandataris', {
-          "filter[:id:]": aanwezige.id,
-          include: "is-bestuurlijke-alias-van",
-        });
-        return queryResult.firstObject;
-      }));
+    if (this._stemming.isNew) {
+      const aanwezigen = yield Promise.all(
+        this._stemming.aanwezigen.map(async (aanwezige) => {
+          const queryResult = await this.store.query('mandataris', {
+            'filter[:id:]': aanwezige.id,
+            include: 'is-bestuurlijke-alias-van',
+          });
+          return queryResult.firstObject;
+        })
+      );
       aanwezigen.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, "zalStemmen")
+        this.votingMap.set(aanwezige, 'zalStemmen')
       );
     } else {
       const stemmingId = this._stemming.id;
       const stemming = (yield this.store.query('stemming', {
-        "filter[:id:]": stemmingId,
-        include: "aanwezigen.is-bestuurlijke-alias-van,stemmers.is-bestuurlijke-alias-van,onthouders.is-bestuurlijke-alias-van,voorstanders.is-bestuurlijke-alias-van,tegenstanders.is-bestuurlijke-alias-van",
-        page: { size: 100 }
+        'filter[:id:]': stemmingId,
+        include:
+          'aanwezigen.is-bestuurlijke-alias-van,stemmers.is-bestuurlijke-alias-van,onthouders.is-bestuurlijke-alias-van,voorstanders.is-bestuurlijke-alias-van,tegenstanders.is-bestuurlijke-alias-van',
+        page: { size: 100 },
       })).firstObject;
 
       const aanwezigen = stemming.aanwezigen;
@@ -91,23 +94,24 @@ export default class EditStemmingService extends Service {
       const tegenstanders = stemming.tegenstanders;
 
       aanwezigen.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, "zalNietStemmen")
+        this.votingMap.set(aanwezige, 'zalNietStemmen')
       );
       stemmers.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, "zalStemmen")
+        this.votingMap.set(aanwezige, 'zalStemmen')
       );
       onthouders.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, "onthouding")
+        this.votingMap.set(aanwezige, 'onthouding')
       );
-      voorstanders.forEach((aanwezige) => this.votingMap.set(aanwezige, "voor"));
+      voorstanders.forEach((aanwezige) =>
+        this.votingMap.set(aanwezige, 'voor')
+      );
       tegenstanders.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, "tegen")
+        this.votingMap.set(aanwezige, 'tegen')
       );
     }
 
     this.refreshMap();
   }
-
 
   refreshMap() {
     // eslint-disable-next-line no-self-assign
@@ -126,8 +130,8 @@ export default class EditStemmingService extends Service {
   @action
   setUnaniemVoorstander() {
     for (let key of this.votingMap.keys()) {
-      if (this.votingMap.get(key) !== "zalNietStemmen") {
-        this.votingMap.set(key, "voor");
+      if (this.votingMap.get(key) !== 'zalNietStemmen') {
+        this.votingMap.set(key, 'voor');
       }
     }
     this.refreshMap();
@@ -135,8 +139,8 @@ export default class EditStemmingService extends Service {
   @action
   setUnaniemTegenstander() {
     for (let key of this.votingMap.keys()) {
-      if (this.votingMap.get(key) !== "zalNietStemmen") {
-        this.votingMap.set(key, "tegen");
+      if (this.votingMap.get(key) !== 'zalNietStemmen') {
+        this.votingMap.set(key, 'tegen');
       }
     }
     this.refreshMap();
@@ -144,8 +148,8 @@ export default class EditStemmingService extends Service {
   @action
   setUnaniemOnthouder() {
     for (let key of this.votingMap.keys()) {
-      if (this.votingMap.get(key) !== "zalNietStemmen") {
-        this.votingMap.set(key, "onthouding");
+      if (this.votingMap.get(key) !== 'zalNietStemmen') {
+        this.votingMap.set(key, 'onthouding');
       }
     }
     this.refreshMap();

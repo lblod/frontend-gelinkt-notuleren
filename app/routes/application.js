@@ -25,10 +25,8 @@ export default class ApplicationRoute extends Route {
       if (match) {
         const featureFlag = match[1];
         const isEnabled = queryParams[key] == 'true';
-        if (isEnabled)
-          this.features.enable(featureFlag);
-        else
-          this.features.disable(featureFlag);
+        if (isEnabled) this.features.enable(featureFlag);
+        else this.features.disable(featureFlag);
       }
     }
   }

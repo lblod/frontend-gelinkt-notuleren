@@ -5,9 +5,9 @@ export default class Agenda extends Model {
   @attr agendaType;
   @attr renderedContent;
 
-  @belongsTo('zitting', {inverse: null}) zitting;
+  @belongsTo('zitting', { inverse: null }) zitting;
   @belongsTo('published-resource') publishedResource;
 
-  @hasMany('agendapunt', {inverse: null}) agendapunten;
+  @hasMany('agendapunt', { inverse: null }) agendapunten;
   @hasMany('signed-resource') signedResources;
 }

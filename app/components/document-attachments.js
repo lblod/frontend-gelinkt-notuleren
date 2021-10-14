@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import {REGULATORY_TYPE_ID}  from 'frontend-gelinkt-notuleren/utils/constants';
+import { REGULATORY_TYPE_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class DocumentAttachmentsComponent extends Component {
   constructor(...args) {
@@ -18,12 +18,14 @@ export default class DocumentAttachmentsComponent extends Component {
 
   @task
   *updateAttachmentIsRegulatory(attachment, isRegulatory) {
-    if(!isRegulatory){
-      attachment.type=null;
-    }
-    else{
-      const concept=yield this.store.findRecord('concept', REGULATORY_TYPE_ID);
-      attachment.type=concept;
+    if (!isRegulatory) {
+      attachment.type = null;
+    } else {
+      const concept = yield this.store.findRecord(
+        'concept',
+        REGULATORY_TYPE_ID
+      );
+      attachment.type = concept;
     }
     yield attachment.save();
   }
@@ -40,7 +42,7 @@ export default class DocumentAttachmentsComponent extends Component {
     this.attachments = yield this.store.query('attachment', {
       page: { size: 100 },
       'filter[document-container][:id:]': this.args.documentContainer.id,
-      include: "type"
+      include: 'type',
     });
   }
 
