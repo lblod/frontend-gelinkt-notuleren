@@ -5,6 +5,7 @@ inbox:
     trash: Recycle bin
     manual: View manual
   meetings:
+    pageTitle: Meetings
     newMeeting: New meeting
     new:
       title: Create a new meeting

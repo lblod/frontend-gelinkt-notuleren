@@ -5,6 +5,7 @@ inbox:
     trash: Prullenmand
     manual: Bekijk handleiding
   meetings:
+    pageTitle: Zittingen
     newMeeting: Nieuwe zitting
     new:
       title: Nieuwe zitting aanmaken
