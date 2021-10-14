@@ -7,12 +7,15 @@
   </td>
   {{#if this.showVoteSelect}}
     <td>
-      <select {{on "change" this.onSelectVote}}>
-        <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
-        {{#each this.voteOptions as |voteOption|}}
-          <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
-        {{/each}}
-      </select>
+      {{#let (unique-id) as |id|}}
+        <AuLabel for={{id}}  class="au-u-hidden-visually">{{t "votingEdit.actionsLabel"}}</AuLabel>
+        <select {{on "change" this.onSelectVote}} id={{id}}>
+          <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
+          {{#each this.voteOptions as |voteOption|}}
+            <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
+          {{/each}}
+        </select>
+      {{/let}}
     </td>
   {{/if}}
   <td colspan="{{if this.showVoteSelect 1 2}}">

@@ -27,13 +27,16 @@
           </td>
           <td>{{attachment.file.humanReadableSize}}</td>
           <td class="au-c-custom-select-cell">
-            <select class="au-c-custom-select" {{on "change" (perform this.onSelectDecision attachment)}}>
-              <option value="">{{t "attachments.typePlaceholder"}}</option>
-              {{#each @decisions as |decisionOption|}}
-                <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>
-                  {{decisionOption.title}}</option>
-              {{/each}}
-            </select>
+            {{#let (unique-id) as |id|}}
+              <AuLabel class="au-u-hidden-visually" for={{id}}></AuLabel>
+              <select  id={{id}} class="au-c-custom-select" {{on "change" (perform this.onSelectDecision attachment)}}>
+                <option value="">{{t "attachments.typePlaceholder"}}</option>
+                {{#each @decisions as |decisionOption|}}
+                  <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>
+                    {{decisionOption.title}}</option>
+                {{/each}}
+              </select>
+            {{/let}}
           </td>
           <td>
             <AuToggleSwitch @label={{t "attachments.regulatory"}} @checked={{eq attachment.type.id this.regulatoryTypeId}} @onChange={{perform this.updateAttachmentIsRegulatory attachment}} />

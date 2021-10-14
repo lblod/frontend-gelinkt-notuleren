@@ -15,7 +15,10 @@
         <div class="au-o-layout">
           <AuHeading @skin="4">Kies een bestuurseenheid om mee in te loggen.</AuHeading>
           <p class="au-u-margin-top-small au-u-margin-bottom">
-            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" placeholder="Aalst, Berchem,..." value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
+            {{#let (unique-id) as |id|}}
+              <AuLabel for={{id}}>Bestuurseenheid zoeken</AuLabel>
+              <input class="au-c-input au-c-input--block js-js-input-pattern-bound" id={{id}} placeholder="Aalst, Berchem,..." value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
+            {{/let}}
           </p>
 
           <MockLogin as |login|>
@@ -25,11 +28,11 @@
               {{#if this.login.errorMessage}}
                 <AuAlert @alertIcon="alert-triangle" @alertTitle={{this.login.errorMessage}} @alertskin="warning" />
               {{/if}}
-              <login.each-account @accounts={{this.model}} as |account|>
-                <div class="au-o-box au-o-box--small au-c-card au-u-margin-bottom-small">
-                  <p>{{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}</p>
-                </div>
-              </login.each-account>
+              {{#each this.model as |account|}}
+                <AuButton class="au-c-card au-u-margin-bottom-small" @skin="link-secondary" @size="large" type="button" {{on "click" (fn login.login account.id account.gebruiker.group.id)}}>
+                  {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
+                </AuButton>
+              {{/each}}
               <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />
             {{/if}}
           </MockLogin>
