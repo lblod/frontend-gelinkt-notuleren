@@ -1,6 +1,20 @@
 
 
 
+## 2.19.0 (2021-10-20)
+
+#### :rocket: Enhancement
+* [#209](https://github.com/lblod/frontend-gelinkt-notuleren/pull/209) Feature/add article to bestuursorgan ([@lagartoverde](https://github.com/lagartoverde))
+* [#207](https://github.com/lblod/frontend-gelinkt-notuleren/pull/207) Added attachments number to agendapoints table ([@lagartoverde](https://github.com/lagartoverde))
+* [#210](https://github.com/lblod/frontend-gelinkt-notuleren/pull/210) Feature/add hash to printview ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#208](https://github.com/lblod/frontend-gelinkt-notuleren/pull/208) fix sorting on status in the agendapoint table ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 2
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.18.0 (2021-10-06)
 
 #### :rocket: Enhancement
