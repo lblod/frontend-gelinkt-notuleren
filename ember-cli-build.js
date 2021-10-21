@@ -25,7 +25,8 @@ module.exports = function (defaults) {
       sourceMapEmbed: true,
       includePaths: [
         'node_modules/@appuniversum/appuniversum',
-        'node_modules/@appuniversum/ember-appuniversum/app/styles'
+        'node_modules/@appuniversum/ember-appuniversum/app/styles',
+        'node_modules/@lblod/ember-rdfa-editor/app/styles'
       ]
     },
     autoprefixer: {

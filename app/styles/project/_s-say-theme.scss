@@ -12,31 +12,23 @@ $say-primary-600              : $au-blue-600;
 $say-primary-700              : $au-blue-700;
 $say-primary-900              : $au-blue-900;
 
-$say-outline-color            : $au-yellow-400;
+$say-outline-color            : rgba($au-blue-600,.65);
 
 // Font settings
 // ---
-$say-font    : $au-font;
-$say-light   : $au-light;
-$say-regular : $au-regular;
-$say-medium  : $au-medium;
-$say-bold    : $au-bold;
+$say-font                     : $au-font;
 
 
 // UI
 // ---
 // Display options
-$say-paper                       : true; // True = displays a paper like background.
-$say-paper-sidebar               : true; // True = adds space for a sidebar to the right.
-$say-toolbar-bottom              : false; // True = position the toolbar at the bottom.
+$say-paper                    : true; // True = displays a paper like background.
+$say-paper-sidebar            : true; // True = adds space for a sidebar to the right.
+$say-toolbar-bottom           : false; // True = position the toolbar at the bottom.
 
 
 // EDITOR
 // ---
-// Editor spacing and background
-$say-editor-padding              : $au-unit;
-$say-editor-background           : $au-gray-100;
-
 // Paper spacing and background
 $say-paper-min-height            : calc(100vh + #{$au-unit});
 $say-paper-padding               : $au-unit-large;
@@ -76,9 +68,9 @@ $say-editor-highlight-hover-color: $au-yellow-100;
 
 // TOOLBAR
 // ---
-$say-toolbar-background          : $au-gray-200;
-$say-toolbar-border              : tint($au-gray-300,30);
-$say-toolbar-height              : 44px;
+// $say-toolbar-background          : $au-gray-200;
+// $say-toolbar-border              : tint($au-gray-300,30);
+// $say-toolbar-height              : 44px;
 
 // Annotation switch styling
 $say-switch-label-color          : $au-gray-700;
