@@ -102,6 +102,9 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * deleteItemTask(item) {
+    // we don't use item.position here to guard against problems
+    // with position logic. The performance hit of searching here
+    // is probably minimal.
     const index = this.items.indexOf(item);
 
     this.items.splice(index, 1);
