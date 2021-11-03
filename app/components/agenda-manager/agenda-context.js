@@ -74,9 +74,6 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * updateItemTask(item) {
-    if(item.isNew) {
-      const treatment = yield item.behandeling;
-    }
     const treatment = yield item.behandeling;
     yield treatment.saveAndPersistDocument();
 
@@ -85,7 +82,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       this.setProperty(item, "zitting", zitting);
     }
 
-    yield this.updatePositionTask.perform(item);
+    yield this.updatePositionTask.unlinked().perform(item);
 
     const container = yield treatment.get("documentContainer");
     const status = yield container.get("status");
@@ -96,7 +93,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     }
 
     this.changeSet.add(item);
-    yield this.saveItemsTask.perform();
+    yield this.saveItemsTask.unlinked().perform();
   }
 
   /**
@@ -119,8 +116,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       yield treatment.destroyRecord();
     }
     yield item.destroyRecord();
-    yield this.repairPositionsTask.perform();
-    yield this.saveItemsTask.perform();
+    yield this.repairPositionsTask.unlinked().perform();
+    yield this.saveItemsTask.unlinked().perform();
   }
 
 
@@ -130,8 +127,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * onSortTask() {
-    yield this.repairPositionsTask.perform();
-    yield this.saveItemsTask.perform();
+    yield this.repairPositionsTask.unlinked().perform();
+    yield this.saveItemsTask.unlinked().perform();
   }
 
   @task
@@ -161,7 +158,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
         this.items.splice(oldIndex, 1);
       }
       this.items.splice(position, 0, item);
-      yield this.repairPositionsTask.perform();
+      yield this.repairPositionsTask.unlinked().perform();
     }
   }
 
@@ -182,12 +179,14 @@ export default class AgendaManagerAgendaContextComponent extends Component {
         this.setProperty(item, "position", index);
         this.setProperty(item, "vorigeAgendapunt", previous);
         const treatment = yield item.behandeling;
-        if(previous) {
-          const previousTreatment = yield previous.behandeling;
-          if(treatment && previous) {
+        if(treatment) {
+          if(previous) {
+            const previousTreatment = yield previous.behandeling;
             this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
-          }
 
+          } else {
+            this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", null);
+          }
         }
       }
       previous = item;
