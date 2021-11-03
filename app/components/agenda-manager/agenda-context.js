@@ -74,6 +74,9 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * updateItemTask(item) {
+    if(item.isNew) {
+      const treatment = yield item.behandeling;
+    }
     const treatment = yield item.behandeling;
     yield treatment.saveAndPersistDocument();
 
@@ -102,7 +105,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * deleteItemTask(item) {
-    const index = item.position;
+    const index = this.items.indexOf(item);
 
     this.items.splice(index, 1);
 
@@ -168,8 +171,6 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * update the item position and links
    * Only updates when necessary, does not persist the changes
    *
-   * @param {number} [from]
-   * @param {number} [to]
    * @private
    * */
   @task
@@ -180,10 +181,13 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       if(item.position !== index || previousItem !== previous) {
         this.setProperty(item, "position", index);
         this.setProperty(item, "vorigeAgendapunt", previous);
-        const treatment = yield item.treatment;
-        if(treatment) {
-          const previousTreatment = yield previous.treatment;
-          this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
+        const treatment = yield item.behandeling;
+        if(previous) {
+          const previousTreatment = yield previous.behandeling;
+          if(treatment && previous) {
+            this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
+          }
+
         }
       }
       previous = item;
