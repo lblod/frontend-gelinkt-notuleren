@@ -30,6 +30,7 @@
 @import "project/s-global";
 @import "project/s-say-theme";
 
+
 // MIXINS
 @import "appuniversum/t-font-size";
 @import "appuniversum/t-sass-mq";
@@ -122,7 +123,7 @@
 
 
 // PLUGINS
-@import "ember-rdfa-editor";
+@import "ember-rdfa-editor/custom-components";
 @import "ember-appuniversum/p-ember-power-select";
 @import "ember-appuniversum/p-duet-datepicker";
 @import "project/p-annotations";
