@@ -13,7 +13,7 @@ export default class AgendaManagerEditComponent extends Component {
   }
   @task
   * submitTask(item) {
-    yield this.args.saveTask.perform(item);
+    yield this.args.saveTask.unlinked().perform(item);
     this.args.onClose();
   }
   @action
@@ -22,7 +22,7 @@ export default class AgendaManagerEditComponent extends Component {
   }
   @task
   * deleteTask(item) {
-    yield this.args.deleteTask.perform(item);
+    yield this.args.deleteTask.unlinked().perform(item);
     this.args.onClose();
   }
   @task
