@@ -80,6 +80,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     if (item.isNew) {
       const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
       this.setProperty(item, "zitting", zitting);
+      this.setProperty(treatment, "openbaar", item.geplandOpenbaar);
     }
 
     yield this.updatePositionTask.unlinked().perform(item);
