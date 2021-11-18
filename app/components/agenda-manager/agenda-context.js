@@ -80,9 +80,10 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     if (item.isNew) {
       const zitting = yield this.store.findRecord("zitting", this.args.zittingId);
       this.setProperty(item, "zitting", zitting);
+      this.setProperty(treatment, "openbaar", item.geplandOpenbaar);
     }
 
-    yield this.updatePositionTask.perform(item);
+    yield this.updatePositionTask.unlinked().perform(item);
 
     const container = yield treatment.get("documentContainer");
     const status = yield container.get("status");
@@ -93,7 +94,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     }
 
     this.changeSet.add(item);
-    yield this.saveItemsTask.perform();
+    yield this.saveItemsTask.unlinked().perform();
   }
 
   /**
@@ -102,7 +103,10 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * deleteItemTask(item) {
-    const index = item.position;
+    // we don't use item.position here to guard against problems
+    // with position logic. The performance hit of searching here
+    // is probably minimal.
+    const index = this.items.indexOf(item);
 
     this.items.splice(index, 1);
 
@@ -116,8 +120,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       yield treatment.destroyRecord();
     }
     yield item.destroyRecord();
-    yield this.repairPositionsTask.perform();
-    yield this.saveItemsTask.perform();
+    yield this.repairPositionsTask.unlinked().perform();
+    yield this.saveItemsTask.unlinked().perform();
   }
 
 
@@ -127,8 +131,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    */
   @task
   * onSortTask() {
-    yield this.repairPositionsTask.perform();
-    yield this.saveItemsTask.perform();
+    yield this.repairPositionsTask.unlinked().perform();
+    yield this.saveItemsTask.unlinked().perform();
   }
 
   @task
@@ -158,7 +162,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
         this.items.splice(oldIndex, 1);
       }
       this.items.splice(position, 0, item);
-      yield this.repairPositionsTask.perform();
+      yield this.repairPositionsTask.unlinked().perform();
     }
   }
 
@@ -168,8 +172,6 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * update the item position and links
    * Only updates when necessary, does not persist the changes
    *
-   * @param {number} [from]
-   * @param {number} [to]
    * @private
    * */
   @task
@@ -180,10 +182,15 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       if(item.position !== index || previousItem !== previous) {
         this.setProperty(item, "position", index);
         this.setProperty(item, "vorigeAgendapunt", previous);
-        const treatment = yield item.treatment;
+        const treatment = yield item.behandeling;
         if(treatment) {
-          const previousTreatment = yield previous.treatment;
-          this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
+          if(previous) {
+            const previousTreatment = yield previous.behandeling;
+            this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", previousTreatment);
+
+          } else {
+            this.setProperty(treatment, "vorigeBehandelingVanAgendapunt", null);
+          }
         }
       }
       previous = item;

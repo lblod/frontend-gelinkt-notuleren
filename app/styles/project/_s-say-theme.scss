@@ -2,25 +2,11 @@
 // #SAY THEME
 // ==================================
 
+// ==================================
+// #THEME
+// ==================================
+
 // Define the look of the Say Editor by changing the variables.
-
-// Colors
-// ---
-$say-primary-200              : $au-blue-200;
-$say-primary-300              : $au-blue-300;
-$say-primary-600              : $au-blue-600;
-$say-primary-700              : $au-blue-700;
-$say-primary-900              : $au-blue-900;
-
-$say-outline-color            : $au-yellow-400;
-
-// Font settings
-// ---
-$say-font    : $au-font;
-$say-light   : $au-light;
-$say-regular : $au-regular;
-$say-medium  : $au-medium;
-$say-bold    : $au-bold;
 
 
 // UI
@@ -36,6 +22,8 @@ $say-toolbar-bottom              : false; // True = position the toolbar at the 
 // Editor spacing and background
 $say-editor-padding              : $au-unit;
 $say-editor-background           : $au-gray-100;
+$say-editor-sidebar-medium       : 30%;
+$say-editor-sidebar-large        : 30%;
 
 // Paper spacing and background
 $say-paper-min-height            : calc(100vh + #{$au-unit});
@@ -43,7 +31,18 @@ $say-paper-padding               : $au-unit-large;
 $say-paper-background            : $au-white;
 $say-paper-box-shadow            : 0 1px 3px rgba($au-gray-900, .1), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
 
+
+// Semantic color variables
+$say-primary-200                 : $au-blue-200;
+$say-primary-300                 : $au-blue-300;
+$say-primary-600                 : $au-blue-600;
+$say-primary-700                 : $au-blue-700;
+$say-primary-800                 : $au-blue-800;
+$say-primary-900                 : $au-blue-900;
+
+
 // Typography
+$say-font-family                 : $au-font;
 $say-h1-font-family              : $au-font-secondary;
 $say-h1-font-weight              : $au-light;
 $say-h1-font-size                : $au-h1;
@@ -80,50 +79,45 @@ $say-toolbar-background          : $au-gray-200;
 $say-toolbar-border              : tint($au-gray-300,30);
 $say-toolbar-height              : 44px;
 
-// Annotation switch styling
-$say-switch-label-color          : $au-gray-700;
-$say-switch-color                : $au-gray-300;
-$say-switch-active-color         : $au-blue-600;
 
-
-// BUTTON
+// BUTTONS
 // ---
 
-$say-button-height                : $au-unit + $au-unit-small;
-$say-button-font-family           : $au-font;
-$say-button-font-size             : $au-base;
-$say-button-font-weight           : $au-regular;
-$say-button-border                : .1rem;
-$say-button-border-color          : $au-blue-700;
-$say-button-border-hover-color    : $au-blue-600;
-$say-button-color                 : $au-white;
-$say-button-hover-color           : $au-white;
-$say-button-bg-color              : $au-blue-700;
-$say-button-bg-hover-color        : $au-blue-600;
-$say-button-radius                : 0;
+// Button
+$say-button-height               : $au-unit + $au-unit-tiny;
+$say-button-font-family          : $say-font-family;
+$say-button-font-size            : $au-base;
+$say-button-font-weight          : $au-regular;
+$say-button-border               : .1rem;
+$say-button-border-color         : $say-primary-600;
+$say-button-border-hover-color   : $say-primary-800;
+$say-button-color                : $au-white;
+$say-button-hover-color          : $au-white;
+$say-button-bg-color             : $say-primary-600;
+$say-button-bg-hover-color       : $say-primary-800;
+$say-button-radius               : $au-radius;
 
 // Secondary button
-$say-button-secondary-color               : $au-blue-700;
-$say-button-secondary-hover-color         : $au-blue-600;
-$say-button-secondary-border-color        : transparent;
-$say-button-secondary-border-hover-color  : transparent;
-$say-button-secondary-bg-color            : transparent;
-$say-button-secondary-bg-hover-color      : transparent;
+$say-button-secondary-color                : $au-gray-700;
+$say-button-secondary-hover-color          : $au-gray-600;
+$say-button-secondary-border-color         : transparent;
+$say-button-secondary-border-hover-color   : transparent;
+$say-button-secondary-bg-color             : transparent;
+$say-button-secondary-bg-hover-color       : transparent;
 
-// Tertiary button
-$say-button-tertiary-height               : $au-unit; // TODO think of height
-$say-button-tertiary-color                : $au-blue-700;
-$say-button-tertiary-hover-color          : $au-blue-600;
-$say-button-tertiary-border-color         : transparent;
-$say-button-tertiary-border-hover-color   : transparent;
-$say-button-tertiary-bg-color             : $au-white;
-$say-button-tertiary-bg-hover-color       : transparent;
-
+// // Tertiary button
+$say-button-tertiary-height                : $au-unit;
+$say-button-tertiary-color                 : $au-blue-600;
+$say-button-tertiary-hover-color           : $au-blue-800;
+$say-button-tertiary-border-color          : transparent;
+$say-button-tertiary-border-hover-color    : transparent;
+$say-button-tertiary-bg-color              : $au-white;
+$say-button-tertiary-bg-hover-color        : transparent;
 
 // ANNOTATIONS
 // ---
 // Annotation options
-$say-annotation-width            : $au-unit-huge*1.5 !default;
+$say-annotation-width            : $au-unit-huge*1.5;
 $say-annotation-offset           : $au-unit-large;
 $say-annotation-gutter           : $au-unit;
 $say-annotation-width-content    : $say-annotation-width;
@@ -134,34 +128,37 @@ $say-annotation-background-color : $au-gray-100;
 // INPUT
 // ---
 
-$say-input-height                    : $au-unit + $au-unit-small;
-$say-input-font-size                 : $au-h6;
+$say-input-height                    : $au-unit-large - $au-unit-small;
 $say-input-color                     : $au-gray-1000;
-$say-input-border-color              : $au-gray-300;
-$say-input-focus-border-color        : $say-outline-color;
-$say-input-error-border              : $au-red-600;
 $say-input-background-color          : $au-white;
-$say-input-radius                    : 0;
+$say-input-border-color              : $au-gray-400;
+$say-input-focus-border-color        : rgba($au-blue-600,.65);
+$say-input-error-border              : $au-red-600;
+$say-input-radius                    : $au-radius;
+
 $say-input-disabled-background-color : $au-gray-100;
 $say-input-disabled-border-color     : $au-gray-600;
 $say-input-disabled-color            : $au-gray-700;
+$say-input-font-size                 : $au-h6;
 
 
 // LABEL
 // ---
 
-$say-label-color                   : $au-gray-800 !default;
+$say-label-color                   : $au-gray-800;
 
 
 // HELP TEXT
 // ---
 
-$say-help-text-color             : $au-gray-800 !default;
-$say-help-text-error-color       : $au-red-600 !default;
-$say-help-text-font-size         : 1.4rem !default;
+$say-help-text-color             : $au-gray-800;
+$say-help-text-error-color       : $au-red-600;
+$say-help-text-font-size         : 1.4rem;
+
 
 
 // DISABLED EDITOR
+// ---
 .say-content--disabled {
   cursor: default;
 }

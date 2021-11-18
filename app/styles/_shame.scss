@@ -314,7 +314,11 @@
 .au-c-card--flex.au-c-card--expandable.au-c-card--publish {
   padding: 0 !important;
 
-  > .au-c-card__header--clickable {
+  > .au-c-card__clickable {
+    align-items: center;
+  }
+
+  > .au-c-card__clickable .au-c-card__header {
     align-items: center;
     padding: $au-unit-small;
     margin-bottom: 0;
