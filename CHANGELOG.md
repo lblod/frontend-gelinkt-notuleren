@@ -1,6 +1,24 @@
 
 
 
+## 2.19.1 (2021-11-18)
+
+#### :rocket: Enhancement
+* [#212](https://github.com/lblod/frontend-gelinkt-notuleren/pull/212) Feature/use appuniversum in editor ([@Dietr](https://github.com/Dietr))
+
+#### :bug: Bug Fix
+* [#215](https://github.com/lblod/frontend-gelinkt-notuleren/pull/215) correctly set the default for "openbaar" on treatment ([@nvdk](https://github.com/nvdk))
+* [#217](https://github.com/lblod/frontend-gelinkt-notuleren/pull/217) sort added to ap in meeting form ([@Asergey91](https://github.com/Asergey91))
+* [#216](https://github.com/lblod/frontend-gelinkt-notuleren/pull/216) Fix calendar popup overflow ([@Dietr](https://github.com/Dietr))
+* [#213](https://github.com/lblod/frontend-gelinkt-notuleren/pull/213) Bugfix/agendapoint ordering ([@abeforgit](https://github.com/abeforgit))
+* [#214](https://github.com/lblod/frontend-gelinkt-notuleren/pull/214) bump rdfa editor to move to support ember-appuniversum in rdfa-editor ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.19.0 (2021-10-20)
 
 #### :rocket: Enhancement
