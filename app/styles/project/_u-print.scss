@@ -100,7 +100,8 @@
   }
 
   .au-c-pill {
-    border-color: $au-gray-300 !important;
+    border: none;
+    padding: 0;
   }
 
   .u-wide-on-print,
@@ -114,9 +115,9 @@
   @page {
     counter-increment: page;
     counter-reset: page 1;
+    size: auto;
+    margin: 6mm 0;
   }
-
-
 
   // App container
   .au-c-app-container,
@@ -205,5 +206,98 @@
   // Publish
   .au-c-editor-preview-treatment--private .behandeling [property="dc:subject"]:after, .au-c-editor-preview-treatment--private .behandeling [property="eli:title"]:after, .au-c-editor-preview-treatment--private .behandeling [property="eli:description"]:after, .au-c-editor-preview-treatment--private .behandeling [property="besluit:openbaar"]:after {
     border-right-color: $au-gray-300 !important;
+  }
+
+  // Make text smaller on print
+  .au-c-heading--1,
+  .au-c-content .au-c-heading--1,
+  .au-c-content h1 {
+    @include au-font-size($au-h4,1.3, $important: true);
+
+    br {
+      display: none;
+    }
+  }
+
+  .au-c-heading--2,
+  .au-c-content .au-c-heading--2,
+  .au-c-content h2 {
+    @include au-font-size(1.6rem,1.3, $important: true);
+  }
+
+  .au-c-heading--3,
+  .au-c-template h3,
+  .au-c-editor-preview h3,
+  .au-c-content .au-c-heading--3,
+  .au-c-content h3,
+  .au-c-template--decision h3, .au-c-template--decision h4, .au-c-editor-preview .besluiten h3, .au-c-editor-preview .besluiten h4 {
+    @include au-font-size(1.5rem, 1.3, $important: true);
+  }
+
+  .au-c-heading--4,
+  .au-c-template h4,
+  .au-c-editor-preview h4,
+  .au-c-content .au-c-heading--4,
+  .au-c-content h4 {
+    @include au-font-size(1.4rem, 1.2, $important: true);
+  }
+
+  .au-c-heading--5,
+  .au-c-heading--6,
+  .au-c-content .au-c-heading--5,
+  .au-c-content .au-c-heading--6,
+  .au-c-template h5,
+  .au-c-template h6,
+  .au-c-editor-preview h5,
+  .au-c-editor-preview h6 {
+    @include au-font-size(1.3rem, 1.2, $important: true);
+  }
+
+  .au-c-template [property="besluit:geplandOpenbaar"], .au-c-template [property="besluit:openbaar"], .au-c-editor-preview [property="besluit:geplandOpenbaar"], .au-c-editor-preview [property="besluit:openbaar"], .au-c-template-public, .au-c-template-private, [property="besluit:geplandOpenbaar"], [property="besluit:openbaar"],.au-c-template--notes [property="dc:subject"], .au-c-rdfa-publication .notulen [property="dc:subject"] {
+    @include au-font-size(1.3rem, 1.2, $important: true);
+  }
+
+  .au-c-content,
+  body,
+  p,
+  ul,
+  ol,
+  .au-c-pill,
+  .au-c-template table, .au-c-editor-preview table,
+  .au-c-template table th, .au-c-template table td, .au-c-editor-preview table th, .au-c-editor-preview table td {
+    font-size: 1.2rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .au-c-hr {
+    border-bottom: 1px solid $au-gray-1000;
+  }
+
+  .au-c-hr--large {
+    margin: $au-unit-small 0;
+  }
+
+  // Hide certain margins
+  .au-template-public::before,
+  .au-template-private::before,
+  .au-c-template-public::before, .au-c-template-private::before, [property="besluit:geplandOpenbaar"]::before, [property="besluit:openbaar"]::before {
+    display: none !important;
+  }
+
+  .au-c-editor-preview,
+  .au-c-card--padding .au-c-card__header,
+  .au-c-card--padding .au-c-card__content {
+    padding: 0;
+  }
+
+  .au-c-card .au-c-badge,
+  .au-c-editor-preview-treatment-toggle-box,
+  .au-c-editor-preview-treatment--private .behandeling [property="dc:subject"]::after, .au-c-editor-preview-treatment--private .behandeling [property="eli:title"]::after, .au-c-editor-preview-treatment--private .behandeling [property="eli:description"]::after, .au-c-editor-preview-treatment--private .behandeling [property="besluit:openbaar"]::after {
+    display: none;
+  }
+
+  .au-c-card,
+  .au-c-editor-preview {
+    border: 0;
   }
 }
