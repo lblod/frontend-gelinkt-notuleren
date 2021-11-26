@@ -24,11 +24,11 @@
 @import "appuniversum/s-colors.scss";
 @import "appuniversum/s-global";
 @import "appuniversum/s-utilities";
+@import "appuniversum/s-root";
 
 
 // PROJECT SPECIFIC VARIABLES
 @import "project/s-global";
-@import "project/s-say-theme";
 
 
 // MIXINS
@@ -102,7 +102,6 @@
 @import 'project/c-editor-preview';
 @import "project/c-template";
 @import "project/c-theme";
-
 
 
 // UTILITIES

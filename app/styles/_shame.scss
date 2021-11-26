@@ -577,3 +577,9 @@
     border-bottom-color: $au-blue-900;
   }
 }
+
+// DISABLED EDITOR
+// ---
+.say-content--disabled {
+  cursor: default;
+}
