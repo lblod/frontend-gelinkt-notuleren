@@ -577,3 +577,14 @@
     border-bottom-color: $au-blue-900;
   }
 }
+
+// DISABLED EDITOR
+// ---
+.say-content--disabled {
+  cursor: default;
+}
+
+// Override main container on mock-login
+.au-c-main-container--mock-login {
+  height: 100%;
+}
