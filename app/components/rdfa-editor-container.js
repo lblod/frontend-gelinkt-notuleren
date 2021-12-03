@@ -4,7 +4,10 @@ import { tracked } from '@glimmer/tracking';
 
 export default class RdfaEditorContainerComponent extends Component {
   @tracked editor;
-
+  plugins = [
+    'roadsign-regulation-plugin',
+    'template-variable-plugin'
+  ];
   get editorOptions() {
     return (
       this.args.editorOptions ?? {
