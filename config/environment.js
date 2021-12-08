@@ -29,6 +29,9 @@ module.exports = function (environment) {
     roadsignRegulationPlugin: {
       endpoint: "{{MOW_REGISTRY_ENDPOINT}}"
     },
+    templateVariablePlugin: {
+      endpoint: "{{MOW_REGISTRY_ENDPOINT}}"
+    },
     manual: {
       baseUrl: "{{MANUAL_BASE_URL}}",
       notuleren: "{{MANUAL_NOTULEREN}}",
@@ -88,6 +91,7 @@ module.exports = function (environment) {
     ENV.manual.print="";
     ENV.featureFlags.attachments = true;
     ENV.roadsignRegulationPlugin.endpoint = "https://dev.roadsigns.lblod.info/sparql";
+    ENV.templateVariablePlugin.endpoint = "https://dev.roadsigns.lblod.info/sparql";
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
