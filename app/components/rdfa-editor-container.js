@@ -6,7 +6,8 @@ export default class RdfaEditorContainerComponent extends Component {
   @tracked editor;
   plugins = [
     'roadsign-regulation',
-    'template-variable'
+    'template-variable',
+    'besluit'
   ];
   get editorOptions() {
     return (
