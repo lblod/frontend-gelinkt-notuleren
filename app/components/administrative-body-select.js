@@ -2,7 +2,8 @@ import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
-import moment from 'moment';
+import sub from 'date-fns/sub';
+import isAfter from 'date-fns/isAfter';
 
 const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
   "http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005", //	"Gemeenteraad"
@@ -76,7 +77,8 @@ export default class AdministrativeBodySelectComponent extends Component {
         if(!endDate) {
           return true;
         }
-        return moment(endDate).isAfter(moment().subtract(2, 'months'));
+        const twoMonthsAgo = sub(new Date(), {months: 2});
+        return isAfter(endDate,twoMonthsAgo);
       }
     );
   }

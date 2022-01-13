@@ -42,8 +42,8 @@
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
         <td>{{row.title}}</td>
-        <td>{{moment-calendar row.updatedOn}}</td>
-        <td>{{moment-calendar row.createdOn}}</td>
+        <td>{{human-friendly-date row.updatedOn}}</td>
+        <td>{{human-friendly-date row.createdOn}}</td>
       {{/with}}
     </c.body>
   </t.content>
