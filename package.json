@@ -37,7 +37,7 @@
     "@lblod/ember-mock-login": "0.5.0",
     "@lblod/ember-rdfa-editor": "^0.49.0",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.4.0",
-    "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.2",
+    "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.4",
     "@lblod/ember-rdfa-editor-document-title-plugin": "0.2.0",
     "@lblod/ember-rdfa-editor-generic-model-plugin": "0.3.0",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.7.4",
