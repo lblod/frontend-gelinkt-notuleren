@@ -49,12 +49,6 @@ module.exports = function (environment) {
       l: 'nl',
       shift_page_down: false
     },
-    moment: {
-      outputFormat: 'DD-MM-YYYY hh:mm:ss',
-      includeTimezone: 'subset',
-      includeLocales: ['nl'],
-      allowEmpty: true
-    },
     torii: {
       disableRedirectInitializer: true,
       providers: {
