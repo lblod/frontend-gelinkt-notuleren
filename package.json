@@ -107,7 +107,8 @@
     "release-it-lerna-changelog": "^3.1.0",
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3",
-    "webpack": "^5.55.1"
+    "webpack": "^5.55.1",
+    "date-fns": "^2.28.0"
   },
   "engines": {
     "node": "10.* || >= 12"
@@ -123,8 +124,5 @@
     "last 1 Safari version",
     "last 1 iOS version",
     "last 1 Edge version"
-  ],
-  "dependencies": {
-    "date-fns": "^2.28.0"
-  }
+  ]
 }
