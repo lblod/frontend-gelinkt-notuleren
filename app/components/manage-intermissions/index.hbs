@@ -1,4 +1,3 @@
-
 <div class="au-c-meeting-chrome-card au-u-margin-bottom-none">
   <AuHeading @level="3" @skin="6" class="au-c-meeting-chrome-card__title">{{t "manageIntermissions.title"}}</AuHeading>
   <table class="au-c-meeting-chrome-table">
@@ -34,18 +33,18 @@
       {{#if this.fetchIntermissions.lastSuccessful}}
         {{#each this.intermissions as |intermission|}}
           <tr>
-            <td>{{moment-format intermission.startedAt "DD/MM/YYYY HH:mm"}}</td>
-            <td>{{moment-format intermission.endedAt "DD/MM/YYYY HH:mm"}}</td>
+            <td>{{detailed-date intermission.startedAt}}</td>
+            <td>{{detailed-date intermission.endedAt}}</td>
             <td>
               {{#if intermission.agendaPosition}}
                 {{#if (eq intermission.agendaPosition.position.label "during")}}
-                  {{t "manageIntermissions.duringAp"}}: 
+                  {{t "manageIntermissions.duringAp"}}:
                 {{/if}}
                 {{#if (eq intermission.agendaPosition.position.label "before")}}
-                  {{t "manageIntermissions.beforeAp"}}: 
+                  {{t "manageIntermissions.beforeAp"}}:
                 {{/if}}
                 {{#if (eq intermission.agendaPosition.position.label "after")}}
-                  {{t "manageIntermissions.afterAp"}}: 
+                  {{t "manageIntermissions.afterAp"}}:
                 {{/if}}
                 <a href="#behandeling-{{intermission.agendaPosition.agendapoint.behandeling.id}}" class="au-c-link au-c-link--secondary">
                   {{intermission.agendaPosition.agendapoint.titel}}

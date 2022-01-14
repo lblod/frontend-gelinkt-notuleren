@@ -2,7 +2,7 @@
   {{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
   <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
     <AuIcon @icon="calendar" />
-    {{moment-format @signature.createdOn 'L LT'}}
+    {{detailed-date @signature.createdOn}}
   </AuHelpText>
 </p>
 <p class="au-u-margin-top-tiny">

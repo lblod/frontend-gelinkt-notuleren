@@ -1,7 +1,7 @@
 <tr>
   <td>{{@mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{@mandataris.isBestuurlijkeAliasVan.achternaam}}</td>
   <td>{{@mandataris.bekleedt.bestuursfunctie.label}}</td>
-  <td>{{moment-format @mandataris.isBestuurlijkeAliasVan.geboorte.datum 'DD/MM/YYYY'}}</td>
+  <td>{{plain-date @mandataris.isBestuurlijkeAliasVan.geboorte.datum}}</td>
   <td>
     <label class="checkbox checkbox--block">
       <input class="checkbox__toggle" type="checkbox" checked={{@selected}} {{on "input" (fn @toggle @mandataris @selected)}} />

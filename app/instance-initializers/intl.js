@@ -4,12 +4,9 @@
 // to set the locale
 export function initialize(appInstance) {
   const intl = appInstance.lookup('service:intl');
-  const moment = appInstance.lookup('service:moment');
   const userLocale = ( navigator.language || navigator.languages[0] );
   intl.setLocale([userLocale, 'nl-BE']);
   flatpickr.localize(flatpickr.l10ns.nl);
-  moment.setTimeZone('Europe/Brussels');
-  moment.setLocale('nl');
 }
 
 export default {

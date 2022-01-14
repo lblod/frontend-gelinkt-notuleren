@@ -21,7 +21,7 @@
   </AuToolbar>
   <AuToolbar @size="small" class="au-u-padding-top-none">
     <AuToolbarGroup>
-      <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
+      <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{plain-date @zitting.geplandeStart}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup class="au-c-toolbar__group--actions">
       {{#if this.isComplete}}
@@ -94,7 +94,7 @@
       {{!-- Meeting title --}}
       <AuHeading>
         {{t "meetingForm.meetingHeadingPartOne"}} {{t this.headerArticleTranslationString}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
-        {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span>
+        {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{detailed-date  @zitting.geplandeStart}}</span>
       </AuHeading>
       <AuHr @size="large"/>
 

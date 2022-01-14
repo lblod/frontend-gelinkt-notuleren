@@ -30,9 +30,7 @@
         <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
       </td>
       <td>
-        {{moment-calendar row.updatedOn}}
-        <br>
-        <AuHelpText @skin="secondary">{{moment-from-now this.document.currentVersion.updatedOn}}</AuHelpText>
+        {{human-friendly-date row.updatedOn}}
       </td>
       <td>
         <EditorStatusPill @status={{container.status}} />
