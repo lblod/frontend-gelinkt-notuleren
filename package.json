@@ -38,7 +38,7 @@
     "@lblod/ember-rdfa-editor": "^0.50.0-beta.2",
     "@lblod/ember-rdfa-editor-besluit-plugin": "0.0.3",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "0.4.0",
-    "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.2",
+    "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.4",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.7.4",
     "@lblod/ember-rdfa-editor-roadsign-regulation-plugin": "^0.1.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.9.0",
@@ -81,7 +81,6 @@
     "ember-load-initializers": "^2.1.2",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-modifier": "^1.0.3",
-    "ember-moment": "^9.0.1",
     "ember-page-title": "^6.0.3",
     "ember-power-select": "^4.1.4",
     "ember-promise-helpers": "^1.0.9",
@@ -108,9 +107,9 @@
     "release-it-lerna-changelog": "^3.1.0",
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3",
-    "webpack": "^5.55.1"
+    "webpack": "^5.55.1",
+    "date-fns": "^2.28.0"
   },
-  "dependencies": {},
   "engines": {
     "node": "10.* || >= 12"
   },

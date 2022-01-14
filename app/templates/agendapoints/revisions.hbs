@@ -8,7 +8,7 @@
   <div class="grid">
   	<div class="col--6-12 col--8-12--m col--12-12--s">
 			<h1 class="h4 u-spacer--tiny">Versiegeschiedenis {{this.model.editorDocument.title}}</h1>
-			<p class="small text-fade u-spacer--tiny">Laatst opgeslagen: {{moment-calendar this.model.editorDocument.updatedOn}} ({{this.model.editorDocument.updatedOn}})</p>
+			<p class="small text-fade u-spacer--tiny">Laatst opgeslagen: {{human-friendly-date this.model.editorDocument.updatedOn}} ({{this.model.editorDocument.updatedOn}})</p>
 		</div>
 	</div>
 </div>
@@ -21,7 +21,7 @@
 	        {{!-- <h3 class="title--alt small u-spacer--none">Opgeslagen documentversies</h3> --}}
 		        {{#each this.orderedRevisions as |revision|}}
 							<div class="u-hr u-padding--bottom--small u-spacer--small">
-	            	<h4 class="h5 u-spacer--tiny">Versie van {{moment-calendar revision.updatedOn}}</h4>
+	            	<h4 class="h5 u-spacer--tiny">Versie van {{human-friendly-date revision.updatedOn}}</h4>
 	            	<p class="small text-fade u-spacer--small">{{revision.updatedOn}}</p>
                 <AuButtonGroup>
                   <AuButton @icon="eye" {{on "click" (fn this.details revision)}}>
@@ -68,7 +68,7 @@
     		<ul class="numbered-list">
 	        {{#each this.revisionsToRemove as |revision|}}
 	          <li class="u-hr u-padding--bottom--small">
-	          	Versie van {{moment-calendar revision.updatedOn}}
+	          	Versie van {{human-friendly-date revision.updatedOn}}
 	          	<p class="text-fade">{{revision.title}}</p>
 	          </li>
 	        {{/each}}
