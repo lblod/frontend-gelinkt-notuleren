@@ -1,66 +1,71 @@
-<AuModal @modalOpen={{true}}
-         @size="fullscreen"
-         @closeModal={{this.closeModal}}
-         @modalTitle={{this.document.title}}
-         class="au-c-modal--editor"
-         as |Modal|
->
-  <Modal.Body>
-    {{#if this.documentContainer}}
-      <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2"  class={{if this.uploading "" "au-u-hidden"}}>
-        <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
-      </div>
-    {{/if}}
-    {{#if this.document}}
-      <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1"  class={{if this.uploading "au-u-hidden" ""}}>
-        <BesluitDocumentContainer class={{if this.uploading ".au-u-hidden" ""}}
-                                  @document={{this.document}}
-                                  @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
-                                  @editor={{this.editor}}
-                                  @saving={{this.saveDocumentTask.isRunning}}
-        />
-      </div>
-    {{/if}}
-  </Modal.Body>
-  <Modal.Footer>
-    {{#if (feature-flag 'attachments')}}
-      {{#if this.uploading}}
-        <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
-          <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" this.toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
-            {{t "attachments.return"}}
-          </AuButton>
-          <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
-            {{t "attachments.attachments"}}
-            (<strong>{{if this.documentContainer.attachments.length this.documentContainer.attachments.length 0}}</strong>)
-          </AuButton>
-        </AuButtonGroup>
-      {{else}}
-        <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
-          <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
-            {{t "attachments.return"}}
-          </AuButton>
-          <AuButton class="au-u-margin-bottom-none has-tooltip" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
-            {{t "attachments.attachments"}}
-            (<strong>{{if this.documentContainer.attachments.length this.documentContainer.attachments.length 0}}</strong>)
-            <span class="au-c-button__tooltip au-c-button__tooltip--top">{{t "attachments.saveAndGo"}}</span>
-          </AuButton>
-        </AuButtonGroup>
+<div class="au-c-modal au-c-modal--fullscreen is-visible au-c-modal--editor" role="dialog" aria-describedby="au-c-modal-title-" tabindex="-1">
+  <div class="au-c-modal__header">
+    <h1 id="au-c-modal-title-" class="au-c-modal__title" tabindex="-1">
+      {{this.document.title}}
+    </h1>
+    <button class="au-c-modal__close" type="button" {{on 'click' this.closeModal}}>
+      <svg role="img" class="au-c-icon au-c-icon--cross  au-c-icon--large" aria-hidden="true">
+        <use xlink:href="/@appuniversum/ember-appuniversum/appuniversum-symbolset.svg#cross"></use>
+      </svg>
+      <span class="au-u-hidden-visually">Venster sluiten</span>
+    </button>
+  </div>
+  <div class="au-c-modal__body">
+      {{#if this.documentContainer}}
+        <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2"  class={{if this.uploading "" "au-u-hidden"}}>
+          <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
+        </div>
       {{/if}}
-    {{/if}}
-    <AuButtonGroup>
-      <AuButton @disabled={{this.saveDocumentTask.isRunning}}
-        {{on "click" (perform this.saveDocumentTask)}}>
-        {{t "behandelingVanAgendapunten.saveButton"}}
-      </AuButton>
-      <AuButton @disabled={{this.saveDocumentTask.isRunning}} {{on "click" this.saveAndQuit}}>
-        {{t "behandelingVanAgendapunten.saveAndQuit"}}
-      </AuButton>
-      <AuButton @skin="secondary"
-                @disabled={{this.saveDocumentTask.isRunning}}
-        {{on "click" this.closeModal}}>
-        {{t "behandelingVanAgendapunten.cancel"}}
-      </AuButton>
-    </AuButtonGroup>
-  </Modal.Footer>
-</AuModal>
+      {{#if this.document}}
+        <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1"  class={{if this.uploading "au-u-hidden" ""}}>
+          <BesluitDocumentContainer class={{if this.uploading ".au-u-hidden" ""}}
+                                    @document={{this.document}}
+                                    @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
+                                    @editor={{this.editor}}
+                                    @saving={{this.saveDocumentTask.isRunning}}
+          />
+        </div>
+      {{/if}}
+  </div>
+  <div class="au-c-modal__footer">
+      {{#if (feature-flag 'attachments')}}
+        {{#if this.uploading}}
+          <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+            <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" this.toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
+              {{t "attachments.return"}}
+            </AuButton>
+            <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
+              {{t "attachments.attachments"}}
+              (<strong>{{if this.documentContainer.attachments.length this.documentContainer.attachments.length 0}}</strong>)
+            </AuButton>
+          </AuButtonGroup>
+        {{else}}
+          <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+            <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
+              {{t "attachments.return"}}
+            </AuButton>
+            <AuButton class="au-u-margin-bottom-none has-tooltip" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform this.toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
+              {{t "attachments.attachments"}}
+              (<strong>{{if this.documentContainer.attachments.length this.documentContainer.attachments.length 0}}</strong>)
+              <span class="au-c-button__tooltip au-c-button__tooltip--top">{{t "attachments.saveAndGo"}}</span>
+            </AuButton>
+          </AuButtonGroup>
+        {{/if}}
+      {{/if}}
+      <AuButtonGroup>
+        <AuButton @disabled={{this.saveDocumentTask.isRunning}}
+          {{on "click" (perform this.saveDocumentTask)}}>
+          {{t "behandelingVanAgendapunten.saveButton"}}
+        </AuButton>
+        <AuButton @disabled={{this.saveDocumentTask.isRunning}} {{on "click" this.saveAndQuit}}>
+          {{t "behandelingVanAgendapunten.saveAndQuit"}}
+        </AuButton>
+        <AuButton @skin="secondary"
+                  @disabled={{this.saveDocumentTask.isRunning}}
+          {{on "click" this.closeModal}}>
+          {{t "behandelingVanAgendapunten.cancel"}}
+        </AuButton>
+      </AuButtonGroup>
+  </div>
+</div>
 <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>
