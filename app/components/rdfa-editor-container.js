@@ -7,7 +7,8 @@ export default class RdfaEditorContainerComponent extends Component {
   plugins = [
     'roadsign-regulation',
     'template-variable',
-    'besluit'
+    'besluit',
+    'rdfa-date',
   ];
   get editorOptions() {
     return (
