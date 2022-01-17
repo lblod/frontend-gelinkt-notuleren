@@ -1,14 +1,8 @@
-<div class="au-c-modal au-c-modal--fullscreen is-visible au-c-modal--editor" role="dialog" aria-describedby="au-c-modal-title-" tabindex="-1">
+<div class="au-c-modal au-c-modal--flat is-visible au-c-modal--editor" role="dialog" aria-describedby="au-c-modal-title-" tabindex="-1">
   <div class="au-c-modal__header">
     <h1 id="au-c-modal-title-" class="au-c-modal__title" tabindex="-1">
       {{this.document.title}}
     </h1>
-    <button class="au-c-modal__close" type="button" {{on 'click' this.closeModal}}>
-      <svg role="img" class="au-c-icon au-c-icon--cross  au-c-icon--large" aria-hidden="true">
-        <use xlink:href="/@appuniversum/ember-appuniversum/appuniversum-symbolset.svg#cross"></use>
-      </svg>
-      <span class="au-u-hidden-visually">Venster sluiten</span>
-    </button>
   </div>
   <div class="au-c-modal__body">
       {{#if this.documentContainer}}
