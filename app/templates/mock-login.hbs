@@ -1,4 +1,4 @@
-<div class="au-c-main-container" itemprop="mainContentOfPage">
+<div class="au-c-main-container au-c-main-container--mock-login" itemprop="mainContentOfPage">
   <div class="au-c-main-container__content au-c-main-container__content--scroll">
     <main id="content">
       <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is gelinkt notuleren">
@@ -27,7 +27,7 @@
               {{/if}}
               <login.each-account @accounts={{this.model}} as |account|>
                 <div class="au-o-box au-o-box--small au-c-card au-u-margin-bottom-small">
-                  <p>{{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}</p>
+                  <p class="au-u-h6">{{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}</p>
                 </div>
               </login.each-account>
               <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />

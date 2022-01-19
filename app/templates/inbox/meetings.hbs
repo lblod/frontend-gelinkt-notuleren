@@ -26,10 +26,10 @@
     </c.header>
     <c.body as |meeting|>
       <td>
-        <LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">Zitting van {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} op {{moment-format meeting.geplandeStart "DD/MM/YYYY HH:mm"}}</LinkTo>
+        <LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">Zitting van {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} op {{detailed-date meeting.geplandeStart}}</LinkTo>
       </td>
       <td>{{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</td>
-      <td>{{moment-format meeting.geplandeStart "DD/MM/YYYY HH:mm"}}</td>
+      <td>{{detailed-date meeting.geplandeStart}}</td>
       <td>
         {{meeting.opLocatie}}
       </td>

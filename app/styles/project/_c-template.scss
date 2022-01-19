@@ -184,10 +184,12 @@
   }
 
   [typeof="besluit:BehandelingVanAgendapunt"] {
-    [property="prov:generated"]:not(:last-child) {
-      margin-bottom: $au-unit-small;
-      padding-bottom: $au-unit-small;
-      border-bottom: .1rem dotted $au-gray-300;
+    margin-top: $au-unit;
+    padding-top: $au-unit;
+    border-top: .1rem dotted $au-gray-300;
+
+    > h3 {
+      @include au-font-size($au-h5, $important: true);
     }
 
     [property="besluit:openbaar"]:after {
@@ -330,6 +332,12 @@
 
 .au-c-template-content {
   margin-bottom: $au-unit;
+}
+
+.c-template-content--treatment {
+  margin-top: $au-unit;
+  padding-top: $au-unit;
+  border-top: .1rem dotted $au-gray-300;
 }
 
 // Public and private labels
