@@ -1,6 +1,26 @@
 
 
 
+## 2.20.0 (2022-01-19)
+
+#### :rocket: Enhancement
+* [#225](https://github.com/lblod/frontend-gelinkt-notuleren/pull/225) add support for mobility measures (IRGN) ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#220](https://github.com/lblod/frontend-gelinkt-notuleren/pull/220) Update print preview ([@Dietr](https://github.com/Dietr))
+* [#219](https://github.com/lblod/frontend-gelinkt-notuleren/pull/219) Fix spacing between titles/articles in publication view ([@Dietr](https://github.com/Dietr))
+* [#218](https://github.com/lblod/frontend-gelinkt-notuleren/pull/218) Solved inconsistencies with the chairman between the meeting and behandeling ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :house: Internal
+* [#223](https://github.com/lblod/frontend-gelinkt-notuleren/pull/223) replace moment with helpers based on date-fns ([@nvdk](https://github.com/nvdk))
+* [#221](https://github.com/lblod/frontend-gelinkt-notuleren/pull/221) Bump editor and corresponding appuniversum ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.19.1 (2021-11-18)
 
 #### :rocket: Enhancement
