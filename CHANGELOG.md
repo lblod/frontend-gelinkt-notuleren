@@ -1,6 +1,17 @@
 
 
 
+## 2.20.1 (2022-01-24)
+
+#### :rocket: Enhancement
+* [#227](https://github.com/lblod/frontend-gelinkt-notuleren/pull/227) bump roadsign regulation plugin for better performance ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#230](https://github.com/lblod/frontend-gelinkt-notuleren/pull/230) Bump node-fetch from 2.6.2 to 2.6.7 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.20.0 (2022-01-19)
 
 #### :rocket: Enhancement
