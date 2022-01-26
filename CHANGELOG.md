@@ -1,6 +1,14 @@
 
 
 
+## 2.20.2 (2022-01-26)
+
+#### :rocket: Enhancement
+* [#231](https://github.com/lblod/frontend-gelinkt-notuleren/pull/231) bump roadsign regulation plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.20.1 (2022-01-24)
 
 #### :rocket: Enhancement
