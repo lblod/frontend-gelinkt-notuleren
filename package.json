@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@appuniversum/appuniversum": "0.2.1",
-    "@appuniversum/ember-appuniversum": "0.7.0",
+    "@appuniversum/ember-appuniversum": "0.9.1",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.6.0",
@@ -36,7 +36,7 @@
     "@lblod/ember-acmidm-login": "^1.2.0",
     "@lblod/ember-mock-login": "0.5.0",
     "@lblod/ember-rdfa-editor": "^0.50.0-beta.4",
-    "@lblod/ember-rdfa-editor-besluit-plugin": "^0.1.1",
+    "@lblod/ember-rdfa-editor-besluit-plugin": "^0.1.2",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "~0.5.0",
     "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.4",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.7.4",
