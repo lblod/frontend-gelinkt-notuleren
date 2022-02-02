@@ -14,7 +14,8 @@
   }
 
   [typeof="besluit:Agendapunt"] {
-    margin-bottom: $say-unit-small;
+    /*margin-bottom: $say-unit-small;*/
+    margin-bottom: 1em;
   }
 
   // Hide superfluous annotated fields
