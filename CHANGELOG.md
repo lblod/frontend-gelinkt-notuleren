@@ -1,6 +1,14 @@
 
 
 
+## 2.20.3 (2022-02-03)
+
+#### :bug: Bug Fix
+* [#232](https://github.com/lblod/frontend-gelinkt-notuleren/pull/232) bump regulation and template-variable plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.20.2 (2022-01-26)
 
 #### :rocket: Enhancement
