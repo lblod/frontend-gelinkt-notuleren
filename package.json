@@ -26,8 +26,8 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
-    "@appuniversum/appuniversum": "0.2.1",
-    "@appuniversum/ember-appuniversum": "0.9.2",
+    "@appuniversum/appuniversum": "^0.3.1",
+    "@appuniversum/ember-appuniversum": "^0.10.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.4.2",
@@ -54,6 +54,7 @@
     "ember-cli-babel": "^7.26.6",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-dependency-lint": "^2.0.0",
+    "ember-cli-deprecation-workflow": "^1.0.1",
     "ember-cli-htmlbars": "^5.7.1",
     "ember-cli-inject-live-reload": "^2.1.0",
     "ember-cli-sass": "^7.1.4",
@@ -78,7 +79,7 @@
     "ember-page-title": "^6.2.2",
     "ember-power-select": "^4.1.4",
     "ember-qunit": "^5.1.4",
-    "ember-resolver": "^8.0.2",
+    "ember-resolver": "^8.0.3",
     "ember-simple-auth": "^3.1.0",
     "ember-source": "~3.28.0",
     "ember-template-lint": "^3.6.0",
@@ -100,7 +101,7 @@
     "release-it-lerna-changelog": "^3.1.0",
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3",
-    "webpack": "^5.55.1"
+    "webpack": "^5.68.0"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
@@ -116,5 +117,8 @@
     "last 1 Safari version",
     "last 1 iOS version",
     "last 1 Edge version"
-  ]
+  ],
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
 }
