@@ -1,6 +1,6 @@
 <div class="au-o-box au-o-box--small au-c-app-chrome">
 	<div class="u-spacer--small">
-    <AuLink @linkRoute="agendapoints.edit" @model={{this.model.container.id}} @skin="secondary">
+    <AuLink @route="agendapoints.edit" @model={{this.model.container.id}} @skin="secondary">
       <AuIcon @icon="arrow-left" @alignment="left" />
       Terug naar laatste versie document
     </AuLink>
@@ -59,7 +59,7 @@
 </div>
 
 <AuModal
-    @modalTitle="Bent u zeker dat u deze versie wil herstellen?"
+    @title="Bent u zeker dat u deze versie wil herstellen?"
     @modalOpen={{this.showConfirmationModal}}
     @closeModal={{this.cancelConfirmRevisionsToRemove}} as |Modal| >
     <Modal.Body>

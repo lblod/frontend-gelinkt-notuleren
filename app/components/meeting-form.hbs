@@ -1,7 +1,7 @@
 <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @linkRoute="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+      <AuLink @route="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
         {{t "meetingForm.backButton"}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
@@ -166,7 +166,7 @@
           {{html-safe @zitting.intro}}
         </ReadonlyTextBox>
         {{#unless this.readOnly}}
-          <AuLink @linkRoute="meetings.edit.intro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
+          <AuLink @route="meetings.edit.intro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
             {{t "behandelingVanAgendapunten.editDocument"}}
           </AuLink>
         {{/unless}}
@@ -210,7 +210,7 @@
             {{html-safe @zitting.outro}}
           </ReadonlyTextBox>
           {{#unless this.readOnly}}
-            <AuLink @linkRoute="meetings.edit.outro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
+            <AuLink @route="meetings.edit.outro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
               {{t "behandelingVanAgendapunten.editDocument"}}
             </AuLink>
           {{/unless}}

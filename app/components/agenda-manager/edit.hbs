@@ -2,7 +2,7 @@
         @model={{@itemToEdit}}
         @onSubmit={{perform this.submitTask}}
         as |Form|>
-  <AuModal @modalTitle={{t "manageAgendaZittingModal.modalTitle"}}
+  <AuModal @title={{t "manageAgendaZittingModal.modalTitle"}}
            @modalOpen={{@visible}}
            @size="default"
            @closeModal={{this.cancel}}

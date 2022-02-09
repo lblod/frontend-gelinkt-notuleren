@@ -2,7 +2,7 @@
   <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @linkRoute="inbox.agendapoints" @skin="secondary">
+      <AuLink @route="inbox.agendapoints" @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
         Terug naar overzicht agendapunten
       </AuLink>
@@ -80,7 +80,7 @@
           Verwijder concept
         </LinkTo>
       {{else}}
-      <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+      <AuDropdown @title="Bestand acties" @buttonLabel="Bestand opties" @alignment="right">
         {{#if @copyAgendapunt}}
           <AuButton {{on "click" @copyAgendapunt}} @skin="tertiary" role="menuitem">
             <AuIcon @icon="copy" @alignment="left" />
