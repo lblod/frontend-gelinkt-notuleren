@@ -1,6 +1,5 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
 import { localCopy } from 'tracked-toolbox';
 import { use } from 'ember-could-get-used-to-this';
 import ParticipationMap from '../../helpers/participant-map';
@@ -40,7 +39,6 @@ import ParticipationMap from '../../helpers/participant-map';
 export default class ParticipationListModalComponent extends Component {
   @localCopy('args.chairman') chairman;
   @localCopy('args.secretary') secretary;
-  @service store;
 
   /** @type {Map} */
   @use participationMap = new ParticipationMap(() => ({

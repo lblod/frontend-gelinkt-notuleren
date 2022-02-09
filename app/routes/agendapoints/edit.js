@@ -5,11 +5,13 @@ import { inject as service } from '@ember/service';
 
 export default class AgendapointsEditRoute extends Route {
   @service currentSession;
+  @service store;
+  @service router;
 
   beforeModel(transition) {
     if(!this.currentSession.canWrite) {
       const id = transition.to.params?.id;
-      this.transitionTo('agendapoints.show', id);
+      this.router.transitionTo('agendapoints.show', id);
       return;
     }
   }
@@ -30,7 +32,7 @@ export default class AgendapointsEditRoute extends Route {
   @action
   error(error /*, transition */) {
     if (error.errors && error.errors[0].status === "404") {
-      this.transitionTo('route-not-found');
+      this.router.transitionTo('route-not-found');
     } else {
       // Let the route above this handle the error.
       return true;

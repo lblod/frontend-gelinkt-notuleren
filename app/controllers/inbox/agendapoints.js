@@ -5,12 +5,12 @@ import {action} from '@ember/object';
 
 export default class InboxDraftDecisionsController extends Controller.extend(DefaultQueryParamsMixin) {
   @service currentSession;
-  @service store;
+  @service router;
   sort='-current-version.updated-on';
 
   @action
   openNewDocument() {
-    this.transitionToRoute('agendapoints.new');
+    this.router.transitionTo('agendapoints.new');
   }
   get readOnly(){
     return !this.currentSession.canWrite && this.currentSession.canRead;

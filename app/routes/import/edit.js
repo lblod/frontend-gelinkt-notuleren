@@ -9,6 +9,7 @@ export default class ImportEditRoute extends Route {
 
   @service importRdfaSnippet;
   @service store;
+  @service router;
 
   async beforeModel(transition) {
     await this.importRdfaSnippet.downloadSnippet(transition.to.queryParams);
@@ -23,14 +24,14 @@ export default class ImportEditRoute extends Route {
 
       if (documentContainers.length){
         const documentContainer = documentContainers.firstObject;
-        this.transitionTo('editor-documents.edit', documentContainer.id);
+        this.router.transitionTo('editor-documents.edit', documentContainer.id);
       } else {
         warn(`No document container found with URI '${documentContainerUri}' to import snippet in. Redirecting to inbox.`, { id: 'document-container.not-found' });
-        this.transitionTo('inbox');
+        this.router.transitionTo('inbox');
       }
     } else {
       warn(`No target document container specified to import snippet in. Redirecting to inbox.`, { id: 'document-container.no-target' });
-      this.transitionTo('inbox');
+      this.router.transitionTo('inbox');
     }
   }
 }

@@ -8,7 +8,6 @@ import { action } from "@ember/object";
 export default class EditStemmingService extends Service {
   /** @type {Stemming} */
   @tracked _stemming;
-
   @service store;
 
   /** @type {Map<string, string>} */
