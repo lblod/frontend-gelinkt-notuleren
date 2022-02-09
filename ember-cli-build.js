@@ -1,6 +1,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const envIsProduction = (process.env.EMBER_ENV === 'production');
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
@@ -8,7 +9,7 @@ module.exports = function (defaults) {
       includePolyfill: false
     },
     minifyCSS: {
-      enabled: false
+      enabled: envIsProduction
     },
     'ember-cli-terser': {
       exclude: ['vendor.js', 'assets/vendor.js'],
@@ -19,7 +20,8 @@ module.exports = function (defaults) {
       },
     },
     sassOptions: {
-      sourceMapEmbed: true,
+      sourceMap: !envIsProduction,
+      sourceMapEmbed: !envIsProduction,
       includePaths: [
         'node_modules/@appuniversum/appuniversum',
         'node_modules/@appuniversum/ember-appuniversum/app/styles'
@@ -28,15 +30,15 @@ module.exports = function (defaults) {
     autoprefixer: {
       enabled: true,
       cascade: true,
-      sourcemap: true
+      sourcemap: !envIsProduction
     },
     flatpickr: {
       locales: ['nl'],
       theme: 'light'
     },
     sourcemaps: {
-      enabled: true,
-      extensions: ['js']
+      enabled: !envIsProduction,
+      extensions: ['js', 'css']
     },
     babel: {
       sourceMaps: 'inline'
