@@ -5,8 +5,13 @@ inbox:
     trash: Recycle bin
     manual: View manual
   meetings:
+    type: Meeting
     pageTitle: Meetings
+    noDataMessage: No meetings
     newMeeting: New meeting
+    administrativeBody: Administrative body
+    time: Time
+    location: Location
     new:
       title: Create a new meeting
       meeting:
@@ -20,7 +25,7 @@ inbox:
       cancel: Back
   agendapoints:
     pageTitle: Agendapoints
-    searchPlaceholder: Type the title of a agendapoint
+    searchPlaceholder: Type the title of an agendapoint
     noDataMessage: No documents
     titleLabel: Agendapoint title
     createdOnLabel: Created
@@ -32,7 +37,11 @@ inbox:
       create: Create
       cancel: Back
   trash:
+    pageTitle: Recycle bin
     title: Recycle bin
+    noDataMessage: No documents
+    searchPlaceholder: Type the title of a meeting
+    restoreMessage: Restore selected documents
 publish:
   backToMeeting: Back to meeting
   headingPartOne: Meeting on

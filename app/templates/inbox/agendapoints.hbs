@@ -1,17 +1,17 @@
 {{page-title (t "inbox.agendapoints.pageTitle")}}
-  <AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.agendapoints.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.agendapoints.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar @size="large">
+      <AuToolbar class="au-o-box" @size="large">
         <AuToolbarGroup>
           <AuHeading @skin="2">
             {{t "inbox.agendapoints.pageTitle"}}
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--search">
-          <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
+        <AuToolbarGroup class="au-c-toolbar__group--center">
+          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} />
           {{#unless this.readOnly}}
-            <LinkTo @route="inbox.agendapoints.new" class="au-c-button-link">{{t "inbox.agendapoints.new.title"}}</LinkTo>
+            <AuLink @route="inbox.agendapoints.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.agendapoints.new.title"}}</AuLink>
           {{/unless}}
         </AuToolbarGroup>
       </AuToolbar>
@@ -22,7 +22,7 @@
       <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.titleLabel'}} />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.updatedOnLabel'}} />
       <AuDataTableThSortable @field="status" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
-      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">Zitting</span></th>
+      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
     </c.header>
     <c.body as |container|>
       {{#with container.currentVersion as |row|}}
@@ -32,7 +32,7 @@
       <td>
         {{moment-calendar row.updatedOn}}
         <br>
-        <AuHelpText @skin="secondary">{{moment-from-now this.document.currentVersion.updatedOn}}</AuHelpText>
+        <AuHelpText @skin="secondary">{{moment-from-now row.updatedOn}}</AuHelpText>
       </td>
       <td>
         <EditorStatusPill @status={{container.status}} />

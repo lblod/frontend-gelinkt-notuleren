@@ -17,7 +17,7 @@
           <p class="au-u-margin-top-small au-u-margin-bottom">
             {{#let (unique-id) as |id|}}
               <AuLabel for={{id}}>Bestuurseenheid zoeken</AuLabel>
-              <input class="au-c-input au-c-input--block js-js-input-pattern-bound" id={{id}} placeholder="Aalst, Berchem,..." value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
+              <input class="au-c-input au-c-input--block js-js-input-pattern-bound" id={{id}} placeholder="Aalst, Berchem, &hellip;" value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
             {{/let}}
           </p>
 

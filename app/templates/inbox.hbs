@@ -13,8 +13,8 @@
   </AuDropdown>
 </AuMainHeader>
 
-<main id="main" class="au-c-main-container" tabindex="-1">
-  <div class="au-c-main-container__sidebar au-u-hide-on-print">
+<AuMainContainer as |maincontainer|>
+  <maincontainer.sidebar>
     <div class="au-c-sidebar">
       <div class="au-c-sidebar__content">
         <nav>
@@ -39,16 +39,17 @@
             </li>
           </ul>
         </nav>
-      </div>
-      <div class="au-c-sidebar__footer">
-        <a href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" class="au-c-link au-c-link--secondary au-c-link--icon">
-          <AuIcon @icon="manual" @alignment="left" />
-          {{t "inbox.menu.manual"}}
-        </a>
+        <div class="au-c-sidebar__footer">
+          <AuLinkExternal href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" @icon="manual" @iconAlignment="left" @skin="secondary">
+            {{t "inbox.menu.manual"}}
+          </AuLinkExternal>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="content" class="au-c-main-container__content au-u-wide-on-print" tabindex="-1">
-    {{outlet}}
-  </div>
-</main>
+  </maincontainer.sidebar>
+  <maincontainer.content @scroll={{true}}>
+    <div class="au-d-component-block au-d-component-block--overflow">
+      {{outlet}}
+    </div>
+  </maincontainer.content>
+</AuMainContainer>
