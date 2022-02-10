@@ -40,7 +40,7 @@ inbox:
     pageTitle: Recycle bin
     title: Recycle bin
     noDataMessage: No documents
-    searchPlaceholder: Type the title of a meeting
+    searchPlaceholder: Type the title of an agendapoint
     restoreMessage: Restore selected documents
 publish:
   backToMeeting: Back to meeting

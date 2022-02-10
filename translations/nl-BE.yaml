@@ -40,7 +40,7 @@ inbox:
     pageTitle: Prullenmand
     title: Prullenmand
     noDataMessage: Geen documenten
-    searchPlaceholder: Zoek titel zitting
+    searchPlaceholder: Zoek titel agendapunt
     restoreMessage: Herstel geselecteerde documenten
 publish:
   backToMeeting: Terug naar zitting
