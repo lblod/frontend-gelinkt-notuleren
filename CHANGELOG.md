@@ -1,6 +1,19 @@
 
 
 
+
+## 2.20.5 (2022-02-11)
+
+#### :rocket: Enhancement
+* [#237](https://github.com/lblod/frontend-gelinkt-notuleren/pull/237) Bump template variable plugin from 0.1.1 to 0.1.2 ([@lagartoverde](https://github.com/lagartoverde))
+* [#236](https://github.com/lblod/frontend-gelinkt-notuleren/pull/236) Bump template-variable-plugin from 0.1.0 to 0.1.1 ([@lagartoverde](https://github.com/lagartoverde))
+* [#235](https://github.com/lblod/frontend-gelinkt-notuleren/pull/235) Bump besluit-plugin from 0.1.2 to 0.1.3 ([@lagartoverde](https://github.com/lagartoverde))
+* [#234](https://github.com/lblod/frontend-gelinkt-notuleren/pull/234) Bump roadsign regulation plugin from 0.3.2 to 0.3.3 ([@lagartoverde](https://github.com/lagartoverde))
+* [#233](https://github.com/lblod/frontend-gelinkt-notuleren/pull/233) Bump editor version from 0.50.0-beta.4 to 0.50.0-beta.7 ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.20.4 (2022-02-04)
 
 ## 2.20.3 (2022-02-03)
