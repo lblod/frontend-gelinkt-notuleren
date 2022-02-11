@@ -2,6 +2,16 @@
 
 
 
+
+## 2.20.6 (2022-02-11)
+
+#### :rocket: Enhancement
+* [#239](https://github.com/lblod/frontend-gelinkt-notuleren/pull/239) Bump ember-rdfa-editor from beta-7 to beta-8 ([@lagartoverde](https://github.com/lagartoverde))
+* [#238](https://github.com/lblod/frontend-gelinkt-notuleren/pull/238) Bump besluit plugin from 0.1.3 to 0.1.4 ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.20.5 (2022-02-11)
 
 #### :rocket: Enhancement
