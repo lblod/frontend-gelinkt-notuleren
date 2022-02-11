@@ -103,7 +103,10 @@
     "release-it-lerna-changelog": "^3.1.0",
     "tracked-built-ins": "^1.0.2",
     "tracked-toolbox": "^1.2.3",
-    "webpack": "^5.66.0"
+    "webpack": "^5.66.0",
+    "@codemirror/basic-setup": "^0.19.0",
+    "@codemirror/lang-html": "^0.19.3",
+    "@codemirror/lang-xml": "^0.19.2"
   },
   "engines": {
     "node": "10.* || >= 12"
@@ -119,5 +122,8 @@
     "last 1 Safari version",
     "last 1 iOS version",
     "last 1 Edge version"
-  ]
+  ],
+  "dependencies": {
+    "xml-formatter": "^2.6.1"
+  }
 }
