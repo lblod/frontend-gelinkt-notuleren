@@ -1,6 +1,47 @@
 
 
 
+
+
+## 2.20.6 (2022-02-11)
+
+#### :rocket: Enhancement
+* [#239](https://github.com/lblod/frontend-gelinkt-notuleren/pull/239) Bump ember-rdfa-editor from beta-7 to beta-8 ([@lagartoverde](https://github.com/lagartoverde))
+* [#238](https://github.com/lblod/frontend-gelinkt-notuleren/pull/238) Bump besluit plugin from 0.1.3 to 0.1.4 ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.20.5 (2022-02-11)
+
+#### :rocket: Enhancement
+* [#237](https://github.com/lblod/frontend-gelinkt-notuleren/pull/237) Bump template variable plugin from 0.1.1 to 0.1.2 ([@lagartoverde](https://github.com/lagartoverde))
+* [#236](https://github.com/lblod/frontend-gelinkt-notuleren/pull/236) Bump template-variable-plugin from 0.1.0 to 0.1.1 ([@lagartoverde](https://github.com/lagartoverde))
+* [#235](https://github.com/lblod/frontend-gelinkt-notuleren/pull/235) Bump besluit-plugin from 0.1.2 to 0.1.3 ([@lagartoverde](https://github.com/lagartoverde))
+* [#234](https://github.com/lblod/frontend-gelinkt-notuleren/pull/234) Bump roadsign regulation plugin from 0.3.2 to 0.3.3 ([@lagartoverde](https://github.com/lagartoverde))
+* [#233](https://github.com/lblod/frontend-gelinkt-notuleren/pull/233) Bump editor version from 0.50.0-beta.4 to 0.50.0-beta.7 ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.20.4 (2022-02-04)
+
+## 2.20.3 (2022-02-03)
+
+#### :bug: Bug Fix
+* [#232](https://github.com/lblod/frontend-gelinkt-notuleren/pull/232) bump regulation and template-variable plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.20.2 (2022-01-26)
+
+#### :rocket: Enhancement
+* [#231](https://github.com/lblod/frontend-gelinkt-notuleren/pull/231) bump roadsign regulation plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.20.1 (2022-01-24)
 
 #### :rocket: Enhancement
