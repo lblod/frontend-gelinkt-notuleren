@@ -5,6 +5,9 @@ const envIsProduction = (process.env.EMBER_ENV === 'production');
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
+    'ember-simple-auth': {
+      useSessionSetupMethod: true,
+    },
     'ember-cli-babel': {
       includePolyfill: false
     },
