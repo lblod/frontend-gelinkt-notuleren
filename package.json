@@ -106,7 +106,8 @@
     "webpack": "^5.66.0",
     "@codemirror/basic-setup": "^0.19.0",
     "@codemirror/lang-html": "^0.19.3",
-    "@codemirror/lang-xml": "^0.19.2"
+    "@codemirror/lang-xml": "^0.19.2",
+    "xml-formatter": "^2.6.1"
   },
   "engines": {
     "node": "10.* || >= 12"
@@ -115,15 +116,8 @@
     "edition": "octane"
   },
   "browserslist": [
-    "last 1 Chrome version",
-    "last 1 Android version",
-    "last 1 Firefox version",
-    "last 1 FirefoxAndroid version",
-    "last 1 Safari version",
-    "last 1 iOS version",
-    "last 1 Edge version"
-  ],
-  "dependencies": {
-    "xml-formatter": "^2.6.1"
-  }
+    "last 2 Chrome version",
+    "last 2 Firefox version",
+    "last 2 Edge version"
+  ]
 }
