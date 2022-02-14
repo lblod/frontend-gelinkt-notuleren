@@ -41,11 +41,11 @@
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label="Aangepast" />
     </c.header>
     <c.body as |container|>
-      {{#with container.currentVersion as |row|}}
+      {{#let container.currentVersion as |row|}}
         <td>{{row.title}}</td>
         <td>{{moment-calendar row.updatedOn}}</td>
         <td>{{moment-calendar row.createdOn}}</td>
-      {{/with}}
+      {{/let}}
     </c.body>
   </table.content>
 </AuDataTable>

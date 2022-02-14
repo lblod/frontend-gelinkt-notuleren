@@ -25,7 +25,7 @@
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
     </c.header>
     <c.body as |container|>
-      {{#with container.currentVersion as |row|}}
+      {{#let container.currentVersion as |row|}}
       <td>
         <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
       </td>
@@ -40,7 +40,7 @@
       <td>
         <ZittingLink @documentContainer={{container}}/>
       </td>
-      {{/with}}
+      {{/let}}
     </c.body>
   </table.content>
 </AuDataTable>
