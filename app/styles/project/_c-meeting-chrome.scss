@@ -14,7 +14,7 @@
 }
 
 .au-c-meeting-chrome {
-  padding: $au-unit $au-unit/2;
+  padding: $au-unit $au-unit * .5;
   width: 100%;
   position: relative;
   overflow: visible;
@@ -222,8 +222,8 @@
 
 .au-c-meeting-chrome__highlight {
   display: inline-block;
-  background-color: $au-yellow-200;
-  margin-top: $au-unit-tiny/2;
+  background-color: $au-yellow-100;
+  margin-top: $au-unit-tiny * .5;
   // cursor: not-allowed;
 }
 

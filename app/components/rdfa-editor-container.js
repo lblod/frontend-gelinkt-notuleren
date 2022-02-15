@@ -19,7 +19,7 @@ export default class RdfaEditorContainerComponent extends Component {
         showRdfaHighlight: true,
         showRdfaHover: true,
         showPaper: true,
-        showSidebar: true
+        showSidebar: true,
       }
     );
   }

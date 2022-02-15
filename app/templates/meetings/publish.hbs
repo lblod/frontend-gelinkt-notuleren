@@ -1,28 +1,30 @@
-<AuToolbar @size="medium" @skin="tint" @border="bottom">
-  <AuToolbarGroup>
-    <AuLink @route="meetings.edit" @model={{@model.id}} @skin="secondary" @icon="arrow-left" @iconAlignment="left">
-      {{t "publish.backToMeeting"}}
-    </AuLink>
-    <span class="au-c-app-chrome__entity">{{t "publish.headingPartOne"}} {{detailed-date this.model.geplandeStart}}</span>
-  </AuToolbarGroup>
-  <AuToolbarGroup>
-    <AuDropdown @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @buttonLabel="Account settings" @alignment="right">
-      {{#if this.acmSwitchEnabled}}
-        <Acmidm::Switch as |acmidm|>
-          <AuButton @loading={{acmidm.isSwitching}} class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" acmidm.switch}}>
-            <AuIcon @icon="switch" @alignment="left" />Wissel van bestuurseenheid
-          </AuButton>
-        </Acmidm::Switch>
-      {{/if}}
-      {{!--<AcmidmLogout @class="au-c-button au-c-button--tertiary" role="menuitem">
-        <AuIcon @icon="logout" @alignment="left" />Afmelden
-      </AcmidmLogout>--}}
-      <button type="button" class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" this.logout}}>
-        <AuIcon @icon="logout" @alignment="left" />Afmelden
-      </button>
-    </AuDropdown>
-  </AuToolbarGroup>
-</AuToolbar>
+<div class="au-c-app-chrome">
+  <AuToolbar @size="small" class="au-u-padding-top-none au-u-padding-bottom-none">
+    <AuToolbarGroup>
+      <AuLink @route="meetings.edit" @model={{@model.id}} @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+        {{t "publish.backToMeeting"}}
+      </AuLink>
+      <span class="au-c-app-chrome__entity">{{t "publish.headingPartOne"}} {{detailed-date this.model.geplandeStart}}</span>
+    </AuToolbarGroup>
+    <AuToolbarGroup>
+      <AuDropdown @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @buttonLabel="Account settings" @alignment="right">
+        {{#if this.acmSwitchEnabled}}
+          <Acmidm::Switch as |acmidm|>
+            <AuButton @loading={{acmidm.isSwitching}} class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" acmidm.switch}}>
+              <AuIcon @icon="switch" @alignment="left" />Wissel van bestuurseenheid
+            </AuButton>
+          </Acmidm::Switch>
+        {{/if}}
+        {{!--<AcmidmLogout @class="au-c-button au-c-button--tertiary" role="menuitem">
+          <AuIcon @icon="logout" @alignment="left" />Afmelden
+        </AcmidmLogout>--}}
+        <button type="button" class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" this.logout}}>
+          <AuIcon @icon="logout" @alignment="left" />Afmelden
+        </button>
+      </AuDropdown>
+    </AuToolbarGroup>
+  </AuToolbar>
+</div>
 <AuMainContainer as |m|>
   <m.sidebar>
     <div class="au-c-sidebar">
@@ -59,7 +61,7 @@
     </div>
   </m.sidebar>
   <m.content @scroll={{true}}>
-    <div id="content" class="au-d-componenent-block au-d-component-block--overflow" tabindex="-1">
+    <div id="content" tabindex="-1">
       {{!-- <p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p> --}}
       {{outlet}}
     </div>

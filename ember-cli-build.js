@@ -25,11 +25,6 @@ module.exports = function (defaults) {
     sassOptions: {
       sourceMap: !envIsProduction,
       sourceMapEmbed: !envIsProduction,
-      includePaths: [
-        'node_modules/@appuniversum/appuniversum',
-        'node_modules/@appuniversum/ember-appuniversum/app/styles',
-        'node_modules/@lblod/ember-rdfa-editor/app/styles'
-      ]
     },
     autoprefixer: {
       enabled: true,
