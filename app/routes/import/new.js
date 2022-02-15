@@ -3,7 +3,7 @@ import Route from '@ember/routing/route';
 
 export default class ImportNewRoute extends Route {
   @service importRdfaSnippet;
-  @serivce router;
+  @service router;
 
   async beforeModel(transition) {
     await this.importRdfaSnippet.downloadSnippet(transition.to.queryParams);
