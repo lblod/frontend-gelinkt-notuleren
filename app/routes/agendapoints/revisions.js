@@ -1,7 +1,11 @@
 import Route from '@ember/routing/route';
 import { task } from 'ember-concurrency';
 import RSVP from 'rsvp';
+import { inject as service } from '@ember/service';
+
 export default class AgendapointsRevisionsRoute extends Route {
+  @service store;
+
   async model(params) {
     const container = await this.store.findRecord('documentContainer', params.id);
     const editorDocument = await container.get('currentVersion');

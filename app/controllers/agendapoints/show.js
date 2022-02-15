@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 
 export default class AgendapointsShowController extends Controller {
   @service currentSession;
+  @service router;
 
   @action
   download() {
@@ -17,7 +18,7 @@ export default class AgendapointsShowController extends Controller {
     const response = yield fetch(`/agendapoint-service/${this.model.documentContainer.id}/copy`, {method: 'POST'});
     const json = yield response.json();
     const agendapuntId = json.uuid;
-    yield this.transitionToRoute('agendapoints.edit', agendapuntId);
+    yield this.router.transitionTo('agendapoints.edit', agendapuntId);
   }
 
   get readOnly(){

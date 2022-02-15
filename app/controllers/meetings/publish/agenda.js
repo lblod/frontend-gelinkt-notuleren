@@ -2,6 +2,7 @@ import Controller from "@ember/controller";
 import {task} from "ember-concurrency";
 import {tracked} from "@glimmer/tracking";
 import fetch from 'fetch';
+import { inject as service } from '@ember/service';
 
 /** @typedef {import("../../../models/agenda").default} Agenda */
 /** @typedef {import("../../../models/zitting").default} Zitting */
@@ -24,6 +25,8 @@ const KIND_LABEL_TO_UUID_MAP = new Map(Object.entries({
  * @property {Zitting} model
  */
 export default class MeetingsPublishAgendaController extends Controller {
+  @service store;
+
   kindGepland = KIND_GEPLAND_UUID;
   kindAanvullend = KIND_AANVULLENDE_UUID;
   kindSpoedeisend = KIND_SPOEDEISENDE_UUID;

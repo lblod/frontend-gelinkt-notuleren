@@ -1,51 +1,52 @@
-<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage="Geen documenten" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |t|>
-   <t.menu as |menu|>
+{{page-title (t "inbox.trash.pageTitle")}}
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.trash.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
+   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar @size="large">
+      <AuToolbar class="au-o-box" @size="large">
         <AuToolbarGroup>
           <AuHeading @skin="2">
-            Prullenbak
+            {{t 'inbox.trash.pageTitle'}}
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--search">
-          <TextSearch @filter={{this.title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+        <AuToolbarGroup class="au-c-toolbar__group--center">
+          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.searchPlaceholder'}} />
         </AuToolbarGroup>
       </AuToolbar>
     </menu.general>
     <menu.selected as |selection datatable|>
       <AuToolbar @size="large" class="au-u-padding-bottom-none">
-        <AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--center">
           <AuHeading @skin="2">
-            Prullenbak
+           {{t 'inbox.trash.pageTitle'}}
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--search">
-          <TextSearch @filter={{this.title}} @placeholder="Zoek naar zitting" class="au-u-1-2@small" />
+        <AuToolbarGroup class="au-c-toolbar__group--center">
+          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.searchPlaceholder'}} />
         </AuToolbarGroup>
       </AuToolbar>
       <AuToolbar @size="large">
         <AuToolbarGroup data-table-action>
           <AuButton @skin="secondary" {{on "click" (fn this.moveToConcepts selection datatable)}}>
             <AuIcon @icon="redo" @alignment="left" />
-            Herstel geselecteerde documenten
+            {{t 'inbox.trash.restoreMessage'}}
           </AuButton>
         </AuToolbarGroup>
       </AuToolbar>
     </menu.selected>
-   </t.menu>
-   <t.content as |c|>
+   </table.menu>
+   <table.content as |c|>
     <c.header>
       <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label="Titel" />
       <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{this.sort}} @label="Aangemaakt" />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label="Aangepast" />
     </c.header>
     <c.body as |container|>
-      {{#with container.currentVersion as |row|}}
+      {{#let container.currentVersion as |row|}}
         <td>{{row.title}}</td>
         <td>{{human-friendly-date row.updatedOn}}</td>
         <td>{{human-friendly-date row.createdOn}}</td>
-      {{/with}}
+      {{/let}}
     </c.body>
-  </t.content>
+  </table.content>
 </AuDataTable>
 

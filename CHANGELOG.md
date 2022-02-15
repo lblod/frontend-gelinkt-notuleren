@@ -1,6 +1,110 @@
 
 
 
+
+
+## 2.20.6 (2022-02-11)
+
+#### :rocket: Enhancement
+* [#239](https://github.com/lblod/frontend-gelinkt-notuleren/pull/239) Bump ember-rdfa-editor from beta-7 to beta-8 ([@lagartoverde](https://github.com/lagartoverde))
+* [#238](https://github.com/lblod/frontend-gelinkt-notuleren/pull/238) Bump besluit plugin from 0.1.3 to 0.1.4 ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.20.5 (2022-02-11)
+
+#### :rocket: Enhancement
+* [#237](https://github.com/lblod/frontend-gelinkt-notuleren/pull/237) Bump template variable plugin from 0.1.1 to 0.1.2 ([@lagartoverde](https://github.com/lagartoverde))
+* [#236](https://github.com/lblod/frontend-gelinkt-notuleren/pull/236) Bump template-variable-plugin from 0.1.0 to 0.1.1 ([@lagartoverde](https://github.com/lagartoverde))
+* [#235](https://github.com/lblod/frontend-gelinkt-notuleren/pull/235) Bump besluit-plugin from 0.1.2 to 0.1.3 ([@lagartoverde](https://github.com/lagartoverde))
+* [#234](https://github.com/lblod/frontend-gelinkt-notuleren/pull/234) Bump roadsign regulation plugin from 0.3.2 to 0.3.3 ([@lagartoverde](https://github.com/lagartoverde))
+* [#233](https://github.com/lblod/frontend-gelinkt-notuleren/pull/233) Bump editor version from 0.50.0-beta.4 to 0.50.0-beta.7 ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.20.4 (2022-02-04)
+
+## 2.20.3 (2022-02-03)
+
+#### :bug: Bug Fix
+* [#232](https://github.com/lblod/frontend-gelinkt-notuleren/pull/232) bump regulation and template-variable plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.20.2 (2022-01-26)
+
+#### :rocket: Enhancement
+* [#231](https://github.com/lblod/frontend-gelinkt-notuleren/pull/231) bump roadsign regulation plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.20.1 (2022-01-24)
+
+#### :rocket: Enhancement
+* [#227](https://github.com/lblod/frontend-gelinkt-notuleren/pull/227) bump roadsign regulation plugin for better performance ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#230](https://github.com/lblod/frontend-gelinkt-notuleren/pull/230) Bump node-fetch from 2.6.2 to 2.6.7 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.20.0 (2022-01-19)
+
+#### :rocket: Enhancement
+* [#225](https://github.com/lblod/frontend-gelinkt-notuleren/pull/225) add support for mobility measures (IRGN) ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#220](https://github.com/lblod/frontend-gelinkt-notuleren/pull/220) Update print preview ([@Dietr](https://github.com/Dietr))
+* [#219](https://github.com/lblod/frontend-gelinkt-notuleren/pull/219) Fix spacing between titles/articles in publication view ([@Dietr](https://github.com/Dietr))
+* [#218](https://github.com/lblod/frontend-gelinkt-notuleren/pull/218) Solved inconsistencies with the chairman between the meeting and behandeling ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :house: Internal
+* [#223](https://github.com/lblod/frontend-gelinkt-notuleren/pull/223) replace moment with helpers based on date-fns ([@nvdk](https://github.com/nvdk))
+* [#221](https://github.com/lblod/frontend-gelinkt-notuleren/pull/221) Bump editor and corresponding appuniversum ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.19.1 (2021-11-18)
+
+#### :rocket: Enhancement
+* [#212](https://github.com/lblod/frontend-gelinkt-notuleren/pull/212) Feature/use appuniversum in editor ([@Dietr](https://github.com/Dietr))
+
+#### :bug: Bug Fix
+* [#215](https://github.com/lblod/frontend-gelinkt-notuleren/pull/215) correctly set the default for "openbaar" on treatment ([@nvdk](https://github.com/nvdk))
+* [#217](https://github.com/lblod/frontend-gelinkt-notuleren/pull/217) sort added to ap in meeting form ([@Asergey91](https://github.com/Asergey91))
+* [#216](https://github.com/lblod/frontend-gelinkt-notuleren/pull/216) Fix calendar popup overflow ([@Dietr](https://github.com/Dietr))
+* [#213](https://github.com/lblod/frontend-gelinkt-notuleren/pull/213) Bugfix/agendapoint ordering ([@abeforgit](https://github.com/abeforgit))
+* [#214](https://github.com/lblod/frontend-gelinkt-notuleren/pull/214) bump rdfa editor to move to support ember-appuniversum in rdfa-editor ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
+## 2.19.0 (2021-10-20)
+
+#### :rocket: Enhancement
+* [#209](https://github.com/lblod/frontend-gelinkt-notuleren/pull/209) Feature/add article to bestuursorgan ([@lagartoverde](https://github.com/lagartoverde))
+* [#207](https://github.com/lblod/frontend-gelinkt-notuleren/pull/207) Added attachments number to agendapoints table ([@lagartoverde](https://github.com/lagartoverde))
+* [#210](https://github.com/lblod/frontend-gelinkt-notuleren/pull/210) Feature/add hash to printview ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#208](https://github.com/lblod/frontend-gelinkt-notuleren/pull/208) fix sorting on status in the agendapoint table ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 2
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.18.0 (2021-10-06)
 
 #### :rocket: Enhancement

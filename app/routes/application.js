@@ -6,10 +6,12 @@ const featureFlagRegex = /^feature\[(.+)\]$/;
 export default class ApplicationRoute extends Route {
   @service currentSession;
   @service features;
+  @service session;
 
-  beforeModel(transition) {
+  async beforeModel(transition) {
     this.updateFeatureFlags(transition.to.queryParams);
 
+    await this.session.setup();
     return this.loadCurrentSession();
   }
 

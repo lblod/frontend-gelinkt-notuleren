@@ -1,11 +1,11 @@
 <form class="au-o-flow">
   <div>
     {{#let (unique-id) as |id|}}
-      <AuLabel @error={{@invalidTitle}} for="{{this.id}}">
+      <AuLabel @error={{@invalidTitle}} for={{id}}>
         {{t "documentCreator.titleField"}}
         <RequiredField />
       </AuLabel>
-      <AuTextarea @error={{@invalidTitle}}  @width="block"  type="text" value={{@title}} id="{{this.id}}" {{on "blur" @updateTitle}} {{on "input" @updateTitle}} />
+      <AuTextarea @error={{@invalidTitle}}  @width="block"  type="text" value={{@title}} id={{id}} {{on "blur" @updateTitle}} {{on "input" @updateTitle}} />
     {{/let}}
   </div>
   <div>

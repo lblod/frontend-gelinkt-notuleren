@@ -1,7 +1,7 @@
 {{page-title (t "inbox.agendapoints.new.title")}}
 <DocumentCreator @onRollback={{this.cancelAgendapointCreation}} @onCreate={{this.redirectToAgendapoint}} as |creator|>
   <AuModal
-    @modalTitle={{t "inbox.agendapoints.new.title"}}
+    @title={{t "inbox.agendapoints.new.title"}}
     @modalOpen={{true}}
     @closeModal={{creator.rollback}}
     as |Modal|
@@ -10,7 +10,7 @@
       <creator.form />
 
       {{#if creator.errorSaving}}
-        <AuAlert @alertIcon="cross" @alertTitle={{t "inbox.agendapoints.new.errorSaving"}} @alertskin="error" @closable={{true}}>
+        <AuAlert @alertIcon="cross" @alertTitle={{t "inbox.agendapoints.new.errorSaving"}} @alertSkin="error" @closable={{true}}>
           {{creator.errorSaving}}
         </AuAlert>
       {{/if}}

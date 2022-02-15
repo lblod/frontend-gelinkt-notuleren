@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 
 export default class MeetingsPublishNotulenController extends Controller {
 
+  @service store;
   @tracked notulen;
   @tracked errors;
   @tracked signedResources = [];

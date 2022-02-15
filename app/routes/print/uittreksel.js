@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default class PrintUittrekselRoute extends Route {
   @service publish;
+  @service store;
 
   async model(params) {
     const { treatment_id: treatmentId, meeting_id: meetingId } = params;

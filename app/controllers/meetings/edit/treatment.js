@@ -10,6 +10,7 @@ const GEAGENDEERD_STATUS_ID = '7186547b61414095aa2a4affefdcca67';
 export default class MeetingsEditTreatmentController extends Controller {
   @service router;
   @service currentSession;
+  @service store;
   @tracked editor;
   @tracked documentContainer;
   @tracked document;

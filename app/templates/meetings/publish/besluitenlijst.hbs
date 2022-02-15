@@ -3,7 +3,7 @@
     <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
     <AuLoader @padding="small" />
   {{else if this.error}}
-    <AuAlert @alertIcon="cross" @alertTitle={{t "publish.decisionListErrorMessage"}} @alertskin="error" @alertsize="small">
+    <AuAlert @alertIcon="cross" @alertTitle={{t "publish.decisionListErrorMessage"}} @alertSkin="error" @alertSize="small">
       <code>{{this.error}}</code>
     </AuAlert>
   {{else}}

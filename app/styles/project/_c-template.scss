@@ -5,39 +5,39 @@
 .au-c-template,
 .au-c-editor-preview {
   h1 {
-    @include au-font-size($au-heading-2);
-    font-family: $au-font-secondary;
-    font-weight: $au-light;
-    color: $au-gray-900;
+    @include au-font-size(var(--au-h2));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
   }
 
   h2 {
-    @include au-font-size($au-heading-3);
-    font-family: $au-font-secondary;
-    font-weight: $au-medium;
-    color: $au-gray-900;
+    @include au-font-size(var(--au-h4));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
   }
 
   h3 {
-    @include au-font-size($au-heading-4);
-    font-family: $au-font;
-    font-weight: $au-medium;
-    color: $au-gray-900;
+    @include au-font-size(var(--au-h5));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
   }
 
   h4 {
-    @include au-font-size($au-heading-5);
-    font-family: $au-font;
-    font-weight: $au-medium;
-    color: $au-gray-900;
+    @include au-font-size(var(--au-h6));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
   }
 
   h5,
   h6 {
-    @include au-font-size($au-heading-6);
-    font-family: $au-font;
-    font-weight: $au-medium;
-    color: $au-gray-900;
+    @include au-font-size(var(--au-h6));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
   }
 
   p + * {
@@ -154,8 +154,15 @@
 .au-c-template--agenda {
   padding-left: 0 !important;
 
+  h1 {
+    @include au-font-size(var(--au-h3));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
+  }
+
   h2 {
-    @include au-font-size($au-heading-4);
+    @include au-font-size(var(--au-h4));
     font-family: $au-font;
   }
 
@@ -166,6 +173,13 @@
 
 .au-c-template--treatment,
 .au-c-rdfa-publication .behandeling {
+  h1 {
+    @include au-font-size(var(--au-h3));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
+  }
+
   [property="besluit:heeftAanwezige"] {
     display: block;
     margin-bottom: $au-unit-small;
@@ -176,9 +190,16 @@
 .au-c-editor-preview .besluiten {
   padding-left: 0 !important;
 
+  h1 {
+    @include au-font-size(var(--au-h3));
+    font-family: var(--au-font);
+    font-weight: var(--au-medium);
+    color: var(--au-gray-900);
+  }
+
   h3,
   h4 {
-    @include au-font-size($au-h4, $important: true);
+    @include au-font-size(var(--au-h4), $important: true);
     font-family: $au-font !important;
     font-weight: $au-medium !important;
   }
@@ -232,8 +253,8 @@
 .au-c-template--notes,
 .au-c-rdfa-publication .notulen {
   h2 {
-    @include au-font-size($au-heading-3);
-    font-family: $au-font-secondary;
+    @include au-font-size(var(--au-h3));
+    font-family: var(--au-font);
     font-weight: $au-medium;
     color: $au-gray-900;
   }
@@ -249,7 +270,7 @@
   }
 
   [property="dc:subject"] {
-    @include au-font-size($au-h6);
+    @include au-font-size(var(--au-h6));
     color: $au-gray-600;
     text-transform: initial;
     letter-spacing: 0;

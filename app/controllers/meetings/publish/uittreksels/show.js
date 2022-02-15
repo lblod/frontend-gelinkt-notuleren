@@ -4,11 +4,11 @@ import { tracked } from '@glimmer/tracking';
 import { fetch } from 'fetch';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+
 export default class MeetingsPublishUittrekselsShowController extends Controller {
   @tracked error;
   @tracked extract;
   @service publish;
-  @service store;
   @service router;
 
   get agendapoint() {
