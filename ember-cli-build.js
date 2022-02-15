@@ -31,10 +31,6 @@ module.exports = function (defaults) {
       cascade: true,
       sourcemap: !envIsProduction
     },
-    flatpickr: {
-      locales: ['nl'],
-      theme: 'light'
-    },
     sourcemaps: {
       enabled: !envIsProduction,
       extensions: ['js', 'css']
