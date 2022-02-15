@@ -14,7 +14,7 @@
         {{#if @editorDocument.updatedOn}}
         <li class="au-c-list-horizontal__item">
           <span class="au-c-app-chrome__status">
-            Bewaard op {{moment-calendar @editorDocument.updatedOn}}
+            Bewaard op {{human-friendly-date @editorDocument.updatedOn}}
           </span>
         </li>
         {{else}}

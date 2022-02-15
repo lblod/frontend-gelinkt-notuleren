@@ -26,6 +26,12 @@ module.exports = function (environment) {
         plausibleScript: "{{ANALYTICS_PLAUSIBLE_SCRIPT}}"
       }
     },
+    roadsignRegulationPlugin: {
+      endpoint: "{{MOW_REGISTRY_ENDPOINT}}"
+    },
+    templateVariablePlugin: {
+      endpoint: "{{MOW_REGISTRY_ENDPOINT}}"
+    },
     manual: {
       baseUrl: "{{MANUAL_BASE_URL}}",
       notuleren: "{{MANUAL_NOTULEREN}}",
@@ -48,12 +54,6 @@ module.exports = function (environment) {
       style: 'corner',
       l: 'nl',
       shift_page_down: false
-    },
-    moment: {
-      outputFormat: 'DD-MM-YYYY hh:mm:ss',
-      includeTimezone: 'subset',
-      includeLocales: ['nl'],
-      allowEmpty: true
     },
     torii: {
       disableRedirectInitializer: true,
@@ -84,6 +84,8 @@ module.exports = function (environment) {
     ENV.manual.publisher="#gebruikersbeheer";
     ENV.manual.print="";
     ENV.featureFlags.attachments = true;
+    ENV.roadsignRegulationPlugin.endpoint = "https://dev.roadsigns.lblod.info/sparql";
+    ENV.templateVariablePlugin.endpoint = "https://dev.roadsigns.lblod.info/sparql";
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

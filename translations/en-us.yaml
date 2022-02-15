@@ -31,6 +31,7 @@ inbox:
     createdOnLabel: Created
     updatedOnLabel: Modified
     statusLabel: Status
+    attachmentsLabel: Attachments
     new:
       title: Create agendapoint
       errorSaving: Something went wrong while creating the agendapoint
@@ -86,7 +87,9 @@ meetingForm:
   fifthSectionTitle: 5. Treatment of the agenda items
   sixthSectionTitle: 6. Free text (meeting outro).
   seventhSectionTitle: 7. End of the meeting
-  meetingHeadingPartOne: Meeting minutes of
+  meetingHeadingPartOne: Meeting minutes
+  meetingHeadingArticleGendered: of
+  meetingHeadingArticleUngendered: of
   meetingHeadingPartTwo: of
   firstSectionNotFilledWarning: Before you can start the meeting it is necessary to set a date, location and governing body.
   secondSectionNotFilledWarning: Complete the attendance.

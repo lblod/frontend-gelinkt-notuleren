@@ -1,18 +1,18 @@
-<AuModal @modalOpen={{true}}
-         @size="fullscreen"
-         @closeModal={{this.closeModal}}
-         @title={{this.document.title}}
-         class="au-c-modal--editor"
-         as |Modal|
->
-  <Modal.Body>
+{{! No AuModal here, because at the moment, when a plugin in the editor opens a modal, the editor modal closes }}
+<div class="au-c-modal au-c-modal--flat is-visible au-c-modal--editor" role="dialog" aria-describedby="au-c-modal-title-" tabindex="-1">
+  <div class="au-c-modal__header">
+    <h1 id="au-c-modal-title-" class="au-c-modal__title" tabindex="-1">
+      {{this.document.title}}
+    </h1>
+  </div>
+  <div class="au-c-modal__body">
     {{#if this.documentContainer}}
       <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2"  class={{if this.uploading "" "au-u-hidden"}}>
         <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
       </div>
     {{/if}}
     {{#if this.document}}
-      <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1"  class={{if this.uploading "au-u-hidden" ""}}>
+      <div id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1"  class={{if this.uploading "au-u-hidden" "au-c-body-container"}}>
         <BesluitDocumentContainer class={{if this.uploading ".au-u-hidden" ""}}
                                   @document={{this.document}}
                                   @handleRdfaEditorInit={{this.handleRdfaEditorInit}}
@@ -21,8 +21,8 @@
         />
       </div>
     {{/if}}
-  </Modal.Body>
-  <Modal.Footer>
+  </div>
+  <div class="au-c-modal__footer">
     {{#if (feature-flag 'attachments')}}
       {{#if this.uploading}}
         <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
@@ -61,6 +61,6 @@
         {{t "behandelingVanAgendapunten.cancel"}}
       </AuButton>
     </AuButtonGroup>
-  </Modal.Footer>
-</AuModal>
+  </div>
+</div>
 <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>

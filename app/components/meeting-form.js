@@ -4,6 +4,7 @@ import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency";
 import { inject as service } from "@ember/service";
 import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
+import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
@@ -16,6 +17,7 @@ export default class MeetingForm extends Component {
   @tracked bestuursorgaan;
   @tracked possibleParticipants;
   @tracked behandelingen;
+  @tracked headerArticleTranslationString = '';
   @service store;
   @service currentSession;
   @service router;
@@ -39,6 +41,10 @@ export default class MeetingForm extends Component {
   *loadData() {
     if (this.zitting.get("id")) {
       this.bestuursorgaan = yield this.zitting.get("bestuursorgaan");
+      const specialisedBestuursorgaan = yield this.bestuursorgaan.get("isTijdsspecialisatieVan");
+      const classification = yield specialisedBestuursorgaan.get('classificatie');
+      this.headerArticleTranslationString = articlesBasedOnClassifcationMap[classification.get('uri')];
+      console.log(this.headerArticleTranslationString);
       this.secretaris = yield this.zitting.get("secretaris");
       this.voorzitter = yield this.zitting.get("voorzitter");
       yield this.fetchParticipants.perform();

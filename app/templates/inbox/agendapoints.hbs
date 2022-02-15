@@ -5,7 +5,7 @@
       <AuToolbar class="au-o-box" @size="large">
         <AuToolbarGroup>
           <AuHeading @skin="2">
-            {{t "inbox.agendapoints.pageTitle"}}
+            {{t 'inbox.agendapoints.pageTitle'}}
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--center">
@@ -21,8 +21,9 @@
     <c.header>
       <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.titleLabel'}} />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.updatedOnLabel'}} />
-      <AuDataTableThSortable @field="status" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
+      <AuDataTableThSortable @field="status.label" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
+      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.agendapoints.attachmentsLabel'}}</span></th>
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
@@ -30,15 +31,17 @@
         <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
       </td>
       <td>
-        {{moment-calendar row.updatedOn}}
+        {{human-friendly-date row.updatedOn}}
         <br>
-        <AuHelpText @skin="secondary">{{moment-from-now row.updatedOn}}</AuHelpText>
       </td>
       <td>
         <EditorStatusPill @status={{container.status}} />
       </td>
       <td>
         <ZittingLink @documentContainer={{container}}/>
+      </td>
+      <td>
+        <AttachmentsNumber @documentContainer={{container}} />
       </td>
       {{/let}}
     </c.body>

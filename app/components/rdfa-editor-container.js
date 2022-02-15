@@ -4,7 +4,12 @@ import { tracked } from '@glimmer/tracking';
 
 export default class RdfaEditorContainerComponent extends Component {
   @tracked editor;
-
+  plugins = [
+    'roadsign-regulation',
+    'template-variable',
+    'besluit',
+    'rdfa-date',
+  ];
   get editorOptions() {
     return (
       this.args.editorOptions ?? {
@@ -13,6 +18,8 @@ export default class RdfaEditorContainerComponent extends Component {
         showRdfa: true,
         showRdfaHighlight: true,
         showRdfaHover: true,
+        showPaper: true,
+        showSidebar: true
       }
     );
   }

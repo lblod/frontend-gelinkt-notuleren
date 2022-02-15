@@ -314,7 +314,11 @@
 .au-c-card--flex.au-c-card--expandable.au-c-card--publish {
   padding: 0 !important;
 
-  > .au-c-card__header--clickable {
+  > .au-c-card__clickable {
+    align-items: center;
+  }
+
+  > .au-c-card__clickable .au-c-card__header {
     align-items: center;
     padding: $au-unit-small;
     margin-bottom: 0;
@@ -572,4 +576,26 @@
     border-color: rgba($au-white, 0);
     border-bottom-color: $au-blue-900;
   }
+}
+
+// DISABLED EDITOR
+// ---
+.say-content--disabled {
+  cursor: default;
+}
+
+// Override main container on mock-login
+.au-c-main-container--mock-login {
+  height: 100%;
+}
+
+// Fake modal
+.au-c-modal--flat {
+  z-index: 9997;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  border-radius: 0;
 }
