@@ -49,7 +49,7 @@
       </div>
       <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
     </AuToolbarGroup>
-    <AuToolbarGroup class="au-c-toolbar__group--actions">
+    <AuToolbarGroup>
       {{#if @uploading}}
         <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
           <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" @toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">

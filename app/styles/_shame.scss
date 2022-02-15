@@ -35,72 +35,6 @@
   padding-bottom: $au-unit-tiny;
 }
 
-// Toolbar alignment fix
-// @TODO: port to ember-appuniversum component
-.au-c-toolbar__group {
-  align-items: center !important; // Fix toolbar alignment
-}
-
-// Right aligned toolbar group
-// @TODO: port to ember-appuniversum component
-.au-c-toolbar__group--search {
-  flex-grow: 1;
-  justify-content: flex-end;
-
-  > * + * {
-    margin-left: $au-unit-small;
-  }
-}
-
-.au-c-toolbar__group--actions {
-  > * + * {
-    margin-left: $au-unit-small;
-  }
-}
-
-// Fix visited state on links acting as buttons
-// @TODO: port to ember-appuniversum component or convert link to button
-.au-c-button-link {
-  @include au-font-size($au-button-font-size, $au-button-height - $au-button-border * 2);
-  cursor: default;
-  font-family: $au-font;
-  font-weight: $au-regular;
-  height: $au-button-height;
-  text-decoration: none;
-  text-align: center;
-  appearance: none;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 $au-unit-small .1rem; // Visually center the text in the button
-  border-radius: $au-radius;
-  border: $au-button-border solid $au-button-contrast-color;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color $au-transition, background-color $au-transition, border-color $au-transition, box-shadow $au-transition;
-
-  &,
-  &:visited {
-    color: $au-button-color;
-    background-color: $au-button-contrast-color;
-    box-shadow: inset 0px 0px 0px $au-button-border transparent;
-  }
-
-  &:hover,
-  &:focus {
-    color: $au-button-color;
-    background-color: $au-button-contrast-hover-color;
-    text-decoration: none;
-  }
-
-  &:focus {
-    outline: $au-outline;
-  }
-
-  &:active {
-    background-color: $au-button-contrast-active-color;
-  }
-}
 
 // Drag button
 .au-c-button--drag {
@@ -239,10 +173,6 @@
   }
 }
 
-.au-hr-dotted {
-  border: 0;
-  border-top: .1rem dotted $au-gray-200;
-}
 
 // Modal quick fixes
 .au-c-modal__footer {

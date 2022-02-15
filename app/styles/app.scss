@@ -27,10 +27,6 @@
 @import "appuniversum/s-root";
 
 
-// PROJECT SPECIFIC VARIABLES
-@import "project/s-global";
-//@import "project/s-say-theme";
-
 // MIXINS
 @import "appuniversum/t-font-size";
 @import "appuniversum/t-sass-mq";
@@ -95,6 +91,7 @@
 @import "ember-appuniversum/c-toolbar";
 @import "ember-appuniversum/c-toggle-switch";
 
+
 // PROJECT COMPONENTS
 @import 'project/c-app-chrome';
 @import 'project/c-meeting-chrome';
@@ -103,7 +100,6 @@
 @import 'project/c-editor-preview';
 @import "project/c-template";
 @import "project/c-theme";
-
 
 
 // UTILITIES
