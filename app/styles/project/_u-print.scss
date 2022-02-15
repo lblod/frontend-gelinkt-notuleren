@@ -63,15 +63,6 @@
     height: auto;
   }
 
-  // .document-print--uittreksel--blockchain-signature {
-  //   .col--6-12 {
-  //     width: 49%;
-  //     min-width: auto;
-  //     display: inline-block;
-  //     vertical-align: top;
-  //   }
-  // }
-
   .say-container {
     all: initial;
   }
@@ -153,12 +144,13 @@
   }
 
   // Meeting print view
-  .au-c-meeting-chrome .au-c-heading--1 {
-    @include au-font-size($au-h2, $important: true);
+  .au-c-meeting-chrome .au-c-heading--1,
+  .au-c-heading--1 {
+    @include au-font-size(var(--au-h4), $important: true);
   }
 
   .au-c-meeting-chrome .au-c-heading--3 {
-    @include au-font-size($au-h4, $important: true);
+    @include au-font-size(var(--au-h4), $important: true);
   }
 
   .au-c-onboarding {

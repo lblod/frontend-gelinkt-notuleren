@@ -93,12 +93,6 @@
 //   font-size: 1.4rem;
 // }
 
-/* temporary fix for besluittypes dropdown */
-
-// .ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
-//   z-index: 9999;
-// }
-
 /* temporary demo fixes for fracties */
 // input.input-field {
 //   padding-right: 0;
@@ -112,7 +106,12 @@
 //   max-height: 75vh;
 // }
 
+/* temporary fix for besluittypes dropdown */
+.ember-basic-dropdown-content.ember-power-select-dropdown.ember-basic-dropdown-content--below {
+  z-index: 9999;
+}
 
+/* handle remaining flex--contain elements */
 .container-flex--contain {
   position: relative;
   display: flex;
