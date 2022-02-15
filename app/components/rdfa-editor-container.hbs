@@ -1,7 +1,7 @@
 {{#if @busy}}
-  <div class="container-flex--contain">
+  <AuBodyContainer>
     <div class="au-c-rdfa-editor">
-      <div class="say-container say-container--sidebar-left">
+      <div class="say-container say-container--sidebar-left say-container--paper say-container--sidebar-right">
         <div class="say-container__main">
           <div class="say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover">
             <div class="say-editor__paper">
@@ -22,9 +22,9 @@
         </div>
       </div>
     </div>
-  </div>
+  </AuBodyContainer>
 {{else}}
-  <div class="container-flex--contain" vocab="{{this.vocab}}" {{did-insert this.setPrefix}}
+  <AuBodyContainer vocab="{{this.vocab}}" {{did-insert this.setPrefix}}
        typeof="{{@typeOfWrappingDiv}}" property="{{@property}}" resource="#">
     <Rdfa::RdfaEditor
             class="au-c-rdfa-editor"
@@ -32,5 +32,5 @@
             @rdfaEditorInit={{this.rdfaEditorInit}}
             @editorOptions={{this.editorOptions}}
             @toolbarOptions={{this.toolbarOptions}} />
-  </div>
+  </AuBodyContainer>
 {{/if}}

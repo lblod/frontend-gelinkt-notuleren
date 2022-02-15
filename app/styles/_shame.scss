@@ -183,7 +183,7 @@
     color: $au-white;
     position: absolute;
     top: 50%;
-    left: $au-unit-tiny/2;
+    left: $au-unit-tiny * .5;
     transform: translateY(-50%);
     background-color: $au-label-error-badge-color;
     width: $au-unit-small * 1.5;
@@ -221,7 +221,7 @@
     color: $au-white;
     position: absolute;
     top: 50%;
-    left: $au-unit-tiny/2;
+    left: $au-unit-tiny * .5;
     transform: translateY(-50%);
     background-color: $au-label-error-badge-color;
     width: $au-unit-small * 1.5;
@@ -292,18 +292,6 @@
 
 .au-c-modal--no-padding .au-c-modal__body {
   padding: 0;
-}
-
-// Replace container class
-.au-c-app-container {
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-
-
-  @include mq(medium) {
-    overflow: hidden;
-  }
 }
 
 .au-u-capitalize {
@@ -571,5 +559,39 @@
   &:before {
     border-color: rgba($au-white, 0);
     border-bottom-color: $au-blue-900;
+  }
+}
+
+
+// Data pagination styles
+.data-table-pagination {
+  margin-top: $au-unit;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.data-table-pagination-left {
+  @extend .au-c-help-text;
+}
+
+.data-table-pagination-right {
+  display: flex;
+  gap: $au-unit-tiny;
+
+  button {
+    @extend .au-c-button;
+    @extend .au-c-button--link;
+  }
+
+  select {
+    background-color: var(--au-white);
+    border: .1rem solid var(--au-gray-300);
+    border-radius: $au-radius;
+    padding: $au-unit-tiny;
   }
 }

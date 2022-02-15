@@ -72,7 +72,7 @@
   [property="ext:agendapuntenTable"] {
     [property="besluit:geplandOpenbaar"]:before,
     [property="dc:subject"]:before {
-      margin-top: $au-unit - $au-unit-tiny/2;
+      margin-top: $au-unit - $au-unit-tiny * .5;
     }
   }
 }

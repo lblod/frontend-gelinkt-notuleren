@@ -30,7 +30,7 @@
       {{/if}}
     </div>
     {{#if (and @errors @errors.length)}}
-      <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertskin="error">
+      <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertSkin="error">
         <ul>
         {{#each @errors as |error|}}
           <li>{{error}}</li>

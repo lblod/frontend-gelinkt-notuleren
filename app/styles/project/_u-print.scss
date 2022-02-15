@@ -116,22 +116,15 @@
     counter-reset: page 1;
   }
 
-
-
   // App container
-  .au-c-app-container,
-  .au-c-main-container,
-  .container--flex-scroll {
+  .au-c-app,
+  .au-c-main-container {
     overflow: auto !important;
     height: auto !important;
   }
 
   // Buttons
   .au-c-card .au-c-button {
-    display: none !important;
-  }
-
-  .checkbox--switch__wrapper {
     display: none !important;
   }
 
@@ -158,10 +151,6 @@
   .say-container__main * {
     border-bottom: 0 !important;
   }
-
-  // [property="ext:hiddenBesluitType"] {
-  //   display: block !important;
-  // }
 
   // Meeting print view
   .au-c-meeting-chrome .au-c-heading--1 {
