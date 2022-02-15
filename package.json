@@ -38,7 +38,7 @@
     "@lblod/ember-rdfa-editor": "^0.50.0-beta.4",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.1.2",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "~0.5.0",
-    "@lblod/ember-rdfa-editor-citaten-plugin": "0.13.4",
+    "@lblod/ember-rdfa-editor-citaten-plugin": "^0.14.0",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "0.7.4",
     "@lblod/ember-rdfa-editor-rdfa-date-plugin": "^0.0.2",
     "@lblod/ember-rdfa-editor-roadsign-regulation-plugin": "^0.3.2",
