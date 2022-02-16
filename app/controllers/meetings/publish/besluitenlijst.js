@@ -2,6 +2,7 @@ import Controller from "@ember/controller";
 import {task, timeout} from "ember-concurrency";
 import {tracked} from "@glimmer/tracking";
 import { fetch } from 'fetch';
+import { inject as service } from '@ember/service';
 /** @typedef {import("../../../models/zitting").default} Zitting */
 
 
@@ -11,8 +12,8 @@ import { fetch } from 'fetch';
  */
 export default class MeetingsPublishBesluitenlijstController extends Controller {
 
-  @tracked
-  besluitenlijst;
+  @service store;
+  @tracked besluitenlijst;
   @tracked validationErrors;
   @tracked error;
 

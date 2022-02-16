@@ -23,14 +23,14 @@
       </AuToolbarGroup>
     </AuToolbar>
     <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">
-      {{#if hasBlock}}
+      {{#if (has-block)}}
         {{yield}}
       {{else}}
         {{html-safe @mockDocument.body}}
       {{/if}}
     </div>
     {{#if (and @errors @errors.length)}}
-      <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertskin="error">
+      <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertSkin="error">
         <ul>
         {{#each @errors as |error|}}
           <li>{{error}}</li>

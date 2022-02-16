@@ -7,6 +7,7 @@ const CONCEPT_STATUS = "a1974d071e6a47b69b85313ebdcef9f7";
 export default class InboxTrashController extends Controller.extend(DefaultQueryParamsMixin) {
   @service currentSession;
   @service store;
+  @service router;
 
   @action
   async moveToConcepts(documents /*, datatable */) {
@@ -15,6 +16,6 @@ export default class InboxTrashController extends Controller.extend(DefaultQuery
       document.status = conceptStatus;
       await document.save();
     }
-    this.transitionToRoute('inbox.agendapoints');
+    this.router.transitionTo('inbox.agendapoints');
   }
 }

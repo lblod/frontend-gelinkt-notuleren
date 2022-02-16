@@ -1,5 +1,5 @@
 <AuMainHeader @homeRoute="index" @appTitle="Gelinkt Notuleren" @contactRoute="contact">
-  <AuDropdown @dropdownTitle="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @dropdownButtonLabel="Account settings" @alignment="right">
+  <AuDropdown @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @buttonLabel="Account settings" @alignment="right">
     {{#if this.acmSwitchEnabled}}
       <Acmidm::Switch as |acmidm|>
         <AuButton @loading={{acmidm.isSwitching}} class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" acmidm.switch}}>
@@ -13,26 +13,26 @@
   </AuDropdown>
 </AuMainHeader>
 
-<main id="main" class="au-c-main-container" tabindex="-1">
-  <div class="au-c-main-container__sidebar au-u-hide-on-print">
+<AuMainContainer as |maincontainer|>
+  <maincontainer.sidebar>
     <div class="au-c-sidebar">
       <div class="au-c-sidebar__content">
         <nav>
           <ul class="au-c-list-navigation">
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="inbox.meetings">
+              <AuNavigationLink @route="inbox.meetings">
                 <AuIcon @icon="documents" @alignment="left" />
                 {{t "inbox.menu.meetings"}}
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="inbox.agendapoints">
+              <AuNavigationLink @route="inbox.agendapoints">
                 <AuIcon @icon="draft" @alignment="left" />
                 {{t "inbox.menu.agendapoints"}}
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="inbox.trash">
+              <AuNavigationLink @route="inbox.trash">
                 <AuIcon @icon="bin" @alignment="left" />
                 {{t "inbox.menu.trash"}}
               </AuNavigationLink>
@@ -41,14 +41,13 @@
         </nav>
       </div>
       <div class="au-c-sidebar__footer">
-        <a href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" class="au-c-link au-c-link--secondary au-c-link--icon">
-          <AuIcon @icon="manual" @alignment="left" />
+        <AuLinkExternal href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" @icon="manual" @iconAlignment="left" @skin="secondary">
           {{t "inbox.menu.manual"}}
-        </a>
+        </AuLinkExternal>
       </div>
     </div>
-  </div>
-  <div id="content" class="au-c-main-container__content au-u-wide-on-print" tabindex="-1">
+  </maincontainer.sidebar>
+  <maincontainer.content @scroll={{true}}>
     {{outlet}}
-  </div>
-</main>
+  </maincontainer.content>
+</AuMainContainer>

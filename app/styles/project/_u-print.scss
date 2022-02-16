@@ -63,15 +63,6 @@
     height: auto;
   }
 
-  // .document-print--uittreksel--blockchain-signature {
-  //   .col--6-12 {
-  //     width: 49%;
-  //     min-width: auto;
-  //     display: inline-block;
-  //     vertical-align: top;
-  //   }
-  // }
-
   .say-container {
     all: initial;
   }
@@ -120,19 +111,14 @@
   }
 
   // App container
-  .au-c-app-container,
-  .au-c-main-container,
-  .container--flex-scroll {
+  .au-c-app,
+  .au-c-main-container {
     overflow: auto !important;
     height: auto !important;
   }
 
   // Buttons
   .au-c-card .au-c-button {
-    display: none !important;
-  }
-
-  .checkbox--switch__wrapper {
     display: none !important;
   }
 
@@ -160,17 +146,14 @@
     border-bottom: 0 !important;
   }
 
-  // [property="ext:hiddenBesluitType"] {
-  //   display: block !important;
-  // }
-
   // Meeting print view
-  .au-c-meeting-chrome .au-c-heading--1 {
-    @include au-font-size($au-h2, $important: true);
+  .au-c-meeting-chrome .au-c-heading--1,
+  .au-c-heading--1 {
+    @include au-font-size(var(--au-h4), $important: true);
   }
 
   .au-c-meeting-chrome .au-c-heading--3 {
-    @include au-font-size($au-h4, $important: true);
+    @include au-font-size(var(--au-h4), $important: true);
   }
 
   .au-c-onboarding {

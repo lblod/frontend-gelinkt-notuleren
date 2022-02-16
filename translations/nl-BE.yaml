@@ -5,7 +5,13 @@ inbox:
     trash: Prullenmand
     manual: Bekijk handleiding
   meetings:
+    type: Zitting
+    pageTitle: Zittingen
+    noDataMessage: Geen zittingen
     newMeeting: Nieuwe zitting
+    administrativeBody: Bestuursorgaan
+    time: Tijdstip
+    location: Locatie
     new:
       title: Nieuwe zitting aanmaken
       meeting:
@@ -32,7 +38,11 @@ inbox:
       create: Aanmaken
       cancel: Terug
   trash:
+    pageTitle: Prullenmand
     title: Prullenmand
+    noDataMessage: Geen documenten
+    searchPlaceholder: Zoek titel agendapunt
+    restoreMessage: Herstel geselecteerde documenten
 publish:
   backToMeeting: Terug naar zitting
   headingPartOne: Zitting van

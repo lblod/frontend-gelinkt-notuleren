@@ -1,17 +1,16 @@
-<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage="Geen zittingen" @sort={{this.sort}} @page={{this.page}} @size={{this.size}} @class="container-flex--contain" as |table|>
+{{page-title (t "inbox.meetings.pageTitle")}}
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.meetings.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar @size="large">
+      <AuToolbar class="au-o-box" @size="large">
         <AuToolbarGroup>
           <AuHeading @skin="2">
-            Zittingen
+            {{t "inbox.meetings.pageTitle"}}
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--search">
+        <AuToolbarGroup class="au-c-toolbar__group--center">
           {{#unless this.readOnly}}
-            <LinkTo @route="inbox.meetings.new" class="au-c-button">
-              {{t "inbox.meetings.newMeeting"}}
-            </LinkTo>
+            <AuLink @route="inbox.meetings.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.meetings.new.title"}}</AuLink>
           {{/unless}}
         </AuToolbarGroup>
       </AuToolbar>
@@ -19,10 +18,10 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <th class="au-c-data-table__header-title">Zitting</th>
-      <AuDataTableThSortable @field="bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label="Bestuursorgaan" />
-      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{this.sort}} @label="Tijdstip" />
-      <AuDataTableThSortable @field="opLocatie" @currentSorting={{this.sort}} @label="Locatie" />
+      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
+      <AuDataTableThSortable @field="bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.administrativeBody'}} />
+      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.time'}} />
+      <AuDataTableThSortable @field="opLocatie" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.location'}} />
     </c.header>
     <c.body as |meeting|>
       <td>

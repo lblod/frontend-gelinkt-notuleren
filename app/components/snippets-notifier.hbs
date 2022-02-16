@@ -1,6 +1,6 @@
 {{#if this.showCard}}
   <AuModal
-    @modalTitle="Er is relevante informatie uit een externe bron beschikbaar."
+    @title="Er is relevante informatie uit een externe bron beschikbaar."
     @modalOpen={{this.showCard}}
     @closeModal={{this.close}} as |Modal|>
     <Modal.Body>
@@ -12,7 +12,7 @@
   </AuModal>
 {{else if this.hasErrors}}
   <AuModal
-    @modalTitle="Er is een probleem opgetreden met het ophalen van de informatie."
+    @title="Er is een probleem opgetreden met het ophalen van de informatie."
     @modalOpen={{this.showCard}}
     @closeModal={{this.close}} as |Modal|>
     <Modal.Body>

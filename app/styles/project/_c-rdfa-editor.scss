@@ -40,7 +40,7 @@
 }
 
 .au-c-rdfa-publication {
-  padding: $au-unit $au-unit-large - $au-unit-tiny/2 $au-unit $au-unit;
+  padding: $au-unit $au-unit-large - $au-unit-tiny * .5 $au-unit $au-unit;
   margin: $au-unit;
   background-color: $au-white;
   box-shadow: 0 1px 3px rgba($au-gray-900, .2), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);

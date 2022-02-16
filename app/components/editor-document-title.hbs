@@ -5,7 +5,10 @@
 {{else}}
   {{#if this.active}}
     <div class="au-c-app-chrome__title-group {{if this.error "au-c-input--error"}}">
-      <input class="au-c-app-chrome__title-input" placeholder="Naamloos document" type="text" value={{this.title}} {{on "input" this.setTitle}} />
+      {{#let (unique-id) as |id|}}
+        <AuLabel for={{id}}  class="au-u-hidden-visually">agendapunt titel</AuLabel>
+        <input class="au-c-app-chrome__title-input" placeholder="Naamloos document" id={{id}} type="text" value={{this.title}} {{on "input" this.setTitle}} />
+      {{/let}}
       <AuButton class="au-c-app-chrome__title-button" {{on "click" this.toggleActive}} @skin="secondary" @icon="check" @hideText={{true}}>Titel aanpassen</AuButton>
     </div>
   {{else}}

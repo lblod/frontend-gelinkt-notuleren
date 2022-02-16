@@ -7,7 +7,8 @@ import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 
 export default class AgendapointsEditController extends Controller {
-  @service currentSession;
+  @service store;
+  @service router;
   @tracked editor;
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
@@ -46,7 +47,7 @@ export default class AgendapointsEditController extends Controller {
     const response = yield fetch(`/agendapoint-service/${this.documentContainer.id}/copy`, {method: 'POST'});
     const json = yield response.json();
     const agendapuntId = json.uuid;
-    yield this.transitionToRoute('agendapoints.edit', agendapuntId);
+    yield this.router.transitionTo('agendapoints.edit', agendapuntId);
   }
 
   @action
@@ -66,7 +67,7 @@ export default class AgendapointsEditController extends Controller {
     container.status = deletedStatus;
     await container.save();
     this.displayDeleteModal = false;
-    this.transitionToRoute('inbox.agendapoints');
+    this.router.transitionTo('inbox.agendapoints');
   }
 
   @task

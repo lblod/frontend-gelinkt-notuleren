@@ -37,7 +37,8 @@ export default class InboxMeetingsNewController extends Controller {
 
     // Ember has a bug where using the router service here, reruns the parent's model hooks.
     // More info: https://github.com/emberjs/ember.js/issues/19497
-    // TODO use the router service once the bug is fixed
+    // TODO use the router service once the bug is fixed:
+    //this.router.replaceWith('inbox.meetings');
     this.replaceRoute('inbox.meetings');
   }
 }

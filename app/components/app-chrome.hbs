@@ -2,7 +2,7 @@
   <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @linkRoute="inbox.agendapoints" @skin="secondary">
+      <AuLink @route="inbox.agendapoints" @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
         Terug naar overzicht agendapunten
       </AuLink>
@@ -38,7 +38,7 @@
     <AuToolbarGroup>
       <div>
         {{#unless @editorDocument.isNew}}
-          <EditorStatusPill @status={{await @documentContainer.status}} />
+          <EditorStatusPill @status={{@documentContainer.status}} />
         {{/unless}}
         {{#if @editorDocument.isNew}}
         <AuPill @skin="warning">
@@ -49,7 +49,7 @@
       </div>
       <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
     </AuToolbarGroup>
-    <AuToolbarGroup class="au-c-toolbar__group--actions">
+    <AuToolbarGroup>
       {{#if @uploading}}
         <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
           <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" @toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
@@ -80,7 +80,7 @@
           Verwijder concept
         </LinkTo>
       {{else}}
-      <AuDropdown @dropdownTitle="Bestand acties" @dropdownButtonLabel="Bestand opties" @alignment="right">
+      <AuDropdown @title="Bestand acties" @buttonLabel="Bestand opties" @alignment="right">
         {{#if @copyAgendapunt}}
           <AuButton {{on "click" @copyAgendapunt}} @skin="tertiary" role="menuitem">
             <AuIcon @icon="copy" @alignment="left" />

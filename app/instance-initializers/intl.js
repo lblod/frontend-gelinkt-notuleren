@@ -6,7 +6,6 @@ export function initialize(appInstance) {
   const intl = appInstance.lookup('service:intl');
   const userLocale = ( navigator.language || navigator.languages[0] );
   intl.setLocale([userLocale, 'nl-BE']);
-  flatpickr.localize(flatpickr.l10ns.nl);
 }
 
 export default {
