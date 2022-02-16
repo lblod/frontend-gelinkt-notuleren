@@ -18,23 +18,23 @@ export default class AgendapointsRevisionsController extends Controller {
     this.model.container.set('currentVersion', revision);
     yield this.model.container.save();
     this.model.editorDocument = revision;
-    yield Promise.all(revisionsToRemove.map( r => r.destroyRecord()));
+    yield Promise.all(revisionsToRemove.map((r) => r.destroyRecord()));
     this.orderedRevisions.removeObjects(revisionsToRemove);
     this.flushThingsToRemove();
   }
 
-  getRevisionsToRemove(revision){
+  getRevisionsToRemove(revision) {
     let revisionsToRemove = [];
 
-    for(let r of this.orderedRevisions){
-      if(r.id === revision.id) break;
+    for (let r of this.orderedRevisions) {
+      if (r.id === revision.id) break;
       revisionsToRemove.pushObject(r);
     }
 
     return revisionsToRemove;
   }
 
-  flushThingsToRemove(){
+  flushThingsToRemove() {
     this.showConfirmationModal = false;
     this.revisionToRemove = null;
     this.revisionsToRemove = null;
@@ -42,29 +42,32 @@ export default class AgendapointsRevisionsController extends Controller {
   }
 
   @action
-  cancelConfirmRevisionsToRemove(){
+  cancelConfirmRevisionsToRemove() {
     this.flushThingsToRemove();
   }
 
   @action
-  confirmRevisionsToRemove(revision){
+  confirmRevisionsToRemove(revision) {
     this.showConfirmationModal = true;
     this.revisionsToRemove = this.getRevisionsToRemove(revision);
     this.revisionToRemove = revision;
   }
 
   @action
-  restore(){
-    this.setNewRevisionHistory.perform(this.revisionsToRemove, this.revisionToRemove);
+  restore() {
+    this.setNewRevisionHistory.perform(
+      this.revisionsToRemove,
+      this.revisionToRemove
+    );
   }
 
   @action
-  details(revision){
+  details(revision) {
     this.revisionDetail = revision;
   }
 
   @action
-  cancelDetails(){
+  cancelDetails() {
     this.revisionDetail = null;
   }
 }

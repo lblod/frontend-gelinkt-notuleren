@@ -51,7 +51,7 @@ export default class PublishService extends Service {
    * @param {string} jobUrl
    * @param {string} statusUrl*/
   @task
-  * fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600 ) {
+  *fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600) {
     const job = yield fetch(jobUrl);
     const jobData = yield job.json();
     const jobId = jobData.data.attributes.jobId;
@@ -68,7 +68,6 @@ export default class PublishService extends Service {
     } else {
       return yield resp.json();
     }
-
   }
 
   /**
@@ -148,21 +147,24 @@ export default class PublishService extends Service {
   async fetchExtract(treatment) {
     const agendapoint = await treatment.get('onderwerp');
     const meeting = await agendapoint.get('zitting');
-    const versionedTreatments = await this.store.query('versioned-behandeling',
-                                                       {
-                                                         filter: { behandeling: {":id:": treatment.id}},
-                                                         include: 'behandeling.onderwerp,signed-resources,published-resource'
-                                                       });
-    if (versionedTreatments.length > 0 ) {
+    const versionedTreatments = await this.store.query(
+      'versioned-behandeling',
+      {
+        filter: { behandeling: { ':id:': treatment.id } },
+        include: 'behandeling.onderwerp,signed-resources,published-resource',
+      }
+    );
+    if (versionedTreatments.length > 0) {
       return new Extract(
         treatment.id,
         agendapoint.get('position'),
         versionedTreatments.get('firstObject'),
         []
       );
-    }
-    else {
-      const extractPreview = this.store.createRecord('extract-preview', {treatment});
+    } else {
+      const extractPreview = this.store.createRecord('extract-preview', {
+        treatment,
+      });
       await extractPreview.save();
       const versionedTreatment = this.store.createRecord(
         'versioned-behandeling',

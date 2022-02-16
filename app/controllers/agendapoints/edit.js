@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { task } from "ember-concurrency";
+import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -44,26 +44,32 @@ export default class AgendapointsEditController extends Controller {
 
   @task
   *copyAgendapunt() {
-    const response = yield fetch(`/agendapoint-service/${this.documentContainer.id}/copy`, {method: 'POST'});
+    const response = yield fetch(
+      `/agendapoint-service/${this.documentContainer.id}/copy`,
+      { method: 'POST' }
+    );
     const json = yield response.json();
     const agendapuntId = json.uuid;
     yield this.router.transitionTo('agendapoints.edit', agendapuntId);
   }
 
   @action
-  toggleDeleteModal(){
-    this.displayDeleteModal = ! this.displayDeleteModal;
+  toggleDeleteModal() {
+    this.displayDeleteModal = !this.displayDeleteModal;
   }
 
   @action
-  closeValidationModal(){
+  closeValidationModal() {
     this.hasDocumentValidationErrors = false;
   }
 
   @action
-  async deleteDocument(){
+  async deleteDocument() {
     const container = this.documentContainer;
-    const deletedStatus = await this.store.findRecord('concept', TRASH_STATUS_ID);
+    const deletedStatus = await this.store.findRecord(
+      'concept',
+      TRASH_STATUS_ID
+    );
     container.status = deletedStatus;
     await container.save();
     this.displayDeleteModal = false;
@@ -72,10 +78,9 @@ export default class AgendapointsEditController extends Controller {
 
   @task
   *saveTask() {
-    if (! this.editorDocument.title) {
+    if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
-    }
-    else {
+    } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
       const editorDocument = this.store.createRecord('editor-document');
@@ -93,18 +98,18 @@ export default class AgendapointsEditController extends Controller {
     }
   }
 
-  @action toggleUpload(){
-    this.uploading=!this.uploading;
+  @action toggleUpload() {
+    this.uploading = !this.uploading;
     this.fetchDecisions.perform();
   }
-  
-  @task 
-  *toggleUploadAndSave(){
-    if(this.dirty) {
+
+  @task
+  *toggleUploadAndSave() {
+    if (this.dirty) {
       yield this.saveTask.perform();
     }
     yield this.fetchDecisions.perform();
-    this.uploading=!this.uploading;
+    this.uploading = !this.uploading;
   }
 
   @task

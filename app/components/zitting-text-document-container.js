@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
-import { task } from "ember-concurrency";
-import { action } from "@ember/object";
+import { task } from 'ember-concurrency';
+import { action } from '@ember/object';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   constructor(...args) {
@@ -16,19 +16,17 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     showInsertButton: false,
     showRdfa: false,
     showRdfaHighlight: false,
-    showRdfaHover: false
+    showRdfaHover: false,
   };
 
-  get text(){
+  get text() {
     const zitting = this.args.zitting;
     if (this.type === 'ext:intro') {
       return zitting.intro;
-    }
-    else if (this.type === 'ext:outro') {
+    } else if (this.type === 'ext:outro') {
       return zitting.outro;
-    }
-    else{
-      return "";
+    } else {
+      return '';
     }
   }
 
@@ -38,8 +36,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
     if (this.type === 'ext:intro') {
       zitting.intro = this.editor.htmlContent;
-    }
-    else if (this.type === 'ext:outro') {
+    } else if (this.type === 'ext:outro') {
       zitting.outro = this.editor.htmlContent;
     }
     yield zitting.save();
@@ -51,5 +48,4 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     this.editor = editor;
     this.args.onEditorInit(editor);
   }
-
 }

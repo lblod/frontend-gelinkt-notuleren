@@ -1,14 +1,14 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Model | ember-data-sanity', function(hooks) {
+module('Unit | Model | ember-data-sanity', function (hooks) {
   setupTest(hooks);
 
   // Replace this with your real tests.
-  test('nested model saving new relationship', async function(assert) {
+  test('nested model saving new relationship', async function (assert) {
     const store = this.owner.lookup('service:store');
-    const documentContainer = store.createRecord("document-container");
-    const behandeling = store.createRecord("behandeling-van-agendapunt");
+    const documentContainer = store.createRecord('document-container');
+    const behandeling = store.createRecord('behandeling-van-agendapunt');
     behandeling.documentContainer = documentContainer;
 
     assert.ok(documentContainer.isNew);
@@ -20,10 +20,12 @@ module('Unit | Model | ember-data-sanity', function(hooks) {
     assert.notOk(behandeling.isNew);
   });
 
-  test('nested model saving to relationship edits', async function(assert) {
+  test('nested model saving to relationship edits', async function (assert) {
     const store = this.owner.lookup('service:store');
-    const agendaItem = store.createRecord("agendapunt");
-    const treatment = store.createRecord("behandeling-van-agendapunt", {openbaar: false});
+    const agendaItem = store.createRecord('agendapunt');
+    const treatment = store.createRecord('behandeling-van-agendapunt', {
+      openbaar: false,
+    });
     agendaItem.behandeling = treatment;
 
     assert.ok(agendaItem.isNew);
@@ -31,7 +33,7 @@ module('Unit | Model | ember-data-sanity', function(hooks) {
 
     await treatment.save();
     await agendaItem.save();
-    const treatmentId = treatment.get("id");
+    const treatmentId = treatment.get('id');
 
     assert.notOk(treatment.isNew);
     assert.notOk(agendaItem.isNew);
@@ -48,11 +50,12 @@ module('Unit | Model | ember-data-sanity', function(hooks) {
     store.unloadAll();
 
     // fetch the relation ship again
-    const treatmentAfterUnload = await store.findRecord("behandeling-van-agendapunt", treatmentId);
+    const treatmentAfterUnload = await store.findRecord(
+      'behandeling-van-agendapunt',
+      treatmentId
+    );
 
     // ember-data does not recursively save relationships!
     assert.notOk(treatmentAfterUnload.openbaar);
-
   });
-
 });

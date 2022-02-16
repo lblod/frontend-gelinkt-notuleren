@@ -1,7 +1,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-const envIsProduction = (process.env.EMBER_ENV === 'production');
+const envIsProduction = process.env.EMBER_ENV === 'production';
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
@@ -9,16 +9,16 @@ module.exports = function (defaults) {
       useSessionSetupMethod: true,
     },
     'ember-cli-babel': {
-      includePolyfill: false
+      includePolyfill: false,
     },
     minifyCSS: {
-      enabled: envIsProduction
+      enabled: envIsProduction,
     },
     'ember-cli-terser': {
       exclude: ['vendor.js', 'assets/vendor.js'],
       terser: {
         compress: {
-          collapse_vars: false
+          collapse_vars: false,
         },
       },
     },
@@ -29,14 +29,14 @@ module.exports = function (defaults) {
     autoprefixer: {
       enabled: true,
       cascade: true,
-      sourcemap: !envIsProduction
+      sourcemap: !envIsProduction,
     },
     sourcemaps: {
       enabled: !envIsProduction,
-      extensions: ['js', 'css']
+      extensions: ['js', 'css'],
     },
     babel: {
-      sourceMaps: 'inline'
+      sourceMaps: 'inline',
     },
   });
 
