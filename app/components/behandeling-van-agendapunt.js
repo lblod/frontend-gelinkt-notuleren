@@ -100,16 +100,16 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   @task
   *getStatus() {
-    const behandeling=(yield this.store.query("behandeling-van-agendapunt", {
-      "filter[:id:]": this.args.behandeling.id,
-      include: 'document-container.status'
+    const behandeling = (yield this.store.query('behandeling-van-agendapunt', {
+      'filter[:id:]': this.args.behandeling.id,
+      include: 'document-container.status',
     })).firstObject;
 
-    if(behandeling){
+    if (behandeling) {
       const status = yield behandeling.get('documentContainer.status');
       const statusId = status.id;
 
-      if(statusId === PUBLISHED_STATUS_ID){
+      if (statusId === PUBLISHED_STATUS_ID) {
         this.published = true;
       }
     }

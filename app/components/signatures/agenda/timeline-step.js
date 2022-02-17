@@ -1,4 +1,4 @@
-import Component from "@glimmer/component";
+import Component from '@glimmer/component';
 /** @typedef {import("../../../models/agenda").default} Agenda */
 
 /**
@@ -17,7 +17,7 @@ export default class SignaturesAgendaTimelineStep extends Component {
   get mockAgenda() {
     return {
       body: this.args.agenda.renderedContent,
-      signedId: this.args.agenda.zitting.get('id')
+      signedId: this.args.agenda.zitting.get('id'),
     };
   }
 }

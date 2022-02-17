@@ -2,14 +2,17 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { task, waitForProperty } from "ember-concurrency";
-import { DRAFT_FOLDER_ID, DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
+import { task, waitForProperty } from 'ember-concurrency';
+import {
+  DRAFT_FOLDER_ID,
+  DRAFT_STATUS_ID,
+} from 'frontend-gelinkt-notuleren/utils/constants';
 import instantiateUuids from '@lblod/ember-rdfa-editor-standard-template-plugin/utils/instantiate-uuids';
 
 export default class DocumentCreatorComponent extends Component {
-  @tracked title = "";
+  @tracked title = '';
   @tracked type;
-  @tracked template
+  @tracked template;
   @tracked templateOptions = [];
   @tracked invalidTitle;
   @tracked errorSaving;
@@ -25,7 +28,7 @@ export default class DocumentCreatorComponent extends Component {
 
   @action
   rollback() {
-    this.title = "";
+    this.title = '';
     this.invalidTitle = false;
     this.template = null;
     if (this.args.onRollback) {
@@ -51,15 +54,14 @@ export default class DocumentCreatorComponent extends Component {
   validateTitle() {
     if (this.title?.length > 0) {
       this.invalidTitle = false;
-    }
-    else {
+    } else {
       this.invalidTitle = true;
     }
   }
 
   validateForm() {
     this.validateTitle();
-    return ! this.invalidTitle;
+    return !this.invalidTitle;
   }
 
   @action
@@ -76,40 +78,46 @@ export default class DocumentCreatorComponent extends Component {
   *ensureTemplates() {
     yield waitForProperty(this.rdfaEditorStandardTemplatePlugin, 'templates');
     const templates = this.rdfaEditorStandardTemplatePlugin.templates;
-    this.templateOptions = this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt']);
+    this.templateOptions =
+      this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, [
+        'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
+      ]);
   }
 
   async buildTemplate() {
     if (this.template) {
       await this.template.reload(); // templatesForContext does not return body of template
       return instantiateUuids(this.template.body);
-    }
-    else
-      return "";
+    } else return '';
   }
 
   @task
   *persistDocument() {
     try {
-      this.errorSaving=null;
+      this.errorSaving = null;
       const creationDate = new Date();
       const generatedTemplate = yield this.buildTemplate();
       const editorDocument = this.store.createRecord('editor-document', {
         createdOn: creationDate,
         updatedOn: creationDate,
         content: generatedTemplate,
-        title: this.title
+        title: this.title,
       });
       yield editorDocument.save();
       const container = this.store.createRecord('document-container');
-      container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
-      container.folder = yield this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
+      container.status = yield this.store.findRecord(
+        'concept',
+        DRAFT_STATUS_ID
+      );
+      container.folder = yield this.store.findRecord(
+        'editor-document-folder',
+        DRAFT_FOLDER_ID
+      );
       container.publisher = this.currentSession.group;
       container.currentVersion = editorDocument;
       yield container.save();
       return container;
-    }
-    catch(e) {
+    } catch (e) {
       this.errorSaving = e.message;
     }
   }

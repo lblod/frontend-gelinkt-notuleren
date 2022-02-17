@@ -16,12 +16,12 @@ export default class PersoonModel extends Model {
   }
 
   rdfaBindings = {
-    class: "http://www.w3.org/ns/person#Person",
-    achternaam: "http://xmlns.com/foaf/0.1/familyName",
-    gebruikteVoornaam: "http://data.vlaanderen.be/ns/persoon#gebruikteVoornaam",
-    alternatieveNaam: "http://xmlns.com/foaf/0.1/name",
-    geslacht: "http://data.vlaanderen.be/ns/persoon#geslacht",
-    isAangesteldAls: "http://data.vlaanderen.be/ns/mandaat#isAangesteldAls",
-    geboorte: "http://data.vlaanderen.be/ns/persoon#heeftGeboorte"
-  }
+    class: 'http://www.w3.org/ns/person#Person',
+    achternaam: 'http://xmlns.com/foaf/0.1/familyName',
+    gebruikteVoornaam: 'http://data.vlaanderen.be/ns/persoon#gebruikteVoornaam',
+    alternatieveNaam: 'http://xmlns.com/foaf/0.1/name',
+    geslacht: 'http://data.vlaanderen.be/ns/persoon#geslacht',
+    isAangesteldAls: 'http://data.vlaanderen.be/ns/mandaat#isAangesteldAls',
+    geboorte: 'http://data.vlaanderen.be/ns/persoon#heeftGeboorte',
+  };
 }

@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class ZittingManageZittingsdataComponent extends Component {
@@ -22,11 +22,10 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
     this.opLocatie = this.args.zitting.opLocatie;
     this.bestuursorgaan = this.args.zitting.bestuursorgaan;
-
   }
 
   @action
-  async saveZittingsData(){
+  async saveZittingsData() {
     this.zitting.geplandeStart = this.geplandeStart;
     this.zitting.gestartOpTijdstip = this.gestartOpTijdstip;
     this.zitting.geeindigdOpTijdstip = this.geeindigdOpTijdstip;
@@ -53,5 +52,4 @@ export default class ZittingManageZittingsdataComponent extends Component {
   changeDate(targetProperty, value) {
     this[targetProperty] = value;
   }
-
 }

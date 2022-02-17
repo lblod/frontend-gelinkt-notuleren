@@ -11,12 +11,15 @@ export default class InboxMeetingsNewController extends Controller {
   }
 
   @dropTask
-  * saveMeetingTask(event) {
+  *saveMeetingTask(event) {
     event.preventDefault();
 
     let bestuursorgaan = yield this.meeting.bestuursorgaan;
     if (!bestuursorgaan) {
-      this.meeting.errors.add('bestuursorgaan', 'inbox.meetings.new.meeting.errors.administrativeBody.required');
+      this.meeting.errors.add(
+        'bestuursorgaan',
+        'inbox.meetings.new.meeting.errors.administrativeBody.required'
+      );
     }
 
     if (this.meeting.isValid) {
