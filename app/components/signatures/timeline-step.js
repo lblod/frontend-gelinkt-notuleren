@@ -1,7 +1,7 @@
-import Component from "@glimmer/component";
-import {inject as service} from '@ember/service';
-import {task, restartableTask} from 'ember-concurrency';
-import {tracked} from "@glimmer/tracking";
+import Component from '@glimmer/component';
+import { inject as service } from '@ember/service';
+import { task, restartableTask } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 /**
@@ -35,8 +35,8 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get isPublished() {
-    if(this.args.publishedResource) {
-      return !! this.args.publishedResource.get("id");
+    if (this.args.publishedResource) {
+      return !!this.args.publishedResource.get('id');
     }
     return false;
   }
@@ -50,7 +50,7 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   @restartableTask
-  * initTask() {
+  *initTask() {
     this.bestuurseenheid = this.currentSession.group;
     const currentUser = this.currentSession.user;
     let firstSignatureUser = null;
@@ -65,72 +65,66 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get isAgenda() {
-    return (this.args.name === 'ontwerpagenda') || (this.args.name === 'aanvullende agenda') || (this.args.name === 'spoedeisende agenda');
+    return (
+      this.args.name === 'ontwerpagenda' ||
+      this.args.name === 'aanvullende agenda' ||
+      this.args.name === 'spoedeisende agenda'
+    );
   }
 
   get title() {
     return `Voorvertoning ${this.args.name}`;
   }
 
-
   get headerWithDefault() {
     return this.args.header || this.args.name;
   }
 
   get status() {
-    if (this.isPublished)
-      return 'published';
-    if (this.signaturesCount === 1)
-      return 'firstSignature';
-    if (this.signaturesCount === 2)
-      return 'secondSignature';
+    if (this.isPublished) return 'published';
+    if (this.signaturesCount === 1) return 'firstSignature';
+    if (this.signaturesCount === 2) return 'secondSignature';
     return 'concept';
   }
 
   get handtekeningStatus() {
-
     if (this.signaturesCount === 1)
-      return {label: 'Tweede ondertekening vereist', color: 'warning'};
+      return { label: 'Tweede ondertekening vereist', color: 'warning' };
     if (this.signaturesCount === 2)
-      return {label: 'Ondertekend', color: 'action'};
-    return {label: 'Niet ondertekend', color: 'border'};
+      return { label: 'Ondertekend', color: 'action' };
+    return { label: 'Niet ondertekend', color: 'border' };
   }
 
   get voorVertoningStatus() {
     if (this.status === 'published')
-      return {label: 'Publieke versie', color: 'action'};
+      return { label: 'Publieke versie', color: 'action' };
     if (this.status === 'firstSignature' || this.status === 'secondSignature')
-      return {label: 'Ondertekende versie', color: 'success'};
-    return {label: 'Meest recente versie'};
-
+      return { label: 'Ondertekende versie', color: 'success' };
+    return { label: 'Meest recente versie' };
   }
 
   get algemeneStatus() {
     if (this.status === 'published')
-      return {label: 'Gepubliceerd', color: 'action'};
+      return { label: 'Gepubliceerd', color: 'action' };
     if (this.status === 'firstSignature')
-      return {label: 'Eerste ondertekening verkregen', color: 'warning'};
+      return { label: 'Eerste ondertekening verkregen', color: 'warning' };
     if (this.status === 'secondSignature')
-      return {label: 'Getekend', color: 'success'};
-    if (this.status === 'concept')
-      return {label: 'Concept'};
+      return { label: 'Getekend', color: 'success' };
+    if (this.status === 'concept') return { label: 'Concept' };
     return 'concept';
   }
 
-
   get iconName() {
-    if (this.status === 'concept')
-      return 'pencil';
+    if (this.status === 'concept') return 'pencil';
     if (this.status === 'firstSignature' || this.status === 'secondSignature')
       return 'message';
-    if (this.status === 'published')
-      return 'check';
+    if (this.status === 'published') return 'check';
 
     return 'pencil';
   }
 
   @task
-  * signDocument(signedId) {
+  *signDocument(signedId) {
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
     yield this.args.signing(signedId);
@@ -139,7 +133,7 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   @task
-  * publishDocument(signedId) {
+  *publishDocument(signedId) {
     this.showPublishingModal = false;
     yield this.args.publish(signedId);
   }

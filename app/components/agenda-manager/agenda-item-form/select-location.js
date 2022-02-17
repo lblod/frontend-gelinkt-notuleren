@@ -6,28 +6,27 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
   @tracked locationOptions = [
     { code: 'start', name: 'Vooraan in agenda' },
     { code: 'after', name: 'Na agendapunt' },
-    { code: 'end', name: 'Achteraan in agenda' }
+    { code: 'end', name: 'Achteraan in agenda' },
   ];
   @tracked selectedLocation;
   @tracked selectedAfterItem;
 
-
-
   get showAfterItemOptions() {
-    return this.selectedLocation && this.selectedLocation.code === "after";
+    return this.selectedLocation && this.selectedLocation.code === 'after';
   }
 
   get afterItemOptions() {
-    return this.args.agendaItems.sortBy("position").reject((x) => x === this.args.currentItem);
+    return this.args.agendaItems
+      .sortBy('position')
+      .reject((x) => x === this.args.currentItem);
   }
 
   @action
   selectLocation(value) {
     this.selectedLocation = value;
-    if(value.code === "start") {
+    if (value.code === 'start') {
       this.args.model[this.args.for] = 0;
-    }
-    else if (value.code === "end"){
+    } else if (value.code === 'end') {
       this.args.model[this.args.for] = this.args.agendaItems.length - 1;
     }
   }

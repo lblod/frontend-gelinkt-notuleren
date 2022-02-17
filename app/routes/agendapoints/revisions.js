@@ -7,18 +7,21 @@ export default class AgendapointsRevisionsRoute extends Route {
   @service store;
 
   async model(params) {
-    const container = await this.store.findRecord('documentContainer', params.id);
+    const container = await this.store.findRecord(
+      'documentContainer',
+      params.id
+    );
     const editorDocument = await container.get('currentVersion');
     return RSVP.hash({
       revisions: this.fetchRevisions.perform(editorDocument),
       container,
-      editorDocument
+      editorDocument,
     });
   }
 
   @task
   *fetchRevisions(currentVersion) {
-    let revisions = [ currentVersion ];
+    let revisions = [currentVersion];
     let revision = yield currentVersion.get('previousVersion');
     while (revision) {
       revisions.push(revision);

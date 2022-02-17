@@ -10,24 +10,18 @@ module.exports = {
       legacyDecorators: true,
     },
   },
-  "globals": {
-    "flatpickr": false
-  },
-  plugins: [
-    'ember'
-  ],
+  plugins: ['ember'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
-    // Disable the Prettier rules for now
-    // 'plugin:prettier/recommended',
+    'plugin:prettier/recommended',
   ],
   env: {
     browser: true,
   },
   rules: {
     'ember/no-mixins': 'warn',
-    'semi': 'error', // Remove this rule once Prettier is enabled
+    semi: 'error', // Remove this rule once Prettier is enabled
   },
   overrides: [
     // node files

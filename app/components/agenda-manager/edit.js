@@ -1,18 +1,16 @@
-import Component from "@glimmer/component";
-import { action } from "@ember/object";
-import {task} from "ember-concurrency";
-import { inject as service } from "@ember/service";
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
+import { task } from 'ember-concurrency';
+import { inject as service } from '@ember/service';
 
 export default class AgendaManagerEditComponent extends Component {
-
   @service documentService;
-
 
   get isNew() {
     return this.args.itemToEdit && this.args.itemToEdit.isNew;
   }
   @task
-  * submitTask(item) {
+  *submitTask(item) {
     yield this.args.saveTask.unlinked().perform(item);
     this.args.onClose();
   }
@@ -21,7 +19,7 @@ export default class AgendaManagerEditComponent extends Component {
     this.args.onCancel();
   }
   @task
-  * deleteTask(item) {
+  *deleteTask(item) {
     yield this.args.deleteTask.unlinked().perform(item);
     this.args.onClose();
   }

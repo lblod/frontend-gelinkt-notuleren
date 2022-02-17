@@ -12,7 +12,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @service router;
 
   get agendapoint() {
-    return  this.model.get('onderwerp');
+    return this.model.get('onderwerp');
   }
 
   get meeting() {
@@ -32,44 +32,52 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   @task
-    *_createSignedResourceTask(behandeling) {
-      try {
-        this.error = null;
-        const result = yield fetch(`/signing/behandeling/sign/${this.meeting.get('id')}/${behandeling.get('id')}`, {
+  *_createSignedResourceTask(behandeling) {
+    try {
+      this.error = null;
+      const result = yield fetch(
+        `/signing/behandeling/sign/${this.meeting.get('id')}/${behandeling.get(
+          'id'
+        )}`,
+        {
           method: 'POST',
-        });
-        if (! result.ok) {
-          const json = yield result.json();
-          const errors = json?.errors?.join("\n");
-          throw errors;
         }
-        yield this.loadExtract.perform();
+      );
+      if (!result.ok) {
+        const json = yield result.json();
+        const errors = json?.errors?.join('\n');
+        throw errors;
       }
-      catch(e) {
-        this.extract = null;
-        this.error = e;
-      }
+      yield this.loadExtract.perform();
+    } catch (e) {
+      this.extract = null;
+      this.error = e;
     }
+  }
 
   @task
-    *_createPublishedResourceTask(behandeling) {
-      try {
-        this.error = null;
-        const result = yield fetch(`/signing/behandeling/publish/${this.meeting.get('id')}/${behandeling.get('id')}`, {
-        method: 'POST',
-        });
-        if (! result.ok) {
-          const json = yield result.json();
-          const errors = json?.errors?.join("\n");
-          throw errors;
+  *_createPublishedResourceTask(behandeling) {
+    try {
+      this.error = null;
+      const result = yield fetch(
+        `/signing/behandeling/publish/${this.meeting.get(
+          'id'
+        )}/${behandeling.get('id')}`,
+        {
+          method: 'POST',
         }
-        yield this.loadExtract.perform();
+      );
+      if (!result.ok) {
+        const json = yield result.json();
+        const errors = json?.errors?.join('\n');
+        throw errors;
       }
-      catch(e) {
-        this.extract = null;
-        this.error = e;
-      }
+      yield this.loadExtract.perform();
+    } catch (e) {
+      this.extract = null;
+      this.error = e;
     }
+  }
 
   @action
   print(extract) {
@@ -83,21 +91,19 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   get mockBehandeling() {
     return {
       body: this.extract.document.content,
-      signedId: this.meeting.get('id')
+      signedId: this.meeting.get('id'),
     };
   }
 
   @task
-    * loadExtract() {
-      try {
-        this.extract = null;
-        this.error = null;
-        const treatment = this.model;
-        this.extract = yield this.publish.fetchExtract(treatment);
-      }
-      catch(e) {
-        this.error = e;
-      }
+  *loadExtract() {
+    try {
+      this.extract = null;
+      this.error = null;
+      const treatment = this.model;
+      this.extract = yield this.publish.fetchExtract(treatment);
+    } catch (e) {
+      this.error = e;
     }
+  }
 }
-

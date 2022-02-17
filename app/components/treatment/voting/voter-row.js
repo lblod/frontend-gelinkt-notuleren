@@ -15,7 +15,7 @@ import { action } from '@ember/object';
  * Ex
  * */
 export default class TreatmentVotingVoterRowComponent extends Component {
-  voteOptions = ["voor", "tegen", "onthouding"];
+  voteOptions = ['voor', 'tegen', 'onthouding'];
 
   constructor(parent, args) {
     super(parent, args);
@@ -24,14 +24,14 @@ export default class TreatmentVotingVoterRowComponent extends Component {
     return this.args.row[0].isBestuurlijkeAliasVan;
   }
   get isVoting() {
-    return this.args.row[1] !== "zalNietStemmen";
+    return this.args.row[1] !== 'zalNietStemmen';
   }
   get mandataris() {
     return this.args.row[0];
   }
   get selectedVote() {
-    if (this.args.row[1] === "zalStemmen") {
-      return "selecteer";
+    if (this.args.row[1] === 'zalStemmen') {
+      return 'selecteer';
     }
     return this.args.row[1];
   }
@@ -41,11 +41,11 @@ export default class TreatmentVotingVoterRowComponent extends Component {
 
   @action
   addStemmer() {
-    this.args.onVoteChange(this.args.row[0], "zalStemmen");
+    this.args.onVoteChange(this.args.row[0], 'zalStemmen');
   }
   @action
   removeStemmer() {
-    this.args.onVoteChange(this.args.row[0], "zalNietStemmen");
+    this.args.onVoteChange(this.args.row[0], 'zalNietStemmen');
   }
 
   @action
@@ -56,5 +56,4 @@ export default class TreatmentVotingVoterRowComponent extends Component {
     const vote = event.target.value;
     this.args.onVoteChange(this.args.row[0], vote);
   }
-
 }

@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class MeetingsEditOutroController extends Controller {
-  @service router
+  @service router;
   @tracked editor;
 
   get dirty() {

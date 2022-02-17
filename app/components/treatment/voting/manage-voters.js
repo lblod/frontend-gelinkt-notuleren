@@ -17,6 +17,5 @@ import { inject as service } from '@ember/service';
  */
 /** @extends {Component<Args>} */
 export default class TreatmentVotingManageVotersComponent extends Component {
-    @service editStemming;
-
+  @service editStemming;
 }

@@ -1,11 +1,10 @@
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
-import {task} from "ember-concurrency";
-import {tracked} from "@glimmer/tracking";
+import { task } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class MeetingsPublishNotulenController extends Controller {
-
   @service store;
   @tracked notulen;
   @tracked errors;
@@ -27,36 +26,38 @@ export default class MeetingsPublishNotulenController extends Controller {
     this.initializeNotulen.perform();
   }
 
-
   @task
-  * initializeNotulen() {
-    const versionedNotulens = yield this.store.query('versioned-notulen',{
+  *initializeNotulen() {
+    const versionedNotulens = yield this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
-      include: 'signed-resources,published-resource'
+      include: 'signed-resources,published-resource',
     });
-    if(versionedNotulens.length) {
+    if (versionedNotulens.length) {
       let notulenSet = false;
-      yield Promise.all(versionedNotulens.map(async (notulen) => {
-        const publishedResource = await notulen.publishedResource;
-        const signedResources = await notulen.signedResources;
-        if(publishedResource) {
-          this.publishedResource = publishedResource;
-          this.publicBehandelingUris = notulen.publicBehandelingen || [];
-          this.notulen = notulen;
-          notulenSet = true;
-        }
-        if(signedResources.length) {
-          this.signedResources = signedResources;
-          if(!notulenSet) {
+      yield Promise.all(
+        versionedNotulens.map(async (notulen) => {
+          const publishedResource = await notulen.publishedResource;
+          const signedResources = await notulen.signedResources;
+          if (publishedResource) {
+            this.publishedResource = publishedResource;
+            this.publicBehandelingUris = notulen.publicBehandelingen || [];
             this.notulen = notulen;
+            notulenSet = true;
           }
-        }
-      }));
+          if (signedResources.length) {
+            this.signedResources = signedResources;
+            if (!notulenSet) {
+              this.notulen = notulen;
+            }
+          }
+        })
+      );
     } else {
-      const {content, errors} = yield this.createPrePublishedResource.perform();
-      const rslt = yield this.store.createRecord("versioned-notulen", {
+      const { content, errors } =
+        yield this.createPrePublishedResource.perform();
+      const rslt = yield this.store.createRecord('versioned-notulen', {
         zitting: this.model,
-        content: content
+        content: content,
       });
       this.publishedResource = undefined;
       this.signedResources = [];
@@ -69,37 +70,40 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   @task
   *reloadNotulen() {
-    const versionedNotulens = yield this.store.query('versioned-notulen',{
+    const versionedNotulens = yield this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
-      include: 'signed-resources,published-resource'
+      include: 'signed-resources,published-resource',
     });
-    if(versionedNotulens.length) {
-      yield Promise.all(versionedNotulens.map(async (notulen) => {
-        const publishedResource = await notulen.publishedResource;
-        const signedResources = await notulen.signedResources;
-        if(publishedResource) {
-          this.publishedResource = publishedResource;
-          this.publicBehandelingUris = notulen.publicBehandelingen || [];
-          this.notulen = notulen;
-        }
-        if(signedResources.length) {
-          this.signedResources = signedResources;
-          if(!this.notulen) {
+    if (versionedNotulens.length) {
+      yield Promise.all(
+        versionedNotulens.map(async (notulen) => {
+          const publishedResource = await notulen.publishedResource;
+          const signedResources = await notulen.signedResources;
+          if (publishedResource) {
+            this.publishedResource = publishedResource;
+            this.publicBehandelingUris = notulen.publicBehandelingen || [];
             this.notulen = notulen;
           }
-        }
-      }));
+          if (signedResources.length) {
+            this.signedResources = signedResources;
+            if (!this.notulen) {
+              this.notulen = notulen;
+            }
+          }
+        })
+      );
     }
-    
+
     const behandelings = yield this.fetchBehandelings.perform();
     this.behandelings = behandelings;
   }
 
-
   @task
   *createPrePublishedResource() {
     const id = this.model.id;
-    const json = yield this.publish.fetchJobTask.perform(`/prepublish/notulen/${id}`);
+    const json = yield this.publish.fetchJobTask.perform(
+      `/prepublish/notulen/${id}`
+    );
     return json.data.attributes;
   }
 
@@ -112,21 +116,29 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   @task
-  * createSignedResource() {
+  *createSignedResource() {
     const id = this.model.id;
-    const taskId = yield this.muTask.fetchTaskifiedEndpoint(`/signing/notulen/sign/${id}`, { method: 'POST' });
+    const taskId = yield this.muTask.fetchTaskifiedEndpoint(
+      `/signing/notulen/sign/${id}`,
+      { method: 'POST' }
+    );
     yield this.muTask.waitForMuTaskTask.perform(taskId);
     setTimeout(() => this.reloadNotulen.perform(), 1);
   }
 
   @task
-  * createPublishedResource() {
+  *createPublishedResource() {
     const id = this.model.id;
     const taskId = yield this.muTask.fetchTaskifiedEndpoint(
       `/signing/notulen/publish/${id}`,
-      {headers: { "Content-Type": 'application/vnd.api+json' },
-       body: JSON.stringify({'public-behandeling-uris': this.publicBehandelingUris}),
-       method: 'POST'});
+      {
+        headers: { 'Content-Type': 'application/vnd.api+json' },
+        body: JSON.stringify({
+          'public-behandeling-uris': this.publicBehandelingUris,
+        }),
+        method: 'POST',
+      }
+    );
     yield this.muTask.waitForMuTaskTask.perform(taskId);
     setTimeout(() => this.reloadNotulen.perform(), 1);
   }
@@ -136,7 +148,9 @@ export default class MeetingsPublishNotulenController extends Controller {
       const div = document.createElement('div');
       div.innerHTML = this.notulen.content;
 
-      const bvapContainer = div.querySelector("[property='http://mu.semte.ch/vocabularies/ext/behandelingVanAgendapuntenContainer']");
+      const bvapContainer = div.querySelector(
+        "[property='http://mu.semte.ch/vocabularies/ext/behandelingVanAgendapuntenContainer']"
+      );
       bvapContainer.innerHTML = '';
       bvapContainer.id = this.behandelingContainerId;
 
@@ -150,9 +164,12 @@ export default class MeetingsPublishNotulenController extends Controller {
     const div = document.createElement('div');
     div.innerHTML = this.notulen.content;
 
-    const behandelingNodes = div.querySelectorAll("[typeof='besluit:BehandelingVanAgendapunt']");
+    const behandelingNodes = div.querySelectorAll(
+      "[typeof='besluit:BehandelingVanAgendapunt']"
+    );
     behandelingNodes.forEach((node) => {
-      const uri = node.attributes['resource'] && node.attributes['resource'].value;
+      const uri =
+        node.attributes['resource'] && node.attributes['resource'].value;
       if (this.publicBehandelingUris.includes(uri)) {
         node.classList.remove('behandeling-preview--niet-publiek');
       } else {
@@ -161,7 +178,8 @@ export default class MeetingsPublishNotulenController extends Controller {
     });
 
     this.notulen.set('body', div.innerHTML);
-    this.allBehandelingPublic = this.behandelings.length === this.publicBehandelingUris.length;
+    this.allBehandelingPublic =
+      this.behandelings.length === this.publicBehandelingUris.length;
   }
 
   @action
@@ -169,14 +187,15 @@ export default class MeetingsPublishNotulenController extends Controller {
     const uri = behandeling.behandeling;
     if (this.publicBehandelingUris.includes(uri))
       this.publicBehandelingUris.removeObject(uri);
-    else
-      this.publicBehandelingUris.pushObject(uri);
+    else this.publicBehandelingUris.pushObject(uri);
     this.updateNotulenPreview();
   }
   @action
   toggleAllPublicationStatus() {
-    if(!this.allBehandelingPublic) {
-      this.publicBehandelingUris = this.behandelings.map((behandeling) => behandeling.behandeling);
+    if (!this.allBehandelingPublic) {
+      this.publicBehandelingUris = this.behandelings.map(
+        (behandeling) => behandeling.behandeling
+      );
       this.updateNotulenPreview();
     } else {
       this.publicBehandelingUris = [];
