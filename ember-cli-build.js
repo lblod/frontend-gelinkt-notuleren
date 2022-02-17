@@ -15,12 +15,9 @@ module.exports = function (defaults) {
       enabled: envIsProduction
     },
     'ember-cli-terser': {
+      enabled: envIsProduction,
       exclude: ['vendor.js', 'assets/vendor.js'],
-      terser: {
-        compress: {
-          collapse_vars: false
-        },
-      },
+      hiddenSourceMap: envIsProduction,
     },
     sassOptions: {
       sourceMap: !envIsProduction,
