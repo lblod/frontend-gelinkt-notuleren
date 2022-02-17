@@ -6,7 +6,6 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-ENV NODE_OPTIONS="--max-old-space-size=5000"
 RUN ember build -prod
 
 FROM semtech/ember-proxy-service:1.5.1
