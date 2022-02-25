@@ -3,6 +3,22 @@
 
 
 
+## 2.21.0 (2022-02-25)
+
+#### :bug: Bug Fix
+* [#244](https://github.com/lblod/frontend-gelinkt-notuleren/pull/244) Fixing production builds "out of memory" problems ([@benjay10](https://github.com/benjay10))
+
+#### :house: Internal
+* [#243](https://github.com/lblod/frontend-gelinkt-notuleren/pull/243) Linting after upgrade 3.28 ([@benjay10](https://github.com/benjay10))
+* [#200](https://github.com/lblod/frontend-gelinkt-notuleren/pull/200) Internal/ember upgrade ([@nvdk](https://github.com/nvdk))
+* [#229](https://github.com/lblod/frontend-gelinkt-notuleren/pull/229) Bump nanoid from 3.1.29 to 3.2.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#241](https://github.com/lblod/frontend-gelinkt-notuleren/pull/241) Bump follow-redirects from 1.14.7 to 1.14.8 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#240](https://github.com/lblod/frontend-gelinkt-notuleren/pull/240) align both the browserlist and build targets ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 2
+- Ben ([@benjay10](https://github.com/benjay10))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.20.6 (2022-02-11)
 
 #### :rocket: Enhancement
