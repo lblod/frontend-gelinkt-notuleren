@@ -1,9 +1,8 @@
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
 import sub from 'date-fns/sub';
 import isAfter from 'date-fns/isAfter';
+import { trackedFunction } from 'ember-resources';
 
 const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005', //	"Gemeenteraad"
@@ -36,23 +35,13 @@ const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
 export default class AdministrativeBodySelectComponent extends Component {
   @service currentSession;
   @service store;
-  @tracked administrativeBodyOptions = [];
 
-  constructor() {
-    super(...arguments);
+  administrativeBodyOptions = trackedFunction(this, async () => {
+    //this has to be here https://github.com/ember-learn/guides-source/issues/1769
+    await Promise.resolve();
 
-    this.fetchAdministrativeBodies.perform();
-  }
-
-  /**
-   * Fetch bodies which are of the right classification, and whose
-   * end date is not older than 2 months before the current date
-   */
-  @task
-  *fetchAdministrativeBodies() {
     let currentAdministrativeUnitId = this.currentSession.group.id;
-
-    let administrativeBodiesInTime = yield this.store.query('bestuursorgaan', {
+    let administrativeBodiesInTime = await this.store.query('bestuursorgaan', {
       'filter[is-tijdsspecialisatie-van][bestuurseenheid][id]':
         currentAdministrativeUnitId,
       include: [
@@ -62,7 +51,7 @@ export default class AdministrativeBodySelectComponent extends Component {
       sort: '-binding-start',
     });
 
-    this.administrativeBodyOptions = administrativeBodiesInTime.filter(
+    const result = administrativeBodiesInTime.filter(
       (administrativeBodyInTime) => {
         const classificationUrl = administrativeBodyInTime.get(
           'isTijdsspecialisatieVan.classificatie.uri'
@@ -82,5 +71,7 @@ export default class AdministrativeBodySelectComponent extends Component {
         return isAfter(endDate, twoMonthsAgo);
       }
     );
-  }
+
+    return result;
+  });
 }

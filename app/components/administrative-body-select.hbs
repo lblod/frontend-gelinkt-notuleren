@@ -2,7 +2,7 @@
   <PowerSelect
     @placeholder={{t "manageZittingsData.selectPlaceholder"}}
     @selected={{@selected}}
-    @options={{this.administrativeBodyOptions}}
+    @options={{this.administrativeBodyOptions.value}}
     @onChange={{@onChange}}
     @triggerId={{@id}}
     as |administrativeBody|
