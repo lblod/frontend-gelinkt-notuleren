@@ -12,6 +12,7 @@
     {{#let (unique-id) as |id|}}
       <AuLabel @error={{@invalidTemplate}} for={{id}}>
         {{t "documentCreator.template"}}
+        <RequiredField />        
       </AuLabel>
       <PowerSelect
         class={{if @invalidTemplate "u-c-input au-c-input--error"}}
