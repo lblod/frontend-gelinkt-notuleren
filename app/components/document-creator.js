@@ -86,8 +86,7 @@ export default class DocumentCreatorComponent extends Component {
 
   @task
   *ensureTemplates() {
-    yield waitForProperty(this.rdfaEditorStandardTemplatePlugin, 'templates');
-    const templates = this.rdfaEditorStandardTemplatePlugin.templates;
+    const templates = yield this.rdfaEditorStandardTemplatePlugin.fetchTemplates.perform();
     this.templateOptions =
       this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, [
         'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
