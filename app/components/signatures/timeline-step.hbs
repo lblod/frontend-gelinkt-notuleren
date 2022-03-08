@@ -191,7 +191,7 @@
         <div class="au-o-grid__item au-u-padding-top-none">
           {{#if this.isAgenda}}
             <AuButton
-              {{on "click" (fn (mut this.showPublishingModal) true)}}
+              {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
               @loading={{this.publishDocument.isRunning}}
@@ -201,7 +201,7 @@
             </AuButton>
           {{else}}
             <AuButton
-              {{on "click" (fn (mut this.showPublishingModal) true)}}
+              {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
               @loading={{this.publishDocument.isRunning}}
@@ -238,6 +238,8 @@
           <Signatures::PublicationConfirmation
             @name={{@name}}
             @mockDocument={{@mockDocument}}
+            @preview={{@preview}}
+            @generatePreview={{@generatePreview}}
             @confirm={{perform this.publishDocument @mockDocument.signedId}}
             @cancel={{fn (mut this.showPublishingModal) false}} />
         {{/if}}

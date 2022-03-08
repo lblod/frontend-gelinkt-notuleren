@@ -15,6 +15,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @tracked publicBehandelingUris = [];
   @tracked behandelings;
   @tracked allBehandelingPublic = false;
+  @tracked preview;
   @service publish;
   @service muTask;
 
@@ -141,6 +142,20 @@ export default class MeetingsPublishNotulenController extends Controller {
     );
     yield this.muTask.waitForMuTaskTask.perform(taskId);
     setTimeout(() => this.reloadNotulen.perform(), 1);
+  }
+
+  @task
+  *generateNotulenPreview() {
+    const id = this.model.id;
+    const response = yield fetch(`/prepublish/notulen/final-preview/${id}`, {
+      headers: { 'Content-Type': 'application/vnd.api+json' },
+      body: JSON.stringify({
+        'public-behandeling-uris': this.publicBehandelingUris,
+      }),
+      method: 'POST',
+    });
+    const previewHtml = yield response.text();
+    this.preview = previewHtml;
   }
 
   get zittingWrapper() {

@@ -53,9 +53,17 @@
       </div>
       <div class="au-o-grid__item au-u-2-3">
         <div class="au-c-rdfa-publication-holder">
-          <div class="au-c-rdfa-publication say-content rdfa-annotations behandeling-preview">
-            {{html-safe @mockDocument.body}}
-          </div>
+          {{#if (and @generatePreview @generatePreview.isRunning)}}
+            <AuLoader />
+          {{else}}
+            <div class="au-c-rdfa-publication say-content rdfa-annotations behandeling-preview">
+              {{#if @preview}}
+                {{html-safe @preview}}
+              {{else}}
+                {{html-safe @mockDocument.body}}
+              {{/if}}
+            </div>
+          {{/if}}
         </div>
       </div>
     </div>
