@@ -16,7 +16,7 @@ export default class RdfaEditorContainerComponent extends Component {
     return (
       this.args.editorOptions ?? {
         showToggleRdfaAnnotations: Boolean(this.args.showToggleRdfaAnnotations),
-        showInsertButton: true,
+        showInsertButton: false,
         showRdfa: true,
         showRdfaHighlight: true,
         showRdfaHover: true,
