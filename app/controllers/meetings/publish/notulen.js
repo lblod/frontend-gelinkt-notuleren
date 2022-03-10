@@ -146,11 +146,26 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   @task
   *generateNotulenPreview() {
-    const id = this.model.id;
-    const response = yield fetch(`/prepublish/notulen/final-preview/${id}`, {
+    const meetingId = this.model.id;
+    const response = yield fetch(`/meeting-notes-previews`, {
       headers: { 'Content-Type': 'application/vnd.api+json' },
       body: JSON.stringify({
-        'public-behandeling-uris': this.publicBehandelingUris,
+        data: {
+          type: 'meeting-notes-previews',
+          relationships: {
+            publicTreatments: this.publicBehandelingUris.map((uri) => ({
+              data: {
+                id: uri,
+                type: 'treatment',
+              },
+            })),
+            meeting: {
+              data: {
+                id: meetingId,
+              },
+            },
+          },
+        },
       }),
       method: 'POST',
     });
