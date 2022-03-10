@@ -15,6 +15,7 @@ export default class DocumentCreatorComponent extends Component {
   @tracked template;
   @tracked templateOptions = [];
   @tracked invalidTitle;
+  @tracked invalidTemplate;
   @tracked errorSaving;
 
   @service store;
@@ -45,6 +46,7 @@ export default class DocumentCreatorComponent extends Component {
   @action
   onSelectTemplate(template) {
     this.template = template;
+    this.validateTemplate();
   }
 
   get isSaving() {
@@ -59,9 +61,17 @@ export default class DocumentCreatorComponent extends Component {
     }
   }
 
+  validateTemplate() {
+    if (this.template) {
+      this.invalidTemplate = false;
+    } else {
+      this.invalidTemplate = true;
+    }
+  }
   validateForm() {
     this.validateTitle();
-    return !this.invalidTitle;
+    this.validateTemplate();
+    return !this.invalidTemplate && !this.invalidTitle;
   }
 
   @action
