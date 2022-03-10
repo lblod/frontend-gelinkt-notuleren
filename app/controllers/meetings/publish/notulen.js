@@ -154,7 +154,8 @@ export default class MeetingsPublishNotulenController extends Controller {
       }),
       method: 'POST',
     });
-    const previewHtml = yield response.text();
+    const json = yield response.json();
+    const previewHtml = json.data.attributes.html;
     this.preview = previewHtml;
   }
 
