@@ -45,7 +45,7 @@
     "@lblod/ember-rdfa-editor-rdfa-date-plugin": "^0.0.2",
     "@lblod/ember-rdfa-editor-roadsign-regulation-plugin": "^0.3.3",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.9.0",
-    "@lblod/ember-rdfa-editor-template-variable-plugin": "^0.1.2",
+    "@lblod/ember-rdfa-editor-template-variable-plugin": "^0.3.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
