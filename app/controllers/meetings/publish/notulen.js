@@ -156,12 +156,13 @@ export default class MeetingsPublishNotulenController extends Controller {
             publicTreatments: this.publicBehandelingUris.map((uri) => ({
               data: {
                 id: uri,
-                type: 'treatment',
+                type: 'treatments',
               },
             })),
             meeting: {
               data: {
                 id: meetingId,
+                type: 'meetings',
               },
             },
           },
