@@ -176,7 +176,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   get zittingWrapper() {
-    if (this.notulen.content) {
+    if (this.notulen?.content) {
       const div = document.createElement('div');
       div.innerHTML = this.notulen.content;
 
