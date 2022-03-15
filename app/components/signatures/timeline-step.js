@@ -141,9 +141,6 @@ export default class SignaturesTimelineStep extends Component {
 
   @action
   publish() {
-    if (this.args.generatePreview) {
-      this.args.generatePreview.perform();
-    }
     this.showPublishingModal = true;
   }
 }

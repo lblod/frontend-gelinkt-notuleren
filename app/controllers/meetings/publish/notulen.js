@@ -6,32 +6,62 @@ import { action } from '@ember/object';
 
 export default class MeetingsPublishNotulenController extends Controller {
   @service store;
+  @service publish;
+  @service muTask;
+
+  behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
   @tracked errors;
   @tracked signedResources = [];
   @tracked publishedResource;
-
-  behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked publicBehandelingUris = [];
-  @tracked behandelings;
+  @tracked treatments;
   @tracked allBehandelingPublic = false;
   @tracked preview;
-  @service publish;
-  @service muTask;
+  @tracked showSigningModal = false;
+  @tracked showPublishingModal = false;
 
   constructor() {
     super(...arguments);
   }
 
+  resetController() {
+    this.notulen = null;
+    this.errors = null;
+    this.signedResources = [];
+    this.publishedResource = null;
+    this.publicBehandelingUris = [];
+    this.treatments = null;
+    this.allBehandelingPublic = false;
+    this.preview = null;
+    this.showSigningModal = false;
+    this.showPublishingModal = false;
+  }
+
   initialize() {
-    this.initializeNotulen.perform();
+    this.loadNotulen.perform();
+  }
+
+  get containerElement() {
+    return document.getElementById(this.behandelingContainerId);
+  }
+
+  get showPublicToggles() {
+    return this.status != 'published' && this.containerElement;
+  }
+
+  get status() {
+    if (this.publishedResource) return 'published';
+    if (this.signedResources.length === 1) return 'firstSignature';
+    if (this.signedResources.length === 2) return 'secondSignature';
+    return 'concept';
   }
 
   @task
-  *initializeNotulen() {
+  *loadNotulen() {
     const versionedNotulens = yield this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
-      include: 'signed-resources,published-resource',
+      include: 'signed-resources.gebruiker,published-resource.gebruiker',
     });
     if (versionedNotulens.length) {
       let notulenSet = false;
@@ -65,38 +95,8 @@ export default class MeetingsPublishNotulenController extends Controller {
       this.notulen = rslt;
       this.errors = errors;
     }
-    const behandelings = yield this.fetchBehandelings.perform();
-    this.behandelings = behandelings;
-  }
-
-  @task
-  *reloadNotulen() {
-    const versionedNotulens = yield this.store.query('versioned-notulen', {
-      'filter[zitting][:id:]': this.model.id,
-      include: 'signed-resources,published-resource',
-    });
-    if (versionedNotulens.length) {
-      yield Promise.all(
-        versionedNotulens.map(async (notulen) => {
-          const publishedResource = await notulen.publishedResource;
-          const signedResources = await notulen.signedResources;
-          if (publishedResource) {
-            this.publishedResource = publishedResource;
-            this.publicBehandelingUris = notulen.publicBehandelingen || [];
-            this.notulen = notulen;
-          }
-          if (signedResources.length) {
-            this.signedResources = signedResources;
-            if (!this.notulen) {
-              this.notulen = notulen;
-            }
-          }
-        })
-      );
-    }
-
-    const behandelings = yield this.fetchBehandelings.perform();
-    this.behandelings = behandelings;
+    const treatments = yield this.fetchTreatments.perform();
+    this.treatments = treatments;
   }
 
   @task
@@ -109,7 +109,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   @task
-  *fetchBehandelings() {
+  *fetchTreatments() {
     const id = this.model.id;
     const response = yield this.publish.fetchTreatmentPreviews(id);
 
@@ -118,17 +118,23 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   @task
   *createSignedResource() {
+    this.showSigningModal = false;
     const id = this.model.id;
     const taskId = yield this.muTask.fetchTaskifiedEndpoint(
       `/signing/notulen/sign/${id}`,
       { method: 'POST' }
     );
     yield this.muTask.waitForMuTaskTask.perform(taskId);
-    setTimeout(() => this.reloadNotulen.perform(), 1);
+    this.signedResources = yield this.store.query('signed-resource', {
+      'filter[versioned-notulen][zitting][:id:]': this.model.id,
+      include: 'gebruiker',
+      sort: 'created-on',
+    });
   }
 
   @task
   *createPublishedResource() {
+    this.showPublishingModal = false;
     const id = this.model.id;
     const taskId = yield this.muTask.fetchTaskifiedEndpoint(
       `/signing/notulen/publish/${id}`,
@@ -141,43 +147,44 @@ export default class MeetingsPublishNotulenController extends Controller {
       }
     );
     yield this.muTask.waitForMuTaskTask.perform(taskId);
-    setTimeout(() => this.reloadNotulen.perform(), 1);
+    yield this.loadNotulen.perform();
   }
 
   @task
   *generateNotulenPreview() {
     const meetingId = this.model.id;
     try {
-      const response = yield this.publish.createJobTask(`/meeting-notes-previews`, {
-        headers: { 'Content-Type': 'application/vnd.api+json' },
-        body: JSON.stringify({
-          data: {
-            type: 'meeting-notes-previews',
-            relationships: {
-              publicTreatments: this.publicBehandelingUris.map((uri) => ({
-                data: {
-                  id: uri,
-                  type: 'treatments',
-                },
-              })),
-              meeting: {
-                data: {
-                  id: meetingId,
-                  type: 'meetings',
+      const json = yield this.publish.createJobTask.perform(
+        `/meeting-notes-previews`,
+        {
+          headers: { 'Content-Type': 'application/vnd.api+json' },
+          body: JSON.stringify({
+            data: {
+              type: 'meeting-notes-previews',
+              relationships: {
+                publicTreatments: this.publicBehandelingUris.map((uri) => ({
+                  data: {
+                    id: uri,
+                    type: 'treatments',
+                  },
+                })),
+                meeting: {
+                  data: {
+                    id: meetingId,
+                    type: 'meetings',
+                  },
                 },
               },
             },
-          },
-        }),
-        method: 'POST',
-      });
-      const json = response.json();
+          }),
+          method: 'POST',
+        }
+      );
       const previewHtml = json.data.attributes.html;
       this.preview = previewHtml;
-    }
-    catch(e) {
-
-      this.errors = [JSON.stringify(e)] ;
+    } catch (e) {
+      console.error(e);
+      this.errors = [JSON.stringify(e)];
     }
   }
 
@@ -196,6 +203,17 @@ export default class MeetingsPublishNotulenController extends Controller {
     } else {
       return null;
     }
+  }
+
+  @action
+  createSignPreview() {
+    this.showSigningModal = true;
+  }
+
+  @task
+  *createPublishPreview() {
+    this.showPublishingModal = true;
+    yield this.generateNotulenPreview.perform();
   }
 
   updateNotulenPreview() {
@@ -217,7 +235,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
     this.notulen.set('body', div.innerHTML);
     this.allBehandelingPublic =
-      this.behandelings.length === this.publicBehandelingUris.length;
+      this.treatments.length === this.publicBehandelingUris.length;
   }
 
   @action
@@ -231,7 +249,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @action
   toggleAllPublicationStatus() {
     if (!this.allBehandelingPublic) {
-      this.publicBehandelingUris = this.behandelings.map(
+      this.publicBehandelingUris = this.treatments.map(
         (behandeling) => behandeling.behandeling
       );
       this.updateNotulenPreview();

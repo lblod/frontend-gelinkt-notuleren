@@ -238,8 +238,6 @@
           <Signatures::PublicationConfirmation
             @name={{@name}}
             @mockDocument={{@mockDocument}}
-            @preview={{@preview}}
-            @generatePreview={{@generatePreview}}
             @confirm={{perform this.publishDocument @mockDocument.signedId}}
             @cancel={{fn (mut this.showPublishingModal) false}} />
         {{/if}}
