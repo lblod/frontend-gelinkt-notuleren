@@ -49,10 +49,24 @@ export default class PublishService extends Service {
 
   /**
    * @param {string} jobUrl
-   * @param {string} statusUrl*/
+   * @param {number} pollingDelayMs
+   * @param {number} maxIterations
+   */
   @task
   *fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600) {
-    const job = yield fetch(jobUrl);
+    return yield this.createJobTask.perform(jobUrl);
+  }
+
+  /**
+   * @param {string} url
+   * @param {string} method
+   * @param {object} options fetch options
+   * @param {number} pollingDelayMs
+   * @param {number} maxIterations
+   */
+  @task
+  *createJobTask(url, options = {}, pollingDelayMs = 1000, maxIterations = 600) {
+    const job = yield fetch(url, options);
     const jobData = yield job.json();
     const jobId = jobData.data.attributes.jobId;
 
@@ -64,7 +78,16 @@ export default class PublishService extends Service {
     } while (resp.status === 404 && maxIterations > 0);
 
     if (resp.status !== 200) {
-      throw new Error(yield resp.text());
+      let errors = yield resp.text();
+      try {
+        const json = yield resp.json();
+        if (json?.errors) {
+          errors = JSON.stringify(json.errors);
+        }
+      }
+      finally {
+        throw new Error(errors);
+      }
     } else {
       return yield resp.json();
     }

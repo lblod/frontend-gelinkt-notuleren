@@ -147,32 +147,38 @@ export default class MeetingsPublishNotulenController extends Controller {
   @task
   *generateNotulenPreview() {
     const meetingId = this.model.id;
-    const response = yield fetch(`/meeting-notes-previews`, {
-      headers: { 'Content-Type': 'application/vnd.api+json' },
-      body: JSON.stringify({
-        data: {
-          type: 'meeting-notes-previews',
-          relationships: {
-            publicTreatments: this.publicBehandelingUris.map((uri) => ({
-              data: {
-                id: uri,
-                type: 'treatments',
-              },
-            })),
-            meeting: {
-              data: {
-                id: meetingId,
-                type: 'meetings',
+    try {
+      const response = yield this.publish.createJobTask(`/meeting-notes-previews`, {
+        headers: { 'Content-Type': 'application/vnd.api+json' },
+        body: JSON.stringify({
+          data: {
+            type: 'meeting-notes-previews',
+            relationships: {
+              publicTreatments: this.publicBehandelingUris.map((uri) => ({
+                data: {
+                  id: uri,
+                  type: 'treatments',
+                },
+              })),
+              meeting: {
+                data: {
+                  id: meetingId,
+                  type: 'meetings',
+                },
               },
             },
           },
-        },
-      }),
-      method: 'POST',
-    });
-    const json = yield response.json();
-    const previewHtml = json.data.attributes.html;
-    this.preview = previewHtml;
+        }),
+        method: 'POST',
+      });
+      const json = response.json();
+      const previewHtml = json.data.attributes.html;
+      this.preview = previewHtml;
+    }
+    catch(e) {
+
+      this.errors = [JSON.stringify(e)] ;
+    }
   }
 
   get zittingWrapper() {
