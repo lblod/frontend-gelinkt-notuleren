@@ -11,7 +11,8 @@ export default class ApplicationSerializer extends JSONAPISerializer.extend(
       payload.data.relationships &&
       payload.data.relationships.treatment
     ) {
-      payload.data.relationships["behandeling-van-agendapunt"] = payload.data.relationships.treatment;
+      payload.data.relationships['behandeling-van-agendapunt'] =
+        payload.data.relationships.treatment;
       payload.data.relationships.treatment = undefined;
     }
     return super.normalizeResponse(store, model, payload, id, requestType);
