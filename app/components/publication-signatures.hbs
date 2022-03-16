@@ -1,0 +1,95 @@
+<AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
+  <AuToolbarGroup>
+    <AuHeading @level="2" @skin="4">{{concat (t "timelineStep.signStepTitle") @name}}</AuHeading>
+    <AuPill @skin={{this.statusSkin}} class="au-u-margin-left">
+      {{this.statusLabel}}
+    </AuPill>
+  </AuToolbarGroup>
+</AuToolbar>
+<div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
+  {{#if (eq @signatures.length 2)}}
+    {{#each @signatures as |signature index|}}
+      {{#if (eq index 0)}}
+        <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
+          <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
+          <Signatures::SignedResource @signature={{signature}} />
+        </div>
+      {{else}}
+        <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
+          <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
+          <Signatures::SignedResource @signature={{signature}} />
+        </div>
+      {{/if}}
+    {{/each}}
+  {{else if (eq @signatures.length 1)}}
+    <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
+      <Signatures::SignedResource @signature={{@signatures.firstObject}} />
+    </div>
+    <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
+      <AuButton
+        {{on "click" @sign}}
+        @skin="secondary"
+        @icon="pencil"
+        @iconAlignment="left"
+        @loading={{@loading}}
+        @disabled={{or (not this.currentSession.canSign) this.isSignedByCurrentUser}}
+      >
+        {{t "timelineStep.signButtonLabel" name=@name}}
+      </AuButton>
+    </div>
+    <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
+      <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+        {{t "timelineStep.signingRestrictionInfo"}}
+        <a
+          href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="au-c-link">
+          {{t "timelineStep.signingRestrictionRole"}}
+        </a>
+        {{t "timelineStep.signingRestrictionEnd"}}
+      </AuHelpText>
+    </div>
+  {{else}} {{!-- No signatures placed --}}
+    <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.firstSignature"}}</AuHeading>
+      <AuButton
+        {{on "click" @sign}}
+        @skin="secondary"
+        @icon="pencil"
+        @iconAlignment="left"
+        @loading={{@loading}}
+        @disabled={{not this.currentSession.canSign}}
+      >
+        {{t "timelineStep.signButtonLabel" name=@name}}
+      </AuButton>
+    </div>
+    <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.secondSignature"}}</AuHeading>
+      <AuButton
+        {{on "click" @sign}}
+        @skin="secondary"
+        @icon="pencil"
+        @iconAlignment="left"
+        @disabled={{true}}
+      >
+        {{t "timelineStep.signButtonLabel" name=@name}}
+      </AuButton>
+    </div>
+    <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
+      <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+        {{t "timelineStep.signingRestrictionInfo"}}
+        <a
+          href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="au-c-link">
+          {{t "timelineStep.signingRestrictionRole"}}
+        </a>
+        {{t "timelineStep.signingRestrictionEnd"}}
+      </AuHelpText>
+    </div>
+  {{/if}}
+</div>

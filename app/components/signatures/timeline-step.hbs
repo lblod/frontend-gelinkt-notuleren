@@ -191,7 +191,7 @@
         <div class="au-o-grid__item au-u-padding-top-none">
           {{#if this.isAgenda}}
             <AuButton
-              {{on "click" (fn (mut this.showPublishingModal) true)}}
+              {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
               @loading={{this.publishDocument.isRunning}}
@@ -201,7 +201,7 @@
             </AuButton>
           {{else}}
             <AuButton
-              {{on "click" (fn (mut this.showPublishingModal) true)}}
+              {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
               @loading={{this.publishDocument.isRunning}}

@@ -25,13 +25,15 @@ export default class MuTaskService extends Service {
   @task
   *waitForMuTaskTask(taskId, pollDelayMs = 1000, timeoutMs = 300000) {
     let resp;
+    let jsonBody;
     let currentStatus;
     const startTime = Date.now();
     do {
       yield timeout(pollDelayMs);
       resp = yield this.fetchMuTask(taskId);
       if (resp.ok) {
-        currentStatus = (yield resp.json()).data.status;
+        jsonBody = yield resp.json();
+        currentStatus = jsonBody.data.status;
       } else {
         currentStatus = null;
       }
@@ -48,7 +50,7 @@ export default class MuTaskService extends Service {
     }
 
     if (currentStatus === TASK_STATUS_SUCCESS) {
-      return task;
+      return jsonBody;
     } else if (currentStatus === TASK_STATUS_FAILURE) {
       throw new Error('Task failed.');
     } else if (currentStatus === TASK_STATUS_RUNNING) {

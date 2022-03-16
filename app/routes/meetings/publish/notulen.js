@@ -9,4 +9,9 @@ export default class MeetingsPublishNotulenRoute extends Route {
     super.setupController(controller, model);
     controller.initialize();
   }
+
+  resetController(controller) {
+    super.resetController(...arguments);
+    controller.resetController();
+  }
 }
