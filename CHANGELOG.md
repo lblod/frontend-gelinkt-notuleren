@@ -3,6 +3,16 @@
 
 
 
+## 2.22.0 (2022-03-17)
+
+#### :rocket: Enhancement
+* [#252](https://github.com/lblod/frontend-gelinkt-notuleren/pull/252) improved regulation search + removed images from output ([@nvdk](https://github.com/nvdk))
+* [#249](https://github.com/lblod/frontend-gelinkt-notuleren/pull/249) Generate a final preview for the notulen taking into account public behandelings ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 2
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.21.1 (2022-03-14)
 
 #### :rocket: Enhancement
