@@ -3,6 +3,27 @@
 
 
 
+## 2.22.0 (2022-03-17)
+
+#### :rocket: Enhancement
+* [#252](https://github.com/lblod/frontend-gelinkt-notuleren/pull/252) improved regulation search + removed images from output ([@nvdk](https://github.com/nvdk))
+* [#249](https://github.com/lblod/frontend-gelinkt-notuleren/pull/249) Generate a final preview for the notulen taking into account public behandelings ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 2
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.21.1 (2022-03-14)
+
+#### :rocket: Enhancement
+* [#250](https://github.com/lblod/frontend-gelinkt-notuleren/pull/250) also update article number when reordering articles ([@nvdk](https://github.com/nvdk))
+* [#251](https://github.com/lblod/frontend-gelinkt-notuleren/pull/251) improve variable support: add support for multi select codelists  ([@nvdk](https://github.com/nvdk))
+* [#248](https://github.com/lblod/frontend-gelinkt-notuleren/pull/248) bump roadsign plugin from 0.3.3 to 0.5.1 ([@nvdk](https://github.com/nvdk))
+* [#247](https://github.com/lblod/frontend-gelinkt-notuleren/pull/247) make the template required when creating an agendapoint ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.21.0 (2022-02-25)
 
 #### :bug: Bug Fix
