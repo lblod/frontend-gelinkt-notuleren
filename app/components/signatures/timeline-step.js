@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { task, restartableTask } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { action } from '@ember/object';
 
 /**
  * @typedef {Object} Args
@@ -136,5 +137,10 @@ export default class SignaturesTimelineStep extends Component {
   *publishDocument(signedId) {
     this.showPublishingModal = false;
     yield this.args.publish(signedId);
+  }
+
+  @action
+  publish() {
+    this.showPublishingModal = true;
   }
 }
