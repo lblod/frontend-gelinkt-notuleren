@@ -3,6 +3,15 @@
 
 
 
+## 2.22.1 (2022-03-18)
+
+#### :bug: Bug Fix
+* [#254](https://github.com/lblod/frontend-gelinkt-notuleren/pull/254) fix labels in the citation plugin modal ([@nvdk](https://github.com/nvdk))
+* [#253](https://github.com/lblod/frontend-gelinkt-notuleren/pull/253) Chore/upgrade roadsign regulation plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.22.0 (2022-03-17)
 
 #### :rocket: Enhancement
