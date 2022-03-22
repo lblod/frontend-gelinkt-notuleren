@@ -3,6 +3,14 @@
 
 
 
+## 2.22.2 (2022-03-22)
+
+#### :bug: Bug Fix
+* [#255](https://github.com/lblod/frontend-gelinkt-notuleren/pull/255) fix validation on publishing notulen ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.22.1 (2022-03-18)
 
 #### :bug: Bug Fix
