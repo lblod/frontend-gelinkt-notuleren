@@ -26,10 +26,10 @@
             {{/in-element}}
           {{/if}}
         </PublicationPreview>
-        {{#if (and @errors @errors.length)}}
+        {{#if (and this.errors this.errors.length)}}
           <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertSkin="error">
             <ul>
-              {{#each @errors as |error|}}
+              {{#each this.errors as |error|}}
                 <li>{{error}}</li>
               {{/each}}
             </ul>
@@ -52,30 +52,29 @@
               {{html-safe this.notulen.content}}
             </Signatures::SignatureConfirmation>
           {{/if}}
-        {{/if}}
-
-        {{!-- publish --}}
-        <PublicationPublish
-          @status={{this.status}}
-          @name="notulen"
-          @publishedResource={{this.publishedResource}}
-          @willSubmitToLoket={{false}}
-          @publish={{perform this.createPublishPreview}}
-          @loading={{this.createPublishedResource.isRunning}}
-        />
-        {{#if this.showPublishingModal}}
-          <Signatures::PublicationConfirmation
+          {{!-- publish --}}
+          <PublicationPublish
+            @status={{this.status}}
             @name="notulen"
-            @confirm={{perform this.createPublishedResource}}
-            @cancel={{fn (mut this.showPublishingModal) false}}
-          >
-            {{#if this.createPublishPreview.isIdle}}
-              {{html-safe this.preview}}
-            {{else}}
-              <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
-              <AuLoader @padding="small" />
-            {{/if}}
-          </Signatures::PublicationConfirmation>
+            @publishedResource={{this.publishedResource}}
+            @willSubmitToLoket={{false}}
+            @publish={{perform this.createPublishPreview}}
+            @loading={{this.createPublishedResource.isRunning}}
+          />
+          {{#if this.showPublishingModal}}
+            <Signatures::PublicationConfirmation
+              @name="notulen"
+              @confirm={{perform this.createPublishedResource}}
+              @cancel={{fn (mut this.showPublishingModal) false}}
+            >
+              {{#if this.createPublishPreview.isIdle}}
+                {{html-safe this.preview}}
+              {{else}}
+                <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
+                <AuLoader @padding="small" />
+              {{/if}}
+            </Signatures::PublicationConfirmation>
+          {{/if}}
         {{/if}}
       {{else}}
         <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
