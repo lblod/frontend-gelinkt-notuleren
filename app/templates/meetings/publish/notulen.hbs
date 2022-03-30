@@ -12,7 +12,11 @@
       {{#if this.loadNotulen.isIdle}}
         {{!-- cheating with status here, because signing doesn't affect preview --}}
         <PublicationPreview @title="Voorvertoning notulen" @status={{if (eq this.status "published") "published" "concept"}}>
-          {{html-safe this.zittingWrapper}}
+          {{#if (eq this.status 'published')}}
+            {{html-safe this.notulen.content}}
+          {{else}}
+            {{html-safe this.zittingWrapper}}
+          {{/if}}
           {{#if this.showPublicToggles}}
             {{#in-element this.containerElement}}
               <Signatures::Notulen::BehandelingenList
