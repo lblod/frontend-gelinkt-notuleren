@@ -3,6 +3,33 @@
 
 
 
+## 2.23.1 (2022-03-30)
+
+#### :bug: Bug Fix
+* [#258](https://github.com/lblod/frontend-gelinkt-notuleren/pull/258) show actual notulen content for published notulen ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.23.0 (2022-03-25)
+
+#### :rocket: Enhancement
+* [#257](https://github.com/lblod/frontend-gelinkt-notuleren/pull/257) IRGN: fetch location options from registry codelist ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#256](https://github.com/lblod/frontend-gelinkt-notuleren/pull/256) bump roadsign regulation plugin to 0.7.2 ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.22.2 (2022-03-22)
+
+#### :bug: Bug Fix
+* [#255](https://github.com/lblod/frontend-gelinkt-notuleren/pull/255) fix validation on publishing notulen ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.22.1 (2022-03-18)
 
 #### :bug: Bug Fix
