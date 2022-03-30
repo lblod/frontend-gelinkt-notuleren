@@ -95,8 +95,10 @@ export default class MeetingsPublishNotulenController extends Controller {
       this.notulen = rslt;
       this.errors = errors;
     }
-    const treatments = yield this.fetchTreatments.perform();
-    this.treatments = treatments;
+    if (this.status !== 'published') {
+      const treatments = yield this.fetchTreatments.perform();
+      this.treatments = treatments;
+    }
   }
 
   @task
