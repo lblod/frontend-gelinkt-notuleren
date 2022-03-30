@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { task, waitForProperty } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 import {
   DRAFT_FOLDER_ID,
   DRAFT_STATUS_ID,
@@ -86,8 +86,8 @@ export default class DocumentCreatorComponent extends Component {
 
   @task
   *ensureTemplates() {
-    yield waitForProperty(this.rdfaEditorStandardTemplatePlugin, 'templates');
-    const templates = this.rdfaEditorStandardTemplatePlugin.templates;
+    const templates =
+      yield this.rdfaEditorStandardTemplatePlugin.fetchTemplates.perform();
     this.templateOptions =
       this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, [
         'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
