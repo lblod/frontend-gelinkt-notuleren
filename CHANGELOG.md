@@ -3,6 +3,14 @@
 
 
 
+## 2.23.1 (2022-03-30)
+
+#### :bug: Bug Fix
+* [#258](https://github.com/lblod/frontend-gelinkt-notuleren/pull/258) show actual notulen content for published notulen ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.23.0 (2022-03-25)
 
 #### :rocket: Enhancement
