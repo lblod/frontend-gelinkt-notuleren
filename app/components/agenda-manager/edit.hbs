@@ -51,7 +51,7 @@
             </div>
           </div>
 
-          {{#if (gt @agendaItems.length 1)}}
+          {{#if (gt @agendaItems.length 0)}}
             <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}} @currentItem={{@itemToEdit}}>
               {{t "manageAgendaZittingModalMove.title"}}
             </Form.SelectLocation>
