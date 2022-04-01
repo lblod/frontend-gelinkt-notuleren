@@ -37,10 +37,9 @@ export default class AdministrativeBodySelectComponent extends Component {
   @service store;
 
   administrativeBodyOptions = trackedFunction(this, async () => {
+    let currentAdministrativeUnitId = this.currentSession.group.id;
     //this has to be here https://github.com/ember-learn/guides-source/issues/1769
     await Promise.resolve();
-
-    let currentAdministrativeUnitId = this.currentSession.group.id;
     let administrativeBodiesInTime = await this.store.query('bestuursorgaan', {
       'filter[is-tijdsspecialisatie-van][bestuurseenheid][id]':
         currentAdministrativeUnitId,

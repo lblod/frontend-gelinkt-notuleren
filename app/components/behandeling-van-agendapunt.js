@@ -5,6 +5,7 @@ import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { use } from 'ember-could-get-used-to-this';
+import { useTask, trackedFunction } from 'ember-resources';
 import RelationshipResource from '../helpers/relationship-resource';
 
 /** @typedef {import("../models/mandataris").default} Mandataris  */
@@ -22,11 +23,31 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service router;
   @tracked document;
   @tracked editor;
-  @tracked participants = [];
-  @tracked absentees = [];
-  @tracked published = false;
-  @tracked chairman;
-  @tracked secretary;
+
+  publishedRT = useTask(this, this.getStatus, () => [this.args.behandeling.id]);
+  get published() {
+    if (this.publishedRT.isFinished)
+      return this.publishedRT.value;
+    else
+      return false;
+  }
+
+  participantsRT = useTask(this, this.fetchParticipants, () => [this.args.behandeling.id]);
+  get participants() {
+    if (this.participantsRT.isFinished)
+      return this.participantsRT.value;
+    else
+      return [];
+  }
+
+  absenteesRT = useTask(this, this.fetchAbsentees, () => [this.args.behandeling.id]);
+  get absentees() {
+    if (this.absenteesRT.isFinished)
+      return this.absenteesRT.value;
+    else
+      return [];
+  }
+
   /** @type {RelationshipResourceValue} */
   @use meetingChairmanData = new RelationshipResource(() => [
     this.args.meeting,
@@ -47,12 +68,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.args.meeting,
     'afwezigenBijStart',
   ]);
-
-  constructor() {
-    super(...arguments);
-    this.fetchParticipants.perform();
-    this.getStatus.perform();
-  }
 
   get editable() {
     return !(this.published || this.args.readOnly);
@@ -78,20 +93,37 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     return this.meetingAbsenteeData.value;
   }
 
+  //hasParticipantsT = trackedFunction(this, async () => {
+  //  await this.participants;
+  //  return (this.participants.value.length > 0);
+  //});
+
   get hasParticipants() {
-    return this.participants.length;
+    console.log("Asking hasParticipants", this.participants);
+    return (this.participants.length > 0);
+    //return this.hasParticipantsT.value;
   }
 
   get isLoading() {
     return (
-      this.fetchParticipants.isRunning ||
+      this.participantsRT.isRunning ||
+      this.absenteesRT.isRunning ||
       this.meetingChairmanData.isRunning ||
       this.meetingSecretaryData.isRunning
     );
   }
 
+  get chairman() {
+    console.log("Asking chairman", this.args.behandeling.voorzitter);
+    return this.args.behandeling.voorzitter;
+  }
+
   get defaultChairman() {
     return this.meetingChairmanData.value;
+  }
+
+  get secretary() {
+    return this.args.behandeling.secretaris;
   }
 
   get defaultSecretary() {
@@ -99,9 +131,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   @task
-  *getStatus() {
+  *getStatus(behandelingId) {
+    yield Promise.resolve();
     const behandeling = (yield this.store.query('behandeling-van-agendapunt', {
-      'filter[:id:]': this.args.behandeling.id,
+      'filter[:id:]': behandelingId,
       include: 'document-container.status',
     })).firstObject;
 
@@ -110,9 +143,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       const statusId = status.id;
 
       if (statusId === PUBLISHED_STATUS_ID) {
-        this.published = true;
+        return true;
       }
     }
+    return false;
   }
 
   /**
@@ -135,23 +169,30 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   @task
-  *fetchParticipants() {
+  *fetchParticipants(behandelingId) {
+    console.log("Fetching participants for behandeling", behandelingId);
     const participantQuery = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[aanwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
+      'filter[aanwezig-bij-behandeling][:id:]': behandelingId,
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
+    yield Promise.resolve();
+    const participants = this.store.query('mandataris', participantQuery);
+    console.log("Fetched participants", participants);
+    return participants;
+  }
+
+  @task
+  *fetchAbsentees(behandelingId) {
     const absenteeQuery = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[afwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
+      'filter[afwezig-bij-behandeling][:id:]': behandelingId,
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    this.participants = yield this.store.query('mandataris', participantQuery);
-    this.absentees = yield this.store.query('mandataris', absenteeQuery);
-    this.chairman = yield this.args.behandeling.voorzitter;
-    this.secretary = yield this.args.behandeling.secretaris;
+    yield Promise.resolve();
+    return this.store.query('mandataris', absenteeQuery);
   }
 
   @task
