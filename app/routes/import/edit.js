@@ -24,7 +24,7 @@ export default class ImportEditRoute extends Route {
 
       if (documentContainers.length) {
         const documentContainer = documentContainers.firstObject;
-        this.router.transitionTo('agendapoints', documentContainer.id);
+        this.router.transitionTo('agendapoints.edit', documentContainer.id);
       } else {
         warn(
           `No document container found with URI '${documentContainerUri}' to import snippet in. Redirecting to inbox.`,
