@@ -46,7 +46,7 @@
           {{t "meetingForm.firstSectionTitle"}}
         </a>
       </li>
-      {{#unless this.zitting.isNew}}
+      {{#unless @zitting.isNew}}
         <li class="au-c-list-divider__item">
           <a href="#sectionTwo" class="au-c-link au-c-link--secondary">
             {{t "meetingForm.secondSectionTitle"}}
@@ -140,7 +140,7 @@
             @possibleParticipants={{this.possibleParticipants}}
             @bestuursorgaan={{this.bestuursorgaan}}
             @onSave={{this.saveParticipationList}}
-            @meeting={{this.zitting}}
+            @meeting={{@zitting}}
             @modalTitle={{t "participationList.openModalButton"}}
             @readOnly={{this.readOnly}}
           />
@@ -178,12 +178,12 @@
               {{t "meetingForm.fifthSectionNotFilledWarning"}}
             </span>
           </AuHeading>
-          {{#if this.fetchTreatments.isRunning}}
+          {{#if this.behandelingen.isRunning}}
             <AuLoader @padding="small" />
             <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
           {{/if}}
 
-          {{#if this.fetchTreatments.lastSuccessful}}
+          {{#if this.behandelingenRT.isFinished}}
             <ol class="au-c-meeting-numbered-list">
             {{#each this.behandelingen as |behandeling|}}
               <li>
@@ -192,7 +192,7 @@
                   @behandeling={{behandeling}}
                   @readOnly={{this.readOnly}}
                   @bestuursorgaan={{this.bestuursorgaan}}
-                  @meeting={{this.zitting}}
+                  @meeting={{@zitting}}
                 />
               </li>
             {{/each}}
