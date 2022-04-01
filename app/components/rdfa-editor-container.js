@@ -11,6 +11,7 @@ export default class RdfaEditorContainerComponent extends Component {
     'roadsign-regulation',
     'template-variable',
     'rdfa-date',
+    'import-snippet',
   ];
   get editorOptions() {
     return (
