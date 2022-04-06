@@ -54,7 +54,8 @@ export default class DocumentCreatorComponent extends Component {
   }
 
   validateTitle() {
-    if (this.title?.length > 0) {
+    //Length still needs to be > 0 with whitespaces removed
+    if (this.title?.trim().length > 0) {
       this.invalidTitle = false;
     } else {
       this.invalidTitle = true;
@@ -68,6 +69,7 @@ export default class DocumentCreatorComponent extends Component {
       this.invalidTemplate = true;
     }
   }
+
   validateForm() {
     this.validateTitle();
     this.validateTemplate();
@@ -111,7 +113,7 @@ export default class DocumentCreatorComponent extends Component {
         createdOn: creationDate,
         updatedOn: creationDate,
         content: generatedTemplate,
-        title: this.title,
+        title: this.title.trim(),
       });
       yield editorDocument.save();
       const container = this.store.createRecord('document-container');
