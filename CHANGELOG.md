@@ -3,6 +3,28 @@
 
 
 
+
+## 2.24.0-0 (2022-04-08)
+
+#### :rocket: Enhancement
+* [#266](https://github.com/lblod/frontend-gelinkt-notuleren/pull/266) Bump editor to v0.55.2 and update plugins to new versions ([@abeforgit](https://github.com/abeforgit))
+
+#### :bug: Bug Fix
+* [#265](https://github.com/lblod/frontend-gelinkt-notuleren/pull/265) Trim title on validation and on saving Agendapoint ([@benjay10](https://github.com/benjay10))
+* [#264](https://github.com/lblod/frontend-gelinkt-notuleren/pull/264) Fixed off by one errors on adding agendapoints ([@benjay10](https://github.com/benjay10))
+
+#### :house: Internal
+* [#262](https://github.com/lblod/frontend-gelinkt-notuleren/pull/262) bump appuniversum to 1.0.3 ([@nvdk](https://github.com/nvdk))
+* [#259](https://github.com/lblod/frontend-gelinkt-notuleren/pull/259) Chore/remove ember wormhole ([@nvdk](https://github.com/nvdk))
+* [#246](https://github.com/lblod/frontend-gelinkt-notuleren/pull/246) bump template and decision type plugin ([@nvdk](https://github.com/nvdk))
+* [#260](https://github.com/lblod/frontend-gelinkt-notuleren/pull/260) Chore/upgrade editor ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 3
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Ben ([@benjay10](https://github.com/benjay10))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+
 ## 2.23.1 (2022-03-30)
 
 #### :bug: Bug Fix
