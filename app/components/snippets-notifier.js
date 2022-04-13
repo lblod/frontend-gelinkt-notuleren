@@ -1,11 +1,8 @@
-import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 
 export default class SnippetsNotifier extends Component {
   @service importRdfaSnippet;
-  @tracked show = true;
 
   get showCard() {
     return this.hasSnippets && this.show;
@@ -25,10 +22,5 @@ export default class SnippetsNotifier extends Component {
 
   get hasErrors() {
     return this.errors.length > 0;
-  }
-
-  @action
-  close() {
-    this.show = false;
   }
 }
