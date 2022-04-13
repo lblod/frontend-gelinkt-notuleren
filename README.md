@@ -39,6 +39,7 @@ This frontend can be configured at runtime. It will get the environment variable
 * `EMBER_OAUTH_BASE_URL`
 * `EMBER_OAUTH_REDIRECT_URL`
 * `EMBER_OAUTH_LOGOUT_URL`
+* `EMBER_OAUTH_SWITCH_URL`
 
 ### other
 * `EMBER_PUBLICATION_BASE_URL`: url of the linked [publication platform](https://github.com/lblod/app-gn-publicatie/), e.g. "https://publicatie.gelinkt-notuleren.vlaanderen.be/"

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
-import { task } from "ember-concurrency";
-import { tracked } from "@glimmer/tracking";
-import {action} from '@ember/object';
+import { task } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class manageIntermissionsComponent extends Component {
@@ -17,8 +17,8 @@ export default class manageIntermissionsComponent extends Component {
 
   @action
   addIntermission() {
-    this.intermissionToEdit = this.store.createRecord("intermission", {
-      startedAt: this.args.zitting.geplandeStart
+    this.intermissionToEdit = this.store.createRecord('intermission', {
+      startedAt: this.args.zitting.geplandeStart,
     });
     this.showModal = true;
   }
@@ -30,8 +30,8 @@ export default class manageIntermissionsComponent extends Component {
   }
 
   @task
-  *fetchIntermissions(){
-    this.intermissions =  yield this.args.zitting.get('intermissions');
+  *fetchIntermissions() {
+    this.intermissions = yield this.args.zitting.get('intermissions');
   }
 
   @action

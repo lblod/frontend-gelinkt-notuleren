@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { task } from "ember-concurrency";
+import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -7,12 +7,20 @@ import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 
 export default class AgendapointsEditController extends Controller {
-  @service currentSession;
+  @service store;
+  @service router;
   @tracked editor;
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
   profile = 'draftDecisionsProfile';
+  @tracked uploading = false;
+  @tracked decisions = [];
+  @service documentService;
+
+  get dirty() {
+    return this.editorDocument.content !== this.editor.htmlContent;
+  }
 
   get editorDocument() {
     return this._editorDocument || this.model.editorDocument;
@@ -36,38 +44,43 @@ export default class AgendapointsEditController extends Controller {
 
   @task
   *copyAgendapunt() {
-    const response = yield fetch(`/agendapoint-service/${this.documentContainer.id}/copy`, {method: 'POST'});
+    const response = yield fetch(
+      `/agendapoint-service/${this.documentContainer.id}/copy`,
+      { method: 'POST' }
+    );
     const json = yield response.json();
     const agendapuntId = json.uuid;
-    yield this.transitionToRoute('agendapoints.edit', agendapuntId);
+    yield this.router.transitionTo('agendapoints.edit', agendapuntId);
   }
 
   @action
-  toggleDeleteModal(){
-    this.displayDeleteModal = ! this.displayDeleteModal;
+  toggleDeleteModal() {
+    this.displayDeleteModal = !this.displayDeleteModal;
   }
 
   @action
-  closeValidationModal(){
+  closeValidationModal() {
     this.hasDocumentValidationErrors = false;
   }
 
   @action
-  async deleteDocument(){
+  async deleteDocument() {
     const container = this.documentContainer;
-    const deletedStatus = await this.store.findRecord('concept', TRASH_STATUS_ID);
+    const deletedStatus = await this.store.findRecord(
+      'concept',
+      TRASH_STATUS_ID
+    );
     container.status = deletedStatus;
     await container.save();
     this.displayDeleteModal = false;
-    this.transitionToRoute('inbox.agendapoints');
+    this.router.transitionTo('inbox.agendapoints');
   }
 
   @task
   *saveTask() {
-    if (! this.editorDocument.title) {
+    if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
-    }
-    else {
+    } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
       const editorDocument = this.store.createRecord('editor-document');
@@ -83,5 +96,26 @@ export default class AgendapointsEditController extends Controller {
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
     }
+  }
+
+  @action toggleUpload() {
+    this.uploading = !this.uploading;
+    this.fetchDecisions.perform();
+  }
+
+  @task
+  *toggleUploadAndSave() {
+    if (this.dirty) {
+      yield this.saveTask.perform();
+    }
+    yield this.fetchDecisions.perform();
+    this.uploading = !this.uploading;
+  }
+
+  @task
+  *fetchDecisions() {
+    const documentContainer = yield this.documentContainer;
+    const currentVersion = yield documentContainer.currentVersion;
+    this.decisions = this.documentService.getDecisions(currentVersion);
   }
 }

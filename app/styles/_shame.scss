@@ -35,70 +35,15 @@
   padding-bottom: $au-unit-tiny;
 }
 
-// Toolbar alignment fix
-// @TODO: port to ember-appuniversum component
-.au-c-toolbar__group {
-  align-items: center !important; // Fix toolbar alignment
-}
 
-// Right aligned toolbar group
-// @TODO: port to ember-appuniversum component
-.au-c-toolbar__group--search {
-  flex-grow: 1;
-  justify-content: flex-end;
+// Drag button
+.au-c-button--drag {
+  cursor: grab;
 
-  > * + * {
-    margin-left: $au-unit-small;
-  }
-}
-
-.au-c-toolbar__group--actions {
-  > * + * {
-    margin-left: $au-unit-small;
-  }
-}
-
-// Fix visited state on links acting as buttons
-// @TODO: port to ember-appuniversum component or convert link to button
-.au-c-button-link {
-  @include au-font-size($au-button-font-size, $au-button-height - $au-button-border * 2);
-  cursor: default;
-  font-family: $au-font;
-  font-weight: $au-regular;
-  height: $au-button-height;
-  text-decoration: none;
-  text-align: center;
-  appearance: none;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 $au-unit-small .1rem; // Visually center the text in the button
-  border-radius: $au-button-radius;
-  border: $au-button-border solid $au-button-contrast-color;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color $au-transition, background-color $au-transition, border-color $au-transition, box-shadow $au-transition;
-
-  &,
-  &:visited {
-    color: $au-button-color;
-    background-color: $au-button-contrast-color;
-    box-shadow: inset 0px 0px 0px $au-button-border transparent;
-  }
-
-  &:hover,
-  &:focus {
-    color: $au-button-color;
-    background-color: $au-button-contrast-hover-color;
-    text-decoration: none;
-  }
-
-  &:focus {
-    outline: $au-outline;
-  }
-
-  &:active {
-    background-color: $au-button-contrast-active-color;
+  .au-c-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    bottom: 0;
   }
 }
 
@@ -172,7 +117,7 @@
     color: $au-white;
     position: absolute;
     top: 50%;
-    left: $au-unit-tiny/2;
+    left: $au-unit-tiny * .5;
     transform: translateY(-50%);
     background-color: $au-label-error-badge-color;
     width: $au-unit-small * 1.5;
@@ -210,7 +155,7 @@
     color: $au-white;
     position: absolute;
     top: 50%;
-    left: $au-unit-tiny/2;
+    left: $au-unit-tiny * .5;
     transform: translateY(-50%);
     background-color: $au-label-error-badge-color;
     width: $au-unit-small * 1.5;
@@ -226,11 +171,6 @@
     display: block;
     width: 100%;
   }
-}
-
-.au-hr-dotted {
-  border: 0;
-  border-top: .1rem dotted $au-gray-200;
 }
 
 // Modal quick fixes
@@ -281,18 +221,6 @@
 
 .au-c-modal--no-padding .au-c-modal__body {
   padding: 0;
-}
-
-// Replace container class
-.au-c-app-container {
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-
-
-  @include mq(medium) {
-    overflow: hidden;
-  }
 }
 
 .au-u-capitalize {
@@ -352,7 +280,18 @@
 
 // Quick fix for standalone tables
 .au-c-table-border {
+  @extend .au-c-data-table__table;
+  @extend .au-c-data-table__table--small;
   border: .1rem solid $au-gray-300;
+
+  thead {
+    border-bottom: .1rem solid $au-gray-300;
+  }
+
+  th,
+  td {
+    padding: $au-unit-tiny !important;
+  }
 }
 
 // Quick fix for button group
@@ -392,11 +331,6 @@
   @extend .au-u-hidden-visually;
 }
 
-// Cursor utils
-.au-u-cursor-inherit {
-  cursor: inherit;
-}
-
 // Overrides for editor modal
 .au-c-modal--editor {
   .au-c-modal__body {
@@ -406,6 +340,7 @@
   .au-c-modal__footer {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 
@@ -414,5 +349,199 @@
 .au-c-main-container {
   @include mq(medium) {
     flex-wrap: nowrap !important;
+  }
+}
+
+// Quickfix for inline button group
+.au-c-button-group--inline {
+  align-items: center;
+
+  .au-c-button {
+    display: inline-flex;
+  }
+
+  .au-c-button.is-active {
+    user-select: none;
+  }
+
+  .au-c-button.is-active:hover {
+    box-shadow: none;
+    border-color: $au-blue-600;
+  }
+}
+
+// Fix data-table header on chrome
+.au-c-data-table__header th {
+  box-shadow: inset 0 -0.2rem 0 0 $au-gray-300;
+}
+
+// Custom select
+.au-c-custom-select {
+  @include au-font-size($au-base);
+  font-family: $au-font;
+  width: 100%;
+  padding: $au-unit-tiny;
+  background-color: $au-white;
+  border: 1px solid $au-gray-400;
+  border-radius: .2rem;
+}
+
+.au-c-custom-select-cell {
+  min-width: 150px;
+}
+
+// Fix data table search
+.au-c-data-table .data-table-search input {
+  @extend .au-c-input;
+  @extend .au-c-input--block;
+}
+
+// FIX NBSP ISSUE
+.say-content,
+.au-c-editor-preview,
+.au-c-template {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+// Button tooltip POC
+.has-tooltip {
+  position: relative;
+  overflow: visible;
+}
+
+.au-c-button__tooltip {
+  @include au-font-size($au-base);
+  display: none;
+  position: absolute;
+
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: $au-z-index-beta;
+  color: $au-white;
+  background-color: $au-blue-900;
+  border-radius: $au-radius;
+  padding: 0 $au-unit-tiny $au-unit-tiny*.3;
+
+  &:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: .4rem;
+    margin-left: -.2rem;
+  }
+
+  &:before {
+    border-color: rgba($au-white, 0);
+    border-bottom-color: $au-blue-900;
+  }
+
+  .has-tooltip:hover > &,
+  .has-tooltip:focus > & {
+    display: block;
+  }
+}
+
+.au-c-button__tooltip--top {
+  bottom: calc(100% + .8rem);
+
+  &:before {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: .4rem;
+    margin-left: -.2rem;
+  }
+
+  &:before {
+    border-color: rgba($au-white, 0);
+    border-top-color: $au-blue-900;
+  }
+}
+
+.au-c-button__tooltip--bottom {
+  top: calc(100% + .8rem);
+
+  &:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: .4rem;
+    margin-left: -.2rem;
+  }
+
+  &:before {
+    border-color: rgba($au-white, 0);
+    border-bottom-color: $au-blue-900;
+  }
+}
+
+// DISABLED EDITOR
+// ---
+.say-content--disabled {
+  cursor: default;
+}
+
+// Override main container on mock-login
+.au-c-main-container--mock-login {
+  height: 100%;
+}
+
+// Fake modal
+.au-c-modal--flat {
+  z-index: 9997;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  border-radius: 0;
+}
+
+// Data pagination styles
+.data-table-pagination {
+  margin-top: $au-unit;
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.data-table-pagination-left {
+  @extend .au-c-help-text;
+}
+
+.data-table-pagination-right {
+  display: flex;
+  gap: $au-unit-tiny;
+
+  button {
+    @extend .au-c-button;
+    @extend .au-c-button--link;
+  }
+
+  select {
+    background-color: var(--au-white);
+    border: .1rem solid var(--au-gray-300);
+    border-radius: $au-radius;
+    padding: $au-unit-tiny;
   }
 }

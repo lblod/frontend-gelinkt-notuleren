@@ -4,7 +4,7 @@ export default class SignaturesBesluitenlijstTimelineStep extends Component {
   get mockLijst() {
     return {
       body: this.args.lijst.content,
-      signedId: this.args.lijst.zitting.get('id')
+      signedId: this.args.lijst.zitting.get('id'),
     };
   }
 }

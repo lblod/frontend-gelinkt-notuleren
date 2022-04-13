@@ -4,16 +4,16 @@
       {{t "manageZittingsData.bestuursorganLabel"}} <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
     </li>
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.geplandeStartLabel"}} <strong>{{moment-format  this.geplandeStart "DD/MM/YYYY HH:mm"}}</strong>
+      {{t "manageZittingsData.geplandeStartLabel"}} <strong>{{detailed-date this.geplandeStart}}</strong>
     </li>
     <li class="au-c-list-divider__item">
       {{t "manageZittingsData.opLocatieLabel"}} <strong>{{this.opLocatie}}</strong>
     </li>
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.gestartOpTijdstipLabel"}} <strong>{{moment-format this.gestartOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+      {{t "manageZittingsData.gestartOpTijdstipLabel"}} <strong>{{detailed-date this.gestartOpTijdstip}}</strong>
     </li>
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.geeindigdOpTijdstipLabel"}} <strong>{{moment-format this.geeindigdOpTijdstip "DD/MM/YYYY HH:mm"}}</strong>
+      {{t "manageZittingsData.geeindigdOpTijdstipLabel"}} <strong>{{detailed-date this.geeindigdOpTijdstip}}</strong>
     </li>
   </ul>
   {{#unless @readOnly}}
@@ -23,7 +23,7 @@
 
 {{#if this.showModal}}
   <AuModal
-    @modalTitle={{t "manageZittingsData.modalTitle"}}
+    @title={{t "manageZittingsData.modalTitle"}}
     @modalOpen={{this.showModal}}
     @closeModal={{this.cancel}} as |Modal| >
     <Modal.Body>
@@ -31,8 +31,8 @@
         <div>
           <AuLabel>{{t "manageZittingsData.bestuursorganLabel"}}</AuLabel>
           {{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}
-          (periode: {{moment-format this.bestuursorgaan.bindingStart "MM/DD/YYYY"}} -
-          {{#if this.bestuursorgaan.bindingEinde}}{{moment-format this.bestuursorgaan.bindingEinde "MM/DD/YYYY"}}{{else}}nvt.{{/if}})
+          (periode: {{plain-date this.bestuursorgaan.bindingStart}} -
+          {{#if this.bestuursorgaan.bindingEinde}}{{plain-date this.bestuursorgaan.bindingEinde}}{{else}}nvt.{{/if}})
         </div>
         <div>
           {{#let (unique-id) as |id|}}

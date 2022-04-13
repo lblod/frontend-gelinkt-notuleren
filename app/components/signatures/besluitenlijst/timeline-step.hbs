@@ -1,9 +1,13 @@
-<Signatures::TimelineStep
-  @name={{@name}}
-  @document={{@lijst}}
-  @errors={{@errors}}
-  @signing={{@signing}}
-  @publish={{@publish}}
-  @mockDocument={{this.mockLijst}}
-  @isOpen={{this.isOpen}}
-/>
+<li>
+  <Signatures::TimelineStep
+    @name={{@name}}
+    @document={{@lijst}}
+    @signedResources={{@lijst.signedResources}}
+    @publishedResource={{@lijst.publishedResource}}
+    @errors={{@errors}}
+    @signing={{@signing}}
+    @publish={{@publish}}
+    @mockDocument={{this.mockLijst}}
+    @isOpen={{true}}
+  />
+</li>

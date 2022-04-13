@@ -1,5 +1,5 @@
 <AuModal
-  @modalTitle={{concat (t "signatureConfirmation.modalTitle") @name}}
+  @title={{concat (t "signatureConfirmation.modalTitle") @name}}
   @modalOpen={{true}}
   @size="fullscreen"
   @closeModal={{@cancel}}
@@ -10,7 +10,7 @@
         <div class="au-c-rdfa-publication-aside">
           <div class="au-o-box">
             <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "signatureConfirmation.signLabel"}}</AuHeading>
-            <AuAlert @alertIcon="info-circle" @alertTitle={{t "signatureConfirmation.signWarningTitle"}}  @alertskin="info" @alertsize="small">
+            <AuAlert @alertIcon="info-circle" @alertTitle={{t "signatureConfirmation.signWarningTitle"}}  @alertSkin="info" @alertSize="small">
               <p>{{t "signatureConfirmation.signWarningText"}}</p>
             </AuAlert>
             <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "signatureConfirmation.metadataLabel"}}</AuHeading>
@@ -34,7 +34,11 @@
       <div class="au-o-grid__item au-u-2-3">
         <div class="au-c-rdfa-publication-holder">
           <div class="au-c-rdfa-publication say-content rdfa-annotations behandeling-preview">
-            {{html-safe @mockDocument.body}}
+            {{#if (has-block)}}
+              {{yield}}
+            {{else}}
+              {{html-safe @mockDocument.body}}
+            {{/if}}
           </div>
         </div>
       </div>

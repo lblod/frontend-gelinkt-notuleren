@@ -1,0 +1,63 @@
+<div class="au-o-box au-o-box--small au-u-background-gray-200">
+  <AuFileUpload @title={{t "attachments.attach" }} @helpTextDragDrop={{t "attachments.drag" }} @modelName={{"file"}}
+    @endPoint={{"/files"}} @onFinishUpload={{perform this.uploadedAttachement}} @maxFileSizeMB="1024"
+    @multiple={{true}} />
+</div>
+
+{{#if @documentContainer.attachments}}
+<div class="au-c-data-table">
+  <div class="au-c-data-table__wrapper">
+    <table class="au-c-data-table__table">
+      <thead class="au-c-data-table__header">
+        <tr>
+          <th>{{t "attachments.filename"}}</th>
+          <th>{{t "attachments.filesize"}}</th>
+          <th>{{t "attachments.decision"}}</th>
+          <th colspan="2">{{t "attachments.type"}}</th>
+          {{!-- <th>{{t "attachments.delete"}}</th> --}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each this.attachments as |attachment|}}
+        <tr>
+          <td>
+            <a href={{attachment.file.downloadLink}} target="_blank" rel="noopener noreferrer" class="au-c-link">
+              {{attachment.file.name}}
+            </a>
+          </td>
+          <td>{{attachment.file.humanReadableSize}}</td>
+          <td class="au-c-custom-select-cell">
+            {{#let (unique-id) as |id|}}
+              <AuLabel class="au-u-hidden-visually" for={{id}}></AuLabel>
+              <select  id={{id}} class="au-c-custom-select" {{on "change" (perform this.onSelectDecision attachment)}}>
+                <option value="">{{t "attachments.typePlaceholder"}}</option>
+                {{#each @decisions as |decisionOption|}}
+                  <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>
+                    {{decisionOption.title}}</option>
+                {{/each}}
+              </select>
+            {{/let}}
+          </td>
+          <td>
+            <AuToggleSwitch @label={{t "attachments.regulatory"}} @checked={{eq attachment.type.id this.regulatoryTypeId}} @onChange={{perform this.updateAttachmentIsRegulatory attachment}} />
+          </td>
+          <td class="au-u-text-right">
+            <AuButton @skin="tertiary" @alert={{true}} @icon="bin" @iconAlignment="left" {{on "click" (perform this.deleteAttachment attachment)}}>
+              {{t "attachments.delete"}}
+            </AuButton>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+{{/if}}
+
+{{#unless @decisions.length}}
+<AuToolbar @border="top" @nowrap="true" @size="small">
+  <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "attachments.noDecisionsFound"}} @alertSkin="warning" class="au-u-margin-bottom-none au-u-1-1">
+    <p>{{t "attachments.decisionRequired"}}</p>
+  </AuAlert>
+</AuToolbar>
+{{/unless}}

@@ -1,0 +1,27 @@
+<form class="au-o-flow">
+  <div>
+    {{#let (unique-id) as |id|}}
+      <AuLabel @error={{@invalidTitle}} for={{id}}>
+        {{t "documentCreator.titleField"}}
+        <RequiredField />
+      </AuLabel>
+      <AuTextarea @error={{@invalidTitle}}  @width="block"  type="text" value={{@title}} id={{id}} {{on "blur" @updateTitle}} {{on "input" @updateTitle}} />
+    {{/let}}
+  </div>
+  <div>
+    {{#let (unique-id) as |id|}}
+      <AuLabel @error={{@invalidTemplate}} for={{id}}>
+        {{t "documentCreator.template"}}
+        <RequiredField />        
+      </AuLabel>
+      <PowerSelect
+        class={{if @invalidTemplate "u-c-input au-c-input--error"}}
+        @options={{@options}}
+        @selected={{@selectedTemplate}}
+        @onChange={{@onSelectTemplate}}
+        as |option|>
+        {{option.title}}
+      </PowerSelect>
+    {{/let}}
+  </div>
+</form>

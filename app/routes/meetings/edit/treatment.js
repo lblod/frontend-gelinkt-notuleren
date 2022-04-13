@@ -3,10 +3,12 @@ import { inject as service } from '@ember/service';
 
 export default class MeetingsEditTreatmentRoute extends Route {
   @service currentSession;
+  @service store;
+  @service router;
 
   beforeModel() {
     if (!this.currentSession.canWrite) {
-      this.transitionTo('meetings.edit');
+      this.router.transitionTo('meetings.edit');
     }
   }
 

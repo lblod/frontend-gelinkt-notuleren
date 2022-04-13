@@ -1,12 +1,11 @@
 import Component from '@glimmer/component';
-import {tracked} from '@glimmer/tracking';
-import {action} from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
 /**
  * @typedef {Object} Args
  * @property {string} zittingId
  */
-
 
 /** @extends {Component<Args>} */
 export default class AgendaManagerIndexComponent extends Component {

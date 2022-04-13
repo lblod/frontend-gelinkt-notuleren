@@ -1,9 +1,13 @@
 import Component from '@glimmer/component';
-import { task } from "ember-concurrency";
-import { tracked } from "@glimmer/tracking";
-import { action } from "@ember/object";
+import { task } from 'ember-concurrency';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import {BEFORE_POS_ID, DURING_POS_ID, AFTER_POS_ID}  from 'frontend-gelinkt-notuleren/utils/constants';
+import {
+  BEFORE_POS_ID,
+  DURING_POS_ID,
+  AFTER_POS_ID,
+} from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class manageIntermissionsEditComponent extends Component {
   @tracked startedAt;
@@ -11,13 +15,13 @@ export default class manageIntermissionsEditComponent extends Component {
   @tracked comment;
   @service store;
   @service intl;
- 
-  constructor(...args){
+
+  constructor(...args) {
     super(...args);
   }
 
   get startedAtExternal() {
-    if(this.startedAt === '' || !this.startedAt) {
+    if (this.startedAt === '' || !this.startedAt) {
       return this.args.intermissionToEdit.startedAt;
     } else {
       return this.startedAt;
@@ -25,7 +29,7 @@ export default class manageIntermissionsEditComponent extends Component {
   }
 
   get endedAtExternal() {
-    if(this.endedAt === '' || !this.endedAt) {
+    if (this.endedAt === '' || !this.endedAt) {
       return this.args.intermissionToEdit.endedAt;
     } else {
       return this.endedAt;
@@ -33,7 +37,7 @@ export default class manageIntermissionsEditComponent extends Component {
   }
 
   get commentExternal() {
-    if(this.comment === '' || !this.comment) {
+    if (this.comment === '' || !this.comment) {
       return this.args.intermissionToEdit.comment;
     } else {
       return this.comment;
@@ -55,18 +59,18 @@ export default class manageIntermissionsEditComponent extends Component {
   }
 
   @task
-  *saveIntermission(){
+  *saveIntermission() {
     const intermission = this.args.intermissionToEdit;
-    if(this.startedAt) {
+    if (this.startedAt) {
       intermission.startedAt = this.startedAt;
     }
-    if(this.endedAt) {
+    if (this.endedAt) {
       intermission.endedAt = this.endedAt;
     }
-    if(this.comment) {
+    if (this.comment) {
       intermission.comment = this.comment;
     }
-    if(intermission.isNew) {
+    if (intermission.isNew) {
       this.args.zitting.intermissions.pushObject(intermission);
     }
     yield this.savePosition.perform();
@@ -89,13 +93,25 @@ export default class manageIntermissionsEditComponent extends Component {
   //position stuff
   get positionOptions() {
     return [
-      { code: 'before', name: this.intl.t('manageIntermissions.beforeAp'), conceptUuid: BEFORE_POS_ID },
-      { code: 'during', name: this.intl.t('manageIntermissions.duringAp'), conceptUuid: DURING_POS_ID },
-      { code: 'after', name: this.intl.t('manageIntermissions.afterAp'), conceptUuid: AFTER_POS_ID }
+      {
+        code: 'before',
+        name: this.intl.t('manageIntermissions.beforeAp'),
+        conceptUuid: BEFORE_POS_ID,
+      },
+      {
+        code: 'during',
+        name: this.intl.t('manageIntermissions.duringAp'),
+        conceptUuid: DURING_POS_ID,
+      },
+      {
+        code: 'after',
+        name: this.intl.t('manageIntermissions.afterAp'),
+        conceptUuid: AFTER_POS_ID,
+      },
     ];
   }
   @action
-  updatedIntermission(){
+  updatedIntermission() {
     this.fetchPosition.perform();
   }
 
@@ -110,9 +126,11 @@ export default class manageIntermissionsEditComponent extends Component {
     }
     agendaPos.agendapoint = this.selectedAp;
     if (this.selectedAp && this.selectedPosition) {
-      agendaPos.position = yield this.store.findRecord('concept', this.selectedPosition.conceptUuid);
-    }
-    else {
+      agendaPos.position = yield this.store.findRecord(
+        'concept',
+        this.selectedPosition.conceptUuid
+      );
+    } else {
       agendaPos.position = null;
     }
     yield agendaPos.save();
@@ -125,20 +143,19 @@ export default class manageIntermissionsEditComponent extends Component {
     if (agendaPos) {
       const posConcept = yield agendaPos.position;
       if (posConcept) {
-        this.selectedPosition = this.positionOptions.find(e => e.conceptUuid === posConcept.id);
-      }
-      else {
+        this.selectedPosition = this.positionOptions.find(
+          (e) => e.conceptUuid === posConcept.id
+        );
+      } else {
         this.selectedPosition = null;
       }
       const posAp = yield agendaPos.agendapoint;
       if (posAp) {
         this.selectedAp = posAp;
-      }
-      else {
+      } else {
         this.selectedAp = null;
       }
-    }
-    else {
+    } else {
       this.selectedAp = null;
       this.selectedPosition = null;
     }
@@ -157,5 +174,9 @@ export default class manageIntermissionsEditComponent extends Component {
     if (!value) {
       this.selectedAp = null;
     }
+  }
+
+  searchMatcher(agendapoint, term) {
+    return `${agendapoint.position + 1}. ${agendapoint.titel}`.indexOf(term);
   }
 }

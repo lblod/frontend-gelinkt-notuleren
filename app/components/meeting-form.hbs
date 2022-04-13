@@ -1,7 +1,7 @@
 <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @linkRoute="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+      <AuLink @route="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
         {{t "meetingForm.backButton"}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
@@ -21,9 +21,9 @@
   </AuToolbar>
   <AuToolbar @size="small" class="au-u-padding-top-none">
     <AuToolbarGroup>
-      <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{moment-format @zitting.geplandeStart "DD/MM/YYYY"}}</h1>
+      <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{plain-date @zitting.geplandeStart}}</h1>
     </AuToolbarGroup>
-    <AuToolbarGroup class="au-c-toolbar__group--actions">
+    <AuToolbarGroup>
       {{#unless this.readOnly}}
         <DeleteMeeting @meeting={{@zitting}}/>
       {{/unless}}
@@ -96,8 +96,8 @@
     <div class="au-c-meeting-chrome__paper">
       {{!-- Meeting title --}}
       <AuHeading>
-        {{t "meetingForm.meetingHeadingPartOne"}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
-        {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{moment-format  @zitting.geplandeStart "DD/MM/YYYY HH:mm"}}</span>
+        {{t "meetingForm.meetingHeadingPartOne"}} {{t this.headerArticleTranslationString}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
+        {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{detailed-date  @zitting.geplandeStart}}</span>
       </AuHeading>
       <AuHr @size="large"/>
 
@@ -169,7 +169,7 @@
           {{html-safe @zitting.intro}}
         </ReadonlyTextBox>
         {{#unless this.readOnly}}
-          <AuLink @linkRoute="meetings.edit.intro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
+          <AuLink @route="meetings.edit.intro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
             {{t "behandelingVanAgendapunten.editDocument"}}
           </AuLink>
         {{/unless}}
@@ -194,7 +194,7 @@
                   @possibleParticipants={{this.possibleParticipants}}
                   @behandeling={{behandeling}}
                   @readOnly={{this.readOnly}}
-                  @bestuursorgaan={{this.zitting.bestuursorgaan}}
+                  @bestuursorgaan={{this.bestuursorgaan}}
                   @meeting={{this.zitting}}
                 />
               </li>
@@ -213,7 +213,7 @@
             {{html-safe @zitting.outro}}
           </ReadonlyTextBox>
           {{#unless this.readOnly}}
-            <AuLink @linkRoute="meetings.edit.outro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
+            <AuLink @route="meetings.edit.outro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
               {{t "behandelingVanAgendapunten.editDocument"}}
             </AuLink>
           {{/unless}}

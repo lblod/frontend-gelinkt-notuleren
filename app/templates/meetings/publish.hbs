@@ -1,44 +1,56 @@
 <div class="au-c-app-chrome">
-  <AuToolbar @size="small">
+  <AuToolbar @size="small" class="au-u-padding-top-none au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @linkRoute="meetings.edit" @model={{@model.id}} @skin="secondary" @icon="arrow-left" @iconAlignment="left">
+      <AuLink @route="meetings.edit" @model={{@model.id}} @skin="secondary" @icon="arrow-left" @iconAlignment="left">
         {{t "publish.backToMeeting"}}
       </AuLink>
-      <span class="au-c-app-chrome__entity">{{t "publish.headingPartOne"}} {{moment-format this.model.geplandeStart "DD/MM/YYYY HH:mm"}}</span>
+      <span class="au-c-app-chrome__entity">{{t "publish.headingPartOne"}} {{detailed-date this.model.geplandeStart}}</span>
     </AuToolbarGroup>
-    <AuDropdown @dropdownTitle="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @dropdownButtonLabel="Account settings" @alignment="right">
-    <AcmidmLogout @class="au-c-button au-c-button--tertiary" role="menuitem">
-      <AuIcon @icon="logout" @alignment="left" />Afmelden
-    </AcmidmLogout>
-  </AuDropdown>
+    <AuToolbarGroup>
+      <AuDropdown @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @buttonLabel="Account settings" @alignment="right">
+        {{#if this.acmSwitchEnabled}}
+          <Acmidm::Switch as |acmidm|>
+            <AuButton @loading={{acmidm.isSwitching}} class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" acmidm.switch}}>
+              <AuIcon @icon="switch" @alignment="left" />Wissel van bestuurseenheid
+            </AuButton>
+          </Acmidm::Switch>
+        {{/if}}
+        {{!--<AcmidmLogout @class="au-c-button au-c-button--tertiary" role="menuitem">
+          <AuIcon @icon="logout" @alignment="left" />Afmelden
+        </AcmidmLogout>--}}
+        <button type="button" class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" this.logout}}>
+          <AuIcon @icon="logout" @alignment="left" />Afmelden
+        </button>
+      </AuDropdown>
+    </AuToolbarGroup>
   </AuToolbar>
 </div>
-<div class="au-c-main-container">
-  <div class="au-c-main-container__sidebar au-u-hide-on-print">
+<AuMainContainer as |m|>
+  <m.sidebar>
     <div class="au-c-sidebar">
       <div class="au-c-sidebar__content">
         <nav>
           <ul class="au-c-list-navigation">
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="meetings.publish.agenda" @model={{@model.id}}>
+              <AuNavigationLink @route="meetings.publish.agenda" @model={{@model.id}}>
                 <AuIcon @icon="calendar" @alignment="left" />
                 Agenda
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="meetings.publish.besluitenlijst" @model={{@model.id}}>
+              <AuNavigationLink @route="meetings.publish.besluitenlijst" @model={{@model.id}}>
                 <AuIcon @icon="unordered-list" @alignment="left" />
                 Besluitenlijst
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="meetings.publish.uittreksels" @model={{@model.id}}>
+              <AuNavigationLink @route="meetings.publish.uittreksels" @model={{@model.id}}>
                 <AuIcon @icon="documents" @alignment="left" />
                 Uittreksels
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
-              <AuNavigationLink @linkRoute="meetings.publish.notulen" @model={{@model.id}}>
+              <AuNavigationLink @route="meetings.publish.notulen" @model={{@model.id}}>
                 <AuIcon @icon="document" @alignment="left" />
                 Notulen
               </AuNavigationLink>
@@ -47,11 +59,11 @@
         </nav>
       </div>
     </div>
-  </div>
-  <div class="au-c-main-container__content">
-    <div id="content" class="au-c-body-container au-c-body-container--scroll" tabindex="-1">
+  </m.sidebar>
+  <m.content @scroll={{true}}>
+    <div id="content" tabindex="-1">
       {{!-- <p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p> --}}
       {{outlet}}
     </div>
-  </div>
-</div>
+  </m.content>
+</AuMainContainer>

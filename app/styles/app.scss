@@ -1,143 +1,42 @@
 /* ==================================
-   #APPUNIVERSUM
+   #GELINKT NOTULEREN
    ================================== */
 
 /**
- * A design universe for Flanders GOV applications
+ * A design system for Flanders GOV applications
  */
 
 /**
  * CONTENTS
  * ---
- * SETTINGS: Project settings and variables
- * TOOLS: Mixins
- * GENERIC: Reset, global box-sizing and font-styles
- * ELEMENTS: Plain html tag styling
- * OBJECTS: OOCSS unstyled objects (namespace: '.au-o-...')
- * COMPONENTS: Components (namespace: '.au-c-...')
- * UTILITIES: Single function helper classes (namespace: '.au-u-...')
+ * EMBER-APPUNIVERSUM: The component library
+ * PROJECT: Project specific styles
+ * PLUGINS: RDFA editor custom styles
+ * UTILITIES: Project utility styles
  * SHAME: Temporary hacks and quickfixes
  */
 
 
-// VARIABLES
-@import "appuniversum/s-colors.scss";
-@import "appuniversum/s-global";
-@import "appuniversum/s-utilities";
+// EMBER-APPUNIVERSUM
+@import "ember-appuniversum";
 
 
-// PROJECT SPECIFIC VARIABLES
-@import "project/s-global";
-@import "project/s-say-theme";
-
-
-// MIXINS
-@import "appuniversum/t-font-size";
-@import "appuniversum/t-sass-mq";
-
-
-// GENERIC
-@import "appuniversum/g-reset";
-@import "appuniversum/g-box-sizing";
-@import "appuniversum/g-font";
-
-
-// ELEMENTS
-@import "appuniversum/e-page";
-
-
-// OBJECTS
-@import "appuniversum/o-box";
-@import "appuniversum/o-flow";
-@import "appuniversum/o-grid";
-@import "appuniversum/o-layout";
-@import "appuniversum/o-region";
-
-
-// WU COMPONENTS (DEPRECATED)
-@import 'ember-vo-webuniversum';
-// @import 'ember-vo-webuniversum-data-table'; // This imports the ember-data-table styles which make <duet-date-picker> not render correctly
-@import 'ember-power-select';
-
-
-
-// COMPONENTS (DEPRECATED)
-@import 'deprecated/tasklist';
-@import 'deprecated/scrollto';
-@import 'deprecated/loading-events';
-@import 'deprecated/wizard';
-
-
-// COMPONENTS
-@import "ember-appuniversum/c-alert";
-@import "ember-appuniversum/c-badge";
-@import "ember-appuniversum/c-body-container";
-@import "ember-appuniversum/c-brand";
-@import "ember-appuniversum/c-button";
-@import "ember-appuniversum/c-button-group";
-@import "ember-appuniversum/c-card";
-@import "ember-appuniversum/c-content";
-@import "ember-appuniversum/c-content-header";
-@import "ember-appuniversum/c-control";
-@import "ember-appuniversum/c-data-table";
-@import "ember-appuniversum/c-dropdown";
-@import "ember-appuniversum/c-form";
-@import "ember-appuniversum/c-heading";
-@import "ember-appuniversum/c-help-text";
-@import "ember-appuniversum/c-hr";
-@import "ember-appuniversum/c-icon";
-@import "ember-appuniversum/c-input";
-@import "ember-appuniversum/c-label";
-@import "ember-appuniversum/c-link";
-@import "ember-appuniversum/c-list-horizontal";
-@import "ember-appuniversum/c-list-navigation";
-@import "ember-appuniversum/c-loader";
-@import "ember-appuniversum/c-pagination";
-@import "ember-appuniversum/c-pill";
-@import "ember-appuniversum/c-main-container";
-@import "ember-appuniversum/c-main-header";
-@import "ember-appuniversum/c-main-footer";
-@import "ember-appuniversum/c-modal";
-@import "ember-appuniversum/c-sidebar";
-@import "ember-appuniversum/c-sidebar-action";
-@import "ember-appuniversum/c-textarea";
-@import "ember-appuniversum/c-timepicker";
-@import "ember-appuniversum/c-toolbar";
-@import "ember-appuniversum/c-toggle-switch";
-
-
-// PROJECT COMPONENTS
+// PROJECT COMPONENTS > @TODO: refactor in ember-appuniversum where possible
 @import 'project/c-app-chrome';
 @import 'project/c-meeting-chrome';
 @import 'project/c-rdfa-editor';
 @import "project/c-onboarding";
 @import 'project/c-editor-preview';
 @import "project/c-template";
-@import "project/c-theme";
 
 
 // PLUGINS
-@import "ember-rdfa-editor";
-@import "ember-appuniversum/p-ember-power-select";
-@import "ember-appuniversum/p-duet-datepicker";
-@import "project/p-annotations";
+@import "ember-rdfa-editor/custom-components";
+@import "project/p-annotations"; // @TODO: refactor in ember-rdfa-editor
 
 
-// UTILITIES
-@import "appuniversum/u-align-text";
-@import "appuniversum/u-break-word";
-@import "appuniversum/u-headings";
-@import "appuniversum/u-hide";
-@import "appuniversum/u-font-family";
-@import "appuniversum/u-font-weights";
-@import "appuniversum/u-paragraphs";
-@import "appuniversum/u-print";
-@import "appuniversum/u-responsive-spacings";
-@import "appuniversum/u-spacings";
-@import "appuniversum/u-visible";
-@import "appuniversum/u-widths";
-// Extra project specific override styles
-@import 'project/u-print';
+// PROJECT UTILITIES
+@import 'project/u-print'; // @TODO: refactor in ember-appuniversum where possible
 
 
 // TEMPORARY HACKS AND QUICKFIXES

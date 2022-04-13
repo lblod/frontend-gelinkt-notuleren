@@ -11,12 +11,15 @@ export default class InboxMeetingsNewController extends Controller {
   }
 
   @dropTask
-  * saveMeetingTask(event) {
+  *saveMeetingTask(event) {
     event.preventDefault();
 
     let bestuursorgaan = yield this.meeting.bestuursorgaan;
     if (!bestuursorgaan) {
-      this.meeting.errors.add('bestuursorgaan', 'inbox.meetings.new.meeting.errors.administrativeBody.required');
+      this.meeting.errors.add(
+        'bestuursorgaan',
+        'inbox.meetings.new.meeting.errors.administrativeBody.required'
+      );
     }
 
     if (this.meeting.isValid) {
@@ -37,7 +40,8 @@ export default class InboxMeetingsNewController extends Controller {
 
     // Ember has a bug where using the router service here, reruns the parent's model hooks.
     // More info: https://github.com/emberjs/ember.js/issues/19497
-    // TODO use the router service once the bug is fixed
+    // TODO use the router service once the bug is fixed:
+    //this.router.replaceWith('inbox.meetings');
     this.replaceRoute('inbox.meetings');
   }
 }

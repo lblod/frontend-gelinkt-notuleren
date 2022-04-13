@@ -17,11 +17,12 @@ export default class MandatarisModel extends Model {
   @belongsTo('mandataris-status-code', { inverse: null }) status;
 
   rdfaBindings = {
-    class: "http://data.vlaanderen.be/ns/mandaat#Mandataris",
-    start: "http://data.vlaanderen.be/ns/mandaat#start",
-    einde: "http://data.vlaanderen.be/ns/mandaat#einde",
-    rangorde: "http://data.vlaanderen.be/ns/mandaat#rangorde",
-    bekleedt: "http://www.w3.org/ns/org#holds",
-    isBestuurlijkeAliasVan: "http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan"
-  }
+    class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris',
+    start: 'http://data.vlaanderen.be/ns/mandaat#start',
+    einde: 'http://data.vlaanderen.be/ns/mandaat#einde',
+    rangorde: 'http://data.vlaanderen.be/ns/mandaat#rangorde',
+    bekleedt: 'http://www.w3.org/ns/org#holds',
+    isBestuurlijkeAliasVan:
+      'http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan',
+  };
 }

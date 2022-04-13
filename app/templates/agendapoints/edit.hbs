@@ -5,13 +5,16 @@
   @sendToTrash={{this.toggleDeleteModal}}
   @exportHtmlFunction={{this.download}}
   @copyAgendapunt={{perform this.copyAgendapunt}}
+  @uploading={{this.uploading}}
+  @toggleUpload={{this.toggleUpload}}
+  @toggleUploadAndSave={{this.toggleUploadAndSave}}
 />
 
 {{#if this.hasDocumentValidationErrors}}
   <AuModal
-    @modalTitle="Geef uw document een naam"
+    @title="Geef uw document een naam"
     @modalOpen={{true}}
-    @closeModal={{fn this.closeValidationModal}} as |Modal| >
+    @closeModal={{this.closeValidationModal}} as |Modal| >
     <Modal.Body>
       <p>Klik op de titel om uw document een naam te geven.</p>
     </Modal.Body>
@@ -23,7 +26,7 @@
 
 {{#if this.displayDeleteModal}}
   <AuModal
-    @modalTitle="Wilt u dit document naar de prullenmand verplaatsen"
+    @title="Wilt u dit document naar de prullenmand verplaatsen"
     @modalOpen={{this.displayDeleteModal}}
     @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
     <Modal.Body>
@@ -35,15 +38,22 @@
     </Modal.Footer>
   </AuModal>
 {{/if}}
-<RdfaEditorContainer
-        @profile={{this.profile}}
-        @rdfaEditorInit={{this.handleRdfaEditorInit}}
-        @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
-        @showToggleRdfaAnnotations={{true}}
-        @editorDocument={{this.editorDocument}}
-        @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-        @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
-                       (t "rdfaEditorContainer.saving")}}
-/>
+{{#if this.documentContainer}}
+  <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class={{if this.uploading "au-c-body-container au-c-body-container--scroll" "au-u-hidden"}}>
+    <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
+  </div>
+{{/if}}
+<div class={{if this.uploading "au-u-hidden" "au-c-body-container au-c-body-container--scroll"}} id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+  <RdfaEditorContainer
+          @profile={{this.profile}}
+          @rdfaEditorInit={{this.handleRdfaEditorInit}}
+          @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
+          @showToggleRdfaAnnotations={{true}}
+          @editorDocument={{this.editorDocument}}
+          @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
+          @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
+                        (t "rdfaEditorContainer.saving")}}
+  />
+</div>
 
 {{outlet}}

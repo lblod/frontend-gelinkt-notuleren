@@ -25,11 +25,11 @@
           @searchPlaceholder={{t "manageAgendaZittingModalMove.searchPlaceholder"}}
           @verticalPosition="above"
           @options={{this.afterItemOptions}}
-          @searchField="titel"
           @selected={{this.selectedAfterItem}}
           @onChange={{this.selectAfterItem}}
+          @matcher={{this.searchMatcher}}
           as |a|>
-          {{a.titel}}
+          {{add a.position 1}}. {{a.titel}}
         </PowerSelect>
       </div>
     {{/if}}

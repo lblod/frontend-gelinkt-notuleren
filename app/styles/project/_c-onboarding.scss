@@ -13,7 +13,7 @@
   color: $au-gray-600;
   width: $au-unit-huge*3;
   font-style: italic;
-  padding-left: $au-unit + $au-unit-tiny/2;
+  padding-left: $au-unit + $au-unit-tiny * .5;
   background-color: $au-gray-200;
   border-radius: $au-radius;
   padding-top: $au-unit-tiny;

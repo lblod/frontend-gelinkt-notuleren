@@ -1,5 +1,5 @@
 import Service, { inject as service } from '@ember/service';
-import { task, all } from 'ember-concurrency';
+import { task, all, timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 
 export class Extract {
@@ -48,6 +48,64 @@ export default class PublishService extends Service {
   }
 
   /**
+   * @param {string} jobUrl
+   * @param {number} pollingDelayMs
+   * @param {number} maxIterations
+   */
+  @task
+  *fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600) {
+    return yield this.createJobTask.perform(
+      jobUrl,
+      {},
+      pollingDelayMs,
+      maxIterations
+    );
+  }
+
+  /**
+   * @param {string} url
+   * @param {string} method
+   * @param {object} options fetch options
+   * @param {number} pollingDelayMs
+   * @param {number} maxIterations
+   */
+  @task
+  *createJobTask(
+    url,
+    options = {},
+    pollingDelayMs = 1000,
+    maxIterations = 600
+  ) {
+    const job = yield fetch(url, options);
+    const jobData = yield job.json();
+    const jobId = jobData.data.attributes.jobId;
+
+    let resp;
+    do {
+      yield timeout(pollingDelayMs);
+      resp = yield fetch(`/prepublish/job-result/${jobId}`);
+      maxIterations--;
+    } while (resp.status === 404 && maxIterations > 0);
+
+    if (resp.status !== 200) {
+      let errors = yield resp.text();
+      try {
+        const json = yield resp.json();
+        if (json?.errors) {
+          errors = JSON.stringify(json.errors);
+        }
+      } catch (e) {
+        // throwing body text
+        throw new Error(errors);
+      }
+      // throwing stringified json body
+      throw new Error(errors);
+    } else {
+      return yield resp.json();
+    }
+  }
+
+  /**
    * Combine saved extracts with newly created ones and expose them as one map keyed by the
    * id of the treatment
    * TODO: proper pagination
@@ -57,7 +115,7 @@ export default class PublishService extends Service {
   @task
   *_loadExtractsTask(meetingId) {
     const [newExtracts, meeting, treatments, versionedTreatments] = yield all([
-      fetch(`/prepublish/behandelingen/${meetingId}`).then((res) => res.json()),
+      this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`),
       this.store.findRecord('zitting', meetingId),
       this.store.query('behandeling-van-agendapunt', {
         'filter[onderwerp][zitting][:id:]': meetingId,
@@ -115,5 +173,48 @@ export default class PublishService extends Service {
       }
     }
     this.treatmentExtractsMap = extractMap;
+  }
+
+  async fetchTreatmentPreviews(meetingId) {
+    return this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`);
+  }
+
+  async fetchExtract(treatment) {
+    const agendapoint = await treatment.get('onderwerp');
+    const meeting = await agendapoint.get('zitting');
+    const versionedTreatments = await this.store.query(
+      'versioned-behandeling',
+      {
+        filter: { behandeling: { ':id:': treatment.id } },
+        include: 'behandeling.onderwerp,signed-resources,published-resource',
+      }
+    );
+    if (versionedTreatments.length > 0) {
+      return new Extract(
+        treatment.id,
+        agendapoint.get('position'),
+        versionedTreatments.get('firstObject'),
+        []
+      );
+    } else {
+      const extractPreview = this.store.createRecord('extract-preview', {
+        treatment,
+      });
+      await extractPreview.save();
+      const versionedTreatment = this.store.createRecord(
+        'versioned-behandeling',
+        {
+          zitting: meeting,
+          content: extractPreview.html,
+          behandeling: treatment,
+        }
+      );
+      return new Extract(
+        treatment.id,
+        agendapoint.get('position'),
+        versionedTreatment,
+        extractPreview.validationErrors
+      );
+    }
   }
 }

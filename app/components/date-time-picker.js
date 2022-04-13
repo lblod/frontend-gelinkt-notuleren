@@ -1,8 +1,8 @@
 import Component from '@glimmer/component';
-import { action } from "@ember/object";
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-export default class DateTimePicker extends Component{
+export default class DateTimePicker extends Component {
   @service intl;
   date;
   hours;
@@ -10,7 +10,7 @@ export default class DateTimePicker extends Component{
 
   constructor() {
     super(...arguments);
-    if(this.args.value) {
+    if (this.args.value) {
       this.date = new Date(this.args.value);
       this.hours = this.date.getHours();
       this.minutes = this.date.getMinutes();
@@ -38,7 +38,7 @@ export default class DateTimePicker extends Component{
   onChangeDate(isoDate, date) {
     let wasDateInputCleared = !date;
     if (!wasDateInputCleared) {
-      if(!this.date) {
+      if (!this.date) {
         this.date = new Date();
       }
       this.date.setDate(date.getDate());
@@ -51,14 +51,14 @@ export default class DateTimePicker extends Component{
   @action
   onChangeTime(type, event) {
     const value = event.target.value;
-    if(!this.date) {
+    if (!this.date) {
       this.date = new Date();
     }
-    if(type === 'hours') {
-      if(value < 0 || value > 24) return;
+    if (type === 'hours') {
+      if (value < 0 || value > 24) return;
       this.date.setHours(value);
     } else {
-      if(value < 0 || value > 60) return;
+      if (value < 0 || value > 60) return;
       this.date.setMinutes(value);
     }
     this.args.onChange(this.date);
@@ -67,19 +67,17 @@ export default class DateTimePicker extends Component{
 
 function getLocalizedMonths(intl, monthFormat = 'long') {
   let someYear = 2021;
-  return [...Array(12).keys()]
-    .map((monthIndex) => {
-      let date = new Date(someYear, monthIndex);
-      return intl.formatDate(date, { month: monthFormat });
-    });
+  return [...Array(12).keys()].map((monthIndex) => {
+    let date = new Date(someYear, monthIndex);
+    return intl.formatDate(date, { month: monthFormat });
+  });
 }
 
 function getLocalizedDays(intl, weekdayFormat = 'long') {
   let someSunday = new Date('2021-01-03');
-  return [...Array(7).keys()]
-    .map((index) => {
-      let weekday = new Date(someSunday.getTime());
-      weekday.setDate(someSunday.getDate() + index);
-      return intl.formatDate(weekday, { weekday: weekdayFormat });
-    });
+  return [...Array(7).keys()].map((index) => {
+    let weekday = new Date(someSunday.getTime());
+    weekday.setDate(someSunday.getDate() + index);
+    return intl.formatDate(weekday, { weekday: weekdayFormat });
+  });
 }

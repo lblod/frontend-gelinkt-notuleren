@@ -5,7 +5,13 @@ inbox:
     trash: Prullenmand
     manual: Bekijk handleiding
   meetings:
+    type: Zitting
+    pageTitle: Zittingen
+    noDataMessage: Geen zittingen
     newMeeting: Nieuwe zitting
+    administrativeBody: Bestuursorgaan
+    time: Tijdstip
+    location: Locatie
     new:
       title: Nieuwe zitting aanmaken
       meeting:
@@ -25,15 +31,34 @@ inbox:
     createdOnLabel: Aangemaakt
     updatedOnLabel: Aangepast
     statusLabel: Status
-    new: Nieuw agendapunt
+    attachmentsLabel: Bijlagen
+    new:
+      title: Nieuw agendapunt
+      errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
+      create: Aanmaken
+      cancel: Terug
   trash:
+    pageTitle: Prullenmand
     title: Prullenmand
+    noDataMessage: Geen documenten
+    searchPlaceholder: Zoek titel agendapunt
+    restoreMessage: Herstel geselecteerde documenten
 publish:
   backToMeeting: Terug naar zitting
   headingPartOne: Zitting van
   loadingMessage: Bezig met laden...
   updatingMessage: Bezig met bijwerken...
-  excerptsErrorMessage: Er zijn geen uittreksels beschikbaar
+  decisionListErrorMessage: Er liep iets fout bij het laden van de besluitenlijst.
+  noExcerptsMessage: Er zijn geen uittreksels beschikbaar.
+  excerptErrorMessage: Er liep iets fout bij het laden van het uittreksel.
+  retry: opnieuw proberen
+  excerpts: Uittreksels
+  excerptsOverview: Alle uittreksels
+  position: Positie
+  statusLabel: Status
+  agendapoint: Agendapunt
+  publishButtonLabel: Onderteken en publiceer
+  toggleAllPublicLabel: Maak de inhoud van alle agendapunten publiek
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
@@ -63,6 +88,8 @@ meetingForm:
   sixthSectionTitle: 6. Einde van de zitting
   seventhSectionTitle: 7. Beëindiging van de zitting
   meetingHeadingPartOne: Notulen van
+  meetingHeadingArticleGendered: de
+  meetingHeadingArticleUngendered: het
   meetingHeadingPartTwo: van
   firstSectionNotFilledWarning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
   secondSectionNotFilledWarning: Zorg ervoor dat je de aanwezigenlijst correct aanvult voor je aan de stemmingen begint.
@@ -230,7 +257,7 @@ timelineStep:
   printInfo: "Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd."
   secondPrintInfo: "Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt."
   publishButtonLabel: "Publiceer {name}"
-  publishNotifyButtonLabel: "Publiceer en meld {name}"
+  publishNotifyButtonLabel: "Publiceer (en meld) {name}"
   publishRestrictionInfo: "Publiceren kan enkel door personen met de rol "
   publishRestrictionRole: "publiceerder"
   publishRestrictionEnd: "."
@@ -242,7 +269,7 @@ timelineStep:
   previewInfo: "Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar "
   previewInfoEnd: ", en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie."
   notifyConsequences: Gevolgen melding
-  notifyInfo: "Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
+  notifyInfo: "Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
   localLoket: "Loket voor Lokale Besturen"
   publishWarning: "Vul de ontbrekende informatie aan om te publiceren"
 publicationConfirmation:
@@ -254,7 +281,7 @@ publicationConfirmation:
   publicationTitle: Publicatie
   publicationSubtitle: "Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:"
   reportingTitle: Melding
-  reportingSubtitle: Het document wordt automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
+  reportingSubtitle: Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
   reportingLink: Loket voor Lokale Besturen
   metadataTitle: Metagegevens bij publiceren
   publisherLabel: Publiceerder
@@ -340,3 +367,24 @@ dateTimePicker:
   date: Datum
   hours: Uur
   minutes: Minuten
+
+attachments:
+  attachments: Bijlagen
+  return: Document
+  attach: Voeg een bestand toe
+  drag: Sleep de bestanden naar hier om toe te voegen
+  filename: Bestandsnaam
+  filesize: Bestandsgrootte
+  download: Downloaden
+  delete: Verwijderen
+  type: Type
+  decision: Besluit
+  typePlaceholder: geen
+  regulatory: regelgevend
+  saveAndGo: Opslaan en bijlagen toevoegen
+  noDecisionsFound: Geen besluiten gevonden
+  decisionRequired: Enkel bijlagen bij een besluit worden opgenomen in de publicatie.
+documentCreator:
+  titleField: Titel agendapunt
+  template: Sjabloon
+  templateSelectPlaceholder: Kies een sjabloon

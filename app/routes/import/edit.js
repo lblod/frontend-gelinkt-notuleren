@@ -4,11 +4,12 @@ import { warn } from '@ember/debug';
 
 export default class ImportEditRoute extends Route {
   queryParams = {
-    target: { refreshModel: true }
+    target: { refreshModel: true },
   };
 
   @service importRdfaSnippet;
   @service store;
+  @service router;
 
   async beforeModel(transition) {
     await this.importRdfaSnippet.downloadSnippet(transition.to.queryParams);
@@ -18,19 +19,25 @@ export default class ImportEditRoute extends Route {
     if (documentContainerUri) {
       const documentContainers = await this.store.query('document-container', {
         'filter[:uri:]': documentContainerUri,
-        page: { size: 1 }
+        page: { size: 1 },
       });
 
-      if (documentContainers.length){
+      if (documentContainers.length) {
         const documentContainer = documentContainers.firstObject;
-        this.transitionTo('editor-documents.edit', documentContainer.id);
+        this.router.transitionTo('editor-documents.edit', documentContainer.id);
       } else {
-        warn(`No document container found with URI '${documentContainerUri}' to import snippet in. Redirecting to inbox.`, { id: 'document-container.not-found' });
-        this.transitionTo('inbox');
+        warn(
+          `No document container found with URI '${documentContainerUri}' to import snippet in. Redirecting to inbox.`,
+          { id: 'document-container.not-found' }
+        );
+        this.router.transitionTo('inbox');
       }
     } else {
-      warn(`No target document container specified to import snippet in. Redirecting to inbox.`, { id: 'document-container.no-target' });
-      this.transitionTo('inbox');
+      warn(
+        `No target document container specified to import snippet in. Redirecting to inbox.`,
+        { id: 'document-container.no-target' }
+      );
+      this.router.transitionTo('inbox');
     }
   }
 }

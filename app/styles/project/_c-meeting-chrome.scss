@@ -14,7 +14,7 @@
 }
 
 .au-c-meeting-chrome {
-  padding: $au-unit $au-unit/2;
+  padding: $au-unit $au-unit * .5;
   width: 100%;
   position: relative;
   overflow: visible;
@@ -58,24 +58,35 @@
   background-color: $au-gray-100;
   margin-top: $au-unit-small;
   margin-bottom: $au-unit-huge + $au-unit;
+  border-radius: $au-radius;
 
   > .au-c-button {
     position: absolute;
     top: calc(100% - .1rem);
     left: -.1rem;
     width: calc(100% + .2rem);
+    border-width: .1rem;
     border-color: $au-gray-300;
     background-color: $au-white;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   & + .au-c-button {
     position: relative;
     margin-top: -$au-unit-small - .1rem !important; // Spacing hack as this button is used in multiple places
+    border-width: .1rem;
     border-color: $au-gray-300;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   &.au-u-margin-bottom-none + .au-c-button {
     margin-top: -.1rem !important; // Spacing hack as this button is used in multiple places
+  }
+
+  .au-c-editor-preview {
+    border: 0;
   }
 }
 
@@ -91,6 +102,12 @@
   background-color: $au-gray-200;
   padding: $au-unit-tiny $au-unit-small;
   border-bottom: .1rem solid $au-gray-300;
+}
+
+.au-c-meeting-chrome-card__title--flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .au-c-meeting-chrome-card__title--inset {
@@ -205,8 +222,8 @@
 
 .au-c-meeting-chrome__highlight {
   display: inline-block;
-  background-color: $au-yellow-200;
-  margin-top: $au-unit-tiny/2;
+  background-color: $au-yellow-100;
+  margin-top: $au-unit-tiny * .5;
   // cursor: not-allowed;
 }
 

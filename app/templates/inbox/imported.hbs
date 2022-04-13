@@ -8,7 +8,7 @@
             Geïmporteerde HTML bestanden
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--search">
+        <AuToolbarGroup>
           <TextSearch @filter={{title}} @placeholder="Zoek titel bestand" />
           <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
           <LinkTo @route="imported-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
@@ -24,7 +24,7 @@
     </c.header>
     <c.body as |container|>
       <td><LinkTo @route="editor-documents.show" @model={{row.id}} class="au-c-link">{{container.currentVersion.title}}</LinkTo></td>
-      <td>{{moment-calendar container.currentVersion.createdOn}}</td>
+      <td>{{human-friendly-date container.currentVersion.createdOn}}</td>
       <td><EditorStatusPill @status={{container.status}} /></td>
     </c.body>
   </t.content>

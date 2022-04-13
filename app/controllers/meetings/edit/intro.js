@@ -35,5 +35,4 @@ export default class MeetingsEditIntroController extends Controller {
     zitting.intro = this.editor.htmlContent;
     yield zitting.save();
   }
-
 }

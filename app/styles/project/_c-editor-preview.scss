@@ -77,14 +77,6 @@
       }
     }
   }
-
-  .checkbox--switch__wrapper {
-    display: block;
-    border-bottom: 1px solid $au-gray-300;
-    padding: 0;
-    padding-bottom: $au-unit-small;
-    margin-bottom: $au-unit-small;
-  }
 }
 
 .au-c-editor-preview-treatment--private .behandeling {
@@ -108,6 +100,15 @@
       content: "Publieke informatie";
       border-right: 4px solid $au-blue-700;
     }
+  }
+}
+
+.au-c-editor-preview-treatment-toggle-box {
+  border: .1rem solid $au-gray-300;
+  background-color: $au-gray-200;
+
+  .au-c-toggle-switch__toggle {
+    background-color: $au-gray-300;
   }
 }
 
@@ -234,7 +235,7 @@
 
 .is-required[content=""] {
   display: inline-block;
-  padding: $au-unit-tiny/2 $au-unit-tiny;
+  padding: $au-unit-tiny * .5 $au-unit-tiny;
   border-radius: $au-radius;
   background-color: $au-red-600;
 
