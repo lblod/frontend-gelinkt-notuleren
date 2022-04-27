@@ -8,6 +8,7 @@ const DRAFT_DECISION_FOLDER_ID = 'ae5feaed-7b70-4533-9417-10fbbc480a4c';
 const GEAGENDEERD_STATUS_ID = '7186547b61414095aa2a4affefdcca67';
 
 export default class MeetingsEditTreatmentController extends Controller {
+  queryParams = ['uploading'];
   @service router;
   @service currentSession;
   @service store;

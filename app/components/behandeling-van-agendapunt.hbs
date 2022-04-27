@@ -83,11 +83,25 @@
   </div>
 {{/if}}
 
-
-<ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}} @attachments={{@behandeling.documentContainer.attachments}}
->
-  {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
-</ReadonlyTextBox>
+<div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
+  <div class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--flex">
+    <AuHeading @level="4" @skin="6">{{t "behandelingVanAgendapunten.contentTitle"}} </AuHeading>
+    {{#if @behandeling.documentContainer.attachments}}
+      <AuPill @skin="border" @icon="attachment" @iconAlignment="left">
+        {{#if this.editable}}
+          <AuLink @route="meetings.edit.treatment" @models={{array @meeting.id @behandeling.id}} @query={{(query-params uploading="true")}} @skin="primary">
+            {{@behandeling.documentContainer.attachments.length}}
+          </AuLink>
+        {{else}}
+          {{@behandeling.documentContainer.attachments.length}}
+        {{/if}}
+      </AuPill>
+    {{/if}}
+  </div>
+  <div class="au-o-box au-o-box--small au-c-editor-preview say-content">
+    {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
+  </div>
+</div>
 {{#if this.editable}}
   <AuLink @route="meetings.edit.treatment" @models={{array @meeting.id @behandeling.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
     {{t "behandelingVanAgendapunten.editDocument"}}
