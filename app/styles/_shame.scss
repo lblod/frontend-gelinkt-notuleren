@@ -109,7 +109,7 @@
 
   &.has-error:before {
     content: "!";
-    font-size: $au-label-error-badge-font-size;
+    font-size: 1.2rem;
     font-style: normal;
     display: inline-flex;
     align-items: center;
@@ -119,7 +119,7 @@
     top: 50%;
     left: $au-unit-tiny * .5;
     transform: translateY(-50%);
-    background-color: $au-label-error-badge-color;
+    background-color: var(--au-red-700);
     width: $au-unit-small * 1.5;
     height: $au-unit-small * 1.5 - .05rem;
     border-radius: $au-unit-small * 1.5;
@@ -147,7 +147,7 @@
 
   &.has-error:before {
     content: "!";
-    font-size: $au-label-error-badge-font-size;
+    font-size: 1.2rem;
     font-style: normal;
     display: inline-flex;
     align-items: center;
@@ -157,7 +157,7 @@
     top: 50%;
     left: $au-unit-tiny * .5;
     transform: translateY(-50%);
-    background-color: $au-label-error-badge-color;
+    background-color: var(--au-red-700);
     width: $au-unit-small * 1.5;
     height: $au-unit-small * 1.5 - .05rem;
     border-radius: $au-unit-small * 1.5;
