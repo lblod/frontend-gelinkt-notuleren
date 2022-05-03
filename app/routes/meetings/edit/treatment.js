@@ -13,7 +13,6 @@ export default class MeetingsEditTreatmentRoute extends Route {
   }
 
   async model(params) {
-    console.log(params)
     const treatment = await this.store.findRecord(
       'behandeling-van-agendapunt',
       params.treatment_id

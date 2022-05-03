@@ -88,7 +88,7 @@
     <AuHeading @level="4" @skin="6">{{t "behandelingVanAgendapunten.contentTitle"}} </AuHeading>
     {{#if @behandeling.documentContainer.attachments}}
       {{#if this.editable}}
-      <AuPill @route="meetings.edit.treatment" @models={{array @meeting.id @behandeling.id}} @query={{(query-params uploading="true")}} @skin="link" @icon="attachment" @iconAlignment="left">
+      <AuPill @route="meetings.edit.treatment" @models={{array @meeting.id @behandeling.id}} @query={{query-params uploading="true"}} @skin="link" @icon="attachment" @iconAlignment="left">
         {{@behandeling.documentContainer.attachments.length}}
       </AuPill>
       {{else}}
