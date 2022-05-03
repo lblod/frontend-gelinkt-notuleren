@@ -348,7 +348,7 @@
     justify-content: center;
     align-items: center;
     left: -$au-unit - $au-unit-tiny;
-    top: $au-unit-small + $au-unit-tiny/1.6;
+    top: $au-unit-small + $au-unit-tiny * .6;
     color: $au-gray-700;
     font-weight: $au-medium;
     width: $au-unit;
