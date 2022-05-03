@@ -16,6 +16,6 @@ export default class AttachmentsNumberComponent extends Component {
   @restartableTask
   *getAttachmentsNumber() {
     const attachments = yield this.args.documentContainer.attachments;
-    this.attachmentsNumber = attachments.meta.count;
+    this.attachmentsNumber = attachments.length;
   }
 }
