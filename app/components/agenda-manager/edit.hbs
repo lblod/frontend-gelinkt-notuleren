@@ -1,84 +1,86 @@
-<AgendaManager::AgendaItemForm
-        @model={{@itemToEdit}}
-        @onSubmit={{perform this.submitTask}}
-        as |Form|>
-  <AuModal @title={{t "manageAgendaZittingModal.modalTitle"}}
-           @modalOpen={{@visible}}
-           @size="default"
-           @closeModal={{this.cancel}}
-           as |Modal|
-  >
-    <Modal.Body>
-      {{#if this.submitTask.isRunning}}
-        <AuLoader />
-        <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
-      {{else}}
-        {{!-- <AuHeading @level="3" @skin="4">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</AuHeading>
-        <AuHr /> --}}
-        <div class="au-c-form">
-          {{#if this.isNew}}
-            <Form.SelectDraft @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}>
-              {{t "manageAgendaZittingModalDraftImport.title"}}
-            </Form.SelectDraft>
-          {{/if}}
+<div {{did-update this.updateGeplandOpenbaar}}>
+  <AgendaManager::AgendaItemForm
+          @model={{@itemToEdit}}
+          @onSubmit={{perform this.submitTask}}
+          as |Form|>
+    <AuModal @title={{t "manageAgendaZittingModal.modalTitle"}}
+            @modalOpen={{@visible}}
+            @size="default"
+            @closeModal={{this.cancel}}
+            as |Modal|
+    >
+      <Modal.Body>
+        {{#if this.submitTask.isRunning}}
+          <AuLoader />
+          <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
+        {{else}}
+          {{!-- <AuHeading @level="3" @skin="4">{{t "manageAgendaZittingModalEdit.modalSubtitle"}}</AuHeading>
+          <AuHr /> --}}
+          <div class="au-c-form">
+            {{#if this.isNew}}
+              <Form.SelectDraft @placeholder={{t "manageAgendaZittingModalDraftImport.default"}}>
+                {{t "manageAgendaZittingModalDraftImport.title"}}
+              </Form.SelectDraft>
+            {{/if}}
 
-          <Form.Textarea @for="titel">
-            {{t "manageAgendaZittingModal.titleLabel"}}
-          </Form.Textarea>
+            <Form.Textarea @for="titel">
+              {{t "manageAgendaZittingModal.titleLabel"}}
+            </Form.Textarea>
 
-          <Form.Textarea @for="beschrijving">
-            {{t "manageAgendaZittingModal.beschrijvingLabel"}}
-          </Form.Textarea>
-          {{#if @itemToEdit.behandeling.documentContainer.currentVersion.content}}
-            <AuButton {{on "click" (perform this.copyDescription)}}>{{t "manageAgendaZittingModal.copyDescriptionLabel"}}</AuButton>
-          {{/if}}
+            <Form.Textarea @for="beschrijving">
+              {{t "manageAgendaZittingModal.beschrijvingLabel"}}
+            </Form.Textarea>
+            {{#if @itemToEdit.behandeling.documentContainer.currentVersion.content}}
+              <AuButton {{on "click" (perform this.copyDescription)}}>{{t "manageAgendaZittingModal.copyDescriptionLabel"}}</AuButton>
+            {{/if}}
 
-          <div>
-            <AuLabel>
-              {{t "manageAgendaZittingModal.geplandOpenbaar"}}
-            </AuLabel>
-            <div class="au-c-radio-group">
-              <Form.Radio @for="geplandOpenbaar" @name="plannedPublic"  as |Radio|>
-                <Radio.Option @value={{true}}
-                >
-                  <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
-                </Radio.Option>
-                <Radio.Option @value={{false}}
-                >
-                  <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
-                </Radio.Option>
-              </Form.Radio>
+            <div>
+              <AuLabel>
+                {{t "manageAgendaZittingModal.geplandOpenbaar"}}
+              </AuLabel>
+              <div class="au-c-radio-group">
+                <Form.Radio @for="geplandOpenbaar" @name="plannedPublic"  as |Radio|>
+                  <Radio.Option @value={{true}}
+                  >
+                    <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarTrueLabel"}}</span>
+                  </Radio.Option>
+                  <Radio.Option @value={{false}}
+                  >
+                    <span>{{t "manageAgendaZittingModalEdit.geplandOpenbaarFalseLabel"}}</span>
+                  </Radio.Option>
+                </Form.Radio>
+              </div>
             </div>
-          </div>
 
-          {{#if (gt @agendaItems.length 0)}}
-            <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}} @currentItem={{@itemToEdit}}>
-              {{t "manageAgendaZittingModalMove.title"}}
-            </Form.SelectLocation>
-          {{/if}}
-        </div>
-      {{/if}}
-    </Modal.Body>
-    <Modal.Footer>
-      <AuToolbar>
-      <AuButtonGroup>
-        <Form.Submit>{{t "manageAgendaZittingModal.saveButton"}}</Form.Submit>
-        <AuButton @skin="secondary" {{on "click" this.cancel}}>
-          {{t "manageAgendaZittingModal.cancelButton"}}
-        </AuButton>
-      </AuButtonGroup>
-      {{#unless this.isNew}}
-        <AuButton
-          @alert={{true}}
-          @skin="tertiary"
-          @loading={{this.deleteTask.isRunning}}
-          @icon="bin"
-          @iconAlignment="left"
-          {{on "click" (perform this.deleteTask @itemToEdit)}} >
-            {{t "manageAgendaZittingModalDelete.deleteButton"}}
-        </AuButton>
-      {{/unless}}
-      </AuToolbar>
-    </Modal.Footer>
-  </AuModal>
-</AgendaManager::AgendaItemForm>
+            {{#if (gt @agendaItems.length 0)}}
+              <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}} @currentItem={{@itemToEdit}}>
+                {{t "manageAgendaZittingModalMove.title"}}
+              </Form.SelectLocation>
+            {{/if}}
+          </div>
+        {{/if}}
+      </Modal.Body>
+      <Modal.Footer>
+        <AuToolbar>
+        <AuButtonGroup>
+          <Form.Submit>{{t "manageAgendaZittingModal.saveButton"}}</Form.Submit>
+          <AuButton @skin="secondary" {{on "click" this.cancel}}>
+            {{t "manageAgendaZittingModal.cancelButton"}}
+          </AuButton>
+        </AuButtonGroup>
+        {{#unless this.isNew}}
+          <AuButton
+            @alert={{true}}
+            @skin="tertiary"
+            @loading={{this.deleteTask.isRunning}}
+            @icon="bin"
+            @iconAlignment="left"
+            {{on "click" (perform this.deleteTask @itemToEdit)}} >
+              {{t "manageAgendaZittingModalDelete.deleteButton"}}
+          </AuButton>
+        {{/unless}}
+        </AuToolbar>
+      </Modal.Footer>
+    </AuModal>
+  </AgendaManager::AgendaItemForm>
+</div>
