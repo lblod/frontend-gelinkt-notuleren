@@ -1,0 +1,550 @@
+@prefix                    conceptscheme: <https://data.vlaanderen.be/id/conceptscheme/> .
+@prefix                      BesluitType: <https://data.vlaanderen.be/id/concept/BesluitType/> .
+@prefix              BesluitDocumentType: <https://data.vlaanderen.be/id/concept/BesluitDocumentType/> .
+@prefix                             skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix                              xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix                             rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix                              rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix                             core: <http://mu.semte.ch/vocabularies/core/> .
+@prefix                          besluit: <http://lblod.data.gift/vocabularies/besluit/> .
+@prefix                  concept-schemes: <http://lblod.data.gift/concept-schemes/> .
+@prefix BestuurseenheidClassificatieCode: <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/> .
+
+BesluitDocumentType:0ee460b1-5ef4-4d4a-b5e1-e2d7c1d5086e
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Andere documenten dan budget, jaarrekening en meerjarenplan(aanpassing) die als onderdeel of bijlage bij een beleidsrapport van de beleids- en beheerscyclus verplicht, vrijwillig of op vraag worden aangeleverd." ;
+    skos:inScheme conceptscheme:BesluitDocumentType ;
+    skos:prefLabel "Andere documenten BBC" ;
+    skos:topConceptOf conceptscheme:BesluitDocumentType .
+
+BesluitDocumentType:3fa67785-ffdc-4b30-8880-2b99d97b4dee
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Lijst met de titels en beschrijvingen van de besluiten die op dezelfde zitting zijn genomen." ;
+    skos:inScheme conceptscheme:BesluitDocumentType ;
+    skos:prefLabel "Besluitenlijst" ;
+    skos:topConceptOf conceptscheme:BesluitDocumentType .
+
+BesluitDocumentType:8e791b27-7600-4577-b24e-c7c29e0eb773
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "De formele notulen van een zitting." ;
+    skos:inScheme conceptscheme:BesluitDocumentType ;
+    skos:prefLabel "Notulen" ;
+    skos:topConceptOf conceptscheme:BesluitDocumentType .
+
+BesluitDocumentType:e274f1b1-7e84-457d-befe-070afec6b752
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Afschrift van het verslag dat bij het indienen van het jaarlijkse budget bij de gemeente- of provincieoverheid gevoegd wordt over de concrete toepassing van de betrokkenheid van de plaatselijke kerk- of geloofsgemeenschap bij het geheel van de lokale gemeenschap met opgave van de wettelijk vereiste elementen." ;
+    skos:inScheme conceptscheme:BesluitDocumentType ;
+    skos:prefLabel "Verslag lokale betrokkenheid eredienstbesturen" ;
+    skos:topConceptOf conceptscheme:BesluitDocumentType .
+
+BesluitType:0d1278af-b69e-4152-a418-ec5cfd1c7d0b
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "0d1278af-b69e-4152-a418-ec5cfd1c7d0b" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van de gemeenteraad of van het college van burgemeester en schepenen dat de politie op het wegverkeer regelt op gemeentewegen die in speciale beschermingszones gelegen zijn." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Aanvullend reglement op het wegverkeer m.b.t. gemeentewegen in speciale beschermingszones" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:1105564e-30c7-4371-a864-6b7329cdae6f
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "1105564e-30c7-4371-a864-6b7329cdae6f" ;
+    skos:definition "Besluit van de gemeenteraad tot oprichting van een intergemeentelijk samenwerkingsverband met rechtspersoonlijkheid." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Oprichting IGS" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:256bd04a-b74b-4f2a-8f5d-14dda4765af9
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "256bd04a-b74b-4f2a-8f5d-14dda4765af9" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van het college van burgemeester en schepenen dat tijdelijk de politie op het wegverkeer regelt." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Tijdelijke politieverordening (op het wegverkeer)" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:25deb453-ae3e-4d40-8027-36cdb48ab738
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "25deb453-ae3e-4d40-8027-36cdb48ab738" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit tot vaststelling of wijziging van een deontologische code." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Deontologische Code" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:2f189152-1786-4b55-a3a9-d7f06de63f1c
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "2f189152-1786-4b55-a3a9-d7f06de63f1c" ;
+    skos:definition "Besluit tot vaststelling van het meerjarenplan of tot vaststelling van de aanpassing van het meerjarenplan conform BBC2020." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Meerjarenplan(aanpassing) BBC2020" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:380674ee-0894-4c41-bcc1-9deaeb9d464c
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "380674ee-0894-4c41-bcc1-9deaeb9d464c" ;
+    skos:definition "Besluit van de gemeenteraad tot oprichting van een districtsbestuur." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Oprichting districtsbestuur" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:3bba9f10-faff-49a6-acaa-85af7f2199a3
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "3bba9f10-faff-49a6-acaa-85af7f2199a3" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van de gemeenteraad of van het college van burgemeester en schepenen dat de politie op het wegverkeer regelt op gemeentewegen die in havengebied gelegen zijn." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Aanvullend reglement op het wegverkeer m.b.t. gemeentewegen in havengebied" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:3fcf7dba-2e5b-4955-a489-6dd8285c013b
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "3fcf7dba-2e5b-4955-a489-6dd8285c013b" ;
+    skos:definition "Besluit van de gemeenteraad over de vaststelling van het meerjarenplan of over de vaststelling van de aanpassing van het meerjarenplan van een eredienstbestuur." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Besluit over meerjarenplan(aanpassing) eredienstbestuur" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:4350cdda-8291-4055-9026-5c7429357fce
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Besluit van de raad voor maatschappelijk welzijn houdende advies bij de jaarrekening van een vereniging of vennootschap voor maatschappelijk welzijn." ;
+    skos:inScheme conceptscheme:BesluitType ;
+    skos:prefLabel "Advies jaarrekening OCMW-vereniging" ;
+    skos:topConceptOf conceptscheme:BesluitType .
+
+BesluitType:4673d472-8dbc-4cea-b3ab-f92df3807eb3
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "4673d472-8dbc-4cea-b3ab-f92df3807eb3" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit tot vaststelling of wijziging van een personeelsreglement." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Personeelsreglement" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:4d8f678a-6fa4-4d5f-a2a1-80974e43bf34
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "4d8f678a-6fa4-4d5f-a2a1-80974e43bf34" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van de gemeenteraad of van het college van burgemeester en schepenen dat de politie op het wegverkeer regelt op gemeentewegen die niet in havengebied of speciale beschermingszones gelegen zijn." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Aanvullend reglement op het wegverkeer enkel m.b.t. gemeentewegen (niet in havengebied of speciale beschermingszones)" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:4efa4632-efc6-40d5-815a-dec785fbceac
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "4efa4632-efc6-40d5-815a-dec785fbceac" ;
+    skos:definition "Besluit van de gemeenteraad of provincieraad houdende advies aan de Vlaamse Regering over de wijziging van de gebiedsomschrijving van de erkende plaatselijke kerk- of geloofsgemeenschap)." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Advies samenvoeging eredienstbesturen" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:5ee63f84-2fa0-4758-8820-99dca2bdce7c
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "5ee63f84-2fa0-4758-8820-99dca2bdce7c" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit tot delegatie van bevoegdheden aan een ander bestuursorgaan." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Delegatiereglement" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:67378dd0-5413-474b-8996-d992ef81637a
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000002 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000003 ;
+    core:uuid "67378dd0-5413-474b-8996-d992ef81637a" ;
+    skos:definition "Besluiten met een reglementair of verordenend karakter. Deze besluiten hebben een algemene draagwijdte." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Reglementen en verordeningen" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:6af621e2-c807-479e-a6f2-2d64d8339491
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "6af621e2-c807-479e-a6f2-2d64d8339491" ;
+    skos:definition "Besluit van een bestuursorgaan van de gemeente Voeren dat aan bijzonder goedkeuringstoezicht onderworpen is." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Goedkeuringstoezicht Voeren" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:79414af4-4f57-4ca3-aaa4-f8f1e015e71c
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "79414af4-4f57-4ca3-aaa4-f8f1e015e71c" ;
+    skos:definition "Besluit van de gemeenteraad houdende advies bij de jaarrekening van een eredienstbestuur." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Advies bij jaarrekening eredienstbestuur" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:7d95fd2e-3cc9-4a4c-a58e-0fbc408c2f9b
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "7d95fd2e-3cc9-4a4c-a58e-0fbc408c2f9b" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van de gemeenteraad of van het college van burgemeester en schepenen dat de politie op het wegverkeer regelt op gewestwegen." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Aanvullend reglement op het wegverkeer m.b.t. één of meerdere gewestwegen" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:84121221-4217-40e3-ada2-cd1379b168e1
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "84121221-4217-40e3-ada2-cd1379b168e1" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit met een reglementair of verordenend karakter dat geen aanvullend reglement van de politie op het wegverkeer inhoudt, noch een belasting- of retributiereglement, noch een delegatiereglement, noch een deontologische code, noch een gebruikersreglement, noch een huishoudelijk reglement, noch een personeelsreglement, noch een politiereglement, noch een reglement onderwijs, noch een reglement over subsidie, premie of erkenning, noch een tijdelijke politieverordening op het wegverkeer." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Andere" .
+
+BesluitType:849c66c2-ba33-4ac1-a693-be48d8ac7bc7
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "849c66c2-ba33-4ac1-a693-be48d8ac7bc7" ;
+    skos:definition "Besluit van de gemeenteraad over de vastelling of de aanpassing van het meerjarenplan van een autonoom gemeentebedrijf." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Besluit meerjarenplan(aanpassing) AGB" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:8bdc614a-d2f2-44c0-8cb1-447b1017d312
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Besluit van de provincieraad houdende advies bij de jaarrekening van een autonoom gemeentebedrijf." ;
+    skos:inScheme conceptscheme:BesluitType ;
+    skos:prefLabel "Advies bij jaarrekening APB" ;
+    skos:topConceptOf conceptscheme:BesluitType .
+
+BesluitType:a0a709a7-ac07-4457-8d40-de4aea9b1432
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "a0a709a7-ac07-4457-8d40-de4aea9b1432" ;
+    skos:definition "Besluit van de gemeenteraad houdende advies bij de jaarrekening van een autonoom gemeentebedrijf." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Advies bij jaarrekening AGB" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:a8486fa3-6375-494d-aa48-e34289b87d5b
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "a8486fa3-6375-494d-aa48-e34289b87d5b" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit tot vaststelling of wijziging van de regels van inwendig bestuur." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Huishoudelijk reglement" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:b25faa84-3ab5-47ae-98c0-1b389c77b827
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "b25faa84-3ab5-47ae-98c0-1b389c77b827" ;
+    skos:definition "Besluit van het college van burgemeester en schepenen tot schorsing van een beslissing van een eredienstbestuur." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Schorsing beslissing eredienstbesturen" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:b69c9f18-967c-4feb-90a8-8eea3c8ce46b
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Besluit van de raad voor maatschappelijk welzijn tot oprichting van een vereniging of vennootschap voor maatschappelijk welzijn." ;
+    skos:inScheme conceptscheme:BesluitType ;
+    skos:prefLabel "Oprichting ocmw-vereniging" ;
+    skos:topConceptOf conceptscheme:BesluitType .
+
+BesluitType:ba5922c9-cfad-4b2e-b203-36479219ba56
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "ba5922c9-cfad-4b2e-b203-36479219ba56" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van de gemeenteraad of van het college van burgemeester en schepenen tot heffing, wijziging of opheffing van een retributie." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Retributiereglement" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:bd0b0c42-ba5e-4acc-b644-95f6aad904c7
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "bd0b0c42-ba5e-4acc-b644-95f6aad904c7" ;
+    skos:definition "Besluit van de gemeenteraad of provincieraad tot oprichting van een autonoom gemeente- of provinciebedrijf." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Oprichting autonoom bedrijf" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:c417f3da-a3bd-47c5-84bf-29007323a362
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Besluit van de provincieraad over de vastelling of de aanpassing van het meerjarenplan van een autonoom provinciebedrijf." ;
+    skos:inScheme conceptscheme:BesluitType ;
+    skos:prefLabel "Besluit over meerjarenplan APB" ;
+    skos:topConceptOf conceptscheme:BesluitType .
+
+BesluitType:c945b531-4742-43fe-af55-b13da6ecc6fe
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:36a82ba0-7ff1-4697-a9dd-2e94df73b721 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ,
+                        BestuurseenheidClassificatieCode:80310756-ce0a-4a1b-9b8e-7c01b6cc7a2d ;
+    core:uuid "c945b531-4742-43fe-af55-b13da6ecc6fe" ;
+    skos:definition "Besluit van de gemeenteraad of provincieraad tot wijziging van de statuten van een autonoom gemeente- of provinciebedrijf." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Wijziging autonoom bedrijf" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:d7060f97-c417-474c-abc6-ef006cb61f41
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "d7060f97-c417-474c-abc6-ef006cb61f41" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van de gemeenteraad of van het college van burgemeester en schepenen dat handelt over een subsidie, premie of erkenning." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Subsidie, premie, erkenning" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:d9c3d177-6dc6-4775-8c6a-1055a9cbdcc6
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Besluit van de raad voor maatschappelijk welzijn tot wijziging van de statuten van een vereniging of vennootschap voor maatschappelijk welzijn." ;
+    skos:inScheme conceptscheme:BesluitType ;
+    skos:prefLabel "Wijziging ocmw-vereniging" ;
+    skos:topConceptOf conceptscheme:BesluitType .
+
+BesluitType:dbc58656-b0a5-4e43-8e9e-701acb75f9b0
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ,
+                        BestuurseenheidClassificatieCode:b156b67f-c5f4-4584-9b30-4c090be02fdc ,
+                        BestuurseenheidClassificatieCode:cd93f147-3ece-4308-acab-5c5ada3ec63d ,
+                        BestuurseenheidClassificatieCode:d01bb1f6-2439-4e33-9c25-1fc295de2e71 ;
+    core:uuid "dbc58656-b0a5-4e43-8e9e-701acb75f9b0" ;
+    skos:definition "Besluit van de gemeenteraad tot wijziging van de statuten van een intergemeentelijk samenwerkingsverband met rechtspersoonlijkheid." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Statutenwijziging IGS" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:df261490-cc74-4f80-b783-41c35e720b46
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "df261490-cc74-4f80-b783-41c35e720b46" ;
+    skos:definition "Besluit van de gemeenteraad over de vaststelling van het budget of over de vaststelling van de wijziging van het budget van een eredienstbestuur." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Besluit over budget(wijziging) eredienstbestuur" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:e27ef237-29de-49b8-be22-4ee2ab2d4e5b
+    a rdfs:Class ,
+      skos:Concept ;
+    skos:definition "Besluit tot toetreding tot een rechtspersoon, andere dan een extern verzelfstandigd agentschap of intergemeentelijk samenwerkingsverband en andere dan een vereniging of vennootschap voor maatschappelijk welzijn." ;
+    skos:inScheme conceptscheme:BesluitType ;
+    skos:prefLabel "Toetreding rechtspersoon" ;
+    skos:topConceptOf conceptscheme:BesluitType .
+
+BesluitType:e44c535d-4339-4d15-bdbf-d4be6046de2c
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:36a82ba0-7ff1-4697-a9dd-2e94df73b721 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000002 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000003 ,
+                        BestuurseenheidClassificatieCode:80310756-ce0a-4a1b-9b8e-7c01b6cc7a2d ,
+                        BestuurseenheidClassificatieCode:cc4e2d67-603b-4784-9b61-e50bac1ec089 ;
+    core:uuid "e44c535d-4339-4d15-bdbf-d4be6046de2c" ;
+    skos:definition "Besluit tot vaststelling van de jaarrekening." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Jaarrekening" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:e8aee49e-8762-4db2-acfe-2d5dd3c37619
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "e8aee49e-8762-4db2-acfe-2d5dd3c37619" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit ?? (? Besluit tot vaststelling van de regels van een gemeentelijke onderwijsinstelling.)" ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Reglement Onderwijs" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:e8afe7c5-9640-4db8-8f74-3f023bec3241
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "e8afe7c5-9640-4db8-8f74-3f023bec3241" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit over aspecten van bestuurlijke politie zoals de zindelijkheid, de gezondheid, de veiligheid en de rust op openbare wegen en plaatsen en in openbare gebouwen. Zo'n besluit kan bijvoorbeeld het nemen van passende maatregelen betreffen om rampen en plagen, zoals brand, epidemieën en epizoötieën te voorkomen en het verstrekken van de nodige hulp om ze te doen ophouden. Zo'n besluit kan bijvoorbeeld ook bestaan in het handhaven van de orde op plaatsen waar veel mensen samenkomen of in het tegengaan van alle vormen van openbare overlast." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Politiereglement" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:e96ec8af-6480-4b32-876a-fefe5f0a3793
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:36a82ba0-7ff1-4697-a9dd-2e94df73b721 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000002 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000003 ,
+                        BestuurseenheidClassificatieCode:80310756-ce0a-4a1b-9b8e-7c01b6cc7a2d ,
+                        BestuurseenheidClassificatieCode:b156b67f-c5f4-4584-9b30-4c090be02fdc ,
+                        BestuurseenheidClassificatieCode:cc4e2d67-603b-4784-9b61-e50bac1ec089 ,
+                        BestuurseenheidClassificatieCode:cd93f147-3ece-4308-acab-5c5ada3ec63d ,
+                        BestuurseenheidClassificatieCode:d01bb1f6-2439-4e33-9c25-1fc295de2e71 ;
+    core:uuid "e96ec8af-6480-4b32-876a-fefe5f0a3793" ;
+    skos:definition "Niet inzendplichtige besluiten" ;
+    skos:inScheme conceptscheme:BesluitType ;
+    skos:prefLabel "Andere" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                      conceptscheme:BesluitType .
+
+BesluitType:efa4ec5a-b006-453f-985f-f986ebae11bc
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "efa4ec5a-b006-453f-985f-f986ebae11bc" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit van de gemeenteraad tot heffing, wijziging of opheffing van een belasting." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Belastingreglement" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
+
+BesluitType:f56c645d-b8e1-4066-813d-e213f5bc529f
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:36a82ba0-7ff1-4697-a9dd-2e94df73b721 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000002 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000003 ,
+                        BestuurseenheidClassificatieCode:80310756-ce0a-4a1b-9b8e-7c01b6cc7a2d ,
+                        BestuurseenheidClassificatieCode:cc4e2d67-603b-4784-9b61-e50bac1ec089 ;
+    core:uuid "f56c645d-b8e1-4066-813d-e213f5bc529f" ;
+    skos:definition "Besluit tot vaststelling van het meerjarenplan of tot vaststelling van de aanpassing van het meerjarenplan." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Meerjarenplan(aanpassing)" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:f8c070bd-96e4-43a1-8c6e-532bcd771251
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ;
+    core:uuid "f8c070bd-96e4-43a1-8c6e-532bcd771251" ;
+    skos:definition "Besluit van de gemeenteraad tot oprichting van een extern verzelfstandigd agentschap of tot deelname in een extern verzelfstandigd agentschap." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Oprichting of deelname EVA" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:fb21d14b-734b-48f4-bd4e-888163fd08e8
+    a rdfs:Class ,
+      skos:Concept ;
+    besluit:decidableBy BestuurseenheidClassificatieCode:36a82ba0-7ff1-4697-a9dd-2e94df73b721 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000000 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000001 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000002 ,
+                        BestuurseenheidClassificatieCode:5ab0e9b8a3b2ca7c5e000003 ,
+                        BestuurseenheidClassificatieCode:80310756-ce0a-4a1b-9b8e-7c01b6cc7a2d ,
+                        BestuurseenheidClassificatieCode:b156b67f-c5f4-4584-9b30-4c090be02fdc ,
+                        BestuurseenheidClassificatieCode:cc4e2d67-603b-4784-9b61-e50bac1ec089 ,
+                        BestuurseenheidClassificatieCode:cd93f147-3ece-4308-acab-5c5ada3ec63d ,
+                        BestuurseenheidClassificatieCode:d01bb1f6-2439-4e33-9c25-1fc295de2e71 ;
+    core:uuid "fb21d14b-734b-48f4-bd4e-888163fd08e8" ;
+    skos:definition "Besluit tot vaststelling van het geheel van of wijzigingen aan de rechtspositieregeling van het personeel." ;
+    skos:inScheme concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Rechtspositieregeling (RPR)" ;
+    skos:topConceptOf concept-schemes:71e6455e-1204-46a6-abf4-87319f58eaa5 ,
+                      conceptscheme:BesluitType .
+
+BesluitType:fb92601a-d189-4482-9922-ab0efc6bc935
+    a rdfs:Class ,
+      skos:Concept ;
+    core:uuid "fb92601a-d189-4482-9922-ab0efc6bc935" ;
+    skos:broader BesluitType:67378dd0-5413-474b-8996-d992ef81637a ;
+    skos:definition "Besluit tot vaststelling of wijziging van een gebruikersreglement." ;
+    skos:inScheme concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a ,
+                  conceptscheme:BesluitType ;
+    skos:prefLabel "Gebruikersreglement" ;
+    skos:topConceptOf concept-schemes:c93ccd41-aee7-488f-86d3-038de890d05a .
