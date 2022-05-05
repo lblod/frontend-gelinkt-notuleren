@@ -37,7 +37,7 @@
       </div>
       <div>
         <AuLabel>{{t "inbox.meetings.new.meeting.plannedStart"}}</AuLabel>
-        <DateTimePicker @onChange={{fn (mut this.meeting.geplandeStart)}} @value={{this.meeting.geplandeStart}}/>
+        <DateTimePicker @alignment="top" @onChange={{fn (mut this.meeting.geplandeStart)}} @value={{this.meeting.geplandeStart}}/>
       </div>
     </form>
   </Modal.Body>
