@@ -42,15 +42,15 @@
         </div>
         <div>
           <AuLabel>{{t "manageZittingsData.geplandeStartLabel"}}</AuLabel>
-          <DateTimePicker @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
+          <DateTimePicker @alignment="top" @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
         </div>
         <div>
           <AuLabel>{{t "manageZittingsData.gestartOpTijdstipLabel"}}</AuLabel>
-          <DateTimePicker @onChange={{fn this.changeDate 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
+          <DateTimePicker @alignment="top" @onChange={{fn this.changeDate 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
         </div>
         <div>
           <AuLabel>{{t "manageZittingsData.geeindigdOpTijdstipLabel"}}</AuLabel>
-          <DateTimePicker @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
+          <DateTimePicker @alignment="top" @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}}/>
         </div>
       </div>
     </Modal.Body>
