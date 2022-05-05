@@ -3,6 +3,7 @@
     {{#let (unique-id) as |id|}}
       <AuLabel for={{id}}>{{t "dateTimePicker.date"}}</AuLabel>
       <AuDatePicker
+        @alignment={{@alignment}}
         @id={{id}}
         @onChange={{this.onChangeDate}}
         @value={{this.date}}
