@@ -4,6 +4,27 @@
 
 
 
+## 2.24.0 (2022-05-05)
+
+#### :rocket: Enhancement
+* [#275](https://github.com/lblod/frontend-gelinkt-notuleren/pull/275) bump editor: improved whitespace handling and table inserts ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#268](https://github.com/lblod/frontend-gelinkt-notuleren/pull/268) Fix alignment of datepicker dialogs in modal windows ([@Dietr](https://github.com/Dietr))
+* [#271](https://github.com/lblod/frontend-gelinkt-notuleren/pull/271) Removed style that displayed article number as block ([@lagartoverde](https://github.com/lagartoverde))
+* [#269](https://github.com/lblod/frontend-gelinkt-notuleren/pull/269) fix attachments number in the agendapoints screen ([@lagartoverde](https://github.com/lagartoverde))
+* [#263](https://github.com/lblod/frontend-gelinkt-notuleren/pull/263) improve import flow using updated import plugin ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#267](https://github.com/lblod/frontend-gelinkt-notuleren/pull/267) bumped appuniversum to 1.0.9 ([@Asergey91](https://github.com/Asergey91))
+* [#261](https://github.com/lblod/frontend-gelinkt-notuleren/pull/261) ran npm update ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 4
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.24.0-0 (2022-04-08)
 
 #### :rocket: Enhancement
