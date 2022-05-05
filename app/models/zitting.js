@@ -6,10 +6,11 @@ export default class ZittingModel extends Model {
   @attr('datetime') geeindigdOpTijdstip;
   @attr opLocatie;
   @attr afgeleidUit;
-  @attr( { defaultValue: "" } ) intro;
-  @attr( { defaultValue: "" } ) outro;
+  @attr({ defaultValue: '' }) intro;
+  @attr({ defaultValue: '' }) outro;
   @belongsTo('bestuursorgaan', { inverse: null }) bestuursorgaan;
-  @hasMany('behandeling-van-agendapunt', { inverse: null }) behandeldeAgendapunten;
+  @hasMany('behandeling-van-agendapunt', { inverse: null })
+  behandeldeAgendapunten;
   @belongsTo('editor-document', { inverse: null }) notulen;
   @hasMany('agenda', { inverse: null }) publicatieAgendas;
   @hasMany('agendapunt', { inverse: 'zitting' }) agendapunten;
@@ -18,6 +19,6 @@ export default class ZittingModel extends Model {
   @hasMany('mandataris', { inverse: null }) aanwezigenBijStart;
   @hasMany('mandataris', { inverse: null }) afwezigenBijStart;
   @hasMany('intermission', { inverse: 'zitting' }) intermissions;
-  @hasMany('versioned-behandeling', {inverse: 'zitting'}) versionedBehandelingen;
+  @hasMany('versioned-behandeling', { inverse: 'zitting' })
+  versionedBehandelingen;
 }
-

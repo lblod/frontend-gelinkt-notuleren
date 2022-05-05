@@ -8,6 +8,6 @@ module.exports = {
     },
     'no-implicit-this': {
       allow: ['unique-id'],
-    }
-  }
+    },
+  },
 };

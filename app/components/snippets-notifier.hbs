@@ -1,25 +1,19 @@
-{{#if this.showCard}}
-  <AuModal
-    @title="Er is relevante informatie uit een externe bron beschikbaar."
-    @modalOpen={{this.showCard}}
-    @closeModal={{this.close}} as |Modal|>
-    <Modal.Body>
-      <p>Maak in de template van uw zitting een besluit aan. Daar zal u de informatie kunnen invoegen.</p>
-    </Modal.Body>
-    <Modal.Footer>
-      <AuButton {{on "click" this.close}}>Begrepen</AuButton>
-    </Modal.Footer>
-  </AuModal>
+{{#if this.hasSnippets}}
+<AuAlert
+  @alertTitle="Informatie uit een externe bron beschikbaar om in te voegen"
+  @alertSkin="info"
+  @icon="info-circle"
+  @closable={{true}}
+>
+  <p>Maak een nieuw agendapunt of open een bestaand punt om de inhoud in te voegen.</p>
+</AuAlert>
 {{else if this.hasErrors}}
-  <AuModal
-    @title="Er is een probleem opgetreden met het ophalen van de informatie."
-    @modalOpen={{this.showCard}}
-    @closeModal={{this.close}} as |Modal|>
-    <Modal.Body>
-      <p>Sla uw document op en vernieuw, of neem contact op via <a href="mailto:digitaalABB@vlaanderen.be" class="au-c-link">digitaalABB@vlaanderen.be</a>.</p>
-    </Modal.Body>
-    <Modal.Footer>
-      <AuButton {{on "click" this.close}}>Begrepen</AuButton>
-    </Modal.Footer>
-  </AuModal>
+<AuAlert
+  @alertTitle="Ophalen van informatie gefaald"
+  @alertSkin="warning"
+  @icon="alert-triangle"
+  @closable={{true}}
+>
+  <p>Er is een probleem opgetreden met het ophalen van informatie uit een externe bron.</p>
+</AuAlert>
 {{/if}}

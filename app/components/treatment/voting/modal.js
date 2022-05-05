@@ -1,8 +1,8 @@
-import { inject as service } from "@ember/service";
-import { action } from "@ember/object";
-import { tracked } from "@glimmer/tracking";
-import Component from "@glimmer/component";
-import { task, restartableTask } from "ember-concurrency";
+import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import Component from '@glimmer/component';
+import { task, restartableTask } from 'ember-concurrency';
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
 /** @typedef {import("../../../models/bestuursorgaan").default} Bestuursorgaan*/
 /** @typedef {import("../../../models/stemming").default} Stemming*/
@@ -33,7 +33,9 @@ export default class TreatmentVotingModalComponent extends Component {
   @restartableTask
   /** @type {import("ember-concurrency").Task} */
   *fetchStemmingen() {
-    this.stemmingen = (yield this.args.behandeling.stemmingen).sortBy('position');
+    this.stemmingen = (yield this.args.behandeling.stemmingen).sortBy(
+      'position'
+    );
   }
 
   @task
@@ -41,8 +43,9 @@ export default class TreatmentVotingModalComponent extends Component {
   *saveStemming() {
     const isNew = this.editStemming.stemming.isNew;
 
-    if(isNew) {
-      this.editStemming.stemming.position = this.args.behandeling.stemmingen.length;
+    if (isNew) {
+      this.editStemming.stemming.position =
+        this.args.behandeling.stemmingen.length;
     }
     yield this.editStemming.saveTask.perform();
 
@@ -58,19 +61,19 @@ export default class TreatmentVotingModalComponent extends Component {
   @task
   /** @type {import("ember-concurrency").Task} */
   *addStemming() {
-    const richTreatment = yield this.store.query("behandeling-van-agendapunt", {
-      "filter[:id:]": this.args.behandeling.id,
-      include: "aanwezigen.bekleedt.bestuursfunctie"
+    const richTreatment = yield this.store.query('behandeling-van-agendapunt', {
+      'filter[:id:]': this.args.behandeling.id,
+      include: 'aanwezigen.bekleedt.bestuursfunctie',
     });
     const participants = richTreatment.firstObject.aanwezigen;
 
-    const stemmingToEdit = this.store.createRecord("stemming", {
-      onderwerp: "",
+    const stemmingToEdit = this.store.createRecord('stemming', {
+      onderwerp: '',
       geheim: false,
       aantalVoorstanders: 0,
       aantalTegenstanders: 0,
       aantalOnthouders: 0,
-      gevolg: "",
+      gevolg: '',
     });
     this.editMode = true;
     stemmingToEdit.aanwezigen.pushObjects(participants);

@@ -5,7 +5,11 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
   @service store;
 
   async model(params) {
-    return this.store.findRecord('behandeling-van-agendapunt', params.treatment_id, { include: 'onderwerp.zitting'});
+    return this.store.findRecord(
+      'behandeling-van-agendapunt',
+      params.treatment_id,
+      { include: 'onderwerp.zitting' }
+    );
   }
 
   setupController(controller) {

@@ -7,6 +7,6 @@ export default class ImportNewRoute extends Route {
 
   async beforeModel(transition) {
     await this.importRdfaSnippet.downloadSnippet(transition.to.queryParams);
-    this.router.transitionTo('inbox');
+    this.router.transitionTo('inbox.agendapoints');
   }
 }

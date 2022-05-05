@@ -2,16 +2,20 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { task, waitForProperty } from "ember-concurrency";
-import { DRAFT_FOLDER_ID, DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
+import { task } from 'ember-concurrency';
+import {
+  DRAFT_FOLDER_ID,
+  DRAFT_STATUS_ID,
+} from 'frontend-gelinkt-notuleren/utils/constants';
 import instantiateUuids from '@lblod/ember-rdfa-editor-standard-template-plugin/utils/instantiate-uuids';
 
 export default class DocumentCreatorComponent extends Component {
-  @tracked title = "";
+  @tracked title = '';
   @tracked type;
-  @tracked template
+  @tracked template;
   @tracked templateOptions = [];
   @tracked invalidTitle;
+  @tracked invalidTemplate;
   @tracked errorSaving;
 
   @service store;
@@ -25,7 +29,7 @@ export default class DocumentCreatorComponent extends Component {
 
   @action
   rollback() {
-    this.title = "";
+    this.title = '';
     this.invalidTitle = false;
     this.template = null;
     if (this.args.onRollback) {
@@ -42,6 +46,7 @@ export default class DocumentCreatorComponent extends Component {
   @action
   onSelectTemplate(template) {
     this.template = template;
+    this.validateTemplate();
   }
 
   get isSaving() {
@@ -49,17 +54,26 @@ export default class DocumentCreatorComponent extends Component {
   }
 
   validateTitle() {
-    if (this.title?.length > 0) {
+    //Length still needs to be > 0 with whitespaces removed
+    if (this.title?.trim().length > 0) {
       this.invalidTitle = false;
-    }
-    else {
+    } else {
       this.invalidTitle = true;
+    }
+  }
+
+  validateTemplate() {
+    if (this.template) {
+      this.invalidTemplate = false;
+    } else {
+      this.invalidTemplate = true;
     }
   }
 
   validateForm() {
     this.validateTitle();
-    return ! this.invalidTitle;
+    this.validateTemplate();
+    return !this.invalidTemplate && !this.invalidTitle;
   }
 
   @action
@@ -74,42 +88,48 @@ export default class DocumentCreatorComponent extends Component {
 
   @task
   *ensureTemplates() {
-    yield waitForProperty(this.rdfaEditorStandardTemplatePlugin, 'templates');
-    const templates = this.rdfaEditorStandardTemplatePlugin.templates;
-    this.templateOptions = this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt']);
+    const templates =
+      yield this.rdfaEditorStandardTemplatePlugin.fetchTemplates.perform();
+    this.templateOptions =
+      this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, [
+        'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
+      ]);
   }
 
   async buildTemplate() {
     if (this.template) {
       await this.template.reload(); // templatesForContext does not return body of template
       return instantiateUuids(this.template.body);
-    }
-    else
-      return "";
+    } else return '';
   }
 
   @task
   *persistDocument() {
     try {
-      this.errorSaving=null;
+      this.errorSaving = null;
       const creationDate = new Date();
       const generatedTemplate = yield this.buildTemplate();
       const editorDocument = this.store.createRecord('editor-document', {
         createdOn: creationDate,
         updatedOn: creationDate,
         content: generatedTemplate,
-        title: this.title
+        title: this.title.trim(),
       });
       yield editorDocument.save();
       const container = this.store.createRecord('document-container');
-      container.status = yield this.store.findRecord('concept', DRAFT_STATUS_ID);
-      container.folder = yield this.store.findRecord('editor-document-folder', DRAFT_FOLDER_ID);
+      container.status = yield this.store.findRecord(
+        'concept',
+        DRAFT_STATUS_ID
+      );
+      container.folder = yield this.store.findRecord(
+        'editor-document-folder',
+        DRAFT_FOLDER_ID
+      );
       container.publisher = this.currentSession.group;
       container.currentVersion = editorDocument;
       yield container.save();
       return container;
-    }
-    catch(e) {
+    } catch (e) {
       this.errorSaving = e.message;
     }
   }

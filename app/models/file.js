@@ -1,5 +1,4 @@
-import Model, { attr }from '@ember-data/model';
-
+import Model, { attr } from '@ember-data/model';
 
 export default class FileModel extends Model {
   @attr name;
@@ -8,7 +7,7 @@ export default class FileModel extends Model {
   @attr extension;
   @attr('datetime') created;
 
-  get humanReadableSize(){
+  get humanReadableSize() {
     //ripped from https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
     const bytes = this.size;
     const sizes = ['bytes', 'KB', 'MB', 'GB', 'TB'];
@@ -17,7 +16,7 @@ export default class FileModel extends Model {
     return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
   }
 
-  get downloadLink(){
+  get downloadLink() {
     return `/files/${this.id}/download?name=${this.name}`;
   }
 }

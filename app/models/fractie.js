@@ -12,6 +12,6 @@ export default class FractieModel extends Model {
     naam: 'http://www.w3.org/ns/regorg#legalName',
     fractietype: 'http://mu.semte.ch/vocabularies/ext/isFractietype',
     bestuursorganenInTijd: 'http://www.w3.org/ns/org#memberOf',
-    bestuurseenheid: 'http://www.w3.org/ns/org#linkedTo'
-  }
+    bestuurseenheid: 'http://www.w3.org/ns/org#linkedTo',
+  };
 }

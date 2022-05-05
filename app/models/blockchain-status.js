@@ -6,18 +6,30 @@ export default class BlockchainStatusModel extends Model {
   @attr description;
 
   get isUnpublished() {
-    return this.uri === 'http://mu.semte.ch/vocabularies/ext/signing/publication-status/unpublished';
+    return (
+      this.uri ===
+      'http://mu.semte.ch/vocabularies/ext/signing/publication-status/unpublished'
+    );
   }
 
   get isPublishing() {
-    return this.uri === 'http://mu.semte.ch/vocabularies/ext/signing/publication-status/publishing';
+    return (
+      this.uri ===
+      'http://mu.semte.ch/vocabularies/ext/signing/publication-status/publishing'
+    );
   }
 
   get isPublished() {
-    return this.uri === 'http://mu.semte.ch/vocabularies/ext/signing/publication-status/published';
+    return (
+      this.uri ===
+      'http://mu.semte.ch/vocabularies/ext/signing/publication-status/published'
+    );
   }
 
   get publicationFailed() {
-    return this.uri === 'http://mu.semte.ch/vocabularies/ext/signing/publication-status/publication_failed';
+    return (
+      this.uri ===
+      'http://mu.semte.ch/vocabularies/ext/signing/publication-status/publication_failed'
+    );
   }
 }

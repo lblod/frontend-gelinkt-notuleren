@@ -3,6 +3,101 @@
 
 
 
+
+## 2.24.0-0 (2022-04-08)
+
+#### :rocket: Enhancement
+* [#266](https://github.com/lblod/frontend-gelinkt-notuleren/pull/266) Bump editor to v0.55.2 and update plugins to new versions ([@abeforgit](https://github.com/abeforgit))
+
+#### :bug: Bug Fix
+* [#265](https://github.com/lblod/frontend-gelinkt-notuleren/pull/265) Trim title on validation and on saving Agendapoint ([@benjay10](https://github.com/benjay10))
+* [#264](https://github.com/lblod/frontend-gelinkt-notuleren/pull/264) Fixed off by one errors on adding agendapoints ([@benjay10](https://github.com/benjay10))
+
+#### :house: Internal
+* [#262](https://github.com/lblod/frontend-gelinkt-notuleren/pull/262) bump appuniversum to 1.0.3 ([@nvdk](https://github.com/nvdk))
+* [#259](https://github.com/lblod/frontend-gelinkt-notuleren/pull/259) Chore/remove ember wormhole ([@nvdk](https://github.com/nvdk))
+* [#246](https://github.com/lblod/frontend-gelinkt-notuleren/pull/246) bump template and decision type plugin ([@nvdk](https://github.com/nvdk))
+* [#260](https://github.com/lblod/frontend-gelinkt-notuleren/pull/260) Chore/upgrade editor ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 3
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Ben ([@benjay10](https://github.com/benjay10))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+
+## 2.23.1 (2022-03-30)
+
+#### :bug: Bug Fix
+* [#258](https://github.com/lblod/frontend-gelinkt-notuleren/pull/258) show actual notulen content for published notulen ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.23.0 (2022-03-25)
+
+#### :rocket: Enhancement
+* [#257](https://github.com/lblod/frontend-gelinkt-notuleren/pull/257) IRGN: fetch location options from registry codelist ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#256](https://github.com/lblod/frontend-gelinkt-notuleren/pull/256) bump roadsign regulation plugin to 0.7.2 ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.22.2 (2022-03-22)
+
+#### :bug: Bug Fix
+* [#255](https://github.com/lblod/frontend-gelinkt-notuleren/pull/255) fix validation on publishing notulen ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.22.1 (2022-03-18)
+
+#### :bug: Bug Fix
+* [#254](https://github.com/lblod/frontend-gelinkt-notuleren/pull/254) fix labels in the citation plugin modal ([@nvdk](https://github.com/nvdk))
+* [#253](https://github.com/lblod/frontend-gelinkt-notuleren/pull/253) Chore/upgrade roadsign regulation plugin ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.22.0 (2022-03-17)
+
+#### :rocket: Enhancement
+* [#252](https://github.com/lblod/frontend-gelinkt-notuleren/pull/252) improved regulation search + removed images from output ([@nvdk](https://github.com/nvdk))
+* [#249](https://github.com/lblod/frontend-gelinkt-notuleren/pull/249) Generate a final preview for the notulen taking into account public behandelings ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 2
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.21.1 (2022-03-14)
+
+#### :rocket: Enhancement
+* [#250](https://github.com/lblod/frontend-gelinkt-notuleren/pull/250) also update article number when reordering articles ([@nvdk](https://github.com/nvdk))
+* [#251](https://github.com/lblod/frontend-gelinkt-notuleren/pull/251) improve variable support: add support for multi select codelists  ([@nvdk](https://github.com/nvdk))
+* [#248](https://github.com/lblod/frontend-gelinkt-notuleren/pull/248) bump roadsign plugin from 0.3.3 to 0.5.1 ([@nvdk](https://github.com/nvdk))
+* [#247](https://github.com/lblod/frontend-gelinkt-notuleren/pull/247) make the template required when creating an agendapoint ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.21.0 (2022-02-25)
+
+#### :bug: Bug Fix
+* [#244](https://github.com/lblod/frontend-gelinkt-notuleren/pull/244) Fixing production builds "out of memory" problems ([@benjay10](https://github.com/benjay10))
+
+#### :house: Internal
+* [#243](https://github.com/lblod/frontend-gelinkt-notuleren/pull/243) Linting after upgrade 3.28 ([@benjay10](https://github.com/benjay10))
+* [#200](https://github.com/lblod/frontend-gelinkt-notuleren/pull/200) Internal/ember upgrade ([@nvdk](https://github.com/nvdk))
+* [#229](https://github.com/lblod/frontend-gelinkt-notuleren/pull/229) Bump nanoid from 3.1.29 to 3.2.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#241](https://github.com/lblod/frontend-gelinkt-notuleren/pull/241) Bump follow-redirects from 1.14.7 to 1.14.8 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#240](https://github.com/lblod/frontend-gelinkt-notuleren/pull/240) align both the browserlist and build targets ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 2
+- Ben ([@benjay10](https://github.com/benjay10))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.20.6 (2022-02-11)
 
 #### :rocket: Enhancement

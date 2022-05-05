@@ -14,7 +14,7 @@ export default class LanguageSelect extends Component {
     super(...arguments);
 
     if (!this.selected) {
-      const defaultOption = this.options.find(o => o.id == 'nl');
+      const defaultOption = this.options.find((o) => o.id == 'nl');
       this.selectLanguage(defaultOption);
     }
   }

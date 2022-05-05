@@ -12,21 +12,20 @@ export default class MockLoginController extends Controller {
   @tracked size = 10;
 
   @task
-  * queryStore() {
+  *queryStore() {
     const filter = { provider: 'https://github.com/lblod/mock-login-service' };
-    if (this.gemeente)
-      filter.gebruiker = { 'achternaam': this.gemeente};
+    if (this.gemeente) filter.gebruiker = { achternaam: this.gemeente };
     const accounts = yield this.store.query('account', {
       include: 'gebruiker,gebruiker.bestuurseenheden',
       filter: filter,
       page: { size: this.size, number: this.page },
-      sort: 'gebruiker.achternaam'
+      sort: 'gebruiker.achternaam',
     });
     return accounts;
   }
 
   @restartableTask
-  * updateSearch(value) {
+  *updateSearch(value) {
     yield timeout(500);
     this.page = 0;
     this.gemeente = value;

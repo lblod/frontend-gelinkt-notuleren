@@ -7,9 +7,9 @@ export default class MandaatModel extends Model {
   @hasMany('bestuursorgaan', { inverse: 'bevat' }) bevatIn;
 
   rdfaBindings = {
-    class: "http://data.vlaanderen.be/ns/mandaat#Mandaat",
-    aantalHouders: "http://data.vlaanderen.be/ns/mandaat#aantalHouders",
-    bestuursfunctie: "http://www.w3.org/ns/org#role",
-    bevatIn: "http://www.w3.org/ns/org#hasPost"
-  }
+    class: 'http://data.vlaanderen.be/ns/mandaat#Mandaat',
+    aantalHouders: 'http://data.vlaanderen.be/ns/mandaat#aantalHouders',
+    bestuursfunctie: 'http://www.w3.org/ns/org#role',
+    bevatIn: 'http://www.w3.org/ns/org#hasPost',
+  };
 }

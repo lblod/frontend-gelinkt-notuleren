@@ -18,74 +18,77 @@ module.exports = function (environment) {
     },
     APP: {
       '@lblod/ember-rdfa-editor-date-plugin': {
-        allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY',  'DD.MM.YYYY'],
-        outputDateFormat: 'D MMMM YYYY'
+        allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY'],
+        outputDateFormat: 'D MMMM YYYY',
       },
       analytics: {
-        appDomain: "{{ANALYTICS_APP_DOMAIN}}",
-        plausibleScript: "{{ANALYTICS_PLAUSIBLE_SCRIPT}}"
-      }
+        appDomain: '{{ANALYTICS_APP_DOMAIN}}',
+        plausibleScript: '{{ANALYTICS_PLAUSIBLE_SCRIPT}}',
+      },
     },
     roadsignRegulationPlugin: {
-      endpoint: "{{MOW_REGISTRY_ENDPOINT}}"
+      endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
     },
     templateVariablePlugin: {
-      endpoint: "{{MOW_REGISTRY_ENDPOINT}}"
+      endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
     },
     manual: {
-      baseUrl: "{{MANUAL_BASE_URL}}",
-      notuleren: "{{MANUAL_NOTULEREN}}",
-      signing: "{{MANUAL_SIGNING}}",
-      publish: "{{MANUAL_PUBLISH}}",
-      mandatees: "{{MANUAL_MANDATEES}}",
-      signee: "{{MANUAL_SIGNEE}}",
-      publisher: "{{MANUAL_PUBLISHER}}",
-      print: "{{MANUAL_PRINT}}"
+      baseUrl: '{{MANUAL_BASE_URL}}',
+      notuleren: '{{MANUAL_NOTULEREN}}',
+      signing: '{{MANUAL_SIGNING}}',
+      publish: '{{MANUAL_PUBLISH}}',
+      mandatees: '{{MANUAL_MANDATEES}}',
+      signee: '{{MANUAL_SIGNEE}}',
+      publisher: '{{MANUAL_PUBLISHER}}',
+      print: '{{MANUAL_PRINT}}',
     },
     featureFlags: {
       'language-select': false,
       'editor-html-paste': true,
       'editor-extended-html-paste': true,
       'acmidm-switch': true,
-      'attachments': true
+      attachments: true,
     },
     browserUpdate: {
-      vs: {f:-3,c:-3},
+      vs: { f: -3, c: -3 },
       style: 'corner',
       l: 'nl',
-      shift_page_down: false
+      shift_page_down: false,
     },
     torii: {
       disableRedirectInitializer: true,
       providers: {
         'acmidm-oauth2': {
-          apiKey: "{{OAUTH_API_KEY}}",
-          baseUrl: "{{OAUTH_BASE_URL}}",
+          apiKey: '{{OAUTH_API_KEY}}',
+          baseUrl: '{{OAUTH_BASE_URL}}',
           scope: 'openid rrn vo profile abb_gelinktNotuleren',
-          redirectUri: "{{OAUTH_REDIRECT_URL}}",
-          logoutUrl: "{{OAUTH_LOGOUT_URL}}",
-          returnUrl: "{{OAUTH_SWITCH_URL}}"
-        }
-      }
+          redirectUri: '{{OAUTH_REDIRECT_URL}}',
+          logoutUrl: '{{OAUTH_LOGOUT_URL}}',
+          returnUrl: '{{OAUTH_SWITCH_URL}}',
+        },
+      },
     },
-    environmentName: "{{ENVIRONMENT_NAME}}",
+    environmentName: '{{ENVIRONMENT_NAME}}',
     publication: {
-      baseUrl: "{{PUBLICATION_BASE_URL}}"
-    }
+      baseUrl: '{{PUBLICATION_BASE_URL}}',
+    },
   };
 
   if (environment === 'development') {
-    ENV.manual.baseUrl="https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/";
-    ENV.manual.notuleren="#notuleren";
-    ENV.manual.signing="#ondertekenen-en-publiceren";
-    ENV.manual.publish="#ondertekenen-en-publiceren";
-    ENV.manual.mandatees="#mandatenbeheer";
-    ENV.manual.signee="#gebruikersbeheer";
-    ENV.manual.publisher="#gebruikersbeheer";
-    ENV.manual.print="";
+    ENV.manual.baseUrl =
+      'https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/';
+    ENV.manual.notuleren = '#notuleren';
+    ENV.manual.signing = '#ondertekenen-en-publiceren';
+    ENV.manual.publish = '#ondertekenen-en-publiceren';
+    ENV.manual.mandatees = '#mandatenbeheer';
+    ENV.manual.signee = '#gebruikersbeheer';
+    ENV.manual.publisher = '#gebruikersbeheer';
+    ENV.manual.print = '';
     ENV.featureFlags.attachments = true;
-    ENV.roadsignRegulationPlugin.endpoint = "https://dev.roadsigns.lblod.info/sparql";
-    ENV.templateVariablePlugin.endpoint = "https://dev.roadsigns.lblod.info/sparql";
+    ENV.roadsignRegulationPlugin.endpoint =
+      'https://dev.roadsigns.lblod.info/sparql';
+    ENV.templateVariablePlugin.endpoint =
+      'https://dev.roadsigns.lblod.info/sparql';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

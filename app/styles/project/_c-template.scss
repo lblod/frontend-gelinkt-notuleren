@@ -284,12 +284,6 @@
   [property="ext:agendapuntenTable"] [property="besluit:heeftAgendapunt"] {
     display: block;
   }
-
-  [typeof="besluit:Artikel"] {
-    [property="eli:number"] {
-      display: block;
-    }
-  }
 }
 
 // List

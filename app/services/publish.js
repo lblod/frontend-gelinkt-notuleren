@@ -49,10 +49,34 @@ export default class PublishService extends Service {
 
   /**
    * @param {string} jobUrl
-   * @param {string} statusUrl*/
+   * @param {number} pollingDelayMs
+   * @param {number} maxIterations
+   */
   @task
-  * fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600 ) {
-    const job = yield fetch(jobUrl);
+  *fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600) {
+    return yield this.createJobTask.perform(
+      jobUrl,
+      {},
+      pollingDelayMs,
+      maxIterations
+    );
+  }
+
+  /**
+   * @param {string} url
+   * @param {string} method
+   * @param {object} options fetch options
+   * @param {number} pollingDelayMs
+   * @param {number} maxIterations
+   */
+  @task
+  *createJobTask(
+    url,
+    options = {},
+    pollingDelayMs = 1000,
+    maxIterations = 600
+  ) {
+    const job = yield fetch(url, options);
     const jobData = yield job.json();
     const jobId = jobData.data.attributes.jobId;
 
@@ -64,11 +88,21 @@ export default class PublishService extends Service {
     } while (resp.status === 404 && maxIterations > 0);
 
     if (resp.status !== 200) {
-      throw new Error(yield resp.text());
+      let errors = yield resp.text();
+      try {
+        const json = yield resp.json();
+        if (json?.errors) {
+          errors = JSON.stringify(json.errors);
+        }
+      } catch (e) {
+        // throwing body text
+        throw new Error(errors);
+      }
+      // throwing stringified json body
+      throw new Error(errors);
     } else {
       return yield resp.json();
     }
-
   }
 
   /**
@@ -148,21 +182,24 @@ export default class PublishService extends Service {
   async fetchExtract(treatment) {
     const agendapoint = await treatment.get('onderwerp');
     const meeting = await agendapoint.get('zitting');
-    const versionedTreatments = await this.store.query('versioned-behandeling',
-                                                       {
-                                                         filter: { behandeling: {":id:": treatment.id}},
-                                                         include: 'behandeling.onderwerp,signed-resources,published-resource'
-                                                       });
-    if (versionedTreatments.length > 0 ) {
+    const versionedTreatments = await this.store.query(
+      'versioned-behandeling',
+      {
+        filter: { behandeling: { ':id:': treatment.id } },
+        include: 'behandeling.onderwerp,signed-resources,published-resource',
+      }
+    );
+    if (versionedTreatments.length > 0) {
       return new Extract(
         treatment.id,
         agendapoint.get('position'),
         versionedTreatments.get('firstObject'),
         []
       );
-    }
-    else {
-      const extractPreview = this.store.createRecord('extract-preview', {treatment});
+    } else {
+      const extractPreview = this.store.createRecord('extract-preview', {
+        treatment,
+      });
       await extractPreview.save();
       const versionedTreatment = this.store.createRecord(
         'versioned-behandeling',
