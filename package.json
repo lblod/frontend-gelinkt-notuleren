@@ -26,7 +26,7 @@
     "test:ember": "ember test"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^1.0.12",
+    "@appuniversum/ember-appuniversum": "^1.0.15",
     "@codemirror/basic-setup": "^0.19.0",
     "@codemirror/lang-html": "^0.19.3",
     "@codemirror/lang-xml": "^0.19.2",
@@ -42,7 +42,7 @@
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.7.0",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.17.0",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "^0.8.0",
-    "@lblod/ember-rdfa-editor-rdfa-date-plugin": "^0.1.0",
+    "@lblod/ember-rdfa-editor-rdfa-date-plugin": "^0.1.1",
     "@lblod/ember-rdfa-editor-roadsign-regulation-plugin": "^0.8.0",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.12.0",
     "@lblod/ember-rdfa-editor-template-variable-plugin": "^0.5.0",
