@@ -10,6 +10,7 @@ export default class ZittingManageZittingsdataComponent extends Component {
   @tracked geeindigdOpTijdstip;
   @tracked opLocatie;
   @tracked bestuursorgaan;
+  @tracked dateError=false;
 
   constructor() {
     super(...arguments);
@@ -51,5 +52,16 @@ export default class ZittingManageZittingsdataComponent extends Component {
   @action
   changeDate(targetProperty, value) {
     this[targetProperty] = value;
+  }
+
+  @action
+  changeEndDate(value) {
+    if(value < this.gestartOpTijdstip){
+      this.dateError = true;
+    }
+    else{
+      this.geeindigdOpTijdstip = value;
+      this.dateError = false;
+    }
   }
 }
