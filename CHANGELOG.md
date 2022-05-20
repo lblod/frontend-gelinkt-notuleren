@@ -4,6 +4,16 @@
 
 
 
+
+## 2.24.1 (2022-05-20)
+
+#### :bug: Bug Fix
+* [#278](https://github.com/lblod/frontend-gelinkt-notuleren/pull/278) Bump editor to v0.56.6 ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 2.24.0 (2022-05-05)
 
 #### :rocket: Enhancement
