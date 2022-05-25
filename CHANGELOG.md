@@ -5,6 +5,16 @@
 
 
 
+
+## 2.24.2 (2022-05-25)
+
+#### :bug: Bug Fix
+* [#279](https://github.com/lblod/frontend-gelinkt-notuleren/pull/279) Bump editor to 0.56.7 to fix bug with copying text ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 2.24.1 (2022-05-20)
 
 #### :bug: Bug Fix
