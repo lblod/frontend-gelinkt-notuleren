@@ -37,7 +37,7 @@
     "@glimmer/tracking": "^1.0.4",
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-mock-login": "0.6.0",
-    "@lblod/ember-rdfa-editor": "^0.56.6",
+    "@lblod/ember-rdfa-editor": "^0.56.7",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.3.0",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.6.0",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.16.0",
