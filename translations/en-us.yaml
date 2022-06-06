@@ -59,7 +59,7 @@ publish:
   excerptErrorMessage: Something went wrong fetching the excerpt.
   publishButtonLabel: Sign and publish
   toggleAllPublicLabel: Toggle all public
-  seriousError: An error occured, please try again at a later time. If the error persists please contact gelinkt-notuleren@vlaanderen.be and include the information below.
+  seriousError: An error occured, please try again at a later time. If the error persists please contact GelinktNotuleren and include the information below.
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save

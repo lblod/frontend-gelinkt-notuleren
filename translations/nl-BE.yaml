@@ -59,7 +59,7 @@ publish:
   agendapoint: Agendapunt
   publishButtonLabel: Onderteken en publiceer
   toggleAllPublicLabel: Maak de inhoud van alle agendapunten publiek
-  seriousError: Er heeft zich een fout voorgedaan, gelieve op een later tijdstip nogmaals te proberen. Als de fout aanhoudt contacteer gelinkt-notuleren@vlaanderen.be met onderstaande informatie.
+  seriousError: Er heeft zich een fout voorgedaan, gelieve op een later tijdstip nogmaals te proberen. Als de fout aanhoudt contacteer GelinktNotuleren@vlaanderen.be met onderstaande informatie.
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
