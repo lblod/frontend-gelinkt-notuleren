@@ -16,7 +16,7 @@ export default class InboxTrashRoute extends Route.extend(DataTableRouteMixin) {
   mergeQueryOptions(params) {
     const query = {
       include: 'status,current-version',
-      'filter[status][id]': EDITOR_FOLDERS.TRASH ,
+      'filter[status][id]': EDITOR_FOLDERS.TRASH,
     };
 
     if (params.title && params.title.length > 0)

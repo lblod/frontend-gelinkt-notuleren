@@ -14,7 +14,7 @@ export default class InboxRoute extends Route {
       'filter[folder][:id:]': EDITOR_FOLDERS.IRG_ARCHIVE,
       page: {
         number: 0,
-        size: 1
+        size: 1,
       },
     };
     return this.store.query('document-container', options);

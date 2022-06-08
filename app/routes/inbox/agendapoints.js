@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import { EDITOR_FOLDERS } from '../../config/constants';
-import {inject as service} from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default class InboxAgendapointsRoute extends Route {
   @service store;
@@ -9,7 +9,7 @@ export default class InboxAgendapointsRoute extends Route {
   queryParams = {
     page: { refreshModel: true },
     sort: { refreshModel: true },
-    title: { refreshModel: true }
+    title: { refreshModel: true },
   };
 
   async model(params) {
@@ -17,7 +17,7 @@ export default class InboxAgendapointsRoute extends Route {
       sort: params.sort,
       include: 'status,current-version',
       'filter[status][:id:]':
-      'a1974d071e6a47b69b85313ebdcef9f7,7186547b61414095aa2a4affefdcca67,ef8e4e331c31430bbdefcdb2bdfbcc06', // concept, geagendeerd or published
+        'a1974d071e6a47b69b85313ebdcef9f7,7186547b61414095aa2a4affefdcca67,ef8e4e331c31430bbdefcdb2bdfbcc06', // concept, geagendeerd or published
       'filter[folder][:id:]': EDITOR_FOLDERS.DECISION_DRAFTS,
       page: {
         number: params.page,
