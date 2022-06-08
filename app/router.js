@@ -16,6 +16,7 @@ Router.map(function () {
     this.route('meetings', function () {
       this.route('new');
     });
+    this.route('irg-archive');
   });
   this.route('mock-login');
   this.route('login');

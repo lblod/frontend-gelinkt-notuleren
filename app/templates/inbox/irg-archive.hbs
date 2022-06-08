@@ -1,0 +1,29 @@
+{{page-title (t "inbox.irgArchive.pageTitle")}}
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage='' @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
+  <table.menu as |menu|>
+    <menu.general>
+      <AuToolbar class="au-o-box" @size="large" as |Group|>
+        <Group>
+          <AuHeading @skin="2">
+            {{t 'inbox.irgArchive.pageTitle'}}
+          </AuHeading>
+        </Group>
+        <Group class="au-c-toolbar__group--center">
+          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.irgArchive.searchPlaceholder'}} />
+        </Group>
+      </AuToolbar>
+    </menu.general>
+  </table.menu>
+  <table.content as |c|>
+    <c.header>
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.titleLabel'}} />
+    </c.header>
+    <c.body as |container|>
+      {{#let container.currentVersion as |row|}}
+      <td>
+        <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
+      </td>
+      {{/let}}
+    </c.body>
+  </table.content>
+</AuDataTable>

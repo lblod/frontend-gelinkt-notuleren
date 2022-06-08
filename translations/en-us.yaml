@@ -37,6 +37,10 @@ inbox:
       errorSaving: Something went wrong while creating the agendapoint
       create: Create
       cancel: Back
+  irgArchive:
+    pageTitle: IRG Archive
+    searchPlaceholder: Search on title of regulatory statement
+    titleLabel: Title of regulatory statement
   trash:
     pageTitle: Recycle bin
     title: Recycle bin

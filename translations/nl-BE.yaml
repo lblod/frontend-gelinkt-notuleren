@@ -37,6 +37,10 @@ inbox:
       errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
       create: Aanmaken
       cancel: Terug
+  irgArchive:
+    pageTitle: IRG Archief
+    searchPlaceholder: Zoek op titel van reglement
+    titleLabel: Titel reglement
   trash:
     pageTitle: Prullenmand
     title: Prullenmand

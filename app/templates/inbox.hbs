@@ -32,6 +32,12 @@
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
+              <AuNavigationLink @route="inbox.irg-archive">
+                <AuIcon @icon="draft" @alignment="left" />
+                {{t "inbox.irgArchive.pageTitle"}}
+              </AuNavigationLink>
+            </li>
+            <li class="au-c-list-navigation__item">
               <AuNavigationLink @route="inbox.trash">
                 <AuIcon @icon="bin" @alignment="left" />
                 {{t "inbox.menu.trash"}}
