@@ -60,4 +60,8 @@ Router.map(function () {
       this.route('notulen');
     });
   });
+
+  this.route('irg-archive', function () {
+    this.route('show', { path: ':id' });
+  });
 });

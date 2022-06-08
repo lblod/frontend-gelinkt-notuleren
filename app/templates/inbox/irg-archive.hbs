@@ -23,7 +23,7 @@
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
       <td>
-        <LinkTo @route="" @documentContainer={{container}} @readOnly={{true}}/>
+        <LinkTo @route="irg-archive.show" @model={{container.id}} />
       </td>
       <td>
         {{container.type.label}}
