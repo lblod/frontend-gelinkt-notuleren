@@ -8,7 +8,7 @@ export default class IrgArchiveShowRoute extends Route {
   async model(params) {
     const container = await this.store.findRecord(
       'document-container',
-      params.id,
+      params.id
     );
     return RSVP.hash({
       documentContainer: container,

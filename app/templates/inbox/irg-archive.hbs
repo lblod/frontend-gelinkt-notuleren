@@ -21,7 +21,6 @@
       <AuDataTableThSortable @field="identifier" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.identifierLabel'}} />
     </c.header>
     <c.body as |container|>
-      {{#let container.currentVersion as |row|}}
       <td>
         <LinkTo @route="irg-archive.show" @model={{container.id}} />
       </td>
@@ -31,7 +30,6 @@
       <td>
         {{container.identifier}}
       </td>
-      {{/let}}
     </c.body>
   </table.content>
 </AuDataTable>
