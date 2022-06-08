@@ -87,7 +87,8 @@ export default class MeetingsPublishNotulenController extends Controller {
       );
     } else {
       try {
-        const { content, errors } = yield this.createPrePublishedResource.perform();
+        const { content, errors } =
+          yield this.createPrePublishedResource.perform();
         const rslt = yield this.store.createRecord('versioned-notulen', {
           zitting: this.model,
           content: content,
@@ -96,8 +97,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         this.signedResources = [];
         this.notulen = rslt;
         this.validationErrors = errors;
-      }
-      catch(e) {
+      } catch (e) {
         console.error(e);
         this.errors = [e];
       }
