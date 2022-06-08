@@ -1,31 +1,31 @@
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
 import { EDITOR_FOLDERS } from '../../config/constants';
-export default class InboxAgendapointsRoute extends Route.extend(
-  DataTableRouteMixin
-) {
-  modelName = 'document-container';
+import {inject as service} from '@ember/service';
+
+export default class InboxAgendapointsRoute extends Route {
+  @service store;
 
   queryParams = {
     page: { refreshModel: true },
-    size: { refreshModel: true },
     sort: { refreshModel: true },
-    filter: { refreshModel: true },
-    // filter params
-    title: { refreshModel: true },
+    title: { refreshModel: true }
   };
 
-  mergeQueryOptions(params) {
-    const query = {
+  async model(params) {
+    const options = {
+      sort: params.sort,
       include: 'status,current-version',
       'filter[status][:id:]':
-        'a1974d071e6a47b69b85313ebdcef9f7,7186547b61414095aa2a4affefdcca67,ef8e4e331c31430bbdefcdb2bdfbcc06', // concept, geagendeerd or published
-      'filter[folder][:id:]': EDITOR_FOLDERS.DECISION_DRAFTS
+      'a1974d071e6a47b69b85313ebdcef9f7,7186547b61414095aa2a4affefdcca67,ef8e4e331c31430bbdefcdb2bdfbcc06', // concept, geagendeerd or published
+      'filter[folder][:id:]': EDITOR_FOLDERS.DECISION_DRAFTS,
+      page: {
+        number: params.page,
+      },
     };
-
-    if (params.title && params.title.length > 0)
-      query['filter[current-version][title]'] = params.title;
-
-    return query;
+    if (params.title) {
+      options['filter[current-version][title]'] = params.title;
+    }
+    return this.store.query('document-container', options);
   }
 }
