@@ -31,12 +31,14 @@
                 {{t "inbox.menu.agendapoints"}}
               </AuNavigationLink>
             </li>
+            {{#if this.model.length}}
             <li class="au-c-list-navigation__item">
               <AuNavigationLink @route="inbox.irg-archive">
                 <AuIcon @icon="draft" @alignment="left" />
                 {{t "inbox.irgArchive.pageTitle"}}
               </AuNavigationLink>
             </li>
+            {{/if}}
             <li class="au-c-list-navigation__item">
               <AuNavigationLink @route="inbox.trash">
                 <AuIcon @icon="bin" @alignment="left" />
