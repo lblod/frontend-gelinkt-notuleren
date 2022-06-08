@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
-
+import { EDITOR_FOLDERS } from '../../config/constants';
 export default class InboxTrashRoute extends Route.extend(DataTableRouteMixin) {
   modelName = 'document-container';
 
@@ -16,7 +16,7 @@ export default class InboxTrashRoute extends Route.extend(DataTableRouteMixin) {
   mergeQueryOptions(params) {
     const query = {
       include: 'status,current-version',
-      'filter[status][id]': '5A8304E8C093B00009000010', // trash
+      'filter[status][id]': EDITOR_FOLDERS.TRASH ,
     };
 
     if (params.title && params.title.length > 0)
