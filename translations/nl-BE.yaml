@@ -41,6 +41,8 @@ inbox:
     pageTitle: IRG Archief
     searchPlaceholder: Zoek op titel van reglement
     titleLabel: Titel reglement
+    typeLabel: Wegtype
+    identifierLabel: Referentie nummer
   trash:
     pageTitle: Prullenmand
     title: Prullenmand

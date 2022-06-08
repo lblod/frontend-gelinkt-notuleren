@@ -17,11 +17,19 @@
   <table.content as |c|>
     <c.header>
       <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.titleLabel'}} />
+      <AuDataTableThSortable @field="type.label" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.typeLabel'}} />
+      <AuDataTableThSortable @field="identifier" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.identifierLabel'}} />
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
       <td>
-        <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
+        <LinkTo @route="" @documentContainer={{container}} @readOnly={{true}}/>
+      </td>
+      <td>
+        {{container.type.label}}
+      </td>
+      <td>
+        {{container.identifier}}
       </td>
       {{/let}}
     </c.body>

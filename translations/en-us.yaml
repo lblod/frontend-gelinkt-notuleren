@@ -41,6 +41,8 @@ inbox:
     pageTitle: IRG Archive
     searchPlaceholder: Search on title of regulatory statement
     titleLabel: Title of regulatory statement
+    typeLabel: Road type
+    identifierLabel: Reference number
   trash:
     pageTitle: Recycle bin
     title: Recycle bin
