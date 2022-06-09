@@ -81,7 +81,7 @@ export default class DocumentCreatorComponent extends Component {
     if (this.validateForm()) {
       const container = await this.persistDocument.perform();
       if (this.args.onCreate) {
-        this.args.onCreate(container);
+        this.args.onCreate(container, this.template);
       }
     }
   }
