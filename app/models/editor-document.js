@@ -3,12 +3,15 @@ import defaultContext from '../config/editor-document-default-context';
 import { htmlSafe } from '@ember/template';
 
 export default class EditorDocumentModel extends Model {
+  @attr identifier;
   @attr uri;
   @attr title;
   @attr content;
   @attr('string', { defaultValue: defaultContext }) context;
   @attr('datetime') createdOn;
   @attr('datetime') updatedOn;
+
+  @belongsTo('concept', { inverse: null }) type;
   @belongsTo('editor-document', { inverse: 'nextVersion' })
   previousVersion;
   @belongsTo('editor-document', { inverse: 'previousVersion' })

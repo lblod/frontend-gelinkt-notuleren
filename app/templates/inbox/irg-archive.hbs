@@ -17,18 +17,18 @@
   <table.content as |c|>
     <c.header>
       <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.titleLabel'}} />
-      <AuDataTableThSortable @field="type.label" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.typeLabel'}} />
-      <AuDataTableThSortable @field="identifier" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.identifierLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.type.label" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.typeLabel'}} />
+      <AuDataTableThSortable @field ="currentVersion.identifier" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.identifierLabel'}} />
     </c.header>
     <c.body as |container|>
       <td>
-        <LinkTo @route="irg-archive.show" @model={{container.id}} />
+        <LinkTo @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo> 
       </td>
       <td>
-        {{container.type.label}}
+        {{container.currentVersion.type.label}}
       </td>
       <td>
-        {{container.identifier}}
+        {{container.currentVersion.identifier}}
       </td>
     </c.body>
   </table.content>
