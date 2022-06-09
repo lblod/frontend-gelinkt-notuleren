@@ -29,7 +29,7 @@ module.exports = function (environment) {
       endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
     },
     'ember-plausible': {
-      enabled: environment === 'production',
+      enabled: false,
       domain: '{{PLAUSIBLE_APP_DOMAIN}}',
       apiHost: '{{PLAUSIBLE_API_ENDPOINT}}',
       trackLocalhost: true,
