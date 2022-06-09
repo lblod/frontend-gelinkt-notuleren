@@ -28,6 +28,15 @@ module.exports = function (environment) {
     templateVariablePlugin: {
       endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
     },
+    'ember-plausible': {
+      enabled: environment === 'production',
+      domain: '{{PLAUSIBLE_APP_DOMAIN}}',
+      apiHost: '{{PLAUSIBLE_API_ENDPOINT}}',
+      trackLocalhost: true,
+      hashMode: false,
+      enableAutoPageviewTracking: true,
+      enableAutoOutboundTracking: true,
+    },
     manual: {
       baseUrl: '{{MANUAL_BASE_URL}}',
       notuleren: '{{MANUAL_NOTULEREN}}',
