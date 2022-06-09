@@ -113,6 +113,7 @@
   // App container
   .au-c-app,
   .au-c-main-container {
+    margin: 2rem !important;
     overflow: auto !important;
     height: auto !important;
   }
@@ -167,7 +168,7 @@
   }
 
   .au-c-meeting-chrome .au-c-button {
-    display: none !important;
+    opacity: 0 !important;
   }
 
   .au-c-meeting-chrome strong {
