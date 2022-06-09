@@ -4,6 +4,24 @@
 
 
 
+## 2.25.0 (2022-06-09)
+
+#### :rocket: Enhancement
+* [#276](https://github.com/lblod/frontend-gelinkt-notuleren/pull/276) added validation to meeting end date/time ([@Asergey91](https://github.com/Asergey91))
+* [#277](https://github.com/lblod/frontend-gelinkt-notuleren/pull/277) bump rdfa-date-plugin to 0.1.1 ([@benjay10](https://github.com/benjay10))
+* [#270](https://github.com/lblod/frontend-gelinkt-notuleren/pull/270) Made attachments pill clickable and go to the uploading part of the behandeling ([@lagartoverde](https://github.com/lagartoverde))
+* [#274](https://github.com/lblod/frontend-gelinkt-notuleren/pull/274) Enhancement/editor redesign ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#281](https://github.com/lblod/frontend-gelinkt-notuleren/pull/281) Fix chrome print bug ([@Dietr](https://github.com/Dietr))
+
+#### Committers: 5
+- Ben ([@benjay10](https://github.com/benjay10))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.24.0 (2022-05-05)
 
 #### :rocket: Enhancement
