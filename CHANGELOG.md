@@ -4,6 +4,14 @@
 
 
 
+## 2.25.1 (2022-06-09)
+
+#### :rocket: Enhancement
+* [#284](https://github.com/lblod/frontend-gelinkt-notuleren/pull/284) bump editor to version 0.59.1 ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.25.0 (2022-06-09)
 
 #### :rocket: Enhancement
