@@ -4,6 +4,22 @@
 
 
 
+## 2.26.0 (2022-06-10)
+
+#### :rocket: Enhancement
+* [#286](https://github.com/lblod/frontend-gelinkt-notuleren/pull/286) Plausible custom event 'Create agendapoint' ([@benjay10](https://github.com/benjay10))
+* [#285](https://github.com/lblod/frontend-gelinkt-notuleren/pull/285) Introducing ember-plausible ([@benjay10](https://github.com/benjay10))
+* [#283](https://github.com/lblod/frontend-gelinkt-notuleren/pull/283) irg archive ([@nvdk](https://github.com/nvdk))
+* [#159](https://github.com/lblod/frontend-gelinkt-notuleren/pull/159) Feature/delete meetings ([@Asergey91](https://github.com/Asergey91))
+
+#### :bug: Bug Fix
+* [#287](https://github.com/lblod/frontend-gelinkt-notuleren/pull/287) Fixing unexpected closing of AuModal ([@benjay10](https://github.com/benjay10))
+
+#### Committers: 3
+- Ben ([@benjay10](https://github.com/benjay10))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.25.1 (2022-06-09)
 
 #### :rocket: Enhancement
