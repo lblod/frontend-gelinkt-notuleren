@@ -1,0 +1,28 @@
+{{page-title this.model.editorDocument.title}}
+<AppChrome
+  @editorDocument={{this.model.editorDocument}}
+  @documentContainer={{this.model.documentContainer}}
+  @exportHtmlFunction={{this.download}}
+  @readOnly={{true}}
+/>
+
+<div class="au-c-body-container">
+  <div class="au-c-rdfa-editor">
+    <div class="say-container say-container--sidebar-left say-container--paper say-container--sidebar-right">
+      <div class="say-container__main">
+          <div class="au-o-box au-o-box--small au-u-background-gray-100">
+            <AuAlert @alertIcon="info-circle" @alertTitle="Niet editeerbaar"  @alertSkin="info" @alertSize="small" class="au-u-margin-bottom-none">
+              <p>Dit is een gearchiveerd document en kan niet worden gewijzigd.</p>
+            </AuAlert>
+          </div>
+        <div class="say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled">
+          <div class="say-editor__paper">
+            <div class="say-editor__inner say-content say-content--disabled">
+              {{ this.model.editorDocument.htmlSafeContent }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
