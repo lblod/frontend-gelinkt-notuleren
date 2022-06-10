@@ -37,6 +37,12 @@ inbox:
       errorSaving: Something went wrong while creating the agendapoint
       create: Create
       cancel: Back
+  irgArchive:
+    pageTitle: IRG Archive
+    searchPlaceholder: Search on title of regulatory statement
+    titleLabel: Title of regulatory statement
+    typeLabel: Road type
+    identifierLabel: Reference number
   trash:
     pageTitle: Recycle bin
     title: Recycle bin
@@ -344,6 +350,12 @@ rdfaEditorContainer:
   saving: Saving
   makingCopy: Making copy
 meetings:
+  delete:
+    delete: Delete
+    confirmMessage: Are you sure you want to delete this meeting
+    warning: This action cannot be undone
+    confirmButton: Yes, Delete this meeting
+    back: Back
   edit:
     intro:
       save: Save

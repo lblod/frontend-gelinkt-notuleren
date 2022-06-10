@@ -16,6 +16,7 @@ Router.map(function () {
     this.route('meetings', function () {
       this.route('new');
     });
+    this.route('irg-archive');
   });
   this.route('mock-login');
   this.route('login');
@@ -58,5 +59,9 @@ Router.map(function () {
       });
       this.route('notulen');
     });
+  });
+
+  this.route('irg-archive', function () {
+    this.route('show', { path: ':id' });
   });
 });
