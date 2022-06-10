@@ -13,7 +13,7 @@ export default class InboxIrgArchiveRoute extends Route {
   async model(params) {
     const options = {
       sort: params.sort,
-      include: 'current-version',
+      include: 'current-version.type',
       'filter[folder][:id:]': EDITOR_FOLDERS.IRG_ARCHIVE,
       page: {
         number: params.page,
