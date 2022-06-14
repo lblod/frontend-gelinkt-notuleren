@@ -24,6 +24,7 @@ inbox:
       save: Create meeting
       cancel: Back
   agendapoints:
+    return: Return to the overview of agendapoints
     pageTitle: Agendapoints
     searchPlaceholder: Type the title of an agendapoint
     noDataMessage: No documents
@@ -38,6 +39,7 @@ inbox:
       create: Create
       cancel: Back
   irgArchive:
+    return: Return to the archive
     pageTitle: IRG Archive
     searchPlaceholder: Search on title of regulatory statement
     titleLabel: Title of regulatory statement

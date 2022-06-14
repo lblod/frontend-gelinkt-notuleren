@@ -24,6 +24,7 @@ inbox:
       save: Zitting aanmaken
       cancel: Terug
   agendapoints:
+    return: Terug naar overzicht agendapunten
     pageTitle: Agendapunten
     searchPlaceholder: Zoek titel agendapunt
     noDataMessage: Geen documenten
@@ -38,6 +39,7 @@ inbox:
       create: Aanmaken
       cancel: Terug
   irgArchive:
+    return: Terug naar overzicht irg-archief
     pageTitle: IRG Archief
     searchPlaceholder: Zoek op titel van reglement
     titleLabel: Titel reglement
