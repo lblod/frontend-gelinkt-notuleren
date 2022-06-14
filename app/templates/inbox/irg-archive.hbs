@@ -1,16 +1,17 @@
 {{page-title (t "inbox.irgArchive.pageTitle")}}
+
 <AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage='' @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large" as |Group|>
-        <Group>
+      <AuToolbar class="au-o-box" @size="large">
+        <AuToolbarGroup>
           <AuHeading @skin="2">
             {{t 'inbox.irgArchive.pageTitle'}}
           </AuHeading>
-        </Group>
-        <Group class="au-c-toolbar__group--center">
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--center">
           <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.irgArchive.searchPlaceholder'}} />
-        </Group>
+        </AuToolbarGroup>
       </AuToolbar>
     </menu.general>
   </table.menu>
@@ -22,7 +23,7 @@
     </c.header>
     <c.body as |container|>
       <td>
-        <LinkTo @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</LinkTo> 
+        <AuLink @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</AuLink> 
       </td>
       <td>
         {{container.currentVersion.type.label}}
