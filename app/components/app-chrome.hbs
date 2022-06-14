@@ -2,9 +2,9 @@
   <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none">
     <AuToolbarGroup>
-      <AuLink @route="inbox.agendapoints" @skin="secondary">
+      <AuLink @route={{@returnRoute}} @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
-        Terug naar overzicht agendapunten
+        {{@returnRouteText}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
     </AuToolbarGroup>
