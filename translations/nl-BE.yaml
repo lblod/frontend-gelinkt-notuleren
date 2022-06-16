@@ -39,7 +39,7 @@ inbox:
       create: Aanmaken
       cancel: Terug
   irgArchive:
-    return: Terug naar overzicht irg-archief
+    return: Terug naar overzicht IRG archief
     pageTitle: IRG Archief
     searchPlaceholder: Zoek op titel van reglement
     titleLabel: Titel reglement
