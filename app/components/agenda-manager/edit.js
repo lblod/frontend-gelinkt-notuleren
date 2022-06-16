@@ -28,11 +28,6 @@ export default class AgendaManagerEditComponent extends Component {
   }
 
   @action
-  updateGeplandOpenbaar() {
-    this.oldGeplandOpenbaar = this.args.itemToEdit.geplandOpenbaar;
-  }
-
-  @action
   cancel() {
     this.args.onCancel();
   }
