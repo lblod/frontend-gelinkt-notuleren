@@ -88,14 +88,15 @@ export default class PublishService extends Service {
     } while (resp.status === 404 && maxIterations > 0);
 
     if (resp.status !== 200) {
-      let errors = yield resp.text();
+      let errors;
       try {
         const json = yield resp.json();
         if (json?.errors) {
-          errors = JSON.stringify(json.errors);
+          errors = json.errors[0]?.title || JSON.stringify(json.errors);
         }
       } catch (e) {
         // throwing body text
+        errors = yield resp.text();
         throw new Error(errors);
       }
       // throwing stringified json body
