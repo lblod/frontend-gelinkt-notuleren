@@ -4,6 +4,8 @@
   @exportHtmlFunction={{this.download}}
   @readOnly={{true}}
   @copyAgendapunt={{if this.readOnly undefined (perform this.copyAgendapunt)}}
+  @returnRoute="inbox.agendapoints"
+  @returnRouteText={{t 'inbox.agendapoints.return'}}
 />
 
 <div class="au-c-body-container">

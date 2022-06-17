@@ -12,6 +12,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
   @tracked errors;
+  @tracked validationErrors;
   @tracked signedResources = [];
   @tracked publishedResource;
   @tracked publicBehandelingUris = [];
@@ -28,6 +29,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   resetController() {
     this.notulen = null;
     this.errors = null;
+    this.validationErrors = null;
     this.signedResources = [];
     this.publishedResource = null;
     this.publicBehandelingUris = [];
@@ -84,16 +86,21 @@ export default class MeetingsPublishNotulenController extends Controller {
         })
       );
     } else {
-      const { content, errors } =
-        yield this.createPrePublishedResource.perform();
-      const rslt = yield this.store.createRecord('versioned-notulen', {
-        zitting: this.model,
-        content: content,
-      });
-      this.publishedResource = undefined;
-      this.signedResources = [];
-      this.notulen = rslt;
-      this.errors = errors;
+      try {
+        const { content, errors } =
+          yield this.createPrePublishedResource.perform();
+        const rslt = yield this.store.createRecord('versioned-notulen', {
+          zitting: this.model,
+          content: content,
+        });
+        this.publishedResource = undefined;
+        this.signedResources = [];
+        this.notulen = rslt;
+        this.validationErrors = errors;
+      } catch (e) {
+        console.error(e);
+        this.errors = [e];
+      }
     }
     if (this.status !== 'published') {
       const treatments = yield this.fetchTreatments.perform();

@@ -24,6 +24,7 @@ inbox:
       save: Create meeting
       cancel: Back
   agendapoints:
+    return: Return to the overview of agendapoints
     pageTitle: Agendapoints
     searchPlaceholder: Type the title of an agendapoint
     noDataMessage: No documents
@@ -38,6 +39,7 @@ inbox:
       create: Create
       cancel: Back
   irgArchive:
+    return: Return to the archive
     pageTitle: IRG Archive
     searchPlaceholder: Search on title of regulatory statement
     titleLabel: Title of regulatory statement
@@ -65,6 +67,7 @@ publish:
   excerptErrorMessage: Something went wrong fetching the excerpt.
   publishButtonLabel: Sign and publish
   toggleAllPublicLabel: Toggle all public
+  seriousError: An error occured, please try again at a later time. If the error persists please contact GelinktNotuleren and include the information below.
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Save
