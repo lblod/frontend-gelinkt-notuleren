@@ -4,6 +4,21 @@
 
 
 
+## 2.27.0 (2022-06-17)
+
+#### :rocket: Enhancement
+* [#280](https://github.com/lblod/frontend-gelinkt-notuleren/pull/280) improve error reporting if preview of notulen fails ([@nvdk](https://github.com/nvdk))
+* [#282](https://github.com/lblod/frontend-gelinkt-notuleren/pull/282) bump rdfa-date-plugin to 0.2.0: enables manually adding an annotated date ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#288](https://github.com/lblod/frontend-gelinkt-notuleren/pull/288) IRG archive: fixed linting, fixed nan on archive pagination, fixed filtering, fixed return link ([@Asergey91](https://github.com/Asergey91))
+* [#289](https://github.com/lblod/frontend-gelinkt-notuleren/pull/289) update package version of citaten-plugin: fixes confirmation popup on leaving edit route ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 3
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.26.0 (2022-06-10)
 
 #### :rocket: Enhancement
