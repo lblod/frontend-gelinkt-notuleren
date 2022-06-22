@@ -8,42 +8,6 @@ export default class MeetingsEditRoute extends Route {
     const zitting = await this.store.findRecord('zitting', params.id, {
       include: 'bestuursorgaan,secretaris,voorzitter,intermissions',
     });
-    const publicationFilter = {
-      filter: {
-        state: 'gepubliceerd',
-        zitting: {
-          id: params.id,
-        },
-      },
-    };
-    const versionedNotulen = await this.store.query(
-      'versioned-notulen',
-      publicationFilter
-    );
-    const versionedBesluitenLijsten = await this.store.query(
-      'versioned-besluiten-lijst',
-      publicationFilter
-    );
-    const versionedBehandelingen = await this.store.query(
-      'versioned-behandeling',
-      publicationFilter
-    );
-    const agendas = await this.store.query('agenda', {
-      filter: {
-        'agenda-status': 'gepubliceerd',
-        zitting: {
-          id: params.id,
-        },
-      },
-    });
-    const publishedResourcesCount =
-      agendas.length +
-      versionedBehandelingen.length +
-      versionedBesluitenLijsten.length +
-      versionedNotulen.length;
-    return {
-      zitting,
-      publishedResourcesCount,
-    };
+    return zitting;
   }
 }

@@ -1,18 +1,20 @@
-<AuButton {{on "click" (fn (mut this.displayDeleteModal) true)}} @skin="tertiary" @alert="true" role="menuitem">
-  <AuIcon @icon="bin" @alignment="left" />
-  {{t "meetings.delete.delete"}}
-</AuButton>
-{{#if this.displayDeleteModal}}
-  <AuModal
-    @modalTitle={{t "meetings.delete.confirmMessage"}}
-    @modalOpen={{this.displayDeleteModal}}
-    @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
-    <Modal.Body>
-      <p>{{t "meetings.delete.warning"}}</p>
-    </Modal.Body>
-    <Modal.Footer>
-      <AuButton @disabled={{this.deleteMeeting.isRunning}} @alert={{true}} {{on "click" (perform this.deleteMeeting)}}>{{t "meetings.delete.confirmButton"}}</AuButton>
-      <AuButton @loading={{this.deleteMeeting.isRunning}} @disabled={{this.deleteMeeting.isRunning}} @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>{{t "meetings.delete.back"}}</AuButton>
-    </Modal.Footer>
-  </AuModal>
+{{#if this.visible}}
+  <AuButton {{on "click" (fn (mut this.displayDeleteModal) true)}} @skin="tertiary" @alert="true" role="menuitem">
+    <AuIcon @icon="bin" @alignment="left" />
+    {{t "meetings.delete.delete"}}
+  </AuButton>
+  {{#if this.displayDeleteModal}}
+    <AuModal
+      @modalTitle={{t "meetings.delete.confirmMessage"}}
+      @modalOpen={{this.displayDeleteModal}}
+      @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
+      <Modal.Body>
+        <p>{{t "meetings.delete.warning"}}</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <AuButton @disabled={{this.deleteMeeting.isRunning}} @alert={{true}} {{on "click" (perform this.deleteMeeting)}}>{{t "meetings.delete.confirmButton"}}</AuButton>
+        <AuButton @loading={{this.deleteMeeting.isRunning}} @disabled={{this.deleteMeeting.isRunning}} @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>{{t "meetings.delete.back"}}</AuButton>
+      </Modal.Footer>
+    </AuModal>
+  {{/if}}
 {{/if}}
