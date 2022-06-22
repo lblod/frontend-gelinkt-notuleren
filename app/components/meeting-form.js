@@ -37,7 +37,6 @@ export default class MeetingForm extends Component {
   }
 
   get deletable() {
-    console.log(this.zitting);
     return !this.readOnly && this.args.publishedResourcesCount === 0;
   }
 
