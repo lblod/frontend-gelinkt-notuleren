@@ -1,3 +1,5 @@
+import generateExportFromHtmlBody from './generate-export-from-html-body';
+
 export default function generateExportFromEditorDocument(editorDocument) {
   const context = JSON.parse(editorDocument.context);
   let prefixes = Object.entries(context.prefix)
@@ -10,18 +12,5 @@ export default function generateExportFromEditorDocument(editorDocument) {
         ${editorDocument.content}
       </div>
   `;
-  const title = editorDocument.title;
-  var element = document.createElement('a');
-  element.setAttribute(
-    'href',
-    'data:text/plain;charset=utf-8,' + encodeURIComponent(body)
-  );
-  element.setAttribute('download', `${title}.html`);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
+  generateExportFromHtmlBody(editorDocument.title, body);
 }
