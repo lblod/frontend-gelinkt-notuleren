@@ -6,8 +6,7 @@ export default class MeetingsEditRoute extends Route {
 
   async model(params) {
     const zitting = await this.store.findRecord('zitting', params.id, {
-      include:
-        'bestuursorgaan,secretaris,voorzitter,intermissions,publicatie-agendas',
+      include: 'bestuursorgaan,secretaris,voorzitter,intermissions',
     });
     const publicationFilter = {
       filter: {
@@ -29,7 +28,14 @@ export default class MeetingsEditRoute extends Route {
       'versioned-behandeling',
       publicationFilter
     );
-    const agendas = await zitting.get('publicatieAgendas');
+    const agendas = await this.store.query('agenda', {
+      filter: {
+        'agenda-status': 'gepubliceerd',
+        zitting: {
+          id: params.id,
+        },
+      },
+    });
     const publishedResourcesCount =
       agendas.length +
       versionedBehandelingen.length +
