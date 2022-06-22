@@ -36,6 +36,11 @@ export default class MeetingForm extends Component {
     return !this.zitting.isNew && this.behandelingen?.length > 0;
   }
 
+  get deletable() {
+    console.log(this.zitting);
+    return !this.readOnly && this.args.publishedResourcesCount === 0;
+  }
+
   @task
   *loadData() {
     if (this.zitting.get('id')) {
