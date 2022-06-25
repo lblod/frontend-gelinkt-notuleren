@@ -17,6 +17,8 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     showRdfa: false,
     showRdfaHighlight: false,
     showRdfaHover: false,
+    showPaper: true,
+    showSidebar: true,
   };
 
   get text() {
