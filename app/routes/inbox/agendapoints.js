@@ -29,8 +29,10 @@ export default class InboxAgendapointsRoute extends Route {
       options['filter[current-version][title]'] = params.title;
     }
     const agendapoints = await this.store.query('document-container', options);
-    if (params.title && !agendapoints.length) {
-      this.router.replaceWith('inbox.agendapoints', { queryParams: {...params, page: 0 }});
+    if (params.page && params.title && !agendapoints.length) {
+      this.router.replaceWith('inbox.agendapoints', {
+        queryParams: { ...params, page: 0 },
+      });
     } else {
       return agendapoints;
     }
