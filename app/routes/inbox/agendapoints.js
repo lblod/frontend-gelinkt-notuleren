@@ -8,6 +8,7 @@ export default class InboxAgendapointsRoute extends Route {
   queryParams = {
     page: { refreshModel: true },
     sort: { refreshModel: true },
+    size: { refreshModel: true },
     title: { refreshModel: true },
   };
 
@@ -20,6 +21,7 @@ export default class InboxAgendapointsRoute extends Route {
       'filter[folder][:id:]': EDITOR_FOLDERS.DECISION_DRAFTS,
       page: {
         number: params.page,
+        size: params.size,
       },
     };
     if (params.title) {
