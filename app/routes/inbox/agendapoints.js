@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default class InboxAgendapointsRoute extends Route {
   @service store;
+  @service router;
 
   queryParams = {
     page: { refreshModel: true },
@@ -27,6 +28,11 @@ export default class InboxAgendapointsRoute extends Route {
     if (params.title) {
       options['filter[current-version][title]'] = params.title;
     }
-    return this.store.query('document-container', options);
+    const agendapoints = await this.store.query('document-container', options);
+    if (params.title && !agendapoints.length) {
+      this.router.replaceWith('inbox.agendapoints', { queryParams: {...params, page: 0 }});
+    } else {
+      return agendapoints;
+    }
   }
 }
