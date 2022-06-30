@@ -3,10 +3,10 @@
         @onSubmit={{perform this.submitTask}}
         as |Form|>
   <AuModal @title={{t "manageAgendaZittingModal.modalTitle"}}
-           @modalOpen={{@visible}}
-           @size="default"
-           @closeModal={{this.cancel}}
-           as |Modal|
+          @modalOpen={{@visible}}
+          @size="default"
+          @closeModal={{this.cancel}}
+          as |Modal|
   >
     <Modal.Body>
       {{#if this.submitTask.isRunning}}
