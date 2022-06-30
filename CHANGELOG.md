@@ -4,6 +4,22 @@
 
 
 
+## 2.28.0 (2022-06-30)
+
+#### :rocket: Enhancement
+* [#293](https://github.com/lblod/frontend-gelinkt-notuleren/pull/293) added validation which enables/disables the delete button of a meeting based on the number of attached published resources ([@elpoelma](https://github.com/elpoelma))
+* [#292](https://github.com/lblod/frontend-gelinkt-notuleren/pull/292) added export html functionality to irg archive document view ([@elpoelma](https://github.com/elpoelma))
+* [#273](https://github.com/lblod/frontend-gelinkt-notuleren/pull/273) changing the geplandOpenbaar of an agendapoint affects the openbaar of a behandeling ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#294](https://github.com/lblod/frontend-gelinkt-notuleren/pull/294) Use paper view for intro and outro editor ([@Dietr](https://github.com/Dietr))
+* [#292](https://github.com/lblod/frontend-gelinkt-notuleren/pull/292) added export html functionality to irg archive document view ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 3
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.27.1 (2022-06-30)
 
 #### :house: Internal
