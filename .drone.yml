@@ -46,7 +46,7 @@ steps:
     purge: true
 trigger:
   branch:
-    - development
+    - master
   event:
     exclude:
     - pull_request
