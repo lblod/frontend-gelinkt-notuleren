@@ -4,6 +4,15 @@
 
 
 
+## 2.27.1 (2022-06-30)
+
+#### :house: Internal
+* [#291](https://github.com/lblod/frontend-gelinkt-notuleren/pull/291) bump ember promise helpers to 2.0.0 ([@nvdk](https://github.com/nvdk))
+* [#290](https://github.com/lblod/frontend-gelinkt-notuleren/pull/290) bump ay11-refocus to 3.0.0 ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.27.0 (2022-06-17)
 
 #### :rocket: Enhancement
