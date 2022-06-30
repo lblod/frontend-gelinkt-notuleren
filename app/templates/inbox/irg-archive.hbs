@@ -10,7 +10,7 @@
           </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center">
-          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.irgArchive.searchPlaceholder'}} />
+          <AuInput @icon="search" @iconAlignment="right" @width="block" @value={{this.searchValue}} placeholder={{t 'inbox.irgArchive.searchPlaceholder'}} {{on "input" (perform this.updateFilter)}}/>
         </Group>
       </AuToolbar>
     </menu.general>
