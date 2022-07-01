@@ -8,7 +8,7 @@ export default class InboxIrgArchiveRoute extends Route {
   queryParams = {
     page: { refreshModel: true },
     sort: { refreshModel: true },
-    title: { refreshModel: true },
+    filter: { refreshModel: true },
   };
 
   async model(params) {
@@ -20,8 +20,8 @@ export default class InboxIrgArchiveRoute extends Route {
         number: params.page,
       },
     };
-    if (params.title) {
-      options['filter[current-version][title]'] = params.title;
+    if (params.filter) {
+      options['filter[current-version][title]'] = params.filter;
     }
     return this.store.query('document-container', options);
   }
