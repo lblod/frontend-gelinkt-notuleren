@@ -4,6 +4,14 @@
 
 
 
+## 2.28.1 (2022-07-01)
+
+#### :bug: Bug Fix
+* [#296](https://github.com/lblod/frontend-gelinkt-notuleren/pull/296) Bugfix/search and pagination ([@Asergey91](https://github.com/Asergey91))
+
+#### Committers: 1
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.28.0 (2022-06-30)
 
 #### :rocket: Enhancement
