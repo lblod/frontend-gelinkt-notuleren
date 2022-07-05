@@ -24,6 +24,9 @@
       <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{plain-date @zitting.geplandeStart}}</h1>
     </AuToolbarGroup>
     <AuToolbarGroup>
+      {{#unless this.readOnly}}
+        <DeleteMeeting @meeting={{@zitting}}/>
+      {{/unless}}
       {{#if this.isComplete}}
         <AuButton @skin="secondary" {{on "click" this.goToPublish}}>
           {{t "meetingForm.publishButton"}}

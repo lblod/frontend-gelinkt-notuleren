@@ -30,13 +30,18 @@
             {{/in-element}}
           {{/if}}
         </PublicationPreview>
-        {{#if (and this.errors this.errors.length)}}
+        {{#if (and this.validationErrors this.validationErrors.length)}}
           <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertSkin="error">
             <ul>
-              {{#each this.errors as |error|}}
+              {{#each this.validationErrors as |error|}}
                 <li>{{error}}</li>
               {{/each}}
             </ul>
+          </AuAlert>
+      {{else if (and this.errors this.errors.length)}}
+          <AuAlert @alertIcon="alert-triangle" @alertSkin="error">
+            <p>{{t 'publish.seriousError'}}</p>
+            <code>{{this.errors.firstObject}}</code>
           </AuAlert>
       {{else}}
           {{!-- Sign --}}

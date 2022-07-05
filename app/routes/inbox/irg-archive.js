@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
-import { EDITOR_FOLDERS } from '../../config/constants';
 import { inject as service } from '@ember/service';
+import { EDITOR_FOLDERS } from '../../config/constants';
 
-export default class InboxAgendapointsRoute extends Route {
+export default class InboxIrgArchiveRoute extends Route {
   @service store;
 
   queryParams = {
@@ -14,10 +14,8 @@ export default class InboxAgendapointsRoute extends Route {
   async model(params) {
     const options = {
       sort: params.sort,
-      include: 'status,current-version',
-      'filter[status][:id:]':
-        'a1974d071e6a47b69b85313ebdcef9f7,7186547b61414095aa2a4affefdcca67,ef8e4e331c31430bbdefcdb2bdfbcc06', // concept, geagendeerd or published
-      'filter[folder][:id:]': EDITOR_FOLDERS.DECISION_DRAFTS,
+      include: 'current-version.type',
+      'filter[folder][:id:]': EDITOR_FOLDERS.IRG_ARCHIVE,
       page: {
         number: params.page,
       },

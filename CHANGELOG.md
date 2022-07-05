@@ -4,6 +4,117 @@
 
 
 
+## 2.28.1 (2022-07-01)
+
+#### :bug: Bug Fix
+* [#296](https://github.com/lblod/frontend-gelinkt-notuleren/pull/296) Bugfix/search and pagination ([@Asergey91](https://github.com/Asergey91))
+
+#### Committers: 1
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
+## 2.28.0 (2022-06-30)
+
+#### :rocket: Enhancement
+* [#293](https://github.com/lblod/frontend-gelinkt-notuleren/pull/293) added validation which enables/disables the delete button of a meeting based on the number of attached published resources ([@elpoelma](https://github.com/elpoelma))
+* [#292](https://github.com/lblod/frontend-gelinkt-notuleren/pull/292) added export html functionality to irg archive document view ([@elpoelma](https://github.com/elpoelma))
+* [#273](https://github.com/lblod/frontend-gelinkt-notuleren/pull/273) changing the geplandOpenbaar of an agendapoint affects the openbaar of a behandeling ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#294](https://github.com/lblod/frontend-gelinkt-notuleren/pull/294) Use paper view for intro and outro editor ([@Dietr](https://github.com/Dietr))
+* [#292](https://github.com/lblod/frontend-gelinkt-notuleren/pull/292) added export html functionality to irg archive document view ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 3
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.27.1 (2022-06-30)
+
+#### :house: Internal
+* [#291](https://github.com/lblod/frontend-gelinkt-notuleren/pull/291) bump ember promise helpers to 2.0.0 ([@nvdk](https://github.com/nvdk))
+* [#290](https://github.com/lblod/frontend-gelinkt-notuleren/pull/290) bump ay11-refocus to 3.0.0 ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.27.0 (2022-06-17)
+
+#### :rocket: Enhancement
+* [#280](https://github.com/lblod/frontend-gelinkt-notuleren/pull/280) improve error reporting if preview of notulen fails ([@nvdk](https://github.com/nvdk))
+* [#282](https://github.com/lblod/frontend-gelinkt-notuleren/pull/282) bump rdfa-date-plugin to 0.2.0: enables manually adding an annotated date ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#288](https://github.com/lblod/frontend-gelinkt-notuleren/pull/288) IRG archive: fixed linting, fixed nan on archive pagination, fixed filtering, fixed return link ([@Asergey91](https://github.com/Asergey91))
+* [#289](https://github.com/lblod/frontend-gelinkt-notuleren/pull/289) update package version of citaten-plugin: fixes confirmation popup on leaving edit route ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 3
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
+## 2.26.0 (2022-06-10)
+
+#### :rocket: Enhancement
+* [#286](https://github.com/lblod/frontend-gelinkt-notuleren/pull/286) Plausible custom event 'Create agendapoint' ([@benjay10](https://github.com/benjay10))
+* [#285](https://github.com/lblod/frontend-gelinkt-notuleren/pull/285) Introducing ember-plausible ([@benjay10](https://github.com/benjay10))
+* [#283](https://github.com/lblod/frontend-gelinkt-notuleren/pull/283) irg archive ([@nvdk](https://github.com/nvdk))
+* [#159](https://github.com/lblod/frontend-gelinkt-notuleren/pull/159) Feature/delete meetings ([@Asergey91](https://github.com/Asergey91))
+
+#### :bug: Bug Fix
+* [#287](https://github.com/lblod/frontend-gelinkt-notuleren/pull/287) Fixing unexpected closing of AuModal ([@benjay10](https://github.com/benjay10))
+
+#### Committers: 3
+- Ben ([@benjay10](https://github.com/benjay10))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
+## 2.25.1 (2022-06-09)
+
+#### :rocket: Enhancement
+* [#284](https://github.com/lblod/frontend-gelinkt-notuleren/pull/284) bump editor to version 0.59.1 ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
+## 2.25.0 (2022-06-09)
+
+#### :rocket: Enhancement
+* [#276](https://github.com/lblod/frontend-gelinkt-notuleren/pull/276) added validation to meeting end date/time ([@Asergey91](https://github.com/Asergey91))
+* [#277](https://github.com/lblod/frontend-gelinkt-notuleren/pull/277) bump rdfa-date-plugin to 0.1.1 ([@benjay10](https://github.com/benjay10))
+* [#270](https://github.com/lblod/frontend-gelinkt-notuleren/pull/270) Made attachments pill clickable and go to the uploading part of the behandeling ([@lagartoverde](https://github.com/lagartoverde))
+* [#274](https://github.com/lblod/frontend-gelinkt-notuleren/pull/274) Enhancement/editor redesign ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#281](https://github.com/lblod/frontend-gelinkt-notuleren/pull/281) Fix chrome print bug ([@Dietr](https://github.com/Dietr))
+
+#### Committers: 5
+- Ben ([@benjay10](https://github.com/benjay10))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
+## 2.24.0 (2022-05-05)
+
+#### :rocket: Enhancement
+* [#275](https://github.com/lblod/frontend-gelinkt-notuleren/pull/275) bump editor: improved whitespace handling and table inserts ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#268](https://github.com/lblod/frontend-gelinkt-notuleren/pull/268) Fix alignment of datepicker dialogs in modal windows ([@Dietr](https://github.com/Dietr))
+* [#271](https://github.com/lblod/frontend-gelinkt-notuleren/pull/271) Removed style that displayed article number as block ([@lagartoverde](https://github.com/lagartoverde))
+* [#269](https://github.com/lblod/frontend-gelinkt-notuleren/pull/269) fix attachments number in the agendapoints screen ([@lagartoverde](https://github.com/lagartoverde))
+* [#263](https://github.com/lblod/frontend-gelinkt-notuleren/pull/263) improve import flow using updated import plugin ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#267](https://github.com/lblod/frontend-gelinkt-notuleren/pull/267) bumped appuniversum to 1.0.9 ([@Asergey91](https://github.com/Asergey91))
+* [#261](https://github.com/lblod/frontend-gelinkt-notuleren/pull/261) ran npm update ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 4
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- Sergey Andreev ([@Asergey91](https://github.com/Asergey91))
+
 ## 2.24.0-0 (2022-04-08)
 
 #### :rocket: Enhancement

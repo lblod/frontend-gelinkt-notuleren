@@ -28,11 +28,15 @@ Next we clone this repository, install the dependencies, and boot the developmen
 You can visit the live reloading site at http://localhost:4200
 
 ## Configuration via docker environment variables
+
 This frontend can be configured at runtime. It will get the environment variables prefixed by EMBER_ and match them with the variables defined in the frontend's configuration. When the docker container is started it will update /app/index.html to match the provided configuration.
 
-### analytics through plausible
-* `EMBER_ANALYTICS_APP_DOMAIN`: domain the app is deployed on, e.g. "gelinkt-notuleren.vlaanderen.be". 
-* `EMBER_ANALYTICS_PLAUSIBLE_SCRIPT`: url of the script provided by your plausible instance, e.g. "https://analytics.mydomain.com/js/plausible.js"
+### Analytics through Plausible
+
+Plausible analytics is handled by the [ember-plausible addon](https://github.com/redpencilio/ember-plausible).
+
+* `EMBER_PLAUSIBLE_APP_DOMAIN`: domain the app is deployed on, e.g. "gelinkt-notuleren.vlaanderen.be". 
+* `EMBER_PLAUSIBLE_API_ENDPOINT`: URL of the Plausible instance to post analytics data, e.g. "https://analytics.mydomain.com"
 
 ### authentication through ACM/IDM
 * `EMBER_OAUTH_API_KEY`

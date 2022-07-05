@@ -24,6 +24,7 @@ inbox:
       save: Zitting aanmaken
       cancel: Terug
   agendapoints:
+    return: Terug naar overzicht agendapunten
     pageTitle: Agendapunten
     searchPlaceholder: Zoek titel agendapunt
     noDataMessage: Geen documenten
@@ -37,6 +38,13 @@ inbox:
       errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
       create: Aanmaken
       cancel: Terug
+  irgArchive:
+    return: Terug naar overzicht IRG archief
+    pageTitle: IRG Archief
+    searchPlaceholder: Zoek op titel van reglement
+    titleLabel: Titel reglement
+    typeLabel: Wegtype
+    identifierLabel: Referentie nummer
   trash:
     pageTitle: Prullenmand
     title: Prullenmand
@@ -59,6 +67,7 @@ publish:
   agendapoint: Agendapunt
   publishButtonLabel: Onderteken en publiceer
   toggleAllPublicLabel: Maak de inhoud van alle agendapunten publiek
+  seriousError: Er heeft zich een fout voorgedaan, gelieve op een later tijdstip nogmaals te proberen. Als de fout aanhoudt contacteer GelinktNotuleren@vlaanderen.be met onderstaande informatie.
 behandelingVanAgendapunten:
   documentLink: "document link"
   saveButton: Opslaan
@@ -76,6 +85,7 @@ behandelingVanAgendapunten:
   needsParticipants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
   editDocument: "Bewerk document"
 meetingForm:
+  dateWarning: U kunt geen einddatum kiezen die vóór de startdatum ligt.
   incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
   backButton: Terug naar overzicht zittingen
   scheduledText: Zitting gepland op
@@ -342,6 +352,12 @@ rdfaEditorContainer:
   saving: Bezig met opslaan
   makingCopy: Kopie aan het maken
 meetings:
+  delete:
+    delete: Verwijderen
+    confirmMessage: Weet u zeker dat u deze zitting wilt verwijderen?
+    warning: Deze actie kan niet ongedaan gemaakt worden
+    confirmButton: Ja, deze zitting verwijderen
+    back: Terug
   edit:
     intro:
       save: Opslaan
