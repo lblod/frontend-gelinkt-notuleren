@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "2.24.0-0",
+  "version": "2.28.1",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -18,6 +18,7 @@
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel 'lint:!(fix)'",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
+    "lint:errors": "eslint . --quiet",
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
@@ -50,7 +51,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
     "date-fns": "^2.28.0",
-    "ember-a11y-refocus": "^1.0.0",
+    "ember-a11y-refocus": "^3.0.0",
     "ember-auto-import": "^2.4.1",
     "ember-browser-update": "^0.1.0",
     "ember-cached-decorator-polyfill": "^0.1.3",
@@ -83,7 +84,7 @@
     "ember-page-title": "^6.2.2",
     "ember-plausible": "^0.1.0",
     "ember-power-select": "^5.0.4",
-    "ember-promise-helpers": "^1.0.9",
+    "ember-promise-helpers": "^2.0.0",
     "ember-qunit": "^5.1.5",
     "ember-resolver": "^8.0.3",
     "ember-simple-auth": "^4.2.1",
