@@ -18,6 +18,10 @@ $au-brand-divider-rotation     : -20deg !default;
   box-shadow: 0 1px 3px rgba($au-gray-900, .1), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
 }
 
+.au-c-app-chrome-container {
+  height: calc(100vh - 9.6rem);
+}
+
 .au-c-app-chrome__entity {
   position: relative;
   font-weight: $au-medium;

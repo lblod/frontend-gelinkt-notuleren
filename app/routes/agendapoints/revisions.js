@@ -4,7 +4,9 @@ import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 
 export default class AgendapointsRevisionsRoute extends Route {
+  @service currentSession;
   @service store;
+  @service router;
 
   async model(params) {
     const container = await this.store.findRecord(
