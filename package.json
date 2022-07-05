@@ -122,5 +122,8 @@
     "last 2 Chrome version",
     "last 2 Firefox version",
     "last 2 Edge version"
-  ]
+  ],
+  "dependencies": {
+    "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.2.3"
+  }
 }

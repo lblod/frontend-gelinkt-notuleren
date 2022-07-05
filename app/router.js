@@ -64,4 +64,5 @@ Router.map(function () {
   this.route('irg-archive', function () {
     this.route('show', { path: ':id' });
   });
+  this.route('regulatory-statements');
 });
