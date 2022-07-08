@@ -39,6 +39,7 @@
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-mock-login": "0.6.0",
     "@lblod/ember-rdfa-editor": "^0.60.1",
+    "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.2.3",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.4.0",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.7.0",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.17.3",
@@ -110,9 +111,7 @@
     "tracked-built-ins": "^2.0.1",
     "tracked-toolbox": "^1.2.3",
     "webpack": "^5.70.0",
-    "xml-formatter": "^2.6.1",
-    "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.2.3"
-
+    "xml-formatter": "^2.6.1"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
@@ -127,5 +126,8 @@
   ],
   "volta": {
     "node": "16.16.0"
+  },
+  "dependencies": {
+    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.2.3"
   }
 }
