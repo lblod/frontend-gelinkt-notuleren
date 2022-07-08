@@ -38,10 +38,10 @@
     "@glimmer/tracking": "^1.0.4",
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-mock-login": "0.6.0",
-    "@lblod/ember-rdfa-editor": "^0.59.1",
+    "@lblod/ember-rdfa-editor": "^0.60.1",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.4.0",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.7.0",
-    "@lblod/ember-rdfa-editor-citaten-plugin": "^0.17.1",
+    "@lblod/ember-rdfa-editor-citaten-plugin": "^0.17.3",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "^0.8.0",
     "@lblod/ember-rdfa-editor-rdfa-date-plugin": "^0.2.0",
     "@lblod/ember-rdfa-editor-roadsign-regulation-plugin": "^0.8.0",
@@ -122,5 +122,8 @@
     "last 2 Chrome version",
     "last 2 Firefox version",
     "last 2 Edge version"
-  ]
+  ],
+  "volta": {
+    "node": "16.16.0"
+  }
 }
