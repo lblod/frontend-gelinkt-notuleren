@@ -18,8 +18,7 @@ export default class RdfaEditorContainerComponent extends Component {
   get plugins() {
     if (Array.isArray(this.args.plugins)) {
       return this.args.plugins;
-    }
-    else {
+    } else {
       return this._plugins;
     }
   }
