@@ -128,6 +128,7 @@
     "node": "16.16.0"
   },
   "dependencies": {
-    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.2.3"
+    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.2.3",
+    "@lblod/ember-rdfa-table-of-contents-plugin": "^0.2.2"
   }
 }

@@ -19,7 +19,8 @@
                           showListButtons="true"
                           showIndentButtons="true"
                       }}
-      @plugins={{array 'article-structure'}}
+      @plugins={{array 'article-structure' 'rdfa-toc'}}
+      @rdfaEditorInit={{this.rdfaEditorInit}}
     />
   </div>
 </AuBodyContainer>
