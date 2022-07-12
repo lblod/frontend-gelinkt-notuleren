@@ -39,7 +39,7 @@
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-mock-login": "0.6.0",
     "@lblod/ember-rdfa-editor": "^0.60.1",
-    "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.2.3",
+    "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.2.4",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.4.0",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.7.0",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.17.3",
