@@ -50,6 +50,7 @@
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
+    "buffer": "^6.0.3",
     "date-fns": "^2.28.0",
     "ember-a11y-refocus": "^3.0.0",
     "ember-auto-import": "^2.4.1",
