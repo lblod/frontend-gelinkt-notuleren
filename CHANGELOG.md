@@ -4,6 +4,21 @@
 
 
 
+## 2.28.2 (2022-07-12)
+
+#### :bug: Bug Fix
+* [#305](https://github.com/lblod/frontend-gelinkt-notuleren/pull/305) bump editor ([@nvdk](https://github.com/nvdk))
+* [#303](https://github.com/lblod/frontend-gelinkt-notuleren/pull/303) bump citation-plugin to 0.17.4 ([@nvdk](https://github.com/nvdk))
+* [#302](https://github.com/lblod/frontend-gelinkt-notuleren/pull/302) only include relevant plugins for intro and outro text ([@nvdk](https://github.com/nvdk))
+* [#301](https://github.com/lblod/frontend-gelinkt-notuleren/pull/301) bump ember-rdfa-editor-rdfa-date-plugin to 0.2.1 ([@nvdk](https://github.com/nvdk))
+* [#300](https://github.com/lblod/frontend-gelinkt-notuleren/pull/300) bump @lblod/ember-rdfa-editor-citaten-plugin to 0.17.3 ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#299](https://github.com/lblod/frontend-gelinkt-notuleren/pull/299) Bump parse-url from 6.0.0 to 6.0.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.28.1 (2022-07-01)
 
 #### :bug: Bug Fix
