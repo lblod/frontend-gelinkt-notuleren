@@ -14,7 +14,7 @@ export default class AgendaManagerEditComponent extends Component {
     return this.args.itemToEdit && this.args.itemToEdit.isNew;
   }
 
-  get isSubmitting(){
+  get isSubmitting() {
     return this.submitTask.isRunning;
   }
 
