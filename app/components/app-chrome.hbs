@@ -60,7 +60,7 @@
             (<strong>{{if @documentContainer.attachments.length @documentContainer.attachments.length 0}}</strong>)
           </AuButton>
           <AuLink @route="agendapoints.revisions" class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="draft" @iconAlignment="left" @model={{@documentContainer.id}}>
-            Versies
+            Versies (2)
           </AuLink>
         </AuButtonGroup>
       {{else}}
@@ -75,7 +75,7 @@
               <span class="au-c-button__tooltip au-c-button__tooltip--bottom">{{t "attachments.saveAndGo"}}</span>
             </AuButton>
             <AuLink @route="agendapoints.revisions" class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="draft" @iconAlignment="left" @model={{@documentContainer.id}}>
-              Versies
+              Versies (2)
             </AuLink>
           </AuButtonGroup>
         {{/if}}

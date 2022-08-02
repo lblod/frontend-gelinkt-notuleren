@@ -62,12 +62,10 @@
             <span class="au-c-button__tooltip au-c-button__tooltip--bottom">{{t "attachments.saveAndGo"}}</span>
           </AuLink>
           <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="draft" @iconAlignment="left">
-            Versies
+            Versies (2)
           </AuButton>
         </AuButtonGroup>
-        <AuDropdown @title="Bestand acties" @buttonLabel="Bestand opties" @alignment="right">
-        </AuDropdown>
-
+        <AuButton @disabled={{true}} @skin="naked" @icon="nav-up-down" @iconAlignment="right" class="au-u-padding-tiny"><span class="au-u-h-functional au-u-regular">Bestand acties</span></AuButton>
         <AuButton @disabled={{true}}>Bewaar</AuButton>
       </AuToolbarGroup>
     </AuToolbar>

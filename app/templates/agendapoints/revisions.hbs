@@ -19,10 +19,15 @@
       </div>
       <div class="au-c-sidebar__content">
         <ul class="au-c-list-navigation">
-          {{#each this.orderedRevisions as |revision|}}
+          {{#each this.orderedRevisions as |revision index|}}
           <li class="au-c-list-navigation__item">
-            <AuButton @skin="link" @icon="document" @iconAlignment="left" class="au-c-list-navigation__link {{if (eq revision.updatedOn this.revisionDetail.updatedOn) 'active'}}" {{on "click" (fn this.details revision)}}>
-              Versie van {{human-friendly-date revision.updatedOn}}
+            <AuButton @skin="link" @icon="document" @iconAlignment="left" class="au-c-button--pill au-c-list-navigation__link {{if (eq revision.updatedOn this.revisionDetail.updatedOn) 'active'}}" {{on "click" (fn this.details revision)}}>
+              <span class="au-c-button__text">
+                {{human-friendly-date revision.updatedOn}}
+              </span>
+              {{#if (eq revision.id this.model.editorDocument.id)}}
+              <AuPill @size="small" class="au-u-margin-left-tiny">Huidige versie</AuPill>
+              {{/if}}
             </AuButton>
           </li>
           {{/each}}
@@ -38,9 +43,16 @@
             <AuHeading @level="2" @skin="3">Versie van {{human-friendly-date this.revisionDetail.updatedOn}}</AuHeading>
           </Group>
           <Group>
-            <AuButton @icon="redo" @skin="primary"  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
-              Herstel versie
-            </AuButton>
+            <div class="au-u-flex">
+              <AuButton @skin="naked" @icon="export" @iconAlignment="left">Exporteer als HTML</AuButton>
+              {{#if (eq this.revisionDetail.id this.model.editorDocument.id)}}
+              <AuPill>Huidige versie</AuPill>
+              {{else}}
+              <AuButton @icon="redo" @skin="primary"  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
+                Herstel versie
+              </AuButton>
+              {{/if}}
+            </div>
           </Group>
         </AuToolbar>
 

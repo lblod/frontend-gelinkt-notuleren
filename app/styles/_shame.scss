@@ -556,3 +556,22 @@
   border: 0;
   border-radius: 0;
 }
+
+.au-c-button--pill {
+  text-decoration-color: transparent !important;
+
+  .au-c-button__text {
+    text-decoration: underline;
+    text-decoration-color: var(--au-blue-300);
+  }
+
+  &:hover {
+    .au-c-button__text {
+      text-decoration: var(--au-blue-200);
+    }
+  }
+
+  &.active .au-c-button__text {
+    text-decoration: none;
+  }
+}
