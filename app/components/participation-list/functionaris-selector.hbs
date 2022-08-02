@@ -1,11 +1,12 @@
 {{#if this.loadData.isRunning}}
   <p class="loader"><span class="u-visually-hidden">{{t "participationList.loadingTitle"}}</span></p>
 {{else}}
-<PowerSelect
-  @options={{this.options}}
-  @selected={{@functionaris}}
-  @onChange={{@onSelect}}
-  as |functionaris| >
+  <PowerSelect
+    @options={{this.options}}
+    @selected={{@functionaris}}
+    @allowClear={{true}}
+    @onChange={{@onSelect}}
+    as |functionaris| >
   {{functionaris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{functionaris.isBestuurlijkeAliasVan.achternaam}},
   {{functionaris.bekleedt.rol.label}} (periode {{plain-date functionaris.start}}  - {{plain-date functionaris.einde}})
 </PowerSelect>
