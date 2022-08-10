@@ -5,8 +5,11 @@ const fs = require('fs');
 
 function extractRepoUrl(pjson) {
   const repo = pjson.repository;
-  let repo_url = repo?.url?.replace('git+', '');
-  return repo_url;
+  if (typeof repo === 'string') {
+    return repo.replace('git+', '');
+  } else if (typeof repo === 'object') {
+    return repo?.url?.replace('git+', '');
+  }
 }
 function getPackages() {
   const packages = {
