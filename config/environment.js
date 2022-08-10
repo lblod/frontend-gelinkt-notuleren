@@ -1,6 +1,36 @@
 'use strict';
 
+const mainPjson = require('../package.json');
+const fs = require('fs');
+
+function extractRepoUrl(pjson) {
+  const repo = pjson.repository;
+  let repo_url = repo?.url?.replace('git+', '');
+  return repo_url;
+}
+function getPackages() {
+  const packages = {
+    [mainPjson.name]: {
+      version: mainPjson.version,
+      url: extractRepoUrl(mainPjson),
+    },
+  };
+  const dirs = fs
+    .readdirSync('node_modules/@lblod')
+    .filter((dir) => dir.startsWith('ember-rdfa-editor'));
+  dirs.forEach((dir) => {
+    const file = `../node_modules/@lblod/${dir}/package.json`;
+    const pjson = require(file);
+    packages[pjson.name] = {
+      version: pjson.version,
+      url: extractRepoUrl(pjson),
+    };
+  });
+  return packages;
+}
+
 module.exports = function (environment) {
+  const editorDeps = getPackages();
   let ENV = {
     modulePrefix: 'frontend-gelinkt-notuleren',
     environment,
@@ -20,6 +50,9 @@ module.exports = function (environment) {
       '@lblod/ember-rdfa-editor-date-plugin': {
         allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY'],
         outputDateFormat: 'D MMMM YYYY',
+      },
+      packages: {
+        ...editorDeps,
       },
     },
     roadsignRegulationPlugin: {
