@@ -13,6 +13,9 @@ Router.map(function () {
     this.route('agendapoints', function () {
       this.route('new');
     });
+    this.route('regulatory-statements', function () {
+      this.route('new');
+    });
     this.route('meetings', function () {
       this.route('new');
     });
@@ -64,5 +67,8 @@ Router.map(function () {
   this.route('irg-archive', function () {
     this.route('show', { path: ':id' });
   });
-  this.route('regulatory-statements');
+
+  this.route('regulatory-statements', function () {
+    this.route('edit');
+  });
 });

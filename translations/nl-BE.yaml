@@ -2,6 +2,7 @@ inbox:
   menu:
     meetings: Zittingen
     agendapoints: Agendapunten
+    statements: Reglementaire bijlagen
     trash: Prullenmand
     manual: Bekijk handleiding
   meetings:
@@ -38,6 +39,18 @@ inbox:
       errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
       create: Aanmaken
       cancel: Terug
+  regulatoryStatements:
+    return: Terug naar overzicht reglementaire bijlagen
+    pageTitle: Reglementaire bijlagen
+    searchPlaceholder: Zoek op titel van reglementaire bijlage
+    noDataMessage: Geen reglementaire bijlagen
+    titleLabel: Titel
+    updatedOnLabel: Aangepast
+    statusLabel: Status
+    type: Type
+    agendaPoint: Agendapunt
+    new:
+      title: Nieuwe reglementaire bijlage
   irgArchive:
     return: Terug naar overzicht IRG archief
     pageTitle: IRG Archief
