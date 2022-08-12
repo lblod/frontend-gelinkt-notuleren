@@ -5,11 +5,11 @@
   <AuModal @title={{t "manageAgendaZittingModal.modalTitle"}}
           @modalOpen={{@visible}}
           @size="default"
-          @closeModal={{this.cancel}}
+          @closeModal={{unless this.isSubmitting this.cancel}}
           as |Modal|
   >
     <Modal.Body>
-      {{#if this.submitTask.isRunning}}
+      {{#if this.isSubmitting}}
         <AuLoader />
         <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
       {{else}}
@@ -63,7 +63,7 @@
       <AuToolbar>
       <AuButtonGroup>
         <Form.Submit>{{t "manageAgendaZittingModal.saveButton"}}</Form.Submit>
-        <AuButton @skin="secondary" {{on "click" this.cancel}}>
+        <AuButton @skin="secondary" {{on "click" this.cancel}} @disabled={{this.isSubmitting}}>
           {{t "manageAgendaZittingModal.cancelButton"}}
         </AuButton>
       </AuButtonGroup>
@@ -74,7 +74,8 @@
           @loading={{this.deleteTask.isRunning}}
           @icon="bin"
           @iconAlignment="left"
-          {{on "click" (perform this.deleteTask @itemToEdit)}} >
+          {{on "click" (perform this.deleteTask @itemToEdit)}}
+          @disabled={{this.isSubmitting}} >
             {{t "manageAgendaZittingModalDelete.deleteButton"}}
         </AuButton>
       {{/unless}}
