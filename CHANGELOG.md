@@ -4,6 +4,27 @@
 
 
 
+## 2.29.0 (2022-08-12)
+
+#### :rocket: Enhancement
+* [#298](https://github.com/lblod/frontend-gelinkt-notuleren/pull/298) fetch decision types from centrale vindplaats ([@benjay10](https://github.com/benjay10))
+* [#311](https://github.com/lblod/frontend-gelinkt-notuleren/pull/311) Addition of an environment banner ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#308](https://github.com/lblod/frontend-gelinkt-notuleren/pull/308) Disable closing the edit agendapoint modal when saving ([@elpoelma](https://github.com/elpoelma))
+* [#306](https://github.com/lblod/frontend-gelinkt-notuleren/pull/306) allow clearing the secretary ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#312](https://github.com/lblod/frontend-gelinkt-notuleren/pull/312) Bump editor to 0.61.1 ([@abeforgit](https://github.com/abeforgit))
+* [#310](https://github.com/lblod/frontend-gelinkt-notuleren/pull/310) Bump parse-url from 6.0.0 to 6.0.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#307](https://github.com/lblod/frontend-gelinkt-notuleren/pull/307) Bump terser from 4.8.0 to 4.8.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Ben ([@benjay10](https://github.com/benjay10))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.28.2 (2022-07-12)
 
 #### :bug: Bug Fix
