@@ -2,6 +2,7 @@ inbox:
   menu:
     meetings: Meetings
     agendapoints: Agenda points
+    statements: Regulatory statements
     trash: Recycle bin
     manual: View manual
   meetings:
@@ -38,6 +39,18 @@ inbox:
       errorSaving: Something went wrong while creating the agendapoint
       create: Create
       cancel: Back
+  regulatoryStatements:
+    return: Return to the overview of regulatory statements
+    pageTitle: Regulatory statements
+    searchPlaceholder: Search on title of regulatory statement
+    noDataMessage: No regulatory statements
+    titleLabel: Title
+    updatedOnLabel: Modified
+    statusLabel: Status
+    type: Type
+    agendaPoint: Agendapoint
+    new:
+      title: New regulatory statement
   irgArchive:
     return: Return to the archive
     pageTitle: IRG Archive

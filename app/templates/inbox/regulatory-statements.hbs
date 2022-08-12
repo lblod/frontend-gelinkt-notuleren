@@ -1,0 +1,51 @@
+{{page-title (t "inbox.regulatoryStatements.pageTitle")}}
+<SnippetsNotifier />
+
+<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.regulatoryStatements.noDataMessage'}} @sort={{this.sort}} as |table|>
+  <table.menu as |menu|>
+    <menu.general>
+      <AuToolbar class="au-o-box" @size="large">
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            {{t 'inbox.regulatoryStatements.pageTitle'}}
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--center">
+          <AuInput @icon="search" @iconAlignment="right" @value={{this.searchValue}} placeholder={{t 'inbox.regulatoryStatements.searchPlaceholder'}} />
+          {{#unless this.readOnly}}
+            <AuLink @route="regulatory-statements.edit" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.regulatoryStatements.new.title"}}</AuLink>
+          {{/unless}}
+        </AuToolbarGroup>
+      </AuToolbar>
+    </menu.general>
+  </table.menu>
+  <table.content as |c|>
+    <c.header>
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.titleLabel'}} />
+      <th><span class="au-c-data-table__header-title">{{t 'inbox.regulatoryStatements.agendaPoint'}}</span></th>
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.type'}} />
+      <AuDataTableThSortable @field="status.label" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.statusLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.updatedOnLabel'}} />
+    </c.header>
+    <tbody>
+      <tr>
+        <td>
+          <AuLink @route="regulatory-statements.edit">Titel reglementaire bijlage</AuLink>
+        </td>
+        <td>
+          <AuLink>Agendapunt 1</AuLink>
+        </td>
+        <td>
+          Belasting
+        </td>
+        <td>
+          <AuPill @size="small">Ontwerp</AuPill>
+        </td>
+        <td>
+          31-05-2022
+        </td>
+      </tr>
+    </tbody>
+  </table.content>
+</AuDataTable>
+{{outlet}}

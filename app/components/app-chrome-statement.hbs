@@ -1,0 +1,51 @@
+<nav>
+  <div class="au-c-app-chrome">
+    <AuToolbar @size="small" class="au-u-padding-bottom-none">
+      <AuToolbarGroup>
+        <AuLink @route={{@returnRoute}} @skin="secondary">
+          <AuIcon @icon="arrow-left" @alignment="left" />
+          {{@returnRouteText}}
+        </AuLink>
+        <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
+      </AuToolbarGroup>
+      <AuToolbarGroup>
+        <ul class="au-c-list-horizontal au-u-padding-right-tiny">
+          <li class="au-c-list-horizontal__item">
+            <span class="au-c-app-chrome__status">
+              Bewaard op 31-05-2022
+            </span>
+          </li>
+        </ul>
+      </AuToolbarGroup>
+    </AuToolbar>
+    <AuToolbar @size="small" class="au-u-padding-top-none">
+      <AuToolbarGroup>
+        <div>
+          <AuPill @skin="default">
+            Ontwerp
+          </AuPill>
+        </div>
+        <EditorDocumentTitle @title="Titel reglementaire bijlage" @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
+      </AuToolbarGroup>
+      <AuToolbarGroup>
+
+        <AuDropdown @title="Bestand acties" @buttonLabel="Bestand opties" @alignment="right">
+          <AuButton @skin="tertiary" role="menuitem">
+            <AuIcon @icon="copy" @alignment="left" />
+            Kopieer reglementaire bijlage
+          </AuButton>
+          <AuButton @skin="tertiary" role="menuitem">
+            <AuIcon @icon="export" @alignment="left" />
+            Exporteer als HTML
+          </AuButton>
+          <AuButton @skin="tertiary" @alert="true" role="menuitem">
+            <AuIcon @icon="bin" @alignment="left" />
+            Naar prullenmand
+          </AuButton>
+        </AuDropdown>
+
+        <AuButton>Bewaar</AuButton>
+      </AuToolbarGroup>
+    </AuToolbar>
+  </div>
+</nav>
