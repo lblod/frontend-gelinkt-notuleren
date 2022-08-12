@@ -13,7 +13,7 @@
         <AuToolbarGroup class="au-c-toolbar__group--center">
           <AuInput @icon="search" @iconAlignment="right" @value={{this.searchValue}} placeholder={{t 'inbox.regulatoryStatements.searchPlaceholder'}} />
           {{#unless this.readOnly}}
-            <AuLink @route="regulatory-statements.edit" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.regulatoryStatements.new.title"}}</AuLink>
+            <AuButton {{on "click" (fn (mut this.displayCreateModal) true)}} @skin="primary" @icon="add" @iconAlignment="left">{{t "inbox.regulatoryStatements.new.title"}}</AuButton>
           {{/unless}}
         </AuToolbarGroup>
       </AuToolbar>
@@ -49,3 +49,43 @@
   </table.content>
 </AuDataTable>
 {{outlet}}
+
+<AuModal
+  @title="Nieuwe reglementaire bijlage"
+  @modalOpen={{this.displayCreateModal}}
+  @closeModal={{fn (mut this.displayCreateModal) false}}
+  as |Modal|
+>
+  <Modal.Body>
+    <form class="au-c-form">
+      <AuFormRow @alignment="default">
+        <AuLabel for="title" @required={{true}}>
+          Titel
+        </AuLabel>
+        <AuInput id="title" @width="block" />
+      </AuFormRow>
+      <AuFormRow @alignment="default">
+        <AuLabel for="template" @required={{true}}>
+          Template
+        </AuLabel>
+        <AuInput id="type" />
+      </AuFormRow>
+      <AuFormRow @alignment="default">
+        <AuLabel for="type" @required={{true}}>
+          Type
+        </AuLabel>
+        <AuInput id="type" />
+      </AuFormRow>
+    </form>
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuLink  @route="regulatory-statements.edit" @skin="button" {{on "click" (fn (mut this.displayCreateModal) false)}}>
+        {{t "inbox.agendapoints.new.create"}}
+      </AuLink>
+      <AuButton @skin="secondary" {{on "click" (fn (mut this.displayCreateModal) false)}}>
+        {{t "inbox.agendapoints.new.cancel"}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>
