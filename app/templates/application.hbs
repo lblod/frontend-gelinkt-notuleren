@@ -5,8 +5,12 @@
     "Gelinkt Notuleren"
     (if environmentName (concat " - " environmentName))
   )}}
-{{/let}}
-
-<AuApp>
+  <AuApp>
+  {{#if environmentName}}
+  <EnvironmentBanner @environmentName={{environmentName}}/>
+  {{/if}}
   {{outlet}}
 </AuApp>
+{{/let}}
+
+
