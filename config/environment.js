@@ -3,12 +3,25 @@
 const mainPjson = require('../package.json');
 const fs = require('fs');
 
+function isUrl(string) {
+  try {
+    const url = new URL(string);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch (e) {
+    return false;
+  }
+}
+
 function extractRepoUrl(pjson) {
   const repo = pjson.repository;
+  let url;
   if (typeof repo === 'string') {
-    return repo.replace('git+', '');
+    url = repo.replace('git+', '');
   } else if (typeof repo === 'object') {
-    return repo?.url?.replace('git+', '');
+    url = repo?.url?.replace('git+', '');
+  }
+  if (url && isUrl(url)) {
+    return url;
   }
 }
 function getPackages() {
