@@ -52,4 +52,3 @@ When in a testing or development environment, a banner is shown containing the v
 * `EMBER_ENVIRONMENT_NAME`: name of the environment, appended to the document title. If this string is non-empty, the environment banner is shown. When this string is empty (such as on production), the banner is not shown.
 ### other
 * `EMBER_PUBLICATION_BASE_URL`: url of the linked [publication platform](https://github.com/lblod/app-gn-publicatie/), e.g. "https://publicatie.gelinkt-notuleren.vlaanderen.be/"
-
