@@ -47,4 +47,4 @@ Plausible analytics is handled by the [ember-plausible addon](https://github.com
 
 ### other
 * `EMBER_PUBLICATION_BASE_URL`: url of the linked [publication platform](https://github.com/lblod/app-gn-publicatie/), e.g. "https://publicatie.gelinkt-notuleren.vlaanderen.be/"
-* `EMBER_ENVIRONMENT_NAME`: name of the environment, appended to the document title.
+* `EMBER_ENVIRONMENT_NAME`: name of the environment, appended to the document title. If this string is non-empty, and environment banner is shown containing the application and editor versions. When this string is empty (such as on production), the banner is not shown.
