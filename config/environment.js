@@ -94,6 +94,7 @@ module.exports = function (environment) {
       'https://dev.roadsigns.lblod.info/sparql';
     ENV.templateVariablePlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
+    ENV['besluit-types-endpoint'] = 'https://centrale-vindplaats.lblod.info/sparql';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
