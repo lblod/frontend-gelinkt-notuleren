@@ -40,7 +40,7 @@
     "@lblod/ember-mock-login": "0.6.0",
     "@lblod/ember-rdfa-editor": "^0.61.0-0",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.4.0",
-    "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.8.0",
+    "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.8.1",
     "@lblod/ember-rdfa-editor-citaten-plugin": "^0.17.4",
     "@lblod/ember-rdfa-editor-import-snippet-plugin": "^0.8.0",
     "@lblod/ember-rdfa-editor-rdfa-date-plugin": "^0.2.1",
