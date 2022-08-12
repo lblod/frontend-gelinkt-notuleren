@@ -20,7 +20,13 @@
       <:body>
         {{#each-in this.packages as |key value|}}
           <tr>
-            <td><AuLinkExternal href={{value.url}}>{{key}}</AuLinkExternal></td>
+            <td>
+              {{#if value.url}}
+              <AuLinkExternal href={{value.url}}>{{key}}</AuLinkExternal>
+              {{else}}
+              {{key}}
+              {{/if}}
+            </td>
             <td>{{value.version}}</td>
             
           </tr>
