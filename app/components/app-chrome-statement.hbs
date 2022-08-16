@@ -28,7 +28,14 @@
         <EditorDocumentTitle @title="Titel reglementaire bijlage" @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
       </AuToolbarGroup>
       <AuToolbarGroup>
-
+        <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
+          <AuButton class="au-u-margin-bottom-none is-active" @skin="secondary" @icon="document" @iconAlignment="left" aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
+            Document
+          </AuButton>
+          <AuButton class="au-u-margin-bottom-none"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
+            Versies (0)
+          </AuButton>
+        </AuButtonGroup>
         <AuDropdown @title="Bestand acties" @buttonLabel="Bestand opties" @alignment="right">
           <AuButton @skin="tertiary" role="menuitem">
             <AuIcon @icon="copy" @alignment="left" />
