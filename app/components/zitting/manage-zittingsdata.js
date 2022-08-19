@@ -10,7 +10,6 @@ export default class ZittingManageZittingsdataComponent extends Component {
   @tracked geeindigdOpTijdstip;
   @tracked opLocatie;
   @tracked bestuursorgaan;
-  @tracked dateError = false;
 
   constructor() {
     super(...arguments);
@@ -54,13 +53,23 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this[targetProperty] = value;
   }
 
-  @action
-  changeEndDate(value) {
-    if (value < this.gestartOpTijdstip) {
-      this.dateError = true;
-    } else {
-      this.geeindigdOpTijdstip = value;
-      this.dateError = false;
-    }
+  get startDateIsEmpty() {
+    return !this.zitting.gestartOpTijdstip;
+  }
+
+  get endDateIsEmpty() {
+    return !this.zitting.geeindigdOpTijdstip;
+  }
+
+  get startDiffersFromPlannedStart() {
+    if (!!this.zitting.geplandeStart && !!this.zitting.gestartOpTijdstip) {
+      return this.geplandeStart != this.gestartOpTijdstip;
+    } else return false;
+  }
+
+  get endIsBeforeStart() {
+    if (this.endDateIsEmpty || this.startDateIsEmpty) {
+      return false;
+    } else return this.geeindigdOpTijdstrip > this.gestartOpTijdstip;
   }
 }
