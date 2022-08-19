@@ -85,7 +85,6 @@ behandelingVanAgendapunten:
   needsParticipants: Please configure the participants to this agenda-item before adding a voting.
   editDocument: "Edit document"
 meetingForm:
-  dateWarning: You can't pick an end-date that is before the start date.
   incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
   backButton: Back to meetings
   scheduledText: Meeting scheduled on
@@ -109,6 +108,10 @@ meetingForm:
   sixthSectionNotFilledWarning: Fill outFree text (meeting outro).
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
+  startNotSet: "start date has not been set"
+  endNotSet: "end date has not been set"
+  endBeforeStart: You can't pick an end-date that is before the start date.
+  startDiffersFromPlannedStart: "Note: planned start differs from start date, make sure this was intentional."
   modalTitle: Manage general information about the meeting
   bestuursorganLabel: "Held by:"
   geplandeStartLabel: "Scheduled start:"
