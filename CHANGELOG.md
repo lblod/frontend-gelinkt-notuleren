@@ -4,6 +4,14 @@
 
 
 
+## 2.28.3 (2022-08-19)
+
+#### :rocket: Enhancement
+* [#315](https://github.com/lblod/frontend-gelinkt-notuleren/pull/315) Bugfix/make meeting date more clear ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 1
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.28.2 (2022-07-12)
 
 #### :bug: Bug Fix
