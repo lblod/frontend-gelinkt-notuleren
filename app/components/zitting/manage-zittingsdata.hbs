@@ -64,7 +64,7 @@
         </div>
         <div>
           <AuLabel>{{t "manageZittingsData.geeindigdOpTijdstipLabel"}}</AuLabel>
-          <DateTimePicker @alignment="top" @onChange={{this.changeEndDate}} @value={{this.geeindigdOpTijdstip}} />
+          <DateTimePicker @alignment="top" @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}} />
           {{#if this.endIsBeforeStart}}
             <AuPill @skin="warning" @draft={{true}} @icon="info-circle">{{t "meetingForm.dateWarning"}}</AuPill>
           {{/if}}
