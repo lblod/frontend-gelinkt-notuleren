@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
+    "design": "ember serve --proxy https://dev.gelinkt-notuleren.lblod.info/login",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel 'lint:!(fix)'",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
