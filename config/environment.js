@@ -1,52 +1,52 @@
 'use strict';
 
-const mainPjson = require('../package.json');
-const fs = require('fs');
+// const mainPjson = require('../package.json');
+// const fs = require('fs');
 
-function isUrl(string) {
-  try {
-    const url = new URL(string);
-    return url.protocol === 'http:' || url.protocol === 'https:';
-  } catch (e) {
-    return false;
-  }
-}
+// function isUrl(string) {
+//   try {
+//     const url = new URL(string);
+//     return url.protocol === 'http:' || url.protocol === 'https:';
+//   } catch (e) {
+//     return false;
+//   }
+// }
 
-function extractRepoUrl(pjson) {
-  const repo = pjson.repository;
-  let url;
-  if (typeof repo === 'string') {
-    url = repo.replace('git+', '');
-  } else if (typeof repo === 'object') {
-    url = repo?.url?.replace('git+', '');
-  }
-  if (url && isUrl(url)) {
-    return url;
-  }
-}
-function getPackages() {
-  const packages = {
-    [mainPjson.name]: {
-      version: mainPjson.version,
-      url: extractRepoUrl(mainPjson),
-    },
-  };
-  const dirs = fs
-    .readdirSync('node_modules/@lblod')
-    .filter((dir) => dir.startsWith('ember-rdfa-editor'));
-  dirs.forEach((dir) => {
-    const file = `../node_modules/@lblod/${dir}/package.json`;
-    const pjson = require(file);
-    packages[pjson.name] = {
-      version: pjson.version,
-      url: extractRepoUrl(pjson),
-    };
-  });
-  return packages;
-}
+// function extractRepoUrl(pjson) {
+//   const repo = pjson.repository;
+//   let url;
+//   if (typeof repo === 'string') {
+//     url = repo.replace('git+', '');
+//   } else if (typeof repo === 'object') {
+//     url = repo?.url?.replace('git+', '');
+//   }
+//   if (url && isUrl(url)) {
+//     return url;
+//   }
+// }
+// function getPackages() {
+//   const packages = {
+//     [mainPjson.name]: {
+//       version: mainPjson.version,
+//       url: extractRepoUrl(mainPjson),
+//     },
+//   };
+//   const dirs = fs
+//     .readdirSync('node_modules/@lblod')
+//     .filter((dir) => dir.startsWith('ember-rdfa-editor'));
+//   dirs.forEach((dir) => {
+//     const file = `../node_modules/@lblod/${dir}/package.json`;
+//     const pjson = require(file);
+//     packages[pjson.name] = {
+//       version: pjson.version,
+//       url: extractRepoUrl(pjson),
+//     };
+//   });
+//   return packages;
+// }
 
 module.exports = function (environment) {
-  const editorDeps = getPackages();
+  // const editorDeps = getPackages();
   let ENV = {
     modulePrefix: 'frontend-gelinkt-notuleren',
     environment,
@@ -67,9 +67,9 @@ module.exports = function (environment) {
         allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY'],
         outputDateFormat: 'D MMMM YYYY',
       },
-      packages: {
-        ...editorDeps,
-      },
+      // packages: {
+      //   ...editorDeps,
+      // },
     },
     roadsignRegulationPlugin: {
       endpoint: '{{MOW_REGISTRY_ENDPOINT}}',

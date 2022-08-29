@@ -1,14 +1,18 @@
 <EmberLoadRemover />
 
-{{#let (config "environmentName") as |environmentName|}}
-  {{page-title (concat
-    "Gelinkt Notuleren"
-    (if environmentName (concat " - " environmentName))
-  )}}
-<AuApp class="{{if environmentName "au-c-app--environment"}}">
-  {{#if environmentName}}
-  <EnvironmentBanner @environmentName={{environmentName}}/>
-  {{/if}}
-  {{outlet}}
-</AuApp>
+{{#let (config 'environmentName') as |environmentName|}}
+  {{page-title
+    (concat
+      'Gelinkt Notuleren' (if environmentName (concat ' - ' environmentName))
+    )
+  }}
+  <AuApp class='{{if environmentName "au-c-app--environment"}}'>
+    {{#if environmentName}}
+      <EnvironmentBanner
+        @environmentName={{environmentName}}
+        @applicationName='Gelinkt Notuleren'
+      />
+    {{/if}}
+    {{outlet}}
+  </AuApp> 
 {{/let}}
