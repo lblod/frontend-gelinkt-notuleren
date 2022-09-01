@@ -195,8 +195,12 @@
   .au-u-margin-top-tiny,
   .au-u-margin-top-small,
   .au-u-margin-top-large,
-  .au-u-margin-top-huge {
+  .au-c-meeting-chrome-card {
     margin-top: 5px !important;
+  }
+
+  .au-u-margin-top-huge {
+    margin-top: 15px !important;
   }
 
   .say-content {
@@ -289,6 +293,7 @@
   .au-c-template--treatment {
     margin-top: 5px !important;
     padding-left: 5px !important;
+    padding-right: 5px !important;
   }
 
   .au-c-modal-backdrop {
@@ -351,6 +356,7 @@
   .au-c-heading--1 > *,
   .au-c-modal__title {
     font-size: 24px !important;
+    line-height: 28px !important;
 
     br {
       display: none !important;
@@ -418,6 +424,27 @@
     width: 18px !important;
     height: 18px !important;
     margin-right: 6px !important;
+  }
+
+  .au-c-editor-preview h5 {
+    margin-top: 5px !important;
+  }
+
+  .au-c-editor-preview table {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .au-c-meeting-numbered-list > li {
+    padding-top: 10px;
+  }
+
+  .au-c-meeting-numbered-list > li:before {
+    content: counter(list-number) '.' !important;
+    position: absolute !important;
+    display: inline-block !important;
+    left: 0 !important;
+    top: 5px !important;
   }
 
   // Hide certain margins
