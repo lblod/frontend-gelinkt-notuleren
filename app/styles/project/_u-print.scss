@@ -40,8 +40,32 @@
   .say-toolbar,
   .say-container__aside,
   .au-c-toolbar__group--search,
-  .au-c-main-header {
+  .au-c-main-header,
+  .au-c-card .au-c-button,
+  .au-c-pagination button,
+  .au-c-editor-preview-treatment__info .au-c-toggle-switch,
+  .au-c-editor-preview-treatment__info .au-c-hr,
+  .au-c-data-table__sort,
+  .au-c-onboarding,
+  .au-c-modal--fullscreen .au-c-modal__footer,
+  .au-c-modal--fullscreen .au-c-modal__close,
+  .au-template-public::before,
+  .au-template-private::before,
+  .au-c-template-public::before,
+  .au-c-template-private::before,
+  [property="besluit:geplandOpenbaar"]::before,
+  [property="besluit:openbaar"]::before,
+  .au-c-card .au-c-badge,
+  .au-c-editor-preview-treatment-toggle-box,
+  .au-c-editor-preview-treatment--private .behandeling [property="dc:subject"]::after,
+  .au-c-editor-preview-treatment--private .behandeling [property="eli:title"]::after,
+  .au-c-editor-preview-treatment--private .behandeling [property="eli:description"]::after,
+  .au-c-editor-preview-treatment--private .behandeling [property="besluit:openbaar"]::after {
     display: none !important;
+  }
+
+  a[href]:after {
+    word-break: break-all !important;
   }
 
   .tasklist.tasklist--expanded {
@@ -91,8 +115,9 @@
   }
 
   .au-c-pill {
-    border: none;
-    padding: 0;
+    border: none !important;
+    padding: 0 !important;
+    min-height: auto !important;
   }
 
   .u-wide-on-print,
@@ -107,20 +132,75 @@
     counter-increment: page;
     counter-reset: page 1;
     size: auto;
-    margin: 6mm 0;
+    margin: 6mm;
+  }
+
+  body {
+    margin: 6mm !important;
   }
 
   // App container
   .au-c-app,
   .au-c-main-container {
-    margin: 2rem !important;
-    overflow: auto !important;
-    height: auto !important;
+    display: initial !important;
+    flex-direction: initial !important;
+    height: initial !important;
+    overflow: initial !important;
   }
 
-  // Buttons
-  .au-c-card .au-c-button {
-    display: none !important;
+  .au-c-main-container__content--scroll {
+    height: initial !important;
+    overflow: initial !important;
+  }
+
+  .au-c-body-container {
+    display: initial !important;
+    flex-direction: initial !important;
+    flex-grow: initial !important;
+    height: initial !important;
+    overflow: initial !important;
+    position: initial !important;
+  }
+
+  .au-c-body-container--scroll {
+    overflow: initial !important;
+  }
+
+  // Spacing
+  .au-o-box,
+  .au-o-box--large,
+  .au-c-toolbar__group,
+  .au-c-toolbar--large {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .au-c-alert,
+  .au-c-list-divider__item,
+  .au-c-meeting-chrome-card__title {
+    padding: 5px !important
+  }
+
+  .au-u-margin-bottom,
+  .au-u-margin-bottom-tiny,
+  .au-u-margin-bottom-small,
+  .au-u-margin-bottom-large,
+  .au-u-margin-bottom-huge
+  .au-u-margin-bottom-large,
+  .au-c-meeting-chrome-card {
+    margin-bottom: 5px !important;
+  }
+
+  .au-u-margin-top,
+  .au-u-margin-top-tiny,
+  .au-u-margin-top-small,
+  .au-u-margin-top-large,
+  .au-u-margin-top-huge {
+    margin-top: 5px !important;
+  }
+
+  .say-content {
+    margin-left: 18px !important;
   }
 
   // Links
@@ -130,8 +210,24 @@
   }
 
   // Tables
-  .au-c-data-table__sort {
-    display: none !important;
+  .au-c-data-table__wrapper {
+    flex-grow: initial !important;
+    overflow: initial !important;
+    position: initial !important;
+    width: initial !important;
+  }
+
+  .au-c-data-table__table {
+    display: initial !important;
+    position: initial !important;
+    min-width: initial !important;
+    width: initial !important;
+  }
+
+  th,
+  td,
+  .au-c-data-table__actions--bottom {
+    padding: 5px !important;
   }
 
   .au-c-data-table__header {
@@ -148,17 +244,8 @@
   }
 
   // Meeting print view
-  .au-c-meeting-chrome .au-c-heading--1,
-  .au-c-heading--1 {
-    @include au-font-size(var(--au-h4), $important: true);
-  }
-
-  .au-c-meeting-chrome .au-c-heading--3 {
-    @include au-font-size(var(--au-h4), $important: true);
-  }
-
-  .au-c-onboarding {
-    display: none !important;
+  .au-c-meeting-chrome-card__title--inset {
+    margin: 0 !important;
   }
 
   .au-c-meeting-chrome {
@@ -168,19 +255,20 @@
   }
 
   .au-c-meeting-chrome .au-c-button {
-    opacity: 0 !important;
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    clip-path: inset(50%) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    white-space: nowrap !important;
+    width: 1px !important;
   }
 
   .au-c-meeting-chrome strong {
     border-bottom: 0 !important;
-  }
-
-  .au-c-meeting-chrome .au-u-margin-top-huge {
-    margin-top: $au-unit !important;
-  }
-
-  .au-c-meeting-chrome-card {
-    margin-bottom: $au-unit !important;
   }
 
   .au-c-meeting-chrome__paper {
@@ -192,53 +280,57 @@
     border-right-color: $au-gray-300 !important;
   }
 
-  // Make text smaller on print
-  .au-c-heading--1,
-  .au-c-content .au-c-heading--1,
-  .au-c-content h1 {
-    @include au-font-size($au-h4,1.3, $important: true);
-
-    br {
-      display: none;
-    }
+  .au-c-editor-preview-treatment__info,
+  .au-c-modal__header,
+  .au-c-modal__body {
+    padding: 5px !important;
   }
 
-  .au-c-heading--2,
-  .au-c-content .au-c-heading--2,
-  .au-c-content h2 {
-    @include au-font-size(1.6rem,1.3, $important: true);
+  .au-c-template--treatment {
+    margin-top: 5px !important;
+    padding-left: 5px !important;
   }
 
-  .au-c-heading--3,
-  .au-c-template h3,
-  .au-c-editor-preview h3,
-  .au-c-content .au-c-heading--3,
-  .au-c-content h3,
-  .au-c-template--decision h3, .au-c-template--decision h4, .au-c-editor-preview .besluiten h3, .au-c-editor-preview .besluiten h4 {
-    @include au-font-size(1.5rem, 1.3, $important: true);
+  .au-c-modal-backdrop {
+    background-color: white !important;
   }
 
-  .au-c-heading--4,
-  .au-c-template h4,
-  .au-c-editor-preview h4,
-  .au-c-content .au-c-heading--4,
-  .au-c-content h4 {
-    @include au-font-size(1.4rem, 1.2, $important: true);
+  .au-c-rdfa-publication {
+    margin: 0 !important;
+    padding: 5px !important;
+
   }
 
-  .au-c-heading--5,
-  .au-c-heading--6,
-  .au-c-content .au-c-heading--5,
-  .au-c-content .au-c-heading--6,
-  .au-c-template h5,
-  .au-c-template h6,
-  .au-c-editor-preview h5,
-  .au-c-editor-preview h6 {
-    @include au-font-size(1.3rem, 1.2, $important: true);
+  .au-c-rdfa-publication-holder {
+    border-left: 0 !important;
   }
 
-  .au-c-template [property="besluit:geplandOpenbaar"], .au-c-template [property="besluit:openbaar"], .au-c-editor-preview [property="besluit:geplandOpenbaar"], .au-c-editor-preview [property="besluit:openbaar"], .au-c-template-public, .au-c-template-private, [property="besluit:geplandOpenbaar"], [property="besluit:openbaar"],.au-c-template--notes [property="dc:subject"], .au-c-rdfa-publication .notulen [property="dc:subject"] {
-    @include au-font-size(1.3rem, 1.2, $important: true);
+  .au-c-modal--fullscreen {
+    position: absolute !important;
+    height: initial !important;
+    max-height: initial !important;
+    width: initial !important;
+    max-width: initial !important;
+    top: initial !important;
+    left: initial !important;
+    transform: initial !important;
+  }
+
+  .au-c-modal--fullscreen .au-c-modal__body {
+    overflow: initial !important;
+    height: initial !important;
+  }
+
+  // Editor
+  .say-editor__paper {
+    padding: 5px !important;
+    margin: 0 !important;
+  }
+
+
+  // Print text styles
+  * {
+    font-size: 14px !important;
   }
 
   .au-c-content,
@@ -249,39 +341,94 @@
   .au-c-pill,
   .au-c-template table, .au-c-editor-preview table,
   .au-c-template table th, .au-c-template table td, .au-c-editor-preview table th, .au-c-editor-preview table td {
-    font-size: 1.2rem !important;
-    line-height: 1.3 !important;
+    font-size: 14px !important;
+  }
+
+
+  .au-c-heading--1,
+  .au-c-content .au-c-heading--1,
+  .au-c-content h1,
+  .au-c-heading--1 > *,
+  .au-c-modal__title {
+    font-size: 24px !important;
+
+    br {
+      display: none !important;
+    }
+  }
+
+  .au-c-heading--2,
+  .au-c-content .au-c-heading--2,
+  .au-c-content h2,
+  .au-c-content h2 > * {
+    font-size: 21px !important;
+  }
+
+  .au-c-heading--3,
+  .au-c-template h3,
+  .au-c-editor-preview h3,
+  .au-c-content .au-c-heading--3,
+  .au-c-content h3,
+  .au-c-template--decision h3, .au-c-template--decision h4, .au-c-editor-preview .besluiten h3, .au-c-editor-preview .besluiten h4,
+  .au-c-template h1,
+  .au-c-template h1 > * {
+    font-size: 18px !important;
+  }
+
+  .au-c-heading--4,
+  .au-c-template h4,
+  .au-c-editor-preview h4,
+  .au-c-content .au-c-heading--4,
+  .au-c-content h4,
+  .au-c-template-list__item h2,
+  .au-c-template-list__item h2 > *,
+  .au-c-template-list__item h3,
+  .au-c-template-list__item h3 > * {
+    font-size: 16px !important;
+  }
+
+  .au-c-heading--5,
+  .au-c-heading--6,
+  .au-c-content .au-c-heading--5,
+  .au-c-content .au-c-heading--6,
+  .au-c-template h5,
+  .au-c-template h6,
+  .au-c-editor-preview h5,
+  .au-c-editor-preview h6 {
+    font-size: 16px !important;
+  }
+
+  .au-c-template [property="besluit:geplandOpenbaar"], .au-c-template [property="besluit:openbaar"], .au-c-editor-preview [property="besluit:geplandOpenbaar"], .au-c-editor-preview [property="besluit:openbaar"], .au-c-template-public, .au-c-template-private, [property="besluit:geplandOpenbaar"], [property="besluit:openbaar"],.au-c-template--notes [property="dc:subject"], .au-c-rdfa-publication .notulen [property="dc:subject"] {
+    font-size: 16px !important;
   }
 
   .au-c-hr {
-    border-bottom: 1px solid $au-gray-1000;
+    border-bottom: 1px solid $au-gray-1000 !important;
   }
 
   .au-c-hr--large {
-    margin: $au-unit-small 0;
+    margin: $au-unit-small 0 !important;
+  }
+
+  .au-c-alert {
+    border-color: black !important;
+  }
+
+  .au-c-alert__icon {
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 6px !important;
   }
 
   // Hide certain margins
-  .au-template-public::before,
-  .au-template-private::before,
-  .au-c-template-public::before, .au-c-template-private::before, [property="besluit:geplandOpenbaar"]::before, [property="besluit:openbaar"]::before {
-    display: none !important;
-  }
-
   .au-c-editor-preview,
   .au-c-card--padding .au-c-card__header,
   .au-c-card--padding .au-c-card__content {
-    padding: 0;
-  }
-
-  .au-c-card .au-c-badge,
-  .au-c-editor-preview-treatment-toggle-box,
-  .au-c-editor-preview-treatment--private .behandeling [property="dc:subject"]::after, .au-c-editor-preview-treatment--private .behandeling [property="eli:title"]::after, .au-c-editor-preview-treatment--private .behandeling [property="eli:description"]::after, .au-c-editor-preview-treatment--private .behandeling [property="besluit:openbaar"]::after {
-    display: none;
+    padding: 0 !important;
   }
 
   .au-c-card,
   .au-c-editor-preview {
-    border: 0;
+    border: 0 !important;
   }
 }
