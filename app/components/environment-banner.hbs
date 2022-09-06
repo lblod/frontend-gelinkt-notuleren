@@ -1,14 +1,14 @@
-<div class="au-c-environment-banner">
-<AuToolbar @size='medium'>
-  <AuToolbarGroup>
-    <p>
-      Environment
+<AuAlert @size="tiny" @skin="warning" class="au-u-margin-bottom-none">
+  <div class="au-u-flex au-u-flex--spaced au-u-flex--between">
+    <p class="au-u-medium">
+      Environment:
       {{@environmentName}}
     </p>
-    <p>
-      Gelinkt Notuleren {{this.applicationVersion}}
-    </p>
-    <VersionInformationOverview/>
-  </AuToolbarGroup>
-</AuToolbar>
-</div>
+    <div class="au-u-flex au-u-flex--spaced-small">
+      <p>
+        Gelinkt Notuleren {{this.applicationVersion}}
+      </p>
+      <VersionInformationOverview/>
+    </div>
+  </div>
+</AuAlert>
