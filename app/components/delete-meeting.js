@@ -15,9 +15,19 @@ export default class DeleteMeetingComponent extends Component {
   }
   @task
   *deleteMeeting() {
+    const meetingId = this.args.meeting.id;
     yield this.args.meeting.destroyRecord();
     this.displayDeleteModal = false;
-    this.router.transitionTo('inbox.meetings');
+    setTimeout(() => {
+      const pollingInterval = setInterval(async () => {
+        try {
+          await this.store.findRecord('zitting', meetingId, { reload: true });
+        } catch (e) {
+          clearInterval(pollingInterval);
+          this.router.transitionTo('inbox.meetings');
+        }
+      }, 200);
+    }, 100);
   }
 
   @task
