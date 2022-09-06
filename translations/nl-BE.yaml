@@ -109,6 +109,10 @@ meetingForm:
   sixthSectionNotFilledWarning: Vull in vrie tekst (zitting outro).
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
+  startNotSet: "Start van de zitting werd nog niet ingesteld."
+  endNotSet: "Einde van de zitting werd nog niet ingesteld."
+  endBeforeStart: U kunt geen einddatum kiezen die vóór de startdatum ligt.
+  startDiffersFromPlannedStart: "Opgelet de geplande start verschilt van de start datum."
   modalTitle: Beheer algemene informatie over de zitting
   bestuursorganLabel: "Gehouden door:"
   geplandeStartLabel: "Geplande start:"
