@@ -158,6 +158,12 @@ export default class MeetingForm extends Component {
     this.router.transitionTo('meetings.publish.agenda', this.args.zitting.id);
   }
 
+  get meetingDateForTitle() {
+    if (this.zitting?.gestartOpTijdstip) {
+      return this.zitting.gestartOpTijdstip;
+    } else return this.zitting.geplandeStart;
+  }
+
   @action
   async meetingInfoUpdate(zitting) {
     const bestuursorgaan = await zitting.get('bestuursorgaan');
