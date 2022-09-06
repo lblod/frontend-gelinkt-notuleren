@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
-
+import fetch from 'fetch';
 export default class DeleteMeetingComponent extends Component {
   @service router;
   @service store;
@@ -21,12 +21,16 @@ export default class DeleteMeetingComponent extends Component {
     setTimeout(() => {
       const pollingInterval = setInterval(async () => {
         try {
-          await this.store.findRecord('zitting', meetingId, { reload: true });
+          const response = await fetch(`/zittingen/${meetingId}`);
+          if (!response.ok) {
+            clearInterval(pollingInterval);
+            this.router.transitionTo('inbox.meetings');
+          }
         } catch (e) {
           clearInterval(pollingInterval);
           this.router.transitionTo('inbox.meetings');
         }
-      }, 200);
+      }, 100);
     }, 100);
   }
 
