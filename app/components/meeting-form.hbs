@@ -97,7 +97,7 @@
       {{!-- Meeting title --}}
       <AuHeading>
         {{t "meetingForm.meetingHeadingPartOne"}} {{t this.headerArticleTranslationString}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
-        {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{detailed-date  @zitting.geplandeStart}}</span>
+        {{t "meetingForm.meetingHeadingPartTwo"}} <span class="au-c-meeting-chrome__highlight">{{detailed-date  this.meetingDateForTitle}}</span>
       </AuHeading>
       <AuHr @size="large"/>
 
