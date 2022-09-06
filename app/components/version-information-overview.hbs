@@ -1,5 +1,4 @@
-<AuButton @skin='link-secondary' onclick={{this.toggleModal}}>
-  <AuIcon @icon='info-circle' @alignment='left' />
+<AuButton @skin='link-secondary' @icon="info-circle" @iconAlignment="left" onclick={{this.toggleModal}}>
   Package versions
 </AuButton>
 <AuModal
@@ -8,7 +7,6 @@
   @title='Package versions'
   as |Modal|
 >
-
   <Modal.Body>
     <AuTable>
       <:header>
@@ -28,7 +26,7 @@
               {{/if}}
             </td>
             <td>{{value.version}}</td>
-            
+
           </tr>
         {{/each-in}}
       </:body>
