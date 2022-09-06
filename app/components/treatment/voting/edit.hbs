@@ -12,18 +12,18 @@
         <AuTextarea id="voting-subject" @width="block" @value={{this.editStemming.stemming.onderwerp}}></AuTextarea>
         <AuHelpText @skin="secondary">{{t "votingEdit.firstStepExplanation"}}</AuHelpText>
       </p>
-      <p>
-        {{!-- <AuControlCheckbox @label={{t "votingEdit.privateVotingCheckbox"}} @identifier="akkoord" @checked={{this.editStemming.stemming.geheim}} /> --}}
-
-        <label class="au-c-label">
-          <Input @type="checkbox" @checked={{this.editStemming.stemming.geheim}} />&nbsp;
-          {{t "votingEdit.privateVotingCheckbox"}}
-        </label>
-      </p>
     </div>
 
     <AuHeading @level="3" @skin="4" class="au-u-margin-top-large">{{t "votingEdit.secondStep"}}</AuHeading>
     <AuHr />
+    <p>
+      {{!-- <AuControlCheckbox @label={{t "votingEdit.privateVotingCheckbox"}} @identifier="akkoord" @checked={{this.editStemming.stemming.geheim}} /> --}}
+
+      <label class="au-c-label">
+        <Input @type="checkbox" @checked={{this.editStemming.stemming.geheim}} />&nbsp;
+        {{t "votingEdit.privateVotingCheckbox"}}
+      </label>
+    </p>
     <div>
       <Treatment::Voting::ManageVoters />
     </div>
