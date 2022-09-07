@@ -1,8 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
+import { restartableTask, task, timeout } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
-import fetch from 'fetch';
 export default class DeleteMeetingComponent extends Component {
   @service router;
   @service store;
@@ -18,20 +17,22 @@ export default class DeleteMeetingComponent extends Component {
     const meetingId = this.args.meeting.id;
     yield this.args.meeting.destroyRecord();
     this.displayDeleteModal = false;
-    setTimeout(() => {
-      const pollingInterval = setInterval(async () => {
-        try {
-          const response = await fetch(`/zittingen/${meetingId}`);
-          if (!response.ok) {
-            clearInterval(pollingInterval);
-            this.router.transitionTo('inbox.meetings');
-          }
-        } catch (e) {
-          clearInterval(pollingInterval);
-          this.router.transitionTo('inbox.meetings');
-        }
-      }, 100);
-    }, 100);
+    yield this.pollWhileMeetingExists.perform(meetingId);
+  }
+
+  @task
+  *pollWhileMeetingExists(id) {
+    yield timeout(100);
+    try {
+      // eslint-disable-next-line no-constant-condition
+      let response = yield fetch(`/zittingen/${id}`);
+      while (response.ok) {
+        yield timeout(100);
+        response = yield fetch(`/zittingen/${id}`);
+      }
+    } finally {
+      this.router.transitionTo('inbox.meetings');
+    }
   }
 
   @task
