@@ -4,6 +4,11 @@
    Some parts will be reused, but most of them will not.
    ========================================================================== */
 
+// Fix body overflow issue (@TODO: review when appuniversum is updated)
+body {
+  overflow: hidden;
+}
+
 // Temporary focus overrides for focus area's
 // @TODO: discuss where to put this or how to fix this focus style.
 #main:focus,

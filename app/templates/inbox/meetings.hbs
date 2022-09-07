@@ -8,7 +8,7 @@
             {{t "inbox.meetings.pageTitle"}}
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--center">
+        <AuToolbarGroup class="au-c-toolbar__group--center au-u-hide-on-print">
           {{#unless this.readOnly}}
             <AuLink @route="inbox.meetings.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.meetings.new.title"}}</AuLink>
           {{/unless}}
