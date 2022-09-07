@@ -7,8 +7,8 @@
             {{t "publish.excerpts"}}
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup>
-          <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} class="au-u-1-2@small" />
+        <AuToolbarGroup class="au-u-hide-on-print">
+          <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} />
         </AuToolbarGroup>
       </AuToolbar>
     </menu.general>
@@ -17,7 +17,8 @@
     <c.header>
       <AuDataTableThSortable @field="position" @currentSorting={{this.sort}} @label={{t 'publish.position'}} />
       <AuDataTableThSortable @field="titel" @currentSorting={{this.sort}} @label={{t 'publish.agendapoint'}} />
-      <AuDataTableThSortable @field="behandeling.documentContainer.status" @currentSorting={{this.sort}} @label={{t 'publish.statusLabel'}} colspan="2" />
+      <AuDataTableThSortable @field="behandeling.documentContainer.status" @currentSorting={{this.sort}} @label={{t 'publish.statusLabel'}} />
+      <th></th>
     </c.header>
 
     <c.body as  |agendapoint|>
@@ -26,7 +27,7 @@
       <td>
         <Signatures::PublicationStatus @versionedResource={{agendapoint.behandeling.versionedBehandeling}} />
       </td>
-      <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right">{{t 'publish.publishButtonLabel'}}</AuLink></td>
+      <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right" class="au-u-hide-on-print">{{t 'publish.publishButtonLabel'}}</AuLink></td>
     </c.body>
   </table.content>
 </AuDataTable>
