@@ -4,6 +4,11 @@
    Some parts will be reused, but most of them will not.
    ========================================================================== */
 
+// Fix body overflow issue (@TODO: review when appuniversum is updated)
+body {
+  overflow: hidden;
+}
+
 // Temporary focus overrides for focus area's
 // @TODO: discuss where to put this or how to fix this focus style.
 #main:focus,
@@ -543,5 +548,19 @@
     border: .1rem solid var(--au-gray-300);
     border-radius: $au-radius;
     padding: $au-unit-tiny;
+  }
+}
+
+
+// Fix app with environment banner @TODO: rework app component
+.au-c-app--environment {
+  // Fix main container height
+  .au-c-main-container {
+    height: calc(100vh - 92px);
+  }
+
+  // Fix sidebar offset
+  .au-c-meeting-sidebar {
+    top: 14.8rem;
   }
 }

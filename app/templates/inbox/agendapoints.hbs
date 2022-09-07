@@ -10,7 +10,7 @@
             {{t 'inbox.agendapoints.pageTitle'}}
           </AuHeading>
         </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--center">
+        <AuToolbarGroup class="au-c-toolbar__group--center au-u-hide-on-print">
           <AuInput @icon="search" @iconAlignment="right" @value={{this.searchValue}} placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} {{on "input" (perform this.updateFilter)}}/>
           {{#unless this.readOnly}}
             <AuLink @route="inbox.agendapoints.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.agendapoints.new.title"}}</AuLink>
