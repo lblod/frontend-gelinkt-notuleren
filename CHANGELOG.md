@@ -5,6 +5,17 @@
 
 
 
+
+## 2.31.0 (2022-09-09)
+
+#### :house: Internal
+* [#324](https://github.com/lblod/frontend-gelinkt-notuleren/pull/324) bump editor to 0.63.1 and plugins to latest ([@abeforgit](https://github.com/abeforgit))
+* [#323](https://github.com/lblod/frontend-gelinkt-notuleren/pull/323) Add release task to package.json ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 2.30.0 (2022-09-07)
 
 #### :rocket: Enhancement
