@@ -4,6 +4,29 @@
 
 
 
+
+## 2.30.0 (2022-09-07)
+
+#### :rocket: Enhancement
+* [#319](https://github.com/lblod/frontend-gelinkt-notuleren/pull/319) Print preview improvements ([@Dietr](https://github.com/Dietr))
+* [#313](https://github.com/lblod/frontend-gelinkt-notuleren/pull/313) Move position of the set vote private checkbox ([@lagartoverde](https://github.com/lagartoverde))
+* [#316](https://github.com/lblod/frontend-gelinkt-notuleren/pull/316) Bugfix/make meeting date more clear ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#320](https://github.com/lblod/frontend-gelinkt-notuleren/pull/320) Ensure meeting is deleted from cache before returning to meeting overview when deleting a meeting ([@elpoelma](https://github.com/elpoelma))
+* [#314](https://github.com/lblod/frontend-gelinkt-notuleren/pull/314) Environment banner styling and fixes ([@Dietr](https://github.com/Dietr))
+
+#### :house: Internal
+* [#321](https://github.com/lblod/frontend-gelinkt-notuleren/pull/321) Bump parse-path, release-it and release-it-lerna-changelog ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#318](https://github.com/lblod/frontend-gelinkt-notuleren/pull/318) extract environment banner functionality and component to seperate repo ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 4
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 2.29.0 (2022-08-12)
 
 #### :rocket: Enhancement
