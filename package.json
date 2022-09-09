@@ -24,7 +24,8 @@
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
     "test": "npm-run-all lint test:*",
-    "test:ember": "ember test"
+    "test:ember": "ember test",
+    "release": "release-it"
   },
   "devDependencies": {
     "@appuniversum/ember-appuniversum": "^1.2.1",
