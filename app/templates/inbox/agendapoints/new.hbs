@@ -1,5 +1,10 @@
 {{page-title (t "inbox.agendapoints.new.title")}}
-<DocumentCreator @onRollback={{this.cancelAgendapointCreation}} @onCreate={{this.redirectToAgendapoint}} as |creator|>
+<DocumentCreator
+  @onRollback={{this.cancelAgendapointCreation}}
+  @onCreate={{this.redirectToAgendapoint}}
+  @folderId={{this.folderId}}
+  @templateOptions={{this.templateOptions}}
+  as |creator|>
   <AuModal
     @title={{t "inbox.agendapoints.new.title"}}
     @modalOpen={{true}}

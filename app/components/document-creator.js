@@ -4,7 +4,6 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import {
-  DRAFT_FOLDER_ID,
   DRAFT_STATUS_ID,
 } from 'frontend-gelinkt-notuleren/utils/constants';
 import instantiateUuids from '@lblod/ember-rdfa-editor-standard-template-plugin/utils/instantiate-uuids';
@@ -13,7 +12,6 @@ export default class DocumentCreatorComponent extends Component {
   @tracked title = '';
   @tracked type;
   @tracked template;
-  @tracked templateOptions = [];
   @tracked invalidTitle;
   @tracked invalidTemplate;
   @tracked errorSaving;
@@ -21,11 +19,6 @@ export default class DocumentCreatorComponent extends Component {
   @service store;
   @service rdfaEditorStandardTemplatePlugin;
   @service currentSession;
-
-  constructor() {
-    super(...arguments);
-    this.ensureTemplates.perform();
-  }
 
   @action
   rollback() {
@@ -86,19 +79,12 @@ export default class DocumentCreatorComponent extends Component {
     }
   }
 
-  @task
-  *ensureTemplates() {
-    const templates =
-      yield this.rdfaEditorStandardTemplatePlugin.fetchTemplates.perform();
-    this.templateOptions =
-      this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, [
-        'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
-      ]);
-  }
-
   async buildTemplate() {
     if (this.template) {
-      await this.template.reload(); // templatesForContext does not return body of template
+      if (this.template.reload) {
+        // regular templates from templatesForContext do not return body of template
+        await this.template.reload();
+      }
       return instantiateUuids(this.template.body);
     } else return '';
   }
@@ -123,7 +109,7 @@ export default class DocumentCreatorComponent extends Component {
       );
       container.folder = yield this.store.findRecord(
         'editor-document-folder',
-        DRAFT_FOLDER_ID
+        this.args.folderId
       );
       container.publisher = this.currentSession.group;
       container.currentVersion = editorDocument;
