@@ -4,3 +4,18 @@ export const EDITOR_FOLDERS = {
   REGULATORY_STATEMENTS: 'd80d06d2-8fc2-4b12-821f-e88b2f035a44',
   TRASH: '5A8304E8C093B00009000010',
 };
+
+export const PLUGIN_CONFIGS = {
+  TABLE_OF_CONTENTS: [
+    {
+      sectionPredicate: 'https://say.data.gift/ns/hasPart',
+      value: {
+        predicate: 'https://say.data.gift/ns/heading',
+      },
+    },
+    {
+      sectionPredicate: 'https://say.data.gift/ns/hasParagraph',
+      value: '§',
+    },
+  ],
+};

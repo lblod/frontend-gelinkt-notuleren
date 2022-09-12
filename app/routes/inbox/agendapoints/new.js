@@ -13,9 +13,11 @@ export default class InboxAgendapointsNewRoute extends Route {
   }
 
   async model() {
-    const templates = await this.rdfaEditorStandardTemplatePlugin.fetchTemplates.perform();
-    return this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, [
-      'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
-    ]);
+    const templates =
+      await this.rdfaEditorStandardTemplatePlugin.fetchTemplates.perform();
+    return this.rdfaEditorStandardTemplatePlugin.templatesForContext(
+      templates,
+      ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt']
+    );
   }
 }

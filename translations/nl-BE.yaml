@@ -51,6 +51,7 @@ inbox:
     agendaPoint: Agendapunt
     new:
       title: Nieuwe reglementaire bijlage
+      errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage
   irgArchive:
     return: Terug naar overzicht IRG archief
     pageTitle: IRG Archief

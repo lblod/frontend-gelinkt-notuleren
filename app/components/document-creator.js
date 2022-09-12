@@ -3,9 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
-import {
-  DRAFT_STATUS_ID,
-} from 'frontend-gelinkt-notuleren/utils/constants';
+import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import instantiateUuids from '@lblod/ember-rdfa-editor-standard-template-plugin/utils/instantiate-uuids';
 
 export default class DocumentCreatorComponent extends Component {

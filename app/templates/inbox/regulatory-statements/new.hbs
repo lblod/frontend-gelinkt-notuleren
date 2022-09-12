@@ -1,0 +1,35 @@
+{{page-title (t 'inbox.regulatoryStatements.new.title')}}
+<DocumentCreator
+  @onRollback={{this.cancelCreation}}
+  @onCreate={{this.redirectToStatement}}
+  @folderId={{this.folderId}}
+  @templateOptions={{this.templateOptions}}
+  as |creator|>
+  <AuModal
+    @title={{t "inbox.regulatoryStatements.new.title"}}
+    @modalOpen={{true}}
+    @closeModal={{creator.rollback}}
+    as |Modal|
+  >
+  <Modal.Body>
+    <creator.form />
+
+    {{#if creator.errorSaving}}
+      <AuAlert @alertIcon="cross" @alertTitle={{t "inbox.regulatoryStatements.new.errorSaving"}} @alertSkin="error" @closable={{true}}>
+        {{creator.errorSaving}}
+      </AuAlert>
+    {{/if}}
+
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton {{on "click" creator.create}} @isLoading={{creator.isSaving}} @disabled={{creator.isSaving}}>
+        {{t "inbox.agendapoints.new.create"}}
+      </AuButton>
+      <AuButton {{on "click" creator.rollback}} @skin="secondary">
+        {{t "inbox.agendapoints.new.cancel"}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>
+</DocumentCreator>
