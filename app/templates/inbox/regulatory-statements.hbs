@@ -22,30 +22,19 @@
   <table.content as |c|>
     <c.header>
       <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.titleLabel'}} />
-      {{!-- <th><span class="au-c-data-table__header-title">{{t 'inbox.regulatoryStatements.agendaPoint'}}</span></th> --}}
-      {{!-- <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.type'}} /> --}}
-      {{!-- <AuDataTableThSortable @field="status.label" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.statusLabel'}} /> --}}
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.updatedOnLabel'}} />
     </c.header>
-    <tbody>
-      <tr>
+    <c.body as |container|>
+      {{#let container.currentVersion as |row|}}
         <td>
-          <AuLink @route="regulatory-statements.edit">Titel reglementaire bijlage</AuLink>
-        </td>
-        {{!-- <td>
-          <AuLink>Agendapunt 1</AuLink>
+          <AuLink @route="regulatory-statements.edit" @model={{row.id}}>{{row.currentVersion.title}}</AuLink>
         </td>
         <td>
-          Belasting
-        </td> --}}
-        {{!-- <td>
-          <AuPill @size="small">Ontwerp</AuPill>
-        </td> --}}
-        <td>
-          31-05-2022
+          {{human-friendly-date row.updatedOn}}
+          <br>
         </td>
-      </tr>
-    </tbody>
+      {{/let}}
+    </c.body>
   </table.content>
 </AuDataTable>
 {{outlet}}
