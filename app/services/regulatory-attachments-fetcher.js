@@ -18,10 +18,12 @@ export default class RegulatoryAttachmentsFetcher extends Service {
     const config = getOwner(this).resolveRegistration('config:environment');
     const sparqlQuery = `
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
       PREFIX pav: <http://purl.org/pav/>
       PREFIX dct: <http://purl.org/dc/terms/>
       select distinct * where {
         ?reglement ext:publishedVersion ?publishedContainer .
+        ?publishedContainer mu:uuid ?uuid.
         ?reglement ext:hasDocumentContainer ?container.
         ?container pav:hasCurrentVersion ?version.
         ?version dct:title ?title.
@@ -51,8 +53,14 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       const templates = bindings.map((binding) => ({
         container: binding.container.value,
         title: binding.title.value,
+        reload: async (template) => {
+          const response = await fetch(
+            `${config.regulatoryStatementPreviewEndpoint}/${binding.uuid.value}`
+          );
+          const json = await response.json();
+          template.body = json.content;
+        },
       }));
-      console.log(templates);
       return templates;
     } else {
       return [];

@@ -81,7 +81,7 @@ export default class DocumentCreatorComponent extends Component {
     if (this.template) {
       if (this.template.reload) {
         // regular templates from templatesForContext do not return body of template
-        await this.template.reload();
+        await this.template.reload(this.template);
       }
       return instantiateUuids(this.template.body);
     } else return '';

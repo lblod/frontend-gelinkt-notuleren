@@ -8,7 +8,6 @@ export default class SignaturesPublicationStatus extends Component {
   @tracked ready = false;
   @action
   async loadResource() {
-    console.log(this.args.versionedResource.get('signedResources'));
     this.signedResources =
       (await this.args.versionedResource.get('signedResources')) || [];
     this.publishedResource = await this.args.versionedResource.get(
