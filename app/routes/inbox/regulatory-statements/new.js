@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default class InboxRegulatoryStatementsNewRoute extends Route {
   @service currentSession;
   @service router;
-  @service rdfaEditorStandardTemplatePlugin;
+  @service regulatoryAttachmentsFetcher;
 
   beforeModel() {
     if (!this.currentSession.canWrite) {
@@ -13,7 +13,7 @@ export default class InboxRegulatoryStatementsNewRoute extends Route {
   }
 
   async model() {
-    const templates = [{ title: 'Vrije ingave', body: '' }];
+    const templates = await this.regulatoryAttachmentsFetcher.fetch.perform();
     return templates;
   }
 }
