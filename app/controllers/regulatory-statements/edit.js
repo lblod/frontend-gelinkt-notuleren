@@ -8,14 +8,20 @@ export default class RegulatoryStatementsRoute extends Controller {
     { name: 'rdfa-toc', options: { config: PLUGIN_CONFIGS.TABLE_OF_CONTENTS } },
   ];
 
+  get dirty() {
+    return this.editorDocument.content !== this.editor.htmlContent;
+  }
+
+  get editorDocument() {
+    return this._editorDocument || this.model.editorDocument;
+  }
+
+  get documentContainer() {
+    return this.model.documentContainer;
+  }
+
   @action
-  rdfaEditorInit(controller) {
-    controller.executeCommand(
-      'insert-component',
-      'inline-components/table-of-contents',
-      {},
-      {},
-      false
-    );
+  handleRdfaEditorInit(controller) {
+    controller.setHtmlContent(this.editorDocument.content);
   }
 }

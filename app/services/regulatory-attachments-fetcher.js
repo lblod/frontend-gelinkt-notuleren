@@ -22,11 +22,10 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       PREFIX pav: <http://purl.org/pav/>
       PREFIX dct: <http://purl.org/dc/terms/>
       select distinct * where {
-        ?reglement ext:publishedVersion ?publishedContainer .
-        ?publishedContainer mu:uuid ?uuid.
-        ?reglement ext:hasDocumentContainer ?container.
-        ?container pav:hasCurrentVersion ?version.
-        ?version dct:title ?title.
+        ?publishedContainer a ext:PublishedRegulatoryAttachmentContainer;
+          mu:uuid ?uuid;
+          ext:currentVersion ?container.
+        ?container dct:title ?title.
       } 
     `;
     const details = {
