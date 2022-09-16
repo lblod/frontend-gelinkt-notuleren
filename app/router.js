@@ -68,6 +68,7 @@ Router.map(function () {
     this.route('show', { path: ':id' });
   });
   this.route('regulatory-statements', function () {
-    this.route('edit', { path: ':id' });
+    this.route('edit', { path: '/:id/edit' });
+    this.route('show', { path: ':id/show' });
   });
 });

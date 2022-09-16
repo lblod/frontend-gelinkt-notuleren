@@ -11,8 +11,8 @@ export default class RegulatoryStatementsEditRoute extends Route {
   beforeModel(transition) {
     if (!this.currentSession.canWrite) {
       const id = transition.to.params?.id;
-      //this.router.transitionTo('regulatory-statements.show', id);
-      //return;
+      this.router.transitionTo('regulatory-statements.show', id);
+      return;
     }
   }
 
