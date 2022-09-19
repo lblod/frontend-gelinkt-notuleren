@@ -1,6 +1,9 @@
 {{page-title "reglementaire bijlage"}}
 
-<AppChromeStatement
+<AppChrome
+  @editorDocument={{this.editorDocument}}
+  @documentContainer={{this.documentContainer}}
+  @save={{hash action=(perform this.saveTask) isRunning=this.saveTask.isRunning}}
   @returnRoute="inbox.regulatory-statements"
   @returnRouteText={{t 'inbox.regulatoryStatements.return'}}
 />
