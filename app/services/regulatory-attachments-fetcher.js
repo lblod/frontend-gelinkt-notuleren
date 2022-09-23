@@ -26,16 +26,16 @@ export default class RegulatoryAttachmentsFetcher extends Service {
           mu:uuid ?uuid;
           ext:currentVersion ?container.
         ?container dct:title ?title.
-      } 
+      }
     `;
     const details = {
       query: sparqlQuery,
       format: 'application/json',
     };
-    var formBody = [];
-    for (var property in details) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue = encodeURIComponent(details[property]);
+    let formBody = [];
+    for (const property in details) {
+      const encodedKey = encodeURIComponent(property);
+      const encodedValue = encodeURIComponent(details[property]);
       formBody.push(encodedKey + '=' + encodedValue);
     }
     formBody = formBody.join('&');
