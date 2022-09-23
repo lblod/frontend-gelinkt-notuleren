@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-import instantiateUuids from '@lblod/ember-rdfa-editor-standard-template-plugin/utils/instantiate-uuids';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class DocumentCreatorComponent extends Component {
   @tracked title = '';
@@ -117,4 +117,15 @@ export default class DocumentCreatorComponent extends Component {
       this.errorSaving = e.message;
     }
   }
+}
+// we can't afford to import the one from the template plugin
+// as the regex is way too loose and also tries to evaluate
+// all the variables in the string, which coincidentally use the
+// exact same syntax
+function instantiateUuids(templateString) {
+  let generateUuid = uuidv4; // eslint-disable-line no-unused-vars
+  return templateString.replace(/\$\{generateUuid()}/g, (match) => {
+    //input '${content}' and eval('content')
+    return eval(match.substring(2, match.length - 1));
+  });
 }
