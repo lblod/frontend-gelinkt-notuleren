@@ -419,7 +419,6 @@ body {
   @include au-font-size($au-base);
   display: none;
   position: absolute;
-
   left: 50%;
   transform: translateX(-50%);
   z-index: $au-z-index-beta;
@@ -488,6 +487,32 @@ body {
     pointer-events: none;
     border-width: .4rem;
     margin-left: -.2rem;
+  }
+
+  &:before {
+    border-color: rgba($au-white, 0);
+    border-bottom-color: $au-blue-900;
+  }
+}
+
+.au-c-button__tooltip--bottom-right {
+  top: calc(100% + .8rem);
+  left: auto;
+  right: 0;
+  transform: translateX(0);
+
+  &:before {
+    bottom: 100%;
+    left: auto;
+    right: $au-unit-small;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: .4rem;
+    margin-left: 0;
   }
 
   &:before {

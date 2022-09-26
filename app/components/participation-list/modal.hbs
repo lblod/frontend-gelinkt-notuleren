@@ -39,11 +39,15 @@
     {{yield}}
   </Modal.Body>
   <Modal.Footer>
-    <AuButtonGroup>
-      <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
-      <AuButton @skin="secondary" {{on "click" this.onCancel}}>
-        {{t "participationListModal.cancelButton"}}
-      </AuButton>
-    </AuButtonGroup>
+    <AuToolbar as |Group|>
+      <Group>
+        <AuButton @skin="naked" {{on "click" this.onCancel}}>
+          {{t "participationListModal.cancelButton"}}
+        </AuButton>
+      </Group>
+      <Group>
+        <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
+      </Group>
+    </AuToolbar>
   </Modal.Footer>
 </AuModal>
