@@ -24,7 +24,6 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   @task
   *saveTask() {
-    console.log('saving')
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {
