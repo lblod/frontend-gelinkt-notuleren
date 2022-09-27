@@ -8,6 +8,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   plugins = [
     'article-structure',
     { name: 'rdfa-toc', options: { config: PLUGIN_CONFIGS.TABLE_OF_CONTENTS } },
+    'insert-variable'
   ];
 
   get dirty() {
