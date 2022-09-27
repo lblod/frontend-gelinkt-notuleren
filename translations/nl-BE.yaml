@@ -413,6 +413,6 @@ attachments:
   noDecisionsFound: Geen besluiten gevonden
   decisionRequired: Enkel bijlagen bij een besluit worden opgenomen in de publicatie.
 documentCreator:
-  titleField: Titel agendapunt
+  titleField: Titel document
   template: Sjabloon
   templateSelectPlaceholder: Kies een sjabloon

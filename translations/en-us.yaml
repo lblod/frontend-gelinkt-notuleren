@@ -412,6 +412,6 @@ attachments:
   noDecisionsFound: No decisions found
   decisionRequired: Only attachments linked to a decision are included in the publication.
 documentCreator:
-  titleField: Agendapoint title
+  titleField: Document title
   template: Template
   templateSelectPlaceholder: Select a template
