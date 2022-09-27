@@ -27,7 +27,7 @@
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
         <td>
-          <AuLink @route="regulatory-statements.edit" @model={{row.id}}>{{row.title}}</AuLink>
+          <AuLink @route="regulatory-statements.edit" @model={{container.id}}>{{row.title}}</AuLink>
         </td>
         <td>
           {{human-friendly-date row.updatedOn}}
