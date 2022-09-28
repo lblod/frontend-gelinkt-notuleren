@@ -48,7 +48,7 @@
     "@lblod/ember-rdfa-editor-roadsign-regulation-plugin": "^0.9.1",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "~0.13.0",
     "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.4.2",
-    "@lblod/ember-rdfa-editor-template-variable-plugin": "^0.7.0",
+    "@lblod/ember-rdfa-editor-template-variable-plugin": "^0.7.1",
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
@@ -113,8 +113,8 @@
     "sass": "^1.49.9",
     "tracked-built-ins": "^2.0.1",
     "tracked-toolbox": "^1.2.3",
-    "webpack": "^5.70.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "webpack": "^5.70.0"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
