@@ -111,7 +111,7 @@ export default class SignaturesTimelineStep extends Component {
       return { label: 'Eerste ondertekening verkregen', color: 'warning' };
     if (this.status === 'secondSignature')
       return { label: 'Getekend', color: 'success' };
-    if (this.status === 'concept') return { label: 'Concept' };
+    if (this.status === 'concept') return { label: 'In voorbereiding' };
     return 'concept';
   }
 
