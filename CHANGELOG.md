@@ -6,6 +6,21 @@
 
 
 
+## 2.31.1 (2022-09-30)
+
+#### :bug: Bug Fix
+* [#332](https://github.com/lblod/frontend-gelinkt-notuleren/pull/332) bumps the variable template plugin ([@nvdk](https://github.com/nvdk))
+* [#331](https://github.com/lblod/frontend-gelinkt-notuleren/pull/331) Fixed bug where the attachment wasn't assigned to the first decision when inserted ([@lagartoverde](https://github.com/lagartoverde))
+* [#330](https://github.com/lblod/frontend-gelinkt-notuleren/pull/330) Fix selection errors when trying to save with empty selection ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#328](https://github.com/lblod/frontend-gelinkt-notuleren/pull/328) chore(deps): bump editor and plugins to newest bugfix releases ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 3
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.31.0 (2022-09-09)
 
 #### :house: Internal
