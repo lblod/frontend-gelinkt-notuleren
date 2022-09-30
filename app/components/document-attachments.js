@@ -55,7 +55,7 @@ export default class DocumentAttachmentsComponent extends Component {
     newAttachment.file = file;
     newAttachment.documentContainer = documentContainer;
     if (this.args.decisions.length === 1) {
-      newAttachment.decision = this.args.decisions[0];
+      newAttachment.decision = this.args.decisions[0].uri;
     }
 
     yield newAttachment.save();
