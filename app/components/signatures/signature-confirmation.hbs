@@ -45,9 +45,13 @@
     </div>
   </Modal.Body>
   <Modal.Footer>
-    <AuButtonGroup>
-      <AuButton {{on "click" @confirm}}>{{concat (t "signatureConfirmation.confirmButton") @name}}</AuButton>
-      <AuButton @skin="secondary" {{on "click" @cancel}}>{{t "signatureConfirmation.cancelButton"}}</AuButton>
-    </AuButtonGroup>
+    <AuToolbar class="au-u-hide-on-print" as |Group|>
+      <Group>
+        <AuButton @skin="naked" {{on "click" @cancel}}>{{t "signatureConfirmation.cancelButton"}}</AuButton>
+      </Group>
+      <Group>
+        <AuButton {{on "click" @confirm}}>{{concat (t "signatureConfirmation.confirmButton") @name}}</AuButton>
+      </Group>
+    </AuToolbar>
   </Modal.Footer>
 </AuModal>

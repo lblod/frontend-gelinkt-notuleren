@@ -63,7 +63,21 @@
   </Modal.Body>
   <Modal.Footer>
     <AuToolbar>
+      <AuButton @skin="naked" {{on "click" this.cancel}}>
+        {{t "manageIntermissions.cancelLabel"}}
+      </AuButton>
       <AuButtonGroup>
+         {{#unless @intermissionToEdit.isNew}}
+        <AuButton
+          @alert={{true}}
+          @skin="secondary"
+          @loading={{this.deleteTask.isRunning}}
+          @icon="bin"
+          @iconAlignment="left"
+          {{on "click" (perform this.deleteTask @intermissionToEdit)}} >
+            {{t "manageIntermissions.deleteButton"}}
+        </AuButton>
+        {{/unless}}
         <AuButton
           @loading={{this.saveIntermission.isRunning}}
           {{on "click" (perform this.saveIntermission)}}
@@ -74,21 +88,7 @@
             {{t "manageIntermissions.saveLabel"}}
           {{/if}}
         </AuButton>
-        <AuButton @skin="secondary" {{on "click" this.cancel}}>
-          {{t "manageIntermissions.cancelLabel"}}
-        </AuButton>
       </AuButtonGroup>
-      {{#unless @intermissionToEdit.isNew}}
-      <AuButton
-        @alert={{true}}
-        @skin="tertiary"
-        @loading={{this.deleteTask.isRunning}}
-        @icon="bin"
-        @iconAlignment="left"
-        {{on "click" (perform this.deleteTask @intermissionToEdit)}} >
-          {{t "manageIntermissions.deleteButton"}}
-      </AuButton>
-      {{/unless}}
     </AuToolbar>
   </Modal.Footer>
 </AuModal>
