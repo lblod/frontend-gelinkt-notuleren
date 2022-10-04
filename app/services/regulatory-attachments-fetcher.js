@@ -28,9 +28,10 @@ export default class RegulatoryAttachmentsFetcher extends Service {
           ext:currentVersion ?container.
         ?container dct:title ?title.
         ?reglement ext:publishedVersion ?publishedContainer.
-        FILTER NOT EXISTS {
+        OPTIONAL { 
           ?reglement schema:validThrough ?validThrough.
         }
+        FILTER( ! BOUND(?validThrough) || ?validThrough < NOW()) 
       }
     `;
     const details = {
