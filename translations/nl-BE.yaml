@@ -202,7 +202,7 @@ manageAgendaZittingModalMove:
   agendapuntSelectPlaceholder: Selecteer agendapunt
   searchPlaceholder: Zoek op titel
 manageAgendaZittingModalDraftImport:
-  title: Agendapunt concept selecteren
+  title: Agendapunt in voorbereiding selecteren
   default: Nieuw agendapunt opstellen of bestaand agendapunt selecteren.
 voting:
   openModalButton: Beheer stemming
@@ -327,6 +327,10 @@ blockchainStatus:
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
 appChrome:
   copyAgendapoint: Kopieer agendapunt
+  defaultDocumentStatus: Voorbereiding niet bewaard
+  deleteConcept: Verwijder voorbereiding
+
+
 manageIntermissions:
   interruptionStartLabel: Start onderbreking
   interruptionEndLabel: Einde onderbreking
@@ -402,3 +406,5 @@ documentCreator:
   titleField: Titel agendapunt
   template: Sjabloon
   templateSelectPlaceholder: Kies een sjabloon
+editorStatusPill:
+  defaultStatus: In voorbereiding

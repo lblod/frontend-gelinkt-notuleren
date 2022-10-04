@@ -24,7 +24,7 @@ export default class SignaturesPublicationStatus extends Component {
     } else if (this.signedResources.length === 2) {
       return { label: 'Getekend', color: 'success' };
     } else {
-      return { label: 'Concept' };
+      return { label: 'In voorbereiding' };
     }
   }
 }
