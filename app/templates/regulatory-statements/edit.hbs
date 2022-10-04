@@ -13,6 +13,7 @@
   <RdfaEditorContainer
     @plugins={{this.plugins}}
     @rdfaEditorInit={{this.handleRdfaEditorInit}}
+    @typeOfWrappingDiv="lblodgn:ReglementaireBijlage"
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning}}
