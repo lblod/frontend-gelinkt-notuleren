@@ -5,6 +5,7 @@ const defaultContext = {
     prov: 'http://www.w3.org/ns/prov#',
     mandaat: 'http://data.vlaanderen.be/ns/mandaat#',
     besluit: 'http://data.vlaanderen.be/ns/besluit#',
+    dossier: 'https://data.vlaanderen.be/ns/dossier',
     ext: 'http://mu.semte.ch/vocabularies/ext/',
     person: 'http://www.w3.org/ns/person#',
     persoon: 'http://data.vlaanderen.be/ns/persoon#',
@@ -13,6 +14,7 @@ const defaultContext = {
     dct: 'http://purl.org/dc/terms/',
     mobiliteit: 'https://data.vlaanderen.be/ns/mobiliteit#',
     lblodmow: 'http://data.lblod.info/vocabularies/mobiliteit/',
+    say: 'https://say.data.gift/ns/',
   },
 };
 
