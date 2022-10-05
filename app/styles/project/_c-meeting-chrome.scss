@@ -62,11 +62,10 @@
 
   > .au-c-button {
     position: absolute;
-    top: calc(100% - .1rem);
     left: -.1rem;
     width: calc(100% + .2rem);
-    border-width: .1rem;
-    border-color: $au-gray-300;
+    border-width: .1rem !important;
+    border-color: $au-gray-300 !important;
     background-color: $au-white;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -75,8 +74,8 @@
   & + .au-c-button {
     position: relative;
     margin-top: -$au-unit-small - .1rem !important; // Spacing hack as this button is used in multiple places
-    border-width: .1rem;
-    border-color: $au-gray-300;
+    border-width: .1rem !important;
+    border-color: $au-gray-300 !important;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
@@ -87,6 +86,7 @@
 
   .au-c-editor-preview {
     border: 0;
+    padding-left: $au-unit;
   }
 }
 

@@ -340,6 +340,8 @@ blockchainStatus:
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
 appChrome:
   copyAgendapoint: Copy Agendapoint
+  defaultDocumentStatus: Concept not saved
+  deleteConcept: Delete concept
 manageIntermissions:
   interruptionStartLabel: Start
   interruptionEndLabel: End
@@ -415,3 +417,5 @@ documentCreator:
   titleField: Document title
   template: Template
   templateSelectPlaceholder: Select a template
+editorStatusPill:
+  defaultStatus: Concept
