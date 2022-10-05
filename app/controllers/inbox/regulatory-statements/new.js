@@ -3,24 +3,24 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { EDITOR_FOLDERS } from 'frontend-gelinkt-notuleren/config/constants';
 
-export default class InboxAgendapointsNewController extends Controller {
+export default class InboxRegulatoryStatementsNewController extends Controller {
   @service router;
   @service plausible;
 
-  folderId = EDITOR_FOLDERS.DECISION_DRAFTS;
+  folderId = EDITOR_FOLDERS.REGULATORY_STATEMENTS;
 
   @action
-  redirectToAgendapoint(container, chosenTemplate) {
+  redirectToStatement(container, chosenTemplate) {
     // Plausible Analytics: post custom event about the template used to create the agendapoint
-    this.plausible.trackEvent('Create agendapoint', {
-      templateTitle: chosenTemplate.get('title'),
+    this.plausible.trackEvent('Create regulatory-statement', {
+      templateTitle: chosenTemplate.title,
     });
-    this.router.transitionTo('agendapoints.edit', container.id);
+    this.router.transitionTo('regulatory-statements.edit', container.id);
   }
 
   @action
-  cancelAgendapointCreation() {
-    this.router.transitionTo('inbox.agendapoints');
+  cancelCreation() {
+    this.router.transitionTo('inbox.regulatory-statements');
   }
 
   get templateOptions() {

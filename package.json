@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
+    "prototype": "ember serve --proxy https://futurenow.gelinkt-notuleren.lblod.info",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel 'lint:!(fix)'",
     "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
     "lint:hbs": "ember-template-lint .",
@@ -28,7 +29,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^1.5.0",
+    "@appuniversum/ember-appuniversum": "^1.8.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^2.0.4",
     "@ember/test-helpers": "^2.6.0",
@@ -37,6 +38,8 @@
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-environment-banner": "^0.1.1",
     "@lblod/ember-mock-login": "0.6.0",
+    "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.3.0",
+    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.4.3",
     "@lblod/ember-rdfa-editor": "^0.63.4",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.5.5",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.9.1",
@@ -110,6 +113,7 @@
     "sass": "^1.49.9",
     "tracked-built-ins": "^2.0.1",
     "tracked-toolbox": "^1.2.3",
+    "uuid": "^8.3.2",
     "webpack": "^5.70.0"
   },
   "engines": {

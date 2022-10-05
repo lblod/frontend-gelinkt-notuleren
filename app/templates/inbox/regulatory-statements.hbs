@@ -1,0 +1,58 @@
+{{page-title (t "inbox.regulatoryStatements.pageTitle")}}
+<SnippetsNotifier/>
+
+<AuDataTable @content={{this.model}}
+             @isLoading={{this.isLoadingModel}}
+             @noDataMessage={{t 'inbox.regulatoryStatements.noDataMessage'}}
+             @sort={{this.sort}}
+             @page={{this.page}}
+             @size={{this.pageSize}}
+             as |table|>
+  <table.menu as |menu|>
+    <menu.general>
+      <AuToolbar class="au-o-box" @size="large">
+        <AuToolbarGroup>
+          <AuHeading @skin="2">
+            {{t 'inbox.regulatoryStatements.pageTitle'}}
+          </AuHeading>
+        </AuToolbarGroup>
+        <AuToolbarGroup class="au-c-toolbar__group--center">
+          <AuInput
+            {{on "input" (perform this.updateFilter)}}
+            @icon="search"
+            @iconAlignment="right"
+            @value={{this.searchValue}}
+            placeholder={{t 'inbox.regulatoryStatements.searchPlaceholder'}}
+          />
+          {{#unless this.readOnly}}
+            <AuLink
+              @route="inbox.regulatory-statements.new"
+              @skin="button" @icon="add" @iconAlignment="left">
+              {{t "inbox.regulatoryStatements.new.title"}}
+            </AuLink>
+          {{/unless}}
+        </AuToolbarGroup>
+      </AuToolbar>
+    </menu.general>
+  </table.menu>
+  <table.content as |c|>
+    <c.header>
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t
+        'inbox.regulatoryStatements.titleLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t
+        'inbox.regulatoryStatements.updatedOnLabel'}} />
+    </c.header>
+    <c.body as |container|>
+      {{#let container.currentVersion as |row|}}
+        <td>
+          <AuLink @route="regulatory-statements.edit" @model={{container.id}}>{{row.title}}</AuLink>
+        </td>
+        <td>
+          {{human-friendly-date row.updatedOn}}
+          <br>
+        </td>
+      {{/let}}
+    </c.body>
+  </table.content>
+</AuDataTable>
+{{outlet}}

@@ -20,7 +20,6 @@ export default class MeetingsPublishUittrekselsRoute extends Route.extend(
   };
 
   mergeQueryOptions(params) {
-    console.log(params);
     const query = {
       include: 'behandeling.versioned-behandeling',
       filter: { zitting: { ':id:': this.meetingId } },
