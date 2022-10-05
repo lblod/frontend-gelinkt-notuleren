@@ -29,7 +29,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^1.5.0",
+    "@appuniversum/ember-appuniversum": "^1.8.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^2.0.4",
     "@ember/test-helpers": "^2.6.0",
@@ -39,7 +39,7 @@
     "@lblod/ember-environment-banner": "^0.1.1",
     "@lblod/ember-mock-login": "0.6.0",
     "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.3.0",
-    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.4.2",
+    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.4.3",
     "@lblod/ember-rdfa-editor": "^0.63.4",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.5.5",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.9.1",

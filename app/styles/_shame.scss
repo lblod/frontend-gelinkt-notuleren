@@ -613,11 +613,6 @@ div.table-of-contents {
   ul li {
     list-style-type: none !important;
   }
-
-  button {
-    @extend .au-c-button--link-secondary;
-    padding: 0;
-  }
 }
 
 [property="say:hasPart"] + [property="say:hasPart"] {
