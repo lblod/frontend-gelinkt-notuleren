@@ -6,6 +6,31 @@
 
 
 
+
+## 2.32.0 (2022-10-05)
+
+#### :rocket: Enhancement
+* [#325](https://github.com/lblod/frontend-gelinkt-notuleren/pull/325) Feature/regulatory statements ([@nvdk](https://github.com/nvdk))
+* [#329](https://github.com/lblod/frontend-gelinkt-notuleren/pull/329) Rename 'concept' to 'In voorbereiding' ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#336](https://github.com/lblod/frontend-gelinkt-notuleren/pull/336) Fix sorting, search and pagination on RS overview page ([@abeforgit](https://github.com/abeforgit))
+* [#334](https://github.com/lblod/frontend-gelinkt-notuleren/pull/334) Update toc plugin which fixes issues with overflowing entries ([@elpoelma](https://github.com/elpoelma))
+* [#333](https://github.com/lblod/frontend-gelinkt-notuleren/pull/333) Filter based on validThrough property ([@lagartoverde](https://github.com/lagartoverde))
+* [#327](https://github.com/lblod/frontend-gelinkt-notuleren/pull/327) Fix/button alignment ([@Dietr](https://github.com/Dietr))
+* [#326](https://github.com/lblod/frontend-gelinkt-notuleren/pull/326) Repair basic RB registry integration ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#335](https://github.com/lblod/frontend-gelinkt-notuleren/pull/335) Add RB endpoints to devenv ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 5
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 2.31.1 (2022-09-30)
 
 #### :bug: Bug Fix
