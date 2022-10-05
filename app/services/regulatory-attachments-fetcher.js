@@ -21,11 +21,17 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
       PREFIX pav: <http://purl.org/pav/>
       PREFIX dct: <http://purl.org/dc/terms/>
+      PREFIX schema: <http://schema.org/>
       select distinct * where {
         ?publishedContainer a ext:PublishedRegulatoryAttachmentContainer;
           mu:uuid ?uuid;
           ext:currentVersion ?container.
         ?container dct:title ?title.
+        ?reglement ext:publishedVersion ?publishedContainer.
+        OPTIONAL { 
+          ?reglement schema:validThrough ?validThrough.
+        }
+        FILTER( ! BOUND(?validThrough) || ?validThrough > NOW()) 
       }
     `;
     const details = {

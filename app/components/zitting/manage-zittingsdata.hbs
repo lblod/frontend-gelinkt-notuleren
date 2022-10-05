@@ -72,14 +72,18 @@
       </div>
     </Modal.Body>
     <Modal.Footer>
-      <AuButtonGroup>
-        <AuButton {{on "click" this.saveZittingsData}}>
-          {{t "manageZittingsData.saveButton"}}
-        </AuButton>
-        <AuButton {{on "click" this.cancel}} @skin="secondary">
-          {{t "manageZittingsData.cancelButton"}}
-        </AuButton>
-      </AuButtonGroup>
+      <AuToolbar as |Group|>
+        <Group>
+          <AuButton @skin="naked" {{on "click" this.cancel}}>
+            {{t "manageZittingsData.cancelButton"}}
+          </AuButton>
+        </Group>
+        <Group>
+          <AuButton {{on "click" this.saveZittingsData}}>
+            {{t "manageZittingsData.saveButton"}}
+          </AuButton>
+        </Group>
+      </AuToolbar>
     </Modal.Footer>
   </AuModal>
 {{/if}}

@@ -86,6 +86,7 @@
               <AuButtonGroup>
                 <AuButton
                   {{on "click" (fn this.toggleEditStemming stemming)}}
+                  @skin="secondary"
                   @icon="pencil"
                   @iconAlignment="left"
                 >
@@ -94,6 +95,7 @@
                 <AuButton
                   {{on "click" (fn (perform this.removeStemming) stemming)}}
                   @skin="secondary"
+                  @alert={{true}}
                   @icon="bin"
                   @iconAlignment="left"
                   @loading={{ this.removeStemming.isRunning }}

@@ -13,19 +13,19 @@
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>
-      <AuButton {{on "click" (perform this.saveTextTask)}}
+      <AuButton @skin="naked"
+                @disabled={{this.saveTextTask.isRunning}}
+        {{on "click" this.closeModal}}>
+        {{t "meetings.edit.outro.cancel"}}
+      </AuButton>
+    </AuButtonGroup>
+    <AuButtonGroup>
+      <AuButton @skin="secondary" {{on "click" (perform this.saveTextTask)}}
               @disabled={{this.saveTextTask.isRunning}}>
         {{t "meetings.edit.outro.save"}}
       </AuButton>
       <AuButton @disabled={{this.saveTextTask.isRunning}} {{on "click" this.saveAndQuit}}>
         {{t "meetings.edit.outro.saveAndQuit"}}
-      </AuButton>
-    </AuButtonGroup>
-    <AuButtonGroup>
-      <AuButton @skin="secondary"
-                @disabled={{this.saveTextTask.isRunning}}
-        {{on "click" this.closeModal}}>
-        {{t "meetings.edit.outro.cancel"}}
       </AuButton>
     </AuButtonGroup>
   </Modal.Footer>

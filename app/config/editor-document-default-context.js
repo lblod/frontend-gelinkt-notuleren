@@ -13,6 +13,7 @@ const defaultContext = {
     besluittype: 'https://data.vlaanderen.be/id/concept/BesluitType/',
     dct: 'http://purl.org/dc/terms/',
     mobiliteit: 'https://data.vlaanderen.be/ns/mobiliteit#',
+    lblodgn: 'http://data.lblod.info/vocabularies/gelinktnotuleren/',
     lblodmow: 'http://data.lblod.info/vocabularies/mobiliteit/',
     say: 'https://say.data.gift/ns/',
   },
