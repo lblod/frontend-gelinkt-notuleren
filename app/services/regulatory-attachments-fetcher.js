@@ -31,7 +31,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
         OPTIONAL { 
           ?reglement schema:validThrough ?validThrough.
         }
-        FILTER( ! BOUND(?validThrough) || ?validThrough < NOW()) 
+        FILTER( ! BOUND(?validThrough) || ?validThrough > NOW()) 
       }
     `;
     const details = {
