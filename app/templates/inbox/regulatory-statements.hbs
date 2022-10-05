@@ -1,7 +1,13 @@
 {{page-title (t "inbox.regulatoryStatements.pageTitle")}}
-<SnippetsNotifier />
+<SnippetsNotifier/>
 
-<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.regulatoryStatements.noDataMessage'}} @sort={{this.sort}} as |table|>
+<AuDataTable @content={{this.model}}
+             @isLoading={{this.isLoadingModel}}
+             @noDataMessage={{t 'inbox.regulatoryStatements.noDataMessage'}}
+             @sort={{this.sort}}
+             @page={{this.page}}
+             @size={{this.pageSize}}
+             as |table|>
   <table.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box" @size="large">
@@ -11,9 +17,19 @@
           </AuHeading>
         </AuToolbarGroup>
         <AuToolbarGroup class="au-c-toolbar__group--center">
-          <AuInput @icon="search" @iconAlignment="right" @value={{this.searchValue}} placeholder={{t 'inbox.regulatoryStatements.searchPlaceholder'}} />
+          <AuInput
+            {{on "input" (perform this.updateFilter)}}
+            @icon="search"
+            @iconAlignment="right"
+            @value={{this.searchValue}}
+            placeholder={{t 'inbox.regulatoryStatements.searchPlaceholder'}}
+          />
           {{#unless this.readOnly}}
-            <AuLink @route="inbox.regulatory-statements.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.regulatoryStatements.new.title"}}</AuLink>
+            <AuLink
+              @route="inbox.regulatory-statements.new"
+              @skin="button" @icon="add" @iconAlignment="left">
+              {{t "inbox.regulatoryStatements.new.title"}}
+            </AuLink>
           {{/unless}}
         </AuToolbarGroup>
       </AuToolbar>
@@ -21,8 +37,10 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.titleLabel'}} />
-      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.regulatoryStatements.updatedOnLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t
+        'inbox.regulatoryStatements.titleLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t
+        'inbox.regulatoryStatements.updatedOnLabel'}} />
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}

@@ -6,6 +6,7 @@ export default class InboxRegulatoryStatementsRoute extends Route {
   @service store;
 
   queryParams = {
+    pageSize: { refreshModel: true },
     page: { refreshModel: true },
     sort: { refreshModel: true },
     filter: { refreshModel: true },
@@ -18,6 +19,7 @@ export default class InboxRegulatoryStatementsRoute extends Route {
       'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
       page: {
         number: params.page,
+        size: params.pageSize,
       },
     };
     if (params.filter) {
