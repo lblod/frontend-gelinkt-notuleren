@@ -6,7 +6,7 @@ import { restartableTask, timeout } from 'ember-concurrency';
 
 export default class InboxDraftDecisionsController extends Controller {
   @tracked page = 0;
-  @tracked size = 10;
+  @tracked pageSize = 20;
   @tracked filter = '';
   @tracked searchValue = this.filter;
   @tracked debounceTime = 2000;
