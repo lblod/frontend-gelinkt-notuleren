@@ -27,11 +27,22 @@ export default class EditorDocumentTitleComponent extends Component {
   }
 
   @action
+  submit() {
+    this.args.onSubmit?.();
+    this.toggleActive();
+  }
+
+  @action
   toggleActive() {
     if (this.active && !this.title) {
       this.error = true;
     } else {
       this.active = !this.active;
     }
+  }
+
+  @action
+  focus(element) {
+    element.focus();
   }
 }

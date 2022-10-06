@@ -22,4 +22,9 @@ export default class AppChromeComponent extends Component {
   updateDocumentTitle(title) {
     this.args.editorDocument.title = title;
   }
+
+  @action
+  async saveDocument() {
+    this.args.editorDocument.save();
+  }
 }

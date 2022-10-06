@@ -47,7 +47,8 @@
         </AuPill>
         {{/if}}
       </div>
-      <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
+      <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} 
+        @onChange={{this.updateDocumentTitle}} @onSubmit={{this.saveDocument}} @readOnly={{@readOnly}} />
     </AuToolbarGroup>
     <AuToolbarGroup>
       {{#if @uploading}}
