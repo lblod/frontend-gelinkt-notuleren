@@ -63,7 +63,7 @@ export default class ZittingManageZittingsdataComponent extends Component {
 
   get startDiffersFromPlannedStart() {
     if (!!this.zitting.geplandeStart && !!this.zitting.gestartOpTijdstip) {
-      return this.geplandeStart != this.gestartOpTijdstip;
+      return this.geplandeStart.getTime() !== this.gestartOpTijdstip.getTime();
     } else return false;
   }
 
