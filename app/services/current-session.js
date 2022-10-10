@@ -40,7 +40,6 @@ export default class CurrentSessionService extends Service {
       this.group = await this.store.findRecord('bestuurseenheid', groupId, {
         include: 'classificatie',
       });
-
       this.roles = this.session.data.authenticated.data.attributes.roles;
     }
   }

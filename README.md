@@ -45,6 +45,10 @@ Plausible analytics is handled by the [ember-plausible addon](https://github.com
 * `EMBER_OAUTH_LOGOUT_URL`
 * `EMBER_OAUTH_SWITCH_URL`
 
+### environment banner
+
+When in a testing or development environment, a banner is shown containing the versions of the application, editor and editor-plugins. This banner is disabled on production.
+
+* `EMBER_ENVIRONMENT_NAME`: name of the environment, appended to the document title. If this string is non-empty, the environment banner is shown. When this string is empty (such as on production), the banner is not shown.
 ### other
 * `EMBER_PUBLICATION_BASE_URL`: url of the linked [publication platform](https://github.com/lblod/app-gn-publicatie/), e.g. "https://publicatie.gelinkt-notuleren.vlaanderen.be/"
-* `EMBER_ENVIRONMENT_NAME`: name of the environment, appended to the document title.

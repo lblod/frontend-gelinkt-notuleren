@@ -6,6 +6,7 @@ export default class InboxAgendapointsRoute extends Route {
   @service store;
 
   queryParams = {
+    pageSize: { refreshModel: true },
     page: { refreshModel: true },
     sort: { refreshModel: true },
     filter: { refreshModel: true },
@@ -16,10 +17,11 @@ export default class InboxAgendapointsRoute extends Route {
       sort: params.sort,
       include: 'status,current-version',
       'filter[status][:id:]':
-        'a1974d071e6a47b69b85313ebdcef9f7,7186547b61414095aa2a4affefdcca67,ef8e4e331c31430bbdefcdb2bdfbcc06', // concept, geagendeerd or published
+        'a1974d071e6a47b69b85313ebdcef9f7,7186547b61414095aa2a4affefdcca67,ef8e4e331c31430bbdefcdb2bdfbcc06', // in voorbereiding, geagendeerd or published
       'filter[folder][:id:]': EDITOR_FOLDERS.DECISION_DRAFTS,
       page: {
         number: params.page,
+        size: params.pageSize,
       },
     };
     if (params.filter) {

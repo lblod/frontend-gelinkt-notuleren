@@ -48,7 +48,6 @@ export default class MeetingForm extends Component {
       );
       this.headerArticleTranslationString =
         articlesBasedOnClassifcationMap[classification.get('uri')];
-      console.log(this.headerArticleTranslationString);
       this.secretaris = yield this.zitting.get('secretaris');
       this.voorzitter = yield this.zitting.get('voorzitter');
       yield this.fetchParticipants.perform();
@@ -156,6 +155,12 @@ export default class MeetingForm extends Component {
   @action
   goToPublish() {
     this.router.transitionTo('meetings.publish.agenda', this.args.zitting.id);
+  }
+
+  get meetingDateForTitle() {
+    if (this.zitting?.gestartOpTijdstip) {
+      return this.zitting.gestartOpTijdstip;
+    } else return this.zitting.geplandeStart;
   }
 
   @action

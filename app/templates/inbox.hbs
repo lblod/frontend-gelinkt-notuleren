@@ -21,14 +21,20 @@
           <ul class="au-c-list-navigation">
             <li class="au-c-list-navigation__item">
               <AuNavigationLink @route="inbox.meetings">
-                <AuIcon @icon="documents" @alignment="left" />
+                <AuIcon @icon="folder" @alignment="left" />
                 {{t "inbox.menu.meetings"}}
               </AuNavigationLink>
             </li>
             <li class="au-c-list-navigation__item">
               <AuNavigationLink @route="inbox.agendapoints">
-                <AuIcon @icon="draft" @alignment="left" />
+                <AuIcon @icon="file" @alignment="left" />
                 {{t "inbox.menu.agendapoints"}}
+              </AuNavigationLink>
+            </li>
+            <li class="au-c-list-navigation__item">
+              <AuNavigationLink @route="inbox.regulatory-statements">
+                <AuIcon @icon="bookmark" @alignment="left" />
+                {{t "inbox.menu.statements"}}
               </AuNavigationLink>
             </li>
             {{#if this.model.length}}

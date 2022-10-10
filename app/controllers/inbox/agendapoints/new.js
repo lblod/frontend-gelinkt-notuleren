@@ -1,10 +1,13 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { EDITOR_FOLDERS } from 'frontend-gelinkt-notuleren/config/constants';
 
 export default class InboxAgendapointsNewController extends Controller {
   @service router;
   @service plausible;
+
+  folderId = EDITOR_FOLDERS.DECISION_DRAFTS;
 
   @action
   redirectToAgendapoint(container, chosenTemplate) {
@@ -18,5 +21,9 @@ export default class InboxAgendapointsNewController extends Controller {
   @action
   cancelAgendapointCreation() {
     this.router.transitionTo('inbox.agendapoints');
+  }
+
+  get templateOptions() {
+    return this.model;
   }
 }

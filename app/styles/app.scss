@@ -28,10 +28,12 @@
 @import "project/c-onboarding";
 @import 'project/c-editor-preview';
 @import "project/c-template";
+@import "project/c-environment-banner";
 
 
 // PLUGINS
-@import "ember-rdfa-editor/custom-components";
+@import "ember-rdfa-editor";
+@import "ember-rdfa-editor-citaten-plugin";
 @import "project/p-annotations"; // @TODO: refactor in ember-rdfa-editor
 
 

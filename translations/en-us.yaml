@@ -2,6 +2,7 @@ inbox:
   menu:
     meetings: Meetings
     agendapoints: Agenda points
+    statements: Regulatory statements
     trash: Recycle bin
     manual: View manual
   meetings:
@@ -38,6 +39,18 @@ inbox:
       errorSaving: Something went wrong while creating the agendapoint
       create: Create
       cancel: Back
+  regulatoryStatements:
+    return: Return to the overview of regulatory statements
+    pageTitle: Regulatory statements
+    searchPlaceholder: Search on title of regulatory statement
+    noDataMessage: No regulatory statements
+    titleLabel: Title
+    updatedOnLabel: Modified
+    statusLabel: Status
+    type: Type
+    agendaPoint: Agendapoint
+    new:
+      title: New regulatory statement
   irgArchive:
     return: Return to the archive
     pageTitle: IRG Archive
@@ -85,7 +98,6 @@ behandelingVanAgendapunten:
   needsParticipants: Please configure the participants to this agenda-item before adding a voting.
   editDocument: "Edit document"
 meetingForm:
-  dateWarning: You can't pick an end-date that is before the start date.
   incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
   backButton: Back to meetings
   scheduledText: Meeting scheduled on
@@ -109,6 +121,10 @@ meetingForm:
   sixthSectionNotFilledWarning: Fill outFree text (meeting outro).
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
 manageZittingsData:
+  startNotSet: "start date has not been set"
+  endNotSet: "end date has not been set"
+  endBeforeStart: You can't pick an end-date that is before the start date.
+  startDiffersFromPlannedStart: "Note: planned start differs from start date, make sure this was intentional."
   modalTitle: Manage general information about the meeting
   bestuursorganLabel: "Held by:"
   geplandeStartLabel: "Scheduled start:"
@@ -324,6 +340,8 @@ blockchainStatus:
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
 appChrome:
   copyAgendapoint: Copy Agendapoint
+  defaultDocumentStatus: Concept not saved
+  deleteConcept: Delete concept
 manageIntermissions:
   interruptionStartLabel: Start
   interruptionEndLabel: End
@@ -396,6 +414,8 @@ attachments:
   noDecisionsFound: No decisions found
   decisionRequired: Only attachments linked to a decision are included in the publication.
 documentCreator:
-  titleField: Agendapoint title
+  titleField: Document title
   template: Template
   templateSelectPlaceholder: Select a template
+editorStatusPill:
+  defaultStatus: Concept

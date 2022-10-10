@@ -4,6 +4,101 @@
 
 
 
+
+
+
+## 2.32.0 (2022-10-05)
+
+#### :rocket: Enhancement
+* [#325](https://github.com/lblod/frontend-gelinkt-notuleren/pull/325) Feature/regulatory statements ([@nvdk](https://github.com/nvdk))
+* [#329](https://github.com/lblod/frontend-gelinkt-notuleren/pull/329) Rename 'concept' to 'In voorbereiding' ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#336](https://github.com/lblod/frontend-gelinkt-notuleren/pull/336) Fix sorting, search and pagination on RS overview page ([@abeforgit](https://github.com/abeforgit))
+* [#334](https://github.com/lblod/frontend-gelinkt-notuleren/pull/334) Update toc plugin which fixes issues with overflowing entries ([@elpoelma](https://github.com/elpoelma))
+* [#333](https://github.com/lblod/frontend-gelinkt-notuleren/pull/333) Filter based on validThrough property ([@lagartoverde](https://github.com/lagartoverde))
+* [#327](https://github.com/lblod/frontend-gelinkt-notuleren/pull/327) Fix/button alignment ([@Dietr](https://github.com/Dietr))
+* [#326](https://github.com/lblod/frontend-gelinkt-notuleren/pull/326) Repair basic RB registry integration ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#335](https://github.com/lblod/frontend-gelinkt-notuleren/pull/335) Add RB endpoints to devenv ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 5
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
+## 2.31.1 (2022-09-30)
+
+#### :bug: Bug Fix
+* [#332](https://github.com/lblod/frontend-gelinkt-notuleren/pull/332) bumps the variable template plugin ([@nvdk](https://github.com/nvdk))
+* [#331](https://github.com/lblod/frontend-gelinkt-notuleren/pull/331) Fixed bug where the attachment wasn't assigned to the first decision when inserted ([@lagartoverde](https://github.com/lagartoverde))
+* [#330](https://github.com/lblod/frontend-gelinkt-notuleren/pull/330) Fix selection errors when trying to save with empty selection ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#328](https://github.com/lblod/frontend-gelinkt-notuleren/pull/328) chore(deps): bump editor and plugins to newest bugfix releases ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 3
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.31.0 (2022-09-09)
+
+#### :house: Internal
+* [#324](https://github.com/lblod/frontend-gelinkt-notuleren/pull/324) bump editor to 0.63.1 and plugins to latest ([@abeforgit](https://github.com/abeforgit))
+* [#323](https://github.com/lblod/frontend-gelinkt-notuleren/pull/323) Add release task to package.json ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
+## 2.30.0 (2022-09-07)
+
+#### :rocket: Enhancement
+* [#319](https://github.com/lblod/frontend-gelinkt-notuleren/pull/319) Print preview improvements ([@Dietr](https://github.com/Dietr))
+* [#313](https://github.com/lblod/frontend-gelinkt-notuleren/pull/313) Move position of the set vote private checkbox ([@lagartoverde](https://github.com/lagartoverde))
+* [#316](https://github.com/lblod/frontend-gelinkt-notuleren/pull/316) Bugfix/make meeting date more clear ([@nvdk](https://github.com/nvdk))
+
+#### :bug: Bug Fix
+* [#320](https://github.com/lblod/frontend-gelinkt-notuleren/pull/320) Ensure meeting is deleted from cache before returning to meeting overview when deleting a meeting ([@elpoelma](https://github.com/elpoelma))
+* [#314](https://github.com/lblod/frontend-gelinkt-notuleren/pull/314) Environment banner styling and fixes ([@Dietr](https://github.com/Dietr))
+
+#### :house: Internal
+* [#321](https://github.com/lblod/frontend-gelinkt-notuleren/pull/321) Bump parse-path, release-it and release-it-lerna-changelog ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#318](https://github.com/lblod/frontend-gelinkt-notuleren/pull/318) extract environment banner functionality and component to seperate repo ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 4
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
+## 2.29.0 (2022-08-12)
+
+#### :rocket: Enhancement
+* [#298](https://github.com/lblod/frontend-gelinkt-notuleren/pull/298) fetch decision types from centrale vindplaats ([@benjay10](https://github.com/benjay10))
+* [#311](https://github.com/lblod/frontend-gelinkt-notuleren/pull/311) Addition of an environment banner ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#308](https://github.com/lblod/frontend-gelinkt-notuleren/pull/308) Disable closing the edit agendapoint modal when saving ([@elpoelma](https://github.com/elpoelma))
+* [#306](https://github.com/lblod/frontend-gelinkt-notuleren/pull/306) allow clearing the secretary ([@nvdk](https://github.com/nvdk))
+
+#### :house: Internal
+* [#312](https://github.com/lblod/frontend-gelinkt-notuleren/pull/312) Bump editor to 0.61.1 ([@abeforgit](https://github.com/abeforgit))
+* [#310](https://github.com/lblod/frontend-gelinkt-notuleren/pull/310) Bump parse-url from 6.0.0 to 6.0.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#307](https://github.com/lblod/frontend-gelinkt-notuleren/pull/307) Bump terser from 4.8.0 to 4.8.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Ben ([@benjay10](https://github.com/benjay10))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.28.2 (2022-07-12)
 
 #### :bug: Bug Fix

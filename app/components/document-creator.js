@@ -3,17 +3,13 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { task } from 'ember-concurrency';
-import {
-  DRAFT_FOLDER_ID,
-  DRAFT_STATUS_ID,
-} from 'frontend-gelinkt-notuleren/utils/constants';
-import instantiateUuids from '@lblod/ember-rdfa-editor-standard-template-plugin/utils/instantiate-uuids';
+import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class DocumentCreatorComponent extends Component {
   @tracked title = '';
   @tracked type;
   @tracked template;
-  @tracked templateOptions = [];
   @tracked invalidTitle;
   @tracked invalidTemplate;
   @tracked errorSaving;
@@ -21,11 +17,6 @@ export default class DocumentCreatorComponent extends Component {
   @service store;
   @service rdfaEditorStandardTemplatePlugin;
   @service currentSession;
-
-  constructor() {
-    super(...arguments);
-    this.ensureTemplates.perform();
-  }
 
   @action
   rollback() {
@@ -86,19 +77,12 @@ export default class DocumentCreatorComponent extends Component {
     }
   }
 
-  @task
-  *ensureTemplates() {
-    const templates =
-      yield this.rdfaEditorStandardTemplatePlugin.fetchTemplates.perform();
-    this.templateOptions =
-      this.rdfaEditorStandardTemplatePlugin.templatesForContext(templates, [
-        'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
-      ]);
-  }
-
   async buildTemplate() {
     if (this.template) {
-      await this.template.reload(); // templatesForContext does not return body of template
+      if (this.template.reload) {
+        // regular templates from templatesForContext do not return body of template
+        await this.template.reload(this.template);
+      }
       return instantiateUuids(this.template.body);
     } else return '';
   }
@@ -123,7 +107,7 @@ export default class DocumentCreatorComponent extends Component {
       );
       container.folder = yield this.store.findRecord(
         'editor-document-folder',
-        DRAFT_FOLDER_ID
+        this.args.folderId
       );
       container.publisher = this.currentSession.group;
       container.currentVersion = editorDocument;
@@ -133,4 +117,15 @@ export default class DocumentCreatorComponent extends Component {
       this.errorSaving = e.message;
     }
   }
+}
+// we can't afford to import the one from the template plugin
+// as the regex is way too loose and also tries to evaluate
+// all the variables in the string, which coincidentally use the
+// exact same syntax
+function instantiateUuids(templateString) {
+  let generateUuid = uuidv4; // eslint-disable-line no-unused-vars
+  return templateString.replace(/\$\{generateUuid()}/g, (match) => {
+    //input '${content}' and eval('content')
+    return eval(match.substring(2, match.length - 1));
+  });
 }
