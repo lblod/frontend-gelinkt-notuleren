@@ -43,7 +43,7 @@
         {{#if @editorDocument.isNew}}
         <AuPill @skin="warning">
           <AuIcon @icon="alert-triangle" @alignment="left" />
-          Concept niet bewaard
+          {{t "appChrome.defaultDocumentStatus"}}
         </AuPill>
         {{/if}}
       </div>
@@ -77,7 +77,7 @@
       {{#if @editorDocument.isNew}}
         <LinkTo @route="inbox.agendapoints" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
           <AuIcon @icon="bin" @alignment="left" />
-          Verwijder concept
+          {{t "appChrome.deleteConcept"}}
         </LinkTo>
       {{else}}
       <AuDropdown @title="Bestand acties" @buttonLabel="Bestand opties" @alignment="right">

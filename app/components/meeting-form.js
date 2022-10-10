@@ -48,7 +48,6 @@ export default class MeetingForm extends Component {
       );
       this.headerArticleTranslationString =
         articlesBasedOnClassifcationMap[classification.get('uri')];
-      console.log(this.headerArticleTranslationString);
       this.secretaris = yield this.zitting.get('secretaris');
       this.voorzitter = yield this.zitting.get('voorzitter');
       yield this.fetchParticipants.perform();

@@ -8,7 +8,6 @@ export default class SignaturesPublicationStatus extends Component {
   @tracked ready = false;
   @action
   async loadResource() {
-    console.log(this.args.versionedResource.get('signedResources'));
     this.signedResources =
       (await this.args.versionedResource.get('signedResources')) || [];
     this.publishedResource = await this.args.versionedResource.get(
@@ -24,7 +23,7 @@ export default class SignaturesPublicationStatus extends Component {
     } else if (this.signedResources.length === 2) {
       return { label: 'Getekend', color: 'success' };
     } else {
-      return { label: 'Concept' };
+      return { label: 'In voorbereiding' };
     }
   }
 }

@@ -6,6 +6,9 @@ module.exports = function (environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
+    regulatoryStatementEndpoint: '{{REGULATORY_STATEMENT_ENDPOINT}}',
+    regulatoryStatementPreviewEndpoint:
+      '{{REGULATORY_STATEMENT_PREVIEW_ENDPOINT}}',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -94,6 +97,10 @@ module.exports = function (environment) {
       'https://dev.roadsigns.lblod.info/sparql';
     ENV.templateVariablePlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
+    ENV.regulatoryStatementEndpoint =
+      'https://dev.reglementairebijlagen.lblod.info/sparql';
+    ENV.regulatoryStatementPreviewEndpoint =
+      'https://dev.reglementairebijlagen.lblod.info/preview/regulatory-attachment-container';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

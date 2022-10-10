@@ -2,6 +2,7 @@ inbox:
   menu:
     meetings: Zittingen
     agendapoints: Agendapunten
+    statements: Reglementaire bijlagen
     trash: Prullenmand
     manual: Bekijk handleiding
   meetings:
@@ -38,6 +39,19 @@ inbox:
       errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
       create: Aanmaken
       cancel: Terug
+  regulatoryStatements:
+    return: Terug naar overzicht reglementaire bijlagen
+    pageTitle: Reglementaire bijlagen
+    searchPlaceholder: Zoek op titel van reglementaire bijlage
+    noDataMessage: Geen reglementaire bijlagen
+    titleLabel: Titel
+    updatedOnLabel: Aangepast
+    statusLabel: Status
+    type: Type
+    agendaPoint: Agendapunt
+    new:
+      title: Nieuwe reglementaire bijlage
+      errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage
   irgArchive:
     return: Terug naar overzicht IRG archief
     pageTitle: IRG Archief
@@ -202,7 +216,7 @@ manageAgendaZittingModalMove:
   agendapuntSelectPlaceholder: Selecteer agendapunt
   searchPlaceholder: Zoek op titel
 manageAgendaZittingModalDraftImport:
-  title: Agendapunt concept selecteren
+  title: Agendapunt in voorbereiding selecteren
   default: Nieuw agendapunt opstellen of bestaand agendapunt selecteren.
 voting:
   openModalButton: Beheer stemming
@@ -327,6 +341,10 @@ blockchainStatus:
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
 appChrome:
   copyAgendapoint: Kopieer agendapunt
+  defaultDocumentStatus: Voorbereiding niet bewaard
+  deleteConcept: Verwijder voorbereiding
+
+
 manageIntermissions:
   interruptionStartLabel: Start onderbreking
   interruptionEndLabel: Einde onderbreking
@@ -399,6 +417,8 @@ attachments:
   noDecisionsFound: Geen besluiten gevonden
   decisionRequired: Enkel bijlagen bij een besluit worden opgenomen in de publicatie.
 documentCreator:
-  titleField: Titel agendapunt
+  titleField: Titel document
   template: Sjabloon
   templateSelectPlaceholder: Kies een sjabloon
+editorStatusPill:
+  defaultStatus: In voorbereiding
