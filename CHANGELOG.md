@@ -6,6 +6,12 @@
 
 
 
+## 2.31.2 (2022-10-10)
+
+#### :bug: Bug Fix
+* make sure the actual start date is set to to planned start date on creation
+
+
 ## 2.31.1 (2022-09-30)
 
 #### :bug: Bug Fix
