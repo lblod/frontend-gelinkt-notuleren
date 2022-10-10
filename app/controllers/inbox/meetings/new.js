@@ -23,6 +23,7 @@ export default class InboxMeetingsNewController extends Controller {
     }
 
     if (this.meeting.isValid) {
+      this.meeting.gestartOpTijdstip = this.meeting.geplandeStart;
       yield this.meeting.save();
       this.router.replaceWith('meetings.edit', this.meeting.id);
     }
