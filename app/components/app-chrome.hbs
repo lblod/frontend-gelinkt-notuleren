@@ -48,7 +48,8 @@
         {{/if}}
       </div>
       <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} 
-        @onChange={{this.updateDocumentTitle}} @onSubmit={{this.saveDocument}} @readOnly={{@readOnly}} />
+        @onChange={{this.updateDocumentTitle}} @onSubmit={{this.saveDocument}}  @onCancel={{this.resetDocument}} 
+        @readOnly={{@readOnly}} />
     </AuToolbarGroup>
     <AuToolbarGroup>
       {{#if @uploading}}

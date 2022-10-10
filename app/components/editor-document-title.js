@@ -33,6 +33,14 @@ export default class EditorDocumentTitleComponent extends Component {
   }
 
   @action
+  cancel(event) {
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      this.args.onCancel?.();
+      this.toggleActive();
+    }
+  }
+
+  @action
   toggleActive() {
     if (this.active && !this.title) {
       this.error = true;

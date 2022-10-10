@@ -4,7 +4,7 @@
   </h1>
 {{else}}
   {{#if this.active}}
-    <form {{on 'submit' this.submit}}>
+    <form {{on 'submit' this.submit}} {{on "focusout" this.cancel}}>
       <div class="au-c-app-chrome__title-group {{if this.error "au-c-input--error"}}">
         {{#let (unique-id) as |id|}}
           <AuLabel for={{id}} class="au-u-hidden-visually">
