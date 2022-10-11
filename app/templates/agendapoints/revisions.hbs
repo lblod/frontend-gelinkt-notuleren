@@ -1,12 +1,19 @@
 <AppChrome
-  @editorDocument={{this.editorDocument}}
+  @editorDocument={{this.revisionDetail}}
   @documentContainer={{this.documentContainer}}
   @returnRoute="inbox.agendapoints"
   @returnRouteText={{t 'inbox.agendapoints.return'}}
 >
   <AgendapointMenu @documentContainer={{this.documentContainer}} />
-  <AuButton @disabled={{true}} @skin="naked" @icon="nav-up-down" @iconAlignment="right" class="au-u-padding-tiny"><span class="au-u-h-functional au-u-regular">{{t "agendapoint.options"}}</span></AuButton>
-  <AuButton @disabled={{true}}>{{t "agendapoint.save"}}</AuButton>
+  <AuDropdown @title={{t "agendapoint.options"}} @buttonLabel={{t "agendapoint.options"}} @alignment="right">
+    <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+      <AuIcon @icon="export" @alignment="left" />
+      {{t "agendapoint.export"}}
+    </AuButton>
+  </AuDropdown>
+  <AuButton @icon="redo" @skin="primary" @disabled={{eq this.revisionDetail.id this.model.editorDocument.id}}  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
+    {{t "agendapoint.restore"}}
+  </AuButton>
 </AppChrome>
 <AuMainContainer class="au-c-app-chrome-container" as |m|>
   <m.sidebar>
@@ -19,66 +26,37 @@
       <div class="au-c-sidebar__content">
         <ul class="au-c-list-navigation">
           {{#each this.orderedRevisions as |revision|}}
-          <li class="au-c-list-navigation__item">
-            <AuButton @skin="link" @icon="document" @iconAlignment="left" class="au-c-button--pill au-c-list-navigation__link {{if (eq revision.updatedOn this.revisionDetail.updatedOn) 'active'}}" {{on "click" (fn this.details revision)}}>
-              <span class="au-c-button__text">
-                {{human-friendly-date revision.updatedOn}}
-              </span>
-              {{#if (eq revision.id this.model.editorDocument.id)}}
-              <AuPill @size="small" class="au-u-margin-left-tiny">Huidige versie</AuPill>
-              {{/if}}
-            </AuButton>
-          </li>
+            <li class="au-c-list-navigation__item">
+              <AuButton @skin="link" @icon="document" @iconAlignment="left" class="au-c-button--pill au-c-list-navigation__link {{if (eq revision.updatedOn this.revisionDetail.updatedOn) 'active'}}" {{on "click" (fn this.details revision)}}>
+                <span class="au-c-button__text">
+                  {{human-friendly-date revision.updatedOn}}
+                </span>
+                {{#if (eq revision.id this.model.editorDocument.id)}}
+                  <AuPill @size="small" class="au-u-margin-left-tiny">Huidige versie</AuPill>
+                {{/if}}
+              </AuButton>
+            </li>
           {{/each}}
         </ul>
       </div>
     </div>
   </m.sidebar>
   <m.content>
-    {{#if this.revisionDetail}}
-      <AuBodyContainer @scroll={{false}}>
-        <AuToolbar @border="bottom" @size="medium" as |Group|>
-          <Group>
-            <AuHeading @level="2" @skin="3">Versie van {{human-friendly-date this.revisionDetail.updatedOn}}</AuHeading>
-          </Group>
-          <Group>
-            <div class="au-u-flex">
-              <AuButton @skin="naked" @icon="export" @iconAlignment="left">Exporteer als HTML</AuButton>
-              {{#if (eq this.revisionDetail.id this.model.editorDocument.id)}}
-              <AuPill>Huidige versie</AuPill>
-              {{else}}
-              <AuButton @icon="redo" @skin="primary"  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
-                Herstel versie
-              </AuButton>
-              {{/if}}
-            </div>
-          </Group>
-        </AuToolbar>
-
-        <div class="au-c-rdfa-editor">
-          <div class="say-container say-container--sidebar-left say-container--paper">
-            <div class="say-container__main">
-              <div class="say-editor">
-                <div class="say-editor__paper">
-                  <div class="say-editor__inner say-content">
-                    {{html-safe this.revisionDetail.htmlSafeContent}}
-                  </div>
+    <AuBodyContainer @scroll={{false}}>
+      <div class="au-c-rdfa-editor">
+        <div class="say-container say-container--sidebar-left say-container--paper">
+          <div class="say-container__main">
+            <div class="say-editor">
+              <div class="say-editor__paper">
+                <div class="say-editor__inner say-content">
+                  {{html-safe this.revisionDetail.htmlSafeContent}}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </AuBodyContainer>
-    {{else}}
-    <div class="au-o-box">
-      <AuAlert
-        @skin="info"
-        @icon="info-circle"
-      >
-        <p>Klik op "Bekijk documentversie" om de inhoud van een opgeslagen versie te bekijken.</p>
-      </AuAlert>
-    </div>
-    {{/if}}
+      </div>
+    </AuBodyContainer>
   </m.content>
 </AuMainContainer>
 
@@ -88,19 +66,19 @@
   @closeModal={{this.cancelConfirmRevisionsToRemove}} as |Modal| >
   <Modal.Body>
     <AuContent>
-    {{#if this.revisionsToRemove}}
-      <p class="u-spacer--small">Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:</p>
-      <ul class="numbered-list">
-        {{#each this.revisionsToRemove as |revision|}}
-          <li class="u-hr u-padding--bottom--small">
-            <AuHeading @level="4" @skin="5">Versie van {{human-friendly-date revision.updatedOn}}</AuHeading>
-            <p class="au-u-muted">{{revision.title}}</p>
-          </li>
-        {{/each}}
-      </ul>
+      {{#if this.revisionsToRemove}}
+        <p class="u-spacer--small">Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:</p>
+        <ul class="numbered-list">
+          {{#each this.revisionsToRemove as |revision|}}
+            <li class="u-hr u-padding--bottom--small">
+              <AuHeading @level="4" @skin="5">Versie van {{human-friendly-date revision.updatedOn}}</AuHeading>
+              <p class="au-u-muted">{{revision.title}}</p>
+            </li>
+          {{/each}}
+        </ul>
     {{else}}
-      <p class="au-u-muted">Geen nieuwere versies om weer te geven.</p>
-    {{/if}}
+        <p class="au-u-muted">Geen nieuwere versies om weer te geven.</p>
+      {{/if}}
     </AuContent>
   </Modal.Body>
   <Modal.Footer>

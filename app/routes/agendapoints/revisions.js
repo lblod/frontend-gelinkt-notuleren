@@ -26,4 +26,9 @@ export default class AgendapointsRevisionsRoute extends Route {
     }
     return revisions;
   }
+
+  setupController(controller, model) {
+    super.setupController(controller, model);
+    controller.revisionDetail = model.revisions[0];
+  }
 }

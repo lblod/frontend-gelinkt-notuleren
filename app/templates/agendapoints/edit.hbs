@@ -13,7 +13,7 @@
     </AuButton>
     <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
       <AuIcon @icon="export" @alignment="left" />
-      Exporteer als HTML
+      {{t "agendapoint.export"}}
     </AuButton>
     <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
       <AuIcon @icon="bin" @alignment="left" />

@@ -426,3 +426,5 @@ agendapoint:
   revisions: Versies
   save: Bewaar
   options: Bestand acties
+  restore: Herstel
+  export: Exporteer als HTML
