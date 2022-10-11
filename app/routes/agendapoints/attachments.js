@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
-export default class AgendapointsEditRoute extends Route {
+export default class AgendapointsAttachmentsRoute extends Route {
   @service documentService;
 
   async model() {
