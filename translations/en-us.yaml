@@ -419,3 +419,7 @@ documentCreator:
   templateSelectPlaceholder: Select a template
 editorStatusPill:
   defaultStatus: Concept
+agendapoint:
+  revisions: Revisions
+  save: Save
+  options: File options

@@ -9,14 +9,22 @@ export default class AgendapointsRevisionsController extends Controller {
   @tracked revisionsToRemove;
   @tracked revisionDetail;
 
+  get documentContainer() {
+    return this.model.documentContainer;
+  }
+
+  get editorDocument() {
+    return this.model.editorDocument;
+  }
+
   get orderedRevisions() {
     return this.model.revisions;
   }
 
   @task
   *setNewRevisionHistory(revisionsToRemove, revision) {
-    this.model.container.set('currentVersion', revision);
-    yield this.model.container.save();
+    this.documentContainer.set('currentVersion', revision);
+    yield this.documentContainer.save();
     this.model.editorDocument = revision;
     yield Promise.all(revisionsToRemove.map((r) => r.destroyRecord()));
     this.orderedRevisions.removeObjects(revisionsToRemove);

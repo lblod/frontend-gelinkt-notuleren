@@ -1,14 +1,13 @@
-<AppChromeRevisions
-  @editorDocument={{this.model.editorDocument}}
-  @documentContainer={{this.model.documentContainer}}
-  @exportHtmlFunction={{this.model.download}}
+<AppChrome
+  @editorDocument={{this.editorDocument}}
+  @documentContainer={{this.documentContainer}}
   @returnRoute="inbox.agendapoints"
   @returnRouteText={{t 'inbox.agendapoints.return'}}
-  @toggleUpload={{this.toggleUpload}}
-  @documentReturnRoute={{@returnRoute}}
-  @documentReturnModel={{this.model.container.id}}
-/>
-
+>
+  <AgendapointMenu @documentContainer={{this.documentContainer}} />
+  <AuButton @disabled={{true}} @skin="naked" @icon="nav-up-down" @iconAlignment="right" class="au-u-padding-tiny"><span class="au-u-h-functional au-u-regular">{{t "agendapoint.options"}}</span></AuButton>
+  <AuButton @disabled={{true}}>{{t "agendapoint.save"}}</AuButton>
+</AppChrome>
 <AuMainContainer class="au-c-app-chrome-container" as |m|>
   <m.sidebar>
     <div class="au-c-sidebar">

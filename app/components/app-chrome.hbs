@@ -1,14 +1,14 @@
 <nav>
   <div class="au-c-app-chrome">
-  <AuToolbar @size="small" class="au-u-padding-bottom-none">
-    <AuToolbarGroup>
-      <AuLink @route={{@returnRoute}} @skin="secondary">
+  <AuToolbar @size="small" class="au-u-padding-bottom-none" as |Group|>
+    <Group>
+      <AuLink @route={{@returnRoute}} @model={{@returnModel}} @skin="secondary">
         <AuIcon @icon="arrow-left" @alignment="left" />
         {{@returnRouteText}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
-    </AuToolbarGroup>
-    <AuToolbarGroup>
+    </Group>
+    <Group>
       <ul class="au-c-list-horizontal au-u-padding-right-tiny">
         {{#unless @editorDocument.isNew}}
         {{#if @editorDocument.updatedOn}}
@@ -26,92 +26,27 @@
         </li>
         {{/if}}
         {{/unless}}
-        {{#if this.features.languageSelect}}
-        <li class="au-c-list-horizontal__item">
-          <LanguageSelect />
-        </li>
-        {{/if}}
       </ul>
-    </AuToolbarGroup>
+    </Group>
   </AuToolbar>
-  <AuToolbar @size="small" class="au-u-padding-top-none">
-    <AuToolbarGroup>
+  <AuToolbar @size="small" class="au-u-padding-top-none" as |Group|>
+    <Group>
       <div>
         {{#unless @editorDocument.isNew}}
           <EditorStatusPill @status={{@documentContainer.status}} />
         {{/unless}}
         {{#if @editorDocument.isNew}}
-        <AuPill @skin="warning">
-          <AuIcon @icon="alert-triangle" @alignment="left" />
-          {{t "appChrome.defaultDocumentStatus"}}
-        </AuPill>
+          <AuPill @skin="warning">
+            <AuIcon @icon="alert-triangle" @alignment="left" />
+            {{t "appChrome.defaultDocumentStatus"}}
+          </AuPill>
         {{/if}}
       </div>
       <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
-    </AuToolbarGroup>
-    <AuToolbarGroup>
-      {{#if @uploading}}
-        <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
-          <AuButton class="au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" {{on "click" @toggleUpload}} aria-selected="false" aria-controls="panel-1" id="tab-1" tabindex="0">
-            {{t "attachments.return"}}
-          </AuButton>
-          <AuButton class="au-u-margin-bottom-none is-active"  @skin="secondary" @icon="attachment" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-2" id="tab-2" tabindex="-1">
-            {{t "attachments.attachments"}}
-            (<strong>{{if @documentContainer.attachments.length @documentContainer.attachments.length 0}}</strong>)
-          </AuButton>
-          <AuLink @route="agendapoints.revisions" class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="draft" @iconAlignment="left" @model={{@documentContainer.id}}>
-            Versies (2)
-          </AuLink>
-        </AuButtonGroup>
-      {{else}}
-        {{#if (and @toggleUploadAndSave (feature-flag 'attachments'))}}
-          <AuButtonGroup @inline={{true}} role="tablist" aria-label="editor-tabs">
-            <AuButton class="is-active au-u-margin-bottom-none" @skin="secondary" @icon="document" @iconAlignment="left" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" tabindex="-1">
-              {{t "attachments.return"}}
-            </AuButton>
-            <AuButton class="au-u-margin-bottom-none has-tooltip" @skin="secondary" @icon="attachment" @iconAlignment="left" {{on "click" (perform @toggleUploadAndSave)}} role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="0">
-              {{t "attachments.attachments"}}
-              (<strong>{{if @documentContainer.attachments.length @documentContainer.attachments.length 0}}</strong>)
-              <span class="au-c-button__tooltip au-c-button__tooltip--bottom">{{t "attachments.saveAndGo"}}</span>
-            </AuButton>
-            <AuLink @route="agendapoints.revisions" class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="draft" @iconAlignment="left" @model={{@documentContainer.id}}>
-              Versies (2)
-            </AuLink>
-          </AuButtonGroup>
-        {{/if}}
-      {{/if}}
-      {{#if @editorDocument.isNew}}
-        <LinkTo @route="inbox.agendapoints" class="au-c-button au-c-button--tertiary au-c-button--alert" role="menuitem">
-          <AuIcon @icon="bin" @alignment="left" />
-          {{t "appChrome.deleteConcept"}}
-        </LinkTo>
-      {{else}}
-      <AuDropdown @title="Bestand acties" @buttonLabel="Bestand opties" @alignment="right">
-        {{#if @copyAgendapunt}}
-          <AuButton {{on "click" @copyAgendapunt}} @skin="tertiary" role="menuitem">
-            <AuIcon @icon="copy" @alignment="left" />
-            {{t "appChrome.copyAgendapoint"}}
-          </AuButton>
-        {{/if}}
-        {{#if @exportHtmlFunction}}
-          <AuButton {{on "click" @exportHtmlFunction}} @skin="tertiary" role="menuitem">
-            <AuIcon @icon="export" @alignment="left" />
-            Exporteer als HTML
-          </AuButton>
-        {{/if}}
-        {{#if @sendToTrash}}
-        <AuButton {{on "click" @sendToTrash}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
-          <AuIcon @icon="bin" @alignment="left" />
-          Naar prullenmand
-        </AuButton>
-        {{/if}}
-      </AuDropdown>
-      {{/if}}
-
-      {{#if @save}}
-        <AuButton {{on "click" @save.action}} @disabled={{@save.isRunning}}>Bewaar</AuButton>
-      {{/if}}
-    </AuToolbarGroup>
+    </Group>
+    <Group>
+      {{yield}}
+    </Group>
   </AuToolbar>
   </div>
 </nav>
