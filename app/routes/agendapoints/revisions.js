@@ -4,19 +4,14 @@ import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 
 export default class AgendapointsRevisionsRoute extends Route {
-  @service currentSession;
   @service store;
   @service router;
 
-  async model(params) {
-    const container = await this.store.findRecord(
-      'documentContainer',
-      params.id
-    );
-    const editorDocument = await container.get('currentVersion');
+  async model() {
+    const { documentContainer, editorDocument } = this.modelFor('agendapoints');
     return RSVP.hash({
       revisions: this.fetchRevisions.perform(editorDocument),
-      container,
+      documentContainer,
       editorDocument,
     });
   }

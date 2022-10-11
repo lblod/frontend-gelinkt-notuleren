@@ -670,3 +670,20 @@ div.table-of-contents {
   background-position:right;
   background-size: 3rem 3rem;
 }
+
+// Fix active state in button groups with links
+.au-c-button-group {
+  .au-c-button.active {
+    user-select: none;
+    color: var(--au-blue-900);
+    background-color: var(--au-blue-200);
+    text-decoration: none;
+    cursor: default;
+  }
+
+  .au-c-button.active:hover {
+    box-shadow: none;
+    color: var(--au-blue-900);
+    background-color: var(--au-blue-200);
+  }
+}
