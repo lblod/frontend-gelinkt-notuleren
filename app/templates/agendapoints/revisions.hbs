@@ -18,7 +18,7 @@
       </div>
       <div class="au-c-sidebar__content">
         <ul class="au-c-list-navigation">
-          {{#each this.orderedRevisions as |revision index|}}
+          {{#each this.orderedRevisions as |revision|}}
           <li class="au-c-list-navigation__item">
             <AuButton @skin="link" @icon="document" @iconAlignment="left" class="au-c-button--pill au-c-list-navigation__link {{if (eq revision.updatedOn this.revisionDetail.updatedOn) 'active'}}" {{on "click" (fn this.details revision)}}>
               <span class="au-c-button__text">

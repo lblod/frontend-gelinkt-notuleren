@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { trackedFunction } from 'ember-resources/util/function';
-import {inject as service } from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default class AgendapointMenuComponent extends Component {
   @service store;
@@ -24,7 +24,6 @@ export default class AgendapointMenuComponent extends Component {
   get attachmentCount() {
     return this.attachmentCountData.value ?? 0;
   }
-
 
   revisionCountData = trackedFunction(this, async () => {
     const containerId = this.args.documentContainer.id;
