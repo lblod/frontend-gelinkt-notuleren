@@ -14,7 +14,11 @@ export default class AgendapointsEditRoute extends Route {
   }
 
   async model() {
-    return this.modelFor('agendapoints');
+    const { documentContainer } = this.modelFor('agendapoints');
+    return {
+      documentContainer,
+      editorDocument: await documentContainer.get('currentVersion'),
+    };
   }
 
   setupController(controller, model) {

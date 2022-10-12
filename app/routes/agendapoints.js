@@ -1,4 +1,3 @@
-import RSVP from 'rsvp';
 import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
@@ -22,11 +21,10 @@ export default class AgendapointsRoute extends Route {
       { include: 'status' }
     );
 
-    return RSVP.hash({
+    return {
       documentContainer: container,
-      editorDocument: await container.get('currentVersion'),
       returnToMeeting: params.returnToMeeting,
-    });
+    };
   }
 
   @action
