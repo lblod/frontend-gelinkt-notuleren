@@ -56,13 +56,12 @@
 
 <div class="au-c-body-container au-c-body-container--scroll" id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
   <RdfaEditorContainer
-    @profile={{this.profile}}
-             @rdfaEditorInit={{this.handleRdfaEditorInit}}
+    @rdfaEditorInit={{this.handleRdfaEditorInit}}
     @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
     @showToggleRdfaAnnotations={{true}}
-             @editorDocument={{this.editorDocument}}
+    @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-             @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
+    @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
                          (t "rdfaEditorContainer.saving")}}
   />
 </div>
