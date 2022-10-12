@@ -1,26 +1,28 @@
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
-  @returnRoute="inbox.agendapoints"
-  @returnRouteText={{t 'inbox.agendapoints.return'}}
 >
-  <AgendapointMenu @documentContainer={{this.documentContainer}} />
-
-  <AuDropdown @title={{t "agendapoint.options"}} @buttonLabel={{t "agendapoint.options"}} @alignment="right">
-    <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
-      <AuIcon @icon="copy" @alignment="left" />
-      {{t "appChrome.copyAgendapoint"}}
-    </AuButton>
-    <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
-      <AuIcon @icon="export" @alignment="left" />
-      {{t "agendapoint.export"}}
-    </AuButton>
-    <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
-      <AuIcon @icon="bin" @alignment="left" />
-      Naar prullenmand
-    </AuButton>
-  </AuDropdown>
-  <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>{{t "agendapoint.save"}}</AuButton>
+  <:return-link>
+    <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+  </:return-link>
+  <:actions>
+    <AgendapointMenu @documentContainer={{this.documentContainer}} />
+      <AuDropdown @title={{t "agendapoint.options"}} @buttonLabel={{t "agendapoint.options"}} @alignment="right">
+      <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
+        <AuIcon @icon="copy" @alignment="left" />
+        {{t "appChrome.copyAgendapoint"}}
+      </AuButton>
+      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+        <AuIcon @icon="export" @alignment="left" />
+        {{t "agendapoint.export"}}
+      </AuButton>
+      <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
+        <AuIcon @icon="bin" @alignment="left" />
+        Naar prullenmand
+      </AuButton>
+    </AuDropdown>
+    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>{{t "agendapoint.save"}}</AuButton>
+  </:actions>
 </AppChrome>
 
 {{#if this.hasDocumentValidationErrors}}
@@ -41,7 +43,7 @@
   <AuModal
     @title="Wilt u dit document naar de prullenmand verplaatsen"
     @modalOpen={{this.displayDeleteModal}}
-    @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
+            @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
     <Modal.Body>
       <p>U kan deze steeds herstellen vanuit de prullenmand.</p>
     </Modal.Body>
@@ -55,13 +57,13 @@
 <div class="au-c-body-container au-c-body-container--scroll" id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
   <RdfaEditorContainer
     @profile={{this.profile}}
-    @rdfaEditorInit={{this.handleRdfaEditorInit}}
+             @rdfaEditorInit={{this.handleRdfaEditorInit}}
     @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
     @showToggleRdfaAnnotations={{true}}
-    @editorDocument={{this.editorDocument}}
+             @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-    @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
-    (t "rdfaEditorContainer.saving")}}
+             @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
+                         (t "rdfaEditorContainer.saving")}}
   />
 </div>
 <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>

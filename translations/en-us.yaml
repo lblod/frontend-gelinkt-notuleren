@@ -425,3 +425,4 @@ agendapoint:
   options: File options
   restore: Restore
   export: Export as HTML
+  backToMeeting: Return to the meeting of {adminBody} on {date}

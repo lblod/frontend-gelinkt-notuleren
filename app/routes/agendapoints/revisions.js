@@ -8,11 +8,13 @@ export default class AgendapointsRevisionsRoute extends Route {
   @service router;
 
   async model() {
-    const { documentContainer, editorDocument } = this.modelFor('agendapoints');
+    const { documentContainer, editorDocument, returnToMeeting } =
+      this.modelFor('agendapoints');
     return RSVP.hash({
       revisions: this.fetchRevisions.perform(editorDocument),
       documentContainer,
       editorDocument,
+      returnToMeeting,
     });
   }
 

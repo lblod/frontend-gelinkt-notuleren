@@ -1,19 +1,23 @@
 <AppChrome
   @editorDocument={{this.revisionDetail}}
   @documentContainer={{this.documentContainer}}
-  @returnRoute="inbox.agendapoints"
-  @returnRouteText={{t 'inbox.agendapoints.return'}}
 >
-  <AgendapointMenu @documentContainer={{this.documentContainer}} />
-  <AuDropdown @title={{t "agendapoint.options"}} @buttonLabel={{t "agendapoint.options"}} @alignment="right">
-    <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
-      <AuIcon @icon="export" @alignment="left" />
-      {{t "agendapoint.export"}}
+  <:return-link>
+  th  <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+  </:return-link>
+
+  <:actions>
+    <AgendapointMenu @documentContainer={{this.documentContainer}} />
+    <AuDropdown @title={{t "agendapoint.options"}} @buttonLabel={{t "agendapoint.options"}} @alignment="right">
+      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+        <AuIcon @icon="export" @alignment="left" />
+        {{t "agendapoint.export"}}
+      </AuButton>
+    </AuDropdown>
+    <AuButton @icon="redo" @skin="primary" @disabled={{eq this.revisionDetail.id this.model.editorDocument.id}}  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
+      {{t "agendapoint.restore"}}
     </AuButton>
-  </AuDropdown>
-  <AuButton @icon="redo" @skin="primary" @disabled={{eq this.revisionDetail.id this.model.editorDocument.id}}  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
-    {{t "agendapoint.restore"}}
-  </AuButton>
+  </:actions>
 </AppChrome>
 <AuMainContainer class="au-c-app-chrome-container" as |m|>
   <m.sidebar>

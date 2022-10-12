@@ -1,11 +1,14 @@
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
-  @returnRoute="inbox.agendapoints"
-  @returnRouteText={{t 'inbox.agendapoints.return'}}
 >
-  <AgendapointMenu @documentContainer={{this.documentContainer}} />
-  <AuButton @disabled={{true}} @skin="naked" @icon="nav-up-down" @iconAlignment="right" class="au-u-padding-tiny"><span class="au-u-h-functional au-u-regular">{{t "agendapoint.options"}}</span></AuButton>
-  <AuButton @disabled={{true}}>{{t "agendapoint.save"}}</AuButton>
+  <:return-link>
+    <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+  </:return-link>
+  <:actions>
+    <AgendapointMenu @documentContainer={{this.documentContainer}} />
+    <AuButton @disabled={{true}} @skin="naked" @icon="nav-up-down" @iconAlignment="right" class="au-u-padding-tiny"><span class="au-u-h-functional au-u-regular">{{t "agendapoint.options"}}</span></AuButton>
+    <AuButton @disabled={{true}}>{{t "agendapoint.save"}}</AuButton>
+  </:actions>
 </AppChrome>
 <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>

@@ -428,3 +428,4 @@ agendapoint:
   options: Bestand acties
   restore: Herstel
   export: Exporteer als HTML
+  backToMeeting: Terug naar zitting van {adminBody} op {date}
