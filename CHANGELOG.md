@@ -7,6 +7,16 @@
 
 
 
+## 2.32.1 (2022-10-12)
+
+#### :bug: Bug Fix
+* [#341](https://github.com/lblod/frontend-gelinkt-notuleren/pull/341) Fix regex which matches for generateUuid() in the template ([@elpoelma](https://github.com/elpoelma))
+* [#338](https://github.com/lblod/frontend-gelinkt-notuleren/pull/338) fix: set start date to planned start on creation ([@nvdk](https://github.com/nvdk))
+
+#### Committers: 2
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+
 ## 2.32.0 (2022-10-05)
 
 #### :rocket: Enhancement
