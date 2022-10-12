@@ -7,7 +7,7 @@ export default class ZittingLinkComponent extends Component {
   meetingData = trackedFunction(this, async () => {
     const meetingId = this.args.meetingId;
     await Promise.resolve();
-    const meeting = await this.store.findRecord('zitting', this.args.meetingId);
+    const meeting = await this.store.findRecord('zitting', meetingId);
     return meeting;
   });
 
@@ -18,12 +18,14 @@ export default class ZittingLinkComponent extends Component {
   administrativeBodyData = trackedFunction(this, async () => {
     const meeting = this.meeting;
     await Promise.resolve();
-    let bestuursorgaan = await this.meeting?.get('bestuursorgaan');
+    let bestuursorgaan = await meeting?.get('bestuursorgaan');
     bestuursorgaan = await bestuursorgaan?.get('isTijdsspecialisatieVan');
     return bestuursorgaan;
-  })
+  });
 
   get administrativeBodyName() {
-    return this.administrativeBodyData.value ? this.administrativeBodyData.value.naam : '';
+    return this.administrativeBodyData.value
+      ? this.administrativeBodyData.value.naam
+      : '';
   }
 }
