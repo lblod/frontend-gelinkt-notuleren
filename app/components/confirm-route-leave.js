@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
+import isLoadingRoute from '../utils/is-loading-route';
 
 export default class ConfirmRouteLeaveComponent extends Component {
   @service router;
@@ -32,7 +33,7 @@ export default class ConfirmRouteLeaveComponent extends Component {
   }
 
   confirm(transition) {
-    if (transition.isAborted) {
+    if (transition.isAborted || isLoadingRoute(transition.to)) {
       return;
     }
     if (this.args.enabled) {
