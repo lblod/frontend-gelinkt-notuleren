@@ -88,7 +88,8 @@
     <AuHeading @level="4" @skin="6">{{t "behandelingVanAgendapunten.contentTitle"}} </AuHeading>
     {{#if @behandeling.documentContainer.attachments}}
       {{#if this.editable}}
-      <AuPill @route="meetings.edit.treatment" @models={{array @meeting.id @behandeling.id}} @query={{query-params uploading="true"}} @skin="link" @icon="attachment" @iconAlignment="left">
+
+      <AuPill @route="agendapoints.attachments" @model={{@behandeling.documentContainer.id}} @query={{hash returnToMeeting=@meeting.id}} @skin="link" @icon="attachment" @iconAlignment="left">
         {{@behandeling.documentContainer.attachments.length}}
       </AuPill>
       {{else}}
@@ -102,8 +103,8 @@
     {{@behandeling.documentContainer.currentVersion.htmlSafeContent}}
   </div>
 </div>
-{{#if this.editable}}
-  <AuLink @route="meetings.edit.treatment" @models={{array @meeting.id @behandeling.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
+{{#if (and this.editable @behandeling.documentContainer)}}
+  <AuLink @route="agendapoints.edit" @model={{@behandeling.documentContainer.id}} @query={{hash returnToMeeting=@meeting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
     {{t "behandelingVanAgendapunten.editDocument"}}
   </AuLink>
 {{/if}}

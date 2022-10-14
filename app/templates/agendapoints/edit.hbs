@@ -1,22 +1,35 @@
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
-  @save={{hash action=(perform this.saveTask) isRunning=this.saveTask.isRunning}}
-  @sendToTrash={{this.toggleDeleteModal}}
-  @exportHtmlFunction={{this.download}}
-  @copyAgendapunt={{perform this.copyAgendapunt}}
-  @uploading={{this.uploading}}
-  @toggleUpload={{this.toggleUpload}}
-  @toggleUploadAndSave={{this.toggleUploadAndSave}}
-  @returnRoute="inbox.agendapoints"
-  @returnRouteText={{t 'inbox.agendapoints.return'}}
-/>
+>
+  <:return-link>
+    <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+  </:return-link>
+  <:actions>
+    <AgendapointMenu @documentContainer={{this.documentContainer}} />
+      <AuDropdown @title={{t "agendapoint.options"}} @buttonLabel={{t "agendapoint.options"}} @alignment="right">
+      <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
+        <AuIcon @icon="copy" @alignment="left" />
+        {{t "appChrome.copyAgendapoint"}}
+      </AuButton>
+      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+        <AuIcon @icon="export" @alignment="left" />
+        {{t "agendapoint.export"}}
+      </AuButton>
+      <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
+        <AuIcon @icon="bin" @alignment="left" />
+        Naar prullenmand
+      </AuButton>
+    </AuDropdown>
+    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>{{t "agendapoint.save"}}</AuButton>
+  </:actions>
+</AppChrome>
 
 {{#if this.hasDocumentValidationErrors}}
   <AuModal
     @title="Geef uw document een naam"
     @modalOpen={{true}}
-    @closeModal={{this.closeValidationModal}} as |Modal| >
+            @closeModal={{this.closeValidationModal}} as |Modal| >
     <Modal.Body>
       <p>Klik op de titel om uw document een naam te geven.</p>
     </Modal.Body>
@@ -30,7 +43,7 @@
   <AuModal
     @title="Wilt u dit document naar de prullenmand verplaatsen"
     @modalOpen={{this.displayDeleteModal}}
-    @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
+            @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
     <Modal.Body>
       <p>U kan deze steeds herstellen vanuit de prullenmand.</p>
     </Modal.Body>
@@ -40,22 +53,16 @@
     </Modal.Footer>
   </AuModal>
 {{/if}}
-{{#if this.documentContainer}}
-  <div id="panel-2" role="tabpanel" tabindex="0" aria-labelledby="tab-2" class={{if this.uploading "au-c-body-container au-c-body-container--scroll" "au-u-hidden"}}>
-    <DocumentAttachments @documentContainer={{this.documentContainer}} @decisions={{this.decisions}}/>
-  </div>
-{{/if}}
-<div class={{if this.uploading "au-u-hidden" "au-c-body-container au-c-body-container--scroll"}} id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+
+<div class="au-c-body-container au-c-body-container--scroll" id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
   <RdfaEditorContainer
-          @profile={{this.profile}}
-          @rdfaEditorInit={{this.handleRdfaEditorInit}}
-          @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
-          @showToggleRdfaAnnotations={{true}}
-          @editorDocument={{this.editorDocument}}
-          @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-          @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
-                        (t "rdfaEditorContainer.saving")}}
+    @rdfaEditorInit={{this.handleRdfaEditorInit}}
+    @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
+    @showToggleRdfaAnnotations={{true}}
+    @editorDocument={{this.editorDocument}}
+    @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
+    @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
+                         (t "rdfaEditorContainer.saving")}}
   />
 </div>
-
-{{outlet}}
+<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>

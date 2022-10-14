@@ -5,17 +5,17 @@ import { inject as service } from '@ember/service';
 
 export default class AgendapointsRevisionsRoute extends Route {
   @service store;
+  @service router;
 
-  async model(params) {
-    const container = await this.store.findRecord(
-      'documentContainer',
-      params.id
-    );
-    const editorDocument = await container.get('currentVersion');
+  async model() {
+    const { documentContainer, returnToMeeting } =
+      this.modelFor('agendapoints');
+    const editorDocument = await documentContainer.currentVersion;
     return RSVP.hash({
       revisions: this.fetchRevisions.perform(editorDocument),
-      container,
+      documentContainer,
       editorDocument,
+      returnToMeeting,
     });
   }
 
@@ -28,5 +28,10 @@ export default class AgendapointsRevisionsRoute extends Route {
       revision = yield revision.get('previousVersion');
     }
     return revisions;
+  }
+
+  setupController(controller, model) {
+    super.setupController(controller, model);
+    controller.revisionDetail = model.revisions[0];
   }
 }

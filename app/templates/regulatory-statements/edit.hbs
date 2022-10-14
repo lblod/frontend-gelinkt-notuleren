@@ -3,10 +3,19 @@
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
-  @save={{hash action=(perform this.saveTask) isRunning=this.saveTask.isRunning}}
-  @returnRoute="inbox.regulatory-statements"
-  @returnRouteText={{t 'inbox.regulatoryStatements.return'}}
-/>
+>
+  <:return-link>
+  <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
+      <AuIcon @icon="arrow-left" @alignment="left" />
+      {{t 'inbox.regulatoryStatements.return'}}
+    </AuLink>
+  </:return-link>
+  <:actions>
+    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>
+      {{t "agendapoint.save"}}
+    </AuButton>
+  </:actions>
+</AppChrome>
 
 <AuBodyContainer vocab="http://data.vlaanderen.be/ns/besluit#"
   prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# say:https://say.data.gift/ns/ dct: http://purl.org/dc/terms/ ext:http://mu.semte.ch/vocabularies/ext/">
