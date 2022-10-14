@@ -2,35 +2,35 @@
 <AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.trash.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
    <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large">
-        <AuToolbarGroup>
+      <AuToolbar class="au-o-box" @size="large" as |Group|>
+        <Group>
           <AuHeading @skin="2">
             {{t 'inbox.trash.pageTitle'}}
           </AuHeading>
-        </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--center">
+        </Group>
+        <Group class="au-c-toolbar__group--center">
           <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.searchPlaceholder'}} />
-        </AuToolbarGroup>
+        </Group>
       </AuToolbar>
     </menu.general>
     <menu.selected as |selection datatable|>
-      <AuToolbar @size="large" class="au-u-padding-bottom-none">
-        <AuToolbarGroup class="au-c-toolbar__group--center">
+      <AuToolbar @size="large" class="au-u-padding-bottom-none" as |Group|>
+        <Group class="au-c-toolbar__group--center">
           <AuHeading @skin="2">
            {{t 'inbox.trash.pageTitle'}}
           </AuHeading>
-        </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--center">
+        </Group>
+        <Group class="au-c-toolbar__group--center">
           <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.searchPlaceholder'}} />
-        </AuToolbarGroup>
+        </Group>
       </AuToolbar>
-      <AuToolbar @size="large">
-        <AuToolbarGroup data-table-action>
+      <AuToolbar @size="large" as |Group|>
+        <Group data-table-action>
           <AuButton @skin="secondary" {{on "click" (fn this.moveToConcepts selection datatable)}}>
             <AuIcon @icon="redo" @alignment="left" />
             {{t 'inbox.trash.restoreMessage'}}
           </AuButton>
-        </AuToolbarGroup>
+        </Group>
       </AuToolbar>
     </menu.selected>
    </table.menu>

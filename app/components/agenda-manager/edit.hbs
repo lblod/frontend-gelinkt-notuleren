@@ -60,7 +60,7 @@
       {{/if}}
     </Modal.Body>
     <Modal.Footer>
-      <AuToolbar>
+      <AuToolbar as |Group|>
         <AuButton @skin="naked" {{on "click" this.cancel}} @disabled={{this.isSubmitting}}>
             {{t "manageAgendaZittingModal.cancelButton"}}
           </AuButton>

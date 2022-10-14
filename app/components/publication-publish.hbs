@@ -1,12 +1,12 @@
-<AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
-  <AuToolbarGroup>
+<AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as |Group|>
+  <Group>
     <AuHeading @level="2" @skin="4">{{t "timelineStep.publishButtonLabel" name=@name}}</AuHeading>
-  </AuToolbarGroup>
-  <AuToolbarGroup>
+  </Group>
+  <Group>
     <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
       {{if @publishedResource "Publiek" "Niet publiek"}}
     </AuPill>
-  </AuToolbarGroup>
+  </Group>
 </AuToolbar>
 <div class="au-o-grid au-u-margin-top-none">
   {{#if @publishedResource}}

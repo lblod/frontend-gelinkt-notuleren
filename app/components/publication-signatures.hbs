@@ -1,10 +1,10 @@
-<AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
-  <AuToolbarGroup>
+<AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as |Group|>
+  <Group>
     <AuHeading @level="2" @skin="4">{{concat (t "timelineStep.signStepTitle") @name}}</AuHeading>
     <AuPill @skin={{this.statusSkin}} class="au-u-margin-left">
       {{this.statusLabel}}
     </AuPill>
-  </AuToolbarGroup>
+  </Group>
 </AuToolbar>
 <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
   {{#if (eq @signatures.length 2)}}

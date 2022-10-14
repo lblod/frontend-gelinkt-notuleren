@@ -20,7 +20,7 @@
 {{else}}
   <div class="au-c-meeting-chrome-editable"
   >
-    <AuToolbar>
+    <AuToolbar as |Group|>
       <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
         {{@behandeling.onderwerp.titel}}
       </AuHeading>

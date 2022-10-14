@@ -10,13 +10,13 @@
              as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large">
-        <AuToolbarGroup>
+      <AuToolbar class="au-o-box" @size="large" as |Group|>
+        <Group>
           <AuHeading @skin="2">
             {{t 'inbox.regulatoryStatements.pageTitle'}}
           </AuHeading>
-        </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--center">
+        </Group>
+        <Group class="au-c-toolbar__group--center">
           <AuInput
             {{on "input" (perform this.updateFilter)}}
             @icon="search"
@@ -31,7 +31,7 @@
               {{t "inbox.regulatoryStatements.new.title"}}
             </AuLink>
           {{/unless}}
-        </AuToolbarGroup>
+        </Group>
       </AuToolbar>
     </menu.general>
   </table.menu>
