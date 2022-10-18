@@ -30,7 +30,7 @@
       {{/if}}
     </div>
     {{#if (and @errors @errors.length)}}
-      <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertSkin="error">
+      <AuAlert @icon="alert-triangle" @title={{t "timelineStep.publishWarning"}} @skin="error">
         <ul>
         {{#each @errors as |error|}}
           <li>{{error}}</li>
@@ -223,12 +223,12 @@
             {{t "timelineStep.publishRestrictionEnd"}}
           </AuHelpText>
 
-          <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.publicationConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
+          <AuAlert @icon="info-circle" @title={{t "timelineStep.publicationConsequences"}} @skin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
             <p>{{t "timelineStep.previewInfo"}}<a href="{{this.publicationBaseUrl}}" target="_blank" rel="noopener noreferrer" class="au-c-link">{{this.publicationBaseUrl}}</a>{{t "timelineStep.previewInfoEnd"}}</p>
           </AuAlert>
 
           {{#unless this.isAgenda}}
-            <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.notifyConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
+            <AuAlert @icon="info-circle" @title={{t "timelineStep.notifyConsequences"}} @skin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
               <p>{{t "timelineStep.notifyInfo"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "timelineStep.localLoket"}}</a>.</p>
             </AuAlert>
           {{/unless}}

@@ -1,7 +1,10 @@
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
+import { inject as service } from '@ember/service';
 import { EDITOR_FOLDERS } from '../../config/constants';
+
 export default class InboxTrashRoute extends Route.extend(DataTableRouteMixin) {
+  @service store;
   modelName = 'document-container';
 
   queryParams = {
