@@ -1,8 +1,9 @@
 import Route from '@ember/routing/route';
-import DataTableRouteMixin from 'ember-data-table/mixins/route';
+import { inject as service } from '@ember/service';
 import { EDITOR_FOLDERS } from '../../config/constants';
-export default class InboxTrashRoute extends Route.extend(DataTableRouteMixin) {
-  modelName = 'document-container';
+
+export default class InboxTrashRoute extends Route {
+  @service store;
 
   queryParams = {
     page: { refreshModel: true },
@@ -13,7 +14,7 @@ export default class InboxTrashRoute extends Route.extend(DataTableRouteMixin) {
     title: { refreshModel: true },
   };
 
-  mergeQueryOptions(params) {
+  model(params) {
     const query = {
       include: 'status,current-version',
       'filter[status][id]': EDITOR_FOLDERS.TRASH,
@@ -21,6 +22,7 @@ export default class InboxTrashRoute extends Route.extend(DataTableRouteMixin) {
 
     if (params.title && params.title.length > 0)
       query['filter[current-version][title]'] = params.title;
-    return query;
+
+    return this.store.query('document-container', query);
   }
 }

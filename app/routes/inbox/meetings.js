@@ -1,29 +1,34 @@
 import Route from '@ember/routing/route';
-import DataTableRouteMixin from 'ember-data-table/mixins/route';
+import { inject as service } from '@ember/service';
 
-export default class InboxMeetingsRoute extends Route.extend(
-  DataTableRouteMixin
-) {
-  modelName = 'zitting';
+export default class InboxMeetingsRoute extends Route {
+  @service store;
 
   queryParams = {
     page: { refreshModel: true },
     size: { refreshModel: true },
     sort: { refreshModel: true },
-    filter: { refreshModel: true },
-    // filter params
     title: { refreshModel: true },
   };
 
-  mergeQueryOptions(params) {
-    var sort;
+  model(params) {
+    console.log('hererererere', this);
+    const options = {
+      sort: params.sort,
+      page: {
+        number: params.page,
+        size: params.size,
+      },
+    };
+
     if (!params.sort) {
-      sort = params.sort;
+      options.sort = params.sort;
     } else if (!params.sort.includes('geplande-start')) {
-      sort = params.sort + ',-geplande-start';
+      options.sort = params.sort + ',-geplande-start';
     } else {
-      sort = params.sort;
+      options.sort = params.sort;
     }
-    return { sort: sort };
+
+    return this.store.query('zitting', options);
   }
 }

@@ -1,8 +1,5 @@
-import Controller from '@ember/controller';
-import DefaultQueryParamsMixin from 'ember-data-table/mixins/default-query-params';
+import Route from '@ember/routing/route';
 
-export default class MeetingsPublishUittrekselsController extends Controller.extend(
-  DefaultQueryParamsMixin
-) {
+export default class MeetingsPublishUittrekselsController extends Route {
   sort = 'position';
 }
