@@ -2,12 +2,22 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
-
+import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
+import { inject as service } from '@ember/service';
 export default class AgendapointsRevisionsController extends Controller {
+  @service router;
   @tracked showConfirmationModal = false;
   @tracked revisionToRemove;
   @tracked revisionsToRemove;
   @tracked revisionDetail;
+
+  get documentContainer() {
+    return this.model.documentContainer;
+  }
+
+  get editorDocument() {
+    return this.model.editorDocument;
+  }
 
   get orderedRevisions() {
     return this.model.revisions;
@@ -15,12 +25,18 @@ export default class AgendapointsRevisionsController extends Controller {
 
   @task
   *setNewRevisionHistory(revisionsToRemove, revision) {
-    this.model.container.set('currentVersion', revision);
-    yield this.model.container.save();
+    this.documentContainer.set('currentVersion', revision);
+    yield this.documentContainer.save();
     this.model.editorDocument = revision;
     yield Promise.all(revisionsToRemove.map((r) => r.destroyRecord()));
     this.orderedRevisions.removeObjects(revisionsToRemove);
     this.flushThingsToRemove();
+    this.router.transitionTo('agendapoints.edit', this.documentContainer.id);
+  }
+
+  @action
+  download() {
+    generateExportFromEditorDocument(this.revisionDetail);
   }
 
   getRevisionsToRemove(revision) {
@@ -38,7 +54,6 @@ export default class AgendapointsRevisionsController extends Controller {
     this.showConfirmationModal = false;
     this.revisionToRemove = null;
     this.revisionsToRemove = null;
-    this.revisionDetail = null;
   }
 
   @action

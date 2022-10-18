@@ -124,7 +124,7 @@ export default class DocumentCreatorComponent extends Component {
 // exact same syntax
 function instantiateUuids(templateString) {
   let generateUuid = uuidv4; // eslint-disable-line no-unused-vars
-  return templateString.replace(/\$\{generateUuid()}/g, (match) => {
+  return templateString.replace(/\$\{generateUuid\(\)\}/g, (match) => {
     //input '${content}' and eval('content')
     return eval(match.substring(2, match.length - 1));
   });

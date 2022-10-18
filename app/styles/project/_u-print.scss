@@ -77,14 +77,40 @@
     width: 100%;
   }
 
+
+  .au-c-meeting-chrome-table {
+    min-width: auto !important;
+
+    thead {
+      display: table-row-group !important;
+    }
+
+    th,
+    td {
+      min-width: initial !important;
+      width: initial !important;
+      max-width: initial !important;
+      white-space: initial !important;
+    }
+
+    .au-c-button-group {
+      display: none !important;
+    }
+
+    td:after {
+      display: none !important;
+    }
+  }
+
+  body,
   .container,
   .grid,
   .container-flex--contain,
   .container-flex--scroll,
   .tasklist__content {
     overflow-y: visible !important;
-    display: block;
-    height: auto;
+    display: block !important;
+    height: auto !important;
   }
 
   .say-container {

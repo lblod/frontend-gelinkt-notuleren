@@ -42,10 +42,11 @@ Router.map(function () {
     this.route('edit');
   });
 
-  this.route('agendapoints', function () {
-    this.route('edit', { path: '/:id/edit' });
-    this.route('show', { path: ':id/show' });
-    this.route('revisions', { path: '/:id/revisions' });
+  this.route('agendapoints', { path: 'agendapoints/:id' }, function () {
+    this.route('edit');
+    this.route('attachments');
+    this.route('show');
+    this.route('revisions');
   });
 
   this.route('meetings', function () {

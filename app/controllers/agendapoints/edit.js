@@ -9,14 +9,10 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
-  @tracked editor;
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
-  profile = 'draftDecisionsProfile';
-  @tracked uploading = false;
-  @tracked decisions = [];
-  @service documentService;
+  @tracked editor;
 
   get dirty() {
     return this.editorDocument.content !== this.editor.htmlContent;
@@ -89,6 +85,7 @@ export default class AgendapointsEditController extends Controller {
       editorDocument.updatedOn = new Date();
       editorDocument.title = this.editorDocument.title;
       editorDocument.previousVersion = this.editorDocument;
+      editorDocument.documentContainer = this.documentContainer;
       yield editorDocument.save();
       this._editorDocument = editorDocument;
 
@@ -96,26 +93,5 @@ export default class AgendapointsEditController extends Controller {
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
     }
-  }
-
-  @action toggleUpload() {
-    this.uploading = !this.uploading;
-    this.fetchDecisions.perform();
-  }
-
-  @task
-  *toggleUploadAndSave() {
-    if (this.dirty) {
-      yield this.saveTask.perform();
-    }
-    yield this.fetchDecisions.perform();
-    this.uploading = !this.uploading;
-  }
-
-  @task
-  *fetchDecisions() {
-    const documentContainer = yield this.documentContainer;
-    const currentVersion = yield documentContainer.currentVersion;
-    this.decisions = this.documentService.getDecisions(currentVersion);
   }
 }
