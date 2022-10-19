@@ -25,7 +25,7 @@
             <AuLoader @padding="small" />
           {{else}}
             {{#if this.login.errorMessage}}
-              <AuAlert @alertIcon="alert-triangle" @alertTitle={{this.login.errorMessage}} @alertSkin="warning" />
+              <AuAlert @icon="alert-triangle" @title={{this.login.errorMessage}} @skin="warning" />
             {{/if}}
             {{#each this.model as |account|}}
               <AuButton class="au-u-flex au-u-flex--row au-u-flex--start au-c-card au-u-margin-bottom-small" @skin="secondary" @width="block"  @size="large" type="button" {{on "click" (fn login.login account.id account.gebruiker.group.id)}}>

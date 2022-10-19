@@ -1,12 +1,12 @@
 <div class="au-c-app-chrome">
-  <AuToolbar @size="small" class="au-u-padding-bottom-none">
-    <AuToolbarGroup>
+  <AuToolbar @size="small" class="au-u-padding-bottom-none" as |Group|>
+    <Group>
       <AuLink @route="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
         {{t "meetingForm.backButton"}}
       </AuLink>
       <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
-    </AuToolbarGroup>
-    <AuToolbarGroup>
+    </Group>
+    <Group>
       <ul class="au-c-list-horizontal au-u-padding-right-tiny">
         <li class="au-c-list-horizontal__item">
           {{!--
@@ -17,13 +17,13 @@
           --}}
         </li>
       </ul>
-    </AuToolbarGroup>
+    </Group>
   </AuToolbar>
-  <AuToolbar @size="small" class="au-u-padding-top-none">
-    <AuToolbarGroup>
+  <AuToolbar @size="small" class="au-u-padding-top-none" as |Group|>
+    <Group>
       <h1 class="au-c-app-chrome__title">{{t "meetingForm.scheduledText"}} {{plain-date @zitting.geplandeStart}}</h1>
-    </AuToolbarGroup>
-    <AuToolbarGroup>
+    </Group>
+    <Group>
       {{#unless this.readOnly}}
         <DeleteMeeting @meeting={{@zitting}}/>
       {{/unless}}
@@ -37,7 +37,7 @@
             {{t "meetingForm.incompleteWarning"}}
         </span>
       {{/if}}
-    </AuToolbarGroup>
+    </Group>
   </AuToolbar>
 </div>
 
