@@ -1,17 +1,18 @@
 import { inject as service } from '@ember/service';
-import Route from '@ember/routing/route';
+import Controller from '@ember/controller';
 import { action } from '@ember/object';
+import { TRASH_CONCEPT_STATUS } from '../../utils/constants';
 
-export default class InboxTrashController extends Route {
+export default class InboxTrashController extends Controller {
   @service currentSession;
   @service store;
   @service router;
 
   @action
-  async moveToConcepts(documents /*, datatable */) {
+  async moveToConcepts(documents) {
     const conceptStatus = await this.store.findRecord(
       'concept',
-      'a1974d071e6a47b69b85313ebdcef9f7'
+      TRASH_CONCEPT_STATUS
     );
     for (const document of documents) {
       document.status = conceptStatus;

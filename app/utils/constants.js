@@ -11,3 +11,4 @@ export const DURING_POS_ID = '4790eec5-acd2-4c1d-8e91-90bb2998f87c';
 export const AFTER_POS_ID = '267a09cc-5380-492d-93ad-697b9e99f032';
 //attachment types
 export const REGULATORY_TYPE_ID = '14e264b4-92db-483f-9dd1-3e806ad6d26c';
+export const TRASH_CONCEPT_STATUS = 'a1974d071e6a47b69b85313ebdcef9f7';
