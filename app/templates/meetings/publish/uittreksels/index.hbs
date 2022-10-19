@@ -5,15 +5,15 @@
              @class="container-flex--contain" as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar @size="large">
-        <AuToolbarGroup>
+      <AuToolbar @size="large" as |Group|>
+        <Group>
           <AuHeading @skin="2">
             {{t "publish.excerpts"}}
           </AuHeading>
-        </AuToolbarGroup>
-        <AuToolbarGroup class="au-u-hide-on-print">
+        </Group>
+        <Group class="au-u-hide-on-print">
           <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} />
-        </AuToolbarGroup>
+        </Group>
       </AuToolbar>
     </menu.general>
   </table.menu>

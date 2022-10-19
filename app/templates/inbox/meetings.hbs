@@ -7,17 +7,17 @@
              @size={{this.pageSize}} as |table|>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large">
-        <AuToolbarGroup>
+      <AuToolbar class="au-o-box" @size="large" as |Group|>
+        <Group>
           <AuHeading @skin="2">
             {{t "inbox.meetings.pageTitle"}}
           </AuHeading>
-        </AuToolbarGroup>
-        <AuToolbarGroup class="au-c-toolbar__group--center au-u-hide-on-print">
+        </Group>
+        <Group class="au-c-toolbar__group--center au-u-hide-on-print">
           {{#unless this.readOnly}}
             <AuLink @route="inbox.meetings.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.meetings.new.title"}}</AuLink>
           {{/unless}}
-        </AuToolbarGroup>
+        </Group>
       </AuToolbar>
     </menu.general>
   </table.menu>

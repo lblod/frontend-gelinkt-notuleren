@@ -31,7 +31,7 @@
           {{/if}}
         </PublicationPreview>
         {{#if (and this.validationErrors this.validationErrors.length)}}
-          <AuAlert @alertIcon="alert-triangle" @alertTitle={{t "timelineStep.publishWarning"}} @alertSkin="error">
+          <AuAlert @icon="alert-triangle" @title={{t "timelineStep.publishWarning"}} @skin="error">
             <ul>
               {{#each this.validationErrors as |error|}}
                 <li>{{error}}</li>
@@ -39,7 +39,7 @@
             </ul>
           </AuAlert>
       {{else if (and this.errors this.errors.length)}}
-          <AuAlert @alertIcon="alert-triangle" @alertSkin="error">
+          <AuAlert @icon="alert-triangle" @skin="error">
             <p>{{t 'publish.seriousError'}}</p>
             <code>{{this.errors.firstObject}}</code>
           </AuAlert>
