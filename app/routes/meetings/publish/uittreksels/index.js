@@ -23,8 +23,9 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
       filter: { zitting: { ':id:': this.meetingId } },
     };
 
-    if (params.title && params.title.length > 0)
+    if (params.title && params.title.length > 0) {
       query['filter[titel]'] = params.title;
+    }
 
     return this.store.query('agendapunt', query);
   }

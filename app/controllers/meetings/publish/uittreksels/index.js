@@ -1,5 +1,6 @@
-import Route from '@ember/routing/route';
+import Controller from '@ember/controller';
 
-export default class MeetingsPublishUittrekselsController extends Route {
+
+export default class MeetingsPublishUittrekselsController extends Controller {
   sort = 'position';
 }
