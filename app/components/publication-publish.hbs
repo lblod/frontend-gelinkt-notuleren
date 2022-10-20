@@ -1,12 +1,12 @@
-<AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small">
-  <AuToolbarGroup>
+<AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as |Group|>
+  <Group>
     <AuHeading @level="2" @skin="4">{{t "timelineStep.publishButtonLabel" name=@name}}</AuHeading>
-  </AuToolbarGroup>
-  <AuToolbarGroup>
+  </Group>
+  <Group>
     <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
       {{if @publishedResource "Publiek" "Niet publiek"}}
     </AuPill>
-  </AuToolbarGroup>
+  </Group>
 </AuToolbar>
 <div class="au-o-grid au-u-margin-top-none">
   {{#if @publishedResource}}
@@ -63,12 +63,12 @@
         {{t "timelineStep.publishRestrictionEnd"}}
       </AuHelpText>
 
-      <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.publicationConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
+      <AuAlert @icon="info-circle" @title={{t "timelineStep.publicationConsequences"}} @skin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
         <p>{{t "timelineStep.previewInfo"}}<a href="{{this.publicationBaseUrl}}" target="_blank" rel="noopener noreferrer" class="au-c-link">{{this.publicationBaseUrl}}</a>{{t "timelineStep.previewInfoEnd"}}</p>
       </AuAlert>
 
       {{#if @willSubmitToLoket}}
-        <AuAlert @alertIcon="info-circle" @alertTitle={{t "timelineStep.notifyConsequences"}} @alertskin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
+        <AuAlert @icon="info-circle" @title={{t "timelineStep.notifyConsequences"}} @skin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
           <p>{{t "timelineStep.notifyInfo"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "timelineStep.localLoket"}}</a>.</p>
         </AuAlert>
       {{/if}}

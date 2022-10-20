@@ -15,7 +15,7 @@
     <creator.form />
 
     {{#if creator.errorSaving}}
-      <AuAlert @alertIcon="cross" @alertTitle={{t "inbox.regulatoryStatements.new.errorSaving"}} @alertSkin="error" @closable={{true}}>
+      <AuAlert @icon="cross" @title={{t "inbox.regulatoryStatements.new.errorSaving"}} @skin="error" @closable={{true}}>
         {{creator.errorSaving}}
       </AuAlert>
     {{/if}}
