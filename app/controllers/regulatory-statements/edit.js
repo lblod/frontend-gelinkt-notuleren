@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { PLUGIN_CONFIGS } from 'frontend-gelinkt-notuleren/config/constants';
 import { task } from 'ember-concurrency';
+import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 
 export default class RegulatoryStatementsRoute extends Controller {
   editor;
@@ -24,6 +25,12 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   get documentContainer() {
     return this.model.documentContainer;
+  }
+
+  @action
+  download() {
+    this.editorDocument.content = this.editor.htmlContent;
+    generateExportFromEditorDocument(this.editorDocument);
   }
 
   @task

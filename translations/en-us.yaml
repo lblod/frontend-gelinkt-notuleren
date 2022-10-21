@@ -421,8 +421,9 @@ editorStatusPill:
   defaultStatus: Concept
 agendapoint:
   revisions: Revisions
-  save: Save
-  options: File options
   restore: Restore
-  export: Export as HTML
   backToMeeting: Return to the meeting of {adminBody} on {date}
+utils:
+  save: Save
+  fileOptions: File options
+  htmlExport: Export as HTML
