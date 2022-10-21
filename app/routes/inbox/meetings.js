@@ -1,9 +1,11 @@
 import Route from '@ember/routing/route';
 import DataTableRouteMixin from 'ember-data-table/mixins/route';
+import { inject as service } from '@ember/service';
 
 export default class InboxMeetingsRoute extends Route.extend(
   DataTableRouteMixin
 ) {
+  @service store;
   modelName = 'zitting';
 
   queryParams = {

@@ -24,12 +24,11 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       PREFIX schema: <http://schema.org/>
       select distinct * where {
         ?publishedContainer a ext:PublishedRegulatoryAttachmentContainer;
-          mu:uuid ?uuid;
-          ext:currentVersion ?container.
-        ?container dct:title ?title.
-        ?reglement ext:publishedVersion ?publishedContainer.
+          ext:currentVersion ?publishedAttachment.
+        ?publishedAttachment dct:title ?title.
+        ?publishedAttachment ext:content/mu:uuid ?fileId.
         OPTIONAL { 
-          ?reglement schema:validThrough ?validThrough.
+          ?publishedContainer schema:validThrough ?validThrough.
         }
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW()) 
       }
@@ -56,14 +55,12 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       const json = yield response.json();
       const bindings = json.results.bindings;
       const templates = bindings.map((binding) => ({
-        container: binding.container.value,
         title: binding.title.value,
         reload: async (template) => {
           const response = await fetch(
-            `${config.regulatoryStatementPreviewEndpoint}/${binding.uuid.value}`
+            `${config.regulatoryStatementFileEndpoint}/${binding.fileId.value}/download`
           );
-          const json = await response.json();
-          template.body = json.content;
+          template.body = await response.text();
         },
       }));
       return templates;
