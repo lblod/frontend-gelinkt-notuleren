@@ -7,6 +7,28 @@
 
 
 
+
+## 2.33.0 (2022-10-20)
+
+#### :rocket: Enhancement
+* [#348](https://github.com/lblod/frontend-gelinkt-notuleren/pull/348) Use file service from regulatory-statements application in order to fetch template ([@elpoelma](https://github.com/elpoelma))
+* [#297](https://github.com/lblod/frontend-gelinkt-notuleren/pull/297) Create revision layout ([@Dietr](https://github.com/Dietr))
+
+#### :bug: Bug Fix
+* [#345](https://github.com/lblod/frontend-gelinkt-notuleren/pull/345) Fix infinite pages when printing a meeting ([@Dietr](https://github.com/Dietr))
+* [#342](https://github.com/lblod/frontend-gelinkt-notuleren/pull/342) Fix: prevent the confirm dialog to show up twice when exiting without saving ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#343](https://github.com/lblod/frontend-gelinkt-notuleren/pull/343) Bump mout from 1.2.3 to 1.2.4 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#344](https://github.com/lblod/frontend-gelinkt-notuleren/pull/344) fix deprecations ([@usrtim](https://github.com/usrtim))
+* [#340](https://github.com/lblod/frontend-gelinkt-notuleren/pull/340) Bump @xmldom/xmldom from 0.8.2 to 0.8.3 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 4
+- Dieter Peirs ([@Dietr](https://github.com/Dietr))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- [@usrtim](https://github.com/usrtim)
+
 ## 2.32.1 (2022-10-12)
 
 #### :bug: Bug Fix
