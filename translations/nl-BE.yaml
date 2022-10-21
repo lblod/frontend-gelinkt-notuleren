@@ -424,8 +424,9 @@ editorStatusPill:
   defaultStatus: In voorbereiding
 agendapoint:
   revisions: Versies
-  save: Bewaar
-  options: Bestand acties
   restore: Herstel
-  export: Exporteer als HTML
   backToMeeting: Terug naar zitting van {adminBody} op {date}
+utils:
+  save: Bewaar
+  fileOptions: Bestand acties
+  htmlExport: Exporteer als HTML

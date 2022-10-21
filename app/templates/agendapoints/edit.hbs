@@ -7,21 +7,21 @@
   </:return-link>
   <:actions>
     <AgendapointMenu @documentContainer={{this.documentContainer}} />
-      <AuDropdown @title={{t "agendapoint.options"}} @buttonLabel={{t "agendapoint.options"}} @alignment="right">
+      <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
       <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="copy" @alignment="left" />
         {{t "appChrome.copyAgendapoint"}}
       </AuButton>
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left" />
-        {{t "agendapoint.export"}}
+        {{t "utils.htmlExport"}}
       </AuButton>
       <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
         <AuIcon @icon="bin" @alignment="left" />
         Naar prullenmand
       </AuButton>
     </AuDropdown>
-    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>{{t "agendapoint.save"}}</AuButton>
+    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>{{t "utils.save"}}</AuButton>
   </:actions>
 </AppChrome>
 
