@@ -11,8 +11,14 @@
     </AuLink>
   </:return-link>
   <:actions>
+    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+        <AuIcon @icon="export" @alignment="left" />
+        {{t "utils.htmlExport"}}
+      </AuButton>
+    </AuDropdown>
     <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>
-      {{t "agendapoint.save"}}
+      {{t "utils.save"}}
     </AuButton>
   </:actions>
 </AppChrome>
