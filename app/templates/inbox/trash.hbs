@@ -1,5 +1,10 @@
 {{page-title (t "inbox.trash.pageTitle")}}
-<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.trash.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
+<AuDataTable @content={{this.model}}
+             @isLoading={{this.isLoadingModel}}
+             @noDataMessage={{t 'inbox.trash.noDataMessage'}}
+             @sort={{this.sort}}
+             @page={{this.page}}
+             @size={{this.pageSize}} as |table|>
    <table.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box" @size="large" as |Group|>
