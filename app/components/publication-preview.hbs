@@ -1,12 +1,12 @@
-<AuToolbar @nowrap={{true}}>
-  <AuToolbarGroup>
+<AuToolbar @nowrap={{true}} as |Group|>
+  <Group>
     <AuHeading @level="2" @skin="4">{{@title}}</AuHeading>
-  </AuToolbarGroup>
-  <AuToolbarGroup>
+  </Group>
+  <Group>
     <AuPill @skin={{this.statusSkin}} class="au-u-margin-left">
       {{this.statusLabel}}
     </AuPill>
-  </AuToolbarGroup>
+  </Group>
 </AuToolbar>
 <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">
   {{#if (has-block)}}

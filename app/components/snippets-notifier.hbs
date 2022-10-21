@@ -1,7 +1,7 @@
 {{#if this.hasSnippets}}
 <AuAlert
-  @alertTitle="Informatie uit een externe bron beschikbaar om in te voegen"
-  @alertSkin="info"
+  @title="Informatie uit een externe bron beschikbaar om in te voegen"
+  @skin="info"
   @icon="info-circle"
   @closable={{true}}
 >
@@ -9,8 +9,8 @@
 </AuAlert>
 {{else if this.hasErrors}}
 <AuAlert
-  @alertTitle="Ophalen van informatie gefaald"
-  @alertSkin="warning"
+  @title="Ophalen van informatie gefaald"
+  @skin="warning"
   @icon="alert-triangle"
   @closable={{true}}
 >

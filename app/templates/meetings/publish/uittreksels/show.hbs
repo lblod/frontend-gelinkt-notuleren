@@ -3,7 +3,7 @@
   {{#if this.loadExtract.isRunning}}
   <AuLoader />
 {{else if this.error}}
-  <AuAlert @alertIcon="cross" @alertTitle={{t "publish.excerptErrorMessage"}} @alertSkin="error" @alertSize="small">
+  <AuAlert @icon="cross" @sitle={{t "publish.excerptErrorMessage"}} @skin="error" @size="small">
     <code>{{this.error}}</code>
   </AuAlert>
   <AuButton {{on "click" (perform this.loadExtract)}}>{{t "publish.retry"}}</AuButton>
