@@ -1,12 +1,20 @@
 <AppChrome
-  @editorDocument={{this.model.editorDocument}}
-  @documentContainer={{this.model.documentContainer}}
-  @exportHtmlFunction={{this.download}}
-  @readOnly={{true}}
-  @copyAgendapunt={{if this.readOnly undefined (perform this.copyAgendapunt)}}
-  @returnRoute="inbox.agendapoints"
-  @returnRouteText={{t 'inbox.agendapoints.return'}}
-/>
+  @editorDocument={{this.editorDocument}}
+  @documentContainer={{this.documentContainer}}
+>
+  <:return-link>
+  <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+  </:return-link>
+  <:actions>
+  <AgendapointMenu @documentContainer={{this.documentContainer}} />
+  <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+    <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+      <AuIcon @icon="export" @alignment="left" />
+      {{t "utils.htmlExport"}}
+    </AuButton>
+  </AuDropdown>
+  </:actions>
+</AppChrome>
 
 <div class="au-c-body-container">
   <div class="au-c-rdfa-editor">
