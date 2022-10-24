@@ -17,6 +17,7 @@ export default class DocumentCreatorComponent extends Component {
   @service store;
   @service rdfaEditorStandardTemplatePlugin;
   @service currentSession;
+  @service documentService;
 
   @action
   rollback() {
@@ -91,15 +92,7 @@ export default class DocumentCreatorComponent extends Component {
   *persistDocument() {
     try {
       this.errorSaving = null;
-      const creationDate = new Date();
       const generatedTemplate = yield this.buildTemplate();
-      const editorDocument = this.store.createRecord('editor-document', {
-        createdOn: creationDate,
-        updatedOn: creationDate,
-        content: generatedTemplate,
-        title: this.title.trim(),
-      });
-      yield editorDocument.save();
       const container = this.store.createRecord('document-container');
       container.status = yield this.store.findRecord(
         'concept',
@@ -110,6 +103,7 @@ export default class DocumentCreatorComponent extends Component {
         this.args.folderId
       );
       container.publisher = this.currentSession.group;
+      const editorDocument = yield this.documentService.createEditorDocument.perform(this.title,  generatedTemplate, container);
       container.currentVersion = editorDocument;
       yield container.save();
       return container;

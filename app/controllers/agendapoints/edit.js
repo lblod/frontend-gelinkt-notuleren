@@ -9,6 +9,7 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
+  @service documentService;
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
@@ -79,19 +80,8 @@ export default class AgendapointsEditController extends Controller {
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
-      const editorDocument = this.store.createRecord('editor-document');
-      editorDocument.content = html;
-      editorDocument.createdOn = new Date();
-      editorDocument.updatedOn = new Date();
-      editorDocument.title = this.editorDocument.title;
-      editorDocument.previousVersion = this.editorDocument;
-      editorDocument.documentContainer = this.documentContainer;
-      yield editorDocument.save();
+      const editorDocument = yield this.documentService.createEditorDocument.perform(this.editorDocument.title, html, this.documentContainer, this.editorDocument);
       this._editorDocument = editorDocument;
-
-      const documentContainer = this.documentContainer;
-      documentContainer.currentVersion = editorDocument;
-      yield documentContainer.save();
     }
   }
 }
