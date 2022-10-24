@@ -2,11 +2,22 @@
 <AppChrome
   @editorDocument={{this.model.editorDocument}}
   @documentContainer={{this.model.documentContainer}}
-  @exportHtmlFunction={{this.download}}
-  @readOnly={{true}}
-  @returnRoute="inbox.irg-archive"
-  @returnRouteText={{t 'inbox.irgArchive.return'}}
-/>
+>
+  <:return-link>
+  <AuLink @route="inbox.irg-archive">
+    <AuIcon @icon="arrow-left" @alignment="left" />
+    {{t 'inbox.irgArchive.return'}}
+  </AuLink>
+  </:return-link>
+  <:actions>
+  <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+    <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+      <AuIcon @icon="export" @alignment="left" />
+      {{t "utils.htmlExport"}}
+    </AuButton>
+  </AuDropdown>
+  </:actions>
+</AppChrome>
 
 <div class="au-c-body-container">
   <div class="au-c-rdfa-editor">

@@ -1,12 +1,11 @@
 <AppChrome
-  @editorDocument={{this.editorDocument}}
-  @documentContainer={{this.documentContainer}}
+  @editorDocument={{this.model.editorDocument}}
+  @documentContainer={{this.model.documentContainer}}
   >
   <:return-link>
     <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
   </:return-link>
   <:actions>
-    <AgendapointMenu @documentContainer={{this.documentContainer}} />
     <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
       {{#unless this.readOnly}}
         <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">

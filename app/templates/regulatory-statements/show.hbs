@@ -1,12 +1,14 @@
 <AppChrome
-  @editorDocument={{this.editorDocument}}
-  @documentContainer={{this.documentContainer}}
+  @editorDocument={{this.model.editorDocument}}
+  @documentContainer={{this.model.documentContainer}}
 >
   <:return-link>
-  <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+  <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
+    <AuIcon @icon="arrow-left" @alignment="left" />
+    {{t 'inbox.regulatoryStatements.return'}}
+  </AuLink>
   </:return-link>
   <:actions>
-  <AgendapointMenu @documentContainer={{this.documentContainer}} />
   <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
     <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
       <AuIcon @icon="export" @alignment="left" />
