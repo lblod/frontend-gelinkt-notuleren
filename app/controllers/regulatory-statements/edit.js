@@ -36,7 +36,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   }
 
   @task
-    *saveTask() {
+  *saveTask() {
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {
@@ -49,6 +49,13 @@ export default class RegulatoryStatementsRoute extends Controller {
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
     }
+  }
+
+  @task
+  *onTitleUpdate(title) {
+    const html = this.editorDocument.content;
+    const editorDocument = yield this.documentService.createEditorDocument.perform(title, html, this.documentContainer, this.editorDocument);
+    this._editorDocument = editorDocument;
   }
 
   @action

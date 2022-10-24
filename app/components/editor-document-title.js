@@ -5,37 +5,44 @@ import { tracked } from '@glimmer/tracking';
 export default class EditorDocumentTitleComponent extends Component {
   @tracked active = false;
   @tracked error = false;
-
+  @tracked _title;
   constructor() {
     super(...arguments);
     this.active = this.args.editActive;
   }
 
   get title() {
-    return this.args.title || '';
+    return this._title || this.args.title;
   }
+
 
   @action
   setTitle(event) {
     let title = event.target.value;
-
-    this.args.onChange?.(title);
+    this._title = title;
 
     if (title) {
       this.error = false;
     }
   }
 
+  get enabled() {
+    this.args.onChange();
+  }
+
   @action
-  submit() {
-    this.args.onSubmit?.();
+  submit(event) {
+    event.preventDefault();
+    console.log(event, this.title);
+    this.args.onSubmit?.(this.title);
     this.toggleActive();
+    return false;
   }
 
   @action
   cancel(event) {
+    this._title = undefined;
     if (!event.currentTarget.contains(event.relatedTarget)) {
-      this.args.onCancel?.();
       this.toggleActive();
     }
   }

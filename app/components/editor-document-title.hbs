@@ -10,22 +10,23 @@
           <AuLabel for={{id}} class="au-u-hidden-visually">
             agendapunt titel
           </AuLabel>
-          <input 
-            class="au-c-app-chrome__title-input" 
-            placeholder="Naamloos document" 
-            id={{id}} 
-            type="text" 
-            value={{this.title}} 
-            {{on "input" this.setTitle}} 
+          <input
+            class="au-c-app-chrome__title-input"
+            placeholder="Naamloos document"
+            id={{id}}
+            type="text"
+            value={{this.title}}
+            {{on "input" this.setTitle}}
             {{did-insert this.focus}}
           />
         {{/let}}
-        <AuButton 
-          type="submit" 
-          class="au-c-app-chrome__title-button" 
-          @skin="secondary" 
-          @icon="check" 
+        <AuButton
+          type="submit"
+          class="au-c-app-chrome__title-button"
+          @skin="secondary"
+          @icon="check"
           @hideText={{true}}
+          @enabled={{this.enabled}}
         >Titel aanpassen</AuButton>
       </div>
     </form>

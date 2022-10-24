@@ -19,17 +19,7 @@ export default class AppChromeComponent extends Component {
   }
 
   @action
-  updateDocumentTitle(title) {
-    this.args.editorDocument.title = title;
-  }
-
-  @action
   async resetDocument() {
     this.args.editorDocument.rollbackAttributes();
-  }
-
-  @action
-  async saveDocument() {
-    await this.args.editorDocument.save();
   }
 }
