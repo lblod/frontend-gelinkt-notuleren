@@ -72,14 +72,14 @@ export default class DocumentService extends Service {
   @task
   *createEditorDocument(title, content, documentContainer, previousDocument) {
     if (!title || !documentContainer) {
-      throw "title and documentContainer are required";
+      throw 'title and documentContainer are required';
     } else {
       const creationDate = new Date();
       const editorDocument = this.store.createRecord('editor-document', {
         createdOn: creationDate,
         updatedOn: creationDate,
-        content: content ?? "",
-        title: title.trim()
+        content: content ?? '',
+        title: title.trim(),
       });
       if (previousDocument) {
         editorDocument.previousVersion = previousDocument;

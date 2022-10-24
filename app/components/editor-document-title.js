@@ -15,7 +15,6 @@ export default class EditorDocumentTitleComponent extends Component {
     return this._title || this.args.title;
   }
 
-
   @action
   setTitle(event) {
     let title = event.target.value;
@@ -24,10 +23,6 @@ export default class EditorDocumentTitleComponent extends Component {
     if (title) {
       this.error = false;
     }
-  }
-
-  get enabled() {
-    this.args.onChange();
   }
 
   @action

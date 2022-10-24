@@ -103,7 +103,12 @@ export default class DocumentCreatorComponent extends Component {
         this.args.folderId
       );
       container.publisher = this.currentSession.group;
-      const editorDocument = yield this.documentService.createEditorDocument.perform(this.title,  generatedTemplate, container);
+      const editorDocument =
+        yield this.documentService.createEditorDocument.perform(
+          this.title,
+          generatedTemplate,
+          container
+        );
       container.currentVersion = editorDocument;
       yield container.save();
       return container;

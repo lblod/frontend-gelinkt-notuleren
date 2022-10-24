@@ -76,7 +76,13 @@ export default class AgendapointsEditController extends Controller {
   @task
   *onTitleUpdate(title) {
     const html = this.editorDocument.content;
-    const editorDocument = yield this.documentService.createEditorDocument.perform(title, html, this.documentContainer, this.editorDocument);
+    const editorDocument =
+      yield this.documentService.createEditorDocument.perform(
+        title,
+        html,
+        this.documentContainer,
+        this.editorDocument
+      );
     this._editorDocument = editorDocument;
   }
 
@@ -87,7 +93,13 @@ export default class AgendapointsEditController extends Controller {
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
-      const editorDocument = yield this.documentService.createEditorDocument.perform(this.editorDocument.title, html, this.documentContainer, this.editorDocument);
+      const editorDocument =
+        yield this.documentService.createEditorDocument.perform(
+          this.editorDocument.title,
+          html,
+          this.documentContainer,
+          this.editorDocument
+        );
       this._editorDocument = editorDocument;
     }
   }
