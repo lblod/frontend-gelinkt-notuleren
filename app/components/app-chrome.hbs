@@ -41,9 +41,9 @@
       </div>
       <EditorDocumentTitle
         @title={{@editorDocument.title}}
-        @readOnly={{not @allowTitleUpdate}}
+        @readOnly={{or @readOnly (not @allowTitleUpdate)}}
         @onSubmit={{@onTitleUpdate}}
-        @readOnly={{@readOnly}} />
+      />
     </Group>
     <Group>
       {{yield to="actions"}}
