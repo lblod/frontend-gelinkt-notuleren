@@ -1,8 +1,7 @@
 import Route from '@ember/routing/route';
 
 export default class AgendapointsShowRoute extends Route {
-
-  async model(params) {
+  async model() {
     const { documentContainer } = this.modelFor('agendapoints');
     return {
       documentContainer,
