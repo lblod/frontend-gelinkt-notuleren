@@ -17,9 +17,4 @@ export default class AppChromeComponent extends Component {
       !this.documentStatus || this.documentStatus.get('id') != DRAFT_STATUS_ID
     );
   }
-
-  @action
-  async resetDocument() {
-    this.args.editorDocument.rollbackAttributes();
-  }
 }
