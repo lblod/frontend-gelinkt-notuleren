@@ -28,7 +28,6 @@ export default class EditorDocumentTitleComponent extends Component {
   @action
   submit(event) {
     event.preventDefault();
-    console.log(event, this.title);
     this.args.onSubmit?.(this.title);
     this.toggleActive();
     return false;
