@@ -6,6 +6,11 @@
 
 
 
+## 2.31.4 (2022-10-25)
+
+* Bump besluit-plugin to 0.5.7
+
+
 ## 2.31.3 (2022-10-17)
 #### :bug: Bug Fix
 * reset table styles on print: seems to be the cause of the infinite pages on print
