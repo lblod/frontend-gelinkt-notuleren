@@ -1,7 +1,13 @@
 {{page-title (t "inbox.agendapoints.pageTitle")}}
 <SnippetsNotifier />
 
-<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage={{t 'inbox.agendapoints.noDataMessage'}} @sort={{this.sort}} @page={{this.page}} @size={{this.pageSize}} as |table|>
+<AuDataTable
+  @content={{this.model}}
+  @isLoading={{this.isLoadingModel}}
+  @noDataMessage={{t 'inbox.agendapoints.noDataMessage'}}
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.pageSize}} as |table|>
   <table.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box" @size="large" as |Group|>

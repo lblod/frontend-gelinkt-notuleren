@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
-import DefaultQueryParamsMixin from 'ember-data-table/mixins/default-query-params';
+import { tracked } from '@glimmer/tracking';
 
-export default class MeetingsPublishUittrekselsController extends Controller.extend(
-  DefaultQueryParamsMixin
-) {
+export default class MeetingsPublishUittrekselsController extends Controller {
   sort = 'position';
+  @tracked debounceTime = 2000;
+  @tracked page = 0;
+  @tracked pageSize = 20;
 }

@@ -1,12 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import DataTableRouteMixin from 'ember-data-table/mixins/route';
 
-export default class MeetingsPublishUittrekselsRoute extends Route.extend(
-  DataTableRouteMixin
-) {
+export default class MeetingsPublishUittrekselsRoute extends Route {
   @service store;
-  modelName = 'agendapunt';
 
   beforeModel() {
     this.meetingId = this.modelFor('meetings.publish').id;
@@ -21,15 +17,16 @@ export default class MeetingsPublishUittrekselsRoute extends Route.extend(
     title: { refreshModel: true },
   };
 
-  mergeQueryOptions(params) {
+  model(params) {
     const query = {
       include: 'behandeling.versioned-behandeling',
       filter: { zitting: { ':id:': this.meetingId } },
     };
 
-    if (params.title && params.title.length > 0)
+    if (params.title && params.title.length > 0) {
       query['filter[titel]'] = params.title;
+    }
 
-    return query;
+    return this.store.query('agendapunt', query);
   }
 }
