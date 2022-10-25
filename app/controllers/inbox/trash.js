@@ -1,21 +1,24 @@
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
-import DefaultQueryParamsMixin from 'ember-data-table/mixins/default-query-params';
 import { action } from '@ember/object';
+import { DRAFT_STATUS_ID } from '../../utils/constants';
+import { tracked } from '@glimmer/tracking';
 
-const CONCEPT_STATUS = 'a1974d071e6a47b69b85313ebdcef9f7';
-export default class InboxTrashController extends Controller.extend(
-  DefaultQueryParamsMixin
-) {
+export default class InboxTrashController extends Controller {
+  @tracked page = 0;
+  @tracked pageSize = 20;
+  @tracked filter = '';
+  @tracked searchValue = this.filter;
+  @tracked debounceTime = 2000;
+
   @service currentSession;
-  @service store;
   @service router;
 
   @action
-  async moveToConcepts(documents /*, datatable */) {
+  async moveToConcepts(documents) {
     const conceptStatus = await this.store.findRecord(
       'concept',
-      CONCEPT_STATUS
+      DRAFT_STATUS_ID
     );
     for (const document of documents) {
       document.status = conceptStatus;

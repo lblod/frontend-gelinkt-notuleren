@@ -8,6 +8,19 @@
 
 
 
+
+## 2.33.1 (2022-10-25)
+
+#### :rocket: Enhancement
+* [#349](https://github.com/lblod/frontend-gelinkt-notuleren/pull/349) Add export-to-html menu action to regulatory-statements document view ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#350](https://github.com/lblod/frontend-gelinkt-notuleren/pull/350) Bump besluit-plugin to 0.5.7 ([@elpoelma](https://github.com/elpoelma))
+* [#346](https://github.com/lblod/frontend-gelinkt-notuleren/pull/346) Bump template-variable-plugin to 0.9.0 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 2.33.0 (2022-10-20)
 
 #### :rocket: Enhancement
