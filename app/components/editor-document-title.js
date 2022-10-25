@@ -36,8 +36,8 @@ export default class EditorDocumentTitleComponent extends Component {
 
   @action
   cancel(event) {
-    this._title = undefined;
     if (!event.currentTarget.contains(event.relatedTarget)) {
+      this._title = undefined;
       this.toggleActive();
     }
   }
