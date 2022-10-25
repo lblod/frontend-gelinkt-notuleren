@@ -3,8 +3,10 @@ import { action } from '@ember/object';
 import { PLUGIN_CONFIGS } from 'frontend-gelinkt-notuleren/config/constants';
 import { task } from 'ember-concurrency';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
+import { inject as service } from '@ember/service';
 
 export default class RegulatoryStatementsRoute extends Controller {
+  @service documentService;
   editor;
   plugins = [
     'article-structure',
@@ -40,19 +42,31 @@ export default class RegulatoryStatementsRoute extends Controller {
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
-      const editorDocument = this.store.createRecord('editor-document');
-      editorDocument.content = html;
-      editorDocument.createdOn = new Date();
-      editorDocument.updatedOn = new Date();
-      editorDocument.title = this.editorDocument.title;
-      editorDocument.previousVersion = this.editorDocument;
-      yield editorDocument.save();
+      const editorDocument = yield this.documentService.createEditorDocument(
+        this.editorDocument.title,
+        html,
+        this.documentContainer,
+        this.editorDocument
+      );
       this._editorDocument = editorDocument;
 
       const documentContainer = this.documentContainer;
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
     }
+  }
+
+  @task
+  *onTitleUpdate(title) {
+    const html = this.editorDocument.content;
+    const editorDocument =
+      yield this.documentService.createEditorDocument.perform(
+        title,
+        html,
+        this.documentContainer,
+        this.editorDocument
+      );
+    this._editorDocument = editorDocument;
   }
 
   @action

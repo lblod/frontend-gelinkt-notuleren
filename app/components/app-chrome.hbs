@@ -39,7 +39,11 @@
           </AuPill>
         {{/if}}
       </div>
-      <EditorDocumentTitle @title={{@editorDocument.title}} @editActive={{@editorDocument.isNew}} @onChange={{this.updateDocumentTitle}} @readOnly={{@readOnly}} />
+      <EditorDocumentTitle
+        @title={{@editorDocument.title}}
+        @readOnly={{or @readOnly (not @allowTitleUpdate)}}
+        @onSubmit={{@onTitleUpdate}}
+      />
     </Group>
     <Group>
       {{yield to="actions"}}

@@ -1,7 +1,11 @@
 import Service from '@ember/service';
 import { analyse } from '@lblod/marawa/rdfa-context-scanner';
+import { task } from 'ember-concurrency';
+import { inject as service } from '@ember/service';
 
 export default class DocumentService extends Service {
+  @service store;
+
   extractTriplesFromDocument(editorDocument) {
     const node = document.createElement('body');
     const context = JSON.parse(editorDocument.context);
@@ -64,5 +68,27 @@ export default class DocumentService extends Service {
       };
     });
     return decisions;
+  }
+  @task
+  *createEditorDocument(title, content, documentContainer, previousDocument) {
+    if (!title || !documentContainer) {
+      throw 'title and documentContainer are required';
+    } else {
+      const creationDate = new Date();
+      const editorDocument = this.store.createRecord('editor-document', {
+        createdOn: creationDate,
+        updatedOn: creationDate,
+        content: content ?? '',
+        title: title.trim(),
+      });
+      if (previousDocument) {
+        editorDocument.previousVersion = previousDocument;
+      }
+      editorDocument.documentContainer = documentContainer;
+      yield editorDocument.save();
+      documentContainer.currentVersion = editorDocument;
+      yield documentContainer.save();
+      return editorDocument;
+    }
   }
 }
