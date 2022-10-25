@@ -6,8 +6,8 @@ export default class InboxTrashRoute extends Route {
   @service store;
 
   queryParams = {
+    pageSize: { refreshModel: true },
     page: { refreshModel: true },
-    size: { refreshModel: true },
     sort: { refreshModel: true },
     filter: { refreshModel: true },
     // filter params
@@ -15,14 +15,19 @@ export default class InboxTrashRoute extends Route {
   };
 
   model(params) {
-    const query = {
+    const options = {
+      sort: params.sort,
       include: 'status,current-version',
       'filter[status][id]': EDITOR_FOLDERS.TRASH,
+      page: {
+        number: params.page,
+        size: params.pageSize,
+      },
     };
 
     if (params.title && params.title.length > 0)
-      query['filter[current-version][title]'] = params.title;
+      options['filter[current-version][title]'] = params.title;
 
-    return this.store.query('document-container', query);
+    return this.store.query('document-container', options);
   }
 }
