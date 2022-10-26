@@ -1,0 +1,7 @@
+<AuList::Item>
+  <AuButton @icon="add" @iconAlignment="left" @skin="link" {{on 'click' this.toggleModal}}>
+    Reglement Invoegen
+  </AuButton>
+</AuList::Item>
+
+<EditorPlugins::RegulatoryStatements::SearchModal @enabled={{this.modalEnabled}} @closeModal={{this.toggleModal}} />

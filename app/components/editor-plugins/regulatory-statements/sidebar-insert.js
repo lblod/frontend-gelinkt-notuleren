@@ -1,0 +1,13 @@
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
+
+export default class manageIntermissionsComponent extends Component {
+  @tracked modalEnabled = false;
+
+  @action
+  toggleModal() {
+    console.log('TOGGLE');
+    this.modalEnabled = !this.modalEnabled;
+  }
+}

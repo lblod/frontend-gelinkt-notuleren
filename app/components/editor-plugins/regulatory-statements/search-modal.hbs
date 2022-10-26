@@ -1,0 +1,52 @@
+<AuModal @modalOpen={{@enabled}} @title="Reglement invoegen" @size="large" @padding="none" @closeModal={{@closeModal}}
+  as |modal|>
+  <modal.Body>
+    <AuMainContainer class="citaten--main-container" as |mc|>
+      <mc.sidebar class="citaten--sidebar" @scroll={{true}}>
+        <div class="au-c-sidebar">
+          <div class="au-c-sidebar__content au-u-padding">
+            <AuInput id="searchtermexpanded" @type="text" @width="block" @icon="search" @iconAlignment="right"
+              @value={{this.searchQuery}} />
+            <AuHr @size="large" />
+            {{#if this.regulatoryStatements.isLoading}}
+            <AuLoader @message="Aan het laden" />
+            {{else}}
+              <ul class="au-c-list-navigation">
+                {{#each this.regulatoryStatements.records as |statement|}}
+                <li class="au-c-list-navigation__item">
+                  <AuButton @skin="link"
+                    class="au-c-list-navigation__link {{if (eq this.selectedReglement statement) 'active'}}"
+                    {{on "click" (fn this.selectReglement statement)}}>
+                    {{statement.currentVersion.title}}
+                  </AuButton>
+                </li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          </div>
+        </div>
+      </mc.sidebar>
+      <mc.content>
+        <AuBodyContainer @scroll={{false}}>
+          {{#if this.selectedReglement}}
+          <div class="au-c-rdfa-editor">
+            <div class="say-container say-container--sidebar-left say-container--paper">
+              <div class="say-container__main">
+                <div class="say-editor">
+                  <div class="say-editor__paper">
+                    <div class="say-editor__inner say-content">
+                      {{this.selectedReglement.currentVersion.htmlSafeContent}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{else}}
+            <p>Geen reglement geselecteerd</p>
+          {{/if}}
+        </AuBodyContainer>
+      </mc.content>
+    </AuMainContainer>
+  </modal.Body>
+</AuModal>
