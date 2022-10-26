@@ -9,9 +9,10 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
   @tracked selectedReglement;
 
   regulatoryStatements = query(this, 'document-container', () => ({
-    include: 'status,current-version',
+    include: 'current-version',
     'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
   }));
+
   @action
   selectReglement(reglement) {
     this.selectedReglement = reglement;

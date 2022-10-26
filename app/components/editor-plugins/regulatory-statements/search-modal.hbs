@@ -29,15 +29,11 @@
       <mc.content>
         <AuBodyContainer @scroll={{false}}>
           {{#if this.selectedReglement}}
-          <div class="au-c-rdfa-editor">
-            <div class="say-container say-container--sidebar-left say-container--paper">
-              <div class="say-container__main">
-                <div class="say-editor">
-                  <div class="say-editor__paper">
-                    <div class="say-editor__inner say-content">
-                      {{this.selectedReglement.currentVersion.htmlSafeContent}}
-                    </div>
-                  </div>
+          <div class="say-container">
+            <div class="say-container__main">
+              <div class="say-editor">
+                <div class="say-editor__inner say-content">
+                  {{this.selectedReglement.currentVersion.htmlSafeContent}}
                 </div>
               </div>
             </div>
@@ -45,6 +41,16 @@
           {{else}}
             <p>Geen reglement geselecteerd</p>
           {{/if}}
+          <div class="au-c-modal__footer">
+            <AuToolbar>
+              <AuToolbarGroup>
+                <AuButton @skin="link" {{on "click" @closeModal}}>Annuleer</AuButton>
+              </AuToolbarGroup>
+              <AuToolbarGroup>
+                <AuButton @disabled={{not this.selectedReglement}}>Reglement invoegen</AuButton>
+              </AuToolbarGroup>
+            </AuToolbar>
+          </div>
         </AuBodyContainer>
       </mc.content>
     </AuMainContainer>
