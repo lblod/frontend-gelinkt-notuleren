@@ -11,17 +11,17 @@
             {{#if this.regulatoryStatements.isLoading}}
             <AuLoader @message="Aan het laden" />
             {{else}}
-              <ul class="au-c-list-navigation">
-                {{#each this.regulatoryStatements.records as |statement|}}
-                <li class="au-c-list-navigation__item">
-                  <AuButton @skin="link"
-                    class="au-c-list-navigation__link {{if (eq this.selectedReglement statement) 'active'}}"
-                    {{on "click" (fn this.selectReglement statement)}}>
-                    {{statement.currentVersion.title}}
-                  </AuButton>
-                </li>
-                {{/each}}
-              </ul>
+            <ul class="au-c-list-navigation">
+              {{#each this.regulatoryStatements.records as |statement|}}
+              <li class="au-c-list-navigation__item">
+                <AuButton @skin="link"
+                  class="au-c-list-navigation__link {{if (eq this.selectedReglement statement) 'active'}}" {{on "click"
+                  (fn this.selectReglement statement)}}>
+                  {{statement.currentVersion.title}}
+                </AuButton>
+              </li>
+              {{/each}}
+            </ul>
             {{/if}}
           </div>
         </div>
@@ -39,7 +39,7 @@
             </div>
           </div>
           {{else}}
-            <p>Geen reglement geselecteerd</p>
+          <p>Geen reglement geselecteerd</p>
           {{/if}}
           <div class="au-c-modal__footer">
             <AuToolbar>
@@ -47,7 +47,11 @@
                 <AuButton @skin="link" {{on "click" @closeModal}}>Annuleer</AuButton>
               </AuToolbarGroup>
               <AuToolbarGroup>
-                <AuButton @disabled={{not this.selectedReglement}}>Reglement invoegen</AuButton>
+                <AuButton 
+                  @disabled={{not this.selectedReglement}} 
+                  {{on "click" @insertStatement}}>
+                  Reglement invoegen
+                </AuButton>
               </AuToolbarGroup>
             </AuToolbar>
           </div>
