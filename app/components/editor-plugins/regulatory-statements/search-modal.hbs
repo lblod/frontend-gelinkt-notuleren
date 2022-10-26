@@ -47,9 +47,8 @@
                 <AuButton @skin="link" {{on "click" @closeModal}}>Annuleer</AuButton>
               </AuToolbarGroup>
               <AuToolbarGroup>
-                <AuButton 
-                  @disabled={{not this.selectedReglement}} 
-                  {{on "click" @insertStatement}}>
+                <AuButton @disabled={{not this.selectedReglement}} {{on "click" (fn @insertStatement
+                  this.selectedReglement)}}>
                   Reglement invoegen
                 </AuButton>
               </AuToolbarGroup>

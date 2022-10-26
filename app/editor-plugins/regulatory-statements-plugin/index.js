@@ -1,6 +1,4 @@
-// import ReadOnlyContentSectionSpec from './inline-components/read-only-content-section';
-
-import RegulatoryStatementsViewSpec from "./inline-components/regulatory-statements-view";
+import RegulatoryStatementsViewSpec from './inline-components/regulatory-statements-view';
 
 export default class RegulatoryStatementsPlugin {
   get name() {

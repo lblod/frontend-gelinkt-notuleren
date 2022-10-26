@@ -6,9 +6,13 @@
       </Group>
       <Group>
         <AuButtonGroup>
-          <AuLinkExternal @icon="pencil" @skin="naked">
+          <AuLink 
+            @icon="pencil" 
+            @skin="naked"
+            @route="regulatory-statements.edit" 
+            @model={{this.reglementContainerId}}>
             Edit
-          </AuLinkExternal>
+          </AuLink>
           <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>
             Detach
           </AuButton>
@@ -18,7 +22,7 @@
   </section>
   <section>
     <AuContent>
-      {{html-safe this.content}}
+      {{this.regulatoryStatement.record.currentVersion.htmlSafeContent}}
     </AuContent>
   </section>
 </AuPanel>

@@ -11,7 +11,29 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
   }
 
   @action
-  insertRegulatoryStatement(_statement) {
+  insertRegulatoryStatement(statement) {
     this.modalEnabled = false;
+    const besluit = this.args.controller.datastore
+      .match(null, 'a', `besluit:Besluit`)
+      .asSubjectNodes()
+      .next().value;
+    if (besluit) {
+      const besluitNode = [...besluit.nodes][0];
+      const range = this.args.controller.rangeFactory.fromInNode(
+        besluitNode,
+        besluitNode.getMaxOffset()
+      );
+      console.log('STATEMENT ID', statement.id);
+      this.args.controller.executeCommand(
+        'insert-component',
+        'editor-plugins/regulatory-statements/view',
+        {
+          reglementContainerId: statement.id,
+        },
+        {},
+        true,
+        range
+      );
+    }
   }
 }
