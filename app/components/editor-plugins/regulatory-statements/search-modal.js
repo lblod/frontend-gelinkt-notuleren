@@ -11,6 +11,9 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
   regulatoryStatements = query(this, 'document-container', () => ({
     include: 'current-version',
     'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
+    ...(this.searchQuery && {
+      'filter[current-version][title]': this.searchQuery,
+    }),
   }));
 
   @action
