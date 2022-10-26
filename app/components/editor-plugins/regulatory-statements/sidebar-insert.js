@@ -7,12 +7,11 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
 
   @action
   toggleModal() {
-    console.log('TOGGLE');
     this.modalEnabled = !this.modalEnabled;
   }
 
   @action
-  insertRegulatoryStatement(_statement){
+  insertRegulatoryStatement(_statement) {
     this.modalEnabled = false;
   }
 }

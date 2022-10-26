@@ -1,0 +1,24 @@
+<AuPanel @active="true" as |section|>
+  <section>
+    <AuToolbar as |Group|>
+      <Group>
+        <AuHeading @level="4" @skin="4">Reglement</AuHeading>
+      </Group>
+      <Group>
+        <AuButtonGroup>
+          <AuLinkExternal @icon="pencil" @skin="naked">
+            Edit
+          </AuLinkExternal>
+          <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>
+            Detach
+          </AuButton>
+        </AuButtonGroup>
+      </Group>
+    </AuToolbar>
+  </section>
+  <section>
+    <AuContent>
+      {{html-safe this.content}}
+    </AuContent>
+  </section>
+</AuPanel>

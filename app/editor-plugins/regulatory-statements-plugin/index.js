@@ -1,5 +1,7 @@
 // import ReadOnlyContentSectionSpec from './inline-components/read-only-content-section';
 
+import RegulatoryStatementsViewSpec from "./inline-components/regulatory-statements-view";
+
 export default class RegulatoryStatementsPlugin {
   get name() {
     return 'regulatory-statements';
@@ -11,5 +13,8 @@ export default class RegulatoryStatementsPlugin {
       componentName: 'editor-plugins/regulatory-statements/sidebar-insert',
       identifier: 'editor-plugins/regulatory-statements/sidebar-insert',
     });
+    controller.registerInlineComponent(
+      new RegulatoryStatementsViewSpec(controller)
+    );
   }
 }
