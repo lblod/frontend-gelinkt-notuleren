@@ -65,4 +65,17 @@ export default class DocumentService extends Service {
     });
     return decisions;
   }
+
+  getDocumentparts(editorDocument) {
+    const triples = this.extractTriplesFromDocument(editorDocument);
+    const documentpartUris = triples
+      .filter(
+        (t) =>
+          t.predicate === 'a' &&
+          t.object ===
+            'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel'
+      )
+      .map((triple) => triple.subject);
+    return documentpartUris;
+  }
 }

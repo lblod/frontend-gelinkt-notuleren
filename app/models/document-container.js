@@ -13,4 +13,5 @@ export default class DocumentContainerModel extends Model {
   @hasMany('versioned-besluiten-lijst') versionedBesluitenLijsten;
   @hasMany('versioned-behandelingen') versionedBehandelingen;
   @hasMany('attachment', { inverse: 'documentContainer' }) attachments;
+  @hasMany('editor-document', { inverse: 'hasParts' }) isPartOf;
 }

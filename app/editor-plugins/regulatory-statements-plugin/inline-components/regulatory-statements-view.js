@@ -20,8 +20,8 @@ export default class RegulatoryStatementsViewSpec extends InlineComponentSpec {
               Reglementaire bijlage: 
               <a 
                 href="${state.reglementContainerURL}"
-                property="lblodgn:reglementaireBijlage"
-                typeof="lblodgn:ReglementaireBijlage"
+                property="dct:hasPart"
+                typeof="besluitpublicatie:Documentonderdeel"
                 resource="${props.reglementContainerURI}"
                 >${state.title}</a>
             </p>`;

@@ -9,6 +9,7 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
+  @service documentService;
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
@@ -86,6 +87,8 @@ export default class AgendapointsEditController extends Controller {
       editorDocument.title = this.editorDocument.title;
       editorDocument.previousVersion = this.editorDocument;
       editorDocument.documentContainer = this.documentContainer;
+
+      yield this.updateLinkedDocuments(editorDocument);
       yield editorDocument.save();
       this._editorDocument = editorDocument;
 
@@ -93,5 +96,21 @@ export default class AgendapointsEditController extends Controller {
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
     }
+  }
+
+  async updateLinkedDocuments(editorDocument) {
+    this.documentService.getDocumentparts(editorDocument).map(async (uri) => {
+      const part = (
+        await this.store.query('document-container', {
+          'filter[:uri:]': uri,
+          include: 'is-part-of',
+        })
+      ).firstObject;
+      if (part) {
+        const isPartOfDocuments = await part.isPartOf;
+        isPartOfDocuments.pushObject(editorDocument);
+        await part.save();
+      }
+    });
   }
 }

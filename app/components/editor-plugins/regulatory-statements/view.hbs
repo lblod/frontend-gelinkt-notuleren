@@ -1,9 +1,9 @@
 <AuPanel 
   @active="true"
   {{did-insert this.didInsert}} 
-  property="lblodgn:reglementaireBijlage"
-  typeof="lblodgn:ReglementaireBijlage"
+  property="dct:hasPart"
   resource={{this.reglementContainerURI}}
+  typeof="besluitpublicatie:Documentonderdeel"
    as |section|>
   <section>
     <AuToolbar as |Group|>
