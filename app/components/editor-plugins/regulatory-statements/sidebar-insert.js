@@ -23,12 +23,11 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
         besluitNode,
         besluitNode.getMaxOffset()
       );
-      console.log('STATEMENT ID', statement.id);
       this.args.controller.executeCommand(
         'insert-component',
         'editor-plugins/regulatory-statements/view',
         {
-          reglementContainerId: statement.id,
+          reglementContainerURI: statement.uri,
         },
         {},
         true,

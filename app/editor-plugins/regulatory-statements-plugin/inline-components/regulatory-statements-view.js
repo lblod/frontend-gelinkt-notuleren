@@ -15,8 +15,16 @@ export default class RegulatoryStatementsViewSpec extends InlineComponentSpec {
       return null;
     },
   };
-  _renderStatic() {
-    return '<p>Static</p>';
+  _renderStatic(props, state) {
+    return `<p>
+              Reglementaire bijlage: 
+              <a 
+                href="${state.reglementContainerURL}"
+                property="lblodgn:reglementaireBijlage"
+                typeof="lblodgn:ReglementaireBijlage"
+                resource="${props.reglementContainerURI}"
+                >${state.title}</a>
+            </p>`;
   }
   constructor(controller) {
     super('editor-plugins/regulatory-statements/view', 'div', controller);

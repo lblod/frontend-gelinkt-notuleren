@@ -1,18 +1,22 @@
-<AuPanel @active="true" as |section|>
+<AuPanel 
+  @active="true"
+  {{did-insert this.didInsert}} 
+  property="lblodgn:reglementaireBijlage"
+  typeof="lblodgn:ReglementaireBijlage" as |section|>
   <section>
     <AuToolbar as |Group|>
       <Group>
         <AuHeading @level="4" @skin="4">Reglement</AuHeading>
+        <p>(Laatst aangepast: {{human-friendly-date this.updatedOn}})</p>
       </Group>
       <Group>
         <AuButtonGroup>
-          <AuLink 
+          <AuLinkExternal
             @icon="pencil" 
             @skin="naked"
-            @route="regulatory-statements.edit" 
-            @model={{this.reglementContainerId}}>
+            href={{this.reglementContainerURL}}>
             Edit
-          </AuLink>
+          </AuLinkExternal>
           <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>
             Detach
           </AuButton>
@@ -22,7 +26,7 @@
   </section>
   <section>
     <AuContent>
-      {{this.regulatoryStatement.record.currentVersion.htmlSafeContent}}
+      {{this.content}}
     </AuContent>
   </section>
 </AuPanel>

@@ -1,12 +1,38 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { findRecord } from 'ember-data-resources';
+import { inject as service } from '@ember/service';
+
 export default class ReadOnlyContentSectionComponent extends Component {
-  regulatoryStatement = findRecord(
-    this,
-    'document-container',
-    () => this.reglementContainerId
-  );
+  @service store;
+
+  @action
+  didInsert() {
+    this.retrieveRegulatoryStatement();
+  }
+
+  async retrieveRegulatoryStatement() {
+    console.log(this.componentController.props.reglementContainerURI);
+    const statementContainer = (
+      await this.store.query('document-container', {
+        'filter[:uri:]': this.componentController.props.reglementContainerURI,
+        include: 'current-version',
+      })
+    ).firstObject;
+    const currentVersion = await statementContainer.currentVersion;
+    this.componentController.setStateProperty('title', currentVersion.title);
+    this.componentController.setStateProperty(
+      'updatedOn',
+      currentVersion.updatedOn
+    );
+    this.componentController.setStateProperty(
+      'content',
+      currentVersion.htmlSafeContent
+    );
+    this.componentController.setStateProperty(
+      'reglementContainerURL',
+      `/regulatory-statements/${statementContainer.id}/edit`
+    );
+  }
 
   get componentController() {
     return this.args.componentController;
@@ -17,12 +43,15 @@ export default class ReadOnlyContentSectionComponent extends Component {
   }
 
   get content() {
-    return 'content';
+    return this.componentController.getStateProperty('content');
   }
 
-  get reglementContainerId() {
-    console.log(this.componentController.props.reglementContainerId);
-    return this.componentController.props.reglementContainerId;
+  get updatedOn() {
+    return this.componentController.getStateProperty('updatedOn');
+  }
+
+  get reglementContainerURL() {
+    return this.componentController.state.reglementContainerURL;
   }
 
   @action
