@@ -54,6 +54,10 @@ export default class ReadOnlyContentSectionComponent extends Component {
     return this.componentController.state.reglementContainerURL;
   }
 
+  get reglementContainerURI() {
+    return this.componentController.props.reglementContainerURI;
+  }
+
   @action
   detach() {
     this.editorController.executeCommand(

@@ -2,7 +2,9 @@
   @active="true"
   {{did-insert this.didInsert}} 
   property="lblodgn:reglementaireBijlage"
-  typeof="lblodgn:ReglementaireBijlage" as |section|>
+  typeof="lblodgn:ReglementaireBijlage"
+  resource={{this.reglementContainerURI}}
+   as |section|>
   <section>
     <AuToolbar as |Group|>
       <Group>
