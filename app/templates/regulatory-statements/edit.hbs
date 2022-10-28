@@ -3,6 +3,8 @@
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
+  @onTitleUpdate={{perform this.onTitleUpdate}}
+  @allowTitleUpdate={{true}}
 >
   <:return-link>
   <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
