@@ -100,25 +100,7 @@ export default class AgendapointsEditController extends Controller {
           this.documentContainer,
           this.editorDocument
         );
-      // TODO
-      // yield this.updateLinkedDocuments(editorDocument);
       this._editorDocument = editorDocument;
     }
-  }
-
-  async updateLinkedDocuments(editorDocument) {
-    this.documentService.getDocumentparts(editorDocument).map(async (uri) => {
-      const part = (
-        await this.store.query('document-container', {
-          'filter[:uri:]': uri,
-          include: 'is-part-of',
-        })
-      ).firstObject;
-      if (part) {
-        const isPartOfDocuments = await part.isPartOf;
-        isPartOfDocuments.pushObject(editorDocument);
-        await part.save();
-      }
-    });
   }
 }
