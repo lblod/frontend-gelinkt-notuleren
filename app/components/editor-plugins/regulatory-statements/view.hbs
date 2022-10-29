@@ -8,8 +8,8 @@
   <section>
     <AuToolbar as |Group|>
       <Group>
-        <AuHeading @level="4" @skin="4">Reglement</AuHeading>
-        <p>(Laatst aangepast: {{human-friendly-date this.updatedOn}})</p>
+        <AuHeading @level="4" @skin="4">{{t "regulatoryStatementsPlugin.regulatoryStatement"}}</AuHeading>
+        <p>({{t "regulatoryStatementsPlugin.lastModification"}}: {{human-friendly-date this.updatedOn}})</p>
       </Group>
       <Group>
         <AuButtonGroup>
@@ -17,10 +17,10 @@
             @icon="pencil"
             @skin="naked"
             href={{this.url}}>
-            Edit
+            {{t "regulatoryStatementsPlugin.editStatement"}}
           </AuLinkExternal>
           <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>
-            Detach
+            {{t "regulatoryStatementsPlugin.detachStatement"}}
           </AuButton>
         </AuButtonGroup>
       </Group>
