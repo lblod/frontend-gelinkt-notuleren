@@ -6,7 +6,7 @@ import { EDITOR_FOLDERS } from '../../../config/constants';
 
 export default class RegulatoryStatementsSearchModalComponent extends Component {
   @tracked searchQuery;
-  @tracked selectedReglement;
+  @tracked selectedStatement;
 
   regulatoryStatements = query(this, 'document-container', () => ({
     include: 'current-version',
@@ -17,7 +17,7 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
   }));
 
   @action
-  selectReglement(reglement) {
-    this.selectedReglement = reglement;
+  selectStatement(statement) {
+    this.selectedStatement = statement;
   }
 }

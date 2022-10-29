@@ -1,8 +1,8 @@
-<AuPanel 
+<AuPanel
   @active="true"
-  {{did-insert this.didInsert}} 
+  {{did-insert this.didInsert}}
   property="dct:hasPart"
-  resource={{this.reglementContainerURI}}
+  resource={{this.uri}}
   typeof="besluitpublicatie:Documentonderdeel"
    as |section|>
   <section>
@@ -14,9 +14,9 @@
       <Group>
         <AuButtonGroup>
           <AuLinkExternal
-            @icon="pencil" 
+            @icon="pencil"
             @skin="naked"
-            href={{this.reglementContainerURL}}>
+            href={{this.url}}>
             Edit
           </AuLinkExternal>
           <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>

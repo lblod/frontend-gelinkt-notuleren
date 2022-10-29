@@ -11,14 +11,13 @@ export default class ReadOnlyContentSectionComponent extends Component {
   }
 
   async retrieveRegulatoryStatement() {
-    console.log(this.componentController.props.reglementContainerURI);
-    const statementContainer = (
+    const regulatoryStatementContainer = (
       await this.store.query('document-container', {
-        'filter[:uri:]': this.componentController.props.reglementContainerURI,
+        'filter[:uri:]': this.uri,
         include: 'current-version',
       })
     ).firstObject;
-    const currentVersion = await statementContainer.currentVersion;
+    const currentVersion = await regulatoryStatementContainer.currentVersion;
     this.componentController.setStateProperty('title', currentVersion.title);
     this.componentController.setStateProperty(
       'updatedOn',
@@ -29,8 +28,8 @@ export default class ReadOnlyContentSectionComponent extends Component {
       currentVersion.htmlSafeContent
     );
     this.componentController.setStateProperty(
-      'reglementContainerURL',
-      `/regulatory-statements/${statementContainer.id}/edit`
+      'url',
+      `/regulatory-statements/${regulatoryStatementContainer.id}/edit`
     );
   }
 
@@ -50,12 +49,13 @@ export default class ReadOnlyContentSectionComponent extends Component {
     return this.componentController.getStateProperty('updatedOn');
   }
 
-  get reglementContainerURL() {
-    return this.componentController.state.reglementContainerURL;
+  get url() {
+    return this.componentController.state.url;
   }
 
-  get reglementContainerURI() {
-    return this.componentController.props.reglementContainerURI;
+  get uri() {
+    console.log('URI: ', this.componentController.props.uri);
+    return this.componentController.props.uri;
   }
 
   @action

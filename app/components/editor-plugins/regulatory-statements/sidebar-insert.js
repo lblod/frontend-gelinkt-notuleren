@@ -27,7 +27,7 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
         'insert-component',
         'editor-plugins/regulatory-statements/view',
         {
-          reglementContainerURI: statement.uri,
+          uri: statement.uri,
         },
         {},
         true,

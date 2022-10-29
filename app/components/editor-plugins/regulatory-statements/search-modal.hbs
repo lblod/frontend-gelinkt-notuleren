@@ -16,7 +16,7 @@
               <li class="au-c-list-navigation__item">
                 <AuButton @skin="link"
                   class="au-c-list-navigation__link {{if (eq this.selectedReglement statement) 'active'}}" {{on "click"
-                  (fn this.selectReglement statement)}}>
+                  (fn this.selectStatement statement)}}>
                   {{statement.currentVersion.title}}
                 </AuButton>
               </li>
@@ -28,12 +28,12 @@
       </mc.sidebar>
       <mc.content>
         <AuBodyContainer @scroll={{false}}>
-          {{#if this.selectedReglement}}
+          {{#if this.selectedStatement}}
           <div class="say-container">
             <div class="say-container__main">
               <div class="say-editor">
                 <div class="say-editor__inner say-content">
-                  {{this.selectedReglement.currentVersion.htmlSafeContent}}
+                  {{this.selectedStatement.currentVersion.htmlSafeContent}}
                 </div>
               </div>
             </div>
@@ -47,8 +47,8 @@
                 <AuButton @skin="link" {{on "click" @closeModal}}>Annuleer</AuButton>
               </AuToolbarGroup>
               <AuToolbarGroup>
-                <AuButton @disabled={{not this.selectedReglement}} {{on "click" (fn @insertStatement
-                  this.selectedReglement)}}>
+                <AuButton @disabled={{not this.selectedStatement}} {{on "click" (fn @insertStatement
+                  this.selectedStatement)}}>
                   Reglement invoegen
                 </AuButton>
               </AuToolbarGroup>

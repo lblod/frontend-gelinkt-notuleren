@@ -17,12 +17,12 @@ export default class RegulatoryStatementsViewSpec extends InlineComponentSpec {
   };
   _renderStatic(props, state) {
     return `<p>
-              Reglementaire bijlage: 
-              <a 
-                href="${state.reglementContainerURL}"
+              Reglementaire bijlage:
+              <a
+                href="${state.url}"
                 property="dct:hasPart"
                 typeof="besluitpublicatie:Documentonderdeel"
-                resource="${props.reglementContainerURI}"
+                resource="${props.uri}"
                 >${state.title}</a>
             </p>`;
   }
