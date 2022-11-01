@@ -1,120 +1,95 @@
 {{!template-lint-disable no-inline-styles}}
 
 {{#if this.editMode}}
-  <Treatment::Voting::Edit
-    @onCancel={{this.onCancelEdit}}
-    @onSave={{perform this.saveStemming}}
-    @saving={{this.saveStemming.isRunning}}
-    @bestuursorgaan={{@bestuursorgaan}}
-    @disableButtons={{this.disableButtons}}
-  />
+<Treatment::Voting::Edit @onCancel={{this.onCancelEdit}} @onSave={{perform this.saveStemming}}
+  @saving={{this.saveStemming.isRunning}} @bestuursorgaan={{@bestuursorgaan}} @disableButtons={{this.disableButtons}} />
 {{/if}}
-<table class="au-c-meeting-chrome-table">
-  <thead>
-    <tr>
-      <th style="max-width: 30rem;">
-        {{t "votingModal.onderwerpLabel"}}
-      </th>
+<AuDataTable 
+  class="au-c-meeting-chrome-table" 
+  @content={{this.stemmingen.records}} 
+  @noDataMessage='Geen stemmingen gevonden'
+  @sort={{this.sortBy}}
+  @page={{this.tablePage}}
+  @size={{this.tableSize}}
+  as |table|>
+  <table.content as |c|>
+    <c.header>
+      <AuDataTableThSortable @label="Nr." @field="position" @currentSorting={{this.sortBy}} />
+      <AuDataTableThSortable @label={{t "votingModal.onderwerpLabel" }} @field="onderwerp" @currentSorting={{this.sortBy}} />
+      <AuDataTableThSortable @label={{t "votingModal.typeLabel" }} @field="geheim" @currentSorting={{this.sortBy}}/>
       <th>
-        {{t "votingModal.typeLabel"}}
+        <span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">
+          {{t "votingModal.stemmenLabel"}}
+        </span>
       </th>
-      <th>
-        {{t "votingModal.stemmenLabel"}}
-      </th>
-      <th style="max-width: 30rem;">
-        {{t "votingModal.gevolgLabel"}}
-      </th>
+      <AuDataTableThSortable @label={{t "votingModal.gevolgLabel" }} @field="gevolg" @currentSorting={{this.sortBy}} />
       {{#unless @readOnly}}
-        <th class="au-u-table-right">
-          <span class="au-u-hidden-visually">{{t "votingModal.actionsLabel"}}</span>
-            <AuButton
-              {{on "click" (perform this.addStemming)}}
-              @icon="add"
-              @iconAlignment="left"
-              @loading={{this.addStemming.isRunning}}
-            >
-              {{t "votingModal.createVotingButton"}}
-            </AuButton>
-        </th>
+      <th class="au-u-table-right">
+        <span class="au-u-hidden-visually">{{t "votingModal.actionsLabel"}}</span>
+        <AuButton {{on "click" (perform this.addStemming)}} @icon="add" @iconAlignment="left"
+          @loading={{this.addStemming.isRunning}}>
+          {{t "votingModal.createVotingButton"}}
+        </AuButton>
+      </th>
       {{/unless}}
-    </tr>
-  </thead>
-  <tbody>
-    {{#if this.fetchStemmingen.lastSuccessful}}
-      {{#each this.stemmingen as |stemming|}}
-        <tr>
-          <td style="max-width: 30rem;">
-            {{#if stemming.onderwerp}}
-              {{stemming.onderwerp}}
-            {{else}}
-              <AuHelpText @size="normal" @skin="tertiary">
-                {{t "votingModal.subjectNotFound"}}
-              </AuHelpText>
-            {{/if}}
-          </td>
-          <td>
-            {{#if stemming.geheim}}
-              <AuHelpText @size="normal">
-                {{t "votingModal.geheimTrueLabel"}}
-              </AuHelpText>
-            {{else}}
-              <AuHelpText @size="normal">
-                {{t "votingModal.geheimFalseLabel"}}
-              </AuHelpText>
-            {{/if}}
-          </td>
-          <td>
-            <p class="au-c-help-text au-c-help-text--normal">
-              {{t "votingModal.aantalVoorstandersLabel"}} <strong>{{stemming.aantalVoorstanders}}</strong>
-            </p>
-            <p class="au-c-help-text au-c-help-text--normal">
-              {{t "votingModal.aantalTegenstandersLabel"}} <strong>{{stemming.aantalTegenstanders}}</strong>
-            </p>
-            <p class="au-c-help-text au-c-help-text--normal">
-              {{t "votingModal.aantalOnthoudersLabel"}} <strong>{{stemming.aantalOnthouders}}</strong>
-            </p>
-          </td>
-          <td style="max-width: 30rem;">
-            {{#if stemming.gevolg}}
-              {{stemming.gevolg}}
-            {{else}}
-              <AuHelpText @size="normal" @skin="tertiary">{{t "votingModal.gevolgNotFound"}}</AuHelpText>
-            {{/if}}
-          </td>
-          {{#unless @readOnly}}
-            <td class="au-u-table-right">
-              <AuButtonGroup>
-                <AuButton
-                  {{on "click" (fn this.toggleEditStemming stemming)}}
-                  @skin="secondary"
-                  @icon="pencil"
-                  @iconAlignment="left"
-                >
-                  {{t "votingModal.toggleEditButton"}}
-                </AuButton>
-                <AuButton
-                  {{on "click" (fn (perform this.removeStemming) stemming)}}
-                  @skin="secondary"
-                  @alert={{true}}
-                  @icon="bin"
-                  @iconAlignment="left"
-                  @loading={{ this.removeStemming.isRunning }}
-                >
-                  {{t "votingModal.deleteButton"}}
-                </AuButton>
-              </AuButtonGroup>
-            </td>
-          {{/unless}}
-        </tr>
-      {{else}}
-        <tr>
-          <td colspan="5">
-            <AuHelpText @size="normal" @skin="tertiary">
-              {{t "votingModal.noDataMessage"}}
-            </AuHelpText>
-          </td>
-        </tr>
-      {{/each}}
-    {{/if}}
-  </tbody>
-</table>
+
+    </c.header>
+    <c.body as |stemming|>
+      <td style="max-width: 30rem;">
+        {{sum stemming.position 1}}
+      </td>
+      <td style="max-width: 30rem;">
+        {{#if stemming.onderwerp}}
+        {{stemming.onderwerp}}
+        {{else}}
+        <AuHelpText @size="normal" @skin="tertiary">
+          {{t "votingModal.subjectNotFound"}}
+        </AuHelpText>
+        {{/if}}
+      </td>
+      <td>
+        {{#if stemming.geheim}}
+        <AuHelpText @size="normal">
+          {{t "votingModal.geheimTrueLabel"}}
+        </AuHelpText>
+        {{else}}
+        <AuHelpText @size="normal">
+          {{t "votingModal.geheimFalseLabel"}}
+        </AuHelpText>
+        {{/if}}
+      </td>
+      <td>
+        <p class="au-c-help-text au-c-help-text--normal">
+          {{t "votingModal.aantalVoorstandersLabel"}} <strong>{{stemming.aantalVoorstanders}}</strong>
+        </p>
+        <p class="au-c-help-text au-c-help-text--normal">
+          {{t "votingModal.aantalTegenstandersLabel"}} <strong>{{stemming.aantalTegenstanders}}</strong>
+        </p>
+        <p class="au-c-help-text au-c-help-text--normal">
+          {{t "votingModal.aantalOnthoudersLabel"}} <strong>{{stemming.aantalOnthouders}}</strong>
+        </p>
+      </td>
+      <td style="max-width: 30rem;">
+        {{#if stemming.gevolg}}
+        {{stemming.gevolg}}
+        {{else}}
+        <AuHelpText @size="normal" @skin="tertiary">{{t "votingModal.gevolgNotFound"}}</AuHelpText>
+        {{/if}}
+      </td>
+      {{#unless @readOnly}}
+      <td class="au-u-table-right">
+        <AuButtonGroup>
+          <AuButton {{on "click" (fn this.toggleEditStemming stemming)}} @skin="secondary" @icon="pencil"
+            @iconAlignment="left">
+            {{t "votingModal.toggleEditButton"}}
+          </AuButton>
+          <AuButton {{on "click" (fn (perform this.removeStemming) stemming)}} @skin="secondary" @alert={{true}}
+            @icon="bin" @iconAlignment="left" @loading={{ this.removeStemming.isRunning }}>
+            {{t "votingModal.deleteButton"}}
+          </AuButton>
+        </AuButtonGroup>
+      </td>
+      {{/unless}}
+    </c.body>
+  </table.content>
+</AuDataTable>

@@ -2,7 +2,8 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import Component from '@glimmer/component';
-import { task, restartableTask } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
+import { query } from 'ember-data-resources';
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
 /** @typedef {import("../../../models/bestuursorgaan").default} Bestuursorgaan*/
 /** @typedef {import("../../../models/stemming").default} Stemming*/
@@ -17,7 +18,6 @@ import { task, restartableTask } from 'ember-concurrency';
 
 /** @extends {Component<Args>} */
 export default class TreatmentVotingModalComponent extends Component {
-  @tracked stemmingen;
   @tracked create = false;
   @tracked edit = false;
   @tracked editMode = false;
@@ -25,21 +25,18 @@ export default class TreatmentVotingModalComponent extends Component {
   @service store;
   @service editStemming;
 
+  @tracked tableSize = 20;
+  @tracked sortBy = 'position';
+  @tracked tablePage = 0;
+
+  stemmingen = query(this, 'stemming', () => ({
+    sort: this.sortBy,
+    'filter[behandeling-van-agendapunt][:id:]': this.args.behandeling.get('id'),
+    page: { size: this.tableSize, number: this.tablePage },
+  }));
+
   constructor(parent, args) {
     super(parent, args);
-    this.fetchStemmingen.perform();
-  }
-
-  @restartableTask
-  /** @type {import("ember-concurrency").Task} */
-  *fetchStemmingen() {
-    const stemmingQuery = {
-      sort: 'position',
-      'filter[behandeling-van-agendapunt][:id:]':
-        this.args.behandeling.get('id'),
-      page: { size: 100 },
-    };
-    this.stemmingen = yield this.store.query('stemming', stemmingQuery);
   }
 
   @task
@@ -57,7 +54,7 @@ export default class TreatmentVotingModalComponent extends Component {
       this.args.behandeling.stemmingen.pushObject(this.editStemming.stemming);
       yield this.args.behandeling.save();
     }
-    yield this.fetchStemmingen.perform();
+    yield this.stemmingen.retry();
 
     this.onCancelEdit();
   }
