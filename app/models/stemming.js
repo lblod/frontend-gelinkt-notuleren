@@ -16,5 +16,6 @@ export default class StemmingModel extends Model {
   @hasMany('mandataris', { inverse: null }) tegenstanders;
   @hasMany('mandataris', { inverse: null }) voorstanders;
 
-  @belongsTo('behandeling-van-agendapunt', { inverse: 'stemmingen' }) behandelingVanAgendapunt;
+  @belongsTo('behandeling-van-agendapunt', { inverse: 'stemmingen' })
+  behandelingVanAgendapunt;
 }

@@ -41,8 +41,8 @@ export default class TreatmentVotingModalComponent extends Component {
       sort: 'position',
       page: {
         size: pageSize,
-      }
-    })
+      },
+    });
     const count = firstPage.meta.count;
     firstPage.forEach((result) => stemmingen.push(result));
     let pageNumber = 1;
@@ -53,9 +53,9 @@ export default class TreatmentVotingModalComponent extends Component {
         sort: 'position',
         page: {
           size: pageSize,
-          number: pageNumber
-        }
-      })
+          number: pageNumber,
+        },
+      });
       pageResults.forEach((result) => stemmingen.push(result));
       pageNumber++;
     }
@@ -68,9 +68,9 @@ export default class TreatmentVotingModalComponent extends Component {
     const isNew = this.editStemming.stemming.isNew;
 
     if (isNew) {
-      this.editStemming.stemming.position =
-        this.stemmingen.length;
-      this.editStemming.stemming.behandelingVanAgendapunt = this.args.behandeling;
+      this.editStemming.stemming.position = this.stemmingen.length;
+      this.editStemming.stemming.behandelingVanAgendapunt =
+        this.args.behandeling;
       this.stemmingen.push(this.editStemming.stemming);
     }
     yield this.editStemming.saveTask.perform();
@@ -100,11 +100,10 @@ export default class TreatmentVotingModalComponent extends Component {
     this.editStemming.stemming = stemmingToEdit;
   }
 
-
   @task
-  *fixPositions(){
+  *fixPositions() {
     for (const [i, stemming] of this.stemmingen.entries()) {
-      if(i !== stemming.position){
+      if (i !== stemming.position) {
         stemming.position = i;
         yield stemming.save();
       }
