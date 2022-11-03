@@ -39,9 +39,8 @@
                 @alertTitle="No statements found"
                 @alertSkin="warning"
                 @alertIcon="cross"
-                @alertSize="{{if @fullSize "default" "small"}}"
-                @closable={{false}}
-                class="{{unless @fullSize "au-u-margin-small"}}">
+                @alertSize="small"
+                @closable={{false}}>
               </AuAlert>
             {{/if}}
           </div>
@@ -49,27 +48,26 @@
       </mc.sidebar>
       <mc.content>
         <AuBodyContainer @scroll={{false}}>
-          {{#if this.selectedStatement}}
           <div class="say-container">
-            <div class="say-container__main">
-              <div class="say-editor">
-                <div class="say-editor__inner say-content">
-                  {{this.selectedStatement.currentVersion.htmlSafeContent}}
+            {{#if this.selectedStatement}}
+              <div class="say-container__main">
+                <div class="say-editor">
+                  <div class="say-editor__inner say-content">
+                    {{this.selectedStatement.currentVersion.htmlSafeContent}}
+                  </div>
                 </div>
               </div>
-            </div>
+            {{else}}
+              <AuAlert
+                @alertTitle="{{t "regulatoryStatementsPlugin.noStatementSelected"}}"
+                @alertSkin="info"
+                @alertIcon="info-circle"
+                @alertSize="default"
+                @closable={{false}}
+                class="au-u-margin-small">
+              </AuAlert>
+            {{/if}}
           </div>
-          {{else}}
-          <AuAlert
-            @alertTitle="{{t "regulatoryStatementsPlugin.noStatementSelected"}}"
-            @alertSkin="warning"
-            @alertIcon="cross"
-            @alertSize="{{if @fullSize "default" "small"}}"
-            @closable={{false}}
-            class="{{unless @fullSize "au-u-margin-small"}}">
-          </AuAlert>
-          <p>{{t "regulatoryStatementsPlugin.noStatementSelected"}}</p>
-          {{/if}}
           <div class="au-c-modal__footer">
             <AuToolbar>
               <AuToolbarGroup>
