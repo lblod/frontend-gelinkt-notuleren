@@ -3,5 +3,6 @@
     {{t "regulatoryStatementsPlugin.insertStatement"}}
   </AuButton>
 </AuList::Item>
-
-<EditorPlugins::RegulatoryStatements::SearchModal @enabled={{this.modalEnabled}} @closeModal={{this.toggleModal}} @insertStatement={{this.insertRegulatoryStatement}}/>
+{{#if this.modalEnabled}}
+<EditorPlugins::RegulatoryStatements::SearchModal @closeModal={{this.toggleModal}} @insertStatement={{this.insertRegulatoryStatement}}/>
+{{/if}}

@@ -1,4 +1,9 @@
-<AuModal @modalOpen={{@enabled}} @title={{t "regulatoryStatementsPlugin.insertStatement"}} @size="large" @padding="none" @closeModal={{@closeModal}}
+<AuModal @modalOpen={{true}} 
+         @title={{t "regulatoryStatementsPlugin.insertStatement"}} 
+         @size="large" 
+         @padding="none" 
+         @closeModal={{@closeModal}}
+         {{!-- {{did-insert (perform this.fetchRegulatoryStatements)}} --}}
   as |modal|>
   <modal.Body>
     <AuMainContainer class="citaten--main-container" as |mc|>
@@ -12,22 +17,32 @@
               @icon="search"
               @iconAlignment="right"
               placeholder={{t "regulatoryStatementsPlugin.search"}}
-              @value={{this.searchQuery}} />
+              @value={{this.searchValue}}
+              {{on "input" this.updateFilter}} />
             <AuHr @size="large" />
             {{#if this.regulatoryStatements.isLoading}}
-            <AuLoader @message={{t "regulatoryStatementsPlugin.loading"}} />
+              <AuLoader @message={{t "regulatoryStatementsPlugin.loading"}} />
+            {{else if this.regulatoryStatements.records}}
+              <ul class="au-c-list-navigation">
+                {{#each this.regulatoryStatements.records as |statement|}}
+                  <li class="au-c-list-navigation__item">
+                    <AuButton @skin="link"
+                      class="au-c-list-navigation__link {{if (eq this.selectedReglement statement) 'active'}}" {{on "click"
+                      (fn this.selectStatement statement)}}>
+                      {{statement.currentVersion.title}}
+                    </AuButton>
+                  </li>
+                {{/each}}
+              </ul>
             {{else}}
-            <ul class="au-c-list-navigation">
-              {{#each this.regulatoryStatements.records as |statement|}}
-              <li class="au-c-list-navigation__item">
-                <AuButton @skin="link"
-                  class="au-c-list-navigation__link {{if (eq this.selectedReglement statement) 'active'}}" {{on "click"
-                  (fn this.selectStatement statement)}}>
-                  {{statement.currentVersion.title}}
-                </AuButton>
-              </li>
-              {{/each}}
-            </ul>
+              <AuAlert
+                @alertTitle="No statements found"
+                @alertSkin="warning"
+                @alertIcon="cross"
+                @alertSize="{{if @fullSize "default" "small"}}"
+                @closable={{false}}
+                class="{{unless @fullSize "au-u-margin-small"}}">
+              </AuAlert>
             {{/if}}
           </div>
         </div>
@@ -45,6 +60,14 @@
             </div>
           </div>
           {{else}}
+          <AuAlert
+            @alertTitle="{{t "regulatoryStatementsPlugin.noStatementSelected"}}"
+            @alertSkin="warning"
+            @alertIcon="cross"
+            @alertSize="{{if @fullSize "default" "small"}}"
+            @closable={{false}}
+            class="{{unless @fullSize "au-u-margin-small"}}">
+          </AuAlert>
           <p>{{t "regulatoryStatementsPlugin.noStatementSelected"}}</p>
           {{/if}}
           <div class="au-c-modal__footer">
