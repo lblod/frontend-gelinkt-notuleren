@@ -87,7 +87,7 @@ export default class DocumentService extends Service {
       }
       editorDocument.documentContainer = documentContainer;
       yield editorDocument.save();
-      yield this.updateLinkedDocuments(editorDocument);
+      yield this.updateLinkedDocuments(previousDocument, editorDocument);
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
       return editorDocument;
@@ -107,8 +107,23 @@ export default class DocumentService extends Service {
     return documentpartUris;
   }
 
-  async updateLinkedDocuments(editorDocument) {
-    this.getDocumentparts(editorDocument).map(async (uri) => {
+  async updateLinkedDocuments(previousDocument, newDocument) {
+    if (previousDocument) {
+      this.getDocumentparts(previousDocument).map(async (uri) => {
+        const part = (
+          await this.store.query('document-container', {
+            'filter[:uri:]': uri,
+            include: 'is-part-of',
+          })
+        ).firstObject;
+        if (part) {
+          part.isPartOf = null;
+          await part.save();
+        }
+      });
+    }
+
+    this.getDocumentparts(newDocument).map(async (uri) => {
       const part = (
         await this.store.query('document-container', {
           'filter[:uri:]': uri,
@@ -116,8 +131,7 @@ export default class DocumentService extends Service {
         })
       ).firstObject;
       if (part) {
-        const isPartOfDocuments = await part.isPartOf;
-        isPartOfDocuments.pushObject(editorDocument);
+        part.isPartOf = newDocument;
         await part.save();
       }
     });
