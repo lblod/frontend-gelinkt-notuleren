@@ -42,12 +42,13 @@ export default class RegulatoryStatementsRoute extends Controller {
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
-      const editorDocument = yield this.documentService.createEditorDocument(
-        this.editorDocument.title,
-        html,
-        this.documentContainer,
-        this.editorDocument
-      );
+      const editorDocument =
+        yield this.documentService.createEditorDocument.perform(
+          this.editorDocument.title,
+          html,
+          this.documentContainer,
+          this.editorDocument
+        );
       this._editorDocument = editorDocument;
 
       const documentContainer = this.documentContainer;
