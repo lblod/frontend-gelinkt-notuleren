@@ -15,7 +15,7 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
   regulatoryStatements = query(this, 'document-container', () => ({
     include: 'current-version',
     'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
-    'filter[:has-no:is-part-of]': 'yes',
+    // 'filter[:has-no:is-part-of]': 'yes', //TODO: we should check if a regulatory statement is allowed to be coupled to only one agendapoint or not.
     ...(this.searchValue && {
       'filter[current-version][title]': this.searchValue,
     }),

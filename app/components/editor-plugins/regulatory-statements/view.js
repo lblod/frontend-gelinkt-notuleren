@@ -54,7 +54,6 @@ export default class ReadOnlyContentSectionComponent extends Component {
   }
 
   get uri() {
-    console.log('URI: ', this.componentController.props.uri);
     return this.componentController.props.uri;
   }
 

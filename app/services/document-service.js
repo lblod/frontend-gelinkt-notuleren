@@ -87,7 +87,7 @@ export default class DocumentService extends Service {
       }
       editorDocument.documentContainer = documentContainer;
       yield editorDocument.save();
-      yield this.updateLinkedDocuments(previousDocument, editorDocument);
+      // yield this.updateLinkedDocuments(previousDocument, editorDocument); //TODO: we should investigate what is the best way on saving the document parts in the database models
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
       return editorDocument;
