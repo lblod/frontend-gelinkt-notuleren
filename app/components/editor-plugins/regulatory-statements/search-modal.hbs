@@ -27,7 +27,7 @@
                 {{#each this.regulatoryStatements.records as |statement|}}
                   <li class="au-c-list-navigation__item">
                     <AuButton @skin="link"
-                      class="au-c-list-navigation__link {{if (eq this.selectedReglement statement) 'active'}}" {{on "click"
+                      class="au-c-list-navigation__link {{if (eq this.selectedStatement statement) 'active'}}" {{on "click"
                       (fn this.selectStatement statement)}}>
                       {{statement.currentVersion.title}}
                     </AuButton>
