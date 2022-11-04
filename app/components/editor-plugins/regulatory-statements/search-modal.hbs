@@ -3,7 +3,7 @@
          @size="large" 
          @padding="none" 
          @closeModal={{@closeModal}}
-         {{!-- {{did-insert (perform this.fetchRegulatoryStatements)}} --}}
+         {{did-insert (perform this.fetchNextPage)}}
   as |modal|>
   <modal.Body>
     <AuMainContainer class="citaten--main-container" as |mc|>
@@ -18,13 +18,11 @@
               @iconAlignment="right"
               placeholder={{t "regulatoryStatementsPlugin.search"}}
               @value={{this.searchValue}}
-              {{on "input" this.updateFilter}} />
+              {{on "input" (perform this.updateFilter)}} />
             <AuHr @size="large" />
-            {{#if this.regulatoryStatements.isLoading}}
-              <AuLoader @message={{t "regulatoryStatementsPlugin.loading"}} />
-            {{else if this.regulatoryStatements.records}}
+            {{#if this.regulatoryStatements}}
               <ul class="au-c-list-navigation">
-                {{#each this.regulatoryStatements.records as |statement|}}
+                {{#each this.regulatoryStatements as |statement|}}
                   <li class="au-c-list-navigation__item">
                     <AuButton @skin="link"
                       class="au-c-list-navigation__link au-u-padding au-u-1-1 {{if (eq this.selectedStatement statement) 'active'}}" {{on "click"
@@ -33,6 +31,15 @@
                     </AuButton>
                   </li>
                 {{/each}}
+                {{#if this.showLoadMore}}
+                <li class="au-c-list-navigation__item">
+                  <AuButton
+                      class="au-u-padding au-u-1-1" {{on "click"
+                      (perform this.fetchNextPage)}}>
+                      Load More
+                  </AuButton>
+                </li>
+                {{/if}}
               </ul>
             {{else}}
               <AuAlert
@@ -42,6 +49,9 @@
                 @alertSize="small"
                 @closable={{false}}>
               </AuAlert>
+            {{/if}}
+            {{#if this.fetchNextPage.isRunning}}
+              <AuLoader @message={{t "regulatoryStatementsPlugin.loading"}} />
             {{/if}}
           </div>
         </div>
