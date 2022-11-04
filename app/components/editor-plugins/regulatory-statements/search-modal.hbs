@@ -35,7 +35,7 @@
                 <li class="au-c-list-navigation__item">
                   <AuButton
                       class="au-u-padding au-u-1-1" {{on "click"
-                      (perform this.fetchNextPage)}}>
+                      (perform this.fetchNextPage)}} @loading={{this.fetchNextPage.isRunning}}>
                       Load More
                   </AuButton>
                 </li>
