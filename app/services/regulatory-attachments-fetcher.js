@@ -22,15 +22,17 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       PREFIX pav: <http://purl.org/pav/>
       PREFIX dct: <http://purl.org/dc/terms/>
       PREFIX schema: <http://schema.org/>
+      PREFIX gn: <http://data.lblod.info/vocabularies/gelinktnotuleren/>
       select distinct * where {
-        ?publishedContainer a ext:PublishedRegulatoryAttachmentContainer;
-          ext:currentVersion ?publishedAttachment.
-        ?publishedAttachment dct:title ?title.
-        ?publishedAttachment ext:content/mu:uuid ?fileId.
+        ?publishedContainer a gn:ReglementaireBijlageTemplate;
+          mu:uuid ?uuid;
+          pav:hasCurrentVersion ?container.
+        ?container dct:title ?title;
+          mu:uuid ?fileId.
         OPTIONAL { 
-          ?publishedContainer schema:validThrough ?validThrough.
+          ?container schema:validThrough ?validThrough.
         }
-        FILTER( ! BOUND(?validThrough) || ?validThrough > NOW()) 
+        FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
       }
     `;
     const details = {
