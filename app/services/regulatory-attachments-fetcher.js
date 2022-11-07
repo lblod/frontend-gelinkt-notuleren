@@ -17,7 +17,6 @@ export default class RegulatoryAttachmentsFetcher extends Service {
   *fetch() {
     const config = getOwner(this).resolveRegistration('config:environment');
     const sparqlQuery = `
-      PREFIX gn: <http://www.geonames.org/ontology#>
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
       PREFIX pav: <http://purl.org/pav/>
