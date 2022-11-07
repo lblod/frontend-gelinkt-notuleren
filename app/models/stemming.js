@@ -1,4 +1,4 @@
-import Model, { attr, hasMany } from '@ember-data/model';
+import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
 export default class StemmingModel extends Model {
   @attr('number') position;
@@ -15,4 +15,7 @@ export default class StemmingModel extends Model {
   @hasMany('mandataris', { inverse: null }) stemmers;
   @hasMany('mandataris', { inverse: null }) tegenstanders;
   @hasMany('mandataris', { inverse: null }) voorstanders;
+
+  @belongsTo('behandeling-van-agendapunt', { inverse: 'stemmingen' })
+  behandelingVanAgendapunt;
 }
