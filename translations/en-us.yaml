@@ -423,6 +423,16 @@ agendapoint:
   revisions: Revisions
   restore: Restore
   backToMeeting: Return to the meeting of {adminBody} on {date}
+regulatoryStatementsPlugin:
+  regulatoryStatement: Regulatory Statement
+  insertStatement: Insert Regulatory Statement
+  cancel: Cancel
+  search: Search
+  lastModification: Last modified
+  loading: Loading
+  noStatementSelected: No regulatory statement selected
+  editStatement: Edit
+  detachStatement: Detach
 utils:
   save: Save
   fileOptions: File options

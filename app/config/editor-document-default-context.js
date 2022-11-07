@@ -11,6 +11,8 @@ const defaultContext = {
     persoon: 'http://data.vlaanderen.be/ns/persoon#',
     dateplugin: 'http://say.data.gift/manipulators/insertion/',
     besluittype: 'https://data.vlaanderen.be/id/concept/BesluitType/',
+    besluitpublicatie:
+      'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#',
     dct: 'http://purl.org/dc/terms/',
     mobiliteit: 'https://data.vlaanderen.be/ns/mobiliteit#',
     lblodgn: 'http://data.lblod.info/vocabularies/gelinktnotuleren/',
