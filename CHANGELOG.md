@@ -9,6 +9,24 @@
 
 
 
+
+## 2.33.2 (2022-11-07)
+
+#### :bug: Bug Fix
+* [#353](https://github.com/lblod/frontend-gelinkt-notuleren/pull/353) Fix issue with voting overview page where the number of votings are limited to 20 ([@elpoelma](https://github.com/elpoelma))
+* [#354](https://github.com/lblod/frontend-gelinkt-notuleren/pull/354) Fix syntax issue that caused error when saving regulatory statement ([@elpoelma](https://github.com/elpoelma))
+* [#351](https://github.com/lblod/frontend-gelinkt-notuleren/pull/351) Fix translation issue on attachments page ([@elpoelma](https://github.com/elpoelma))
+* [#337](https://github.com/lblod/frontend-gelinkt-notuleren/pull/337) Save document title after edit ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#357](https://github.com/lblod/frontend-gelinkt-notuleren/pull/357) Update editor to 0.63.7 ([@elpoelma](https://github.com/elpoelma))
+* [#352](https://github.com/lblod/frontend-gelinkt-notuleren/pull/352) Bump editor to 0.63.5 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 2
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- [@usrtim](https://github.com/usrtim)
+
+
 ## 2.33.1 (2022-10-25)
 
 #### :rocket: Enhancement
