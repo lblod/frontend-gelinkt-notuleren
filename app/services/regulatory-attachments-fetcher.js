@@ -28,7 +28,8 @@ export default class RegulatoryAttachmentsFetcher extends Service {
         ?publishedContainer a gn:ReglementaireBijlageTemplate;
           mu:uuid ?uuid;
           pav:hasCurrentVersion ?container.
-        ?container dct:title ?title.
+        ?container dct:title ?title;
+          mu:uuid ?fileId.
         OPTIONAL { 
           ?container schema:validThrough ?validThrough.
         }
