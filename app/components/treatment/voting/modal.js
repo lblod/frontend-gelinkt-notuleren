@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
+import { tracked } from 'tracked-built-ins';
 import Component from '@glimmer/component';
 import { task, restartableTask } from 'ember-concurrency';
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
@@ -17,7 +17,7 @@ import { task, restartableTask } from 'ember-concurrency';
 
 /** @extends {Component<Args>} */
 export default class TreatmentVotingModalComponent extends Component {
-  @tracked stemmingen;
+  @tracked stemmingen = tracked([]);
   @tracked create = false;
   @tracked edit = false;
   @tracked editMode = false;
@@ -33,9 +33,33 @@ export default class TreatmentVotingModalComponent extends Component {
   @restartableTask
   /** @type {import("ember-concurrency").Task} */
   *fetchStemmingen() {
-    this.stemmingen = (yield this.args.behandeling.stemmingen).sortBy(
-      'position'
-    );
+    const stemmingen = [];
+    const pageSize = 20;
+
+    const firstPage = yield this.store.query('stemming', {
+      'filter[behandeling-van-agendapunt][:id:]': this.args.behandeling.id,
+      sort: 'position',
+      page: {
+        size: pageSize,
+      },
+    });
+    const count = firstPage.meta.count;
+    firstPage.forEach((result) => stemmingen.push(result));
+    let pageNumber = 1;
+
+    while (pageNumber * pageSize < count) {
+      const pageResults = yield this.store.query('stemming', {
+        'filter[behandeling-van-agendapunt][:id:]': this.args.behandeling.id,
+        sort: 'position',
+        page: {
+          size: pageSize,
+          number: pageNumber,
+        },
+      });
+      pageResults.forEach((result) => stemmingen.push(result));
+      pageNumber++;
+    }
+    this.stemmingen = tracked(stemmingen);
   }
 
   @task
@@ -44,17 +68,12 @@ export default class TreatmentVotingModalComponent extends Component {
     const isNew = this.editStemming.stemming.isNew;
 
     if (isNew) {
-      this.editStemming.stemming.position =
-        this.args.behandeling.stemmingen.length;
+      this.editStemming.stemming.position = this.stemmingen.length;
+      this.editStemming.stemming.behandelingVanAgendapunt =
+        this.args.behandeling;
+      this.stemmingen.push(this.editStemming.stemming);
     }
     yield this.editStemming.saveTask.perform();
-
-    if (isNew) {
-      this.args.behandeling.stemmingen.pushObject(this.editStemming.stemming);
-      this.args.behandeling.save();
-    }
-    yield this.fetchStemmingen.perform();
-
     this.onCancelEdit();
   }
 
@@ -81,6 +100,16 @@ export default class TreatmentVotingModalComponent extends Component {
     this.editStemming.stemming = stemmingToEdit;
   }
 
+  @task
+  *fixPositions() {
+    for (const [i, stemming] of this.stemmingen.entries()) {
+      if (i !== stemming.position) {
+        stemming.position = i;
+        yield stemming.save();
+      }
+    }
+  }
+
   @action
   toggleEditStemming(stemming) {
     this.editStemming.stemming = stemming;
@@ -90,7 +119,9 @@ export default class TreatmentVotingModalComponent extends Component {
   @task
   *removeStemming(stemming) {
     yield stemming.destroyRecord();
-    this.stemmingen = this.stemmingen.reject((x) => x === stemming);
+    const index = this.stemmingen.indexOf(stemming);
+    this.stemmingen.splice(index, 1);
+    yield this.fixPositions.perform();
   }
 
   @action
