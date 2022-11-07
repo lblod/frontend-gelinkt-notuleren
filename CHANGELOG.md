@@ -10,6 +10,17 @@
 
 
 
+
+## 2.34.0 (2022-11-07)
+
+#### :rocket: Enhancement
+* [#356](https://github.com/lblod/frontend-gelinkt-notuleren/pull/356) adapt query to the new model ([@lagartoverde](https://github.com/lagartoverde))
+* [#355](https://github.com/lblod/frontend-gelinkt-notuleren/pull/355) Feature: decision regulatory statement coupling ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 2
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.33.2 (2022-11-07)
 
 #### :bug: Bug Fix
