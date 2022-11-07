@@ -6,6 +6,10 @@
 
 
 
+## 2.31.5 (2022-11-07)
+HOTFIX: fetch all stemmingen and ensure positions of stemmingen stay correct
+
+
 ## 2.31.4 (2022-10-25)
 
 * Bump besluit-plugin to 0.5.7
