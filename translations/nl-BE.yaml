@@ -426,6 +426,16 @@ agendapoint:
   revisions: Versies
   restore: Herstel
   backToMeeting: Terug naar zitting van {adminBody} op {date}
+regulatoryStatementsPlugin:
+  regulatoryStatement: Reglement
+  insertStatement: Reglement Invoegen
+  cancel: Annuleer
+  search: Zoeken
+  lastModification: Laatst aangepast
+  loading: Aan het laden
+  noStatementSelected: Geen reglement geselecteerd
+  editStatement: Bewerk
+  detachStatement: Loskoppelen
 utils:
   save: Bewaar
   fileOptions: Bestand acties

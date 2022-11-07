@@ -1,0 +1,98 @@
+<AuModal @modalOpen={{true}} 
+         @title={{t "regulatoryStatementsPlugin.insertStatement"}} 
+         @size="large" 
+         @padding="none" 
+         @closeModal={{@closeModal}}
+         {{did-insert (perform this.fetchNextPage)}}
+  as |modal|>
+  <modal.Body>
+    <AuMainContainer class="citaten--main-container" as |mc|>
+      <mc.sidebar class="citaten--sidebar" @scroll={{true}}>
+        <div class="au-c-sidebar">
+          <div class="au-c-sidebar__content au-u-padding">
+            <AuInput
+              id="searchtermexpanded"
+              @type="text"
+              @width="block"
+              @icon="search"
+              @iconAlignment="right"
+              placeholder={{t "regulatoryStatementsPlugin.search"}}
+              @value={{this.searchValue}}
+              {{on "input" (perform this.updateFilter)}} />
+            <AuHr @size="large" />
+            {{#if this.regulatoryStatements}}
+              <ul class="au-c-list-navigation">
+                {{#each this.regulatoryStatements as |statement|}}
+                  <li class="au-c-list-navigation__item">
+                    <AuButton @skin="link"
+                      class="au-c-list-navigation__link au-u-padding au-u-1-1 {{if (eq this.selectedStatement statement) 'active'}}" {{on "click"
+                      (fn this.selectStatement statement)}}>
+                      {{statement.currentVersion.title}}
+                    </AuButton>
+                  </li>
+                {{/each}}
+                {{#if this.showLoadMore}}
+                <li class="au-c-list-navigation__item">
+                  <AuButton
+                      class="au-u-padding au-u-1-1" {{on "click"
+                      (perform this.fetchNextPage)}} @loading={{this.fetchNextPage.isRunning}}>
+                      Load More
+                  </AuButton>
+                </li>
+                {{/if}}
+              </ul>
+            {{else}}
+              <AuAlert
+                @alertTitle="No statements found"
+                @alertSkin="warning"
+                @alertIcon="cross"
+                @alertSize="small"
+                @closable={{false}}>
+              </AuAlert>
+            {{/if}}
+            {{#if this.fetchNextPage.isRunning}}
+              <AuLoader @message={{t "regulatoryStatementsPlugin.loading"}} />
+            {{/if}}
+          </div>
+        </div>
+      </mc.sidebar>
+      <mc.content>
+        <AuBodyContainer @scroll={{false}}>
+          <div class="say-container">
+            {{#if this.selectedStatement}}
+              <div class="say-container__main">
+                <div class="say-editor">
+                  <div class="say-editor__inner say-content">
+                    {{this.selectedStatement.currentVersion.htmlSafeContent}}
+                  </div>
+                </div>
+              </div>
+            {{else}}
+              <AuAlert
+                @alertTitle="{{t "regulatoryStatementsPlugin.noStatementSelected"}}"
+                @alertSkin="info"
+                @alertIcon="info-circle"
+                @alertSize="default"
+                @closable={{false}}
+                class="au-u-margin-small">
+              </AuAlert>
+            {{/if}}
+          </div>
+          <div class="au-c-modal__footer">
+            <AuToolbar>
+              <AuToolbarGroup>
+                <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatoryStatementsPlugin.cancel"}}</AuButton>
+              </AuToolbarGroup>
+              <AuToolbarGroup>
+                <AuButton @disabled={{not this.selectedStatement}} {{on "click" (fn @insertStatement
+                  this.selectedStatement)}}>
+                  {{t "regulatoryStatementsPlugin.insertStatement"}}
+                </AuButton>
+              </AuToolbarGroup>
+            </AuToolbar>
+          </div>
+        </AuBodyContainer>
+      </mc.content>
+    </AuMainContainer>
+  </modal.Body>
+</AuModal>

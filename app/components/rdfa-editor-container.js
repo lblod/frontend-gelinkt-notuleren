@@ -13,6 +13,7 @@ export default class RdfaEditorContainerComponent extends Component {
     'rdfa-date',
     'import-snippet',
     'citaten-plugin',
+    'regulatory-statements',
   ];
 
   get plugins() {

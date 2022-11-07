@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import defaultContext from '../config/editor-document-default-context';
 import { htmlSafe } from '@ember/template';
 
@@ -18,6 +18,7 @@ export default class EditorDocumentModel extends Model {
   nextVersion;
   @belongsTo('document-container', { inverse: 'revisions' })
   documentContainer;
+  @hasMany('document-container', { inverse: 'isPartOf' }) hasParts;
 
   get htmlSafeContent() {
     return htmlSafe(this.content);

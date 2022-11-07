@@ -626,34 +626,18 @@ div.table-of-contents {
 
 [typeof="https://say.data.gift/ns/Title"] > [property="say:heading"] {
   @extend .au-c-heading--3;
-
-  &:before {
-    content: 'Titel';
-  }
 }
 
 [typeof="https://say.data.gift/ns/Chapter"] > [property="say:heading"] {
   @extend .au-c-heading--4;
-
-  &:before {
-    content: 'Hoodfstuk';
-  }
 }
 
 [typeof="https://say.data.gift/ns/Section"] > [property="say:heading"] {
   @extend .au-c-heading--5;
-
-  &:before {
-    content: 'Afdeling';
-  }
 }
 
 [typeof="https://say.data.gift/ns/Subsection"] > [property="say:heading"] {
   @extend .au-c-heading--6;
-
-  &:before {
-    content: 'Onderafdeling';
-  }
 }
 
 // Plain select for prototyping
