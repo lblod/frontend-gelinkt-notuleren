@@ -4,5 +4,5 @@
   </AuButton>
 </AuList::Item>
 {{#if this.modalEnabled}}
-<EditorPlugins::RegulatoryStatements::SearchModal @closeModal={{this.toggleModal}} @insertStatement={{this.insertRegulatoryStatement}}/>
+<EditorPlugins::RegulatoryStatements::SearchModal @closeModal={{this.toggleModal}} @insertStatement={{this.insertRegulatoryStatement}} @controller={{@controller}}/>
 {{/if}}
