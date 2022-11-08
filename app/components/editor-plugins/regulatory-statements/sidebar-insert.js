@@ -10,15 +10,22 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
     this.modalEnabled = !this.modalEnabled;
   }
 
-  @action
-  insertRegulatoryStatement(statement) {
-    this.modalEnabled = false;
-    const besluit = this.args.controller.datastore
+  get besluit() {
+    return this.args.controller.datastore
       .match(null, 'a', `besluit:Besluit`)
       .asSubjectNodes()
       .next().value;
-    if (besluit) {
-      const besluitNode = [...besluit.nodes][0];
+  }
+
+  get isDisabled() {
+    return !this.besluit;
+  }
+
+  @action
+  insertRegulatoryStatement(statement) {
+    this.modalEnabled = false;
+    if (this.besluit) {
+      const besluitNode = [...this.besluit.nodes][0];
       const range = this.args.controller.rangeFactory.fromInNode(
         besluitNode,
         besluitNode.getMaxOffset()
