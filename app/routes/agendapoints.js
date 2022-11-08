@@ -6,6 +6,10 @@ export default class AgendapointsRoute extends Route {
   @service session;
   @service store;
 
+  queryParams = {
+    returnToMeeting: { refreshModel: true },
+  };
+
   beforeModel(transition) {
     this.session.requireAuthentication(transition, 'login');
   }
@@ -19,6 +23,7 @@ export default class AgendapointsRoute extends Route {
 
     return {
       documentContainer: container,
+      returnToMeeting: params.returnToMeeting,
     };
   }
 
