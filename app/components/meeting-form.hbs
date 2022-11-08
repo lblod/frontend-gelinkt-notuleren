@@ -108,6 +108,11 @@
           <AuIcon @icon="info-circle"/>
           {{t "meetingForm.firstSectionNotFilledWarning"}}
         </span>
+        {{#if this.isPublished}}
+          <AuPill @skin="success">
+            {{t "meetingForm.notulenPublished"}}
+          </AuPill>
+        {{/if}}
       </AuHeading>
       <Zitting::ManageZittingsdata
         @zitting={{@zitting}}
@@ -133,6 +138,11 @@
               <AuIcon @icon="info-circle"/>
               {{t "meetingForm.secondSectionNotFilledWarning"}}
             </span>
+            {{#if this.isPublished}}
+              <AuPill @skin="success">
+                {{t "meetingForm.notulenPublished"}}
+              </AuPill>
+            {{/if}}
           </AuHeading>
           <ParticipationList
             @chairman={{this.voorzitter}}
@@ -155,6 +165,11 @@
               <AuIcon @icon="info-circle"/>
               {{t "meetingForm.thirdSectionNotFilledWarning"}}
             </span>
+            {{#if this.isPublished}}
+              <AuPill @skin="success">
+                {{t "meetingForm.notulenPublished"}}
+              </AuPill>
+            {{/if}}
           </AuHeading>
           <AgendaManager @zittingId={{@zitting.id}} @onSave={{perform this.fetchTreatments}} @readOnly={{this.readOnly}}/>
           {{!-- Start of meeting --}}
@@ -164,6 +179,11 @@
               <AuIcon @icon="info-circle"/>
                 {{t 'manageFreeText.before'}}
             </span>
+            {{#if this.isPublished}}
+              <AuPill @skin="success">
+                {{t "meetingForm.notulenPublished"}}
+              </AuPill>
+            {{/if}}
           </AuHeading>
         <ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}>
           {{html-safe @zitting.intro}}
@@ -180,6 +200,11 @@
               <AuIcon @icon="info-circle"/>
               {{t "meetingForm.fifthSectionNotFilledWarning"}}
             </span>
+            {{#if this.isPublished}}
+              <AuPill @skin="success">
+                {{t "meetingForm.notulenPublished"}}
+              </AuPill>
+            {{/if}}
           </AuHeading>
           {{#if this.fetchTreatments.isRunning}}
             <AuLoader @padding="small" />
@@ -208,6 +233,11 @@
               <AuIcon @icon="info-circle"/>
                 {{t 'manageFreeText.after'}}
               </span>
+              {{#if this.isPublished}}
+                <AuPill @skin="success">
+                  {{t "meetingForm.notulenPublished"}}
+                </AuPill>
+              {{/if}}
           </AuHeading>
           <ReadonlyTextBox @title={{t "behandelingVanAgendapunten.contentTitle"}}>
             {{html-safe @zitting.outro}}

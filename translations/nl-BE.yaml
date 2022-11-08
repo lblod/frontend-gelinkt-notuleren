@@ -122,6 +122,7 @@ meetingForm:
   fifthSectionNotFilledWarning: Bewerk je besluiten en beheer de stemmingen
   sixthSectionNotFilledWarning: Vull in vrie tekst (zitting outro).
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+  notulenPublished: Notulen gepubliceerd
 manageZittingsData:
   startNotSet: "Start van de zitting werd nog niet ingesteld."
   endNotSet: "Einde van de zitting werd nog niet ingesteld."
