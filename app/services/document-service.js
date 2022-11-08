@@ -104,7 +104,8 @@ export default class DocumentService extends Service {
             'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel'
       )
       .map((triple) => triple.subject);
-      return Promise.all(documentpartUris.map(async (uri) => {
+    return Promise.all(
+      documentpartUris.map(async (uri) => {
         const part = (
           await this.store.query('document-container', {
             'filter[:uri:]': uri,
@@ -112,6 +113,7 @@ export default class DocumentService extends Service {
           })
         ).firstObject;
         return part;
-      }));
+      })
+    );
   }
 }
