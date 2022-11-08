@@ -5,6 +5,10 @@ export default class AgendapointsEditRoute extends Route {
   @service currentSession;
   @service router;
 
+  queryParams = {
+    returnToMeeting: { refreshModel: true },
+  };
+
   beforeModel(transition) {
     if (!this.currentSession.canWrite) {
       const id = transition.to.params?.id;
@@ -13,11 +17,12 @@ export default class AgendapointsEditRoute extends Route {
     }
   }
 
-  async model() {
+  async model(params) {
     const { documentContainer } = this.modelFor('agendapoints');
     return {
       documentContainer,
       editorDocument: await documentContainer.get('currentVersion'),
+      returnToMeeting: params.returnToMeeting,
     };
   }
 
