@@ -29,7 +29,7 @@
                       (fn this.selectStatement statement)}}>
                       {{statement.currentVersion.title}}
                       {{#if (this.isInserted statement)}}
-                        <AuPill @skin="border" @icon="info-circle">Already Attached</AuPill>
+                        <AuPill @skin="border" @icon="info-circle">{{t "regulatoryStatementsPlugin.alreadyAttached"}}</AuPill>
                       {{/if}}
                     </AuButton>
                   </li>
@@ -39,7 +39,7 @@
                   <AuButton
                       class="au-u-padding au-u-1-1" {{on "click"
                       (perform this.fetchNextPage)}} @loading={{this.fetchNextPage.isRunning}}>
-                      Load More
+                      {{t "regulatoryStatementsPlugin.loadMore"}}
                   </AuButton>
                 </li>
                 {{/if}}
