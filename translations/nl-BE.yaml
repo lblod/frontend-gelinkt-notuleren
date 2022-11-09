@@ -7,6 +7,8 @@ appChrome:
   copyAgendapoint: Kopieer agendapunt
   defaultDocumentStatus: Voorbereiding niet bewaard
   deleteConcept: Verwijder voorbereiding
+  savedOn: Bewaard op
+  changesNotSaved: Wijzigingen niet bewaard
 
 attachments:
   attachments: Bijlagen
