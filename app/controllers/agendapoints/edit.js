@@ -30,7 +30,7 @@ export default class AgendapointsEditController extends Controller {
   @action
   handleRdfaEditorInit(editor) {
     this.editor = editor;
-    editor.setHtmlContent(this.editorDocument.content);
+    editor.setHtmlContent(this.editorDocument.content || '');
   }
 
   @action
