@@ -1,7 +1,9 @@
 <AuMainHeader @brandLink="https://www.vlaanderen.be/nl" @homeRoute="index" @appTitle="Gelinkt Notuleren" @contactRoute="contact">
-  <AcmidmLoginCompact @styles="au-c-button au-c-button--tertiary">
-    <AuIcon @icon="login" @alignment="left" />Aanmelden
-  </AcmidmLoginCompact>
+  <a class="au-c-button au-c-button--tertiary" href={{this.loginUrl}}>
+    <svg role="img" class="au-c-icon au-c-icon--login au-c-icon--left " aria-hidden="true">
+      <use xlink:href="/@appuniversum/ember-appuniversum/appuniversum-symbolset.svg#login"></use>
+    </svg>Aanmelden
+  </a>
 </AuMainHeader>
 
 {{!-- Refocus after page navigation --}}
