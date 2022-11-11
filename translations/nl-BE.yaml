@@ -257,6 +257,7 @@ meetingForm:
   fifthSectionNotFilledWarning: Bewerk je besluiten en beheer de stemmingen
   sixthSectionNotFilledWarning: Vull in vrie tekst (zitting outro).
   bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+  notulenPublished: Notulen gepubliceerd
 
 meetings:
   delete:
