@@ -18,12 +18,16 @@ export default class MeetingForm extends Component {
   @tracked possibleParticipants;
   @tracked behandelingen;
   @tracked headerArticleTranslationString = '';
+  @tracked isPublished = false;
   @service store;
   @service currentSession;
   @service router;
 
   get readOnly() {
-    return !this.currentSession.canWrite && this.currentSession.canRead;
+    return (
+      (!this.currentSession.canWrite && this.currentSession.canRead) ||
+      this.isPublished
+    );
   }
 
   constructor() {
@@ -46,6 +50,12 @@ export default class MeetingForm extends Component {
       const classification = yield specialisedBestuursorgaan.get(
         'classificatie'
       );
+      const versionedNotulen = yield this.store.query('versioned-notulen', {
+        'filter[zitting][id]': this.zitting.get('id'),
+      });
+      if (versionedNotulen.firstObject) {
+        this.isPublished = true;
+      }
       this.headerArticleTranslationString =
         articlesBasedOnClassifcationMap[classification.get('uri')];
       this.secretaris = yield this.zitting.get('secretaris');

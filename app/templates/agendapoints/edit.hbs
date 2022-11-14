@@ -20,7 +20,7 @@
       </AuButton>
       <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
         <AuIcon @icon="bin" @alignment="left" />
-        Naar prullenmand
+        {{t "utils.delete"}}
       </AuButton>
     </AuDropdown>
     <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>{{t "utils.save"}}</AuButton>
@@ -29,29 +29,29 @@
 
 {{#if this.hasDocumentValidationErrors}}
   <AuModal
-    @title="Geef uw document een naam"
+    @title={{t "validationModal.title"}}
     @modalOpen={{true}}
             @closeModal={{this.closeValidationModal}} as |Modal| >
     <Modal.Body>
-      <p>Klik op de titel om uw document een naam te geven.</p>
+      <p>{{t "validationModal.message"}}</p>
     </Modal.Body>
     <Modal.Footer>
-      <AuButton {{on "click" this.closeValidationModal}}>OK</AuButton>
+      <AuButton {{on "click" this.closeValidationModal}}>{{t "validationModal.confirm"}}</AuButton>
     </Modal.Footer>
   </AuModal>
 {{/if}}
 
 {{#if this.displayDeleteModal}}
   <AuModal
-    @title="Wilt u dit document naar de prullenmand verplaatsen"
+    @title={{t "deleteModal.title"}}
     @modalOpen={{this.displayDeleteModal}}
             @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
     <Modal.Body>
-      <p>U kan deze steeds herstellen vanuit de prullenmand.</p>
+      <p>{{t "deleteModal.restoreMessage"}}</p>
     </Modal.Body>
     <Modal.Footer>
-      <AuButton {{on "click" this.deleteDocument}}>Ja, verplaats naar prullenmand</AuButton>
-      <AuButton @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>Annuleren</AuButton>
+      <AuButton {{on "click" this.deleteDocument}}>{{t "deleteModal.confirm"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>{{t "deleteModal.cancel"}}</AuButton>
     </Modal.Footer>
   </AuModal>
 {{/if}}
