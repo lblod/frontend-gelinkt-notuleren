@@ -12,7 +12,11 @@ export default class EditorDocumentTitleComponent extends Component {
   }
 
   get title() {
-    return this._title || this.args.title;
+    if (this._title === undefined || this._title === null) {
+      return this.args.title;
+    } else {
+      return this._title;
+    }
   }
 
   @action
