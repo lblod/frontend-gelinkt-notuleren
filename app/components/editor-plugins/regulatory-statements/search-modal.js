@@ -36,7 +36,6 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
     const regulatoryStatements = yield this.store.query('document-container', {
       include: 'current-version',
       'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
-      // 'filter[:has-no:is-part-of]': 'yes', //TODO: we should check if a regulatory statement is allowed to be coupled to only one agendapoint or not.
       ...(this.searchValue && {
         'filter[current-version][title]': this.searchValue,
       }),
@@ -44,6 +43,7 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
         size: this.pageSize,
         number: this.page,
       },
+      sort: 'current-version.title',
     });
     this.regulatoryStatements.push(...regulatoryStatements.toArray());
     if (regulatoryStatements.meta.count <= this.regulatoryStatements.length) {
