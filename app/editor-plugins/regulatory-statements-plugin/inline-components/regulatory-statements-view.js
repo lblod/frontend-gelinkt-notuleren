@@ -16,15 +16,12 @@ export default class RegulatoryStatementsViewSpec extends InlineComponentSpec {
     },
   };
   _renderStatic(props, state) {
-    return `<p>
-              Reglementaire bijlage:
+    return `<div resource="${props.uri}" property="eli:related_to" rev="dct:isPartOf" typeof="besluitpublicatie:Documentonderdeel">
+              <h5>Reglementaire bijlage: ${state.title}</h5>
               <a
                 href="${state.url}"
-                property="dct:hasPart"
-                typeof="besluitpublicatie:Documentonderdeel"
-                resource="${props.uri}"
-                >${state.title}</a>
-            </p>`;
+                >Link</a>
+            </div>`;
   }
   constructor(controller) {
     super('editor-plugins/regulatory-statements/view', 'div', controller);
