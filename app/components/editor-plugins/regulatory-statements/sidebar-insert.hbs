@@ -1,8 +1,8 @@
 <AuList::Item>
-  <AuButton @icon="add" @iconAlignment="left" @skin="link" {{on 'click' this.toggleModal}}>
+  <AuButton @icon="add" @iconAlignment="left" @skin="link" {{on 'click' this.toggleModal}} @disabled={{this.isDisabled}}>
     {{t "regulatoryStatementsPlugin.insertStatement"}}
   </AuButton>
 </AuList::Item>
 {{#if this.modalEnabled}}
-<EditorPlugins::RegulatoryStatements::SearchModal @closeModal={{this.toggleModal}} @insertStatement={{this.insertRegulatoryStatement}}/>
+<EditorPlugins::RegulatoryStatements::SearchModal @closeModal={{this.toggleModal}} @insertStatement={{this.insertRegulatoryStatement}} @controller={{@controller}}/>
 {{/if}}

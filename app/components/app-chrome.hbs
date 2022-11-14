@@ -11,14 +11,14 @@
         {{#if @editorDocument.updatedOn}}
         <li class="au-c-list-horizontal__item">
           <span class="au-c-app-chrome__status">
-            Bewaard op {{human-friendly-date @editorDocument.updatedOn}}
+            {{t "appChrome.savedOn"}} {{human-friendly-date @editorDocument.updatedOn}}
           </span>
         </li>
         {{else}}
         <li class="au-c-list-horizontal__item">
           <span class="au-c-app-chrome__status">
             <AuIcon @icon="alert-triangle" @alignment="left" />
-            Wijzigingen niet bewaard
+            {{t "appChrome.changesNotSaved"}}
           </span>
         </li>
         {{/if}}

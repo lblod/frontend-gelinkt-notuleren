@@ -70,6 +70,19 @@ export default class DocumentService extends Service {
     return decisions;
   }
 
+  getDocumentparts(editorDocument) {
+    const triples = this.extractTriplesFromDocument(editorDocument);
+    const documentpartUris = triples
+      .filter(
+        (t) =>
+          t.predicate === 'a' &&
+          t.object ===
+            'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel'
+      )
+      .map((triple) => triple.subject);
+    return documentpartUris;
+  }
+
   @task
   *createEditorDocument(title, content, documentContainer, previousDocument) {
     if (!title || !documentContainer) {
@@ -95,17 +108,8 @@ export default class DocumentService extends Service {
   }
 
   async retrieveDocumentParts(document) {
-    const triples = this.extractTriplesFromDocument(document);
-    const documentpartUris = triples
-      .filter(
-        (t) =>
-          t.predicate === 'a' &&
-          t.object ===
-            'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel'
-      )
-      .map((triple) => triple.subject);
     return Promise.all(
-      documentpartUris.map(async (uri) => {
+      this.getDocumentparts(document).map(async (uri) => {
         const part = (
           await this.store.query('document-container', {
             'filter[:uri:]': uri,
