@@ -7,6 +7,7 @@ import { restartableTask } from 'ember-concurrency';
 
 export default class RegulatoryStatementsSearchModalComponent extends Component {
   @service store;
+  @service documentService;
 
   @tracked page = 0;
   @tracked pageSize = 10;
@@ -17,7 +18,18 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
   @tracked showLoadMore = true;
 
   @tracked regulatoryStatements = tracked([]);
+  @tracked includedStatements = [];
   @tracked debounceTime = 2000;
+
+  @action
+  didInsert() {
+    this.fetchNextPage.perform();
+    const editorDocument = this.store.createRecord('editor-document', {
+      content: this.args.controller.htmlContent ?? '',
+    });
+    this.includedStatements =
+      this.documentService.getDocumentparts(editorDocument);
+  }
 
   @restartableTask
   *fetchNextPage() {
@@ -48,7 +60,6 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
     this.searchValue = input;
     this.regulatoryStatements = tracked([]);
     this._selectedStatement = null;
-
     this.page = 0;
     yield this.fetchNextPage.perform();
   }
@@ -61,4 +72,6 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
   get selectedStatement() {
     return this._selectedStatement ?? this.regulatoryStatements?.firstObject;
   }
+
+  isInserted = (statement) => this.includedStatements.includes(statement.uri);
 }

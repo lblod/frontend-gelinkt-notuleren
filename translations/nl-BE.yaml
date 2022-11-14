@@ -374,6 +374,8 @@ regulatoryStatementsPlugin:
   noStatementSelected: Geen reglement geselecteerd
   editStatement: Bewerk
   detachStatement: Loskoppelen
+  loadMore: Meer laden
+  alreadyAttached: Reeds gekoppeld
 
 requiredField:
   required: Verplicht
