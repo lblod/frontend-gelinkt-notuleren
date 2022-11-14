@@ -5,7 +5,6 @@ import { action } from '@ember/object';
 export default class RegulatoryStatementsSidebarInsertComponent extends Component {
   @tracked isDisabled = false;
   @tracked modalEnabled = false;
-  @tracked besluit;
 
   constructor() {
     super(...arguments);
@@ -13,11 +12,14 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
     this.update();
   }
 
-  update() {
-    this.besluit = this.args.controller.datastore
+  get besluit() {
+    return this.args.controller.datastore
       .match(null, 'a', `besluit:Besluit`)
       .asSubjectNodes()
       .next().value;
+  }
+
+  update() {
     this.isDisabled = !this.besluit;
   }
 
