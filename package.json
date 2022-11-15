@@ -38,7 +38,7 @@
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-environment-banner": "^0.1.1",
     "@lblod/ember-mock-login": "0.6.0",
-    "@lblod/ember-rdfa-editor": "github:lblod/ember-rdfa-editor#feature/inline-components-serializable-attributes",
+    "@lblod/ember-rdfa-editor": "^0.64.0",
     "@lblod/ember-rdfa-editor-article-structure-plugin": "^0.3.0",
     "@lblod/ember-rdfa-editor-besluit-plugin": "^0.5.7",
     "@lblod/ember-rdfa-editor-besluit-type-plugin": "^0.9.1",
