@@ -372,7 +372,9 @@ regulatoryStatementsPlugin:
   noStatementSelected: No regulatory statement selected
   editStatement: Edit
   detachStatement: Detach
-
+  loadMore: Load more
+  alreadyAttached: Already attached
+  
 requiredField:
   required: Required
 

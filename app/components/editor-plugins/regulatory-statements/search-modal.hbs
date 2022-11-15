@@ -3,7 +3,7 @@
          @size="large" 
          @padding="none" 
          @closeModal={{@closeModal}}
-         {{did-insert (perform this.fetchNextPage)}}
+         {{did-insert this.didInsert}}
   as |modal|>
   <modal.Body>
     <AuMainContainer class="citaten--main-container" as |mc|>
@@ -28,6 +28,9 @@
                       class="au-c-list-navigation__link au-u-padding au-u-1-1 {{if (eq this.selectedStatement statement) 'active'}}" {{on "click"
                       (fn this.selectStatement statement)}}>
                       {{statement.currentVersion.title}}
+                      {{#if (this.isInserted statement)}}
+                        <AuPill @skin="border" @icon="info-circle">{{t "regulatoryStatementsPlugin.alreadyAttached"}}</AuPill>
+                      {{/if}}
                     </AuButton>
                   </li>
                 {{/each}}
@@ -36,7 +39,7 @@
                   <AuButton
                       class="au-u-padding au-u-1-1" {{on "click"
                       (perform this.fetchNextPage)}} @loading={{this.fetchNextPage.isRunning}}>
-                      Load More
+                      {{t "regulatoryStatementsPlugin.loadMore"}}
                   </AuButton>
                 </li>
                 {{/if}}
@@ -84,7 +87,7 @@
                 <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatoryStatementsPlugin.cancel"}}</AuButton>
               </AuToolbarGroup>
               <AuToolbarGroup>
-                <AuButton @disabled={{not this.selectedStatement}} {{on "click" (fn @insertStatement
+                <AuButton @disabled={{or (not this.selectedStatement) (this.isInserted this.selectedStatement)}} {{on "click" (fn @insertStatement
                   this.selectedStatement)}}>
                   {{t "regulatoryStatementsPlugin.insertStatement"}}
                 </AuButton>
