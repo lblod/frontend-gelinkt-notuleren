@@ -5,22 +5,23 @@ export default class RegulatoryStatementsViewSpec extends InlineComponentSpec {
     tag: this.tag,
     attributeBuilder: (node) => {
       if (isElement(node)) {
-        if (
-          node.classList.contains('inline-component') &&
-          node.classList.contains(this.name)
-        ) {
+        if (node.dataset.inlineComponent === this.name) {
           return {};
         }
       }
       return null;
     },
   };
-  _renderStatic(props, state) {
+  properties = {
+    uri: { serializable: true },
+  };
+  _renderStatic(props) {
+    console.log(props);
     return `<div resource="${props.uri}" property="eli:related_to" rev="dct:isPartOf" typeof="besluitpublicatie:Documentonderdeel">
-              <h5>Reglementaire bijlage: ${state.title}</h5>
-              <a
-                href="${state.url}"
-                >Link</a>
+              <h5>Reglementaire bijlage: ${props.title}</h5>
+              <div>
+                ${props.content}
+              </div>
             </div>`;
   }
   constructor(controller) {

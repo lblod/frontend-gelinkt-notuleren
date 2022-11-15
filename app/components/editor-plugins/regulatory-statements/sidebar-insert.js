@@ -29,7 +29,6 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
         {
           uri: statement.uri,
         },
-        {},
         true,
         range
       );
