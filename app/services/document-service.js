@@ -99,41 +99,25 @@ export default class DocumentService extends Service {
         editorDocument.previousVersion = previousDocument;
       }
       editorDocument.documentContainer = documentContainer;
+      editorDocument.parts = yield this.retrieveDocumentParts(editorDocument);
       yield editorDocument.save();
-      // yield this.updateLinkedDocuments(previousDocument, editorDocument); //TODO: we should investigate what is the best way on saving the document parts in the database models
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
       return editorDocument;
     }
   }
 
-  async updateLinkedDocuments(previousDocument, newDocument) {
-    if (previousDocument) {
-      this.getDocumentparts(previousDocument).map(async (uri) => {
+  async retrieveDocumentParts(document) {
+    return Promise.all(
+      this.getDocumentparts(document).map(async (uri) => {
         const part = (
           await this.store.query('document-container', {
             'filter[:uri:]': uri,
             include: 'is-part-of',
           })
         ).firstObject;
-        if (part) {
-          part.isPartOf = null;
-          await part.save();
-        }
-      });
-    }
-
-    this.getDocumentparts(newDocument).map(async (uri) => {
-      const part = (
-        await this.store.query('document-container', {
-          'filter[:uri:]': uri,
-          include: 'is-part-of',
-        })
-      ).firstObject;
-      if (part) {
-        part.isPartOf = newDocument;
-        await part.save();
-      }
-    });
+        return part;
+      })
+    );
   }
 }

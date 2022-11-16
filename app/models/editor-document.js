@@ -19,7 +19,7 @@ export default class EditorDocumentModel extends Model {
   nextVersion;
   @belongsTo('document-container', { inverse: 'revisions' })
   documentContainer;
-  @hasMany('document-container', { inverse: 'isPartOf' }) hasParts;
+  @hasMany('document-container', { inverse: 'isPartOf' }) parts;
 
   get htmlSafeContent() {
     return htmlSafe(this.content);
