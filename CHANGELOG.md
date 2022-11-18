@@ -11,6 +11,33 @@
 
 
 
+
+## 2.35.0 (2022-11-18)
+
+#### :rocket: Enhancement
+* [#359](https://github.com/lblod/frontend-gelinkt-notuleren/pull/359) When saving an editorDocument retrieve and store its parts in the editor-document model ([@elpoelma](https://github.com/elpoelma))
+* [#370](https://github.com/lblod/frontend-gelinkt-notuleren/pull/370) Feature/regulatory statements publication ([@elpoelma](https://github.com/elpoelma))
+* [#363](https://github.com/lblod/frontend-gelinkt-notuleren/pull/363) Feature: prevent the duplicate inclusion of regulatory statements in a decision ([@elpoelma](https://github.com/elpoelma))
+* [#361](https://github.com/lblod/frontend-gelinkt-notuleren/pull/361) When the notulen is published disable the editing ([@lagartoverde](https://github.com/lagartoverde))
+* [#365](https://github.com/lblod/frontend-gelinkt-notuleren/pull/365) Feature/translation improvements ([@lagartoverde](https://github.com/lagartoverde))
+* [#362](https://github.com/lblod/frontend-gelinkt-notuleren/pull/362) Feature/minor improvements ([@lagartoverde](https://github.com/lagartoverde))
+* [#360](https://github.com/lblod/frontend-gelinkt-notuleren/pull/360) Sort regulatory statements by title when inserting a regulatory statement in an agendapoint ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#367](https://github.com/lblod/frontend-gelinkt-notuleren/pull/367) Move besluit property in regulatory statement plugin to dynamic getter. ([@elpoelma](https://github.com/elpoelma))
+* [#364](https://github.com/lblod/frontend-gelinkt-notuleren/pull/364) Disable 'insert statement' button if there is no besluit present ([@elpoelma](https://github.com/elpoelma))
+* [#366](https://github.com/lblod/frontend-gelinkt-notuleren/pull/366) Bugfix: only return title property if this._title is null or undefined ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#371](https://github.com/lblod/frontend-gelinkt-notuleren/pull/371) Bump article-structure plugin to 0.4.1 ([@elpoelma](https://github.com/elpoelma))
+* [#372](https://github.com/lblod/frontend-gelinkt-notuleren/pull/372) Bump table of contents plugin to 0.5.0 ([@elpoelma](https://github.com/elpoelma))
+* [#369](https://github.com/lblod/frontend-gelinkt-notuleren/pull/369) Update roadsign regulation plugin to version 0.9.5 ([@elpoelma](https://github.com/elpoelma))
+* [#368](https://github.com/lblod/frontend-gelinkt-notuleren/pull/368) Update editor to version 0.64.0 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 2
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.34.0 (2022-11-07)
 
 #### :rocket: Enhancement
