@@ -16,7 +16,6 @@ export default class RegulatoryStatementsViewSpec extends InlineComponentSpec {
     uri: { serializable: true },
   };
   _renderStatic(props) {
-    console.log(props);
     return `<br>
             <div resource="${props.uri}" property="eli:related_to" rev="dct:isPartOf" typeof="besluitpublicatie:Documentonderdeel">
               <h5>Reglementaire bijlage: ${props.title}</h5>
