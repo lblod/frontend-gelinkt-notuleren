@@ -18,16 +18,13 @@ export default class ReadOnlyContentSectionComponent extends Component {
       })
     ).firstObject;
     const currentVersion = await regulatoryStatementContainer.currentVersion;
-    this.componentController.setStateProperty('title', currentVersion.title);
-    this.componentController.setStateProperty(
-      'updatedOn',
-      currentVersion.updatedOn
-    );
-    this.componentController.setStateProperty(
+    this.componentController.setProperty('title', currentVersion.title);
+    this.componentController.setProperty('updatedOn', currentVersion.updatedOn);
+    this.componentController.setProperty(
       'content',
       currentVersion.htmlSafeContent
     );
-    this.componentController.setStateProperty(
+    this.componentController.setProperty(
       'url',
       `/regulatory-statements/${regulatoryStatementContainer.id}/edit`
     );
@@ -42,19 +39,19 @@ export default class ReadOnlyContentSectionComponent extends Component {
   }
 
   get content() {
-    return this.componentController.getStateProperty('content');
+    return this.componentController.getProperty('content');
   }
 
   get updatedOn() {
-    return this.componentController.getStateProperty('updatedOn');
+    return this.componentController.getProperty('updatedOn');
   }
 
   get url() {
-    return this.componentController.state.url;
+    return this.componentController.getProperty('url');
   }
 
   get uri() {
-    return this.componentController.props.uri;
+    return this.componentController.getProperty('uri');
   }
 
   @action

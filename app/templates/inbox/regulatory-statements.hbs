@@ -41,6 +41,8 @@
         'inbox.regulatoryStatements.titleLabel'}} />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t
         'inbox.regulatoryStatements.updatedOnLabel'}} />
+      <AuDataTableThSortable @field="currentVersion.status.label" @currentSorting={{this.sort}} @label={{t
+        'inbox.regulatoryStatements.statusLabel'}} />
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
@@ -50,6 +52,9 @@
         <td>
           {{human-friendly-date row.updatedOn}}
           <br>
+        </td>
+        <td>
+          <EditorStatusPill @status={{container.currentVersion.status}} />
         </td>
       {{/let}}
     </c.body>
