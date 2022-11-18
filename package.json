@@ -47,7 +47,7 @@
     "@lblod/ember-rdfa-editor-rdfa-date-plugin": "^0.3.1",
     "@lblod/ember-rdfa-editor-roadsign-regulation-plugin": "^0.9.5",
     "@lblod/ember-rdfa-editor-standard-template-plugin": "^0.13.1",
-    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "github:lblod/ember-rdfa-editor-table-of-contents-plugin#feature/update-to-new-property-model",
+    "@lblod/ember-rdfa-editor-table-of-contents-plugin": "^0.5.0",
     "@lblod/ember-rdfa-editor-template-variable-plugin": "^0.10.0",
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "babel-eslint": "^10.1.0",
