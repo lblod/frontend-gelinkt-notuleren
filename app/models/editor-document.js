@@ -12,13 +12,14 @@ export default class EditorDocumentModel extends Model {
   @attr('datetime') updatedOn;
 
   @belongsTo('concept', { inverse: null }) type;
+  @belongsTo('concept', { inverse: null }) status;
   @belongsTo('editor-document', { inverse: 'nextVersion' })
   previousVersion;
   @belongsTo('editor-document', { inverse: 'previousVersion' })
   nextVersion;
   @belongsTo('document-container', { inverse: 'revisions' })
   documentContainer;
-  @hasMany('document-container', { inverse: 'isPartOf' }) hasParts;
+  @hasMany('document-container', { inverse: 'isPartOf' }) parts;
 
   get htmlSafeContent() {
     return htmlSafe(this.content);

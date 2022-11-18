@@ -5,21 +5,27 @@ import { action } from '@ember/object';
 export default class RegulatoryStatementsSidebarInsertComponent extends Component {
   @tracked isDisabled = false;
   @tracked modalEnabled = false;
+  @tracked besluit;
 
   constructor() {
     super(...arguments);
-    this.args.controller.onEvent('contentChanged', this.update.bind(this));
+    this.args.controller.onEvent('selectionChanged', this.update.bind(this));
     this.update();
   }
 
-  get besluit() {
-    return this.args.controller.datastore
+  update() {
+    const selectedRange = this.args.controller.selection.lastRange;
+    if (!selectedRange) {
+      return;
+    }
+    const limitedDatastore = this.args.controller.datastore.limitToRange(
+      selectedRange,
+      'rangeIsInside'
+    );
+    this.besluit = limitedDatastore
       .match(null, 'a', `besluit:Besluit`)
       .asSubjectNodes()
       .next().value;
-  }
-
-  update() {
     this.isDisabled = !this.besluit;
   }
 
@@ -43,7 +49,6 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
         {
           uri: statement.uri,
         },
-        {},
         true,
         range
       );
