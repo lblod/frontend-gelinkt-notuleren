@@ -19,4 +19,10 @@ export default class RegulatoryStatementLinkComponent extends Component {
       return 'unknown';
     }
   }
+
+  get linkLabel() {
+    return (
+      this.args.label ?? this.args.documentContainer.currentVersion.get('title')
+    );
+  }
 }

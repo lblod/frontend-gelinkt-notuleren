@@ -1,5 +1,9 @@
 {{#if (or (eq this.editorStatus "published") @readOnly)}}
-  <LinkTo @route="regulatory-statements.show" @model={{@documentContainer.id}} class="au-c-link">{{@documentContainer.currentVersion.title}}</LinkTo>
+<AuLink @icon={{@icon}} @route="regulatory-statements.show" @model={{@documentContainer.id}}>
+  {{this.linkLabel}}
+</AuLink>
 {{else}}
-  <LinkTo @route="regulatory-statements.edit" @model={{@documentContainer.id}} class="au-c-link">{{@documentContainer.currentVersion.title}}</LinkTo>
+<AuLink @icon={{@icon}} @route="regulatory-statements.edit" @model={{@documentContainer.id}}>
+  {{this.linkLabel}}
+</AuLink>
 {{/if}}
