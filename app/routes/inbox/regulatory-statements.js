@@ -15,7 +15,7 @@ export default class InboxRegulatoryStatementsRoute extends Route {
   async model(params) {
     const options = {
       sort: params.sort,
-      include: 'status,current-version',
+      include: 'current-version,current-version.status',
       'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
       page: {
         number: params.page,

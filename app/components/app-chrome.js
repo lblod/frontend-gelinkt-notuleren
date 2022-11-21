@@ -7,7 +7,8 @@ export default class AppChromeComponent extends Component {
   @service features;
 
   get documentStatus() {
-    const status = this.args.documentContainer?.get('status');
+    const status =
+      this.args.documentStatus ?? this.args.documentContainer?.get('status');
     return status;
   }
 
