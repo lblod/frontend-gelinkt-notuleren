@@ -12,7 +12,7 @@ export default class RdfaEditorContainerComponent extends Component {
     'template-variable',
     'rdfa-date',
     'import-snippet',
-    'citaten-plugin',
+    'citaten',
     'regulatory-statements',
   ];
 

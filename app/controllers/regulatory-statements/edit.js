@@ -10,11 +10,14 @@ export default class RegulatoryStatementsRoute extends Controller {
   editor;
   plugins = [
     'article-structure',
-    { name: 'rdfa-toc', options: { config: PLUGIN_CONFIGS.TABLE_OF_CONTENTS } },
+    {
+      name: 'table-of-contents',
+      options: { config: PLUGIN_CONFIGS.TABLE_OF_CONTENTS },
+    },
     'template-variable',
     'rdfa-date',
     'import-snippet',
-    'citaten-plugin',
+    'citaten',
   ];
 
   get dirty() {
