@@ -4,10 +4,11 @@
   <table.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box" @size="large" as |Group|>
-        <Group>
+        <Group class="au-c-toolbar__group--vertical">
           <AuHeading @skin="2">
             {{t 'inbox.irgArchive.pageTitle'}}
           </AuHeading>
+          <h2>{{t 'inbox.irgArchive.pageSubTitle'}}</h2>
         </Group>
         <Group class="au-c-toolbar__group--center">
           <AuInput @icon="search" @iconAlignment="right" @width="block" @value={{this.searchValue}} placeholder={{t 'inbox.irgArchive.searchPlaceholder'}} {{on "input" (perform this.updateFilter)}}/>
@@ -23,7 +24,7 @@
     </c.header>
     <c.body as |container|>
       <td>
-        <AuLink @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</AuLink> 
+        <AuLink @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</AuLink>
       </td>
       <td>
         {{container.currentVersion.type.label}}
