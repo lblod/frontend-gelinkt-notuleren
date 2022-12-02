@@ -6,7 +6,6 @@ import { PLUGIN_CONFIGS } from 'frontend-gelinkt-notuleren/config/constants';
 import { task } from 'ember-concurrency';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { inject as service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
