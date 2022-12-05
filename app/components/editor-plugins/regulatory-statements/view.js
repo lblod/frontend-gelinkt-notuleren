@@ -1,9 +1,11 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class ReadOnlyContentSectionComponent extends Component {
   @service store;
+  @tracked documentContainer;
 
   @action
   didInsert() {
@@ -17,16 +19,13 @@ export default class ReadOnlyContentSectionComponent extends Component {
         include: 'current-version',
       })
     ).firstObject;
+    this.documentContainer = regulatoryStatementContainer;
     const currentVersion = await regulatoryStatementContainer.currentVersion;
     this.componentController.setProperty('title', currentVersion.title);
     this.componentController.setProperty('updatedOn', currentVersion.updatedOn);
     this.componentController.setProperty(
       'content',
       currentVersion.htmlSafeContent
-    );
-    this.componentController.setProperty(
-      'url',
-      `/regulatory-statements/${regulatoryStatementContainer.id}/edit`
     );
   }
 
@@ -44,10 +43,6 @@ export default class ReadOnlyContentSectionComponent extends Component {
 
   get updatedOn() {
     return this.componentController.getProperty('updatedOn');
-  }
-
-  get url() {
-    return this.componentController.getProperty('url');
   }
 
   get uri() {

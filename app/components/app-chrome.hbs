@@ -30,7 +30,7 @@
     <Group>
       <div>
         {{#unless @editorDocument.isNew}}
-          <EditorStatusPill @status={{@documentContainer.status}} />
+          <EditorStatusPill @status={{this.documentStatus}} />
         {{/unless}}
         {{#if @editorDocument.isNew}}
           <AuPill @skin="warning">
