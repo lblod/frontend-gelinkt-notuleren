@@ -8,7 +8,9 @@
           <AuHeading @skin="2">
             {{t 'inbox.irgArchive.pageTitle'}}
           </AuHeading>
-          <h2>{{t 'inbox.irgArchive.pageSubTitle'}}</h2>
+          <AuHeading @skin="5">
+            {{t 'inbox.irgArchive.pageSubTitle'}}
+          </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center">
           <AuInput @icon="search" @iconAlignment="right" @width="block" @value={{this.searchValue}} placeholder={{t 'inbox.irgArchive.searchPlaceholder'}} {{on "input" (perform this.updateFilter)}}/>
