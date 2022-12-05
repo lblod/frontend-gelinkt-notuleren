@@ -50,11 +50,8 @@ module.exports = function (environment) {
       print: '{{MANUAL_PRINT}}',
     },
     featureFlags: {
-      'language-select': false,
       'editor-html-paste': true,
       'editor-extended-html-paste': true,
-      'acmidm-switch': true,
-      attachments: true,
     },
     browserUpdate: {
       vs: { f: -3, c: -3 },
