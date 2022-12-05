@@ -29,6 +29,10 @@ export default class ConfirmRouteLeaveComponent extends Component {
       this.args.onCancel(transition);
     } else {
       transition.abort();
+
+      if (window.history) {
+        window.history.forward();
+      }
     }
   }
 
