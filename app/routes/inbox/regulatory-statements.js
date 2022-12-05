@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default class InboxRegulatoryStatementsRoute extends Route {
   @service store;
+  @service features;
 
   queryParams = {
     pageSize: { refreshModel: true },
@@ -11,6 +12,12 @@ export default class InboxRegulatoryStatementsRoute extends Route {
     sort: { refreshModel: true },
     filter: { refreshModel: true },
   };
+
+  beforeModel(/*transition*/) {
+    if (!this.features.isEnabled('regulatoryStatements')) {
+      this.replaceWith('inbox.agendapoints');
+    }
+  }
 
   async model(params) {
     const options = {

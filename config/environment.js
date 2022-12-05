@@ -52,6 +52,7 @@ module.exports = function (environment) {
     featureFlags: {
       'editor-html-paste': true,
       'editor-extended-html-paste': true,
+      'regulatory-statements': '{{GN_FEATURE_REGULATORY_STATEMENTS}}',
     },
     browserUpdate: {
       vs: { f: -3, c: -3 },
@@ -88,7 +89,7 @@ module.exports = function (environment) {
     ENV.manual.signee = '#gebruikersbeheer';
     ENV.manual.publisher = '#gebruikersbeheer';
     ENV.manual.print = '';
-    ENV.featureFlags.attachments = true;
+    ENV.featureFlags['regulatory-statements'] = true;
     ENV.roadsignRegulationPlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
     ENV.templateVariablePlugin.endpoint =

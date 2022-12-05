@@ -29,12 +29,14 @@
                 {{t "inbox.menu.agendapoints"}}
               </AuNavigationLink>
             </li>
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="inbox.regulatory-statements">
-                <AuIcon @icon="bookmark" @alignment="left" />
-                {{t "inbox.menu.statements"}}
-              </AuNavigationLink>
-            </li>
+            {{#if (feature-flag 'regulatoryStatements')}}
+              <li class="au-c-list-navigation__item">
+                <AuNavigationLink @route="inbox.regulatory-statements">
+                  <AuIcon @icon="bookmark" @alignment="left" />
+                  {{t "inbox.menu.statements"}}
+                </AuNavigationLink>
+              </li>
+            {{/if}}
             {{#if this.model.length}}
             <li class="au-c-list-navigation__item">
               <AuNavigationLink @route="inbox.irg-archive">
