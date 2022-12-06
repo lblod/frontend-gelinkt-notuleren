@@ -1,9 +1,12 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
 
 export default class RdfaEditorContainerComponent extends Component {
+  @service features;
   @tracked editor;
+
   _plugins = [
     'besluit-type',
     'standard-template',
@@ -13,12 +16,13 @@ export default class RdfaEditorContainerComponent extends Component {
     'rdfa-date',
     'import-snippet',
     'citaten-plugin',
-    'regulatory-statements',
   ];
 
   get plugins() {
     if (Array.isArray(this.args.plugins)) {
       return this.args.plugins;
+    } else if (this.features.isEnabled('regulatoryStatements')) {
+      return this._plugins.concat(['regulatory-statements']);
     } else {
       return this._plugins;
     }
