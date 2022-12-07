@@ -13,6 +13,21 @@
     </AuLink>
   </:return-link>
   <:actions>
+    <AuDropdown @title={{human-friendly-date this.editorDocument.updatedOn}} @buttonLabel={{human-friendly-date this.editorDocument.updatedOn}} @alignment="left">
+      <p class="au-u-margin-small" style="white-space: nowrap">
+        <span class="au-u-bold au-u-margin-right-large">Actual Version: </span>
+        <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn}}</span>
+      </p>
+      <AuHr />
+      <div class="au-u-margin-small au-u-flex--column au-u-flex">
+        <p class="au-u-muted">HISTORIEK: </p>
+        {{#each this.model.revisions as |revision|}}
+          <AuButton {{on "click" this.download}} @skin="link-secondary" role="menuitem" >
+            {{human-friendly-date revision.updatedOn}}
+          </AuButton>
+        {{/each}}
+      </div>
+    </AuDropdown>
     <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left" />
