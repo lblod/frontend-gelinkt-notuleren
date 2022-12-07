@@ -13,6 +13,10 @@
 
 
 
+## 2.36.1 (2022-12-07)
+#### :bug: Bug Fix
+ * bump ember-rdfa-editor to 0.64.1, fixes issue with templates not showing in insert menu
+ 
 ## 2.36.0 (2022-12-07)
 
 #### :rocket: Enhancement
