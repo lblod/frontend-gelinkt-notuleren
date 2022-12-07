@@ -12,6 +12,28 @@
 
 
 
+
+## 2.36.0 (2022-12-07)
+
+#### :rocket: Enhancement
+* [#383](https://github.com/lblod/frontend-gelinkt-notuleren/pull/383) Add archive date to irg archive ([@elpoelma](https://github.com/elpoelma))
+* [#373](https://github.com/lblod/frontend-gelinkt-notuleren/pull/373) Feature: non editable published regulatory statements ([@elpoelma](https://github.com/elpoelma))
+* [#375](https://github.com/lblod/frontend-gelinkt-notuleren/pull/375) add a prompt when a user tries to leave a page with unsaved changes in a document (GN-3740) ([@usrtim](https://github.com/usrtim))
+
+#### :bug: Bug Fix
+* [#377](https://github.com/lblod/frontend-gelinkt-notuleren/pull/377) reset back to the url you were on after cancelling redirect ([@usrtim](https://github.com/usrtim))
+* [#379](https://github.com/lblod/frontend-gelinkt-notuleren/pull/379) Fix weird title behaviour in regulatory statements edit page. ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#380](https://github.com/lblod/frontend-gelinkt-notuleren/pull/380) hide rs behind feature flag ([@nvdk](https://github.com/nvdk))
+* [#374](https://github.com/lblod/frontend-gelinkt-notuleren/pull/374) Bump engine.io from 6.2.0 to 6.2.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 3
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Niels V ([@nvdk](https://github.com/nvdk))
+- [@usrtim](https://github.com/usrtim)
+
+
 ## 2.35.0 (2022-11-18)
 
 #### :rocket: Enhancement
