@@ -23,14 +23,9 @@ export default class RegulatoryStatementsEditRoute extends Route {
       { include: 'status' }
     );
     const currentVersion = await container.get('currentVersion');
-    const revisions = await container.get('revisions');
-    const revisionsWithoutCurrentVersion = revisions.filter(
-      (document) => document.id !== currentVersion.id
-    );
     return RSVP.hash({
       documentContainer: container,
       editorDocument: currentVersion,
-      revisions: revisionsWithoutCurrentVersion,
     });
   }
   setupController(controller, model) {
