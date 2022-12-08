@@ -111,6 +111,7 @@ inbox:
       cancel: Back
   regulatoryStatements:
     return: Return to the overview of regulatory statements
+    revisionsReturn: Return to the actual version
     pageTitle: Regulatory statements
     searchPlaceholder: Search on title of regulatory statement
     noDataMessage: No regulatory statements
@@ -424,6 +425,10 @@ utils:
   fileOptions: File options
   htmlExport: Export as HTML
   delete: Delete
+  restore: Restore
+  actualVersion: Actual Version
+  history: History
+  fullHistory: See the full history
 
 validationModal:
   title: Name your document

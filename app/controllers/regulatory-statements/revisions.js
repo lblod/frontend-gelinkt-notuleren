@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { action } from '@ember/object';
+import { task } from 'ember-concurrency';
 
 export default class RegulatoryAttachmentsShowController extends Controller {
   @service currentSession;
@@ -10,6 +11,11 @@ export default class RegulatoryAttachmentsShowController extends Controller {
   @action
   download() {
     generateExportFromEditorDocument(this.model.editorDocument);
+  }
+
+  @task
+  restoreTask() {
+
   }
 
   get readOnly() {

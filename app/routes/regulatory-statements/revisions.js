@@ -12,12 +12,18 @@ export default class AgendapointsShowRoute extends Route {
       { include: 'status' }
     );
     const revisions = await container.get('revisions');
+    const currentVersion = await container.get('currentVersion');
     const document = revisions.find(
       (document) => document.id === params.document_id
+    );
+    const revisionsWithoutCurrentVersion = revisions.filter(
+      (revision) => revision.id !== document.id && revision.id !== currentVersion.id
     );
     return RSVP.hash({
       documentContainer: container,
       editorDocument: document,
+      revisions: revisionsWithoutCurrentVersion,
+      currentVersion: currentVersion,
     });
   }
 }

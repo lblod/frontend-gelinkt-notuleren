@@ -12,22 +12,28 @@
       {{t 'inbox.regulatoryStatements.return'}}
     </AuLink>
   </:return-link>
-  <:actions>
-    <AuDropdown @title={{human-friendly-date this.editorDocument.updatedOn}} @buttonLabel={{human-friendly-date this.editorDocument.updatedOn}} @alignment="left">
-      <p class="au-u-margin-small" style="white-space: nowrap">
-        <span class="au-u-bold au-u-margin-right-large">Actual Version: </span>
+  <:actions-after-title>
+    <AuDropdown @title={{t 'utils.actualVersion'}} @buttonLabel={{t 'utils.actualVersion'}} @alignment="left">
+      <p class="au-u-padding-small" style="white-space: nowrap; border-left: 3px solid #5990DE;">
+        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.actualVersion'}}: </span>
         <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn}}</span>
       </p>
       <AuHr />
       <div class="au-u-margin-small au-u-flex--column au-u-flex">
-        <p class="au-u-muted">HISTORIEK: </p>
+        <p class="au-u-muted">{{t 'utils.history'}}</p>
         {{#each this.model.revisions as |revision|}}
-          <AuButton {{on "click" this.download}} @skin="link-secondary" role="menuitem" >
+          <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array this.documentContainer.id revision.id}}>
             {{human-friendly-date revision.updatedOn}}
-          </AuButton>
+          </AuLink>
         {{/each}}
+        <AuButton @skin="link" role="menuitem" >
+          <AuIcon @icon="clock" @alignment="left" />
+          {{t 'utils.fullHistory'}}
+        </AuButton>
       </div>
     </AuDropdown>
+  </:actions-after-title>
+  <:actions>
     <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left" />
