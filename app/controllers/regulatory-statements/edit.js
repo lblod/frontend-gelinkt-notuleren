@@ -73,6 +73,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       const documentContainer = this.documentContainer;
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
+      this.fetchRevisions();
     }
   }
 
