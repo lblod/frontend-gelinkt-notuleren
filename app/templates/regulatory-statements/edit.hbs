@@ -16,9 +16,9 @@
       </AuLink>
     </:return-link>
     <:actions-after-title>
-      <AuDropdown @title={{t 'utils.actualVersion'}} @buttonLabel={{t 'utils.actualVersion'}} @alignment="left">
-        <p class="au-u-padding-small" style="white-space: nowrap; border-left: 3px solid #5990DE;">
-          <span class="au-u-bold au-u-margin-right-large">{{t 'utils.actualVersion'}}: </span>
+      <AuDropdown @title={{t 'utils.currentVersion'}} @buttonLabel={{t 'utils.currentVersion'}} @alignment="left">
+        <p class="au-u-padding-small regulatory-statement-current-version-container-active">
+          <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
           <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn}}</span>
         </p>
         <AuHr />

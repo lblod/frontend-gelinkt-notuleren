@@ -428,7 +428,7 @@ utils:
   htmlExport: Exporteer als HTML
   delete: Naar prullenmand
   restore: Herstellen
-  actualVersion: Actuele versie
+  currentVersion: Actuele versie
   history: HISTORIEK
   fullHistory: Volledige historiek bekijken
 
