@@ -26,12 +26,12 @@ export default class RegulatoryStatementsRoute extends Controller {
   @task
   *fetchRevisions() {
     const revisions = yield this.store.query('editor-document', {
-      'filter[document-container][id]': this.model.documentContainer.id,
+      'filter[document-container][id]': this.documentContainer.id,
       sort: '-updated-on',
       'page[size]': 5,
     });
     const revisionsWithoutCurrentVersion = revisions.filter(
-      (revision) => revision.id !== this.model.editorDocument.id
+      (revision) => revision.id !== this.editorDocument.id
     );
     this.revisions = revisionsWithoutCurrentVersion;
   }
@@ -73,7 +73,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       const documentContainer = this.documentContainer;
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
-      this.fetchRevisions();
+      this.fetchRevisions.perform();
     }
   }
 

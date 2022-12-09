@@ -671,3 +671,14 @@ div.table-of-contents {
     background-color: var(--au-blue-200);
   }
 }
+
+.regulatory-statement-current-version-container-active {
+  white-space: nowrap; 
+  border-left: 3px solid #5990DE;
+}
+
+.regulatory-statement-current-version-container {
+  white-space: nowrap; 
+  color: black; 
+  text-decoration: none;
+}

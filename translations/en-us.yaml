@@ -426,7 +426,7 @@ utils:
   htmlExport: Export as HTML
   delete: Delete
   restore: Restore
-  actualVersion: Actual Version
+  currentVersion: Current Version
   history: History
   fullHistory: See the full history
 
