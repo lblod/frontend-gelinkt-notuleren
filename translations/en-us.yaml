@@ -429,6 +429,7 @@ utils:
   currentVersion: Current Version
   history: History
   fullHistory: See the full history
+  createNewVersion: Create new version
 
 validationModal:
   title: Name your document

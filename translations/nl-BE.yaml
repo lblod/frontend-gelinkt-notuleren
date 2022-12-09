@@ -431,6 +431,7 @@ utils:
   currentVersion: Actuele versie
   history: HISTORIEK
   fullHistory: Volledige historiek bekijken
+  createNewVersion: Nieuwe versie maken
 
 validationModal:
   title: Geef uw document een naam
