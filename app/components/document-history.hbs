@@ -1,0 +1,29 @@
+<div 
+  {{did-update (perform this.fetchRevisions)}}
+  {{did-insert (perform this.fetchRevisions)}}
+/>
+<AuModal
+  @modalTitle={{t "utils.history"}}
+  @modalOpen="true" as |Modal| >
+  <Modal.Body>
+    {{#if this.args.isCurrentVersion}}
+      <p class="au-u-padding-small regulatory-statement-current-version-container-active">
+        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-light">{{human-friendly-date this.args.currentVersion.updatedOn}}</span>
+      </p>
+    {{else}}
+      <LinkTo @route="regulatory-statements.edit" @model={{this.args.documentContainerId}} class="au-u-padding-small regulatory-statement-current-version-container">
+        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-light">{{human-friendly-date this.args.currentVersion.updatedOn}}</span>
+      </LinkTo>
+    {{/if}}
+    <AuHr />
+    <div class="au-u-margin-small au-u-flex--column au-u-flex">
+      {{#each this.revisions as |revision|}}
+        <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array this.args.documentContainerId revision.id}}>
+          {{human-friendly-date revision.updatedOn}}
+        </AuLink>
+      {{/each}}
+    </div>
+  </Modal.Body>
+</AuModal>

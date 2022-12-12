@@ -27,10 +27,10 @@
               {{human-friendly-date revision.updatedOn}}
             </AuLink>
           {{/each}}
-          <AuButton @skin="link" role="menuitem" >
+          <AuLink @route="regulatory-statements.revisions.history" @skin="link" role="menuitem" >
             <AuIcon @icon="clock" @alignment="left" />
             {{t 'utils.fullHistory'}}
-          </AuButton>
+          </AuLink>
         </div>
       </AuDropdown>
     </:actions-after-title>
