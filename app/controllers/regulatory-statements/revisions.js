@@ -10,21 +10,17 @@ export default class RegulatoryAttachmentsShowController extends Controller {
   @service currentSession;
   @service router;
   @service store;
+  @service documentService;
   @tracked revisions;
 
   @task
   *fetchRevisions() {
-    const revisions = yield this.store.query('editor-document', {
-      'filter[document-container][id]': this.model.documentContainer.id,
-      sort: '-updated-on',
-      'page[size]': 5,
-    });
-    const revisionsWithoutCurrentVersion = revisions.filter(
-      (revision) =>
-        revision.id !== this.model.currentVersion.id &&
-        revision.id !== this.model.editorDocument.id
+    this.revisions = yield this.documentService.fetchRevisions.perform(
+      this.model.documentContainer.id,
+      this.model.currentVersion.id,
+      this.model.editorDocument.id,
+      5
     );
-    this.revisions = revisionsWithoutCurrentVersion;
   }
 
   @action

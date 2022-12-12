@@ -4,20 +4,15 @@ import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 
 export default class DocumentHistoryComponent extends Component {
-  @service store;
+  @service documentService;
   @tracked revisions;
 
   @task
   *fetchRevisions() {
-    const revisions = yield this.store.query('editor-document', {
-      'filter[document-container][id]': this.args.documentContainerId,
-      sort: '-updated-on',
-    });
-    const revisionsWithoutCurrentVersion = revisions.filter(
-      (revision) =>
-        revision.id !== this.args.currentVersion.id &&
-        revision.id !== this.args.currentRevisionId
+    this.revisions = yield this.documentService.fetchRevisions.perform(
+      this.args.documentContainerId,
+      this.args.currentVersion.id,
+      this.args.currentRevisionId
     );
-    this.revisions = revisionsWithoutCurrentVersion;
   }
 }
