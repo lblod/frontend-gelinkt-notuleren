@@ -7,6 +7,7 @@ import { replaceUris } from '../../utils/replace-uris';
 
 export default class RegulatoryAttachmentsShowController extends Controller {
   @service currentSession;
+  @service documentService;
   @service router;
 
   @action
@@ -21,20 +22,12 @@ export default class RegulatoryAttachmentsShowController extends Controller {
     const documentContainer = this.model.documentContainer;
     //If it's published
     let content = replaceUris(currentVersion.content);
-
-    const newDocument = this.store.createRecord('editor-document', {
-      createdOn: new Date(),
-      updatedOn: new Date(),
-      content: content,
-      title: currentVersion.title,
-      previousVersion: currentVersion,
+    yield this.documentService.createEditorDocument.perform(
+      currentVersion.title,
+      content,
       documentContainer,
-    });
-    yield newDocument.save();
-    currentVersion.nextVersion = newDocument;
-    yield currentVersion.save();
-    documentContainer.currentVersion = newDocument;
-    yield documentContainer.save();
+      currentVersion
+    );
     this.router.transitionTo(
       'regulatory-statements.edit',
       documentContainer.id
