@@ -4,7 +4,9 @@
 />
 <AuModal
   @modalTitle={{t "utils.history"}}
-  @modalOpen="true" as |Modal| >
+  @modalOpen="true"
+  @closeModal={{this.goBack}}
+   as |Modal| >
   <Modal.Body>
     {{#if this.args.isCurrentVersion}}
       <p class="au-u-padding-small regulatory-statement-current-version-container-active">

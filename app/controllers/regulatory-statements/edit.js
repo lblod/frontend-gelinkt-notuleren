@@ -25,10 +25,10 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   @task
   *fetchRevisions() {
+    const revisionsToSkip = [this.editorDocument.id];
     this.revisions = yield this.documentService.fetchRevisions.perform(
       this.documentContainer.id,
-      this.editorDocument.id,
-      null,
+      revisionsToSkip,
       5
     );
   }
