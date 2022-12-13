@@ -22,10 +22,19 @@
     <AuHr />
     <div class="au-u-margin-small au-u-flex--column au-u-flex">
       {{#each this.revisions as |revision|}}
-        <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array @documentContainerId revision.id}}>
-          {{human-friendly-date revision.updatedOn}}
-        </AuLink>
+        {{#if (eq revision.id @currentRevisionId)}}
+          <AuLink @route="regulatory-statements.revisions" @active="true" @skin="secondary" role="menuitem" @models={{array @documentContainerId revision.id}}>
+            {{human-friendly-date revision.updatedOn}}
+          </AuLink>
+        {{else}}
+          <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array @documentContainerId revision.id}}>
+            {{human-friendly-date revision.updatedOn}}
+          </AuLink>
+        {{/if}}
       {{/each}}
+      {{#if this.hasMore}}
+        <AuButton @skin="link" {{on "click" (perform this.loadMore)}} >Load More</AuButton>
+      {{/if}}
     </div>
   </Modal.Body>
 </AuModal>

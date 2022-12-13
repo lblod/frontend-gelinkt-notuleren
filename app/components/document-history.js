@@ -8,6 +8,10 @@ export default class DocumentHistoryComponent extends Component {
   @service documentService;
   @service router;
   @tracked revisions;
+  @tracked hasMore = true;
+
+  @tracked page = 1;
+  pageSize = 20;
 
   @action
   goBack() {
@@ -15,14 +19,33 @@ export default class DocumentHistoryComponent extends Component {
   }
 
   @task
+  *loadMore() {
+    const revisionsToSkip = [this.args.currentVersion.id];
+    const newRevisions = yield this.documentService.fetchRevisions.perform(
+      this.args.documentContainerId,
+      revisionsToSkip,
+      this.pageSize,
+      this.page
+    );
+    this.revisions = [...this.revisions, ...newRevisions];
+    this.page += 1;
+    if (newRevisions.length < this.pageSize) {
+      this.hasMore = false;
+    }
+  }
+
+  @task
   *fetchRevisions() {
-    const revisionsToSkip = [
-      this.args.currentVersion.id,
-      this.args.currentRevisionId,
-    ];
+    const revisionsToSkip = [this.args.currentVersion.id];
     this.revisions = yield this.documentService.fetchRevisions.perform(
       this.args.documentContainerId,
-      revisionsToSkip
+      revisionsToSkip,
+      this.pageSize
     );
+    console.log(this.revisions.length);
+    // We add 1 because we are skipping the current version
+    if (this.revisions.length + 1 < this.pageSize) {
+      this.hasMore = false;
+    }
   }
 }
