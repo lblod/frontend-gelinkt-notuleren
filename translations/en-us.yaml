@@ -299,6 +299,7 @@ participationListModal:
   presentLabel: Present mandatees
   saveButton: Insert attendees
   cancelButton: Cancel
+  chairmanAbsentError: Chairman cannot be absent
 
 participationListModalSelector:
   loadingMessage: Loading...

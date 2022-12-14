@@ -5,6 +5,14 @@
         as |Modal|>
   <Modal.Body>
     <div class="au-o-flow">
+      {{#if this.error}}
+        <AuAlert 
+          @title={{this.error}}
+          @skin="error"
+          @icon="cross"
+          @size="small"
+        />
+      {{/if}}
       <div>
         <AuLabel>
           {{t "participationListModal.voorzitterLabel"}}
