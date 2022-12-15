@@ -72,4 +72,8 @@ inflector.irregular('agenda-position', 'agenda-positions');
 inflector.irregular('file', 'files');
 inflector.irregular('attachment', 'attachments');
 inflector.irregular('extract-preview', 'extract-previews');
+inflector.irregular(
+  'versioned-regulatory-statement',
+  'versioned-regulatory-statements'
+);
 inflector.uncountable('sync');

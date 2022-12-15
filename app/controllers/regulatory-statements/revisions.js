@@ -4,6 +4,7 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
+import { replaceUris } from '../../utils/replace-uris';
 
 export default class RegulatoryAttachmentsShowController extends Controller {
   @service currentSession;
@@ -32,8 +33,40 @@ export default class RegulatoryAttachmentsShowController extends Controller {
   }
 
   @task
-  restoreTask() {
-    this.model.documentContainer;
+  *restoreTask() {
+    const currentVersion = this.model.currentVersion;
+    const toRestore = this.model.editorDocument;
+    const documentContainer = this.model.documentContainer;
+    //If it's published
+    let content;
+    const publishedVersion = (yield this.store.query(
+      'versioned-regulatory-statement',
+      {
+        'filter[regulatoryStatement][id]': currentVersion.id,
+      }
+    ))[0];
+    if (publishedVersion) {
+      content = replaceUris(toRestore.content);
+    } else {
+      content = toRestore.content;
+    }
+    const newDocument = this.store.createRecord('editor-document', {
+      createdOn: new Date(),
+      updatedOn: new Date(),
+      content: content,
+      title: toRestore.title,
+      previousVersion: currentVersion,
+      documentContainer,
+    });
+    yield newDocument.save();
+    currentVersion.nextVersion = newDocument;
+    yield currentVersion.save();
+    documentContainer.currentVersion = newDocument;
+    yield documentContainer.save();
+    this.router.transitionTo(
+      'regulatory-statements.edit',
+      documentContainer.id
+    );
   }
 
   get readOnly() {
