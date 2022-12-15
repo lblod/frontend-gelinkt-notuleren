@@ -8,13 +8,16 @@ export const EDITOR_FOLDERS = {
 export const PLUGIN_CONFIGS = {
   TABLE_OF_CONTENTS: [
     {
-      sectionPredicate: 'https://say.data.gift/ns/hasPart',
+      sectionPredicate: ['https://say.data.gift/ns/hasPart', 'say:hasPart'],
       value: {
         predicate: 'https://say.data.gift/ns/heading',
       },
     },
     {
-      sectionPredicate: 'https://say.data.gift/ns/hasParagraph',
+      sectionPredicate: [
+        'https://say.data.gift/ns/hasParagraph',
+        'say:hasParagraph',
+      ],
       value: '§',
     },
   ],

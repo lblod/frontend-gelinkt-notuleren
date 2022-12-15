@@ -65,6 +65,10 @@
     @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
     @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
                          (t "rdfaEditorContainer.saving")}}
+    @schema={{this.schema}}
+    @widgets={{this.widgets}}
+    @nodeViews={{this.nodeViews}}
+    @plugins={{this.plugins}}
   />
 </div>
 <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>

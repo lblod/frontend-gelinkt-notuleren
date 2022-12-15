@@ -4,24 +4,21 @@ import { tracked } from '@glimmer/tracking';
 
 export default class RdfaEditorContainerComponent extends Component {
   @tracked editor;
-  _plugins = [
-    'besluit-type',
-    'standard-template',
-    'besluit',
-    'roadsign-regulation',
-    'template-variable',
-    'rdfa-date',
-    'import-snippet',
-    'citaten',
-    'regulatory-statements',
-  ];
 
   get plugins() {
-    if (Array.isArray(this.args.plugins)) {
-      return this.args.plugins;
-    } else {
-      return this._plugins;
-    }
+    return this.args.plugins || [];
+  }
+
+  get widgets() {
+    return this.args.widgets || [];
+  }
+
+  get schema() {
+    return this.args.schema;
+  }
+
+  get nodeViews() {
+    return this.args.nodeViews;
   }
 
   get editorOptions() {
