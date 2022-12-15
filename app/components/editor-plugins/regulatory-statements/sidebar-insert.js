@@ -3,30 +3,34 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class RegulatoryStatementsSidebarInsertComponent extends Component {
-  @tracked isDisabled = false;
   @tracked modalEnabled = false;
-  @tracked besluit;
 
-  constructor() {
-    super(...arguments);
-    this.args.controller.onEvent('selectionChanged', this.update.bind(this));
-    this.update();
+  get controller() {
+    return this.args.controller;
   }
 
-  update() {
-    const selectedRange = this.args.controller.selection.lastRange;
-    if (!selectedRange) {
-      return;
-    }
-    const limitedDatastore = this.args.controller.datastore.limitToRange(
-      selectedRange,
-      'rangeIsInside'
+  get insertRange() {
+    const selection = this.controller.state.selection;
+    const limitedDatastore = this.controller.datastore.limitToRange(
+      this.controller.state,
+      selection.from,
+      selection.to
     );
-    this.besluit = limitedDatastore
-      .match(null, 'a', `besluit:Besluit`)
-      .asSubjectNodes()
-      .next().value;
-    this.isDisabled = !this.besluit;
+    const besluitNode = [
+      ...limitedDatastore
+        .match(null, 'a', 'besluit:Besluit')
+        .asSubjectNodeMapping()
+        .nodes(),
+    ][0];
+    if (besluitNode) {
+      const { pos, node } = besluitNode;
+      return { from: pos + node.nodeSize - 1, to: pos + node.nodeSize - 1 };
+    }
+    return undefined;
+  }
+
+  get isDisabled() {
+    return !this.insertRange;
   }
 
   @action
@@ -37,21 +41,17 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
   @action
   insertRegulatoryStatement(statement) {
     this.modalEnabled = false;
-    if (this.besluit) {
-      const besluitNode = [...this.besluit.nodes][0];
-      const range = this.args.controller.rangeFactory.fromInNode(
-        besluitNode,
-        besluitNode.getMaxOffset()
-      );
-      this.args.controller.executeCommand(
-        'insert-component',
-        'editor-plugins/regulatory-statements/view',
-        {
-          uri: statement.uri,
-        },
-        true,
-        range
-      );
+    if (this.insertRange) {
+      const { schema } = this.controller;
+      this.controller.withTransaction((tr) => {
+        return tr.replaceRangeWith(
+          this.insertRange.from,
+          this.insertRange.to,
+          schema.node('regulatoryStatementNode', {
+            resource: statement.uri,
+          })
+        );
+      });
     }
   }
 }

@@ -56,6 +56,11 @@ import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/p
 
 import { setupCitationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 
+import {
+  regulatoryStatementNode,
+  regulatoryStatementNodeView,
+  regulatoryStatementWidget,
+} from '../../editor-plugins/regulatory-statements-plugin';
 const citation = setupCitationPlugin();
 
 export default class AgendapointsEditController extends Controller {
@@ -86,6 +91,7 @@ export default class AgendapointsEditController extends Controller {
         image,
         hard_break,
         inline_rdfa,
+        regulatoryStatementNode,
         block_rdfa,
       },
       marks: {
@@ -100,9 +106,10 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get nodeViews() {
-    return () => {
+    return (controller) => {
       return {
         placeholder: placeholderView,
+        regulatoryStatementNode: regulatoryStatementNodeView(controller),
       };
     };
   }
@@ -119,6 +126,7 @@ export default class AgendapointsEditController extends Controller {
       citation.widgets.citationInsert,
       roadSignRegulationWidget,
       templateVariableWidget,
+      regulatoryStatementWidget,
     ];
   }
 
