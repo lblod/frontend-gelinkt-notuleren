@@ -2,7 +2,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
 import Component from '@glimmer/component';
-import { task, restartableTask } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
 /** @typedef {import("../../../models/bestuursorgaan").default} Bestuursorgaan*/
 /** @typedef {import("../../../models/stemming").default} Stemming*/
@@ -30,13 +30,11 @@ export default class TreatmentVotingModalComponent extends Component {
     this.fetchStemmingen.perform();
   }
 
-  @restartableTask
-  /** @type {import("ember-concurrency").Task} */
-  *fetchStemmingen() {
+  fetchStemmingen = task({ restartable: true }, async () => {
     const stemmingen = [];
     const pageSize = 20;
 
-    const firstPage = yield this.store.query('stemming', {
+    const firstPage = await this.store.query('stemming', {
       'filter[behandeling-van-agendapunt][:id:]': this.args.behandeling.id,
       sort: 'position',
       page: {
@@ -48,7 +46,7 @@ export default class TreatmentVotingModalComponent extends Component {
     let pageNumber = 1;
 
     while (pageNumber * pageSize < count) {
-      const pageResults = yield this.store.query('stemming', {
+      const pageResults = await this.store.query('stemming', {
         'filter[behandeling-van-agendapunt][:id:]': this.args.behandeling.id,
         sort: 'position',
         page: {
@@ -60,11 +58,9 @@ export default class TreatmentVotingModalComponent extends Component {
       pageNumber++;
     }
     this.stemmingen = tracked(stemmingen);
-  }
+  });
 
-  @task
-  /** @type {import("ember-concurrency").Task} */
-  *saveStemming() {
+  saveStemming = task(async () => {
     const isNew = this.editStemming.stemming.isNew;
 
     if (isNew) {
@@ -73,14 +69,12 @@ export default class TreatmentVotingModalComponent extends Component {
         this.args.behandeling;
       this.stemmingen.push(this.editStemming.stemming);
     }
-    yield this.editStemming.saveTask.perform();
+    await this.editStemming.saveTask.perform();
     this.onCancelEdit();
-  }
+  });
 
-  @task
-  /** @type {import("ember-concurrency").Task} */
-  *addStemming() {
-    const richTreatment = yield this.store.query('behandeling-van-agendapunt', {
+  addStemming = task(async () => {
+    const richTreatment = await this.store.query('behandeling-van-agendapunt', {
       'filter[:id:]': this.args.behandeling.id,
       include: 'aanwezigen.bekleedt.bestuursfunctie',
     });
@@ -98,17 +92,16 @@ export default class TreatmentVotingModalComponent extends Component {
     stemmingToEdit.aanwezigen.pushObjects(participants);
     stemmingToEdit.stemmers.pushObjects(participants);
     this.editStemming.stemming = stemmingToEdit;
-  }
+  });
 
-  @task
-  *fixPositions() {
+  fixPositions = task(async () => {
     for (const [i, stemming] of this.stemmingen.entries()) {
       if (i !== stemming.position) {
         stemming.position = i;
-        yield stemming.save();
+        await stemming.save();
       }
     }
-  }
+  });
 
   @action
   toggleEditStemming(stemming) {
@@ -116,13 +109,12 @@ export default class TreatmentVotingModalComponent extends Component {
     this.editMode = true;
   }
 
-  @task
-  *removeStemming(stemming) {
-    yield stemming.destroyRecord();
+  removeStemming = task(async (stemming) => {
+    await stemming.destroyRecord();
     const index = this.stemmingen.indexOf(stemming);
     this.stemmingen.splice(index, 1);
-    yield this.fixPositions.perform();
-  }
+    await this.fixPositions.perform();
+  });
 
   @action
   onCancelEdit() {

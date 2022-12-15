@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { all, restartableTask, timeout } from 'ember-concurrency';
+import { all, task, timeout } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 
@@ -62,23 +62,22 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     return classification.uri === DEPUTATION_CLASSIFICATION;
   }
 
-  @restartableTask
-  *searchByName(searchData) {
-    yield timeout(SEARCH_DEBOUNCE_MS);
-    const isDeputation = yield this.isDeputation(this.adminBody);
+  searchByName = task({ restartable: true }, async (searchData) => {
+    await timeout(SEARCH_DEBOUNCE_MS);
+    const isDeputation = await this.isDeputation(this.adminBody);
     let mandatees;
     if (isDeputation) {
-      const adminUnit = yield this.args.bestuursorgaan.get(
+      const adminUnit = await this.args.bestuursorgaan.get(
         'isTijdsspecialisatieVan.bestuurseenheid'
       );
-      const [mandateeResults, governorResults] = yield all([
+      const [mandateeResults, governorResults] = await all([
         this.searchMandateesOfAdminBodyByName(this.adminBody, searchData),
         this.searchGovernorsAdminUnitByName(adminUnit, searchData),
       ]);
       mandatees = mandateeResults.toArray();
       mandatees.push(...governorResults.toArray());
     } else {
-      mandatees = yield this.searchMandateesOfAdminBodyByName(
+      mandatees = await this.searchMandateesOfAdminBodyByName(
         this.adminBody,
         searchData
       );
@@ -86,5 +85,5 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     return mandatees.filter((mandatee) =>
       isValidMandateeForMeeting(mandatee, this.args.meeting)
     );
-  }
+  });
 }

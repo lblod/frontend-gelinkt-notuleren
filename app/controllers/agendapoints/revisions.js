@@ -23,16 +23,15 @@ export default class AgendapointsRevisionsController extends Controller {
     return this.model.revisions;
   }
 
-  @task
-  *setNewRevisionHistory(revisionsToRemove, revision) {
+  setNewRevisionHistory = task(async (revisionsToRemove, revision) => {
     this.documentContainer.set('currentVersion', revision);
-    yield this.documentContainer.save();
+    await this.documentContainer.save();
     this.model.editorDocument = revision;
-    yield Promise.all(revisionsToRemove.map((r) => r.destroyRecord()));
+    await Promise.all(revisionsToRemove.map((r) => r.destroyRecord()));
     this.orderedRevisions.removeObjects(revisionsToRemove);
     this.flushThingsToRemove();
     this.router.transitionTo('agendapoints.edit', this.documentContainer.id);
-  }
+  });
 
   @action
   download() {

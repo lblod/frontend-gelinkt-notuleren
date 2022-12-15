@@ -88,34 +88,33 @@ export default class DocumentCreatorComponent extends Component {
     } else return '';
   }
 
-  @task
-  *persistDocument() {
+  persistDocument = task(async () => {
     try {
       this.errorSaving = null;
-      const generatedTemplate = yield this.buildTemplate();
+      const generatedTemplate = await this.buildTemplate();
       const container = this.store.createRecord('document-container');
-      container.status = yield this.store.findRecord(
+      container.status = await this.store.findRecord(
         'concept',
         DRAFT_STATUS_ID
       );
-      container.folder = yield this.store.findRecord(
+      container.folder = await this.store.findRecord(
         'editor-document-folder',
         this.args.folderId
       );
       container.publisher = this.currentSession.group;
       const editorDocument =
-        yield this.documentService.createEditorDocument.perform(
+        await this.documentService.createEditorDocument.perform(
           this.title,
           generatedTemplate,
           container
         );
       container.currentVersion = editorDocument;
-      yield container.save();
+      await container.save();
       return container;
     } catch (e) {
       this.errorSaving = e.message;
     }
-  }
+  });
 }
 // we can't afford to import the one from the template plugin
 // as the regex is way too loose and also tries to evaluate

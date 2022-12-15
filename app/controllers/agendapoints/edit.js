@@ -150,16 +150,15 @@ export default class AgendapointsEditController extends Controller {
     generateExportFromEditorDocument(this.editorDocument);
   }
 
-  @task
-  *copyAgendapunt() {
-    const response = yield fetch(
+  copyAgendapunt = task(async () => {
+    const response = await fetch(
       `/agendapoint-service/${this.documentContainer.id}/copy`,
       { method: 'POST' }
     );
-    const json = yield response.json();
+    const json = await response.json();
     const agendapuntId = json.uuid;
-    yield this.router.transitionTo('agendapoints.edit', agendapuntId);
-  }
+    await this.router.transitionTo('agendapoints.edit', agendapuntId);
+  });
 
   @action
   toggleDeleteModal() {
@@ -184,28 +183,26 @@ export default class AgendapointsEditController extends Controller {
     this.router.transitionTo('inbox.agendapoints');
   }
 
-  @task
-  *onTitleUpdate(title) {
+  onTitleUpdate = task(async (title) => {
     const html = this.editorDocument.content;
     const editorDocument =
-      yield this.documentService.createEditorDocument.perform(
+      await this.documentService.createEditorDocument.perform(
         title,
         html,
         this.documentContainer,
         this.editorDocument
       );
     this._editorDocument = editorDocument;
-  }
+  });
 
-  @task
-  *saveTask() {
+  saveTask = task(async () => {
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
       const editorDocument =
-        yield this.documentService.createEditorDocument.perform(
+        await this.documentService.createEditorDocument.perform(
           this.editorDocument.title,
           html,
           this.documentContainer,
@@ -213,5 +210,5 @@ export default class AgendapointsEditController extends Controller {
         );
       this._editorDocument = editorDocument;
     }
-  }
+  });
 }

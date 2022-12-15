@@ -19,16 +19,15 @@ export default class AgendapointsRevisionsRoute extends Route {
     });
   }
 
-  @task
-  *fetchRevisions(currentVersion) {
+  fetchRevisions = task(async (currentVersion) => {
     let revisions = [currentVersion];
-    let revision = yield currentVersion.get('previousVersion');
+    let revision = await currentVersion.get('previousVersion');
     while (revision) {
       revisions.push(revision);
-      revision = yield revision.get('previousVersion');
+      revision = await revision.get('previousVersion');
     }
     return revisions;
-  }
+  });
 
   setupController(controller, model) {
     super.setupController(controller, model);

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import { restartableTask } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 
 export default class AttachmentsNumberComponent extends Component {
   constructor(...args) {
@@ -13,9 +13,8 @@ export default class AttachmentsNumberComponent extends Component {
 
   @tracked attachmentsNumber;
 
-  @restartableTask
-  *getAttachmentsNumber() {
-    const attachments = yield this.args.documentContainer.attachments;
+  getAttachmentsNumber = task({ restartable: true }, async () => {
+    const attachments = await this.args.documentContainer.attachments;
     this.attachmentsNumber = attachments.length;
-  }
+  });
 }

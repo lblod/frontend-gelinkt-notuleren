@@ -3,7 +3,7 @@ import { tracked } from 'tracked-built-ins';
 import { action } from '@ember/object';
 import { EDITOR_FOLDERS } from '../../../config/constants';
 import { inject as service } from '@ember/service';
-import { restartableTask } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 
 export default class RegulatoryStatementsSearchModalComponent extends Component {
   @service store;
@@ -31,9 +31,8 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
       this.documentService.getDocumentparts(editorDocument);
   }
 
-  @restartableTask
-  *fetchNextPage() {
-    const regulatoryStatements = yield this.store.query('document-container', {
+  fetchNextPage = task({ restartable: true }, async () => {
+    const regulatoryStatements = await this.store.query('document-container', {
       include: 'current-version',
       'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
       ...(this.searchValue && {
@@ -52,17 +51,16 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
       this.showLoadMore = true;
       this.page += 1;
     }
-  }
+  });
 
-  @restartableTask
-  *updateFilter(event) {
+  updateFilter = task({ restartable: true }, async (event) => {
     const input = event.target.value;
     this.searchValue = input;
     this.regulatoryStatements = tracked([]);
     this._selectedStatement = null;
     this.page = 0;
-    yield this.fetchNextPage.perform();
-  }
+    await this.fetchNextPage.perform();
+  });
 
   @action
   selectStatement(statement) {

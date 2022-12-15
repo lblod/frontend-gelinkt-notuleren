@@ -58,8 +58,7 @@ export default class manageIntermissionsEditComponent extends Component {
     this[targetProperty] = value;
   }
 
-  @task
-  *saveIntermission() {
+  saveIntermission = task(async () => {
     const intermission = this.args.intermissionToEdit;
     if (this.startedAt) {
       intermission.startedAt = this.startedAt;
@@ -73,22 +72,21 @@ export default class manageIntermissionsEditComponent extends Component {
     if (intermission.isNew) {
       this.args.zitting.intermissions.pushObject(intermission);
     }
-    yield this.savePosition.perform();
-    yield intermission.save();
-    yield this.args.zitting.save();
+    await this.savePosition.perform();
+    await intermission.save();
+    await this.args.zitting.save();
     this.startedAt = '';
     this.endedAt = '';
     this.comment = '';
     this.args.onClose();
-  }
+  });
 
-  @task
-  *deleteTask(intermission) {
+  deleteTask = task(async (intermission) => {
     this.args.zitting.intermissions.removeObject(intermission);
-    yield this.args.zitting.save();
-    yield intermission.destroyRecord();
+    await this.args.zitting.save();
+    await intermission.destroyRecord();
     this.args.onClose();
-  }
+  });
 
   //position stuff
   get positionOptions() {
@@ -115,33 +113,31 @@ export default class manageIntermissionsEditComponent extends Component {
     this.fetchPosition.perform();
   }
 
-  @task
-  *savePosition() {
-    const intermission = yield this.args.intermissionToEdit;
-    let agendaPos = yield intermission.agendaPosition;
+  savePosition = task(async () => {
+    const intermission = await this.args.intermissionToEdit;
+    let agendaPos = await intermission.agendaPosition;
     if (!agendaPos) {
-      agendaPos = yield this.store.createRecord('agenda-position');
-      yield agendaPos.save();
+      agendaPos = await this.store.createRecord('agenda-position');
+      await agendaPos.save();
       intermission.agendaPosition = agendaPos;
     }
     agendaPos.agendapoint = this.selectedAp;
     if (this.selectedAp && this.selectedPosition) {
-      agendaPos.position = yield this.store.findRecord(
+      agendaPos.position = await this.store.findRecord(
         'concept',
         this.selectedPosition.conceptUuid
       );
     } else {
       agendaPos.position = null;
     }
-    yield agendaPos.save();
-  }
+    await agendaPos.save();
+  });
 
-  @task
-  *fetchPosition() {
-    const intermission = yield this.args.intermissionToEdit;
-    const agendaPos = yield intermission.agendaPosition;
+  fetchPosition = task(async () => {
+    const intermission = await this.args.intermissionToEdit;
+    const agendaPos = await intermission.agendaPosition;
     if (agendaPos) {
-      const posConcept = yield agendaPos.position;
+      const posConcept = await agendaPos.position;
       if (posConcept) {
         this.selectedPosition = this.positionOptions.find(
           (e) => e.conceptUuid === posConcept.id
@@ -149,7 +145,7 @@ export default class manageIntermissionsEditComponent extends Component {
       } else {
         this.selectedPosition = null;
       }
-      const posAp = yield agendaPos.agendapoint;
+      const posAp = await agendaPos.agendapoint;
       if (posAp) {
         this.selectedAp = posAp;
       } else {
@@ -159,7 +155,7 @@ export default class manageIntermissionsEditComponent extends Component {
       this.selectedAp = null;
       this.selectedPosition = null;
     }
-  }
+  });
 
   @tracked selectedPosition;
 

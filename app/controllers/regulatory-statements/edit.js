@@ -142,15 +142,14 @@ export default class RegulatoryStatementsRoute extends Controller {
     generateExportFromEditorDocument(this.editorDocument);
   }
 
-  @task
-  *saveTask() {
+  saveTask = task(async () => {
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
       const editorDocument =
-        yield this.documentService.createEditorDocument.perform(
+        await this.documentService.createEditorDocument.perform(
           this.editorDocument.title,
           html,
           this.documentContainer,
@@ -160,22 +159,21 @@ export default class RegulatoryStatementsRoute extends Controller {
 
       const documentContainer = this.documentContainer;
       documentContainer.currentVersion = editorDocument;
-      yield documentContainer.save();
+      await documentContainer.save();
     }
-  }
+  });
 
-  @task
-  *onTitleUpdate(title) {
+  onTitleUpdate = task(async (title) => {
     const html = this.editorDocument.content;
     const editorDocument =
-      yield this.documentService.createEditorDocument.perform(
+      await this.documentService.createEditorDocument.perform(
         title,
         html,
         this.documentContainer,
         this.editorDocument
       );
     this._editorDocument = editorDocument;
-  }
+  });
 
   @action
   handleRdfaEditorInit(controller) {

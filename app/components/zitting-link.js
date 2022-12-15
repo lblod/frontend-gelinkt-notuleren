@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
-import { restartableTask } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 
 export default class ZittingLinkComponent extends Component {
   constructor(...args) {
@@ -13,9 +13,8 @@ export default class ZittingLinkComponent extends Component {
 
   @tracked meeting;
 
-  @restartableTask
-  *getMeeting() {
-    const result = yield this.store.query('zitting', {
+  getMeeting = task({ restartable: true }, async () => {
+    const result = await this.store.query('zitting', {
       'filter[agendapunten][behandeling][document-container][:id:]':
         this.args.documentContainer.id,
       // Including the agendapunten relationship ensures the cache returns the proper response.
@@ -23,5 +22,5 @@ export default class ZittingLinkComponent extends Component {
       include: 'agendapunten',
     });
     this.meeting = result.firstObject;
-  }
+  });
 }

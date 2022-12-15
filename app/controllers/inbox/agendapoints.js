@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { restartableTask, timeout } from 'ember-concurrency';
+import { task, timeout } from 'ember-concurrency';
 
 export default class InboxDraftDecisionsController extends Controller {
   @tracked page = 0;
@@ -15,14 +15,13 @@ export default class InboxDraftDecisionsController extends Controller {
   @service router;
   sort = '-current-version.updated-on';
 
-  @restartableTask
-  *updateFilter(event) {
+  updateFilter = task({ restartable: true }, async (event) => {
     const input = event.target.value;
     this.searchValue = input;
-    yield timeout(this.debounceTime);
+    await timeout(this.debounceTime);
     this.filter = this.searchValue;
     this.page = 0;
-  }
+  });
 
   @action
   openNewDocument() {

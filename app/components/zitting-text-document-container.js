@@ -72,8 +72,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     }
   }
 
-  @task
-  *saveText() {
+  saveText = task(async () => {
     const zitting = this.args.zitting;
 
     if (this.type === 'ext:intro') {
@@ -81,8 +80,8 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     } else if (this.type === 'ext:outro') {
       zitting.outro = this.editor.htmlContent;
     }
-    yield zitting.save();
-  }
+    await zitting.save();
+  });
 
   @action
   rdfaEditorInit(editor) {
