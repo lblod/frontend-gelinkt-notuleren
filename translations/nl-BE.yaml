@@ -111,6 +111,7 @@ inbox:
       cancel: Terug
   regulatoryStatements:
     return: Terug naar overzicht reglementaire bijlagen
+    revisionsReturn: Terug naar actuele versie
     pageTitle: Reglementaire bijlagen
     searchPlaceholder: Zoek op titel van reglementaire bijlage
     noDataMessage: Geen reglementaire bijlagen
@@ -426,6 +427,10 @@ utils:
   fileOptions: Bestand acties
   htmlExport: Exporteer als HTML
   delete: Naar prullenmand
+  restore: Herstellen
+  currentVersion: Actuele versie
+  history: HISTORIEK
+  fullHistory: Volledige historiek bekijken
 
 validationModal:
   title: Geef uw document een naam

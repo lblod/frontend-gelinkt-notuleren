@@ -9,8 +9,10 @@ import { inject as service } from '@ember/service';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
+  @service store;
   @tracked editor;
   @tracked _editorDocument;
+  @tracked revisions;
 
   plugins = [
     'article-structure',
@@ -20,6 +22,19 @@ export default class RegulatoryStatementsRoute extends Controller {
     'import-snippet',
     'citaten-plugin',
   ];
+
+  @task
+  *fetchRevisions() {
+    const revisions = yield this.store.query('editor-document', {
+      'filter[document-container][id]': this.documentContainer.id,
+      sort: '-updated-on',
+      'page[size]': 5,
+    });
+    const revisionsWithoutCurrentVersion = revisions.filter(
+      (revision) => revision.id !== this.editorDocument.id
+    );
+    this.revisions = revisionsWithoutCurrentVersion;
+  }
 
   get dirty() {
     return this.editorDocument.content !== this.editor.htmlContent;
@@ -58,6 +73,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       const documentContainer = this.documentContainer;
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
+      this.fetchRevisions.perform();
     }
   }
 
