@@ -23,7 +23,6 @@ module.exports = function (defaults) {
     sassOptions: {
       sourceMap: !envIsProduction,
       sourceMapEmbed: !envIsProduction,
-      includePaths: ['node_modules/'],
     },
     autoprefixer: {
       enabled: true,
