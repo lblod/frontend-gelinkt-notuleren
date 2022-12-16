@@ -37,19 +37,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
     const currentVersion = this.model.currentVersion;
     const toRestore = this.model.editorDocument;
     const documentContainer = this.model.documentContainer;
-    //If it's published
-    let content;
-    const publishedVersion = (yield this.store.query(
-      'versioned-regulatory-statement',
-      {
-        'filter[regulatoryStatement][id]': currentVersion.id,
-      }
-    ))[0];
-    if (publishedVersion) {
-      content = replaceUris(toRestore.content);
-    } else {
-      content = toRestore.content;
-    }
+    let content = replaceUris(toRestore.content);
     yield this.documentService.createEditorDocument.perform(
       toRestore.title,
       content,
