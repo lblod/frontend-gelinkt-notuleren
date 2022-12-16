@@ -120,4 +120,17 @@ export default class DocumentService extends Service {
       })
     );
   }
+  @task
+  *fetchRevisions(documentContainerId, revisionsToSkip, pageSize, pageNumber) {
+    const revisions = yield this.store.query('editor-document', {
+      'filter[document-container][id]': documentContainerId,
+      sort: '-updated-on',
+      'page[size]': pageSize,
+      'page[number]': pageNumber,
+    });
+    const revisionsWithoutCurrentVersion = revisions.filter(
+      (revision) => !revisionsToSkip.includes(revision.id)
+    );
+    return revisionsWithoutCurrentVersion;
+  }
 }

@@ -1,0 +1,40 @@
+<div 
+  {{did-update (perform this.fetchRevisions)}}
+  {{did-insert (perform this.fetchRevisions)}}
+/>
+<AuModal
+  @modalTitle={{t "utils.history"}}
+  @modalOpen="true"
+  @closeModal={{this.goBack}}
+   as |Modal| >
+  <Modal.Body>
+    {{#if @isCurrentVersion}}
+      <p class="au-u-padding-small regulatory-statement-current-version-container-active">
+        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn}}</span>
+      </p>
+    {{else}}
+      <LinkTo @route="regulatory-statements.edit" @model={{@documentContainerId}} class="au-u-padding-small regulatory-statement-current-version-container">
+        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn}}</span>
+      </LinkTo>
+    {{/if}}
+    <AuHr />
+    <div class="au-u-margin-small au-u-flex--column au-u-flex">
+      {{#each this.revisions as |revision|}}
+        {{#if (eq revision.id @currentRevisionId)}}
+          <AuLink @route="regulatory-statements.revisions" @active="true" @skin="secondary" role="menuitem" @models={{array @documentContainerId revision.id}}>
+            {{human-friendly-date revision.updatedOn}}
+          </AuLink>
+        {{else}}
+          <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array @documentContainerId revision.id}}>
+            {{human-friendly-date revision.updatedOn}}
+          </AuLink>
+        {{/if}}
+      {{/each}}
+      {{#if this.hasMore}}
+        <AuButton @skin="link" {{on "click" (perform this.loadMore)}} >Load More</AuButton>
+      {{/if}}
+    </div>
+  </Modal.Body>
+</AuModal>

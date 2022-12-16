@@ -29,10 +29,10 @@
               {{human-friendly-date revision.updatedOn}}
             </AuLink>
           {{/each}}
-          <AuButton @skin="link" role="menuitem" >
+          <AuLink @route="regulatory-statements.edit.history" @model={{this.documentContainer.id}} @skin="link" role="menuitem" >
             <AuIcon @icon="clock" @alignment="left" />
             {{t 'utils.fullHistory'}}
-          </AuButton>
+          </AuLink>
         </div>
       </AuDropdown>
     </:actions-after-title>
@@ -63,3 +63,4 @@
   </AuBodyContainer>
   <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>
 </div>
+{{outlet}}
