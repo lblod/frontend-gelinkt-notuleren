@@ -10,11 +10,7 @@ const emberNodeConfig = {
   group: 'block',
   atom: true,
   attrs: {
-    resource: {
-      parse: (element) => {
-        return element.getAttribute('resource');
-      },
-    },
+    resource: {},
     title: { default: '' },
     content: { default: '' },
   },
@@ -34,6 +30,29 @@ const emberNodeConfig = {
       ['div', {}, ...html.body.childNodes],
     ];
   },
+  parseDOM: [
+    {
+      tag: 'div',
+      getAttrs(element) {
+        if (element.dataset['emberNode'] === 'regulatory-statement-view') {
+          return {
+            resource: element.getAttribute('resource'),
+          };
+        } else if (
+          element.dataset.inlineComponent ===
+            'editor-plugins/regulatory-statements/view' &&
+          element.dataset.props
+        ) {
+          // This is to ensure backwards compatibility
+          const propsParsed = JSON.parse(element.dataset.props);
+          return {
+            resource: propsParsed['uri'],
+          };
+        }
+        return false;
+      },
+    },
+  ],
 };
 
 export const regulatoryStatementNode = createEmberNodeSpec(emberNodeConfig);
