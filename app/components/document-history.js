@@ -42,7 +42,6 @@ export default class DocumentHistoryComponent extends Component {
       revisionsToSkip,
       this.pageSize
     );
-    console.log(this.revisions.length);
     // We add 1 because we are skipping the current version
     if (this.revisions.length + 1 < this.pageSize) {
       this.hasMore = false;

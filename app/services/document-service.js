@@ -124,6 +124,7 @@ export default class DocumentService extends Service {
   *fetchRevisions(documentContainerId, revisionsToSkip, pageSize, pageNumber) {
     const revisions = yield this.store.query('editor-document', {
       'filter[document-container][id]': documentContainerId,
+      include: 'status',
       sort: '-updated-on',
       'page[size]': pageSize,
       'page[number]': pageNumber,

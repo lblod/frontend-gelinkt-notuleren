@@ -25,10 +25,16 @@
         {{#if (eq revision.id @currentRevisionId)}}
           <AuLink @route="regulatory-statements.revisions" @active="true" @skin="secondary" role="menuitem" @models={{array @documentContainerId revision.id}}>
             {{human-friendly-date revision.updatedOn}}
+            {{#if revision.status.label}}
+              <AuPill @skin='success'>{{revision.status.label}}</AuPill>
+            {{/if}}
           </AuLink>
         {{else}}
           <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array @documentContainerId revision.id}}>
             {{human-friendly-date revision.updatedOn}}
+            {{#if revision.status.label}}
+              <AuPill @skin='success'>{{revision.status.label}}</AuPill>
+            {{/if}}
           </AuLink>
         {{/if}}
       {{/each}}

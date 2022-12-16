@@ -25,6 +25,9 @@
           {{#each this.revisions as |revision|}}
             <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array this.model.documentContainer.id revision.id}}>
               {{human-friendly-date revision.updatedOn}}
+              {{#if revision.status.label}}
+                <AuPill @skin='success'>{{revision.status.label}}</AuPill>
+              {{/if}}
             </AuLink>
           {{/each}}
           <AuLink @route="regulatory-statements.revisions.history" @skin="link" role="menuitem" >
