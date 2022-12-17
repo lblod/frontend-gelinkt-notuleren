@@ -45,6 +45,10 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/placeholder';
 
 import { besluitTypeWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin';
+import {
+  besluitPluginCardWidget,
+  besluitContextCardWidget,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-plugin';
 import { importSnippetWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/import-snippet-plugin';
 import {
   rdfaDateCardWidget,
@@ -118,6 +122,8 @@ export default class AgendapointsEditController extends Controller {
     return [
       tableMenu,
       besluitTypeWidget,
+      besluitContextCardWidget(),
+      besluitPluginCardWidget(),
       importSnippetWidget,
       rdfaDateCardWidget,
       rdfaDateInsertWidget,
