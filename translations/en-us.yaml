@@ -120,8 +120,12 @@ inbox:
     statusLabel: Status
     type: Type
     agendaPoint: Agendapoint
+    readOnlyBanner:
+      title: Not editable
+      message: This is an old version. Restore this version to make new edits.
     new:
       title: New regulatory statement
+      errorSaving: Something went wrong while creating the regulatory statement.
   irgArchive:
     return: Return to the archive
     pageTitle: IRG Archive
@@ -376,7 +380,7 @@ regulatoryStatementsPlugin:
   detachStatement: Detach
   loadMore: Load more
   alreadyAttached: Already attached
-  
+
 requiredField:
   required: Required
 
