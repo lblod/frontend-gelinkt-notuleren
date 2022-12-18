@@ -27,12 +27,15 @@
           {{#each this.revisions as |revision|}}
             <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array this.documentContainer.id revision.id}}>
               {{human-friendly-date revision.updatedOn}}
+              {{#if revision.status.label}}
+                <AuPill @skin='success'>{{revision.status.label}}</AuPill>
+              {{/if}}
             </AuLink>
           {{/each}}
-          <AuButton @skin="link" role="menuitem" >
+          <AuLink @route="regulatory-statements.edit.history" @model={{this.documentContainer.id}} @skin="link" role="menuitem" >
             <AuIcon @icon="clock" @alignment="left" />
             {{t 'utils.fullHistory'}}
-          </AuButton>
+          </AuLink>
         </div>
       </AuDropdown>
     </:actions-after-title>
@@ -63,3 +66,4 @@
   </AuBodyContainer>
   <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>
 </div>
+{{outlet}}

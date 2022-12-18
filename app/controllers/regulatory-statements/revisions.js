@@ -8,23 +8,23 @@ import { replaceUris } from '../../utils/replace-uris';
 
 export default class RegulatoryAttachmentsShowController extends Controller {
   @service currentSession;
+  @service documentService;
   @service router;
   @service store;
+  @service documentService;
   @tracked revisions;
 
   @task
   *fetchRevisions() {
-    const revisions = yield this.store.query('editor-document', {
-      'filter[document-container][id]': this.model.documentContainer.id,
-      sort: '-updated-on',
-      'page[size]': 5,
-    });
-    const revisionsWithoutCurrentVersion = revisions.filter(
-      (revision) =>
-        revision.id !== this.model.currentVersion.id &&
-        revision.id !== this.model.editorDocument.id
+    const revisionsToSkip = [
+      this.model.currentVersion.id,
+      this.model.editorDocument.id,
+    ];
+    this.revisions = yield this.documentService.fetchRevisions.perform(
+      this.model.documentContainer.id,
+      revisionsToSkip,
+      5
     );
-    this.revisions = revisionsWithoutCurrentVersion;
   }
 
   @action
@@ -37,32 +37,13 @@ export default class RegulatoryAttachmentsShowController extends Controller {
     const currentVersion = this.model.currentVersion;
     const toRestore = this.model.editorDocument;
     const documentContainer = this.model.documentContainer;
-    //If it's published
-    let content;
-    const publishedVersion = (yield this.store.query(
-      'versioned-regulatory-statement',
-      {
-        'filter[regulatoryStatement][id]': currentVersion.id,
-      }
-    ))[0];
-    if (publishedVersion) {
-      content = replaceUris(toRestore.content);
-    } else {
-      content = toRestore.content;
-    }
-    const newDocument = this.store.createRecord('editor-document', {
-      createdOn: new Date(),
-      updatedOn: new Date(),
-      content: content,
-      title: toRestore.title,
-      previousVersion: currentVersion,
+    let content = replaceUris(toRestore.content);
+    yield this.documentService.createEditorDocument.perform(
+      toRestore.title,
+      content,
       documentContainer,
-    });
-    yield newDocument.save();
-    currentVersion.nextVersion = newDocument;
-    yield currentVersion.save();
-    documentContainer.currentVersion = newDocument;
-    yield documentContainer.save();
+      currentVersion
+    );
     this.router.transitionTo(
       'regulatory-statements.edit',
       documentContainer.id
