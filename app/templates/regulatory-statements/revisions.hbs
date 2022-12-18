@@ -1,6 +1,6 @@
-<div 
-  {{did-update (perform this.fetchRevisions)}} 
-  {{did-insert (perform this.fetchRevisions)}} 
+<div
+  {{did-update (perform this.fetchRevisions)}}
+  {{did-insert (perform this.fetchRevisions)}}
 >
   <AppChrome
     @editorDocument={{this.model.editorDocument}}
@@ -8,42 +8,48 @@
     @documentStatus={{this.model.documentContainer.currentVersion.status}}
   >
     <:return-link>
-    <AuLink @route="regulatory-statements.edit" @model={{this.model.documentContainer.id}}>
-      <AuIcon @icon="arrow-left" @alignment="left" />
-      {{t 'inbox.regulatoryStatements.revisionsReturn'}}
-    </AuLink>
+      <AuLink @route="regulatory-statements.edit" @model={{this.model.documentContainer.id}}>
+        <AuIcon @icon="arrow-left" @alignment="left"/>
+        {{t 'inbox.regulatoryStatements.revisionsReturn'}}
+      </AuLink>
     </:return-link>
     <:actions-after-title>
-      <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn}} @buttonLabel={{human-friendly-date this.model.editorDocument.updatedOn}} @alignment="left">
-        <LinkTo @route="regulatory-statements.edit" @model={{this.model.documentContainer.id}} class="au-u-padding-small regulatory-statement-current-version-container">
+      <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn}} @buttonLabel={{human-friendly-date
+        this.model.editorDocument.updatedOn}} @alignment="left">
+        <LinkTo @route="regulatory-statements.edit" @model={{this.model.documentContainer.id}}
+                class="au-u-padding-small regulatory-statement-current-version-container">
           <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
           <span class="au-u-light">{{human-friendly-date this.model.currentVersion.updatedOn}}</span>
         </LinkTo>
-        <AuHr />
+        <AuHr/>
         <div class="au-u-margin-small au-u-flex--column au-u-flex">
           <p class="au-u-muted">{{t 'utils.history'}}: </p>
           {{#each this.revisions as |revision|}}
-            <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array this.model.documentContainer.id revision.id}}>
+            <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array
+              this.model.documentContainer.id revision.id}}>
               {{human-friendly-date revision.updatedOn}}
+              {{#if revision.status.label}}
+                <AuPill @skin='success'>{{revision.status.label}}</AuPill>
+              {{/if}}
             </AuLink>
           {{/each}}
-          <AuButton @skin="link" role="menuitem" >
-            <AuIcon @icon="clock" @alignment="left" />
+          <AuLink @route="regulatory-statements.revisions.history" @skin="link" role="menuitem">
+            <AuIcon @icon="clock" @alignment="left"/>
             {{t 'utils.fullHistory'}}
-          </AuButton>
+          </AuLink>
         </div>
       </AuDropdown>
     </:actions-after-title>
     <:actions>
-    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
-      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
-        <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.htmlExport"}}
+      <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+        <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+          <AuIcon @icon="export" @alignment="left"/>
+          {{t "utils.htmlExport"}}
+        </AuButton>
+      </AuDropdown>
+      <AuButton {{on "click" (perform this.restoreTask)}} @disabled={{this.restoreTask.isRunning}}>
+        {{t "utils.restore"}}
       </AuButton>
-    </AuDropdown>
-    <AuButton {{on "click" (perform this.restoreTask)}} @disabled={{this.restoreTask.isRunning}}>
-      {{t "utils.restore"}}
-    </AuButton>
     </:actions>
   </AppChrome>
 
@@ -53,8 +59,9 @@
         <div class="say-container__main">
           {{#unless this.readOnly}}
             <div class="au-o-box au-o-box--small au-u-background-gray-100">
-              <AuAlert @icon="info-circle" @title="Niet editeerbaar"  @skin="info" @size="small" class="au-u-margin-bottom-none">
-                <p>Dit reglement is reeds gepubliceerd. Gepubliceerde reglementaire bijlagen zijn niet editeerbaar.</p>
+              <AuAlert @icon="info-circle" @title={{t "inbox.regulatoryStatements.readOnlyBanner.title"}}  @skin="info"
+                       @size="small" class="au-u-margin-bottom-none">
+                <p>{{t "inbox.regulatoryStatements.readOnlyBanner.message"}}</p>
               </AuAlert>
             </div>
           {{/unless}}

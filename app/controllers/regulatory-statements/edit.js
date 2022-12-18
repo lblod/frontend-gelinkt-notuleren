@@ -25,15 +25,12 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   @task
   *fetchRevisions() {
-    const revisions = yield this.store.query('editor-document', {
-      'filter[document-container][id]': this.documentContainer.id,
-      sort: '-updated-on',
-      'page[size]': 5,
-    });
-    const revisionsWithoutCurrentVersion = revisions.filter(
-      (revision) => revision.id !== this.editorDocument.id
+    const revisionsToSkip = [this.editorDocument.id];
+    this.revisions = yield this.documentService.fetchRevisions.perform(
+      this.documentContainer.id,
+      revisionsToSkip,
+      5
     );
-    this.revisions = revisionsWithoutCurrentVersion;
   }
 
   get dirty() {
