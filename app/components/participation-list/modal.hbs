@@ -29,7 +29,7 @@
         <ParticipationList::MandatarissenTable @toggleParticipant={{this.toggleParticipant}}
                                                as |Table|>
           {{#each this.participants as |participant| }}
-            <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}} @disabled={{(eq participant.person this.chairman)}}/>
+            <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}} @disabled={{eq participant.person this.chairman}}/>
           {{else}}
             <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
           {{/each}}
