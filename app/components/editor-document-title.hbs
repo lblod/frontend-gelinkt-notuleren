@@ -1,5 +1,5 @@
 {{#if @readOnly}}
-  <h1 class="au-c-app-chrome__title">
+  <h1 class="au-c-app-chrome__title" title={{this.title}}>
     {{limit-content this.title 70}} 
   </h1>
 {{else}}
@@ -10,27 +10,15 @@
           <AuLabel for={{id}} class="au-u-hidden-visually">
             agendapunt titel
           </AuLabel>
-          {{#if this.error}}
             <input
-              class="au-c-app-chrome__title-input au-c-input--error "
-              placeholder="Naamloos document"
+              class="au-c-app-chrome__title-input {{if this.error "au-c-input--error"}}"
+              placeholder={{t "editorDocumentTitle.placeholder"}}
               id={{id}}
               type="text"
               value={{this.title}}
               {{on "input" this.setTitle}}
               {{did-insert this.focus}}
             />
-          {{else}}
-            <input
-              class="au-c-app-chrome__title-input"
-              placeholder="Naamloos document"
-              id={{id}}
-              type="text"
-              value={{this.title}}
-              {{on "input" this.setTitle}}
-              {{did-insert this.focus}}
-            />
-          {{/if}}
         {{/let}}
         <AuButton
           type="submit"
