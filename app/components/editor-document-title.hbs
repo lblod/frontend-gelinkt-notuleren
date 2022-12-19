@@ -30,7 +30,7 @@
       </div>
     </form>
   {{else}}
-    <h1 class="au-c-app-chrome__title au-c-app-chrome__title--edit">
+    <h1 class="au-c-app-chrome__title au-c-app-chrome__title--edit" title={{this.title}}>
       {{limit-content this.title 70}} 
       <AuButton {{on "click" this.toggleActive}} @icon="pencil" @skin="tertiary" @hideText={{true}} >titel wijzigen</AuButton>
     </h1>
