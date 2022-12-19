@@ -72,6 +72,7 @@ export default class ParticipationListModalComponent extends Component {
   @action
   selectChairman(value) {
     this.chairman = value;
+    this.participationMap.set(value, true);
   }
 
   @action

@@ -5,14 +5,6 @@
         as |Modal|>
   <Modal.Body>
     <div class="au-o-flow">
-      {{#if this.error}}
-        <AuAlert 
-          @title={{this.error}}
-          @skin="error"
-          @icon="cross"
-          @size="small"
-        />
-      {{/if}}
       <div>
         <AuLabel>
           {{t "participationListModal.voorzitterLabel"}}
@@ -37,13 +29,21 @@
         <ParticipationList::MandatarissenTable @toggleParticipant={{this.toggleParticipant}}
                                                as |Table|>
           {{#each this.participants as |participant| }}
-            <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}}/>
+            <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}} @disabled={{(eq participant.person this.chairman)}}/>
           {{else}}
             <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
           {{/each}}
         </ParticipationList::MandatarissenTable>
       </div>
     </div>
+    {{#if this.error}}
+      <AuAlert 
+        @title={{this.error}}
+        @skin="error"
+        @icon="cross"
+        @size="small"
+      />
+    {{/if}}
     {{yield}}
   </Modal.Body>
   <Modal.Footer>
