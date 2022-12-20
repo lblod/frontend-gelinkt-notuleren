@@ -5,7 +5,7 @@
   <AppChrome
     @editorDocument={{this.model.editorDocument}}
     @documentContainer={{this.model.documentContainer}}
-    @documentStatus={{this.model.documentContainer.currentVersion.status}}
+    @documentStatus={{this.model.editorDocument.status}}
   >
     <:return-link>
       <AuLink @route="regulatory-statements.edit" @model={{this.model.documentContainer.id}}>
@@ -63,7 +63,11 @@
             <div class="au-o-box au-o-box--small au-u-background-gray-100">
               <AuAlert @icon="info-circle" @title={{t "inbox.regulatoryStatements.readOnlyBanner.title"}}  @skin="info"
                        @size="small" class="au-u-margin-bottom-none">
-                <p>{{t "inbox.regulatoryStatements.readOnlyBanner.message"}}</p>
+                {{#if this.model.editorDocument.status}}
+                  <p>{{t "inbox.regulatoryStatements.readOnlyBanner.publishedMessage"}}</p>
+                {{else}}
+                  <p>{{t "inbox.regulatoryStatements.readOnlyBanner.message"}}</p>
+                {{/if}}
               </AuAlert>
             </div>
           {{/unless}}
