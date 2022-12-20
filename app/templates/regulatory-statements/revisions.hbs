@@ -47,9 +47,11 @@
           {{t "utils.htmlExport"}}
         </AuButton>
       </AuDropdown>
-      <AuButton {{on "click" (perform this.restoreTask)}} @disabled={{this.restoreTask.isRunning}}>
-        {{t "utils.restore"}}
-      </AuButton>
+      {{#if this.currentSession.canWrite}}
+        <AuButton {{on "click" (perform this.restoreTask)}} @disabled={{this.restoreTask.isRunning}}>
+          {{t "utils.restore"}}
+        </AuButton>
+      {{/if}}
     </:actions>
   </AppChrome>
 
