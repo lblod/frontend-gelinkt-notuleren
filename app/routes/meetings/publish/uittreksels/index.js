@@ -21,6 +21,7 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
     const query = {
       include: 'behandeling.versioned-behandeling',
       filter: { zitting: { ':id:': this.meetingId } },
+      sort: params.sort,
     };
 
     if (params.title && params.title.length > 0) {
