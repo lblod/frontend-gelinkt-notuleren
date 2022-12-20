@@ -72,7 +72,9 @@ Router.map(function () {
     this.route('edit', { path: '/:id/edit' }, function () {
       this.route('history');
     });
-    this.route('show', { path: ':id/show' });
+    this.route('show', { path: ':id/show' }, function () {
+      this.route('history');
+    });
     this.route(
       'revisions',
       { path: '/:container_id/revisions/:document_id' },
