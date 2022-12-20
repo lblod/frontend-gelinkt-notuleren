@@ -110,15 +110,21 @@ export default class AgendapointsEditController extends Controller {
     const parserInstance = new DOMParser();
     const parsedHtml = parserInstance.parseFromString(html, 'text/html');
     const body = parsedHtml.body.childNodes;
+    const besluitIdentifiers = {
+      prefix: 'besluit:Besluit',
+      uri: 'https://data.vlaanderen.be/id/concept/BesluitType/',
+    };
 
     for (const child of body) {
-      if (child.attributes?.typeof?.textContent.includes('besluit:Besluit')) {
+      const textContent = child.attributes?.typeof?.textContent;
+      const { prefix, uri } = besluitIdentifiers;
+      if (textContent?.includes(prefix) && textContent?.includes(uri)) {
         if (child.textContent.trim() === '') {
           child.remove();
         }
       }
     }
 
-    return parsedHtml.documentElement.lastChild.innerHTML;
+    return parsedHtml.body.innerHTML;
   }
 }
