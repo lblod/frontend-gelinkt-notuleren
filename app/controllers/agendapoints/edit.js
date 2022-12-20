@@ -93,14 +93,32 @@ export default class AgendapointsEditController extends Controller {
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
+      const cleanedHtml = this.removeEmptyDivs(html);
+
       const editorDocument =
         yield this.documentService.createEditorDocument.perform(
           this.editorDocument.title,
-          html,
+          cleanedHtml,
           this.documentContainer,
           this.editorDocument
         );
       this._editorDocument = editorDocument;
     }
+  }
+
+  removeEmptyDivs(html) {
+    const parserInstance = new DOMParser();
+    const parsedHtml = parserInstance.parseFromString(html, 'text/html');
+    const body = parsedHtml.body.childNodes;
+
+    for (const child of body) {
+      if (child.attributes?.typeof?.textContent.includes('besluit:Besluit')) {
+        if (child.textContent.trim() === '') {
+          child.remove();
+        }
+      }
+    }
+
+    return parsedHtml.documentElement.lastChild.innerHTML;
   }
 }
