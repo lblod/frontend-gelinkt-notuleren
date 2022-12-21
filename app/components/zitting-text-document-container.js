@@ -17,9 +17,11 @@ import {
   list_item,
   ordered_list,
   paragraph,
+  placeholder,
   repaired_block,
   text,
 } from '@lblod/ember-rdfa-editor/nodes';
+import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 
 import {
   em,
@@ -34,12 +36,6 @@ import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-
-import {
-  placeholder,
-  placeholderEditing,
-  placeholderView,
-} from '@lblod/ember-rdfa-editor/plugins/placeholder';
 
 import {
   rdfaDateCardWidget,
@@ -104,19 +100,16 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
         heading,
         blockquote,
-
         horizontal_rule,
         code_block,
-
         text,
-
         image,
-
         hard_break,
-        inline_rdfa,
+        invisible_rdfa,
         block_rdfa,
       },
       marks: {
+        inline_rdfa,
         link,
         em,
         strong,
@@ -127,7 +120,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get plugins() {
-    return [placeholderEditing(), tablePlugin];
+    return [tablePlugin];
   }
 
   get widgets() {
@@ -136,9 +129,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   get nodeViews() {
     return () => {
-      return {
-        placeholder: placeholderView,
-      };
+      return {};
     };
   }
 }

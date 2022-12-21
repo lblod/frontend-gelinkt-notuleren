@@ -22,8 +22,9 @@ import {
   paragraph,
   repaired_block,
   text,
+  placeholder,
 } from '@lblod/ember-rdfa-editor/nodes';
-
+import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 import {
   em,
   link,
@@ -31,12 +32,6 @@ import {
   strong,
   underline,
 } from '@lblod/ember-rdfa-editor/marks';
-
-import {
-  placeholderEditing,
-  placeholderView,
-  placeholder,
-} from '@lblod/ember-rdfa-editor/plugins/placeholder';
 import {
   tableMenu,
   tablePlugin,
@@ -70,6 +65,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           content: 'tableOfContents? block+',
         },
         paragraph,
+        tableOfContents,
         repaired_block,
         list_item,
         ordered_list,
@@ -83,12 +79,12 @@ export default class RegulatoryStatementsRoute extends Controller {
         text,
         image,
         hard_break,
-        inline_rdfa,
+        invisible_rdfa,
         block_rdfa,
-        tableOfContents,
       },
       marks: {
         citation: citation.marks.citation,
+        inline_rdfa,
         link,
         em,
         strong,
@@ -114,14 +110,13 @@ export default class RegulatoryStatementsRoute extends Controller {
   get nodeViews() {
     return (controller) => {
       return {
-        placeholder: placeholderView,
         tableOfContents: tableOfContentsView(controller),
       };
     };
   }
 
   get plugins() {
-    return [placeholderEditing(), tablePlugin, citation.plugin];
+    return [tablePlugin, citation.plugin];
   }
 
   get dirty() {

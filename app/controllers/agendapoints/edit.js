@@ -23,8 +23,9 @@ import {
   paragraph,
   repaired_block,
   text,
+  placeholder,
 } from '@lblod/ember-rdfa-editor/nodes';
-
+import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 import {
   em,
   link,
@@ -38,11 +39,6 @@ import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-import {
-  placeholder,
-  placeholderEditing,
-  placeholderView,
-} from '@lblod/ember-rdfa-editor/plugins/placeholder';
 
 import { besluitTypeWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin';
 import {
@@ -94,12 +90,13 @@ export default class AgendapointsEditController extends Controller {
         text,
         image,
         hard_break,
-        inline_rdfa,
         regulatoryStatementNode,
+        invisible_rdfa,
         block_rdfa,
       },
       marks: {
         citation: citation.marks.citation,
+        inline_rdfa,
         link,
         em,
         strong,
@@ -112,7 +109,6 @@ export default class AgendapointsEditController extends Controller {
   get nodeViews() {
     return (controller) => {
       return {
-        placeholder: placeholderView,
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
       };
     };
@@ -137,7 +133,7 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get plugins() {
-    return [placeholderEditing(), tablePlugin, citation.plugin];
+    return [tablePlugin, citation.plugin];
   }
 
   get dirty() {
