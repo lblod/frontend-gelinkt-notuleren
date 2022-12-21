@@ -3,6 +3,8 @@ import { action } from '@ember/object';
 import { localCopy } from 'tracked-toolbox';
 import { use } from 'ember-could-get-used-to-this';
 import ParticipationMap from '../../helpers/participant-map';
+import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
 /** @typedef {import("../../models/functionaris").default} Functionaris */
@@ -39,6 +41,8 @@ import ParticipationMap from '../../helpers/participant-map';
 export default class ParticipationListModalComponent extends Component {
   @localCopy('args.chairman') chairman;
   @localCopy('args.secretary') secretary;
+  @tracked error;
+  @service intl;
 
   /** @type {Map} */
   @use participationMap = new ParticipationMap(() => ({
@@ -68,6 +72,7 @@ export default class ParticipationListModalComponent extends Component {
   @action
   selectChairman(value) {
     this.chairman = value;
+    this.participationMap.set(value, true);
   }
 
   @action
@@ -80,6 +85,7 @@ export default class ParticipationListModalComponent extends Component {
    */
   @action
   insert() {
+    this.error = undefined;
     const { participants, absentees } = this.collectParticipantsAndAbsentees();
     const info = {
       chairman: this.chairman,
@@ -87,6 +93,10 @@ export default class ParticipationListModalComponent extends Component {
       participants,
       absentees,
     };
+    if (absentees.includes(this.chairman)) {
+      this.error = this.intl.t('participationListModal.chairmanAbsentError');
+      return;
+    }
     this.args.onSave(info);
     this.args.onCloseModal();
   }
