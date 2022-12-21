@@ -16,6 +16,11 @@
       {{t "utils.htmlExport"}}
     </AuButton>
   </AuDropdown>
+  {{#if this.currentSession.canWrite}}
+    <AuButton {{on "click" (perform this.createNewVersion)}} @disabled={{this.createNewVersion.isRunning}}>
+      {{t "utils.createNewVersion"}}
+    </AuButton>
+  {{/if}}
   </:actions>
 </AppChrome>
 

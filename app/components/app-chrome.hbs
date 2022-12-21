@@ -44,6 +44,7 @@
         @readOnly={{or @readOnly (not @allowTitleUpdate)}}
         @onSubmit={{@onTitleUpdate}}
       />
+      {{yield to="actions-after-title"}}
     </Group>
     <Group>
       {{yield to="actions"}}
