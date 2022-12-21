@@ -1,6 +1,6 @@
 {{#if @readOnly}}
-  <h1 class="au-c-app-chrome__title">
-    {{this.title}}
+  <h1 class="au-c-app-chrome__title" title={{this.title}}>
+    {{limit-content this.title 70}} 
   </h1>
 {{else}}
   {{#if this.active}}
@@ -10,15 +10,15 @@
           <AuLabel for={{id}} class="au-u-hidden-visually">
             agendapunt titel
           </AuLabel>
-          <input
-            class="au-c-app-chrome__title-input"
-            placeholder="Naamloos document"
-            id={{id}}
-            type="text"
-            value={{this.title}}
-            {{on "input" this.setTitle}}
-            {{did-insert this.focus}}
-          />
+            <input
+              class="au-c-app-chrome__title-input {{if this.error "au-c-input--error"}}"
+              placeholder={{t "editorDocumentTitle.placeholder"}}
+              id={{id}}
+              type="text"
+              value={{this.title}}
+              {{on "input" this.setTitle}}
+              {{did-insert this.focus}}
+            />
         {{/let}}
         <AuButton
           type="submit"
@@ -30,8 +30,9 @@
       </div>
     </form>
   {{else}}
-    <h1 class="au-c-app-chrome__title au-c-app-chrome__title--edit">
-      {{this.title}} <AuButton {{on "click" this.toggleActive}} @icon="pencil" @skin="tertiary" @hideText={{true}} >titel wijzigen</AuButton>
+    <h1 class="au-c-app-chrome__title au-c-app-chrome__title--edit" title={{this.title}}>
+      {{limit-content this.title 70}} 
+      <AuButton {{on "click" this.toggleActive}} @icon="pencil" @skin="tertiary" @hideText={{true}} >titel wijzigen</AuButton>
     </h1>
   {{/if}}
 

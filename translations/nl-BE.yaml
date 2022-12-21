@@ -68,6 +68,9 @@ documentCreator:
 editorStatusPill:
   defaultStatus: In voorbereiding
 
+editorDocumentTitle:
+  placeholder: Naamloos document
+
 inbox:
   menu:
     meetings: Zittingen

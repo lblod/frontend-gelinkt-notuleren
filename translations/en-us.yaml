@@ -68,6 +68,9 @@ documentCreator:
 editorStatusPill:
   defaultStatus: Concept
 
+editorDocumentTitle:
+  placeholder: Untitled document
+
 inbox:
   menu:
     meetings: Meetings
