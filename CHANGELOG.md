@@ -13,6 +13,18 @@
 
 
 
+
+## 2.36.2 (2022-12-21)
+
+#### :bug: Bug Fix
+* [#394](https://github.com/lblod/frontend-gelinkt-notuleren/pull/394) Pass sort to the backend on uittreksels publication table ([@lagartoverde](https://github.com/lagartoverde))
+* [#393](https://github.com/lblod/frontend-gelinkt-notuleren/pull/393) hotfix: remove empty decisions from document on save ([@usrtim](https://github.com/usrtim))
+
+#### Committers: 2
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@usrtim](https://github.com/usrtim)
+
+
 ## 2.36.1 (2022-12-07)
 #### :bug: Bug Fix
  * bump ember-rdfa-editor to 0.64.1, fixes issue with templates not showing in insert menu
