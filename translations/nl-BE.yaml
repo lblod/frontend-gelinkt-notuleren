@@ -68,6 +68,9 @@ documentCreator:
 editorStatusPill:
   defaultStatus: In voorbereiding
 
+editorDocumentTitle:
+  placeholder: Naamloos document
+
 inbox:
   menu:
     meetings: Zittingen
@@ -308,6 +311,7 @@ participationListModal:
   presentLabel: Aanwezige mandatarissen
   saveButton: Voeg aanwezigen in
   cancelButton: Annuleer
+  chairmanAbsentError: De voorzitter moet verplicht aanwezig zijn
 
 participationListModalSelector:
   loadingMessage: Aan het laden...
