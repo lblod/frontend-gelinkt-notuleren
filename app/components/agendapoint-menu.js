@@ -27,6 +27,9 @@ export default class AgendapointMenuComponent extends Component {
 
   revisionCountData = trackedFunction(this, async () => {
     const containerId = this.args.documentContainer.id;
+    // We use this little hack to ensure the function is running
+    // eslint-disable-next-line no-unused-vars
+    const editorDocument = this.args.editorDocument.id;
     //this has to be here https://github.com/ember-learn/guides-source/issues/1769
     await Promise.resolve();
     const revisionCountData = await this.store.query('editor-document', {
