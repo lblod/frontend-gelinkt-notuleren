@@ -16,12 +16,11 @@
     <:actions-after-title>
       <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn}} @buttonLabel={{human-friendly-date
         this.model.editorDocument.updatedOn}} @alignment="left">
-        <LinkTo @route="regulatory-statements.edit" @model={{this.model.documentContainer.id}}
-                class="au-u-padding-small regulatory-statement-current-version-container">
+        <p class="au-u-padding-small regulatory-statement-current-version-container-active">
           <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
-          <span class="au-u-light">{{human-friendly-date this.model.currentVersion.updatedOn}}</span>
-        </LinkTo>
-        <AuHr/>
+          <span class="au-u-light">{{human-friendly-date this.model.editorDocument.updatedOn}}</span>
+        </p>
+        <AuHr />
         <div class="au-u-margin-small au-u-flex--column au-u-flex">
           <p class="au-u-muted">{{t 'utils.history'}}: </p>
           {{#each this.revisions as |revision|}}
@@ -61,8 +60,8 @@
         <div class="say-container__main">
           {{#unless this.readOnly}}
             <div class="au-o-box au-o-box--small au-u-background-gray-100">
-              <AuAlert @icon="info-circle" @title="Niet editeerbaar"  @skin="info" @size="small" class="au-u-margin-bottom-none">
-                <p>Dit reglement is reeds gepubliceerd. Gepubliceerde reglementaire bijlagen zijn niet editeerbaar.</p>
+              <AuAlert @icon="info-circle" @title={{t "inbox.regulatoryStatements.readOnlyBanner.publishedMessageTitle"}}  @skin="info" @size="small" class="au-u-margin-bottom-none">
+                <p>{{t "inbox.regulatoryStatements.readOnlyBanner.publishedMessage"}}</p>
               </AuAlert>
             </div>
           {{/unless}}

@@ -123,7 +123,9 @@ inbox:
     readOnlyBanner:
       title: Not editable
       message: This is an old version. Restore this version to make new edits.
-      publishedMessage: This is an old published version. Restore this version to make new edits.
+      oldPublishedMessage: This is an old published version. Restore this version to make new edits.
+      publishedMessage: This regulatory statement have already been published. Published regulatory attachments are not editable.
+      publishedMessageTitle: Non editable
     new:
       title: New regulatory statement
       errorSaving: Something went wrong while creating the regulatory statement.
