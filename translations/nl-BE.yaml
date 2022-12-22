@@ -126,6 +126,9 @@ inbox:
     readOnlyBanner:
       title: Niet editeerbaar
       message: Dit is een oude versie. Herstel deze versie om nieuwe wijzigingen door te voeren.
+      oldPublishedMessage: Dit is een oude gepubliceerde versie. Herstel deze versie om nieuwe wijzigingen door te voeren.
+      publishedMessage: Dit reglement is reeds gepubliceerd. Gepubliceerde reglementaire bijlagen zijn niet editeerbaar.
+      publishedMessageTitle: Niet editeerbaar
     new:
       title: Nieuwe reglementaire bijlage
       errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage.
