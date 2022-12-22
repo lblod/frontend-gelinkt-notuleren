@@ -16,10 +16,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
 
   @task
   *fetchRevisions() {
-    const revisionsToSkip = [
-      this.model.currentVersion.id,
-      this.model.editorDocument.id,
-    ];
+    const revisionsToSkip = [this.model.currentVersion.id];
     this.revisions = yield this.documentService.fetchRevisions.perform(
       this.model.documentContainer.id,
       revisionsToSkip,
