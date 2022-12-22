@@ -16,15 +16,15 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
       selection.from,
       selection.to
     );
-    const besluitNode = [
+    const besluitRange = [
       ...limitedDatastore
         .match(null, 'a', 'besluit:Besluit')
         .asSubjectNodeMapping()
         .nodes(),
     ][0];
-    if (besluitNode) {
-      const { pos, node } = besluitNode;
-      return { from: pos + node.nodeSize - 1, to: pos + node.nodeSize - 1 };
+    if (besluitRange) {
+      const { to } = besluitRange;
+      return { from: to - 1, to: to - 1 };
     }
     return undefined;
   }
