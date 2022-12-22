@@ -1,43 +1,72 @@
 {{page-title "reglementaire bijlage"}}
-
-<AppChrome
-  @editorDocument={{this.editorDocument}}
-  @documentContainer={{this.documentContainer}}
-  @onTitleUpdate={{perform this.onTitleUpdate}}
-  @allowTitleUpdate={{true}}
+<div 
+  {{did-update (perform this.fetchRevisions)}} 
+  {{did-insert (perform this.fetchRevisions)}} 
 >
-  <:return-link>
-  <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
-      <AuIcon @icon="arrow-left" @alignment="left" />
-      {{t 'inbox.regulatoryStatements.return'}}
-    </AuLink>
-  </:return-link>
-  <:actions>
-    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
-      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
-        <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.htmlExport"}}
-      </AuButton>
-    </AuDropdown>
-    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>
-      {{t "utils.save"}}
-    </AuButton>
-  </:actions>
-</AppChrome>
-
-<AuBodyContainer vocab="http://data.vlaanderen.be/ns/besluit#"
-  prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# say:https://say.data.gift/ns/ dct: http://purl.org/dc/terms/ ext:http://mu.semte.ch/vocabularies/ext/">
-  <RdfaEditorContainer
-    @rdfaEditorInit={{this.handleRdfaEditorInit}}
-    @typeOfWrappingDiv="lblodgn:ReglementaireBijlage"
-    @showToggleRdfaAnnotations={{true}}
+  <AppChrome
     @editorDocument={{this.editorDocument}}
-    @busy={{or this.saveTask.isRunning}}
-    @busyText={{t "rdfaEditorContainer.saving"}}
-    @schema={{this.schema}}
-    @widgets={{this.widgets}}
-    @nodeViews={{this.nodeViews}}
-    @plugins={{this.plugins}}
-  />
-  />
-</AuBodyContainer>
+    @documentContainer={{this.documentContainer}}
+    @onTitleUpdate={{perform this.onTitleUpdate}}
+    @allowTitleUpdate={{true}}
+  >
+    <:return-link>
+    <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
+        <AuIcon @icon="arrow-left" @alignment="left" />
+        {{t 'inbox.regulatoryStatements.return'}}
+      </AuLink>
+    </:return-link>
+    <:actions-after-title>
+      <AuDropdown @title={{t 'utils.currentVersion'}} @buttonLabel={{t 'utils.currentVersion'}} @alignment="left">
+        <p class="au-u-padding-small regulatory-statement-current-version-container-active">
+          <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+          <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn}}</span>
+        </p>
+        <AuHr />
+        <div class="au-u-margin-small au-u-flex--column au-u-flex">
+          <p class="au-u-muted">{{t 'utils.history'}}</p>
+          {{#each this.revisions as |revision|}}
+            <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array this.documentContainer.id revision.id}}>
+              {{human-friendly-date revision.updatedOn}}
+              {{#if revision.status.label}}
+                <AuPill @skin='success'>{{revision.status.label}}</AuPill>
+              {{/if}}
+            </AuLink>
+          {{/each}}
+          <AuLink @route="regulatory-statements.edit.history" @model={{this.documentContainer.id}} @skin="link" role="menuitem" >
+            <AuIcon @icon="clock" @alignment="left" />
+            {{t 'utils.fullHistory'}}
+          </AuLink>
+        </div>
+      </AuDropdown>
+    </:actions-after-title>
+    <:actions>
+      <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+        <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
+          <AuIcon @icon="export" @alignment="left" />
+          {{t "utils.htmlExport"}}
+        </AuButton>
+      </AuDropdown>
+      <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>
+        {{t "utils.save"}}
+      </AuButton>
+    </:actions>
+  </AppChrome>
+
+  <AuBodyContainer vocab="http://data.vlaanderen.be/ns/besluit#"
+  prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# say:https://say.data.gift/ns/ dct: http://purl.org/dc/terms/ ext:http://mu.semte.ch/vocabularies/ext/">
+    <RdfaEditorContainer
+      @rdfaEditorInit={{this.handleRdfaEditorInit}}
+      @typeOfWrappingDiv="lblodgn:ReglementaireBijlage"
+      @showToggleRdfaAnnotations={{true}}
+      @editorDocument={{this.editorDocument}}
+      @busy={{or this.saveTask.isRunning}}
+      @busyText={{t "rdfaEditorContainer.saving"}}
+      @schema={{this.schema}}
+      @widgets={{this.widgets}}
+      @nodeViews={{this.nodeViews}}
+      @plugins={{this.plugins}}
+    />
+  </AuBodyContainer>
+  <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>
+</div>
+{{outlet}}

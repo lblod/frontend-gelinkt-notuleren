@@ -111,6 +111,7 @@ inbox:
       cancel: Terug
   regulatoryStatements:
     return: Terug naar overzicht reglementaire bijlagen
+    revisionsReturn: Terug naar actuele versie
     pageTitle: Reglementaire bijlagen
     searchPlaceholder: Zoek op titel van reglementaire bijlage
     noDataMessage: Geen reglementaire bijlagen
@@ -119,12 +120,16 @@ inbox:
     statusLabel: Status
     type: Type
     agendaPoint: Agendapunt
+    readOnlyBanner:
+      title: Niet editeerbaar
+      message: Dit is een oude versie. Herstel deze versie om nieuwe wijzigingen door te voeren.
     new:
       title: Nieuwe reglementaire bijlage
-      errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage
+      errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage.
   irgArchive:
     return: Terug naar overzicht IRG archief
     pageTitle: IRG Archief
+    pageSubTitle: Reglementen tot 3/11/2022
     searchPlaceholder: Zoek op titel van reglement
     titleLabel: Titel reglement
     typeLabel: Wegtype
@@ -425,6 +430,11 @@ utils:
   fileOptions: Bestand acties
   htmlExport: Exporteer als HTML
   delete: Naar prullenmand
+  restore: Herstellen
+  currentVersion: Actuele versie
+  history: HISTORIEK
+  fullHistory: Volledige historiek bekijken
+  createNewVersion: Nieuwe versie maken
 
 validationModal:
   title: Geef uw document een naam

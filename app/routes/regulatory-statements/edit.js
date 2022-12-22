@@ -22,9 +22,10 @@ export default class RegulatoryStatementsEditRoute extends Route {
       params.id,
       { include: 'status' }
     );
+    const currentVersion = await container.get('currentVersion');
     return RSVP.hash({
       documentContainer: container,
-      editorDocument: await container.get('currentVersion'),
+      editorDocument: currentVersion,
     });
   }
   setupController(controller, model) {

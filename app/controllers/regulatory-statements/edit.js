@@ -55,7 +55,10 @@ const citation = setupCitationPlugin();
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
+  @service store;
+  @tracked editor;
   @tracked _editorDocument;
+  @tracked revisions;
   editor;
 
   get schema() {
@@ -119,6 +122,16 @@ export default class RegulatoryStatementsRoute extends Controller {
     return [tablePlugin, citation.plugin];
   }
 
+  @task
+  *fetchRevisions() {
+    const revisionsToSkip = [this.editorDocument.id];
+    this.revisions = yield this.documentService.fetchRevisions.perform(
+      this.documentContainer.id,
+      revisionsToSkip,
+      5
+    );
+  }
+
   get dirty() {
     return this.editorDocument.content !== this.editor.htmlContent;
   }
@@ -156,6 +169,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       const documentContainer = this.documentContainer;
       documentContainer.currentVersion = editorDocument;
       yield documentContainer.save();
+      this.fetchRevisions.perform();
     }
   }
 

@@ -1,0 +1,9 @@
+{{#if (or (eq this.editorStatus "published") @readOnly)}}
+<AuLink @icon={{@icon}} @route="regulatory-statements.show" @model={{@documentContainer.id}}>
+  {{this.linkLabel}}
+</AuLink>
+{{else}}
+<AuLink @icon={{@icon}} @route="regulatory-statements.edit" @model={{@documentContainer.id}}>
+  {{this.linkLabel}}
+</AuLink>
+{{/if}}

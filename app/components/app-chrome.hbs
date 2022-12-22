@@ -30,7 +30,7 @@
     <Group>
       <div>
         {{#unless @editorDocument.isNew}}
-          <EditorStatusPill @status={{@documentContainer.status}} />
+          <EditorStatusPill @status={{this.documentStatus}} />
         {{/unless}}
         {{#if @editorDocument.isNew}}
           <AuPill @skin="warning">
@@ -44,6 +44,7 @@
         @readOnly={{or @readOnly (not @allowTitleUpdate)}}
         @onSubmit={{@onTitleUpdate}}
       />
+      {{yield to="actions-after-title"}}
     </Group>
     <Group>
       {{yield to="actions"}}

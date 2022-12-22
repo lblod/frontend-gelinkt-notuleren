@@ -4,9 +4,12 @@
   <table.menu as |menu|>
     <menu.general>
       <AuToolbar class="au-o-box" @size="large" as |Group|>
-        <Group>
+        <Group class="au-c-toolbar__group--vertical">
           <AuHeading @skin="2">
             {{t 'inbox.irgArchive.pageTitle'}}
+          </AuHeading>
+          <AuHeading @skin="5">
+            {{t 'inbox.irgArchive.pageSubTitle'}}
           </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center">
@@ -23,7 +26,7 @@
     </c.header>
     <c.body as |container|>
       <td>
-        <AuLink @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</AuLink> 
+        <AuLink @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</AuLink>
       </td>
       <td>
         {{container.currentVersion.type.label}}

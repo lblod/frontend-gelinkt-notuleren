@@ -111,6 +111,7 @@ inbox:
       cancel: Back
   regulatoryStatements:
     return: Return to the overview of regulatory statements
+    revisionsReturn: Return to the actual version
     pageTitle: Regulatory statements
     searchPlaceholder: Search on title of regulatory statement
     noDataMessage: No regulatory statements
@@ -119,11 +120,16 @@ inbox:
     statusLabel: Status
     type: Type
     agendaPoint: Agendapoint
+    readOnlyBanner:
+      title: Not editable
+      message: This is an old version. Restore this version to make new edits.
     new:
       title: New regulatory statement
+      errorSaving: Something went wrong while creating the regulatory statement.
   irgArchive:
     return: Return to the archive
     pageTitle: IRG Archive
+    pageSubTitle: Regulations up until 3/11/2022
     searchPlaceholder: Search on title of regulatory statement
     titleLabel: Title of regulatory statement
     typeLabel: Road type
@@ -374,7 +380,7 @@ regulatoryStatementsPlugin:
   detachStatement: Detach
   loadMore: Load more
   alreadyAttached: Already attached
-  
+
 requiredField:
   required: Required
 
@@ -423,6 +429,11 @@ utils:
   fileOptions: File options
   htmlExport: Export as HTML
   delete: Delete
+  restore: Restore
+  currentVersion: Current Version
+  history: History
+  fullHistory: See the full history
+  createNewVersion: Create new version
 
 validationModal:
   title: Name your document
