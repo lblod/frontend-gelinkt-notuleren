@@ -28,7 +28,7 @@
 
     <c.body as  |agendapoint|>
       <td>{{inc agendapoint.position}}</td>
-      <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{agendapoint.titel}}</AuLink></td>
+      <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{limit-content agendapoint.titel 70}}</AuLink></td>
       <td>
         <Signatures::PublicationStatus @versionedResource={{agendapoint.behandeling.versionedBehandeling}} />
       </td>
