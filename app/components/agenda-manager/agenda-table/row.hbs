@@ -4,7 +4,7 @@
       {{add @item.position 1}}
     </td>
     <td>
-      <p>{{@item.titel}}</p>
+      <p>{{limit-content @item.titel 40}}</p>
     </td>
     <td>
       {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
@@ -26,7 +26,7 @@
       </AuButton>
     </td>
     <td>
-      <p>{{@item.titel}}</p>
+      <p>{{limit-content @item.titel 40}}</p>
     </td>
     <td>
       {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")

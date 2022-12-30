@@ -1,7 +1,7 @@
 {{#if this.editable}}
   <div class="au-c-meeting-chrome-editable">
     <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
-      {{@behandeling.onderwerp.titel}}
+      {{limit-content @behandeling.onderwerp.titel 80}}
     </AuHeading>
 
     <div class="au-o-box au-o-box--small au-c-meeting-chrome-card au-u-margin-bottom-none">
@@ -22,7 +22,7 @@
   >
     <AuToolbar>
       <AuHeading id="behandeling-{{@behandeling.id}}" @level="3" @skin="4">
-        {{@behandeling.onderwerp.titel}}
+        {{limit-content @behandeling.onderwerp.titel 80}}
       </AuHeading>
       {{#if this.published}}
         <AuPill @skin="success">
