@@ -39,8 +39,8 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import {
   tableOfContentsView,
-  tableOfContents,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/ember-nodes/table-of-contents';
+  table_of_contents,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import { tableOfContentsWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin';
 import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-variable-plugin';
 import { setupCitationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
@@ -48,7 +48,12 @@ import {
   rdfaDateCardWidget,
   rdfaDateInsertWidget,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
+import {
+  articleStructureContextWidget,
+  articleStructureInsertWidget,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
 import { importSnippetWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/import-snippet-plugin';
+import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import { Schema } from '@lblod/ember-rdfa-editor';
 
 const citation = setupCitationPlugin();
@@ -65,16 +70,17 @@ export default class RegulatoryStatementsRoute extends Controller {
     return new Schema({
       nodes: {
         doc: {
-          content: 'tableOfContents? block+',
+          content: 'table_of_contents? block+',
         },
         paragraph,
-        tableOfContents,
+        table_of_contents,
         repaired_block,
         list_item,
         ordered_list,
         bullet_list,
         placeholder,
         ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        ...STRUCTURE_NODES,
         heading,
         blockquote,
         horizontal_rule,
@@ -106,6 +112,8 @@ export default class RegulatoryStatementsRoute extends Controller {
       importSnippetWidget,
       citation.widgets.citationCard,
       citation.widgets.citationInsert,
+      articleStructureContextWidget(),
+      articleStructureInsertWidget(),
       templateVariableWidget,
     ];
   }
@@ -113,7 +121,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   get nodeViews() {
     return (controller) => {
       return {
-        tableOfContents: tableOfContentsView(controller),
+        table_of_contents: tableOfContentsView(controller),
       };
     };
   }
