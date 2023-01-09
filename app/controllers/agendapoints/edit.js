@@ -118,8 +118,8 @@ export default class AgendapointsEditController extends Controller {
     return [
       tableMenu,
       besluitTypeWidget,
-      besluitContextCardWidget(),
-      besluitPluginCardWidget(),
+      besluitContextCardWidget,
+      besluitPluginCardWidget,
       importSnippetWidget,
       rdfaDateCardWidget,
       rdfaDateInsertWidget,
