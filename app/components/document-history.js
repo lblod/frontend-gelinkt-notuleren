@@ -7,6 +7,7 @@ import { action } from '@ember/object';
 export default class DocumentHistoryComponent extends Component {
   @service documentService;
   @service router;
+  @service currentSession;
   @tracked revisions;
   @tracked hasMore = true;
 

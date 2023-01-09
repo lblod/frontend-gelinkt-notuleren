@@ -214,14 +214,35 @@ export default class AgendapointsEditController extends Controller {
     } else {
       this.hasDocumentValidationErrors = false;
       const html = this.editor.htmlContent;
+      const cleanedHtml = this.removeEmptyDivs(html);
+
       const editorDocument =
         yield this.documentService.createEditorDocument.perform(
           this.editorDocument.title,
-          html,
+          cleanedHtml,
           this.documentContainer,
           this.editorDocument
         );
       this._editorDocument = editorDocument;
     }
+  }
+
+  removeEmptyDivs(html) {
+    const parserInstance = new DOMParser();
+    const parsedHtml = parserInstance.parseFromString(html, 'text/html');
+    const besluitIdentifiers = {
+      prefixed: 'besluit:Besluit',
+      full: 'http://data.vlaanderen.be/ns/besluit#Besluit',
+    };
+    const besluitDivs = parsedHtml.querySelectorAll(
+      `div[typeof~="${besluitIdentifiers.prefixed}"], div[typeof~="${besluitIdentifiers.full}"]`
+    );
+    besluitDivs.forEach((besluitDiv) => {
+      if (besluitDiv.textContent.trim() === '') {
+        besluitDiv.remove();
+      }
+    });
+
+    return parsedHtml.body.innerHTML;
   }
 }

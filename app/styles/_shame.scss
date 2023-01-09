@@ -682,3 +682,8 @@ div.table-of-contents {
   color: black; 
   text-decoration: none;
 }
+
+[data-inline-component="editor-plugins/regulatory-statements/view"] {
+  cursor: not-allowed;
+  user-select: none;
+}

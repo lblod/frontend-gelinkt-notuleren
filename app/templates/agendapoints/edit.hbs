@@ -8,7 +8,7 @@
     <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
   </:return-link>
   <:actions>
-    <AgendapointMenu @documentContainer={{this.documentContainer}} />
+    <AgendapointMenu @documentContainer={{this.documentContainer}} @editorDocument={{this.editorDocument}} />
       <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
       <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="copy" @alignment="left" />

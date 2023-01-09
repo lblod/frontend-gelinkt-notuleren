@@ -4,15 +4,27 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 import { replaceUris } from '../../utils/replace-uris';
+import { tracked } from '@glimmer/tracking';
 
 export default class RegulatoryAttachmentsShowController extends Controller {
   @service currentSession;
   @service documentService;
   @service router;
+  @tracked revisions;
 
   @action
   download() {
     generateExportFromEditorDocument(this.model.editorDocument);
+  }
+
+  @task
+  *fetchRevisions() {
+    const revisionsToSkip = [this.model.editorDocument.id];
+    this.revisions = yield this.documentService.fetchRevisions.perform(
+      this.model.documentContainer.id,
+      revisionsToSkip,
+      5
+    );
   }
 
   @task
