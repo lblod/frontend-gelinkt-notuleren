@@ -22,18 +22,17 @@
           <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn}}</span>
         </p>
         <AuHr />
-        <div class="au-u-margin-small au-u-flex--column au-u-flex">
-          <p class="au-u-muted">{{t 'utils.history'}}</p>
+        <div class="au-u-flex--column au-u-flex">
+          <p class="au-u-muted au-u-medium au-u-padding-tiny au-u-padding-left-small">{{t 'utils.history'}}</p>
           {{#each this.revisions as |revision|}}
-            <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array this.documentContainer.id revision.id}}>
+            <AuLink @route="regulatory-statements.revisions" @skin="secondary" @models={{array this.documentContainer.id revision.id}} class="au-u-padding-tiny  au-u-padding-left-small">
               {{human-friendly-date revision.updatedOn}}
               {{#if revision.status.label}}
                 <AuPill @skin='success'>{{revision.status.label}}</AuPill>
               {{/if}}
             </AuLink>
           {{/each}}
-          <AuLink @route="regulatory-statements.edit.history" @model={{this.documentContainer.id}} @skin="link" role="menuitem" >
-            <AuIcon @icon="clock" @alignment="left" />
+          <AuLink @route="regulatory-statements.edit.history" @model={{this.documentContainer.id}} @skin="link" role="menuitem" @icon="clock" class="au-u-padding-tiny au-u-padding-left-small">
             {{t 'utils.fullHistory'}}
           </AuLink>
         </div>

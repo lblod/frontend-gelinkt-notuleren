@@ -679,8 +679,7 @@ div.table-of-contents {
 
 .regulatory-statement-current-version-container {
   white-space: nowrap; 
-  color: black; 
-  text-decoration: none;
+  color: var(--au-gray-700);
 }
 
 [data-inline-component="editor-plugins/regulatory-statements/view"] {
