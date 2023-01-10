@@ -16,6 +16,15 @@
 
 
 
+
+## 2.37.2 (2023-01-10)
+
+#### :rocket: Enhancement
+* [#400](https://github.com/lblod/frontend-gelinkt-notuleren/pull/400) Add case insensitive sorting to all text-based/title columns ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## v2.36.3 (2023-01-10)
 
 #### :bug: Bug Fix
