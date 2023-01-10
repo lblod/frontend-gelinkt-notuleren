@@ -20,7 +20,7 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.titleLabel'}} />
+      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.titleLabel'}} />
       <AuDataTableThSortable @field="currentVersion.type.label" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.typeLabel'}} />
       <AuDataTableThSortable @field ="currentVersion.identifier" @currentSorting={{this.sort}} @label={{t 'inbox.irgArchive.identifierLabel'}} />
     </c.header>
