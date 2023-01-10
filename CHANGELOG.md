@@ -13,6 +13,60 @@
 
 
 
+
+
+
+## v2.36.3 (2023-01-10)
+
+#### :bug: Bug Fix
+* [#399](https://github.com/lblod/frontend-gelinkt-notuleren/pull/399) Hide empty voter divs in notulen preview ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
+## 2.37.0 (2023-01-04)
+
+#### :rocket: Enhancement
+* [#397](https://github.com/lblod/frontend-gelinkt-notuleren/pull/397) Feature/support long titles in meeting screen ([@lagartoverde](https://github.com/lagartoverde))
+* [#392](https://github.com/lblod/frontend-gelinkt-notuleren/pull/392) Feature/solve inconsistencies ([@lagartoverde](https://github.com/lagartoverde))
+* [#388](https://github.com/lblod/frontend-gelinkt-notuleren/pull/388) Don't allow participant list insertion if the chairman is not present ([@lagartoverde](https://github.com/lagartoverde))
+* [#386](https://github.com/lblod/frontend-gelinkt-notuleren/pull/386) Feature/create new rs versions ([@lagartoverde](https://github.com/lagartoverde))
+* [#385](https://github.com/lblod/frontend-gelinkt-notuleren/pull/385) Feature/restore old rs ([@lagartoverde](https://github.com/lagartoverde))
+* [#384](https://github.com/lblod/frontend-gelinkt-notuleren/pull/384) Feature/rs revisions ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#395](https://github.com/lblod/frontend-gelinkt-notuleren/pull/395) Solved revisions not updating until page reload ([@lagartoverde](https://github.com/lagartoverde))
+* [#394](https://github.com/lblod/frontend-gelinkt-notuleren/pull/394) Pass sort to the backend on uittreksels publication table ([@lagartoverde](https://github.com/lagartoverde))
+* [#393](https://github.com/lblod/frontend-gelinkt-notuleren/pull/393) hotfix: remove empty decisions from document on save ([@usrtim](https://github.com/usrtim))
+* [#390](https://github.com/lblod/frontend-gelinkt-notuleren/pull/390) Make title error visible and wrap when content is long ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :house: Internal
+* [#382](https://github.com/lblod/frontend-gelinkt-notuleren/pull/382) Bump @xmldom/xmldom from 0.8.3 to 0.8.6 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#381](https://github.com/lblod/frontend-gelinkt-notuleren/pull/381) Bump decode-uri-component from 0.2.0 to 0.2.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 2
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@usrtim](https://github.com/usrtim)
+
+## 2.36.3 (2023-01-10)
+
+#### :bug: Bug Fix
+* [#399](https://github.com/lblod/frontend-gelinkt-notuleren/pull/399) Hide empty voter divs in notulen preview ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
+## 2.36.2 (2022-12-21)
+
+#### :bug: Bug Fix
+* [#394](https://github.com/lblod/frontend-gelinkt-notuleren/pull/394) Pass sort to the backend on uittreksels publication table ([@lagartoverde](https://github.com/lagartoverde))
+* [#393](https://github.com/lblod/frontend-gelinkt-notuleren/pull/393) hotfix: remove empty decisions from document on save ([@usrtim](https://github.com/usrtim))
+
+#### Committers: 2
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@usrtim](https://github.com/usrtim)
+
+
 ## 2.36.1 (2022-12-07)
 #### :bug: Bug Fix
  * bump ember-rdfa-editor to 0.64.1, fixes issue with templates not showing in insert menu

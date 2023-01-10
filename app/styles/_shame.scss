@@ -687,3 +687,12 @@ div.table-of-contents {
   cursor: not-allowed;
   user-select: none;
 }
+
+div[typeof="besluit:Zitting"] {
+  div[property="besluit:heeftStemming"] {
+    div[property="besluit:heeftVoorstander"], div[property="besluit:heeftTegenstander"], div[property="besluit:heeftOnthouder"] {
+      display: none;
+    }
+  }
+}
+
