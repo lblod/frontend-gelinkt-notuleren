@@ -15,6 +15,15 @@
 
 
 
+
+## v2.36.3 (2023-01-10)
+
+#### :bug: Bug Fix
+* [#399](https://github.com/lblod/frontend-gelinkt-notuleren/pull/399) Hide empty voter divs in notulen preview ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 2.37.0 (2023-01-04)
 
 #### :rocket: Enhancement
