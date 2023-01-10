@@ -27,9 +27,9 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.titleLabel'}} />
+      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.titleLabel'}} />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.updatedOnLabel'}} />
-      <AuDataTableThSortable @field="status.label" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
+      <AuDataTableThSortable @field=":no-case:status.label" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.agendapoints.attachmentsLabel'}}</span></th>
     </c.header>

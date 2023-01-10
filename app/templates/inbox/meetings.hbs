@@ -24,9 +24,9 @@
   <table.content as |c|>
     <c.header>
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
-      <AuDataTableThSortable @field="bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.administrativeBody'}} />
+      <AuDataTableThSortable @field=":no-case:bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.administrativeBody'}} />
       <AuDataTableThSortable @field="geplandeStart" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.time'}} />
-      <AuDataTableThSortable @field="opLocatie" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.location'}} />
+      <AuDataTableThSortable @field=":no-case:opLocatie" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.location'}} />
     </c.header>
     <c.body as |meeting|>
       <td>

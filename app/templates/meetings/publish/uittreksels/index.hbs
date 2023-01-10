@@ -21,7 +21,7 @@
   <table.content as |c|>
     <c.header>
       <AuDataTableThSortable @field="position" @currentSorting={{this.sort}} @label={{t 'publish.position'}} />
-      <AuDataTableThSortable @field="titel" @currentSorting={{this.sort}} @label={{t 'publish.agendapoint'}} />
+      <AuDataTableThSortable @field=":no-case:titel" @currentSorting={{this.sort}} @label={{t 'publish.agendapoint'}} />
       <AuDataTableThSortable @field="behandeling.documentContainer.status" @currentSorting={{this.sort}} @label={{t 'publish.statusLabel'}} />
       <th></th>
     </c.header>

@@ -43,7 +43,7 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
         size: this.pageSize,
         number: this.page,
       },
-      sort: 'current-version.title',
+      sort: ':no-case:current-version.title',
     });
     this.regulatoryStatements.push(...regulatoryStatements.toArray());
     if (regulatoryStatements.meta.count <= this.regulatoryStatements.length) {
