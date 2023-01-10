@@ -27,7 +27,7 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
       include: 'current-version,status',
       'filter[status][:id:]': DRAFT_STATUS_ID,
       'filter[folder][:id:]': FOLDER_ID,
-      sort: 'current-version.title',
+      sort: ':no-case:current-version.title',
     };
     if (searchParams.length > 1) {
       query['filter[current-version][title]'] = searchParams;

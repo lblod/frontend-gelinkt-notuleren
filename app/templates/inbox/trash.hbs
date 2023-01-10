@@ -41,7 +41,7 @@
    </table.menu>
    <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{this.sort}} @label="Titel" />
+      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label="Titel" />
       <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{this.sort}} @label="Aangemaakt" />
       <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label="Aangepast" />
     </c.header>
