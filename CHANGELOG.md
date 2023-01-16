@@ -17,6 +17,15 @@
 
 
 
+
+## 2.37.3 (2023-01-12)
+
+#### :rocket: Enhancement
+* [#398](https://github.com/lblod/frontend-gelinkt-notuleren/pull/398) Bugfix/rs scrolling issue ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 2.37.2 (2023-01-10)
 
 #### :rocket: Enhancement
