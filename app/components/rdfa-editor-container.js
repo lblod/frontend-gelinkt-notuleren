@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import applyDevTools from 'prosemirror-dev-tools';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
@@ -84,6 +85,9 @@ export default class RdfaEditorContainerComponent extends Component {
 
   @action
   rdfaEditorInit(editor) {
+    if (this.features.isEnabled('prosemirror-dev-tools')) {
+      applyDevTools(editor.view);
+    }
     if (this.args.rdfaEditorInit) {
       this.args.rdfaEditorInit(editor);
     }
