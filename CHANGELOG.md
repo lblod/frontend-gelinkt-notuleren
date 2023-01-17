@@ -15,6 +15,33 @@
 
 
 
+
+
+
+## 2.37.3 (2023-01-12)
+
+#### :rocket: Enhancement
+* [#398](https://github.com/lblod/frontend-gelinkt-notuleren/pull/398) Bugfix/rs scrolling issue ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 2.37.2 (2023-01-10)
+
+#### :rocket: Enhancement
+* [#400](https://github.com/lblod/frontend-gelinkt-notuleren/pull/400) Add case insensitive sorting to all text-based/title columns ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
+## v2.36.3 (2023-01-10)
+
+#### :bug: Bug Fix
+* [#399](https://github.com/lblod/frontend-gelinkt-notuleren/pull/399) Hide empty voter divs in notulen preview ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 2.37.0 (2023-01-04)
 
 #### :rocket: Enhancement
@@ -39,6 +66,13 @@
 - Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
 - [@usrtim](https://github.com/usrtim)
 
+## 2.36.3 (2023-01-10)
+
+#### :bug: Bug Fix
+* [#399](https://github.com/lblod/frontend-gelinkt-notuleren/pull/399) Hide empty voter divs in notulen preview ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
 
 ## 2.36.2 (2022-12-21)
 
