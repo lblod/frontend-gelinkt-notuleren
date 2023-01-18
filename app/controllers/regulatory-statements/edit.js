@@ -73,7 +73,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           content: 'table_of_contents? block+',
         },
         paragraph,
-        table_of_contents,
+        table_of_contents: table_of_contents(PLUGIN_CONFIGS.TABLE_OF_CONTENTS),
         repaired_block,
         list_item,
         ordered_list,
@@ -106,7 +106,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   get widgets() {
     return [
       tableMenu,
-      tableOfContentsWidget(PLUGIN_CONFIGS.TABLE_OF_CONTENTS),
+      tableOfContentsWidget,
       rdfaDateCardWidget,
       rdfaDateInsertWidget,
       importSnippetWidget,
@@ -121,7 +121,9 @@ export default class RegulatoryStatementsRoute extends Controller {
   get nodeViews() {
     return (controller) => {
       return {
-        table_of_contents: tableOfContentsView(controller),
+        table_of_contents: tableOfContentsView(
+          PLUGIN_CONFIGS.TABLE_OF_CONTENTS
+        )(controller),
       };
     };
   }
