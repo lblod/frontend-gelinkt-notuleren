@@ -125,7 +125,7 @@ inbox:
   irgArchive:
     return: Terug naar overzicht IRG archief
     pageTitle: IRG Archief
-    pageSubTitle: Reglementen tot 3/11/2022
+    pageSubTitle: Reglementen tot 18/01/2023
     searchPlaceholder: Zoek op titel van reglement
     titleLabel: Titel reglement
     typeLabel: Wegtype
