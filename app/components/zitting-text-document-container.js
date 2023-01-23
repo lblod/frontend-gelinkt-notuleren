@@ -43,6 +43,7 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
 import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
 import { inject as service } from '@ember/service';
+import { PLUGIN_CONFIGS } from '../config/constants';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
@@ -133,7 +134,11 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get widgets() {
-    return [tableMenu, rdfaDateCardWidget, rdfaDateInsertWidget];
+    return [
+      tableMenu,
+      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
+      rdfaDateInsertWidget,
+    ];
   }
 
   get nodeViews() {

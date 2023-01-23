@@ -71,6 +71,7 @@ import {
   articleStructureContextWidget,
   articleStructureInsertWidget,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
+import { PLUGIN_CONFIGS } from '../../config/constants';
 
 const citation = setupCitationPlugin({
   type: 'nodes',
@@ -146,7 +147,7 @@ export default class AgendapointsEditController extends Controller {
       tableMenu,
       besluitTypeWidget,
       importSnippetWidget,
-      rdfaDateCardWidget(),
+      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
       rdfaDateInsertWidget,
       standardTemplateWidget,
       citation.widgets.citationCard,
