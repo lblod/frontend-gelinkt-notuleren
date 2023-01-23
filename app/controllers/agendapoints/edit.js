@@ -41,18 +41,18 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/table';
 
 import { besluitTypeWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin';
-import {
-  besluitPluginCardWidget,
-  besluitContextCardWidget,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-plugin';
 import { importSnippetWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/import-snippet-plugin';
 import {
   rdfaDateCardWidget,
   rdfaDateInsertWidget,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
-import { standardTemplateWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+import {
+  besluitNodes,
+  standardTemplateWidget,
+  structureSpecs,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 import { roadSignRegulationWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin';
-import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-variable-plugin';
+import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin';
 
 import { setupCitationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 
@@ -61,7 +61,23 @@ import {
   regulatoryStatementNodeView,
   regulatoryStatementWidget,
 } from '../../editor-plugins/regulatory-statements-plugin';
-const citation = setupCitationPlugin();
+import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
+import {
+  variable,
+  variableView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
+import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+import {
+  articleStructureContextWidget,
+  articleStructureInsertWidget,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
+
+const citation = setupCitationPlugin({
+  type: 'nodes',
+  activeInNodeTypes(schema) {
+    return new Set([schema.nodes.motivering]);
+  },
+});
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -71,6 +87,7 @@ export default class AgendapointsEditController extends Controller {
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
   @tracked editor;
+  @service intl;
 
   get schema() {
     return new Schema({
@@ -83,6 +100,15 @@ export default class AgendapointsEditController extends Controller {
         bullet_list,
         placeholder,
         ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        date: date({
+          placeholder: {
+            insertDate: this.intl.t('date-plugin.insert.date'),
+            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+          },
+        }),
+        variable,
+        ...besluitNodes,
+        roadsign_regulation,
         heading,
         blockquote,
         horizontal_rule,
@@ -109,6 +135,7 @@ export default class AgendapointsEditController extends Controller {
   get nodeViews() {
     return (controller) => {
       return {
+        variable: variableView(controller),
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
       };
     };
@@ -118,10 +145,8 @@ export default class AgendapointsEditController extends Controller {
     return [
       tableMenu,
       besluitTypeWidget,
-      besluitContextCardWidget,
-      besluitPluginCardWidget,
       importSnippetWidget,
-      rdfaDateCardWidget,
+      rdfaDateCardWidget(),
       rdfaDateInsertWidget,
       standardTemplateWidget,
       citation.widgets.citationCard,
@@ -129,6 +154,8 @@ export default class AgendapointsEditController extends Controller {
       roadSignRegulationWidget,
       templateVariableWidget,
       regulatoryStatementWidget,
+      articleStructureInsertWidget(structureSpecs),
+      articleStructureContextWidget(structureSpecs),
     ];
   }
 

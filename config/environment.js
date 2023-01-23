@@ -97,7 +97,7 @@ module.exports = function (environment) {
     ENV.templateVariablePlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
     ENV.regulatoryStatementEndpoint =
-      'https://dev.reglementairebijlagen.lblod.info/sparql';
+      'https://dev.reglementairebijlagen.lblod.info/raw-sparql';
     ENV.regulatoryStatementFileEndpoint =
       'https://dev.reglementairebijlagen.lblod.info/files';
     // ENV.APP.LOG_RESOLVER = true;

@@ -42,7 +42,7 @@ import {
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import { tableOfContentsWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin';
-import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-variable-plugin';
+import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin';
 import { setupCitationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
   rdfaDateCardWidget,
@@ -54,6 +54,11 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
 import { importSnippetWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/import-snippet-plugin';
 import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
+import {
+  variable,
+  variableView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
+import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
 import { Schema } from '@lblod/ember-rdfa-editor';
 
 const citation = setupCitationPlugin();
@@ -64,13 +69,14 @@ export default class RegulatoryStatementsRoute extends Controller {
   @tracked editor;
   @tracked _editorDocument;
   @tracked revisions;
+  @service intl;
   editor;
 
   get schema() {
     return new Schema({
       nodes: {
         doc: {
-          content: 'table_of_contents? block+',
+          content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
         },
         paragraph,
         table_of_contents: table_of_contents(PLUGIN_CONFIGS.TABLE_OF_CONTENTS),
@@ -80,6 +86,13 @@ export default class RegulatoryStatementsRoute extends Controller {
         bullet_list,
         placeholder,
         ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        date: date({
+          placeholder: {
+            insertDate: this.intl.t('date-plugin.insert.date'),
+            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+          },
+        }),
+        variable,
         ...STRUCTURE_NODES,
         heading,
         blockquote,
@@ -107,7 +120,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     return [
       tableMenu,
       tableOfContentsWidget,
-      rdfaDateCardWidget,
+      rdfaDateCardWidget(),
       rdfaDateInsertWidget,
       importSnippetWidget,
       citation.widgets.citationCard,
@@ -121,6 +134,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   get nodeViews() {
     return (controller) => {
       return {
+        variable: variableView(controller),
         table_of_contents: tableOfContentsView(
           PLUGIN_CONFIGS.TABLE_OF_CONTENTS
         )(controller),
