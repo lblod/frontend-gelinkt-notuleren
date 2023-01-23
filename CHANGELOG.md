@@ -15,6 +15,15 @@
 
 
 
+
+## 2.36.4 (2023-01-23)
+
+#### :rocket: Enhancement
+* [#406](https://github.com/lblod/frontend-gelinkt-notuleren/pull/406) Update irg-archive date to 18-01-2023 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 2.36.3 (2023-01-10)
 
 #### :bug: Bug Fix
