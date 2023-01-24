@@ -41,8 +41,12 @@ import {
   rdfaDateCardWidget,
   rdfaDateInsertWidget,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
+import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
+import { inject as service } from '@ember/service';
+import { PLUGIN_CONFIGS } from '../config/constants';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
+  @service intl;
   profile = 'none';
   editor;
   type = this.args.type;
@@ -98,6 +102,12 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         bullet_list,
         placeholder,
         ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        date: date({
+          placeholder: {
+            insertDate: this.intl.t('date-plugin.insert.date'),
+            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+          },
+        }),
         heading,
         blockquote,
         horizontal_rule,
@@ -124,7 +134,11 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get widgets() {
-    return [tableMenu, rdfaDateCardWidget, rdfaDateInsertWidget];
+    return [
+      tableMenu,
+      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
+      rdfaDateInsertWidget,
+    ];
   }
 
   get nodeViews() {

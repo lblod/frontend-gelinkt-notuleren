@@ -83,15 +83,15 @@
           </div>
           <div class="au-c-modal__footer">
             <AuToolbar>
-              <AuToolbarGroup>
+              <AuToolbar::Group>
                 <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatoryStatementsPlugin.cancel"}}</AuButton>
-              </AuToolbarGroup>
-              <AuToolbarGroup>
+              </AuToolbar::Group>
+              <AuToolbar::Group>
                 <AuButton @disabled={{or (not this.selectedStatement) (this.isInserted this.selectedStatement)}} {{on "click" (fn @insertStatement
                   this.selectedStatement)}}>
                   {{t "regulatoryStatementsPlugin.insertStatement"}}
                 </AuButton>
-              </AuToolbarGroup>
+              </AuToolbar::Group>
             </AuToolbar>
           </div>
         </AuBodyContainer>

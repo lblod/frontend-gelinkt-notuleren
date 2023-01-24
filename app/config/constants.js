@@ -14,4 +14,23 @@ export const PLUGIN_CONFIGS = {
       ],
     },
   ],
+  date: (intl) => {
+    return {
+      formats: [
+        {
+          label: intl.t('dateFormat.shortDate'),
+          key: 'short',
+          dateFormat: 'dd/MM/yy',
+          dateTimeFormat: 'dd/MM/yy HH:mm',
+        },
+        {
+          label: intl.t('dateFormat.longDate'),
+          key: 'long',
+          dateFormat: 'EEEE dd MMMM yyyy',
+          dateTimeFormat: 'EEEE dd MMMM yyyy at HH:mm',
+        },
+      ],
+      allowCustomFormat: true,
+    };
+  },
 };

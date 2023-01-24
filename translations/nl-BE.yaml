@@ -49,6 +49,10 @@ blockchainStatus:
   encryptingLabel: Bezig met versleutelen
   encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
 
+dateFormat:
+  shortDate: Korte datum
+  longDate: Lange datum
+
 dateTimePicker:
   date: Datum
   hours: Uur
