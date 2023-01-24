@@ -139,7 +139,7 @@ inbox:
   irgArchive:
     return: Return to the archive
     pageTitle: IRG Archive
-    pageSubTitle: Regulations up until 3/11/2022
+    pageSubTitle: Regulations up until 18/01/2023
     searchPlaceholder: Search on title of regulatory statement
     titleLabel: Title of regulatory statement
     typeLabel: Road type
