@@ -4,8 +4,7 @@
   @documentStatus={{this.model.editorDocument.status}}
 >
   <:return-link>
-    <AuLink @route={{if (or this.model.currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}} @model={{this.model.documentContainer.id}}>
-      <AuIcon @icon="arrow-left" @alignment="left"/>
+    <AuLink @route={{if (or this.model.currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}} @model={{this.model.documentContainer.id}} @icon="arrow-left">
       {{t 'inbox.regulatoryStatements.revisionsReturn'}}
     </AuLink>
   </:return-link>
@@ -14,14 +13,14 @@
       this.model.editorDocument.updatedOn}} @alignment="left">
       <LinkTo @route="{{if (or this.model.currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}}" @model={{this.model.documentContainer.id}}
               class="au-u-padding-small regulatory-statement-current-version-container">
-        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
         <span class="au-u-light">{{human-friendly-date this.model.currentVersion.updatedOn}}</span>
       </LinkTo>
       <AuHr/>
-      <div class="au-u-margin-small au-u-flex--column au-u-flex">
-        <p class="au-u-muted">{{t 'utils.history'}}: </p>
+      <div class="au-u-flex--column au-u-flex">
+        <p class="au-u-muted au-u-medium au-u-padding-tiny au-u-padding-left-small">{{t 'utils.history'}}: </p>
         {{#each this.revisions as |revision|}}
-          <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array
+          <AuLink @route="regulatory-statements.revisions" @skin="secondary" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem" @models={{array
             this.model.documentContainer.id revision.id}}>
             {{human-friendly-date revision.updatedOn}}
             {{#if revision.status.label}}
@@ -29,8 +28,7 @@
             {{/if}}
           </AuLink>
         {{/each}}
-        <AuLink @route="regulatory-statements.revisions.history" @skin="link" role="menuitem">
-          <AuIcon @icon="clock" @alignment="left"/>
+        <AuLink @route="regulatory-statements.revisions.history" @skin="link" @icon="clock" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem">
           {{t 'utils.fullHistory'}}
         </AuLink>
       </div>
@@ -51,7 +49,7 @@
   </:actions>
 </AppChrome>
 
-<div 
+<div
   class="au-c-body-container"
   {{did-update (perform this.fetchRevisions)}}
   {{did-insert (perform this.fetchRevisions)}}
