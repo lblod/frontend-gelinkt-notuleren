@@ -19,6 +19,15 @@
 
 
 
+
+## 3.0.1 (2023-01-25)
+
+#### :house: Internal
+* [#407](https://github.com/lblod/frontend-gelinkt-notuleren/pull/407) Update editor-plugins to 1.0.0 beta 6 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 3.0.0 (2023-01-25)
 
 #### :rocket: Enhancement
