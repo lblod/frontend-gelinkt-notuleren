@@ -7,53 +7,56 @@ export default class ReadOnlyContentSectionComponent extends Component {
   @service store;
   @tracked documentContainer;
 
-  @action
-  didInsert() {
-    this.retrieveRegulatoryStatement();
+  @tracked regulatoryStatementContainer;
+
+  @tracked currentVersion;
+
+  get controller() {
+    return this.args.controller;
   }
 
-  async retrieveRegulatoryStatement() {
-    const regulatoryStatementContainer = (
+  @action
+  async didInsert() {
+    this.regulatoryStatementContainer = (
       await this.store.query('document-container', {
-        'filter[:uri:]': this.uri,
+        'filter[:uri:]': this.resource,
         include: 'current-version',
       })
     ).firstObject;
-    this.documentContainer = regulatoryStatementContainer;
-    const currentVersion = await regulatoryStatementContainer.currentVersion;
-    this.componentController.setProperty('title', currentVersion.title);
-    this.componentController.setProperty('updatedOn', currentVersion.updatedOn);
-    this.componentController.setProperty(
-      'content',
-      currentVersion.htmlSafeContent
-    );
-  }
+    this.currentVersion = await this.regulatoryStatementContainer
+      .currentVersion;
 
-  get componentController() {
-    return this.args.componentController;
-  }
-
-  get editorController() {
-    return this.args.editorController;
+    this.args.updateAttribute('title', this.currentVersion.title);
+    this.args.updateAttribute('content', this.currentVersion.htmlSafeContent);
   }
 
   get content() {
-    return this.componentController.getProperty('content');
+    return this.args.node.attrs.content;
+  }
+
+  get resource() {
+    return this.args.node.attrs['resource'];
+  }
+
+  get title() {
+    return this.args.node.attrs['title'];
   }
 
   get updatedOn() {
-    return this.componentController.getProperty('updatedOn');
+    return this.currentVersion?.updatedOn;
   }
 
-  get uri() {
-    return this.componentController.getProperty('uri');
+  get url() {
+    return `/regulatory-statements/${this.regulatoryStatementContainer?.id}/edit`;
   }
 
   @action
   detach() {
-    this.editorController.executeCommand(
-      'remove-component',
-      this.componentController.model
-    );
+    this.controller.withTransaction((tr) => {
+      return tr.delete(
+        this.args.getPos(),
+        this.args.getPos() + this.args.node.nodeSize
+      );
+    });
   }
 }

@@ -49,6 +49,10 @@ blockchainStatus:
   encryptingLabel: Encrypting
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
 
+dateFormat:
+  shortDate: Short date
+  longDate: Long date
+
 dateTimePicker:
   date: Date
   hours: Hour

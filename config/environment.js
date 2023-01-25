@@ -52,6 +52,7 @@ module.exports = function (environment) {
     featureFlags: {
       'editor-html-paste': true,
       'editor-extended-html-paste': true,
+      'prosemirror-dev-tools': false,
       'regulatory-statements': '{{GN_FEATURE_REGULATORY_STATEMENTS}}',
     },
     browserUpdate: {
@@ -90,12 +91,13 @@ module.exports = function (environment) {
     ENV.manual.publisher = '#gebruikersbeheer';
     ENV.manual.print = '';
     ENV.featureFlags['regulatory-statements'] = true;
+    ENV.featureFlags['prosemirror-dev-tools'] = true;
     ENV.roadsignRegulationPlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
     ENV.templateVariablePlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
     ENV.regulatoryStatementEndpoint =
-      'https://dev.reglementairebijlagen.lblod.info/sparql';
+      'https://dev.reglementairebijlagen.lblod.info/raw-sparql';
     ENV.regulatoryStatementFileEndpoint =
       'https://dev.reglementairebijlagen.lblod.info/files';
     // ENV.APP.LOG_RESOLVER = true;

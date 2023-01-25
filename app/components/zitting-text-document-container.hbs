@@ -6,6 +6,8 @@
            @busyText={{t "rdfaEditorContainer.saving"}}
            @prefix={{hash ext="http://mu.semte.ch/vocabularies/ext/"}}
            @property={{@type}}
-           @plugins={{array 'rdfa-date'}}
-
+           @schema={{this.schema}}
+           @plugins={{this.plugins}}
+           @widgets={{this.widgets}}
+           @nodeViews={{this.nodeViews}}
 />

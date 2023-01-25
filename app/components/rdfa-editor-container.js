@@ -2,30 +2,26 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
+import applyDevTools from 'prosemirror-dev-tools';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
   @tracked editor;
 
-  _plugins = [
-    'besluit-type',
-    'standard-template',
-    'besluit',
-    'roadsign-regulation',
-    'template-variable',
-    'rdfa-date',
-    'import-snippet',
-    'citaten-plugin',
-  ];
-
   get plugins() {
-    if (Array.isArray(this.args.plugins)) {
-      return this.args.plugins;
-    } else if (this.features.isEnabled('regulatoryStatements')) {
-      return this._plugins.concat(['regulatory-statements']);
-    } else {
-      return this._plugins;
-    }
+    return this.args.plugins || [];
+  }
+
+  get widgets() {
+    return this.args.widgets || [];
+  }
+
+  get schema() {
+    return this.args.schema;
+  }
+
+  get nodeViews() {
+    return this.args.nodeViews;
   }
 
   get editorOptions() {
@@ -89,6 +85,9 @@ export default class RdfaEditorContainerComponent extends Component {
 
   @action
   rdfaEditorInit(editor) {
+    if (this.features.isEnabled('prosemirror-dev-tools')) {
+      applyDevTools(editor.view);
+    }
     if (this.args.rdfaEditorInit) {
       this.args.rdfaEditorInit(editor);
     }
