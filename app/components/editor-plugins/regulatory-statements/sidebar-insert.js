@@ -1,3 +1,4 @@
+import { findParentNodeOfType } from '@curvenote/prosemirror-utils';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
@@ -11,20 +12,13 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
 
   get insertRange() {
     const selection = this.controller.state.selection;
-    const limitedDatastore = this.controller.datastore.limitToRange(
-      this.controller.state,
-      selection.from,
-      selection.to
+    const besluit = findParentNodeOfType(this.controller.schema.nodes.besluit)(
+      selection
     );
-    const besluitRange = [
-      ...limitedDatastore
-        .match(null, 'a', 'besluit:Besluit')
-        .asSubjectNodeMapping()
-        .nodes(),
-    ][0];
-    if (besluitRange) {
-      const { to } = besluitRange;
-      return { from: to - 1, to: to - 1 };
+    if (besluit) {
+      const { node, start } = besluit;
+      const endOfDecision = start + node.nodeSize - 2;
+      return { from: endOfDecision, to: endOfDecision };
     }
     return undefined;
   }

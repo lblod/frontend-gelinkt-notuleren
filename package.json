@@ -124,6 +124,7 @@
     "node": "16.16.0"
   },
   "dependencies": {
+    "@curvenote/prosemirror-utils": "^1.0.5",
     "ember-resources": "^5.4.0"
   }
 }
