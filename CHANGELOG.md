@@ -30,14 +30,10 @@
 
 #### :rocket: Enhancement
 * [#400](https://github.com/lblod/frontend-gelinkt-notuleren/pull/400) Add case insensitive sorting to all text-based/title columns ([@elpoelma](https://github.com/elpoelma))
+## 2.36.4 (2023-01-23)
 
-#### Committers: 1
-- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
-
-## v2.36.3 (2023-01-10)
-
-#### :bug: Bug Fix
-* [#399](https://github.com/lblod/frontend-gelinkt-notuleren/pull/399) Hide empty voter divs in notulen preview ([@elpoelma](https://github.com/elpoelma))
+#### :rocket: Enhancement
+* [#406](https://github.com/lblod/frontend-gelinkt-notuleren/pull/406) Update irg-archive date to 18-01-2023 ([@elpoelma](https://github.com/elpoelma))
 
 #### Committers: 1
 - Elena Poelman ([@elpoelma](https://github.com/elpoelma))
