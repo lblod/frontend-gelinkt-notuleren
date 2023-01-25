@@ -49,6 +49,10 @@ blockchainStatus:
   encryptingLabel: Encrypting
   encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
 
+dateFormat:
+  shortDate: Short date
+  longDate: Long date
+
 dateTimePicker:
   date: Date
   hours: Hour
@@ -135,7 +139,7 @@ inbox:
   irgArchive:
     return: Return to the archive
     pageTitle: IRG Archive
-    pageSubTitle: Regulations up until 3/11/2022
+    pageSubTitle: Regulations up until 18/01/2023
     searchPlaceholder: Search on title of regulatory statement
     titleLabel: Title of regulatory statement
     typeLabel: Road type

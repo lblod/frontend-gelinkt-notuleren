@@ -33,7 +33,9 @@
 
 // PLUGINS
 @import "ember-rdfa-editor";
-@import "ember-rdfa-editor-citaten-plugin";
+@import "citaten-plugin";
+@import "date-plugin";
+@import "variable-plugin";
 @import "project/p-annotations"; // @TODO: refactor in ember-rdfa-editor
 
 

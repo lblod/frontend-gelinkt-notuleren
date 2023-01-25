@@ -1,12 +1,52 @@
 import Component from '@glimmer/component';
 import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
+import { Schema } from '@lblod/ember-rdfa-editor';
+
+import {
+  doc,
+  block_rdfa,
+  blockquote,
+  bullet_list,
+  code_block,
+  hard_break,
+  heading,
+  horizontal_rule,
+  image,
+  inline_rdfa,
+  list_item,
+  ordered_list,
+  paragraph,
+  placeholder,
+  repaired_block,
+  text,
+} from '@lblod/ember-rdfa-editor/nodes';
+import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+
+import {
+  em,
+  link,
+  strikethrough,
+  strong,
+  underline,
+} from '@lblod/ember-rdfa-editor/marks';
+
+import {
+  tableMenu,
+  tableNodes,
+  tablePlugin,
+} from '@lblod/ember-rdfa-editor/plugins/table';
+
+import {
+  rdfaDateCardWidget,
+  rdfaDateInsertWidget,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
+import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
+import { inject as service } from '@ember/service';
+import { PLUGIN_CONFIGS } from '../config/constants';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
-  constructor(...args) {
-    super(...args);
-  }
-
+  @service intl;
   profile = 'none';
   editor;
   type = this.args.type;
@@ -49,5 +89,61 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     editor.setHtmlContent(this.text);
     this.editor = editor;
     this.args.onEditorInit(editor);
+  }
+
+  get schema() {
+    return new Schema({
+      nodes: {
+        doc,
+        paragraph,
+        repaired_block,
+        list_item,
+        ordered_list,
+        bullet_list,
+        placeholder,
+        ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        date: date({
+          placeholder: {
+            insertDate: this.intl.t('date-plugin.insert.date'),
+            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+          },
+        }),
+        heading,
+        blockquote,
+        horizontal_rule,
+        code_block,
+        text,
+        image,
+        hard_break,
+        invisible_rdfa,
+        block_rdfa,
+      },
+      marks: {
+        inline_rdfa,
+        link,
+        em,
+        strong,
+        underline,
+        strikethrough,
+      },
+    });
+  }
+
+  get plugins() {
+    return [tablePlugin];
+  }
+
+  get widgets() {
+    return [
+      tableMenu,
+      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
+      rdfaDateInsertWidget,
+    ];
+  }
+
+  get nodeViews() {
+    return () => {
+      return {};
+    };
   }
 }

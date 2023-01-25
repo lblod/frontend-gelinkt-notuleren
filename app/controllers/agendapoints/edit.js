@@ -5,6 +5,81 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
+import { Schema } from '@lblod/ember-rdfa-editor';
+
+import {
+  block_rdfa,
+  blockquote,
+  bullet_list,
+  code_block,
+  doc,
+  hard_break,
+  heading,
+  horizontal_rule,
+  image,
+  inline_rdfa,
+  list_item,
+  ordered_list,
+  paragraph,
+  placeholder,
+  repaired_block,
+  text,
+} from '@lblod/ember-rdfa-editor/nodes';
+import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+import {
+  em,
+  link,
+  strikethrough,
+  strong,
+  underline,
+} from '@lblod/ember-rdfa-editor/marks';
+
+import {
+  tableMenu,
+  tableNodes,
+  tablePlugin,
+} from '@lblod/ember-rdfa-editor/plugins/table';
+
+import { besluitTypeWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin';
+import { importSnippetWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/import-snippet-plugin';
+import {
+  rdfaDateCardWidget,
+  rdfaDateInsertWidget,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
+import {
+  besluitNodes,
+  standardTemplateWidget,
+  structureSpecs,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+import { roadSignRegulationWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin';
+import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin';
+
+import { setupCitationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+
+import {
+  regulatoryStatementNode,
+  regulatoryStatementNodeView,
+  regulatoryStatementWidget,
+} from '../../editor-plugins/regulatory-statements-plugin';
+import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
+import {
+  variable,
+  variableView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
+import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+import {
+  articleStructureContextWidget,
+  articleStructureInsertWidget,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
+import { besluitPluginCardWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-plugin';
+import { PLUGIN_CONFIGS } from '../../config/constants';
+
+const citation = setupCitationPlugin({
+  type: 'nodes',
+  activeInNodeTypes(schema) {
+    return new Set([schema.nodes.motivering]);
+  },
+});
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -14,6 +89,82 @@ export default class AgendapointsEditController extends Controller {
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
   @tracked editor;
+  @service intl;
+
+  get schema() {
+    return new Schema({
+      nodes: {
+        doc,
+        paragraph,
+        repaired_block,
+        list_item,
+        ordered_list,
+        bullet_list,
+        placeholder,
+        ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        date: date({
+          placeholder: {
+            insertDate: this.intl.t('date-plugin.insert.date'),
+            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+          },
+        }),
+        variable,
+        ...besluitNodes,
+        roadsign_regulation,
+        heading,
+        blockquote,
+        horizontal_rule,
+        code_block,
+        text,
+        image,
+        hard_break,
+        regulatoryStatementNode,
+        invisible_rdfa,
+        block_rdfa,
+      },
+      marks: {
+        citation: citation.marks.citation,
+        inline_rdfa,
+        link,
+        em,
+        strong,
+        underline,
+        strikethrough,
+      },
+    });
+  }
+
+  get nodeViews() {
+    return (controller) => {
+      return {
+        variable: variableView(controller),
+        regulatoryStatementNode: regulatoryStatementNodeView(controller),
+      };
+    };
+  }
+
+  get widgets() {
+    return [
+      besluitPluginCardWidget,
+      tableMenu,
+      besluitTypeWidget,
+      importSnippetWidget,
+      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
+      rdfaDateInsertWidget,
+      standardTemplateWidget,
+      citation.widgets.citationCard,
+      citation.widgets.citationInsert,
+      roadSignRegulationWidget,
+      templateVariableWidget,
+      regulatoryStatementWidget,
+      articleStructureInsertWidget(structureSpecs),
+      articleStructureContextWidget(structureSpecs),
+    ];
+  }
+
+  get plugins() {
+    return [tablePlugin, citation.plugin];
+  }
 
   get dirty() {
     return this.editorDocument.content !== this.editor.htmlContent;

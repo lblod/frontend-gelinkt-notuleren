@@ -8,14 +8,29 @@ export const EDITOR_FOLDERS = {
 export const PLUGIN_CONFIGS = {
   TABLE_OF_CONTENTS: [
     {
-      sectionPredicate: 'https://say.data.gift/ns/hasPart',
-      value: {
-        predicate: 'https://say.data.gift/ns/heading',
-      },
-    },
-    {
-      sectionPredicate: 'https://say.data.gift/ns/hasParagraph',
-      value: '§',
+      nodeHierarchy: [
+        'title|chapter|section|subsection|article',
+        'structure_header|article_header',
+      ],
     },
   ],
+  date: (intl) => {
+    return {
+      formats: [
+        {
+          label: intl.t('dateFormat.shortDate'),
+          key: 'short',
+          dateFormat: 'dd/MM/yy',
+          dateTimeFormat: 'dd/MM/yy HH:mm',
+        },
+        {
+          label: intl.t('dateFormat.longDate'),
+          key: 'long',
+          dateFormat: 'EEEE dd MMMM yyyy',
+          dateTimeFormat: 'EEEE dd MMMM yyyy at HH:mm',
+        },
+      ],
+      allowCustomFormat: true,
+    };
+  },
 };

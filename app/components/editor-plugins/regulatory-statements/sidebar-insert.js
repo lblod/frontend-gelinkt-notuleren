@@ -1,32 +1,30 @@
+import { findParentNodeOfType } from '@curvenote/prosemirror-utils';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class RegulatoryStatementsSidebarInsertComponent extends Component {
-  @tracked isDisabled = false;
   @tracked modalEnabled = false;
-  @tracked besluit;
 
-  constructor() {
-    super(...arguments);
-    this.args.controller.onEvent('selectionChanged', this.update.bind(this));
-    this.update();
+  get controller() {
+    return this.args.controller;
   }
 
-  update() {
-    const selectedRange = this.args.controller.selection.lastRange;
-    if (!selectedRange) {
-      return;
-    }
-    const limitedDatastore = this.args.controller.datastore.limitToRange(
-      selectedRange,
-      'rangeIsInside'
+  get insertRange() {
+    const selection = this.controller.state.selection;
+    const besluit = findParentNodeOfType(this.controller.schema.nodes.besluit)(
+      selection
     );
-    this.besluit = limitedDatastore
-      .match(null, 'a', `besluit:Besluit`)
-      .asSubjectNodes()
-      .next().value;
-    this.isDisabled = !this.besluit;
+    if (besluit) {
+      const { node, start } = besluit;
+      const endOfDecision = start + node.nodeSize - 2;
+      return { from: endOfDecision, to: endOfDecision };
+    }
+    return undefined;
+  }
+
+  get isDisabled() {
+    return !this.insertRange;
   }
 
   @action
@@ -37,21 +35,17 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
   @action
   insertRegulatoryStatement(statement) {
     this.modalEnabled = false;
-    if (this.besluit) {
-      const besluitNode = [...this.besluit.nodes][0];
-      const range = this.args.controller.rangeFactory.fromInNode(
-        besluitNode,
-        besluitNode.getMaxOffset()
-      );
-      this.args.controller.executeCommand(
-        'insert-component',
-        'editor-plugins/regulatory-statements/view',
-        {
-          uri: statement.uri,
-        },
-        true,
-        range
-      );
+    if (this.insertRange) {
+      const { schema } = this.controller;
+      this.controller.withTransaction((tr) => {
+        return tr.replaceRangeWith(
+          this.insertRange.from,
+          this.insertRange.to,
+          schema.node('regulatoryStatementNode', {
+            resource: statement.uri,
+          })
+        );
+      });
     }
   }
 }

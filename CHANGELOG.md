@@ -18,6 +18,38 @@
 
 
 
+
+
+## 3.0.1 (2023-01-25)
+
+#### :house: Internal
+* [#407](https://github.com/lblod/frontend-gelinkt-notuleren/pull/407) Update editor-plugins to 1.0.0 beta 6 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
+## 3.0.0 (2023-01-25)
+
+#### :rocket: Enhancement
+* [#389](https://github.com/lblod/frontend-gelinkt-notuleren/pull/389) Integration of new prosemirror-based editor ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
+
+## v2.36.4 (2023-01-23)
+
+#### :rocket: Enhancement
+* [#406](https://github.com/lblod/frontend-gelinkt-notuleren/pull/406) Update irg-archive date to 18-01-2023 ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#404](https://github.com/lblod/frontend-gelinkt-notuleren/pull/404) Bump editor to 1.0.0-beta.2 and editor-plugins to 1.0.0-beta.1 ([@elpoelma](https://github.com/elpoelma))
+* [#403](https://github.com/lblod/frontend-gelinkt-notuleren/pull/403) Update ember appuniversum to 2.2.0 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
+
 ## 2.37.3 (2023-01-12)
 
 #### :rocket: Enhancement
@@ -30,14 +62,10 @@
 
 #### :rocket: Enhancement
 * [#400](https://github.com/lblod/frontend-gelinkt-notuleren/pull/400) Add case insensitive sorting to all text-based/title columns ([@elpoelma](https://github.com/elpoelma))
+## 2.36.4 (2023-01-23)
 
-#### Committers: 1
-- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
-
-## v2.36.3 (2023-01-10)
-
-#### :bug: Bug Fix
-* [#399](https://github.com/lblod/frontend-gelinkt-notuleren/pull/399) Hide empty voter divs in notulen preview ([@elpoelma](https://github.com/elpoelma))
+#### :rocket: Enhancement
+* [#406](https://github.com/lblod/frontend-gelinkt-notuleren/pull/406) Update irg-archive date to 18-01-2023 ([@elpoelma](https://github.com/elpoelma))
 
 #### Committers: 1
 - Elena Poelman ([@elpoelma](https://github.com/elpoelma))
