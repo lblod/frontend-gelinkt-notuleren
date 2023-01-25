@@ -8,11 +8,11 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 import { Schema } from '@lblod/ember-rdfa-editor';
 
 import {
-  doc,
   block_rdfa,
   blockquote,
   bullet_list,
   code_block,
+  doc,
   hard_break,
   heading,
   horizontal_rule,
@@ -21,9 +21,9 @@ import {
   list_item,
   ordered_list,
   paragraph,
+  placeholder,
   repaired_block,
   text,
-  placeholder,
 } from '@lblod/ember-rdfa-editor/nodes';
 import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 import {
@@ -71,6 +71,7 @@ import {
   articleStructureContextWidget,
   articleStructureInsertWidget,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
+import { besluitPluginCardWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-plugin';
 import { PLUGIN_CONFIGS } from '../../config/constants';
 
 const citation = setupCitationPlugin({
@@ -144,6 +145,7 @@ export default class AgendapointsEditController extends Controller {
 
   get widgets() {
     return [
+      besluitPluginCardWidget,
       tableMenu,
       besluitTypeWidget,
       importSnippetWidget,
