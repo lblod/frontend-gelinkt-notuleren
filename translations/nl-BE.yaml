@@ -136,6 +136,9 @@ inbox:
     new:
       title: Nieuwe reglementaire bijlage
       errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage.
+    linkedAgendapoints:
+      title: Agendapunten die {title} bevatten
+      noData: Geen agendapunten gevonden
   irgArchive:
     return: Terug naar overzicht IRG archief
     pageTitle: IRG Archief

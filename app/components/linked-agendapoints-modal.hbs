@@ -1,0 +1,33 @@
+<AuModal @modalOpen={{@show}} @closeModal={{@onClose}}
+  @title={{t "inbox.regulatoryStatements.linkedAgendapoints.title" title=@document.currentVersion.title}}>
+  {{!-- <Modal.Body> --}}
+    <AuDataTable @content={{this.agendapoints.records}} @isLoading={{this.agendapoints.isLoading}}
+      @noDataMessage={{t "inbox.regulatoryStatements.linkedAgendapoints.noData"}} @sort={{this.sort}} @page={{this.page}} @size={{this.pageSize}} as
+      |table|>
+      <table.content as |c|>
+        <c.header>
+          <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}}
+            @label={{t 'inbox.agendapoints.titleLabel' }} />
+          <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}}
+            @label={{t 'inbox.agendapoints.updatedOnLabel' }} />
+          <AuDataTableThSortable @field=":no-case:status.label" @currentSorting={{this.sort}}
+            @label={{t 'inbox.agendapoints.statusLabel' }} />
+        </c.header>
+        <c.body as |container|>
+          {{#let container.currentVersion as |row|}}
+          <td>
+            <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}} />
+          </td>
+          <td>
+            {{human-friendly-date row.updatedOn}}
+            <br>
+          </td>
+          <td>
+            <EditorStatusPill @status={{container.status}} />
+          </td>
+          {{/let}}
+        </c.body>
+      </table.content>
+    </AuDataTable>
+  {{!-- </Modal.Body> --}}
+</AuModal>

@@ -136,6 +136,9 @@ inbox:
     new:
       title: New regulatory statement
       errorSaving: Something went wrong while creating the regulatory statement.
+    linkedAgendapoints:
+      title: Agendapoints linked to {title}
+      noData: No agendapoints found
   irgArchive:
     return: Return to the archive
     pageTitle: IRG Archive

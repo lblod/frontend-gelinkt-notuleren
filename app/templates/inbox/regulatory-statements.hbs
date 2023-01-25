@@ -43,6 +43,7 @@
         'inbox.regulatoryStatements.updatedOnLabel'}} />
       <AuDataTableThSortable @field=":no-case:currentVersion.status.label" @currentSorting={{this.sort}} @label={{t
         'inbox.regulatoryStatements.statusLabel'}} />
+      <th/>
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
@@ -56,8 +57,17 @@
         <td>
           <EditorStatusPill @status={{container.currentVersion.status}} />
         </td>
+        <td>
+          <AuButton {{on "click" (fn this.showLinkedAgendapoints container)}} @skin="link">Gelinkte agendapunten
+          </AuButton>
+        </td>
       {{/let}}
     </c.body>
   </table.content>
 </AuDataTable>
 {{outlet}}
+<LinkedAgendapointsModal 
+  @document={{this.selectedDocument}} 
+  @show={{this.showLinkedAgendapointsModal}} 
+  @onClose={{this.closeLinkedAgendapointsModal}}
+/>
