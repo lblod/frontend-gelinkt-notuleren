@@ -20,6 +20,27 @@
 
 
 
+
+## 3.1.0 (2023-01-26)
+
+#### :rocket: Enhancement
+* [#410](https://github.com/lblod/frontend-gelinkt-notuleren/pull/410) Support for displaying which agendapoints are linked to a regulatory statement ([@elpoelma](https://github.com/elpoelma))
+* [#402](https://github.com/lblod/frontend-gelinkt-notuleren/pull/402) Add new statuses for the regulatory statements ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#412](https://github.com/lblod/frontend-gelinkt-notuleren/pull/412) Fix i18n of human readable dates ([@elpoelma](https://github.com/elpoelma))
+* [#409](https://github.com/lblod/frontend-gelinkt-notuleren/pull/409) Enable table keymap and allow block content in table cells ([@elpoelma](https://github.com/elpoelma))
+* [#411](https://github.com/lblod/frontend-gelinkt-notuleren/pull/411) Add besluit-plugin stylesheet ([@elpoelma](https://github.com/elpoelma))
+* [#408](https://github.com/lblod/frontend-gelinkt-notuleren/pull/408) Increase priority of regulatory statement node in schema ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#413](https://github.com/lblod/frontend-gelinkt-notuleren/pull/413) Update editor to 1.0.0 and plugins to 1.0.0-beta.8 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 2
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 3.0.1 (2023-01-25)
 
 #### :house: Internal
