@@ -1,6 +1,8 @@
 import Component from '@glimmer/component';
 import { query } from 'ember-data-resources';
 import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
+
 export default class LinkedAgendapointsModal extends Component {
   @tracked
   pageSize = 10;
@@ -8,6 +10,7 @@ export default class LinkedAgendapointsModal extends Component {
   page = 0;
   @tracked
   sort = '';
+  @service intl;
 
   agendapoints = query(this, 'document-container', () => ({
     include: 'current-version,current-version.parts',
