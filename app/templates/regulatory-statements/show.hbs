@@ -2,6 +2,7 @@
   @editorDocument={{this.model.editorDocument}}
   @documentContainer={{this.model.documentContainer}}
   @documentStatus={{this.model.documentContainer.currentVersion.status}}
+  @isRegulatoryStatement={{true}}
 >
   <:return-link>
   <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
