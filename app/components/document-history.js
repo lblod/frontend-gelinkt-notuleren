@@ -8,6 +8,7 @@ export default class DocumentHistoryComponent extends Component {
   @service documentService;
   @service router;
   @service currentSession;
+  @service intl;
   @tracked revisions;
   @tracked hasMore = true;
 

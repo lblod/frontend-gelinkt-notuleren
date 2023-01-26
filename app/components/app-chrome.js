@@ -5,6 +5,7 @@ import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 export default class AppChromeComponent extends Component {
   @service currentSession;
   @service features;
+  @service intl;
 
   get documentStatus() {
     const status =

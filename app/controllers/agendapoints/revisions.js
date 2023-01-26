@@ -6,6 +6,7 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 import { inject as service } from '@ember/service';
 export default class AgendapointsRevisionsController extends Controller {
   @service router;
+  @service intl;
   @tracked showConfirmationModal = false;
   @tracked revisionToRemove;
   @tracked revisionsToRemove;

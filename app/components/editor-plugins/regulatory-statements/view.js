@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ReadOnlyContentSectionComponent extends Component {
   @service store;
+  @service intl;
   @tracked documentContainer;
 
   @tracked regulatoryStatementContainer;

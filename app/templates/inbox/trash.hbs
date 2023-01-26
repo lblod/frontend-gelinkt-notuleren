@@ -48,8 +48,8 @@
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
         <td>{{row.title}}</td>
-        <td>{{human-friendly-date row.updatedOn}}</td>
-        <td>{{human-friendly-date row.createdOn}}</td>
+        <td>{{human-friendly-date row.updatedOn locale=this.intl.primaryLocale}}</td>
+        <td>{{human-friendly-date row.createdOn locale=this.intl.primaryLocale}}</td>
       {{/let}}
     </c.body>
   </table.content>

@@ -13,6 +13,7 @@ export default class InboxDraftDecisionsController extends Controller {
 
   @service currentSession;
   @service router;
+  @service intl;
   sort = '-current-version.updated-on';
 
   @restartableTask

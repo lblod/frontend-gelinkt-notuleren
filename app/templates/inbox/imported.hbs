@@ -24,7 +24,7 @@
     </c.header>
     <c.body as |container|>
       <td><LinkTo @route="editor-documents.show" @model={{row.id}} class="au-c-link">{{container.currentVersion.title}}</LinkTo></td>
-      <td>{{human-friendly-date container.currentVersion.createdOn}}</td>
+      <td>{{human-friendly-date container.currentVersion.createdOn locale=this.intl.primaryLocale}}</td>
       <td><EditorStatusPill @status={{container.status}} /></td>
     </c.body>
   </t.content>
