@@ -55,7 +55,7 @@
           <br>
         </td>
         <td>
-          <EditorStatusPill @status={{container.currentVersion.status}} />
+          <RegulatoryStatementStatusPill @container={{container}} />
         </td>
         <td>
           <AuButton {{on "click" (fn this.showLinkedAgendapoints container)}} @skin="link">Gelinkte agendapunten
