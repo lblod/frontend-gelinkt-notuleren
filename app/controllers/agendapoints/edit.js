@@ -35,6 +35,7 @@ import {
 } from '@lblod/ember-rdfa-editor/marks';
 
 import {
+  tableKeymap,
   tableMenu,
   tableNodes,
   tablePlugin,
@@ -101,7 +102,7 @@ export default class AgendapointsEditController extends Controller {
         ordered_list,
         bullet_list,
         placeholder,
-        ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
         date: date({
           placeholder: {
             insertDate: this.intl.t('date-plugin.insert.date'),
@@ -163,7 +164,7 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get plugins() {
-    return [tablePlugin, citation.plugin];
+    return [tablePlugin, tableKeymap, citation.plugin];
   }
 
   get dirty() {

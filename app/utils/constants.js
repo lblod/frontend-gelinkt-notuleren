@@ -1,5 +1,6 @@
 //document status
 export const DRAFT_STATUS_ID = 'a1974d071e6a47b69b85313ebdcef9f7';
+export const ASSIGNED_STATUS_ID = '81BE41E2-C6DA-4ED4-B076-6BDC82CE4F31';
 export const SCHEDULED_STATUS_ID = '7186547b61414095aa2a4affefdcca67';
 export const PUBLISHED_STATUS_ID = 'ef8e4e331c31430bbdefcdb2bdfbcc06';
 export const TRASH_STATUS_ID = '5A8304E8C093B00009000010';

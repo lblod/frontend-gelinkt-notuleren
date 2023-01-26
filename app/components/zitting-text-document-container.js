@@ -32,6 +32,7 @@ import {
 } from '@lblod/ember-rdfa-editor/marks';
 
 import {
+  tableKeymap,
   tableMenu,
   tableNodes,
   tablePlugin,
@@ -101,7 +102,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         ordered_list,
         bullet_list,
         placeholder,
-        ...tableNodes({ tableGroup: 'block', cellContent: 'inline*' }),
+        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
         date: date({
           placeholder: {
             insertDate: this.intl.t('date-plugin.insert.date'),
@@ -130,7 +131,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get plugins() {
-    return [tablePlugin];
+    return [tablePlugin, tableKeymap];
   }
 
   get widgets() {
