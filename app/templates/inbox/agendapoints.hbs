@@ -39,7 +39,7 @@
         <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
       </td>
       <td>
-        {{human-friendly-date row.updatedOn}}
+        {{human-friendly-date row.updatedOn locale=this.intl.primaryLocale}}
         <br>
       </td>
       <td>

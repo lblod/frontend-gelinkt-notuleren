@@ -10,6 +10,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
   @service currentSession;
   @service documentService;
   @service router;
+  @service intl;
   @tracked revisions;
 
   @action

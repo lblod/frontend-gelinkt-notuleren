@@ -10,7 +10,7 @@
     <AuToolbar as |Group|>
       <Group>
         <AuHeading @level="4" @skin="4">{{t "regulatoryStatementsPlugin.regulatoryStatement"}}</AuHeading>
-        <p>({{t "regulatoryStatementsPlugin.lastModification"}}: {{human-friendly-date this.updatedOn}})</p>
+        <p>({{t "regulatoryStatementsPlugin.lastModification"}}: {{human-friendly-date this.updatedOn locale=this.intl.primaryLocale}})</p>
       </Group>
       <Group>
         <AuButtonGroup>

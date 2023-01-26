@@ -14,7 +14,7 @@
     <AuDropdown @title={{t 'utils.currentVersion'}} @buttonLabel={{t 'utils.currentVersion'}} @alignment="left">
       <p class="au-u-padding-small regulatory-statement-current-version-container-active">
         <span class="au-u-medium au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
-        <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn}}</span>
+        <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn locale=this.intl.primaryLocale}}</span>
       </p>
       <AuHr />
       <div
@@ -25,7 +25,7 @@
         <p class="au-u-muted au-u-medium au-u-padding-tiny au-u-padding-left-small">{{t 'utils.history'}}</p>
         {{#each this.revisions as |revision|}}
           <AuLink @route="regulatory-statements.revisions" @skin="secondary" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem" @models={{array this.documentContainer.id revision.id}}>
-            {{human-friendly-date revision.updatedOn}}
+            {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
             {{#if revision.status.label}}
               <AuPill @skin='success'>{{revision.status.label}}</AuPill>
             {{/if}}
