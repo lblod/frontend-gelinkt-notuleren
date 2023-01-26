@@ -5,7 +5,7 @@ function getDateFnsLocale(locale) {
   return locales[locale] ?? locales[locale.substring(0, 2)];
 }
 
-export default function humanFriendlyDate(date, { locale = 'nl-BE' }) {
+export default function humanFriendlyDate(date, { locale = 'nl-BE' } = {}) {
   console.log('LOCALE: ', locale);
   if (!(date instanceof Date)) return '';
   try {

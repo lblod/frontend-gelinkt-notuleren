@@ -43,6 +43,7 @@
         'inbox.regulatoryStatements.updatedOnLabel'}} />
       <AuDataTableThSortable @field=":no-case:currentVersion.status.label" @currentSorting={{this.sort}} @label={{t
         'inbox.regulatoryStatements.statusLabel'}} />
+      <th/>
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
@@ -55,6 +56,9 @@
         </td>
         <td>
           <RegulatoryStatementStatusPill @container={{container}} />
+        </td>
+        <td>
+          <LinkedAgendapointsButton @document={{container}}/>
         </td>
       {{/let}}
     </c.body>
