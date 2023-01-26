@@ -33,7 +33,7 @@
             <li class="au-c-list-navigation__item">
               <AuButton @skin="link" @icon="document" @iconAlignment="left" class="au-c-button--pill au-c-list-navigation__link {{if (eq revision.updatedOn this.revisionDetail.updatedOn) 'active'}}" {{on "click" (fn this.details revision)}}>
                 <span class="au-c-button__text">
-                  {{human-friendly-date revision.updatedOn}}
+                  {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
                 </span>
                 {{#if (eq revision.id this.model.editorDocument.id)}}
                   <AuPill @size="small" class="au-u-margin-left-tiny">Huidige versie</AuPill>
@@ -75,7 +75,7 @@
         <ul class="numbered-list">
           {{#each this.revisionsToRemove as |revision|}}
             <li class="u-hr u-padding--bottom--small">
-              <AuHeading @level="4" @skin="5">Versie van {{human-friendly-date revision.updatedOn}}</AuHeading>
+              <AuHeading @level="4" @skin="5">Versie van {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}</AuHeading>
               <p class="au-u-muted">{{revision.title}}</p>
             </li>
           {{/each}}

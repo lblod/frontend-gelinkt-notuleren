@@ -13,6 +13,7 @@ export default class InboxTrashController extends Controller {
 
   @service currentSession;
   @service router;
+  @service intl;
 
   @action
   async moveToConcepts(documents) {

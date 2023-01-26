@@ -9,12 +9,12 @@
     </AuLink>
   </:return-link>
   <:actions-after-title>
-    <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn}} @buttonLabel={{human-friendly-date
-      this.model.editorDocument.updatedOn}} @alignment="left">
+    <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @buttonLabel={{human-friendly-date
+      this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @alignment="left">
       <LinkTo @route="{{if (or this.model.currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}}" @model={{this.model.documentContainer.id}}
               class="au-u-padding-small regulatory-statement-current-version-container">
         <span class="au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
-        <span class="au-u-light">{{human-friendly-date this.model.currentVersion.updatedOn}}</span>
+        <span class="au-u-light">{{human-friendly-date this.model.currentVersion.updatedOn locale=this.intl.primaryLocale}}</span>
       </LinkTo>
       <AuHr/>
       <div class="au-u-flex--column au-u-flex">
@@ -22,7 +22,7 @@
         {{#each this.revisions as |revision|}}
           <AuLink @route="regulatory-statements.revisions" @skin="secondary" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem" @models={{array
             this.model.documentContainer.id revision.id}}>
-            {{human-friendly-date revision.updatedOn}}
+            {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
             {{#if revision.status.label}}
               <AuPill @skin='success'>{{revision.status.label}}</AuPill>
             {{/if}}

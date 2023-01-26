@@ -1,18 +1,19 @@
-import { helper } from '@ember/component/helper';
 import formatRelative from 'date-fns/formatRelative';
-import { nl } from 'date-fns/locale';
+import locales from 'date-fns/locale';
 
-// this is a helper to mimic the moment-calendar behaviour
-export default helper(function humanFriendlyDate(
-  [referenceDatetime] /*, hash*/
-) {
-  //If not a date (e.g. date is undefined) return "" for printing on screen.
-  if (!(referenceDatetime instanceof Date)) return '';
+function getDateFnsLocale(locale) {
+  return locales[locale] ?? locales[locale.substring(0, 2)];
+}
 
+export default function humanFriendlyDate(date, { locale = 'nl-BE' }) {
+  console.log('LOCALE: ', locale);
+  if (!(date instanceof Date)) return '';
   try {
-    return formatRelative(referenceDatetime, new Date(), { locale: nl });
+    return formatRelative(date, new Date(), {
+      locale: getDateFnsLocale(locale),
+    });
   } catch (e) {
     console.error(e);
     return '';
   }
-});
+}

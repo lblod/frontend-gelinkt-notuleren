@@ -12,13 +12,13 @@
     {{#if @isCurrentVersion}}
       <p class="au-u-padding-small au-u-flex au-u-flex--between regulatory-statement-current-version-container-active">
         <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
-        <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn}}</span>
+        <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn locale=this.intl.primaryLocale}}</span>
       </p>
     {{else}}
     <p class="au-u-padding-small">
       <LinkTo @route={{if (or @currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}} @model={{@documentContainerId}} class="regulatory-statement-current-version-container au-u-flex au-u-flex--between">
         <span class="au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
-        <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn}}</span>
+        <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn locale=this.intl.primaryLocale}}</span>
       </LinkTo>
     </p>
     {{/if}}
@@ -27,14 +27,14 @@
       {{#each this.revisions as |revision|}}
         {{#if (eq revision.id @currentRevisionId)}}
           <AuLink @route="regulatory-statements.revisions" @active="true" @skin="secondary" role="menuitem" class="au-u-padding-tiny au-u-padding-left-small" @models={{array @documentContainerId revision.id}}>
-            {{human-friendly-date revision.updatedOn}}
+            {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
             {{#if revision.status.label}}
               <AuPill @skin='success'>{{revision.status.label}}</AuPill>
             {{/if}}
           </AuLink>
         {{else}}
           <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" class="au-u-padding-tiny au-u-padding-left-small" @models={{array @documentContainerId revision.id}}>
-            {{human-friendly-date revision.updatedOn}}
+            {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
             {{#if revision.status.label}}
               <AuPill @skin='success'>{{revision.status.label}}</AuPill>
             {{/if}}
