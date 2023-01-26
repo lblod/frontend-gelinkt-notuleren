@@ -137,6 +137,7 @@ inbox:
       title: Nieuwe reglementaire bijlage
       errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage.
     linkedAgendapoints:
+      buttonLabel: Gelinkte agendapunten
       title: Agendapunten die {title} bevatten
       noData: Geen agendapunten gevonden
   irgArchive:

@@ -58,16 +58,10 @@
           <RegulatoryStatementStatusPill @container={{container}} />
         </td>
         <td>
-          <AuButton {{on "click" (fn this.showLinkedAgendapoints container)}} @skin="link">Gelinkte agendapunten
-          </AuButton>
+          <LinkedAgendapointsButton @document={{container}}/>
         </td>
       {{/let}}
     </c.body>
   </table.content>
 </AuDataTable>
 {{outlet}}
-<LinkedAgendapointsModal 
-  @document={{this.selectedDocument}} 
-  @show={{this.showLinkedAgendapointsModal}} 
-  @onClose={{this.closeLinkedAgendapointsModal}}
-/>
