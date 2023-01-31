@@ -1,6 +1,5 @@
 import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
-import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default class RegulatoryStatementsEditRoute extends Route {
@@ -32,15 +31,5 @@ export default class RegulatoryStatementsEditRoute extends Route {
     super.setupController(controller, model);
     controller.uploading = false;
     controller._editorDocument = null;
-  }
-
-  @action
-  error(error /*, transition */) {
-    if (error.errors && error.errors[0].status === '404') {
-      this.router.transitionTo('route-not-found');
-    } else {
-      // Let the route above this handle the error.
-      return true;
-    }
   }
 }

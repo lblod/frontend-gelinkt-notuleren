@@ -1,11 +1,3 @@
-<VoPage>
-  <section class="au-o-region-large">
-    <div class="au-o-layout">
-        <AuAlert @title={{t "not-found.title"}} @icon="link-broken" @skin="warning">
-          <p>{{t "not-found.body.explanation"}}</p>
-          <p>{{t "not-found.body.contact-message"}} <AuLink @route="contact">{{t "not-found.body.contact-link"}}</AuLink></p>
-          <p>{{t "not-found.body.email-message"}} <a href="mailto:gelinktnotuleren@vlaanderen.be" class="au-c-link">GelinktNotuleren@vlaanderen.be</a></p>
-        </AuAlert>
-    </div>
-  </section>
-</VoPage>
+<NotFoundWarning @title={{t "not-found.title" }}>
+  {{t "not-found.body.explanation"}}
+</NotFoundWarning>

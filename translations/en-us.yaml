@@ -2,6 +2,7 @@ agendapoint:
   revisions: Revisions
   restore: Restore
   backToMeeting: Return to the meeting of {adminBody} on {date}
+  not-found: Agendapoint not found
 
 appChrome:
   copyAgendapoint: Copy Agendapoint
@@ -155,6 +156,9 @@ inbox:
     searchPlaceholder: Type the title of an agendapoint
     restoreMessage: Restore selected documents
 
+irg-archive:
+  not-found: Reglement not found
+
 manageAgendaZitting:
   titelLabel: Title
   beschrijvingLabel: Description
@@ -295,6 +299,8 @@ meetings:
       confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
       saveAndQuit: Save and Quit
       cancel: Cancel
+  not-found: Meeting not found
+
 
 not-found:
   title: Page not found
@@ -390,6 +396,9 @@ rdfaEditorContainer:
   defaultBusyText: Processing
   saving: Saving
   makingCopy: Making copy
+
+regulatory-statements:
+  not-found: Regulatory statement not found
 
 regulatoryStatementsPlugin:
   regulatoryStatement: Regulatory Statement
