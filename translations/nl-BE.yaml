@@ -2,7 +2,9 @@ agendapoint:
   revisions: Versies
   restore: Herstel
   backToMeeting: Terug naar zitting van {adminBody} op {date}
-  not-found: Agendapunt niet gevonden
+  not-found:
+    title: Agendapunt niet gevonden
+    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het agendapunt.
 
 appChrome:
   copyAgendapoint: Kopieer agendapunt
@@ -157,7 +159,10 @@ inbox:
     restoreMessage: Herstel geselecteerde documenten
 
 irg-archive:
-  not-found: Reglement niet gevonden
+  not-found: 
+    title: Reglement niet gevonden
+    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het reglement.
+
 
 manageAgendaZitting:
   titelLabel: Titel
@@ -300,7 +305,10 @@ meetings:
       confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
       saveAndQuit: Opslaan en afsluiten
       cancel: Annuleren
-  not-found: Zitting niet gevonden
+  not-found: 
+    title: Zitting niet gevonden
+    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de zitting.
+
 
 
 not-found:
@@ -399,7 +407,9 @@ rdfaEditorContainer:
   makingCopy: Kopie aan het maken
 
 regulatory-statements:
-  not-found: Reglementaire bijlage niet gevonden
+  not-found: 
+    title: Reglementaire bijlage niet gevonden
+    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de reglementaire bijlage.
 
 regulatoryStatementsPlugin:
   regulatoryStatement: Reglement
