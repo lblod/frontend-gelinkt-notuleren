@@ -296,6 +296,14 @@ meetings:
       saveAndQuit: Save and Quit
       cancel: Cancel
 
+not-found:
+  title: Page not found
+  body:
+    explanation: Our apologies, but we could not find this page.
+    contact-message: If you think this is a mistake, you can always contact us on our
+    contact-link: contact page
+    email-message: Or send a mail to
+
 participation:
   presentLabel: "Present mandatees:"
 
