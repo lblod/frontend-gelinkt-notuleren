@@ -33,9 +33,6 @@ Router.map(function () {
   this.route('print', function () {
     this.route('uittreksel', { path: 'uittreksel/:meeting_id/:treatment_id' });
   });
-  this.route('route-not-found', {
-    path: '/*wildcard',
-  });
 
   this.route('import', function () {
     this.route('new');
@@ -83,4 +80,5 @@ Router.map(function () {
       }
     );
   });
+  this.route('not-found', { path: '/*path' });
 });
