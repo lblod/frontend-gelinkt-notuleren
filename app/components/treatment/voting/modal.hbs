@@ -13,27 +13,27 @@
   <thead>
     <tr>
       <th style="max-width: 30rem;">
-        {{t "votingModal.onderwerpLabel"}}
+        {{t "voting-modal.onderwerp-label"}}
       </th>
       <th>
-        {{t "votingModal.typeLabel"}}
+        {{t "voting-modal.type-label"}}
       </th>
       <th>
-        {{t "votingModal.stemmenLabel"}}
+        {{t "voting-modal.stemmen-label"}}
       </th>
       <th style="max-width: 30rem;">
-        {{t "votingModal.gevolgLabel"}}
+        {{t "voting-modal.gevolg-label"}}
       </th>
       {{#unless @readOnly}}
         <th class="au-u-table-right">
-          <span class="au-u-hidden-visually">{{t "votingModal.actionsLabel"}}</span>
+          <span class="au-u-hidden-visually">{{t "voting-modal.actions-label"}}</span>
             <AuButton
               {{on "click" (perform this.addStemming)}}
               @icon="add"
               @iconAlignment="left"
               @loading={{this.addStemming.isRunning}}
             >
-              {{t "votingModal.createVotingButton"}}
+              {{t "voting-modal.create-voting-button"}}
             </AuButton>
         </th>
       {{/unless}}
@@ -48,37 +48,37 @@
               {{stemming.onderwerp}}
             {{else}}
               <AuHelpText @size="normal" @skin="tertiary">
-                {{t "votingModal.subjectNotFound"}}
+                {{t "voting-modal.subject-not-found"}}
               </AuHelpText>
             {{/if}}
           </td>
           <td>
             {{#if stemming.geheim}}
               <AuHelpText @size="normal">
-                {{t "votingModal.geheimTrueLabel"}}
+                {{t "voting-modal.geheim-true-label"}}
               </AuHelpText>
             {{else}}
               <AuHelpText @size="normal">
-                {{t "votingModal.geheimFalseLabel"}}
+                {{t "voting-modal.geheim-false-label"}}
               </AuHelpText>
             {{/if}}
           </td>
           <td>
             <p class="au-c-help-text au-c-help-text--normal">
-              {{t "votingModal.aantalVoorstandersLabel"}} <strong>{{stemming.aantalVoorstanders}}</strong>
+              {{t "voting-modal.aantal-voorstanders-label"}} <strong>{{stemming.aantalVoorstanders}}</strong>
             </p>
             <p class="au-c-help-text au-c-help-text--normal">
-              {{t "votingModal.aantalTegenstandersLabel"}} <strong>{{stemming.aantalTegenstanders}}</strong>
+              {{t "voting-modal.aantal-tegenstanders-label"}} <strong>{{stemming.aantalTegenstanders}}</strong>
             </p>
             <p class="au-c-help-text au-c-help-text--normal">
-              {{t "votingModal.aantalOnthoudersLabel"}} <strong>{{stemming.aantalOnthouders}}</strong>
+              {{t "voting-modal.aantal-onthouders-label"}} <strong>{{stemming.aantalOnthouders}}</strong>
             </p>
           </td>
           <td style="max-width: 30rem;">
             {{#if stemming.gevolg}}
               {{stemming.gevolg}}
             {{else}}
-              <AuHelpText @size="normal" @skin="tertiary">{{t "votingModal.gevolgNotFound"}}</AuHelpText>
+              <AuHelpText @size="normal" @skin="tertiary">{{t "voting-modal.gevolg-not-found"}}</AuHelpText>
             {{/if}}
           </td>
           {{#unless @readOnly}}
@@ -90,7 +90,7 @@
                   @icon="pencil"
                   @iconAlignment="left"
                 >
-                  {{t "votingModal.toggleEditButton"}}
+                  {{t "voting-modal.toggle-edit-button"}}
                 </AuButton>
                 <AuButton
                   {{on "click" (fn (perform this.removeStemming) stemming)}}
@@ -100,7 +100,7 @@
                   @iconAlignment="left"
                   @loading={{ this.removeStemming.isRunning }}
                 >
-                  {{t "votingModal.deleteButton"}}
+                  {{t "voting-modal.delete-button"}}
                 </AuButton>
               </AuButtonGroup>
             </td>
@@ -110,7 +110,7 @@
         <tr>
           <td colspan="5">
             <AuHelpText @size="normal" @skin="tertiary">
-              {{t "votingModal.noDataMessage"}}
+              {{t "voting-modal.no-data-message"}}
             </AuHelpText>
           </td>
         </tr>

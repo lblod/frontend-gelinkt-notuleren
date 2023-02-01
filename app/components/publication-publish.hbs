@@ -1,6 +1,6 @@
 <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as |Group|>
   <Group>
-    <AuHeading @level="2" @skin="4">{{t "timelineStep.publishButtonLabel" name=@name}}</AuHeading>
+    <AuHeading @level="2" @skin="4">{{t "timeline-step.publish-button-label" name=@name}}</AuHeading>
   </Group>
   <Group>
     <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
@@ -14,7 +14,7 @@
       <Signatures::PublishedResource @publication={{@publishedResource}} />
     </div>
     <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
-      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.linkPublish"}}</AuHeading>
+      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.link-publish"}}</AuHeading>
       <p>
         <a href="{{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}"
            target="_blank"
@@ -23,9 +23,9 @@
           {{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}
         </a>
       </p>
-      <AuHelpText @skin="secondary" class="au-u-margin-bottom-small">{{t "timelineStep.timingWarning"}}</AuHelpText>
-      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timelineStep.publicationType"}}</AuHeading>
-      <p>{{t "timelineStep.publicForAll"}}</p>
+      <AuHelpText @skin="secondary" class="au-u-margin-bottom-small">{{t "timeline-step.timing-warning"}}</AuHelpText>
+      <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.publication-type"}}</AuHeading>
+      <p>{{t "timeline-step.public-for-all"}}</p>
     </div>
   {{else}}
     <div class="au-o-grid__item au-u-padding-top-none">
@@ -37,7 +37,7 @@
           @loading={{@loading}}
                  @disabled={{or (not this.currentSession.canPublish) @loading}}
         >
-          {{t "timelineStep.publishNotifyButtonLabel" name=@name}}
+          {{t "timeline-step.publish-notify-button-label" name=@name}}
         </AuButton>
       {{else}}
         <AuButton
@@ -47,29 +47,29 @@
           @loading={{@loading}}
                  @disabled={{or (not this.currentSession.canPublish) @loading}}
         >
-          {{t "timelineStep.publishButtonLabel" name=@name}}
+          {{t "timeline-step.publish-button-label" name=@name}}
         </AuButton>
       {{/if}}
 
       <AuHelpText @skin="secondary" class="au-u-margin-top-small">
-        {{t "timelineStep.publishRestrictionInfo"}}
+        {{t "timeline-step.publish-restriction-info"}}
         <a
           href="{{config "manual.baseUrl"}}{{config "manual.publisher"}}"
           target="_blank"
           rel="noopener noreferrer"
           class="au-c-link">
-          {{t "timelineStep.publishRestrictionRole"}}
+          {{t "timeline-step.publish-restriction-role"}}
         </a>
-        {{t "timelineStep.publishRestrictionEnd"}}
+        {{t "timeline-step.publish-restriction-end"}}
       </AuHelpText>
 
-      <AuAlert @icon="info-circle" @title={{t "timelineStep.publicationConsequences"}} @skin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
-        <p>{{t "timelineStep.previewInfo"}}<a href="{{this.publicationBaseUrl}}" target="_blank" rel="noopener noreferrer" class="au-c-link">{{this.publicationBaseUrl}}</a>{{t "timelineStep.previewInfoEnd"}}</p>
+      <AuAlert @icon="info-circle" @title={{t "timeline-step.publication-consequences"}} @skin="info" @alertsize="small" class="au-u-margin-top au-u-margin-bottom-none">
+        <p>{{t "timeline-step.preview-info"}}<a href="{{this.publicationBaseUrl}}" target="_blank" rel="noopener noreferrer" class="au-c-link">{{this.publicationBaseUrl}}</a>{{t "timeline-step.preview-info-end"}}</p>
       </AuAlert>
 
       {{#if @willSubmitToLoket}}
-        <AuAlert @icon="info-circle" @title={{t "timelineStep.notifyConsequences"}} @skin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
-          <p>{{t "timelineStep.notifyInfo"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "timelineStep.localLoket"}}</a>.</p>
+        <AuAlert @icon="info-circle" @title={{t "timeline-step.notify-consequences"}} @skin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
+          <p>{{t "timeline-step.notify-info"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "timeline-step.local-loket"}}</a>.</p>
         </AuAlert>
       {{/if}}
     </div>

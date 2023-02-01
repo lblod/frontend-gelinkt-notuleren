@@ -1,5 +1,5 @@
 <AuModal
-  @title={{concat (t "signatureConfirmation.modalTitle") @name}}
+  @title={{concat (t "signature-confirmation.modal-title") @name}}
   @modalOpen={{true}}
   @size="fullscreen"
   @closeModal={{@cancel}}
@@ -9,19 +9,19 @@
       <div class="au-o-grid__item au-u-1-3">
         <div class="au-c-rdfa-publication-aside">
           <div class="au-o-box">
-            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "signatureConfirmation.signLabel"}}</AuHeading>
-            <AuAlert @icon="info-circle" @title={{t "signatureConfirmation.signWarningTitle"}}  @skin="info" @size="small">
-              <p>{{t "signatureConfirmation.signWarningText"}}</p>
+            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "signature-confirmation.sign-label"}}</AuHeading>
+            <AuAlert @icon="info-circle" @title={{t "signature-confirmation.sign-warning-title"}}  @skin="info" @size="small">
+              <p>{{t "signature-confirmation.sign-warning-text"}}</p>
             </AuAlert>
-            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "signatureConfirmation.metadataLabel"}}</AuHeading>
+            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "signature-confirmation.metadata-label"}}</AuHeading>
             <ul>
               <li>
-                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "signatureConfirmation.signerLabel"}}</p>
+                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "signature-confirmation.signer-label"}}</p>
                 <p class="au-c-help-text au-c-help-text--large">{{this.currentSession.user.fullName}}</p>
               </li>
               <li class="au-u-margin-top-small">
-                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "signatureConfirmation.timeLabel"}}</p>
-                <p class="au-c-help-text au-c-help-text--large">{{t "signatureConfirmation.timeMessage"}}</p>
+                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "signature-confirmation.time-label"}}</p>
+                <p class="au-c-help-text au-c-help-text--large">{{t "signature-confirmation.time-message"}}</p>
               </li>
               {{!-- <li class="au-u-margin-top-small">
                 <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">Hash</p>
@@ -47,10 +47,10 @@
   <Modal.Footer>
     <AuToolbar class="au-u-hide-on-print" as |Group|>
       <Group>
-        <AuButton @skin="naked" {{on "click" @cancel}}>{{t "signatureConfirmation.cancelButton"}}</AuButton>
+        <AuButton @skin="naked" {{on "click" @cancel}}>{{t "signature-confirmation.cancel-button"}}</AuButton>
       </Group>
       <Group>
-        <AuButton {{on "click" @confirm}}>{{concat (t "signatureConfirmation.confirmButton") @name}}</AuButton>
+        <AuButton {{on "click" @confirm}}>{{concat (t "signature-confirmation.confirm-button") @name}}</AuButton>
       </Group>
     </AuToolbar>
   </Modal.Footer>

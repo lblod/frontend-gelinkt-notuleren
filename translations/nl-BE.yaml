@@ -1,14 +1,13 @@
 agendapoint:
   revisions: Versies
   restore: Herstel
-  backToMeeting: Terug naar zitting van {adminBody} op {date}
+  back-to-meeting: Terug naar zitting van {adminBody} op {date}
 
-appChrome:
-  copyAgendapoint: Kopieer agendapunt
-  defaultDocumentStatus: Voorbereiding niet bewaard
-  deleteConcept: Verwijder voorbereiding
-  savedOn: Bewaard op
-  changesNotSaved: Wijzigingen niet bewaard
+app-chrome:
+  copy-agendapoint: Kopieer agendapunt
+  default-document-status: Voorbereiding niet bewaard
+  saved-on: Bewaard op
+  changes-not-saved: Wijzigingen niet bewaard
 
 attachments:
   attachments: Bijlagen
@@ -21,58 +20,49 @@ attachments:
   delete: Verwijderen
   type: Type
   decision: Besluit
-  typePlaceholder: geen
+  type-placeholder: geen
   regulatory: regelgevend
-  saveAndGo: Opslaan en bijlagen toevoegen
-  noDecisionsFound: Geen besluiten gevonden
-  decisionRequired: Enkel bijlagen bij een besluit worden opgenomen in de publicatie.
+  no-decisions-found: Geen besluiten gevonden
+  decision-required: Enkel bijlagen bij een besluit worden opgenomen in de publicatie.
 
-behandelingVanAgendapunten:
-  documentLink: "document link"
-  saveButton: Opslaan
-  saveAndQuit: Opslaan en Afsluiten
+behandeling-van-agendapunten:
+  save-button: Opslaan
+  save-and-quit: Opslaan en Afsluiten
   cancel: Annuleren
-  leaveWithoutSaving: Weggaan zonder op te slaan
-  confirmLeaveWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
-  openbaarLabel: "maak agendapunt openbaar"
-  geenOpenbaarMsg: "agendapunt niet openbaar"
-  openbaarMsg: "agendapunt openbaar"
-  participationListButton: Beheer aanwezigen bij dit agendapunt
+  confirm-leave-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+  openbaar-label: "maak agendapunt openbaar"
+  geen-openbaar-msg: "agendapunt niet openbaar"
+  openbaar-msg: "agendapunt openbaar"
+  participation-list-button: Beheer aanwezigen bij dit agendapunt
   visibility: "Zichtbaarheid"
-  votingTitle: "Stemming"
-  contentTitle: "Inhoud"
-  needsParticipants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
-  editDocument: "Bewerk document"
+  voting-title: "Stemming"
+  content-title: "Inhoud"
+  needs-participants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
+  edit-document: "Bewerk document"
 
-blockchainStatus:
-  encryptedLabel: Versleuteld
-  encryptingLabel: Bezig met versleutelen
-  encryptingText: Het versleutelen van een document kan enkele minuten duren. Vernieuw de pagina om de nieuwe status te zien.
+date-format:
+  short-date: Korte datum
+  long-date: Lange datum
 
-dateFormat:
-  shortDate: Korte datum
-  longDate: Lange datum
-
-dateTimePicker:
+date-time-picker:
   date: Datum
   hours: Uur
   minutes: Minuten
 
-deleteModal:
+delete-modal:
   title: Wilt u dit document naar de prullenmand verplaatsen
-  restoreMessage: U kan deze steeds herstellen vanuit de prullenmand.
+  restore-message: U kan deze steeds herstellen vanuit de prullenmand.
   confirm: Ja, verplaats naar prullenmand
   cancel: Annuleren
 
-documentCreator:
-  titleField: Titel document
+document-creator:
+  title-field: Titel document
   template: Sjabloon
-  templateSelectPlaceholder: Kies een sjabloon
 
-editorStatusPill:
-  defaultStatus: In voorbereiding
+editor-status-pill:
+  default-status: In voorbereiding
 
-editorDocumentTitle:
+editor-document-title:
   placeholder: Naamloos document
 
 inbox:
@@ -84,432 +74,414 @@ inbox:
     manual: Bekijk handleiding
   meetings:
     type: Zitting
-    pageTitle: Zittingen
-    noDataMessage: Geen zittingen
-    newMeeting: Nieuwe zitting
-    administrativeBody: Bestuursorgaan
+    page-title: Zittingen
+    no-data-message: Geen zittingen
+    administrative-body: Bestuursorgaan
     time: Tijdstip
     location: Locatie
     new:
       title: Nieuwe zitting aanmaken
       meeting:
-        administrativeBody: Gehouden door
+        administrative-body: Gehouden door
         location: Op locatie
-        plannedStart: Geplande start
+        planned-start: Geplande start
         errors:
-          administrativeBody:
+          administrative-body:
             required: Gelieve een bestuursorgaan te selecteren
       save: Zitting aanmaken
       cancel: Terug
   agendapoints:
     return: Terug naar overzicht agendapunten
-    pageTitle: Agendapunten
-    searchPlaceholder: Zoek titel agendapunt
-    noDataMessage: Geen documenten
-    titleLabel: Titel agendapunt
-    createdOnLabel: Aangemaakt
-    updatedOnLabel: Aangepast
-    statusLabel: Status
-    attachmentsLabel: Bijlagen
+    page-title: Agendapunten
+    search-placeholder: Zoek titel agendapunt
+    no-data-message: Geen documenten
+    title-label: Titel agendapunt
+    updated-on-label: Aangepast
+    status-label: Status
+    attachments-label: Bijlagen
     new:
       title: Nieuw agendapunt
-      errorSaving: Er liep iets fout bij het aanmaken van het agendapunt
+      error-saving: Er liep iets fout bij het aanmaken van het agendapunt
       create: Aanmaken
       cancel: Terug
-  regulatoryStatements:
+  regulatory-statements:
     return: Terug naar overzicht reglementaire bijlagen
-    revisionsReturn: Terug naar actuele versie
-    pageTitle: Reglementaire bijlagen
-    searchPlaceholder: Zoek op titel van reglementaire bijlage
-    noDataMessage: Geen reglementaire bijlagen
-    titleLabel: Titel
-    updatedOnLabel: Aangepast
-    statusLabel: Status
+    revisions-return: Terug naar actuele versie
+    page-title: Reglementaire bijlagen
+    search-placeholder: Zoek op titel van reglementaire bijlage
+    no-data-message: Geen reglementaire bijlagen
+    title-label: Titel
+    updated-on-label: Aangepast
+    status-label: Status
     type: Type
-    agendaPoint: Agendapunt
-    readOnlyBanner:
+    read-only-banner:
       title: Niet editeerbaar
       message: Dit is een oude versie. Herstel deze versie om nieuwe wijzigingen door te voeren.
-      oldPublishedMessage: Dit is een oude gepubliceerde versie. Herstel deze versie om nieuwe wijzigingen door te voeren.
-      publishedMessage: Dit reglement is reeds gepubliceerd. Gepubliceerde reglementaire bijlagen zijn niet editeerbaar.
-      publishedMessageTitle: Niet editeerbaar
+      old-published-message: Dit is een oude gepubliceerde versie. Herstel deze versie om nieuwe wijzigingen door te voeren.
+      published-message: Dit reglement is reeds gepubliceerd. Gepubliceerde reglementaire bijlagen zijn niet editeerbaar.
+      published-message-title: Niet editeerbaar
     new:
       title: Nieuwe reglementaire bijlage
-      errorSaving: Er liep iets fout bij het aanmaken van de reglementaire bijlage.
-    linkedAgendapoints:
-      buttonLabel: Gelinkte agendapunten
+      error-saving: Er liep iets fout bij het aanmaken van de reglementaire bijlage.
+    linked-agendapoints:
+      button-label: Gelinkte agendapunten
       title: Agendapunten die {title} bevatten
-      noData: Geen agendapunten gevonden
-  irgArchive:
+      no-data: Geen agendapunten gevonden
+  irg-archive:
     return: Terug naar overzicht IRG archief
-    pageTitle: IRG Archief
-    pageSubTitle: Reglementen tot 18/01/2023
-    searchPlaceholder: Zoek op titel van reglement
-    titleLabel: Titel reglement
-    typeLabel: Wegtype
-    identifierLabel: Referentie nummer
+    page-title: IRG Archief
+    page-subtitle: Reglementen tot 18/01/2023
+    search-placeholder: Zoek op titel van reglement
+    title-label: Titel reglement
+    type-label: Wegtype
+    identifier-label: Referentie nummer
   trash:
-    pageTitle: Prullenmand
+    page-title: Prullenmand
     title: Prullenmand
-    noDataMessage: Geen documenten
-    searchPlaceholder: Zoek titel agendapunt
-    restoreMessage: Herstel geselecteerde documenten
+    no-data-message: Geen documenten
+    search-placeholder: Zoek titel agendapunt
+    restore-message: Herstel geselecteerde documenten
 
-manageAgendaZitting:
-  titelLabel: Titel
-  beschrijvingLabel: Beschrijving
-  geplandOpenbaar: Gepland openbaar
-  openModalButton: Beheer agenda
+manage-agenda-zitting:
+  beschrijving-label: Beschrijving
+  gepland-openbaar: Gepland openbaar
+  open-modal-button: Beheer agenda
 
-manageAgendaZittingModal:
-  modalTitle: Bewerk agendapunt
-  saveButton: Bewaar agendapunt
-  saveAllButton: Bewaar agenda
-  cancelEditingButton: Annuleer
-  cancelButton: Terug
-  orderLabel: Volgorde
-  titleLabel: Titel agendapunt
-  beschrijvingLabel: Beschrijving agendapunt
-  copyDescriptionLabel: Beschrijving van besluit overnemen
-  geplandOpenbaar: Geplande openbaarheid
-  actionsLabel: Acties
-  createItemButton: Voeg agendapunt toe
-  editItemButton: Bewerk agendapunt
-  apPublishedMsg: Agendapunt gepubliceerd
-  noDataMessage: Geen agendapunten gevonden.
-  geplandOpenbaarTrueLabel: Openbaar
-  geplandOpenbaarFalseLabel: Besloten
-  saveAllError: er ging iets mis bij het bewaren van de agenda, gelieve opnieuw te proberen.
+manage-agenda-zitting-modal:
+  modal-title: Bewerk agendapunt
+  save-button: Bewaar agendapunt
+  cancel-button: Terug
+  order-label: Volgorde
+  title-label: Titel agendapunt
+  beschrijving-label: Beschrijving agendapunt
+  copy-description-label: Beschrijving van besluit overnemen
+  gepland-openbaar: Geplande openbaarheid
+  actions-label: Acties
+  create-item-button: Voeg agendapunt toe
+  edit-item-button: Bewerk agendapunt
+  ap-published-msg: Agendapunt gepubliceerd
+  no-data-message: Geen agendapunten gevonden.
+  gepland-openbaar-true-label: Openbaar
+  gepland-openbaar-false-label: Besloten
 
-manageAgendaZittingModalDelete:
-  modalSubtitle: Verwijder agendapunt
-  toggleEditButton: Behoud agendapunt
-  deleteButton: Verwijder agendapunt
-  toggleWarningButton: Verwijder het agendapunt
-  warningPartOne: U kan deze actie niet ongedaan maken.
-  warningPartTwo: U verwijdert het agendapunt uit de agenda.
-  agreeQuestion: Bent u zeker dat u het agendapunt wil verwijderen?
-  checkboxLabel: Ik begrijp dat het agendapunt onomkeerbaar verwijderd worden.
+manage-agenda-zitting-modal-delete:
+  modal-subtitle: Verwijder agendapunt
+  toggle-edit-button: Behoud agendapunt
+  delete-button: Verwijder agendapunt
+  checkbox-label: Ik begrijp dat het agendapunt onomkeerbaar verwijderd worden.
 
-manageAgendaZittingModalDraftImport:
+manage-agenda-zitting-modal-draft-import:
   title: Agendapunt in voorbereiding selecteren
   default: Nieuw agendapunt opstellen of bestaand agendapunt selecteren.
 
-manageAgendaZittingModalEdit:
-  modalSubtitle: Bewerk agendapunt
-  geplandOpenbaarTrueLabel: Gepland openbaar agendapunt
-  geplandOpenbaarFalseLabel: Gepland besloten agendapunt
+manage-agenda-zitting-modal-edit:
+  modal-subtitle: Bewerk agendapunt
+  gepland-openbaar-true-label: Gepland openbaar agendapunt
+  gepland-openbaar-false-label: Gepland besloten agendapunt
 
-manageAgendaZittingModalMove:
+manage-agenda-zitting-modal-move:
   title: Verplaats agendapunt
-  positionSelectPlaceholder: Selecteer positie
-  agendapuntSelectPlaceholder: Selecteer agendapunt
-  searchPlaceholder: Zoek op titel
+  position-select-placeholder: Selecteer positie
+  agendapunt-select-placeholder: Selecteer agendapunt
+  search-placeholder: Zoek op titel
 
-manageFreeText:
+manage-free-text:
   before: Vrije tekstveld waar je de start van de zitting kan beschrijven
   after: Vrije tekstveld waar je het einde van de zitting kan beschrijven
   save: Opslaan
 
-manageIntermissions:
-  interruptionStartLabel: Start onderbreking
-  interruptionEndLabel: Einde onderbreking
-  commentLabel: Opmerking
-  actionsLabel: Acties
-  addInterruptionLabel: Voeg onderbreking in
+manage-intermissions:
+  interruption-start-label: Start onderbreking
+  interruption-end-label: Einde onderbreking
+  comment-label: Opmerking
+  actions-label: Acties
+  add-interruption-label: Voeg onderbreking in
   title: Onderbrekingen
-  noDataMessage: Geen onderbrekingen
-  modalTitle: Voeg onderbreking in
-  insertLabel: Voeg in
-  saveLabel: Pas aan
-  cancelLabel: Terug
-  editLabel: Bewerk onderbreking
-  deleteCardTitle: Verwijder onderbreking
+  no-data-message: Geen onderbrekingen
+  modal-title: Voeg onderbreking in
+  insert-label: Voeg in
+  save-label: Pas aan
+  cancel-label: Terug
+  edit-label: Bewerk onderbreking
   warning: U kan deze actie niet ongedaan maken.
-  toggleWarningButton: Verwijder onderbreking
-  agreeQuestion: Bent u zeker dat u deze onderbreking wil verwijderen?
-  checkboxLabel: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
-  deleteButton: Verwijder onderbreking
-  retainButton: Behoud onderbreking
-  beforeAp: "Voor"
-  duringAp: "Tijdens"
-  afterAp: "Na"
+  checkbox-label: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
+  delete-button: Verwijder onderbreking
+  before-ap: "Voor"
+  during-ap: "Tijdens"
+  after-ap: "Na"
   position: "Plaats"
 
-manageZittingsData:
-  startNotSet: "Start van de zitting werd nog niet ingesteld."
-  endNotSet: "Einde van de zitting werd nog niet ingesteld."
-  endBeforeStart: U kunt geen einddatum kiezen die vóór de startdatum ligt.
-  startDiffersFromPlannedStart: "Opgelet de geplande start verschilt van de start datum."
-  modalTitle: Beheer algemene informatie over de zitting
-  bestuursorganLabel: "Gehouden door:"
-  geplandeStartLabel: "Geplande start:"
-  opLocatieLabel: "Op locatie:"
-  gestartOpTijdstipLabel: "Gestart op:"
-  geeindigdOpTijdstipLabel: "Beëindigd op:"
-  saveButton: Voeg zittingsdata in
-  cancelButton: Terug
-  openModalButton: Beheer algemene zittingsdata
-  selectPlaceholder: Selecteer bestuursorgaan
+manage-zittings-data:
+  start-not-set: "Start van de zitting werd nog niet ingesteld."
+  end-not-set: "Einde van de zitting werd nog niet ingesteld."
+  end-before-start: U kunt geen einddatum kiezen die vóór de startdatum ligt.
+  start-differs-from-planned-start: "Opgelet de geplande start verschilt van de start datum."
+  modal-title: Beheer algemene informatie over de zitting
+  bestuursorgan-label: "Gehouden door:"
+  geplande-start-label: "Geplande start:"
+  op-locatie-label: "Op locatie:"
+  gestart-op-tijdstip-label: "Gestart op:"
+  geeindigd-op-tijdstip-label: "Beëindigd op:"
+  save-button: Voeg zittingsdata in
+  cancel-button: Terug
+  open-modal-button: Beheer algemene zittingsdata
+  select-placeholder: Selecteer bestuursorgaan
 
-meetingForm:
-  dateWarning: U kunt geen einddatum kiezen die vóór de startdatum ligt.
-  incompleteWarning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
-  backButton: Terug naar overzicht zittingen
-  scheduledText: Zitting gepland op
-  publishButton: Ondertekenen en publiceren
-  firstSectionTitle: 1. Algemene informatie over de zitting
-  secondSectionTitle: 2. Aanwezigen bij de start van de zitting
-  thirdSectionTitle: 3. Agenda van de zitting
-  fourthSectionTitle: 4. Start van de Zitting
-  fifthSectionTitle: 5. Behandeling van de agendapunten
-  sixthSectionTitle: 6. Einde van de zitting
-  seventhSectionTitle: 7. Beëindiging van de zitting
-  meetingHeadingPartOne: Notulen van
-  meetingHeadingArticleGendered: de
-  meetingHeadingArticleUngendered: het
-  meetingHeadingPartTwo: van
-  firstSectionNotFilledWarning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
-  secondSectionNotFilledWarning: Zorg ervoor dat je de aanwezigenlijst correct aanvult voor je aan de stemmingen begint.
-  thirdSectionNotFilledWarning: Beheer hier de agenda van je zitting. Je kan nieuwe besluiten of reeds gemaakte agendapunten toevoegen.
-  fourthSectionNotFilledWarning: Vull in vrie tekst (zitting intro).
-  fifthSectionNotFilledWarning: Bewerk je besluiten en beheer de stemmingen
-  sixthSectionNotFilledWarning: Vull in vrie tekst (zitting outro).
-  bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
-  notulenPublished: Notulen gepubliceerd
+meeting-form:
+  date-warning: U kunt geen einddatum kiezen die vóór de startdatum ligt.
+  incomplete-warning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
+  back-button: Terug naar overzicht zittingen
+  scheduled-text: Zitting gepland op
+  publish-button: Ondertekenen en publiceren
+  first-section-title: 1. Algemene informatie over de zitting
+  second-section-title: 2. Aanwezigen bij de start van de zitting
+  third-section-title: 3. Agenda van de zitting
+  fourth-section-title: 4. Start van de Zitting
+  fifth-section-title: 5. Behandeling van de agendapunten
+  sixth-section-title: 6. Einde van de zitting
+  meeting-heading-part-one: Notulen van
+  meeting-heading-article-gendered: de
+  meeting-heading-article-ungendered: het
+  meeting-heading-part-two: van
+  first-section-not-filled-warning: Voor je kan starten met de zitting is het nodig om een datum, locatie en bestuursorgaan in te stellen.
+  second-section-not-filled-warning: Zorg ervoor dat je de aanwezigenlijst correct aanvult voor je aan de stemmingen begint.
+  third-section-not-filled-warning: Beheer hier de agenda van je zitting. Je kan nieuwe besluiten of reeds gemaakte agendapunten toevoegen.
+  fifth-section-not-filled-warning: Bewerk je besluiten en beheer de stemmingen
+  bestuursorgan-not-selected-warning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+  notulen-published: Notulen gepubliceerd
 
 meetings:
   delete:
     delete: Verwijderen
-    confirmMessage: Weet u zeker dat u deze zitting wilt verwijderen?
+    confirm-message: Weet u zeker dat u deze zitting wilt verwijderen?
     warning: Deze actie kan niet ongedaan gemaakt worden
-    confirmButton: Ja, deze zitting verwijderen
+    confirm-button: Ja, deze zitting verwijderen
     back: Terug
   edit:
     intro:
       save: Opslaan
-      confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
-      saveAndQuit: Opslaan en afsluiten
+      confirm-quit-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+      save-and-quit: Opslaan en afsluiten
       cancel: Annuleren
     outro:
       save: Opslaan
-      confirmQuitWithoutSaving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
-      saveAndQuit: Opslaan en afsluiten
+      confirm-quit-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+      save-and-quit: Opslaan en afsluiten
       cancel: Annuleren
 
 participation:
-  presentLabel: "Aanwezige mandatarissen:"
+  present-label: "Aanwezige mandatarissen:"
 
-participationList:
-  blockTitle: "Aanwezigen"
-  loadingTitle: Bezig met laden van de aanwezigenlijst
-  loadingLoader: Aan het laden
-  voorzitterLabel: "Voorzitter:"
-  voorzitterError: "Er is nog geen voorzitter aangeduid"
-  secretarisLabel: "Secretaris:"
-  secretarisError: "Er is nog geen secretaris aangeduid"
-  presentLabel: "Aanwezige mandatarissen:"
-  presentError: "Er zijn nog geen aanwezige mandatarissen aangeduid"
-  notPresentLabel: "Afwezige mandatarissen:"
-  openModalButton: Beheer aanwezigen bij start van de zitting
+participation-list:
+  block-title: "Aanwezigen"
+  loading-title: Bezig met laden van de aanwezigenlijst
+  loading-loader: Aan het laden
+  voorzitter-label: "Voorzitter:"
+  voorzitter-error: "Er is nog geen voorzitter aangeduid"
+  secretaris-label: "Secretaris:"
+  secretaris-error: "Er is nog geen secretaris aangeduid"
+  present-label: "Aanwezige mandatarissen:"
+  present-error: "Er zijn nog geen aanwezige mandatarissen aangeduid"
+  not-present-label: "Afwezige mandatarissen:"
+  open-modal-button: Beheer aanwezigen bij start van de zitting
 
-participationListModal:
-  voorzitterLabel: Voorzitter van de zitting
-  secretarisLabel: Secretaris van de zitting
-  presentLabel: Aanwezige mandatarissen
-  saveButton: Voeg aanwezigen in
-  cancelButton: Annuleer
-  chairmanAbsentError: De voorzitter moet verplicht aanwezig zijn
+participation-list-modal:
+  voorzitter-label: Voorzitter van de zitting
+  secretaris-label: Secretaris van de zitting
+  present-label: Aanwezige mandatarissen
+  save-button: Voeg aanwezigen in
+  cancel-button: Annuleer
+  chairman-absent-error: De voorzitter moet verplicht aanwezig zijn
 
-participationListModalSelector:
-  loadingMessage: Aan het laden...
-  noMatchesMessage: Geen resultaten
-  searchMessage: Typ om te zoeken
+participation-list-modal-selector:
+  loading-message: Aan het laden...
+  no-matches-message: Geen resultaten
+  search-message: Typ om te zoeken
   placeholder: Zoek op naam
 
-participationListModalTable:
-  naamLabel: Naam
-  functieLabel: Functie
-  geboortedatumLabel: Geboortedatum
-  actieLabel: Actie
-  checkboxLabel: Aanwezig
-  noDataMessage: Geen mandatarissen gevonden.
+participation-list-modal-table:
+  naam-label: Naam
+  functie-label: Functie
+  geboortedatum-label: Geboortedatum
+  actie-label: Actie
+  checkbox-label: Aanwezig
+  no-data-message: Geen mandatarissen gevonden.
 
-publicationConfirmation:
-  modalTitle: "Bevestig publicatie van "
-  alertFirstPart: Publiceren en melden is bindend en onomkeerbaar.
-  alertSecondPart: Kijk de inhoud van het document goed na — u kan het document achteraf
-  alertThirdPart: niet meer aanpassen.
-  alertFourthPart: Enkel bevoegde personen mogen het document publiceren.
-  publicationTitle: Publicatie
-  publicationSubtitle: "Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:"
-  reportingTitle: Melding
-  reportingSubtitle: Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
-  reportingLink: Loket voor Lokale Besturen
-  metadataTitle: Metagegevens bij publiceren
-  publisherLabel: Publiceerder
-  dateAndTimeLabel: "Datum & Tijd"
-  dateAndTimeMessage: Het moment waarop je op het publiceren bevestigd, wordt ook opgeslagen.
-  confirmButton: "Bevestig publicatie van "
-  cancelButton: Annuleren
+publication-confirmation:
+  modal-title: "Bevestig publicatie van "
+  alert-first-part: Publiceren en melden is bindend en onomkeerbaar.
+  alert-second-part: Kijk de inhoud van het document goed na — u kan het document achteraf
+  alert-third-part: niet meer aanpassen.
+  alert-fourth-part: Enkel bevoegde personen mogen het document publiceren.
+  publication-title: Publicatie
+  publication-subtitle: "Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:"
+  reporting-title: Melding
+  reporting-subtitle: Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
+  reporting-link: Loket voor Lokale Besturen
+  metadata-title: Metagegevens bij publiceren
+  publisher-label: Publiceerder
+  date-and-time-label: "Datum & Tijd"
+  date-and-time-message: Het moment waarop je op het publiceren bevestigd, wordt ook opgeslagen.
+  confirm-button: "Bevestig publicatie van "
+  cancel-button: Annuleren
 
 publish:
-  backToMeeting: Terug naar zitting
-  headingPartOne: Zitting van
-  loadingMessage: Bezig met laden...
-  updatingMessage: Bezig met bijwerken...
-  decisionListErrorMessage: Er liep iets fout bij het laden van de besluitenlijst.
-  noExcerptsMessage: Er zijn geen uittreksels beschikbaar.
-  excerptErrorMessage: Er liep iets fout bij het laden van het uittreksel.
+  back-to-meeting: Terug naar zitting
+  heading-part-one: Zitting van
+  loading-message: Bezig met laden...
+  updating-message: Bezig met bijwerken...
+  decision-list-error-message: Er liep iets fout bij het laden van de besluitenlijst.
+  no-excerpts-message: Er zijn geen uittreksels beschikbaar.
+  excerpt-error-message: Er liep iets fout bij het laden van het uittreksel.
   retry: opnieuw proberen
   excerpts: Uittreksels
-  excerptsOverview: Alle uittreksels
+  excerpts-overview: Alle uittreksels
   position: Positie
-  statusLabel: Status
+  status-label: Status
   agendapoint: Agendapunt
-  publishButtonLabel: Onderteken en publiceer
-  toggleAllPublicLabel: Maak de inhoud van alle agendapunten publiek
-  seriousError: Er heeft zich een fout voorgedaan, gelieve op een later tijdstip nogmaals te proberen. Als de fout aanhoudt contacteer GelinktNotuleren@vlaanderen.be met onderstaande informatie.
+  publish-button-label: Onderteken en publiceer
+  toggle-all-public-label: Maak de inhoud van alle agendapunten publiek
+  serious-error: Er heeft zich een fout voorgedaan, gelieve op een later tijdstip nogmaals te proberen. Als de fout aanhoudt contacteer GelinktNotuleren@vlaanderen.be met onderstaande informatie.
 
-publishedResource:
-  publishedByLabel: Gepubliceerd door
-  reportLabel: Melding
-  reportText: Automatisch gemeld door
-  notificationText: Bekijk melding op het
-  reportFailedText: Automatische melding mislukt
-  downloadText: Download het document en voltooi de melding via
+published-resource:
+  published-by-label: Gepubliceerd door
+  report-label: Melding
+  report-text: Automatisch gemeld door
+  notfication-text: Bekijk melding op het
+  report-failed-text: Automatische melding mislukt
+  download-text: Download het document en voltooi de melding via
 
-rdfaEditorContainer:
-  defaultBusyText: Bezig met verwerken
+rdfa-editor-container:
+  default-busy-text: Bezig met verwerken
   saving: Bezig met opslaan
-  makingCopy: Kopie aan het maken
+  making-copy: Kopie aan het maken
 
-regulatoryStatementsPlugin:
-  regulatoryStatement: Reglement
-  insertStatement: Reglement Invoegen
+regulatory-statements-plugin:
+  regulatory-statement: Reglement
+  insert-statement: Reglement Invoegen
   cancel: Annuleer
   search: Zoeken
-  lastModification: Laatst aangepast
+  last-modification: Laatst aangepast
   loading: Aan het laden
-  noStatementSelected: Geen reglement geselecteerd
-  editStatement: Bewerk
-  detachStatement: Loskoppelen
-  loadMore: Meer laden
-  alreadyAttached: Reeds gekoppeld
+  no-statement-selected: Geen reglement geselecteerd
+  edit-statement: Bewerk
+  detach-statement: Loskoppelen
+  load-more: Meer laden
+  already-attached: Reeds gekoppeld
 
-requiredField:
+required-field:
   required: Verplicht
 
-signatureConfirmation:
-  modalTitle: "Bevestig ondertekenen van "
-  signLabel: Ondertekenen
-  signWarningTitle: Ondertekenen is bindend en onomkeerbaar
-  signWarningText: Kijk de inhoud van het document goed na. Enkel bevoegde personen mogen het document ondertekenen.
-  metadataLabel: Metagegevens bij ondertekenen
-  signerLabel: Ondertekenaar
-  timeLabel: Tijd
-  timeMessage: Het moment waarop je op het ondertekenen bevestigd, wordt ook opgeslagen.
-  confirmButton: "Bevestig ondertekenen van "
-  cancelButton: Annuleren
+signature-confirmation:
+  modal-title: "Bevestig ondertekenen van "
+  sign-label: Ondertekenen
+  sign-warning-title: Ondertekenen is bindend en onomkeerbaar
+  sign-warning-text: Kijk de inhoud van het document goed na. Enkel bevoegde personen mogen het document ondertekenen.
+  metadata-label: Metagegevens bij ondertekenen
+  signer-label: Ondertekenaar
+  time-label: Tijd
+  time-message: Het moment waarop je op het ondertekenen bevestigd, wordt ook opgeslagen.
+  confirm-button: "Bevestig ondertekenen van "
+  cancel-button: Annuleren
 
-timelineStep:
-  signStepTitle: "Onderteken "
-  signingRestrictionInfo: "Ondertekenen kan enkel door de aangewezen personen met de rol "
-  signingRestrictionRole: "ondertekenaar"
-  signingRestrictionEnd: " binnen het orgaan."
-  firstSignature: Eerste ondertekening
-  secondSignature: Tweede ondertekening
-  signButtonLabel: "Onderteken {name}"
-  printButtonLabel: "Print {name}"
-  printInfo: "Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd."
-  secondPrintInfo: "Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt."
-  publishButtonLabel: "Publiceer {name}"
-  publishNotifyButtonLabel: "Publiceer (en meld) {name}"
-  publishRestrictionInfo: "Publiceren kan enkel door personen met de rol "
-  publishRestrictionRole: "publiceerder"
-  publishRestrictionEnd: "."
-  linkPublish: "Link publicatie"
-  timingWarning: "Het kan tot 5 minuten duren voor u de publicatie kan zien op bovenstaande link."
-  publicationType: Type publicatie
-  publicForAll: Publiek voor iedereen
-  publicationConsequences: Gevolgen publicatie
-  previewInfo: "Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar "
-  previewInfoEnd: ", en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie."
-  notifyConsequences: Gevolgen melding
-  notifyInfo: "Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
-  localLoket: "Loket voor Lokale Besturen"
-  publishWarning: "Vul de ontbrekende informatie aan om te publiceren"
+timeline-step:
+  sign-step-title: "Onderteken "
+  signing-restriction-info: "Ondertekenen kan enkel door de aangewezen personen met de rol "
+  signing-restriction-role: "ondertekenaar"
+  signing-restriction-end: " binnen het orgaan."
+  first-signature: Eerste ondertekening
+  second-signature: Tweede ondertekening
+  sign-button-label: "Onderteken {name}"
+  print-button-label: "Print {name}"
+  print-info: "Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd."
+  second-print-info: "Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt."
+  publish-button-label: "Publiceer {name}"
+  publish-notify-button-label: "Publiceer (en meld) {name}"
+  publish-restriction-info: "Publiceren kan enkel door personen met de rol "
+  publish-restriction-role: "publiceerder"
+  publish-restriction-end: "."
+  link-publish: "Link publicatie"
+  timing-warning: "Het kan tot 5 minuten duren voor u de publicatie kan zien op bovenstaande link."
+  publication-type: Type publicatie
+  public-for-all: Publiek voor iedereen
+  publication-consequences: Gevolgen publicatie
+  preview-info: "Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar "
+  preview-info-end: ", en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie."
+  notify-consequences: Gevolgen melding
+  notify-info: "Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
+  local-loket: "Loket voor Lokale Besturen"
+  publish-warning: "Vul de ontbrekende informatie aan om te publiceren"
 
 utils:
   save: Bewaar
-  fileOptions: Bestand acties
-  htmlExport: Exporteer als HTML
+  file-options: Bestand acties
+  html-export: Exporteer als HTML
   delete: Naar prullenmand
   restore: Herstellen
-  currentVersion: Actuele versie
+  current-version: Actuele versie
   history: HISTORIEK
-  fullHistory: Volledige historiek bekijken
-  createNewVersion: Nieuwe versie maken
+  full-history: Volledige historiek bekijken
+  create-new-version: Nieuwe versie maken
 
-validationModal:
+validation-modal:
   title: Geef uw document een naam
   message: Klik op de titel om uw document een naam te geven.
   confirm: Ok
 
 voting:
-  openModalButton: Beheer stemming
+  open-modal-button: Beheer stemming
 
-votingEdit:
-  firstStepTitle: 1. Geef onderwerp in
-  firstStepIntroduction: De raad stemt,
-  firstStepExplanation: "Het onderwerp van een stemming kan bijvoorbeeld zijn: het voorstel van besluit, een amendement, de al dan niet
+voting-edit:
+  first-step-title: 1. Geef onderwerp in
+  first-step-introduction: De raad stemt,
+  first-step-explanation: "Het onderwerp van een stemming kan bijvoorbeeld zijn: het voorstel van besluit, een amendement, de al dan niet
   behandeling van een agendapunt, de open of besloten behandeling van een agendapunt, een verdaging, een
   tussenkomst."
-  privateVotingCheckbox: Maak stemming geheim
-  secondStep: 2. Beheer aanwezigen en stemmen
-  thirdStep: 3. Geef gevolg in
-  thirdStepIntroduction: Met als gevolg,
-  thirdStepExplanation: Het gevolg van een stemming kan bijvoorbeeld goedgekeurd, afgekeurd of verdaagd zijn.
-  fourthStepTitle: 4. Bewaar stemming
-  fourthStepExplanationPartOne: Uw wijzigingen worden niet ingevoegd tot u op
-  fourthStepExplanationPartTwo: klikt.
-  saveButton: Bewaar stemming
-  cancelButton: Annuleer
-  inputPlaceholder: Typ hier...
-  naamLabel: Naam
-  hoedanigheidLabel: Hoedanigheid
-  actionsLabel: Actie
-  loadingText: Bezig met laden...
-  noDataMessage: Geen aanwezigen gevonden. Voeg een nieuwe aanwezige toe.
-  selectPlaceholder: Selecteer
-  addItemButton: Geef stemrecht
-  removeItemButton: Verwijder stemrecht
+  private-voting-checkbox: Maak stemming geheim
+  second-step: 2. Beheer aanwezigen en stemmen
+  third-step: 3. Geef gevolg in
+  third-step-introduction: Met als gevolg,
+  third-step-explanation: Het gevolg van een stemming kan bijvoorbeeld goedgekeurd, afgekeurd of verdaagd zijn.
+  fourth-step-title: 4. Bewaar stemming
+  fourth-step-explanation-part-one: Uw wijzigingen worden niet ingevoegd tot u op
+  fourth-step-explanation-part-two: klikt.
+  save-button: Bewaar stemming
+  cancel-button: Annuleer
+  input-placeholder: Typ hier...
+  naam-label: Naam
+  hoedanigheid-label: Hoedanigheid
+  actions-label: Actie
+  loading-text: Bezig met laden...
+  no-data-message: Geen aanwezigen gevonden. Voeg een nieuwe aanwezige toe.
+  select-placeholder: Selecteer
+  add-item-button: Geef stemrecht
+  remove-item-button: Verwijder stemrecht
 
-votingManageVoting:
+voting-manage-voting:
   title: Geef aanwezigen en stemmers in
   subtitle: Geef aantal stemmen in
-  setUnaniemVoorstanderButton: Geef unaniem voorstander in
-  setUnaniemTegenstanderButton: Geef unaniem tegenstander in
-  setUnaniemOnthouderButton: Geef unaniem onthouder in
-  saveVotesButton: Stemmen opslaan
-  cancelVotesButton: Annuleer
-  startManageVotesButton: Beheer stemmen
+  set-unaniem-voorstander-button: Geef unaniem voorstander in
+  set-unaniem-tegenstander-button: Geef unaniem tegenstander in
+  set-unaniem-onthouder-button: Geef unaniem onthouder in
+  save-votes-button: Stemmen opslaan
+  cancel-votes-button: Annuleer
+  start-manage-votes-button: Beheer stemmen
 
-votingModal:
-  modalTitle: Beheer stemming
-  onderwerpLabel: Onderwerp
-  typeLabel: Type
-  stemmenLabel: Stemmen
-  gevolgLabel: Gevolg
-  actionsLabel: Actie
-  createVotingButton: Nieuwe stemming
-  subjectNotFound: Geen onderwerp
-  geheimTrueLabel: Geheim
-  geheimFalseLabel: Openbaar
-  aantalVoorstandersLabel: "Voorstanders:"
-  aantalTegenstandersLabel: "Tegenstanders:"
-  aantalOnthoudersLabel: "Onthouders:"
-  gevolgNotFound: Geen gevolg
-  toggleEditButton: Bewerk
-  deleteButton: Verwijder
-  noDataMessage: Geen stemmingen gevonden
+voting-modal:
+  modal-title: Beheer stemming
+  onderwerp-label: Onderwerp
+  type-label: Type
+  stemmen-label: Stemmen
+  gevolg-label: Gevolg
+  actions-label: Actie
+  create-voting-button: Nieuwe stemming
+  subject-not-found: Geen onderwerp
+  geheim-true-label: Geheim
+  geheim-false-label: Openbaar
+  aantal-voorstanders-label: "Voorstanders:"
+  aantal-tegenstanders-label: "Tegenstanders:"
+  aantal-onthouders-label: "Onthouders:"
+  gevolg-not-found: Geen gevolg
+  toggle-edit-button: Bewerk
+  delete-button: Verwijder
+  no-data-message: Geen stemmingen gevonden

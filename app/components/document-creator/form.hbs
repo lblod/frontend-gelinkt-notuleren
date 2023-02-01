@@ -2,7 +2,7 @@
   <div>
     {{#let (unique-id) as |id|}}
       <AuLabel @error={{@invalidTitle}} for={{id}}>
-        {{t "documentCreator.titleField"}}
+        {{t "document-creator.title-field"}}
         <RequiredField />
       </AuLabel>
       <AuTextarea @error={{@invalidTitle}}  @width="block"  type="text" value={{@title}} id={{id}} {{on "blur" @updateTitle}} {{on "input" @updateTitle}} />
@@ -11,7 +11,7 @@
   <div>
     {{#let (unique-id) as |id|}}
       <AuLabel @error={{@invalidTemplate}} for={{id}}>
-        {{t "documentCreator.template"}}
+        {{t "document-creator.template"}}
         <RequiredField />        
       </AuLabel>
       <PowerSelect

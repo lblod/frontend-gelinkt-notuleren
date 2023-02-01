@@ -14,7 +14,7 @@
             @error={{if errors true false}}
             for={{id}}
           >
-            {{t "inbox.meetings.new.meeting.administrativeBody"}} <RequiredField />
+            {{t "inbox.meetings.new.meeting.administrative-body"}} <RequiredField />
           </AuLabel>
           <AdministrativeBodySelect
             @id={{id}}
@@ -36,7 +36,7 @@
         {{/let}}
       </div>
       <div>
-        <AuLabel>{{t "inbox.meetings.new.meeting.plannedStart"}}</AuLabel>
+        <AuLabel>{{t "inbox.meetings.new.meeting.planned-start"}}</AuLabel>
         <DateTimePicker @alignment="top" @onChange={{fn (mut this.meeting.geplandeStart)}} @value={{this.meeting.geplandeStart}}/>
       </div>
     </form>

@@ -19,7 +19,7 @@ export default class DateTimePicker extends Component {
 
   get datePickerLocalization() {
     return {
-      buttonLabel: this.intl.t('auDatePicker.buttonLabel'),
+      buttonLabel: this.intl.t('auDatePicker.button-label'),
       selectedDateMessage: this.intl.t('auDatePicker.selectedDateMessage'),
       prevMonthLabel: this.intl.t('auDatePicker.prevMonthLabel'),
       nextMonthLabel: this.intl.t('auDatePicker.nextMonthLabel'),

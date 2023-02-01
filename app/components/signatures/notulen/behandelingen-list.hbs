@@ -1,5 +1,5 @@
 <div class="au-o-box au-u-padding-top-small au-u-padding-bottom-small au-c-editor-preview-treatment-toggle-box">
-  <AuToggleSwitch @label={{t "publish.toggleAllPublicLabel"}} @checked={{@allBehandelingPublic}} @onChange={{@toggleAll}} />
+  <AuToggleSwitch @label={{t "publish.toggle-all-public-label"}} @checked={{@allBehandelingPublic}} @onChange={{@toggleAll}} />
 </div>
 {{#each @prepublishedBehandelingen as |preview|}}
   {{#let (includes preview.behandeling @publicBehandelingUris) as |isPublicBehandeling|}}

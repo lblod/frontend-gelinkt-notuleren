@@ -1,14 +1,14 @@
 <thead>
   <tr>
-    <th>{{t "manageAgendaZittingModal.orderLabel"}}</th>
+    <th>{{t "manage-agenda-zitting-modal.order-label"}}</th>
     {{!template-lint-disable no-inline-styles}}
-    <th style="width: 400px;">{{t "manageAgendaZittingModal.titleLabel"}}</th>
-    <th>{{t "manageAgendaZittingModal.geplandOpenbaar"}}</th>
+    <th style="width: 400px;">{{t "manage-agenda-zitting-modal.title-label"}}</th>
+    <th>{{t "manage-agenda-zitting-modal.gepland-openbaar"}}</th>
     <th class="au-u-table-right">
-      <span class="au-u-hidden-visually">{{t "manageAgendaZittingModal.actionsLabel"}}</span>
+      <span class="au-u-hidden-visually">{{t "manage-agenda-zitting-modal.actions-label"}}</span>
       {{#unless @readOnly}}
         <AuButton {{on "click" @onCreate}} @icon="add" @iconAlignment="left">
-          {{t "manageAgendaZittingModal.createItemButton"}}
+          {{t "manage-agenda-zitting-modal.create-item-button"}}
         </AuButton>
       {{/unless}}
     </th>

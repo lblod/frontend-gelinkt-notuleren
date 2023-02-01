@@ -1,4 +1,4 @@
-{{page-title (t 'inbox.regulatoryStatements.new.title')}}
+{{page-title (t 'inbox.regulatory-statements.new.title')}}
 <DocumentCreator
   @onRollback={{this.cancelCreation}}
   @onCreate={{this.redirectToStatement}}
@@ -6,7 +6,7 @@
   @templateOptions={{this.templateOptions}}
   as |creator|>
   <AuModal
-    @title={{t "inbox.regulatoryStatements.new.title"}}
+    @title={{t "inbox.regulatory-statements.new.title"}}
     @modalOpen={{true}}
     @closeModal={{creator.rollback}}
     as |Modal|
@@ -15,7 +15,7 @@
     <creator.form />
 
     {{#if creator.errorSaving}}
-      <AuAlert @icon="cross" @title={{t "inbox.regulatoryStatements.new.errorSaving"}} @skin="error" @closable={{true}}>
+      <AuAlert @icon="cross" @title={{t "inbox.regulatory-statements.new.error-saving"}} @skin="error" @closable={{true}}>
         {{creator.errorSaving}}
       </AuAlert>
     {{/if}}

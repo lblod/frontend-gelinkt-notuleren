@@ -1,5 +1,5 @@
 auDatePicker:
-  buttonLabel: "Choose a date"
+  button-label: "Choose a date"
   selectedDateMessage: "Selected date is"
   prevMonthLabel: "Previous month"
   nextMonthLabel: "Next month"

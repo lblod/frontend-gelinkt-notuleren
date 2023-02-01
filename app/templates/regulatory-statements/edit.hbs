@@ -8,13 +8,13 @@
 >
   <:return-link>
   <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}} @icon="arrow-left">
-      {{t 'inbox.regulatoryStatements.return'}}
+      {{t 'inbox.regulatory-statements.return'}}
     </AuLink>
   </:return-link>
   <:actions-after-title>
-    <AuDropdown @title={{t 'utils.currentVersion'}} @buttonLabel={{t 'utils.currentVersion'}} @alignment="left">
+    <AuDropdown @title={{t 'utils.current-version'}} @buttonLabel={{t 'utils.current-version'}} @alignment="left">
       <p class="au-u-padding-small regulatory-statement-current-version-container-active">
-        <span class="au-u-medium au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-medium au-u-margin-right-large">{{t 'utils.current-version'}}: </span>
         <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn locale=this.intl.primaryLocale}}</span>
       </p>
       <AuHr />
@@ -33,16 +33,16 @@
           </AuLink>
         {{/each}}
         <AuLink @route="regulatory-statements.edit.history" @model={{this.documentContainer.id}} @skin="link" @icon="clock" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem">
-          {{t 'utils.fullHistory'}}
+          {{t 'utils.full-history'}}
         </AuLink>
       </div>
     </AuDropdown>
   </:actions-after-title>
   <:actions>
-    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.htmlExport"}}
+        {{t "utils.html-export"}}
       </AuButton>
     </AuDropdown>
     <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>
@@ -59,12 +59,12 @@
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning}}
-    @busyText={{t "rdfaEditorContainer.saving"}}
+    @busyText={{t "rdfa-editor-container.saving"}}
     @schema={{this.schema}}
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
   />
 </AuBodyContainer>
-<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>
+<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandeling-van-agendapunten.confirm-leave-without-saving"}}/>
 {{outlet}}

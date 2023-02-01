@@ -1,10 +1,10 @@
-{{page-title (t "inbox.agendapoints.pageTitle")}}
+{{page-title (t "inbox.agendapoints.page-title")}}
 <SnippetsNotifier />
 
 <AuDataTable
   @content={{this.model}}
   @isLoading={{this.isLoadingModel}}
-  @noDataMessage={{t 'inbox.agendapoints.noDataMessage'}}
+  @noDataMessage={{t 'inbox.agendapoints.no-data-message'}}
   @sort={{this.sort}}
   @page={{this.page}}
   @size={{this.pageSize}} as |table|>
@@ -13,11 +13,11 @@
       <AuToolbar class="au-o-box" @size="large" as |Group|>
         <Group>
           <AuHeading @skin="2">
-            {{t 'inbox.agendapoints.pageTitle'}}
+            {{t 'inbox.agendapoints.page-title'}}
           </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center au-u-hide-on-print">
-          <AuInput @icon="search" @iconAlignment="right" @value={{this.searchValue}} placeholder={{t 'inbox.agendapoints.searchPlaceholder'}} {{on "input" (perform this.updateFilter)}}/>
+          <AuInput @icon="search" @iconAlignment="right" @value={{this.searchValue}} placeholder={{t 'inbox.agendapoints.search-placeholder'}} {{on "input" (perform this.updateFilter)}}/>
           {{#unless this.readOnly}}
             <AuLink @route="inbox.agendapoints.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.agendapoints.new.title"}}</AuLink>
           {{/unless}}
@@ -27,11 +27,11 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.titleLabel'}} />
-      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.updatedOnLabel'}} />
-      <AuDataTableThSortable @field=":no-case:status.label" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.statusLabel'}} />
+      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.title-label'}} />
+      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.updated-on-label'}} />
+      <AuDataTableThSortable @field=":no-case:status.label" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.status-label'}} />
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
-      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.agendapoints.attachmentsLabel'}}</span></th>
+      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.agendapoints.attachments-label'}}</span></th>
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}

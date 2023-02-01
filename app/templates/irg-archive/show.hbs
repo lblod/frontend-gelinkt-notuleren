@@ -6,14 +6,14 @@
   <:return-link>
   <AuLink @route="inbox.irg-archive">
     <AuIcon @icon="arrow-left" @alignment="left" />
-    {{t 'inbox.irgArchive.return'}}
+    {{t 'inbox.irg-archive.return'}}
   </AuLink>
   </:return-link>
   <:actions>
-  <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+  <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
     <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
       <AuIcon @icon="export" @alignment="left" />
-      {{t "utils.htmlExport"}}
+      {{t "utils.html-export"}}
     </AuButton>
   </AuDropdown>
   </:actions>
