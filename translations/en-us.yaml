@@ -2,6 +2,10 @@ agendapoint:
   revisions: Revisions
   restore: Restore
   back-to-meeting: Return to the meeting of {adminBody} on {date}
+  not-found: 
+    title: Agendapoint not found
+    explanation: It's possible that you don't have access to the agendapoint with this account
+
 
 app-chrome:
   copy-agendapoint: Copy Agendapoint
@@ -142,6 +146,11 @@ inbox:
     search-placeholder: Type the title of an agendapoint
     restore-message: Restore selected documents
 
+irg-archive:
+  not-found: 
+    title: Reglement not found
+    explanation: It's possible that you don't have access to the reglement with this account
+
 manage-agenda-zitting:
   beschrijving-label: Description
   gepland-openbaar: Planned public
@@ -267,6 +276,19 @@ meetings:
       confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
       save-and-quit: Save and Quit
       cancel: Cancel
+  not-found: 
+    title: Meeting not found
+    explanation: It's possible that you don't have access to the meeting with this account
+
+
+
+not-found:
+  title: Page not found
+  body:
+    explanation: Our apologies, but we could not find this page.
+    contact-message: If you think this is a mistake, you can always contact us on our
+    contact-link: contact page
+    email-message: Or send a mail to
 
 participation:
   present-label: "Present mandatees:"
@@ -354,6 +376,12 @@ rdfa-editor-container:
   default-busy-text: Processing
   saving: Saving
   making-copy: Making copy
+
+regulatory-statements:
+  not-found: 
+    title: Regulatory statement not found
+    explanation: It's possible that you don't have access to the regulatory statement with this account
+
 
 regulatory-statements-plugin:
   regulatory-statement: Regulatory Statement

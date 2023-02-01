@@ -1,10 +1,9 @@
-import { action } from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-
 export default class AgendapointsRoute extends Route {
   @service session;
   @service store;
+  @service router;
 
   queryParams = {
     returnToMeeting: { refreshModel: true },
@@ -25,15 +24,5 @@ export default class AgendapointsRoute extends Route {
       documentContainer: container,
       returnToMeeting: params.returnToMeeting,
     };
-  }
-
-  @action
-  error(error /*, transition */) {
-    if (error.errors && error.errors[0].status === '404') {
-      this.router.transitionTo('route-not-found');
-    } else {
-      // Let the route above this handle the error.
-      return true;
-    }
   }
 }

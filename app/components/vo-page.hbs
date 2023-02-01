@@ -1,9 +1,4 @@
-<AuMainHeader @brandLink="https://www.vlaanderen.be/nl" @homeRoute="index" @appTitle="Gelinkt Notuleren" @contactRoute="contact">
-  <AcmidmLoginCompact @styles="au-c-button au-c-button--tertiary">
-    <AuIcon @icon="login" @alignment="left" />Aanmelden
-  </AcmidmLoginCompact>
-</AuMainHeader>
-
+<ApplicationHeader/>
 {{!-- Refocus after page navigation --}}
 <NavigationNarrator />
 
@@ -11,10 +6,12 @@
   <div class="au-c-main-container__content au-c-main-container__content--scroll">
     <div class="page">
       <main id="content">
+        {{#if this.showBanner}}
         <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is gelinkt notuleren">
           {{!-- template-lint-disable require-valid-alt-text  --}}
           <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="een laptop met daarop het vlaanderen logo.">
         </AuContentHeader>
+        {{/if}}
         {{yield}}
       </main>
     </div>
