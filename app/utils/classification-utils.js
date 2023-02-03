@@ -32,7 +32,8 @@ export const articlesBasedOnClassifcationMap = {
   [GEMEENTERAAD]: 'meeting-form.meeting-heading-article-gendered',
   [RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN]:
     'meeting-form.meeting-heading-article-gendered',
-  [VOORZITTER_VAN_DE_GEMEENTERAAD]: 'meeting-form.meeting-heading-article-gendered',
+  [VOORZITTER_VAN_DE_GEMEENTERAAD]:
+    'meeting-form.meeting-heading-article-gendered',
   [BIJZONDER_COMITE_VOOR_DE_SOCIALE_DIENST]:
     'meeting-form.meeting-heading-article-ungendered',
   [DEPUTATIE]: 'meeting-form.meeting-heading-article-gendered',
