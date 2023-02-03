@@ -91,6 +91,7 @@ export default class AgendapointsEditController extends Controller {
   @tracked _editorDocument;
   @tracked editor;
   @service intl;
+  @service features;
 
   get schema() {
     return new Schema({
@@ -157,9 +158,11 @@ export default class AgendapointsEditController extends Controller {
       citation.widgets.citationInsert,
       roadSignRegulationWidget,
       templateVariableWidget,
-      regulatoryStatementWidget,
       articleStructureInsertWidget(structureSpecs),
       articleStructureContextWidget(structureSpecs),
+      ...(this.features.isEnabled('regulatory-statements')
+        ? [regulatoryStatementWidget]
+        : []),
     ];
   }
 
