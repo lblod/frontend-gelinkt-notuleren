@@ -152,7 +152,7 @@ export default class AgendapointsEditController extends Controller {
       besluitTypeWidget,
       importSnippetWidget,
       rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget,
+      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
       standardTemplateWidget,
       citation.widgets.citationCard,
       citation.widgets.citationInsert,
