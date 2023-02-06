@@ -21,6 +21,23 @@
 
 
 
+
+## 3.2.0 (2023-02-06)
+
+#### :rocket: Enhancement
+* [#416](https://github.com/lblod/frontend-gelinkt-notuleren/pull/416) Add error routes to agendapoints, regulatory statements, meetings and the irg-archive ([@elpoelma](https://github.com/elpoelma))
+* [#415](https://github.com/lblod/frontend-gelinkt-notuleren/pull/415) Addition of not-found route ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#418](https://github.com/lblod/frontend-gelinkt-notuleren/pull/418) Disable regulatory statement insert when its feature flag is disabled ([@elpoelma](https://github.com/elpoelma))
+* [#414](https://github.com/lblod/frontend-gelinkt-notuleren/pull/414) Reroute irg-archive to login when not authenticated ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#420](https://github.com/lblod/frontend-gelinkt-notuleren/pull/420) Update editor and plugins to version 2.1.0 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 3.1.0 (2023-01-26)
 
 #### :rocket: Enhancement
