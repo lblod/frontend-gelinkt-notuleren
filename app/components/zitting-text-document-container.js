@@ -138,7 +138,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     return [
       tableMenu,
       rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget,
+      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
     ];
   }
 

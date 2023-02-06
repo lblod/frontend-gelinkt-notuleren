@@ -122,7 +122,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       tableMenu,
       tableOfContentsWidget,
       rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget,
+      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
       importSnippetWidget,
       citation.widgets.citationCard,
       citation.widgets.citationInsert,
