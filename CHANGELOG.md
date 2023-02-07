@@ -22,6 +22,20 @@
 
 
 
+
+## 3.2.1 (2023-02-07)
+
+#### :bug: Bug Fix
+* [#421](https://github.com/lblod/frontend-gelinkt-notuleren/pull/421) Show unsaved changes correctly ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#419](https://github.com/lblod/frontend-gelinkt-notuleren/pull/419) Bump http-cache-semantics from 4.1.0 to 4.1.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#422](https://github.com/lblod/frontend-gelinkt-notuleren/pull/422) bump editor to v2.1.2 and plugins to v2.1.1 ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 3.2.0 (2023-02-06)
 
 #### :rocket: Enhancement
