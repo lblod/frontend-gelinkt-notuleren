@@ -171,7 +171,7 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get dirty() {
-    return this.editorDocument.content !== this.editor.htmlContent;
+    return this.editorDocument.content !== this.editor?.htmlContent;
   }
 
   get editorDocument() {
