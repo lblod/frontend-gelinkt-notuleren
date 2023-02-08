@@ -1,0 +1,34 @@
+ @import 'utils';
+
+@include admin-unit(gent) {
+  --gent-color-cyan: #009de0;
+  --gent-color-dark-dark-gray: #23333a;
+
+  --au-gray-900: var(--gent-color-dark-dark-gray);
+  color: var(--gent-color-dark-dark-gray);
+
+  li[typeof='besluit:Agendapunt'] {
+    h2 {
+      color: var(--gent-color-cyan);
+      font-size: 20px;
+    }
+
+    p {
+      color: var(--gent-color-dark-dark-gray);
+      margin-top: 0;
+    }
+  }
+
+  div[typeof="besluit:BehandelingVanAgendapunt"] {
+    h3 {
+      color: var(--gent-color-cyan);
+      font-size: 20px;
+    }
+
+    div.c-template-content.c-template-content--treatment {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 0;
+    }
+  }
+}

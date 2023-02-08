@@ -77,6 +77,10 @@ export default class SignaturesTimelineStep extends Component {
     return `Voorvertoning ${this.args.name}`;
   }
 
+  get administrativeUnitName() {
+    return this.currentSession.group.naam.toLowerCase();
+  }
+
   get headerWithDefault() {
     return this.args.header || this.args.name;
   }
