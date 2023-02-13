@@ -7,13 +7,13 @@
       <p>{{limit-content @item.titel 40}}</p>
     </td>
     <td>
-      {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
-          (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
+      {{if @item.geplandOpenbaar (t "manage-agenda-zitting-modal.gepland-openbaar-true-label")
+          (t "manage-agenda-zitting-modal.gepland-openbaar-false-label")}}
     </td>
     <td class="au-u-table-right">
       {{#if this.published}}
         <AuPill @skin="success">
-          {{t "manageAgendaZittingModal.apPublishedMsg"}}
+          {{t "manage-agenda-zitting-modal.ap-published-msg"}}
         </AuPill>
       {{/if}}
     </td>
@@ -29,12 +29,12 @@
       <p>{{limit-content @item.titel 40}}</p>
     </td>
     <td>
-      {{if @item.geplandOpenbaar (t "manageAgendaZittingModal.geplandOpenbaarTrueLabel")
-          (t "manageAgendaZittingModal.geplandOpenbaarFalseLabel")}}
+      {{if @item.geplandOpenbaar (t "manage-agenda-zitting-modal.gepland-openbaar-true-label")
+          (t "manage-agenda-zitting-modal.gepland-openbaar-false-label")}}
     </td>
     <td class="au-u-table-right">
       <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
-        {{t "manageAgendaZittingModal.editItemButton"}}
+        {{t "manage-agenda-zitting-modal.edit-item-button"}}
       </AuButton>
     </td>
   </DraggableObject>

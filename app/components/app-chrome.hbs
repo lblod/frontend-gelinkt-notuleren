@@ -11,14 +11,14 @@
         {{#if (and @editorDocument.updatedOn (not @dirty))}}
         <li class="au-c-list-horizontal__item">
           <span class="au-c-app-chrome__status">
-            {{t "appChrome.savedOn"}} {{human-friendly-date @editorDocument.updatedOn locale=this.intl.primaryLocale}}
+            {{t "app-chrome.saved-on"}} {{human-friendly-date @editorDocument.updatedOn locale=this.intl.primaryLocale}}
           </span>
         </li>
         {{else}}
         <li class="au-c-list-horizontal__item">
           <span class="au-c-app-chrome__status">
             <AuIcon @icon="alert-triangle" @alignment="left" />
-            {{t "appChrome.changesNotSaved"}}
+            {{t "app-chrome.changes-not-saved"}}
           </span>
         </li>
         {{/if}}
@@ -39,7 +39,7 @@
         {{#if @editorDocument.isNew}}
           <AuPill @skin="warning">
             <AuIcon @icon="alert-triangle" @alignment="left" />
-            {{t "appChrome.defaultDocumentStatus"}}
+            {{t "app-chrome.default-document-status"}}
           </AuPill>
         {{/if}}
       </div>

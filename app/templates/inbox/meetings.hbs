@@ -1,7 +1,7 @@
-{{page-title (t "inbox.meetings.pageTitle")}}
+{{page-title (t "inbox.meetings.page-title")}}
 <AuDataTable @content={{this.model}}
              @isLoading={{this.isLoadingModel}}
-             @noDataMessage={{t 'inbox.meetings.noDataMessage'}}
+             @noDataMessage={{t 'inbox.meetings.no-data-message'}}
              @sort={{this.sort}}
              @page={{this.page}}
              @size={{this.pageSize}} as |table|>
@@ -10,7 +10,7 @@
       <AuToolbar class="au-o-box" @size="large" as |Group|>
         <Group>
           <AuHeading @skin="2">
-            {{t "inbox.meetings.pageTitle"}}
+            {{t "inbox.meetings.page-title"}}
           </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center au-u-hide-on-print">
@@ -24,7 +24,7 @@
   <table.content as |c|>
     <c.header>
       <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
-      <AuDataTableThSortable @field=":no-case:bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.administrativeBody'}} />
+      <AuDataTableThSortable @field=":no-case:bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.administrative-body'}} />
       <AuDataTableThSortable @field="geplandeStart" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.time'}} />
       <AuDataTableThSortable @field=":no-case:opLocatie" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.location'}} />
     </c.header>

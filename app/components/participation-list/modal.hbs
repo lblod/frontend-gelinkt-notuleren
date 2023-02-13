@@ -7,7 +7,7 @@
     <div class="au-o-flow">
       <div>
         <AuLabel>
-          {{t "participationListModal.voorzitterLabel"}}
+          {{t "participation-list-modal.voorzitter-label"}}
         </AuLabel>
         <ParticipationList::MandatarisSelector
                 @onSelect={{this.selectChairman}}
@@ -25,13 +25,13 @@
         />
       </div>
       <div>
-        <AuLabel>{{t "participationListModal.presentLabel"}}</AuLabel>
+        <AuLabel>{{t "participation-list-modal.present-label"}}</AuLabel>
         <ParticipationList::MandatarissenTable @toggleParticipant={{this.toggleParticipant}}
                                                as |Table|>
           {{#each this.participants as |participant| }}
             <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}} @disabled={{eq participant.person this.chairman}}/>
           {{else}}
-            <td colspan="4">{{t "participationListModalTable.noDataMessage"}}</td>
+            <td colspan="4">{{t "participation-list-modal-table.no-data-message"}}</td>
           {{/each}}
         </ParticipationList::MandatarissenTable>
       </div>
@@ -50,11 +50,11 @@
     <AuToolbar as |Group|>
       <Group>
         <AuButton @skin="naked" {{on "click" this.onCancel}}>
-          {{t "participationListModal.cancelButton"}}
+          {{t "participation-list-modal.cancel-button"}}
         </AuButton>
       </Group>
       <Group>
-        <AuButton {{on "click" this.insert}}>{{t "participationListModal.saveButton"}}</AuButton>
+        <AuButton {{on "click" this.insert}}>{{t "participation-list-modal.save-button"}}</AuButton>
       </Group>
     </AuToolbar>
   </Modal.Footer>

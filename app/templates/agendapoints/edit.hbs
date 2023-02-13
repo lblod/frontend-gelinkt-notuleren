@@ -10,14 +10,14 @@
   </:return-link>
   <:actions>
     <AgendapointMenu @documentContainer={{this.documentContainer}} @editorDocument={{this.editorDocument}} />
-    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
       <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="copy" @alignment="left"/>
-        {{t "appChrome.copyAgendapoint"}}
+        {{t "app-chrome.copy-agendapoint"}}
       </AuButton>
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left"/>
-        {{t "utils.htmlExport"}}
+        {{t "utils.html-export"}}
       </AuButton>
       <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem"
                                                       @disabled={{this.isNotAllowedToTrash}}>
@@ -31,29 +31,29 @@
 
 {{#if this.hasDocumentValidationErrors}}
   <AuModal
-    @title={{t "validationModal.title"}}
+    @title={{t "validation-modal.title"}}
     @modalOpen={{true}}
             @closeModal={{this.closeValidationModal}} as |Modal| >
     <Modal.Body>
-      <p>{{t "validationModal.message"}}</p>
+      <p>{{t "validation-modal.message"}}</p>
     </Modal.Body>
     <Modal.Footer>
-      <AuButton {{on "click" this.closeValidationModal}}>{{t "validationModal.confirm"}}</AuButton>
+      <AuButton {{on "click" this.closeValidationModal}}>{{t "validation-modal.confirm"}}</AuButton>
     </Modal.Footer>
   </AuModal>
 {{/if}}
 
 {{#if this.displayDeleteModal}}
   <AuModal
-    @title={{t "deleteModal.title"}}
+    @title={{t "delete-modal.title"}}
     @modalOpen={{this.displayDeleteModal}}
             @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
     <Modal.Body>
-      <p>{{t "deleteModal.restoreMessage"}}</p>
+      <p>{{t "delete-modal.restore-message"}}</p>
     </Modal.Body>
     <Modal.Footer>
-      <AuButton {{on "click" this.deleteDocument}}>{{t "deleteModal.confirm"}}</AuButton>
-      <AuButton @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>{{t "deleteModal.cancel"}}</AuButton>
+      <AuButton {{on "click" this.deleteDocument}}>{{t "delete-modal.confirm"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>{{t "delete-modal.cancel"}}</AuButton>
     </Modal.Footer>
   </AuModal>
 {{/if}}
@@ -65,12 +65,12 @@
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-    @busyText={{if this.copyAgendapunt.isRunning (t "rdfaEditorContainer.makingCopy")
-                         (t "rdfaEditorContainer.saving")}}
+    @busyText={{if this.copyAgendapunt.isRunning (t "rdfa-editor-container.making-copy")
+                         (t "rdfa-editor-container.saving")}}
     @schema={{this.schema}}
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
   />
 </div>
-<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandelingVanAgendapunten.confirmLeaveWithoutSaving"}}/>
+<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandeling-van-agendapunten.confirm-leave-without-saving"}}/>

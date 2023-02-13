@@ -5,7 +5,7 @@
 >
   <:return-link>
     <AuLink @route={{if (or this.model.currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}} @model={{this.model.documentContainer.id}} @icon="arrow-left">
-      {{t 'inbox.regulatoryStatements.revisionsReturn'}}
+      {{t 'inbox.regulatory-statements.revisions-return'}}
     </AuLink>
   </:return-link>
   <:actions-after-title>
@@ -13,7 +13,7 @@
       this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @alignment="left">
       <LinkTo @route="{{if (or this.model.currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}}" @model={{this.model.documentContainer.id}}
               class="au-u-padding-small regulatory-statement-current-version-container">
-        <span class="au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-margin-right-large">{{t 'utils.current-version'}}: </span>
         <span class="au-u-light">{{human-friendly-date this.model.currentVersion.updatedOn locale=this.intl.primaryLocale}}</span>
       </LinkTo>
       <AuHr/>
@@ -29,16 +29,16 @@
           </AuLink>
         {{/each}}
         <AuLink @route="regulatory-statements.revisions.history" @skin="link" @icon="clock" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem">
-          {{t 'utils.fullHistory'}}
+          {{t 'utils.full-history'}}
         </AuLink>
       </div>
     </AuDropdown>
   </:actions-after-title>
   <:actions>
-    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left"/>
-        {{t "utils.htmlExport"}}
+        {{t "utils.html-export"}}
       </AuButton>
     </AuDropdown>
     {{#if this.currentSession.canWrite}}
@@ -59,12 +59,12 @@
       <div class="say-container__main">
         {{#unless this.readOnly}}
           <div class="au-o-box au-o-box--small au-u-background-gray-100">
-            <AuAlert @icon="info-circle" @title={{t "inbox.regulatoryStatements.readOnlyBanner.title"}}  @skin="info"
+            <AuAlert @icon="info-circle" @title={{t "inbox.regulatory-statements.read-only-banner.title"}}  @skin="info"
                       @size="small" class="au-u-margin-bottom-none">
               {{#if this.model.editorDocument.status}}
-                <p>{{t "inbox.regulatoryStatements.readOnlyBanner.oldPublishedMessage"}}</p>
+                <p>{{t "inbox.regulatory-statements.read-only-banner.old-published-message"}}</p>
               {{else}}
-                <p>{{t "inbox.regulatoryStatements.readOnlyBanner.message"}}</p>
+                <p>{{t "inbox.regulatory-statements.read-only-banner.message"}}</p>
               {{/if}}
             </AuAlert>
           </div>

@@ -8,9 +8,9 @@
   {{#if this.showVoteSelect}}
     <td>
       {{#let (unique-id) as |id|}}
-        <AuLabel for={{id}}  class="au-u-hidden-visually">{{t "votingEdit.actionsLabel"}}</AuLabel>
+        <AuLabel for={{id}}  class="au-u-hidden-visually">{{t "voting-edit.actions-label"}}</AuLabel>
         <select {{on "change" this.onSelectVote}} id={{id}}>
-          <option value="">{{t "votingEdit.selectPlaceholder"}}</option>
+          <option value="">{{t "voting-edit.select-placeholder"}}</option>
           {{#each this.voteOptions as |voteOption|}}
             <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
           {{/each}}
@@ -21,11 +21,11 @@
   <td colspan="{{if this.showVoteSelect 1 2}}">
     {{#if this.isVoting}}
       <AuButton @alert={{ true }} @skin="secondary" @icon="cross" @iconAlignment="left" {{on "click" this.removeStemmer}}>
-        {{t "votingEdit.removeItemButton"}}
+        {{t "voting-edit.remove-item-button"}}
       </AuButton>
     {{else}}
       <AuButton @alert={{ false }} @skin="secondary" @icon="add" @iconAlignment="left" {{on "click" this.addStemmer}}>
-        {{t "votingEdit.addItemButton"}}
+        {{t "voting-edit.add-item-button"}}
       </AuButton>
     {{/if}}
   </td>

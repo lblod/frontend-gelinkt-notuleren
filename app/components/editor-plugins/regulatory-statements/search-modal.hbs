@@ -1,5 +1,5 @@
 <AuModal @modalOpen={{true}} 
-         @title={{t "regulatoryStatementsPlugin.insertStatement"}} 
+         @title={{t "regulatory-statements-plugin.insert-statement"}} 
          @size="large" 
          @padding="none" 
          @closeModal={{@closeModal}}
@@ -16,7 +16,7 @@
               @width="block"
               @icon="search"
               @iconAlignment="right"
-              placeholder={{t "regulatoryStatementsPlugin.search"}}
+              placeholder={{t "regulatory-statements-plugin.search"}}
               @value={{this.searchValue}}
               {{on "input" (perform this.updateFilter)}} />
             <AuHr @size="large" />
@@ -29,7 +29,7 @@
                       (fn this.selectStatement statement)}}>
                       {{statement.currentVersion.title}}
                       {{#if (this.isInserted statement)}}
-                        <AuPill @skin="border" @icon="info-circle">{{t "regulatoryStatementsPlugin.alreadyAttached"}}</AuPill>
+                        <AuPill @skin="border" @icon="info-circle">{{t "regulatory-statements-plugin.already-attached"}}</AuPill>
                       {{/if}}
                     </AuButton>
                   </li>
@@ -39,7 +39,7 @@
                   <AuButton
                       class="au-u-padding au-u-1-1" {{on "click"
                       (perform this.fetchNextPage)}} @loading={{this.fetchNextPage.isRunning}}>
-                      {{t "regulatoryStatementsPlugin.loadMore"}}
+                      {{t "regulatory-statements-plugin.load-more"}}
                   </AuButton>
                 </li>
                 {{/if}}
@@ -54,7 +54,7 @@
               </AuAlert>
             {{/if}}
             {{#if this.fetchNextPage.isRunning}}
-              <AuLoader @message={{t "regulatoryStatementsPlugin.loading"}} />
+              <AuLoader @message={{t "regulatory-statements-plugin.loading"}} />
             {{/if}}
           </div>
         </div>
@@ -72,7 +72,7 @@
               </div>
             {{else}}
               <AuAlert
-                @alertTitle="{{t "regulatoryStatementsPlugin.noStatementSelected"}}"
+                @alertTitle="{{t "regulatory-statements-plugin.no-statement-selected"}}"
                 @alertSkin="info"
                 @alertIcon="info-circle"
                 @alertSize="default"
@@ -84,12 +84,12 @@
           <div class="au-c-modal__footer">
             <AuToolbar>
               <AuToolbar::Group>
-                <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatoryStatementsPlugin.cancel"}}</AuButton>
+                <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatory-statements-plugin.cancel"}}</AuButton>
               </AuToolbar::Group>
               <AuToolbar::Group>
                 <AuButton @disabled={{or (not this.selectedStatement) (this.isInserted this.selectedStatement)}} {{on "click" (fn @insertStatement
                   this.selectedStatement)}}>
-                  {{t "regulatoryStatementsPlugin.insertStatement"}}
+                  {{t "regulatory-statements-plugin.insert-statement"}}
                 </AuButton>
               </AuToolbar::Group>
             </AuToolbar>

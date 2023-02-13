@@ -8,7 +8,7 @@
   <div class="au-c-meeting-chrome-card">
     {{#if agenda.loadItemsTask.isRunning}}
       <AuLoader />
-      <AuHelpText>{{t "participationList.loadingLoader"}}</AuHelpText>
+      <AuHelpText>{{t "participation-list.loading-loader"}}</AuHelpText>
     {{else}}
       <AgendaManager::AgendaTable
               @onSort={{agenda.onSort}}

@@ -1,7 +1,7 @@
-{{page-title (t "inbox.trash.pageTitle")}}
+{{page-title (t "inbox.trash.page-title")}}
 <AuDataTable @content={{this.model}}
              @isLoading={{this.isLoadingModel}}
-             @noDataMessage={{t 'inbox.trash.noDataMessage'}}
+             @noDataMessage={{t 'inbox.trash.no-data-message'}}
              @sort={{this.sort}}
              @page={{this.page}}
              @size={{this.pageSize}} as |table|>
@@ -10,11 +10,11 @@
       <AuToolbar class="au-o-box" @size="large" as |Group|>
         <Group>
           <AuHeading @skin="2">
-            {{t 'inbox.trash.pageTitle'}}
+            {{t 'inbox.trash.page-title'}}
           </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center">
-          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.searchPlaceholder'}} />
+          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.search-placeholder'}} />
         </Group>
       </AuToolbar>
     </menu.general>
@@ -22,18 +22,18 @@
       <AuToolbar @size="large" class="au-u-padding-bottom-none" as |Group|>
         <Group class="au-c-toolbar__group--center">
           <AuHeading @skin="2">
-           {{t 'inbox.trash.pageTitle'}}
+           {{t 'inbox.trash.page-title'}}
           </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center">
-          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.searchPlaceholder'}} />
+          <AuDataTableTextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.trash.search-placeholder'}} />
         </Group>
       </AuToolbar>
       <AuToolbar @size="large" as |Group|>
         <Group data-table-action>
           <AuButton @skin="secondary" {{on "click" (fn this.moveToConcepts selection datatable)}}>
             <AuIcon @icon="redo" @alignment="left" />
-            {{t 'inbox.trash.restoreMessage'}}
+            {{t 'inbox.trash.restore-message'}}
           </AuButton>
         </Group>
       </AuToolbar>

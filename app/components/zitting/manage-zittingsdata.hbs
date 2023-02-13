@@ -1,72 +1,72 @@
 <div class="au-c-meeting-chrome-card au-u-margin-bottom-large">
   <ul class="au-c-list-divider">
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.bestuursorganLabel"}} <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
+      {{t "manage-zittings-data.bestuursorgan-label"}} <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
     </li>
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.geplandeStartLabel"}} <strong>{{detailed-date this.geplandeStart}}</strong>
+      {{t "manage-zittings-data.geplande-start-label"}} <strong>{{detailed-date this.geplandeStart}}</strong>
     </li>
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.opLocatieLabel"}} <strong>{{this.opLocatie}}</strong>
+      {{t "manage-zittings-data.op-locatie-label"}} <strong>{{this.opLocatie}}</strong>
     </li>
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.gestartOpTijdstipLabel"}} <strong>{{detailed-date this.gestartOpTijdstip}}</strong>
+      {{t "manage-zittings-data.gestart-op-tijdstip-label"}} <strong>{{detailed-date this.gestartOpTijdstip}}</strong>
       {{#if this.startDiffersFromPlannedStart}}
         <AuPill @skin="info" @draft={{true}} @icon="info-circle" @iconAlignment="left">
-          {{t "manageZittingsData.startDiffersFromPlannedStart"}}
+          {{t "manage-zittings-data.start-differs-from-planned-start"}}
         </AuPill>
       {{/if}}
       {{#if this.startDateIsEmpty}}
-        <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t "manageZittingsData.startNotSet"}}</AuPill>
+        <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t "manage-zittings-data.start-not-set"}}</AuPill>
       {{/if}}
     </li>
     <li class="au-c-list-divider__item">
-      {{t "manageZittingsData.geeindigdOpTijdstipLabel"}} <strong>{{detailed-date this.geeindigdOpTijdstip}}</strong>
+      {{t "manage-zittings-data.geeindigd-op-tijdstip-label"}} <strong>{{detailed-date this.geeindigdOpTijdstip}}</strong>
       {{#if this.endDateIsEmpty}}
-        <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t "manageZittingsData.endNotSet"}}</AuPill>
+        <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t "manage-zittings-data.end-not-set"}}</AuPill>
       {{/if}}
       {{#if this.endIsBeforeStart}}
-        <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t "manageZittingsData.endBeforeStart"}}</AuPill>
+        <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t "manage-zittings-data.end-before-start"}}</AuPill>
       {{/if}}
     </li>
   </ul>
   {{#unless @readOnly}}
-    <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">{{t "manageZittingsData.openModalButton"}}</AuButton>
+    <AuButton {{on "click" this.toggleModal}} @skin="secondary" @width="block" @icon="pencil" @iconAlignment="left">{{t "manage-zittings-data.open-modal-button"}}</AuButton>
   {{/unless}}
 </div>
 
 {{#if this.showModal}}
   <AuModal
-    @title={{t "manageZittingsData.modalTitle"}}
+    @title={{t "manage-zittings-data.modal-title"}}
     @modalOpen={{this.showModal}}
     @closeModal={{this.cancel}} as |Modal| >
     <Modal.Body>
       <div class="au-o-flow">
         <div>
-          <AuLabel>{{t "manageZittingsData.bestuursorganLabel"}}</AuLabel>
+          <AuLabel>{{t "manage-zittings-data.bestuursorgan-label"}}</AuLabel>
           {{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}
           (periode: {{plain-date this.bestuursorgaan.bindingStart}} -
           {{#if this.bestuursorgaan.bindingEinde}}{{plain-date this.bestuursorgaan.bindingEinde}}{{else}}nvt.{{/if}})
         </div>
         <div>
           {{#let (unique-id) as |id|}}
-            <AuLabel for={{id}}>{{t "manageZittingsData.opLocatieLabel"}}</AuLabel>
+            <AuLabel for={{id}}>{{t "manage-zittings-data.op-locatie-label"}}</AuLabel>
             <AuInput type='text' @value={{mut this.opLocatie}} @width="block" id={{id}} />
           {{/let}}
         </div>
         <div>
-          <AuLabel>{{t "manageZittingsData.geplandeStartLabel"}}</AuLabel>
+          <AuLabel>{{t "manage-zittings-data.geplande-start-label"}}</AuLabel>
           <DateTimePicker @alignment="top" @onChange={{fn this.changeDate 'geplandeStart'}} @value={{this.geplandeStart}}/>
         </div>
         <div>
-          <AuLabel>{{t "manageZittingsData.gestartOpTijdstipLabel"}}</AuLabel>
+          <AuLabel>{{t "manage-zittings-data.gestart-op-tijdstip-label"}}</AuLabel>
           <DateTimePicker @alignment="top" @onChange={{fn this.changeDate 'gestartOpTijdstip'}} @value={{this.gestartOpTijdstip}}/>
         </div>
         <div>
-          <AuLabel>{{t "manageZittingsData.geeindigdOpTijdstipLabel"}}</AuLabel>
+          <AuLabel>{{t "manage-zittings-data.geeindigd-op-tijdstip-label"}}</AuLabel>
           <DateTimePicker @alignment="top" @onChange={{fn this.changeDate 'geeindigdOpTijdstip'}} @value={{this.geeindigdOpTijdstip}} />
           {{#if this.endIsBeforeStart}}
-            <AuPill @skin="warning" @draft={{true}} @icon="info-circle">{{t "meetingForm.dateWarning"}}</AuPill>
+            <AuPill @skin="warning" @draft={{true}} @icon="info-circle">{{t "meeting-form.date-warning"}}</AuPill>
           {{/if}}
         </div>
       </div>
@@ -75,12 +75,12 @@
       <AuToolbar as |Group|>
         <Group>
           <AuButton @skin="naked" {{on "click" this.cancel}}>
-            {{t "manageZittingsData.cancelButton"}}
+            {{t "manage-zittings-data.cancel-button"}}
           </AuButton>
         </Group>
         <Group>
           <AuButton {{on "click" this.saveZittingsData}}>
-            {{t "manageZittingsData.saveButton"}}
+            {{t "manage-zittings-data.save-button"}}
           </AuButton>
         </Group>
       </AuToolbar>
