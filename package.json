@@ -103,7 +103,7 @@
     "prosemirror-dev-tools": "^4.0.0",
     "qunit": "^2.18.1",
     "qunit-dom": "^1.6.0",
-    "release-it": "^15.4.1",
+    "release-it": "^15.6.0",
     "sass": "^1.49.9",
     "tracked-built-ins": "^2.0.1",
     "tracked-toolbox": "^1.2.3",
