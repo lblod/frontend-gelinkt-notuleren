@@ -26,6 +26,7 @@
 @include admin-unit(gent) {
   --gent-color-cyan: #009de0;
   --gent-color-dark-dark-gray: #23333a;
+  --gent-color-background-cyan: #f0f9fd;
   --au-gray-900: var(--gent-color-dark-dark-gray);
 
   color: var(--gent-color-dark-dark-gray);
@@ -47,7 +48,26 @@
     @include header-styles;
 
     table {
+      border: 0;
       margin-top: 1rem;
+
+      tbody {
+        tr {
+          border-color: transparent;
+
+          td:first-child {
+            border-left: 0
+          }
+
+          td {
+            border-color: white;
+          }
+        }
+
+        tr:nth-child(2n) {
+          background-color: var(--gent-color-background-cyan);
+        }
+      }
     }
 
     ul {
