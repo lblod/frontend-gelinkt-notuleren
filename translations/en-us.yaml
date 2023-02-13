@@ -1,18 +1,17 @@
 agendapoint:
   revisions: Revisions
   restore: Restore
-  backToMeeting: Return to the meeting of {adminBody} on {date}
+  back-to-meeting: Return to the meeting of {adminBody} on {date}
   not-found: 
     title: Agendapoint not found
     explanation: It's possible that you don't have access to the agendapoint with this account
 
 
-appChrome:
-  copyAgendapoint: Copy Agendapoint
-  defaultDocumentStatus: Concept not saved
-  deleteConcept: Delete concept
-  savedOn: Saved on
-  changesNotSaved: Changes not saved
+app-chrome:
+  copy-agendapoint: Copy Agendapoint
+  default-document-status: Concept not saved
+  saved-on: Saved on
+  changes-not-saved: Changes not saved
 
 attachments:
   attachments: Attachments
@@ -25,58 +24,49 @@ attachments:
   delete: Delete
   type: Type
   decision: Decision
-  typePlaceholder: none
+  type-placeholder: none
   regulatory: regulatory
-  saveAndGo: Save and go to attachments
-  noDecisionsFound: No decisions found
-  decisionRequired: Only attachments linked to a decision are included in the publication.
+  no-decisions-found: No decisions found
+  decision-required: Only attachments linked to a decision are included in the publication.
 
-behandelingVanAgendapunten:
-  documentLink: "document link"
-  saveButton: Save
-  saveAndQuit: Save and Quit
+behandeling-van-agendapunten:
+  save-button: Save
+  save-and-quit: Save and Quit
   cancel: Cancel
-  leaveWithoutSaving: Leave without saving
-  confirmLeaveWithoutSaving: Are you sure you would like to leave this page without saving your changes?
-  openbaarLabel: "make agendapoint public"
-  geenOpenbaarMsg: "agendapoint not public"
-  openbaarMsg: "agendapoint public"
-  participationListButton: Configure attendees of this agenda-item.
+  confirm-leave-without-saving: Are you sure you would like to leave this page without saving your changes?
+  openbaar-label: "make agendapoint public"
+  geen-openbaar-msg: "agendapoint not public"
+  openbaar-msg: "agendapoint public"
+  participation-list-button: Configure attendees of this agenda-item.
   visibility: "visibility"
-  votingTitle: "Voting"
-  contentTitle: "Content"
-  needsParticipants: Please configure the participants to this agenda-item before adding a voting.
-  editDocument: "Edit document"
+  voting-title: "Voting"
+  content-title: "Content"
+  needs-participants: Please configure the participants to this agenda-item before adding a voting.
+  edit-document: "Edit document"
 
-blockchainStatus:
-  encryptedLabel: Encrypted
-  encryptingLabel: Encrypting
-  encryptingText: Encrypting a document can take several minutes. Refresh the page to see the new status.
+date-format:
+  short-date: Short date
+  long-date: Long date
 
-dateFormat:
-  shortDate: Short date
-  longDate: Long date
-
-dateTimePicker:
+date-time-picker:
   date: Date
   hours: Hour
   minutes: Minutes
 
-deleteModal:
+delete-modal:
   title: Do you want to move this document to the trash?
-  restoreMessage: You can always restore it from the trash
+  restore-message: You can always restore it from the trash
   confirm: Yes, move to trash
   cancel: Cancel
 
-documentCreator:
-  titleField: Document title
+document-creator:
+  title-field: Document title
   template: Template
-  templateSelectPlaceholder: Select a template
 
-editorStatusPill:
-  defaultStatus: Concept
+editor-status-pill:
+  default-status: Concept
 
-editorDocumentTitle:
+editor-document-title:
   placeholder: Untitled document
 
 inbox:
@@ -88,221 +78,203 @@ inbox:
     manual: View manual
   meetings:
     type: Meeting
-    pageTitle: Meetings
-    noDataMessage: No meetings
-    newMeeting: New meeting
-    administrativeBody: Administrative body
+    page-title: Meetings
+    no-data-message: No meetings
+    administrative-body: Administrative body
     time: Time
     location: Location
     new:
       title: Create a new meeting
       meeting:
-        administrativeBody: Held by
+        administrative-body: Held by
         location: On location
-        plannedStart: Scheduled start
+        planned-start: Scheduled start
         errors:
-          administrativeBody:
+          administrative-body:
             required: Please select an administrative body
       save: Create meeting
       cancel: Back
   agendapoints:
     return: Return to the overview of agendapoints
-    pageTitle: Agendapoints
-    searchPlaceholder: Type the title of an agendapoint
-    noDataMessage: No documents
-    titleLabel: Agendapoint title
-    createdOnLabel: Created
-    updatedOnLabel: Modified
-    statusLabel: Status
-    attachmentsLabel: Attachments
+    page-title: Agendapoints
+    search-placeholder: Type the title of an agendapoint
+    no-data-message: No documents
+    title-label: Agendapoint title
+    updated-on-label: Modified
+    status-label: Status
+    attachments-label: Attachments
     new:
       title: Create agendapoint
-      errorSaving: Something went wrong while creating the agendapoint
+      error-saving: Something went wrong while creating the agendapoint
       create: Create
       cancel: Back
-  regulatoryStatements:
+  regulatory-statements:
     return: Return to the overview of regulatory statements
-    revisionsReturn: Return to the actual version
-    pageTitle: Regulatory statements
-    searchPlaceholder: Search on title of regulatory statement
-    noDataMessage: No regulatory statements
-    titleLabel: Title
-    updatedOnLabel: Modified
-    statusLabel: Status
+    revisions-return: Return to the actual version
+    page-title: Regulatory statements
+    search-placeholder: Search on title of regulatory statement
+    no-data-message: No regulatory statements
+    title-label: Title
+    updated-on-label: Modified
+    status-label: Status
     type: Type
-    agendaPoint: Agendapoint
-    readOnlyBanner:
+    read-only-banner:
       title: Not editable
       message: This is an old version. Restore this version to make new edits.
-      oldPublishedMessage: This is an old published version. Restore this version to make new edits.
-      publishedMessage: This regulatory statement has already been published. Published regulatory attachments are not editable.
-      publishedMessageTitle: Non editable
+      old-published-message: This is an old published version. Restore this version to make new edits.
+      published-message: This regulatory statement has already been published. Published regulatory attachments are not editable.
+      published-message-title: Non editable
     new:
       title: New regulatory statement
-      errorSaving: Something went wrong while creating the regulatory statement.
-    linkedAgendapoints:
-      buttonLabel: Linked agendapoints
+      error-saving: Something went wrong while creating the regulatory statement.
+    linked-agendapoints:
+      button-label: Linked agendapoints
       title: Agendapoints linked to {title}
-      noData: No agendapoints found
-  irgArchive:
+      no-data: No agendapoints found
+  irg-archive:
     return: Return to the archive
-    pageTitle: IRG Archive
-    pageSubTitle: Regulations up until 18/01/2023
-    searchPlaceholder: Search on title of regulatory statement
-    titleLabel: Title of regulatory statement
-    typeLabel: Road type
-    identifierLabel: Reference number
+    page-title: IRG Archive
+    page-subtitle: Regulations up until 18/01/2023
+    search-placeholder: Search on title of regulatory statement
+    title-label: Title of regulatory statement
+    type-label: Road type
+    identifier-label: Reference number
   trash:
-    pageTitle: Recycle bin
+    page-title: Recycle bin
     title: Recycle bin
-    noDataMessage: No documents
-    searchPlaceholder: Type the title of an agendapoint
-    restoreMessage: Restore selected documents
+    no-data-message: No documents
+    search-placeholder: Type the title of an agendapoint
+    restore-message: Restore selected documents
 
 irg-archive:
   not-found: 
     title: Reglement not found
     explanation: It's possible that you don't have access to the reglement with this account
 
-manageAgendaZitting:
-  titelLabel: Title
-  beschrijvingLabel: Description
-  geplandOpenbaar: Planned public
-  openModalButton: Manage agenda
+manage-agenda-zitting:
+  beschrijving-label: Description
+  gepland-openbaar: Planned public
+  open-modal-button: Manage agenda
 
-manageAgendaZittingModal:
-  modalTitle: Edit agenda item
-  saveButton: Save agenda item
-  saveAllButton: Save agenda
-  cancelEditingButton: Cancel
-  cancelButton: Back
-  orderLabel: Order
-  titleLabel: Agenda item title
-  beschrijvingLabel: Agenda item description
-  copyDescriptionLabel: Copy description from decision
-  geplandOpenbaar: Planned visibility
-  actionsLabel: Actions
-  createItemButton: Add agenda item
-  editItemButton: Edit agenda item
-  apPublishedMsg: Agenda point is published
-  noDataMessage: No agenda items found.
-  geplandOpenbaarTrueLabel: Public
-  geplandOpenbaarFalseLabel: Private
-  saveAllError: something went wrong while persisting the agenda, please try again.
+manage-agenda-zitting-modal:
+  modal-title: Edit agenda item
+  save-button: Save agenda item
+  cancel-button: Back
+  order-label: Order
+  title-label: Agenda item title
+  beschrijving-label: Agenda item description
+  copy-description-label: Copy description from decision
+  gepland-openbaar: Planned visibility
+  actions-label: Actions
+  create-item-button: Add agenda item
+  edit-item-button: Edit agenda item
+  ap-published-msg: Agenda point is published
+  no-data-message: No agenda items found.
+  gepland-openbaar-true-label: Public
+  gepland-openbaar-false-label: Private
 
-manageAgendaZittingModalDelete:
-  modalSubtitle: Delete agenda item
-  toggleEditButton: Retain agenda item
-  deleteButton: Delete agenda item
-  toggleWarningButton: Delete the agenda item.
-  warningPartOne: You cannot undo this action.
-  warningPartTwo: You are going to remove the agenda item from the agenda.
-  agreeQuestion: Are you sure you want to delete the agenda item?
-  checkboxLabel: I understand that the agenda item will be irreversibly removed.
+manage-agenda-zitting-modal-delete:
+  modal-subtitle: Delete agenda item
+  toggle-edit-button: Retain agenda item
+  delete-button: Delete agenda item
+  checkbox-label: I understand that the agenda item will be irreversibly removed.
 
-manageAgendaZittingModalDraftImport:
+manage-agenda-zitting-modal-draft-import:
   title: Select draft agendapoint
   default: Create a new agendapoint or select an existing one
 
-manageAgendaZittingModalEdit:
-  modalSubtitle: Edit agenda item
-  geplandOpenbaarTrueLabel: Public
-  geplandOpenbaarFalseLabel: Private
+manage-agenda-zitting-modal-edit:
+  modal-subtitle: Edit agenda item
+  gepland-openbaar-true-label: Public
+  gepland-openbaar-false-label: Private
 
-manageAgendaZittingModalMove:
+manage-agenda-zitting-modal-move:
   title: Move agenda item
-  positionSelectPlaceholder: Select position
-  agendapuntSelectPlaceholder: Select agenda item
-  searchPlaceholder: Search by title
+  position-select-placeholder: Select position
+  agendapunt-select-placeholder: Select agenda item
+  search-placeholder: Search by title
 
-manageFreeText:
+manage-free-text:
   before: Free text before the meeting
   after: Free text after the meeting
   save: Save
 
-manageIntermissions:
-  interruptionStartLabel: Start
-  interruptionEndLabel: End
-  commentLabel: Comment
-  actionsLabel: Actions
-  addInterruptionLabel: Add Intermission
+manage-intermissions:
+  interruption-start-label: Start
+  interruption-end-label: End
+  comment-label: Comment
+  actions-label: Actions
+  add-interruption-label: Add Intermission
   title: Intermissions
-  noDataMessage: No intermissions
-  modalTitle: Intermission
-  insertLabel: Insert
-  saveLabel: Save
-  cancelLabel: Cancel
-  editLabel: Edit Intermission
-  deleteCardTitle: Delete Intermission
+  no-data-message: No intermissions
+  modal-title: Intermission
+  insert-label: Insert
+  save-label: Save
+  cancel-label: Cancel
+  edit-label: Edit Intermission
   warning: You cannot undo this action.
-  toggleWarningButton: Delete Intermission
-  agreeQuestion: Are you sure you want to delete the intermission?
-  checkboxLabel: I understand that the intermission will be irreversibly removed.
-  retainButton: Retain intermission
-  deleteButton: Delete intermission
-  beforeAp: "Intermission before agenda item:"
-  duringAp: "Intermission during agenda item:"
-  afterAp: "Intermission after agenda item:"
+  checkbox-label: I understand that the intermission will be irreversibly removed.
+  delete-button: Delete intermission
+  before-ap: "Intermission before agenda item:"
+  during-ap: "Intermission during agenda item:"
+  after-ap: "Intermission after agenda item:"
   position: "Position"
 
-manageZittingsData:
-  startNotSet: "start date has not been set"
-  endNotSet: "end date has not been set"
-  endBeforeStart: You can't pick an end-date that is before the start date.
-  startDiffersFromPlannedStart: "Note: planned start differs from start date, make sure this was intentional."
-  modalTitle: Manage general information about the meeting
-  bestuursorganLabel: "Held by:"
-  geplandeStartLabel: "Scheduled start:"
-  opLocatieLabel: "On location:"
-  gestartOpTijdstipLabel: "Started at:"
-  geeindigdOpTijdstipLabel: "Finished at:"
-  saveButton: Insert meeting data
-  cancelButton: Back
-  openModalButton: Manage general data of the meeting
-  selectPlaceholder: Select governing body
+manage-zittings-data:
+  start-not-set: "start date has not been set"
+  end-not-set: "end date has not been set"
+  end-before-start: You can't pick an end-date that is before the start date.
+  start-differs-from-planned-start: "Note: planned start differs from start date, make sure this was intentional."
+  modal-title: Manage general information about the meeting
+  bestuursorgan-label: "Held by:"
+  geplande-start-label: "Scheduled start:"
+  op-locatie-label: "On location:"
+  gestart-op-tijdstip-label: "Started at:"
+  geeindigd-op-tijdstip-label: "Finished at:"
+  save-button: Insert meeting data
+  cancel-button: Back
+  open-modal-button: Manage general data of the meeting
+  select-placeholder: Select governing body
 
-meetingForm:
-  incompleteWarning: Please fill out the meeting details and add at least one agenda item before publishing.
-  backButton: Back to meetings
-  scheduledText: Meeting scheduled on
-  publishButton: Sign and publish
-  firstSectionTitle: 1. General information about the meeting
-  secondSectionTitle: 2. Attendance at the start of the meeting
-  thirdSectionTitle: 3. Agenda of the meeting
-  fourthSectionTitle: 4. Free text (meeting intro).
-  fifthSectionTitle: 5. Treatment of the agenda items
-  sixthSectionTitle: 6. Free text (meeting outro).
-  seventhSectionTitle: 7. End of the meeting
-  meetingHeadingPartOne: Meeting minutes
-  meetingHeadingArticleGendered: of
-  meetingHeadingArticleUngendered: of
-  meetingHeadingPartTwo: of
-  firstSectionNotFilledWarning: Before you can start the meeting it is necessary to set a date, location and governing body.
-  secondSectionNotFilledWarning: Complete the attendance.
-  thirdSectionNotFilledWarning: Manage the agenda of your meeting. You can add new agenda items or add existing agenda items.
-  fourthSectionNotFilledWarning: Fill out free text (meeting intro).
-  fifthSectionNotFilledWarning: Manage your decision and votes.
-  sixthSectionNotFilledWarning: Fill outFree text (meeting outro).
-  bestuursorganNotSelectedWarning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
-  notulenPublished: Meeting is published
+meeting-form:
+  incomplete-warning: Please fill out the meeting details and add at least one agenda item before publishing.
+  back-button: Back to meetings
+  scheduled-text: Meeting scheduled on
+  publish-button: Sign and publish
+  first-section-title: 1. General information about the meeting
+  second-section-title: 2. Attendance at the start of the meeting
+  third-section-title: 3. Agenda of the meeting
+  fourth-section-title: 4. Free text (meeting intro).
+  fifth-section-title: 5. Treatment of the agenda items
+  sixth-section-title: 6. Free text (meeting outro).
+  meeting-heading-part-one: Meeting minutes
+  meeting-heading-article-gendered: of
+  meeting-heading-article-ungendered: of
+  meeting-heading-part-two: of
+  first-section-not-filled-warning: Before you can start the meeting it is necessary to set a date, location and governing body.
+  second-section-not-filled-warning: Complete the attendance.
+  third-section-not-filled-warning: Manage the agenda of your meeting. You can add new agenda items or add existing agenda items.
+  fifth-section-not-filled-warning: Manage your decision and votes.
+  bestuursorgan-not-selected-warning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
+  notulen-published: Meeting is published
 
 meetings:
   delete:
     delete: Delete
-    confirmMessage: Are you sure you want to delete this meeting
+    confirm-message: Are you sure you want to delete this meeting
     warning: This action cannot be undone
-    confirmButton: Yes, Delete this meeting
+    confirm-button: Yes, Delete this meeting
     back: Back
   edit:
     intro:
       save: Save
-      confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
-      saveAndQuit: Save and Quit
+      confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
+      save-and-quit: Save and Quit
       cancel: Cancel
     outro:
       save: Save
-      confirmQuitWithoutSaving: Are you sure you want to leave the page without saving your changes?
-      saveAndQuit: Save and Quit
+      confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
+      save-and-quit: Save and Quit
       cancel: Cancel
   not-found: 
     title: Meeting not found
@@ -319,91 +291,91 @@ not-found:
     email-message: Or send a mail to
 
 participation:
-  presentLabel: "Present mandatees:"
+  present-label: "Present mandatees:"
 
-participationList:
-  blockTitle: "Participation"
-  loadingTitle: Loading the attendee list
-  loadingLoader: Loading
-  voorzitterLabel: "Chairman:"
-  voorzitterError: "No chairman has been assigned"
-  secretarisLabel: "Secretary:"
-  secretarisError: "No secretary has been assigned"
-  presentLabel: "Present mandatees:"
-  presentError: "No mandatees have been appointed"
-  notPresentLabel: "Absent mandatees:"
-  openModalButton: Manage attendees at the start of the session
+participation-list:
+  block-title: "Participation"
+  loading-title: Loading the attendee list
+  loading-loader: Loading
+  voorzitter-label: "Chairman:"
+  voorzitter-error: "No chairman has been assigned"
+  secretaris-label: "Secretary:"
+  secretaris-error: "No secretary has been assigned"
+  present-label: "Present mandatees:"
+  present-error: "No mandatees have been appointed"
+  not-present-label: "Absent mandatees:"
+  open-modal-button: Manage attendees at the start of the session
 
-participationListModal:
-  voorzitterLabel: Chairman of the meeting
-  secretarisLabel: Secretary of the meeting
-  presentLabel: Present mandatees
-  saveButton: Insert attendees
-  cancelButton: Cancel
-  chairmanAbsentError: The chairman must be present
+participation-list-modal:
+  voorzitter-label: Chairman of the meeting
+  secretaris-label: Secretary of the meeting
+  present-label: Present mandatees
+  save-button: Insert attendees
+  cancel-button: Cancel
+  chairman-absent-error: The chairman must be present
 
-participationListModalSelector:
-  loadingMessage: Loading...
-  noMatchesMessage: No results
-  searchMessage: Type to search
+participation-list-modal-selector:
+  loading-message: Loading...
+  no-matches-message: No results
+  search-message: Type to search
   placeholder: Search on name
 
-participationListModalTable:
-  naamLabel: Name
-  functieLabel: Position
-  geboortedatumLabel: Birthdate
-  actieLabel: Action
-  checkboxLabel: Present
-  noDataMessage: No mandatees were found.
+participation-list-modal-table:
+  naam-label: Name
+  functie-label: Position
+  geboortedatum-label: Birthdate
+  actie-label: Action
+  checkbox-label: Present
+  no-data-message: No mandatees were found.
 
-publicationConfirmation:
-  modalTitle: "Confirm publication of "
-  alertFirstPart: Publication and reporting is binding and irreversible.
-  alertSecondPart: Check the content of the document - you can check the document afterwards
-  alertThirdPart: but not modify it any more.
-  alertFourthPart: Only authorized persons may publish the document.
-  publicationTitle: Publication
-  publicationSubtitle: "The document and its content are made public on the publication page, freely accessible to citizens:"
-  reportingTitle: Reporting
-  reportingSubtitle: If applicable, document will be automatically reported to the supervising authority, and will be visible in the
-  reportingLink: Loket voor Lokale Besturen
-  metadataTitle: Publishing metadata
-  publisherLabel: Publisher
-  dateAndTimeLabel: "Date & Time"
-  dateAndTimeMessage: The moment you confirm the publication it will also be saved.
-  confirmButton: "Confirm publication of "
-  cancelButton: Cancel
+publication-confirmation:
+  modal-title: "Confirm publication of "
+  alert-first-part: Publication and reporting is binding and irreversible.
+  alert-second-part: Check the content of the document - you can check the document afterwards
+  alert-third-part: but not modify it any more.
+  alert-fourth-part: Only authorized persons may publish the document.
+  publication-title: Publication
+  publication-subtitle: "The document and its content are made public on the publication page, freely accessible to citizens:"
+  reporting-title: Reporting
+  reporting-subtitle: If applicable, document will be automatically reported to the supervising authority, and will be visible in the
+  reporting-link: Loket voor Lokale Besturen
+  metadata-title: Publishing metadata
+  publisher-label: Publisher
+  date-and-time-label: "Date & Time"
+  date-and-time-message: The moment you confirm the publication it will also be saved.
+  confirm-button: "Confirm publication of "
+  cancel-button: Cancel
 
 publish:
-  backToMeeting: Back to meeting
-  headingPartOne: Meeting on
-  loadingMessage: Loading...
-  updatingMessage: Updating...
-  decisionListErrorMessage: Something went wrong while fetching the decision list.
-  noExcerptsMessage: There are no excerpts available.
+  back-to-meeting: Back to meeting
+  heading-part-one: Meeting on
+  loading-message: Loading...
+  updating-message: Updating...
+  decision-list-error-message: Something went wrong while fetching the decision list.
+  no-excerpts-message: There are no excerpts available.
   retry: "retry"
   excerpts: Excerpts
-  excerptsOverview: All excerpts
+  excerpts-overview: All excerpts
   position: Position
-  statusLabel: Status
+  status-label: Status
   agendapoint: Agendapoint
-  excerptErrorMessage: Something went wrong fetching the excerpt.
-  publishButtonLabel: Sign and publish
-  toggleAllPublicLabel: Toggle all public
-  seriousError: An error occured, please try again at a later time. If the error persists please contact GelinktNotuleren and include the information below.
+  excerpt-error-message: Something went wrong fetching the excerpt.
+  publish-button-label: Sign and publish
+  toggle-all-public-label: Toggle all public
+  serious-error: An error occured, please try again at a later time. If the error persists please contact GelinktNotuleren and include the information below.
 
-publishedResource:
-  publishedByLabel: Published by
-  reportLabel: Report
-  reportText: Automatically reported by
-  notificationText: View notification on the
-  reportFailedText: Automatic notification failed
-  downloadText: Download the document and complete the notification via
+published-resource:
+  published-by-label: Published by
+  report-label: Report
+  report-text: Automatically reported by
+  notfication-text: View notification on the
+  report-failed-text: Automatic notification failed
+  download-text: Download the document and complete the notification via
 
-rdfaEditorContainer:
-  defaultBusyText: Processing
+rdfa-editor-container:
+  default-busy-text: Processing
   saving: Saving
-  makingCopy: Making copy
+  making-copy: Making copy
 
 regulatory-statements:
   not-found: 
@@ -411,134 +383,134 @@ regulatory-statements:
     explanation: It's possible that you don't have access to the regulatory statement with this account
 
 
-regulatoryStatementsPlugin:
-  regulatoryStatement: Regulatory Statement
-  insertStatement: Insert Regulatory Statement
+regulatory-statements-plugin:
+  regulatory-statement: Regulatory Statement
+  insert-statement: Insert Regulatory Statement
   cancel: Cancel
   search: Search
-  lastModification: Last modified
+  last-modification: Last modified
   loading: Loading
-  noStatementSelected: No regulatory statement selected
-  editStatement: Edit
-  detachStatement: Detach
-  loadMore: Load more
-  alreadyAttached: Already attached
+  no-statement-selected: No regulatory statement selected
+  edit-statement: Edit
+  detach-statement: Detach
+  load-more: Load more
+  already-attached: Already attached
 
-requiredField:
+required-field:
   required: Required
 
-signatureConfirmation:
-  modalTitle: "Confirm signing of "
-  signLabel: Sign
-  signWarningTitle: Signing is binding and irreversible
-  signWarningText: Check the contents of the document carefully. Only authorized persons may sign the document.
-  metadataLabel: Signing Metadata
-  signerLabel: Signer
-  timeLabel: Time
-  timeMessage: The moment you confirm the signing it will also be saved.
-  confirmButton: "Confirm signing of "
-  cancelButton: Cancel
+signature-confirmation:
+  modal-title: "Confirm signing of "
+  sign-label: Sign
+  sign-warning-title: Signing is binding and irreversible
+  sign-warning-text: Check the contents of the document carefully. Only authorized persons may sign the document.
+  metadata-label: Signing Metadata
+  signer-label: Signer
+  time-label: Time
+  time-message: The moment you confirm the signing it will also be saved.
+  confirm-button: "Confirm signing of "
+  cancel-button: Cancel
 
-timelineStep:
-  signStepTitle: "Sign "
-  signingRestrictionInfo: "Signing is only possible by authorized persons which have been assigned to the "
-  signingRestrictionRole: "signer role"
-  signingRestrictionEnd: " within the organization."
-  firstSignature: First signature
-  secondSignature: Second signature
-  signButtonLabel: "Sign {name}"
-  printButtonLabel: "Print {name}"
-  printInfo: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
-  secondPrintInfo: "Printing is only possible after the document has been signed. This print will not be made available externally."
-  publishButtonLabel: "Publish {name}"
-  publishNotifyButtonLabel: "Publish (and notify) {name}"
-  publishRestrictionInfo: "Publishing is only possible by persons with the "
-  publishRestrictionRole: "publisher"
-  publishRestrictionEnd: " role."
-  linkPublish: "Link publication"
-  timingWarning: "It can take up to 5 minutes before the publication is visible on the above link."
-  publicationType: Publication type
-  publicForAll: Visible for everyone
-  publicationConsequences: Consequences publication
-  previewInfo: "The document will be published as seen in the preview above to "
-  previewInfoEnd: ", and will be publicly available to anyone, without authentication."
-  notifyConsequences: Consequences notification
-  notifyInfo: "If applicable, a notification will be sent for this document to the authoritative government and will be visible in the "
-  localLoket: "Loket voor Lokale Besturen"
-  publishWarning: "Complete the missing information to publish"
+timeline-step:
+  sign-step-title: "Sign "
+  signing-restriction-info: "Signing is only possible by authorized persons which have been assigned to the "
+  signing-restriction-role: "signer role"
+  signing-restriction-end: " within the organization."
+  first-signature: First signature
+  second-signature: Second signature
+  sign-button-label: "Sign {name}"
+  print-button-label: "Print {name}"
+  print-info: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
+  second-print-info: "Printing is only possible after the document has been signed. This print will not be made available externally."
+  publish-button-label: "Publish {name}"
+  publish-notify-button-label: "Publish (and notify) {name}"
+  publish-restriction-info: "Publishing is only possible by persons with the "
+  publish-restriction-role: "publisher"
+  publish-restriction-end: " role."
+  link-publish: "Link publication"
+  timing-warning: "It can take up to 5 minutes before the publication is visible on the above link."
+  publication-type: Publication type
+  public-for-all: Visible for everyone
+  publication-consequences: Consequences publication
+  preview-info: "The document will be published as seen in the preview above to "
+  preview-info-end: ", and will be publicly available to anyone, without authentication."
+  notify-consequences: Consequences notification
+  notify-info: "If applicable, a notification will be sent for this document to the authoritative government and will be visible in the "
+  local-loket: "Loket voor Lokale Besturen"
+  publish-warning: "Complete the missing information to publish"
 
 utils:
   save: Save
-  fileOptions: File options
-  htmlExport: Export as HTML
+  file-options: File options
+  html-export: Export as HTML
   delete: Delete
   restore: Restore
-  currentVersion: Current Version
+  current-version: Current Version
   history: History
-  fullHistory: See the full history
-  createNewVersion: Create new version
+  full-history: See the full history
+  create-new-version: Create new version
 
-validationModal:
+validation-modal:
   title: Name your document
   message: Click on the title to name your document.
   confirm: Ok
 
 voting:
-  openModalButton: Manage voting
+  open-modal-button: Manage voting
 
-votingEdit:
-  firstStepTitle: 1. Enter subject
-  firstStepIntroduction: The board votes,
-  firstStepExplanation: "The subject of a vote can be, for example: the proposal of decision, an amendment, whether or not
+voting-edit:
+  first-step-title: 1. Enter subject
+  first-step-introduction: The board votes,
+  first-step-explanation: "The subject of a vote can be, for example: the proposal of decision, an amendment, whether or not
   to treat an agenda item, the open or closed treatment of an agenda item, an adjournment, a
   intervention."
-  privateVotingCheckbox: Make voting secret
-  secondStep: 2. Manage attendees and votes
-  thirdStep: 3. Enter Result
-  thirdStepIntroduction: As a result,
-  thirdStepExplanation: For example, the result of a vote may be approved, rejected or adjourned.
-  fourthStepTitle: 4. Save voting
-  fourthStepExplanationPartOne: Your changes will not be inserted until you click on the
-  fourthStepExplanationPartTwo: button.
-  saveButton: Save voting
-  cancelButton: Cancel
-  inputPlaceholder: Start typing here...
-  naamLabel: Name
-  hoedanigheidLabel: Position
-  actionsLabel: Actions
-  loadingText: Loading...
-  noDataMessage: No attendees found. Add a new attendee.
-  selectPlaceholder: Select
-  addItemButton: Add voter
-  removeItemButton: Remove voter
+  private-voting-checkbox: Make voting secret
+  second-step: 2. Manage attendees and votes
+  third-step: 3. Enter Result
+  third-step-introduction: As a result,
+  third-step-explanation: For example, the result of a vote may be approved, rejected or adjourned.
+  fourth-step-title: 4. Save voting
+  fourth-step-explanation-part-one: Your changes will not be inserted until you click on the
+  fourth-step-explanation-part-two: button.
+  save-button: Save voting
+  cancel-button: Cancel
+  input-placeholder: Start typing here...
+  naam-label: Name
+  hoedanigheid-label: Position
+  actions-label: Actions
+  loading-text: Loading...
+  no-data-message: No attendees found. Add a new attendee.
+  select-placeholder: Select
+  add-item-button: Add voter
+  remove-item-button: Remove voter
 
-votingManageVoting:
+voting-manage-voting:
   title: Enter attendees and voters
   subtitle: Enter number of votes
-  setUnaniemVoorstanderButton: Unanimous support
-  setUnaniemTegenstanderButton: Unanimous opposition
-  setUnaniemOnthouderButton: Unanimous abstention
-  saveVotesButton: Save voting
-  cancelVotesButton: Cancel
-  startManageVotesButton: Manage voting
+  set-unaniem-voorstander-button: Unanimous support
+  set-unaniem-tegenstander-button: Unanimous opposition
+  set-unaniem-onthouder-button: Unanimous abstention
+  save-votes-button: Save voting
+  cancel-votes-button: Cancel
+  start-manage-votes-button: Manage voting
 
-votingModal:
-  modalTitle: Manage voting
-  onderwerpLabel: Subject
-  typeLabel: Type
-  stemmenLabel: Votes
-  gevolgLabel: Result
-  actionsLabel: Actions
-  createVotingButton: New voting
-  subjectNotFound: No subject
-  geheimTrueLabel: Secret
-  geheimFalseLabel: Public
-  aantalVoorstandersLabel: "Supporters:"
-  aantalTegenstandersLabel: "Objectors:"
-  aantalOnthoudersLabel: "Abstentions:"
-  gevolgNotFound: No consequences
-  toggleEditButton: Edit
-  deleteButton: Delete
-  noDataMessage: No votes found
+voting-modal:
+  modal-title: Manage voting
+  onderwerp-label: Subject
+  type-label: Type
+  stemmen-label: Votes
+  gevolg-label: Result
+  actions-label: Actions
+  create-voting-button: New voting
+  subject-not-found: No subject
+  geheim-true-label: Secret
+  geheim-false-label: Public
+  aantal-voorstanders-label: "Supporters:"
+  aantal-tegenstanders-label: "Objectors:"
+  aantal-onthouders-label: "Abstentions:"
+  gevolg-not-found: No consequences
+  toggle-edit-button: Edit
+  delete-button: Delete
+  no-data-message: No votes found
 
 

@@ -3,13 +3,13 @@
   {{#if this.loadExtract.isRunning}}
   <AuLoader />
 {{else if this.error}}
-  <AuAlert @icon="cross" @sitle={{t "publish.excerptErrorMessage"}} @skin="error" @size="small">
+  <AuAlert @icon="cross" @sitle={{t "publish.excerpt-error-message"}} @skin="error" @size="small">
     <code>{{this.error}}</code>
   </AuAlert>
   <AuButton {{on "click" (perform this.loadExtract)}}>{{t "publish.retry"}}</AuButton>
 {{else if this.extract}}
 <div class="au-u-margin-bottom-small au-u-hide-on-print">
-  <AuLink @route="meetings.publish.uittreksels" @skin="secondary" @icon="arrow-left" @iconAlignment="left">{{t "publish.excerptsOverview"}}</AuLink>
+  <AuLink @route="meetings.publish.uittreksels" @skin="secondary" @icon="arrow-left" @iconAlignment="left">{{t "publish.excerpts-overview"}}</AuLink>
 </div>
 <Signatures::TimelineStep
   @name={{this.agendapoint.titel}}

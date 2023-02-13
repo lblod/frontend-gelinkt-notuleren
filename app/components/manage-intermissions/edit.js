@@ -95,17 +95,17 @@ export default class manageIntermissionsEditComponent extends Component {
     return [
       {
         code: 'before',
-        name: this.intl.t('manageIntermissions.beforeAp'),
+        name: this.intl.t('manage-intermissions.before-ap'),
         conceptUuid: BEFORE_POS_ID,
       },
       {
         code: 'during',
-        name: this.intl.t('manageIntermissions.duringAp'),
+        name: this.intl.t('manage-intermissions.during-ap'),
         conceptUuid: DURING_POS_ID,
       },
       {
         code: 'after',
-        name: this.intl.t('manageIntermissions.afterAp'),
+        name: this.intl.t('manage-intermissions.after-ap'),
         conceptUuid: AFTER_POS_ID,
       },
     ];

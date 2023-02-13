@@ -1,18 +1,18 @@
 <AuModal @modalOpen={{@show}} @closeModal={{@onClose}}
-         @title={{t "inbox.regulatoryStatements.linkedAgendapoints.title" title=@document.currentVersion.title}}>
+         @title={{t "inbox.regulatory-statements.linked-agendapoints.title" title=@document.currentVersion.title}}>
   {{!-- <Modal.Body> --}}
   <AuDataTable @content={{this.agendapoints.records}} @isLoading={{this.agendapoints.isLoading}}
-               @noDataMessage={{t "inbox.regulatoryStatements.linkedAgendapoints.noData"}} @sort={{this.sort}}
+               @noDataMessage={{t "inbox.regulatory-statements.linked-agendapoints.no-data"}} @sort={{this.sort}}
                @page={{this.page}} @size={{this.pageSize}} as
                |table|>
     <table.content as |c|>
       <c.header>
         <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}}
-                               @label={{t 'inbox.agendapoints.titleLabel' }} />
+                               @label={{t 'inbox.agendapoints.title-label' }} />
         <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}}
-                               @label={{t 'inbox.agendapoints.updatedOnLabel' }} />
+                               @label={{t 'inbox.agendapoints.updated-on-label' }} />
         <AuDataTableThSortable @field=":no-case:status.label" @currentSorting={{this.sort}}
-                               @label={{t 'inbox.agendapoints.statusLabel' }} />
+                               @label={{t 'inbox.agendapoints.status-label' }} />
       </c.header>
       <c.body as |container|>
         {{#let container.currentVersion as |row|}}

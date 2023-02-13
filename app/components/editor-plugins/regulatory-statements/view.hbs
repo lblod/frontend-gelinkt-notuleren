@@ -9,16 +9,16 @@
   <section>
     <AuToolbar as |Group|>
       <Group>
-        <AuHeading @level="4" @skin="4">{{t "regulatoryStatementsPlugin.regulatoryStatement"}}</AuHeading>
-        <p>({{t "regulatoryStatementsPlugin.lastModification"}}: {{human-friendly-date this.updatedOn locale=this.intl.primaryLocale}})</p>
+        <AuHeading @level="4" @skin="4">{{t "regulatory-statements-plugin.regulatory-statement"}}</AuHeading>
+        <p>({{t "regulatory-statements-plugin.last-modification"}}: {{human-friendly-date this.updatedOn locale=this.intl.primaryLocale}})</p>
       </Group>
       <Group>
         <AuButtonGroup>
           {{#if this.documentContainer}}
-          <RegulatoryStatementLink @icon="pencil" @documentContainer={{this.documentContainer}} @label={{t "regulatoryStatementsPlugin.editStatement"}}/>
+          <RegulatoryStatementLink @icon="pencil" @documentContainer={{this.documentContainer}} @label={{t "regulatory-statements-plugin.edit-statement"}}/>
           {{/if}}
           <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>
-            {{t "regulatoryStatementsPlugin.detachStatement"}}
+            {{t "regulatory-statements-plugin.detach-statement"}}
           </AuButton>
         </AuButtonGroup>
       </Group>

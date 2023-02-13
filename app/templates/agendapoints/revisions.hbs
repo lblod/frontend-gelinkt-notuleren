@@ -8,10 +8,10 @@
 
   <:actions>
     <AgendapointMenu @documentContainer={{this.documentContainer}} />
-    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.htmlExport"}}
+        {{t "utils.html-export"}}
       </AuButton>
     </AuDropdown>
     <AuButton @icon="redo" @skin="primary" @disabled={{eq this.revisionDetail.id this.model.editorDocument.id}}  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
@@ -88,7 +88,7 @@
   <Modal.Footer>
     <AuButtonGroup>
       <AuButton {{on "click" this.restore}}>Herstel versie en verwerp nieuwere versies</AuButton>
-      <AuButton @skin="secondary" {{on "click" this.cancelConfirmRevisionsToRemove}}>{{t "participationListModal.cancelButton"}}</AuButton>
+      <AuButton @skin="secondary" {{on "click" this.cancelConfirmRevisionsToRemove}}>{{t "participation-list-modal.cancel-button"}}</AuButton>
     </AuButtonGroup>
   </Modal.Footer>
 </AuModal>

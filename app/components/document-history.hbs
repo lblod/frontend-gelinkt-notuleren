@@ -11,13 +11,13 @@
   <Modal.Body>
     {{#if @isCurrentVersion}}
       <p class="au-u-padding-small au-u-flex au-u-flex--between regulatory-statement-current-version-container-active">
-        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.current-version'}}: </span>
         <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn locale=this.intl.primaryLocale}}</span>
       </p>
     {{else}}
     <p class="au-u-padding-small">
       <LinkTo @route={{if (or @currentVersion.status (not this.currentSession.canWrite)) 'regulatory-statements.show' 'regulatory-statements.edit'}} @model={{@documentContainerId}} class="regulatory-statement-current-version-container au-u-flex au-u-flex--between">
-        <span class="au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-margin-right-large">{{t 'utils.current-version'}}: </span>
         <span class="au-u-light">{{human-friendly-date @currentVersion.updatedOn locale=this.intl.primaryLocale}}</span>
       </LinkTo>
     </p>

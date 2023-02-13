@@ -18,13 +18,13 @@ export const PLUGIN_CONFIGS = {
     return {
       formats: [
         {
-          label: intl.t('dateFormat.shortDate'),
+          label: intl.t('date-format.short-date'),
           key: 'short',
           dateFormat: 'dd/MM/yy',
           dateTimeFormat: 'dd/MM/yy HH:mm',
         },
         {
-          label: intl.t('dateFormat.longDate'),
+          label: intl.t('date-format.long-date'),
           key: 'long',
           dateFormat: 'EEEE dd MMMM yyyy',
           dateTimeFormat: 'PPPPp',

@@ -6,16 +6,16 @@
     <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
   </:return-link>
   <:actions>
-    <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
       {{#unless this.readOnly}}
         <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
           <AuIcon @icon="copy" @alignment="left" />
-         {{t "appChrome.copyAgendapoint"}}
+         {{t "app-chrome.copy-agendapoint"}}
         </AuButton>
       {{/unless}}
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.htmlExport"}}
+        {{t "utils.html-export"}}
       </AuButton>
     </AuDropdown>
     </:actions>
