@@ -27,7 +27,7 @@ export const PLUGIN_CONFIGS = {
           label: intl.t('date-format.long-date'),
           key: 'long',
           dateFormat: 'EEEE dd MMMM yyyy',
-          dateTimeFormat: 'EEEE dd MMMM yyyy at HH:mm',
+          dateTimeFormat: 'PPPPp',
         },
       ],
       allowCustomFormat: true,

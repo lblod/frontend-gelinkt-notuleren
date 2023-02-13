@@ -3,23 +3,25 @@
   @documentContainer={{this.documentContainer}}
   @onTitleUpdate={{perform this.onTitleUpdate}}
   @allowTitleUpdate={{true}}
-  >
+  @dirty={{this.dirty}}
+>
   <:return-link>
     <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
   </:return-link>
   <:actions>
     <AgendapointMenu @documentContainer={{this.documentContainer}} @editorDocument={{this.editorDocument}} />
-      <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
+    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
       <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
-        <AuIcon @icon="copy" @alignment="left" />
+        <AuIcon @icon="copy" @alignment="left"/>
         {{t "app-chrome.copy-agendapoint"}}
       </AuButton>
       <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
-        <AuIcon @icon="export" @alignment="left" />
+        <AuIcon @icon="export" @alignment="left"/>
         {{t "utils.html-export"}}
       </AuButton>
-      <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem" @disabled={{this.isNotAllowedToTrash}}>
-        <AuIcon @icon="bin" @alignment="left" />
+      <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem"
+                                                      @disabled={{this.isNotAllowedToTrash}}>
+        <AuIcon @icon="bin" @alignment="left"/>
         {{t "utils.delete"}}
       </AuButton>
     </AuDropdown>

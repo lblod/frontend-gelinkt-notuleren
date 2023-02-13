@@ -91,6 +91,7 @@ export default class AgendapointsEditController extends Controller {
   @tracked _editorDocument;
   @tracked editor;
   @service intl;
+  @service features;
 
   get schema() {
     return new Schema({
@@ -151,15 +152,17 @@ export default class AgendapointsEditController extends Controller {
       besluitTypeWidget,
       importSnippetWidget,
       rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget,
+      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
       standardTemplateWidget,
       citation.widgets.citationCard,
       citation.widgets.citationInsert,
       roadSignRegulationWidget,
       templateVariableWidget,
-      regulatoryStatementWidget,
       articleStructureInsertWidget(structureSpecs),
       articleStructureContextWidget(structureSpecs),
+      ...(this.features.isEnabled('regulatory-statements')
+        ? [regulatoryStatementWidget]
+        : []),
     ];
   }
 
@@ -168,7 +171,7 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get dirty() {
-    return this.editorDocument.content !== this.editor.htmlContent;
+    return this.editorDocument.content !== this.editor?.htmlContent;
   }
 
   get editorDocument() {
