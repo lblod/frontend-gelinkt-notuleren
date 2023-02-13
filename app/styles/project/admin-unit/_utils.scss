@@ -4,7 +4,12 @@
 // unit styling, so there's only single place where we need to change
 // the wrapping selector
 @mixin admin-unit($admin-unit) {
+  .au-c-rdfa-publication.rdfa-annotations.administrative-unit-#{$admin-unit},
   .au-c-content .administrative-unit-#{$admin-unit} {
+    [property] {
+      border-bottom: 0;
+    }
+
     @content;
   }
 }

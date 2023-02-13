@@ -1,8 +1,11 @@
+import { inject as service } from '@ember/service';
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 
 export default class PublicationPreviewComponent extends Component {
   @service intl;
+  @service currentSession;
+
   get statusSkin() {
     if (this.args.status === 'published') return 'action';
     else if (
@@ -12,6 +15,7 @@ export default class PublicationPreviewComponent extends Component {
       return 'success';
     else return null;
   }
+
   get statusLabel() {
     if (this.args.status === 'published') {
       return this.intl.t('publish.public-version');
@@ -20,5 +24,9 @@ export default class PublicationPreviewComponent extends Component {
     } else if (this.args.status === 'secondSignature')
       return this.intl.t('publish.signed-version');
     else return '';
+  }
+
+  get administrativeUnitName() {
+    return this.currentSession.group.naam.toLowerCase();
   }
 }
