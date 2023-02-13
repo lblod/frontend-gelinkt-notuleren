@@ -7,10 +7,10 @@
     <div class="au-o-box au-o-box--small au-c-meeting-chrome-card au-u-margin-bottom-none">
       <AuHeading @level="4" @skin="6"
                  class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--inset au-u-margin-bottom-small">{{t
-                                                                                                                           "behandelingVanAgendapunten.visibility"}}</AuHeading>
+                                                                                                                           "behandeling-van-agendapunten.visibility"}}</AuHeading>
       {{#let (unique-id) as |id|}}
       <AuLabel for={{id}}><Input @type="checkbox" @checked={{this.openbaar}} {{on "input" (perform this.toggleOpenbaar)}} id={{id}} /> &nbsp;{{t
-                                                                                                                          "behandelingVanAgendapunten.openbaarLabel"}}</AuLabel>
+                                                                                                                          "behandeling-van-agendapunten.openbaar-label"}}</AuLabel>
       {{/let}}
       {{#if this.toggleOpenbaar.isRunning}}
         <AuLoader @padding="small"/>
@@ -26,19 +26,19 @@
       </AuHeading>
       {{#if this.published}}
         <AuPill @skin="success">
-          {{t "manageAgendaZittingModal.apPublishedMsg"}}
+          {{t "manage-agenda-zitting-modal.ap-published-msg"}}
         </AuPill>
       {{/if}}
     </AuToolbar>
     <div class="au-o-box au-o-box--small au-c-meeting-chrome-card au-u-margin-bottom-none">
       <AuHeading @level="4" @skin="6"
                  class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--inset au-u-margin-bottom-small">{{t
-              "behandelingVanAgendapunten.visibility"}}</AuHeading>
+              "behandeling-van-agendapunten.visibility"}}</AuHeading>
       <AuPill @skin="border">
         {{#if this.openbaar}}
-          {{t "behandelingVanAgendapunten.openbaarMsg"}}
+          {{t "behandeling-van-agendapunten.openbaar-msg"}}
         {{else}}
-          {{t "behandelingVanAgendapunten.geenOpenbaarMsg"}}
+          {{t "behandeling-van-agendapunten.geen-openbaar-msg"}}
         {{/if}}
       </AuPill>
     </div>
@@ -48,7 +48,7 @@
 
 {{#if this.isLoading}}
   <AuLoader @padding="small"/>
-  <AuHelpText>{{t "participationList.loadingTitle"}}</AuHelpText>
+  <AuHelpText>{{t "participation-list.loading-title"}}</AuHelpText>
 {{else}}
   <ParticipationList
           @chairman={{this.chairman}}
@@ -64,7 +64,7 @@
           @bestuursorgaan={{@bestuursorgaan}}
           @onSave={{this.saveParticipants}}
           @meeting={{@meeting}}
-          @modalTitle={{t "behandelingVanAgendapunten.participationListButton"}}
+          @modalTitle={{t "behandeling-van-agendapunten.participation-list-button"}}
           @readOnly={{not this.editable}}
   />
 {{/if}}
@@ -73,19 +73,19 @@
 {{#if this.hasParticipants}}
   <div class="au-c-meeting-chrome-card au-u-margin-bottom-none">
     <AuHeading @level="4" @skin="6" class="au-c-meeting-chrome-card__title">{{t
-            "behandelingVanAgendapunten.votingTitle"}}</AuHeading>
+            "behandeling-van-agendapunten.voting-title"}}</AuHeading>
     <Treatment::Voting @bestuursorgaan={{@bestuursorgaan}} @behandeling={{@behandeling}} @readOnly={{not this.editable}}/>
   </div>
 {{else}}
   <div class="au-u-margin-top au-u-margin-bottom">
     <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">{{t
-            "behandelingVanAgendapunten.needsParticipants"}}</AuPill>
+            "behandeling-van-agendapunten.needs-participants"}}</AuPill>
   </div>
 {{/if}}
 
 <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
   <div class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--flex">
-    <AuHeading @level="4" @skin="6">{{t "behandelingVanAgendapunten.contentTitle"}} </AuHeading>
+    <AuHeading @level="4" @skin="6">{{t "behandeling-van-agendapunten.content-title"}} </AuHeading>
     {{#if @behandeling.documentContainer.attachments}}
       {{#if this.editable}}
 
@@ -105,6 +105,6 @@
 </div>
 {{#if (and this.editable @behandeling.documentContainer)}}
   <AuLink @route="agendapoints.edit" @model={{@behandeling.documentContainer.id}} @query={{hash returnToMeeting=@meeting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
-    {{t "behandelingVanAgendapunten.editDocument"}}
+    {{t "behandeling-van-agendapunten.edit-document"}}
   </AuLink>
 {{/if}}

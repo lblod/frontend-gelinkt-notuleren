@@ -24,21 +24,22 @@ const VAST_BUREAU =
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000008';
 
 export const articlesBasedOnClassifcationMap = {
-  [BURGEMEESTER]: 'meetingForm.meetingHeadingArticleGendered',
+  [BURGEMEESTER]: 'meeting-form.meeting-heading-article-gendered',
   [COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN]:
-    'meetingForm.meetingHeadingArticleUngendered',
+    'meeting-form.meeting-heading-article-ungendered',
   [VOORZITTER_VAN_DE_RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN]:
-    'meetingForm.meetingHeadingArticleGendered',
-  [GEMEENTERAAD]: 'meetingForm.meetingHeadingArticleGendered',
+    'meeting-form.meeting-heading-article-gendered',
+  [GEMEENTERAAD]: 'meeting-form.meeting-heading-article-gendered',
   [RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN]:
-    'meetingForm.meetingHeadingArticleGendered',
-  [VOORZITTER_VAN_DE_GEMEENTERAAD]: 'meetingForm.meetingHeadingArticleGendered',
+    'meeting-form.meeting-heading-article-gendered',
+  [VOORZITTER_VAN_DE_GEMEENTERAAD]:
+    'meeting-form.meeting-heading-article-gendered',
   [BIJZONDER_COMITE_VOOR_DE_SOCIALE_DIENST]:
-    'meetingForm.meetingHeadingArticleUngendered',
-  [DEPUTATIE]: 'meetingForm.meetingHeadingArticleGendered',
-  [GOUVERNEUR]: 'meetingForm.meetingHeadingArticleGendered',
-  [PROVINCIERAAD]: 'meetingForm.meetingHeadingArticleGendered',
+    'meeting-form.meeting-heading-article-ungendered',
+  [DEPUTATIE]: 'meeting-form.meeting-heading-article-gendered',
+  [GOUVERNEUR]: 'meeting-form.meeting-heading-article-gendered',
+  [PROVINCIERAAD]: 'meeting-form.meeting-heading-article-gendered',
   [VOORZITTER_VAN_HET_BIJZONDER_COMITE_VOOR_DE_SOCIALE_DIENST]:
-    'meetingForm.meetingHeadingArticleGendered',
-  [VAST_BUREAU]: 'meetingForm.meetingHeadingArticleUngendered',
+    'meeting-form.meeting-heading-article-gendered',
+  [VAST_BUREAU]: 'meeting-form.meeting-heading-article-ungendered',
 };

@@ -1,29 +1,29 @@
 <div class="au-c-meeting-chrome-card au-u-margin-bottom-none">
-  <AuHeading @level="3" @skin="6" class="au-c-meeting-chrome-card__title">{{t "manageIntermissions.title"}}</AuHeading>
+  <AuHeading @level="3" @skin="6" class="au-c-meeting-chrome-card__title">{{t "manage-intermissions.title"}}</AuHeading>
   <table class="au-c-meeting-chrome-table">
     <thead>
       <tr>
         <th>
-          {{t "manageIntermissions.interruptionStartLabel"}}
+          {{t "manage-intermissions.interruption-start-label"}}
         </th>
         <th>
-          {{t "manageIntermissions.interruptionEndLabel"}}
+          {{t "manage-intermissions.interruption-end-label"}}
         </th>
         <th>
-          {{t "manageIntermissions.position"}}
+          {{t "manage-intermissions.position"}}
         </th>
         <th>
-          <strong>{{t "manageIntermissions.commentLabel"}}</strong>
+          <strong>{{t "manage-intermissions.comment-label"}}</strong>
         </th>
         <th class="au-u-table-right">
           {{#unless @readOnly}}
-            <span class="au-u-hidden-visually">{{t "manageIntermissions.actionsLabel"}}</span>
+            <span class="au-u-hidden-visually">{{t "manage-intermissions.actions-label"}}</span>
             <AuButton
               {{on "click" this.addIntermission}}
               @icon="add"
               @iconAlignment="left"
             >
-              {{t "manageIntermissions.addInterruptionLabel"}}
+              {{t "manage-intermissions.add-interruption-label"}}
             </AuButton>
           {{/unless}}
         </th>
@@ -38,13 +38,13 @@
             <td>
               {{#if intermission.agendaPosition}}
                 {{#if (eq intermission.agendaPosition.position.label "during")}}
-                  {{t "manageIntermissions.duringAp"}}:
+                  {{t "manage-intermissions.during-ap"}}:
                 {{/if}}
                 {{#if (eq intermission.agendaPosition.position.label "before")}}
-                  {{t "manageIntermissions.beforeAp"}}:
+                  {{t "manage-intermissions.before-ap"}}:
                 {{/if}}
                 {{#if (eq intermission.agendaPosition.position.label "after")}}
-                  {{t "manageIntermissions.afterAp"}}:
+                  {{t "manage-intermissions.after-ap"}}:
                 {{/if}}
                 <a href="#behandeling-{{intermission.agendaPosition.agendapoint.behandeling.id}}" class="au-c-link au-c-link--secondary">
                   {{intermission.agendaPosition.agendapoint.titel}}
@@ -55,7 +55,7 @@
             <td class="au-u-table-right">
               {{#unless @readOnly}}
                 <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" (fn this.editIntermission intermission)}}>
-                  {{t "manageIntermissions.editLabel"}}
+                  {{t "manage-intermissions.edit-label"}}
                 </AuButton>
               {{/unless}}
             </td>
@@ -64,7 +64,7 @@
           <tr>
             <td colspan="4">
               <AuHelpText @size="normal" @skin="tertiary">
-                {{t "manageIntermissions.noDataMessage"}}
+                {{t "manage-intermissions.no-data-message"}}
               </AuHelpText>
             </td>
           </tr>

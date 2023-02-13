@@ -31,7 +31,7 @@
           {{/if}}
         </PublicationPreview>
         {{#if (and this.validationErrors this.validationErrors.length)}}
-          <AuAlert @icon="alert-triangle" @title={{t "timelineStep.publishWarning"}} @skin="error">
+          <AuAlert @icon="alert-triangle" @title={{t "timeline-step.publish-warning"}} @skin="error">
             <ul>
               {{#each this.validationErrors as |error|}}
                 <li>{{error}}</li>
@@ -40,7 +40,7 @@
           </AuAlert>
       {{else if (and this.errors this.errors.length)}}
           <AuAlert @icon="alert-triangle" @skin="error">
-            <p>{{t 'publish.seriousError'}}</p>
+            <p>{{t 'publish.serious-error'}}</p>
             <code>{{this.errors.firstObject}}</code>
           </AuAlert>
       {{else}}
@@ -79,14 +79,14 @@
               {{#if this.createPublishPreview.isIdle}}
                 {{html-safe this.preview}}
               {{else}}
-                <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
+                <AuHelpText @size="large">{{t "publish.loading-message"}}</AuHelpText>
                 <AuLoader @padding="small" />
               {{/if}}
             </Signatures::PublicationConfirmation>
           {{/if}}
         {{/if}}
       {{else}}
-        <AuHelpText @size="large">{{t "publish.loadingMessage"}}</AuHelpText>
+        <AuHelpText @size="large">{{t "publish.loading-message"}}</AuHelpText>
         <AuLoader @padding="small" />
       {{/if}}
     </c.content>

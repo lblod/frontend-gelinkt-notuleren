@@ -2,13 +2,13 @@
   <thead>
     <tr>
       <th>
-        {{t "votingEdit.naamLabel"}}
+        {{t "voting-edit.naam-label"}}
       </th>
       <th>
-        {{t "votingEdit.hoedanigheidLabel"}}
+        {{t "voting-edit.hoedanigheid-label"}}
       </th>
       <th colspan="2">
-        {{t "votingEdit.actionsLabel"}}
+        {{t "voting-edit.actions-label"}}
       </th>
     </tr>
   </thead>
@@ -16,7 +16,7 @@
     {{#if this.editStemming.fetchVoters.isRunning}}
     <div class="au-o-box">
       <AuLoader @padding="small" />
-      <AuHelpText>{{t "votingEdit.loadingText"}}</AuHelpText>
+      <AuHelpText>{{t "voting-edit.loading-text"}}</AuHelpText>
     </div>
     {{else}}
     {{#each this.voters as |row|}}
@@ -29,7 +29,7 @@
     {{else}}
     <tr>
       <td colspan="3">
-        <AuHelpText>{{t "votingEdit.noDataMessage"}}</AuHelpText>
+        <AuHelpText>{{t "voting-edit.no-data-message"}}</AuHelpText>
       </td>
     </tr>
     {{/each}}

@@ -30,7 +30,7 @@
             {{#let (unique-id) as |id|}}
               <AuLabel class="au-u-hidden-visually" for={{id}}></AuLabel>
               <select  id={{id}} class="au-c-custom-select" {{on "change" (perform this.onSelectDecision attachment)}}>
-                <option value="">{{t "attachments.typePlaceholder"}}</option>
+                <option value="">{{t "attachments.type-placeholder"}}</option>
                 {{#each @decisions as |decisionOption|}}
                   <option value={{decisionOption.uri}} selected={{eq attachment.decision decisionOption.uri}}>
                     {{decisionOption.title}}</option>
@@ -56,8 +56,8 @@
 
 {{#unless @decisions.length}}
 <AuToolbar @border="top" @nowrap="true" @size="small">
-  <AuAlert @icon="alert-triangle" @title={{t "attachments.noDecisionsFound"}} @skin="warning" class="au-u-margin-bottom-none au-u-1-1">
-    <p>{{t "attachments.decisionRequired"}}</p>
+  <AuAlert @icon="alert-triangle" @title={{t "attachments.no-decisions-found"}} @skin="warning" class="au-u-margin-bottom-none au-u-1-1">
+    <p>{{t "attachments.decision-required"}}</p>
   </AuAlert>
 </AuToolbar>
 {{/unless}}

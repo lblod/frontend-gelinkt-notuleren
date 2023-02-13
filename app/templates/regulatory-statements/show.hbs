@@ -7,14 +7,14 @@
   <:return-link>
   <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
     <AuIcon @icon="arrow-left" @alignment="left" />
-    {{t 'inbox.regulatoryStatements.return'}}
+    {{t 'inbox.regulatory-statements.return'}}
   </AuLink>
   </:return-link>
   <:actions-after-title>
     <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @buttonLabel={{human-friendly-date
       this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @alignment="left">
       <p class="au-u-padding-small regulatory-statement-current-version-container-active">
-        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.currentVersion'}}: </span>
+        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.current-version'}}: </span>
         <span class="au-u-light">{{human-friendly-date this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}}</span>
       </p>
       <AuHr />
@@ -31,21 +31,21 @@
         {{/each}}
         <AuLink @route="regulatory-statements.show.history" @skin="link" role="menuitem">
           <AuIcon @icon="clock" @alignment="left"/>
-          {{t 'utils.fullHistory'}}
+          {{t 'utils.full-history'}}
         </AuLink>
       </div>
     </AuDropdown>
   </:actions-after-title>
   <:actions>
-  <AuDropdown @title={{t "utils.fileOptions"}} @buttonLabel={{t "utils.fileOptions"}} @alignment="right">
+  <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
     <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
       <AuIcon @icon="export" @alignment="left" />
-      {{t "utils.htmlExport"}}
+      {{t "utils.html-export"}}
     </AuButton>
   </AuDropdown>
   {{#if this.currentSession.canWrite}}
     <AuButton {{on "click" (perform this.createNewVersion)}} @disabled={{this.createNewVersion.isRunning}}>
-      {{t "utils.createNewVersion"}}
+      {{t "utils.create-new-version"}}
     </AuButton>
   {{/if}}
   </:actions>
@@ -61,8 +61,8 @@
       <div class="say-container__main">
         {{#unless this.readOnly}}
           <div class="au-o-box au-o-box--small au-u-background-gray-100">
-            <AuAlert @icon="info-circle" @title={{t "inbox.regulatoryStatements.readOnlyBanner.publishedMessageTitle"}}  @skin="info" @size="small" class="au-u-margin-bottom-none">
-              <p>{{t "inbox.regulatoryStatements.readOnlyBanner.publishedMessage"}}</p>
+            <AuAlert @icon="info-circle" @title={{t "inbox.regulatory-statements.read-only-banner.published-message-title"}}  @skin="info" @size="small" class="au-u-margin-bottom-none">
+              <p>{{t "inbox.regulatory-statements.read-only-banner.published-message"}}</p>
             </AuAlert>
           </div>
         {{/unless}}
