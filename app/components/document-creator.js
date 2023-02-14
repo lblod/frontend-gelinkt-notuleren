@@ -84,7 +84,8 @@ export default class DocumentCreatorComponent extends Component {
         // regular templates from templatesForContext do not return body of template
         await this.template.reload(this.template);
       }
-      return instantiateUuids(this.template.body);
+      const trimmedHtml = this.template.body.replace(/>\s+</g, '><');
+      return instantiateUuids(trimmedHtml);
     } else return '';
   }
 
