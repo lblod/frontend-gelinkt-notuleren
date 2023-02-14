@@ -7,12 +7,10 @@
                 )}}
         <AuHeading @skin="3">
           <AuIcon @icon="document" @iconAlignment="left"/>
-          Maak een print of PDF van een uittreksel
+          {{t "print-view.print-header"}}
         </AuHeading>
-        <p>U kan deze pagina opslaan als PDF, of printen. Bekijk hoe opslaan en printen werkt in Firefox of Chrome, in
-          de <a href="{{config "manual.baseUrl"}}{{config "manual.print"}}" target="_blank" rel="noopener noreferrer"
-                class="au-c-link">handleiding</a>. Deze informatie (boven de stippellijn) zal niet op de print of PDF te
-          zien zijn.</p>
+        <p>{{t "print-view.save-1"}} <a href="{{config "manual.baseUrl"}}{{config "manual.print"}}" target="_blank" rel="noopener noreferrer"
+                class="au-c-link">{{t "print-view.manual"}}</a>{{t "print-view.save-2"}}</p>
       </AuContent>
     </div>
   </div>

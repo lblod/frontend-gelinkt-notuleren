@@ -5,7 +5,7 @@
   @icon="info-circle"
   @closable={{true}}
 >
-  <p>Maak een nieuw agendapunt of open een bestaand punt om de inhoud in te voegen.</p>
+  <p>{{t "snippets-notifier.has-snippets-message"}}</p>
 </AuAlert>
 {{else if this.hasErrors}}
 <AuAlert
@@ -14,6 +14,6 @@
   @icon="alert-triangle"
   @closable={{true}}
 >
-  <p>Er is een probleem opgetreden met het ophalen van informatie uit een externe bron.</p>
+  <p>{{t "snippets-notifier.has-errors-message"}}</p>
 </AuAlert>
 {{/if}}

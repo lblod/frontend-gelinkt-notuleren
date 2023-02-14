@@ -24,7 +24,7 @@
     <div class="au-c-sidebar">
       <div class="au-c-sidebar__header">
         <h6 class="au-c-heading au-c-heading--6">
-          Opgeslagen documentversies:
+          {{t "agendapoint.saved-versions"}}
         </h6>
       </div>
       <div class="au-c-sidebar__content">
@@ -36,7 +36,7 @@
                   {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
                 </span>
                 {{#if (eq revision.id this.model.editorDocument.id)}}
-                  <AuPill @size="small" class="au-u-margin-left-tiny">Huidige versie</AuPill>
+                  <AuPill @size="small" class="au-u-margin-left-tiny">{{t "agendapoint.current-version"}}</AuPill>
                 {{/if}}
               </AuButton>
             </li>
@@ -65,29 +65,29 @@
 </AuMainContainer>
 
 <AuModal
-  @title="Bent u zeker dat u deze versie wil herstellen?"
+  @title={{t "agendapoint.revisions-modal-title"}}
   @modalOpen={{this.showConfirmationModal}}
   @closeModal={{this.cancelConfirmRevisionsToRemove}} as |Modal| >
   <Modal.Body>
     <AuContent>
       {{#if this.revisionsToRemove}}
-        <p class="u-spacer--small">Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:</p>
+        <p class="u-spacer--small">{{t "agendapoint.modify-warning"}}</p>
         <ul class="numbered-list">
           {{#each this.revisionsToRemove as |revision|}}
             <li class="u-hr u-padding--bottom--small">
-              <AuHeading @level="4" @skin="5">Versie van {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}</AuHeading>
+              <AuHeading @level="4" @skin="5">{{t "agendapoint.version-of"}} {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}</AuHeading>
               <p class="au-u-muted">{{revision.title}}</p>
             </li>
           {{/each}}
         </ul>
     {{else}}
-        <p class="au-u-muted">Geen nieuwere versies om weer te geven.</p>
+        <p class="au-u-muted">{{t "agendapoint.no-new-versions"}}</p>
       {{/if}}
     </AuContent>
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>
-      <AuButton {{on "click" this.restore}}>Herstel versie en verwerp nieuwere versies</AuButton>
+      <AuButton {{on "click" this.restore}}>{{t "agendapoint.restore-version"}}</AuButton>
       <AuButton @skin="secondary" {{on "click" this.cancelConfirmRevisionsToRemove}}>{{t "participation-list-modal.cancel-button"}}</AuButton>
     </AuButtonGroup>
   </Modal.Footer>

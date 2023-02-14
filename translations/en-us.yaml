@@ -1,11 +1,29 @@
 agendapoint:
+  editor-tabs: editor-tabs
   revisions: Revisions
   restore: Restore
   back-to-meeting: Return to the meeting of {adminBody} on {date}
   not-found: 
     title: Agendapoint not found
     explanation: It's possible that you don't have access to the agendapoint with this account
+  saved-versions: "Saved document versions:"
+  current-version: Current version
+  modify-warning: "When modifying the document to an older version, subsequent newer versions disappear irretrievably:"
+  version-of: Version of
+  no-new-versions: No newer versions to display.
+  restore-version: Restore version and reject newer versions
+  revisions-modal-title: Are you sure you want to restore this version?
+  published: This article has already been published. Published agenda items are not editable.
+  saving:  Saving...
+  making-copy: Making copy...
 
+administrative-body-select:
+  period: "(period:"
+  not-applicable: n/a
+
+application-header:
+  switch-administrative-unit: Switch Administrative Unit
+  logout: Logout
 
 app-chrome:
   copy-agendapoint: Copy Agendapoint
@@ -29,6 +47,16 @@ attachments:
   no-decisions-found: No decisions found
   decision-required: Only attachments linked to a decision are included in the publication.
 
+behandeling-list:
+  public: Content was published
+  public-description: All information from the discussion of the agenda item was published.
+  public-now:  Content will be published
+  public-now-description: All information from the discussion of the agenda item will be published.
+  not-public-past: Content was not published
+  not-public-past-description: However, the title and visibility of the discussion are published. For decisions, the title of the decision and the brief description are also published.
+  not-public-now: Content will not be published
+  not-public-now-description: However, the title and visibility of the discussion will be published. For decisions, the title of the decision and the brief description will also be published.
+
 behandeling-van-agendapunten:
   save-button: Save
   save-and-quit: Save and Quit
@@ -43,6 +71,16 @@ behandeling-van-agendapunten:
   content-title: "Content"
   needs-participants: Please configure the participants to this agenda-item before adding a voting.
   edit-document: "Edit document"
+
+contact:
+  about: What is your message about?
+  bug-message: A functionality, bug or problem
+  compose: Compose message
+  contact-directly: Or contact us directly by mail
+  email: GelinktNotuleren@vlaanderen.be
+  heading: Contact
+  question-message: A content question
+  send: Send message
 
 date-format:
   short-date: Short date
@@ -63,13 +101,20 @@ document-creator:
   title-field: Document title
   template: Template
 
+document-history:
+  load-more: Load more
+
 editor-status-pill:
   default-status: Concept
 
 editor-document-title:
   placeholder: Untitled document
+  agendapoint-title: agendapoint title
+  change-title: Change title
 
 inbox:
+  loading: Loading
+  patience-text: Thank you for your patience.
   menu:
     meetings: Meetings
     agendapoints: Agenda points
@@ -83,6 +128,8 @@ inbox:
     administrative-body: Administrative body
     time: Time
     location: Location
+    meeting-of: Meeting of
+    at: at
     new:
       title: Create a new meeting
       meeting:
@@ -139,6 +186,7 @@ inbox:
     title-label: Title of regulatory statement
     type-label: Road type
     identifier-label: Reference number
+    archived-warning: This is an archived document and cannot be changed.
   trash:
     page-title: Recycle bin
     title: Recycle bin
@@ -150,6 +198,55 @@ irg-archive:
   not-found: 
     title: Reglement not found
     explanation: It's possible that you don't have access to the reglement with this account
+
+login:
+  app-name: Gelinkt Notuleren
+  description: A web application that helps format and publish agendas, minutes and resolutions for Local Boards.
+  problems-text: Unable to log in? Please contact your internal administrator. If a problem occurs, contact
+  gebruikersbeheer: gebruikersbeheer Vlaanderen
+  signing-instructions: Signing in is done in a pop-up; make sure your browser settings are correct if it does not appear.
+  functionality-heading: The functionalities of Gelink Notuleren
+  present-in-manual: All functionalities, along with helpful tips & tricks, can be viewed in manual.
+  view-manual: View the manual here.
+  meeting-heading: Meeting
+  record-your-session: Record your session using the online word processing program.
+  meeting-1-1: Use the built-in
+  meeting-1-2: templates
+  meeting-1-3: to form decisions;
+  meeting-2-1: link to the correct
+  meeting-2-2: legislation from the Flemish Codex;
+  meeting-3-1: the document will meet the imposed
+  meeting-3-2: standards.
+  sign-and-validate: Sign & Validate
+  sign-description: Your documents remain authentic and securely stored online.
+  sign-1-1: Only persons with the
+  sign-1-2: proper authority
+  sign-1-3: can sign documents;
+  sign-2-1: documents are provided online
+  sign-2-2: signed and sealed;
+  sign-3-1: documents may at any time
+  sign-3-2: be validated for authenticity.
+  mandate-management: Mandate management
+  mandate-description: Automatically populate the mandate database when publishing your minutes.
+  mandate-1-1: The editor
+  mandate-1-2: automatically recognizes appropriate mandate holders
+  mandate-1-3: in your decisions;
+  mandate-2-1: Make use of templates for the
+  mandate-2-2: changing mandates;
+  mandate-3-1: changes in mandates will be made upon publication
+  mandate-3-2: being automatically updated in the mandate database.
+  publication: Publication
+  publication-description: Documents are made available online with the appropriate level of security.
+  publication-1-1: Make essential information available to the
+  publication-1-2: members of your board;
+  publication-2-1: bring
+  publication-2-2: supervisory authorities
+  publication-2-3: up to date and comply with the
+  publication-2-4: publication requirement
+  publication-2-5: with a single click;
+  publication-3-1: give citizens easy access to
+  publication-3-2: public information.
+
 
 manage-agenda-zitting:
   beschrijving-label: Description
@@ -193,6 +290,7 @@ manage-agenda-zitting-modal-move:
   position-select-placeholder: Select position
   agendapunt-select-placeholder: Select agenda item
   search-placeholder: Search by title
+  optional: Optional
 
 manage-free-text:
   before: Free text before the meeting
@@ -235,6 +333,8 @@ manage-zittings-data:
   cancel-button: Back
   open-modal-button: Manage general data of the meeting
   select-placeholder: Select governing body
+  period-start: "(period:"
+  not-applicable: n/a
 
 meeting-form:
   incomplete-warning: Please fill out the meeting details and add at least one agenda item before publishing.
@@ -259,6 +359,11 @@ meeting-form:
   notulen-published: Meeting is published
 
 meetings:
+  publish:
+    agenda: Agenda
+    decision-list: Decision list
+    extracts: Extracts
+    document: Document
   delete:
     delete: Delete
     confirm-message: Are you sure you want to delete this meeting
@@ -280,7 +385,10 @@ meetings:
     title: Meeting not found
     explanation: It's possible that you don't have access to the meeting with this account
 
-
+mock-login:
+  administrative-unit-selection: Choose a administrative unit to log in with.
+  administrative-unit-search: Administrative unit search
+  search-placeholder: "Aalst, Berchem, ..."
 
 not-found:
   title: Page not found
@@ -289,6 +397,7 @@ not-found:
     contact-message: If you think this is a mistake, you can always contact us on our
     contact-link: contact page
     email-message: Or send a mail to
+    email: GelinktNotuleren@vlaanderen.be
 
 participation:
   present-label: "Present mandatees:"
@@ -305,6 +414,7 @@ participation-list:
   present-error: "No mandatees have been appointed"
   not-present-label: "Absent mandatees:"
   open-modal-button: Manage attendees at the start of the session
+  period-start: "(period"
 
 participation-list-modal:
   voorzitter-label: Chairman of the meeting
@@ -327,6 +437,17 @@ participation-list-modal-table:
   actie-label: Action
   checkbox-label: Present
   no-data-message: No mandatees were found.
+
+print-view:
+  back-link: Back to signing & publishing
+  heading-1: Excerpt from the minutes
+  heading-2: session of
+  description: The document refers to the situation as known at the time of delivery.
+  print-header: Make a printout or PDF of an excerpt
+  save-1: You can save this page as a PDF, or print it. See how saving and printing works in Firefox or Chrome, in the
+  manual: manual
+  save-2: . This information (above the dotted line) will not show up on the print or PDF.
+  signed-by: Signed by
 
 publication-confirmation:
   modal-title: "Confirm publication of "
@@ -371,6 +492,7 @@ published-resource:
   notfication-text: View notification on the
   report-failed-text: Automatic notification failed
   download-text: Download the document and complete the notification via
+  loket: Loket voor Lokale Besturen
 
 rdfa-editor-container:
   default-busy-text: Processing
@@ -411,6 +533,17 @@ signature-confirmation:
   confirm-button: "Confirm signing of "
   cancel-button: Cancel
 
+snippets-notifier:
+  has-snippets-message: Create a new agenda item or open an existing item to insert content.
+  has-errors-message: A problem occurred retrieving information from an external source.
+
+switch-login:
+  heading: Gelinkt Notuleren
+  app-description: A web application that helps format and publish agendas, minutes and resolutions for Local Governs.
+  contact-text: Unable to log in? Please contact your internal administrator. If a problem occurs, contact
+  user-admin: user administration Flanders
+  signing-instructions: Signing in is done in a pop-up; make sure your browser settings are correct if it does not appear.
+
 timeline-step:
   sign-step-title: "Sign "
   signing-restriction-info: "Signing is only possible by authorized persons which have been assigned to the "
@@ -439,6 +572,12 @@ timeline-step:
   local-loket: "Loket voor Lokale Besturen"
   publish-warning: "Complete the missing information to publish"
 
+uittreksel-error:
+  header: We cannot find the page you are looking for
+  extract-not-found: Something has gone wrong. The extract you are looking for does not exist or you do not have access.
+  back-link: Go back to the overview
+  error-code: "404"
+
 utils:
   save: Save
   file-options: File options
@@ -454,6 +593,15 @@ validation-modal:
   title: Name your document
   message: Click on the title to name your document.
   confirm: Ok
+
+vo-page:
+  alt-image: a laptop with the flanders logo on it.
+  official-website: Gelinkt-notuleren.vlaanderen.be is an official website of the Flemish government
+  published-by: Published by
+  agentschap-binnenlands-bestuur: Agentschap Binnenlands Bestuur
+  disclaimer: Disclaimer
+  cookie-policy: Cookie Policy
+  accesibility-statement: Accesibility Statement
 
 voting:
   open-modal-button: Manage voting
@@ -513,4 +661,6 @@ voting-modal:
   delete-button: Delete
   no-data-message: No votes found
 
-
+zitting-link:
+  meeting-of: Meeting of
+  at: at

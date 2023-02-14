@@ -4,10 +4,10 @@
 {{#if this.submissionSucceeded}}
   <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny au-u-margin-top">{{t "published-resource.report-label"}}</AuHeading>
   <p>{{t "published-resource.report-text"}} <br> {{@publication.gebruiker.voornaam}} {{@publication.gebruiker.achternaam}} <br> {{detailed-date @publication.createdOn 'L LT'}}</p>
-  <p class="u-spacer--bottom--small text-fade smaller">{{t "published-resource.notfication-text"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer">Loket voor Lokale Besturen</a>.</p>
+  <p class="u-spacer--bottom--small text-fade smaller">{{t "published-resource.notfication-text"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer">{{t "published-resource.loket"}}</a>.</p>
 {{else if this.submissionFailed}}
   <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny au-u-margin-top">{{t "published-resource.report-label"}}</AuHeading>
   <AuAlert @icon="cross" @title="{{t "published-resource.report-failed-text"}}" @skin="error" @size="small">
-    <p>{{t "published-resource.download-text"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" class="au-c-link" rel="noopener noreferrer">Loket voor Lokale Besturen</a>.</p>
+    <p>{{t "published-resource.download-text"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" class="au-c-link" rel="noopener noreferrer">{{t "published-resource.loket"}}</a>.</p>
   </AuAlert>
 {{/if}}

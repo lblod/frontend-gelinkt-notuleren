@@ -2,7 +2,7 @@
   <Print.Header as |Header|>
     {{#if @backLinkRoute}}
       <Header.BackLink @linkRoute={{@backLinkRoute}} @model={{@linkModel}} @models={{@linkModels}}>
-        Terug naar ondertekenen & publiceren
+        {{t "print-view.back-link"}}
       </Header.BackLink>
     {{/if}}
   </Print.Header>
@@ -11,14 +11,13 @@
     {{#let @versionedTreatment.signedResources
            @versionedTreatment.zitting as |signatures meeting|}}
       <AuHeading>
-        Uittreksel uit de notulen
+        {{t "print-view.heading-1"}}
         <br>
         {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}
         <br>
-        zitting van {{detailed-date meeting.geplandeStart}}
+        {{t "print-view.heading-2"}} {{detailed-date meeting.geplandeStart}}
       </AuHeading>
-      <p class="au-u-margin-top-small au-u-margin-bottom">Het document slaat op de situatie zoals gekend bij het
-        afleveren.</p>
+      <p class="au-u-margin-top-small au-u-margin-bottom">{{t "print-view.description"}}</p>
 
       {{#if signatures.length}}
         <div class="au-o-grid">

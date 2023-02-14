@@ -1,5 +1,5 @@
 {{#if this.meeting.id}}
   <LinkTo @route="meetings.edit" @model={{this.meeting.id}} class="au-c-link">
-    Zitting van {{this.meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} op {{detailed-date this.meeting.geplandeStart}}
+    {{t "zitting-link.meeting-of"}} {{this.meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} {{t "zitting-link.at"}} {{detailed-date this.meeting.geplandeStart}}
   </LinkTo>
 {{/if}}
