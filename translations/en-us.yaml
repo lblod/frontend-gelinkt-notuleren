@@ -48,8 +48,8 @@ attachments:
   decision-required: Only attachments linked to a decision are included in the publication.
 
 behandeling-list:
-  public: Content was published
-  public-description: All information from the discussion of the agenda item was published.
+  public-past: Content was published
+  public-past-description: All information from the discussion of the agenda item was published.
   public-now:  Content will be published
   public-now-description: All information from the discussion of the agenda item will be published.
   not-public-past: Content was not published
@@ -337,6 +337,7 @@ manage-zittings-data:
   not-applicable: n/a
 
 meeting-form:
+  date-warning: You cannot choose an end date that is before the start date.
   incomplete-warning: Please fill out the meeting details and add at least one agenda item before publishing.
   back-button: Back to meetings
   scheduled-text: Meeting scheduled on
