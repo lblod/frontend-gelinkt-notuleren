@@ -23,6 +23,16 @@
 
 
 
+
+## 3.2.3 (2023-02-15)
+
+#### :bug: Bug Fix
+* [#429](https://github.com/lblod/frontend-gelinkt-notuleren/pull/429) Hotfix: trim whitespace out of templates before instantiating them ([@elpoelma](https://github.com/elpoelma))
+* [#428](https://github.com/lblod/frontend-gelinkt-notuleren/pull/428) Hotfix: update plugins to 2.1.2 to solve codelist bug ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 3.2.2 (2023-02-09)
 bump editor to v2.1.3
 
