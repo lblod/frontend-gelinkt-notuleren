@@ -30,7 +30,7 @@
     </c.header>
     <c.body as |meeting|>
       <td>
-        <LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">Zitting van {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} op {{detailed-date meeting.geplandeStart}}</LinkTo>
+        <LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">{{t "inbox.meetings.meeting-of"}} {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} {{t "inbox.meetings.at"}} {{detailed-date meeting.geplandeStart}}</LinkTo>
       </td>
       <td>{{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</td>
       <td>{{detailed-date meeting.geplandeStart}}</td>

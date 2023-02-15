@@ -9,5 +9,6 @@ module.exports = {
     'no-implicit-this': {
       allow: ['unique-id'],
     },
+    'no-bare-strings': true,
   },
 };

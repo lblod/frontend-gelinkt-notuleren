@@ -1,10 +1,29 @@
 agendapoint:
+  editor-tabs: editor-tabs
   revisions: Versies
   restore: Herstel
   back-to-meeting: Terug naar zitting van {adminBody} op {date}
   not-found:
     title: Agendapunt niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het agendapunt.
+  saved-versions: "Opgeslagen documentversies:"
+  current-version: Huidige versie
+  modify-warning: "Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:"
+  version-of: Versie van
+  no-new-versions: Geen nieuwere versies om weer te geven.
+  restore-version: Herstel versie en verwerp nieuwere versies
+  revisions-modal-title: Bent u zeker dat u deze versie wil herstellen?
+  published: Dit artikel is reeds gepubliceerd. Gepubliceerde agendapunten zijn niet editeerbaar.
+  saving: Bezig met opslaan
+  making-copy: Kopie aan het maken
+
+administrative-body-select:
+  period: "period"
+  not-applicable: nvt.
+
+application-header:
+  switch-administrative-unit: Wissel van bestuurseenheid
+  logout: Afmelden
 
 app-chrome:
   copy-agendapoint: Kopieer agendapunt
@@ -28,6 +47,16 @@ attachments:
   no-decisions-found: Geen besluiten gevonden
   decision-required: Enkel bijlagen bij een besluit worden opgenomen in de publicatie.
 
+behandeling-list:
+  public-past: Inhoud werd gepubliceerd
+  public-past-description: Alle informatie uit de behandeling van het agendapunt werd gepubliceerd.
+  public-now: Inhoud wordt gepubliceerd
+  public-now-description: Alle informatie uit de behandeling van het agendapunt wordt gepubliceerd.
+  not-public-past: Inhoud werd niet gepubliceerd
+  not-public-past-description: De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.
+  not-public-now: Inhoud wordt niet gepubliceerd
+  not-public-now-description: De titel en de openbaarheid van de behandeling worden wel gepubliceerd. Voor besluiten worden ook de titel van het besluit en de korte omschrijving gepubliceerd.
+
 behandeling-van-agendapunten:
   save-button: Opslaan
   save-and-quit: Opslaan en Afsluiten
@@ -42,6 +71,16 @@ behandeling-van-agendapunten:
   content-title: "Inhoud"
   needs-participants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
   edit-document: "Bewerk document"
+
+contact:
+  about: Waar gaat uw bericht over?
+  bug-message: Een functionaliteit, bug of probleem
+  compose: Stel bericht op
+  contact-directly: Of neem rechtstreeks contact op via mail
+  email: GelinktNotuleren@vlaanderen.be
+  heading: Contact
+  question-message: Een inhoudelijke vraag
+  send: Bericht versturen
 
 date-format:
   short-date: Korte datum
@@ -62,13 +101,20 @@ document-creator:
   title-field: Titel document
   template: Sjabloon
 
+document-history:
+  load-more: Meer laden
+
 editor-status-pill:
   default-status: In voorbereiding
 
 editor-document-title:
   placeholder: Naamloos document
+  agendapoint-title: agendapunt titel
+  change-title: Titel wijzigen
 
 inbox:
+  loading: Aan het laden
+  patience-text: Bedankt voor uw geduld.
   menu:
     meetings: Zittingen
     agendapoints: Agendapunten
@@ -82,6 +128,8 @@ inbox:
     administrative-body: Bestuursorgaan
     time: Tijdstip
     location: Locatie
+    meeting-of: Zitting van 
+    at: op
     new:
       title: Nieuwe zitting aanmaken
       meeting:
@@ -138,6 +186,7 @@ inbox:
     title-label: Titel reglement
     type-label: Wegtype
     identifier-label: Referentie nummer
+    archived-warning: Dit is een gearchiveerd document en kan niet worden gewijzigd.
   trash:
     page-title: Prullenmand
     title: Prullenmand
@@ -150,6 +199,54 @@ irg-archive:
   not-found: 
     title: Reglement niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het reglement.
+
+login:
+  app-name: Gelinkt Notuleren
+  description: Een webapplicatie die helpt met het opmaken en publiceren van agenda's, notulen en besluiten voor Lokale Besturen.
+  problems-text: Lukt het aanmelden niet? Neem contact op met uw interne beheerder. Indien er zich een probleem voordoet, contacteer
+  gebruikersbeheer: gebruikersbeheer Vlaanderen
+  signing-instructions: Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct staan indien deze niet verschijnt.
+  functionality-heading: De functionaliteiten van Gelinkt Notuleren
+  present-in-manual: Alle functionaliteiten, samen met handige tips & tricks, kan u bekijken in handleiding.
+  view-manual: Bekijk de handleiding hier.
+  meeting-heading: Notuleren
+  record-your-session: Notuleer uw zitting met behulp van het online tekstverwerkingsprogramma.
+  meeting-1-1: Gebruik de ingebouwde
+  meeting-1-2: sjablonen
+  meeting-1-3: om besluiten te vormen;
+  meeting-2-1: link naar de juiste
+  meeting-2-2: wetgeving uit de Vlaamse codex
+  meeting-3-1: notuleer technisch conform de opgelegde
+  meeting-3-2: standaarden
+  sign-and-validate: Ondertekenen & Valideren
+  sign-description: Uw documenten blijven online authentiek en veilig bewaard.
+  sign-1-1: Enkel personen met de
+  sign-1-2: juiste bevoegdheid
+  sign-1-3: kunnen documenten ondertekenen;
+  sign-2-1: documenten worden online
+  sign-2-2: getekend en verzegeld
+  sign-3-1: documenten kunnen op elk moment
+  sign-3-2: gevalideerd worden op echtheid
+  mandate-management: Mandatenbeheer
+  mandate-description: Vul automatisch de mandatendatabank aan bij het publiceren van uw notulen.
+  mandate-1-1: De tekstverwerker
+  mandate-1-2: herkent automatisch de juiste mandatarissen
+  mandate-1-3: in uw besluiten;
+  mandate-2-1: maak gebruik van sjablonen voor het
+  mandate-2-2: wijzigen van mandaten
+  mandate-3-1: wijzigingen in mandaten worden bij publicatie
+  mandate-3-2: automatisch up-to-date gebracht in de mandatendatabank
+  publication: Publiceren
+  publication-description: Documenten worden met het juiste niveau van beveiliging online ter beschikking gesteld.
+  publication-1-1: Stel essentiële informatie ter beschikking voor de
+  publication-1-2: leden van uw bestuur
+  publication-2-1: breng
+  publication-2-2: toezichthoudende overheden
+  publication-2-3: op de hoogte en voldoe aan de
+  publication-2-4: publicatieplicht
+  publication-2-5: met de druk van een knop;
+  publication-3-1: geef burgers eenvoudig toegang tot
+  publication-3-2: publieke informatie
 
 manage-agenda-zitting:
   beschrijving-label: Beschrijving
@@ -193,6 +290,7 @@ manage-agenda-zitting-modal-move:
   position-select-placeholder: Selecteer positie
   agendapunt-select-placeholder: Selecteer agendapunt
   search-placeholder: Zoek op titel
+  optional: Optioneel
 
 manage-free-text:
   before: Vrije tekstveld waar je de start van de zitting kan beschrijven
@@ -235,6 +333,8 @@ manage-zittings-data:
   cancel-button: Terug
   open-modal-button: Beheer algemene zittingsdata
   select-placeholder: Selecteer bestuursorgaan
+  period-start: "periode"
+  not-applicable: nvt.
 
 meeting-form:
   date-warning: U kunt geen einddatum kiezen die vóór de startdatum ligt.
@@ -260,6 +360,11 @@ meeting-form:
   notulen-published: Notulen gepubliceerd
 
 meetings:
+  publish:
+    agenda: Agenda
+    decision-list: Besluitenlijst
+    extracts: Uittreksels
+    document: Notulen
   delete:
     delete: Verwijderen
     confirm-message: Weet u zeker dat u deze zitting wilt verwijderen?
@@ -281,7 +386,10 @@ meetings:
     title: Zitting niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de zitting.
 
-
+mock-login:
+  administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
+  administrative-unit-search: Bestuurseenheid zoeken
+  search-placeholder: "Aalst, Berchem, ..."
 
 not-found:
   title: Pagina niet gevonden
@@ -290,6 +398,7 @@ not-found:
     contact-message: Indien u denkt dat dit een fout is, kan u ons steeds contacteren op onze
     contact-link: contact-pagina
     email-message: Of stuur een mail naar
+    email: GelinktNotuleren@vlaanderen.be
 
 participation:
   present-label: "Aanwezige mandatarissen:"
@@ -306,6 +415,7 @@ participation-list:
   present-error: "Er zijn nog geen aanwezige mandatarissen aangeduid"
   not-present-label: "Afwezige mandatarissen:"
   open-modal-button: Beheer aanwezigen bij start van de zitting
+  period-start: "periode"
 
 participation-list-modal:
   voorzitter-label: Voorzitter van de zitting
@@ -328,6 +438,17 @@ participation-list-modal-table:
   actie-label: Actie
   checkbox-label: Aanwezig
   no-data-message: Geen mandatarissen gevonden.
+
+print-view:
+  back-link: Terug naar ondertekenen & publiceren
+  heading-1: Uittreksel uit de notulen
+  heading-2: zitting van
+  description: Het document slaat op de situatie zoals gekend bij het afleveren.
+  print-header: Maak een print of PDF van een uittreksel
+  save-1: U kan deze pagina opslaan als PDF, of printen. Bekijk hoe opslaan en printen werkt in Firefox of Chrome, in de
+  manual: handleiding
+  save-2: . Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.
+  signed-by: Ondertekend door
 
 publication-confirmation:
   modal-title: "Bevestig publicatie van "
@@ -372,6 +493,7 @@ published-resource:
   notfication-text: Bekijk melding op het
   report-failed-text: Automatische melding mislukt
   download-text: Download het document en voltooi de melding via
+  loket: Loket voor Lokale Besturen
 
 rdfa-editor-container:
   default-busy-text: Bezig met verwerken
@@ -411,6 +533,17 @@ signature-confirmation:
   confirm-button: "Bevestig ondertekenen van "
   cancel-button: Annuleren
 
+snippets-notifier:
+  has-snippets-message: Maak een nieuw agendapunt of open een bestaand punt om de inhoud in te voegen.
+  has-errors-message: Er is een probleem opgetreden met het ophalen van informatie uit een externe bron.
+
+switch-login:
+  heading: Gelinkt Notuleren
+  app-description: Een webapplicatie die helpt met het opmaken en publiceren van agenda's, notulen en besluiten voor Lokale Besturen.
+  contact-text: Lukt het aanmelden niet? Neem contact op met uw interne beheerder. Indien er zich een probleem voordoet, contacteer
+  user-admin: gebruikersbeheer Vlaanderen
+  signing-instructions: Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct staan indien deze niet verschijnt.
+
 timeline-step:
   sign-step-title: "Onderteken "
   signing-restriction-info: "Ondertekenen kan enkel door de aangewezen personen met de rol "
@@ -439,6 +572,12 @@ timeline-step:
   local-loket: "Loket voor Lokale Besturen"
   publish-warning: "Vul de ontbrekende informatie aan om te publiceren"
 
+uittreksel-error:
+  header: We kunnen de pagina die u zoekt niet vinden
+  extract-not-found: Er is iets fout gelopen. Het uittreksel dat u zoekt bestaat niet of u heeft geen toegang.
+  back-link: Terug naar overzicht notulen
+  error-code: "404"
+
 utils:
   save: Bewaar
   file-options: Bestand acties
@@ -454,6 +593,15 @@ validation-modal:
   title: Geef uw document een naam
   message: Klik op de titel om uw document een naam te geven.
   confirm: Ok
+
+vo-page:
+  alt-image: een laptop met daarop het vlaanderen logo.
+  official-website: Gelinkt-notuleren.vlaanderen.be is een officiële website van de Vlaamse overheid
+  published-by: Uitgegeven door
+  agentschap-binnenlands-bestuur: Agentschap Binnenlands Bestuur
+  disclaimer: Disclaimer
+  cookie-policy: Cookieverklaring
+  accesibility-statement: Toegankelijkheidsverklaring
 
 voting:
   open-modal-button: Beheer stemming
@@ -512,3 +660,7 @@ voting-modal:
   toggle-edit-button: Bewerk
   delete-button: Verwijder
   no-data-message: Geen stemmingen gevonden
+
+zitting-link:
+  meeting-of: Zitting van
+  at: op

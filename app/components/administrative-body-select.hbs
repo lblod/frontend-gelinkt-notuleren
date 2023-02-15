@@ -8,11 +8,11 @@
     as |administrativeBody|
   >
     {{administrativeBody.isTijdsspecialisatieVan.naam}}
-    (periode: {{plain-date administrativeBody.bindingStart}} -
+    ({{t "administrative-body-select.period"}}: {{plain-date administrativeBody.bindingStart}} -
     {{#if administrativeBody.bindingEinde~}}
       {{plain-date administrativeBody.bindingEinde}}
     {{else}}
-      nvt.
+      {{t "administrative-body-select.not-applicable"}} 
     {{/if}})
   </PowerSelect>
 </div>

@@ -42,7 +42,7 @@
         {{/if}}
       {{/each}}
       {{#if this.hasMore}}
-        <AuButton @skin="link" class="au-u-padding-tiny au-u-padding-left-small" {{on "click" (perform this.loadMore)}} >Load More</AuButton>
+        <AuButton @skin="link" class="au-u-padding-tiny au-u-padding-left-small" {{on "click" (perform this.loadMore)}} >{{t "document-history.load-more"}}</AuButton>
       {{/if}}
     </div>
   </Modal.Body>

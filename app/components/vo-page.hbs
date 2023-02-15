@@ -9,7 +9,7 @@
         {{#if this.showBanner}}
         <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is gelinkt notuleren">
           {{!-- template-lint-disable require-valid-alt-text  --}}
-          <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt="een laptop met daarop het vlaanderen logo.">
+          <img sizes="50vw" src="/assets/images/loket-header-1600.jpg" srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w" alt={{t "vo-page.alt-image"}}>
         </AuContentHeader>
         {{/if}}
         {{yield}}
@@ -18,19 +18,19 @@
 
     <AuMainFooter>
       <AuHeading @level="3" @skin="4">
-        Gelinkt-notuleren.vlaanderen.be is een officiële website van de Vlaamse overheid
+        {{t "vo-page.official-website"}}
       </AuHeading>
       <AuContent @skin="small">
-        <p>Uitgegeven door <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">Agentschap Binnenlands Bestuur</a></p>
+        <p>{{t "vo-page.published-by"}} <a class="au-c-link" href="https://www.vlaanderen.be/organisaties/administratieve-diensten-van-de-vlaamse-overheid/beleidsdomein-kanselarij-en-bestuur/agentschap-binnenlands-bestuur">{{t "vo-page.agentschap-binnenlands-bestuur"}}</a></p>
         <ul class="au-c-list-horizontal">
           <li class="au-c-list-horizontal__item">
-            <AuLink @route="legaal.disclaimer" @skin="secondary">Disclaimer</AuLink>
+            <AuLink @route="legaal.disclaimer" @skin="secondary">{{t "vo-page.disclaimer"}}</AuLink>
           </li>
           <li class="au-c-list-horizontal__item">
-            <AuLink @route="legaal.cookieverklaring" @skin="secondary">Cookieverklaring</AuLink>
+            <AuLink @route="legaal.cookieverklaring" @skin="secondary">{{t "vo-page.cookie-policy"}}</AuLink>
           </li>
           <li class="au-c-list-horizontal__item">
-            <AuLink @route="legaal.toegankelijkheidsverklaring" @skin="secondary">Toegankelijkheid</AuLink>
+            <AuLink @route="legaal.toegankelijkheidsverklaring" @skin="secondary">{{t "vo-page.accesibility-statement"}}</AuLink>
           </li>
         </ul>
       </AuContent>

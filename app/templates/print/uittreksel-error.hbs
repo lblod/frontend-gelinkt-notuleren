@@ -16,7 +16,7 @@
 	          <div class="content-header__content">
 	            <div class="content-header__logo-wrapper">
 	            	<a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase">
-	            		<span class="h1 content-header__entity-logo__prefix u-spacer--none">404</span>
+	            		<span class="h1 content-header__entity-logo__prefix u-spacer--none">{{t "uittreksel-error.error-code"}}</span>
 	            	</a>
 	            </div>
 	          </div>
@@ -29,10 +29,10 @@
 		<div class="grid">
 			<div class="col--6-12">
 				<div class="u-padding--round--large">
-					<h1 class="h2">We kunnen de pagina die u zoekt niet vinden</h1>
-					<p class="u-spacer">Er is iets fout gelopen. Het uittreksel dat u zoekt bestaat niet of u heeft geen toegang.</p>
+					<h1 class="h2">{{t "uittreksel-error.heading"}}</h1>
+					<p class="u-spacer">{{t "uittreksel-error.extract-not-found"}}</p>
           <AuLink @route="inbox.index" @width="block" @skin="button-secondary" @icon="arrow-left" @iconAlignment="left">
-            Terug naar overzicht notulen
+            {{t "uittreksel-error.back-link"}}
 					</AuLink>
 				</div>
 			</div>

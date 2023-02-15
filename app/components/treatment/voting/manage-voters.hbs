@@ -6,7 +6,7 @@
       <AuLabel for="amount-pro">
         {{t "voting-modal.aantal-voorstanders-label"}}
       </AuLabel>
-      <Input id="amount-pro" class="au-c-input au-c-input--block" placeholder="0" @type="number"
+      <Input id="amount-pro" class="au-c-input au-c-input--block" @type="number"
         @value={{this.editStemming.stemming.aantalVoorstanders}} min="0"
         disabled={{not this.editStemming.stemming.geheim}} />
     </div>
@@ -14,7 +14,7 @@
       <AuLabel for="amount-con">
         {{t "voting-modal.aantal-tegenstanders-label"}}
       </AuLabel>
-      <Input id="amount-con" class="au-c-input au-c-input--block" placeholder="0" @type="number"
+      <Input id="amount-con" class="au-c-input au-c-input--block" @type="number"
         @value={{this.editStemming.stemming.aantalTegenstanders}} min="0"
         disabled={{not this.editStemming.stemming.geheim}} />
     </div>
@@ -22,7 +22,7 @@
       <AuLabel for="amount-none">
         {{t "voting-modal.aantal-onthouders-label"}}
       </AuLabel>
-      <Input id="amount-none" class="au-c-input au-c-input--block" placeholder="0" @type="number"
+      <Input id="amount-none" class="au-c-input au-c-input--block" @type="number"
         @value={{this.editStemming.stemming.aantalOnthouders}} min="0"
         disabled={{not this.editStemming.stemming.geheim}} />
     </div>
