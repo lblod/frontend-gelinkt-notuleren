@@ -2,6 +2,7 @@
 
 @mixin font-styles {
   --au-font: "Fira Sans", sans-serif;
+
   font-family: "Fira Sans", sans-serif !important;
   font-size: 16px !important;
 }
@@ -18,65 +19,71 @@
   }
 
   h3 {
-    font-weight: 500;
-    font-size: 22px;
+    font-size: 20px;
+    font-weight: 700;
+  }
+}
+
+@mixin table-styles {
+  table {
+    border: 0;
+    margin-top: 1rem;
+
+    tbody {
+      tr {
+        border-color: transparent;
+
+        td:first-child {
+          border-left: 0
+        }
+
+        td {
+          border-color: white;
+        }
+      }
+
+      tr:nth-child(2n) {
+        background-color: var(--gent-color-background-cyan);
+      }
+    }
+  }
+}
+
+@mixin list-styles {
+  ul {
+    margin: 0 0 1rem 3.4rem;
+
+    li, ul {
+      margin-top: 0;
+    }
   }
 }
 
 @include admin-unit(gent) {
   --gent-color-cyan: #009de0;
-  --gent-color-dark-dark-gray: #23333a;
+  --gent-color-dark-gray: #23333a;
   --gent-color-background-cyan: #f0f9fd;
-  --au-gray-900: var(--gent-color-dark-dark-gray);
+  --au-gray-900: var(--gent-color-dark-gray);
 
-  color: var(--gent-color-dark-dark-gray);
+  color: var(--gent-color-dark-gray);
 
   @include agendapunt {
     @include font-styles;
     @include header-styles;
 
     p {
-      color: var(--gent-color-dark-dark-gray) !important;
+      color: var(--gent-color-dark-gray) !important;
       margin-top: 0;
     }
   }
 
   @include behandeling-van-agendapunt {
-    color: var(--gent-color-dark-dark-gray) !important;
+    color: var(--gent-color-dark-gray) !important;
 
     @include font-styles;
     @include header-styles;
-
-    table {
-      border: 0;
-      margin-top: 1rem;
-
-      tbody {
-        tr {
-          border-color: transparent;
-
-          td:first-child {
-            border-left: 0
-          }
-
-          td {
-            border-color: white;
-          }
-        }
-
-        tr:nth-child(2n) {
-          background-color: var(--gent-color-background-cyan);
-        }
-      }
-    }
-
-    ul {
-      margin: 0 0 1rem 3.4rem;
-
-      li, ul {
-        margin-top: 0;
-      }
-    }
+    @include table-styles;
+    @include list-styles;
   }
 }
 
