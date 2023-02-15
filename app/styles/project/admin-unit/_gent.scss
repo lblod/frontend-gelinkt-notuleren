@@ -31,7 +31,7 @@
 
   color: var(--gent-color-dark-dark-gray);
 
-  li[typeof='besluit:Agendapunt'] {
+  @include agendapunt {
     @include font-styles;
     @include header-styles;
 
@@ -41,7 +41,7 @@
     }
   }
 
-  div[typeof="besluit:BehandelingVanAgendapunt"] {
+  @include behandeling-van-agendapunt {
     color: var(--gent-color-dark-dark-gray) !important;
 
     @include font-styles;
@@ -76,12 +76,6 @@
       li, ul {
         margin-top: 0;
       }
-    }
-
-    div.c-template-content.c-template-content--treatment {
-      margin-top: 0.5rem;
-      padding-top: 0.5rem;
-      border-top: 0;
     }
   }
 }

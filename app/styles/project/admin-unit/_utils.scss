@@ -13,3 +13,23 @@
     @content;
   }
 }
+
+@mixin agendapunt {
+  li[typeof='besluit:Agendapunt'] {
+    @content;
+  }
+}
+
+@mixin behandeling-van-agendapunt {
+  div[typeof="besluit:BehandelingVanAgendapunt"] {
+    @content;
+
+    div.c-template-content.c-template-content--treatment {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 0;
+
+      padding-left: 2.5rem;
+    }
+  }
+}
