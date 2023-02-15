@@ -12,8 +12,8 @@
   }
 
   h3 {
-    font-weight: 700;
     font-size: 22px;
+    font-weight: 700;
   }
 }
 
@@ -27,13 +27,9 @@
 
 @include admin-unit(essen) {
   --essen-color-black: #000000;
-  --essen-color-dark-green: #52a63a;
-  --essen-color-light-green: #b7c724;
   --essen-color-dark-orange: #dd6b18;
-  --essen-color-light-orange: #e99b22;
-  --essen-color-yellow: #f0c22e;
-
   --au-gray-900: var(--essen-color-black);
+
   color: var(--essen-color-black);
 
   @include agendapunt {
