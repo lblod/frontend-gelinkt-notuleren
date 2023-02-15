@@ -45,7 +45,7 @@
         <div>
           <AuLabel>{{t "manage-zittings-data.bestuursorgan-label"}}</AuLabel>
           {{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}
-          {{t "manage-zittings-data.period-start"}} {{plain-date this.bestuursorgaan.bindingStart}} -
+          ({{t "manage-zittings-data.period-start"}}: {{plain-date this.bestuursorgaan.bindingStart}} -
           {{#if this.bestuursorgaan.bindingEinde}}{{plain-date this.bestuursorgaan.bindingEinde}}{{else}}{{t "manage-zittings-data.not-applicable"}}{{/if}})
         </div>
         <div>

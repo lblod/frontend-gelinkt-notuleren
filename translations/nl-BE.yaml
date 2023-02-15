@@ -8,7 +8,7 @@ agendapoint:
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het agendapunt.
   saved-versions: "Opgeslagen documentversies:"
   current-version: Huidige versie
-  modify-warning: "Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende recentere versies onherroepelijk:"
+  modify-warning: "Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:"
   version-of: Versie van
   no-new-versions: Geen nieuwere versies om weer te geven.
   restore-version: Herstel versie en verwerp nieuwere versies
@@ -18,7 +18,7 @@ agendapoint:
   making-copy: Kopie aan het maken
 
 administrative-body-select:
-  period: "(period:"
+  period: "period"
   not-applicable: nvt.
 
 application-header:
@@ -211,7 +211,7 @@ login:
   view-manual: Bekijk de handleiding hier.
   meeting-heading: Notuleren
   record-your-session: Notuleer uw zitting met behulp van het online tekstverwerkingsprogramma.
-  meeting-1-1: Gebruik de ingebouwde
+  meeting-1-1: Gebruik de de ingebouwde
   meeting-1-2: sjablonen
   meeting-1-3: om besluiten te vormen;
   meeting-2-1: link naar de juiste
@@ -333,7 +333,7 @@ manage-zittings-data:
   cancel-button: Terug
   open-modal-button: Beheer algemene zittingsdata
   select-placeholder: Selecteer bestuursorgaan
-  period-start: "(periode:"
+  period-start: "periode:"
   not-applicable: nvt.
 
 meeting-form:
@@ -415,7 +415,7 @@ participation-list:
   present-error: "Er zijn nog geen aanwezige mandatarissen aangeduid"
   not-present-label: "Afwezige mandatarissen:"
   open-modal-button: Beheer aanwezigen bij start van de zitting
-  period-start: "(periode"
+  period-start: "periode"
 
 participation-list-modal:
   voorzitter-label: Voorzitter van de zitting
@@ -542,7 +542,7 @@ switch-login:
   app-description: Een webapplicatie die helpt met het opmaken en publiceren van agenda's, notulen en besluiten voor Lokale Besturen.
   contact-text: Lukt het aanmelden niet? Neem contact op met uw interne beheerder. Indien er zich een probleem voordoet, contacteer
   user-admin: gebruikersbeheer Vlaanderen
-  signing-instructions: Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct ingesteld zijn indien deze niet verschijnt.
+  signing-instructions: Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct staan indien deze niet verschijnt.
 
 timeline-step:
   sign-step-title: "Onderteken "

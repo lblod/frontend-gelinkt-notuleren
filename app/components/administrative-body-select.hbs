@@ -8,7 +8,7 @@
     as |administrativeBody|
   >
     {{administrativeBody.isTijdsspecialisatieVan.naam}}
-    {{t "administrative-body-select.period"}} {{plain-date administrativeBody.bindingStart}} -
+    ({{t "administrative-body-select.period"}}: {{plain-date administrativeBody.bindingStart}} -
     {{#if administrativeBody.bindingEinde~}}
       {{plain-date administrativeBody.bindingEinde}}
     {{else}}

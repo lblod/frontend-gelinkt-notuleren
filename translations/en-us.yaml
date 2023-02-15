@@ -18,7 +18,7 @@ agendapoint:
   making-copy: Making copy...
 
 administrative-body-select:
-  period: "(period:"
+  period: "period"
   not-applicable: n/a
 
 application-header:
@@ -333,7 +333,7 @@ manage-zittings-data:
   cancel-button: Back
   open-modal-button: Manage general data of the meeting
   select-placeholder: Select governing body
-  period-start: "(period:"
+  period-start: "period"
   not-applicable: n/a
 
 meeting-form:
@@ -415,7 +415,7 @@ participation-list:
   present-error: "No mandatees have been appointed"
   not-present-label: "Absent mandatees:"
   open-modal-button: Manage attendees at the start of the session
-  period-start: "(period"
+  period-start: "period"
 
 participation-list-modal:
   voorzitter-label: Chairman of the meeting
