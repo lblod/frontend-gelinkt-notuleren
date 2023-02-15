@@ -333,7 +333,7 @@ manage-zittings-data:
   cancel-button: Terug
   open-modal-button: Beheer algemene zittingsdata
   select-placeholder: Selecteer bestuursorgaan
-  period-start: "periode:"
+  period-start: "periode"
   not-applicable: nvt.
 
 meeting-form:
