@@ -9,6 +9,10 @@ export default class CurrentSessionService extends Service {
   @tracked account;
   @tracked user;
   @tracked group;
+  // Ideally this should be part of `group` itself
+  // I'm just putting it into the `CurrentSessionService` for the POC,
+  // to indicate that this will be the place where we'll be retrieving the logo from
+  @tracked groupLogoUrl;
   @tracked roles = [];
 
   get canRead() {
@@ -40,6 +44,10 @@ export default class CurrentSessionService extends Service {
       this.group = await this.store.findRecord('bestuurseenheid', groupId, {
         include: 'classificatie',
       });
+
+      this.groupLogoUrl =
+        'https://stad.gent/sites/default/files/media/images/logoGent_c100.png';
+
       this.roles = this.session.data.authenticated.data.attributes.roles;
     }
   }
