@@ -5,7 +5,6 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 export default class MeetingsPublishNotulenController extends Controller {
-  @service currentSession;
   @service store;
   @service publish;
   @service muTask;
@@ -190,39 +189,18 @@ export default class MeetingsPublishNotulenController extends Controller {
           method: 'POST',
         }
       );
-
-      const headerImageHTML = this.headerImageHTML;
       const previewHtml = json.data.attributes.html;
-
-      this.preview = `${headerImageHTML || ''}${previewHtml}`;
+      this.preview = previewHtml;
     } catch (e) {
       console.error(e);
       this.errors = [JSON.stringify(e)];
     }
   }
 
-  get headerImageHTML() {
-    if (!this.currentSession.groupLogoUrl) {
-      return null;
-    }
-
-    const imageElement = document.createElement('img');
-    imageElement.setAttribute('src', this.currentSession.groupLogoUrl);
-    imageElement.classList.add('au-c-header-image');
-
-    const headerImageHTML = imageElement.outerHTML;
-
-    return headerImageHTML;
-  }
-
-  get notulenContentWithHeaderImage() {
-    return `${this.headerImageHTML || ''}${this.notulen?.content || ''}`;
-  }
-
   get zittingWrapper() {
-    if (this.notulenContentWithHeaderImage) {
+    if (this.notulen?.content) {
       const div = document.createElement('div');
-      div.innerHTML = this.notulenContentWithHeaderImage;
+      div.innerHTML = this.notulen.content;
 
       const bvapContainer = div.querySelector(
         "[property='http://mu.semte.ch/vocabularies/ext/behandelingVanAgendapuntenContainer']"

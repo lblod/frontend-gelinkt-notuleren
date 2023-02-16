@@ -12,8 +12,9 @@
       {{#if this.loadNotulen.isIdle}}
         {{!-- cheating with status here, because signing doesn't affect preview --}}
         <PublicationPreview @title="Voorvertoning notulen" @status={{if (eq this.status "published") "published" "concept"}}>
+          <PreviewHeaderImage/>
           {{#if (eq this.status 'published')}}
-            {{html-safe this.notulenContentWithHeaderImage}}
+            {{html-safe this.notulen.content}}
           {{else}}
             {{html-safe this.zittingWrapper}}
           {{/if}}
@@ -58,7 +59,8 @@
               @confirm={{perform this.createSignedResource}}
               @cancel={{fn (mut this.showSigningModal) false}}
             >
-              {{html-safe this.notulenContentWithHeaderImage}}
+              <PreviewHeaderImage/>
+              {{html-safe this.notulen.content}}
             </Signatures::SignatureConfirmation>
           {{/if}}
           {{!-- publish --}}
@@ -77,6 +79,7 @@
               @cancel={{fn (mut this.showPublishingModal) false}}
             >
               {{#if this.createPublishPreview.isIdle}}
+                <PreviewHeaderImage/>
                 {{html-safe this.preview}}
               {{else}}
                 <AuHelpText @size="large">{{t "publish.loading-message"}}</AuHelpText>
