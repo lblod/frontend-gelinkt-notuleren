@@ -13,7 +13,7 @@
         {{!-- cheating with status here, because signing doesn't affect preview --}}
         <PublicationPreview @title="Voorvertoning notulen" @status={{if (eq this.status "published") "published" "concept"}}>
           {{#if (eq this.status 'published')}}
-            {{html-safe this.notulen.content}}
+            {{html-safe this.notulenContentWithHeaderImage}}
           {{else}}
             {{html-safe this.zittingWrapper}}
           {{/if}}
@@ -58,7 +58,7 @@
               @confirm={{perform this.createSignedResource}}
               @cancel={{fn (mut this.showSigningModal) false}}
             >
-              {{html-safe this.notulen.content}}
+              {{html-safe this.notulenContentWithHeaderImage}}
             </Signatures::SignatureConfirmation>
           {{/if}}
           {{!-- publish --}}
