@@ -1,0 +1,13 @@
+<div class='au-o-box au-o-box--small au-u-background-gray-200'>
+  <AuToaster />
+  <AuFileUpload
+    @title={{t 'attachments.attach'}}
+    accept="text/css"
+    @helpTextDragDrop={{t 'attachments.drag'}}
+    @modelName={{'file'}}
+    @endPoint={{'/files'}}
+    @onFinishUpload={{perform this.uploadedAttachement}}
+    @maxFileSizeMB='1'
+    @multiple={{false}}
+  />
+</div>

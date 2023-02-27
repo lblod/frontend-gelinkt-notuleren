@@ -9,12 +9,18 @@ export default class ApplicationRoute extends Route {
   @service features;
   @service session;
   @service plausible;
+  @service headData;
+  @service houseCss;
 
   async beforeModel(transition) {
     this.updateFeatureFlags(transition.to.queryParams);
     await this.startAnalytics();
     await this.session.setup();
     return this.loadCurrentSession();
+  }
+
+  afterModel() {
+    this.headData.houseCssUrl = this.houseCss.getFileUrl;
   }
 
   async startAnalytics() {
