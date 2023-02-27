@@ -81,6 +81,7 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
+    ENV.environmentName = 'LOCAL';
     ENV.manual.baseUrl =
       'https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/';
     ENV.manual.notuleren = '#notuleren';
