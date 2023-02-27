@@ -20,6 +20,7 @@ Router.map(function () {
       this.route('new');
     });
     this.route('irg-archive');
+    this.route('upload');
   });
   this.route('mock-login');
   this.route('login');
