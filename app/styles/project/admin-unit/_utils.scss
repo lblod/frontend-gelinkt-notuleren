@@ -4,12 +4,7 @@
 // unit styling, so there's only single place where we need to change
 // the wrapping selector
 @mixin admin-unit($admin-unit) {
-  // Print view
-  .au-u-wide-on-print.administrative-unit-gent,
-  // Publication confirmation, Signature confirmation
-  .au-c-rdfa-publication.rdfa-annotations.administrative-unit-#{$admin-unit},
-  // Uittreksels view
-  .au-c-content .administrative-unit-#{$admin-unit} {
+  .administrative-unit-#{$admin-unit} {
     [property] {
       border-bottom: 0;
     }
