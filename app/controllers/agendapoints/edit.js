@@ -6,81 +6,73 @@ import { inject as service } from '@ember/service';
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { Schema } from '@lblod/ember-rdfa-editor';
-
-import {
-  block_rdfa,
-  blockquote,
-  bullet_list,
-  code_block,
-  doc,
-  hard_break,
-  heading,
-  horizontal_rule,
-  image,
-  inline_rdfa,
-  list_item,
-  ordered_list,
-  paragraph,
-  placeholder,
-  repaired_block,
-  text,
-} from '@lblod/ember-rdfa-editor/nodes';
-import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 import {
   em,
-  link,
   strikethrough,
   strong,
   underline,
-} from '@lblod/ember-rdfa-editor/marks';
-
+} from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
-  tableKeymap,
-  tableMenu,
+  block_rdfa,
+  hard_break,
+  horizontal_rule,
+  invisible_rdfa,
+  paragraph,
+  repaired_block,
+  text,
+} from '@lblod/ember-rdfa-editor/nodes';
+import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-
-import { besluitTypeWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin';
-import { importSnippetWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/import-snippet-plugin';
+import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
 import {
-  rdfaDateCardWidget,
-  rdfaDateInsertWidget,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
+  tableOfContentsView,
+  table_of_contents,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import {
-  besluitNodes,
-  standardTemplateWidget,
-  structureSpecs,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
-import { roadSignRegulationWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin';
-import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin';
-
-import { setupCitationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
-
-import {
-  regulatoryStatementNode,
-  regulatoryStatementNodeView,
-  regulatoryStatementWidget,
-} from '../../editor-plugins/regulatory-statements-plugin';
-import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
+  STRUCTURE_NODES,
+  STRUCTURE_SPECS,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
   variable,
   variableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
-import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
 import {
-  articleStructureContextWidget,
-  articleStructureInsertWidget,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
-import { besluitPluginCardWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-plugin';
-import { PLUGIN_CONFIGS } from '../../config/constants';
+  bullet_list,
+  list_item,
+  ordered_list,
+} from '@lblod/ember-rdfa-editor/plugins/list';
+import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
+import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
+import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
+import { image } from '@lblod/ember-rdfa-editor/plugins/image';
+import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
+import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
-const citation = setupCitationPlugin({
+import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
+
+import { besluitNodes } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+
+import { citation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin/marks/citation';
+import {
+  citationPlugin,
+  CitationPluginConfig,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+
+import {
+  regulatoryStatementNode,
+  regulatoryStatementNodeView,
+} from '../../editor-plugins/regulatory-statements-plugin';
+import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+
+/*const citation = setupCitationPlugin({
   type: 'nodes',
   activeInNodeTypes(schema) {
     return new Set([schema.nodes.motivering]);
   },
-});
+});*/
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -89,14 +81,17 @@ export default class AgendapointsEditController extends Controller {
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
-  @tracked editor;
+  @tracked controller;
   @service intl;
   @service features;
+  @tracked citationPlugin = citationPlugin(this.config.citation);
 
   get schema() {
     return new Schema({
       nodes: {
-        doc,
+        doc: {
+          content: 'block*',
+        },
         paragraph,
         repaired_block,
         list_item,
@@ -125,7 +120,7 @@ export default class AgendapointsEditController extends Controller {
         block_rdfa,
       },
       marks: {
-        citation: citation.marks.citation,
+        citation: citation,
         inline_rdfa,
         link,
         em,
@@ -134,6 +129,41 @@ export default class AgendapointsEditController extends Controller {
         strikethrough,
       },
     });
+  }
+
+  get config() {
+    return {
+      date: {
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+        },
+        formats: [
+          {
+            label: 'Short Date',
+            key: 'short',
+            dateFormat: 'dd/MM/yy',
+            dateTimeFormat: 'dd/MM/yy HH:mm',
+          },
+          {
+            label: 'Long Date',
+            key: 'long',
+            dateFormat: 'EEEE dd MMMM yyyy',
+            dateTimeFormat: 'PPPPp',
+          },
+        ],
+        allowCustomFormat: true,
+      },
+      citation: {
+        type: 'nodes',
+        activeInNodeTypes(schema) {
+          return new Set([schema.nodes.motivering]);
+        },
+      },
+      link: {
+        interactive: true,
+      },
+    };
   }
 
   get nodeViews() {
@@ -145,7 +175,7 @@ export default class AgendapointsEditController extends Controller {
     };
   }
 
-  get widgets() {
+  /*get widgets() {
     return [
       besluitPluginCardWidget,
       tableMenu,
@@ -164,14 +194,14 @@ export default class AgendapointsEditController extends Controller {
         ? [regulatoryStatementWidget]
         : []),
     ];
-  }
+  }*/
 
   get plugins() {
-    return [tablePlugin, tableKeymap, citation.plugin];
+    return [tablePlugin, tableKeymap, this.citationPlugin];
   }
 
   get dirty() {
-    return this.editorDocument.content !== this.editor?.htmlContent;
+    return this.editorDocument.content !== this.controller?.htmlContent;
   }
 
   get editorDocument() {
@@ -184,13 +214,13 @@ export default class AgendapointsEditController extends Controller {
 
   @action
   handleRdfaEditorInit(editor) {
-    this.editor = editor;
+    this.controller = editor;
     editor.setHtmlContent(this.editorDocument.content || '');
   }
 
   @action
   download() {
-    this.editorDocument.content = this.editor.htmlContent;
+    this.editorDocument.content = this.controller.htmlContent;
     generateExportFromEditorDocument(this.editorDocument);
   }
 
@@ -247,7 +277,7 @@ export default class AgendapointsEditController extends Controller {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
-      const html = this.editor.htmlContent;
+      const html = this.controller.htmlContent;
       const cleanedHtml = this.removeEmptyDivs(html);
 
       const editorDocument =

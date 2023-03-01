@@ -24,7 +24,7 @@ import {
   text,
   placeholder,
 } from '@lblod/ember-rdfa-editor/nodes';
-import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+import { invisible_rdfa } from '@lblod/ember-rdfa-editor/marks/inline-rdfa';
 import {
   em,
   link,
