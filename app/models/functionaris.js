@@ -1,6 +1,7 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
+import MandatarisModel from './mandataris';
 
-export default class FunctionarisModel extends Model {
+export default class FunctionarisModel extends MandatarisModel {
   @attr('datetime') start;
   @attr('datetime') einde;
   @attr uri;

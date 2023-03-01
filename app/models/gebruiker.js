@@ -17,6 +17,6 @@ export default class UserModel extends Model {
   }
 
   get fullName() {
-    return `${this.voornaam} ${this.achternaam}`.trim();
+    return `${this.voornaam} ${this.achternaam}` //.trim();
   }
 }

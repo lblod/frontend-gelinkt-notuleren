@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { task } from 'ember-concurrency';
 /**
  * @typedef {import("../models/mandataris").default} Mandataris
  * @typedef {import("../models/functionaris").default} Functionaris
@@ -34,6 +35,16 @@ import { action } from '@ember/object';
  */
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
+  @tracked secretary;
+
+  @task
+  *fetchData() {
+    this.secretary = yield this.args.secretary;
+    console.log(this.secretary);
+    yield this.secretary.isBestuurlijkeAliasVan;
+    yield this.secretary.isBestuurlijkeAliasVan.fullName;
+    console.log(this.secretary);
+  }
 
   get chairman() {
     return this.args.chairman;
@@ -41,10 +52,6 @@ export default class ParticipationListComponent extends Component {
 
   get defaultedChairman() {
     return this.chairman ?? this.args.defaultChairman;
-  }
-
-  get secretary() {
-    return this.args.secretary;
   }
 
   get defaultedSecretary() {
