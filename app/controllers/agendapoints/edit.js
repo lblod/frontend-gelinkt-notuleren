@@ -20,16 +20,13 @@ import {
   paragraph,
   repaired_block,
   text,
+  doc,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
-import {
-  tableOfContentsView,
-  table_of_contents,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,
@@ -53,7 +50,7 @@ import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugi
 
 import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
 
-import { besluitNodes } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+import { besluitNodes, structureSpecs } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 
 import { citation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin/marks/citation';
 import {
@@ -66,6 +63,8 @@ import {
   regulatoryStatementNodeView,
 } from '../../editor-plugins/regulatory-statements-plugin';
 import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+
+
 
 /*const citation = setupCitationPlugin({
   type: 'nodes',
@@ -89,9 +88,7 @@ export default class AgendapointsEditController extends Controller {
   get schema() {
     return new Schema({
       nodes: {
-        doc: {
-          content: 'block*',
-        },
+        doc,
         paragraph,
         repaired_block,
         list_item,
@@ -105,6 +102,7 @@ export default class AgendapointsEditController extends Controller {
             insertDateTime: this.intl.t('date-plugin.insert.datetime'),
           },
         }),
+        STRUCTURE_NODES,
         regulatoryStatementNode,
         variable,
         ...besluitNodes,
@@ -118,11 +116,11 @@ export default class AgendapointsEditController extends Controller {
         hard_break,
         invisible_rdfa,
         block_rdfa,
+        link: link(this.config.link),
       },
       marks: {
-        citation: citation,
+        citation,
         inline_rdfa,
-        link,
         em,
         strong,
         underline,
@@ -163,6 +161,7 @@ export default class AgendapointsEditController extends Controller {
       link: {
         interactive: true,
       },
+      structures: structureSpecs,
     };
   }
 
@@ -171,6 +170,7 @@ export default class AgendapointsEditController extends Controller {
       return {
         variable: variableView(controller),
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
+        link: linkView(this.config.link)(controller),
       };
     };
   }

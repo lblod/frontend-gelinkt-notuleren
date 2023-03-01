@@ -8,70 +8,69 @@ import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/g
 import { inject as service } from '@ember/service';
 
 import {
-  block_rdfa,
-  blockquote,
-  bullet_list,
-  code_block,
-  hard_break,
-  heading,
-  horizontal_rule,
-  image,
-  inline_rdfa,
-  list_item,
-  ordered_list,
-  paragraph,
-  repaired_block,
-  text,
-  placeholder,
-} from '@lblod/ember-rdfa-editor/nodes';
-import { invisible_rdfa } from '@lblod/ember-rdfa-editor/marks/inline-rdfa';
-import {
   em,
-  link,
   strikethrough,
   strong,
   underline,
-} from '@lblod/ember-rdfa-editor/marks';
+} from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
-  tableMenu,
-  tablePlugin,
+  block_rdfa,
+  hard_break,
+  horizontal_rule,
+  invisible_rdfa,
+  paragraph,
+  repaired_block,
+  text,
+  doc,
+} from '@lblod/ember-rdfa-editor/nodes';
+import {
   tableNodes,
-  tableKeymap,
+  tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
+import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
 import {
-  tableOfContentsView,
-  table_of_contents,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
-import { tableOfContentsWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin';
-import { templateVariableWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin';
-import { setupCitationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
-import {
-  rdfaDateCardWidget,
-  rdfaDateInsertWidget,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
-import {
-  articleStructureContextWidget,
-  articleStructureInsertWidget,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin';
-import { importSnippetWidget } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/import-snippet-plugin';
-import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
+  STRUCTURE_NODES,
+  STRUCTURE_SPECS,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
   variable,
   variableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
-import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
+import {
+  bullet_list,
+  list_item,
+  ordered_list,
+} from '@lblod/ember-rdfa-editor/plugins/list';
+import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
+import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
+import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
+import { image } from '@lblod/ember-rdfa-editor/plugins/image';
+import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
+import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
+
 import { Schema } from '@lblod/ember-rdfa-editor';
 
-const citation = setupCitationPlugin();
+import { citation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin/marks/citation';
+import {
+  citationPlugin,
+  CitationPluginConfig,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
+import {
+  tableOfContentsView,
+  table_of_contents,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
-  @tracked editor;
+  @tracked controller;
   @tracked _editorDocument;
   @tracked revisions;
   @service intl;
   editor;
+  @tracked citationPlugin = citationPlugin(this.config.citation);
 
   get schema() {
     return new Schema({
@@ -80,7 +79,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
         },
         paragraph,
-        table_of_contents: table_of_contents(PLUGIN_CONFIGS.TABLE_OF_CONTENTS),
+        table_of_contents: table_of_contents(this.config.tableOfContents),
         repaired_block,
         list_item,
         ordered_list,
@@ -104,11 +103,11 @@ export default class RegulatoryStatementsRoute extends Controller {
         hard_break,
         invisible_rdfa,
         block_rdfa,
+        link: link(this.config.link),
       },
       marks: {
-        citation: citation.marks.citation,
+        citation,
         inline_rdfa,
-        link,
         em,
         strong,
         underline,
@@ -117,7 +116,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     });
   }
 
-  get widgets() {
+  /*get widgets() {
     return [
       tableMenu,
       tableOfContentsWidget,
@@ -130,21 +129,66 @@ export default class RegulatoryStatementsRoute extends Controller {
       articleStructureInsertWidget(),
       templateVariableWidget,
     ];
-  }
+  }*/
 
   get nodeViews() {
     return (controller) => {
       return {
         variable: variableView(controller),
-        table_of_contents: tableOfContentsView(
-          PLUGIN_CONFIGS.TABLE_OF_CONTENTS
-        )(controller),
+        table_of_contents: tableOfContentsView(this.config.tableOfContents)(
+          controller
+        ),
+        link: linkView(this.config.link)(controller),
       };
     };
   }
 
   get plugins() {
-    return [tablePlugin, tableKeymap, citation.plugin];
+    return [tablePlugin, tableKeymap, this.citationPlugin];
+  }
+
+  get config() {
+    return {
+      tableOfContents: [
+        {
+          nodeHierarchy: [
+            'title|chapter|section|subsection|article',
+            'structure_header|article_header',
+          ],
+        },
+      ],
+      date: {
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+        },
+        formats: [
+          {
+            label: 'Short Date',
+            key: 'short',
+            dateFormat: 'dd/MM/yy',
+            dateTimeFormat: 'dd/MM/yy HH:mm',
+          },
+          {
+            label: 'Long Date',
+            key: 'long',
+            dateFormat: 'EEEE dd MMMM yyyy',
+            dateTimeFormat: 'PPPPp',
+          },
+        ],
+        allowCustomFormat: true,
+      },
+      citation: {
+        type: 'nodes',
+        activeInNodeTypes(schema) {
+          return new Set([schema.nodes.motivering]);
+        },
+      },
+      link: {
+        interactive: true,
+      },
+      structures: STRUCTURE_SPECS,
+    };
   }
 
   @task
@@ -158,7 +202,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   }
 
   get dirty() {
-    return this.editorDocument.content !== this.editor.htmlContent;
+    return this.editorDocument.content !== this.controller.htmlContent;
   }
 
   get editorDocument() {
@@ -171,7 +215,7 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   @action
   download() {
-    this.editorDocument.content = this.editor.htmlContent;
+    this.editorDocument.content = this.controller.htmlContent;
     generateExportFromEditorDocument(this.editorDocument);
   }
 
@@ -181,7 +225,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
-      const html = this.editor.htmlContent;
+      const html = this.controller.htmlContent;
       const editorDocument =
         yield this.documentService.createEditorDocument.perform(
           this.editorDocument.title,
@@ -214,6 +258,6 @@ export default class RegulatoryStatementsRoute extends Controller {
   @action
   handleRdfaEditorInit(controller) {
     controller.setHtmlContent(this.editorDocument.content);
-    this.editor = controller;
+    this.controller = controller;
   }
 }

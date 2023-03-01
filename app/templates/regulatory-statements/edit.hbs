@@ -64,7 +64,29 @@
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
-  />
+  >
+    <:sidebar-collapsible>
+      <ArticleStructurePlugin::ArticleStructureCard 
+        @controller={{this.controller}}
+        @options={{this.config.structures}}
+      />
+      <RdfaDatePlugin::Insert 
+        @controller={{this.controller}}
+        @options={{this.config.date}}
+      />
+      <StandardTemplatePlugin::Card @controller={{this.controller}}/>
+    </:sidebar-collapsible>
+    <:sidebar>
+      <ArticleStructurePlugin::StructureCard 
+        @controller={{this.controller}} 
+        @options={{this.config.structures}}
+      />
+      <RdfaDatePlugin::Card 
+        @controller={{this.controller}}
+        @options={{this.config.date}}/>
+      <VariablePlugin::TemplateVariableCard @controller={{this.controller}}/>
+    </:sidebar>
+  </RdfaEditorContainer>
 </AuBodyContainer>
 <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandeling-van-agendapunten.confirm-leave-without-saving"}}/>
 {{outlet}}
