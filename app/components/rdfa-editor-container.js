@@ -7,6 +7,7 @@ import applyDevTools from 'prosemirror-dev-tools';
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
   @tracked controller;
+  @tracked ready = false;
 
   get plugins() {
     return this.args.plugins || [];
@@ -81,6 +82,7 @@ export default class RdfaEditorContainerComponent extends Component {
       'prefix',
       this.prefixToAttrString(this.documentContext.prefix)
     );
+    this.ready = true;
   }
 
   @action

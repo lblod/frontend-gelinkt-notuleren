@@ -26,64 +26,65 @@
 {{else}}
   <AuBodyContainer vocab="{{this.vocab}}" {{did-insert this.setPrefix}}
        typeof="{{@typeOfWrappingDiv}}" property="{{@property}}" resource="#">
-
-      <EditorContainer
-        @editorOptions={{hash
-          showRdfa='true'
-          showRdfaHighlight='true'
-          showRdfaHover='true'
-          showPaper='true'
-          showToolbarBottom=null
-        }}
-        @showRdfaBlocks={{this.controller.showRdfaBlocks}}
-      >
-        <:top>
-          {{#if this.controller}}
-            <Toolbar as |Tb|>
-              <Tb.Group>
-                <Toolbar::History @controller={{this.controller}}/>
-              </Tb.Group>
-              <Tb.Group>
-                <Toolbar::Styling @controller={{this.controller}}/>
-              </Tb.Group>
-              <Tb.Group>
-                <Toolbar::List @controller={{this.controller}}/>
-                <Plugins::Indentation::IndentationMenu @controller={{this.controller}}/>
-              </Tb.Group>
-              <Tb.Group>
-                <Plugins::Link::LinkMenu @controller={{this.controller}}/>
-              </Tb.Group>
-              <Tb.Group>
-                <Plugins::Table::TableMenu @controller={{this.controller}}/>
-              </Tb.Group>
-              <Tb.Group>
-                <Plugins::Heading::HeadingMenu @controller={{this.controller}}/>
-              </Tb.Group>
-              <Tb.Spacer/>
-              <Tb.Group>
-                <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}}/>
-                <Plugins::RdfaBlockRender::RdfaBlocksToggle @controller={{this.controller}}/>
-              </Tb.Group>
-            </Toolbar>
-          {{/if}}
-        </:top>
-        <:default>
-          <Editor
-            @plugins={{this.plugins}}
-            @schema={{this.schema}}
-            @nodeViews={{this.nodeViews}}
-            @rdfaEditorInit={{this.rdfaEditorInit}}/>
-        </:default>
-        <:aside>
-          {{#if this.controller}}
-            <Sidebar as |Sidebar|>
-                 <Sidebar.Collapsible @title='Insert'>
-                  {{yield to='sidebar-collapsible'}}
-                 </Sidebar.Collapsible>
-                {{yield to='sidebar'}}
-            </Sidebar>
-          {{/if}}
-        </:aside>
-      </EditorContainer>
+      {{#if this.ready}}
+        <EditorContainer
+          @editorOptions={{hash
+            showRdfa='true'
+            showRdfaHighlight='true'
+            showRdfaHover='true'
+            showPaper='true'
+            showToolbarBottom=null
+          }}
+          @showRdfaBlocks={{this.controller.showRdfaBlocks}}
+        >
+          <:top>
+            {{#if this.controller}}
+              <Toolbar as |Tb|>
+                <Tb.Group>
+                  <Toolbar::History @controller={{this.controller}}/>
+                </Tb.Group>
+                <Tb.Group>
+                  <Toolbar::Styling @controller={{this.controller}}/>
+                </Tb.Group>
+                <Tb.Group>
+                  <Toolbar::List @controller={{this.controller}}/>
+                  <Plugins::Indentation::IndentationMenu @controller={{this.controller}}/>
+                </Tb.Group>
+                <Tb.Group>
+                  <Plugins::Link::LinkMenu @controller={{this.controller}}/>
+                </Tb.Group>
+                <Tb.Group>
+                  <Plugins::Table::TableMenu @controller={{this.controller}}/>
+                </Tb.Group>
+                <Tb.Group>
+                  <Plugins::Heading::HeadingMenu @controller={{this.controller}}/>
+                </Tb.Group>
+                <Tb.Spacer/>
+                <Tb.Group>
+                  <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}}/>
+                  <Plugins::RdfaBlockRender::RdfaBlocksToggle @controller={{this.controller}}/>
+                </Tb.Group>
+              </Toolbar>
+            {{/if}}
+          </:top>
+          <:default>
+            <Editor
+              @plugins={{this.plugins}}
+              @schema={{this.schema}}
+              @nodeViews={{this.nodeViews}}
+              @rdfaEditorInit={{this.rdfaEditorInit}}/>
+          </:default>
+          <:aside>
+            {{#if this.controller}}
+              <Sidebar as |Sidebar|>
+                  <Sidebar.Collapsible @title='Insert'>
+                    {{yield to='sidebar-collapsible'}}
+                  </Sidebar.Collapsible>
+                  {{yield to='sidebar'}}
+              </Sidebar>
+            {{/if}}
+          </:aside>
+        </EditorContainer>
+      {{/if}}
   </AuBodyContainer>
 {{/if}}
