@@ -36,7 +36,7 @@
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
     "@lblod/ember-acmidm-login": "^1.4.0",
-    "@lblod/ember-environment-banner": "^0.1.1",
+    "@lblod/ember-environment-banner": "^0.2.0",
     "@lblod/ember-mock-login": "0.6.0",
     "@lblod/ember-rdfa-editor": "^3.2.1",
     "@lblod/ember-rdfa-editor-lblod-plugins": "^3.0.0",
