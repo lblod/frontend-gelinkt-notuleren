@@ -62,7 +62,8 @@
                 <Tb.Spacer/>
                 <Tb.Group>
                   <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}}/>
-                  <Plugins::RdfaBlockRender::RdfaBlocksToggle @controller={{this.controller}}/>
+                  {{yield to="toolbar"}}
+                  <Plugins::RdfaBlockRender::RdfaBlocksToggle @controller={{this.editor}}/>
                 </Tb.Group>
               </Toolbar>
             {{/if}}

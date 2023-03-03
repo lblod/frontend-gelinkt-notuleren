@@ -2,7 +2,6 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
-import { PLUGIN_CONFIGS } from 'frontend-gelinkt-notuleren/config/constants';
 import { task } from 'ember-concurrency';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { inject as service } from '@ember/service';
@@ -21,7 +20,6 @@ import {
   paragraph,
   repaired_block,
   text,
-  doc,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
   tableNodes,
@@ -52,10 +50,7 @@ import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugi
 import { Schema } from '@lblod/ember-rdfa-editor';
 
 import { citation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin/marks/citation';
-import {
-  citationPlugin,
-  CitationPluginConfig,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
 import {
   tableOfContentsView,
@@ -115,21 +110,6 @@ export default class RegulatoryStatementsRoute extends Controller {
       },
     });
   }
-
-  /*get widgets() {
-    return [
-      tableMenu,
-      tableOfContentsWidget,
-      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
-      importSnippetWidget,
-      citation.widgets.citationCard,
-      citation.widgets.citationInsert,
-      articleStructureContextWidget(),
-      articleStructureInsertWidget(),
-      templateVariableWidget,
-    ];
-  }*/
 
   get nodeViews() {
     return (controller) => {

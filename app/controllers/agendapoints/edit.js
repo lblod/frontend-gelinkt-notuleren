@@ -27,10 +27,7 @@ import {
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
-import {
-  STRUCTURE_NODES,
-  STRUCTURE_SPECS,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
+import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
   variable,
   variableView,
@@ -50,28 +47,19 @@ import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugi
 
 import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
 
-import { besluitNodes, structureSpecs } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+import {
+  besluitNodes,
+  structureSpecs,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 
 import { citation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin/marks/citation';
-import {
-  citationPlugin,
-  CitationPluginConfig,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 
 import {
   regulatoryStatementNode,
   regulatoryStatementNodeView,
 } from '../../editor-plugins/regulatory-statements-plugin';
 import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
-
-
-
-/*const citation = setupCitationPlugin({
-  type: 'nodes',
-  activeInNodeTypes(schema) {
-    return new Set([schema.nodes.motivering]);
-  },
-});*/
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -174,27 +162,6 @@ export default class AgendapointsEditController extends Controller {
       };
     };
   }
-
-  /*get widgets() {
-    return [
-      besluitPluginCardWidget,
-      tableMenu,
-      besluitTypeWidget,
-      importSnippetWidget,
-      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
-      standardTemplateWidget,
-      citation.widgets.citationCard,
-      citation.widgets.citationInsert,
-      roadSignRegulationWidget,
-      templateVariableWidget,
-      articleStructureInsertWidget(structureSpecs),
-      articleStructureContextWidget(structureSpecs),
-      ...(this.features.isEnabled('regulatory-statements')
-        ? [regulatoryStatementWidget]
-        : []),
-    ];
-  }*/
 
   get plugins() {
     return [tablePlugin, tableKeymap, this.citationPlugin];

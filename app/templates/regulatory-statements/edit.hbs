@@ -65,6 +65,9 @@
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
   >
+    <:toolbar>
+      <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}}/>
+    </:toolbar>
     <:sidebar-collapsible>
       <ArticleStructurePlugin::ArticleStructureCard 
         @controller={{this.controller}}
