@@ -88,7 +88,7 @@ export default class RdfaEditorContainerComponent extends Component {
   @action
   rdfaEditorInit(editor) {
     if (this.features.isEnabled('prosemirror-dev-tools')) {
-      applyDevTools(editor.view);
+      applyDevTools(editor.mainEditorView);
     }
     if (this.args.rdfaEditorInit) {
       this.args.rdfaEditorInit(editor);

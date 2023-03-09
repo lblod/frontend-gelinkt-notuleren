@@ -177,12 +177,6 @@ export default class AgendapointsEditController extends Controller {
       tableKeymap,
       this.citationPlugin,
       linkPasteHandler(this.schema.nodes.link),
-      createInvisiblesPlugin(
-        [space, hardBreak, paragraphInvisible, headingInvisible],
-        {
-          shouldShowInvisibles: false,
-        }
-      ),
     ];
   }
 
