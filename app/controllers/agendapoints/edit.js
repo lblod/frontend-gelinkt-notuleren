@@ -60,6 +60,14 @@ import {
   regulatoryStatementNodeView,
 } from '../../editor-plugins/regulatory-statements-plugin';
 import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import {
+  createInvisiblesPlugin,
+  hardBreak,
+  space,
+  paragraph as paragraphInvisible,
+  heading as headingInvisible,
+} from '@lblod/ember-rdfa-editor/plugins/invisibles';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -164,7 +172,18 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get plugins() {
-    return [tablePlugin, tableKeymap, this.citationPlugin];
+    return [
+      tablePlugin,
+      tableKeymap,
+      this.citationPlugin,
+      linkPasteHandler(this.schema.nodes.link),
+      createInvisiblesPlugin(
+        [space, hardBreak, paragraphInvisible, headingInvisible],
+        {
+          shouldShowInvisibles: false,
+        }
+      ),
+    ];
   }
 
   get dirty() {
