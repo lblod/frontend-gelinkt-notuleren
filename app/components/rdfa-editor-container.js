@@ -6,7 +6,8 @@ import applyDevTools from 'prosemirror-dev-tools';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
-  @tracked editor;
+  @tracked controller;
+  @tracked ready = false;
 
   get plugins() {
     return this.args.plugins || [];
@@ -81,17 +82,18 @@ export default class RdfaEditorContainerComponent extends Component {
       'prefix',
       this.prefixToAttrString(this.documentContext.prefix)
     );
+    this.ready = true;
   }
 
   @action
   rdfaEditorInit(editor) {
     if (this.features.isEnabled('prosemirror-dev-tools')) {
-      applyDevTools(editor.view);
+      applyDevTools(editor.mainEditorView);
     }
     if (this.args.rdfaEditorInit) {
       this.args.rdfaEditorInit(editor);
     }
-    this.editor = editor;
+    this.controller = editor;
   }
 
   prefixToAttrString(prefix) {

@@ -4,47 +4,51 @@ import { action } from '@ember/object';
 import { Schema } from '@lblod/ember-rdfa-editor';
 
 import {
-  doc,
-  block_rdfa,
-  blockquote,
-  bullet_list,
-  code_block,
-  hard_break,
-  heading,
-  horizontal_rule,
-  image,
-  inline_rdfa,
-  list_item,
-  ordered_list,
-  paragraph,
-  placeholder,
-  repaired_block,
-  text,
-} from '@lblod/ember-rdfa-editor/nodes';
-import { invisible_rdfa } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
-
-import {
   em,
-  link,
   strikethrough,
   strong,
   underline,
-} from '@lblod/ember-rdfa-editor/marks';
-
+} from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
-  tableKeymap,
-  tableMenu,
+  block_rdfa,
+  hard_break,
+  horizontal_rule,
+  invisible_rdfa,
+  paragraph,
+  repaired_block,
+  text,
+} from '@lblod/ember-rdfa-editor/nodes';
+import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
+import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
+import {
+  bullet_list,
+  list_item,
+  ordered_list,
+} from '@lblod/ember-rdfa-editor/plugins/list';
+import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
+import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
+import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
+import { image } from '@lblod/ember-rdfa-editor/plugins/image';
+import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
+import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
+
+import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
+
+import { doc } from '@lblod/ember-rdfa-editor/nodes';
+
+import { tableMenu } from '@lblod/ember-rdfa-editor/plugins/table';
 
 import {
   rdfaDateCardWidget,
   rdfaDateInsertWidget,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
-import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
 import { inject as service } from '@ember/service';
 import { PLUGIN_CONFIGS } from '../config/constants';
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
@@ -118,10 +122,10 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         hard_break,
         invisible_rdfa,
         block_rdfa,
+        link: link(this.config.link),
       },
       marks: {
         inline_rdfa,
-        link,
         em,
         strong,
         underline,
@@ -130,8 +134,16 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     });
   }
 
+  get config() {
+    return {
+      link: {
+        interactive: true,
+      },
+    };
+  }
+
   get plugins() {
-    return [tablePlugin, tableKeymap];
+    return [tablePlugin, tableKeymap, linkPasteHandler(this.schema.nodes.link)];
   }
 
   get widgets() {
@@ -143,8 +155,10 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get nodeViews() {
-    return () => {
-      return {};
+    return (controller) => {
+      return {
+        link: linkView(this.config.link)(controller),
+      };
     };
   }
 }
