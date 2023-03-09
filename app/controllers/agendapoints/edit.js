@@ -61,13 +61,6 @@ import {
 } from '../../editor-plugins/regulatory-statements-plugin';
 import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
-import {
-  createInvisiblesPlugin,
-  hardBreak,
-  space,
-  paragraph as paragraphInvisible,
-  heading as headingInvisible,
-} from '@lblod/ember-rdfa-editor/plugins/invisibles';
 
 export default class AgendapointsEditController extends Controller {
   @service store;

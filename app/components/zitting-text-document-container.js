@@ -48,6 +48,7 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
 import { inject as service } from '@ember/service';
 import { PLUGIN_CONFIGS } from '../config/constants';
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
@@ -142,7 +143,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get plugins() {
-    return [tablePlugin, tableKeymap];
+    return [tablePlugin, tableKeymap, linkPasteHandler(this.schema.nodes.link)];
   }
 
   get widgets() {

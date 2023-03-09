@@ -57,13 +57,6 @@ import {
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
-import {
-  createInvisiblesPlugin,
-  hardBreak,
-  space,
-  paragraph as paragraphInvisible,
-  heading as headingInvisible,
-} from '@lblod/ember-rdfa-editor/plugins/invisibles';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
