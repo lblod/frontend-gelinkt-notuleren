@@ -22,7 +22,7 @@ import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-import { link } from '@lblod/ember-rdfa-editor/nodes/link';
+import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
 import {
   bullet_list,
   list_item,
@@ -121,16 +121,24 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         hard_break,
         invisible_rdfa,
         block_rdfa,
+        link: link(this.config.link),
       },
       marks: {
         inline_rdfa,
-        link,
         em,
         strong,
         underline,
         strikethrough,
       },
     });
+  }
+
+  get config() {
+    return {
+      link: {
+        interactive: true,
+      },
+    };
   }
 
   get plugins() {
@@ -146,8 +154,10 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get nodeViews() {
-    return () => {
-      return {};
+    return (controller) => {
+      return {
+        link: linkView(this.config.link)(controller),
+      };
     };
   }
 }
