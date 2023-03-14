@@ -485,6 +485,9 @@ publish:
   publish-button-label: Sign and publish
   toggle-all-public-label: Toggle all public
   serious-error: An error occured, please try again at a later time. If the error persists please contact GelinktNotuleren and include the information below.
+  public-version: Public version
+  need-second-signature: Second signature requirement
+  signed-version: Signed version
 
 published-resource:
   published-by-label: Published by

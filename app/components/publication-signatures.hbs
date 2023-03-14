@@ -40,17 +40,19 @@
       </AuButton>
     </div>
     <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
-      <AuHelpText @skin="secondary" class="au-u-margin-top-none">
-        {{t "timeline-step.signing-restriction-info"}}
-        <a
-          href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="au-c-link">
-          {{t "timeline-step.signing-restriction-role"}}
-        </a>
-        {{t "timeline-step.signing-restriction-end"}}
-      </AuHelpText>
+      {{#if (or (not this.currentSession.canSign) this.isSignedByCurrentUser)}}
+        <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+          {{t "timeline-step.signing-restriction-info"}}
+          <a
+            href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="au-c-link">
+            {{t "timeline-step.signing-restriction-role"}}
+          </a>
+          {{t "timeline-step.signing-restriction-end"}}
+        </AuHelpText>
+      {{/if}}
     </div>
   {{else}} {{!-- No signatures placed --}}
     <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
@@ -79,17 +81,19 @@
       </AuButton>
     </div>
     <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
-      <AuHelpText @skin="secondary" class="au-u-margin-top-none">
-        {{t "timeline-step.signing-restriction-info"}}
-        <a
-          href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="au-c-link">
-          {{t "timeline-step.signing-restriction-role"}}
-        </a>
-        {{t "timeline-step.signing-restriction-end"}}
-      </AuHelpText>
+      {{#if (not this.currentSession.canSign)}}
+        <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+          {{t "timeline-step.signing-restriction-info"}}
+          <a
+            href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="au-c-link">
+            {{t "timeline-step.signing-restriction-role"}}
+          </a>
+          {{t "timeline-step.signing-restriction-end"}}
+        </AuHelpText>
+      {{/if}}
     </div>
   {{/if}}
 </div>

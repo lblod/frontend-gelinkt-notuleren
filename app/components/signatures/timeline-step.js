@@ -21,6 +21,7 @@ import { action } from '@ember/object';
  */
 export default class SignaturesTimelineStep extends Component {
   @service currentSession;
+  @service intl;
 
   @tracked showSigningModal = false;
   @tracked showPublishingModal = false;
@@ -90,7 +91,10 @@ export default class SignaturesTimelineStep extends Component {
 
   get handtekeningStatus() {
     if (this.signaturesCount === 1)
-      return { label: 'Tweede ondertekening vereist', color: 'warning' };
+      return {
+        label: this.intl('publish.need-second-signature'),
+        color: 'warning',
+      };
     if (this.signaturesCount === 2)
       return { label: 'Ondertekend', color: 'action' };
     return { label: 'Niet ondertekend', color: 'border' };
@@ -98,10 +102,17 @@ export default class SignaturesTimelineStep extends Component {
 
   get voorVertoningStatus() {
     if (this.status === 'published')
-      return { label: 'Publieke versie', color: 'action' };
-    if (this.status === 'firstSignature' || this.status === 'secondSignature')
-      return { label: 'Ondertekende versie', color: 'success' };
-    return { label: 'Meest recente versie' };
+      return { label: this.intl('publish.public-version'), color: 'action' };
+    if (this.status === 'firstSignature') {
+      return {
+        label: this.intl('publish.need-second-signature'),
+        color: 'success',
+      };
+    }
+    if (this.status === 'secondSignature') {
+      return { label: this.intl('publish.signed-version'), color: 'success' };
+    }
+    return { label: '' };
   }
 
   get algemeneStatus() {

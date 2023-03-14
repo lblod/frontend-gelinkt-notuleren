@@ -17,9 +17,11 @@
         <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{this.title}}</AuHeading>
       </Group>
       <Group>
-        <AuPill @skin={{this.voorVertoningStatus.color}} class="au-u-margin-left">
-          {{this.voorVertoningStatus.label}}
-        </AuPill>
+        {{#if this.voorVertoningStatus.label}}
+          <AuPill @skin={{this.voorVertoningStatus.color}} class="au-u-margin-left">
+            {{this.voorVertoningStatus.label}}
+          </AuPill>
+        {{/if}}
       </Group>
     </AuToolbar>
     <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">

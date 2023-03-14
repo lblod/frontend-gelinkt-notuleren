@@ -3,10 +3,11 @@ import { inject as service } from '@ember/service';
 
 export default class PublicationSignaturesComponent extends Component {
   @service currentSession;
+  @service intl;
 
   get statusLabel() {
     if (this.args.signatures.length === 1)
-      return 'Tweede ondertekening vereist';
+      return this.intl('publish.need-second-signature');
     else if (this.args.signatures.length === 2) return 'Ondertekend';
     else return 'Niet ondertekend';
   }

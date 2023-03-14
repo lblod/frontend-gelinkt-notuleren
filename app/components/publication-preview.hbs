@@ -3,9 +3,11 @@
     <AuHeading @level="2" @skin="4">{{@title}}</AuHeading>
   </Group>
   <Group>
-    <AuPill @skin={{this.statusSkin}} class="au-u-margin-left">
-      {{this.statusLabel}}
-    </AuPill>
+    {{#if this.statusLabel}}
+      <AuPill @skin={{this.statusSkin}} class="au-u-margin-left">
+        {{this.statusLabel}}
+      </AuPill>
+    {{/if}}
   </Group>
 </AuToolbar>
 <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">
