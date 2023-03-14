@@ -14,11 +14,11 @@ export default class PublicationPreviewComponent extends Component {
   }
   get statusLabel() {
     if (this.args.status === 'published') {
-      return this.intl('publish.public-version');
+      return this.intl.t('publish.public-version');
     } else if (this.args.status === 'firstSignature') {
-      return this.intl('publish.need-second-signature');
+      return this.intl.t('publish.need-second-signature');
     } else if (this.args.status === 'secondSignature')
-      return this.intl('publish.signed-version');
+      return this.intl.t('publish.signed-version');
     else return '';
   }
 }

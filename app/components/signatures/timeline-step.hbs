@@ -15,8 +15,6 @@
     <AuToolbar @nowrap={{true}} as |Group|>
       <Group>
         <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{this.title}}</AuHeading>
-      </Group>
-      <Group>
         {{#if this.voorVertoningStatus.label}}
           <AuPill @skin={{this.voorVertoningStatus.color}} class="au-u-margin-left">
             {{this.voorVertoningStatus.label}}
@@ -44,8 +42,6 @@
       <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small"  as |Group|>
         <Group>
           <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{concat (t "timeline-step.sign-step-title") @name}}</AuHeading>
-        </Group>
-        <Group>
           <AuPill @skin={{this.handtekeningStatus.color}} class="au-u-margin-left">
             {{this.handtekeningStatus.label}}
           </AuPill>
@@ -163,8 +159,6 @@
       <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as |Group|>
         <Group>
           <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{t "timeline-step.publish-button-label" name=@name}}</AuHeading>
-        </Group>
-        <Group>
           <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
             {{if @publishedResource "Publiek" "Niet publiek"}}
           </AuPill>

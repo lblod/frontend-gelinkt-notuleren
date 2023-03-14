@@ -92,7 +92,7 @@ export default class SignaturesTimelineStep extends Component {
   get handtekeningStatus() {
     if (this.signaturesCount === 1)
       return {
-        label: this.intl('publish.need-second-signature'),
+        label: this.intl.t('publish.need-second-signature'),
         color: 'warning',
       };
     if (this.signaturesCount === 2)
@@ -102,15 +102,15 @@ export default class SignaturesTimelineStep extends Component {
 
   get voorVertoningStatus() {
     if (this.status === 'published')
-      return { label: this.intl('publish.public-version'), color: 'action' };
+      return { label: this.intl.t('publish.public-version'), color: 'action' };
     if (this.status === 'firstSignature') {
       return {
-        label: this.intl('publish.need-second-signature'),
+        label: this.intl.t('publish.need-second-signature'),
         color: 'success',
       };
     }
     if (this.status === 'secondSignature') {
-      return { label: this.intl('publish.signed-version'), color: 'success' };
+      return { label: this.intl.t('publish.signed-version'), color: 'success' };
     }
     return { label: '' };
   }
