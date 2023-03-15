@@ -486,7 +486,7 @@ publish:
   toggle-all-public-label: Maak de inhoud van alle agendapunten publiek
   serious-error: Er heeft zich een fout voorgedaan, gelieve op een later tijdstip nogmaals te proberen. Als de fout aanhoudt contacteer GelinktNotuleren@vlaanderen.be met onderstaande informatie.
   public-version: Publieke versie
-  need-second-signature: Tweede ondertekening vereis
+  need-second-signature: Tweede ondertekening vereist
   signed-version: Ondertekende versie
   signed: Ondertekend
   unsigned: Niet ondertekend
