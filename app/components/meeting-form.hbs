@@ -22,9 +22,9 @@
   <AuToolbar @size="small" class="au-u-padding-top-none" as |Group|>
     <Group>
       <h1 class="au-c-app-chrome__title">{{t "meeting-form.scheduled-text"}} {{plain-date @zitting.geplandeStart}}</h1>
-      {{#if this.isPublished}}
+      {{#if this.status}}
         <AuPill @skin="success">
-          {{t "meeting-form.notulen-published"}}
+          {{this.status}}
         </AuPill>
       {{/if}}
     </Group>

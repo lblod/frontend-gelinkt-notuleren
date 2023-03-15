@@ -358,6 +358,8 @@ meeting-form:
   fifth-section-not-filled-warning: Manage your decision and votes.
   bestuursorgan-not-selected-warning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
   notulen-published: Meeting is published
+  notulen-signed: Meeting is signed
+
 
 meetings:
   publish:

@@ -5,6 +5,7 @@ import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
+import { trackedFunction } from 'ember-resources/util/function';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
@@ -22,11 +23,43 @@ export default class MeetingForm extends Component {
   @service store;
   @service currentSession;
   @service router;
+  @service intl;
+
+  isPublished = trackedFunction(this, async () => {
+    await Promise.resolve();
+    const publishedNotulen = await this.store.query('versioned-notulen', {
+      'filter[zitting][id]': this.zitting.get('id'),
+      'filter[:has:published-resource]': 'yes',
+      'fields[versioned-notulen]': 'id',
+    });
+    return !!publishedNotulen.firstObject;
+  });
+
+  isSigned = trackedFunction(this, async () => {
+    await Promise.resolve();
+    const publishedNotulen = await this.store.query('versioned-notulen', {
+      'filter[zitting][id]': this.zitting.get('id'),
+      'filter[:has:signed-resources]': 'yes',
+      'fields[versioned-notulen]': 'id',
+    });
+    return !!publishedNotulen.firstObject;
+  });
+
+  get status() {
+    if (this.isPublished.value) {
+      return this.intl.t('meeting-form.notulen-published');
+    } else if (this.isSigned.value) {
+      return this.intl.t('meeting-form.notulen-signed');
+    } else {
+      return null;
+    }
+  }
 
   get readOnly() {
     return (
       (!this.currentSession.canWrite && this.currentSession.canRead) ||
-      this.isPublished
+      this.isSigned.value ||
+      this.isPublished.value
     );
   }
 
@@ -50,12 +83,6 @@ export default class MeetingForm extends Component {
       const classification = yield specialisedBestuursorgaan.get(
         'classificatie'
       );
-      const versionedNotulen = yield this.store.query('versioned-notulen', {
-        'filter[zitting][id]': this.zitting.get('id'),
-      });
-      if (versionedNotulen.firstObject) {
-        this.isPublished = true;
-      }
       this.headerArticleTranslationString =
         articlesBasedOnClassifcationMap[classification.get('uri')];
       this.secretaris = yield this.zitting.get('secretaris');
