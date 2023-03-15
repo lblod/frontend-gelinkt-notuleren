@@ -493,6 +493,8 @@ publish:
   published: Published
   first-signature-obtained: First signature obtained
   in-preparation: In preparation
+  public: Public
+  non-public: Not public
 
 published-resource:
   published-by-label: Published by

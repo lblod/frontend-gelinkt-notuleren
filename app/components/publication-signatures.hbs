@@ -81,7 +81,7 @@
       </AuButton>
     </div>
     <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
-      {{#if (not this.currentSession.canSign)}}
+      {{#unless this.currentSession.canSign}}
         <AuHelpText @skin="secondary" class="au-u-margin-top-none">
           {{t "timeline-step.signing-restriction-info"}}
           <a
@@ -93,7 +93,7 @@
           </a>
           {{t "timeline-step.signing-restriction-end"}}
         </AuHelpText>
-      {{/if}}
+      {{/unless}}
     </div>
   {{/if}}
 </div>

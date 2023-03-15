@@ -493,6 +493,8 @@ publish:
   published: Gepubliceerd
   first-signature-obtained: Eerste ondertekening verkregen
   in-preparation: In voorbereiding
+  public: Publiek
+  non-public: Niet publiek
 
 published-resource:
   published-by-label: Gepubliceerd door
