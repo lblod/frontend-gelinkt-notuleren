@@ -125,7 +125,8 @@ export default class SignaturesTimelineStep extends Component {
       };
     if (this.status === 'secondSignature')
       return { label: this.intl.t('publish.signed'), color: 'success' };
-    if (this.status === 'concept') return { label: this.intl.t('publish.in-preparation') };
+    if (this.status === 'concept')
+      return { label: this.intl.t('publish.in-preparation') };
     return 'concept';
   }
 
