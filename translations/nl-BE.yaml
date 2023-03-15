@@ -488,6 +488,11 @@ publish:
   public-version: Publieke versie
   need-second-signature: Tweede ondertekening vereis
   signed-version: Ondertekende versie
+  signed: Ondertekend
+  unsigned: Niet ondertekend
+  published: Gepubliceerd
+  first-signature-obtained: Eerste ondertekening verkregen
+  in-preparation: In voorbereiding
 
 published-resource:
   published-by-label: Gepubliceerd door

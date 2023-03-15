@@ -488,6 +488,11 @@ publish:
   public-version: Public version
   need-second-signature: Second signature requirement
   signed-version: Signed version
+  signed: Signed
+  unsigned: Unsigned
+  published: Published
+  first-signature-obtained: First signature obtained
+  in-preparation: In preparation
 
 published-resource:
   published-by-label: Published by

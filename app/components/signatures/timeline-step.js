@@ -96,8 +96,8 @@ export default class SignaturesTimelineStep extends Component {
         color: 'warning',
       };
     if (this.signaturesCount === 2)
-      return { label: 'Ondertekend', color: 'action' };
-    return { label: 'Niet ondertekend', color: 'border' };
+      return { label: this.intl.t('publish.signed'), color: 'action' };
+    return { label: this.intl.t('publish.unsigned'), color: 'border' };
   }
 
   get voorVertoningStatus() {
@@ -117,12 +117,15 @@ export default class SignaturesTimelineStep extends Component {
 
   get algemeneStatus() {
     if (this.status === 'published')
-      return { label: 'Gepubliceerd', color: 'action' };
+      return { label: this.intl.t('publish.published'), color: 'action' };
     if (this.status === 'firstSignature')
-      return { label: 'Eerste ondertekening verkregen', color: 'warning' };
+      return {
+        label: this.intl.t('publish.first-signature-obtained'),
+        color: 'warning',
+      };
     if (this.status === 'secondSignature')
-      return { label: 'Getekend', color: 'success' };
-    if (this.status === 'concept') return { label: 'In voorbereiding' };
+      return { label: this.intl.t('publish.signed'), color: 'success' };
+    if (this.status === 'concept') return { label: this.intl.t('publish.in-preparation') };
     return 'concept';
   }
 
