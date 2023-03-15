@@ -8,8 +8,9 @@ export default class PublicationSignaturesComponent extends Component {
   get statusLabel() {
     if (this.args.signatures.length === 1)
       return this.intl.t('publish.need-second-signature');
-    else if (this.args.signatures.length === 2) return 'Ondertekend';
-    else return 'Niet ondertekend';
+    else if (this.args.signatures.length === 2)
+      return this.intl.t('publish.signed');
+    else return this.intl.t('publish.unsigned');
   }
 
   get statusSkin() {
