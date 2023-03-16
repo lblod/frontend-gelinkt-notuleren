@@ -46,10 +46,10 @@
               </ul>
             {{else}}
               <AuAlert
-                @alertTitle="No statements found"
-                @alertSkin="warning"
-                @alertIcon="cross"
-                @alertSize="small"
+                @title={{t 'regulatory-statements-plugin.no-statement-found'}}
+                @skin="warning"
+                @icon="cross"
+                @size="small"
                 @closable={{false}}>
               </AuAlert>
             {{/if}}
@@ -72,10 +72,10 @@
               </div>
             {{else}}
               <AuAlert
-                @alertTitle="{{t "regulatory-statements-plugin.no-statement-selected"}}"
-                @alertSkin="info"
-                @alertIcon="info-circle"
-                @alertSize="default"
+                @title="{{t "regulatory-statements-plugin.no-statement-selected"}}"
+                @skin="info"
+                @icon="info-circle"
+                @size="default"
                 @closable={{false}}
                 class="au-u-margin-small">
               </AuAlert>
