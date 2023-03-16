@@ -30,19 +30,28 @@ export default class EditorDocumentStatusPillComponent extends Component {
       const isPartOf = yield container.isPartOf;
       if (isPartOf && isPartOf.length) {
         const agendapoints = [...isPartOf.toArray()];
+        let isConnectedToLatestVersion = false;
         for (let agendapoint of agendapoints) {
           const documentContainer = yield agendapoint.documentContainer;
-          const status = yield documentContainer.status;
-          if (status.id === PLANNED_STATUS_ID) {
-            this.status = status;
-            return;
+          const nextVersion = yield agendapoint.nextVersion;
+          if (!nextVersion) {
+            isConnectedToLatestVersion = true;
+            const status = yield documentContainer.status;
+            if (status.id === PLANNED_STATUS_ID) {
+              this.status = status;
+              return;
+            }
           }
         }
-        const assignedStatus = yield this.store.findRecord(
-          'concept',
-          ASSIGNED_STATUS_ID
-        );
-        this.status = assignedStatus;
+        if (isConnectedToLatestVersion) {
+          const assignedStatus = yield this.store.findRecord(
+            'concept',
+            ASSIGNED_STATUS_ID
+          );
+          this.status = assignedStatus;
+        } else {
+          this.status = container.currentVersion.get('status');
+        }
       } else {
         this.status = container.currentVersion.get('status');
       }
