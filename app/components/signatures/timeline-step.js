@@ -48,7 +48,7 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get signaturesCount() {
-    return this.signedResources.length;
+    return this.activeSignatures.length;
   }
 
   @restartableTask
@@ -157,5 +157,20 @@ export default class SignaturesTimelineStep extends Component {
   @action
   publish() {
     this.showPublishingModal = true;
+  }
+
+  get activeSignatures() {
+    return this.signedResources.filter((signature) => !signature.deleted);
+  }
+
+  get deletedSignatures() {
+    return this.signedResources.filter((signature) => signature.deleted);
+  }
+
+  get showDeletedSecondSignature() {
+    return (
+      this.activeSignatures.firstObject.createdOn <
+      this.deletedSignatures.lastObject.createdOn
+    );
   }
 }

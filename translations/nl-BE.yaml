@@ -495,6 +495,8 @@ publish:
   in-preparation: In voorbereiding
   public: Publiek
   non-public: Niet publiek
+  delete-signature: Ondertekening verwijderen
+  delete-signature-warning: Bent u zeker dat u uw ondertekening wil verwijderen?
 
 published-resource:
   published-by-label: Gepubliceerd door

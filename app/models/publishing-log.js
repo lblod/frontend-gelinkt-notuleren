@@ -10,4 +10,5 @@ export default class PublishingLogs extends Model {
   @belongsTo('versioned-behandelingen') versionedBehandeling;
 
   @belongsTo('gebruiker') user;
+  @belongsTo('zitting') zitting;
 }

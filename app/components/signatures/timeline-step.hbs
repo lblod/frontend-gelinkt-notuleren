@@ -49,7 +49,7 @@
       </AuToolbar>
       <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
         {{#if (eq this.signaturesCount 2)}}
-          {{#each @signedResources as |signature index|}}
+          {{#each this.activeSignatures as |signature index|}}
             {{#if (eq index 0)}}
               <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
                 <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
@@ -58,17 +58,20 @@
             {{else}}
               <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
                 <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.second-signature"}}</AuHeading>
-                <Signatures::SignedResource @signature={{signature}} />
+                <Signatures::SignedResource @signature={{signature}} @canDelete="true"/>
               </div>
             {{/if}}
           {{/each}}
         {{else if (eq this.signaturesCount 1)}}
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
-            <Signatures::SignedResource @signature={{@signedResources.firstObject}} />
+            <Signatures::SignedResource @signature={{this.activeSignatures.firstObject}} @canDelete="true" />
           </div>
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.second-signature"}}</AuHeading>
+            {{#if this.showDeletedSecondSignature}}
+              <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />
+            {{/if}}
             <AuButton
               {{on "click" (fn (mut this.showSigningModal) true)}}
               @skin="secondary"
@@ -96,6 +99,7 @@
         {{else}} {{!-- No signatures placed --}}
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
+            <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />
             <AuButton
               {{on "click" (fn (mut this.showSigningModal) true)}}
               @skin="secondary"

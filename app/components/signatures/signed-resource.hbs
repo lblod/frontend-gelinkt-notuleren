@@ -1,10 +1,52 @@
 <p>
   {{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
-  <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
-    <AuIcon @icon="calendar" />
-    {{detailed-date @signature.createdOn}}
-  </AuHelpText>
+  {{#if @signature.deleted}}
+    <AuPill
+      @skin="error"
+    >
+      Deleted
+    </AuPill>
+  {{else}}
+    <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
+      <AuIcon @icon="calendar" />
+      {{detailed-date @signature.createdOn}}
+    </AuHelpText>
+  {{/if}}
 </p>
-<p class="au-u-margin-top-tiny">
-  <AuPill class="au-u-word-break-all">{{@signature.hashValue}}</AuPill>
-</p>
+{{#if (and (not @signature.deleted) @canDelete)}}
+  <AuButton
+    {{on "click" this.toggleDeleteSignatureCard}}
+    @skin="link-secondary"
+    @alert="true"
+    @disabled={{this.deleteSignature.isRunning}}
+  >
+    {{t "publish.delete-signature"}}
+  </AuButton>
+  {{#if this.showDeleteSignatureCard}}
+    <div class="signature-warning">
+      <div class="signature-warning-icon">
+        <AuIcon
+          @icon="info-circle"
+          @size="large"
+        />
+      </div>
+      <div class="signature-warning-close-button">
+        <AuButton
+          {{on "click" this.toggleDeleteSignatureCard}}
+          @skin="link"
+          @icon="cross"
+        />
+      </div>
+      {{t "publish.delete-signature-warning"}}
+      <AuButton
+        {{on "click" (perform this.deleteSignature)}}
+        @skin="secondary"
+        @alert="true"
+        @disabled={{this.deleteSignature.isRunning}}
+        style="background-color: white"
+      >
+        {{t "publish.delete-signature"}}
+      </AuButton>
+    </div>
+  {{/if}}
+{{/if}}
