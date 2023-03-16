@@ -60,41 +60,39 @@
         </div>
       </mc.sidebar>
       <mc.content>
-        <AuBodyContainer @scroll={{false}}>
-          <div class="say-container">
-            {{#if this.selectedStatement}}
-              <div class="say-container__main">
-                <div class="say-editor">
-                  <div class="say-editor__inner say-content">
-                    {{this.selectedStatement.currentVersion.htmlSafeContent}}
-                  </div>
+        <AuBodyContainer @scroll={{true}}>
+          {{#if this.selectedStatement}}
+            <div class="say-container__main">
+              <div class="say-editor">
+                <div class="say-editor__inner say-content">
+                  {{this.selectedStatement.currentVersion.htmlSafeContent}}
                 </div>
               </div>
-            {{else}}
-              <AuAlert
-                @title="{{t "regulatory-statements-plugin.no-statement-selected"}}"
-                @skin="info"
-                @icon="info-circle"
-                @size="default"
-                @closable={{false}}
-                class="au-u-margin-small">
-              </AuAlert>
-            {{/if}}
-          </div>
-          <div class="au-c-modal__footer">
-            <AuToolbar>
-              <AuToolbar::Group>
-                <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatory-statements-plugin.cancel"}}</AuButton>
-              </AuToolbar::Group>
-              <AuToolbar::Group>
-                <AuButton @disabled={{or (not this.selectedStatement) (this.isInserted this.selectedStatement)}} {{on "click" (fn @insertStatement
-                  this.selectedStatement)}}>
-                  {{t "regulatory-statements-plugin.insert-statement"}}
-                </AuButton>
-              </AuToolbar::Group>
-            </AuToolbar>
-          </div>
+            </div>
+          {{else}}
+            <AuAlert
+              @title="{{t "regulatory-statements-plugin.no-statement-selected"}}"
+              @skin="info"
+              @icon="info-circle"
+              @size="default"
+              @closable={{false}}
+              class="au-u-margin-small">
+            </AuAlert>
+          {{/if}}
         </AuBodyContainer>
+        <div class="au-c-modal__footer">
+          <AuToolbar>
+            <AuToolbar::Group>
+              <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatory-statements-plugin.cancel"}}</AuButton>
+            </AuToolbar::Group>
+            <AuToolbar::Group>
+              <AuButton @disabled={{or (not this.selectedStatement) (this.isInserted this.selectedStatement)}} {{on "click" (fn @insertStatement
+                this.selectedStatement)}}>
+                {{t "regulatory-statements-plugin.insert-statement"}}
+              </AuButton>
+            </AuToolbar::Group>
+          </AuToolbar>
+        </div>
       </mc.content>
     </AuMainContainer>
   </modal.Body>
