@@ -13,8 +13,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
   @tracked group;
   @tracked roles = [];
 
-  @task
-  *fetch() {
+  fetch = task(async () => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const sparqlQuery = `
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -46,7 +45,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       formBody.push(encodedKey + '=' + encodedValue);
     }
     formBody = formBody.join('&');
-    const response = yield fetch(config.regulatoryStatementEndpoint, {
+    const response = await fetch(config.regulatoryStatementEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
@@ -54,7 +53,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       body: formBody,
     });
     if (response.status === 200) {
-      const json = yield response.json();
+      const json = await response.json();
       const bindings = json.results.bindings;
       const templates = bindings.map((binding) => ({
         title: binding.title.value,
@@ -69,5 +68,5 @@ export default class RegulatoryAttachmentsFetcher extends Service {
     } else {
       return [];
     }
-  }
+  });
 }

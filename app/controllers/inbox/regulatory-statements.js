@@ -15,13 +15,12 @@ export default class InboxRegulatoryStatementsController extends Controller {
   @service intl;
   sort = '-current-version.updated-on';
 
-  @restartableTask
-  *updateFilter(event) {
+  updateFilter = restartableTask(async (event) => {
     this.searchValue = event.target.value;
-    yield timeout(this.debounceTime);
+    await timeout(this.debounceTime);
     this.filter = this.searchValue;
     this.page = 0;
-  }
+  });
 
   get readOnly() {
     return !this.currentSession.canWrite && this.currentSession.canRead;

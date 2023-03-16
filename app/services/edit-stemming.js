@@ -26,8 +26,8 @@ export default class EditStemmingService extends Service {
       this.fetchVoters.perform();
     }
   }
-  @task
-  *saveTask() {
+
+  saveTask = task(async () => {
     const stemmers = [];
     const onthouders = [];
     const voorstanders = [];
@@ -56,12 +56,12 @@ export default class EditStemmingService extends Service {
       this._stemming.voorstanders.clear();
       this._stemming.tegenstanders.clear();
     }
-    yield this._stemming.save();
-  }
-  @task
-  *fetchVoters() {
+    await this._stemming.save();
+  });
+
+  fetchVoters = task(async () => {
     if (this._stemming.isNew) {
-      const aanwezigen = yield Promise.all(
+      const aanwezigen = await Promise.all(
         this._stemming.aanwezigen.map(async (aanwezige) => {
           const queryResult = await this.store.query('mandataris', {
             'filter[:id:]': aanwezige.id,
@@ -75,12 +75,14 @@ export default class EditStemmingService extends Service {
       );
     } else {
       const stemmingId = this._stemming.id;
-      const stemming = (yield this.store.query('stemming', {
-        'filter[:id:]': stemmingId,
-        include:
-          'aanwezigen.is-bestuurlijke-alias-van,stemmers.is-bestuurlijke-alias-van,onthouders.is-bestuurlijke-alias-van,voorstanders.is-bestuurlijke-alias-van,tegenstanders.is-bestuurlijke-alias-van',
-        page: { size: 100 },
-      })).firstObject;
+      const stemming = (
+        await this.store.query('stemming', {
+          'filter[:id:]': stemmingId,
+          include:
+            'aanwezigen.is-bestuurlijke-alias-van,stemmers.is-bestuurlijke-alias-van,onthouders.is-bestuurlijke-alias-van,voorstanders.is-bestuurlijke-alias-van,tegenstanders.is-bestuurlijke-alias-van',
+          page: { size: 100 },
+        })
+      ).firstObject;
 
       const aanwezigen = stemming.aanwezigen;
 
@@ -110,7 +112,7 @@ export default class EditStemmingService extends Service {
     }
 
     this.refreshMap();
-  }
+  });
 
   refreshMap() {
     // eslint-disable-next-line no-self-assign

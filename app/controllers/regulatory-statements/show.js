@@ -18,24 +18,22 @@ export default class RegulatoryAttachmentsShowController extends Controller {
     generateExportFromEditorDocument(this.model.editorDocument);
   }
 
-  @task
-  *fetchRevisions() {
+  fetchRevisions = task(async () => {
     const revisionsToSkip = [this.model.editorDocument.id];
-    this.revisions = yield this.documentService.fetchRevisions.perform(
+    this.revisions = await this.documentService.fetchRevisions.perform(
       this.model.documentContainer.id,
       revisionsToSkip,
       5
     );
-  }
+  });
 
-  @task
-  *createNewVersion() {
+  createNewVersion = task(async () => {
     if (!this.currentSession.canWrite) return;
     const currentVersion = this.model.editorDocument;
     const documentContainer = this.model.documentContainer;
     //If it's published
     let content = replaceUris(currentVersion.content);
-    yield this.documentService.createEditorDocument.perform(
+    await this.documentService.createEditorDocument.perform(
       currentVersion.title,
       content,
       documentContainer,
@@ -45,7 +43,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
       'regulatory-statements.edit',
       documentContainer.id
     );
-  }
+  });
 
   get readOnly() {
     return !this.currentSession.canWrite && this.currentSession.canRead;
