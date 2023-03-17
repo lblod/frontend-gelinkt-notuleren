@@ -88,11 +88,13 @@ export default class MeetingsPublishAgendaController extends Controller {
     const agendas = yield this.store.query('agenda', {
       'filter[zitting][:id:]': this.meeting.id,
       'filter[agenda-type]': type,
+      'filter[deleted]': false,
       include: 'signed-resources,published-resource',
     });
     if (agendas.length) {
       return agendas.firstObject;
     } else {
+      console.log('creating agenda');
       const prePublish = yield this.createPrePublishedResource.perform(
         KIND_LABEL_TO_UUID_MAP.get(type)
       );
@@ -101,7 +103,9 @@ export default class MeetingsPublishAgendaController extends Controller {
         zitting: this.model,
         agendapunten: this.model.behandeldeAgendapunten,
         renderedContent: prePublish,
+        deleted: false,
       });
+      console.log(rslt);
       return rslt;
     }
   }

@@ -7,6 +7,7 @@ export default class SignedResourceModel extends Model {
   @attr('datetime') createdOn;
   @belongsTo('blockchain-status') status;
   @belongsTo('gebruiker') gebruiker;
+  @belongsTo('agenda') agenda;
   @belongsTo('versioned-agenda') versionedAgenda;
   @belongsTo('versioned-besluiten-lijst') versionedBesluitenLijst;
   @belongsTo('versioned-notulen') versionedNotulen;

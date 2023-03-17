@@ -168,6 +168,9 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get showDeletedSecondSignature() {
+    if (!this.deletedSignatures.lastObject) {
+      return false;
+    }
     return (
       this.activeSignatures.firstObject.createdOn <
       this.deletedSignatures.lastObject.createdOn

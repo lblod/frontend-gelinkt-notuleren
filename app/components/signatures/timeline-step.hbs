@@ -99,7 +99,9 @@
         {{else}} {{!-- No signatures placed --}}
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
-            <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />
+            {{#if this.deletedSignatures.lastObject}}
+              <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />
+            {{/if}}
             <AuButton
               {{on "click" (fn (mut this.showSigningModal) true)}}
               @skin="secondary"

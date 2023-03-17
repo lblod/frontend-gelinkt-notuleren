@@ -4,6 +4,7 @@ export default class Agenda extends Model {
   @attr agendaStatus;
   @attr agendaType;
   @attr renderedContent;
+  @attr('boolean', { defaultValue: false }) deleted;
 
   @belongsTo('zitting', { inverse: null }) zitting;
   @belongsTo('published-resource') publishedResource;

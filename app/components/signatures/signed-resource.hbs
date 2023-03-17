@@ -39,7 +39,7 @@
       </div>
       {{t "publish.delete-signature-warning"}}
       <AuButton
-        {{on "click" (perform this.deleteSignature)}}
+        {{on "click" this.deleteSignature}}
         @skin="secondary"
         @alert="true"
         @disabled={{this.deleteSignature.isRunning}}
