@@ -1,0 +1,11 @@
+<span {{did-insert (perform this.loadData)}}>
+  {{#if this.deleted}}
+    <AuLink @route="meetings.publish.publication-actions.detail" @model={{@log.id}}>
+      {{this.documentName}} {{#if this.deleted}}( {{t "publication-actions.deleted"}} ){{/if}}
+    </AuLink>
+  {{else}}
+    <AuLink @route={{this.route}}>
+      {{this.documentName}}
+    </AuLink>
+  {{/if}}
+</span>

@@ -717,3 +717,13 @@ div[typeof="besluit:Zitting"] {
   top: 5px;
   right: 5px;
 }
+
+.publication-actions-detail-container {
+  margin: 20px;
+  border: 1px solid var(--au-gray-300);
+  color: var(--au-gray-300);
+  padding: 20px;
+  .au-c-template * {
+    color: var(--au-gray-600);
+  }
+}

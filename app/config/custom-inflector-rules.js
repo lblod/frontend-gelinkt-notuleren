@@ -76,4 +76,5 @@ inflector.irregular(
   'versioned-regulatory-statement',
   'versioned-regulatory-statements'
 );
+inflector.irregular('publishing-log', 'publishing-logs');
 inflector.uncountable('sync');

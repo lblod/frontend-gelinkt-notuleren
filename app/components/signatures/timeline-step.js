@@ -22,6 +22,7 @@ import { action } from '@ember/object';
 export default class SignaturesTimelineStep extends Component {
   @service currentSession;
   @service intl;
+  @service store;
 
   @tracked showSigningModal = false;
   @tracked showPublishingModal = false;
@@ -141,17 +142,53 @@ export default class SignaturesTimelineStep extends Component {
 
   @task
   *signDocument(signedId) {
+    console.log('signing');
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
     yield this.args.signing(signedId);
     const signedResources = yield this.args.signedResources;
     this.signedResources = signedResources.sortBy('createdOn');
+    const signedResource = signedResources.lastObject;
+    let versionedResource;
+    if (signedResource.get('agenda')) {
+      versionedResource = signedResource.get('agenda');
+    } else if (signedResource.get('versionedBesluitenLijst')) {
+      versionedResource = signedResource.get('versionedBesluitenLijst');
+    } else if (signedResource.get('versionedNotulen')) {
+      versionedResource = signedResource.get('versionedNotulen');
+    }
+    const log = this.store.createRecord('publishing-log', {
+      action: 'sign',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signedResource,
+      zitting: versionedResource.get('zitting'),
+    });
+    yield log.save();
   }
 
   @task
   *publishDocument(signedId) {
+    console.log('publishing');
     this.showPublishingModal = false;
     yield this.args.publish(signedId);
+    const publishedResource = this.args.publishedResource;
+    let versionedResource;
+    if (publishedResource.get('agenda')) {
+      versionedResource = publishedResource.get('agenda');
+    } else if (publishedResource.get('versionedBesluitenLijst')) {
+      versionedResource = publishedResource.get('versionedBesluitenLijst');
+    } else if (publishedResource.get('versionedNotulen')) {
+      versionedResource = publishedResource.get('versionedNotulen');
+    }
+    const log = this.store.createRecord('publishing-log', {
+      action: 'publish',
+      user: this.currentSession.user,
+      date: new Date(),
+      publishedResource: publishedResource,
+      zitting: versionedResource.get('zitting'),
+    });
+    yield log.save();
   }
 
   @action

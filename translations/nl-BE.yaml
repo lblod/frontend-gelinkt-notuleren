@@ -365,6 +365,7 @@ meetings:
     decision-list: Besluitenlijst
     extracts: Uittreksels
     document: Notulen
+    publication-actions: Publicatie acties
   delete:
     delete: Verwijderen
     confirm-message: Weet u zeker dat u deze zitting wilt verwijderen?
@@ -449,6 +450,21 @@ print-view:
   manual: handleiding
   save-2: . Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.
   signed-by: Ondertekend door
+
+
+publication-actions:
+  document: Document
+  action: Actie
+  date: Datum
+  user: Uitvoerder
+  hash: Hash
+  planned-agenda: Ontwerpagenda
+  suplemental-agenda: Aanvullende Agenda
+  urgent-agenda: Spoedeisende Agenda
+  notulen: Notulen
+  decision-list: BesluitenLijst
+  deleted: verwijderd
+  return: Terug naar alle publicatie acties
 
 publication-confirmation:
   modal-title: "Bevestig publicatie van "

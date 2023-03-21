@@ -1,10 +1,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default class SignedResource extends Component {
   @tracked showDeleteSignatureCard = false;
+  @service currentSession;
+  @service store;
 
   @action
   toggleDeleteSignatureCard() {
@@ -37,5 +39,13 @@ export default class SignedResource extends Component {
     }
     await versionedResource.save();
     await signature.save();
+    const log = this.store.createRecord('publishing-log', {
+      action: 'delete-signature',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signature,
+      zitting: versionedResource.get('zitting'),
+    });
+    await log.save();
   }
 }
