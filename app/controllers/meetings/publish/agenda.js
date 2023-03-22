@@ -94,7 +94,6 @@ export default class MeetingsPublishAgendaController extends Controller {
     if (agendas.length) {
       return agendas.firstObject;
     } else {
-      console.log('creating agenda');
       const prePublish = yield this.createPrePublishedResource.perform(
         KIND_LABEL_TO_UUID_MAP.get(type)
       );
@@ -105,7 +104,6 @@ export default class MeetingsPublishAgendaController extends Controller {
         renderedContent: prePublish,
         deleted: false,
       });
-      console.log(rslt);
       return rslt;
     }
   }

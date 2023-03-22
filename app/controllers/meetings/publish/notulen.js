@@ -159,7 +159,6 @@ export default class MeetingsPublishNotulenController extends Controller {
       zitting: yield versionedResource.get('zitting'),
     });
     yield log.save();
-    console.log('saving log');
   }
 
   @task
