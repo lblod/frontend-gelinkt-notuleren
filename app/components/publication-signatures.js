@@ -28,7 +28,6 @@ export default class PublicationSignaturesComponent extends Component {
     return false;
   }
   get activeSignatures() {
-    console.log(this.args.signatures);
     return this.args.signatures.filter((signature) => !signature.deleted);
   }
 
