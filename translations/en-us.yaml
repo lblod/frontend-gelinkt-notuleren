@@ -513,6 +513,7 @@ publish:
   non-public: Not public
   delete-signature: Delete signature
   delete-signature-warning: Are you sure you want to delete your signature?
+  deleted: Deleted
 
 published-resource:
   published-by-label: Published by
