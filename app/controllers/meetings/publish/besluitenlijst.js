@@ -28,6 +28,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     try {
       const behandelings = yield this.store.query('versioned-besluiten-lijst', {
         'filter[zitting][:id:]': this.model.id,
+        'filter[deleted]': false,
         include: 'signed-resources,published-resource',
       });
       if (behandelings.length) {
@@ -73,6 +74,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   *reloadBesluitenLijst() {
     const behandelings = yield this.store.query('versioned-besluiten-lijst', {
       'filter[zitting][:id:]': this.model.id,
+      'filter[deleted]': false,
       include: 'signed-resources,published-resource',
     });
     this.besluitenlijst = behandelings.firstObject;

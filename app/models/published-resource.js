@@ -10,4 +10,5 @@ export default class PublishedResourceModel extends Model {
   @belongsTo('versioned-agenda') versionedAgenda;
   @belongsTo('versioned-besluiten-lijst') versionedBesluitenLijst;
   @belongsTo('versioned-notulen') versionedNotulen;
+  @belongsTo('versioned-behandeling') versionedBehandeling;
 }

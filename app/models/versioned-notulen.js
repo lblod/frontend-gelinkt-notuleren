@@ -6,7 +6,7 @@ export default class VersionedNotulesModel extends Model {
   @attr publicContent;
   @attr publicBehandelingen;
   @attr kind;
-  @attr deleted;
+  @attr('boolean', { defaultValue: false }) deleted;
   @hasMany('signed-resource') signedResources;
   @belongsTo('published-resource') publishedResource;
   @belongsTo('document-container') documentContainer;

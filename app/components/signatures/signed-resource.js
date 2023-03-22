@@ -19,17 +19,20 @@ export default class SignedResource extends Component {
     signature.deleted = true;
     //Check if versioned resource should be deleted
     let versionedResource;
-    if (signature.agenda) {
+    if (await signature.agenda) {
       versionedResource = await signature.agenda;
-    } else if (signature.versionedBesluitenLijst) {
+    } else if (await signature.versionedBesluitenLijst) {
       versionedResource = await signature.versionedBesluitenLijst;
-    } else if (signature.versionedNotulen) {
+    } else if (await signature.versionedNotulen) {
       versionedResource = await signature.versionedNotulen;
+    } else if (await signature.versionedBehandeling) {
+      versionedResource = await signature.versionedBehandeling;
     }
     if (versionedResource.get('publishedResource').get('id')) {
       await signature.save();
       return;
     }
+    console.log(versionedResource);
     const signedResources = versionedResource.get('signedResources');
     const validSignedResources = signedResources.filter(
       (signature) => !signature.deleted

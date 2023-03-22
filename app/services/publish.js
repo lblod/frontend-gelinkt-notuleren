@@ -125,6 +125,7 @@ export default class PublishService extends Service {
       }),
       this.store.query('versioned-behandeling', {
         'filter[zitting][:id:]': meetingId,
+        'filter[deleted]': false,
         include: 'behandeling.onderwerp,signed-resources,published-resource',
         page: { size: 1000 },
       }),

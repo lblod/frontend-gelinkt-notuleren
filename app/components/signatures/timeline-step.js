@@ -142,7 +142,6 @@ export default class SignaturesTimelineStep extends Component {
 
   @task
   *signDocument(signedId) {
-    console.log('signing');
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
     yield this.args.signing(signedId);
@@ -150,12 +149,14 @@ export default class SignaturesTimelineStep extends Component {
     this.signedResources = signedResources.sortBy('createdOn');
     const signedResource = signedResources.lastObject;
     let versionedResource;
-    if (signedResource.get('agenda')) {
+    if (yield signedResource.get('agenda')) {
       versionedResource = signedResource.get('agenda');
-    } else if (signedResource.get('versionedBesluitenLijst')) {
+    } else if (yield signedResource.get('versionedBesluitenLijst')) {
       versionedResource = signedResource.get('versionedBesluitenLijst');
-    } else if (signedResource.get('versionedNotulen')) {
+    } else if (yield signedResource.get('versionedNotulen')) {
       versionedResource = signedResource.get('versionedNotulen');
+    } else if (yield signedResource.get('versionedBehandeling')) {
+      versionedResource = signedResource.get('versionedBehandeling');
     }
     const log = this.store.createRecord('publishing-log', {
       action: 'sign',
@@ -174,12 +175,14 @@ export default class SignaturesTimelineStep extends Component {
     yield this.args.publish(signedId);
     const publishedResource = this.args.publishedResource;
     let versionedResource;
-    if (publishedResource.get('agenda')) {
+    if (yield publishedResource.get('agenda')) {
       versionedResource = publishedResource.get('agenda');
-    } else if (publishedResource.get('versionedBesluitenLijst')) {
+    } else if (yield publishedResource.get('versionedBesluitenLijst')) {
       versionedResource = publishedResource.get('versionedBesluitenLijst');
-    } else if (publishedResource.get('versionedNotulen')) {
+    } else if (yield publishedResource.get('versionedNotulen')) {
       versionedResource = publishedResource.get('versionedNotulen');
+    } else if (yield publishedResource.get('versionedBehandeling')) {
+      versionedResource = publishedResource.get('versionedBehandeling');
     }
     const log = this.store.createRecord('publishing-log', {
       action: 'publish',

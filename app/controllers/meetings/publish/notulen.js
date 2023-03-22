@@ -8,6 +8,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @service store;
   @service publish;
   @service muTask;
+  @service currentSession;
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
@@ -63,6 +64,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   *loadNotulen() {
     const versionedNotulens = yield this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
+      'filter[deleted]': false,
       include: 'signed-resources.gebruiker,published-resource.gebruiker',
     });
     if (versionedNotulens.length) {
@@ -139,6 +141,25 @@ export default class MeetingsPublishNotulenController extends Controller {
       include: 'gebruiker',
       sort: 'created-on',
     });
+    const signedResource = this.signedResources.lastObject;
+    let versionedResource;
+    if (yield signedResource.get('agenda')) {
+      versionedResource = signedResource.get('agenda');
+    } else if (yield signedResource.get('versionedBesluitenLijst')) {
+      versionedResource = signedResource.get('versionedBesluitenLijst');
+    } else if (yield signedResource.get('versionedNotulen')) {
+      versionedResource = signedResource.get('versionedNotulen');
+    }
+    yield versionedResource;
+    const log = this.store.createRecord('publishing-log', {
+      action: 'sign',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signedResource,
+      zitting: yield versionedResource.get('zitting'),
+    });
+    yield log.save();
+    console.log('saving log');
   }
 
   @task

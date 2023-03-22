@@ -10,10 +10,10 @@ export default class MeetingsPublishPublicationActionsDetailRoute extends Route 
       }
     );
     if (log.get('signedResource')) {
-      const signedResource = await log.get('signedResource')
+      const signedResource = await log.get('signedResource');
       return signedResource.get('content');
     } else {
-      const publishedResource = await log.get('publishedResource')
+      const publishedResource = await log.get('publishedResource');
       return await publishedResource.get('content');
     }
   }
