@@ -20,8 +20,6 @@ export default class PublishingLogDocumentNameComponent extends Component {
     if (yield logResource.get('agenda')) {
       versionedResource = yield logResource.get('agenda');
       const type = versionedResource.get('agendaType');
-      console.log(versionedResource);
-      console.log(type);
       switch (type) {
         case 'gepland':
           this.documentName = this.intl.t('publication-actions.planned-agenda');
@@ -48,8 +46,10 @@ export default class PublishingLogDocumentNameComponent extends Component {
       this.documentName = this.intl.t('publication-actions.treatment');
       versionedResource = yield logResource.get('versionedBehandeling');
       const behandeling = yield versionedResource.get('behandeling');
-      const onderwerp = yield behandeling.get('onderwerp');
-      this.documentName += ` [${onderwerp.get('titel')}]`;
+      if (behandeling) {
+        const onderwerp = yield behandeling.get('onderwerp');
+        this.documentName += ` [${onderwerp.get('titel')}]`;
+      }
       this.route = 'meetings.publish.uittreksels';
     }
     this.deleted = versionedResource.get('deleted');

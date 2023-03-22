@@ -461,7 +461,8 @@ publication-actions:
   suplemental-agenda: Supplemental Agenda
   urgent-agenda: Urgent Agenda
   notulen: Document
-  decision-list: Decision list 
+  decision-list: Decision list
+  treatment: Treatment
   deleted: Deleted
   return: Back to all publication actions
 

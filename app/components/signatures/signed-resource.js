@@ -32,7 +32,6 @@ export default class SignedResource extends Component {
       await signature.save();
       return;
     }
-    console.log(versionedResource);
     const signedResources = versionedResource.get('signedResources');
     const validSignedResources = signedResources.filter(
       (signature) => !signature.deleted
@@ -47,7 +46,7 @@ export default class SignedResource extends Component {
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signature,
-      zitting: versionedResource.get('zitting'),
+      zitting: await versionedResource.get('zitting'),
     });
     await log.save();
   }

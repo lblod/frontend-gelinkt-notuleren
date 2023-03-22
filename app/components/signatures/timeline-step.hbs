@@ -77,8 +77,8 @@
               @skin="secondary"
               @icon="pencil"
               @iconAlignment="left"
-              @loading={{this.signDocument.isRunning}}
-              @disabled={{or (or (not this.currentSession.canSign) this.signDocument.isRunning) this.isSignedByCurrentUser}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (or (not this.currentSession.canSign) this.signingOrPublishing) this.isSignedByCurrentUser}}
             >
               {{t "timeline-step.sign-button-label" name=(limit-content @name 30)}}
             </AuButton>
@@ -107,8 +107,8 @@
               @skin="secondary"
               @icon="pencil"
               @iconAlignment="left"
-              @loading={{this.signDocument.isRunning}}
-              @disabled={{or (not this.currentSession.canSign) this.signDocument.isRunning}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (not this.currentSession.canSign) this.signingOrPublishing}}
             >
               {{t "timeline-step.sign-button-label" name=(limit-content @name 30)}}
             </AuButton>
@@ -142,7 +142,7 @@
         {{#if this.showSigningModal}}
           <Signatures::SignatureConfirmation
             @name={{@name}} @mockDocument={{@mockDocument}}
-            @confirm={{perform this.signDocument @mockDocument.signedId}}
+            @confirm={{fn this.signDocument @mockDocument.signedId @signedResources}}
             @cancel={{fn (mut this.showSigningModal) false}} />
         {{/if}}
       </div>
@@ -196,8 +196,8 @@
               {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
-              @loading={{this.publishDocument.isRunning}}
-              @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (not this.currentSession.canPublish) this.signingOrPublishing}}
             >
               {{t "timeline-step.publish-button-label" name=(limit-content @name 60)}}
             </AuButton>
@@ -206,8 +206,8 @@
               {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
-              @loading={{this.publishDocument.isRunning}}
-              @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (not this.currentSession.canPublish) this.signingOrPublishing}}
             >
               {{t "timeline-step.publish-notify-button-label" name=(limit-content @name 60)}}
             </AuButton>

@@ -49,6 +49,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         throw errors;
       }
       yield this.loadExtract.perform();
+      return this.extract.document.signedResources;
     } catch (e) {
       this.extract = null;
       this.error = e;

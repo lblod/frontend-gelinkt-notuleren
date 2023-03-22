@@ -187,7 +187,7 @@ export default class PublishService extends Service {
     const versionedTreatments = await this.store.query(
       'versioned-behandeling',
       {
-        filter: { behandeling: { ':id:': treatment.id } },
+        filter: { behandeling: { ':id:': treatment.id }, deleted: false },
         include: 'behandeling.onderwerp,signed-resources,published-resource',
       }
     );

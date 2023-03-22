@@ -19,6 +19,7 @@ import { action } from '@ember/object';
 /**
  * @extends {Component<Args>}
  */
+
 export default class SignaturesTimelineStep extends Component {
   @service currentSession;
   @service intl;
@@ -28,6 +29,7 @@ export default class SignaturesTimelineStep extends Component {
   @tracked showPublishingModal = false;
   @tracked isSignedByCurrentUser = true;
   @tracked signedResources = [];
+  @tracked signingOrPublishing = false;
 
   publicationBaseUrl = ENV.publication.baseUrl;
 
@@ -140,22 +142,25 @@ export default class SignaturesTimelineStep extends Component {
     return 'pencil';
   }
 
-  @task
-  *signDocument(signedId) {
+  @action
+  async signDocument(signedId, oldSignedResources) {
+    this.signingOrPublishing = true;
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
-    yield this.args.signing(signedId);
-    const signedResources = yield this.args.signedResources;
+    let signedResources = await this.args.signing(signedId);
+    if (!signedResources) {
+      signedResources = oldSignedResources;
+    }
     this.signedResources = signedResources.sortBy('createdOn');
     const signedResource = signedResources.lastObject;
     let versionedResource;
-    if (yield signedResource.get('agenda')) {
+    if (await signedResource.get('agenda')) {
       versionedResource = signedResource.get('agenda');
-    } else if (yield signedResource.get('versionedBesluitenLijst')) {
+    } else if (await signedResource.get('versionedBesluitenLijst')) {
       versionedResource = signedResource.get('versionedBesluitenLijst');
-    } else if (yield signedResource.get('versionedNotulen')) {
+    } else if (await signedResource.get('versionedNotulen')) {
       versionedResource = signedResource.get('versionedNotulen');
-    } else if (yield signedResource.get('versionedBehandeling')) {
+    } else if (await signedResource.get('versionedBehandeling')) {
       versionedResource = signedResource.get('versionedBehandeling');
     }
     const log = this.store.createRecord('publishing-log', {
@@ -163,25 +168,26 @@ export default class SignaturesTimelineStep extends Component {
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signedResource,
-      zitting: versionedResource.get('zitting'),
+      zitting: await versionedResource.get('zitting'),
     });
-    yield log.save();
+    await log.save();
+    this.signingOrPublishing = false;
   }
 
-  @task
-  *publishDocument(signedId) {
-    console.log('publishing');
+  @action
+  async publishDocument(signedId) {
+    this.signingOrPublishing = true;
     this.showPublishingModal = false;
-    yield this.args.publish(signedId);
+    await this.args.publish(signedId);
     const publishedResource = this.args.publishedResource;
     let versionedResource;
-    if (yield publishedResource.get('agenda')) {
+    if (await publishedResource.get('agenda')) {
       versionedResource = publishedResource.get('agenda');
-    } else if (yield publishedResource.get('versionedBesluitenLijst')) {
+    } else if (await publishedResource.get('versionedBesluitenLijst')) {
       versionedResource = publishedResource.get('versionedBesluitenLijst');
-    } else if (yield publishedResource.get('versionedNotulen')) {
+    } else if (await publishedResource.get('versionedNotulen')) {
       versionedResource = publishedResource.get('versionedNotulen');
-    } else if (yield publishedResource.get('versionedBehandeling')) {
+    } else if (await publishedResource.get('versionedBehandeling')) {
       versionedResource = publishedResource.get('versionedBehandeling');
     }
     const log = this.store.createRecord('publishing-log', {
@@ -191,7 +197,8 @@ export default class SignaturesTimelineStep extends Component {
       publishedResource: publishedResource,
       zitting: versionedResource.get('zitting'),
     });
-    yield log.save();
+    await log.save();
+    this.signingOrPublishing = false;
   }
 
   @action
