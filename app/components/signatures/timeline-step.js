@@ -51,20 +51,19 @@ export default class SignaturesTimelineStep extends Component {
     return this.signedResources.length;
   }
 
-  @restartableTask
-  *initTask() {
+  initTask = restartableTask(async () => {
     this.bestuurseenheid = this.currentSession.group;
     const currentUser = this.currentSession.user;
     let firstSignatureUser = null;
     if (this.args.signedResources) {
-      const signedResources = yield this.args.signedResources;
+      const signedResources = await this.args.signedResources;
       if (signedResources.length > 0) {
         this.signedResources = signedResources.sortBy('createdOn');
-        firstSignatureUser = yield signedResources.firstObject.gebruiker;
+        firstSignatureUser = await signedResources.firstObject.gebruiker;
       }
     }
     this.isSignedByCurrentUser = currentUser === firstSignatureUser;
-  }
+  });
 
   get isAgenda() {
     return (
@@ -139,20 +138,18 @@ export default class SignaturesTimelineStep extends Component {
     return 'pencil';
   }
 
-  @task
-  *signDocument(signedId) {
+  signDocument = task(async (signedId) => {
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
-    yield this.args.signing(signedId);
-    const signedResources = yield this.args.signedResources;
+    await this.args.signing(signedId);
+    const signedResources = await this.args.signedResources;
     this.signedResources = signedResources.sortBy('createdOn');
-  }
+  });
 
-  @task
-  *publishDocument(signedId) {
+  publishDocument = task(async (signedId) => {
     this.showPublishingModal = false;
-    yield this.args.publish(signedId);
-  }
+    await this.args.publish(signedId);
+  });
 
   @action
   publish() {

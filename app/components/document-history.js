@@ -20,10 +20,9 @@ export default class DocumentHistoryComponent extends Component {
     history.back();
   }
 
-  @task
-  *loadMore() {
+  loadMore = task(async () => {
     const revisionsToSkip = [this.args.currentVersion.id];
-    const newRevisions = yield this.documentService.fetchRevisions.perform(
+    const newRevisions = await this.documentService.fetchRevisions.perform(
       this.args.documentContainerId,
       revisionsToSkip,
       this.pageSize,
@@ -34,12 +33,11 @@ export default class DocumentHistoryComponent extends Component {
     if (newRevisions.length < this.pageSize) {
       this.hasMore = false;
     }
-  }
+  });
 
-  @task
-  *fetchRevisions() {
+  fetchRevisions = task(async () => {
     const revisionsToSkip = [this.args.currentVersion.id];
-    this.revisions = yield this.documentService.fetchRevisions.perform(
+    this.revisions = await this.documentService.fetchRevisions.perform(
       this.args.documentContainerId,
       revisionsToSkip,
       this.pageSize
@@ -48,5 +46,5 @@ export default class DocumentHistoryComponent extends Component {
     if (this.revisions.length + 1 < this.pageSize) {
       this.hasMore = false;
     }
-  }
+  });
 }

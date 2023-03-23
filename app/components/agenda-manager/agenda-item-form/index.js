@@ -3,10 +3,9 @@ import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
 
 export default class AgendaManagerAgendaItemFormIndexComponent extends Component {
-  @task
-  *submitTask() {
-    yield this.args.onSubmit(this.args.model);
-  }
+  submitTask = task(async () => {
+    await this.args.onSubmit(this.args.model);
+  });
 
   @action
   submit() {
