@@ -13,12 +13,13 @@ export default class AgendaManagerAgendaTableRowComponent extends Component {
     this.getAgendaPointStatus.perform();
   }
 
-  @task
-  *getAgendaPointStatus() {
-    const behandeling = (yield this.store.query('behandeling-van-agendapunt', {
-      'filter[onderwerp][:id:]': this.args.item.id,
-      include: 'document-container.status',
-    })).firstObject;
+  getAgendaPointStatus = task(async () => {
+    const behandeling = (
+      await this.store.query('behandeling-van-agendapunt', {
+        'filter[onderwerp][:id:]': this.args.item.id,
+        include: 'document-container.status',
+      })
+    ).firstObject;
 
     if (behandeling) {
       const statusId = behandeling.get('documentContainer.status.id');
@@ -27,5 +28,5 @@ export default class AgendaManagerAgendaTableRowComponent extends Component {
         this.published = true;
       }
     }
-  }
+  });
 }

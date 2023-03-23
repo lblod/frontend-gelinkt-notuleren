@@ -13,9 +13,8 @@ export default class AttachmentsNumberComponent extends Component {
 
   @tracked attachmentsNumber;
 
-  @restartableTask
-  *getAttachmentsNumber() {
-    const attachments = yield this.args.documentContainer.attachments;
+  getAttachmentsNumber = restartableTask(async () => {
+    const attachments = await this.args.documentContainer.attachments;
     this.attachmentsNumber = attachments.length;
-  }
+  });
 }

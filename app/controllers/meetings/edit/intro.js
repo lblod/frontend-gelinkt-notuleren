@@ -29,10 +29,9 @@ export default class MeetingsEditIntroController extends Controller {
     this.closeModal();
   }
 
-  @task
-  *saveTextTask() {
+  saveTextTask = task(async () => {
     const zitting = this.model;
     zitting.intro = this.editor.htmlContent;
-    yield zitting.save();
-  }
+    await zitting.save();
+  });
 }
