@@ -83,29 +83,30 @@ export default class DocumentService extends Service {
     return documentpartUris;
   }
 
-  @task
-  *createEditorDocument(title, content, documentContainer, previousDocument) {
-    if (!title || !documentContainer) {
-      throw 'title and documentContainer are required';
-    } else {
-      const creationDate = new Date();
-      const editorDocument = this.store.createRecord('editor-document', {
-        createdOn: creationDate,
-        updatedOn: creationDate,
-        content: content ?? '',
-        title: title.trim(),
-      });
-      if (previousDocument) {
-        editorDocument.previousVersion = previousDocument;
+  createEditorDocument = task(
+    async (title, content, documentContainer, previousDocument) => {
+      if (!title || !documentContainer) {
+        throw 'title and documentContainer are required';
+      } else {
+        const creationDate = new Date();
+        const editorDocument = this.store.createRecord('editor-document', {
+          createdOn: creationDate,
+          updatedOn: creationDate,
+          content: content ?? '',
+          title: title.trim(),
+        });
+        if (previousDocument) {
+          editorDocument.previousVersion = previousDocument;
+        }
+        editorDocument.documentContainer = documentContainer;
+        editorDocument.parts = await this.retrieveDocumentParts(editorDocument);
+        await editorDocument.save();
+        documentContainer.currentVersion = editorDocument;
+        await documentContainer.save();
+        return editorDocument;
       }
-      editorDocument.documentContainer = documentContainer;
-      editorDocument.parts = yield this.retrieveDocumentParts(editorDocument);
-      yield editorDocument.save();
-      documentContainer.currentVersion = editorDocument;
-      yield documentContainer.save();
-      return editorDocument;
     }
-  }
+  );
 
   async retrieveDocumentParts(document) {
     return Promise.all(
@@ -120,18 +121,20 @@ export default class DocumentService extends Service {
       })
     );
   }
-  @task
-  *fetchRevisions(documentContainerId, revisionsToSkip, pageSize, pageNumber) {
-    const revisions = yield this.store.query('editor-document', {
-      'filter[document-container][id]': documentContainerId,
-      include: 'status',
-      sort: '-updated-on',
-      'page[size]': pageSize,
-      'page[number]': pageNumber,
-    });
-    const revisionsWithoutCurrentVersion = revisions.filter(
-      (revision) => !revisionsToSkip.includes(revision.id)
-    );
-    return revisionsWithoutCurrentVersion;
-  }
+
+  fetchRevisions = task(
+    async (documentContainerId, revisionsToSkip, pageSize, pageNumber) => {
+      const revisions = await this.store.query('editor-document', {
+        'filter[document-container][id]': documentContainerId,
+        include: 'status',
+        sort: '-updated-on',
+        'page[size]': pageSize,
+        'page[number]': pageNumber,
+      });
+      const revisionsWithoutCurrentVersion = revisions.filter(
+        (revision) => !revisionsToSkip.includes(revision.id)
+      );
+      return revisionsWithoutCurrentVersion;
+    }
+  );
 }
