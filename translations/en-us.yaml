@@ -3,7 +3,7 @@ agendapoint:
   revisions: Revisions
   restore: Restore
   back-to-meeting: Return to the meeting of {adminBody} on {date}
-  not-found: 
+  not-found:
     title: Agendapoint not found
     explanation: It's possible that you don't have access to the agendapoint with this account
   saved-versions: "Saved document versions:"
@@ -195,7 +195,7 @@ inbox:
     restore-message: Restore selected documents
 
 irg-archive:
-  not-found: 
+  not-found:
     title: Reglement not found
     explanation: It's possible that you don't have access to the reglement with this account
 
@@ -382,7 +382,7 @@ meetings:
       confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
       save-and-quit: Save and Quit
       cancel: Cancel
-  not-found: 
+  not-found:
     title: Meeting not found
     explanation: It's possible that you don't have access to the meeting with this account
 
@@ -486,7 +486,7 @@ publish:
   toggle-all-public-label: Toggle all public
   serious-error: An error occured, please try again at a later time. If the error persists please contact GelinktNotuleren and include the information below.
   public-version: Public version
-  need-second-signature: Second signature requirement
+  need-second-signature: Second signature required
   signed-version: Signed version
   signed: Signed
   unsigned: Unsigned
@@ -511,7 +511,7 @@ rdfa-editor-container:
   making-copy: Making copy
 
 regulatory-statements:
-  not-found: 
+  not-found:
     title: Regulatory statement not found
     explanation: It's possible that you don't have access to the regulatory statement with this account
 
