@@ -30,6 +30,9 @@
 @import "project/c-template";
 @import "project/c-environment-banner";
 
+// ADMIN UNIT - Styling specific to administrative units
+@import "project/admin-unit/essen";
+@import "project/admin-unit/gent";
 
 // PLUGINS
 @import "ember-rdfa-editor";

@@ -8,4 +8,8 @@ export default class SignaturesSignatureConfirmation extends Component {
   @tracked mockDocument;
   @tracked confirm;
   @tracked cancel;
+
+  get administrativeUnitName() {
+    return this.currentSession.group.naam.toLowerCase();
+  }
 }

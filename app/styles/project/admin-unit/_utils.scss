@@ -1,0 +1,37 @@
+// This @mixin can be extracted to a utils.scss or similar location
+//
+// Goal of this mixin is to provide common wrapper for administrative
+// unit styling, so there's only single place where we need to change
+// the wrapping selector
+@mixin admin-unit($admin-unit) {
+  // Print view
+  .au-u-wide-on-print.administrative-unit-gent,
+  // Publication confirmation, Signature confirmation
+  .au-c-rdfa-publication.rdfa-annotations.administrative-unit-#{$admin-unit},
+  // Uittreksels view
+  .au-c-content .administrative-unit-#{$admin-unit} {
+    [property] {
+      border-bottom: 0;
+    }
+
+    @content;
+  }
+}
+
+@mixin agendapunt {
+  li[typeof='besluit:Agendapunt'] {
+    @content;
+  }
+}
+
+@mixin behandeling-van-agendapunt {
+  div[typeof="besluit:BehandelingVanAgendapunt"] {
+    @content;
+
+    div.c-template-content.c-template-content--treatment {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 0;
+    }
+  }
+}
