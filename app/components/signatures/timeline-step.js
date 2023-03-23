@@ -21,6 +21,7 @@ import { action } from '@ember/object';
  */
 export default class SignaturesTimelineStep extends Component {
   @service currentSession;
+  @service intl;
 
   @tracked showSigningModal = false;
   @tracked showPublishingModal = false;
@@ -50,20 +51,19 @@ export default class SignaturesTimelineStep extends Component {
     return this.signedResources.length;
   }
 
-  @restartableTask
-  *initTask() {
+  initTask = restartableTask(async () => {
     this.bestuurseenheid = this.currentSession.group;
     const currentUser = this.currentSession.user;
     let firstSignatureUser = null;
     if (this.args.signedResources) {
-      const signedResources = yield this.args.signedResources;
+      const signedResources = await this.args.signedResources;
       if (signedResources.length > 0) {
         this.signedResources = signedResources.sortBy('createdOn');
-        firstSignatureUser = yield signedResources.firstObject.gebruiker;
+        firstSignatureUser = await signedResources.firstObject.gebruiker;
       }
     }
     this.isSignedByCurrentUser = currentUser === firstSignatureUser;
-  }
+  });
 
   get isAgenda() {
     return (
@@ -90,28 +90,42 @@ export default class SignaturesTimelineStep extends Component {
 
   get handtekeningStatus() {
     if (this.signaturesCount === 1)
-      return { label: 'Tweede ondertekening vereist', color: 'warning' };
+      return {
+        label: this.intl.t('publish.need-second-signature'),
+        color: 'warning',
+      };
     if (this.signaturesCount === 2)
-      return { label: 'Ondertekend', color: 'action' };
-    return { label: 'Niet ondertekend', color: 'border' };
+      return { label: this.intl.t('publish.signed'), color: 'action' };
+    return { label: this.intl.t('publish.unsigned'), color: 'border' };
   }
 
   get voorVertoningStatus() {
     if (this.status === 'published')
-      return { label: 'Publieke versie', color: 'action' };
-    if (this.status === 'firstSignature' || this.status === 'secondSignature')
-      return { label: 'Ondertekende versie', color: 'success' };
-    return { label: 'Meest recente versie' };
+      return { label: this.intl.t('publish.public-version'), color: 'action' };
+    if (this.status === 'firstSignature') {
+      return {
+        label: this.intl.t('publish.need-second-signature'),
+        color: 'success',
+      };
+    }
+    if (this.status === 'secondSignature') {
+      return { label: this.intl.t('publish.signed-version'), color: 'success' };
+    }
+    return { label: '' };
   }
 
   get algemeneStatus() {
     if (this.status === 'published')
-      return { label: 'Gepubliceerd', color: 'action' };
+      return { label: this.intl.t('publish.published'), color: 'action' };
     if (this.status === 'firstSignature')
-      return { label: 'Eerste ondertekening verkregen', color: 'warning' };
+      return {
+        label: this.intl.t('publish.first-signature-obtained'),
+        color: 'warning',
+      };
     if (this.status === 'secondSignature')
-      return { label: 'Getekend', color: 'success' };
-    if (this.status === 'concept') return { label: 'In voorbereiding' };
+      return { label: this.intl.t('publish.signed'), color: 'success' };
+    if (this.status === 'concept')
+      return { label: this.intl.t('publish.in-preparation') };
     return 'concept';
   }
 
@@ -124,20 +138,18 @@ export default class SignaturesTimelineStep extends Component {
     return 'pencil';
   }
 
-  @task
-  *signDocument(signedId) {
+  signDocument = task(async (signedId) => {
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
-    yield this.args.signing(signedId);
-    const signedResources = yield this.args.signedResources;
+    await this.args.signing(signedId);
+    const signedResources = await this.args.signedResources;
     this.signedResources = signedResources.sortBy('createdOn');
-  }
+  });
 
-  @task
-  *publishDocument(signedId) {
+  publishDocument = task(async (signedId) => {
     this.showPublishingModal = false;
-    yield this.args.publish(signedId);
-  }
+    await this.args.publish(signedId);
+  });
 
   @action
   publish() {

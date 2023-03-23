@@ -22,43 +22,44 @@ export default class MuTaskService extends Service {
    * @param {number} [pollDelayMs] time to wait between each status poll
    * @param {number} [timeoutMs] maximum time to wait before throwing
    * */
-  @task
-  *waitForMuTaskTask(taskId, pollDelayMs = 1000, timeoutMs = 300000) {
-    let resp;
-    let jsonBody;
-    let currentStatus;
-    const startTime = Date.now();
-    do {
-      yield timeout(pollDelayMs);
-      resp = yield this.fetchMuTask(taskId);
-      if (resp.ok) {
-        jsonBody = yield resp.json();
-        currentStatus = jsonBody.data.status;
-      } else {
-        currentStatus = null;
+  waitForMuTaskTask = task(
+    async (taskId, pollDelayMs = 1000, timeoutMs = 300000) => {
+      let resp;
+      let jsonBody;
+      let currentStatus;
+      const startTime = Date.now();
+      do {
+        await timeout(pollDelayMs);
+        resp = await this.fetchMuTask(taskId);
+        if (resp.ok) {
+          jsonBody = await resp.json();
+          currentStatus = jsonBody.data.status;
+        } else {
+          currentStatus = null;
+        }
+      } while (
+        resp.ok &&
+        (currentStatus === TASK_STATUS_RUNNING ||
+          currentStatus === TASK_STATUS_CREATED) &&
+        Date.now() - startTime < timeoutMs
+      );
+
+      if (!resp.ok) {
+        const reason = await resp.text();
+        throw new Error(reason);
       }
-    } while (
-      resp.ok &&
-      (currentStatus === TASK_STATUS_RUNNING ||
-        currentStatus === TASK_STATUS_CREATED) &&
-      Date.now() - startTime < timeoutMs
-    );
 
-    if (!resp.ok) {
-      const reason = yield resp.text();
-      throw new Error(reason);
+      if (currentStatus === TASK_STATUS_SUCCESS) {
+        return jsonBody;
+      } else if (currentStatus === TASK_STATUS_FAILURE) {
+        throw new Error('Task failed.');
+      } else if (currentStatus === TASK_STATUS_RUNNING) {
+        throw new Error('Task timed out.');
+      } else {
+        throw new Error('Task in unexpected state');
+      }
     }
-
-    if (currentStatus === TASK_STATUS_SUCCESS) {
-      return jsonBody;
-    } else if (currentStatus === TASK_STATUS_FAILURE) {
-      throw new Error('Task failed.');
-    } else if (currentStatus === TASK_STATUS_RUNNING) {
-      throw new Error('Task timed out.');
-    } else {
-      throw new Error('Task in unexpected state');
-    }
-  }
+  );
 
   async fetchTaskifiedEndpoint(url, fetchOptions) {
     const res = await fetch(url, fetchOptions);

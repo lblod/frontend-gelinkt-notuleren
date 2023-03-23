@@ -108,7 +108,7 @@
     "tracked-built-ins": "^2.0.1",
     "tracked-toolbox": "^1.2.3",
     "uuid": "^9.0.0",
-    "webpack": "^5.70.0"
+    "webpack": "^5.76.0"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"

@@ -21,8 +21,7 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
     return this.args.model;
   }
 
-  @restartableTask
-  *getDrafts(searchParams = '') {
+  getDrafts = restartableTask(async (searchParams = '') => {
     const query = {
       include: 'current-version,status',
       'filter[status][:id:]': DRAFT_STATUS_ID,
@@ -32,9 +31,9 @@ export default class AgendaManagerAgendaItemFormSelectDraftComponent extends Com
     if (searchParams.length > 1) {
       query['filter[current-version][title]'] = searchParams;
     }
-    const containers = yield this.store.query('document-container', query);
+    const containers = await this.store.query('document-container', query);
     this.options = containers;
-  }
+  });
 
   @action
   select(draft) {

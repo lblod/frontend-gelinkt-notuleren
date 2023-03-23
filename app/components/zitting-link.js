@@ -13,9 +13,8 @@ export default class ZittingLinkComponent extends Component {
 
   @tracked meeting;
 
-  @restartableTask
-  *getMeeting() {
-    const result = yield this.store.query('zitting', {
+  getMeeting = restartableTask(async () => {
+    const result = await this.store.query('zitting', {
       'filter[agendapunten][behandeling][document-container][:id:]':
         this.args.documentContainer.id,
       // Including the agendapunten relationship ensures the cache returns the proper response.
@@ -23,5 +22,5 @@ export default class ZittingLinkComponent extends Component {
       include: 'agendapunten',
     });
     this.meeting = result.firstObject;
-  }
+  });
 }

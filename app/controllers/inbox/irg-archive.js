@@ -9,12 +9,11 @@ export default class InboxIrgArchiveController extends Controller {
   @tracked searchValue = this.filter;
   @tracked debounceTime = 2000;
 
-  @restartableTask
-  *updateFilter(event) {
+  updateFilter = restartableTask(async (event) => {
     const input = event.target.value;
     this.searchValue = input;
-    yield timeout(this.debounceTime);
+    await timeout(this.debounceTime);
     this.filter = this.searchValue;
     this.page = 0;
-  }
+  });
 }

@@ -18,8 +18,7 @@ export default class EditorDocumentStatusPillComponent extends Component {
     this.calculateStatus.perform();
   }
 
-  @task
-  *calculateStatus() {
+  calculateStatus = task(async () => {
     const container = this.args.container;
     if (
       container.currentVersion.get('status') &&
@@ -27,18 +26,18 @@ export default class EditorDocumentStatusPillComponent extends Component {
     ) {
       this.status = container.currentVersion.get('status');
     } else {
-      const isPartOf = yield container.isPartOf;
+      const isPartOf = await container.isPartOf;
       if (isPartOf && isPartOf.length) {
         const agendapoints = [...isPartOf.toArray()];
         for (let agendapoint of agendapoints) {
-          const documentContainer = yield agendapoint.documentContainer;
-          const status = yield documentContainer.status;
+          const documentContainer = await agendapoint.documentContainer;
+          const status = await documentContainer.status;
           if (status.id === PLANNED_STATUS_ID) {
             this.status = status;
             return;
           }
         }
-        const assignedStatus = yield this.store.findRecord(
+        const assignedStatus = await this.store.findRecord(
           'concept',
           ASSIGNED_STATUS_ID
         );
@@ -47,7 +46,7 @@ export default class EditorDocumentStatusPillComponent extends Component {
         this.status = container.currentVersion.get('status');
       }
     }
-  }
+  });
 
   get editorStatusClass() {
     if (!this.status) return '';

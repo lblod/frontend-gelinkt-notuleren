@@ -70,9 +70,8 @@ export default class RelationshipResource extends Resource {
     this.resolveTask.cancelAll();
   }
 
-  @task
-  *resolveTask() {
+  resolveTask = task(async () => {
     const [model, relationshipPath] = this.args.positional;
-    return yield model.get(relationshipPath);
-  }
+    return await model.get(relationshipPath);
+  });
 }
