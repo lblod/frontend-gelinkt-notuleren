@@ -91,6 +91,9 @@
         />
         <RoadsignRegulationPlugin::RoadsignRegulationCard @controller={{this.controller}}/>
         <StandardTemplatePlugin::Card @controller={{this.controller}}/>
+        {{#if (feature-flag 'regulatoryStatements')}}
+          <EditorPlugins::RegulatoryStatements::SidebarInsert @controller={{this.controller}}/>
+        {{/if}}
     </:sidebar-collapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard 

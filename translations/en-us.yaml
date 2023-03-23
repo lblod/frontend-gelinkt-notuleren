@@ -524,6 +524,7 @@ regulatory-statements-plugin:
   last-modification: Last modified
   loading: Loading
   no-statement-selected: No regulatory statement selected
+  no-statement-found: No regulatory statements found
   edit-statement: Edit
   detach-statement: Detach
   load-more: Load more

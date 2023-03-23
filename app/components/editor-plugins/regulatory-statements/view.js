@@ -53,11 +53,14 @@ export default class ReadOnlyContentSectionComponent extends Component {
 
   @action
   detach() {
-    this.controller.withTransaction((tr) => {
-      return tr.delete(
-        this.args.getPos(),
-        this.args.getPos() + this.args.node.nodeSize
-      );
-    });
+    this.controller.withTransaction(
+      (tr) => {
+        return tr.delete(
+          this.args.getPos(),
+          this.args.getPos() + this.args.node.nodeSize
+        );
+      },
+      { view: this.controller.mainEditorView }
+    );
   }
 }

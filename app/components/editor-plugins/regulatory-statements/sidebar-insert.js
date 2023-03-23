@@ -11,7 +11,7 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
   }
 
   get insertRange() {
-    const selection = this.controller.state.selection;
+    const selection = this.controller.mainEditorState.selection;
     const besluit = findParentNodeOfType(this.controller.schema.nodes.besluit)(
       selection
     );
@@ -37,15 +37,18 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
     this.modalEnabled = false;
     if (this.insertRange) {
       const { schema } = this.controller;
-      this.controller.withTransaction((tr) => {
-        return tr.replaceRangeWith(
-          this.insertRange.from,
-          this.insertRange.to,
-          schema.node('regulatoryStatementNode', {
-            resource: statement.uri,
-          })
-        );
-      });
+      this.controller.withTransaction(
+        (tr) => {
+          return tr.replaceRangeWith(
+            this.insertRange.from,
+            this.insertRange.to,
+            schema.node('regulatoryStatementNode', {
+              resource: statement.uri,
+            })
+          );
+        },
+        { view: this.controller.mainEditorView }
+      );
     }
   }
 }
