@@ -4,7 +4,7 @@
   </Group>
   <Group>
     <AuPill @skin={{if @publishedResource "success"}} class="au-u-margin-left">
-      {{if @publishedResource "Publiek" "Niet publiek"}}
+      {{if @publishedResource (t "publish.public") (t "publish.non-public")}}
     </AuPill>
   </Group>
 </AuToolbar>
