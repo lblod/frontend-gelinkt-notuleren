@@ -41,7 +41,7 @@ export default class PublishingLogDocumentNameComponent extends Component {
     } else if (yield logResource.get('versionedBesluitenLijst')) {
       this.documentName = this.intl.t('publication-actions.decision-list');
       versionedResource = logResource.get('versionedBesluitenLijst');
-      this.route = 'meetings.publish.besluitelijst';
+      this.route = 'meetings.publish.besluitenlijst';
     } else if (yield logResource.get('versionedBehandeling')) {
       this.documentName = this.intl.t('publication-actions.treatment');
       versionedResource = yield logResource.get('versionedBehandeling');

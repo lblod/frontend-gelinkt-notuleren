@@ -121,10 +121,19 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @this {MeetingsPublishAgendaController}
    */
   @task
-  *createSignedResource(kindUuid) {
+  *createSignedResource(kindUuid, kind) {
     const id = this.model.id;
     yield fetch(`/signing/agenda/sign/${kindUuid}/${id}`, { method: 'POST' });
     yield this.reloadAgendas.perform();
+    if (kind === 'ontwerp') {
+      return this.ontwerpAgenda.signedResources;
+    }
+    if (kind === 'aanvullende') {
+      return this.aanvullendeAgenda.signedResources;
+    }
+    if (kind === 'spoedeisende') {
+      return this.spoedeisendeAgenda.signedResources;
+    }
   }
 
   /**
@@ -132,11 +141,20 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @this {MeetingsPublishAgendaController}
    */
   @task
-  *createPublishedResource(kindUuid) {
+  *createPublishedResource(kindUuid, kind) {
     const id = this.model.id;
     yield fetch(`/signing/agenda/publish/${kindUuid}/${id}`, {
       method: 'POST',
     });
     yield this.reloadAgendas.perform();
+    if (kind === 'ontwerp') {
+      return this.ontwerpAgenda.publishedResource;
+    }
+    if (kind === 'aanvullende') {
+      return this.aanvullendeAgenda.publishedResource;
+    }
+    if (kind === 'spoedeisende') {
+      return this.spoedeisendeAgenda.publishedResource;
+    }
   }
 }

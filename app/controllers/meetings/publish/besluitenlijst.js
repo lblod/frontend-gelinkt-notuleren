@@ -77,6 +77,8 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       'filter[deleted]': false,
       include: 'signed-resources,published-resource',
     });
+    console.log('reload besluitenlist');
+    console.log(behandelings.firstObject);
     this.besluitenlijst = behandelings.firstObject;
   }
 
@@ -110,6 +112,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       iteration > maxIterations
     );
     yield this.reloadBesluitenLijst.perform();
+    return this.besluitenlijst.signedResources;
   }
 
   @task
@@ -135,5 +138,6 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       iteration > maxIterations
     );
     yield this.reloadBesluitenLijst.perform();
+    return this.besluitenlijst.publishedResource;
   }
 }

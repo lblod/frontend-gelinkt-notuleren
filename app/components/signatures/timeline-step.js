@@ -143,25 +143,35 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   @action
-  async signDocument(signedId, oldSignedResources) {
+  async signDocument(signedId) {
     this.signingOrPublishing = true;
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
     let signedResources = await this.args.signing(signedId);
-    if (!signedResources) {
-      signedResources = oldSignedResources;
-    }
     this.signedResources = signedResources.sortBy('createdOn');
-    const signedResource = signedResources.lastObject;
+    const signedResource = await signedResources.lastObject;
+    console.log(signedResource);
     let versionedResource;
-    if (await signedResource.get('agenda')) {
-      versionedResource = signedResource.get('agenda');
-    } else if (await signedResource.get('versionedBesluitenLijst')) {
-      versionedResource = signedResource.get('versionedBesluitenLijst');
-    } else if (await signedResource.get('versionedNotulen')) {
-      versionedResource = signedResource.get('versionedNotulen');
-    } else if (await signedResource.get('versionedBehandeling')) {
-      versionedResource = signedResource.get('versionedBehandeling');
+    const agenda = await signedResource.agenda;
+    if (agenda) {
+      versionedResource = agenda;
+    } else {
+      const versionedBesluitenLijst =
+        await signedResource.versionedBesluitenLijst;
+      if (versionedBesluitenLijst) {
+        versionedResource = versionedBesluitenLijst;
+      } else {
+        const versionedNotulen = await signedResource.versionedNotulen;
+        if (versionedNotulen) {
+          versionedResource = versionedNotulen;
+        } else {
+          const versionedBehandeling =
+            await signedResource.versionedBehandeling;
+          if (versionedBehandeling) {
+            versionedResource = versionedBehandeling;
+          }
+        }
+      }
     }
     const log = this.store.createRecord('publishing-log', {
       action: 'sign',
@@ -178,17 +188,28 @@ export default class SignaturesTimelineStep extends Component {
   async publishDocument(signedId) {
     this.signingOrPublishing = true;
     this.showPublishingModal = false;
-    await this.args.publish(signedId);
-    const publishedResource = this.args.publishedResource;
+    const publishedResource = await this.args.publish(signedId);
     let versionedResource;
-    if (await publishedResource.get('agenda')) {
-      versionedResource = publishedResource.get('agenda');
-    } else if (await publishedResource.get('versionedBesluitenLijst')) {
-      versionedResource = publishedResource.get('versionedBesluitenLijst');
-    } else if (await publishedResource.get('versionedNotulen')) {
-      versionedResource = publishedResource.get('versionedNotulen');
-    } else if (await publishedResource.get('versionedBehandeling')) {
-      versionedResource = publishedResource.get('versionedBehandeling');
+    const agenda = await publishedResource.agenda;
+    if (agenda) {
+      versionedResource = agenda;
+    } else {
+      const versionedBesluitenLijst =
+        await publishedResource.versionedBesluitenLijst;
+      if (versionedBesluitenLijst) {
+        versionedResource = versionedBesluitenLijst;
+      } else {
+        const versionedNotulen = await publishedResource.versionedNotulen;
+        if (versionedNotulen) {
+          versionedResource = versionedNotulen;
+        } else {
+          const versionedBehandeling =
+            await publishedResource.versionedBehandeling;
+          if (versionedBehandeling) {
+            versionedResource = versionedBehandeling;
+          }
+        }
+      }
     }
     const log = this.store.createRecord('publishing-log', {
       action: 'publish',
