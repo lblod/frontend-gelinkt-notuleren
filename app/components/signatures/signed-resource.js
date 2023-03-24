@@ -19,20 +19,31 @@ export default class SignedResource extends Component {
     signature.deleted = true;
     //Check if versioned resource should be deleted
     let versionedResource;
-    if (await signature.agenda) {
-      versionedResource = await signature.agenda;
-    } else if (await signature.versionedBesluitenLijst) {
-      versionedResource = await signature.versionedBesluitenLijst;
-    } else if (await signature.versionedNotulen) {
-      versionedResource = await signature.versionedNotulen;
-    } else if (await signature.versionedBehandeling) {
-      versionedResource = await signature.versionedBehandeling;
+    const agenda = await signature.agenda;
+    if (agenda) {
+      versionedResource = agenda;
+    } else {
+      const versionedBesluitenLijst = await signature.versionedBesluitenLijst;
+      if (versionedBesluitenLijst) {
+        versionedResource = versionedBesluitenLijst;
+      } else {
+        const versionedNotulen = await signature.versionedNotulen;
+        if (versionedNotulen) {
+          versionedResource = versionedNotulen;
+        } else {
+          const versionedBehandeling = await signature.versionedBehandeling;
+          if (versionedBehandeling) {
+            versionedResource = versionedBehandeling;
+          }
+        }
+      }
     }
-    if (versionedResource.get('publishedResource').get('id')) {
+    const publishedResource = await versionedResource.publishedResource;
+    if (publishedResource.id) {
       await signature.save();
       return;
     }
-    const signedResources = versionedResource.get('signedResources');
+    const signedResources = await versionedResource.signedResources;
     const validSignedResources = signedResources.filter(
       (signature) => !signature.deleted
     );
@@ -46,7 +57,7 @@ export default class SignedResource extends Component {
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signature,
-      zitting: await versionedResource.get('zitting'),
+      zitting: await versionedResource.zitting,
     });
     await log.save();
   }
