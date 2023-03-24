@@ -136,21 +136,11 @@ export default class MeetingsPublishNotulenController extends Controller {
       { method: 'POST' }
     );
     yield this.muTask.waitForMuTaskTask.perform(taskId);
-    this.signedResources = yield this.store.query('signed-resource', {
-      'filter[versioned-notulen][zitting][:id:]': this.model.id,
-      include: 'gebruiker',
-      sort: 'created-on',
-    });
-    const signedResource = this.signedResources.lastObject;
-    let versionedResource;
-    if (yield signedResource.get('agenda')) {
-      versionedResource = signedResource.get('agenda');
-    } else if (yield signedResource.get('versionedBesluitenLijst')) {
-      versionedResource = signedResource.get('versionedBesluitenLijst');
-    } else if (yield signedResource.get('versionedNotulen')) {
-      versionedResource = signedResource.get('versionedNotulen');
-    }
-    yield versionedResource;
+    yield this.loadNotulen.perform();
+    const signedResources = this.notulen.signedResources;
+    const signedResource = signedResources.lastObject;
+    const versionedResource = yield signedResource.versionedNotulen;
+
     const log = this.store.createRecord('publishing-log', {
       action: 'sign',
       user: this.currentSession.user,
@@ -177,6 +167,17 @@ export default class MeetingsPublishNotulenController extends Controller {
     );
     yield this.muTask.waitForMuTaskTask.perform(taskId);
     yield this.loadNotulen.perform();
+    const publishedResource = this.notulen.publishedResource;
+    const versionedResource = yield publishedResource.versionedNotulen;
+
+    const log = this.store.createRecord('publishing-log', {
+      action: 'sign',
+      user: this.currentSession.user,
+      date: new Date(),
+      publishedResource: publishedResource,
+      zitting: yield versionedResource.get('zitting'),
+    });
+    yield log.save();
   }
 
   @task

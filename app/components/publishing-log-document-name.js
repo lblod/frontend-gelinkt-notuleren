@@ -14,12 +14,12 @@ export default class PublishingLogDocumentNameComponent extends Component {
   *loadData() {
     const log = this.args.log;
     const logResource =
-      log.get('signedResource') ?? log.get('publishedResource');
-    yield logResource;
+      (yield log.signedResource) ?? (yield log.publishedResource);
     let versionedResource;
-    if (yield logResource.get('agenda')) {
-      versionedResource = yield logResource.get('agenda');
-      const type = versionedResource.get('agendaType');
+    const agenda = yield logResource.agenda;
+    if (agenda) {
+      versionedResource = agenda;
+      const type = versionedResource.agendaType;
       switch (type) {
         case 'gepland':
           this.documentName = this.intl.t('publication-actions.planned-agenda');
@@ -34,23 +34,33 @@ export default class PublishingLogDocumentNameComponent extends Component {
           break;
       }
       this.route = 'meetings.publish.agenda';
-    } else if (yield logResource.get('versionedNotulen')) {
-      this.documentName = this.intl.t('publication-actions.notulen');
-      versionedResource = logResource.get('versionedNotulen');
-      this.route = 'meetings.publish.notulen';
-    } else if (yield logResource.get('versionedBesluitenLijst')) {
-      this.documentName = this.intl.t('publication-actions.decision-list');
-      versionedResource = logResource.get('versionedBesluitenLijst');
-      this.route = 'meetings.publish.besluitenlijst';
-    } else if (yield logResource.get('versionedBehandeling')) {
-      this.documentName = this.intl.t('publication-actions.treatment');
-      versionedResource = yield logResource.get('versionedBehandeling');
-      const behandeling = yield versionedResource.get('behandeling');
-      if (behandeling) {
-        const onderwerp = yield behandeling.get('onderwerp');
-        this.documentName += ` [${onderwerp.get('titel')}]`;
+    } else {
+      const versionedNotulen = yield logResource.versionedNotulen;
+      if (versionedNotulen) {
+        this.documentName = this.intl.t('publication-actions.notulen');
+        versionedResource = versionedNotulen;
+        this.route = 'meetings.publish.notulen';
+      } else {
+        const versionedBesluitenLijst =
+          yield logResource.versionedBesluitenLijst;
+        if (versionedBesluitenLijst) {
+          this.documentName = this.intl.t('publication-actions.decision-list');
+          versionedResource = versionedBesluitenLijst;
+          this.route = 'meetings.publish.besluitenlijst';
+        } else {
+          const versionedBehandeling = logResource.versionedBehandeling;
+          if (versionedBehandeling) {
+            this.documentName = this.intl.t('publication-actions.treatment');
+            versionedResource = yield logResource.versionedBehandeling;
+            const behandeling = yield versionedResource.behandeling;
+            if (behandeling) {
+              const onderwerp = yield behandeling.onderwerp;
+              this.documentName += ` [${onderwerp.titel}]`;
+            }
+            this.route = 'meetings.publish.uittreksels';
+          }
+        }
       }
-      this.route = 'meetings.publish.uittreksels';
     }
     this.deleted = versionedResource.get('deleted');
   }

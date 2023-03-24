@@ -77,8 +77,6 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       'filter[deleted]': false,
       include: 'signed-resources,published-resource',
     });
-    console.log('reload besluitenlist');
-    console.log(behandelings.firstObject);
     this.besluitenlijst = behandelings.firstObject;
   }
 

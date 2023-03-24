@@ -9,8 +9,7 @@ export default class PublishingLogHashComponent extends Component {
   *loadData() {
     const log = this.args.log;
     const logResource =
-      log.get('signedResource') ?? log.get('publishedResource');
-    yield logResource;
-    this.hash = logResource.get('hashValue');
+      (yield log.signedResource) ?? (yield log.publishedResource);
+    this.hash = logResource.hashValue;
   }
 }
