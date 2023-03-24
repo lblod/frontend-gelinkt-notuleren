@@ -39,7 +39,7 @@ export default class SignedResource extends Component {
       }
     }
     const publishedResource = await versionedResource.publishedResource;
-    if (publishedResource.id) {
+    if (publishedResource) {
       await signature.save();
       return;
     }
