@@ -150,7 +150,6 @@ export default class SignaturesTimelineStep extends Component {
     let signedResources = await this.args.signing(signedId);
     this.signedResources = signedResources.sortBy('createdOn');
     const signedResource = await signedResources.lastObject;
-    console.log(signedResource);
     let versionedResource;
     const agenda = await signedResource.agenda;
     if (agenda) {
