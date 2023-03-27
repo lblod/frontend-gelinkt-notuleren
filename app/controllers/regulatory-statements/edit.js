@@ -64,7 +64,6 @@ import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
-import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
