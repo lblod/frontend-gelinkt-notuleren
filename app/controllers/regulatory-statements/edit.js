@@ -10,6 +10,8 @@ import {
   em,
   strikethrough,
   strong,
+  subscript,
+  superscript,
   underline,
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
@@ -22,10 +24,11 @@ import {
   text,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
+  tableKeymap,
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
+import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,
@@ -43,21 +46,27 @@ import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
 import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
-import { image } from '@lblod/ember-rdfa-editor/plugins/image';
+import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 
-import { citation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin/marks/citation';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
-import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
+import {
+  createInvisiblesPlugin,
+  hardBreak,
+  heading as headingInvisible,
+  paragraph as paragraphInvisible,
+  space,
+} from '@lblod/ember-rdfa-editor/plugins/invisibles';
 import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
-import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 
+import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
+import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -102,12 +111,15 @@ export default class RegulatoryStatementsRoute extends Controller {
         link: link(this.config.link),
       },
       marks: {
-        citation,
         inline_rdfa,
         em,
         strong,
         underline,
         strikethrough,
+        subscript,
+        superscript,
+        highlight,
+        color,
       },
     });
   }
@@ -120,6 +132,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           controller
         ),
         link: linkView(this.config.link)(controller),
+        image: imageView(controller),
       };
     };
   }
@@ -129,7 +142,12 @@ export default class RegulatoryStatementsRoute extends Controller {
       tablePlugin,
       tableKeymap,
       this.citationPlugin,
-      linkPasteHandler(this.schema.nodes.link),
+      createInvisiblesPlugin(
+        [space, hardBreak, paragraphInvisible, headingInvisible],
+        {
+          shouldShowInvisibles: false,
+        }
+      ),
     ];
   }
 
@@ -150,13 +168,13 @@ export default class RegulatoryStatementsRoute extends Controller {
         },
         formats: [
           {
-            label: 'Short Date',
+            label: this.intl.t('date-format.short-date'),
             key: 'short',
             dateFormat: 'dd/MM/yy',
             dateTimeFormat: 'dd/MM/yy HH:mm',
           },
           {
-            label: 'Long Date',
+            label: this.intl.t('date-format.long-date'),
             key: 'long',
             dateFormat: 'EEEE dd MMMM yyyy',
             dateTimeFormat: 'PPPPp',
