@@ -1,7 +1,7 @@
-<span {{did-insert (perform this.loadData)}}>
-  {{#if this.hash}}
+<span>
+  {{#if this.hash.value}}
     <AuPill>
-      {{this.hash}}
+      {{this.hash.value}}
     </AuPill>
   {{/if}}
 </span>

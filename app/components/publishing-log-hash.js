@@ -1,15 +1,11 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
+import { trackedFunction } from 'ember-resources/util/function';
 
 export default class PublishingLogHashComponent extends Component {
-  @tracked hash;
-
-  @task
-  *loadData() {
+  hash = trackedFunction(this, async () => {
     const log = this.args.log;
     const logResource =
-      (yield log.signedResource) ?? (yield log.publishedResource);
-    this.hash = logResource.hashValue;
-  }
+      (await log.signedResource) ?? (await log.publishedResource);
+    return logResource.hashValue;
+  });
 }

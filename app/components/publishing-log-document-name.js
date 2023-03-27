@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
+import { trackedFunction } from 'ember-resources/util/function';
 
 export default class PublishingLogDocumentNameComponent extends Component {
   @tracked documentName;
@@ -10,58 +10,63 @@ export default class PublishingLogDocumentNameComponent extends Component {
   @tracked behandeling;
   @service intl;
 
-  @task
-  *loadData() {
+  data = trackedFunction(this, async () => {
     const log = this.args.log;
+    await Promise.resolve();
     const logResource =
-      (yield log.signedResource) ?? (yield log.publishedResource);
+      (await log.signedResource) ?? (await log.publishedResource);
     let versionedResource;
-    const agenda = yield logResource.agenda;
+    const agenda = await logResource.agenda;
+    let route;
+    let documentName;
     if (agenda) {
       versionedResource = agenda;
       const type = versionedResource.agendaType;
       switch (type) {
         case 'gepland':
-          this.documentName = this.intl.t('publication-actions.planned-agenda');
+          documentName = this.intl.t('publication-actions.planned-agenda');
           break;
         case 'aanvullend':
-          this.documentName = this.intl.t(
-            'publication-actions.suplemental-agenda'
-          );
+          documentName = this.intl.t('publication-actions.suplemental-agenda');
           break;
         case 'spoedeisend':
-          this.documentName = this.intl.t('publication-actions.urgent-agenda');
+          documentName = this.intl.t('publication-actions.urgent-agenda');
           break;
       }
-      this.route = 'meetings.publish.agenda';
+      route = 'meetings.publish.agenda';
     } else {
-      const versionedNotulen = yield logResource.versionedNotulen;
+      const versionedNotulen = await logResource.versionedNotulen;
       if (versionedNotulen) {
-        this.documentName = this.intl.t('publication-actions.notulen');
+        documentName = this.intl.t('publication-actions.notulen');
         versionedResource = versionedNotulen;
-        this.route = 'meetings.publish.notulen';
+        route = 'meetings.publish.notulen';
       } else {
         const versionedBesluitenLijst =
-          yield logResource.versionedBesluitenLijst;
+          await logResource.versionedBesluitenLijst;
         if (versionedBesluitenLijst) {
-          this.documentName = this.intl.t('publication-actions.decision-list');
+          documentName = this.intl.t('publication-actions.decision-list');
           versionedResource = versionedBesluitenLijst;
-          this.route = 'meetings.publish.besluitenlijst';
+          route = 'meetings.publish.besluitenlijst';
         } else {
           const versionedBehandeling = logResource.versionedBehandeling;
           if (versionedBehandeling) {
-            this.documentName = this.intl.t('publication-actions.treatment');
-            versionedResource = yield logResource.versionedBehandeling;
-            const behandeling = yield versionedResource.behandeling;
+            documentName = this.intl.t('publication-actions.treatment');
+            versionedResource = await logResource.versionedBehandeling;
+            const behandeling = await versionedResource.behandeling;
             if (behandeling) {
-              const onderwerp = yield behandeling.onderwerp;
-              this.documentName += ` [${onderwerp.titel}]`;
+              const onderwerp = await behandeling.onderwerp;
+              documentName += ` [${onderwerp.titel}]`;
             }
-            this.route = 'meetings.publish.uittreksels';
+            route = 'meetings.publish.uittreksels';
           }
         }
       }
     }
-    this.deleted = versionedResource.get('deleted');
-  }
+    const deleted = versionedResource.get('deleted');
+    return {
+      documentName,
+      route,
+      deleted,
+    };
+  });
 }
