@@ -18,7 +18,7 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
     if (besluit) {
       const { node, start } = besluit;
       const endOfDecision = start + node.nodeSize - 2;
-      return { from: endOfDecision, to: endOfDecision };
+      return { from: endOfDecision - 2, to: endOfDecision };
     }
     return undefined;
   }
