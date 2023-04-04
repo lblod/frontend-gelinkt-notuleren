@@ -39,12 +39,23 @@
         >
           <:top>
             {{#if this.controller}}
-              <Toolbar as |Tb|>
+              <ResponsiveToolbar>
+                <:main as |Tb|>
                 <Tb.Group>
                   <Toolbar::History @controller={{this.controller}}/>
                 </Tb.Group>
                 <Tb.Group>
                   <Toolbar::Styling @controller={{this.controller}}/>
+                  <Plugins::TextStyle::Subscript @controller={{this.controller}}/>
+                  <Plugins::TextStyle::Superscript @controller={{this.controller}}/>
+                  <Plugins::TextStyle::Highlight
+                    @controller={{this.controller}}
+                    @defaultColor="#FFEA00"
+                  />
+                  <Plugins::TextStyle::Color
+                    @controller={{this.controller}}
+                    @defaultColor="#000000"
+                  />
                 </Tb.Group>
                 <Tb.Group>
                   <Toolbar::List @controller={{this.controller}}/>
@@ -52,6 +63,7 @@
                 </Tb.Group>
                 <Tb.Group>
                   <Plugins::Link::LinkMenu @controller={{this.controller}}/>
+                  <Plugins::Image::InsertMenu @controller={{this.controller}}/>
                 </Tb.Group>
                 <Tb.Group>
                   <Plugins::Table::TableMenu @controller={{this.controller}}/>
@@ -60,11 +72,14 @@
                   <Plugins::Heading::HeadingMenu @controller={{this.controller}}/>
                 </Tb.Group>
                 <Tb.Spacer/>
-                <Tb.Group>
-                  {{yield to="toolbar"}}
-                  <Plugins::RdfaBlockRender::RdfaBlocksToggle @controller={{this.controller}}/>
-                </Tb.Group>
-              </Toolbar>
+                </:main>
+                <:side as |Tb|>
+                  <Tb.Group>
+                    {{yield to="toolbar"}}
+                    <Plugins::RdfaBlockRender::RdfaBlocksToggle @controller={{this.controller}}/>
+                  </Tb.Group>
+                </:side>
+              </ResponsiveToolbar>
             {{/if}}
           </:top>
           <:default>

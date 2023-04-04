@@ -74,18 +74,19 @@
   >
     <:toolbar>
       <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}}/>
+      <Plugins::Formatting::FormattingToggle @controller={{this.controller}}/>
     </:toolbar>
     <:sidebar-collapsible>
-        <ArticleStructurePlugin::ArticleStructureCard 
+        <ArticleStructurePlugin::ArticleStructureCard
           @controller={{this.controller}}
           @options={{this.config.structures}}
         />
-        <CitationPlugin::CitationInsert 
-          @controller={{this.controller}} 
+        <CitationPlugin::CitationInsert
+          @controller={{this.controller}}
           @plugin={{this.citationPlugin}}
           @config={{this.config.citation}}
         />
-        <RdfaDatePlugin::Insert 
+        <RdfaDatePlugin::Insert
           @controller={{this.controller}}
           @options={{this.config.date}}
         />
@@ -96,17 +97,17 @@
         {{/if}}
     </:sidebar-collapsible>
     <:sidebar>
-      <ArticleStructurePlugin::StructureCard 
-        @controller={{this.controller}} 
+      <ArticleStructurePlugin::StructureCard
+        @controller={{this.controller}}
         @options={{this.config.structures}}
       />
       <BesluitPlugin::BesluitPluginCard @controller={{this.controller}}/>
-      <CitationPlugin::CitationCard 
-        @controller={{this.controller}} 
+      <CitationPlugin::CitationCard
+        @controller={{this.controller}}
         @plugin={{this.citationPlugin}}
       />
       <ImportSnippetPlugin::Card @controller={{this.controller}}/>
-      <RdfaDatePlugin::Card 
+      <RdfaDatePlugin::Card
         @controller={{this.controller}}
         @options={{this.config.date}}/>
       <VariablePlugin::TemplateVariableCard @controller={{this.controller}}/>

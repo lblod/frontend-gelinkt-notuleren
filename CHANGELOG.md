@@ -24,6 +24,33 @@
 
 
 
+
+## 3.3.0 (2023-03-27)
+
+#### :rocket: Enhancement
+* [#444](https://github.com/lblod/frontend-gelinkt-notuleren/pull/444) feat(editor): bump to 3.4 and activate all the new features ([@abeforgit](https://github.com/abeforgit))
+
+#### :bug: Bug Fix
+* [#439](https://github.com/lblod/frontend-gelinkt-notuleren/pull/439) Update internal regulatory statement to support new editor API ([@elpoelma](https://github.com/elpoelma))
+* [#427](https://github.com/lblod/frontend-gelinkt-notuleren/pull/427) GN-4088: Fix backlink of print ([@dkozickis](https://github.com/dkozickis))
+* [#425](https://github.com/lblod/frontend-gelinkt-notuleren/pull/425) Hotfix: trim whitespace out of templates before instantiating them ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#435](https://github.com/lblod/frontend-gelinkt-notuleren/pull/435) Bump minimist from 0.2.1 to 0.2.4 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#436](https://github.com/lblod/frontend-gelinkt-notuleren/pull/436) Bump webpack from 5.74.0 to 5.76.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#441](https://github.com/lblod/frontend-gelinkt-notuleren/pull/441) Use new ember-concurrency api ([@elpoelma](https://github.com/elpoelma))
+* [#432](https://github.com/lblod/frontend-gelinkt-notuleren/pull/432) Update ember-environment-banner to 0.2.0 ([@elpoelma](https://github.com/elpoelma))
+* [#426](https://github.com/lblod/frontend-gelinkt-notuleren/pull/426) Internal/prevent hardcoded strings ([@lagartoverde](https://github.com/lagartoverde))
+* [#417](https://github.com/lblod/frontend-gelinkt-notuleren/pull/417) Use kebab-case in translations and remove unused translations ([@elpoelma](https://github.com/elpoelma))
+* [#424](https://github.com/lblod/frontend-gelinkt-notuleren/pull/424) Bump cacheable-request and release-it ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 4
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Deniss Kozickis ([@dkozickis](https://github.com/dkozickis))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 3.2.3 (2023-02-15)
 
 #### :bug: Bug Fix
