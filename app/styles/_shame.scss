@@ -695,3 +695,18 @@ div[typeof="besluit:Zitting"] {
   }
 }
 
+div[typeof="besluitpublicatie:Documentonderdeel"] {
+  &:hover {
+    border: 0.1rem solid var(--au-gray-400);
+  }
+  span.mark-highlight-manual {
+    background-color: var(--au-gray-300);
+    color: var(--au-gray-900);
+  }
+  [typeof="ext:Mapping"] [property="dct:type"] + [property="ext:content"]:after, [typeof="ext:Mapping"] [property="ext:codelist"] + [property="ext:content"]:after {
+    background-image: none;
+    height: 0;
+    width: 0;
+    margin: 0;
+  }
+}
