@@ -142,7 +142,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signedResource,
-      zitting: await versionedResource.get('zitting'),
+      zitting: await versionedResource.zitting,
     });
     await log.save();
   });
@@ -162,15 +162,15 @@ export default class MeetingsPublishNotulenController extends Controller {
     );
     await this.muTask.waitForMuTaskTask.perform(taskId);
     await this.loadNotulen.perform();
-    const publishedResource = this.notulen.publishedResource;
-    const versionedResource = await publishedResource.versionedNotulen;
+    const publishedResource = this.publishedResource;
+    const versionedResource = this.notulen;
 
     const log = this.store.createRecord('publishing-log', {
       action: 'sign',
       user: this.currentSession.user,
       date: new Date(),
       publishedResource: publishedResource,
-      zitting: await versionedResource.get('zitting'),
+      zitting: await versionedResource.zitting,
     });
     await log.save();
   });
