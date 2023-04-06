@@ -47,12 +47,9 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         const errors = json?.errors?.join('\n');
         throw errors;
       }
-<<<<<<< HEAD
-      yield this.loadExtract.perform();
-      return this.extract.document.signedResources;
-=======
+
       await this.loadExtract.perform();
->>>>>>> master
+      return this.extract.document.signedResources;
     } catch (e) {
       this.extract = null;
       this.error = e;
