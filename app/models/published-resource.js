@@ -7,7 +7,7 @@ export default class PublishedResourceModel extends Model {
   @attr submissionStatus;
   @belongsTo('blockchain-status') status;
   @belongsTo('gebruiker') gebruiker;
-  @belongsTo('versioned-agenda') versionedAgenda;
+  @belongsTo('agenda') agenda;
   @belongsTo('versioned-besluiten-lijst') versionedBesluitenLijst;
   @belongsTo('versioned-notulen') versionedNotulen;
   @belongsTo('versioned-behandeling') versionedBehandeling;

@@ -141,14 +141,16 @@ export default class MeetingsPublishAgendaController extends Controller {
       method: 'POST',
     });
     await this.reloadAgendas.perform();
+    let publishedResource;
     if (kind === 'ontwerp') {
-      return this.ontwerpAgenda.publishedResource;
+      publishedResource = await this.ontwerpAgenda.publishedResource;
     }
     if (kind === 'aanvullende') {
-      return this.aanvullendeAgenda.publishedResource;
+      publishedResource = await this.aanvullendeAgenda.publishedResource;
     }
     if (kind === 'spoedeisende') {
-      return this.spoedeisendeAgenda.publishedResource;
+      publishedResource = await this.spoedeisendeAgenda.publishedResource;
     }
+    return publishedResource;
   });
 }

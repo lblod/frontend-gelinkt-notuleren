@@ -38,6 +38,14 @@ export default class SignedResource extends Component {
         }
       }
     }
+    const log = this.store.createRecord('publishing-log', {
+      action: 'delete-signature',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signature,
+      zitting: await versionedResource.zitting,
+    });
+    await log.save();
     const publishedResource = await versionedResource.publishedResource;
     if (publishedResource) {
       await signature.save();
@@ -52,13 +60,5 @@ export default class SignedResource extends Component {
     }
     await versionedResource.save();
     await signature.save();
-    const log = this.store.createRecord('publishing-log', {
-      action: 'delete-signature',
-      user: this.currentSession.user,
-      date: new Date(),
-      signedResource: signature,
-      zitting: await versionedResource.zitting,
-    });
-    await log.save();
   }
 }
