@@ -31,11 +31,10 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     return this._createPublishedResourceTask.unlinked();
   }
 
-  @task
-  *_createSignedResourceTask(behandeling) {
+  _createSignedResourceTask = task(async (behandeling) => {
     try {
       this.error = null;
-      const result = yield fetch(
+      const result = await fetch(
         `/signing/behandeling/sign/${this.meeting.get('id')}/${behandeling.get(
           'id'
         )}`,
@@ -44,23 +43,26 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         }
       );
       if (!result.ok) {
-        const json = yield result.json();
+        const json = await result.json();
         const errors = json?.errors?.join('\n');
         throw errors;
       }
+<<<<<<< HEAD
       yield this.loadExtract.perform();
       return this.extract.document.signedResources;
+=======
+      await this.loadExtract.perform();
+>>>>>>> master
     } catch (e) {
       this.extract = null;
       this.error = e;
     }
-  }
+  });
 
-  @task
-  *_createPublishedResourceTask(behandeling) {
+  _createPublishedResourceTask = task(async (behandeling) => {
     try {
       this.error = null;
-      const result = yield fetch(
+      const result = await fetch(
         `/signing/behandeling/publish/${this.meeting.get(
           'id'
         )}/${behandeling.get('id')}`,
@@ -69,16 +71,16 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         }
       );
       if (!result.ok) {
-        const json = yield result.json();
+        const json = await result.json();
         const errors = json?.errors?.join('\n');
         throw errors;
       }
-      yield this.loadExtract.perform();
+      await this.loadExtract.perform();
     } catch (e) {
       this.extract = null;
       this.error = e;
     }
-  }
+  });
 
   @action
   print(extract) {
@@ -96,15 +98,14 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     };
   }
 
-  @task
-  *loadExtract() {
+  loadExtract = task(async () => {
     try {
       this.extract = null;
       this.error = null;
       const treatment = this.model;
-      this.extract = yield this.publish.fetchExtract(treatment);
+      this.extract = await this.publish.fetchExtract(treatment);
     } catch (e) {
       this.error = e;
     }
-  }
+  });
 }

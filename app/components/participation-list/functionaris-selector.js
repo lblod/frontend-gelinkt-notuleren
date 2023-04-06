@@ -20,15 +20,14 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
   @service store;
   @service currentSession;
 
-  @task
-  *loadData() {
+  loadData = task(async () => {
     const group = this.currentSession.group;
-    const adminUnitClassification = yield group.classificatie;
+    const adminUnitClassification = await group.classificatie;
     let relevantBestuursOrgaanClassifications = `${ALGEMEEN_DIRECTEUR_CLASSIFICATION_ID},${ADJUNCT_ALGEMEEN_DIRECTEUR_CLASSIFICATION_ID}`;
     if (adminUnitClassification.id === PROVINCE_CLASSIFICATION_ID) {
       relevantBestuursOrgaanClassifications = GRIFFIER_CLASSIFICATION_ID;
     }
-    const bestuursorganen = yield this.store.query('bestuursorgaan', {
+    const bestuursorganen = await this.store.query('bestuursorgaan', {
       filter: {
         'is-tijdsspecialisatie-van': {
           bestuurseenheid: { ':id:': group.id },
@@ -46,7 +45,7 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
         .join(','),
       'filter[:lte:start]': startOfMeeting.toISOString(),
     };
-    const candidateOptions = yield this.store.query(
+    const candidateOptions = await this.store.query(
       'functionaris',
       queryParams
     );
@@ -54,5 +53,5 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
       (functionaris) =>
         functionaris.einde && functionaris.einde < startOfMeeting
     );
-  }
+  });
 }

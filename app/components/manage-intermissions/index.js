@@ -29,10 +29,9 @@ export default class manageIntermissionsComponent extends Component {
     this.showModal = true;
   }
 
-  @task
-  *fetchIntermissions() {
-    this.intermissions = yield this.args.zitting.get('intermissions');
-  }
+  fetchIntermissions = task(async () => {
+    this.intermissions = await this.args.zitting.get('intermissions');
+  });
 
   @action
   closeEdit() {

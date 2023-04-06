@@ -15,28 +15,26 @@ export default class RegulatoryAttachmentsShowController extends Controller {
   @service documentService;
   @tracked revisions;
 
-  @task
-  *fetchRevisions() {
+  fetchRevisions = task(async () => {
     const revisionsToSkip = [this.model.currentVersion.id];
-    this.revisions = yield this.documentService.fetchRevisions.perform(
+    this.revisions = await this.documentService.fetchRevisions.perform(
       this.model.documentContainer.id,
       revisionsToSkip,
       5
     );
-  }
+  });
 
   @action
   download() {
     generateExportFromEditorDocument(this.model.editorDocument);
   }
 
-  @task
-  *restoreTask() {
+  restoreTask = task(async () => {
     const currentVersion = this.model.currentVersion;
     const toRestore = this.model.editorDocument;
     const documentContainer = this.model.documentContainer;
     let content = replaceUris(toRestore.content);
-    yield this.documentService.createEditorDocument.perform(
+    await this.documentService.createEditorDocument.perform(
       toRestore.title,
       content,
       documentContainer,
@@ -46,7 +44,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
       'regulatory-statements.edit',
       documentContainer.id
     );
-  }
+  });
 
   get readOnly() {
     return !this.currentSession.canWrite && this.currentSession.canRead;

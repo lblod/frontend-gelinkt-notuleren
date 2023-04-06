@@ -4,6 +4,7 @@ import { restartableTask } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { action } from '@ember/object';
+import { task } from 'ember-concurrency';
 
 /**
  * @typedef {Object} Args
@@ -54,20 +55,19 @@ export default class SignaturesTimelineStep extends Component {
     return this.activeSignatures.length;
   }
 
-  @restartableTask
-  *initTask() {
+  initTask = restartableTask(async () => {
     this.bestuurseenheid = this.currentSession.group;
     const currentUser = this.currentSession.user;
     let firstSignatureUser = null;
     if (this.args.signedResources) {
-      const signedResources = yield this.args.signedResources;
+      const signedResources = await this.args.signedResources;
       if (signedResources.length > 0) {
         this.signedResources = signedResources.sortBy('createdOn');
-        firstSignatureUser = yield signedResources.firstObject.gebruiker;
+        firstSignatureUser = await signedResources.firstObject.gebruiker;
       }
     }
     this.isSignedByCurrentUser = currentUser === firstSignatureUser;
-  }
+  });
 
   get isAgenda() {
     return (
@@ -142,8 +142,7 @@ export default class SignaturesTimelineStep extends Component {
     return 'pencil';
   }
 
-  @action
-  async signDocument(signedId) {
+  signDocument = task(async (signedId) => {
     this.signingOrPublishing = true;
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
@@ -181,10 +180,9 @@ export default class SignaturesTimelineStep extends Component {
     });
     await log.save();
     this.signingOrPublishing = false;
-  }
+  });
 
-  @action
-  async publishDocument(signedId) {
+  publishDocument = task(async (signedId) => {
     this.signingOrPublishing = true;
     this.showPublishingModal = false;
     const publishedResource = await this.args.publish(signedId);
@@ -219,7 +217,7 @@ export default class SignaturesTimelineStep extends Component {
     });
     await log.save();
     this.signingOrPublishing = false;
-  }
+  });
 
   @action
   publish() {

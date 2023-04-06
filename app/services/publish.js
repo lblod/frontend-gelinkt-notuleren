@@ -52,15 +52,16 @@ export default class PublishService extends Service {
    * @param {number} pollingDelayMs
    * @param {number} maxIterations
    */
-  @task
-  *fetchJobTask(jobUrl, pollingDelayMs = 1000, maxIterations = 600) {
-    return yield this.createJobTask.perform(
-      jobUrl,
-      {},
-      pollingDelayMs,
-      maxIterations
-    );
-  }
+  fetchJobTask = task(
+    async (jobUrl, pollingDelayMs = 1000, maxIterations = 600) => {
+      return await this.createJobTask.perform(
+        jobUrl,
+        {},
+        pollingDelayMs,
+        maxIterations
+      );
+    }
+  );
 
   /**
    * @param {string} url
@@ -69,42 +70,38 @@ export default class PublishService extends Service {
    * @param {number} pollingDelayMs
    * @param {number} maxIterations
    */
-  @task
-  *createJobTask(
-    url,
-    options = {},
-    pollingDelayMs = 1000,
-    maxIterations = 600
-  ) {
-    const job = yield fetch(url, options);
-    const jobData = yield job.json();
-    const jobId = jobData.data.attributes.jobId;
+  createJobTask = task(
+    async (url, options = {}, pollingDelayMs = 1000, maxIterations = 600) => {
+      const job = await fetch(url, options);
+      const jobData = await job.json();
+      const jobId = jobData.data.attributes.jobId;
 
-    let resp;
-    do {
-      yield timeout(pollingDelayMs);
-      resp = yield fetch(`/prepublish/job-result/${jobId}`);
-      maxIterations--;
-    } while (resp.status === 404 && maxIterations > 0);
+      let resp;
+      do {
+        await timeout(pollingDelayMs);
+        resp = await fetch(`/prepublish/job-result/${jobId}`);
+        maxIterations--;
+      } while (resp.status === 404 && maxIterations > 0);
 
-    if (resp.status !== 200) {
-      let errors;
-      try {
-        const json = yield resp.json();
-        if (json?.errors) {
-          errors = json.errors[0]?.title || JSON.stringify(json.errors);
+      if (resp.status !== 200) {
+        let errors;
+        try {
+          const json = await resp.json();
+          if (json?.errors) {
+            errors = json.errors[0]?.title || JSON.stringify(json.errors);
+          }
+        } catch (e) {
+          // throwing body text
+          errors = await resp.text();
+          throw new Error(errors);
         }
-      } catch (e) {
-        // throwing body text
-        errors = yield resp.text();
+        // throwing stringified json body
         throw new Error(errors);
+      } else {
+        return await resp.json();
       }
-      // throwing stringified json body
-      throw new Error(errors);
-    } else {
-      return yield resp.json();
     }
-  }
+  );
 
   /**
    * Combine saved extracts with newly created ones and expose them as one map keyed by the
@@ -113,9 +110,8 @@ export default class PublishService extends Service {
    * @param meetingId
    * @return {Generator<*, void, *>}
    */
-  @task
-  *_loadExtractsTask(meetingId) {
-    const [newExtracts, meeting, treatments, versionedTreatments] = yield all([
+  _loadExtractsTask = task(async (meetingId) => {
+    const [newExtracts, meeting, treatments, versionedTreatments] = await all([
       this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`),
       this.store.findRecord('zitting', meetingId),
       this.store.query('behandeling-van-agendapunt', {
@@ -175,7 +171,7 @@ export default class PublishService extends Service {
       }
     }
     this.treatmentExtractsMap = extractMap;
-  }
+  });
 
   async fetchTreatmentPreviews(meetingId) {
     return this.fetchJobTask.perform(`/prepublish/behandelingen/${meetingId}`);

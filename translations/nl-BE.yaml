@@ -543,6 +543,7 @@ regulatory-statements-plugin:
   last-modification: Laatst aangepast
   loading: Aan het laden
   no-statement-selected: Geen reglement geselecteerd
+  no-statement-found: Geen reglementen gevonden
   edit-statement: Bewerk
   detach-statement: Loskoppelen
   load-more: Meer laden

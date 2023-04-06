@@ -13,16 +13,15 @@ export default class AgendapointsShowController extends Controller {
     generateExportFromEditorDocument(this.model.editorDocument);
   }
 
-  @task
-  *copyAgendapunt() {
-    const response = yield fetch(
+  copyAgendapunt = task(async () => {
+    const response = await fetch(
       `/agendapoint-service/${this.model.documentContainer.id}/copy`,
       { method: 'POST' }
     );
-    const json = yield response.json();
+    const json = await response.json();
     const agendapuntId = json.uuid;
-    yield this.router.transitionTo('agendapoints.edit', agendapuntId);
-  }
+    await this.router.transitionTo('agendapoints.edit', agendapuntId);
+  });
 
   get readOnly() {
     return !this.currentSession.canWrite && this.currentSession.canRead;

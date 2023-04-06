@@ -60,16 +60,15 @@ export default class MeetingsPublishNotulenController extends Controller {
     return 'concept';
   }
 
-  @task
-  *loadNotulen() {
-    const versionedNotulens = yield this.store.query('versioned-notulen', {
+  loadNotulen = task(async () => {
+    const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
       'filter[deleted]': false,
       include: 'signed-resources.gebruiker,published-resource.gebruiker',
     });
     if (versionedNotulens.length) {
       let notulenSet = false;
-      yield Promise.all(
+      await Promise.all(
         versionedNotulens.map(async (notulen) => {
           const publishedResource = await notulen.publishedResource;
           const signedResources = await notulen.signedResources;
@@ -90,8 +89,8 @@ export default class MeetingsPublishNotulenController extends Controller {
     } else {
       try {
         const { content, errors } =
-          yield this.createPrePublishedResource.perform();
-        const rslt = yield this.store.createRecord('versioned-notulen', {
+          await this.createPrePublishedResource.perform();
+        const rslt = await this.store.createRecord('versioned-notulen', {
           zitting: this.model,
           content: content,
         });
@@ -105,57 +104,53 @@ export default class MeetingsPublishNotulenController extends Controller {
       }
     }
     if (this.status !== 'published') {
-      const treatments = yield this.fetchTreatments.perform();
+      const treatments = await this.fetchTreatments.perform();
       this.treatments = treatments;
     }
-  }
+  });
 
-  @task
-  *createPrePublishedResource() {
+  createPrePublishedResource = task(async () => {
     const id = this.model.id;
-    const json = yield this.publish.fetchJobTask.perform(
+    const json = await this.publish.fetchJobTask.perform(
       `/prepublish/notulen/${id}`
     );
     return json.data.attributes;
-  }
+  });
 
-  @task
-  *fetchTreatments() {
+  fetchTreatments = task(async () => {
     const id = this.model.id;
-    const response = yield this.publish.fetchTreatmentPreviews(id);
+    const response = await this.publish.fetchTreatmentPreviews(id);
 
     return response.map((res) => res.data.attributes);
-  }
+  });
 
-  @task
-  *createSignedResource() {
+  createSignedResource = task(async () => {
     this.showSigningModal = false;
     const id = this.model.id;
-    const taskId = yield this.muTask.fetchTaskifiedEndpoint(
+    const taskId = await this.muTask.fetchTaskifiedEndpoint(
       `/signing/notulen/sign/${id}`,
       { method: 'POST' }
     );
-    yield this.muTask.waitForMuTaskTask.perform(taskId);
-    yield this.loadNotulen.perform();
+    await this.muTask.waitForMuTaskTask.perform(taskId);
+    await this.loadNotulen.perform();
     const signedResources = this.notulen.signedResources;
     const signedResource = signedResources.lastObject;
-    const versionedResource = yield signedResource.versionedNotulen;
+    const versionedResource = await signedResource.versionedNotulen;
 
     const log = this.store.createRecord('publishing-log', {
       action: 'sign',
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signedResource,
-      zitting: yield versionedResource.get('zitting'),
+      zitting: await versionedResource.get('zitting'),
     });
-    yield log.save();
-  }
+    await log.save();
+  });
 
-  @task
-  *createPublishedResource() {
+  createPublishedResource = task(async () => {
     this.showPublishingModal = false;
     const id = this.model.id;
-    const taskId = yield this.muTask.fetchTaskifiedEndpoint(
+    const taskId = await this.muTask.fetchTaskifiedEndpoint(
       `/signing/notulen/publish/${id}`,
       {
         headers: { 'Content-Type': 'application/vnd.api+json' },
@@ -165,26 +160,25 @@ export default class MeetingsPublishNotulenController extends Controller {
         method: 'POST',
       }
     );
-    yield this.muTask.waitForMuTaskTask.perform(taskId);
-    yield this.loadNotulen.perform();
+    await this.muTask.waitForMuTaskTask.perform(taskId);
+    await this.loadNotulen.perform();
     const publishedResource = this.notulen.publishedResource;
-    const versionedResource = yield publishedResource.versionedNotulen;
+    const versionedResource = await publishedResource.versionedNotulen;
 
     const log = this.store.createRecord('publishing-log', {
       action: 'sign',
       user: this.currentSession.user,
       date: new Date(),
       publishedResource: publishedResource,
-      zitting: yield versionedResource.get('zitting'),
+      zitting: await versionedResource.get('zitting'),
     });
-    yield log.save();
-  }
+    await log.save();
+  });
 
-  @task
-  *generateNotulenPreview() {
+  generateNotulenPreview = task(async () => {
     const meetingId = this.model.id;
     try {
-      const json = yield this.publish.createJobTask.perform(
+      const json = await this.publish.createJobTask.perform(
         `/meeting-notes-previews`,
         {
           headers: { 'Content-Type': 'application/vnd.api+json' },
@@ -216,7 +210,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       console.error(e);
       this.errors = [JSON.stringify(e)];
     }
-  }
+  });
 
   get zittingWrapper() {
     if (this.notulen?.content) {
@@ -240,11 +234,10 @@ export default class MeetingsPublishNotulenController extends Controller {
     this.showSigningModal = true;
   }
 
-  @task
-  *createPublishPreview() {
+  createPublishPreview = task(async () => {
     this.showPublishingModal = true;
-    yield this.generateNotulenPreview.perform();
-  }
+    await this.generateNotulenPreview.perform();
+  });
 
   updateNotulenPreview() {
     const div = document.createElement('div');

@@ -23,10 +23,9 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     this.initializeBesluitenLijst.perform();
   }
 
-  @task
-  *initializeBesluitenLijst() {
+  initializeBesluitenLijst = task(async () => {
     try {
-      const behandelings = yield this.store.query('versioned-besluiten-lijst', {
+      const behandelings = await this.store.query('versioned-besluiten-lijst', {
         'filter[zitting][:id:]': this.model.id,
         'filter[deleted]': false,
         include: 'signed-resources,published-resource',
@@ -35,8 +34,8 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
         this.besluitenlijst = behandelings.firstObject;
       } else {
         const { content, errors } =
-          yield this.createPrePublishedResource.perform();
-        const rslt = yield this.store.createRecord(
+          await this.createPrePublishedResource.perform();
+        const rslt = await this.store.createRecord(
           'versioned-besluiten-lijst',
           {
             zitting: this.model,
@@ -49,7 +48,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     } catch (e) {
       this.error = e;
     }
-  }
+  });
 
   async pollForPrepublisherResults(meetingId) {
     let uuidResp = await fetch(`/prepublish/besluitenlijst/${meetingId}`);
@@ -70,38 +69,35 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     }
   }
 
-  @task
-  *reloadBesluitenLijst() {
-    const behandelings = yield this.store.query('versioned-besluiten-lijst', {
+  reloadBesluitenLijst = task(async () => {
+    const behandelings = await this.store.query('versioned-besluiten-lijst', {
       'filter[zitting][:id:]': this.model.id,
       'filter[deleted]': false,
       include: 'signed-resources,published-resource',
     });
     this.besluitenlijst = behandelings.firstObject;
-  }
+  });
 
-  @task
-  *createPrePublishedResource() {
+  createPrePublishedResource = task(async () => {
     const id = this.model.id;
-    const json = yield this.pollForPrepublisherResults(id);
+    const json = await this.pollForPrepublisherResults(id);
     return json.data.attributes;
-  }
+  });
 
-  @task
-  *createSignedResource() {
+  createSignedResource = task(async () => {
     const id = this.model.id;
-    const result = yield fetch(`/signing/besluitenlijst/sign/${id}`, {
+    const result = await fetch(`/signing/besluitenlijst/sign/${id}`, {
       method: 'POST',
     });
-    const json = yield result.json();
+    const json = await result.json();
     const taskId = json.data.id;
     let maxIterations = 600;
     let status;
     let iteration = 0;
     do {
-      yield timeout(1000);
-      const result = yield fetch(`/publication-tasks/${taskId}`);
-      const json = yield result.json();
+      await timeout(1000);
+      const result = await fetch(`/publication-tasks/${taskId}`);
+      const json = await result.json();
       status = json.data.status;
       iteration++;
     } while (
@@ -109,25 +105,24 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
         'http://lblod.data.gift/besluit-publicatie-melding-statuses/success' ||
       iteration > maxIterations
     );
-    yield this.reloadBesluitenLijst.perform();
+    await this.reloadBesluitenLijst.perform();
     return this.besluitenlijst.signedResources;
-  }
+  });
 
-  @task
-  *createPublishedResource() {
+  createPublishedResource = task(async () => {
     const id = this.model.id;
-    const result = yield fetch(`/signing/besluitenlijst/publish/${id}`, {
+    const result = await fetch(`/signing/besluitenlijst/publish/${id}`, {
       method: 'POST',
     });
-    const json = yield result.json();
+    const json = await result.json();
     const taskId = json.data.id;
     let maxIterations = 600;
     let status;
     let iteration = 0;
     do {
-      yield timeout(1000);
-      const result = yield fetch(`/publication-tasks/${taskId}`);
-      const json = yield result.json();
+      await timeout(1000);
+      const result = await fetch(`/publication-tasks/${taskId}`);
+      const json = await result.json();
       status = json.data.status;
       iteration++;
     } while (
@@ -135,7 +130,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
         'http://lblod.data.gift/besluit-publicatie-melding-statuses/success' ||
       iteration > maxIterations
     );
-    yield this.reloadBesluitenLijst.perform();
+    await this.reloadBesluitenLijst.perform();
     return this.besluitenlijst.publishedResource;
-  }
+  });
 }

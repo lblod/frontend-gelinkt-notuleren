@@ -16,41 +16,37 @@ export default class DocumentAttachmentsComponent extends Component {
   @tracked decisions;
   regulatoryTypeId = REGULATORY_TYPE_ID;
 
-  @task
-  *updateAttachmentIsRegulatory(attachment, isRegulatory) {
+  updateAttachmentIsRegulatory = task(async (attachment, isRegulatory) => {
     if (!isRegulatory) {
       attachment.type = null;
     } else {
-      const concept = yield this.store.findRecord(
+      const concept = await this.store.findRecord(
         'concept',
         REGULATORY_TYPE_ID
       );
       attachment.type = concept;
     }
-    yield attachment.save();
-  }
+    await attachment.save();
+  });
 
-  @task
-  *onSelectDecision(attachment, event) {
+  onSelectDecision = task(async (attachment, event) => {
     const selectedId = event.target.value;
     attachment.decision = selectedId;
-    yield attachment.save();
-  }
+    await attachment.save();
+  });
 
-  @task
-  *fetchAttachments() {
-    this.attachments = yield this.store.query('attachment', {
+  fetchAttachments = task(async () => {
+    this.attachments = await this.store.query('attachment', {
       page: { size: 100 },
       'filter[document-container][:id:]': this.args.documentContainer.id,
       include: 'type',
     });
-  }
+  });
 
-  @task
-  *uploadedAttachement(fileId) {
-    const file = yield this.store.findRecord('file', fileId);
-    const documentContainer = yield this.args.documentContainer;
-    const newAttachment = yield this.store.createRecord('attachment');
+  uploadedAttachement = task(async (fileId) => {
+    const file = await this.store.findRecord('file', fileId);
+    const documentContainer = await this.args.documentContainer;
+    const newAttachment = await this.store.createRecord('attachment');
 
     newAttachment.file = file;
     newAttachment.documentContainer = documentContainer;
@@ -58,16 +54,15 @@ export default class DocumentAttachmentsComponent extends Component {
       newAttachment.decision = this.args.decisions[0].uri;
     }
 
-    yield newAttachment.save();
+    await newAttachment.save();
 
     //there has to be a better way to do this
-    yield this.fetchAttachments.perform();
-  }
+    await this.fetchAttachments.perform();
+  });
 
-  @task
-  *deleteAttachment(attachment) {
-    const file = yield attachment.file;
+  deleteAttachment = task(async (attachment) => {
+    const file = await attachment.file;
     file.destroyRecord();
-    yield attachment.destroyRecord();
-  }
+    await attachment.destroyRecord();
+  });
 }

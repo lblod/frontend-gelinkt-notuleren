@@ -60,32 +60,29 @@ export default class MeetingsPublishAgendaController extends Controller {
     return this.model;
   }
 
-  @task
-  *initializeAgendas() {
-    this.ontwerpAgenda = yield this.initializeAgenda.perform('gepland');
-    this.aanvullendeAgenda = yield this.initializeAgenda.perform('aanvullend');
-    this.spoedeisendeAgenda = yield this.initializeAgenda.perform(
+  initializeAgendas = task(async () => {
+    this.ontwerpAgenda = await this.initializeAgenda.perform('gepland');
+    this.aanvullendeAgenda = await this.initializeAgenda.perform('aanvullend');
+    this.spoedeisendeAgenda = await this.initializeAgenda.perform(
       'spoedeisend'
     );
-  }
+  });
 
-  @task
-  *reloadAgendas() {
-    this.ontwerpAgenda = yield this.initializeAgenda.perform('gepland');
-    this.aanvullendeAgenda = yield this.initializeAgenda.perform('aanvullend');
-    this.spoedeisendeAgenda = yield this.initializeAgenda.perform(
+  reloadAgendas = task(async () => {
+    this.ontwerpAgenda = await this.initializeAgenda.perform('gepland');
+    this.aanvullendeAgenda = await this.initializeAgenda.perform('aanvullend');
+    this.spoedeisendeAgenda = await this.initializeAgenda.perform(
       'spoedeisend'
     );
-  }
+  });
 
   /**
    * @this {MeetingsPublishAgendaController}
    * @param {string} type
    * @return {Generator<*, void, *>}
    */
-  @task
-  *initializeAgenda(type) {
-    const agendas = yield this.store.query('agenda', {
+  initializeAgenda = task(async (type) => {
+    const agendas = await this.store.query('agenda', {
       'filter[zitting][:id:]': this.meeting.id,
       'filter[agenda-type]': type,
       'filter[deleted]': false,
@@ -94,10 +91,10 @@ export default class MeetingsPublishAgendaController extends Controller {
     if (agendas.length) {
       return agendas.firstObject;
     } else {
-      const prePublish = yield this.createPrePublishedResource.perform(
+      const prePublish = await this.createPrePublishedResource.perform(
         KIND_LABEL_TO_UUID_MAP.get(type)
       );
-      const rslt = yield this.store.createRecord('agenda', {
+      const rslt = await this.store.createRecord('agenda', {
         agendaType: type,
         zitting: this.model,
         agendapunten: this.model.behandeldeAgendapunten,
@@ -106,25 +103,23 @@ export default class MeetingsPublishAgendaController extends Controller {
       });
       return rslt;
     }
-  }
+  });
 
-  @task
-  *createPrePublishedResource(kindUuid) {
+  createPrePublishedResource = task(async (kindUuid) => {
     const id = this.meeting.id;
-    const response = yield fetch(`/prepublish/agenda/${kindUuid}/${id}`);
-    const json = yield response.json();
+    const response = await fetch(`/prepublish/agenda/${kindUuid}/${id}`);
+    const json = await response.json();
     return json.data.attributes.content;
-  }
+  });
 
   /**
    * @param {string} agendaType
    * @this {MeetingsPublishAgendaController}
    */
-  @task
-  *createSignedResource(kindUuid, kind) {
+  createSignedResource = task(async (kindUuid, kind) => {
     const id = this.model.id;
-    yield fetch(`/signing/agenda/sign/${kindUuid}/${id}`, { method: 'POST' });
-    yield this.reloadAgendas.perform();
+    await fetch(`/signing/agenda/sign/${kindUuid}/${id}`, { method: 'POST' });
+    await this.reloadAgendas.perform();
     if (kind === 'ontwerp') {
       return this.ontwerpAgenda.signedResources;
     }
@@ -134,19 +129,18 @@ export default class MeetingsPublishAgendaController extends Controller {
     if (kind === 'spoedeisende') {
       return this.spoedeisendeAgenda.signedResources;
     }
-  }
+  });
 
   /**
    * @param {string} agendaType
    * @this {MeetingsPublishAgendaController}
    */
-  @task
-  *createPublishedResource(kindUuid, kind) {
+  createPublishedResource = task(async (kindUuid, kind) => {
     const id = this.model.id;
-    yield fetch(`/signing/agenda/publish/${kindUuid}/${id}`, {
+    await fetch(`/signing/agenda/publish/${kindUuid}/${id}`, {
       method: 'POST',
     });
-    yield this.reloadAgendas.perform();
+    await this.reloadAgendas.perform();
     if (kind === 'ontwerp') {
       return this.ontwerpAgenda.publishedResource;
     }
@@ -156,5 +150,5 @@ export default class MeetingsPublishAgendaController extends Controller {
     if (kind === 'spoedeisende') {
       return this.spoedeisendeAgenda.publishedResource;
     }
-  }
+  });
 }

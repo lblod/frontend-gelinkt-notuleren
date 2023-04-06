@@ -66,25 +66,26 @@
     @plugins={{this.plugins}}
   >
     <:toolbar>
+      <Plugins::Formatting::FormattingToggle @controller={{this.controller}}/>
       <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}}/>
     </:toolbar>
     <:sidebar-collapsible>
-      <ArticleStructurePlugin::ArticleStructureCard 
+      <ArticleStructurePlugin::ArticleStructureCard
         @controller={{this.controller}}
         @options={{this.config.structures}}
       />
-      <RdfaDatePlugin::Insert 
+      <RdfaDatePlugin::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
       />
       <StandardTemplatePlugin::Card @controller={{this.controller}}/>
     </:sidebar-collapsible>
     <:sidebar>
-      <ArticleStructurePlugin::StructureCard 
-        @controller={{this.controller}} 
+      <ArticleStructurePlugin::StructureCard
+        @controller={{this.controller}}
         @options={{this.config.structures}}
       />
-      <RdfaDatePlugin::Card 
+      <RdfaDatePlugin::Card
         @controller={{this.controller}}
         @options={{this.config.date}}/>
       <VariablePlugin::TemplateVariableCard @controller={{this.controller}}/>

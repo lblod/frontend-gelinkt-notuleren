@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "3.2.3",
+  "version": "3.3.0",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -38,8 +38,8 @@
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-environment-banner": "^0.2.0",
     "@lblod/ember-mock-login": "0.6.0",
-    "@lblod/ember-rdfa-editor": "^3.3.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "^3.0.0",
+    "@lblod/ember-rdfa-editor": "^3.4.1",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "^4.0.1",
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
@@ -108,7 +108,7 @@
     "tracked-built-ins": "^2.0.1",
     "tracked-toolbox": "^1.2.3",
     "uuid": "^9.0.0",
-    "webpack": "^5.70.0"
+    "webpack": "^5.76.0"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
