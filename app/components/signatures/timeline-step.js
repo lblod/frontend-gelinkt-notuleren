@@ -176,7 +176,7 @@ export default class SignaturesTimelineStep extends Component {
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signedResource,
-      zitting: await versionedResource.get('zitting'),
+      zitting: await versionedResource.zitting,
     });
     await log.save();
     this.signingOrPublishing = false;
@@ -213,7 +213,7 @@ export default class SignaturesTimelineStep extends Component {
       user: this.currentSession.user,
       date: new Date(),
       publishedResource: publishedResource,
-      zitting: versionedResource.get('zitting'),
+      zitting: await versionedResource.zitting,
     });
     await log.save();
     this.signingOrPublishing = false;

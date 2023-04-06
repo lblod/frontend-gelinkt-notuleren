@@ -106,7 +106,8 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       iteration > maxIterations
     );
     await this.reloadBesluitenLijst.perform();
-    return this.besluitenlijst.signedResources;
+    const signedResources = await this.besluitenlijst.signedResources;
+    return signedResources;
   });
 
   createPublishedResource = task(async () => {
@@ -131,6 +132,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       iteration > maxIterations
     );
     await this.reloadBesluitenLijst.perform();
-    return this.besluitenlijst.publishedResource;
+    const publishedResource = await this.besluitenlijst.publishedResource;
+    return publishedResource;
   });
 }
