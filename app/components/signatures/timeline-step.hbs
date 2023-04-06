@@ -142,7 +142,7 @@
         {{#if this.showSigningModal}}
           <Signatures::SignatureConfirmation
             @name={{@name}} @mockDocument={{@mockDocument}}
-            @confirm={{perform this.signDocument @mockDocument.signedId @signedResources}}
+            @confirm={{fn this.signDocument @mockDocument.signedId @signedResources}}
             @cancel={{fn (mut this.showSigningModal) false}} />
         {{/if}}
       </div>
@@ -240,7 +240,7 @@
           <Signatures::PublicationConfirmation
             @name={{@name}}
             @mockDocument={{@mockDocument}}
-            @confirm={{perform this.publishDocument @mockDocument.signedId}}
+            @confirm={{fn this.publishDocument @mockDocument.signedId}}
             @cancel={{fn (mut this.showPublishingModal) false}} />
         {{/if}}
       </div>

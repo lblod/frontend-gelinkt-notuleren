@@ -4,7 +4,6 @@ import { restartableTask } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { action } from '@ember/object';
-import { task } from 'ember-concurrency';
 
 /**
  * @typedef {Object} Args
@@ -142,7 +141,7 @@ export default class SignaturesTimelineStep extends Component {
     return 'pencil';
   }
 
-  signDocument = task(async (signedId) => {
+  signDocument = async (signedId) => {
     this.signingOrPublishing = true;
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
@@ -180,9 +179,9 @@ export default class SignaturesTimelineStep extends Component {
     });
     await log.save();
     this.signingOrPublishing = false;
-  });
+  };
 
-  publishDocument = task(async (signedId) => {
+  publishDocument = async (signedId) => {
     this.signingOrPublishing = true;
     this.showPublishingModal = false;
     const publishedResource = await this.args.publish(signedId);
@@ -217,7 +216,7 @@ export default class SignaturesTimelineStep extends Component {
     });
     await log.save();
     this.signingOrPublishing = false;
-  });
+  };
 
   @action
   publish() {

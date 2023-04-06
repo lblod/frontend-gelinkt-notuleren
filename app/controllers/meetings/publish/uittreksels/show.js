@@ -49,7 +49,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
       }
 
       await this.loadExtract.perform();
-      return this.extract.document.signedResources;
+      const signedResources = await this.extract.document.signedResources;
+      return signedResources;
     } catch (e) {
       this.extract = null;
       this.error = e;
@@ -73,6 +74,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         throw errors;
       }
       await this.loadExtract.perform();
+      const publishedResource = await this.extract.document.publishedResource;
+      return publishedResource;
     } catch (e) {
       this.extract = null;
       this.error = e;
