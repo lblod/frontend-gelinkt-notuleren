@@ -26,6 +26,7 @@ export default class MeetingForm extends Component {
   @service intl;
 
   isPublished = trackedFunction(this, async () => {
+    // This is needed here, see https://github.com/NullVoxPopuli/ember-resources/issues/340
     await Promise.resolve();
     const publishedNotulen = await this.store.query('versioned-notulen', {
       'filter[zitting][id]': this.zitting.get('id'),
@@ -36,6 +37,7 @@ export default class MeetingForm extends Component {
   });
 
   isSigned = trackedFunction(this, async () => {
+    // This is needed here, see https://github.com/NullVoxPopuli/ember-resources/issues/340
     await Promise.resolve();
     const publishedNotulen = await this.store.query('versioned-notulen', {
       'filter[zitting][id]': this.zitting.get('id'),
