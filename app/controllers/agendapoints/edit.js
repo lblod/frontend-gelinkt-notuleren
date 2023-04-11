@@ -70,7 +70,7 @@ import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plug
 import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -186,6 +186,7 @@ export default class AgendapointsEditController extends Controller {
           shouldShowInvisibles: false,
         }
       ),
+      linkPasteHandler(this.schema.nodes.link),
     ];
   }
 

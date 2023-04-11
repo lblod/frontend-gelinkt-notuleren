@@ -67,6 +67,8 @@ import {
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -146,6 +148,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           shouldShowInvisibles: false,
         }
       ),
+      linkPasteHandler(this.schema.nodes.link),
     ];
   }
 
