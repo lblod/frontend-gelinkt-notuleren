@@ -16,14 +16,13 @@ export default class InboxDraftDecisionsController extends Controller {
   @service intl;
   sort = '-current-version.updated-on';
 
-  @restartableTask
-  *updateFilter(event) {
+  updateFilter = restartableTask(async (event) => {
     const input = event.target.value;
     this.searchValue = input;
-    yield timeout(this.debounceTime);
+    await timeout(this.debounceTime);
     this.filter = this.searchValue;
     this.page = 0;
-  }
+  });
 
   @action
   openNewDocument() {

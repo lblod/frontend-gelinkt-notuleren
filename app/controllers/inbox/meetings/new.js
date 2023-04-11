@@ -10,11 +10,10 @@ export default class InboxMeetingsNewController extends Controller {
     return this.model;
   }
 
-  @dropTask
-  *saveMeetingTask(event) {
+  saveMeetingTask = dropTask(async (event) => {
     event.preventDefault();
 
-    let bestuursorgaan = yield this.meeting.bestuursorgaan;
+    let bestuursorgaan = await this.meeting.bestuursorgaan;
     if (!bestuursorgaan) {
       this.meeting.errors.add(
         'bestuursorgaan',
@@ -24,10 +23,10 @@ export default class InboxMeetingsNewController extends Controller {
 
     if (this.meeting.isValid) {
       this.meeting.gestartOpTijdstip = this.meeting.geplandeStart;
-      yield this.meeting.save();
+      await this.meeting.save();
       this.router.replaceWith('meetings.edit', this.meeting.id);
     }
-  }
+  });
 
   @action
   updateAdministrativeBody(administrativeBody) {

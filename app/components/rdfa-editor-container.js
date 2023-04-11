@@ -3,6 +3,8 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import applyDevTools from 'prosemirror-dev-tools';
+import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
+import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
@@ -10,7 +12,8 @@ export default class RdfaEditorContainerComponent extends Component {
   @tracked ready = false;
 
   get plugins() {
-    return this.args.plugins || [];
+    const plugins = this.args.plugins || [];
+    return plugins.concat(firefoxCursorFix(), lastKeyPressedPlugin);
   }
 
   get widgets() {

@@ -75,29 +75,27 @@ export default class MeetingForm extends Component {
     return !this.zitting.isNew && this.behandelingen?.length > 0;
   }
 
-  @task
-  *loadData() {
+  loadData = task(async () => {
     if (this.zitting.get('id')) {
-      this.bestuursorgaan = yield this.zitting.get('bestuursorgaan');
-      const specialisedBestuursorgaan = yield this.bestuursorgaan.get(
+      this.bestuursorgaan = await this.zitting.get('bestuursorgaan');
+      const specialisedBestuursorgaan = await this.bestuursorgaan.get(
         'isTijdsspecialisatieVan'
       );
-      const classification = yield specialisedBestuursorgaan.get(
+      const classification = await specialisedBestuursorgaan.get(
         'classificatie'
       );
       this.headerArticleTranslationString =
         articlesBasedOnClassifcationMap[classification.get('uri')];
-      this.secretaris = yield this.zitting.get('secretaris');
-      this.voorzitter = yield this.zitting.get('voorzitter');
-      yield this.fetchParticipants.perform();
-      yield this.fetchTreatments.perform();
+      this.secretaris = await this.zitting.get('secretaris');
+      this.voorzitter = await this.zitting.get('voorzitter');
+      await this.fetchParticipants.perform();
+      await this.fetchTreatments.perform();
     }
-  }
+  });
 
-  @task
-  *fetchParticipants() {
+  fetchParticipants = task(async () => {
     if (this.bestuursorgaan) {
-      yield this.fetchPossibleParticipants.perform();
+      await this.fetchPossibleParticipants.perform();
     }
     const participantQuery = {
       include: 'is-bestuurlijke-alias-van,status',
@@ -112,15 +110,14 @@ export default class MeetingForm extends Component {
       'filter[afwezig-bij-zitting][:id:]': this.zitting.get('id'),
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    const present = yield this.store.query('mandataris', participantQuery);
-    const absent = yield this.store.query('mandataris', absenteeQuery);
+    const present = await this.store.query('mandataris', participantQuery);
+    const absent = await this.store.query('mandataris', absenteeQuery);
     this.aanwezigenBijStart = present;
     this.afwezigenBijStart = absent;
-  }
+  });
 
-  @task
-  *fetchPossibleParticipants() {
-    const aanwezigenRoles = yield this.store.query('bestuursfunctie-code', {
+  fetchPossibleParticipants = task(async () => {
+    const aanwezigenRoles = await this.store.query('bestuursfunctie-code', {
       'filter[standaard-type-van][is-classificatie-van][heeft-tijdsspecialisaties][:id:]':
         this.bestuursorgaan.id,
     });
@@ -134,19 +131,18 @@ export default class MeetingForm extends Component {
       'filter[bekleedt][bestuursfunctie][:id:]': stringifiedDefaultTypeIds,
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    const mandatees = yield this.store.query('mandataris', queryParams);
+    const mandatees = await this.store.query('mandataris', queryParams);
     this.possibleParticipants = Array.from(
       mandatees.filter((mandatee) =>
         isValidMandateeForMeeting(mandatee, this.zitting)
       )
     );
-  }
+  });
 
-  @task
-  *fetchTreatments() {
+  fetchTreatments = task(async () => {
     const treatments = new Array();
     const pageSize = 20;
-    const firstPage = yield this.store.query('behandeling-van-agendapunt', {
+    const firstPage = await this.store.query('behandeling-van-agendapunt', {
       include: 'voorzitter,secretaris',
       'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
       'page[size]': pageSize,
@@ -156,7 +152,7 @@ export default class MeetingForm extends Component {
     firstPage.forEach((result) => treatments.push(result));
     let pageNumber = 1;
     while (pageNumber * pageSize < count) {
-      const pageResults = yield this.store.query('behandeling-van-agendapunt', {
+      const pageResults = await this.store.query('behandeling-van-agendapunt', {
         'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
         'page[size]': pageSize,
         'page[number]': pageNumber,
@@ -166,7 +162,7 @@ export default class MeetingForm extends Component {
       pageNumber++;
     }
     this.behandelingen = treatments;
-  }
+  });
 
   /**
    * Persist the participants of the zitting

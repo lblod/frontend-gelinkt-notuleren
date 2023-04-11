@@ -28,10 +28,9 @@ export default class MeetingsEditOutroController extends Controller {
     this.closeModal();
   }
 
-  @task
-  *saveTextTask() {
+  saveTextTask = task(async () => {
     const zitting = this.model;
     zitting.outro = this.editor.htmlContent;
-    yield zitting.save();
-  }
+    await zitting.save();
+  });
 }

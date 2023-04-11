@@ -98,22 +98,23 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     return this.meetingSecretaryData.value;
   }
 
-  @task
-  *getStatus() {
-    const behandeling = (yield this.store.query('behandeling-van-agendapunt', {
-      'filter[:id:]': this.args.behandeling.id,
-      include: 'document-container.status',
-    })).firstObject;
+  getStatus = task(async () => {
+    const behandeling = (
+      await this.store.query('behandeling-van-agendapunt', {
+        'filter[:id:]': this.args.behandeling.id,
+        include: 'document-container.status',
+      })
+    ).firstObject;
 
     if (behandeling) {
-      const status = yield behandeling.get('documentContainer.status');
+      const status = await behandeling.get('documentContainer.status');
       const statusId = status.id;
 
       if (statusId === PUBLISHED_STATUS_ID) {
         this.published = true;
       }
     }
-  }
+  });
 
   /**
    * @param {ParticipantInfo} info
@@ -134,8 +135,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     await this.args.behandeling.save();
   }
 
-  @task
-  *fetchParticipants() {
+  fetchParticipants = task(async () => {
     const participantQuery = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       'filter[aanwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
@@ -148,16 +148,15 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       include: 'is-bestuurlijke-alias-van',
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    this.participants = yield this.store.query('mandataris', participantQuery);
-    this.absentees = yield this.store.query('mandataris', absenteeQuery);
-    this.chairman = yield this.args.behandeling.voorzitter;
-    this.secretary = yield this.args.behandeling.secretaris;
-  }
+    this.participants = await this.store.query('mandataris', participantQuery);
+    this.absentees = await this.store.query('mandataris', absenteeQuery);
+    this.chairman = await this.args.behandeling.voorzitter;
+    this.secretary = await this.args.behandeling.secretaris;
+  });
 
-  @task
-  *toggleOpenbaar(e) {
+  toggleOpenbaar = task(async (e) => {
     const openbaar = e.target.checked;
     this.args.behandeling.openbaar = openbaar;
-    yield this.args.behandeling.save();
-  }
+    await this.args.behandeling.save();
+  });
 }

@@ -14,8 +14,8 @@
       </Group>
       <Group>
         <AuButtonGroup>
-          {{#if this.documentContainer}}
-          <RegulatoryStatementLink @icon="pencil" @documentContainer={{this.documentContainer}} @label={{t "regulatory-statements-plugin.edit-statement"}}/>
+          {{#if this.regulatoryStatementContainer}}
+          <RegulatoryStatementLink @icon="pencil" @documentContainer={{this.regulatoryStatementContainer}} @label={{t "regulatory-statements-plugin.edit-statement"}}/>
           {{/if}}
           <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>
             {{t "regulatory-statements-plugin.detach-statement"}}
