@@ -67,6 +67,8 @@ import {
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -77,52 +79,50 @@ export default class RegulatoryStatementsRoute extends Controller {
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
 
-  get schema() {
-    return new Schema({
-      nodes: {
-        doc: {
-          content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
+  schema = new Schema({
+    nodes: {
+      doc: {
+        content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
+      },
+      paragraph,
+      table_of_contents: table_of_contents(this.config.tableOfContents),
+      repaired_block,
+      list_item,
+      ordered_list,
+      bullet_list,
+      placeholder,
+      ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
+      date: date({
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
         },
-        paragraph,
-        table_of_contents: table_of_contents(this.config.tableOfContents),
-        repaired_block,
-        list_item,
-        ordered_list,
-        bullet_list,
-        placeholder,
-        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-        date: date({
-          placeholder: {
-            insertDate: this.intl.t('date-plugin.insert.date'),
-            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-          },
-        }),
-        variable,
-        ...STRUCTURE_NODES,
-        heading,
-        blockquote,
-        horizontal_rule,
-        code_block,
-        text,
-        image,
-        hard_break,
-        invisible_rdfa,
-        block_rdfa,
-        link: link(this.config.link),
-      },
-      marks: {
-        inline_rdfa,
-        em,
-        strong,
-        underline,
-        strikethrough,
-        subscript,
-        superscript,
-        highlight,
-        color,
-      },
-    });
-  }
+      }),
+      variable,
+      ...STRUCTURE_NODES,
+      heading,
+      blockquote,
+      horizontal_rule,
+      code_block,
+      text,
+      image,
+      hard_break,
+      invisible_rdfa,
+      block_rdfa,
+      link: link(this.config.link),
+    },
+    marks: {
+      inline_rdfa,
+      em,
+      strong,
+      underline,
+      strikethrough,
+      subscript,
+      superscript,
+      highlight,
+      color,
+    },
+  });
 
   get nodeViews() {
     return (controller) => {
@@ -148,6 +148,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           shouldShowInvisibles: false,
         }
       ),
+      linkPasteHandler(this.schema.nodes.link),
     ];
   }
 
