@@ -186,7 +186,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       citation: {
         type: 'nodes',
         activeInNodeTypes(schema) {
-          return new Set([schema.nodes.motivering]);
+          return new Set([schema.nodes.doc]);
         },
       },
       link: {
