@@ -8,7 +8,11 @@ import {
   strikethrough,
   strong,
   underline,
+  subscript,
+  superscript,
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
+import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
+import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import {
   block_rdfa,
   hard_break,
@@ -66,6 +70,46 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     showSidebar: true,
   };
 
+  schema = new Schema({
+    nodes: {
+      doc,
+      paragraph,
+      repaired_block,
+      list_item,
+      ordered_list,
+      bullet_list,
+      placeholder,
+      ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
+      date: date({
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+        },
+      }),
+      heading,
+      blockquote,
+      horizontal_rule,
+      code_block,
+      text,
+      image,
+      hard_break,
+      invisible_rdfa,
+      block_rdfa,
+      link: link(this.config.link),
+    },
+    marks: {
+      inline_rdfa,
+      em,
+      strong,
+      underline,
+      strikethrough,
+      subscript,
+      superscript,
+      highlight,
+      color,
+    },
+  });
+
   get text() {
     const zitting = this.args.zitting;
     if (this.type === 'ext:intro') {
@@ -93,44 +137,6 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     editor.setHtmlContent(this.text);
     this.editor = editor;
     this.args.onEditorInit(editor);
-  }
-
-  get schema() {
-    return new Schema({
-      nodes: {
-        doc,
-        paragraph,
-        repaired_block,
-        list_item,
-        ordered_list,
-        bullet_list,
-        placeholder,
-        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-        date: date({
-          placeholder: {
-            insertDate: this.intl.t('date-plugin.insert.date'),
-            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-          },
-        }),
-        heading,
-        blockquote,
-        horizontal_rule,
-        code_block,
-        text,
-        image,
-        hard_break,
-        invisible_rdfa,
-        block_rdfa,
-        link: link(this.config.link),
-      },
-      marks: {
-        inline_rdfa,
-        em,
-        strong,
-        underline,
-        strikethrough,
-      },
-    });
   }
 
   get config() {
