@@ -74,6 +74,11 @@
         @controller={{this.controller}}
         @options={{this.config.structures}}
       />
+      <CitationPlugin::CitationInsert
+        @controller={{this.controller}}
+        @plugin={{this.citationPlugin}}
+        @config={{this.config.citation}}
+      />
       <RdfaDatePlugin::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
@@ -84,6 +89,10 @@
       <ArticleStructurePlugin::StructureCard
         @controller={{this.controller}}
         @options={{this.config.structures}}
+      />
+      <CitationPlugin::CitationCard
+        @controller={{this.controller}}
+        @plugin={{this.citationPlugin}}
       />
       <RdfaDatePlugin::Card
         @controller={{this.controller}}
