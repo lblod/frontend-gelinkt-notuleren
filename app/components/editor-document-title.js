@@ -19,6 +19,13 @@ export default class EditorDocumentTitleComponent extends Component {
     }
   }
 
+  get titleModified() {
+    if (!this._title) {
+      return false;
+    }
+    return this.args.title !== this._title;
+  }
+
   @action
   setTitle(event) {
     let title = event.target.value;

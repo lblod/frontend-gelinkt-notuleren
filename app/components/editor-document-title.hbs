@@ -26,6 +26,7 @@
           @skin="secondary"
           @icon="check"
           @hideText={{true}}
+          @disabled={{not this.titleModified}}
         >{{t "editor-document-title.change-title"}}</AuButton>
       </div>
     </form>
