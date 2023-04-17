@@ -70,7 +70,7 @@ import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plug
 import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -83,52 +83,50 @@ export default class AgendapointsEditController extends Controller {
   @service features;
   @tracked citationPlugin = citationPlugin(this.config.citation);
 
-  get schema() {
-    return new Schema({
-      nodes: {
-        doc,
-        paragraph,
-        repaired_block,
-        list_item,
-        ordered_list,
-        bullet_list,
-        placeholder,
-        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-        date: date({
-          placeholder: {
-            insertDate: this.intl.t('date-plugin.insert.date'),
-            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-          },
-        }),
-        STRUCTURE_NODES,
-        regulatoryStatementNode,
-        variable,
-        ...besluitNodes,
-        roadsign_regulation,
-        heading,
-        blockquote,
-        horizontal_rule,
-        code_block,
-        text,
-        image,
-        hard_break,
-        invisible_rdfa,
-        block_rdfa,
-        link: link(this.config.link),
-      },
-      marks: {
-        inline_rdfa,
-        em,
-        strong,
-        underline,
-        strikethrough,
-        subscript,
-        superscript,
-        highlight,
-        color,
-      },
-    });
-  }
+  schema = new Schema({
+    nodes: {
+      doc,
+      paragraph,
+      repaired_block,
+      list_item,
+      ordered_list,
+      bullet_list,
+      placeholder,
+      ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
+      date: date({
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+        },
+      }),
+      STRUCTURE_NODES,
+      regulatoryStatementNode,
+      variable,
+      ...besluitNodes,
+      roadsign_regulation,
+      heading,
+      blockquote,
+      horizontal_rule,
+      code_block,
+      text,
+      image,
+      hard_break,
+      invisible_rdfa,
+      block_rdfa,
+      link: link(this.config.link),
+    },
+    marks: {
+      inline_rdfa,
+      em,
+      strong,
+      underline,
+      strikethrough,
+      subscript,
+      superscript,
+      highlight,
+      color,
+    },
+  });
 
   get config() {
     return {
@@ -188,6 +186,7 @@ export default class AgendapointsEditController extends Controller {
           shouldShowInvisibles: false,
         }
       ),
+      linkPasteHandler(this.schema.nodes.link),
     ];
   }
 
