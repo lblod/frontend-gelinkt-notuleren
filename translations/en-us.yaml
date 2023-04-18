@@ -514,6 +514,7 @@ publish:
   delete-signature: Delete signature
   delete-signature-warning: Are you sure you want to delete your signature?
   deleted: Deleted
+  no-publication-actions-message: There are no publication actions available
 
 published-resource:
   published-by-label: Published by

@@ -9,12 +9,12 @@ export default class MeetingsPublishPublicationActionsDetailRoute extends Route 
         include: 'signed-resource,published-resource',
       }
     );
-    if (log.get('signedResource')) {
-      const signedResource = await log.get('signedResource');
-      return signedResource.get('content');
+    const signedResource = await log.signedResource;
+    if (signedResource) {
+      return signedResource.content;
     } else {
-      const publishedResource = await log.get('publishedResource');
-      return await publishedResource.get('content');
+      const publishedResource = await log.publishedResource;
+      return publishedResource.content;
     }
   }
 }

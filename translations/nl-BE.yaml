@@ -515,6 +515,7 @@ publish:
   delete-signature: Ondertekening verwijderen
   delete-signature-warning: Bent u zeker dat u uw ondertekening wil verwijderen?
   deleted: Verwijderd
+  no-publication-actions-message: Er zijn geen publicatieacties beschikbaar
 
 published-resource:
   published-by-label: Gepubliceerd door

@@ -21,5 +21,5 @@ export default class ZittingModel extends Model {
   @hasMany('intermission', { inverse: 'zitting' }) intermissions;
   @hasMany('versioned-behandeling', { inverse: 'zitting' })
   versionedBehandelingen;
-  @hasMany('publishing-logs', { inverse: 'zitting' }) publishingLogs;
+  @hasMany('publishing-log', { inverse: 'zitting' }) publishingLogs;
 }
