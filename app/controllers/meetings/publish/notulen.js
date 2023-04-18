@@ -60,6 +60,10 @@ export default class MeetingsPublishNotulenController extends Controller {
     return 'concept';
   }
 
+  get isPublished() {
+    return !!this.publishedResource;
+  }
+
   loadNotulen = task(async () => {
     const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
@@ -133,7 +137,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     );
     await this.muTask.waitForMuTaskTask.perform(taskId);
     await this.loadNotulen.perform();
-    const signedResources = this.notulen.signedResources;
+    const signedResources = this.signedResources;
     const signedResource = signedResources.lastObject;
     const versionedResource = await signedResource.versionedNotulen;
 
@@ -166,7 +170,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     const versionedResource = this.notulen;
 
     const log = this.store.createRecord('publishing-log', {
-      action: 'sign',
+      action: 'publish',
       user: this.currentSession.user,
       date: new Date(),
       publishedResource: publishedResource,

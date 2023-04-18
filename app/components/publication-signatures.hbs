@@ -17,14 +17,14 @@
       {{else}}
         <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
           <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.second-signature"}}</AuHeading>
-          <Signatures::SignedResource @signature={{signature}} @canDelete={{true}}/>
+          <Signatures::SignedResource @signature={{signature}} @canDelete={{(and (not @isPublished) this.isSignedByCurrentUser)}}/>
         </div>
       {{/if}}
     {{/each}}
   {{else if (eq this.signaturesCount 1)}}
     <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
       <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
-      <Signatures::SignedResource @signature={{this.activeSignatures.firstObject}} @canDelete={{true}}/>
+      <Signatures::SignedResource @signature={{this.activeSignatures.firstObject}} @canDelete={{(and (not @isPublished) this.isSignedByCurrentUser)}}/>
     </div>
     <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
       <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.second-signature"}}</AuHeading>

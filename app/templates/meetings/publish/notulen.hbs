@@ -50,6 +50,7 @@
             @signatures={{this.signedResources}}
             @sign={{this.createSignPreview}}
             @loading={{this.createSignedResource.isRunning}}
+            @isPublished={{this.isPublished}}
           />
           {{#if this.showSigningModal}}
             {{!-- signing is always the full document, so no preview here --}}
