@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { trackedFunction } from 'ember-resources/util/function';
 
 export default class SignedResource extends Component {
   @tracked showDeleteSignatureCard = false;
@@ -12,6 +13,11 @@ export default class SignedResource extends Component {
   toggleDeleteSignatureCard() {
     this.showDeleteSignatureCard = !this.showDeleteSignatureCard;
   }
+
+  signedByCurrentUser = trackedFunction(this, async () => {
+    const gebruiker = await this.args.signature.gebruiker;
+    return gebruiker === this.currentSession.user;
+  });
 
   @action
   async deleteSignature() {

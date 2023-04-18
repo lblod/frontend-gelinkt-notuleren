@@ -13,7 +13,7 @@
     </AuHelpText>
   {{/if}}
 </p>
-{{#if (and (not @signature.deleted) @canDelete)}}
+{{#if (and this.signedByCurrentUser (and (not @signature.deleted) @canDelete))}}
   <AuButton
     {{on "click" this.toggleDeleteSignatureCard}}
     @skin="link-secondary"
