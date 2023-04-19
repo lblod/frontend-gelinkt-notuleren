@@ -711,3 +711,15 @@ div[typeof="besluitpublicatie:Documentonderdeel"] {
     margin: 0;
   }
 }
+
+.ProseMirror-selectednode {
+  div[typeof="besluitpublicatie:Documentonderdeel"] {
+    outline: 0;
+    box-shadow: 0 0 0 2px var(--au-blue-600);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  ::selection {
+    background-color: #0000;
+  }
+}
