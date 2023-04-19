@@ -696,6 +696,7 @@ div[typeof="besluit:Zitting"] {
 }
 
 div[typeof="besluitpublicatie:Documentonderdeel"] {
+  cursor: default;
   &:hover {
     border: 0.1rem solid var(--au-gray-400);
   }
