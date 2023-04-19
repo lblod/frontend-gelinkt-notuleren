@@ -16,7 +16,7 @@ export default class SignedResource extends Component {
 
   signedByCurrentUser = trackedFunction(this, async () => {
     const gebruiker = await this.args.signature.gebruiker;
-    return gebruiker === this.currentSession.user;
+    return gebruiker.id === this.currentSession.user.id;
   });
 
   @action
