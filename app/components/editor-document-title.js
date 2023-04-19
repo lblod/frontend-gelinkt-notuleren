@@ -6,6 +6,7 @@ export default class EditorDocumentTitleComponent extends Component {
   @tracked active = false;
   @tracked error = false;
   @tracked _title;
+  @tracked showSaved = false;
   constructor() {
     super(...arguments);
     this.active = this.args.editActive;
@@ -41,6 +42,8 @@ export default class EditorDocumentTitleComponent extends Component {
     event.preventDefault();
     this.args.onSubmit?.(this.title);
     this.toggleActive();
+    this.showSaved = true;
+    setTimeout(() => (this.showSaved = false), 30000);
     return false;
   }
 
