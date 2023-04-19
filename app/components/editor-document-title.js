@@ -1,15 +1,11 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
 
 export default class EditorDocumentTitleComponent extends Component {
   @tracked active = false;
   @tracked error = false;
   @tracked _title;
-  @service toaster;
-  @service intl;
-
   constructor() {
     super(...arguments);
     this.active = this.args.editActive;
@@ -44,11 +40,6 @@ export default class EditorDocumentTitleComponent extends Component {
   submit(event) {
     event.preventDefault();
     this.args.onSubmit?.(this.title);
-    this.toaster.success(
-      this.intl.t('editor-document-title.title-saved'),
-      'Success',
-      { timeOut: 3000 }
-    );
     this.toggleActive();
     return false;
   }
