@@ -111,7 +111,8 @@ editor-document-title:
   placeholder: Untitled document
   agendapoint-title: agendapoint title
   change-title: Change title
-  saved: Saved
+  title-saved: Title saved
+
 inbox:
   loading: Loading
   patience-text: Thank you for your patience.
