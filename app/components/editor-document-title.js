@@ -60,9 +60,7 @@ export default class EditorDocumentTitleComponent extends Component {
     if (this.active && !this.title) {
       this.error = true;
     } else {
-      console.log(activeValue);
       if (activeValue !== undefined) {
-        console.log(this.active);
         if (activeValue !== this.active) {
           this.active = activeValue;
         }
