@@ -41,7 +41,7 @@ export default class EditorDocumentTitleComponent extends Component {
   submit(event) {
     event.preventDefault();
     this.args.onSubmit?.(this.title);
-    this.toggleActive();
+    this.toggleActive(false);
     this.showSaved = true;
     setTimeout(() => (this.showSaved = false), 30000);
     return false;
@@ -51,16 +51,24 @@ export default class EditorDocumentTitleComponent extends Component {
   cancel(event) {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       this._title = undefined;
-      this.toggleActive();
+      this.toggleActive(false);
     }
   }
 
   @action
-  toggleActive() {
+  toggleActive(activeValue) {
     if (this.active && !this.title) {
       this.error = true;
     } else {
-      this.active = !this.active;
+      console.log(activeValue);
+      if (activeValue !== undefined) {
+        console.log(this.active);
+        if (activeValue !== this.active) {
+          this.active = activeValue;
+        }
+      } else {
+        this.active = !this.active;
+      }
     }
   }
 
