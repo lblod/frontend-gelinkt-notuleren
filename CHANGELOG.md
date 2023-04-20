@@ -25,6 +25,26 @@
 
 
 
+
+## 3.4.0 (2023-04-20)
+
+#### :rocket: Enhancement
+* [#452](https://github.com/lblod/frontend-gelinkt-notuleren/pull/452) avoid saving editor document title without changes ([@lagartoverde](https://github.com/lagartoverde))
+* [#448](https://github.com/lblod/frontend-gelinkt-notuleren/pull/448) Improve RS Attachment styling ([@lagartoverde](https://github.com/lagartoverde))
+* [#450](https://github.com/lblod/frontend-gelinkt-notuleren/pull/450) Enable link-paste-handler in agendapoints and regulatory statements ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#449](https://github.com/lblod/frontend-gelinkt-notuleren/pull/449) Fix schema of zitting-text component ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#451](https://github.com/lblod/frontend-gelinkt-notuleren/pull/451) Bump vm2 from 3.9.15 to 3.9.16 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#447](https://github.com/lblod/frontend-gelinkt-notuleren/pull/447) Bump vm2 from 3.9.11 to 3.9.15 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 3
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@usrtim](https://github.com/usrtim)
+
 ## 3.3.0 (2023-03-27)
 
 #### :rocket: Enhancement
