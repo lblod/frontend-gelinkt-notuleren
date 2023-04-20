@@ -26,6 +26,7 @@
           @skin="secondary"
           @icon="check"
           @hideText={{true}}
+          @disabled={{not this.titleModified}}
         >{{t "editor-document-title.change-title"}}</AuButton>
       </div>
     </form>
@@ -34,6 +35,14 @@
       {{limit-content this.title 70}} 
       <AuButton {{on "click" this.toggleActive}} @icon="pencil" @skin="tertiary" @hideText={{true}} >{{t "editor-document-title.change-title"}}</AuButton>
     </h1>
+    {{#if this.showSaved}}
+      <AuPill
+        @skin="success"
+        @icon="check"
+      >
+        {{t "editor-document-title.title-saved"}}
+      </AuPill>
+    {{/if}}
   {{/if}}
 
 {{/if}}

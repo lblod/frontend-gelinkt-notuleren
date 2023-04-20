@@ -111,6 +111,7 @@ editor-document-title:
   placeholder: Naamloos document
   agendapoint-title: agendapunt titel
   change-title: Titel wijzigen
+  title-saved: Titel opgeslagen
 
 inbox:
   loading: Aan het laden
