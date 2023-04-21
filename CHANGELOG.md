@@ -26,6 +26,15 @@
 
 
 
+
+## 3.4.1 (2023-04-21)
+
+#### :bug: Bug Fix
+* [#453](https://github.com/lblod/frontend-gelinkt-notuleren/pull/453) Bugfix/problem with title in dev ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 3.4.0 (2023-04-20)
 
 #### :rocket: Enhancement
