@@ -41,7 +41,7 @@ export default class EditorDocumentTitleComponent extends Component {
   submit(event) {
     event.preventDefault();
     this.args.onSubmit?.(this.title);
-    this.toggleActive();
+    this.disabledEdit();
     this.showSaved = true;
     setTimeout(() => (this.showSaved = false), 30000);
     return false;
@@ -51,16 +51,29 @@ export default class EditorDocumentTitleComponent extends Component {
   cancel(event) {
     if (!event.currentTarget.contains(event.relatedTarget)) {
       this._title = undefined;
-      this.toggleActive();
+      this.disabledEdit();
     }
   }
 
+  // We check the value of active in these 2 functions to avoid setting it 2 times in the same computation with
+  // the cancel event + submit which cause a bug in prod environments.
   @action
-  toggleActive() {
-    if (this.active && !this.title) {
+  enableEdit() {
+    if (this.active) {
+      return;
+    }
+    this.active = true;
+  }
+
+  @action
+  disabledEdit() {
+    if (!this.active) {
+      return;
+    }
+    if (!this.title) {
       this.error = true;
     } else {
-      this.active = !this.active;
+      this.active = false;
     }
   }
 
