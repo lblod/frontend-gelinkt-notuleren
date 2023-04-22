@@ -71,6 +71,11 @@ import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import {
+  tableOfContentsView,
+  table_of_contents,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
+
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -85,8 +90,11 @@ export default class AgendapointsEditController extends Controller {
 
   schema = new Schema({
     nodes: {
-      doc,
+      doc: {
+        content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
+      },
       paragraph,
+      table_of_contents: table_of_contents(this.config.tableOfContents),
       repaired_block,
       list_item,
       ordered_list,
@@ -99,7 +107,7 @@ export default class AgendapointsEditController extends Controller {
           insertDateTime: this.intl.t('date-plugin.insert.datetime'),
         },
       }),
-      STRUCTURE_NODES,
+      ...STRUCTURE_NODES,
       regulatoryStatementNode,
       variable,
       ...besluitNodes,
@@ -130,6 +138,14 @@ export default class AgendapointsEditController extends Controller {
 
   get config() {
     return {
+      tableOfContents: [
+        {
+          nodeHierarchy: [
+            'title|chapter|section|subsection|article',
+            'structure_header|article_header',
+          ],
+        },
+      ],
       date: {
         placeholder: {
           insertDate: this.intl.t('date-plugin.insert.date'),
@@ -169,6 +185,9 @@ export default class AgendapointsEditController extends Controller {
       return {
         variable: variableView(controller),
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
+        table_of_contents: tableOfContentsView(this.config.tableOfContents)(
+          controller
+        ),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
       };
