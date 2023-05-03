@@ -31,7 +31,7 @@
       <div>
         {{#unless @editorDocument.isNew}}
           {{#if @isRegulatoryStatement}}
-            <RegulatoryStatementStatusPill @container={{@documentContainer}} />
+            <LinkedAgendapointsButton @document={{@documentContainer}}/>
           {{else}}
             <EditorStatusPill @status={{this.documentStatus}} />
           {{/if}}

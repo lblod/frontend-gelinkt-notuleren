@@ -3,13 +3,17 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { inject as service } from '@ember/service';
 import applyDevTools from 'prosemirror-dev-tools';
+import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
+import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
-  @tracked editor;
+  @tracked controller;
+  @tracked ready = false;
 
   get plugins() {
-    return this.args.plugins || [];
+    const plugins = this.args.plugins || [];
+    return plugins.concat(firefoxCursorFix(), lastKeyPressedPlugin);
   }
 
   get widgets() {
@@ -81,17 +85,18 @@ export default class RdfaEditorContainerComponent extends Component {
       'prefix',
       this.prefixToAttrString(this.documentContext.prefix)
     );
+    this.ready = true;
   }
 
   @action
   rdfaEditorInit(editor) {
     if (this.features.isEnabled('prosemirror-dev-tools')) {
-      applyDevTools(editor.view);
+      applyDevTools(editor.mainEditorView);
     }
     if (this.args.rdfaEditorInit) {
       this.args.rdfaEditorInit(editor);
     }
-    this.editor = editor;
+    this.controller = editor;
   }
 
   prefixToAttrString(prefix) {

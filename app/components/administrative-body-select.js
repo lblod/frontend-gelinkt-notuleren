@@ -48,11 +48,10 @@ export default class AdministrativeBodySelectComponent extends Component {
    * Fetch bodies which are of the right classification, and whose
    * end date is not older than 2 months before the current date
    */
-  @task
-  *fetchAdministrativeBodies() {
+  fetchAdministrativeBodies = task(async () => {
     let currentAdministrativeUnitId = this.currentSession.group.id;
 
-    let administrativeBodiesInTime = yield this.store.query('bestuursorgaan', {
+    let administrativeBodiesInTime = await this.store.query('bestuursorgaan', {
       'filter[is-tijdsspecialisatie-van][bestuurseenheid][id]':
         currentAdministrativeUnitId,
       include: [
@@ -82,5 +81,5 @@ export default class AdministrativeBodySelectComponent extends Component {
         return isAfter(endDate, twoMonthsAgo);
       }
     );
-  }
+  });
 }

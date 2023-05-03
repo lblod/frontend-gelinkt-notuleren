@@ -31,9 +31,8 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
       this.documentService.getDocumentparts(editorDocument);
   }
 
-  @restartableTask
-  *fetchNextPage() {
-    const regulatoryStatements = yield this.store.query('document-container', {
+  fetchNextPage = restartableTask(async () => {
+    const regulatoryStatements = await this.store.query('document-container', {
       include: 'current-version',
       'filter[folder][:id:]': EDITOR_FOLDERS.REGULATORY_STATEMENTS,
       ...(this.searchValue && {
@@ -52,17 +51,16 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
       this.showLoadMore = true;
       this.page += 1;
     }
-  }
+  });
 
-  @restartableTask
-  *updateFilter(event) {
+  updateFilter = restartableTask(async (event) => {
     const input = event.target.value;
     this.searchValue = input;
     this.regulatoryStatements = tracked([]);
     this._selectedStatement = null;
     this.page = 0;
-    yield this.fetchNextPage.perform();
-  }
+    await this.fetchNextPage.perform();
+  });
 
   @action
   selectStatement(statement) {

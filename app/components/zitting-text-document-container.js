@@ -25,26 +25,32 @@ import { invisible_rdfa } from '@lblod/ember-rdfa-editor/marks/inline-rdfa';
 
 import {
   em,
-  link,
   strikethrough,
   strong,
   underline,
-} from '@lblod/ember-rdfa-editor/marks';
-
+  subscript,
+  superscript,
+} from '@lblod/ember-rdfa-editor/plugins/text-style';
+import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
+import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import {
-  tableKeymap,
-  tableMenu,
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
+import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
+import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
+
+import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
+
+import { tableMenu } from '@lblod/ember-rdfa-editor/plugins/table';
 
 import {
   rdfaDateCardWidget,
   rdfaDateInsertWidget,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
-import { date } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes';
 import { inject as service } from '@ember/service';
 import { PLUGIN_CONFIGS } from '../config/constants';
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
@@ -62,6 +68,46 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     showSidebar: true,
   };
 
+  schema = new Schema({
+    nodes: {
+      doc,
+      paragraph,
+      repaired_block,
+      list_item,
+      ordered_list,
+      bullet_list,
+      placeholder,
+      ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
+      date: date({
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+        },
+      }),
+      heading,
+      blockquote,
+      horizontal_rule,
+      code_block,
+      text,
+      image,
+      hard_break,
+      invisible_rdfa,
+      block_rdfa,
+      link: link(this.config.link),
+    },
+    marks: {
+      inline_rdfa,
+      em,
+      strong,
+      underline,
+      strikethrough,
+      subscript,
+      superscript,
+      highlight,
+      color,
+    },
+  });
+
   get text() {
     const zitting = this.args.zitting;
     if (this.type === 'ext:intro') {
@@ -73,8 +119,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     }
   }
 
-  @task
-  *saveText() {
+  saveText = task(async () => {
     const zitting = this.args.zitting;
 
     if (this.type === 'ext:intro') {
@@ -82,8 +127,8 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     } else if (this.type === 'ext:outro') {
       zitting.outro = this.editor.htmlContent;
     }
-    yield zitting.save();
-  }
+    await zitting.save();
+  });
 
   @action
   rdfaEditorInit(editor) {
@@ -92,46 +137,16 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     this.args.onEditorInit(editor);
   }
 
-  get schema() {
-    return new Schema({
-      nodes: {
-        doc,
-        paragraph,
-        repaired_block,
-        list_item,
-        ordered_list,
-        bullet_list,
-        placeholder,
-        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-        date: date({
-          placeholder: {
-            insertDate: this.intl.t('date-plugin.insert.date'),
-            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-          },
-        }),
-        heading,
-        blockquote,
-        horizontal_rule,
-        code_block,
-        text,
-        image,
-        hard_break,
-        invisible_rdfa,
-        block_rdfa,
+  get config() {
+    return {
+      link: {
+        interactive: true,
       },
-      marks: {
-        inline_rdfa,
-        link,
-        em,
-        strong,
-        underline,
-        strikethrough,
-      },
-    });
+    };
   }
 
   get plugins() {
-    return [tablePlugin, tableKeymap];
+    return [tablePlugin, tableKeymap, linkPasteHandler(this.schema.nodes.link)];
   }
 
   get widgets() {
@@ -143,8 +158,10 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get nodeViews() {
-    return () => {
-      return {};
+    return (controller) => {
+      return {
+        link: linkView(this.config.link)(controller),
+      };
     };
   }
 }

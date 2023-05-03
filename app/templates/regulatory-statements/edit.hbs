@@ -64,7 +64,42 @@
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
-  />
+  >
+    <:toolbar>
+      <Plugins::Formatting::FormattingToggle @controller={{this.controller}}/>
+      <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}}/>
+    </:toolbar>
+    <:sidebar-collapsible>
+      <ArticleStructurePlugin::ArticleStructureCard
+        @controller={{this.controller}}
+        @options={{this.config.structures}}
+      />
+      <CitationPlugin::CitationInsert
+        @controller={{this.controller}}
+        @plugin={{this.citationPlugin}}
+        @config={{this.config.citation}}
+      />
+      <RdfaDatePlugin::Insert
+        @controller={{this.controller}}
+        @options={{this.config.date}}
+      />
+      <StandardTemplatePlugin::Card @controller={{this.controller}}/>
+    </:sidebar-collapsible>
+    <:sidebar>
+      <ArticleStructurePlugin::StructureCard
+        @controller={{this.controller}}
+        @options={{this.config.structures}}
+      />
+      <CitationPlugin::CitationCard
+        @controller={{this.controller}}
+        @plugin={{this.citationPlugin}}
+      />
+      <RdfaDatePlugin::Card
+        @controller={{this.controller}}
+        @options={{this.config.date}}/>
+      <VariablePlugin::TemplateVariableCard @controller={{this.controller}}/>
+    </:sidebar>
+  </RdfaEditorContainer>
 </AuBodyContainer>
 <ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandeling-van-agendapunten.confirm-leave-without-saving"}}/>
 {{outlet}}
