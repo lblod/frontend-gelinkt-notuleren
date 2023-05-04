@@ -68,6 +68,7 @@ import {
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import { extractOutline } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/utils';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -223,11 +224,48 @@ export default class RegulatoryStatementsRoute extends Controller {
     generateExportFromEditorDocument(this.editorDocument);
   }
 
+  tableOfContentsRange() {
+    let result;
+    this.controller.mainEditorState.doc.descendants((node, pos) => {
+      if (node.type === this.controller.schema.nodes['table_of_contents']) {
+        result = { from: pos };
+      }
+      return !result;
+    });
+
+    return result;
+  }
+
+  outline() {
+    return {
+      entries: extractOutline({
+        node: this.controller.mainEditorState.doc,
+        pos: -1,
+        config: this.config.tableOfContents,
+      }),
+    };
+  }
+
+  createTableOfContentHTML() {
+    const tocRange = this.tableOfContentsRange();
+    if (tocRange) {
+      const { from } = tocRange;
+      this.controller.withTransaction((tr) => {
+        tr.setNodeMarkup(from, null, {
+          ...this.config.tableOfContents,
+          ...this.outline(),
+        });
+        return tr;
+      });
+    }
+  }
+
   saveTask = task(async () => {
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
+      this.createTableOfContentHTML();
       const html = this.controller.htmlContent;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
