@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 import applyDevTools from 'prosemirror-dev-tools';
 import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
 import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
+import { chromeHacksPlugin } from '@lblod/ember-rdfa-editor/plugins/chrome-hacks-plugin';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
@@ -13,7 +14,11 @@ export default class RdfaEditorContainerComponent extends Component {
 
   get plugins() {
     const plugins = this.args.plugins || [];
-    return plugins.concat(firefoxCursorFix(), lastKeyPressedPlugin);
+    return plugins.concat(
+      firefoxCursorFix(),
+      lastKeyPressedPlugin,
+      chromeHacksPlugin()
+    );
   }
 
   get widgets() {
