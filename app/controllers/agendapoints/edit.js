@@ -265,6 +265,19 @@ export default class AgendapointsEditController extends Controller {
 
   onTitleUpdate = task(async (title) => {
     const html = this.editorDocument.content;
+
+    const behandeling = (
+      await this.store.query('behandeling-van-agendapunt', {
+        'document-container.id': this.model.documentContainer.id,
+        'filter[document-container][current-version][:id:]':
+          this.editorDocument.id,
+        include: 'document-container.current-version,onderwerp',
+      })
+    ).firstObject;
+
+    const agendaItem = await behandeling.onderwerp;
+    agendaItem.titel = title;
+
     const editorDocument =
       await this.documentService.createEditorDocument.perform(
         title,
@@ -272,7 +285,10 @@ export default class AgendapointsEditController extends Controller {
         this.documentContainer,
         this.editorDocument
       );
+
     this._editorDocument = editorDocument;
+
+    await behandeling.save();
   });
 
   saveTask = task(async () => {
