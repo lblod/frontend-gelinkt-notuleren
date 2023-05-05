@@ -71,6 +71,8 @@ import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
+
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -159,6 +161,20 @@ export default class AgendapointsEditController extends Controller {
       },
       link: {
         interactive: true,
+      },
+      roadsignRegulation: {
+        endpoint: ENV.roadsignRegulationPlugin.endpoint,
+        imageBaseUrl: ENV.roadsignRegulationPlugin.imageBaseUrl,
+      },
+      besluitType: {
+        endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
+      },
+      templateVariable: {
+        endpoint: ENV.templateVariablePlugin.endpoint,
+        zonalLocationCodelistUri:
+          ENV.templateVariablePlugin.zonalLocationCodelistUri,
+        nonZonalLocationCodelistUri:
+          ENV.templateVariablePlugin.nonZonalLocationCodelistUri,
       },
       structures: structureSpecs,
     };
