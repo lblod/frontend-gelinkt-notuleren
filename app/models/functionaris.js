@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import { attr, belongsTo } from '@ember-data/model';
 import MandatarisModel from './mandataris';
 
 export default class FunctionarisModel extends MandatarisModel {
