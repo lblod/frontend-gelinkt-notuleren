@@ -11,7 +11,7 @@
       {{/unless}}
     </li>
     <li class="au-c-list-divider__item">
-      {{t "participation-list.secretaris-label"}} <strong></strong>
+      {{t "participation-list.secretaris-label"}} <strong>{{this.secretary.isBestuurlijkeAliasVan.fullName}}</strong>
       {{#unless this.secretary}}
         <AuPill @skin="warning" @icon="alert-triangle" @iconAlignment="left">
           {{t "participation-list.secretaris-error"}}
