@@ -299,5 +299,6 @@ export default class RegulatoryStatementsRoute extends Controller {
   handleRdfaEditorInit(controller) {
     controller.setHtmlContent(this.editorDocument.content);
     this.controller = controller;
+    this.createTableOfContentHTML();
   }
 }
