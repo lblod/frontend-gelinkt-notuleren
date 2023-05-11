@@ -8,9 +8,6 @@ export default class DocumentContainerModel extends Model {
   @belongsTo('editor-document-folder', { inverse: null }) folder;
   @belongsTo('bestuurseenheid', { inverse: null }) publisher;
 
-  @hasMany('versioned-notulen') versionedNotulen;
-  @hasMany('versioned-besluiten-lijst') versionedBesluitenLijsten;
-  @hasMany('versioned-behandelingen') versionedBehandelingen;
   @hasMany('attachment', { inverse: 'documentContainer' }) attachments;
   @hasMany('editor-document', { inverse: 'parts' }) isPartOf;
 }
