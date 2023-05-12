@@ -38,7 +38,7 @@
     "@lblod/ember-acmidm-login": "^1.4.0",
     "@lblod/ember-environment-banner": "^0.2.0",
     "@lblod/ember-mock-login": "0.6.0",
-    "@lblod/ember-rdfa-editor": "^3.4.1",
+    "@lblod/ember-rdfa-editor": "^3.6.0",
     "@lblod/ember-rdfa-editor-lblod-plugins": "^6.1.0",
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "babel-eslint": "^10.1.0",

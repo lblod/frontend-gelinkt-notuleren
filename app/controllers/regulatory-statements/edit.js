@@ -68,6 +68,7 @@ import {
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { extractOutline } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/utils';
 
 export default class RegulatoryStatementsRoute extends Controller {
@@ -189,6 +190,13 @@ export default class RegulatoryStatementsRoute extends Controller {
         activeInNodeTypes(schema) {
           return new Set([schema.nodes.doc]);
         },
+      },
+      templateVariable: {
+        endpoint: ENV.templateVariablePlugin.endpoint,
+        zonalLocationCodelistUri:
+          ENV.templateVariablePlugin.zonalLocationCodelistUri,
+        nonZonalLocationCodelistUri:
+          ENV.templateVariablePlugin.nonZonalLocationCodelistUri,
       },
       link: {
         interactive: true,

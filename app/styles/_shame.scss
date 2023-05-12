@@ -712,6 +712,13 @@ div[typeof="besluitpublicatie:Documentonderdeel"] {
   }
 }
 
+.au-c-card__content div[typeof="besluitpublicatie:Documentonderdeel"],
+.au-c-meeting-chrome-card div[typeof="besluitpublicatie:Documentonderdeel"] {
+  &:hover {
+    border: none;
+  }
+}
+
 .ProseMirror-selectednode {
   div[typeof="besluitpublicatie:Documentonderdeel"] {
     outline: 0;
