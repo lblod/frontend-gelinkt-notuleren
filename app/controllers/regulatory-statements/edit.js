@@ -207,7 +207,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   });
 
   get dirty() {
-    return this.editorDocument.content !== this.controller.htmlContent;
+    return this.editorDocument.content !== this.controller?.htmlContent;
   }
 
   get editorDocument() {
