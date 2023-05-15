@@ -18,6 +18,7 @@ export default class ApplicationSerializer extends JSONAPISerializer.extend(
     }
     return super.normalizeResponse(store, model, payload, id, requestType);
   }
+
   serializeAttribute(snapshot, json, key, attributes) {
     if (key !== 'uri')
       super.serializeAttribute(snapshot, json, key, attributes);

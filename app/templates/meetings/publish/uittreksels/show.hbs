@@ -1,27 +1,134 @@
 {{page-title this.model.agendapoint.title}}
 <div class="au-o-box">
   {{#if this.loadExtract.isRunning}}
-  <AuLoader />
-{{else if this.error}}
-  <AuAlert @icon="cross" @sitle={{t "publish.excerpt-error-message"}} @skin="error" @size="small">
-    <code>{{this.error}}</code>
-  </AuAlert>
-  <AuButton {{on "click" (perform this.loadExtract)}}>{{t "publish.retry"}}</AuButton>
-{{else if this.extract}}
-<div class="au-u-margin-bottom-small au-u-hide-on-print">
-  <AuLink @route="meetings.publish.uittreksels" @skin="secondary" @icon="arrow-left" @iconAlignment="left">{{t "publish.excerpts-overview"}}</AuLink>
+    <AuLoader/>
+  {{else if this.error}}
+    <AuAlert @icon="cross" @sitle={{t "publish.excerpt-error-message"}} @skin="error" @size="small">
+      <code>{{this.error}}</code>
+    </AuAlert>
+    <AuButton {{on "click" (perform this.loadExtract)}}>{{t "publish.retry"}}</AuButton>
+  {{else}}
+    <div class="au-u-margin-bottom-small au-u-hide-on-print">
+      <AuLink @route="meetings.publish.uittreksels" @skin="secondary" @icon="arrow-left" @iconAlignment="left">{{t
+        "publish.excerpts-overview"}}</AuLink>
+    </div>
+    <AuCard
+      @divided={{true}}
+      @flex={{true}}
+      class="au-u-margin-bottom-small au-c-card--publish"
+      as |Card|
+    >
+      <Card.header
+        @badgeIcon={{this.status.icon}}
+        @badgeSkin="brand">
+
+        <AuToolbar @nowrap={{true}}>
+          <AuHeading
+            @level="2"
+            @skin="3"
+            class="au-u-capitalize au-u-word-break-all">
+            {{this.header}}
+          </AuHeading>
+          <AuPill @skin="{{this.status.generalColor}}"
+                  class="au-u-margin-left">{{this.status.generalLabel}}</AuPill>
+        </AuToolbar>
+
+      </Card.header>
+
+      <Card.content>
+
+        <AuToolbar @nowrap={{true}} as |Group|>
+          <Group>
+            <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{this.title}}</AuHeading>
+            {{#if this.status.previewLabel}}
+              <AuPill @skin={{this.status.previewColor}} class="au-u-margin-left">
+                {{this.status.previewLabel}}
+              </AuPill>
+            {{/if}}
+          </Group>
+        </AuToolbar>
+
+        <div class="au-c-editor-preview au-u-margin-top-small au-u-margin-bottom-large">
+          {{html-safe this.previewDocument.body}}
+        </div>
+
+
+        {{#if (and this.errors this.errors.length)}}
+          <AuAlert @icon="alert-triangle" @title={{t "timeline-step.publish-warning"}} @skin="error">
+            <ul>
+              {{#each this.errors as |error|}}
+                <li>{{error}}</li>
+              {{/each}}
+            </ul>
+          </AuAlert>
+        {{else}}
+
+
+          <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
+            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
+                "timeline-step.first-signature"}}</AuHeading>
+              {{!--            {{#if this.deletedSignatures.lastObject}}--}}
+              {{!--              <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />--}}
+              {{!--            {{/if}}--}}
+              {{#if this.firstSignature}}
+                <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+                  <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
+                    "timeline-step.first-signature"}}</AuHeading>
+                  <Signatures::SignedResource @signature={{this.firstSignature}} @canDelete={{not this.isPublished}} />
+                </div>
+
+              {{/if}}
+              <AuButton
+                {{on "click" this.showSigningModal}}
+                @skin="secondary"
+                @icon="pencil"
+                @iconAlignment="left"
+                @loading={{this.loading}}
+                @disabled={{not this.canSignFirstSignature}}
+              >
+                {{t "timeline-step.sign-button-label" name=(limit-content this.title 30)}}
+              </AuButton>
+            </div>
+            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
+                "timeline-step.second-signature"}}</AuHeading>
+              <AuButton
+                {{on "click" this.showSigningModal}}
+                @skin="secondary"
+                @icon="pencil"
+                @iconAlignment="left"
+                @loading={{this.loading}}
+                @disabled={{not this.canSignSecondSignature}}
+              >
+                {{t "timeline-step.sign-button-label" name=(limit-content this.title 30)}}
+              </AuButton>
+            </div>
+            <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
+              <AuHelpText @skin="secondary" class="au-u-margin-top-none">
+                {{t "timeline-step.signing-restriction-info"}}
+                <a
+                  href="{{config "manual.baseUrl"}}{{config "manual.signee"}}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="au-c-link">
+                  {{t "timeline-step.signing-restriction-role"}}
+                </a>
+                {{t "timeline-step.signing-restriction-end"}}
+              </AuHelpText>
+            </div>
+          </div>
+
+
+        {{/if}}
+      </Card.content>
+    </AuCard>
+  {{/if}}
 </div>
-<Signatures::TimelineStep
-  @name={{this.agendapoint.titel}}
-  @document={{this.extract.document}}
-  @signedResources={{this.extract.document.signedResources}}
-  @publishedResource={{this.extract.document.publishedResource}}
-  @errors={{this.extract.errors}}
-  @signing={{perform this.createSignedResourceTask this.extract.document.behandeling}}
-  @publish={{perform this.createPublishedResourceTask this.extract.document.behandeling}}
-  @print={{fn this.print this.extract}}
-  @isOpen={{true}}
-  @mockDocument={{this.mockBehandeling}}
-/>
+
+{{#if this.signingModalOpen}}
+  <Signatures::SignatureConfirmation
+    @name={{this.title}} @mockDocument={{this.previewDocument}}
+    @confirm={{perform this.signDocumentTask}}
+    @cancel={{this.closeSigningModal}} />
 {{/if}}
-</div>

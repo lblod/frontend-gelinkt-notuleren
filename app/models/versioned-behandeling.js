@@ -5,8 +5,10 @@ export default class VersionedBehandelingModel extends Model {
   @attr content;
   @attr uri;
   @attr('boolean', { defaultValue: false }) deleted;
-  @hasMany('signed-resource') signedResources;
+  @hasMany('signed-resource', { inverse: 'versionedBehandeling' })
+  signedResources;
   @belongsTo('published-resource') publishedResource;
   @belongsTo('zitting') zitting;
-  @belongsTo('behandeling-van-agendapunt') behandeling;
+  @belongsTo('behandeling-van-agendapunt', { inverse: 'versionedBehandeling' })
+  behandeling;
 }

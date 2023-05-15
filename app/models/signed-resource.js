@@ -12,4 +12,6 @@ export default class SignedResourceModel extends Model {
   @belongsTo('versioned-behandeling') versionedBehandeling;
   @belongsTo('versioned-besluiten-lijst') versionedBesluitenLijst;
   @belongsTo('versioned-notulen') versionedNotulen;
+  @belongsTo('versioned-behandeling', { inverse: 'signedResources' })
+  versionedBehandeling;
 }
