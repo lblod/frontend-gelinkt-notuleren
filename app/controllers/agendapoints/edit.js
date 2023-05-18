@@ -71,6 +71,10 @@ import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { validation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/validation';
+import { atLeastOneArticleContainer } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/decision-plugin/utils/validation-rules';
+
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -82,6 +86,9 @@ export default class AgendapointsEditController extends Controller {
   @service intl;
   @service features;
   @tracked citationPlugin = citationPlugin(this.config.citation);
+  @tracked validationPlugin = validation((schema) => ({
+    shapes: [atLeastOneArticleContainer(schema)],
+  }));
 
   schema = new Schema({
     nodes: {
@@ -93,12 +100,7 @@ export default class AgendapointsEditController extends Controller {
       bullet_list,
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-      date: date({
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
-      }),
+      date: date(this.config.date),
       STRUCTURE_NODES,
       regulatoryStatementNode,
       variable,
@@ -156,9 +158,24 @@ export default class AgendapointsEditController extends Controller {
         activeInNodeTypes(schema) {
           return new Set([schema.nodes.motivering]);
         },
+        endpoint: '/codex/sparql',
       },
       link: {
         interactive: true,
+      },
+      roadsignRegulation: {
+        endpoint: ENV.roadsignRegulationPlugin.endpoint,
+        imageBaseUrl: ENV.roadsignRegulationPlugin.imageBaseUrl,
+      },
+      besluitType: {
+        endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
+      },
+      templateVariable: {
+        endpoint: ENV.templateVariablePlugin.endpoint,
+        zonalLocationCodelistUri:
+          ENV.templateVariablePlugin.zonalLocationCodelistUri,
+        nonZonalLocationCodelistUri:
+          ENV.templateVariablePlugin.nonZonalLocationCodelistUri,
       },
       structures: structureSpecs,
     };
@@ -180,6 +197,7 @@ export default class AgendapointsEditController extends Controller {
       tablePlugin,
       tableKeymap,
       this.citationPlugin,
+      this.validationPlugin,
       createInvisiblesPlugin(
         [space, hardBreak, paragraphInvisible, headingInvisible],
         {
@@ -249,6 +267,19 @@ export default class AgendapointsEditController extends Controller {
 
   onTitleUpdate = task(async (title) => {
     const html = this.editorDocument.content;
+
+    const behandeling = (
+      await this.store.query('behandeling-van-agendapunt', {
+        'document-container.id': this.model.documentContainer.id,
+        'filter[document-container][current-version][:id:]':
+          this.editorDocument.id,
+        include: 'document-container.current-version,onderwerp',
+      })
+    ).firstObject;
+
+    const agendaItem = await behandeling.onderwerp;
+    agendaItem.titel = title;
+
     const editorDocument =
       await this.documentService.createEditorDocument.perform(
         title,
@@ -256,7 +287,10 @@ export default class AgendapointsEditController extends Controller {
         this.documentContainer,
         this.editorDocument
       );
+
     this._editorDocument = editorDocument;
+
+    await behandeling.save();
   });
 
   saveTask = task(async () => {
