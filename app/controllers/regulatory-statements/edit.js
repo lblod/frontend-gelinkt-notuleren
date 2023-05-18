@@ -94,12 +94,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       bullet_list,
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-      date: date({
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
-      }),
+      date: date(this.config.date),
       variable,
       ...STRUCTURE_NODES,
       heading,
@@ -190,6 +185,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         activeInNodeTypes(schema) {
           return new Set([schema.nodes.doc]);
         },
+        endpoint: '/codex/sparql',
       },
       templateVariable: {
         endpoint: ENV.templateVariablePlugin.endpoint,
