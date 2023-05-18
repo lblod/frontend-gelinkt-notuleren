@@ -28,6 +28,15 @@
 
 
 
+
+## 4.0.1 (2023-05-18)
+
+#### :bug: Bug Fix
+* [#467](https://github.com/lblod/frontend-gelinkt-notuleren/pull/467) Add image base url to env ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 4.0.0 (2023-05-18)
 
 #### :boom: Breaking Change
