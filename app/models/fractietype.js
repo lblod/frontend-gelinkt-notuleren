@@ -3,6 +3,7 @@ import Model, { attr } from '@ember-data/model';
 export default class FractieTypeModel extends Model {
   @attr uri;
   @attr label;
+  @attr scopeNote;
 
   get isOnafhankelijk() {
     return (

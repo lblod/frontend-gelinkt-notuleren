@@ -5,10 +5,10 @@ export default class UserModel extends Model {
   @attr achternaam;
   @attr rijksregisterNummer;
 
-  @hasMany('account', { inverse: null })
+  @hasMany('account', { inverse: 'gebruiker' })
   account;
 
-  @hasMany('bestuurseenheden', { inverse: null })
+  @hasMany('bestuurseenheid', { inverse: null })
   bestuurseenheden;
 
   // this is only used for mock login afaik

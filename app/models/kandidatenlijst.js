@@ -4,8 +4,11 @@ export default class KandidatenlijstModel extends Model {
   @attr uri;
   @attr lijstnaam;
   @attr lijstnummer;
+
+  @belongsTo('lijsttype', { inverse: null }) lijsttype;
   @belongsTo('rechtstreekse-verkiezing', { inverse: 'heeftLijst' })
   rechtstreekseVerkiezing;
+
   @hasMany('persoon', { inverse: 'isKandidaatVoor' }) kandidaten;
 
   rdfaBindings = {

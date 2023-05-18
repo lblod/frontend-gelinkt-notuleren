@@ -3,9 +3,12 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 export default class FractieModel extends Model {
   @attr uri;
   @attr naam;
+  @attr generatedFrom;
+
   @belongsTo('fractietype', { inverse: null }) fractietype;
-  @hasMany('bestuursorgaan', { inverse: null }) bestuursorganenInTijd;
   @belongsTo('bestuurseenheid', { inverse: null }) bestuurseenheid;
+
+  @hasMany('bestuursorgaan', { inverse: null }) bestuursorganenInTijd;
 
   rdfaBindings = {
     class: 'http://data.vlaanderen.be/ns/mandaat#Fractie',

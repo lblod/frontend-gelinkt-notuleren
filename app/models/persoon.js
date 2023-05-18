@@ -5,11 +5,15 @@ export default class PersoonModel extends Model {
   @attr achternaam;
   @attr alternatieveNaam;
   @attr gebruikteVoornaam;
+
   @belongsTo('geboorte', { inverse: null }) geboorte;
+  @belongsTo('identificator', { inverse: null }) identificator;
   @belongsTo('geslacht-code', { inverse: null }) geslacht;
+
   @hasMany('mandataris', { inverse: 'isBestuurlijkeAliasVan' }) isAangesteldAls;
   @hasMany('kandidatenlijst', { inverse: 'kandidaten' }) isKandidaatVoor;
-  @hasMany('verkiezingsresultaat', { inverse: null }) verkiezingsresultaten;
+  @hasMany('verkiezingsresultaat', { inverse: 'isResultaatVan' })
+  verkiezingsresultaten;
 
   get fullName() {
     return `${this.gebruikteVoornaam} ${this.achternaam}`;

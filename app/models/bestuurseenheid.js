@@ -2,9 +2,16 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class BestuurseenheidModel extends Model {
   @attr naam;
+  @attr alternatieveNaam;
+  @attr wilMailOntvangen;
+  @attr mailAdres;
   @attr uri;
+
+  @belongsTo('werkingsgebied', { inverse: 'bestuurseenheid' }) werkingsgebied;
+  @belongsTo('werkingsgebied', { inverse: null }) provincie;
   @belongsTo('bestuurseenheid-classificatie-code', { inverse: null })
   classificatie;
+
   @hasMany('bestuursorgaan', { inverse: 'bestuurseenheid' }) bestuursorganen;
 
   rdfaBindings = {
