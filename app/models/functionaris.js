@@ -5,6 +5,7 @@ export default class FunctionarisModel extends MandatarisModel {
   @attr('datetime') start;
   @attr('datetime') einde;
   @attr uri;
+
   @belongsTo('bestuursfunctie', { inverse: null }) bekleedt;
   @belongsTo('persoon', { inverse: 'isAangesteldAls' }) isBestuurlijkeAliasVan;
   @belongsTo('functionaris-status-code', { inverse: null }) status;

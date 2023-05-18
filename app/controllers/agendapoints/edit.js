@@ -72,6 +72,8 @@ import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/high
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { validation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/validation';
+import { atLeastOneArticleContainer } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/decision-plugin/utils/validation-rules';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -84,6 +86,9 @@ export default class AgendapointsEditController extends Controller {
   @service intl;
   @service features;
   @tracked citationPlugin = citationPlugin(this.config.citation);
+  @tracked validationPlugin = validation((schema) => ({
+    shapes: [atLeastOneArticleContainer(schema)],
+  }));
 
   schema = new Schema({
     nodes: {
@@ -95,12 +100,7 @@ export default class AgendapointsEditController extends Controller {
       bullet_list,
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-      date: date({
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
-      }),
+      date: date(this.config.date),
       STRUCTURE_NODES,
       regulatoryStatementNode,
       variable,
@@ -158,6 +158,7 @@ export default class AgendapointsEditController extends Controller {
         activeInNodeTypes(schema) {
           return new Set([schema.nodes.motivering]);
         },
+        endpoint: '/codex/sparql',
       },
       link: {
         interactive: true,
@@ -196,6 +197,7 @@ export default class AgendapointsEditController extends Controller {
       tablePlugin,
       tableKeymap,
       this.citationPlugin,
+      this.validationPlugin,
       createInvisiblesPlugin(
         [space, hardBreak, paragraphInvisible, headingInvisible],
         {

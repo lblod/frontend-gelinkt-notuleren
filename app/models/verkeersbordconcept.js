@@ -4,5 +4,4 @@ export default class VerkeersbordconceptModel extends Model {
   @attr afbeelding;
   @attr betekenis;
   @attr verkeersbordcode;
-  @attr beschrijving;
 }

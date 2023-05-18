@@ -6,8 +6,11 @@ export default class VersionedNotulesModel extends Model {
   @attr publicContent;
   @attr publicBehandelingen;
   @attr kind;
-  @hasMany('signed-resource') signedResources;
-  @belongsTo('published-resource') publishedResource;
-  @belongsTo('document-container') documentContainer;
-  @belongsTo('zitting') zitting;
+
+  @hasMany('signed-resource', { inverse: 'versionedNotulen' }) signedResources;
+
+  @belongsTo('published-resource', { inverse: 'versionedNotulen' })
+  publishedResource;
+  @belongsTo('editor-document', { inverse: null }) editorDocument;
+  @belongsTo('zitting', { inverse: null }) zitting;
 }

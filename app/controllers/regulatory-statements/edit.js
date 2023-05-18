@@ -69,6 +69,7 @@ import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/high
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { extractOutline } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/utils';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -93,12 +94,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       bullet_list,
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-      date: date({
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
-      }),
+      date: date(this.config.date),
       variable,
       ...STRUCTURE_NODES,
       heading,
@@ -189,6 +185,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         activeInNodeTypes(schema) {
           return new Set([schema.nodes.doc]);
         },
+        endpoint: '/codex/sparql',
       },
       templateVariable: {
         endpoint: ENV.templateVariablePlugin.endpoint,
@@ -214,7 +211,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   });
 
   get dirty() {
-    return this.editorDocument.content !== this.controller.htmlContent;
+    return this.editorDocument.content !== this.controller?.htmlContent;
   }
 
   get editorDocument() {
@@ -231,11 +228,48 @@ export default class RegulatoryStatementsRoute extends Controller {
     generateExportFromEditorDocument(this.editorDocument);
   }
 
+  tableOfContentsRange() {
+    let result;
+    this.controller.mainEditorState.doc.descendants((node, pos) => {
+      if (node.type === this.controller.schema.nodes['table_of_contents']) {
+        result = { from: pos };
+      }
+      return !result;
+    });
+
+    return result;
+  }
+
+  outline() {
+    return {
+      entries: extractOutline({
+        node: this.controller.mainEditorState.doc,
+        pos: -1,
+        config: this.config.tableOfContents,
+      }),
+    };
+  }
+
+  createTableOfContentHTML() {
+    const tocRange = this.tableOfContentsRange();
+    if (tocRange) {
+      const { from } = tocRange;
+      this.controller.withTransaction((tr) => {
+        tr.setNodeMarkup(from, null, {
+          ...this.config.tableOfContents,
+          ...this.outline(),
+        });
+        return tr;
+      });
+    }
+  }
+
   saveTask = task(async () => {
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
+      this.createTableOfContentHTML();
       const html = this.controller.htmlContent;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
@@ -269,5 +303,6 @@ export default class RegulatoryStatementsRoute extends Controller {
   handleRdfaEditorInit(controller) {
     controller.setHtmlContent(this.editorDocument.content);
     this.controller = controller;
+    this.createTableOfContentHTML();
   }
 }
