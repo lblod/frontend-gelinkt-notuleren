@@ -27,6 +27,31 @@
 
 
 
+
+## 4.0.0 (2023-05-18)
+
+#### :boom: Breaking Change
+* [#456](https://github.com/lblod/frontend-gelinkt-notuleren/pull/456) configure plugins without env variables ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :rocket: Enhancement
+* [#461](https://github.com/lblod/frontend-gelinkt-notuleren/pull/461) Always show time on relative dates ([@lagartoverde](https://github.com/lagartoverde))
+* [#456](https://github.com/lblod/frontend-gelinkt-notuleren/pull/456) configure plugins without env variables ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#464](https://github.com/lblod/frontend-gelinkt-notuleren/pull/464) Fix problem with powerselect not appearing ([@lagartoverde](https://github.com/lagartoverde))
+* [#460](https://github.com/lblod/frontend-gelinkt-notuleren/pull/460) Remove border on hover on publication and meeting route ([@lagartoverde](https://github.com/lagartoverde))
+* [#458](https://github.com/lblod/frontend-gelinkt-notuleren/pull/458) Add chrome hacks plugin to GN ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :house: Internal
+* [#457](https://github.com/lblod/frontend-gelinkt-notuleren/pull/457) Add au-modal-container and disable deprecation warnings for modal wormhole version ([@elpoelma](https://github.com/elpoelma))
+* [#454](https://github.com/lblod/frontend-gelinkt-notuleren/pull/454) Bump vm2 from 3.9.16 to 3.9.17 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 4
+- Deniss Kozickis ([@dkozickis](https://github.com/dkozickis))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@usrtim](https://github.com/usrtim)
+
 ## 3.4.1 (2023-04-21)
 
 #### :bug: Bug Fix
