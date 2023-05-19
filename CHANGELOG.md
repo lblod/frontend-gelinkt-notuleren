@@ -29,6 +29,15 @@
 
 
 
+
+## 4.0.2 (2023-05-19)
+
+#### :bug: Bug Fix
+* [#468](https://github.com/lblod/frontend-gelinkt-notuleren/pull/468) GN-4140: Endpoint config for CitationPlugin Card ([@dkozickis](https://github.com/dkozickis))
+
+#### Committers: 1
+- Deniss Kozickis ([@dkozickis](https://github.com/dkozickis))
+
 ## 4.0.1 (2023-05-18)
 
 #### :bug: Bug Fix
