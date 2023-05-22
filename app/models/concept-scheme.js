@@ -4,6 +4,6 @@ export default class ConceptSchemeModel extends Model {
   @attr uri;
   @attr label;
 
-  @hasMany('concept', { inverse: 'conceptSchemes' }) concepts;
-  @hasMany('concept', { inverse: 'topConceptSchemes' }) topConcepts;
+  @hasMany('concept', { inverse: null }) concepts;
+  @hasMany('concept', { inverse: null }) topConcepts;
 }

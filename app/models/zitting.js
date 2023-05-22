@@ -12,9 +12,9 @@ export default class ZittingModel extends Model {
   @belongsTo('functionaris', { inverse: null }) secretaris;
   @belongsTo('mandataris', { inverse: null }) voorzitter;
 
-  @hasMany('agenda', { inverse: 'zitting' }) publicatieAgendas;
+  @hasMany('agenda', { inverse: null }) publicatieAgendas;
   @hasMany('agendapunt', { inverse: 'zitting' }) agendapunten;
-  @hasMany('mandataris', { inverse: 'aanwezigBijZitting' }) aanwezigenBijStart;
-  @hasMany('mandataris', { inverse: 'afwezigBijZitting' }) afwezigenBijStart;
+  @hasMany('mandataris', { inverse: null }) aanwezigenBijStart;
+  @hasMany('mandataris', { inverse: null }) afwezigenBijStart;
   @hasMany('intermission', { inverse: 'zitting' }) intermissions;
 }

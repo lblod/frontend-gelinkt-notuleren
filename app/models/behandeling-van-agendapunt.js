@@ -20,8 +20,8 @@ export default class BehandelingVanAgendapunt extends Model {
 
   @hasMany('besluit', { inverse: 'volgendUitBehandelingVanAgendapunt' })
   besluiten;
-  @hasMany('mandataris', { inverse: 'aanwezigBijBehandeling' }) aanwezigen;
-  @hasMany('mandataris', { inverse: 'afwezigBijBehandeling' }) afwezigen;
+  @hasMany('mandataris', { inverse: null }) aanwezigen;
+  @hasMany('mandataris', { inverse: null }) afwezigen;
   @hasMany('stemming', { inverse: 'behandelingVanAgendapunt' }) stemmingen;
 
   async initializeDocument() {

@@ -12,8 +12,7 @@ export default class PersoonModel extends Model {
 
   @hasMany('mandataris', { inverse: 'isBestuurlijkeAliasVan' }) isAangesteldAls;
   @hasMany('kandidatenlijst', { inverse: 'kandidaten' }) isKandidaatVoor;
-  @hasMany('verkiezingsresultaat', { inverse: 'isResultaatVan' })
-  verkiezingsresultaten;
+  @hasMany('verkiezingsresultaat', { inverse: null }) verkiezingsresultaten;
 
   get fullName() {
     return `${this.gebruikteVoornaam} ${this.achternaam}`;

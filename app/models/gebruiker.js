@@ -5,7 +5,7 @@ export default class UserModel extends Model {
   @attr achternaam;
   @attr rijksregisterNummer;
 
-  @hasMany('account', { inverse: 'gebruiker' })
+  @hasMany('account', { inverse: null })
   account;
 
   @hasMany('bestuurseenheid', { inverse: null })
