@@ -40,10 +40,9 @@ export default class ParticipationListComponent extends Component {
   @task
   *fetchData() {
     this.secretary = yield this.args.secretary;
-    console.log(this.secretary);
-    yield this.secretary.isBestuurlijkeAliasVan;
-    yield this.secretary.isBestuurlijkeAliasVan.fullName;
-    console.log(this.secretary);
+    if (this.secretary) {
+      yield this.secretary.isBestuurlijkeAliasVan;
+    }
   }
 
   get chairman() {
