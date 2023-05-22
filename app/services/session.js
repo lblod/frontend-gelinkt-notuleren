@@ -1,7 +1,8 @@
 import { inject as service } from '@ember/service';
 import BaseSessionService from 'ember-simple-auth/services/session';
-import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import config from 'frontend-gelinkt-notuleren/config/environment';
 
+const providerConfig = config.torii.providers['acmidm-oauth2'];
 export default class SessionService extends BaseSessionService {
   @service currentSession;
 
@@ -11,7 +12,7 @@ export default class SessionService extends BaseSessionService {
   }
 
   handleInvalidation() {
-    const logoutUrl = ENV['torii']['providers']['acmidm-oauth2']['logoutUrl'];
+    const logoutUrl = providerConfig.logoutUrl;
     super.handleInvalidation(logoutUrl);
   }
 }

@@ -8,13 +8,13 @@
     </Group>
     <Group>
       <AuDropdown @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @buttonLabel="Account settings" @alignment="right">
-        <Acmidm::Switch as |acmidm|>
+        {{!-- <Acmidm::Switch as |acmidm|>
           <AuButton @loading={{acmidm.isSwitching}} class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" acmidm.switch}}>
-            <AuIcon @icon="switch" @alignment="left" />{{t "application-header.switch-administrative-unit"}}
+            <AuIcon @icon="switch" @alignment="left" />{{t "auth.switch-administrative-unit"}}
           </AuButton>
-        </Acmidm::Switch>
+        </Acmidm::Switch> --}}
         <button type="button" class="au-c-button au-c-button--tertiary" role="menuitem" {{on "click" this.logout}}>
-          <AuIcon @icon="logout" @alignment="left" />{{t "application-header.logout"}}
+          <AuIcon @icon="logout" @alignment="left" />{{t "auth.logout"}}
         </button>
       </AuDropdown>
     </Group>
