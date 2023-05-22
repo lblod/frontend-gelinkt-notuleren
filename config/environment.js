@@ -26,6 +26,7 @@ module.exports = function (environment) {
     },
     roadsignRegulationPlugin: {
       endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
+      imageBaseUrl: '{{ROADSIGN_IMAGE_BASE_URL}}',
     },
     templateVariablePlugin: {
       endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
