@@ -7,5 +7,5 @@ export default class BestuursorgaanClassificatieCodeModel extends Model {
 
   @hasMany('bestuursfunctie-code', { inverse: 'standaardTypeVan' })
   standaardType;
-  @hasMany('bestuursorgaan', { inverse: 'classificatie' }) isClassificatieVan;
+  @hasMany('bestuursorgaan', { inverse: null }) isClassificatieVan;
 }
