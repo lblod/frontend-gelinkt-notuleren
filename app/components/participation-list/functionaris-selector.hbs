@@ -8,6 +8,6 @@
     @onChange={{@onSelect}}
     as |functionaris| >
   {{functionaris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{functionaris.isBestuurlijkeAliasVan.achternaam}},
-  {{functionaris.bekleedt.rol.label}} ({{t "participation-list.period-start"}}: {{plain-date (await functionaris.start)}}  - {{plain-date (await functionaris.einde)}})
+  {{functionaris.bekleedt.rol.label}} ({{t "participation-list.period-start"}}: {{plain-date functionaris.start}}  - {{plain-date functionaris.einde}})
 </PowerSelect>
 {{/if}}
