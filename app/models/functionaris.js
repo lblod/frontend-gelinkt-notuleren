@@ -1,13 +1,12 @@
-import { attr, belongsTo } from '@ember-data/model';
-import MandatarisModel from './mandataris';
+import Model, { attr, belongsTo } from '@ember-data/model';
 
-export default class FunctionarisModel extends MandatarisModel {
+export default class FunctionarisModel extends Model {
   @attr('datetime') start;
   @attr('datetime') einde;
   @attr uri;
 
   @belongsTo('bestuursfunctie', { inverse: null }) bekleedt;
-  @belongsTo('persoon', { inverse: 'isAangesteldAls' }) isBestuurlijkeAliasVan;
+  @belongsTo('persoon', { inverse: null }) isBestuurlijkeAliasVan;
   @belongsTo('functionaris-status-code', { inverse: null }) status;
 
   rdfaBindings = {
