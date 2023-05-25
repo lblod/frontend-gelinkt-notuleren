@@ -1,9 +1,10 @@
 import Controller from '@ember/controller';
-import { task, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { fetch } from 'fetch';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { trackedFunction } from 'ember-resources/util/function';
 
 export default class MeetingsPublishUittrekselsShowController extends Controller {
   @tracked error;
@@ -15,6 +16,44 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @service intl;
   @service currentSession;
   @service store;
+
+  signatureData = trackedFunction(this, async () => {
+    const signatures = (this.model.signedResources?.toArray() || []).filter(
+      (signature) => !signature.deleted
+    );
+    const first = signatures[0];
+    const second = signatures[1];
+    const result = { first: null, second: null, count: 0 };
+    if (first) {
+      const user = await first.gebruiker;
+      result.first = {
+        model: first,
+        user,
+      };
+      result.count = 1;
+    }
+    if (second) {
+      const user = await second.gebruiker;
+      result.second = {
+        model: second,
+        user,
+      };
+      result.count = 2;
+    }
+    return result;
+  });
+
+  get signatures() {
+    return this.signatureData.value ?? { first: null, second: null, count: 0 };
+  }
+
+  get firstSignature() {
+    return this.signatures.first;
+  }
+
+  get secondSignature() {
+    return this.signatures.second;
+  }
 
   setup(reloadModel) {
     this.reloadModel = reloadModel;
@@ -53,7 +92,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   /**
-   * TODO
    * @returns {boolean}
    */
   get loading() {
@@ -61,14 +99,13 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   /**
-   * TODO
    * @returns {boolean}
    */
   get canSignFirstSignature() {
     return (
       !this.loading &&
       this.currentSession.canSign &&
-      this.signatures.length === 0
+      this.signatures.count === 0
     );
   }
 
@@ -79,7 +116,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     return (
       !this.loading &&
       this.currentSession.canSign &&
-      this.signatures.length === 1
+      this.currentSession.user.id !== this.firstSignature?.user?.id &&
+      this.signatures.count === 1
     );
   }
 
@@ -93,21 +131,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     this.signingModalOpen = false;
   }
 
-  /**
-   * @returns {Signature[]}
-   */
-  get signatures() {
-    return this.model.signedResources;
-  }
-
-  get firstSignature() {
-    return this.signatures[0] ?? null;
-  }
-
-  get secondSignature() {
-    return this.signatures[1] ?? null;
-  }
-
   get status() {
     if (this.isPublished) {
       return {
@@ -119,7 +142,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         previewColor: 'action',
       };
     }
-    if (this.signatures.length === 1) {
+    if (this.signatures.count === 1) {
       return {
         name: 'firstSignature',
         icon: 'message',
@@ -129,7 +152,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         previewColor: 'success',
       };
     }
-    if (this.signatures.length > 1) {
+    if (this.signatures.count > 1) {
       return {
         name: 'secondSignature',
         icon: 'message',
@@ -151,10 +174,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     return 'TODO HEADER';
   }
 
-  get createSignedResourceTask() {
-    return this._createSignedResourceTask.unlinked();
-  }
-
   get createPublishedResourceTask() {
     return this._createPublishedResourceTask.unlinked();
   }
@@ -167,13 +186,14 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         versionedBehandeling: this.versionedTreatment,
       });
       await signature.save();
-      // this.versionedTreatment.signedResources.pushObject(signature);
-      // await this.versionedTreatment.save();
-      // this.treatment.versionedBehandeling = this.versionedTreatment;
-      // await this.treatment.save();
-
-      // necessary because the endpoint does not do json-api, so we can't use the normal
-      // ember-data flow
+      const log = this.store.createRecord('publishing-log', {
+        action: 'sign',
+        user: this.currentSession.user,
+        date: new Date(),
+        signedResource: signature,
+        zitting: this.meeting,
+      });
+      await log.save();
     } catch (e) {
       this.error = e;
     }

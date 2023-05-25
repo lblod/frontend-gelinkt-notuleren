@@ -12,6 +12,6 @@ export default class VersionedBehandelingModel extends Model {
   @belongsTo('published-resource', { inverse: 'versionedBehandeling' })
   publishedResource;
   @belongsTo('zitting', { inverse: null }) zitting;
-  @belongsTo('behandeling-van-agendapunt', { inverse: 'versionedBehandeling' })
+  @belongsTo('behandeling-van-agendapunt', { inverse: 'versionedBehandelingen' })
   behandeling;
 }

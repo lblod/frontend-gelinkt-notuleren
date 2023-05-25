@@ -10,15 +10,22 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
       'behandeling-van-agendapunt',
       params.treatment_id,
       {
-        include:
-          'onderwerp.zitting,' +
-          'versioned-behandeling.published-resource,versioned-behandeling.signed-resources',
+        include: 'onderwerp.zitting',
       }
     );
-    const { agendapoint, versionedTreatment } = await hash({
+    const { agendapoint } = await hash({
       agendapoint: await treatment.onderwerp,
-      versionedTreatment: await treatment.versionedBehandeling,
     });
+    const versionedTreatments = await this.store.query(
+      'versioned-behandeling',
+      {
+        'filter[behandeling][:id:]': treatment.id,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+      }
+    );
+    const versionedTreatment = versionedTreatments.firstObject;
+    console.log('versioned Treatment', versionedTreatment);
     const meeting = await agendapoint.zitting;
 
     if (!versionedTreatment) {
@@ -37,13 +44,15 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
           behandeling: treatment,
         }
       );
+      const signedResources = await versionedTreatment.signedResources;
+      const publishedResource = await versionedTreatment.publishedResource;
       return {
         treatment,
         agendapoint,
         versionedTreatment,
         meeting,
-        signedResources: [],
-        publishedResource: null,
+        signedResources,
+        publishedResource,
       };
     } else {
       const signedResources = await versionedTreatment.signedResources;
@@ -53,7 +62,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         agendapoint,
         versionedTreatment,
         meeting,
-        signedResources: signedResources.toArray(),
+        signedResources,
         publishedResource,
       };
     }
@@ -61,7 +70,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
 
   setupController(controller) {
     super.setupController(...arguments);
-    console.log("firing setupController");
+    console.log('firing setupController');
     console.log(...arguments);
     console.log(controller.model);
     controller.setup(async () => {

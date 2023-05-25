@@ -8,9 +8,7 @@ export default class SignedResourceModel extends Model {
 
   @belongsTo('blockchain-status', { inverse: null }) status;
   @belongsTo('gebruiker', { inverse: null }) gebruiker;
-  @belongsTo('agenda') agenda;
   @belongsTo('agenda', { inverse: 'signedResources' }) agenda;
-  @belongsTo('versioned-behandeling') versionedBehandeling;
   @belongsTo('versioned-besluiten-lijst', { inverse: 'signedResources' })
   versionedBesluitenLijst;
   @belongsTo('versioned-behandeling', { inverse: 'signedResources' })
