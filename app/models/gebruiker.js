@@ -8,7 +8,7 @@ export default class UserModel extends Model {
   @hasMany('account', { inverse: null })
   account;
 
-  @hasMany('bestuurseenheden', { inverse: null })
+  @hasMany('bestuurseenheid', { inverse: null })
   bestuurseenheden;
 
   // this is only used for mock login afaik

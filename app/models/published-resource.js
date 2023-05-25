@@ -5,10 +5,14 @@ export default class PublishedResourceModel extends Model {
   @attr hashValue;
   @attr('datetime') createdOn;
   @attr submissionStatus;
-  @belongsTo('blockchain-status') status;
-  @belongsTo('gebruiker') gebruiker;
-  @belongsTo('agenda') agenda;
-  @belongsTo('versioned-besluiten-lijst') versionedBesluitenLijst;
-  @belongsTo('versioned-notulen') versionedNotulen;
-  @belongsTo('versioned-behandeling') versionedBehandeling;
+
+  @belongsTo('blockchain-status', { inverse: null }) status;
+  @belongsTo('gebruiker', { inverse: null }) gebruiker;
+  @belongsTo('agenda', { inverse: 'publishedResource' }) agenda;
+  @belongsTo('versioned-besluiten-lijst', { inverse: 'publishedResource' })
+  versionedBesluitenLijst;
+  @belongsTo('versioned-behandeling', { inverse: 'publishedResource' })
+  versionedBehandeling;
+  @belongsTo('versioned-notulen', { inverse: 'publishedResource' })
+  versionedNotulen;
 }

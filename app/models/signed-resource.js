@@ -5,13 +5,18 @@ export default class SignedResourceModel extends Model {
   @attr hashValue;
   @attr('boolean', { defaultValue: false }) deleted;
   @attr('datetime') createdOn;
-  @belongsTo('blockchain-status') status;
-  @belongsTo('gebruiker') gebruiker;
+
+  @belongsTo('blockchain-status', { inverse: null }) status;
+  @belongsTo('gebruiker', { inverse: null }) gebruiker;
   @belongsTo('agenda') agenda;
-  @belongsTo('versioned-agenda') versionedAgenda;
+  @belongsTo('agenda', { inverse: 'signedResources' }) agenda;
   @belongsTo('versioned-behandeling') versionedBehandeling;
-  @belongsTo('versioned-besluiten-lijst') versionedBesluitenLijst;
-  @belongsTo('versioned-notulen') versionedNotulen;
+  @belongsTo('versioned-besluiten-lijst', { inverse: 'signedResources' })
+  versionedBesluitenLijst;
+  @belongsTo('versioned-behandeling', { inverse: 'signedResources' })
+  versionedBehandeling;
+  @belongsTo('versioned-notulen', { inverse: 'signedResources' })
+  versionedNotulen;
   @belongsTo('versioned-behandeling', { inverse: 'signedResources' })
   versionedBehandeling;
 }

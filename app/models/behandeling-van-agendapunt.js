@@ -4,22 +4,25 @@ import { inject as service } from '@ember/service';
 
 export default class BehandelingVanAgendapunt extends Model {
   @service store;
+
   @attr openbaar;
   @attr afgeleidUit;
   @attr('string') gevolg;
+
   @belongsTo('behandeling-van-agendapunt', { inverse: null })
   vorigeBehandelingVanAgendapunt;
   @belongsTo('agendapunt', { inverse: 'behandeling' }) onderwerp;
   @belongsTo('functionaris', { inverse: null }) secretaris;
   @belongsTo('mandataris', { inverse: null }) voorzitter;
+  @belongsTo('document-container', { inverse: null }) documentContainer;
+  @belongsTo('versioned-behandeling', { inverse: 'behandeling' })
+  versionedBehandeling;
+
   @hasMany('besluit', { inverse: 'volgendUitBehandelingVanAgendapunt' })
   besluiten;
   @hasMany('mandataris', { inverse: null }) aanwezigen;
   @hasMany('mandataris', { inverse: null }) afwezigen;
   @hasMany('stemming', { inverse: 'behandelingVanAgendapunt' }) stemmingen;
-  @belongsTo('document-container') documentContainer;
-  @belongsTo('versioned-behandeling', { inverse: 'behandeling' })
-  versionedBehandeling;
 
   async initializeDocument() {
     const agendaItem = await this.onderwerp;

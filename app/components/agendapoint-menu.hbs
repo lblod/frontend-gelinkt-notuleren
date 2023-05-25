@@ -1,13 +1,15 @@
 <AuButtonGroup @inline={{true}} role="tablist" aria-label={{t "editor-tabs"}}>
-  <AuLink @route="agendapoints.edit"   class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="document" @iconAlignment="left" @model={{@documentContainer.id}}>
-    {{t "attachments.return"}}
-  </AuLink>
-  <AuLink @route="agendapoints.attachments"   class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="attachment" @iconAlignment="left" @model={{@documentContainer.id}}>
-    {{t "attachments.attachments"}}
-    {{#if this.attachmentCount}}( {{this.attachmentCount}} ){{/if}}
-  </AuLink>
-  <AuLink @route="agendapoints.revisions"  class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="draft" @iconAlignment="left" @model={{@documentContainer.id}}>
-    {{t "agendapoint.revisions"}}
-    {{#if this.revisionCount}}( {{this.revisionCount}} ){{/if}}
-  </AuLink>
+  {{#if @documentContainer}}
+    <AuLink @route="agendapoints.edit"   class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="document" @iconAlignment="left" @model={{@documentContainer.id}}>
+      {{t "attachments.return"}}
+    </AuLink>
+    <AuLink @route="agendapoints.attachments"   class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="attachment" @iconAlignment="left" @model={{@documentContainer.id}}>
+      {{t "attachments.attachments"}}
+      {{#if this.attachmentCount}}( {{this.attachmentCount}} ){{/if}}
+    </AuLink>
+    <AuLink @route="agendapoints.revisions"  class="au-u-margin-bottom-none"  @skin="button-secondary" @icon="draft" @iconAlignment="left" @model={{@documentContainer.id}}>
+      {{t "agendapoint.revisions"}}
+      {{#if this.revisionCount}}( {{this.revisionCount}} ){{/if}}
+    </AuLink>
+    {{/if}}
 </AuButtonGroup>
