@@ -16,12 +16,12 @@ export default class MandatarisModel extends Model {
 
   @hasMany('mandataris', { inverse: null }) tijdelijkeVervangingen;
   @hasMany('beleidsdomein-code', { inverse: 'mandatarissen' }) beleidsdomein;
-  @hasMany('behandeling-van-agendapunt', { inverse: 'aanwezigen' })
+  @hasMany('behandeling-van-agendapunt', { inverse: null })
   aanwezigBijBehandeling;
-  @hasMany('behandeling-van-agendapunt', { inverse: 'afwezigen' })
+  @hasMany('behandeling-van-agendapunt', { inverse: null })
   afwezigBijBehandeling;
-  @hasMany('zitting', { inverse: 'aanwezigenBijStart' }) aanwezigBijZitting;
-  @hasMany('zitting', { inverse: 'afwezigenBijStart' }) afwezigBijZitting;
+  @hasMany('zitting', { inverse: null }) aanwezigBijZitting;
+  @hasMany('zitting', { inverse: null }) afwezigBijZitting;
 
   rdfaBindings = {
     class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris',
