@@ -5,6 +5,7 @@
   @onTitleUpdate={{perform this.onTitleUpdate}}
   @allowTitleUpdate={{true}}
   @isRegulatoryStatement={{true}}
+  @dirty={{this.dirty}}
 >
   <:return-link>
   <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}} @icon="arrow-left">
@@ -74,6 +75,11 @@
         @controller={{this.controller}}
         @options={{this.config.structures}}
       />
+      <CitationPlugin::CitationInsert
+        @controller={{this.controller}}
+        @plugin={{this.citationPlugin}}
+        @config={{this.config.citation}}
+      />
       <RdfaDatePlugin::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
@@ -85,10 +91,15 @@
         @controller={{this.controller}}
         @options={{this.config.structures}}
       />
+      <CitationPlugin::CitationCard
+        @controller={{this.controller}}
+        @plugin={{this.citationPlugin}}
+        @config={{this.config.citation}}
+      />
       <RdfaDatePlugin::Card
         @controller={{this.controller}}
         @options={{this.config.date}}/>
-      <VariablePlugin::TemplateVariableCard @controller={{this.controller}}/>
+      <VariablePlugin::TemplateVariableCard @controller={{this.controller}} @options={{this.config.templateVariable}}/>
     </:sidebar>
   </RdfaEditorContainer>
 </AuBodyContainer>

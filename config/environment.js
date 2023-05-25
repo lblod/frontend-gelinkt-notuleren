@@ -26,9 +26,12 @@ module.exports = function (environment) {
     },
     roadsignRegulationPlugin: {
       endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
+      imageBaseUrl: '{{ROADSIGN_IMAGE_BASE_URL}}',
     },
     templateVariablePlugin: {
       endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
+      zonalLocationCodelistUri: '{{ZONAL_LOCATION_CODELIST_URI}}',
+      nonZonalLocationCodelistUri: '{{NON_ZONAL_LOCATION_CODELIST_URI}}',
     },
     'ember-plausible': {
       enabled: false,
@@ -95,8 +98,14 @@ module.exports = function (environment) {
     ENV.featureFlags['prosemirror-dev-tools'] = true;
     ENV.roadsignRegulationPlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
+    ENV.roadsignRegulationPlugin.imageBaseUrl =
+      'https://register.mobiliteit.vlaanderen.be/';
     ENV.templateVariablePlugin.endpoint =
       'https://dev.roadsigns.lblod.info/sparql';
+    ENV.templateVariablePlugin.zonalLocationCodelistUri =
+      'http://lblod.data.gift/concept-schemes/62331E6900730AE7B99DF7EF';
+    ENV.templateVariablePlugin.nonZonalLocationCodelistUri =
+      'http://lblod.data.gift/concept-schemes/62331FDD00730AE7B99DF7F2';
     ENV.regulatoryStatementEndpoint =
       'https://dev.reglementairebijlagen.lblod.info/raw-sparql';
     ENV.regulatoryStatementFileEndpoint =

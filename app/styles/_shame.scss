@@ -673,12 +673,12 @@ div.table-of-contents {
 }
 
 .regulatory-statement-current-version-container-active {
-  white-space: nowrap; 
+  white-space: nowrap;
   border-left: 3px solid #5990DE;
 }
 
 .regulatory-statement-current-version-container {
-  white-space: nowrap; 
+  white-space: nowrap;
   color: var(--au-gray-700);
 }
 
@@ -726,4 +726,43 @@ div[typeof="besluit:Zitting"] {
   .au-c-template * {
     color: var(--au-gray-600);
   }
+}
+div[typeof="besluitpublicatie:Documentonderdeel"] {
+  cursor: default;
+  &:hover {
+    border: 0.1rem solid var(--au-gray-400);
+  }
+  span.mark-highlight-manual {
+    background-color: var(--au-gray-300);
+    color: var(--au-gray-900);
+  }
+  [typeof="ext:Mapping"] [property="dct:type"] + [property="ext:content"]:after, [typeof="ext:Mapping"] [property="ext:codelist"] + [property="ext:content"]:after {
+    background-image: none;
+    height: 0;
+    width: 0;
+    margin: 0;
+  }
+}
+
+.au-c-card__content div[typeof="besluitpublicatie:Documentonderdeel"],
+.au-c-meeting-chrome-card div[typeof="besluitpublicatie:Documentonderdeel"] {
+  &:hover {
+    border: none;
+  }
+}
+
+.ProseMirror-selectednode {
+  div[typeof="besluitpublicatie:Documentonderdeel"] {
+    outline: 0;
+    box-shadow: 0 0 0 2px var(--au-blue-600);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  ::selection {
+    background-color: #0000;
+  }
+}
+
+#ember-basic-dropdown-wormhole {
+  z-index: 20000;
 }

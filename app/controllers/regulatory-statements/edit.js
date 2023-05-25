@@ -67,6 +67,10 @@ import {
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { extractOutline } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/utils';
+
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -77,52 +81,45 @@ export default class RegulatoryStatementsRoute extends Controller {
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
 
-  get schema() {
-    return new Schema({
-      nodes: {
-        doc: {
-          content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
-        },
-        paragraph,
-        table_of_contents: table_of_contents(this.config.tableOfContents),
-        repaired_block,
-        list_item,
-        ordered_list,
-        bullet_list,
-        placeholder,
-        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-        date: date({
-          placeholder: {
-            insertDate: this.intl.t('date-plugin.insert.date'),
-            insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-          },
-        }),
-        variable,
-        ...STRUCTURE_NODES,
-        heading,
-        blockquote,
-        horizontal_rule,
-        code_block,
-        text,
-        image,
-        hard_break,
-        invisible_rdfa,
-        block_rdfa,
-        link: link(this.config.link),
+  schema = new Schema({
+    nodes: {
+      doc: {
+        content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
       },
-      marks: {
-        inline_rdfa,
-        em,
-        strong,
-        underline,
-        strikethrough,
-        subscript,
-        superscript,
-        highlight,
-        color,
-      },
-    });
-  }
+      paragraph,
+      table_of_contents: table_of_contents(this.config.tableOfContents),
+      repaired_block,
+      list_item,
+      ordered_list,
+      bullet_list,
+      placeholder,
+      ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
+      date: date(this.config.date),
+      variable,
+      ...STRUCTURE_NODES,
+      heading,
+      blockquote,
+      horizontal_rule,
+      code_block,
+      text,
+      image,
+      hard_break,
+      invisible_rdfa,
+      block_rdfa,
+      link: link(this.config.link),
+    },
+    marks: {
+      inline_rdfa,
+      em,
+      strong,
+      underline,
+      strikethrough,
+      subscript,
+      superscript,
+      highlight,
+      color,
+    },
+  });
 
   get nodeViews() {
     return (controller) => {
@@ -148,6 +145,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           shouldShowInvisibles: false,
         }
       ),
+      linkPasteHandler(this.schema.nodes.link),
     ];
   }
 
@@ -185,8 +183,16 @@ export default class RegulatoryStatementsRoute extends Controller {
       citation: {
         type: 'nodes',
         activeInNodeTypes(schema) {
-          return new Set([schema.nodes.motivering]);
+          return new Set([schema.nodes.doc]);
         },
+        endpoint: '/codex/sparql',
+      },
+      templateVariable: {
+        endpoint: ENV.templateVariablePlugin.endpoint,
+        zonalLocationCodelistUri:
+          ENV.templateVariablePlugin.zonalLocationCodelistUri,
+        nonZonalLocationCodelistUri:
+          ENV.templateVariablePlugin.nonZonalLocationCodelistUri,
       },
       link: {
         interactive: true,
@@ -205,7 +211,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   });
 
   get dirty() {
-    return this.editorDocument.content !== this.controller.htmlContent;
+    return this.editorDocument.content !== this.controller?.htmlContent;
   }
 
   get editorDocument() {
@@ -222,11 +228,48 @@ export default class RegulatoryStatementsRoute extends Controller {
     generateExportFromEditorDocument(this.editorDocument);
   }
 
+  tableOfContentsRange() {
+    let result;
+    this.controller.mainEditorState.doc.descendants((node, pos) => {
+      if (node.type === this.controller.schema.nodes['table_of_contents']) {
+        result = { from: pos };
+      }
+      return !result;
+    });
+
+    return result;
+  }
+
+  outline() {
+    return {
+      entries: extractOutline({
+        node: this.controller.mainEditorState.doc,
+        pos: -1,
+        config: this.config.tableOfContents,
+      }),
+    };
+  }
+
+  createTableOfContentHTML() {
+    const tocRange = this.tableOfContentsRange();
+    if (tocRange) {
+      const { from } = tocRange;
+      this.controller.withTransaction((tr) => {
+        tr.setNodeMarkup(from, null, {
+          ...this.config.tableOfContents,
+          ...this.outline(),
+        });
+        return tr;
+      });
+    }
+  }
+
   saveTask = task(async () => {
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
+      this.createTableOfContentHTML();
       const html = this.controller.htmlContent;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
@@ -260,5 +303,6 @@ export default class RegulatoryStatementsRoute extends Controller {
   handleRdfaEditorInit(controller) {
     controller.setHtmlContent(this.editorDocument.content);
     this.controller = controller;
+    this.createTableOfContentHTML();
   }
 }

@@ -73,7 +73,7 @@
     @plugins={{this.plugins}}
   >
     <:toolbar>
-      <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}}/>
+      <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}} @options={{this.config.besluitType}}/>
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}}/>
     </:toolbar>
     <:sidebar-collapsible>
@@ -90,7 +90,7 @@
           @controller={{this.controller}}
           @options={{this.config.date}}
         />
-        <RoadsignRegulationPlugin::RoadsignRegulationCard @controller={{this.controller}}/>
+        <RoadsignRegulationPlugin::RoadsignRegulationCard @controller={{this.controller}} @options={{this.config.roadsignRegulation}}/>
         <StandardTemplatePlugin::Card @controller={{this.controller}}/>
         {{#if (feature-flag 'regulatoryStatements')}}
           <EditorPlugins::RegulatoryStatements::SidebarInsert @controller={{this.controller}}/>
@@ -101,16 +101,17 @@
         @controller={{this.controller}}
         @options={{this.config.structures}}
       />
-      <BesluitPlugin::BesluitPluginCard @controller={{this.controller}}/>
+      <DecisionPlugin::DecisionPluginCard @controller={{this.controller}}/>
       <CitationPlugin::CitationCard
         @controller={{this.controller}}
         @plugin={{this.citationPlugin}}
+        @config={{this.config.citation}}
       />
       <ImportSnippetPlugin::Card @controller={{this.controller}}/>
       <RdfaDatePlugin::Card
         @controller={{this.controller}}
         @options={{this.config.date}}/>
-      <VariablePlugin::TemplateVariableCard @controller={{this.controller}}/>
+      <VariablePlugin::TemplateVariableCard @controller={{this.controller}} @options={{this.config.templateVariable}}/>
     </:sidebar>
   </RdfaEditorContainer>
 </div>

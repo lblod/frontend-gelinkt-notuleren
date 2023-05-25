@@ -111,6 +111,7 @@ editor-document-title:
   placeholder: Naamloos document
   agendapoint-title: agendapunt titel
   change-title: Titel wijzigen
+  title-saved: Titel opgeslagen
 
 inbox:
   loading: Aan het laden
@@ -358,6 +359,7 @@ meeting-form:
   fifth-section-not-filled-warning: Bewerk je besluiten en beheer de stemmingen
   bestuursorgan-not-selected-warning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
   notulen-published: Notulen gepubliceerd
+  notulen-signed: Notulen ondertekend
 
 meetings:
   publish:

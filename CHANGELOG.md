@@ -25,6 +25,78 @@
 
 
 
+
+
+
+
+
+## 4.0.2 (2023-05-19)
+
+#### :bug: Bug Fix
+* [#468](https://github.com/lblod/frontend-gelinkt-notuleren/pull/468) GN-4140: Endpoint config for CitationPlugin Card ([@dkozickis](https://github.com/dkozickis))
+
+#### Committers: 1
+- Deniss Kozickis ([@dkozickis](https://github.com/dkozickis))
+
+## 4.0.1 (2023-05-18)
+
+#### :bug: Bug Fix
+* [#467](https://github.com/lblod/frontend-gelinkt-notuleren/pull/467) Add image base url to env ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 4.0.0 (2023-05-18)
+
+#### :boom: Breaking Change
+* [#456](https://github.com/lblod/frontend-gelinkt-notuleren/pull/456) configure plugins without env variables ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :rocket: Enhancement
+* [#461](https://github.com/lblod/frontend-gelinkt-notuleren/pull/461) Always show time on relative dates ([@lagartoverde](https://github.com/lagartoverde))
+* [#456](https://github.com/lblod/frontend-gelinkt-notuleren/pull/456) configure plugins without env variables ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#464](https://github.com/lblod/frontend-gelinkt-notuleren/pull/464) Fix problem with powerselect not appearing ([@lagartoverde](https://github.com/lagartoverde))
+* [#460](https://github.com/lblod/frontend-gelinkt-notuleren/pull/460) Remove border on hover on publication and meeting route ([@lagartoverde](https://github.com/lagartoverde))
+* [#458](https://github.com/lblod/frontend-gelinkt-notuleren/pull/458) Add chrome hacks plugin to GN ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :house: Internal
+* [#457](https://github.com/lblod/frontend-gelinkt-notuleren/pull/457) Add au-modal-container and disable deprecation warnings for modal wormhole version ([@elpoelma](https://github.com/elpoelma))
+* [#454](https://github.com/lblod/frontend-gelinkt-notuleren/pull/454) Bump vm2 from 3.9.16 to 3.9.17 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 4
+- Deniss Kozickis ([@dkozickis](https://github.com/dkozickis))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@usrtim](https://github.com/usrtim)
+
+## 3.4.1 (2023-04-21)
+
+#### :bug: Bug Fix
+* [#453](https://github.com/lblod/frontend-gelinkt-notuleren/pull/453) Bugfix/problem with title in dev ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+## 3.4.0 (2023-04-20)
+
+#### :rocket: Enhancement
+* [#452](https://github.com/lblod/frontend-gelinkt-notuleren/pull/452) avoid saving editor document title without changes ([@lagartoverde](https://github.com/lagartoverde))
+* [#448](https://github.com/lblod/frontend-gelinkt-notuleren/pull/448) Improve RS Attachment styling ([@lagartoverde](https://github.com/lagartoverde))
+* [#450](https://github.com/lblod/frontend-gelinkt-notuleren/pull/450) Enable link-paste-handler in agendapoints and regulatory statements ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#449](https://github.com/lblod/frontend-gelinkt-notuleren/pull/449) Fix schema of zitting-text component ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#451](https://github.com/lblod/frontend-gelinkt-notuleren/pull/451) Bump vm2 from 3.9.15 to 3.9.16 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#447](https://github.com/lblod/frontend-gelinkt-notuleren/pull/447) Bump vm2 from 3.9.11 to 3.9.15 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 3
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@usrtim](https://github.com/usrtim)
+
 ## 3.3.0 (2023-03-27)
 
 #### :rocket: Enhancement
