@@ -97,7 +97,6 @@ export default class MeetingsPublishAgendaController extends Controller {
       const rslt = await this.store.createRecord('agenda', {
         agendaType: type,
         zitting: this.model,
-        agendapunten: this.model.behandeldeAgendapunten,
         renderedContent: prePublish,
         deleted: false,
       });
