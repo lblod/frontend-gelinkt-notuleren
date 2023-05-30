@@ -223,7 +223,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
       //
       // the only way to be 100% sure is to build a full jsonAPI endpoint for the entire resource
       // in the service, completely bypassing mu-cl-resources for the GET requests as well
-      await timeout(500);
+      await timeout(1000);
       await this.refreshRoute();
 
       const log = this.store.createRecord('publishing-log', {
