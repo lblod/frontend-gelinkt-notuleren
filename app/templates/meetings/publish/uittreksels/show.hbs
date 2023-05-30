@@ -1,8 +1,6 @@
 {{page-title this.model.agendapoint.title}}
 <div class="au-o-box">
-  {{#if this.loadExtract.isRunning}}
-    <AuLoader/>
-  {{else if this.error}}
+  {{#if this.error}}
     <AuAlert @icon="cross" @sitle={{t "publish.excerpt-error-message"}} @skin="error" @size="small">
       <code>{{this.error}}</code>
     </AuAlert>
@@ -27,7 +25,7 @@
             @level="2"
             @skin="3"
             class="au-u-capitalize au-u-word-break-all">
-            {{this.header}}
+            {{this.title}}
           </AuHeading>
           <AuPill @skin="{{this.status.generalColor}}"
                   class="au-u-margin-left">{{this.status.generalLabel}}</AuPill>
@@ -37,9 +35,11 @@
 
       <Card.content>
 
+        {{!-- Preview --}}
         <AuToolbar @nowrap={{true}} as |Group|>
           <Group>
-            <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{this.title}}</AuHeading>
+            <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{t
+              'publish.preview'}} {{this.title}}</AuHeading>
             {{#if this.status.previewLabel}}
               <AuPill @skin={{this.status.previewColor}} class="au-u-margin-left">
                 {{this.status.previewLabel}}
@@ -63,7 +63,17 @@
           </AuAlert>
         {{else}}
 
-
+        {{!-- Sign --}}
+          <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as
+                     |Group|>
+            <Group>
+              <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{concat (t "timeline-step.sign-step-title")
+                                                                                   this.title}}</AuHeading>
+              <AuPill @skin={{this.status.signingColor}} class="au-u-margin-left">
+                {{this.status.signingLabel}}
+              </AuPill>
+            </Group>
+          </AuToolbar>
           <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
             <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
               <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
@@ -74,7 +84,7 @@
               {{#if this.firstSignature}}
                 <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
                   <Signatures::SignedResource @signature={{this.firstSignature.model}} @canDelete={{not
-                    this.isPublished}} />
+                    this.isPublished}} @delete={{fn (perform this.deleteSignatureTask) this.firstSignature.model}} />
                 </div>
               {{else}}
 
@@ -96,7 +106,7 @@
               {{#if this.secondSignature}}
                 <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
                   <Signatures::SignedResource @signature={{this.secondSignature.model}} @canDelete={{not
-                    this.isPublished}} />
+                    this.isPublished}} @delete={{fn (perform this.deleteSignatureTask) this.secondSignature.model}}/>
                 </div>
 
               {{else}}
@@ -129,26 +139,114 @@
 
 
         {{/if}}
+        {{!-- Print --}}
+        <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as
+                   |Group|>
+          <Group>
+            <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{t "timeline-step.print-button-label"
+                                                                            name=this.title}}</AuHeading>
+          </Group>
+        </AuToolbar>
+        <div class="au-u-margin-top-none au-u-margin-bottom-large">
+          <AuLink @skin="button" @route='print.uittreksel' @models={{array this.meeting.id this.treatment.id}}>
+            {{t "timeline-step.print-button-label" name=(limit-content this.title 60)}}
+          </AuLink>
+        </div>
+
+        {{!-- Publish --}}
+        <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as
+                   |Group|>
+          <Group>
+            <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{t "timeline-step.publish-button-label"
+                                                                            name=this.title}}</AuHeading>
+            <AuPill @skin={{if this.isPublished "success"}} class="au-u-margin-left">
+              {{if this.isPublished (t "publish.public") (t "publish.non-public")}}
+            </AuPill>
+          </Group>
+        </AuToolbar>
+        <div class="au-o-grid au-u-margin-top-none">
+          {{#if this.isPublished}}
+            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
+              <Signatures::PublishedResource @publication={{this.publishedResource}} />
+            </div>
+            <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none">
+              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
+                "timeline-step.link-publish"}}</AuHeading>
+              <p>
+                <a
+                  href="{{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="au-c-link">
+                  {{this.publicationBaseUrl}}{{this.bestuurseenheid.naam}}/{{this.bestuurseenheid.classificatie.label}}
+                </a>
+              </p>
+              <AuHelpText @skin="secondary" class="au-u-margin-bottom-small">{{t
+                "timeline-step.timing-warning"}}</AuHelpText>
+              <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
+                "timeline-step.publication-type"}}</AuHeading>
+              <p>{{t "timeline-step.public-for-all"}}</p>
+            </div>
+          {{else}}
+            <div class="au-o-grid__item au-u-padding-top-none">
+              <AuButton
+                {{on "click" this.showPublishingModal}}
+                @icon="upload"
+                @iconAlignment="left"
+                @loading={{this.loading}}
+                @disabled={{not this.canPublish}}
+              >
+                {{t "timeline-step.publish-notify-button-label" name=(limit-content @name 60)}}
+              </AuButton>
+
+              <AuHelpText @skin="secondary" class="au-u-margin-top-small">
+                {{t "timeline-step.publish-restriction-info"}}
+                <a
+                  href="{{config "manual.baseUrl"}}{{config "manual.publisher"}}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="au-c-link">
+                  {{t "timeline-step.publish-restriction-role"}}
+                </a>
+                {{t "timeline-step.publish-restriction-end"}}
+              </AuHelpText>
+
+              <AuAlert @icon="info-circle" @title={{t "timeline-step.publication-consequences"}} @skin="info"
+                       @alertsize="small"
+                       class="au-u-margin-top au-u-margin-bottom-none">
+                <p>{{t "timeline-step.preview-info"}}<a href="{{this.publicationBaseUrl}}" target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="au-c-link">{{this.publicationBaseUrl}}</a>{{t
+                  "timeline-step.preview-info-end"}}</p>
+              </AuAlert>
+
+              <AuAlert @icon="info-circle" @title={{t "timeline-step.notify-consequences"}} @skin="info"
+                       @alertsize="small"
+                       class="au-u-margin-top-tiny au-u-margin-bottom-none">
+                <p>{{t "timeline-step.notify-info"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank"
+                                                       rel="noopener noreferrer" class="au-c-link">{{t
+                  "timeline-step.local-loket"}}</a>.</p>
+              </AuAlert>
+            </div>
+          {{/if}}
+        </div>
       </Card.content>
     </AuCard>
   {{/if}}
 
-  <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as |Group|>
-    <Group>
-      <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{t "timeline-step.print-button-label"
-                                                                      name=this.title}}</AuHeading>
-    </Group>
-  </AuToolbar>
-  <div class="au-u-margin-top-none au-u-margin-bottom-large">
-    <AuLink @skin="button" @route='print.uittreksel' @models={{array this.meeting.id this.treatment.id}}>
-      {{t "timeline-step.print-button-label" name=(limit-content this.title 60)}}
-    </AuLink>
-  </div>
 </div>
 
 {{#if this.signingModalOpen}}
   <Signatures::SignatureConfirmation
-    @name={{this.title}} @mockDocument={{this.previewDocument}}
+    @name={{this.title}}
+    @mockDocument={{this.previewDocument}}
     @confirm={{perform this.signDocumentTask}}
     @cancel={{this.closeSigningModal}} />
+{{/if}}
+{{#if this.publishingModalOpen}}
+  <Signatures::PublicationConfirmation
+    @name={{this.title}}
+    @mockDocument={{this.previewDocument}}
+    @confirm={{perform this.publishDocumentTask}}
+    @cancel={{this.closePublishingModal}} />
 {{/if}}

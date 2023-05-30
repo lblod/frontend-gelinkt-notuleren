@@ -129,7 +129,7 @@ inbox:
     administrative-body: Bestuursorgaan
     time: Tijdstip
     location: Locatie
-    meeting-of: Zitting van 
+    meeting-of: Zitting van
     at: op
     new:
       title: Nieuwe zitting aanmaken
@@ -197,7 +197,7 @@ inbox:
 
 
 irg-archive:
-  not-found: 
+  not-found:
     title: Reglement niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het reglement.
 
@@ -385,7 +385,7 @@ meetings:
       confirm-quit-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
       save-and-quit: Opslaan en afsluiten
       cancel: Annuleren
-  not-found: 
+  not-found:
     title: Zitting niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de zitting.
 
@@ -488,6 +488,7 @@ publication-confirmation:
   cancel-button: Annuleren
 
 publish:
+  preview: Voorvertoning
   back-to-meeting: Terug naar zitting
   heading-part-one: Zitting van
   loading-message: Bezig met laden...
@@ -534,7 +535,7 @@ rdfa-editor-container:
   making-copy: Kopie aan het maken
 
 regulatory-statements:
-  not-found: 
+  not-found:
     title: Reglementaire bijlage niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de reglementaire bijlage.
 

@@ -1,17 +1,20 @@
 <p>
-  {{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
-  {{#if @signature.deleted}}
+{{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
+{{#if @signature.deleted}}
     <AuPill
       @skin="error"
     >
       {{t "publish.deleted"}}
     </AuPill>
-  {{else}}
+{{else}}
     <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
-      <AuIcon @icon="calendar" />
+      <AuIcon @icon="calendar"/>
       {{detailed-date @signature.createdOn}}
     </AuHelpText>
-  {{/if}}
+  <p class="au-u-margin-top-tiny">
+    <AuPill class="au-u-word-break-all">{{@signature.hashValue}}</AuPill>
+  </p>
+{{/if}}
 </p>
 {{#if (and this.signedByCurrentUser.value (and (not @signature.deleted) @canDelete))}}
   <AuButton

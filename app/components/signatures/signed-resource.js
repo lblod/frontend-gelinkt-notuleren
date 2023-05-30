@@ -21,6 +21,10 @@ export default class SignedResource extends Component {
 
   @action
   async deleteSignature() {
+    if (this.args.delete) {
+      await this.args.delete();
+      return;
+    }
     const signature = this.args.signature;
     signature.deleted = true;
     //Check if versioned resource should be deleted
@@ -52,11 +56,6 @@ export default class SignedResource extends Component {
       zitting: await versionedResource.zitting,
     });
     await log.save();
-    const publishedResource = await versionedResource.publishedResource;
-    if (publishedResource) {
-      await signature.save();
-      return;
-    }
     const signedResources = await versionedResource.signedResources;
     const validSignedResources = signedResources.filter(
       (signature) => !signature.deleted

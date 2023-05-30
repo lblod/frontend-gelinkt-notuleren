@@ -5,17 +5,21 @@ import { fetch } from 'fetch';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { trackedFunction } from 'ember-resources/util/function';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export default class MeetingsPublishUittrekselsShowController extends Controller {
+  publicationBaseUrl = ENV.publication.baseUrl;
   @tracked error;
-  @tracked extract;
   @tracked signingModalOpen = false;
+  @tracked publishingModalOpen = false;
   @tracked reloadModel;
+  @tracked deleting = false;
   @service publish;
   @service router;
   @service intl;
   @service currentSession;
   @service store;
+  @service router;
 
   signatureData = trackedFunction(this, async () => {
     const signatures = (this.model.signedResources?.toArray() || []).filter(
@@ -42,6 +46,10 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     }
     return result;
   });
+
+  get bestuurseenheid() {
+    return this.currentSession.group;
+  }
 
   get signatures() {
     return this.signatureData.value ?? { first: null, second: null, count: 0 };
@@ -79,8 +87,12 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     return this.model.treatment;
   }
 
+  get publishedResource() {
+    return this.model.publishedResource;
+  }
+
   get isPublished() {
-    return !!this.model.publishedResource;
+    return !!this.publishedResource;
   }
 
   /**
@@ -95,7 +107,11 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
    * @returns {boolean}
    */
   get loading() {
-    return this.signDocumentTask.isRunning;
+    return (
+      this.signDocumentTask.isRunning ||
+      this.publishDocumentTask.isRunning ||
+      this.deleteSignatureTask.isRunning
+    );
   }
 
   /**
@@ -121,9 +137,20 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     );
   }
 
+  /**
+   * @returns {boolean}
+   */
+  get canPublish() {
+    return !this.loading && this.currentSession.canPublish;
+  }
+
   @action
   showSigningModal() {
     this.signingModalOpen = true;
+  }
+
+  @action showPublishingModal() {
+    this.publishingModalOpen = true;
   }
 
   @action
@@ -131,7 +158,27 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     this.signingModalOpen = false;
   }
 
+  @action
+  closePublishingModal() {
+    this.publishingModalOpen = false;
+  }
+
+  @action
+  async refreshRoute() {
+    await this.router.refresh();
+  }
+
   get status() {
+    let signingLabel = '';
+    let signingColor = null;
+    if (this.signatures.count === 1) {
+      signingLabel = this.intl.t('publish.need-second-signature');
+      signingColor = 'warning';
+    }
+    if (this.signatures.count > 1) {
+      signingLabel = this.intl.t('publish.signed-version');
+      signingColor = 'success';
+    }
     if (this.isPublished) {
       return {
         name: 'published',
@@ -140,6 +187,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         previewLabel: this.intl.t('publish.public-version'),
         generalColor: 'action',
         previewColor: 'action',
+        signingLabel,
+        signingColor,
       };
     }
     if (this.signatures.count === 1) {
@@ -150,6 +199,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         previewLabel: this.intl.t('publish.need-second-signature'),
         generalColor: 'warning',
         previewColor: 'success',
+        signingLabel,
+        signingColor,
       };
     }
     if (this.signatures.count > 1) {
@@ -160,6 +211,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         previewLabel: this.intl.t('publish.signed-version'),
         generalColor: 'success',
         previewColor: 'success',
+        signingLabel,
+        signingColor,
       };
     }
     return {
@@ -167,6 +220,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
       icon: 'pencil',
       generalLabel: this.intl.t('publish.in-preparation'),
       previewLabel: '',
+      signingLabel,
+      signingColor,
     };
   }
 
@@ -179,6 +234,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   signDocumentTask = task(async () => {
+    this.closeSigningModal();
     try {
       this.error = null;
       await this.versionedTreatment.save();
@@ -197,16 +253,32 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     } catch (e) {
       this.error = e;
     }
-    this.closeSigningModal();
   });
 
-  _createPublishedResourceTask = task(async (behandeling) => {
+  deleteSignatureTask = task(async (signature) => {
+    signature.deleted = true;
+    await signature.save();
+    const log = this.store.createRecord('publishing-log', {
+      action: 'delete-signature',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signature,
+      zitting: this.meeting,
+    });
+    await log.save();
+    if (this.signatureData.count === 0) {
+      this.versionedTreatment.deleted = true;
+      await this.versionedTreatment.save();
+    }
+    await this.refreshRoute();
+  });
+
+  publishDocumentTask = task(async () => {
+    this.closePublishingModal();
     try {
       this.error = null;
       const result = await fetch(
-        `/signing/behandeling/publish/${this.meeting.get(
-          'id'
-        )}/${behandeling.get('id')}`,
+        `/signing/behandeling/publish/${this.meeting.id}/${this.treatment.id}`,
         {
           method: 'POST',
         }
@@ -216,23 +288,24 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         const errors = json?.errors?.join('\n');
         throw errors;
       }
-      await this.loadExtract.perform();
-      const publishedResource = await this.extract.document.publishedResource;
-      return publishedResource;
+      // TODO if the prepublisher would be fully jsonAPI compliant, this would not be needed
+      // there is a potential timing issue here as mu-cl-resources needs to be made aware of the changes
+      // the prepublisher made just before
+      await this.refreshRoute();
+
+      const log = this.store.createRecord('publishing-log', {
+        action: 'publish',
+        user: this.currentSession.user,
+        date: new Date(),
+        publishedResource: this.publishedResource,
+        zitting: this.meeting,
+      });
+      await log.save();
+      return this.publishedResource;
     } catch (e) {
-      this.extract = null;
       this.error = e;
     }
   });
-
-  @action
-  print(extract) {
-    this.router.transitionTo(
-      'print.uittreksel',
-      this.meeting.get('id'),
-      extract.treatmentId
-    );
-  }
 
   get previewDocument() {
     return {
@@ -240,16 +313,4 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
       signedId: this.meeting.get('id'),
     };
   }
-
-  //
-  // loadExtract = task(async () => {
-  //   try {
-  //     this.extract = null;
-  //     this.error = null;
-  //     const treatment = this.model;
-  //     this.extract = await this.publish.fetchExtract(treatment);
-  //   } catch (e) {
-  //     this.error = e;
-  //   }
-  // });
 }

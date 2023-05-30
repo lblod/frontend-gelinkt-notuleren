@@ -488,6 +488,7 @@ publication-confirmation:
   cancel-button: Cancel
 
 publish:
+  preview: Preview
   back-to-meeting: Back to meeting
   heading-part-one: Meeting on
   loading-message: Loading...
