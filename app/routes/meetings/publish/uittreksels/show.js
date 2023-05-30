@@ -52,6 +52,9 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         validationErrors: extractPreview.validationErrors,
       };
     } else {
+      // because the signedResources endpoint IS jsonAPI compliant,
+      // we could have used the relationship here, but the extra filtering
+      // needed prevents that
       const signedResources = await this.store.query('signed-resource', {
         'filter[versioned-behandeling][:id:]': versionedTreatment.id,
         'filter[:or:][deleted]': false,
@@ -61,14 +64,19 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
       if (signedResources.length > 2) {
         throw new Error('More than 2 undeleted signatures found');
       }
-      const publishedResource = await versionedTreatment.publishedResource;
+      // we can't use the relationship here because the published-resource is not
+      // created with a jsonAPI compliant endpoint. This means ED is not aware when we create it,
+      // causing ED to cache too aggressively. With query, we bypass the cache.
+      const publishedResource = await this.store.query('published-resource', {
+        'filter[versioned-behandeling][:id:]': versionedTreatment.id,
+      });
       return {
         treatment,
         agendapoint,
         versionedTreatment,
         meeting,
         signedResources: signedResources.toArray(),
-        publishedResource,
+        publishedResource: publishedResource.firstObject,
         // if a versionedTreatment exists, that means some signature or publication
         // has happened, which means that there are no errors, so we can safely do this
         validationErrors: [],
