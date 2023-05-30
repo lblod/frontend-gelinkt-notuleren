@@ -22,9 +22,9 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @service router;
 
   signatureData = trackedFunction(this, async () => {
-    const signatures = (this.model.signedResources?.toArray() || []).filter(
-      (signature) => !signature.deleted
-    );
+    const signatures = (this.model.signedResources?.toArray() || [])
+      .filter((signature) => !signature.deleted)
+      .sort((a, b) => (a.createdOn > b.createdOn ? 1 : -1));
     const first = signatures[0];
     const second = signatures[1];
     const result = { first: null, second: null, count: 0 };
