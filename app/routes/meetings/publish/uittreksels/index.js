@@ -18,8 +18,11 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
   };
 
   async model(params) {
+    // versioned behandelingen may not exist for every agenda item
+    // this is why we have to query them through the agenda items
+    // and can't query them directly
     const query = {
-      include: 'behandeling.versioned-behandeling',
+      include: 'behandeling',
       filter: { zitting: { ':id:': this.meetingId } },
       sort: params.sort,
       page: {
