@@ -49,6 +49,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         meeting,
         signedResources,
         publishedResource,
+        validationErrors: extractPreview.validationErrors,
       };
     } else {
       const signedResources = await this.store.query('signed-resource', {
@@ -68,6 +69,9 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         meeting,
         signedResources: signedResources.toArray(),
         publishedResource,
+        // if a versionedTreatment exists, that means some signature or publication
+        // has happened, which means that there are no errors, so we can safely do this
+        validationErrors: [],
       };
     }
   }

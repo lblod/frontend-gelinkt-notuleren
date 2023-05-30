@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { task } from 'ember-concurrency';
+import { task, timeout } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { fetch } from 'fetch';
 import { action } from '@ember/object';
@@ -50,12 +50,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     return !!this.publishedResource;
   }
 
-  /**
-   * TODO
-   * @returns {*[]}
-   */
   get errors() {
-    return [];
+    return this.model.validationErrors;
   }
 
   /**
@@ -79,7 +75,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   get signatureCount() {
     return this.model.signedResources.length;
   }
-
 
   get status() {
     if (this.isPublished) {
@@ -213,8 +208,22 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         throw errors;
       }
       // TODO if the prepublisher would be fully jsonAPI compliant, this would not be needed
-      // there is a potential timing issue here as mu-cl-resources needs to be made aware of the changes
+      // there is a timing issue here as mu-cl-resources needs to be made aware of the changes
       // the prepublisher made just before
+      //
+      // "but why did this work without a timeout before?"
+      // it didn't, but there were enough unnecessary backend requests in the spaghetti to
+      // essentially achieve the same timeout
+      //
+      // "but why does it work for the signatures?"
+      // there, we have a jsonAPI compliant endpoint, which means we can immediately continue with
+      // the creation of the log entry. This gives us enough of a time buffer that the subsequent
+      // model refresh actually gets the correct data. So, essentially again, there's a hidden
+      // timeout
+      //
+      // the only way to be 100% sure is to build a full jsonAPI endpoint for the entire resource
+      // in the service, completely bypassing mu-cl-resources for the GET requests as well
+      await timeout(500);
       await this.refreshRoute();
 
       const log = this.store.createRecord('publishing-log', {
