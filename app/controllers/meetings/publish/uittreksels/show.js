@@ -12,7 +12,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @tracked error;
   @tracked signingModalOpen = false;
   @tracked publishingModalOpen = false;
-  @tracked reloadModel;
   @tracked deleting = false;
   @service publish;
   @service router;
@@ -22,9 +21,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @service router;
 
   signatureData = trackedFunction(this, async () => {
-    const signatures = (this.model.signedResources?.toArray() || [])
-      .filter((signature) => !signature.deleted)
-      .sort((a, b) => (a.createdOn > b.createdOn ? 1 : -1));
+    const signatures = this.model.signedResources;
     const first = signatures[0];
     const second = signatures[1];
     const result = { first: null, second: null, count: 0 };
@@ -61,10 +58,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
 
   get secondSignature() {
     return this.signatures.second;
-  }
-
-  setup(reloadModel) {
-    this.reloadModel = reloadModel;
   }
 
   get agendapoint() {
@@ -169,8 +162,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   get status() {
-    let signingLabel = '';
-    let signingColor = null;
+    let signingLabel = this.intl.t('publish.unsigned');
+    let signingColor = 'border';
     if (this.signatures.count === 1) {
       signingLabel = this.intl.t('publish.need-second-signature');
       signingColor = 'warning';
@@ -225,12 +218,11 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     };
   }
 
-  get header() {
-    return 'TODO HEADER';
-  }
-
-  get createPublishedResourceTask() {
-    return this._createPublishedResourceTask.unlinked();
+  get previewDocument() {
+    return {
+      body: this.model.versionedTreatment?.content,
+      signedId: this.meeting.get('id'),
+    };
   }
 
   signDocumentTask = task(async () => {
@@ -250,6 +242,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         zitting: this.meeting,
       });
       await log.save();
+      await this.refreshRoute();
     } catch (e) {
       this.error = e;
     }
@@ -306,11 +299,4 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
       this.error = e;
     }
   });
-
-  get previewDocument() {
-    return {
-      body: this.model.versionedTreatment?.content,
-      signedId: this.meeting.get('id'),
-    };
-  }
 }

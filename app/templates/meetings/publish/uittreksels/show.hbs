@@ -78,13 +78,12 @@
             <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
               <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
                 "timeline-step.first-signature"}}</AuHeading>
-              {{!--            {{#if this.deletedSignatures.lastObject}}--}}
-              {{!--              <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />--}}
-              {{!--            {{/if}}--}}
               {{#if this.firstSignature}}
                 <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
-                  <Signatures::SignedResource @signature={{this.firstSignature.model}} @canDelete={{not
-                    this.isPublished}} @delete={{fn (perform this.deleteSignatureTask) this.firstSignature.model}} />
+                  <Signatures::SignedResource
+                    @signature={{this.firstSignature.model}}
+                    @canDelete={{and (not this.isPublished) (not this.secondSignature)}}
+                    @delete={{fn (perform this.deleteSignatureTask) this.firstSignature.model}} />
                 </div>
               {{else}}
 

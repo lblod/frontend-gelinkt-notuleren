@@ -25,16 +25,12 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
       }
     );
     const versionedTreatment = versionedTreatments.firstObject;
-    console.log('versioned Treatment', versionedTreatment);
     const meeting = await agendapoint.zitting;
 
     if (!versionedTreatment) {
-      console.log('creating a new extract preview');
-      console.log(treatment);
       const extractPreview = this.store.createRecord('extract-preview', {
         treatment,
       });
-      console.log(extractPreview);
       await extractPreview.save();
       const versionedTreatment = this.store.createRecord(
         'versioned-behandeling',
@@ -44,7 +40,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
           behandeling: treatment,
         }
       );
-      const signedResources = await versionedTreatment.signedResources;
+      const signedResources = [];
       const publishedResource = await versionedTreatment.publishedResource;
       return {
         treatment,
@@ -55,27 +51,24 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         publishedResource,
       };
     } else {
-      const signedResources = await versionedTreatment.signedResources;
+      const signedResources = await this.store.query('signed-resource', {
+        'filter[versioned-behandeling][:id:]': versionedTreatment.id,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+        sort: 'created-on',
+      });
+      if (signedResources.length > 2) {
+        throw new Error('More than 2 undeleted signatures found');
+      }
       const publishedResource = await versionedTreatment.publishedResource;
       return {
         treatment,
         agendapoint,
         versionedTreatment,
         meeting,
-        signedResources,
+        signedResources: signedResources.toArray(),
         publishedResource,
       };
     }
-  }
-
-  setupController(controller) {
-    super.setupController(...arguments);
-    console.log('firing setupController');
-    console.log(...arguments);
-    console.log(controller.model);
-    controller.setup(async () => {
-      console.log('reloading model');
-      await this.refresh();
-    });
   }
 }
