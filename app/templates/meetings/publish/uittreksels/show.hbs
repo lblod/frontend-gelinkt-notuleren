@@ -132,6 +132,18 @@
       </Card.content>
     </AuCard>
   {{/if}}
+
+  <AuToolbar @nowrap={{true}} @border="bottom" class="au-u-padding-bottom-tiny au-u-margin-bottom-small" as |Group|>
+    <Group>
+      <AuHeading @level="2" @skin="4" class="au-u-word-break-all">{{t "timeline-step.print-button-label"
+                                                                      name=this.title}}</AuHeading>
+    </Group>
+  </AuToolbar>
+  <div class="au-u-margin-top-none au-u-margin-bottom-large">
+    <AuLink @skin="button" @route='print.uittreksel' @models={{array this.meeting.id this.treatment.id}}>
+      {{t "timeline-step.print-button-label" name=(limit-content this.title 60)}}
+    </AuLink>
+  </div>
 </div>
 
 {{#if this.signingModalOpen}}
