@@ -4,26 +4,6 @@ import { action } from '@ember/object';
 import { Schema } from '@lblod/ember-rdfa-editor';
 
 import {
-  doc,
-  block_rdfa,
-  blockquote,
-  bullet_list,
-  code_block,
-  hard_break,
-  heading,
-  horizontal_rule,
-  image,
-  inline_rdfa,
-  list_item,
-  ordered_list,
-  paragraph,
-  placeholder,
-  repaired_block,
-  text,
-} from '@lblod/ember-rdfa-editor/nodes';
-import { invisible_rdfa } from '@lblod/ember-rdfa-editor/marks/inline-rdfa';
-
-import {
   em,
   strikethrough,
   strong,
@@ -34,28 +14,43 @@ import {
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import {
+  block_rdfa,
+  hard_break,
+  horizontal_rule,
+  invisible_rdfa,
+  paragraph,
+  repaired_block,
+  text,
+} from '@lblod/ember-rdfa-editor/nodes';
+import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
+import {
+  bullet_list,
+  list_item,
+  ordered_list,
+} from '@lblod/ember-rdfa-editor/plugins/list';
+import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
+import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
+import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
+import { image } from '@lblod/ember-rdfa-editor/plugins/image';
+import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
 import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
 
-import { tableMenu } from '@lblod/ember-rdfa-editor/plugins/table';
-
-import {
-  rdfaDateCardWidget,
-  rdfaDateInsertWidget,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
+import { doc } from '@lblod/ember-rdfa-editor/nodes';
 import { inject as service } from '@ember/service';
-import { PLUGIN_CONFIGS } from '../config/constants';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import { tracked } from '@glimmer/tracking';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
   profile = 'none';
-  editor;
+  @tracked editor;
   type = this.args.type;
 
   editorOptions = {
@@ -78,12 +73,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       bullet_list,
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-      date: date({
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
-      }),
+      date: date(this.config.date),
       heading,
       blockquote,
       horizontal_rule,
@@ -142,19 +132,32 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       link: {
         interactive: true,
       },
+      date: {
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+        },
+        formats: [
+          {
+            label: this.intl.t('date-format.short-date'),
+            key: 'short',
+            dateFormat: 'dd/MM/yy',
+            dateTimeFormat: 'dd/MM/yy HH:mm',
+          },
+          {
+            label: this.intl.t('date-format.long-date'),
+            key: 'long',
+            dateFormat: 'EEEE dd MMMM yyyy',
+            dateTimeFormat: 'PPPPp',
+          },
+        ],
+        allowCustomFormat: true,
+      },
     };
   }
 
   get plugins() {
     return [tablePlugin, tableKeymap, linkPasteHandler(this.schema.nodes.link)];
-  }
-
-  get widgets() {
-    return [
-      tableMenu,
-      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
-    ];
   }
 
   get nodeViews() {
