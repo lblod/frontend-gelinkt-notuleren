@@ -35,16 +35,16 @@ import { action } from '@ember/object';
 export default class ParticipationListComponent extends Component {
   @tracked popup = false;
 
+  get secretary() {
+    return this.args.secretary;
+  }
+
   get chairman() {
     return this.args.chairman;
   }
 
   get defaultedChairman() {
     return this.chairman ?? this.args.defaultChairman;
-  }
-
-  get secretary() {
-    return this.args.secretary;
   }
 
   get defaultedSecretary() {
