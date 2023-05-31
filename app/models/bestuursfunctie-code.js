@@ -4,6 +4,7 @@ export default class BestuursfunctieCodeModel extends Model {
   @attr label;
   @attr scopeNote;
   @attr uri;
+
   @hasMany('bestuursorgaan-classificatie-code', { inverse: 'standaardType' })
   standaardTypeVan;
 

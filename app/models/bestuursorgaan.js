@@ -5,6 +5,7 @@ export default class BestuursorgaanModel extends Model {
   @attr naam;
   @attr('date') bindingEinde;
   @attr('date') bindingStart;
+
   @belongsTo('bestuurseenheid', { inverse: 'bestuursorganen' }) bestuurseenheid;
   @belongsTo('bestuursorgaan-classificatie-code', { inverse: null })
   classificatie;
@@ -12,9 +13,11 @@ export default class BestuursorgaanModel extends Model {
   isTijdsspecialisatieVan;
   @belongsTo('rechtstreekse-verkiezing', { inverse: 'steltSamen' })
   wordtSamengesteldDoor;
+
   @hasMany('bestuursorgaan', { inverse: 'isTijdsspecialisatieVan' })
   heeftTijdsspecialisaties;
   @hasMany('mandaat', { inverse: 'bevatIn' }) bevat;
+  @hasMany('bestuursfunctie', { inverse: 'bevatIn' }) bevatBestuursfunctie;
 
   rdfaBindings = {
     naam: 'http://www.w3.org/2004/02/skos/core#prefLabel',

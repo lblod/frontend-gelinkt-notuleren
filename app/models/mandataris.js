@@ -7,14 +7,21 @@ export default class MandatarisModel extends Model {
   @attr uri;
   @attr('datetime') datumEedaflegging;
   @attr('datetime') datumMinistrieelBesluit;
+  @attr generatedFrom;
+
   @belongsTo('mandaat', { inverse: null }) bekleedt;
+  @belongsTo('lidmaatschap', { inverse: 'lid' }) heeftLidmaatschap;
   @belongsTo('persoon', { inverse: 'isAangesteldAls' }) isBestuurlijkeAliasVan;
-  @hasMany('mandataris', { inverse: null }) tijdelijkeVervangingen;
-  @hasMany('behandeling-van-agendapunt') aanwezigBijBehandeling;
-  @hasMany('behandeling-van-agendapunt') afwezigBijBehandeling;
-  @hasMany('zitting') aanwezigBijZitting;
-  @hasMany('zitting') afwezigBijZitting;
   @belongsTo('mandataris-status-code', { inverse: null }) status;
+
+  @hasMany('mandataris', { inverse: null }) tijdelijkeVervangingen;
+  @hasMany('beleidsdomein-code', { inverse: 'mandatarissen' }) beleidsdomein;
+  @hasMany('behandeling-van-agendapunt', { inverse: null })
+  aanwezigBijBehandeling;
+  @hasMany('behandeling-van-agendapunt', { inverse: null })
+  afwezigBijBehandeling;
+  @hasMany('zitting', { inverse: null }) aanwezigBijZitting;
+  @hasMany('zitting', { inverse: null }) afwezigBijZitting;
 
   rdfaBindings = {
     class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris',
