@@ -21,6 +21,11 @@ administrative-body-select:
   period: "period"
   not-applicable: nvt.
 
+auth:
+  login: Aanmelden
+  switch-administrative-unit: Wissel van bestuurseenheid
+  logout: Afmelden
+
 application-header:
   switch-administrative-unit: Wissel van bestuurseenheid
   logout: Afmelden
