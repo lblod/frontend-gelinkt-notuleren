@@ -8,6 +8,18 @@
   @property={{@type}}
   @schema={{this.schema}}
   @plugins={{this.plugins}}
-  @widgets={{this.widgets}}
   @nodeViews={{this.nodeViews}}
-/>
+>
+  <:sidebar-collapsible>
+    <RdfaDatePlugin::Insert
+      @controller={{this.editor}}
+      @options={{this.config.date}}
+    />
+  </:sidebar-collapsible>
+  <:sidebar>
+    <RdfaDatePlugin::Card
+      @controller={{this.editor}}
+      @options={{this.config.date}}
+    />
+  </:sidebar>
+</RdfaEditorContainer>

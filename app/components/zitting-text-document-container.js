@@ -43,21 +43,14 @@ import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugi
 import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
 
 import { doc } from '@lblod/ember-rdfa-editor/nodes';
-
-import { tableMenu } from '@lblod/ember-rdfa-editor/plugins/table';
-
-import {
-  rdfaDateCardWidget,
-  rdfaDateInsertWidget,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin';
 import { inject as service } from '@ember/service';
-import { PLUGIN_CONFIGS } from '../config/constants';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import { tracked } from '@glimmer/tracking';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
   profile = 'none';
-  editor;
+  @tracked editor;
   type = this.args.type;
 
   editorOptions = {
@@ -80,12 +73,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       bullet_list,
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-      date: date({
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
-      }),
+      date: date(this.config.date),
       heading,
       blockquote,
       horizontal_rule,
@@ -144,19 +132,32 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       link: {
         interactive: true,
       },
+      date: {
+        placeholder: {
+          insertDate: this.intl.t('date-plugin.insert.date'),
+          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
+        },
+        formats: [
+          {
+            label: this.intl.t('date-format.short-date'),
+            key: 'short',
+            dateFormat: 'dd/MM/yy',
+            dateTimeFormat: 'dd/MM/yy HH:mm',
+          },
+          {
+            label: this.intl.t('date-format.long-date'),
+            key: 'long',
+            dateFormat: 'EEEE dd MMMM yyyy',
+            dateTimeFormat: 'PPPPp',
+          },
+        ],
+        allowCustomFormat: true,
+      },
     };
   }
 
   get plugins() {
     return [tablePlugin, tableKeymap, linkPasteHandler(this.schema.nodes.link)];
-  }
-
-  get widgets() {
-    return [
-      tableMenu,
-      rdfaDateCardWidget(PLUGIN_CONFIGS.date(this.intl)),
-      rdfaDateInsertWidget(PLUGIN_CONFIGS.date(this.intl)),
-    ];
   }
 
   get nodeViews() {
