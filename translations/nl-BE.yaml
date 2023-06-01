@@ -21,6 +21,12 @@ administrative-body-select:
   period: "period"
   not-applicable: nvt.
 
+application:
+  flanders-logo: Logo van de vlaamse overheid
+  loading: Aan het laden
+  patience-text: Bedankt voor uw geduld
+
+
 auth:
   login: Aanmelden
   switch-administrative-unit: Wissel van bestuurseenheid

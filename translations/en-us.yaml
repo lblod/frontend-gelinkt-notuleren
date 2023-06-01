@@ -21,10 +21,16 @@ administrative-body-select:
   period: "period"
   not-applicable: n/a
 
+application:
+  flanders-logo: Logo of the Flemish government
+  loading: Loading
+  patience-text: Thank you for your patience.
+
 auth:
   login: Login
   switch-administrative-unit: Switch Administrative Unit
   logout: Logout
+
 
 application-header:
   switch-administrative-unit: Switch Administrative Unit
