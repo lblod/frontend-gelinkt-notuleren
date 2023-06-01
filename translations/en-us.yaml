@@ -547,6 +547,10 @@ regulatory-statements-plugin:
 required-field:
   required: Required
 
+regulatory-statement:
+  page-title: Regulatory statement
+  history: History
+
 signature-confirmation:
   modal-title: "Confirm signing of "
   sign-label: Sign

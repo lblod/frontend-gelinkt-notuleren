@@ -28,7 +28,11 @@ import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-import { link, linkView, linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import {
+  link,
+  linkView,
+  linkPasteHandler,
+} from '@lblod/ember-rdfa-editor/plugins/link';
 import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,

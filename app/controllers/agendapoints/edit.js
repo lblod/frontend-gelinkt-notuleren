@@ -67,7 +67,11 @@ import {
   regulatoryStatementNodeView,
 } from '../../editor-plugins/regulatory-statements-plugin';
 import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
-import { link, linkView, linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
+import {
+  link,
+  linkView,
+  linkPasteHandler,
+} from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';

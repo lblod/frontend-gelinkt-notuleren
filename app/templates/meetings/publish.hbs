@@ -8,6 +8,7 @@
     </Group>
     <Group>
       <AuDropdown @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @buttonLabel="Account settings" @alignment="right">
+        {{!-- template-lint-disable require-context-role --}}
         <AuLink @route="authorization.switch" @icon='switch' role="menuitem">{{t "auth.switch-administrative-unit"}}</AuLink>
         <AuLink @route="authorization.logout" @icon='logout' role="menuitem">{{t "auth.logout"}}</AuLink>
       </AuDropdown>

@@ -92,9 +92,9 @@
           <:aside>
             {{#if this.controller}}
               <Sidebar as |Sidebar|>
-                {{#if (has-block 'sidebar-collapsible')}}
+                {{#if (has-block 'sidebarCollapsible')}}
                   <Sidebar.Collapsible @title='Insert'>
-                    {{yield to='sidebar-collapsible'}}
+                    {{yield to='sidebarCollapsible'}}
                   </Sidebar.Collapsible>
                 {{/if}}
                 {{yield to='sidebar'}}

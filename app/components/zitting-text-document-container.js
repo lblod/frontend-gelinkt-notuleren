@@ -23,7 +23,11 @@ import {
   text,
   doc,
 } from '@lblod/ember-rdfa-editor/nodes';
-import { tableNodes, tablePlugin, tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
+import {
+  tableNodes,
+  tablePlugin,
+  tableKeymap,
+} from '@lblod/ember-rdfa-editor/plugins/table';
 import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
 import {
   bullet_list,

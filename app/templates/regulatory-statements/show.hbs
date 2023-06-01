@@ -4,12 +4,12 @@
   @documentStatus={{this.model.documentContainer.currentVersion.status}}
   @isRegulatoryStatement={{true}}
 >
-  <:return-link>
+  <:returnLink>
   <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
     <AuIcon @icon="arrow-left" @alignment="left" />
     {{t 'inbox.regulatory-statements.return'}}
   </AuLink>
-  </:return-link>
+  </:returnLink>
   <:actions-after-title>
     <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @buttonLabel={{human-friendly-date
       this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @alignment="left">
@@ -21,7 +21,7 @@
       <div class="au-u-margin-small au-u-flex--column au-u-flex">
         <p class="au-u-muted">{{t 'utils.history'}}: </p>
         {{#each this.revisions as |revision|}}
-          <AuLink @route="regulatory-statements.revisions" @skin="secondary" role="menuitem" @models={{array
+          <AuLink @route="regulatory-statements.revisions" @skin="secondary" @models={{array
             this.model.documentContainer.id revision.id}}>
             {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
             {{#if revision.status.label}}
@@ -29,7 +29,7 @@
             {{/if}}
           </AuLink>
         {{/each}}
-        <AuLink @route="regulatory-statements.show.history" @skin="link" role="menuitem">
+        <AuLink @route="regulatory-statements.show.history" @skin="link">
           <AuIcon @icon="clock" @alignment="left"/>
           {{t 'utils.full-history'}}
         </AuLink>
@@ -38,6 +38,7 @@
   </:actions-after-title>
   <:actions>
   <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
+    {{!-- template-lint-disable require-context-role --}}
     <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
       <AuIcon @icon="export" @alignment="left" />
       {{t "utils.html-export"}}

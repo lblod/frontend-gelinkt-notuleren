@@ -545,6 +545,10 @@ regulatory-statements-plugin:
 required-field:
   required: Verplicht
 
+regulatory-statement:
+  page-title: Reglementaire bijlage
+  history: Historiek
+
 signature-confirmation:
   modal-title: "Bevestig ondertekenen van "
   sign-label: Ondertekenen
