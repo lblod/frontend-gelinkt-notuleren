@@ -28,7 +28,7 @@ import {
   tableNodes,
   tablePlugin,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
+import { link, linkView, linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,
@@ -67,7 +67,6 @@ import {
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { extractOutline } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/utils';
 
