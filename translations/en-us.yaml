@@ -21,6 +21,11 @@ administrative-body-select:
   period: "period"
   not-applicable: n/a
 
+auth:
+  login: Login
+  switch-administrative-unit: Switch Administrative Unit
+  logout: Logout
+
 application-header:
   switch-administrative-unit: Switch Administrative Unit
   logout: Logout
