@@ -60,6 +60,14 @@ export default class MeetingsPublishNotulenController extends Controller {
     return 'concept';
   }
 
+  get loading() {
+    return (
+      this.createSignedResource.isRunning ||
+      this.deleteSignatureTask.isRunning ||
+      this.loadNotulen.isRunning
+    );
+  }
+
   get isPublished() {
     return !!this.publishedResource;
   }
@@ -82,11 +90,9 @@ export default class MeetingsPublishNotulenController extends Controller {
             this.notulen = notulen;
             notulenSet = true;
           }
-          if (signedResources.length) {
-            this.signedResources = signedResources;
-            if (!notulenSet) {
-              this.notulen = notulen;
-            }
+          this.signedResources = signedResources.toArray();
+          if (!notulenSet) {
+            this.notulen = notulen;
           }
         })
       );
@@ -127,6 +133,28 @@ export default class MeetingsPublishNotulenController extends Controller {
 
     return response.map((res) => res.data.attributes);
   });
+  deleteSignatureTask = task(async (signature) => {
+    signature.deleted = true;
+    await signature.save();
+    const log = this.store.createRecord('publishing-log', {
+      action: 'delete-signature',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signature,
+      zitting: this.meeting,
+    });
+    await log.save();
+
+    // not a mistake
+    // at this point, the signature is marked as deleted but the model has not yet reloaded,
+    // so it is still in the signedResources array.
+    // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
+    if (this.signedResources.length === 1) {
+      this.notulen.deleted = true;
+      await this.notulen.save();
+    }
+    await this.loadNotulen.perform();
+  });
 
   createSignedResource = task(async () => {
     this.showSigningModal = false;
@@ -138,7 +166,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     await this.muTask.waitForMuTaskTask.perform(taskId);
     await this.loadNotulen.perform();
     const signedResources = this.signedResources;
-    const signedResource = signedResources.lastObject;
+    const signedResource = signedResources[signedResources.length - 1];
     const versionedResource = await signedResource.versionedNotulen;
 
     const log = this.store.createRecord('publishing-log', {
@@ -273,6 +301,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     else this.publicBehandelingUris.pushObject(uri);
     this.updateNotulenPreview();
   }
+
   @action
   toggleAllPublicationStatus() {
     if (!this.allBehandelingPublic) {

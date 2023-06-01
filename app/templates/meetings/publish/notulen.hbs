@@ -45,12 +45,13 @@
           </AuAlert>
       {{else}}
           {{!-- Sign --}}
-          <PublicationSignatures
-            @name="notulen"
-            @signatures={{this.signedResources}}
-            @sign={{this.createSignPreview}}
-            @loading={{this.createSignedResource.isRunning}}
+          <Signatures::SignatureControls
+            @title="notulen"
+            @signedResources={{this.signedResources}}
             @isPublished={{this.isPublished}}
+            @deleteSignature={{perform this.deleteSignatureTask}}
+            @sign={{this.createSignPreview}}
+            @loading={{this.loading}}
           />
           {{#if this.showSigningModal}}
             {{!-- signing is always the full document, so no preview here --}}
