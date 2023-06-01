@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { trackedFunction } from 'ember-resources/util/function';
 
 export default class ZittingLinkComponent extends Component {

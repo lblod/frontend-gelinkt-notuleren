@@ -3,7 +3,7 @@ import { PUBLISHED_STATUS_ID } from '../utils/constants';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { use } from 'ember-could-get-used-to-this';
 import RelationshipResource from '../helpers/relationship-resource';
 

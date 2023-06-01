@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import fetch from 'fetch';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 /** @typedef {import("../../../models/agenda").default} Agenda */
 /** @typedef {import("../../../models/zitting").default} Zitting */

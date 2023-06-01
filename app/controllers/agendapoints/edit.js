@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { Schema } from '@lblod/ember-rdfa-editor';

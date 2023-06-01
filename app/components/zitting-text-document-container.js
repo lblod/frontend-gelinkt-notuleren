@@ -38,7 +38,7 @@ import { image } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import { tracked } from '@glimmer/tracking';
 

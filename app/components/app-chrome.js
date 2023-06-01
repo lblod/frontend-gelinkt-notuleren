@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class AppChromeComponent extends Component {
