@@ -105,7 +105,7 @@
     "webpack": "^5.76.0"
   },
   "engines": {
-    "node": "14.* || 16.* || >= 18"
+    "node": "16.* || >= 18"
   },
   "ember": {
     "edition": "octane"
@@ -116,7 +116,7 @@
     "last 2 Edge version"
   ],
   "volta": {
-    "node": "16.16.0"
+    "node": "18.16.0"
   },
   "dependencies": {
     "@curvenote/prosemirror-utils": "^1.0.5",
