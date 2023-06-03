@@ -49,9 +49,12 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
       'functionaris',
       queryParams
     );
-    this.options = candidateOptions.reject(
-      (functionaris) =>
-        functionaris.einde && functionaris.einde < startOfMeeting
-    );
+    this.options = candidateOptions.filter((functionaris) => {
+      if (functionaris.einde) {
+        return functionaris.einde >= startOfMeeting;
+      } else {
+        return true;
+      }
+    });
   });
 }
