@@ -46,7 +46,11 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   get containerElement() {
-    return document.getElementById(this.behandelingContainerId);
+    if (this.loadNotulen.isIdle) {
+      return document.getElementById(this.behandelingContainerId);
+    } else {
+      return null;
+    }
   }
 
   get showPublicToggles() {
