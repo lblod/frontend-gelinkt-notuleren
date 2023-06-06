@@ -62,7 +62,7 @@ export default class PublishingLogDocumentNameComponent extends Component {
         }
       }
     }
-    const deleted = versionedResource.get('deleted');
+    const deleted = versionedResource.deleted;
     return {
       documentName,
       route,
