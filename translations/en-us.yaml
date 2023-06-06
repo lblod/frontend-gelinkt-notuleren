@@ -458,6 +458,8 @@ print-view:
   manual: manual
   save-2: . This information (above the dotted line) will not show up on the print or PDF.
   signed-by: Signed by
+  error-heading: Something went wrong while generating the print preview.
+  error-body: Please contact the support team.
 
 publication-actions:
   document: Document

@@ -7,39 +7,53 @@
     {{/if}}
   </Print.Header>
   <Print.Body>
-
-    {{#let @versionedTreatment.signedResources
-           @versionedTreatment.zitting as |signatures meeting|}}
+    {{#if this.data.isError}}
+      <AuCard @flex={{true}} as |card|>
+        <card.header
+          @badgeIcon="alert-triangle"
+          @badgeSkin="error"
+        >
+          <AuHeading @level="2" @skin="4">
+            {{t "print-view.error-heading"}}
+          </AuHeading>
+        </card.header>
+        <card.content>
+          {{t "print-view.error-body"}}
+        </card.content>
+      </AuCard>
+    {{/if}}
+    {{#if this.data.value}}
       <AuHeading>
         {{t "print-view.heading-1"}}
         <br>
-        {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}
+        {{this.meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}
         <br>
-        {{t "print-view.heading-2"}} {{detailed-date meeting.geplandeStart}}
+        {{t "print-view.heading-2"}} {{detailed-date this.meeting.geplandeStart}}
       </AuHeading>
       <p class="au-u-margin-top-small au-u-margin-bottom">{{t "print-view.description"}}</p>
 
-      {{#if signatures.length}}
+      {{#if this.signatures.length}}
         <div class="au-o-grid">
-          {{#each signatures as |signature|}}
-            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}} @hashValue={{signature.hashValue}}/>
+          {{#each this.signatures as |signature|}}
+            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}
+                                  @hashValue={{signature.hashValue}}/>
           {{/each}}
         </div>
       {{/if}}
 
       <AuHr @size="large"/>
 
-      {{html-safe @versionedTreatment.content}}
+      {{html-safe this.content}}
 
 
-      {{#if signatures.length}}
+      {{#if this.signatures.length}}
         <AuHr @size="large"/>
         <div class="au-o-grid">
-          {{#each signatures as |signature|}}
+          {{#each this.signatures as |signature|}}
             <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
           {{/each}}
         </div>
       {{/if}}
-    {{/let}}
+    {{/if}}
   </Print.Body>
 </PrintView>

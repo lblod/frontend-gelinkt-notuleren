@@ -457,6 +457,8 @@ print-view:
   manual: handleiding
   save-2: . Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.
   signed-by: Ondertekend door
+  error-heading: Er is een fout opgetreden bij het genereren van het afdrukvoorbeeld.
+  error-body: Gelieve contact op te nemen met het support team.
 
 
 publication-actions:
