@@ -12,7 +12,6 @@ export default class PublishingLogDocumentNameComponent extends Component {
 
   data = trackedFunction(this, async () => {
     const log = this.args.log;
-    await Promise.resolve();
     const logResource =
       (await log.signedResource) ?? (await log.publishedResource);
     let versionedResource;
