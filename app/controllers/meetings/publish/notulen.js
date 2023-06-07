@@ -46,6 +46,15 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   get containerElement() {
+    // This is a kind of a workaround/trick
+    // if you look at the template, the in-element helper that uses this getter
+    // already conditionally renders on loadNotulen.isIdle, so you'd expect this
+    // to not be necessary here,
+    // but it seems in-element doesn't retrigger this getter
+    // when the block it's in goes from unrendered to rendered.
+    // As a result, the children are rendered in a containerElement that is no longer
+    // attached to the dom. So we force an extra dependency here to make sure the getter
+    // retriggers.
     if (this.loadNotulen.isIdle) {
       return document.getElementById(this.behandelingContainerId);
     } else {
