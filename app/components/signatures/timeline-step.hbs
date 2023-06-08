@@ -49,7 +49,7 @@
       </AuToolbar>
       <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
         {{#if (eq this.signaturesCount 2)}}
-          {{#each @signedResources as |signature index|}}
+          {{#each this.activeSignatures as |signature index|}}
             {{#if (eq index 0)}}
               <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
                 <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
@@ -58,24 +58,27 @@
             {{else}}
               <div class="au-o-grid__item au-u-1-2@medium au-u-padding-bottom-none au-u-padding-bottom-small">
                 <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.second-signature"}}</AuHeading>
-                <Signatures::SignedResource @signature={{signature}} />
+                <Signatures::SignedResource @signature={{signature}} @canDelete={{not this.isPublished}}/>
               </div>
             {{/if}}
           {{/each}}
         {{else if (eq this.signaturesCount 1)}}
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
-            <Signatures::SignedResource @signature={{@signedResources.firstObject}} />
+            <Signatures::SignedResource @signature={{this.activeSignatures.firstObject}} @canDelete={{not this.isPublished}} />
           </div>
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.second-signature"}}</AuHeading>
+            {{#if this.showDeletedSecondSignature}}
+              <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />
+            {{/if}}
             <AuButton
               {{on "click" (fn (mut this.showSigningModal) true)}}
               @skin="secondary"
               @icon="pencil"
               @iconAlignment="left"
-              @loading={{this.signDocument.isRunning}}
-              @disabled={{or (or (not this.currentSession.canSign) this.signDocument.isRunning) this.isSignedByCurrentUser}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (or (not this.currentSession.canSign) this.signingOrPublishing) this.isSignedByCurrentUser}}
             >
               {{t "timeline-step.sign-button-label" name=(limit-content @name 30)}}
             </AuButton>
@@ -96,13 +99,16 @@
         {{else}} {{!-- No signatures placed --}}
           <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
             <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
+            {{#if this.deletedSignatures.lastObject}}
+              <Signatures::SignedResource @signature={{this.deletedSignatures.lastObject}} />
+            {{/if}}
             <AuButton
               {{on "click" (fn (mut this.showSigningModal) true)}}
               @skin="secondary"
               @icon="pencil"
               @iconAlignment="left"
-              @loading={{this.signDocument.isRunning}}
-              @disabled={{or (not this.currentSession.canSign) this.signDocument.isRunning}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (not this.currentSession.canSign) this.signingOrPublishing}}
             >
               {{t "timeline-step.sign-button-label" name=(limit-content @name 30)}}
             </AuButton>
@@ -136,7 +142,7 @@
         {{#if this.showSigningModal}}
           <Signatures::SignatureConfirmation
             @name={{@name}} @mockDocument={{@mockDocument}}
-            @confirm={{perform this.signDocument @mockDocument.signedId}}
+            @confirm={{fn this.signDocument @mockDocument.signedId @signedResources}}
             @cancel={{fn (mut this.showSigningModal) false}} />
         {{/if}}
       </div>
@@ -190,8 +196,8 @@
               {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
-              @loading={{this.publishDocument.isRunning}}
-              @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (not this.currentSession.canPublish) this.signingOrPublishing}}
             >
               {{t "timeline-step.publish-button-label" name=(limit-content @name 60)}}
             </AuButton>
@@ -200,8 +206,8 @@
               {{on "click" this.publish}}
               @icon="upload"
               @iconAlignment="left"
-              @loading={{this.publishDocument.isRunning}}
-              @disabled={{or (not this.currentSession.canPublish) this.publishDocument.isRunning}}
+              @loading={{this.signingOrPublishing}}
+              @disabled={{or (not this.currentSession.canPublish) this.signingOrPublishing}}
             >
               {{t "timeline-step.publish-notify-button-label" name=(limit-content @name 60)}}
             </AuButton>
@@ -234,7 +240,7 @@
           <Signatures::PublicationConfirmation
             @name={{@name}}
             @mockDocument={{@mockDocument}}
-            @confirm={{perform this.publishDocument @mockDocument.signedId}}
+            @confirm={{fn this.publishDocument @mockDocument.signedId}}
             @cancel={{fn (mut this.showPublishingModal) false}} />
         {{/if}}
       </div>

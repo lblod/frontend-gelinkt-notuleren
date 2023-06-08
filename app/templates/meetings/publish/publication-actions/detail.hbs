@@ -1,0 +1,10 @@
+{{page-title "Detail"}}
+<div class="au-u-margin-top au-u-margin-left">
+  <AuLink @route="meetings.publish.publication-actions" @skin="secondary">
+    <AuIcon @icon="arrow-left" @alignment="left"/>
+    {{t 'publication-actions.return'}}
+  </AuLink>
+</div>
+<div class="publication-actions-detail-container au-u-margin-left au-u-margin-right au-u-margin-top">
+  {{html-safe this.model}}
+</div>

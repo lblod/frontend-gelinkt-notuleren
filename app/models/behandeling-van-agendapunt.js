@@ -15,9 +15,9 @@ export default class BehandelingVanAgendapunt extends Model {
   @belongsTo('functionaris', { inverse: null }) secretaris;
   @belongsTo('mandataris', { inverse: null }) voorzitter;
   @belongsTo('document-container', { inverse: null }) documentContainer;
-  @belongsTo('versioned-behandeling', { inverse: 'behandeling' })
-  versionedBehandeling;
 
+  @hasMany('versioned-behandeling', { inverse: 'behandeling' })
+  versionedBehandelingen;
   @hasMany('besluit', { inverse: 'volgendUitBehandelingVanAgendapunt' })
   besluiten;
   @hasMany('mandataris', { inverse: null }) aanwezigen;

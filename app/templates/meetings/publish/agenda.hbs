@@ -4,21 +4,21 @@
       <Signatures::Agenda::TimelineStep
         @name="ontwerpagenda"
         @agenda={{this.ontwerpAgenda}}
-        @signing={{perform this.createSignedResource this.kindGepland}}
-        @publish={{perform this.createPublishedResource this.kindGepland}}
+        @signing={{perform this.createSignedResource this.kindGepland 'ontwerp'}}
+        @publish={{perform this.createPublishedResource this.kindGepland 'ontwerp'}}
       />
       <Signatures::Agenda::TimelineStep
         @name="aanvullende agenda"
         @agenda={{this.aanvullendeAgenda}}
-        @signing={{perform this.createSignedResource this.kindAanvullend}}
-        @publish={{perform this.createPublishedResource this.kindAanvullend}}
+        @signing={{perform this.createSignedResource this.kindAanvullend 'aanvullende'}}
+        @publish={{perform this.createPublishedResource this.kindAanvullend 'aanvullende'}}
       />
 
       <Signatures::Agenda::TimelineStep
         @name="spoedeisende agenda"
         @agenda={{this.spoedeisendeAgenda}}
-        @signing={{perform this.createSignedResource this.kindSpoedeisend}}
-        @publish={{perform this.createPublishedResource this.kindSpoedeisend}}
+        @signing={{perform this.createSignedResource this.kindSpoedeisend 'spoedeisende'}}
+        @publish={{perform this.createPublishedResource this.kindSpoedeisend 'spoedeisende'}}
       />
   </ul>
   {{else}}

@@ -673,12 +673,12 @@ div.table-of-contents {
 }
 
 .regulatory-statement-current-version-container-active {
-  white-space: nowrap; 
+  white-space: nowrap;
   border-left: 3px solid #5990DE;
 }
 
 .regulatory-statement-current-version-container {
-  white-space: nowrap; 
+  white-space: nowrap;
   color: var(--au-gray-700);
 }
 
@@ -695,6 +695,37 @@ div[typeof="besluit:Zitting"] {
   }
 }
 
+.signature-warning {
+  position: relative;
+  border: 1px solid var(--au-red-400);
+  background-color: var(--au-red-300);
+  padding: 10px;
+  padding-left: 35px;
+  margin-top: 10px;
+  max-width: 400px;
+}
+
+.signature-warning-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: var(--au-red-600);
+}
+
+.signature-warning-close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.publication-actions-detail-container {
+  border: 1px solid var(--au-gray-300);
+  color: var(--au-gray-300);
+  padding: 20px;
+  .au-c-template * {
+    color: var(--au-gray-600);
+  }
+}
 div[typeof="besluitpublicatie:Documentonderdeel"] {
   cursor: default;
   &:hover {

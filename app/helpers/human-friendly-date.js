@@ -10,7 +10,6 @@ export default function humanFriendlyDate(
   date,
   { locale = 'nl-BE', alwaysShowTime = true } = {}
 ) {
-  console.log('LOCALE: ', locale);
   if (!(date instanceof Date)) return '';
   try {
     let relativeDate = formatRelative(date, new Date(), {

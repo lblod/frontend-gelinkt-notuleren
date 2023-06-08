@@ -30,7 +30,7 @@
       <td>{{inc agendapoint.position}}</td>
       <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{limit-content agendapoint.titel 70}}</AuLink></td>
       <td>
-        <Signatures::PublicationStatus @versionedResource={{agendapoint.behandeling.versionedBehandeling}} />
+        <Signatures::PublicationStatus @versionedResource={{agendapoint.versionedBehandeling}} />
       </td>
       <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right" class="au-u-hide-on-print">{{t 'publish.publish-button-label'}}</AuLink></td>
     </c.body>

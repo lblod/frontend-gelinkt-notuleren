@@ -7,6 +7,7 @@ export default class VersionedNotulesModel extends Model {
   @attr publicBehandelingen;
   @attr kind;
 
+  @attr('boolean', { defaultValue: false }) deleted;
   @hasMany('signed-resource', { inverse: 'versionedNotulen' }) signedResources;
 
   @belongsTo('published-resource', { inverse: 'versionedNotulen' })
