@@ -31,6 +31,16 @@
 
 
 
+
+## 5.0.0 (2023-06-09)
+
+#### :rocket: Enhancement
+* [#442](https://github.com/lblod/frontend-gelinkt-notuleren/pull/442) GN-4159 - Feature/create revoke signature button ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 4.1.0 (2023-06-04)
 
 #### :bug: Bug Fix
