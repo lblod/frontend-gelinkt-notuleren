@@ -140,7 +140,7 @@ inbox:
     administrative-body: Bestuursorgaan
     time: Tijdstip
     location: Locatie
-    meeting-of: Zitting van 
+    meeting-of: Zitting van
     at: op
     new:
       title: Nieuwe zitting aanmaken
@@ -208,7 +208,7 @@ inbox:
 
 
 irg-archive:
-  not-found: 
+  not-found:
     title: Reglement niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het reglement.
 
@@ -378,6 +378,7 @@ meetings:
     decision-list: Besluitenlijst
     extracts: Uittreksels
     document: Notulen
+    publication-actions: Publicatie acties
   delete:
     delete: Verwijderen
     confirm-message: Weet u zeker dat u deze zitting wilt verwijderen?
@@ -395,7 +396,7 @@ meetings:
       confirm-quit-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
       save-and-quit: Opslaan en afsluiten
       cancel: Annuleren
-  not-found: 
+  not-found:
     title: Zitting niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de zitting.
 
@@ -462,6 +463,24 @@ print-view:
   manual: handleiding
   save-2: . Deze informatie (boven de stippellijn) zal niet op de print of PDF te zien zijn.
   signed-by: Ondertekend door
+  error-heading: Er is een fout opgetreden bij het genereren van het afdrukvoorbeeld.
+  error-body: Gelieve contact op te nemen met het support team.
+
+
+publication-actions:
+  document: Document
+  action: Actie
+  date: Datum
+  user: Uitvoerder
+  hash: Hash
+  planned-agenda: Ontwerpagenda
+  suplemental-agenda: Aanvullende Agenda
+  urgent-agenda: Spoedeisende Agenda
+  notulen: Notulen
+  decision-list: BesluitenLijst
+  treatment: Uitreksel
+  deleted: verwijderd
+  return: Terug naar alle publicatie acties
 
 publication-confirmation:
   modal-title: "Bevestig publicatie van "
@@ -482,6 +501,7 @@ publication-confirmation:
   cancel-button: Annuleren
 
 publish:
+  preview: Voorvertoning
   back-to-meeting: Terug naar zitting
   heading-part-one: Zitting van
   loading-message: Bezig met laden...
@@ -508,6 +528,10 @@ publish:
   in-preparation: In voorbereiding
   public: Publiek
   non-public: Niet publiek
+  delete-signature: Ondertekening verwijderen
+  delete-signature-warning: Bent u zeker dat u uw ondertekening wil verwijderen?
+  deleted: Verwijderd
+  no-publication-actions-message: Er zijn geen publicatieacties beschikbaar
 
 published-resource:
   published-by-label: Gepubliceerd door
@@ -524,7 +548,7 @@ rdfa-editor-container:
   making-copy: Kopie aan het maken
 
 regulatory-statements:
-  not-found: 
+  not-found:
     title: Reglementaire bijlage niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de reglementaire bijlage.
 

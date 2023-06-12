@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
-import { task, restartableTask } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { action } from '@ember/object';
@@ -19,14 +19,17 @@ import { action } from '@ember/object';
 /**
  * @extends {Component<Args>}
  */
+
 export default class SignaturesTimelineStep extends Component {
   @service currentSession;
   @service intl;
+  @service store;
 
   @tracked showSigningModal = false;
   @tracked showPublishingModal = false;
   @tracked isSignedByCurrentUser = true;
   @tracked signedResources = [];
+  @tracked signingOrPublishing = false;
 
   publicationBaseUrl = ENV.publication.baseUrl;
 
@@ -48,7 +51,7 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get signaturesCount() {
-    return this.signedResources.length;
+    return this.activeSignatures.length;
   }
 
   initTask = restartableTask(async () => {
@@ -138,21 +141,103 @@ export default class SignaturesTimelineStep extends Component {
     return 'pencil';
   }
 
-  signDocument = task(async (signedId) => {
+  signDocument = async (signedId) => {
+    this.signingOrPublishing = true;
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
-    await this.args.signing(signedId);
-    const signedResources = await this.args.signedResources;
+    let signedResources = await this.args.signing(signedId);
     this.signedResources = signedResources.sortBy('createdOn');
-  });
+    const signedResource = await signedResources.lastObject;
+    let versionedResource;
+    const agenda = await signedResource.agenda;
+    if (agenda) {
+      versionedResource = agenda;
+    } else {
+      const versionedBesluitenLijst =
+        await signedResource.versionedBesluitenLijst;
+      if (versionedBesluitenLijst) {
+        versionedResource = versionedBesluitenLijst;
+      } else {
+        const versionedNotulen = await signedResource.versionedNotulen;
+        if (versionedNotulen) {
+          versionedResource = versionedNotulen;
+        } else {
+          const versionedBehandeling =
+            await signedResource.versionedBehandeling;
+          if (versionedBehandeling) {
+            versionedResource = versionedBehandeling;
+          }
+        }
+      }
+    }
+    const log = this.store.createRecord('publishing-log', {
+      action: 'sign',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signedResource,
+      zitting: await versionedResource.zitting,
+    });
+    await log.save();
+    this.signingOrPublishing = false;
+  };
 
-  publishDocument = task(async (signedId) => {
+  publishDocument = async (signedId) => {
+    this.signingOrPublishing = true;
     this.showPublishingModal = false;
-    await this.args.publish(signedId);
-  });
+    const publishedResource = await this.args.publish(signedId);
+    let versionedResource;
+    const agenda = await publishedResource.agenda;
+    if (agenda) {
+      versionedResource = agenda;
+    } else {
+      const versionedBesluitenLijst =
+        await publishedResource.versionedBesluitenLijst;
+      if (versionedBesluitenLijst) {
+        versionedResource = versionedBesluitenLijst;
+      } else {
+        const versionedNotulen = await publishedResource.versionedNotulen;
+        if (versionedNotulen) {
+          versionedResource = versionedNotulen;
+        } else {
+          const versionedBehandeling =
+            await publishedResource.versionedBehandeling;
+          if (versionedBehandeling) {
+            versionedResource = versionedBehandeling;
+          }
+        }
+      }
+    }
+    const log = this.store.createRecord('publishing-log', {
+      action: 'publish',
+      user: this.currentSession.user,
+      date: new Date(),
+      publishedResource: publishedResource,
+      zitting: await versionedResource.zitting,
+    });
+    await log.save();
+    this.signingOrPublishing = false;
+  };
 
   @action
   publish() {
     this.showPublishingModal = true;
+  }
+
+  get activeSignatures() {
+    return this.signedResources.filter((signature) => !signature.deleted);
+  }
+
+  get deletedSignatures() {
+    return this.signedResources.filter((signature) => signature.deleted);
+  }
+
+  get showDeletedSecondSignature() {
+    if (!this.deletedSignatures.lastObject) {
+      return false;
+    }
+    return (
+      this.activeSignatures.firstObject.createdOn <
+      this.deletedSignatures.lastObject.createdOn
+    );
   }
 }

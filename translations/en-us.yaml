@@ -379,6 +379,7 @@ meetings:
     decision-list: Decision list
     extracts: Extracts
     document: Document
+    publication-actions: Publication actions
   delete:
     delete: Delete
     confirm-message: Are you sure you want to delete this meeting
@@ -463,6 +464,23 @@ print-view:
   manual: manual
   save-2: . This information (above the dotted line) will not show up on the print or PDF.
   signed-by: Signed by
+  error-heading: Something went wrong while generating the print preview.
+  error-body: Please contact the support team.
+
+publication-actions:
+  document: Document
+  action: Action
+  date: Date
+  user: User
+  hash: Hash
+  planned-agenda: Planned Agenda
+  suplemental-agenda: Supplemental Agenda
+  urgent-agenda: Urgent Agenda
+  notulen: Document
+  decision-list: Decision list
+  treatment: Treatment
+  deleted: Deleted
+  return: Back to all publication actions
 
 publication-confirmation:
   modal-title: "Confirm publication of "
@@ -483,6 +501,7 @@ publication-confirmation:
   cancel-button: Cancel
 
 publish:
+  preview: Preview
   back-to-meeting: Back to meeting
   heading-part-one: Meeting on
   loading-message: Loading...
@@ -509,6 +528,10 @@ publish:
   in-preparation: In preparation
   public: Public
   non-public: Not public
+  delete-signature: Delete signature
+  delete-signature-warning: Are you sure you want to delete your signature?
+  deleted: Deleted
+  no-publication-actions-message: There are no publication actions available
 
 published-resource:
   published-by-label: Published by

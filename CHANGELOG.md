@@ -30,6 +30,33 @@
 
 
 
+
+
+## 5.0.0 (2023-06-09)
+
+#### :rocket: Enhancement
+* [#442](https://github.com/lblod/frontend-gelinkt-notuleren/pull/442) GN-4159 - Feature/create revoke signature button ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
+## 4.1.0 (2023-06-04)
+
+#### :bug: Bug Fix
+* [#469](https://github.com/lblod/frontend-gelinkt-notuleren/pull/469) Add date plugin to zitting-text-document-container and fix date config error ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#471](https://github.com/lblod/frontend-gelinkt-notuleren/pull/471) Update ember-acmidm-login to v2 ([@elpoelma](https://github.com/elpoelma))
+* [#462](https://github.com/lblod/frontend-gelinkt-notuleren/pull/462) Update models and relationships ([@elpoelma](https://github.com/elpoelma))
+* [#470](https://github.com/lblod/frontend-gelinkt-notuleren/pull/470) Bump socket.io-parser from 4.2.1 to 4.2.3 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 3
+- Deniss Kozickis ([@dkozickis](https://github.com/dkozickis))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 4.0.2 (2023-05-19)
 
 #### :bug: Bug Fix

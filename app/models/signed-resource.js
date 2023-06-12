@@ -3,6 +3,7 @@ import Model, { attr, belongsTo } from '@ember-data/model';
 export default class SignedResourceModel extends Model {
   @attr content;
   @attr hashValue;
+  @attr('boolean', { defaultValue: false }) deleted;
   @attr('datetime') createdOn;
 
   @belongsTo('blockchain-status', { inverse: null }) status;
@@ -14,4 +15,6 @@ export default class SignedResourceModel extends Model {
   versionedBehandeling;
   @belongsTo('versioned-notulen', { inverse: 'signedResources' })
   versionedNotulen;
+  @belongsTo('versioned-behandeling', { inverse: 'signedResources' })
+  versionedBehandeling;
 }

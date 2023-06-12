@@ -8,8 +8,21 @@ export default class SignaturesPublicationStatus extends Component {
   @tracked ready = false;
   @action
   async loadResource() {
-    this.signedResources =
-      (await this.args.versionedResource.get('signedResources')) || [];
+    if (!this.args.versionedResource) {
+      this.signedResources = [];
+      this.ready = true;
+      return;
+    }
+    const versionedResource = await this.args.versionedResource;
+    const signedResources = await versionedResource.signedResources;
+    if (signedResources) {
+      const activeSignedResources = signedResources.filter(
+        (signature) => !signature.deleted
+      );
+      this.signedResources = activeSignedResources;
+    } else {
+      this.signedResources = [];
+    }
     this.publishedResource = await this.args.versionedResource.get(
       'publishedResource'
     );

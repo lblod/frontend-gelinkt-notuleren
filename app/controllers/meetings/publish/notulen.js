@@ -8,6 +8,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @service store;
   @service publish;
   @service muTask;
+  @service currentSession;
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
@@ -45,7 +46,20 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   get containerElement() {
-    return document.getElementById(this.behandelingContainerId);
+    // This is a kind of a workaround/trick
+    // if you look at the template, the in-element helper that uses this getter
+    // already conditionally renders on loadNotulen.isIdle, so you'd expect this
+    // to not be necessary here,
+    // but it seems in-element doesn't retrigger this getter
+    // when the block it's in goes from unrendered to rendered.
+    // As a result, the children are rendered in a containerElement that is no longer
+    // attached to the dom. So we force an extra dependency here to make sure the getter
+    // retriggers.
+    if (this.loadNotulen.isIdle) {
+      return document.getElementById(this.behandelingContainerId);
+    } else {
+      return null;
+    }
   }
 
   get showPublicToggles() {
@@ -59,9 +73,22 @@ export default class MeetingsPublishNotulenController extends Controller {
     return 'concept';
   }
 
+  get loading() {
+    return (
+      this.createSignedResource.isRunning ||
+      this.deleteSignatureTask.isRunning ||
+      this.loadNotulen.isRunning
+    );
+  }
+
+  get isPublished() {
+    return !!this.publishedResource;
+  }
+
   loadNotulen = task(async () => {
     const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
+      'filter[deleted]': false,
       include: 'signed-resources.gebruiker,published-resource.gebruiker',
     });
     if (versionedNotulens.length) {
@@ -76,11 +103,9 @@ export default class MeetingsPublishNotulenController extends Controller {
             this.notulen = notulen;
             notulenSet = true;
           }
-          if (signedResources.length) {
-            this.signedResources = signedResources;
-            if (!notulenSet) {
-              this.notulen = notulen;
-            }
+          this.signedResources = signedResources.toArray();
+          if (!notulenSet) {
+            this.notulen = notulen;
           }
         })
       );
@@ -121,6 +146,28 @@ export default class MeetingsPublishNotulenController extends Controller {
 
     return response.map((res) => res.data.attributes);
   });
+  deleteSignatureTask = task(async (signature) => {
+    signature.deleted = true;
+    await signature.save();
+    const log = this.store.createRecord('publishing-log', {
+      action: 'delete-signature',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signature,
+      zitting: this.meeting,
+    });
+    await log.save();
+
+    // not a mistake
+    // at this point, the signature is marked as deleted but the model has not yet reloaded,
+    // so it is still in the signedResources array.
+    // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
+    if (this.signedResources.length === 1) {
+      this.notulen.deleted = true;
+      await this.notulen.save();
+    }
+    await this.loadNotulen.perform();
+  });
 
   createSignedResource = task(async () => {
     this.showSigningModal = false;
@@ -130,11 +177,19 @@ export default class MeetingsPublishNotulenController extends Controller {
       { method: 'POST' }
     );
     await this.muTask.waitForMuTaskTask.perform(taskId);
-    this.signedResources = await this.store.query('signed-resource', {
-      'filter[versioned-notulen][zitting][:id:]': this.model.id,
-      include: 'gebruiker',
-      sort: 'created-on',
+    await this.loadNotulen.perform();
+    const signedResources = this.signedResources;
+    const signedResource = signedResources[signedResources.length - 1];
+    const versionedResource = await signedResource.versionedNotulen;
+
+    const log = this.store.createRecord('publishing-log', {
+      action: 'sign',
+      user: this.currentSession.user,
+      date: new Date(),
+      signedResource: signedResource,
+      zitting: await versionedResource.zitting,
     });
+    await log.save();
   });
 
   createPublishedResource = task(async () => {
@@ -152,6 +207,17 @@ export default class MeetingsPublishNotulenController extends Controller {
     );
     await this.muTask.waitForMuTaskTask.perform(taskId);
     await this.loadNotulen.perform();
+    const publishedResource = this.publishedResource;
+    const versionedResource = this.notulen;
+
+    const log = this.store.createRecord('publishing-log', {
+      action: 'publish',
+      user: this.currentSession.user,
+      date: new Date(),
+      publishedResource: publishedResource,
+      zitting: await versionedResource.zitting,
+    });
+    await log.save();
   });
 
   generateNotulenPreview = task(async () => {
@@ -248,6 +314,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     else this.publicBehandelingUris.pushObject(uri);
     this.updateNotulenPreview();
   }
+
   @action
   toggleAllPublicationStatus() {
     if (!this.allBehandelingPublic) {

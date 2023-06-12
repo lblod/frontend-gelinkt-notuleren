@@ -65,6 +65,9 @@ Router.map(function () {
         this.route('show', { path: '/:treatment_id' });
       });
       this.route('notulen');
+      this.route('publication-actions', function () {
+        this.route('detail', { path: '/:publishing_log_id' });
+      });
     });
   });
 

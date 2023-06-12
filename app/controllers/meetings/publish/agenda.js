@@ -85,6 +85,7 @@ export default class MeetingsPublishAgendaController extends Controller {
     const agendas = await this.store.query('agenda', {
       'filter[zitting][:id:]': this.meeting.id,
       'filter[agenda-type]': type,
+      'filter[deleted]': false,
       include: 'signed-resources,published-resource',
     });
     if (agendas.length) {
@@ -97,6 +98,7 @@ export default class MeetingsPublishAgendaController extends Controller {
         agendaType: type,
         zitting: this.model,
         renderedContent: prePublish,
+        deleted: false,
       });
       return rslt;
     }
@@ -113,21 +115,41 @@ export default class MeetingsPublishAgendaController extends Controller {
    * @param {string} agendaType
    * @this {MeetingsPublishAgendaController}
    */
-  createSignedResource = task(async (kindUuid) => {
+  createSignedResource = task(async (kindUuid, kind) => {
     const id = this.model.id;
     await fetch(`/signing/agenda/sign/${kindUuid}/${id}`, { method: 'POST' });
     await this.reloadAgendas.perform();
+    if (kind === 'ontwerp') {
+      return this.ontwerpAgenda.signedResources;
+    }
+    if (kind === 'aanvullende') {
+      return this.aanvullendeAgenda.signedResources;
+    }
+    if (kind === 'spoedeisende') {
+      return this.spoedeisendeAgenda.signedResources;
+    }
   });
 
   /**
    * @param {string} agendaType
    * @this {MeetingsPublishAgendaController}
    */
-  createPublishedResource = task(async (kindUuid) => {
+  createPublishedResource = task(async (kindUuid, kind) => {
     const id = this.model.id;
     await fetch(`/signing/agenda/publish/${kindUuid}/${id}`, {
       method: 'POST',
     });
     await this.reloadAgendas.perform();
+    let publishedResource;
+    if (kind === 'ontwerp') {
+      publishedResource = await this.ontwerpAgenda.publishedResource;
+    }
+    if (kind === 'aanvullende') {
+      publishedResource = await this.aanvullendeAgenda.publishedResource;
+    }
+    if (kind === 'spoedeisende') {
+      publishedResource = await this.spoedeisendeAgenda.publishedResource;
+    }
+    return publishedResource;
   });
 }

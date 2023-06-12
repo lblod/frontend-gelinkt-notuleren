@@ -27,6 +27,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     try {
       const behandelings = await this.store.query('versioned-besluiten-lijst', {
         'filter[zitting][:id:]': this.model.id,
+        'filter[deleted]': false,
         include: 'signed-resources,published-resource',
       });
       if (behandelings.length) {
@@ -71,6 +72,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   reloadBesluitenLijst = task(async () => {
     const behandelings = await this.store.query('versioned-besluiten-lijst', {
       'filter[zitting][:id:]': this.model.id,
+      'filter[deleted]': false,
       include: 'signed-resources,published-resource',
     });
     this.besluitenlijst = behandelings.firstObject;
@@ -104,6 +106,8 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       iteration > maxIterations
     );
     await this.reloadBesluitenLijst.perform();
+    const signedResources = await this.besluitenlijst.signedResources;
+    return signedResources;
   });
 
   createPublishedResource = task(async () => {
@@ -128,5 +132,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       iteration > maxIterations
     );
     await this.reloadBesluitenLijst.perform();
+    const publishedResource = await this.besluitenlijst.publishedResource;
+    return publishedResource;
   });
 }
