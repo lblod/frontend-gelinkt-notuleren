@@ -5,12 +5,13 @@
   @allowTitleUpdate={{true}}
   @dirty={{this.dirty}}
 >
-  <:return-link>
+  <:returnLink>
     <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
-  </:return-link>
+  </:returnLink>
   <:actions>
     <AgendapointMenu @documentContainer={{this.documentContainer}} @editorDocument={{this.editorDocument}} />
     <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
+      {{!-- template-lint-disable require-context-role --}}
       <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
         <AuIcon @icon="copy" @alignment="left"/>
         {{t "app-chrome.copy-agendapoint"}}
@@ -76,7 +77,7 @@
       <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}} @options={{this.config.besluitType}}/>
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}}/>
     </:toolbar>
-    <:sidebar-collapsible>
+    <:sidebarCollapsible>
         <ArticleStructurePlugin::ArticleStructureCard
           @controller={{this.controller}}
           @options={{this.config.structures}}
@@ -95,7 +96,7 @@
         {{#if (feature-flag 'regulatoryStatements')}}
           <EditorPlugins::RegulatoryStatements::SidebarInsert @controller={{this.controller}}/>
         {{/if}}
-    </:sidebar-collapsible>
+    </:sidebarCollapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard
         @controller={{this.controller}}

@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import { EDITOR_FOLDERS } from '../../config/constants';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import {
   DRAFT_STATUS_ID,
   SCHEDULED_STATUS_ID,

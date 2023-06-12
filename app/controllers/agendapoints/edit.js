@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { Schema } from '@lblod/ember-rdfa-editor';
@@ -67,10 +67,13 @@ import {
   regulatoryStatementNodeView,
 } from '../../editor-plugins/regulatory-statements-plugin';
 import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
-import { link, linkView } from '@lblod/ember-rdfa-editor/plugins/link';
+import {
+  link,
+  linkView,
+  linkPasteHandler,
+} from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { validation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/validation';
 import { atLeastOneArticleContainer } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/decision-plugin/utils/validation-rules';

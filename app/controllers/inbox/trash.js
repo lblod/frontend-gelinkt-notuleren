@@ -1,4 +1,4 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { DRAFT_STATUS_ID } from '../../utils/constants';
@@ -14,6 +14,7 @@ export default class InboxTrashController extends Controller {
   @service currentSession;
   @service router;
   @service intl;
+  @service store;
 
   @action
   async moveToConcepts(documents) {

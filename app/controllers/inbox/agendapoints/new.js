@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { EDITOR_FOLDERS } from 'frontend-gelinkt-notuleren/config/constants';
 
 export default class InboxAgendapointsNewController extends Controller {

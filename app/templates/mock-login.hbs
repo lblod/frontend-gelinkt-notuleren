@@ -16,7 +16,7 @@
         <p class="au-u-margin-top-small au-u-margin-bottom">
           {{#let (unique-id) as |id|}}
             <AuLabel for={{id}}>{{t "mock-login.administrative-unit-search"}}</AuLabel>
-            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" id={{id}} placeholder={{t "mock-login.search-placeholder"}} value={{this.gemeente}} autofocus oninput={{perform this.updateSearch value='target.value'}}>
+            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" id={{id}} placeholder={{t "mock-login.search-placeholder"}} value={{this.gemeente}} oninput={{perform this.updateSearch value='target.value'}}>
           {{/let}}
         </p>
 

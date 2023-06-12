@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import isLoadingRoute from '../utils/is-loading-route';
 
 export default class ConfirmRouteLeaveComponent extends Component {

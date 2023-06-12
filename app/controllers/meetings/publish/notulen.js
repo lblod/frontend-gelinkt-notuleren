@@ -1,4 +1,4 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';

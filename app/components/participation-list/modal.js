@@ -4,7 +4,7 @@ import { localCopy } from 'tracked-toolbox';
 import { use } from 'ember-could-get-used-to-this';
 import ParticipationMap from '../../helpers/participant-map';
 import { tracked } from '@glimmer/tracking';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 /** @typedef {import("../../models/mandataris").default} Mandataris */
 /** @typedef {import("../../models/functionaris").default} Functionaris */
