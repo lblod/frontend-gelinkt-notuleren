@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { EDITOR_FOLDERS } from '../../config/constants';
 
 export default class InboxTrashRoute extends Route {

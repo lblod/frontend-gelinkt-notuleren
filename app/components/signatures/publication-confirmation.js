@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export default class SignaturesPublicationConfirmation extends Component {

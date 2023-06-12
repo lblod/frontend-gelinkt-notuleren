@@ -1,7 +1,6 @@
-import Service from '@ember/service';
+import Service, { service } from '@ember/service';
 import { analyse } from '@lblod/marawa/rdfa-context-scanner';
 import { task } from 'ember-concurrency';
-import { inject as service } from '@ember/service';
 
 export default class DocumentService extends Service {
   @service store;

@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { trackedFunction } from 'ember-resources/util/function';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class AgendapointMenuComponent extends Component {
   @service store;

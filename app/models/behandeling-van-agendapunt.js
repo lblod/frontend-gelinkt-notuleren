@@ -1,6 +1,6 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { DRAFT_FOLDER_ID, SCHEDULED_STATUS_ID } from '../utils/constants';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 
 export default class BehandelingVanAgendapunt extends Model {
   @service store;

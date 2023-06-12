@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { task } from 'ember-concurrency';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 const PROVINCE_CLASSIFICATION_ID = '5ab0e9b8a3b2ca7c5e000000';
@@ -49,9 +49,12 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
       'functionaris',
       queryParams
     );
-    this.options = candidateOptions.reject(
-      (functionaris) =>
-        functionaris.einde && functionaris.einde < startOfMeeting
-    );
+    this.options = candidateOptions.filter((functionaris) => {
+      if (functionaris.einde) {
+        return functionaris.einde >= startOfMeeting;
+      } else {
+        return true;
+      }
+    });
   });
 }

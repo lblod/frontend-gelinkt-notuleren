@@ -2,7 +2,7 @@
   <div class="au-c-app-chrome">
   <AuToolbar @size="small" class="au-u-padding-bottom-none" as |Group|>
     <Group>
-     {{yield to='return-link'}}
+     {{yield to='returnLink'}}
      <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
     </Group>
     <Group>
@@ -48,7 +48,7 @@
         @readOnly={{or @readOnly (not @allowTitleUpdate)}}
         @onSubmit={{@onTitleUpdate}}
       />
-      {{yield to="actions-after-title"}}
+      {{yield to="actionsAfterTitle"}}
     </Group>
     <Group>
       {{yield to="actions"}}

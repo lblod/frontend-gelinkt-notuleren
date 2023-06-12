@@ -21,10 +21,16 @@ administrative-body-select:
   period: "period"
   not-applicable: n/a
 
+application:
+  flanders-logo: Logo of the Flemish government
+  loading: Loading
+  patience-text: Thank you for your patience.
+
 auth:
   login: Login
   switch-administrative-unit: Switch Administrative Unit
   logout: Logout
+
 
 application-header:
   switch-administrative-unit: Switch Administrative Unit
@@ -475,6 +481,7 @@ publication-actions:
   treatment: Treatment
   deleted: Deleted
   return: Back to all publication actions
+  details: Details
 
 publication-confirmation:
   modal-title: "Confirm publication of "
@@ -563,6 +570,10 @@ regulatory-statements-plugin:
 
 required-field:
   required: Required
+
+regulatory-statement:
+  page-title: Regulatory statement
+  history: History
 
 signature-confirmation:
   modal-title: "Confirm signing of "

@@ -23,7 +23,7 @@
     </p>
     {{/if}}
     <hr class="au-c-hr au-u-margin-none" />
-    <div class="au-u-flex--column au-u-flex">
+    <div class="au-u-flex--column au-u-flex" role="menu">
       {{#each this.revisions as |revision|}}
         {{#if (eq revision.id @currentRevisionId)}}
           <AuLink @route="regulatory-statements.revisions" @active="true" @skin="secondary" role="menuitem" class="au-u-padding-tiny au-u-padding-left-small" @models={{array @documentContainerId revision.id}}>

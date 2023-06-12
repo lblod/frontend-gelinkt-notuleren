@@ -21,10 +21,12 @@ import {
   paragraph,
   repaired_block,
   text,
+  doc,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
   tableNodes,
   tablePlugin,
+  tableKeymap,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
 import {
@@ -40,10 +42,7 @@ import { image } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
-import { tableKeymap } from '@lblod/ember-rdfa-editor/plugins/table';
-
-import { doc } from '@lblod/ember-rdfa-editor/nodes';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import { tracked } from '@glimmer/tracking';
 

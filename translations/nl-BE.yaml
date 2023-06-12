@@ -21,6 +21,12 @@ administrative-body-select:
   period: "period"
   not-applicable: nvt.
 
+application:
+  flanders-logo: Logo van de vlaamse overheid
+  loading: Aan het laden
+  patience-text: Bedankt voor uw geduld
+
+
 auth:
   login: Aanmelden
   switch-administrative-unit: Wissel van bestuurseenheid
@@ -475,6 +481,7 @@ publication-actions:
   treatment: Uitreksel
   deleted: verwijderd
   return: Terug naar alle publicatie acties
+  details: Details
 
 publication-confirmation:
   modal-title: "Bevestig publicatie van "
@@ -562,6 +569,10 @@ regulatory-statements-plugin:
 
 required-field:
   required: Verplicht
+
+regulatory-statement:
+  page-title: Reglementaire bijlage
+  history: Historiek
 
 signature-confirmation:
   modal-title: "Bevestig ondertekenen van "

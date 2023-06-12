@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { task, all } from 'ember-concurrency';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { tracked } from 'tracked-built-ins';
 import {
   DRAFT_STATUS_ID,

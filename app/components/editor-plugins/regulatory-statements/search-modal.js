@@ -2,7 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from 'tracked-built-ins';
 import { action } from '@ember/object';
 import { EDITOR_FOLDERS } from '../../../config/constants';
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { restartableTask } from 'ember-concurrency';
 
 export default class RegulatoryStatementsSearchModalComponent extends Component {

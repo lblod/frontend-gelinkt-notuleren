@@ -1,4 +1,4 @@
-import { inject as service } from '@ember/service';
+import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
 import Component from '@glimmer/component';
@@ -78,7 +78,7 @@ export default class TreatmentVotingModalComponent extends Component {
       'filter[:id:]': this.args.behandeling.id,
       include: 'aanwezigen.bekleedt.bestuursfunctie',
     });
-    const participants = richTreatment.firstObject.aanwezigen;
+    const participants = await richTreatment.firstObject.aanwezigen;
 
     const stemmingToEdit = this.store.createRecord('stemming', {
       onderwerp: '',

@@ -1,13 +1,14 @@
 import formatRelative from 'date-fns/formatRelative';
 import format from 'date-fns/format';
 import locales from 'date-fns/locale';
+import { helper } from '@ember/component/helper';
 
 function getDateFnsLocale(locale) {
   return locales[locale] ?? locales[locale.substring(0, 2)];
 }
 
-export default function humanFriendlyDate(
-  date,
+function humanFriendlyDate(
+  [date],
   { locale = 'nl-BE', alwaysShowTime = true } = {}
 ) {
   if (!(date instanceof Date)) return '';
@@ -28,3 +29,5 @@ export default function humanFriendlyDate(
     return '';
   }
 }
+
+export default helper(humanFriendlyDate);

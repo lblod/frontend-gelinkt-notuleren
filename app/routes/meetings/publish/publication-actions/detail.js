@@ -1,6 +1,8 @@
 import Route from '@ember/routing/route';
-
+import { service } from '@ember/service';
 export default class MeetingsPublishPublicationActionsDetailRoute extends Route {
+  @service store;
+
   async model(params) {
     const log = await this.store.findRecord(
       'publishing_log',
