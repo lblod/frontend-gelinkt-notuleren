@@ -481,6 +481,7 @@ publication-actions:
   treatment: Treatment
   deleted: Deleted
   return: Back to all publication actions
+  details: Details
 
 publication-confirmation:
   modal-title: "Confirm publication of "

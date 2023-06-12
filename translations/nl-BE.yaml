@@ -481,6 +481,7 @@ publication-actions:
   treatment: Uitreksel
   deleted: verwijderd
   return: Terug naar alle publicatie acties
+  details: Details
 
 publication-confirmation:
   modal-title: "Bevestig publicatie van "
