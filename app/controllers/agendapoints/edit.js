@@ -273,15 +273,14 @@ export default class AgendapointsEditController extends Controller {
 
     const behandeling = (
       await this.store.query('behandeling-van-agendapunt', {
-        'document-container.id': this.model.documentContainer.id,
-        'filter[document-container][current-version][:id:]':
-          this.editorDocument.id,
-        include: 'document-container.current-version,onderwerp',
+        'filter[document-container][:id:]': this.model.documentContainer.id,
       })
     ).firstObject;
-
-    const agendaItem = await behandeling.onderwerp;
-    agendaItem.titel = title;
+    if (behandeling) {
+      const agendaItem = await behandeling.onderwerp;
+      agendaItem.titel = title;
+      await agendaItem.save();
+    }
 
     const editorDocument =
       await this.documentService.createEditorDocument.perform(
@@ -292,8 +291,6 @@ export default class AgendapointsEditController extends Controller {
       );
 
     this._editorDocument = editorDocument;
-
-    await behandeling.save();
   });
 
   saveTask = task(async () => {
