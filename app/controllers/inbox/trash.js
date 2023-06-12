@@ -14,6 +14,7 @@ export default class InboxTrashController extends Controller {
   @service currentSession;
   @service router;
   @service intl;
+  @service store;
 
   @action
   async moveToConcepts(documents) {
