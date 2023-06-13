@@ -19,7 +19,6 @@ export default class MeetingForm extends Component {
   @tracked possibleParticipants;
   @tracked behandelingen;
   @tracked headerArticleTranslationString = '';
-  @tracked isPublished = false;
   @service store;
   @service currentSession;
   @service router;

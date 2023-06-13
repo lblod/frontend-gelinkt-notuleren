@@ -12,7 +12,6 @@ export default class RegulatoryAttachmentsShowController extends Controller {
   @service router;
   @service store;
   @service intl;
-  @service documentService;
   @tracked revisions;
 
   fetchRevisions = task(async () => {

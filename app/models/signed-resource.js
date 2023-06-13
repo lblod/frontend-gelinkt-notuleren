@@ -15,6 +15,4 @@ export default class SignedResourceModel extends Model {
   versionedBehandeling;
   @belongsTo('versioned-notulen', { inverse: 'signedResources' })
   versionedNotulen;
-  @belongsTo('versioned-behandeling', { inverse: 'signedResources' })
-  versionedBehandeling;
 }
