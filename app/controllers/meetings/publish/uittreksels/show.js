@@ -16,7 +16,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @service intl;
   @service currentSession;
   @service store;
-  @service router;
 
   get bestuurseenheid() {
     return this.currentSession.group;
