@@ -24,7 +24,7 @@
   {{else if (eq this.signaturesCount 1)}}
     <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
       <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.first-signature"}}</AuHeading>
-      <Signatures::SignedResource @signature={{this.activeSignatures.firstObject}} @canDelete={{not @isPublished}}/>
+      <Signatures::SignedResource @signature={{get this.activeSignatures "0"}} @canDelete={{not @isPublished}} />
     </div>
     <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
       <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t "timeline-step.second-signature"}}</AuHeading>
