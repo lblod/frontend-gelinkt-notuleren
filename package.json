@@ -102,7 +102,7 @@
     "release-it": "^15.6.0",
     "sass": "^1.49.9",
     "tracked-built-ins": "^3.1.1",
-    "tracked-toolbox": "^1.2.3",
+    "tracked-toolbox": "^2.0.0",
     "uuid": "^9.0.0",
     "webpack": "^5.76.0"
   },
