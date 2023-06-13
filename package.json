@@ -83,7 +83,7 @@
     "ember-router-service-refresh-polyfill": "^1.1.0",
     "ember-simple-auth": "^4.2.2",
     "ember-source": "~4.8.0",
-    "ember-template-lint": "^4.16.1",
+    "ember-template-lint": "^5.10.1",
     "ember-truth-helpers": "^3.0.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.5.0",
