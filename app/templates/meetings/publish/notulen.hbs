@@ -41,7 +41,7 @@
       {{else if (and this.errors this.errors.length)}}
           <AuAlert @icon="alert-triangle" @skin="error">
             <p>{{t 'publish.serious-error'}}</p>
-            <code>{{this.errors.firstObject}}</code>
+            <code>{{get this.errors "0"}}</code>
           </AuAlert>
       {{else}}
           {{!-- Sign --}}
