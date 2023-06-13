@@ -45,7 +45,10 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
-import date from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
+import {
+  date,
+  dateView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
 import {
   createInvisiblesPlugin,
@@ -191,6 +194,7 @@ export default class AgendapointsEditController extends Controller {
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
+        date: dateView(this.config.date)(controller),
       };
     };
   }
