@@ -231,7 +231,7 @@ export default class SignaturesTimelineStep extends Component {
     return this.signedResources.filter((signature) => signature.deleted);
   }
 
-  get lastDeletedSignature(){
+  get lastDeletedSignature() {
     return this.deletedSignatures.at(-1);
   }
 
