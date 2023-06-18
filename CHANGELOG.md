@@ -32,6 +32,29 @@
 
 
 
+
+## 5.1.0 (2023-06-18)
+
+#### :bug: Bug Fix
+* [#475](https://github.com/lblod/frontend-gelinkt-notuleren/pull/475) Fix agendapoint title saving ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#487](https://github.com/lblod/frontend-gelinkt-notuleren/pull/487) update ember-rdfa-editor-lblod-plugins to 8.0.1 ([@lagartoverde](https://github.com/lagartoverde))
+* [#478](https://github.com/lblod/frontend-gelinkt-notuleren/pull/478) build(deps-dev): bump tracked-toolbox from 1.3.0 to 2.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#486](https://github.com/lblod/frontend-gelinkt-notuleren/pull/486) Bump editor to 3.8.1 and editor-plugins to 7.2.0 ([@elpoelma](https://github.com/elpoelma))
+* [#484](https://github.com/lblod/frontend-gelinkt-notuleren/pull/484) build(deps-dev): bump tracked-built-ins from 2.0.1 to 3.1.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#482](https://github.com/lblod/frontend-gelinkt-notuleren/pull/482) build(deps-dev): bump ember-power-select from 5.0.4 to 7.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#480](https://github.com/lblod/frontend-gelinkt-notuleren/pull/480) build(deps-dev): bump ember-template-lint from 4.18.2 to 5.10.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#485](https://github.com/lblod/frontend-gelinkt-notuleren/pull/485) build(deps-dev): bump @appuniversum/ember-appuniversum from 2.6.0 to 2.7.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#476](https://github.com/lblod/frontend-gelinkt-notuleren/pull/476) build(deps-dev): bump eslint from 7.32.0 to 8.42.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#479](https://github.com/lblod/frontend-gelinkt-notuleren/pull/479) build(deps-dev): bump ember-resolver from 9.0.1 to 10.1.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#474](https://github.com/lblod/frontend-gelinkt-notuleren/pull/474) Upgrade to ember 4.8.5 ([@elpoelma](https://github.com/elpoelma))
+
+#### Committers: 2
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
+
 ## 5.0.0 (2023-06-09)
 
 #### :rocket: Enhancement
