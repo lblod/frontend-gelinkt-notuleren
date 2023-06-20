@@ -385,6 +385,8 @@ meetings:
       title: Uittreksels
     document: 
       title: Notulen
+      preview: Voorvertoning notulen
+      make-agendapoint-content-public: Maak inhoud agendapunt publiek
     publication-actions: 
       title: Publicatie acties
       document: Document

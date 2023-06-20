@@ -386,6 +386,8 @@ meetings:
       title: Extracts
     document: 
       title: Document
+      preview: Document preview
+      make-agendapoint-content-public: Publish content of agendapoint
     publication-actions: 
       title: Publication actions
       document: Document

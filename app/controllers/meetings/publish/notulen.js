@@ -9,6 +9,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @service publish;
   @service muTask;
   @service currentSession;
+  @service intl;
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
@@ -71,6 +72,19 @@ export default class MeetingsPublishNotulenController extends Controller {
     if (this.signedResources.length === 1) return 'firstSignature';
     if (this.signedResources.length === 2) return 'secondSignature';
     return 'concept';
+  }
+
+  get statusLabel() {
+    switch (this.status) {
+      case 'published':
+        return this.intl.t('publish.published');
+      case 'firstSignature':
+        return this.intl.t('publish.first-signature-obtained');
+      case 'secondSignature':
+        return this.intl.t('publish.signed');
+      default:
+        return this.intl.t('publish.in-preparation');
+    }
   }
 
   get loading() {
