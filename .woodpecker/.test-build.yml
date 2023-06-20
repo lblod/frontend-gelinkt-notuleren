@@ -1,0 +1,9 @@
+pipeline:
+  build:
+    image: woodpeckerci/plugin-docker-buildx
+    settings:
+      repo: ${CI_REPO}
+      dry_run: true
+when:
+  event:
+    - pull_request

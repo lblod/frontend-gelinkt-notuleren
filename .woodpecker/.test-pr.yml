@@ -1,0 +1,23 @@
+pipeline:
+  install:
+    image: danlynn/ember-cli:3.28.5-node_16.13
+    commands:
+      - npm ci
+  lint:
+    image: danlynn/ember-cli:3.28.5-node_16.13
+    group: lint
+    commands:
+      - npm run lint
+  dependency-lint:
+    image: danlynn/ember-cli:3.28.5-node_16.13
+    group: lint
+    commands:
+      - ember dependency-lint
+    failure: ignore
+  test:
+    image: danlynn/ember-cli:3.28.5-node_16.13
+    commands:
+      - npm run test:ember
+    failure: ignore
+when:
+  event: pull_request
