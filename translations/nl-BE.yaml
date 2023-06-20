@@ -391,6 +391,10 @@ meetings:
       title: Publicatie acties
       document: Document
       action: Actie
+      actions:
+        publish: Publicatie
+        sign: Ondertekening
+        delete-signature: Verwijdering ondertekening
       date: Datum
       user: Uitvoerder
       hash: Hash

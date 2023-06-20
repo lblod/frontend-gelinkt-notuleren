@@ -32,7 +32,7 @@
           <PublishingLogDocumentName @log={{publishingLog}} />
         </td>
         <td>
-          {{publishingLog.action}}
+          {{this.actionLabel publishingLog}}
         </td>
         <td>
           {{human-friendly-date publishingLog.date locale=this.intl.primaryLocale}}

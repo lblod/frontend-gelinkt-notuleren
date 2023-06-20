@@ -392,6 +392,10 @@ meetings:
       title: Publication actions
       document: Document
       action: Action
+      actions:
+        publish: Publication
+        sign: Signature
+        delete-signature: Signature removal
       date: Date
       user: User
       hash: Hash
