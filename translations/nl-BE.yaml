@@ -374,11 +374,30 @@ meeting-form:
 
 meetings:
   publish:
-    agenda: Agenda
-    decision-list: Besluitenlijst
-    extracts: Uittreksels
-    document: Notulen
-    publication-actions: Publicatie acties
+    agenda: 
+      title: Agenda
+    decision-list: 
+      title: Besluitenlijst
+    extracts: 
+      title: Uittreksels
+    document: 
+      title: Notulen
+    publication-actions: 
+      title: Publicatie acties
+      document: Document
+      action: Actie
+      date: Datum
+      user: Uitvoerder
+      hash: Hash
+      planned-agenda: Ontwerpagenda
+      suplemental-agenda: Aanvullende Agenda
+      urgent-agenda: Spoedeisende Agenda
+      notulen: Notulen
+      decision-list: BesluitenLijst
+      treatment: Uitreksel
+      deleted: verwijderd
+      return: Terug naar alle publicatie acties
+      details: Details
   delete:
     delete: Verwijderen
     confirm-message: Weet u zeker dat u deze zitting wilt verwijderen?
@@ -465,23 +484,6 @@ print-view:
   signed-by: Ondertekend door
   error-heading: Er is een fout opgetreden bij het genereren van het afdrukvoorbeeld.
   error-body: Gelieve contact op te nemen met het support team.
-
-
-publication-actions:
-  document: Document
-  action: Actie
-  date: Datum
-  user: Uitvoerder
-  hash: Hash
-  planned-agenda: Ontwerpagenda
-  suplemental-agenda: Aanvullende Agenda
-  urgent-agenda: Spoedeisende Agenda
-  notulen: Notulen
-  decision-list: BesluitenLijst
-  treatment: Uitreksel
-  deleted: verwijderd
-  return: Terug naar alle publicatie acties
-  details: Details
 
 publication-confirmation:
   modal-title: "Bevestig publicatie van "

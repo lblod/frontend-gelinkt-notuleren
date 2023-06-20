@@ -9,23 +9,23 @@
   >
     <table.content as |c|>
       <c.header>
-        <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'publication-actions.document'}}</span></th>
+        <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'meetings.publish.publication-actions.document'}}</span></th>
         <AuDataTableThSortable 
           @field="action" 
           @currentSorting={{this.sort}}
-          @label={{t 'publication-actions.action' }} 
+          @label={{t 'meetings.publish.publication-actions.action' }} 
         />
         <AuDataTableThSortable 
           @field="date" 
           @currentSorting={{this.sort}}
-          @label={{t 'publication-actions.date' }} 
+          @label={{t 'meetings.publish.publication-actions.date' }} 
         />
         <AuDataTableThSortable 
           @field="user" 
           @currentSorting={{this.sort}}
-          @label={{t 'publication-actions.user' }} 
+          @label={{t 'meetings.publish.publication-actions.user' }} 
         />
-        <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'publication-actions.hash'}}</span></th>
+        <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'meetings.publish.publication-actions.hash'}}</span></th>
       </c.header>
       <c.body as |publishingLog|>
         <td>

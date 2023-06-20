@@ -375,11 +375,30 @@ meeting-form:
 
 meetings:
   publish:
-    agenda: Agenda
-    decision-list: Decision list
-    extracts: Extracts
-    document: Document
-    publication-actions: Publication actions
+    agenda: 
+      title: Agenda
+    decision-list: 
+      title: Decision list
+    extracts: 
+      title: Extracts
+    document: 
+      title: Document
+    publication-actions: 
+      title: Publication actions
+      document: Document
+      action: Action
+      date: Date
+      user: User
+      hash: Hash
+      planned-agenda: Planned Agenda
+      suplemental-agenda: Supplemental Agenda
+      urgent-agenda: Urgent Agenda
+      notulen: Document
+      decision-list: Decision list
+      treatment: Treatment
+      deleted: Deleted
+      return: Back to all publication actions
+      details: Details
   delete:
     delete: Delete
     confirm-message: Are you sure you want to delete this meeting
@@ -466,22 +485,6 @@ print-view:
   signed-by: Signed by
   error-heading: Something went wrong while generating the print preview.
   error-body: Please contact the support team.
-
-publication-actions:
-  document: Document
-  action: Action
-  date: Date
-  user: User
-  hash: Hash
-  planned-agenda: Planned Agenda
-  suplemental-agenda: Supplemental Agenda
-  urgent-agenda: Urgent Agenda
-  notulen: Document
-  decision-list: Decision list
-  treatment: Treatment
-  deleted: Deleted
-  return: Back to all publication actions
-  details: Details
 
 publication-confirmation:
   modal-title: "Confirm publication of "
