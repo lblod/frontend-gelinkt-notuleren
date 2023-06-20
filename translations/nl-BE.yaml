@@ -376,6 +376,9 @@ meetings:
   publish:
     agenda: 
       title: Agenda
+      planned-agenda: Ontwerpagenda
+      supplemental-agenda: Aanvullende Agenda
+      urgent-agenda: Spoedeisende Agenda
     decision-list: 
       title: Besluitenlijst
     extracts: 

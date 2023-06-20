@@ -377,6 +377,9 @@ meetings:
   publish:
     agenda: 
       title: Agenda
+      planned-agenda: Planned Agenda
+      supplemental-agenda: Supplemental Agenda
+      urgent-agenda: Urgent Agenda
     decision-list: 
       title: Decision list
     extracts: 
