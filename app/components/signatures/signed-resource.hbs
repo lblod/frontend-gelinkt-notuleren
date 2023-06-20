@@ -1,4 +1,4 @@
-<p>
+<p class="au-u-flex">
 {{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
 {{#if @signature.deleted}}
     <AuPill
@@ -7,7 +7,7 @@
       {{t "publish.deleted"}}
     </AuPill>
 {{else}}
-  <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
+  <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none au-u-margin-left-small">
     <AuIcon @icon="calendar"/>
     {{detailed-date @signature.createdOn}}
   </AuHelpText>
