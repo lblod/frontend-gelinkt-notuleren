@@ -514,10 +514,10 @@ publish:
   loading-message: Loading...
   updating-message: Updating...
   decision-list-error-message: Something went wrong while fetching the decision list.
-  no-excerpts-message: There are no excerpts available.
+  no-extracts-message: There are no extracts available.
   retry: "retry"
-  excerpts: Excerpts
-  excerpts-overview: All excerpts
+  extracts: Extracts
+  extracts-overview: All extracts
   position: Position
   status-label: Status
   agendapoint: Agendapoint

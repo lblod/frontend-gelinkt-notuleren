@@ -513,11 +513,11 @@ publish:
   loading-message: Bezig met laden...
   updating-message: Bezig met bijwerken...
   decision-list-error-message: Er liep iets fout bij het laden van de besluitenlijst.
-  no-excerpts-message: Er zijn geen uittreksels beschikbaar.
+  no-extracts-message: Er zijn geen uittreksels beschikbaar.
   excerpt-error-message: Er liep iets fout bij het laden van het uittreksel.
   retry: opnieuw proberen
-  excerpts: Uittreksels
-  excerpts-overview: Alle uittreksels
+  extracts: Uittreksels
+  extracts-overview: Alle uittreksels
   position: Positie
   status-label: Status
   agendapoint: Agendapunt
