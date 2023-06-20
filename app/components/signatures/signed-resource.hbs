@@ -7,13 +7,10 @@
       {{t "publish.deleted"}}
     </AuPill>
 {{else}}
-    <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
-      <AuIcon @icon="calendar"/>
-      {{detailed-date @signature.createdOn}}
-    </AuHelpText>
-  <p class="au-u-margin-top-tiny">
-    <AuPill class="au-u-word-break-all">{{@signature.hashValue}}</AuPill>
-  </p>
+  <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none">
+    <AuIcon @icon="calendar"/>
+    {{detailed-date @signature.createdOn}}
+  </AuHelpText>
 {{/if}}
 </p>
 {{#if (and this.signedByCurrentUser.value (and (not @signature.deleted) @canDelete))}}
