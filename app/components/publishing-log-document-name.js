@@ -23,33 +23,45 @@ export default class PublishingLogDocumentNameComponent extends Component {
       const type = versionedResource.agendaType;
       switch (type) {
         case 'gepland':
-          documentName = this.intl.t('meetings.publish.publication-actions.planned-agenda');
+          documentName = this.intl.t(
+            'meetings.publish.publication-actions.planned-agenda'
+          );
           break;
         case 'aanvullend':
-          documentName = this.intl.t('meetings.publish.publication-actions.suplemental-agenda');
+          documentName = this.intl.t(
+            'meetings.publish.publication-actions.suplemental-agenda'
+          );
           break;
         case 'spoedeisend':
-          documentName = this.intl.t('meetings.publish.publication-actions.urgent-agenda');
+          documentName = this.intl.t(
+            'meetings.publish.publication-actions.urgent-agenda'
+          );
           break;
       }
       route = 'meetings.publish.agenda';
     } else {
       const versionedNotulen = await logResource.versionedNotulen;
       if (versionedNotulen) {
-        documentName = this.intl.t('meetings.publish.publication-actions.notulen');
+        documentName = this.intl.t(
+          'meetings.publish.publication-actions.notulen'
+        );
         versionedResource = versionedNotulen;
         route = 'meetings.publish.notulen';
       } else {
         const versionedBesluitenLijst =
           await logResource.versionedBesluitenLijst;
         if (versionedBesluitenLijst) {
-          documentName = this.intl.t('meetings.publish.publication-actions.decision-list');
+          documentName = this.intl.t(
+            'meetings.publish.publication-actions.decision-list'
+          );
           versionedResource = versionedBesluitenLijst;
           route = 'meetings.publish.besluitenlijst';
         } else {
           const versionedBehandeling = logResource.versionedBehandeling;
           if (versionedBehandeling) {
-            documentName = this.intl.t('meetings.publish.publication-actions.treatment');
+            documentName = this.intl.t(
+              'meetings.publish.publication-actions.treatment'
+            );
             versionedResource = await logResource.versionedBehandeling;
             const behandeling = await versionedResource.behandeling;
             if (behandeling) {
