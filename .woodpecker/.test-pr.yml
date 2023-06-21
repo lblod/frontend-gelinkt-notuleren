@@ -1,4 +1,4 @@
-pipeline:
+steps:
   install:
     image: danlynn/ember-cli:3.28.5-node_16.13
     commands:
