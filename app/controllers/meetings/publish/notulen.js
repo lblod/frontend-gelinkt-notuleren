@@ -103,13 +103,16 @@ export default class MeetingsPublishNotulenController extends Controller {
             this.notulen = notulen;
             notulenSet = true;
           }
-          this.signedResources = signedResources.toArray();
-          if (!notulenSet) {
-            this.notulen = notulen;
+          if (signedResources.length) {
+            this.signedResources = signedResources.slice();
+            if (!notulenSet) {
+              this.notulen = notulen;
+            }
           }
         })
       );
     } else {
+      console.log("creating new versioned notulen");
       try {
         const { content, errors } =
           await this.createPrePublishedResource.perform();
