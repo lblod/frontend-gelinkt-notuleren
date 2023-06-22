@@ -168,7 +168,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signature,
-      zitting: this.meeting,
+      zitting: await this.notulen.zitting,
     });
     await log.save();
 
