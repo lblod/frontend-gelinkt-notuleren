@@ -112,7 +112,6 @@ export default class MeetingsPublishNotulenController extends Controller {
         })
       );
     } else {
-      console.log("creating new versioned notulen");
       try {
         const { content, errors } =
           await this.createPrePublishedResource.perform();
