@@ -33,6 +33,29 @@
 
 
 
+
+## 5.2.0 (2023-06-22)
+
+#### :rocket: Enhancement
+* [#493](https://github.com/lblod/frontend-gelinkt-notuleren/pull/493) Hide hash on signed resource ([@lagartoverde](https://github.com/lagartoverde))
+* [#494](https://github.com/lblod/frontend-gelinkt-notuleren/pull/494) Place the date on the right of the signer ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :bug: Bug Fix
+* [#498](https://github.com/lblod/frontend-gelinkt-notuleren/pull/498) Fix - Add publication action when deleting signature of document ([@x-m-el](https://github.com/x-m-el))
+
+#### :house: Internal
+* [#501](https://github.com/lblod/frontend-gelinkt-notuleren/pull/501) Update `@lblod/ember-rdfa-editor` to 3.10.0 and `@lblod/ember-rdfa-editor-lblod-plugins` to 8.1.0 ([@elpoelma](https://github.com/elpoelma))
+* [#491](https://github.com/lblod/frontend-gelinkt-notuleren/pull/491) build(deps-dev): bump ember-resolver from 10.1.0 to 10.1.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#490](https://github.com/lblod/frontend-gelinkt-notuleren/pull/490) build(deps-dev): bump @ember/render-modifiers from 2.0.5 to 2.1.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#488](https://github.com/lblod/frontend-gelinkt-notuleren/pull/488) build(deps-dev): bump release-it from 15.10.3 to 15.11.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#492](https://github.com/lblod/frontend-gelinkt-notuleren/pull/492) build(deps-dev): bump webpack from 5.85.0 to 5.87.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 4
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Jan-Pieter Baert ([@Jan-PieterBaert](https://github.com/Jan-PieterBaert))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+- [@x-m-el](https://github.com/x-m-el)
+
 ## 5.1.0 (2023-06-18)
 
 #### :bug: Bug Fix
