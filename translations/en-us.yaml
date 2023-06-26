@@ -375,11 +375,39 @@ meeting-form:
 
 meetings:
   publish:
-    agenda: Agenda
-    decision-list: Decision list
-    extracts: Extracts
-    document: Document
-    publication-actions: Publication actions
+    agenda: 
+      title: Agenda
+      planned-agenda: Planned Agenda
+      supplemental-agenda: Supplemental Agenda
+      urgent-agenda: Urgent Agenda
+    decision-list: 
+      title: Decision list
+    extracts: 
+      title: Extracts
+    document: 
+      title: Document
+      preview: Document preview
+      make-agendapoint-content-public: Publish content of agendapoint
+    publication-actions: 
+      title: Publication actions
+      document: Document
+      action: Action
+      actions:
+        publish: Publication
+        sign: Signature
+        delete-signature: Signature removal
+      date: Date
+      user: User
+      hash: Hash
+      planned-agenda: Planned Agenda
+      suplemental-agenda: Supplemental Agenda
+      urgent-agenda: Urgent Agenda
+      notulen: Document
+      decision-list: Decision list
+      treatment: Treatment
+      deleted: Deleted
+      return: Back to all publication actions
+      details: Details
   delete:
     delete: Delete
     confirm-message: Are you sure you want to delete this meeting
@@ -467,22 +495,6 @@ print-view:
   error-heading: Something went wrong while generating the print preview.
   error-body: Please contact the support team.
 
-publication-actions:
-  document: Document
-  action: Action
-  date: Date
-  user: User
-  hash: Hash
-  planned-agenda: Planned Agenda
-  suplemental-agenda: Supplemental Agenda
-  urgent-agenda: Urgent Agenda
-  notulen: Document
-  decision-list: Decision list
-  treatment: Treatment
-  deleted: Deleted
-  return: Back to all publication actions
-  details: Details
-
 publication-confirmation:
   modal-title: "Confirm publication of "
   alert-first-part: Publication and reporting is binding and irreversible.
@@ -508,10 +520,10 @@ publish:
   loading-message: Loading...
   updating-message: Updating...
   decision-list-error-message: Something went wrong while fetching the decision list.
-  no-excerpts-message: There are no excerpts available.
+  no-extracts-message: There are no extracts available.
   retry: "retry"
-  excerpts: Excerpts
-  excerpts-overview: All excerpts
+  extracts: Extracts
+  extracts-overview: All extracts
   position: Position
   status-label: Status
   agendapoint: Agendapoint

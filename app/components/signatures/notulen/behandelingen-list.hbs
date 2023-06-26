@@ -14,7 +14,7 @@
             <p class="au-c-help-text au-c-help-text--normal">{{t "behandeling-list.not-public-past-description"}}</p>
           {{/if}}
         {{else}}
-          <AuToggleSwitch @label="Maak inhoud agendapunt publiek" @checked={{isPublicBehandeling}} @onChange={{fn @toggle preview}} />
+          <AuToggleSwitch @label={{t "meetings.publish.document.make-agendapoint-content-public"}} @checked={{isPublicBehandeling}} @onChange={{fn @toggle preview}} />
           <AuHr />
           {{#if isPublicBehandeling}}
             <p><strong>{{t "behandeling-list.public-now"}}</strong></p>
