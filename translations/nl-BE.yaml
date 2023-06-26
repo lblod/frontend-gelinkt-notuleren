@@ -588,7 +588,7 @@ regulatory-statement:
 signature-confirmation:
   modal-title: "Bevestig ondertekenen van "
   sign-label: Ondertekenen
-  sign-warning-title: Ondertekenen is bindend en onomkeerbaar
+  sign-warning-title: Ondertekenen is bindend.
   sign-warning-text: Kijk de inhoud van het document goed na. Enkel bevoegde personen mogen het document ondertekenen.
   metadata-label: Metagegevens bij ondertekenen
   signer-label: Ondertekenaar

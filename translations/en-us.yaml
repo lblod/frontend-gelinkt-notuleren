@@ -590,7 +590,7 @@ regulatory-statement:
 signature-confirmation:
   modal-title: "Confirm signing of "
   sign-label: Sign
-  sign-warning-title: Signing is binding and irreversible
+  sign-warning-title: Signing is binding.
   sign-warning-text: Check the contents of the document carefully. Only authorized persons may sign the document.
   metadata-label: Signing Metadata
   signer-label: Signer
