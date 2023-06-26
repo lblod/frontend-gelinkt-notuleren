@@ -1,49 +1,65 @@
-<div class="au-o-box">
-  <AuDataTable 
-    @content={{this.model}}
-    @noDataMessage={{t "publish.no-publication-actions-message"}}
-    @sort={{this.sort}}
-    @page={{this.page}}
-    @size={{this.pageSize}}
-    as |table|
-  >
-    <table.content as |c|>
-      <c.header>
-        <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'meetings.publish.publication-actions.document'}}</span></th>
-        <AuDataTableThSortable 
-          @field="action" 
-          @currentSorting={{this.sort}}
-          @label={{t 'meetings.publish.publication-actions.action' }} 
-        />
-        <AuDataTableThSortable 
-          @field="date" 
-          @currentSorting={{this.sort}}
-          @label={{t 'meetings.publish.publication-actions.date' }} 
-        />
-        <AuDataTableThSortable 
-          @field="user" 
-          @currentSorting={{this.sort}}
-          @label={{t 'meetings.publish.publication-actions.user' }} 
-        />
-        <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'meetings.publish.publication-actions.hash'}}</span></th>
-      </c.header>
-      <c.body as |publishingLog|>
-        <td>
-          <PublishingLogDocumentName @log={{publishingLog}} />
-        </td>
-        <td>
-          {{this.actionLabel publishingLog}}
-        </td>
-        <td>
-          {{human-friendly-date publishingLog.date locale=this.intl.primaryLocale}}
-        </td>
-        <td>
-          {{publishingLog.user.fullName}}
-        </td>
-        <td>
-          <PublishingLogHash @log={{publishingLog}} />
-        </td>
-      </c.body>
-    </table.content>
-  </AuDataTable>
-</div>
+<AuDataTable
+  @content={{this.model}}
+  @noDataMessage={{t 'publish.no-publication-actions-message'}}
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.pageSize}}
+  as |table|
+>
+  <table.menu as |menu|>
+    <menu.general>
+      <AuToolbar @size='large' as |Group|>
+        <Group>
+          <AuHeading @skin='2'>
+            {{t 'meetings.publish.publication-actions.title'}}
+          </AuHeading>
+        </Group>
+      </AuToolbar>
+    </menu.general>
+  </table.menu>
+  <table.content as |c|>
+    <c.header>
+      <th><span
+          class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+        >{{t 'meetings.publish.publication-actions.document'}}</span></th>
+      <AuDataTableThSortable
+        @field='action'
+        @currentSorting={{this.sort}}
+        @label={{t 'meetings.publish.publication-actions.action'}}
+      />
+      <AuDataTableThSortable
+        @field='date'
+        @currentSorting={{this.sort}}
+        @label={{t 'meetings.publish.publication-actions.date'}}
+      />
+      <AuDataTableThSortable
+        @field='user'
+        @currentSorting={{this.sort}}
+        @label={{t 'meetings.publish.publication-actions.user'}}
+      />
+      <th><span
+          class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+        >{{t 'meetings.publish.publication-actions.hash'}}</span></th>
+    </c.header>
+    <c.body as |publishingLog|>
+      <td>
+        <PublishingLogDocumentName @log={{publishingLog}} />
+      </td>
+      <td>
+        {{this.actionLabel publishingLog}}
+      </td>
+      <td>
+        {{human-friendly-date
+          publishingLog.date
+          locale=this.intl.primaryLocale
+        }}
+      </td>
+      <td>
+        {{publishingLog.user.fullName}}
+      </td>
+      <td>
+        <PublishingLogHash @log={{publishingLog}} />
+      </td>
+    </c.body>
+  </table.content>
+</AuDataTable>
