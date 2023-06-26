@@ -60,7 +60,7 @@ export default class PublishingLogDocumentNameComponent extends Component {
           const versionedBehandeling = logResource.versionedBehandeling;
           if (versionedBehandeling) {
             documentName = this.intl.t(
-              'meetings.publish.publication-actions.treatment'
+              'meetings.publish.publication-actions.extract'
             );
             versionedResource = await logResource.versionedBehandeling;
             const behandeling = await versionedResource.behandeling;
