@@ -2,20 +2,20 @@
   {{#if this.initializeAgendas.isIdle}}
     <ul>
       <Signatures::Agenda::TimelineStep
-        @name="ontwerpagenda"
+        @name={{t "meetings.publish.agenda.planned-agenda"}}
         @agenda={{this.ontwerpAgenda}}
         @signing={{perform this.createSignedResource this.kindGepland 'ontwerp'}}
         @publish={{perform this.createPublishedResource this.kindGepland 'ontwerp'}}
       />
       <Signatures::Agenda::TimelineStep
-        @name="aanvullende agenda"
+        @name={{t "meetings.publish.agenda.supplemental-agenda"}}
         @agenda={{this.aanvullendeAgenda}}
         @signing={{perform this.createSignedResource this.kindAanvullend 'aanvullende'}}
         @publish={{perform this.createPublishedResource this.kindAanvullend 'aanvullende'}}
       />
 
       <Signatures::Agenda::TimelineStep
-        @name="spoedeisende agenda"
+        @name={{t "meetings.publish.agenda.urgent-agenda"}}
         @agenda={{this.spoedeisendeAgenda}}
         @signing={{perform this.createSignedResource this.kindSpoedeisend 'spoedeisende'}}
         @publish={{perform this.createPublishedResource this.kindSpoedeisend 'spoedeisende'}}

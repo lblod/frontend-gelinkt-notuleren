@@ -191,7 +191,7 @@
         </div>
         {{else}}
         <div class="au-o-grid__item au-u-padding-top-none">
-          {{#if this.isAgenda}}
+          {{#if @isAgenda}}
             <AuButton
               {{on "click" this.publish}}
               @icon="upload"
@@ -229,7 +229,7 @@
             <p>{{t "timeline-step.preview-info"}}<a href="{{this.publicationBaseUrl}}" target="_blank" rel="noopener noreferrer" class="au-c-link">{{this.publicationBaseUrl}}</a>{{t "timeline-step.preview-info-end"}}</p>
           </AuAlert>
 
-          {{#unless this.isAgenda}}
+          {{#unless @isAgenda}}
             <AuAlert @icon="info-circle" @title={{t "timeline-step.notify-consequences"}} @skin="info" @alertsize="small" class="au-u-margin-top-tiny au-u-margin-bottom-none">
               <p>{{t "timeline-step.notify-info"}}<a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "timeline-step.local-loket"}}</a>.</p>
             </AuAlert>
