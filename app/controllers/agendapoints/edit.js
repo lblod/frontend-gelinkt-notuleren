@@ -200,7 +200,7 @@ export default class AgendapointsEditController extends Controller {
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
-        number: numberView(controller)
+        number: numberView(controller),
       };
     };
   }
