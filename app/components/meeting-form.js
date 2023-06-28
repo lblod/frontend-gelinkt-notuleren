@@ -41,6 +41,7 @@ export default class MeetingForm extends Component {
     const publishedNotulen = await this.store.query('versioned-notulen', {
       'filter[zitting][id]': this.zitting.get('id'),
       'filter[:has:signed-resources]': 'yes',
+      'filter[signed-resources][deleted]': false,
       'fields[versioned-notulen]': 'id',
     });
     return !!publishedNotulen.firstObject;
