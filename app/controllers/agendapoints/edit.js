@@ -35,6 +35,10 @@ import {
   variableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
 import {
+  number,
+  numberView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/number';
+import {
   bullet_list,
   list_item,
   ordered_list,
@@ -109,6 +113,7 @@ export default class AgendapointsEditController extends Controller {
       date: date(this.config.date),
       STRUCTURE_NODES,
       regulatoryStatementNode,
+      number,
       variable,
       ...besluitNodes,
       roadsign_regulation,
@@ -195,6 +200,7 @@ export default class AgendapointsEditController extends Controller {
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
+        number: numberView(controller)
       };
     };
   }
