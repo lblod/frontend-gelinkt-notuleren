@@ -58,6 +58,16 @@
         {{t "timeline-step.sign-button-label" name=(limit-content this.title 30)}}
       </AuButton>
     {{/if}}
+    {{#if this.showDeleteBothSignaturesNotification}}
+      <AuAlert
+        @skin="warning"
+        @icon="alert-triangle"
+        @size="small"
+        class="au-u-margin-top"
+      >
+        {{t "timeline-step.delete-both-signatures-warning"}}
+      </AuAlert>
+    {{/if}}
   </div>
   <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">
     <AuHelpText @skin="secondary" class="au-u-margin-top-none">

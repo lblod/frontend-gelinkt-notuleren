@@ -16,6 +16,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @tracked errors;
   @tracked validationErrors;
   @tracked signedResources = [];
+  @tracked hasDeletedSignedResources = false;
   @tracked publishedResource;
   @tracked publicBehandelingUris = [];
   @tracked treatments;
@@ -99,22 +100,28 @@ export default class MeetingsPublishNotulenController extends Controller {
     return !!this.publishedResource;
   }
 
-  async setSignedResources(versionedNotulenId) {
+  async loadSignedResources(versionedNotulenId) {
     const signedResources = await this.store.query('signed-resource', {
       'filter[versioned-notulen][:id:]': versionedNotulenId,
-      'filter[:or:][deleted]': false,
-      'filter[:or:][:has-no:deleted]': 'yes',
       sort: 'created-on',
     });
 
-    this.signedResources = signedResources.toArray();
+    const arraySignedResources = signedResources.toArray();
+
+    this.signedResources = arraySignedResources.filter(
+      (resource) => resource.deleted === false
+    );
+
+    this.hasDeletedSignedResources = arraySignedResources.some(
+      (resource) => resource.deleted === true
+    );
   }
 
   loadNotulen = task(async () => {
     const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
       'filter[deleted]': false,
-      include: 'signed-resources.gebruiker,published-resource.gebruiker',
+      include: 'published-resource.gebruiker',
     });
 
     if (versionedNotulens.length) {
@@ -130,7 +137,7 @@ export default class MeetingsPublishNotulenController extends Controller {
           }
 
           if (!notulenSet) {
-            await this.setSignedResources(notulen.id);
+            await this.loadSignedResources(notulen.id);
             this.notulen = notulen;
           }
         })
