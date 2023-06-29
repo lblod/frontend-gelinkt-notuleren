@@ -99,26 +99,38 @@ export default class MeetingsPublishNotulenController extends Controller {
     return !!this.publishedResource;
   }
 
+  async setSignedResources(versionedNotulenId) {
+    const signedResources = await this.store.query('signed-resource', {
+      'filter[versioned-notulen][:id:]': versionedNotulenId,
+      'filter[:or:][deleted]': false,
+      'filter[:or:][:has-no:deleted]': 'yes',
+      sort: 'created-on',
+    });
+
+    this.signedResources = signedResources.toArray();
+  }
+
   loadNotulen = task(async () => {
     const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
       'filter[deleted]': false,
       include: 'signed-resources.gebruiker,published-resource.gebruiker',
     });
+
     if (versionedNotulens.length) {
       let notulenSet = false;
       await Promise.all(
         versionedNotulens.map(async (notulen) => {
           const publishedResource = await notulen.publishedResource;
-          const signedResources = await notulen.signedResources;
           if (publishedResource) {
             this.publishedResource = publishedResource;
             this.publicBehandelingUris = notulen.publicBehandelingen || [];
             this.notulen = notulen;
             notulenSet = true;
           }
-          this.signedResources = signedResources.toArray();
+
           if (!notulenSet) {
+            await this.setSignedResources(notulen.id);
             this.notulen = notulen;
           }
         })
