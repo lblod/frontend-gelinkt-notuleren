@@ -1,24 +1,32 @@
-<p class="au-u-flex">
-{{@signature.gebruiker.voornaam}} {{@signature.gebruiker.achternaam}} <br>
-{{#if @signature.deleted}}
-    <AuPill
-      @skin="error"
+<div class='au-u-flex au-u-flex--vertical-center au-u-flex--spaced-tiny'>
+  <span>{{@signature.gebruiker.voornaam}}
+    {{@signature.gebruiker.achternaam}}</span>
+  {{#if @signature.deleted}}
+    <div>
+      <AuPill @skin='error'>
+        {{t 'publish.deleted'}}
+      </AuPill>
+    </div>
+  {{else}}
+    <AuHelpText
+      @size='large'
+      @skin='secondary'
+      class='au-u-margin-top-none au-u-margin-left-small signature-timestamp'
     >
-      {{t "publish.deleted"}}
-    </AuPill>
-{{else}}
-  <AuHelpText @size="large" @skin="secondary" class="au-u-margin-top-none au-u-margin-left-small">
-    <AuIcon @icon="calendar"/>
-    {{detailed-date @signature.createdOn}}
-  </AuHelpText>
-{{/if}}
-</p>
+      <div class='au-u-flex au-u-flex--vertical-center au-u-flex--spaced-tiny'>
+        <AuIcon @icon='calendar' />
+        <span>{{detailed-date @signature.createdOn}}</span>
+      </div>
+    </AuHelpText>
+  {{/if}}
+</div>
 {{#if (and this.signedByCurrentUser.value (and (not @signature.deleted) @canDelete))}}
   <AuButton
     {{on "click" this.toggleDeleteSignatureCard}}
     @skin="link-secondary"
     @alert="true"
     @disabled={{this.deleteSignature.isRunning}}
+    class="au-u-padding-none signature-delete-button"
   >
     {{t "publish.delete-signature"}}
   </AuButton>
