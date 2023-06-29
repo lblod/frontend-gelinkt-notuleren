@@ -402,8 +402,8 @@ meetings:
       suplemental-agenda: Aanvullende Agenda
       urgent-agenda: Spoedeisende Agenda
       notulen: Notulen
-      decision-list: BesluitenLijst
-      extract: Uitreksel
+      decision-list: Besluitenlijst
+      extract: Uittreksel
       deleted: verwijderd
       document-type-filter:
         label: Type document

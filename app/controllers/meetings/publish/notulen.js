@@ -117,9 +117,11 @@ export default class MeetingsPublishNotulenController extends Controller {
             this.notulen = notulen;
             notulenSet = true;
           }
-          this.signedResources = signedResources.toArray();
-          if (!notulenSet) {
-            this.notulen = notulen;
+          if (signedResources.length) {
+            this.signedResources = signedResources.slice();
+            if (!notulenSet) {
+              this.notulen = notulen;
+            }
           }
         })
       );
