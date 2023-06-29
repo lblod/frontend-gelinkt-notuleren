@@ -41,4 +41,12 @@ export default class MeetingsPublishPublicationActionsIndexRoute extends Route {
 
     return this.store.query('publishing-log', query);
   }
+
+  resetController(controller, isExiting) {
+    if (isExiting) {
+      controller.set('type', null);
+      controller.set('sort', '-date');
+      controller.set('page', 0);
+    }
+  }
 }
