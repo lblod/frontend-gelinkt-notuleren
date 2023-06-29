@@ -1,4 +1,4 @@
-<div class='au-u-flex au-u-flex--vertical-center au-u-flex--spaced-tiny'>
+<div class='au-u-flex au-u-flex--vertical-start au-u-flex--spaced-tiny'>
   <span>{{@signature.gebruiker.voornaam}}
     {{@signature.gebruiker.achternaam}}</span>
   {{#if @signature.deleted}}
@@ -31,22 +31,14 @@
     {{t "publish.delete-signature"}}
   </AuButton>
   {{#if this.showDeleteSignatureCard}}
-    <div class="signature-warning">
-      <div class="signature-warning-icon">
-        <AuIcon
-          @icon="info-circle"
-          @size="large"
-        />
-      </div>
-      <div class="signature-warning-close-button">
-        <AuButton
-          {{on "click" this.toggleDeleteSignatureCard}}
-          @skin="link"
-          @icon="cross"
-        />
-      </div>
-      {{t "publish.delete-signature-warning"}}
-      {{! template-lint-disable }}
+    <AuAlert
+      @skin="error"
+      @icon="alert-triangle"
+      @size="small"
+      @closable={{true}}
+      @onClose={{this.toggleDeleteSignatureCard}}
+    >
+      <div>{{t "publish.delete-signature-warning"}}</div>
       <AuButton
         {{on "click" this.deleteSignature}}
         @skin="secondary"
@@ -56,6 +48,6 @@
       >
         {{t "publish.delete-signature"}}
       </AuButton>
-    </div>
+    </AuAlert>
   {{/if}}
 {{/if}}
