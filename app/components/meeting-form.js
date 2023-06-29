@@ -38,13 +38,19 @@ export default class MeetingForm extends Component {
   isSigned = trackedFunction(this, async () => {
     // This is needed here, see https://github.com/NullVoxPopuli/ember-resources/issues/340
     await Promise.resolve();
-    const publishedNotulen = await this.store.query('versioned-notulen', {
-      'filter[zitting][id]': this.zitting.get('id'),
-      'filter[:has:signed-resources]': 'yes',
-      'filter[signed-resources][deleted]': false,
-      'fields[versioned-notulen]': 'id',
+
+    const signedResources = await this.store.query('signed-resource', {
+      'filter[versioned-notulen][zitting][:id:]': this.zitting.get('id'),
+      'filter[:has-no:deleted]': 'yes',
     });
-    return !!publishedNotulen.firstObject;
+
+    const arraySignedResources = signedResources.toArray();
+
+    if (!arraySignedResources.length) {
+      return false;
+    }
+
+    return arraySignedResources.toArray().some((resource) => !resource.deleted);
   });
 
   get status() {
