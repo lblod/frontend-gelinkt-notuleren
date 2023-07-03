@@ -101,20 +101,25 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   async loadSignedResources(versionedNotulenId) {
-    const signedResources = await this.store.query('signed-resource', {
+    const signedNonDeletedResources = await this.store.query(
+      'signed-resource',
+      {
+        'filter[versioned-notulen][:id:]': versionedNotulenId,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+        sort: 'created-on',
+      }
+    );
+
+    const signedDeletedResources = await this.store.query('signed-resource', {
       'filter[versioned-notulen][:id:]': versionedNotulenId,
+      'filter[deleted]': true,
       sort: 'created-on',
     });
 
-    const arraySignedResources = signedResources.toArray();
+    this.signedResources = signedNonDeletedResources.toArray();
 
-    this.signedResources = arraySignedResources.filter(
-      (resource) => resource.deleted === false
-    );
-
-    this.hasDeletedSignedResources = arraySignedResources.some(
-      (resource) => resource.deleted === true
-    );
+    this.hasDeletedSignedResources = !!signedDeletedResources.toArray().length;
   }
 
   loadNotulen = task(async () => {

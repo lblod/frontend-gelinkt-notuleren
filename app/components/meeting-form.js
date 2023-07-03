@@ -41,16 +41,13 @@ export default class MeetingForm extends Component {
 
     const signedResources = await this.store.query('signed-resource', {
       'filter[versioned-notulen][zitting][:id:]': this.zitting.get('id'),
-      'filter[:has-no:deleted]': 'yes',
+      'filter[:or:][deleted]': false,
+      'filter[:or:][:has-no:deleted]': 'yes',
     });
 
     const arraySignedResources = signedResources.toArray();
 
-    if (!arraySignedResources.length) {
-      return false;
-    }
-
-    return arraySignedResources.toArray().some((resource) => !resource.deleted);
+    return !!arraySignedResources.length;
   });
 
   get status() {
