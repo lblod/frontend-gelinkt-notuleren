@@ -404,8 +404,11 @@ meetings:
       urgent-agenda: Urgent Agenda
       notulen: Document
       decision-list: Decision list
-      treatment: Treatment
+      extract: Extract
       deleted: Deleted
+      document-type-filter:
+        label: Document type
+        placeholder: Select an option
       return: Back to all publication actions
       details: Details
   delete:
