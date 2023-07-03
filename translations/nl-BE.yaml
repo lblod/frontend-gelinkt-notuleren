@@ -403,8 +403,11 @@ meetings:
       urgent-agenda: Spoedeisende Agenda
       notulen: Notulen
       decision-list: Besluitenlijst
-      treatment: Uittreksel
+      extract: Uittreksel
       deleted: verwijderd
+      document-type-filter:
+        label: Type document
+        placeholder: Selecteer een optie
       return: Terug naar alle publicatie acties
       details: Details
   delete:
