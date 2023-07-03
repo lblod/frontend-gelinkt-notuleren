@@ -56,6 +56,14 @@ export default class SignatureControlsComponent extends Component {
     return this.signatures.second;
   }
 
+  get showDeleteBothSignaturesNotification() {
+    if (!this.firstSignature) {
+      return false;
+    }
+
+    return !this.secondSignature && this.args.hasDeletedSignedResources;
+  }
+
   /**
    * @returns {boolean}
    */

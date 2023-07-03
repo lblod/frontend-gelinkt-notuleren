@@ -10,11 +10,11 @@
   </Group>
 </AuToolbar>
 <div class="au-o-grid au-u-margin-top-none au-u-margin-bottom-large">
-  <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+  <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small au-u-padding-right-none@medium">
     <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
       "timeline-step.first-signature"}}</AuHeading>
     {{#if this.firstSignature}}
-      <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+      <div class='au-u-padding-top-none au-u-padding-bottom-small'>
         <Signatures::SignedResource
           @signature={{this.firstSignature.model}}
           @canDelete={{and (not @isPublished) (not this.secondSignature)}}
@@ -38,11 +38,12 @@
     <AuHeading @level="3" @skin="6" class="au-u-margin-bottom-tiny">{{t
       "timeline-step.second-signature"}}</AuHeading>
     {{#if this.secondSignature}}
-      <div class="au-o-grid__item au-u-1-2@medium au-u-padding-top-none au-u-padding-bottom-small">
+      <div class='au-u-padding-top-none au-u-padding-bottom-small'>
         <Signatures::SignedResource
           @signature={{this.secondSignature.model}}
           @canDelete={{not @isPublished}}
-          @delete={{fn @deleteSignature this.secondSignature.model}}/>
+          @delete={{fn @deleteSignature this.secondSignature.model}}
+        />
       </div>
 
     {{else}}
@@ -56,6 +57,16 @@
       >
         {{t "timeline-step.sign-button-label" name=(limit-content this.title 30)}}
       </AuButton>
+    {{/if}}
+    {{#if this.showDeleteBothSignaturesNotification}}
+      <AuAlert
+        @skin="warning"
+        @icon="alert-triangle"
+        @size="small"
+        class="au-u-margin-top"
+      >
+        {{t "timeline-step.delete-both-signatures-warning"}}
+      </AuAlert>
     {{/if}}
   </div>
   <div class="au-o-grid__item au-u-padding-top-none au-u-padding-bottom-none">

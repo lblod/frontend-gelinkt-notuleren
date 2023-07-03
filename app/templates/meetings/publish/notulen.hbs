@@ -51,6 +51,7 @@
           <Signatures::SignatureControls
             @title="notulen"
             @signedResources={{this.signedResources}}
+            @hasDeletedSignedResources={{this.hasDeletedSignedResources}}
             @isPublished={{this.isPublished}}
             @deleteSignature={{perform this.deleteSignatureTask}}
             @sign={{this.createSignPreview}}

@@ -16,6 +16,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @tracked errors;
   @tracked validationErrors;
   @tracked signedResources = [];
+  @tracked hasDeletedSignedResources = false;
   @tracked publishedResource;
   @tracked publicBehandelingUris = [];
   @tracked treatments;
@@ -99,29 +100,50 @@ export default class MeetingsPublishNotulenController extends Controller {
     return !!this.publishedResource;
   }
 
+  async loadSignedResources(versionedNotulenId) {
+    const signedNonDeletedResources = await this.store.query(
+      'signed-resource',
+      {
+        'filter[versioned-notulen][:id:]': versionedNotulenId,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+        sort: 'created-on',
+      }
+    );
+
+    const signedDeletedResources = await this.store.query('signed-resource', {
+      'filter[versioned-notulen][:id:]': versionedNotulenId,
+      'filter[deleted]': true,
+      sort: 'created-on',
+    });
+
+    this.signedResources = signedNonDeletedResources.toArray();
+
+    this.hasDeletedSignedResources = !!signedDeletedResources.toArray().length;
+  }
+
   loadNotulen = task(async () => {
     const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
       'filter[deleted]': false,
-      include: 'signed-resources.gebruiker,published-resource.gebruiker',
+      include: 'published-resource.gebruiker',
     });
+
     if (versionedNotulens.length) {
       let notulenSet = false;
       await Promise.all(
         versionedNotulens.map(async (notulen) => {
           const publishedResource = await notulen.publishedResource;
-          const signedResources = await notulen.signedResources;
           if (publishedResource) {
             this.publishedResource = publishedResource;
             this.publicBehandelingUris = notulen.publicBehandelingen || [];
             this.notulen = notulen;
             notulenSet = true;
           }
-          if (signedResources.length) {
-            this.signedResources = signedResources.slice();
-            if (!notulenSet) {
-              this.notulen = notulen;
-            }
+
+          if (!notulenSet) {
+            await this.loadSignedResources(notulen.id);
+            this.notulen = notulen;
           }
         })
       );
