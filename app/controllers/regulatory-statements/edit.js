@@ -93,7 +93,8 @@ export default class RegulatoryStatementsRoute extends Controller {
   schema = new Schema({
     nodes: {
       doc: {
-        content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
+        content:
+          'table_of_contents? ((chapter|block)+|(title|block)+|(article|block)+)',
       },
       paragraph,
       table_of_contents: table_of_contents(this.config.tableOfContents),
