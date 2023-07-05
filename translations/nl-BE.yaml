@@ -374,20 +374,20 @@ meeting-form:
 
 meetings:
   publish:
-    agenda: 
+    agenda:
       title: Agenda
       planned-agenda: Ontwerpagenda
       supplemental-agenda: Aanvullende Agenda
       urgent-agenda: Spoedeisende Agenda
-    decision-list: 
+    decision-list:
       title: Besluitenlijst
-    extracts: 
+    extracts:
       title: Uittreksels
-    document: 
+    document:
       title: Notulen
       preview: Voorvertoning notulen
       make-agendapoint-content-public: Maak inhoud agendapunt publiek
-    publication-actions: 
+    publication-actions:
       title: Publicatie acties
       document: Document
       action: Actie
@@ -638,6 +638,7 @@ timeline-step:
   notify-info: "Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
   local-loket: "Loket voor Lokale Besturen"
   publish-warning: "Vul de ontbrekende informatie aan om te publiceren"
+  delete-both-signatures-warning: "Om het document te kunnen aanpassen moeten beide handtekeningen verwijderd zijn"
 
 uittreksel-error:
   header: We kunnen de pagina die u zoekt niet vinden

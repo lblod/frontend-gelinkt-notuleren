@@ -718,6 +718,14 @@ div[typeof="besluit:Zitting"] {
   right: 5px;
 }
 
+.signature-delete-button {
+  border: 0;
+}
+
+.signature-timestamp {
+  flex-shrink: 0;
+}
+
 .publication-actions-detail-container {
   border: 1px solid var(--au-gray-300);
   color: var(--au-gray-300);

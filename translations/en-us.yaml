@@ -375,20 +375,20 @@ meeting-form:
 
 meetings:
   publish:
-    agenda: 
+    agenda:
       title: Agenda
       planned-agenda: Planned Agenda
       supplemental-agenda: Supplemental Agenda
       urgent-agenda: Urgent Agenda
-    decision-list: 
+    decision-list:
       title: Decision list
-    extracts: 
+    extracts:
       title: Extracts
-    document: 
+    document:
       title: Document
       preview: Document preview
       make-agendapoint-content-public: Publish content of agendapoint
-    publication-actions: 
+    publication-actions:
       title: Publication actions
       document: Document
       action: Action
@@ -640,6 +640,7 @@ timeline-step:
   notify-info: "If applicable, a notification will be sent for this document to the authoritative government and will be visible in the "
   local-loket: "Loket voor Lokale Besturen"
   publish-warning: "Complete the missing information to publish"
+  delete-both-signatures-warning: "To be able to modify the document, both signatures must be removed"
 
 uittreksel-error:
   header: We cannot find the page you are looking for
