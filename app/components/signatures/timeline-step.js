@@ -68,16 +68,8 @@ export default class SignaturesTimelineStep extends Component {
     this.isSignedByCurrentUser = currentUser === firstSignatureUser;
   });
 
-  get isAgenda() {
-    return (
-      this.args.name === 'ontwerpagenda' ||
-      this.args.name === 'aanvullende agenda' ||
-      this.args.name === 'spoedeisende agenda'
-    );
-  }
-
   get title() {
-    return `Voorvertoning ${this.args.name}`;
+    return `${this.intl.t('publish.preview')} ${this.args.name}`;
   }
 
   get headerWithDefault() {

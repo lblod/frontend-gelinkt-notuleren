@@ -58,7 +58,10 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
-
+import {
+  number,
+  numberView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/number';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
   createInvisiblesPlugin,
@@ -90,7 +93,8 @@ export default class RegulatoryStatementsRoute extends Controller {
   schema = new Schema({
     nodes: {
       doc: {
-        content: 'table_of_contents? ((chapter|block)+|(title|block)+)',
+        content:
+          'table_of_contents? ((chapter|block)+|(title|block)+|(article|block)+)',
       },
       paragraph,
       table_of_contents: table_of_contents(this.config.tableOfContents),
@@ -101,6 +105,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
+      number,
       variable,
       ...STRUCTURE_NODES,
       heading,
@@ -137,6 +142,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
+        number: numberView(controller),
       };
     };
   }

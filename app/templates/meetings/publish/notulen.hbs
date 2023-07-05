@@ -3,15 +3,18 @@
     <c.header @badgeIcon={{status-icon-name this.status}} @badgeSkin="brand">
       <AuToolbar @nowrap={{true}}>
         <AuHeading @level="2" @skin="3" class="au-u-capitalize">
-          {{t "meetings.publish.document"}}
+          {{t "meetings.publish.document.title"}}
         </AuHeading>
-        <AuPill @skin={{publication-status-color this.status}} class="au-u-margin-left">{{human-publication-status this.status}}</AuPill>
+        <AuPill @skin={{publication-status-color this.status}} class="au-u-margin-left">{{this.statusLabel}}</AuPill>
       </AuToolbar>
     </c.header>
     <c.content>
       {{#if this.loadNotulen.isIdle}}
         {{!-- cheating with status here, because signing doesn't affect preview --}}
-        <PublicationPreview @title="Voorvertoning notulen" @status={{if (eq this.status "published") "published" "concept"}}>
+        <PublicationPreview
+          @title={{t "meetings.publish.document.preview"}}
+          @status={{if (eq this.status "published") "published" "concept"}}
+        >
           {{#if (eq this.status 'published')}}
             {{html-safe this.notulen.content}}
           {{else}}
@@ -48,6 +51,7 @@
           <Signatures::SignatureControls
             @title="notulen"
             @signedResources={{this.signedResources}}
+            @hasDeletedSignedResources={{this.hasDeletedSignedResources}}
             @isPublished={{this.isPublished}}
             @deleteSignature={{perform this.deleteSignatureTask}}
             @sign={{this.createSignPreview}}

@@ -88,7 +88,7 @@ module.exports = function (environment) {
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
     ENV.roadsignRegulationPlugin.endpoint =
-      'https://dev.roadsigns.lblod.info/sparql';
+      'https://dev.roadsigns.lblod.info/raw-sparql';
     ENV.roadsignRegulationPlugin.imageBaseUrl =
       'https://register.mobiliteit.vlaanderen.be/';
     ENV.templateVariablePlugin.endpoint =

@@ -34,6 +34,27 @@
 
 
 
+
+## 5.2.1 (2023-06-28)
+
+#### :rocket: Enhancement
+* [#503](https://github.com/lblod/frontend-gelinkt-notuleren/pull/503) Make design of publication-actions page consistent with designs of other publication pages ([@elpoelma](https://github.com/elpoelma))
+
+#### :bug: Bug Fix
+* [#511](https://github.com/lblod/frontend-gelinkt-notuleren/pull/511) GN-4403: use correct config for variables ([@abeforgit](https://github.com/abeforgit))
+* [#499](https://github.com/lblod/frontend-gelinkt-notuleren/pull/499) GN-4362 fix signatures disappearing after publishing ([@abeforgit](https://github.com/abeforgit))
+* [#510](https://github.com/lblod/frontend-gelinkt-notuleren/pull/510) fix translation issues on publication actions page ([@elpoelma](https://github.com/elpoelma))
+* [#496](https://github.com/lblod/frontend-gelinkt-notuleren/pull/496) GN-4359: improve publish page translations ([@elpoelma](https://github.com/elpoelma))
+
+#### :house: Internal
+* [#507](https://github.com/lblod/frontend-gelinkt-notuleren/pull/507) build(deps-dev): bump ember-plausible from 0.1.1 to 0.2.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#508](https://github.com/lblod/frontend-gelinkt-notuleren/pull/508) build(deps-dev): bump webpack from 5.87.0 to 5.88.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 2
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
+
 ## 5.2.0 (2023-06-22)
 
 #### :rocket: Enhancement

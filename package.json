@@ -1,6 +1,6 @@
 {
   "name": "frontend-gelinkt-notuleren",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "private": true,
   "description": "Ember frontend of the Gelinkt Notuleren application",
   "repository": {
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@appuniversum/ember-appuniversum": "^2.7.0",
     "@babel/eslint-parser": "^7.19.1",
-    "@babel/plugin-proposal-decorators": "^7.20.13",
+    "@babel/plugin-proposal-decorators": "^7.22.5",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^2.1.0",
     "@ember/test-helpers": "^2.8.1",
@@ -41,7 +41,7 @@
     "@lblod/ember-environment-banner": "^0.2.0",
     "@lblod/ember-mock-login": "0.7.0",
     "@lblod/ember-rdfa-editor": "^3.10.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "^8.1.0",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "^8.2.2",
     "@release-it-plugins/lerna-changelog": "^5.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
@@ -54,7 +54,7 @@
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-autoprefixer": "^2.0.0",
     "ember-cli-babel": "^7.26.11",
-    "ember-cli-dependency-checker": "^3.3.1",
+    "ember-cli-dependency-checker": "^3.3.2",
     "ember-cli-dependency-lint": "^2.0.0",
     "ember-cli-htmlbars": "^6.1.1",
     "ember-cli-inject-live-reload": "^2.1.0",
@@ -73,9 +73,9 @@
     "ember-fetch": "^8.1.2",
     "ember-intl": "^5.7.2",
     "ember-load-initializers": "^2.1.2",
-    "ember-modifier": "^3.2.0",
+    "ember-modifier": "^4.1.0",
     "ember-page-title": "^7.0.0",
-    "ember-plausible": "^0.1.0",
+    "ember-plausible": "^0.2.0",
     "ember-power-select": "^7.0.0",
     "ember-promise-helpers": "^2.0.0",
     "ember-qunit": "^6.0.0",
@@ -87,7 +87,7 @@
     "ember-truth-helpers": "^3.0.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-ember": "^11.1.0",
+    "eslint-plugin-ember": "^11.9.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.1",
@@ -103,7 +103,7 @@
     "sass": "^1.49.9",
     "tracked-built-ins": "^3.1.1",
     "uuid": "^9.0.0",
-    "webpack": "^5.87.0"
+    "webpack": "^5.88.0"
   },
   "engines": {
     "node": "16.* || >= 18"

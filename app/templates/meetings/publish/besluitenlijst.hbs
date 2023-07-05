@@ -9,7 +9,7 @@
   {{else}}
   <ul>
     <Signatures::Besluitenlijst::TimelineStep
-      @name="besluitenlijst"
+      @name={{t "meetings.publish.decision-list.title"}}
       @lijst={{this.besluitenlijst}}
       @errors={{this.validationErrors}}
       @signing={{perform this.createSignedResource}}

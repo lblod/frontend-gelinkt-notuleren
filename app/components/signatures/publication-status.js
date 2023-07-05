@@ -1,8 +1,10 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-
+import { service } from '@ember/service';
 export default class SignaturesPublicationStatus extends Component {
+  @service intl;
+
   @tracked signedResources = [];
   @tracked publishedResource;
   @tracked ready = false;
@@ -30,13 +32,16 @@ export default class SignaturesPublicationStatus extends Component {
   }
   get publicationStatus() {
     if (this.publishedResource) {
-      return { label: 'Gepubliceerd', color: 'action' };
+      return { label: this.intl.t('publish.published'), color: 'action' };
     } else if (this.signedResources.length === 1) {
-      return { label: 'Eerste ondertekening verkregen', color: 'warning' };
+      return {
+        label: this.intl.t('publish.first-signature-obtained'),
+        color: 'warning',
+      };
     } else if (this.signedResources.length === 2) {
-      return { label: 'Getekend', color: 'success' };
+      return { label: this.intl.t('publish.signed'), color: 'success' };
     } else {
-      return { label: 'In voorbereiding' };
+      return { label: this.intl.t('publish.in-preparation') };
     }
   }
 }

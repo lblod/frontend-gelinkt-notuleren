@@ -9,12 +9,14 @@ export default class MeetingsPublishNotulenController extends Controller {
   @service publish;
   @service muTask;
   @service currentSession;
+  @service intl;
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
   @tracked errors;
   @tracked validationErrors;
   @tracked signedResources = [];
+  @tracked hasDeletedSignedResources = false;
   @tracked publishedResource;
   @tracked publicBehandelingUris = [];
   @tracked treatments;
@@ -73,6 +75,19 @@ export default class MeetingsPublishNotulenController extends Controller {
     return 'concept';
   }
 
+  get statusLabel() {
+    switch (this.status) {
+      case 'published':
+        return this.intl.t('publish.published');
+      case 'firstSignature':
+        return this.intl.t('publish.first-signature-obtained');
+      case 'secondSignature':
+        return this.intl.t('publish.signed');
+      default:
+        return this.intl.t('publish.in-preparation');
+    }
+  }
+
   get loading() {
     return (
       this.createSignedResource.isRunning ||
@@ -85,26 +100,49 @@ export default class MeetingsPublishNotulenController extends Controller {
     return !!this.publishedResource;
   }
 
+  async loadSignedResources(versionedNotulenId) {
+    const signedNonDeletedResources = await this.store.query(
+      'signed-resource',
+      {
+        'filter[versioned-notulen][:id:]': versionedNotulenId,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+        sort: 'created-on',
+      }
+    );
+
+    const signedDeletedResources = await this.store.query('signed-resource', {
+      'filter[versioned-notulen][:id:]': versionedNotulenId,
+      'filter[deleted]': true,
+      sort: 'created-on',
+    });
+
+    this.signedResources = signedNonDeletedResources.toArray();
+
+    this.hasDeletedSignedResources = !!signedDeletedResources.toArray().length;
+  }
+
   loadNotulen = task(async () => {
     const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
       'filter[deleted]': false,
-      include: 'signed-resources.gebruiker,published-resource.gebruiker',
+      include: 'published-resource.gebruiker',
     });
+
     if (versionedNotulens.length) {
       let notulenSet = false;
       await Promise.all(
         versionedNotulens.map(async (notulen) => {
           const publishedResource = await notulen.publishedResource;
-          const signedResources = await notulen.signedResources;
           if (publishedResource) {
             this.publishedResource = publishedResource;
             this.publicBehandelingUris = notulen.publicBehandelingen || [];
             this.notulen = notulen;
             notulenSet = true;
           }
-          this.signedResources = signedResources.toArray();
+
           if (!notulenSet) {
+            await this.loadSignedResources(notulen.id);
             this.notulen = notulen;
           }
         })
