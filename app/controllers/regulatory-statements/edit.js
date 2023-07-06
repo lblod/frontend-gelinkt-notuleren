@@ -74,6 +74,7 @@ import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
+import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
@@ -94,9 +95,10 @@ export default class RegulatoryStatementsRoute extends Controller {
     nodes: {
       doc: {
         content:
-          'table_of_contents? ((chapter|block)+|(title|block)+|(article|block)+)',
+          'table_of_contents? document_title? ((chapter|block)+|(title|block)+|(article|block)+)',
       },
       paragraph,
+      document_title,
       table_of_contents: table_of_contents(this.config.tableOfContents),
       repaired_block,
       list_item,
