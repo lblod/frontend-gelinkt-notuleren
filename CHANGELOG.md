@@ -35,6 +35,26 @@
 
 
 
+
+## 5.3.0 (2023-07-06)
+
+#### :rocket: Enhancement
+* [#502](https://github.com/lblod/frontend-gelinkt-notuleren/pull/502) GN-4200: Implement new TOC scrolling functionality ([@lagartoverde](https://github.com/lagartoverde))
+* [#519](https://github.com/lblod/frontend-gelinkt-notuleren/pull/519) GN-4406: add support for root level articles to regulatory statement documents ([@elpoelma](https://github.com/elpoelma))
+* [#509](https://github.com/lblod/frontend-gelinkt-notuleren/pull/509) GN-4358: addition of a document-type filter to the publication actions page ([@elpoelma](https://github.com/elpoelma))
+* [#512](https://github.com/lblod/frontend-gelinkt-notuleren/pull/512) GN-4384: Convert deleted text in publication actions to a pill ([@lagartoverde](https://github.com/lagartoverde))
+
+#### :house: Internal
+* [#514](https://github.com/lblod/frontend-gelinkt-notuleren/pull/514) build(deps-dev): bump @babel/plugin-proposal-decorators from 7.22.3 to 7.22.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#516](https://github.com/lblod/frontend-gelinkt-notuleren/pull/516) build(deps-dev): bump ember-cli-dependency-checker from 3.3.1 to 3.3.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#518](https://github.com/lblod/frontend-gelinkt-notuleren/pull/518) build(deps-dev): bump eslint-plugin-ember from 11.8.0 to 11.9.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#506](https://github.com/lblod/frontend-gelinkt-notuleren/pull/506) build(deps-dev): bump ember-modifier from 3.2.7 to 4.1.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 3
+- Deniss Kozickis ([@dkozickis](https://github.com/dkozickis))
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 5.2.1 (2023-06-28)
 
 #### :rocket: Enhancement
