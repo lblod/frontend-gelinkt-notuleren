@@ -36,6 +36,16 @@
 
 
 
+
+## 5.4.0 (2023-07-06)
+
+#### :bug: Bug Fix
+* [#520](https://github.com/lblod/frontend-gelinkt-notuleren/pull/520) GN-4416: add document title config (and bump editor v3.10.0 and plugins v8.4.0) ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 5.3.0 (2023-07-06)
 
 #### :rocket: Enhancement
