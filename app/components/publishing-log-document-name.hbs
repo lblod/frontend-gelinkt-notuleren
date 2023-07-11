@@ -3,13 +3,11 @@
     <AuLink @route="meetings.publish.publication-actions.detail" @model={{@log.id}}>
       {{this.data.value.documentName}} 
     </AuLink>
-    {{#if this.data.value.deleted}}
-      <span class="au-u-margin-left-small">
-        <AuPill @skin="error" @icon="trash">
-          {{t "meetings.publish.publication-actions.deleted"}}
-        </AuPill>
-      </span>
-    {{/if}}
+    <span class="au-u-margin-left-small">
+      <AuPill @skin="error" @icon="trash">
+        {{t "meetings.publish.publication-actions.deleted"}}
+      </AuPill>
+    </span>
   {{else}}
     <AuLink @route={{this.data.value.route}}>
       {{this.data.value.documentName}}
