@@ -10,9 +10,8 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
 
   queryParams = {
     page: { refreshModel: true },
-    size: { refreshModel: true },
+    pageSize: { refreshModel: true },
     sort: { refreshModel: true },
-    filter: { refreshModel: true },
     // filter params
     title: { refreshModel: true },
   };
@@ -24,9 +23,11 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
     const query = {
       include: 'behandeling',
       filter: { zitting: { ':id:': this.meetingId } },
+      'fields[behandeling]': 'id',
+      'fields[document-container]': 'status',
       sort: params.sort,
       page: {
-        size: params.size,
+        size: params.pageSize,
         number: params.page,
       },
     };
@@ -34,10 +35,11 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
     if (params.title && params.title.length > 0) {
       query['filter[titel]'] = params.title;
     }
-    const agendapoints = (
-      await this.store.query('agendapunt', query)
-    ).toArray();
+    const result = await this.store.query('agendapunt', query);
+    const agendapoints = result.toArray();
     const agendapointsToDisplay = [];
+    agendapointsToDisplay.meta = result.meta;
+
     for (let agendapoint of agendapoints) {
       const behandeling = await agendapoint.behandeling;
       const versionedBehandeling = (
