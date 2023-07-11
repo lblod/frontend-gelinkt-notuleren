@@ -37,6 +37,17 @@
 
 
 
+
+## 5.4.1 (2023-07-11)
+
+#### :bug: Bug Fix
+* [#527](https://github.com/lblod/frontend-gelinkt-notuleren/pull/527) GN-4372: fix pagination of extracts publish view ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 2
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- [@x-m-el](https://github.com/x-m-el)
+
+
 ## 5.4.0 (2023-07-06)
 
 #### :bug: Bug Fix
