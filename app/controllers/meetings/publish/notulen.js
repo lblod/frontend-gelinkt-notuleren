@@ -113,7 +113,8 @@ export default class MeetingsPublishNotulenController extends Controller {
 
     const signedDeletedResources = await this.store.query('signed-resource', {
       'filter[versioned-notulen][:id:]': versionedNotulenId,
-      'filter[deleted]': true,
+      'filter[:or:][deleted]': false,
+      'filter[:or:][:has-no:deleted]': 'yes',
       sort: 'created-on',
     });
 
@@ -125,7 +126,8 @@ export default class MeetingsPublishNotulenController extends Controller {
   loadNotulen = task(async () => {
     const versionedNotulens = await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
-      'filter[deleted]': false,
+      'filter[:or:][deleted]': false,
+      'filter[:or:][:has-no:deleted]': 'yes',
       include: 'published-resource.gebruiker',
     });
 
