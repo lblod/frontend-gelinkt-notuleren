@@ -121,7 +121,7 @@
   },
   "dependencies": {
     "@curvenote/prosemirror-utils": "^1.0.5",
-    "ember-resources": "^6.1.1",
+    "ember-resources": "^6.2.1",
     "tracked-toolbox": "^2.0.0"
   }
 }
