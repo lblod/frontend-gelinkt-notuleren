@@ -38,6 +38,20 @@
 
 
 
+
+## 5.4.2 (2023-07-13)
+
+#### :bug: Bug Fix
+* [#530](https://github.com/lblod/frontend-gelinkt-notuleren/pull/530) GN-4427: fix old signatures and publications not being picked up ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#528](https://github.com/lblod/frontend-gelinkt-notuleren/pull/528) build(deps): bump ember-resources from 6.1.1 to 6.2.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#529](https://github.com/lblod/frontend-gelinkt-notuleren/pull/529) build(deps): bump semver from 5.7.1 to 5.7.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 5.4.1 (2023-07-11)
 
 #### :bug: Bug Fix
