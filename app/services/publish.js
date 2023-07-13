@@ -121,7 +121,8 @@ export default class PublishService extends Service {
       }),
       this.store.query('versioned-behandeling', {
         'filter[zitting][:id:]': meetingId,
-        'filter[deleted]': false,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': false,
         include: 'behandeling.onderwerp,signed-resources,published-resource',
         page: { size: 1000 },
       }),
@@ -183,7 +184,9 @@ export default class PublishService extends Service {
     const versionedTreatments = await this.store.query(
       'versioned-behandeling',
       {
-        filter: { behandeling: { ':id:': treatment.id }, deleted: false },
+        'filter[behandeling][:id:]': treatment.id,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
         include: 'behandeling.onderwerp,signed-resources,published-resource',
       }
     );

@@ -44,10 +44,9 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
       const behandeling = await agendapoint.behandeling;
       const versionedBehandeling = (
         await this.store.query('versioned-behandeling', {
-          filter: {
-            behandeling: { ':id:': behandeling.id },
-            deleted: false,
-          },
+          'filter[behandeling][:id:]': behandeling.id,
+          'filter[:or:][deleted]': false,
+          'filter[:or:][:has-no:deleted]': 'yes',
         })
       ).toArray()[0];
       agendapointsToDisplay.push({

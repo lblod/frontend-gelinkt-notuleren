@@ -27,7 +27,9 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
     try {
       const behandelings = await this.store.query('versioned-besluiten-lijst', {
         'filter[zitting][:id:]': this.model.id,
-        'filter[deleted]': false,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+
         include: 'signed-resources,published-resource',
       });
       if (behandelings.length) {
@@ -72,7 +74,8 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
   reloadBesluitenLijst = task(async () => {
     const behandelings = await this.store.query('versioned-besluiten-lijst', {
       'filter[zitting][:id:]': this.model.id,
-      'filter[deleted]': false,
+      'filter[:or:][deleted]': false,
+      'filter[:or:][:has-no:deleted]': 'yes',
       include: 'signed-resources,published-resource',
     });
     this.besluitenlijst = behandelings.firstObject;

@@ -85,7 +85,8 @@ export default class MeetingsPublishAgendaController extends Controller {
     const agendas = await this.store.query('agenda', {
       'filter[zitting][:id:]': this.meeting.id,
       'filter[agenda-type]': type,
-      'filter[deleted]': false,
+      'filter[:or:][deleted]': false,
+      'filter[:or:][:has-no:deleted]': "yes",
       include: 'signed-resources,published-resource',
     });
     if (agendas.length) {
