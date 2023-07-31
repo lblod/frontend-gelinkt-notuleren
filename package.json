@@ -29,7 +29,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^2.7.0",
+    "@appuniversum/ember-appuniversum": "^2.9.3",
     "@babel/eslint-parser": "^7.22.9",
     "@babel/plugin-proposal-decorators": "^7.22.5",
     "@ember/optional-features": "^2.0.0",
