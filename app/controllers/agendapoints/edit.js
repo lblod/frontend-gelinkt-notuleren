@@ -16,7 +16,7 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
   block_rdfa,
-  doc,
+  docWithConfig,
   hard_break,
   horizontal_rule,
   invisible_rdfa,
@@ -102,7 +102,7 @@ export default class AgendapointsEditController extends Controller {
 
   schema = new Schema({
     nodes: {
-      doc,
+      doc: docWithConfig(),
       paragraph,
       repaired_block,
       list_item,
@@ -236,7 +236,7 @@ export default class AgendapointsEditController extends Controller {
   @action
   handleRdfaEditorInit(editor) {
     this.controller = editor;
-    editor.setHtmlContent(this.editorDocument.content || '');
+    editor.initialize(this.editorDocument.content || '');
   }
 
   @action

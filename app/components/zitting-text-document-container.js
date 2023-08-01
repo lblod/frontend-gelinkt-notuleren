@@ -15,13 +15,13 @@ import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/high
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import {
   block_rdfa,
+  docWithConfig,
   hard_break,
   horizontal_rule,
   invisible_rdfa,
   paragraph,
   repaired_block,
   text,
-  doc,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
   tableNodes,
@@ -67,7 +67,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   schema = new Schema({
     nodes: {
-      doc,
+      doc: docWithConfig(),
       paragraph,
       repaired_block,
       list_item,
@@ -124,7 +124,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   @action
   rdfaEditorInit(editor) {
-    editor.setHtmlContent(this.text);
+    editor.initialize(this.text);
     this.editor = editor;
     this.args.onEditorInit(editor);
   }
