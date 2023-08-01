@@ -35,6 +35,10 @@ import {
   variableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
 import {
+  templateCommentNodes,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import {
   number,
   numberView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/number';
@@ -117,6 +121,7 @@ export default class AgendapointsEditController extends Controller {
       variable,
       ...besluitNodes,
       roadsign_regulation,
+      templateCommentNodes,
       heading,
       blockquote,
       horizontal_rule,
@@ -201,6 +206,7 @@ export default class AgendapointsEditController extends Controller {
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
+        templateComment: templateCommentView(controller),
       };
     };
   }

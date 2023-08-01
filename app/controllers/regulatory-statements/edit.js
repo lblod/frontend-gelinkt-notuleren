@@ -75,6 +75,10 @@ import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
+import {
+  templateCommentNodes,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
@@ -111,6 +115,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       number,
       variable,
       ...STRUCTURE_NODES,
+      ...templateCommentNodes,
       heading,
       blockquote,
       horizontal_rule,
@@ -146,6 +151,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
+        templateComment: templateCommentView(controller),
       };
     };
   }
