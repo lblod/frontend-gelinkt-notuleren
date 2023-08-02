@@ -39,6 +39,22 @@
 
 
 
+
+## 5.4.3 (2023-08-02)
+
+#### :house: Internal
+* [#542](https://github.com/lblod/frontend-gelinkt-notuleren/pull/542) Update editor plugins to 8.4.2 ([@elpoelma](https://github.com/elpoelma))
+* [#539](https://github.com/lblod/frontend-gelinkt-notuleren/pull/539) build(deps-dev): bump eslint from 8.42.0 to 8.46.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#536](https://github.com/lblod/frontend-gelinkt-notuleren/pull/536) build(deps-dev): bump sass from 1.62.1 to 1.64.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#537](https://github.com/lblod/frontend-gelinkt-notuleren/pull/537) build(deps-dev): bump release-it from 15.11.0 to 16.1.3 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#532](https://github.com/lblod/frontend-gelinkt-notuleren/pull/532) build(deps-dev): bump ember-cli-app-version from 5.0.0 to 6.0.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#535](https://github.com/lblod/frontend-gelinkt-notuleren/pull/535) build(deps-dev): bump word-wrap from 1.2.3 to 1.2.4 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#531](https://github.com/lblod/frontend-gelinkt-notuleren/pull/531) build(deps-dev): bump @babel/eslint-parser from 7.22.5 to 7.22.9 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#534](https://github.com/lblod/frontend-gelinkt-notuleren/pull/534) build(deps-dev): bump @release-it-plugins/lerna-changelog from 5.0.0 to 6.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Elena Poelman ([@elpoelma](https://github.com/elpoelma))
+
 ## 5.4.2 (2023-07-13)
 
 #### :bug: Bug Fix
