@@ -16,6 +16,7 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
   block_rdfa,
+  docWithConfig,
   hard_break,
   horizontal_rule,
   invisible_rdfa,
@@ -93,10 +94,10 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   schema = new Schema({
     nodes: {
-      doc: {
+      doc: docWithConfig({
         content:
           'table_of_contents? document_title? ((chapter|block)+|(title|block)+|(article|block)+)',
-      },
+      }),
       paragraph,
       document_title,
       table_of_contents: table_of_contents(this.config.tableOfContents),
@@ -318,7 +319,7 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   @action
   handleRdfaEditorInit(controller) {
-    controller.setHtmlContent(this.editorDocument.content);
+    controller.initialize(this.editorDocument.content);
     this.controller = controller;
     this.createTableOfContentHTML();
   }
