@@ -40,6 +40,16 @@
 
 
 
+
+## 5.4.4 (2023-08-07)
+
+#### :bug: Bug Fix
+* [#551](https://github.com/lblod/frontend-gelinkt-notuleren/pull/551) GN-4451: fix rendered templates not showing in roadsign modal ([@abeforgit](https://github.com/abeforgit))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 5.4.3 (2023-08-02)
 
 #### :house: Internal
