@@ -98,6 +98,7 @@
         {{#if (feature-flag 'regulatoryStatements')}}
           <EditorPlugins::RegulatoryStatements::SidebarInsert @controller={{this.controller}}/>
         {{/if}}
+        <TemplateCommentsPlugin::Insert @controller={{this.controller}}/>
     </:sidebarCollapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard
@@ -120,6 +121,7 @@
       <VariablePlugin::Location::Edit
         @controller={{this.controller}}
         @options={{this.locationEditOptions}}/>
+      <TemplateCommentsPlugin::EditCard @controller={{this.controller}}/>
     </:sidebar>
   </RdfaEditorContainer>
 </div>

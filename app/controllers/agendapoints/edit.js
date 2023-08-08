@@ -72,6 +72,11 @@ import {
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 
 import {
+  templateComment,
+  templateCommentView
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+
+import {
   regulatoryStatementNode,
   regulatoryStatementNodeView,
 } from '../../editor-plugins/regulatory-statements-plugin';
@@ -115,6 +120,7 @@ export default class AgendapointsEditController extends Controller {
       date: date(this.config.date),
       STRUCTURE_NODES,
       regulatoryStatementNode,
+      templateComment,
       text_variable,
       number,
       location,
@@ -214,6 +220,7 @@ export default class AgendapointsEditController extends Controller {
         text_variable: textVariableView(controller),
         location: locationView(controller),
         codelist: codelistView(controller),
+        templateComment: templateCommentView(controller),
       };
     };
   }

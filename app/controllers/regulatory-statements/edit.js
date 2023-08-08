@@ -35,6 +35,10 @@ import {
   linkPasteHandler,
 } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
+  templateComment,
+  templateCommentView
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
@@ -108,6 +112,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       ordered_list,
       bullet_list,
       placeholder,
+      templateComment,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
       codelist,
@@ -152,6 +157,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         location: locationView(controller),
         codelist: codelistView(controller),
         text_variable: textVariableView(controller),
+        templateComment: templateCommentView(controller),
       };
     };
   }
