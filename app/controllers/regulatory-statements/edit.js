@@ -36,7 +36,7 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
   templateComment,
-  templateCommentView
+  templateCommentView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import {
   STRUCTURE_NODES,

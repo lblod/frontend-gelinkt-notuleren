@@ -83,12 +83,9 @@ module.exports = function (environment) {
     ENV.manual.print = '';
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
-    ENV.mowRegistryEndpoint =
-      'https://dev.roadsigns.lblod.info/sparql';
-    ENV.roadsignImageBaseUrl =
-      'https://register.mobiliteit.vlaanderen.be/';
-    ENV.fallbackCodelistEndpoint =
-      'https://dev.roadsigns.lblod.info/sparql';
+    ENV.mowRegistryEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
+    ENV.roadsignImageBaseUrl = 'https://register.mobiliteit.vlaanderen.be/';
+    ENV.fallbackCodelistEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
     ENV.zonalLocationCodelistUri =
       'http://lblod.data.gift/concept-schemes/62331E6900730AE7B99DF7EF';
     ENV.nonZonalLocationCodelistUri =

@@ -73,7 +73,7 @@ import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/c
 
 import {
   templateComment,
-  templateCommentView
+  templateCommentView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 
 import {
