@@ -91,7 +91,9 @@
           @controller={{this.controller}}
           @options={{this.config.date}}
         />
-        <RoadsignRegulationPlugin::RoadsignRegulationCard @controller={{this.controller}} @options={{this.config.roadsignRegulation}}/>
+        <RoadsignRegulationPlugin::RoadsignRegulationCard
+          @controller={{this.controller}}
+          @options={{this.config.roadsignRegulation}}/>
         <StandardTemplatePlugin::Card @controller={{this.controller}}/>
         {{#if (feature-flag 'regulatoryStatements')}}
           <EditorPlugins::RegulatoryStatements::SidebarInsert @controller={{this.controller}}/>
@@ -112,7 +114,12 @@
       <RdfaDatePlugin::Card
         @controller={{this.controller}}
         @options={{this.config.date}}/>
-      <VariablePlugin::TemplateVariableCard @controller={{this.controller}} @options={{this.config.templateVariable}}/>
+      <VariablePlugin::Codelist::Edit
+        @controller={{this.controller}}
+        @options={{this.codelistEditOptions}}/>
+      <VariablePlugin::Location::Edit
+        @controller={{this.controller}}
+        @options={{this.locationEditOptions}}/>
     </:sidebar>
   </RdfaEditorContainer>
 </div>

@@ -8,6 +8,11 @@ module.exports = function (environment) {
     locationType: 'auto',
     regulatoryStatementEndpoint: '{{REGULATORY_STATEMENT_ENDPOINT}}',
     regulatoryStatementFileEndpoint: '{{REGULATORY_STATEMENT_FILE_ENDPOINT}}',
+    mowRegistryEndpoint: '{{MOW_REGISTRY_ENDPOINT}}',
+    roadsignImageBaseUrl: '{{ROADSIGN_IMAGE_BASE_URL}}',
+    fallbackCodelistEndpoint: '{{MOW_REGISTRY_ENDPOINT}}',
+    zonalLocationCodelistUri: '{{ZONAL_LOCATION_CODELIST_URI}}',
+    nonZonalLocationCodelistUri: '{{NON_ZONAL_LOCATION_CODELIST_URI}}',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -19,15 +24,6 @@ module.exports = function (environment) {
         allowedInputDateFormats: ['DD/MM/YYYY', 'DD-MM-YYYY', 'DD.MM.YYYY'],
         outputDateFormat: 'D MMMM YYYY',
       },
-    },
-    roadsignRegulationPlugin: {
-      endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
-      imageBaseUrl: '{{ROADSIGN_IMAGE_BASE_URL}}',
-    },
-    templateVariablePlugin: {
-      endpoint: '{{MOW_REGISTRY_ENDPOINT}}',
-      zonalLocationCodelistUri: '{{ZONAL_LOCATION_CODELIST_URI}}',
-      nonZonalLocationCodelistUri: '{{NON_ZONAL_LOCATION_CODELIST_URI}}',
     },
     'ember-plausible': {
       enabled: false,
@@ -87,15 +83,15 @@ module.exports = function (environment) {
     ENV.manual.print = '';
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
-    ENV.roadsignRegulationPlugin.endpoint =
-      'https://dev.roadsigns.lblod.info/raw-sparql';
-    ENV.roadsignRegulationPlugin.imageBaseUrl =
-      'https://register.mobiliteit.vlaanderen.be/';
-    ENV.templateVariablePlugin.endpoint =
+    ENV.mowRegistryEndpoint =
       'https://dev.roadsigns.lblod.info/sparql';
-    ENV.templateVariablePlugin.zonalLocationCodelistUri =
+    ENV.roadsignImageBaseUrl =
+      'https://register.mobiliteit.vlaanderen.be/';
+    ENV.fallbackCodelistEndpoint =
+      'https://dev.roadsigns.lblod.info/sparql';
+    ENV.zonalLocationCodelistUri =
       'http://lblod.data.gift/concept-schemes/62331E6900730AE7B99DF7EF';
-    ENV.templateVariablePlugin.nonZonalLocationCodelistUri =
+    ENV.nonZonalLocationCodelistUri =
       'http://lblod.data.gift/concept-schemes/62331FDD00730AE7B99DF7F2';
     ENV.regulatoryStatementEndpoint =
       'https://dev.reglementairebijlagen.lblod.info/raw-sparql';
