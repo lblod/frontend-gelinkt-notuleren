@@ -24,7 +24,7 @@
           />
           {{#each errors as |error|}}
             <AuHelpText @error={{true}}>
-              {{t error.message}}
+              {{error.message}}
             </AuHelpText>
           {{/each}}
         {{/let}}
