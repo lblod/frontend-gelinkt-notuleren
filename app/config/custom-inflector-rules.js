@@ -32,7 +32,7 @@ inflector.irregular('agenda', 'agendas');
 inflector.uncountable('versioned-notulen');
 inflector.irregular(
   'behandeling-van-agendapunt',
-  'behandelingen-van-agendapunten'
+  'behandelingen-van-agendapunten',
 );
 inflector.irregular('rechtsgrond-aanstelling', 'rechtsgronden-aanstelling');
 inflector.irregular('rechtsgrond-artikel', 'rechtsgronden-artikel');
@@ -52,7 +52,7 @@ inflector.irregular('validation-error', 'validation-errors');
 inflector.irregular('inzending-voor-toezicht', 'inzendingen-voor-toezicht');
 inflector.irregular(
   'toezicht-account-acceptance-status',
-  'toezicht-account-acceptance-statuses'
+  'toezicht-account-acceptance-statuses',
 );
 inflector.irregular('toezicht-fiscal-period', 'toezicht-fiscal-periods');
 inflector.irregular('form-solution', 'form-solutions');
@@ -74,7 +74,7 @@ inflector.irregular('attachment', 'attachments');
 inflector.irregular('extract-preview', 'extract-previews');
 inflector.irregular(
   'versioned-regulatory-statement',
-  'versioned-regulatory-statements'
+  'versioned-regulatory-statements',
 );
 inflector.irregular('publishing-log', 'publishing-logs');
 inflector.uncountable('sync');

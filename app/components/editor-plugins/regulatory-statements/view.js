@@ -57,10 +57,10 @@ export default class ReadOnlyContentSectionComponent extends Component {
       (tr) => {
         return tr.delete(
           this.args.getPos(),
-          this.args.getPos() + this.args.node.nodeSize
+          this.args.getPos() + this.args.node.nodeSize,
         );
       },
-      { view: this.controller.mainEditorView }
+      { view: this.controller.mainEditorView },
     );
   }
 }

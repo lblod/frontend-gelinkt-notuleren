@@ -58,9 +58,9 @@ export default class PublishService extends Service {
         jobUrl,
         {},
         pollingDelayMs,
-        maxIterations
+        maxIterations,
       );
-    }
+    },
   );
 
   /**
@@ -100,7 +100,7 @@ export default class PublishService extends Service {
       } else {
         return await resp.json();
       }
-    }
+    },
   );
 
   /**
@@ -131,7 +131,7 @@ export default class PublishService extends Service {
     // map all treatments to their ids for later retrieval
     const treatmentMap = new Map();
     treatments.forEach((treatment) =>
-      treatmentMap.set(treatment.id, treatment)
+      treatmentMap.set(treatment.id, treatment),
     );
 
     // map all existing extracts to their behandeling id
@@ -142,8 +142,8 @@ export default class PublishService extends Service {
         new Extract(
           versionedTreatment.behandeling.get('id'),
           versionedTreatment.get('behandeling.onderwerp.position'),
-          versionedTreatment
-        )
+          versionedTreatment,
+        ),
       );
     });
 
@@ -158,7 +158,7 @@ export default class PublishService extends Service {
             zitting: meeting,
             content: extract.data.attributes.content,
             behandeling: treatment,
-          }
+          },
         );
         extractMap.set(
           treatmentId,
@@ -166,8 +166,8 @@ export default class PublishService extends Service {
             treatmentId,
             treatment.get('onderwerp.position'),
             versionedTreatment,
-            extract.data.attributes.errors
-          )
+            extract.data.attributes.errors,
+          ),
         );
       }
     }
@@ -188,14 +188,14 @@ export default class PublishService extends Service {
         'filter[:or:][deleted]': false,
         'filter[:or:][:has-no:deleted]': 'yes',
         include: 'behandeling.onderwerp,signed-resources,published-resource',
-      }
+      },
     );
     if (versionedTreatments.length > 0) {
       return new Extract(
         treatment.id,
         agendapoint.get('position'),
         versionedTreatments.get('firstObject'),
-        []
+        [],
       );
     } else {
       const extractPreview = this.store.createRecord('extract-preview', {
@@ -208,13 +208,13 @@ export default class PublishService extends Service {
           zitting: meeting,
           content: extractPreview.html,
           behandeling: treatment,
-        }
+        },
       );
       return new Extract(
         treatment.id,
         agendapoint.get('position'),
         versionedTreatment,
-        extractPreview.validationErrors
+        extractPreview.validationErrors,
       );
     }
   }

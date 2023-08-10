@@ -20,7 +20,7 @@ export default class InboxTrashController extends Controller {
   async moveToConcepts(documents) {
     const conceptStatus = await this.store.findRecord(
       'concept',
-      DRAFT_STATUS_ID
+      DRAFT_STATUS_ID,
     );
     for (const document of documents) {
       document.status = conceptStatus;

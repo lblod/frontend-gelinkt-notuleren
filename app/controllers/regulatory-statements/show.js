@@ -23,7 +23,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
     this.revisions = await this.documentService.fetchRevisions.perform(
       this.model.documentContainer.id,
       revisionsToSkip,
-      5
+      5,
     );
   });
 
@@ -37,11 +37,11 @@ export default class RegulatoryAttachmentsShowController extends Controller {
       currentVersion.title,
       content,
       documentContainer,
-      currentVersion
+      currentVersion,
     );
     this.router.transitionTo(
       'regulatory-statements.edit',
-      documentContainer.id
+      documentContainer.id,
     );
   });
 

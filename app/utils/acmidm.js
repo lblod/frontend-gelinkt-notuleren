@@ -13,7 +13,7 @@ export function buildLogoutUrl({ logoutUrl }) {
 
 export function buildSwitchUrl({ apiKey, logoutUrl, switchRedirectUrl }) {
   return `${logoutUrl}?switch=true&client_id=${apiKey}&post_logout_redirect_uri=${encodeURIComponent(
-    switchRedirectUrl
+    switchRedirectUrl,
   )}`;
 }
 
@@ -22,6 +22,6 @@ export function isValidAcmidmConfig(acmidmConfig) {
     (value) =>
       typeof value === 'string' &&
       value.trim() !== '' &&
-      !value.startsWith('{{')
+      !value.startsWith('{{'),
   );
 }

@@ -26,7 +26,7 @@ export default class DocumentHistoryComponent extends Component {
       this.args.documentContainerId,
       revisionsToSkip,
       this.pageSize,
-      this.page
+      this.page,
     );
     this.revisions = [...this.revisions, ...newRevisions];
     this.page += 1;
@@ -40,7 +40,7 @@ export default class DocumentHistoryComponent extends Component {
     this.revisions = await this.documentService.fetchRevisions.perform(
       this.args.documentContainerId,
       revisionsToSkip,
-      this.pageSize
+      this.pageSize,
     );
     // We add 1 because we are skipping the current version
     if (this.revisions.length + 1 < this.pageSize) {

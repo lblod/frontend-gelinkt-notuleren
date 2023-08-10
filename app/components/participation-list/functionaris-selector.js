@@ -47,7 +47,7 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
     };
     const candidateOptions = await this.store.query(
       'functionaris',
-      queryParams
+      queryParams,
     );
     this.options = candidateOptions.filter((functionaris) => {
       if (functionaris.einde) {

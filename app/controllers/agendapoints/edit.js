@@ -235,7 +235,7 @@ export default class AgendapointsEditController extends Controller {
         [space, hardBreak, paragraphInvisible, headingInvisible],
         {
           shouldShowInvisibles: false,
-        }
+        },
       ),
       linkPasteHandler(this.schema.nodes.link),
     ];
@@ -268,7 +268,7 @@ export default class AgendapointsEditController extends Controller {
   copyAgendapunt = task(async () => {
     const response = await fetch(
       `/agendapoint-service/${this.documentContainer.id}/copy`,
-      { method: 'POST' }
+      { method: 'POST' },
     );
     const json = await response.json();
     const agendapuntId = json.uuid;
@@ -290,7 +290,7 @@ export default class AgendapointsEditController extends Controller {
     const container = this.documentContainer;
     const deletedStatus = await this.store.findRecord(
       'concept',
-      TRASH_STATUS_ID
+      TRASH_STATUS_ID,
     );
     container.status = deletedStatus;
     await container.save();
@@ -317,7 +317,7 @@ export default class AgendapointsEditController extends Controller {
         title,
         html,
         this.documentContainer,
-        this.editorDocument
+        this.editorDocument,
       );
 
     this._editorDocument = editorDocument;
@@ -336,7 +336,7 @@ export default class AgendapointsEditController extends Controller {
           this.editorDocument.title,
           cleanedHtml,
           this.documentContainer,
-          this.editorDocument
+          this.editorDocument,
         );
       this._editorDocument = editorDocument;
     }
@@ -350,7 +350,7 @@ export default class AgendapointsEditController extends Controller {
       full: 'http://data.vlaanderen.be/ns/besluit#Besluit',
     };
     const besluitDivs = parsedHtml.querySelectorAll(
-      `div[typeof~="${besluitIdentifiers.prefixed}"], div[typeof~="${besluitIdentifiers.full}"]`
+      `div[typeof~="${besluitIdentifiers.prefixed}"], div[typeof~="${besluitIdentifiers.full}"]`,
     );
     besluitDivs.forEach((besluitDiv) => {
       if (besluitDiv.textContent.trim() === '') {

@@ -95,7 +95,7 @@ export default class ParticipationListModalComponent extends Component {
     };
     if (absentees.includes(this.chairman)) {
       this.error = this.intl.t(
-        'participation-list-modal.chairman-absent-error'
+        'participation-list-modal.chairman-absent-error',
       );
       return;
     }

@@ -66,7 +66,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       {
         openbaar: agendaItem.geplandOpenbaar,
         onderwerp: agendaItem,
-      }
+      },
     );
 
     this.args.onCreate(agendaItem);
@@ -86,7 +86,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
     if (item.isNew) {
       const zitting = await this.store.findRecord(
         'zitting',
-        this.args.zittingId
+        this.args.zittingId,
       );
       this.setProperty(item, 'zitting', zitting);
       this.setProperty(treatment, 'openbaar', item.geplandOpenbaar);
@@ -100,7 +100,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       // it's not published, so we set the status
       const conceptStatus = await this.store.findRecord(
         'concept',
-        SCHEDULED_STATUS_ID
+        SCHEDULED_STATUS_ID,
       );
       this.setProperty(container, 'status', conceptStatus);
     }
@@ -127,7 +127,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       if (container) {
         const draftStatus = await this.store.findRecord(
           'concept',
-          DRAFT_STATUS_ID
+          DRAFT_STATUS_ID,
         );
         this.setProperty(container, 'status', draftStatus);
       }
@@ -196,7 +196,7 @@ export default class AgendaManagerAgendaContextComponent extends Component {
             this.setProperty(
               treatment,
               'vorigeBehandelingVanAgendapunt',
-              previousTreatment
+              previousTreatment,
             );
           } else {
             this.setProperty(treatment, 'vorigeBehandelingVanAgendapunt', null);

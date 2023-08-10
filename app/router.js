@@ -86,7 +86,7 @@ Router.map(function () {
       { path: '/:container_id/revisions/:document_id' },
       function () {
         this.route('history');
-      }
+      },
     );
   });
   this.route('not-found', { path: '/*path' });

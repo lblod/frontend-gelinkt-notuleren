@@ -72,7 +72,7 @@ export default class AgendapointsRevisionsController extends Controller {
   restore() {
     this.setNewRevisionHistory.perform(
       this.revisionsToRemove,
-      this.revisionToRemove
+      this.revisionToRemove,
     );
   }
 

@@ -67,10 +67,10 @@ export default class EditStemmingService extends Service {
             include: 'is-bestuurlijke-alias-van',
           });
           return queryResult.firstObject;
-        })
+        }),
       );
       aanwezigen.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, 'zalStemmen')
+        this.votingMap.set(aanwezige, 'zalStemmen'),
       );
     } else {
       const stemmingId = this._stemming.id;
@@ -94,19 +94,19 @@ export default class EditStemmingService extends Service {
       const tegenstanders = stemming.tegenstanders;
 
       aanwezigen.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, 'zalNietStemmen')
+        this.votingMap.set(aanwezige, 'zalNietStemmen'),
       );
       stemmers.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, 'zalStemmen')
+        this.votingMap.set(aanwezige, 'zalStemmen'),
       );
       onthouders.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, 'onthouding')
+        this.votingMap.set(aanwezige, 'onthouding'),
       );
       voorstanders.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, 'voor')
+        this.votingMap.set(aanwezige, 'voor'),
       );
       tegenstanders.forEach((aanwezige) =>
-        this.votingMap.set(aanwezige, 'tegen')
+        this.votingMap.set(aanwezige, 'tegen'),
       );
     }
 
