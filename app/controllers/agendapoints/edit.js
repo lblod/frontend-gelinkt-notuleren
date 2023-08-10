@@ -31,13 +31,15 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
-  variable,
-  variableView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
-import {
+  codelist,
+  codelistView,
   number,
   numberView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/number';
+  location,
+  locationView,
+  text_variable,
+  textVariableView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   bullet_list,
   list_item,
@@ -68,6 +70,11 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+
+import {
+  templateComment,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 
 import {
   regulatoryStatementNode,
@@ -113,8 +120,11 @@ export default class AgendapointsEditController extends Controller {
       date: date(this.config.date),
       STRUCTURE_NODES,
       regulatoryStatementNode,
+      templateComment,
+      text_variable,
       number,
-      variable,
+      location,
+      codelist,
       ...besluitNodes,
       roadsign_regulation,
       heading,
@@ -175,32 +185,42 @@ export default class AgendapointsEditController extends Controller {
         interactive: true,
       },
       roadsignRegulation: {
-        endpoint: ENV.roadsignRegulationPlugin.endpoint,
-        imageBaseUrl: ENV.roadsignRegulationPlugin.imageBaseUrl,
+        endpoint: ENV.mowRegistryEndpoint,
+        imageBaseUrl: ENV.roadsignImageBaseUrl,
       },
       besluitType: {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
       },
-      templateVariable: {
-        endpoint: ENV.templateVariablePlugin.endpoint,
-        zonalLocationCodelistUri:
-          ENV.templateVariablePlugin.zonalLocationCodelistUri,
-        nonZonalLocationCodelistUri:
-          ENV.templateVariablePlugin.nonZonalLocationCodelistUri,
-      },
       structures: structureSpecs,
+    };
+  }
+
+  get codelistEditOptions() {
+    return {
+      endpoint: ENV.fallbackCodelistEndpoint,
+    };
+  }
+
+  get locationEditOptions() {
+    return {
+      endpoint: ENV.fallbackCodelistEndpoint,
+      zonalLocationCodelistUri: ENV.zonalLocationCodelistUri,
+      nonZonalLocationCodelistUri: ENV.nonZonalLocationCodelistUri,
     };
   }
 
   get nodeViews() {
     return (controller) => {
       return {
-        variable: variableView(controller),
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
+        text_variable: textVariableView(controller),
+        location: locationView(controller),
+        codelist: codelistView(controller),
+        templateComment: templateCommentView(controller),
       };
     };
   }
