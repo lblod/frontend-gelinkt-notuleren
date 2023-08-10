@@ -19,7 +19,7 @@ export default class RegulatoryStatementsEditRoute extends Route {
     const container = await this.store.findRecord(
       'document-container',
       params.id,
-      { include: 'status' }
+      { include: 'status' },
     );
     const currentVersion = await container.get('currentVersion');
     return RSVP.hash({

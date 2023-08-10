@@ -17,7 +17,7 @@ export default class RdfaEditorContainerComponent extends Component {
     return plugins.concat(
       firefoxCursorFix(),
       lastKeyPressedPlugin,
-      chromeHacksPlugin()
+      chromeHacksPlugin(),
     );
   }
 
@@ -65,7 +65,7 @@ export default class RdfaEditorContainerComponent extends Component {
         console.warn(
           'Error encountered during parsing of document context. ' +
             'Reverting to default context.',
-          e
+          e,
         );
       }
     }
@@ -88,7 +88,7 @@ export default class RdfaEditorContainerComponent extends Component {
   setPrefix(element) {
     element.setAttribute(
       'prefix',
-      this.prefixToAttrString(this.documentContext.prefix)
+      this.prefixToAttrString(this.documentContext.prefix),
     );
     this.ready = true;
   }

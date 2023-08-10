@@ -9,7 +9,7 @@ function getDateFnsLocale(locale) {
 
 function humanFriendlyDate(
   [date],
-  { locale = 'nl-BE', alwaysShowTime = true } = {}
+  { locale = 'nl-BE', alwaysShowTime = true } = {},
 ) {
   if (!(date instanceof Date)) return '';
   try {

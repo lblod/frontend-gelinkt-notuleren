@@ -22,7 +22,7 @@ export default class DocumentAttachmentsComponent extends Component {
     } else {
       const concept = await this.store.findRecord(
         'concept',
-        REGULATORY_TYPE_ID
+        REGULATORY_TYPE_ID,
       );
       attachment.type = concept;
     }

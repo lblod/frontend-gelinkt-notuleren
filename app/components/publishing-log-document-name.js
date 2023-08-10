@@ -24,17 +24,17 @@ export default class PublishingLogDocumentNameComponent extends Component {
       switch (type) {
         case 'gepland':
           documentName = this.intl.t(
-            'meetings.publish.publication-actions.planned-agenda'
+            'meetings.publish.publication-actions.planned-agenda',
           );
           break;
         case 'aanvullend':
           documentName = this.intl.t(
-            'meetings.publish.publication-actions.suplemental-agenda'
+            'meetings.publish.publication-actions.suplemental-agenda',
           );
           break;
         case 'spoedeisend':
           documentName = this.intl.t(
-            'meetings.publish.publication-actions.urgent-agenda'
+            'meetings.publish.publication-actions.urgent-agenda',
           );
           break;
       }
@@ -43,7 +43,7 @@ export default class PublishingLogDocumentNameComponent extends Component {
       const versionedNotulen = await logResource.versionedNotulen;
       if (versionedNotulen) {
         documentName = this.intl.t(
-          'meetings.publish.publication-actions.notulen'
+          'meetings.publish.publication-actions.notulen',
         );
         versionedResource = versionedNotulen;
         route = 'meetings.publish.notulen';
@@ -52,7 +52,7 @@ export default class PublishingLogDocumentNameComponent extends Component {
           await logResource.versionedBesluitenLijst;
         if (versionedBesluitenLijst) {
           documentName = this.intl.t(
-            'meetings.publish.publication-actions.decision-list'
+            'meetings.publish.publication-actions.decision-list',
           );
           versionedResource = versionedBesluitenLijst;
           route = 'meetings.publish.besluitenlijst';
@@ -60,7 +60,7 @@ export default class PublishingLogDocumentNameComponent extends Component {
           const versionedBehandeling = logResource.versionedBehandeling;
           if (versionedBehandeling) {
             documentName = this.intl.t(
-              'meetings.publish.publication-actions.extract'
+              'meetings.publish.publication-actions.extract',
             );
             versionedResource = await logResource.versionedBehandeling;
             const behandeling = await versionedResource.behandeling;

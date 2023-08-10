@@ -17,7 +17,7 @@ export default class InboxMeetingsNewController extends Controller {
     if (!bestuursorgaan) {
       this.meeting.errors.add(
         'bestuursorgaan',
-        'inbox.meetings.new.meeting.errors.administrativeBody.required'
+        'inbox.meetings.new.meeting.errors.administrativeBody.required',
       );
     }
 

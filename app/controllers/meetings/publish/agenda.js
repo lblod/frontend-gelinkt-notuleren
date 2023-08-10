@@ -18,7 +18,7 @@ const KIND_LABEL_TO_UUID_MAP = new Map(
     gepland: KIND_GEPLAND_UUID,
     aanvullend: KIND_AANVULLENDE_UUID,
     spoedeisend: KIND_SPOEDEISENDE_UUID,
-  })
+  }),
 );
 
 /**
@@ -64,7 +64,7 @@ export default class MeetingsPublishAgendaController extends Controller {
     this.ontwerpAgenda = await this.initializeAgenda.perform('gepland');
     this.aanvullendeAgenda = await this.initializeAgenda.perform('aanvullend');
     this.spoedeisendeAgenda = await this.initializeAgenda.perform(
-      'spoedeisend'
+      'spoedeisend',
     );
   });
 
@@ -72,7 +72,7 @@ export default class MeetingsPublishAgendaController extends Controller {
     this.ontwerpAgenda = await this.initializeAgenda.perform('gepland');
     this.aanvullendeAgenda = await this.initializeAgenda.perform('aanvullend');
     this.spoedeisendeAgenda = await this.initializeAgenda.perform(
-      'spoedeisend'
+      'spoedeisend',
     );
   });
 
@@ -93,7 +93,7 @@ export default class MeetingsPublishAgendaController extends Controller {
       return agendas.firstObject;
     } else {
       const prePublish = await this.createPrePublishedResource.perform(
-        KIND_LABEL_TO_UUID_MAP.get(type)
+        KIND_LABEL_TO_UUID_MAP.get(type),
       );
       const rslt = await this.store.createRecord('agenda', {
         agendaType: type,

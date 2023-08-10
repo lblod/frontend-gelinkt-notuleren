@@ -6,7 +6,7 @@ export default helper(function plainDate([datetime] /*, hash*/) {
 
   try {
     return Intl.DateTimeFormat('nl-BE', { dateStyle: 'short' }).format(
-      datetime
+      datetime,
     );
   } catch (e) {
     console.error(e);

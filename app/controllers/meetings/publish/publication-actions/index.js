@@ -47,7 +47,7 @@ export default class MeetingsPublishPublicationActionsController extends Control
 
   actionLabel = (log) => {
     return this.intl.t(
-      `meetings.publish.publication-actions.actions.${log.action}`
+      `meetings.publish.publication-actions.actions.${log.action}`,
     );
   };
 }

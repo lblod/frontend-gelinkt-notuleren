@@ -64,7 +64,7 @@ export default class AdministrativeBodySelectComponent extends Component {
     this.administrativeBodyOptions = administrativeBodiesInTime.filter(
       (administrativeBodyInTime) => {
         const classificationUrl = administrativeBodyInTime.get(
-          'isTijdsspecialisatieVan.classificatie.uri'
+          'isTijdsspecialisatieVan.classificatie.uri',
         );
         const bodyIsValid =
           VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS.includes(classificationUrl);
@@ -79,7 +79,7 @@ export default class AdministrativeBodySelectComponent extends Component {
         }
         const twoMonthsAgo = sub(new Date(), { months: 2 });
         return isAfter(endDate, twoMonthsAgo);
-      }
+      },
     );
   });
 }

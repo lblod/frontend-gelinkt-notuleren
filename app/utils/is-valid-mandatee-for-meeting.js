@@ -15,7 +15,7 @@ export default function isValidMandateeForMeeting(mandatee, meeting) {
   const hasValidEndDate =
     isEmpty(mandatee.einde) || mandatee.einde > startOfMeeting;
   const hasValidStatus = [statusEffectief, statusWaarnemend].includes(
-    mandatee.get('status.id')
+    mandatee.get('status.id'),
   );
   return hasValidStartDate && hasValidEndDate && hasValidStatus;
 }

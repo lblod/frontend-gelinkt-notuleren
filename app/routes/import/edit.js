@@ -28,14 +28,14 @@ export default class ImportEditRoute extends Route {
       } else {
         warn(
           `No document container found with URI '${documentContainerUri}' to import snippet in. Redirecting to inbox.`,
-          { id: 'document-container.not-found' }
+          { id: 'document-container.not-found' },
         );
         this.router.transitionTo('inbox');
       }
     } else {
       warn(
         `No target document container specified to import snippet in. Redirecting to inbox.`,
-        { id: 'document-container.no-target' }
+        { id: 'document-container.no-target' },
       );
       this.router.transitionTo('inbox');
     }

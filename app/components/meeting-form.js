@@ -82,10 +82,10 @@ export default class MeetingForm extends Component {
     if (this.zitting.get('id')) {
       this.bestuursorgaan = await this.zitting.get('bestuursorgaan');
       const specialisedBestuursorgaan = await this.bestuursorgaan.get(
-        'isTijdsspecialisatieVan'
+        'isTijdsspecialisatieVan',
       );
       const classification = await specialisedBestuursorgaan.get(
-        'classificatie'
+        'classificatie',
       );
       this.headerArticleTranslationString =
         articlesBasedOnClassifcationMap[classification.get('uri')];
@@ -137,8 +137,8 @@ export default class MeetingForm extends Component {
     const mandatees = await this.store.query('mandataris', queryParams);
     this.possibleParticipants = Array.from(
       mandatees.filter((mandatee) =>
-        isValidMandateeForMeeting(mandatee, this.zitting)
-      )
+        isValidMandateeForMeeting(mandatee, this.zitting),
+      ),
     );
   });
 

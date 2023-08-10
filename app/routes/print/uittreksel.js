@@ -13,13 +13,13 @@ export default class PrintUittrekselRoute extends Route {
         'filter[behandeling][:id:]': treatmentId,
         'filter[:or:][deleted]': false,
         'filter[:or:][:has-no:deleted]': 'yes',
-      }
+      },
     );
     let versionedTreatment = versionedTreatments.firstObject;
     if (!versionedTreatment) {
       const treatment = await this.store.findRecord(
         'behandeling-van-agendapunt',
-        treatmentId
+        treatmentId,
       );
       const meeting = await this.store.findRecord('zitting', meetingId);
       const extractPreview = this.store.createRecord('extract-preview', {

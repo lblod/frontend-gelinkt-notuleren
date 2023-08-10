@@ -19,14 +19,14 @@ export default class SignaturesPublicationStatus extends Component {
     const signedResources = await versionedResource.signedResources;
     if (signedResources) {
       const activeSignedResources = signedResources.filter(
-        (signature) => !signature.deleted
+        (signature) => !signature.deleted,
       );
       this.signedResources = activeSignedResources;
     } else {
       this.signedResources = [];
     }
     this.publishedResource = await this.args.versionedResource.get(
-      'publishedResource'
+      'publishedResource',
     );
     this.ready = true;
   }

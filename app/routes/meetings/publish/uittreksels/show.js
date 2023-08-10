@@ -11,7 +11,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
       params.treatment_id,
       {
         include: 'onderwerp.zitting',
-      }
+      },
     );
     const { agendapoint } = await hash({
       agendapoint: await treatment.onderwerp,
@@ -22,7 +22,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         'filter[behandeling][:id:]': treatment.id,
         'filter[:or:][deleted]': false,
         'filter[:or:][:has-no:deleted]': 'yes',
-      }
+      },
     );
     const versionedTreatment = versionedTreatments.firstObject;
     const meeting = await agendapoint.zitting;
@@ -38,7 +38,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
           zitting: meeting,
           content: extractPreview.html,
           behandeling: treatment,
-        }
+        },
       );
       const signedResources = [];
       const publishedResource = await versionedTreatment.publishedResource;

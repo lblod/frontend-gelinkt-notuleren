@@ -199,7 +199,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         `/signing/behandeling/publish/${this.meeting.id}/${this.treatment.id}`,
         {
           method: 'POST',
-        }
+        },
       );
       if (!result.ok) {
         const json = await result.json();

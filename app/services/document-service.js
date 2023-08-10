@@ -21,14 +21,14 @@ export default class DocumentService extends Service {
     const decisionUris = triples.filter(
       (t) =>
         t.predicate === 'a' &&
-        t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit'
+        t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit',
     );
     const firstDecision = decisionUris[0];
     if (!firstDecision) return '';
     const descriptionOfFirstDecision = triples.filter(
       (t) =>
         t.predicate === 'http://data.europa.eu/eli/ontology#description' &&
-        t.subject === firstDecision.subject
+        t.subject === firstDecision.subject,
     )[0].object;
     return descriptionOfFirstDecision;
   }
@@ -52,14 +52,14 @@ export default class DocumentService extends Service {
     const decisionUris = triples.filter(
       (t) =>
         t.predicate === 'a' &&
-        t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit'
+        t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit',
     );
     const decisions = decisionUris.map((decisionUriTriple) => {
       const uri = decisionUriTriple.subject;
       const title = triples.filter(
         (t) =>
           t.predicate === 'http://data.europa.eu/eli/ontology#title' &&
-          t.subject === uri
+          t.subject === uri,
       )[0].object;
       return {
         uri,
@@ -76,7 +76,7 @@ export default class DocumentService extends Service {
         (t) =>
           t.predicate === 'a' &&
           t.object ===
-            'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel'
+            'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel',
       )
       .map((triple) => triple.subject);
     return documentpartUris;
@@ -104,7 +104,7 @@ export default class DocumentService extends Service {
         await documentContainer.save();
         return editorDocument;
       }
-    }
+    },
   );
 
   async retrieveDocumentParts(document) {
@@ -117,7 +117,7 @@ export default class DocumentService extends Service {
           })
         ).firstObject;
         return part;
-      })
+      }),
     );
   }
 
@@ -131,9 +131,9 @@ export default class DocumentService extends Service {
         'page[number]': pageNumber,
       });
       const revisionsWithoutCurrentVersion = revisions.filter(
-        (revision) => !revisionsToSkip.includes(revision.id)
+        (revision) => !revisionsToSkip.includes(revision.id),
       );
       return revisionsWithoutCurrentVersion;
-    }
+    },
   );
 }

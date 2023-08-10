@@ -148,7 +148,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     return (controller) => {
       return {
         table_of_contents: tableOfContentsView(this.config.tableOfContents)(
-          controller
+          controller,
         ),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
@@ -171,7 +171,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         [space, hardBreak, paragraphInvisible, headingInvisible],
         {
           shouldShowInvisibles: false,
-        }
+        },
       ),
       linkPasteHandler(this.schema.nodes.link),
     ];
@@ -229,7 +229,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     this.revisions = await this.documentService.fetchRevisions.perform(
       this.documentContainer.id,
       revisionsToSkip,
-      5
+      5,
     );
   });
 
@@ -312,7 +312,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           this.editorDocument.title,
           html,
           this.documentContainer,
-          this.editorDocument
+          this.editorDocument,
         );
       this._editorDocument = editorDocument;
 
@@ -330,7 +330,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         title,
         html,
         this.documentContainer,
-        this.editorDocument
+        this.editorDocument,
       );
     this._editorDocument = editorDocument;
   });
