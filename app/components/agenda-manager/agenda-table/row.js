@@ -1,32 +1,16 @@
 import Component from '@glimmer/component';
 import { PUBLISHED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
-import { service } from '@ember/service';
+import { trackedFunction } from 'ember-resources/util/function';
 
 export default class AgendaManagerAgendaTableRowComponent extends Component {
-  @service store;
-  @tracked published = false;
-
-  constructor(...args) {
-    super(...args);
-    this.getAgendaPointStatus.perform();
-  }
-
-  getAgendaPointStatus = task(async () => {
-    const behandeling = (
-      await this.store.query('behandeling-van-agendapunt', {
-        'filter[onderwerp][:id:]': this.args.item.id,
-        include: 'document-container.status',
-      })
-    ).firstObject;
-
-    if (behandeling) {
-      const statusId = behandeling.get('documentContainer.status.id');
-
-      if (statusId == PUBLISHED_STATUS_ID) {
-        this.published = true;
-      }
-    }
+  apStatusData = trackedFunction(this, async () => {
+    const treatment = await this.args.item.behandeling;
+    const container = await treatment.documentContainer;
+    const status = await container?.status;
+    return status;
   });
+
+  get published() {
+    return this.apStatusData.value?.id === PUBLISHED_STATUS_ID;
+  }
 }

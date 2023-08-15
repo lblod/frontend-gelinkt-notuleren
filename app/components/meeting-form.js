@@ -165,9 +165,9 @@ export default class MeetingForm extends Component {
         include: [
           'document-container.status',
           'document-container.current-version',
+          'document-container.attachments',
           'voorzitter',
           'secretaris',
-          'document-container.attachments',
           'onderwerp',
           'aanwezigen.is-bestuurlijke-alias-van',
           'afwezigen.is-bestuurlijke-alias-van',

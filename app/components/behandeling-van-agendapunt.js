@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { use } from 'ember-could-get-used-to-this';
 import RelationshipResource from '../helpers/relationship-resource';
+import { trackedFunction } from 'ember-resources/util/function';
 
 /** @typedef {import("../models/mandataris").default} Mandataris  */
 /**
@@ -51,6 +52,15 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     super(...arguments);
     this.fetchParticipants.perform();
     this.getStatus.perform();
+  }
+  attachmentData = trackedFunction(this, async () => {
+    const container = await this.behandeling.documentContainer;
+    const attachments = await container.attachments;
+    return attachments
+  })
+  get attachments() {
+
+    return this.attachmentData.value ?? [];
   }
   get behandeling() {
     return this.args.behandeling;

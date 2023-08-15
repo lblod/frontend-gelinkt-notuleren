@@ -86,15 +86,15 @@
 <div class="au-c-meeting-chrome-card au-u-margin-bottom-small au-u-margin-top-small">
   <div class="au-c-meeting-chrome-card__title au-c-meeting-chrome-card__title--flex">
     <AuHeading @level="4" @skin="6">{{t "behandeling-van-agendapunten.content-title"}} </AuHeading>
-    {{#if @behandeling.documentContainer.attachments}}
+    {{#if this.attachments}}
       {{#if this.editable}}
 
       <AuPill @route="agendapoints.attachments" @model={{@behandeling.documentContainer.id}} @query={{hash returnToMeeting=@meeting.id}} @skin="link" @icon="attachment" @iconAlignment="left">
-        {{@behandeling.documentContainer.attachments.length}}
+        {{this.attachments.length}}
       </AuPill>
       {{else}}
       <AuPill @skin="border" @icon="attachment" @iconAlignment="left">
-        {{@behandeling.documentContainer.attachments.length}}
+        {{this.attachments.length}}
       </AuPill>
       {{/if}}
     {{/if}}
