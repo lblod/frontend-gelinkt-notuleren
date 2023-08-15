@@ -6,7 +6,7 @@ export default class MeetingsEditRoute extends Route {
 
   async model(params) {
     const zitting = await this.store.findRecord('zitting', params.id, {
-      include: 'bestuursorgaan,secretaris,voorzitter,intermissions',
+      include: 'bestuursorgaan,secretaris,voorzitter,intermissions,aanwezigen-bij-start,afwezigen-bij-start',
     });
     return zitting;
   }
