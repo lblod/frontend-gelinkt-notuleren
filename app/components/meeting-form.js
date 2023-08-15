@@ -138,10 +138,18 @@ export default class MeetingForm extends Component {
 
   fetchTreatments = task(async () => {
     const treatments = new Array();
-    const pageSize = 20;
+    const pageSize = 100;
     const firstPage = await this.store.query('behandeling-van-agendapunt', {
-      include:
-      'document-container.status,document-container.current-version,voorzitter,secretaris,document-container.attachments,onderwerp',
+      include: [
+        'document-container.status',
+        'document-container.current-version',
+        'document-container.attachments',
+        'voorzitter',
+        'secretaris',
+        'onderwerp',
+        'aanwezigen.is-bestuurlijke-alias-van',
+        'afwezigen.is-bestuurlijke-alias-van',
+      ].join(','),
       'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
       'page[size]': pageSize,
       sort: 'onderwerp.position',
@@ -154,8 +162,16 @@ export default class MeetingForm extends Component {
         'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
         'page[size]': pageSize,
         'page[number]': pageNumber,
-        include:
-        'document-container.status,document-container.current-version,voorzitter,secretaris,document-container.attachments,onderwerp',
+        include: [
+          'document-container.status',
+          'document-container.current-version',
+          'voorzitter',
+          'secretaris',
+          'document-container.attachments',
+          'onderwerp',
+          'aanwezigen.is-bestuurlijke-alias-van',
+          'afwezigen.is-bestuurlijke-alias-van',
+        ].join(','),
         sort: 'onderwerp.position',
       });
       pageResults.forEach((result) => treatments.push(result));

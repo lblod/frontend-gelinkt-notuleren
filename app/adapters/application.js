@@ -6,6 +6,18 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
 
     return retryOnError(super.ajax.bind(this), arguments);
   }
+  findHasMany(store, snapshot, url, relationship) {
+    const customPageSize = relationship.meta?.options?.defaultPageSize;
+    if (customPageSize) {
+      return super.findHasMany(
+        store,
+        snapshot,
+        `${url}?page[size]=${customPageSize}`,
+        relationship
+      );
+    }
+    return super.findHasMany(store, snapshot, url, relationship);
+  }
 }
 
 async function retryOnError(ajax, ajaxArgs, retryCount = 0) {

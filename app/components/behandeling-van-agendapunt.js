@@ -22,7 +22,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service router;
   @tracked document;
   @tracked editor;
-  @tracked participants = [];
   @tracked absentees = [];
   @tracked published = false;
   @tracked chairman;
@@ -47,7 +46,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.args.meeting,
     'afwezigenBijStart',
   ]);
-
 
   constructor() {
     super(...arguments);
@@ -81,6 +79,12 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   get defaultAbsentees() {
     return this.meetingAbsenteeData.value;
   }
+  get participants() {
+    return this.behandeling.sortedParticipants ?? [];
+  }
+  get absentees() {
+    return this.behandeling.sortedAbsentees ?? [];
+  }
 
   get hasParticipants() {
     return this.participants.length;
@@ -103,7 +107,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   getStatus = task(async () => {
-
     if (this.behandeling) {
       const container = await this.behandeling.documentContainer;
       const status = await container.status;
@@ -125,7 +128,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.behandeling.secretaris = secretary;
     this.secretary = secretary;
 
-    this.participants = participants;
     this.behandeling.aanwezigen = participants;
 
     this.absentees = absentees;
@@ -135,20 +137,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   fetchParticipants = task(async () => {
-    const participantQuery = {
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[aanwezig-bij-behandeling][:id:]': this.behandeling.id,
-      include: 'is-bestuurlijke-alias-van',
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-    const absenteeQuery = {
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[afwezig-bij-behandeling][:id:]': this.behandeling.id,
-      include: 'is-bestuurlijke-alias-van',
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-    this.participants = await this.store.query('mandataris', participantQuery);
-    this.absentees = await this.store.query('mandataris', absenteeQuery);
     this.chairman = await this.behandeling.voorzitter;
     this.secretary = await this.behandeling.secretaris;
   });
