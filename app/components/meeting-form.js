@@ -14,7 +14,6 @@ export default class MeetingForm extends Component {
   @tracked afwezigenBijStart;
   @tracked voorzitter;
   @tracked secretaris;
-  @tracked zitting;
   @tracked bestuursorgaan;
   @tracked possibleParticipants;
   @tracked behandelingen;
@@ -28,7 +27,7 @@ export default class MeetingForm extends Component {
     // This is needed here, see https://github.com/NullVoxPopuli/ember-resources/issues/340
     await Promise.resolve();
     const publishedNotulen = await this.store.query('versioned-notulen', {
-      'filter[zitting][id]': this.zitting.get('id'),
+      'filter[zitting][id]': this.zitting.id,
       'filter[:has:published-resource]': 'yes',
       'fields[versioned-notulen]': 'id',
     });
@@ -40,7 +39,7 @@ export default class MeetingForm extends Component {
     await Promise.resolve();
 
     const signedResources = await this.store.query('signed-resource', {
-      'filter[versioned-notulen][zitting][:id:]': this.zitting.get('id'),
+      'filter[versioned-notulen][zitting][:id:]': this.zitting.id,
       'filter[:or:][deleted]': false,
       'filter[:or:][:has-no:deleted]': 'yes',
     });
@@ -68,29 +67,22 @@ export default class MeetingForm extends Component {
     );
   }
 
-  constructor() {
-    super(...arguments);
-    this.zitting = this.args.zitting;
-    this.loadData.perform();
+  get zitting() {
+    return this.args.zitting;
   }
 
   get isComplete() {
-    return !this.zitting.isNew && this.behandelingen?.length > 0;
+    return !this.zitting?.isNew && this.behandelingen?.length > 0;
   }
 
   loadData = task(async () => {
-    if (this.zitting.get('id')) {
-      this.bestuursorgaan = await this.zitting.get('bestuursorgaan');
-      const specialisedBestuursorgaan = await this.bestuursorgaan.get(
-        'isTijdsspecialisatieVan',
-      );
-      const classification = await specialisedBestuursorgaan.get(
-        'classificatie',
-      );
-      this.headerArticleTranslationString =
-        articlesBasedOnClassifcationMap[classification.get('uri')];
-      this.secretaris = await this.zitting.get('secretaris');
-      this.voorzitter = await this.zitting.get('voorzitter');
+    if (this.zitting.id) {
+      this.bestuursorgaan = await this.zitting.bestuursorgaan;
+      const specialisedBestuursorgaan = await this.bestuursorgaan.isTijdsspecialisatieVan;
+      const classification = await specialisedBestuursorgaan.classificatie;
+      this.headerArticleTranslationString = articlesBasedOnClassifcationMap[classification.uri];
+      this.secretaris = await this.zitting.secretaris;
+      this.voorzitter = await this.zitting.voorzitter;
       await this.fetchParticipants.perform();
       await this.fetchTreatments.perform();
     }
@@ -103,14 +95,14 @@ export default class MeetingForm extends Component {
     const participantQuery = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[aanwezig-bij-zitting][:id:]': this.zitting.get('id'),
+      'filter[aanwezig-bij-zitting][:id:]': this.zitting.id,
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
 
     const absenteeQuery = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[afwezig-bij-zitting][:id:]': this.zitting.get('id'),
+      'filter[afwezig-bij-zitting][:id:]': this.zitting.id,
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const present = await this.store.query('mandataris', participantQuery);
@@ -130,7 +122,7 @@ export default class MeetingForm extends Component {
     let queryParams = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[bekleedt][bevat-in][:uri:]': this.bestuursorgaan.get('uri'),
+      'filter[bekleedt][bevat-in][:uri:]': this.bestuursorgaan.uri,
       'filter[bekleedt][bestuursfunctie][:id:]': stringifiedDefaultTypeIds,
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
@@ -203,7 +195,7 @@ export default class MeetingForm extends Component {
 
   @action
   async meetingInfoUpdate(zitting) {
-    const bestuursorgaan = await zitting.get('bestuursorgaan');
+    const bestuursorgaan = await zitting.bestuursorgaan;
     if (bestuursorgaan != this.bestuursorgaan) {
       this.bestuursorgaan = bestuursorgaan;
       this.fetchPossibleParticipants.perform();
