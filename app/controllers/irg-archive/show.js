@@ -7,7 +7,7 @@ export default class IrgArchiveShowController extends Controller {
   download() {
     generateExportFromHtmlBody(
       this.model.editorDocument.title,
-      this.model.editorDocument.content
+      this.model.editorDocument.content,
     );
   }
 }

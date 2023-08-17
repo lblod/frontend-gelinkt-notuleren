@@ -16,7 +16,7 @@ export default class AgendapointsShowController extends Controller {
   copyAgendapunt = task(async () => {
     const response = await fetch(
       `/agendapoint-service/${this.model.documentContainer.id}/copy`,
-      { method: 'POST' }
+      { method: 'POST' },
     );
     const json = await response.json();
     const agendapuntId = json.uuid;

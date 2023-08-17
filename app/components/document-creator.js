@@ -96,18 +96,18 @@ export default class DocumentCreatorComponent extends Component {
       const container = this.store.createRecord('document-container');
       container.status = await this.store.findRecord(
         'concept',
-        DRAFT_STATUS_ID
+        DRAFT_STATUS_ID,
       );
       container.folder = await this.store.findRecord(
         'editor-document-folder',
-        this.args.folderId
+        this.args.folderId,
       );
       container.publisher = this.currentSession.group;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
           this.title,
           generatedTemplate,
-          container
+          container,
         );
       container.currentVersion = editorDocument;
       await container.save();

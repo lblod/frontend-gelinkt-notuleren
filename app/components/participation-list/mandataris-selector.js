@@ -57,7 +57,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
 
   async isDeputation(adminBody) {
     const classification = await adminBody.get(
-      'isTijdsspecialisatieVan.classificatie'
+      'isTijdsspecialisatieVan.classificatie',
     );
     return classification.uri === DEPUTATION_CLASSIFICATION;
   }
@@ -68,7 +68,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     let mandatees;
     if (isDeputation) {
       const adminUnit = await this.args.bestuursorgaan.get(
-        'isTijdsspecialisatieVan.bestuurseenheid'
+        'isTijdsspecialisatieVan.bestuurseenheid',
       );
       const [mandateeResults, governorResults] = await all([
         this.searchMandateesOfAdminBodyByName(this.adminBody, searchData),
@@ -79,11 +79,11 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     } else {
       mandatees = await this.searchMandateesOfAdminBodyByName(
         this.adminBody,
-        searchData
+        searchData,
       );
     }
     return mandatees.filter((mandatee) =>
-      isValidMandateeForMeeting(mandatee, this.args.meeting)
+      isValidMandateeForMeeting(mandatee, this.args.meeting),
     );
   });
 }

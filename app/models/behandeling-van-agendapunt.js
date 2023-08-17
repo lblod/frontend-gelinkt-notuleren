@@ -28,11 +28,11 @@ export default class BehandelingVanAgendapunt extends Model {
     const agendaItem = await this.onderwerp;
     const draftDecisionFolder = await this.store.findRecord(
       'editor-document-folder',
-      DRAFT_FOLDER_ID
+      DRAFT_FOLDER_ID,
     );
     const scheduledStatus = await this.store.findRecord(
       'concept',
-      SCHEDULED_STATUS_ID
+      SCHEDULED_STATUS_ID,
     );
 
     const document = this.store.createRecord('editor-document', {

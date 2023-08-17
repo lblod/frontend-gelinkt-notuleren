@@ -9,7 +9,7 @@ export default class MeetingsPublishPublicationActionsDetailRoute extends Route 
       params.publishing_log_id,
       {
         include: 'signed-resource,published-resource',
-      }
+      },
     );
     const signedResource = await log.signedResource;
     if (signedResource) {

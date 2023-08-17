@@ -58,7 +58,7 @@ export default class MuTaskService extends Service {
       } else {
         throw new Error('Task in unexpected state');
       }
-    }
+    },
   );
 
   async fetchTaskifiedEndpoint(url, fetchOptions) {

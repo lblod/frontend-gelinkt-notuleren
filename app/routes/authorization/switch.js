@@ -23,7 +23,7 @@ export default class AuthorizationSwitchRoute extends Route {
         'Something went wrong while trying to remove the session on the server',
         {
           cause: error,
-        }
+        },
       );
     }
   }

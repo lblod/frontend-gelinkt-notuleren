@@ -31,17 +31,15 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
-  variable,
-  variableView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
-import {
-  templateCommentNodes,
-  templateCommentView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
-import {
+  codelist,
+  codelistView,
   number,
   numberView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/number';
+  location,
+  locationView,
+  text_variable,
+  textVariableView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   bullet_list,
   list_item,
@@ -72,6 +70,11 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+
+import {
+  templateComment,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 
 import {
   regulatoryStatementNode,
@@ -117,11 +120,13 @@ export default class AgendapointsEditController extends Controller {
       date: date(this.config.date),
       STRUCTURE_NODES,
       regulatoryStatementNode,
+      templateComment,
+      text_variable,
       number,
-      variable,
+      location,
+      codelist,
       ...besluitNodes,
       roadsign_regulation,
-      templateCommentNodes,
       heading,
       blockquote,
       horizontal_rule,
@@ -180,32 +185,41 @@ export default class AgendapointsEditController extends Controller {
         interactive: true,
       },
       roadsignRegulation: {
-        endpoint: ENV.roadsignRegulationPlugin.endpoint,
-        imageBaseUrl: ENV.roadsignRegulationPlugin.imageBaseUrl,
+        endpoint: ENV.mowRegistryEndpoint,
+        imageBaseUrl: ENV.roadsignImageBaseUrl,
       },
       besluitType: {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
       },
-      templateVariable: {
-        endpoint: ENV.templateVariablePlugin.endpoint,
-        zonalLocationCodelistUri:
-          ENV.templateVariablePlugin.zonalLocationCodelistUri,
-        nonZonalLocationCodelistUri:
-          ENV.templateVariablePlugin.nonZonalLocationCodelistUri,
-      },
       structures: structureSpecs,
+    };
+  }
+
+  get codelistEditOptions() {
+    return {
+      endpoint: ENV.fallbackCodelistEndpoint,
+    };
+  }
+
+  get locationEditOptions() {
+    return {
+      endpoint: ENV.fallbackCodelistEndpoint,
+      zonalLocationCodelistUri: ENV.zonalLocationCodelistUri,
+      nonZonalLocationCodelistUri: ENV.nonZonalLocationCodelistUri,
     };
   }
 
   get nodeViews() {
     return (controller) => {
       return {
-        variable: variableView(controller),
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
+        text_variable: textVariableView(controller),
+        location: locationView(controller),
+        codelist: codelistView(controller),
         templateComment: templateCommentView(controller),
       };
     };
@@ -221,7 +235,7 @@ export default class AgendapointsEditController extends Controller {
         [space, hardBreak, paragraphInvisible, headingInvisible],
         {
           shouldShowInvisibles: false,
-        }
+        },
       ),
       linkPasteHandler(this.schema.nodes.link),
     ];
@@ -254,7 +268,7 @@ export default class AgendapointsEditController extends Controller {
   copyAgendapunt = task(async () => {
     const response = await fetch(
       `/agendapoint-service/${this.documentContainer.id}/copy`,
-      { method: 'POST' }
+      { method: 'POST' },
     );
     const json = await response.json();
     const agendapuntId = json.uuid;
@@ -276,7 +290,7 @@ export default class AgendapointsEditController extends Controller {
     const container = this.documentContainer;
     const deletedStatus = await this.store.findRecord(
       'concept',
-      TRASH_STATUS_ID
+      TRASH_STATUS_ID,
     );
     container.status = deletedStatus;
     await container.save();
@@ -303,7 +317,7 @@ export default class AgendapointsEditController extends Controller {
         title,
         html,
         this.documentContainer,
-        this.editorDocument
+        this.editorDocument,
       );
 
     this._editorDocument = editorDocument;
@@ -322,7 +336,7 @@ export default class AgendapointsEditController extends Controller {
           this.editorDocument.title,
           cleanedHtml,
           this.documentContainer,
-          this.editorDocument
+          this.editorDocument,
         );
       this._editorDocument = editorDocument;
     }
@@ -336,7 +350,7 @@ export default class AgendapointsEditController extends Controller {
       full: 'http://data.vlaanderen.be/ns/besluit#Besluit',
     };
     const besluitDivs = parsedHtml.querySelectorAll(
-      `div[typeof~="${besluitIdentifiers.prefixed}"], div[typeof~="${besluitIdentifiers.full}"]`
+      `div[typeof~="${besluitIdentifiers.prefixed}"], div[typeof~="${besluitIdentifiers.full}"]`,
     );
     besluitDivs.forEach((besluitDiv) => {
       if (besluitDiv.textContent.trim() === '') {

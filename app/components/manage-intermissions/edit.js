@@ -125,7 +125,7 @@ export default class manageIntermissionsEditComponent extends Component {
     if (this.selectedAp && this.selectedPosition) {
       agendaPos.position = await this.store.findRecord(
         'concept',
-        this.selectedPosition.conceptUuid
+        this.selectedPosition.conceptUuid,
       );
     } else {
       agendaPos.position = null;
@@ -140,7 +140,7 @@ export default class manageIntermissionsEditComponent extends Component {
       const posConcept = await agendaPos.position;
       if (posConcept) {
         this.selectedPosition = this.positionOptions.find(
-          (e) => e.conceptUuid === posConcept.id
+          (e) => e.conceptUuid === posConcept.id,
         );
       } else {
         this.selectedPosition = null;

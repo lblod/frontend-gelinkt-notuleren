@@ -58,7 +58,7 @@ export default class SignedResource extends Component {
     await log.save();
     const signedResources = await versionedResource.signedResources;
     const validSignedResources = signedResources.filter(
-      (signature) => !signature.deleted
+      (signature) => !signature.deleted,
     );
     if (validSignedResources.length === 0) {
       versionedResource.deleted = true;

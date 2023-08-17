@@ -35,13 +35,13 @@ import {
   linkPasteHandler,
 } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
+  templateComment,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
-import {
-  variable,
-  variableView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/nodes';
 import {
   bullet_list,
   list_item,
@@ -60,9 +60,15 @@ import {
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
+  codelist,
+  codelistView,
   number,
   numberView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/number';
+  location,
+  locationView,
+  text_variable,
+  textVariableView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
   createInvisiblesPlugin,
@@ -75,10 +81,6 @@ import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
-import {
-  templateCommentNodes,
-  templateCommentView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
@@ -110,12 +112,14 @@ export default class RegulatoryStatementsRoute extends Controller {
       ordered_list,
       bullet_list,
       placeholder,
+      templateComment,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
+      codelist,
+      location,
       number,
-      variable,
+      text_variable,
       ...STRUCTURE_NODES,
-      ...templateCommentNodes,
       heading,
       blockquote,
       horizontal_rule,
@@ -143,14 +147,16 @@ export default class RegulatoryStatementsRoute extends Controller {
   get nodeViews() {
     return (controller) => {
       return {
-        variable: variableView(controller),
         table_of_contents: tableOfContentsView(this.config.tableOfContents)(
-          controller
+          controller,
         ),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
+        location: locationView(controller),
+        codelist: codelistView(controller),
+        text_variable: textVariableView(controller),
         templateComment: templateCommentView(controller),
       };
     };
@@ -165,7 +171,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         [space, hardBreak, paragraphInvisible, headingInvisible],
         {
           shouldShowInvisibles: false,
-        }
+        },
       ),
       linkPasteHandler(this.schema.nodes.link),
     ];
@@ -211,13 +217,6 @@ export default class RegulatoryStatementsRoute extends Controller {
         },
         endpoint: '/codex/sparql',
       },
-      templateVariable: {
-        endpoint: ENV.templateVariablePlugin.endpoint,
-        zonalLocationCodelistUri:
-          ENV.templateVariablePlugin.zonalLocationCodelistUri,
-        nonZonalLocationCodelistUri:
-          ENV.templateVariablePlugin.nonZonalLocationCodelistUri,
-      },
       link: {
         interactive: true,
       },
@@ -230,7 +229,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     this.revisions = await this.documentService.fetchRevisions.perform(
       this.documentContainer.id,
       revisionsToSkip,
-      5
+      5,
     );
   });
 
@@ -246,6 +245,19 @@ export default class RegulatoryStatementsRoute extends Controller {
     return this.model.documentContainer;
   }
 
+  get codelistEditOptions() {
+    return {
+      endpoint: ENV.fallbackCodelistEndpoint,
+    };
+  }
+
+  get locationEditOptions() {
+    return {
+      endpoint: ENV.fallbackCodelistEndpoint,
+      zonalLocationCodelistUri: ENV.zonalLocationCodelistUri,
+      nonZonalLocationCodelistUri: ENV.nonZonalLocationCodelistUri,
+    };
+  }
   @action
   download() {
     this.editorDocument.content = this.controller.htmlContent;
@@ -300,7 +312,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           this.editorDocument.title,
           html,
           this.documentContainer,
-          this.editorDocument
+          this.editorDocument,
         );
       this._editorDocument = editorDocument;
 
@@ -318,7 +330,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         title,
         html,
         this.documentContainer,
-        this.editorDocument
+        this.editorDocument,
       );
     this._editorDocument = editorDocument;
   });

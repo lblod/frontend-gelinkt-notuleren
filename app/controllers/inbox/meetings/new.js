@@ -5,6 +5,7 @@ import { service } from '@ember/service';
 
 export default class InboxMeetingsNewController extends Controller {
   @service router;
+  @service intl;
 
   get meeting() {
     return this.model;
@@ -17,7 +18,9 @@ export default class InboxMeetingsNewController extends Controller {
     if (!bestuursorgaan) {
       this.meeting.errors.add(
         'bestuursorgaan',
-        'inbox.meetings.new.meeting.errors.administrativeBody.required'
+        this.intl.t(
+          'inbox.meetings.new.meeting.errors.administrative-body.required',
+        ),
       );
     }
 

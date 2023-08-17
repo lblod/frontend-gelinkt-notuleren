@@ -45,15 +45,15 @@ export default class DeleteMeetingComponent extends Component {
     };
     const versionedNotulen = await this.store.query(
       'versioned-notulen',
-      publicationFilter
+      publicationFilter,
     );
     const versionedBesluitenLijsten = await this.store.query(
       'versioned-besluiten-lijst',
-      publicationFilter
+      publicationFilter,
     );
     const versionedBehandelingen = await this.store.query(
       'versioned-behandeling',
-      publicationFilter
+      publicationFilter,
     );
     const agendas = await this.store.query('agenda', {
       filter: {

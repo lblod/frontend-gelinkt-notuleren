@@ -42,7 +42,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
           {
             zitting: this.model,
             content: content,
-          }
+          },
         );
         this.besluitenlijst = rslt;
         this.validationErrors = errors;

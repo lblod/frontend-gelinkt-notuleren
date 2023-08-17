@@ -108,7 +108,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         'filter[:or:][deleted]': false,
         'filter[:or:][:has-no:deleted]': 'yes',
         sort: 'created-on',
-      }
+      },
     );
 
     const signedDeletedResources = await this.store.query('signed-resource', {
@@ -147,7 +147,7 @@ export default class MeetingsPublishNotulenController extends Controller {
             await this.loadSignedResources(notulen.id);
             this.notulen = notulen;
           }
-        })
+        }),
       );
     } else {
       try {
@@ -175,7 +175,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   createPrePublishedResource = task(async () => {
     const id = this.model.id;
     const json = await this.publish.fetchJobTask.perform(
-      `/prepublish/notulen/${id}`
+      `/prepublish/notulen/${id}`,
     );
     return json.data.attributes;
   });
@@ -214,7 +214,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     const id = this.model.id;
     const taskId = await this.muTask.fetchTaskifiedEndpoint(
       `/signing/notulen/sign/${id}`,
-      { method: 'POST' }
+      { method: 'POST' },
     );
     await this.muTask.waitForMuTaskTask.perform(taskId);
     await this.loadNotulen.perform();
@@ -243,7 +243,7 @@ export default class MeetingsPublishNotulenController extends Controller {
           'public-behandeling-uris': this.publicBehandelingUris,
         }),
         method: 'POST',
-      }
+      },
     );
     await this.muTask.waitForMuTaskTask.perform(taskId);
     await this.loadNotulen.perform();
@@ -287,7 +287,7 @@ export default class MeetingsPublishNotulenController extends Controller {
             },
           }),
           method: 'POST',
-        }
+        },
       );
       const previewHtml = json.data.attributes.html;
       this.preview = previewHtml;
@@ -303,7 +303,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       div.innerHTML = this.notulen.content;
 
       const bvapContainer = div.querySelector(
-        "[property='http://mu.semte.ch/vocabularies/ext/behandelingVanAgendapuntenContainer']"
+        "[property='http://mu.semte.ch/vocabularies/ext/behandelingVanAgendapuntenContainer']",
       );
       bvapContainer.innerHTML = '';
       bvapContainer.id = this.behandelingContainerId;
@@ -329,7 +329,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     div.innerHTML = this.notulen.content;
 
     const behandelingNodes = div.querySelectorAll(
-      "[typeof='besluit:BehandelingVanAgendapunt']"
+      "[typeof='besluit:BehandelingVanAgendapunt']",
     );
     behandelingNodes.forEach((node) => {
       const uri =
@@ -359,7 +359,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   toggleAllPublicationStatus() {
     if (!this.allBehandelingPublic) {
       this.publicBehandelingUris = this.treatments.map(
-        (behandeling) => behandeling.behandeling
+        (behandeling) => behandeling.behandeling,
       );
       this.updateNotulenPreview();
     } else {

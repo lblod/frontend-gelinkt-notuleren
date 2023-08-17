@@ -13,7 +13,7 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
   get insertRange() {
     const selection = this.controller.mainEditorState.selection;
     const besluit = findParentNodeOfType(this.controller.schema.nodes.besluit)(
-      selection
+      selection,
     );
     if (besluit) {
       const { node, start } = besluit;
@@ -44,10 +44,10 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
             this.insertRange.to,
             schema.node('regulatoryStatementNode', {
               resource: statement.uri,
-            })
+            }),
           );
         },
-        { view: this.controller.mainEditorView }
+        { view: this.controller.mainEditorView },
       );
     }
   }

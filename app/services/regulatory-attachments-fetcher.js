@@ -58,7 +58,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
         title: binding.title.value,
         reload: async (template) => {
           const response = await fetch(
-            `${config.regulatoryStatementFileEndpoint}/${binding.fileId.value}/download`
+            `${config.regulatoryStatementFileEndpoint}/${binding.fileId.value}/download`,
           );
           template.body = await response.text();
         },

@@ -17,7 +17,7 @@ export default class AgendapointsRoute extends Route {
     const container = await this.store.findRecord(
       'document-container',
       params.id,
-      { include: 'status' }
+      { include: 'status' },
     );
 
     return {
