@@ -17,7 +17,6 @@ import { task, restartableTask } from 'ember-concurrency';
 
 /** @extends {Component<Args>} */
 export default class TreatmentVotingModalComponent extends Component {
-  @tracked stemmingen = tracked([]);
   @tracked create = false;
   @tracked edit = false;
   @tracked editMode = false;
@@ -25,41 +24,12 @@ export default class TreatmentVotingModalComponent extends Component {
   @service store;
   @service editStemming;
 
-  constructor(parent, args) {
-    super(parent, args);
-    this.fetchStemmingen.perform();
+  get behandeling() {
+    return this.args.behandeling;
   }
-
-  fetchStemmingen = restartableTask(async () => {
-    const stemmingen = [];
-    const pageSize = 20;
-
-    const firstPage = await this.store.query('stemming', {
-      'filter[behandeling-van-agendapunt][:id:]': this.args.behandeling.id,
-      sort: 'position',
-      page: {
-        size: pageSize,
-      },
-    });
-    const count = firstPage.meta.count;
-    firstPage.forEach((result) => stemmingen.push(result));
-    let pageNumber = 1;
-
-    while (pageNumber * pageSize < count) {
-      const pageResults = await this.store.query('stemming', {
-        'filter[behandeling-van-agendapunt][:id:]': this.args.behandeling.id,
-        sort: 'position',
-        page: {
-          size: pageSize,
-          number: pageNumber,
-        },
-      });
-      pageResults.forEach((result) => stemmingen.push(result));
-      pageNumber++;
-    }
-    this.stemmingen = tracked(stemmingen);
-  });
-
+  get stemmingen() {
+    return this.args.behandeling.sortedVotings ?? [];
+  }
   saveStemming = task(async () => {
     const isNew = this.editStemming.stemming.isNew;
 
@@ -67,18 +37,15 @@ export default class TreatmentVotingModalComponent extends Component {
       this.editStemming.stemming.position = this.stemmingen.length;
       this.editStemming.stemming.behandelingVanAgendapunt =
         this.args.behandeling;
-      this.stemmingen.push(this.editStemming.stemming);
+      // this.stemmingen.push(this.editStemming.stemming);
     }
     await this.editStemming.saveTask.perform();
     this.onCancelEdit();
   });
 
   addStemming = task(async () => {
-    const richTreatment = await this.store.query('behandeling-van-agendapunt', {
-      'filter[:id:]': this.args.behandeling.id,
-      include: 'aanwezigen.bekleedt.bestuursfunctie',
-    });
-    const participants = await richTreatment.firstObject.aanwezigen;
+    // high pagesize is set on the model, so this is fine
+    const participants = await this.args.behandeling.aanwezigen;
 
     const stemmingToEdit = this.store.createRecord('stemming', {
       onderwerp: '',
@@ -94,15 +61,6 @@ export default class TreatmentVotingModalComponent extends Component {
     this.editStemming.stemming = stemmingToEdit;
   });
 
-  fixPositions = task(async () => {
-    for (const [i, stemming] of this.stemmingen.entries()) {
-      if (i !== stemming.position) {
-        stemming.position = i;
-        await stemming.save();
-      }
-    }
-  });
-
   @action
   toggleEditStemming(stemming) {
     this.editStemming.stemming = stemming;
@@ -111,9 +69,26 @@ export default class TreatmentVotingModalComponent extends Component {
 
   removeStemming = task(async (stemming) => {
     await stemming.destroyRecord();
-    const index = this.stemmingen.indexOf(stemming);
-    this.stemmingen.splice(index, 1);
-    await this.fixPositions.perform();
+
+    // it may look like we can just use this.stemmingen here, but
+    // that's not the case
+    // the problem is that when we delete the voting on the first line,
+    // the resource starts recalculating. This is an async operation. While the underlying promise
+    // is resolving, the resource's value will be null, as normal.
+    // It will then later update to the correct value, but a task such as this one won't retrigger
+    // (and shouldn't, cause it has side-effects)
+    //
+    // The core issue is that we are not in a reactive context here. a trackedFunction turns an
+    // async context into a reactive one, and here we are in an async context.
+    //
+    // luckily the trackedFunction provides a way to await its underlying promise
+   await this.behandeling.sortedVotingData.retry();
+    for (const [i, stemming] of this.stemmingen.entries()) {
+      if (i !== stemming.position) {
+        stemming.position = i;
+        await stemming.save();
+      }
+    }
   });
 
   @action

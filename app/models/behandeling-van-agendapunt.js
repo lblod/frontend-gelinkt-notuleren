@@ -13,7 +13,10 @@ export default class BehandelingVanAgendapunt extends Model {
   @belongsTo('behandeling-van-agendapunt', { inverse: null })
   vorigeBehandelingVanAgendapunt;
   @belongsTo('agendapunt', { inverse: 'behandeling' }) onderwerp;
-  @belongsTo('functionaris', { inverse: null, defaultPageSize: 100 }) secretaris;
+  // original queries fetching these used pagesize of 100
+  @belongsTo('functionaris', { inverse: null, defaultPageSize: 100 })
+  secretaris;
+  // original queries fetching these used pagesize of 100
   @belongsTo('mandataris', { inverse: null, defaultPageSize: 100 }) voorzitter;
   @belongsTo('document-container', { inverse: null }) documentContainer;
 
@@ -23,7 +26,12 @@ export default class BehandelingVanAgendapunt extends Model {
   besluiten;
   @hasMany('mandataris', { inverse: null }) aanwezigen;
   @hasMany('mandataris', { inverse: null }) afwezigen;
-  @hasMany('stemming', { inverse: 'behandelingVanAgendapunt', defaultPageSize: 100}) stemmingen;
+  // original queries did "fetch all" pagination loops
+  @hasMany('stemming', {
+    inverse: 'behandelingVanAgendapunt',
+    defaultPageSize: 1000,
+  })
+  stemmingen;
 
   sortedParticipantData = trackedFunction(this, async () => {
     const participants = await this.aanwezigen;
@@ -34,7 +42,7 @@ export default class BehandelingVanAgendapunt extends Model {
       })
     );
     return participantsWithNames
-      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .sort((a, b) => a.surname.localeCompare(b.surname))
       .map((pn) => pn.participant);
   });
   sortedAbsenteeData = trackedFunction(this, async () => {
@@ -46,14 +54,26 @@ export default class BehandelingVanAgendapunt extends Model {
       })
     );
     return absenteesWithNames
-      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .sort((a, b) => a.surname.localeCompare(b.surname))
       .map((an) => an.absentee);
+  });
+  async getSortedVotings() {
+    const votings = await this.stemmingen;
+    return votings
+      ?.slice()
+      .sort((a, b) => Number(a.position) - Number(b.position));
+  }
+  sortedVotingData = trackedFunction(this, async () => {
+    return await this.getSortedVotings();
   });
   get sortedParticipants() {
     return this.sortedParticipantData.value;
   }
   get sortedAbsentees() {
     return this.sortedAbsenteeData.value;
+  }
+  get sortedVotings() {
+    return this.sortedVotingData.value;
   }
   async initializeDocument() {
     const agendaItem = await this.onderwerp;
