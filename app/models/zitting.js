@@ -14,8 +14,10 @@ export default class ZittingModel extends Model {
 
   @hasMany('agenda', { inverse: null }) publicatieAgendas;
   @hasMany('agendapunt', { inverse: 'zitting' }) agendapunten;
-  @hasMany('mandataris', { inverse: null, defaultPagination: 100 }) aanwezigenBijStart;
-  @hasMany('mandataris', { inverse: null, defaultPagination: 100 }) afwezigenBijStart;
+  @hasMany('mandataris', { inverse: null, defaultPagination: 100 })
+  aanwezigenBijStart;
+  @hasMany('mandataris', { inverse: null, defaultPagination: 100 })
+  afwezigenBijStart;
   @hasMany('intermission', { inverse: 'zitting' }) intermissions;
   @hasMany('publishing-log', { inverse: 'zitting' }) publishingLogs;
 }

@@ -39,7 +39,7 @@ export default class BehandelingVanAgendapunt extends Model {
       participants.map(async (participant) => {
         const surname = (await participant.isBestuurlijkeAliasVan).achternaam;
         return { participant, surname };
-      })
+      }),
     );
     return participantsWithNames
       .sort((a, b) => a.surname.localeCompare(b.surname))
@@ -51,7 +51,7 @@ export default class BehandelingVanAgendapunt extends Model {
       absentees.map(async (absentee) => {
         const surname = (await absentee.isBestuurlijkeAliasVan).achternaam;
         return { absentee, surname };
-      })
+      }),
     );
     return absenteesWithNames
       .sort((a, b) => a.surname.localeCompare(b.surname))

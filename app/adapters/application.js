@@ -13,7 +13,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
         store,
         snapshot,
         `${url}?page[size]=${customPageSize}`,
-        relationship
+        relationship,
       );
     }
     return super.findHasMany(store, snapshot, url, relationship);

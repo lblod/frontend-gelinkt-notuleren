@@ -2,7 +2,7 @@ import { service } from '@ember/service';
 import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
 import Component from '@glimmer/component';
-import { task, restartableTask } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 /** @typedef {import("../../../models/behandeling-van-agendapunt").default} Behandeling*/
 /** @typedef {import("../../../models/bestuursorgaan").default} Bestuursorgaan*/
 /** @typedef {import("../../../models/stemming").default} Stemming*/
@@ -82,7 +82,7 @@ export default class TreatmentVotingModalComponent extends Component {
     // async context into a reactive one, and here we are in an async context.
     //
     // luckily the trackedFunction provides a way to await its underlying promise
-   await this.behandeling.sortedVotingData.retry();
+    await this.behandeling.sortedVotingData.retry();
     for (const [i, stemming] of this.stemmingen.entries()) {
       if (i !== stemming.position) {
         stemming.position = i;
