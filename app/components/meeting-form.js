@@ -13,11 +13,7 @@ import { trackedTask } from 'ember-resources/util/ember-concurrency';
 export default class MeetingForm extends Component {
   @tracked aanwezigenBijStart;
   @tracked afwezigenBijStart;
-  @tracked voorzitter;
-  @tracked secretaris;
-  @tracked bestuursorgaan;
   behandelingen = tracked([]);
-  @tracked headerArticleTranslationString = '';
   @service store;
   @service currentSession;
   @service router;
@@ -74,23 +70,44 @@ export default class MeetingForm extends Component {
   get isComplete() {
     return !this.zitting?.isNew && this.behandelingen?.length > 0;
   }
-
-  loadData = task(async () => {
-    if (this.zitting.id) {
-      this.bestuursorgaan = await this.zitting.bestuursorgaan;
-      const specialisedBestuursorgaan = await this.bestuursorgaan
-        .isTijdsspecialisatieVan;
-      const classification = await specialisedBestuursorgaan.classificatie;
-      this.headerArticleTranslationString =
-        articlesBasedOnClassifcationMap[classification.uri];
-      this.secretaris = await this.zitting.secretaris;
-      this.voorzitter = await this.zitting.voorzitter;
-      await this.fetchParticipants.perform();
-      await this.fetchTreatments.perform();
-    }
+  get bestuursorgaan() {
+    return this.meetingDetailsData.value?.bestuursorgaan ?? null;
+  }
+  get headerArticleTranslationString() {
+    return this.meetingDetailsData.value?.headerArticleTranslationString ?? '';
+  }
+  get secretaris() {
+    return this.meetingDetailsData.value?.secretaris ?? null;
+  }
+  get voorzitter() {
+    return this.meetingDetailsData.value?.voorzitter ?? null;
+  }
+  meetingDetailsTask = restartableTask(async () => {
+    const bestuursorgaan = await this.zitting.bestuursorgaan;
+    const specialisedBestuursorgaan =
+      await bestuursorgaan.isTijdsspecialisatieVan;
+    const classification = await specialisedBestuursorgaan.classificatie;
+    const headerArticleTranslationString =
+      articlesBasedOnClassifcationMap[classification.uri];
+    const secretaris = await this.zitting.secretaris;
+    const voorzitter = await this.zitting.voorzitter;
+    return {
+      bestuursorgaan,
+      headerArticleTranslationString,
+      secretaris,
+      voorzitter,
+    };
   });
+  meetingDetailsData = trackedTask(this, this.meetingDetailsTask, () => [
+    this.zitting.secretaris,
+    this.zitting.voorzitter,
+    this.zitting.bestuursorgaan,
+  ]);
 
   fetchParticipants = task(async () => {
+    if (!this.zitting.id) {
+      return null;
+    }
     const participantQuery = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
@@ -142,6 +159,9 @@ export default class MeetingForm extends Component {
     return this.possibleParticipantsData.value ?? [];
   }
   fetchTreatments = task(async () => {
+    if (!this.zitting.id) {
+      return null;
+    }
     const pageSize = 20;
     const firstPage = await this.store.query('behandeling-van-agendapunt', {
       include: [
@@ -207,8 +227,6 @@ export default class MeetingForm extends Component {
     participants,
     absentees,
   }) {
-    this.secretaris = secretary;
-    this.voorzitter = chairman;
     this.aanwezigenBijStart = participants;
     this.afwezigenBijStart = absentees;
     this.zitting.voorzitter = chairman;
@@ -231,9 +249,6 @@ export default class MeetingForm extends Component {
 
   @action
   async meetingInfoUpdate(zitting) {
-    const bestuursorgaan = await zitting.bestuursorgaan;
-    if (bestuursorgaan != this.bestuursorgaan) {
-      this.bestuursorgaan = bestuursorgaan;
-    }
+    //TODO remove
   }
 }
