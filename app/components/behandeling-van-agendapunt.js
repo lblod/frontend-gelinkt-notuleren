@@ -23,7 +23,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service router;
   @tracked document;
   @tracked editor;
-  @tracked absentees = [];
   @tracked published = false;
   @tracked chairman;
   @tracked secretary;
@@ -56,10 +55,9 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   attachmentData = trackedFunction(this, async () => {
     const container = await this.behandeling.documentContainer;
     const attachments = await container.attachments;
-    return attachments
-  })
+    return attachments;
+  });
   get attachments() {
-
     return this.attachmentData.value ?? [];
   }
   get behandeling() {
@@ -140,7 +138,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
     this.behandeling.aanwezigen = participants;
 
-    this.absentees = absentees;
     this.behandeling.afwezigen = absentees;
 
     await this.args.behandeling.save();
