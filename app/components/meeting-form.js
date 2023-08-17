@@ -159,6 +159,7 @@ export default class MeetingForm extends Component {
     return this.possibleParticipantsData.value ?? [];
   }
   fetchTreatments = task(async () => {
+    this.behandelingen.clear();
     if (!this.zitting.id) {
       return null;
     }
