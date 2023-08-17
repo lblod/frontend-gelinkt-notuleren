@@ -1,3 +1,14 @@
+
+// Hide template comments in all direct document previews
+// Template comments are also *removed* in publishing flow (via notulen-prepublish-service)
+@mixin hideTemplateComment {
+  div[typeof="ext:TemplateComment"],
+  div[typeof="http://mu.semte.ch/vocabularies/ext/TemplateComment"] {
+    display: none;
+  }
+}
+
+
 /* ==========================================================================
   #EDITOR-PREVIEW
   Used in the publish flow
@@ -15,6 +26,7 @@
 
 .au-c-editor-preview,
 .au-c-rdfa-publication {
+
   // Labels
   [property="besluit:geplandOpenbaar"],
   [property="besluit:openbaar"] {
@@ -29,6 +41,7 @@
   [property="ext:behandelt"],
   [property="besluit:heeftAgendapunt"],
   [typeof="besluit:Agendapunt"] {
+
     [property="besluit:geplandOpenbaar"] i,
     [property="besluit:geplandOpenbaar"] em,
     [property="besluit:openbaar"] i,
@@ -36,6 +49,8 @@
       display: none;
     }
   }
+  @include hideTemplateComment
+
 }
 
 /* Notulen treatment (public/private)
@@ -63,7 +78,7 @@
       margin-top: 0.5rem;
 
       &:after {
-        @include au-font-size($au-base,1);
+        @include au-font-size($au-base, 1);
         position: absolute;
         right: -11.5rem;
         width: 9rem;
@@ -77,10 +92,11 @@
       }
     }
   }
+  @include hideTemplateComment
 }
 
 .au-c-editor-preview-treatment--private .behandeling {
-  > * {
+  >* {
     color: $au-gray-400;
   }
 
@@ -124,7 +140,7 @@
 }
 
 .au-c-editor-preview-treatment__info--private {
-  .checkbox--switch + .checkbox--switch__label {
+  .checkbox--switch+.checkbox--switch__label {
     &:after {
       border-color: $au-gray-300;
     }
@@ -136,6 +152,7 @@
  ========================================================================== */
 
 .behandeling-preview {
+
   div[property^="ext:insert"],
   div[property^="ext:insert"],
   [data-flagged-remove="complete"],
@@ -148,6 +165,7 @@
       border-right: 4px solid $au-yellow-300;
     }
   }
+  @include hideTemplateComment
 }
 
 .behandeling-preview div[property^="ext:insert"],
@@ -224,6 +242,7 @@
     width: 0;
     background-color: rgba($au-white, .5);
   }
+
   100% {
     width: 100%;
     background-color: rgba($au-yellow-300, .5);
