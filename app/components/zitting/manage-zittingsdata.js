@@ -16,7 +16,6 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this.initializeState();
   }
   initializeState() {
-    this.zitting = this.args.zitting;
     this.geplandeStart = this.args.zitting.geplandeStart;
     this.gestartOpTijdstip = this.args.zitting.gestartOpTijdstip;
     this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
@@ -24,6 +23,9 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this.bestuursorgaan = this.args.zitting.bestuursorgaan;
   }
 
+  get zitting() {
+    return this.args.zitting;
+  }
   @action
   async saveZittingsData() {
     this.zitting.geplandeStart = this.geplandeStart;

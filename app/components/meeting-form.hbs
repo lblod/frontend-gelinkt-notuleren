@@ -191,7 +191,6 @@
             <AuHelpText>{{t "participation-list.loading-loader"}}</AuHelpText>
           {{/if}}
 
-          {{#if this.fetchTreatments.lastSuccessful}}
             <ol class="au-c-meeting-numbered-list">
             {{#each this.behandelingen as |behandeling|}}
               <li>
@@ -222,7 +221,6 @@
               {{t "behandeling-van-agendapunten.edit-document"}}
             </AuLink>
           {{/unless}}
-        {{/if}}
       {{else}}
         <AuHelpText @size="large" @skin="secondary">
           {{t "meeting-form.bestuursorgan-not-selected-warning"}}
