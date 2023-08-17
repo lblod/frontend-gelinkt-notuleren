@@ -153,7 +153,7 @@ export default class MeetingForm extends Component {
   possibleParticipantsData = trackedTask(
     this,
     this.fetchPossibleParticipants,
-    () => [this.zitting.geplandeStart, this.zitting.gestartOpTijdstip]
+    () => [this.zitting.geplandeStart, this.zitting.gestartOpTijdstip],
   );
   get possibleParticipants() {
     return this.possibleParticipantsData.value ?? [];
@@ -202,7 +202,7 @@ export default class MeetingForm extends Component {
             ].join(','),
             sort: 'onderwerp.position',
           })
-          .then((results) => ({ pageNumber, results }))
+          .then((results) => ({ pageNumber, results })),
       );
 
       pageNumber++;
@@ -212,7 +212,7 @@ export default class MeetingForm extends Component {
     resultSets
       .sort((a, b) => a.pageNumber - b.pageNumber)
       .forEach(({ results }) =>
-        results.forEach((result) => this.behandelingen.push(result))
+        results.forEach((result) => this.behandelingen.push(result)),
       );
   });
 
@@ -246,10 +246,5 @@ export default class MeetingForm extends Component {
     if (this.zitting?.gestartOpTijdstip) {
       return this.zitting.gestartOpTijdstip;
     } else return this.zitting.geplandeStart;
-  }
-
-  @action
-  async meetingInfoUpdate(zitting) {
-    //TODO remove
   }
 }

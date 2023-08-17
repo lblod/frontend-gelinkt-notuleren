@@ -36,7 +36,6 @@ export default class ZittingManageZittingsdataComponent extends Component {
 
     await this.zitting.save();
     this.toggleModal();
-    this.args.onChange(this.zitting);
   }
 
   @action
