@@ -37,7 +37,6 @@ export default class TreatmentVotingModalComponent extends Component {
       this.editStemming.stemming.position = this.stemmingen.length;
       this.editStemming.stemming.behandelingVanAgendapunt =
         this.args.behandeling;
-      // this.stemmingen.push(this.editStemming.stemming);
     }
     await this.editStemming.saveTask.perform();
     this.onCancelEdit();
