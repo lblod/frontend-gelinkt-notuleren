@@ -208,7 +208,6 @@ export default class MeetingForm extends Component {
       pageNumber++;
     }
     const resultSets = await all(queries);
-    console.log(resultSets);
     resultSets
       .sort((a, b) => a.pageNumber - b.pageNumber)
       .forEach(({ results }) =>
