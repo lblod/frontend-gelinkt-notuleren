@@ -1,24 +1,19 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
+import { tracked } from 'tracked-built-ins';
+import { task, all, restartableTask } from 'ember-concurrency';
 import { service } from '@ember/service';
 import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
 import { trackedFunction } from 'ember-resources/util/function';
+import { trackedTask } from 'ember-resources/util/ember-concurrency';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
 export default class MeetingForm extends Component {
   @tracked aanwezigenBijStart;
   @tracked afwezigenBijStart;
-  @tracked voorzitter;
-  @tracked secretaris;
-  @tracked zitting;
-  @tracked bestuursorgaan;
-  @tracked possibleParticipants;
-  @tracked behandelingen;
-  @tracked headerArticleTranslationString = '';
+  behandelingen = tracked([]);
   @service store;
   @service currentSession;
   @service router;
@@ -28,7 +23,7 @@ export default class MeetingForm extends Component {
     // This is needed here, see https://github.com/NullVoxPopuli/ember-resources/issues/340
     await Promise.resolve();
     const publishedNotulen = await this.store.query('versioned-notulen', {
-      'filter[zitting][id]': this.zitting.get('id'),
+      'filter[zitting][id]': this.zitting.id,
       'filter[:has:published-resource]': 'yes',
       'fields[versioned-notulen]': 'id',
     });
@@ -40,7 +35,7 @@ export default class MeetingForm extends Component {
     await Promise.resolve();
 
     const signedResources = await this.store.query('signed-resource', {
-      'filter[versioned-notulen][zitting][:id:]': this.zitting.get('id'),
+      'filter[versioned-notulen][zitting][:id:]': this.zitting.id,
       'filter[:or:][deleted]': false,
       'filter[:or:][:has-no:deleted]': 'yes',
     });
@@ -68,49 +63,62 @@ export default class MeetingForm extends Component {
     );
   }
 
-  constructor() {
-    super(...arguments);
-    this.zitting = this.args.zitting;
-    this.loadData.perform();
+  get zitting() {
+    return this.args.zitting;
   }
 
   get isComplete() {
-    return !this.zitting.isNew && this.behandelingen?.length > 0;
+    return !this.zitting?.isNew && this.behandelingen?.length > 0;
   }
-
-  loadData = task(async () => {
-    if (this.zitting.get('id')) {
-      this.bestuursorgaan = await this.zitting.get('bestuursorgaan');
-      const specialisedBestuursorgaan = await this.bestuursorgaan.get(
-        'isTijdsspecialisatieVan',
-      );
-      const classification = await specialisedBestuursorgaan.get(
-        'classificatie',
-      );
-      this.headerArticleTranslationString =
-        articlesBasedOnClassifcationMap[classification.get('uri')];
-      this.secretaris = await this.zitting.get('secretaris');
-      this.voorzitter = await this.zitting.get('voorzitter');
-      await this.fetchParticipants.perform();
-      await this.fetchTreatments.perform();
-    }
+  get bestuursorgaan() {
+    return this.meetingDetailsData.value?.bestuursorgaan ?? null;
+  }
+  get headerArticleTranslationString() {
+    return this.meetingDetailsData.value?.headerArticleTranslationString ?? '';
+  }
+  get secretaris() {
+    return this.meetingDetailsData.value?.secretaris ?? null;
+  }
+  get voorzitter() {
+    return this.meetingDetailsData.value?.voorzitter ?? null;
+  }
+  meetingDetailsTask = restartableTask(async () => {
+    const bestuursorgaan = await this.zitting.bestuursorgaan;
+    const specialisedBestuursorgaan =
+      await bestuursorgaan.isTijdsspecialisatieVan;
+    const classification = await specialisedBestuursorgaan.classificatie;
+    const headerArticleTranslationString =
+      articlesBasedOnClassifcationMap[classification.uri];
+    const secretaris = await this.zitting.secretaris;
+    const voorzitter = await this.zitting.voorzitter;
+    return {
+      bestuursorgaan,
+      headerArticleTranslationString,
+      secretaris,
+      voorzitter,
+    };
   });
+  meetingDetailsData = trackedTask(this, this.meetingDetailsTask, () => [
+    this.zitting.secretaris,
+    this.zitting.voorzitter,
+    this.zitting.bestuursorgaan,
+  ]);
 
   fetchParticipants = task(async () => {
-    if (this.bestuursorgaan) {
-      await this.fetchPossibleParticipants.perform();
+    if (!this.zitting.id) {
+      return null;
     }
     const participantQuery = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[aanwezig-bij-zitting][:id:]': this.zitting.get('id'),
+      'filter[aanwezig-bij-zitting][:id:]': this.zitting.id,
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
 
     const absenteeQuery = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[afwezig-bij-zitting][:id:]': this.zitting.get('id'),
+      'filter[afwezig-bij-zitting][:id:]': this.zitting.id,
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const present = await this.store.query('mandataris', participantQuery);
@@ -119,7 +127,7 @@ export default class MeetingForm extends Component {
     this.afwezigenBijStart = absent;
   });
 
-  fetchPossibleParticipants = task(async () => {
+  fetchPossibleParticipants = restartableTask(async () => {
     const aanwezigenRoles = await this.store.query('bestuursfunctie-code', {
       'filter[standaard-type-van][is-classificatie-van][heeft-tijdsspecialisaties][:id:]':
         this.bestuursorgaan.id,
@@ -130,41 +138,81 @@ export default class MeetingForm extends Component {
     let queryParams = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[bekleedt][bevat-in][:uri:]': this.bestuursorgaan.get('uri'),
+      'filter[bekleedt][bevat-in][:uri:]': this.bestuursorgaan.uri,
       'filter[bekleedt][bestuursfunctie][:id:]': stringifiedDefaultTypeIds,
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandatees = await this.store.query('mandataris', queryParams);
-    this.possibleParticipants = Array.from(
+    return Array.from(
       mandatees.filter((mandatee) =>
         isValidMandateeForMeeting(mandatee, this.zitting),
       ),
     );
   });
 
+  possibleParticipantsData = trackedTask(
+    this,
+    this.fetchPossibleParticipants,
+    () => [this.zitting.geplandeStart, this.zitting.gestartOpTijdstip],
+  );
+  get possibleParticipants() {
+    return this.possibleParticipantsData.value ?? [];
+  }
   fetchTreatments = task(async () => {
-    const treatments = new Array();
+    this.behandelingen.clear();
+    if (!this.zitting.id) {
+      return null;
+    }
     const pageSize = 20;
     const firstPage = await this.store.query('behandeling-van-agendapunt', {
-      include: 'voorzitter,secretaris',
+      include: [
+        'document-container.status',
+        'document-container.current-version',
+        'voorzitter',
+        'secretaris',
+        'onderwerp',
+        'stemmingen',
+        'aanwezigen.is-bestuurlijke-alias-van',
+        'afwezigen.is-bestuurlijke-alias-van',
+      ].join(','),
       'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
       'page[size]': pageSize,
       sort: 'onderwerp.position',
     });
     const count = firstPage.meta.count;
-    firstPage.forEach((result) => treatments.push(result));
+    firstPage.forEach((result) => this.behandelingen.push(result));
     let pageNumber = 1;
+    const queries = [];
     while (pageNumber * pageSize < count) {
-      const pageResults = await this.store.query('behandeling-van-agendapunt', {
-        'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
-        'page[size]': pageSize,
-        'page[number]': pageNumber,
-        sort: 'onderwerp.position',
-      });
-      pageResults.forEach((result) => treatments.push(result));
+      queries.push(
+        this.store
+          .query('behandeling-van-agendapunt', {
+            'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
+            'page[size]': pageSize,
+            'page[number]': pageNumber,
+            include: [
+              'document-container.status',
+              'document-container.current-version',
+              'voorzitter',
+              'secretaris',
+              'onderwerp',
+              'stemmingen',
+              'aanwezigen.is-bestuurlijke-alias-van',
+              'afwezigen.is-bestuurlijke-alias-van',
+            ].join(','),
+            sort: 'onderwerp.position',
+          })
+          .then((results) => ({ pageNumber, results })),
+      );
+
       pageNumber++;
     }
-    this.behandelingen = treatments;
+    const resultSets = await all(queries);
+    resultSets
+      .sort((a, b) => a.pageNumber - b.pageNumber)
+      .forEach(({ results }) =>
+        results.forEach((result) => this.behandelingen.push(result)),
+      );
   });
 
   /**
@@ -179,8 +227,6 @@ export default class MeetingForm extends Component {
     participants,
     absentees,
   }) {
-    this.secretaris = secretary;
-    this.voorzitter = chairman;
     this.aanwezigenBijStart = participants;
     this.afwezigenBijStart = absentees;
     this.zitting.voorzitter = chairman;
@@ -199,14 +245,5 @@ export default class MeetingForm extends Component {
     if (this.zitting?.gestartOpTijdstip) {
       return this.zitting.gestartOpTijdstip;
     } else return this.zitting.geplandeStart;
-  }
-
-  @action
-  async meetingInfoUpdate(zitting) {
-    const bestuursorgaan = await zitting.get('bestuursorgaan');
-    if (bestuursorgaan != this.bestuursorgaan) {
-      this.bestuursorgaan = bestuursorgaan;
-      this.fetchPossibleParticipants.perform();
-    }
   }
 }
