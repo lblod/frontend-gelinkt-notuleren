@@ -16,11 +16,11 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this.initializeState();
   }
   initializeState() {
-    this.geplandeStart = this.args.zitting.geplandeStart;
-    this.gestartOpTijdstip = this.args.zitting.gestartOpTijdstip;
-    this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
-    this.opLocatie = this.args.zitting.opLocatie;
-    this.bestuursorgaan = this.args.zitting.bestuursorgaan;
+    this.geplandeStart = this.zitting.geplandeStart;
+    this.gestartOpTijdstip = this.zitting.gestartOpTijdstip;
+    this.geeindigdOpTijdstip = this.zitting.geeindigdOpTijdstip;
+    this.opLocatie = this.zitting.opLocatie;
+    this.bestuursorgaan = this.zitting.bestuursorgaan;
   }
 
   get zitting() {
