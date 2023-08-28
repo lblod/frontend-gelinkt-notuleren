@@ -40,6 +40,27 @@
 
 
 
+
+## 5.5.0 (2023-08-23)
+
+#### :rocket: Enhancement
+* [#545](https://github.com/lblod/frontend-gelinkt-notuleren/pull/545) GN-4441: Hide template comments via CSS in all previews ([@x-m-el](https://github.com/x-m-el))
+* [#552](https://github.com/lblod/frontend-gelinkt-notuleren/pull/552) GN-4264: enable template comments in GN ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#554](https://github.com/lblod/frontend-gelinkt-notuleren/pull/554) build(deps-dev): bump eslint-config-prettier from 8.8.0 to 9.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#555](https://github.com/lblod/frontend-gelinkt-notuleren/pull/555) build(deps-dev): bump release-it from 16.1.3 to 16.1.5 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#549](https://github.com/lblod/frontend-gelinkt-notuleren/pull/549) build(deps-dev): bump prettier from 2.8.8 to 3.0.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#550](https://github.com/lblod/frontend-gelinkt-notuleren/pull/550) build(deps-dev): bump sass from 1.64.1 to 1.64.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#548](https://github.com/lblod/frontend-gelinkt-notuleren/pull/548) build(deps-dev): bump eslint-plugin-qunit from 7.3.4 to 8.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#533](https://github.com/lblod/frontend-gelinkt-notuleren/pull/533) build(deps-dev): bump ember-data-resources from 4.0.4 to 5.0.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#540](https://github.com/lblod/frontend-gelinkt-notuleren/pull/540) build(deps): bump ember-resources from 6.2.1 to 6.3.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#546](https://github.com/lblod/frontend-gelinkt-notuleren/pull/546) build(deps-dev): bump @appuniversum/ember-appuniversum from 2.7.0 to 2.11.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 2
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+- [@x-m-el](https://github.com/x-m-el)
+
 ## 5.4.3 (2023-08-02)
 
 #### :house: Internal
