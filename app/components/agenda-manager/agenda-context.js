@@ -22,13 +22,17 @@ export default class AgendaManagerAgendaContextComponent extends Component {
 
   loadItemsTask = task(async () => {
     const agendaItems = [];
-    const pageSize = 10;
+    const pageSize = 100;
 
     const firstPage = await this.store.query('agendapunt', {
       'filter[zitting][:id:]': this.args.zittingId,
       'page[size]': pageSize,
-      include:
-        'vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt',
+      include: [
+        'vorige-agendapunt',
+        'behandeling',
+        'behandeling.document-container.status',
+        'behandeling.vorige-behandeling-van-agendapunt',
+      ].join(','),
     });
     const count = firstPage.meta.count;
     firstPage.forEach((result) => agendaItems.push(result));
@@ -39,8 +43,12 @@ export default class AgendaManagerAgendaContextComponent extends Component {
         'filter[zitting][:id:]': this.args.zittingId,
         'page[size]': pageSize,
         'page[number]': pageNumber,
-        include:
-          'vorige-agendapunt,behandeling.vorige-behandeling-van-agendapunt',
+        include: [
+          'vorige-agendapunt',
+          'behandeling',
+          'behandeling.document-container.status',
+          'behandeling.vorige-behandeling-van-agendapunt',
+        ].join(','),
       });
       pageResults.forEach((result) => agendaItems.push(result));
       pageNumber++;

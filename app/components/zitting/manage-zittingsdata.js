@@ -16,14 +16,16 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this.initializeState();
   }
   initializeState() {
-    this.zitting = this.args.zitting;
-    this.geplandeStart = this.args.zitting.geplandeStart;
-    this.gestartOpTijdstip = this.args.zitting.gestartOpTijdstip;
-    this.geeindigdOpTijdstip = this.args.zitting.geeindigdOpTijdstip;
-    this.opLocatie = this.args.zitting.opLocatie;
-    this.bestuursorgaan = this.args.zitting.bestuursorgaan;
+    this.geplandeStart = this.zitting.geplandeStart;
+    this.gestartOpTijdstip = this.zitting.gestartOpTijdstip;
+    this.geeindigdOpTijdstip = this.zitting.geeindigdOpTijdstip;
+    this.opLocatie = this.zitting.opLocatie;
+    this.bestuursorgaan = this.zitting.bestuursorgaan;
   }
 
+  get zitting() {
+    return this.args.zitting;
+  }
   @action
   async saveZittingsData() {
     this.zitting.geplandeStart = this.geplandeStart;
@@ -34,7 +36,6 @@ export default class ZittingManageZittingsdataComponent extends Component {
 
     await this.zitting.save();
     this.toggleModal();
-    this.args.onChange(this.zitting);
   }
 
   @action

@@ -6,6 +6,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { use } from 'ember-could-get-used-to-this';
 import RelationshipResource from '../helpers/relationship-resource';
+import { trackedFunction } from 'ember-resources/util/function';
 
 /** @typedef {import("../models/mandataris").default} Mandataris  */
 /**
@@ -22,8 +23,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service router;
   @tracked document;
   @tracked editor;
-  @tracked participants = [];
-  @tracked absentees = [];
   @tracked published = false;
   @tracked chairman;
   @tracked secretary;
@@ -53,6 +52,17 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.fetchParticipants.perform();
     this.getStatus.perform();
   }
+  attachmentData = trackedFunction(this, async () => {
+    const container = await this.behandeling.documentContainer;
+    const attachments = await container.attachments;
+    return attachments;
+  });
+  get attachments() {
+    return this.attachmentData.value ?? [];
+  }
+  get behandeling() {
+    return this.args.behandeling;
+  }
 
   get editable() {
     return !(this.published || this.args.readOnly);
@@ -77,6 +87,12 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   get defaultAbsentees() {
     return this.meetingAbsenteeData.value;
   }
+  get participants() {
+    return this.behandeling.sortedParticipants ?? [];
+  }
+  get absentees() {
+    return this.behandeling.sortedAbsentees ?? [];
+  }
 
   get hasParticipants() {
     return this.participants.length;
@@ -99,15 +115,9 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   getStatus = task(async () => {
-    const behandeling = (
-      await this.store.query('behandeling-van-agendapunt', {
-        'filter[:id:]': this.args.behandeling.id,
-        include: 'document-container.status',
-      })
-    ).firstObject;
-
-    if (behandeling) {
-      const status = await behandeling.get('documentContainer.status');
+    if (this.behandeling) {
+      const container = await this.behandeling.documentContainer;
+      const status = await container.status;
       const statusId = status.id;
 
       if (statusId === PUBLISHED_STATUS_ID) {
@@ -121,42 +131,26 @@ export default class BehandelingVanAgendapuntComponent extends Component {
    */
   @action
   async saveParticipants({ chairman, secretary, participants, absentees }) {
-    this.args.behandeling.voorzitter = chairman;
+    this.behandeling.voorzitter = chairman;
     this.chairman = chairman;
-    this.args.behandeling.secretaris = secretary;
+    this.behandeling.secretaris = secretary;
     this.secretary = secretary;
 
-    this.participants = participants;
-    this.args.behandeling.aanwezigen = participants;
+    this.behandeling.aanwezigen = participants;
 
-    this.absentees = absentees;
-    this.args.behandeling.afwezigen = absentees;
+    this.behandeling.afwezigen = absentees;
 
     await this.args.behandeling.save();
   }
 
   fetchParticipants = task(async () => {
-    const participantQuery = {
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[aanwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
-      include: 'is-bestuurlijke-alias-van',
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-    const absenteeQuery = {
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[afwezig-bij-behandeling][:id:]': this.args.behandeling.get('id'),
-      include: 'is-bestuurlijke-alias-van',
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-    this.participants = await this.store.query('mandataris', participantQuery);
-    this.absentees = await this.store.query('mandataris', absenteeQuery);
-    this.chairman = await this.args.behandeling.voorzitter;
-    this.secretary = await this.args.behandeling.secretaris;
+    this.chairman = await this.behandeling.voorzitter;
+    this.secretary = await this.behandeling.secretaris;
   });
 
   toggleOpenbaar = task(async (e) => {
     const openbaar = e.target.checked;
-    this.args.behandeling.openbaar = openbaar;
-    await this.args.behandeling.save();
+    this.behandeling.openbaar = openbaar;
+    await this.behandeling.save();
   });
 }
