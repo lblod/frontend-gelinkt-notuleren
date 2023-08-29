@@ -9,120 +9,176 @@
     <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
   </:returnLink>
   <:actions>
-    <AgendapointMenu @documentContainer={{this.documentContainer}} @editorDocument={{this.editorDocument}} />
-    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
-      {{!-- template-lint-disable require-context-role --}}
-      <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="tertiary" role="menuitem">
-        <AuIcon @icon="copy" @alignment="left"/>
-        {{t "app-chrome.copy-agendapoint"}}
+    <AgendapointMenu
+      @documentContainer={{this.documentContainer}}
+      @editorDocument={{this.editorDocument}}
+    />
+    <AuDropdown
+      @title={{t 'utils.file-options'}}
+      @buttonLabel={{t 'utils.file-options'}}
+      @alignment='right'
+    >
+      {{! template-lint-disable require-context-role }}
+      <AuButton
+        {{on 'click' (perform this.copyAgendapunt)}}
+        @skin='tertiary'
+        role='menuitem'
+      >
+        <AuIcon @icon='copy' @alignment='left' />
+        {{t 'app-chrome.copy-agendapoint'}}
       </AuButton>
-      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
-        <AuIcon @icon="export" @alignment="left"/>
-        {{t "utils.html-export"}}
+      <AuButton {{on 'click' this.download}} @skin='tertiary' role='menuitem'>
+        <AuIcon @icon='export' @alignment='left' />
+        {{t 'utils.html-export'}}
       </AuButton>
-      <AuButton {{on "click" this.toggleDeleteModal}} @skin="tertiary" @alert="true" role="menuitem"
-                                                      @disabled={{this.isNotAllowedToTrash}}>
-        <AuIcon @icon="bin" @alignment="left"/>
-        {{t "utils.delete"}}
+      <AuButton
+        {{on 'click' this.toggleDeleteModal}}
+        @skin='tertiary'
+        @alert='true'
+        role='menuitem'
+        @disabled={{this.isNotAllowedToTrash}}
+      >
+        <AuIcon @icon='bin' @alignment='left' />
+        {{t 'utils.delete'}}
       </AuButton>
     </AuDropdown>
-    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>{{t "utils.save"}}</AuButton>
+    <AuButton
+      {{on 'click' (perform this.saveTask)}}
+      @disabled={{this.save.isRunning}}
+    >{{t 'utils.save'}}</AuButton>
   </:actions>
 </AppChrome>
 
 {{#if this.hasDocumentValidationErrors}}
   <AuModal
-    @title={{t "validation-modal.title"}}
+    @title={{t 'validation-modal.title'}}
     @modalOpen={{true}}
-            @closeModal={{this.closeValidationModal}} as |Modal| >
+    @closeModal={{this.closeValidationModal}}
+    as |Modal|
+  >
     <Modal.Body>
-      <p>{{t "validation-modal.message"}}</p>
+      <p>{{t 'validation-modal.message'}}</p>
     </Modal.Body>
     <Modal.Footer>
-      <AuButton {{on "click" this.closeValidationModal}}>{{t "validation-modal.confirm"}}</AuButton>
+      <AuButton {{on 'click' this.closeValidationModal}}>{{t
+          'validation-modal.confirm'
+        }}</AuButton>
     </Modal.Footer>
   </AuModal>
 {{/if}}
 
 {{#if this.displayDeleteModal}}
   <AuModal
-    @title={{t "delete-modal.title"}}
+    @title={{t 'delete-modal.title'}}
     @modalOpen={{this.displayDeleteModal}}
-            @closeModal={{fn (mut this.displayDeleteModal) false}} as |Modal| >
+    @closeModal={{fn (mut this.displayDeleteModal) false}}
+    as |Modal|
+  >
     <Modal.Body>
-      <p>{{t "delete-modal.restore-message"}}</p>
+      <p>{{t 'delete-modal.restore-message'}}</p>
     </Modal.Body>
     <Modal.Footer>
-      <AuButton {{on "click" this.deleteDocument}}>{{t "delete-modal.confirm"}}</AuButton>
-      <AuButton @skin="secondary" {{on "click" (fn (mut this.displayDeleteModal) false)}}>{{t "delete-modal.cancel"}}</AuButton>
+      <AuButton {{on 'click' this.deleteDocument}}>{{t
+          'delete-modal.confirm'
+        }}</AuButton>
+      <AuButton
+        @skin='secondary'
+        {{on 'click' (fn (mut this.displayDeleteModal) false)}}
+      >{{t 'delete-modal.cancel'}}</AuButton>
     </Modal.Footer>
   </AuModal>
 {{/if}}
 
-<div class="au-c-body-container au-c-body-container--scroll" id="panel-1" role="tabpanel" tabindex="0" aria-labelledby="tab-1">
+<div
+  class='au-c-body-container au-c-body-container--scroll'
+  id='panel-1'
+  role='tabpanel'
+  tabindex='0'
+  aria-labelledby='tab-1'
+>
   <RdfaEditorContainer
     @rdfaEditorInit={{this.handleRdfaEditorInit}}
-    @typeOfWrappingDiv="besluit:BehandelingVanAgendapunt"
+    @typeOfWrappingDiv='besluit:BehandelingVanAgendapunt'
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-    @busyText={{if this.copyAgendapunt.isRunning (t "rdfa-editor-container.making-copy")
-                         (t "rdfa-editor-container.saving")}}
+    @busyText={{if
+      this.copyAgendapunt.isRunning
+      (t 'rdfa-editor-container.making-copy')
+      (t 'rdfa-editor-container.saving')
+    }}
     @schema={{this.schema}}
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
   >
     <:toolbar>
-      <BesluitTypePlugin::ToolbarDropdown @controller={{this.controller}} @options={{this.config.besluitType}}/>
-      <Plugins::Formatting::FormattingToggle @controller={{this.controller}}/>
+      <BesluitTypePlugin::ToolbarDropdown
+        @controller={{this.controller}}
+        @options={{this.config.besluitType}}
+      />
+      <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
-        <ArticleStructurePlugin::ArticleStructureCard
+      <ArticleStructurePlugin::ArticleStructureCard
+        @controller={{this.controller}}
+        @options={{this.config.structures}}
+      />
+      <CitationPlugin::CitationInsert
+        @controller={{this.controller}}
+        @plugin={{this.citationPlugin}}
+        @config={{this.config.citation}}
+      />
+      <RdfaDatePlugin::Insert
+        @controller={{this.controller}}
+        @options={{this.config.date}}
+      />
+      <RoadsignRegulationPlugin::RoadsignRegulationCard
+        @controller={{this.controller}}
+        @options={{this.config.roadsignRegulation}}
+      />
+      <StandardTemplatePlugin::Card @controller={{this.controller}} />
+      {{#if (feature-flag 'regulatoryStatements')}}
+        <EditorPlugins::RegulatoryStatements::SidebarInsert
           @controller={{this.controller}}
-          @options={{this.config.structures}}
         />
-        <CitationPlugin::CitationInsert
-          @controller={{this.controller}}
-          @plugin={{this.citationPlugin}}
-          @config={{this.config.citation}}
-        />
-        <RdfaDatePlugin::Insert
-          @controller={{this.controller}}
-          @options={{this.config.date}}
-        />
-        <RoadsignRegulationPlugin::RoadsignRegulationCard
-          @controller={{this.controller}}
-          @options={{this.config.roadsignRegulation}}/>
-        <StandardTemplatePlugin::Card @controller={{this.controller}}/>
-        {{#if (feature-flag 'regulatoryStatements')}}
-          <EditorPlugins::RegulatoryStatements::SidebarInsert @controller={{this.controller}}/>
-        {{/if}}
-        <TemplateCommentsPlugin::Insert @controller={{this.controller}}/>
+      {{/if}}
+      <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
+      <VariablePlugin::Address::Insert @controller={{this.controller}} />
     </:sidebarCollapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard
         @controller={{this.controller}}
         @options={{this.config.structures}}
       />
-      <DecisionPlugin::DecisionPluginCard @controller={{this.controller}}/>
+      <DecisionPlugin::DecisionPluginCard @controller={{this.controller}} />
       <CitationPlugin::CitationCard
         @controller={{this.controller}}
         @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
-      <ImportSnippetPlugin::Card @controller={{this.controller}}/>
+      <ImportSnippetPlugin::Card @controller={{this.controller}} />
       <RdfaDatePlugin::Card
         @controller={{this.controller}}
-        @options={{this.config.date}}/>
+        @options={{this.config.date}}
+      />
       <VariablePlugin::Codelist::Edit
         @controller={{this.controller}}
-        @options={{this.codelistEditOptions}}/>
+        @options={{this.codelistEditOptions}}
+      />
       <VariablePlugin::Location::Edit
         @controller={{this.controller}}
-        @options={{this.locationEditOptions}}/>
-      <TemplateCommentsPlugin::EditCard @controller={{this.controller}}/>
+        @options={{this.locationEditOptions}}
+      />
+      <VariablePlugin::Address::Edit
+        @controller={{this.controller}}
+        @defaultMunicipality={{this.defaultMunicipality}}
+      />
+      <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
     </:sidebar>
   </RdfaEditorContainer>
 </div>
-<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandeling-van-agendapunten.confirm-leave-without-saving"}}/>
+<ConfirmRouteLeave
+  @enabled={{this.dirty}}
+  @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
+/>

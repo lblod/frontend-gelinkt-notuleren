@@ -1,4 +1,4 @@
-{{page-title (t "regulatory-statement.page-title")}}
+{{page-title (t 'regulatory-statement.page-title')}}
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
@@ -8,69 +8,112 @@
   @dirty={{this.dirty}}
 >
   <:returnLink>
-  <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}} @icon="arrow-left">
+    <AuLink
+      @route='inbox.regulatory-statements'
+      @model={{@meetingId}}
+      @icon='arrow-left'
+    >
       {{t 'inbox.regulatory-statements.return'}}
     </AuLink>
   </:returnLink>
   <:actionsAfterTitle>
-    <AuDropdown @title={{t 'utils.current-version'}} @buttonLabel={{t 'utils.current-version'}} @alignment="left">
-      <p class="au-u-padding-small regulatory-statement-current-version-container-active">
-        <span class="au-u-medium au-u-margin-right-large">{{t 'utils.current-version'}}: </span>
-        <span class="au-u-light">{{human-friendly-date this.editorDocument.updatedOn locale=this.intl.primaryLocale}}</span>
+    <AuDropdown
+      @title={{t 'utils.current-version'}}
+      @buttonLabel={{t 'utils.current-version'}}
+      @alignment='left'
+    >
+      <p
+        class='au-u-padding-small regulatory-statement-current-version-container-active'
+      >
+        <span class='au-u-medium au-u-margin-right-large'>{{t
+            'utils.current-version'
+          }}:
+        </span>
+        <span class='au-u-light'>{{human-friendly-date
+            this.editorDocument.updatedOn
+            locale=this.intl.primaryLocale
+          }}</span>
       </p>
       <AuHr />
       <div
-        class="au-u-flex--column au-u-flex"
+        class='au-u-flex--column au-u-flex'
         {{did-update (perform this.fetchRevisions)}}
         {{did-insert (perform this.fetchRevisions)}}
       >
-        <p class="au-u-muted au-u-medium au-u-padding-tiny au-u-padding-left-small">{{t 'utils.history'}}</p>
+        <p
+          class='au-u-muted au-u-medium au-u-padding-tiny au-u-padding-left-small'
+        >{{t 'utils.history'}}</p>
         {{#each this.revisions as |revision|}}
-          {{!-- template-lint-disable require-context-role --}}
-          <AuLink @route="regulatory-statements.revisions" @skin="secondary" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem" @models={{array this.documentContainer.id revision.id}}>
-            {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
+          {{! template-lint-disable require-context-role }}
+          <AuLink
+            @route='regulatory-statements.revisions'
+            @skin='secondary'
+            class='au-u-padding-tiny au-u-padding-left-small'
+            role='menuitem'
+            @models={{array this.documentContainer.id revision.id}}
+          >
+            {{human-friendly-date
+              revision.updatedOn
+              locale=this.intl.primaryLocale
+            }}
             {{#if revision.status.label}}
               <AuPill @skin='success'>{{revision.status.label}}</AuPill>
             {{/if}}
           </AuLink>
         {{/each}}
-        <AuLink @route="regulatory-statements.edit.history" @model={{this.documentContainer.id}} @skin="link" @icon="clock" class="au-u-padding-tiny au-u-padding-left-small" role="menuitem">
+        <AuLink
+          @route='regulatory-statements.edit.history'
+          @model={{this.documentContainer.id}}
+          @skin='link'
+          @icon='clock'
+          class='au-u-padding-tiny au-u-padding-left-small'
+          role='menuitem'
+        >
           {{t 'utils.full-history'}}
         </AuLink>
       </div>
     </AuDropdown>
   </:actionsAfterTitle>
   <:actions>
-    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
-      {{!-- template-lint-disable require-context-role --}}
-      <AuButton {{on "click" this.download}} @skin="tertiary" role="menuitem">
-        <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.html-export"}}
+    <AuDropdown
+      @title={{t 'utils.file-options'}}
+      @buttonLabel={{t 'utils.file-options'}}
+      @alignment='right'
+    >
+      {{! template-lint-disable require-context-role }}
+      <AuButton {{on 'click' this.download}} @skin='tertiary' role='menuitem'>
+        <AuIcon @icon='export' @alignment='left' />
+        {{t 'utils.html-export'}}
       </AuButton>
     </AuDropdown>
-    <AuButton {{on "click" (perform this.saveTask)}} @disabled={{this.save.isRunning}}>
-      {{t "utils.save"}}
+    <AuButton
+      {{on 'click' (perform this.saveTask)}}
+      @disabled={{this.save.isRunning}}
+    >
+      {{t 'utils.save'}}
     </AuButton>
   </:actions>
 </AppChrome>
 
-<AuBodyContainer vocab="http://data.vlaanderen.be/ns/besluit#"
-  prefix="eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# say:https://say.data.gift/ns/ dct: http://purl.org/dc/terms/ ext:http://mu.semte.ch/vocabularies/ext/">
+<AuBodyContainer
+  vocab='http://data.vlaanderen.be/ns/besluit#'
+  prefix='eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# say:https://say.data.gift/ns/ dct: http://purl.org/dc/terms/ ext:http://mu.semte.ch/vocabularies/ext/'
+>
   <RdfaEditorContainer
     @rdfaEditorInit={{this.handleRdfaEditorInit}}
-    @typeOfWrappingDiv="lblodgn:ReglementaireBijlage"
+    @typeOfWrappingDiv='lblodgn:ReglementaireBijlage'
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning}}
-    @busyText={{t "rdfa-editor-container.saving"}}
+    @busyText={{t 'rdfa-editor-container.saving'}}
     @schema={{this.schema}}
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
   >
     <:toolbar>
-      <Plugins::Formatting::FormattingToggle @controller={{this.controller}}/>
-      <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}}/>
+      <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
+      <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
       <ArticleStructurePlugin::ArticleStructureCard
@@ -86,8 +129,9 @@
         @controller={{this.controller}}
         @options={{this.config.date}}
       />
-      <StandardTemplatePlugin::Card @controller={{this.controller}}/>
-      <TemplateCommentsPlugin::Insert @controller={{this.controller}}/>
+      <StandardTemplatePlugin::Card @controller={{this.controller}} />
+      <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
+      <VariablePlugin::Address::Insert @controller={{this.controller}} />
     </:sidebarCollapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard
@@ -101,16 +145,26 @@
       />
       <RdfaDatePlugin::Card
         @controller={{this.controller}}
-        @options={{this.config.date}}/>
+        @options={{this.config.date}}
+      />
       <VariablePlugin::Codelist::Edit
         @controller={{this.controller}}
-        @options={{this.codelistEditOptions}}/>
+        @options={{this.codelistEditOptions}}
+      />
       <VariablePlugin::Location::Edit
         @controller={{this.controller}}
-        @options={{this.locationEditOptions}}/>
-      <TemplateCommentsPlugin::EditCard @controller={{this.controller}}/>
+        @options={{this.locationEditOptions}}
+      />
+      <VariablePlugin::Address::Edit
+        @controller={{this.controller}}
+        @defaultMunicipality={{this.defaultMunicipality}}
+      />
+      <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
     </:sidebar>
   </RdfaEditorContainer>
 </AuBodyContainer>
-<ConfirmRouteLeave @enabled={{this.dirty}} @message={{t "behandeling-van-agendapunten.confirm-leave-without-saving"}}/>
+<ConfirmRouteLeave
+  @enabled={{this.dirty}}
+  @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
+/>
 {{outlet}}

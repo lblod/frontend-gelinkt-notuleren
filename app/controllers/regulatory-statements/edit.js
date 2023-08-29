@@ -5,7 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { service } from '@ember/service';
-
+import { getOwner } from '@ember/application';
 import {
   em,
   strikethrough,
@@ -60,6 +60,8 @@ import {
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
+  address,
+  addressView,
   codelist,
   codelistView,
   number,
@@ -81,16 +83,17 @@ import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
 
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
-import { extractOutline } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/utils';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
+  @service currentSession;
   @tracked controller;
   @tracked _editorDocument;
   @tracked revisions;
@@ -117,6 +120,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       date: date(this.config.date),
       codelist,
       location,
+      address,
       number,
       text_variable,
       ...STRUCTURE_NODES,
@@ -152,6 +156,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         ),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
+        address: addressView(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
         location: locationView(controller),
@@ -174,6 +179,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         },
       ),
       linkPasteHandler(this.schema.nodes.link),
+      emberApplication({ application: getOwner(this) }),
     ];
   }
 
@@ -258,46 +264,13 @@ export default class RegulatoryStatementsRoute extends Controller {
       nonZonalLocationCodelistUri: ENV.nonZonalLocationCodelistUri,
     };
   }
+  get defaultMunicipality() {
+    return this.currentSession.group.naam;
+  }
   @action
   download() {
     this.editorDocument.content = this.controller.htmlContent;
     generateExportFromEditorDocument(this.editorDocument);
-  }
-
-  tableOfContentsRange() {
-    let result;
-    this.controller.mainEditorState.doc.descendants((node, pos) => {
-      if (node.type === this.controller.schema.nodes['table_of_contents']) {
-        result = { from: pos };
-      }
-      return !result;
-    });
-
-    return result;
-  }
-
-  outline() {
-    return {
-      entries: extractOutline({
-        node: this.controller.mainEditorState.doc,
-        pos: -1,
-        config: this.config.tableOfContents,
-      }),
-    };
-  }
-
-  createTableOfContentHTML() {
-    const tocRange = this.tableOfContentsRange();
-    if (tocRange) {
-      const { from } = tocRange;
-      this.controller.withTransaction((tr) => {
-        tr.setNodeMarkup(from, null, {
-          ...this.config.tableOfContents,
-          ...this.outline(),
-        });
-        return tr;
-      });
-    }
   }
 
   saveTask = task(async () => {
@@ -305,7 +278,6 @@ export default class RegulatoryStatementsRoute extends Controller {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
-      this.createTableOfContentHTML();
       const html = this.controller.htmlContent;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
@@ -339,6 +311,5 @@ export default class RegulatoryStatementsRoute extends Controller {
   handleRdfaEditorInit(controller) {
     controller.initialize(this.editorDocument.content);
     this.controller = controller;
-    this.createTableOfContentHTML();
   }
 }
