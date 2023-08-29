@@ -63,17 +63,15 @@ export default class MeetingsPublishAgendaController extends Controller {
   initializeAgendas = task(async () => {
     this.ontwerpAgenda = await this.initializeAgenda.perform('gepland');
     this.aanvullendeAgenda = await this.initializeAgenda.perform('aanvullend');
-    this.spoedeisendeAgenda = await this.initializeAgenda.perform(
-      'spoedeisend',
-    );
+    this.spoedeisendeAgenda =
+      await this.initializeAgenda.perform('spoedeisend');
   });
 
   reloadAgendas = task(async () => {
     this.ontwerpAgenda = await this.initializeAgenda.perform('gepland');
     this.aanvullendeAgenda = await this.initializeAgenda.perform('aanvullend');
-    this.spoedeisendeAgenda = await this.initializeAgenda.perform(
-      'spoedeisend',
-    );
+    this.spoedeisendeAgenda =
+      await this.initializeAgenda.perform('spoedeisend');
   });
 
   /**

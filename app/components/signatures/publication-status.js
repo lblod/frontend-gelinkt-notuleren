@@ -25,9 +25,8 @@ export default class SignaturesPublicationStatus extends Component {
     } else {
       this.signedResources = [];
     }
-    this.publishedResource = await this.args.versionedResource.get(
-      'publishedResource',
-    );
+    this.publishedResource =
+      await this.args.versionedResource.get('publishedResource');
     this.ready = true;
   }
   get publicationStatus() {
