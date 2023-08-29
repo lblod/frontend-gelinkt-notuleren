@@ -1,4 +1,7 @@
-<div class="au-c-app-chrome">
+<div class="au-c-app-chrome"
+  {{did-insert (perform this.fetchParticipants) this.zitting}}
+  {{did-insert (perform this.fetchTreatments) this.zitting}}
+>
   <AuToolbar @size="small" class="au-u-padding-bottom-none" as |Group|>
     <Group>
       <AuLink @route="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
@@ -116,12 +119,11 @@
       </AuHeading>
       <Zitting::ManageZittingsdata
         @zitting={{@zitting}}
-        @onChange={{this.meetingInfoUpdate}}
         @readOnly={{this.readOnly}}
       />
 
       {{#if this.bestuursorgaan}}
-        {{#if this.loadData.isRunning}}
+        {{#if this.fetchParticipants.isRunning}}
           <AuLoader @padding="small" />
           <AuHelpText>{{t "participation-list.loading-title"}}</AuHelpText>
         {{else}}
@@ -186,25 +188,25 @@
               {{t "meeting-form.fifth-section-not-filled-warning"}}
             </span>
           </AuHeading>
+
           {{#if this.fetchTreatments.isRunning}}
             <AuLoader @padding="small" />
             <AuHelpText>{{t "participation-list.loading-loader"}}</AuHelpText>
-          {{/if}}
-
-          {{#if this.fetchTreatments.lastSuccessful}}
+          {{else}}
             <ol class="au-c-meeting-numbered-list">
-            {{#each this.behandelingen as |behandeling|}}
-              <li>
-                <BehandelingVanAgendapunt
-                  @possibleParticipants={{this.possibleParticipants}}
-                  @behandeling={{behandeling}}
-                  @readOnly={{this.readOnly}}
-                  @bestuursorgaan={{this.bestuursorgaan}}
-                  @meeting={{this.zitting}}
-                />
-              </li>
-            {{/each}}
+              {{#each this.behandelingen as |behandeling|}}
+                <li>
+                  <BehandelingVanAgendapunt
+                    @possibleParticipants={{this.possibleParticipants}}
+                    @behandeling={{behandeling}}
+                    @readOnly={{this.readOnly}}
+                    @bestuursorgaan={{this.bestuursorgaan}}
+                    @meeting={{this.zitting}}
+                  />
+                </li>
+              {{/each}}
             </ol>
+          {{/if}}
           {{/if}}
           {{!-- End of meeting --}}
           <AuHeading id="sectionSix" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
@@ -222,7 +224,6 @@
               {{t "behandeling-van-agendapunten.edit-document"}}
             </AuLink>
           {{/unless}}
-        {{/if}}
       {{else}}
         <AuHelpText @size="large" @skin="secondary">
           {{t "meeting-form.bestuursorgan-not-selected-warning"}}
