@@ -31,6 +31,8 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
+  address,
+  addressView,
   codelist,
   codelistView,
   number,
@@ -96,6 +98,7 @@ export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
   @service documentService;
+  @service currentSession;
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
@@ -123,6 +126,7 @@ export default class AgendapointsEditController extends Controller {
       templateComment,
       text_variable,
       number,
+      address,
       location,
       codelist,
       ...besluitNodes,
@@ -194,6 +198,9 @@ export default class AgendapointsEditController extends Controller {
       structures: structureSpecs,
     };
   }
+  get defaultMunicipality() {
+    return this.currentSession.group.naam;
+  }
 
   get codelistEditOptions() {
     return {
@@ -215,6 +222,7 @@ export default class AgendapointsEditController extends Controller {
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
+        address: addressView(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
         text_variable: textVariableView(controller),
