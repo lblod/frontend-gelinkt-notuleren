@@ -41,6 +41,24 @@
 
 
 
+
+## 5.6.0 (2023-08-29)
+
+#### :rocket: Enhancement
+* [#563](https://github.com/lblod/frontend-gelinkt-notuleren/pull/563) feat(deps): update editor and plugins ([@abeforgit](https://github.com/abeforgit))
+* [#558](https://github.com/lblod/frontend-gelinkt-notuleren/pull/558) GN-4472: Optimize loading of meeting page ([@abeforgit](https://github.com/abeforgit))
+
+#### :house: Internal
+* [#562](https://github.com/lblod/frontend-gelinkt-notuleren/pull/562) build(deps-dev): bump ember-concurrency from 2.3.7 to 3.1.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#557](https://github.com/lblod/frontend-gelinkt-notuleren/pull/557) build(deps-dev): bump ember-template-lint from 5.10.1 to 5.11.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#561](https://github.com/lblod/frontend-gelinkt-notuleren/pull/561) build(deps-dev): bump eslint-plugin-ember from 11.9.0 to 11.11.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#560](https://github.com/lblod/frontend-gelinkt-notuleren/pull/560) build(deps-dev): bump prettier from 3.0.1 to 3.0.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#556](https://github.com/lblod/frontend-gelinkt-notuleren/pull/556) build(deps): bump ember-resources from 6.3.1 to 6.4.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- Arne Bertrand ([@abeforgit](https://github.com/abeforgit))
+
+
 ## 5.5.0 (2023-08-23)
 
 #### :rocket: Enhancement
