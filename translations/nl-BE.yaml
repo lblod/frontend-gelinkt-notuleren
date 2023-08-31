@@ -81,6 +81,7 @@ behandeling-van-agendapunten:
   voting-title: "Stemming"
   content-title: "Inhoud"
   needs-participants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
+  cannot-edit-participants: Aanwezigen zijn niet aanpasbaar als er al een stemming plaatsvond.
   edit-document: "Bewerk document"
 
 contact:

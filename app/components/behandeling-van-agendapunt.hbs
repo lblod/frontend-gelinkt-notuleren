@@ -65,7 +65,8 @@
           @onSave={{this.saveParticipants}}
           @meeting={{@meeting}}
           @modalTitle={{t "behandeling-van-agendapunten.participation-list-button"}}
-          @readOnly={{not this.editable}}
+          @readOnly={{or (not this.editable) (not this.canEditParticipants)}}
+          @readOnlyText={{unless this.canEditParticipants (t "behandeling-van-agendapunten.cannot-edit-participants")}}
   />
 {{/if}}
 

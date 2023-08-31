@@ -81,6 +81,7 @@ behandeling-van-agendapunten:
   voting-title: "Voting"
   content-title: "Content"
   needs-participants: Please configure the participants to this agenda-item before adding a voting.
+  cannot-edit-participants: Cannot configure participants if votings exist for this agenda item.
   edit-document: "Edit document"
 
 contact:

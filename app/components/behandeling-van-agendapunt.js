@@ -68,6 +68,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     return !(this.published || this.args.readOnly);
   }
 
+  get canEditParticipants() {
+    return this.behandeling.stemmingen.length === 0;
+  }
+
   get documentContainer() {
     return this.args.behandeling.documentContainer;
   }
