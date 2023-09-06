@@ -49,6 +49,18 @@
     {{@modalTitle}}
   </AuButton>
 {{/unless}}
+{{#if (and @readOnly @readOnlyText)}}
+  <AuButton
+      @width="block"
+      @skin="secondary"
+      @icon="cross"
+      @iconAlignment="left"
+      class="au-u-margin-top-small"
+      @disabled={{true}}
+    >
+      {{@readOnlyText}}
+    </AuButton>
+{{/if}}
 
 <ParticipationList::Modal
   @chairman={{this.defaultedChairman}}
