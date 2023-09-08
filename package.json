@@ -117,7 +117,7 @@
     "last 2 Edge version"
   ],
   "volta": {
-    "node": "18.16.0"
+    "node": "18.17.1"
   },
   "dependencies": {
     "@curvenote/prosemirror-utils": "^1.0.5",
