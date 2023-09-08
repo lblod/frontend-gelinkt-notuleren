@@ -42,6 +42,21 @@
 
 
 
+
+## 5.6.1 (2023-09-08)
+
+#### :bug: Bug Fix
+* [#564](https://github.com/lblod/frontend-gelinkt-notuleren/pull/564) GN-4430: Don't allow editing agendapoint participants if votings are present ([@x-m-el](https://github.com/x-m-el))
+
+#### :house: Internal
+* [#570](https://github.com/lblod/frontend-gelinkt-notuleren/pull/570) build(deps-dev): bump ember-truth-helpers from 3.1.1 to 4.0.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#569](https://github.com/lblod/frontend-gelinkt-notuleren/pull/569) build(deps-dev): bump @appuniversum/ember-appuniversum from 2.11.0 to 2.12.0 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#565](https://github.com/lblod/frontend-gelinkt-notuleren/pull/565) build(deps-dev): bump sass from 1.64.2 to 1.66.1 ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#567](https://github.com/lblod/frontend-gelinkt-notuleren/pull/567) build(deps-dev): bump webpack from 5.88.0 to 5.88.2 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 1
+- [@x-m-el](https://github.com/x-m-el)
+
 ## 5.6.0 (2023-08-29)
 
 #### :rocket: Enhancement
