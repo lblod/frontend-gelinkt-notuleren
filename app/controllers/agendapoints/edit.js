@@ -93,6 +93,10 @@ import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { validation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/validation';
 import { atLeastOneArticleContainer } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/decision-plugin/utils/validation-rules';
+import {
+  GEMEENTE,
+  OCMW,
+} from '../../utils/bestuurseenheid-classificatie-codes';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -198,8 +202,14 @@ export default class AgendapointsEditController extends Controller {
       structures: structureSpecs,
     };
   }
+
   get defaultMunicipality() {
-    return this.currentSession.group.naam;
+    const classificatie = this.currentSession.classificatie;
+    if (classificatie.uri === GEMEENTE || classificatie.uri === OCMW) {
+      return this.currentSession.group.naam;
+    } else {
+      return null;
+    }
   }
 
   get codelistEditOptions() {

@@ -9,6 +9,7 @@ export default class CurrentSessionService extends Service {
   @tracked user;
   @tracked group;
   @tracked roles = [];
+  @tracked classificatie;
 
   get canRead() {
     return this.hasRole('GelinktNotuleren-lezer');
@@ -39,6 +40,7 @@ export default class CurrentSessionService extends Service {
       this.group = await this.store.findRecord('bestuurseenheid', groupId, {
         include: 'classificatie',
       });
+      this.classificatie = await this.group.classificatie;
       this.roles = this.session.data.authenticated.data.attributes.roles;
     }
   }

@@ -89,6 +89,10 @@ import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/d
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import {
+  GEMEENTE,
+  OCMW,
+} from '../../utils/bestuurseenheid-classificatie-codes';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -264,9 +268,17 @@ export default class RegulatoryStatementsRoute extends Controller {
       nonZonalLocationCodelistUri: ENV.nonZonalLocationCodelistUri,
     };
   }
+
   get defaultMunicipality() {
-    return this.currentSession.group.naam;
+    const classificatie = this.currentSession.classificatie;
+
+    if (classificatie.uri === GEMEENTE || classificatie.uri === OCMW) {
+      return this.currentSession.group.naam;
+    } else {
+      return null;
+    }
   }
+
   @action
   download() {
     this.editorDocument.content = this.controller.htmlContent;
