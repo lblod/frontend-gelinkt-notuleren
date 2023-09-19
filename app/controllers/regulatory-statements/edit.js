@@ -53,10 +53,6 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
-import {
-  date,
-  dateView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
@@ -64,6 +60,8 @@ import {
   addressView,
   codelist,
   codelistView,
+  date,
+  dateView,
   number,
   numberView,
   location,
@@ -200,10 +198,6 @@ export default class RegulatoryStatementsRoute extends Controller {
         },
       ],
       date: {
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
         formats: [
           {
             label: this.intl.t('date-format.short-date'),

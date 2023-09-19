@@ -129,7 +129,7 @@
         @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
-      <RdfaDatePlugin::Insert
+      <VariablePlugin::Date::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
       />
@@ -158,7 +158,7 @@
         @config={{this.config.citation}}
       />
       <ImportSnippetPlugin::Card @controller={{this.controller}} />
-      <RdfaDatePlugin::Card
+      <VariablePlugin::Date::Edit
         @controller={{this.controller}}
         @options={{this.config.date}}
       />
