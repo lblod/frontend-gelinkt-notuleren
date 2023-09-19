@@ -9,6 +9,7 @@ module.exports = function (environment) {
     regulatoryStatementEndpoint: '{{REGULATORY_STATEMENT_ENDPOINT}}',
     regulatoryStatementFileEndpoint: '{{REGULATORY_STATEMENT_FILE_ENDPOINT}}',
     mowRegistryEndpoint: '{{MOW_REGISTRY_ENDPOINT}}',
+    publicatieEndpoint: '{{PUBLICATIE_ENDPOINT}}',
     roadsignImageBaseUrl: '{{ROADSIGN_IMAGE_BASE_URL}}',
     fallbackCodelistEndpoint: '{{MOW_REGISTRY_ENDPOINT}}',
     zonalLocationCodelistUri: '{{ZONAL_LOCATION_CODELIST_URI}}',
@@ -84,6 +85,8 @@ module.exports = function (environment) {
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
     ENV.mowRegistryEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
+    ENV.publicatieEndpoint =
+      'https://publicatie.dev.gelinkt-notuleren.lblod.info/sparql';
     ENV.roadsignImageBaseUrl = 'https://register.mobiliteit.vlaanderen.be/';
     ENV.fallbackCodelistEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
     ENV.zonalLocationCodelistUri =

@@ -226,6 +226,8 @@ export default class RegulatoryStatementsRoute extends Controller {
           return new Set([schema.nodes.doc]);
         },
         endpoint: '/codex/sparql',
+        decisionsEndpoint: ENV.publicatieEndpoint,
+        defaultDecisionsGovernmentName: this.defaultMunicipality,
       },
       link: {
         interactive: true,

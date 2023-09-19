@@ -188,6 +188,8 @@ export default class AgendapointsEditController extends Controller {
           return new Set([schema.nodes.motivering]);
         },
         endpoint: '/codex/sparql',
+        decisionsEndpoint: ENV.publicatieEndpoint,
+        defaultDecisionsGovernmentName: this.defaultMunicipality,
       },
       link: {
         interactive: true,
