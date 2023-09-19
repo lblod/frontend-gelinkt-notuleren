@@ -188,6 +188,9 @@ export default class AgendapointsEditController extends Controller {
           return new Set([schema.nodes.motivering]);
         },
         endpoint: '/codex/sparql',
+        decisionsEndpoint:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/sparql',
+        defaultDecisionsGovernmentName: this.defaultMunicipality,
       },
       link: {
         interactive: true,
