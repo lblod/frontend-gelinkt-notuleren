@@ -33,6 +33,8 @@ import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/
 import {
   address,
   addressView,
+  date,
+  dateView,
   codelist,
   codelistView,
   number,
@@ -53,10 +55,6 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
-import {
-  date,
-  dateView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
 
 import {
   createInvisiblesPlugin,
@@ -162,10 +160,6 @@ export default class AgendapointsEditController extends Controller {
   get config() {
     return {
       date: {
-        placeholder: {
-          insertDate: this.intl.t('date-plugin.insert.date'),
-          insertDateTime: this.intl.t('date-plugin.insert.datetime'),
-        },
         formats: [
           {
             label: this.intl.t('date-format.short-date'),
