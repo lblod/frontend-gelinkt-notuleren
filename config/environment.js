@@ -86,7 +86,7 @@ module.exports = function (environment) {
     ENV.featureFlags['prosemirror-dev-tools'] = true;
     ENV.mowRegistryEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
     ENV.publicatieEndpoint =
-      'https://publicatie.gelinkt-notuleren.lblod.info/sparql';
+      'https://publicatie.dev.gelinkt-notuleren.lblod.info/sparql';
     ENV.roadsignImageBaseUrl = 'https://register.mobiliteit.vlaanderen.be/';
     ENV.fallbackCodelistEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
     ENV.zonalLocationCodelistUri =
