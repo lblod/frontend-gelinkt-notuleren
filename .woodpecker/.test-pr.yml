@@ -13,7 +13,6 @@ steps:
     group: lint
     commands:
       - ember dependency-lint
-    failure: ignore
   test:
     image: danlynn/ember-cli:4.8.0
     commands:
