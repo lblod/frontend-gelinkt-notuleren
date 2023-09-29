@@ -1,12 +1,14 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { isBlank } from '../utils/strings';
+import { restartableTask, timeout } from 'ember-concurrency';
 
 export default class EditorDocumentTitleComponent extends Component {
   @tracked active = false;
   @tracked error = false;
   @tracked _title;
-  @tracked showSaved = false;
+
   constructor() {
     super(...arguments);
     this.active = this.args.editActive;
@@ -20,11 +22,16 @@ export default class EditorDocumentTitleComponent extends Component {
     }
   }
 
-  get titleModified() {
+  get isTitleModified() {
     if (!this._title) {
       return false;
     }
     return this.args.title !== this._title;
+  }
+
+  get isInvalidTitle() {
+    // do not allow empty titles
+    return isBlank(this.title);
   }
 
   @action
@@ -40,18 +47,30 @@ export default class EditorDocumentTitleComponent extends Component {
   @action
   submit(event) {
     event.preventDefault();
+    if (this.isInvalidTitle || !this.isTitleModified) {
+      this.cancel();
+      return;
+    }
     this.args.onSubmit?.(this.title);
-    this.disabledEdit();
-    this.showSaved = true;
-    setTimeout(() => (this.showSaved = false), 30000);
+    this.disableEdit();
+    this.showIsSavedTask.perform();
     return false;
   }
 
+  showIsSavedTask = restartableTask(async () => {
+    await timeout(3000);
+  });
+
   @action
-  cancel(event) {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      this._title = undefined;
-      this.disabledEdit();
+  cancel() {
+    this._title = undefined;
+    this.disableEdit();
+  }
+
+  @action
+  cancelOnEscape(keyEvent) {
+    if (keyEvent.key === 'Escape') {
+      this.cancel();
     }
   }
 
@@ -59,6 +78,7 @@ export default class EditorDocumentTitleComponent extends Component {
   // the cancel event + submit which cause a bug in prod environments.
   @action
   enableEdit() {
+    this.showIsSavedTask.cancelAll();
     if (this.active) {
       return;
     }
@@ -66,15 +86,11 @@ export default class EditorDocumentTitleComponent extends Component {
   }
 
   @action
-  disabledEdit() {
+  disableEdit() {
     if (!this.active) {
       return;
     }
-    if (!this.title) {
-      this.error = true;
-    } else {
-      this.active = false;
-    }
+    this.active = false;
   }
 
   @action
