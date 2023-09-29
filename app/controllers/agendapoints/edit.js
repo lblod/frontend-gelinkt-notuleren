@@ -101,6 +101,7 @@ export default class AgendapointsEditController extends Controller {
   @service router;
   @service documentService;
   @service currentSession;
+
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;

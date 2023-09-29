@@ -15,7 +15,6 @@ export default class DocumentCreatorComponent extends Component {
   @tracked errorSaving;
 
   @service store;
-  @service standardTemplatePlugin;
   @service currentSession;
   @service documentService;
 
