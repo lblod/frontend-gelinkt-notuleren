@@ -159,6 +159,7 @@ export default class AgendapointsEditController extends Controller {
   });
 
   get config() {
+    const classificatie = this.currentSession.classificatie;
     return {
       date: {
         formats: [
@@ -195,6 +196,7 @@ export default class AgendapointsEditController extends Controller {
       },
       besluitType: {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
+        classificatieUri: classificatie.uri,
       },
       structures: structureSpecs,
     };

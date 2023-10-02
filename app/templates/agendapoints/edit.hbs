@@ -115,6 +115,7 @@
     <:toolbar>
       <BesluitTypePlugin::ToolbarDropdown
         @controller={{this.controller}}
+        @classificatieUri={{this.config.classificatieUri}}
         @options={{this.config.besluitType}}
       />
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
