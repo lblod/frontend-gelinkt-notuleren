@@ -21,9 +21,7 @@ export default class StandardTemplateService extends Service {
   });
 
   async loadTemplates() {
-    const templates = await this.store.query('template', {
-      fields: { templates: 'title,contexts,matches,disabled-in-contexts' },
-    });
+    const templates = await this.store.findAll('template');
     this.templates = templates.filter(
       (template) => !BLACKLISTED_TEMPLATES.has(template.title),
     );
