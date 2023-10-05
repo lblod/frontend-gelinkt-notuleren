@@ -98,7 +98,7 @@
 >
   <RdfaEditorContainer
     @rdfaEditorInit={{this.handleRdfaEditorInit}}
-    @typeOfWrappingDiv='besluit:BehandelingVanAgendapunt'
+    @typeOfWrappingDiv='http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt'
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
