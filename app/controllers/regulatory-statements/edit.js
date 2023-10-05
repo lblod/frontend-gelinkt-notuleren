@@ -268,7 +268,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   get defaultMunicipality() {
     const classificatie = this.currentSession.classificatie;
 
-    if (classificatie.uri === GEMEENTE || classificatie.uri === OCMW) {
+    if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
       return this.currentSession.group.naam;
     } else {
       return null;
