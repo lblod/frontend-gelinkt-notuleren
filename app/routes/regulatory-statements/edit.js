@@ -6,6 +6,7 @@ export default class RegulatoryStatementsEditRoute extends Route {
   @service currentSession;
   @service store;
   @service router;
+  @service standardTemplate;
 
   beforeModel(transition) {
     if (!this.currentSession.canWrite) {
@@ -21,10 +22,13 @@ export default class RegulatoryStatementsEditRoute extends Route {
       params.id,
       { include: 'status' },
     );
+    const standardTemplates =
+      await this.standardTemplate.fetchTemplates.perform();
     const currentVersion = await container.get('currentVersion');
     return RSVP.hash({
       documentContainer: container,
       editorDocument: currentVersion,
+      standardTemplates,
     });
   }
   setupController(controller, model) {
