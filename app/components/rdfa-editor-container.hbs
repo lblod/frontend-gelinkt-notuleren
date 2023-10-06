@@ -24,7 +24,7 @@
     </div>
   </AuBodyContainer>
 {{else}}
-  <AuBodyContainer vocab="{{this.vocab}}" {{did-insert this.setPrefix}}
+  <AuBodyContainer vocab="{{this.vocab}}" {{this.setUpPrefixAttr}}
        typeof="{{@typeOfWrappingDiv}}" property="{{@property}}" resource="#">
       {{#if this.ready}}
         <EditorContainer
