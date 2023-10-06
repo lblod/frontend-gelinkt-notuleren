@@ -115,6 +115,7 @@
     <:toolbar>
       <BesluitTypePlugin::ToolbarDropdown
         @controller={{this.controller}}
+        @classificatieUri={{this.config.classificatieUri}}
         @options={{this.config.besluitType}}
       />
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
@@ -137,7 +138,10 @@
         @controller={{this.controller}}
         @options={{this.config.roadsignRegulation}}
       />
-      <StandardTemplatePlugin::Card @controller={{this.controller}} />
+      <StandardTemplatePlugin::Card
+        @controller={{this.controller}}
+        @templates={{this.model.standardTemplates}}
+      />
       {{#if (feature-flag 'regulatoryStatements')}}
         <EditorPlugins::RegulatoryStatements::SidebarInsert
           @controller={{this.controller}}
