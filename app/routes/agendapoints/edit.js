@@ -4,6 +4,7 @@ import { service } from '@ember/service';
 export default class AgendapointsEditRoute extends Route {
   @service currentSession;
   @service router;
+  @service standardTemplate;
 
   beforeModel(transition) {
     if (!this.currentSession.canWrite) {
@@ -16,10 +17,13 @@ export default class AgendapointsEditRoute extends Route {
   async model() {
     const { documentContainer, returnToMeeting } =
       this.modelFor('agendapoints');
+    const standardTemplates =
+      await this.standardTemplate.fetchTemplates.perform();
     return {
       documentContainer,
       editorDocument: await documentContainer.get('currentVersion'),
       returnToMeeting,
+      standardTemplates,
     };
   }
 

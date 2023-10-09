@@ -129,7 +129,10 @@
         @controller={{this.controller}}
         @options={{this.config.date}}
       />
-      <StandardTemplatePlugin::Card @controller={{this.controller}} />
+      <StandardTemplatePlugin::Card
+        @controller={{this.controller}}
+        @templates={{this.model.standardTemplates}}
+      />
       <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
       <VariablePlugin::Address::Insert @controller={{this.controller}} />
     </:sidebarCollapsible>

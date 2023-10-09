@@ -101,6 +101,7 @@ export default class AgendapointsEditController extends Controller {
   @service router;
   @service documentService;
   @service currentSession;
+
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
   @tracked _editorDocument;
@@ -158,6 +159,7 @@ export default class AgendapointsEditController extends Controller {
   });
 
   get config() {
+    const classificatie = this.currentSession.classificatie;
     return {
       date: {
         formats: [
@@ -194,6 +196,7 @@ export default class AgendapointsEditController extends Controller {
       },
       besluitType: {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
+        classificatieUri: classificatie?.uri,
       },
       structures: structureSpecs,
     };
@@ -201,7 +204,7 @@ export default class AgendapointsEditController extends Controller {
 
   get defaultMunicipality() {
     const classificatie = this.currentSession.classificatie;
-    if (classificatie.uri === GEMEENTE || classificatie.uri === OCMW) {
+    if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
       return this.currentSession.group.naam;
     } else {
       return null;
