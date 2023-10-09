@@ -36,7 +36,7 @@
     "@changesets/cli": "^2.26.2",
     "@ember/optional-features": "^2.0.0",
     "@ember/render-modifiers": "^2.1.0",
-    "@ember/test-helpers": "^2.8.1",
+    "@ember/test-helpers": "^2.9.4",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@lblod/ember-acmidm-login": "^2.0.0-beta.1",
