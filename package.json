@@ -105,7 +105,7 @@
     "release-it": "^16.1.5",
     "sass": "^1.66.1",
     "tracked-built-ins": "^3.1.1",
-    "uuid": "^9.0.0",
+    "uuid": "^9.0.1",
     "webpack": "^5.88.2"
   },
   "overrides": {
