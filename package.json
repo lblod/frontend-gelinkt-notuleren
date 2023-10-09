@@ -79,7 +79,7 @@
     "ember-modifier": "^3.2.7",
     "ember-page-title": "^8.0.0",
     "ember-plausible": "^0.2.0",
-    "ember-power-select": "^6.0.1",
+    "ember-power-select": "^7.1.2",
     "ember-promise-helpers": "^2.0.0",
     "ember-qunit": "^6.0.0",
     "ember-resolver": "^10.1.1",
