@@ -6,11 +6,30 @@ import applyDevTools from 'prosemirror-dev-tools';
 import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
 import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
 import { chromeHacksPlugin } from '@lblod/ember-rdfa-editor/plugins/chrome-hacks-plugin';
+import { modifier } from 'ember-modifier';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
   @tracked controller;
   @tracked ready = false;
+
+  /**
+   * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
+   * see https://github.com/emberjs/ember.js/issues/19369
+   */
+  setUpPrefixAttr = modifier(
+    (element) => {
+      element.setAttribute(
+        'prefix',
+        this.prefixToAttrString(this.documentContext.prefix),
+      );
+      this.ready = true;
+      return () => {
+        this.ready = false;
+      };
+    },
+    { eager: false },
+  );
 
   get plugins() {
     const plugins = this.args.plugins || [];
@@ -78,19 +97,6 @@ export default class RdfaEditorContainerComponent extends Component {
 
   get vocab() {
     return this.documentContext['vocab'];
-  }
-
-  /**
-   * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
-   * see https://github.com/emberjs/ember.js/issues/19369
-   */
-  @action
-  setPrefix(element) {
-    element.setAttribute(
-      'prefix',
-      this.prefixToAttrString(this.documentContext.prefix),
-    );
-    this.ready = true;
   }
 
   @action
