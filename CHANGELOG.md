@@ -1,5 +1,24 @@
 # frontend-gelinkt-notuleren
 
+## 5.8.0
+
+### Minor Changes
+
+- [#581](https://github.com/lblod/frontend-gelinkt-notuleren/pull/581) [`229897a8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/229897a805943e3df4c3da7fa4529a8df8809890) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4528: Fix issues reported by `dependency-lint`, require `dependency-lint` CI job to pass
+
+- [#582](https://github.com/lblod/frontend-gelinkt-notuleren/pull/582) [`7492c976`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7492c9765f11c402843bfd47198c2ccef96e711a) Thanks [@x-m-el](https://github.com/x-m-el)! - - automatically save the document title if clicking outside of the title input box
+  - Do not allow empty document titles
+  - saving a document will also save its title
+  - the "saved" pill will only show up if something is actually saved
+
+### Patch Changes
+
+- [#585](https://github.com/lblod/frontend-gelinkt-notuleren/pull/585) [`e41a0233`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e41a0233b75b2363c7474e539264403c3b350959) Thanks [@x-m-el](https://github.com/x-m-el)! - Use the say-content style for any treatment content, like rendering sub/superscripts correctly
+
+- [#587](https://github.com/lblod/frontend-gelinkt-notuleren/pull/587) [`4551896e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4551896edf2ff89e0cc007bc6bcce632d56e5e65) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to 6.2.0
+
+- [#583](https://github.com/lblod/frontend-gelinkt-notuleren/pull/583) [`817f18d3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/817f18d32b6e13996a9ebbd27963746078010bb0) Thanks [@piemonkey](https://github.com/piemonkey)! - Pass standard templates into standard template plugin instead of it loading them itself
+
 ## 5.7.0
 
 ### Minor Changes
