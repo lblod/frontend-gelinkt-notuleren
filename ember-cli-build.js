@@ -39,19 +39,6 @@ module.exports = function (defaults) {
     babel: {
       sourceMaps: 'inline',
     },
-    autoImport: {
-      webpack: {
-        plugins: [
-          //This is for the besluit-type-plugin. The SPARQL fetcher is made compatible with an older version of Webpack where this module was packaged by default.
-          new webpack.ProvidePlugin({
-            process: 'process/browser',
-          }),
-          new webpack.ProvidePlugin({
-            Buffer: ['buffer', 'Buffer'],
-          }),
-        ],
-      },
-    },
   });
 
   return app.toTree();
