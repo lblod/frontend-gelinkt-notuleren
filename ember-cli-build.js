@@ -2,7 +2,6 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const envIsProduction = process.env.EMBER_ENV === 'production';
-const webpack = require('webpack');
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
