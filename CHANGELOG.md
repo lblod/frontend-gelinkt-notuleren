@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.9.0
+
+### Minor Changes
+
+- [#586](https://github.com/lblod/frontend-gelinkt-notuleren/pull/586) [`be7b65ad`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/be7b65adc3852fa209992f175fdc28c046eb3e18) Thanks [@piemonkey](https://github.com/piemonkey)! - Add support for regulatory statement templates with repeated entity uris
+
+- [#590](https://github.com/lblod/frontend-gelinkt-notuleren/pull/590) [`c6c5bca9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c6c5bca9f7f267fce4a0efd5fad3253f7fff784e) Thanks [@elpoelma](https://github.com/elpoelma)! - Update ember-source to 4.12.0
+
+- [#590](https://github.com/lblod/frontend-gelinkt-notuleren/pull/590) [`c6c5bca9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c6c5bca9f7f267fce4a0efd5fad3253f7fff784e) Thanks [@elpoelma](https://github.com/elpoelma)! - Update ember-data to 4.12.0
+
+### Patch Changes
+
+- [`5e487994`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5e4879946f91faa0f9b189e1eb59d1974dedf6eb) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to 6.4.0
+
+- [#591](https://github.com/lblod/frontend-gelinkt-notuleren/pull/591) [`7fbdaa2f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7fbdaa2f41db0b64951147b983a153fc4addbf3e) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure editor is only initalized after correct prefix attribute has been set
+
 ## 5.8.0
 
 ### Minor Changes
