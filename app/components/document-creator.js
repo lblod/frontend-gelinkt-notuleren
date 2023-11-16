@@ -79,9 +79,24 @@ export default class DocumentCreatorComponent extends Component {
 
   async buildTemplate() {
     if (this.template) {
-      if (this.template.reload) {
-        // regular templates from templatesForContext do not return body of template
-        await this.template.reload(this.template);
+      /**
+       * Document Creator component is used by two different screens:
+       *   - Create agenda point flow
+       *   - Create regulatory statements flow
+       *
+       * `templates` coming from regulatory statements flow are _NOT_ `TemplateModel` instances,
+       * they are just plain objects with a `title` and a `loadTemplateBody` property. So we
+       * have to use `loadTemplateBody` to load the template body if we need to build the template
+       * when creating a regulatory statement.
+       *
+       * This was previously checking and calling `this.template.reload`, but that was causing
+       * `reload` to mutate from function to a "boolean" when `TemplateModel` of `ember-data` is used,
+       * causing errors when calling `reload` on the template again, as it became a boolean.
+       *
+       * The fix was to change `reload` to `loadTemplateBody` in `RegulatoryAttachmentsFetcher`
+       */
+      if (this.template.loadTemplateBody) {
+        await this.template.loadTemplateBody(this.template);
       }
       const trimmedHtml = this.template.body.replace(/>\s+</g, '><');
       return instantiateUuids(trimmedHtml);
