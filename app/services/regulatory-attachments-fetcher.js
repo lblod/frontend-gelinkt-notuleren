@@ -27,7 +27,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
           pav:hasCurrentVersion ?container.
         ?container dct:title ?title;
           mu:uuid ?fileId.
-        OPTIONAL { 
+        OPTIONAL {
           ?container schema:validThrough ?validThrough.
         }
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
@@ -56,7 +56,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       const bindings = json.results.bindings;
       const templates = bindings.map((binding) => ({
         title: binding.title.value,
-        reload: async (template) => {
+        loadTemplateBody: async (template) => {
           const response = await fetch(
             `${config.regulatoryStatementFileEndpoint}/${binding.fileId.value}/download`,
           );
