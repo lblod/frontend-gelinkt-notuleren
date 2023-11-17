@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.9.1
+
+### Patch Changes
+
+- [#606](https://github.com/lblod/frontend-gelinkt-notuleren/pull/606) [`76e04611`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/76e046113ed1b9310ae7722d499649e2f4477f3e) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-XXX: Fix agendapoint/regulatory attachment template "reload"
+
 ## 5.9.0
 
 ### Minor Changes
