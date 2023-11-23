@@ -11,13 +11,13 @@
   @nodeViews={{this.nodeViews}}
 >
   <:sidebarCollapsible>
-    <RdfaDatePlugin::Insert
+    <VariablePlugin::Date::Insert
       @controller={{this.editor}}
       @options={{this.config.date}}
     />
   </:sidebarCollapsible>
   <:sidebar>
-    <RdfaDatePlugin::Card
+    <VariablePlugin::Date::Edit
       @controller={{this.editor}}
       @options={{this.config.date}}
     />
