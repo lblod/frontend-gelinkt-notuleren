@@ -43,7 +43,7 @@ import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import {
   date,
   dateView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/rdfa-date-plugin/nodes/date';
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 
 import { service } from '@ember/service';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
