@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.9.2
+
+### Patch Changes
+
+- [#607](https://github.com/lblod/frontend-gelinkt-notuleren/pull/607) [`87a9de7c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/87a9de7c913716a07276a010eeeb5c5c497ee047) Thanks [@elpoelma](https://github.com/elpoelma)! - Update regex in `isLoadingRoute` function to take underscore syntax into account
+
+- [`f29003c0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f29003c0536a71b646240a1369aee75eb92087b9) Thanks [@abeforgit](https://github.com/abeforgit)! - Bump editor to [v7.0.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/v7.0.1) and plugins to [v15.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v15.1.0)
+
+- [#601](https://github.com/lblod/frontend-gelinkt-notuleren/pull/601) [`072fb6cc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/072fb6cc8c9e9a10b6e1a5bd9f30a4af4565e40f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to 15.0.0
+
+- [#608](https://github.com/lblod/frontend-gelinkt-notuleren/pull/608) [`7b506a9f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7b506a9fa1e47bf4f807faa2bd39197e504fd28c) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix import paths of variable-date plugin in `zitting-text-document-container` component
+
 ## 5.9.1
 
 ### Patch Changes
