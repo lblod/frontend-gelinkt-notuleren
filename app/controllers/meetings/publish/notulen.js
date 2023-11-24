@@ -122,41 +122,49 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   loadNotulen = task(async () => {
-    const fullNotulen = (await this.store.query('versioned-notulen', {
-      'filter[zitting][:id:]': this.model.id,
-      'filter[:or:][deleted]': false,
-      'filter[:or:][:has-no:deleted]': 'yes',
-      'filter[kind]': 'full',
-    }))[0];
+    // this file is incredibly stateful, so we need to do silly things
+    // like this
+    this.publishedResource = undefined;
+    this.signedResources = [];
 
-    const publicNotulen = (await this.store.query('versioned-notulen', {
-      'filter[zitting][:id:]': this.model.id,
-      'filter[:or:][deleted]': false,
-      'filter[:or:][:has-no:deleted]': 'yes',
-      'filter[kind]': 'public',
-      include: 'published-resource.gebruiker',
-    }))[0];
+    // published notulen have kind "public", meaning they only
+    // contain the public content
+    const publicNotulen = (
+      await this.store.query('versioned-notulen', {
+        'filter[zitting][:id:]': this.model.id,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+        'filter[kind]': 'public',
+        include: 'published-resource.gebruiker',
+      })
+    )[0];
 
     if (publicNotulen) {
-      // the notulen have been published, so the final version is locked in
-      // it can still be signed, which should sign the full version
+      // the notulen have been published
       const publishedResource = await publicNotulen.publishedResource;
       if (publishedResource) {
+        // the else branch _should_ never happen, I don't know what to do
+        // if it does
         this.publishedResource = publishedResource;
       }
       this.publicBehandelingUris = publicNotulen.publicBehandelingen || [];
       this.notulen = publicNotulen;
     } else {
       try {
+        // generate a rendered document
         const { content, errors } =
           await this.createPrePublishedResource.perform();
+        // save it in a "placeholder" versioned-notulen instance
+        // note: this instance will never actually be saved using ember
+        // data, as we call the service that creates the final entry
+        // in the database. This is just done here for ????? reasons
+        // that predate me visiting this file.
         const rslt = await this.store.createRecord('versioned-notulen', {
           zitting: this.model,
           content: content,
           kind: 'public',
         });
-        this.publishedResource = undefined;
-        this.signedResources = [];
+
         this.notulen = rslt;
         this.validationErrors = errors;
       } catch (e) {
@@ -164,15 +172,36 @@ export default class MeetingsPublishNotulenController extends Controller {
         this.errors = [e];
       }
     }
+    // signed notulen have kind "full", meaning they always
+    // contain the full content.
+    const fullNotulen = (
+      await this.store.query('versioned-notulen', {
+        'filter[zitting][:id:]': this.model.id,
+        'filter[:or:][deleted]': false,
+        'filter[:or:][:has-no:deleted]': 'yes',
+        'filter[kind]': 'full',
+      })
+    )[0];
+
     if (fullNotulen) {
+      // load the signed resources. NOTE: we can't use relationships here,
+      // because we need to filter on the deleted property
       const { signedNonDeletedResources, signedDeletedResources } =
         await this.loadSignedResources(fullNotulen.id);
+
+      // store the rest of the needed state
       this.signedResources = signedNonDeletedResources;
       this.hasDeletedSignedResources =
         !!signedDeletedResources.toArray().length;
       this.fullNotulen = fullNotulen;
     } else {
+      // this means there are no signatures
       try {
+        // we generate another preview, independent from the one for
+        // publishing, so we are sure we're showing the user the actual
+        // content they will be signing, regardless of the publication state.
+        // e.g.: a document is published with agenda item contents kept private
+        // -> this will still show all the contents as they always sign everything
         const { content, errors } =
           await this.createPrePublishedResource.perform();
         const rslt = await this.store.createRecord('versioned-notulen', {
@@ -188,6 +217,8 @@ export default class MeetingsPublishNotulenController extends Controller {
       }
     }
 
+    // publishing notulen also auto-publishes extracts of the agenda items
+    // marked as "public content", so we refresh those
     if (this.status !== 'published') {
       const treatments = await this.fetchTreatments.perform();
       this.treatments = treatments;
