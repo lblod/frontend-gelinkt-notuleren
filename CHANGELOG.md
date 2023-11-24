@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.9.3
+
+### Patch Changes
+
+- [`af202b99`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/af202b996bc3d79f0c1c2c43fb122ca04e8e7558) Thanks [@abeforgit](https://github.com/abeforgit)! - correctly deal with the 2 types of versionedNotulen
+
+  - correctly show signatures even after document is published
+  - correctly show the full document when signing even if notulen is already published with some parts marked private (you always sign the whole document)
+    -> the page was showing the wrong document in the signing modal in
+    niche cases before, leading users to sign a different document than what they
+    were looking at
+
 ## 5.9.2
 
 ### Patch Changes
