@@ -64,7 +64,7 @@
               @confirm={{perform this.createSignedResource}}
               @cancel={{fn (mut this.showSigningModal) false}}
             >
-              {{html-safe this.notulen.content}}
+              {{html-safe this.fullNotulen.content}}
             </Signatures::SignatureConfirmation>
           {{/if}}
           {{!-- publish --}}

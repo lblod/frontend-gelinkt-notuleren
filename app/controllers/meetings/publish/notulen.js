@@ -13,6 +13,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
+  @tracked fullNotulen;
   @tracked errors;
   @tracked validationErrors;
   @tracked signedResources = [];
@@ -113,42 +114,38 @@ export default class MeetingsPublishNotulenController extends Controller {
 
     const signedDeletedResources = await this.store.query('signed-resource', {
       'filter[versioned-notulen][:id:]': versionedNotulenId,
-      'filter[:or:][deleted]': false,
-      'filter[:or:][:has-no:deleted]': 'yes',
+      'filter[deleted]': true,
       sort: 'created-on',
     });
 
-    this.signedResources = signedNonDeletedResources.toArray();
-
-    this.hasDeletedSignedResources = !!signedDeletedResources.toArray().length;
+    return { signedDeletedResources, signedNonDeletedResources };
   }
 
   loadNotulen = task(async () => {
-    const versionedNotulens = await this.store.query('versioned-notulen', {
+    const fullNotulen = (await this.store.query('versioned-notulen', {
       'filter[zitting][:id:]': this.model.id,
       'filter[:or:][deleted]': false,
       'filter[:or:][:has-no:deleted]': 'yes',
+      'filter[kind]': 'full',
+    }))[0];
+
+    const publicNotulen = (await this.store.query('versioned-notulen', {
+      'filter[zitting][:id:]': this.model.id,
+      'filter[:or:][deleted]': false,
+      'filter[:or:][:has-no:deleted]': 'yes',
+      'filter[kind]': 'public',
       include: 'published-resource.gebruiker',
-    });
+    }))[0];
 
-    if (versionedNotulens.length) {
-      let notulenSet = false;
-      await Promise.all(
-        versionedNotulens.map(async (notulen) => {
-          const publishedResource = await notulen.publishedResource;
-          if (publishedResource) {
-            this.publishedResource = publishedResource;
-            this.publicBehandelingUris = notulen.publicBehandelingen || [];
-            this.notulen = notulen;
-            notulenSet = true;
-          }
-
-          if (!notulenSet) {
-            await this.loadSignedResources(notulen.id);
-            this.notulen = notulen;
-          }
-        }),
-      );
+    if (publicNotulen) {
+      // the notulen have been published, so the final version is locked in
+      // it can still be signed, which should sign the full version
+      const publishedResource = await publicNotulen.publishedResource;
+      if (publishedResource) {
+        this.publishedResource = publishedResource;
+      }
+      this.publicBehandelingUris = publicNotulen.publicBehandelingen || [];
+      this.notulen = publicNotulen;
     } else {
       try {
         const { content, errors } =
@@ -156,6 +153,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         const rslt = await this.store.createRecord('versioned-notulen', {
           zitting: this.model,
           content: content,
+          kind: 'public',
         });
         this.publishedResource = undefined;
         this.signedResources = [];
@@ -166,6 +164,30 @@ export default class MeetingsPublishNotulenController extends Controller {
         this.errors = [e];
       }
     }
+    if (fullNotulen) {
+      const { signedNonDeletedResources, signedDeletedResources } =
+        await this.loadSignedResources(fullNotulen.id);
+      this.signedResources = signedNonDeletedResources;
+      this.hasDeletedSignedResources =
+        !!signedDeletedResources.toArray().length;
+      this.fullNotulen = fullNotulen;
+    } else {
+      try {
+        const { content, errors } =
+          await this.createPrePublishedResource.perform();
+        const rslt = await this.store.createRecord('versioned-notulen', {
+          zitting: this.model,
+          content: content,
+          kind: 'full',
+        });
+        this.fullNotulen = rslt;
+        this.validationErrors = errors;
+      } catch (e) {
+        console.error(e);
+        this.errors = [e];
+      }
+    }
+
     if (this.status !== 'published') {
       const treatments = await this.fetchTreatments.perform();
       this.treatments = treatments;
