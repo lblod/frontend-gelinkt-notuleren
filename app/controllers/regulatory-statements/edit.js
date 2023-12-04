@@ -75,7 +75,6 @@ import {
   hardBreak,
   heading as headingInvisible,
   paragraph as paragraphInvisible,
-  space,
 } from '@lblod/ember-rdfa-editor/plugins/invisibles';
 import {
   tableOfContentsView,
@@ -175,7 +174,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       tableKeymap,
       this.citationPlugin,
       createInvisiblesPlugin(
-        [space, hardBreak, paragraphInvisible, headingInvisible],
+        [hardBreak, paragraphInvisible, headingInvisible],
         {
           shouldShowInvisibles: false,
         },
