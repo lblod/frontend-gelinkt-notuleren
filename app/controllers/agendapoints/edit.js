@@ -61,7 +61,6 @@ import {
   hardBreak,
   heading as headingInvisible,
   paragraph as paragraphInvisible,
-  space,
 } from '@lblod/ember-rdfa-editor/plugins/invisibles';
 
 import {
@@ -249,7 +248,7 @@ export default class AgendapointsEditController extends Controller {
       this.citationPlugin,
       this.validationPlugin,
       createInvisiblesPlugin(
-        [space, hardBreak, paragraphInvisible, headingInvisible],
+        [hardBreak, paragraphInvisible, headingInvisible],
         {
           shouldShowInvisibles: false,
         },
