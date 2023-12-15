@@ -25,7 +25,7 @@ import {
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
   tableNodes,
-  tablePlugin,
+  tablePlugins,
   tableKeymap,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
@@ -159,7 +159,11 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   get plugins() {
-    return [tablePlugin, tableKeymap, linkPasteHandler(this.schema.nodes.link)];
+    return [
+      ...tablePlugins,
+      tableKeymap,
+      linkPasteHandler(this.schema.nodes.link),
+    ];
   }
 
   get nodeViews() {

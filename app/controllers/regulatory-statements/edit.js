@@ -27,7 +27,7 @@ import {
 import {
   tableKeymap,
   tableNodes,
-  tablePlugin,
+  tablePlugins,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import {
   link,
@@ -170,7 +170,7 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   get plugins() {
     return [
-      tablePlugin,
+      ...tablePlugins,
       tableKeymap,
       this.citationPlugin,
       createInvisiblesPlugin(
