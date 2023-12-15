@@ -27,7 +27,7 @@ import {
 import {
   tableKeymap,
   tableNodes,
-  tablePlugin,
+  tablePlugins,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
@@ -243,7 +243,7 @@ export default class AgendapointsEditController extends Controller {
 
   get plugins() {
     return [
-      tablePlugin,
+      ...tablePlugins,
       tableKeymap,
       this.citationPlugin,
       this.validationPlugin,
