@@ -1,5 +1,18 @@
 # frontend-gelinkt-notuleren
 
+## 5.10.0
+
+### Minor Changes
+
+- [#610](https://github.com/lblod/frontend-gelinkt-notuleren/pull/610) [`e4742aae`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e4742aae2c24e8977c0f00c105dfb816a8203878) Thanks [@elpoelma](https://github.com/elpoelma)! - Disable space-invisible in order to prevent slowdowns
+
+- [#611](https://github.com/lblod/frontend-gelinkt-notuleren/pull/611) [`4ba94b92`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ba94b9239dc06eeb2c35384648567879d05f944) Thanks [@dkozickis](https://github.com/dkozickis)! - Bump editor dependencies
+
+  - Bump `@lblod/ember-rdfa-editor` to `^8.0.2`
+  - Bump `@lblod/ember-rdfa-editor-lblod-plugins` to `^15.2.1`
+  - Enable `Alignment` plugin
+  - Enable column sizing for tables
+
 ## 5.9.3
 
 ### Patch Changes
