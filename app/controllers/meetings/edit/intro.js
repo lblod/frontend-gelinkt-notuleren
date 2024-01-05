@@ -3,6 +3,7 @@ import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 export default class MeetingsEditIntroController extends Controller {
   @service router;
@@ -10,7 +11,11 @@ export default class MeetingsEditIntroController extends Controller {
   @service intl;
 
   get dirty() {
-    return this.model.intro !== this.editor.htmlContent;
+    // Since we clear the undo history when saving, this works. If we want to maintain undo history
+    // on save, we would need to add functionality to the editor to track what is the 'saved' state
+    return this.editor?.checkCommand(undo, {
+      view: this.editor?.mainEditorView,
+    });
   }
 
   @action
