@@ -651,6 +651,7 @@ uittreksel-error:
 
 utils:
   save: Save
+  insert: Insert
   file-options: File options
   html-export: Export as HTML
   delete: Delete
