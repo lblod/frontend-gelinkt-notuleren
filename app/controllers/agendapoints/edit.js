@@ -94,6 +94,7 @@ import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -258,7 +259,11 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get dirty() {
-    return this.editorDocument.content !== this.controller?.htmlContent;
+    // Since we clear the undo history when saving, this works. If we want to maintain undo history
+    // on save, we would need to add functionality to the editor to track what is the 'saved' state
+    return this.controller?.checkCommand(undo, {
+      view: this.controller?.mainEditorView,
+    });
   }
 
   get editorDocument() {
