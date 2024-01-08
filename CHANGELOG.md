@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.10.1
+
+### Patch Changes
+
+- [#614](https://github.com/lblod/frontend-gelinkt-notuleren/pull/614) [`7ecf0c67`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7ecf0c672a1884ec4d6c5157248ae8036cac2c43) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly track the saved state so we only ask to save changes when changes have been made
+
+- [#616](https://github.com/lblod/frontend-gelinkt-notuleren/pull/616) [`fb96524b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fb96524bbc83920ccfc800e2d819bbe4d9b295ca) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-plugins` to 15.2.2
+
+- [#616](https://github.com/lblod/frontend-gelinkt-notuleren/pull/616) [`5836bdb9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5836bdb964fe19e70cc64b93ade73fd320ce99cb) Thanks [@elpoelma](https://github.com/elpoelma)! - Update editor to 8.2.0
+
+- [#615](https://github.com/lblod/frontend-gelinkt-notuleren/pull/615) [`ccb58a99`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ccb58a99049b144656fc3c5a83f51f704e06a905) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly translate 'insert' in the sidebar
+
 ## 5.10.0
 
 ### Minor Changes
