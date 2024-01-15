@@ -112,6 +112,9 @@
   "overrides": {
     "@appuniversum/ember-appuniversum": {
       "tracked-toolbox": "^2.0.0"
+    },
+    "@lblod/ember-rdfa-editor": {
+      "ember-focus-trap": "^1.1.0"
     }
   },
   "engines": {
