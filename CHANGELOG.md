@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.10.2
+
+### Patch Changes
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@appuniversum/ember-appuniversum` to 2.15.0
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to 9.0.0
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `ember-intl` to 6.1.0
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to 16.0.0
+
 ## 5.10.1
 
 ### Patch Changes
