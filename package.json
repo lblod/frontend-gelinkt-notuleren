@@ -29,7 +29,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^2.12.0",
+    "@appuniversum/ember-appuniversum": "~2.15.0",
     "@babel/eslint-parser": "^7.22.9",
     "@babel/plugin-proposal-decorators": "^7.22.5",
     "@changesets/changelog-github": "^0.4.8",
@@ -43,8 +43,8 @@
     "@lblod/ember-acmidm-login": "^2.0.0-beta.1",
     "@lblod/ember-environment-banner": "^0.2.0",
     "@lblod/ember-mock-login": "0.7.0",
-    "@lblod/ember-rdfa-editor": "^8.2.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "^15.2.2",
+    "@lblod/ember-rdfa-editor": "^9.0.0",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "^16.0.0",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
@@ -76,7 +76,7 @@
     "ember-drag-drop": "^0.9.0-beta.0",
     "ember-feature-flags": "^6.0.0",
     "ember-fetch": "^8.1.2",
-    "ember-intl": "^5.7.2",
+    "ember-intl": "^6.1.0",
     "ember-load-initializers": "^2.1.2",
     "ember-modifier": "^3.2.7",
     "ember-page-title": "^8.0.0",
@@ -112,6 +112,9 @@
   "overrides": {
     "@appuniversum/ember-appuniversum": {
       "tracked-toolbox": "^2.0.0"
+    },
+    "@lblod/ember-rdfa-editor": {
+      "ember-focus-trap": "^1.1.0"
     }
   },
   "engines": {
