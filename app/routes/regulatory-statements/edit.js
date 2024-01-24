@@ -17,18 +17,18 @@ export default class RegulatoryStatementsEditRoute extends Route {
   }
 
   async model(params) {
-    const container = await this.store.findRecord(
+    const containerPromise = this.store.findRecord(
       'document-container',
       params.id,
       { include: 'status' },
     );
-    const standardTemplates =
-      await this.standardTemplate.fetchTemplates.perform();
-    const currentVersion = await container.get('currentVersion');
+    const currentVersion = containerPromise.then((container) =>
+      container.get('currentVersion'),
+    );
     return RSVP.hash({
-      documentContainer: container,
+      documentContainer: containerPromise,
       editorDocument: currentVersion,
-      standardTemplates,
+      standardTemplates: this.standardTemplate.fetchTemplates.perform(),
     });
   }
   setupController(controller, model) {
