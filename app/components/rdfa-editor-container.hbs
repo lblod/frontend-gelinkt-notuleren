@@ -29,7 +29,7 @@
       {{#if this.ready}}
         <EditorContainer
           @editorOptions={{hash
-            showRdfa='true'
+            showRdfa=(if @shouldEditRdfa false true)
             showRdfaHighlight='true'
             showRdfaHover='true'
             showPaper='true'
@@ -101,6 +101,22 @@
                   </Sidebar.Collapsible>
                 {{/if}}
                 {{yield to='sidebar'}}
+                {{#if @shouldEditRdfa}}
+                  <Plugins::Link::LinkEditor @controller={{this.controller}} />
+                  <this.RdfaEditor
+                    @node={{this.activeNode}}
+                    @controller={{this.controller}}
+                  />
+                  {{#if this.activeNode}}
+                    <this.AttributeEditor
+                      @node={{this.activeNode}}
+                      @controller={{this.controller}}
+                    />
+                    <this.DebugInfo
+                      @node={{this.activeNode}}
+                    />
+                  {{/if}}
+                {{/if}}
               </Sidebar>
             {{/if}}
           </:aside>
