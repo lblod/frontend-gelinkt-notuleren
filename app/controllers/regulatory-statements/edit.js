@@ -55,6 +55,24 @@ import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
+  createInvisiblesPlugin,
+  hardBreak,
+  heading as headingInvisible,
+  paragraph as paragraphInvisible,
+} from '@lblod/ember-rdfa-editor/plugins/invisibles';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
+import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
+import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
+import {
+  templateComment,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import {
+  STRUCTURE_NODES,
+  STRUCTURE_SPECS,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
+import {
   address,
   addressView,
   codelist,
@@ -70,16 +88,9 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
-  createInvisiblesPlugin,
-  hardBreak,
-  heading as headingInvisible,
-  paragraph as paragraphInvisible,
-} from '@lblod/ember-rdfa-editor/plugins/invisibles';
-import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
-import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
