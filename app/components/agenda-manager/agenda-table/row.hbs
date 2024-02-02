@@ -21,7 +21,7 @@
 {{else}}
   <DraggableObject @tagName="tr" @content={{@item}} @isSortable={{true}}>
     <td>
-      <AuButton @icon="drag" @skin="tertiary" @hideText={{true}} class="au-c-button--drag"></AuButton>
+      <AuButton @icon="drag" @skin="link" @hideText={{true}} class="au-c-button--drag"></AuButton>
     </td>
     <td>
       <p>{{limit-content @item.titel 40}}</p>
@@ -31,7 +31,7 @@
           (t "manage-agenda-zitting-modal.gepland-openbaar-false-label")}}
     </td>
     <td class="au-u-table-right">
-      <AuButton @skin="tertiary" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
+      <AuButton @skin="link" @icon="pencil" @iconAlignment="left" {{on "click" @edit}}>
         {{t "manage-agenda-zitting-modal.edit-item-button"}}
       </AuButton>
     </td>

@@ -21,19 +21,19 @@
       {{! template-lint-disable require-context-role }}
       <AuButton
         {{on 'click' (perform this.copyAgendapunt)}}
-        @skin='tertiary'
+        @skin='link'
         role='menuitem'
       >
         <AuIcon @icon='copy' @alignment='left' />
         {{t 'app-chrome.copy-agendapoint'}}
       </AuButton>
-      <AuButton {{on 'click' this.download}} @skin='tertiary' role='menuitem'>
+      <AuButton {{on 'click' this.download}} @skin='link' role='menuitem'>
         <AuIcon @icon='export' @alignment='left' />
         {{t 'utils.html-export'}}
       </AuButton>
       <AuButton
         {{on 'click' this.toggleDeleteModal}}
-        @skin='tertiary'
+        @skin='link'
         @alert='true'
         role='menuitem'
         @disabled={{this.isNotAllowedToTrash}}
@@ -111,6 +111,7 @@
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
+    @shouldEditRdfa={{false}}
   >
     <:toolbar>
       <BesluitTypePlugin::ToolbarDropdown
