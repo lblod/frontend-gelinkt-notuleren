@@ -1,5 +1,14 @@
 # frontend-gelinkt-notuleren
 
+## 5.11.0
+
+### Minor Changes
+
+- [#623](https://github.com/lblod/frontend-gelinkt-notuleren/pull/623) [`73cb66f4`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/73cb66f4ce61ad7d8039b9244966dd2c35015bc6) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to 9.1.0 and plugins to 16.1.0
+
+  fixes [4657](https://binnenland.atlassian.net/browse/GN-4657)
+  fixes [4652](https://binnenland.atlassian.net/browse/GN-4652)
+
 ## 5.10.3
 
 ### Patch Changes
