@@ -1,4 +1,4 @@
-{{page-title (t 'regulatory-statement.page-title')}}
+{{page-title (t "regulatory-statement.page-title")}}
 <AppChrome
   @editorDocument={{this.editorDocument}}
   @documentContainer={{this.documentContainer}}
@@ -9,47 +9,47 @@
 >
   <:returnLink>
     <AuLink
-      @route='inbox.regulatory-statements'
+      @route="inbox.regulatory-statements"
       @model={{@meetingId}}
-      @icon='arrow-left'
+      @icon="arrow-left"
     >
-      {{t 'inbox.regulatory-statements.return'}}
+      {{t "inbox.regulatory-statements.return"}}
     </AuLink>
   </:returnLink>
   <:actionsAfterTitle>
     <AuDropdown
-      @title={{t 'utils.current-version'}}
-      @buttonLabel={{t 'utils.current-version'}}
-      @alignment='left'
+      @title={{t "utils.current-version"}}
+      @buttonLabel={{t "utils.current-version"}}
+      @alignment="left"
     >
       <p
-        class='au-u-padding-small regulatory-statement-current-version-container-active'
+        class="au-u-padding-small regulatory-statement-current-version-container-active"
       >
-        <span class='au-u-medium au-u-margin-right-large'>{{t
-            'utils.current-version'
+        <span class="au-u-medium au-u-margin-right-large">{{t
+            "utils.current-version"
           }}:
         </span>
-        <span class='au-u-light'>{{human-friendly-date
+        <span class="au-u-light">{{human-friendly-date
             this.editorDocument.updatedOn
             locale=this.intl.primaryLocale
           }}</span>
       </p>
       <AuHr />
       <div
-        class='au-u-flex--column au-u-flex'
+        class="au-u-flex--column au-u-flex"
         {{did-update (perform this.fetchRevisions)}}
         {{did-insert (perform this.fetchRevisions)}}
       >
         <p
-          class='au-u-muted au-u-medium au-u-padding-tiny au-u-padding-left-small'
-        >{{t 'utils.history'}}</p>
+          class="au-u-muted au-u-medium au-u-padding-tiny au-u-padding-left-small"
+        >{{t "utils.history"}}</p>
         {{#each this.revisions as |revision|}}
           {{! template-lint-disable require-context-role }}
           <AuLink
-            @route='regulatory-statements.revisions'
-            @skin='secondary'
-            class='au-u-padding-tiny au-u-padding-left-small'
-            role='menuitem'
+            @route="regulatory-statements.revisions"
+            @skin="secondary"
+            class="au-u-padding-tiny au-u-padding-left-small"
+            role="menuitem"
             @models={{array this.documentContainer.id revision.id}}
           >
             {{human-friendly-date
@@ -126,6 +126,11 @@
         @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
+      <this.SnippetInsert
+        @controller={{this.controller}}
+        @config={{this.config.snippet}}
+        @node={{this.activeNode}}
+      />
       <VariablePlugin::Date::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
@@ -173,6 +178,6 @@
 </AuBodyContainer>
 <ConfirmRouteLeave
   @enabled={{this.dirty}}
-  @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
+  @message={{t "behandeling-van-agendapunten.confirm-leave-without-saving"}}
 />
 {{outlet}}
