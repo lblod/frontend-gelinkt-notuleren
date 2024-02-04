@@ -58,6 +58,7 @@ import {
   templateComment,
   templateCommentView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,
@@ -90,6 +91,7 @@ import {
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
 
+import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -100,6 +102,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   @service intl;
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
+  SnippetInsert = SnippetInsertRdfaComponent;
 
   schema = new Schema({
     nodes: {
@@ -183,6 +186,12 @@ export default class RegulatoryStatementsRoute extends Controller {
     ];
   }
 
+  get activeNode() {
+    if (this.controller) {
+      return getActiveEditableNode(this.controller.activeEditorState);
+    }
+    return null;
+  }
   get config() {
     return {
       tableOfContents: [
@@ -225,6 +234,9 @@ export default class RegulatoryStatementsRoute extends Controller {
         interactive: true,
       },
       structures: STRUCTURE_SPECS,
+      snippet: {
+        endpoint: ENV.regulatoryStatementEndpoint,
+      },
     };
   }
 
