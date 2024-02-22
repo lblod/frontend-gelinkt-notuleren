@@ -126,11 +126,13 @@
         @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
-      <this.SnippetInsert
-        @controller={{this.controller}}
-        @config={{this.config.snippet}}
-        @node={{this.activeNode}}
-      />
+      {{#if this.activeNode}}
+        <this.SnippetInsert
+          @controller={{this.controller}}
+          @config={{this.config.snippet}}
+          @node={{this.activeNode}}
+        />
+      {{/if}}
       <VariablePlugin::Date::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
