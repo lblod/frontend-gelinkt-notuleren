@@ -3,15 +3,25 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import applyDevTools from 'prosemirror-dev-tools';
+import { modifier } from 'ember-modifier';
 import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
 import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
 import { chromeHacksPlugin } from '@lblod/ember-rdfa-editor/plugins/chrome-hacks-plugin';
-import { modifier } from 'ember-modifier';
+import {
+  editableNodePlugin,
+  getActiveEditableNode,
+} from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
+import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attribute-editor';
+import RdfaEditor from '@lblod/ember-rdfa-editor/components/_private/rdfa-editor';
+import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
 
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
   @tracked controller;
   @tracked ready = false;
+  AttributeEditor = AttributeEditor;
+  RdfaEditor = RdfaEditor;
+  DebugInfo = DebugInfo;
 
   /**
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
@@ -33,11 +43,14 @@ export default class RdfaEditorContainerComponent extends Component {
 
   get plugins() {
     const plugins = this.args.plugins || [];
-    return plugins.concat(
-      firefoxCursorFix(),
-      lastKeyPressedPlugin,
-      chromeHacksPlugin(),
-    );
+    return plugins
+      .concat(
+        firefoxCursorFix(),
+        lastKeyPressedPlugin,
+        chromeHacksPlugin(),
+        this.args.shouldEditRdfa && editableNodePlugin(),
+      )
+      .filter((nullCheck) => nullCheck);
   }
 
   get widgets() {
@@ -50,30 +63,6 @@ export default class RdfaEditorContainerComponent extends Component {
 
   get nodeViews() {
     return this.args.nodeViews;
-  }
-
-  get editorOptions() {
-    return (
-      this.args.editorOptions ?? {
-        showToggleRdfaAnnotations: Boolean(this.args.showToggleRdfaAnnotations),
-        showInsertButton: false,
-        showRdfa: true,
-        showRdfaHighlight: true,
-        showRdfaHover: true,
-        showPaper: true,
-        showSidebar: true,
-      }
-    );
-  }
-
-  get toolbarOptions() {
-    return (
-      this.args.toolbarOptions ?? {
-        showTextStyleButtons: true,
-        showListButtons: true,
-        showIndentButtons: true,
-      }
-    );
   }
 
   get documentContext() {
@@ -97,6 +86,13 @@ export default class RdfaEditorContainerComponent extends Component {
 
   get vocab() {
     return this.documentContext['vocab'];
+  }
+
+  get activeNode() {
+    if (this.controller && this.args.shouldEditRdfa) {
+      return getActiveEditableNode(this.controller.activeEditorState);
+    }
+    return null;
   }
 
   @action

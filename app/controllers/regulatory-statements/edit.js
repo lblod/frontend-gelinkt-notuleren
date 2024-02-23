@@ -1,9 +1,7 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-
 import { task } from 'ember-concurrency';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { service } from '@ember/service';
 import { getOwner } from '@ember/application';
 import {
@@ -35,14 +33,6 @@ import {
   linkPasteHandler,
 } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
-  templateComment,
-  templateCommentView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
-import {
-  STRUCTURE_NODES,
-  STRUCTURE_SPECS,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
-import {
   bullet_list,
   list_item,
   ordered_list,
@@ -53,8 +43,26 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
-
 import { Schema } from '@lblod/ember-rdfa-editor';
+import {
+  createInvisiblesPlugin,
+  hardBreak,
+  heading as headingInvisible,
+  paragraph as paragraphInvisible,
+} from '@lblod/ember-rdfa-editor/plugins/invisibles';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
+import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
+import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
+import {
+  templateComment,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
+import {
+  STRUCTURE_NODES,
+  STRUCTURE_SPECS,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
   address,
   addressView,
@@ -71,27 +79,19 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
-  createInvisiblesPlugin,
-  hardBreak,
-  heading as headingInvisible,
-  paragraph as paragraphInvisible,
-} from '@lblod/ember-rdfa-editor/plugins/invisibles';
-import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
-import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
 
-import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
-import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
+import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -102,6 +102,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   @service intl;
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
+  SnippetInsert = SnippetInsertRdfaComponent;
 
   schema = new Schema({
     nodes: {
@@ -185,6 +186,12 @@ export default class RegulatoryStatementsRoute extends Controller {
     ];
   }
 
+  get activeNode() {
+    if (this.controller) {
+      return getActiveEditableNode(this.controller.activeEditorState);
+    }
+    return null;
+  }
   get config() {
     return {
       tableOfContents: [
@@ -227,6 +234,9 @@ export default class RegulatoryStatementsRoute extends Controller {
         interactive: true,
       },
       structures: STRUCTURE_SPECS,
+      snippet: {
+        endpoint: ENV.regulatoryStatementEndpoint,
+      },
     };
   }
 

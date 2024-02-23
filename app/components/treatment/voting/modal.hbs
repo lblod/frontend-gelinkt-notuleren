@@ -47,7 +47,7 @@
             {{#if stemming.onderwerp}}
               {{stemming.onderwerp}}
             {{else}}
-              <AuHelpText @size="normal" @skin="tertiary">
+              <AuHelpText @size="normal" @skin="link">
                 {{t "voting-modal.subject-not-found"}}
               </AuHelpText>
             {{/if}}
@@ -78,7 +78,7 @@
             {{#if stemming.gevolg}}
               {{stemming.gevolg}}
             {{else}}
-              <AuHelpText @size="normal" @skin="tertiary">{{t "voting-modal.gevolg-not-found"}}</AuHelpText>
+              <AuHelpText @size="normal" @skin="link">{{t "voting-modal.gevolg-not-found"}}</AuHelpText>
             {{/if}}
           </td>
           {{#unless @readOnly}}
@@ -109,7 +109,7 @@
       {{else}}
         <tr>
           <td colspan="5">
-            <AuHelpText @size="normal" @skin="tertiary">
+            <AuHelpText @size="normal" @skin="link">
               {{t "voting-modal.no-data-message"}}
             </AuHelpText>
           </td>

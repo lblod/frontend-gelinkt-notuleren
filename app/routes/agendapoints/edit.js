@@ -1,3 +1,4 @@
+import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
@@ -17,14 +18,13 @@ export default class AgendapointsEditRoute extends Route {
   async model() {
     const { documentContainer, returnToMeeting } =
       this.modelFor('agendapoints');
-    const standardTemplates =
-      await this.standardTemplate.fetchTemplates.perform();
-    return {
+    const standardTemplates = this.standardTemplate.fetchTemplates.perform();
+    return RSVP.hash({
       documentContainer,
-      editorDocument: await documentContainer.get('currentVersion'),
+      editorDocument: documentContainer.get('currentVersion'),
       returnToMeeting,
       standardTemplates,
-    };
+    });
   }
 
   setupController(controller, model) {
