@@ -9,9 +9,10 @@ import RelationshipResource from '../helpers/relationship-resource';
 import { trackedFunction } from 'ember-resources/util/function';
 
 /** @typedef {import("../models/mandataris").default} Mandataris  */
+/** @typedef {import("../models/behandeling-van-agendapunt").default} Behandeling  */
 /**
  * @typedef {Object} Args
- * @property {Behandeling} behandeling
+ * @property {Behandeling|undefined} behandeling
  * @property {Array<Mandataris>} possibleParticipants
  * @property {BestuursOrgaan} bestuursorgaan
  * @property {Zitting} meeting
@@ -53,13 +54,15 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.getStatus.perform();
   }
   attachmentData = trackedFunction(this, async () => {
-    const container = await this.behandeling.documentContainer;
-    const attachments = await container.attachments;
+    const container = await this.behandeling?.documentContainer;
+    const attachments = await container?.attachments;
     return attachments;
   });
+
   get attachments() {
     return this.attachmentData.value ?? [];
   }
+
   get behandeling() {
     return this.args.behandeling;
   }
@@ -69,19 +72,21 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   get canEditParticipants() {
-    return this.behandeling.stemmingen.length === 0;
-  }
-
-  get documentContainer() {
-    return this.args.behandeling.documentContainer;
+    if (this.behandeling) {
+      return this.behandeling.stemmingen.length === 0;
+    } else {
+      return false;
+    }
   }
 
   get openbaar() {
-    return this.args.behandeling.openbaar;
+    return this.behandeling?.openbaar;
   }
 
   set openbaar(value) {
-    this.args.behandeling.openbaar = value;
+    if (this.behandeling) {
+      this.behandeling.openbaar = value;
+    }
   }
 
   get defaultParticipants() {
@@ -92,10 +97,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     return this.meetingAbsenteeData.value;
   }
   get participants() {
-    return this.behandeling.sortedParticipants ?? [];
+    return this.behandeling?.sortedParticipants ?? [];
   }
   get absentees() {
-    return this.behandeling.sortedAbsentees ?? [];
+    return this.behandeling?.sortedAbsentees ?? [];
   }
 
   get hasParticipants() {
@@ -119,8 +124,8 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   getStatus = task(async () => {
-    if (this.behandeling) {
-      const container = await this.behandeling.documentContainer;
+    const container = await this.behandeling?.documentContainer;
+    if (container) {
       const status = await container.status;
       const statusId = status.id;
 
@@ -135,26 +140,32 @@ export default class BehandelingVanAgendapuntComponent extends Component {
    */
   @action
   async saveParticipants({ chairman, secretary, participants, absentees }) {
-    this.behandeling.voorzitter = chairman;
-    this.chairman = chairman;
-    this.behandeling.secretaris = secretary;
-    this.secretary = secretary;
+    if (this.behandeling) {
+      this.behandeling.voorzitter = chairman;
+      this.chairman = chairman;
+      this.behandeling.secretaris = secretary;
+      this.secretary = secretary;
 
-    this.behandeling.aanwezigen = participants;
+      this.behandeling.aanwezigen = participants;
 
-    this.behandeling.afwezigen = absentees;
+      this.behandeling.afwezigen = absentees;
 
-    await this.args.behandeling.save();
+      await this.behandeling.save();
+    }
   }
 
   fetchParticipants = task(async () => {
-    this.chairman = await this.behandeling.voorzitter;
-    this.secretary = await this.behandeling.secretaris;
+    if (this.behandeling) {
+      this.chairman = await this.behandeling.voorzitter;
+      this.secretary = await this.behandeling.secretaris;
+    }
   });
 
   toggleOpenbaar = task(async (e) => {
-    const openbaar = e.target.checked;
-    this.behandeling.openbaar = openbaar;
-    await this.behandeling.save();
+    if (this.behandeling) {
+      const openbaar = e.target.checked;
+      this.behandeling.openbaar = openbaar;
+      await this.behandeling.save();
+    }
   });
 }
