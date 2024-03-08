@@ -66,6 +66,12 @@
     @include au-font-size($au-h6);
     display: table;
     table-layout: fixed;
+
+    // Having `colgroup` means that column widths are defined
+    &:has(colgroup) {
+      table-layout: auto;
+    }
+
     position: relative;
     width: 100%;
     border-collapse: collapse;

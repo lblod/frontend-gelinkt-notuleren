@@ -27,7 +27,7 @@ import {
 import {
   tableKeymap,
   tableNodes,
-  tablePlugin,
+  tablePlugins,
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
@@ -61,7 +61,6 @@ import {
   hardBreak,
   heading as headingInvisible,
   paragraph as paragraphInvisible,
-  space,
 } from '@lblod/ember-rdfa-editor/plugins/invisibles';
 
 import {
@@ -95,6 +94,7 @@ import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -244,12 +244,12 @@ export default class AgendapointsEditController extends Controller {
 
   get plugins() {
     return [
-      tablePlugin,
+      ...tablePlugins,
       tableKeymap,
       this.citationPlugin,
       this.validationPlugin,
       createInvisiblesPlugin(
-        [space, hardBreak, paragraphInvisible, headingInvisible],
+        [hardBreak, paragraphInvisible, headingInvisible],
         {
           shouldShowInvisibles: false,
         },
@@ -259,7 +259,11 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get dirty() {
-    return this.editorDocument.content !== this.controller?.htmlContent;
+    // Since we clear the undo history when saving, this works. If we want to maintain undo history
+    // on save, we would need to add functionality to the editor to track what is the 'saved' state
+    return this.controller?.checkCommand(undo, {
+      view: this.controller?.mainEditorView,
+    });
   }
 
   get editorDocument() {

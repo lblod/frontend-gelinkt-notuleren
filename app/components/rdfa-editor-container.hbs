@@ -71,6 +71,9 @@
                 <Tb.Group>
                   <Plugins::Heading::HeadingMenu @controller={{this.controller}}/>
                 </Tb.Group>
+                <Tb.Group>
+                  <Plugins::Alignment::AlignmentMenu @controller={{this.controller}}/>
+                </Tb.Group>
                 <Tb.Spacer/>
                 </:main>
                 <:side as |Tb|>
@@ -93,7 +96,7 @@
             {{#if this.controller}}
               <Sidebar as |Sidebar|>
                 {{#if (has-block 'sidebarCollapsible')}}
-                  <Sidebar.Collapsible @title='Insert'>
+                  <Sidebar.Collapsible @title={{t "utils.insert"}}>
                     {{yield to='sidebarCollapsible'}}
                   </Sidebar.Collapsible>
                 {{/if}}

@@ -1,5 +1,60 @@
 # frontend-gelinkt-notuleren
 
+## 5.11.0
+
+### Minor Changes
+
+- [#623](https://github.com/lblod/frontend-gelinkt-notuleren/pull/623) [`73cb66f4`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/73cb66f4ce61ad7d8039b9244966dd2c35015bc6) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to 9.1.0 and plugins to 16.1.0
+
+  fixes [4657](https://binnenland.atlassian.net/browse/GN-4657)
+  fixes [4652](https://binnenland.atlassian.net/browse/GN-4652)
+
+## 5.10.3
+
+### Patch Changes
+
+- [#619](https://github.com/lblod/frontend-gelinkt-notuleren/pull/619) [`1c156717`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1c156717e4b4241bf3ef0f45b0100c0cd0a52ec0) Thanks [@elpoelma](https://github.com/elpoelma)! - Downgrade `ember-intl` to 5.7.2
+
+- [#619](https://github.com/lblod/frontend-gelinkt-notuleren/pull/619) [`1c156717`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1c156717e4b4241bf3ef0f45b0100c0cd0a52ec0) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to 9.0.2
+  Update `@lblod/ember-rdfa-editor-lblod-plugins` to 16.0.1
+
+## 5.10.2
+
+### Patch Changes
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@appuniversum/ember-appuniversum` to 2.15.0
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to 9.0.0
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `ember-intl` to 6.1.0
+
+- [#618](https://github.com/lblod/frontend-gelinkt-notuleren/pull/618) [`f3940bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3940bbab8194392cd796de3a4b707be65cbbfa7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to 16.0.0
+
+## 5.10.1
+
+### Patch Changes
+
+- [#614](https://github.com/lblod/frontend-gelinkt-notuleren/pull/614) [`7ecf0c67`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7ecf0c672a1884ec4d6c5157248ae8036cac2c43) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly track the saved state so we only ask to save changes when changes have been made
+
+- [#616](https://github.com/lblod/frontend-gelinkt-notuleren/pull/616) [`fb96524b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fb96524bbc83920ccfc800e2d819bbe4d9b295ca) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-plugins` to 15.2.2
+
+- [#616](https://github.com/lblod/frontend-gelinkt-notuleren/pull/616) [`5836bdb9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5836bdb964fe19e70cc64b93ade73fd320ce99cb) Thanks [@elpoelma](https://github.com/elpoelma)! - Update editor to 8.2.0
+
+- [#615](https://github.com/lblod/frontend-gelinkt-notuleren/pull/615) [`ccb58a99`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ccb58a99049b144656fc3c5a83f51f704e06a905) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly translate 'insert' in the sidebar
+
+## 5.10.0
+
+### Minor Changes
+
+- [#610](https://github.com/lblod/frontend-gelinkt-notuleren/pull/610) [`e4742aae`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e4742aae2c24e8977c0f00c105dfb816a8203878) Thanks [@elpoelma](https://github.com/elpoelma)! - Disable space-invisible in order to prevent slowdowns
+
+- [#611](https://github.com/lblod/frontend-gelinkt-notuleren/pull/611) [`4ba94b92`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ba94b9239dc06eeb2c35384648567879d05f944) Thanks [@dkozickis](https://github.com/dkozickis)! - Bump editor dependencies
+
+  - Bump `@lblod/ember-rdfa-editor` to `^8.0.2`
+  - Bump `@lblod/ember-rdfa-editor-lblod-plugins` to `^15.2.1`
+  - Enable `Alignment` plugin
+  - Enable column sizing for tables
+
 ## 5.9.3
 
 ### Patch Changes

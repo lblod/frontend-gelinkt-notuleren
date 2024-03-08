@@ -649,6 +649,7 @@ uittreksel-error:
 
 utils:
   save: Bewaar
+  insert: Invoegen
   file-options: Bestand acties
   html-export: Exporteer als HTML
   delete: Naar prullenmand
