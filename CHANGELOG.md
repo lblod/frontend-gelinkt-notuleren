@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.9.4
+
+### Patch Changes
+
+- [#628](https://github.com/lblod/frontend-gelinkt-notuleren/pull/628) [`84592be5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/84592be54a1043e3dc10b390405474f91288deaf) Thanks [@elpoelma](https://github.com/elpoelma)! - Add null/undefined checks to `behandeling-van-agendapunt` component to prevent errors
+
 ## 5.9.3
 
 ### Patch Changes
