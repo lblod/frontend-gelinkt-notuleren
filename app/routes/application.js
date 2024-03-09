@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { decentLocaleMatch } from '../utils/intl';
 
 const featureFlagRegex = /^feature\[(.+)\]$/;
 
@@ -9,8 +10,15 @@ export default class ApplicationRoute extends Route {
   @service features;
   @service session;
   @service plausible;
+  @service intl;
 
   async beforeModel(transition) {
+    const userLocales = decentLocaleMatch(
+      navigator.languages,
+      this.intl.locales,
+      'nl-BE',
+    );
+    this.intl.setLocale(userLocales);
     this.updateFeatureFlags(transition.to.queryParams);
     await this.startAnalytics();
     await this.session.setup();
