@@ -3,6 +3,7 @@ import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
 export default class MeetingsPublishNotulenController extends Controller {
   @service store;
@@ -148,6 +149,12 @@ export default class MeetingsPublishNotulenController extends Controller {
         this.publishedResource = publishedResource;
       }
       this.publicBehandelingUris = publicNotulen.publicBehandelingen || [];
+      if (isEmpty(publicNotulen.content)) {
+        const fileMeta = await publicNotulen.file;
+        publicNotulen.content = await (
+          await fetch(fileMeta.downloadLink)
+        ).text();
+      }
       this.notulen = publicNotulen;
     } else {
       try {
