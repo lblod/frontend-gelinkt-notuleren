@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.12.0
+
+### Minor Changes
+
+- [#626](https://github.com/lblod/frontend-gelinkt-notuleren/pull/626) [`088527e2`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/088527e241defa9c6badc4a3e137951f7bd830ab) Thanks [@nvdk](https://github.com/nvdk)! - support notulen publications as files
+
+- [#621](https://github.com/lblod/frontend-gelinkt-notuleren/pull/621) [`13028253`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1302825302e52078690acfd07492d32a82e53ed3) Thanks [@elpoelma](https://github.com/elpoelma)! - Improve browser language detection and set a fallback of `nl-BE`
+
+- [#627](https://github.com/lblod/frontend-gelinkt-notuleren/pull/627) [`f98250bb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f98250bb867f0b7eac428551578688f1255bfe42) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4660: Percentage resize for tables instead of absolute pixels
+
+### Patch Changes
+
+- [#627](https://github.com/lblod/frontend-gelinkt-notuleren/pull/627) [`f98250bb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f98250bb867f0b7eac428551578688f1255bfe42) Thanks [@dkozickis](https://github.com/dkozickis)! - Update `@lblod/ember-rdfa-editor` to 9.2.0
+
+- [#628](https://github.com/lblod/frontend-gelinkt-notuleren/pull/628) [`84592be5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/84592be54a1043e3dc10b390405474f91288deaf) Thanks [@elpoelma](https://github.com/elpoelma)! - Add null/undefined checks to `behandeling-van-agendapunt` component to prevent errors
+
 ## 5.11.0
 
 ### Minor Changes
