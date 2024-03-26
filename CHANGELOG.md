@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.12.2
+
+### Patch Changes
+
+- [#633](https://github.com/lblod/frontend-gelinkt-notuleren/pull/633) [`7198b50c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7198b50c5fca9e7889c5d0ac56967dd3719bcc46) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to v9.5.1
+
 ## 5.12.1
 
 ### Patch Changes
