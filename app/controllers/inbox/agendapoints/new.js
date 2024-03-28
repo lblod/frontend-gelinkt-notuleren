@@ -13,7 +13,7 @@ export default class InboxAgendapointsNewController extends Controller {
   redirectToAgendapoint(container, chosenTemplate) {
     // Plausible Analytics: post custom event about the template used to create the agendapoint
     this.plausible.trackEvent('Create agendapoint', {
-      templateTitle: chosenTemplate.get('title'),
+      templateTitle: chosenTemplate.title,
     });
     this.router.transitionTo('agendapoints.edit', container.id);
   }

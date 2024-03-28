@@ -5,6 +5,7 @@ export default class AgendapointsEditRoute extends Route {
   @service currentSession;
   @service router;
   @service standardTemplate;
+  @service templateFetcher;
 
   beforeModel(transition) {
     if (!this.currentSession.canWrite) {
@@ -19,11 +20,15 @@ export default class AgendapointsEditRoute extends Route {
       this.modelFor('agendapoints');
     const standardTemplates =
       await this.standardTemplate.fetchTemplates.perform();
+    const dynamicTemplates = await this.templateFetcher.fetch.perform({
+      templateType:
+        'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
+    });
     return {
       documentContainer,
       editorDocument: await documentContainer.get('currentVersion'),
       returnToMeeting,
-      standardTemplates,
+      templates: [...standardTemplates, ...dynamicTemplates],
     };
   }
 
