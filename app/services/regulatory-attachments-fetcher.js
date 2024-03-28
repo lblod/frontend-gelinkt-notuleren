@@ -56,11 +56,11 @@ export default class RegulatoryAttachmentsFetcher extends Service {
       const bindings = json.results.bindings;
       const templates = bindings.map((binding) => ({
         title: binding.title.value,
-        loadTemplateBody: async (template) => {
+        loadBody: async function () {
           const response = await fetch(
             `${config.regulatoryStatementFileEndpoint}/${binding.fileId.value}/download`,
           );
-          template.body = await response.text();
+          this.body = await response.text();
         },
       }));
       return templates;
