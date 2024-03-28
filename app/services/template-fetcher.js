@@ -3,7 +3,7 @@ import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { getOwner } from '@ember/application';
 
-export default class RegulatoryAttachmentsFetcher extends Service {
+export default class TemplateFetcher extends Service {
   @service session;
   @service store;
 
@@ -11,18 +11,22 @@ export default class RegulatoryAttachmentsFetcher extends Service {
   @tracked user;
   @tracked group;
   @tracked roles = [];
-
-  fetch = task(async () => {
+  fetch = task(async ({ templateType }) => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const sparqlQuery = `
-      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
       PREFIX pav: <http://purl.org/pav/>
       PREFIX dct: <http://purl.org/dc/terms/>
       PREFIX schema: <http://schema.org/>
-      PREFIX gn: <http://data.lblod.info/vocabularies/gelinktnotuleren/>
-      select distinct * where {
-        ?publishedContainer a gn:ReglementaireBijlageTemplate;
+      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      SELECT
+        ?container
+        ?title
+        ?fileId
+        (GROUP_CONCAT(?context;SEPARATOR="|") as ?contexts)
+        (GROUP_CONCAT(?disabledInContext;SEPARATOR="|") as ?disabledInContexts)
+      WHERE {
+        ?publishedContainer a <${templateType}>;
           mu:uuid ?uuid;
           pav:hasCurrentVersion ?container.
         ?container dct:title ?title;
@@ -30,8 +34,15 @@ export default class RegulatoryAttachmentsFetcher extends Service {
         OPTIONAL {
           ?container schema:validThrough ?validThrough.
         }
+        OPTIONAL {
+          ?container ext:context ?context.
+        }
+        OPTIONAL {
+          ?container ext:disabledInContext ?disabledInContext.
+        }
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
       }
+      GROUP BY ?container ?title ?fileId
     `;
     const details = {
       query: sparqlQuery,
@@ -62,6 +73,8 @@ export default class RegulatoryAttachmentsFetcher extends Service {
           );
           this.body = await response.text();
         },
+        contexts: binding.contexts.split('|'),
+        disabledInContexts: binding.disabledInContexts.split('|'),
       }));
       return templates;
     } else {
