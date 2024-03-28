@@ -95,8 +95,8 @@ export default class DocumentCreatorComponent extends Component {
        *
        * The fix was to change `reload` to `loadTemplateBody` in `RegulatoryAttachmentsFetcher`
        */
-      if (this.template.loadTemplateBody) {
-        await this.template.loadTemplateBody(this.template);
+      if (this.template.loadBody) {
+        await this.template.loadBody();
       }
       const trimmedHtml = this.template.body.replace(/>\s+</g, '><');
       return instantiateUuids(trimmedHtml);
