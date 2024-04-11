@@ -2,10 +2,18 @@ import {
   createEmberNodeSpec,
   createEmberNodeView,
 } from '@lblod/ember-rdfa-editor/utils/ember-node';
+import ReadOnlyContentSectionComponent from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/view';
 
+/**
+ * @typedef {import('@lblod/ember-rdfa-editor/utils/ember-node').EmberNodeConfig} EmberNodeConfig
+ */
+
+/**
+ * @type {EmberNodeConfig}
+ */
 const emberNodeConfig = {
   name: 'regulatory-statement-view',
-  componentPath: 'editor-plugins/regulatory-statements/view',
+  component: ReadOnlyContentSectionComponent,
   inline: false,
   group: 'block',
   atom: true,
