@@ -16,9 +16,12 @@ export default class MeetingsPublishPublicationActionsDetailRoute extends Route 
       return signedResource.content;
     } else if (signedResource?.file) {
       const fileMeta = await signedResource.file;
-      const fileContent =
-        fileMeta && (await (await fetch(fileMeta.downloadLink)).text());
-      return fileContent;
+      const fileReq = await fetch(fileMeta.downloadLink);
+      if (fileReq.ok) {
+        return fileReq.text();
+      } else {
+        return `<div class="au-c-alert au-c-alert--warning"><p>Error fetching file contents: ${fileReq.statusText}</p></div>`;
+      }
     } else {
       const publishedResource = await log.publishedResource;
       return publishedResource.content;

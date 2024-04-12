@@ -151,9 +151,12 @@ export default class MeetingsPublishNotulenController extends Controller {
       this.publicBehandelingUris = publicNotulen.publicBehandelingen || [];
       if (isEmpty(publicNotulen.content)) {
         const fileMeta = await publicNotulen.file;
-        publicNotulen.content = await (
-          await fetch(fileMeta.downloadLink)
-        ).text();
+        const fileReq = await fetch(fileMeta.downloadLink);
+        if (fileReq.ok) {
+          publicNotulen.content = await fileReq.text();
+        } else {
+          this.errors = [`Error fetching file contents: ${fileReq.statusText}`];
+        }
       }
       this.notulen = publicNotulen;
     } else {
