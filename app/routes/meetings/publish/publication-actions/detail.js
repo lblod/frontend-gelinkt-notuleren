@@ -12,8 +12,13 @@ export default class MeetingsPublishPublicationActionsDetailRoute extends Route 
       },
     );
     const signedResource = await log.signedResource;
-    if (signedResource) {
+    if (signedResource?.content) {
       return signedResource.content;
+    } else if (signedResource?.file) {
+      const fileMeta = await signedResource.file;
+      const fileContent =
+        fileMeta && (await (await fetch(fileMeta.downloadLink)).text());
+      return fileContent;
     } else {
       const publishedResource = await log.publishedResource;
       return publishedResource.content;
