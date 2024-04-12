@@ -1,11 +1,10 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
-
 import { task } from 'ember-concurrency';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { service } from '@ember/service';
 import { getOwner } from '@ember/application';
+
 import {
   em,
   strikethrough,
@@ -53,7 +52,6 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
-
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
   address,
@@ -82,15 +80,16 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
-
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
+
+import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -186,6 +185,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   }
 
   get config() {
+    const municipality = this.defaultMunicipality;
     return {
       tableOfContents: [
         {
@@ -221,12 +221,19 @@ export default class RegulatoryStatementsRoute extends Controller {
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,
-        defaultDecisionsGovernmentName: this.defaultMunicipality,
+        defaultDecisionsGovernmentName: municipality.naam,
       },
       link: {
         interactive: true,
       },
       structures: STRUCTURE_SPECS,
+      worship: {
+        endpoint: 'https://data.lblod.info/sparql',
+        defaultAdministrativeUnit: municipality && {
+          label: municipality.naam,
+          uri: municipality.uri,
+        },
+      },
     };
   }
 
@@ -273,7 +280,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     const classificatie = this.currentSession.classificatie;
 
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
-      return this.currentSession.group.naam;
+      return this.currentSession.group;
     } else {
       return null;
     }

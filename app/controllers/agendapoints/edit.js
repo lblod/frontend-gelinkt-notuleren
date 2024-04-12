@@ -3,8 +3,7 @@ import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
+
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
   em,
@@ -55,30 +54,21 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
-
 import {
   createInvisiblesPlugin,
   hardBreak,
   heading as headingInvisible,
   paragraph as paragraphInvisible,
 } from '@lblod/ember-rdfa-editor/plugins/invisibles';
-
 import {
   besluitNodes,
   structureSpecs,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
-
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
-
 import {
   templateComment,
   templateCommentView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
-
-import {
-  regulatoryStatementNode,
-  regulatoryStatementNodeView,
-} from '../../editor-plugins/regulatory-statements-plugin';
 import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
 import {
   link,
@@ -87,14 +77,21 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { validation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/validation';
 import { atLeastOneArticleContainer } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/decision-plugin/utils/validation-rules';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
+
+import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
+import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import {
+  regulatoryStatementNode,
+  regulatoryStatementNodeView,
+} from '../../editor-plugins/regulatory-statements-plugin';
 import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -160,6 +157,7 @@ export default class AgendapointsEditController extends Controller {
 
   get config() {
     const classificatie = this.currentSession.classificatie;
+    const municipality = this.defaultMunicipality;
     return {
       date: {
         formats: [
@@ -185,7 +183,7 @@ export default class AgendapointsEditController extends Controller {
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,
-        defaultDecisionsGovernmentName: this.defaultMunicipality,
+        defaultDecisionsGovernmentName: municipality.naam,
       },
       link: {
         interactive: true,
@@ -199,13 +197,20 @@ export default class AgendapointsEditController extends Controller {
         classificatieUri: classificatie?.uri,
       },
       structures: structureSpecs,
+      worship: {
+        endpoint: 'https://data.lblod.info/sparql',
+        defaultAdministrativeUnit: municipality && {
+          label: municipality.naam,
+          uri: municipality.uri,
+        },
+      },
     };
   }
 
   get defaultMunicipality() {
     const classificatie = this.currentSession.classificatie;
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
-      return this.currentSession.group.naam;
+      return this.currentSession.group;
     } else {
       return null;
     }

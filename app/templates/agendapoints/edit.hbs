@@ -149,6 +149,10 @@
       {{/if}}
       <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
       <VariablePlugin::Address::Insert @controller={{this.controller}} />
+      <WorshipPlugin::Insert
+        @controller={{this.controller}}
+        @config={{this.config.worship}}
+      />
     </:sidebarCollapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard
@@ -176,7 +180,7 @@
       />
       <VariablePlugin::Address::Edit
         @controller={{this.controller}}
-        @defaultMunicipality={{this.defaultMunicipality}}
+        @defaultMunicipality={{this.defaultMunicipality.naam}}
       />
       <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
     </:sidebar>
