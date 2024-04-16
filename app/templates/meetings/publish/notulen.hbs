@@ -23,7 +23,7 @@
           {{#if this.showPublicToggles}}
             {{#in-element this.containerElement}}
               <Signatures::Notulen::BehandelingenList
-                @notulen={{this.notulen}}
+                @isPublished={{this.isPublished}}
                 @prepublishedBehandelingen={{this.treatments}}
                 @publicBehandelingUris={{this.publicBehandelingUris}}
                 @toggle={{this.togglePublicationStatus}}

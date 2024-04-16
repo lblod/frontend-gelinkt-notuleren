@@ -404,7 +404,6 @@ export default class MeetingsPublishNotulenController extends Controller {
       }
     });
 
-    this.notulen.set('body', div.innerHTML);
     this.allBehandelingPublic =
       this.treatments.length === this.publicBehandelingUris.length;
   }
