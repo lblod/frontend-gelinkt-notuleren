@@ -1,6 +1,6 @@
 {{#if @readOnly}}
   <h1 class="au-c-app-chrome__title" title={{this.title}}>
-    {{limit-content this.title 70}} 
+    {{limit-content this.title 70}}
   </h1>
 {{else}}
   {{#if this.active}}
@@ -33,8 +33,8 @@
     </form>
   {{else}}
     <h1 class="au-c-app-chrome__title au-c-app-chrome__title--edit" title={{this.title}}>
-      {{limit-content this.title 70}} 
-      <AuButton {{on "click" this.enableEdit}} @icon="pencil" @skin="tertiary" @hideText={{true}} >{{t "editor-document-title.change-title"}}</AuButton>
+      {{limit-content this.title 70}}
+      <AuButton {{on "click" this.enableEdit}} @icon="pencil" @skin="link" @hideText={{true}} >{{t "editor-document-title.change-title"}}</AuButton>
     </h1>
     {{#if this.showIsSavedTask.isRunning}}
       <AuPill

@@ -42,7 +42,7 @@
             <AuToggleSwitch @label={{t "attachments.regulatory"}} @checked={{eq attachment.type.id this.regulatoryTypeId}} @onChange={{perform this.updateAttachmentIsRegulatory attachment}} />
           </td>
           <td class="au-u-text-right">
-            <AuButton @skin="tertiary" @alert={{true}} @icon="bin" @iconAlignment="left" {{on "click" (perform this.deleteAttachment attachment)}}>
+            <AuButton @skin="link" @alert={{true}} @icon="bin" @iconAlignment="left" {{on "click" (perform this.deleteAttachment attachment)}}>
               {{t "attachments.delete"}}
             </AuButton>
           </td>

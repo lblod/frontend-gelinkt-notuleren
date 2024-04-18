@@ -5,7 +5,7 @@ module.exports = function (environment) {
     modulePrefix: 'frontend-gelinkt-notuleren',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'history',
     regulatoryStatementEndpoint: '{{REGULATORY_STATEMENT_ENDPOINT}}',
     regulatoryStatementFileEndpoint: '{{REGULATORY_STATEMENT_FILE_ENDPOINT}}',
     mowRegistryEndpoint: '{{MOW_REGISTRY_ENDPOINT}}',
