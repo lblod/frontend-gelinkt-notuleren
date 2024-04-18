@@ -1,34 +1,43 @@
+const matchUserLocaleToSupportedLocale = (userLocale, supportedLocales) => {
+  // Check if there is an exact match, e.g. nl-be === nl-be
+  const supportedLocale = supportedLocales.find(
+    (locale) => locale === userLocale,
+  );
+
+  if (supportedLocale) {
+    return supportedLocale;
+  }
+
+  // Check if there is a match based on language, e.g. nl === nl-be
+  const language = userLocale.split('-')[0];
+  return supportedLocales.find((locale) =>
+    locale.toLowerCase().startsWith(language.toLowerCase()),
+  );
+};
+
 /**
  * Helper function to help pick supported locales for ember-intl.
- * Returns exact matches first, then language matches, then the default.
+ *
+ * @param {string[]} userLocales - The user's locales, in order of preference,
+ * possibly from `navigator.languages`
+ * @param {string[]} supportedLocales - The locales the app supports, provided by `ember-intl`.
+ * @param {string} defaultLocale - The default fallback locale.
+ *
+ * @returns {string[]} - The supported locales, in order of preference.
  **/
 export function decentLocaleMatch(
   userLocales,
   supportedLocales,
   defaultLocale,
 ) {
-  // Ember-intl lowercases locales so we can make comparisons easier by doing the same
-  const userLocs = userLocales.map((locale) => locale.toLowerCase());
-  const supportedLocs = supportedLocales.map((locale) => locale.toLowerCase());
-
-  // First find exact matches. Use a set to avoid duplicates while preserving insert order.
-  const matches = new Set(
-    userLocs.filter((locale) => supportedLocs.includes(locale)),
+  const supportedLocalesThatUserPrefers = userLocales.map((userLocale) =>
+    matchUserLocaleToSupportedLocale(userLocale, supportedLocales),
   );
 
-  // Then look for locales that just match based on language,
-  // e.g. match en or en-US if looking for en-GB
-  const languageMap = {};
-  supportedLocs.forEach((locale) => {
-    const lang = locale.split('-')[0];
-    languageMap[lang] = [...(languageMap[lang] || []), locale];
-  });
-  userLocs.forEach((locale) => {
-    const looseMatches = languageMap[locale.split('-')[0]] ?? [];
-    looseMatches.forEach((match) => matches.add(match));
-  });
+  const deduplicatedSupportedLocales = new Set([
+    ...supportedLocalesThatUserPrefers.map((locale) => locale.toLowerCase()),
+    defaultLocale.toLowerCase(),
+  ]);
 
-  // Add the default so we always have something
-  matches.add(defaultLocale.toLowerCase());
-  return [...matches];
+  return [...deduplicatedSupportedLocales];
 }
