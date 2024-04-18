@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { service } from '@ember/service';
 import { getOwner } from '@ember/application';
+
 import {
   em,
   strikethrough,
@@ -193,6 +194,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     return null;
   }
   get config() {
+    const municipality = this.defaultMunicipality;
     return {
       tableOfContents: [
         {
@@ -228,7 +230,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,
-        defaultDecisionsGovernmentName: this.defaultMunicipality,
+        defaultDecisionsGovernmentName: municipality.naam,
       },
       link: {
         interactive: true,
@@ -236,6 +238,13 @@ export default class RegulatoryStatementsRoute extends Controller {
       structures: STRUCTURE_SPECS,
       snippet: {
         endpoint: ENV.regulatoryStatementEndpoint,
+      },
+      worship: {
+        endpoint: 'https://data.lblod.info/sparql',
+        defaultAdministrativeUnit: municipality && {
+          label: municipality.naam,
+          uri: municipality.uri,
+        },
       },
     };
   }
@@ -283,7 +292,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     const classificatie = this.currentSession.classificatie;
 
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
-      return this.currentSession.group.naam;
+      return this.currentSession.group;
     } else {
       return null;
     }

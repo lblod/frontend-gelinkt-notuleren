@@ -3,6 +3,8 @@ import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+import { getResourceContent } from 'frontend-gelinkt-notuleren/utils/get-resource-content';
 
 export default class MeetingsPublishNotulenController extends Controller {
   @service store;
@@ -13,7 +15,10 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
-  @tracked fullNotulen;
+  @tracked fullNotulenContent;
+  // Since content can be in a file or in the triplestore, handle content independently from the
+  // notulen itself
+  @tracked notulenContent;
   @tracked errors;
   @tracked validationErrors;
   @tracked signedResources = [];
@@ -32,6 +37,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   resetController() {
     this.notulen = null;
+    this.notulenContent = null;
     this.errors = null;
     this.validationErrors = null;
     this.signedResources = [];
@@ -149,6 +155,13 @@ export default class MeetingsPublishNotulenController extends Controller {
       }
       this.publicBehandelingUris = publicNotulen.publicBehandelingen || [];
       this.notulen = publicNotulen;
+      // Fetching the file could take time or fail, so clear the content first
+      this.notulenContent = null;
+      this.notulenContent = !isEmpty(publicNotulen.content)
+        ? publicNotulen.content
+        : await getResourceContent(publicNotulen, (statusText) => {
+            this.errors = [`Error fetching file contents: ${statusText}`];
+          });
     } else {
       try {
         // generate a rendered document
@@ -166,6 +179,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         });
 
         this.notulen = rslt;
+        this.notulenContent = content;
         this.validationErrors = errors;
       } catch (e) {
         console.error(e);
@@ -193,7 +207,12 @@ export default class MeetingsPublishNotulenController extends Controller {
       this.signedResources = signedNonDeletedResources;
       this.hasDeletedSignedResources =
         !!signedDeletedResources.toArray().length;
-      this.fullNotulen = fullNotulen;
+      this.fullNotulenContent = await getResourceContent(
+        fullNotulen,
+        (statusText) => {
+          this.errors = [`Error fetching file contents: ${statusText}`];
+        },
+      );
     } else {
       // this means there are no signatures
       try {
@@ -204,12 +223,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         // -> this will still show all the contents as they always sign everything
         const { content, errors } =
           await this.createPrePublishedResource.perform();
-        const rslt = await this.store.createRecord('versioned-notulen', {
-          zitting: this.model,
-          content: content,
-          kind: 'full',
-        });
-        this.fullNotulen = rslt;
+        this.fullNotulenContent = content;
         this.validationErrors = errors;
       } catch (e) {
         console.error(e);
@@ -351,9 +365,9 @@ export default class MeetingsPublishNotulenController extends Controller {
   });
 
   get zittingWrapper() {
-    if (this.notulen?.content) {
+    if (this.notulenContent) {
       const div = document.createElement('div');
-      div.innerHTML = this.notulen.content;
+      div.innerHTML = this.notulenContent;
 
       const bvapContainer = div.querySelector(
         "[property='http://mu.semte.ch/vocabularies/ext/behandelingVanAgendapuntenContainer']",
@@ -379,7 +393,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   updateNotulenPreview() {
     const div = document.createElement('div');
-    div.innerHTML = this.notulen.content;
+    div.innerHTML = this.notulenContent;
 
     const behandelingNodes = div.querySelectorAll(
       "[typeof='besluit:BehandelingVanAgendapunt']",
@@ -394,7 +408,6 @@ export default class MeetingsPublishNotulenController extends Controller {
       }
     });
 
-    this.notulen.set('body', div.innerHTML);
     this.allBehandelingPublic =
       this.treatments.length === this.publicBehandelingUris.length;
   }

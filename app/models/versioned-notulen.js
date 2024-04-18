@@ -1,6 +1,6 @@
 import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
 
-export default class VersionedNotulesModel extends Model {
+export default class VersionedNotulenModel extends Model {
   @attr state;
   @attr content;
   @attr publicContent;
@@ -14,4 +14,5 @@ export default class VersionedNotulesModel extends Model {
   publishedResource;
   @belongsTo('editor-document', { inverse: null }) editorDocument;
   @belongsTo('zitting', { inverse: null }) zitting;
+  @belongsTo('file', { inverse: null }) file;
 }

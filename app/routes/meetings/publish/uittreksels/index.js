@@ -36,7 +36,7 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
       query['filter[titel]'] = params.title;
     }
     const result = await this.store.query('agendapunt', query);
-    const agendapoints = result.toArray();
+    const agendapoints = result.slice();
     const agendapointsToDisplay = [];
     agendapointsToDisplay.meta = result.meta;
 
@@ -48,7 +48,7 @@ export default class MeetingsPublishUittrekselsRoute extends Route {
           'filter[:or:][deleted]': false,
           'filter[:or:][:has-no:deleted]': 'yes',
         })
-      ).toArray()[0];
+      )[0];
       agendapointsToDisplay.push({
         titel: agendapoint.titel,
         behandeling: agendapoint.behandeling,
