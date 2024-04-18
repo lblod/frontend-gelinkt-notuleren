@@ -76,7 +76,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         versionedTreatment,
         meeting,
         signedResources: signedResources.toArray(),
-        publishedResource: publishedResource.firstObject,
+        publishedResource: publishedResource[0],
         // if a versionedTreatment exists, that means some signature or publication
         // has happened, which means that there are no errors, so we can safely do this
         validationErrors: [],
