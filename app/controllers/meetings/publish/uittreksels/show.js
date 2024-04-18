@@ -143,6 +143,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @action
   async refreshRoute() {
     await this.router.refresh();
+    this.error = undefined;
   }
 
   signDocumentTask = task(async () => {
