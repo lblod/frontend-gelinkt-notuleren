@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import RSVP from 'rsvp';
 
 export default class AgendapointsEditRoute extends Route {
   @service currentSession;
@@ -24,12 +25,12 @@ export default class AgendapointsEditRoute extends Route {
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
     });
-    return {
+    return RSVP.hash({
       documentContainer,
-      editorDocument: await documentContainer.get('currentVersion'),
+      editorDocument: documentContainer.currentVersion,
       returnToMeeting,
       templates: [...standardTemplates, ...dynamicTemplates],
-    };
+    });
   }
 
   setupController(controller, model) {

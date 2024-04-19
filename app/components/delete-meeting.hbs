@@ -1,5 +1,5 @@
 {{#if this.visible}}
-  <AuButton {{on "click" (fn (mut this.displayDeleteModal) true)}} @skin="tertiary" @alert="true" role="menuitem">
+  <AuButton {{on "click" (fn (mut this.displayDeleteModal) true)}} @skin="link" @alert="true" role="menuitem">
     <AuIcon @icon="bin" @alignment="left" />
     {{t "meetings.delete.delete"}}
   </AuButton>

@@ -1,5 +1,31 @@
 # frontend-gelinkt-notuleren
 
+## 5.13.0
+
+### Minor Changes
+
+- [#643](https://github.com/lblod/frontend-gelinkt-notuleren/pull/643) [`968dc25b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/968dc25b9bcbde828e6e0316f55d38b9899dabff) Thanks [@piemonkey](https://github.com/piemonkey)! - Add initial version of worship service plugin
+
+### Patch Changes
+
+- [#641](https://github.com/lblod/frontend-gelinkt-notuleren/pull/641) [`8b3fab9a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8b3fab9a9a01b0c919871fd0f57d13d2dee12e03) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4772: Fix supported language detection
+
+- [#634](https://github.com/lblod/frontend-gelinkt-notuleren/pull/634) [`b2649e7a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b2649e7af8c21160c93666bbd07d8770b4c9d334) Thanks [@elpoelma](https://github.com/elpoelma)! - (internal) Drop requirement to pass template to its own loadBody method
+
+- [#636](https://github.com/lblod/frontend-gelinkt-notuleren/pull/636) [`18e735e7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/18e735e733e6f007ae37ab3c1dc4b292069593d6) Thanks [@elpoelma](https://github.com/elpoelma)! - Update editor to 9.6.1 and plugins to 16.3.0
+
+- [#643](https://github.com/lblod/frontend-gelinkt-notuleren/pull/643) [`61a90dda`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/61a90ddad970b8e52b919caac58565f4b01422e1) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix some deprecation warnings from appuniversum
+
+- [#638](https://github.com/lblod/frontend-gelinkt-notuleren/pull/638) [`cb2efe03`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/cb2efe030c1ebe7f353f9f03337dc494d168a129) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4771: Regulatory statements not showing in agendapoint
+
+  Fix `emberNodeConfig` definition for `regulatory-statement-view` to use `component` instead of old `componentPath`.
+
+- [#640](https://github.com/lblod/frontend-gelinkt-notuleren/pull/640) [`5aa056ec`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5aa056ec79ccc8ce1a9b7f8184e9ce136ea35b04) Thanks [@piemonkey](https://github.com/piemonkey)! - Add support for signed-resources and published-resources which have their content in files instead of directly as text
+
+- [#640](https://github.com/lblod/frontend-gelinkt-notuleren/pull/640) [`ac1b6763`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ac1b6763f0dcebc78e8389b3dec75b6a71c891a3) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix some bugs around versioned-notulen with content stored as files
+
+- [#643](https://github.com/lblod/frontend-gelinkt-notuleren/pull/643) [`a1c1b584`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a1c1b584e600ee177054c496fbd3d31dba1c4cc1) Thanks [@piemonkey](https://github.com/piemonkey)! - Improve editor load times by running some promises in parallel instead of series
+
 ## 5.12.2
 
 ### Patch Changes
