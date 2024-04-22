@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.13.1
+
+### Patch Changes
+
+- [#644](https://github.com/lblod/frontend-gelinkt-notuleren/pull/644) [`862e5584`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/862e5584a501db9b05ccd45519d5228149d0e261) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4808: Fix language detection for users that are coming to GN for the first time
+
 ## 5.13.0
 
 ### Minor Changes
