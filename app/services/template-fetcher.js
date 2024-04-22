@@ -20,29 +20,29 @@ export default class TemplateFetcher extends Service {
       PREFIX schema: <http://schema.org/>
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       SELECT
-        ?container
+        ?template_version
         ?title
         ?fileId
         (GROUP_CONCAT(?context;SEPARATOR="|") as ?contexts)
         (GROUP_CONCAT(?disabledInContext;SEPARATOR="|") as ?disabledInContexts)
       WHERE {
-        ?publishedContainer a <${templateType}>;
+        ?template a <${templateType}>;
           mu:uuid ?uuid;
-          pav:hasCurrentVersion ?container.
-        ?container dct:title ?title;
-          mu:uuid ?fileId.
+          pav:hasCurrentVersion ?template_version.
+        ?template_version mu:uuid ?fileId;
+                          dct:title ?title.
         OPTIONAL {
-          ?container schema:validThrough ?validThrough.
+          ?template_version schema:validThrough ?validThrough.
         }
         OPTIONAL {
-          ?container ext:context ?context.
+          ?template_version ext:context ?context.
         }
         OPTIONAL {
-          ?container ext:disabledInContext ?disabledInContext.
+          ?template_version ext:disabledInContext ?disabledInContext.
         }
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
       }
-      GROUP BY ?container ?title ?fileId
+      GROUP BY ?template_version ?title ?fileId
     `;
     const details = {
       query: sparqlQuery,
@@ -65,17 +65,19 @@ export default class TemplateFetcher extends Service {
     if (response.status === 200) {
       const json = await response.json();
       const bindings = json.results.bindings;
-      const templates = bindings.map((binding) => ({
-        title: binding.title.value,
-        loadBody: async function () {
-          const response = await fetch(
-            `${config.regulatoryStatementFileEndpoint}/${binding.fileId.value}/download`,
-          );
-          this.body = await response.text();
-        },
-        contexts: binding.contexts.split('|'),
-        disabledInContexts: binding.disabledInContexts.split('|'),
-      }));
+      const templates = bindings.map((binding) => {
+        return {
+          title: binding.title.value,
+          loadBody: async function () {
+            const response = await fetch(
+              `${config.regulatoryStatementFileEndpoint}/${binding.fileId.value}/download`,
+            );
+            this.body = await response.text();
+          },
+          contexts: binding.contexts.value.split('|'),
+          disabledInContexts: binding.disabledInContexts.value.split('|'),
+        };
+      });
       return templates;
     } else {
       return [];
