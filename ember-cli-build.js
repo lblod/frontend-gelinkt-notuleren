@@ -5,10 +5,6 @@ const envIsProduction = process.env.EMBER_ENV === 'production';
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
-    '@appuniversum/ember-appuniversum': {
-      disableWormholeElement: true,
-      dutchDatePickerLocalization: true,
-    },
     'ember-simple-auth': {
       useSessionSetupMethod: true,
     },
