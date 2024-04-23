@@ -7,6 +7,7 @@ module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     '@appuniversum/ember-appuniversum': {
       disableWormholeElement: true,
+      dutchDatePickerLocalization: true,
     },
     'ember-simple-auth': {
       useSessionSetupMethod: true,
@@ -25,6 +26,7 @@ module.exports = function (defaults) {
     sassOptions: {
       sourceMap: !envIsProduction,
       sourceMapEmbed: !envIsProduction,
+      includePaths: ['node_modules/@appuniversum/ember-appuniversum'],
     },
     autoprefixer: {
       enabled: true,

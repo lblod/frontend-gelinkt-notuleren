@@ -8,13 +8,16 @@ export default class InboxRegulatoryStatementsController extends Controller {
   @tracked pageSize = 20;
   @tracked filter = '';
   @tracked searchValue = this.filter;
-  @tracked debounceTime = 2000;
+  @tracked debounceTime = 1000;
 
   @service currentSession;
   @service router;
   @service intl;
   sort = '-current-version.updated-on';
 
+  /**
+   * @param {InputEvent<HTMLInputElement>} event
+   */
   updateFilter = restartableTask(async (event) => {
     this.searchValue = event.target.value;
     await timeout(this.debounceTime);

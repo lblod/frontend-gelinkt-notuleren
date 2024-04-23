@@ -13,7 +13,14 @@
           </AuHeading>
         </Group>
         <Group class="au-c-toolbar__group--center">
-          <AuInput @icon="search" @iconAlignment="right" @width="block" @value={{this.searchValue}} placeholder={{t 'inbox.irg-archive.search-placeholder'}} {{on "input" (perform this.updateFilter)}}/>
+          <AuInput
+            @icon="search"
+            @iconAlignment="right"
+            @width="block"
+            value={{this.searchValue}}
+            placeholder={{t 'inbox.irg-archive.search-placeholder'}}
+            {{on "input" (perform this.updateFilter)}}
+          />
         </Group>
       </AuToolbar>
     </menu.general>
