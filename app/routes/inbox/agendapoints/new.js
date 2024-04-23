@@ -14,15 +14,21 @@ export default class InboxAgendapointsNewRoute extends Route {
   }
 
   async model() {
-    const templates = await this.standardTemplate.fetchTemplates.perform();
-    const standardTemplates = this.standardTemplate.templatesForContext(
-      templates,
-      ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt'],
-    );
-    const dynamicTemplates = await this.templateFetcher.fetch.perform({
+    const standardTemplatesPromise = this.standardTemplate.fetchTemplates
+      .perform()
+      .then((standardTemplates) => {
+        return this.standardTemplate.templatesForContext(standardTemplates, [
+          'http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt',
+        ]);
+      });
+    const dynamicTemplatesPromise = this.templateFetcher.fetch.perform({
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
     });
-    return [...standardTemplates, ...dynamicTemplates];
+    t;
+    return Promise.all([
+      standardTemplatesPromise,
+      dynamicTemplatesPromise,
+    ]).then((result) => result.flat());
   }
 }
