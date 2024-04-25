@@ -1,7 +1,7 @@
-<AuModal @modalOpen={{true}} 
-         @title={{t "regulatory-statements-plugin.insert-statement"}} 
-         @size="large" 
-         @padding="none" 
+<AuModal @modalOpen={{true}}
+         @title={{t "regulatory-statements-plugin.insert-statement"}}
+         @size="large"
+         @padding="none"
          @closeModal={{@closeModal}}
          {{did-insert this.didInsert}}
   as |modal|>
@@ -17,8 +17,9 @@
               @icon="search"
               @iconAlignment="right"
               placeholder={{t "regulatory-statements-plugin.search"}}
-              @value={{this.searchValue}}
-              {{on "input" (perform this.updateFilter)}} />
+              value={{this.searchValue}}
+              {{on "input" (perform this.updateFilter)}}
+            />
             <AuHr @size="large" />
             {{#if this.regulatoryStatements}}
               <ul class="au-c-list-navigation">

@@ -44,8 +44,12 @@ export default class manageIntermissionsEditComponent extends Component {
     }
   }
 
-  set commentExternal(value) {
-    this.comment = value;
+  /**
+   * @param {ChangeEvent<HTMLInputElement>} event
+   */
+  @action
+  handleCommentExternalChange(event) {
+    this.comment = event.target.value;
   }
 
   @action

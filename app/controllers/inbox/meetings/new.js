@@ -11,6 +11,14 @@ export default class InboxMeetingsNewController extends Controller {
     return this.model;
   }
 
+  /**
+   * @param {ChangeEvent<HTMLInputElement>} event
+   */
+  @action
+  handleUpdateMeetingOpLocatie(event) {
+    this.meeting.opLocatie = event.target.value;
+  }
+
   saveMeetingTask = dropTask(async (event) => {
     event.preventDefault();
 

@@ -57,7 +57,12 @@
       </div>
       <div>
         <AuLabel for="intermissionComment">{{t "manage-intermissions.comment-label"}} <AuPill>{{t "manage-agenda-zitting-modal-move.optional"}}</AuPill></AuLabel>
-        <AuTextarea id="intermissionComment" @value={{this.commentExternal}} @width="block"></AuTextarea>
+        <AuTextarea
+          id="intermissionComment"
+          value={{this.commentExternal}}
+          {{on "input" this.handleCommentExternalChange}}
+          @width="block"
+        />
       </div>
     </div>
   </Modal.Body>

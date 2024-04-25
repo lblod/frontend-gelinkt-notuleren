@@ -1,4 +1,9 @@
 <p>
   <AuLabel for={{@for}}>{{yield}}</AuLabel>
-  <AuTextarea id={{@for}} @value={{this.value}} @width="block"></AuTextarea>
+  <AuTextarea
+    id={{@for}}
+    value={{this.value}}
+    {{on "input" this.handleValueChange}}
+    @width="block"
+  />
 </p>

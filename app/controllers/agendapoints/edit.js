@@ -183,7 +183,7 @@ export default class AgendapointsEditController extends Controller {
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,
-        defaultDecisionsGovernmentName: municipality.naam,
+        defaultDecisionsGovernmentName: municipality?.naam,
       },
       link: {
         interactive: true,

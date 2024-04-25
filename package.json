@@ -29,7 +29,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "~2.15.0",
+    "@appuniversum/ember-appuniversum": "^3.4.1",
     "@babel/eslint-parser": "^7.22.9",
     "@babel/plugin-proposal-decorators": "^7.22.5",
     "@changesets/changelog-github": "^0.4.8",
@@ -41,10 +41,10 @@
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@lblod/ember-acmidm-login": "^2.0.0-beta.1",
-    "@lblod/ember-environment-banner": "^0.2.0",
+    "@lblod/ember-environment-banner": "^0.5.0",
     "@lblod/ember-mock-login": "0.7.0",
     "@lblod/ember-rdfa-editor": "9.6.1",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "^16.4.0",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "^17.0.0",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
@@ -111,7 +111,9 @@
   },
   "overrides": {
     "@appuniversum/ember-appuniversum": {
-      "tracked-toolbox": "^2.0.0"
+      "tracked-toolbox": "^2.0.0",
+      "ember-concurrency": "^2.3.7",
+      "ember-modifier": "^3.2.7"
     },
     "@lblod/ember-rdfa-editor": {
       "ember-focus-trap": "^1.1.0"

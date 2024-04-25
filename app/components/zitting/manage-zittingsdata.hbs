@@ -51,7 +51,13 @@
         <div>
           {{#let (unique-id) as |id|}}
             <AuLabel for={{id}}>{{t "manage-zittings-data.op-locatie-label"}}</AuLabel>
-            <AuInput type='text' @value={{mut this.opLocatie}} @width="block" id={{id}} />
+            <AuInput
+              type='text'
+              value={{this.opLocatie}}
+              {{on "input" this.handleOpLocatieChange}}
+              @width="block"
+              id={{id}}
+            />
           {{/let}}
         </div>
         <div>

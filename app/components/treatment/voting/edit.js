@@ -21,8 +21,25 @@ export default class TreatmentVotingEditComponent extends Component {
   save() {
     this.args.onSave && this.args.onSave();
   }
+
   @action
   cancel() {
     this.args.onCancel && this.args.onCancel();
+  }
+
+  /**
+   * @param {ChangeEvent<HTMLInputElement>} event
+   */
+  @action
+  handleVotingSubjectChange(event) {
+    this.editStemming.stemming.onderwerp = event.target.value;
+  }
+
+  /**
+   * @param {ChangeEvent<HTMLInputElement>} event
+   */
+  @action
+  handleVotingConsequencesChange(event) {
+    this.editStemming.stemming.gevolg = event.target.value;
   }
 }

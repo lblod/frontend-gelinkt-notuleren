@@ -8,3 +8,4 @@ au-date-picker:
   close-label: "Sluit venster"
   keyboard-instruction: "Gebruik de pijltjestoetsen om te navigeren"
   calendar-heading: "Kies een datum"
+  placeholder: "DD-MM-JJJJ"

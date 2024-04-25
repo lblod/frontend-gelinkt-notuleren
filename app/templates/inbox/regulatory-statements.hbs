@@ -21,7 +21,7 @@
             {{on "input" (perform this.updateFilter)}}
             @icon="search"
             @iconAlignment="right"
-            @value={{this.searchValue}}
+            value={{this.searchValue}}
             placeholder={{t 'inbox.regulatory-statements.search-placeholder'}}
           />
           {{#unless this.readOnly}}
