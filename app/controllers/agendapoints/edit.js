@@ -44,9 +44,10 @@ import {
   textVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
-  bullet_list,
-  list_item,
-  ordered_list,
+  bulletListWithConfig,
+  listItemWithConfig,
+  listTrackingPlugin,
+  orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
 import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
@@ -115,9 +116,9 @@ export default class AgendapointsEditController extends Controller {
       doc: docWithConfig(),
       paragraph,
       repaired_block,
-      list_item,
-      ordered_list,
-      bullet_list,
+      list_item: listItemWithConfig({ enableHierarchicalList: true }),
+      ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
+      bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
@@ -260,6 +261,7 @@ export default class AgendapointsEditController extends Controller {
         },
       ),
       linkPasteHandler(this.schema.nodes.link),
+      listTrackingPlugin(),
     ];
   }
 
