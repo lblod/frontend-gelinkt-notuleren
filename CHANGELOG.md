@@ -1,5 +1,31 @@
 # frontend-gelinkt-notuleren
 
+## 5.14.0
+
+### Minor Changes
+
+- [#645](https://github.com/lblod/frontend-gelinkt-notuleren/pull/645) [`c522af9a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c522af9a8fa38ce5210b1fc99464334f4b82ffa4) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4800: Bump `@appuniversum/ember-appuniversum` to `3.4.1`
+
+  - Bump `@appuniversum/ember-appuniversum` to `3.4.1`
+
+    - Update breaking changes, mainly removing two-way binding from `AuTextarea` and `AuInput` components.
+    - Change how `appuniversum` SCSS is imported in the app.
+    - Add a key to `AuDatePicker` localisation.
+
+  - Bump `@lblod/ember-rdfa-editor-lblod-plugins` to `17.0.0`
+  - Bump `@lblod/ember-environment-banner` to `0.5.0`
+
+- [#646](https://github.com/lblod/frontend-gelinkt-notuleren/pull/646) [`906a1363`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/906a136348e2c074f8c8268aeabb4470825d73ee) Thanks [@dkozickis](https://github.com/dkozickis)! - Bump `ember-rdfa-editor-lblod-plugins` to `17.1.0` to get snippet changes:
+
+  ##### GN-4811: Only show the titles of the snippets
+
+  In the snippet insert modal: only show the titles of the snippets
+
+  #### GN-4816: Add sorting for snippet lists
+
+  - Use AuDataTable
+  - Add sorting for snippet lists
+
 ## 5.13.1
 
 ### Patch Changes
