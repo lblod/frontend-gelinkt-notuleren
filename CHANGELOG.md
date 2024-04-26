@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.15.0
+
+### Minor Changes
+
+- [#651](https://github.com/lblod/frontend-gelinkt-notuleren/pull/651) [`9419f783`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9419f783fb6aa7d8a8b6d1ec3d3f8df33619fc60) Thanks [@elpoelma](https://github.com/elpoelma)! - Enable support for hierarchical lists
+
+### Patch Changes
+
+- [#651](https://github.com/lblod/frontend-gelinkt-notuleren/pull/651) [`fe2ab595`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fe2ab595444c113bd2ff612145b7d6fed7389664) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 9.7.0
+
 ## 5.14.0
 
 ### Minor Changes
