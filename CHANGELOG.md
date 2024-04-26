@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.15.1
+
+### Patch Changes
+
+- [#652](https://github.com/lblod/frontend-gelinkt-notuleren/pull/652) [`ff9f7bad`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ff9f7badbc085f557d8e8fb020d9a774c2b8dee5) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to 17.1.1
+
+- [`4ba4d36e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ba4d36ef0e1694f21312fa833eabd371fd2977e) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 9.7.1
+
 ## 5.15.0
 
 ### Minor Changes
