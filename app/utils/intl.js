@@ -35,9 +35,21 @@ export function decentLocaleMatch(
   );
 
   const deduplicatedSupportedLocales = new Set([
-    ...supportedLocalesThatUserPrefers.map((locale) => locale.toLowerCase()),
+    ...supportedLocalesThatUserPrefers.map(
+      (locale) => locale && locale.toLowerCase(),
+    ),
     defaultLocale.toLowerCase(),
   ]);
 
-  return [...deduplicatedSupportedLocales];
+  const definedSupportedLocales = [...deduplicatedSupportedLocales].filter(
+    (locale) => typeof locale === 'string',
+  );
+
+  const lowerCaseDefaultLocale = defaultLocale.toLowerCase();
+
+  if (definedSupportedLocales.length < 1) {
+    return [lowerCaseDefaultLocale];
+  }
+
+  return [...definedSupportedLocales, lowerCaseDefaultLocale];
 }

@@ -34,9 +34,18 @@ import {
   linkPasteHandler,
 } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
-  bullet_list,
-  list_item,
-  ordered_list,
+  templateComment,
+  templateCommentView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import {
+  STRUCTURE_NODES,
+  STRUCTURE_SPECS,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
+import {
+  bulletListWithConfig,
+  listItemWithConfig,
+  listTrackingPlugin,
+  orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
 import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
@@ -55,15 +64,7 @@ import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-applica
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
-import {
-  templateComment,
-  templateCommentView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
-import {
-  STRUCTURE_NODES,
-  STRUCTURE_SPECS,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
   address,
   addressView,
@@ -115,9 +116,9 @@ export default class RegulatoryStatementsRoute extends Controller {
       document_title,
       table_of_contents: table_of_contents(this.config.tableOfContents),
       repaired_block,
-      list_item,
-      ordered_list,
-      bullet_list,
+      list_item: listItemWithConfig({ enableHierarchicalList: true }),
+      ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
+      bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
       placeholder,
       templateComment,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
@@ -184,6 +185,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       ),
       linkPasteHandler(this.schema.nodes.link),
       emberApplication({ application: getOwner(this) }),
+      listTrackingPlugin(),
     ];
   }
 

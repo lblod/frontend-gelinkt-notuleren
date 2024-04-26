@@ -31,6 +31,7 @@ export default class DateTimePicker extends Component {
       dayNames: getLocalizedDays(this.intl),
       monthNames: getLocalizedMonths(this.intl),
       monthNamesShort: getLocalizedMonths(this.intl, 'short'),
+      placeholder: this.intl.t('au-date-picker.placeholder'),
     };
   }
 

@@ -32,7 +32,13 @@
       <div>
         {{#let (unique-id) as |id|}}
           <AuLabel for={{id}}>{{t "inbox.meetings.new.meeting.location"}}</AuLabel>
-          <AuInput @value={{this.meeting.opLocatie}} @width="block" id={{id}} type="text" />
+          <AuInput
+            value={{this.meeting.opLocatie}}
+            {{on "input" this.handleUpdateMeetingOpLocatie}}
+            @width="block"
+            id={{id}}
+            type="text"
+          />
         {{/let}}
       </div>
       <div>
