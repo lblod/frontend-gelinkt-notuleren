@@ -93,7 +93,8 @@ import {
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
 
-import SnippetInsertComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert';
+import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -104,7 +105,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   @service intl;
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
-  SnippetInsert = SnippetInsertComponent;
+  SnippetInsert = SnippetInsertRdfaComponent;
 
   schema = new Schema({
     nodes: {
