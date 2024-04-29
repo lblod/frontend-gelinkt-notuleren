@@ -34,22 +34,18 @@ export function decentLocaleMatch(
     matchUserLocaleToSupportedLocale(userLocale, supportedLocales),
   );
 
-  const deduplicatedSupportedLocales = new Set([
-    ...supportedLocalesThatUserPrefers.map(
-      (locale) => locale && locale.toLowerCase(),
-    ),
-    defaultLocale.toLowerCase(),
-  ]);
-
-  const definedSupportedLocales = [...deduplicatedSupportedLocales].filter(
-    (locale) => typeof locale === 'string',
-  );
-
   const lowerCaseDefaultLocale = defaultLocale.toLowerCase();
 
-  if (definedSupportedLocales.length < 1) {
+  const deduplicatedSupportedLocales = new Set([
+    ...supportedLocalesThatUserPrefers
+      .map((locale) => locale && locale.toLowerCase())
+      .filter((locale) => typeof locale === 'string'),
+    lowerCaseDefaultLocale,
+  ]);
+
+  if (deduplicatedSupportedLocales.size < 1) {
     return [lowerCaseDefaultLocale];
   }
 
-  return [...definedSupportedLocales, lowerCaseDefaultLocale];
+  return [...deduplicatedSupportedLocales];
 }
