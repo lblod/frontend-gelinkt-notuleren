@@ -25,7 +25,6 @@ export default class InboxAgendapointsNewRoute extends Route {
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
     });
-    t;
     return Promise.all([
       standardTemplatesPromise,
       dynamicTemplatesPromise,
