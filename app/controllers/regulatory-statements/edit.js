@@ -64,15 +64,7 @@ import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-applica
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
-import {
-  templateComment,
-  templateCommentView,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
-import {
-  STRUCTURE_NODES,
-  STRUCTURE_SPECS,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
   address,
   addressView,
@@ -93,9 +85,6 @@ import {
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
-import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
-import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
