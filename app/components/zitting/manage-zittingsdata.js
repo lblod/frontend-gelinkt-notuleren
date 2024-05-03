@@ -73,4 +73,12 @@ export default class ZittingManageZittingsdataComponent extends Component {
       return false;
     } else return this.geeindigdOpTijdstrip > this.gestartOpTijdstip;
   }
+
+  /**
+   * @param {ChangeEvent<HTMLInputElement>} event
+   */
+  @action
+  handleOpLocatieChange(event) {
+    this.opLocatie = event.target.value;
+  }
 }

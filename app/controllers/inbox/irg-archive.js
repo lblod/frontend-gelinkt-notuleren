@@ -7,8 +7,11 @@ export default class InboxIrgArchiveController extends Controller {
   @tracked size = 10;
   @tracked filter = '';
   @tracked searchValue = this.filter;
-  @tracked debounceTime = 2000;
+  @tracked debounceTime = 1000;
 
+  /**
+   * @param {InputEvent<HTMLInputElement>} event
+   */
   updateFilter = restartableTask(async (event) => {
     const input = event.target.value;
     this.searchValue = input;

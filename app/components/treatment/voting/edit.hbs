@@ -9,7 +9,12 @@
     <div class="au-c-form">
       <p>
         <AuLabel for="voting-subject">{{t "voting-edit.first-step-introduction"}}</AuLabel>
-        <AuTextarea id="voting-subject" @width="block" @value={{this.editStemming.stemming.onderwerp}}></AuTextarea>
+        <AuTextarea
+          id="voting-subject"
+          @width="block"
+          value={{this.editStemming.stemming.onderwerp}}
+          {{on "input" this.handleVotingSubjectChange}}
+        />
         <AuHelpText @skin="secondary">{{t "voting-edit.first-step-explanation"}}</AuHelpText>
       </p>
     </div>
@@ -33,7 +38,12 @@
     <div class="au-c-form au-u-padding-bottom">
       <p>
         <AuLabel for="voting-consequence">{{t "voting-edit.third-step-introduction"}}</AuLabel>
-        <AuTextarea id="voting-consequence" @width="block" @value={{this.editStemming.stemming.gevolg}}></AuTextarea>
+        <AuTextarea
+          id="voting-consequence"
+          @width="block"
+          value={{this.editStemming.stemming.gevolg}}
+          {{on "input" this.handleVotingConsequencesChange}}
+        />
         <AuHelpText @skin="secondary">{{t "voting-edit.third-step-explanation"}}</AuHelpText>
       </p>
     </div>

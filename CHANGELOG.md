@@ -1,5 +1,55 @@
 # frontend-gelinkt-notuleren
 
+## 5.15.1
+
+### Patch Changes
+
+- [#652](https://github.com/lblod/frontend-gelinkt-notuleren/pull/652) [`ff9f7bad`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ff9f7badbc085f557d8e8fb020d9a774c2b8dee5) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to 17.1.1
+
+- [`4ba4d36e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ba4d36ef0e1694f21312fa833eabd371fd2977e) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 9.7.1
+
+## 5.15.0
+
+### Minor Changes
+
+- [#651](https://github.com/lblod/frontend-gelinkt-notuleren/pull/651) [`9419f783`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9419f783fb6aa7d8a8b6d1ec3d3f8df33619fc60) Thanks [@elpoelma](https://github.com/elpoelma)! - Enable support for hierarchical lists
+
+### Patch Changes
+
+- [#651](https://github.com/lblod/frontend-gelinkt-notuleren/pull/651) [`fe2ab595`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fe2ab595444c113bd2ff612145b7d6fed7389664) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 9.7.0
+
+## 5.14.0
+
+### Minor Changes
+
+- [#645](https://github.com/lblod/frontend-gelinkt-notuleren/pull/645) [`c522af9a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c522af9a8fa38ce5210b1fc99464334f4b82ffa4) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4800: Bump `@appuniversum/ember-appuniversum` to `3.4.1`
+
+  - Bump `@appuniversum/ember-appuniversum` to `3.4.1`
+
+    - Update breaking changes, mainly removing two-way binding from `AuTextarea` and `AuInput` components.
+    - Change how `appuniversum` SCSS is imported in the app.
+    - Add a key to `AuDatePicker` localisation.
+
+  - Bump `@lblod/ember-rdfa-editor-lblod-plugins` to `17.0.0`
+  - Bump `@lblod/ember-environment-banner` to `0.5.0`
+
+- [#646](https://github.com/lblod/frontend-gelinkt-notuleren/pull/646) [`906a1363`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/906a136348e2c074f8c8268aeabb4470825d73ee) Thanks [@dkozickis](https://github.com/dkozickis)! - Bump `ember-rdfa-editor-lblod-plugins` to `17.1.0` to get snippet changes:
+
+  ##### GN-4811: Only show the titles of the snippets
+
+  In the snippet insert modal: only show the titles of the snippets
+
+  #### GN-4816: Add sorting for snippet lists
+
+  - Use AuDataTable
+  - Add sorting for snippet lists
+
+## 5.13.1
+
+### Patch Changes
+
+- [#644](https://github.com/lblod/frontend-gelinkt-notuleren/pull/644) [`862e5584`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/862e5584a501db9b05ccd45519d5228149d0e261) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4808: Fix language detection for users that are coming to GN for the first time
+
 ## 5.13.0
 
 ### Minor Changes
