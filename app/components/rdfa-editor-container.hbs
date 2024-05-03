@@ -102,7 +102,7 @@
                   </Sidebar.Collapsible>
                 {{/if}}
                 {{yield to='sidebar'}}
-                {{#if @shouldEditRdfa}}
+                {{#if this.shouldShowRdfaTools}}
                   <Plugins::Link::LinkEditor @controller={{this.controller}} />
                   <this.RdfaEditor
                     @node={{this.activeNode}}

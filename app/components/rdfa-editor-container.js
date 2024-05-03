@@ -94,6 +94,9 @@ export default class RdfaEditorContainerComponent extends Component {
     }
     return null;
   }
+  get shouldShowRdfaTools() {
+    return this.args.shouldShowRdfaTools ?? this.args.shouldEditRdfa ?? false;
+  }
 
   @action
   rdfaEditorInit(editor) {
