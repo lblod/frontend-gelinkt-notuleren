@@ -14,15 +14,21 @@ import {
   underline,
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
+  blockRdfaWithConfig,
   block_rdfa,
   docWithConfig,
   hard_break,
   horizontal_rule,
   invisible_rdfa,
   paragraph,
+  repairedBlockWithConfig,
   repaired_block,
   text,
 } from '@lblod/ember-rdfa-editor/nodes';
+import {
+  inlineRdfaWithConfigView,
+  inlineRdfaWithConfig,
+} from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 import {
   tableKeymap,
   tableNodes,
@@ -48,7 +54,10 @@ import {
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
-import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import {
+  heading,
+  headingWithConfig,
+} from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
@@ -111,11 +120,12 @@ export default class RegulatoryStatementsRoute extends Controller {
       doc: docWithConfig({
         content:
           'table_of_contents? document_title? ((chapter|block)+|(title|block)+|(article|block)+)',
+        rdfaAware: true,
       }),
       paragraph,
       document_title,
       table_of_contents: table_of_contents(this.config.tableOfContents),
-      repaired_block,
+      repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
       list_item: listItemWithConfig({ enableHierarchicalList: true }),
       ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
       bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
@@ -129,19 +139,18 @@ export default class RegulatoryStatementsRoute extends Controller {
       number,
       text_variable,
       ...STRUCTURE_NODES,
-      heading,
+      heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
       horizontal_rule,
       code_block,
       text,
       image,
       hard_break,
-      invisible_rdfa,
-      block_rdfa,
+      block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
+      inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
     },
     marks: {
-      inline_rdfa,
       em,
       strong,
       underline,
@@ -168,6 +177,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         codelist: codelistView(controller),
         text_variable: textVariableView(controller),
         templateComment: templateCommentView(controller),
+        inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
       };
     };
   }
