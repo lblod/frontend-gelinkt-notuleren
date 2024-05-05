@@ -94,9 +94,9 @@ module.exports = function (environment) {
     ENV.nonZonalLocationCodelistUri =
       'http://lblod.data.gift/concept-schemes/62331FDD00730AE7B99DF7F2';
     ENV.regulatoryStatementEndpoint =
-      'https://dev.reglementairebijlagen.lblod.info/raw-sparql';
+      'https://futurenow.reglementaire-bijlagen.lblod.info/raw-sparql';
     ENV.regulatoryStatementFileEndpoint =
-      'https://dev.reglementairebijlagen.lblod.info/files';
+      'https://futurenow.reglementaire-bijlagen.lblod.info/files';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
