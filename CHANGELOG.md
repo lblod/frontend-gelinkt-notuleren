@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.16.0
+
+### Minor Changes
+
+- [#624](https://github.com/lblod/frontend-gelinkt-notuleren/pull/624) [`3fdce6a3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3fdce6a36e74658d3ccc486e026ab882431abdb8) Thanks [@piemonkey](https://github.com/piemonkey)! - Add hidden support for editing and advanced annotation of RDFa in the editor
+
+### Patch Changes
+
+- [#654](https://github.com/lblod/frontend-gelinkt-notuleren/pull/654) [`7538e800`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7538e8004e869d35da5fa16f1e6991c2fdd623d9) Thanks [@piemonkey](https://github.com/piemonkey)! - Remove duplication of supported locales passed to ember-intl
+
+- [#624](https://github.com/lblod/frontend-gelinkt-notuleren/pull/624) [`f3735717`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3735717c0bcf1250d5efb289b4135d027f35515) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix some deprecation warnings from appuniversum
+
+- [#654](https://github.com/lblod/frontend-gelinkt-notuleren/pull/654) [`4ff629ce`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ff629ce18de37cb340da051bcb43040092aa448) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix CI set-up to correctly fail on test failures and update package-lock to match package.json
+
+- [#624](https://github.com/lblod/frontend-gelinkt-notuleren/pull/624) [`ef39fe32`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ef39fe32c1a8852b3601cc9d282cce1095344ab7) Thanks [@piemonkey](https://github.com/piemonkey)! - Improve editor load times by running some promises in parallel instead of series
+
 ## 5.15.1
 
 ### Patch Changes
