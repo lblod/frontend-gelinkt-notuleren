@@ -15,14 +15,11 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
   blockRdfaWithConfig,
-  block_rdfa,
   docWithConfig,
   hard_break,
   horizontal_rule,
-  invisible_rdfa,
   paragraph,
   repairedBlockWithConfig,
-  repaired_block,
   text,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
@@ -54,14 +51,10 @@ import {
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
-import {
-  heading,
-  headingWithConfig,
-} from '@lblod/ember-rdfa-editor/plugins/heading';
+import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
-import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
   createInvisiblesPlugin,
