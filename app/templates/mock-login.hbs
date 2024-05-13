@@ -1,37 +1,71 @@
-<AuBodyContainer @scroll={{true}} itemprop="mainContentOfPage">
-  <main id="content">
-    <AuContentHeader @titlePartOne="Vlaanderen" @titlePartTwo="is gelinkt notuleren">
+<AuBodyContainer @scroll={{true}} itemprop='mainContentOfPage'>
+  <main id='content'>
+    <AuContentHeader
+      @titlePartOne='Vlaanderen'
+      @titlePartTwo='is gelinkt notuleren'
+    >
       <img
-        sizes="50vw"
-        src="/assets/images/loket-header-1600.jpg"
-        srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w"
-        alt=""
-      >
+        sizes='50vw'
+        src='/assets/images/loket-header-1600.jpg'
+        srcset='/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w'
+        alt=''
+      />
     </AuContentHeader>
 
-    <div class="au-o-region-large">
-      <div class="au-o-layout">
-        <AuHeading @skin="4">{{t "mock-login.administrative-unit-selection"}}</AuHeading>
-        <p class="au-u-margin-top-small au-u-margin-bottom">
+    <div class='au-o-region-large'>
+      <div class='au-o-layout'>
+        <AuHeading @skin='4'>{{t
+            'mock-login.administrative-unit-selection'
+          }}</AuHeading>
+        <p class='au-u-margin-top-small au-u-margin-bottom'>
           {{#let (unique-id) as |id|}}
-            <AuLabel for={{id}}>{{t "mock-login.administrative-unit-search"}}</AuLabel>
-            <input class="au-c-input au-c-input--block js-js-input-pattern-bound" id={{id}} placeholder={{t "mock-login.search-placeholder"}} value={{this.gemeente}} oninput={{perform this.updateSearch value='target.value'}}>
+            <AuLabel for={{id}}>{{t
+                'mock-login.administrative-unit-search'
+              }}</AuLabel>
+            <input
+              class='au-c-input au-c-input--block js-js-input-pattern-bound'
+              id={{id}}
+              placeholder={{t 'mock-login.search-placeholder'}}
+              value={{this.gemeente}}
+              oninput={{perform this.updateSearch value='target.value'}}
+            />
           {{/let}}
         </p>
 
         <MockLogin as |login|>
           {{#if this.queryStore.isRunning}}
-            <AuLoader @padding="small" />
+            <AuLoader @padding='small' />
           {{else}}
             {{#if this.login.errorMessage}}
-              <AuAlert @icon="alert-triangle" @title={{this.login.errorMessage}} @skin="warning" />
+              <AuAlert
+                @icon='alert-triangle'
+                @title={{this.login.errorMessage}}
+                @skin='warning'
+              />
             {{/if}}
             {{#each this.model as |account|}}
-              <AuButton class="au-u-flex au-u-flex--row au-u-flex--start au-c-card au-u-margin-bottom-small" @skin="secondary" @width="block"  @size="large" type="button" {{on "click" (fn login.login account.id account.gebruiker.group.id)}}>
-                {{account.gebruiker.voornaam}} {{account.gebruiker.achternaam}}
+              <AuButton
+                class='au-u-flex au-u-flex--row au-u-flex--start au-c-card au-u-margin-bottom-small'
+                @skin='secondary'
+                @width='block'
+                @size='large'
+                type='button'
+                {{on
+                  'click'
+                  (fn login.login account.id account.gebruiker.group.id)
+                }}
+              >
+                {{account.gebruiker.voornaam}}
+                {{account.gebruiker.achternaam}}
               </AuButton>
             {{/each}}
-            <NumberPagination @page={{this.page}} @size={{this.size}} @nbOfItems={{this.model.length}} @total={{this.model.meta.count}} @links={{this.model.meta.pagination}} />
+            <NumberPagination
+              @page={{this.page}}
+              @size={{this.size}}
+              @nbOfItems={{this.model.length}}
+              @total={{this.model.meta.count}}
+              @links={{this.model.meta.pagination}}
+            />
           {{/if}}
         </MockLogin>
       </div>

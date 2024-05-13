@@ -1,51 +1,58 @@
-<ApplicationHeader/>
+<ApplicationHeader />
 
 <AuMainContainer as |maincontainer|>
   <maincontainer.sidebar>
-    <div class="au-c-sidebar">
-      <div class="au-c-sidebar__content">
+    <div class='au-c-sidebar'>
+      <div class='au-c-sidebar__content'>
         <nav>
-          <ul class="au-c-list-navigation">
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="inbox.meetings">
-                <AuIcon @icon="folder" @alignment="left" />
-                {{t "inbox.menu.meetings"}}
+          <ul class='au-c-list-navigation'>
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink @route='inbox.meetings'>
+                <AuIcon @icon='folder' @alignment='left' />
+                {{t 'inbox.menu.meetings'}}
               </AuNavigationLink>
             </li>
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="inbox.agendapoints">
-                <AuIcon @icon="file" @alignment="left" />
-                {{t "inbox.menu.agendapoints"}}
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink @route='inbox.agendapoints'>
+                <AuIcon @icon='file' @alignment='left' />
+                {{t 'inbox.menu.agendapoints'}}
               </AuNavigationLink>
             </li>
             {{#if (feature-flag 'regulatoryStatements')}}
-              <li class="au-c-list-navigation__item">
-                <AuNavigationLink @route="inbox.regulatory-statements">
-                  <AuIcon @icon="bookmark" @alignment="left" />
-                  {{t "inbox.menu.statements"}}
+              <li class='au-c-list-navigation__item'>
+                <AuNavigationLink @route='inbox.regulatory-statements'>
+                  <AuIcon @icon='bookmark' @alignment='left' />
+                  {{t 'inbox.menu.statements'}}
                 </AuNavigationLink>
               </li>
             {{/if}}
             {{#if this.model.length}}
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="inbox.irg-archive">
-                <AuIcon @icon="draft" @alignment="left" />
-                {{t "inbox.irg-archive.page-title"}}
-              </AuNavigationLink>
-            </li>
+              <li class='au-c-list-navigation__item'>
+                <AuNavigationLink @route='inbox.irg-archive'>
+                  <AuIcon @icon='draft' @alignment='left' />
+                  {{t 'inbox.irg-archive.page-title'}}
+                </AuNavigationLink>
+              </li>
             {{/if}}
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="inbox.trash">
-                <AuIcon @icon="bin" @alignment="left" />
-                {{t "inbox.menu.trash"}}
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink @route='inbox.trash'>
+                <AuIcon @icon='bin' @alignment='left' />
+                {{t 'inbox.menu.trash'}}
               </AuNavigationLink>
             </li>
           </ul>
         </nav>
       </div>
-      <div class="au-c-sidebar__footer">
-        <AuLinkExternal href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" @icon="manual" @iconAlignment="left" @skin="secondary">
-          {{t "inbox.menu.manual"}}
+      <div class='au-c-sidebar__footer'>
+        <AuLinkExternal
+          href='{{config "manual.baseUrl"}}'
+          target='_blank'
+          rel='noopener noreferrer'
+          @icon='manual'
+          @iconAlignment='left'
+          @skin='secondary'
+        >
+          {{t 'inbox.menu.manual'}}
         </AuLinkExternal>
       </div>
     </div>

@@ -1,28 +1,52 @@
-<div class="au-o-box">
+<div class='au-o-box'>
   {{#if this.initializeAgendas.isIdle}}
     <ul>
       <Signatures::Agenda::TimelineStep
-        @name={{t "meetings.publish.agenda.planned-agenda"}}
+        @name={{t 'meetings.publish.agenda.planned-agenda'}}
         @agenda={{this.ontwerpAgenda}}
-        @signing={{perform this.createSignedResource this.kindGepland 'ontwerp'}}
-        @publish={{perform this.createPublishedResource this.kindGepland 'ontwerp'}}
+        @signing={{perform
+          this.createSignedResource
+          this.kindGepland
+          'ontwerp'
+        }}
+        @publish={{perform
+          this.createPublishedResource
+          this.kindGepland
+          'ontwerp'
+        }}
       />
       <Signatures::Agenda::TimelineStep
-        @name={{t "meetings.publish.agenda.supplemental-agenda"}}
+        @name={{t 'meetings.publish.agenda.supplemental-agenda'}}
         @agenda={{this.aanvullendeAgenda}}
-        @signing={{perform this.createSignedResource this.kindAanvullend 'aanvullende'}}
-        @publish={{perform this.createPublishedResource this.kindAanvullend 'aanvullende'}}
+        @signing={{perform
+          this.createSignedResource
+          this.kindAanvullend
+          'aanvullende'
+        }}
+        @publish={{perform
+          this.createPublishedResource
+          this.kindAanvullend
+          'aanvullende'
+        }}
       />
 
       <Signatures::Agenda::TimelineStep
-        @name={{t "meetings.publish.agenda.urgent-agenda"}}
+        @name={{t 'meetings.publish.agenda.urgent-agenda'}}
         @agenda={{this.spoedeisendeAgenda}}
-        @signing={{perform this.createSignedResource this.kindSpoedeisend 'spoedeisende'}}
-        @publish={{perform this.createPublishedResource this.kindSpoedeisend 'spoedeisende'}}
+        @signing={{perform
+          this.createSignedResource
+          this.kindSpoedeisend
+          'spoedeisende'
+        }}
+        @publish={{perform
+          this.createPublishedResource
+          this.kindSpoedeisend
+          'spoedeisende'
+        }}
       />
-  </ul>
+    </ul>
   {{else}}
-    <AuHelpText @size="large">{{t "publish.loading-message"}}</AuHelpText>
-    <AuLoader @padding="small" />
+    <AuHelpText @size='large'>{{t 'publish.loading-message'}}</AuHelpText>
+    <AuLoader @padding='small' />
   {{/if}}
 </div>

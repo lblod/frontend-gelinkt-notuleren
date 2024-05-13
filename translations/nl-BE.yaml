@@ -6,9 +6,9 @@ agendapoint:
   not-found:
     title: Agendapunt niet gevonden
     explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het agendapunt.
-  saved-versions: "Opgeslagen documentversies:"
+  saved-versions: 'Opgeslagen documentversies:'
   current-version: Huidige versie
-  modify-warning: "Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:"
+  modify-warning: 'Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:'
   version-of: Versie van
   no-new-versions: Geen nieuwere versies om weer te geven.
   restore-version: Herstel versie en verwerp nieuwere versies
@@ -18,14 +18,13 @@ agendapoint:
   making-copy: Kopie aan het maken
 
 administrative-body-select:
-  period: "period"
+  period: 'period'
   not-applicable: nvt.
 
 application:
   flanders-logo: Logo van de vlaamse overheid
   loading: Aan het laden
   patience-text: Bedankt voor uw geduld
-
 
 auth:
   login: Aanmelden
@@ -73,16 +72,16 @@ behandeling-van-agendapunten:
   save-and-quit: Opslaan en Afsluiten
   cancel: Annuleren
   confirm-leave-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
-  openbaar-label: "maak agendapunt openbaar"
-  geen-openbaar-msg: "agendapunt niet openbaar"
-  openbaar-msg: "agendapunt openbaar"
+  openbaar-label: 'maak agendapunt openbaar'
+  geen-openbaar-msg: 'agendapunt niet openbaar'
+  openbaar-msg: 'agendapunt openbaar'
   participation-list-button: Beheer aanwezigen bij dit agendapunt
-  visibility: "Zichtbaarheid"
-  voting-title: "Stemming"
-  content-title: "Inhoud"
+  visibility: 'Zichtbaarheid'
+  voting-title: 'Stemming'
+  content-title: 'Inhoud'
   needs-participants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
   cannot-edit-participants: Aanwezigen zijn niet aanpasbaar als er al een stemming plaatsvond.
-  edit-document: "Bewerk document"
+  edit-document: 'Bewerk document'
 
 contact:
   about: Waar gaat uw bericht over?
@@ -207,7 +206,6 @@ inbox:
     search-placeholder: Zoek titel agendapunt
     restore-message: Herstel geselecteerde documenten
 
-
 irg-archive:
   not-found:
     title: Reglement niet gevonden
@@ -326,27 +324,27 @@ manage-intermissions:
   warning: U kan deze actie niet ongedaan maken.
   checkbox-label: Ik begrijp dat deze onderbreking onomkeerbaar verwijderd gaat worden.
   delete-button: Verwijder onderbreking
-  before-ap: "Voor"
-  during-ap: "Tijdens"
-  after-ap: "Na"
-  position: "Plaats"
+  before-ap: 'Voor'
+  during-ap: 'Tijdens'
+  after-ap: 'Na'
+  position: 'Plaats'
 
 manage-zittings-data:
-  start-not-set: "Start van de zitting werd nog niet ingesteld."
-  end-not-set: "Einde van de zitting werd nog niet ingesteld."
+  start-not-set: 'Start van de zitting werd nog niet ingesteld.'
+  end-not-set: 'Einde van de zitting werd nog niet ingesteld.'
   end-before-start: U kunt geen einddatum kiezen die vóór de startdatum ligt.
-  start-differs-from-planned-start: "Opgelet de geplande start verschilt van de start datum."
+  start-differs-from-planned-start: 'Opgelet de geplande start verschilt van de start datum.'
   modal-title: Beheer algemene informatie over de zitting
-  bestuursorgan-label: "Gehouden door:"
-  geplande-start-label: "Geplande start:"
-  op-locatie-label: "Op locatie:"
-  gestart-op-tijdstip-label: "Gestart op:"
-  geeindigd-op-tijdstip-label: "Beëindigd op:"
+  bestuursorgan-label: 'Gehouden door:'
+  geplande-start-label: 'Geplande start:'
+  op-locatie-label: 'Op locatie:'
+  gestart-op-tijdstip-label: 'Gestart op:'
+  geeindigd-op-tijdstip-label: 'Beëindigd op:'
   save-button: Voeg zittingsdata in
   cancel-button: Terug
   open-modal-button: Beheer algemene zittingsdata
   select-placeholder: Selecteer bestuursorgaan
-  period-start: "periode"
+  period-start: 'periode'
   not-applicable: nvt.
 
 meeting-form:
@@ -435,7 +433,7 @@ meetings:
 mock-login:
   administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
   administrative-unit-search: Bestuurseenheid zoeken
-  search-placeholder: "Aalst, Berchem, ..."
+  search-placeholder: 'Aalst, Berchem, ...'
 
 not-found:
   title: Pagina niet gevonden
@@ -447,21 +445,21 @@ not-found:
     email: GelinktNotuleren@vlaanderen.be
 
 participation:
-  present-label: "Aanwezige mandatarissen:"
+  present-label: 'Aanwezige mandatarissen:'
 
 participation-list:
-  block-title: "Aanwezigen"
+  block-title: 'Aanwezigen'
   loading-title: Bezig met laden van de aanwezigenlijst
   loading-loader: Aan het laden
-  voorzitter-label: "Voorzitter:"
-  voorzitter-error: "Er is nog geen voorzitter aangeduid"
-  secretaris-label: "Secretaris:"
-  secretaris-error: "Er is nog geen secretaris aangeduid"
-  present-label: "Aanwezige mandatarissen:"
-  present-error: "Er zijn nog geen aanwezige mandatarissen aangeduid"
-  not-present-label: "Afwezige mandatarissen:"
+  voorzitter-label: 'Voorzitter:'
+  voorzitter-error: 'Er is nog geen voorzitter aangeduid'
+  secretaris-label: 'Secretaris:'
+  secretaris-error: 'Er is nog geen secretaris aangeduid'
+  present-label: 'Aanwezige mandatarissen:'
+  present-error: 'Er zijn nog geen aanwezige mandatarissen aangeduid'
+  not-present-label: 'Afwezige mandatarissen:'
   open-modal-button: Beheer aanwezigen bij start van de zitting
-  period-start: "periode"
+  period-start: 'periode'
 
 participation-list-modal:
   voorzitter-label: Voorzitter van de zitting
@@ -499,21 +497,21 @@ print-view:
   error-body: Gelieve contact op te nemen met het support team.
 
 publication-confirmation:
-  modal-title: "Bevestig publicatie van "
+  modal-title: 'Bevestig publicatie van '
   alert-first-part: Publiceren en melden is bindend en onomkeerbaar.
   alert-second-part: Kijk de inhoud van het document goed na — u kan het document achteraf
   alert-third-part: niet meer aanpassen.
   alert-fourth-part: Enkel bevoegde personen mogen het document publiceren.
   publication-title: Publicatie
-  publication-subtitle: "Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:"
+  publication-subtitle: 'Het document en diens inhoud worden publiek gemaakt op de publicatiepagina, vrij toegankelijk voor burgers:'
   reporting-title: Melding
   reporting-subtitle: Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het
   reporting-link: Loket voor Lokale Besturen
   metadata-title: Metagegevens bij publiceren
   publisher-label: Publiceerder
-  date-and-time-label: "Datum & Tijd"
+  date-and-time-label: 'Datum & Tijd'
   date-and-time-message: Het moment waarop je op het publiceren bevestigd, wordt ook opgeslagen.
-  confirm-button: "Bevestig publicatie van "
+  confirm-button: 'Bevestig publicatie van '
   cancel-button: Annuleren
 
 publish:
@@ -590,7 +588,7 @@ regulatory-statement:
   history: Historiek
 
 signature-confirmation:
-  modal-title: "Bevestig ondertekenen van "
+  modal-title: 'Bevestig ondertekenen van '
   sign-label: Ondertekenen
   sign-warning-title: Ondertekenen is bindend.
   sign-warning-text: Kijk de inhoud van het document goed na. Enkel bevoegde personen mogen het document ondertekenen.
@@ -598,7 +596,7 @@ signature-confirmation:
   signer-label: Ondertekenaar
   time-label: Tijd
   time-message: Het moment waarop je op het ondertekenen bevestigd, wordt ook opgeslagen.
-  confirm-button: "Bevestig ondertekenen van "
+  confirm-button: 'Bevestig ondertekenen van '
   cancel-button: Annuleren
 
 snippets-notifier:
@@ -613,39 +611,39 @@ switch-login:
   signing-instructions: Het aanmelden gebeurt in een pop-up; zorg dat de instellingen van uw browser correct staan indien deze niet verschijnt.
 
 timeline-step:
-  sign-step-title: "Onderteken "
-  signing-restriction-info: "Ondertekenen kan enkel door de aangewezen personen met de rol "
-  signing-restriction-role: "ondertekenaar"
-  signing-restriction-end: " binnen het orgaan."
+  sign-step-title: 'Onderteken '
+  signing-restriction-info: 'Ondertekenen kan enkel door de aangewezen personen met de rol '
+  signing-restriction-role: 'ondertekenaar'
+  signing-restriction-end: ' binnen het orgaan.'
   first-signature: Eerste ondertekening
   second-signature: Tweede ondertekening
-  sign-button-label: "Onderteken {name}"
-  print-button-label: "Print {name}"
-  print-info: "Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd."
-  second-print-info: "Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt."
-  publish-button-label: "Publiceer {name}"
-  publish-notify-button-label: "Publiceer (en meld) {name}"
-  publish-restriction-info: "Publiceren kan enkel door personen met de rol "
-  publish-restriction-role: "publiceerder"
-  publish-restriction-end: "."
-  link-publish: "Link publicatie"
-  timing-warning: "Het kan tot 5 minuten duren voor u de publicatie kan zien op bovenstaande link."
+  sign-button-label: 'Onderteken {name}'
+  print-button-label: 'Print {name}'
+  print-info: 'Een print (of PDF) maken kan op elk moment, door iedereen die toegang heeft tot de notulen; nadat het document ondertekend werd.'
+  second-print-info: 'Printen kan enkel nadat het document ondertekend werd. Deze print wordt niet extern beschikbaar gemaakt.'
+  publish-button-label: 'Publiceer {name}'
+  publish-notify-button-label: 'Publiceer (en meld) {name}'
+  publish-restriction-info: 'Publiceren kan enkel door personen met de rol '
+  publish-restriction-role: 'publiceerder'
+  publish-restriction-end: '.'
+  link-publish: 'Link publicatie'
+  timing-warning: 'Het kan tot 5 minuten duren voor u de publicatie kan zien op bovenstaande link.'
   publication-type: Type publicatie
   public-for-all: Publiek voor iedereen
   publication-consequences: Gevolgen publicatie
-  preview-info: "Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar "
-  preview-info-end: ", en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie."
+  preview-info: 'Het document wordt gepubliceerd zoals bovenaan in de voorvertoning naar '
+  preview-info-end: ', en zal publiek beschikbaar zijn voor iedereen, zonder authenticatie.'
   notify-consequences: Gevolgen melding
-  notify-info: "Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het "
-  local-loket: "Loket voor Lokale Besturen"
-  publish-warning: "Vul de ontbrekende informatie aan om te publiceren"
-  delete-both-signatures-warning: "Om het document te kunnen aanpassen moeten beide handtekeningen verwijderd zijn"
+  notify-info: 'Het document wordt, indien van toepassing, automatisch gemeld aan de toezichthoudende overheid, en zal zichtbaar zijn in het '
+  local-loket: 'Loket voor Lokale Besturen'
+  publish-warning: 'Vul de ontbrekende informatie aan om te publiceren'
+  delete-both-signatures-warning: 'Om het document te kunnen aanpassen moeten beide handtekeningen verwijderd zijn'
 
 uittreksel-error:
   header: We kunnen de pagina die u zoekt niet vinden
   extract-not-found: Er is iets fout gelopen. Het uittreksel dat u zoekt bestaat niet of u heeft geen toegang.
   back-link: Terug naar overzicht notulen
-  error-code: "404"
+  error-code: '404'
 
 utils:
   save: Bewaar
@@ -679,9 +677,7 @@ voting:
 voting-edit:
   first-step-title: 1. Geef onderwerp in
   first-step-introduction: De raad stemt,
-  first-step-explanation: "Het onderwerp van een stemming kan bijvoorbeeld zijn: het voorstel van besluit, een amendement, de al dan niet
-  behandeling van een agendapunt, de open of besloten behandeling van een agendapunt, een verdaging, een
-  tussenkomst."
+  first-step-explanation: 'Het onderwerp van een stemming kan bijvoorbeeld zijn: het voorstel van besluit, een amendement, de al dan niet behandeling van een agendapunt, de open of besloten behandeling van een agendapunt, een verdaging, een tussenkomst.'
   private-voting-checkbox: Maak stemming geheim
   second-step: 2. Beheer aanwezigen en stemmen
   third-step: 3. Geef gevolg in
@@ -723,9 +719,9 @@ voting-modal:
   subject-not-found: Geen onderwerp
   geheim-true-label: Geheim
   geheim-false-label: Openbaar
-  aantal-voorstanders-label: "Voorstanders:"
-  aantal-tegenstanders-label: "Tegenstanders:"
-  aantal-onthouders-label: "Onthouders:"
+  aantal-voorstanders-label: 'Voorstanders:'
+  aantal-tegenstanders-label: 'Tegenstanders:'
+  aantal-onthouders-label: 'Onthouders:'
   gevolg-not-found: Geen gevolg
   toggle-edit-button: Bewerk
   delete-button: Verwijder

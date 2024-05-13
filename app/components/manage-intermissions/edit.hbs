@@ -1,100 +1,122 @@
-
 <div {{did-update this.updatedIntermission @intermissionToEdit}}>
-<AuModal
-  @title={{t "manage-intermissions.modal-title"}}
-  @modalOpen={{@visible}}
-  @size="default"
-  @closeModal={{this.cancel}}
-  as |Modal|
->
-  <Modal.Body>
-    <div class="au-c-form">
-      <div>
-        <AuLabel>{{t "manage-intermissions.interruption-start-label"}}</AuLabel>
-        <DateTimePicker @onChange={{fn this.changeDate 'startedAt'}} @value={{this.startedAtExternal}}/>
-      </div>
-      <div>
-        <AuLabel>{{t "manage-intermissions.interruption-end-label"}}</AuLabel>
-        <DateTimePicker @onChange={{fn this.changeDate 'endedAt'}} @value={{this.endedAtExternal}}/>
-      </div>
-      <div>
-        {{#if @zitting.agendapunten}}
-          <AuLabel>{{t "manage-intermissions.position"}}</AuLabel>
-          <div class="au-o-grid au-o-grid--tiny">
-            <div class="au-o-grid__item au-u-1-2">
-              <PowerSelect
-                @renderInPlace={{true}}
-                @placeholder={{t "manage-agenda-zitting-modal-move.position-select-placeholder"}}
-                @options={{this.positionOptions}}
-                @verticalPosition="above"
-                @selected={{this.selectedPosition}}
-                @onChange={{this.selectPosition}}
-                @allowClear={{true}}
-                as |location|>
-                {{location.name}}
-              </PowerSelect>
-            </div>
-            <div class="au-o-grid__item au-u-1-2">
-              {{#if this.selectedPosition}}
+  <AuModal
+    @title={{t 'manage-intermissions.modal-title'}}
+    @modalOpen={{@visible}}
+    @size='default'
+    @closeModal={{this.cancel}}
+    as |Modal|
+  >
+    <Modal.Body>
+      <div class='au-c-form'>
+        <div>
+          <AuLabel>{{t
+              'manage-intermissions.interruption-start-label'
+            }}</AuLabel>
+          <DateTimePicker
+            @onChange={{fn this.changeDate 'startedAt'}}
+            @value={{this.startedAtExternal}}
+          />
+        </div>
+        <div>
+          <AuLabel>{{t 'manage-intermissions.interruption-end-label'}}</AuLabel>
+          <DateTimePicker
+            @onChange={{fn this.changeDate 'endedAt'}}
+            @value={{this.endedAtExternal}}
+          />
+        </div>
+        <div>
+          {{#if @zitting.agendapunten}}
+            <AuLabel>{{t 'manage-intermissions.position'}}</AuLabel>
+            <div class='au-o-grid au-o-grid--tiny'>
+              <div class='au-o-grid__item au-u-1-2'>
                 <PowerSelect
                   @renderInPlace={{true}}
-                  @placeholder={{t "manage-agenda-zitting-modal-move.agendapunt-select-placeholder"}}
-                  @searchEnabled={{true}}
-                  @searchPlaceholder={{t "manage-agenda-zitting-modal-move.search-placeholder"}}
-                  @verticalPosition="above"
-                  @options={{sort-by "position" @zitting.agendapunten}}
-                  @searchField="titel"
-                  @selected={{this.selectedAp}}
-                  @onChange={{this.selectAp}}
-                  @matcher={{this.searchMatcher}}
-                  as |a|>
-                  {{add a.position 1}}. {{a.titel}}
+                  @placeholder={{t
+                    'manage-agenda-zitting-modal-move.position-select-placeholder'
+                  }}
+                  @options={{this.positionOptions}}
+                  @verticalPosition='above'
+                  @selected={{this.selectedPosition}}
+                  @onChange={{this.selectPosition}}
+                  @allowClear={{true}}
+                  as |location|
+                >
+                  {{location.name}}
                 </PowerSelect>
-              {{/if}}
+              </div>
+              <div class='au-o-grid__item au-u-1-2'>
+                {{#if this.selectedPosition}}
+                  <PowerSelect
+                    @renderInPlace={{true}}
+                    @placeholder={{t
+                      'manage-agenda-zitting-modal-move.agendapunt-select-placeholder'
+                    }}
+                    @searchEnabled={{true}}
+                    @searchPlaceholder={{t
+                      'manage-agenda-zitting-modal-move.search-placeholder'
+                    }}
+                    @verticalPosition='above'
+                    @options={{sort-by 'position' @zitting.agendapunten}}
+                    @searchField='titel'
+                    @selected={{this.selectedAp}}
+                    @onChange={{this.selectAp}}
+                    @matcher={{this.searchMatcher}}
+                    as |a|
+                  >
+                    {{add a.position 1}}.
+                    {{a.titel}}
+                  </PowerSelect>
+                {{/if}}
+              </div>
             </div>
-          </div>
-        {{/if}}
-      </div>
-      <div>
-        <AuLabel for="intermissionComment">{{t "manage-intermissions.comment-label"}} <AuPill>{{t "manage-agenda-zitting-modal-move.optional"}}</AuPill></AuLabel>
-        <AuTextarea
-          id="intermissionComment"
-          value={{this.commentExternal}}
-          {{on "input" this.handleCommentExternalChange}}
-          @width="block"
-        />
-      </div>
-    </div>
-  </Modal.Body>
-  <Modal.Footer>
-    <AuToolbar>
-      <AuButton @skin="naked" {{on "click" this.cancel}}>
-        {{t "manage-intermissions.cancel-label"}}
-      </AuButton>
-      <AuButtonGroup>
-         {{#unless @intermissionToEdit.isNew}}
-        <AuButton
-          @alert={{true}}
-          @skin="secondary"
-          @loading={{this.deleteTask.isRunning}}
-          @icon="bin"
-          @iconAlignment="left"
-          {{on "click" (perform this.deleteTask @intermissionToEdit)}} >
-            {{t "manage-intermissions.delete-button"}}
-        </AuButton>
-        {{/unless}}
-        <AuButton
-          @loading={{this.saveIntermission.isRunning}}
-          {{on "click" (perform this.saveIntermission)}}
-        >
-          {{#if @intermissionToEdit.isNew}}
-            {{t "manage-intermissions.insert-label"}}
-          {{else}}
-            {{t "manage-intermissions.save-label"}}
           {{/if}}
+        </div>
+        <div>
+          <AuLabel for='intermissionComment'>{{t
+              'manage-intermissions.comment-label'
+            }}
+            <AuPill>{{t
+                'manage-agenda-zitting-modal-move.optional'
+              }}</AuPill></AuLabel>
+          <AuTextarea
+            id='intermissionComment'
+            value={{this.commentExternal}}
+            {{on 'input' this.handleCommentExternalChange}}
+            @width='block'
+          />
+        </div>
+      </div>
+    </Modal.Body>
+    <Modal.Footer>
+      <AuToolbar>
+        <AuButton @skin='naked' {{on 'click' this.cancel}}>
+          {{t 'manage-intermissions.cancel-label'}}
         </AuButton>
-      </AuButtonGroup>
-    </AuToolbar>
-  </Modal.Footer>
-</AuModal>
+        <AuButtonGroup>
+          {{#unless @intermissionToEdit.isNew}}
+            <AuButton
+              @alert={{true}}
+              @skin='secondary'
+              @loading={{this.deleteTask.isRunning}}
+              @icon='bin'
+              @iconAlignment='left'
+              {{on 'click' (perform this.deleteTask @intermissionToEdit)}}
+            >
+              {{t 'manage-intermissions.delete-button'}}
+            </AuButton>
+          {{/unless}}
+          <AuButton
+            @loading={{this.saveIntermission.isRunning}}
+            {{on 'click' (perform this.saveIntermission)}}
+          >
+            {{#if @intermissionToEdit.isNew}}
+              {{t 'manage-intermissions.insert-label'}}
+            {{else}}
+              {{t 'manage-intermissions.save-label'}}
+            {{/if}}
+          </AuButton>
+        </AuButtonGroup>
+      </AuToolbar>
+    </Modal.Footer>
+  </AuModal>
 </div>

@@ -1,20 +1,26 @@
-<table class="au-c-table-border">
+<table class='au-c-table-border'>
   <thead>
     <tr>
-      <th>{{t "participation-list-modal-table.naam-label"}}</th>
-      <th>{{t "participation-list-modal-table.functie-label"}}</th>
-      <th>{{t "participation-list-modal-table.geboortedatum-label"}}</th>
+      <th>{{t 'participation-list-modal-table.naam-label'}}</th>
+      <th>{{t 'participation-list-modal-table.functie-label'}}</th>
+      <th>{{t 'participation-list-modal-table.geboortedatum-label'}}</th>
       <th>
-        <div class="grid">
-          <div class="col--4-12">
-            {{t "participation-list-modal-table.actie-label"}}
+        <div class='grid'>
+          <div class='col--4-12'>
+            {{t 'participation-list-modal-table.actie-label'}}
           </div>
         </div>
       </th>
     </tr>
   </thead>
   <tbody>
-  {{yield (hash Row=(component "participation-list/mandataris-row" toggle=@toggleParticipant))}}
+    {{yield
+      (hash
+        Row=(component
+          'participation-list/mandataris-row' toggle=@toggleParticipant
+        )
+      )
+    }}
   </tbody>
 </table>
 

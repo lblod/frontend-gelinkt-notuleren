@@ -1,59 +1,102 @@
 <AuModal
-  @title={{concat (t "publication-confirmation.modal-title") @name}}
+  @title={{concat (t 'publication-confirmation.modal-title') @name}}
   @modalOpen={{true}}
-  @size="fullscreen"
+  @size='fullscreen'
   @closeModal={{@cancel}}
-  class="au-c-modal--publish" as |Modal| >
+  class='au-c-modal--publish'
+  as |Modal|
+>
   <Modal.Body>
-    <div class="au-o-grid au-o-grid--flush au-o-grid--fixed">
-      <div class="au-o-grid__item au-u-1-3 au-u-hide-on-print">
-        <div class="au-c-rdfa-publication-aside">
-          <div class="au-o-box">
-            <AuAlert @icon="info-circle" @title={{t "publication-confirmation.alert-first-part"}}  @skin="info" @alertSize="small">
-              <p>{{t "publication-confirmation.alert-second-part"}}<strong> {{t "publication-confirmation.alert-third-part"}}</strong> {{t "publication-confirmation.alert-fourth-part"}}</p>
+    <div class='au-o-grid au-o-grid--flush au-o-grid--fixed'>
+      <div class='au-o-grid__item au-u-1-3 au-u-hide-on-print'>
+        <div class='au-c-rdfa-publication-aside'>
+          <div class='au-o-box'>
+            <AuAlert
+              @icon='info-circle'
+              @title={{t 'publication-confirmation.alert-first-part'}}
+              @skin='info'
+              @alertSize='small'
+            >
+              <p>{{t 'publication-confirmation.alert-second-part'}}<strong>
+                  {{t 'publication-confirmation.alert-third-part'}}</strong>
+                {{t 'publication-confirmation.alert-fourth-part'}}</p>
             </AuAlert>
 
-            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "publication-confirmation.publication-title"}}</AuHeading>
-            <p class="au-c-help-text au-c-help-text--large au-u-margin-bottom">{{t "publication-confirmation.publication-subtitle"}} <a href="{{this.publicationBaseUrl}}">{{this.publicationBaseUrl}}</a>.</p>
+            <AuHeading @level='2' @skin='6' class='au-u-margin-bottom-small'>{{t
+                'publication-confirmation.publication-title'
+              }}</AuHeading>
+            <p
+              class='au-c-help-text au-c-help-text--large au-u-margin-bottom'
+            >{{t 'publication-confirmation.publication-subtitle'}}
+              <a
+                href='{{this.publicationBaseUrl}}'
+              >{{this.publicationBaseUrl}}</a>.</p>
 
-            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "publication-confirmation.reporting-title"}}</AuHeading>
-            <p class="au-c-help-text au-c-help-text--large au-u-margin-bottom">{{t "publication-confirmation.reporting-subtitle"}} <a href="https://loket.lokaalbestuur.vlaanderen.be/" target="_blank" rel="noopener noreferrer" class="au-c-link">{{t "publication-confirmation.reporting-link"}}</a>.</p>
+            <AuHeading @level='2' @skin='6' class='au-u-margin-bottom-small'>{{t
+                'publication-confirmation.reporting-title'
+              }}</AuHeading>
+            <p
+              class='au-c-help-text au-c-help-text--large au-u-margin-bottom'
+            >{{t 'publication-confirmation.reporting-subtitle'}}
+              <a
+                href='https://loket.lokaalbestuur.vlaanderen.be/'
+                target='_blank'
+                rel='noopener noreferrer'
+                class='au-c-link'
+              >{{t 'publication-confirmation.reporting-link'}}</a>.</p>
 
-            <AuHeading @level="2" @skin="6" class="au-u-margin-bottom-small">{{t "publication-confirmation.metadata-title"}}</AuHeading>
+            <AuHeading @level='2' @skin='6' class='au-u-margin-bottom-small'>{{t
+                'publication-confirmation.metadata-title'
+              }}</AuHeading>
 
             <ul>
               <li>
-                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "publication-confirmation.publisher-label"}}</p>
-                <p class="au-c-help-text au-c-help-text--large">{{this.currentSession.user.fullName}}</p>
+                <p
+                  class='au-c-help-text au-c-help-text--secondary au-c-help-text--normal'
+                >{{t 'publication-confirmation.publisher-label'}}</p>
+                <p
+                  class='au-c-help-text au-c-help-text--large'
+                >{{this.currentSession.user.fullName}}</p>
               </li>
-              <li class="au-u-margin-top-small">
-                <p class="au-c-help-text au-c-help-text--secondary au-c-help-text--normal">{{t "publication-confirmation.date-and-time-label"}}</p>
-                <p class="au-c-help-text au-c-help-text--large">{{t "publication-confirmation.date-and-time-message"}}</p>
+              <li class='au-u-margin-top-small'>
+                <p
+                  class='au-c-help-text au-c-help-text--secondary au-c-help-text--normal'
+                >{{t 'publication-confirmation.date-and-time-label'}}</p>
+                <p class='au-c-help-text au-c-help-text--large'>{{t
+                    'publication-confirmation.date-and-time-message'
+                  }}</p>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="au-o-grid__item au-u-2-3 au-u-wide-on-print">
-        <div class="au-c-rdfa-publication-holder">
-          <div class="au-c-rdfa-publication say-content rdfa-annotations behandeling-preview">
-          {{#if (has-block)}}
-            {{yield}}
-          {{else}}
-            {{html-safe @mockDocument.body}}
-          {{/if}}
+      <div class='au-o-grid__item au-u-2-3 au-u-wide-on-print'>
+        <div class='au-c-rdfa-publication-holder'>
+          <div
+            class='au-c-rdfa-publication say-content rdfa-annotations behandeling-preview'
+          >
+            {{#if (has-block)}}
+              {{yield}}
+            {{else}}
+              {{html-safe @mockDocument.body}}
+            {{/if}}
           </div>
         </div>
       </div>
     </div>
   </Modal.Body>
   <Modal.Footer>
-    <AuToolbar class="au-u-hide-on-print" as |Group|>
+    <AuToolbar class='au-u-hide-on-print' as |Group|>
       <Group>
-        <AuButton @skin="naked" {{on "click" @cancel}}>{{t "publication-confirmation.cancel-button"}}</AuButton>
+        <AuButton @skin='naked' {{on 'click' @cancel}}>{{t
+            'publication-confirmation.cancel-button'
+          }}</AuButton>
       </Group>
       <Group>
-        <AuButton {{on "click" @confirm}}>{{concat (t "publication-confirmation.confirm-button") @name}}</AuButton>
+        <AuButton {{on 'click' @confirm}}>{{concat
+            (t 'publication-confirmation.confirm-button')
+            @name
+          }}</AuButton>
       </Group>
     </AuToolbar>
   </Modal.Footer>

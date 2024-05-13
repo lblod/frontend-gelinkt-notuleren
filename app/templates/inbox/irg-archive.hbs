@@ -1,25 +1,33 @@
-{{page-title (t "inbox.irg-archive.page-title")}}
+{{page-title (t 'inbox.irg-archive.page-title')}}
 
-<AuDataTable @content={{this.model}} @isLoading={{this.isLoadingModel}} @noDataMessage='' @sort={{this.sort}} @page={{this.page}} @size={{this.size}} as |table|>
+<AuDataTable
+  @content={{this.model}}
+  @isLoading={{this.isLoadingModel}}
+  @noDataMessage=''
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.size}}
+  as |table|
+>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large" as |Group|>
-        <Group class="au-c-toolbar__group--vertical">
-          <AuHeading @skin="2">
+      <AuToolbar class='au-o-box' @size='large' as |Group|>
+        <Group class='au-c-toolbar__group--vertical'>
+          <AuHeading @skin='2'>
             {{t 'inbox.irg-archive.page-title'}}
           </AuHeading>
-          <AuHeading @skin="5">
+          <AuHeading @skin='5'>
             {{t 'inbox.irg-archive.page-subtitle'}}
           </AuHeading>
         </Group>
-        <Group class="au-c-toolbar__group--center">
+        <Group class='au-c-toolbar__group--center'>
           <AuInput
-            @icon="search"
-            @iconAlignment="right"
-            @width="block"
+            @icon='search'
+            @iconAlignment='right'
+            @width='block'
             value={{this.searchValue}}
             placeholder={{t 'inbox.irg-archive.search-placeholder'}}
-            {{on "input" (perform this.updateFilter)}}
+            {{on 'input' (perform this.updateFilter)}}
           />
         </Group>
       </AuToolbar>
@@ -27,13 +35,28 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.irg-archive.title-label'}} />
-      <AuDataTableThSortable @field="currentVersion.type.label" @currentSorting={{this.sort}} @label={{t 'inbox.irg-archive.type-label'}} />
-      <AuDataTableThSortable @field ="currentVersion.identifier" @currentSorting={{this.sort}} @label={{t 'inbox.irg-archive.identifier-label'}} />
+      <AuDataTableThSortable
+        @field=':no-case:currentVersion.title'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.irg-archive.title-label'}}
+      />
+      <AuDataTableThSortable
+        @field='currentVersion.type.label'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.irg-archive.type-label'}}
+      />
+      <AuDataTableThSortable
+        @field='currentVersion.identifier'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.irg-archive.identifier-label'}}
+      />
     </c.header>
     <c.body as |container|>
       <td>
-        <AuLink @route="irg-archive.show" @model={{container.id}}>{{container.currentVersion.title}}</AuLink>
+        <AuLink
+          @route='irg-archive.show'
+          @model={{container.id}}
+        >{{container.currentVersion.title}}</AuLink>
       </td>
       <td>
         {{container.currentVersion.type.label}}

@@ -1,20 +1,22 @@
-{{page-title (t "inbox.meetings.new.title")}}
+{{page-title (t 'inbox.meetings.new.title')}}
 
 <AuModal
-  @title={{t "inbox.meetings.new.title"}}
+  @title={{t 'inbox.meetings.new.title'}}
   @modalOpen={{true}}
   @closeModal={{this.cancelMeetingCreation}}
   as |Modal|
 >
   <Modal.Body>
-    <form class="au-o-flow" id="create-meeting-form" {{on "submit" (perform this.saveMeetingTask)}}>
+    <form
+      class='au-o-flow'
+      id='create-meeting-form'
+      {{on 'submit' (perform this.saveMeetingTask)}}
+    >
       <div>
         {{#let (unique-id) this.meeting.errors.bestuursorgaan as |id errors|}}
-          <AuLabel
-            @error={{if errors true false}}
-            for={{id}}
-          >
-            {{t "inbox.meetings.new.meeting.administrative-body"}} <RequiredField />
+          <AuLabel @error={{if errors true false}} for={{id}}>
+            {{t 'inbox.meetings.new.meeting.administrative-body'}}
+            <RequiredField />
           </AuLabel>
           <AdministrativeBodySelect
             @id={{id}}
@@ -31,36 +33,42 @@
       </div>
       <div>
         {{#let (unique-id) as |id|}}
-          <AuLabel for={{id}}>{{t "inbox.meetings.new.meeting.location"}}</AuLabel>
+          <AuLabel for={{id}}>{{t
+              'inbox.meetings.new.meeting.location'
+            }}</AuLabel>
           <AuInput
             value={{this.meeting.opLocatie}}
-            {{on "input" this.handleUpdateMeetingOpLocatie}}
-            @width="block"
+            {{on 'input' this.handleUpdateMeetingOpLocatie}}
+            @width='block'
             id={{id}}
-            type="text"
+            type='text'
           />
         {{/let}}
       </div>
       <div>
-        <AuLabel>{{t "inbox.meetings.new.meeting.planned-start"}}</AuLabel>
-        <DateTimePicker @alignment="top" @onChange={{fn (mut this.meeting.geplandeStart)}} @value={{this.meeting.geplandeStart}}/>
+        <AuLabel>{{t 'inbox.meetings.new.meeting.planned-start'}}</AuLabel>
+        <DateTimePicker
+          @alignment='top'
+          @onChange={{fn (mut this.meeting.geplandeStart)}}
+          @value={{this.meeting.geplandeStart}}
+        />
       </div>
     </form>
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>
-      {{!-- Due to a bug in Ember overriding the type of a button component with splattributes isn't possible --}}
-      {{!-- More information: https://github.com/emberjs/ember.js/issues/18232 --}}
-      {{!-- TODO: Replace this with the AuButton component once the app is updated to 3.25+ or the fix is backported to 3.24 LTS --}}
+      {{! Due to a bug in Ember overriding the type of a button component with splattributes isn't possible }}
+      {{! More information: https://github.com/emberjs/ember.js/issues/18232 }}
+      {{! TODO: Replace this with the AuButton component once the app is updated to 3.25+ or the fix is backported to 3.24 LTS }}
       <button
-        class="au-c-button {{if this.saveMeetingTask.isRunning "is-loading"}}"
-        form="create-meeting-form"
-        type="submit"
+        class='au-c-button {{if this.saveMeetingTask.isRunning "is-loading"}}'
+        form='create-meeting-form'
+        type='submit'
       >
-        {{t "inbox.meetings.new.save"}}
+        {{t 'inbox.meetings.new.save'}}
       </button>
-      <AuButton {{on "click" this.cancelMeetingCreation}} @skin="secondary">
-        {{t "inbox.meetings.new.cancel"}}
+      <AuButton {{on 'click' this.cancelMeetingCreation}} @skin='secondary'>
+        {{t 'inbox.meetings.new.cancel'}}
       </AuButton>
     </AuButtonGroup>
   </Modal.Footer>

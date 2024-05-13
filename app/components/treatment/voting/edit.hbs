@@ -1,70 +1,89 @@
 <AuModal
-  @title="Bewerk stemming"
+  @title='Bewerk stemming'
   @modalOpen={{true}}
-  @size="fullscreen"
-  @closeModal={{this.cancel}} as |Modal| >
+  @size='fullscreen'
+  @closeModal={{this.cancel}}
+  as |Modal|
+>
   <Modal.Body>
-    <AuHeading @level="3" @skin="4">{{t "voting-edit.first-step-title"}}</AuHeading>
+    <AuHeading @level='3' @skin='4'>{{t
+        'voting-edit.first-step-title'
+      }}</AuHeading>
     <AuHr />
-    <div class="au-c-form">
+    <div class='au-c-form'>
       <p>
-        <AuLabel for="voting-subject">{{t "voting-edit.first-step-introduction"}}</AuLabel>
+        <AuLabel for='voting-subject'>{{t
+            'voting-edit.first-step-introduction'
+          }}</AuLabel>
         <AuTextarea
-          id="voting-subject"
-          @width="block"
+          id='voting-subject'
+          @width='block'
           value={{this.editStemming.stemming.onderwerp}}
-          {{on "input" this.handleVotingSubjectChange}}
+          {{on 'input' this.handleVotingSubjectChange}}
         />
-        <AuHelpText @skin="secondary">{{t "voting-edit.first-step-explanation"}}</AuHelpText>
+        <AuHelpText @skin='secondary'>{{t
+            'voting-edit.first-step-explanation'
+          }}</AuHelpText>
       </p>
     </div>
 
-    <AuHeading @level="3" @skin="4" class="au-u-margin-top-large">{{t "voting-edit.second-step"}}</AuHeading>
+    <AuHeading @level='3' @skin='4' class='au-u-margin-top-large'>{{t
+        'voting-edit.second-step'
+      }}</AuHeading>
     <AuHr />
     <p>
       {{!-- <AuControlCheckbox @label={{t "voting-edit.private-voting-checkbox"}} @identifier="akkoord" @checked={{this.editStemming.stemming.geheim}} /> --}}
 
-      <label class="au-c-label">
-        <Input @type="checkbox" @checked={{this.editStemming.stemming.geheim}} />&nbsp;
-        {{t "voting-edit.private-voting-checkbox"}}
+      <label class='au-c-label'>
+        <Input
+          @type='checkbox'
+          @checked={{this.editStemming.stemming.geheim}}
+        />&nbsp;
+        {{t 'voting-edit.private-voting-checkbox'}}
       </label>
     </p>
     <div>
       <Treatment::Voting::ManageVoters />
     </div>
 
-    <AuHeading @level="3" @skin="4" class="au-u-margin-top-large">{{t "voting-edit.third-step"}}</AuHeading>
+    <AuHeading @level='3' @skin='4' class='au-u-margin-top-large'>{{t
+        'voting-edit.third-step'
+      }}</AuHeading>
     <AuHr />
-    <div class="au-c-form au-u-padding-bottom">
+    <div class='au-c-form au-u-padding-bottom'>
       <p>
-        <AuLabel for="voting-consequence">{{t "voting-edit.third-step-introduction"}}</AuLabel>
+        <AuLabel for='voting-consequence'>{{t
+            'voting-edit.third-step-introduction'
+          }}</AuLabel>
         <AuTextarea
-          id="voting-consequence"
-          @width="block"
+          id='voting-consequence'
+          @width='block'
           value={{this.editStemming.stemming.gevolg}}
-          {{on "input" this.handleVotingConsequencesChange}}
+          {{on 'input' this.handleVotingConsequencesChange}}
         />
-        <AuHelpText @skin="secondary">{{t "voting-edit.third-step-explanation"}}</AuHelpText>
+        <AuHelpText @skin='secondary'>{{t
+            'voting-edit.third-step-explanation'
+          }}</AuHelpText>
       </p>
     </div>
   </Modal.Body>
   <Modal.Footer>
     <AuToolbar as |Group|>
       <Group>
-        <AuButton @skin="naked" {{on "click" this.cancel}}>
-          {{t "voting-edit.cancel-button"}}
+        <AuButton @skin='naked' {{on 'click' this.cancel}}>
+          {{t 'voting-edit.cancel-button'}}
         </AuButton>
       </Group>
       <Group>
         <AuHelpText>
-          {{t "voting-edit.fourth-step-explanation-part-one"}}
+          {{t 'voting-edit.fourth-step-explanation-part-one'}}
           <strong>
-            {{t "voting-edit.save-button"}}
+            {{t 'voting-edit.save-button'}}
           </strong>
-          {{t "voting-edit.fourth-step-explanation-part-two"}}
+          {{t 'voting-edit.fourth-step-explanation-part-two'}}
         </AuHelpText>
-        <AuButton @loading={{@saving}} {{on "click" this.save}}>
-          {{t "voting-edit.save-button"}}
+        <AuButton @loading={{@saving}} {{on 'click' this.save}}>
+          {{t 'voting-edit.save-button'}}
         </AuButton>
       </Group>
     </AuToolbar>

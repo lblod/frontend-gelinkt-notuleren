@@ -20,32 +20,34 @@
     </AuHelpText>
   {{/if}}
 </div>
-{{#if (and this.signedByCurrentUser.value (and (not @signature.deleted) @canDelete))}}
+{{#if
+  (and this.signedByCurrentUser.value (and (not @signature.deleted) @canDelete))
+}}
   <AuButton
-    {{on "click" this.toggleDeleteSignatureCard}}
-    @skin="link-secondary"
-    @alert="true"
+    {{on 'click' this.toggleDeleteSignatureCard}}
+    @skin='link-secondary'
+    @alert='true'
     @disabled={{this.deleteSignature.isRunning}}
-    class="au-u-padding-none signature-delete-button"
+    class='au-u-padding-none signature-delete-button'
   >
-    {{t "publish.delete-signature"}}
+    {{t 'publish.delete-signature'}}
   </AuButton>
   {{#if this.showDeleteSignatureCard}}
     <AuAlert
-      @skin="error"
-      @icon="alert-triangle"
-      @size="small"
+      @skin='error'
+      @icon='alert-triangle'
+      @size='small'
       @closable={{true}}
       @onClose={{this.toggleDeleteSignatureCard}}
     >
-      <div>{{t "publish.delete-signature-warning"}}</div>
+      <div>{{t 'publish.delete-signature-warning'}}</div>
       <AuButton
-        {{on "click" this.deleteSignature}}
-        @skin="secondary"
-        @alert="true"
+        {{on 'click' this.deleteSignature}}
+        @skin='secondary'
+        @alert='true'
         @disabled={{this.deleteSignature.isRunning}}
       >
-        {{t "publish.delete-signature"}}
+        {{t 'publish.delete-signature'}}
       </AuButton>
     </AuAlert>
   {{/if}}

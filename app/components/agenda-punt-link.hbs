@@ -1,5 +1,13 @@
-{{#if (or (eq this.editorStatus "published") @readOnly)}}
-  <LinkTo @route="agendapoints.show" @model={{@documentContainer.id}} class="au-c-link">{{limit-content @documentContainer.currentVersion.title 70}}</LinkTo>
+{{#if (or (eq this.editorStatus 'published') @readOnly)}}
+  <LinkTo
+    @route='agendapoints.show'
+    @model={{@documentContainer.id}}
+    class='au-c-link'
+  >{{limit-content @documentContainer.currentVersion.title 70}}</LinkTo>
 {{else}}
-  <LinkTo @route="agendapoints.edit" @model={{@documentContainer.id}} class="au-c-link">{{limit-content @documentContainer.currentVersion.title 70}}</LinkTo>
+  <LinkTo
+    @route='agendapoints.edit'
+    @model={{@documentContainer.id}}
+    class='au-c-link'
+  >{{limit-content @documentContainer.currentVersion.title 70}}</LinkTo>
 {{/if}}

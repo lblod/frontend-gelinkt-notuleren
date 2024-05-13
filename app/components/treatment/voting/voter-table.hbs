@@ -1,38 +1,38 @@
-<table class="au-c-table-border au-u-margin-top-small">
+<table class='au-c-table-border au-u-margin-top-small'>
   <thead>
     <tr>
       <th>
-        {{t "voting-edit.naam-label"}}
+        {{t 'voting-edit.naam-label'}}
       </th>
       <th>
-        {{t "voting-edit.hoedanigheid-label"}}
+        {{t 'voting-edit.hoedanigheid-label'}}
       </th>
-      <th colspan="2">
-        {{t "voting-edit.actions-label"}}
+      <th colspan='2'>
+        {{t 'voting-edit.actions-label'}}
       </th>
     </tr>
   </thead>
   <tbody>
     {{#if this.editStemming.fetchVoters.isRunning}}
-    <div class="au-o-box">
-      <AuLoader @padding="small" />
-      <AuHelpText>{{t "voting-edit.loading-text"}}</AuHelpText>
-    </div>
+      <div class='au-o-box'>
+        <AuLoader @padding='small' />
+        <AuHelpText>{{t 'voting-edit.loading-text'}}</AuHelpText>
+      </div>
     {{else}}
-    {{#each this.voters as |row|}}
-    <Treatment::Voting::VoterRow
-    @row={{row}}
-    @onVoteChange={{this.editStemming.setVote}}
-    @secret={{this.editStemming.stemming.geheim}}
-    />
+      {{#each this.voters as |row|}}
+        <Treatment::Voting::VoterRow
+          @row={{row}}
+          @onVoteChange={{this.editStemming.setVote}}
+          @secret={{this.editStemming.stemming.geheim}}
+        />
 
-    {{else}}
-    <tr>
-      <td colspan="3">
-        <AuHelpText>{{t "voting-edit.no-data-message"}}</AuHelpText>
-      </td>
-    </tr>
-    {{/each}}
+      {{else}}
+        <tr>
+          <td colspan='3'>
+            <AuHelpText>{{t 'voting-edit.no-data-message'}}</AuHelpText>
+          </td>
+        </tr>
+      {{/each}}
     {{/if}}
   </tbody>
 </table>

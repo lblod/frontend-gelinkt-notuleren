@@ -1,13 +1,11 @@
 {{#if this.agendapoints.records.meta.count}}
-<AuButton 
-  {{on "click" this.openModal}} 
-  @skin="link">
-  {{t "inbox.regulatory-statements.linked-agendapoints.button-label"}}
-  ({{this.agendapoints.records.meta.count}})
-</AuButton>
-<LinkedAgendapointsModal 
-  @document={{@document}} 
-  @show={{this.modalOpen}} 
-  @onClose={{this.closeModal}}
-/>
+  <AuButton {{on 'click' this.openModal}} @skin='link'>
+    {{t 'inbox.regulatory-statements.linked-agendapoints.button-label'}}
+    ({{this.agendapoints.records.meta.count}})
+  </AuButton>
+  <LinkedAgendapointsModal
+    @document={{@document}}
+    @show={{this.modalOpen}}
+    @onClose={{this.closeModal}}
+  />
 {{/if}}

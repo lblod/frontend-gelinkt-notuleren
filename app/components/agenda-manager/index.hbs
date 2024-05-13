@@ -5,24 +5,25 @@
   @onCancel={{this.stopEditing}}
   as |agenda|
 >
-  <div class="au-c-meeting-chrome-card">
+  <div class='au-c-meeting-chrome-card'>
     {{#if agenda.loadItemsTask.isRunning}}
       <AuLoader />
-      <AuHelpText>{{t "participation-list.loading-loader"}}</AuHelpText>
+      <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
     {{else}}
       <AgendaManager::AgendaTable
-              @onSort={{agenda.onSort}}
-              @onCreate={{agenda.createAgendaItem}}
-              @items={{agenda.items}}
-              @readOnly={{@readOnly}}
-              as |Table|>
-        <Table.Header/>
+        @onSort={{agenda.onSort}}
+        @onCreate={{agenda.createAgendaItem}}
+        @items={{agenda.items}}
+        @readOnly={{@readOnly}}
+        as |Table|
+      >
+        <Table.Header />
 
         <Table.Body as |Body|>
           {{#each agenda.items as |item|}}
             <Body.Row @item={{item}} @edit={{fn this.editItem item}} />
           {{else}}
-            <Body.Empty/>
+            <Body.Empty />
           {{/each}}
 
         </Table.Body>

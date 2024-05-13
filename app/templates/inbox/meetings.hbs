@@ -1,21 +1,29 @@
-{{page-title (t "inbox.meetings.page-title")}}
-<AuDataTable @content={{this.model}}
-             @isLoading={{this.isLoadingModel}}
-             @noDataMessage={{t 'inbox.meetings.no-data-message'}}
-             @sort={{this.sort}}
-             @page={{this.page}}
-             @size={{this.pageSize}} as |table|>
+{{page-title (t 'inbox.meetings.page-title')}}
+<AuDataTable
+  @content={{this.model}}
+  @isLoading={{this.isLoadingModel}}
+  @noDataMessage={{t 'inbox.meetings.no-data-message'}}
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.pageSize}}
+  as |table|
+>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large" as |Group|>
+      <AuToolbar class='au-o-box' @size='large' as |Group|>
         <Group>
-          <AuHeading @skin="2">
-            {{t "inbox.meetings.page-title"}}
+          <AuHeading @skin='2'>
+            {{t 'inbox.meetings.page-title'}}
           </AuHeading>
         </Group>
-        <Group class="au-c-toolbar__group--center au-u-hide-on-print">
+        <Group class='au-c-toolbar__group--center au-u-hide-on-print'>
           {{#unless this.readOnly}}
-            <AuLink @route="inbox.meetings.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.meetings.new.title"}}</AuLink>
+            <AuLink
+              @route='inbox.meetings.new'
+              @skin='button'
+              @icon='add'
+              @iconAlignment='left'
+            >{{t 'inbox.meetings.new.title'}}</AuLink>
           {{/unless}}
         </Group>
       </AuToolbar>
@@ -23,14 +31,35 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
-      <AuDataTableThSortable @field=":no-case:bestuursorgaan.isTijdsspecialisatieVan.naam" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.administrative-body'}} />
-      <AuDataTableThSortable @field="geplandeStart" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.time'}} />
-      <AuDataTableThSortable @field=":no-case:opLocatie" @currentSorting={{this.sort}} @label={{t 'inbox.meetings.location'}} />
+      <th><span
+          class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+        >{{t 'inbox.meetings.type'}}</span></th>
+      <AuDataTableThSortable
+        @field=':no-case:bestuursorgaan.isTijdsspecialisatieVan.naam'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.meetings.administrative-body'}}
+      />
+      <AuDataTableThSortable
+        @field='geplandeStart'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.meetings.time'}}
+      />
+      <AuDataTableThSortable
+        @field=':no-case:opLocatie'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.meetings.location'}}
+      />
     </c.header>
     <c.body as |meeting|>
       <td>
-        <LinkTo @route="meetings.edit" @model={{meeting.id}} class="au-c-link">{{t "inbox.meetings.meeting-of"}} {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}} {{t "inbox.meetings.at"}} {{detailed-date meeting.geplandeStart}}</LinkTo>
+        <LinkTo
+          @route='meetings.edit'
+          @model={{meeting.id}}
+          class='au-c-link'
+        >{{t 'inbox.meetings.meeting-of'}}
+          {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}
+          {{t 'inbox.meetings.at'}}
+          {{detailed-date meeting.geplandeStart}}</LinkTo>
       </td>
       <td>{{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}</td>
       <td>{{detailed-date meeting.geplandeStart}}</td>

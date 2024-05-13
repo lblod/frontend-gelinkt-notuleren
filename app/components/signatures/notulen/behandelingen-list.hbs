@@ -1,27 +1,65 @@
-<div class="au-o-box au-u-padding-top-small au-u-padding-bottom-small au-c-editor-preview-treatment-toggle-box">
-  <AuToggleSwitch @label={{t "publish.toggle-all-public-label"}} @checked={{@allBehandelingPublic}} @onChange={{@toggleAll}} />
+<div
+  class='au-o-box au-u-padding-top-small au-u-padding-bottom-small au-c-editor-preview-treatment-toggle-box'
+>
+  <AuToggleSwitch
+    @label={{t 'publish.toggle-all-public-label'}}
+    @checked={{@allBehandelingPublic}}
+    @onChange={{@toggleAll}}
+  />
 </div>
 {{#each @prepublishedBehandelingen as |preview|}}
-  {{#let (includes preview.behandeling @publicBehandelingUris) as |isPublicBehandeling|}}
-    <div class="au-c-editor-preview-treatment {{if isPublicBehandeling "au-c-editor-preview-treatment--public" "au-c-editor-preview-treatment--private"}}">
-      <div class="au-o-box au-c-editor-preview-treatment__info {{if isPublicBehandeling "au-c-editor-preview-treatment__info--public" "au-c-editor-preview-treatment__info--private"}} ">
+  {{#let
+    (includes preview.behandeling @publicBehandelingUris)
+    as |isPublicBehandeling|
+  }}
+    <div
+      class='au-c-editor-preview-treatment
+        {{if
+          isPublicBehandeling
+          "au-c-editor-preview-treatment--public"
+          "au-c-editor-preview-treatment--private"
+        }}'
+    >
+      <div
+        class='au-o-box au-c-editor-preview-treatment__info
+          {{if
+            isPublicBehandeling
+            "au-c-editor-preview-treatment__info--public"
+            "au-c-editor-preview-treatment__info--private"
+          }}
+          '
+      >
         {{#if @isPublished}}
           {{#if isPublicBehandeling}}
-            <p><strong>{{t "behandeling-list.public-past"}}</strong></p>
-            <p class="au-c-help-text au-c-help-text--normal">{{t "behandeling-list.public-description"}}</p>
+            <p><strong>{{t 'behandeling-list.public-past'}}</strong></p>
+            <p class='au-c-help-text au-c-help-text--normal'>{{t
+                'behandeling-list.public-description'
+              }}</p>
           {{else}}
-            <p><strong>{{t "behandeling-list.not-public-past"}}</strong></p>
-            <p class="au-c-help-text au-c-help-text--normal">{{t "behandeling-list.not-public-past-description"}}</p>
+            <p><strong>{{t 'behandeling-list.not-public-past'}}</strong></p>
+            <p class='au-c-help-text au-c-help-text--normal'>{{t
+                'behandeling-list.not-public-past-description'
+              }}</p>
           {{/if}}
         {{else}}
-          <AuToggleSwitch @label={{t "meetings.publish.document.make-agendapoint-content-public"}} @checked={{isPublicBehandeling}} @onChange={{fn @toggle preview}} />
+          <AuToggleSwitch
+            @label={{t
+              'meetings.publish.document.make-agendapoint-content-public'
+            }}
+            @checked={{isPublicBehandeling}}
+            @onChange={{fn @toggle preview}}
+          />
           <AuHr />
           {{#if isPublicBehandeling}}
-            <p><strong>{{t "behandeling-list.public-now"}}</strong></p>
-            <p class="au-c-help-text au-c-help-text--normal">{{t "behandeling-list.public-now-description"}}</p>
+            <p><strong>{{t 'behandeling-list.public-now'}}</strong></p>
+            <p class='au-c-help-text au-c-help-text--normal'>{{t
+                'behandeling-list.public-now-description'
+              }}</p>
           {{else}}
-            <p><strong>{{t "behandeling-list.not-public-now"}}</strong></p>
-            <p class="au-c-help-text au-c-help-text--normal">{{t "behandeling-list.not-public-now-description"}}</p>
+            <p><strong>{{t 'behandeling-list.not-public-now'}}</strong></p>
+            <p class='au-c-help-text au-c-help-text--normal'>{{t
+                'behandeling-list.not-public-now-description'
+              }}</p>
           {{/if}}
         {{/if}}
       </div>

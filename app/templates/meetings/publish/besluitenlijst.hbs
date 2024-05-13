@@ -1,20 +1,25 @@
-<div class="au-o-box">
+<div class='au-o-box'>
   {{#if this.initializeBesluitenLijst.isRunning}}
-    <AuHelpText @size="large">{{t "publish.loading-message"}}</AuHelpText>
-    <AuLoader @padding="small" />
+    <AuHelpText @size='large'>{{t 'publish.loading-message'}}</AuHelpText>
+    <AuLoader @padding='small' />
   {{else if this.error}}
-    <AuAlert @icon="cross" @title={{t "publish.decision-list-error-message"}} @skin="error" @size="small">
+    <AuAlert
+      @icon='cross'
+      @title={{t 'publish.decision-list-error-message'}}
+      @skin='error'
+      @size='small'
+    >
       <code>{{this.error}}</code>
     </AuAlert>
   {{else}}
-  <ul>
-    <Signatures::Besluitenlijst::TimelineStep
-      @name={{t "meetings.publish.decision-list.title"}}
-      @lijst={{this.besluitenlijst}}
-      @errors={{this.validationErrors}}
-      @signing={{perform this.createSignedResource}}
-      @publish={{perform this.createPublishedResource}}
-    />
-  </ul>
+    <ul>
+      <Signatures::Besluitenlijst::TimelineStep
+        @name={{t 'meetings.publish.decision-list.title'}}
+        @lijst={{this.besluitenlijst}}
+        @errors={{this.validationErrors}}
+        @signing={{perform this.createSignedResource}}
+        @publish={{perform this.createPublishedResource}}
+      />
+    </ul>
   {{/if}}
 </div>

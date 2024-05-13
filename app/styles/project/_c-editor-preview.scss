@@ -1,13 +1,12 @@
-
 // Hide template comments in all direct document previews
 // Template comments are also *removed* in publishing flow (via notulen-prepublish-service)
 @mixin hideTemplateComment {
   div[typeof="ext:TemplateComment"],
-  div[typeof="http://mu.semte.ch/vocabularies/ext/TemplateComment"] {
+  div[typeof="http://mu.semte.ch/vocabularies/ext/TemplateComment"]
+  {
     display: none;
   }
 }
-
 
 /* ==========================================================================
   #EDITOR-PREVIEW
@@ -16,7 +15,7 @@
 
 .au-c-editor-preview {
   padding: $au-unit-small $au-unit $au-unit-small;
-  border: .1rem solid $au-gray-200;
+  border: 0.1rem solid $au-gray-200;
   background-color: $au-gray-100;
 
   h5 {
@@ -26,10 +25,9 @@
 
 .au-c-editor-preview,
 .au-c-rdfa-publication {
-
   // Labels
-  [property="besluit:geplandOpenbaar"],
-  [property="besluit:openbaar"] {
+  [property='besluit:geplandOpenbaar'],
+  [property='besluit:openbaar'] {
     @include au-font-size($au-h6);
     color: $au-gray-600;
     text-transform: initial;
@@ -37,20 +35,18 @@
   }
 
   // Hide webuniversum icons
-  [typeof="besluit:BehandelingVanAgendapunt"],
-  [property="ext:behandelt"],
-  [property="besluit:heeftAgendapunt"],
-  [typeof="besluit:Agendapunt"] {
-
-    [property="besluit:geplandOpenbaar"] i,
-    [property="besluit:geplandOpenbaar"] em,
-    [property="besluit:openbaar"] i,
-    [property="besluit:openbaar"] em {
+  [typeof='besluit:BehandelingVanAgendapunt'],
+  [property='ext:behandelt'],
+  [property='besluit:heeftAgendapunt'],
+  [typeof='besluit:Agendapunt'] {
+    [property='besluit:geplandOpenbaar'] i,
+    [property='besluit:geplandOpenbaar'] em,
+    [property='besluit:openbaar'] i,
+    [property='besluit:openbaar'] em {
       display: none;
     }
   }
-  @include hideTemplateComment
-
+  @include hideTemplateComment;
 }
 
 /* Notulen treatment (public/private)
@@ -59,7 +55,7 @@
 .au-c-editor-preview-treatment {
   margin-top: $au-unit-small;
   margin-bottom: $au-unit-small;
-  border: .1rem solid $au-gray-300;
+  border: 0.1rem solid $au-gray-300;
 
   .behandeling {
     margin-top: $au-unit;
@@ -67,14 +63,14 @@
     transition: all 200ms;
     padding-right: 11.4rem;
 
-    [property="dc:subject"],
-    [property="eli:title"],
-    [property="eli:description"],
-    [property="besluit:openbaar"],
-    div[property^="ext:insert"],
-    div[property^="ext:insert"],
-    [data-flagged-remove="complete"],
-    [data-flagged-remove="complete"] {
+    [property='dc:subject'],
+    [property='eli:title'],
+    [property='eli:description'],
+    [property='besluit:openbaar'],
+    div[property^='ext:insert'],
+    div[property^='ext:insert'],
+    [data-flagged-remove='complete'],
+    [data-flagged-remove='complete'] {
       margin-top: 0.5rem;
 
       &:after {
@@ -87,25 +83,25 @@
         letter-spacing: 1px;
         line-height: 1.1;
         font-weight: 400;
-        padding: 0 .2rem 0 0;
+        padding: 0 0.2rem 0 0;
         font-family: 'flanders-sans', sans-serif;
       }
     }
   }
-  @include hideTemplateComment
+  @include hideTemplateComment;
 }
 
 .au-c-editor-preview-treatment--private .behandeling {
-  >* {
+  > * {
     color: $au-gray-400;
   }
 
-  [property="dc:subject"],
-  [property="eli:title"],
-  [property="eli:description"],
-  [property="besluit:openbaar"] {
+  [property='dc:subject'],
+  [property='eli:title'],
+  [property='eli:description'],
+  [property='besluit:openbaar'] {
     position: relative;
-    background-color: rgba($au-blue-700, .2);
+    background-color: rgba($au-blue-700, 0.2);
     box-shadow: inset -4px 0 0 0 $au-blue-700;
     width: 100%;
     display: block;
@@ -113,14 +109,14 @@
 
     &:after {
       color: $au-blue-900;
-      content: "Publieke informatie";
+      content: 'Publieke informatie';
       border-right: 4px solid $au-blue-700;
     }
   }
 }
 
 .au-c-editor-preview-treatment-toggle-box {
-  border: .1rem solid $au-gray-300;
+  border: 0.1rem solid $au-gray-300;
   background-color: $au-gray-200;
 
   .au-c-toggle-switch__toggle {
@@ -131,7 +127,7 @@
 .au-c-editor-preview-treatment__info {
   transition: all 200ms;
   padding: $au-unit;
-  border-bottom: .1rem solid $au-gray-300;
+  border-bottom: 0.1rem solid $au-gray-300;
   background-color: $au-gray-200;
 
   .au-c-toggle-switch__toggle {
@@ -140,42 +136,40 @@
 }
 
 .au-c-editor-preview-treatment__info--private {
-  .checkbox--switch+.checkbox--switch__label {
+  .checkbox--switch + .checkbox--switch__label {
     &:after {
       border-color: $au-gray-300;
     }
   }
 }
 
-
 /* Behandeling overview
  ========================================================================== */
 
 .behandeling-preview {
-
-  div[property^="ext:insert"],
-  div[property^="ext:insert"],
-  [data-flagged-remove="complete"],
-  [data-flagged-remove="complete"] {
+  div[property^='ext:insert'],
+  div[property^='ext:insert'],
+  [data-flagged-remove='complete'],
+  [data-flagged-remove='complete'] {
     background-color: $au-yellow-300;
     color: $au-gray-1000;
 
     &:after {
-      content: "Informatie ontbreekt";
+      content: 'Informatie ontbreekt';
       border-right: 4px solid $au-yellow-300;
     }
   }
-  @include hideTemplateComment
+  @include hideTemplateComment;
 }
 
-.behandeling-preview div[property^="ext:insert"],
-.steps div[property^="ext:insert"] {
+.behandeling-preview div[property^='ext:insert'],
+.steps div[property^='ext:insert'] {
   position: relative;
 }
 
-.behandeling-preview [data-flagged-remove="complete"]:before,
-.steps [data-flagged-remove="complete"]:before {
-  content: "Leeg veld";
+.behandeling-preview [data-flagged-remove='complete']:before,
+.steps [data-flagged-remove='complete']:before {
+  content: 'Leeg veld';
   font-weight: 300;
   color: $au-gray-600;
 }
@@ -193,7 +187,7 @@
   pointer-events: none;
 
   &:after {
-    content: "";
+    content: '';
     display: block;
     left: 0;
     right: 0;
@@ -209,7 +203,7 @@
   }
 
   .au-c-loader::before {
-    height: .4rem !important;
+    height: 0.4rem !important;
   }
 }
 
@@ -240,30 +234,30 @@
 @keyframes move {
   0% {
     width: 0;
-    background-color: rgba($au-white, .5);
+    background-color: rgba($au-white, 0.5);
   }
 
   100% {
     width: 100%;
-    background-color: rgba($au-yellow-300, .5);
+    background-color: rgba($au-yellow-300, 0.5);
   }
 }
 
 /* Notulen preview missing data
  ========================================================================== */
 
-.is-required[content=""] {
+.is-required[content=''] {
   display: inline-block;
-  padding: $au-unit-tiny * .5 $au-unit-tiny;
+  padding: $au-unit-tiny * 0.5 $au-unit-tiny;
   border-radius: $au-radius;
   background-color: $au-red-600;
 
   &:after {
-    content: "Deze informatie is vereist om te kunnen publiceren";
+    content: 'Deze informatie is vereist om te kunnen publiceren';
     color: $au-white;
   }
 
-  [data--language="en"] &:after {
-    content: "Warning: You must fill this information";
+  [data--language='en'] &:after {
+    content: 'Warning: You must fill this information';
   }
 }

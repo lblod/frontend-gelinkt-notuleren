@@ -1,12 +1,15 @@
 <VoPage @showBanner={{false}}>
-  <section class="au-o-region-large">
-    <div class="au-o-layout">
+  <section class='au-o-region-large'>
+    <div class='au-o-layout'>
       <AuAlert @title={{@title}} @icon={{this.icon}} @skin={{this.skin}}>
         <p>{{yield}}</p>
-        <p>{{t "not-found.body.contact-message"}} <AuLink @route="contact">{{t "not-found.body.contact-link"}}</AuLink>
+        <p>{{t 'not-found.body.contact-message'}}
+          <AuLink @route='contact'>{{t 'not-found.body.contact-link'}}</AuLink>
         </p>
-        <p>{{t "not-found.body.email-message"}} <a href="mailto:gelinktnotuleren@vlaanderen.be"
-            class="au-c-link">{{t "not-found.body.email"}}</a></p>
+        <p>{{t 'not-found.body.email-message'}}
+          <a href='mailto:gelinktnotuleren@vlaanderen.be' class='au-c-link'>{{t
+              'not-found.body.email'
+            }}</a></p>
       </AuAlert>
     </div>
   </section>
