@@ -95,7 +95,8 @@ import {
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
 
-import SnippetInsertComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert';
+import SnippetInsertComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -198,6 +199,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     }
     return null;
   }
+
   get config() {
     const municipality = this.defaultMunicipality;
     return {
