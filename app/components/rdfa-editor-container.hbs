@@ -103,7 +103,6 @@
                 {{/if}}
                 {{yield to='sidebar'}}
                 {{#if @shouldEditRdfa}}
-                  <Plugins::Link::LinkEditor @controller={{this.controller}} />
                   <this.RdfaEditor
                     @node={{this.activeNode}}
                     @controller={{this.controller}}

@@ -205,6 +205,7 @@ export default class RegulatoryStatementsRoute extends Controller {
     }
     return null;
   }
+
   get config() {
     const municipality = this.defaultMunicipality;
     return {
