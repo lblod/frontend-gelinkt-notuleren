@@ -87,6 +87,10 @@ import {
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
+import {
+  snippetPlaceholder,
+  snippetPlaceholderView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet-placeholder';
 
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
@@ -95,7 +99,7 @@ import {
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
 
-import SnippetInsertComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -107,7 +111,7 @@ export default class RegulatoryStatementsRoute extends Controller {
   @service intl;
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
-  SnippetInsert = SnippetInsertComponent;
+  SnippetInsert = SnippetInsertRdfaComponent;
 
   schema = new Schema({
     nodes: {
@@ -143,6 +147,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
+      snippet_placeholder: snippetPlaceholder,
     },
     marks: {
       em,
@@ -172,6 +177,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         text_variable: textVariableView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+        snippet_placeholder: snippetPlaceholderView(controller),
       };
     };
   }
