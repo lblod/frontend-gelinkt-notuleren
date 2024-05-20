@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.17.0
+
+### Minor Changes
+
+- [#661](https://github.com/lblod/frontend-gelinkt-notuleren/pull/661) [`e8c3b562`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e8c3b56223186e22d0fd2818d34e3d0dc4e76112) Thanks [@piemonkey](https://github.com/piemonkey)! - Add support for snippet placeholder nodes in regulatory statements
+
+### Patch Changes
+
+- [#657](https://github.com/lblod/frontend-gelinkt-notuleren/pull/657) [`53d920b3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/53d920b3e78c95b9d021a43a42e185e415367cd6) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4827: Remove RDFA Tools from RDFA Editor
+
+- [#658](https://github.com/lblod/frontend-gelinkt-notuleren/pull/658) [`400d5bfc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/400d5bfcf613bee364f76a7a01576763f041d47c) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4825: Fix fetching snippets from RB
+
 ## 5.16.0
 
 ### Minor Changes
