@@ -119,6 +119,10 @@
         @classificatieUri={{this.config.classificatieUri}}
         @options={{this.config.besluitType}}
       />
+      <BesluitTopicPlugin::BesluitTopicToolbarDropdown
+        @controller={{this.controller}}
+        @options={{this.config.besluitTopic}}
+      />
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
