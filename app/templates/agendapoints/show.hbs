@@ -1,57 +1,75 @@
 <AppChrome
   @editorDocument={{this.model.editorDocument}}
   @documentContainer={{this.model.documentContainer}}
-  >
+>
   <:returnLink>
     <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
   </:returnLink>
   <:actions>
-    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
-      {{!-- template-lint-disable require-context-role --}}
+    <AuDropdown
+      @title={{t 'utils.file-options'}}
+      @buttonLabel={{t 'utils.file-options'}}
+      @alignment='right'
+    >
+      {{! template-lint-disable require-context-role }}
       {{#unless this.readOnly}}
-        <AuButton {{on "click" (perform this.copyAgendapunt)}} @skin="link" role="menuitem">
-          <AuIcon @icon="copy" @alignment="left" />
-         {{t "app-chrome.copy-agendapoint"}}
+        <AuButton
+          {{on 'click' (perform this.copyAgendapunt)}}
+          @skin='link'
+          role='menuitem'
+        >
+          <AuIcon @icon='copy' @alignment='left' />
+          {{t 'app-chrome.copy-agendapoint'}}
         </AuButton>
       {{/unless}}
-      <AuButton {{on "click" this.download}} @skin="link" role="menuitem">
-        <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.html-export"}}
+      <AuButton {{on 'click' this.download}} @skin='link' role='menuitem'>
+        <AuIcon @icon='export' @alignment='left' />
+        {{t 'utils.html-export'}}
       </AuButton>
     </AuDropdown>
-    </:actions>
+  </:actions>
 </AppChrome>
 
-<div class="au-c-body-container">
-  <div class="au-c-rdfa-editor">
-    <div class="say-container say-container--sidebar-left say-container--paper say-container--sidebar-right">
-      <div class="say-container__main">
+<div class='au-c-body-container'>
+  <div class='au-c-rdfa-editor'>
+    <div
+      class='say-container say-container--sidebar-left say-container--paper say-container--sidebar-right'
+    >
+      <div class='say-container__main'>
         {{#unless this.readOnly}}
-          <div class="au-o-box au-o-box--small au-u-background-gray-100">
-            <AuAlert @icon="info-circle" @title="Niet editeerbaar"  @skin="info" @size="small" class="au-u-margin-bottom-none">
-              <p>{{t "agendapoint.published"}}</p>
+          <div class='au-o-box au-o-box--small au-u-background-gray-100'>
+            <AuAlert
+              @icon='info-circle'
+              @title='Niet editeerbaar'
+              @skin='info'
+              @size='small'
+              class='au-u-margin-bottom-none'
+            >
+              <p>{{t 'agendapoint.published'}}</p>
             </AuAlert>
           </div>
         {{/unless}}
-        <div class="say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled">
-          <div class="say-editor__paper">
+        <div
+          class='say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled'
+        >
+          <div class='say-editor__paper'>
             {{#if this.copyAgendapunt.isRunning}}
-            <div class="au-c-scanner">
-              <div class="au-c-scanner__text">
-                <AuLoader @padding="small" />
-                <AuHelpText @size="large">
-                  {{#if this.saveTask.isRunning}}
-                    {{t "agendapoint.saving"}}
-                  {{else}}
-                    {{t "agendapoint.making-copy"}}
-                  {{/if}}
-                </AuHelpText>
+              <div class='au-c-scanner'>
+                <div class='au-c-scanner__text'>
+                  <AuLoader @padding='small' />
+                  <AuHelpText @size='large'>
+                    {{#if this.saveTask.isRunning}}
+                      {{t 'agendapoint.saving'}}
+                    {{else}}
+                      {{t 'agendapoint.making-copy'}}
+                    {{/if}}
+                  </AuHelpText>
+                </div>
+                <span class='au-c-scanner__bar'></span>
               </div>
-              <span class="au-c-scanner__bar"></span>
-            </div>
             {{/if}}
-            <div class="say-editor__inner say-content say-content--disabled">
-              {{ this.model.editorDocument.htmlSafeContent }}
+            <div class='say-editor__inner say-content say-content--disabled'>
+              {{this.model.editorDocument.htmlSafeContent}}
             </div>
           </div>
         </div>
@@ -59,6 +77,5 @@
     </div>
   </div>
 </div>
-
 
 {{outlet}}

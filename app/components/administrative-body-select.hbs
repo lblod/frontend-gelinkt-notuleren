@@ -1,6 +1,6 @@
-<div class={{if @error "ember-power-select--error"}}>
+<div class={{if @error 'ember-power-select--error'}}>
   <PowerSelect
-    @placeholder={{t "manage-zittings-data.select-placeholder"}}
+    @placeholder={{t 'manage-zittings-data.select-placeholder'}}
     @selected={{@selected}}
     @options={{this.administrativeBodyOptions}}
     @onChange={{@onChange}}
@@ -8,11 +8,13 @@
     as |administrativeBody|
   >
     {{administrativeBody.isTijdsspecialisatieVan.naam}}
-    ({{t "administrative-body-select.period"}}: {{plain-date administrativeBody.bindingStart}} -
+    ({{t 'administrative-body-select.period'}}:
+    {{plain-date administrativeBody.bindingStart}}
+    -
     {{#if administrativeBody.bindingEinde~}}
       {{plain-date administrativeBody.bindingEinde}}
     {{else}}
-      {{t "administrative-body-select.not-applicable"}} 
+      {{t 'administrative-body-select.not-applicable'}}
     {{/if}})
   </PowerSelect>
 </div>

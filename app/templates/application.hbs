@@ -1,6 +1,7 @@
 {{page-title
   (concat
-    'Gelinkt Notuleren' (if this.showEnvironment (concat ' - ' this.environmentName))
+    'Gelinkt Notuleren'
+    (if this.showEnvironment (concat ' - ' this.environmentName))
   )
 }}
 <AuModalContainer />
@@ -12,4 +13,4 @@
     />
   {{/if}}
   {{outlet}}
-</AuApp> 
+</AuApp>

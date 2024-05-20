@@ -16,44 +16,40 @@
  * SHAME: Temporary hacks and quickfixes
  */
 
-
 // EMBER-APPUNIVERSUM
-@import "@appuniversum/ember-appuniversum/styles";
-
+@import '@appuniversum/ember-appuniversum/styles';
 
 // PROJECT COMPONENTS > @TODO: refactor in ember-appuniversum where possible
 @import 'project/c-app-chrome';
 @import 'project/c-meeting-chrome';
 @import 'project/c-rdfa-editor';
-@import "project/c-onboarding";
+@import 'project/c-onboarding';
 @import 'project/c-editor-preview';
-@import "project/c-template";
-@import "project/c-environment-banner";
-
+@import 'project/c-template';
+@import 'project/c-environment-banner';
 
 // PLUGINS
-@import "ember-rdfa-editor";
-@import "citaten-plugin";
-@import "date-plugin";
-@import "variable-plugin";
-@import "besluit-plugin";
-@import "article-structure-plugin";
-@import "document-title-plugin";
-@import "snippet-plugin";
-@import "template-comments-plugin";
-@import "confidentiality-plugin";
-@import "worship-plugin";
-@import "snippet-plugin";
-@import "project/p-annotations"; // @TODO: refactor in ember-rdfa-editor
+@import 'ember-rdfa-editor';
+@import 'citaten-plugin';
+@import 'date-plugin';
+@import 'variable-plugin';
+@import 'besluit-plugin';
+@import 'article-structure-plugin';
+@import 'document-title-plugin';
+@import 'snippet-plugin';
+@import 'template-comments-plugin';
+@import 'confidentiality-plugin';
+@import 'worship-plugin';
+@import 'snippet-plugin';
+@import 'project/p-annotations'; // @TODO: refactor in ember-rdfa-editor
 
 // give treatment (behandeling) content the same style as other say-documents
 .c-template-content--treatment {
-   @include say-content();
+  @include say-content();
 }
 
 // PROJECT UTILITIES
 @import 'project/u-print'; // @TODO: refactor in ember-appuniversum where possible
-
 
 // TEMPORARY HACKS AND QUICKFIXES
 @import 'deprecated';

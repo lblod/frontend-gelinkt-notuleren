@@ -6,13 +6,14 @@
     @renderInPlace={{true}}
     @placeholder={{@placeholder}}
     @options={{this.options}}
-    @verticalPosition="below"
+    @verticalPosition='below'
     @searchEnabled={{true}}
     @selected={{this.selected}}
     @allowClear={{true}}
     @search={{perform this.getDrafts}}
     @onChange={{this.select}}
-    as |option|>
+    as |option|
+  >
     {{option.currentVersion.title}}
   </PowerSelect>
 </div>

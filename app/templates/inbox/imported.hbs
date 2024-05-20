@@ -1,30 +1,62 @@
-{{!-- template-lint-disable  --}}
-<AuDataTable @content={{model}} @isLoading={{isLoadingModel}} @noDataMessage="Geen documenten" @sort={{sort}} @page={{page}} @size={{size}} @class="container-flex--contain" as |t|>
+{{! template-lint-disable  }}
+<AuDataTable
+  @content={{model}}
+  @isLoading={{isLoadingModel}}
+  @noDataMessage='Geen documenten'
+  @sort={{sort}}
+  @page={{page}}
+  @size={{size}}
+  @class='container-flex--contain'
+  as |t|
+>
   <t.menu as |menu|>
     <menu.general>
-      <AuToolbar @size="large" as |Group|>
+      <AuToolbar @size='large' as |Group|>
         <Group>
-          <AuHeading @skin="2">
+          <AuHeading @skin='2'>
             Geïmporteerde HTML bestanden
           </AuHeading>
         </Group>
         <Group>
-          <TextSearch @filter={{title}} @placeholder="Zoek titel bestand" />
-          <LinkTo @route="imported-documents.new" class="button button--alt">Importeer HTML bestand</LinkTo>
-          <LinkTo @route="imported-documents.new" class="button">Nieuw ontwerpbesluit</LinkTo>
+          <TextSearch @filter={{title}} @placeholder='Zoek titel bestand' />
+          <LinkTo
+            @route='imported-documents.new'
+            class='button button--alt'
+          >Importeer HTML bestand</LinkTo>
+          <LinkTo @route='imported-documents.new' class='button'>Nieuw
+            ontwerpbesluit</LinkTo>
         </Group>
       </AuToolbar>
     </menu.general>
   </t.menu>
   <t.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field="currentVersion.title" @currentSorting={{sort}} @label="Document" />
-      <AuDataTableThSortable @field="currentVersion.createdOn" @currentSorting={{sort}} @label="Aangemaakt" />
-      <AuDataTableThSortable @field="status" @currentSorting={{sort}} @label="Status" />
+      <AuDataTableThSortable
+        @field='currentVersion.title'
+        @currentSorting={{sort}}
+        @label='Document'
+      />
+      <AuDataTableThSortable
+        @field='currentVersion.createdOn'
+        @currentSorting={{sort}}
+        @label='Aangemaakt'
+      />
+      <AuDataTableThSortable
+        @field='status'
+        @currentSorting={{sort}}
+        @label='Status'
+      />
     </c.header>
     <c.body as |container|>
-      <td><LinkTo @route="editor-documents.show" @model={{row.id}} class="au-c-link">{{container.currentVersion.title}}</LinkTo></td>
-      <td>{{human-friendly-date container.currentVersion.createdOn locale=this.intl.primaryLocale}}</td>
+      <td><LinkTo
+          @route='editor-documents.show'
+          @model={{row.id}}
+          class='au-c-link'
+        >{{container.currentVersion.title}}</LinkTo></td>
+      <td>{{human-friendly-date
+          container.currentVersion.createdOn
+          locale=this.intl.primaryLocale
+        }}</td>
       <td><EditorStatusPill @status={{container.status}} /></td>
     </c.body>
   </t.content>

@@ -1,19 +1,31 @@
 {{yield}}
-<form class="au-c-form js-formvalidation-bound">
-  <AuLabel for="select">{{t "contact.about"}}</AuLabel>
+<form class='au-c-form js-formvalidation-bound'>
+  <AuLabel for='select'>{{t 'contact.about'}}</AuLabel>
   <ul>
     <li>
-      <AuControlRadio @label={{t "contact.bug-message"}} @value="GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem" @name="type-vraag" @onChange={{this.setMailto}} />
+      <AuControlRadio
+        @label={{t 'contact.bug-message'}}
+        @value='GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem'
+        @name='type-vraag'
+        @onChange={{this.setMailto}}
+      />
 
     </li>
     <li>
-      <AuControlRadio @label={{t "contact.question-message"}} @name="type-vraag" @value="GelinktNotuleren@vlaanderen.be?subject=Inhoudelijke vraag" @onChange={{this.setMailto}} />
+      <AuControlRadio
+        @label={{t 'contact.question-message'}}
+        @name='type-vraag'
+        @value='GelinktNotuleren@vlaanderen.be?subject=Inhoudelijke vraag'
+        @onChange={{this.setMailto}}
+      />
     </li>
   </ul>
   {{#if this.mailto}}
-    <a href={{concat "mailto:" this.mailto}} class="au-c-button">{{t "contact.send"}}</a>
+    <a href={{concat 'mailto:' this.mailto}} class='au-c-button'>{{t
+        'contact.send'
+      }}</a>
   {{else}}
-    <AuButton @disabled="true">{{t "contact.compose"}}</AuButton>
+    <AuButton @disabled='true'>{{t 'contact.compose'}}</AuButton>
   {{/if}}
-  <div class="form__error" aria-describedby="radio-buttons"></div>
+  <div class='form__error' aria-describedby='radio-buttons'></div>
 </form>

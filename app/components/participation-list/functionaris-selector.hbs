@@ -1,13 +1,21 @@
 {{#if this.loadData.isRunning}}
-  <p class="loader"><span class="u-visually-hidden">{{t "participation-list.loading-title"}}</span></p>
+  <p class='loader'><span class='u-visually-hidden'>{{t
+        'participation-list.loading-title'
+      }}</span></p>
 {{else}}
   <PowerSelect
     @options={{this.options}}
     @selected={{@functionaris}}
     @allowClear={{true}}
     @onChange={{@onSelect}}
-    as |functionaris| >
-  {{functionaris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{functionaris.isBestuurlijkeAliasVan.achternaam}},
-  {{functionaris.bekleedt.rol.label}} ({{t "participation-list.period-start"}}: {{plain-date functionaris.start}}  - {{plain-date functionaris.einde}})
-</PowerSelect>
+    as |functionaris|
+  >
+    {{functionaris.isBestuurlijkeAliasVan.gebruikteVoornaam}}
+    {{functionaris.isBestuurlijkeAliasVan.achternaam}},
+    {{functionaris.bekleedt.rol.label}}
+    ({{t 'participation-list.period-start'}}:
+    {{plain-date functionaris.start}}
+    -
+    {{plain-date functionaris.einde}})
+  </PowerSelect>
 {{/if}}

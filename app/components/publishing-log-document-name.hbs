@@ -1,11 +1,14 @@
-<span class="au-u-flex">
+<span class='au-u-flex'>
   {{#if this.data.value.deleted}}
-    <AuLink @route="meetings.publish.publication-actions.detail" @model={{@log.id}}>
-      {{this.data.value.documentName}} 
+    <AuLink
+      @route='meetings.publish.publication-actions.detail'
+      @model={{@log.id}}
+    >
+      {{this.data.value.documentName}}
     </AuLink>
-    <span class="au-u-margin-left-small">
-      <AuPill @skin="error" @icon="trash">
-        {{t "meetings.publish.publication-actions.deleted"}}
+    <span class='au-u-margin-left-small'>
+      <AuPill @skin='error' @icon='trash'>
+        {{t 'meetings.publish.publication-actions.deleted'}}
       </AuPill>
     </span>
   {{else}}

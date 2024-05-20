@@ -1,16 +1,27 @@
-<section class="au-o-box au-u-background-gray-100 au-u-hide-on-print au-u-hide-on-print--show">
-  <div class="au-o-grid">
-    <div class="au-o-grid__item au-u-3-4@medium au-u-1-2@large">
+<section
+  class='au-o-box au-u-background-gray-100 au-u-hide-on-print au-u-hide-on-print--show'
+>
+  <div class='au-o-grid'>
+    <div class='au-o-grid__item au-u-3-4@medium au-u-1-2@large'>
       <AuContent>
-        {{yield (hash
-                        BackLink=(component "au-link" iconAlignment="left" skin="secondary" icon="arrow-left")
-                )}}
-        <AuHeading @skin="3">
-          <AuIcon @icon="document" @iconAlignment="left"/>
-          {{t "print-view.print-header"}}
+        {{yield
+          (hash
+            BackLink=(component
+              'au-link' iconAlignment='left' skin='secondary' icon='arrow-left'
+            )
+          )
+        }}
+        <AuHeading @skin='3'>
+          <AuIcon @icon='document' @iconAlignment='left' />
+          {{t 'print-view.print-header'}}
         </AuHeading>
-        <p>{{t "print-view.save-1"}} <a href="{{config "manual.baseUrl"}}{{config "manual.print"}}" target="_blank" rel="noopener noreferrer"
-                class="au-c-link">{{t "print-view.manual"}}</a>{{t "print-view.save-2"}}</p>
+        <p>{{t 'print-view.save-1'}}
+          <a
+            href='{{config "manual.baseUrl"}}{{config "manual.print"}}'
+            target='_blank'
+            rel='noopener noreferrer'
+            class='au-c-link'
+          >{{t 'print-view.manual'}}</a>{{t 'print-view.save-2'}}</p>
       </AuContent>
     </div>
   </div>

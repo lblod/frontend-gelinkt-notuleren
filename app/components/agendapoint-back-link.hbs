@@ -1,11 +1,15 @@
 {{#if @meetingId}}
-  <AuLink @route="meetings.edit" @model={{@meetingId}}>
-    <AuIcon @icon="arrow-left" @alignment="left" />
-    {{t "agendapoint.back-to-meeting" adminBody=this.administrativeBodyName date=(detailed-date this.meeting.geplandeStart)}}
+  <AuLink @route='meetings.edit' @model={{@meetingId}}>
+    <AuIcon @icon='arrow-left' @alignment='left' />
+    {{t
+      'agendapoint.back-to-meeting'
+      adminBody=this.administrativeBodyName
+      date=(detailed-date this.meeting.geplandeStart)
+    }}
   </AuLink>
 {{else}}
-  <AuLink @route="inbox.agendapoints" @skin="secondary">
-    <AuIcon @icon="arrow-left" @alignment="left" />
+  <AuLink @route='inbox.agendapoints' @skin='secondary'>
+    <AuIcon @icon='arrow-left' @alignment='left' />
     {{t 'inbox.agendapoints.return'}}
   </AuLink>
 {{/if}}

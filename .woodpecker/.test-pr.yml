@@ -3,11 +3,21 @@ steps:
     image: danlynn/ember-cli:4.12.1
     commands:
       - npm ci
-  lint:
-    image: danlynn/ember-cli:4.12.1
+  lint-js:
+    image: node:20-slim
     group: lint
     commands:
-      - npm run lint
+      - npm run lint:js
+  lint-hbs:
+    image: node:20-slim
+    group: lint
+    commands:
+      - npm run lint:hbs
+  lint-prettier:
+    image: node:20-slim
+    group: lint
+    commands:
+      - npm run lint:prettier
   dependency-lint:
     image: danlynn/ember-cli:4.12.1
     group: lint

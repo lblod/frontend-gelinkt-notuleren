@@ -1,4 +1,4 @@
-{{page-title (t "inbox.agendapoints.page-title")}}
+{{page-title (t 'inbox.agendapoints.page-title')}}
 <SnippetsNotifier />
 
 <AuDataTable
@@ -7,25 +7,32 @@
   @noDataMessage={{t 'inbox.agendapoints.no-data-message'}}
   @sort={{this.sort}}
   @page={{this.page}}
-  @size={{this.pageSize}} as |table|>
+  @size={{this.pageSize}}
+  as |table|
+>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large" as |Group|>
+      <AuToolbar class='au-o-box' @size='large' as |Group|>
         <Group>
-          <AuHeading @skin="2">
+          <AuHeading @skin='2'>
             {{t 'inbox.agendapoints.page-title'}}
           </AuHeading>
         </Group>
-        <Group class="au-c-toolbar__group--center au-u-hide-on-print">
+        <Group class='au-c-toolbar__group--center au-u-hide-on-print'>
           <AuInput
-            @icon="search"
-            @iconAlignment="right"
+            @icon='search'
+            @iconAlignment='right'
             value={{this.searchValue}}
             placeholder={{t 'inbox.agendapoints.search-placeholder'}}
-            {{on "input" (perform this.updateFilter)}}
+            {{on 'input' (perform this.updateFilter)}}
           />
           {{#unless this.readOnly}}
-            <AuLink @route="inbox.agendapoints.new" @skin="button" @icon="add" @iconAlignment="left">{{t "inbox.agendapoints.new.title"}}</AuLink>
+            <AuLink
+              @route='inbox.agendapoints.new'
+              @skin='button'
+              @icon='add'
+              @iconAlignment='left'
+            >{{t 'inbox.agendapoints.new.title'}}</AuLink>
           {{/unless}}
         </Group>
       </AuToolbar>
@@ -33,30 +40,49 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.title-label'}} />
-      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.updated-on-label'}} />
-      <AuDataTableThSortable @field=":no-case:status.label" @currentSorting={{this.sort}} @label={{t 'inbox.agendapoints.status-label'}} />
-      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.meetings.type'}}</span></th>
-      <th><span class="au-c-data-table__header-title au-c-data-table__header-title--sortable">{{t 'inbox.agendapoints.attachments-label'}}</span></th>
+      <AuDataTableThSortable
+        @field=':no-case:currentVersion.title'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.agendapoints.title-label'}}
+      />
+      <AuDataTableThSortable
+        @field='currentVersion.updatedOn'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.agendapoints.updated-on-label'}}
+      />
+      <AuDataTableThSortable
+        @field=':no-case:status.label'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.agendapoints.status-label'}}
+      />
+      <th><span
+          class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+        >{{t 'inbox.meetings.type'}}</span></th>
+      <th><span
+          class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+        >{{t 'inbox.agendapoints.attachments-label'}}</span></th>
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
-      <td>
-        <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
-      </td>
-      <td>
-        {{human-friendly-date row.updatedOn locale=this.intl.primaryLocale}}
-        <br>
-      </td>
-      <td>
-        <EditorStatusPill @status={{container.status}} />
-      </td>
-      <td>
-        <ZittingLink @documentContainer={{container}}/>
-      </td>
-      <td>
-        <AttachmentsNumber @documentContainer={{container}} />
-      </td>
+        <td>
+          <AgendaPuntLink
+            @documentContainer={{container}}
+            @readOnly={{this.readOnly}}
+          />
+        </td>
+        <td>
+          {{human-friendly-date row.updatedOn locale=this.intl.primaryLocale}}
+          <br />
+        </td>
+        <td>
+          <EditorStatusPill @status={{container.status}} />
+        </td>
+        <td>
+          <ZittingLink @documentContainer={{container}} />
+        </td>
+        <td>
+          <AttachmentsNumber @documentContainer={{container}} />
+        </td>
       {{/let}}
     </c.body>
   </table.content>

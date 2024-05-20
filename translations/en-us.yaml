@@ -6,19 +6,19 @@ agendapoint:
   not-found:
     title: Agendapoint not found
     explanation: It's possible that you don't have access to the agendapoint with this account
-  saved-versions: "Saved document versions:"
+  saved-versions: 'Saved document versions:'
   current-version: Current version
-  modify-warning: "When modifying the document to an older version, subsequent newer versions disappear irretrievably:"
+  modify-warning: 'When modifying the document to an older version, subsequent newer versions disappear irretrievably:'
   version-of: Version of
   no-new-versions: No newer versions to display.
   restore-version: Restore version and reject newer versions
   revisions-modal-title: Are you sure you want to restore this version?
   published: This article has already been published. Published agenda items are not editable.
-  saving:  Saving...
+  saving: Saving...
   making-copy: Making copy...
 
 administrative-body-select:
-  period: "period"
+  period: 'period'
   not-applicable: n/a
 
 application:
@@ -30,7 +30,6 @@ auth:
   login: Login
   switch-administrative-unit: Switch Administrative Unit
   logout: Logout
-
 
 application-header:
   switch-administrative-unit: Switch Administrative Unit
@@ -61,7 +60,7 @@ attachments:
 behandeling-list:
   public-past: Content was published
   public-past-description: All information from the discussion of the agenda item was published.
-  public-now:  Content will be published
+  public-now: Content will be published
   public-now-description: All information from the discussion of the agenda item will be published.
   not-public-past: Content was not published
   not-public-past-description: However, the title and visibility of the discussion are published. For decisions, the title of the decision and the brief description are also published.
@@ -73,16 +72,16 @@ behandeling-van-agendapunten:
   save-and-quit: Save and Quit
   cancel: Cancel
   confirm-leave-without-saving: Are you sure you would like to leave this page without saving your changes?
-  openbaar-label: "make agendapoint public"
-  geen-openbaar-msg: "agendapoint not public"
-  openbaar-msg: "agendapoint public"
+  openbaar-label: 'make agendapoint public'
+  geen-openbaar-msg: 'agendapoint not public'
+  openbaar-msg: 'agendapoint public'
   participation-list-button: Configure attendees of this agenda-item.
-  visibility: "visibility"
-  voting-title: "Voting"
-  content-title: "Content"
+  visibility: 'visibility'
+  voting-title: 'Voting'
+  content-title: 'Content'
   needs-participants: Please configure the participants to this agenda-item before adding a voting.
   cannot-edit-participants: Cannot configure participants if votings exist for this agenda item.
-  edit-document: "Edit document"
+  edit-document: 'Edit document'
 
 contact:
   about: What is your message about?
@@ -260,7 +259,6 @@ login:
   publication-3-1: give citizens easy access to
   publication-3-2: public information.
 
-
 manage-agenda-zitting:
   beschrijving-label: Description
   gepland-openbaar: Planned public
@@ -326,27 +324,27 @@ manage-intermissions:
   warning: You cannot undo this action.
   checkbox-label: I understand that the intermission will be irreversibly removed.
   delete-button: Delete intermission
-  before-ap: "Intermission before agenda item:"
-  during-ap: "Intermission during agenda item:"
-  after-ap: "Intermission after agenda item:"
-  position: "Position"
+  before-ap: 'Intermission before agenda item:'
+  during-ap: 'Intermission during agenda item:'
+  after-ap: 'Intermission after agenda item:'
+  position: 'Position'
 
 manage-zittings-data:
-  start-not-set: "start date has not been set"
-  end-not-set: "end date has not been set"
+  start-not-set: 'start date has not been set'
+  end-not-set: 'end date has not been set'
   end-before-start: You can't pick an end-date that is before the start date.
-  start-differs-from-planned-start: "Note: planned start differs from start date, make sure this was intentional."
+  start-differs-from-planned-start: 'Note: planned start differs from start date, make sure this was intentional.'
   modal-title: Manage general information about the meeting
-  bestuursorgan-label: "Held by:"
-  geplande-start-label: "Scheduled start:"
-  op-locatie-label: "On location:"
-  gestart-op-tijdstip-label: "Started at:"
-  geeindigd-op-tijdstip-label: "Finished at:"
+  bestuursorgan-label: 'Held by:'
+  geplande-start-label: 'Scheduled start:'
+  op-locatie-label: 'On location:'
+  gestart-op-tijdstip-label: 'Started at:'
+  geeindigd-op-tijdstip-label: 'Finished at:'
   save-button: Insert meeting data
   cancel-button: Back
   open-modal-button: Manage general data of the meeting
   select-placeholder: Select governing body
-  period-start: "period"
+  period-start: 'period'
   not-applicable: n/a
 
 meeting-form:
@@ -372,7 +370,6 @@ meeting-form:
   bestuursorgan-not-selected-warning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
   notulen-published: Meeting is published
   notulen-signed: Meeting is signed
-
 
 meetings:
   publish:
@@ -436,7 +433,7 @@ meetings:
 mock-login:
   administrative-unit-selection: Choose a administrative unit to log in with.
   administrative-unit-search: Administrative unit search
-  search-placeholder: "Aalst, Berchem, ..."
+  search-placeholder: 'Aalst, Berchem, ...'
 
 not-found:
   title: Page not found
@@ -448,21 +445,21 @@ not-found:
     email: GelinktNotuleren@vlaanderen.be
 
 participation:
-  present-label: "Present mandatees:"
+  present-label: 'Present mandatees:'
 
 participation-list:
-  block-title: "Participation"
+  block-title: 'Participation'
   loading-title: Loading the attendee list
   loading-loader: Loading
-  voorzitter-label: "Chairman:"
-  voorzitter-error: "No chairman has been assigned"
-  secretaris-label: "Secretary:"
-  secretaris-error: "No secretary has been assigned"
-  present-label: "Present mandatees:"
-  present-error: "No mandatees have been appointed"
-  not-present-label: "Absent mandatees:"
+  voorzitter-label: 'Chairman:'
+  voorzitter-error: 'No chairman has been assigned'
+  secretaris-label: 'Secretary:'
+  secretaris-error: 'No secretary has been assigned'
+  present-label: 'Present mandatees:'
+  present-error: 'No mandatees have been appointed'
+  not-present-label: 'Absent mandatees:'
   open-modal-button: Manage attendees at the start of the session
-  period-start: "period"
+  period-start: 'period'
 
 participation-list-modal:
   voorzitter-label: Chairman of the meeting
@@ -500,21 +497,21 @@ print-view:
   error-body: Please contact the support team.
 
 publication-confirmation:
-  modal-title: "Confirm publication of "
+  modal-title: 'Confirm publication of '
   alert-first-part: Publication and reporting is binding and irreversible.
   alert-second-part: Check the content of the document - you can check the document afterwards
   alert-third-part: but not modify it any more.
   alert-fourth-part: Only authorized persons may publish the document.
   publication-title: Publication
-  publication-subtitle: "The document and its content are made public on the publication page, freely accessible to citizens:"
+  publication-subtitle: 'The document and its content are made public on the publication page, freely accessible to citizens:'
   reporting-title: Reporting
   reporting-subtitle: If applicable, document will be automatically reported to the supervising authority, and will be visible in the
   reporting-link: Loket voor Lokale Besturen
   metadata-title: Publishing metadata
   publisher-label: Publisher
-  date-and-time-label: "Date & Time"
+  date-and-time-label: 'Date & Time'
   date-and-time-message: The moment you confirm the publication it will also be saved.
-  confirm-button: "Confirm publication of "
+  confirm-button: 'Confirm publication of '
   cancel-button: Cancel
 
 publish:
@@ -525,7 +522,7 @@ publish:
   updating-message: Updating...
   decision-list-error-message: Something went wrong while fetching the decision list.
   no-extracts-message: There are no extracts available.
-  retry: "retry"
+  retry: 'retry'
   extracts: Extracts
   extracts-overview: All extracts
   position: Position
@@ -569,7 +566,6 @@ regulatory-statements:
     title: Regulatory statement not found
     explanation: It's possible that you don't have access to the regulatory statement with this account
 
-
 regulatory-statements-plugin:
   regulatory-statement: Regulatory Statement
   insert-statement: Insert Regulatory Statement
@@ -592,7 +588,7 @@ regulatory-statement:
   history: History
 
 signature-confirmation:
-  modal-title: "Confirm signing of "
+  modal-title: 'Confirm signing of '
   sign-label: Sign
   sign-warning-title: Signing is binding.
   sign-warning-text: Check the contents of the document carefully. Only authorized persons may sign the document.
@@ -600,7 +596,7 @@ signature-confirmation:
   signer-label: Signer
   time-label: Time
   time-message: The moment you confirm the signing it will also be saved.
-  confirm-button: "Confirm signing of "
+  confirm-button: 'Confirm signing of '
   cancel-button: Cancel
 
 snippets-notifier:
@@ -615,39 +611,39 @@ switch-login:
   signing-instructions: Signing in is done in a pop-up; make sure your browser settings are correct if it does not appear.
 
 timeline-step:
-  sign-step-title: "Sign "
-  signing-restriction-info: "Signing is only possible by authorized persons which have been assigned to the "
-  signing-restriction-role: "signer role"
-  signing-restriction-end: " within the organization."
+  sign-step-title: 'Sign '
+  signing-restriction-info: 'Signing is only possible by authorized persons which have been assigned to the '
+  signing-restriction-role: 'signer role'
+  signing-restriction-end: ' within the organization.'
   first-signature: First signature
   second-signature: Second signature
-  sign-button-label: "Sign {name}"
-  print-button-label: "Print {name}"
-  print-info: "Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed"
-  second-print-info: "Printing is only possible after the document has been signed. This print will not be made available externally."
-  publish-button-label: "Publish {name}"
-  publish-notify-button-label: "Publish (and notify) {name}"
-  publish-restriction-info: "Publishing is only possible by persons with the "
-  publish-restriction-role: "publisher"
-  publish-restriction-end: " role."
-  link-publish: "Link publication"
-  timing-warning: "It can take up to 5 minutes before the publication is visible on the above link."
+  sign-button-label: 'Sign {name}'
+  print-button-label: 'Print {name}'
+  print-info: 'Anyone with access to the meeting minutes can make a print (or PDF) after they have been signed'
+  second-print-info: 'Printing is only possible after the document has been signed. This print will not be made available externally.'
+  publish-button-label: 'Publish {name}'
+  publish-notify-button-label: 'Publish (and notify) {name}'
+  publish-restriction-info: 'Publishing is only possible by persons with the '
+  publish-restriction-role: 'publisher'
+  publish-restriction-end: ' role.'
+  link-publish: 'Link publication'
+  timing-warning: 'It can take up to 5 minutes before the publication is visible on the above link.'
   publication-type: Publication type
   public-for-all: Visible for everyone
   publication-consequences: Consequences publication
-  preview-info: "The document will be published as seen in the preview above to "
-  preview-info-end: ", and will be publicly available to anyone, without authentication."
+  preview-info: 'The document will be published as seen in the preview above to '
+  preview-info-end: ', and will be publicly available to anyone, without authentication.'
   notify-consequences: Consequences notification
-  notify-info: "If applicable, a notification will be sent for this document to the authoritative government and will be visible in the "
-  local-loket: "Loket voor Lokale Besturen"
-  publish-warning: "Complete the missing information to publish"
-  delete-both-signatures-warning: "To be able to modify the document, both signatures must be removed"
+  notify-info: 'If applicable, a notification will be sent for this document to the authoritative government and will be visible in the '
+  local-loket: 'Loket voor Lokale Besturen'
+  publish-warning: 'Complete the missing information to publish'
+  delete-both-signatures-warning: 'To be able to modify the document, both signatures must be removed'
 
 uittreksel-error:
   header: We cannot find the page you are looking for
   extract-not-found: Something has gone wrong. The extract you are looking for does not exist or you do not have access.
   back-link: Go back to the overview
-  error-code: "404"
+  error-code: '404'
 
 utils:
   save: Save
@@ -681,9 +677,7 @@ voting:
 voting-edit:
   first-step-title: 1. Enter subject
   first-step-introduction: The board votes,
-  first-step-explanation: "The subject of a vote can be, for example: the proposal of decision, an amendment, whether or not
-  to treat an agenda item, the open or closed treatment of an agenda item, an adjournment, a
-  intervention."
+  first-step-explanation: 'The subject of a vote can be, for example: the proposal of decision, an amendment, whether or not to treat an agenda item, the open or closed treatment of an agenda item, an adjournment, a intervention.'
   private-voting-checkbox: Make voting secret
   second-step: 2. Manage attendees and votes
   third-step: 3. Enter Result
@@ -725,9 +719,9 @@ voting-modal:
   subject-not-found: No subject
   geheim-true-label: Secret
   geheim-false-label: Public
-  aantal-voorstanders-label: "Supporters:"
-  aantal-tegenstanders-label: "Objectors:"
-  aantal-onthouders-label: "Abstentions:"
+  aantal-voorstanders-label: 'Supporters:'
+  aantal-tegenstanders-label: 'Objectors:'
+  aantal-onthouders-label: 'Abstentions:'
   gevolg-not-found: No consequences
   toggle-edit-button: Edit
   delete-button: Delete

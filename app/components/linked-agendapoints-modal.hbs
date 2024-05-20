@@ -1,27 +1,52 @@
-<AuModal @modalOpen={{@show}} @closeModal={{@onClose}}
-         @title={{t "inbox.regulatory-statements.linked-agendapoints.title" title=@document.currentVersion.title}}>
-  {{!-- <Modal.Body> --}}
-  <AuDataTable @content={{this.agendapoints.records}} @isLoading={{this.agendapoints.isLoading}}
-               @noDataMessage={{t "inbox.regulatory-statements.linked-agendapoints.no-data"}} @sort={{this.sort}}
-               @page={{this.page}} @size={{this.pageSize}} as
-               |table|>
+<AuModal
+  @modalOpen={{@show}}
+  @closeModal={{@onClose}}
+  @title={{t
+    'inbox.regulatory-statements.linked-agendapoints.title'
+    title=@document.currentVersion.title
+  }}
+>
+  {{! <Modal.Body> }}
+  <AuDataTable
+    @content={{this.agendapoints.records}}
+    @isLoading={{this.agendapoints.isLoading}}
+    @noDataMessage={{t
+      'inbox.regulatory-statements.linked-agendapoints.no-data'
+    }}
+    @sort={{this.sort}}
+    @page={{this.page}}
+    @size={{this.pageSize}}
+    as |table|
+  >
     <table.content as |c|>
       <c.header>
-        <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}}
-                               @label={{t 'inbox.agendapoints.title-label' }} />
-        <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}}
-                               @label={{t 'inbox.agendapoints.updated-on-label' }} />
-        <AuDataTableThSortable @field=":no-case:status.label" @currentSorting={{this.sort}}
-                               @label={{t 'inbox.agendapoints.status-label' }} />
+        <AuDataTableThSortable
+          @field=':no-case:currentVersion.title'
+          @currentSorting={{this.sort}}
+          @label={{t 'inbox.agendapoints.title-label'}}
+        />
+        <AuDataTableThSortable
+          @field='currentVersion.updatedOn'
+          @currentSorting={{this.sort}}
+          @label={{t 'inbox.agendapoints.updated-on-label'}}
+        />
+        <AuDataTableThSortable
+          @field=':no-case:status.label'
+          @currentSorting={{this.sort}}
+          @label={{t 'inbox.agendapoints.status-label'}}
+        />
       </c.header>
       <c.body as |container|>
         {{#let container.currentVersion as |row|}}
           <td>
-            <AgendaPuntLink @documentContainer={{container}} @readOnly={{this.readOnly}} />
+            <AgendaPuntLink
+              @documentContainer={{container}}
+              @readOnly={{this.readOnly}}
+            />
           </td>
           <td>
             {{human-friendly-date row.updatedOn locale=this.intl.primaryLocale}}
-            <br>
+            <br />
           </td>
           <td>
             <EditorStatusPill @status={{container.status}} />
@@ -30,5 +55,5 @@
       </c.body>
     </table.content>
   </AuDataTable>
-  {{!-- </Modal.Body> --}}
+  {{! </Modal.Body> }}
 </AuModal>

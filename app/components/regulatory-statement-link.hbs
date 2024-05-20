@@ -1,9 +1,17 @@
-{{#if (or (eq this.editorStatus "published") @readOnly)}}
-<AuLink @icon={{@icon}} @route="regulatory-statements.show" @model={{@documentContainer.id}}>
-  {{limit-content this.linkLabel 70}}
-</AuLink>
+{{#if (or (eq this.editorStatus 'published') @readOnly)}}
+  <AuLink
+    @icon={{@icon}}
+    @route='regulatory-statements.show'
+    @model={{@documentContainer.id}}
+  >
+    {{limit-content this.linkLabel 70}}
+  </AuLink>
 {{else}}
-<AuLink @icon={{@icon}} @route="regulatory-statements.edit" @model={{@documentContainer.id}}>
-  {{limit-content this.linkLabel 70}}
-</AuLink>
+  <AuLink
+    @icon={{@icon}}
+    @route='regulatory-statements.edit'
+    @model={{@documentContainer.id}}
+  >
+    {{limit-content this.linkLabel 70}}
+  </AuLink>
 {{/if}}

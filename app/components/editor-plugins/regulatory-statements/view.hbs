@@ -1,24 +1,40 @@
 <AuPanel
-  @active="true"
+  @active='true'
   {{did-insert this.didInsert}}
-  property="dct:hasPart"
+  property='dct:hasPart'
   resource={{this.resource}}
-  typeof="besluitpublicatie:Documentonderdeel"
-   as |section|>
-  {{!-- template-lint-disable no-shadowed-elements --}}
+  typeof='besluitpublicatie:Documentonderdeel'
+  as |section|
+>
+  {{! template-lint-disable no-shadowed-elements }}
   <section>
     <AuToolbar as |Group|>
       <Group>
-        <AuHeading @level="4" @skin="4">{{t "regulatory-statements-plugin.regulatory-statement"}}</AuHeading>
-        <p>({{t "regulatory-statements-plugin.last-modification"}}: {{human-friendly-date this.updatedOn locale=this.intl.primaryLocale}})</p>
+        <AuHeading @level='4' @skin='4'>{{t
+            'regulatory-statements-plugin.regulatory-statement'
+          }}</AuHeading>
+        <p>({{t 'regulatory-statements-plugin.last-modification'}}:
+          {{human-friendly-date
+            this.updatedOn
+            locale=this.intl.primaryLocale
+          }})</p>
       </Group>
       <Group>
         <AuButtonGroup>
           {{#if this.regulatoryStatementContainer}}
-          <RegulatoryStatementLink @icon="pencil" @documentContainer={{this.regulatoryStatementContainer}} @label={{t "regulatory-statements-plugin.edit-statement"}}/>
+            <RegulatoryStatementLink
+              @icon='pencil'
+              @documentContainer={{this.regulatoryStatementContainer}}
+              @label={{t 'regulatory-statements-plugin.edit-statement'}}
+            />
           {{/if}}
-          <AuButton @skin="naked" @icon="link-broken" @alert="true" {{on "click" this.detach}}>
-            {{t "regulatory-statements-plugin.detach-statement"}}
+          <AuButton
+            @skin='naked'
+            @icon='link-broken'
+            @alert='true'
+            {{on 'click' this.detach}}
+          >
+            {{t 'regulatory-statements-plugin.detach-statement'}}
           </AuButton>
         </AuButtonGroup>
       </Group>

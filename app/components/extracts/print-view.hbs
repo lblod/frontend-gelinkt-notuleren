@@ -1,56 +1,65 @@
 <PrintView as |Print|>
   <Print.Header as |Header|>
     {{#if @backLinkRoute}}
-      <Header.BackLink @route={{@backLinkRoute}} @model={{@linkModel}} @models={{@linkModels}}>
-        {{t "print-view.back-link"}}
+      <Header.BackLink
+        @route={{@backLinkRoute}}
+        @model={{@linkModel}}
+        @models={{@linkModels}}
+      >
+        {{t 'print-view.back-link'}}
       </Header.BackLink>
     {{/if}}
   </Print.Header>
   <Print.Body>
     {{#if this.data.isError}}
       <AuCard @flex={{true}} as |card|>
-        <card.header
-          @badgeIcon="alert-triangle"
-          @badgeSkin="error"
-        >
-          <AuHeading @level="2" @skin="4">
-            {{t "print-view.error-heading"}}
+        <card.header @badgeIcon='alert-triangle' @badgeSkin='error'>
+          <AuHeading @level='2' @skin='4'>
+            {{t 'print-view.error-heading'}}
           </AuHeading>
         </card.header>
         <card.content>
-          {{t "print-view.error-body"}}
+          {{t 'print-view.error-body'}}
         </card.content>
       </AuCard>
     {{/if}}
     {{#if this.data.value}}
       <AuHeading>
-        {{t "print-view.heading-1"}}
-        <br>
+        {{t 'print-view.heading-1'}}
+        <br />
         {{this.meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}
-        <br>
-        {{t "print-view.heading-2"}} {{detailed-date this.meeting.geplandeStart}}
+        <br />
+        {{t 'print-view.heading-2'}}
+        {{detailed-date this.meeting.geplandeStart}}
       </AuHeading>
-      <p class="au-u-margin-top-small au-u-margin-bottom">{{t "print-view.description"}}</p>
+      <p class='au-u-margin-top-small au-u-margin-bottom'>{{t
+          'print-view.description'
+        }}</p>
 
       {{#if this.signatures.length}}
-        <div class="au-o-grid">
+        <div class='au-o-grid'>
           {{#each this.signatures as |signature|}}
-            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}
-                                  @hashValue={{signature.hashValue}}/>
+            <PrintView::Signature
+              @fullName={{signature.gebruiker.fullName}}
+              @createdOn={{signature.createdOn}}
+              @hashValue={{signature.hashValue}}
+            />
           {{/each}}
         </div>
       {{/if}}
 
-      <AuHr @size="large"/>
+      <AuHr @size='large' />
 
       {{html-safe this.content}}
 
-
       {{#if this.signatures.length}}
-        <AuHr @size="large"/>
-        <div class="au-o-grid">
+        <AuHr @size='large' />
+        <div class='au-o-grid'>
           {{#each this.signatures as |signature|}}
-            <PrintView::Signature @fullName={{signature.gebruiker.fullName}} @createdOn={{signature.createdOn}}/>
+            <PrintView::Signature
+              @fullName={{signature.gebruiker.fullName}}
+              @createdOn={{signature.createdOn}}
+            />
           {{/each}}
         </div>
       {{/if}}

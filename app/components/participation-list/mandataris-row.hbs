@@ -1,12 +1,19 @@
 <tr>
-  <td>{{@mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}} {{@mandataris.isBestuurlijkeAliasVan.achternaam}}</td>
+  <td>{{@mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}}
+    {{@mandataris.isBestuurlijkeAliasVan.achternaam}}</td>
   <td>{{@mandataris.bekleedt.bestuursfunctie.label}}</td>
   <td>{{plain-date @mandataris.isBestuurlijkeAliasVan.geboorte.datum}}</td>
   <td>
-    <label class="checkbox checkbox--block">
-      <input class="checkbox__toggle" type="checkbox" checked={{@selected}} {{on "input" (fn @toggle @mandataris @selected)}} disabled={{@disabled}} />
+    <label class='checkbox checkbox--block'>
+      <input
+        class='checkbox__toggle'
+        type='checkbox'
+        checked={{@selected}}
+        {{on 'input' (fn @toggle @mandataris @selected)}}
+        disabled={{@disabled}}
+      />
       <span></span>
-      <strong>{{t "participation-list-modal-table.checkbox-label"}}</strong>
+      <strong>{{t 'participation-list-modal-table.checkbox-label'}}</strong>
     </label>
   </td>
 </tr>
