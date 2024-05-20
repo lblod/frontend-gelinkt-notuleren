@@ -197,6 +197,9 @@ export default class AgendapointsEditController extends Controller {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
         classificatieUri: classificatie?.uri,
       },
+      besluitTopic: {
+        endpoint: 'https://data.vlaanderen.be/sparql',
+      },
       structures: structureSpecs,
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
