@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.17.1
+
+### Patch Changes
+
+- [#659](https://github.com/lblod/frontend-gelinkt-notuleren/pull/659) [`0c7efa22`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0c7efa227b8c8e5f4b7272276b116512cdf07993) Thanks [@dkozickis](https://github.com/dkozickis)! - Apply Prettier to the codebase
+
+- [#662](https://github.com/lblod/frontend-gelinkt-notuleren/pull/662) [`ac651c6c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ac651c6cf3b917dafc11d63235cb1c813f5ed905) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4692: Bump `ember-rdfa-editor-lblod-plugins` and enable `BesluitTopicPlugin`
+
 ## 5.17.0
 
 ### Minor Changes
