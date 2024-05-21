@@ -39,8 +39,8 @@
     {{#if this.ready}}
       <EditorContainer
         @editorOptions={{hash
-          showRdfa=(if @shouldEditRdfa false true)
-          editRdfa=(if @shouldEditRdfa true false)
+          showRdfa=(if @shouldShowRdfa false true)
+          editRdfa=(if @shouldShowRdfa true false)
           showRdfaHighlight='true'
           showRdfaHover='true'
           showPaper='true'
