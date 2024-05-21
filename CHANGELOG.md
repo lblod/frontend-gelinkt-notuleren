@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.17.2
+
+### Patch Changes
+
+- [`7b5c4fe0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7b5c4fe050076e71bbd3911a3d4b22646f90bbe8) Thanks [@abeforgit](https://github.com/abeforgit)! - Add back structure styling
+
 ## 5.17.1
 
 ### Patch Changes
