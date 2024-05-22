@@ -208,6 +208,9 @@ export default class AgendapointsEditController extends Controller {
           uri: municipality.uri,
         },
       },
+      lmb: {
+        endpoint: '/vendor-proxy/query',
+      },
     };
   }
 
