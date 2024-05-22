@@ -60,13 +60,14 @@
               </td>
               <td>
                 <AuToggleSwitch
-                  @label={{t 'attachments.regulatory'}}
                   @checked={{eq attachment.type.id this.regulatoryTypeId}}
                   @onChange={{perform
                     this.updateAttachmentIsRegulatory
                     attachment
                   }}
-                />
+                >
+                  {{t 'attachments.regulatory'}}
+                </AuToggleSwitch>
               </td>
               <td class='au-u-text-right'>
                 <AuButton
