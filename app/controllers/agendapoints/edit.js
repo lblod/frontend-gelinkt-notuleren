@@ -93,6 +93,10 @@ import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
+import {
+  inlineRdfaWithConfig,
+  inlineRdfaWithConfigView,
+} from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -142,9 +146,9 @@ export default class AgendapointsEditController extends Controller {
       invisible_rdfa,
       block_rdfa,
       link: link(this.config.link),
+      inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
     },
     marks: {
-      inline_rdfa,
       em,
       strong,
       underline,
@@ -250,6 +254,7 @@ export default class AgendapointsEditController extends Controller {
         location: locationView(controller),
         codelist: codelistView(controller),
         templateComment: templateCommentView(controller),
+        inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
       };
     };
   }
