@@ -20,7 +20,7 @@ export default class DocumentService extends Service {
     const triples = this.extractTriplesFromDocument(editorDocument);
     const decisionUris = triples.filter(
       (t) =>
-        t.predicate === 'a' &&
+        t.predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
         t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit',
     );
     const firstDecision = decisionUris[0];
@@ -49,9 +49,10 @@ export default class DocumentService extends Service {
   }
   getDecisions(editorDocument) {
     const triples = this.extractTriplesFromDocument(editorDocument);
+    console.log(triples)
     const decisionUris = triples.filter(
       (t) =>
-        t.predicate === 'a' &&
+        t.predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
         t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit',
     );
     const decisions = decisionUris.map((decisionUriTriple) => {
@@ -74,7 +75,7 @@ export default class DocumentService extends Service {
     const documentpartUris = triples
       .filter(
         (t) =>
-          t.predicate === 'a' &&
+          t.predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
           t.object ===
             'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel',
       )
