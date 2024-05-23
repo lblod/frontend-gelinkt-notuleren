@@ -1,11 +1,9 @@
 <div
   class='au-o-box au-u-padding-top-small au-u-padding-bottom-small au-c-editor-preview-treatment-toggle-box'
 >
-  <AuToggleSwitch
-    @label={{t 'publish.toggle-all-public-label'}}
-    @checked={{@allBehandelingPublic}}
-    @onChange={{@toggleAll}}
-  />
+  <AuToggleSwitch @checked={{@allBehandelingPublic}} @onChange={{@toggleAll}}>
+    {{t 'publish.toggle-all-public-label'}}
+  </AuToggleSwitch>
 </div>
 {{#each @prepublishedBehandelingen as |preview|}}
   {{#let
@@ -43,12 +41,11 @@
           {{/if}}
         {{else}}
           <AuToggleSwitch
-            @label={{t
-              'meetings.publish.document.make-agendapoint-content-public'
-            }}
             @checked={{isPublicBehandeling}}
             @onChange={{fn @toggle preview}}
-          />
+          >
+            {{t 'meetings.publish.document.make-agendapoint-content-public'}}
+          </AuToggleSwitch>
           <AuHr />
           {{#if isPublicBehandeling}}
             <p><strong>{{t 'behandeling-list.public-now'}}</strong></p>
