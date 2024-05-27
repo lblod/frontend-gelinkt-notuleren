@@ -4,6 +4,7 @@ steps:
     settings:
       repo: ${CI_REPO}
       dry_run: true
+      platforms: linux/amd64,linux/arm64
 when:
   event:
     - pull_request
