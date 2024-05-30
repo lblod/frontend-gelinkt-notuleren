@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.18.0
+
+### Minor Changes
+
+- [`e24b3ad`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e24b3adb110c405dbbf2e212238c8250acc5ec9f) Thanks [@piemonkey](https://github.com/piemonkey)! - Update @lblod/ember-rdfa-editor to 9.10.0 and @lblod/ember-rdfa-editor-lblod-plugins to 19.2.0
+
+### Patch Changes
+
+- [#664](https://github.com/lblod/frontend-gelinkt-notuleren/pull/664) [`6e13b96`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6e13b96760db62e52d025093a0f09adb4dde8521) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Remove wrongly placed text block in the free text section title
+
+- [#663](https://github.com/lblod/frontend-gelinkt-notuleren/pull/663) [`8d5cf63`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8d5cf63ae9fcac55dec258c6c2cee1a11d7f2ccb) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fixed switch labels
+
 ## 5.17.2
 
 ### Patch Changes
