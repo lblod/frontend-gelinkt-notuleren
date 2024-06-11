@@ -14,6 +14,8 @@ module.exports = function (environment) {
     fallbackCodelistEndpoint: '{{MOW_REGISTRY_ENDPOINT}}',
     zonalLocationCodelistUri: '{{ZONAL_LOCATION_CODELIST_URI}}',
     nonZonalLocationCodelistUri: '{{NON_ZONAL_LOCATION_CODELIST_URI}}',
+    // Full URL, even if it's on the same domain as the frontend
+    lpdcEndpoint: '{{LPDC_ENDPOINT}}',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -97,6 +99,7 @@ module.exports = function (environment) {
       'https://dev.reglementairebijlagen.lblod.info/raw-sparql';
     ENV.regulatoryStatementFileEndpoint =
       'https://dev.reglementairebijlagen.lblod.info/files';
+    ENV.lpdcEndpoint = 'https://dev.gelinkt-notuleren.lblod.info/lpdc-service';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

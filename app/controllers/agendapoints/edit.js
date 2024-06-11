@@ -208,6 +208,9 @@ export default class AgendapointsEditController extends Controller {
           uri: municipality.uri,
         },
       },
+      lpdc: {
+        endpoint: ENV.lpdcEndpoint,
+      },
     };
   }
 
