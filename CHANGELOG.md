@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.18.1
+
+### Patch Changes
+
+- [#675](https://github.com/lblod/frontend-gelinkt-notuleren/pull/675) [`5f0f9eb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5f0f9ebb191003e5aa691e94e72d04fce92fbb5d) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure that exiting dialog does not show up when saving and exiting the intro/outro of a meeting
+
+- [#674](https://github.com/lblod/frontend-gelinkt-notuleren/pull/674) [`2915b7a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2915b7a11f5c7fcc7dbe494be5b07ca26570aa90) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix rendering of documents on revisions page
+
+- [#672](https://github.com/lblod/frontend-gelinkt-notuleren/pull/672) [`eaa66f6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eaa66f66b91addca997a4a469164ec0131e2cdf9) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4825: Show "Insert snippet" when required
+
+- [#669](https://github.com/lblod/frontend-gelinkt-notuleren/pull/669) [`c12b953`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c12b95322424dba1f7a2ab9d5b6f7b3f92e9a7f1) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly tag release builds as latest
+
 ## 5.18.0
 
 ### Minor Changes
