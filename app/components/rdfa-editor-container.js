@@ -15,6 +15,11 @@ import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attrib
 import RdfaEditor from '@lblod/ember-rdfa-editor/components/_private/rdfa-editor';
 import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
 
+/**
+ * `shouldShowRdfa` - boolean that indicates whether the editor should be in "RDFA aware" mode, or in old RDFA display mode.
+ *                    `true` - RDFA aware mode, `false | undefined` - old RDFA display mode
+ * `shouldEditRdfa` - boolean that indicates whether the "RDFA aware" debug tools will be available
+ */
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
   @tracked controller;
@@ -48,7 +53,8 @@ export default class RdfaEditorContainerComponent extends Component {
         firefoxCursorFix(),
         lastKeyPressedPlugin,
         chromeHacksPlugin(),
-        this.args.shouldEditRdfa && editableNodePlugin(),
+        (this.args.shouldEditRdfa || this.args.shouldShowRdfa) &&
+          editableNodePlugin(),
       )
       .filter((nullCheck) => nullCheck);
   }
@@ -89,7 +95,10 @@ export default class RdfaEditorContainerComponent extends Component {
   }
 
   get activeNode() {
-    if (this.controller && this.args.shouldEditRdfa) {
+    if (
+      this.controller &&
+      (this.args.shouldEditRdfa || this.args.shouldShowRdfa)
+    ) {
       return getActiveEditableNode(this.controller.activeEditorState);
     }
     return null;
