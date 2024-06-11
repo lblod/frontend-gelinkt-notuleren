@@ -68,8 +68,6 @@ import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 import {
-  address,
-  addressView,
   codelist,
   codelistView,
   date,
@@ -81,6 +79,10 @@ import {
   text_variable,
   textVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
+import {
+  osloLocation,
+  osloLocationView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/node';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
   tableOfContentsView,
@@ -133,7 +135,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       date: date(this.config.date),
       codelist,
       location,
-      address,
+      oslo_location: osloLocation(this.config.location),
       number,
       text_variable,
       ...STRUCTURE_NODES,
@@ -169,7 +171,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         ),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
-        address: addressView(controller),
+        oslo_location: osloLocationView(this.config.location)(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
         location: locationView(controller),
@@ -251,13 +253,21 @@ export default class RegulatoryStatementsRoute extends Controller {
       structures: STRUCTURE_SPECS,
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
-        defaultAdministrativeUnit: municipality && {
+        defaultAdministrativeUnit: municipality.uri && {
           label: municipality.naam,
           uri: municipality.uri,
         },
       },
       snippet: {
         endpoint: ENV.regulatoryStatementEndpoint,
+      },
+      location: {
+        defaultPointUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/geometrie/',
+        defaultPlaceUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/',
+        defaultAddressUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
       },
     };
   }
@@ -307,7 +317,8 @@ export default class RegulatoryStatementsRoute extends Controller {
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
       return this.currentSession.group;
     } else {
-      return null;
+      // Return empty object instead of null so can be used safely in template
+      return {};
     }
   }
 
