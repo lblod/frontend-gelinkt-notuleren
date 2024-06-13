@@ -30,8 +30,6 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/table';
 import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
-  address,
-  addressView,
   date,
   dateView,
   codelist,
@@ -43,6 +41,10 @@ import {
   text_variable,
   textVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
+import {
+  osloLocation,
+  osloLocationView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/node';
 import {
   bulletListWithConfig,
   listItemWithConfig,
@@ -127,7 +129,7 @@ export default class AgendapointsEditController extends Controller {
       templateComment,
       text_variable,
       number,
-      address,
+      oslo_location: osloLocation(this.config.location),
       location,
       codelist,
       ...besluitNodes,
@@ -184,7 +186,7 @@ export default class AgendapointsEditController extends Controller {
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,
-        defaultDecisionsGovernmentName: municipality?.naam,
+        defaultDecisionsGovernmentName: municipality.naam,
       },
       link: {
         interactive: true,
@@ -203,10 +205,18 @@ export default class AgendapointsEditController extends Controller {
       structures: structureSpecs,
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
-        defaultAdministrativeUnit: municipality && {
+        defaultAdministrativeUnit: municipality.uri && {
           label: municipality.naam,
           uri: municipality.uri,
         },
+      },
+      location: {
+        defaultPointUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/geometrie/',
+        defaultPlaceUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/',
+        defaultAddressUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
       },
     };
   }
@@ -216,7 +226,8 @@ export default class AgendapointsEditController extends Controller {
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
       return this.currentSession.group;
     } else {
-      return null;
+      // Return empty object instead of null so can be used safely in template
+      return {};
     }
   }
 
@@ -240,7 +251,7 @@ export default class AgendapointsEditController extends Controller {
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
-        address: addressView(controller),
+        oslo_location: osloLocationView(this.config.location)(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
         text_variable: textVariableView(controller),
