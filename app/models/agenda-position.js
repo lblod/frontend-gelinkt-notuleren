@@ -1,8 +1,8 @@
 import Model, { belongsTo } from '@ember-data/model';
 
 export default class AgendaPositionModel extends Model {
-  @belongsTo('concept', { inverse: null }) position;
-  @belongsTo('agendapunt', { inverse: null }) agendapoint;
+  @belongsTo('concept', { inverse: null, async: true }) position;
+  @belongsTo('agendapunt', { inverse: null, async: true }) agendapoint;
 }
 
 // skos:prefLabel "before";

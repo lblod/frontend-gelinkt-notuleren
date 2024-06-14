@@ -10,13 +10,16 @@ export default class StemmingModel extends Model {
   @attr('string') gevolg;
   @attr('string') onderwerp;
 
-  @belongsTo('behandeling-van-agendapunt', { inverse: 'stemmingen' })
+  @belongsTo('behandeling-van-agendapunt', {
+    inverse: 'stemmingen',
+    async: true,
+  })
   behandelingVanAgendapunt;
 
   /** @type {import("ember-data").DS.RecordArray} */
-  @hasMany('mandataris', { inverse: null }) aanwezigen;
-  @hasMany('mandataris', { inverse: null }) onthouders;
-  @hasMany('mandataris', { inverse: null }) stemmers;
-  @hasMany('mandataris', { inverse: null }) tegenstanders;
-  @hasMany('mandataris', { inverse: null }) voorstanders;
+  @hasMany('mandataris', { inverse: null, async: true }) aanwezigen;
+  @hasMany('mandataris', { inverse: null, async: true }) onthouders;
+  @hasMany('mandataris', { inverse: null, async: true }) stemmers;
+  @hasMany('mandataris', { inverse: null, async: true }) tegenstanders;
+  @hasMany('mandataris', { inverse: null, async: true }) voorstanders;
 }

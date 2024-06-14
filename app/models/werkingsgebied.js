@@ -4,5 +4,6 @@ export default class WerkingsgebiedModel extends Model {
   @attr naam;
   @attr niveau;
 
-  @hasMany('bestuurseenheid', { inverse: 'werkingsgebied' }) bestuurseenheid;
+  @hasMany('bestuurseenheid', { inverse: 'werkingsgebied', async: true })
+  bestuurseenheid;
 }
