@@ -6,6 +6,7 @@ import applyDevTools from 'prosemirror-dev-tools';
 import { modifier } from 'ember-modifier';
 import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
 import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
+import recreateUuidsOnPaste from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/recreateUuidsOnPaste';
 import { chromeHacksPlugin } from '@lblod/ember-rdfa-editor/plugins/chrome-hacks-plugin';
 import {
   editableNodePlugin,
@@ -55,6 +56,7 @@ export default class RdfaEditorContainerComponent extends Component {
         chromeHacksPlugin(),
         (this.args.shouldEditRdfa || this.args.shouldShowRdfa) &&
           editableNodePlugin(),
+        recreateUuidsOnPaste,
       )
       .filter((nullCheck) => nullCheck);
   }
