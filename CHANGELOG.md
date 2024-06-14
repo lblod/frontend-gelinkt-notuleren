@@ -1,5 +1,19 @@
 # frontend-gelinkt-notuleren
 
+## 5.19.0
+
+### Minor Changes
+
+- [#677](https://github.com/lblod/frontend-gelinkt-notuleren/pull/677) [`5a142bc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5a142bc4db557949bae838d569cf012732be121f) Thanks [@piemonkey](https://github.com/piemonkey)! - Switch to new location-plugin for addresses, including functionality to choose geographic locations from a map
+
+- [#677](https://github.com/lblod/frontend-gelinkt-notuleren/pull/677) [`0166bf1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0166bf15fed0944f26ccc25f7f0b6511b08f57a3) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to latest @lblod/ember-rdfa-editor-lblod-plugins v19.3.0
+
+### Patch Changes
+
+- [#678](https://github.com/lblod/frontend-gelinkt-notuleren/pull/678) [`dabd46e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/dabd46ee6bb276a7814a554b9851247239b2ad1f) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4820: Bump editor and enable copy/pasting variable nodes correctly
+
+- [#676](https://github.com/lblod/frontend-gelinkt-notuleren/pull/676) [`57658bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/57658bdc4c0a03ddff0720803e89ea1a39d099d1) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix bug where selection in link url text was not visible
+
 ## 5.18.1
 
 ### Patch Changes
