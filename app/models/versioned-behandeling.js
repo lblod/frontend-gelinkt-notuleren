@@ -6,14 +6,18 @@ export default class VersionedBehandelingModel extends Model {
   @attr uri;
 
   @attr('boolean', { defaultValue: false }) deleted;
-  @hasMany('signed-resource', { inverse: 'versionedBehandeling' })
+  @hasMany('signed-resource', { inverse: 'versionedBehandeling', async: true })
   signedResources;
 
-  @belongsTo('published-resource', { inverse: 'versionedBehandeling' })
+  @belongsTo('published-resource', {
+    inverse: 'versionedBehandeling',
+    async: true,
+  })
   publishedResource;
-  @belongsTo('zitting', { inverse: null }) zitting;
+  @belongsTo('zitting', { inverse: null, async: true }) zitting;
   @belongsTo('behandeling-van-agendapunt', {
     inverse: 'versionedBehandelingen',
+    async: true,
   })
   behandeling;
 }

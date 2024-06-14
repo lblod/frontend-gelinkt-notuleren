@@ -5,9 +5,9 @@ export default class FunctionarisModel extends Model {
   @attr('datetime') einde;
   @attr uri;
 
-  @belongsTo('bestuursfunctie', { inverse: null }) bekleedt;
-  @belongsTo('persoon', { inverse: null }) isBestuurlijkeAliasVan;
-  @belongsTo('functionaris-status-code', { inverse: null }) status;
+  @belongsTo('bestuursfunctie', { inverse: null, async: true }) bekleedt;
+  @belongsTo('persoon', { inverse: null, async: true }) isBestuurlijkeAliasVan;
+  @belongsTo('functionaris-status-code', { inverse: null, async: true }) status;
 
   rdfaBindings = {
     class: 'http://data.lblod.info/vocabularies/leidinggevenden/Functionaris',

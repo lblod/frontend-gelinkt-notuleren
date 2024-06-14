@@ -5,5 +5,6 @@ export default class BeleidsdomeinCodeModel extends Model {
   @attr label;
   @attr scopeNote;
 
-  @hasMany('mandataris', { inverse: 'beleidsdomein' }) mandatarissen;
+  @hasMany('mandataris', { inverse: 'beleidsdomein', async: true })
+  mandatarissen;
 }

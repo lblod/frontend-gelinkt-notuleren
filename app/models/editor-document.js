@@ -11,16 +11,16 @@ export default class EditorDocumentModel extends Model {
   @attr('datetime') createdOn;
   @attr('datetime') updatedOn;
 
-  @belongsTo('concept', { inverse: null }) type;
-  @belongsTo('concept', { inverse: null }) status;
-  @belongsTo('editor-document', { inverse: 'nextVersion' })
+  @belongsTo('concept', { inverse: null, async: true }) type;
+  @belongsTo('concept', { inverse: null, async: true }) status;
+  @belongsTo('editor-document', { inverse: 'nextVersion', async: true })
   previousVersion;
-  @belongsTo('editor-document', { inverse: 'previousVersion' })
+  @belongsTo('editor-document', { inverse: 'previousVersion', async: true })
   nextVersion;
-  @belongsTo('document-container', { inverse: 'revisions' })
+  @belongsTo('document-container', { inverse: 'revisions', async: true })
   documentContainer;
 
-  @hasMany('document-container', { inverse: 'isPartOf' }) parts;
+  @hasMany('document-container', { inverse: 'isPartOf', async: true }) parts;
 
   get htmlSafeContent() {
     return htmlSafe(this.content);
