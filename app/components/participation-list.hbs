@@ -1,69 +1,33 @@
-<div class='au-c-meeting-chrome-card au-u-margin-bottom-none'>
-  <AuHeading @level='4' @skin='6' class='au-c-meeting-chrome-card__title'>{{t
-      'participation-list.block-title'
-    }}</AuHeading>
-  <ul class='au-c-list-divider'>
-    <li class='au-c-list-divider__item'>
-      {{t 'participation-list.voorzitter-label'}}
-      <strong>{{this.chairman.isBestuurlijkeAliasVan.fullName}}</strong>
-      {{#unless this.chairman}}
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
-          {{t 'participation-list.voorzitter-error'}}
-        </AuPill>
-      {{/unless}}
-    </li>
-    <li class='au-c-list-divider__item'>
-      {{t 'participation-list.secretaris-label'}}
-      <strong>{{this.secretary.isBestuurlijkeAliasVan.fullName}}</strong>
-      {{#unless this.secretary}}
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
-          {{t 'participation-list.secretaris-error'}}
-        </AuPill>
-      {{/unless}}
-    </li>
-    <li class='au-c-list-divider__item'>
-      {{t 'participation-list.present-label'}}
-      {{#each this.participants as |mandataris|}}
-        <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
-      {{else}}
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
-          {{t 'participation-list.present-error'}}
-        </AuPill>
-      {{/each}}
-    </li>
-    <li class='au-c-list-divider__item'>
-      {{t 'participation-list.not-present-label'}}
-      {{#each this.absentees as |mandataris|}}
-        <strong>{{mandataris.isBestuurlijkeAliasVan.fullName}}</strong>,
-      {{/each}}
-    </li>
-  </ul>
-</div>
+<Common::MeetingSubSection @title={{t 'participation-list.block-title'}}>
+  <:body>
+    <Common::DetailsList @items={{this.detailsListItems}} />
+  </:body>
 
-{{#unless @readOnly}}
-  <AuButton
-    @width='block'
-    @skin='secondary'
-    @icon='pencil'
-    @iconAlignment='left'
-    {{on 'click' this.togglePopup}}
-    class='au-u-margin-top-small'
-  >
-    {{@modalTitle}}
-  </AuButton>
-{{/unless}}
-{{#if (and @readOnly @readOnlyText)}}
-  <AuButton
-    @width='block'
-    @skin='secondary'
-    @icon='cross'
-    @iconAlignment='left'
-    class='au-u-margin-top-small'
-    @disabled={{true}}
-  >
-    {{@readOnlyText}}
-  </AuButton>
-{{/if}}
+  <:button>
+    {{#unless @readOnly}}
+      <AuButton
+        @skin='secondary'
+        @icon='pencil'
+        @iconAlignment='left'
+        {{on 'click' this.togglePopup}}
+        class='au-u-margin-top-small'
+      >
+        {{@modalTitle}}
+      </AuButton>
+    {{/unless}}
+    {{#if (and @readOnly @readOnlyText)}}
+      <AuButton
+        @skin='secondary'
+        @icon='cross'
+        @iconAlignment='left'
+        class='au-u-margin-top-small'
+        @disabled={{true}}
+      >
+        {{@readOnlyText}}
+      </AuButton>
+    {{/if}}
+  </:button>
+</Common::MeetingSubSection>
 
 <ParticipationList::Modal
   @chairman={{this.defaultedChairman}}
