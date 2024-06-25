@@ -32,6 +32,7 @@ export default class RegulatoryAttachmentsFetcher extends Service {
         }
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
       }
+      ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
     `;
     const details = {
       query: sparqlQuery,
