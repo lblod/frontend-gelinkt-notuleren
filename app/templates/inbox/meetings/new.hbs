@@ -46,7 +46,9 @@
         {{/let}}
       </div>
       <div>
-        <AuLabel>{{t 'inbox.meetings.new.common-meeting.planned-start'}}</AuLabel>
+        <AuLabel>{{t
+            'inbox.meetings.new.common-meeting.planned-start'
+          }}</AuLabel>
         <DateTimePicker
           @alignment='top'
           @onChange={{fn (mut this.meeting.geplandeStart)}}
