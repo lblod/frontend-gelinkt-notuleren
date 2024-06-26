@@ -33,7 +33,12 @@
   </AuToolbar>
   <AuToolbar @size='small' class='au-u-padding-top-none' as |Group|>
     <Group>
-      <h1 class='au-c-app-chrome__title'>{{t 'meeting-form.scheduled-text'}}
+      <h1 class='au-c-app-chrome__title'>
+        {{#if this.isInstallationMeeting}}
+          Installatievergadering gepland op
+        {{else}}
+          {{t 'meeting-form.scheduled-text'}}
+        {{/if}}
         {{plain-date @zitting.geplandeStart}}</h1>
       {{#if this.status}}
         <AuPill @skin='success'>
@@ -124,6 +129,9 @@
       <AuHeading>
         {{t 'meeting-form.meeting-heading-part-one'}}
         {{t this.headerArticleTranslationString}}
+        {{#if this.isInstallationMeeting}}
+          Installatievergadering
+        {{/if}}
         <span
           class='au-c-meeting-chrome__highlight'
         >{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
