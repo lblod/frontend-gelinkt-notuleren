@@ -35,9 +35,9 @@
     <Group>
       <h1 class='au-c-app-chrome__title'>
         {{#if this.isInstallationMeeting}}
-          Installatievergadering gepland op
+          {{t 'meeting-form.scheduled-text.installation-meeting'}}
         {{else}}
-          {{t 'meeting-form.scheduled-text'}}
+          {{t 'meeting-form.scheduled-text.common-meeting'}}
         {{/if}}
         {{plain-date @zitting.geplandeStart}}</h1>
       {{#if this.status}}
@@ -130,7 +130,7 @@
         {{t 'meeting-form.meeting-heading-part-one'}}
         {{t this.headerArticleTranslationString}}
         {{#if this.isInstallationMeeting}}
-          Installatievergadering
+          {{t 'meeting-form.installation-meeting'}}
         {{/if}}
         <span
           class='au-c-meeting-chrome__highlight'

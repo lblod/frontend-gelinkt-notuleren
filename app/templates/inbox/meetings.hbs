@@ -20,21 +20,23 @@
           {{#unless this.readOnly}}
             <AuDropdown
               @skin="primary"
-              @title="Zitting aanmaken"
+              @title={{t 'inbox.meetings.new.title'}}
               @alignment="left"
               @icon="chevron-down"
               role="menu">
               <AuLink
                 @route='inbox.meetings.new'
                 role='menuitem'>
-                {{t 'inbox.meetings.new.title'}}
+                {{t 'inbox.meetings.new.common-meeting.title'}}
               </AuLink>
               <AuButton
 
                 @skin="link"
                 {{on 'click' this.createInstallationMeeting}}
                 role='menuitem'
-              >Installatievergadering aanmaken</AuButton>
+              >
+                {{t 'inbox.meetings.new.installation-meeting.title'}}
+              </AuButton>
             </AuDropdown>
           {{/unless}}
         </Group>
@@ -70,7 +72,7 @@
           class='au-c-link'
         >
           {{#if (this.isInstallationMeeting meeting)}}
-            Installatievergadering
+            {{t 'inbox.meetings.installation-meeting'}}
           {{else}}
             {{t 'inbox.meetings.meeting-of'}}
           {{/if}}

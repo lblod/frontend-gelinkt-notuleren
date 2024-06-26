@@ -1,7 +1,7 @@
-{{page-title (t 'inbox.meetings.new.title')}}
+{{page-title (t 'inbox.meetings.new.common-meeting.title')}}
 
 <AuModal
-  @title={{t 'inbox.meetings.new.title'}}
+  @title={{t 'inbox.meetings.new.common-meeting.title'}}
   @modalOpen={{true}}
   @closeModal={{this.cancelMeetingCreation}}
   as |Modal|
@@ -15,7 +15,7 @@
       <div>
         {{#let (unique-id) this.meeting.errors.bestuursorgaan as |id errors|}}
           <AuLabel @error={{if errors true false}} for={{id}}>
-            {{t 'inbox.meetings.new.meeting.administrative-body'}}
+            {{t 'inbox.meetings.new.common-meeting.administrative-body'}}
             <RequiredField />
           </AuLabel>
           <AdministrativeBodySelect
@@ -34,7 +34,7 @@
       <div>
         {{#let (unique-id) as |id|}}
           <AuLabel for={{id}}>{{t
-              'inbox.meetings.new.meeting.location'
+              'inbox.meetings.new.common-meeting.location'
             }}</AuLabel>
           <AuInput
             value={{this.meeting.opLocatie}}
@@ -46,7 +46,7 @@
         {{/let}}
       </div>
       <div>
-        <AuLabel>{{t 'inbox.meetings.new.meeting.planned-start'}}</AuLabel>
+        <AuLabel>{{t 'inbox.meetings.new.common-meeting.planned-start'}}</AuLabel>
         <DateTimePicker
           @alignment='top'
           @onChange={{fn (mut this.meeting.geplandeStart)}}
@@ -65,10 +65,10 @@
         form='create-meeting-form'
         type='submit'
       >
-        {{t 'inbox.meetings.new.save'}}
+        {{t 'inbox.meetings.new.common-meeting.save'}}
       </button>
       <AuButton {{on 'click' this.cancelMeetingCreation}} @skin='secondary'>
-        {{t 'inbox.meetings.new.cancel'}}
+        {{t 'inbox.meetings.new.common-meeting.cancel'}}
       </AuButton>
     </AuButtonGroup>
   </Modal.Footer>

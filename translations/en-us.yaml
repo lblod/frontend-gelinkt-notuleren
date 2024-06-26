@@ -141,18 +141,22 @@ inbox:
     time: Time
     location: Location
     meeting-of: Meeting of
+    installation-meeting: Installation meeting
     at: at
     new:
-      title: Create a new meeting
-      meeting:
+      title: Create meeting
+      common-meeting:
+        title: Create a new meeting
         administrative-body: Held by
         location: On location
         planned-start: Scheduled start
         errors:
           administrative-body:
             required: Please select an administrative body
-      save: Create meeting
-      cancel: Back
+        save: Create meeting
+        cancel: Back
+      installation-meeting:
+        title: Create installation meeting
   agendapoints:
     return: Return to the overview of agendapoints
     page-title: Agendapoints
@@ -351,7 +355,10 @@ meeting-form:
   date-warning: You cannot choose an end date that is before the start date.
   incomplete-warning: Please fill out the meeting details and add at least one agenda item before publishing.
   back-button: Back to meetings
-  scheduled-text: Meeting scheduled on
+  scheduled-text:
+    common-meeting: Meeting scheduled on
+    installation-meeting: Installation meeting scheduled on
+  installation-meeting: Installation meeting
   publish-button: Sign and publish
   first-section-title: 1. General information about the meeting
   second-section-title: 2. Attendance at the start of the meeting
