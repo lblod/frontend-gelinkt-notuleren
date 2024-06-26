@@ -7,6 +7,7 @@ import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid
 import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
 import { trackedFunction } from 'ember-resources/util/function';
 import { trackedTask } from 'ember-resources/util/ember-concurrency';
+import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
@@ -65,6 +66,10 @@ export default class MeetingForm extends Component {
 
   get zitting() {
     return this.args.zitting;
+  }
+
+  get isInstallationMeeting() {
+    return this.zitting instanceof InstallatieVergaderingModel;
   }
 
   get isComplete() {
