@@ -141,7 +141,7 @@ inbox:
     time: Time
     location: Location
     meeting-of: Meeting of
-    installation-meeting: Installation meeting
+    inauguration-meeting: Inauguration meeting
     at: at
     new:
       title: Create meeting
@@ -155,8 +155,8 @@ inbox:
             required: Please select an administrative body
         save: Create meeting
         cancel: Back
-      installation-meeting:
-        title: Create installation meeting
+      inauguration-meeting:
+        title: Create inauguration meeting
   agendapoints:
     return: Return to the overview of agendapoints
     page-title: Agendapoints
@@ -357,8 +357,8 @@ meeting-form:
   back-button: Back to meetings
   scheduled-text:
     common-meeting: Meeting scheduled on
-    installation-meeting: Installation meeting scheduled on
-  installation-meeting: Installation meeting
+    inauguration-meeting: Inauguration meeting scheduled on
+  inauguration-meeting: Inauguration meeting
   publish-button: Sign and publish
   first-section-title: 1. General information about the meeting
   second-section-title: 2. Attendance at the start of the meeting

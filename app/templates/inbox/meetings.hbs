@@ -30,10 +30,10 @@
               </AuLink>
               <AuButton
                 @skin='link'
-                {{on 'click' this.createInstallationMeeting}}
+                {{on 'click' this.createInaugurationMeeting}}
                 role='menuitem'
               >
-                {{t 'inbox.meetings.new.installation-meeting.title'}}
+                {{t 'inbox.meetings.new.inauguration-meeting.title'}}
               </AuButton>
             </AuDropdown>
           {{/unless}}
@@ -65,8 +65,8 @@
     <c.body as |meeting|>
       <td>
         <LinkTo @route='meetings.edit' @model={{meeting.id}} class='au-c-link'>
-          {{#if (this.isInstallationMeeting meeting)}}
-            {{t 'inbox.meetings.installation-meeting'}}
+          {{#if (this.isInaugurationMeeting meeting)}}
+            {{t 'inbox.meetings.inauguration-meeting'}}
           {{else}}
             {{t 'inbox.meetings.meeting-of'}}
           {{/if}}

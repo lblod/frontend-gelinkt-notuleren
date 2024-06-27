@@ -17,12 +17,12 @@ export default class InboxMeetingsController extends Controller {
     return !this.currentSession.canWrite && this.currentSession.canRead;
   }
 
-  isInstallationMeeting = (meeting) => {
+  isInaugurationMeeting = (meeting) => {
     return meeting instanceof InstallatieVergaderingModel;
   };
 
   @action
-  async createInstallationMeeting() {
+  async createInaugurationMeeting() {
     let now = new Date();
     const bestuursorgaan = (
       await this.store.query('bestuursorgaan', {
@@ -43,7 +43,7 @@ export default class InboxMeetingsController extends Controller {
         },
       })
     )[0];
-    const installationmeeting = this.store.createRecord(
+    const inaugurationmeeting = this.store.createRecord(
       'installatievergadering',
       {
         geplandeStart: now,
@@ -51,7 +51,7 @@ export default class InboxMeetingsController extends Controller {
         bestuursorgaan,
       },
     );
-    await installationmeeting.save();
+    await inaugurationmeeting.save();
     const promises = [];
     let previousAgendapoint;
     for (let i = 0; i < 9; i++) {
@@ -59,7 +59,7 @@ export default class InboxMeetingsController extends Controller {
         position: i,
         geplandOpenbaar: true,
         titel: `Naam Agendapunt ${i}`,
-        zitting: installationmeeting,
+        zitting: inaugurationmeeting,
         vorigeAgendapunt: previousAgendapoint,
       });
       const treatment = this.store.createRecord('behandeling-van-agendapunt', {
@@ -70,6 +70,6 @@ export default class InboxMeetingsController extends Controller {
       previousAgendapoint = agendapoint;
     }
     await Promise.all(promises);
-    this.router.replaceWith('meetings.edit', installationmeeting.id);
+    this.router.replaceWith('meetings.edit', inaugurationmeeting.id);
   }
 }
