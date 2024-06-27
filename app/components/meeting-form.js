@@ -68,7 +68,7 @@ export default class MeetingForm extends Component {
     return this.args.zitting;
   }
 
-  get isInstallationMeeting() {
+  get isInaugurationMeeting() {
     return this.zitting instanceof InstallatieVergaderingModel;
   }
 

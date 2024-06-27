@@ -141,7 +141,7 @@ inbox:
     time: Tijdstip
     location: Locatie
     meeting-of: Zitting van
-    installation-meeting: Installatievergadering
+    inauguration-meeting: Installatievergadering
     at: op
     new:
       title: Zitting aanmaken
@@ -155,7 +155,7 @@ inbox:
             required: Gelieve een bestuursorgaan te selecteren
         save: Zitting aanmaken
         cancel: Terug
-      installation-meeting:
+      inauguration-meeting:
         title: Installatievergadering aanmaken
 
   agendapoints:
@@ -358,8 +358,8 @@ meeting-form:
   back-button: Terug naar overzicht zittingen
   scheduled-text:
     common-meeting: Zitting gepland op
-    installation-meeting: Installatievergadering gepland op
-  installation-meeting: Installatievergadering
+    inauguration-meeting: Installatievergadering gepland op
+  inauguration-meeting: Installatievergadering
   publish-button: Ondertekenen en publiceren
   first-section-title: 1. Algemene informatie over de zitting
   second-section-title: 2. Aanwezigen bij de start van de zitting

@@ -34,8 +34,8 @@
   <AuToolbar @size='small' class='au-u-padding-top-none' as |Group|>
     <Group>
       <h1 class='au-c-app-chrome__title'>
-        {{#if this.isInstallationMeeting}}
-          {{t 'meeting-form.scheduled-text.installation-meeting'}}
+        {{#if this.isInaugurationMeeting}}
+          {{t 'meeting-form.scheduled-text.inauguration-meeting'}}
         {{else}}
           {{t 'meeting-form.scheduled-text.common-meeting'}}
         {{/if}}
@@ -129,8 +129,8 @@
       <AuHeading>
         {{t 'meeting-form.meeting-heading-part-one'}}
         {{t this.headerArticleTranslationString}}
-        {{#if this.isInstallationMeeting}}
-          {{t 'meeting-form.installation-meeting'}}
+        {{#if this.isInaugurationMeeting}}
+          {{t 'meeting-form.inauguration-meeting'}}
         {{/if}}
         <span
           class='au-c-meeting-chrome__highlight'
