@@ -19,7 +19,6 @@ export default class AgendaManagerEditComponent extends Component {
   }
 
   submitTask = task(async (item) => {
-    console.log('Item: ', item);
     await this.args.saveTask.unlinked().perform(item);
     const behandeling = await item.get('behandeling');
     if (
