@@ -27,6 +27,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @tracked published = false;
   @tracked chairman;
   @tracked secretary;
+
+  @tracked editMode = false;
+  @service editStemming;
+
   /** @type {RelationshipResourceValue} */
   @use meetingChairmanData = new RelationshipResource(() => [
     this.args.meeting,
@@ -65,6 +69,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   get behandeling() {
     return this.args.behandeling;
+  }
+
+  get stemmingen() {
+    return this.args.behandeling.sortedVotings ?? [];
   }
 
   get editable() {
@@ -167,5 +175,42 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       this.behandeling.openbaar = openbaar;
       await this.behandeling.save();
     }
+  });
+
+  @action
+  onCancelEdit() {
+    this.editMode = false;
+    this.editStemming.stemming.rollbackAttributes();
+    this.editStemming.stemming = null;
+  }
+
+  saveStemming = task(async () => {
+    const isNew = this.editStemming.stemming.isNew;
+
+    if (isNew) {
+      this.editStemming.stemming.position = this.stemmingen.length;
+      this.editStemming.stemming.behandelingVanAgendapunt =
+        this.args.behandeling;
+    }
+    await this.editStemming.saveTask.perform();
+    this.onCancelEdit();
+  });
+
+  addStemming = task(async () => {
+    // high pagesize is set on the model, so this is fine
+    const participants = await this.args.behandeling.aanwezigen;
+
+    const stemmingToEdit = this.store.createRecord('stemming', {
+      onderwerp: '',
+      geheim: false,
+      aantalVoorstanders: 0,
+      aantalTegenstanders: 0,
+      aantalOnthouders: 0,
+      gevolg: '',
+    });
+    this.editMode = true;
+    stemmingToEdit.aanwezigen.pushObjects(participants);
+    stemmingToEdit.stemmers.pushObjects(participants);
+    this.editStemming.stemming = stemmingToEdit;
   });
 }

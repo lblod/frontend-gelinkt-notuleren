@@ -42,24 +42,6 @@ export default class TreatmentVotingModalComponent extends Component {
     this.onCancelEdit();
   });
 
-  addStemming = task(async () => {
-    // high pagesize is set on the model, so this is fine
-    const participants = await this.args.behandeling.aanwezigen;
-
-    const stemmingToEdit = this.store.createRecord('stemming', {
-      onderwerp: '',
-      geheim: false,
-      aantalVoorstanders: 0,
-      aantalTegenstanders: 0,
-      aantalOnthouders: 0,
-      gevolg: '',
-    });
-    this.editMode = true;
-    stemmingToEdit.aanwezigen.pushObjects(participants);
-    stemmingToEdit.stemmers.pushObjects(participants);
-    this.editStemming.stemming = stemmingToEdit;
-  });
-
   @action
   toggleEditStemming(stemming) {
     this.editStemming.stemming = stemming;

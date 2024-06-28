@@ -76,7 +76,7 @@ behandeling-van-agendapunten:
   geen-openbaar-msg: 'agendapoint not public'
   openbaar-msg: 'agendapoint public'
   participation-list-button: Configure attendees of this agenda-item.
-  visibility: 'visibility'
+  visibility: 'Visibility'
   voting-title: 'Voting'
   content-title: 'Content'
   needs-participants: Please configure the participants to this agenda-item before adding a voting.
@@ -330,8 +330,8 @@ manage-intermissions:
   position: 'Position'
 
 manage-zittings-data:
-  start-not-set: 'start date has not been set'
-  end-not-set: 'end date has not been set'
+  start-not-set: 'Start date has not been set'
+  end-not-set: 'End date has not been set'
   end-before-start: You can't pick an end-date that is before the start date.
   start-differs-from-planned-start: 'Note: planned start differs from start date, make sure this was intentional.'
   modal-title: Manage general information about the meeting
@@ -730,3 +730,7 @@ voting-modal:
 zitting-link:
   meeting-of: Meeting of
   at: at
+
+generic:
+  edit: Edit
+  add: Add

@@ -1,61 +1,20 @@
-<div class='au-c-meeting-chrome-card au-u-margin-bottom-large'>
-  <ul class='au-c-list-divider'>
-    <li class='au-c-list-divider__item'>
-      {{t 'manage-zittings-data.bestuursorgan-label'}}
-      <strong>{{this.bestuursorgaan.isTijdsspecialisatieVan.naam}}</strong>
-    </li>
-    <li class='au-c-list-divider__item'>
-      {{t 'manage-zittings-data.geplande-start-label'}}
-      <strong>{{detailed-date this.geplandeStart}}</strong>
-    </li>
-    <li class='au-c-list-divider__item'>
-      {{t 'manage-zittings-data.op-locatie-label'}}
-      <strong>{{this.opLocatie}}</strong>
-    </li>
-    <li class='au-c-list-divider__item'>
-      {{t 'manage-zittings-data.gestart-op-tijdstip-label'}}
-      <strong>{{detailed-date this.gestartOpTijdstip}}</strong>
-      {{#if this.startDiffersFromPlannedStart}}
-        <AuPill
-          @skin='info'
-          @draft={{true}}
-          @icon='info-circle'
-          @iconAlignment='left'
-        >
-          {{t 'manage-zittings-data.start-differs-from-planned-start'}}
-        </AuPill>
-      {{/if}}
-      {{#if this.startDateIsEmpty}}
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>{{t
-            'manage-zittings-data.start-not-set'
-          }}</AuPill>
-      {{/if}}
-    </li>
-    <li class='au-c-list-divider__item'>
-      {{t 'manage-zittings-data.geeindigd-op-tijdstip-label'}}
-      <strong>{{detailed-date this.geeindigdOpTijdstip}}</strong>
-      {{#if this.endDateIsEmpty}}
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>{{t
-            'manage-zittings-data.end-not-set'
-          }}</AuPill>
-      {{/if}}
-      {{#if this.endIsBeforeStart}}
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>{{t
-            'manage-zittings-data.end-before-start'
-          }}</AuPill>
-      {{/if}}
-    </li>
-  </ul>
-  {{#unless @readOnly}}
-    <AuButton
-      {{on 'click' this.toggleModal}}
-      @skin='secondary'
-      @width='block'
-      @icon='pencil'
-      @iconAlignment='left'
-    >{{t 'manage-zittings-data.open-modal-button'}}</AuButton>
-  {{/unless}}
-</div>
+<Common::MeetingSubSection @title={{t 'inbox.meetings.type'}}>
+  <:body>
+    <Common::DetailsList @items={{this.infoListItems}} />
+  </:body>
+  <:button>
+    {{#unless @readOnly}}
+      <AuButton
+        {{on 'click' this.toggleModal}}
+        @skin='secondary'
+        @icon='pencil'
+        @iconAlignment='left'
+      >
+        {{t 'generic.edit'}}
+      </AuButton>
+    {{/unless}}
+  </:button>
+</Common::MeetingSubSection>
 
 {{#if this.showModal}}
   <AuModal
