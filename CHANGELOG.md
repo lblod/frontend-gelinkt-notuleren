@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.19.1
+
+### Patch Changes
+
+- [#682](https://github.com/lblod/frontend-gelinkt-notuleren/pull/682) [`f92fb55`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f92fb55ab68d98b10b631066872285aed3b0be40) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4853: Seach and sort templates alphabetically
+
+- [#681](https://github.com/lblod/frontend-gelinkt-notuleren/pull/681) [`27a92bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/27a92bdd6b324d7ca34fc8c3ff8f68525c4d4dd9) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fixed copy agendapunt description button
+
 ## 5.19.0
 
 ### Minor Changes
