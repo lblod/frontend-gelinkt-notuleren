@@ -107,7 +107,7 @@
     "prettier": "^3.0.2",
     "process": "^0.11.10",
     "prosemirror-dev-tools": "^4.1.0",
-    "qunit": "^2.19.4",
+    "qunit": "^2.21.0",
     "qunit-dom": "^2.0.0",
     "release-it": "^16.1.5",
     "sass": "^1.66.1",
