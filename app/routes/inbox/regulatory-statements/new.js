@@ -4,7 +4,7 @@ import { service } from '@ember/service';
 export default class InboxRegulatoryStatementsNewRoute extends Route {
   @service currentSession;
   @service router;
-  @service regulatoryAttachmentsFetcher;
+  @service templateFetcher;
 
   beforeModel() {
     if (!this.currentSession.canWrite) {
@@ -13,7 +13,10 @@ export default class InboxRegulatoryStatementsNewRoute extends Route {
   }
 
   async model() {
-    const templates = await this.regulatoryAttachmentsFetcher.fetch.perform();
+    const templates = await this.templateFetcher.fetch.perform({
+      templateType:
+        'http://data.lblod.info/vocabularies/gelinktnotuleren/ReglementaireBijlageTemplate',
+    });
     return templates;
   }
 }
