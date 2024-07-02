@@ -5,7 +5,6 @@
 /* Variables
    ========================================================================== */
 
-
 /* Component
    ========================================================================== */
 
@@ -14,7 +13,7 @@
 }
 
 .au-c-meeting-chrome {
-  padding: $au-unit $au-unit * .5;
+  padding: $au-unit $au-unit * 0.5;
   width: 100%;
   position: relative;
   overflow: visible;
@@ -25,14 +24,14 @@
   }
 
   @include mq(1160px) {
-    left: $au-unit-huge*3;
-    width: calc(100% - #{$au-unit-huge*3});
+    left: $au-unit-huge * 3;
+    width: calc(100% - #{$au-unit-huge * 3});
   }
 
   @include mq(large) {
-    left: $au-unit-huge*3.5;
-    width: calc(100% - #{$au-unit-huge*3.5});
-    padding-right: $au-unit-huge*4;
+    left: $au-unit-huge * 3.5;
+    width: calc(100% - #{$au-unit-huge * 3.5});
+    padding-right: $au-unit-huge * 4;
   }
 }
 
@@ -43,7 +42,10 @@
   min-height: calc(100vh + #{$au-unit});
   background-color: $au-white;
   padding: $au-unit-large;
-  box-shadow: 0 .1rem .3rem rgba($au-gray-900, .1), 0 .4rem 2rem rgba($au-gray-900, .035), 0 .1rem .1rem rgba($au-gray-900, .025);
+  box-shadow:
+    0 0.1rem 0.3rem rgba($au-gray-900, 0.1),
+    0 0.4rem 2rem rgba($au-gray-900, 0.035),
+    0 0.1rem 0.1rem rgba($au-gray-900, 0.025);
   cursor: default;
 
   &:focus {
@@ -54,7 +56,7 @@
 .au-c-meeting-chrome-card {
   position: relative;
   color: $au-gray-700;
-  border: .1rem solid $au-gray-300;
+  border: 0.1rem solid $au-gray-300;
   background-color: $au-gray-100;
   margin-top: $au-unit-small;
   margin-bottom: $au-unit-huge + $au-unit;
@@ -62,9 +64,9 @@
 
   > .au-c-button {
     position: absolute;
-    left: -.1rem;
-    width: calc(100% + .2rem);
-    border-width: .1rem !important;
+    left: -0.1rem;
+    width: calc(100% + 0.2rem);
+    border-width: 0.1rem !important;
     border-color: $au-gray-300 !important;
     background-color: $au-white;
     border-top-left-radius: 0;
@@ -73,15 +75,15 @@
 
   & + .au-c-button {
     position: relative;
-    margin-top: -$au-unit-small - .1rem !important; // Spacing hack as this button is used in multiple places
-    border-width: .1rem !important;
+    margin-top: -$au-unit-small - 0.1rem !important; // Spacing hack as this button is used in multiple places
+    border-width: 0.1rem !important;
     border-color: $au-gray-300 !important;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
 
   &.au-u-margin-bottom-none + .au-c-button {
-    margin-top: -.1rem !important; // Spacing hack as this button is used in multiple places
+    margin-top: -0.1rem !important; // Spacing hack as this button is used in multiple places
   }
 
   .au-c-editor-preview {
@@ -91,7 +93,7 @@
 }
 
 .au-c-meeting-chrome-card--editable {
-  border: .1rem solid $au-gray-300;
+  border: 0.1rem solid $au-gray-300;
 }
 
 .au-c-meeting-chrome-card--editor {
@@ -101,7 +103,7 @@
 .au-c-meeting-chrome-card__title {
   background-color: $au-gray-200;
   padding: $au-unit-tiny $au-unit-small;
-  border-bottom: .1rem solid $au-gray-300;
+  border-bottom: 0.1rem solid $au-gray-300;
 }
 
 .au-c-meeting-chrome-card__title--flex {
@@ -124,7 +126,7 @@
   .container-flex--contain {
     overflow: visible;
     margin-top: -$au-unit;
-    border: .1rem solid $au-gray-200;
+    border: 0.1rem solid $au-gray-200;
   }
 
   .say-container {
@@ -182,9 +184,9 @@
   }
 
   .say-container__aside {
-    left: calc(100% - #{$au-unit-huge*3.5});
+    left: calc(100% - #{$au-unit-huge * 3.5});
     position: absolute;
-    width: $au-unit-huge*3.5;
+    width: $au-unit-huge * 3.5;
     height: 100%;
     overflow: visible;
     z-index: 999;
@@ -192,7 +194,7 @@
 
     @include mq(large) {
       left: calc(100% + #{$au-unit-large});
-      width: $au-unit-huge*4;
+      width: $au-unit-huge * 4;
     }
   }
 
@@ -223,7 +225,7 @@
 .au-c-meeting-chrome__highlight {
   display: inline-block;
   background-color: $au-yellow-100;
-  margin-top: $au-unit-tiny * .5;
+  margin-top: $au-unit-tiny * 0.5;
   // cursor: not-allowed;
 }
 
@@ -235,12 +237,12 @@
   min-width: 50rem;
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: -.1rem;
+  margin-bottom: -0.1rem;
 
   strong {
     font-style: normal;
     font-weight: 500;
-    border-bottom: .2rem dotted $au-gray-300;
+    border-bottom: 0.2rem dotted $au-gray-300;
   }
 
   thead {
@@ -248,12 +250,12 @@
     width: 100%;
     z-index: $au-z-index-alpha;
     border-top: 0;
-    border-bottom: .1rem solid $au-gray-300;
-    @include au-font-size($au-base,1.2);
+    border-bottom: 0.1rem solid $au-gray-300;
+    @include au-font-size($au-base, 1.2);
   }
 
   tbody tr {
-    border-bottom: .1rem solid $au-gray-300;
+    border-bottom: 0.1rem solid $au-gray-300;
     background-color: $au-gray-100;
   }
 
@@ -287,21 +289,21 @@
   th + th,
   td + td {
     &:after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
-      width: .1rem;
-      left: -.1rem;
+      width: 0.1rem;
+      left: -0.1rem;
       top: 0;
       height: 100%;
-      border-left: .1rem dotted $au-gray-300;
+      border-left: 0.1rem dotted $au-gray-300;
     }
   }
 }
 
 .au-c-meeting-sidebar {
   @include au-font-size($au-h6);
-  opacity: .7;
+  opacity: 0.7;
   position: fixed;
   top: $au-unit-huge;
   left: 0;
@@ -315,11 +317,11 @@
 
   @include mq(1160px) {
     display: block;
-    width: $au-unit-huge*3;
+    width: $au-unit-huge * 3;
   }
 
   @include mq(large) {
-    width: $au-unit-huge*3.5;
+    width: $au-unit-huge * 3.5;
   }
 
   &:hover {
@@ -331,7 +333,7 @@
   counter-reset: list-number;
 
   > li + li {
-    border-top: .1rem dashed $au-gray-300;
+    border-top: 0.1rem dashed $au-gray-300;
   }
 
   > li {
@@ -348,7 +350,7 @@
     justify-content: center;
     align-items: center;
     left: -$au-unit - $au-unit-tiny;
-    top: $au-unit-small + $au-unit-tiny * .6;
+    top: $au-unit-small + $au-unit-tiny * 0.6;
     color: $au-gray-700;
     font-weight: $au-medium;
     width: $au-unit;

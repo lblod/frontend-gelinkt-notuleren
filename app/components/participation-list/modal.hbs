@@ -1,47 +1,56 @@
 <AuModal
-        @title="Beheer aanwezigen"
-        @modalOpen={{@show}}
-        @closeModal={{this.onCancel}}
-        as |Modal|>
+  @title='Beheer aanwezigen'
+  @modalOpen={{@show}}
+  @closeModal={{this.onCancel}}
+  as |Modal|
+>
   <Modal.Body>
-    <div class="au-o-flow">
+    <div class='au-o-flow'>
       <div>
         <AuLabel>
-          {{t "participation-list-modal.voorzitter-label"}}
+          {{t 'participation-list-modal.voorzitter-label'}}
         </AuLabel>
         <ParticipationList::MandatarisSelector
-                @onSelect={{this.selectChairman}}
-                @mandataris={{this.chairman}}
-                @meeting={{@meeting}}
-                @bestuursorgaan={{@bestuursorgaan}}
+          @onSelect={{this.selectChairman}}
+          @mandataris={{this.chairman}}
+          @meeting={{@meeting}}
+          @bestuursorgaan={{@bestuursorgaan}}
         />
       </div>
       <div>
-        <AuLabel>{{t "participation-list-modal.secretaris-label"}}</AuLabel>
+        <AuLabel>{{t 'participation-list-modal.secretaris-label'}}</AuLabel>
         <ParticipationList::FunctionarisSelector
-                @onSelect={{this.selectSecretary}}
-                @functionaris={{this.secretary}}
-                @meeting={{@meeting}}
+          @onSelect={{this.selectSecretary}}
+          @functionaris={{this.secretary}}
+          @meeting={{@meeting}}
         />
       </div>
       <div>
-        <AuLabel>{{t "participation-list-modal.present-label"}}</AuLabel>
-        <ParticipationList::MandatarissenTable @toggleParticipant={{this.toggleParticipant}}
-                                               as |Table|>
-          {{#each this.participants as |participant| }}
-            <Table.Row @mandataris={{participant.person}} @selected={{participant.participating}} @disabled={{eq participant.person this.chairman}}/>
+        <AuLabel>{{t 'participation-list-modal.present-label'}}</AuLabel>
+        <ParticipationList::MandatarissenTable
+          @toggleParticipant={{this.toggleParticipant}}
+          as |Table|
+        >
+          {{#each this.participants as |participant|}}
+            <Table.Row
+              @mandataris={{participant.person}}
+              @selected={{participant.participating}}
+              @disabled={{eq participant.person this.chairman}}
+            />
           {{else}}
-            <td colspan="4">{{t "participation-list-modal-table.no-data-message"}}</td>
+            <td colspan='4'>{{t
+                'participation-list-modal-table.no-data-message'
+              }}</td>
           {{/each}}
         </ParticipationList::MandatarissenTable>
       </div>
     </div>
     {{#if this.error}}
-      <AuAlert 
+      <AuAlert
         @title={{this.error}}
-        @skin="error"
-        @icon="cross"
-        @size="small"
+        @skin='error'
+        @icon='cross'
+        @size='small'
       />
     {{/if}}
     {{yield}}
@@ -49,12 +58,14 @@
   <Modal.Footer>
     <AuToolbar as |Group|>
       <Group>
-        <AuButton @skin="naked" {{on "click" this.onCancel}}>
-          {{t "participation-list-modal.cancel-button"}}
+        <AuButton @skin='naked' {{on 'click' this.onCancel}}>
+          {{t 'participation-list-modal.cancel-button'}}
         </AuButton>
       </Group>
       <Group>
-        <AuButton {{on "click" this.insert}}>{{t "participation-list-modal.save-button"}}</AuButton>
+        <AuButton {{on 'click' this.insert}}>{{t
+            'participation-list-modal.save-button'
+          }}</AuButton>
       </Group>
     </AuToolbar>
   </Modal.Footer>

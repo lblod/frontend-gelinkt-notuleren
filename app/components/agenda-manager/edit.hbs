@@ -1,59 +1,79 @@
 <AgendaManager::AgendaItemForm
-        @model={{@itemToEdit}}
-        @onSubmit={{perform this.submitTask}}
-        as |Form|>
-  <AuModal @title={{t "manage-agenda-zitting-modal.modal-title"}}
-          @modalOpen={{@visible}}
-          @size="default"
-          @closeModal={{unless this.isSubmitting this.cancel}}
-          as |Modal|
+  @model={{@itemToEdit}}
+  @onSubmit={{perform this.submitTask}}
+  as |Form|
+>
+  <AuModal
+    @title={{t 'manage-agenda-zitting-modal.modal-title'}}
+    @modalOpen={{@visible}}
+    @size='default'
+    @closeModal={{unless this.isSubmitting this.cancel}}
+    as |Modal|
   >
     <Modal.Body>
       {{#if this.isSubmitting}}
         <AuLoader />
-        <AuHelpText>{{t "participation-list.loading-loader"}}</AuHelpText>
+        <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
       {{else}}
         {{!-- <AuHeading @level="3" @skin="4">{{t "manage-agenda-zitting-modal-edit.modal-subtitle"}}</AuHeading>
         <AuHr /> --}}
-        <div class="au-c-form">
+        <div class='au-c-form'>
           {{#if this.isNew}}
-            <Form.SelectDraft @placeholder={{t "manage-agenda-zitting-modal-draft-import.default"}}>
-              {{t "manage-agenda-zitting-modal-draft-import.title"}}
+            <Form.SelectDraft
+              @placeholder={{t
+                'manage-agenda-zitting-modal-draft-import.default'
+              }}
+            >
+              {{t 'manage-agenda-zitting-modal-draft-import.title'}}
             </Form.SelectDraft>
           {{/if}}
 
-          <Form.Textarea @for="titel">
-            {{t "manage-agenda-zitting-modal.title-label"}}
+          <Form.Textarea @for='titel'>
+            {{t 'manage-agenda-zitting-modal.title-label'}}
           </Form.Textarea>
 
-          <Form.Textarea @for="beschrijving">
-            {{t "manage-agenda-zitting-modal.beschrijving-label"}}
+          <Form.Textarea @for='beschrijving'>
+            {{t 'manage-agenda-zitting-modal.beschrijving-label'}}
           </Form.Textarea>
-          {{#if @itemToEdit.behandeling.documentContainer.currentVersion.content}}
-            <AuButton {{on "click" (perform this.copyDescription)}}>{{t "manage-agenda-zitting-modal.copy-description-label"}}</AuButton>
+          {{#if
+            @itemToEdit.behandeling.documentContainer.currentVersion.content
+          }}
+            <AuButton {{on 'click' (perform this.copyDescription)}}>{{t
+                'manage-agenda-zitting-modal.copy-description-label'
+              }}</AuButton>
           {{/if}}
 
           <div>
             <AuLabel>
-              {{t "manage-agenda-zitting-modal.gepland-openbaar"}}
+              {{t 'manage-agenda-zitting-modal.gepland-openbaar'}}
             </AuLabel>
-            <div class="au-c-radio-group">
-              <Form.Radio @for="geplandOpenbaar" @name="plannedPublic"  as |Radio|>
-                <Radio.Option @value={{true}}
-                >
-                  <span>{{t "manage-agenda-zitting-modal-edit.gepland-openbaar-true-label"}}</span>
+            <div class='au-c-radio-group'>
+              <Form.Radio
+                @for='geplandOpenbaar'
+                @name='plannedPublic'
+                as |Radio|
+              >
+                <Radio.Option @value={{true}}>
+                  <span>{{t
+                      'manage-agenda-zitting-modal-edit.gepland-openbaar-true-label'
+                    }}</span>
                 </Radio.Option>
-                <Radio.Option @value={{false}}
-                >
-                  <span>{{t "manage-agenda-zitting-modal-edit.gepland-openbaar-false-label"}}</span>
+                <Radio.Option @value={{false}}>
+                  <span>{{t
+                      'manage-agenda-zitting-modal-edit.gepland-openbaar-false-label'
+                    }}</span>
                 </Radio.Option>
               </Form.Radio>
             </div>
           </div>
 
           {{#if (gt @agendaItems.length 0)}}
-            <Form.SelectLocation @for="position" @agendaItems={{@agendaItems}} @currentItem={{@itemToEdit}}>
-              {{t "manage-agenda-zitting-modal-move.title"}}
+            <Form.SelectLocation
+              @for='position'
+              @agendaItems={{@agendaItems}}
+              @currentItem={{@itemToEdit}}
+            >
+              {{t 'manage-agenda-zitting-modal-move.title'}}
             </Form.SelectLocation>
           {{/if}}
         </div>
@@ -61,23 +81,30 @@
     </Modal.Body>
     <Modal.Footer>
       <AuToolbar>
-        <AuButton @skin="naked" {{on "click" this.cancel}} @disabled={{this.isSubmitting}}>
-            {{t "manage-agenda-zitting-modal.cancel-button"}}
-          </AuButton>
+        <AuButton
+          @skin='naked'
+          {{on 'click' this.cancel}}
+          @disabled={{this.isSubmitting}}
+        >
+          {{t 'manage-agenda-zitting-modal.cancel-button'}}
+        </AuButton>
         <AuButtonGroup>
           {{#unless this.isNew}}
-          <AuButton
-            @alert={{true}}
-            @skin="secondary"
-            @loading={{this.deleteTask.isRunning}}
-            @icon="bin"
-            @iconAlignment="left"
-            {{on "click" (perform this.deleteTask @itemToEdit)}}
-            @disabled={{this.isSubmitting}} >
-              {{t "manage-agenda-zitting-modal-delete.delete-button"}}
-          </AuButton>
+            <AuButton
+              @alert={{true}}
+              @skin='secondary'
+              @loading={{this.deleteTask.isRunning}}
+              @icon='bin'
+              @iconAlignment='left'
+              {{on 'click' (perform this.deleteTask @itemToEdit)}}
+              @disabled={{this.isSubmitting}}
+            >
+              {{t 'manage-agenda-zitting-modal-delete.delete-button'}}
+            </AuButton>
           {{/unless}}
-          <Form.Submit>{{t "manage-agenda-zitting-modal.save-button"}}</Form.Submit>
+          <Form.Submit>{{t
+              'manage-agenda-zitting-modal.save-button'
+            }}</Form.Submit>
         </AuButtonGroup>
       </AuToolbar>
     </Modal.Footer>

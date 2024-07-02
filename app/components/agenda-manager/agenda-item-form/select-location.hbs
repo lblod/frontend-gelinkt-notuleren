@@ -1,35 +1,44 @@
-<div class="au-u-margin-bottom">
+<div class='au-u-margin-bottom'>
   <AuLabel>
     {{yield}}
   </AuLabel>
-  <div class="au-o-grid au-o-grid--tiny">
-    <div class="au-o-grid__item au-u-1-2">
+  <div class='au-o-grid au-o-grid--tiny'>
+    <div class='au-o-grid__item au-u-1-2'>
       <PowerSelect
         @renderInPlace={{true}}
-        @placeholder={{t "manage-agenda-zitting-modal-move.position-select-placeholder"}}
+        @placeholder={{t
+          'manage-agenda-zitting-modal-move.position-select-placeholder'
+        }}
         @options={{this.locationOptions}}
-        @verticalPosition="above"
+        @verticalPosition='above'
         @selected={{this.selectedLocation}}
         @allowClear={{true}}
         @onChange={{this.selectLocation}}
-        as |location|>
+        as |location|
+      >
         {{location.name}}
       </PowerSelect>
     </div>
     {{#if this.showAfterItemOptions}}
-      <div class="au-o-grid__item au-u-1-2">
+      <div class='au-o-grid__item au-u-1-2'>
         <PowerSelect
           @renderInPlace={{true}}
-          @placeholder={{t "manage-agenda-zitting-modal-move.agendapunt-select-placeholder"}}
+          @placeholder={{t
+            'manage-agenda-zitting-modal-move.agendapunt-select-placeholder'
+          }}
           @searchEnabled={{true}}
-          @searchPlaceholder={{t "manage-agenda-zitting-modal-move.search-placeholder"}}
-          @verticalPosition="above"
+          @searchPlaceholder={{t
+            'manage-agenda-zitting-modal-move.search-placeholder'
+          }}
+          @verticalPosition='above'
           @options={{this.afterItemOptions}}
           @selected={{this.selectedAfterItem}}
           @onChange={{this.selectAfterItem}}
           @matcher={{this.searchMatcher}}
-          as |a|>
-          {{add a.position 1}}. {{a.titel}}
+          as |a|
+        >
+          {{add a.position 1}}.
+          {{a.titel}}
         </PowerSelect>
       </div>
     {{/if}}

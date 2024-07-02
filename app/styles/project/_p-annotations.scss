@@ -3,17 +3,23 @@
   ================================== */
 
 .rdfa-annotations {
-  h1, .h1,
-  h2, .h2,
-  h3, .h3,
-  h4, .h4,
-  h5, .h5,
-  h6, .h6,
-  [property="dc:title"] {
+  h1,
+  .h1,
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6,
+  [property='dc:title'] {
     margin-bottom: 0;
   }
 
-  [typeof="besluit:Agendapunt"] {
+  [typeof='besluit:Agendapunt'] {
     margin-bottom: $au-unit-small;
   }
 
@@ -42,8 +48,9 @@
   }
 
   // Display roadsign details
-  [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"] {
-    [typeof="mobiliteit:Opstelling"] {
+  [prefix="mobiliteit: https://data.vlaanderen.be/ns/mobiliteit# infrastructuur: https://data.vlaanderen.be/ns/openbaardomein/infrastructuur# besluit: https://data.vlaanderen.be/ns/besluit# geosparql: http://www.opengis.net/ont/geosparql# locn: http://www.w3.org/ns/locn# xsd:http://www.w3.org/2001/XMLSchema# foaf: http://xmlns.com/foaf/0.1/"]
+  {
+    [typeof='mobiliteit:Opstelling'] {
       display: none;
     }
   }
@@ -52,9 +59,9 @@
 // Hover annotation
 .rdfa-annotations-hover:not(.show-rdfa-blocks) {
   // Hide superfluous annotations
-  [typeof="besluit:Zitting"],
-  [typeof="foaf:Document"],
-  [property="ext:metadata"] {
+  [typeof='besluit:Zitting'],
+  [typeof='foaf:Document'],
+  [property='ext:metadata'] {
     border-bottom: 0 !important;
 
     &:before,
@@ -69,10 +76,10 @@
   }
 
   // Format agenda points
-  [property="ext:agendapuntenTable"] {
-    [property="besluit:geplandOpenbaar"]:before,
-    [property="dc:subject"]:before {
-      margin-top: $au-unit - $au-unit-tiny * .5;
+  [property='ext:agendapuntenTable'] {
+    [property='besluit:geplandOpenbaar']:before,
+    [property='dc:subject']:before {
+      margin-top: $au-unit - $au-unit-tiny * 0.5;
     }
   }
 }

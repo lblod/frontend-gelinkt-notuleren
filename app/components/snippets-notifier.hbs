@@ -1,19 +1,19 @@
 {{#if this.hasSnippets}}
-<AuAlert
-  @title="Informatie uit een externe bron beschikbaar om in te voegen"
-  @skin="info"
-  @icon="info-circle"
-  @closable={{true}}
->
-  <p>{{t "snippets-notifier.has-snippets-message"}}</p>
-</AuAlert>
+  <AuAlert
+    @title='Informatie uit een externe bron beschikbaar om in te voegen'
+    @skin='info'
+    @icon='info-circle'
+    @closable={{true}}
+  >
+    <p>{{t 'snippets-notifier.has-snippets-message'}}</p>
+  </AuAlert>
 {{else if this.hasErrors}}
-<AuAlert
-  @title="Ophalen van informatie gefaald"
-  @skin="warning"
-  @icon="alert-triangle"
-  @closable={{true}}
->
-  <p>{{t "snippets-notifier.has-errors-message"}}</p>
-</AuAlert>
+  <AuAlert
+    @title='Ophalen van informatie gefaald'
+    @skin='warning'
+    @icon='alert-triangle'
+    @closable={{true}}
+  >
+    <p>{{t 'snippets-notifier.has-errors-message'}}</p>
+  </AuAlert>
 {{/if}}

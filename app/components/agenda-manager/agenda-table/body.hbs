@@ -1,11 +1,15 @@
-<SortableObjects @tagName={{"tbody"}}
-                 @sortEndAction={{@onSort}}
-                 @sortableObjectList={{@items}}
-                 @enableSort={{true}}
-                 @useSwap={{true}}
-                 @inPlace={{true}}>
-  {{yield (hash
-                  Row=(component "agenda-manager/agenda-table/row" readOnly=@readOnly)
-                  Empty=(component "agenda-manager/agenda-table/empty" onCreate=@onCreate)
-          )}}
+<SortableObjects
+  @tagName={{'tbody'}}
+  @sortEndAction={{@onSort}}
+  @sortableObjectList={{@items}}
+  @enableSort={{true}}
+  @useSwap={{true}}
+  @inPlace={{true}}
+>
+  {{yield
+    (hash
+      Row=(component 'agenda-manager/agenda-table/row' readOnly=@readOnly)
+      Empty=(component 'agenda-manager/agenda-table/empty' onCreate=@onCreate)
+    )
+  }}
 </SortableObjects>

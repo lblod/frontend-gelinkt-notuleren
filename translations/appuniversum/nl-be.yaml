@@ -1,11 +1,11 @@
 au-date-picker:
-  button-label: "Kies een datum"
-  selected-date-message: "De geselecteerde datum is"
-  prev-month-label: "Vorige maand"
-  next-month-label: "Volgende maand"
-  month-select-label: "Maand"
-  year-select-label: "Jaar"
-  close-label: "Sluit venster"
-  keyboard-instruction: "Gebruik de pijltjestoetsen om te navigeren"
-  calendar-heading: "Kies een datum"
-  placeholder: "DD-MM-JJJJ"
+  button-label: 'Kies een datum'
+  selected-date-message: 'De geselecteerde datum is'
+  prev-month-label: 'Vorige maand'
+  next-month-label: 'Volgende maand'
+  month-select-label: 'Maand'
+  year-select-label: 'Jaar'
+  close-label: 'Sluit venster'
+  keyboard-instruction: 'Gebruik de pijltjestoetsen om te navigeren'
+  calendar-heading: 'Kies een datum'
+  placeholder: 'DD-MM-JJJJ'

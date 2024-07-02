@@ -1,34 +1,39 @@
-{{page-title (t "inbox.regulatory-statements.page-title")}}
-<SnippetsNotifier/>
+{{page-title (t 'inbox.regulatory-statements.page-title')}}
+<SnippetsNotifier />
 
-<AuDataTable @content={{this.model}}
-             @isLoading={{this.isLoadingModel}}
-             @noDataMessage={{t 'inbox.regulatory-statements.no-data-message'}}
-             @sort={{this.sort}}
-             @page={{this.page}}
-             @size={{this.pageSize}}
-             as |table|>
+<AuDataTable
+  @content={{this.model}}
+  @isLoading={{this.isLoadingModel}}
+  @noDataMessage={{t 'inbox.regulatory-statements.no-data-message'}}
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.pageSize}}
+  as |table|
+>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar class="au-o-box" @size="large" as |Group|>
+      <AuToolbar class='au-o-box' @size='large' as |Group|>
         <Group>
-          <AuHeading @skin="2">
+          <AuHeading @skin='2'>
             {{t 'inbox.regulatory-statements.page-title'}}
           </AuHeading>
         </Group>
-        <Group class="au-c-toolbar__group--center">
+        <Group class='au-c-toolbar__group--center'>
           <AuInput
-            {{on "input" (perform this.updateFilter)}}
-            @icon="search"
-            @iconAlignment="right"
+            {{on 'input' (perform this.updateFilter)}}
+            @icon='search'
+            @iconAlignment='right'
             value={{this.searchValue}}
             placeholder={{t 'inbox.regulatory-statements.search-placeholder'}}
           />
           {{#unless this.readOnly}}
             <AuLink
-              @route="inbox.regulatory-statements.new"
-              @skin="button" @icon="add" @iconAlignment="left">
-              {{t "inbox.regulatory-statements.new.title"}}
+              @route='inbox.regulatory-statements.new'
+              @skin='button'
+              @icon='add'
+              @iconAlignment='left'
+            >
+              {{t 'inbox.regulatory-statements.new.title'}}
             </AuLink>
           {{/unless}}
         </Group>
@@ -37,23 +42,32 @@
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field=":no-case:currentVersion.title" @currentSorting={{this.sort}} @label={{t
-        'inbox.regulatory-statements.title-label'}} />
-      <AuDataTableThSortable @field="currentVersion.updatedOn" @currentSorting={{this.sort}} @label={{t
-        'inbox.regulatory-statements.updated-on-label'}} />
-      <th/>
+      <AuDataTableThSortable
+        @field=':no-case:currentVersion.title'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.regulatory-statements.title-label'}}
+      />
+      <AuDataTableThSortable
+        @field='currentVersion.updatedOn'
+        @currentSorting={{this.sort}}
+        @label={{t 'inbox.regulatory-statements.updated-on-label'}}
+      />
+      <th />
     </c.header>
     <c.body as |container|>
       {{#let container.currentVersion as |row|}}
         <td>
-          <RegulatoryStatementLink @documentContainer={{container}} @readOnly={{this.readOnly}}/>
+          <RegulatoryStatementLink
+            @documentContainer={{container}}
+            @readOnly={{this.readOnly}}
+          />
         </td>
         <td>
           {{human-friendly-date row.updatedOn locale=this.intl.primaryLocale}}
-          <br>
+          <br />
         </td>
         <td>
-          <LinkedAgendapointsButton @document={{container}}/>
+          <LinkedAgendapointsButton @document={{container}} />
         </td>
       {{/let}}
     </c.body>

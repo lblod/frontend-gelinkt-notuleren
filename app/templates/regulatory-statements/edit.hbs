@@ -110,6 +110,8 @@
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
+    @shouldEditRdfa={{false}}
+    @shouldShowRdfa={{true}}
   >
     <:toolbar>
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
@@ -125,6 +127,13 @@
         @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
+      {{#if this.activeNode}}
+        <this.SnippetInsert
+          @controller={{this.controller}}
+          @config={{this.config.snippet}}
+          @node={{this.activeNode}}
+        />
+      {{/if}}
       <VariablePlugin::Date::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
@@ -134,7 +143,11 @@
         @templates={{this.model.standardTemplates}}
       />
       <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
-      <VariablePlugin::Address::Insert @controller={{this.controller}} />
+      <LocationPlugin::Insert
+        @controller={{this.controller}}
+        @defaultMunicipality={{this.defaultMunicipality.naam}}
+        @config={{this.config.location}}
+      />
       <WorshipPlugin::Insert
         @controller={{this.controller}}
         @config={{this.config.worship}}
@@ -161,10 +174,6 @@
       <VariablePlugin::Location::Edit
         @controller={{this.controller}}
         @options={{this.locationEditOptions}}
-      />
-      <VariablePlugin::Address::Edit
-        @controller={{this.controller}}
-        @defaultMunicipality={{this.defaultMunicipality.naam}}
       />
       <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
     </:sidebar>

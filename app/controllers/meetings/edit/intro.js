@@ -23,6 +23,10 @@ export default class MeetingsEditIntroController extends Controller {
     this.editor = editor;
   }
 
+  clearEditor() {
+    this.editor = null;
+  }
+
   @action
   closeModal() {
     this.router.transitionTo('meetings.edit');
@@ -38,5 +42,6 @@ export default class MeetingsEditIntroController extends Controller {
     const zitting = this.model;
     zitting.intro = this.editor.htmlContent;
     await zitting.save();
+    this.clearEditor();
   });
 }

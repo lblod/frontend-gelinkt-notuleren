@@ -5,72 +5,116 @@
   @isRegulatoryStatement={{true}}
 >
   <:returnLink>
-  <AuLink @route="inbox.regulatory-statements" @model={{@meetingId}}>
-    <AuIcon @icon="arrow-left" @alignment="left" />
-    {{t 'inbox.regulatory-statements.return'}}
-  </AuLink>
+    <AuLink @route='inbox.regulatory-statements' @model={{@meetingId}}>
+      <AuIcon @icon='arrow-left' @alignment='left' />
+      {{t 'inbox.regulatory-statements.return'}}
+    </AuLink>
   </:returnLink>
   <:actions-after-title>
-    <AuDropdown @title={{human-friendly-date this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @buttonLabel={{human-friendly-date
-      this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}} @alignment="left">
-      <p class="au-u-padding-small regulatory-statement-current-version-container-active">
-        <span class="au-u-bold au-u-margin-right-large">{{t 'utils.current-version'}}: </span>
-        <span class="au-u-light">{{human-friendly-date this.model.editorDocument.updatedOn locale=this.intl.primaryLocale}}</span>
+    <AuDropdown
+      @title={{human-friendly-date
+        this.model.editorDocument.updatedOn
+        locale=this.intl.primaryLocale
+      }}
+      @buttonLabel={{human-friendly-date
+        this.model.editorDocument.updatedOn
+        locale=this.intl.primaryLocale
+      }}
+      @alignment='left'
+    >
+      <p
+        class='au-u-padding-small regulatory-statement-current-version-container-active'
+      >
+        <span class='au-u-bold au-u-margin-right-large'>{{t
+            'utils.current-version'
+          }}:
+        </span>
+        <span class='au-u-light'>{{human-friendly-date
+            this.model.editorDocument.updatedOn
+            locale=this.intl.primaryLocale
+          }}</span>
       </p>
       <AuHr />
-      <div class="au-u-margin-small au-u-flex--column au-u-flex">
-        <p class="au-u-muted">{{t 'utils.history'}}: </p>
+      <div class='au-u-margin-small au-u-flex--column au-u-flex'>
+        <p class='au-u-muted'>{{t 'utils.history'}}: </p>
         {{#each this.revisions as |revision|}}
-          <AuLink @route="regulatory-statements.revisions" @skin="secondary" @models={{array
-            this.model.documentContainer.id revision.id}}>
-            {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
+          <AuLink
+            @route='regulatory-statements.revisions'
+            @skin='secondary'
+            @models={{array this.model.documentContainer.id revision.id}}
+          >
+            {{human-friendly-date
+              revision.updatedOn
+              locale=this.intl.primaryLocale
+            }}
             {{#if revision.status.label}}
               <AuPill @skin='success'>{{revision.status.label}}</AuPill>
             {{/if}}
           </AuLink>
         {{/each}}
-        <AuLink @route="regulatory-statements.show.history" @skin="link">
-          <AuIcon @icon="clock" @alignment="left"/>
+        <AuLink @route='regulatory-statements.show.history' @skin='link'>
+          <AuIcon @icon='clock' @alignment='left' />
           {{t 'utils.full-history'}}
         </AuLink>
       </div>
     </AuDropdown>
   </:actions-after-title>
   <:actions>
-  <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
-    {{!-- template-lint-disable require-context-role --}}
-    <AuButton {{on "click" this.download}} @skin="link" role="menuitem">
-      <AuIcon @icon="export" @alignment="left" />
-      {{t "utils.html-export"}}
-    </AuButton>
-  </AuDropdown>
-  {{#if this.currentSession.canWrite}}
-    <AuButton {{on "click" (perform this.createNewVersion)}} @disabled={{this.createNewVersion.isRunning}}>
-      {{t "utils.create-new-version"}}
-    </AuButton>
-  {{/if}}
+    <AuDropdown
+      @title={{t 'utils.file-options'}}
+      @buttonLabel={{t 'utils.file-options'}}
+      @alignment='right'
+    >
+      {{! template-lint-disable require-context-role }}
+      <AuButton {{on 'click' this.download}} @skin='link' role='menuitem'>
+        <AuIcon @icon='export' @alignment='left' />
+        {{t 'utils.html-export'}}
+      </AuButton>
+    </AuDropdown>
+    {{#if this.currentSession.canWrite}}
+      <AuButton
+        {{on 'click' (perform this.createNewVersion)}}
+        @disabled={{this.createNewVersion.isRunning}}
+      >
+        {{t 'utils.create-new-version'}}
+      </AuButton>
+    {{/if}}
   </:actions>
 </AppChrome>
 
 <div
-  class="au-c-body-container"
+  class='au-c-body-container'
   {{did-update (perform this.fetchRevisions)}}
   {{did-insert (perform this.fetchRevisions)}}
 >
-  <div class="au-c-rdfa-editor">
-    <div class="say-container say-container--sidebar-left say-container--paper say-container--sidebar-right">
-      <div class="say-container__main">
+  <div class='au-c-rdfa-editor'>
+    <div
+      class='say-container say-container--sidebar-left say-container--paper say-container--sidebar-right'
+    >
+      <div class='say-container__main'>
         {{#unless this.readOnly}}
-          <div class="au-o-box au-o-box--small au-u-background-gray-100">
-            <AuAlert @icon="info-circle" @title={{t "inbox.regulatory-statements.read-only-banner.published-message-title"}}  @skin="info" @size="small" class="au-u-margin-bottom-none">
-              <p>{{t "inbox.regulatory-statements.read-only-banner.published-message"}}</p>
+          <div class='au-o-box au-o-box--small au-u-background-gray-100'>
+            <AuAlert
+              @icon='info-circle'
+              @title={{t
+                'inbox.regulatory-statements.read-only-banner.published-message-title'
+              }}
+              @skin='info'
+              @size='small'
+              class='au-u-margin-bottom-none'
+            >
+              <p>{{t
+                  'inbox.regulatory-statements.read-only-banner.published-message'
+                }}</p>
             </AuAlert>
           </div>
         {{/unless}}
-        <div class="say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled">
-          <div class="say-editor__paper">
-            <div class="say-editor__inner say-content say-content--disabled">
-              {{ this.model.editorDocument.htmlSafeContent }}
+        <div
+          class='say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled'
+        >
+          <div class='say-editor__paper'>
+            <div class='say-editor__inner say-content say-content--disabled'>
+              {{this.model.editorDocument.htmlSafeContent}}
             </div>
           </div>
         </div>
@@ -78,6 +122,5 @@
     </div>
   </div>
 </div>
-
 
 {{outlet}}

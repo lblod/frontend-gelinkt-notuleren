@@ -11,9 +11,9 @@
 
 // Hide metadata
 .au-c-rdfa-editor {
-  [property="heeftNotulen"],
-  [property="ext:metadata"],
-  [property="ext:templateVersion"] {
+  [property='heeftNotulen'],
+  [property='ext:metadata'],
+  [property='ext:templateVersion'] {
     border: 0 !important;
     clip: rect(0 0 0 0) !important;
     clip-path: inset(50%) !important;
@@ -29,7 +29,7 @@
 
 .au-c-rdfa-publication-holder {
   background-color: $au-gray-100;
-  border-left: .1rem solid $au-gray-200;
+  border-left: 0.1rem solid $au-gray-200;
   height: 100%;
   overflow: auto;
 }
@@ -40,10 +40,13 @@
 }
 
 .au-c-rdfa-publication {
-  padding: $au-unit $au-unit-large - $au-unit-tiny * .5 $au-unit $au-unit;
+  padding: $au-unit $au-unit-large - $au-unit-tiny * 0.5 $au-unit $au-unit;
   margin: $au-unit;
   background-color: $au-white;
-  box-shadow: 0 1px 3px rgba($au-gray-900, .2), 0 4px 20px rgba($au-gray-900, .035), 0 1px 1px rgba($au-gray-900, .025);
+  box-shadow:
+    0 1px 3px rgba($au-gray-900, 0.2),
+    0 4px 20px rgba($au-gray-900, 0.035),
+    0 1px 1px rgba($au-gray-900, 0.025);
 
   *:before {
     display: none;

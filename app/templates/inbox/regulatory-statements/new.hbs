@@ -4,32 +4,42 @@
   @onCreate={{this.redirectToStatement}}
   @folderId={{this.folderId}}
   @templateOptions={{this.templateOptions}}
-  as |creator|>
+  as |creator|
+>
   <AuModal
-    @title={{t "inbox.regulatory-statements.new.title"}}
+    @title={{t 'inbox.regulatory-statements.new.title'}}
     @modalOpen={{true}}
     @closeModal={{creator.rollback}}
     as |Modal|
   >
-  <Modal.Body>
-    <creator.form />
+    <Modal.Body>
+      <creator.form />
 
-    {{#if creator.errorSaving}}
-      <AuAlert @icon="cross" @title={{t "inbox.regulatory-statements.new.error-saving"}} @skin="error" @closable={{true}}>
-        {{creator.errorSaving}}
-      </AuAlert>
-    {{/if}}
+      {{#if creator.errorSaving}}
+        <AuAlert
+          @icon='cross'
+          @title={{t 'inbox.regulatory-statements.new.error-saving'}}
+          @skin='error'
+          @closable={{true}}
+        >
+          {{creator.errorSaving}}
+        </AuAlert>
+      {{/if}}
 
-  </Modal.Body>
-  <Modal.Footer>
-    <AuButtonGroup>
-      <AuButton {{on "click" creator.create}} @isLoading={{creator.isSaving}} @disabled={{creator.isSaving}}>
-        {{t "inbox.agendapoints.new.create"}}
-      </AuButton>
-      <AuButton {{on "click" creator.rollback}} @skin="secondary">
-        {{t "inbox.agendapoints.new.cancel"}}
-      </AuButton>
-    </AuButtonGroup>
-  </Modal.Footer>
-</AuModal>
+    </Modal.Body>
+    <Modal.Footer>
+      <AuButtonGroup>
+        <AuButton
+          {{on 'click' creator.create}}
+          @isLoading={{creator.isSaving}}
+          @disabled={{creator.isSaving}}
+        >
+          {{t 'inbox.agendapoints.new.create'}}
+        </AuButton>
+        <AuButton {{on 'click' creator.rollback}} @skin='secondary'>
+          {{t 'inbox.agendapoints.new.cancel'}}
+        </AuButton>
+      </AuButtonGroup>
+    </Modal.Footer>
+  </AuModal>
 </DocumentCreator>

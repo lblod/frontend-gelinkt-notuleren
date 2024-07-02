@@ -1,61 +1,70 @@
-<AuModal @modalOpen={{true}}
-         @title={{t "regulatory-statements-plugin.insert-statement"}}
-         @size="large"
-         @padding="none"
-         @closeModal={{@closeModal}}
-         {{did-insert this.didInsert}}
-  as |modal|>
+<AuModal
+  @modalOpen={{true}}
+  @title={{t 'regulatory-statements-plugin.insert-statement'}}
+  @size='large'
+  @padding='none'
+  @closeModal={{@closeModal}}
+  {{did-insert this.didInsert}}
+  as |modal|
+>
   <modal.Body>
-    <AuMainContainer class="citaten--main-container" as |mc|>
-      <mc.sidebar class="citaten--sidebar" @scroll={{true}}>
-        <div class="au-c-sidebar">
-          <div class="au-c-sidebar__content au-u-padding">
+    <AuMainContainer class='citaten--main-container' as |mc|>
+      <mc.sidebar class='citaten--sidebar' @scroll={{true}}>
+        <div class='au-c-sidebar'>
+          <div class='au-c-sidebar__content au-u-padding'>
             <AuInput
-              id="searchtermexpanded"
-              @type="text"
-              @width="block"
-              @icon="search"
-              @iconAlignment="right"
-              placeholder={{t "regulatory-statements-plugin.search"}}
+              id='searchtermexpanded'
+              @type='text'
+              @width='block'
+              @icon='search'
+              @iconAlignment='right'
+              placeholder={{t 'regulatory-statements-plugin.search'}}
               value={{this.searchValue}}
-              {{on "input" (perform this.updateFilter)}}
+              {{on 'input' (perform this.updateFilter)}}
             />
-            <AuHr @size="large" />
+            <AuHr @size='large' />
             {{#if this.regulatoryStatements}}
-              <ul class="au-c-list-navigation">
+              <ul class='au-c-list-navigation'>
                 {{#each this.regulatoryStatements as |statement|}}
-                  <li class="au-c-list-navigation__item">
-                    <AuButton @skin="link"
-                      class="au-c-list-navigation__link au-u-padding au-u-1-1 {{if (eq this.selectedStatement statement) 'active'}}" {{on "click"
-                      (fn this.selectStatement statement)}}>
+                  <li class='au-c-list-navigation__item'>
+                    <AuButton
+                      @skin='link'
+                      class='au-c-list-navigation__link au-u-padding au-u-1-1
+                        {{if (eq this.selectedStatement statement) "active"}}'
+                      {{on 'click' (fn this.selectStatement statement)}}
+                    >
                       {{statement.currentVersion.title}}
                       {{#if (this.isInserted statement)}}
-                        <AuPill @skin="border" @icon="info-circle">{{t "regulatory-statements-plugin.already-attached"}}</AuPill>
+                        <AuPill @skin='border' @icon='info-circle'>{{t
+                            'regulatory-statements-plugin.already-attached'
+                          }}</AuPill>
                       {{/if}}
                     </AuButton>
                   </li>
                 {{/each}}
                 {{#if this.showLoadMore}}
-                <li class="au-c-list-navigation__item">
-                  <AuButton
-                      class="au-u-padding au-u-1-1" {{on "click"
-                      (perform this.fetchNextPage)}} @loading={{this.fetchNextPage.isRunning}}>
-                      {{t "regulatory-statements-plugin.load-more"}}
-                  </AuButton>
-                </li>
+                  <li class='au-c-list-navigation__item'>
+                    <AuButton
+                      class='au-u-padding au-u-1-1'
+                      {{on 'click' (perform this.fetchNextPage)}}
+                      @loading={{this.fetchNextPage.isRunning}}
+                    >
+                      {{t 'regulatory-statements-plugin.load-more'}}
+                    </AuButton>
+                  </li>
                 {{/if}}
               </ul>
             {{else}}
               <AuAlert
                 @title={{t 'regulatory-statements-plugin.no-statement-found'}}
-                @skin="warning"
-                @icon="cross"
-                @size="small"
-                @closable={{false}}>
-              </AuAlert>
+                @skin='warning'
+                @icon='cross'
+                @size='small'
+                @closable={{false}}
+              />
             {{/if}}
             {{#if this.fetchNextPage.isRunning}}
-              <AuLoader @message={{t "regulatory-statements-plugin.loading"}} />
+              <AuLoader @message={{t 'regulatory-statements-plugin.loading'}} />
             {{/if}}
           </div>
         </div>
@@ -63,35 +72,44 @@
       <mc.content>
         <AuBodyContainer @scroll={{true}}>
           {{#if this.selectedStatement}}
-            <div class="say-container__main">
-              <div class="say-editor">
-                <div class="say-editor__inner say-content">
+            <div class='say-container__main'>
+              <div class='say-editor'>
+                <div class='say-editor__inner say-content'>
                   {{this.selectedStatement.currentVersion.htmlSafeContent}}
                 </div>
               </div>
             </div>
           {{else}}
             <AuAlert
-              @title="{{t "regulatory-statements-plugin.no-statement-selected"}}"
-              @skin="info"
-              @icon="info-circle"
-              @size="default"
+              @title='{{t
+                "regulatory-statements-plugin.no-statement-selected"
+              }}'
+              @skin='info'
+              @icon='info-circle'
+              @size='default'
               @closable={{false}}
-              class="au-u-margin-small">
-            </AuAlert>
+              class='au-u-margin-small'
+            />
           {{/if}}
         </AuBodyContainer>
-        <div class="au-c-modal__footer">
-          <AuToolbar>
-            <AuToolbar::Group>
-              <AuButton @skin="link" {{on "click" @closeModal}}>{{t "regulatory-statements-plugin.cancel"}}</AuButton>
-            </AuToolbar::Group>
-            <AuToolbar::Group>
-              <AuButton @disabled={{or (not this.selectedStatement) (this.isInserted this.selectedStatement)}} {{on "click" (fn @insertStatement
-                this.selectedStatement)}}>
-                {{t "regulatory-statements-plugin.insert-statement"}}
+        <div class='au-c-modal__footer'>
+          <AuToolbar as |Group|>
+            <Group>
+              <AuButton @skin='link' {{on 'click' @closeModal}}>{{t
+                  'regulatory-statements-plugin.cancel'
+                }}</AuButton>
+            </Group>
+            <Group>
+              <AuButton
+                @disabled={{or
+                  (not this.selectedStatement)
+                  (this.isInserted this.selectedStatement)
+                }}
+                {{on 'click' (fn @insertStatement this.selectedStatement)}}
+              >
+                {{t 'regulatory-statements-plugin.insert-statement'}}
               </AuButton>
-            </AuToolbar::Group>
+            </Group>
           </AuToolbar>
         </div>
       </mc.content>

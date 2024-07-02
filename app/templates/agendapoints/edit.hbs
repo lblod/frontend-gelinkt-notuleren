@@ -111,12 +111,17 @@
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
+    @shouldEditRdfa={{false}}
   >
     <:toolbar>
       <BesluitTypePlugin::ToolbarDropdown
         @controller={{this.controller}}
         @classificatieUri={{this.config.classificatieUri}}
         @options={{this.config.besluitType}}
+      />
+      <BesluitTopicPlugin::BesluitTopicToolbarDropdown
+        @controller={{this.controller}}
+        @options={{this.config.besluitTopic}}
       />
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
     </:toolbar>
@@ -148,7 +153,11 @@
         />
       {{/if}}
       <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
-      <VariablePlugin::Address::Insert @controller={{this.controller}} />
+      <LocationPlugin::Insert
+        @controller={{this.controller}}
+        @defaultMunicipality={{this.defaultMunicipality.naam}}
+        @config={{this.config.location}}
+      />
       <WorshipPlugin::Insert
         @controller={{this.controller}}
         @config={{this.config.worship}}
@@ -177,10 +186,6 @@
       <VariablePlugin::Location::Edit
         @controller={{this.controller}}
         @options={{this.locationEditOptions}}
-      />
-      <VariablePlugin::Address::Edit
-        @controller={{this.controller}}
-        @defaultMunicipality={{this.defaultMunicipality.naam}}
       />
       <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
     </:sidebar>

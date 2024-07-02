@@ -1,40 +1,59 @@
-<div class="container--flex-scroll">
-	<div class="page">
-	  <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
-	    <header class="content-header content-header--small content-header--half-image u-spacer--large">
-	      <div class="content-header__wrapper">
-	        <picture class="content-header__bg">
+<div class='container--flex-scroll'>
+  <div class='page'>
+    <div
+      id='main'
+      itemprop='mainContentOfPage'
+      role='main'
+      tabindex='-1'
+      class='main-content'
+    >
+      <header
+        class='content-header content-header--small content-header--half-image u-spacer--large'
+      >
+        <div class='content-header__wrapper'>
+          <picture class='content-header__bg'>
             <img
-              sizes="50vw"
-              src="/assets/images/loket-header-1600.jpg"
-              srcset="/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w"
-              alt=""
-            >
+              sizes='50vw'
+              src='/assets/images/loket-header-1600.jpg'
+              srcset='/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w'
+              alt=''
+            />
           </picture>
-	        <div class="layout layout--wide">
-	          <div class="content-header__content">
-	            <div class="content-header__logo-wrapper">
-	            	<a href="#" class="content-header__entity-logo content-header__entity-logo--lowercase">
-	            		<span class="h1 content-header__entity-logo__prefix u-spacer--none">{{t "uittreksel-error.error-code"}}</span>
-	            	</a>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
-	    </header>
-	  </div>
-	</div>
-	<section class="u-padding--rl--small">
-		<div class="grid">
-			<div class="col--6-12">
-				<div class="u-padding--round--large">
-					<h1 class="h2">{{t "uittreksel-error.heading"}}</h1>
-					<p class="u-spacer">{{t "uittreksel-error.extract-not-found"}}</p>
-          <AuLink @route="inbox.index" @width="block" @skin="button-secondary" @icon="arrow-left" @iconAlignment="left">
-            {{t "uittreksel-error.back-link"}}
-					</AuLink>
-				</div>
-			</div>
-		</div>
-	</section>
+          <div class='layout layout--wide'>
+            <div class='content-header__content'>
+              <div class='content-header__logo-wrapper'>
+                <a
+                  href='#'
+                  class='content-header__entity-logo content-header__entity-logo--lowercase'
+                >
+                  <span
+                    class='h1 content-header__entity-logo__prefix u-spacer--none'
+                  >{{t 'uittreksel-error.error-code'}}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+  <section class='u-padding--rl--small'>
+    <div class='grid'>
+      <div class='col--6-12'>
+        <div class='u-padding--round--large'>
+          <h1 class='h2'>{{t 'uittreksel-error.heading'}}</h1>
+          <p class='u-spacer'>{{t 'uittreksel-error.extract-not-found'}}</p>
+          <AuLink
+            @route='inbox.index'
+            @width='block'
+            @skin='button-secondary'
+            @icon='arrow-left'
+            @iconAlignment='left'
+          >
+            {{t 'uittreksel-error.back-link'}}
+          </AuLink>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

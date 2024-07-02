@@ -1,6 +1,7 @@
 <tr>
   <td>
-    {{this.persoon.gebruikteVoornaam}} {{this.persoon.achternaam}}
+    {{this.persoon.gebruikteVoornaam}}
+    {{this.persoon.achternaam}}
   </td>
   <td>
     {{this.mandataris.bekleedt.bestuursfunctie.label}}
@@ -8,24 +9,41 @@
   {{#if this.showVoteSelect}}
     <td>
       {{#let (unique-id) as |id|}}
-        <AuLabel for={{id}}  class="au-u-hidden-visually">{{t "voting-edit.actions-label"}}</AuLabel>
-        <select {{on "change" this.onSelectVote}} id={{id}}>
-          <option value="">{{t "voting-edit.select-placeholder"}}</option>
+        <AuLabel for={{id}} class='au-u-hidden-visually'>{{t
+            'voting-edit.actions-label'
+          }}</AuLabel>
+        <select {{on 'change' this.onSelectVote}} id={{id}}>
+          <option value=''>{{t 'voting-edit.select-placeholder'}}</option>
           {{#each this.voteOptions as |voteOption|}}
-            <option value={{voteOption}} selected={{eq this.selectedVote voteOption}}>{{voteOption}}</option>
+            <option
+              value={{voteOption}}
+              selected={{eq this.selectedVote voteOption}}
+            >{{voteOption}}</option>
           {{/each}}
         </select>
       {{/let}}
     </td>
   {{/if}}
-  <td colspan="{{if this.showVoteSelect 1 2}}">
+  <td colspan='{{if this.showVoteSelect 1 2}}'>
     {{#if this.isVoting}}
-      <AuButton @alert={{ true }} @skin="secondary" @icon="cross" @iconAlignment="left" {{on "click" this.removeStemmer}}>
-        {{t "voting-edit.remove-item-button"}}
+      <AuButton
+        @alert={{true}}
+        @skin='secondary'
+        @icon='cross'
+        @iconAlignment='left'
+        {{on 'click' this.removeStemmer}}
+      >
+        {{t 'voting-edit.remove-item-button'}}
       </AuButton>
     {{else}}
-      <AuButton @alert={{ false }} @skin="secondary" @icon="add" @iconAlignment="left" {{on "click" this.addStemmer}}>
-        {{t "voting-edit.add-item-button"}}
+      <AuButton
+        @alert={{false}}
+        @skin='secondary'
+        @icon='add'
+        @iconAlignment='left'
+        {{on 'click' this.addStemmer}}
+      >
+        {{t 'voting-edit.add-item-button'}}
       </AuButton>
     {{/if}}
   </td>

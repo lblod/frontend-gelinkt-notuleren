@@ -1,19 +1,28 @@
-<div class="au-o-box">
-  <AuCard @divided={{true}} @flex={{true}} @expandable={{false}} class="au-u-margin-bottom-small au-c-card--publish" as |c| >
-    <c.header @badgeIcon={{status-icon-name this.status}} @badgeSkin="brand">
+<div class='au-o-box'>
+  <AuCard
+    @divided={{true}}
+    @flex={{true}}
+    @expandable={{false}}
+    class='au-u-margin-bottom-small au-c-card--publish'
+    as |c|
+  >
+    <c.header @badgeIcon={{status-icon-name this.status}} @badgeSkin='brand'>
       <AuToolbar @nowrap={{true}}>
-        <AuHeading @level="2" @skin="3" class="au-u-capitalize">
-          {{t "meetings.publish.document.title"}}
+        <AuHeading @level='2' @skin='3' class='au-u-capitalize'>
+          {{t 'meetings.publish.document.title'}}
         </AuHeading>
-        <AuPill @skin={{publication-status-color this.status}} class="au-u-margin-left">{{this.statusLabel}}</AuPill>
+        <AuPill
+          @skin={{publication-status-color this.status}}
+          class='au-u-margin-left'
+        >{{this.statusLabel}}</AuPill>
       </AuToolbar>
     </c.header>
     <c.content>
       {{#if this.loadNotulen.isIdle}}
-        {{!-- cheating with status here, because signing doesn't affect preview --}}
+        {{! cheating with status here, because signing doesn't affect preview }}
         <PublicationPreview
-          @title={{t "meetings.publish.document.preview"}}
-          @status={{if (eq this.status "published") "published" "concept"}}
+          @title={{t 'meetings.publish.document.preview'}}
+          @status={{if (eq this.status 'published') 'published' 'concept'}}
         >
           {{#if (eq this.status 'published')}}
             {{html-safe this.notulenContent}}
@@ -34,22 +43,26 @@
           {{/if}}
         </PublicationPreview>
         {{#if (and this.validationErrors this.validationErrors.length)}}
-          <AuAlert @icon="alert-triangle" @title={{t "timeline-step.publish-warning"}} @skin="error">
+          <AuAlert
+            @icon='alert-triangle'
+            @title={{t 'timeline-step.publish-warning'}}
+            @skin='error'
+          >
             <ul>
               {{#each this.validationErrors as |error|}}
                 <li>{{error}}</li>
               {{/each}}
             </ul>
           </AuAlert>
-      {{else if (and this.errors this.errors.length)}}
-          <AuAlert @icon="alert-triangle" @skin="error">
+        {{else if (and this.errors this.errors.length)}}
+          <AuAlert @icon='alert-triangle' @skin='error'>
             <p>{{t 'publish.serious-error'}}</p>
-            <code>{{get this.errors "0"}}</code>
+            <code>{{get this.errors '0'}}</code>
           </AuAlert>
-      {{else}}
-          {{!-- Sign --}}
+        {{else}}
+          {{! Sign }}
           <Signatures::SignatureControls
-            @title="notulen"
+            @title='notulen'
             @signedResources={{this.signedResources}}
             @hasDeletedSignedResources={{this.hasDeletedSignedResources}}
             @isPublished={{this.isPublished}}
@@ -58,19 +71,19 @@
             @loading={{this.loading}}
           />
           {{#if this.showSigningModal}}
-            {{!-- signing is always the full document, so no preview here --}}
+            {{! signing is always the full document, so no preview here }}
             <Signatures::SignatureConfirmation
-              @name="notulen"
+              @name='notulen'
               @confirm={{perform this.createSignedResource}}
               @cancel={{fn (mut this.showSigningModal) false}}
             >
               {{html-safe this.fullNotulenContent}}
             </Signatures::SignatureConfirmation>
           {{/if}}
-          {{!-- publish --}}
+          {{! publish }}
           <PublicationPublish
             @status={{this.status}}
-            @name="notulen"
+            @name='notulen'
             @publishedResource={{this.publishedResource}}
             @willSubmitToLoket={{false}}
             @publish={{perform this.createPublishPreview}}
@@ -78,22 +91,24 @@
           />
           {{#if this.showPublishingModal}}
             <Signatures::PublicationConfirmation
-              @name="notulen"
+              @name='notulen'
               @confirm={{perform this.createPublishedResource}}
               @cancel={{fn (mut this.showPublishingModal) false}}
             >
               {{#if this.createPublishPreview.isIdle}}
                 {{html-safe this.preview}}
               {{else}}
-                <AuHelpText @size="large">{{t "publish.loading-message"}}</AuHelpText>
-                <AuLoader @padding="small" />
+                <AuHelpText @size='large'>{{t
+                    'publish.loading-message'
+                  }}</AuHelpText>
+                <AuLoader @padding='small' />
               {{/if}}
             </Signatures::PublicationConfirmation>
           {{/if}}
         {{/if}}
       {{else}}
-        <AuHelpText @size="large">{{t "publish.loading-message"}}</AuHelpText>
-        <AuLoader @padding="small" />
+        <AuHelpText @size='large'>{{t 'publish.loading-message'}}</AuHelpText>
+        <AuLoader @padding='small' />
       {{/if}}
     </c.content>
   </AuCard>

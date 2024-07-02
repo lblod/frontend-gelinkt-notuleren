@@ -1,38 +1,69 @@
-<AuDataTable @content={{this.model}}
-             @noDataMessage={{t "publish.no-extracts-message"}}
-             @sort={{this.sort}}
-             @page={{this.page}}
-             @size={{this.pageSize}}
-             @class="container-flex--contain" as |table|>
+<AuDataTable
+  @content={{this.model}}
+  @noDataMessage={{t 'publish.no-extracts-message'}}
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.pageSize}}
+  @class='container-flex--contain'
+  as |table|
+>
   <table.menu as |menu|>
     <menu.general>
-      <AuToolbar @size="large" as |Group|>
+      <AuToolbar @size='large' as |Group|>
         <Group>
-          <AuHeading @skin="2">
-            {{t "publish.extracts"}}
+          <AuHeading @skin='2'>
+            {{t 'publish.extracts'}}
           </AuHeading>
         </Group>
-        <Group class="au-u-hide-on-print">
-          <TextSearch @wait={{2000}} @filter={{this.title}} @placeholder={{t 'inbox.agendapoints.search-placeholder'}} />
+        <Group class='au-u-hide-on-print'>
+          <TextSearch
+            @wait={{2000}}
+            @filter={{this.title}}
+            @placeholder={{t 'inbox.agendapoints.search-placeholder'}}
+          />
         </Group>
       </AuToolbar>
     </menu.general>
   </table.menu>
   <table.content as |c|>
     <c.header>
-      <AuDataTableThSortable @field="position" @currentSorting={{this.sort}} @label={{t 'publish.position'}} />
-      <AuDataTableThSortable @field=":no-case:titel" @currentSorting={{this.sort}} @label={{t 'publish.agendapoint'}} />
-      <AuDataTableThSortable @field="behandeling.documentContainer.status" @currentSorting={{this.sort}} @label={{t 'publish.status-label'}} />
+      <AuDataTableThSortable
+        @field='position'
+        @currentSorting={{this.sort}}
+        @label={{t 'publish.position'}}
+      />
+      <AuDataTableThSortable
+        @field=':no-case:titel'
+        @currentSorting={{this.sort}}
+        @label={{t 'publish.agendapoint'}}
+      />
+      <AuDataTableThSortable
+        @field='behandeling.documentContainer.status'
+        @currentSorting={{this.sort}}
+        @label={{t 'publish.status-label'}}
+      />
       <th></th>
     </c.header>
 
-    <c.body as  |agendapoint|>
+    <c.body as |agendapoint|>
       <td>{{inc agendapoint.position}}</td>
-      <td><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}}>{{limit-content agendapoint.titel 70}}</AuLink></td>
+      <td><AuLink
+          @route='meetings.publish.uittreksels.show'
+          @model={{agendapoint.behandeling.id}}
+        >{{limit-content agendapoint.titel 70}}</AuLink></td>
       <td>
-        <Signatures::PublicationStatus @versionedResource={{agendapoint.versionedBehandeling}} />
+        <Signatures::PublicationStatus
+          @versionedResource={{agendapoint.versionedBehandeling}}
+        />
       </td>
-      <td class="au-u-text-right"><AuLink @route="meetings.publish.uittreksels.show" @model={{agendapoint.behandeling.id}} @skin="button" @icon="arrow-right" @iconAlignment="right" class="au-u-hide-on-print">{{t 'publish.publish-button-label'}}</AuLink></td>
+      <td class='au-u-text-right'><AuLink
+          @route='meetings.publish.uittreksels.show'
+          @model={{agendapoint.behandeling.id}}
+          @skin='button'
+          @icon='arrow-right'
+          @iconAlignment='right'
+          class='au-u-hide-on-print'
+        >{{t 'publish.publish-button-label'}}</AuLink></td>
     </c.body>
   </table.content>
 </AuDataTable>

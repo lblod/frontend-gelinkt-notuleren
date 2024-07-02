@@ -1,90 +1,108 @@
-<div class="au-c-app-chrome"
+<div
+  class='au-c-app-chrome'
   {{did-insert (perform this.fetchParticipants) this.zitting}}
   {{did-insert (perform this.fetchTreatments) this.zitting}}
 >
-  <AuToolbar @size="small" class="au-u-padding-bottom-none" as |Group|>
+  <AuToolbar @size='small' class='au-u-padding-bottom-none' as |Group|>
     <Group>
-      <AuLink @route="inbox.meetings" @skin="secondary" @icon="arrow-left" @iconAlignment="left">
-        {{t "meeting-form.back-button"}}
+      <AuLink
+        @route='inbox.meetings'
+        @skin='secondary'
+        @icon='arrow-left'
+        @iconAlignment='left'
+      >
+        {{t 'meeting-form.back-button'}}
       </AuLink>
-      <span class="au-c-app-chrome__entity">{{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}</span>
+      <span
+        class='au-c-app-chrome__entity'
+      >{{this.currentSession.group.classificatie.label}}
+        {{this.currentSession.group.naam}}</span>
     </Group>
     <Group>
-      <ul class="au-c-list-horizontal au-u-padding-right-tiny">
-        <li class="au-c-list-horizontal__item">
-          {{!--
+      <ul class='au-c-list-horizontal au-u-padding-right-tiny'>
+        <li class='au-c-list-horizontal__item'>
+          {{!
           <span class="au-c-app-chrome__status">
             <AuIcon @icon="alert-triangle" @alignment="left" />
             Wijzigingen niet bewaard
           </span>
-          --}}
+          }}
         </li>
       </ul>
     </Group>
   </AuToolbar>
-  <AuToolbar @size="small" class="au-u-padding-top-none" as |Group|>
+  <AuToolbar @size='small' class='au-u-padding-top-none' as |Group|>
     <Group>
-      <h1 class="au-c-app-chrome__title">{{t "meeting-form.scheduled-text"}} {{plain-date @zitting.geplandeStart}}</h1>
+      <h1 class='au-c-app-chrome__title'>{{t 'meeting-form.scheduled-text'}}
+        {{plain-date @zitting.geplandeStart}}</h1>
       {{#if this.status}}
-        <AuPill @skin="success">
+        <AuPill @skin='success'>
           {{this.status}}
         </AuPill>
       {{/if}}
     </Group>
     <Group>
       {{#unless this.readOnly}}
-        <DeleteMeeting @meeting={{@zitting}}/>
+        <DeleteMeeting @meeting={{@zitting}} />
       {{/unless}}
       {{#if this.isComplete}}
-        <AuButton @skin="secondary" {{on "click" this.goToPublish}}>
-          {{t "meeting-form.publish-button"}}
+        <AuButton @skin='secondary' {{on 'click' this.goToPublish}}>
+          {{t 'meeting-form.publish-button'}}
         </AuButton>
       {{else}}
         <span>
-          <AuIcon @icon="info-circle"/>
-            {{t "meeting-form.incomplete-warning"}}
+          <AuIcon @icon='info-circle' />
+          {{t 'meeting-form.incomplete-warning'}}
         </span>
       {{/if}}
     </Group>
   </AuToolbar>
 </div>
 
-<div id="content" class="au-c-body-container au-c-body-container--scroll au-c-meeting">
-  <div class="au-c-meeting-sidebar au-u-hide-on-print">
-    <ul class="au-c-list-divider">
-      <li class="au-c-list-divider__item">
-        <a href="#sectionOne" class="au-c-link au-c-link--secondary">
-          {{t "meeting-form.first-section-title"}}
+<div
+  id='content'
+  class='au-c-body-container au-c-body-container--scroll au-c-meeting'
+>
+  <div class='au-c-meeting-sidebar au-u-hide-on-print'>
+    <ul class='au-c-list-divider'>
+      <li class='au-c-list-divider__item'>
+        <a href='#sectionOne' class='au-c-link au-c-link--secondary'>
+          {{t 'meeting-form.first-section-title'}}
         </a>
       </li>
       {{#unless this.zitting.isNew}}
-        <li class="au-c-list-divider__item">
-          <a href="#sectionTwo" class="au-c-link au-c-link--secondary">
-            {{t "meeting-form.second-section-title"}}
+        <li class='au-c-list-divider__item'>
+          <a href='#sectionTwo' class='au-c-link au-c-link--secondary'>
+            {{t 'meeting-form.second-section-title'}}
           </a>
         </li>
-        <li class="au-c-list-divider__item">
-          <a href="#sectionThree" class="au-c-link au-c-link--secondary">
-            {{t "meeting-form.third-section-title"}}
+        <li class='au-c-list-divider__item'>
+          <a href='#sectionThree' class='au-c-link au-c-link--secondary'>
+            {{t 'meeting-form.third-section-title'}}
           </a>
         </li>
-        <li class="au-c-list-divider__item">
-          <a href="#sectionFour" class="au-c-link au-c-link--secondary">
-            {{t "meeting-form.fourth-section-title"}}
+        <li class='au-c-list-divider__item'>
+          <a href='#sectionFour' class='au-c-link au-c-link--secondary'>
+            {{t 'meeting-form.fourth-section-title'}}
           </a>
         </li>
-        <li class="au-c-list-divider__item">
-          <a href="#sectionFive" class="au-c-link au-c-link--secondary">
-            {{t "meeting-form.fifth-section-title"}}
+        <li class='au-c-list-divider__item'>
+          <a href='#sectionFive' class='au-c-link au-c-link--secondary'>
+            {{t 'meeting-form.fifth-section-title'}}
           </a>
           {{#if this.fetchTreatments.isRunning}}
-            <p class="loader"><span class="u-visually-hidden">{{t "participation-list.loading-loader"}}</span></p>
+            <p class='loader'><span class='u-visually-hidden'>{{t
+                  'participation-list.loading-loader'
+                }}</span></p>
           {{/if}}
           {{#if this.fetchTreatments.lastSuccessful}}
-            <ol class="au-c-list-numbered">
+            <ol class='au-c-list-numbered'>
               {{#each this.behandelingen as |behandeling|}}
-                <li class="au-c-list-numbered__item">
-                  <a href="#behandeling-{{behandeling.id}}" class="au-c-link au-c-link--secondary">
+                <li class='au-c-list-numbered__item'>
+                  <a
+                    href='#behandeling-{{behandeling.id}}'
+                    class='au-c-link au-c-link--secondary'
+                  >
                     {{behandeling.onderwerp.titel}}
                   </a>
                 </li>
@@ -92,29 +110,41 @@
             </ol>
           {{/if}}
         </li>
-        <li class="au-c-list-divider__item">
-          <a href="#sectionSix" class="au-c-link au-c-link--secondary">
-            {{t "meeting-form.sixth-section-title"}}
+        <li class='au-c-list-divider__item'>
+          <a href='#sectionSix' class='au-c-link au-c-link--secondary'>
+            {{t 'meeting-form.sixth-section-title'}}
           </a>
         </li>
       {{/unless}}
     </ul>
   </div>
-  <div class="au-c-meeting-chrome">
-    <div class="au-c-meeting-chrome__paper">
-      {{!-- Meeting title --}}
+  <div class='au-c-meeting-chrome'>
+    <div class='au-c-meeting-chrome__paper'>
+      {{! Meeting title }}
       <AuHeading>
-        {{t "meeting-form.meeting-heading-part-one"}} {{t this.headerArticleTranslationString}} <span class="au-c-meeting-chrome__highlight">{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
-        {{t "meeting-form.meeting-heading-part-two"}} <span class="au-c-meeting-chrome__highlight">{{detailed-date  this.meetingDateForTitle}}</span>
+        {{t 'meeting-form.meeting-heading-part-one'}}
+        {{t this.headerArticleTranslationString}}
+        <span
+          class='au-c-meeting-chrome__highlight'
+        >{{@zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
+        {{t 'meeting-form.meeting-heading-part-two'}}
+        <span class='au-c-meeting-chrome__highlight'>{{detailed-date
+            this.meetingDateForTitle
+          }}</span>
       </AuHeading>
-      <AuHr @size="large"/>
+      <AuHr @size='large' />
 
-      {{!-- General Information --}}
-      <AuHeading id="sectionOne" @level="2" @skin="3" class="au-c-onboarding-wrapper">
-        {{t "meeting-form.first-section-title"}}
-        <span class="au-c-onboarding">
-          <AuIcon @icon="info-circle"/>
-          {{t "meeting-form.first-section-not-filled-warning"}}
+      {{! General Information }}
+      <AuHeading
+        id='sectionOne'
+        @level='2'
+        @skin='3'
+        class='au-c-onboarding-wrapper'
+      >
+        {{t 'meeting-form.first-section-title'}}
+        <span class='au-c-onboarding'>
+          <AuIcon @icon='info-circle' />
+          {{t 'meeting-form.first-section-not-filled-warning'}}
         </span>
       </AuHeading>
       <Zitting::ManageZittingsdata
@@ -124,8 +154,8 @@
 
       {{#if this.bestuursorgaan}}
         {{#if this.fetchParticipants.isRunning}}
-          <AuLoader @padding="small" />
-          <AuHelpText>{{t "participation-list.loading-title"}}</AuHelpText>
+          <AuLoader @padding='small' />
+          <AuHelpText>{{t 'participation-list.loading-title'}}</AuHelpText>
         {{else}}
 
           <ManageIntermissions
@@ -133,12 +163,17 @@
             @readOnly={{this.readOnly}}
           />
 
-          {{!-- Participation list --}}
-          <AuHeading id="sectionTwo" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
-            {{t "meeting-form.second-section-title"}}
-            <span class="au-c-onboarding">
-              <AuIcon @icon="info-circle"/>
-              {{t "meeting-form.second-section-not-filled-warning"}}
+          {{! Participation list }}
+          <AuHeading
+            id='sectionTwo'
+            @level='2'
+            @skin='3'
+            class='au-c-onboarding-wrapper au-u-margin-top-huge'
+          >
+            {{t 'meeting-form.second-section-title'}}
+            <span class='au-c-onboarding'>
+              <AuIcon @icon='info-circle' />
+              {{t 'meeting-form.second-section-not-filled-warning'}}
             </span>
           </AuHeading>
           <ParticipationList
@@ -151,49 +186,77 @@
             @bestuursorgaan={{this.bestuursorgaan}}
             @onSave={{this.saveParticipationList}}
             @meeting={{this.zitting}}
-            @modalTitle={{t "participation-list.open-modal-button"}}
+            @modalTitle={{t 'participation-list.open-modal-button'}}
             @readOnly={{this.readOnly}}
           />
 
-          {{!-- Agenda --}}
-          <AuHeading id="sectionThree" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
-            {{t "meeting-form.third-section-title"}}
-            <span class="au-c-onboarding">
-              <AuIcon @icon="info-circle"/>
-              {{t "meeting-form.third-section-not-filled-warning"}}
+          {{! Agenda }}
+          <AuHeading
+            id='sectionThree'
+            @level='2'
+            @skin='3'
+            class='au-c-onboarding-wrapper au-u-margin-top-huge'
+          >
+            {{t 'meeting-form.third-section-title'}}
+            <span class='au-c-onboarding'>
+              <AuIcon @icon='info-circle' />
+              {{t 'meeting-form.third-section-not-filled-warning'}}
             </span>
           </AuHeading>
-          <AgendaManager @zittingId={{@zitting.id}} @onSave={{perform this.fetchTreatments}} @readOnly={{this.readOnly}}/>
-          {{!-- Start of meeting --}}
-          <AuHeading id="sectionFour" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
-            {{t "meeting-form.fourth-section-title"}}
-            <span class="au-c-onboarding">
-              <AuIcon @icon="info-circle"/>
-                {{t 'manage-free-text.before'}}
+          <AgendaManager
+            @zittingId={{@zitting.id}}
+            @onSave={{perform this.fetchTreatments}}
+            @readOnly={{this.readOnly}}
+          />
+          {{! Start of meeting }}
+          <AuHeading
+            id='sectionFour'
+            @level='2'
+            @skin='3'
+            class='au-c-onboarding-wrapper au-u-margin-top-huge'
+          >
+            {{t 'meeting-form.fourth-section-title'}}
+            <span class='au-c-onboarding'>
+              <AuIcon @icon='info-circle' />
+              {{t 'manage-free-text.before'}}
             </span>
           </AuHeading>
-        <ReadonlyTextBox @title={{t "behandeling-van-agendapunten.content-title"}}>
-          {{html-safe @zitting.intro}}
-        </ReadonlyTextBox>
-        {{#unless this.readOnly}}
-          <AuLink @route="meetings.edit.intro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
-            {{t "behandeling-van-agendapunten.edit-document"}}
-          </AuLink>
-        {{/unless}}
-          {{!-- Treatment of agenda --}}
-          <AuHeading id="sectionFive" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
-            {{t "meeting-form.fifth-section-title"}}
-            <span class="au-c-onboarding">
-              <AuIcon @icon="info-circle"/>
-              {{t "meeting-form.fifth-section-not-filled-warning"}}
+          <ReadonlyTextBox
+            @title={{t 'behandeling-van-agendapunten.content-title'}}
+          >
+            {{html-safe @zitting.intro}}
+          </ReadonlyTextBox>
+          {{#unless this.readOnly}}
+            <AuLink
+              @route='meetings.edit.intro'
+              @model={{@zitting.id}}
+              @width='block'
+              @skin='button-secondary'
+              @icon='pencil'
+              @iconAlignment='left'
+            >
+              {{t 'behandeling-van-agendapunten.edit-document'}}
+            </AuLink>
+          {{/unless}}
+          {{! Treatment of agenda }}
+          <AuHeading
+            id='sectionFive'
+            @level='2'
+            @skin='3'
+            class='au-c-onboarding-wrapper au-u-margin-top-huge'
+          >
+            {{t 'meeting-form.fifth-section-title'}}
+            <span class='au-c-onboarding'>
+              <AuIcon @icon='info-circle' />
+              {{t 'meeting-form.fifth-section-not-filled-warning'}}
             </span>
           </AuHeading>
 
           {{#if this.fetchTreatments.isRunning}}
-            <AuLoader @padding="small" />
-            <AuHelpText>{{t "participation-list.loading-loader"}}</AuHelpText>
+            <AuLoader @padding='small' />
+            <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
           {{else}}
-            <ol class="au-c-meeting-numbered-list">
+            <ol class='au-c-meeting-numbered-list'>
               {{#each this.behandelingen as |behandeling|}}
                 <li>
                   <BehandelingVanAgendapunt
@@ -207,26 +270,40 @@
               {{/each}}
             </ol>
           {{/if}}
-          {{/if}}
-          {{!-- End of meeting --}}
-          <AuHeading id="sectionSix" @level="2" @skin="3" class="au-c-onboarding-wrapper au-u-margin-top-huge">
-              {{t "meeting-form.sixth-section-title"}}
-              <span class="au-c-onboarding">
-              <AuIcon @icon="info-circle"/>
-                {{t 'manage-free-text.after'}}
-              </span>
-          </AuHeading>
-          <ReadonlyTextBox @title={{t "behandeling-van-agendapunten.content-title"}}>
-            {{html-safe @zitting.outro}}
-          </ReadonlyTextBox>
-          {{#unless this.readOnly}}
-            <AuLink @route="meetings.edit.outro" @model={{@zitting.id}} @width="block" @skin="button-secondary" @icon="pencil" @iconAlignment="left">
-              {{t "behandeling-van-agendapunten.edit-document"}}
-            </AuLink>
-          {{/unless}}
+        {{/if}}
+        {{! End of meeting }}
+        <AuHeading
+          id='sectionSix'
+          @level='2'
+          @skin='3'
+          class='au-c-onboarding-wrapper au-u-margin-top-huge'
+        >
+          {{t 'meeting-form.sixth-section-title'}}
+          <span class='au-c-onboarding'>
+            <AuIcon @icon='info-circle' />
+            {{t 'manage-free-text.after'}}
+          </span>
+        </AuHeading>
+        <ReadonlyTextBox
+          @title={{t 'behandeling-van-agendapunten.content-title'}}
+        >
+          {{html-safe @zitting.outro}}
+        </ReadonlyTextBox>
+        {{#unless this.readOnly}}
+          <AuLink
+            @route='meetings.edit.outro'
+            @model={{@zitting.id}}
+            @width='block'
+            @skin='button-secondary'
+            @icon='pencil'
+            @iconAlignment='left'
+          >
+            {{t 'behandeling-van-agendapunten.edit-document'}}
+          </AuLink>
+        {{/unless}}
       {{else}}
-        <AuHelpText @size="large" @skin="secondary">
-          {{t "meeting-form.bestuursorgan-not-selected-warning"}}
+        <AuHelpText @size='large' @skin='secondary'>
+          {{t 'meeting-form.bestuursorgan-not-selected-warning'}}
         </AuHelpText>
       {{/if}}
     </div>

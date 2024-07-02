@@ -1,5 +1,93 @@
 # frontend-gelinkt-notuleren
 
+## 5.19.1
+
+### Patch Changes
+
+- [#682](https://github.com/lblod/frontend-gelinkt-notuleren/pull/682) [`f92fb55`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f92fb55ab68d98b10b631066872285aed3b0be40) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4853: Seach and sort templates alphabetically
+
+- [#681](https://github.com/lblod/frontend-gelinkt-notuleren/pull/681) [`27a92bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/27a92bdd6b324d7ca34fc8c3ff8f68525c4d4dd9) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fixed copy agendapunt description button
+
+## 5.19.0
+
+### Minor Changes
+
+- [#677](https://github.com/lblod/frontend-gelinkt-notuleren/pull/677) [`5a142bc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5a142bc4db557949bae838d569cf012732be121f) Thanks [@piemonkey](https://github.com/piemonkey)! - Switch to new location-plugin for addresses, including functionality to choose geographic locations from a map
+
+- [#677](https://github.com/lblod/frontend-gelinkt-notuleren/pull/677) [`0166bf1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0166bf15fed0944f26ccc25f7f0b6511b08f57a3) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to latest @lblod/ember-rdfa-editor-lblod-plugins v19.3.0
+
+### Patch Changes
+
+- [#678](https://github.com/lblod/frontend-gelinkt-notuleren/pull/678) [`dabd46e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/dabd46ee6bb276a7814a554b9851247239b2ad1f) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4820: Bump editor and enable copy/pasting variable nodes correctly
+
+- [#676](https://github.com/lblod/frontend-gelinkt-notuleren/pull/676) [`57658bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/57658bdc4c0a03ddff0720803e89ea1a39d099d1) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix bug where selection in link url text was not visible
+
+## 5.18.1
+
+### Patch Changes
+
+- [#675](https://github.com/lblod/frontend-gelinkt-notuleren/pull/675) [`5f0f9eb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5f0f9ebb191003e5aa691e94e72d04fce92fbb5d) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure that exiting dialog does not show up when saving and exiting the intro/outro of a meeting
+
+- [#674](https://github.com/lblod/frontend-gelinkt-notuleren/pull/674) [`2915b7a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2915b7a11f5c7fcc7dbe494be5b07ca26570aa90) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix rendering of documents on revisions page
+
+- [#672](https://github.com/lblod/frontend-gelinkt-notuleren/pull/672) [`eaa66f6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eaa66f66b91addca997a4a469164ec0131e2cdf9) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4825: Show "Insert snippet" when required
+
+- [#669](https://github.com/lblod/frontend-gelinkt-notuleren/pull/669) [`c12b953`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c12b95322424dba1f7a2ab9d5b6f7b3f92e9a7f1) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly tag release builds as latest
+
+## 5.18.0
+
+### Minor Changes
+
+- [`e24b3ad`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e24b3adb110c405dbbf2e212238c8250acc5ec9f) Thanks [@piemonkey](https://github.com/piemonkey)! - Update @lblod/ember-rdfa-editor to 9.10.0 and @lblod/ember-rdfa-editor-lblod-plugins to 19.2.0
+
+### Patch Changes
+
+- [#664](https://github.com/lblod/frontend-gelinkt-notuleren/pull/664) [`6e13b96`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6e13b96760db62e52d025093a0f09adb4dde8521) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Remove wrongly placed text block in the free text section title
+
+- [#663](https://github.com/lblod/frontend-gelinkt-notuleren/pull/663) [`8d5cf63`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8d5cf63ae9fcac55dec258c6c2cee1a11d7f2ccb) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fixed switch labels
+
+## 5.17.2
+
+### Patch Changes
+
+- [`7b5c4fe0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7b5c4fe050076e71bbd3911a3d4b22646f90bbe8) Thanks [@abeforgit](https://github.com/abeforgit)! - Add back structure styling
+
+## 5.17.1
+
+### Patch Changes
+
+- [#659](https://github.com/lblod/frontend-gelinkt-notuleren/pull/659) [`0c7efa22`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0c7efa227b8c8e5f4b7272276b116512cdf07993) Thanks [@dkozickis](https://github.com/dkozickis)! - Apply Prettier to the codebase
+
+- [#662](https://github.com/lblod/frontend-gelinkt-notuleren/pull/662) [`ac651c6c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ac651c6cf3b917dafc11d63235cb1c813f5ed905) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4692: Bump `ember-rdfa-editor-lblod-plugins` and enable `BesluitTopicPlugin`
+
+## 5.17.0
+
+### Minor Changes
+
+- [#661](https://github.com/lblod/frontend-gelinkt-notuleren/pull/661) [`e8c3b562`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e8c3b56223186e22d0fd2818d34e3d0dc4e76112) Thanks [@piemonkey](https://github.com/piemonkey)! - Add support for snippet placeholder nodes in regulatory statements
+
+### Patch Changes
+
+- [#657](https://github.com/lblod/frontend-gelinkt-notuleren/pull/657) [`53d920b3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/53d920b3e78c95b9d021a43a42e185e415367cd6) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4827: Remove RDFA Tools from RDFA Editor
+
+- [#658](https://github.com/lblod/frontend-gelinkt-notuleren/pull/658) [`400d5bfc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/400d5bfcf613bee364f76a7a01576763f041d47c) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4825: Fix fetching snippets from RB
+
+## 5.16.0
+
+### Minor Changes
+
+- [#624](https://github.com/lblod/frontend-gelinkt-notuleren/pull/624) [`3fdce6a3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3fdce6a36e74658d3ccc486e026ab882431abdb8) Thanks [@piemonkey](https://github.com/piemonkey)! - Add hidden support for editing and advanced annotation of RDFa in the editor
+
+### Patch Changes
+
+- [#654](https://github.com/lblod/frontend-gelinkt-notuleren/pull/654) [`7538e800`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7538e8004e869d35da5fa16f1e6991c2fdd623d9) Thanks [@piemonkey](https://github.com/piemonkey)! - Remove duplication of supported locales passed to ember-intl
+
+- [#624](https://github.com/lblod/frontend-gelinkt-notuleren/pull/624) [`f3735717`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3735717c0bcf1250d5efb289b4135d027f35515) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix some deprecation warnings from appuniversum
+
+- [#654](https://github.com/lblod/frontend-gelinkt-notuleren/pull/654) [`4ff629ce`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ff629ce18de37cb340da051bcb43040092aa448) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix CI set-up to correctly fail on test failures and update package-lock to match package.json
+
+- [#624](https://github.com/lblod/frontend-gelinkt-notuleren/pull/624) [`ef39fe32`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ef39fe32c1a8852b3601cc9d282cce1095344ab7) Thanks [@piemonkey](https://github.com/piemonkey)! - Improve editor load times by running some promises in parallel instead of series
+
 ## 5.15.1
 
 ### Patch Changes

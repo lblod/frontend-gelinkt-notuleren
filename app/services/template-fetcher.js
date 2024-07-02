@@ -43,6 +43,7 @@ export default class TemplateFetcher extends Service {
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
       }
       GROUP BY ?template_version ?title ?fileId
+      ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
     `;
     const details = {
       query: sparqlQuery,

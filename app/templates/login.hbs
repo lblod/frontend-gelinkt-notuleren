@@ -1,118 +1,176 @@
 <VoPage>
-  <section class="au-o-region-large">
-      <div class="au-o-layout">
-        <div class="au-o-grid au-o-grid--small">
-          <div class="au-o-grid__item au-u-3-4@small au-u-1-2@medium">
-            <AuContent @skin="large">
-              <h1>{{t "login.app-name"}}</h1>
-              <p class="au-c-heading au-c-heading--4">{{t "login.description"}}</p>
-              <p>{{t "login.problems-text"}} <a class="au-c-link" href="https://overheid.vlaanderen.be/ict/ict-diensten/gebruikersbeheer">{{t "login.gebruikersbeheer"}}</a>.</p>
-              <p>{{t "login.signing-instructions"}}</p>
-            </AuContent>
-          </div>
-          <div class="au-o-grid__item au-u-1-4@small au-u-1-2@medium au-u-text-right@medium">
-            <AuLink @route="authorization.login" @skin="button">
-              {{t "auth.login"}}
-            </AuLink>
-          </div>
+  <section class='au-o-region-large'>
+    <div class='au-o-layout'>
+      <div class='au-o-grid au-o-grid--small'>
+        <div class='au-o-grid__item au-u-3-4@small au-u-1-2@medium'>
+          <AuContent @skin='large'>
+            <h1>{{t 'login.app-name'}}</h1>
+            <p class='au-c-heading au-c-heading--4'>{{t
+                'login.description'
+              }}</p>
+            <p>{{t 'login.problems-text'}}
+              <a
+                class='au-c-link'
+                href='https://overheid.vlaanderen.be/ict/ict-diensten/gebruikersbeheer'
+              >{{t 'login.gebruikersbeheer'}}</a>.</p>
+            <p>{{t 'login.signing-instructions'}}</p>
+          </AuContent>
+        </div>
+        <div
+          class='au-o-grid__item au-u-1-4@small au-u-1-2@medium au-u-text-right@medium'
+        >
+          <AuLink @route='authorization.login' @skin='button'>
+            {{t 'auth.login'}}
+          </AuLink>
         </div>
       </div>
+    </div>
   </section>
 
-  <section class="au-o-region-large au-u-background-gray-200">
-    <div class="au-o-layout">
-      <AuContent @skin="large" class="au-u-margin-bottom">
-        <AuHeading @level="2" @skin="3" class="au-u-margin-bottom">{{t "login.functionality-heading"}}</AuHeading>
-        <p>{{t "login.present-in-manual"}} <a class="au-c-link" href="{{config "manual.baseUrl"}}" target="_blank" rel="noopener noreferrer" >{{t "login.view-manual"}}</a></p>
+  <section class='au-o-region-large au-u-background-gray-200'>
+    <div class='au-o-layout'>
+      <AuContent @skin='large' class='au-u-margin-bottom'>
+        <AuHeading @level='2' @skin='3' class='au-u-margin-bottom'>{{t
+            'login.functionality-heading'
+          }}</AuHeading>
+        <p>{{t 'login.present-in-manual'}}
+          <a
+            class='au-c-link'
+            href='{{config "manual.baseUrl"}}'
+            target='_blank'
+            rel='noopener noreferrer'
+          >{{t 'login.view-manual'}}</a></p>
       </AuContent>
-      <div class="au-o-grid au-o-grid--small">
-        <div class="au-o-grid__item au-u-1-2@small">
-          <AuCard @textCenter="true" as |c|>
-            <c.header @badgeSkin="brand" @badgeIcon="pencil">
-              <AuHeading @level="3" @skin="4">
-                {{t "login.meeting-heading"}}
+      <div class='au-o-grid au-o-grid--small'>
+        <div class='au-o-grid__item au-u-1-2@small'>
+          <AuCard @textCenter='true' as |c|>
+            <c.header @badgeSkin='brand' @badgeIcon='pencil'>
+              <AuHeading @level='3' @skin='4'>
+                {{t 'login.meeting-heading'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t "login.record-your-session"}}</p>
+              <p>{{t 'login.record-your-session'}}</p>
               <ul>
-                <li>{{t "login.meeting-1-1"}} <strong>{{t "login.meeting-1-2"}}</strong> {{t "login.meeting-1-3"}}</li>
-                <li>{{t "login.meeting-2-1"}} <strong>{{t "login.meeting-2-2"}}</strong></li>
-                <li>{{t "login.meeting-3-1"}} <strong>{{t "login.meeting-3-2"}}</strong></li>
+                <li>{{t 'login.meeting-1-1'}}
+                  <strong>{{t 'login.meeting-1-2'}}</strong>
+                  {{t 'login.meeting-1-3'}}</li>
+                <li>{{t 'login.meeting-2-1'}}
+                  <strong>{{t 'login.meeting-2-2'}}</strong></li>
+                <li>{{t 'login.meeting-3-1'}}
+                  <strong>{{t 'login.meeting-3-2'}}</strong></li>
               </ul>
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.notuleren"}}" rel="noopener noreferrer" target="_blank">{{t "login.view-manual"}}</a>
+                <a
+                  class='au-c-button'
+                  href='{{config "manual.baseUrl"}}{{config
+                    "manual.notuleren"
+                  }}'
+                  rel='noopener noreferrer'
+                  target='_blank'
+                >{{t 'login.view-manual'}}</a>
               </p>
             </c.footer>
           </AuCard>
         </div>
 
-        <div class="au-o-grid__item au-u-1-2@small">
-          <AuCard @textCenter="true" as |c|>
-            <c.header @badgeSkin="brand" @badgeIcon="user-popup">
-              <AuHeading @level="3" @skin="4">
-                {{t "login.sign-and-validate"}}
+        <div class='au-o-grid__item au-u-1-2@small'>
+          <AuCard @textCenter='true' as |c|>
+            <c.header @badgeSkin='brand' @badgeIcon='user-popup'>
+              <AuHeading @level='3' @skin='4'>
+                {{t 'login.sign-and-validate'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t "login.sign-description"}}</p>
+              <p>{{t 'login.sign-description'}}</p>
               <ul>
-                <li>{{t "login.sign-1-1"}} <strong>{{t "login.sign-1-2"}}</strong> {{t "login.sign-1-3"}}</li>
-                <li>{{t "login.sign-2-1"}} <strong>{{t "login.sign-2-2"}}</strong></li>
-                <li>{{t "login.sign-3-1"}} <strong>{{t "login.sign-3-2"}}</strong></li>
+                <li>{{t 'login.sign-1-1'}}
+                  <strong>{{t 'login.sign-1-2'}}</strong>
+                  {{t 'login.sign-1-3'}}</li>
+                <li>{{t 'login.sign-2-1'}}
+                  <strong>{{t 'login.sign-2-2'}}</strong></li>
+                <li>{{t 'login.sign-3-1'}}
+                  <strong>{{t 'login.sign-3-2'}}</strong></li>
               </ul>
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.signing"}}" target="_blank" rel="noopener noreferrer">{{t "login.view-manual"}}</a>
+                <a
+                  class='au-c-button'
+                  href='{{config "manual.baseUrl"}}{{config "manual.signing"}}'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >{{t 'login.view-manual'}}</a>
               </p>
             </c.footer>
           </AuCard>
         </div>
 
-        <div class="au-o-grid__item au-u-1-2@small">
-          <AuCard @textCenter="true" as |c|>
-            <c.header @badgeSkin="brand" @badgeIcon="user-fill">
-              <AuHeading @level="3" @skin="4">
-                {{t "login.mandate-management"}}
+        <div class='au-o-grid__item au-u-1-2@small'>
+          <AuCard @textCenter='true' as |c|>
+            <c.header @badgeSkin='brand' @badgeIcon='user-fill'>
+              <AuHeading @level='3' @skin='4'>
+                {{t 'login.mandate-management'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t "login.mandate-description"}}</p>
+              <p>{{t 'login.mandate-description'}}</p>
               <ul>
-                <li>{{t "login.mandate-1-1"}} <strong>{{t "login.mandate-1-2"}}</strong> {{t "login.mandate-1-3"}}</li>
-                <li>{{t "login.mandate-2-1"}} <strong>{{t "login.mandate-2-2"}}</strong></li>
-                <li>{{t "login.mandate-3-1"}} <strong>{{t "login.mandate-3-2"}}</strong></li>
+                <li>{{t 'login.mandate-1-1'}}
+                  <strong>{{t 'login.mandate-1-2'}}</strong>
+                  {{t 'login.mandate-1-3'}}</li>
+                <li>{{t 'login.mandate-2-1'}}
+                  <strong>{{t 'login.mandate-2-2'}}</strong></li>
+                <li>{{t 'login.mandate-3-1'}}
+                  <strong>{{t 'login.mandate-3-2'}}</strong></li>
               </ul>
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.mandatees"}}" target="_blank" rel="noopener noreferrer">{{t "login.view-manual"}}</a>
+                <a
+                  class='au-c-button'
+                  href='{{config "manual.baseUrl"}}{{config
+                    "manual.mandatees"
+                  }}'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >{{t 'login.view-manual'}}</a>
               </p>
             </c.footer>
           </AuCard>
         </div>
 
-        <div class="au-o-grid__item au-u-1-2@small">
-          <AuCard @textCenter="true" as |c|>
-            <c.header @badgeSkin="brand" @badgeIcon="documents">
-              <AuHeading @level="3" @skin="4">
-                {{t "login.publication"}}
+        <div class='au-o-grid__item au-u-1-2@small'>
+          <AuCard @textCenter='true' as |c|>
+            <c.header @badgeSkin='brand' @badgeIcon='documents'>
+              <AuHeading @level='3' @skin='4'>
+                {{t 'login.publication'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t "login.publication-description"}}</p>
+              <p>{{t 'login.publication-description'}}</p>
               <ul>
-                <li>{{t "login.publication-1-1"}} <strong>{{t "login.publication-1-2"}}</strong></li>
-                <li>{{t "login.publication-2-1"}} <strong>{{t "login.publication-2-2"}}</strong> {{t "login.publication-2-3"}} <strong>{{t "login.publication-2-4"}}</strong> {{t "login.publication-2-5"}}</li>
-                <li>{{t "login.publication-3-1"}} <strong>{{t "login.publication-3-2"}}</strong></li>
+                <li>{{t 'login.publication-1-1'}}
+                  <strong>{{t 'login.publication-1-2'}}</strong></li>
+                <li>{{t 'login.publication-2-1'}}
+                  <strong>{{t 'login.publication-2-2'}}</strong>
+                  {{t 'login.publication-2-3'}}
+                  <strong>{{t 'login.publication-2-4'}}</strong>
+                  {{t 'login.publication-2-5'}}</li>
+                <li>{{t 'login.publication-3-1'}}
+                  <strong>{{t 'login.publication-3-2'}}</strong></li>
               </ul>
             </c.content>
             <c.footer>
               <p>
-                <a class="au-c-button" href="{{config "manual.baseUrl"}}{{config "manual.publish"}}" target="_blank" rel="noopener noreferrer">{{t "login.view-manual"}}</a>
+                <a
+                  class='au-c-button'
+                  href='{{config "manual.baseUrl"}}{{config "manual.publish"}}'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >{{t 'login.view-manual'}}</a>
               </p>
             </c.footer>
           </AuCard>

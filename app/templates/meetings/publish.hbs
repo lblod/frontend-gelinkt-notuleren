@@ -1,54 +1,88 @@
-<div class="au-c-app-chrome">
-  <AuToolbar @size="small" class="au-u-padding-top-none au-u-padding-bottom-none" as |Group|>
+<div class='au-c-app-chrome'>
+  <AuToolbar
+    @size='small'
+    class='au-u-padding-top-none au-u-padding-bottom-none'
+    as |Group|
+  >
     <Group>
-      <AuLink @route="meetings.edit" @model={{@model.id}} @skin="secondary" @icon="arrow-left" @iconAlignment="left">
-        {{t "publish.back-to-meeting"}}
+      <AuLink
+        @route='meetings.edit'
+        @model={{@model.id}}
+        @skin='secondary'
+        @icon='arrow-left'
+        @iconAlignment='left'
+      >
+        {{t 'publish.back-to-meeting'}}
       </AuLink>
-      <span class="au-c-app-chrome__entity">{{t "publish.heading-part-one"}} {{detailed-date this.model.geplandeStart}}</span>
+      <span class='au-c-app-chrome__entity'>{{t 'publish.heading-part-one'}}
+        {{detailed-date this.model.geplandeStart}}</span>
     </Group>
     <Group>
-      <AuDropdown @title="{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}" @buttonLabel="Account settings" @alignment="right">
-        {{!-- template-lint-disable require-context-role --}}
-        <AuLink @route="authorization.switch" @icon='switch' role="menuitem">{{t "auth.switch-administrative-unit"}}</AuLink>
-        <AuLink @route="authorization.logout" @icon='logout' role="menuitem">{{t "auth.logout"}}</AuLink>
+      <AuDropdown
+        @title='{{this.currentSession.user.voornaam}} {{this.currentSession.user.achternaam}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}'
+        @buttonLabel='Account settings'
+        @alignment='right'
+      >
+        {{! template-lint-disable require-context-role }}
+        <AuLink @route='authorization.switch' @icon='switch' role='menuitem'>{{t
+            'auth.switch-administrative-unit'
+          }}</AuLink>
+        <AuLink @route='authorization.logout' @icon='logout' role='menuitem'>{{t
+            'auth.logout'
+          }}</AuLink>
       </AuDropdown>
     </Group>
   </AuToolbar>
 </div>
 <AuMainContainer as |m|>
   <m.sidebar>
-    <div class="au-c-sidebar">
-      <div class="au-c-sidebar__content">
+    <div class='au-c-sidebar'>
+      <div class='au-c-sidebar__content'>
         <nav>
-          <ul class="au-c-list-navigation">
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="meetings.publish.agenda" @model={{@model.id}}>
-                <AuIcon @icon="calendar" @alignment="left" />
-                {{t "meetings.publish.agenda.title"}}
+          <ul class='au-c-list-navigation'>
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink
+                @route='meetings.publish.agenda'
+                @model={{@model.id}}
+              >
+                <AuIcon @icon='calendar' @alignment='left' />
+                {{t 'meetings.publish.agenda.title'}}
               </AuNavigationLink>
             </li>
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="meetings.publish.besluitenlijst" @model={{@model.id}}>
-                <AuIcon @icon="unordered-list" @alignment="left" />
-                {{t "meetings.publish.decision-list.title"}}
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink
+                @route='meetings.publish.besluitenlijst'
+                @model={{@model.id}}
+              >
+                <AuIcon @icon='unordered-list' @alignment='left' />
+                {{t 'meetings.publish.decision-list.title'}}
               </AuNavigationLink>
             </li>
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="meetings.publish.uittreksels" @model={{@model.id}}>
-                <AuIcon @icon="documents" @alignment="left" />
-                {{t "meetings.publish.extracts.title"}}
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink
+                @route='meetings.publish.uittreksels'
+                @model={{@model.id}}
+              >
+                <AuIcon @icon='documents' @alignment='left' />
+                {{t 'meetings.publish.extracts.title'}}
               </AuNavigationLink>
             </li>
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="meetings.publish.notulen" @model={{@model.id}}>
-                <AuIcon @icon="document" @alignment="left" />
-                {{t "meetings.publish.document.title"}}
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink
+                @route='meetings.publish.notulen'
+                @model={{@model.id}}
+              >
+                <AuIcon @icon='document' @alignment='left' />
+                {{t 'meetings.publish.document.title'}}
               </AuNavigationLink>
             </li>
-            <li class="au-c-list-navigation__item">
-              <AuNavigationLink @route="meetings.publish.publication-actions" @model={{@model.id}}>
-                <AuIcon @icon="book" @alignment="left" />
-                {{t "meetings.publish.publication-actions.title"}}
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink
+                @route='meetings.publish.publication-actions'
+                @model={{@model.id}}
+              >
+                <AuIcon @icon='book' @alignment='left' />
+                {{t 'meetings.publish.publication-actions.title'}}
               </AuNavigationLink>
             </li>
           </ul>
@@ -57,7 +91,7 @@
     </div>
   </m.sidebar>
   <m.content @scroll={{true}}>
-    <div id="content" tabindex="-1">
+    <div id='content' tabindex='-1'>
       {{!-- <p>Each of these subroutes will present the contents of the document with current title <strong><quote>{{model.currentVersion.title}}</quote></strong></p> --}}
       {{outlet}}
     </div>

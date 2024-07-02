@@ -1,57 +1,77 @@
 {{#if this.editStemming.stemming.geheim}}
-<div class="au-u-margin-top au-u-margin-bottom">
-  <AuHeading @level="4" @skin="5">{{t "voting-manage-voting.subtitle"}}</AuHeading>
-  <div class="au-o-grid">
-    <div class="au-o-grid__item au-u-1-3">
-      <AuLabel for="amount-pro">
-        {{t "voting-modal.aantal-voorstanders-label"}}
-      </AuLabel>
-      <Input id="amount-pro" class="au-c-input au-c-input--block" @type="number"
-        @value={{this.editStemming.stemming.aantalVoorstanders}} min="0"
-        disabled={{not this.editStemming.stemming.geheim}} />
-    </div>
-    <div class="au-o-grid__item au-u-1-3">
-      <AuLabel for="amount-con">
-        {{t "voting-modal.aantal-tegenstanders-label"}}
-      </AuLabel>
-      <Input id="amount-con" class="au-c-input au-c-input--block" @type="number"
-        @value={{this.editStemming.stemming.aantalTegenstanders}} min="0"
-        disabled={{not this.editStemming.stemming.geheim}} />
-    </div>
-    <div class="au-o-grid__item au-u-1-3">
-      <AuLabel for="amount-none">
-        {{t "voting-modal.aantal-onthouders-label"}}
-      </AuLabel>
-      <Input id="amount-none" class="au-c-input au-c-input--block" @type="number"
-        @value={{this.editStemming.stemming.aantalOnthouders}} min="0"
-        disabled={{not this.editStemming.stemming.geheim}} />
+  <div class='au-u-margin-top au-u-margin-bottom'>
+    <AuHeading @level='4' @skin='5'>{{t
+        'voting-manage-voting.subtitle'
+      }}</AuHeading>
+    <div class='au-o-grid'>
+      <div class='au-o-grid__item au-u-1-3'>
+        <AuLabel for='amount-pro'>
+          {{t 'voting-modal.aantal-voorstanders-label'}}
+        </AuLabel>
+        <Input
+          id='amount-pro'
+          class='au-c-input au-c-input--block'
+          @type='number'
+          @value={{this.editStemming.stemming.aantalVoorstanders}}
+          min='0'
+          disabled={{not this.editStemming.stemming.geheim}}
+        />
+      </div>
+      <div class='au-o-grid__item au-u-1-3'>
+        <AuLabel for='amount-con'>
+          {{t 'voting-modal.aantal-tegenstanders-label'}}
+        </AuLabel>
+        <Input
+          id='amount-con'
+          class='au-c-input au-c-input--block'
+          @type='number'
+          @value={{this.editStemming.stemming.aantalTegenstanders}}
+          min='0'
+          disabled={{not this.editStemming.stemming.geheim}}
+        />
+      </div>
+      <div class='au-o-grid__item au-u-1-3'>
+        <AuLabel for='amount-none'>
+          {{t 'voting-modal.aantal-onthouders-label'}}
+        </AuLabel>
+        <Input
+          id='amount-none'
+          class='au-c-input au-c-input--block'
+          @type='number'
+          @value={{this.editStemming.stemming.aantalOnthouders}}
+          min='0'
+          disabled={{not this.editStemming.stemming.geheim}}
+        />
+      </div>
     </div>
   </div>
-</div>
 {{else}}
 
-<AuButtonGroup class="au-u-margin-top-small au-c-button-group-fix">
-  <AuButton
-    @icon="check"
-    @iconAlignment="left"
-    @skin="secondary"
-    {{on "click" this.editStemming.setUnaniemVoorstander}}>{{t "voting-manage-voting.set-unaniem-voorstander-button"}}
-  </AuButton>
+  <AuButtonGroup class='au-u-margin-top-small au-c-button-group-fix'>
+    <AuButton
+      @icon='check'
+      @iconAlignment='left'
+      @skin='secondary'
+      {{on 'click' this.editStemming.setUnaniemVoorstander}}
+    >{{t 'voting-manage-voting.set-unaniem-voorstander-button'}}
+    </AuButton>
 
-  <AuButton
-    @icon="cross"
-    @iconAlignment="left"
-    @skin="secondary"
-    {{on "click" this.editStemming.setUnaniemTegenstander}}>{{t "voting-manage-voting.set-unaniem-tegenstander-button"}}
-  </AuButton>
+    <AuButton
+      @icon='cross'
+      @iconAlignment='left'
+      @skin='secondary'
+      {{on 'click' this.editStemming.setUnaniemTegenstander}}
+    >{{t 'voting-manage-voting.set-unaniem-tegenstander-button'}}
+    </AuButton>
 
-  <AuButton
-    @icon="user"
-    @iconAlignment="left"
-    @skin="secondary"
-    {{on "click" this.editStemming.setUnaniemOnthouder}}>{{t "voting-manage-voting.set-unaniem-onthouder-button"}}
-  </AuButton>
-</AuButtonGroup>
+    <AuButton
+      @icon='user'
+      @iconAlignment='left'
+      @skin='secondary'
+      {{on 'click' this.editStemming.setUnaniemOnthouder}}
+    >{{t 'voting-manage-voting.set-unaniem-onthouder-button'}}
+    </AuButton>
+  </AuButtonGroup>
 
 {{/if}}
 <Treatment::Voting::VoterTable @manageVotes={{this.manageVotes}} />

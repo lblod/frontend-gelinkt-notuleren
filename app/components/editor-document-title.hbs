@@ -1,47 +1,53 @@
 {{#if @readOnly}}
-  <h1 class="au-c-app-chrome__title" title={{this.title}}>
+  <h1 class='au-c-app-chrome__title' title={{this.title}}>
     {{limit-content this.title 70}}
   </h1>
 {{else}}
   {{#if this.active}}
-    <form {{on 'submit' this.submit}} {{on "focusout" this.submit}}>
-      <div class="au-c-app-chrome__title-group">
+    <form {{on 'submit' this.submit}} {{on 'focusout' this.submit}}>
+      <div class='au-c-app-chrome__title-group'>
         {{#let (unique-id) as |id|}}
-<AuLabel for={{id}} class="au-u-hidden-visually">
-            {{t "editor-document-title-agendapoint-title"}}
+          <AuLabel for={{id}} class='au-u-hidden-visually'>
+            {{t 'editor-document-title-agendapoint-title'}}
           </AuLabel>
-            <input
-              class="au-c-app-chrome__title-input {{if this.isInvalidTitle "au-c-input--error"}}"
-              placeholder={{t "editor-document-title.placeholder"}}
-              id={{id}}
-              type="text"
-              value={{this.title}}
-              {{on "input" this.setTitle}}
-              {{on "keydown" this.cancelOnEscape}}
-              {{did-insert this.focus}}
-            />
+          <input
+            class='au-c-app-chrome__title-input
+              {{if this.isInvalidTitle "au-c-input--error"}}'
+            placeholder={{t 'editor-document-title.placeholder'}}
+            id={{id}}
+            type='text'
+            value={{this.title}}
+            {{on 'input' this.setTitle}}
+            {{on 'keydown' this.cancelOnEscape}}
+            {{did-insert this.focus}}
+          />
         {{/let}}
         <AuButton
-          type="submit"
-          class="au-c-app-chrome__title-button"
-          @skin="secondary"
-          @icon="check"
+          type='submit'
+          class='au-c-app-chrome__title-button'
+          @skin='secondary'
+          @icon='check'
           @hideText={{true}}
           @disabled={{this.isInvalidTitle}}
-        >{{t "editor-document-title.change-title"}}</AuButton>
+        >{{t 'editor-document-title.change-title'}}</AuButton>
       </div>
     </form>
   {{else}}
-    <h1 class="au-c-app-chrome__title au-c-app-chrome__title--edit" title={{this.title}}>
+    <h1
+      class='au-c-app-chrome__title au-c-app-chrome__title--edit'
+      title={{this.title}}
+    >
       {{limit-content this.title 70}}
-      <AuButton {{on "click" this.enableEdit}} @icon="pencil" @skin="link" @hideText={{true}} >{{t "editor-document-title.change-title"}}</AuButton>
+      <AuButton
+        {{on 'click' this.enableEdit}}
+        @icon='pencil'
+        @skin='link'
+        @hideText={{true}}
+      >{{t 'editor-document-title.change-title'}}</AuButton>
     </h1>
     {{#if this.showIsSavedTask.isRunning}}
-      <AuPill
-        @skin="success"
-        @icon="check"
-      >
-        {{t "editor-document-title.title-saved"}}
+      <AuPill @skin='success' @icon='check'>
+        {{t 'editor-document-title.title-saved'}}
       </AuPill>
     {{/if}}
   {{/if}}

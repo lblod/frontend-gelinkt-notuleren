@@ -8,36 +8,61 @@
 
   <:actions>
     <AgendapointMenu @documentContainer={{this.documentContainer}} />
-    <AuDropdown @title={{t "utils.file-options"}} @buttonLabel={{t "utils.file-options"}} @alignment="right">
-      {{!-- template-lint-disable require-context-role --}}
-      <AuButton {{on "click" this.download}} @skin="link" role="menuitem">
-        <AuIcon @icon="export" @alignment="left" />
-        {{t "utils.html-export"}}
+    <AuDropdown
+      @title={{t 'utils.file-options'}}
+      @buttonLabel={{t 'utils.file-options'}}
+      @alignment='right'
+    >
+      {{! template-lint-disable require-context-role }}
+      <AuButton {{on 'click' this.download}} @skin='link' role='menuitem'>
+        <AuIcon @icon='export' @alignment='left' />
+        {{t 'utils.html-export'}}
       </AuButton>
     </AuDropdown>
-    <AuButton @icon="redo" @skin="primary" @disabled={{eq this.revisionDetail.id this.model.editorDocument.id}}  @iconAlignment="left" {{on "click" (fn this.confirmRevisionsToRemove this.revisionDetail)}}>
-      {{t "agendapoint.restore"}}
+    <AuButton
+      @icon='redo'
+      @skin='primary'
+      @disabled={{eq this.revisionDetail.id this.model.editorDocument.id}}
+      @iconAlignment='left'
+      {{on 'click' (fn this.confirmRevisionsToRemove this.revisionDetail)}}
+    >
+      {{t 'agendapoint.restore'}}
     </AuButton>
   </:actions>
 </AppChrome>
-<AuMainContainer class="au-c-app-chrome-container" as |m|>
+<AuMainContainer class='au-c-app-chrome-container' as |m|>
   <m.sidebar>
-    <div class="au-c-sidebar">
-      <div class="au-c-sidebar__header">
-        <h6 class="au-c-heading au-c-heading--6">
-          {{t "agendapoint.saved-versions"}}
+    <div class='au-c-sidebar'>
+      <div class='au-c-sidebar__header'>
+        <h6 class='au-c-heading au-c-heading--6'>
+          {{t 'agendapoint.saved-versions'}}
         </h6>
       </div>
-      <div class="au-c-sidebar__content">
-        <ul class="au-c-list-navigation">
+      <div class='au-c-sidebar__content'>
+        <ul class='au-c-list-navigation'>
           {{#each this.orderedRevisions as |revision|}}
-            <li class="au-c-list-navigation__item">
-              <AuButton @skin="link" @icon="document" @iconAlignment="left" class="au-c-button--pill au-c-list-navigation__link {{if (eq revision.updatedOn this.revisionDetail.updatedOn) 'active'}}" {{on "click" (fn this.details revision)}}>
-                <span class="au-c-button__text">
-                  {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}
+            <li class='au-c-list-navigation__item'>
+              <AuButton
+                @skin='link'
+                @icon='document'
+                @iconAlignment='left'
+                class='au-c-button--pill au-c-list-navigation__link
+                  {{if
+                    (eq revision.updatedOn this.revisionDetail.updatedOn)
+                    "active"
+                  }}'
+                {{on 'click' (fn this.details revision)}}
+              >
+                <span class='au-c-button__text'>
+                  {{human-friendly-date
+                    revision.updatedOn
+                    locale=this.intl.primaryLocale
+                  }}
                 </span>
                 {{#if (eq revision.id this.model.editorDocument.id)}}
-                  <AuPill @size="small" class="au-u-margin-left-tiny">{{t "agendapoint.current-version"}}</AuPill>
+                  <AuPill @size='small' class='au-u-margin-left-tiny'>{{t
+                      'agendapoint.current-version'
+                    }}</AuPill>
                 {{/if}}
               </AuButton>
             </li>
@@ -48,13 +73,15 @@
   </m.sidebar>
   <m.content>
     <AuBodyContainer @scroll={{false}}>
-      <div class="au-c-rdfa-editor">
-        <div class="say-container say-container--sidebar-left say-container--paper">
-          <div class="say-container__main">
-            <div class="say-editor">
-              <div class="say-editor__paper">
-                <div class="say-editor__inner say-content">
-                  {{html-safe this.revisionDetail.htmlSafeContent}}
+      <div class='au-c-rdfa-editor'>
+        <div
+          class='say-container say-container--sidebar-left say-container--paper'
+        >
+          <div class='say-container__main'>
+            <div class='say-editor'>
+              <div class='say-editor__paper'>
+                <div class='say-editor__inner say-content'>
+                  {{this.revisionDetail.htmlSafeContent}}
                 </div>
               </div>
             </div>
@@ -66,30 +93,41 @@
 </AuMainContainer>
 
 <AuModal
-  @title={{t "agendapoint.revisions-modal-title"}}
+  @title={{t 'agendapoint.revisions-modal-title'}}
   @modalOpen={{this.showConfirmationModal}}
-  @closeModal={{this.cancelConfirmRevisionsToRemove}} as |Modal| >
+  @closeModal={{this.cancelConfirmRevisionsToRemove}}
+  as |Modal|
+>
   <Modal.Body>
     <AuContent>
       {{#if this.revisionsToRemove}}
-        <p class="u-spacer--small">{{t "agendapoint.modify-warning"}}</p>
-        <ul class="numbered-list">
+        <p class='u-spacer--small'>{{t 'agendapoint.modify-warning'}}</p>
+        <ul class='numbered-list'>
           {{#each this.revisionsToRemove as |revision|}}
-            <li class="u-hr u-padding--bottom--small">
-              <AuHeading @level="4" @skin="5">{{t "agendapoint.version-of"}} {{human-friendly-date revision.updatedOn locale=this.intl.primaryLocale}}</AuHeading>
-              <p class="au-u-muted">{{revision.title}}</p>
+            <li class='u-hr u-padding--bottom--small'>
+              <AuHeading @level='4' @skin='5'>{{t 'agendapoint.version-of'}}
+                {{human-friendly-date
+                  revision.updatedOn
+                  locale=this.intl.primaryLocale
+                }}</AuHeading>
+              <p class='au-u-muted'>{{revision.title}}</p>
             </li>
           {{/each}}
         </ul>
-    {{else}}
-        <p class="au-u-muted">{{t "agendapoint.no-new-versions"}}</p>
+      {{else}}
+        <p class='au-u-muted'>{{t 'agendapoint.no-new-versions'}}</p>
       {{/if}}
     </AuContent>
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>
-      <AuButton {{on "click" this.restore}}>{{t "agendapoint.restore-version"}}</AuButton>
-      <AuButton @skin="secondary" {{on "click" this.cancelConfirmRevisionsToRemove}}>{{t "participation-list-modal.cancel-button"}}</AuButton>
+      <AuButton {{on 'click' this.restore}}>{{t
+          'agendapoint.restore-version'
+        }}</AuButton>
+      <AuButton
+        @skin='secondary'
+        {{on 'click' this.cancelConfirmRevisionsToRemove}}
+      >{{t 'participation-list-modal.cancel-button'}}</AuButton>
     </AuButtonGroup>
   </Modal.Footer>
 </AuModal>

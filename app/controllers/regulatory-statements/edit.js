@@ -14,15 +14,18 @@ import {
   underline,
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
-  block_rdfa,
+  blockRdfaWithConfig,
   docWithConfig,
   hard_break,
   horizontal_rule,
-  invisible_rdfa,
   paragraph,
-  repaired_block,
+  repairedBlockWithConfig,
   text,
 } from '@lblod/ember-rdfa-editor/nodes';
+import {
+  inlineRdfaWithConfigView,
+  inlineRdfaWithConfig,
+} from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 import {
   tableKeymap,
   tableNodes,
@@ -48,15 +51,23 @@ import {
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
-import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
-import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
-  address,
-  addressView,
+  createInvisiblesPlugin,
+  hardBreak,
+  heading as headingInvisible,
+  paragraph as paragraphInvisible,
+} from '@lblod/ember-rdfa-editor/plugins/invisibles';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
+import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
+import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
+import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
+import {
   codelist,
   codelistView,
   date,
@@ -68,22 +79,20 @@ import {
   text_variable,
   textVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
-import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
-  createInvisiblesPlugin,
-  hardBreak,
-  heading as headingInvisible,
-  paragraph as paragraphInvisible,
-} from '@lblod/ember-rdfa-editor/plugins/invisibles';
+  osloLocation,
+  osloLocationView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/node';
+import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
   tableOfContentsView,
   table_of_contents,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/table-of-contents-plugin/nodes';
-import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { document_title } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-title-plugin/nodes';
-import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
-import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
+import {
+  snippetPlaceholder,
+  snippetPlaceholderView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet-placeholder';
 
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
@@ -91,6 +100,8 @@ import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
+
+import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -102,17 +113,19 @@ export default class RegulatoryStatementsRoute extends Controller {
   @service intl;
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
+  SnippetInsert = SnippetInsertRdfaComponent;
 
   schema = new Schema({
     nodes: {
       doc: docWithConfig({
         content:
           'table_of_contents? document_title? ((chapter|block)+|(title|block)+|(article|block)+)',
+        rdfaAware: true,
       }),
       paragraph,
       document_title,
       table_of_contents: table_of_contents(this.config.tableOfContents),
-      repaired_block,
+      repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
       list_item: listItemWithConfig({ enableHierarchicalList: true }),
       ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
       bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
@@ -122,23 +135,23 @@ export default class RegulatoryStatementsRoute extends Controller {
       date: date(this.config.date),
       codelist,
       location,
-      address,
+      oslo_location: osloLocation(this.config.location),
       number,
       text_variable,
       ...STRUCTURE_NODES,
-      heading,
+      heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
       horizontal_rule,
       code_block,
       text,
       image,
       hard_break,
-      invisible_rdfa,
-      block_rdfa,
+      block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
+      inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
+      snippet_placeholder: snippetPlaceholder,
     },
     marks: {
-      inline_rdfa,
       em,
       strong,
       underline,
@@ -158,13 +171,15 @@ export default class RegulatoryStatementsRoute extends Controller {
         ),
         link: linkView(this.config.link)(controller),
         image: imageView(controller),
-        address: addressView(controller),
+        oslo_location: osloLocationView(this.config.location)(controller),
         date: dateView(this.config.date)(controller),
         number: numberView(controller),
         location: locationView(controller),
         codelist: codelistView(controller),
         text_variable: textVariableView(controller),
         templateComment: templateCommentView(controller),
+        inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+        snippet_placeholder: snippetPlaceholderView(controller),
       };
     };
   }
@@ -184,6 +199,13 @@ export default class RegulatoryStatementsRoute extends Controller {
       emberApplication({ application: getOwner(this) }),
       listTrackingPlugin(),
     ];
+  }
+
+  get activeNode() {
+    if (this.controller) {
+      return getActiveEditableNode(this.controller.activeEditorState);
+    }
+    return null;
   }
 
   get config() {
@@ -231,10 +253,21 @@ export default class RegulatoryStatementsRoute extends Controller {
       structures: STRUCTURE_SPECS,
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
-        defaultAdministrativeUnit: municipality && {
+        defaultAdministrativeUnit: municipality.uri && {
           label: municipality.naam,
           uri: municipality.uri,
         },
+      },
+      snippet: {
+        endpoint: ENV.regulatoryStatementEndpoint,
+      },
+      location: {
+        defaultPointUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/geometrie/',
+        defaultPlaceUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/',
+        defaultAddressUriRoot:
+          'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
       },
     };
   }
@@ -284,7 +317,8 @@ export default class RegulatoryStatementsRoute extends Controller {
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
       return this.currentSession.group;
     } else {
-      return null;
+      // Return empty object instead of null so can be used safely in template
+      return {};
     }
   }
 
