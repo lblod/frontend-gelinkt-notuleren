@@ -5,7 +5,10 @@ export default class BestuursfunctieCodeModel extends Model {
   @attr scopeNote;
   @attr uri;
 
-  @hasMany('bestuursorgaan-classificatie-code', { inverse: 'standaardType' })
+  @hasMany('bestuursorgaan-classificatie-code', {
+    inverse: 'standaardType',
+    async: true,
+  })
   standaardTypeVan;
 
   rdfaBindings = {

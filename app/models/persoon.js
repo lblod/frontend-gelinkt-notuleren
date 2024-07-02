@@ -6,13 +6,16 @@ export default class PersoonModel extends Model {
   @attr alternatieveNaam;
   @attr gebruikteVoornaam;
 
-  @belongsTo('geboorte', { inverse: null }) geboorte;
-  @belongsTo('identificator', { inverse: null }) identificator;
-  @belongsTo('geslacht-code', { inverse: null }) geslacht;
+  @belongsTo('geboorte', { inverse: null, async: true }) geboorte;
+  @belongsTo('identificator', { inverse: null, async: true }) identificator;
+  @belongsTo('geslacht-code', { inverse: null, async: true }) geslacht;
 
-  @hasMany('mandataris', { inverse: 'isBestuurlijkeAliasVan' }) isAangesteldAls;
-  @hasMany('kandidatenlijst', { inverse: 'kandidaten' }) isKandidaatVoor;
-  @hasMany('verkiezingsresultaat', { inverse: null }) verkiezingsresultaten;
+  @hasMany('mandataris', { inverse: 'isBestuurlijkeAliasVan', async: true })
+  isAangesteldAls;
+  @hasMany('kandidatenlijst', { inverse: 'kandidaten', async: true })
+  isKandidaatVoor;
+  @hasMany('verkiezingsresultaat', { inverse: null, async: true })
+  verkiezingsresultaten;
 
   get fullName() {
     return `${this.gebruikteVoornaam} ${this.achternaam}`;

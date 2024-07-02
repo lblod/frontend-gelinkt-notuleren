@@ -9,19 +9,21 @@ export default class MandatarisModel extends Model {
   @attr('datetime') datumMinistrieelBesluit;
   @attr generatedFrom;
 
-  @belongsTo('mandaat', { inverse: null }) bekleedt;
-  @belongsTo('lidmaatschap', { inverse: 'lid' }) heeftLidmaatschap;
-  @belongsTo('persoon', { inverse: 'isAangesteldAls' }) isBestuurlijkeAliasVan;
-  @belongsTo('mandataris-status-code', { inverse: null }) status;
+  @belongsTo('mandaat', { inverse: null, async: true }) bekleedt;
+  @belongsTo('lidmaatschap', { inverse: 'lid', async: true }) heeftLidmaatschap;
+  @belongsTo('persoon', { inverse: 'isAangesteldAls', async: true })
+  isBestuurlijkeAliasVan;
+  @belongsTo('mandataris-status-code', { inverse: null, async: true }) status;
 
-  @hasMany('mandataris', { inverse: null }) tijdelijkeVervangingen;
-  @hasMany('beleidsdomein-code', { inverse: 'mandatarissen' }) beleidsdomein;
-  @hasMany('behandeling-van-agendapunt', { inverse: null })
+  @hasMany('mandataris', { inverse: null, async: true }) tijdelijkeVervangingen;
+  @hasMany('beleidsdomein-code', { inverse: 'mandatarissen', async: true })
+  beleidsdomein;
+  @hasMany('behandeling-van-agendapunt', { inverse: null, async: true })
   aanwezigBijBehandeling;
-  @hasMany('behandeling-van-agendapunt', { inverse: null })
+  @hasMany('behandeling-van-agendapunt', { inverse: null, async: true })
   afwezigBijBehandeling;
-  @hasMany('zitting', { inverse: null }) aanwezigBijZitting;
-  @hasMany('zitting', { inverse: null }) afwezigBijZitting;
+  @hasMany('zitting', { inverse: null, async: true }) aanwezigBijZitting;
+  @hasMany('zitting', { inverse: null, async: true }) afwezigBijZitting;
 
   rdfaBindings = {
     class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris',

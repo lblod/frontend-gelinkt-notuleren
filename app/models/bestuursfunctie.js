@@ -3,9 +3,10 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 export default class BestuursfunctieModel extends Model {
   @attr uri;
 
-  @belongsTo('bestuursfunctie-code', { inverse: null }) rol;
+  @belongsTo('bestuursfunctie-code', { inverse: null, async: true }) rol;
 
-  @hasMany('bestuursorgaan', { inverse: 'bevatBestuursfunctie' }) bevatIn;
+  @hasMany('bestuursorgaan', { inverse: 'bevatBestuursfunctie', async: true })
+  bevatIn;
 
   rdfaBindings = {
     class:

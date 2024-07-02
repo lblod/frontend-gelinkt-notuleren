@@ -33,19 +33,16 @@ export default class RdfaEditorContainerComponent extends Component {
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
    * see https://github.com/emberjs/ember.js/issues/19369
    */
-  setUpPrefixAttr = modifier(
-    (element) => {
-      element.setAttribute(
-        'prefix',
-        this.prefixToAttrString(this.documentContext.prefix),
-      );
-      this.ready = true;
-      return () => {
-        this.ready = false;
-      };
-    },
-    { eager: false },
-  );
+  setUpPrefixAttr = modifier((element) => {
+    element.setAttribute(
+      'prefix',
+      this.prefixToAttrString(this.documentContext.prefix),
+    );
+    this.ready = true;
+    return () => {
+      this.ready = false;
+    };
+  });
 
   get plugins() {
     const plugins = this.args.plugins || [];

@@ -5,11 +5,11 @@ export default class KandidatenlijstModel extends Model {
   @attr lijstnaam;
   @attr lijstnummer;
 
-  @belongsTo('lijsttype', { inverse: null }) lijsttype;
-  @belongsTo('rechtstreekse-verkiezing', { inverse: 'heeftLijst' })
+  @belongsTo('lijsttype', { inverse: null, async: true }) lijsttype;
+  @belongsTo('rechtstreekse-verkiezing', { inverse: 'heeftLijst', async: true })
   rechtstreekseVerkiezing;
 
-  @hasMany('persoon', { inverse: 'isKandidaatVoor' }) kandidaten;
+  @hasMany('persoon', { inverse: 'isKandidaatVoor', async: true }) kandidaten;
 
   rdfaBindings = {
     lijstnaam: 'http://www.w3.org/2004/02/skos/core#prefLabel',
