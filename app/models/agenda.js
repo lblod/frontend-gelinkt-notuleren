@@ -7,7 +7,7 @@ export default class Agenda extends Model {
   @attr renderedContent;
   @attr('boolean', { defaultValue: false }) deleted;
 
-  @belongsTo('zitting', { inverse: null }) zitting;
+  @belongsTo('zitting', { inverse: null, polymorphic: true }) zitting;
   @belongsTo('published-resource', { inverse: 'agenda' }) publishedResource;
 
   @hasMany('signed-resource', { inverse: 'agenda' }) signedResources;

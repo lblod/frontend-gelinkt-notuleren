@@ -18,12 +18,24 @@
         </Group>
         <Group class='au-c-toolbar__group--center au-u-hide-on-print'>
           {{#unless this.readOnly}}
-            <AuLink
-              @route='inbox.meetings.new'
-              @skin='button'
-              @icon='add'
-              @iconAlignment='left'
-            >{{t 'inbox.meetings.new.title'}}</AuLink>
+            <AuDropdown
+              @skin='primary'
+              @title={{t 'inbox.meetings.new.title'}}
+              @alignment='left'
+              @icon='chevron-down'
+              role='menu'
+            >
+              <AuLink @route='inbox.meetings.new' role='menuitem'>
+                {{t 'inbox.meetings.new.common-meeting.title'}}
+              </AuLink>
+              <AuButton
+                @skin='link'
+                {{on 'click' this.createInaugurationMeeting}}
+                role='menuitem'
+              >
+                {{t 'inbox.meetings.new.inauguration-meeting.title'}}
+              </AuButton>
+            </AuDropdown>
           {{/unless}}
         </Group>
       </AuToolbar>
@@ -52,11 +64,12 @@
     </c.header>
     <c.body as |meeting|>
       <td>
-        <LinkTo
-          @route='meetings.edit'
-          @model={{meeting.id}}
-          class='au-c-link'
-        >{{t 'inbox.meetings.meeting-of'}}
+        <LinkTo @route='meetings.edit' @model={{meeting.id}} class='au-c-link'>
+          {{#if (this.isInaugurationMeeting meeting)}}
+            {{t 'inbox.meetings.inauguration-meeting'}}
+          {{else}}
+            {{t 'inbox.meetings.meeting-of'}}
+          {{/if}}
           {{meeting.bestuursorgaan.isTijdsspecialisatieVan.naam}}
           {{t 'inbox.meetings.at'}}
           {{detailed-date meeting.geplandeStart}}</LinkTo>
