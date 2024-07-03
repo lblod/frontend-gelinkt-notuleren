@@ -9,7 +9,11 @@ export default class Agendapunt extends Model {
   @attr('number') position;
 
   @belongsTo('agendapunt', { inverse: null }) vorigeAgendapunt;
-  @belongsTo('zitting', { inverse: 'agendapunten' }) zitting;
+  @belongsTo('zitting', {
+    inverse: 'agendapunten',
+    polymorphic: true,
+  })
+  zitting;
   @belongsTo('behandeling-van-agendapunt', { inverse: 'onderwerp' })
   behandeling;
 
