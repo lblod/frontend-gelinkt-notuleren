@@ -14,13 +14,13 @@ import {
   underline,
 } from '@lblod/ember-rdfa-editor/plugins/text-style';
 import {
-  block_rdfa,
+  blockRdfaWithConfig,
   docWithConfig,
   hard_break,
   horizontal_rule,
-  invisible_rdfa,
+  invisibleRdfaWithConfig,
   paragraph,
-  repaired_block,
+  repairedBlockWithConfig,
   text,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
@@ -28,7 +28,6 @@ import {
   tableNodes,
   tablePlugins,
 } from '@lblod/ember-rdfa-editor/plugins/table';
-import { STRUCTURE_NODES } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
 import {
   date,
   dateView,
@@ -63,10 +62,6 @@ import {
   heading as headingInvisible,
   paragraph as paragraphInvisible,
 } from '@lblod/ember-rdfa-editor/plugins/invisibles';
-import {
-  besluitNodes,
-  structureSpecs,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import {
   templateComment,
@@ -80,8 +75,6 @@ import {
 } from '@lblod/ember-rdfa-editor/plugins/link';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import { validation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/validation';
-import { atLeastOneArticleContainer } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/decision-plugin/utils/validation-rules';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
@@ -95,7 +88,24 @@ import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
+import {
+  structure,
+  structureView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/structure-plugin/node';
+import StructureControlCardComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/structure-plugin/_private/control-card';
+import {
+  inlineRdfaWithConfig,
+  inlineRdfaWithConfigView,
+} from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+import InsertArticleComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/decision-plugin/insert-article';
 
+import {
+  snippetPlaceholder,
+  snippetPlaceholderView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet-placeholder';
+import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
+
+import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -109,22 +119,22 @@ export default class AgendapointsEditController extends Controller {
   @service intl;
   @service features;
   @tracked citationPlugin = citationPlugin(this.config.citation);
-  @tracked validationPlugin = validation((schema) => ({
-    shapes: [atLeastOneArticleContainer(schema)],
-  }));
+  StructureControlCard = StructureControlCardComponent;
+  InsertArticle = InsertArticleComponent;
 
+  SnippetInsert = SnippetInsertRdfaComponent;
   schema = new Schema({
     nodes: {
       doc: docWithConfig(),
       paragraph,
-      repaired_block,
+      repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
+      structure,
       list_item: listItemWithConfig({ enableHierarchicalList: true }),
       ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
       bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
-      STRUCTURE_NODES,
       regulatoryStatementNode,
       templateComment,
       text_variable,
@@ -132,21 +142,21 @@ export default class AgendapointsEditController extends Controller {
       oslo_location: osloLocation(this.config.location),
       location,
       codelist,
-      ...besluitNodes,
       roadsign_regulation,
       heading,
       blockquote,
+      snippet_placeholder: snippetPlaceholder,
       horizontal_rule,
       code_block,
       text,
       image,
       hard_break,
-      invisible_rdfa,
-      block_rdfa,
+      block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
+      invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
+      inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
     },
     marks: {
-      inline_rdfa,
       em,
       strong,
       underline,
@@ -202,13 +212,16 @@ export default class AgendapointsEditController extends Controller {
       besluitTopic: {
         endpoint: 'https://data.vlaanderen.be/sparql',
       },
-      structures: structureSpecs,
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
         defaultAdministrativeUnit: municipality.uri && {
           label: municipality.naam,
           uri: municipality.uri,
         },
+      },
+
+      snippet: {
+        endpoint: ENV.regulatoryStatementEndpoint,
       },
       location: {
         defaultPointUriRoot:
@@ -258,6 +271,10 @@ export default class AgendapointsEditController extends Controller {
         location: locationView(controller),
         codelist: codelistView(controller),
         templateComment: templateCommentView(controller),
+        inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+
+        snippet_placeholder: snippetPlaceholderView(controller),
+        structure: structureView(controller),
       };
     };
   }
@@ -267,7 +284,6 @@ export default class AgendapointsEditController extends Controller {
       ...tablePlugins,
       tableKeymap,
       this.citationPlugin,
-      this.validationPlugin,
       createInvisiblesPlugin(
         [hardBreak, paragraphInvisible, headingInvisible],
         {
@@ -293,6 +309,15 @@ export default class AgendapointsEditController extends Controller {
 
   get documentContainer() {
     return this.model.documentContainer;
+  }
+
+  get activeNode(){
+
+    if (this.controller) {
+      return getActiveEditableNode(this.controller.activeEditorState);
+    }
+    return null;
+
   }
 
   @action
@@ -326,6 +351,7 @@ export default class AgendapointsEditController extends Controller {
   closeValidationModal() {
     this.hasDocumentValidationErrors = false;
   }
+
 
   @action
   async deleteDocument() {
