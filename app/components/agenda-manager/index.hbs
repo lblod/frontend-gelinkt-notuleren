@@ -5,33 +5,48 @@
   @onCancel={{this.stopEditing}}
   as |agenda|
 >
-  <div class='au-c-meeting-chrome-card'>
-    {{#if agenda.loadItemsTask.isRunning}}
-      <AuLoader />
-      <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
-    {{else}}
-      <AgendaManager::AgendaTable
-        @onSort={{agenda.onSort}}
-        @onCreate={{agenda.createAgendaItem}}
-        @items={{agenda.items}}
-        @readOnly={{@readOnly}}
-        as |Table|
-      >
-        <Table.Header />
+  <Common::MeetingSubSection @title={{t 'meetings.publish.agenda.title'}}>
+    <:body>
+      {{#if agenda.loadItemsTask.isRunning}}
+        <AuLoader />
+        <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
+      {{else}}
+        <AgendaManager::AgendaTable
+          @onSort={{agenda.onSort}}
+          @onCreate={{agenda.createAgendaItem}}
+          @items={{agenda.items}}
+          @readOnly={{@readOnly}}
+          as |Table|
+        >
+          <Table.Header />
 
-        <Table.Body as |Body|>
-          {{#each agenda.items as |item|}}
-            <Body.Row @item={{item}} @edit={{fn this.editItem item}} />
-          {{else}}
-            <Body.Empty />
-          {{/each}}
+          <Table.Body as |Body|>
+            {{#each agenda.items as |item|}}
+              <Body.Row @item={{item}} @edit={{fn this.editItem item}} />
+            {{else}}
+              <Body.Empty />
+            {{/each}}
 
-        </Table.Body>
+          </Table.Body>
 
-      </AgendaManager::AgendaTable>
+        </AgendaManager::AgendaTable>
 
-    {{/if}}
-  </div>
+      {{/if}}
+    </:body>
+
+    <:button>
+      {{#unless @readOnly}}
+        <AuButton
+          @skin='secondary'
+          @icon='plus'
+          @iconAlignment='left'
+          {{on 'click' agenda.createAgendaItem}}
+        >
+          {{t 'generic.add'}}
+        </AuButton>
+      {{/unless}}
+    </:button>
+  </Common::MeetingSubSection>
 
   {{#if this.editModalVisible}}
     <AgendaManager::Edit

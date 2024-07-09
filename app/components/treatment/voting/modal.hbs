@@ -24,21 +24,8 @@
       <th style='max-width: 30rem;'>
         {{t 'voting-modal.gevolg-label'}}
       </th>
-      {{#unless @readOnly}}
-        <th class='au-u-table-right'>
-          <span class='au-u-hidden-visually'>{{t
-              'voting-modal.actions-label'
-            }}</span>
-          <AuButton
-            {{on 'click' (perform this.addStemming)}}
-            @icon='add'
-            @iconAlignment='left'
-            @loading={{this.addStemming.isRunning}}
-          >
-            {{t 'voting-modal.create-voting-button'}}
-          </AuButton>
-        </th>
-      {{/unless}}
+      <th class='au-u-table-right'>
+      </th>
     </tr>
   </thead>
   <tbody>
