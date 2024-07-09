@@ -1,6 +1,8 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+import { service } from '@ember/service';
+
 /**
  * @typedef {import("../models/mandataris").default} Mandataris
  * @typedef {import("../models/functionaris").default} Functionaris
@@ -33,6 +35,8 @@ import { action } from '@ember/object';
  * @extends {Component<Args>}
  */
 export default class ParticipationListComponent extends Component {
+  @service intl;
+
   @tracked popup = false;
 
   get secretary() {
@@ -80,5 +84,52 @@ export default class ParticipationListComponent extends Component {
   @action
   togglePopup() {
     this.popup = !this.popup;
+  }
+
+  get detailsListItems() {
+    return [
+      {
+        label: this.intl.t('participation-list.voorzitter-label'),
+        value: this.chairman?.get('isBestuurlijkeAliasVan.fullName'),
+        pill: !this.chairman
+          ? {
+              skin: 'warning',
+              icon: 'alert-triangle',
+              text: this.intl.t('participation-list.voorzitter-error'),
+            }
+          : null,
+      },
+      {
+        label: this.intl.t('participation-list.secretaris-label'),
+        value: this.secretary?.get('isBestuurlijkeAliasVan.fullName'),
+        pill: !this.secretary
+          ? {
+              skin: 'warning',
+              icon: 'alert-triangle',
+              text: this.intl.t('participation-list.secretaris-error'),
+            }
+          : null,
+      },
+      {
+        label: this.intl.t('participation-list.present-label'),
+        value: this.participants
+          ?.map((m) => m.get('isBestuurlijkeAliasVan.fullName'))
+          .join(', '),
+        pill: !this.participants?.length
+          ? {
+              skin: 'warning',
+              icon: 'alert-triangle',
+              text: this.intl.t('participation-list.present-error'),
+            }
+          : null,
+      },
+      {
+        label: this.intl.t('participation-list.not-present-label'),
+        value:
+          this.absentees
+            ?.map((m) => m.isBestuurlijkeAliasVan.fullName)
+            .join(', ') || '',
+      },
+    ];
   }
 }
