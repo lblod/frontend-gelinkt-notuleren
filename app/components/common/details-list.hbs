@@ -7,15 +7,15 @@
           <strong class='au-c-details-list__value-text'>{{item.value}}</strong>
         {{/if}}
         {{#if item.pill}}
-        <span class="au-c-details-list__value-pill">
-          <AuPill
-            @skin={{item.pill.skin}}
-            @draft={{item.pill.draft}}
-            @icon={{item.pill.icon}}
-            @iconAlignment='left'
-          >
-            {{item.pill.text}}
-          </AuPill>
+          <span class='au-c-details-list__value-pill'>
+            <AuPill
+              @skin={{item.pill.skin}}
+              @draft={{item.pill.draft}}
+              @icon={{item.pill.icon}}
+              @iconAlignment='left'
+            >
+              {{item.pill.text}}
+            </AuPill>
           </span>
         {{/if}}
       </div>
