@@ -103,9 +103,10 @@
   }
 
   .au-c-details-list__item {
-    display: grid;
-    grid-template-columns: minmax(150px, auto) 1fr;
-    padding: $au-unit-small 0 $au-unit-small $au-unit-small;
+    display: flex;
+    flex-direction: column;
+    // grid-template-columns: minmax(10px, auto) 1fr;
+    // padding: $au-unit-small 0 $au-unit-small $au-unit-small;
   }
 
   .au-c-details-list__label {
@@ -115,18 +116,22 @@
   }
 
   .au-c-details-list__value {
-    display: grid;
-    grid-template-columns: auto auto;
+    // display: grid;
+    display: flex;
     justify-content: start;
-    align-items: center;
+    align-items: baseline;
     gap: 0.5rem;
-  }
 
-  .au-c-details-list__value-text {
-    font-weight: 500;
-    text-decoration: underline;
-    border-bottom: none;
-    color: $au-gray-900;
+    .au-c-details-list__value-pill {
+      padding-top: $au-unit-tiny;
+    }
+    .au-c-details-list__value-text {
+      font-weight: 500;
+      text-decoration: underline;
+      border-bottom: none;
+      color: $au-gray-900;
+      padding-top: $au-unit-tiny;
+    }
   }
 }
 
