@@ -21,20 +21,26 @@ export const detailedDate = (datetime) => {
      *
      * Have jump through the hoops below.
      */
-    const formattedDate = new Intl.DateTimeFormat('nl-BE', {
+    const datetimeformat = new Intl.DateTimeFormat('nl-BE', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
-    }).format(datetime);
-
-    const [datePart, timePart] = formattedDate.split(', ');
-    // Replace the default separator (/) with - for the date part
-    const formattedDateWithHyphen = datePart.replace(/\//g, '-');
-
-    return `${formattedDateWithHyphen} ${timePart}`;
+    });
+    const parts = datetimeformat.formatToParts();
+    const formatMap = {};
+    for (const part of parts) {
+      if (part.type !== 'literal') {
+        formatMap[part.type] = part.value;
+      }
+    }
+    const date = `${formatMap.day}-${formatMap.month}-${formatMap.year}`;
+    if (formatMap.hour) {
+      return `${date} ${formatMap.hour}:${formatMap.minute}`;
+    }
+    return date;
   } catch (e) {
     console.error(e);
     return '';
