@@ -124,11 +124,10 @@
         @controller={{this.controller}}
         @options={{this.config.roadsignRegulation}}
       />
-      {{!-- <StandardTemplatePlugin::Card
+      <StandardTemplatePlugin::Card
         @controller={{this.controller}}
         @templates={{this.model.templates}}
-      /> --}}
-      <DecisionPlugin::DecisionPluginCard @controller={{this.controller}} />
+      />
       {{#if (feature-flag 'regulatoryStatements')}}
         <EditorPlugins::RegulatoryStatements::SidebarInsert
           @controller={{this.controller}}

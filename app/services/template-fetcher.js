@@ -75,8 +75,13 @@ export default class TemplateFetcher extends Service {
             );
             this.body = await response.text();
           },
-          contexts: binding.contexts.value.split('|'),
-          disabledInContexts: binding.disabledInContexts.value.split('|'),
+          contexts: binding.contexts.length
+            ? binding.contexts.value.split('|')
+            : [],
+          disabledInContexts: binding.contexts.length
+            ? binding.disabledInContexts.value.split('|')
+            : // make the RB templates unavailable from the sidebar insert for now
+              ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt'],
         };
       });
       return templates;
