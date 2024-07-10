@@ -74,7 +74,10 @@ export default class MeetingForm extends Component {
     return this.meetingDetailsData.value?.bestuursorgaan ?? null;
   }
   get headerArticleTranslationString() {
-    return this.meetingDetailsData.value?.headerArticleTranslationString ?? '';
+    return (
+      this.meetingDetailsData.value?.headerArticleTranslationString ??
+      'meeting-form.meeting-heading-article-ungendered'
+    );
   }
   get secretaris() {
     return this.meetingDetailsData.value?.secretaris ?? null;
