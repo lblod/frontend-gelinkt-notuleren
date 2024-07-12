@@ -118,7 +118,8 @@
   "overrides": {
     "@appuniversum/ember-appuniversum": {
       "tracked-toolbox": "^2.0.0",
-      "ember-concurrency": "^2.3.7"
+      "ember-concurrency": "^2.3.7",
+      "ember-modifier": "^4.1.0"
     }
   },
   "engines": {
