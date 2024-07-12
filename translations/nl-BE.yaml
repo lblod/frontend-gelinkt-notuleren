@@ -730,3 +730,7 @@ voting-modal:
 zitting-link:
   meeting-of: Zitting van
   at: op
+
+generic:
+  edit: Bewerk
+  add: Toevoegen
