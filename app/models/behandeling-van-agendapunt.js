@@ -10,26 +10,36 @@ export default class BehandelingVanAgendapunt extends Model {
   @attr afgeleidUit;
   @attr('string') gevolg;
 
-  @belongsTo('behandeling-van-agendapunt', { inverse: null })
+  @belongsTo('behandeling-van-agendapunt', { inverse: null, async: true })
   vorigeBehandelingVanAgendapunt;
-  @belongsTo('agendapunt', { inverse: 'behandeling' }) onderwerp;
+  @belongsTo('agendapunt', { inverse: 'behandeling', async: true }) onderwerp;
   // original queries fetching these used pagesize of 100
-  @belongsTo('functionaris', { inverse: null, defaultPageSize: 100 })
+  @belongsTo('functionaris', {
+    inverse: null,
+    defaultPageSize: 100,
+    async: true,
+  })
   secretaris;
   // original queries fetching these used pagesize of 100
-  @belongsTo('mandataris', { inverse: null, defaultPageSize: 100 }) voorzitter;
-  @belongsTo('document-container', { inverse: null }) documentContainer;
+  @belongsTo('mandataris', { inverse: null, defaultPageSize: 100, async: true })
+  voorzitter;
+  @belongsTo('document-container', { inverse: null, async: true })
+  documentContainer;
 
-  @hasMany('versioned-behandeling', { inverse: 'behandeling' })
+  @hasMany('versioned-behandeling', { inverse: 'behandeling', async: true })
   versionedBehandelingen;
-  @hasMany('besluit', { inverse: 'volgendUitBehandelingVanAgendapunt' })
+  @hasMany('besluit', {
+    inverse: 'volgendUitBehandelingVanAgendapunt',
+    async: true,
+  })
   besluiten;
-  @hasMany('mandataris', { inverse: null }) aanwezigen;
-  @hasMany('mandataris', { inverse: null }) afwezigen;
+  @hasMany('mandataris', { inverse: null, async: true }) aanwezigen;
+  @hasMany('mandataris', { inverse: null, async: true }) afwezigen;
   // original queries did "fetch all" pagination loops
   @hasMany('stemming', {
     inverse: 'behandelingVanAgendapunt',
     defaultPageSize: 1000,
+    async: true,
   })
   stemmingen;
 

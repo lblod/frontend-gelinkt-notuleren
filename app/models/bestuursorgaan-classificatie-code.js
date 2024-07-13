@@ -5,7 +5,7 @@ export default class BestuursorgaanClassificatieCodeModel extends Model {
   @attr scopeNote;
   @attr uri;
 
-  @hasMany('bestuursfunctie-code', { inverse: 'standaardTypeVan' })
+  @hasMany('bestuursfunctie-code', { inverse: 'standaardTypeVan', async: true })
   standaardType;
-  @hasMany('bestuursorgaan', { inverse: null }) isClassificatieVan;
+  @hasMany('bestuursorgaan', { inverse: null, async: true }) isClassificatieVan;
 }

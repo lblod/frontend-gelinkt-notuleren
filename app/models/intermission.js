@@ -6,8 +6,9 @@ export default class IntermissionModel extends Model {
   @attr comment;
   @belongsTo('zitting', {
     inverse: 'intermissions',
+    async: true,
     polymorphic: true,
   })
   zitting;
-  @belongsTo('agenda-position', { inverse: null }) agendaPosition;
+  @belongsTo('agenda-position', { inverse: null, async: true }) agendaPosition;
 }
