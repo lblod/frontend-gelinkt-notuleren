@@ -4,9 +4,10 @@ export default class MandaatModel extends Model {
   @attr uri;
   @attr aantalHouders;
 
-  @belongsTo('bestuursfunctie-code', { inverse: null }) bestuursfunctie;
+  @belongsTo('bestuursfunctie-code', { inverse: null, async: true })
+  bestuursfunctie;
 
-  @hasMany('bestuursorgaan', { inverse: 'bevat' }) bevatIn;
+  @hasMany('bestuursorgaan', { inverse: 'bevat', async: true }) bevatIn;
 
   rdfaBindings = {
     class: 'http://data.vlaanderen.be/ns/mandaat#Mandaat',
