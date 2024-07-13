@@ -145,7 +145,7 @@
       />
       <StandardTemplatePlugin::Card
         @controller={{this.controller}}
-        @templates={{this.model.standardTemplates}}
+        @templates={{this.model.templates}}
       />
       {{#if (feature-flag 'regulatoryStatements')}}
         <EditorPlugins::RegulatoryStatements::SidebarInsert
