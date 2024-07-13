@@ -1,11 +1,12 @@
-import RSVP from 'rsvp';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import RSVP from 'rsvp';
 
 export default class AgendapointsEditRoute extends Route {
   @service currentSession;
   @service router;
   @service standardTemplate;
+  @service templateFetcher;
 
   beforeModel(transition) {
     if (!this.currentSession.canWrite) {
@@ -18,12 +19,23 @@ export default class AgendapointsEditRoute extends Route {
   async model() {
     const { documentContainer, returnToMeeting } =
       this.modelFor('agendapoints');
-    const standardTemplates = this.standardTemplate.fetchTemplates.perform();
+    const standardTemplatesPromise =
+      this.standardTemplate.fetchTemplates.perform();
+    const dynamicTemplatesPromise = this.templateFetcher.fetch.perform({
+      templateType:
+        'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
+    });
+
+    const templatesPromise = Promise.all([
+      standardTemplatesPromise,
+      dynamicTemplatesPromise,
+    ]).then((result) => result.flat());
+
     return RSVP.hash({
       documentContainer,
-      editorDocument: documentContainer.get('currentVersion'),
+      editorDocument: documentContainer.currentVersion,
       returnToMeeting,
-      standardTemplates,
+      templates: templatesPromise,
     });
   }
 
