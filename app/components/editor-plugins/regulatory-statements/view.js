@@ -30,8 +30,6 @@ export default class ReadOnlyContentSectionComponent extends Component {
       this.args.updateAttribute('title', this.currentVersion.title);
     }
     if (this.content !== this.currentVersion.htmlSafeContent) {
-      console.log('content', this.content);
-      console.log('curver content', this.currentVersion.htmlSafeContent);
       this.args.updateAttribute('content', this.currentVersion.htmlSafeContent);
     }
   }
