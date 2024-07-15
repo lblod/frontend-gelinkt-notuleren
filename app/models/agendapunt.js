@@ -9,7 +9,12 @@ export default class Agendapunt extends Model {
   @attr('number') position;
 
   @belongsTo('agendapunt', { inverse: null, async: true }) vorigeAgendapunt;
-  @belongsTo('zitting', { inverse: 'agendapunten', async: true }) zitting;
+  @belongsTo('zitting', {
+    inverse: 'agendapunten',
+    async: true,
+    polymorphic: true,
+  })
+  zitting;
   @belongsTo('behandeling-van-agendapunt', {
     inverse: 'onderwerp',
     async: true,

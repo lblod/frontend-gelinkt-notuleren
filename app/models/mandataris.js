@@ -22,8 +22,10 @@ export default class MandatarisModel extends Model {
   aanwezigBijBehandeling;
   @hasMany('behandeling-van-agendapunt', { inverse: null, async: true })
   afwezigBijBehandeling;
-  @hasMany('zitting', { inverse: null, async: true }) aanwezigBijZitting;
-  @hasMany('zitting', { inverse: null, async: true }) afwezigBijZitting;
+  @hasMany('zitting', { inverse: null, async: true, polymorphic: true })
+  aanwezigBijZitting;
+  @hasMany('zitting', { inverse: null, async: true, polymorphic: true })
+  afwezigBijZitting;
 
   rdfaBindings = {
     class: 'http://data.vlaanderen.be/ns/mandaat#Mandataris',

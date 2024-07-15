@@ -26,9 +26,15 @@ export default class ReadOnlyContentSectionComponent extends Component {
     ).firstObject;
     this.currentVersion =
       await this.regulatoryStatementContainer.currentVersion;
-
-    this.args.updateAttribute('title', this.currentVersion.title);
-    this.args.updateAttribute('content', this.currentVersion.htmlSafeContent);
+    if (this.node.attrs.title !== this.currentVersion.title) {
+      this.args.updateAttribute('title', this.currentVersion.title);
+    }
+    if (this.content !== this.currentVersion.htmlSafeContent) {
+      this.args.updateAttribute('content', this.currentVersion.htmlSafeContent);
+    }
+  }
+  get node() {
+    return this.args.node;
   }
 
   get content() {

@@ -49,24 +49,6 @@
   </:actions>
 </AppChrome>
 
-{{#if this.hasDocumentValidationErrors}}
-  <AuModal
-    @title={{t 'validation-modal.title'}}
-    @modalOpen={{true}}
-    @closeModal={{this.closeValidationModal}}
-    as |Modal|
-  >
-    <Modal.Body>
-      <p>{{t 'validation-modal.message'}}</p>
-    </Modal.Body>
-    <Modal.Footer>
-      <AuButton {{on 'click' this.closeValidationModal}}>{{t
-          'validation-modal.confirm'
-        }}</AuButton>
-    </Modal.Footer>
-  </AuModal>
-{{/if}}
-
 {{#if this.displayDeleteModal}}
   <AuModal
     @title={{t 'delete-modal.title'}}
@@ -112,6 +94,7 @@
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
     @shouldEditRdfa={{false}}
+    @shouldShowRdfa={{true}}
   >
     <:toolbar>
       <BesluitTypePlugin::ToolbarDropdown
@@ -126,10 +109,7 @@
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
-      <ArticleStructurePlugin::ArticleStructureCard
-        @controller={{this.controller}}
-        @options={{this.config.structures}}
-      />
+      <this.InsertArticle @controller={{this.controller}} />
       <CitationPlugin::CitationInsert
         @controller={{this.controller}}
         @plugin={{this.citationPlugin}}
@@ -152,6 +132,14 @@
           @controller={{this.controller}}
         />
       {{/if}}
+
+      {{#if this.activeNode}}
+        <this.SnippetInsert
+          @controller={{this.controller}}
+          @config={{this.config.snippet}}
+          @node={{this.activeNode}}
+        />
+      {{/if}}
       <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
       <LocationPlugin::Insert
         @controller={{this.controller}}
@@ -164,10 +152,7 @@
       />
     </:sidebarCollapsible>
     <:sidebar>
-      <ArticleStructurePlugin::StructureCard
-        @controller={{this.controller}}
-        @options={{this.config.structures}}
-      />
+      <this.StructureControlCard @controller={{this.controller}} />
       <DecisionPlugin::DecisionPluginCard @controller={{this.controller}} />
       <CitationPlugin::CitationCard
         @controller={{this.controller}}

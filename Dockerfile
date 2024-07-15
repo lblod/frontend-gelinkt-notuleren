@@ -1,4 +1,4 @@
-FROM madnificent/ember:4.12.1-node_18 as builder
+FROM node:20-slim as builder
 
 LABEL maintainer="info@redpencil.io"
 
@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-RUN ember build -prod
+RUN npm run build
 
 FROM semtech/ember-proxy-service:1.5.1
 ENV STATIC_FOLDERS_REGEX "^/(assets|font|files|handleiding|@appuniversum)/"

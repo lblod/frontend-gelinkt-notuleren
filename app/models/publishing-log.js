@@ -8,5 +8,5 @@ export default class PublishingLogs extends Model {
   @belongsTo('published-resource', { async: true }) publishedResource;
 
   @belongsTo('gebruiker', { async: true }) user;
-  @belongsTo('zitting', { async: true }) zitting;
+  @belongsTo('zitting', { async: true }, { polymorphic: true }) zitting;
 }
