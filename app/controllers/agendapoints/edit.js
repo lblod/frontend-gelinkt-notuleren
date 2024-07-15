@@ -55,7 +55,6 @@ import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
-import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import {
   createInvisiblesPlugin,
   hardBreak,
@@ -311,13 +310,11 @@ export default class AgendapointsEditController extends Controller {
     return this.model.documentContainer;
   }
 
-  get activeNode(){
-
+  get activeNode() {
     if (this.controller) {
       return getActiveEditableNode(this.controller.activeEditorState);
     }
     return null;
-
   }
 
   @action
@@ -351,7 +348,6 @@ export default class AgendapointsEditController extends Controller {
   closeValidationModal() {
     this.hasDocumentValidationErrors = false;
   }
-
 
   @action
   async deleteDocument() {

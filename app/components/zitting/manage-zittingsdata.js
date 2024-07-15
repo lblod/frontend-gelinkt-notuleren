@@ -114,12 +114,12 @@ export default class ZittingManageZittingsdataComponent extends Component {
               ),
             }
           : this.startDateIsEmpty
-          ? {
-              skin: 'warning',
-              icon: 'alert-triangle',
-              text: this.intl.t('manage-zittings-data.start-not-set'),
-            }
-          : null,
+            ? {
+                skin: 'warning',
+                icon: 'alert-triangle',
+                text: this.intl.t('manage-zittings-data.start-not-set'),
+              }
+            : null,
       },
       {
         label: this.intl.t('manage-zittings-data.geeindigd-op-tijdstip-label'),
@@ -131,12 +131,12 @@ export default class ZittingManageZittingsdataComponent extends Component {
               text: this.intl.t('manage-zittings-data.end-not-set'),
             }
           : this.endIsBeforeStart
-          ? {
-              skin: 'warning',
-              icon: 'alert-triangle',
-              text: this.intl.t('manage-zittings-data.end-before-start'),
-            }
-          : null,
+            ? {
+                skin: 'warning',
+                icon: 'alert-triangle',
+                text: this.intl.t('manage-zittings-data.end-before-start'),
+              }
+            : null,
       },
     ];
   }

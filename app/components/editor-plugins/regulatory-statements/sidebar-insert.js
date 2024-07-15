@@ -1,12 +1,9 @@
-import { findParentNodeOfType } from '@curvenote/prosemirror-utils';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
 import { findAncestors } from '@lblod/ember-rdfa-editor/utils/position-utils';
-import {
-  hasOutgoingNamedNodeTriple,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/utils/namespace';
+import { hasOutgoingNamedNodeTriple } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/namespace';
 import {
   BESLUIT,
   RDF,
@@ -18,7 +15,7 @@ export default class RegulatoryStatementsSidebarInsertComponent extends Componen
     return this.args.controller;
   }
 
-  get decisionNodeLocation(){
+  get decisionNodeLocation() {
     return (
       findAncestors(this.controller.mainEditorState.selection.$from, (node) => {
         return hasOutgoingNamedNodeTriple(
