@@ -1,5 +1,27 @@
 # frontend-gelinkt-notuleren
 
+## 5.20.0
+
+### Minor Changes
+
+- [#683](https://github.com/lblod/frontend-gelinkt-notuleren/pull/683) [`0a37110`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a37110fb41e58c2780cb5a2f1fd2fa32f0ca3a7) Thanks [@elpoelma](https://github.com/elpoelma)! - - Add basic support for consuming and using decision templates from the regulatory statement endpoint
+
+  - Refactor `RegulatoryAttachmentsFetcher` to `TemplateFetcher`
+
+- [#635](https://github.com/lblod/frontend-gelinkt-notuleren/pull/635) [`0a43cb3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a43cb3ef75fad4bb01ce56b09d3f70b05ea613f) Thanks [@elpoelma](https://github.com/elpoelma)! - Set-up basic creation-flow for inauguration meetings (installatievergadering) of a municipal council (gemeenteraad)
+
+- [#688](https://github.com/lblod/frontend-gelinkt-notuleren/pull/688) [`6e3ed19`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6e3ed19dd5221ccd649b2f3ab4ee0a8a09472c3d) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to lblod/ember-rdfa-editor and lblod/ember-rdfa-editor-lblod-plugins with updated dependency versions and update dependencies to match
+
+- [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.0.1
+
+### Patch Changes
+
+- [#679](https://github.com/lblod/frontend-gelinkt-notuleren/pull/679) [`d09c779`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d09c77917f8d7db6897c55bf1dcfa295f4e2d1d5) Thanks [@piemonkey](https://github.com/piemonkey)! - Update version of ember-modifier and remove some deprecated code use
+
+- [#685](https://github.com/lblod/frontend-gelinkt-notuleren/pull/685) [`f8ad946`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f8ad946710e36a3949c05ec66470d820e8a6532b) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4829: Design updates to meetings
+
+- [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.0.0
+
 ## 5.19.1
 
 ### Patch Changes
