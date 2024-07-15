@@ -75,10 +75,10 @@ export default class TemplateFetcher extends Service {
             );
             this.body = await response.text();
           },
-          contexts: binding.contexts.length
+          contexts: binding.contexts.value
             ? binding.contexts.value.split('|')
             : [],
-          disabledInContexts: binding.contexts.length
+          disabledInContexts: binding.disabledInContexts.value
             ? binding.disabledInContexts.value.split('|')
             : // make the RB templates unavailable from the sidebar insert for now
               ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt'],
