@@ -102,6 +102,10 @@ import {
   snippetPlaceholder,
   snippetPlaceholderView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet-placeholder';
+import {
+  snippet,
+  snippetView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
@@ -145,6 +149,7 @@ export default class AgendapointsEditController extends Controller {
       heading,
       blockquote,
       snippet_placeholder: snippetPlaceholder,
+      snippet: snippet(this.config.snippet),
       horizontal_rule,
       code_block,
       text,
@@ -273,6 +278,7 @@ export default class AgendapointsEditController extends Controller {
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
 
         snippet_placeholder: snippetPlaceholderView(controller),
+        snippet: snippetView(this.config.snippet)(controller),
         structure: structureView(controller),
       };
     };
