@@ -1,0 +1,13 @@
+<div class='au-c-meeting-section'>
+  <AuHeading
+    @level='2'
+    @skin='3'
+    class='au-c-onboarding-wrapper au-u-margin-bottom-small'
+  >
+    {{@title}}
+  </AuHeading>
+  <AuAlert @skin='info' @size='tiny'>
+    {{@helpText}}
+  </AuAlert>
+  {{yield}}
+</div>

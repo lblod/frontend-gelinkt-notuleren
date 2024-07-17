@@ -7,6 +7,7 @@ import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid
 import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
 import { trackedFunction } from 'ember-resources/util/function';
 import { trackedTask } from 'ember-resources/util/ember-concurrency';
+import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
@@ -67,6 +68,10 @@ export default class MeetingForm extends Component {
     return this.args.zitting;
   }
 
+  get isInaugurationMeeting() {
+    return this.zitting instanceof InstallatieVergaderingModel;
+  }
+
   get isComplete() {
     return !this.zitting?.isNew && this.behandelingen?.length > 0;
   }
@@ -74,7 +79,10 @@ export default class MeetingForm extends Component {
     return this.meetingDetailsData.value?.bestuursorgaan ?? null;
   }
   get headerArticleTranslationString() {
-    return this.meetingDetailsData.value?.headerArticleTranslationString ?? '';
+    return (
+      this.meetingDetailsData.value?.headerArticleTranslationString ??
+      'meeting-form.meeting-heading-article-ungendered'
+    );
   }
   get secretaris() {
     return this.meetingDetailsData.value?.secretaris ?? null;

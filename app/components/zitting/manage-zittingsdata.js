@@ -1,8 +1,13 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
+
+import { detailedDate } from '../../utils/detailed-date';
 
 export default class ZittingManageZittingsdataComponent extends Component {
+  @service intl;
+
   @tracked showModal = false;
 
   @tracked geplandeStart;
@@ -80,5 +85,59 @@ export default class ZittingManageZittingsdataComponent extends Component {
   @action
   handleOpLocatieChange(event) {
     this.opLocatie = event.target.value;
+  }
+
+  get infoListItems() {
+    return [
+      {
+        label: this.intl.t('manage-zittings-data.bestuursorgan-label'),
+        value: this.bestuursorgaan.get('isTijdsspecialisatieVan.naam'),
+      },
+      {
+        label: this.intl.t('manage-zittings-data.geplande-start-label'),
+        value: detailedDate(this.geplandeStart),
+      },
+      {
+        label: this.intl.t('manage-zittings-data.op-locatie-label'),
+        value: this.opLocatie,
+      },
+      {
+        label: this.intl.t('manage-zittings-data.gestart-op-tijdstip-label'),
+        value: detailedDate(this.gestartOpTijdstip),
+        pill: this.startDiffersFromPlannedStart
+          ? {
+              skin: 'info',
+              draft: true,
+              icon: 'info-circle',
+              text: this.intl.t(
+                'manage-zittings-data.start-differs-from-planned-start',
+              ),
+            }
+          : this.startDateIsEmpty
+            ? {
+                skin: 'warning',
+                icon: 'alert-triangle',
+                text: this.intl.t('manage-zittings-data.start-not-set'),
+              }
+            : null,
+      },
+      {
+        label: this.intl.t('manage-zittings-data.geeindigd-op-tijdstip-label'),
+        value: detailedDate(this.geeindigdOpTijdstip),
+        pill: this.endDateIsEmpty
+          ? {
+              skin: 'warning',
+              icon: 'alert-triangle',
+              text: this.intl.t('manage-zittings-data.end-not-set'),
+            }
+          : this.endIsBeforeStart
+            ? {
+                skin: 'warning',
+                icon: 'alert-triangle',
+                text: this.intl.t('manage-zittings-data.end-before-start'),
+              }
+            : null,
+      },
+    ];
   }
 }

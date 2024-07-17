@@ -37,12 +37,13 @@ export default class StandardTemplateService extends Service {
    */
   templatesForContext(templates, rdfaTypes) {
     const isMatchingForContext = (template) => {
-      return (
-        rdfaTypes.filter((e) => template.get('contexts').includes(e)).length >
-          0 &&
-        rdfaTypes.filter((e) => template.get('disabledInContexts').includes(e))
-          .length === 0
-      );
+      const allowedInContext =
+        template.contexts.length === 0 ||
+        rdfaTypes.filter((e) => template.contexts.includes(e)).length > 0;
+      const disabledInContext =
+        rdfaTypes.filter((e) => template.disabledInContexts.includes(e))
+          .length > 0;
+      return allowedInContext && !disabledInContext;
     };
     return templates.filter(isMatchingForContext);
   }

@@ -8,10 +8,18 @@ export default class Agendapunt extends Model {
   @attr('string-set') type;
   @attr('number') position;
 
-  @belongsTo('agendapunt', { inverse: null }) vorigeAgendapunt;
-  @belongsTo('zitting', { inverse: 'agendapunten' }) zitting;
-  @belongsTo('behandeling-van-agendapunt', { inverse: 'onderwerp' })
+  @belongsTo('agendapunt', { inverse: null, async: true }) vorigeAgendapunt;
+  @belongsTo('zitting', {
+    inverse: 'agendapunten',
+    async: true,
+    polymorphic: true,
+  })
+  zitting;
+  @belongsTo('behandeling-van-agendapunt', {
+    inverse: 'onderwerp',
+    async: true,
+  })
   behandeling;
 
-  @hasMany('agendapunt', { inverse: null }) referenties;
+  @hasMany('agendapunt', { inverse: null, async: true }) referenties;
 }

@@ -6,6 +6,7 @@ import applyDevTools from 'prosemirror-dev-tools';
 import { modifier } from 'ember-modifier';
 import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
 import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
+import recreateUuidsOnPaste from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/recreateUuidsOnPaste';
 import { chromeHacksPlugin } from '@lblod/ember-rdfa-editor/plugins/chrome-hacks-plugin';
 import {
   editableNodePlugin,
@@ -15,6 +16,11 @@ import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attrib
 import RdfaEditor from '@lblod/ember-rdfa-editor/components/_private/rdfa-editor';
 import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
 
+/**
+ * `shouldShowRdfa` - boolean that indicates whether the editor should be in "RDFA aware" mode, or in old RDFA display mode.
+ *                    `true` - RDFA aware mode, `false | undefined` - old RDFA display mode
+ * `shouldEditRdfa` - boolean that indicates whether the "RDFA aware" debug tools will be available
+ */
 export default class RdfaEditorContainerComponent extends Component {
   @service features;
   @tracked controller;
@@ -27,19 +33,16 @@ export default class RdfaEditorContainerComponent extends Component {
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
    * see https://github.com/emberjs/ember.js/issues/19369
    */
-  setUpPrefixAttr = modifier(
-    (element) => {
-      element.setAttribute(
-        'prefix',
-        this.prefixToAttrString(this.documentContext.prefix),
-      );
-      this.ready = true;
-      return () => {
-        this.ready = false;
-      };
-    },
-    { eager: false },
-  );
+  setUpPrefixAttr = modifier((element) => {
+    element.setAttribute(
+      'prefix',
+      this.prefixToAttrString(this.documentContext.prefix),
+    );
+    this.ready = true;
+    return () => {
+      this.ready = false;
+    };
+  });
 
   get plugins() {
     const plugins = this.args.plugins || [];
@@ -48,7 +51,9 @@ export default class RdfaEditorContainerComponent extends Component {
         firefoxCursorFix(),
         lastKeyPressedPlugin,
         chromeHacksPlugin(),
-        this.args.shouldEditRdfa && editableNodePlugin(),
+        (this.args.shouldEditRdfa || this.args.shouldShowRdfa) &&
+          editableNodePlugin(),
+        recreateUuidsOnPaste,
       )
       .filter((nullCheck) => nullCheck);
   }
@@ -89,7 +94,10 @@ export default class RdfaEditorContainerComponent extends Component {
   }
 
   get activeNode() {
-    if (this.controller && this.args.shouldEditRdfa) {
+    if (
+      this.controller &&
+      (this.args.shouldEditRdfa || this.args.shouldShowRdfa)
+    ) {
       return getActiveEditableNode(this.controller.activeEditorState);
     }
     return null;

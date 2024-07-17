@@ -1,5 +1,61 @@
 # frontend-gelinkt-notuleren
 
+## 5.20.0
+
+### Minor Changes
+
+- [#683](https://github.com/lblod/frontend-gelinkt-notuleren/pull/683) [`0a37110`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a37110fb41e58c2780cb5a2f1fd2fa32f0ca3a7) Thanks [@elpoelma](https://github.com/elpoelma)! - - Add basic support for consuming and using decision templates from the regulatory statement endpoint
+
+  - Refactor `RegulatoryAttachmentsFetcher` to `TemplateFetcher`
+
+- [#635](https://github.com/lblod/frontend-gelinkt-notuleren/pull/635) [`0a43cb3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a43cb3ef75fad4bb01ce56b09d3f70b05ea613f) Thanks [@elpoelma](https://github.com/elpoelma)! - Set-up basic creation-flow for inauguration meetings (installatievergadering) of a municipal council (gemeenteraad)
+
+- [#688](https://github.com/lblod/frontend-gelinkt-notuleren/pull/688) [`6e3ed19`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6e3ed19dd5221ccd649b2f3ab4ee0a8a09472c3d) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to lblod/ember-rdfa-editor and lblod/ember-rdfa-editor-lblod-plugins with updated dependency versions and update dependencies to match
+
+- [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.0.1
+
+### Patch Changes
+
+- [#679](https://github.com/lblod/frontend-gelinkt-notuleren/pull/679) [`d09c779`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d09c77917f8d7db6897c55bf1dcfa295f4e2d1d5) Thanks [@piemonkey](https://github.com/piemonkey)! - Update version of ember-modifier and remove some deprecated code use
+
+- [#685](https://github.com/lblod/frontend-gelinkt-notuleren/pull/685) [`f8ad946`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f8ad946710e36a3949c05ec66470d820e8a6532b) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4829: Design updates to meetings
+
+- [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.0.0
+
+## 5.19.1
+
+### Patch Changes
+
+- [#682](https://github.com/lblod/frontend-gelinkt-notuleren/pull/682) [`f92fb55`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f92fb55ab68d98b10b631066872285aed3b0be40) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4853: Seach and sort templates alphabetically
+
+- [#681](https://github.com/lblod/frontend-gelinkt-notuleren/pull/681) [`27a92bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/27a92bdd6b324d7ca34fc8c3ff8f68525c4d4dd9) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fixed copy agendapunt description button
+
+## 5.19.0
+
+### Minor Changes
+
+- [#677](https://github.com/lblod/frontend-gelinkt-notuleren/pull/677) [`5a142bc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5a142bc4db557949bae838d569cf012732be121f) Thanks [@piemonkey](https://github.com/piemonkey)! - Switch to new location-plugin for addresses, including functionality to choose geographic locations from a map
+
+- [#677](https://github.com/lblod/frontend-gelinkt-notuleren/pull/677) [`0166bf1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0166bf15fed0944f26ccc25f7f0b6511b08f57a3) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to latest @lblod/ember-rdfa-editor-lblod-plugins v19.3.0
+
+### Patch Changes
+
+- [#678](https://github.com/lblod/frontend-gelinkt-notuleren/pull/678) [`dabd46e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/dabd46ee6bb276a7814a554b9851247239b2ad1f) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4820: Bump editor and enable copy/pasting variable nodes correctly
+
+- [#676](https://github.com/lblod/frontend-gelinkt-notuleren/pull/676) [`57658bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/57658bdc4c0a03ddff0720803e89ea1a39d099d1) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix bug where selection in link url text was not visible
+
+## 5.18.1
+
+### Patch Changes
+
+- [#675](https://github.com/lblod/frontend-gelinkt-notuleren/pull/675) [`5f0f9eb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5f0f9ebb191003e5aa691e94e72d04fce92fbb5d) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure that exiting dialog does not show up when saving and exiting the intro/outro of a meeting
+
+- [#674](https://github.com/lblod/frontend-gelinkt-notuleren/pull/674) [`2915b7a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2915b7a11f5c7fcc7dbe494be5b07ca26570aa90) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix rendering of documents on revisions page
+
+- [#672](https://github.com/lblod/frontend-gelinkt-notuleren/pull/672) [`eaa66f6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eaa66f66b91addca997a4a469164ec0131e2cdf9) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4825: Show "Insert snippet" when required
+
+- [#669](https://github.com/lblod/frontend-gelinkt-notuleren/pull/669) [`c12b953`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c12b95322424dba1f7a2ab9d5b6f7b3f92e9a7f1) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly tag release builds as latest
+
 ## 5.18.0
 
 ### Minor Changes

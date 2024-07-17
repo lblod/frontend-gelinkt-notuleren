@@ -141,18 +141,23 @@ inbox:
     time: Tijdstip
     location: Locatie
     meeting-of: Zitting van
+    inauguration-meeting: Installatievergadering
     at: op
     new:
-      title: Nieuwe zitting aanmaken
-      meeting:
+      title: Zitting aanmaken
+      common-meeting:
+        title: Nieuwe zitting aanmaken
         administrative-body: Gehouden door
         location: Op locatie
         planned-start: Geplande start
         errors:
           administrative-body:
             required: Gelieve een bestuursorgaan te selecteren
-      save: Zitting aanmaken
-      cancel: Terug
+        save: Zitting aanmaken
+        cancel: Terug
+      inauguration-meeting:
+        title: Installatievergadering aanmaken
+
   agendapoints:
     return: Terug naar overzicht agendapunten
     page-title: Agendapunten
@@ -351,7 +356,10 @@ meeting-form:
   date-warning: U kunt geen einddatum kiezen die vóór de startdatum ligt.
   incomplete-warning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
   back-button: Terug naar overzicht zittingen
-  scheduled-text: Zitting gepland op
+  scheduled-text:
+    common-meeting: Zitting gepland op
+    inauguration-meeting: Installatievergadering gepland op
+  inauguration-meeting: Installatievergadering
   publish-button: Ondertekenen en publiceren
   first-section-title: 1. Algemene informatie over de zitting
   second-section-title: 2. Aanwezigen bij de start van de zitting
@@ -730,3 +738,7 @@ voting-modal:
 zitting-link:
   meeting-of: Zitting van
   at: op
+
+generic:
+  edit: Bewerk
+  add: Toevoegen
