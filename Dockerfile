@@ -8,9 +8,9 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM semtech/ember-proxy-service:1.5.1
-ENV STATIC_FOLDERS_REGEX "^/(assets|font|files|handleiding|@appuniversum)/"
+FROM semtech/static-file-service:0.2.0
+
 ENV EMBER_GN_FEATURE_REGULATORY_STATEMENTS=false
 
 COPY ./proxy/* /config/
-COPY --from=builder /app/dist /app
+COPY --from=builder /app/dist /data
