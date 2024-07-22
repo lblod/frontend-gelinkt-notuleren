@@ -127,7 +127,7 @@ export default class ParticipationListComponent extends Component {
         label: this.intl.t('participation-list.not-present-label'),
         value:
           this.absentees
-            ?.map((m) => m.isBestuurlijkeAliasVan.fullName)
+            ?.map((m) => m.get('isBestuurlijkeAliasVan.fullName'))
             .join(', ') || '',
       },
     ];
