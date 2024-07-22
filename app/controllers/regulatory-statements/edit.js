@@ -93,7 +93,10 @@ import {
   snippetPlaceholder,
   snippetPlaceholderView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet-placeholder';
-
+import {
+  snippet,
+  snippetView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
 import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
@@ -141,6 +144,8 @@ export default class RegulatoryStatementsRoute extends Controller {
       ...STRUCTURE_NODES,
       heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
+      snippet_placeholder: snippetPlaceholder,
+      snippet: snippet(this.config.snippet),
       horizontal_rule,
       code_block,
       text,
@@ -149,7 +154,6 @@ export default class RegulatoryStatementsRoute extends Controller {
       block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
-      snippet_placeholder: snippetPlaceholder,
     },
     marks: {
       em,
@@ -180,6 +184,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
         snippet_placeholder: snippetPlaceholderView(controller),
+        snippet: snippetView(this.config.snippet)(controller),
       };
     };
   }
