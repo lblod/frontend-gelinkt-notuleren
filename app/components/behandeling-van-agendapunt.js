@@ -7,6 +7,7 @@ import { service } from '@ember/service';
 import { use } from 'ember-could-get-used-to-this';
 import RelationshipResource from '../helpers/relationship-resource';
 import { trackedFunction } from 'ember-resources/util/function';
+import InstallatieVergaderingModel from '../models/installatievergadering';
 
 /** @typedef {import("../models/mandataris").default} Mandataris  */
 /** @typedef {import("../models/behandeling-van-agendapunt").default} Behandeling  */
@@ -129,6 +130,10 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   get defaultSecretary() {
     return this.meetingSecretaryData.value;
+  }
+
+  get isInaugurationMeeting() {
+    return this.args.meeting instanceof InstallatieVergaderingModel;
   }
 
   getStatus = task(async () => {
