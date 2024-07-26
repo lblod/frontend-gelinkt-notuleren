@@ -1,0 +1,30 @@
+{{#if @options.success}}
+  <AuAlert
+    @skin='success'
+    @icon='check'
+    @size='small'
+    @closable={{true}}
+    @onClose={{@close}}
+  >
+    <p class='au-u-medium'>
+      {{t 'inauguration-meeting.synchronization.toast.success.title'}}
+    </p>
+  </AuAlert>
+{{else}}
+  <AuAlert
+    @skin='warning'
+    @icon='alert-triangle'
+    @size='small'
+    @closable={{true}}
+    @onClose={{@close}}
+  >
+    <p class='au-u-medium'>{{t
+        'inauguration-meeting.synchronization.toast.failure.title'
+      }}</p>
+    {{! TODO: add link to local mandatee db }}
+    <p>{{html-safe (t 'inauguration-meeting.synchronization.toast.failure.body.paragraph-1' link=this.lmbEndpoint)}}</p>
+    <p>
+      {{html-safe (t 'inauguration-meeting.synchronization.toast.failure.body.paragraph-2' email='gelinktnotuleren@vlaanderen.be')}}
+    </p>
+  </AuAlert>
+{{/if}}

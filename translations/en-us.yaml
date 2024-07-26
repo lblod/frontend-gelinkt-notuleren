@@ -127,6 +127,31 @@ editor-document-title:
 
 inauguration-meeting:
   last-synchronization: Last datasynchronization on {date}
+  synchronization:
+    button:
+      up-to-date: Synchronization up-to-date
+      out-of-date: Synchronize data
+    modal:
+      title: Possible loss of data
+      info:
+        paragraph-1: This data synchronization with <a href="{link}" target="_blank">LMB</a> might incur in loss of data.
+        paragraph-2: Check if the mandatee data is correct, and adjust the information in LMB where necessary.
+      attendee-list:
+        title: Attendees
+        no-changes: No changes
+      decisions:
+        title: Decisions
+      actions:
+        cancel: Cancel
+        synchronize: Synchronize
+    toast:
+      success:
+        title: Synchronization with LMB successful.
+      failure:
+        title: Synchronization with LMB failed.
+        body:
+          paragraph-1: Please complete data in <a href="{link}" target="_blank">LMB</a>
+          paragraph-2: If this problem persists, please contact <a href="mailto:{email}">{email}</a>
 
 inbox:
   loading: Loading
