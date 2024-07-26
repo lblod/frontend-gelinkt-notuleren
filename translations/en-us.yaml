@@ -82,6 +82,7 @@ behandeling-van-agendapunten:
   needs-participants: Please configure the participants to this agenda-item before adding a voting.
   cannot-edit-participants: Cannot configure participants if votings exist for this agenda item.
   edit-document: 'Edit document'
+  sync-warning: Data possibly overwritten by synchronization
 
 contact:
   about: What is your message about?
