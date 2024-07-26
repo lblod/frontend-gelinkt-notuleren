@@ -125,6 +125,9 @@ editor-document-title:
   change-title: Titel wijzigen
   title-saved: Titel opgeslagen
 
+inauguration-meeting:
+  last-synchronization: Laatste datasynchronisatie op {date}
+
 inbox:
   loading: Aan het laden
   patience-text: Bedankt voor uw geduld.

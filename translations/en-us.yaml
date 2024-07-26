@@ -125,6 +125,9 @@ editor-document-title:
   change-title: Change title
   title-saved: Title saved
 
+inauguration-meeting:
+  last-synchronization: Last datasynchronization on {date}
+
 inbox:
   loading: Loading
   patience-text: Thank you for your patience.
