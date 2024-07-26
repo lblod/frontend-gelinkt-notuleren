@@ -54,6 +54,9 @@
     <Group class='au-u-flex--vertical-center'>
       {{#unless this.readOnly}}
         <DeleteMeeting @meeting={{@zitting}} />
+        {{#if this.isInaugurationMeeting}}
+          <InaugurationMeeting::Synchronization @meeting={{this.zitting}} />
+        {{/if}}
       {{/unless}}
       {{#if this.isComplete}}
         <AuButton @skin='secondary' {{on 'click' this.goToPublish}}>

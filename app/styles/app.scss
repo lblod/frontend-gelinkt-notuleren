@@ -27,6 +27,7 @@
 @import 'project/c-editor-preview';
 @import 'project/c-template';
 @import 'project/c-environment-banner';
+@import 'project/c-inauguration-meeting-synchronization';
 
 // PLUGINS
 @import 'ember-rdfa-editor';
@@ -48,6 +49,10 @@
 // give treatment (behandeling) content the same style as other say-documents
 .c-template-content--treatment {
   @include say-content();
+}
+
+.toaster {
+  width: 380px;
 }
 
 // PROJECT UTILITIES

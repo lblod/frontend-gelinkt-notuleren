@@ -1,0 +1,35 @@
+.meeting__sync-button {
+  font-weight: var(--au-medium);
+}
+
+.meeting__sync-button--up-to-date {
+  & {
+    background-color: var(--au-green-200);
+    border-color: var(--au-green-500);
+    color: var(--au-green-500);
+  }
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    background-color: var(--au-green-200);
+    border-color: var(--au-green-700);
+    color: var(--au-green-700);
+  }
+}
+
+.meeting__sync-button--out-of-date {
+  & {
+    background-color: transparent;
+    border-color: var(--au-blue-700);
+    color: var(--au-blue-700);
+  }
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    background-color: transparent;
+    border-color: var(--au-blue-900);
+    color: var(--au-blue-900);
+  }
+}

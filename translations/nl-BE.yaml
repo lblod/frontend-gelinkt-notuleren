@@ -127,6 +127,34 @@ editor-document-title:
 
 inauguration-meeting:
   last-synchronization: Laatste datasynchronisatie op {date}
+  synchronization:
+    button:
+      up-to-date: Synchronisatie up-to-date
+      out-of-date: Data synchroniseren
+    modal:
+      title: Overschrijving gegevens
+      info:
+        paragraph-1: Deze datasynchronisatie met <a href="{link}" target="_blank">Lokaal Mandatenbeheer</a> zal mogelijks
+          gegevens in de installatievergadering overschrijven.
+        paragraph-2: Bekijk of die klopt, en pas de gegevens aan in het Lokaal
+          Mandatenbeheer waar nodig.
+      attendee-list:
+        title: Aanwezigenlijst
+        no-changes: Geen verandering
+      decisions:
+        title: Besluiten
+      actions:
+        cancel: Annuleer
+        synchronize: Synchroniseer
+    toast:
+      success:
+        title: Synchronisatie met Lokale Mandatenbeheer geslaagd.
+      failure:
+        title: Synchronisatie met Lokale Mandatenbeheer mislukt.
+        body:
+          paragraph-1: Vul gegevens aan in <a href="{link}" target="_blank">Lokaal Mandatenbeheer</a>
+          paragraph-2: Indien dit probleem zich blijft voordoen, kunt u contact opnemen met <a href="mailto:{email}">{email}</a>
+
 
 inbox:
   loading: Aan het laden
