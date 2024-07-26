@@ -146,6 +146,7 @@
       <Common::MeetingSection
         @title={{t 'meeting-form.first-section-title'}}
         @helpText={{t 'meeting-form.first-section-not-filled-warning'}}
+        id="sectionOne"
       >
         <Zitting::ManageZittingsdata
           @zitting={{@zitting}}
@@ -167,6 +168,7 @@
           <Common::MeetingSection
             @title={{t 'meeting-form.second-section-title'}}
             @helpText={{t 'meeting-form.second-section-not-filled-warning'}}
+            id="sectionTwo"
           >
             <ParticipationList
               @chairman={{this.voorzitter}}
@@ -187,6 +189,7 @@
           <Common::MeetingSection
             @title={{t 'meeting-form.third-section-title'}}
             @helpText={{t 'meeting-form.third-section-not-filled-warning'}}
+            id="sectionThree"
           >
             <AgendaManager
               @zittingId={{@zitting.id}}
@@ -199,6 +202,7 @@
           <Common::MeetingSection
             @title={{t 'meeting-form.fourth-section-title'}}
             @helpText={{t 'manage-free-text.before'}}
+            id="sectionFour"
           >
             <Common::MeetingSubSection
               @title={{t 'behandeling-van-agendapunten.content-title'}}
@@ -228,6 +232,7 @@
           <Common::MeetingSection
             @title={{t 'meeting-form.fifth-section-title'}}
             @helpText={{t 'meeting-form.fifth-section-not-filled-warning'}}
+            id="sectionFive"
           >
             {{#if this.fetchTreatments.isRunning}}
               <AuLoader @padding='small' />
@@ -254,6 +259,7 @@
         <Common::MeetingSection
           @title={{t 'meeting-form.sixth-section-title'}}
           @helpText={{t 'manage-free-text.after'}}
+          id="sectionSix"
         >
           <Common::MeetingSubSection
             @title={{t 'behandeling-van-agendapunten.content-title'}}
