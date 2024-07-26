@@ -25,6 +25,7 @@ module.exports = {
   rules: {
     'ember/no-mixins': 'warn',
     semi: 'error', // Remove this rule once Prettier is enabled
+    'getter-return': ['error', { allowImplicit: true }],
   },
   overrides: [
     // node files
