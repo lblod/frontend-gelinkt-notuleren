@@ -44,7 +44,7 @@
         )
       }}</p>
     <p>{{t 'inauguration-meeting.synchronization.modal.info.paragraph-2'}}</p>
-    <AuHeading @level='5' @skin='5'>
+    <AuHeading @level='2' @skin='5'>
       {{t 'inauguration-meeting.synchronization.modal.attendee-list.title'}}
     </AuHeading>
     <p class='au-u-italic'>
@@ -52,21 +52,25 @@
         'inauguration-meeting.synchronization.modal.attendee-list.no-changes'
       }}
     </p>
-    <AuHeading @level='5' @skin='5'>
+    <AuHeading @level='2' @skin='5'>
       {{t 'inauguration-meeting.synchronization.modal.decisions.title'}}
     </AuHeading>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-      accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-      illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-      explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-      odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-      voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-      quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-      eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-      voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam
-      corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-      Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
-      nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas
-      nulla pariatur?</p>
+    {{#if this.treatments.isLoading}}
+      <AuLoader @padding='small' />
+      <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
+    {{else}}
+      <ol class='meeting__sync-modal__treatments'>
+        {{#each this.treatments.value as |treatment|}}
+          <li class='meeting__sync-modal__treatments__entry'>
+            <AuHeading @level='3' @skin='4'>
+              {{limit-content treatment.onderwerp.titel 80}}
+            </AuHeading>
+            <AuPill @icon='alert-triangle' @skin='warning'>
+              {{t 'behandeling-van-agendapunten.sync-warning'}}
+            </AuPill>
+          </li>
+        {{/each}}
+      </ol>
+    {{/if}}
   </div>
 </Common::SimpleModal>

@@ -12,6 +12,7 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export default class InaugurationMeetingSynchronizationComponent extends Component {
   @service toaster;
+  @service store;
   @tracked modalOpen = false;
 
   get meeting() {
@@ -48,6 +49,51 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
       return;
     }
   });
+
+  treatments = trackedFunction(this, async () => {
+    if (!this.meeting.id) {
+      return [];
+    }
+    const treatments = [];
+    const pageSize = 20;
+    const firstPage = await this.store.query('behandeling-van-agendapunt', {
+      include: [
+        'onderwerp',
+      ].join(','),
+      'filter[onderwerp][zitting][:id:]': this.meeting.id,
+      'page[size]': pageSize,
+      sort: 'onderwerp.position',
+    });
+    const count = firstPage.meta.count;
+    firstPage.forEach((result) => treatments.push(result));
+    let pageNumber = 1;
+    const queries = [];
+    while (pageNumber * pageSize < count) {
+      queries.push(
+        this.store
+          .query('behandeling-van-agendapunt', {
+            'filter[onderwerp][zitting][:id:]': this.meeting.id,
+            'page[size]': pageSize,
+            'page[number]': pageNumber,
+            include: [
+              'onderwerp',
+            ].join(','),
+            sort: 'onderwerp.position',
+          })
+          .then((results) => ({ pageNumber, results })),
+      );
+
+      pageNumber++;
+    }
+    const resultSets = await Promise.all(queries);
+    resultSets
+      .sort((a, b) => a.pageNumber - b.pageNumber)
+      .forEach(({ results }) =>
+        results.forEach((result) => treatments.push(result)),
+      );
+    console.log(treatments);
+    return treatments;
+  })
 
   get buttonClass() {
     const modifier = this.isUpToDate ? 'up-to-date' : 'out-of-date';

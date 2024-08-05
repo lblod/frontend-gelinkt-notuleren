@@ -37,3 +37,28 @@
 .meeting__sync-modal__header {
   border-bottom: 1px solid var(--au-gray-300);
 }
+
+.meeting__sync-modal__treatments {
+  counter-reset: list-number;
+}
+
+.meeting__sync-modal__treatments__entry {
+  margin-bottom: $au-unit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: $au-unit-small;
+  &::before {
+    content: counter(list-number);
+    counter-increment: list-number;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $au-unit;
+    height: $au-unit;
+    font-weight: $au-medium;
+    background-color: #f7f9fc;
+    border: 1px solid #cfd4db;
+    border-radius: $au-unit;
+  }
+}
