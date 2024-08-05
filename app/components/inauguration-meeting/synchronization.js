@@ -73,7 +73,10 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   }
 
   @action
-  closeModal() {
+  cancel() {
+    if (this.synchronize.isRunning) {
+      return;
+    }
     this.modalOpen = false;
   }
 
@@ -87,7 +90,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     } catch (e) {
       success = false;
     } finally {
-      this.closeModal();
+      this.modalOpen = false;
     }
     this.toaster.show(InaugurationMeetingSynchronizationToast, {
       success,
