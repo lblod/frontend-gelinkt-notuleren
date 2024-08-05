@@ -42,7 +42,10 @@
         {{plain-date @zitting.geplandeStart}}</h1>
       {{#if this.lastSync}}
         <AuPill>
-          {{t 'inauguration-meeting.last-synchronization' date=(detailed-date this.lastSync)}}
+          {{t
+            'inauguration-meeting.last-synchronization'
+            date=(detailed-date this.lastSync)
+          }}
         </AuPill>
       {{/if}}
       {{#if this.status}}
