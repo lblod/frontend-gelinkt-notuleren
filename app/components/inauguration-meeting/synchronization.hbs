@@ -10,10 +10,7 @@
   {{/if}}
 
 </AuButton>
-<Common::SimpleModal
-  @modalOpen={{this.modalOpen}}
-  @closeModal={{this.cancel}}
->
+<Common::SimpleModal @modalOpen={{this.modalOpen}} @closeModal={{this.cancel}}>
   <AuToolbar class='au-u-padding meeting__sync-modal__header' as |Group|>
     <Group>
       <AuHeading @level='1' @skin='2'>

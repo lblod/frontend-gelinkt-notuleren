@@ -21,10 +21,21 @@
     <p class='au-u-medium'>{{t
         'inauguration-meeting.synchronization.toast.failure.title'
       }}</p>
-    {{! TODO: add link to local mandatee db }}
-    <p>{{html-safe (t 'inauguration-meeting.synchronization.toast.failure.body.paragraph-1' link=this.lmbEndpoint)}}</p>
     <p>
-      {{html-safe (t 'inauguration-meeting.synchronization.toast.failure.body.paragraph-2' email='gelinktnotuleren@vlaanderen.be')}}
+      {{html-safe
+        (t
+          'inauguration-meeting.synchronization.toast.failure.body.paragraph-1'
+          link=this.lmbEndpoint
+        )
+      }}
+    </p>
+    <p>
+      {{html-safe
+        (t
+          'inauguration-meeting.synchronization.toast.failure.body.paragraph-2'
+          email='gelinktnotuleren@vlaanderen.be'
+        )
+      }}
     </p>
   </AuAlert>
 {{/if}}

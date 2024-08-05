@@ -134,7 +134,8 @@ inauguration-meeting:
     modal:
       title: Overschrijving gegevens
       info:
-        paragraph-1: Deze datasynchronisatie met <a href="{link}" target="_blank">Lokaal Mandatenbeheer</a> zal mogelijks
+        paragraph-1:
+          Deze datasynchronisatie met <a href="{link}" target="_blank">Lokaal Mandatenbeheer</a> zal mogelijks
           gegevens in de installatievergadering overschrijven.
         paragraph-2: Bekijk of die klopt, en pas de gegevens aan in het Lokaal
           Mandatenbeheer waar nodig.
@@ -154,7 +155,6 @@ inauguration-meeting:
         body:
           paragraph-1: Vul gegevens aan in <a href="{link}" target="_blank">Lokaal Mandatenbeheer</a>
           paragraph-2: Indien dit probleem zich blijft voordoen, kunt u contact opnemen met <a href="mailto:{email}">{email}</a>
-
 
 inbox:
   loading: Aan het laden
