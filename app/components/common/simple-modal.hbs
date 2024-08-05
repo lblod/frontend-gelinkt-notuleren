@@ -1,0 +1,30 @@
+{{#if @modalOpen}}
+  {{#in-element this.destinationElement insertBefore=null}}
+    <div class='au-c-modal-backdrop {{if @modalOpen "is-visible"}}'></div>
+    <div
+      id='{{@id}}'
+      class={{class-names
+        'au-c-modal'
+        this.size
+        this.padding
+        this.overflow
+        (if @modalOpen 'is-visible')
+      }}
+      role='dialog'
+      tabindex='-1'
+      {{focus-trap
+        isActive=@modalOpen
+        additionalElements=this.additionalElements
+        focusTrapOptions=(hash
+          initialFocus=@initialFocus
+          fallbackFocus=this.fallbackFocus
+          escapeDeactivates=this.handleEscapePress
+          allowOutsideClick=true
+        )
+      }}
+      ...attributes
+    >
+      {{yield}}
+    </div>
+  {{/in-element}}
+{{/if}}
