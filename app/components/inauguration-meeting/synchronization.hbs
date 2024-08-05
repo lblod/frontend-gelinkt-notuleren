@@ -18,13 +18,20 @@
 >
   <Modal.Body>
     <div class='au-o-flow--small'>
-      <p>{{html-safe (t 'inauguration-meeting.synchronization.modal.info.paragraph-1' link=this.lmbEndpoint)}}</p>
+      <p>{{html-safe
+          (t
+            'inauguration-meeting.synchronization.modal.info.paragraph-1'
+            link=this.lmbEndpoint
+          )
+        }}</p>
       <p>{{t 'inauguration-meeting.synchronization.modal.info.paragraph-2'}}</p>
       <AuHeading @level='5' @skin='5'>
         {{t 'inauguration-meeting.synchronization.modal.attendee-list.title'}}
       </AuHeading>
       <p class='au-u-italic'>
-        {{t 'inauguration-meeting.synchronization.modal.attendee-list.no-changes'}}
+        {{t
+          'inauguration-meeting.synchronization.modal.attendee-list.no-changes'
+        }}
       </p>
       <AuHeading @level='5' @skin='5'>
         {{t 'inauguration-meeting.synchronization.modal.decisions.title'}}

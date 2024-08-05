@@ -22,7 +22,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     return this.meeting.synchronizedOn;
   }
 
-  get lmbEndpoint(){
+  get lmbEndpoint() {
     return ENV.lmbEndpoint;
   }
 
@@ -56,8 +56,8 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   }
 
   get isUpToDate() {
-    if(this.lastSync && this.lastModification.value){
-      return this.lastSync > this.lastModification.value
+    if (this.lastSync && this.lastModification.value) {
+      return this.lastSync > this.lastModification.value;
     } else {
       return false;
     }
@@ -81,7 +81,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     let success = true;
     try {
       this.args.meeting.synchronizedOn = new Date();
-      await this.args.meeting.save()
+      await this.args.meeting.save();
       // TODO: synchronize treatments here
       await timeout(2000);
     } catch (e) {
