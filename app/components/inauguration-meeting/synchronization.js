@@ -57,9 +57,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     const treatments = [];
     const pageSize = 20;
     const firstPage = await this.store.query('behandeling-van-agendapunt', {
-      include: [
-        'onderwerp',
-      ].join(','),
+      include: ['onderwerp'].join(','),
       'filter[onderwerp][zitting][:id:]': this.meeting.id,
       'page[size]': pageSize,
       sort: 'onderwerp.position',
@@ -75,9 +73,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
             'filter[onderwerp][zitting][:id:]': this.meeting.id,
             'page[size]': pageSize,
             'page[number]': pageNumber,
-            include: [
-              'onderwerp',
-            ].join(','),
+            include: ['onderwerp'].join(','),
             sort: 'onderwerp.position',
           })
           .then((results) => ({ pageNumber, results })),
@@ -93,7 +89,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
       );
     console.log(treatments);
     return treatments;
-  })
+  });
 
   get buttonClass() {
     const modifier = this.isUpToDate ? 'up-to-date' : 'out-of-date';
