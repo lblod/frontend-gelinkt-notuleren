@@ -235,6 +235,9 @@ export default class AgendapointsEditController extends Controller {
         defaultAddressUriRoot:
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
       },
+      lpdc: {
+        endpoint: '/lpdc-service',
+      },
     };
   }
 
