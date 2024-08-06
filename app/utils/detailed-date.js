@@ -29,7 +29,7 @@ export const detailedDate = (datetime) => {
       minute: '2-digit',
       hour12: false,
     });
-    const parts = datetimeformat.formatToParts();
+    const parts = datetimeformat.formatToParts(datetime);
     const formatMap = {};
     for (const part of parts) {
       if (part.type !== 'literal') {

@@ -1,5 +1,22 @@
 # frontend-gelinkt-notuleren
 
+## 5.20.2
+
+### Patch Changes
+
+- [#692](https://github.com/lblod/frontend-gelinkt-notuleren/pull/692) [`830254a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/830254a092277112b96e940c61ec07b6e6ab40b1) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix meeting absentees not shown
+
+- [`6b63c5f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6b63c5f9f264337f76353ef3e9739c966d98b238) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix wrong date being shown on meeting overview page
+
+- [#691](https://github.com/lblod/frontend-gelinkt-notuleren/pull/691) [`9c1f96d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9c1f96d1df543388ad23663ca2fc9594f910e132) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure snippets can be correctly inserted on the regulatory statement editor page
+
+## 5.20.1
+
+### Patch Changes
+
+- [#690](https://github.com/lblod/frontend-gelinkt-notuleren/pull/690) [`14308b4`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/14308b401dea6bf3e067a91cf2b94c8e4b9c3d08) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [10.0.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.0.1)
+  Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [22.0.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v22.0.2)
+
 ## 5.20.0
 
 ### Minor Changes
