@@ -236,7 +236,7 @@ export default class AgendapointsEditController extends Controller {
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
       },
       lpdc: {
-        endpoint: ENV.lpdcEndpoint,
+        endpoint: '/lpdc-service',
       },
     };
   }
