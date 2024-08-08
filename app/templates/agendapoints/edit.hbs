@@ -154,6 +154,10 @@
         @controller={{this.controller}}
         @config={{this.config.lpdc}}
       />
+      <MandateeTablePlugin::Insert
+        @controller={{this.controller}}
+        @defaultTag={{this.config.mandateeTable.defaultTag}}
+      />
     </:sidebarCollapsible>
     <:sidebar>
       <this.StructureControlCard @controller={{this.controller}} />
@@ -177,6 +181,10 @@
         @options={{this.locationEditOptions}}
       />
       <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
+      <MandateeTablePlugin::Configure
+        @controller={{this.controller}}
+        @supportedTags={{this.config.mandateeTable.tags}}
+      />
     </:sidebar>
   </RdfaEditorContainer>
 </div>
