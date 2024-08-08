@@ -3,16 +3,22 @@ import { CheckIcon } from '@appuniversum/ember-appuniversum/components/icons/che
 import { SynchronizeIcon } from '@appuniversum/ember-appuniversum/components/icons/synchronize';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
-import { task, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 import { service } from '@ember/service';
-import InaugurationMeetingSynchronizationToast from './synchronization-toast';
 import { trackedFunction } from 'ember-resources/util/function';
 import { executeQuery } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import { headlessProsemirror } from '../../utils/meeting/headless-prosemirror';
+import InaugurationMeetingSynchronizationToast from './synchronization-toast';
+import { syncDocument } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/mandatee-table-plugin';
+import { MANDATEE_TABLE_SAMPLE_CONFIG } from '../../config/mandatee-table-config';
+import SaySerializer from '@lblod/ember-rdfa-editor/core/say-serializer';
+import { getOwner } from '@ember/application';
 
 export default class InaugurationMeetingSynchronizationComponent extends Component {
   @service toaster;
   @service store;
+  @service documentService;
   @tracked modalOpen = false;
 
   get meeting() {
@@ -64,7 +70,11 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
             },
           },
         },
-        include: ['onderwerp'].join(','),
+        include: [
+          'onderwerp',
+          'document-container',
+          'document-container.current-version',
+        ].join(','),
         sort: 'onderwerp.position',
       },
     );
@@ -103,13 +113,19 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   }
 
   synchronize = task(async () => {
+    if (!this.treatments.isResolved) {
+      return;
+    }
     let success = true;
     try {
       this.args.meeting.synchronizedOn = new Date();
       await this.args.meeting.save();
-      // TODO: synchronize treatments here
-      await timeout(2000);
+      const treatments = this.treatments.value.slice();
+      await Promise.all(
+        treatments.map((treatment) => this.syncTreatment(treatment)),
+      );
     } catch (e) {
+      console.error(e);
       success = false;
     } finally {
       this.modalOpen = false;
@@ -119,4 +135,26 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
       timeOut: success ? 3000 : null,
     });
   });
+
+  async syncTreatment(treatment) {
+    const container = await treatment.documentContainer;
+    const currentVersion = await container.currentVersion;
+    const html = currentVersion.content ?? '';
+    const initialState = headlessProsemirror(html, getOwner(this));
+    const syncedState = await syncDocument(
+      initialState,
+      MANDATEE_TABLE_SAMPLE_CONFIG,
+    );
+    const serializer = SaySerializer.fromSchema(syncedState.schema, () => syncedState);
+    const div = document.createElement('div');
+    const doc = serializer.serializeNode(syncedState.doc, undefined);
+    div.appendChild(doc);
+    const syncedHTML = div.innerHTML;
+    await this.documentService.createEditorDocument.perform(
+      currentVersion.title,
+      syncedHTML,
+      container,
+      currentVersion,
+    );
+  }
 }
