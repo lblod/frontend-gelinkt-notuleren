@@ -47,7 +47,7 @@
     "@lblod/ember-environment-banner": "^0.5.0",
     "@lblod/ember-mock-login": "^0.10.0",
     "@lblod/ember-rdfa-editor": "10.0.3-dev.ce6ffc9981a35eb9b8e2f7083a3f3738d5ec03c7",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "22.1.0",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "22.1.0-dev.c3d659f0ddfb62c9241a8a34aea53a45375687f2",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
