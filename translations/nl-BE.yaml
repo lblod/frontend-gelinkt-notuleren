@@ -280,7 +280,7 @@ manage-agenda-zitting-modal:
   gepland-openbaar: Geplande openbaarheid
   actions-label: Acties
   create-item-button: Voeg agendapunt toe
-  edit-item-button: Bewerk agendapunt
+  edit-item-message: Bewerk agendapunt
   ap-published-msg: Agendapunt gepubliceerd
   no-data-message: Geen agendapunten gevonden.
   gepland-openbaar-true-label: Openbaar
