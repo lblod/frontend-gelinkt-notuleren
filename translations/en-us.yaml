@@ -279,7 +279,7 @@ manage-agenda-zitting-modal:
   gepland-openbaar: Planned visibility
   actions-label: Actions
   create-item-button: Add agenda item
-  edit-item-button: Edit agenda item
+  edit-item-message: Edit agenda item
   ap-published-msg: Agenda point is published
   no-data-message: No agenda items found.
   gepland-openbaar-true-label: Public

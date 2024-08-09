@@ -32,7 +32,13 @@
       />
     </td>
     <td>
-      <p>{{limit-content @item.titel 40}}</p>
+      <AuButton
+        @skin='link'
+        {{on 'click' @edit}}
+        title={{t 'manage-agenda-zitting-modal.edit-item-message'}}
+      >
+        {{limit-content @item.titel 40}}
+      </AuButton>
     </td>
     <td>
       {{if
@@ -40,16 +46,6 @@
         (t 'manage-agenda-zitting-modal.gepland-openbaar-true-label')
         (t 'manage-agenda-zitting-modal.gepland-openbaar-false-label')
       }}
-    </td>
-    <td class='au-u-table-right'>
-      <AuButton
-        @skin='link'
-        @icon='pencil'
-        @iconAlignment='left'
-        {{on 'click' @edit}}
-      >
-        {{t 'manage-agenda-zitting-modal.edit-item-button'}}
-      </AuButton>
     </td>
   </DraggableObject>
 {{/if}}
