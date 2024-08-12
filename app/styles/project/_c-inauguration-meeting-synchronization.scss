@@ -34,6 +34,22 @@
   }
 }
 
+.meeting__sync-button--failed {
+  & {
+    background-color: var(--au-orange-200);
+    border-color: var(--au-orange-500);
+    color: var(--au-orange-500);
+  }
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    background-color: var(--au-orange-200);
+    border-color: var(--au-orange-700);
+    color: var(--au-orange-700);
+  }
+}
+
 .meeting__sync-modal__header {
   border-bottom: 1px solid var(--au-gray-300);
 }

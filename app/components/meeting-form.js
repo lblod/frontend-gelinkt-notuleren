@@ -91,13 +91,6 @@ export default class MeetingForm extends Component {
     return this.meetingDetailsData.value?.voorzitter ?? null;
   }
 
-  get lastSync() {
-    if (this.zitting instanceof InstallatieVergaderingModel) {
-      return this.zitting.synchronizedOn;
-    }
-    return;
-  }
-
   meetingDetailsTask = restartableTask(async () => {
     const bestuursorgaan = await this.zitting.bestuursorgaan;
     const specialisedBestuursorgaan =

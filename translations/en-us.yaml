@@ -131,6 +131,7 @@ inauguration-meeting:
     button:
       up-to-date: Synchronization up-to-date
       out-of-date: Synchronize data
+      failed: Synchronization failed, try again
     modal:
       title: Possible loss of data
       info:

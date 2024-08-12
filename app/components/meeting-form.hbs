@@ -40,11 +40,11 @@
           {{t 'meeting-form.scheduled-text.common-meeting'}}
         {{/if}}
         {{plain-date @zitting.geplandeStart}}</h1>
-      {{#if this.lastSync}}
+      {{#if @zitting.synchronizationStatus}}
         <AuPill>
           {{t
             'inauguration-meeting.last-synchronization'
-            date=(detailed-date this.lastSync)
+            date=(detailed-date @zitting.synchronizationStatus.timestamp)
           }}
         </AuPill>
       {{/if}}

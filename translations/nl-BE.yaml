@@ -131,6 +131,7 @@ inauguration-meeting:
     button:
       up-to-date: Synchronisatie up-to-date
       out-of-date: Data synchroniseren
+      failed: Synchronisatie mislukt, probeer opnieuw
     modal:
       title: Overschrijving gegevens
       info:

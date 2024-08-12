@@ -1,15 +1,12 @@
-<AuButton
-  @icon={{this.buttonIcon}}
-  class={{this.buttonClass}}
-  {{on 'click' this.openModal}}
->
-  {{#if this.isUpToDate}}
-    {{t 'inauguration-meeting.synchronization.button.up-to-date'}}
-  {{else}}
-    {{t 'inauguration-meeting.synchronization.button.out-of-date'}}
-  {{/if}}
-
-</AuButton>
+{{#if this.synchronizationStatus.value}}
+  <AuButton
+    @icon={{this.buttonIcon}}
+    class={{this.buttonClass}}
+    {{on 'click' this.openModal}}
+  >
+    {{this.synchronizationStatus.value.label}}
+  </AuButton>
+{{/if}}
 <Common::SimpleModal @modalOpen={{this.modalOpen}} @closeModal={{this.cancel}}>
   <AuToolbar class='au-u-padding meeting__sync-modal__header' as |Group|>
     <Group>

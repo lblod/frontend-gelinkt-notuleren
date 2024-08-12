@@ -1,6 +1,6 @@
 import ZittingModel from './zitting';
-import { attr } from '@ember-data/model';
+import { attr, belongsTo } from '@ember-data/model';
 
 export default class InstallatieVergaderingModel extends ZittingModel {
-  @attr('datetime') synchronizedOn;
+  @belongsTo('installatievergadering-synchronization-status') synchronizationStatus;
 }

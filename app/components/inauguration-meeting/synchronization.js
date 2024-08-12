@@ -19,14 +19,11 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   @service toaster;
   @service store;
   @service documentService;
+  @service intl;
   @tracked modalOpen = false;
 
   get meeting() {
     return this.args.meeting;
-  }
-
-  get lastSync() {
-    return this.meeting.synchronizedOn;
   }
 
   get lmbEndpoint() {
@@ -82,14 +79,57 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   });
 
   get buttonClass() {
-    const modifier = this.isUpToDate ? 'up-to-date' : 'out-of-date';
-
-    return `meeting__sync-button meeting__sync-button--${modifier}`;
+    const modifier = this.synchronizationStatus.value?.status;
+    if(modifier){
+      return `meeting__sync-button meeting__sync-button--${modifier}`;
+    } else {
+      return `meeting__sync-button`;
+    }
   }
 
+  synchronizationStatus = trackedFunction(this, async () => {
+    const synchronizationStatus = await this.meeting.synchronizationStatus;
+    if (!synchronizationStatus) {
+      return {
+        status: 'out-of-date',
+        label: this.intl.t(
+          'inauguration-meeting.synchronization.button.out-of-date',
+        ),
+      };
+    }
+    if (!synchronizationStatus.success) {
+      return {
+        status: 'failed',
+        label: this.intl.t(
+          'inauguration-meeting.synchronization.button.failed',
+        ),
+      };
+    }
+    if (synchronizationStatus.timestamp > this.lastModification.value) {
+      return {
+        status: 'up-to-date',
+        label: this.intl.t(
+          'inauguration-meeting.synchronization.button.up-to-date',
+        ),
+      };
+    } else {
+      return {
+        status: 'out-of-date',
+        label: this.intl.t(
+          'inauguration-meeting.synchronization.button.out-of-date',
+        ),
+      };
+    }
+  });
+
   get isUpToDate() {
-    if (this.lastSync && this.lastModification.value) {
-      return this.lastSync > this.lastModification.value;
+    if (this.meeting.synchronizationStatus === 'failed') {
+      return {
+        skin: 'warning',
+      };
+    }
+    if (this.meeting.synchronizedOn && this.lastModification.value) {
+      return this.meeting.synchronizedOn > this.lastModification.value;
     } else {
       return false;
     }
@@ -117,19 +157,31 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
       return;
     }
     let success = true;
+    let errorMessage = '';
+    const timestamp = new Date();
     try {
-      this.args.meeting.synchronizedOn = new Date();
-      await this.args.meeting.save();
       const treatments = this.treatments.value.slice();
       await Promise.all(
         treatments.map((treatment) => this.syncTreatment(treatment)),
       );
     } catch (e) {
+      errorMessage = e.toString?.();
       console.error(e);
       success = false;
     } finally {
       this.modalOpen = false;
     }
+    const status = this.store.createRecord(
+      'installatievergadering-synchronization-status',
+      {
+        timestamp,
+        success,
+        errorMessage,
+      },
+    );
+    await status.save();
+    this.args.meeting.synchronizationStatus = status;
+    await this.args.meeting.save();
     this.toaster.show(InaugurationMeetingSynchronizationToast, {
       success,
       timeOut: success ? 3000 : null,
@@ -145,7 +197,10 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
       initialState,
       MANDATEE_TABLE_SAMPLE_CONFIG,
     );
-    const serializer = SaySerializer.fromSchema(syncedState.schema, () => syncedState);
+    const serializer = SaySerializer.fromSchema(
+      syncedState.schema,
+      () => syncedState,
+    );
     const div = document.createElement('div');
     const doc = serializer.serializeNode(syncedState.doc, undefined);
     div.appendChild(doc);
