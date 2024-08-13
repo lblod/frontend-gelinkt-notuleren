@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { dropTask } from 'ember-concurrency';
 import { service } from '@ember/service';
 import InstallatieVergaderingModel from '../../../models/installatievergadering';
-import { trackedFunction } from 'ember-resources/util/function';
 
 export default class InboxMeetingsNewController extends Controller {
   @service router;
