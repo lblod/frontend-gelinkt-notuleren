@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import { format } from 'date-fns/fp';
 
 export default class InboxMeetingsNewRoute extends Route {
   @service currentSession;
@@ -46,6 +47,10 @@ export default class InboxMeetingsNewRoute extends Route {
           'is-tijdsspecialisatie-van.classificatie',
         ].join(','),
         filter: {
+          ':or:': {
+            ':gte:binding-einde': format('yyyy-mm-dd')(now),
+            ':has-no:binding-einde': true,
+          },
           'is-tijdsspecialisatie-van': {
             bestuurseenheid: {
               id: this.currentSession.group.id,
