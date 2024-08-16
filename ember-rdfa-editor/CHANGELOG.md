@@ -1,30 +1,5 @@
 # @lblod/ember-rdfa-editor
 
-## 10.0.3
-
-### Patch Changes
-
-- [`5d87134`](https://github.com/lblod/ember-rdfa-editor/commit/5d871341dd51606c48b8a3d24152feb33f452214) Thanks [@elpoelma](https://github.com/elpoelma)! - Addition of `vm-browserify` dependency. This dependency is required as one of the other dependencies (`parse-asn1`) now depends on `vm` (which is built in into node and requires a polyfill on the browser).
-  For more information on this subject, check out https://github.com/browserify/parse-asn1/issues/46
-
-## 10.0.2
-
-### Patch Changes
-
-- [#1208](https://github.com/lblod/ember-rdfa-editor/pull/1208) [`0310750`](https://github.com/lblod/ember-rdfa-editor/commit/03107503598681e5cb8fbb5c307b2a760fe63a20) Thanks [@elpoelma](https://github.com/elpoelma)! - fix in `addPropertyToNode` function: when property is already included, do not add it a second time (this prevents duplications)
-
-## 10.0.1
-
-### Patch Changes
-
-- [#1207](https://github.com/lblod/ember-rdfa-editor/pull/1207) [`4edc7c6`](https://github.com/lblod/ember-rdfa-editor/commit/4edc7c65f16fd25697580c8d2f6ce94a652ecbd9) Thanks [@elpoelma](https://github.com/elpoelma)! - Remove css rule from toolbar which breaks toolbar spacing on bigger screens
-
-## 9.14.1
-
-### Patch Changes
-
-- [#1207](https://github.com/lblod/ember-rdfa-editor/pull/1207) [`4edc7c6`](https://github.com/lblod/ember-rdfa-editor/commit/4edc7c65f16fd25697580c8d2f6ce94a652ecbd9) Thanks [@elpoelma](https://github.com/elpoelma)! - Remove css rule from toolbar which breaks toolbar spacing on bigger screens
-
 ## 10.0.0
 
 ### Major Changes
