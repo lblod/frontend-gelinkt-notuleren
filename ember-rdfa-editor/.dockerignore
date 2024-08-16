@@ -1,8 +1,0 @@
-node_modules
-declarations
-dist
-.eslintcache
-test-results
-playwright-report
-blob-report
-playwright/.cache
