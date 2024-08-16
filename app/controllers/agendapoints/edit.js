@@ -53,7 +53,7 @@ import {
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
-import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
@@ -130,7 +130,7 @@ export default class AgendapointsEditController extends Controller {
   SnippetInsert = SnippetInsertRdfaComponent;
   schema = new Schema({
     nodes: {
-      doc: docWithConfig(),
+      doc: docWithConfig({ rdfaAware: true }),
       paragraph,
       repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
       structure,
@@ -148,7 +148,7 @@ export default class AgendapointsEditController extends Controller {
       location,
       codelist,
       roadsign_regulation,
-      heading,
+      heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
       snippet_placeholder: snippetPlaceholder,
       snippet: snippet(this.config.snippet),
@@ -207,6 +207,7 @@ export default class AgendapointsEditController extends Controller {
       },
       link: {
         interactive: true,
+        rdfaAware: true,
       },
       roadsignRegulation: {
         endpoint: ENV.mowRegistryEndpoint,
