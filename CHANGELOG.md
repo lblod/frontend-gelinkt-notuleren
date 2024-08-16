@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.19.2
+
+### Patch Changes
+
+- [`7544ef6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7544ef6a502f0bb612be7b36c869d986cf3756a0) Thanks [@elpoelma](https://github.com/elpoelma)! - Exlude ember-leaflet assets from fingerprinting
+
 ## 5.19.1
 
 ### Patch Changes
