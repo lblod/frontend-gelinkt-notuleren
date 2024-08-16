@@ -1,0 +1,52 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist/
+/declarations/
+/tmp/
+
+# dependencies
+/bower_components/
+/node_modules/
+/public/say-symbolset.svg
+
+# misc
+/.log
+/.env*
+/.pnp*
+/.sass-cache
+/.eslintcache
+/connect.lock
+/coverage/
+/libpeerconnection.log
+npm-debug.log*
+yarn-error.log
+testem.log
+.DS_Store
+
+*~
+
+# ember-try
+/.node_modules.ember-try/
+/bower.json.ember-try
+/npm-shrinkwrap.json.ember-try
+/package.json.ember-try
+
+# jetbrains
+.idea
+
+# vscode
+.vscode
+
+# nvm
+.nvmrc
+/package-lock.json.ember-try
+/yarn.lock.ember-try
+
+# broccoli-debug
+/DEBUG/
+
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
