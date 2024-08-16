@@ -21,6 +21,7 @@ const emberNodeConfig = {
     resource: {},
     title: { default: '' },
     content: { default: '' },
+    oldContent: { default: ''}
   },
   toDOM: (node) => {
     const parser = new DOMParser();
@@ -33,6 +34,8 @@ const emberNodeConfig = {
         property: 'eli:related_to',
         rev: 'dct:isPartOf',
         typeof: 'besluitpublicatie:Documentonderdeel',
+        'data-rs-content':  node.attrs['content'],
+        'data-rs-title': node.attrs['title']
       },
       ['h5', {}, `Reglementaire bijlage: ${node.attrs['title']}`],
       ['div', {}, ...html.body.childNodes],
@@ -42,9 +45,13 @@ const emberNodeConfig = {
     {
       tag: 'div',
       getAttrs(element) {
+        const oldContent = element.dataset.rsContent;
+        const title = element.dataset.rsTitle
         if (element.dataset['emberNode'] === 'regulatory-statement-view') {
           return {
             resource: element.getAttribute('resource'),
+            oldContent,
+            title
           };
         } else if (
           element.dataset.inlineComponent ===
@@ -55,6 +62,8 @@ const emberNodeConfig = {
           const propsParsed = JSON.parse(element.dataset.props);
           return {
             resource: propsParsed['uri'],
+            oldContent,
+            title
           };
         }
         return false;

@@ -29,8 +29,10 @@ export default class ReadOnlyContentSectionComponent extends Component {
     if (this.node.attrs.title !== this.currentVersion.title) {
       this.args.updateAttribute('title', this.currentVersion.title);
     }
-    if (this.content !== this.currentVersion.htmlSafeContent) {
+    if (this.node.attrs.oldContent !== this.currentVersion.htmlSafeContent.toString()) {
       this.args.updateAttribute('content', this.currentVersion.htmlSafeContent);
+    } else {
+      this.args.updateAttribute('content', this.currentVersion.htmlSafeContent, true);
     }
   }
   get node() {
