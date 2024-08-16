@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:lblod/ember-rdfa-editor.git
 	branch = test/subrepo
-	commit = d33f3ee8795c15f40dfe13a4b12f6cc576d54f8e
-	parent = e0385cad45447c274d33917d7b33c6246a440ddb
+	commit = a7f01d86dead574a699f2ecac8411b8ad9053a41
+	parent = 43be547e5b0255c38598ca1622e8e4fdc847430e
 	method = merge
 	cmdver = 0.4.6
