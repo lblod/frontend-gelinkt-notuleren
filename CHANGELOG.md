@@ -39,6 +39,12 @@
 
 - [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.0.0
 
+## 5.19.2
+
+### Patch Changes
+
+- [`7544ef6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7544ef6a502f0bb612be7b36c869d986cf3756a0) Thanks [@elpoelma](https://github.com/elpoelma)! - Exlude ember-leaflet assets from fingerprinting
+
 ## 5.19.1
 
 ### Patch Changes
