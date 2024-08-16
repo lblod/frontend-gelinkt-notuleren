@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:lblod/ember-rdfa-editor.git
+	branch = test/subrepo
+	commit = d33f3ee8795c15f40dfe13a4b12f6cc576d54f8e
+	parent = e0385cad45447c274d33917d7b33c6246a440ddb
+	method = merge
+	cmdver = 0.4.6
