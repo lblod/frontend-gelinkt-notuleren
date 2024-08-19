@@ -40,10 +40,14 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
       : this.args.meeting.geplandeStart;
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[bekleedt][bevat-in][:id:]': bestuursorganen
-        .map((b) => b.id)
-        .join(','),
-      'filter[:lte:start]': startOfMeeting.toISOString(),
+      filter: {
+        bekleedt: {
+          'bevat-in': {
+            ':id:': bestuursorganen.map((b) => b.id).join(','),
+          },
+        },
+        ':lte:start': startOfMeeting.toISOString(),
+      },
     };
     const candidateOptions = await this.store.query(
       'functionaris',
