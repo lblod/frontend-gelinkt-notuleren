@@ -2,7 +2,10 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { all, restartableTask, timeout } from 'ember-concurrency';
 import { service } from '@ember/service';
-import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
+import {
+  MANDATARIS_STATUS_EFFECTIEF,
+  MANDATARIS_STATUS_WAARNEMEND,
+} from '../../utils/constants';
 
 const GOVERNOR_CLASSIFICATION =
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/180a2fba-6ca9-4766-9b94-82006bb9c709';
@@ -26,6 +29,14 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     return this.args.bestuursorgaan;
   }
 
+  get meeting() {
+    return this.args.meeting;
+  }
+
+  get startOfMeeting() {
+    return this.meeting.gestartOpTijdstip ?? this.meeting.geplandeStart;
+  }
+
   @action
   select(value) {
     this.args.onSelect(value);
@@ -42,6 +53,17 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
           },
         },
         'is-bestuurlijke-alias-van': searchData,
+        status: {
+          ':id:': [
+            MANDATARIS_STATUS_EFFECTIEF,
+            MANDATARIS_STATUS_WAARNEMEND,
+          ].join(','),
+        },
+        ':lte:start': this.startOfMeeting.toISOString(),
+        ':or:': {
+          ':has-no:einde': true,
+          ':gt:einde': this.startOfMeeting.toISOString(),
+        },
       },
       page: { size: 100 },
     };
@@ -66,6 +88,17 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
           },
         },
         'is-bestuurlijke-alias-van': searchData,
+        status: {
+          ':id:': [
+            MANDATARIS_STATUS_EFFECTIEF,
+            MANDATARIS_STATUS_WAARNEMEND,
+          ].join(','),
+        },
+        ':lte:start': this.startOfMeeting.toISOString(),
+        ':or:': {
+          ':has-no:einde': true,
+          ':gt:einde': this.startOfMeeting.toISOString(),
+        },
       },
       page: { size: 100 },
     };
@@ -99,8 +132,6 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
         searchData,
       );
     }
-    return mandatees.filter((mandatee) =>
-      isValidMandateeForMeeting(mandatee, this.args.meeting),
-    );
+    return mandatees;
   });
 }
