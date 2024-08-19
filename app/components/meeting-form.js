@@ -146,8 +146,16 @@ export default class MeetingForm extends Component {
     let queryParams = {
       include: 'is-bestuurlijke-alias-van,status',
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[bekleedt][bevat-in][:uri:]': this.bestuursorgaan.uri,
-      'filter[bekleedt][bestuursfunctie][:id:]': stringifiedDefaultTypeIds,
+      filter: {
+        bekleedt: {
+          'bevat-in': {
+            ':uri:': this.bestuursorgaan.uri,
+          },
+          bestuursfunctie: {
+            ':id:': stringifiedDefaultTypeIds,
+          },
+        },
+      },
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandatees = await this.store.query('mandataris', queryParams);
