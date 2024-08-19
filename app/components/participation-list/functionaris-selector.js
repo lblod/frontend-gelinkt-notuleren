@@ -28,6 +28,9 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
       relevantBestuursOrgaanClassifications = GRIFFIER_CLASSIFICATION_ID;
     }
     const bestuursorganen = await this.store.query('bestuursorgaan', {
+      fields: {
+        bestuursorganen: 'id',
+      },
       filter: {
         'is-tijdsspecialisatie-van': {
           bestuurseenheid: { ':id:': group.id },
@@ -35,10 +38,12 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
         },
       },
     });
-    const startOfMeeting = this.args.meeting.gestartOpTijdstip
-      ? this.args.meeting.gestartOpTijdstip
-      : this.args.meeting.geplandeStart;
+    const startOfMeeting =
+      this.args.meeting.gestartOpTijdstip ?? this.args.meeting.geplandeStart;
     let queryParams = {
+      include: ['is-bestuurlijke-alias-van', 'bekleedt', 'bekleedt.rol'].join(
+        ',',
+      ),
       sort: 'is-bestuurlijke-alias-van.achternaam',
       filter: {
         bekleedt: {
@@ -47,18 +52,16 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
           },
         },
         ':lte:start': startOfMeeting.toISOString(),
+        ':or:': {
+          ':has-no:einde': true,
+          ':gt:einde': startOfMeeting.toISOString(),
+        },
       },
     };
     const candidateOptions = await this.store.query(
       'functionaris',
       queryParams,
     );
-    this.options = candidateOptions.filter((functionaris) => {
-      if (functionaris.einde) {
-        return functionaris.einde >= startOfMeeting;
-      } else {
-        return true;
-      }
-    });
+    this.options = candidateOptions;
   });
 }
