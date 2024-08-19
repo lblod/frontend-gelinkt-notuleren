@@ -149,7 +149,13 @@ export default class MeetingForm extends Component {
     const startOfMeeting =
       this.zitting.gestartOpTijdstip ?? this.zitting.geplandeStart;
     let queryParams = {
-      include: 'is-bestuurlijke-alias-van,status',
+      include: [
+        'is-bestuurlijke-alias-van',
+        'is-bestuurlijke-alias-van.geboorte',
+        'status',
+        'bekleedt',
+        'bekleedt.bestuursfunctie',
+      ].join(','),
       sort: 'is-bestuurlijke-alias-van.achternaam',
       filter: {
         bekleedt: {
