@@ -35,8 +35,14 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       include: 'status',
-      'filter[bekleedt][bevat-in][:uri:]': adminBody.uri,
-      'filter[is-bestuurlijke-alias-van]': searchData,
+      filter: {
+        bekleedt: {
+          'bevat-in': {
+            ':uri:': adminBody.uri,
+          },
+        },
+        'is-bestuurlijke-alias-van': searchData,
+      },
       page: { size: 100 },
     };
     return this.store.query('mandataris', queryParams);
@@ -46,11 +52,22 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     const queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       include: 'status',
-      'filter[bekleedt][bevat-in][is-tijdsspecialisatie-van][classificatie][:uri:]':
-        GOVERNOR_CLASSIFICATION,
-      'filter[is-bestuurlijke-alias-van]': searchData,
-      'filter[bekleedt][bevat-in][is-tijdsspecialisatie-van][bestuurseenheid][:uri:]':
-        adminUnit.uri,
+      filter: {
+        bekleedt: {
+          'bevat-in': {
+            'is-tijdsspecialisatie-van': {
+              classificatie: {
+                ':uri:': GOVERNOR_CLASSIFICATION,
+              },
+              bestuurseenheid: {
+                ':uri:': adminUnit.uri,
+              },
+            },
+          },
+        },
+        'is-bestuurlijke-alias-van': searchData,
+      },
+      page: { size: 100 },
     };
     return this.store.query('mandataris', queryParams);
   }
