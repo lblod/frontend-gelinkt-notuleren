@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.22.0
+
+### Minor Changes
+
+- [#701](https://github.com/lblod/frontend-gelinkt-notuleren/pull/701) [`8730def`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8730def66b22462f4c22f503d798407cd6ace278) Thanks [@lagartoverde](https://github.com/lagartoverde)! - BUmp plugins to 2.22.1
+
 ## 5.21.0
 
 ### Minor Changes
