@@ -3,7 +3,9 @@ steps:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: ${CI_REPO}
-      tags: [ "latest", "${CI_COMMIT_TAG##v}" ]
+      tags:
+        - "${CI_COMMIT_TAG##v}"
+        - "latest"
     secrets: [ docker_username, docker_password ]
 when:
   event: tag
