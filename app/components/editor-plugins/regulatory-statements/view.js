@@ -24,22 +24,17 @@ export default class ReadOnlyContentSectionComponent extends Component {
         include: 'current-version',
       })
     ).firstObject;
+
     this.currentVersion =
       await this.regulatoryStatementContainer.currentVersion;
     if (this.node.attrs.title !== this.currentVersion.title) {
       this.args.updateAttribute('title', this.currentVersion.title);
     }
     if (
-      this.node.attrs.oldContent !==
+      this.node.attrs.content.toString() !==
       this.currentVersion.htmlSafeContent.toString()
     ) {
       this.args.updateAttribute('content', this.currentVersion.htmlSafeContent);
-    } else {
-      this.args.updateAttribute(
-        'content',
-        this.currentVersion.htmlSafeContent,
-        true,
-      );
     }
   }
   get node() {

@@ -3,6 +3,7 @@ import {
   createEmberNodeView,
 } from '@lblod/ember-rdfa-editor/utils/ember-node';
 import ReadOnlyContentSectionComponent from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/view';
+import { htmlSafe } from '@ember/template';
 
 /**
  * @typedef {import('@lblod/ember-rdfa-editor/utils/ember-node').EmberNodeConfig} EmberNodeConfig
@@ -50,8 +51,8 @@ const emberNodeConfig = {
         if (element.dataset['emberNode'] === 'regulatory-statement-view') {
           return {
             resource: element.getAttribute('resource'),
-            oldContent,
             title,
+            content: htmlSafe(oldContent),
           };
         } else if (
           element.dataset.inlineComponent ===
@@ -62,8 +63,8 @@ const emberNodeConfig = {
           const propsParsed = JSON.parse(element.dataset.props);
           return {
             resource: propsParsed['uri'],
-            oldContent,
             title,
+            content: htmlSafe(oldContent),
           };
         }
         return false;
