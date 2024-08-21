@@ -152,6 +152,10 @@
         @controller={{this.controller}}
         @config={{this.config.worship}}
       />
+      <LmbPlugin::Insert
+        @controller={{this.controller}}
+        @config={{this.config.lmb}}
+      />
     </:sidebarCollapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard
@@ -174,6 +178,10 @@
       <VariablePlugin::Location::Edit
         @controller={{this.controller}}
         @options={{this.locationEditOptions}}
+      />
+      <VariablePlugin::Person::Edit
+        @controller={{this.controller}}
+        @config={{this.config.lmb}}
       />
       <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
     </:sidebar>
