@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.23.0
+
+### Minor Changes
+
+- [`832d73d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/832d73dcfc2d6c92e786880500a5d698878c0c59) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Bump ember-rdfa-editor to 10.1.0
+
+### Patch Changes
+
+- [#700](https://github.com/lblod/frontend-gelinkt-notuleren/pull/700) [`a255765`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a255765b83c56b24297acb083935b93769ad37f5) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Don't make unnecesary history changes when updating regulatory statements inside agendapoints
+
 ## 5.22.0
 
 ### Minor Changes
