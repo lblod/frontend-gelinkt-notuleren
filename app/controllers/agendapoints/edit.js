@@ -39,6 +39,8 @@ import {
   locationView,
   text_variable,
   textVariableView,
+  person_variable,
+  personVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   osloLocation,
@@ -159,6 +161,7 @@ export default class AgendapointsEditController extends Controller {
       invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
+      person_variable,
     },
     marks: {
       em,
@@ -238,6 +241,9 @@ export default class AgendapointsEditController extends Controller {
       lpdc: {
         endpoint: '/lpdc-service',
       },
+      lmb: {
+        endpoint: '/vendor-proxy/query',
+      },
     };
   }
 
@@ -283,6 +289,7 @@ export default class AgendapointsEditController extends Controller {
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
         structure: structureView(controller),
+        person_variable: personVariableView(controller),
       };
     };
   }
