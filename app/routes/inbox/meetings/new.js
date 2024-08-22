@@ -20,7 +20,6 @@ export default class InboxMeetingsNewRoute extends Route {
   }
 
   model(params) {
-    console.log(params);
     const type = params.type;
     switch (type) {
       case 'common':
