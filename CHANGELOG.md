@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.19.3
+
+### Patch Changes
+
+- [#707](https://github.com/lblod/frontend-gelinkt-notuleren/pull/707) [`b260950`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b260950f617e4693f9768df49448235acdac1a8a) Thanks [@elpoelma](https://github.com/elpoelma)! - Adjust rdfa-annotation stylesheets to also match full URIs instead of only prefixed ones
+
+- [#706](https://github.com/lblod/frontend-gelinkt-notuleren/pull/706) [`c01e81b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c01e81bc45589b8fe76604d407562d1544462a9f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update to editor-plugin 19.3.2 hotfix which contains fixes for styles of annotated content
+
 ## 5.19.2
 
 ### Patch Changes
