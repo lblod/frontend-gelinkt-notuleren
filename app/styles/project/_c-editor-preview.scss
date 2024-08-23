@@ -29,7 +29,8 @@
   [property='besluit:geplandOpenbaar'],
   [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'],
   [property='besluit:openbaar'],
-  [property='http://data.vlaanderen.be/ns/besluit#openbaar']  {
+  [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+  {
     @include au-font-size($au-h6);
     color: $au-gray-600;
     text-transform: initial;
@@ -44,7 +45,8 @@
   [property='besluit:heeftAgendapunt'],
   [property='http://data.vlaanderen.be/ns/besluit#heeftAgendapunt'],
   [typeof='besluit:Agendapunt'],
-  [typeof='http://data.vlaanderen.be/ns/besluit#Agendapunt'] {
+  [typeof='http://data.vlaanderen.be/ns/besluit#Agendapunt']
+  {
     [property='besluit:geplandOpenbaar'] i,
     [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'] i,
     [property='besluit:geplandOpenbaar'] em,
@@ -52,7 +54,8 @@
     [property='besluit:openbaar'] i,
     [property='http://data.vlaanderen.be/ns/besluit#openbaar'] i,
     [property='besluit:openbaar'] em,
-    [property='http://data.vlaanderen.be/ns/besluit#openbaar'] em {
+    [property='http://data.vlaanderen.be/ns/besluit#openbaar'] em
+    {
       display: none;
     }
   }
@@ -118,7 +121,8 @@
   [property='eli:description'],
   [property='http://data.europa.eu/eli/ontology#description'],
   [property='besluit:openbaar'],
-  [property='http://data.vlaanderen.be/ns/besluit#openbaar'] {
+  [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+  {
     position: relative;
     background-color: rgba($au-blue-700, 0.2);
     box-shadow: inset -4px 0 0 0 $au-blue-700;

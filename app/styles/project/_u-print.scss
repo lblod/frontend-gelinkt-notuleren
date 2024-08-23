@@ -62,21 +62,21 @@
     display: none !important;
   }
 
-  .au-c-editor-preview-treatment--private
-    .behandeling {
-      [property='dc:subject'],
+  .au-c-editor-preview-treatment--private .behandeling {
+    [property='dc:subject'],
       [property='http://purl.org/dc/elements/1.1/subject'],
       [property='eli:title'],
       [property='http://data.europa.eu/eli/ontology#title'],
       [property='eli:description'],
       [property='http://data.europa.eu/eli/ontology#description'],
       [property='besluit:openbaar'],
-      [property='http://data.vlaanderen.be/ns/besluit#openbaar'] {
-        &::after {
-          display: none !important;
-        }
+      [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+    {
+      &::after {
+        display: none !important;
       }
     }
+  }
 
   a[href]:after {
     word-break: break-all !important;
@@ -474,7 +474,8 @@
   .au-c-template--notes [property='dc:subject'],
   .au-c-template--notes [property='http://purl.org/dc/elements/1.1/subject'],
   .au-c-rdfa-publication .notulen [property='dc:subject'],
-  .au-c-rdfa-publication .notulen [property='http://purl.org/dc/elements/1.1/subject'] {
+  .au-c-rdfa-publication .notulen [property='http://purl.org/dc/elements/1.1/subject']
+  {
     font-size: 16px !important;
   }
 

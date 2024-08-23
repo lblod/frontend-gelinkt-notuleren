@@ -122,7 +122,8 @@
   [property='besluit:geplandOpenbaar'],
   [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'],
   [property='besluit:openbaar'],
-  [property='http://data.vlaanderen.be/ns/besluit#openbaar'] {
+  [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+  {
     @include au-font-size($au-h6, $important: true);
     color: $au-gray-600 !important;
     text-transform: initial !important;
@@ -136,7 +137,8 @@
   [property='besluit:heeftAgendapunt'],
   [property='http://data.vlaanderen.be/ns/besluit#heeftAgendapunt'],
   [typeof='besluit:Agendapunt'],
-  [typeof='http://data.vlaanderen.be/ns/besluit#Agendapunt'] {
+  [typeof='http://data.vlaanderen.be/ns/besluit#Agendapunt']
+  {
     display: block !important;
     position: relative;
   }
@@ -145,7 +147,8 @@
   [property='besluit:geplandOpenbaar'],
   [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'],
   [property='besluit:openbaar'],
-  [property='http://data.vlaanderen.be/ns/besluit#openbaar'] {
+  [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+  {
     &:before {
       content: '' !important;
       color: $au-gray-600 !important;
@@ -197,7 +200,8 @@
   }
 
   [property='besluit:heeftAanwezige'],
-  [property='http://data.vlaanderen.be/ns/besluit#heeftAanwezige'] {
+  [property='http://data.vlaanderen.be/ns/besluit#heeftAanwezige']
+  {
     display: block;
     margin-bottom: $au-unit-small;
   }
@@ -222,7 +226,8 @@
   }
 
   [typeof='besluit:BehandelingVanAgendapunt'],
-  [typeof='http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt'] {
+  [typeof='http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt']
+  {
     margin-top: $au-unit;
     padding-top: $au-unit;
     border-top: 0.1rem dotted $au-gray-300;
@@ -232,7 +237,8 @@
     }
 
     [property='besluit:openbaar'],
-    [property='http://data.vlaanderen.be/ns/besluit#openbaar'] {
+    [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+    {
       &:after {
         position: relative;
         left: 0;
@@ -254,7 +260,8 @@
           content: 'Openbare behandeling van agendapunt';
         }
       }
-      &[content='true']:before,&[content='false']:before{
+      &[content='true']:before,
+      &[content='false']:before {
         display: inline-block;
         content: '';
         width: 18px;
@@ -283,15 +290,18 @@
   }
 
   [typeof='besluit:Zitting'],
-  [typeof='http://data.vlaanderen.be/ns/besluit#Zitting'] {
+  [typeof='http://data.vlaanderen.be/ns/besluit#Zitting']
+  {
     > [property='dc:title'],
-    > [property='http://purl.org/dc/elements/1.1/title'] {
+    > [property='http://purl.org/dc/elements/1.1/title']
+    {
       margin-bottom: $au-unit;
     }
   }
 
   [property='dc:subject'],
-  [property='http://purl.org/dc/elements/1.1/subject'] {
+  [property='http://purl.org/dc/elements/1.1/subject']
+  {
     @include au-font-size(var(--au-h6));
     color: $au-gray-600;
     text-transform: initial;
@@ -304,14 +314,14 @@
   }
 
   [property='ext:agendapuntenTable'],
-  [property='http://mu.semte.ch/vocabularies/ext/agendapuntenTable'] {
+  [property='http://mu.semte.ch/vocabularies/ext/agendapuntenTable']
+  {
     [property='besluit:heeftAgendapunt'],
-    [property='http://data.vlaanderen.be/ns/besluit#heeftAgendapunt'] {
-        display: block;
-      }
+    [property='http://data.vlaanderen.be/ns/besluit#heeftAgendapunt']
+    {
+      display: block;
+    }
   }
-
-
 }
 
 // List
@@ -365,15 +375,16 @@
   }
 
   [property='mandaat:isBestuurlijkeAliasVan'],
-  [property='http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan'] {
+  [property='http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan']
+  {
     &:before {
       display: none !important;
     }
-
   }
 
   &[property='besluit:heeftAanwezige'],
-  &[property='http://data.vlaanderen.be/ns/besluit#heeftAanwezige'] {
+  &[property='http://data.vlaanderen.be/ns/besluit#heeftAanwezige']
+  {
     margin-right: $au-unit-tiny !important;
   }
 }
@@ -394,7 +405,8 @@
 [property='besluit:geplandOpenbaar'],
 [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'],
 [property='besluit:openbaar'],
-[property='http://data.vlaanderen.be/ns/besluit#openbaar'] {
+[property='http://data.vlaanderen.be/ns/besluit#openbaar']
+{
   @include au-font-size($au-h6);
   color: $au-gray-600;
   text-transform: initial;
@@ -417,7 +429,8 @@
 [property='besluit:geplandOpenbaar'],
 [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'],
 [property='besluit:openbaar'],
-[property='http://data.vlaanderen.be/ns/besluit#openbaar'] {
+[property='http://data.vlaanderen.be/ns/besluit#openbaar']
+{
   .au-c-template-public,
   .au-c-template-private {
     &:before {
@@ -430,7 +443,8 @@
 [property='besluit:geplandOpenbaar'][content='true'],
 [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'][content='true'],
 [property='besluit:openbaar'][content='true'],
-[property='http://data.vlaanderen.be/ns/besluit#openbaar'][content='true'] {
+[property='http://data.vlaanderen.be/ns/besluit#openbaar'][content='true']
+{
   &:before {
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSIjNjk3MTdDIiBkPSJNMTIsNSBDMTUuOTA0LDUgMTkuNzM2LDcuMjM2IDIxLjg5NCwxMS41NTMgQzIyLjAzNDYyMTQsMTEuODM0NDEwOCAyMi4wMzQ2MjE0LDEyLjE2NTU4OTIgMjEuODk0LDEyLjQ0NyBDMTkuNzM2LDE2Ljc2NCAxNS45MDMsMTkgMTIsMTkgQzguMDk2LDE5IDQuMjY0LDE2Ljc2NCAyLjEwNiwxMi40NDcgQzEuOTY1Mzc4NjEsMTIuMTY1NTg5MiAxLjk2NTM3ODYxLDExLjgzNDQxMDggMi4xMDYsMTEuNTUzIEM0LjI2NCw3LjIzNiA4LjA5Nyw1IDEyLDUgWiBNMTIsNyBDOS4wMyw3IDUuOTk4LDguNjIgNC4xMywxMiBDNS45OTgsMTUuMzggOS4wMzEsMTcgMTIsMTcgQzE0Ljk2OSwxNyAxOC4wMDIsMTUuMzggMTkuODcsMTIgQzE4LjAwMiw4LjYyIDE0Ljk2OSw3IDEyLDcgWiBNMTIsOSBDMTMuNjU2ODU0Miw5IDE1LDEwLjM0MzE0NTggMTUsMTIgQzE1LDEzLjY1Njg1NDIgMTMuNjU2ODU0MiwxNSAxMiwxNSBDMTAuMzQzMTQ1OCwxNSA5LDEzLjY1Njg1NDIgOSwxMiBDOSwxMC4zNDMxNDU4IDEwLjM0MzE0NTgsOSAxMiw5IFoiLz4KPC9zdmc+Cg==');
   }
@@ -440,7 +454,8 @@
 [property='besluit:geplandOpenbaar'][content='false'],
 [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'][content='false'],
 [property='besluit:openbaar'][content='false'],
-[property='http://data.vlaanderen.be/ns/besluit#openbaar'][content='false'] {
+[property='http://data.vlaanderen.be/ns/besluit#openbaar'][content='false']
+{
   &:before {
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICA8cGF0aCBmaWxsPSIjNjk3MTdDIiBkPSJNNC43MDcsMy4yOTMgQzQuMzE0NjIxMTEsMi45MTQwMjc3OSAzLjY5MDkxNTIyLDIuOTE5NDQ3NjMgMy4zMDUxODE0MiwzLjMwNTE4MTQyIEMyLjkxOTQ0NzYzLDMuNjkwOTE1MjIgMi45MTQwMjc3OSw0LjMxNDYyMTExIDMuMjkzLDQuNzA3IEw1LjcxNyw3LjEzMSBDNC4yODcsOC4yMDcgMy4wMzksOS42ODUgMi4xMDYsMTEuNTUzIEMxLjk2NTM3ODYxLDExLjgzNDQxMDggMS45NjUzNzg2MSwxMi4xNjU1ODkyIDIuMTA2LDEyLjQ0NyBDNC4yNjQsMTYuNzY0IDguMDk2LDE5IDEyLDE5IEMxMy41NTUsMTkgMTUuMSwxOC42NDUgMTYuNTMsMTcuOTQ1IEwxOS4yOTMsMjAuNzA3IEMxOS42ODUzNzg5LDIxLjA4NTk3MjIgMjAuMzA5MDg0OCwyMS4wODA1NTI0IDIwLjY5NDgxODYsMjAuNjk0ODE4NiBDMjEuMDgwNTUyNCwyMC4zMDkwODQ4IDIxLjA4NTk3MjIsMTkuNjg1Mzc4OSAyMC43MDcsMTkuMjkzIEw0LjcwNywzLjI5MyBaIE0xNS4wMTQsMTYuNDI4IEMxNC4wMzQsMTYuODExIDEzLjAxNCwxNyAxMiwxNyBDOS4wMzEsMTcgNS45OTgsMTUuMzggNC4xMywxMiBDNC45NDcsMTAuNTIxIDUuOTg4LDkuMzggNy4xNDgsOC41NjMgTDkuMjkyLDEwLjcwNyBDOC43NDI5NDU1OCwxMS44NTQ1NDA3IDguOTc3MzQwMDUsMTMuMjIzNTk4OCA5Ljg3Njg3MDYzLDE0LjEyMzEyOTQgQzEwLjc3NjQwMTIsMTUuMDIyNjU5OSAxMi4xNDU0NTkzLDE1LjI1NzA1NDQgMTMuMjkzLDE0LjcwOCBMMTUuMDEzLDE2LjQyOCBMMTUuMDE0LDE2LjQyOCBaIE0xOC41NTIsMTMuODk2IEMxOS4wMzUsMTMuMzQgMTkuNDc4LDEyLjcwOSAxOS44NywxMiBDMTguMDAyLDguNjIgMTQuOTcsNyAxMiw3IEMxMS44ODgsNyAxMS43NzYsNy4wMDIgMTEuNjY0LDcuMDA3IEw5Ljg3OSw1LjIyMyBDMTAuNTc2MjgyNCw1LjA3NDg2NDI4IDExLjI4NzE1NTcsNS4wMDAxMjM3MSAxMiw1IEMxNS45MDMsNSAxOS43MzYsNy4yMzYgMjEuODk0LDExLjU1MyBDMjIuMDM0NjIxNCwxMS44MzQ0MTA4IDIyLjAzNDYyMTQsMTIuMTY1NTg5MiAyMS44OTQsMTIuNDQ3IEMyMS4zODE0NDU1LDEzLjQ4MjY4OTEgMjAuNzM0MTY2NywxNC40NDYwNDE2IDE5Ljk2OSwxNS4zMTIgTDE4LjU1MiwxMy44OTYgTDE4LjU1MiwxMy44OTYgWiIvPgo8L3N2Zz4K');
   }
