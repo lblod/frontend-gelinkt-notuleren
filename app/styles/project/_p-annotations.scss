@@ -15,11 +15,13 @@
   .h5,
   h6,
   .h6,
-  [property='dc:title'] {
+  [property='dc:title'],
+  [property='http://purl.org/dc/elements/1.1/title'] {
     margin-bottom: 0;
   }
 
-  [typeof='besluit:Agendapunt'] {
+  [typeof='besluit:Agendapunt'],
+  [typeof='http://data.vlaanderen.be/ns/besluit#Agendapunt'] {
     margin-bottom: $au-unit-small;
   }
 
