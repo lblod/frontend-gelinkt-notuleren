@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.24.0
+
+### Minor Changes
+
+- [#703](https://github.com/lblod/frontend-gelinkt-notuleren/pull/703) [`5882b39`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5882b3999862df3a2baebd29d134873345b00110) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add person variable
+
+### Patch Changes
+
+- [#705](https://github.com/lblod/frontend-gelinkt-notuleren/pull/705) [`c31bdea`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c31bdead835a8c0b630f074a4c0e7cc3e1787330) Thanks [@elpoelma](https://github.com/elpoelma)! - Drop the redundant `keyboardInstruction` setting of date-picker, as the date-picker now uses a table element, which screen readers already know how to handle.
+
 ## 5.23.0
 
 ### Minor Changes
