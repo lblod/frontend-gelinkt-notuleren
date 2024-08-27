@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.24.1
+
+### Patch Changes
+
+- [`f4dafaf`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f4dafaf93382a17f58687f4f1d1ad95c24f9494f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.2.2
+
 ## 5.24.0
 
 ### Minor Changes
