@@ -26,7 +26,6 @@ export default class DateTimePicker extends Component {
       monthSelectLabel: this.intl.t('au-date-picker.month-select-label'),
       yearSelectLabel: this.intl.t('au-date-picker.year-select-label'),
       closeLabel: this.intl.t('au-date-picker.close-label'),
-      keyboardInstruction: this.intl.t('au-date-picker.keyboard-instruction'),
       calendarHeading: this.intl.t('au-date-picker.calendar-heading'),
       dayNames: getLocalizedDays(this.intl),
       monthNames: getLocalizedMonths(this.intl),

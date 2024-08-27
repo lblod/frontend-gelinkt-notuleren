@@ -1,5 +1,73 @@
 # frontend-gelinkt-notuleren
 
+## 5.25.0
+
+### Minor Changes
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`389cb83`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/389cb83af84a70e0c3d745b3139ba15a83cc5436) Thanks [@elpoelma](https://github.com/elpoelma)! - (functionaris-selector) improve filter of functionaris query
+
+- [#699](https://github.com/lblod/frontend-gelinkt-notuleren/pull/699) [`0042f62`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0042f62614dc2663d924eab495b70425ce456f8f) Thanks [@elpoelma](https://github.com/elpoelma)! - agendapoint editor: enable rdfa-aware `doc`, `heading` and `link` nodes
+
+- [#699](https://github.com/lblod/frontend-gelinkt-notuleren/pull/699) [`2386e7e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2386e7e1782068b6d99eb47e57dcd04114a1a2b9) Thanks [@elpoelma](https://github.com/elpoelma)! - meeting intro/outro editors: enable rdfa-aware nodes
+
+- [#699](https://github.com/lblod/frontend-gelinkt-notuleren/pull/699) [`fb19e47`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fb19e47f19a9c6cedc06102c2a116617fb7e436a) Thanks [@elpoelma](https://github.com/elpoelma)! - regulatory-statement editor: enable rdfa-aware `link` nodes
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`e500a25`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e500a25b46dd900fb268ca3c47fd39ab1c00d202) Thanks [@elpoelma](https://github.com/elpoelma)! - Improve filtering of possible-participants (meeting-form) query
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`145f095`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/145f0958d060c3d6c6097b639755b994c0ad33ed) Thanks [@elpoelma](https://github.com/elpoelma)! - (mandataris-selector) improve filter of mandatee queries
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`91ed23d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/91ed23d6e82f2e295770cbe0886644293dbe5fc6) Thanks [@elpoelma](https://github.com/elpoelma)! - (meeting-form) adjust possible-participants query to include additional relationships to avoid patchy load of mandatee-table
+
+## 5.24.1
+
+### Patch Changes
+
+- [`f4dafaf`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f4dafaf93382a17f58687f4f1d1ad95c24f9494f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.2.2
+
+## 5.24.0
+
+### Minor Changes
+
+- [#703](https://github.com/lblod/frontend-gelinkt-notuleren/pull/703) [`5882b39`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5882b3999862df3a2baebd29d134873345b00110) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add person variable
+
+### Patch Changes
+
+- [#705](https://github.com/lblod/frontend-gelinkt-notuleren/pull/705) [`c31bdea`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c31bdead835a8c0b630f074a4c0e7cc3e1787330) Thanks [@elpoelma](https://github.com/elpoelma)! - Drop the redundant `keyboardInstruction` setting of date-picker, as the date-picker now uses a table element, which screen readers already know how to handle.
+
+## 5.23.0
+
+### Minor Changes
+
+- [`832d73d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/832d73dcfc2d6c92e786880500a5d698878c0c59) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Bump ember-rdfa-editor to 10.1.0
+
+### Patch Changes
+
+- [#700](https://github.com/lblod/frontend-gelinkt-notuleren/pull/700) [`a255765`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a255765b83c56b24297acb083935b93769ad37f5) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Don't make unnecesary history changes when updating regulatory statements inside agendapoints
+
+## 5.22.0
+
+### Minor Changes
+
+- [#701](https://github.com/lblod/frontend-gelinkt-notuleren/pull/701) [`8730def`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8730def66b22462f4c22f503d798407cd6ace278) Thanks [@lagartoverde](https://github.com/lagartoverde)! - BUmp plugins to 2.22.1
+
+## 5.21.0
+
+### Minor Changes
+
+- [#667](https://github.com/lblod/frontend-gelinkt-notuleren/pull/667) [`74542c6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/74542c614559541f83acc87f0d2d63a58aede5f3) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4693: Bump `@lblod/ember-rdfa-editor-lblod-plugins` to `19.2.0` and enable `LPDC` plugin
+
+- [#696](https://github.com/lblod/frontend-gelinkt-notuleren/pull/696) [`0201665`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/02016653bade630d84a6c7bd94d831d823c47820) Thanks [@elpoelma](https://github.com/elpoelma)! - Remove seperate edit button for agenda items and make agenda item titles clickable
+
+### Patch Changes
+
+- [#698](https://github.com/lblod/frontend-gelinkt-notuleren/pull/698) [`6013e9f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6013e9f21acd5c37c54798a5a059b6b2feede347) Thanks [@elpoelma](https://github.com/elpoelma)! - Exlude ember-leaflet assets from fingerprinting
+
+- [#695](https://github.com/lblod/frontend-gelinkt-notuleren/pull/695) [`65a57f1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/65a57f1577b4abeb112ae10bdb8000ca06638939) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.0.3
+
+- [#695](https://github.com/lblod/frontend-gelinkt-notuleren/pull/695) [`65a57f1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/65a57f1577b4abeb112ae10bdb8000ca06638939) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.1.0
+
+- [#693](https://github.com/lblod/frontend-gelinkt-notuleren/pull/693) [`c04e82f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c04e82feb03b5138bb9e994544dda420bb3d181c) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix links in meeting sidebar
+
 ## 5.20.2
 
 ### Patch Changes
@@ -38,6 +106,12 @@
 - [#685](https://github.com/lblod/frontend-gelinkt-notuleren/pull/685) [`f8ad946`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f8ad946710e36a3949c05ec66470d820e8a6532b) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4829: Design updates to meetings
 
 - [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.0.0
+
+## 5.19.2
+
+### Patch Changes
+
+- [`7544ef6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7544ef6a502f0bb612be7b36c869d986cf3756a0) Thanks [@elpoelma](https://github.com/elpoelma)! - Exlude ember-leaflet assets from fingerprinting
 
 ## 5.19.1
 

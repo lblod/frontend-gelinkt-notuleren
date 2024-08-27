@@ -3,11 +3,14 @@ import { action } from '@ember/object';
 import { tracked } from 'tracked-built-ins';
 import { task, all, restartableTask } from 'ember-concurrency';
 import { service } from '@ember/service';
-import isValidMandateeForMeeting from 'frontend-gelinkt-notuleren/utils/is-valid-mandatee-for-meeting';
 import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
 import { trackedFunction } from 'ember-resources/util/function';
 import { trackedTask } from 'ember-resources/util/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
+import {
+  MANDATARIS_STATUS_EFFECTIEF,
+  MANDATARIS_STATUS_WAARNEMEND,
+} from '../utils/constants';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
@@ -144,19 +147,42 @@ export default class MeetingForm extends Component {
     const stringifiedDefaultTypeIds = aanwezigenRoles
       .map((t) => t.id)
       .join(',');
+    const startOfMeeting =
+      this.zitting.gestartOpTijdstip ?? this.zitting.geplandeStart;
     let queryParams = {
-      include: 'is-bestuurlijke-alias-van,status',
+      include: [
+        'is-bestuurlijke-alias-van',
+        'is-bestuurlijke-alias-van.geboorte',
+        'status',
+        'bekleedt',
+        'bekleedt.bestuursfunctie',
+      ].join(','),
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[bekleedt][bevat-in][:uri:]': this.bestuursorgaan.uri,
-      'filter[bekleedt][bestuursfunctie][:id:]': stringifiedDefaultTypeIds,
+      filter: {
+        bekleedt: {
+          'bevat-in': {
+            ':uri:': this.bestuursorgaan.uri,
+          },
+          bestuursfunctie: {
+            ':id:': stringifiedDefaultTypeIds,
+          },
+        },
+        status: {
+          ':id:': [
+            MANDATARIS_STATUS_EFFECTIEF,
+            MANDATARIS_STATUS_WAARNEMEND,
+          ].join(','),
+        },
+        ':lte:start': startOfMeeting.toISOString(),
+        ':or:': {
+          ':has-no:einde': true,
+          ':gt:einde': startOfMeeting.toISOString(),
+        },
+      },
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandatees = await this.store.query('mandataris', queryParams);
-    return Array.from(
-      mandatees.filter((mandatee) =>
-        isValidMandateeForMeeting(mandatee, this.zitting),
-      ),
-    );
+    return Array.from(mandatees);
   });
 
   possibleParticipantsData = trackedTask(

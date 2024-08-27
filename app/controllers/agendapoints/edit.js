@@ -39,6 +39,8 @@ import {
   locationView,
   text_variable,
   textVariableView,
+  person_variable,
+  personVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   osloLocation,
@@ -51,7 +53,7 @@ import {
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
-import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
@@ -135,7 +137,7 @@ export default class AgendapointsEditController extends Controller {
   SnippetInsert = SnippetInsertRdfaComponent;
   schema = new Schema({
     nodes: {
-      doc: docWithConfig(),
+      doc: docWithConfig({ rdfaAware: true }),
       paragraph,
       repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
       structure,
@@ -154,7 +156,7 @@ export default class AgendapointsEditController extends Controller {
       codelist,
       roadsign_regulation,
       mandatee_table,
-      heading,
+      heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
       snippet_placeholder: snippetPlaceholder,
       snippet: snippet(this.config.snippet),
@@ -167,6 +169,7 @@ export default class AgendapointsEditController extends Controller {
       invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
+      person_variable,
     },
     marks: {
       em,
@@ -212,6 +215,7 @@ export default class AgendapointsEditController extends Controller {
       },
       link: {
         interactive: true,
+        rdfaAware: true,
       },
       roadsignRegulation: {
         endpoint: ENV.mowRegistryEndpoint,
@@ -250,6 +254,9 @@ export default class AgendapointsEditController extends Controller {
         config: MANDATEE_TABLE_SAMPLE_CONFIG,
         tags: Object.keys(MANDATEE_TABLE_SAMPLE_CONFIG),
         defaultTag: Object.keys(MANDATEE_TABLE_SAMPLE_CONFIG)[0],
+      },
+      lmb: {
+        endpoint: '/vendor-proxy/query',
       },
     };
   }
@@ -297,6 +304,7 @@ export default class AgendapointsEditController extends Controller {
         snippet: snippetView(this.config.snippet)(controller),
         structure: structureView(controller),
         mandatee_table: mandateeTableView(controller),
+        person_variable: personVariableView(controller),
       };
     };
   }

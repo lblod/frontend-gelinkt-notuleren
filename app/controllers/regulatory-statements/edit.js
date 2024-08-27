@@ -78,6 +78,8 @@ import {
   locationView,
   text_variable,
   textVariableView,
+  person_variable,
+  personVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   osloLocation,
@@ -154,6 +156,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
+      person_variable,
     },
     marks: {
       em,
@@ -185,6 +188,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
+        person_variable: personVariableView(controller),
       };
     };
   }
@@ -254,6 +258,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       },
       link: {
         interactive: true,
+        rdfaAware: true,
       },
       structures: STRUCTURE_SPECS,
       worship: {
@@ -273,6 +278,9 @@ export default class RegulatoryStatementsRoute extends Controller {
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/',
         defaultAddressUriRoot:
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
+      },
+      lmb: {
+        endpoint: '/vendor-proxy/query',
       },
     };
   }
