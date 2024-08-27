@@ -79,7 +79,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         LIMIT 10`;
       return executeQuery({
         query: sparqlQuery,
-        endpoint: 'http://localhost/vendor-proxy/query',
+        endpoint: '/vendor-proxy/query',
       });
     },
     updateContent: (pos, queryResult) => {
@@ -158,7 +158,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         LIMIT 10`;
       return executeQuery({
         query: sparqlQuery,
-        endpoint: 'http://localhost/vendor-proxy/query',
+        endpoint: '/vendor-proxy/query',
       });
     },
     updateContent: (pos, queryResult) => {
