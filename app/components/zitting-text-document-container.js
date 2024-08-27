@@ -14,13 +14,13 @@ import {
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import {
-  block_rdfa,
+  blockRdfaWithConfig,
   docWithConfig,
   hard_break,
   horizontal_rule,
-  invisible_rdfa,
+  invisibleRdfaWithConfig,
   paragraph,
-  repaired_block,
+  repairedBlockWithConfig,
   text,
 } from '@lblod/ember-rdfa-editor/nodes';
 import {
@@ -36,11 +36,10 @@ import {
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
-import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image } from '@lblod/ember-rdfa-editor/plugins/image';
-import { inline_rdfa } from '@lblod/ember-rdfa-editor/marks';
 import {
   date,
   dateView,
@@ -49,6 +48,10 @@ import {
 import { service } from '@ember/service';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import { tracked } from '@glimmer/tracking';
+import {
+  inlineRdfaWithConfig,
+  inlineRdfaWithConfigView,
+} from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
@@ -68,28 +71,28 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   schema = new Schema({
     nodes: {
-      doc: docWithConfig(),
+      doc: docWithConfig({ rdfaAware: true }),
       paragraph,
-      repaired_block,
+      repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
       list_item: listItemWithConfig({ enableHierarchicalList: true }),
       ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
       bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
-      heading,
+      heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
       horizontal_rule,
       code_block,
       text,
       image,
       hard_break,
-      invisible_rdfa,
-      block_rdfa,
+      invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
+      block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
+      inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
     },
     marks: {
-      inline_rdfa,
       em,
       strong,
       underline,
@@ -134,6 +137,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
     return {
       link: {
         interactive: true,
+        rdfaAware: true,
       },
       date: {
         placeholder: {
@@ -173,6 +177,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       return {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
+        inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
       };
     };
   }

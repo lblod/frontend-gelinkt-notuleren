@@ -12,3 +12,9 @@ export const DURING_POS_ID = '4790eec5-acd2-4c1d-8e91-90bb2998f87c';
 export const AFTER_POS_ID = '267a09cc-5380-492d-93ad-697b9e99f032';
 //attachment types
 export const REGULATORY_TYPE_ID = '14e264b4-92db-483f-9dd1-3e806ad6d26c';
+
+//mandatee status
+export const MANDATARIS_STATUS_WAARNEMEND =
+  'e1ca6edd-55e1-4288-92a5-53f4cf71946a';
+export const MANDATARIS_STATUS_EFFECTIEF =
+  '21063a5b-912c-4241-841c-cc7fb3c73e75';

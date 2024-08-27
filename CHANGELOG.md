@@ -1,5 +1,29 @@
 # frontend-gelinkt-notuleren
 
+## 5.25.0
+
+### Minor Changes
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`389cb83`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/389cb83af84a70e0c3d745b3139ba15a83cc5436) Thanks [@elpoelma](https://github.com/elpoelma)! - (functionaris-selector) improve filter of functionaris query
+
+- [#699](https://github.com/lblod/frontend-gelinkt-notuleren/pull/699) [`0042f62`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0042f62614dc2663d924eab495b70425ce456f8f) Thanks [@elpoelma](https://github.com/elpoelma)! - agendapoint editor: enable rdfa-aware `doc`, `heading` and `link` nodes
+
+- [#699](https://github.com/lblod/frontend-gelinkt-notuleren/pull/699) [`2386e7e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2386e7e1782068b6d99eb47e57dcd04114a1a2b9) Thanks [@elpoelma](https://github.com/elpoelma)! - meeting intro/outro editors: enable rdfa-aware nodes
+
+- [#699](https://github.com/lblod/frontend-gelinkt-notuleren/pull/699) [`fb19e47`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fb19e47f19a9c6cedc06102c2a116617fb7e436a) Thanks [@elpoelma](https://github.com/elpoelma)! - regulatory-statement editor: enable rdfa-aware `link` nodes
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`e500a25`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e500a25b46dd900fb268ca3c47fd39ab1c00d202) Thanks [@elpoelma](https://github.com/elpoelma)! - Improve filtering of possible-participants (meeting-form) query
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`145f095`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/145f0958d060c3d6c6097b639755b994c0ad33ed) Thanks [@elpoelma](https://github.com/elpoelma)! - (mandataris-selector) improve filter of mandatee queries
+
+- [#702](https://github.com/lblod/frontend-gelinkt-notuleren/pull/702) [`91ed23d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/91ed23d6e82f2e295770cbe0886644293dbe5fc6) Thanks [@elpoelma](https://github.com/elpoelma)! - (meeting-form) adjust possible-participants query to include additional relationships to avoid patchy load of mandatee-table
+
+## 5.24.1
+
+### Patch Changes
+
+- [`f4dafaf`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f4dafaf93382a17f58687f4f1d1ad95c24f9494f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.2.2
+
 ## 5.24.0
 
 ### Minor Changes

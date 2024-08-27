@@ -258,6 +258,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       },
       link: {
         interactive: true,
+        rdfaAware: true,
       },
       structures: STRUCTURE_SPECS,
       worship: {
