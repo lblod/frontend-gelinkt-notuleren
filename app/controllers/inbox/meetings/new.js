@@ -2,10 +2,14 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { dropTask } from 'ember-concurrency';
 import { service } from '@ember/service';
+import InstallatieVergaderingModel from '../../../models/installatievergadering';
 
 export default class InboxMeetingsNewController extends Controller {
   @service router;
+  @service store;
   @service intl;
+
+  queryParams = ['type'];
 
   get meeting() {
     return this.model;
@@ -17,6 +21,18 @@ export default class InboxMeetingsNewController extends Controller {
   @action
   handleUpdateMeetingOpLocatie(event) {
     this.meeting.opLocatie = event.target.value;
+  }
+
+  get isInaugurationMeeting() {
+    return this.meeting instanceof InstallatieVergaderingModel;
+  }
+
+  get title() {
+    if (this.isInaugurationMeeting) {
+      return this.intl.t('inbox.meetings.new.inauguration-meeting.title');
+    } else {
+      return this.intl.t('inbox.meetings.new.common-meeting.title');
+    }
   }
 
   saveMeetingTask = dropTask(async (event) => {
@@ -31,13 +47,36 @@ export default class InboxMeetingsNewController extends Controller {
         ),
       );
     }
-
     if (this.meeting.isValid) {
       this.meeting.gestartOpTijdstip = this.meeting.geplandeStart;
       await this.meeting.save();
+      if (this.isInaugurationMeeting) {
+        await this.setUpInaugurationMeeting();
+      }
       this.router.replaceWith('meetings.edit', this.meeting.id);
     }
   });
+
+  async setUpInaugurationMeeting() {
+    const promises = [];
+    let previousAgendapoint;
+    for (let i = 0; i < 9; i++) {
+      const agendapoint = this.store.createRecord('agendapunt', {
+        position: i,
+        geplandOpenbaar: true,
+        titel: `Naam Agendapunt ${i}`,
+        zitting: this.meeting,
+        vorigeAgendapunt: previousAgendapoint,
+      });
+      const treatment = this.store.createRecord('behandeling-van-agendapunt', {
+        openbaar: true,
+        onderwerp: agendapoint,
+      });
+      promises.push(agendapoint.save(), treatment.saveAndPersistDocument());
+      previousAgendapoint = agendapoint;
+    }
+    await Promise.all(promises);
+  }
 
   @action
   updateAdministrativeBody(administrativeBody) {
