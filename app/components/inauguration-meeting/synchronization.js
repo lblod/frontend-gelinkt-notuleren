@@ -80,7 +80,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
 
   get buttonClass() {
     const modifier = this.synchronizationStatus.value?.status;
-    if(modifier){
+    if (modifier) {
       return `meeting__sync-button meeting__sync-button--${modifier}`;
     } else {
       return `meeting__sync-button`;
@@ -89,6 +89,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
 
   synchronizationStatus = trackedFunction(this, async () => {
     const synchronizationStatus = await this.meeting.synchronizationStatus;
+    const lastModification = await this.lastModification.promise;
     if (!synchronizationStatus) {
       return {
         status: 'out-of-date',
@@ -105,7 +106,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
         ),
       };
     }
-    if (synchronizationStatus.timestamp > this.lastModification.value) {
+    if (synchronizationStatus.timestamp > lastModification) {
       return {
         status: 'up-to-date',
         label: this.intl.t(
