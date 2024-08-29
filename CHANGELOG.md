@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.26.0
+
+### Minor Changes
+
+- [#697](https://github.com/lblod/frontend-gelinkt-notuleren/pull/697) [`6127729`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6127729b9cac923835ccfed5750867173072016f) Thanks [@elpoelma](https://github.com/elpoelma)! - Add meeting details modal to inauguration-meeting creation flow
+
+### Patch Changes
+
+- [#708](https://github.com/lblod/frontend-gelinkt-notuleren/pull/708) [`00c342d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/00c342d84510d960123b958baaa4ac6e58604339) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.3.0
+
 ## 5.25.0
 
 ### Minor Changes
