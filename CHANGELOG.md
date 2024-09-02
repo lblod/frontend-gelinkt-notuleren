@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.27.0
+
+### Minor Changes
+
+- [#694](https://github.com/lblod/frontend-gelinkt-notuleren/pull/694) [`eb549e7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eb549e75f93e3fb02a840d84bf6d68808880b7a8) Thanks [@elpoelma](https://github.com/elpoelma)! - Addition of a generic `SimpleModal` component. This component is an extension of the `AuModal` component. It is less opinionated as the content can be completely configured (no predefined content).
+
+- [#694](https://github.com/lblod/frontend-gelinkt-notuleren/pull/694) [`eb549e7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eb549e75f93e3fb02a840d84bf6d68808880b7a8) Thanks [@elpoelma](https://github.com/elpoelma)! - Addition of a basic meeting synchronization flow which allows users to synchronize an inauguration meeting with a configured LMB endpoint.
+
+### Patch Changes
+
+- [#694](https://github.com/lblod/frontend-gelinkt-notuleren/pull/694) [`324fdb5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/324fdb52e33e0d61572680ef947df5b794a97464) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.3.0
+
 ## 5.26.0
 
 ### Minor Changes
