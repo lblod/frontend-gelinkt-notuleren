@@ -93,6 +93,7 @@ export default class MeetingForm extends Component {
   get voorzitter() {
     return this.meetingDetailsData.value?.voorzitter ?? null;
   }
+
   meetingDetailsTask = restartableTask(async () => {
     const bestuursorgaan = await this.zitting.bestuursorgaan;
     const specialisedBestuursorgaan =

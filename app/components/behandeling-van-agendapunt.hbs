@@ -1,8 +1,18 @@
 {{#if this.editable}}
   <div class='au-c-meeting-chrome-editable'>
-    <AuHeading id='behandeling-{{@behandeling.id}}' @level='3' @skin='4'>
-      {{limit-content @behandeling.onderwerp.titel 80}}
-    </AuHeading>
+    <div
+      class='au-u-flex au-u-flex--spaced-small au-u-flex--row au-u-flex--vertical-center'
+    >
+      <AuHeading id='behandeling-{{@behandeling.id}}' @level='3' @skin='4'>
+        {{limit-content @behandeling.onderwerp.titel 80}}
+      </AuHeading>
+      {{#if this.isInaugurationMeeting}}
+        <AuPill @icon='alert-triangle' @skin='warning'>
+          {{t 'behandeling-van-agendapunten.sync-warning'}}
+        </AuPill>
+      {{/if}}
+    </div>
+
     <Common::MeetingSubSection
       @title={{t 'behandeling-van-agendapunten.visibility'}}
     >

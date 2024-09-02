@@ -82,6 +82,7 @@ behandeling-van-agendapunten:
   needs-participants: Configureer de aanwezigen bij dit agendapunt alvorens een stemming toe te voegen.
   cannot-edit-participants: Aanwezigen zijn niet aanpasbaar als er al een stemming plaatsvond.
   edit-document: 'Bewerk document'
+  sync-warning: Gegevens mogelijks overschreven door synchronisatie
 
 contact:
   about: Waar gaat uw bericht over?
@@ -123,6 +124,38 @@ editor-document-title:
   agendapoint-title: agendapunt titel
   change-title: Titel wijzigen
   title-saved: Titel opgeslagen
+
+inauguration-meeting:
+  last-synchronization: Laatste datasynchronisatie op {date}
+  synchronization:
+    button:
+      up-to-date: Synchronisatie up-to-date
+      out-of-date: Data synchroniseren
+      failed: Synchronisatie mislukt, probeer opnieuw
+    modal:
+      title: Overschrijving gegevens
+      info:
+        paragraph-1:
+          Deze datasynchronisatie met <a href="{link}" target="_blank">Lokaal Mandatenbeheer</a> zal mogelijks
+          gegevens in de installatievergadering overschrijven.
+        paragraph-2: Bekijk of die klopt, en pas de gegevens aan in het Lokaal
+          Mandatenbeheer waar nodig.
+      attendee-list:
+        title: Aanwezigenlijst
+        no-changes: Geen verandering
+      decisions:
+        title: Besluiten
+      actions:
+        cancel: Annuleer
+        synchronize: Synchroniseer
+    toast:
+      success:
+        title: Synchronisatie met Lokale Mandatenbeheer geslaagd.
+      failure:
+        title: Synchronisatie met Lokale Mandatenbeheer mislukt.
+        body:
+          paragraph-1: Vul gegevens aan in <a href="{link}" target="_blank">Lokaal Mandatenbeheer</a>
+          paragraph-2: Indien dit probleem zich blijft voordoen, kunt u contact opnemen met <a href="mailto:{email}">{email}</a>
 
 inbox:
   loading: Aan het laden

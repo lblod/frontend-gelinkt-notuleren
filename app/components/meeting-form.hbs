@@ -32,7 +32,7 @@
     </Group>
   </AuToolbar>
   <AuToolbar @size='small' class='au-u-padding-top-none' as |Group|>
-    <Group>
+    <Group class='au-u-flex--vertical-center'>
       <h1 class='au-c-app-chrome__title'>
         {{#if this.isInaugurationMeeting}}
           {{t 'meeting-form.scheduled-text.inauguration-meeting'}}
@@ -40,15 +40,26 @@
           {{t 'meeting-form.scheduled-text.common-meeting'}}
         {{/if}}
         {{plain-date @zitting.geplandeStart}}</h1>
+      {{#if @zitting.synchronizationStatus}}
+        <AuPill>
+          {{t
+            'inauguration-meeting.last-synchronization'
+            date=(detailed-date @zitting.synchronizationStatus.timestamp)
+          }}
+        </AuPill>
+      {{/if}}
       {{#if this.status}}
         <AuPill @skin='success'>
           {{this.status}}
         </AuPill>
       {{/if}}
     </Group>
-    <Group>
+    <Group class='au-u-flex--vertical-center'>
       {{#unless this.readOnly}}
         <DeleteMeeting @meeting={{@zitting}} />
+        {{#if this.isInaugurationMeeting}}
+          <InaugurationMeeting::Synchronization @meeting={{this.zitting}} />
+        {{/if}}
       {{/unless}}
       {{#if this.isComplete}}
         <AuButton @skin='secondary' {{on 'click' this.goToPublish}}>

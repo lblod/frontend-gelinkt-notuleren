@@ -1,0 +1,73 @@
+{{#if this.synchronizationStatus.value}}
+  <AuButton
+    @icon={{this.buttonIcon}}
+    class={{this.buttonClass}}
+    {{on 'click' this.openModal}}
+  >
+    {{this.synchronizationStatus.value.label}}
+  </AuButton>
+{{/if}}
+<Common::SimpleModal @modalOpen={{this.modalOpen}} @closeModal={{this.cancel}}>
+  <AuToolbar class='au-u-padding meeting__sync-modal__header' as |Group|>
+    <Group>
+      <AuHeading @level='1' @skin='2'>
+        {{t 'inauguration-meeting.synchronization.modal.title'}}
+      </AuHeading>
+    </Group>
+    <Group>
+      <AuButton
+        {{on 'click' this.cancel}}
+        @skin='naked'
+        @disabled={{this.synchronize.isRunning}}
+      >
+        {{t 'inauguration-meeting.synchronization.modal.actions.cancel'}}
+      </AuButton>
+      <AuButton
+        {{on 'click' (perform this.synchronize)}}
+        @icon='synchronize'
+        @skin='primary'
+        @loading={{this.synchronize.isRunning}}
+      >
+        {{t 'inauguration-meeting.synchronization.modal.actions.synchronize'}}
+      </AuButton>
+    </Group>
+  </AuToolbar>
+
+  <div class='au-u-padding au-o-flow--small'>
+    <p>{{html-safe
+        (t
+          'inauguration-meeting.synchronization.modal.info.paragraph-1'
+          link=this.lmbEndpoint
+        )
+      }}</p>
+    <p>{{t 'inauguration-meeting.synchronization.modal.info.paragraph-2'}}</p>
+    <AuHeading @level='2' @skin='5'>
+      {{t 'inauguration-meeting.synchronization.modal.attendee-list.title'}}
+    </AuHeading>
+    <p class='au-u-italic'>
+      {{t
+        'inauguration-meeting.synchronization.modal.attendee-list.no-changes'
+      }}
+    </p>
+    <AuHeading @level='2' @skin='5'>
+      {{t 'inauguration-meeting.synchronization.modal.decisions.title'}}
+    </AuHeading>
+    {{#if this.treatments.isLoading}}
+      <AuLoader @padding='small' />
+      <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
+    {{else}}
+      <ol class='meeting__sync-modal__treatments'>
+        {{#each this.treatments.value as |treatment|}}
+          <li class='meeting__sync-modal__treatments__entry'>
+            <AuHeading @level='3' @skin='4'>
+              {{limit-content treatment.onderwerp.titel 80}}
+            </AuHeading>
+            <AuPill @icon='alert-triangle' @skin='warning'>
+              {{t 'behandeling-van-agendapunten.sync-warning'}}
+            </AuPill>
+          </li>
+        {{/each}}
+      </ol>
+    {{/if}}
+  </div>
+</Common::SimpleModal>

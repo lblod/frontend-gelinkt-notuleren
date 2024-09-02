@@ -78,3 +78,7 @@ inflector.irregular(
 );
 inflector.irregular('publishing-log', 'publishing-logs');
 inflector.uncountable('sync');
+inflector.irregular(
+  'installatievergadering-synchronization-status',
+  'installatievergadering-synchronization-statuses',
+);

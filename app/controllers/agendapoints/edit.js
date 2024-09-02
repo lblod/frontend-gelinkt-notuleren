@@ -101,6 +101,11 @@ import {
 import InsertArticleComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/decision-plugin/insert-article';
 
 import {
+  mandatee_table,
+  mandateeTableView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/mandatee-table-plugin/node';
+
+import {
   snippetPlaceholder,
   snippetPlaceholderView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet-placeholder';
@@ -108,9 +113,11 @@ import {
   snippet,
   snippetView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
+
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+import { MANDATEE_TABLE_SAMPLE_CONFIG } from '../../config/mandatee-table-config';
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -148,6 +155,7 @@ export default class AgendapointsEditController extends Controller {
       location,
       codelist,
       roadsign_regulation,
+      mandatee_table,
       heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
       snippet_placeholder: snippetPlaceholder,
@@ -242,6 +250,11 @@ export default class AgendapointsEditController extends Controller {
       lpdc: {
         endpoint: '/lpdc-service',
       },
+      mandateeTable: {
+        config: MANDATEE_TABLE_SAMPLE_CONFIG,
+        tags: Object.keys(MANDATEE_TABLE_SAMPLE_CONFIG),
+        defaultTag: Object.keys(MANDATEE_TABLE_SAMPLE_CONFIG)[0],
+      },
       lmb: {
         endpoint: '/vendor-proxy/query',
       },
@@ -290,6 +303,7 @@ export default class AgendapointsEditController extends Controller {
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
         structure: structureView(controller),
+        mandatee_table: mandateeTableView(controller),
         person_variable: personVariableView(controller),
       };
     };
