@@ -80,6 +80,8 @@ import {
   textVariableView,
   person_variable,
   personVariableView,
+  autofilled_variable,
+  autofilledVariableView
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   osloLocation,
@@ -157,6 +159,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
       person_variable,
+      autofilled_variable: autofilled_variable(this.config.autofilledVariable),
     },
     marks: {
       em,
@@ -189,6 +192,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
         person_variable: personVariableView(controller),
+        autofilled_variable: autofilledVariableView(this.config.autofilledVariable)(controller)
       };
     };
   }
@@ -282,6 +286,11 @@ export default class RegulatoryStatementsRoute extends Controller {
       lmb: {
         endpoint: '/vendor-proxy/query',
       },
+      autofilledVariable: {
+        autofilledValues: {
+          administrativeUnit: municipality.naam,
+        }
+      }
     };
   }
 
