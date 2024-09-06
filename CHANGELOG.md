@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.27.2
+
+### Patch Changes
+
+- [`a538d6e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a538d6ee6e1d6421617a380e494e2db28e49b0bc) Thanks [@elpoelma](https://github.com/elpoelma)! - When deleting a signature, and all signatures have been removed, ensure that the `deleted` status is set on the `fullNotulen` resource, not the `publicNotulen` resource
+
+- [`a538d6e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a538d6ee6e1d6421617a380e494e2db28e49b0bc) Thanks [@elpoelma](https://github.com/elpoelma)! - Adjust rdfa-annotation stylesheets to also match full URIs instead of only prefixed ones
+
 ## 5.27.1
 
 ### Patch Changes
@@ -134,6 +142,7 @@
 - [#685](https://github.com/lblod/frontend-gelinkt-notuleren/pull/685) [`f8ad946`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f8ad946710e36a3949c05ec66470d820e8a6532b) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4829: Design updates to meetings
 
 - [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.0.0
+
 ## 5.19.4
 
 ### Patch Changes
