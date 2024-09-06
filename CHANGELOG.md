@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.19.4
+
+### Patch Changes
+
+- [#710](https://github.com/lblod/frontend-gelinkt-notuleren/pull/710) [`f46cc0d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f46cc0decba2c2f15f07609a4f41a6f2b64f4528) Thanks [@elpoelma](https://github.com/elpoelma)! - When deleting a signature, and all signatures have been removed, ensure that the `deleted` status is set on the `fullNotulen` resource, not the `publicNotulen` resource
+
 ## 5.19.3
 
 ### Patch Changes
