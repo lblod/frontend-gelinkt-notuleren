@@ -4,10 +4,32 @@ import { dropTask } from 'ember-concurrency';
 import { service } from '@ember/service';
 import InstallatieVergaderingModel from '../../../models/installatievergadering';
 
+const IV_AP_MAP = [
+  'http://data.lblod.info/templates/77eb1d90-6d3b-11ef-a3a6-c39998a0026f',
+  'http://data.lblod.info/templates/02cee410-6471-11ef-9943-f704da4e6eb6',
+  'http://data.lblod.info/templates/dcdc22a0-6e2e-11ef-a3a6-c39998a0026f',
+  'http://data.lblod.info/templates/fc357ed0-6e2e-11ef-a3a6-c39998a0026f',
+  'http://data.lblod.info/templates/3679b220-6e32-11ef-a3a6-c39998a0026f',
+  'http://data.lblod.info/templates/b10c53d0-6e32-11ef-a3a6-c39998a0026f',
+  'http://data.lblod.info/templates/770b2020-6e33-11ef-a3a6-c39998a0026f',
+  'http://data.lblod.info/templates/8186d760-6e33-11ef-a3a6-c39998a0026f',
+];
+const IV_NAME_MAP = [
+  'Kennisname van de definitieve verkiezingsuitslag',
+  'Onderzoek van de geloofsbrieven',
+  'Eedaflegging van de verkozen gemeenteraadsleden',
+  'Bepaling van de rangorde van de gemeenteraadsleden',
+  'Vaststelling van de fracties',
+  'Verkiezing van de voorzitter van de gemeenteraad',
+  'Verkiezing van de schepenen',
+  'Aanduiding en eedaflegging van de aangewezen-burgemeester',
+];
 export default class InboxMeetingsNewController extends Controller {
   @service router;
   @service store;
   @service intl;
+  /** @type {import("../../../services/template-fetcher").default} */
+  @service templateFetcher;
 
   queryParams = ['type'];
 
@@ -60,11 +82,11 @@ export default class InboxMeetingsNewController extends Controller {
   async setUpInaugurationMeeting() {
     const promises = [];
     let previousAgendapoint;
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 8; i++) {
       const agendapoint = this.store.createRecord('agendapunt', {
         position: i,
         geplandOpenbaar: true,
-        titel: `Naam Agendapunt ${i}`,
+        titel: IV_NAME_MAP[i],
         zitting: this.meeting,
         vorigeAgendapunt: previousAgendapoint,
       });
@@ -72,7 +94,16 @@ export default class InboxMeetingsNewController extends Controller {
         openbaar: true,
         onderwerp: agendapoint,
       });
-      promises.push(agendapoint.save(), treatment.saveAndPersistDocument());
+      const template = await this.templateFetcher.fetchByUri({
+        uri: IV_AP_MAP[i],
+      });
+      await template.loadBody();
+      promises.push(
+        agendapoint.save(),
+        treatment
+          .initializeDocument(template.body)
+          .then(() => treatment.saveAndPersistDocument()),
+      );
       previousAgendapoint = agendapoint;
     }
     await Promise.all(promises);

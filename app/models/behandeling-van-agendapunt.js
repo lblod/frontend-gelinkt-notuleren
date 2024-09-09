@@ -85,7 +85,10 @@ export default class BehandelingVanAgendapunt extends Model {
   get sortedVotings() {
     return this.sortedVotingData.value;
   }
-  async initializeDocument() {
+  /**
+   * @param {string?} content
+   */
+  async initializeDocument(content) {
     const agendaItem = await this.onderwerp;
     const draftDecisionFolder = await this.store.findRecord(
       'editor-document-folder',
@@ -100,6 +103,7 @@ export default class BehandelingVanAgendapunt extends Model {
       title: agendaItem.titel,
       createdOn: new Date(),
       updatedOn: new Date(),
+      content,
     });
 
     const container = this.store.createRecord('document-container', {
