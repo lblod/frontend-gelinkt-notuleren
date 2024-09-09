@@ -120,6 +120,7 @@ import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { MANDATEE_TABLE_SAMPLE_CONFIG } from '../../config/mandatee-table-config';
+import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -172,7 +173,7 @@ export default class AgendapointsEditController extends Controller {
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
       person_variable,
-      autofilled_variable: autofilled_variable(this.config.autofilledVariable),
+      autofilled_variable,
     },
     marks: {
       em,
@@ -313,7 +314,7 @@ export default class AgendapointsEditController extends Controller {
         structure: structureView(controller),
         mandatee_table: mandateeTableView(controller),
         person_variable: personVariableView(controller),
-        autofilled_variable: autofilledVariableView(this.config.autofilledVariable)(controller)
+        autofilled_variable: autofilledVariableView(controller)
       };
     };
   }
@@ -331,6 +332,7 @@ export default class AgendapointsEditController extends Controller {
       ),
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
+      variableAutofillerPlugin(this.config.autofilledVariable),
     ];
   }
 

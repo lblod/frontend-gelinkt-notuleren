@@ -109,6 +109,7 @@ import {
 } from '../../utils/bestuurseenheid-classificatie-codes';
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -159,7 +160,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
       person_variable,
-      autofilled_variable: autofilled_variable(this.config.autofilledVariable),
+      autofilled_variable,
     },
     marks: {
       em,
@@ -192,7 +193,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
         person_variable: personVariableView(controller),
-        autofilled_variable: autofilledVariableView(this.config.autofilledVariable)(controller)
+        autofilled_variable: autofilledVariableView(controller)
       };
     };
   }
@@ -211,6 +212,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       linkPasteHandler(this.schema.nodes.link),
       emberApplication({ application: getOwner(this) }),
       listTrackingPlugin(),
+      variableAutofillerPlugin(this.config.autofilledVariable),
     ];
   }
 
