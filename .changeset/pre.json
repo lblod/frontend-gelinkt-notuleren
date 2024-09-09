@@ -1,0 +1,8 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "frontend-gelinkt-notuleren": "5.27.2"
+  },
+  "changesets": []
+}
