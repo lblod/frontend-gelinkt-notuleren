@@ -4,5 +4,9 @@
   "initialVersions": {
     "frontend-gelinkt-notuleren": "5.27.2"
   },
-  "changesets": []
+  "changesets": [
+    "early-students-marry",
+    "loud-ducks-laugh",
+    "serious-countries-provide"
+  ]
 }
