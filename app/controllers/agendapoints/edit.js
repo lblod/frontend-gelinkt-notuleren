@@ -42,7 +42,7 @@ import {
   person_variable,
   personVariableView,
   autofilled_variable,
-  autofilledVariableView
+  autofilledVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   osloLocation,
@@ -265,8 +265,8 @@ export default class AgendapointsEditController extends Controller {
       autofilledVariable: {
         autofilledValues: {
           administrativeUnit: municipality.naam,
-        }
-      }
+        },
+      },
     };
   }
 
@@ -314,7 +314,7 @@ export default class AgendapointsEditController extends Controller {
         structure: structureView(controller),
         mandatee_table: mandateeTableView(controller),
         person_variable: personVariableView(controller),
-        autofilled_variable: autofilledVariableView(controller)
+        autofilled_variable: autofilledVariableView(controller),
       };
     };
   }
