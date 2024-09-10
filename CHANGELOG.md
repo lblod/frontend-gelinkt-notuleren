@@ -1,5 +1,19 @@
 # frontend-gelinkt-notuleren
 
+## 5.27.2
+
+### Patch Changes
+
+- [`a538d6e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a538d6ee6e1d6421617a380e494e2db28e49b0bc) Thanks [@elpoelma](https://github.com/elpoelma)! - When deleting a signature, and all signatures have been removed, ensure that the `deleted` status is set on the `fullNotulen` resource, not the `publicNotulen` resource
+
+- [`a538d6e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a538d6ee6e1d6421617a380e494e2db28e49b0bc) Thanks [@elpoelma](https://github.com/elpoelma)! - Adjust rdfa-annotation stylesheets to also match full URIs instead of only prefixed ones
+
+## 5.27.1
+
+### Patch Changes
+
+- [#709](https://github.com/lblod/frontend-gelinkt-notuleren/pull/709) [`64da6b7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/64da6b7d783e3d04473ca6a435ba0e0d7dc15d28) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 22.4.1
+
 ## 5.27.0
 
 ### Minor Changes
@@ -128,6 +142,20 @@
 - [#685](https://github.com/lblod/frontend-gelinkt-notuleren/pull/685) [`f8ad946`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f8ad946710e36a3949c05ec66470d820e8a6532b) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4829: Design updates to meetings
 
 - [`40e8403`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40e84030f378437bc9536f6a1d970f61dd58bd8f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.0.0
+
+## 5.19.4
+
+### Patch Changes
+
+- [#710](https://github.com/lblod/frontend-gelinkt-notuleren/pull/710) [`f46cc0d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f46cc0decba2c2f15f07609a4f41a6f2b64f4528) Thanks [@elpoelma](https://github.com/elpoelma)! - When deleting a signature, and all signatures have been removed, ensure that the `deleted` status is set on the `fullNotulen` resource, not the `publicNotulen` resource
+
+## 5.19.3
+
+### Patch Changes
+
+- [#707](https://github.com/lblod/frontend-gelinkt-notuleren/pull/707) [`b260950`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b260950f617e4693f9768df49448235acdac1a8a) Thanks [@elpoelma](https://github.com/elpoelma)! - Adjust rdfa-annotation stylesheets to also match full URIs instead of only prefixed ones
+
+- [#706](https://github.com/lblod/frontend-gelinkt-notuleren/pull/706) [`c01e81b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c01e81bc45589b8fe76604d407562d1544462a9f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update to editor-plugin 19.3.2 hotfix which contains fixes for styles of annotated content
 
 ## 5.19.2
 

@@ -15,6 +15,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   behandelingContainerId = 'behandeling-van-agendapunten-container';
   @tracked notulen;
+  @tracked fullNotulen;
   @tracked fullNotulenContent;
   // Since content can be in a file or in the triplestore, handle content independently from the
   // notulen itself
@@ -38,6 +39,8 @@ export default class MeetingsPublishNotulenController extends Controller {
   resetController() {
     this.notulen = null;
     this.notulenContent = null;
+    this.fullNotulen = null;
+    this.fullNotulenContent = null;
     this.errors = null;
     this.validationErrors = null;
     this.signedResources = [];
@@ -213,6 +216,7 @@ export default class MeetingsPublishNotulenController extends Controller {
           this.errors = [`Error fetching file contents: ${statusText}`];
         },
       );
+      this.fullNotulen = fullNotulen;
     } else {
       // this means there are no signatures
       try {
@@ -270,8 +274,8 @@ export default class MeetingsPublishNotulenController extends Controller {
     // so it is still in the signedResources array.
     // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
     if (this.signedResources.length === 1) {
-      this.notulen.deleted = true;
-      await this.notulen.save();
+      this.fullNotulen.deleted = true;
+      await this.fullNotulen.save();
     }
     await this.loadNotulen.perform();
   });

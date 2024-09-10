@@ -27,7 +27,10 @@
 .au-c-rdfa-publication {
   // Labels
   [property='besluit:geplandOpenbaar'],
-  [property='besluit:openbaar'] {
+  [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'],
+  [property='besluit:openbaar'],
+  [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+  {
     @include au-font-size($au-h6);
     color: $au-gray-600;
     text-transform: initial;
@@ -36,13 +39,23 @@
 
   // Hide webuniversum icons
   [typeof='besluit:BehandelingVanAgendapunt'],
+  [typeof='http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt']
   [property='ext:behandelt'],
+  [property='http://mu.semte.ch/vocabularies/ext/behandelt'],
   [property='besluit:heeftAgendapunt'],
-  [typeof='besluit:Agendapunt'] {
+  [property='http://data.vlaanderen.be/ns/besluit#heeftAgendapunt'],
+  [typeof='besluit:Agendapunt'],
+  [typeof='http://data.vlaanderen.be/ns/besluit#Agendapunt']
+  {
     [property='besluit:geplandOpenbaar'] i,
+    [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'] i,
     [property='besluit:geplandOpenbaar'] em,
+    [property='http://data.vlaanderen.be/ns/besluit#geplandOpenbaar'] em,
     [property='besluit:openbaar'] i,
-    [property='besluit:openbaar'] em {
+    [property='http://data.vlaanderen.be/ns/besluit#openbaar'] i,
+    [property='besluit:openbaar'] em,
+    [property='http://data.vlaanderen.be/ns/besluit#openbaar'] em
+    {
       display: none;
     }
   }
@@ -64,19 +77,24 @@
     padding-right: 11.4rem;
 
     [property='dc:subject'],
+    [property='http://purl.org/dc/elements/1.1/subject'],
     [property='eli:title'],
+    [property='http://data.europa.eu/eli/ontology#title'],
     [property='eli:description'],
+    [property='http://data.europa.eu/eli/ontology#description'],
     [property='besluit:openbaar'],
+    [property='http://data.vlaanderen.be/ns/besluit#openbaar'],
     div[property^='ext:insert'],
     div[property^='ext:insert'],
     [data-flagged-remove='complete'],
     [data-flagged-remove='complete'] {
       margin-top: 0.5rem;
 
-      &:after {
+      &::after {
         @include au-font-size($au-base, 1);
         position: absolute;
         right: -11.5rem;
+        top: 0rem;
         width: 9rem;
         font-size: 1.3rem;
         text-transform: uppercase;
@@ -97,9 +115,14 @@
   }
 
   [property='dc:subject'],
+  [property='http://purl.org/dc/elements/1.1/subject'],
   [property='eli:title'],
+  [property='http://data.europa.eu/eli/ontology#title'],
   [property='eli:description'],
-  [property='besluit:openbaar'] {
+  [property='http://data.europa.eu/eli/ontology#description'],
+  [property='besluit:openbaar'],
+  [property='http://data.vlaanderen.be/ns/besluit#openbaar']
+  {
     position: relative;
     background-color: rgba($au-blue-700, 0.2);
     box-shadow: inset -4px 0 0 0 $au-blue-700;
