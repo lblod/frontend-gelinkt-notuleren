@@ -115,9 +115,10 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
 
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
-
+import AanvraagInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/aanvraag-plugin/insert';
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { MANDATEE_TABLE_SAMPLE_CONFIG } from '../../config/mandatee-table-config';
+
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -133,6 +134,7 @@ export default class AgendapointsEditController extends Controller {
   @tracked citationPlugin = citationPlugin(this.config.citation);
   StructureControlCard = StructureControlCardComponent;
   InsertArticle = InsertArticleComponent;
+  AanvraagInsert = AanvraagInsert;
 
   SnippetInsert = SnippetInsertRdfaComponent;
   schema = new Schema({
@@ -257,6 +259,9 @@ export default class AgendapointsEditController extends Controller {
       },
       lmb: {
         endpoint: '/vendor-proxy/query',
+      },
+      aanvraag: {
+        endpoint: 'https://aanvraag.hackathon-5.s.redhost.be/sparql',
       },
     };
   }

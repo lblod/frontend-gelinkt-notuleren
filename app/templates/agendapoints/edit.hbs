@@ -93,7 +93,7 @@
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
-    @shouldEditRdfa={{false}}
+    @shouldEditRdfa={{true}}
     @shouldShowRdfa={{true}}
   >
     <:toolbar>
@@ -109,6 +109,10 @@
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
+      <this.AanvraagInsert
+        @controller={{this.controller}}
+        @config={{this.config.aanvraag}}
+      />
       <this.InsertArticle @controller={{this.controller}} />
       <CitationPlugin::CitationInsert
         @controller={{this.controller}}
