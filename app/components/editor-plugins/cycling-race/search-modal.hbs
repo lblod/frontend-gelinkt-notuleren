@@ -1,0 +1,70 @@
+{{! @glint-nocheck: not typesafe yet }}
+<AuModal
+  class='worship-modal'
+  @modalOpen={{@open}}
+  @closeModal={{this.closeModal}}
+  @title={{t 'worship-plugin.modal.title'}}
+  @size='large'
+  @padding='none'
+  as |modal|
+>
+  <modal.Body>
+    <AuMainContainer
+      @scroll={{true}}
+      class='worship-modal--main-container'
+      as |mc|
+    >
+      <mc.sidebar>
+        <div class='au-c-sidebar'>
+          <div class='au-c-sidebar__content au-u-padding'>
+            <AuHeading @level='3' @skin='4' class='au-u-padding-bottom-small'>
+              {{t 'worship-plugin.modal.search.title'}}
+            </AuHeading>
+            <AuLabel class='au-margin-bottom-small' for='searchTerm'>
+              {{t 'worship-plugin.modal.fields.name'}}
+            </AuLabel>
+            <AuNativeInput
+              @type='text'
+              @width='block'
+              id='searchTerm'
+              value={{this.searchText}}
+              placeholder={{t 'worship-plugin.modal.search.placeholder'}}
+              {{on 'input' this.setInputSearchText}}
+            />
+          </div>
+        </div>
+      </mc.sidebar>
+      <mc.content @scroll={{true}}>
+        <div class='worship-modal--list-container'>
+          <EditorPlugins::CyclingRace::List
+            @error={{this.error}}
+            @services={{this.servicesResource}}
+            @sort={{this.sort}}
+            @setSort={{this.setSort}}
+            @insert={{@onInsert}}
+          />
+        </div>
+        {{#if this.servicesResource.value.totalCount}}
+          {{#let
+            (pagination
+              page=this.pageNumber
+              pageSize=this.pageSize
+              count=this.servicesResource.value.totalCount
+            )
+            as |pg|
+          }}
+            <Pagination::PaginationView
+              @totalCount={{pg.count}}
+              @rangeStart={{pg.pageStart}}
+              @rangeEnd={{pg.pageEnd}}
+              @onNextPage={{this.nextPage}}
+              @onPreviousPage={{this.previousPage}}
+              @isFirstPage={{not pg.hasPreviousPage}}
+              @isLastPage={{not pg.hasNextPage}}
+            />
+          {{/let}}
+        {{/if}}
+      </mc.content>
+    </AuMainContainer>
+  </modal.Body>
+</AuModal>

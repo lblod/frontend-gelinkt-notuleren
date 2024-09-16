@@ -1,0 +1,16 @@
+<li class='au-c-list__item'>
+  <AuButton
+    @icon='add'
+    @iconAlignment='left'
+    @skin='link'
+    {{on 'click' this.openModal}}
+  >
+    {{t 'cycling-plugin.insert-cycling-decision'}}
+  </AuButton>
+</li>
+  <EditorPlugins::CyclingRace::SearchModal
+    @open={{this.showModal}}
+    @closeModal={{this.closeModal}}
+    @config={{@config}}
+    @onInsert={{this.insertCyclingRaceDecision}}
+  />

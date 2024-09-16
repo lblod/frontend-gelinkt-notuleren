@@ -771,3 +771,11 @@ zitting-link:
 generic:
   edit: Edit
   add: Add
+
+cycling-plugin:
+  insert-cycling-decision: Insert cycling decision
+  fields:
+    date: Date
+    name: Name
+    organizer: Organizer
+    insert: Insert

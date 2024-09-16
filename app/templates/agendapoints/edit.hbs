@@ -133,6 +133,10 @@
         />
       {{/if}}
 
+      <EditorPlugins::CyclingRace::SidebarInsert
+          @controller={{this.controller}}
+        />
+
       {{#if this.activeNode}}
         <this.SnippetInsert
           @controller={{this.controller}}

@@ -1,0 +1,62 @@
+<AuTable>
+  <:header>
+    <tr class='au-c-data-table__header-title'>
+      <th>
+        <Common::Sort::SortableTableHeader
+          @field='date'
+          @label={{t 'cycling-plugin.fields.date'}}
+          @sort={{@sort}}
+          @setSort={{@setSort}}
+        />
+      </th>
+      <th>
+        <Common::Sort::SortableTableHeader
+          @field='name'
+          @label={{t 'cycling-plugin.fields.name'}}
+          @sort={{@sort}}
+          @setSort={{@setSort}}
+        />
+      </th>
+      <th>
+        <Common::Sort::SortableTableHeader
+          @field='organizer'
+          @label={{t 'cycling-plugin.fields.organizer'}}
+          @sort={{@sort}}
+          @setSort={{@setSort}}
+        />
+      </th>
+      <th />
+    </tr>
+  </:header>
+  <:body>
+    {{#unless (or @services.isRunning @error)}}
+      {{#if @services.value.totalCount}}
+        {{#each @services.value.results as |row|}}
+          <tr>
+            <td>{{human-friendly-date row.date}}</td>
+            <td>{{row.name}}</td>
+            <td>{{row.organizer}}</td>
+            <td class='au-u-text-center'>
+              <AuButton {{on 'click' (fn @insert row)}}>
+                {{t 'cycling-plugin.fields.insert'}}
+              </AuButton>
+            </td>
+          </tr>
+        {{/each}}
+      {{/if}}
+    {{/unless}}
+  </:body>
+</AuTable>
+{{#if @services.isRunning}}
+  <div class='au-u-margin'>
+    <Common::Search::Loading />
+  </div>
+{{else}}
+  {{#if @error}}
+    <Common::Search::AlertLoadError @error={{@error}} />
+  {{else}}
+    {{#unless @services.value.totalCount}}
+      <Common::Search::AlertNoItems />
+    {{/unless}}
+  {{/if}}
+{{/if}}

@@ -775,3 +775,11 @@ zitting-link:
 generic:
   edit: Bewerk
   add: Toevoegen
+
+cycling-plugin:
+  insert-cycling-decision: Fietsbeslissing invoegen
+  fields:
+    date: Datum
+    name: Naam
+    organizer: Organisator
+    insert: Invoegen
