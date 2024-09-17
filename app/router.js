@@ -25,6 +25,12 @@ Router.map(function () {
     this.route('meetings', function () {
       this.route('new');
     });
+    this.route('verenigingsloket', function () {
+      this.route('te-behandelen');
+      this.route('in-behandeling');
+      this.route('behandeld');
+      this.route('te-behandelen-awv');
+    });
     this.route('irg-archive');
   });
   this.route('mock-login');

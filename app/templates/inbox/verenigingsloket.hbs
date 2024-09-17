@@ -1,0 +1,38 @@
+{{page-title 'Aanvragen verenigingsloket'}}
+
+<AuToolbar @size='large' as |Group|>
+  <Group>
+    <AuHeading @level={{1}} @skin={{2}}>Aanvragen verenigingsloket</AuHeading>
+  </Group>
+</AuToolbar>
+<AuTabs as |Tab|>
+  <Tab>
+    <AuLink
+      @route='inbox.verenigingsloket.te-behandelen'
+    >
+      Te behandelen
+      <AuBadge @number={{4}} @size='small' />
+    </AuLink>
+  </Tab>
+  <Tab>
+    <AuLink
+      @route='inbox.verenigingsloket.in-behandeling'
+    >
+      In behandeling
+    </AuLink>
+  </Tab>
+  <Tab>
+    <AuLink
+      @route='inbox.verenigingsloket.behandeld'
+    >
+      Behandeld
+    </AuLink>
+  </Tab>
+  <Tab>
+    <AuLink @route='inbox.verenigingsloket.te-behandelen-awv'>
+      Door te sturen naar AWV
+      <AuBadge @number={{2}} @size='small' />
+    </AuLink>
+  </Tab>
+</AuTabs>
+{{outlet}}

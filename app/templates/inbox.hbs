@@ -26,6 +26,13 @@
                 </AuNavigationLink>
               </li>
             {{/if}}
+            <li class='au-c-list-navigation__item'>
+              <AuNavigationLink @route='inbox.verenigingsloket'>
+                <AuIcon @icon='message' @alignment='left' />
+                <span>Aanvragen verenigingsloket</span>
+                <AuBadge @number={{4}} @size='small' @skin="border" class="au-u-margin-left-tiny"/>
+              </AuNavigationLink>
+            </li>
             {{#if this.model.length}}
               <li class='au-c-list-navigation__item'>
                 <AuNavigationLink @route='inbox.irg-archive'>
