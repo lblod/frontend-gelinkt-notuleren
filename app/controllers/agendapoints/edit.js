@@ -264,7 +264,7 @@ export default class AgendapointsEditController extends Controller {
       },
       autofilledVariable: {
         autofilledValues: {
-          administrativeUnit: municipality.naam,
+          administrativeUnit: `${this.currentSession.classificatie.label} ${this.currentSession.group.naam}`,
         },
       },
     };
