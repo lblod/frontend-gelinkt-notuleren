@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.27.3
+
+### Patch Changes
+
+- [#718](https://github.com/lblod/frontend-gelinkt-notuleren/pull/718) [`9635ec2`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9635ec27677ac432da7de8facf52b60e72dbcfb7) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix removal of empty lines on save, they are now maintained
+
 ## 5.27.2
 
 ### Patch Changes
