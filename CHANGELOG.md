@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.28.0
+
+### Minor Changes
+
+- [#704](https://github.com/lblod/frontend-gelinkt-notuleren/pull/704) [`ecd4d94`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ecd4d94cb0e8ad52361da0b2fb2da505a22bf6bf) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to v22.5.1 of plugins. Including:
+  - Support for imported resources in snippets, both when editing and including them
+  - Mandatee table improvements
+
 ## 5.27.3
 
 ### Patch Changes
