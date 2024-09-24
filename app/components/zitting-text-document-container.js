@@ -128,7 +128,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
 
   @action
   rdfaEditorInit(editor) {
-    editor.initialize(this.text);
+    editor.initialize(this.text, { doNotClean: true });
     this.editor = editor;
     this.args.onEditorInit(editor);
   }
