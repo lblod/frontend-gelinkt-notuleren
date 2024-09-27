@@ -126,17 +126,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { schema, doc } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = unwrap(
-          findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          }),
-        ).node.attrs.subject;
+        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+          return hasOutgoingNamedNodeTriple(
+            node.attrs,
+            RDF('type'),
+            BESLUIT('Besluit'),
+          );
+        })?.node.attrs.subject;
         if (!decisionUri) {
-          return { result: false, initialState: state, transaction: state.tr };
+          throw new Error(
+            'Could not find decision to sync mandatee table with',
+          );
         }
 
         const bindings = queryResult.results.bindings;
@@ -202,17 +202,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { doc, schema } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = unwrap(
-          findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          }),
-        ).node.attrs.subject;
+        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+          return hasOutgoingNamedNodeTriple(
+            node.attrs,
+            RDF('type'),
+            BESLUIT('Besluit'),
+          );
+        })?.node.attrs.subject;
         if (!decisionUri) {
-          return { initialState: state, result: false, transaction: state.tr };
+          throw new Error(
+            'Could not find decision to sync mandatee table with',
+          );
         }
         const bindings = queryResult.results.bindings;
         const tableHeader = row(
@@ -286,17 +286,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { doc, schema } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = unwrap(
-          findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          }),
-        ).node.attrs.subject;
+        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+          return hasOutgoingNamedNodeTriple(
+            node.attrs,
+            RDF('type'),
+            BESLUIT('Besluit'),
+          );
+        })?.node.attrs.subject;
         if (!decisionUri) {
-          return { initialState: state, result: false, transaction: state.tr };
+          throw new Error(
+            'Could not find decision to sync mandatee table with',
+          );
         }
         const bindings = queryResult.results.bindings;
         const tableHeader = row(
@@ -432,17 +432,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { doc, schema } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = unwrap(
-          findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          }),
-        ).node.attrs.subject;
+        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+          return hasOutgoingNamedNodeTriple(
+            node.attrs,
+            RDF('type'),
+            BESLUIT('Besluit'),
+          );
+        })?.node.attrs.subject;
         if (!decisionUri) {
-          return { initialState: state, result: false, transaction: state.tr };
+          throw new Error(
+            'Could not find decision to sync mandatee table with',
+          );
         }
         const bindings = queryResult.results.bindings;
         const tableHeader = row(
@@ -517,17 +517,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { doc, schema } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = unwrap(
-          findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          }),
-        ).node.attrs.subject;
+        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+          return hasOutgoingNamedNodeTriple(
+            node.attrs,
+            RDF('type'),
+            BESLUIT('Besluit'),
+          );
+        })?.node.attrs.subject;
         if (!decisionUri) {
-          return { initialState: state, result: false, transaction: state.tr };
+          throw new Error(
+            'Could not find decision to sync mandatee table with',
+          );
         }
         const bindings = queryResult.results.bindings;
         const tableHeader = row(
@@ -610,17 +610,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { doc, schema } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = unwrap(
-          findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          }),
-        ).node.attrs.subject;
+        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+          return hasOutgoingNamedNodeTriple(
+            node.attrs,
+            RDF('type'),
+            BESLUIT('Besluit'),
+          );
+        })?.node.attrs.subject;
         if (!decisionUri) {
-          return { initialState: state, result: false, transaction: state.tr };
+          throw new Error(
+            'Could not find decision to sync mandatee table with',
+          );
         }
         const bindings = queryResult.results.bindings;
         const tableHeader = row(
@@ -714,17 +714,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { doc, schema } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = unwrap(
-          findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          }),
-        ).node.attrs.subject;
+        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+          return hasOutgoingNamedNodeTriple(
+            node.attrs,
+            RDF('type'),
+            BESLUIT('Besluit'),
+          );
+        })?.node.attrs.subject;
         if (!decisionUri) {
-          return { initialState: state, result: false, transaction: state.tr };
+          throw new Error(
+            'Could not find decision to sync mandatee table with',
+          );
         }
         const bindings = queryResult.results.bindings;
         const tableHeader = row(
