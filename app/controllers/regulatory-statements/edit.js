@@ -377,7 +377,7 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   @action
   handleRdfaEditorInit(controller) {
-    controller.initialize(this.editorDocument.content);
+    controller.initialize(this.editorDocument.content, { doNotClean: true });
     this.controller = controller;
   }
 }
