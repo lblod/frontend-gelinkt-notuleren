@@ -100,21 +100,22 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
   'IVGR2-LMB-1-geloofsbrieven': {
     query: () => {
       const sparqlQuery = /* sparql */ `
-        PREFIX org: <http://www.w3.org/ns/org#>
-        PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
-        PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
-        PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
-          # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
-          ?bestuursorgaan org:hasPost ?mandaat.
-          ?mandataris org:holds ?mandaat.
-          ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+        PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+        PREFIX org: <http://www.w3.org/ns/org#>
+        PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+        SELECT DISTINCT ?persoon ?persoon_naam WHERE {
+          ?persoon a person:Person .
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
-          BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
+          BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+          ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          ?mandataris org:holds ?mandaat.
+          ?bestuursorgaan org:hasPost ?mandaat.
+          # TODO: replace this by the correct bestuursperiode
+          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
         }
       `;
       return executeQuery({
@@ -126,45 +127,16 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { schema, doc } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
-          return hasOutgoingNamedNodeTriple(
-            node.attrs,
-            RDF('type'),
-            BESLUIT('Besluit'),
-          );
-        })?.node.attrs.subject;
-        if (!decisionUri) {
-          throw new Error(
-            'Could not find decision to sync mandatee table with',
-          );
-        }
-
         const bindings = queryResult.results.bindings;
         const tableHeader = row(schema, [schema.text('Naam verkozene')], true);
         const rows = bindings.map((binding) => {
-          const { mandataris, mandataris_naam } = bindingToObject(binding);
-          return row(schema, [
-            resourceNode(schema, mandataris, mandataris_naam),
-          ]);
+          const { persoon_naam } = bindingToObject(binding);
+          return row(schema, [schema.text(persoon_naam)]);
         });
         const content = schema.nodes.table.create(null, [tableHeader, ...rows]);
-        const factory = new SayDataFactory();
-        const result = transactionCombinator(
-          state,
-          replaceContent(state.tr, $pos, content),
-        )(
-          bindings.map((binding) => {
-            return addPropertyToNode({
-              resource: decisionUri,
-              property: {
-                predicate: EXT('appoints').full,
-                object: factory.resourceNode(binding['mandataris'].value),
-              },
-            });
-          }),
-        );
+        const transaction = replaceContent(state.tr, $pos, content);
         return {
-          transaction: result.transaction,
+          transaction,
           result: true,
           initialState: state,
         };
