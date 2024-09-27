@@ -258,18 +258,6 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       return (state) => {
         const { doc, schema } = state;
         const $pos = doc.resolve(pos);
-        const decisionUri = findParentNodeClosestToPos($pos, (node) => {
-          return hasOutgoingNamedNodeTriple(
-            node.attrs,
-            RDF('type'),
-            BESLUIT('Besluit'),
-          );
-        })?.node.attrs.subject;
-        if (!decisionUri) {
-          throw new Error(
-            'Could not find decision to sync mandatee table with',
-          );
-        }
         const bindings = queryResult.results.bindings;
         const tableHeader = row(
           schema,
@@ -277,31 +265,16 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
           true,
         );
         const rows = bindings.map((binding) => {
-          const { mandataris, mandataris_naam, mandataris_rang } =
-            bindingToObject(binding);
+          const { mandataris_naam, mandataris_rang } = bindingToObject(binding);
           return row(schema, [
-            resourceNode(schema, mandataris, mandataris_naam),
+            schema.text(mandataris_naam),
             schema.text(mandataris_rang),
           ]);
         });
         const content = schema.nodes.table.create(null, [tableHeader, ...rows]);
-        const factory = new SayDataFactory();
-        const result = transactionCombinator(
-          state,
-          replaceContent(state.tr, $pos, content),
-        )(
-          bindings.map((binding) => {
-            return addPropertyToNode({
-              resource: decisionUri,
-              property: {
-                predicate: EXT('appoints').full,
-                object: factory.resourceNode(binding['mandataris'].value),
-              },
-            });
-          }),
-        );
+        const transaction = replaceContent(state.tr, $pos, content);
         return {
-          transaction: result.transaction,
+          transaction,
           result: true,
           initialState: state,
         };
