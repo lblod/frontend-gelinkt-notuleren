@@ -97,6 +97,11 @@ function bindingToObject(binding) {
 }
 
 export const MANDATEE_TABLE_SAMPLE_CONFIG = {
+  /**
+   * **IVGR2: Onderzoek van de geloofsbrieven**
+   *
+   * IVGR2-LMB-1: De gemeenteraad keurt de geloofsbrieven goed van volgende verkozenen
+   */
   'IVGR2-LMB-1-geloofsbrieven': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -143,6 +148,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR3: Eedaflegging van de verkozen gemeenteraadsleden**
+   *
+   * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging van de volgende verkozenen op datum van
+   */
   'IVGR3-LMB-1-eedafleggingen': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -224,6 +234,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR4: Bepaling van de rangorde van de gemeenteraadsleden**
+   *
+   * IVGR4-LMB-1: De rangorde van de gemeenteraadsleden is als volgt vastgesteld
+   */
   'IVGR4-LMB-1-rangorde-gemeenteraadsleden': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -281,6 +296,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR5: Vaststelling van de fracties**
+   *
+   * IVGR5-LMB-1: Splitsing fracties: één of meerdere lijsten hebben in de akte van voordracht van kandidaten aangegeven te zullen splitsen in twee fracties.
+   */
   'IVGR5-LMB-1-splitsing-fracties': {
     query: () => {
       throw new NotImplementedError();
@@ -289,6 +309,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       throw new NotImplementedError();
     },
   },
+  /**
+   * **IVGR5: Vaststelling van de fracties**
+   *
+   * IVGR5-LMB-2: De gemeenteraad stelt de grootte van de fracties als volgt vast
+   */
   'IVGR5-LMB-2-grootte-fracties': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -344,6 +369,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR5: Vaststelling van de fracties**
+   *
+   * IVGR5-LMB-3: De gemeenteraad stelt de samenstelling van de fracties voorlopig als volgt vast
+   */
   'IVGR5-LMB-3-samenstelling-fracties': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -402,6 +432,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR7: Verkiezing van de schepenen**
+   *
+   * IVGR7-LMB-1: De voorgedragen kandidaat-schepenen zijn
+   */
   'IVGR7-LMB-1-kandidaat-schepenen': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -487,6 +522,12 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR7: Verkiezing van de schepenen**
+   *
+   * IVGR7-LMB-2: De gemeenteraad neemt kennis van de ontvankelijkheid van de gezamenlijke akte van voordracht
+   * en verklaart de voorgedragen kandidaat-schepenen verkozen in de rangorde van de gezamenlijke akte van voordracht van kandidaat-schepenen
+   */
   'IVGR7-LMB-2-ontvankelijkheid-schepenen': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -598,6 +639,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR8: Aanduiding en eedaflegging van de aangewezen-burgemeester**
+   *
+   * IVGR8-LMB-1: De volgende gemeenteraadsleden zijn verkozen als schepen
+   */
   'IVGR8-LMB-1-verkozen-schepenen': {
     query: () => {
       const sparqlQuery = /* sparql */ `
@@ -684,6 +730,11 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
       };
     },
   },
+  /**
+   * **IVGR8: Aanduiding en eedaflegging van de aangewezen-burgemeester**
+   *
+   * IVGR8-LMB-2: Op basis van de verkiezing van de schepenen en de voorzitter van het bijzonder comité voor de sociale dienst behoren de volgende fracties tot de coalitie
+   */
   'IVGR8-LMB-2-coalitie': {
     query: () => {
       const sparqlQuery = /* sparql */ `
