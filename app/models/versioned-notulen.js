@@ -14,6 +14,7 @@ export default class VersionedNotulenModel extends Model {
   @belongsTo('published-resource', { inverse: 'versionedNotulen', async: true })
   publishedResource;
   @belongsTo('editor-document', { inverse: null, async: true }) editorDocument;
-  @belongsTo('zitting', { inverse: null, async: true }) zitting;
+  @belongsTo('zitting', { inverse: null, async: true, polymorphic: true })
+  zitting;
   @belongsTo('file', { inverse: null, async: true }) file;
 }
