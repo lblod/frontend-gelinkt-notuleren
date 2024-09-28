@@ -1,5 +1,4 @@
 'use strict';
-
 module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'frontend-gelinkt-notuleren',
@@ -73,6 +72,7 @@ module.exports = function (environment) {
   };
 
   if (environment === 'development') {
+    require('dotenv').config();
     ENV.environmentName = 'LOCAL';
     ENV.manual.baseUrl =
       'https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/';
@@ -85,20 +85,35 @@ module.exports = function (environment) {
     ENV.manual.print = '';
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
-    ENV.mowRegistryEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
+    ENV.mowRegistryEndpoint =
+      process.env.MOW_REGISTRY_SPARQL_ENDPOINT ??
+      'https://dev.roadsigns.lblod.info/sparql';
     ENV.publicatieEndpoint =
+      process.env.PUBLICATION_SPARQL_ENDPOINT ??
       'https://publicatie.dev.gelinkt-notuleren.lblod.info/sparql';
-    ENV.roadsignImageBaseUrl = 'https://register.mobiliteit.vlaanderen.be/';
-    ENV.fallbackCodelistEndpoint = 'https://dev.roadsigns.lblod.info/sparql';
+    ENV.roadsignImageBaseUrl =
+      process.env.ROADSIGN_IMAGE_BASE_URL ??
+      'https://register.mobiliteit.vlaanderen.be/';
+    ENV.fallbackCodelistEndpoint =
+      process.env.FALLBACK_CODELIST_SPARQL_ENDPOINT ??
+      'https://dev.roadsigns.lblod.info/sparql';
     ENV.zonalLocationCodelistUri =
       'http://lblod.data.gift/concept-schemes/62331E6900730AE7B99DF7EF';
     ENV.nonZonalLocationCodelistUri =
       'http://lblod.data.gift/concept-schemes/62331FDD00730AE7B99DF7F2';
-    ENV.regulatoryStatementEndpoint =
-      'https://dev.reglementairebijlagen.lblod.info/raw-sparql';
-    ENV.regulatoryStatementFileEndpoint =
-      'https://dev.reglementairebijlagen.lblod.info/files';
-    ENV.lmbEndpoint = 'https://dev.mandatenbeheer.lblod.info';
+    ENV.regulatoryStatementEndpoint = new URL(
+      '/raw-sparql',
+      process.env.REGULATORY_STATEMENT_ENDPOINT ??
+        'https://dev.reglementairebijlagen.lblod.info',
+    ).toString();
+    ENV.regulatoryStatementFileEndpoint = new URL(
+      '/files',
+      process.env.REGULATORY_STATEMENT_ENDPOINT ??
+        'https://dev.reglementairebijlagen.lblod.info',
+    ).toString();
+
+    ENV.lmbEndpoint =
+      process.env.LMB_ENDPOINT ?? 'https://dev.mandatenbeheer.lblod.info';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
