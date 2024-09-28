@@ -6,7 +6,7 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { use } from 'ember-could-get-used-to-this';
 import RelationshipResource from '../helpers/relationship-resource';
-import { trackedFunction } from 'ember-resources/util/function';
+import { trackedFunction } from 'reactiveweb/function';
 import InstallatieVergaderingModel from '../models/installatievergadering';
 
 /** @typedef {import("../models/mandataris").default} Mandataris  */

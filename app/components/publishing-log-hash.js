@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { trackedFunction } from 'ember-resources/util/function';
+import { trackedFunction } from 'reactiveweb/function';
 
 export default class PublishingLogHashComponent extends Component {
   hash = trackedFunction(this, async () => {
