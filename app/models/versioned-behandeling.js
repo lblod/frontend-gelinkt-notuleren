@@ -14,7 +14,8 @@ export default class VersionedBehandelingModel extends Model {
     async: true,
   })
   publishedResource;
-  @belongsTo('zitting', { inverse: null, async: true }) zitting;
+  @belongsTo('zitting', { inverse: null, async: true, polymorphic: true })
+  zitting;
   @belongsTo('behandeling-van-agendapunt', {
     inverse: 'versionedBehandelingen',
     async: true,

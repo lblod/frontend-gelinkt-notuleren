@@ -14,6 +14,7 @@ export default class VersionedBesluitenLijstModel extends Model {
     async: true,
   })
   publishedResource;
-  @belongsTo('zitting', { inverse: null, async: true }) zitting;
+  @belongsTo('zitting', { inverse: null, async: true, polymorphic: true })
+  zitting;
   @belongsTo('editor-document', { inverse: null, async: true }) editorDocument;
 }
