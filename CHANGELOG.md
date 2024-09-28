@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.28.1
+
+### Patch Changes
+
+- [#716](https://github.com/lblod/frontend-gelinkt-notuleren/pull/716) [`76d5a1c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/76d5a1cb6099a8fc081e6b61086811950c6d9ddf) Thanks [@piemonkey](https://github.com/piemonkey)! - Include fix for snippet buttons in certain situations
+
+- [#721](https://github.com/lblod/frontend-gelinkt-notuleren/pull/721) [`a8f441d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a8f441d95c0cff4a89a58443284c54d0b4cd8be3) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [23.0.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v23.0.0)
+
+- [#713](https://github.com/lblod/frontend-gelinkt-notuleren/pull/713) [`c851cc2`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c851cc20930553430372c6f38b10840a8c32181d) Thanks [@abeforgit](https://github.com/abeforgit)! - Add polymorphic to all remaining relationships to meetings
+
 ## 5.28.0
 
 ### Minor Changes
