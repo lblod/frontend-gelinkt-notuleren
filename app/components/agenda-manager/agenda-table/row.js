@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import { PUBLISHED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-import { trackedFunction } from 'ember-resources/util/function';
+import { trackedFunction } from 'reactiveweb/function';
 
 export default class AgendaManagerAgendaTableRowComponent extends Component {
   apStatusData = trackedFunction(this, async () => {
