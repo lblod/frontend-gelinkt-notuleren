@@ -55,6 +55,7 @@
     "changesets-release-it-plugin": "^0.1.2",
     "concurrently": "^8.0.1",
     "date-fns": "^2.30.0",
+    "dotenv": "^16.4.5",
     "ember-a11y-refocus": "^3.0.0",
     "ember-auto-import": "^2.6.3",
     "ember-browser-update": "^0.1.0",
