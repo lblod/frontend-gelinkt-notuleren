@@ -47,7 +47,7 @@
     "@lblod/ember-environment-banner": "^0.5.0",
     "@lblod/ember-mock-login": "^0.10.0",
     "@lblod/ember-rdfa-editor": "^10.5.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "22.5.2",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "23.0.0",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
@@ -57,13 +57,13 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.4.5",
     "ember-a11y-refocus": "^3.0.0",
-    "ember-auto-import": "^2.6.3",
+    "ember-auto-import": "~2.8.1",
     "ember-browser-update": "^0.1.0",
     "ember-changeset": "^4.1.2",
     "ember-cli": "~4.12.0",
     "ember-cli-app-version": "^6.0.1",
     "ember-cli-autoprefixer": "^2.0.0",
-    "ember-cli-babel": "^7.26.11",
+    "ember-cli-babel": "~8.2.0",
     "ember-cli-dependency-checker": "^3.3.2",
     "ember-cli-dependency-lint": "^2.0.0",
     "ember-cli-htmlbars": "^6.3.0",
@@ -110,8 +110,9 @@
     "prosemirror-dev-tools": "^4.1.0",
     "qunit": "^2.19.4",
     "qunit-dom": "^3.2.0",
+    "reactiveweb": "^1.3.0",
     "release-it": "^16.1.5",
-    "sass": "^1.66.1",
+    "sass": "^1.79.4",
     "tracked-built-ins": "^3.1.1",
     "uuid": "^9.0.1",
     "webpack": "^5.89.0"
@@ -143,7 +144,8 @@
   },
   "dependencies": {
     "@curvenote/prosemirror-utils": "^1.0.5",
-    "ember-resources": "^6.4.0",
-    "tracked-toolbox": "^2.0.0"
+    "ember-resources": "^7.0.2",
+    "tracked-toolbox": "^2.0.0",
+    "reactiveweb": "^1.3.0"
   }
 }

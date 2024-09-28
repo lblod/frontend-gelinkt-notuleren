@@ -1,7 +1,7 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { DRAFT_FOLDER_ID, SCHEDULED_STATUS_ID } from '../utils/constants';
 import { service } from '@ember/service';
-import { trackedFunction } from 'ember-resources/util/function';
+import { trackedFunction } from 'reactiveweb/function';
 
 export default class BehandelingVanAgendapunt extends Model {
   @service store;

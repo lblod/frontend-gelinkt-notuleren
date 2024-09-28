@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import { trackedFunction } from 'ember-resources/util/function';
+import { trackedFunction } from 'reactiveweb/function';
 import { service } from '@ember/service';
 
 export default class AgendapointMenuComponent extends Component {
