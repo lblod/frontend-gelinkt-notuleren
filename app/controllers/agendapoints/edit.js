@@ -351,7 +351,7 @@ export default class AgendapointsEditController extends Controller {
   @action
   handleRdfaEditorInit(editor) {
     this.controller = editor;
-    editor.initialize(this.editorDocument.content || '');
+    editor.initialize(this.editorDocument.content || '', { doNotClean: true });
   }
 
   @action
