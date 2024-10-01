@@ -407,6 +407,10 @@ meeting-form:
   bestuursorgan-not-selected-warning: Alvorens u verder kan gaan, dient de zitting eerst informatie te hebben over het bestuursorgaan.
   notulen-published: Meeting is published
   notulen-signed: Meeting is signed
+  actions:
+    dropdown-title: Actions
+    download-meeting: Download minutes as HTML
+    download-treatments: Copying components to external application
 
 meetings:
   publish:
@@ -771,3 +775,23 @@ zitting-link:
 generic:
   edit: Edit
   add: Add
+
+download:
+  heading: Copying treatments to external application
+  back-to-meeting: Back to meeting
+  description: Choose an agenda item from which to copy items
+  document-download:
+    dropdown-title: Publication documents
+    agenda: Download agenda as HTML
+    besluitenlijst: Download decision list as HTML
+    notulen: Download meeting as HTML
+    agendapunt: Agendapoint
+    besluit: Decision
+  table:
+    agendapoint-title: Agendapoint Title
+    download-html: Download HTML
+    no-data-message: No agendapoints found in meeting
+
+download-meeting-part:
+  downloading: Downloading
+  downloaded: Downloaded
