@@ -21,27 +21,31 @@ export default class DownloadMeetingComponent extends Component {
     let route = `/prepublish/${this.args.documentType}`;
     let html;
     switch (this.args.documentType) {
-      case 'agendapunt':
+      case 'agendapunt': {
         html = await this.downloadAgendapoint(
           this.args.meeting.id,
           this.args.behandeling.id,
         );
         break;
-      case 'besluit':
+      }
+      case 'besluit': {
         html = await this.downloadBesluit(this.args.behandeling);
         break;
-      case 'agenda':
+      }
+      case 'agenda': {
         html = await this.downloadAgenda(
           this.args.meeting.id,
           this.args.agendaType,
         );
         break;
-      default:
+      }
+      default: {
         const json = await this.publish.fetchJobTask.perform(
           `${route}/${this.args.meeting.id}`,
         );
         html = json.data.attributes.content;
         break;
+      }
     }
     const file = new Blob([html], { type: 'text/html' });
     const linkElement = document.createElement('a');

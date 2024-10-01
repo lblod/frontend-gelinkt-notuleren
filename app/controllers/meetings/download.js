@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { articlesBasedOnClassifcationMap } from '../../utils/classification-utils';
-import { task, all, restartableTask } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency';
 import { trackedTask } from 'ember-resources/util/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 
