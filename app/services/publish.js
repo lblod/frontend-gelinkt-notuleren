@@ -74,7 +74,6 @@ export default class PublishService extends Service {
     async (url, options = {}, pollingDelayMs = 1000, maxIterations = 600) => {
       const job = await fetch(url, options);
       const jobData = await job.json();
-      console.log(jobData);
       const jobId = jobData.data.attributes.jobId;
 
       let resp;
