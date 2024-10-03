@@ -2,6 +2,11 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import AuIcon from '@appuniversum/ember-appuniversum/components/au-icon';
+import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
+import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
+import { on } from '@ember/modifier';
+import t from 'ember-intl/helpers/t';
 
 export default class DownloadMeetingComponent extends Component {
   @service publish;
@@ -93,4 +98,27 @@ export default class DownloadMeetingComponent extends Component {
     console.log(content);
     return content;
   }
+  <template>
+    {{#if this.isCompleted}}
+      <span
+        class='download-meeting-part-downloaded au-u-flex--inline au-u-flex--vertical-center'
+      >
+        <AuIcon @icon='circle-check' />
+        {{t 'download-meeting-part.downloaded'}}
+      </span>
+    {{else if this.isLoading}}
+      <AuLoader @inline='true'>
+        {{t 'download-meeting-part.downloading'}}
+      </AuLoader>
+    {{else}}
+      <AuButton
+        @skin='link'
+        @icon={{@icon}}
+        role='menuitem'
+        {{on 'click' this.downloadMeeting}}
+      >
+        {{this.buttonText}}
+      </AuButton>
+    {{/if}}
+  </template>
 }
