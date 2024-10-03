@@ -46,8 +46,8 @@
     "@lblod/ember-acmidm-login": "^2.1.0",
     "@lblod/ember-environment-banner": "^0.5.0",
     "@lblod/ember-mock-login": "^0.10.0",
-    "@lblod/ember-rdfa-editor": "^10.5.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "23.0.0",
+    "@lblod/ember-rdfa-editor": "10.5.0-dev.7f01e7e07f7de4b7cef5870bbcffeed2b7589674",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "23.0.0-dev.89791b510500f9ad47d040dcb2101632a740cc92",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "broccoli-plugin": "^4.0.7",
@@ -121,6 +121,9 @@
     "@appuniversum/ember-appuniversum": {
       "@floating-ui/dom": "^1.6.5",
       "tracked-toolbox": "^2.0.0"
+    },
+    "@lblod/ember-rdfa-editor-lblod-plugins": {
+      "@lblod/ember-rdfa-editor": "10.5.0-dev.7f01e7e07f7de4b7cef5870bbcffeed2b7589674"
     },
     "babel-plugin-ember-template-compilation": "^2.2.5",
     "ember-data-table": {

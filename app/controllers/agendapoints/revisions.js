@@ -2,8 +2,8 @@ import Controller from '@ember/controller';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { service } from '@ember/service';
+
 export default class AgendapointsRevisionsController extends Controller {
   @service router;
   @service intl;
@@ -33,11 +33,6 @@ export default class AgendapointsRevisionsController extends Controller {
     this.flushThingsToRemove();
     this.router.transitionTo('agendapoints.edit', this.documentContainer.id);
   });
-
-  @action
-  download() {
-    generateExportFromEditorDocument(this.revisionDetail);
-  }
 
   getRevisionsToRemove(revision) {
     let revisionsToRemove = [];
