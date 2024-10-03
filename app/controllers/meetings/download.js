@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { articlesBasedOnClassifcationMap } from '../../utils/classification-utils';
-import { restartableTask, trackedTask } from 'ember-concurrency';
+import { restartableTask } from 'ember-concurrency';
+import { trackedTask } from 'reactiveweb/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 
 export default class MeetingsDownloadController extends Controller {
