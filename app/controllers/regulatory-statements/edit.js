@@ -99,7 +99,6 @@ import {
   snippet,
   snippetView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
   GEMEENTE,
@@ -333,12 +332,6 @@ export default class RegulatoryStatementsRoute extends Controller {
       // Return empty object instead of null so can be used safely in template
       return {};
     }
-  }
-
-  @action
-  download() {
-    this.editorDocument.content = this.controller.htmlContent;
-    generateExportFromEditorDocument(this.editorDocument);
   }
 
   saveTask = task(async () => {

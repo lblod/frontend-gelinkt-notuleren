@@ -1,7 +1,5 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
-import { action } from '@ember/object';
 import { task } from 'ember-concurrency';
 import { replaceUris } from '../../utils/replace-uris';
 import { tracked } from '@glimmer/tracking';
@@ -12,11 +10,6 @@ export default class RegulatoryAttachmentsShowController extends Controller {
   @service router;
   @service intl;
   @tracked revisions;
-
-  @action
-  download() {
-    generateExportFromEditorDocument(this.model.editorDocument);
-  }
 
   fetchRevisions = task(async () => {
     const revisionsToSkip = [this.model.editorDocument.id];

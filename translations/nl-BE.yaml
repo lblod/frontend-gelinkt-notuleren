@@ -695,6 +695,7 @@ utils:
   insert: Invoegen
   file-options: Bestand acties
   html-export: Exporteer als HTML
+  html-export-publish: Exporteer als HTML (voor publicatie)
   delete: Naar prullenmand
   restore: Herstellen
   current-version: Actuele versie
