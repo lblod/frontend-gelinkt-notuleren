@@ -22,10 +22,11 @@
           {{t 'app-chrome.copy-agendapoint'}}
         </AuButton>
       {{/unless}}
-      <AuButton {{on 'click' this.download}} @skin='link' role='menuitem'>
-        <AuIcon @icon='export' @alignment='left' />
-        {{t 'utils.html-export'}}
-      </AuButton>
+      <DownloadDocument @document={{this.model.editorDocument}} />
+      <DownloadDocument
+        @document={{this.model.editorDocument}}
+        @forPublish={{true}}
+      />
     </AuDropdown>
   </:actions>
 </AppChrome>
