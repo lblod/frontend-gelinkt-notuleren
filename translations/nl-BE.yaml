@@ -784,7 +784,6 @@ generic:
 download:
   heading: Onderdelen downloaden of kopiëren
   back-to-meeting: Terug naar zitting
-  description: Kies een agendapunt waaruit je onderdelen wil kopieren
   document-download:
     dropdown-title: Publicatiedocumenten
     agenda: Agenda downloaden als HTML
