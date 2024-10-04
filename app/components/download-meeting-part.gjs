@@ -7,22 +7,15 @@ import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { on } from '@ember/modifier';
 import t from 'ember-intl/helpers/t';
+import { task } from 'ember-concurrency';
+import perform from 'ember-concurrency/helpers/perform';
 
 export default class DownloadMeetingComponent extends Component {
   @service publish;
   @service intl;
   @tracked status = 'initial';
 
-  get isCompleted() {
-    return this.status === 'completed';
-  }
-  get isLoading() {
-    return this.status === 'loading';
-  }
-  @action
-  async downloadMeeting() {
-    this.status = 'loading';
-    console.log('download meeting');
+  downloadMeeting = task(async() => {
     let route = `/prepublish/${this.args.documentType}`;
     let html;
     switch (this.args.documentType) {
@@ -57,8 +50,7 @@ export default class DownloadMeetingComponent extends Component {
     linkElement.href = URL.createObjectURL(file);
     linkElement.download = `${this.args.documentType}.html`;
     linkElement.click();
-    this.status = 'completed';
-  }
+  })
   get buttonText() {
     return this.intl.t(`download.document-download.${this.args.documentType}`);
   }
@@ -99,14 +91,14 @@ export default class DownloadMeetingComponent extends Component {
     return content;
   }
   <template>
-    {{#if this.isCompleted}}
+    {{#if this.downloadMeeting.last.isSuccessful}}
       <span
         class='download-meeting-part-downloaded au-u-flex--inline au-u-flex--vertical-center'
       >
         <AuIcon @icon='circle-check' />
         {{t 'download-meeting-part.downloaded'}}
       </span>
-    {{else if this.isLoading}}
+    {{else if this.downloadMeeting.isRunning}}
       <AuLoader @inline='true'>
         {{t 'download-meeting-part.downloading'}}
       </AuLoader>
@@ -115,7 +107,7 @@ export default class DownloadMeetingComponent extends Component {
         @skin='link'
         @icon={{@icon}}
         role='menuitem'
-        {{on 'click' this.downloadMeeting}}
+        {{on 'click' (perform this.downloadMeeting)}}
       >
         {{this.buttonText}}
       </AuButton>
