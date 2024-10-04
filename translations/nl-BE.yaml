@@ -782,7 +782,7 @@ generic:
   add: Toevoegen
 
 download:
-  heading: Onderdelen kopiëren naar externe applicatie
+  heading: Onderdelen downloaden of kopiëren
   back-to-meeting: Terug naar zitting
   description: Kies een agendapunt waaruit je onderdelen wil kopieren
   document-download:
