@@ -1,7 +1,5 @@
 import Component from '@glimmer/component';
-import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 import AuIcon from '@appuniversum/ember-appuniversum/components/au-icon';
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
@@ -9,7 +7,7 @@ import { on } from '@ember/modifier';
 import t from 'ember-intl/helpers/t';
 import { task } from 'ember-concurrency';
 import perform from 'ember-concurrency/helpers/perform';
-import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish'
+import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 
 const PREFIXES = [
   'eli: http://data.europa.eu/eli/ontology#',
@@ -30,7 +28,7 @@ export default class DownloadMeetingComponent extends Component {
   @service publish;
   @service intl;
 
-  downloadMeeting = task(async() => {
+  downloadMeeting = task(async () => {
     let route = `/prepublish/${this.args.documentType}`;
     let html;
     switch (this.args.documentType) {
@@ -65,7 +63,7 @@ export default class DownloadMeetingComponent extends Component {
     linkElement.href = URL.createObjectURL(file);
     linkElement.download = `${this.args.documentType}.html`;
     linkElement.click();
-  })
+  });
   get buttonText() {
     return this.intl.t(`download.document-download.${this.args.documentType}`);
   }
@@ -106,7 +104,7 @@ export default class DownloadMeetingComponent extends Component {
     <div prefix="${PREFIXES.join(' ')}">
       ${stripHtmlForPublish(content)}
     </div>
-    `
+    `;
     return enrichedContent;
   }
   <template>
