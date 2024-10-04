@@ -3,6 +3,7 @@ import {
   BESLUIT,
   DCT,
   EXT,
+  MANDAAT,
   RDF,
   XSD,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
@@ -220,7 +221,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
             return addPropertyToNode({
               resource: decisionUri,
               property: {
-                predicate: EXT('appoints').full,
+                predicate: MANDAAT('bekrachtigtAanstellingVan').full,
                 object: factory.resourceNode(binding['mandataris'].value),
               },
             });
@@ -508,7 +509,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
             return addPropertyToNode({
               resource: decisionUri,
               property: {
-                predicate: EXT('appoints').full,
+                predicate: MANDAAT('bekrachtigtAanstellingVan').full,
                 object: factory.resourceNode(binding['mandataris'].value),
               },
             });
@@ -625,7 +626,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
             return addPropertyToNode({
               resource: decisionUri,
               property: {
-                predicate: EXT('appoints').full,
+                predicate: MANDAAT('bekrachtigtAanstellingVan').full,
                 object: factory.resourceNode(mandatee['mandataris'].value),
               },
             });
@@ -716,7 +717,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
             return addPropertyToNode({
               resource: decisionUri,
               property: {
-                predicate: EXT('appoints').full,
+                predicate: MANDAAT('bekrachtigtAanstellingVan').full,
                 object: factory.resourceNode(binding['mandataris'].value),
               },
             });
