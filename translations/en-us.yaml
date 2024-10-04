@@ -778,7 +778,7 @@ generic:
   add: Add
 
 download:
-  heading: Copying treatments to external application
+  heading: Download or copy meeting documents
   back-to-meeting: Back to meeting
   description: Choose an agenda item from which to copy items
   document-download:
