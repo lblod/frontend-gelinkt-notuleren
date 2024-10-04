@@ -410,7 +410,7 @@ meeting-form:
   actions:
     dropdown-title: Actions
     download-meeting: Download minutes as HTML
-    download-treatments: Copying components to external application
+    download-treatments: Download or copy meeting documents
 
 meetings:
   publish:
