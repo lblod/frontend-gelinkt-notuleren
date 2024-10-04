@@ -414,7 +414,7 @@ meeting-form:
   actions:
     dropdown-title: Acties
     download-meeting: Notulen downloaden als HTML
-    download-treatments: Onderdelen kopiëren naar externe applicatie
+    download-treatments: Onderdelen downloaden of kopiëren
 
 meetings:
   publish:
