@@ -123,7 +123,6 @@ export default class DownloadMeetingComponent extends Component {
       <AuButton
         @skin='link'
         @icon={{@icon}}
-        role='menuitem'
         {{on 'click' (perform this.downloadMeeting)}}
       >
         {{this.buttonText}}

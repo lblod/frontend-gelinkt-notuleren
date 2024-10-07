@@ -791,6 +791,12 @@ download:
     notulen: Notulen downloaden als HTML
     agendapunt: Agendapunt
     besluit: Besluit
+    agenda-downloading: Agenda aan het downloaden
+    agenda-downloaded: Agenda gedownload
+    besluitenlijst-downloading: Besluitenlijst aan het downloaden
+    besluitenlijst-downloaded: Besluitenlijst gedownload
+    notulen-downloading: Notulen aan het downloaden
+    notulen-downloaded: Notulen gedownload
   table:
     agendapoint-title: Titel agendapunt
     download-html: Download HTML
