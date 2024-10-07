@@ -81,7 +81,6 @@ import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
   regulatoryStatementNode,
@@ -362,13 +361,7 @@ export default class AgendapointsEditController extends Controller {
   @action
   handleRdfaEditorInit(editor) {
     this.controller = editor;
-    editor.initialize(this.editorDocument.content || '');
-  }
-
-  @action
-  download() {
-    this.editorDocument.content = this.controller.htmlContent;
-    generateExportFromEditorDocument(this.editorDocument);
+    editor.initialize(this.editorDocument.content || '', { doNotClean: true });
   }
 
   copyAgendapunt = task(async () => {

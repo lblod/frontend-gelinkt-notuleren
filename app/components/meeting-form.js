@@ -4,8 +4,8 @@ import { tracked } from 'tracked-built-ins';
 import { task, all, restartableTask } from 'ember-concurrency';
 import { service } from '@ember/service';
 import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
-import { trackedFunction } from 'ember-resources/util/function';
-import { trackedTask } from 'ember-resources/util/ember-concurrency';
+import { trackedFunction } from 'reactiveweb/function';
+import { trackedTask } from 'reactiveweb/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 import {
   MANDATARIS_STATUS_EFFECTIEF,

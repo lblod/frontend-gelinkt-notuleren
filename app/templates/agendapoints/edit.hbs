@@ -27,10 +27,15 @@
         <AuIcon @icon='copy' @alignment='left' />
         {{t 'app-chrome.copy-agendapoint'}}
       </AuButton>
-      <AuButton {{on 'click' this.download}} @skin='link' role='menuitem'>
-        <AuIcon @icon='export' @alignment='left' />
-        {{t 'utils.html-export'}}
-      </AuButton>
+      <DownloadDocument
+        @content={{this.controller.htmlContent}}
+        @document={{this.editorDocument}}
+      />
+      <DownloadDocument
+        @content={{this.controller.htmlContent}}
+        @document={{this.editorDocument}}
+        @forPublish={{true}}
+      />
       <AuButton
         {{on 'click' this.toggleDeleteModal}}
         @skin='link'

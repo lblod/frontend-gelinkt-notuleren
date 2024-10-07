@@ -1,5 +1,39 @@
 # frontend-gelinkt-notuleren
 
+## 5.29.0
+
+### Minor Changes
+
+- [#723](https://github.com/lblod/frontend-gelinkt-notuleren/pull/723) [`53999b8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/53999b82bc7de5f78919e7884116f6a1adc2ed33) Thanks [@piemonkey](https://github.com/piemonkey)! - Add option to export HTML 'for publishing', which removes template comments
+
+### Patch Changes
+
+- [#720](https://github.com/lblod/frontend-gelinkt-notuleren/pull/720) [`07b5d09`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/07b5d091959182fa06498cde6d0769767ab7f98c) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 24.0.0
+
+## 5.28.1
+
+### Patch Changes
+
+- [#716](https://github.com/lblod/frontend-gelinkt-notuleren/pull/716) [`76d5a1c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/76d5a1cb6099a8fc081e6b61086811950c6d9ddf) Thanks [@piemonkey](https://github.com/piemonkey)! - Include fix for snippet buttons in certain situations
+
+- [#721](https://github.com/lblod/frontend-gelinkt-notuleren/pull/721) [`a8f441d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a8f441d95c0cff4a89a58443284c54d0b4cd8be3) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [23.0.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v23.0.0)
+
+- [#713](https://github.com/lblod/frontend-gelinkt-notuleren/pull/713) [`c851cc2`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c851cc20930553430372c6f38b10840a8c32181d) Thanks [@abeforgit](https://github.com/abeforgit)! - Add polymorphic to all remaining relationships to meetings
+
+## 5.28.0
+
+### Minor Changes
+
+- [#704](https://github.com/lblod/frontend-gelinkt-notuleren/pull/704) [`ecd4d94`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ecd4d94cb0e8ad52361da0b2fb2da505a22bf6bf) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to v22.5.1 of plugins. Including:
+  - Support for imported resources in snippets, both when editing and including them
+  - Mandatee table improvements
+
+## 5.27.3
+
+### Patch Changes
+
+- [#718](https://github.com/lblod/frontend-gelinkt-notuleren/pull/718) [`9635ec2`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9635ec27677ac432da7de8facf52b60e72dbcfb7) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix removal of empty lines on save, they are now maintained
+
 ## 5.27.2
 
 ### Patch Changes
