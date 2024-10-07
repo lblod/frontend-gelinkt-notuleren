@@ -276,20 +276,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
+        SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?bestuursorgaan org:hasPost ?mandaat.
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
-          # TODO: ?rangorde is a string or number?
-          ?mandataris mandaat:rangorde ?mandataris_rang.
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
         }
-        ORDER BY ?mandataris_rang
       `;
       return executeQuery({
         query: sparqlQuery,
@@ -307,11 +304,8 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
           true,
         );
         const rows = bindings.map((binding) => {
-          const { mandataris_naam, mandataris_rang } = bindingToObject(binding);
-          return row(schema, [
-            schema.text(mandataris_naam),
-            schema.text(mandataris_rang),
-          ]);
+          const { mandataris_naam } = bindingToObject(binding);
+          return row(schema, [schema.text(mandataris_naam), null]);
         });
         const content = schema.nodes.table.create(null, [tableHeader, ...rows]);
         const transaction = replaceContent(state.tr, $pos, content);
