@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.30.0
+
+### Minor Changes
+
+- [#715](https://github.com/lblod/frontend-gelinkt-notuleren/pull/715) [`4d360d8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4d360d8d3ff1b7bb167b937b846e641525616a34) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Implement autofill variable
+
 ## 5.29.0
 
 ### Minor Changes
