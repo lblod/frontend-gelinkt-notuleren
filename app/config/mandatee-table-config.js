@@ -16,6 +16,7 @@ import { addPropertyToNode } from '@lblod/ember-rdfa-editor/utils/rdfa-utils';
 import { transactionCombinator } from '@lblod/ember-rdfa-editor/utils/transaction-utils';
 import { v4 as uuidv4 } from 'uuid';
 import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
+import { rangordeStringToNumber } from '../utils/mandataris-rangorde';
 
 // TODO: replace this by the correct 'bestuursperiode' (2025-...)
 const BESTUURSPERIODE =
@@ -507,12 +508,22 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
             'Could not find decision to sync mandatee table with',
           );
         }
-        const bindings = queryResult.results.bindings;
         const tableHeader = row(
           schema,
           [schema.text('Schepen'), schema.text('Rang')],
           true,
         );
+        const bindings = queryResult.results.bindings
+          .map((binding) => {
+            const { mandataris_rang } = bindingToObject(binding);
+            return {
+              ...binding,
+              rangnummer: rangordeStringToNumber(mandataris_rang),
+            };
+          })
+          .sort((b1, b2) => {
+            return b1.rangnummer - b2.rangnummer;
+          });
         const rows = bindings.map((binding) => {
           const { mandataris, mandataris_naam, mandataris_rang } =
             bindingToObject(binding);
@@ -607,7 +618,17 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
             'Could not find decision to sync mandatee table with',
           );
         }
-        const bindings = queryResult.results.bindings;
+        const bindings = queryResult.results.bindings
+          .map((binding) => {
+            const { mandataris_rang } = bindingToObject(binding);
+            return {
+              ...binding,
+              rangnummer: rangordeStringToNumber(mandataris_rang),
+            };
+          })
+          .sort((b1, b2) => {
+            return b1.rangnummer - b2.rangnummer;
+          });
         const tableHeader = row(
           schema,
           [
