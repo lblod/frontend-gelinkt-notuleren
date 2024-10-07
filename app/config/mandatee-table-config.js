@@ -17,6 +17,9 @@ import { transactionCombinator } from '@lblod/ember-rdfa-editor/utils/transactio
 import { v4 as uuidv4 } from 'uuid';
 import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 
+const BESTUURSPERIODE =
+  'http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca';
+
 function tableCell(schema, width, content, header = false) {
   const nodetype = header ? schema.nodes.table_header : schema.nodes.table_cell;
   return nodetype.create(
@@ -121,7 +124,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
           ?mandataris org:holds ?mandaat.
           ?bestuursorgaan org:hasPost ?mandaat.
           # TODO: replace this by the correct bestuursperiode
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
         }
       `;
       return executeQuery({
@@ -165,7 +168,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_datum_eedaflegging WHERE {
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?bestuursorgaan org:hasPost ?mandaat.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
@@ -251,7 +254,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?bestuursorgaan org:hasPost ?mandaat.
           # TODO: Do we only want information on 'gemeenteraadsleden'?
           ?mandaat org:role <http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011>.
@@ -328,7 +331,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lidmaatschap) as ?fractie_aantal_zetels) WHERE {
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?fractie org:memberOf ?bestuursorgaan.
           ?fractie regorg:legalName ?fractie_naam.
           # We want this to be optional, as it is possible there are 'fracties' without any electees
@@ -398,7 +401,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
           ?mandataris org:holds ?mandaat.
           ?bestuursorgaan org:hasPost ?mandaat.
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
         }
       `;
       return executeQuery({
@@ -449,7 +452,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?bestuursorgaan org:hasPost ?mandaat.
           # Filter on 'schepen'
           ?mandaat org:role <http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000014>.
@@ -541,7 +544,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_begindatum ?mandaat_einddatum ?mandataris_opvolger WHERE {
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?bestuursorgaan org:hasPost ?mandaat.
           # Filter on 'schepen'
           ?mandaat org:role <http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000014>.
@@ -657,7 +660,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?fractie ?fractie_naam WHERE {
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?bestuursorgaan org:hasPost ?mandaat.
           # Filter on 'schepen'
           ?mandaat org:role <http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000014>.
@@ -748,7 +751,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?fractie ?fractie_naam WHERE {
           # TODO: replace this by the correct 'bestuursperiode'
-          ?bestuursorgaan lmb:heeftBestuursperiode <http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
           ?bestuursorgaan org:hasPost ?mandaat.
           # Filter on 'schepen', 'voorzitter van het bijzonder comité voor de sociale dienst'
           ?mandaat org:role ?role.
