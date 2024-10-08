@@ -62,3 +62,7 @@ export const BESTUURSPERIODES = {
   '2025-heden':
     'http://data.lblod.info/id/concept/Bestuursperiode/96efb929-5d83-48fa-bfbb-b98dfb1180c7',
 };
+
+export const LOKALE_VERKIEZINGEN = {
+  2024: 'http://data.lblod.info/id/rechtstreekse-verkiezingen/612a57de-7fc2-40af-a7dc-17d544e5de20',
+};

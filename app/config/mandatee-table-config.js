@@ -7,7 +7,6 @@ import {
 import { hasOutgoingNamedNodeTriple } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/namespace';
 import { executeQuery } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
 import { SayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
-import { NotImplementedError } from '@lblod/ember-rdfa-editor/utils/_private/errors';
 import { addPropertyToNode } from '@lblod/ember-rdfa-editor/utils/rdfa-utils';
 import { transactionCombinator } from '@lblod/ember-rdfa-editor/utils/transaction-utils';
 import { rangordeStringToNumber } from '../utils/mandataris-rangorde';
@@ -18,7 +17,12 @@ import {
   resourceNode,
   row,
 } from '../utils/editor-utils';
-import { BESTUURSFUNCTIE_CODES, BESTUURSPERIODES } from './constants';
+import {
+  BESTUURSFUNCTIE_CODES,
+  BESTUURSPERIODES,
+  LOKALE_VERKIEZINGEN,
+} from './constants';
+import { promiseProperties } from '../utils/promises';
 
 export const IVGR_TAGS = /** @type {const} */ ([
   'IVGR2-LMB-1-geloofsbrieven',
@@ -248,13 +252,94 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR5-LMB-1: Splitsing fracties: één of meerdere lijsten hebben in de akte van voordracht van kandidaten aangegeven te zullen splitsen in twee fracties.
      */
     'IVGR5-LMB-1-splitsing-fracties': {
-      query: () => {
-        throw new NotImplementedError();
+      query: async () => {
+        const splitKandidatenlijstQuery = /* sparql */ `
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+        PREFIX regorg: <https://www.w3.org/ns/regorg#>
+
+        SELECT DISTINCT ?kandidatenlijst ?kandidatenlijst_naam ?fractie1 ?fractie2 ?fractie1_naam ?fractie2_naam WHERE {
+          ?kandidatenlijst a <http://data.vlaanderen.be/ns/mandaat#Kandidatenlijst>.
+          ?kandidatenlijst mandaat:behoortTot <${LOKALE_VERKIEZINGEN[2024]}>.
+          ?kandidatenlijst skos:prefLabel ?kandidatenlijst_naam.
+          ?fractie1 ext:geproduceerdDoor ?kandidatenlijst;
+                    regorg:legalName ?fractie1_naam.
+          ?fractie2 ext:geproduceerdDoor ?kandidatenlijst;
+                    regorg:legalName ?fractie2_naam.
+          FILTER(?fractie1 != ?fractie2 && ?fractie1 < ?fractie2)
+        }
+      `;
+        const kandidatenlijstQueryResult = await executeQuery({
+          query: splitKandidatenlijstQuery,
+          endpoint: '/vendor-proxy/query',
+        });
+        const bindings = kandidatenlijstQueryResult.results.bindings;
+
+        const promises = [];
+        for (const binding of bindings) {
+          const {
+            kandidatenlijst,
+            kandidatenlijst_naam,
+            fractie1,
+            fractie1_naam,
+            fractie2,
+            fractie2_naam,
+          } = bindingToObject(binding);
+          const entry = {
+            uri: kandidatenlijst,
+            naam: kandidatenlijst_naam,
+            fractie1: {
+              uri: fractie1,
+              naam: fractie1_naam,
+              leden: fetchFractieLeden(fractie1),
+            },
+            fractie2: {
+              uri: fractie2,
+              naam: fractie2_naam,
+              leden: fetchFractieLeden(fractie2),
+            },
+          };
+          promises.push(promiseProperties(entry, true));
+        }
+        return Promise.all(promises);
       },
-      updateContent: () => {
-        throw new NotImplementedError();
+      updateContent: (pos, kandidatenlijsten) => {
+        return (state) => {
+          const content = [];
+          const { schema, doc } = state;
+          const $pos = doc.resolve(pos);
+          for (const kandidatenlijst of kandidatenlijsten) {
+            content.push(
+              schema.nodes.paragraph.create(null, [
+                schema.text(
+                  `${kandidatenlijst.naam} heeft in de akte van voordracht van kandidaten aangegeven te zullen splitsen in twee fracties.`,
+                ),
+                schema.nodes.hard_break.create(),
+                schema.text(
+                  `${kandidatenlijst.naam} splitst in ${kandidatenlijst.fractie1.naam} en ${kandidatenlijst.fractie2.naam}.`,
+                ),
+              ]),
+            );
+            content.push(
+              createFractieLedenTable(kandidatenlijst.fractie1, schema),
+            );
+            content.push(
+              createFractieLedenTable(kandidatenlijst.fractie2, schema),
+            );
+          }
+          const transaction = replaceContent(state.tr, $pos, content);
+          return {
+            transaction,
+            result: true,
+            initialState: state,
+          };
+        };
       },
     },
+
     /**
      * **IVGR5: Vaststelling van de fracties**
      *
@@ -775,3 +860,37 @@ export const mandateeTableConfigIVGR = (meeting) => {
     },
   };
 };
+
+async function fetchFractieLeden(fractieUri) {
+  const sparqlQuery = /* sparql */ `
+    PREFIX org: <http://www.w3.org/ns/org#>
+    PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+    PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+    PREFIX person: <http://www.w3.org/ns/person#>
+    PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+    SELECT DISTINCT ?persoon ?persoon_naam WHERE {
+      ?persoon a person:Person .
+      ?persoon persoon:gebruikteVoornaam ?voornaam.
+      ?persoon foaf:familyName ?achternaam.
+      BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+
+      ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+      ?mandataris org:hasMembership/org:organisation <${fractieUri}>.
+    }
+  `;
+  const result = await executeQuery({
+    query: sparqlQuery,
+    endpoint: '/vendor-proxy/query',
+  });
+  return result.results.bindings.map(bindingToObject) ?? [];
+}
+
+function createFractieLedenTable(fractie, schema) {
+  const { naam, leden } = fractie;
+  const tableHeader = row(schema, [schema.text(`Behoren tot ${naam}`)], true);
+  const rows = leden.map((lid) => {
+    return row(schema, [schema.text(lid.naam)]);
+  });
+  return schema.nodes.table.create(null, [tableHeader, ...rows]);
+}
