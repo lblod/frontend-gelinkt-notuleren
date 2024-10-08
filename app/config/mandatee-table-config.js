@@ -347,14 +347,15 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         # TODO: http or https?
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
-        SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lidmaatschap) as ?fractie_aantal_zetels) WHERE {
+        SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lid) as ?fractie_aantal_zetels) WHERE {
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODE}>.
 
           ?fractie org:memberOf ?bestuursorgaan.
           ?fractie regorg:legalName ?fractie_naam.
           # We want this to be optional, as it is possible there are 'fracties' without any electees
           OPTIONAL {
-            ?lidmaatschap org:organisation ?fractie.
+            ?mandataris org:hasMembership/org:organisation ?fractie.
+            ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
           }
         }
       `;
