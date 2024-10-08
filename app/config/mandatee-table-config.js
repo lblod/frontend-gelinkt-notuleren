@@ -479,14 +479,12 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
-          # TODO: ?rangorde is a string or number?
+
           ?mandataris mandaat:rangorde ?mandataris_rang.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
         }
-        # TODO: Unsure how we will sort 'rang'
-        ORDER BY ?mandataris_rang
       `;
       return executeQuery({
         query: sparqlQuery,
