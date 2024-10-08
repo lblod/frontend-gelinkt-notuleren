@@ -579,7 +579,6 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
-          # TODO: ?rangorde is a string or number?
           ?mandataris mandaat:rangorde ?mandataris_rang.
           ?mandataris mandaat:status/skos:prefLabel ?mandataris_status.
 
@@ -591,10 +590,7 @@ export const MANDATEE_TABLE_SAMPLE_CONFIG = {
           VALUES ?mandaat_einddatum { undef }
           # TODO: unsure how we will fetch the 'opvolger'
           VALUES ?mandataris_opvolger { undef }
-
         }
-        # TODO: Unsure how we will sort 'rang'
-        ORDER BY ?mandataris_rang
       `;
       return executeQuery({
         query: sparqlQuery,
