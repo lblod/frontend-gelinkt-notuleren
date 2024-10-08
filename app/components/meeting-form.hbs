@@ -56,11 +56,30 @@
     </Group>
     <Group class='au-u-flex--vertical-center'>
       {{#unless this.readOnly}}
-        <DeleteMeeting @meeting={{@zitting}} />
         {{#if this.isInaugurationMeeting}}
           <InaugurationMeeting::Synchronization @meeting={{this.zitting}} />
         {{/if}}
       {{/unless}}
+      <AuDropdown
+        @skin='secondary'
+        @title={{t 'meeting-form.actions.dropdown-title'}}
+        @alignment='left'
+        @icon='chevron-down'
+        role='menu'
+      >
+        <AuLink
+          @skin='primary'
+          @route='meetings.download'
+          @icon='copy-paste'
+          @model={{@zitting}}
+          role='menuitem'
+        >
+          {{t 'meeting-form.actions.download-treatments'}}
+        </AuLink>
+        {{#unless this.readOnly}}
+          <DeleteMeeting @meeting={{@zitting}} />
+        {{/unless}}
+      </AuDropdown>
       {{#if this.isComplete}}
         <AuButton @skin='secondary' {{on 'click' this.goToPublish}}>
           {{t 'meeting-form.publish-button'}}
