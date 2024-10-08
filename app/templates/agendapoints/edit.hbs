@@ -137,14 +137,6 @@
           @controller={{this.controller}}
         />
       {{/if}}
-
-      {{#if this.activeNode}}
-        <this.SnippetInsert
-          @controller={{this.controller}}
-          @config={{this.config.snippet}}
-          @node={{this.activeNode}}
-        />
-      {{/if}}
       <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
       <LocationPlugin::Insert
         @controller={{this.controller}}
@@ -167,6 +159,13 @@
         @controller={{this.controller}}
         @config={{this.config.lmb}}
       />
+      {{#if this.activeNode}}
+        <this.SnippetInsert
+          @controller={{this.controller}}
+          @config={{this.config.snippet}}
+          @node={{this.activeNode}}
+        />
+      {{/if}}
     </:sidebarCollapsible>
     <:sidebar>
       <this.StructureControlCard @controller={{this.controller}} />

@@ -131,13 +131,6 @@
         @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
-      {{#if this.activeNode}}
-        <this.SnippetInsert
-          @controller={{this.controller}}
-          @config={{this.config.snippet}}
-          @node={{this.activeNode}}
-        />
-      {{/if}}
       <VariablePlugin::Date::Insert
         @controller={{this.controller}}
         @options={{this.config.date}}
@@ -160,6 +153,13 @@
         @controller={{this.controller}}
         @config={{this.config.lmb}}
       />
+      {{#if this.activeNode}}
+        <this.SnippetInsert
+          @controller={{this.controller}}
+          @config={{this.config.snippet}}
+          @node={{this.activeNode}}
+        />
+      {{/if}}
     </:sidebarCollapsible>
     <:sidebar>
       <ArticleStructurePlugin::StructureCard

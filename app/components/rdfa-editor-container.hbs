@@ -120,7 +120,7 @@
           {{#if this.controller}}
             <Sidebar as |Sidebar|>
               {{#if (has-block 'sidebarCollapsible')}}
-                <Sidebar.Collapsible @title={{t 'utils.insert'}}>
+                <Sidebar.Collapsible @title={{t 'utils.insert'}} @expandedInitially="true">
                   {{yield to='sidebarCollapsible'}}
                 </Sidebar.Collapsible>
               {{/if}}
