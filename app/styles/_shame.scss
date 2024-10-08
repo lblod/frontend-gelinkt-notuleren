@@ -771,3 +771,14 @@ div[typeof='besluitpublicatie:Documentonderdeel'] {
 #ember-basic-dropdown-wormhole {
   z-index: 20000;
 }
+
+.au-c-data-table-with-borders {
+  border-left: 0.1rem solid var(--au-gray-300);
+  border-right: 0.1rem solid var(--au-gray-300);
+}
+.download-meeting-part-downloaded {
+  color: var(--au-green-700);
+  .au-c-icon {
+    margin-right: 0.5rem;
+  }
+}

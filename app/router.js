@@ -69,6 +69,7 @@ Router.map(function () {
         this.route('detail', { path: '/:publishing_log_id' });
       });
     });
+    this.route('download', { path: '/:id/download' });
   });
 
   this.route('irg-archive', function () {
