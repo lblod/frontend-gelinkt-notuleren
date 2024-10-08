@@ -536,7 +536,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
               };
             })
             .sort((b1, b2) => {
-              return b1.rangnummer - b2.rangnummer;
+              return (b1.rangnummer ?? Infinity) - (b2.rangnummer ?? Infinity);
             });
           const rows = bindings.map((binding) => {
             const { mandataris, mandataris_naam, mandataris_rang } =
