@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.31.0
+
+### Minor Changes
+
+- [#711](https://github.com/lblod/frontend-gelinkt-notuleren/pull/711) [`d3f4f25`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d3f4f255eace6a55f67122a2faba7fdc35d14a97) Thanks [@elpoelma](https://github.com/elpoelma)! - Add inital mandatee table config containing the different configurations/queries needed for the inauguration meeting
+
+- [#724](https://github.com/lblod/frontend-gelinkt-notuleren/pull/724) [`f71851b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f71851b6cb3e95e65cc91fb87733277b8c2802e6) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Correctly instantiate templates coming from RB
+
+- [#714](https://github.com/lblod/frontend-gelinkt-notuleren/pull/714) [`f5570f6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f5570f6a6c7e665e35d58178d7792386ff554d3c) Thanks [@abeforgit](https://github.com/abeforgit)! - Inital version of loading correct templates upon IV creation
+
+- [#722](https://github.com/lblod/frontend-gelinkt-notuleren/pull/722) [`b14af9d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b14af9dbb711036bad924be48a2bf9b78060e39b) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Users can now download certain meeting parts as HTML
+
+### Patch Changes
+
+- [#726](https://github.com/lblod/frontend-gelinkt-notuleren/pull/726) [`a46d2ed`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a46d2edecadc2a166ca4794b036ff2687249af86) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Insert menu is open by default now and moved insert snippet button to the bottom of the list
+
 ## 5.30.0
 
 ### Minor Changes
