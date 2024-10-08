@@ -5,6 +5,7 @@ import { service } from '@ember/service';
 import { task } from 'ember-concurrency';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 
 export default class DocumentCreatorComponent extends Component {
   @tracked title = '';
@@ -97,9 +98,13 @@ export default class DocumentCreatorComponent extends Component {
        */
       if (this.template.loadBody) {
         await this.template.loadBody();
+        const trimmedHtml = this.template.body.replace(/>\s+</g, '><');
+        //If the template comes from RB we instantiate it with the new library
+        return templateUuidInstantiator(trimmedHtml);
+      } else {
+        const trimmedHtml = this.template.body.replace(/>\s+</g, '><');
+        return instantiateUuids(trimmedHtml);
       }
-      const trimmedHtml = this.template.body.replace(/>\s+</g, '><');
-      return instantiateUuids(trimmedHtml);
     } else return '';
   }
 
