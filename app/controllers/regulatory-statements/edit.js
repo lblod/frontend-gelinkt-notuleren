@@ -80,6 +80,8 @@ import {
   textVariableView,
   person_variable,
   personVariableView,
+  autofilled_variable,
+  autofilledVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import {
   osloLocation,
@@ -99,7 +101,6 @@ import {
   snippet,
   snippetView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
-import generateExportFromEditorDocument from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
   GEMEENTE,
@@ -107,6 +108,7 @@ import {
 } from '../../utils/bestuurseenheid-classificatie-codes';
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -157,6 +159,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
       link: link(this.config.link),
       person_variable,
+      autofilled_variable,
     },
     marks: {
       em,
@@ -189,6 +192,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
         person_variable: personVariableView(controller),
+        autofilled_variable: autofilledVariableView(controller),
       };
     };
   }
@@ -207,6 +211,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       linkPasteHandler(this.schema.nodes.link),
       emberApplication({ application: getOwner(this) }),
       listTrackingPlugin(),
+      variableAutofillerPlugin(this.config.autofilledVariable),
     ];
   }
 
@@ -219,6 +224,7 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   get config() {
     const municipality = this.defaultMunicipality;
+    console.log(municipality);
     return {
       tableOfContents: [
         {
@@ -282,6 +288,11 @@ export default class RegulatoryStatementsRoute extends Controller {
       lmb: {
         endpoint: '/vendor-proxy/query',
       },
+      autofilledVariable: {
+        autofilledValues: {
+          administrativeUnit: `${this.currentSession.classificatie.label} ${this.currentSession.group.naam}`,
+        },
+      },
     };
   }
 
@@ -333,12 +344,6 @@ export default class RegulatoryStatementsRoute extends Controller {
       // Return empty object instead of null so can be used safely in template
       return {};
     }
-  }
-
-  @action
-  download() {
-    this.editorDocument.content = this.controller.htmlContent;
-    generateExportFromEditorDocument(this.editorDocument);
   }
 
   saveTask = task(async () => {

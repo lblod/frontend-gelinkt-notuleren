@@ -687,6 +687,7 @@ utils:
   insert: Insert
   file-options: File options
   html-export: Export as HTML
+  html-export-publish: Export as HTML (for publishing)
   delete: Delete
   restore: Restore
   current-version: Current Version
