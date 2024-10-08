@@ -40,6 +40,18 @@
 
 - [#718](https://github.com/lblod/frontend-gelinkt-notuleren/pull/718) [`9635ec2`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9635ec27677ac432da7de8facf52b60e72dbcfb7) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix removal of empty lines on save, they are now maintained
 
+## 5.28.0-next.0
+
+### Minor Changes
+
+- [#711](https://github.com/lblod/frontend-gelinkt-notuleren/pull/711) [`d3f4f25`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d3f4f255eace6a55f67122a2faba7fdc35d14a97) Thanks [@elpoelma](https://github.com/elpoelma)! - Add inital mandatee table config containing the different configurations/queries needed for the inauguration meeting
+
+### Patch Changes
+
+- [#712](https://github.com/lblod/frontend-gelinkt-notuleren/pull/712) [`6f7d82a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6f7d82a65d860be48cd9b2fbd5e17113c4c3974d) Thanks [@abeforgit](https://github.com/abeforgit)! - Recalculate structure numbers after snippet insert (plugin bump)
+
+- [#713](https://github.com/lblod/frontend-gelinkt-notuleren/pull/713) [`2b73813`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2b7381393b711db4895b9ef83cf5a6c0898a2386) Thanks [@abeforgit](https://github.com/abeforgit)! - Add polymorphic to all remaining relationships to meetings
+
 ## 5.27.2
 
 ### Patch Changes

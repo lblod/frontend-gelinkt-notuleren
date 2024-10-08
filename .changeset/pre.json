@@ -1,0 +1,12 @@
+{
+  "mode": "exit",
+  "tag": "next",
+  "initialVersions": {
+    "frontend-gelinkt-notuleren": "5.27.2"
+  },
+  "changesets": [
+    "early-students-marry",
+    "loud-ducks-laugh",
+    "serious-countries-provide"
+  ]
+}
