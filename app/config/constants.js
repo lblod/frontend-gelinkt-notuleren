@@ -34,3 +34,31 @@ export const PLUGIN_CONFIGS = {
     };
   },
 };
+
+export const BESTUURSFUNCTIE_CODES = {
+  GEMEENTERAADSLID:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
+  SCHEPEN:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000014',
+  BURGEMEESTER:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
+  VOORZITTER_GEMEENTERAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000012',
+  LID_BCSD:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000019',
+  VOORZITTER_BCSD:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001a',
+  LID_RAAD_MAATSCHAPPELIJK_WELZIJN:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
+  VOORZITTER_RAAD_MAATSCHAPPELIJK_WELZIJN:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
+};
+
+export const BESTUURSPERIODES = {
+  '2012-2019':
+    'http://data.lblod.info/id/concept/Bestuursperiode/845dbc7f-139e-4632-b200-f90e180f1dba',
+  '2019-2025':
+    'http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca',
+  '2025-heden':
+    'http://data.lblod.info/id/concept/Bestuursperiode/96efb929-5d83-48fa-bfbb-b98dfb1180c7',
+};

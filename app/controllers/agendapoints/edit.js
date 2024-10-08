@@ -118,7 +118,7 @@ import {
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
-import { MANDATEE_TABLE_SAMPLE_CONFIG } from '../../config/mandatee-table-config';
+import { IVGR_TAGS } from '../../config/mandatee-table-config';
 import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -254,9 +254,8 @@ export default class AgendapointsEditController extends Controller {
         endpoint: '/lpdc-service',
       },
       mandateeTable: {
-        config: MANDATEE_TABLE_SAMPLE_CONFIG,
-        tags: Object.keys(MANDATEE_TABLE_SAMPLE_CONFIG),
-        defaultTag: Object.keys(MANDATEE_TABLE_SAMPLE_CONFIG)[0],
+        tags: IVGR_TAGS,
+        defaultTag: IVGR_TAGS[0],
       },
       lmb: {
         endpoint: '/vendor-proxy/query',
