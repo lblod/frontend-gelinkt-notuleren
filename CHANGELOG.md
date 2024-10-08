@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.30.0
+
+### Minor Changes
+
+- [#715](https://github.com/lblod/frontend-gelinkt-notuleren/pull/715) [`4d360d8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4d360d8d3ff1b7bb167b937b846e641525616a34) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Implement autofill variable
+
+## 5.29.0
+
+### Minor Changes
+
+- [#723](https://github.com/lblod/frontend-gelinkt-notuleren/pull/723) [`53999b8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/53999b82bc7de5f78919e7884116f6a1adc2ed33) Thanks [@piemonkey](https://github.com/piemonkey)! - Add option to export HTML 'for publishing', which removes template comments
+
+### Patch Changes
+
+- [#720](https://github.com/lblod/frontend-gelinkt-notuleren/pull/720) [`07b5d09`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/07b5d091959182fa06498cde6d0769767ab7f98c) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 24.0.0
+
 ## 5.28.1
 
 ### Patch Changes
