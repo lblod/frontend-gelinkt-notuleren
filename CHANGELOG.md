@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.31.1
+
+### Patch Changes
+
+- [#727](https://github.com/lblod/frontend-gelinkt-notuleren/pull/727) [`16735bb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/16735bba5e800e4645e453bfdf77ba9cee7cee18) Thanks [@elpoelma](https://github.com/elpoelma)! - LMB IV GR config: ensure queries filter on bestuursfunctie 'gemeenteraadslid' where necessary
+
 ## 5.31.0
 
 ### Minor Changes
