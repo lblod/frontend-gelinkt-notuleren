@@ -132,7 +132,7 @@
             <th>
               <span
                 class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
-              >{{t 'download.table.download-html'}}</span>
+              >{{t 'download.table.copy-options-header'}}</span>
             </th>
           </c.header>
           <c.body as |agendapoint|>
@@ -150,7 +150,6 @@
             <td><AuLink
                 @route='meetings.download.copy'
                 @model={{agendapoint.behandeling.documentContainer.id}}
-                @skin='link'
               >
                 {{t 'download.table.copy-options'}}
               </AuLink></td>

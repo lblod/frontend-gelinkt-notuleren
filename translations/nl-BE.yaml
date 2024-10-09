@@ -798,6 +798,7 @@ download:
     agendapoint-title: Titel agendapunt
     download-html: Download HTML
     no-data-message: Geen agendapunten gevonden in zitting
+    copy-options-header: Kopieer naar klembord
     copy-options: Bekijk kopieermogelijkehden
 
 download-meeting-part:
@@ -805,7 +806,7 @@ download-meeting-part:
   downloaded: Gedownload
 
 copy-options:
-  heading: 'Kopieer onderdelen uit: {besluit}'
+  heading: 'Kopieer onderdelen uit:'
   disclaimer: 'De opmaak van het document zal afhangen van de applicatie waarin het opgeladen wordt.'
   copy-all: Volledig besluit kopieren
   copying: kopiëren

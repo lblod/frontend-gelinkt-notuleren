@@ -794,6 +794,7 @@ download:
     agendapoint-title: Agendapoint Title
     download-html: Download HTML
     no-data-message: No agendapoints found in meeting
+    copy-options-header: Copy to clipboard
     copy-options: More copy options
 
 download-meeting-part:
