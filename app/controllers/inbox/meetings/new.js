@@ -5,14 +5,14 @@ import { service } from '@ember/service';
 import InstallatieVergaderingModel from '../../../models/installatievergadering';
 
 const IV_AP_MAP = [
-  'http://data.lblod.info/templates/77eb1d90-6d3b-11ef-a3a6-c39998a0026f',
-  'http://data.lblod.info/templates/02cee410-6471-11ef-9943-f704da4e6eb6',
-  'http://data.lblod.info/templates/dcdc22a0-6e2e-11ef-a3a6-c39998a0026f',
-  'http://data.lblod.info/templates/fc357ed0-6e2e-11ef-a3a6-c39998a0026f',
-  'http://data.lblod.info/templates/3679b220-6e32-11ef-a3a6-c39998a0026f',
-  'http://data.lblod.info/templates/b10c53d0-6e32-11ef-a3a6-c39998a0026f',
-  'http://data.lblod.info/templates/770b2020-6e33-11ef-a3a6-c39998a0026f',
-  'http://data.lblod.info/templates/8186d760-6e33-11ef-a3a6-c39998a0026f',
+  'IVGR1 Kennisname van de definitieve verkiezingsluitslag',
+  'IVGR2 Onderzoek van de geloofsbrieven',
+  'IVGR3 Eedaflegging van de verkozen gemeenteraadsleden',
+  'IVGR4 Bepaling van de rangorde van de gemeenteraadsleden',
+  'IVGR5 Vaststelling van de fracties',
+  'IVGR6 Verkiezing van de voorzitter van de gemeenteraad',
+  'IVGR7 Verkiezing van de schepenen',
+  'IVGR8 Aanduiding en eedaflegging van de aangewezen-burgemeester',
 ];
 const IV_NAME_MAP = [
   'Kennisname van de definitieve verkiezingsuitslag',
@@ -94,8 +94,8 @@ export default class InboxMeetingsNewController extends Controller {
         openbaar: true,
         onderwerp: agendapoint,
       });
-      const template = await this.templateFetcher.fetchByUri({
-        uri: IV_AP_MAP[i],
+      const template = await this.templateFetcher.fetchByTemplateName({
+        name: IV_AP_MAP[i],
       });
       await template.loadBody();
       promises.push(

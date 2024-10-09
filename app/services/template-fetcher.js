@@ -11,6 +11,56 @@ export default class TemplateFetcher extends Service {
   @tracked user;
   @tracked group;
   @tracked roles = [];
+
+  fetchByTemplateName = async ({ name }) => {
+    const config = getOwner(this).resolveRegistration('config:environment');
+    const fileEndpoint = config.regulatoryStatementFileEndpoint;
+    const sparqlEndpoint = config.regulatoryStatementEndpoint;
+
+    const sparqlQuery = `
+      PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+      PREFIX pav: <http://purl.org/pav/>
+      PREFIX dct: <http://purl.org/dc/terms/>
+      PREFIX schema: <http://schema.org/>
+      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      SELECT
+        ?template_version
+        ?title
+        ?fileId
+        (GROUP_CONCAT(?context;SEPARATOR="|") as ?contexts)
+        (GROUP_CONCAT(?disabledInContext;SEPARATOR="|") as ?disabledInContexts)
+      WHERE {
+        BIND("${name}" as ?title)
+        ?uri mu:uuid ?uuid;
+          pav:hasCurrentVersion ?template_version.
+        ?template_version mu:uuid ?fileId;
+                          dct:title ?title.
+        OPTIONAL {
+          ?template_version schema:validThrough ?validThrough.
+        }
+        OPTIONAL {
+          ?template_version ext:context ?context.
+        }
+        OPTIONAL {
+          ?template_version ext:disabledInContext ?disabledInContext.
+        }
+        FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
+      }
+      GROUP BY ?template_version ?title ?fileId
+      ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
+    `;
+
+    const response = await this.sendQuery(sparqlEndpoint, sparqlQuery);
+    if (response.status === 200) {
+      const json = await response.json();
+      const bindings = json.results.bindings;
+      const templates = bindings.map(this.bindingToTemplate(fileEndpoint));
+      return templates[0];
+    } else {
+      return null;
+    }
+  };
+
   fetchByUri = async ({ uri }) => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
