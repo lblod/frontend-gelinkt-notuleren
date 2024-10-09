@@ -7,12 +7,20 @@
     <Group>
       <AuLink
         @route='meetings.edit'
-        @model={{@model.container.id}}
+        @model={{@model.zitting.id}}
         @skin='secondary'
         @icon='arrow-left'
         @iconAlignment='left'
       >
         {{t 'download.back-to-meeting'}}
+      </AuLink>
+      <AuLink
+        @route='meetings.download'
+        @model={{@model.zitting.id}}
+        @skin='secondary'
+        class='au-c-app-chrome__entity'
+      >
+        {{t 'download.back-to-download'}}
       </AuLink>
       <span class='au-c-app-chrome__entity'>{{t 'copy-options.heading'}}
         {{@model.document.title}}</span>
@@ -44,5 +52,20 @@
       </Group>
     </AuToolbar>
     <p class='au-u-padding'>{{t 'copy-options.disclaimer'}}</p>
+    <div
+      class='au-u-flex au-u-flex--column au-u-flex--vertical-center au-u-margin-bottom-large'
+    >
+      <AuPanel @active={{true}} class='au-u-3-5' as |Panel|>
+        <Panel>
+          <AuHeading
+            @level={{4}}
+            @skin={{4}}
+          >{{@model.document.title}}</AuHeading>
+        </Panel>
+        <Panel>
+          {{@model.document.htmlSafeContent}}
+        </Panel>
+      </AuPanel>
+    </div>
   </m.content>
 </AuMainContainer>

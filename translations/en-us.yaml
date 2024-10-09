@@ -776,6 +776,7 @@ generic:
 download:
   heading: Download or copy meeting documents
   back-to-meeting: Back to meeting
+  back-to-download: Export components to HTML
   document-download:
     dropdown-title: Publication documents
     agenda: Download agenda as HTML
