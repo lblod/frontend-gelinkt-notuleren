@@ -61,6 +61,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
 
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris org:holds ?mandaat.
+          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
           ?bestuursorgaan org:hasPost ?mandaat.
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
@@ -365,6 +366,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
           OPTIONAL {
             ?mandataris org:hasMembership/org:organisation ?fractie.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
+            ?mandataris org:holds ?mandaat.
+
+            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
           }
         }
       `;
@@ -432,6 +436,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?fractie regorg:legalName ?fractie_naam.
 
           ?mandataris org:holds ?mandaat.
+          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
           ?bestuursorgaan org:hasPost ?mandaat.
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
@@ -877,6 +882,9 @@ async function fetchFractieLeden(fractieUri) {
 
       ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
       ?mandataris org:hasMembership/org:organisation <${fractieUri}>.
+      ?mandataris org:holds ?mandaat.
+
+      ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
     }
   `;
   const result = await executeQuery({
