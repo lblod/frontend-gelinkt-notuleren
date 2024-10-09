@@ -793,7 +793,15 @@ download:
     agendapoint-title: Agendapoint Title
     download-html: Download HTML
     no-data-message: No agendapoints found in meeting
+    copy-options: More copy options
 
 download-meeting-part:
   downloading: Downloading
   downloaded: Downloaded
+
+copy-options:
+  heading: 'Copy parts from:'
+  disclaimer: 'The formatting of the document will depend on the application in which it is loaded.'
+  copy-all: Copy full decision
+  copying: copying
+  completed: copied

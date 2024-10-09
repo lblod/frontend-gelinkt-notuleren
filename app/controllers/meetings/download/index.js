@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { articlesBasedOnClassifcationMap } from '../../utils/classification-utils';
+import { articlesBasedOnClassifcationMap } from 'frontend-gelinkt-notuleren/utils/classification-utils';
 import { restartableTask, task } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
