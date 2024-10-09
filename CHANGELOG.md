@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.31.2
+
+### Patch Changes
+
+- [`598529a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/598529a8982a7f0a58adbc0a1ccab7e57ade1b22) Thanks [@abeforgit](https://github.com/abeforgit)! - Select IV templates based on name so they work in all envs
+
 ## 5.31.1
 
 ### Patch Changes
