@@ -778,7 +778,6 @@ div[typeof='besluitpublicatie:Documentonderdeel'] {
 }
 .download-meeting-part-downloaded {
   color: var(--au-green-700);
-  .au-c-icon {
-    margin-right: 0.5rem;
-  }
+  border-color: var(--au-green-700);
+  border-width: 0;
 }
