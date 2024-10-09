@@ -4,22 +4,7 @@ import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { on } from '@ember/modifier';
 import { task } from 'ember-concurrency';
 import perform from 'ember-concurrency/helpers/perform';
-import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
-
-const PREFIXES = [
-  'eli: http://data.europa.eu/eli/ontology#',
-  'prov: http://www.w3.org/ns/prov#',
-  'mandaat: http://data.vlaanderen.be/ns/mandaat#',
-  'besluit: http://data.vlaanderen.be/ns/besluit#',
-  'ext: http://mu.semte.ch/vocabularies/ext/',
-  'person: http://www.w3.org/ns/person#',
-  'persoon: http://data.vlaanderen.be/ns/persoon#',
-  'dateplugin: http://say.data.gift/manipulators/insertion/',
-  'besluittype: https://data.vlaanderen.be/id/concept/BesluitType/',
-  'dct: http://purl.org/dc/terms/',
-  'mobiliteit: https://data.vlaanderen.be/ns/mobiliteit#',
-  'lblodmow: http://data.lblod.info/vocabularies/mobiliteit/',
-];
+import { generateExportTextFromEditorDocument } from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 
 export default class DownloadMeetingComponent extends Component {
   @service publish;
@@ -118,13 +103,7 @@ export default class DownloadMeetingComponent extends Component {
   }
   async downloadBesluit(docContainer) {
     const currentVersion = await docContainer.get('currentVersion');
-    const content = currentVersion.content;
-    const enrichedContent = `
-    <div prefix="${PREFIXES.join(' ')}">
-      ${stripHtmlForPublish(content)}
-    </div>
-    `;
-    return enrichedContent;
+    return generateExportTextFromEditorDocument(currentVersion, true);
   }
   <template>
     <AuButton
