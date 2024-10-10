@@ -1,7 +1,7 @@
 <AuModal
   @modalOpen={{true}}
   @size='fullscreen'
-  @title={{t 'meeting-form.fourth-section-title'}}
+  @title="Manual voting (Change this)"
   @closeModal={{this.closeModal}}
   class='au-c-modal--editor'
   as |Modal|
@@ -10,7 +10,7 @@
     <ZittingTextDocumentContainer
       @onEditorInit={{this.initEditor}}
       @saving={{this.saveTextTask.isRunning}}
-      @text={{@model.intro}}
+      @text={{this.text}}
     />
   </Modal.Body>
   <Modal.Footer>

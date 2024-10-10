@@ -9,6 +9,8 @@ export default class BehandelingVanAgendapunt extends Model {
   @attr openbaar;
   @attr afgeleidUit;
   @attr('string') gevolg;
+  @attr('boolean') isManualVoting;
+  @attr('string') manualVoting;
 
   @belongsTo('behandeling-van-agendapunt', { inverse: null, async: true })
   vorigeBehandelingVanAgendapunt;

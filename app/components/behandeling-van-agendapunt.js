@@ -218,4 +218,21 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     stemmingToEdit.stemmers.pushObjects(participants);
     this.editStemming.stemming = stemmingToEdit;
   });
+
+  toggleManualVoting = task(async (e) => {
+    if (this.behandeling.isManualVoting) {
+      if (this.behandeling.manualVoting !== '') {
+        console.log('confirm deletion');
+      }
+      this.behandeling.manualVoting = '';
+      this.behandeling.isManualVoting = false;
+    } else {
+      if (this.behandeling.stemmingen.length) {
+        console.log('confirm deletion');
+      }
+      this.behandeling.stemmingen = [];
+      this.behandeling.isManualVoting = true;
+    }
+    await this.behandeling.save();
+  });
 }

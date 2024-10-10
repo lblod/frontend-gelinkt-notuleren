@@ -10,8 +10,7 @@
     <ZittingTextDocumentContainer
       @onEditorInit={{this.initEditor}}
       @saving={{this.saveTextTask.isRunning}}
-      @type='ext:outro'
-      @zitting={{@model}}
+      @text={{@model.outro}}
     />
   </Modal.Body>
   <Modal.Footer>

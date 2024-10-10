@@ -92,49 +92,71 @@
     }}
   />
 {{/if}}
-
-<Common::MeetingSubSection
-  @title={{t 'behandeling-van-agendapunten.voting-title'}}
->
-  <:body>
-    {{#if this.hasParticipants}}
+<div class='au-u-flex au-u-flex--between au-u-flex--vertical-center'>
+      {{#unless @readOnly}}
+        <div>
+          {{t 'behandeling-van-agendapunten.voting-title'}}
+          <AuToggleSwitch
+            @checked={{this.behandeling.isManualVoting}}
+            @onChange={{(perform this.toggleManualVoting)}}
+          >Toggle manual voting</AuToggleSwitch>
+        </div>
+        <div>
+          {{#if this.behandeling.isManualVoting}}
+            <AuLink
+              @route='meetings.edit.manualVoting'
+              @models={{array @meeting.id @behandeling.id}}
+              @skin='button-secondary'
+              @icon='pencil'
+              @iconAlignment='left'
+            >
+              {{t 'generic.edit'}}
+            </AuLink>
+          {{else}}
+            <AuButton
+              {{on 'click' (perform this.addStemming)}}
+              @icon='add'
+              @skin='secondary'
+              @iconAlignment='left'
+              @loading={{this.addStemming.isRunning}}
+            >
+              {{t 'generic.add'}}
+            </AuButton>
+          {{/if}}
+          {{#if this.editMode}}
+            <Treatment::Voting::Edit
+              @bestuursorgaan={{@bestuursorgaan}}
+              @onSave={{perform this.saveStemming}}
+              @onCancel={{this.onCancelEdit}}
+              @saving={{this.saveStemming.isRunning}}
+            />
+          {{/if}}
+        </div>
+      {{/unless}}
+</div>
+<div class='au-c-meeting-chrome-card'>
+  {{#if this.hasParticipants}}
+    {{#if this.behandeling.isManualVoting}}
+      <ReadonlyTextBox>
+        {{html-safe @behandeling.manualVoting}}
+      </ReadonlyTextBox>
+    {{else}}
       <Treatment::Voting
         @bestuursorgaan={{@bestuursorgaan}}
         @behandeling={{@behandeling}}
         @readOnly={{not this.editable}}
       />
-    {{else}}
-      <div
-        class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'
-      >
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
-          {{t 'behandeling-van-agendapunten.needs-participants'}}
-        </AuPill>
-      </div>
     {{/if}}
-  </:body>
-  <:button>
-    {{#unless @readOnly}}
-      <AuButton
-        {{on 'click' (perform this.addStemming)}}
-        @icon='add'
-        @skin='secondary'
-        @iconAlignment='left'
-        @loading={{this.addStemming.isRunning}}
-      >
-        {{t 'generic.add'}}
-      </AuButton>
-      {{#if this.editMode}}
-        <Treatment::Voting::Edit
-          @bestuursorgaan={{@bestuursorgaan}}
-          @onSave={{perform this.saveStemming}}
-          @onCancel={{this.onCancelEdit}}
-          @saving={{this.saveStemming.isRunning}}
-        />
-      {{/if}}
-    {{/unless}}
-  </:button>
-</Common::MeetingSubSection>
+  {{else}}
+    <div
+      class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'
+    >
+      <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
+        {{t 'behandeling-van-agendapunten.needs-participants'}}
+      </AuPill>
+    </div>
+  {{/if}}
+</div>
 
 <Common::MeetingSubSection
   @title={{t 'behandeling-van-agendapunten.content-title'}}

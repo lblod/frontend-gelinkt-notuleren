@@ -105,29 +105,13 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   });
 
   get text() {
-    const zitting = this.args.zitting;
-    if (this.type === 'ext:intro') {
-      return zitting.intro;
-    } else if (this.type === 'ext:outro') {
-      return zitting.outro;
-    } else {
-      return '';
-    }
+    return this.args.text;
   }
-
-  saveText = task(async () => {
-    const zitting = this.args.zitting;
-
-    if (this.type === 'ext:intro') {
-      zitting.intro = this.editor.htmlContent;
-    } else if (this.type === 'ext:outro') {
-      zitting.outro = this.editor.htmlContent;
-    }
-    await zitting.save();
-  });
 
   @action
   rdfaEditorInit(editor) {
+    console.log('init');
+    console.log(this.text);
     editor.initialize(this.text, { doNotClean: true });
     this.editor = editor;
     this.args.onEditorInit(editor);
