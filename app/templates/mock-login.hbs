@@ -34,7 +34,7 @@
 
         <MockLogin as |login|>
           {{#if this.queryStore.isRunning}}
-            <AuLoader @padding='small' />
+            <AuLoader @padding='small'>{{t 'application.loading'}}</AuLoader>
           {{else}}
             {{#if this.login.errorMessage}}
               <AuAlert
