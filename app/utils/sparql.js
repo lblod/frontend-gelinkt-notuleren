@@ -5,7 +5,7 @@
 export function bindingToObject(binding) {
   const result = {};
   for (let key in binding) {
-    result[key] = binding[key].value;
+    result[key] = binding[key]?.value;
   }
   return result;
 }
