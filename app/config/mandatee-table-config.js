@@ -203,12 +203,17 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
+        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
+
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          OPTIONAL {
+            ?mandataris mandaat:rangorde ?mandataris_rang.
+          }
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
@@ -224,15 +229,30 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
-          const bindings = queryResult.results.bindings;
           const tableHeader = row(
             schema,
             [schema.text('Gemeenteraadslid'), schema.text('Rang')],
             true,
           );
+
+          const bindings = queryResult.results.bindings
+            .map((binding) => {
+              const { mandataris_rang } = bindingToObject(binding);
+              return {
+                ...binding,
+                rangnummer: rangordeStringToNumber(mandataris_rang),
+              };
+            })
+            .sort((b1, b2) => {
+              return (b1.rangnummer ?? Infinity) - (b2.rangnummer ?? Infinity);
+            });
           const rows = bindings.map((binding) => {
-            const { mandataris_naam } = bindingToObject(binding);
-            return row(schema, [schema.text(mandataris_naam), null]);
+            const { mandataris_naam, mandataris_rang } =
+              bindingToObject(binding);
+            return row(schema, [
+              schema.text(mandataris_naam),
+              mandataris_rang ? schema.text(mandataris_rang) : undefined,
+            ]);
           });
           const content = schema.nodes.table.create(null, [
             tableHeader,
