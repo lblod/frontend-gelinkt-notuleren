@@ -21,6 +21,7 @@ import {
   BESTUURSFUNCTIE_CODES,
   BESTUURSPERIODES,
   LOKALE_VERKIEZINGEN,
+  MANDATARIS_STATUS_CODES,
 } from './constants';
 import { promiseProperties } from '../utils/promises';
 
@@ -33,6 +34,7 @@ export const IVGR_TAGS = /** @type {const} */ ([
   'IVGR5-LMB-3-samenstelling-fracties',
   'IVGR7-LMB-1-kandidaat-schepenen',
   'IVGR7-LMB-2-ontvankelijkheid-schepenen',
+  'IVGR7-LMB-3-verhindering-schepenen',
   'IVGR8-LMB-1-verkozen-schepenen',
   'IVGR8-LMB-2-coalitie',
 ]);
@@ -678,6 +680,70 @@ export const mandateeTableConfigIVGR = (meeting) => {
           );
           return {
             transaction: result.transaction,
+            result: true,
+            initialState: state,
+          };
+        };
+      },
+    },
+
+    'IVGR7-LMB-3-verhindering-schepenen': {
+      query: () => {
+        const sparqlQuery = /* sparql */ `
+        PREFIX org: <http://www.w3.org/ns/org#>
+        PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+        PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+        PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+        PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT DISTINCT ?mandataris ?mandataris_naam  WHERE {
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan org:hasPost ?mandaat.
+
+          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+
+          ?mandataris org:holds ?mandaat.
+          ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          ?mandataris mandaat:status/skos:prefLabel <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
+
+          ?persoon persoon:gebruikteVoornaam ?voornaam.
+          ?persoon foaf:familyName ?achternaam.
+          BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
+        }
+      `;
+        return executeQuery({
+          query: sparqlQuery,
+          endpoint: '/vendor-proxy/query',
+        });
+      },
+      updateContent: (pos, queryResult) => {
+        return (state) => {
+          const { doc, schema } = state;
+          const $pos = doc.resolve(pos);
+          const bindings = queryResult.results.bindings
+            .map((binding) => {
+              const { mandataris_rang } = bindingToObject(binding);
+              return {
+                ...binding,
+                rangnummer: rangordeStringToNumber(mandataris_rang),
+              };
+            })
+            .sort((b1, b2) => {
+              return b1.rangnummer - b2.rangnummer;
+            });
+          const tableHeader = row(schema, [schema.text('Schepen')], true);
+          const rows = bindings.map((binding) => {
+            const { mandataris_naam } = bindingToObject(binding);
+            return row(schema, [schema.text(mandataris_naam)]);
+          });
+          const content = schema.nodes.table.create(null, [
+            tableHeader,
+            ...rows,
+          ]);
+          const transaction = replaceContent(state.tr, $pos, content);
+          return {
+            transaction: transaction,
             result: true,
             initialState: state,
           };

@@ -66,3 +66,14 @@ export const BESTUURSPERIODES = {
 export const LOKALE_VERKIEZINGEN = {
   2024: 'http://data.lblod.info/id/rechtstreekse-verkiezingen/612a57de-7fc2-40af-a7dc-17d544e5de20',
 };
+
+export const MANDATARIS_STATUS_CODES = {
+  EFFECTIEF:
+    'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/21063a5b-912c-4241-841c-cc7fb3c73e75',
+  TITELVOEREND:
+    'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/aacb3fed-b51d-4e0b-a411-f3fa641da1b3',
+  VERHINDERD:
+    'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/c301248f-0199-45ca-b3e5-4c596731d5fe',
+  WAARNEMEND:
+    'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/e1ca6edd-55e1-4288-92a5-53f4cf71946a',
+};
