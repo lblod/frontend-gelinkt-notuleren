@@ -793,18 +793,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
-          const decisionUri = findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          })?.node.attrs.subject;
-          if (!decisionUri) {
-            throw new Error(
-              'Could not find decision to sync mandatee table with',
-            );
-          }
           const bindings = queryResult.results.bindings;
           const tableHeader = row(
             schema,
@@ -812,10 +800,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
             true,
           );
           const rows = bindings.map((binding) => {
-            const { mandataris, mandataris_naam, fractie_naam } =
-              bindingToObject(binding);
+            const { mandataris_naam, fractie_naam } = bindingToObject(binding);
             return row(schema, [
-              resourceNode(schema, mandataris, mandataris_naam),
+              schema.text(mandataris_naam),
               schema.text(fractie_naam ?? ''),
             ]);
           });
@@ -823,23 +810,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
             tableHeader,
             ...rows,
           ]);
-          const factory = new SayDataFactory();
-          const result = transactionCombinator(
-            state,
-            replaceContent(state.tr, $pos, content),
-          )(
-            bindings.map((binding) => {
-              return addPropertyToNode({
-                resource: decisionUri,
-                property: {
-                  predicate: MANDAAT('bekrachtigtAanstellingVan').full,
-                  object: factory.resourceNode(binding['mandataris'].value),
-                },
-              });
-            }),
-          );
+          const transaction = replaceContent(state.tr, $pos, content);
           return {
-            transaction: result.transaction,
+            transaction,
             result: true,
             initialState: state,
           };
