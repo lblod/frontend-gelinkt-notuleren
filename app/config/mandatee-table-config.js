@@ -102,7 +102,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
     /**
      * **IVGR3: Eedaflegging van de verkozen gemeenteraadsleden**
      *
-     * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging van de volgende verkozenen op datum van
+     * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging (= datum van de zitting) van de volgende verkozenen op datum van
      */
     'IVGR3-LMB-1-eedafleggingen': {
       query: () => {
