@@ -569,7 +569,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_einddatum ?mandataris_opvolger WHERE {
+        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde ?mandataris_opvolger WHERE {
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
@@ -579,12 +579,15 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris mandaat:rangorde ?mandataris_rang.
           ?mandataris mandaat:status/skos:prefLabel ?mandataris_status.
+          ?mandataris mandaat:start ?mandaat_start.
+          OPTIONAL {
+            ?mandataris mandaat:einde ?mandaat_einde.
+          }
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
 
-          VALUES ?mandaat_einddatum { undef }
           # TODO: unsure how we will fetch the 'opvolger'
           VALUES ?mandataris_opvolger { undef }
         }
@@ -639,18 +642,16 @@ export const mandateeTableConfigIVGR = (meeting) => {
               mandataris_rang,
               mandataris_naam,
               mandataris_status,
-              mandaat_einddatum,
+              mandaat_start,
+              mandaat_einde,
               mandataris_opvolger,
             } = bindingToObject(binding);
-            const mandaat_begindatum = meeting.gestartOpTijdstip.toISOString();
             return row(schema, [
               schema.text(mandataris_rang),
               resourceNode(schema, mandataris, mandataris_naam),
               schema.text(mandataris_status),
-              dateNode(schema, mandaat_begindatum),
-              mandaat_einddatum
-                ? dateNode(schema, mandaat_einddatum)
-                : undefined,
+              dateNode(schema, mandaat_start),
+              mandaat_einde ? dateNode(schema, mandaat_einde) : undefined,
               mandataris_opvolger
                 ? schema.text(mandataris_opvolger)
                 : undefined,
