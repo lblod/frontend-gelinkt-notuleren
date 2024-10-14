@@ -56,6 +56,21 @@ const SECTIONS = [
   {
     label: 'copy-options.section.motivation',
     selector: '[property="http://data.vlaanderen.be/ns/besluit#motivering"]',
+    parts: {
+      selector: ':scope h5',
+      callback: (sectionHeading) => {
+        const wrapper = document.createElement('div');
+        const sectionContents = [];
+        let next = sectionHeading.nextElementSibling;
+        while (next && next.tagName !== 'H5') {
+          sectionContents.push(next);
+          next = next.nextElementSibling;
+        }
+        wrapper.append(...sectionContents);
+        return wrapper;
+      },
+      labelCallback: (sectionHeading) => sectionHeading,
+    },
   },
   {
     label: 'copy-options.section.ruling',
@@ -92,13 +107,16 @@ function update(component) {
       let foundParts = [];
       if (parts) {
         const partCb = parts.callback || ((a) => a);
-        const partElements = contentElement.querySelectorAll(parts.selector);
+        const partElements =
+          contentElement.querySelectorAll(parts.selector) ?? [];
         partElements.forEach((part) => {
           const partElement = partCb(part);
-          const partLabel = partElement.querySelector(parts.labelSelector);
-          const partContent = partElement.querySelector(
-            parts.contentSelector,
-          ).outerHTML;
+          const partLabel = parts.labelCallback
+            ? parts.labelCallback(part)
+            : partElement.querySelector(parts.labelSelector);
+          const partContent = parts.contentSelector
+            ? partElement.querySelector(parts.contentSelector).outerHTML
+            : partElement.outerHTML;
           foundParts.push({
             translatedLabel: partLabel.textContent,
             content: partContent,
