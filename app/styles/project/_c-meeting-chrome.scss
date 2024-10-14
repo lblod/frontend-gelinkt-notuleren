@@ -402,3 +402,17 @@
     border-radius: $au-unit;
   }
 }
+
+.gn-meeting-copy-section--container {
+  // We don't actually do any positioning, just need this to be 'positioned' to allow children to be
+  // positioned relative to it
+  position: relative;
+}
+
+.gn-meeting-copy-section--button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  // Width 0 container div for the button to allow for positioning independent of text length
+  width: 0;
+}
