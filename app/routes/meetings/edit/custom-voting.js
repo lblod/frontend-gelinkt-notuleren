@@ -7,11 +7,15 @@ export default class MeetingsEditManualVotingRoute extends Route {
   @service store;
 
   async model(params) {
-    const behandeling = await this.store.findRecord(
-      'behandeling-van-agendapunt',
-      params.treatment_id,
+    const voting = await this.store.findRecord(
+      'custom-voting',
+      params.voting_id,
+      {
+        include: 'voting-document.current-version',
+      },
     );
-    return behandeling;
+    console.log(voting);
+    return voting;
   }
 
   beforeModel() {

@@ -8,6 +8,7 @@ import { use } from 'ember-could-get-used-to-this';
 import RelationshipResource from '../helpers/relationship-resource';
 import { trackedFunction } from 'reactiveweb/function';
 import InstallatieVergaderingModel from '../models/installatievergadering';
+import { PLANNED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 
 /** @typedef {import("../models/mandataris").default} Mandataris  */
 /** @typedef {import("../models/behandeling-van-agendapunt").default} Behandeling  */
@@ -31,6 +32,8 @@ export default class BehandelingVanAgendapuntComponent extends Component {
 
   @tracked editMode = false;
   @service editStemming;
+  @service documentService;
+  @service currentSession;
 
   /** @type {RelationshipResourceValue} */
   @use meetingChairmanData = new RelationshipResource(() => [
@@ -201,11 +204,11 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     this.onCancelEdit();
   });
 
-  addStemming = task(async () => {
+  addStandardVoting = task(async () => {
     // high pagesize is set on the model, so this is fine
     const participants = await this.args.behandeling.aanwezigen;
 
-    const stemmingToEdit = this.store.createRecord('stemming', {
+    const stemmingToEdit = this.store.createRecord('standard-voting', {
       onderwerp: '',
       geheim: false,
       aantalVoorstanders: 0,
@@ -217,6 +220,33 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     stemmingToEdit.aanwezigen.pushObjects(participants);
     stemmingToEdit.stemmers.pushObjects(participants);
     this.editStemming.stemming = stemmingToEdit;
+  });
+
+  addCustomVoting = task(async () => {
+    const container = this.store.createRecord('document-container');
+    container.status = await this.store.findRecord(
+      'concept',
+      PLANNED_STATUS_ID,
+    );
+    container.folder = await this.store.findRecord(
+      'editor-document-folder',
+      '39fa1367-93dc-4025-af7b-4db8c7029dc3',
+    );
+    container.publisher = this.currentSession.group;
+    const editorDocument =
+      await this.documentService.createEditorDocument.perform(
+        'Custom voting',
+        '',
+        container,
+      );
+    container.currentVersion = editorDocument;
+    await container.save();
+    const stemmingToEdit = this.store.createRecord('custom-voting', {
+      votingDocument: container,
+      behandelingVanAgendapunt: this.args.behandeling,
+    });
+    await stemmingToEdit.save();
+    this.router.transitionTo('meetings.edit.customVoting', stemmingToEdit);
   });
 
   toggleManualVoting = task(async (e) => {

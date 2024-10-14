@@ -7,11 +7,36 @@
   as |Modal|
 >
   <Modal.Body>
-    <ZittingTextDocumentContainer
-      @onEditorInit={{this.initEditor}}
-      @saving={{this.saveTextTask.isRunning}}
-      @text={{this.text}}
+    <EditorDocumentTitle
+      @title={{this.editorDocument.title}}
+      @readOnly={{this.readOnly}}
+      @onSubmit={{perform this.onTitleUpdate}}
     />
+    <RdfaEditorContainer
+      @profile={{this.profile}}
+      @rdfaEditorInit={{this.rdfaEditorInit}}
+      @editorOptions={{this.editorOptions}}
+      @busy={{@saving}}
+      @busyText={{t 'rdfa-editor-container.saving'}}
+      @prefix={{hash ext='http://mu.semte.ch/vocabularies/ext/'}}
+      @property={{@type}}
+      @schema={{this.schema}}
+      @plugins={{this.plugins}}
+      @nodeViews={{this.nodeViews}}
+    >
+      <:sidebarCollapsible>
+        <VariablePlugin::Date::Insert
+          @controller={{this.editor}}
+          @options={{this.config.date}}
+        />
+      </:sidebarCollapsible>
+      <:sidebar>
+        <VariablePlugin::Date::Edit
+          @controller={{this.editor}}
+          @options={{this.config.date}}
+        />
+      </:sidebar>
+    </RdfaEditorContainer>
   </Modal.Body>
   <Modal.Footer>
     <AuButtonGroup>

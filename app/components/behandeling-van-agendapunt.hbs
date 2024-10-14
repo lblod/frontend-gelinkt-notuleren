@@ -93,46 +93,39 @@
   />
 {{/if}}
 <div class='au-u-flex au-u-flex--between au-u-flex--vertical-center'>
-      {{#unless @readOnly}}
-        <div>
-          {{t 'behandeling-van-agendapunten.voting-title'}}
-          <AuToggleSwitch
-            @checked={{this.behandeling.isManualVoting}}
-            @onChange={{(perform this.toggleManualVoting)}}
-          >Toggle manual voting</AuToggleSwitch>
-        </div>
-        <div>
-          {{#if this.behandeling.isManualVoting}}
-            <AuLink
-              @route='meetings.edit.manualVoting'
-              @models={{array @meeting.id @behandeling.id}}
-              @skin='button-secondary'
-              @icon='pencil'
-              @iconAlignment='left'
-            >
-              {{t 'generic.edit'}}
-            </AuLink>
-          {{else}}
-            <AuButton
-              {{on 'click' (perform this.addStemming)}}
-              @icon='add'
-              @skin='secondary'
-              @iconAlignment='left'
-              @loading={{this.addStemming.isRunning}}
-            >
-              {{t 'generic.add'}}
-            </AuButton>
-          {{/if}}
-          {{#if this.editMode}}
-            <Treatment::Voting::Edit
-              @bestuursorgaan={{@bestuursorgaan}}
-              @onSave={{perform this.saveStemming}}
-              @onCancel={{this.onCancelEdit}}
-              @saving={{this.saveStemming.isRunning}}
-            />
-          {{/if}}
-        </div>
-      {{/unless}}
+  {{#unless @readOnly}}
+    <div>
+      {{t 'behandeling-van-agendapunten.voting-title'}}
+    </div>
+    <div>
+        <AuButton
+          {{on 'click' (perform this.addStandardVoting)}}
+          @icon='add'
+          @skin='secondary'
+          @iconAlignment='left'
+          @loading={{this.addStandardVoting.isRunning}}
+        >
+          {{t 'generic.add'}}
+        </AuButton>
+        <AuButton
+          {{on 'click' (perform this.addCustomVoting)}}
+          @icon='add'
+          @skin='secondary'
+          @iconAlignment='left'
+          @loading={{this.addCustomVoting.isRunning}}
+        >
+          Add custom voting
+        </AuButton>
+      {{#if this.editMode}}
+        <Treatment::Voting::Edit
+          @bestuursorgaan={{@bestuursorgaan}}
+          @onSave={{perform this.saveStemming}}
+          @onCancel={{this.onCancelEdit}}
+          @saving={{this.saveStemming.isRunning}}
+        />
+      {{/if}}
+    </div>
+  {{/unless}}
 </div>
 <div class='au-c-meeting-chrome-card'>
   {{#if this.hasParticipants}}
