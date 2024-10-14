@@ -80,7 +80,6 @@ function htmlSafer(text) {
 // would be better to either use an RDFa parser that can also return the elements associated with
 // relations or a headless prosemirror instance.
 function update(component) {
-  console.warn('content processing!');
   const parser = new DOMParser();
   const parsed = parser.parseFromString(
     component.args.decision.content,
@@ -125,34 +124,34 @@ export default class DecisionCopyParts extends Component {
   <template>
     <div class='au-o-flow--small au-u-3-5'>
       {{#each this.sections as |section|}}
-        <div class='gn-meeting-copy-section--container'>
-          <div class='say-structure'>
-            <div class='say-structure__header'>
+        <div class='gn-meeting-copy--section-container'>
+          <div class='gn-meeting-copy--structure'>
+            <div class='gn-meeting-copy--structure-header'>
               {{t section.label}}
             </div>
             {{#each section.parts as |part|}}
-              <div class='say-structure__content'>
-                <div class='gn-meeting-copy-section--container'>
-                  <div class='say-structure'>
-                    <div class='say-structure__header'>
+              <div class='gn-meeting-copy--structure-content'>
+                <div class='gn-meeting-copy--section-container'>
+                  <div class='gn-meeting-copy--structure'>
+                    <div class='gn-meeting-copy--structure-header'>
                       {{part.translatedLabel}}
                     </div>
-                    <div class='say-structure__content'>
+                    <div class='gn-meeting-copy--structure-content'>
                       {{(htmlSafer part.content)}}
                     </div>
                   </div>
-                  <div class='gn-meeting-copy-section--button'>
+                  <div class='gn-meeting-copy--section-button'>
                     <DownloadButton @section={{part}} @translatedLabel={{part.translatedLabel}} />
                   </div>
                 </div>
               </div>
             {{else}}
-              <div class='say-structure__content'>
+              <div class='gn-meeting-copy--structure-content'>
                 {{(htmlSafer section.content)}}
               </div>
             {{/each}}
           </div>
-          <div class='gn-meeting-copy-section--button'>
+          <div class='gn-meeting-copy--section-button'>
             <DownloadButton @section={{section}} />
           </div>
         </div>
