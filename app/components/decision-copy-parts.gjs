@@ -47,15 +47,18 @@ class DownloadButton extends Component {
 const SECTIONS = [
   {
     label: 'copy-options.section.title',
-    selector: '[property="http://data.europa.eu/eli/ontology#title"]',
+    selector:
+      '[property="http://data.europa.eu/eli/ontology#title"]>[data-content-container="true"]',
   },
   {
     label: 'copy-options.section.description',
-    selector: '[property="http://data.europa.eu/eli/ontology#description"]',
+    selector:
+      '[property="http://data.europa.eu/eli/ontology#description"]>[data-content-container="true"]',
   },
   {
     label: 'copy-options.section.motivation',
-    selector: '[property="http://data.vlaanderen.be/ns/besluit#motivering"]',
+    selector:
+      '[property="http://data.vlaanderen.be/ns/besluit#motivering"]>[data-content-container="true"]',
     parts: {
       selector: ':scope h5',
       callback: (sectionHeading) => {
@@ -75,7 +78,7 @@ const SECTIONS = [
   {
     label: 'copy-options.section.ruling',
     selector:
-      ':scope [about^="http://data.lblod.info/id/besluiten/"][property="http://www.w3.org/ns/prov#value"]',
+      ':scope [about^="http://data.lblod.info/id/besluiten/"][property="http://www.w3.org/ns/prov#value"]>[data-content-container="true"]',
     parts: {
       selector:
         '[property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][resource="http://data.vlaanderen.be/ns/besluit#Artikel"]',
