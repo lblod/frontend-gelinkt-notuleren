@@ -202,6 +202,11 @@ const IVRMW_VOEREN_MAP = [
     apTitle: 'Samenstelling van Raad maatschappelijk welzijn voeren',
   },
 ];
+const FUSION_SPEC = { gemeenteraad: IVGR_FUSIE_MAP, rmw: IVRMW_FUSIE_MAP };
+const FACILITY_SPEC = {
+  gemeenteraad: IVGR_FACILITEITEN_MAP,
+  rmw: IVRMW_FACILITEITEN_MAP,
+};
 /**
  * @typedef {Object} MunicipalitySpec
  * @property {TemplateSpec[]} gemeenteraad
@@ -210,40 +215,41 @@ const IVRMW_VOEREN_MAP = [
 
 /** @type { Record<string, MunicipalitySpec> } */
 const MUNICIPALITY_CONFIG = {
-  Aalst: { gemeenteraad: IVGR_POLITIERAAD_MAP, rmw: IVRMW_MAP },
+  // example without politieraad
+  Aalst: { gemeenteraad: IVGR_MAP, rmw: IVRMW_MAP },
   Voeren: { gemeenteraad: IVGR_VOEREN_MAP, rmw: IVRMW_VOEREN_MAP },
-  Bever: { gemeenteraad: IVGR_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
-  Drogenbos: {
-    gemeenteraad: IVGR_FACILITEITEN_MAP,
-    rmw: IVRMW_FACILITEITEN_MAP,
-  },
-  Herstappe: {
-    gemeenteraad: IVGR_FACILITEITEN_MAP,
-    rmw: IVRMW_FACILITEITEN_MAP,
-  },
-  Kraainem: {
-    gemeenteraad: IVGR_FACILITEITEN_MAP,
-    rmw: IVRMW_FACILITEITEN_MAP,
-  },
-  Linkebeek: {
-    gemeenteraad: IVGR_FACILITEITEN_MAP,
-    rmw: IVRMW_FACILITEITEN_MAP,
-  },
-  Mesen: { gemeenteraad: IVGR_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
-  Ronse: { gemeenteraad: IVRMW_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
-  'Sint-Genesius-Rode': {
-    gemeenteraad: IVGR_FACILITEITEN_MAP,
-    rmw: IVRMW_FACILITEITEN_MAP,
-  },
-  'Spiere-Helkijn': {
-    gemeenteraad: IVGR_FACILITEITEN_MAP,
-    rmw: IVRMW_FACILITEITEN_MAP,
-  },
-  Wemmel: { gemeenteraad: IVGR_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
-  'Wezembeek-Oppem': {
-    gemeenteraad: IVGR_FACILITEITEN_MAP,
-    rmw: IVRMW_FACILITEITEN_MAP,
-  },
+  // faciliteitengemeentes (municipalities on the language border which have
+  // special facilities for the french-speaking minorities)
+  Bever: FACILITY_SPEC,
+  Drogenbos: FACILITY_SPEC,
+  Herstappe: FACILITY_SPEC,
+  Kraainem: FACILITY_SPEC,
+  Linkebeek: FACILITY_SPEC,
+  Mesen: FACILITY_SPEC,
+  Ronse: FACILITY_SPEC,
+  'Sint-Genesius-Rode': FACILITY_SPEC,
+  'Spiere-Helkijn': FACILITY_SPEC,
+  Wemmel: FACILITY_SPEC,
+  'Wezembeek-Oppem': FACILITY_SPEC,
+  // fusions
+  'Merelbeke-Melle': FUSION_SPEC,
+  'Nazareth-De Pinte': FUSION_SPEC,
+  Pajottegem: FUSION_SPEC,
+  'Tessenderlo-Ham': FUSION_SPEC,
+  Tielt: FUSION_SPEC,
+  Lochristi: FUSION_SPEC,
+  Hasselt: FUSION_SPEC,
+  'Beveren-Kruibeke-Zwijndrecht': FUSION_SPEC,
+  Wingene: FUSION_SPEC,
+  'Tongeren-Borgloon': FUSION_SPEC,
+  'Bilzen-Hoeselt': FUSION_SPEC,
+  Lokeren: FUSION_SPEC,
 };
-/** @type {MunicipalitySpec} */
-const DEFAULT_MUNICIPALITY_SPEC = { gemeenteraad: IVGR_MAP, rmw: IVRMW_MAP };
+
+/**
+ * Most municipalities will have the 9th agenda item
+ * @type {MunicipalitySpec} */
+const DEFAULT_MUNICIPALITY_SPEC = {
+  gemeenteraad: IVGR_POLITIERAAD_MAP,
+  rmw: IVRMW_MAP,
+};
