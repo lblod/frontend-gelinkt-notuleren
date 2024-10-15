@@ -34,10 +34,6 @@ export async function createInstallatievergadering(
   await meeting.save();
 
   const templateSpecs = await getSpec(bestuursorgaan);
-  console.info(
-    'DEBUGPRINT[2]: installatievergadering.js:33: templateSpecs=',
-    templateSpecs,
-  );
   const promises = [];
   let previousAgendapoint;
   for (let i = 0; i < templateSpecs.length; i++) {
@@ -52,11 +48,9 @@ export async function createInstallatievergadering(
       openbaar: true,
       onderwerp: agendapoint,
     });
-    console.log('fetching spec', templateSpecs[i]);
     const template = await templateFetcher.fetchByTemplateName({
       name: templateSpecs[i].templateTitle,
     });
-    console.log('got template', template);
     await template.loadBody();
     promises.push(
       agendapoint.save(),
@@ -145,6 +139,32 @@ const IVGR_MAP = [
     apTitle: 'Aanduiding en eedaflegging van de aangewezen-burgemeester',
   },
 ];
+
+/** @type {TemplateSpec[]} */
+const IVGR_FACILITEITEN_MAP = [
+  {
+    templateTitle:
+      'IVGRFac1 Kennisname van de definitieve verkiezingsuitslag DUMMY',
+    apTitle: 'Kennisname van de definitieve verkiezingsuitslag faciliteiten',
+  },
+];
+
+/** @type {TemplateSpec[]} */
+const IVGR_FUSIE_MAP = [
+  {
+    templateTitle:
+      'IVGRFusie1 Kennisname van de definitieve verkiezingsuitslag DUMMY',
+    apTitle: 'Kennisname van de definitieve verkiezingsuitslag fusie',
+  },
+];
+/** @type {TemplateSpec[]} */
+const IVGR_VOEREN_MAP = [
+  {
+    templateTitle:
+      'IVGRVoeren1 Kennisname van de definitieve verkiezingsuitslag DUMMY',
+    apTitle: 'Kennisname van de definitieve verkiezingsuitslag voeren',
+  },
+];
 /** @type {TemplateSpec[]} */
 const IVGR_POLITIERAAD_MAP = [
   ...IVGR_MAP,
@@ -161,6 +181,27 @@ const IVRMW_MAP = [
     apTitle: 'Samenstelling van Raad maatschappelijk welzijn',
   },
 ];
+/** @type {TemplateSpec[]} */
+const IVRMW_FACILITEITEN_MAP = [
+  {
+    templateTitle: 'IVRWFac1 DUMMY IV RMW',
+    apTitle: 'Samenstelling van Raad maatschappelijk welzijn faciliteiten',
+  },
+];
+/** @type {TemplateSpec[]} */
+const IVRMW_FUSIE_MAP = [
+  {
+    templateTitle: 'IVRWFusie1 DUMMY IV RMW',
+    apTitle: 'Samenstelling van Raad maatschappelijk welzijn fusie',
+  },
+];
+/** @type {TemplateSpec[]} */
+const IVRMW_VOEREN_MAP = [
+  {
+    templateTitle: 'IVRWVoeren1 DUMMY IV RMW',
+    apTitle: 'Samenstelling van Raad maatschappelijk welzijn voeren',
+  },
+];
 /**
  * @typedef {Object} MunicipalitySpec
  * @property {TemplateSpec[]} gemeenteraad
@@ -169,7 +210,40 @@ const IVRMW_MAP = [
 
 /** @type { Record<string, MunicipalitySpec> } */
 const MUNICIPALITY_CONFIG = {
-  aalst: { gemeenteraad: IVGR_POLITIERAAD_MAP, rmw: IVRMW_MAP },
+  Aalst: { gemeenteraad: IVGR_POLITIERAAD_MAP, rmw: IVRMW_MAP },
+  Voeren: { gemeenteraad: IVGR_VOEREN_MAP, rmw: IVRMW_VOEREN_MAP },
+  Bever: { gemeenteraad: IVGR_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
+  Drogenbos: {
+    gemeenteraad: IVGR_FACILITEITEN_MAP,
+    rmw: IVRMW_FACILITEITEN_MAP,
+  },
+  Herstappe: {
+    gemeenteraad: IVGR_FACILITEITEN_MAP,
+    rmw: IVRMW_FACILITEITEN_MAP,
+  },
+  Kraainem: {
+    gemeenteraad: IVGR_FACILITEITEN_MAP,
+    rmw: IVRMW_FACILITEITEN_MAP,
+  },
+  Linkebeek: {
+    gemeenteraad: IVGR_FACILITEITEN_MAP,
+    rmw: IVRMW_FACILITEITEN_MAP,
+  },
+  Mesen: { gemeenteraad: IVGR_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
+  Ronse: { gemeenteraad: IVRMW_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
+  'Sint-Genesius-Rode': {
+    gemeenteraad: IVGR_FACILITEITEN_MAP,
+    rmw: IVRMW_FACILITEITEN_MAP,
+  },
+  'Spiere-Helkijn': {
+    gemeenteraad: IVGR_FACILITEITEN_MAP,
+    rmw: IVRMW_FACILITEITEN_MAP,
+  },
+  Wemmel: { gemeenteraad: IVGR_FACILITEITEN_MAP, rmw: IVRMW_FACILITEITEN_MAP },
+  'Wezembeek-Oppem': {
+    gemeenteraad: IVGR_FACILITEITEN_MAP,
+    rmw: IVRMW_FACILITEITEN_MAP,
+  },
 };
 /** @type {MunicipalitySpec} */
 const DEFAULT_MUNICIPALITY_SPEC = { gemeenteraad: IVGR_MAP, rmw: IVRMW_MAP };
