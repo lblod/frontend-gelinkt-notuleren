@@ -16,7 +16,8 @@
       @profile={{this.profile}}
       @rdfaEditorInit={{this.rdfaEditorInit}}
       @editorOptions={{this.editorOptions}}
-      @busy={{@saving}}
+      @editorDocument={{this.editorDocument}}
+      @busy={{this.saveTask.isRunning}}
       @busyText={{t 'rdfa-editor-container.saving'}}
       @prefix={{hash ext='http://mu.semte.ch/vocabularies/ext/'}}
       @property={{@type}}

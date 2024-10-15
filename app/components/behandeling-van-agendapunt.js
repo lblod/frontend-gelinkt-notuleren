@@ -244,6 +244,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     const stemmingToEdit = this.store.createRecord('custom-voting', {
       votingDocument: container,
       behandelingVanAgendapunt: this.args.behandeling,
+      position: this.behandeling.stemmingen.length,
     });
     await stemmingToEdit.save();
     this.router.transitionTo('meetings.edit.customVoting', stemmingToEdit);

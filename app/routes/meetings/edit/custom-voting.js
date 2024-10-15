@@ -14,7 +14,6 @@ export default class MeetingsEditManualVotingRoute extends Route {
         include: 'voting-document.current-version',
       },
     );
-    console.log(voting);
     return voting;
   }
 

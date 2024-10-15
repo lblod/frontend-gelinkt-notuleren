@@ -63,7 +63,6 @@ export default class MeetingsEditManualVotingController extends Controller {
   @tracked _editorDocument;
 
   get editorDocument() {
-    console.log(this.documentContainer.get('currentVersion').content);
     return (
       this._editorDocument ||
       this.documentContainer.get('currentVersion').content
@@ -71,7 +70,6 @@ export default class MeetingsEditManualVotingController extends Controller {
   }
 
   get documentContainer() {
-    console.log(this.model.votingDocument);
     return this.model.votingDocument;
   }
 
@@ -85,6 +83,7 @@ export default class MeetingsEditManualVotingController extends Controller {
 
   clearEditor() {
     this.editor = null;
+    this._editorDocument = undefined;
   }
 
   @action
@@ -94,11 +93,12 @@ export default class MeetingsEditManualVotingController extends Controller {
 
   @action
   async saveAndQuit() {
-    await this.saveTextTask.perform();
+    await this.saveTask.perform();
+    this.clearEditor();
     this.closeModal();
   }
 
-  saveTextTask = task(async () => {
+  saveTask = task(async () => {
     const html = this.editor.htmlContent;
 
     const editorDocument =
@@ -108,7 +108,7 @@ export default class MeetingsEditManualVotingController extends Controller {
         await this.documentContainer,
         this.editorDocument,
       );
-    this.clearEditor();
+    this._editorDocument = editorDocument;
   });
 
   editorOptions = {
