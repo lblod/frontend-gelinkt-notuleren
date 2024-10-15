@@ -207,6 +207,9 @@ export default class MeetingsEditManualVotingController extends Controller {
         ],
         allowCustomFormat: true,
       },
+      lmb: {
+        endpoint: '/vendor-proxy/query',
+      },
     };
   }
 
