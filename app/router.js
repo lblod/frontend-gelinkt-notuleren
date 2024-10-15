@@ -57,7 +57,7 @@ Router.map(function () {
       this.route('intro');
       this.route('outro');
       this.route('treatment', { path: ':treatment_id' });
-      this.route('customVoting', { path: '/custom-voting/:voting_id' });
+      this.route('custom-voting', { path: '/custom-voting/:voting_id' });
     });
     this.route('publish', { path: '/:id/publish' }, function () {
       this.route('agenda');

@@ -83,6 +83,7 @@ behandeling-van-agendapunten:
   cannot-edit-participants: Cannot configure participants if votings exist for this agenda item.
   edit-document: 'Edit document'
   sync-warning: Data possibly overwritten by synchronization
+  add-custom-voting: Add custom voting
 
 contact:
   about: What is your message about?
@@ -93,6 +94,9 @@ contact:
   heading: Contact
   question-message: A content question
   send: Send message
+
+custom-voting:
+  modal-title: Custom voting
 
 date-format:
   short-date: Short date
@@ -457,16 +461,10 @@ meetings:
     confirm-button: Yes, Delete this meeting
     back: Back
   edit:
-    intro:
-      save: Save
-      confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
-      save-and-quit: Save and Quit
-      cancel: Cancel
-    outro:
-      save: Save
-      confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
-      save-and-quit: Save and Quit
-      cancel: Cancel
+    save: Save
+    confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
+    save-and-quit: Save and Quit
+    cancel: Cancel
   not-found:
     title: Meeting not found
     explanation: It's possible that you don't have access to the meeting with this account

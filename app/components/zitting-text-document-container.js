@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
 import { Schema } from '@lblod/ember-rdfa-editor';
 

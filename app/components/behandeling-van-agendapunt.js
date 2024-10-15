@@ -247,23 +247,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       position: this.behandeling.stemmingen.length,
     });
     await stemmingToEdit.save();
-    this.router.transitionTo('meetings.edit.customVoting', stemmingToEdit);
-  });
-
-  toggleManualVoting = task(async (e) => {
-    if (this.behandeling.isManualVoting) {
-      if (this.behandeling.manualVoting !== '') {
-        console.log('confirm deletion');
-      }
-      this.behandeling.manualVoting = '';
-      this.behandeling.isManualVoting = false;
-    } else {
-      if (this.behandeling.stemmingen.length) {
-        console.log('confirm deletion');
-      }
-      this.behandeling.stemmingen = [];
-      this.behandeling.isManualVoting = true;
-    }
-    await this.behandeling.save();
+    this.router.transitionTo('meetings.edit.custom-voting', stemmingToEdit);
   });
 }

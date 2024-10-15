@@ -1,4 +1,4 @@
-import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
+import { belongsTo } from '@ember-data/model';
 import StemmingModel from './stemming';
 
 export default class CustomVotingModel extends StemmingModel {

@@ -1,7 +1,7 @@
 <AuModal
   @modalOpen={{true}}
   @size='fullscreen'
-  @title="Manual voting (Change this)"
+  @title={{t 'custom-voting.modal-title'}}
   @closeModal={{this.closeModal}}
   class='au-c-modal--editor'
   as |Modal|
@@ -19,7 +19,6 @@
       @editorDocument={{this.editorDocument}}
       @busy={{this.saveTask.isRunning}}
       @busyText={{t 'rdfa-editor-container.saving'}}
-      @prefix={{hash ext='http://mu.semte.ch/vocabularies/ext/'}}
       @property={{@type}}
       @schema={{this.schema}}
       @plugins={{this.plugins}}
@@ -50,7 +49,7 @@
         @disabled={{this.saveTextTask.isRunning}}
         {{on 'click' this.closeModal}}
       >
-        {{t 'meetings.edit.intro.cancel'}}
+        {{t 'meetings.edit.cancel'}}
       </AuButton>
     </AuButtonGroup>
     <AuButtonGroup>
@@ -59,18 +58,18 @@
         {{on 'click' (perform this.saveTextTask)}}
         @disabled={{this.saveTextTask.isRunning}}
       >
-        {{t 'meetings.edit.intro.save'}}
+        {{t 'meetings.edit.save'}}
       </AuButton>
       <AuButton
         @disabled={{this.saveTextTask.isRunning}}
         {{on 'click' this.saveAndQuit}}
       >
-        {{t 'meetings.edit.intro.save-and-quit'}}
+        {{t 'meetings.edit.save-and-quit'}}
       </AuButton>
     </AuButtonGroup>
   </Modal.Footer>
 </AuModal>
 <ConfirmRouteLeave
   @enabled={{this.dirty}}
-  @message={{t 'meetings.edit.intro.confirm-quit-without-saving'}}
+  @message={{t 'meetings.edit.confirm-quit-without-saving'}}
 />

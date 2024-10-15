@@ -59,7 +59,6 @@ export default class MeetingsEditManualVotingController extends Controller {
   @service intl;
   @service documentService;
   profile = 'none';
-  @tracked editor;
   @tracked _editorDocument;
 
   get editorDocument() {

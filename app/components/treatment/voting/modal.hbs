@@ -103,33 +103,32 @@
           </tr>
         {{else}}
           <tr>
-            <td colspan="4">
+            <td colspan='4'>
               {{stemming.votingDocument.currentVersion.title}}
-              </td>
-              <td class='au-u-table-right'>
-
+            </td>
+            <td class='au-u-table-right'>
 
               <AuButtonGroup>
-                  <AuLink
-                    @route='meetings.edit.customVoting'
-                    @model={{stemming}}
-                    @skin='button-secondary'
-                    @icon='pencil'
-                    @iconAlignment='left'
-                  >
-                    {{t 'voting-modal.toggle-edit-button'}}
-                  </AuLink>
-                  <AuButton
-                    {{on 'click' (fn (perform this.removeStemming) stemming)}}
-                    @skin='secondary'
-                    @alert={{true}}
-                    @icon='bin'
-                    @iconAlignment='left'
-                    @loading={{this.removeStemming.isRunning}}
-                  >
-                    {{t 'voting-modal.delete-button'}}
-                  </AuButton>
-                </AuButtonGroup>
+                <AuLink
+                  @route='meetings.edit.custom-voting'
+                  @model={{stemming}}
+                  @skin='button-secondary'
+                  @icon='pencil'
+                  @iconAlignment='left'
+                >
+                  {{t 'voting-modal.toggle-edit-button'}}
+                </AuLink>
+                <AuButton
+                  {{on 'click' (fn (perform this.removeStemming) stemming)}}
+                  @skin='secondary'
+                  @alert={{true}}
+                  @icon='bin'
+                  @iconAlignment='left'
+                  @loading={{this.removeStemming.isRunning}}
+                >
+                  {{t 'voting-modal.delete-button'}}
+                </AuButton>
+              </AuButtonGroup>
             </td>
           </tr>
         {{/if}}

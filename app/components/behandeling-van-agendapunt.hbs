@@ -98,24 +98,24 @@
       {{t 'behandeling-van-agendapunten.voting-title'}}
     </div>
     <div>
-        <AuButton
-          {{on 'click' (perform this.addStandardVoting)}}
-          @icon='add'
-          @skin='secondary'
-          @iconAlignment='left'
-          @loading={{this.addStandardVoting.isRunning}}
-        >
-          {{t 'generic.add'}}
-        </AuButton>
-        <AuButton
-          {{on 'click' (perform this.addCustomVoting)}}
-          @icon='add'
-          @skin='secondary'
-          @iconAlignment='left'
-          @loading={{this.addCustomVoting.isRunning}}
-        >
-          Add custom voting
-        </AuButton>
+      <AuButton
+        {{on 'click' (perform this.addStandardVoting)}}
+        @icon='add'
+        @skin='secondary'
+        @iconAlignment='left'
+        @loading={{this.addStandardVoting.isRunning}}
+      >
+        {{t 'generic.add'}}
+      </AuButton>
+      <AuButton
+        {{on 'click' (perform this.addCustomVoting)}}
+        @icon='add'
+        @skin='secondary'
+        @iconAlignment='left'
+        @loading={{this.addCustomVoting.isRunning}}
+      >
+       {{t 'behandeling-van-agendapunten.add-custom-voting'}}
+      </AuButton>
       {{#if this.editMode}}
         <Treatment::Voting::Edit
           @bestuursorgaan={{@bestuursorgaan}}
@@ -141,9 +141,7 @@
       />
     {{/if}}
   {{else}}
-    <div
-      class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'
-    >
+    <div class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'>
       <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
         {{t 'behandeling-van-agendapunten.needs-participants'}}
       </AuPill>
