@@ -1,11 +1,10 @@
 agendapoint:
+  type: Agendapunt
+  the-type: het agendapunt
   editor-tabs: editor-tabs
   revisions: Versies
   restore: Herstel
   back-to-meeting: Terug naar zitting van {adminBody} op {date}
-  not-found:
-    title: Agendapunt niet gevonden
-    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het agendapunt.
   saved-versions: 'Opgeslagen documentversies:'
   current-version: Huidige versie
   modify-warning: 'Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:'
@@ -249,9 +248,8 @@ inbox:
     restore-message: Herstel geselecteerde documenten
 
 irg-archive:
-  not-found:
-    title: Reglement niet gevonden
-    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot het reglement.
+  type: Reglement
+  the-type: het reglement
 
 login:
   app-name: Gelinkt Notuleren
@@ -421,6 +419,8 @@ meeting-form:
     download-treatments: Onderdelen downloaden of kopiëren
 
 meetings:
+  type: Zitting
+  the-type: de zitting
   publish:
     agenda:
       title: Agenda
@@ -470,23 +470,11 @@ meetings:
     confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
     save-and-quit: Save and Quit
     cancel: Cancel
-  not-found:
-    title: Zitting niet gevonden
-    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de zitting.
 
 mock-login:
   administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
   administrative-unit-search: Bestuurseenheid zoeken
   search-placeholder: 'Aalst, Berchem, ...'
-
-not-found:
-  title: Pagina niet gevonden
-  body:
-    explanation: Onze excuses, maar we slaagden er niet in om deze pagina terug te vinden.
-    contact-message: Indien u denkt dat dit een fout is, kan u ons steeds contacteren op onze
-    contact-link: contact-pagina
-    email-message: Of stuur een mail naar
-    email: GelinktNotuleren@vlaanderen.be
 
 participation:
   present-label: 'Aanwezige mandatarissen:'
@@ -605,12 +593,9 @@ rdfa-editor-container:
   saving: Bezig met opslaan
   making-copy: Kopie aan het maken
 
-regulatory-statements:
-  not-found:
-    title: Reglementaire bijlage niet gevonden
-    explanation: Het is mogelijk dat u met dit account geen toegang heeft tot de reglementaire bijlage.
-
 regulatory-statements-plugin:
+  type: Reglementaire bijlage
+  the-type: de reglementaire bijlage
   regulatory-statement: Reglement
   insert-statement: Reglement Invoegen
   cancel: Annuleer
@@ -701,6 +686,17 @@ utils:
   history: HISTORIEK
   full-history: Volledige historiek bekijken
   create-new-version: Nieuwe versie maken
+  not-found:
+    title: '{type} niet gevonden'
+    explanation: 'Het is mogelijk dat u met dit account geen toegang heeft tot {type}.'
+  body:
+    contact-message: Indien u denkt dat dit een fout is, kan u ons steeds contacteren op onze
+    contact-link: contact-pagina
+    email-message: Of stuur een mail naar
+    email: GelinktNotuleren@vlaanderen.be
+    route:
+      title: Pagina niet gevonden
+      explanation: Onze excuses, maar we slaagden er niet in om deze pagina terug te vinden.
 
 validation-modal:
   title: Geef uw document een naam
@@ -783,6 +779,7 @@ generic:
 download:
   heading: Onderdelen downloaden of kopiëren
   back-to-meeting: Terug naar zitting
+  back-to-download: Exporteer onderdelen naar HTML
   document-download:
     dropdown-title: Publicatiedocumenten
     agenda: Agenda downloaden als HTML
@@ -800,7 +797,16 @@ download:
     agendapoint-title: Titel agendapunt
     download-html: Download HTML
     no-data-message: Geen agendapunten gevonden in zitting
+    copy-options-header: Kopieer naar klembord
+    copy-options: Bekijk kopieermogelijkheden
 
 download-meeting-part:
   downloading: Aan het downloaden
   downloaded: Gedownload
+
+copy-options:
+  heading: 'Kopieer onderdelen uit:'
+  disclaimer: 'De opmaak van het document zal afhangen van de applicatie waarin het geüpload wordt.'
+  copy-all: Volledig besluit kopieren
+  copying: kopiëren
+  completed: gekopieerd

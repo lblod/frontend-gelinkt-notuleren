@@ -1,0 +1,161 @@
+<div class='au-c-app-chrome'>
+  <AuToolbar
+    @size='small'
+    class='au-u-padding-top-none au-u-padding-bottom-none'
+    as |Group|
+  >
+    <Group>
+      <AuLink
+        @route='meetings.edit'
+        @model={{@model.id}}
+        @skin='secondary'
+        @icon='arrow-left'
+        @iconAlignment='left'
+      >
+        {{t 'download.back-to-meeting'}}
+      </AuLink>
+      <span class='au-c-app-chrome__entity'>{{t 'download.heading'}}</span>
+    </Group>
+  </AuToolbar>
+</div>
+<AuMainContainer as |m|>
+  <m.content @scroll={{true}}>
+    <AuToolbar @size='large' as |Group|>
+      <Group>
+        <AuHeading @level='1' @skin='2'>
+          {{t 'meeting-form.meeting-heading-part-one'}}
+          {{t this.headerArticleTranslationString}}
+          {{#if this.isInaugurationMeeting}}
+            {{t 'meeting-form.inauguration-meeting'}}
+          {{/if}}
+          <span
+            class='au-c-meeting-chrome__highlight'
+          >{{this.zitting.bestuursorgaan.isTijdsspecialisatieVan.naam}},</span>
+          {{t 'meeting-form.meeting-heading-part-two'}}
+          <span class='au-c-meeting-chrome__highlight'>{{detailed-date
+              this.meetingDateForTitle
+            }}</span>
+        </AuHeading>
+      </Group>
+      <Group>
+        <div class='au-u-flex au-u-flex--column'>
+          <AuDropdown
+            @title={{t 'download.document-download.dropdown-title'}}
+            @buttonLabel={{t 'download.document-download.dropdown-title'}}
+            @alignment='right'
+            role='menu'
+            @skin='secondary'
+          >
+            <AuButton
+              @skin='link'
+              @icon='download'
+              role='menuitem'
+              {{on 'click' (perform this.downloadAgenda)}}
+            >
+              {{t 'download.document-download.agenda'}}
+            </AuButton>
+            <AuButton
+              @skin='link'
+              @icon='download'
+              role='menuitem'
+              {{on 'click' (perform this.downloadDecisionlist)}}
+            >
+              {{t 'download.document-download.besluitenlijst'}}
+            </AuButton>
+            <AuButton
+              @skin='link'
+              @icon='download'
+              role='menuitem'
+              {{on 'click' (perform this.downloadMeeting)}}
+            >
+              {{t 'download.document-download.notulen'}}
+            </AuButton>
+          </AuDropdown>
+          {{#if this.downloadAgenda.isRunning}}
+            <AuLoader @inline='true'>
+              {{t 'download.document-download.agenda-downloading'}}
+            </AuLoader>
+          {{else if this.downloadAgenda.last.isSuccessful}}
+            <span
+              class='download-meeting-part-downloaded au-u-flex--inline au-u-flex--vertical-center'
+            >
+              <AuIcon @icon='circle-check' />
+              {{t 'download.document-download.agenda-downloaded'}}
+            </span>
+          {{/if}}
+          {{#if this.downloadDecisionlist.isRunning}}
+            <AuLoader @inline='true'>
+              {{t 'download.document-download.besluitenlijst-downloading'}}
+            </AuLoader>
+          {{else if this.downloadDecisionlist.last.isSuccessful}}
+            <span
+              class='download-meeting-part-downloaded au-u-flex--inline au-u-flex--vertical-center'
+            >
+              <AuIcon @icon='circle-check' />
+              {{t 'download.document-download.besluitenlijst-downloaded'}}
+            </span>
+          {{/if}}
+          {{#if this.downloadMeeting.isRunning}}
+            <AuLoader @inline='true'>
+              {{t 'download.document-download.notulen-downloading'}}
+            </AuLoader>
+          {{else if this.downloadMeeting.last.isSuccessful}}
+            <span
+              class='download-meeting-part-downloaded au-u-flex--inline au-u-flex--vertical-center'
+            >
+              <AuIcon @icon='circle-check' />
+              {{t 'download.document-download.notulen-downloaded'}}
+            </span>
+          {{/if}}
+        </div>
+      </Group>
+    </AuToolbar>
+    <div class='au-u-padding'>
+      <AuDataTable
+        @content={{this.agendapoints}}
+        @noDataMessage={{t 'download.table.no-data-message'}}
+        @tableClass='au-c-data-table-with-borders'
+        as |table|
+      >
+        <table.content as |c|>
+          <c.header>
+            <th>
+              <span
+                class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+              >{{t 'download.table.agendapoint-title'}}</span>
+            </th>
+            <th>
+              <span
+                class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+              >{{t 'download.table.download-html'}}</span>
+            </th>
+            <th>
+              <span
+                class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+              >{{t 'download.table.copy-options-header'}}</span>
+            </th>
+          </c.header>
+          <c.body as |agendapoint|>
+            <td>{{agendapoint.titel}}</td>
+            <td class='au-u-flex'><DownloadMeetingPart
+                @documentType='agendapunt'
+                @meeting={{this.zitting}}
+                @behandeling={{agendapoint.behandeling}}
+              />
+              /
+              <DownloadMeetingPart
+                @documentType='besluit'
+                @documentContainer={{agendapoint.behandeling.documentContainer}}
+              /></td>
+            <td><AuLink
+                @route='meetings.download.copy'
+                @model={{agendapoint.behandeling.documentContainer.id}}
+              >
+                {{t 'download.table.copy-options'}}
+              </AuLink></td>
+          </c.body>
+        </table.content>
+      </AuDataTable>
+    </div>
+  </m.content>
+</AuMainContainer>

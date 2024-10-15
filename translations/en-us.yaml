@@ -1,11 +1,10 @@
 agendapoint:
+  type: Agendapoint
+  the-type: the agendapoint
   editor-tabs: editor-tabs
   revisions: Revisions
   restore: Restore
   back-to-meeting: Return to the meeting of {adminBody} on {date}
-  not-found:
-    title: Agendapoint not found
-    explanation: It's possible that you don't have access to the agendapoint with this account
   saved-versions: 'Saved document versions:'
   current-version: Current version
   modify-warning: 'When modifying the document to an older version, subsequent newer versions disappear irretrievably:'
@@ -245,9 +244,8 @@ inbox:
     restore-message: Restore selected documents
 
 irg-archive:
-  not-found:
-    title: Reglement not found
-    explanation: It's possible that you don't have access to the reglement with this account
+  type: Regulation
+  the-type: the regulation
 
 login:
   app-name: Gelinkt Notuleren
@@ -417,6 +415,8 @@ meeting-form:
     download-treatments: Download or copy meeting documents
 
 meetings:
+  type: Meeting
+  the-type: the meeting
   publish:
     agenda:
       title: Agenda
@@ -465,23 +465,11 @@ meetings:
     confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
     save-and-quit: Save and Quit
     cancel: Cancel
-  not-found:
-    title: Meeting not found
-    explanation: It's possible that you don't have access to the meeting with this account
 
 mock-login:
   administrative-unit-selection: Choose a administrative unit to log in with.
   administrative-unit-search: Administrative unit search
   search-placeholder: 'Aalst, Berchem, ...'
-
-not-found:
-  title: Page not found
-  body:
-    explanation: Our apologies, but we could not find this page.
-    contact-message: If you think this is a mistake, you can always contact us on our
-    contact-link: contact page
-    email-message: Or send a mail to
-    email: GelinktNotuleren@vlaanderen.be
 
 participation:
   present-label: 'Present mandatees:'
@@ -600,12 +588,9 @@ rdfa-editor-container:
   saving: Saving
   making-copy: Making copy
 
-regulatory-statements:
-  not-found:
-    title: Regulatory statement not found
-    explanation: It's possible that you don't have access to the regulatory statement with this account
-
 regulatory-statements-plugin:
+  type: Regulatory Statement
+  the-type: the regulatory statement
   regulatory-statement: Regulatory Statement
   insert-statement: Insert Regulatory Statement
   cancel: Cancel
@@ -669,7 +654,7 @@ timeline-step:
   timing-warning: 'It can take up to 5 minutes before the publication is visible on the above link.'
   publication-type: Publication type
   public-for-all: Visible for everyone
-  publication-consequences: Consequences publication
+  publication-consequences: Publication consequences
   preview-info: 'The document will be published as seen in the preview above to '
   preview-info-end: ', and will be publicly available to anyone, without authentication.'
   notify-consequences: Consequences notification
@@ -696,6 +681,17 @@ utils:
   history: History
   full-history: See the full history
   create-new-version: Create new version
+  not-found:
+    title: '{type} not found'
+    explanation: "It's possible that you don't have access to {type} with this account"
+    body:
+      contact-message: If you think this is a mistake, you can always contact us on our
+      contact-link: contact page
+      email-message: Or send a mail to
+      email: GelinktNotuleren@vlaanderen.be
+    route:
+      title: Page not found
+      explanation: Our apologies, but we could not find this page.
 
 validation-modal:
   title: Name your document
@@ -778,6 +774,7 @@ generic:
 download:
   heading: Download or copy meeting documents
   back-to-meeting: Back to meeting
+  back-to-download: Export components to HTML
   document-download:
     dropdown-title: Publication documents
     agenda: Download agenda as HTML
@@ -795,7 +792,16 @@ download:
     agendapoint-title: Agendapoint Title
     download-html: Download HTML
     no-data-message: No agendapoints found in meeting
+    copy-options-header: Copy to clipboard
+    copy-options: More copy options
 
 download-meeting-part:
   downloading: Downloading
   downloaded: Downloaded
+
+copy-options:
+  heading: 'Copy parts from:'
+  disclaimer: 'The formatting of the document will depend on the application in which it is loaded.'
+  copy-all: Copy full decision
+  copying: copying
+  completed: copied

@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.32.0
+
+### Minor Changes
+
+- [#728](https://github.com/lblod/frontend-gelinkt-notuleren/pull/728) [`354371c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/354371c06c2c784c267c5a4e9f11c32d892a22e0) Thanks [@piemonkey](https://github.com/piemonkey)! - Add screen within meeting download options to allow for copying of the decision to the clipboard
+
 ## 5.31.2
 
 ### Patch Changes

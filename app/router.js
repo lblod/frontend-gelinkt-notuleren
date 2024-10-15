@@ -70,7 +70,9 @@ Router.map(function () {
         this.route('detail', { path: '/:publishing_log_id' });
       });
     });
-    this.route('download', { path: '/:id/download' });
+    this.route('download', { path: '/:id/download' }, function () {
+      this.route('copy', { path: ':container_id/copy' });
+    });
   });
 
   this.route('irg-archive', function () {
