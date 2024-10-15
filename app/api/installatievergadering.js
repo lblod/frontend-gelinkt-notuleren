@@ -10,6 +10,8 @@ import { RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN } from '../utils/classification-utils
  * @typedef {Object} CreateInstallatievergaderingOptions
  * @property {BestuursorgaanModel} bestuursorgaan
  * @property {TemplateFetcher} templateFetcher
+ * @property {string} location
+ * @property {string} plannedStart
  */
 
 /**
@@ -19,13 +21,14 @@ import { RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN } from '../utils/classification-utils
  */
 export async function createInstallatievergadering(
   store,
-  { bestuursorgaan, templateFetcher },
+  { bestuursorgaan, templateFetcher, location, plannedStart },
 ) {
   const now = new Date();
 
   const meeting = store.createRecord('installatievergadering', {
-    geplandeStart: now,
+    geplandeStart: plannedStart,
     gestartOpTijdstip: now,
+    opLocatie: location,
     bestuursorgaan,
   });
   await meeting.save();
@@ -64,6 +67,7 @@ export async function createInstallatievergadering(
     previousAgendapoint = agendapoint;
   }
   await Promise.all(promises);
+  await meeting.save();
   return meeting;
 }
 /**

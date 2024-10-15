@@ -1,2 +1,76 @@
-{{page-title 'NewInauguration'}}
-{{outlet}}
+{{page-title this.title}}
+<AuModal
+  @title={{this.title}}
+  @modalOpen={{true}}
+  @closeModal={{this.cancelMeetingCreation}}
+  as |Modal|
+>
+  <Modal.Body>
+    <form
+      class='au-o-flow'
+      id='create-meeting-form'
+      {{on 'submit' (perform this.createMeetingTask)}}
+    >
+
+      <div>
+        <p class='au-c-label'>
+          {{t 'inbox.meetings.new.common-meeting.administrative-body'}}
+        </p>
+        <p>
+          {{#let @model.bestuursorgaan as |bestuursorgaan|}}
+            {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
+            ({{t 'administrative-body-select.period'}}:
+            {{plain-date bestuursorgaan.bindingStart}}
+            -
+            {{#if bestuursorgaan.bindingEinde}}
+              {{plain-date bestuursorgaan.bindingEinde}}
+            {{else}}
+              {{t 'administrative-body-select.not-applicable'}}
+            {{/if}})
+          {{/let}}
+        </p>
+      </div>
+
+      <div>
+        {{#let (unique-id) as |id|}}
+          <AuLabel for={{id}}>{{t
+              'inbox.meetings.new.common-meeting.location'
+            }}</AuLabel>
+          <AuInput
+            value={{this.location}}
+            {{on 'input' this.handleUpdateLocation}}
+            @width='block'
+            id={{id}}
+            type='text'
+          />
+        {{/let}}
+      </div>
+
+      <div>
+        <AuLabel>{{t
+            'inbox.meetings.new.common-meeting.planned-start'
+          }}</AuLabel>
+        <DateTimePicker
+          @alignment='top'
+          @onChange={{this.handleUpdatePlannedStart}}
+          @value={{this.plannedStart}}
+        />
+      </div>
+    </form>
+  </Modal.Body>
+
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton
+        @loading={{this.createMeetingTask.isRunning}}
+        form='create-meeting-form'
+        type='submit'
+      >
+        {{t 'inbox.meetings.new.common-meeting.save'}}
+      </AuButton>
+      <AuButton {{on 'click' this.cancelMeetingCreation}} @skin='secondary'>
+        {{t 'inbox.meetings.new.common-meeting.cancel'}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>

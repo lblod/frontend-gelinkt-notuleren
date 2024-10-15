@@ -24,6 +24,7 @@ Router.map(function () {
     });
     this.route('meetings', function () {
       this.route('new');
+      this.route('new-inauguration');
     });
     this.route('irg-archive');
   });
