@@ -22,7 +22,9 @@ class DownloadButton extends Component {
   }
 
   copyToClipboard = task(async () => {
-    await navigator.clipboard.writeText(this.args.section.content.trim());
+    await navigator.clipboard.write([
+      new ClipboardItem({ 'text/html': this.args.section.content.trim() }),
+    ]);
   });
 
   <template>
