@@ -97,13 +97,15 @@
 >
   <:body>
     {{#if this.hasParticipants}}
-        <Treatment::Voting
-          @bestuursorgaan={{@bestuursorgaan}}
-          @behandeling={{@behandeling}}
-          @readOnly={{not this.editable}}
-        />
+      <Treatment::Voting
+        @bestuursorgaan={{@bestuursorgaan}}
+        @behandeling={{@behandeling}}
+        @readOnly={{not this.editable}}
+      />
     {{else}}
-      <div class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'>
+      <div
+        class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'
+      >
         <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
           {{t 'behandeling-van-agendapunten.needs-participants'}}
         </AuPill>
@@ -114,34 +116,34 @@
     {{#unless @readOnly}}
       <div>
 
-          <AuButton
-            {{on 'click' (perform this.addStandardVoting)}}
-            @icon='add'
-            @skin='secondary'
-            @iconAlignment='left'
-            @loading={{this.addStandardVoting.isRunning}}
-          >
-            {{t 'generic.add'}}
-          </AuButton>
-          <AuButton
-            {{on 'click' (perform this.addCustomVoting)}}
-            @icon='add'
-            @skin='secondary'
-            @iconAlignment='left'
-            @loading={{this.addCustomVoting.isRunning}}
-          >
+        <AuButton
+          {{on 'click' (perform this.addStandardVoting)}}
+          @icon='add'
+          @skin='secondary'
+          @iconAlignment='left'
+          @loading={{this.addStandardVoting.isRunning}}
+        >
+          {{t 'generic.add'}}
+        </AuButton>
+        <AuButton
+          {{on 'click' (perform this.addCustomVoting)}}
+          @icon='add'
+          @skin='secondary'
+          @iconAlignment='left'
+          @loading={{this.addCustomVoting.isRunning}}
+        >
           {{t 'behandeling-van-agendapunten.add-custom-voting'}}
-          </AuButton>
-          {{#if this.editMode}}
-            <Treatment::Voting::Edit
-              @bestuursorgaan={{@bestuursorgaan}}
-              @onSave={{perform this.saveStemming}}
-              @onCancel={{this.onCancelEdit}}
-              @saving={{this.saveStemming.isRunning}}
-            />
-          {{/if}}
-        </div>
-      {{/unless}}
+        </AuButton>
+        {{#if this.editMode}}
+          <Treatment::Voting::Edit
+            @bestuursorgaan={{@bestuursorgaan}}
+            @onSave={{perform this.saveStemming}}
+            @onCancel={{this.onCancelEdit}}
+            @saving={{this.saveStemming.isRunning}}
+          />
+        {{/if}}
+      </div>
+    {{/unless}}
   </:button>
 </Common::MeetingSubSection>
 
