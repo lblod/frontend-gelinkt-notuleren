@@ -97,17 +97,11 @@
 >
   <:body>
     {{#if this.hasParticipants}}
-      {{#if this.behandeling.isManualVoting}}
-        <ReadonlyTextBox>
-          {{html-safe @behandeling.manualVoting}}
-        </ReadonlyTextBox>
-      {{else}}
         <Treatment::Voting
           @bestuursorgaan={{@bestuursorgaan}}
           @behandeling={{@behandeling}}
           @readOnly={{not this.editable}}
         />
-      {{/if}}
     {{else}}
       <div class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'>
         <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
