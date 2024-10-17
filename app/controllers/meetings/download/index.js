@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { articlesBasedOnClassifcationMap } from '../../utils/classification-utils';
+import { articlesBasedOnClassifcationMap } from 'frontend-gelinkt-notuleren/utils/classification-utils';
 import { restartableTask, task } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
@@ -11,7 +11,9 @@ export default class MeetingsDownloadController extends Controller {
     return this.model;
   }
   get agendapoints() {
-    return this.zitting.agendapunten;
+    return this.zitting.agendapunten
+      .slice()
+      .sort((a, b) => a.position - b.position);
   }
   get meetingDateForTitle() {
     if (this.zitting?.gestartOpTijdstip) {

@@ -1,0 +1,63 @@
+<div class='au-c-app-chrome'>
+  <AuToolbar
+    @size='small'
+    class='au-u-padding-top-none au-u-padding-bottom-none'
+    as |Group|
+  >
+    <Group>
+      <AuLink
+        @route='meetings.edit'
+        @model={{@model.zitting.id}}
+        @skin='secondary'
+        @icon='arrow-left'
+        @iconAlignment='left'
+      >
+        {{t 'download.back-to-meeting'}}
+      </AuLink>
+      <AuLink
+        @route='meetings.download'
+        @model={{@model.zitting.id}}
+        @skin='secondary'
+        class='au-c-app-chrome__entity'
+      >
+        {{t 'download.back-to-download'}}
+      </AuLink>
+      <span class='au-c-app-chrome__entity'>{{t 'copy-options.heading'}}
+        {{@model.document.title}}</span>
+    </Group>
+  </AuToolbar>
+</div>
+<AuMainContainer as |m|>
+  <m.content @scroll={{true}}>
+    <AuToolbar @size='large' as |Group|>
+      <Group>
+        <AuHeading @level='1' @skin='2'>
+          {{t 'copy-options.heading'}}
+          <span
+            class='au-c-meeting-chrome__highlight'
+          >{{@model.document.title}}</span>
+        </AuHeading>
+      </Group>
+      <Group>
+        <DownloadMeetingPart
+          @documentType='besluit'
+          @documentContainer={{@model.container}}
+          @buttonText={{t 'copy-options.copy-all'}}
+          @loadingText={{t 'copy-options.copying'}}
+          @completedText={{t 'copy-options.completed'}}
+          @icon='copy-paste'
+          @buttonSkin='secondary'
+          @callback={{this.copyToClipboard}}
+        />
+      </Group>
+    </AuToolbar>
+    <p class='au-u-margin-left au-u-margin-bottom'>{{t
+        'copy-options.disclaimer'
+      }}</p>
+    <div
+      class='au-u-flex au-u-flex--column au-u-flex--vertical-center au-u-margin-bottom-large'
+    >
+      <DecisionCopyParts @decision={{@model.document}} />
+    </div>
+  </m.content>
+</AuMainContainer>
