@@ -21,6 +21,7 @@ import {
   BESTUURSFUNCTIE_CODES,
   BESTUURSPERIODES,
   LOKALE_VERKIEZINGEN,
+  MANDATARIS_STATUS_CODES,
 } from './constants';
 import { promiseProperties } from '../utils/promises';
 
@@ -33,6 +34,7 @@ export const IVGR_TAGS = /** @type {const} */ ([
   'IVGR5-LMB-3-samenstelling-fracties',
   'IVGR7-LMB-1-kandidaat-schepenen',
   'IVGR7-LMB-2-ontvankelijkheid-schepenen',
+  'IVGR7-LMB-3-verhindering-schepenen',
   'IVGR8-LMB-1-verkozen-schepenen',
   'IVGR8-LMB-2-coalitie',
 ]);
@@ -102,7 +104,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
     /**
      * **IVGR3: Eedaflegging van de verkozen gemeenteraadsleden**
      *
-     * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging van de volgende verkozenen op datum van
+     * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging (= datum van de zitting) van de volgende verkozenen op datum van
      */
     'IVGR3-LMB-1-eedafleggingen': {
       query: () => {
@@ -535,18 +537,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
-          const decisionUri = findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          })?.node.attrs.subject;
-          if (!decisionUri) {
-            throw new Error(
-              'Could not find decision to sync mandatee table with',
-            );
-          }
+
           const tableHeader = row(
             schema,
             [schema.text('Schepen'), schema.text('Rang')],
@@ -564,10 +555,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
               return (b1.rangnummer ?? Infinity) - (b2.rangnummer ?? Infinity);
             });
           const rows = bindings.map((binding) => {
-            const { mandataris, mandataris_naam, mandataris_rang } =
+            const { mandataris_naam, mandataris_rang } =
               bindingToObject(binding);
             return row(schema, [
-              resourceNode(schema, mandataris, mandataris_naam),
+              schema.text(mandataris_naam),
               schema.text(mandataris_rang),
             ]);
           });
@@ -575,23 +566,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
             tableHeader,
             ...rows,
           ]);
-          const factory = new SayDataFactory();
-          const result = transactionCombinator(
-            state,
-            replaceContent(state.tr, $pos, content),
-          )(
-            bindings.map((binding) => {
-              return addPropertyToNode({
-                resource: decisionUri,
-                property: {
-                  predicate: MANDAAT('bekrachtigtAanstellingVan').full,
-                  object: factory.resourceNode(binding['mandataris'].value),
-                },
-              });
-            }),
-          );
+          const transaction = replaceContent(state.tr, $pos, content);
           return {
-            transaction: result.transaction,
+            transaction,
             result: true,
             initialState: state,
           };
@@ -614,7 +591,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_einddatum ?mandataris_opvolger WHERE {
+        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde ?mandataris_opvolger WHERE {
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
@@ -624,12 +601,15 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris mandaat:rangorde ?mandataris_rang.
           ?mandataris mandaat:status/skos:prefLabel ?mandataris_status.
+          ?mandataris mandaat:start ?mandaat_start.
+          OPTIONAL {
+            ?mandataris mandaat:einde ?mandaat_einde.
+          }
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
 
-          VALUES ?mandaat_einddatum { undef }
           # TODO: unsure how we will fetch the 'opvolger'
           VALUES ?mandataris_opvolger { undef }
         }
@@ -684,18 +664,16 @@ export const mandateeTableConfigIVGR = (meeting) => {
               mandataris_rang,
               mandataris_naam,
               mandataris_status,
-              mandaat_einddatum,
+              mandaat_start,
+              mandaat_einde,
               mandataris_opvolger,
             } = bindingToObject(binding);
-            const mandaat_begindatum = meeting.gestartOpTijdstip.toISOString();
             return row(schema, [
               schema.text(mandataris_rang),
               resourceNode(schema, mandataris, mandataris_naam),
               schema.text(mandataris_status),
-              dateNode(schema, mandaat_begindatum),
-              mandaat_einddatum
-                ? dateNode(schema, mandaat_einddatum)
-                : undefined,
+              dateNode(schema, mandaat_start),
+              mandaat_einde ? dateNode(schema, mandaat_einde) : undefined,
               mandataris_opvolger
                 ? schema.text(mandataris_opvolger)
                 : undefined,
@@ -722,6 +700,70 @@ export const mandateeTableConfigIVGR = (meeting) => {
           );
           return {
             transaction: result.transaction,
+            result: true,
+            initialState: state,
+          };
+        };
+      },
+    },
+
+    'IVGR7-LMB-3-verhindering-schepenen': {
+      query: () => {
+        const sparqlQuery = /* sparql */ `
+        PREFIX org: <http://www.w3.org/ns/org#>
+        PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+        PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+        PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+        PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT DISTINCT ?mandataris ?mandataris_naam  WHERE {
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan org:hasPost ?mandaat.
+
+          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+
+          ?mandataris org:holds ?mandaat.
+          ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          ?mandataris mandaat:status/skos:prefLabel <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
+
+          ?persoon persoon:gebruikteVoornaam ?voornaam.
+          ?persoon foaf:familyName ?achternaam.
+          BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
+        }
+      `;
+        return executeQuery({
+          query: sparqlQuery,
+          endpoint: '/vendor-proxy/query',
+        });
+      },
+      updateContent: (pos, queryResult) => {
+        return (state) => {
+          const { doc, schema } = state;
+          const $pos = doc.resolve(pos);
+          const bindings = queryResult.results.bindings
+            .map((binding) => {
+              const { mandataris_rang } = bindingToObject(binding);
+              return {
+                ...binding,
+                rangnummer: rangordeStringToNumber(mandataris_rang),
+              };
+            })
+            .sort((b1, b2) => {
+              return b1.rangnummer - b2.rangnummer;
+            });
+          const tableHeader = row(schema, [schema.text('Schepen')], true);
+          const rows = bindings.map((binding) => {
+            const { mandataris_naam } = bindingToObject(binding);
+            return row(schema, [schema.text(mandataris_naam)]);
+          });
+          const content = schema.nodes.table.create(null, [
+            tableHeader,
+            ...rows,
+          ]);
+          const transaction = replaceContent(state.tr, $pos, content);
+          return {
+            transaction: transaction,
             result: true,
             initialState: state,
           };
@@ -771,18 +813,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
-          const decisionUri = findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          })?.node.attrs.subject;
-          if (!decisionUri) {
-            throw new Error(
-              'Could not find decision to sync mandatee table with',
-            );
-          }
           const bindings = queryResult.results.bindings;
           const tableHeader = row(
             schema,
@@ -790,10 +820,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
             true,
           );
           const rows = bindings.map((binding) => {
-            const { mandataris, mandataris_naam, fractie_naam } =
-              bindingToObject(binding);
+            const { mandataris_naam, fractie_naam } = bindingToObject(binding);
             return row(schema, [
-              resourceNode(schema, mandataris, mandataris_naam),
+              schema.text(mandataris_naam),
               schema.text(fractie_naam ?? ''),
             ]);
           });
@@ -801,23 +830,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
             tableHeader,
             ...rows,
           ]);
-          const factory = new SayDataFactory();
-          const result = transactionCombinator(
-            state,
-            replaceContent(state.tr, $pos, content),
-          )(
-            bindings.map((binding) => {
-              return addPropertyToNode({
-                resource: decisionUri,
-                property: {
-                  predicate: MANDAAT('bekrachtigtAanstellingVan').full,
-                  object: factory.resourceNode(binding['mandataris'].value),
-                },
-              });
-            }),
-          );
+          const transaction = replaceContent(state.tr, $pos, content);
           return {
-            transaction: result.transaction,
+            transaction,
             result: true,
             initialState: state,
           };
