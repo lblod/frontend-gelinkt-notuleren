@@ -807,3 +807,10 @@ copy-options:
   copy-all: Copy full decision
   copying: copying
   completed: copied
+  copy-part: 'Copy {part}'
+  part-copied: '{part} copied'
+  section:
+    title: Title
+    description: Description
+    motivation: Motivation
+    ruling: Ruling

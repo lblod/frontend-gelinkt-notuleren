@@ -80,8 +80,12 @@
           <DeleteMeeting @meeting={{@zitting}} />
         {{/unless}}
       </AuDropdown>
-      {{#if this.isComplete}}
-        <AuButton @skin='secondary' {{on 'click' this.goToPublish}}>
+      {{#if (or this.isComplete this.isLoading)}}
+        <AuButton
+          @skin='secondary'
+          @loading={{this.isLoading}}
+          {{on 'click' this.goToPublish}}
+        >
           {{t 'meeting-form.publish-button'}}
         </AuButton>
       {{else}}

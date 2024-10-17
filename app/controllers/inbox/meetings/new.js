@@ -2,36 +2,11 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { dropTask } from 'ember-concurrency';
 import { service } from '@ember/service';
-import InstallatieVergaderingModel from '../../../models/installatievergadering';
 
-const IV_AP_MAP = [
-  'IVGR1 Kennisname van de definitieve verkiezingsluitslag',
-  'IVGR2 Onderzoek van de geloofsbrieven',
-  'IVGR3 Eedaflegging van de verkozen gemeenteraadsleden',
-  'IVGR4 Bepaling van de rangorde van de gemeenteraadsleden',
-  'IVGR5 Vaststelling van de fracties',
-  'IVGR6 Verkiezing van de voorzitter van de gemeenteraad',
-  'IVGR7 Verkiezing van de schepenen',
-  'IVGR8 Aanduiding en eedaflegging van de aangewezen-burgemeester',
-];
-const IV_NAME_MAP = [
-  'Kennisname van de definitieve verkiezingsuitslag',
-  'Onderzoek van de geloofsbrieven',
-  'Eedaflegging van de verkozen gemeenteraadsleden',
-  'Bepaling van de rangorde van de gemeenteraadsleden',
-  'Vaststelling van de fracties',
-  'Verkiezing van de voorzitter van de gemeenteraad',
-  'Verkiezing van de schepenen',
-  'Aanduiding en eedaflegging van de aangewezen-burgemeester',
-];
 export default class InboxMeetingsNewController extends Controller {
   @service router;
   @service store;
   @service intl;
-  /** @type {import("../../../services/template-fetcher").default} */
-  @service templateFetcher;
-
-  queryParams = ['type'];
 
   get meeting() {
     return this.model;
@@ -45,16 +20,8 @@ export default class InboxMeetingsNewController extends Controller {
     this.meeting.opLocatie = event.target.value;
   }
 
-  get isInaugurationMeeting() {
-    return this.meeting instanceof InstallatieVergaderingModel;
-  }
-
   get title() {
-    if (this.isInaugurationMeeting) {
-      return this.intl.t('inbox.meetings.new.inauguration-meeting.title');
-    } else {
-      return this.intl.t('inbox.meetings.new.common-meeting.title');
-    }
+    return this.intl.t('inbox.meetings.new.common-meeting.title');
   }
 
   saveMeetingTask = dropTask(async (event) => {
@@ -72,42 +39,9 @@ export default class InboxMeetingsNewController extends Controller {
     if (this.meeting.isValid) {
       this.meeting.gestartOpTijdstip = this.meeting.geplandeStart;
       await this.meeting.save();
-      if (this.isInaugurationMeeting) {
-        await this.setUpInaugurationMeeting();
-      }
       this.router.replaceWith('meetings.edit', this.meeting.id);
     }
   });
-
-  async setUpInaugurationMeeting() {
-    const promises = [];
-    let previousAgendapoint;
-    for (let i = 0; i < 8; i++) {
-      const agendapoint = this.store.createRecord('agendapunt', {
-        position: i,
-        geplandOpenbaar: true,
-        titel: IV_NAME_MAP[i],
-        zitting: this.meeting,
-        vorigeAgendapunt: previousAgendapoint,
-      });
-      const treatment = this.store.createRecord('behandeling-van-agendapunt', {
-        openbaar: true,
-        onderwerp: agendapoint,
-      });
-      const template = await this.templateFetcher.fetchByTemplateName({
-        name: IV_AP_MAP[i],
-      });
-      await template.loadBody();
-      promises.push(
-        agendapoint.save(),
-        treatment
-          .initializeDocument(template.body)
-          .then(() => treatment.saveAndPersistDocument()),
-      );
-      previousAgendapoint = agendapoint;
-    }
-    await Promise.all(promises);
-  }
 
   @action
   updateAdministrativeBody(administrativeBody) {
@@ -123,6 +57,7 @@ export default class InboxMeetingsNewController extends Controller {
     // More info: https://github.com/emberjs/ember.js/issues/19497
     // TODO use the router service once the bug is fixed:
     //this.router.replaceWith('inbox.meetings');
+    // still relevant as of 15/10/2024
     this.replaceRoute('inbox.meetings');
   }
 }
