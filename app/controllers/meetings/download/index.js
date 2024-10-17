@@ -11,7 +11,9 @@ export default class MeetingsDownloadController extends Controller {
     return this.model;
   }
   get agendapoints() {
-    return this.zitting.agendapunten;
+    return this.zitting.agendapunten
+      .slice()
+      .sort((a, b) => a.position - b.position);
   }
   get meetingDateForTitle() {
     if (this.zitting?.gestartOpTijdstip) {

@@ -7,7 +7,7 @@
     <Group>
       <AuLink
         @route='meetings.edit'
-        @model={{@model.id}}
+        @model={{this.zitting.id}}
         @skin='secondary'
         @icon='arrow-left'
         @iconAlignment='left'
@@ -149,7 +149,9 @@
               /></td>
             <td><AuLink
                 @route='meetings.download.copy'
-                @model={{agendapoint.behandeling.documentContainer.id}}
+                @models={{(array
+                  this.zitting agendapoint.behandeling.documentContainer.id
+                )}}
               >
                 {{t 'download.table.copy-options'}}
               </AuLink></td>

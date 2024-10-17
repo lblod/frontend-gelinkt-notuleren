@@ -811,3 +811,10 @@ copy-options:
   copy-all: Volledig besluit kopieren
   copying: kopiëren
   completed: gekopieerd
+  copy-part: 'Kopieer {part}'
+  part-copied: '{part} gekopieerd'
+  section:
+    title: Titel
+    description: Beschrijving
+    motivation: Motivering
+    ruling: Beslissing
