@@ -120,6 +120,9 @@ import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { IVGR_TAGS } from '../../config/mandatee-table-config';
 import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
+import { getOwner } from '@ember/application';
+
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
@@ -330,6 +333,8 @@ export default class AgendapointsEditController extends Controller {
       ),
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
+
+      emberApplication({ application: getOwner(this) }),
       variableAutofillerPlugin(this.config.autofilledVariable),
     ];
   }
