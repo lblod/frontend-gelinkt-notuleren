@@ -25,18 +25,10 @@
               @icon='chevron-down'
               role='menu'
             >
-              <AuLink
-                @route='inbox.meetings.new'
-                @query={{hash type='common'}}
-                role='menuitem'
-              >
+              <AuLink @route='inbox.meetings.new' role='menuitem'>
                 {{t 'inbox.meetings.new.common-meeting.title'}}
               </AuLink>
-              <AuLink
-                @route='inbox.meetings.new'
-                @query={{hash type='inauguration-meeting'}}
-                role='menuitem'
-              >
+              <AuLink @route='inbox.meetings.new-inauguration' role='menuitem'>
                 {{t 'inbox.meetings.new.inauguration-meeting.title'}}
               </AuLink>
             </AuDropdown>

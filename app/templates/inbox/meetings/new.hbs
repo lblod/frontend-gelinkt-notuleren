@@ -13,42 +13,23 @@
       {{on 'submit' (perform this.saveMeetingTask)}}
     >
       <div>
-        {{#if this.isInaugurationMeeting}}
-          <p class='au-c-label'>
+        {{#let (unique-id) this.meeting.errors.bestuursorgaan as |id errors|}}
+          <AuLabel @error={{if errors true false}} for={{id}}>
             {{t 'inbox.meetings.new.common-meeting.administrative-body'}}
-          </p>
-          <p>
-            {{#let this.meeting.bestuursorgaan as |bestuursorgaan|}}
-              {{bestuursorgaan.isTijdsspecialisatieVan.naam}}
-              ({{t 'administrative-body-select.period'}}:
-              {{plain-date bestuursorgaan.bindingStart}}
-              -
-              {{#if bestuursorgaan.bindingEinde}}
-                {{plain-date bestuursorgaan.bindingEinde}}
-              {{else}}
-                {{t 'administrative-body-select.not-applicable'}}
-              {{/if}})
-            {{/let}}
-          </p>
-        {{else}}
-          {{#let (unique-id) this.meeting.errors.bestuursorgaan as |id errors|}}
-            <AuLabel @error={{if errors true false}} for={{id}}>
-              {{t 'inbox.meetings.new.common-meeting.administrative-body'}}
-              <RequiredField />
-            </AuLabel>
-            <AdministrativeBodySelect
-              @id={{id}}
-              @selected={{this.meeting.bestuursorgaan}}
-              @onChange={{this.updateAdministrativeBody}}
-              @error={{if errors true false}}
-            />
-            {{#each errors as |error|}}
-              <AuHelpText @error={{true}}>
-                {{error.message}}
-              </AuHelpText>
-            {{/each}}
-          {{/let}}
-        {{/if}}
+            <RequiredField />
+          </AuLabel>
+          <AdministrativeBodySelect
+            @id={{id}}
+            @selected={{this.meeting.bestuursorgaan}}
+            @onChange={{this.updateAdministrativeBody}}
+            @error={{if errors true false}}
+          />
+          {{#each errors as |error|}}
+            <AuHelpText @error={{true}}>
+              {{error.message}}
+            </AuHelpText>
+          {{/each}}
+        {{/let}}
 
       </div>
       <div>
