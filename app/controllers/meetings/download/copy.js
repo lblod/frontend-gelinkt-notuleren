@@ -7,7 +7,7 @@ export default class MeetingsDownloadCopyController extends Controller {
   @action
   async copyToClipboard(text) {
     // TODO error handling, e.g. not secure...
-    await navigator.clipboard.writeText(text.trim());
+    await navigator.clipboard.write([new ClipboardItem({ 'text/html': text })]);
   }
 
   get previewDocument() {

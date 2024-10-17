@@ -75,6 +75,9 @@ export default class MeetingForm extends Component {
     return this.zitting instanceof InstallatieVergaderingModel;
   }
 
+  get isLoading() {
+    return this.fetchTreatments.isRunning;
+  }
   get isComplete() {
     return !this.zitting?.isNew && this.behandelingen?.length > 0;
   }
