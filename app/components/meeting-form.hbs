@@ -114,7 +114,11 @@
         </AuLink>
       {{else}}
         {{#if (or this.isComplete this.isLoading)}}
-          <AuButton @skin='secondary' @loading={{this.isLoading}} {{on 'click' this.goToPublish}}>
+          <AuButton
+            @skin='secondary'
+            @loading={{this.isLoading}}
+            {{on 'click' this.goToPublish}}
+          >
             {{t 'meeting-form.publish-button'}}
           </AuButton>
         {{else}}

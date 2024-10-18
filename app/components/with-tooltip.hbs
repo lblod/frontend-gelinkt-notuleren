@@ -1,8 +1,4 @@
-<this.Velcro
-  @placement='top'
-  @offsetOptions={{hash mainAxis=10}}
-  as |velcro|
->
+<this.Velcro @placement='top' @offsetOptions={{hash mainAxis=10}} as |velcro|>
   <div
     {{on 'mouseenter' this.showTooltip}}
     {{on 'mouseleave' this.hideTooltip}}
@@ -13,11 +9,8 @@
     {{yield}}
   </div>
   {{#if this.tooltipOpen}}
-      <AuPill
-        role='tooltip'
-        {{velcro.loop}}
-      >
-        {{@tooltip}}
-      </AuPill>
+    <AuPill role='tooltip' {{velcro.loop}}>
+      {{@tooltip}}
+    </AuPill>
   {{/if}}
 </this.Velcro>
