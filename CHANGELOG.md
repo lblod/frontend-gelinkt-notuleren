@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.33.1
+
+### Patch Changes
+
+- [`f2a6314`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f2a63141a5128065afa1409e869952cc3135886e) Thanks [@abeforgit](https://github.com/abeforgit)! - update meeting configs
+
 ## 5.33.0
 
 ### Minor Changes
