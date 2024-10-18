@@ -413,6 +413,8 @@ meeting-form:
     dropdown-title: Acties
     download-meeting: Notulen downloaden als HTML
     download-treatments: Onderdelen downloaden of kopiëren
+  focus-mode: Focus besluiten
+  focus-mode-tooltip: Publiceert u de installatievergadering in een externe applicatie? Schakel deze optie in om enkel de besluiten te zien.
 
 meetings:
   type: Zitting
