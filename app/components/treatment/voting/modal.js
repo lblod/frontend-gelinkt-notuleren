@@ -78,4 +78,7 @@ export default class TreatmentVotingModalComponent extends Component {
     this.editStemming.stemming.rollbackAttributes();
     this.editStemming.stemming = null;
   }
+  isStandardVoting(voting) {
+    return voting.constructor.modelName === 'standard-voting';
+  }
 }
