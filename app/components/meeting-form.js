@@ -17,6 +17,7 @@ import {
 export default class MeetingForm extends Component {
   @tracked aanwezigenBijStart;
   @tracked afwezigenBijStart;
+  @tracked focusMode = false;
   behandelingen = tracked([]);
   @service store;
   @service currentSession;
@@ -283,5 +284,9 @@ export default class MeetingForm extends Component {
     if (this.zitting?.gestartOpTijdstip) {
       return this.zitting.gestartOpTijdstip;
     } else return this.zitting.geplandeStart;
+  }
+  @action
+  toggleFocusMode() {
+    this.focusMode = !this.focusMode;
   }
 }

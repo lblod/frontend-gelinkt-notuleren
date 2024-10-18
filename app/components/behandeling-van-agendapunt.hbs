@@ -12,29 +12,29 @@
         </AuPill>
       {{/if}}
     </div>
-
-    <Common::MeetingSubSection
-      @title={{t 'behandeling-van-agendapunten.visibility'}}
-    >
-      <:body>
-        <div class='au-u-padding-tiny au-u-padding-bottom-none'>
-          {{#let (unique-id) as |id|}}
-            <AuLabel for={{id}}><Input
-                @type='checkbox'
-                @checked={{this.openbaar}}
-                {{on 'input' (perform this.toggleOpenbaar)}}
-                id={{id}}
-              />
-              &nbsp;{{t 'behandeling-van-agendapunten.openbaar-label'}}
-            </AuLabel>
-          {{/let}}
-          {{#if this.toggleOpenbaar.isRunning}}
-            <AuLoader @padding='small' />
-          {{/if}}
-        </div>
-      </:body>
-    </Common::MeetingSubSection>
-
+    {{#unless @focusMode}}
+      <Common::MeetingSubSection
+        @title={{t 'behandeling-van-agendapunten.visibility'}}
+      >
+        <:body>
+          <div class='au-u-padding-tiny au-u-padding-bottom-none'>
+            {{#let (unique-id) as |id|}}
+              <AuLabel for={{id}}><Input
+                  @type='checkbox'
+                  @checked={{this.openbaar}}
+                  {{on 'input' (perform this.toggleOpenbaar)}}
+                  id={{id}}
+                />
+                &nbsp;{{t 'behandeling-van-agendapunten.openbaar-label'}}
+              </AuLabel>
+            {{/let}}
+            {{#if this.toggleOpenbaar.isRunning}}
+              <AuLoader @padding='small' />
+            {{/if}}
+          </div>
+        </:body>
+      </Common::MeetingSubSection>
+    {{/unless}}
   </div>
 {{else}}
   <div class='au-c-meeting-chrome-editable'>
@@ -67,75 +67,76 @@
 
 {{/if}}
 
-{{#if this.isLoading}}
-  <AuLoader @padding='small' />
-  <AuHelpText>{{t 'participation-list.loading-title'}}</AuHelpText>
-{{else}}
-  <ParticipationList
-    @chairman={{this.chairman}}
-    @defaultChairman={{this.defaultChairman}}
-    @secretary={{this.secretary}}
-    @defaultSecretary={{this.defaultSecretary}}
-    @participants={{this.participants}}
-    @defaultParticipants={{this.defaultParticipants}}
-    @absentees={{this.absentees}}
-    @defaultAbsentees={{this.defaultAbsentees}}
-    @possibleParticipants={{@possibleParticipants}}
-    @bestuursorgaan={{@bestuursorgaan}}
-    @onSave={{this.saveParticipants}}
-    @meeting={{@meeting}}
-    @modalTitle={{t 'generic.edit'}}
-    @readOnly={{or (not this.editable) (not this.canEditParticipants)}}
-    @readOnlyText={{unless
-      this.canEditParticipants
-      (t 'behandeling-van-agendapunten.cannot-edit-participants')
-    }}
-  />
-{{/if}}
+{{#unless @focusMode}}
+  {{#if this.isLoading}}
+    <AuLoader @padding='small' />
+    <AuHelpText>{{t 'participation-list.loading-title'}}</AuHelpText>
+  {{else}}
+    <ParticipationList
+      @chairman={{this.chairman}}
+      @defaultChairman={{this.defaultChairman}}
+      @secretary={{this.secretary}}
+      @defaultSecretary={{this.defaultSecretary}}
+      @participants={{this.participants}}
+      @defaultParticipants={{this.defaultParticipants}}
+      @absentees={{this.absentees}}
+      @defaultAbsentees={{this.defaultAbsentees}}
+      @possibleParticipants={{@possibleParticipants}}
+      @bestuursorgaan={{@bestuursorgaan}}
+      @onSave={{this.saveParticipants}}
+      @meeting={{@meeting}}
+      @modalTitle={{t 'generic.edit'}}
+      @readOnly={{or (not this.editable) (not this.canEditParticipants)}}
+      @readOnlyText={{unless
+        this.canEditParticipants
+        (t 'behandeling-van-agendapunten.cannot-edit-participants')
+      }}
+    />
+  {{/if}}
 
-<Common::MeetingSubSection
-  @title={{t 'behandeling-van-agendapunten.voting-title'}}
->
-  <:body>
-    {{#if this.hasParticipants}}
-      <Treatment::Voting
-        @bestuursorgaan={{@bestuursorgaan}}
-        @behandeling={{@behandeling}}
-        @readOnly={{not this.editable}}
-      />
-    {{else}}
-      <div
-        class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'
-      >
-        <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
-          {{t 'behandeling-van-agendapunten.needs-participants'}}
-        </AuPill>
-      </div>
-    {{/if}}
-  </:body>
-  <:button>
-    {{#unless @readOnly}}
-      <AuButton
-        {{on 'click' (perform this.addStemming)}}
-        @icon='add'
-        @skin='secondary'
-        @iconAlignment='left'
-        @loading={{this.addStemming.isRunning}}
-      >
-        {{t 'generic.add'}}
-      </AuButton>
-      {{#if this.editMode}}
-        <Treatment::Voting::Edit
+  <Common::MeetingSubSection
+    @title={{t 'behandeling-van-agendapunten.voting-title'}}
+  >
+    <:body>
+      {{#if this.hasParticipants}}
+        <Treatment::Voting
           @bestuursorgaan={{@bestuursorgaan}}
-          @onSave={{perform this.saveStemming}}
-          @onCancel={{this.onCancelEdit}}
-          @saving={{this.saveStemming.isRunning}}
+          @behandeling={{@behandeling}}
+          @readOnly={{not this.editable}}
         />
+      {{else}}
+        <div
+          class='au-u-margin-top au-u-margin-bottom au-u-flex au-u-flex--center'
+        >
+          <AuPill @skin='warning' @icon='alert-triangle' @iconAlignment='left'>
+            {{t 'behandeling-van-agendapunten.needs-participants'}}
+          </AuPill>
+        </div>
       {{/if}}
-    {{/unless}}
-  </:button>
-</Common::MeetingSubSection>
-
+    </:body>
+    <:button>
+      {{#unless @readOnly}}
+        <AuButton
+          {{on 'click' (perform this.addStemming)}}
+          @icon='add'
+          @skin='secondary'
+          @iconAlignment='left'
+          @loading={{this.addStemming.isRunning}}
+        >
+          {{t 'generic.add'}}
+        </AuButton>
+        {{#if this.editMode}}
+          <Treatment::Voting::Edit
+            @bestuursorgaan={{@bestuursorgaan}}
+            @onSave={{perform this.saveStemming}}
+            @onCancel={{this.onCancelEdit}}
+            @saving={{this.saveStemming.isRunning}}
+          />
+        {{/if}}
+      {{/unless}}
+    </:button>
+  </Common::MeetingSubSection>
+{{/unless}}
 <Common::MeetingSubSection
   @title={{t 'behandeling-van-agendapunten.content-title'}}
 >
