@@ -7,7 +7,7 @@ import perform from 'ember-concurrency/helpers/perform';
 import t from 'ember-intl/helpers/t';
 import { trackedReset } from 'tracked-toolbox';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
-import { copyStringToClipboard } from '../utils/copyHtmlToClipboard';
+import { copyStringToClipboard } from '../utils/copy-string-to-clipboard';
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 
 class DownloadButton extends Component {

@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { htmlSafe } from '@ember/template';
 import { generateExportTextFromEditorDocument } from '../../../utils/generate-export-from-editor-document';
-import { copyStringToClipboard } from '../../../utils/copyHtmlToClipboard';
+import { copyStringToClipboard } from '../../../utils/copy-string-to-clipboard';
 
 export default class MeetingsDownloadCopyController extends Controller {
   @action
