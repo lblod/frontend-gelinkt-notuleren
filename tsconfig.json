@@ -1,9 +1,13 @@
 {
+  "extends": "@tsconfig/ember/tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "checkJs": false
   },
   "exclude": ["node_modules", "dist"],
-  "allowJs": true,
-  "checkJs": true
+  "glint": {
+    "environment": ["ember-loose", "ember-template-imports"]
+  }
 }
