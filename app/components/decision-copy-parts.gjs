@@ -7,6 +7,7 @@ import perform from 'ember-concurrency/helpers/perform';
 import t from 'ember-intl/helpers/t';
 import { trackedReset } from 'tracked-toolbox';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
+import { copyStringToClipboard } from '../utils/copyHtmlToClipboard';
 
 class DownloadButton extends Component {
   @service intl;
@@ -22,9 +23,7 @@ class DownloadButton extends Component {
   }
 
   copyToClipboard = task(async () => {
-    await navigator.clipboard.write([
-      new ClipboardItem({ 'text/html': this.args.section.content.trim() }),
-    ]);
+    await copyStringToClipboard({ html: this.args.section.content.trim() });
   });
 
   <template>
@@ -164,7 +163,10 @@ export default class DecisionCopyParts extends Component {
                     </div>
                   </div>
                   <div class='gn-meeting-copy--section-button'>
-                    <DownloadButton @section={{part}} @translatedLabel={{part.translatedLabel}} />
+                    <DownloadButton
+                      @section={{part}}
+                      @translatedLabel={{part.translatedLabel}}
+                    />
                   </div>
                 </div>
               </div>
