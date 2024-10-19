@@ -8,6 +8,7 @@ import t from 'ember-intl/helpers/t';
 import { trackedReset } from 'tracked-toolbox';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { copyStringToClipboard } from '../utils/copyHtmlToClipboard';
+import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 
 class DownloadButton extends Component {
   @service intl;
@@ -101,7 +102,7 @@ function htmlSafer(text) {
 function update(component) {
   const parser = new DOMParser();
   const parsed = parser.parseFromString(
-    component.args.decision.content,
+    stripHtmlForPublish(component.args.decision.content),
     'text/html',
   );
   return SECTIONS.flatMap(({ label, selector, parts, callback = (a) => a }) => {
