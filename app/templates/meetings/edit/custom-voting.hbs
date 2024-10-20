@@ -1,0 +1,75 @@
+<AuModal
+  @modalOpen={{true}}
+  @size='fullscreen'
+  @title={{t 'custom-voting.modal-title'}}
+  @closeModal={{this.closeModal}}
+  class='au-c-modal--editor'
+  as |Modal|
+>
+  <Modal.Body>
+    <EditorDocumentTitle
+      @title={{this.editorDocument.title}}
+      @readOnly={{this.readOnly}}
+      @onSubmit={{perform this.onTitleUpdate}}
+    />
+    <RdfaEditorContainer
+      @profile={{this.profile}}
+      @rdfaEditorInit={{this.rdfaEditorInit}}
+      @editorOptions={{this.editorOptions}}
+      @editorDocument={{this.editorDocument}}
+      @busy={{this.saveTask.isRunning}}
+      @busyText={{t 'rdfa-editor-container.saving'}}
+      @property={{@type}}
+      @schema={{this.schema}}
+      @plugins={{this.plugins}}
+      @nodeViews={{this.nodeViews}}
+    >
+      <:sidebarCollapsible>
+        <VariablePlugin::Date::Insert
+          @controller={{this.editor}}
+          @options={{this.config.date}}
+        />
+      </:sidebarCollapsible>
+      <:sidebar>
+        <VariablePlugin::Date::Edit
+          @controller={{this.editor}}
+          @options={{this.config.date}}
+        />
+        <LmbPlugin::Insert
+          @controller={{this.editor}}
+          @config={{this.config.lmb}}
+        />
+      </:sidebar>
+    </RdfaEditorContainer>
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton
+        @skin='naked'
+        @disabled={{this.saveTextTask.isRunning}}
+        {{on 'click' this.closeModal}}
+      >
+        {{t 'meetings.edit.cancel'}}
+      </AuButton>
+    </AuButtonGroup>
+    <AuButtonGroup>
+      <AuButton
+        @skin='secondary'
+        {{on 'click' (perform this.saveTextTask)}}
+        @disabled={{this.saveTextTask.isRunning}}
+      >
+        {{t 'meetings.edit.save'}}
+      </AuButton>
+      <AuButton
+        @disabled={{this.saveTextTask.isRunning}}
+        {{on 'click' this.saveAndQuit}}
+      >
+        {{t 'meetings.edit.save-and-quit'}}
+      </AuButton>
+    </AuButtonGroup>
+  </Modal.Footer>
+</AuModal>
+<ConfirmRouteLeave
+  @enabled={{this.dirty}}
+  @message={{t 'meetings.edit.confirm-quit-without-saving'}}
+/>
