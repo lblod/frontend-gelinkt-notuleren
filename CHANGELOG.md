@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.34.1
+
+### Patch Changes
+
+- [`f185ac0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f185ac040ce382dde3530478c6ef9345c89538d4) Thanks [@abeforgit](https://github.com/abeforgit)! - fix alignment in synchronization modal
+
 ## 5.34.0
 
 ### Minor Changes
