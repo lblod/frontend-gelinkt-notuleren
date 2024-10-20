@@ -17,7 +17,6 @@ import {
 export default class MeetingForm extends Component {
   @tracked aanwezigenBijStart;
   @tracked afwezigenBijStart;
-  @tracked focusMode = false;
   behandelingen = tracked([]);
   @service store;
   @service currentSession;
@@ -287,6 +286,7 @@ export default class MeetingForm extends Component {
   }
   @action
   toggleFocusMode() {
-    this.focusMode = !this.focusMode;
+    const newFocus = !this.args.focused;
+    this.router.transitionTo({ queryParams: { focused: newFocus } });
   }
 }

@@ -56,7 +56,7 @@
     </Group>
     <Group class='au-u-flex--vertical-center'>
       <AuToggleSwitch
-        @checked={{this.focusMode}}
+        @checked={{@focused}}
         @onChange={{this.toggleFocusMode}}
         class='has-tooltip'
       >
@@ -78,7 +78,7 @@
         @icon='chevron-down'
         role='menu'
       >
-        {{#if this.focusMode}}
+        {{#if @focused}}
           {{#if this.isComplete}}
             <AuButton
               @skin='link'
@@ -104,7 +104,7 @@
           <DeleteMeeting @meeting={{@zitting}} />
         {{/unless}}
       </AuDropdown>
-      {{#if this.focusMode}}
+      {{#if @focused}}
         <AuLink
           @skin='button-secondary'
           @route='meetings.download'
@@ -144,7 +144,7 @@
         </a>
       </li>
       {{#unless this.zitting.isNew}}
-        {{#unless this.focusMode}}
+        {{#unless @focused}}
           <li class='au-c-list-divider__item'>
             <a href='#sectionTwo' class='au-c-link au-c-link--secondary'>
               {{t 'meeting-form.second-section-title'}}
@@ -156,7 +156,7 @@
             {{t 'meeting-form.third-section-title'}}
           </a>
         </li>
-        {{#unless this.focusMode}}
+        {{#unless @focused}}
           <li class='au-c-list-divider__item'>
             <a href='#sectionFour' class='au-c-link au-c-link--secondary'>
               {{t 'meeting-form.fourth-section-title'}}
@@ -187,7 +187,7 @@
             </ol>
           {{/if}}
         </li>
-        {{#unless this.focusMode}}
+        {{#unless @focused}}
           <li class='au-c-list-divider__item'>
             <a href='#sectionSix' class='au-c-link au-c-link--secondary'>
               {{t 'meeting-form.sixth-section-title'}}
@@ -226,7 +226,7 @@
           @zitting={{@zitting}}
           @readOnly={{this.readOnly}}
         />
-        {{#unless this.focusMode}}
+        {{#unless @focused}}
           <ManageIntermissions
             @zitting={{@zitting}}
             @readOnly={{this.readOnly}}
@@ -240,7 +240,7 @@
           <AuLoader @padding='small' />
           <AuHelpText>{{t 'participation-list.loading-title'}}</AuHelpText>
         {{else}}
-          {{#unless this.focusMode}}
+          {{#unless @focused}}
             {{! Participation list }}
             <Common::MeetingSection
               @title={{t 'meeting-form.second-section-title'}}
@@ -274,7 +274,7 @@
               @readOnly={{this.readOnly}}
             />
           </Common::MeetingSection>
-          {{#unless this.focusMode}}
+          {{#unless @focused}}
             {{! Start of meeting }}
             <Common::MeetingSection
               @title={{t 'meeting-form.fourth-section-title'}}
@@ -325,7 +325,7 @@
                       @readOnly={{this.readOnly}}
                       @bestuursorgaan={{this.bestuursorgaan}}
                       @meeting={{this.zitting}}
-                      @focusMode={{this.focusMode}}
+                      @focusMode={{@focused}}
                     />
                   </li>
                 {{/each}}
@@ -333,7 +333,7 @@
             {{/if}}
           </Common::MeetingSection>
         {{/if}}
-        {{#unless this.focusMode}}
+        {{#unless @focused}}
           {{! End of meeting }}
           <Common::MeetingSection
             @title={{t 'meeting-form.sixth-section-title'}}
