@@ -64,6 +64,7 @@
   flex-direction: row;
   align-items: center;
   gap: $au-unit-small;
+  justify-content: space-between;
   &::before {
     content: counter(list-number);
     counter-increment: list-number;
@@ -77,4 +78,10 @@
     border: 1px solid #cfd4db;
     border-radius: $au-unit;
   }
+}
+.meeting__sync-mocal__treatments__entry__header {
+  width: 60%
+}
+.meeting__sync-mocal__treatments__entry__pill {
+  width: 40%
 }
