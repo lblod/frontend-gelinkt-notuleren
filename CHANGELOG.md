@@ -1,5 +1,19 @@
 # frontend-gelinkt-notuleren
 
+## 5.34.0
+
+### Minor Changes
+
+- [#735](https://github.com/lblod/frontend-gelinkt-notuleren/pull/735) [`d25b883`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d25b883090b399523e1df3fea7538e8d1ba12b75) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add focus besluit mode to the meeting form
+
+### Patch Changes
+
+- [`0a5daee`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a5daeedfc07377b506bc1bf51a392aa7b5a4b86) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [24.1.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.1.1)
+
+- [`9d11674`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9d11674f11b7e871610dfaf24e52a264aa7ced46) Thanks [@abeforgit](https://github.com/abeforgit)! - fix copy on chrome and add plaintext version to clipboard
+
+- [`e745582`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e745582bb7b37c7d23adec58804cbb982eb62d1d) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [24.1.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.1.2)
+
 ## 5.33.1
 
 ### Patch Changes
