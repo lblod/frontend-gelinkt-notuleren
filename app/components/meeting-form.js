@@ -284,4 +284,9 @@ export default class MeetingForm extends Component {
       return this.zitting.gestartOpTijdstip;
     } else return this.zitting.geplandeStart;
   }
+  @action
+  toggleFocusMode() {
+    const newFocus = !this.args.focused;
+    this.router.transitionTo({ queryParams: { focused: newFocus } });
+  }
 }

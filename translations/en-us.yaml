@@ -409,6 +409,8 @@ meeting-form:
     dropdown-title: Actions
     download-meeting: Download minutes as HTML
     download-treatments: Download or copy meeting documents
+  focus-mode: Focus decisions
+  focus-mode-tooltip: Are you publishing the installation meeting in an external application? Enable this option to see only the decisions.
 
 meetings:
   type: Meeting
