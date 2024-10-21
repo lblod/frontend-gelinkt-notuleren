@@ -25,6 +25,8 @@ import {
   date,
   number,
   text_variable,
+  person_variable,
+  autofilled_variable,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import { regulatoryStatementNode } from '../../editor-plugins/regulatory-statements-plugin';
 import { link } from '@lblod/ember-rdfa-editor/plugins/link';
@@ -39,7 +41,6 @@ import { mandatee_table } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/m
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import { heading } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { image } from '@lblod/ember-rdfa-editor/plugins/image';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
@@ -54,6 +55,8 @@ import {
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { htmlToDoc } from '@lblod/ember-rdfa-editor/utils/_private/html-utils';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
+import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
+import { invisibleRdfaWithConfig } from '@lblod/ember-rdfa-editor/nodes';
 
 const CONFIG = {
   date: {
@@ -89,7 +92,7 @@ const CONFIG = {
 };
 const SCHEMA = new Schema({
   nodes: {
-    doc: docWithConfig(),
+    doc: docWithConfig({ rdfaAware: true }),
     paragraph,
     repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
     structure,
@@ -108,7 +111,7 @@ const SCHEMA = new Schema({
     codelist,
     roadsign_regulation,
     mandatee_table,
-    heading,
+    heading: headingWithConfig({ rdfaAware: true }),
     blockquote,
     snippet_placeholder: snippetPlaceholder,
     snippet: snippet(CONFIG.snippet),
@@ -118,9 +121,11 @@ const SCHEMA = new Schema({
     image,
     hard_break,
     block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
-    invisible_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
+    invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
     inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
     link: link(CONFIG.link),
+    person_variable,
+    autofilled_variable,
   },
   marks: {
     em,
