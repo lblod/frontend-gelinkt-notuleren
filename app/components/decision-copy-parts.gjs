@@ -120,12 +120,14 @@ function update(component) {
             ? parts.labelCallback(part)
             : partElement.querySelector(parts.labelSelector);
           const partContent = parts.contentSelector
-            ? partElement.querySelector(parts.contentSelector).outerHTML
+            ? partElement.querySelector(parts.contentSelector)?.outerHTML
             : partElement.outerHTML;
-          foundParts.push({
-            translatedLabel: partLabel.textContent,
-            content: partContent,
-          });
+          if (partLabel && partContent) {
+            foundParts.push({
+              translatedLabel: partLabel.textContent,
+              content: partContent,
+            });
+          }
         });
       }
       return {
