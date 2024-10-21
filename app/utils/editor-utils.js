@@ -5,6 +5,7 @@ import {
   XSD,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import { isSome } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -67,11 +68,11 @@ export function dateNode(schema, value) {
         predicate: DCT('type').full,
         object: sayDataFactory.literal('date', XSD('date').namedNode),
       },
-      {
+      value && {
         predicate: EXT('content').full,
         object: sayDataFactory.literal(value, XSD('date')),
       },
-    ],
+    ].filter(isSome),
     backlinks: [],
   });
 }

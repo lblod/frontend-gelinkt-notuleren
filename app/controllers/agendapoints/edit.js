@@ -118,7 +118,7 @@ import {
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
-import { IVGR_TAGS } from '../../config/mandatee-table-config';
+import { IVGR_TAGS, RMW_TAGS } from '../../config/mandatee-table-config';
 import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { getOwner } from '@ember/application';
@@ -257,7 +257,7 @@ export default class AgendapointsEditController extends Controller {
         endpoint: '/lpdc-service',
       },
       mandateeTable: {
-        tags: IVGR_TAGS,
+        tags: [...IVGR_TAGS, ...RMW_TAGS],
         defaultTag: IVGR_TAGS[0],
       },
       lmb: {
