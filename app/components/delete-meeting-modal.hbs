@@ -1,0 +1,24 @@
+
+  <AuModal
+    @modalTitle={{t 'meetings.delete.confirm-message'}}
+    @modalOpen={{@show}}
+    @closeModal={{@closeModal}}
+    as |Modal|
+  >
+    <Modal.Body>
+      <p>{{t 'meetings.delete.warning'}}</p>
+    </Modal.Body>
+    <Modal.Footer>
+      <AuButton
+        @disabled={{this.deleteMeeting.isRunning}}
+        @alert={{true}}
+        {{on 'click' (perform this.deleteMeeting)}}
+      >{{t 'meetings.delete.confirm-button'}}</AuButton>
+      <AuButton
+        @loading={{this.deleteMeeting.isRunning}}
+        @disabled={{this.deleteMeeting.isRunning}}
+        @skin='secondary'
+        {{on 'click' @closeModal}}
+      >{{t 'meetings.delete.back'}}</AuButton>
+    </Modal.Footer>
+  </AuModal>
