@@ -7,7 +7,7 @@ import { copyStringToClipboard } from '../../../utils/copy-string-to-clipboard';
 export default class MeetingsDownloadCopyController extends Controller {
   @action
   async copyToClipboard(text) {
-    await copyStringToClipboard({ html: text }, true);
+    await copyStringToClipboard({ html: text });
   }
 
   get previewDocument() {

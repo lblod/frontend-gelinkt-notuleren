@@ -1,15 +1,31 @@
+import { gecko } from '@lblod/ember-rdfa-editor/utils/_private/browser';
+
 /**
  * @typedef {Object} CopyArgs
  * @property {string?} html
  * @property {string?} plainText
- * @property {boolean?} renderHtmlToPlain
+ * @property {boolean?} renderHtmlToPlain - Also render the html content to plain text using
+ * `innerText`. Note, this is always treated as true on Firefox we need to work around the clipboard
+ * API stripping RDFa attributes, so we use an older API which performs this automatically
  */
 
 /**
  * @param {CopyArgs}
  * @returns {Promise<void>}
  */
-export async function copyStringToClipboard({
+export async function copyStringToClipboard(args = {}) {
+  if (gecko && args.html) {
+    return copyStringUsingDeprecatedApi(args.html);
+  } else {
+    return copyStringUsingClipboardApi(args);
+  }
+}
+
+/**
+ * @param {CopyArgs}
+ * @returns {Promise<void>}
+ */
+export async function copyStringUsingClipboardApi({
   html,
   plainText,
   renderHtmlToPlain = true,
@@ -50,4 +66,22 @@ export async function copyStringToClipboard({
     clipboardElements['text/plain'] = plainBlob;
   }
   await navigator.clipboard.write([new ClipboardItem(clipboardElements)]);
+}
+
+/**
+ * @param {string} html
+ * @returns {void}
+ */
+export function copyStringUsingDeprecatedApi(html) {
+  if (!html) {
+    return;
+  }
+  const parser = new DOMParser();
+  const inEl = parser.parseFromString(html, 'text/html').body;
+  const element = document.createElement('div');
+  element.appendChild(inEl);
+  document.body.lastElementChild.append(element);
+  document.getSelection().selectAllChildren(element);
+  document.execCommand('copy');
+  element.remove();
 }
