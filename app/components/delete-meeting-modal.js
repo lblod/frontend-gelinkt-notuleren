@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import { task, timeout } from 'ember-concurrency';
 import { service } from '@ember/service';
 export default class DeleteMeetingComponent extends Component {
