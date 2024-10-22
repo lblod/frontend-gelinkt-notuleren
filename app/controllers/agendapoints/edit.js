@@ -39,6 +39,8 @@ export default class AgendapointsEditController extends Controller {
 
   plugins = this.agendapointEditor.plugins;
 
+  citationPlugin = this.agendapointEditor.citationPlugin;
+
   get dirty() {
     // Since we clear the undo history when saving, this works. If we want to maintain undo history
     // on save, we would need to add functionality to the editor to track what is the 'saved' state
