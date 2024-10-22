@@ -109,6 +109,10 @@ function update(component) {
     const elements = Array.from(parsed.querySelectorAll(selector));
     return elements.map((element) => {
       const contentElement = callback(element);
+      // Note, it's important to generate the content here as with the use of DOM apis in the
+      // callbacks, it's easy to accidentally mutate `contentElement`. For example when appending
+      // parts of the content to a 'container' element.
+      const contentHtml = contentElement.outerHTML;
       let foundParts = [];
       if (parts) {
         const partCb = parts.callback || ((a) => a);
@@ -120,17 +124,19 @@ function update(component) {
             ? parts.labelCallback(part)
             : partElement.querySelector(parts.labelSelector);
           const partContent = parts.contentSelector
-            ? partElement.querySelector(parts.contentSelector).outerHTML
+            ? partElement.querySelector(parts.contentSelector)?.outerHTML
             : partElement.outerHTML;
-          foundParts.push({
-            translatedLabel: partLabel.textContent,
-            content: partContent,
-          });
+          if (partLabel && partContent) {
+            foundParts.push({
+              translatedLabel: partLabel.textContent,
+              content: partContent,
+            });
+          }
         });
       }
       return {
         label,
-        content: contentElement.outerHTML,
+        content: contentHtml,
         parts: foundParts,
       };
     });
