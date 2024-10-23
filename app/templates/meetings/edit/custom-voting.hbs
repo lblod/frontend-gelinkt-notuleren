@@ -29,15 +29,15 @@
           @controller={{this.editor}}
           @options={{this.config.date}}
         />
+        <LmbPlugin::Insert
+          @controller={{this.editor}}
+          @config={{this.config.lmb}}
+        />
       </:sidebarCollapsible>
       <:sidebar>
         <VariablePlugin::Date::Edit
           @controller={{this.editor}}
           @options={{this.config.date}}
-        />
-        <LmbPlugin::Insert
-          @controller={{this.editor}}
-          @config={{this.config.lmb}}
         />
       </:sidebar>
     </RdfaEditorContainer>
@@ -46,7 +46,7 @@
     <AuButtonGroup>
       <AuButton
         @skin='naked'
-        @disabled={{this.saveTextTask.isRunning}}
+        @disabled={{this.saveTask.isRunning}}
         {{on 'click' this.closeModal}}
       >
         {{t 'meetings.edit.cancel'}}
@@ -55,13 +55,13 @@
     <AuButtonGroup>
       <AuButton
         @skin='secondary'
-        {{on 'click' (perform this.saveTextTask)}}
-        @disabled={{this.saveTextTask.isRunning}}
+        {{on 'click' (perform this.saveTask)}}
+        @disabled={{this.saveTask.isRunning}}
       >
         {{t 'meetings.edit.save'}}
       </AuButton>
       <AuButton
-        @disabled={{this.saveTextTask.isRunning}}
+        @disabled={{this.saveTask.isRunning}}
         {{on 'click' this.saveAndQuit}}
       >
         {{t 'meetings.edit.save-and-quit'}}

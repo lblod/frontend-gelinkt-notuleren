@@ -96,6 +96,7 @@ contact:
 
 custom-voting:
   modal-title: Aangepaste stemming
+  document-title: Aangepaste stemming
 
 date-format:
   short-date: Korte datum

@@ -24,6 +24,7 @@ import { PLANNED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 export default class BehandelingVanAgendapuntComponent extends Component {
   @service store;
   @service router;
+  @service intl;
   @tracked document;
   @tracked editor;
   @tracked published = false;
@@ -235,7 +236,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     container.publisher = this.currentSession.group;
     const editorDocument =
       await this.documentService.createEditorDocument.perform(
-        'Custom voting',
+        this.intl.t('custom-voting.document-title'),
         '',
         container,
       );

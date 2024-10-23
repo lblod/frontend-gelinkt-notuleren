@@ -96,6 +96,7 @@ contact:
 
 custom-voting:
   modal-title: Custom voting
+  document-title: Custom voting
 
 date-format:
   short-date: Short date
