@@ -17,6 +17,7 @@ import {
 export default class MeetingForm extends Component {
   @tracked aanwezigenBijStart;
   @tracked afwezigenBijStart;
+  @tracked showDeleteModal;
   behandelingen = tracked([]);
   @service store;
   @service currentSession;
@@ -32,6 +33,45 @@ export default class MeetingForm extends Component {
       'fields[versioned-notulen]': 'id',
     });
     return !!publishedNotulen.firstObject;
+  });
+
+  canBeDeleted = trackedFunction(this, async () => {
+    // This is needed here, see https://github.com/NullVoxPopuli/ember-resources/issues/340
+    await Promise.resolve();
+    const publicationFilter = {
+      filter: {
+        state: 'gepubliceerd',
+        zitting: {
+          id: this.args.meeting.id,
+        },
+      },
+    };
+    const versionedNotulen = await this.store.query(
+      'versioned-notulen',
+      publicationFilter,
+    );
+    const versionedBesluitenLijsten = await this.store.query(
+      'versioned-besluiten-lijst',
+      publicationFilter,
+    );
+    const versionedBehandelingen = await this.store.query(
+      'versioned-behandeling',
+      publicationFilter,
+    );
+    const agendas = await this.store.query('agenda', {
+      filter: {
+        'agenda-status': 'gepubliceerd',
+        zitting: {
+          id: this.args.meeting.id,
+        },
+      },
+    });
+    const publishedResourcesCount =
+      agendas.length +
+      versionedBehandelingen.length +
+      versionedBesluitenLijsten.length +
+      versionedNotulen.length;
+    return publishedResourcesCount === 0;
   });
 
   isSigned = trackedFunction(this, async () => {
@@ -288,5 +328,9 @@ export default class MeetingForm extends Component {
   toggleFocusMode() {
     const newFocus = !this.args.focused;
     this.router.transitionTo({ queryParams: { focused: newFocus } });
+  }
+  @action
+  toggleShowDeleteModal() {
+    this.showDeleteModal = !this.showDeleteModal;
   }
 }

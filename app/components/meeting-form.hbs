@@ -100,9 +100,17 @@
             {{t 'meeting-form.actions.download-treatments'}}
           </AuLink>
         {{/if}}
-        {{#unless this.readOnly}}
-          <DeleteMeeting @meeting={{@zitting}} />
-        {{/unless}}
+        {{#if (and this.canBeDeleted (not this.readOnly))}}
+          <AuButton
+            {{on 'click' this.toggleShowDeleteModal}}
+            @skin='link'
+            @alert='true'
+            role='menuitem'
+          >
+            <AuIcon @icon='bin' @alignment='left' />
+            {{t 'meetings.delete.delete'}}
+          </AuButton>
+        {{/if}}
       </AuDropdown>
       {{#if @focused}}
         <AuLink
@@ -372,3 +380,8 @@
     </div>
   </div>
 </div>
+<DeleteMeetingModal
+  @show={{this.showDeleteModal}}
+  @closeModal={{this.toggleShowDeleteModal}}
+  @meeting={{@zitting}}
+/>
