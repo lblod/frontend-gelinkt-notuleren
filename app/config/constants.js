@@ -63,10 +63,6 @@ export const BESTUURSPERIODES = {
     'http://data.lblod.info/id/concept/Bestuursperiode/96efb929-5d83-48fa-bfbb-b98dfb1180c7',
 };
 
-export const LOKALE_VERKIEZINGEN = {
-  2024: 'http://data.lblod.info/id/rechtstreekse-verkiezingen/612a57de-7fc2-40af-a7dc-17d544e5de20',
-};
-
 export const MANDATARIS_STATUS_CODES = {
   EFFECTIEF:
     'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/21063a5b-912c-4241-841c-cc7fb3c73e75',
