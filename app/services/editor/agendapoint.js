@@ -241,7 +241,7 @@ export default class AgendapointEditorService extends Service {
         defaultTag: IVGR_TAGS[0],
       },
       lmb: {
-        endpoint: '/vendor-proxy/query',
+        endpoint: '/raw-sparql',
       },
       autofilledVariable: {
         autofilledValues: {

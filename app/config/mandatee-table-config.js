@@ -71,7 +71,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -131,7 +131,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -224,7 +224,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -297,7 +297,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         const kandidatenlijstQueryResult = await executeQuery({
           query: splitKandidatenlijstQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
         const bindings = kandidatenlijstQueryResult.results.bindings;
 
@@ -396,7 +396,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -466,7 +466,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -530,7 +530,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -616,7 +616,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -734,7 +734,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -806,7 +806,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -872,7 +872,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -924,7 +924,7 @@ async function fetchFractieLeden(fractieUri) {
   `;
   const result = await executeQuery({
     query: sparqlQuery,
-    endpoint: '/vendor-proxy/query',
+    endpoint: '/raw-sparql',
   });
   return result.results.bindings.map(bindingToObject) ?? [];
 }
