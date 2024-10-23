@@ -8,11 +8,9 @@ import { service } from '@ember/service';
 import { trackedFunction } from 'reactiveweb/function';
 import { executeQuery } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
-import { headlessProsemirror } from '../../utils/meeting/headless-prosemirror';
 import InaugurationMeetingSynchronizationToast from './synchronization-toast';
 import { syncDocument } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/mandatee-table-plugin';
 import SaySerializer from '@lblod/ember-rdfa-editor/core/say-serializer';
-import { getOwner } from '@ember/application';
 import { mandateeTableConfigIVGR } from '../../config/mandatee-table-config';
 
 export default class InaugurationMeetingSynchronizationComponent extends Component {
@@ -20,6 +18,8 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   @service store;
   @service documentService;
   @service intl;
+  @service('editor/agendapoint') agendapointEditor;
+
   @tracked modalOpen = false;
 
   get meeting() {
@@ -193,7 +193,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     const container = await treatment.documentContainer;
     const currentVersion = await container.currentVersion;
     const html = currentVersion.content ?? '';
-    const initialState = headlessProsemirror(html, getOwner(this));
+    const initialState = this.agendapointEditor.getState(html);
     const syncedState = await syncDocument(
       initialState,
       mandateeTableConfigIVGR(this.meeting),
