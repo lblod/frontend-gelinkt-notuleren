@@ -123,6 +123,7 @@
             @icon='add'
             @skin='secondary'
             @iconAlignment='left'
+            @disabled={{not this.hasParticipants}}
             @loading={{this.addStandardVoting.isRunning}}
           >
             {{t 'generic.add'}}
@@ -132,6 +133,7 @@
             @icon='add'
             @skin='secondary'
             @iconAlignment='left'
+            @disabled={{not this.hasParticipants}}
             @loading={{this.addCustomVoting.isRunning}}
           >
             {{t 'behandeling-van-agendapunten.add-custom-voting'}}

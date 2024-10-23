@@ -7,11 +7,15 @@
   as |Modal|
 >
   <Modal.Body>
-    <EditorDocumentTitle
-      @title={{this.editorDocument.title}}
-      @readOnly={{this.readOnly}}
-      @onSubmit={{perform this.onTitleUpdate}}
-    />
+     <AuToolbar @size='small' class='au-u-padding-top-none' as |Group|>
+       <Group>
+        <EditorDocumentTitle
+          @title={{this.editorDocument.title}}
+          @readOnly={{this.readOnly}}
+          @onSubmit={{perform this.onTitleUpdate}}
+        />
+      </Group>
+    </AuToolbar>
     <RdfaEditorContainer
       @profile={{this.profile}}
       @rdfaEditorInit={{this.rdfaEditorInit}}
