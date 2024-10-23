@@ -45,7 +45,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     `;
     const response = await executeQuery({
       query,
-      endpoint: '/vendor-proxy/query',
+      endpoint: '/raw-sparql',
     });
     const bindings = response.results.bindings;
     if (bindings.length) {
