@@ -21,19 +21,26 @@ export default class NotFoundWarningComponent extends Component {
     <VoPage @showBanner={{false}}>
       <section class='au-o-region-large'>
         <div class='au-o-layout'>
-          <AuAlert @title={{t this.title type=@type}} @icon={{this.icon}} @skin={{this.skin}}>
+          <AuAlert
+            @title={{t this.title type=@type}}
+            @icon={{this.icon}}
+            @skin={{this.skin}}
+          >
             {{#if (has-block)}}
               <p>{{yield}}</p>
             {{else}}
               <p>{{t 'utils.not-found.explanation' type=@theType}}</p>
             {{/if}}
             <p>{{t 'utils.not-found.body.contact-message'}}
-              <AuLink @route='contact'>{{t 'utils.not-found.body.contact-link'}}</AuLink>
+              <AuLink @route='contact'>{{t
+                  'utils.not-found.body.contact-link'
+                }}</AuLink>
             </p>
             <p>{{t 'utils.not-found.body.email-message'}}
-              <a href='mailto:gelinktnotuleren@vlaanderen.be' class='au-c-link'>{{t
-                  'utils.not-found.body.email'
-                }}</a></p>
+              <a
+                href='mailto:gelinktnotuleren@vlaanderen.be'
+                class='au-c-link'
+              >{{t 'utils.not-found.body.email'}}</a></p>
           </AuAlert>
         </div>
       </section>

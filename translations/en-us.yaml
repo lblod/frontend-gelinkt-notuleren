@@ -414,6 +414,8 @@ meeting-form:
     dropdown-title: Actions
     download-meeting: Download minutes as HTML
     download-treatments: Download or copy meeting documents
+  focus-mode: Focus decisions
+  focus-mode-tooltip: Are you publishing the installation meeting in an external application? Enable this option to see only the decisions.
 
 meetings:
   type: Meeting
@@ -457,7 +459,7 @@ meetings:
       details: Details
   delete:
     delete: Delete
-    confirm-message: Are you sure you want to delete this meeting
+    confirm-message: Are you sure you want to delete this meeting?
     warning: This action cannot be undone
     confirm-button: Yes, Delete this meeting
     back: Back

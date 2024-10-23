@@ -66,7 +66,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
           ?bestuursorgaan org:hasPost ?mandaat.
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
         }
       `;
         return executeQuery({
@@ -116,7 +116,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
@@ -206,7 +206,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
@@ -380,7 +380,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         # TODO: http or https?
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lid) as ?fractie_aantal_zetels) WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
 
           ?fractie org:memberOf ?bestuursorgaan.
           ?fractie regorg:legalName ?fractie_naam.
@@ -461,7 +461,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
           ?bestuursorgaan org:hasPost ?mandaat.
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
         }
       `;
         return executeQuery({
@@ -514,7 +514,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
@@ -592,7 +592,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde ?mandataris_opvolger WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
@@ -718,7 +718,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         SELECT DISTINCT ?mandataris ?mandataris_naam  WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
@@ -786,7 +786,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?fractie ?fractie_naam WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
@@ -855,7 +855,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?fractie ?fractie_naam WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2025']}>.
+          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
 
           ?mandaat org:role ?role.

@@ -57,9 +57,9 @@ export const BESTUURSFUNCTIE_CODES = {
 export const BESTUURSPERIODES = {
   '2012-2019':
     'http://data.lblod.info/id/concept/Bestuursperiode/845dbc7f-139e-4632-b200-f90e180f1dba',
-  '2019-2025':
+  '2019-2024':
     'http://data.lblod.info/id/concept/Bestuursperiode/a2b977a3-ce68-4e42-80a6-4397f66fc5ca',
-  '2025-heden':
+  '2024-heden':
     'http://data.lblod.info/id/concept/Bestuursperiode/96efb929-5d83-48fa-bfbb-b98dfb1180c7',
 };
 

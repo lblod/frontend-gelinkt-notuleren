@@ -1,5 +1,59 @@
 # frontend-gelinkt-notuleren
 
+## 5.34.1
+
+### Patch Changes
+
+- [`f185ac0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f185ac040ce382dde3530478c6ef9345c89538d4) Thanks [@abeforgit](https://github.com/abeforgit)! - fix alignment in synchronization modal
+
+## 5.34.0
+
+### Minor Changes
+
+- [#735](https://github.com/lblod/frontend-gelinkt-notuleren/pull/735) [`d25b883`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d25b883090b399523e1df3fea7538e8d1ba12b75) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add focus besluit mode to the meeting form
+
+### Patch Changes
+
+- [`0a5daee`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a5daeedfc07377b506bc1bf51a392aa7b5a4b86) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [24.1.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.1.1)
+
+- [`9d11674`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9d11674f11b7e871610dfaf24e52a264aa7ced46) Thanks [@abeforgit](https://github.com/abeforgit)! - fix copy on chrome and add plaintext version to clipboard
+
+- [`e745582`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e745582bb7b37c7d23adec58804cbb982eb62d1d) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [24.1.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.1.2)
+
+## 5.33.1
+
+### Patch Changes
+
+- [`f2a6314`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f2a63141a5128065afa1409e869952cc3135886e) Thanks [@abeforgit](https://github.com/abeforgit)! - update meeting configs
+
+## 5.33.0
+
+### Minor Changes
+
+- [#731](https://github.com/lblod/frontend-gelinkt-notuleren/pull/731) [`0277635`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0277635f09906a59d4979bf124a56cebc483c661) Thanks [@piemonkey](https://github.com/piemonkey)! - Add functionality to copy parts of a decision from the meeting copy-parts page
+
+- [#730](https://github.com/lblod/frontend-gelinkt-notuleren/pull/730) [`ca64f65`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ca64f658e28e617d58766d3e63660850cf017b3c) Thanks [@elpoelma](https://github.com/elpoelma)! - **LMB IV GR tables**
+  Add a `IVGR7-LMB-3-verhindering-schepenen` config which lists the 'schepenen' who have a status of 'verhinderd'
+
+- [#729](https://github.com/lblod/frontend-gelinkt-notuleren/pull/729) [`b32953a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b32953ad8e53314c5defcd68dbc30c8108c27932) Thanks [@elpoelma](https://github.com/elpoelma)! - IVGR4-LMB-1 rangorde gemeenteraadsleden: add support for the 'rangorde' column.
+
+- [`0289964`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0289964a500f90ea96fe240e5e171a793ebac3e9) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [24.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.1.0)
+
+- [#734](https://github.com/lblod/frontend-gelinkt-notuleren/pull/734) [`032704b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/032704b3c45cd564098f61c3df465d2b25432756) Thanks [@abeforgit](https://github.com/abeforgit)! - switch to new period for lmb queries
+
+- [#733](https://github.com/lblod/frontend-gelinkt-notuleren/pull/733) [`9a351fc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9a351fc9c1b9fea71955ffe8248e1f27be1e6fa9) Thanks [@abeforgit](https://github.com/abeforgit)! - Add system for meeting variants
+
+### Patch Changes
+
+- [#730](https://github.com/lblod/frontend-gelinkt-notuleren/pull/730) [`4459ac4`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4459ac423eb7e80cb9b3cc8d9da06a18d0098839) Thanks [@elpoelma](https://github.com/elpoelma)! - **LMB IV GR tables**
+  Introduce correction in `IVGR7-LMB-2-ontvankelijkheid-schepenen` on start and end of mandate
+
+- [#730](https://github.com/lblod/frontend-gelinkt-notuleren/pull/730) [`e3da7c9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e3da7c9ea801c4d8324c122c1989957e5595cb78) Thanks [@elpoelma](https://github.com/elpoelma)! - **LMB IV GR tables**
+  Remove erroneous 'mandaat:bekrachtigdAanstellingVan' relationship from `IVGR8-LMB-1-verkozen-schepenen` table
+
+- [#730](https://github.com/lblod/frontend-gelinkt-notuleren/pull/730) [`9e68b55`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9e68b55203771655233713056d04dcb42ce82eb1) Thanks [@elpoelma](https://github.com/elpoelma)! - **LMB IV GR tables**
+  Remove erroneous 'mandaat:bekrachtigdAanstellingVan' relationship from `IVGR7-LMB-1-kandidaat-schepenen` table
+
 ## 5.32.0
 
 ### Minor Changes

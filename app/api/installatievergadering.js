@@ -169,32 +169,30 @@ const IVGR_VOEREN_MAP = [
 const IVGR_POLITIERAAD_MAP = [
   ...IVGR_MAP,
   {
-    templateTitle: 'IVGR9 Samenstelling van de politieraad DUMMY',
-    apTitle: 'Samenstelling van de politieraad',
+    templateTitle: 'IVGR9 Verkiezing van de politieraadsleden',
+    apTitle: 'Verkiezing van de politieraadsleden',
   },
 ];
 
 /** @type {TemplateSpec[]} */
 const IVRMW_MAP = [
   {
-    templateTitle: 'IVRW1 DUMMY IV RMW',
-    apTitle: 'Samenstelling van Raad maatschappelijk welzijn',
+    templateTitle:
+      'IVRMW1 Verkiezing van de voorzitter van het bijzonder comité voor de sociale dienst',
+    apTitle:
+      'Verkiezing van de voorzitter van het bijzonder comité voor de sociale dienst',
+  },
+  {
+    templateTitle:
+      'IVRMW2 Verkiezing van de leden van het bijzonder comité voor de sociale dienst',
+    apTitle:
+      'Verkiezing van de leden van het bijzonder comité voor de sociale dienst',
   },
 ];
 /** @type {TemplateSpec[]} */
-const IVRMW_FACILITEITEN_MAP = [
-  {
-    templateTitle: 'IVRWFac1 DUMMY IV RMW',
-    apTitle: 'Samenstelling van Raad maatschappelijk welzijn faciliteiten',
-  },
-];
+const IVRMW_FACILITEITEN_MAP = IVRMW_MAP;
 /** @type {TemplateSpec[]} */
-const IVRMW_FUSIE_MAP = [
-  {
-    templateTitle: 'IVRWFusie1 DUMMY IV RMW',
-    apTitle: 'Samenstelling van Raad maatschappelijk welzijn fusie',
-  },
-];
+const IVRMW_FUSIE_MAP = IVRMW_MAP;
 /** @type {TemplateSpec[]} */
 const IVRMW_VOEREN_MAP = [
   {

@@ -7,6 +7,8 @@ import perform from 'ember-concurrency/helpers/perform';
 import t from 'ember-intl/helpers/t';
 import { trackedReset } from 'tracked-toolbox';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
+import { copyStringToClipboard } from '../utils/copy-string-to-clipboard';
+import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 
 class DownloadButton extends Component {
   @service intl;
@@ -22,9 +24,7 @@ class DownloadButton extends Component {
   }
 
   copyToClipboard = task(async () => {
-    await navigator.clipboard.write([
-      new ClipboardItem({ 'text/html': this.args.section.content.trim() }),
-    ]);
+    await copyStringToClipboard({ html: this.args.section.content.trim() });
   });
 
   <template>
@@ -102,13 +102,17 @@ function htmlSafer(text) {
 function update(component) {
   const parser = new DOMParser();
   const parsed = parser.parseFromString(
-    component.args.decision.content,
+    stripHtmlForPublish(component.args.decision.content),
     'text/html',
   );
   return SECTIONS.flatMap(({ label, selector, parts, callback = (a) => a }) => {
     const elements = Array.from(parsed.querySelectorAll(selector));
     return elements.map((element) => {
       const contentElement = callback(element);
+      // Note, it's important to generate the content here as with the use of DOM apis in the
+      // callbacks, it's easy to accidentally mutate `contentElement`. For example when appending
+      // parts of the content to a 'container' element.
+      const contentHtml = contentElement.outerHTML;
       let foundParts = [];
       if (parts) {
         const partCb = parts.callback || ((a) => a);
@@ -120,17 +124,19 @@ function update(component) {
             ? parts.labelCallback(part)
             : partElement.querySelector(parts.labelSelector);
           const partContent = parts.contentSelector
-            ? partElement.querySelector(parts.contentSelector).outerHTML
+            ? partElement.querySelector(parts.contentSelector)?.outerHTML
             : partElement.outerHTML;
-          foundParts.push({
-            translatedLabel: partLabel.textContent,
-            content: partContent,
-          });
+          if (partLabel && partContent) {
+            foundParts.push({
+              translatedLabel: partLabel.textContent,
+              content: partContent,
+            });
+          }
         });
       }
       return {
         label,
-        content: contentElement.outerHTML,
+        content: contentHtml,
         parts: foundParts,
       };
     });
@@ -164,7 +170,10 @@ export default class DecisionCopyParts extends Component {
                     </div>
                   </div>
                   <div class='gn-meeting-copy--section-button'>
-                    <DownloadButton @section={{part}} @translatedLabel={{part.translatedLabel}} />
+                    <DownloadButton
+                      @section={{part}}
+                      @translatedLabel={{part.translatedLabel}}
+                    />
                   </div>
                 </div>
               </div>

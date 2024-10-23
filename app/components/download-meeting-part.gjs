@@ -111,7 +111,10 @@ export default class DownloadMeetingComponent extends Component {
       @icon={{this.icon}}
       @loading={{this.downloadMeeting.isRunning}}
       @loadingMessage={{this.loadingText}}
-      class={{if this.downloadMeeting.last.isSuccessful 'download-meeting-part-downloaded'}}
+      class={{if
+        this.downloadMeeting.last.isSuccessful
+        'download-meeting-part-downloaded'
+      }}
       {{on 'click' (perform this.downloadMeeting)}}
     >
       {{#if this.downloadMeeting.last.isSuccessful}}

@@ -59,10 +59,18 @@
       <ol class='meeting__sync-modal__treatments'>
         {{#each this.treatments.value as |treatment|}}
           <li class='meeting__sync-modal__treatments__entry'>
-            <AuHeading @level='3' @skin='4'>
+            <AuHeading
+              @level='3'
+              @skin='4'
+              class='meeting__sync-mocal__treatments__entry__header'
+            >
               {{limit-content treatment.onderwerp.titel 80}}
             </AuHeading>
-            <AuPill @icon='alert-triangle' @skin='warning'>
+            <AuPill
+              @icon='alert-triangle'
+              @skin='warning'
+              class='meeting__sync-mocal__treatments__entry__pill'
+            >
               {{t 'behandeling-van-agendapunten.sync-warning'}}
             </AuPill>
           </li>
