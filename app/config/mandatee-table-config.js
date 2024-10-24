@@ -223,6 +223,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
@@ -309,6 +311,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+        PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
 
         SELECT DISTINCT ?kandidatenlijst ?kandidatenlijst_naam ?fractie1 ?fractie2 ?fractie1_naam ?fractie2_naam WHERE {
           ?kandidatenlijst a <http://data.vlaanderen.be/ns/mandaat#Kandidatenlijst>.
