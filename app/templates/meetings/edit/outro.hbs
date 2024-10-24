@@ -10,8 +10,7 @@
     <ZittingTextDocumentContainer
       @onEditorInit={{this.initEditor}}
       @saving={{this.saveTextTask.isRunning}}
-      @type='ext:outro'
-      @zitting={{@model}}
+      @text={{@model.outro}}
     />
   </Modal.Body>
   <Modal.Footer>
@@ -21,7 +20,7 @@
         @disabled={{this.saveTextTask.isRunning}}
         {{on 'click' this.closeModal}}
       >
-        {{t 'meetings.edit.outro.cancel'}}
+        {{t 'meetings.edit.cancel'}}
       </AuButton>
     </AuButtonGroup>
     <AuButtonGroup>
@@ -30,18 +29,18 @@
         {{on 'click' (perform this.saveTextTask)}}
         @disabled={{this.saveTextTask.isRunning}}
       >
-        {{t 'meetings.edit.outro.save'}}
+        {{t 'meetings.edit.save'}}
       </AuButton>
       <AuButton
         @disabled={{this.saveTextTask.isRunning}}
         {{on 'click' this.saveAndQuit}}
       >
-        {{t 'meetings.edit.outro.save-and-quit'}}
+        {{t 'meetings.edit.save-and-quit'}}
       </AuButton>
     </AuButtonGroup>
   </Modal.Footer>
 </AuModal>
 <ConfirmRouteLeave
   @enabled={{this.dirty}}
-  @message={{t 'meetings.edit.outro.confirm-quit-without-saving'}}
+  @message={{t 'meetings.edit.confirm-quit-without-saving'}}
 />

@@ -82,3 +82,7 @@ inflector.irregular(
   'installatievergadering-synchronization-status',
   'installatievergadering-synchronization-statuses',
 );
+
+inflector.irregular('standard-voting', 'standard-votings');
+
+inflector.irregular('custom-voting', 'custom-votings');

@@ -9,6 +9,8 @@ export default class BehandelingVanAgendapunt extends Model {
   @attr openbaar;
   @attr afgeleidUit;
   @attr('string') gevolg;
+  @attr('boolean') isManualVoting;
+  @attr('string') manualVoting;
 
   @belongsTo('behandeling-van-agendapunt', { inverse: null, async: true })
   vorigeBehandelingVanAgendapunt;
@@ -40,6 +42,7 @@ export default class BehandelingVanAgendapunt extends Model {
     inverse: 'behandelingVanAgendapunt',
     defaultPageSize: 1000,
     async: true,
+    polymorphic: true,
   })
   stemmingen;
 

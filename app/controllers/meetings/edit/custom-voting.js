@@ -1,5 +1,9 @@
-import Component from '@glimmer/component';
+import Controller from '@ember/controller';
+import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 import { Schema } from '@lblod/ember-rdfa-editor';
 
 import {
@@ -43,20 +47,68 @@ import {
   date,
   dateView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
-
-import { service } from '@ember/service';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
-import { tracked } from '@glimmer/tracking';
 import {
   inlineRdfaWithConfig,
   inlineRdfaWithConfigView,
 } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 
-export default class ZittingTextDocumentContainerComponent extends Component {
-  @service intl;
-  profile = 'none';
+export default class MeetingsEditManualVotingController extends Controller {
+  @service router;
   @tracked editor;
-  type = this.args.type;
+  @service intl;
+  @service documentService;
+  profile = 'none';
+  @tracked _editorDocument;
+
+  get editorDocument() {
+    return (
+      this._editorDocument ||
+      this.documentContainer.get('currentVersion').content
+    );
+  }
+
+  get documentContainer() {
+    return this.model.voting.votingDocument;
+  }
+
+  get dirty() {
+    // Since we clear the undo history when saving, this works. If we want to maintain undo history
+    // on save, we would need to add functionality to the editor to track what is the 'saved' state
+    return this.editor?.checkCommand(undo, {
+      view: this.editor?.mainEditorView,
+    });
+  }
+
+  clearEditor() {
+    this.editor = null;
+    this._editorDocument = undefined;
+  }
+
+  @action
+  closeModal() {
+    this.router.transitionTo('meetings.edit');
+  }
+
+  @action
+  async saveAndQuit() {
+    await this.saveTask.perform();
+    this.clearEditor();
+    this.closeModal();
+  }
+
+  saveTask = task(async () => {
+    const html = this.editor.htmlContent;
+
+    const editorDocument =
+      await this.documentService.createEditorDocument.perform(
+        this.editorDocument.title,
+        html,
+        await this.documentContainer,
+        this.editorDocument,
+      );
+    this._editorDocument = editorDocument;
+  });
 
   editorOptions = {
     showToggleRdfaAnnotations: false,
@@ -104,14 +156,27 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   });
 
   get text() {
-    return this.args.text;
+    return this.editorDocument.content;
   }
+
+  onTitleUpdate = task(async (title) => {
+    const html = this.editorDocument.content;
+
+    const editorDocument =
+      await this.documentService.createEditorDocument.perform(
+        title,
+        html,
+        await this.documentContainer,
+        this.editorDocument,
+      );
+
+    this._editorDocument = editorDocument;
+  });
 
   @action
   rdfaEditorInit(editor) {
     editor.initialize(this.text, { doNotClean: true });
     this.editor = editor;
-    this.args.onEditorInit(editor);
   }
 
   get config() {
@@ -140,6 +205,9 @@ export default class ZittingTextDocumentContainerComponent extends Component {
           },
         ],
         allowCustomFormat: true,
+      },
+      lmb: {
+        endpoint: '/vendor-proxy/query',
       },
     };
   }
