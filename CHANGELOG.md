@@ -1,5 +1,38 @@
 # frontend-gelinkt-notuleren
 
+## 5.35.0
+
+### Minor Changes
+
+- [#736](https://github.com/lblod/frontend-gelinkt-notuleren/pull/736) [`d6e5731`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d6e573115cec0a5f5fd1b0e577d12af19ad8db4f) Thanks [@elpoelma](https://github.com/elpoelma)! - **LMB IV RMW tables**
+  Add configs for the necessary LMB tables for the RMW IV
+
+- [#738](https://github.com/lblod/frontend-gelinkt-notuleren/pull/738) [`0170e3e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0170e3e1b4d8da72ed0c2c5fbcf563fe45f8f5c9) Thanks [@elpoelma](https://github.com/elpoelma)! - Partly refactor `AgendapointEditController` into seperate ember service:
+  - Move `schema`, `plugins`, `nodeviews` and config to the `AgendapointEditorService`
+  - Allows for easily sharing these settings between the headful and headless editor instances
+  - Service includes a method to easily compute a state based on a passed html string
+
+### Patch Changes
+
+- [#741](https://github.com/lblod/frontend-gelinkt-notuleren/pull/741) [`40942e1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/40942e136e95e6b4ec2d4c720f5252809d2a2e85) Thanks [@elpoelma](https://github.com/elpoelma)! - Implement a more extendable way to determine the correct bestuursorgaan-classificatie for a new inauguration meeting
+
+- [#737](https://github.com/lblod/frontend-gelinkt-notuleren/pull/737) [`86abc61`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/86abc61f0cd32fd9ba8e2865a522ef3a7be66929) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix handling of motivation section when copying parts of decisions to clipboard
+
+- [`767c1be`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/767c1be58bf7d02288ff7a15abf7d08a4435bc60) Thanks [@abeforgit](https://github.com/abeforgit)! - Bump plugins to [v24.2.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.2.1)
+
+- [#739](https://github.com/lblod/frontend-gelinkt-notuleren/pull/739) [`cda985e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/cda985e878cf3f8374e86741bddc301a0a9d1a73) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fixed bug where deleting the meeting was not possible
+
+- [#740](https://github.com/lblod/frontend-gelinkt-notuleren/pull/740) [`930f963`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/930f963fed02d0693bf3fd5d605f8a831fe73830) Thanks [@elpoelma](https://github.com/elpoelma)! - **IVGR LMB tables: adjust fractie-splitsing query**
+
+  - Adjustment in how verkiezing and kieslijsten are determined
+  - Fix variable name
+
+- [`198f916`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/198f916cd7ce03af8860c1e58bb2bfa510f25e73) Thanks [@abeforgit](https://github.com/abeforgit)! - Use safe getters for auth info in editor config service
+
+- [#738](https://github.com/lblod/frontend-gelinkt-notuleren/pull/738) [`f7a212a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f7a212aa827a3659b2cf450275c03ed73cac2b42) Thanks [@elpoelma](https://github.com/elpoelma)! - Adjustments to headless prosemirror schema used for processing agendapoints:
+  - Use `WithConfig` versions of node-specs where possible
+  - Include `person_variable` and `autofilled_variable`
+
 ## 5.34.1
 
 ### Patch Changes
