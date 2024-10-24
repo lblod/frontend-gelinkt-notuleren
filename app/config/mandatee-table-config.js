@@ -915,7 +915,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
             const { mandataris_naam, fractie_naam } = bindingToObject(binding);
             return row(schema, [
               schema.text(mandataris_naam),
-              schema.text(fractie_naam ?? ''),
+              fractie_naam ? schema.text(fractie_naam) : undefined,
             ]);
           });
           const content = schema.nodes.table.create(null, [
