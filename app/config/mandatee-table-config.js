@@ -20,7 +20,6 @@ import {
 import {
   BESTUURSFUNCTIE_CODES,
   BESTUURSPERIODES,
-  LOKALE_VERKIEZINGEN,
   MANDATARIS_STATUS_CODES,
 } from './constants';
 import { promiseProperties } from '../utils/promises';
@@ -276,6 +275,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
      */
     'IVGR5-LMB-1-splitsing-fracties': {
       query: async () => {
+        const bestuursorgaan = await meeting.bestuursorgaan;
         const splitKandidatenlijstQuery = /* sparql */ `
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -286,7 +286,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
 
         SELECT DISTINCT ?kandidatenlijst ?kandidatenlijst_naam ?fractie1 ?fractie2 ?fractie1_naam ?fractie2_naam WHERE {
           ?kandidatenlijst a <http://data.vlaanderen.be/ns/mandaat#Kandidatenlijst>.
-          ?kandidatenlijst mandaat:behoortTot <${LOKALE_VERKIEZINGEN[2024]}>.
+          ?kandidatenlijst mandaat:behoortTot ?verkiezing.
+          ?verkiezing mandaat:steltSamen <${bestuursorgaan.uri}>.
+
           ?kandidatenlijst skos:prefLabel ?kandidatenlijst_naam.
           ?fractie1 ext:geproduceerdDoor ?kandidatenlijst;
                     regorg:legalName ?fractie1_naam.
@@ -331,6 +333,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       },
       updateContent: (pos, kandidatenlijsten) => {
         return (state) => {
+          console.log('Kandidatenlijsten: ', kandidatenlijsten);
           const content = [];
           const { schema, doc } = state;
           const $pos = doc.resolve(pos);
@@ -909,11 +912,11 @@ async function fetchFractieLeden(fractieUri) {
     PREFIX person: <http://www.w3.org/ns/person#>
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-    SELECT DISTINCT ?persoon ?persoon_naam WHERE {
+    SELECT DISTINCT ?persoon ?naam WHERE {
       ?persoon a person:Person .
       ?persoon persoon:gebruikteVoornaam ?voornaam.
       ?persoon foaf:familyName ?achternaam.
-      BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+      BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?naam)
 
       ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
       ?mandataris org:hasMembership/org:organisation <${fractieUri}>.
@@ -932,6 +935,7 @@ async function fetchFractieLeden(fractieUri) {
 function createFractieLedenTable(fractie, schema) {
   const { naam, leden } = fractie;
   const tableHeader = row(schema, [schema.text(`Behoren tot ${naam}`)], true);
+
   const rows = leden.map((lid) => {
     return row(schema, [schema.text(lid.naam)]);
   });
