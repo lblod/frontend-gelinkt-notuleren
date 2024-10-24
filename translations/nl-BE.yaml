@@ -768,6 +768,7 @@ voting-modal:
   aantal-onthouders-label: 'Onthouders:'
   gevolg-not-found: Geen gevolg
   toggle-edit-button: Bewerk
+  show-button: Bekijk
   delete-button: Verwijder
   no-data-message: Geen stemmingen gevonden
 

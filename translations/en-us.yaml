@@ -763,6 +763,7 @@ voting-modal:
   aantal-onthouders-label: 'Abstentions:'
   gevolg-not-found: No consequences
   toggle-edit-button: Edit
+  show-button: Show
   delete-button: Delete
   no-data-message: No votes found
 

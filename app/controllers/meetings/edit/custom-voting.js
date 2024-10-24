@@ -69,7 +69,7 @@ export default class MeetingsEditManualVotingController extends Controller {
   }
 
   get documentContainer() {
-    return this.model.votingDocument;
+    return this.model.voting.votingDocument;
   }
 
   get dirty() {

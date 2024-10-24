@@ -24,10 +24,8 @@
       <th style='max-width: 30rem;'>
         {{t 'voting-modal.gevolg-label'}}
       </th>
-      {{#unless @readOnly}}
-        <th class='au-u-table-right'>
-        </th>
-      {{/unless}}
+      <th class='au-u-table-right'>
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -108,32 +106,44 @@
             <td colspan='4'>
               {{stemming.votingDocument.currentVersion.title}}
             </td>
-            {{#unless @readOnly}}
+
               <td class='au-u-table-right'>
 
                 <AuButtonGroup>
-                  <AuLink
-                    @route='meetings.edit.custom-voting'
-                    @model={{stemming}}
-                    @skin='button-secondary'
-                    @icon='pencil'
-                    @iconAlignment='left'
-                  >
-                    {{t 'voting-modal.toggle-edit-button'}}
-                  </AuLink>
-                  <AuButton
-                    {{on 'click' (fn (perform this.removeStemming) stemming)}}
-                    @skin='secondary'
-                    @alert={{true}}
-                    @icon='bin'
-                    @iconAlignment='left'
-                    @loading={{this.removeStemming.isRunning}}
-                  >
-                    {{t 'voting-modal.delete-button'}}
-                  </AuButton>
+                  {{#if @readOnly}}
+                    <AuLink
+                      @route='meetings.edit.custom-voting'
+                      @model={{stemming.id}}
+                      @skin='button-secondary'
+                      @icon='eye'
+                      @iconAlignment='left'
+                    >
+                      {{t 'voting-modal.show-button'}}
+                    </AuLink>
+                  {{else}}
+                    <AuLink
+                      @route='meetings.edit.custom-voting'
+                      @model={{stemming.id}}
+                      @skin='button-secondary'
+                      @icon='pencil'
+                      @iconAlignment='left'
+                    >
+                      {{t 'voting-modal.toggle-edit-button'}}
+                    </AuLink>
+                    <AuButton
+                      {{on 'click' (fn (perform this.removeStemming) stemming)}}
+                      @skin='secondary'
+                      @alert={{true}}
+                      @icon='bin'
+                      @iconAlignment='left'
+                      @loading={{this.removeStemming.isRunning}}
+                    >
+                      {{t 'voting-modal.delete-button'}}
+                    </AuButton>
+                  {{/if}}
                 </AuButtonGroup>
               </td>
-            {{/unless}}
+
           </tr>
         {{/if}}
       {{else}}
