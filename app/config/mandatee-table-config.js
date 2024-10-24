@@ -371,7 +371,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
       },
       updateContent: (pos, kandidatenlijsten) => {
         return (state) => {
-          console.log('Kandidatenlijsten: ', kandidatenlijsten);
           const content = [];
           const { schema, doc } = state;
           const $pos = doc.resolve(pos);
