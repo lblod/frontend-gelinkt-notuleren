@@ -63,10 +63,6 @@ export const BESTUURSPERIODES = {
     'http://data.lblod.info/id/concept/Bestuursperiode/96efb929-5d83-48fa-bfbb-b98dfb1180c7',
 };
 
-export const LOKALE_VERKIEZINGEN = {
-  2024: 'http://data.lblod.info/id/rechtstreekse-verkiezingen/612a57de-7fc2-40af-a7dc-17d544e5de20',
-};
-
 export const MANDATARIS_STATUS_CODES = {
   EFFECTIEF:
     'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/21063a5b-912c-4241-841c-cc7fb3c73e75',
@@ -76,4 +72,36 @@ export const MANDATARIS_STATUS_CODES = {
     'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/c301248f-0199-45ca-b3e5-4c596731d5fe',
   WAARNEMEND:
     'http://data.vlaanderen.be/id/concept/MandatarisStatusCode/e1ca6edd-55e1-4288-92a5-53f4cf71946a',
+};
+
+export const BESTUURSEENHEID_CLASSIFICATIE_CODES = {
+  GEMEENTE:
+    'http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000001',
+  PROVINCIE:
+    'http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000000',
+  OCMW: 'http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000002',
+  DISTRICT:
+    'http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/5ab0e9b8a3b2ca7c5e000003',
+};
+
+export const BESTUURSORGAAN_CLASSIFICATIE_CODES = {
+  GEMEENTERAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005',
+  PROVINCIERAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000c',
+  DISTRICTSRAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000a',
+  OCMW_RAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000007',
+};
+
+export const IV_CLASSIFICATIE_MAP = {
+  [BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE]:
+    BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD,
+  [BESTUURSEENHEID_CLASSIFICATIE_CODES.PROVINCIE]:
+    BESTUURSORGAAN_CLASSIFICATIE_CODES.PROVINCIERAAD,
+  [BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT]:
+    BESTUURSORGAAN_CLASSIFICATIE_CODES.DISTRICTSRAAD,
+  [BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW]:
+    BESTUURSORGAAN_CLASSIFICATIE_CODES.OCMW_RAAD,
 };

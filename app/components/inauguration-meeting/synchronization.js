@@ -11,7 +11,10 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import InaugurationMeetingSynchronizationToast from './synchronization-toast';
 import { syncDocument } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/mandatee-table-plugin';
 import SaySerializer from '@lblod/ember-rdfa-editor/core/say-serializer';
-import { mandateeTableConfigIVGR } from '../../config/mandatee-table-config';
+import {
+  mandateeTableConfigIVGR,
+  mandateeTableConfigRMW,
+} from '../../config/mandatee-table-config';
 
 export default class InaugurationMeetingSynchronizationComponent extends Component {
   @service toaster;
@@ -194,10 +197,10 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     const currentVersion = await container.currentVersion;
     const html = currentVersion.content ?? '';
     const initialState = this.agendapointEditor.getState(html);
-    const syncedState = await syncDocument(
-      initialState,
-      mandateeTableConfigIVGR(this.meeting),
-    );
+    const syncedState = await syncDocument(initialState, {
+      ...mandateeTableConfigIVGR(this.meeting),
+      ...mandateeTableConfigRMW(this.meeting),
+    });
     const serializer = SaySerializer.fromSchema(
       syncedState.schema,
       () => syncedState,
