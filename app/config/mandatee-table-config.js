@@ -976,7 +976,7 @@ export const mandateeTableConfigRMW = (meeting) => {
           # TODO: http or https?
           PREFIX regorg: <https://www.w3.org/ns/regorg#>
           SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?persoon) as ?fractie_aantal_zetels) WHERE {
-            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2024']}>.
+            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
 
             ?fractie org:memberOf ?bestuursorgaan.
             ?fractie regorg:legalName ?fractie_naam.
@@ -1060,7 +1060,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
 
             ?bestuursorgaan org:hasPost ?mandaat.
-            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2024']}>.
+            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           }
         `;
         return executeQuery({
@@ -1138,7 +1138,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
 
             ?bestuursorgaan org:hasPost ?mandaat.
-            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2024']}>.
+            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           }
         `;
         return executeQuery({
@@ -1243,7 +1243,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
 
             ?bestuursorgaan org:hasPost ?mandaat.
-            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2024']}>.
+            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           }
         `;
         return executeQuery({
@@ -1312,7 +1312,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
 
             ?bestuursorgaan org:hasPost ?mandaat.
-            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2019-2024']}>.
+            ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           }
         `;
         return executeQuery({
