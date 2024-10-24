@@ -125,7 +125,7 @@ editor-document-title:
   title-saved: Title saved
 
 inauguration-meeting:
-  last-synchronization: Last datasynchronization on {date}
+  last-synchronization: Last data synchronization on {date}
   synchronization:
     button:
       up-to-date: Synchronization up-to-date

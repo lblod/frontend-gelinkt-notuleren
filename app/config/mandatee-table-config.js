@@ -46,7 +46,8 @@ export const IVGR_TAGS = /** @type {const} */ ([
 export const mandateeTableConfigIVGR = (meeting) => {
   return {
     'IVGR2-LMB-1-geloofsbrieven': {
-      query: () => {
+      query: async () => {
+        const bestuursorgaan = await meeting.bestuursorgaan;
         const sparqlQuery = /* sparql */ `
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX person: <http://www.w3.org/ns/person#>
@@ -54,19 +55,30 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+        PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?persoon ?persoon_naam WHERE {
           ?persoon a person:Person .
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+          ?persoon ^mandaat:isResultaatVan ?result.
 
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris org:holds ?mandaat.
+          ?mandataris org:hasMembership / org:organisation ?fractie.
+
+          ?fractie ^org:organisation / ^org:hasMembership / mandaat:isBestuurlijkeAliasVan ?fractie_member.
+          ?fractie regorg:legalName ?fractie_naam.
+
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
           ?bestuursorgaan org:hasPost ?mandaat.
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+
+          # ?result mandaat:isResultaatVoor / mandaat:behoortTot / mandaat:steltSamen <${bestuursorgaan.uri}>.
+          ?result mandaat:aantalNaamstemmen ?votes.
         }
+        ORDER BY DESC(count(distinct ?fractie_member)) DESC(?fractie_naam) DESC(?votes)
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -106,7 +118,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging (= datum van de zitting) van de volgende verkozenen op datum van
      */
     'IVGR3-LMB-1-eedafleggingen': {
-      query: () => {
+      query: async () => {
+        const bestuursorgaan = await meeting.bestuursorgaan;
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -114,6 +127,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
@@ -122,11 +136,20 @@ export const mandateeTableConfigIVGR = (meeting) => {
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          ?mandataris org:hasMembership / org:organisation ?fractie.
+
+          ?fractie ^org:organisation / ^org:hasMembership / mandaat:isBestuurlijkeAliasVan ?fractie_member.
+          ?fractie regorg:legalName ?fractie_naam.
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
+          ?persoon ^mandaat:isResultaatVan ?result.
+
+          # ?result mandaat:isResultaatVoor / mandaat:behoortTot / mandaat:steltSamen <${bestuursorgaan.uri}>.
+          ?result mandaat:aantalNaamstemmen ?votes.
         }
+        ORDER BY DESC(count(distinct ?fractie_member)) DESC(?fractie_naam) DESC(?votes)
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -196,7 +219,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR4-LMB-1: De rangorde van de gemeenteraadsleden is als volgt vastgesteld
      */
     'IVGR4-LMB-1-rangorde-gemeenteraadsleden': {
-      query: () => {
+      query: async () => {
+        const bestuursorgaan = await meeting.bestuursorgaan;
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -204,6 +228,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX regorg: <https://www.w3.org/ns/regorg#>
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaan org:hasPost ?mandaat.
@@ -215,11 +240,20 @@ export const mandateeTableConfigIVGR = (meeting) => {
           OPTIONAL {
             ?mandataris mandaat:rangorde ?mandataris_rang.
           }
+          ?mandataris org:hasMembership / org:organisation ?fractie.
+
+          ?fractie ^org:organisation / ^org:hasMembership / mandaat:isBestuurlijkeAliasVan ?fractie_member.
+          ?fractie regorg:legalName ?fractie_naam.
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
+          ?persoon ^mandaat:isResultaatVan ?result.
+
+          # ?result mandaat:isResultaatVoor / mandaat:behoortTot / mandaat:steltSamen <${bestuursorgaan.uri}>.
+          ?result mandaat:aantalNaamstemmen ?votes.
         }
+        ORDER BY DESC(count(distinct ?fractie_member)) DESC(?fractie_naam) DESC(?votes)
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -295,7 +329,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?fractie2 ext:geproduceerdDoor ?kandidatenlijst;
                     regorg:legalName ?fractie2_naam.
           FILTER(?fractie1 != ?fractie2 && ?fractie1 < ?fractie2)
+
+          ?fractie1 ^org:organisation / ^org:hasMembership / mandaat:isBestuurlijkeAliasVan ?fractie_member.
         }
+        ORDER BY DESC(count(distinct ?fractie_member)) DESC(?fractie1_naam)
       `;
         const kandidatenlijstQueryResult = await executeQuery({
           query: splitKandidatenlijstQuery,
