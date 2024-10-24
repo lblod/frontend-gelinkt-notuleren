@@ -93,6 +93,11 @@ export const BESTUURSORGAAN_CLASSIFICATIE_CODES = {
     'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000a',
   OCMW_RAAD:
     'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000007',
+  COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN:
+    'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000006',
+  VOORZITTER_BSCD:
+    'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/53c0d8cd-f3a2-411d-bece-4bd83ae2bbc9',
+  BCSD: 'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000009',
 };
 
 export const IV_CLASSIFICATIE_MAP = {
