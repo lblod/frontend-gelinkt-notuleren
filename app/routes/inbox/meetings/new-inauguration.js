@@ -1,12 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { format } from 'date-fns/fp';
-
-import { GEMEENTE } from '../../../utils/bestuurseenheid-classificatie-codes';
-import {
-  GEMEENTERAAD,
-  RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN,
-} from '../../../utils/classification-utils';
+import { IV_CLASSIFICATIE_MAP } from '../../../config/constants';
 
 export default class InboxMeetingsNewInaugurationRoute extends Route {
   @service currentSession;
@@ -41,10 +36,7 @@ export default class InboxMeetingsNewInaugurationRoute extends Route {
               id: this.currentSession.group.id,
             },
             classificatie: {
-              ':uri:':
-                unitClass.uri === GEMEENTE
-                  ? GEMEENTERAAD
-                  : RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN,
+              ':uri:': IV_CLASSIFICATIE_MAP[unitClass.uri],
             },
           },
         },
