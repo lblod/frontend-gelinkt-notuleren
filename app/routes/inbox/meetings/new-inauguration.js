@@ -1,7 +1,10 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 import { format } from 'date-fns/fp';
-import { IV_CLASSIFICATIE_MAP } from '../../../config/constants';
+import {
+  IV_CLASSIFICATIE_MAP,
+  BESTUURSPERIODES,
+} from '../../../config/constants';
 
 export default class InboxMeetingsNewInaugurationRoute extends Route {
   @service currentSession;
@@ -30,6 +33,9 @@ export default class InboxMeetingsNewInaugurationRoute extends Route {
           ':or:': {
             ':gte:binding-einde': format('yyyy-mm-dd')(now),
             ':has-no:binding-einde': true,
+          },
+          bestuursperiode: {
+            ':uri:': BESTUURSPERIODES['2024-heden'],
           },
           'is-tijdsspecialisatie-van': {
             bestuurseenheid: {
