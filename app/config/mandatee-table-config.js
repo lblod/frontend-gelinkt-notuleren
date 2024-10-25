@@ -454,7 +454,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        # TODO: http or https?
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
@@ -743,7 +742,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
 
-          # TODO: unsure how we will fetch the 'opvolger'
           VALUES ?mandataris_opvolger { undef }
         }
       `;
