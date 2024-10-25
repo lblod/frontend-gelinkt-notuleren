@@ -1052,7 +1052,9 @@ export const mandateeTableConfigRMW = (meeting) => {
 
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
-            ?mandataris mandaat:einde ?persoon_mandaat_einde.
+            OPTIONAL {
+              ?mandataris mandaat:einde ?persoon_mandaat_einde.
+            }
 
             ?fractie regorg:legalName ?fractie_naam.
 
