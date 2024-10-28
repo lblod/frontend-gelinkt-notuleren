@@ -44,6 +44,14 @@ export const BESTUURSFUNCTIE_CODES = {
     'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
   VOORZITTER_GEMEENTERAAD:
     'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000012',
+  DISTRICTSSCHEPEN:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001e',
+  DISTRICTSBURGEMEESTER:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001d',
+  DISTRICTSRAADLID:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001b',
+  VOORZITTER_DISTRICTSRAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001c',
   LID_BCSD:
     'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000019',
   VOORZITTER_BCSD:
@@ -91,6 +99,8 @@ export const BESTUURSORGAAN_CLASSIFICATIE_CODES = {
     'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000c',
   DISTRICTSRAAD:
     'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000a',
+  DISTRICTSCOLLEGE:
+    'https://data.vlaanderen.be/doc/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000b',
   OCMW_RAAD:
     'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000007',
   COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN:

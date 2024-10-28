@@ -39,6 +39,32 @@ export const IVGR_TAGS = /** @type {const} */ ([
   'IVGR8-LMB-1-verkozen-schepenen',
   'IVGR8-LMB-2-coalitie',
 ]);
+
+const DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP = {
+  [BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE]: {
+    raad: {
+      bestuursorgaan: BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD,
+      lid: BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID,
+    },
+    college: {
+      bestuursorgaan:
+        BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN,
+      schepen: BESTUURSFUNCTIE_CODES.SCHEPEN,
+      burgemeester: BESTUURSFUNCTIE_CODES.BURGEMEESTER,
+    },
+  },
+  [BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT]: {
+    raad: {
+      bestuursorgaan: BESTUURSORGAAN_CLASSIFICATIE_CODES.DISTRICTSRAAD,
+      lid: BESTUURSFUNCTIE_CODES.DISTRICTSRAADLID,
+    },
+    college: {
+      bestuursorgaan: BESTUURSORGAAN_CLASSIFICATIE_CODES.DISTRICTSCOLLEGE,
+      schepen: BESTUURSFUNCTIE_CODES.DISTRICTSSCHEPEN,
+      burgemeester: BESTUURSFUNCTIE_CODES.DISTRICTSBURGEMEESTER,
+    },
+  },
+};
 /**
  * Function which returns the IVGR mandatee table config for a given meeting
  * @param {import("../models/zitting").default} meeting
@@ -50,10 +76,16 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR2-LMB-1-geloofsbrieven': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
+
         const sparqlQuery = /* sparql */ `
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX person: <http://www.w3.org/ns/person#>
@@ -71,14 +103,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
 
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris org:holds ?mandaat.
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+          ?mandaat org:role <${classificatieInfo.raad.lid}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+            <${classificatieInfo.raad.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
         }
@@ -116,17 +148,22 @@ export const mandateeTableConfigIVGR = (meeting) => {
       },
     },
     /**
-     * **IVGR3: Eedaflegging van de verkozen gemeenteraadsleden**
+     * **IVGR3: Eedaflegging van de verkozen gemeente-/districtraadsleden**
      *
-     * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging (= datum van de zitting) van de volgende verkozenen op datum van
+     * IVGR3-LMB-1: De gemeente-/districtsraad neemt kennis van de eedaflegging (= datum van de zitting) van de volgende verkozenen op datum van
      */
     'IVGR3-LMB-1-eedafleggingen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -136,14 +173,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
         SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+          ?mandaat org:role <${classificatieInfo.raad.lid}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+            <${classificatieInfo.raad.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -218,17 +255,22 @@ export const mandateeTableConfigIVGR = (meeting) => {
       },
     },
     /**
-     * **IVGR4: Bepaling van de rangorde van de gemeenteraadsleden**
+     * **IVGR4: Bepaling van de rangorde van de gemeente-/districtraadsleden**
      *
-     * IVGR4-LMB-1: De rangorde van de gemeenteraadsleden is als volgt vastgesteld
+     * IVGR4-LMB-1: De rangorde van de gemeente-/districtraadsleden is als volgt vastgesteld
      */
     'IVGR4-LMB-1-rangorde-gemeenteraadsleden': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -239,14 +281,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+          ?mandaat org:role <${classificatieInfo.raad.lid}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+            <${classificatieInfo.raad.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -316,10 +358,15 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR5-LMB-1-splitsing-fracties': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const splitKandidatenlijstQuery = /* sparql */ `
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -340,7 +387,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+            <${classificatieInfo.raad.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -374,12 +421,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
             fractie1: {
               uri: fractie1,
               naam: fractie1_naam,
-              leden: fetchFractieLeden(fractie1),
+              leden: fetchFractieLeden(fractie1, classificatieInfo.raad.lid),
             },
             fractie2: {
               uri: fractie2,
               naam: fractie2_naam,
-              leden: fetchFractieLeden(fractie2),
+              leden: fetchFractieLeden(fractie2, classificatieInfo.raad.lid),
             },
           };
           promises.push(promiseProperties(entry, true));
@@ -423,15 +470,20 @@ export const mandateeTableConfigIVGR = (meeting) => {
     /**
      * **IVGR5: Vaststelling van de fracties**
      *
-     * IVGR5-LMB-2: De gemeenteraad stelt de grootte van de fracties als volgt vast
+     * IVGR5-LMB-2: De gemeente-/districtsraad stelt de grootte van de fracties als volgt vast
      */
     'IVGR5-LMB-2-grootte-fracties': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -450,7 +502,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+            <${classificatieInfo.raad.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -459,7 +511,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
             ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
             ?mandataris org:holds ?mandaat.
 
-            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+            ?mandaat org:role <${classificatieInfo.raad.lid}>.
           }
         }
       `;
@@ -502,15 +554,20 @@ export const mandateeTableConfigIVGR = (meeting) => {
     /**
      * **IVGR5: Vaststelling van de fracties**
      *
-     * IVGR5-LMB-3: De gemeenteraad stelt de samenstelling van de fracties voorlopig als volgt vast
+     * IVGR5-LMB-3: De gemeente-/districtsraad stelt de samenstelling van de fracties voorlopig als volgt vast
      */
     'IVGR5-LMB-3-samenstelling-fracties': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -534,14 +591,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?fractie regorg:legalName ?fractie_naam.
 
           ?mandataris org:holds ?mandaat.
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+          ?mandaat org:role <${classificatieInfo.raad.lid}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+            <${classificatieInfo.raad.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
         }
@@ -589,10 +646,15 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR7-LMB-1-kandidaat-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -603,14 +665,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
         SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+          ?mandaat org:role <${classificatieInfo.college.schepen}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+            <${classificatieInfo.college.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -673,16 +735,21 @@ export const mandateeTableConfigIVGR = (meeting) => {
     /**
      * **IVGR7: Verkiezing van de schepenen**
      *
-     * IVGR7-LMB-2: De gemeenteraad neemt kennis van de ontvankelijkheid van de gezamenlijke akte van voordracht
+     * IVGR7-LMB-2: De gemeente-/districtsraad neemt kennis van de ontvankelijkheid van de gezamenlijke akte van voordracht
      * en verklaart de voorgedragen kandidaat-schepenen verkozen in de rangorde van de gezamenlijke akte van voordracht van kandidaat-schepenen
      */
     'IVGR7-LMB-2-ontvankelijkheid-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -694,14 +761,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
         SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde ?mandataris_opvolger WHERE {
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+          ?mandaat org:role <${classificatieInfo.college.schepen}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+            <${classificatieInfo.college.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -817,10 +884,15 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR7-LMB-3-verhindering-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -832,14 +904,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
         SELECT DISTINCT ?mandataris ?mandataris_naam  WHERE {
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+          ?mandaat org:role <${classificatieInfo.college.schepen}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+            <${classificatieInfo.college.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -893,15 +965,20 @@ export const mandateeTableConfigIVGR = (meeting) => {
     /**
      * **IVGR8: Aanduiding en eedaflegging van de aangewezen-burgemeester**
      *
-     * IVGR8-LMB-1: De volgende gemeenteraadsleden zijn verkozen als schepen
+     * IVGR8-LMB-1: De volgende gemeente-/districtsraadsleden zijn verkozen als schepen
      */
     'IVGR8-LMB-1-verkozen-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -913,14 +990,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
         SELECT DISTINCT ?mandataris ?mandataris_naam ?fractie ?fractie_naam WHERE {
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+          ?mandaat org:role <${classificatieInfo.college.schepen}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+            <${classificatieInfo.college.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -980,10 +1057,15 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR8-LMB-2-coalitie': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
-        await assertClassificatie(bestuurseenheid, [
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
-          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
-        ]);
+        const bestuurseenheidClassificatie = await assertClassificatie(
+          bestuurseenheid,
+          [
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+            BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+          ],
+        );
+        const classificatieInfo =
+          DISTRICT_GEMEENTERAAD_CLASSIFICATIE_MAP[bestuurseenheidClassificatie];
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -997,8 +1079,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         SELECT DISTINCT ?fractie ?fractie_naam WHERE {
           ?mandaat org:role ?role.
           VALUES ?role {
-            <${BESTUURSFUNCTIE_CODES.SCHEPEN}>
-            <${BESTUURSFUNCTIE_CODES.VOORZITTER_BCSD}>
+            <${classificatieInfo.college.schepen}>
           }
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
@@ -1006,8 +1087,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.VOORZITTER_BSCD}>
+            <${classificatieInfo.college.bestuursorgaan}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
@@ -1049,7 +1129,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
   };
 };
 
-async function fetchFractieLeden(fractieUri) {
+async function fetchFractieLeden(fractieUri, bestuursfunctie_code) {
   const sparqlQuery = /* sparql */ `
     PREFIX org: <http://www.w3.org/ns/org#>
     PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
@@ -1067,7 +1147,7 @@ async function fetchFractieLeden(fractieUri) {
       ?mandataris org:hasMembership/org:organisation <${fractieUri}>.
       ?mandataris org:holds ?mandaat.
 
-      ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+      ?mandaat org:role <${bestuursfunctie_code}>.
     }
   `;
   const result = await executeQuery({
