@@ -22,6 +22,7 @@ import {
   MANDATARIS_STATUS_CODES,
   BESTUURSPERIODES,
   BESTUURSORGAAN_CLASSIFICATIE_CODES,
+  BESTUURSEENHEID_CLASSIFICATIE_CODES,
 } from './constants';
 import { promiseProperties } from '../utils/promises';
 
@@ -49,6 +50,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR2-LMB-1-geloofsbrieven': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX person: <http://www.w3.org/ns/person#>
@@ -118,6 +123,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR3-LMB-1-eedafleggingen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -216,6 +225,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR4-LMB-1-rangorde-gemeenteraadsleden': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -303,6 +316,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR5-LMB-1-splitsing-fracties': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const splitKandidatenlijstQuery = /* sparql */ `
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -411,6 +428,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR5-LMB-2-grootte-fracties': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -487,6 +508,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR5-LMB-3-samenstelling-fracties': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -565,6 +590,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR7-LMB-1-kandidaat-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -651,6 +680,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR7-LMB-2-ontvankelijkheid-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -786,6 +819,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR7-LMB-3-verhindering-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -863,6 +900,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR8-LMB-1-verkozen-schepenen': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -941,6 +982,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
     'IVGR8-LMB-2-coalitie': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -1069,6 +1114,9 @@ export const mandateeTableConfigRMW = (meeting) => {
     'IVRMW2-LMB-1-zetelverdeling': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
         const sparqlQuery = /* sparql */ `
           PREFIX org: <http://www.w3.org/ns/org#>
           PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -1147,6 +1195,9 @@ export const mandateeTableConfigRMW = (meeting) => {
     'IVRMW2-LMB-2-kandidaat-leden': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
         const sparqlQuery = /* sparql */ `
           PREFIX org: <http://www.w3.org/ns/org#>
           PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -1233,6 +1284,9 @@ export const mandateeTableConfigRMW = (meeting) => {
     'IVRMW2-LBM-3-verkiezing-leden': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
         const sparqlQuery = /* sparql */ `
           PREFIX org: <http://www.w3.org/ns/org#>
           PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -1351,6 +1405,9 @@ export const mandateeTableConfigRMW = (meeting) => {
     'IVRMW2-LBM-4-geloofsbrieven-leden': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
         const sparqlQuery = /* sparql */ `
           PREFIX org: <http://www.w3.org/ns/org#>
           PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -1429,6 +1486,9 @@ export const mandateeTableConfigRMW = (meeting) => {
     'IVRMW2-LBM-5-eed-leden': {
       query: async () => {
         const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
         const sparqlQuery = /* sparql */ `
           PREFIX org: <http://www.w3.org/ns/org#>
           PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -1509,4 +1569,16 @@ async function getBestuurseenheid(meeting) {
   const bestuursorgaanIT = await meeting.bestuursorgaan;
   const bestuursorgaanMain = await bestuursorgaanIT.isTijdsspecialisatieVan;
   return bestuursorgaanMain.bestuurseenheid;
+}
+
+async function assertClassificatie(bestuurseenheid, classificatiecodes) {
+  const classificatie = await bestuurseenheid.classificatie;
+  const match = classificatiecodes.some((code) => code === classificatie.uri);
+  if (match) {
+    return classificatie.uri;
+  } else {
+    throw new Error(
+      `Bestuurseenheid holding the IV does not have the correct 'classificatie'. Received ${classificatie.uri}. Expected one of ${classificatiecodes.join(', ')}`,
+    );
+  }
 }
