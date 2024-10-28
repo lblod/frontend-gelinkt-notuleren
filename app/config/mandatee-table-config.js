@@ -22,6 +22,7 @@ import {
   MANDATARIS_STATUS_CODES,
   BESTUURSPERIODES,
   BESTUURSORGAAN_CLASSIFICATIE_CODES,
+  BESTUURSEENHEID_CLASSIFICATIE_CODES,
 } from './constants';
 import { promiseProperties } from '../utils/promises';
 
