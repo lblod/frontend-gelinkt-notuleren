@@ -453,7 +453,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
             <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
-          # We want this to be optional, as it is possible there are 'fracties' without any electees
+
           OPTIONAL {
             ?mandataris org:hasMembership/org:organisation ?fractie.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
@@ -1122,7 +1122,6 @@ export const mandateeTableConfigRMW = (meeting) => {
           PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
           PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
           PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-          # TODO: http or https?
           PREFIX regorg: <https://www.w3.org/ns/regorg#>
           PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
@@ -1137,7 +1136,7 @@ export const mandateeTableConfigRMW = (meeting) => {
               <${BESTUURSORGAAN_CLASSIFICATIE_CODES.BCSD}>
             }
             ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
-            # We want this to be optional, as it is possible there are 'fracties' without any electees
+
             OPTIONAL {
               ?mandataris org:hasMembership/org:organisation ?fractie.
               ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
