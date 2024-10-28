@@ -248,6 +248,6 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       position: this.behandeling.stemmingen.length,
     });
     await stemmingToEdit.save();
-    this.router.transitionTo('meetings.edit.custom-voting', stemmingToEdit);
+    this.router.transitionTo('meetings.edit.custom-voting', stemmingToEdit.id);
   });
 }

@@ -99,10 +99,12 @@ export default class MeetingsEditManualVotingController extends Controller {
 
   saveTask = task(async () => {
     const html = this.editor.htmlContent;
-
+    if (this.onTitleUpdate.isRunning) {
+      await this.onTitleUpdate.lastRunning;
+    }
     const editorDocument =
       await this.documentService.createEditorDocument.perform(
-        this.editorDocument.title,
+        this.title || this.editorDocument.title,
         html,
         await this.documentContainer,
         this.editorDocument,
