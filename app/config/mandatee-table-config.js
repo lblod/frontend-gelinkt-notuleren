@@ -81,7 +81,24 @@ export const mandateeTableConfigIVGR = (meeting) => {
             <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+          ?mandataris org:hasMembership/org:organisation ?fractie.
+          {
+            SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
+            WHERE {
+              ?_mandataris org:hasMembership/org:organisation ?fractie.
+              ?_mandataris org:holds ?_mandaat.
+              ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+              ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+            }
+          }
+
+          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+          ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+          ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+          ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
         }
+        ORDER BY DESC(?fractie_grootte) ?fractie DESC(?aantal_stemmen)
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -153,7 +170,24 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
+
+          ?mandataris org:hasMembership/org:organisation ?fractie.
+          {
+            SELECT ?fractie (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte)
+            WHERE {
+              ?_mandataris org:hasMembership/org:organisation ?fractie.
+              ?_mandataris org:holds ?_mandaat.
+              ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+              ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+            }
+          }
+
+          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+          ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+          ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+          ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
         }
+        ORDER BY DESC(?fractie_grootte) ?fractie DESC(?aantal_stemmen)
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -462,6 +496,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
           }
         }
+        ORDER BY DESC(?fractie_aantal_zetels) ?fractie
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -544,7 +579,23 @@ export const mandateeTableConfigIVGR = (meeting) => {
             <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+          {
+            SELECT ?fractie (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte)
+            WHERE {
+              ?_mandataris org:hasMembership/org:organisation ?fractie.
+              ?_mandataris org:holds ?_mandaat.
+              ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+              ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+            }
+          }
+
+          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+          ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+          ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+          ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
         }
+        ORDER BY DESC(?fractie_grootte) ?fractie DESC(?aantal_stemmen)
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -831,7 +882,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
-        SELECT DISTINCT ?mandataris ?mandataris_naam  WHERE {
+        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
@@ -846,6 +897,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris mandaat:status <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
+          ?mandataris mandaat:rangorde ?mandataris_rang.
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
@@ -926,6 +978,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          ?mandataris mandaat:rangorde ?mandataris_rang.
+
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
@@ -946,12 +1000,22 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
-          const bindings = queryResult.results.bindings;
           const tableHeader = row(
             schema,
             [schema.text('Schepen'), schema.text('Fractie')],
             true,
           );
+          const bindings = queryResult.results.bindings
+            .map((binding) => {
+              const { mandataris_rang } = bindingToObject(binding);
+              return {
+                ...binding,
+                rangnummer: rangordeStringToNumber(mandataris_rang),
+              };
+            })
+            .sort((b1, b2) => {
+              return b1.rangnummer - b2.rangnummer;
+            });
           const rows = bindings.map((binding) => {
             const { mandataris_naam, fractie_naam } = bindingToObject(binding);
             return row(schema, [
@@ -998,7 +1062,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandaat org:role ?role.
           VALUES ?role {
             <${BESTUURSFUNCTIE_CODES.SCHEPEN}>
-            <${BESTUURSFUNCTIE_CODES.VOORZITTER_BCSD}>
           }
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
@@ -1007,16 +1070,16 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
             <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
-            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.VOORZITTER_BSCD}>
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
-
           ?mandataris org:holds ?mandaat.
           ?mandataris org:hasMembership/org:organisation ?fractie.
+          ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
 
           ?fractie regorg:legalName ?fractie_naam.
         }
+        ORDER BY DESC(COUNT(?persoon))
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -1068,7 +1131,14 @@ async function fetchFractieLeden(fractieUri) {
       ?mandataris org:holds ?mandaat.
 
       ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+      <${fractieUri}> org:memberOf ?bestuursorgaanIT.
+      ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+      ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+      ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+      ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
     }
+    ORDER BY DESC(?aantal_stemmen)
   `;
   const result = await executeQuery({
     query: sparqlQuery,
