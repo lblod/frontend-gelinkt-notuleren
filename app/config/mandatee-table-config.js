@@ -845,7 +845,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
-          ?mandataris mandaat:status/skos:prefLabel <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
+          ?mandataris mandaat:status <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
