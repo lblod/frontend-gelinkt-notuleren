@@ -209,7 +209,7 @@ export default class BehandelingVanAgendapuntComponent extends Component {
     // high pagesize is set on the model, so this is fine
     const participants = await this.args.behandeling.aanwezigen;
 
-    const stemmingToEdit = this.store.createRecord('standard-voting', {
+    const stemmingToEdit = this.store.createRecord('stemming', {
       onderwerp: '',
       geheim: false,
       aantalVoorstanders: 0,

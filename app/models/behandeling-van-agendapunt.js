@@ -9,8 +9,6 @@ export default class BehandelingVanAgendapunt extends Model {
   @attr openbaar;
   @attr afgeleidUit;
   @attr('string') gevolg;
-  @attr('boolean') isManualVoting;
-  @attr('string') manualVoting;
 
   @belongsTo('behandeling-van-agendapunt', { inverse: null, async: true })
   vorigeBehandelingVanAgendapunt;
@@ -46,6 +44,13 @@ export default class BehandelingVanAgendapunt extends Model {
   })
   stemmingen;
 
+  @hasMany('custom-voting', {
+    inverse: 'behandelingVanAgendapunt',
+    defaultPageSize: 1000,
+    async: true,
+  })
+  customVotings;
+
   sortedParticipantData = trackedFunction(this, async () => {
     const participants = await this.aanwezigen;
     const participantsWithNames = await Promise.all(
@@ -71,7 +76,9 @@ export default class BehandelingVanAgendapunt extends Model {
       .map((an) => an.absentee);
   });
   async getSortedVotings() {
-    const votings = await this.stemmingen;
+    const normalVotings = this.stemmingen;
+    const customVotings = this.customVotings;
+    const votings = [...(await normalVotings), ...(await customVotings)];
     return votings
       ?.slice()
       .sort((a, b) => Number(a.position) - Number(b.position));
