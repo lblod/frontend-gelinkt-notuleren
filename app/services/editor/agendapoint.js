@@ -141,7 +141,7 @@ export default class AgendapointEditorService extends Service {
       codelist,
       roadsign_regulation,
       mandatee_table,
-      heading: headingWithConfig({ rdfaAware: true }),
+      heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
       snippet_placeholder: snippetPlaceholder,
       snippet: snippet(this.config.snippet),
