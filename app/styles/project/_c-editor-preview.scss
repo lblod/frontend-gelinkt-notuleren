@@ -136,6 +136,19 @@
       border-right: 4px solid $au-blue-700;
     }
   }
+
+  // Subject is different as it sits next to a number, so override some of the previous rules
+  [property='dc:subject'] {
+    width: auto;
+    flex-grow: 1;
+    margin-top: 0;
+  }
+
+  [typeof='besluit:BehandelingVanAgendapunt'] > h3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .au-c-editor-preview-treatment-toggle-box {
