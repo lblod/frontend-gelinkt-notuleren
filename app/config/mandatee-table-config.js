@@ -693,7 +693,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
-        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde ?mandataris_opvolger WHERE {
+        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
@@ -717,8 +717,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
-
-          VALUES ?mandataris_opvolger { undef }
         }
       `;
         return executeQuery({
@@ -773,7 +771,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
               mandataris_status,
               mandaat_start,
               mandaat_einde,
-              mandataris_opvolger,
             } = bindingToObject(binding);
             return row(schema, [
               schema.text(mandataris_rang),
@@ -781,9 +778,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
               schema.text(mandataris_status),
               dateNode(schema, mandaat_start),
               mandaat_einde ? dateNode(schema, mandaat_einde) : undefined,
-              mandataris_opvolger
-                ? schema.text(mandataris_opvolger)
-                : undefined,
+              undefined,
             ]);
           });
           const content = schema.nodes.table.create(null, [
