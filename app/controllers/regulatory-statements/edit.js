@@ -146,7 +146,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       number,
       text_variable,
       ...STRUCTURE_NODES,
-      heading: headingWithConfig({ rdfaAware: true }),
+      heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
       snippet_placeholder: snippetPlaceholder,
       snippet: snippet(this.config.snippet),
