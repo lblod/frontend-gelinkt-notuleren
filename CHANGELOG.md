@@ -1,5 +1,44 @@
 # frontend-gelinkt-notuleren
 
+## 5.36.0
+
+### Minor Changes
+
+- [#744](https://github.com/lblod/frontend-gelinkt-notuleren/pull/744) [`2d9afb7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2d9afb75d15c9fbaa1a438a0e9f20795cf49bc81) Thanks [@elpoelma](https://github.com/elpoelma)! - Add `bestuursperiode` ember-data model.
+  This model represents the legislation periode for a specific bestuursorgaan.
+
+- [#746](https://github.com/lblod/frontend-gelinkt-notuleren/pull/746) [`6bb3107`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6bb310750f2670a9d127e99023ad5a02ee68baf6) Thanks [@elpoelma](https://github.com/elpoelma)! - **IVGR LMB table queries**
+  Introduce deterministic ordering. Mandatees/fractions will be ordered by:
+
+  - Fraction size
+  - Mandatee name in alphabetical order
+
+- [#746](https://github.com/lblod/frontend-gelinkt-notuleren/pull/746) [`3fc060b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3fc060bbb904b54ac9cd41c86d437201290334b7) Thanks [@elpoelma](https://github.com/elpoelma)! - **IVGR LMB table queries**
+  Introduce deterministic ordering. Depending on the query/table, mandatees/fractions will be ordered by:
+
+  - Fraction size
+  - Amount of votes
+  - Mandatee rank
+
+- [#742](https://github.com/lblod/frontend-gelinkt-notuleren/pull/742) [`b3c0605`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b3c0605b3f007ad8cadcae4a5172b966c9b5ebe2) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure the correct 'bestuursorgaan-in-tijd' is selected when syncing an IV
+
+- [#747](https://github.com/lblod/frontend-gelinkt-notuleren/pull/747) [`a1988b2`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a1988b25f8afa796f929100c1b82eb40934b1522) Thanks [@piemonkey](https://github.com/piemonkey)! - Add styling for agendapoint numbers next to titles in prepublish flow
+
+### Patch Changes
+
+- [#744](https://github.com/lblod/frontend-gelinkt-notuleren/pull/744) [`4ea943a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ea943af418b2eeeaddca67bd950f16bd7784d8a) Thanks [@elpoelma](https://github.com/elpoelma)! - When creating a new inauguration meeting,
+  automatically select the bestuursorgaan corresponding to the '2024-...'bestuursperiode.
+
+- [`eec9e2c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eec9e2cfd8f9adcdc5679c401351909d8e306774) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [v24.2.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.2.2)
+
+- [#742](https://github.com/lblod/frontend-gelinkt-notuleren/pull/742) [`a2981c5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a2981c58f9427d761275a167cfa692a0250bfed5) Thanks [@elpoelma](https://github.com/elpoelma)! - Change endpoints from LMB plugin and mandatee table to use the backend
+
+- [#748](https://github.com/lblod/frontend-gelinkt-notuleren/pull/748) [`0bd0edf`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0bd0edf17e9adecf99c83b8390bf852249e927f9) Thanks [@elpoelma](https://github.com/elpoelma)! - Disable `rdfa-aware` setting for `heading` nodes
+
+- [`3aa5f4d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3aa5f4db59fb5c080e43cedc7d63a7e1876480e6) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [v24.2.3](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.2.3)
+
+- [#749](https://github.com/lblod/frontend-gelinkt-notuleren/pull/749) [`250b10d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/250b10d5f0c5dc9126138921dab4e806600da9a9) Thanks [@piemonkey](https://github.com/piemonkey)! - Update copy-decision-parts screen to better handle single articles
+
 ## 5.35.0
 
 ### Minor Changes
