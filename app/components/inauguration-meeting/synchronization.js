@@ -34,18 +34,18 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   }
 
   lastModification = trackedFunction(this, async () => {
+    const bestuursorgaanIT = await this.meeting.bestuursorgaan;
+    const bestuursorgaanMain = await bestuursorgaanIT.isTijdsspecialisatieVan;
+    const bestuurseenheid = await bestuursorgaanMain.bestuurseenheid;
     const query = /* sparql */ `
-      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
-      PREFIX dct: <http://purl.org/dc/terms/>
-      SELECT (max(?m) as ?modified) WHERE {
-        ?sub dct:modified ?m.
+      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      SELECT ?modified WHERE {
+        <${bestuurseenheid.uri}> ext:lastLMBUpdate ?modified.
       }
     `;
     const response = await executeQuery({
       query,
-      endpoint: '/vendor-proxy/query',
+      endpoint: '/raw-sparql',
     });
     const bindings = response.results.bindings;
     if (bindings.length) {
