@@ -105,42 +105,52 @@ function update(component) {
     stripHtmlForPublish(component.args.decision.content),
     'text/html',
   );
-  return SECTIONS.flatMap(({ label, selector, parts, callback = (a) => a }) => {
-    const elements = Array.from(parsed.querySelectorAll(selector));
-    return elements.map((element) => {
-      const contentElement = callback(element);
-      // Note, it's important to generate the content here as with the use of DOM apis in the
-      // callbacks, it's easy to accidentally mutate `contentElement`. For example when appending
-      // parts of the content to a 'container' element.
-      const contentHtml = contentElement.outerHTML;
-      let foundParts = [];
-      if (parts) {
-        const partCb = parts.callback || ((a) => a);
-        const partElements =
-          contentElement.querySelectorAll(parts.selector) ?? [];
-        partElements.forEach((part) => {
-          const partElement = partCb(part);
-          const partLabel = parts.labelCallback
-            ? parts.labelCallback(part)
-            : partElement.querySelector(parts.labelSelector);
-          const partContent = parts.contentSelector
-            ? partElement.querySelector(parts.contentSelector)?.outerHTML
-            : partElement.outerHTML;
-          if (partLabel && partContent) {
-            foundParts.push({
-              translatedLabel: partLabel.textContent,
-              content: partContent,
-            });
-          }
-        });
-      }
-      return {
-        label,
-        content: contentHtml,
-        parts: foundParts,
-      };
-    });
-  });
+  const temporaryRenderingSpace = document.createElement('div');
+  document.firstElementChild.appendChild(temporaryRenderingSpace);
+  const mappedSections = SECTIONS.flatMap(
+    ({ label, selector, parts, callback = (a) => a }) => {
+      const elements = Array.from(parsed.querySelectorAll(selector));
+      return elements.map((element) => {
+        const contentElement = callback(element);
+        // Note, it's important to generate the content here as with the use of DOM apis in the
+        // callbacks, it's easy to accidentally mutate `contentElement`. For example when appending
+        // parts of the content to a 'container' element.
+        const contentHtml = contentElement.outerHTML;
+        let foundParts = [];
+        if (parts) {
+          const partCb = parts.callback || ((a) => a);
+          const partElements =
+            contentElement.querySelectorAll(parts.selector) ?? [];
+          partElements.forEach((part) => {
+            const partElement = partCb(part);
+            const partLabel = parts.labelCallback
+              ? parts.labelCallback(part)
+              : partElement.querySelector(parts.labelSelector);
+            const partContent = parts.contentSelector
+              ? partElement.querySelector(parts.contentSelector)?.outerHTML
+              : partElement.outerHTML;
+            if (partLabel && partContent) {
+              // Put the element into the DOM so that `innerText` can know which parts of the
+              // content are human readable in `innerText`
+              temporaryRenderingSpace.replaceChildren(partLabel);
+              foundParts.push({
+                translatedLabel: partLabel.innerText,
+                content: partContent,
+              });
+            }
+          });
+        }
+        return {
+          label,
+          content: contentHtml,
+          parts: foundParts,
+        };
+      });
+    },
+  );
+  temporaryRenderingSpace.remove();
+
+  return mappedSections;
 }
 
 export default class DecisionCopyParts extends Component {
