@@ -24,12 +24,9 @@
 {{else}}
   <DraggableObject @tagName='tr' @content={{@item}} @isSortable={{true}}>
     <td>
-      <AuButton
-        @icon='drag'
-        @skin='link'
-        @hideText={{true}}
-        class='au-c-button--drag'
-      />
+      <AuButton @icon='drag' @skin='link' class='au-c-button--drag'>
+        {{add @item.position 1}}
+      </AuButton>
     </td>
     <td>
       <AuButton
