@@ -286,7 +286,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
       },
       lmb: {
-        endpoint: '/vendor-proxy/query',
+        endpoint: '/raw-sparql',
       },
       autofilledVariable: {
         autofilledValues: {
