@@ -11,7 +11,10 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import InaugurationMeetingSynchronizationToast from './synchronization-toast';
 import { syncDocument } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/mandatee-table-plugin';
 import SaySerializer from '@lblod/ember-rdfa-editor/core/say-serializer';
-import { mandateeTableConfigIVGR } from '../../config/mandatee-table-config';
+import {
+  mandateeTableConfigIVGR,
+  mandateeTableConfigRMW,
+} from '../../config/mandatee-table-config';
 
 export default class InaugurationMeetingSynchronizationComponent extends Component {
   @service toaster;
@@ -31,18 +34,18 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
   }
 
   lastModification = trackedFunction(this, async () => {
+    const bestuursorgaanIT = await this.meeting.bestuursorgaan;
+    const bestuursorgaanMain = await bestuursorgaanIT.isTijdsspecialisatieVan;
+    const bestuurseenheid = await bestuursorgaanMain.bestuurseenheid;
     const query = /* sparql */ `
-      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
-      PREFIX dct: <http://purl.org/dc/terms/>
-      SELECT (max(?m) as ?modified) WHERE {
-        ?sub dct:modified ?m.
+      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      SELECT ?modified WHERE {
+        <${bestuurseenheid.uri}> ext:lastLMBUpdate ?modified.
       }
     `;
     const response = await executeQuery({
       query,
-      endpoint: '/vendor-proxy/query',
+      endpoint: '/raw-sparql',
     });
     const bindings = response.results.bindings;
     if (bindings.length) {
@@ -194,10 +197,10 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     const currentVersion = await container.currentVersion;
     const html = currentVersion.content ?? '';
     const initialState = this.agendapointEditor.getState(html);
-    const syncedState = await syncDocument(
-      initialState,
-      mandateeTableConfigIVGR(this.meeting),
-    );
+    const syncedState = await syncDocument(initialState, {
+      ...mandateeTableConfigIVGR(this.meeting),
+      ...mandateeTableConfigRMW(this.meeting),
+    });
     const serializer = SaySerializer.fromSchema(
       syncedState.schema,
       () => syncedState,

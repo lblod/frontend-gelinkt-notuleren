@@ -146,7 +146,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       number,
       text_variable,
       ...STRUCTURE_NODES,
-      heading: headingWithConfig({ rdfaAware: true }),
+      heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
       snippet_placeholder: snippetPlaceholder,
       snippet: snippet(this.config.snippet),
@@ -285,7 +285,7 @@ export default class RegulatoryStatementsRoute extends Controller {
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
       },
       lmb: {
-        endpoint: '/vendor-proxy/query',
+        endpoint: '/raw-sparql',
       },
       autofilledVariable: {
         autofilledValues: {

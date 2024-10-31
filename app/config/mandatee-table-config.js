@@ -19,9 +19,10 @@ import {
 } from '../utils/editor-utils';
 import {
   BESTUURSFUNCTIE_CODES,
-  BESTUURSPERIODES,
-  LOKALE_VERKIEZINGEN,
   MANDATARIS_STATUS_CODES,
+  BESTUURSPERIODES,
+  BESTUURSORGAAN_CLASSIFICATIE_CODES,
+  BESTUURSEENHEID_CLASSIFICATIE_CODES,
 } from './constants';
 import { promiseProperties } from '../utils/promises';
 
@@ -47,7 +48,12 @@ export const IVGR_TAGS = /** @type {const} */ ([
 export const mandateeTableConfigIVGR = (meeting) => {
   return {
     'IVGR2-LMB-1-geloofsbrieven': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX person: <http://www.w3.org/ns/person#>
@@ -55,6 +61,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
         SELECT DISTINCT ?persoon ?persoon_naam WHERE {
           ?persoon a person:Person .
           ?persoon persoon:gebruikteVoornaam ?voornaam.
@@ -65,13 +73,36 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandataris org:holds ?mandaat.
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
-          ?bestuursorgaan org:hasPost ?mandaat.
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+          ?mandataris org:hasMembership/org:organisation ?fractie.
+          {
+            SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
+            WHERE {
+              ?_mandataris org:hasMembership/org:organisation ?fractie.
+              ?_mandataris org:holds ?_mandaat.
+              ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+              ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+            }
+          }
+
+          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+          ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+          ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+          ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
         }
+        ORDER BY DESC(?fractie_grootte) ?fractie DESC(?aantal_stemmen)
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -107,7 +138,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR3-LMB-1: De gemeenteraad neemt kennis van de eedaflegging (= datum van de zitting) van de volgende verkozenen op datum van
      */
     'IVGR3-LMB-1-eedafleggingen': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -115,11 +151,18 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
         SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
-          ?bestuursorgaan org:hasPost ?mandaat.
-
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
@@ -127,11 +170,28 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
+
+          ?mandataris org:hasMembership/org:organisation ?fractie.
+          {
+            SELECT ?fractie (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte)
+            WHERE {
+              ?_mandataris org:hasMembership/org:organisation ?fractie.
+              ?_mandataris org:holds ?_mandaat.
+              ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+              ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+            }
+          }
+
+          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+          ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+          ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+          ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
         }
+        ORDER BY DESC(?fractie_grootte) ?fractie DESC(?aantal_stemmen)
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -197,7 +257,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR4-LMB-1: De rangorde van de gemeenteraadsleden is als volgt vastgesteld
      */
     'IVGR4-LMB-1-rangorde-gemeenteraadsleden': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -205,11 +270,19 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
-          ?bestuursorgaan org:hasPost ?mandaat.
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
+        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
@@ -224,7 +297,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -276,6 +349,11 @@ export const mandateeTableConfigIVGR = (meeting) => {
      */
     'IVGR5-LMB-1-splitsing-fracties': {
       query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const splitKandidatenlijstQuery = /* sparql */ `
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -283,10 +361,23 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+        PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
 
         SELECT DISTINCT ?kandidatenlijst ?kandidatenlijst_naam ?fractie1 ?fractie2 ?fractie1_naam ?fractie2_naam WHERE {
           ?kandidatenlijst a <http://data.vlaanderen.be/ns/mandaat#Kandidatenlijst>.
-          ?kandidatenlijst mandaat:behoortTot <${LOKALE_VERKIEZINGEN[2024]}>.
+          ?kandidatenlijst mandaat:behoortTot ?verkiezing.
+
+          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
           ?kandidatenlijst skos:prefLabel ?kandidatenlijst_naam.
           ?fractie1 ext:geproduceerdDoor ?kandidatenlijst;
                     regorg:legalName ?fractie1_naam.
@@ -297,7 +388,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         const kandidatenlijstQueryResult = await executeQuery({
           query: splitKandidatenlijstQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
         const bindings = kandidatenlijstQueryResult.results.bindings;
 
@@ -369,7 +460,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR5-LMB-2: De gemeenteraad stelt de grootte van de fracties als volgt vast
      */
     'IVGR5-LMB-2-grootte-fracties': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -377,14 +473,21 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        # TODO: http or https?
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
-        SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lid) as ?fractie_aantal_zetels) WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
-          ?fractie org:memberOf ?bestuursorgaan.
+        SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lid) as ?fractie_aantal_zetels) WHERE {
           ?fractie regorg:legalName ?fractie_naam.
-          # We want this to be optional, as it is possible there are 'fracties' without any electees
+          ?fractie org:memberOf ?bestuursorgaanIT.
+
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
           OPTIONAL {
             ?mandataris org:hasMembership/org:organisation ?fractie.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
@@ -393,10 +496,11 @@ export const mandateeTableConfigIVGR = (meeting) => {
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
           }
         }
+        ORDER BY DESC(?fractie_aantal_zetels) ?fractie
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -436,7 +540,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR5-LMB-3: De gemeenteraad stelt de samenstelling van de fracties voorlopig als volgt vast
      */
     'IVGR5-LMB-3-samenstelling-fracties': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -446,6 +555,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX person: <http://www.w3.org/ns/person#>
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
         SELECT DISTINCT ?persoon ?persoon_naam ?fractie ?fractie_naam WHERE {
           ?persoon a person:Person.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
@@ -460,13 +571,35 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandataris org:holds ?mandaat.
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
-          ?bestuursorgaan org:hasPost ?mandaat.
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+          {
+            SELECT ?fractie (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte)
+            WHERE {
+              ?_mandataris org:hasMembership/org:organisation ?fractie.
+              ?_mandataris org:holds ?_mandaat.
+              ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+              ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+            }
+          }
+
+          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+          ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+          ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+          ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
         }
+        ORDER BY DESC(?fractie_grootte) ?fractie DESC(?aantal_stemmen)
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -505,7 +638,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR7-LMB-1: De voorgedragen kandidaat-schepenen zijn
      */
     'IVGR7-LMB-1-kandidaat-schepenen': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -513,11 +651,19 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
-          ?bestuursorgaan org:hasPost ?mandaat.
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
+        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
@@ -530,7 +676,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -582,7 +728,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * en verklaart de voorgedragen kandidaat-schepenen verkozen in de rangorde van de gezamenlijke akte van voordracht van kandidaat-schepenen
      */
     'IVGR7-LMB-2-ontvankelijkheid-schepenen': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -591,11 +742,19 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde ?mandataris_opvolger WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
-          ?bestuursorgaan org:hasPost ?mandaat.
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
+        SELECT DISTINCT ?mandataris ?mandataris_rang ?mandataris_naam ?mandataris_status ?mandaat_start ?mandaat_einde WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
@@ -609,14 +768,11 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
-
-          # TODO: unsure how we will fetch the 'opvolger'
-          VALUES ?mandataris_opvolger { undef }
         }
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -666,7 +822,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
               mandataris_status,
               mandaat_start,
               mandaat_einde,
-              mandataris_opvolger,
             } = bindingToObject(binding);
             return row(schema, [
               schema.text(mandataris_rang),
@@ -674,9 +829,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
               schema.text(mandataris_status),
               dateNode(schema, mandaat_start),
               mandaat_einde ? dateNode(schema, mandaat_einde) : undefined,
-              mandataris_opvolger
-                ? schema.text(mandataris_opvolger)
-                : undefined,
+              undefined,
             ]);
           });
           const content = schema.nodes.table.create(null, [
@@ -708,7 +861,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
     },
 
     'IVGR7-LMB-3-verhindering-schepenen': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -717,15 +875,24 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-        SELECT DISTINCT ?mandataris ?mandataris_naam  WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
-          ?bestuursorgaan org:hasPost ?mandaat.
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
+        SELECT DISTINCT ?mandataris ?mandataris_naam ?mandataris_rang WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
-          ?mandataris mandaat:status/skos:prefLabel <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
+          ?mandataris mandaat:status <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
+          ?mandataris mandaat:rangorde ?mandataris_rang.
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
@@ -734,7 +901,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -776,7 +943,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR8-LMB-1: De volgende gemeenteraadsleden zijn verkozen als schepen
      */
     'IVGR8-LMB-1-verkozen-schepenen': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -785,14 +957,24 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
-        SELECT DISTINCT ?mandataris ?mandataris_naam ?fractie ?fractie_naam WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
-          ?bestuursorgaan org:hasPost ?mandaat.
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
+        SELECT DISTINCT ?mandataris ?mandataris_naam ?fractie ?fractie_naam WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          ?mandataris mandaat:rangorde ?mandataris_rang.
+
 
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
@@ -806,24 +988,34 @@ export const mandateeTableConfigIVGR = (meeting) => {
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
-          const bindings = queryResult.results.bindings;
           const tableHeader = row(
             schema,
             [schema.text('Schepen'), schema.text('Fractie')],
             true,
           );
+          const bindings = queryResult.results.bindings
+            .map((binding) => {
+              const { mandataris_rang } = bindingToObject(binding);
+              return {
+                ...binding,
+                rangnummer: rangordeStringToNumber(mandataris_rang),
+              };
+            })
+            .sort((b1, b2) => {
+              return b1.rangnummer - b2.rangnummer;
+            });
           const rows = bindings.map((binding) => {
             const { mandataris_naam, fractie_naam } = bindingToObject(binding);
             return row(schema, [
               schema.text(mandataris_naam),
-              schema.text(fractie_naam ?? ''),
+              fractie_naam ? schema.text(fractie_naam) : undefined,
             ]);
           });
           const content = schema.nodes.table.create(null, [
@@ -845,7 +1037,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
      * IVGR8-LMB-2: Op basis van de verkiezing van de schepenen en de voorzitter van het bijzonder comité voor de sociale dienst behoren de volgende fracties tot de coalitie
      */
     'IVGR8-LMB-2-coalitie': {
-      query: () => {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.GEMEENTE,
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.DISTRICT,
+        ]);
         const sparqlQuery = /* sparql */ `
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -854,25 +1051,34 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
-        SELECT DISTINCT ?fractie ?fractie_naam WHERE {
-          ?bestuursorgaan lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
-          ?bestuursorgaan org:hasPost ?mandaat.
+        PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
+        SELECT DISTINCT ?fractie ?fractie_naam WHERE {
           ?mandaat org:role ?role.
           VALUES ?role {
             <${BESTUURSFUNCTIE_CODES.SCHEPEN}>
-            <${BESTUURSFUNCTIE_CODES.VOORZITTER_BCSD}>
           }
+
+          ?bestuursorgaanIT org:hasPost ?mandaat.
+          ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+          ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:classificatie ?classificatie.
+          VALUES ?classificatie {
+            <${BESTUURSORGAAN_CLASSIFICATIE_CODES.COLLEGE_VAN_BURGEMEESTER_EN_SCHEPENEN}>
+          }
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?mandataris org:holds ?mandaat.
           ?mandataris org:hasMembership/org:organisation ?fractie.
+          ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
 
           ?fractie regorg:legalName ?fractie_naam.
         }
+        ORDER BY DESC(COUNT(?persoon))
       `;
         return executeQuery({
           query: sparqlQuery,
-          endpoint: '/vendor-proxy/query',
+          endpoint: '/raw-sparql',
         });
       },
       updateContent: (pos, queryResult) => {
@@ -909,22 +1115,29 @@ async function fetchFractieLeden(fractieUri) {
     PREFIX person: <http://www.w3.org/ns/person#>
     PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
-    SELECT DISTINCT ?persoon ?persoon_naam WHERE {
+    SELECT DISTINCT ?persoon ?naam WHERE {
       ?persoon a person:Person .
       ?persoon persoon:gebruikteVoornaam ?voornaam.
       ?persoon foaf:familyName ?achternaam.
-      BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+      BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?naam)
 
       ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
       ?mandataris org:hasMembership/org:organisation <${fractieUri}>.
       ?mandataris org:holds ?mandaat.
 
       ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+      <${fractieUri}> org:memberOf ?bestuursorgaanIT.
+      ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
+      ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
+      ?verkiezingsresultaat mandaat:isResultaatVan ?persoon.
+      ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
     }
+    ORDER BY DESC(?aantal_stemmen)
   `;
   const result = await executeQuery({
     query: sparqlQuery,
-    endpoint: '/vendor-proxy/query',
+    endpoint: '/raw-sparql',
   });
   return result.results.bindings.map(bindingToObject) ?? [];
 }
@@ -932,8 +1145,547 @@ async function fetchFractieLeden(fractieUri) {
 function createFractieLedenTable(fractie, schema) {
   const { naam, leden } = fractie;
   const tableHeader = row(schema, [schema.text(`Behoren tot ${naam}`)], true);
+
   const rows = leden.map((lid) => {
     return row(schema, [schema.text(lid.naam)]);
   });
   return schema.nodes.table.create(null, [tableHeader, ...rows]);
+}
+
+export const RMW_TAGS = /** @type {const} */ ([
+  'IVRMW2-LMB-1-zetelverdeling',
+  'IVRMW2-LMB-2-kandidaat-leden',
+  'IVRMW2-LBM-3-verkiezing-leden',
+  'IVRMW2-LBM-4-geloofsbrieven-leden',
+  'IVRMW2-LBM-5-eed-leden',
+]);
+
+/**
+ * Function which returns the RMW (OCMW) mandatee table config for a given meeting
+ * @param {import("../models/zitting").default} meeting
+ * @typedef {typeof RMW_TAGS[number]} RMW_TAG
+ * @returns {Record<RMW_TAG, unknown>}
+ */
+// eslint-disable-next-line no-unused-vars
+export const mandateeTableConfigRMW = (meeting) => {
+  return {
+    /**
+     * **IVRMW2: Verkiezing van de leden van het bijzonder comité voor de sociale dienst**
+     *
+     * IVGR3-LMB-1: Zetelverdeling
+     */
+    'IVRMW2-LMB-1-zetelverdeling': {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
+        const sparqlQuery = /* sparql */ `
+          PREFIX org: <http://www.w3.org/ns/org#>
+          PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+          PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+          PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          PREFIX regorg: <https://www.w3.org/ns/regorg#>
+          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
+          SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?persoon) as ?fractie_aantal_zetels) WHERE {
+            ?fractie regorg:legalName ?fractie_naam.
+            ?fractie org:memberOf ?bestuursorgaanIT.
+
+            ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+            ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+            ?bestuursorgaan besluit:classificatie ?classificatie.
+            VALUES ?classificatie {
+              <${BESTUURSORGAAN_CLASSIFICATIE_CODES.BCSD}>
+            }
+            ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+            OPTIONAL {
+              ?mandataris org:hasMembership/org:organisation ?fractie.
+              ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+              ?mandataris org:holds ?mandaat.
+
+              ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+            }
+          }
+          ORDER BY DESC(?fractie_aantal_zetels) ?fractie
+        `;
+        return executeQuery({
+          query: sparqlQuery,
+          endpoint: '/raw-sparql',
+        });
+      },
+      updateContent: (pos, queryResult) => {
+        return (state) => {
+          const { doc, schema } = state;
+          const $pos = doc.resolve(pos);
+          const bindings = queryResult.results.bindings;
+          const tableHeader = row(
+            schema,
+            [schema.text('Naam lijst'), schema.text('Beschikt over')],
+            true,
+          );
+          const rows = bindings.map((binding) => {
+            const { fractie_naam, fractie_aantal_zetels } =
+              bindingToObject(binding);
+            const zetelSuffix =
+              fractie_aantal_zetels === '1' ? 'zetel' : 'zetels';
+            return row(schema, [
+              schema.text(fractie_naam),
+              schema.text(`${fractie_aantal_zetels} ${zetelSuffix}`),
+            ]);
+          });
+          const content = schema.nodes.table.create(null, [
+            tableHeader,
+            ...rows,
+          ]);
+          const transaction = replaceContent(state.tr, $pos, content);
+          return {
+            transaction,
+            result: true,
+            initialState: state,
+          };
+        };
+      },
+    },
+    /**
+     * **IVRMW2: Verkiezing van de leden van het bijzonder comité voor de sociale dienst**
+     *
+     * IVGR3-LMB-2: Akte van voordracht van de kandidaat-leden en kandidaat-opvolgers van het BCSD
+     */
+    'IVRMW2-LMB-2-kandidaat-leden': {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
+        const sparqlQuery = /* sparql */ `
+          PREFIX org: <http://www.w3.org/ns/org#>
+          PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+          PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+          PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          PREFIX regorg: <https://www.w3.org/ns/regorg#>
+          PREFIX person: <http://www.w3.org/ns/person#>
+          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
+          SELECT DISTINCT ?persoon ?persoon_naam ?persoon_mandaat_einde ?fractie ?fractie_naam WHERE {
+            ?persoon a person:Person.
+            ?persoon persoon:gebruikteVoornaam ?voornaam.
+            ?persoon foaf:familyName ?achternaam.
+            BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+
+            ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+            ?mandataris org:hasMembership/org:organisation ?fractie.
+            OPTIONAL {
+              ?mandataris mandaat:einde ?persoon_mandaat_einde.
+            }
+
+            ?fractie regorg:legalName ?fractie_naam.
+
+            ?mandataris org:holds ?mandaat.
+            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+            ?bestuursorgaanIT org:hasPost ?mandaat.
+            ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+            ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+            ?bestuursorgaan besluit:classificatie ?classificatie.
+            VALUES ?classificatie {
+              <${BESTUURSORGAAN_CLASSIFICATIE_CODES.BCSD}>
+            }
+            ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+            {
+              SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
+              WHERE {
+                ?_mandataris org:hasMembership/org:organisation ?fractie.
+                ?_mandataris org:holds ?_mandaat.
+                ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+                ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+              }
+            }
+          }
+          ORDER BY DESC(?fractie_grootte) ?fractie ?persoon_naam
+        `;
+        return executeQuery({
+          query: sparqlQuery,
+          endpoint: '/raw-sparql',
+        });
+      },
+      updateContent: (pos, queryResult) => {
+        return (state) => {
+          const { doc, schema } = state;
+          const $pos = doc.resolve(pos);
+          const bindings = queryResult.results.bindings;
+          const tableHeader = row(
+            schema,
+            [
+              schema.text('Naam lijst'),
+              schema.text('Naam kandidaat-lid'),
+              schema.text('Einddatum mandaat kandidaat-lid BCSD'),
+              schema.text('Naam kandidaat-opvolger(s)'),
+              schema.text('Einddatum mandaat kandidaat-opvolger(s)'),
+            ],
+            true,
+          );
+          const rows = bindings.map((binding) => {
+            const { persoon_naam, persoon_mandaat_einde, fractie_naam } =
+              bindingToObject(binding);
+            return row(schema, [
+              schema.text(fractie_naam),
+              schema.text(persoon_naam),
+              dateNode(schema, persoon_mandaat_einde),
+              undefined,
+              dateNode(schema),
+            ]);
+          });
+          const content = schema.nodes.table.create(null, [
+            tableHeader,
+            ...rows,
+          ]);
+          const transaction = replaceContent(state.tr, $pos, content);
+          return {
+            transaction,
+            result: true,
+            initialState: state,
+          };
+        };
+      },
+    },
+    'IVRMW2-LBM-3-verkiezing-leden': {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
+        const sparqlQuery = /* sparql */ `
+          PREFIX org: <http://www.w3.org/ns/org#>
+          PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+          PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+          PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          PREFIX regorg: <https://www.w3.org/ns/regorg#>
+          PREFIX person: <http://www.w3.org/ns/person#>
+          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
+          SELECT DISTINCT ?mandataris ?persoon ?persoon_naam ?mandaat_start ?mandaat_einde ?fractie ?fractie_naam WHERE {
+            ?persoon a person:Person.
+            ?persoon persoon:gebruikteVoornaam ?voornaam.
+            ?persoon foaf:familyName ?achternaam.
+            BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+
+            ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+            ?mandataris org:hasMembership/org:organisation ?fractie.
+            ?mandataris mandaat:start ?mandaat_start.
+            OPTIONAL {
+              ?mandataris mandaat:einde ?mandaat_einde.
+            }
+
+            ?fractie regorg:legalName ?fractie_naam.
+
+            ?mandataris org:holds ?mandaat.
+            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+            ?bestuursorgaanIT org:hasPost ?mandaat.
+            ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+            ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+            ?bestuursorgaan besluit:classificatie ?classificatie.
+            VALUES ?classificatie {
+              <${BESTUURSORGAAN_CLASSIFICATIE_CODES.BCSD}>
+            }
+            ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+            {
+              SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
+              WHERE {
+                ?_mandataris org:hasMembership/org:organisation ?fractie.
+                ?_mandataris org:holds ?_mandaat.
+                ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+                ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+              }
+            }
+          }
+          ORDER BY DESC(?fractie_grootte) ?fractie ?persoon_naam
+        `;
+        return executeQuery({
+          query: sparqlQuery,
+          endpoint: '/raw-sparql',
+        });
+      },
+      updateContent: (pos, queryResult) => {
+        return (state) => {
+          const { doc, schema } = state;
+          const $pos = doc.resolve(pos);
+          const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+            return hasOutgoingNamedNodeTriple(
+              node.attrs,
+              RDF('type'),
+              BESLUIT('Besluit'),
+            );
+          })?.node.attrs.subject;
+          if (!decisionUri) {
+            throw new Error(
+              'Could not find decision to sync mandatee table with',
+            );
+          }
+          const bindings = queryResult.results.bindings;
+          const tableHeader = row(
+            schema,
+            [
+              schema.text('Naam lijst'),
+              schema.text('Naam lid'),
+              schema.text('Begindatum mandaat'),
+              schema.text('Einddatum mandaat'),
+              schema.text('Naam kandidaat-opvolger'),
+            ],
+            true,
+          );
+          const rows = bindings.map((binding) => {
+            const {
+              mandataris,
+              persoon_naam,
+              mandaat_start,
+              mandaat_einde,
+              fractie_naam,
+            } = bindingToObject(binding);
+            return row(schema, [
+              schema.text(fractie_naam),
+              resourceNode(schema, mandataris, persoon_naam),
+              dateNode(schema, mandaat_start),
+              dateNode(schema, mandaat_einde),
+              undefined,
+            ]);
+          });
+          const content = schema.nodes.table.create(null, [
+            tableHeader,
+            ...rows,
+          ]);
+          const factory = new SayDataFactory();
+          const result = transactionCombinator(
+            state,
+            replaceContent(state.tr, $pos, content),
+          )(
+            bindings.map((binding) => {
+              return addPropertyToNode({
+                resource: decisionUri,
+                property: {
+                  predicate: MANDAAT('bekrachtigtAanstellingVan').full,
+                  object: factory.resourceNode(binding['mandataris'].value),
+                },
+              });
+            }),
+          );
+          return {
+            transaction: result.transaction,
+            result: true,
+            initialState: state,
+          };
+        };
+      },
+    },
+    'IVRMW2-LBM-4-geloofsbrieven-leden': {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
+        const sparqlQuery = /* sparql */ `
+          PREFIX org: <http://www.w3.org/ns/org#>
+          PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+          PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+          PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          PREFIX regorg: <https://www.w3.org/ns/regorg#>
+          PREFIX person: <http://www.w3.org/ns/person#>
+          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
+          SELECT DISTINCT ?persoon ?persoon_naam ?fractie ?fractie_naam WHERE {
+            ?persoon a person:Person.
+            ?persoon persoon:gebruikteVoornaam ?voornaam.
+            ?persoon foaf:familyName ?achternaam.
+            BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+
+            ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+            ?mandataris org:hasMembership/org:organisation ?fractie.
+
+            ?fractie regorg:legalName ?fractie_naam.
+
+            ?mandataris org:holds ?mandaat.
+            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+            ?bestuursorgaanIT org:hasPost ?mandaat.
+            ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+            ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+            ?bestuursorgaan besluit:classificatie ?classificatie.
+            VALUES ?classificatie {
+              <${BESTUURSORGAAN_CLASSIFICATIE_CODES.BCSD}>
+            }
+            ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+            {
+              SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
+              WHERE {
+                ?_mandataris org:hasMembership/org:organisation ?fractie.
+                ?_mandataris org:holds ?_mandaat.
+                ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+                ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+              }
+            }
+          }
+          ORDER BY DESC(?fractie_grootte) ?fractie ?persoon_naam
+        `;
+        return executeQuery({
+          query: sparqlQuery,
+          endpoint: '/raw-sparql',
+        });
+      },
+      updateContent: (pos, queryResult) => {
+        return (state) => {
+          const { doc, schema } = state;
+          const $pos = doc.resolve(pos);
+          const bindings = queryResult.results.bindings;
+          const tableHeader = row(
+            schema,
+            [
+              schema.text('Naam kandidaat-lid'),
+              schema.text('Voorgedragen door'),
+              schema.text('Met als opvolger'),
+            ],
+            true,
+          );
+          const rows = bindings.map((binding) => {
+            const { persoon_naam, fractie_naam } = bindingToObject(binding);
+            return row(schema, [
+              schema.text(persoon_naam),
+              schema.text(fractie_naam),
+              undefined,
+            ]);
+          });
+          const content = schema.nodes.table.create(null, [
+            tableHeader,
+            ...rows,
+          ]);
+          const transaction = replaceContent(state.tr, $pos, content);
+          return {
+            transaction,
+            result: true,
+            initialState: state,
+          };
+        };
+      },
+    },
+    'IVRMW2-LBM-5-eed-leden': {
+      query: async () => {
+        const bestuurseenheid = await getBestuurseenheid(meeting);
+        await assertClassificatie(bestuurseenheid, [
+          BESTUURSEENHEID_CLASSIFICATIE_CODES.OCMW,
+        ]);
+        const sparqlQuery = /* sparql */ `
+          PREFIX org: <http://www.w3.org/ns/org#>
+          PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
+          PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+          PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          PREFIX regorg: <https://www.w3.org/ns/regorg#>
+          PREFIX person: <http://www.w3.org/ns/person#>
+          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
+          SELECT DISTINCT ?persoon ?persoon_naam ?fractie ?fractie_naam WHERE {
+            ?persoon a person:Person.
+            ?persoon persoon:gebruikteVoornaam ?voornaam.
+            ?persoon foaf:familyName ?achternaam.
+            BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
+
+            ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+            ?mandataris org:hasMembership/org:organisation ?fractie.
+
+            ?fractie regorg:legalName ?fractie_naam.
+
+            ?mandataris org:holds ?mandaat.
+            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+            ?bestuursorgaanIT org:hasPost ?mandaat.
+            ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
+            ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+            ?bestuursorgaan besluit:classificatie ?classificatie.
+            VALUES ?classificatie {
+              <${BESTUURSORGAAN_CLASSIFICATIE_CODES.BCSD}>
+            }
+            ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
+
+            {
+              SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
+              WHERE {
+                ?_mandataris org:hasMembership/org:organisation ?fractie.
+                ?_mandataris org:holds ?_mandaat.
+                ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+                ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
+              }
+            }
+          }
+          ORDER BY DESC(?fractie_grootte) ?fractie ?persoon_naam
+        `;
+        return executeQuery({
+          query: sparqlQuery,
+          endpoint: '/raw-sparql',
+        });
+      },
+      updateContent: (pos, queryResult) => {
+        return (state) => {
+          const { doc, schema } = state;
+          const $pos = doc.resolve(pos);
+          const bindings = queryResult.results.bindings;
+          const tableHeader = row(
+            schema,
+            [
+              schema.text('Naam kandidaat-lid'),
+              schema.text('Voorgedragen door'),
+            ],
+            true,
+          );
+          const rows = bindings.map((binding) => {
+            const { persoon_naam, fractie_naam } = bindingToObject(binding);
+            return row(schema, [
+              schema.text(persoon_naam),
+              schema.text(fractie_naam),
+            ]);
+          });
+          const content = schema.nodes.table.create(null, [
+            tableHeader,
+            ...rows,
+          ]);
+          const transaction = replaceContent(state.tr, $pos, content);
+          return {
+            transaction,
+            result: true,
+            initialState: state,
+          };
+        };
+      },
+    },
+  };
+};
+
+async function getBestuurseenheid(meeting) {
+  const bestuursorgaanIT = await meeting.bestuursorgaan;
+  const bestuursorgaanMain = await bestuursorgaanIT.isTijdsspecialisatieVan;
+  return bestuursorgaanMain.bestuurseenheid;
+}
+
+async function assertClassificatie(bestuurseenheid, classificatiecodes) {
+  const classificatie = await bestuurseenheid.classificatie;
+  const match = classificatiecodes.some((code) => code === classificatie.uri);
+  if (match) {
+    return classificatie.uri;
+  } else {
+    throw new Error(
+      `Bestuurseenheid holding the IV does not have the correct 'classificatie'. Received ${classificatie.uri}. Expected one of ${classificatiecodes.join(', ')}`,
+    );
+  }
 }

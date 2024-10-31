@@ -79,7 +79,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
-      heading: headingWithConfig({ rdfaAware: true }),
+      heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
       horizontal_rule,
       code_block,

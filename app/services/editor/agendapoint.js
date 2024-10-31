@@ -106,7 +106,7 @@ import {
   snippetView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
 
-import { IVGR_TAGS } from '../../config/mandatee-table-config';
+import { IVGR_TAGS, RMW_TAGS } from '../../config/mandatee-table-config';
 import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { getOwner } from '@ember/application';
@@ -141,7 +141,7 @@ export default class AgendapointEditorService extends Service {
       codelist,
       roadsign_regulation,
       mandatee_table,
-      heading: headingWithConfig({ rdfaAware: true }),
+      heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
       snippet_placeholder: snippetPlaceholder,
       snippet: snippet(this.config.snippet),
@@ -237,15 +237,15 @@ export default class AgendapointEditorService extends Service {
         endpoint: '/lpdc-service',
       },
       mandateeTable: {
-        tags: IVGR_TAGS,
+        tags: [...IVGR_TAGS, ...RMW_TAGS],
         defaultTag: IVGR_TAGS[0],
       },
       lmb: {
-        endpoint: '/vendor-proxy/query',
+        endpoint: '/raw-sparql',
       },
       autofilledVariable: {
         autofilledValues: {
-          administrativeUnit: `${this.currentSession.classificatie.label} ${this.currentSession.group.naam}`,
+          administrativeUnit: `${municipality.naam}`,
         },
       },
     };

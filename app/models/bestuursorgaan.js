@@ -21,6 +21,12 @@ export default class BestuursorgaanModel extends Model {
   @belongsTo('rechtstreekse-verkiezing', { inverse: 'steltSamen', async: true })
   wordtSamengesteldDoor;
 
+  @belongsTo('bestuursperiode', {
+    async: true,
+    inverse: null,
+  })
+  bestuursperiode;
+
   @hasMany('bestuursorgaan', {
     inverse: 'isTijdsspecialisatieVan',
     async: true,
