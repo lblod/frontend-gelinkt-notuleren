@@ -51,7 +51,7 @@
     "@lblod/ember-environment-banner": "^0.5.0",
     "@lblod/ember-mock-login": "^0.10.0",
     "@lblod/ember-rdfa-editor": "10.6.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "24.2.3",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "24.3.0",
     "@lblod/template-uuid-instantiator": "^1.0.2",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
     "@tsconfig/ember": "^3.0.8",
