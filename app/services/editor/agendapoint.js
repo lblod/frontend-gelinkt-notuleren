@@ -245,7 +245,7 @@ export default class AgendapointEditorService extends Service {
       },
       autofilledVariable: {
         autofilledValues: {
-          administrativeUnit: `${classificatie?.label} ${municipality.naam}`,
+          administrativeUnit: `${municipality.naam}`,
         },
       },
     };
