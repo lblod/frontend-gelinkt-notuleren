@@ -39,6 +39,7 @@ import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
 import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
+import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import { image } from '@lblod/ember-rdfa-editor/plugins/image';
 import {
   date,
@@ -178,6 +179,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+        block_rdfa: (node) => new BlockRDFaView(node),
       };
     };
   }

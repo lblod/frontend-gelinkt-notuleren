@@ -105,6 +105,7 @@ import {
   snippet,
   snippetView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
+import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 
 import { IVGR_TAGS, RMW_TAGS } from '../../config/mandatee-table-config';
 import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
@@ -289,6 +290,7 @@ export default class AgendapointEditorService extends Service {
         codelist: codelistView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+        block_rdfa: (node) => new BlockRDFaView(node),
 
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
