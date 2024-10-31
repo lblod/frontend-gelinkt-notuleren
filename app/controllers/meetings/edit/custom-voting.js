@@ -46,6 +46,8 @@ import { image } from '@lblod/ember-rdfa-editor/plugins/image';
 import {
   date,
   dateView,
+  person_variable,
+  personVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
 import {
@@ -140,6 +142,7 @@ export default class MeetingsEditManualVotingController extends Controller {
       text,
       image,
       hard_break,
+      person_variable,
       invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
       block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
@@ -209,7 +212,9 @@ export default class MeetingsEditManualVotingController extends Controller {
         allowCustomFormat: true,
       },
       lmb: {
-        endpoint: '/vendor-proxy/query',
+        // not raw-sparql as this is quite a slow query
+        // and the Person instances in LMB aren't likely to change very much
+        endpoint: '/sparql',
       },
     };
   }
@@ -229,6 +234,7 @@ export default class MeetingsEditManualVotingController extends Controller {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+        person_variable: personVariableView(controller),
       };
     };
   }
