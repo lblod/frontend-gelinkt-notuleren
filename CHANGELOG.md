@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.37.0
+
+### Minor Changes
+
+- [`eabfb71`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eabfb71ac06524052c061197b62eaa593cfa6c81) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to [v10.7.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.7.0)
+
 ## 5.36.1
 
 ### Patch Changes
