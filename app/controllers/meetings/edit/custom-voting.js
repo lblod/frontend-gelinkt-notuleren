@@ -87,13 +87,13 @@ export default class MeetingsEditManualVotingController extends Controller {
 
   @action
   closeModal() {
+    this.clearEditor();
     this.router.transitionTo('meetings.edit');
   }
 
   @action
   async saveAndQuit() {
     await this.saveTask.perform();
-    this.clearEditor();
     this.closeModal();
   }
 
