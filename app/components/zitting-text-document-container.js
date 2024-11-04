@@ -1,8 +1,9 @@
 import Component from '@glimmer/component';
 import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
-import { Schema } from '@lblod/ember-rdfa-editor';
+import { getOwner } from '@ember/application';
 
+import { Schema } from '@lblod/ember-rdfa-editor';
 import {
   em,
   strikethrough,
@@ -53,6 +54,7 @@ import {
   inlineRdfaWithConfig,
   inlineRdfaWithConfigView,
 } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
@@ -170,6 +172,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
+      emberApplication(getOwner(this)),
     ];
   }
 
