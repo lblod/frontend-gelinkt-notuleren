@@ -54,6 +54,8 @@ import {
   inlineRdfaWithConfig,
   inlineRdfaWithConfigView,
 } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+import { getOwner } from '@ember/application';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 
 export default class MeetingsEditManualVotingController extends Controller {
   @service router;
@@ -225,6 +227,7 @@ export default class MeetingsEditManualVotingController extends Controller {
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
+      emberApplication(getOwner(this)),
     ];
   }
 
