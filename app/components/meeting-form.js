@@ -274,10 +274,16 @@ export default class MeetingForm extends Component {
                   MANDATARIS_STATUS_WAARNEMEND,
                 ].join(','),
               },
+              ':or:': {
+                ':has-no:einde': true,
+                ':gt:einde': startOfMeeting.toISOString(),
+              },
             },
           })),
         ];
-        mandatees.push(...voorzittersPreviousLegislation);
+        if (voorzittersPreviousLegislation.length) {
+          mandatees.push(voorzittersPreviousLegislation[0]);
+        }
       }
     }
     return Array.from(mandatees);

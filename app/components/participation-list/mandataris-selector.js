@@ -122,10 +122,16 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
                   MANDATARIS_STATUS_WAARNEMEND,
                 ].join(','),
               },
+              ':or:': {
+                ':has-no:einde': true,
+                ':gt:einde': this.startOfMeeting.toISOString(),
+              },
             },
           })),
         ];
-        mandatees.push(...voorzittersPreviousLegislation);
+        if (voorzittersPreviousLegislation.length) {
+          mandatees.push(voorzittersPreviousLegislation[0]);
+        }
       }
     }
     return mandatees;
