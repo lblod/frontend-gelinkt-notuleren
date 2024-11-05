@@ -510,6 +510,7 @@ participation-list-modal-table:
   naam-label: Name
   functie-label: Position
   geboortedatum-label: Birthdate
+  bestuursperiode-label: Administration period
   actie-label: Action
   checkbox-label: Present
   no-data-message: No mandatees were found.

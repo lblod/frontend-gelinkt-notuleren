@@ -514,6 +514,7 @@ participation-list-modal-table:
   naam-label: Naam
   functie-label: Functie
   geboortedatum-label: Geboortedatum
+  bestuursperiode-label: Bestuursperiode
   actie-label: Actie
   checkbox-label: Aanwezig
   no-data-message: Geen mandatarissen gevonden.
