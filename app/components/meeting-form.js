@@ -11,6 +11,8 @@ import {
   MANDATARIS_STATUS_EFFECTIEF,
   MANDATARIS_STATUS_WAARNEMEND,
 } from '../utils/constants';
+import { getIdentifier } from '../utils/rdf-utils';
+import { BESTUURSFUNCTIE_CODES } from '../config/constants';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
@@ -183,9 +185,10 @@ export default class MeetingForm extends Component {
   });
 
   fetchPossibleParticipants = restartableTask(async () => {
+    const bestuursorgaanIT = this.bestuursorgaan;
     const aanwezigenRoles = await this.store.query('bestuursfunctie-code', {
       'filter[standaard-type-van][is-classificatie-van][heeft-tijdsspecialisaties][:id:]':
-        this.bestuursorgaan.id,
+        bestuursorgaanIT.id,
     });
     const stringifiedDefaultTypeIds = aanwezigenRoles
       .map((t) => t.id)
@@ -204,7 +207,7 @@ export default class MeetingForm extends Component {
       filter: {
         bekleedt: {
           'bevat-in': {
-            ':uri:': this.bestuursorgaan.uri,
+            ':uri:': bestuursorgaanIT.uri,
           },
           bestuursfunctie: {
             ':id:': stringifiedDefaultTypeIds,
@@ -224,7 +227,60 @@ export default class MeetingForm extends Component {
       },
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
-    const mandatees = await this.store.query('mandataris', queryParams);
+    const mandatees = [...(await this.store.query('mandataris', queryParams))];
+    if (this.isInaugurationMeeting) {
+      const commonBestuursorgaan =
+        await bestuursorgaanIT.isTijdsspecialisatieVan;
+      // In case this is an inauguration meeting, we also want to include the chairman of the previous legislation
+      const currentBestuursperiode = await bestuursorgaanIT.bestuursperiode;
+      const previousBestuursperiode = await currentBestuursperiode.previous;
+      if (previousBestuursperiode) {
+        const voorzittersPreviousLegislation = [
+          ...(await this.store.query('mandataris', {
+            include: [
+              'is-bestuurlijke-alias-van',
+              'is-bestuurlijke-alias-van.geboorte',
+              'status',
+              'bekleedt',
+              'bekleedt.bestuursfunctie',
+            ].join(','),
+            sort: '-einde',
+            filter: {
+              bekleedt: {
+                'bevat-in': {
+                  'is-tijdsspecialisatie-van': {
+                    ':uri:': commonBestuursorgaan.uri,
+                  },
+                  bestuursperiode: {
+                    ':uri:': previousBestuursperiode.uri,
+                  },
+                },
+                bestuursfunctie: {
+                  ':id:': [
+                    getIdentifier(
+                      BESTUURSFUNCTIE_CODES.VOORZITTER_GEMEENTERAAD,
+                    ),
+                    getIdentifier(
+                      BESTUURSFUNCTIE_CODES.VOORZITTER_RAAD_MAATSCHAPPELIJK_WELZIJN,
+                    ),
+                    getIdentifier(
+                      BESTUURSFUNCTIE_CODES.VOORZITTER_DISTRICTSRAAD,
+                    ),
+                  ].join(','),
+                },
+              },
+              status: {
+                ':id:': [
+                  MANDATARIS_STATUS_EFFECTIEF,
+                  MANDATARIS_STATUS_WAARNEMEND,
+                ].join(','),
+              },
+            },
+          })),
+        ];
+        mandatees.push(...voorzittersPreviousLegislation);
+      }
+    }
     return Array.from(mandatees);
   });
 
