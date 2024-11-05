@@ -24,11 +24,9 @@ export async function createInstallatievergadering(
   store,
   { bestuursorgaan, templateFetcher, location, plannedStart },
 ) {
-  const now = new Date();
-
   const meeting = store.createRecord('installatievergadering', {
     geplandeStart: plannedStart,
-    gestartOpTijdstip: now,
+    gestartOpTijdstip: plannedStart,
     opLocatie: location,
     bestuursorgaan,
   });
