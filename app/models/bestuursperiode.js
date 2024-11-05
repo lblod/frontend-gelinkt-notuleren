@@ -1,8 +1,11 @@
 import ConceptModel from './concept';
 
-import { attr } from '@ember-data/model';
+import { attr, belongsTo } from '@ember-data/model';
 
 export default class BestuursperiodeModel extends ConceptModel {
-  @attr('number') start;
-  @attr('number') einde;
+  @attr('number') startYear;
+  @attr('number') endYear;
+
+  @belongsTo('bestuursperiode', { async: true, inverse: 'next' }) previous;
+  @belongsTo('bestuursperiode', { async: true, inverse: 'previous' }) next;
 }

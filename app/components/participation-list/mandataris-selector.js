@@ -6,6 +6,9 @@ import {
   MANDATARIS_STATUS_EFFECTIEF,
   MANDATARIS_STATUS_WAARNEMEND,
 } from '../../utils/constants';
+import { BESTUURSFUNCTIE_CODES } from '../../config/constants';
+import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
+import { getIdentifier } from '../../utils/rdf-utils';
 
 const GOVERNOR_CLASSIFICATION =
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/180a2fba-6ca9-4766-9b94-82006bb9c709';
@@ -25,7 +28,7 @@ const SEARCH_DEBOUNCE_MS = 300;
 export default class ParticipationListMandatarisSelectorComponent extends Component {
   @service store;
 
-  get adminBody() {
+  get bestuursorgaanIT() {
     return this.args.bestuursorgaan;
   }
 
@@ -37,19 +40,23 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     return this.meeting.gestartOpTijdstip ?? this.meeting.geplandeStart;
   }
 
+  get isInaugurationMeeting() {
+    return this.meeting instanceof InstallatieVergaderingModel;
+  }
+
   @action
   select(value) {
     this.args.onSelect(value);
   }
 
-  async searchMandateesOfAdminBodyByName(adminBody, searchData) {
+  async searchMandateesByName(searchData) {
     let queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      include: 'status',
+      include: 'is-bestuurlijke-alias-van,bekleedt.bestuursfunctie',
       filter: {
         bekleedt: {
           'bevat-in': {
-            ':uri:': adminBody.uri,
+            ':uri:': this.bestuursorgaanIT.uri,
           },
         },
         'is-bestuurlijke-alias-van': searchData,
@@ -67,13 +74,76 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
       },
       page: { size: 100 },
     };
-    return this.store.query('mandataris', queryParams);
+    const mandatees = [...(await this.store.query('mandataris', queryParams))];
+    if (this.isInaugurationMeeting) {
+      const commonBestuursorgaan =
+        await this.bestuursorgaanIT.isTijdsspecialisatieVan;
+      // In case this is an inauguration meeting, we also want to include the chairman of the previous legislation
+      const currentBestuursperiode =
+        await this.bestuursorgaanIT.bestuursperiode;
+      const previousBestuursperiode = await currentBestuursperiode.previous;
+      if (previousBestuursperiode) {
+        const voorzittersPreviousLegislation = [
+          ...(await this.store.query('mandataris', {
+            include: [
+              'is-bestuurlijke-alias-van',
+              'is-bestuurlijke-alias-van.geboorte',
+              'status',
+              'bekleedt',
+              'bekleedt.bestuursfunctie',
+            ].join(','),
+            filter: {
+              bekleedt: {
+                'bevat-in': {
+                  'is-tijdsspecialisatie-van': {
+                    ':uri:': commonBestuursorgaan.uri,
+                  },
+                  bestuursperiode: {
+                    ':uri:': previousBestuursperiode.uri,
+                  },
+                },
+                bestuursfunctie: {
+                  ':id:': [
+                    getIdentifier(
+                      BESTUURSFUNCTIE_CODES.VOORZITTER_GEMEENTERAAD,
+                    ),
+                    getIdentifier(
+                      BESTUURSFUNCTIE_CODES.VOORZITTER_RAAD_MAATSCHAPPELIJK_WELZIJN,
+                    ),
+                    getIdentifier(
+                      BESTUURSFUNCTIE_CODES.VOORZITTER_DISTRICTSRAAD,
+                    ),
+                  ].join(','),
+                },
+              },
+              status: {
+                ':id:': [
+                  MANDATARIS_STATUS_EFFECTIEF,
+                  MANDATARIS_STATUS_WAARNEMEND,
+                ].join(','),
+              },
+              ':or:': {
+                ':has-no:einde': true,
+                ':gt:einde': this.startOfMeeting.toISOString(),
+              },
+            },
+          })),
+        ];
+        if (voorzittersPreviousLegislation.length) {
+          mandatees.push(voorzittersPreviousLegislation[0]);
+        }
+      }
+    }
+    return mandatees;
   }
 
-  async searchGovernorsAdminUnitByName(adminUnit, searchData) {
+  async searchGovernorsByName(searchData) {
+    const adminUnit = await this.bestuursorgaanIT.get(
+      'isTijdsspecialisatieVan.bestuurseenheid',
+    );
     const queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
-      include: 'status',
+      include: 'is-bestuurlijke-alias-van,bekleedt.bestuursfunctie',
       filter: {
         bekleedt: {
           'bevat-in': {
@@ -102,7 +172,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
       },
       page: { size: 100 },
     };
-    return this.store.query('mandataris', queryParams);
+    return [...(await this.store.query('mandataris', queryParams))];
   }
 
   async isDeputation(adminBody) {
@@ -114,23 +184,17 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
 
   searchByName = restartableTask(async (searchData) => {
     await timeout(SEARCH_DEBOUNCE_MS);
-    const isDeputation = await this.isDeputation(this.adminBody);
+    const isDeputation = await this.isDeputation(this.bestuursorgaanIT);
     let mandatees;
     if (isDeputation) {
-      const adminUnit = await this.args.bestuursorgaan.get(
-        'isTijdsspecialisatieVan.bestuurseenheid',
-      );
       const [mandateeResults, governorResults] = await all([
-        this.searchMandateesOfAdminBodyByName(this.adminBody, searchData),
-        this.searchGovernorsAdminUnitByName(adminUnit, searchData),
+        this.searchMandateesByName(searchData),
+        this.searchGovernorsByName(searchData),
       ]);
-      mandatees = mandateeResults.toArray();
-      mandatees.push(...governorResults.toArray());
+      mandatees = mandateeResults;
+      mandatees.push(...governorResults);
     } else {
-      mandatees = await this.searchMandateesOfAdminBodyByName(
-        this.adminBody,
-        searchData,
-      );
+      mandatees = await this.searchMandateesByName(searchData);
     }
     return mandatees;
   });

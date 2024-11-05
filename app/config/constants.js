@@ -49,9 +49,13 @@ export const BESTUURSFUNCTIE_CODES = {
   VOORZITTER_BCSD:
     'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001a',
   LID_RAAD_MAATSCHAPPELIJK_WELZIJN:
-    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000015',
   VOORZITTER_RAAD_MAATSCHAPPELIJK_WELZIJN:
-    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000016',
+  LID_DISTRICTSRAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001b',
+  VOORZITTER_DISTRICTSRAAD:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e00001c',
 };
 
 export const BESTUURSPERIODES = {
