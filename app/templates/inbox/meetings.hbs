@@ -17,7 +17,7 @@
           </AuHeading>
         </Group>
         <Group class='au-c-toolbar__group--center au-u-hide-on-print'>
-          {{#unless this.readOnly}}
+          {{#unless (or this.readOnly this.mayCreateInaugurationMeeting.isLoading)}}
             <AuDropdown
               @skin='primary'
               @title={{t 'inbox.meetings.new.title'}}
@@ -28,9 +28,11 @@
               <AuLink @route='inbox.meetings.new' role='menuitem'>
                 {{t 'inbox.meetings.new.common-meeting.title'}}
               </AuLink>
-              <AuLink @route='inbox.meetings.new-inauguration' role='menuitem'>
-                {{t 'inbox.meetings.new.inauguration-meeting.title'}}
-              </AuLink>
+              {{#if this.mayCreateInaugurationMeeting.value}}
+                <AuLink @route='inbox.meetings.new-inauguration' role='menuitem'>
+                  {{t 'inbox.meetings.new.inauguration-meeting.title'}}
+                </AuLink>
+              {{/if}}
             </AuDropdown>
           {{/unless}}
         </Group>
