@@ -514,6 +514,7 @@ participation-list-modal-table:
   naam-label: Naam
   functie-label: Functie
   geboortedatum-label: Geboortedatum
+  bestuursperiode-label: Bestuursperiode
   actie-label: Actie
   checkbox-label: Aanwezig
   no-data-message: Geen mandatarissen gevonden.
@@ -789,8 +790,8 @@ download:
     agenda: Agenda downloaden als HTML
     besluitenlijst: Besluitenlijst downloaden als HTML
     notulen: Notulen downloaden als HTML
-    agendapunt: Agendapunt
-    besluit: Besluit
+    agendapunt: Download agendapunt
+    besluit: Download besluit
     agenda-downloading: Agenda aan het downloaden
     agenda-downloaded: Agenda gedownload
     besluitenlijst-downloading: Besluitenlijst aan het downloaden
@@ -802,7 +803,7 @@ download:
     download-html: Download HTML
     no-data-message: Geen agendapunten gevonden in zitting
     copy-options-header: Kopieer naar klembord
-    copy-options: Bekijk kopieermogelijkheden
+    copy-options: Kopieer besluit en onderdelen
 
 download-meeting-part:
   downloading: Aan het downloaden
@@ -811,7 +812,7 @@ download-meeting-part:
 copy-options:
   heading: 'Kopieer onderdelen uit:'
   disclaimer: 'De opmaak van het document zal afhangen van de applicatie waarin het geüpload wordt.'
-  copy-all: Volledig besluit kopieren
+  copy-all: Kopieer volledig besluit
   copying: kopiëren
   completed: gekopieerd
   copy-part: 'Kopieer {part}'

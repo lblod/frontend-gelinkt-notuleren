@@ -1,7 +1,8 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { Schema } from '@lblod/ember-rdfa-editor';
+import { getOwner } from '@ember/application';
 
+import { Schema } from '@lblod/ember-rdfa-editor';
 import {
   em,
   strikethrough,
@@ -38,6 +39,7 @@ import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
 import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
+import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import { image } from '@lblod/ember-rdfa-editor/plugins/image';
 import {
   date,
@@ -51,6 +53,7 @@ import {
   inlineRdfaWithConfig,
   inlineRdfaWithConfigView,
 } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 
 export default class ZittingTextDocumentContainerComponent extends Component {
   @service intl;
@@ -150,6 +153,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
+      emberApplication(getOwner(this)),
     ];
   }
 
@@ -159,6 +163,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+        block_rdfa: (node) => new BlockRDFaView(node),
       };
     };
   }

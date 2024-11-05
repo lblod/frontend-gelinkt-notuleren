@@ -509,6 +509,7 @@ participation-list-modal-table:
   naam-label: Name
   functie-label: Position
   geboortedatum-label: Birthdate
+  bestuursperiode-label: Administration period
   actie-label: Action
   checkbox-label: Present
   no-data-message: No mandatees were found.
@@ -784,8 +785,8 @@ download:
     agenda: Download agenda as HTML
     besluitenlijst: Download decision list as HTML
     notulen: Download meeting as HTML
-    agendapunt: Agendapoint
-    besluit: Decision
+    agendapunt: Download agendapoint
+    besluit: Download decision
     agenda-downloading: Downloading Agenda
     agenda-downloaded: Agenda downloaded
     besluitenlijst-downloading: Downloading decision list
@@ -797,7 +798,7 @@ download:
     download-html: Download HTML
     no-data-message: No agendapoints found in meeting
     copy-options-header: Copy to clipboard
-    copy-options: More copy options
+    copy-options: Copy decision parts
 
 download-meeting-part:
   downloading: Downloading

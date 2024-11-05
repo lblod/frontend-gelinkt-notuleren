@@ -1,5 +1,19 @@
 # frontend-gelinkt-notuleren
 
+## 5.37.0
+
+### Minor Changes
+
+- [`eabfb71`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/eabfb71ac06524052c061197b62eaa593cfa6c81) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to [v10.7.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.7.0)
+
+## 5.36.1
+
+### Patch Changes
+
+- [`1380706`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/13807061a87918827e78192ad2e5a255595b4956) Thanks [@abeforgit](https://github.com/abeforgit)! - Only insert name of municipality for autovars
+
+- [`55672a9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/55672a976278a1a7630136e86afbe48aaa4a421d) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [v24.3.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.3.0)
+
 ## 5.36.0
 
 ### Minor Changes

@@ -40,6 +40,7 @@ import {
   templateComment,
   templateCommentView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import {
   STRUCTURE_NODES,
   STRUCTURE_SPECS,
@@ -189,6 +190,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         text_variable: textVariableView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
+        block_rdfa: (node) => new BlockRDFaView(node),
         snippet_placeholder: snippetPlaceholderView(controller),
         snippet: snippetView(this.config.snippet)(controller),
         person_variable: personVariableView(controller),
