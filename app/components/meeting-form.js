@@ -244,7 +244,6 @@ export default class MeetingForm extends Component {
               'bekleedt',
               'bekleedt.bestuursfunctie',
             ].join(','),
-            sort: '-einde',
             filter: {
               bekleedt: {
                 'bevat-in': {
