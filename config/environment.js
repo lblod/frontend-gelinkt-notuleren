@@ -50,6 +50,7 @@ module.exports = function (environment) {
       'editor-extended-html-paste': true,
       'prosemirror-dev-tools': false,
       'regulatory-statements': '{{GN_FEATURE_REGULATORY_STATEMENTS}}',
+      'mandatee-table-editor': '{{GN_FEATURE_MANDATEE_TABLE_EDITOR}}',
     },
     browserUpdate: {
       vs: { f: -3, c: -3 },
@@ -85,6 +86,7 @@ module.exports = function (environment) {
     ENV.manual.print = '';
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
+    ENV.featureFlags['mandatee-table-editor'] = true;
     ENV.mowRegistryEndpoint =
       process.env.MOW_REGISTRY_SPARQL_ENDPOINT ??
       'https://dev.roadsigns.lblod.info/sparql';

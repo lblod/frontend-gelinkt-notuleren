@@ -5,6 +5,7 @@
  */
 
 import { RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN } from '../utils/classification-utils';
+import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 
 /**
  * @typedef {Object} CreateInstallatievergaderingOptions
@@ -55,7 +56,7 @@ export async function createInstallatievergadering(
     promises.push(
       agendapoint.save(),
       treatment
-        .initializeDocument(template.body)
+        .initializeDocument(templateUuidInstantiator(template.body))
         .then(() => treatment.saveAndPersistDocument()),
     );
     previousAgendapoint = agendapoint;
