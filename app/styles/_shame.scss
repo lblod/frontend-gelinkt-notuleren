@@ -777,6 +777,11 @@ div[typeof='besluitpublicatie:Documentonderdeel'] {
   border-left: 0.1rem solid var(--au-gray-300);
   border-right: 0.1rem solid var(--au-gray-300);
 }
+.au-c-data-table:has(.au-c-data-table-without-pagination) {
+  .au-c-data-table__actions {
+    display: none;
+  }
+}
 .download-meeting-part-downloaded {
   color: var(--au-green-700);
   border-color: var(--au-green-700);
