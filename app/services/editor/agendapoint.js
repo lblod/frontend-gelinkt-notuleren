@@ -1,4 +1,5 @@
 import Service, { service } from '@ember/service';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
@@ -248,6 +249,9 @@ export default class AgendapointEditorService extends Service {
         autofilledValues: {
           administrativeUnit: `${municipality.naam}`,
         },
+      },
+      insertArticle: {
+        uriGenerator: () => `http://data.lblod.info/artikels/${uuidv4()}`,
       },
     };
   }
