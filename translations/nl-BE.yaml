@@ -798,6 +798,7 @@ download:
     notulen-downloading: Notulen aan het downloaden
     notulen-downloaded: Notulen gedownload
   table:
+    agendapoint-position: Positie
     agendapoint-title: Titel agendapunt
     download-html: Download HTML
     no-data-message: Geen agendapunten gevonden in zitting
