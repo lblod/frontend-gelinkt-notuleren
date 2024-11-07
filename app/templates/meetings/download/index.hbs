@@ -114,28 +114,34 @@
       <AuDataTable
         @content={{this.agendapoints}}
         @noDataMessage={{t 'download.table.no-data-message'}}
-        @tableClass='au-c-data-table-with-borders'
+        @tableClass='au-c-data-table-with-borders au-c-data-table-without-pagination'
         as |table|
       >
         <table.content as |c|>
           <c.header>
             <th>
-              <span
-                class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
-              >{{t 'download.table.agendapoint-title'}}</span>
+              <span class='au-c-data-table__header-title'>{{t
+                  'download.table.agendapoint-position'
+                }}</span>
             </th>
             <th>
-              <span
-                class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
-              >{{t 'download.table.download-html'}}</span>
+              <span class='au-c-data-table__header-title'>{{t
+                  'download.table.agendapoint-title'
+                }}</span>
             </th>
             <th>
-              <span
-                class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
-              >{{t 'download.table.copy-options-header'}}</span>
+              <span class='au-c-data-table__header-title'>{{t
+                  'download.table.download-html'
+                }}</span>
+            </th>
+            <th>
+              <span class='au-c-data-table__header-title'>{{t
+                  'download.table.copy-options-header'
+                }}</span>
             </th>
           </c.header>
           <c.body as |agendapoint|>
+            <td>{{inc agendapoint.position}}</td>
             <td>{{agendapoint.titel}}</td>
             <td class='au-u-flex'><DownloadMeetingPart
                 @documentType='agendapunt'
