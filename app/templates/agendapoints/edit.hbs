@@ -114,7 +114,10 @@
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
-      <this.InsertArticle @controller={{this.controller}} />
+      <this.InsertArticle
+        @controller={{this.controller}}
+        @options={{this.config.insertArticle}}
+      />
       <CitationPlugin::CitationInsert
         @controller={{this.controller}}
         @plugin={{this.citationPlugin}}

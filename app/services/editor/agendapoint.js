@@ -1,4 +1,5 @@
 import Service, { service } from '@ember/service';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
@@ -242,12 +243,15 @@ export default class AgendapointEditorService extends Service {
         defaultTag: IVGR_TAGS[0],
       },
       lmb: {
-        endpoint: '/raw-sparql',
+        endpoint: '/sparql',
       },
       autofilledVariable: {
         autofilledValues: {
           administrativeUnit: `${municipality.naam}`,
         },
+      },
+      insertArticle: {
+        uriGenerator: () => `http://data.lblod.info/artikels/${uuidv4()}`,
       },
     };
   }
