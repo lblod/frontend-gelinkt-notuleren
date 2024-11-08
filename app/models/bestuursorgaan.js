@@ -1,4 +1,6 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import isAfter from 'date-fns/isAfter';
+import isBefore from 'date-fns/isBefore';
 
 export default class BestuursorgaanModel extends Model {
   @attr uri;
@@ -47,4 +49,15 @@ export default class BestuursorgaanModel extends Model {
       'http://data.vlaanderen.be/ns/mandaat#isTijdspecialisatieVan',
     bevat: 'http://www.w3.org/ns/org#hasPost',
   };
+
+  /**
+   * @param {Date} referenceDate
+   */
+  isActive(referenceDate) {
+    const startDateIsValid =
+      !this.bindingStart || isBefore(this.bindingStart, referenceDate);
+    const endDateIsValid =
+      !this.bindingEinde || isAfter(this.bindingEinde, referenceDate);
+    return startDateIsValid && endDateIsValid;
+  }
 }

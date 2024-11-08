@@ -20,6 +20,15 @@ export default class InboxMeetingsNewController extends Controller {
     this.meeting.opLocatie = event.target.value;
   }
 
+  @action
+  async updatePlannedStart(date) {
+    this.meeting.geplandeStart = new Date(date.getTime());
+    const bestuursorgaan = await this.meeting.bestuursorgaan;
+    if (!bestuursorgaan?.isActive(date)) {
+      this.meeting.bestuursorgaan = null;
+    }
+  }
+
   get title() {
     return this.intl.t('inbox.meetings.new.common-meeting.title');
   }
