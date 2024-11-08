@@ -244,6 +244,8 @@ export default class AgendapointEditorService extends Service {
       },
       lmb: {
         endpoint: '/sparql',
+
+        defaultAdminUnit: municipality.naam,
       },
       autofilledVariable: {
         autofilledValues: {
