@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.40.0
+
+### Minor Changes
+
+- [#763](https://github.com/lblod/frontend-gelinkt-notuleren/pull/763) [`1def2b1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1def2b1a6a0d2494ecb3d014d6be1767146d0a1e) Thanks [@elpoelma](https://github.com/elpoelma)! - bump plugins to [v25.2.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v25.2.0)
+
+  - set up config for new snippet placeholder UI
+
+### Patch Changes
+
+- [`bc109e9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bc109e9b1c98538b9c782a1a30909c87e4c71999) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update ember-rdfa-editor to 10.7.3 and ember-rdfa-editor-lblod-plugins to 25.2.1
+
 ## 5.39.0
 
 ### Minor Changes
