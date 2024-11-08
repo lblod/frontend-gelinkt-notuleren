@@ -1,5 +1,27 @@
 # frontend-gelinkt-notuleren
 
+## 5.39.0
+
+### Minor Changes
+
+- [`0ffdffb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0ffdffbb8d1bf24d9ac122aaa0bfe3b1d62361fe) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to [v10.7.2](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.7.2) and plugins to [v25.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v25.1.0)
+
+### Patch Changes
+
+- [#759](https://github.com/lblod/frontend-gelinkt-notuleren/pull/759) [`0b15894`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0b158942a840957e614f07bb6e43ef7992e8d11c) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add agendapoint numbers to download table
+
+- [#761](https://github.com/lblod/frontend-gelinkt-notuleren/pull/761) [`51469e4`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/51469e4076210c19daca7c880eb3b38fa673c5fd) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to ember-rdfa-editor-lblod-plugins v24.3.2 to get snippet URI fix
+
+- [#758](https://github.com/lblod/frontend-gelinkt-notuleren/pull/758) [`be6b33b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/be6b33bfdf440d23051a807fe4be3b9ea2f0ea4f) Thanks [@abeforgit](https://github.com/abeforgit)! - use cached endpoint for lmb plugin
+
+- [#761](https://github.com/lblod/frontend-gelinkt-notuleren/pull/761) [`642c059`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/642c059da23bfb8954bf14937b58c63fc8736945) Thanks [@piemonkey](https://github.com/piemonkey)! - Correct generated URI for inserted articles in decisions
+
+- [`4c75a3e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4c75a3e19e72f76e87e2f2287ba73a219700ae83) Thanks [@abeforgit](https://github.com/abeforgit)! - Correctly set IV config for special municipalities
+
+- [#762](https://github.com/lblod/frontend-gelinkt-notuleren/pull/762) [`b659539`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b65953925c8c563ad0e292b64df3addb44dc2c86) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [10.7.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.7.1)
+
+- [#760](https://github.com/lblod/frontend-gelinkt-notuleren/pull/760) [`93cb34d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/93cb34d38390b7c90e02bdd45296ed1ac2e1a68b) Thanks [@elpoelma](https://github.com/elpoelma)! - IV Mandatee table queries: do not include fractions which do not have any seats
+
 ## 5.38.0
 
 ### Minor Changes
