@@ -147,7 +147,7 @@ export default class AgendapointEditorService extends Service {
       mandatee_table,
       heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
-      snippet_placeholder: snippetPlaceholder,
+      snippet_placeholder: snippetPlaceholder(this.config.snippet),
       snippet: snippet(this.config.snippet),
       horizontal_rule,
       code_block,
@@ -307,7 +307,9 @@ export default class AgendapointEditorService extends Service {
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
         block_rdfa: (node) => new BlockRDFaView(node),
 
-        snippet_placeholder: snippetPlaceholderView(controller),
+        snippet_placeholder: snippetPlaceholderView(this.config.snippet)(
+          controller,
+        ),
         snippet: snippetView(this.config.snippet)(controller),
         structure: structureView(controller),
         mandatee_table: mandateeTableView(controller),
