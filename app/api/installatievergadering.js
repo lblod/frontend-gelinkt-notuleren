@@ -140,28 +140,11 @@ const IVGR_MAP = [
 ];
 
 /** @type {TemplateSpec[]} */
-const IVGR_FACILITEITEN_MAP = [
-  {
-    templateTitle:
-      'IVGRFac1 Kennisname van de definitieve verkiezingsuitslag DUMMY',
-    apTitle: 'Kennisname van de definitieve verkiezingsuitslag faciliteiten',
-  },
-];
-
-/** @type {TemplateSpec[]} */
 const IVGR_FUSIE_MAP = [
   {
     templateTitle:
       'IVGRFusie1 Kennisname van de definitieve verkiezingsuitslag DUMMY',
     apTitle: 'Kennisname van de definitieve verkiezingsuitslag fusie',
-  },
-];
-/** @type {TemplateSpec[]} */
-const IVGR_VOEREN_MAP = [
-  {
-    templateTitle:
-      'IVGRVoeren1 Kennisname van de definitieve verkiezingsuitslag DUMMY',
-    apTitle: 'Kennisname van de definitieve verkiezingsuitslag voeren',
   },
 ];
 /** @type {TemplateSpec[]} */
@@ -189,32 +172,39 @@ const IVRMW_MAP = [
   },
 ];
 /** @type {TemplateSpec[]} */
-const IVRMW_FACILITEITEN_MAP = IVRMW_MAP;
-/** @type {TemplateSpec[]} */
 const IVRMW_FUSIE_MAP = IVRMW_MAP;
-/** @type {TemplateSpec[]} */
-const IVRMW_VOEREN_MAP = [
-  {
-    templateTitle: 'IVRWVoeren1 DUMMY IV RMW',
-    apTitle: 'Samenstelling van Raad maatschappelijk welzijn voeren',
-  },
-];
-const FUSION_SPEC = { gemeenteraad: IVGR_FUSIE_MAP, rmw: IVRMW_FUSIE_MAP };
-const FACILITY_SPEC = {
-  gemeenteraad: IVGR_FACILITEITEN_MAP,
-  rmw: IVRMW_FACILITEITEN_MAP,
-};
+
 /**
  * @typedef {Object} MunicipalitySpec
  * @property {TemplateSpec[]} gemeenteraad
  * @property {TemplateSpec[]} rmw
  */
 
+const FUSION_SPEC = { gemeenteraad: IVGR_FUSIE_MAP, rmw: IVRMW_FUSIE_MAP };
+
+/**
+ * municipalities without the 9th agenda item about the police zone
+ * @type {MunicipalitySpec}
+ */
+const NO_POLITIERAAD_SPEC = {
+  gemeenteraad: IVGR_MAP,
+  rmw: IVRMW_MAP,
+};
+
+/**
+ * Most municipalities will have the 9th agenda item
+ * @type {MunicipalitySpec} */
+const DEFAULT_MUNICIPALITY_SPEC = {
+  gemeenteraad: IVGR_POLITIERAAD_MAP,
+  rmw: IVRMW_MAP,
+};
+// we will not provide special templates for border municipalities
+const FACILITY_SPEC = DEFAULT_MUNICIPALITY_SPEC;
+
 /** @type { Record<string, MunicipalitySpec> } */
 const MUNICIPALITY_CONFIG = {
-  // example without politieraad
-  Aalst: { gemeenteraad: IVGR_MAP, rmw: IVRMW_MAP },
-  Voeren: { gemeenteraad: IVGR_VOEREN_MAP, rmw: IVRMW_VOEREN_MAP },
+  // We won't have special templates for voeren
+  Voeren: { gemeenteraad: NO_POLITIERAAD_SPEC, rmw: IVRMW_MAP },
   // faciliteitengemeentes (municipalities on the language border which have
   // special facilities for the french-speaking minorities)
   Bever: FACILITY_SPEC,
@@ -223,7 +213,7 @@ const MUNICIPALITY_CONFIG = {
   Kraainem: FACILITY_SPEC,
   Linkebeek: FACILITY_SPEC,
   Mesen: FACILITY_SPEC,
-  Ronse: FACILITY_SPEC,
+  Ronse: { gemeenteraad: NO_POLITIERAAD_SPEC, rmw: IVRMW_MAP },
   'Sint-Genesius-Rode': FACILITY_SPEC,
   'Spiere-Helkijn': FACILITY_SPEC,
   Wemmel: FACILITY_SPEC,
@@ -240,13 +230,28 @@ const MUNICIPALITY_CONFIG = {
   Wingene: FUSION_SPEC,
   'Tongeren-Borgloon': FUSION_SPEC,
   'Bilzen-Hoeselt': FUSION_SPEC,
+  //TODO: NO Politieraad for lokeren
   Lokeren: FUSION_SPEC,
-};
 
-/**
- * Most municipalities will have the 9th agenda item
- * @type {MunicipalitySpec} */
-const DEFAULT_MUNICIPALITY_SPEC = {
-  gemeenteraad: IVGR_POLITIERAAD_MAP,
-  rmw: IVRMW_MAP,
+  // municipalities without the 9th agenda item
+  Antwerpen: NO_POLITIERAAD_SPEC,
+  Brasschaat: NO_POLITIERAAD_SPEC,
+  Schoten: NO_POLITIERAAD_SPEC,
+  Lier: NO_POLITIERAAD_SPEC,
+  'Heist-op-den-Berg': NO_POLITIERAAD_SPEC,
+  Lommel: NO_POLITIERAAD_SPEC,
+  'Heusden-Zolder': NO_POLITIERAAD_SPEC,
+  Leuven: NO_POLITIERAAD_SPEC,
+  Aarschot: NO_POLITIERAAD_SPEC,
+  Zaventem: NO_POLITIERAAD_SPEC,
+  Dilbeek: NO_POLITIERAAD_SPEC,
+  Grimbergen: NO_POLITIERAAD_SPEC,
+  Gent: NO_POLITIERAAD_SPEC,
+  'Sint-Niklaas': NO_POLITIERAAD_SPEC,
+  Aalst: NO_POLITIERAAD_SPEC,
+  Ninove: NO_POLITIERAAD_SPEC,
+  Dendermonde: NO_POLITIERAAD_SPEC,
+  Brugge: NO_POLITIERAAD_SPEC,
+  Oostende: NO_POLITIERAAD_SPEC,
+  Middelkerke: NO_POLITIERAAD_SPEC,
 };
