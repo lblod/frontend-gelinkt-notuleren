@@ -115,6 +115,8 @@ import { getOwner } from '@ember/application';
 import { EditorState, ProseParser } from '@lblod/ember-rdfa-editor';
 import { htmlToDoc } from '@lblod/ember-rdfa-editor/utils/_private/html-utils';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+import { isRdfaAttrs } from '@lblod/ember-rdfa-editor/core/schema';
+import { BESLUIT } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 
 export default class AgendapointEditorService extends Service {
   @service intl;
@@ -194,8 +196,15 @@ export default class AgendapointEditorService extends Service {
       },
       citation: {
         type: 'nodes',
-        activeInNodeTypes(schema) {
-          return new Set([schema.nodes.motivering]);
+        activeInNode(node) {
+          const { attrs } = node;
+          if (!isRdfaAttrs(attrs)) {
+            return false;
+          }
+          const match = attrs.backlinks.find((bl) =>
+            BESLUIT('motivering').matches(bl.predicate),
+          );
+          return Boolean(match);
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,
