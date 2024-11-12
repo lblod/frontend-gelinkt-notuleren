@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.41.2
+
+### Patch Changes
+
+- [#766](https://github.com/lblod/frontend-gelinkt-notuleren/pull/766) [`88e3d26`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/88e3d26aa3414d8129ac6a45297ea93caf7746fa) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix ember application plugin configuration error
+
+- [#767](https://github.com/lblod/frontend-gelinkt-notuleren/pull/767) [`5d58d7d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5d58d7d206de043341f7b44521016d1572b09a69) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix incorrect zitting intro/outro/custom-voting translations
+
 ## 5.41.1
 
 ### Patch Changes
