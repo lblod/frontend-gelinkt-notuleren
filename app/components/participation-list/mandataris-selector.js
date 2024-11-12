@@ -71,6 +71,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
           ':has-no:einde': true,
           ':gt:einde': this.startOfMeeting.toISOString(),
         },
+        ':has:is-bestuurlijke-alias-van': true,
       },
       page: { size: 100 },
     };
@@ -126,6 +127,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
                 ':has-no:einde': true,
                 ':gt:einde': this.startOfMeeting.toISOString(),
               },
+              ':has:is-bestuurlijke-alias-van': true,
             },
           })),
         ];
@@ -169,6 +171,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
           ':has-no:einde': true,
           ':gt:einde': this.startOfMeeting.toISOString(),
         },
+        ':has:is-bestuurlijke-alias-van': true,
       },
       page: { size: 100 },
     };

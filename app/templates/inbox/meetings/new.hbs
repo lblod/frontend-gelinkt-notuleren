@@ -22,6 +22,7 @@
             @id={{id}}
             @selected={{this.meeting.bestuursorgaan}}
             @onChange={{this.updateAdministrativeBody}}
+            @referenceDate={{this.meeting.geplandeStart}}
             @error={{if errors true false}}
           />
           {{#each errors as |error|}}
@@ -52,7 +53,7 @@
           }}</AuLabel>
         <DateTimePicker
           @alignment='top'
-          @onChange={{fn (mut this.meeting.geplandeStart)}}
+          @onChange={{this.updatePlannedStart}}
           @value={{this.meeting.geplandeStart}}
         />
       </div>

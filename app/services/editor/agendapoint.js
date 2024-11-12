@@ -1,4 +1,5 @@
 import Service, { service } from '@ember/service';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
@@ -114,6 +115,8 @@ import { getOwner } from '@ember/application';
 import { EditorState, ProseParser } from '@lblod/ember-rdfa-editor';
 import { htmlToDoc } from '@lblod/ember-rdfa-editor/utils/_private/html-utils';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
+import { isRdfaAttrs } from '@lblod/ember-rdfa-editor/core/schema';
+import { BESLUIT } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 
 export default class AgendapointEditorService extends Service {
   @service intl;
@@ -144,7 +147,7 @@ export default class AgendapointEditorService extends Service {
       mandatee_table,
       heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
-      snippet_placeholder: snippetPlaceholder,
+      snippet_placeholder: snippetPlaceholder(this.config.snippet),
       snippet: snippet(this.config.snippet),
       horizontal_rule,
       code_block,
@@ -193,8 +196,15 @@ export default class AgendapointEditorService extends Service {
       },
       citation: {
         type: 'nodes',
-        activeInNodeTypes(schema) {
-          return new Set([schema.nodes.motivering]);
+        activeInNode(node) {
+          const { attrs } = node;
+          if (!isRdfaAttrs(attrs)) {
+            return false;
+          }
+          const match = attrs.backlinks.find((bl) =>
+            BESLUIT('motivering').matches(bl.predicate),
+          );
+          return Boolean(match);
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,
@@ -242,12 +252,17 @@ export default class AgendapointEditorService extends Service {
         defaultTag: IVGR_TAGS[0],
       },
       lmb: {
-        endpoint: '/raw-sparql',
+        endpoint: '/sparql',
+
+        defaultAdminUnit: municipality.naam,
       },
       autofilledVariable: {
         autofilledValues: {
           administrativeUnit: `${municipality.naam}`,
         },
+      },
+      insertArticle: {
+        uriGenerator: () => `http://data.lblod.info/artikels/${uuidv4()}`,
       },
     };
   }
@@ -292,7 +307,9 @@ export default class AgendapointEditorService extends Service {
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
         block_rdfa: (node) => new BlockRDFaView(node),
 
-        snippet_placeholder: snippetPlaceholderView(controller),
+        snippet_placeholder: snippetPlaceholderView(this.config.snippet)(
+          controller,
+        ),
         snippet: snippetView(this.config.snippet)(controller),
         structure: structureView(controller),
         mandatee_table: mandateeTableView(controller),

@@ -56,6 +56,7 @@ export default class ParticipationListFunctionarisSelectorComponent extends Comp
           ':has-no:einde': true,
           ':gt:einde': startOfMeeting.toISOString(),
         },
+        ':has:is-bestuurlijke-alias-van': true,
       },
     };
     const candidateOptions = await this.store.query(

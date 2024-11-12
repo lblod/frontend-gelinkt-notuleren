@@ -794,6 +794,7 @@ download:
     notulen-downloading: Downloading meeting
     notulen-downloaded: Meeting downloaded
   table:
+    agendapoint-position: Position
     agendapoint-title: Agendapoint Title
     download-html: Download HTML
     no-data-message: No agendapoints found in meeting

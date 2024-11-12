@@ -1,5 +1,69 @@
 # frontend-gelinkt-notuleren
 
+## 5.40.0
+
+### Minor Changes
+
+- [#763](https://github.com/lblod/frontend-gelinkt-notuleren/pull/763) [`1def2b1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1def2b1a6a0d2494ecb3d014d6be1767146d0a1e) Thanks [@elpoelma](https://github.com/elpoelma)! - bump plugins to [v25.2.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v25.2.0)
+
+  - set up config for new snippet placeholder UI
+
+### Patch Changes
+
+- [`bc109e9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bc109e9b1c98538b9c782a1a30909c87e4c71999) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update ember-rdfa-editor to 10.7.3 and ember-rdfa-editor-lblod-plugins to 25.2.1
+
+## 5.39.0
+
+### Minor Changes
+
+- [`0ffdffb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0ffdffbb8d1bf24d9ac122aaa0bfe3b1d62361fe) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to [v10.7.2](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.7.2) and plugins to [v25.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v25.1.0)
+
+### Patch Changes
+
+- [#759](https://github.com/lblod/frontend-gelinkt-notuleren/pull/759) [`0b15894`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0b158942a840957e614f07bb6e43ef7992e8d11c) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add agendapoint numbers to download table
+
+- [#761](https://github.com/lblod/frontend-gelinkt-notuleren/pull/761) [`51469e4`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/51469e4076210c19daca7c880eb3b38fa673c5fd) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to ember-rdfa-editor-lblod-plugins v24.3.2 to get snippet URI fix
+
+- [#758](https://github.com/lblod/frontend-gelinkt-notuleren/pull/758) [`be6b33b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/be6b33bfdf440d23051a807fe4be3b9ea2f0ea4f) Thanks [@abeforgit](https://github.com/abeforgit)! - use cached endpoint for lmb plugin
+
+- [#761](https://github.com/lblod/frontend-gelinkt-notuleren/pull/761) [`642c059`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/642c059da23bfb8954bf14937b58c63fc8736945) Thanks [@piemonkey](https://github.com/piemonkey)! - Correct generated URI for inserted articles in decisions
+
+- [`4c75a3e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4c75a3e19e72f76e87e2f2287ba73a219700ae83) Thanks [@abeforgit](https://github.com/abeforgit)! - Correctly set IV config for special municipalities
+
+- [#762](https://github.com/lblod/frontend-gelinkt-notuleren/pull/762) [`b659539`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b65953925c8c563ad0e292b64df3addb44dc2c86) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [10.7.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.7.1)
+
+- [#760](https://github.com/lblod/frontend-gelinkt-notuleren/pull/760) [`93cb34d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/93cb34d38390b7c90e02bdd45296ed1ac2e1a68b) Thanks [@elpoelma](https://github.com/elpoelma)! - IV Mandatee table queries: do not include fractions which do not have any seats
+
+## 5.38.0
+
+### Minor Changes
+
+- [#756](https://github.com/lblod/frontend-gelinkt-notuleren/pull/756) [`9b121b5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9b121b5ce5d93f2d8cba0ee33dc32041e455f733) Thanks [@elpoelma](https://github.com/elpoelma)! - Meeting participation modal: include adminstration period of mandatees
+
+- [#756](https://github.com/lblod/frontend-gelinkt-notuleren/pull/756) [`ccbb557`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ccbb55759b078a8b7dc6b4a290d04230f87a515b) Thanks [@elpoelma](https://github.com/elpoelma)! - Inauguration meetings: ensure that the chairman of the previous legislation may be selected as chairman and attendee
+
+- [#751](https://github.com/lblod/frontend-gelinkt-notuleren/pull/751) [`59a10ac`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/59a10acd5d588c4dcf9e6a387b85b16deb625f6d) Thanks [@elpoelma](https://github.com/elpoelma)! - Add `emberApplication` prosemirror plugin to `zitting-text-document-container` component
+
+### Patch Changes
+
+- [#750](https://github.com/lblod/frontend-gelinkt-notuleren/pull/750) [`fbd1953`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fbd1953cb6e1c27e3a59af027ccf6715910b4ac2) Thanks [@elpoelma](https://github.com/elpoelma)! - Hide mandatee-table editor feature behind feature-flag `mandatee-table-editor`
+
+- [#752](https://github.com/lblod/frontend-gelinkt-notuleren/pull/752) [`d9e559c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d9e559c2e445a24a986d85a21ddf85d2801399f9) Thanks [@elpoelma](https://github.com/elpoelma)! - bump plugins to [v24.3.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v24.3.1)
+
+- [#755](https://github.com/lblod/frontend-gelinkt-notuleren/pull/755) [`b59829f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b59829f35c123be984a4b42b3fdc1c202f3bd335) Thanks [@abeforgit](https://github.com/abeforgit)! - Clarify wording in export page
+
+- [#754](https://github.com/lblod/frontend-gelinkt-notuleren/pull/754) [`b003ecb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b003ecb8be378e701e800ab5ccc7ef3b3b66c4b3) Thanks [@abeforgit](https://github.com/abeforgit)! - Set meeting start date to planned start for new IVs
+
+- [#757](https://github.com/lblod/frontend-gelinkt-notuleren/pull/757) [`0bc0d88`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0bc0d8897ec6ee03df02d3a64838563ef6029140) Thanks [@elpoelma](https://github.com/elpoelma)! - Disable creation of inauguration meeting if not applicable.
+  To be able to create an inauguration meeting, you should be logged in as a:
+
+  - Gemeente
+  - District
+  - OCMW
+    The logged-in administrative unit should be relevant for the next legislation (e.g. no old, no longer existing muncipalities)
+
+- [#753](https://github.com/lblod/frontend-gelinkt-notuleren/pull/753) [`7409997`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/740999713108fffa919c0a3b9f63dc5008a4f9f9) Thanks [@elpoelma](https://github.com/elpoelma)! - IV creation: ensure decision templates are correctly instantiated upon meeting creation
+
 ## 5.37.0
 
 ### Minor Changes

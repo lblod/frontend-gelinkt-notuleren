@@ -256,8 +256,8 @@ export default class RegulatoryStatementsRoute extends Controller {
       },
       citation: {
         type: 'nodes',
-        activeInNodeTypes(schema) {
-          return new Set([schema.nodes.doc]);
+        activeInNode(node, state) {
+          return node.type === state.schema.nodes.doc;
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV.publicatieEndpoint,

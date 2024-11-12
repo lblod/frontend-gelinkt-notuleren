@@ -488,13 +488,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
-          OPTIONAL {
-            ?mandataris org:hasMembership/org:organisation ?fractie.
-            ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
-            ?mandataris org:holds ?mandaat.
-
-            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
-          }
+          ?mandataris org:hasMembership/org:organisation ?fractie.
+          ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
+          ?mandataris org:holds ?mandaat.
+          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
         }
         ORDER BY DESC(?fractie_aantal_zetels) ?fractie
       `;
@@ -1202,13 +1199,10 @@ export const mandateeTableConfigRMW = (meeting) => {
             }
             ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
-            OPTIONAL {
-              ?mandataris org:hasMembership/org:organisation ?fractie.
-              ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
-              ?mandataris org:holds ?mandaat.
-
-              ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
-            }
+            ?mandataris org:hasMembership/org:organisation ?fractie.
+            ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+            ?mandataris org:holds ?mandaat.
+            ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
           }
           ORDER BY DESC(?fractie_aantal_zetels) ?fractie
         `;
