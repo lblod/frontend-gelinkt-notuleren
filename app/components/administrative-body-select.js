@@ -1,9 +1,6 @@
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { task } from 'ember-concurrency';
-import sub from 'date-fns/sub';
-import isAfter from 'date-fns/isAfter';
+import { trackedFunction } from 'reactiveweb/function';
 
 const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005', //	"Gemeenteraad"
@@ -30,56 +27,45 @@ const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
  * @property {BestuursOrgaan} selected which governing body is currently selected
  * @property {(administrativeBody: BestuursOrgaan) => void} onChange change handler called when a body is selected
  * @property {boolean} error whether there is a form value error and we should render as such
+ * @property {Date|undefined} referenceDate the reference date to use when determining the currently active bodies
  */
 
 /** @extends {Component<Args>} */
 export default class AdministrativeBodySelectComponent extends Component {
   @service currentSession;
   @service store;
-  @tracked administrativeBodyOptions = [];
 
-  constructor() {
-    super(...arguments);
-
-    this.fetchAdministrativeBodies.perform();
+  get referenceDate() {
+    return this.args.referenceDate || new Date();
   }
 
-  /**
-   * Fetch bodies which are of the right classification, and whose
-   * end date is not older than 2 months before the current date
-   */
-  fetchAdministrativeBodies = task(async () => {
+  administrativeBodyOptions = trackedFunction(this, async () => {
     let currentAdministrativeUnitId = this.currentSession.group.id;
-
-    let administrativeBodiesInTime = await this.store.query('bestuursorgaan', {
-      'filter[is-tijdsspecialisatie-van][bestuurseenheid][id]':
-        currentAdministrativeUnitId,
-      include: [
-        'is-tijdsspecialisatie-van.bestuurseenheid',
-        'is-tijdsspecialisatie-van.classificatie',
-      ].join(),
-      sort: '-binding-start',
-    });
-
-    this.administrativeBodyOptions = administrativeBodiesInTime.filter(
-      (administrativeBodyInTime) => {
-        const classificationUrl = administrativeBodyInTime.get(
-          'isTijdsspecialisatieVan.classificatie.uri',
-        );
-        const bodyIsValid =
-          VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS.includes(classificationUrl);
-        // shortcutting to avoid work
-        if (!bodyIsValid) {
-          return false;
-        }
-
-        const endDate = administrativeBodyInTime.bindingEinde;
-        if (!endDate) {
-          return true;
-        }
-        const twoMonthsAgo = sub(new Date(), { months: 2 });
-        return isAfter(endDate, twoMonthsAgo);
+    const referenceDate = this.referenceDate;
+    let administrativeBodiesInTime = await this.store.countAndFetchAll(
+      'bestuursorgaan',
+      {
+        'filter[is-tijdsspecialisatie-van][bestuurseenheid][id]':
+          currentAdministrativeUnitId,
+        include: [
+          'is-tijdsspecialisatie-van.bestuurseenheid',
+          'is-tijdsspecialisatie-van.classificatie',
+        ].join(),
+        sort: '-binding-start',
       },
     );
+
+    return administrativeBodiesInTime.filter((administrativeBodyInTime) => {
+      const classificationUrl = administrativeBodyInTime.get(
+        'isTijdsspecialisatieVan.classificatie.uri',
+      );
+      const bodyIsValid =
+        VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS.includes(classificationUrl);
+      // shortcutting to avoid work
+      if (!bodyIsValid) {
+        return false;
+      }
+      return administrativeBodyInTime.isActive(referenceDate);
+    });
   });
 }
