@@ -153,7 +153,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
-      emberApplication(getOwner(this)),
+      emberApplication({ application: getOwner(this) }),
     ];
   }
 
