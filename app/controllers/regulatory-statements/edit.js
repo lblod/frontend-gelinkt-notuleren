@@ -226,7 +226,6 @@ export default class RegulatoryStatementsRoute extends Controller {
 
   get config() {
     const municipality = this.defaultMunicipality;
-    console.log(municipality);
     return {
       tableOfContents: [
         {

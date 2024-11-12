@@ -40,8 +40,16 @@ export default class BehandelingVanAgendapunt extends Model {
     inverse: 'behandelingVanAgendapunt',
     defaultPageSize: 1000,
     async: true,
+    polymorphic: true,
   })
   stemmingen;
+
+  @hasMany('custom-voting', {
+    inverse: 'behandelingVanAgendapunt',
+    defaultPageSize: 1000,
+    async: true,
+  })
+  customVotings;
 
   sortedParticipantData = trackedFunction(this, async () => {
     const participants = await this.aanwezigen;
@@ -68,7 +76,9 @@ export default class BehandelingVanAgendapunt extends Model {
       .map((an) => an.absentee);
   });
   async getSortedVotings() {
-    const votings = await this.stemmingen;
+    const normalVotings = this.stemmingen;
+    const customVotings = this.customVotings;
+    const votings = [...(await normalVotings), ...(await customVotings)];
     return votings
       ?.slice()
       .sort((a, b) => Number(a.position) - Number(b.position));

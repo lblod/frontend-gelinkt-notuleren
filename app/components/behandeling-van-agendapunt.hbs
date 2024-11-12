@@ -48,25 +48,26 @@
         </AuPill>
       {{/if}}
     </AuToolbar>
-    <Common::MeetingSubSection
-      @title={{t 'behandeling-van-agendapunten.visibility'}}
-    >
-      <:body>
-        <div class='au-u-padding-tiny'>
-          <AuPill @skin='border'>
-            {{#if this.openbaar}}
-              {{t 'behandeling-van-agendapunten.openbaar-msg'}}
-            {{else}}
-              {{t 'behandeling-van-agendapunten.geen-openbaar-msg'}}
-            {{/if}}
-          </AuPill>
-        </div>
-      </:body>
-    </Common::MeetingSubSection>
+    {{#unless @focusMode}}
+      <Common::MeetingSubSection
+        @title={{t 'behandeling-van-agendapunten.visibility'}}
+      >
+        <:body>
+          <div class='au-u-padding-tiny'>
+            <AuPill @skin='border'>
+              {{#if this.openbaar}}
+                {{t 'behandeling-van-agendapunten.openbaar-msg'}}
+              {{else}}
+                {{t 'behandeling-van-agendapunten.geen-openbaar-msg'}}
+              {{/if}}
+            </AuPill>
+          </div>
+        </:body>
+      </Common::MeetingSubSection>
+    {{/unless}}
   </div>
 
 {{/if}}
-
 {{#unless @focusMode}}
   {{#if this.isLoading}}
     <AuLoader @padding='small' />
@@ -93,7 +94,6 @@
       }}
     />
   {{/if}}
-
   <Common::MeetingSubSection
     @title={{t 'behandeling-van-agendapunten.voting-title'}}
   >
@@ -116,23 +116,37 @@
     </:body>
     <:button>
       {{#unless @readOnly}}
-        <AuButton
-          {{on 'click' (perform this.addStemming)}}
-          @icon='add'
-          @skin='secondary'
-          @iconAlignment='left'
-          @loading={{this.addStemming.isRunning}}
-        >
-          {{t 'generic.add'}}
-        </AuButton>
-        {{#if this.editMode}}
-          <Treatment::Voting::Edit
-            @bestuursorgaan={{@bestuursorgaan}}
-            @onSave={{perform this.saveStemming}}
-            @onCancel={{this.onCancelEdit}}
-            @saving={{this.saveStemming.isRunning}}
-          />
-        {{/if}}
+        <div>
+
+          <AuButton
+            {{on 'click' (perform this.addStandardVoting)}}
+            @icon='add'
+            @skin='secondary'
+            @iconAlignment='left'
+            @disabled={{not (and this.hasParticipants this.editable)}}
+            @loading={{this.addStandardVoting.isRunning}}
+          >
+            {{t 'generic.add'}}
+          </AuButton>
+          <AuButton
+            {{on 'click' (perform this.addCustomVoting)}}
+            @icon='add'
+            @skin='secondary'
+            @iconAlignment='left'
+            @disabled={{not (and this.hasParticipants this.editable)}}
+            @loading={{this.addCustomVoting.isRunning}}
+          >
+            {{t 'behandeling-van-agendapunten.add-custom-voting'}}
+          </AuButton>
+          {{#if this.editMode}}
+            <Treatment::Voting::Edit
+              @bestuursorgaan={{@bestuursorgaan}}
+              @onSave={{perform this.saveStemming}}
+              @onCancel={{this.onCancelEdit}}
+              @saving={{this.saveStemming.isRunning}}
+            />
+          {{/if}}
+        </div>
       {{/unless}}
     </:button>
   </Common::MeetingSubSection>

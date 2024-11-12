@@ -1,7 +1,12 @@
-import Model, { attr, hasMany, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 
 export default class StemmingModel extends Model {
   @attr('number') position;
+  @belongsTo('behandeling-van-agendapunt', {
+    inverse: 'stemmingen',
+    async: true,
+  })
+  behandelingVanAgendapunt;
   @attr('number') aantalOnthouders;
   @attr('number') aantalTegenstanders;
   @attr('number') aantalVoorstanders;
@@ -9,12 +14,6 @@ export default class StemmingModel extends Model {
   // @attr title;
   @attr('string') gevolg;
   @attr('string') onderwerp;
-
-  @belongsTo('behandeling-van-agendapunt', {
-    inverse: 'stemmingen',
-    async: true,
-  })
-  behandelingVanAgendapunt;
 
   /** @type {import("ember-data").DS.RecordArray} */
   @hasMany('mandataris', { inverse: null, async: true }) aanwezigen;

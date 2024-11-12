@@ -1,0 +1,105 @@
+<AuModal
+  @modalOpen={{true}}
+  @size='fullscreen'
+  @title={{t 'custom-voting.modal-title'}}
+  @closeModal={{this.closeModal}}
+  class='au-c-modal--editor'
+  as |Modal|
+>
+  <Modal.Body>
+    <AuToolbar @size='small' class='au-u-padding-top-none' as |Group|>
+      <Group>
+        <EditorDocumentTitle
+          @title={{this.editorDocument.title}}
+          @readOnly={{this.model.published}}
+          @onSubmit={{perform this.onTitleUpdate}}
+        />
+      </Group>
+    </AuToolbar>
+    {{#if this.model.published}}
+      <div class='au-c-body-container'>
+        <div class='au-c-rdfa-editor'>
+          <div
+            class='say-container say-container--sidebar-left say-container--paper say-container--sidebar-right'
+          >
+            <div class='say-container__main'>
+              <div
+                class='say-editor rdfa-annotations rdfa-annotations-hover rdfa-annotations--disabled'
+              >
+                <div class='say-editor__paper'>
+                  <div
+                    class='say-editor__inner say-content say-content--disabled'
+                  >
+                    {{this.editorDocument.htmlSafeContent}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <RdfaEditorContainer
+        @profile={{this.profile}}
+        @rdfaEditorInit={{this.rdfaEditorInit}}
+        @editorOptions={{this.editorOptions}}
+        @editorDocument={{this.editorDocument}}
+        @busy={{this.saveTask.isRunning}}
+        @busyText={{t 'rdfa-editor-container.saving'}}
+        @property={{@type}}
+        @schema={{this.schema}}
+        @plugins={{this.plugins}}
+        @nodeViews={{this.nodeViews}}
+      >
+        <:sidebarCollapsible>
+          <VariablePlugin::Date::Insert
+            @controller={{this.editor}}
+            @options={{this.config.date}}
+          />
+          <LmbPlugin::Insert
+            @controller={{this.editor}}
+            @config={{this.config.lmb}}
+          />
+        </:sidebarCollapsible>
+        <:sidebar>
+          <VariablePlugin::Date::Edit
+            @controller={{this.editor}}
+            @options={{this.config.date}}
+          />
+        </:sidebar>
+      </RdfaEditorContainer>
+    {{/if}}
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButtonGroup>
+      <AuButton
+        @skin='naked'
+        @disabled={{this.saveTask.isRunning}}
+        {{on 'click' this.closeModal}}
+      >
+        {{t 'meetings.edit.cancel'}}
+      </AuButton>
+    </AuButtonGroup>
+    {{#unless this.model.published}}
+      <AuButtonGroup>
+        <AuButton
+          @skin='secondary'
+          {{on 'click' (perform this.saveTask)}}
+          @disabled={{this.saveTask.isRunning}}
+        >
+          {{t 'meetings.edit.save'}}
+        </AuButton>
+        <AuButton
+          @disabled={{this.saveTask.isRunning}}
+          {{on 'click' this.saveAndQuit}}
+        >
+          {{t 'meetings.edit.save-and-quit'}}
+        </AuButton>
+      </AuButtonGroup>
+    {{/unless}}
+  </Modal.Footer>
+</AuModal>
+<ConfirmRouteLeave
+  @enabled={{this.dirty}}
+  @message={{t 'meetings.edit.confirm-quit-without-saving'}}
+/>

@@ -1,8 +1,11 @@
-import Component from '@glimmer/component';
+import Controller from '@ember/controller';
+import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
-import { getOwner } from '@ember/application';
-
+import { tracked } from '@glimmer/tracking';
+import { service } from '@ember/service';
+import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 import { Schema } from '@lblod/ember-rdfa-editor';
+
 import {
   em,
   strikethrough,
@@ -39,27 +42,79 @@ import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
 import { headingWithConfig } from '@lblod/ember-rdfa-editor/plugins/heading';
 import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
-import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import { image } from '@lblod/ember-rdfa-editor/plugins/image';
 import {
   date,
   dateView,
+  person_variable,
+  personVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
-
-import { service } from '@ember/service';
 import { linkPasteHandler } from '@lblod/ember-rdfa-editor/plugins/link';
-import { tracked } from '@glimmer/tracking';
 import {
   inlineRdfaWithConfig,
   inlineRdfaWithConfigView,
 } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
+import { getOwner } from '@ember/application';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 
-export default class ZittingTextDocumentContainerComponent extends Component {
-  @service intl;
-  profile = 'none';
+export default class MeetingsEditManualVotingController extends Controller {
+  @service router;
   @tracked editor;
-  type = this.args.type;
+  @service intl;
+  @service documentService;
+  profile = 'none';
+  @tracked _editorDocument;
+
+  get editorDocument() {
+    return (
+      this._editorDocument ||
+      this.documentContainer.get('currentVersion').content
+    );
+  }
+
+  get documentContainer() {
+    return this.model.voting.votingDocument;
+  }
+
+  get dirty() {
+    // Since we clear the undo history when saving, this works. If we want to maintain undo history
+    // on save, we would need to add functionality to the editor to track what is the 'saved' state
+    return this.editor?.checkCommand(undo, {
+      view: this.editor?.mainEditorView,
+    });
+  }
+
+  clearEditor() {
+    this.editor = null;
+    this._editorDocument = undefined;
+  }
+
+  @action
+  closeModal() {
+    this.clearEditor();
+    this.router.transitionTo('meetings.edit');
+  }
+
+  @action
+  async saveAndQuit() {
+    await this.saveTask.perform();
+    this.closeModal();
+  }
+
+  saveTask = task(async () => {
+    const html = this.editor.htmlContent;
+    if (this.onTitleUpdate.isRunning) {
+      await this.onTitleUpdate.lastRunning;
+    }
+    const editorDocument =
+      await this.documentService.createEditorDocument.perform(
+        this.title || this.editorDocument.title,
+        html,
+        await this.documentContainer,
+        this.editorDocument,
+      );
+    this._editorDocument = editorDocument;
+  });
 
   editorOptions = {
     showToggleRdfaAnnotations: false,
@@ -82,13 +137,14 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       placeholder,
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
-      heading: headingWithConfig({ rdfaAware: false }),
+      heading: headingWithConfig({ rdfaAware: true }),
       blockquote,
       horizontal_rule,
       code_block,
       text,
       image,
       hard_break,
+      person_variable,
       invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
       block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
       inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
@@ -107,14 +163,27 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   });
 
   get text() {
-    return this.args.text;
+    return this.editorDocument.content;
   }
+
+  onTitleUpdate = task(async (title) => {
+    const html = this.editorDocument.content;
+
+    const editorDocument =
+      await this.documentService.createEditorDocument.perform(
+        title,
+        html,
+        await this.documentContainer,
+        this.editorDocument,
+      );
+
+    this._editorDocument = editorDocument;
+  });
 
   @action
   rdfaEditorInit(editor) {
     editor.initialize(this.text, { doNotClean: true });
     this.editor = editor;
-    this.args.onEditorInit(editor);
   }
 
   get config() {
@@ -144,6 +213,11 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         ],
         allowCustomFormat: true,
       },
+      lmb: {
+        // not raw-sparql as this is quite a slow query
+        // and the Person instances in LMB aren't likely to change very much
+        endpoint: '/sparql',
+      },
     };
   }
 
@@ -163,7 +237,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
-        block_rdfa: (node) => new BlockRDFaView(node),
+        person_variable: personVariableView(controller),
       };
     };
   }

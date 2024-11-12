@@ -82,6 +82,7 @@ behandeling-van-agendapunten:
   cannot-edit-participants: Aanwezigen zijn niet aanpasbaar als er al een stemming plaatsvond.
   edit-document: 'Bewerk document'
   sync-warning: Gegevens mogelijks overschreven door synchronisatie
+  add-custom-voting: Aangepaste stemming toevoegen
 
 contact:
   about: Waar gaat uw bericht over?
@@ -92,6 +93,10 @@ contact:
   heading: Contact
   question-message: Een inhoudelijke vraag
   send: Bericht versturen
+
+custom-voting:
+  modal-title: Aangepaste stemming
+  document-title: Aangepaste stemming
 
 date-format:
   short-date: Korte datum
@@ -463,16 +468,11 @@ meetings:
     confirm-button: Ja, deze zitting verwijderen
     back: Terug
   edit:
-    intro:
-      save: Opslaan
-      confirm-quit-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
-      save-and-quit: Opslaan en afsluiten
-      cancel: Annuleren
-    outro:
-      save: Opslaan
-      confirm-quit-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
-      save-and-quit: Opslaan en afsluiten
-      cancel: Annuleren
+    edit:
+    save: Save
+    confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
+    save-and-quit: Save and Quit
+    cancel: Cancel
 
 mock-login:
   administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
@@ -769,6 +769,7 @@ voting-modal:
   aantal-onthouders-label: 'Onthouders:'
   gevolg-not-found: Geen gevolg
   toggle-edit-button: Bewerk
+  show-button: Bekijk
   delete-button: Verwijder
   no-data-message: Geen stemmingen gevonden
 
