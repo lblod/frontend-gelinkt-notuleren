@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.41.1
+
+### Patch Changes
+
+- [`11e961d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/11e961df944508897fe5b8a1cb7a8fc2313eca99) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix configuration of `snippet_placeholder` node and nodeview
+
 ## 5.41.0
 
 ### Minor Changes
