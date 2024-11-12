@@ -468,11 +468,10 @@ meetings:
     confirm-button: Ja, deze zitting verwijderen
     back: Terug
   edit:
-    edit:
-    save: Save
-    confirm-quit-without-saving: Are you sure you want to leave the page without saving your changes?
-    save-and-quit: Save and Quit
-    cancel: Cancel
+    save: Opslaan
+    confirm-quit-without-saving: Bent u zeker dat u deze pagina wilt verlaten zonder uw wijzigingen op te slaan?
+    save-and-quit: Opslaan en afsluiten
+    cancel: Annuleren
 
 mock-login:
   administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
