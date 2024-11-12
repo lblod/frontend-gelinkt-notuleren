@@ -227,7 +227,7 @@ export default class MeetingsEditManualVotingController extends Controller {
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
-      emberApplication(getOwner(this)),
+      emberApplication({ application: getOwner(this) }),
     ];
   }
 
