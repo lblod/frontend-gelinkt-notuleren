@@ -224,6 +224,7 @@ export default class MeetingForm extends Component {
           ':has-no:einde': true,
           ':gt:einde': startOfMeeting.toISOString(),
         },
+        ':has:is-bestuurlijke-alias-van': true,
       },
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
@@ -278,6 +279,7 @@ export default class MeetingForm extends Component {
                 ':has-no:einde': true,
                 ':gt:einde': startOfMeeting.toISOString(),
               },
+              ':has:is-bestuurlijke-alias-van': true,
             },
           })),
         ];
