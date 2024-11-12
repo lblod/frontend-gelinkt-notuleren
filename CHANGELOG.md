@@ -1,5 +1,22 @@
 # frontend-gelinkt-notuleren
 
+## 5.41.0
+
+### Minor Changes
+
+- [#765](https://github.com/lblod/frontend-gelinkt-notuleren/pull/765) [`001c7c3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/001c7c3bca5706af075ac428b93ab7195e7238d2) Thanks [@elpoelma](https://github.com/elpoelma)! - - Adjust logic of meeting creation modal:
+
+  - Only allow the selection of 'bestuursorganen' which are active on the selected 'planned start' date
+  - When modifying the 'planned start' date, clear the 'bestuursorgaan' if necessary.
+
+  * Modernize `administrative-body-select` component
+
+- [#732](https://github.com/lblod/frontend-gelinkt-notuleren/pull/732) [`677da80`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/677da8049ac6cb0dc531be9355ca7ecac3859633) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add a way of adding a custom voting
+
+### Patch Changes
+
+- [#764](https://github.com/lblod/frontend-gelinkt-notuleren/pull/764) [`100044b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/100044bba69ff4f99c5c000d1d067b915302b349) Thanks [@elpoelma](https://github.com/elpoelma)! - Meeting attendee modal: ensure only mandatees with a linked person are displayed
+
 ## 5.40.0
 
 ### Minor Changes
