@@ -50,7 +50,7 @@
     "@lblod/ember-acmidm-login": "^2.1.0",
     "@lblod/ember-environment-banner": "^0.5.0",
     "@lblod/ember-mock-login": "^0.10.0",
-    "@lblod/ember-rdfa-editor": "10.7.3",
+    "@lblod/ember-rdfa-editor": "10.7.4",
     "@lblod/ember-rdfa-editor-lblod-plugins": "25.2.1",
     "@lblod/template-uuid-instantiator": "^1.0.2",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
