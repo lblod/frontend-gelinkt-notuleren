@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.41.3
+
+### Patch Changes
+
+- [`83d30c9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/83d30c91b17b731969c944821c0a98581504f667) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to [v10.7.4](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.7.4)
+
+- [#771](https://github.com/lblod/frontend-gelinkt-notuleren/pull/771) [`014fe5c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/014fe5c61e7a6abc9c1cbd7198a2843d9eae2797) Thanks [@elpoelma](https://github.com/elpoelma)! - Rework how meeting page buttons are hidden when media="print"
+
+- [#770](https://github.com/lblod/frontend-gelinkt-notuleren/pull/770) [`890efcd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/890efcda11b659bc5a561c5810a685c48917b900) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure diaeresis are taken into account when converting mandatee rank to number
+
+- [#768](https://github.com/lblod/frontend-gelinkt-notuleren/pull/768) [`e91a8ce`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e91a8ceb9d489ab83066442b73d31354d64310aa) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix codelist and locations in agendapoint editor
+
 ## 5.41.2
 
 ### Patch Changes
