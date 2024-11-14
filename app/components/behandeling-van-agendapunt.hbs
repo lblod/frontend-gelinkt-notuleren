@@ -7,7 +7,11 @@
         {{limit-content @behandeling.onderwerp.titel 80}}
       </AuHeading>
       {{#if this.isInaugurationMeeting}}
-        <AuPill @icon='alert-triangle' @skin='warning' class="au-u-hide-on-print">
+        <AuPill
+          @icon='alert-triangle'
+          @skin='warning'
+          class='au-u-hide-on-print'
+        >
           {{t 'behandeling-van-agendapunten.sync-warning'}}
         </AuPill>
       {{/if}}
@@ -15,7 +19,7 @@
     {{#unless @focusMode}}
       <Common::MeetingSubSection
         @title={{t 'behandeling-van-agendapunten.visibility'}}
-        class="au-u-hide-on-print"
+        class='au-u-hide-on-print'
       >
         <:body>
           <div class='au-u-padding-tiny au-u-padding-bottom-none'>
@@ -117,7 +121,7 @@
     </:body>
     <:button>
       {{#unless @readOnly}}
-        <div class="au-u-hide-on-print">
+        <div class='au-u-hide-on-print'>
 
           <AuButton
             {{on 'click' (perform this.addStandardVoting)}}
@@ -188,7 +192,7 @@
         @skin='button-secondary'
         @icon='pencil'
         @iconAlignment='left'
-        class="au-u-hide-on-print"
+        class='au-u-hide-on-print'
       >
         {{t 'generic.edit'}}
       </AuLink>
