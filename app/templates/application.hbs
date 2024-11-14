@@ -7,10 +7,12 @@
 <AuModalContainer />
 <AuApp class='{{if this.showEnvironment "au-c-app--environment"}}'>
   {{#if this.showEnvironment}}
-    <EnvironmentBanner
-      @environmentName={{this.environmentName}}
-      @applicationName='Gelinkt Notuleren'
-    />
+    <div class='au-u-hide-on-print'>
+      <EnvironmentBanner
+        @environmentName={{this.environmentName}}
+        @applicationName='Gelinkt Notuleren'
+      />
+    </div>
   {{/if}}
   {{outlet}}
 </AuApp>
