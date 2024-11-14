@@ -10,7 +10,7 @@
         @icon='pencil'
         @iconAlignment='left'
         {{on 'click' this.togglePopup}}
-        class='au-u-margin-top-small'
+        class='au-u-margin-top-small au-u-hide-on-print'
       >
         {{@modalTitle}}
       </AuButton>
@@ -20,7 +20,7 @@
         @skin='secondary'
         @icon='cross'
         @iconAlignment='left'
-        class='au-u-margin-top-small'
+        class='au-u-margin-top-small au-u-hide-on-print'
         @disabled={{true}}
       >
         {{@readOnlyText}}
