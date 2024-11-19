@@ -1,5 +1,8 @@
 import Service, { service } from '@ember/service';
 import { v4 as uuidv4 } from 'uuid';
+import { removePropertiesOfDeletedNodes } from '@lblod/ember-rdfa-editor/plugins/remove-properties-of-deleted-nodes';
+import { defaultAttributeValueGeneration } from '@lblod/ember-rdfa-editor/plugins/default-attribute-value-generation';
+import { rdfaInfoPlugin } from '@lblod/ember-rdfa-editor/plugins/rdfa-info';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
@@ -347,7 +350,27 @@ export default class AgendapointEditorService extends Service {
 
     const state = EditorState.create({
       doc,
-      plugins: this.plugins,
+      // We need to configure some additional (default) plugins for the headless editor
+      // (they are already configured by default on the headful one)
+      plugins: [
+        defaultAttributeValueGeneration([
+          {
+            attribute: '__guid',
+            generator() {
+              return uuidv4();
+            },
+          },
+          {
+            attribute: '__rdfaId',
+            generator() {
+              return uuidv4();
+            },
+          },
+        ]),
+        removePropertiesOfDeletedNodes(),
+        rdfaInfoPlugin(),
+        ...this.plugins,
+      ],
     });
     return state;
   };
