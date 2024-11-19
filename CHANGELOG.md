@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.41.5
+
+### Patch Changes
+
+- [#773](https://github.com/lblod/frontend-gelinkt-notuleren/pull/773) [`1175960`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/11759608ffb50bf15e096462edd075e484e24071) Thanks [@elpoelma](https://github.com/elpoelma)! - Agendapoint headless editor: ensure the necessary RDFa plugins are configured for the headless editor to work as expected
+
+- [#772](https://github.com/lblod/frontend-gelinkt-notuleren/pull/772) [`d4afe53`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d4afe530100eceead1b5aaba312f920a8411ee84) Thanks [@elpoelma](https://github.com/elpoelma)! - Update editor-plugins to version [26.0.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v26.0.1)
+
+- [#772](https://github.com/lblod/frontend-gelinkt-notuleren/pull/772) [`d4afe53`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d4afe530100eceead1b5aaba312f920a8411ee84) Thanks [@elpoelma](https://github.com/elpoelma)! - Update @lblod/template-uuid-instantiator to version [1.0.3](https://github.com/lblod/template-uuid-instantiator/releases/tag/v1.0.3)
+
 ## 5.41.4
 
 ### Patch Changes
