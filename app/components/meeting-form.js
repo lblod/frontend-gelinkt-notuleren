@@ -7,10 +7,6 @@ import { articlesBasedOnClassifcationMap } from '../utils/classification-utils';
 import { trackedFunction } from 'reactiveweb/function';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
-import {
-  MANDATARIS_STATUS_EFFECTIEF,
-  MANDATARIS_STATUS_WAARNEMEND,
-} from '../utils/constants';
 import { getIdentifier } from '../utils/rdf-utils';
 import { BESTUURSFUNCTIE_CODES } from '../config/constants';
 
@@ -213,12 +209,6 @@ export default class MeetingForm extends Component {
             ':id:': stringifiedDefaultTypeIds,
           },
         },
-        status: {
-          ':id:': [
-            MANDATARIS_STATUS_EFFECTIEF,
-            MANDATARIS_STATUS_WAARNEMEND,
-          ].join(','),
-        },
         ':lte:start': startOfMeeting.toISOString(),
         ':or:': {
           ':has-no:einde': true,
@@ -268,12 +258,6 @@ export default class MeetingForm extends Component {
                     ),
                   ].join(','),
                 },
-              },
-              status: {
-                ':id:': [
-                  MANDATARIS_STATUS_EFFECTIEF,
-                  MANDATARIS_STATUS_WAARNEMEND,
-                ].join(','),
               },
               ':or:': {
                 ':has-no:einde': true,
