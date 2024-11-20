@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.42.0
+
+### Minor Changes
+
+- [`f4e9351`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f4e935125cc3aef5278a8bc32017e87791bd2930) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [v26.0.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v26.0.2) and editor to [v10.8.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.8.0)
+
+### Patch Changes
+
+- [#775](https://github.com/lblod/frontend-gelinkt-notuleren/pull/775) [`c2de080`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c2de080513a3820def9945a2d29e7ecb1315db27) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix model configuration for publishing logs of IV meetings
+
 ## 5.41.5
 
 ### Patch Changes
