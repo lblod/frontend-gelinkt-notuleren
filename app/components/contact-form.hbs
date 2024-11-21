@@ -3,21 +3,19 @@
   <AuLabel for='select'>{{t 'contact.about'}}</AuLabel>
   <ul>
     <li>
-      <AuControlRadio
-        @label={{t 'contact.bug-message'}}
+      <AuRadio
         @value='GelinktNotuleren@vlaanderen.be?subject=Functionaliteit of bug of probleem'
         @name='type-vraag'
         @onChange={{this.setMailto}}
-      />
+      >{{t 'contact.bug-message'}}</AuRadio>
 
     </li>
     <li>
-      <AuControlRadio
-        @label={{t 'contact.question-message'}}
+      <AuRadio
         @name='type-vraag'
         @value='GelinktNotuleren@vlaanderen.be?subject=Inhoudelijke vraag'
         @onChange={{this.setMailto}}
-      />
+      >{{t 'contact.question-message'}}</AuRadio>
     </li>
   </ul>
   {{#if this.mailto}}
