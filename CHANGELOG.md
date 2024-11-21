@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.42.1
+
+### Patch Changes
+
+- [#776](https://github.com/lblod/frontend-gelinkt-notuleren/pull/776) [`6b92eb8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6b92eb8fd26d2255dc401484c305abc52ead5ad2) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix contact page
+
 ## 5.42.0
 
 ### Minor Changes
