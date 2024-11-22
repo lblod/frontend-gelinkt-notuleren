@@ -284,11 +284,19 @@ export default class MeetingForm extends Component {
           })),
         ];
         if (voorzittersPreviousLegislation.length) {
-          mandatees.push(voorzittersPreviousLegislation[0]);
+          const oldChairman = voorzittersPreviousLegislation[0];
+          const oldChairmanPerson = await oldChairman.isBestuurlijkeAliasVan;
+          for (const mandatee of mandatees) {
+            const person = await mandatee.isBestuurlijkeAliasVan;
+            if (person.uri === oldChairmanPerson.uri) {
+              return mandatees;
+            }
+          }
+          return [...mandatees, oldChairman];
         }
       }
     }
-    return Array.from(mandatees);
+    return mandatees;
   });
 
   possibleParticipantsData = trackedTask(
