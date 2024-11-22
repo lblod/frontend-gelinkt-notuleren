@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.42.2
+
+### Patch Changes
+
+- [`5df910d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5df910dbca5f69825fc4f7b1f513e7cdcc426f3e) Thanks [@abeforgit](https://github.com/abeforgit)! - dont add previous chairman to participants if that person is already in that list
+
 ## 5.42.1
 
 ### Patch Changes
