@@ -1414,18 +1414,6 @@ export const mandateeTableConfigRMW = (meeting) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
-          const decisionUri = findParentNodeClosestToPos($pos, (node) => {
-            return hasOutgoingNamedNodeTriple(
-              node.attrs,
-              RDF('type'),
-              BESLUIT('Besluit'),
-            );
-          })?.node.attrs.subject;
-          if (!decisionUri) {
-            throw new Error(
-              'Could not find decision to sync mandatee table with',
-            );
-          }
           const bindings = queryResult.results.bindings;
           const tableHeader = row(
             schema,
@@ -1439,16 +1427,11 @@ export const mandateeTableConfigRMW = (meeting) => {
             true,
           );
           const rows = bindings.map((binding) => {
-            const {
-              mandataris,
-              persoon_naam,
-              mandaat_start,
-              mandaat_einde,
-              fractie_naam,
-            } = bindingToObject(binding);
+            const { persoon_naam, mandaat_start, mandaat_einde, fractie_naam } =
+              bindingToObject(binding);
             return row(schema, [
               schema.text(fractie_naam),
-              resourceNode(schema, mandataris, persoon_naam),
+              schema.text(persoon_naam),
               dateNode(schema, mandaat_start),
               dateNode(schema, mandaat_einde),
               undefined,
@@ -1458,23 +1441,9 @@ export const mandateeTableConfigRMW = (meeting) => {
             tableHeader,
             ...rows,
           ]);
-          const factory = new SayDataFactory();
-          const result = transactionCombinator(
-            state,
-            replaceContent(state.tr, $pos, content),
-          )(
-            bindings.map((binding) => {
-              return addPropertyToNode({
-                resource: decisionUri,
-                property: {
-                  predicate: MANDAAT('bekrachtigtAanstellingVan').full,
-                  object: factory.resourceNode(binding['mandataris'].value),
-                },
-              });
-            }),
-          );
+          const transaction = replaceContent(state.tr, $pos, content);
           return {
-            transaction: result.transaction,
+            transaction,
             result: true,
             initialState: state,
           };
@@ -1590,7 +1559,7 @@ export const mandateeTableConfigRMW = (meeting) => {
           PREFIX person: <http://www.w3.org/ns/person#>
           PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
-          SELECT DISTINCT ?persoon ?persoon_naam ?fractie ?fractie_naam WHERE {
+          SELECT DISTINCT ?mandataris ?persoon ?persoon_naam ?fractie ?fractie_naam WHERE {
             ?persoon a person:Person.
             ?persoon persoon:gebruikteVoornaam ?voornaam.
             ?persoon foaf:familyName ?achternaam.
@@ -1634,6 +1603,18 @@ export const mandateeTableConfigRMW = (meeting) => {
         return (state) => {
           const { doc, schema } = state;
           const $pos = doc.resolve(pos);
+          const decisionUri = findParentNodeClosestToPos($pos, (node) => {
+            return hasOutgoingNamedNodeTriple(
+              node.attrs,
+              RDF('type'),
+              BESLUIT('Besluit'),
+            );
+          })?.node.attrs.subject;
+          if (!decisionUri) {
+            throw new Error(
+              'Could not find decision to sync mandatee table with',
+            );
+          }
           const bindings = queryResult.results.bindings;
           const tableHeader = row(
             schema,
@@ -1644,9 +1625,10 @@ export const mandateeTableConfigRMW = (meeting) => {
             true,
           );
           const rows = bindings.map((binding) => {
-            const { persoon_naam, fractie_naam } = bindingToObject(binding);
+            const { mandataris, persoon_naam, fractie_naam } =
+              bindingToObject(binding);
             return row(schema, [
-              schema.text(persoon_naam),
+              resourceNode(schema, mandataris, persoon_naam),
               schema.text(fractie_naam),
             ]);
           });
@@ -1654,9 +1636,23 @@ export const mandateeTableConfigRMW = (meeting) => {
             tableHeader,
             ...rows,
           ]);
-          const transaction = replaceContent(state.tr, $pos, content);
+          const factory = new SayDataFactory();
+          const result = transactionCombinator(
+            state,
+            replaceContent(state.tr, $pos, content),
+          )(
+            bindings.map((binding) => {
+              return addPropertyToNode({
+                resource: decisionUri,
+                property: {
+                  predicate: MANDAAT('bekrachtigtAanstellingVan').full,
+                  object: factory.resourceNode(binding['mandataris'].value),
+                },
+              });
+            }),
+          );
           return {
-            transaction,
+            transaction: result.transaction,
             result: true,
             initialState: state,
           };
