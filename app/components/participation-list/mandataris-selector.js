@@ -2,10 +2,6 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { all, restartableTask, timeout } from 'ember-concurrency';
 import { service } from '@ember/service';
-import {
-  MANDATARIS_STATUS_EFFECTIEF,
-  MANDATARIS_STATUS_WAARNEMEND,
-} from '../../utils/constants';
 import { BESTUURSFUNCTIE_CODES } from '../../config/constants';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 import { getIdentifier } from '../../utils/rdf-utils';
@@ -60,12 +56,6 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
           },
         },
         'is-bestuurlijke-alias-van': searchData,
-        status: {
-          ':id:': [
-            MANDATARIS_STATUS_EFFECTIEF,
-            MANDATARIS_STATUS_WAARNEMEND,
-          ].join(','),
-        },
         ':lte:start': this.startOfMeeting.toISOString(),
         ':or:': {
           ':has-no:einde': true,
@@ -117,12 +107,6 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
                   ].join(','),
                 },
               },
-              status: {
-                ':id:': [
-                  MANDATARIS_STATUS_EFFECTIEF,
-                  MANDATARIS_STATUS_WAARNEMEND,
-                ].join(','),
-              },
               ':or:': {
                 ':has-no:einde': true,
                 ':gt:einde': this.startOfMeeting.toISOString(),
@@ -160,12 +144,6 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
           },
         },
         'is-bestuurlijke-alias-van': searchData,
-        status: {
-          ':id:': [
-            MANDATARIS_STATUS_EFFECTIEF,
-            MANDATARIS_STATUS_WAARNEMEND,
-          ].join(','),
-        },
         ':lte:start': this.startOfMeeting.toISOString(),
         ':or:': {
           ':has-no:einde': true,
