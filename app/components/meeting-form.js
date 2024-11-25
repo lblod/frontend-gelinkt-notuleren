@@ -11,8 +11,6 @@ import {
   MANDATARIS_STATUS_EFFECTIEF,
   MANDATARIS_STATUS_WAARNEMEND,
 } from '../utils/constants';
-import { getIdentifier } from '../utils/rdf-utils';
-import { BESTUURSFUNCTIE_CODES } from '../config/constants';
 
 /** @typedef {import("../models/agendapunt").default[]} Agendapunt */
 
