@@ -31,15 +31,19 @@ export default class AgendapointsEditController extends Controller {
 
   SnippetInsert = SnippetInsertRdfaComponent;
 
-  schema = this.agendapointEditor.schema;
-
   config = this.agendapointEditor.config;
 
   nodeViews = this.agendapointEditor.nodeViews;
 
-  plugins = this.agendapointEditor.plugins;
-
   citationPlugin = this.agendapointEditor.citationPlugin;
+
+  constructor(...args) {
+    super(...args);
+    const { schema, plugins } =
+      this.agendapointEditor.getSchemaAndPlugins(false);
+    this.schema = schema;
+    this.plugins = plugins;
+  }
 
   get dirty() {
     // Since we clear the undo history when saving, this works. If we want to maintain undo history
