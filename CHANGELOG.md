@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.43.0
+
+### Minor Changes
+
+- [#778](https://github.com/lblod/frontend-gelinkt-notuleren/pull/778) [`bd204e8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bd204e831f1311283ea9d3b75041a3f0846e402c) Thanks [@elpoelma](https://github.com/elpoelma)! - RMW mandatee table adjustments:
+  - Add `mandaat:bekrachtigtAanstellingVan` predicate to mandatees in 'Eedafleggingen' table (`IVRMW2-LBM-5-eed-leden`)
+  - Remove `mandaat:bekrachtigtAanstellingVan` predicate from 'Verkiezingen' table (`IVRMW2-LBM-3-verkiezing-leden`)
+
+### Patch Changes
+
+- [`954220b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/954220bc5bb4be353bfcf0c1432b16ff16533dcd) Thanks [@abeforgit](https://github.com/abeforgit)! - Do not add ex-chairperson to participant list
+
 ## 5.42.3
 
 ### Patch Changes
