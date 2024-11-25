@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.42.3
+
+### Patch Changes
+
+- [#777](https://github.com/lblod/frontend-gelinkt-notuleren/pull/777) [`1cd28f5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1cd28f5d5f3f03ba57c96674f4df0048fabfe722) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix bug with LMB synchronisation by not autofilling variables in headless editors
+
 ## 5.42.2
 
 ### Patch Changes
