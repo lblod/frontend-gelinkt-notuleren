@@ -127,55 +127,6 @@ export default class AgendapointEditorService extends Service {
 
   citationPlugin = citationPlugin(this.config.citation);
 
-  schema = new Schema({
-    nodes: {
-      doc: docWithConfig({ rdfaAware: true }),
-      paragraph,
-      repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
-      structure,
-      list_item: listItemWithConfig({ enableHierarchicalList: true }),
-      ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
-      bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
-      placeholder,
-      ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
-      date: date(this.config.date),
-      regulatoryStatementNode,
-      templateComment,
-      text_variable,
-      number,
-      oslo_location: osloLocation(this.config.location),
-      location,
-      codelist,
-      roadsign_regulation,
-      mandatee_table,
-      heading: headingWithConfig({ rdfaAware: false }),
-      blockquote,
-      snippet_placeholder: snippetPlaceholder(this.config.snippet),
-      snippet: snippet(this.config.snippet),
-      horizontal_rule,
-      code_block,
-      text,
-      image,
-      hard_break,
-      block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
-      invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
-      inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
-      link: link(this.config.link),
-      person_variable,
-      autofilled_variable,
-    },
-    marks: {
-      em,
-      strong,
-      underline,
-      strikethrough,
-      subscript,
-      superscript,
-      highlight,
-      color,
-    },
-  });
-
   get config() {
     const classificatie = this.currentSession.classificatie;
     const municipality = this.defaultMunicipality;
@@ -322,8 +273,62 @@ export default class AgendapointEditorService extends Service {
     };
   }
 
-  get plugins() {
-    return [
+  /**
+   * Get the schema and plugins for the editor.
+   * @param {boolean} isHeadless - Whether this is for a headless editor, as this requires
+   * different config to work correctly
+   **/
+  getSchemaAndPlugins(isHeadless) {
+    const schema = new Schema({
+      nodes: {
+        doc: docWithConfig({ rdfaAware: true }),
+        paragraph,
+        repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
+        structure,
+        list_item: listItemWithConfig({ enableHierarchicalList: true }),
+        ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
+        bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
+        placeholder,
+        ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
+        date: date(this.config.date),
+        regulatoryStatementNode,
+        templateComment,
+        text_variable,
+        number,
+        oslo_location: osloLocation(this.config.location),
+        location,
+        codelist,
+        roadsign_regulation,
+        mandatee_table,
+        heading: headingWithConfig({ rdfaAware: false }),
+        blockquote,
+        snippet_placeholder: snippetPlaceholder(this.config.snippet),
+        snippet: snippet(this.config.snippet),
+        horizontal_rule,
+        code_block,
+        text,
+        image,
+        hard_break,
+        block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
+        invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
+        inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
+        link: link(this.config.link),
+        person_variable,
+        autofilled_variable,
+      },
+      marks: {
+        em,
+        strong,
+        underline,
+        strikethrough,
+        subscript,
+        superscript,
+        highlight,
+        color,
+      },
+    });
+
+    const plugins = [
       ...tablePlugins,
       tableKeymap,
       this.citationPlugin,
@@ -333,18 +338,27 @@ export default class AgendapointEditorService extends Service {
           shouldShowInvisibles: false,
         },
       ),
-      linkPasteHandler(this.schema.nodes.link),
+      linkPasteHandler(schema.nodes.link),
       listTrackingPlugin(),
 
       emberApplication({ application: getOwner(this) }),
-      variableAutofillerPlugin(this.config.autofilledVariable),
     ];
+
+    // The autofiller plugin messes with the headless editor by appending a transaction just
+    // before the desired transactions run, meaning that the transactions are attempted to be
+    // applied to a different state than intended.
+    if (!isHeadless) {
+      plugins.push(variableAutofillerPlugin(this.config.autofilledVariable));
+    }
+
+    return { schema, plugins };
   }
 
   getState = (html) => {
-    const parser = ProseParser.fromSchema(this.schema);
+    const { schema, plugins } = this.getSchemaAndPlugins(true);
+    const parser = ProseParser.fromSchema(schema);
     const doc = htmlToDoc(html, {
-      schema: this.schema,
+      schema: schema,
       parser,
     });
 
@@ -369,7 +383,7 @@ export default class AgendapointEditorService extends Service {
         ]),
         removePropertiesOfDeletedNodes(),
         rdfaInfoPlugin(),
-        ...this.plugins,
+        ...plugins,
       ],
     });
     return state;
