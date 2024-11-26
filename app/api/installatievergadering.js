@@ -204,7 +204,7 @@ const FACILITY_SPEC = DEFAULT_MUNICIPALITY_SPEC;
 /** @type { Record<string, MunicipalitySpec> } */
 const MUNICIPALITY_CONFIG = {
   // We won't have special templates for voeren
-  Voeren: { gemeenteraad: NO_POLITIERAAD_SPEC, rmw: IVRMW_MAP },
+  Voeren: NO_POLITIERAAD_SPEC,
   // faciliteitengemeentes (municipalities on the language border which have
   // special facilities for the french-speaking minorities)
   Bever: FACILITY_SPEC,
@@ -213,7 +213,7 @@ const MUNICIPALITY_CONFIG = {
   Kraainem: FACILITY_SPEC,
   Linkebeek: FACILITY_SPEC,
   Mesen: FACILITY_SPEC,
-  Ronse: { gemeenteraad: NO_POLITIERAAD_SPEC, rmw: IVRMW_MAP },
+  Ronse: NO_POLITIERAAD_SPEC,
   'Sint-Genesius-Rode': FACILITY_SPEC,
   'Spiere-Helkijn': FACILITY_SPEC,
   Wemmel: FACILITY_SPEC,
