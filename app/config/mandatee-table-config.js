@@ -69,8 +69,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris org:holds ?mandaat.
+
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
@@ -82,13 +84,18 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?fractie a mandaat:Fractie.
           ?mandataris org:hasMembership/org:organisation ?fractie.
           {
             SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
             WHERE {
+              ?_mandataris a mandaat:Mandataris.
               ?_mandataris org:hasMembership/org:organisation ?fractie.
+
               ?_mandataris org:holds ?_mandaat.
               ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+              ?_persoon a person:Person.
               ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
             }
           }
@@ -150,6 +157,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
         SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
@@ -164,20 +172,27 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
 
+          ?persoon a person:Person.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
 
+          ?fractie a mandaat:Fractie.
           ?mandataris org:hasMembership/org:organisation ?fractie.
           {
             SELECT ?fractie (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte)
             WHERE {
+              ?_mandataris a mandaat:Mandataris.
               ?_mandataris org:hasMembership/org:organisation ?fractie.
               ?_mandataris org:holds ?_mandaat.
+
               ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+              ?_persoon a person:Person.
               ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
             }
           }
@@ -269,6 +284,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
@@ -284,12 +300,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           OPTIONAL {
             ?mandataris mandaat:rangorde ?mandataris_rang.
           }
 
+          ?persoon a person:Person.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
@@ -379,9 +397,13 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ?kandidatenlijst skos:prefLabel ?kandidatenlijst_naam.
-          ?fractie1 ext:geproduceerdDoor ?kandidatenlijst;
+
+          ?fractie1 a mandaat:Fractie;
+                    ext:geproduceerdDoor ?kandidatenlijst;
                     regorg:legalName ?fractie1_naam.
-          ?fractie2 ext:geproduceerdDoor ?kandidatenlijst;
+
+          ?fractie2 a mandaat:Fractie;
+                    ext:geproduceerdDoor ?kandidatenlijst;
                     regorg:legalName ?fractie2_naam.
           FILTER(?fractie1 != ?fractie2 && ?fractie1 < ?fractie2)
         }
@@ -472,11 +494,13 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
         SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lid) as ?fractie_aantal_zetels) WHERE {
+          ?fractie a mandaat:Fractie.
           ?fractie regorg:legalName ?fractie_naam.
           ?fractie org:memberOf ?bestuursorgaanIT.
 
@@ -488,10 +512,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:hasMembership/org:organisation ?fractie.
-          ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
+
           ?mandataris org:holds ?mandaat.
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+          ?lid a person:Person.
+          ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
         }
         ORDER BY DESC(?fractie_aantal_zetels) ?fractie
       `;
@@ -560,9 +588,11 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris org:hasMembership/org:organisation ?fractie.
 
+          ?fractie a mandaat:Fractie.
           ?fractie regorg:legalName ?fractie_naam.
 
           ?mandataris org:holds ?mandaat.
@@ -580,9 +610,12 @@ export const mandateeTableConfigIVGR = (meeting) => {
           {
             SELECT ?fractie (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte)
             WHERE {
+              ?_mandataris a mandaat:Mandataris.
               ?_mandataris org:hasMembership/org:organisation ?fractie.
               ?_mandataris org:holds ?_mandaat.
               ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+              ?_persoon a person:Person.
               ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
             }
           }
@@ -647,6 +680,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
@@ -662,10 +696,13 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
 
           ?mandataris mandaat:rangorde ?mandataris_rang.
+
+          ?persoon a person:Person.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
@@ -737,6 +774,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
@@ -753,6 +791,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris mandaat:rangorde ?mandataris_rang.
@@ -762,6 +801,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
             ?mandataris mandaat:einde ?mandaat_einde.
           }
 
+          ?persoon a person:Person.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
@@ -870,6 +910,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
@@ -886,11 +927,13 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris mandaat:status <${MANDATARIS_STATUS_CODES.VERHINDERD}>.
           ?mandataris mandaat:rangorde ?mandataris_rang.
 
+          ?persoon a person:Person.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
@@ -952,6 +995,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
@@ -968,17 +1012,19 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:holds ?mandaat.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris mandaat:rangorde ?mandataris_rang.
 
-
+          ?persoon a person:Person.
           ?persoon persoon:gebruikteVoornaam ?voornaam.
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
 
           OPTIONAL {
             ?mandataris org:hasMembership/org:organisation ?fractie.
+            ?fractie a mandaat:Fractie.
             ?fractie regorg:legalName ?fractie_naam.
           }
         }
@@ -1046,6 +1092,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
         PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+        PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
@@ -1065,10 +1112,14 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+          ?mandataris a mandaat:Mandataris.
           ?mandataris org:holds ?mandaat.
           ?mandataris org:hasMembership/org:organisation ?fractie.
+
+          ?persoon a person:Person.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
 
+          ?fractie a mandaat:Fractie.
           ?fractie regorg:legalName ?fractie_naam.
         }
         ORDER BY DESC(COUNT(?persoon))
@@ -1118,6 +1169,7 @@ async function fetchFractieLeden(fractieUri) {
       ?persoon foaf:familyName ?achternaam.
       BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?naam)
 
+      ?mandataris a mandaat:Mandataris.
       ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
       ?mandataris org:hasMembership/org:organisation <${fractieUri}>.
       ?mandataris org:holds ?mandaat.
@@ -1183,11 +1235,13 @@ export const mandateeTableConfigRMW = (meeting) => {
           PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
           PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
           PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+          PREFIX person: <http://www.w3.org/ns/person#>
           PREFIX foaf: <http://xmlns.com/foaf/0.1/>
           PREFIX regorg: <https://www.w3.org/ns/regorg#>
           PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
           SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?persoon) as ?fractie_aantal_zetels) WHERE {
+            ?fractie a mandaat:Fractie.
             ?fractie regorg:legalName ?fractie_naam.
             ?fractie org:memberOf ?bestuursorgaanIT.
 
@@ -1199,10 +1253,13 @@ export const mandateeTableConfigRMW = (meeting) => {
             }
             ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
+            ?mandataris a mandaat:Mandataris.
             ?mandataris org:hasMembership/org:organisation ?fractie.
-            ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:holds ?mandaat.
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+            ?persoon a person:Person.
+            ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           }
           ORDER BY DESC(?fractie_aantal_zetels) ?fractie
         `;
@@ -1272,12 +1329,14 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?persoon foaf:familyName ?achternaam.
             BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
 
+            ?mandataris a mandaat:Mandataris.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
             OPTIONAL {
               ?mandataris mandaat:einde ?persoon_mandaat_einde.
             }
 
+            ?fractie a mandaat:Fractie.
             ?fractie regorg:legalName ?fractie_naam.
 
             ?mandataris org:holds ?mandaat.
@@ -1295,9 +1354,12 @@ export const mandateeTableConfigRMW = (meeting) => {
             {
               SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
               WHERE {
+                ?_mandataris a mandaat:Mandataris.
                 ?_mandataris org:hasMembership/org:organisation ?fractie.
                 ?_mandataris org:holds ?_mandaat.
                 ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+                ?_persoon a person:Person.
                 ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
               }
             }
@@ -1372,6 +1434,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?persoon foaf:familyName ?achternaam.
             BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
 
+            ?mandataris a mandaat:Mandataris.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
             ?mandataris mandaat:start ?mandaat_start.
@@ -1379,6 +1442,7 @@ export const mandateeTableConfigRMW = (meeting) => {
               ?mandataris mandaat:einde ?mandaat_einde.
             }
 
+            ?fractie a mandaat:Fractie.
             ?fractie regorg:legalName ?fractie_naam.
 
             ?mandataris org:holds ?mandaat.
@@ -1396,9 +1460,12 @@ export const mandateeTableConfigRMW = (meeting) => {
             {
               SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
               WHERE {
+                ?_mandataris a mandaat:Mandataris.
                 ?_mandataris org:hasMembership/org:organisation ?fractie.
                 ?_mandataris org:holds ?_mandaat.
                 ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+                ?_persoon a person:Person.
                 ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
               }
             }
@@ -1473,9 +1540,11 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?persoon foaf:familyName ?achternaam.
             BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
 
+            ?mandataris a mandaat:Mandataris.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
 
+            ?fractie a mandaat:Fractie.
             ?fractie regorg:legalName ?fractie_naam.
 
             ?mandataris org:holds ?mandaat.
@@ -1493,9 +1562,12 @@ export const mandateeTableConfigRMW = (meeting) => {
             {
               SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
               WHERE {
+                ?_mandataris a mandaat:Mandataris.
                 ?_mandataris org:hasMembership/org:organisation ?fractie.
                 ?_mandataris org:holds ?_mandaat.
                 ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
+
+                ?_persoon a person:Person.
                 ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
               }
             }
@@ -1565,9 +1637,11 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?persoon foaf:familyName ?achternaam.
             BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
 
+            ?mandataris a mandaat:Mandataris.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
 
+            ?fractie a mandaat:Fractie.
             ?fractie regorg:legalName ?fractie_naam.
 
             ?mandataris org:holds ?mandaat.
@@ -1585,9 +1659,12 @@ export const mandateeTableConfigRMW = (meeting) => {
             {
               SELECT ?fractie (COUNT(?_persoon) AS ?fractie_grootte)
               WHERE {
+                ?_mandataris a mandaat:Mandataris.
                 ?_mandataris org:hasMembership/org:organisation ?fractie.
                 ?_mandataris org:holds ?_mandaat.
                 ?_mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
+
+                ?_persoon a person:Person.
                 ?_mandataris mandaat:isBestuurlijkeAliasVan ?_persoon.
               }
             }
