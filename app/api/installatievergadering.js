@@ -198,26 +198,9 @@ const DEFAULT_MUNICIPALITY_SPEC = {
   gemeenteraad: IVGR_POLITIERAAD_MAP,
   rmw: IVRMW_MAP,
 };
-// we will not provide special templates for border municipalities
-const FACILITY_SPEC = DEFAULT_MUNICIPALITY_SPEC;
 
 /** @type { Record<string, MunicipalitySpec> } */
 const MUNICIPALITY_CONFIG = {
-  // We won't have special templates for voeren
-  Voeren: NO_POLITIERAAD_SPEC,
-  // faciliteitengemeentes (municipalities on the language border which have
-  // special facilities for the french-speaking minorities)
-  Bever: FACILITY_SPEC,
-  Drogenbos: FACILITY_SPEC,
-  Herstappe: FACILITY_SPEC,
-  Kraainem: FACILITY_SPEC,
-  Linkebeek: FACILITY_SPEC,
-  Mesen: FACILITY_SPEC,
-  Ronse: NO_POLITIERAAD_SPEC,
-  'Sint-Genesius-Rode': FACILITY_SPEC,
-  'Spiere-Helkijn': FACILITY_SPEC,
-  Wemmel: FACILITY_SPEC,
-  'Wezembeek-Oppem': FACILITY_SPEC,
   // fusions
   'Merelbeke-Melle': FUSION_SPEC,
   'Nazareth-De Pinte': FUSION_SPEC,
@@ -234,6 +217,8 @@ const MUNICIPALITY_CONFIG = {
   Lokeren: FUSION_SPEC,
 
   // municipalities without the 9th agenda item
+  Voeren: NO_POLITIERAAD_SPEC,
+  Ronse: NO_POLITIERAAD_SPEC,
   Antwerpen: NO_POLITIERAAD_SPEC,
   Brasschaat: NO_POLITIERAAD_SPEC,
   Schoten: NO_POLITIERAAD_SPEC,
