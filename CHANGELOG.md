@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.43.1
+
+### Patch Changes
+
+- [#780](https://github.com/lblod/frontend-gelinkt-notuleren/pull/780) [`509dc29`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/509dc29eb851342642aaea696347061e1637c71d) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix agendapoint not generated bug when creating a IV with Ronse and Voeren
+
+- [#779](https://github.com/lblod/frontend-gelinkt-notuleren/pull/779) [`25a7190`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/25a71905beaf4b0b871f89b8fb384757e1d955dd) Thanks [@elpoelma](https://github.com/elpoelma)! - Adjust mandatee queries to explicitly include the `rdf:type` of URIs which are consumed from LMB. This prevents us from querying tombstones.
+
 ## 5.43.0
 
 ### Minor Changes
