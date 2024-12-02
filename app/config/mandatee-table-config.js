@@ -1332,8 +1332,15 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandataris a mandaat:Mandataris.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
-            OPTIONAL {
+
+            {
               ?mandataris mandaat:einde ?persoon_mandaat_einde.
+            }
+            UNION
+            {
+              FILTER NOT EXISTS {
+                ?mandataris mandaat:einde ?persoon_mandaat_einde.
+              }
             }
 
             ?fractie a mandaat:Fractie.
@@ -1438,8 +1445,15 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
             ?mandataris mandaat:start ?mandaat_start.
-            OPTIONAL {
+
+            {
               ?mandataris mandaat:einde ?mandaat_einde.
+            }
+            UNION
+            {
+              FILTER NOT EXISTS {
+                ?mandataris mandaat:einde ?mandaat_einde.
+              }
             }
 
             ?fractie a mandaat:Fractie.
