@@ -14,6 +14,7 @@ module.exports = function (environment) {
     zonalLocationCodelistUri: '{{ZONAL_LOCATION_CODELIST_URI}}',
     nonZonalLocationCodelistUri: '{{NON_ZONAL_LOCATION_CODELIST_URI}}',
     lmbEndpoint: '{{LMB_ENDPOINT}}',
+    globalSystemNotification: '{{GLOBAL_SYSTEM_NOTIFICATION}}',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
