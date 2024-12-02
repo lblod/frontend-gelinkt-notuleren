@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.43.3
+
+### Patch Changes
+
+- [#782](https://github.com/lblod/frontend-gelinkt-notuleren/pull/782) [`28f57ed`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/28f57ed34462f6f48e91cdad0160ef4f817b1365) Thanks [@elpoelma](https://github.com/elpoelma)! - Work around virtuoso optional-nested-select duplication bug by replacing `OPTIONAL` statements by `UNION` statements
+
 ## 5.43.2
 
 ### Patch Changes
