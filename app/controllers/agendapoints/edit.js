@@ -12,6 +12,7 @@ import InsertArticleComponent from '@lblod/ember-rdfa-editor-lblod-plugins/compo
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+import { fixArticleConnections } from '../../utils/fix-article-connections';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -69,9 +70,10 @@ export default class AgendapointsEditController extends Controller {
   }
 
   @action
-  handleRdfaEditorInit(editor) {
+  async handleRdfaEditorInit(editor) {
     this.controller = editor;
     editor.initialize(this.editorDocument.content || '', { doNotClean: true });
+    fixArticleConnections(editor);
   }
 
   copyAgendapunt = task(async () => {
