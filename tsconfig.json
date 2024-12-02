@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "experimentalDecorators": true,
     "allowJs": true,
     "checkJs": false
