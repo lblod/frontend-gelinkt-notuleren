@@ -63,6 +63,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX org: <http://www.w3.org/ns/org#>
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+        PREFIX regorg: <https://www.w3.org/ns/regorg#>
 
         SELECT DISTINCT ?persoon ?persoon_naam WHERE {
           ?persoon a person:Person .
@@ -85,7 +86,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
           }
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
-          ?fractie a mandaat:Fractie.
           ?mandataris org:hasMembership/org:organisation ?fractie.
 
           ${fractieOrderingSubquery(
@@ -153,6 +153,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+        PREFIX regorg: <https://www.w3.org/ns/regorg#>
+
         SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
 
@@ -174,7 +176,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?mandataris_naam)
 
-          ?fractie a mandaat:Fractie.
           ?mandataris org:hasMembership/org:organisation ?fractie.
 
           ${fractieOrderingSubquery(
@@ -581,9 +582,6 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandataris a mandaat:Mandataris.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
           ?mandataris org:hasMembership/org:organisation ?fractie.
-
-          ?fractie a mandaat:Fractie.
-          ?fractie regorg:legalName ?fractie_naam.
 
           ?mandataris org:holds ?mandaat.
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
@@ -1330,9 +1328,6 @@ export const mandateeTableConfigRMW = (meeting) => {
               }
             }
 
-            ?fractie a mandaat:Fractie.
-            ?fractie regorg:legalName ?fractie_naam.
-
             ?mandataris org:holds ?mandaat.
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
 
@@ -1435,9 +1430,6 @@ export const mandateeTableConfigRMW = (meeting) => {
               }
             }
 
-            ?fractie a mandaat:Fractie.
-            ?fractie regorg:legalName ?fractie_naam.
-
             ?mandataris org:holds ?mandaat.
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
 
@@ -1529,9 +1521,6 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
 
-            ?fractie a mandaat:Fractie.
-            ?fractie regorg:legalName ?fractie_naam.
-
             ?mandataris org:holds ?mandaat.
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.
 
@@ -1617,9 +1606,6 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?mandataris a mandaat:Mandataris.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
             ?mandataris org:hasMembership/org:organisation ?fractie.
-
-            ?fractie a mandaat:Fractie.
-            ?fractie regorg:legalName ?fractie_naam.
 
             ?mandataris org:holds ?mandaat.
             ?mandaat org:role <${BESTUURSFUNCTIE_CODES.LID_BCSD}>.

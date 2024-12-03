@@ -1,8 +1,11 @@
 export const fractieOrderingSubquery = (role, period) => `{
-  SELECT ?fractie (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte) (SUM(?_aantal_stemmen) AS ?fractie_stemmen)
+  SELECT ?fractie ?fractie_naam (COUNT(DISTINCT ?_persoon) AS ?fractie_grootte) (SUM(?_aantal_stemmen) AS ?fractie_stemmen)
   WHERE {
     ?_mandataris a mandaat:Mandataris.
     ?_mandataris org:hasMembership/org:organisation ?fractie.
+
+    ?fractie a mandaat:Fractie.
+    ?fractie regorg:legalName ?fractie_naam.
 
     ?_mandataris org:holds ?_mandaat.
     ?_mandaat org:role <${role}>.
