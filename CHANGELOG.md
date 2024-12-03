@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.44.0
+
+### Minor Changes
+
+- [#785](https://github.com/lblod/frontend-gelinkt-notuleren/pull/785) [`7985754`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7985754e5a5f1234953818ff48d0a0bcf9222d95) Thanks [@elpoelma](https://github.com/elpoelma)! - Add fusietemplates to installatievergadering-api configuration
+
+### Patch Changes
+
+- [#785](https://github.com/lblod/frontend-gelinkt-notuleren/pull/785) [`7985754`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7985754e5a5f1234953818ff48d0a0bcf9222d95) Thanks [@elpoelma](https://github.com/elpoelma)! - Rework installatievergadering API a bit for clarity
+
+- [`a841179`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a841179e8bff65b3abaff93342f683793052b625) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix: automatically connect articles to parent decision upon opening an agendapoint
+
+- [#786](https://github.com/lblod/frontend-gelinkt-notuleren/pull/786) [`3a90ef5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3a90ef5a9ffc8cbe585dd77d933b4ba4344b4c5b) Thanks [@elpoelma](https://github.com/elpoelma)! - Slightly modernize the meeting page styling by moving to a flex-based layout
+
+- [#784](https://github.com/lblod/frontend-gelinkt-notuleren/pull/784) [`daea8f5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/daea8f5e3dbd64e114aed584b7e986f2a8c8193e) Thanks [@piemonkey](https://github.com/piemonkey)! - Update mandatee table queries for IVs to sort fracties with the same number of seats by number of votes
+
 ## 5.43.3
 
 ### Patch Changes
