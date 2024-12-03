@@ -73,7 +73,6 @@ export default class AgendapointsEditController extends Controller {
   async handleRdfaEditorInit(editor) {
     this.controller = editor;
     editor.initialize(this.editorDocument.content || '', { doNotClean: true });
-    fixArticleConnections(editor);
   }
 
   copyAgendapunt = task(async () => {
@@ -135,6 +134,7 @@ export default class AgendapointsEditController extends Controller {
   });
 
   saveTask = task(async () => {
+    fixArticleConnections(this.controller);
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {

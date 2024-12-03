@@ -58,7 +58,7 @@ function findDecisions(doc, schema) {
 }
 
 function findUnconnectedArticles(decisionNode, schema) {
-  const decisionURI = decisionNode.subject;
+  const decisionURI = decisionNode.attrs.subject;
   const articles = findChildren(decisionNode, (child) => {
     return (
       child.type === schema.nodes.structure &&
@@ -70,11 +70,12 @@ function findUnconnectedArticles(decisionNode, schema) {
 }
 
 function isConnectedTo(articleNode, decisionURI) {
-  return Boolean(
+  const result = Boolean(
     (articleNode.attrs.backlinks ?? []).some(
       (backlink) =>
-        backlink.subject === decisionURI &&
-        backlink.predicate == 'http://data.europa.eu/eli/ontology#has_part',
+        backlink.subject.value === decisionURI &&
+        backlink.predicate === 'http://data.europa.eu/eli/ontology#has_part',
     ),
   );
+  return result;
 }
