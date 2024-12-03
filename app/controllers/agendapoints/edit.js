@@ -134,7 +134,12 @@ export default class AgendapointsEditController extends Controller {
   });
 
   saveTask = task(async () => {
-    fixArticleConnections(this.controller);
+    const fixArticleConnectionsTr = fixArticleConnections(
+      this.controller.mainEditorState,
+    );
+    if (fixArticleConnectionsTr) {
+      this.controller.mainEditorView.dispatch(fixArticleConnectionsTr);
+    }
     if (!this.editorDocument.title) {
       this.hasDocumentValidationErrors = true;
     } else {

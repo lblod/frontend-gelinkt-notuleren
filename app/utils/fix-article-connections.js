@@ -8,19 +8,19 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 import { findChildren } from '@curvenote/prosemirror-utils';
 
-export function fixArticleConnections(editorController) {
-  const state = editorController.mainEditorState;
-  const decisions = findDecisions(state.doc, editorController.schema);
+/**
+ * Generates a prosemirror transactions which allows for fixing the article connections in an AP
+ */
+export function fixArticleConnections(editorState) {
+  const schema = editorState.schema;
+  const decisions = findDecisions(editorState.doc, schema);
   if (!decisions.length) {
-    return false;
+    return;
   }
   const transactionMonads = [];
   const factory = new SayDataFactory();
   for (const decision of decisions) {
-    const unconnectedArticles = findUnconnectedArticles(
-      decision.node,
-      editorController.schema,
-    );
+    const unconnectedArticles = findUnconnectedArticles(decision.node, schema);
     for (const article of unconnectedArticles) {
       transactionMonads.push(
         addPropertyToNode({
@@ -34,17 +34,13 @@ export function fixArticleConnections(editorController) {
     }
   }
   if (!transactionMonads.length) {
-    return false;
+    return;
   }
-  editorController.withTransaction((tr) => {
-    const result = transactionCombinator(
-      editorController.mainEditorState,
-      tr,
-    )(transactionMonads);
-    result.transaction.setMeta('addToHistory', false);
-    return result.transaction;
-  });
-  return true;
+  const result = transactionCombinator(
+    editorState,
+    editorState.tr,
+  )(transactionMonads);
+  return result.transaction;
 }
 
 function findDecisions(doc, schema) {

@@ -15,6 +15,7 @@ import {
   mandateeTableConfigIVGR,
   mandateeTableConfigRMW,
 } from '../../config/mandatee-table-config';
+import { fixArticleConnections } from '../../utils/fix-article-connections';
 
 export default class InaugurationMeetingSynchronizationComponent extends Component {
   @service toaster;
@@ -197,10 +198,15 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     const currentVersion = await container.currentVersion;
     const html = currentVersion.content ?? '';
     const initialState = this.agendapointEditor.getState(html);
-    const syncedState = await syncDocument(initialState, {
+    let syncedState = await syncDocument(initialState, {
       ...mandateeTableConfigIVGR(this.meeting),
       ...mandateeTableConfigRMW(this.meeting),
     });
+    const fixArticleConnectionsTr = fixArticleConnections(syncedState);
+    if (fixArticleConnectionsTr) {
+      syncedState = syncedState.applyTransaction(fixArticleConnectionsTr).state;
+    }
+
     const serializer = SaySerializer.fromSchema(
       syncedState.schema,
       () => syncedState,
