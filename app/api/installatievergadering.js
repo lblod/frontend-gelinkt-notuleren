@@ -6,6 +6,7 @@
 
 import { RAAD_VOOR_MAATSCHAPPELIJK_WELZIJN } from '../utils/classification-utils';
 import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
+import { MapWithDefault } from '../utils/map-with-default';
 
 /**
  * @typedef {Object} CreateInstallatievergaderingOptions
@@ -89,7 +90,7 @@ async function getMunicipality(bestuursorgaan) {
 async function getSpec(bestuursorgaan) {
   const municipality = await getMunicipality(bestuursorgaan);
 
-  const spec = MUNICIPALITY_CONFIG[municipality] ?? DEFAULT_MUNICIPALITY_SPEC;
+  const spec = MUNICIPALITY_CONFIG.get(municipality);
 
   if (await isRMW(bestuursorgaan)) {
     return spec.rmw;
@@ -142,9 +143,38 @@ const IVGR_MAP = [
 /** @type {TemplateSpec[]} */
 const IVGR_FUSIE_MAP = [
   {
+    templateTitle: 'IVFUSIE1 Kennisname van de definitieve verkiezingsuitslag',
+    apTitle: 'Kennisname van de definitieve verkiezingsuitslag',
+  },
+  {
+    templateTitle: 'IVFUSIE2 Onderzoek van de geloofsbrieven',
+    apTitle: 'Onderzoek van de geloofsbrieven',
+  },
+  {
+    templateTitle: 'IVFUSIE3 Eedaflegging van de verkozen gemeenteraadsleden',
+    apTitle: 'Eedaflegging van de verkozen gemeenteraadsleden',
+  },
+  {
     templateTitle:
-      'IVGRFusie1 Kennisname van de definitieve verkiezingsuitslag DUMMY',
-    apTitle: 'Kennisname van de definitieve verkiezingsuitslag fusie',
+      'IVFUSIE4 Bepaling van de rangorde van de gemeenteraadsleden',
+    apTitle: 'Bepaling van de rangorde van de gemeenteraadsleden',
+  },
+  {
+    templateTitle: 'IVFUSIE5 Vaststelling van de fracties',
+    apTitle: 'Vaststelling van de fracties',
+  },
+  {
+    templateTitle: 'IVFUSIE6 Verkiezing van de voorzitter van de gemeenteraad',
+    apTitle: 'Verkiezing van de voorzitter van de gemeenteraad',
+  },
+  {
+    templateTitle: 'IVFUSIE7 Verkiezing van de schepenen',
+    apTitle: 'Verkiezing van de schepenen',
+  },
+  {
+    templateTitle:
+      'IVFUSIE8 Aanduiding en eedaflegging van de aangewezen-burgemeester',
+    apTitle: 'Aanduiding en eedaflegging van de aangewezen-burgemeester',
   },
 ];
 /** @type {TemplateSpec[]} */
@@ -153,6 +183,16 @@ const IVGR_POLITIERAAD_MAP = [
   {
     templateTitle: 'IVGR9 Verkiezing van de politieraadsleden',
     apTitle: 'Verkiezing van de politieraadsleden',
+  },
+];
+
+/** @type {TemplateSpec[]} */
+const IVGR_FUSIE_POLITIERAAD_MAP = [
+  ...IVGR_FUSIE_MAP,
+  {
+    templateTitle:
+      'IVFUSIE9 Verkiezing van de vertegenwoordigers van de politieraad',
+    apTitle: 'Verkiezing van de vertegenwoordigers van de politieraad',
   },
 ];
 
@@ -171,72 +211,66 @@ const IVRMW_MAP = [
       'Verkiezing van de leden van het bijzonder comité voor de sociale dienst',
   },
 ];
-/** @type {TemplateSpec[]} */
-const IVRMW_FUSIE_MAP = IVRMW_MAP;
 
-/**
- * @typedef {Object} MunicipalitySpec
- * @property {TemplateSpec[]} gemeenteraad
- * @property {TemplateSpec[]} rmw
- */
-
-const FUSION_SPEC = { gemeenteraad: IVGR_FUSIE_MAP, rmw: IVRMW_FUSIE_MAP };
-
-/**
- * municipalities without the 9th agenda item about the police zone
- * @type {MunicipalitySpec}
- */
-const NO_POLITIERAAD_SPEC = {
-  gemeenteraad: IVGR_MAP,
-  rmw: IVRMW_MAP,
-};
-
-/**
- * Most municipalities will have the 9th agenda item
- * @type {MunicipalitySpec} */
-const DEFAULT_MUNICIPALITY_SPEC = {
+const MUNICIPALITY_CONFIG = new MapWithDefault({
   gemeenteraad: IVGR_POLITIERAAD_MAP,
   rmw: IVRMW_MAP,
-};
+});
 
-/** @type { Record<string, MunicipalitySpec> } */
-const MUNICIPALITY_CONFIG = {
-  // fusions
-  'Merelbeke-Melle': FUSION_SPEC,
-  'Nazareth-De Pinte': FUSION_SPEC,
-  Pajottegem: FUSION_SPEC,
-  'Tessenderlo-Ham': FUSION_SPEC,
-  Tielt: FUSION_SPEC,
-  Lochristi: FUSION_SPEC,
-  Hasselt: FUSION_SPEC,
-  'Beveren-Kruibeke-Zwijndrecht': FUSION_SPEC,
-  Wingene: FUSION_SPEC,
-  'Tongeren-Borgloon': FUSION_SPEC,
-  'Bilzen-Hoeselt': FUSION_SPEC,
-  //TODO: NO Politieraad for lokeren
-  Lokeren: FUSION_SPEC,
+// Set-up 'gemeenten' that do not have a 'politieraad'
+MUNICIPALITY_CONFIG.batchSet(
+  [
+    'Voeren',
+    'Ronse',
+    'Brasschaat',
+    'Schoten',
+    'Lier',
+    'Heist-op-den-Berg',
+    'Lommel',
+    'Heusden-Zolder',
+    'Leuven',
+    'Aarschot',
+    'Zaventem',
+    'Dilbeek',
+    'Grimbergen',
+    'Gent',
+    'Sint-Niklaas',
+    'Aalst',
+    'Ninove',
+    'Dendermonde',
+    'Brugge',
+    'Oostende',
+    'Middelkerke',
+  ],
+  {
+    gemeenteraad: IVGR_MAP,
+    rmw: IVRMW_MAP,
+  },
+);
 
-  // municipalities without the 9th agenda item
-  Voeren: NO_POLITIERAAD_SPEC,
-  Ronse: NO_POLITIERAAD_SPEC,
-  Antwerpen: NO_POLITIERAAD_SPEC,
-  Brasschaat: NO_POLITIERAAD_SPEC,
-  Schoten: NO_POLITIERAAD_SPEC,
-  Lier: NO_POLITIERAAD_SPEC,
-  'Heist-op-den-Berg': NO_POLITIERAAD_SPEC,
-  Lommel: NO_POLITIERAAD_SPEC,
-  'Heusden-Zolder': NO_POLITIERAAD_SPEC,
-  Leuven: NO_POLITIERAAD_SPEC,
-  Aarschot: NO_POLITIERAAD_SPEC,
-  Zaventem: NO_POLITIERAAD_SPEC,
-  Dilbeek: NO_POLITIERAAD_SPEC,
-  Grimbergen: NO_POLITIERAAD_SPEC,
-  Gent: NO_POLITIERAAD_SPEC,
-  'Sint-Niklaas': NO_POLITIERAAD_SPEC,
-  Aalst: NO_POLITIERAAD_SPEC,
-  Ninove: NO_POLITIERAAD_SPEC,
-  Dendermonde: NO_POLITIERAAD_SPEC,
-  Brugge: NO_POLITIERAAD_SPEC,
-  Oostende: NO_POLITIERAAD_SPEC,
-  Middelkerke: NO_POLITIERAAD_SPEC,
-};
+// Set-up 'fusiegemeenten' that have a 'politieraad'
+MUNICIPALITY_CONFIG.batchSet(
+  [
+    'Merelbeke-Melle',
+    'Nazareth-De Pinte',
+    'Pajottegem',
+    'Tessenderlo-Ham',
+    'Tielt',
+    'Lochristi',
+    'Hasselt',
+    'Beveren-Kruibeke-Zwijndrecht',
+    'Wingene',
+    'Tongeren-Borgloon',
+    'Bilzen-Hoeselt',
+  ],
+  {
+    gemeenteraad: IVGR_FUSIE_POLITIERAAD_MAP,
+    rmw: IVRMW_MAP,
+  },
+);
+
+// Set-up 'fusiegemeenten' without a 'politieraad'
+MUNICIPALITY_CONFIG.batchSet(['Lokeren', 'Antwerpen'], {
+  gemeenteraad: IVGR_FUSIE_MAP,
+  rmw: IVRMW_MAP,
+});
