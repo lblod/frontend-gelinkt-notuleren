@@ -1240,13 +1240,8 @@ export const mandateeTableConfigRMW = (meeting) => {
 
             ?persoon a person:Person.
             ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
-
-            ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
-            ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
-            ?verkiezingsresultaat mandaat:isResultaatVan ?lid.
-            ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
           }
-          ORDER BY DESC(?fractie_aantal_zetels) DESC(SUM(?aantal_stemmen)) ?fractie
+          ORDER BY DESC(?fractie_aantal_zetels) ?fractie
         `;
         return executeQuery({
           query: sparqlQuery,
@@ -1343,6 +1338,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ${fractieOrderingSubquery(
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
+              true,
             )}
           }
           ORDER BY DESC(?fractie_grootte) DESC(?fractie_stemmen) ?fractie ?persoon_naam
@@ -1445,6 +1441,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ${fractieOrderingSubquery(
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
+              true,
             )}
           }
           ORDER BY DESC(?fractie_grootte) DESC(?fractie_stemmen) ?fractie ?persoon_naam
@@ -1536,6 +1533,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ${fractieOrderingSubquery(
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
+              true,
             )}
           }
           ORDER BY DESC(?fractie_grootte) DESC(?fractie_stemmen) ?fractie ?persoon_naam
@@ -1622,6 +1620,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ${fractieOrderingSubquery(
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
+              true,
             )}
           }
           ORDER BY DESC(?fractie_grootte) DESC(?fractie_stemmen) ?fractie ?persoon_naam
