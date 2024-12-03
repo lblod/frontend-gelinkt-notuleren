@@ -4,7 +4,6 @@ import config from 'frontend-gelinkt-notuleren/config/environment';
 
 export default class GlobalSystemNotification extends Component {
   get notification() {
-    console.log('Not: ', config.globalSystemNotification);
     return config.globalSystemNotification;
   }
 
