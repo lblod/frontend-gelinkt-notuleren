@@ -88,8 +88,8 @@ import {
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
 import {
-  structure,
-  structureView,
+  structureWithConfig,
+  structureViewWithConfig,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/structure-plugin/node';
 import {
   inlineRdfaWithConfig,
@@ -120,6 +120,7 @@ import { htmlToDoc } from '@lblod/ember-rdfa-editor/utils/_private/html-utils';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import { isRdfaAttrs } from '@lblod/ember-rdfa-editor/core/schema';
 import { BESLUIT } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
+import configurationPerAdminUnit from '../../config/configuration-per-admin-unit';
 
 export default class AgendapointEditorService extends Service {
   @service intl;
@@ -218,6 +219,7 @@ export default class AgendapointEditorService extends Service {
       insertArticle: {
         uriGenerator: () => `http://data.lblod.info/artikels/${uuidv4()}`,
       },
+      ...this.adminUnitConfig,
     };
   }
 
@@ -229,6 +231,10 @@ export default class AgendapointEditorService extends Service {
       // Return empty object instead of null so can be used safely in template
       return {};
     }
+  }
+
+  get adminUnitConfig() {
+    return configurationPerAdminUnit[this.defaultMunicipality.id] || {};
   }
 
   get codelistEditOptions() {
@@ -265,7 +271,7 @@ export default class AgendapointEditorService extends Service {
           controller,
         ),
         snippet: snippetView(this.config.snippet)(controller),
-        structure: structureView(controller),
+        structure: structureViewWithConfig(this.config.structure)(controller),
         mandatee_table: mandateeTableView(controller),
         person_variable: personVariableView(controller),
         autofilled_variable: autofilledVariableView(controller),
@@ -284,7 +290,7 @@ export default class AgendapointEditorService extends Service {
         doc: docWithConfig({ rdfaAware: true }),
         paragraph,
         repaired_block: repairedBlockWithConfig({ rdfaAware: true }),
-        structure,
+        structure: structureWithConfig(this.config.structure),
         list_item: listItemWithConfig({ enableHierarchicalList: true }),
         ordered_list: orderedListWithConfig({ enableHierarchicalList: true }),
         bullet_list: bulletListWithConfig({ enableHierarchicalList: true }),
