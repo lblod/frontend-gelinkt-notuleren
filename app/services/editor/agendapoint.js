@@ -234,7 +234,8 @@ export default class AgendapointEditorService extends Service {
   }
 
   get adminUnitConfig() {
-    return configurationPerAdminUnit[this.defaultMunicipality.id] || {};
+    console.log(this.defaultMunicipality);
+    return configurationPerAdminUnit[this.defaultMunicipality.uri] || {};
   }
 
   get codelistEditOptions() {

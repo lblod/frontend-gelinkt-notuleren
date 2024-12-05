@@ -115,7 +115,9 @@ export const IV_CLASSIFICATIE_MAP = {
     BESTUURSORGAAN_CLASSIFICATIE_CODES.OCMW_RAAD,
 };
 
-export const ADMINISTRATIVE_UNIT_IDS = {
+export const ADMINISTRATIVE_UNIT_URIS = {
   GEMEENTE_GENT:
-    '353234a365664e581db5c2f7cc07add2534b47b8e1ab87c821fc6e6365e6bef5',
+    'http://data.lblod.info/id/bestuurseenheden/353234a365664e581db5c2f7cc07add2534b47b8e1ab87c821fc6e6365e6bef5',
+  OCMW_GENT:
+    'http://data.lblod.info/id/bestuurseenheden/c5623baf3970c5efa9746dff01afd43092c1321a47316dbe81ed79604b56e8ea',
 };
