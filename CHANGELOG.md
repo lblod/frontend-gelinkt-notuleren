@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.44.1
+
+### Patch Changes
+
+- [`b92513e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b92513eea5a3afec6d230f86fb54d2ccdcd75115) Thanks [@elpoelma](https://github.com/elpoelma)! - Revert accidental `shouldEditRdfa` change
+
 ## 5.44.0
 
 ### Minor Changes
