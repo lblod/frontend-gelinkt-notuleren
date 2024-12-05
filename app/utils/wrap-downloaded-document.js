@@ -1,5 +1,6 @@
 export function wrapDownloadedDocument(html) {
   const document = `
+      <!doctype html>
       <html>
         <head>
           <meta charset="utf-8" />
