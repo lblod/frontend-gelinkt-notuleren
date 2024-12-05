@@ -5,8 +5,9 @@ import { on } from '@ember/modifier';
 import { task } from 'ember-concurrency';
 import perform from 'ember-concurrency/helpers/perform';
 import { generateExportTextFromEditorDocument } from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
+import { wrapDownloadedDocument } from 'frontend-gelinkt-notuleren/utils/wrap-downloaded-document';
 
-export default class DownloadMeetingComponent extends Component {
+export default class DownloadMeetingPartComponent extends Component {
   @service publish;
   @service intl;
 
@@ -14,7 +15,7 @@ export default class DownloadMeetingComponent extends Component {
     return this.args.buttonSkin || 'link';
   }
   get icon() {
-    return this.downloadMeeting.last?.isSuccessful
+    return this.downloadMeetingPart.last?.isSuccessful
       ? 'circle-check'
       : this.args.icon;
   }
@@ -29,7 +30,7 @@ export default class DownloadMeetingComponent extends Component {
     );
   }
 
-  downloadMeeting = task(async () => {
+  downloadMeetingPart = task(async () => {
     let route = `/prepublish/${this.args.documentType}`;
     let html;
     switch (this.args.documentType) {
@@ -59,7 +60,9 @@ export default class DownloadMeetingComponent extends Component {
     if (this.args.callback) {
       return this.args.callback(html);
     } else {
-      const file = new Blob([html], { type: 'text/html' });
+      const file = new Blob([wrapDownloadedDocument(html)], {
+        type: 'text/html',
+      });
       const linkElement = document.createElement('a');
       linkElement.href = URL.createObjectURL(file);
       linkElement.download = `${this.args.documentType}.html`;
@@ -109,15 +112,15 @@ export default class DownloadMeetingComponent extends Component {
     <AuButton
       @skin={{this.buttonSkin}}
       @icon={{this.icon}}
-      @loading={{this.downloadMeeting.isRunning}}
+      @loading={{this.downloadMeetingPart.isRunning}}
       @loadingMessage={{this.loadingText}}
       class={{if
-        this.downloadMeeting.last.isSuccessful
+        this.downloadMeetingPart.last.isSuccessful
         'download-meeting-part-downloaded'
       }}
-      {{on 'click' (perform this.downloadMeeting)}}
+      {{on 'click' (perform this.downloadMeetingPart)}}
     >
-      {{#if this.downloadMeeting.last.isSuccessful}}
+      {{#if this.downloadMeetingPart.last.isSuccessful}}
         {{this.completedText}}
       {{else}}
         {{this.buttonText}}

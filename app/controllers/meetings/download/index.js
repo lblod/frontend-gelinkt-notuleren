@@ -4,6 +4,7 @@ import { restartableTask, task } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 import { service } from '@ember/service';
+import { wrapDownloadedDocument } from '../../../utils/wrap-downloaded-document';
 
 export default class MeetingsDownloadController extends Controller {
   @service publish;
@@ -53,7 +54,9 @@ export default class MeetingsDownloadController extends Controller {
   });
 
   downloadHtml(html, documentName) {
-    const file = new Blob([html], { type: 'text/html' });
+    const file = new Blob([wrapDownloadedDocument(html)], {
+      type: 'text/html',
+    });
     const linkElement = document.createElement('a');
     linkElement.href = URL.createObjectURL(file);
     linkElement.download = `${documentName}.html`;
