@@ -11,30 +11,16 @@
       />
     {{/let}}
   </div>
-  <div class='au-o-grid__item au-u-1-5 au-u-1-6@small'>
-    {{#let (unique-id) as |id|}}
-      <AuLabel for={{id}}>{{t 'date-time-picker.hours'}}</AuLabel>
-      <Input
-        class='au-c-input au-c-input--block'
-        @type='number'
-        {{on 'input' (fn this.onChangeTime 'hours')}}
-        @value={{this.hours}}
-        max={{24}}
-        id={{id}}
-      />
-    {{/let}}
-  </div>
-  <div class='au-o-grid__item au-u-1-5 au-u-1-6@small'>
-    {{#let (unique-id) as |id|}}
-      <AuLabel for={{id}}>{{t 'date-time-picker.minutes'}}</AuLabel>
-      <Input
-        class='au-c-input au-c-input--block'
-        @type='number'
-        {{on 'input' (fn this.onChangeTime 'minutes')}}
-        @value={{this.minutes}}
-        max={{60}}
-        id={{id}}
-      />
-    {{/let}}
+  <div class='au-o-grid__item au-u-2-5 au-u-2-6@small'>
+    <AuTimePicker
+      @hoursLabel={{t 'date-time-picker.hours'}}
+      @minutesLabel={{t 'date-time-picker.minutes'}}
+      @nowLabel={{t 'date-plugin.card.now'}}
+      @hours={{this.hours}}
+      @minutes={{this.minutes}}
+      @showSeconds={{false}}
+      @showNow={{false}}
+      @onChange={{this.onChangeTime}}
+    />
   </div>
 </div>

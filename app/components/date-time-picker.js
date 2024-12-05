@@ -49,18 +49,11 @@ export default class DateTimePicker extends Component {
   }
 
   @action
-  onChangeTime(type, event) {
-    const value = event.target.value;
-    if (!this.date) {
-      this.date = new Date();
-    }
-    if (type === 'hours') {
-      if (value < 0 || value > 24) return;
-      this.date.setHours(value);
-    } else {
-      if (value < 0 || value > 60) return;
-      this.date.setMinutes(value);
-    }
+  onChangeTime(timeObject) {
+    if (!this.date) this.date = new Date();
+    this.date.setHours(timeObject.hours);
+    this.date.setMinutes(timeObject.minutes);
+    this.date.setSeconds(timeObject.seconds);
     this.args.onChange(this.date);
   }
 }
