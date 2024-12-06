@@ -64,6 +64,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX lmb: <http://lblod.data.gift/vocabularies/lmb/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
+        PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
         SELECT DISTINCT ?persoon ?persoon_naam WHERE {
           ?persoon a person:Person .
@@ -71,8 +73,9 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?persoon foaf:familyName ?achternaam.
           BIND(CONCAT(?voornaam, " ", ?achternaam) AS ?persoon_naam)
 
-          ?mandataris a mandaat:Mandataris.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?persoon.
+          ?mandataris a mandaat:Mandataris.
+          ?mandataris org:hasMembership/org:organisation ?fractie.
           ?mandataris org:holds ?mandaat.
 
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
@@ -80,15 +83,15 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
           ?bestuursorgaanIT mandaat:isTijdspecialisatieVan ?bestuursorgaan.
+          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
           ?bestuursorgaan besluit:classificatie ?classificatie.
           VALUES ?classificatie {
             <${BESTUURSORGAAN_CLASSIFICATIE_CODES.GEMEENTERAAD}>
           }
-          ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
-          ?mandataris org:hasMembership/org:organisation ?fractie.
 
           ${fractieOrderingSubquery(
+            bestuurseenheid.uri,
             BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID,
             BESTUURSPERIODES['2024-heden'],
           )}
@@ -154,6 +157,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
         SELECT DISTINCT ?mandataris ?mandataris_naam WHERE {
           ?mandaat org:role <${BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID}>.
@@ -179,6 +183,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandataris org:hasMembership/org:organisation ?fractie.
 
           ${fractieOrderingSubquery(
+            bestuurseenheid.uri,
             BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID,
             BESTUURSPERIODES['2024-heden'],
           )}
@@ -484,6 +489,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
         SELECT DISTINCT ?fractie ?fractie_naam (COUNT(DISTINCT ?lid) as ?fractie_aantal_zetels) WHERE {
           ?fractie a mandaat:Fractie.
@@ -507,12 +513,10 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?lid a person:Person.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
 
-          ?verkiezing mandaat:steltSamen ?bestuursorgaanIT.
-          ?verkiezingsresultaat mandaat:isResultaatVoor/mandaat:behoortTot ?verkiezing.
-          ?verkiezingsresultaat mandaat:isResultaatVan ?lid.
-          ?verkiezingsresultaat mandaat:aantalNaamstemmen ?aantal_stemmen.
+          ?fractie ext:geproduceerdDoor/ext:matched_stemmen ?fractie_stemmen.
+
         }
-        ORDER BY DESC(?fractie_aantal_zetels) DESC(SUM(?aantal_stemmen)) ?fractie
+        ORDER BY DESC(?fractie_aantal_zetels) DESC(?fractie_stemmen) ?fractie
       `;
         return executeQuery({
           query: sparqlQuery,
@@ -572,6 +576,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX regorg: <https://www.w3.org/ns/regorg#>
         PREFIX person: <http://www.w3.org/ns/person#>
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
         SELECT DISTINCT ?persoon ?persoon_naam ?fractie ?fractie_naam WHERE {
           ?persoon a person:Person.
@@ -596,6 +601,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
           ${fractieOrderingSubquery(
+            bestuurseenheid.uri,
             BESTUURSFUNCTIE_CODES.GEMEENTERAADSLID,
             BESTUURSPERIODES['2024-heden'],
           )}
@@ -1336,6 +1342,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
             ${fractieOrderingSubquery(
+              bestuurseenheid.uri,
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
               true,
@@ -1439,6 +1446,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
             ${fractieOrderingSubquery(
+              bestuurseenheid.uri,
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
               true,
@@ -1531,6 +1539,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
             ${fractieOrderingSubquery(
+              bestuurseenheid.uri,
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
               true,
@@ -1618,6 +1627,7 @@ export const mandateeTableConfigRMW = (meeting) => {
             ?bestuursorgaan besluit:bestuurt <${bestuurseenheid.uri}>.
 
             ${fractieOrderingSubquery(
+              bestuurseenheid.uri,
               BESTUURSFUNCTIE_CODES.LID_BCSD,
               BESTUURSPERIODES['2024-heden'],
               true,
