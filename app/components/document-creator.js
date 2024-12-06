@@ -103,7 +103,8 @@ export default class DocumentCreatorComponent extends Component {
         return templateUuidInstantiator(trimmedHtml);
       } else {
         const trimmedHtml = this.template.body.replace(/>\s+</g, '><');
-        return instantiateUuids(trimmedHtml);
+        // If it's a built=in template, we apply both instantiate functions
+        return instantiateUuids(templateUuidInstantiator(trimmedHtml));
       }
     } else return '';
   }
