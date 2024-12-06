@@ -131,7 +131,7 @@ export default class AgendapointEditorService extends Service {
   }
   get config() {
     const classificatie = this.currentSession.classificatie;
-    const municipality = this.defaultMunicipality;
+    const municipality = this.currentSession.group;
     return {
       date: {
         formats: [
@@ -281,13 +281,8 @@ export default class AgendapointEditorService extends Service {
     };
   }
 
-  /**
-   * Get the schema and plugins for the editor.
-   * @param {boolean} isHeadless - Whether this is for a headless editor, as this requires
-   * different config to work correctly
-   **/
-  getSchemaAndPlugins(isHeadless) {
-    const schema = new Schema({
+  get schema() {
+    return new Schema({
       nodes: {
         doc: docWithConfig({ rdfaAware: true }),
         paragraph,
@@ -335,7 +330,14 @@ export default class AgendapointEditorService extends Service {
         color,
       },
     });
+  }
 
+  /**
+   * Get the plugins for the editor.
+   * @param {boolean} isHeadless - Whether this is for a headless editor, as this requires
+   * different config to work correctly
+   **/
+  getPlugins(isHeadless) {
     const plugins = [
       ...tablePlugins,
       tableKeymap,
@@ -346,7 +348,7 @@ export default class AgendapointEditorService extends Service {
           shouldShowInvisibles: false,
         },
       ),
-      linkPasteHandler(schema.nodes.link),
+      linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
 
       emberApplication({ application: getOwner(this) }),
@@ -358,12 +360,12 @@ export default class AgendapointEditorService extends Service {
     if (!isHeadless) {
       plugins.push(variableAutofillerPlugin(this.config.autofilledVariable));
     }
-
-    return { schema, plugins };
+    return plugins;
   }
 
   getState = (html) => {
-    const { schema, plugins } = this.getSchemaAndPlugins(true);
+    const schema = this.schema;
+    const plugins = this.getPlugins(true);
     const parser = ProseParser.fromSchema(schema);
     const doc = htmlToDoc(html, {
       schema: schema,
