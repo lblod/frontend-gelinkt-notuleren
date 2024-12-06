@@ -234,7 +234,6 @@ export default class AgendapointEditorService extends Service {
   }
 
   get adminUnitConfig() {
-    console.log(this.defaultMunicipality);
     return configurationPerAdminUnit[this.defaultMunicipality.uri] || {};
   }
 
