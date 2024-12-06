@@ -126,8 +126,9 @@ export default class AgendapointEditorService extends Service {
   @service intl;
   @service currentSession;
 
-  citationPlugin = citationPlugin(this.config.citation);
-
+  get citationPlugin() {
+    return citationPlugin(this.config.citation);
+  }
   get config() {
     const classificatie = this.currentSession.classificatie;
     const municipality = this.defaultMunicipality;

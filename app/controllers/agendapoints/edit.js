@@ -32,18 +32,28 @@ export default class AgendapointsEditController extends Controller {
 
   SnippetInsert = SnippetInsertRdfaComponent;
 
-  config = this.agendapointEditor.config;
-
-  nodeViews = this.agendapointEditor.nodeViews;
-
-  citationPlugin = this.agendapointEditor.citationPlugin;
-
   constructor(...args) {
     super(...args);
-    const { schema, plugins } =
-      this.agendapointEditor.getSchemaAndPlugins(false);
-    this.schema = schema;
-    this.plugins = plugins;
+  }
+
+  get config() {
+    return this.agendapointEditor.config;
+  }
+
+  get nodeViews() {
+    return this.agendapointEditor.nodeViews;
+  }
+
+  get citationPlugin() {
+    return this.agendapointEditor.citationPlugin;
+  }
+
+  get schema() {
+    return this.agendapointEditor.getSchemaAndPlugins(false).schema;
+  }
+
+  get plugins() {
+    return this.agendapointEditor.getSchemaAndPlugins(false).plugins;
   }
 
   get dirty() {
