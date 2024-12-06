@@ -27,14 +27,7 @@ export const fractieOrderingSubquery = (
     ${
       ignoreVotes
         ? ''
-        : `
-    <${bestuurseenheid}> skos:prefLabel ?_bestuurseenheid_naam.
-    ?fractie ext:geproduceerdDoor/skos:prefLabel ?_lijst.
-
-    ?_kieslijst_result a ext:KieslijstResult;
-          ext:kieskring ?_bestuurseenheid_naam;
-          ext:lijst ?_lijst;
-          ext:stemcijfer ?fractie_stemmen.`
+        : `?fractie ext:geproduceerdDoor/ext:matched_stemmen ?fractie_stemmen.`
     }
   }
 }`;

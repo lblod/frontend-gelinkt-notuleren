@@ -513,13 +513,8 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?lid a person:Person.
           ?mandataris mandaat:isBestuurlijkeAliasVan ?lid.
 
-          <${bestuurseenheid.uri}> skos:prefLabel ?_bestuurseenheid_naam.
-          ?fractie ext:geproduceerdDoor/skos:prefLabel ?_lijst.
+          ?fractie ext:geproduceerdDoor/ext:matched_stemmen ?fractie_stemmen.
 
-          ?_kieslijst_result a ext:KieslijstResult;
-                ext:kieskring ?_bestuurseenheid_naam;
-                ext:lijst ?_lijst;
-                ext:stemcijfer ?fractie_stemmen.
         }
         ORDER BY DESC(?fractie_aantal_zetels) DESC(?fractie_stemmen) ?fractie
       `;
