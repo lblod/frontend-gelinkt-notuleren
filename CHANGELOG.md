@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.44.2
+
+### Patch Changes
+
+- [#789](https://github.com/lblod/frontend-gelinkt-notuleren/pull/789) [`886ea7b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/886ea7b2edc1b9d924517332a309fa5e4f2e094a) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Wrap downloaded docs for correct uf8
+
+- [#788](https://github.com/lblod/frontend-gelinkt-notuleren/pull/788) [`65e8a4e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/65e8a4e88fb9128eeff5ba5f80e0d29ba9d4359e) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update the date time picker to use the au time picker
+
 ## 5.44.1
 
 ### Patch Changes
