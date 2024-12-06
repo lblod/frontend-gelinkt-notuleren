@@ -981,7 +981,11 @@ export const mandateeTableConfigIVGR = (meeting) => {
         PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 
         SELECT DISTINCT ?mandataris ?mandataris_naam ?fractie ?fractie_naam WHERE {
-          ?mandaat org:role <${BESTUURSFUNCTIE_CODES.SCHEPEN}>.
+          ?mandaat org:role ?role.
+          VALUES ?role {
+            <${BESTUURSFUNCTIE_CODES.SCHEPEN}>
+            <${BESTUURSFUNCTIE_CODES.TOEGEVOEGDE_SCHEPEN}>
+          }
 
           ?bestuursorgaanIT org:hasPost ?mandaat.
           ?bestuursorgaanIT lmb:heeftBestuursperiode <${BESTUURSPERIODES['2024-heden']}>.
@@ -1081,6 +1085,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
           ?mandaat org:role ?role.
           VALUES ?role {
             <${BESTUURSFUNCTIE_CODES.SCHEPEN}>
+            <${BESTUURSFUNCTIE_CODES.TOEGEVOEGDE_SCHEPEN}>
           }
 
           ?bestuursorgaanIT org:hasPost ?mandaat.

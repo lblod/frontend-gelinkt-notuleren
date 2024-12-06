@@ -40,6 +40,8 @@ export const BESTUURSFUNCTIE_CODES = {
     'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
   SCHEPEN:
     'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000014',
+  TOEGEVOEGDE_SCHEPEN:
+    'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/59a90e03-4f22-4bb9-8c91-132618db4b38',
   BURGEMEESTER:
     'http://data.vlaanderen.be/id/concept/BestuursfunctieCode/5ab0e9b8a3b2ca7c5e000011',
   VOORZITTER_GEMEENTERAAD:
