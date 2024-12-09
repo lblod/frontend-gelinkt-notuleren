@@ -93,6 +93,7 @@ export default class AgendapointsEditController extends Controller {
     if (this.copyAgendapunt.isRunning) {
       return this.intl.t('rdfa-editor-container.saving');
     }
+    return '';
   }
 
   @action
