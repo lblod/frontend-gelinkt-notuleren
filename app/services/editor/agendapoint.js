@@ -131,7 +131,7 @@ export default class AgendapointEditorService extends Service {
   }
   get config() {
     const classificatie = this.currentSession.classificatie;
-    const municipality = this.defaultMunicipality;
+    const municipality = this.currentSession.group;
     return {
       date: {
         formats: [
