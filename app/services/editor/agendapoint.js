@@ -198,6 +198,7 @@ export default class AgendapointEditorService extends Service {
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/',
         defaultAddressUriRoot:
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
+        subjectTypesToLinkTo: [BESLUIT('Artikel'), BESLUIT('Besluit')],
       },
       lpdc: {
         endpoint: '/lpdc-service',
