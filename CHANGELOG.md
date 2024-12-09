@@ -1,5 +1,23 @@
 # frontend-gelinkt-notuleren
 
+## 5.45.0
+
+### Minor Changes
+
+- [#790](https://github.com/lblod/frontend-gelinkt-notuleren/pull/790) [`6a26fc3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6a26fc380d4016e74d8c1a35d89ce152177c86d6) Thanks [@piemonkey](https://github.com/piemonkey)! - Use list-based election results to sort mandatee tables not candidate-based
+
+### Patch Changes
+
+- [#791](https://github.com/lblod/frontend-gelinkt-notuleren/pull/791) [`07dd6ea`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/07dd6ea5896b1384e6e36f3f2c4f1c158b7d648d) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure mandatees with the 'Toegevoegde schepen' mandate are also shown in the 'Verkozen schepenen' table of IVGR8 (`IVGR8-LMB-1-verkozen-schepenen`)
+
+## 5.44.2
+
+### Patch Changes
+
+- [#789](https://github.com/lblod/frontend-gelinkt-notuleren/pull/789) [`886ea7b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/886ea7b2edc1b9d924517332a309fa5e4f2e094a) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Wrap downloaded docs for correct uf8
+
+- [#788](https://github.com/lblod/frontend-gelinkt-notuleren/pull/788) [`65e8a4e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/65e8a4e88fb9128eeff5ba5f80e0d29ba9d4359e) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update the date time picker to use the au time picker
+
 ## 5.44.1
 
 ### Patch Changes
