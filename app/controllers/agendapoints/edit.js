@@ -49,11 +49,11 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get schema() {
-    return this.agendapointEditor.schema;
+    return this.agendapointEditor.getSchemaAndPlugins(false).schema;
   }
 
   get plugins() {
-    return this.agendapointEditor.getPlugins(false);
+    return this.agendapointEditor.getSchemaAndPlugins(false).plugins;
   }
 
   get dirty() {
