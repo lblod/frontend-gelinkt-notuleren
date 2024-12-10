@@ -13,6 +13,7 @@ import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { fixArticleConnections } from '../../utils/fix-article-connections';
+import { modifier } from 'ember-modifier';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -92,16 +93,17 @@ export default class AgendapointsEditController extends Controller {
     return '';
   }
 
-  @action
-  setSchemaAndPlugins() {
-    if (!this.editorSetup) {
-      const { schema, plugins } =
-        this.agendapointEditor.getSchemaAndPlugins(false);
-      this.schema = schema;
-      this.plugins = plugins;
-      this.editorSetup = true;
-    }
-  }
+  setSchemaAndPlugins = modifier((element) => {
+    const { schema, plugins } =
+      this.agendapointEditor.getSchemaAndPlugins(false);
+    this.schema = schema;
+    this.plugins = plugins;
+    this.editorSetup = true;
+    console.log('setting up');
+    return () => {
+      this.editorSetup = false;
+    };
+  });
 
   @action
   async handleRdfaEditorInit(editor) {
