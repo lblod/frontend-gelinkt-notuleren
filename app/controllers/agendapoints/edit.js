@@ -36,10 +36,6 @@ export default class AgendapointsEditController extends Controller {
 
   SnippetInsert = SnippetInsertRdfaComponent;
 
-  constructor(...args) {
-    super(...args);
-  }
-
   get config() {
     return this.agendapointEditor.config;
   }
