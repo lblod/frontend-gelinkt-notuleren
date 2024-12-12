@@ -93,7 +93,7 @@ export default class AgendapointsEditController extends Controller {
     return '';
   }
 
-  setSchemaAndPlugins = modifier((element) => {
+  setSchemaAndPlugins = modifier(() => {
     const { schema, plugins } =
       this.agendapointEditor.getSchemaAndPlugins(false);
     this.schema = schema;
