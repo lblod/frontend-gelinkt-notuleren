@@ -3,12 +3,9 @@ import { service } from '@ember/service';
 
 export default class MeetingsDownloadCopyRoute extends Route {
   @service store;
-  async model(params) {
-    const { documentContainer, returnToMeeting } =
-      this.modelFor('agendapoints');
+  async model() {
+    const { documentContainer } = this.modelFor('agendapoints');
     const document = await documentContainer.currentVersion;
-    console.log(document);
-    console.log(documentContainer);
     return { container: documentContainer, document };
   }
 }
