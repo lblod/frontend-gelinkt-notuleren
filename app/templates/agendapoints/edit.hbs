@@ -36,6 +36,10 @@
         @document={{this.editorDocument}}
         @forPublish={{true}}
       />
+      <AuLink @route='agendapoints.copy' role='menuitem'>
+        <AuIcon @icon='copy' @alignment='left' />
+        {{t 'agendapoint.copy-parts-link'}}
+      </AuLink>
       <AuButton
         {{on 'click' this.toggleDeleteModal}}
         @skin='link'
