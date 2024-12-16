@@ -31,6 +31,7 @@ export default class AgendapointsEditController extends Controller {
   @tracked schema;
   @tracked plugins;
   @tracked editorSetup = false;
+  @tracked citationPlugin;
 
   StructureControlCard = StructureControlCardComponent;
   InsertArticle = InsertArticleComponent;
@@ -43,10 +44,6 @@ export default class AgendapointsEditController extends Controller {
 
   get nodeViews() {
     return this.agendapointEditor.nodeViews;
-  }
-
-  get citationPlugin() {
-    return this.agendapointEditor.citationPlugin;
   }
 
   get dirty() {
@@ -97,7 +94,9 @@ export default class AgendapointsEditController extends Controller {
     const { schema, plugins } =
       this.agendapointEditor.getSchemaAndPlugins(false);
     this.schema = schema;
-    this.plugins = plugins;
+    const citationPlugin = this.agendapointEditor.citationPlugin;
+    this.plugins = [...plugins, citationPlugin];
+    this.citationPlugin = citationPlugin;
     this.editorSetup = true;
     console.log('setting up');
     return () => {
