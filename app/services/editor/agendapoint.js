@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { removePropertiesOfDeletedNodes } from '@lblod/ember-rdfa-editor/plugins/remove-properties-of-deleted-nodes';
 import { defaultAttributeValueGeneration } from '@lblod/ember-rdfa-editor/plugins/default-attribute-value-generation';
 import { rdfaInfoPlugin } from '@lblod/ember-rdfa-editor/plugins/rdfa-info';
-import { tracked } from '@glimmer/tracking';
 
 import { Schema } from '@lblod/ember-rdfa-editor';
 import {
@@ -127,7 +126,9 @@ export default class AgendapointEditorService extends Service {
   @service intl;
   @service currentSession;
 
-  @tracked citationPlugin;
+  get citationPlugin() {
+    return citationPlugin(this.config.citation);
+  }
   get config() {
     const classificatie = this.currentSession.classificatie;
     const municipality = this.currentSession.group;
@@ -334,8 +335,6 @@ export default class AgendapointEditorService extends Service {
         color,
       },
     });
-
-    this.citationPlugin = citationPlugin(this.config.citation);
 
     const plugins = [
       ...tablePlugins,
