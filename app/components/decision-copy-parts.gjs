@@ -61,33 +61,42 @@ const SECTIONS = [
     label: 'copy-options.section.motivation',
     selector:
       '[property="http://data.vlaanderen.be/ns/besluit#motivering"]>[data-content-container="true"]',
-    parts: {
-      selector: ':scope h5',
-      callback: (sectionHeading) => {
-        const wrapper = document.createElement('div');
-        const sectionContents = [];
-        let next = sectionHeading.nextElementSibling;
-        while (next && next.tagName !== 'H5') {
-          sectionContents.push(next);
-          next = next.nextElementSibling;
-        }
-        wrapper.append(...sectionContents);
-        return wrapper;
+    parts: [
+      {
+        selector: ':scope h5',
+        callback: (sectionHeading) => {
+          const wrapper = document.createElement('div');
+          const sectionContents = [];
+          let next = sectionHeading.nextElementSibling;
+          while (next && next.tagName !== 'H5') {
+            sectionContents.push(next);
+            next = next.nextElementSibling;
+          }
+          wrapper.append(...sectionContents);
+          return wrapper;
+        },
+        labelCallback: (sectionHeading) => sectionHeading,
       },
-      labelCallback: (sectionHeading) => sectionHeading,
-    },
+    ],
   },
   {
     label: 'copy-options.section.ruling',
     selector:
       ':scope [about^="http://data.lblod.info/id/besluiten/"][property="http://www.w3.org/ns/prov#value"]>[data-content-container="true"]',
-    parts: {
-      selector:
-        '[property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][resource="http://data.vlaanderen.be/ns/besluit#Artikel"]',
-      callback: (selected) => selected.parentElement?.parentElement,
-      labelSelector: ':scope h5',
-      contentSelector: ':scope [data-say-structure-content=true]',
-    },
+    parts: [
+      {
+        selector:
+          '[property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][resource="http://data.vlaanderen.be/ns/besluit#Artikel"]',
+        callback: (selected) => selected.parentElement?.parentElement,
+        labelSelector: ':scope h5',
+        contentSelector: ':scope [data-say-structure-content=true]',
+      },
+      {
+        selector: '[property="eli:related_to"]',
+        labelSelector: ':scope h5',
+        contentSelector: ':scope div',
+      },
+    ],
   },
 ];
 
@@ -118,27 +127,32 @@ function update(component) {
         const contentHtml = contentElement.outerHTML;
         let foundParts = [];
         if (parts) {
-          const partCb = parts.callback || ((a) => a);
-          const partElements =
-            contentElement.querySelectorAll(parts.selector) ?? [];
-          partElements.forEach((part) => {
-            const partElement = partCb(part);
-            const partLabel = parts.labelCallback
-              ? parts.labelCallback(part)
-              : partElement.querySelector(parts.labelSelector);
-            const partContent = parts.contentSelector
-              ? partElement.querySelector(parts.contentSelector)?.outerHTML
-              : partElement.outerHTML;
-            if (partLabel && partContent) {
-              // Put the element into the DOM so that `innerText` can know which parts of the
-              // content are human readable in `innerText`
-              temporaryRenderingSpace.replaceChildren(partLabel);
-              foundParts.push({
-                translatedLabel: partLabel.innerText,
-                content: partContent,
-              });
-            }
-          });
+          for (let partType of parts) {
+            console.log(partType);
+            const partCb = partType.callback || ((a) => a);
+            console.log(contentElement);
+            const partElements =
+              contentElement.querySelectorAll(partType.selector) ?? [];
+            console.log(partElements);
+            partElements.forEach((part) => {
+              const partElement = partCb(part);
+              const partLabel = partType.labelCallback
+                ? partType.labelCallback(part)
+                : partElement.querySelector(partType.labelSelector);
+              const partContent = partType.contentSelector
+                ? partElement.querySelector(partType.contentSelector)?.outerHTML
+                : partElement.outerHTML;
+              if (partLabel && partContent) {
+                // Put the element into the DOM so that `innerText` can know which parts of the
+                // content are human readable in `innerText`
+                temporaryRenderingSpace.replaceChildren(partLabel);
+                foundParts.push({
+                  translatedLabel: partLabel.innerText,
+                  content: partContent,
+                });
+              }
+            });
+          }
         }
         return {
           label,
