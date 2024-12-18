@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.46.0
+
+### Minor Changes
+
+- [#787](https://github.com/lblod/frontend-gelinkt-notuleren/pull/787) [`3ff7901`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3ff7901952dcc89696c1ba36c390b8a5ca27a77e) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add configuration per administrative unit
+
+### Patch Changes
+
+- [#793](https://github.com/lblod/frontend-gelinkt-notuleren/pull/793) [`c46adbc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c46adbce21e63253a518228c60ec4ce1b962161d) Thanks [@elpoelma](https://github.com/elpoelma)! - Apply new `instantiateUuids` method onto built-in standard templates
+
 ## 5.45.0
 
 ### Minor Changes
