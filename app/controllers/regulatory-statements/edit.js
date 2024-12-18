@@ -110,6 +110,7 @@ import {
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
+import { SAY } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -287,6 +288,12 @@ export default class RegulatoryStatementsRoute extends Controller {
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/plaats/',
         defaultAddressUriRoot:
           'https://publicatie.gelinkt-notuleren.vlaanderen.be/id/adres/',
+        subjectTypesToLinkTo: [
+          SAY('Article'),
+          SAY('Subsection'),
+          SAY('Section'),
+          SAY('Chapter'),
+        ],
       },
       lmb: {
         endpoint: '/raw-sparql',
