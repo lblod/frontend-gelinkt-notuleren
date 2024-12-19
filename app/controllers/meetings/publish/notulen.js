@@ -363,8 +363,8 @@ export default class MeetingsPublishNotulenController extends Controller {
       const previewHtml = json.data.attributes.html;
       this.preview = previewHtml;
     } catch (e) {
-      console.error(e);
-      this.errors = [JSON.stringify(e)];
+      console.error('Error generating notulen preview', e);
+      this.errors = [e.message];
     }
   });
 
