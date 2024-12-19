@@ -64,7 +64,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       maxIterations--;
     } while (resp.status === 404 && maxIterations > 0);
 
-    if (resp.status !== 200) {
+    if (!resp.ok) {
       throw new Error(await resp.text());
     } else {
       return await resp.json();
