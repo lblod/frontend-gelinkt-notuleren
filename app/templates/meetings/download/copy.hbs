@@ -1,26 +1,23 @@
-<DecisionCopy
-  @document={{@model.document}}
-  @container={{@model.container}}
->
+<DecisionCopy @document={{@model.document}} @container={{@model.container}}>
   <:links>
     <AuLink
-        @route='meetings.edit'
-        @model={{@model.zitting.id}}
-        @skin='secondary'
-        @icon='arrow-left'
-        @iconAlignment='left'
-      >
-        {{t 'download.back-to-meeting'}}
-      </AuLink>
-      <AuLink
-        @route='meetings.download'
-        @model={{@model.zitting.id}}
-        @skin='secondary'
-        class='au-c-app-chrome__entity'
-      >
-        {{t 'download.back-to-download'}}
-      </AuLink>
-      <span class='au-c-app-chrome__entity'>{{t 'copy-options.heading'}}
-        {{@model.document.title}}</span>
+      @route='meetings.edit'
+      @model={{@model.zitting.id}}
+      @skin='secondary'
+      @icon='arrow-left'
+      @iconAlignment='left'
+    >
+      {{t 'download.back-to-meeting'}}
+    </AuLink>
+    <AuLink
+      @route='meetings.download'
+      @model={{@model.zitting.id}}
+      @skin='secondary'
+      class='au-c-app-chrome__entity'
+    >
+      {{t 'download.back-to-download'}}
+    </AuLink>
+    <span class='au-c-app-chrome__entity'>{{t 'copy-options.heading'}}
+      {{@model.document.title}}</span>
   </:links>
 </DecisionCopy>
