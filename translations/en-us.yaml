@@ -820,3 +820,10 @@ copy-options:
     description: Description
     motivation: Motivation
     ruling: Ruling
+  regulatory-statements:
+    title: Title
+    chapter: Chapter
+    section: Section
+    subsection: Subsection
+    article: Article
+    paragraph: Paragraph

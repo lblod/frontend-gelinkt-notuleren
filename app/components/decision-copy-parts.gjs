@@ -128,12 +128,9 @@ function update(component) {
         let foundParts = [];
         if (parts) {
           for (let partType of parts) {
-            console.log(partType);
             const partCb = partType.callback || ((a) => a);
-            console.log(contentElement);
             const partElements =
               contentElement.querySelectorAll(partType.selector) ?? [];
-            console.log(partElements);
             partElements.forEach((part) => {
               const partElement = partCb(part);
               const partLabel = partType.labelCallback

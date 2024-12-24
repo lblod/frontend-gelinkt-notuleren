@@ -1,6 +1,6 @@
 import Component from '@glimmer/component';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
-import { copyStringToClipboard } from '../utils/copy-string-to-clipboard';
+import { copyStringToClipboard } from '../../utils/copy-string-to-clipboard';
 import { on } from '@ember/modifier';
 import { task } from 'ember-concurrency';
 import perform from 'ember-concurrency/helpers/perform';

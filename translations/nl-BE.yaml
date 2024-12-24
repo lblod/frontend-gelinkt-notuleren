@@ -824,3 +824,10 @@ copy-options:
     description: Beschrijving
     motivation: Motivering
     ruling: Beslissing
+  regulatory-statements:
+    title: Titel
+    chapter: Hoofdstuk
+    section: Afdeling
+    subsection: Onderafdeling
+    article: Artikel
+    paragraph: Paragraaf

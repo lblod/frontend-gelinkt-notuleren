@@ -94,6 +94,7 @@ Router.map(function () {
         this.route('history');
       },
     );
+    this.route('copy', { path: ':id/copy' });
   });
   this.route('not-found', { path: '/*path' });
 });
