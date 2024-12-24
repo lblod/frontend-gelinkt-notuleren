@@ -18,8 +18,6 @@ function update(component) {
     stripHtmlForPublish(component.args.decision.content),
     'text/html',
   );
-  const temporaryRenderingSpace = document.createElement('div');
-  document.firstElementChild.appendChild(temporaryRenderingSpace);
   const mappedSections = Object.values(SECTIONS).flatMap(
     ({ label, selector, childTypes, callback = (a) => a }) => {
       const elements = Array.from(parsed.querySelectorAll(selector));
@@ -43,7 +41,6 @@ function update(component) {
       });
     },
   );
-  temporaryRenderingSpace.remove();
   const outerHTML = parsed.firstElementChild.outerHTML.split(
     'say-rb-copy-replace-by',
   );
