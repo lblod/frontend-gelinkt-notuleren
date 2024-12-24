@@ -1,3 +1,4 @@
+// Sections must be ordered from more to less specifity
 const SECTIONS = {
   title: {
     label: 'copy-options.regulatory-statements.title',

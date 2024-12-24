@@ -37,6 +37,7 @@ function update(component) {
           content: contentHtml,
           childTypes,
           isSection: true,
+          level: component.args.section.level + 1,
         };
       });
     },
@@ -80,18 +81,25 @@ export default class Section extends Component {
         <div class='gn-meeting-copy--structure-header'>
           {{t @section.label}}
         </div>
-        {{#each this.content as |content|}}
-          {{#if content.isSection}}
-            <Section
-              @section={{content}}
-              @sections={{generateSections content.childTypes}}
-            />
-          {{else}}
-            {{{content}}}
-          {{/if}}
-        {{/each}}
+        <div class='gn-meeting-copy--structure-content'>
+          {{#each this.content as |content|}}
+            {{#if content.isSection}}
+              <Section
+                @section={{content}}
+                @sections={{generateSections content.childTypes}}
+              />
+            {{else}}
+
+              {{htmlSafe content}}
+
+            {{/if}}
+          {{/each}}
+        </div>
       </div>
-      <div class='gn-meeting-copy--section-button'>
+      <div
+        class='gn-meeting-copy--section-button'
+        style='right: -{{htmlSafe @section.level}}rem'
+      >
         <DownloadButton @section={{@section}} />
       </div>
     </div>

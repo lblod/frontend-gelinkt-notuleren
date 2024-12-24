@@ -38,6 +38,7 @@ function update(component) {
           content: contentHtml,
           childTypes,
           isSection: true,
+          level: 0,
         };
       });
     },
@@ -75,16 +76,20 @@ export default class DecisionCopyParts extends Component {
 
   <template>
     <div class='au-o-flow--small au-u-3-5'>
-      {{#each this.content as |content|}}
-        {{#if content.isSection}}
-          <Section
-            @section={{content}}
-            @sections={{generateSections content.childTypes}}
-          />
-        {{else}}
-          {{{content}}}
-        {{/if}}
-      {{/each}}
+      <div class='gn-meeting-copy--section-container'>
+        {{#each this.content as |content|}}
+          {{#if content.isSection}}
+            <Section
+              @section={{content}}
+              @sections={{generateSections content.childTypes}}
+            />
+          {{else}}
+            <div class='gn-meeting-copy--structure-content'>
+              {{htmlSafe content}}
+            </div>
+          {{/if}}
+        {{/each}}
+      </div>
     </div>
   </template>
 }
