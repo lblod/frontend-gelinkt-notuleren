@@ -1,9 +1,7 @@
 import Component from '@glimmer/component';
 import { htmlSafe } from '@ember/template';
-import t from 'ember-intl/helpers/t';
 import { trackedReset } from 'tracked-toolbox';
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
-import DownloadButton from './copy-parts/download-button';
 import Section from './copy-parts/section';
 import { helper } from '@ember/component/helper';
 import SECTIONS from './copy-parts/rb-sections';

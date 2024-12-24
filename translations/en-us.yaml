@@ -210,6 +210,7 @@ inbox:
   regulatory-statements:
     return: Return to the overview of regulatory statements
     revisions-return: Return to the actual version
+    return-to-edit: Return to edit
     page-title: Regulatory statements
     search-placeholder: Search on title of regulatory statement
     no-data-message: No regulatory statements
@@ -811,6 +812,7 @@ copy-options:
   heading: 'Copy parts from:'
   disclaimer: 'The formatting of the document will depend on the application in which it is loaded.'
   copy-all: Copy full decision
+  copy-rb: Copy full regulatory statement
   copying: copying
   completed: copied
   copy-part: 'Copy {part}'

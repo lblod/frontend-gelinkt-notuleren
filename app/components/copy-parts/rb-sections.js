@@ -4,8 +4,6 @@ const SECTIONS = {
     label: 'copy-options.regulatory-statements.title',
     selector:
       '[typeof="say:Title"]>[data-content-container="true"], [typeof="https://say.data.gift/ns/Title"]>[data-content-container="true"]',
-    splitSelector:
-      '[typeof="say:Chapter"], [typeof="https://say.data.gift/ns/Chapter"]',
     childTypes: ['chapter'],
   },
   chapter: {

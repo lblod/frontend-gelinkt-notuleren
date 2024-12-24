@@ -6,7 +6,6 @@ import { trackedReset } from 'tracked-toolbox';
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 import DownloadButton from './download-button';
 import SECTIONS from './rb-sections';
-import { v4 as uuid } from 'uuid';
 
 function update(component) {
   if (!component.args.sections) return [component.args.section.content];
@@ -16,7 +15,7 @@ function update(component) {
     'text/html',
   );
   const mappedSections = Object.values(component.args.sections).flatMap(
-    ({ label, selector, childTypes, splitSelector, callback = (a) => a }) => {
+    ({ label, selector, childTypes, callback = (a) => a }) => {
       const elements = Array.from(parsed.querySelectorAll(selector));
       return elements.map((element) => {
         const contentElement = callback(element);
