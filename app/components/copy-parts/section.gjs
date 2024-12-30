@@ -5,7 +5,7 @@ import t from 'ember-intl/helpers/t';
 import { trackedReset } from 'tracked-toolbox';
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 import DownloadButton from './download-button';
-import SECTIONS from './rb-sections';
+import SECTIONS from 'frontend-gelinkt-notuleren/utils/rb-sections';
 
 function update(component) {
   if (!component.args.sections) return [component.args.section.content];
@@ -14,7 +14,7 @@ function update(component) {
     stripHtmlForPublish(component.args.section.content),
     'text/html',
   );
-  const mappedSections = Object.values(component.args.sections).flatMap(
+  const mappedSections = component.args.sections.flatMap(
     ({ label, selector, childTypes, callback = (a) => a }) => {
       const elements = Array.from(parsed.querySelectorAll(selector));
       return elements.map((element) => {
@@ -52,12 +52,13 @@ function update(component) {
   return content;
 }
 
-const generateSections = helper((childTypes) => {
+const generateSections = helper(([childTypes]) => {
   if (childTypes) {
-    const sections = {};
+    const sections = [];
     childTypes.forEach((type) => {
-      if (SECTIONS[type]) {
-        sections[type] = SECTIONS[type];
+      const sectionType = SECTIONS.find((section) => section.id === type);
+      if (sectionType) {
+        sections.push(sectionType);
       }
     });
     return sections;

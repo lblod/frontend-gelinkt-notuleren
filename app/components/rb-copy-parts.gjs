@@ -4,7 +4,7 @@ import { trackedReset } from 'tracked-toolbox';
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 import Section from './copy-parts/section';
 import { helper } from '@ember/component/helper';
-import SECTIONS from './copy-parts/rb-sections';
+import SECTIONS from 'frontend-gelinkt-notuleren/utils/rb-sections';
 
 // This method of looking for query selectors is error-prone as it assumes that the document follows
 // the current DOM output specs. This is not necessarily true of historic or future documents. It
@@ -16,7 +16,7 @@ function update(component) {
     stripHtmlForPublish(component.args.decision.content),
     'text/html',
   );
-  const mappedSections = Object.values(SECTIONS).flatMap(
+  const mappedSections = SECTIONS.flatMap(
     ({ label, selector, childTypes, callback = (a) => a }) => {
       const elements = Array.from(parsed.querySelectorAll(selector));
       return elements.map((element) => {
@@ -54,9 +54,12 @@ function update(component) {
 
 const generateSections = helper(([childTypes]) => {
   if (childTypes) {
-    const sections = {};
+    const sections = [];
     childTypes.forEach((type) => {
-      sections[type] = SECTIONS[type];
+      const sectionType = SECTIONS.find((section) => section.id === type);
+      if (sectionType) {
+        sections.push(sectionType);
+      }
     });
     return sections;
   }
