@@ -126,11 +126,9 @@ export default class AgendapointEditorService extends Service {
   @service intl;
   @service currentSession;
 
-  citationPlugin = citationPlugin(this.config.citation);
-
   get config() {
     const classificatie = this.currentSession.classificatie;
-    const municipality = this.defaultMunicipality;
+    const municipality = this.currentSession.group;
     return {
       date: {
         formats: [
@@ -338,7 +336,7 @@ export default class AgendapointEditorService extends Service {
     const plugins = [
       ...tablePlugins,
       tableKeymap,
-      this.citationPlugin,
+      citationPlugin(this.config.citation),
       createInvisiblesPlugin(
         [hardBreak, paragraphInvisible, headingInvisible],
         {
