@@ -31,17 +31,21 @@
           @toggleParticipant={{this.toggleParticipant}}
           as |Table|
         >
-          {{#each this.participants as |participant|}}
-            <Table.Row
-              @mandataris={{participant.person}}
-              @selected={{participant.participating}}
-              @disabled={{eq participant.person this.chairman}}
-            />
+          {{#if @loading}}
+            <td colspan='4'><AuLoader /></td>
           {{else}}
-            <td colspan='4'>{{t
-                'participation-list-modal-table.no-data-message'
-              }}</td>
-          {{/each}}
+            {{#each this.participants as |participant|}}
+              <Table.Row
+                @mandataris={{participant.person}}
+                @selected={{participant.participating}}
+                @disabled={{eq participant.person this.chairman}}
+              />
+            {{else}}
+              <td colspan='4'>{{t
+                  'participation-list-modal-table.no-data-message'
+                }}</td>
+            {{/each}}
+          {{/if}}
         </ParticipationList::MandatarissenTable>
       </div>
     </div>
