@@ -5,22 +5,47 @@ import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-f
 import Section from './copy-parts/section';
 import { helper } from '@ember/component/helper';
 import SECTIONS from 'frontend-gelinkt-notuleren/utils/rb-sections';
+import { inject as service } from '@ember/service';
 
 // This method of looking for query selectors is error-prone as it assumes that the document follows
 // the current DOM output specs. This is not necessarily true of historic or future documents. It
 // would be better to either use an RDFa parser that can also return the elements associated with
 // relations or a headless prosemirror instance.
-function update(component) {
+function update(component, intl) {
   const parser = new DOMParser();
   const parsed = parser.parseFromString(
     stripHtmlForPublish(component.args.decision.content),
     'text/html',
   );
   const mappedSections = SECTIONS.flatMap(
-    ({ label, selector, childTypes, callback = (a) => a }) => {
+    ({
+      label,
+      labelCallback,
+      labelSelector,
+      selector,
+      childTypes,
+      contentCallback,
+      contentSelector,
+    }) => {
       const elements = Array.from(parsed.querySelectorAll(selector));
       return elements.map((element) => {
-        const contentElement = callback(element);
+        let contentElement;
+        if (contentCallback) {
+          contentElement = contentCallback(element);
+        } else if (contentSelector) {
+          console.log(contentSelector);
+          contentElement = element.querySelector(contentSelector);
+        } else {
+          contentElement = element;
+        }
+        let elementLabel;
+        if (label) {
+          elementLabel = intl.t(label);
+        } else if (labelCallback) {
+          elementLabel = labelCallback(element);
+        } else if (labelSelector) {
+          elementLabel = element.querySelector(labelSelector).innerText;
+        }
         // Note, it's important to generate the content here as with the use of DOM apis in the
         // callbacks, it's easy to accidentally mutate `contentElement`. For example when appending
         // parts of the content to a 'container' element.
@@ -28,9 +53,10 @@ function update(component) {
           document.createTextNode(`say-rb-copy-replace-by`),
           element,
         );
+
         const contentHtml = contentElement.outerHTML;
         return {
-          label,
+          label: elementLabel,
           content: contentHtml,
           childTypes,
           isSection: true,
@@ -54,23 +80,20 @@ function update(component) {
 
 const generateSections = helper(([childTypes]) => {
   if (childTypes) {
-    const sections = [];
-    childTypes.forEach((type) => {
-      const sectionType = SECTIONS.find((section) => section.id === type);
-      if (sectionType) {
-        sections.push(sectionType);
-      }
-    });
+    const sections = SECTIONS.filter((section) =>
+      childTypes.includes(section.id),
+    );
     return sections;
   }
 });
 
 export default class DecisionCopyParts extends Component {
+  @service intl;
   @trackedReset({
     memo: 'decision.content',
     update,
   })
-  content = update(this);
+  content = update(this, this.intl);
 
   <template>
     <div class='au-o-flow--small au-u-3-5'>
