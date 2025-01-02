@@ -5,6 +5,7 @@ agendapoint:
   revisions: Revisions
   restore: Restore
   back-to-meeting: Return to the meeting of {adminBody} on {date}
+  back-to-agendapoint: Return to the agendapoint
   saved-versions: 'Saved document versions:'
   current-version: Current version
   modify-warning: 'When modifying the document to an older version, subsequent newer versions disappear irretrievably:'
@@ -15,6 +16,7 @@ agendapoint:
   published: This article has already been published. Published agenda items are not editable.
   saving: Saving...
   making-copy: Making copy...
+  copy-parts-link: Copy decision parts
 
 administrative-body-select:
   period: 'period'

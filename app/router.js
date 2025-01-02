@@ -51,6 +51,7 @@ Router.map(function () {
     this.route('attachments');
     this.route('show');
     this.route('revisions');
+    this.route('copy');
   });
 
   this.route('meetings', function () {

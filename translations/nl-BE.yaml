@@ -5,6 +5,7 @@ agendapoint:
   revisions: Versies
   restore: Herstel
   back-to-meeting: Terug naar zitting van {adminBody} op {date}
+  back-to-agendapoint: Terug naar agendapunt
   saved-versions: 'Opgeslagen documentversies:'
   current-version: Huidige versie
   modify-warning: 'Bij het aanpassen van het document naar een oudere versie, verdwijnen volgende nieuwere versies onherroepelijk:'
@@ -15,6 +16,7 @@ agendapoint:
   published: Dit artikel is reeds gepubliceerd. Gepubliceerde agendapunten zijn niet editeerbaar.
   saving: Bezig met opslaan
   making-copy: Kopie aan het maken
+  copy-parts-link: Kopieer besluit en onderdelen
 
 administrative-body-select:
   period: 'period'
