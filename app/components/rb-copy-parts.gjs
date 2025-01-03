@@ -33,7 +33,6 @@ function update(component, intl) {
         if (contentCallback) {
           contentElement = contentCallback(element);
         } else if (contentSelector) {
-          console.log(contentSelector);
           contentElement = element.querySelector(contentSelector);
         } else {
           contentElement = element;
