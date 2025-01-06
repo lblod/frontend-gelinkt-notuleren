@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.47.2
+
+### Patch Changes
+
+- [#801](https://github.com/lblod/frontend-gelinkt-notuleren/pull/801) [`02e6905`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/02e6905921b75d685aacd85b07a64b852e89bb6e) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix incorrect fetch error handling in template-fetcher
+
 ## 5.47.1
 
 ### Patch Changes
