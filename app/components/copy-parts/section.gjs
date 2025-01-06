@@ -1,12 +1,12 @@
 import Component from '@glimmer/component';
 import { helper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/template';
-import t from 'ember-intl/helpers/t';
 import { trackedReset } from 'tracked-toolbox';
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 import DownloadButton from './download-button';
 import SECTIONS from 'frontend-gelinkt-notuleren/utils/rb-sections';
 import { inject as service } from '@ember/service';
+import { concat } from '@ember/helper';
 
 function update(component, intl) {
   if (!component.args.sections) return [component.args.section.content];
@@ -115,7 +115,7 @@ export default class Section extends Component {
       </div>
       <div
         class='gn-meeting-copy--section-button'
-        style='right: -{{htmlSafe @section.level}}rem'
+        style={{htmlSafe (concat 'right: -' @section.level 'rem')}}
       >
         <DownloadButton
           @section={{@section}}

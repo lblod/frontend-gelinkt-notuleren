@@ -5,7 +5,11 @@
     as |Group|
   >
     <Group>
-      <AuLink @route='regulatory-statements.edit' @model={{@model.container.id}} @skin='secondary'>
+      <AuLink
+        @route='regulatory-statements.edit'
+        @model={{@model.container.id}}
+        @skin='secondary'
+      >
         <AuIcon @icon='arrow-left' @alignment='left' />
         {{t 'inbox.regulatory-statements.return-to-edit'}}
       </AuLink>
