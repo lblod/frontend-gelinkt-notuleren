@@ -64,7 +64,9 @@
               />
             {{/if}}
             {{#if this.fetchNextPage.isRunning}}
-              <AuLoader @message={{t 'regulatory-statements-plugin.loading'}} />
+              <AuLoader @hideMessage={{true}}>
+                {{t 'regulatory-statements-plugin.loading'}}
+              </AuLoader>
             {{/if}}
           </div>
         </div>

@@ -8,8 +8,7 @@
   <Common::MeetingSubSection @title={{t 'meetings.publish.agenda.title'}}>
     <:body>
       {{#if agenda.loadItemsTask.isRunning}}
-        <AuLoader />
-        <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
+        <AuLoader>{{t 'participation-list.loading-loader'}}</AuLoader>
       {{else}}
         <AgendaManager::AgendaTable
           @onSort={{agenda.onSort}}

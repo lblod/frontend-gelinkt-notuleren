@@ -53,8 +53,7 @@
       {{t 'inauguration-meeting.synchronization.modal.decisions.title'}}
     </AuHeading>
     {{#if this.treatments.isLoading}}
-      <AuLoader @padding='small' />
-      <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
+      <AuLoader>{{t 'participation-list.loading-loader'}}</AuLoader>
     {{else}}
       <ol class='meeting__sync-modal__treatments'>
         {{#each this.treatments.value as |treatment|}}

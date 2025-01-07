@@ -15,8 +15,7 @@
   <tbody>
     {{#if this.editStemming.fetchVoters.isRunning}}
       <div class='au-o-box'>
-        <AuLoader @padding='small' />
-        <AuHelpText>{{t 'voting-edit.loading-text'}}</AuHelpText>
+        <AuLoader>{{t 'application.loading'}}</AuLoader>
       </div>
     {{else}}
       {{#each this.voters as |row|}}
