@@ -86,18 +86,15 @@
   role='tabpanel'
   tabindex='0'
   aria-labelledby='tab-1'
+  {{this.setSchemaAndPlugins}}
 >
   <RdfaEditorContainer
     @rdfaEditorInit={{this.handleRdfaEditorInit}}
     @typeOfWrappingDiv='besluit:BehandelingVanAgendapunt'
     @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
-    @busy={{or this.saveTask.isRunning this.copyAgendapunt.isRunning}}
-    @busyText={{if
-      this.copyAgendapunt.isRunning
-      (t 'rdfa-editor-container.making-copy')
-      (t 'rdfa-editor-container.saving')
-    }}
+    @busy={{this.isBusy}}
+    @busyText={{this.busyText}}
     @schema={{this.schema}}
     @widgets={{this.widgets}}
     @nodeViews={{this.nodeViews}}
@@ -124,7 +121,6 @@
       />
       <CitationPlugin::CitationInsert
         @controller={{this.controller}}
-        @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
       <VariablePlugin::Date::Insert
@@ -181,7 +177,6 @@
       <DecisionPlugin::DecisionPluginCard @controller={{this.controller}} />
       <CitationPlugin::CitationCard
         @controller={{this.controller}}
-        @plugin={{this.citationPlugin}}
         @config={{this.config.citation}}
       />
       <ImportSnippetPlugin::Card @controller={{this.controller}} />
