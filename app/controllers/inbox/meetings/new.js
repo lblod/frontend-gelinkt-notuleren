@@ -67,6 +67,7 @@ export default class InboxMeetingsNewController extends Controller {
     // TODO use the router service once the bug is fixed:
     //this.router.replaceWith('inbox.meetings');
     // still relevant as of 15/10/2024
+    // eslint-disable-next-line ember/no-deprecated-router-transition-methods
     this.replaceRoute('inbox.meetings');
   }
 }
