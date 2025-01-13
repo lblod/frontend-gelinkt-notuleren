@@ -5,6 +5,7 @@ import { service } from '@ember/service';
 export default class InboxRegulatoryStatementsRoute extends Route {
   @service store;
   @service features;
+  @service router;
 
   queryParams = {
     pageSize: { refreshModel: true },
@@ -15,7 +16,7 @@ export default class InboxRegulatoryStatementsRoute extends Route {
 
   beforeModel(/*transition*/) {
     if (!this.features.isEnabled('regulatoryStatements')) {
-      this.replaceWith('inbox.agendapoints');
+      this.router.replaceWith('inbox.agendapoints');
     }
   }
 
