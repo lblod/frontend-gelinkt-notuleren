@@ -1,11 +1,11 @@
 {{! template-lint-disable  }}
 <AuDataTable
-  @content={{model}}
-  @isLoading={{isLoadingModel}}
+  @content={{this.model}}
+  @isLoading={{this.isLoadingModel}}
   @noDataMessage='Geen documenten'
-  @sort={{sort}}
-  @page={{page}}
-  @size={{size}}
+  @sort={{this.sort}}
+  @page={{this.page}}
+  @size={{this.size}}
   @class='container-flex--contain'
   as |t|
 >
@@ -18,7 +18,7 @@
           </AuHeading>
         </Group>
         <Group>
-          <TextSearch @filter={{title}} @placeholder='Zoek titel bestand' />
+          <TextSearch @filter={{this.title}} @placeholder='Zoek titel bestand' />
           <LinkTo
             @route='imported-documents.new'
             class='button button--alt'
@@ -33,24 +33,24 @@
     <c.header>
       <AuDataTableThSortable
         @field='currentVersion.title'
-        @currentSorting={{sort}}
+        @currentSorting={{this.sort}}
         @label='Document'
       />
       <AuDataTableThSortable
         @field='currentVersion.createdOn'
-        @currentSorting={{sort}}
+        @currentSorting={{this.sort}}
         @label='Aangemaakt'
       />
       <AuDataTableThSortable
         @field='status'
-        @currentSorting={{sort}}
+        @currentSorting={{this.sort}}
         @label='Status'
       />
     </c.header>
     <c.body as |container|>
       <td><LinkTo
           @route='editor-documents.show'
-          @model={{row.id}}
+          @model={{this.row.id}}
           class='au-c-link'
         >{{container.currentVersion.title}}</LinkTo></td>
       <td>{{human-friendly-date
