@@ -38,8 +38,8 @@ export default class DownloadMeetingPartComponent extends Component {
         html = await this.downloadAgendapoint(this.args.behandeling.id);
         break;
       }
-      case 'besluit': {
-        html = await this.downloadBesluit(this.args.documentContainer);
+      case 'document': {
+        html = await this.downloadDocument(this.args.documentContainer);
         break;
       }
       case 'agenda': {
@@ -104,7 +104,7 @@ export default class DownloadMeetingPartComponent extends Component {
     const json = await response.json();
     return json.data.attributes.html;
   }
-  async downloadBesluit(docContainer) {
+  async downloadDocument(docContainer) {
     const currentVersion = await docContainer.get('currentVersion');
     return generateExportTextFromEditorDocument(currentVersion, true);
   }

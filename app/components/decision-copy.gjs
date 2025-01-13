@@ -46,7 +46,7 @@ export default class DecisionCopy extends Component {
           </Group>
           <Group>
             <DownloadMeetingPart
-              @documentType='besluit'
+              @documentType='document'
               @documentContainer={{@container}}
               @buttonText={{t 'copy-options.copy-all'}}
               @loadingText={{t 'copy-options.copying'}}
