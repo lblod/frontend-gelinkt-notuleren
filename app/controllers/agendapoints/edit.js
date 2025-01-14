@@ -146,7 +146,7 @@ export default class AgendapointsEditController extends Controller {
       await this.store.query('behandeling-van-agendapunt', {
         'filter[document-container][:id:]': this.model.documentContainer.id,
       })
-    ).firstObject;
+    )[0];
     if (behandeling) {
       const agendaItem = await behandeling.onderwerp;
       agendaItem.titel = title;

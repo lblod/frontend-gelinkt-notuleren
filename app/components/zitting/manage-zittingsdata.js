@@ -37,7 +37,7 @@ export default class ZittingManageZittingsdataComponent extends Component {
     this.zitting.gestartOpTijdstip = this.gestartOpTijdstip;
     this.zitting.geeindigdOpTijdstip = this.geeindigdOpTijdstip;
     this.zitting.opLocatie = this.opLocatie;
-    this.zitting.bestuursorgaan = this.bestuursorgaan;
+    this.zitting.bestuursorgaan = await this.bestuursorgaan;
 
     await this.zitting.save();
     this.toggleModal();

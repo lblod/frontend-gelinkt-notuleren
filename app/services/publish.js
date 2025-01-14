@@ -194,7 +194,7 @@ export default class PublishService extends Service {
       return new Extract(
         treatment.id,
         agendapoint.get('position'),
-        versionedTreatments.get('firstObject'),
+        versionedTreatments[0],
         [],
       );
     } else {

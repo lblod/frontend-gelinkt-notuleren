@@ -78,7 +78,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
       'filter[:or:][:has-no:deleted]': 'yes',
       include: 'signed-resources,published-resource',
     });
-    this.besluitenlijst = behandelings.firstObject;
+    this.besluitenlijst = behandelings[0];
   });
 
   createPrePublishedResource = task(async () => {

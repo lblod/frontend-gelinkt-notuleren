@@ -62,7 +62,7 @@ export default class SignaturesTimelineStep extends Component {
       const signedResources = await this.args.signedResources;
       if (signedResources.length > 0) {
         this.signedResources = signedResources.sortBy('createdOn');
-        firstSignatureUser = await signedResources.firstObject.gebruiker;
+        firstSignatureUser = await signedResources[0].gebruiker;
       }
     }
     this.isSignedByCurrentUser = currentUser === firstSignatureUser;
@@ -139,7 +139,7 @@ export default class SignaturesTimelineStep extends Component {
     this.isSignedByCurrentUser = true;
     let signedResources = await this.args.signing(signedId);
     this.signedResources = signedResources.sortBy('createdOn');
-    const signedResource = await signedResources.lastObject;
+    const signedResource = await signedResources.at(-1);
     let versionedResource;
     const agenda = await signedResource.agenda;
     if (agenda) {
@@ -228,12 +228,12 @@ export default class SignaturesTimelineStep extends Component {
   }
 
   get showDeletedSecondSignature() {
-    if (!this.deletedSignatures.lastObject) {
+    if (!this.deletedSignatures.at(-1)) {
       return false;
     }
     return (
-      this.activeSignatures.firstObject.createdOn <
-      this.deletedSignatures.lastObject.createdOn
+      this.activeSignatures[0].createdOn <
+      this.deletedSignatures.at(-1).createdOn
     );
   }
 }

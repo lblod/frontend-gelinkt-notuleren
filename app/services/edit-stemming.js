@@ -66,7 +66,7 @@ export default class EditStemmingService extends Service {
             'filter[:id:]': aanwezige.id,
             include: 'is-bestuurlijke-alias-van',
           });
-          return queryResult.firstObject;
+          return queryResult[0];
         }),
       );
       aanwezigen.forEach((aanwezige) =>
@@ -81,7 +81,7 @@ export default class EditStemmingService extends Service {
             'aanwezigen.is-bestuurlijke-alias-van,stemmers.is-bestuurlijke-alias-van,onthouders.is-bestuurlijke-alias-van,voorstanders.is-bestuurlijke-alias-van,tegenstanders.is-bestuurlijke-alias-van',
           page: { size: 100 },
         })
-      ).firstObject;
+      )[0];
 
       const aanwezigen = stemming.aanwezigen;
 

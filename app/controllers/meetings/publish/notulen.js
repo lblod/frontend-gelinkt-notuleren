@@ -208,8 +208,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
       // store the rest of the needed state
       this.signedResources = signedNonDeletedResources;
-      this.hasDeletedSignedResources =
-        !!signedDeletedResources.toArray().length;
+      this.hasDeletedSignedResources = !!signedDeletedResources.slice().length;
       this.fullNotulenContent = await getResourceContent(
         fullNotulen,
         (statusText) => {

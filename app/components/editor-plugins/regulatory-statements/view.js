@@ -23,7 +23,7 @@ export default class ReadOnlyContentSectionComponent extends Component {
         'filter[:uri:]': this.resource,
         include: 'current-version',
       })
-    ).firstObject;
+    )[0];
 
     this.currentVersion =
       await this.regulatoryStatementContainer.currentVersion;
