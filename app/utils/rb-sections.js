@@ -1,4 +1,4 @@
-// Sections must be ordered from more to less specifity
+// Sections must be ordered from more to less specifity, we have to order them so the highest level section is found first in the array
 const SECTIONS = [
   {
     id: 'title',
@@ -6,9 +6,7 @@ const SECTIONS = [
       '[property="https://say.data.gift/ns/heading"]>[data-content-container="true"], [property="say:heading"]>[data-content-container="true"]',
     contentSelector:
       '[property="https://say.data.gift/ns/body"]>[data-content-container="true"], [property="say:body"]>[data-content-container="true"]',
-    selector:
-      '[typeof="say:Title"]>[data-content-container="true"], [typeof="https://say.data.gift/ns/Title"]>[data-content-container="true"]',
-    childTypes: ['chapter', 'section', 'subsection', 'article'],
+    selector: '[typeof="say:Title"], [typeof="https://say.data.gift/ns/Title"]',
   },
   {
     id: 'chapter',
@@ -17,8 +15,7 @@ const SECTIONS = [
     contentSelector:
       '[property="https://say.data.gift/ns/body"]>[data-content-container="true"], [property="say:body"]>[data-content-container="true"]',
     selector:
-      '[typeof="say:Chapter"]>[data-content-container="true"], [typeof="https://say.data.gift/ns/Chapter"]>[data-content-container="true"]',
-    childTypes: ['section', 'subsection', 'article'],
+      '[typeof="say:Chapter"], [typeof="https://say.data.gift/ns/Chapter"]',
   },
   {
     id: 'section',
@@ -27,8 +24,7 @@ const SECTIONS = [
     contentSelector:
       '[property="https://say.data.gift/ns/body"]>[data-content-container="true"], [property="say:body"]>[data-content-container="true"]',
     selector:
-      '[typeof="say:Section"]>[data-content-container="true"], [typeof="https://say.data.gift/ns/Section"]>[data-content-container="true"]',
-    childTypes: ['subsection', 'article'],
+      '[typeof="say:Section"], [typeof="https://say.data.gift/ns/Section"]',
   },
   {
     id: 'subsection',
@@ -37,24 +33,22 @@ const SECTIONS = [
     contentSelector:
       '[property="https://say.data.gift/ns/body"]>[data-content-container="true"], [property="say:body"]>[data-content-container="true"]',
     selector:
-      '[typeof="say:Subsection"]>[data-content-container="true"], [typeof="https://say.data.gift/ns/Subsection"]>[data-content-container="true"]',
-    childTypes: ['article'],
+      '[typeof="say:Subsection"], [typeof="https://say.data.gift/ns/Subsection"]',
   },
   {
     id: 'article',
     labelSelector:
       '[property="https://say.data.gift/ns/heading"]>[data-content-container="true"], [property="say:heading"]>[data-content-container="true"]',
     selector:
-      '[typeof="say:Article"]>[data-content-container="true"], [typeof="https://say.data.gift/ns/Article"]>[data-content-container="true"]',
+      '[typeof="say:Article"], [typeof="https://say.data.gift/ns/Article"]',
     contentSelector:
       '[property="https://say.data.gift/ns/body"]>[data-content-container="true"], [property="say:body"]>[data-content-container="true"]',
-    childTypes: ['paragraph'],
   },
   {
     id: 'paragraph',
     label: 'copy-options.regulatory-statements.paragraph',
     selector:
-      '[typeof="say:Paragraph"]>[data-content-container="true"], [typeof="https://say.data.gift/ns/Paragraph"]>[data-content-container="true"]',
+      '[typeof="say:Paragraph"], [typeof="https://say.data.gift/ns/Paragraph"]',
   },
 ];
 
