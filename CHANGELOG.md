@@ -1,5 +1,37 @@
 # frontend-gelinkt-notuleren
 
+## 5.47.2
+
+### Patch Changes
+
+- [#801](https://github.com/lblod/frontend-gelinkt-notuleren/pull/801) [`02e6905`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/02e6905921b75d685aacd85b07a64b852e89bb6e) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix incorrect fetch error handling in template-fetcher
+
+## 5.47.1
+
+### Patch Changes
+
+- [`6f9f7f6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6f9f7f63fe72a93a5b311b94eb1983a299fed38f) Thanks [@piemonkey](https://github.com/piemonkey)! - Update @lblod/ember-rdfa-editor to v10.10.0
+
+## 5.47.0
+
+### Minor Changes
+
+- [#794](https://github.com/lblod/frontend-gelinkt-notuleren/pull/794) [`fb88c76`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/fb88c76b1787d3c83728b6d8d87cd707e185451f) Thanks [@piemonkey](https://github.com/piemonkey)! - Link locations to the surrounding article or decision on insertion
+
+- [#798](https://github.com/lblod/frontend-gelinkt-notuleren/pull/798) [`3fdb7e6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3fdb7e6a991eec2b4572bc858a08c3c94c9191d8) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add loading indicator to participation list
+
+- [#796](https://github.com/lblod/frontend-gelinkt-notuleren/pull/796) [`d1a7fe6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d1a7fe670f43fbee57edcf7fd0d222655ca9d07a) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add copy parts link to the agendapoint file options
+
+### Patch Changes
+
+- [#797](https://github.com/lblod/frontend-gelinkt-notuleren/pull/797) [`2aa5a01`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2aa5a01600c997d2f7bd92d9c9e6b9a04144921e) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix publish service to handle non-200 success status codes
+
+- [`9de5ed9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9de5ed9d94b112e25c9183143ae1a448d6f22183) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix dutch 'not-found' translations
+
+- [#795](https://github.com/lblod/frontend-gelinkt-notuleren/pull/795) [`037c986`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/037c986a7bb27970faabb9dc9931f2a8c1603ab9) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix bug where the normal meeting was not filling the whole page
+
+- [`ba60c96`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ba60c96dd896844fdbfb1ffaaf8cb67d6b149e7c) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Bump ember-rdfa-editor-lblod-plugins to 26.3.1
+
 ## 5.46.0
 
 ### Minor Changes

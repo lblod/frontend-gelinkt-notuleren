@@ -594,6 +594,7 @@ rdfa-editor-container:
   default-busy-text: Processing
   saving: Saving
   making-copy: Making copy
+  loading: Loading
 
 regulatory-statements-plugin:
   type: Regulatory Statement

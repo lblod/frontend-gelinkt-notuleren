@@ -83,7 +83,7 @@ export default class PublishService extends Service {
         maxIterations--;
       } while (resp.status === 404 && maxIterations > 0);
 
-      if (resp.status !== 200) {
+      if (!resp.ok) {
         let errors;
         try {
           const json = await resp.json();

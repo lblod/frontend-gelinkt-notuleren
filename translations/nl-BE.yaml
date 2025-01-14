@@ -598,6 +598,7 @@ rdfa-editor-container:
   default-busy-text: Bezig met verwerken
   saving: Bezig met opslaan
   making-copy: Kopie aan het maken
+  loading: Bezig met laden
 
 regulatory-statements-plugin:
   type: Reglementaire bijlage
@@ -695,11 +696,11 @@ utils:
   not-found:
     title: '{type} niet gevonden'
     explanation: 'Het is mogelijk dat u met dit account geen toegang heeft tot {type}.'
-  body:
-    contact-message: Indien u denkt dat dit een fout is, kan u ons steeds contacteren op onze
-    contact-link: contact-pagina
-    email-message: Of stuur een mail naar
-    email: GelinktNotuleren@vlaanderen.be
+    body:
+      contact-message: Indien u denkt dat dit een fout is, kan u ons steeds contacteren op onze
+      contact-link: contact-pagina
+      email-message: Of stuur een mail naar
+      email: GelinktNotuleren@vlaanderen.be
     route:
       title: Pagina niet gevonden
       explanation: Onze excuses, maar we slaagden er niet in om deze pagina terug te vinden.

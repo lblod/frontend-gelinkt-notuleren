@@ -51,7 +51,7 @@ export default class TemplateFetcher extends Service {
     `;
 
     const response = await this.sendQuery(sparqlEndpoint, sparqlQuery);
-    if (response.status === 200) {
+    if (response.ok) {
       const json = await response.json();
       const bindings = json.results.bindings;
       const templates = bindings.map(this.bindingToTemplate(fileEndpoint));
@@ -99,7 +99,7 @@ export default class TemplateFetcher extends Service {
     `;
 
     const response = await this.sendQuery(sparqlEndpoint, sparqlQuery);
-    if (response.status === 200) {
+    if (response.ok) {
       const json = await response.json();
       const bindings = json.results.bindings;
       const templates = bindings.map(this.bindingToTemplate(fileEndpoint));
@@ -145,7 +145,7 @@ export default class TemplateFetcher extends Service {
       ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
     `;
     const response = await this.sendQuery(sparqlEndpoint, sparqlQuery);
-    if (response.status === 200) {
+    if (response.ok) {
       const json = await response.json();
       const bindings = json.results.bindings;
       const templates = bindings.map(this.bindingToTemplate(fileEndpoint));

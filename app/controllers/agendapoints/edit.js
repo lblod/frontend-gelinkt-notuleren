@@ -13,11 +13,13 @@ import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private
 
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { fixArticleConnections } from '../../utils/fix-article-connections';
+import { modifier } from 'ember-modifier';
 
 export default class AgendapointsEditController extends Controller {
   @service store;
   @service router;
   @service documentService;
+  @service intl;
 
   @service('editor/agendapoint') agendapointEditor;
 
@@ -26,24 +28,21 @@ export default class AgendapointsEditController extends Controller {
   @tracked _editorDocument;
   @tracked controller;
   @service features;
+  @tracked schema;
+  @tracked plugins;
+  @tracked editorSetup = false;
 
   StructureControlCard = StructureControlCardComponent;
   InsertArticle = InsertArticleComponent;
 
   SnippetInsert = SnippetInsertRdfaComponent;
 
-  config = this.agendapointEditor.config;
+  get config() {
+    return this.agendapointEditor.config;
+  }
 
-  nodeViews = this.agendapointEditor.nodeViews;
-
-  citationPlugin = this.agendapointEditor.citationPlugin;
-
-  constructor(...args) {
-    super(...args);
-    const { schema, plugins } =
-      this.agendapointEditor.getSchemaAndPlugins(false);
-    this.schema = schema;
-    this.plugins = plugins;
+  get nodeViews() {
+    return this.agendapointEditor.nodeViews;
   }
 
   get dirty() {
@@ -68,6 +67,38 @@ export default class AgendapointsEditController extends Controller {
     }
     return null;
   }
+
+  get isBusy() {
+    return (
+      !this.editorSetup ||
+      this.saveTask.isRunning ||
+      this.copyAgendapunt.isRunning
+    );
+  }
+
+  get busyText() {
+    if (!this.editorSetup) {
+      return this.intl.t('rdfa-editor-container.loading');
+    }
+    if (this.saveTask.isRunning) {
+      return this.intl.t('rdfa-editor-container.making-copy');
+    }
+    if (this.copyAgendapunt.isRunning) {
+      return this.intl.t('rdfa-editor-container.saving');
+    }
+    return '';
+  }
+
+  setSchemaAndPlugins = modifier(() => {
+    const { schema, plugins } =
+      this.agendapointEditor.getSchemaAndPlugins(false);
+    this.schema = schema;
+    this.plugins = plugins;
+    this.editorSetup = true;
+    return () => {
+      this.editorSetup = false;
+    };
+  });
 
   @action
   async handleRdfaEditorInit(editor) {
