@@ -82,7 +82,11 @@
           </strong>
           {{t 'voting-edit.fourth-step-explanation-part-two'}}
         </AuHelpText>
-        <AuButton @loading={{@saving}} {{on 'click' this.save}}>
+        <AuButton
+          @loading={{@saving}}
+          @loadingMessage={{t 'application.loading'}}
+          {{on 'click' this.save}}
+        >
           {{t 'voting-edit.save-button'}}
         </AuButton>
       </Group>

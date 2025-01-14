@@ -134,6 +134,7 @@
             @iconAlignment='left'
             @disabled={{not (and this.hasParticipants this.editable)}}
             @loading={{this.addStandardVoting.isRunning}}
+            @loadingMessage={{t 'application.loading'}}
           >
             {{t 'generic.add'}}
           </AuButton>
@@ -144,6 +145,7 @@
             @iconAlignment='left'
             @disabled={{not (and this.hasParticipants this.editable)}}
             @loading={{this.addCustomVoting.isRunning}}
+            @loadingMessage={{t 'application.loading'}}
           >
             {{t 'behandeling-van-agendapunten.add-custom-voting'}}
           </AuButton>

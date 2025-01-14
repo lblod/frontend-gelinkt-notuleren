@@ -125,6 +125,7 @@
           <AuButton
             @skin='secondary'
             @loading={{this.isLoading}}
+            @loadingMessage={{t 'application.loading'}}
             {{on 'click' this.goToPublish}}
           >
             {{t 'meeting-form.publish-button'}}

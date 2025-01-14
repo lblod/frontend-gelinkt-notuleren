@@ -93,6 +93,7 @@
               @alert={{true}}
               @skin='secondary'
               @loading={{this.deleteTask.isRunning}}
+              @loadingMessage={{t 'application.loading'}}
               @icon='bin'
               @iconAlignment='left'
               {{on 'click' (perform this.deleteTask @itemToEdit)}}

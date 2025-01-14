@@ -48,6 +48,7 @@
                       class='au-u-padding au-u-1-1'
                       {{on 'click' (perform this.fetchNextPage)}}
                       @loading={{this.fetchNextPage.isRunning}}
+                      @loadingMessage={{t 'application.loading'}}
                     >
                       {{t 'regulatory-statements-plugin.load-more'}}
                     </AuButton>

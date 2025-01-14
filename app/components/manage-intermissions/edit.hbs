@@ -98,6 +98,7 @@
               @alert={{true}}
               @skin='secondary'
               @loading={{this.deleteTask.isRunning}}
+              @loadingMessage={{t 'application.loading'}}
               @icon='bin'
               @iconAlignment='left'
               {{on 'click' (perform this.deleteTask @intermissionToEdit)}}
@@ -107,6 +108,7 @@
           {{/unless}}
           <AuButton
             @loading={{this.saveIntermission.isRunning}}
+            @loadingMessage={{t 'application.loading'}}
             {{on 'click' (perform this.saveIntermission)}}
           >
             {{#if @intermissionToEdit.isNew}}
