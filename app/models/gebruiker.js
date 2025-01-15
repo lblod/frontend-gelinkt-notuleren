@@ -12,8 +12,8 @@ export default class UserModel extends Model {
   bestuurseenheden;
 
   // this is only used for mock login afaik
-  get group() {
-    return this.bestuurseenheden.firstObject;
+  async group() {
+    return (await this.bestuurseenheden)[0];
   }
 
   get fullName() {
