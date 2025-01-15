@@ -4,6 +4,7 @@ import { restartableTask } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { action } from '@ember/object';
+import compareAsc from 'date-fns/compareAsc';
 
 /**
  * @typedef {Object} Args
@@ -59,9 +60,13 @@ export default class SignaturesTimelineStep extends Component {
     const currentUser = this.currentSession.user;
     let firstSignatureUser = null;
     if (this.args.signedResources) {
-      const signedResources = await this.args.signedResources;
+      // Need to copy the array here as if we don't, Ember's proxy gives us an error when running
+      // the sort method:
+      // `No local relationship update operation exists for 'sortRelatedRecords'`
+      const signedResources = (await this.args.signedResources).slice();
       if (signedResources.length > 0) {
-        this.signedResources = signedResources.sortBy('createdOn');
+        signedResources.sort(compareAsc);
+        this.signedResources = signedResources;
         firstSignatureUser = await signedResources[0].gebruiker;
       }
     }
@@ -137,8 +142,12 @@ export default class SignaturesTimelineStep extends Component {
     this.signingOrPublishing = true;
     this.showSigningModal = false;
     this.isSignedByCurrentUser = true;
-    let signedResources = await this.args.signing(signedId);
-    this.signedResources = signedResources.sortBy('createdOn');
+    // Need to copy the array here as if we don't, Ember's proxy gives us an error when running
+    // the sort method:
+    // `No local relationship update operation exists for 'sortRelatedRecords'`
+    let signedResources = (await this.args.signing(signedId)).slice();
+    signedResources.sort(compareAsc);
+    this.signedResources = signedResources;
     const signedResource = await signedResources.at(-1);
     let versionedResource;
     const agenda = await signedResource.agenda;
