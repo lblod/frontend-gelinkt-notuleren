@@ -218,8 +218,8 @@ export default class BehandelingVanAgendapuntComponent extends Component {
       gevolg: '',
     });
     this.editMode = true;
-    stemmingToEdit.aanwezigen.pushObjects(participants);
-    stemmingToEdit.stemmers.pushObjects(participants);
+    (await stemmingToEdit.aanwezigen).push(...participants);
+    (await stemmingToEdit.stemmers).push(...participants);
     this.editStemming.stemming = stemmingToEdit;
   });
 

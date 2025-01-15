@@ -33,7 +33,7 @@ export default class MeetingsPublishBesluitenlijstController extends Controller 
         include: 'signed-resources,published-resource',
       });
       if (behandelings.length) {
-        this.besluitenlijst = behandelings.firstObject;
+        this.besluitenlijst = behandelings[0];
       } else {
         const { content, errors } =
           await this.createPrePublishedResource.perform();

@@ -16,10 +16,6 @@ export default class manageIntermissionsEditComponent extends Component {
   @service store;
   @service intl;
 
-  constructor(...args) {
-    super(...args);
-  }
-
   get startedAtExternal() {
     if (this.startedAt === '' || !this.startedAt) {
       return this.args.intermissionToEdit.startedAt;
@@ -74,7 +70,7 @@ export default class manageIntermissionsEditComponent extends Component {
       intermission.comment = this.comment;
     }
     if (intermission.isNew) {
-      this.args.zitting.intermissions.pushObject(intermission);
+      (await this.args.zitting.intermissions).push(intermission);
     }
     await this.savePosition.perform();
     await intermission.save();
@@ -86,7 +82,11 @@ export default class manageIntermissionsEditComponent extends Component {
   });
 
   deleteTask = task(async (intermission) => {
-    this.args.zitting.intermissions.removeObject(intermission);
+    const intermissions = await this.args.zitting.intermissions;
+    intermissions.splice(
+      intermissions.findIndex((inList) => inList.id === intermission.id),
+      1,
+    );
     await this.args.zitting.save();
     await intermission.destroyRecord();
     this.args.onClose();
@@ -160,6 +160,12 @@ export default class manageIntermissionsEditComponent extends Component {
       this.selectedPosition = null;
     }
   });
+
+  agendaOptionsPromise = (async () => {
+    const ap = [...(await this.args.zitting.agendapunten)];
+    ap.sort((a, b) => a.position - b.position);
+    return ap;
+  })();
 
   @tracked selectedPosition;
 

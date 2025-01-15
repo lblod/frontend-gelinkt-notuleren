@@ -35,7 +35,9 @@ export default class PublishService extends Service {
   }
 
   get treatmentExtracts() {
-    return [...this.treatmentExtractsMap.values()].sortBy('position');
+    return [...this.treatmentExtractsMap.values()].sort(
+      (a, b) => a.position - b.position,
+    );
   }
 
   get isIdle() {

@@ -43,17 +43,17 @@ export default class EditStemmingService extends Service {
         }
       }
     }
-    this._stemming.stemmers.setObjects(stemmers);
-    this._stemming.onthouders.setObjects(onthouders);
+    this._stemming.stemmers = stemmers;
+    this._stemming.onthouders = onthouders;
     if (!this._stemming.geheim) {
-      this._stemming.voorstanders.setObjects(voorstanders);
-      this._stemming.tegenstanders.setObjects(tegenstanders);
+      this._stemming.voorstanders = voorstanders;
+      this._stemming.tegenstanders = tegenstanders;
       this._stemming.aantalOnthouders = onthouders.length;
       this._stemming.aantalVoorstanders = voorstanders.length;
       this._stemming.aantalTegenstanders = tegenstanders.length;
     } else {
-      this._stemming.voorstanders.clear();
-      this._stemming.tegenstanders.clear();
+      this._stemming.voorstanders = [];
+      this._stemming.tegenstanders = [];
     }
     await this._stemming.save();
   });

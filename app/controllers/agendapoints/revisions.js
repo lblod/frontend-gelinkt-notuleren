@@ -29,7 +29,11 @@ export default class AgendapointsRevisionsController extends Controller {
     await this.documentContainer.save();
     this.model.editorDocument = revision;
     await Promise.all(revisionsToRemove.map((r) => r.destroyRecord()));
-    this.orderedRevisions.removeObjects(revisionsToRemove);
+    this.model.revisions = this.model.revisions.filter((existingRevision) => {
+      return !revisionsToRemove.some(
+        (toRemove) => toRemove.id === existingRevision.id,
+      );
+    });
     this.flushThingsToRemove();
     this.router.transitionTo('agendapoints.edit', this.documentContainer.id);
   });
@@ -39,7 +43,7 @@ export default class AgendapointsRevisionsController extends Controller {
 
     for (let r of this.orderedRevisions) {
       if (r.id === revision.id) break;
-      revisionsToRemove.pushObject(r);
+      revisionsToRemove.push(r);
     }
 
     return revisionsToRemove;
