@@ -61,7 +61,7 @@ export default class EditStemmingService extends Service {
   fetchVoters = task(async () => {
     if (this._stemming.isNew) {
       const aanwezigen = await Promise.all(
-        this._stemming.aanwezigen.map(async (aanwezige) => {
+        (await this._stemming.aanwezigen).map(async (aanwezige) => {
           const queryResult = await this.store.query('mandataris', {
             'filter[:id:]': aanwezige.id,
             include: 'is-bestuurlijke-alias-van',
