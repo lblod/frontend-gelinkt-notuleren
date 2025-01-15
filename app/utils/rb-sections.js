@@ -49,6 +49,8 @@ const SECTIONS = [
     label: 'copy-options.regulatory-statements.paragraph',
     selector:
       '[typeof="say:Paragraph"], [typeof="https://say.data.gift/ns/Paragraph"]',
+    contentSelector:
+      '[property="https://say.data.gift/ns/body"]>[data-content-container="true"], [property="say:body"]>[data-content-container="true"]',
   },
 ];
 
