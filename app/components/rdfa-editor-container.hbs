@@ -4,7 +4,7 @@
       <div class='say-container say-container--sidebar-left'>
         <div class='say-container__main'>
           <div
-            class='say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover'
+            class='say-editor'
           >
             <div class='say-editor__paper'>
               <div class='au-c-scanner'>
@@ -39,11 +39,11 @@
     {{#if this.ready}}
       <EditorContainer
         @editorOptions={{hash
-                    editRdfa=(if @shouldShowRdfa true false)
-                    showPaper='true'
+          editRdfa=(if @shouldShowRdfa true false)
+          showPaper='true'
           showToolbarBottom=null
         }}
-              >
+      >
         <:top>
           {{#if this.controller}}
             <ResponsiveToolbar>
@@ -96,7 +96,7 @@
               <:side as |Tb|>
                 <Tb.Group>
                   {{yield to='toolbar'}}
-                                  </Tb.Group>
+                </Tb.Group>
               </:side>
             </ResponsiveToolbar>
           {{/if}}
