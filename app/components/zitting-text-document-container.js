@@ -62,11 +62,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   type = this.args.type;
 
   editorOptions = {
-    showToggleRdfaAnnotations: false,
     showInsertButton: false,
-    showRdfa: false,
-    showRdfaHighlight: false,
-    showRdfaHover: false,
     showPaper: true,
     showSidebar: true,
   };

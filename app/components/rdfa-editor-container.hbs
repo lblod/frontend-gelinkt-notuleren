@@ -39,15 +39,11 @@
     {{#if this.ready}}
       <EditorContainer
         @editorOptions={{hash
-          showRdfa=(if @shouldShowRdfa false true)
-          editRdfa=(if @shouldShowRdfa true false)
-          showRdfaHighlight='true'
-          showRdfaHover='true'
-          showPaper='true'
+                    editRdfa=(if @shouldShowRdfa true false)
+                    showPaper='true'
           showToolbarBottom=null
         }}
-        @showRdfaBlocks={{this.controller.showRdfaBlocks}}
-      >
+              >
         <:top>
           {{#if this.controller}}
             <ResponsiveToolbar>
@@ -100,10 +96,7 @@
               <:side as |Tb|>
                 <Tb.Group>
                   {{yield to='toolbar'}}
-                  <Plugins::RdfaBlockRender::RdfaBlocksToggle
-                    @controller={{this.controller}}
-                  />
-                </Tb.Group>
+                                  </Tb.Group>
               </:side>
             </ResponsiveToolbar>
           {{/if}}
