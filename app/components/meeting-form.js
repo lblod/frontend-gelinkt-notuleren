@@ -139,19 +139,22 @@ export default class MeetingForm extends Component {
 
   meetingDetailsTask = restartableTask(async () => {
     const bestuursorgaan = await this.zitting.bestuursorgaan;
-    const specialisedBestuursorgaan =
-      await bestuursorgaan.isTijdsspecialisatieVan;
-    const classification = await specialisedBestuursorgaan.classificatie;
-    const headerArticleTranslationString =
-      articlesBasedOnClassifcationMap[classification.uri];
-    const secretaris = await this.zitting.secretaris;
-    const voorzitter = await this.zitting.voorzitter;
-    return {
-      bestuursorgaan,
-      headerArticleTranslationString,
-      secretaris,
-      voorzitter,
-    };
+    // Can only be null in odd cases, such as while the zitting is being deleted
+    if (bestuursorgaan) {
+      const specialisedBestuursorgaan =
+        await bestuursorgaan.isTijdsspecialisatieVan;
+      const classification = await specialisedBestuursorgaan.classificatie;
+      const headerArticleTranslationString =
+        articlesBasedOnClassifcationMap[classification.uri];
+      const secretaris = await this.zitting.secretaris;
+      const voorzitter = await this.zitting.voorzitter;
+      return {
+        bestuursorgaan,
+        headerArticleTranslationString,
+        secretaris,
+        voorzitter,
+      };
+    }
   });
   meetingDetailsData = trackedTask(this, this.meetingDetailsTask, () => [
     this.zitting.secretaris,

@@ -20,7 +20,7 @@ export default class InboxAgendapointsNewController extends Controller {
 
   @action
   cancelAgendapointCreation() {
-    this.router.transitionTo('inbox.agendapoints');
+    this.router.legacyTransitionTo('inbox.agendapoints');
   }
 
   get templateOptions() {

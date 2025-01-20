@@ -1,4 +1,6 @@
+import { getOwner } from '@ember/application';
 import EmberRouter from '@ember/routing/router';
+import RouterService from '@ember/routing/router-service';
 import config from 'frontend-gelinkt-notuleren/config/environment';
 
 export default class Router extends EmberRouter {
@@ -96,4 +98,29 @@ Router.map(function () {
     );
   });
   this.route('not-found', { path: '/*path' });
+});
+
+// Hack to workaround bug with router.transitionTo and router.replaceWith, see
+// https://github.com/emberjs/ember.js/issues/19497#issuecomment-2164641248
+RouterService.reopen({
+  /**
+   * Use this method instead of `router.transitionTo()` when that method results in the model hook
+   * re-running. This is not in all cases however.
+   */
+  legacyTransitionTo: function () {
+    // eslint-disable-next-line ember/no-private-routing-service
+    return getOwner(this)
+      .lookup('router:main')
+      .transitionTo(...arguments);
+  },
+  /**
+   * Use this method instead of `router.replaceWith()` to avoid re-running model hooks on parts of
+   * the path that have not changed
+   */
+  legacyReplaceWith: function () {
+    // eslint-disable-next-line ember/no-private-routing-service
+    return getOwner(this)
+      .lookup('router:main')
+      .replaceWith(...arguments);
+  },
 });
