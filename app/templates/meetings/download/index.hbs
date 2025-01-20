@@ -155,9 +155,10 @@
               /></td>
             <td><AuLink
                 @route='meetings.download.copy'
-                @models={{(array
-                  this.zitting agendapoint.behandeling.documentContainer.id
-                )}}
+                @models={{array
+                  this.zitting
+                  agendapoint.behandeling.documentContainer.id
+                }}
               >
                 {{t 'download.table.copy-options'}}
               </AuLink></td>
