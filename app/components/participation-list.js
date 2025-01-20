@@ -60,7 +60,7 @@ export default class ParticipationListComponent extends Component {
   }
 
   get participants() {
-    return this.args.participants?.sortBy('isBestuurlijkeAliasVan.achternaam');
+    return this.args.participants;
   }
 
   get defaultedParticipants() {
@@ -71,7 +71,7 @@ export default class ParticipationListComponent extends Component {
   }
 
   get absentees() {
-    return this.args.absentees?.sortBy('isBestuurlijkeAliasVan.achternaam');
+    return this.args.absentees;
   }
 
   get defaultedAbsentees() {

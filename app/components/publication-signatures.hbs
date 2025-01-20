@@ -64,6 +64,7 @@
         @icon='pencil'
         @iconAlignment='left'
         @loading={{@loading}}
+        @loadingMessage={{t 'application.loading'}}
         @disabled={{or
           (not this.currentSession.canSign)
           this.isSignedByCurrentUser
@@ -102,6 +103,7 @@
         @icon='pencil'
         @iconAlignment='left'
         @loading={{@loading}}
+        @loadingMessage={{t 'application.loading'}}
         @disabled={{not this.currentSession.canSign}}
       >
         {{t 'timeline-step.sign-button-label' name=@name}}

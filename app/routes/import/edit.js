@@ -23,7 +23,7 @@ export default class ImportEditRoute extends Route {
       });
 
       if (documentContainers.length) {
-        const documentContainer = documentContainers.firstObject;
+        const documentContainer = documentContainers[0];
         this.router.transitionTo('agendapoints.edit', documentContainer.id);
       } else {
         warn(

@@ -88,7 +88,7 @@ export default class MeetingsPublishAgendaController extends Controller {
       include: 'signed-resources,published-resource',
     });
     if (agendas.length) {
-      return agendas.firstObject;
+      return agendas[0];
     } else {
       const prePublish = await this.createPrePublishedResource.perform(
         KIND_LABEL_TO_UUID_MAP.get(type),

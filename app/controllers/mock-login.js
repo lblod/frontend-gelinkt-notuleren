@@ -10,6 +10,11 @@ export default class MockLoginController extends Controller {
   @tracked page = 0;
   @tracked size = 10;
 
+  login = async (loginComp, account) => {
+    const gebruiker = await account.gebruiker;
+    loginComp.login(account.id, (await gebruiker.group()).id);
+  };
+
   queryStore = task(async () => {
     const filter = { provider: 'https://github.com/lblod/mock-login-service' };
     if (this.gemeente) filter.gebruiker = { achternaam: this.gemeente };

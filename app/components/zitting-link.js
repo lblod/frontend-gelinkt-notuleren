@@ -21,6 +21,6 @@ export default class ZittingLinkComponent extends Component {
       // TODO: This is a workaround for a mu-cache issue. Remove the include once that's resolved.
       include: 'agendapunten',
     });
-    this.meeting = result.firstObject;
+    this.meeting = result[0];
   });
 }

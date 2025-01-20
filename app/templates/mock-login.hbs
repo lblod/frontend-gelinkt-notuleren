@@ -36,7 +36,7 @@
           {{#if this.queryStore.isRunning}}
             <AuLoader @padding='small'>{{t 'application.loading'}}</AuLoader>
           {{else}}
-            {{#if this.login.errorMessage}}
+            {{#if login.errorMessage}}
               <AuAlert
                 @icon='alert-triangle'
                 @title={{this.login.errorMessage}}
@@ -50,10 +50,7 @@
                 @width='block'
                 @size='large'
                 type='button'
-                {{on
-                  'click'
-                  (fn login.login account.id account.gebruiker.group.id)
-                }}
+                {{on 'click' (fn this.login login account)}}
               >
                 {{account.gebruiker.voornaam}}
                 {{account.gebruiker.achternaam}}

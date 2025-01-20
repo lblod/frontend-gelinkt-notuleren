@@ -208,8 +208,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
       // store the rest of the needed state
       this.signedResources = signedNonDeletedResources;
-      this.hasDeletedSignedResources =
-        !!signedDeletedResources.toArray().length;
+      this.hasDeletedSignedResources = !!signedDeletedResources.slice().length;
       this.fullNotulenContent = await getResourceContent(
         fullNotulen,
         (statusText) => {
@@ -419,9 +418,12 @@ export default class MeetingsPublishNotulenController extends Controller {
   @action
   togglePublicationStatus(behandeling) {
     const uri = behandeling.behandeling;
-    if (this.publicBehandelingUris.includes(uri))
-      this.publicBehandelingUris.removeObject(uri);
-    else this.publicBehandelingUris.pushObject(uri);
+    const publicIndex = this.publicBehandelingUris.indexOf(uri);
+    if (publicIndex !== -1) {
+      this.publicBehandelingUris.splice(publicIndex, 1);
+    } else {
+      this.publicBehandelingUris.push(uri);
+    }
     this.updateNotulenPreview();
   }
 

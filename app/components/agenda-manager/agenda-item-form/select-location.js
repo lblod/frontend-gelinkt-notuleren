@@ -16,9 +16,11 @@ export default class AgendaManagerAgendaItemFormSelectLocationComponent extends 
   }
 
   get afterItemOptions() {
-    return this.args.agendaItems
-      .sortBy('position')
-      .reject((x) => x === this.args.currentItem);
+    const agendaItems = this.args.agendaItems.filter(
+      (x) => x.id !== this.args.currentItem.id,
+    );
+    agendaItems.sort((a, b) => a.position - b.position);
+    return agendaItems;
   }
 
   @action

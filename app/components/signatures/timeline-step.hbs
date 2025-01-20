@@ -147,6 +147,7 @@
                 @icon='pencil'
                 @iconAlignment='left'
                 @loading={{this.signingOrPublishing}}
+                @loadingMessage={{t 'application.loading'}}
                 @disabled={{or
                   (or
                     (not this.currentSession.canSign) this.signingOrPublishing
@@ -197,6 +198,7 @@
                 @icon='pencil'
                 @iconAlignment='left'
                 @loading={{this.signingOrPublishing}}
+                @loadingMessage={{t 'application.loading'}}
                 @disabled={{or
                   (not this.currentSession.canSign)
                   this.signingOrPublishing
@@ -350,6 +352,7 @@
                   @icon='upload'
                   @iconAlignment='left'
                   @loading={{this.signingOrPublishing}}
+                  @loadingMessage={{t 'application.loading'}}
                   @disabled={{or
                     (not this.currentSession.canPublish)
                     this.signingOrPublishing
@@ -366,6 +369,7 @@
                   @icon='upload'
                   @iconAlignment='left'
                   @loading={{this.signingOrPublishing}}
+                  @loadingMessage={{t 'application.loading'}}
                   @disabled={{or
                     (not this.currentSession.canPublish)
                     this.signingOrPublishing

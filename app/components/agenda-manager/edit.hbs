@@ -12,8 +12,7 @@
   >
     <Modal.Body>
       {{#if this.isSubmitting}}
-        <AuLoader />
-        <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
+        <AuLoader>{{t 'application.loading'}}</AuLoader>
       {{else}}
         {{!-- <AuHeading @level="3" @skin="4">{{t "manage-agenda-zitting-modal-edit.modal-subtitle"}}</AuHeading>
         <AuHr /> --}}
@@ -94,6 +93,7 @@
               @alert={{true}}
               @skin='secondary'
               @loading={{this.deleteTask.isRunning}}
+              @loadingMessage={{t 'application.loading'}}
               @icon='bin'
               @iconAlignment='left'
               {{on 'click' (perform this.deleteTask @itemToEdit)}}

@@ -24,7 +24,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         'filter[:or:][:has-no:deleted]': 'yes',
       },
     );
-    const versionedTreatment = versionedTreatments.firstObject;
+    const versionedTreatment = versionedTreatments[0];
     const meeting = await agendapoint.zitting;
 
     if (!versionedTreatment) {
@@ -75,7 +75,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         agendapoint,
         versionedTreatment,
         meeting,
-        signedResources: signedResources.toArray(),
+        signedResources: signedResources.slice(),
         publishedResource: publishedResource[0],
         // if a versionedTreatment exists, that means some signature or publication
         // has happened, which means that there are no errors, so we can safely do this

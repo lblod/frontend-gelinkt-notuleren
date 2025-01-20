@@ -34,7 +34,9 @@
               </AuLabel>
             {{/let}}
             {{#if this.toggleOpenbaar.isRunning}}
-              <AuLoader @padding='small' />
+              <AuLoader @padding='small' @hideMessage={{true}}>{{t
+                  'application.loading'
+                }}</AuLoader>
             {{/if}}
           </div>
         </:body>
@@ -75,8 +77,9 @@
 {{/if}}
 {{#unless @focusMode}}
   {{#if this.isLoading}}
-    <AuLoader @padding='small' />
-    <AuHelpText>{{t 'participation-list.loading-title'}}</AuHelpText>
+    <AuLoader @centered={{false}}>{{t
+        'participation-list.loading-title'
+      }}</AuLoader>
   {{else}}
     <ParticipationList
       @chairman={{this.chairman}}
@@ -131,6 +134,7 @@
             @iconAlignment='left'
             @disabled={{not (and this.hasParticipants this.editable)}}
             @loading={{this.addStandardVoting.isRunning}}
+            @loadingMessage={{t 'application.loading'}}
           >
             {{t 'generic.add'}}
           </AuButton>
@@ -141,6 +145,7 @@
             @iconAlignment='left'
             @disabled={{not (and this.hasParticipants this.editable)}}
             @loading={{this.addCustomVoting.isRunning}}
+            @loadingMessage={{t 'application.loading'}}
           >
             {{t 'behandeling-van-agendapunten.add-custom-voting'}}
           </AuButton>

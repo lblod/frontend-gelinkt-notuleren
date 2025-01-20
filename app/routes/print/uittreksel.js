@@ -15,7 +15,7 @@ export default class PrintUittrekselRoute extends Route {
         'filter[:or:][:has-no:deleted]': 'yes',
       },
     );
-    let versionedTreatment = versionedTreatments.firstObject;
+    let versionedTreatment = versionedTreatments[0];
     if (!versionedTreatment) {
       const treatment = await this.store.findRecord(
         'behandeling-van-agendapunt',
