@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
-import { task } from 'ember-concurrency';
+import { task, restartableTask } from 'ember-concurrency';
+import { trackedTask } from 'reactiveweb/ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
@@ -161,11 +162,14 @@ export default class manageIntermissionsEditComponent extends Component {
     }
   });
 
-  agendaOptionsPromise = (async () => {
+  agendaOptionsTask = restartableTask(async () => {
     const ap = [...(await this.args.zitting.agendapunten)];
     ap.sort((a, b) => a.position - b.position);
     return ap;
-  })();
+  });
+  agendaOptions = trackedTask(this, this.agendaOptionsTask, () => [
+    this.args.zitting.agendapunten,
+  ]);
 
   @tracked selectedPosition;
 
