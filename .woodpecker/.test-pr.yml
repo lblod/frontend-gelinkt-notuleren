@@ -1,6 +1,6 @@
 steps:
   install:
-    image: danlynn/ember-cli:4.12.1
+    image: danlynn/ember-cli:5.12.0-node_20.18
     commands:
       - npm ci
   lint-js:
@@ -19,12 +19,12 @@ steps:
     commands:
       - npm run lint:prettier
   dependency-lint:
-    image: danlynn/ember-cli:4.12.1
+    image: danlynn/ember-cli:5.12.0-node_20.18
     group: lint
     commands:
       - npm run lint:deps
   test:
-    image: danlynn/ember-cli:4.12.1
+    image: danlynn/ember-cli:5.12.0-node_20.18
     commands:
       - npm run test:ember
 when:
