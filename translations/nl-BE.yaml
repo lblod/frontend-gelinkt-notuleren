@@ -817,7 +817,7 @@ copy-options:
   heading: 'Kopieer onderdelen uit:'
   disclaimer: 'De opmaak van het document zal afhangen van de applicatie waarin het geüpload wordt.'
   copy-all: Kopieer volledig besluit
-  copy-rb: Copy full reglementaire bijlagen
+  copy-rb: Kopieer volledige reglementaire bijlage
   copying: kopiëren
   completed: gekopieerd
   copy-part: 'Kopieer {part}'
