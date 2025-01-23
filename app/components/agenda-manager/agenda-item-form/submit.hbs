@@ -1,3 +1,7 @@
-<AuButton @loading={{@loading}} {{on 'click' @submit}}>
+<AuButton
+  @loading={{@loading}}
+  @loadingMessage={{t 'application.loading'}}
+  {{on 'click' @submit}}
+>
   {{yield}}
 </AuButton>

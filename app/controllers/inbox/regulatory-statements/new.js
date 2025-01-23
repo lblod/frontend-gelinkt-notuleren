@@ -20,7 +20,7 @@ export default class InboxRegulatoryStatementsNewController extends Controller {
 
   @action
   cancelCreation() {
-    this.router.transitionTo('inbox.regulatory-statements');
+    this.router.legacyTransitionTo('inbox.regulatory-statements');
   }
 
   get templateOptions() {

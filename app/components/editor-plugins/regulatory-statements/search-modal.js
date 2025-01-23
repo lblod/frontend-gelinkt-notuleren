@@ -44,7 +44,7 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
       },
       sort: ':no-case:current-version.title',
     });
-    this.regulatoryStatements.push(...regulatoryStatements.toArray());
+    this.regulatoryStatements.push(...regulatoryStatements.slice());
     if (regulatoryStatements.meta.count <= this.regulatoryStatements.length) {
       this.showLoadMore = false;
     } else {
@@ -68,7 +68,7 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
   }
 
   get selectedStatement() {
-    return this._selectedStatement ?? this.regulatoryStatements?.firstObject;
+    return this._selectedStatement ?? this.regulatoryStatements?.[0];
   }
 
   isInserted = (statement) => this.includedStatements.includes(statement.uri);

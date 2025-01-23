@@ -53,7 +53,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
       pageResults.forEach((result) => agendaItems.push(result));
       pageNumber++;
     }
-    this.items = tracked(agendaItems.sortBy('position'));
+    agendaItems.sort((a, b) => a.position - b.position);
+    this.items = tracked(agendaItems);
   });
 
   /**

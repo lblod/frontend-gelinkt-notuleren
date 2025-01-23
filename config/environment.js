@@ -20,6 +20,10 @@ module.exports = function (environment) {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
+      // It doesn't look like we're making use of any prototype extensions in our code any more, but
+      // ember-drag-drop (v1.0.0) makes use of `.reset()`, so we can't turn this off until that lib
+      // has been updated. We should also keep an eye out for deprecations in our or other lib code.
+      // EXTEND_PROTOTYPES: false,
     },
     APP: {
       '@lblod/ember-rdfa-editor-date-plugin': {

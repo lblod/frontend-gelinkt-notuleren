@@ -15,6 +15,7 @@
     >{{t 'meetings.delete.confirm-button'}}</AuButton>
     <AuButton
       @loading={{this.deleteMeeting.isRunning}}
+      @loadingMessage={{t 'application.loading'}}
       @disabled={{this.deleteMeeting.isRunning}}
       @skin='secondary'
       {{on 'click' @closeModal}}

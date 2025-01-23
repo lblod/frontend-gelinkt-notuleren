@@ -51,6 +51,7 @@
           @icon='upload'
           @iconAlignment='left'
           @loading={{@loading}}
+          @loadingMessage={{t 'application.loading'}}
           @disabled={{or (not this.currentSession.canPublish) @loading}}
         >
           {{t 'timeline-step.publish-notify-button-label' name=@name}}
@@ -61,6 +62,7 @@
           @icon='upload'
           @iconAlignment='left'
           @loading={{@loading}}
+          @loadingMessage={{t 'application.loading'}}
           @disabled={{or (not this.currentSession.canPublish) @loading}}
         >
           {{t 'timeline-step.publish-button-label' name=@name}}

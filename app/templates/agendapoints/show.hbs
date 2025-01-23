@@ -57,14 +57,13 @@
             {{#if this.copyAgendapunt.isRunning}}
               <div class='au-c-scanner'>
                 <div class='au-c-scanner__text'>
-                  <AuLoader @padding='small' />
-                  <AuHelpText @size='large'>
+                  <AuLoader>
                     {{#if this.saveTask.isRunning}}
                       {{t 'agendapoint.saving'}}
                     {{else}}
                       {{t 'agendapoint.making-copy'}}
                     {{/if}}
-                  </AuHelpText>
+                  </AuLoader>
                 </div>
                 <span class='au-c-scanner__bar'></span>
               </div>

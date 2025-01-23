@@ -1,6 +1,6 @@
 steps:
   changeset:
-    image: danlynn/ember-cli:4.12.1
+    image: danlynn/ember-cli:5.12.0-node_20.18
     commands:
       - git fetch origin master
       - git diff -wb --name-only origin/master..HEAD | grep "\.changeset/.*\.md"

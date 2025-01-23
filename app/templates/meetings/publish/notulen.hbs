@@ -94,21 +94,14 @@
               @name='notulen'
               @confirm={{perform this.createPublishedResource}}
               @cancel={{fn (mut this.showPublishingModal) false}}
+              @loading={{this.createPublishPreview.isRunning}}
             >
-              {{#if this.createPublishPreview.isIdle}}
-                {{html-safe this.preview}}
-              {{else}}
-                <AuHelpText @size='large'>{{t
-                    'publish.loading-message'
-                  }}</AuHelpText>
-                <AuLoader @padding='small' />
-              {{/if}}
+              {{html-safe this.preview}}
             </Signatures::PublicationConfirmation>
           {{/if}}
         {{/if}}
       {{else}}
-        <AuHelpText @size='large'>{{t 'publish.loading-message'}}</AuHelpText>
-        <AuLoader @padding='small' />
+        <AuLoader>{{t 'application.loading'}}</AuLoader>
       {{/if}}
     </c.content>
   </AuCard>

@@ -21,6 +21,6 @@ export default class ZittingModel extends Model {
   afwezigenBijStart;
   @hasMany('intermission', { inverse: 'zitting', async: true, as: 'zitting' })
   intermissions;
-  @hasMany('publishing-log', { inverse: 'zitting', async: true })
+  @hasMany('publishing-log', { inverse: 'zitting', async: true, as: 'zitting' })
   publishingLogs;
 }

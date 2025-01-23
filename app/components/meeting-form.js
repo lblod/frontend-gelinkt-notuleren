@@ -32,7 +32,7 @@ export default class MeetingForm extends Component {
       'filter[:has:published-resource]': 'yes',
       'fields[versioned-notulen]': 'id',
     });
-    return !!publishedNotulen.firstObject;
+    return !!publishedNotulen[0];
   });
 
   canBeDeleted = trackedFunction(this, async () => {
@@ -84,7 +84,7 @@ export default class MeetingForm extends Component {
       'filter[:or:][:has-no:deleted]': 'yes',
     });
 
-    const arraySignedResources = signedResources.toArray();
+    const arraySignedResources = signedResources.slice();
 
     return !!arraySignedResources.length;
   });
@@ -139,19 +139,22 @@ export default class MeetingForm extends Component {
 
   meetingDetailsTask = restartableTask(async () => {
     const bestuursorgaan = await this.zitting.bestuursorgaan;
-    const specialisedBestuursorgaan =
-      await bestuursorgaan.isTijdsspecialisatieVan;
-    const classification = await specialisedBestuursorgaan.classificatie;
-    const headerArticleTranslationString =
-      articlesBasedOnClassifcationMap[classification.uri];
-    const secretaris = await this.zitting.secretaris;
-    const voorzitter = await this.zitting.voorzitter;
-    return {
-      bestuursorgaan,
-      headerArticleTranslationString,
-      secretaris,
-      voorzitter,
-    };
+    // Can only be null in odd cases, such as while the zitting is being deleted
+    if (bestuursorgaan) {
+      const specialisedBestuursorgaan =
+        await bestuursorgaan.isTijdsspecialisatieVan;
+      const classification = await specialisedBestuursorgaan.classificatie;
+      const headerArticleTranslationString =
+        articlesBasedOnClassifcationMap[classification.uri];
+      const secretaris = await this.zitting.secretaris;
+      const voorzitter = await this.zitting.voorzitter;
+      return {
+        bestuursorgaan,
+        headerArticleTranslationString,
+        secretaris,
+        voorzitter,
+      };
+    }
   });
   meetingDetailsData = trackedTask(this, this.meetingDetailsTask, () => [
     this.zitting.secretaris,
@@ -239,7 +242,7 @@ export default class MeetingForm extends Component {
     return this.possibleParticipantsData.value ?? [];
   }
   fetchTreatments = task(async () => {
-    this.behandelingen.clear();
+    this.behandelingen.splice(0, this.behandelingen.length);
     if (!this.zitting.id) {
       return null;
     }

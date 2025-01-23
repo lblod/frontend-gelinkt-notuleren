@@ -4,9 +4,15 @@ export default class PublishingLogs extends Model {
   @attr action;
   @attr('date') date;
 
-  @belongsTo('signed-resource', { async: true }) signedResource;
-  @belongsTo('published-resource', { async: true }) publishedResource;
+  @belongsTo('signed-resource', { async: true, inverse: null }) signedResource;
+  @belongsTo('published-resource', { async: true, inverse: null })
+  publishedResource;
 
-  @belongsTo('gebruiker', { async: true }) user;
-  @belongsTo('zitting', { async: true, polymorphic: true }) zitting;
+  @belongsTo('gebruiker', { async: true, inverse: null }) user;
+  @belongsTo('zitting', {
+    async: true,
+    polymorphic: true,
+    inverse: 'publishingLogs',
+  })
+  zitting;
 }

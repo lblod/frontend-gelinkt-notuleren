@@ -1,7 +1,6 @@
 <div class='au-o-box'>
   {{#if this.initializeBesluitenLijst.isRunning}}
-    <AuHelpText @size='large'>{{t 'publish.loading-message'}}</AuHelpText>
-    <AuLoader @padding='small' />
+    <AuLoader>{{t 'application.loading'}}</AuLoader>
   {{else if this.error}}
     <AuAlert
       @icon='cross'

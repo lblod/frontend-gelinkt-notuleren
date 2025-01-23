@@ -28,6 +28,17 @@ module.exports = {
     'getter-return': ['error', { allowImplicit: true }],
   },
   overrides: [
+    {
+      files: ['**/*.gjs'],
+      parser: 'ember-eslint-parser',
+      plugins: ['ember'],
+      extends: [
+        'eslint:recommended',
+        'plugin:ember/recommended',
+        'plugin:ember/recommended-gts',
+        'plugin:prettier/recommended',
+      ],
+    },
     // node files
     {
       files: [

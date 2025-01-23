@@ -125,6 +125,7 @@
           <AuButton
             @skin='secondary'
             @loading={{this.isLoading}}
+            @loadingMessage={{t 'application.loading'}}
             {{on 'click' this.goToPublish}}
           >
             {{t 'meeting-form.publish-button'}}
@@ -245,8 +246,7 @@
       {{#if this.bestuursorgaan}}
 
         {{#if this.fetchParticipants.isRunning}}
-          <AuLoader @padding='small' />
-          <AuHelpText>{{t 'participation-list.loading-title'}}</AuHelpText>
+          <AuLoader>{{t 'participation-list.loading-title'}}</AuLoader>
         {{else}}
           {{#unless @focused}}
             {{! Participation list }}
@@ -323,8 +323,7 @@
             id='sectionFive'
           >
             {{#if this.fetchTreatments.isRunning}}
-              <AuLoader @padding='small' />
-              <AuHelpText>{{t 'participation-list.loading-loader'}}</AuHelpText>
+              <AuLoader>{{t 'participation-list.loading-loader'}}</AuLoader>
             {{else}}
               <ol class='au-c-meeting-numbered-list'>
                 {{#each this.behandelingen as |behandeling|}}

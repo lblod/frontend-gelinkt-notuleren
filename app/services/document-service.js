@@ -115,7 +115,7 @@ export default class DocumentService extends Service {
             'filter[:uri:]': uri,
             include: 'is-part-of',
           })
-        ).firstObject;
+        )[0];
         return part;
       }),
     );

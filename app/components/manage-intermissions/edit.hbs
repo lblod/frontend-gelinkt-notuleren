@@ -25,7 +25,7 @@
           />
         </div>
         <div>
-          {{#if @zitting.agendapunten}}
+          {{#if @zitting.agendapunten.length}}
             <AuLabel>{{t 'manage-intermissions.position'}}</AuLabel>
             <div class='au-o-grid au-o-grid--tiny'>
               <div class='au-o-grid__item au-u-1-2'>
@@ -56,7 +56,7 @@
                       'manage-agenda-zitting-modal-move.search-placeholder'
                     }}
                     @verticalPosition='above'
-                    @options={{sort-by 'position' @zitting.agendapunten}}
+                    @options={{this.agendaOptions}}
                     @searchField='titel'
                     @selected={{this.selectedAp}}
                     @onChange={{this.selectAp}}
@@ -98,6 +98,7 @@
               @alert={{true}}
               @skin='secondary'
               @loading={{this.deleteTask.isRunning}}
+              @loadingMessage={{t 'application.loading'}}
               @icon='bin'
               @iconAlignment='left'
               {{on 'click' (perform this.deleteTask @intermissionToEdit)}}
@@ -107,6 +108,7 @@
           {{/unless}}
           <AuButton
             @loading={{this.saveIntermission.isRunning}}
+            @loadingMessage={{t 'application.loading'}}
             {{on 'click' (perform this.saveIntermission)}}
           >
             {{#if @intermissionToEdit.isNew}}

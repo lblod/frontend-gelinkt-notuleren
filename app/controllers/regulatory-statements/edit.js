@@ -300,7 +300,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       },
       autofilledVariable: {
         autofilledValues: {
-          administrativeUnit: `${this.currentSession.classificatie.label} ${this.currentSession.group.naam}`,
+          administrativeUnit: `${this.currentSession.classificatie?.label} ${this.currentSession.group?.naam}`,
         },
       },
     };

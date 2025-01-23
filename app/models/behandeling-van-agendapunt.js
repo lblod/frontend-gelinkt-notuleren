@@ -40,7 +40,6 @@ export default class BehandelingVanAgendapunt extends Model {
     inverse: 'behandelingVanAgendapunt',
     defaultPageSize: 1000,
     async: true,
-    polymorphic: true,
   })
   stemmingen;
 

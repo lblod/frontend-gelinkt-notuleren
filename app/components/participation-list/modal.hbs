@@ -32,7 +32,9 @@
           as |Table|
         >
           {{#if @loading}}
-            <td colspan='4'><AuLoader /></td>
+            <td colspan='4'><AuLoader @hideMessage={{true}}>{{t
+                  'application.loading'
+                }}</AuLoader></td>
           {{else}}
             {{#each this.participants as |participant|}}
               <Table.Row

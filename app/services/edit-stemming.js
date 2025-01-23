@@ -43,17 +43,17 @@ export default class EditStemmingService extends Service {
         }
       }
     }
-    this._stemming.stemmers.setObjects(stemmers);
-    this._stemming.onthouders.setObjects(onthouders);
+    this._stemming.stemmers = stemmers;
+    this._stemming.onthouders = onthouders;
     if (!this._stemming.geheim) {
-      this._stemming.voorstanders.setObjects(voorstanders);
-      this._stemming.tegenstanders.setObjects(tegenstanders);
+      this._stemming.voorstanders = voorstanders;
+      this._stemming.tegenstanders = tegenstanders;
       this._stemming.aantalOnthouders = onthouders.length;
       this._stemming.aantalVoorstanders = voorstanders.length;
       this._stemming.aantalTegenstanders = tegenstanders.length;
     } else {
-      this._stemming.voorstanders.clear();
-      this._stemming.tegenstanders.clear();
+      this._stemming.voorstanders = [];
+      this._stemming.tegenstanders = [];
     }
     await this._stemming.save();
   });
@@ -61,12 +61,12 @@ export default class EditStemmingService extends Service {
   fetchVoters = task(async () => {
     if (this._stemming.isNew) {
       const aanwezigen = await Promise.all(
-        this._stemming.aanwezigen.map(async (aanwezige) => {
+        (await this._stemming.aanwezigen).map(async (aanwezige) => {
           const queryResult = await this.store.query('mandataris', {
             'filter[:id:]': aanwezige.id,
             include: 'is-bestuurlijke-alias-van',
           });
-          return queryResult.firstObject;
+          return queryResult[0];
         }),
       );
       aanwezigen.forEach((aanwezige) =>
@@ -81,7 +81,7 @@ export default class EditStemmingService extends Service {
             'aanwezigen.is-bestuurlijke-alias-van,stemmers.is-bestuurlijke-alias-van,onthouders.is-bestuurlijke-alias-van,voorstanders.is-bestuurlijke-alias-van,tegenstanders.is-bestuurlijke-alias-van',
           page: { size: 100 },
         })
-      ).firstObject;
+      )[0];
 
       const aanwezigen = stemming.aanwezigen;
 

@@ -30,7 +30,7 @@ export default class manageIntermissionsComponent extends Component {
   }
 
   fetchIntermissions = task(async () => {
-    this.intermissions = await this.args.zitting.get('intermissions');
+    this.intermissions = await this.args.zitting.intermissions;
   });
 
   @action

@@ -187,7 +187,7 @@ export default class DecisionCopyParts extends Component {
                       {{part.translatedLabel}}
                     </div>
                     <div class='gn-meeting-copy--structure-content'>
-                      {{(htmlSafer part.content)}}
+                      {{htmlSafer part.content}}
                     </div>
                   </div>
                   <div class='gn-meeting-copy--section-button'>
@@ -200,7 +200,7 @@ export default class DecisionCopyParts extends Component {
               </div>
             {{else}}
               <div class='gn-meeting-copy--structure-content'>
-                {{(htmlSafer section.content)}}
+                {{htmlSafer section.content}}
               </div>
             {{/each}}
           </div>
