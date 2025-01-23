@@ -1,5 +1,29 @@
 # frontend-gelinkt-notuleren
 
+## 5.48.0
+
+### Minor Changes
+
+- [#807](https://github.com/lblod/frontend-gelinkt-notuleren/pull/807) [`57ff0dc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/57ff0dc5f134fdcd91d2fb3f96f62cd1218b6cc7) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to Ember 5.8
+
+- [#799](https://github.com/lblod/frontend-gelinkt-notuleren/pull/799) [`5f8a42e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5f8a42e9a57361e1960fd0f8955ea702067303df) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Added copy parts to the regulatory statements
+
+- [#807](https://github.com/lblod/frontend-gelinkt-notuleren/pull/807) [`5e9fbf6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5e9fbf68469864520e70e3c338458c3cc68edc82) Thanks [@piemonkey](https://github.com/piemonkey)! - Upgrade to Ember 5.12
+
+- Fix most deprecations introduced in Ember 5
+
+### Patch Changes
+
+- [#812](https://github.com/lblod/frontend-gelinkt-notuleren/pull/812) [`22f9d09`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/22f9d0910ae9b8bdb3b98c1614e950c8b5cf08e9) Thanks [@elpoelma](https://github.com/elpoelma)! - Move to builtin `ember.js` types
+
+- [#807](https://github.com/lblod/frontend-gelinkt-notuleren/pull/807) [`318c0e0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/318c0e0e31bbb9c6fb34fad34f86433d56821d43) Thanks [@piemonkey](https://github.com/piemonkey)! - Update @lblod/ember-rdfa-editor-lblod-plugins to 26.4.0
+
+- [#792](https://github.com/lblod/frontend-gelinkt-notuleren/pull/792) [`8b35aa9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8b35aa91f91483abbf26f9e3a307762240ee7d56) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Wait until everything has loaded to setup plugins, schema and nodeviews
+
+- [#812](https://github.com/lblod/frontend-gelinkt-notuleren/pull/812) [`22f9d09`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/22f9d0910ae9b8bdb3b98c1614e950c8b5cf08e9) Thanks [@elpoelma](https://github.com/elpoelma)! - Introduce updated `ember-data` types
+
+- [`0a2ce86`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a2ce861dc01a4bc83f437bf88ef2c58489d59bf) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version 10.11.1
+
 ## 5.47.2
 
 ### Patch Changes
