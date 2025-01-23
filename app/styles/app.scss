@@ -47,8 +47,12 @@
 @import 'mandatee-table-plugin';
 @import 'project/p-annotations'; // @TODO: refactor in ember-rdfa-editor
 
-// give treatment (behandeling) content the same style as other say-documents
+// give treatment (behandeling) content and the copy-parts content the same style as other say-documents
 .c-template-content--treatment {
+  @include say-content();
+}
+
+.gn-meeting-copy--structure-content {
   @include say-content();
 }
 

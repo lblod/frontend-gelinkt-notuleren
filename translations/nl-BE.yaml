@@ -214,6 +214,7 @@ inbox:
   regulatory-statements:
     return: Terug naar overzicht reglementaire bijlagen
     revisions-return: Terug naar actuele versie
+    return-to-edit: Terug naar bewerken
     page-title: Reglementaire bijlagen
     search-placeholder: Zoek op titel van reglementaire bijlage
     no-data-message: Geen reglementaire bijlagen
@@ -816,6 +817,7 @@ copy-options:
   heading: 'Kopieer onderdelen uit:'
   disclaimer: 'De opmaak van het document zal afhangen van de applicatie waarin het geüpload wordt.'
   copy-all: Kopieer volledig besluit
+  copy-rb: Kopieer volledige reglementaire bijlage
   copying: kopiëren
   completed: gekopieerd
   copy-part: 'Kopieer {part}'
@@ -825,3 +827,10 @@ copy-options:
     description: Beschrijving
     motivation: Motivering
     ruling: Beslissing
+  regulatory-statements:
+    title: Titel
+    chapter: Hoofdstuk
+    section: Afdeling
+    subsection: Onderafdeling
+    article: Artikel
+    paragraph: Paragraaf

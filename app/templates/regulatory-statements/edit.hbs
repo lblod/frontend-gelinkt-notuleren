@@ -89,6 +89,14 @@
         @document={{this.editorDocument}}
         @forPublish={{true}}
       />
+      <AuLink
+        @route='regulatory-statements.copy'
+        @model={{this.documentContainer.id}}
+        role='menuitem'
+      >
+        <AuIcon @icon='copy' @alignment='left' />
+        {{t 'agendapoint.copy-parts-link'}}
+      </AuLink>
     </AuDropdown>
     <AuButton
       {{on 'click' (perform this.saveTask)}}
