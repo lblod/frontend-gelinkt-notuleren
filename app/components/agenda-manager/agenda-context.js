@@ -151,7 +151,8 @@ export default class AgendaManagerAgendaContextComponent extends Component {
    * Handles a rearrangement of the this.items array
    * Takes the array index as source of truth.
    */
-  onSortTask = task(async () => {
+  onSortTask = task(async (items) => {
+    this.items = tracked(items);
     await this.repairPositionsTask.unlinked().perform();
     await this.saveItemsTask.unlinked().perform();
   });
