@@ -6,10 +6,6 @@ import { inject as service } from '@ember/service';
 import { concat } from '@ember/helper';
 import update from 'frontend-gelinkt-notuleren/utils/copy-parts-update';
 
-function htmlSafer(text) {
-  return htmlSafe(text);
-}
-
 function getDestinationElement(content) {
   return document.getElementById(content.replaceId);
 }

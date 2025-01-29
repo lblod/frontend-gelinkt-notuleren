@@ -61,6 +61,5 @@ export default function update(sectionContent, level, intl) {
   let outerHTML = parsed.firstElementChild.outerHTML;
   outerHTML = outerHTML.replace('<html><head></head><body>', '');
   outerHTML = outerHTML.replace('</body></html>', '');
-  const outerHTMLSplited = outerHTML.split('say-rb-copy-replace-by');
   return { html: outerHTML, sections: mappedSections };
 }
