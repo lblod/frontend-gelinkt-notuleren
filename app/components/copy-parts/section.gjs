@@ -6,6 +6,14 @@ import { inject as service } from '@ember/service';
 import { concat } from '@ember/helper';
 import update from 'frontend-gelinkt-notuleren/utils/copy-parts-update';
 
+function htmlSafer(text) {
+  return htmlSafe(text);
+}
+
+function getDestinationElement(content) {
+  return document.getElementById(content.replaceId);
+}
+
 export default class Section extends Component {
   @service intl;
   @trackedReset({
@@ -17,7 +25,6 @@ export default class Section extends Component {
     this.args.section.level + 1,
     this.intl,
   );
-
   <template>
     <div class='gn-meeting-copy--section-container'>
       <div class='gn-meeting-copy--structure'>
@@ -25,14 +32,12 @@ export default class Section extends Component {
           {{@section.label}}
         </div>
         <div class='gn-meeting-copy--structure-content'>
-          {{#each this.content as |content|}}
-            {{#if content.isSection}}
+          {{htmlSafe this.content.html}}
+
+          {{#each this.content.sections as |content|}}
+            {{#in-element (getDestinationElement content)}}
               <Section @section={{content}} />
-            {{else}}
-
-              {{htmlSafe content}}
-
-            {{/if}}
+            {{/in-element}}
           {{/each}}
         </div>
       </div>

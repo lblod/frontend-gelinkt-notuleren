@@ -1,10 +1,11 @@
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
 import SECTIONS from 'frontend-gelinkt-notuleren/utils/rb-sections';
+import { v4 as uuid } from 'uuid';
 
 // In the future we should rely on the prosemirror nodespecs instead of the dom targeting we are doing
 export default function update(sectionContent, level, intl) {
   const parser = new DOMParser();
-  const parsed = parser.parseFromString(
+  let parsed = parser.parseFromString(
     stripHtmlForPublish(sectionContent),
     'text/html',
   );
@@ -40,10 +41,10 @@ export default function update(sectionContent, level, intl) {
         // callbacks, it's easy to accidentally mutate `contentElement`. For example when appending
         // parts of the content to a 'container' element.
         // We replace the content by this key in order to know where to split the content, and where to render the different sections
-        element.parentNode.replaceChild(
-          document.createTextNode(`say-rb-copy-replace-by`),
-          element,
-        );
+        const replaceId = `say-rb-copy-replace-by-${uuid()}`;
+        const div = document.createElement('div');
+        div.setAttribute('id', replaceId);
+        element.parentNode.replaceChild(div, element);
 
         const contentHtml = contentElement.outerHTML;
         return {
@@ -52,20 +53,14 @@ export default function update(sectionContent, level, intl) {
           childTypes,
           isSection: true,
           level: level,
+          replaceId,
         };
       });
     },
   );
-
-  const outerHTML = parsed.firstElementChild.outerHTML.split(
-    'say-rb-copy-replace-by',
-  );
-  const content = [];
-  for (let i = 0; i < outerHTML.length; i++) {
-    content.push(outerHTML[i]);
-    if (mappedSections[i]) {
-      content.push(mappedSections[i]);
-    }
-  }
-  return content;
+  let outerHTML = parsed.firstElementChild.outerHTML;
+  outerHTML = outerHTML.replace('<html><head></head><body>', '');
+  outerHTML = outerHTML.replace('</body></html>', '');
+  const outerHTMLSplited = outerHTML.split('say-rb-copy-replace-by');
+  return { html: outerHTML, sections: mappedSections };
 }
