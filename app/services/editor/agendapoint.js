@@ -172,7 +172,7 @@ export default class AgendapointEditorService extends Service {
       roadsignRegulation: {
         endpoint: ENV.mowRegistryEndpoint,
         imageBaseUrl: ENV.roadsignImageBaseUrl,
-        articleUriGenrator: articleUriGenerator,
+        articleUriGenerator,
       },
       besluitType: {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
