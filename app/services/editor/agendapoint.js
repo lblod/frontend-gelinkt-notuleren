@@ -129,6 +129,8 @@ export default class AgendapointEditorService extends Service {
   get config() {
     const classificatie = this.currentSession.classificatie;
     const municipality = this.currentSession.group;
+    const articleUriGenerator = () =>
+      `http://data.lblod.info/artikels/${uuidv4()}`;
     return {
       date: {
         formats: [
@@ -170,6 +172,7 @@ export default class AgendapointEditorService extends Service {
       roadsignRegulation: {
         endpoint: ENV.mowRegistryEndpoint,
         imageBaseUrl: ENV.roadsignImageBaseUrl,
+        articleUriGenerator,
       },
       besluitType: {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
@@ -216,7 +219,10 @@ export default class AgendapointEditorService extends Service {
         },
       },
       insertArticle: {
-        uriGenerator: () => `http://data.lblod.info/artikels/${uuidv4()}`,
+        uriGenerator: articleUriGenerator,
+      },
+      decisionPlugin: {
+        articleUriGenerator,
       },
       ...this.adminUnitConfig,
     };

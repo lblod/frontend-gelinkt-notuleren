@@ -23,6 +23,7 @@
   },
   "exclude": ["node_modules", "dist"],
   "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
+    "environment": ["ember-loose", "ember-template-imports"],
+    "checkStandaloneTemplates": false
   }
 }

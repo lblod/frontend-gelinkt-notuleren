@@ -1,15 +1,8 @@
-<SortableObjects
-  @tagName='tbody'
-  @sortEndAction={{@onSort}}
-  @sortableObjectList={{@items}}
-  @enableSort={{true}}
-  @useSwap={{true}}
-  @inPlace={{true}}
->
+<tbody {{sortable-group onChange=@onSort}}>
   {{yield
     (hash
       Row=(component 'agenda-manager/agenda-table/row' readOnly=@readOnly)
       Empty=(component 'agenda-manager/agenda-table/empty' onCreate=@onCreate)
     )
   }}
-</SortableObjects>
+</tbody>

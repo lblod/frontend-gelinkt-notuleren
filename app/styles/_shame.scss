@@ -40,18 +40,6 @@ body {
   padding-bottom: $au-unit-tiny;
 }
 
-// Drag button
-.au-c-button--drag {
-  cursor: grab;
-  text-decoration: none;
-
-  .au-c-icon {
-    width: 1.75rem;
-    height: 1.75rem;
-    bottom: 0;
-  }
-}
-
 // Data table quick fix
 // @TODO port to appuniversum
 .au-c-data-table__header th {

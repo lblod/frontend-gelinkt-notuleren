@@ -1,0 +1,23 @@
+tr.sortable-item {
+  transition: all 0.125s;
+}
+
+tr.sortable-item.is-dragging {
+  transition-duration: 0s;
+  z-index: 10;
+}
+
+.drag-handle {
+  cursor: grab;
+  color: var(--au-blue-700);
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 0.6rem;
+}
+
+.drag-handle__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+}

@@ -174,7 +174,10 @@
     </:sidebarCollapsible>
     <:sidebar>
       <this.StructureControlCard @controller={{this.controller}} />
-      <DecisionPlugin::DecisionPluginCard @controller={{this.controller}} />
+      <DecisionPlugin::DecisionPluginCard
+        @controller={{this.controller}}
+        @options={{this.config.decisionPlugin}}
+      />
       <CitationPlugin::CitationCard
         @controller={{this.controller}}
         @config={{this.config.citation}}
