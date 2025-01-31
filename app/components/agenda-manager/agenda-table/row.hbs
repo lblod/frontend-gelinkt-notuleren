@@ -22,12 +22,12 @@
     </td>
   </tr>
 {{else}}
-  <DraggableObject @tagName='tr' @content={{@item}} @isSortable={{true}}>
+  <tr {{sortable-item model=@item}}>
     <td>
-      <AuButton @skin='link' class='au-c-button--drag'>
-        <AuIcon @icon='drag' class='au-u-hide-on-print' />
+      <span class='drag-handle' {{sortable-handle}}>
+        <AuIcon @icon='drag' class='au-u-hide-on-print drag-handle__icon' />
         {{add @item.position 1}}
-      </AuButton>
+      </span>
     </td>
     <td>
       <AuButton
@@ -45,5 +45,5 @@
         (t 'manage-agenda-zitting-modal.gepland-openbaar-false-label')
       }}
     </td>
-  </DraggableObject>
+  </tr>
 {{/if}}

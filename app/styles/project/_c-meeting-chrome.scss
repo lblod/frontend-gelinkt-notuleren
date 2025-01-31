@@ -273,7 +273,7 @@
   position: relative;
   min-width: 50rem;
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
   margin-bottom: -0.1rem;
 
   strong {
@@ -291,9 +291,9 @@
     @include au-font-size($au-base, 1.2);
   }
 
-  tbody tr {
-    border-bottom: 0.1rem solid $au-gray-300;
+  tr {
     background-color: $au-gray-100;
+    position: relative;
   }
 
   th {
@@ -313,6 +313,7 @@
 
   th,
   td {
+    border-bottom: 0.1rem solid $au-gray-300;
     max-width: 55ch;
     position: relative;
     vertical-align: middle;
