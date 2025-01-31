@@ -618,6 +618,7 @@ required-field:
 regulatory-statement:
   page-title: Regulatory statement
   history: History
+  copy-parts-link: Copy regulatory statement parts
 
 signature-confirmation:
   modal-title: 'Confirm signing of '

@@ -622,6 +622,7 @@ required-field:
 regulatory-statement:
   page-title: Reglementaire bijlage
   history: Historiek
+  copy-parts-link: Kopieer reglementaire bijlage en onderdelen
 
 signature-confirmation:
   modal-title: 'Bevestig ondertekenen van '
