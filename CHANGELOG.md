@@ -1,5 +1,19 @@
 # frontend-gelinkt-notuleren
 
+## 5.48.1
+
+### Patch Changes
+
+- [#821](https://github.com/lblod/frontend-gelinkt-notuleren/pull/821) [`784bd07`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/784bd07eee76bd7460c543d9078da83239430be9) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix rb copy parts in ember 5
+
+- [#820](https://github.com/lblod/frontend-gelinkt-notuleren/pull/820) [`36977a5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/36977a583dc25dae590e13b18fab489aea34c0f2) Thanks [@elpoelma](https://github.com/elpoelma)! - Rework meeting agenda table using `ember-sortable` package
+
+- [#823](https://github.com/lblod/frontend-gelinkt-notuleren/pull/823) [`b248ba9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b248ba918718e9d2c4cf4d387bfa1acd2ab4e2fd) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [10.11.2](https://github.com/lblod/ember-rdfa-editor/releases/tag/v10.11.2). This version fixes issues related to the preservation of selections.
+
+- [#822](https://github.com/lblod/frontend-gelinkt-notuleren/pull/822) [`47374a9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/47374a977e9346c2a7e6ee3d18a0e98b4222308f) Thanks [@elpoelma](https://github.com/elpoelma)! - Ensure both the 'Insert traffic measure' and 'Insert article block' functionalities insert decision articles with correctly defined URIs (not placeholder URIs)
+
+- [#824](https://github.com/lblod/frontend-gelinkt-notuleren/pull/824) [`7c7cc66`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7c7cc66cbf2db6cd927a65d901958368d8a6ecc7) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [26.5.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v26.5.0)
+
 ## 5.48.0
 
 ### Minor Changes
