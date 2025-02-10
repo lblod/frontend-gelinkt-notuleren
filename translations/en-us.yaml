@@ -791,7 +791,7 @@ download:
     besluitenlijst: Download decision list as HTML
     notulen: Download meeting as HTML
     agendapunt: Download agendapoint
-    besluit: Download decision
+    document: Download decision
     agenda-downloading: Downloading Agenda
     agenda-downloaded: Agenda downloaded
     besluitenlijst-downloading: Downloading decision list
