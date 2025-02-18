@@ -127,7 +127,8 @@
   >
     <:toolbar>
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
-      <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}} />
+      {{! Disabled as it is currently non-functional }}
+      {{!-- <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}} /> --}}
     </:toolbar>
     <:sidebarCollapsible>
       <ArticleStructurePlugin::ArticleStructureCard
@@ -170,7 +171,7 @@
       {{/if}}
     </:sidebarCollapsible>
     <:sidebar>
-      <ArticleStructurePlugin::StructureCard
+      <this.StructureControlCard
         @controller={{this.controller}}
         @options={{this.config.structures}}
       />
