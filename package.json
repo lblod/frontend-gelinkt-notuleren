@@ -62,8 +62,8 @@
     "@lblod/ember-acmidm-login": "^2.1.0",
     "@lblod/ember-environment-banner": "^0.6.0",
     "@lblod/ember-mock-login": "^0.10.0",
-    "@lblod/ember-rdfa-editor": "10.11.2",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "26.5.0",
+    "@lblod/ember-rdfa-editor": "10.11.3-dev.19b78a1110c284a94cc3124d4e2f40a8f973d109",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "26.5.0-dev.1f6453d3676544f1802cd665fab388529d7a2446",
     "@lblod/template-uuid-instantiator": "^1.0.3",
     "@nullvoxpopuli/ember-composable-helpers": "^5.2.6",
     "@release-it-plugins/lerna-changelog": "^6.0.0",
@@ -145,6 +145,7 @@
       "@floating-ui/dom": "^1.6.5"
     },
     "@lblod/ember-rdfa-editor-lblod-plugins": {
+      "@lblod/ember-rdfa-editor": "$@lblod/ember-rdfa-editor",
       "ember-concurrency": "$ember-concurrency"
     },
     "babel-plugin-ember-template-compilation": "^2.2.5",
