@@ -91,7 +91,6 @@
   <RdfaEditorContainer
     @rdfaEditorInit={{this.handleRdfaEditorInit}}
     @typeOfWrappingDiv='besluit:BehandelingVanAgendapunt'
-    @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{this.isBusy}}
     @busyText={{this.busyText}}
@@ -100,7 +99,6 @@
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
     @shouldEditRdfa={{false}}
-    @shouldShowRdfa={{true}}
   >
     <:toolbar>
       <BesluitTypePlugin::ToolbarDropdown

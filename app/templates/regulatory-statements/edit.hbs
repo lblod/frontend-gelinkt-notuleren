@@ -114,7 +114,6 @@
   <RdfaEditorContainer
     @rdfaEditorInit={{this.handleRdfaEditorInit}}
     @typeOfWrappingDiv='lblodgn:ReglementaireBijlage'
-    @showToggleRdfaAnnotations={{true}}
     @editorDocument={{this.editorDocument}}
     @busy={{or this.saveTask.isRunning}}
     @busyText={{t 'rdfa-editor-container.saving'}}
@@ -123,7 +122,6 @@
     @nodeViews={{this.nodeViews}}
     @plugins={{this.plugins}}
     @shouldEditRdfa={{false}}
-    @shouldShowRdfa={{true}}
   >
     <:toolbar>
       <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
