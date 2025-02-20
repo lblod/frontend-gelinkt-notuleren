@@ -117,11 +117,7 @@ export default class MeetingsEditManualVotingController extends Controller {
   });
 
   editorOptions = {
-    showToggleRdfaAnnotations: false,
     showInsertButton: false,
-    showRdfa: false,
-    showRdfaHighlight: false,
-    showRdfaHover: false,
     showPaper: true,
     showSidebar: true,
   };
