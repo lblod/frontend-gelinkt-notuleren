@@ -4,8 +4,6 @@ import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { use } from 'ember-could-get-used-to-this';
-import RelationshipResource from '../helpers/relationship-resource';
 import { trackedFunction } from 'reactiveweb/function';
 import InstallatieVergaderingModel from '../models/installatievergadering';
 import { PLANNED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
@@ -36,26 +34,21 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   @service documentService;
   @service currentSession;
 
-  /** @type {RelationshipResourceValue} */
-  @use meetingChairmanData = new RelationshipResource(() => [
-    this.args.meeting,
-    'voorzitter',
-  ]);
-  /** @type {RelationshipResourceValue} */
-  @use meetingSecretaryData = new RelationshipResource(() => [
-    this.args.meeting,
-    'secretaris',
-  ]);
-  /** @type {RelationshipResourceValue} */
-  @use meetingParticipantsData = new RelationshipResource(() => [
-    this.args.meeting,
-    'aanwezigenBijStart',
-  ]);
-  /** @type {RelationshipResourceValue} */
-  @use meetingAbsenteeData = new RelationshipResource(() => [
-    this.args.meeting,
-    'afwezigenBijStart',
-  ]);
+  meetingChairmanRequest = trackedFunction(this, async () => {
+    return this.args.meeting.voorzitter;
+  });
+
+  meetingSecretaryRequest = trackedFunction(this, async () => {
+    return this.args.meeting.secretaris;
+  });
+
+  meetingParticipantsRequest = trackedFunction(this, async () => {
+    return this.args.meeting.aanwezigenBijStart;
+  });
+
+  meetingAbsenteesRequest = trackedFunction(this, async () => {
+    return this.args.meeting.afwezigenBijStart;
+  });
 
   constructor() {
     super(...arguments);
@@ -103,11 +96,11 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   }
 
   get defaultParticipants() {
-    return this.meetingParticipantsData.value;
+    return this.meetingParticipantsRequest.value;
   }
 
   get defaultAbsentees() {
-    return this.meetingAbsenteeData.value;
+    return this.meetingAbsenteesRequest.value;
   }
   get participants() {
     return this.behandeling?.sortedParticipants ?? [];
@@ -123,17 +116,17 @@ export default class BehandelingVanAgendapuntComponent extends Component {
   get isLoading() {
     return (
       this.fetchParticipants.isRunning ||
-      this.meetingChairmanData.isRunning ||
-      this.meetingSecretaryData.isRunning
+      this.meetingChairmanRequest.isRunning ||
+      this.meetingSecretaryRequest.isRunning
     );
   }
 
   get defaultChairman() {
-    return this.meetingChairmanData.value;
+    return this.meetingChairmanRequest.value;
   }
 
   get defaultSecretary() {
-    return this.meetingSecretaryData.value;
+    return this.meetingSecretaryRequest.value;
   }
 
   get isInaugurationMeeting() {

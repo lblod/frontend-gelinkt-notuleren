@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { localCopy } from 'tracked-toolbox';
-import { use } from 'ember-could-get-used-to-this';
+import { use } from 'ember-resources';
 import ParticipationMap from '../../helpers/participant-map';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
@@ -44,17 +44,15 @@ export default class ParticipationListModalComponent extends Component {
   @tracked error;
   @service intl;
 
-  /** @type {Map} */
-  @use participationMap = new ParticipationMap(() => ({
-    named: {
-      // we depend on the show state here to make sure that upon opening/closing the modal
-      // we reset the state
+  participationMap = use(
+    this,
+    ParticipationMap(() => ({
       active: this.args.show,
       participants: this.args.participants,
       absentees: this.args.absentees,
       possibleParticipants: this.args.possibleParticipants,
-    },
-  }));
+    })),
+  );
 
   /**
    * Get a list of possible mandatees with their participation
@@ -65,14 +63,14 @@ export default class ParticipationListModalComponent extends Component {
   get participants() {
     return this.args.possibleParticipants.map((participant) => ({
       person: participant,
-      participating: this.participationMap.get(participant),
+      participating: this.participationMap.current.get(participant),
     }));
   }
 
   @action
   selectChairman(value) {
     this.chairman = value;
-    this.participationMap.set(value, true);
+    this.participationMap.current.set(value, true);
   }
 
   @action
@@ -128,7 +126,7 @@ export default class ParticipationListModalComponent extends Component {
    */
   @action
   toggleParticipant(mandataris, selected) {
-    this.participationMap.set(mandataris, !selected);
+    this.participationMap.current.set(mandataris, !selected);
   }
 
   @action
