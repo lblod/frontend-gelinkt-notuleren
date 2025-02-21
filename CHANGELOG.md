@@ -1,5 +1,34 @@
 # frontend-gelinkt-notuleren
 
+## 5.49.0
+
+### Minor Changes
+
+- [#826](https://github.com/lblod/frontend-gelinkt-notuleren/pull/826) [`d21d3a7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d21d3a72f8ffae206cb23b950d0a995c35fb1a7a) Thanks [@piemonkey](https://github.com/piemonkey)! - Removal of legacy `rdfa-annotation` classes
+
+- [#826](https://github.com/lblod/frontend-gelinkt-notuleren/pull/826) [`9059b16`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9059b167e2a294db6d6e1ced2c045af204786018) Thanks [@piemonkey](https://github.com/piemonkey)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version 27.0.0
+
+- [#826](https://github.com/lblod/frontend-gelinkt-notuleren/pull/826) [`9059b16`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9059b167e2a294db6d6e1ced2c045af204786018) Thanks [@piemonkey](https://github.com/piemonkey)! - Update `@lblod/ember-rdfa-editor` to version 11.0.0
+
+- [#827](https://github.com/lblod/frontend-gelinkt-notuleren/pull/827) [`6b98b83`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6b98b83f4efedc68581b51af2e242edf857f43e5) Thanks [@elpoelma](https://github.com/elpoelma)! - Remove `ember-could-get-used-to-this` dependency
+
+- [#826](https://github.com/lblod/frontend-gelinkt-notuleren/pull/826) [`23564a5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/23564a53ab9afc268672b553df21ee723222177e) Thanks [@piemonkey](https://github.com/piemonkey)! - Move to structure-plugin for regulatory statement structures
+
+- [#826](https://github.com/lblod/frontend-gelinkt-notuleren/pull/826) [`d21d3a7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d21d3a72f8ffae206cb23b950d0a995c35fb1a7a) Thanks [@piemonkey](https://github.com/piemonkey)! - Removal of legacy `_p-annotations` sass stylesheet
+
+- [#826](https://github.com/lblod/frontend-gelinkt-notuleren/pull/826) [`d21d3a7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d21d3a72f8ffae206cb23b950d0a995c35fb1a7a) Thanks [@piemonkey](https://github.com/piemonkey)! - Remove usage of obsolete `editorOptions`
+
+- [#827](https://github.com/lblod/frontend-gelinkt-notuleren/pull/827) [`6b98b83`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6b98b83f4efedc68581b51af2e242edf857f43e5) Thanks [@elpoelma](https://github.com/elpoelma)! - Modernize `ParticipationMap` resource: use `ember-resources` instead of `ember-could-get-used-to-this`.
+
+- [#827](https://github.com/lblod/frontend-gelinkt-notuleren/pull/827) [`6b98b83`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6b98b83f4efedc68581b51af2e242edf857f43e5) Thanks [@elpoelma](https://github.com/elpoelma)! - Removal of `RelationshipResource` resource.
+  This resource was built using the unmaintained `ember-could-get-used-to-this`.
+
+- [#826](https://github.com/lblod/frontend-gelinkt-notuleren/pull/826) [`d21d3a7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d21d3a72f8ffae206cb23b950d0a995c35fb1a7a) Thanks [@piemonkey](https://github.com/piemonkey)! - Removal of legacy `rdfa-annotations` toggle
+
+### Patch Changes
+
+- [`6ce2d29`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6ce2d29f7bbdb97ac7e8051cd1564078f2c42156) Thanks [@abeforgit](https://github.com/abeforgit)! - Change translation key in line with changed usages
+
 ## 5.48.1
 
 ### Patch Changes
