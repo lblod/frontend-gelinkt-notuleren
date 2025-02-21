@@ -42,10 +42,6 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import {
-  STRUCTURE_NODES,
-  STRUCTURE_SPECS,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/article-structure-plugin/structures';
-import {
   bulletListWithConfig,
   listItemWithConfig,
   listTrackingPlugin,
@@ -102,15 +98,19 @@ import {
   snippet,
   snippetView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/snippet-plugin/nodes/snippet';
+import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
+import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
+import { SAY } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
+import {
+  structureViewWithConfig,
+  structureWithConfig,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/structure-plugin/node';
+import StructureControlCardComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/structure-plugin/control-card';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
   GEMEENTE,
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
-
-import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
-import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
-import { SAY } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
@@ -123,12 +123,12 @@ export default class RegulatoryStatementsRoute extends Controller {
   editor;
   @tracked citationPlugin = citationPlugin(this.config.citation);
   SnippetInsert = SnippetInsertRdfaComponent;
+  StructureControlCard = StructureControlCardComponent;
 
   schema = new Schema({
     nodes: {
       doc: docWithConfig({
-        content:
-          'table_of_contents? document_title? ((chapter|block)+|(title|block)+|(article|block)+)',
+        content: 'table_of_contents? document_title? block+',
         rdfaAware: true,
       }),
       paragraph,
@@ -147,7 +147,7 @@ export default class RegulatoryStatementsRoute extends Controller {
       oslo_location: osloLocation(this.config.location),
       number,
       text_variable,
-      ...STRUCTURE_NODES,
+      structure: structureWithConfig(this.config.structures),
       heading: headingWithConfig({ rdfaAware: false }),
       blockquote,
       snippet_placeholder: snippetPlaceholder(this.config.snippet),
@@ -198,6 +198,7 @@ export default class RegulatoryStatementsRoute extends Controller {
         snippet: snippetView(this.config.snippet)(controller),
         person_variable: personVariableView(controller),
         autofilled_variable: autofilledVariableView(controller),
+        structure: structureViewWithConfig(this.config.structures)(controller),
       };
     };
   }
@@ -270,7 +271,11 @@ export default class RegulatoryStatementsRoute extends Controller {
         interactive: true,
         rdfaAware: true,
       },
-      structures: STRUCTURE_SPECS,
+      structures: {
+        uriGenerator: 'uuid4',
+        fullLengthArticles: true,
+        onlyArticleSpecialName: false,
+      },
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
         defaultAdministrativeUnit: municipality.uri && {

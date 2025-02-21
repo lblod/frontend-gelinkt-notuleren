@@ -75,9 +75,7 @@
           {{#if @loading}}
             <AuLoader>{{t 'application.loading'}}</AuLoader>
           {{else}}
-            <div
-              class='au-c-rdfa-publication say-content rdfa-annotations behandeling-preview'
-            >
+            <div class='au-c-rdfa-publication say-content behandeling-preview'>
               {{#if (has-block)}}
                 {{yield}}
               {{else}}

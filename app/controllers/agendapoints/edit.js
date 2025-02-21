@@ -6,7 +6,7 @@ import { service } from '@ember/service';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-import StructureControlCardComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/structure-plugin/_private/control-card';
+import StructureControlCardComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/structure-plugin/control-card';
 import InsertArticleComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/decision-plugin/insert-article';
 
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';

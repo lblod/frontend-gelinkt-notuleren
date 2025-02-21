@@ -3,9 +3,7 @@
     <div class='au-c-rdfa-editor'>
       <div class='say-container say-container--sidebar-left'>
         <div class='say-container__main'>
-          <div
-            class='say-editor rdfa-annotations rdfa-annotations-highlight rdfa-annotations-hover'
-          >
+          <div class='say-editor'>
             <div class='say-editor__paper'>
               <div class='au-c-scanner'>
                 <div class='au-c-scanner__text'>
@@ -37,15 +35,7 @@
   >
     {{#if this.ready}}
       <EditorContainer
-        @editorOptions={{hash
-          showRdfa=(if @shouldShowRdfa false true)
-          editRdfa=(if @shouldShowRdfa true false)
-          showRdfaHighlight='true'
-          showRdfaHover='true'
-          showPaper='true'
-          showToolbarBottom=null
-        }}
-        @showRdfaBlocks={{this.controller.showRdfaBlocks}}
+        @editorOptions={{hash showPaper='true' showToolbarBottom=null}}
       >
         <:top>
           {{#if this.controller}}
@@ -99,9 +89,6 @@
               <:side as |Tb|>
                 <Tb.Group>
                   {{yield to='toolbar'}}
-                  <Plugins::RdfaBlockRender::RdfaBlocksToggle
-                    @controller={{this.controller}}
-                  />
                 </Tb.Group>
               </:side>
             </ResponsiveToolbar>

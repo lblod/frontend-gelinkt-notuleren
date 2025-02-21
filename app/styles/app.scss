@@ -31,13 +31,11 @@
 @import 'project/c-sortable';
 
 // PLUGINS
-@import 'ember-rdfa-editor';
+@import '@lblod/ember-rdfa-editor';
 @import 'citaten-plugin';
 @import 'date-plugin';
 @import 'variable-plugin';
 @import 'besluit-plugin';
-@import 'article-structure-plugin';
-@import 'document-title-plugin';
 @import 'snippet-plugin';
 @import 'template-comments-plugin';
 @import 'confidentiality-plugin';
@@ -46,7 +44,6 @@
 @import 'location-plugin';
 @import 'structure-plugin';
 @import 'mandatee-table-plugin';
-@import 'project/p-annotations'; // @TODO: refactor in ember-rdfa-editor
 
 // give treatment (behandeling) content and the copy-parts content the same style as other say-documents
 .c-template-content--treatment {
