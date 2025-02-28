@@ -1206,7 +1206,6 @@ export const RMW_TAGS = /** @type {const} */ ([
  * @typedef {typeof RMW_TAGS[number]} RMW_TAG
  * @returns {Record<RMW_TAG, unknown>}
  */
-// eslint-disable-next-line no-unused-vars
 export const mandateeTableConfigRMW = (meeting) => {
   return {
     /**

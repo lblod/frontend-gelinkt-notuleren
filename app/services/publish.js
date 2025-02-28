@@ -92,7 +92,7 @@ export default class PublishService extends Service {
           if (json?.errors) {
             errors = json.errors[0]?.title || JSON.stringify(json.errors);
           }
-        } catch (e) {
+        } catch (_e) {
           // throwing body text
           errors = await resp.text();
           throw new Error(errors);
