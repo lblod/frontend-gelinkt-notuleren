@@ -231,16 +231,10 @@ export default class RegulatoryStatementsRoute extends Controller {
   get config() {
     const municipality = this.defaultMunicipality;
     return {
-      tableOfContents: [
-        {
-          nodeHierarchy: [
-            'title|chapter|section|subsection|article',
-            'structure_header|article_header',
-          ],
-          scrollContainer: () =>
-            document.getElementsByClassName('say-container__main')[0],
-        },
-      ],
+      tableOfContents: {
+        scrollContainer: () =>
+          document.getElementsByClassName('say-container__main')[0],
+      },
       date: {
         formats: [
           {
