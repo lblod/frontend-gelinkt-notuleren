@@ -82,6 +82,17 @@ export default ts.config(
         ...globals.browser,
       },
     },
+    rules: {
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
   },
   {
     files: ['**/*.{ts,gts}'],
@@ -90,6 +101,18 @@ export default ts.config(
       parserOptions: parserOptions.esm.ts,
     },
     extends: [...ts.configs.recommendedTypeChecked, ember.configs.gts],
+
+    rules: {
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
   },
   {
     files: ['tests/**/*-test.{js,gjs,ts,gts}'],

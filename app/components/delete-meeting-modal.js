@@ -15,7 +15,6 @@ export default class DeleteMeetingComponent extends Component {
   pollWhileMeetingExists = task(async (id) => {
     await timeout(100);
     try {
-      // eslint-disable-next-line no-constant-condition
       let response = await fetch(`/zittingen/${id}`);
       while (response.ok) {
         await timeout(100);
