@@ -19,19 +19,10 @@
 // EMBER-APPUNIVERSUM
 @import '@appuniversum/ember-appuniversum/styles';
 
-// PROJECT COMPONENTS > @TODO: refactor in ember-appuniversum where possible
-@import 'project/c-app-chrome';
-@import 'project/c-meeting-chrome';
-@import 'project/c-rdfa-editor';
-@import 'project/c-onboarding';
-@import 'project/c-editor-preview';
-@import 'project/c-template';
-@import 'project/c-environment-banner';
-@import 'project/c-inauguration-meeting-synchronization';
-@import 'project/c-sortable';
+// EDITOR
+@import '@lblod/ember-rdfa-editor';
 
 // PLUGINS
-@import '@lblod/ember-rdfa-editor';
 @import 'citaten-plugin';
 @import 'date-plugin';
 @import 'variable-plugin';
@@ -44,6 +35,17 @@
 @import 'location-plugin';
 @import 'structure-plugin';
 @import 'mandatee-table-plugin';
+
+// PROJECT COMPONENTS > @TODO: refactor in ember-appuniversum where possible
+@import 'project/c-app-chrome';
+@import 'project/c-meeting-chrome';
+@import 'project/c-rdfa-editor';
+@import 'project/c-onboarding';
+@import 'project/c-editor-preview';
+@import 'project/c-template';
+@import 'project/c-environment-banner';
+@import 'project/c-inauguration-meeting-synchronization';
+@import 'project/c-sortable';
 
 // give treatment (behandeling) content and the copy-parts content the same style as other say-documents
 .c-template-content--treatment {
