@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.49.2
+
+### Patch Changes
+
+- [#829](https://github.com/lblod/frontend-gelinkt-notuleren/pull/829) [`dd16274`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/dd162749b13d455ec9d34ab27a3df31635ac1706) Thanks [@elpoelma](https://github.com/elpoelma)! - Styling: ensure editor styles are loaded before app styles
+
 ## 5.49.1
 
 ### Patch Changes
