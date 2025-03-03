@@ -6,6 +6,7 @@ import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins
 import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 /** @import BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid'; */
+/** @import { Template } from 'frontend-gelinkt-notuleren/services/template-fetcher'; */
 
 export default class DocumentService extends Service {
   @service store;
@@ -111,11 +112,6 @@ export default class DocumentService extends Service {
       }
     },
   );
-  /**
-   * @typedef {Object} Template
-   * @property {string} body
-   * @property {() => Promise<void>} [loadBody]
-   */
   /**
    * @param {Template} template
    * @return {Promise<string>}

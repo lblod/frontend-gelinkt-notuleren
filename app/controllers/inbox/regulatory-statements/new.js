@@ -6,6 +6,7 @@ import { EDITOR_FOLDERS } from 'frontend-gelinkt-notuleren/config/constants';
 export default class InboxRegulatoryStatementsNewController extends Controller {
   @service router;
   @service plausible;
+  @service templateFetcher;
 
   folderId = EDITOR_FOLDERS.REGULATORY_STATEMENTS;
 
@@ -18,12 +19,21 @@ export default class InboxRegulatoryStatementsNewController extends Controller {
     this.router.transitionTo('regulatory-statements.edit', container.id);
   }
 
+  getTemplates = async ({ filter: _, pagination, abortSignal }) => {
+    const templates = await this.templateFetcher.fetch.perform({
+      templateType:
+        'http://data.lblod.info/vocabularies/gelinktnotuleren/ReglementaireBijlageTemplate',
+      abortSignal,
+    });
+
+    // TODO Do 'proper' pagination
+    const firstRes = pagination.pageNumber * pagination.pageSize;
+    const paginated = templates.slice(firstRes, firstRes + pagination.pageSize);
+    return { results: paginated, totalCount: templates.length };
+  };
+
   @action
   cancelCreation() {
     this.router.legacyTransitionTo('inbox.regulatory-statements');
-  }
-
-  get templateOptions() {
-    return this.model;
   }
 }

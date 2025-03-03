@@ -3,6 +3,14 @@ import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { getOwner } from '@ember/application';
 
+/**
+ * @typedef {Object} Template
+ * @property {string} body
+ * @property {[string]} contexts
+ * @property {[number]} disabledInContexts
+ * @property {() => Promise<void>} [loadBody]
+ */
+
 export default class TemplateFetcher extends Service {
   @service session;
   @service store;
@@ -186,6 +194,7 @@ export default class TemplateFetcher extends Service {
     return formBody;
   }
   bindingToTemplate(fileEndpoint) {
+    /** @return {Template} */
     return (binding) => {
       return {
         title: binding.title.value,
