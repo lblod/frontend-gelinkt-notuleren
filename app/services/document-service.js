@@ -1,6 +1,11 @@
 import Service, { service } from '@ember/service';
 import { analyse } from '@lblod/marawa/rdfa-context-scanner';
 import { task } from 'ember-concurrency';
+/** @import { Task } from 'ember-concurrency'; */
+import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
+import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
+/** @import BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid'; */
 
 export default class DocumentService extends Service {
   @service store;
@@ -104,6 +109,78 @@ export default class DocumentService extends Service {
         await documentContainer.save();
         return editorDocument;
       }
+    },
+  );
+  /**
+   * @typedef {Object} Template
+   * @property {string} body
+   * @property {() => Promise<void>} [loadBody]
+   */
+  /**
+   * @param {Template} template
+   * @return {Promise<string>}
+   */
+  async buildTemplate(template) {
+    if (template) {
+      /**
+       * Document Creator component is used by two different screens:
+       *   - Create agenda point flow
+       *   - Create regulatory statements flow
+       *
+       * `templates` coming from regulatory statements flow are _NOT_ `TemplateModel` instances,
+       * they are just plain objects with a `title` and a `loadTemplateBody` property. So we
+       * have to use `loadTemplateBody` to load the template body if we need to build the template
+       * when creating a regulatory statement.
+       *
+       * This was previously checking and calling `this.template.reload`, but that was causing
+       * `reload` to mutate from function to a "boolean" when `TemplateModel` of `ember-data` is used,
+       * causing errors when calling `reload` on the template again, as it became a boolean.
+       *
+       * The fix was to change `reload` to `loadTemplateBody` in `RegulatoryAttachmentsFetcher`
+       */
+      if (template.loadBody) {
+        await template.loadBody();
+        const trimmedHtml = template.body.replace(/>\s+</g, '><');
+        //If the template comes from RB we instantiate it with the new library
+        return templateUuidInstantiator(trimmedHtml);
+      } else {
+        const trimmedHtml = template.body.replace(/>\s+</g, '><');
+        // If it's a built=in template, we apply both instantiate functions
+        return instantiateUuids(templateUuidInstantiator(trimmedHtml));
+      }
+    } else return '';
+  }
+
+  /**
+   * @typedef {Object} PersistDocumentArgs
+   * @property {Template} template
+   * @property {string} title
+   * @property {string} folderId
+   * @property {BestuurseenheidModel} group
+   */
+  /** @type {Task<unknown, [PersistDocumentArgs]>} */
+  persistDocument = task(
+    /** @type {(args: PersistDocumentArgs) => Promise<unknown>} */
+    async ({ template, title, folderId, group }) => {
+      const generatedTemplate = await this.buildTemplate(template);
+      const container = this.store.createRecord('document-container');
+      container.status = await this.store.findRecord(
+        'concept',
+        DRAFT_STATUS_ID,
+      );
+      container.folder = await this.store.findRecord(
+        'editor-document-folder',
+        folderId,
+      );
+      container.publisher = group;
+      const editorDocument = await this.createEditorDocument.perform(
+        title,
+        generatedTemplate,
+        container,
+      );
+      container.currentVersion = editorDocument;
+      await container.save();
+      return container;
     },
   );
 

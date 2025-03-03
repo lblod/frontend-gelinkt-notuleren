@@ -12,7 +12,7 @@ export default class TemplateFetcher extends Service {
   @tracked group;
   @tracked roles = [];
 
-  fetchByTemplateName = async ({ name }) => {
+  fetchByTemplateName = async ({ name, abortSignal }) => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
     const sparqlEndpoint = config.regulatoryStatementEndpoint;
@@ -50,7 +50,11 @@ export default class TemplateFetcher extends Service {
       ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
     `;
 
-    const response = await this.sendQuery(sparqlEndpoint, sparqlQuery);
+    const response = await this.sendQuery(
+      sparqlEndpoint,
+      sparqlQuery,
+      abortSignal,
+    );
     if (response.ok) {
       const json = await response.json();
       const bindings = json.results.bindings;
@@ -61,7 +65,7 @@ export default class TemplateFetcher extends Service {
     }
   };
 
-  fetchByUri = async ({ uri }) => {
+  fetchByUri = async ({ uri, abortSignal }) => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
     const sparqlEndpoint = config.regulatoryStatementEndpoint;
@@ -98,7 +102,11 @@ export default class TemplateFetcher extends Service {
       ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
     `;
 
-    const response = await this.sendQuery(sparqlEndpoint, sparqlQuery);
+    const response = await this.sendQuery(
+      sparqlEndpoint,
+      sparqlQuery,
+      abortSignal,
+    );
     if (response.ok) {
       const json = await response.json();
       const bindings = json.results.bindings;
@@ -108,7 +116,7 @@ export default class TemplateFetcher extends Service {
       return null;
     }
   };
-  fetch = task(async ({ templateType }) => {
+  fetch = task(async ({ templateType, abortSignal }) => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
     const sparqlEndpoint = config.regulatoryStatementEndpoint;
@@ -144,7 +152,11 @@ export default class TemplateFetcher extends Service {
       GROUP BY ?template_version ?title ?fileId
       ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
     `;
-    const response = await this.sendQuery(sparqlEndpoint, sparqlQuery);
+    const response = await this.sendQuery(
+      sparqlEndpoint,
+      sparqlQuery,
+      abortSignal,
+    );
     if (response.ok) {
       const json = await response.json();
       const bindings = json.results.bindings;
@@ -196,9 +208,10 @@ export default class TemplateFetcher extends Service {
   /**
    * @param {string} endpoint
    * @param {string} sparqlQuery
+   * @param {AbortSignal} [abortSignal]
    * @returns {Promise<Response>}
    */
-  async sendQuery(endpoint, sparqlQuery) {
+  async sendQuery(endpoint, sparqlQuery, abortSignal) {
     const formBody = this.queryToFormBody(sparqlQuery);
     const response = await fetch(endpoint, {
       method: 'POST',
@@ -206,6 +219,7 @@ export default class TemplateFetcher extends Service {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       },
       body: formBody,
+      signal: abortSignal,
     });
     return response;
   }
