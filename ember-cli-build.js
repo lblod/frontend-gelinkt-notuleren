@@ -10,6 +10,7 @@ module.exports = function (defaults) {
     },
     'ember-cli-babel': {
       includePolyfill: false,
+      enableTypeScriptTransform: true,
     },
     minifyCSS: {
       enabled: envIsProduction,

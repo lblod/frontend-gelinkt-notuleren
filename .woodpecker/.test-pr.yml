@@ -3,6 +3,11 @@ steps:
     image: danlynn/ember-cli:5.12.0-node_20.18
     commands:
       - npm ci
+  lint-types:
+    image: node:20-slim
+    group: lint
+    commands:
+      - npm run lint:types
   lint-js:
     image: node:20-slim
     group: lint
