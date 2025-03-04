@@ -2,6 +2,7 @@ import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { getOwner } from '@ember/application';
+import { sparqlEscapeString } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
 
 /**
  * @typedef {Object} Template
@@ -125,10 +126,13 @@ export default class TemplateFetcher extends Service {
       return null;
     }
   };
-  fetch = task(async ({ templateType, abortSignal }) => {
+  fetch = task(async ({ templateType, titleFilter, abortSignal }) => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
     const sparqlEndpoint = config.regulatoryStatementEndpoint;
+    const filterQuery = !titleFilter
+      ? ''
+      : `FILTER(CONTAINS(LCASE(?title), LCASE(${sparqlEscapeString(titleFilter)})))`;
     const sparqlQuery = `
       PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
       PREFIX pav: <http://purl.org/pav/>
@@ -157,6 +161,7 @@ export default class TemplateFetcher extends Service {
           ?template_version ext:disabledInContext ?disabledInContext.
         }
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
+        ${filterQuery}
       }
       GROUP BY ?template_version ?title ?fileId
       ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))

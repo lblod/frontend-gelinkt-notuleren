@@ -19,10 +19,11 @@ export default class InboxRegulatoryStatementsNewController extends Controller {
     this.router.transitionTo('regulatory-statements.edit', container.id);
   }
 
-  getTemplates = async ({ filter: _, pagination, abortSignal }) => {
+  getTemplates = async ({ filter, pagination, abortSignal }) => {
     const templates = await this.templateFetcher.fetch.perform({
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/ReglementaireBijlageTemplate',
+      titleFilter: filter?.title,
       abortSignal,
     });
 

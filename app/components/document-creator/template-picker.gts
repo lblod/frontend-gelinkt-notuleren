@@ -109,7 +109,7 @@ export default class TemplatePicker extends Component<Sig> {
 
     try {
       const queryResult = await this.args.getTemplates({
-        filter: {},
+        filter: this.searchText ? { title: this.searchText } : {},
         abortSignal: abortController.signal,
         pagination: { pageNumber: this.pageNumber, pageSize: this.pageSize },
       });

@@ -20,7 +20,7 @@ export default class InboxAgendapointsNewController extends Controller {
     this.router.transitionTo('agendapoints.edit', container.id);
   }
 
-  getTemplates = async ({ filter: _, pagination, abortSignal }) => {
+  getTemplates = async ({ filter, pagination, abortSignal }) => {
     const standardTemplatesPromise = this.standardTemplate.fetchTemplates
       .perform()
       .then((standardTemplates) => {
@@ -31,12 +31,17 @@ export default class InboxAgendapointsNewController extends Controller {
     const dynamicTemplatesPromise = this.templateFetcher.fetch.perform({
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
+      titleFilter: filter?.title,
       abortSignal,
     });
     const results = await Promise.all([
       standardTemplatesPromise,
       dynamicTemplatesPromise,
-    ]).then((result) => result.flat());
+    ])
+      .then((result) => result.flat()
+      .filter(
+        (result) => !filter?.title || result.title.includes(filter.title),
+      ));
 
     // TODO can we do 'proper' pagination since we want to combine different sources of templates
     const firstRes = pagination.pageNumber * pagination.pageSize;
