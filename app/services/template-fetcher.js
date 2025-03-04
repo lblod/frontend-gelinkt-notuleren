@@ -5,6 +5,7 @@ import { getOwner } from '@ember/application';
 
 /**
  * @typedef {Object} Template
+ * @property {string} title
  * @property {string} body
  * @property {[string]} contexts
  * @property {[number]} disabledInContexts
@@ -196,13 +197,13 @@ export default class TemplateFetcher extends Service {
   bindingToTemplate(fileEndpoint) {
     /** @return {Template} */
     return (binding) => {
-      return {
+      const template = {
         title: binding.title.value,
         loadBody: async function () {
           const response = await fetch(
             `${fileEndpoint}/${binding.fileId.value}/download`,
           );
-          this.body = await response.text();
+          template.body = await response.text();
         },
         contexts: binding.contexts.value
           ? binding.contexts.value.split('|')
@@ -212,6 +213,7 @@ export default class TemplateFetcher extends Service {
           : // make the RB templates unavailable from the sidebar insert for now
             ['http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt'],
       };
+      return template;
     };
   }
   /**

@@ -18,6 +18,42 @@ import PreviewList from '@lblod/ember-rdfa-editor-lblod-plugins/components/commo
 import AlertNoItems from '@lblod/ember-rdfa-editor-lblod-plugins/components/common/search/alert-no-items';
 import PaginationView from '@lblod/ember-rdfa-editor-lblod-plugins/components/pagination/pagination-view';
 import { type PreviewableDocument } from '@lblod/ember-rdfa-editor-lblod-plugins/components/common/documents/types';
+import type { Template } from '../../services/template-fetcher';
+
+class PreviewableTemplate implements PreviewableDocument {
+  title: string;
+  original: Template;
+  contentPromise: Promise<string | null>;
+  contentResolve?: (content: string | null) => void;
+  loadStarted = false;
+
+  constructor(template: Template) {
+    this.original = template;
+    this.title = template.title;
+    this.contentPromise = new Promise<string | null>((resolve) => {
+      this.contentResolve = resolve;
+    });
+  }
+
+  get content() {
+    if (!this.loadStarted) {
+      this.loadStarted = true;
+      (this.original.loadBody ?? Promise.resolve)()
+        ?.then(() => {
+          this.contentResolve?.(this.original.body);
+        })
+        .catch((err) => {
+          console.error(
+            'Error when trying to load template preview',
+            this.title,
+            err,
+          );
+          this.contentResolve?.(null);
+        });
+    }
+    return this.contentPromise;
+  }
+}
 
 export type GetTemplates = (args: {
   filter: object;
@@ -26,13 +62,13 @@ export type GetTemplates = (args: {
     pageNumber: number;
     pageSize: number;
   };
-}) => Promise<{ totalCount: number; results: PreviewableDocument[] }>;
+}) => Promise<{ totalCount: number; results: Template[] }>;
 
 interface Sig {
   Args: {
     getTemplates: GetTemplates;
     onCancel?: () => void;
-    onSelect: (doc: PreviewableDocument) => void;
+    onSelect: (doc: Template) => void;
   };
 }
 
@@ -80,7 +116,9 @@ export default class TemplatePicker extends Component<Sig> {
 
       this.totalCount = queryResult.totalCount;
 
-      return queryResult.results;
+      return queryResult.results.map(
+        (template) => new PreviewableTemplate(template),
+      );
     } catch (error) {
       this.error = error as Error;
       return [];
@@ -88,8 +126,11 @@ export default class TemplatePicker extends Component<Sig> {
       abortController.abort();
     }
   });
+  onSelect = (template: PreviewableTemplate) => {
+    return this.args.onSelect(template.original);
+  };
 
-  templateResource = trackedTask<PreviewableDocument[]>(
+  templateResource = trackedTask<PreviewableTemplate[]>(
     this,
     this.templateSearch,
     () => [this.inputSearchText, this.pageNumber, this.pageSize],
@@ -159,7 +200,7 @@ export default class TemplatePicker extends Component<Sig> {
               {{#if this.templateResource.value.length}}
                 <PreviewList
                   @docs={{this.templateResource.value}}
-                  @onInsert={{@onSelect}}
+                  @onInsert={{this.onSelect}}
                   @isFavourite={{this.isFav}}
                   @toggleFavourite={{this.setFav}}
                 />

@@ -8,10 +8,10 @@ import { not } from 'ember-truth-helpers';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import TemplatePicker, { type GetTemplates } from './template-picker';
-import { type PreviewableDocument } from '@lblod/ember-rdfa-editor-lblod-plugins/components/common/documents/types';
 import type DocumentService from '../../services/document-service';
 import type CurrentSessionService from '../../services/current-session';
 import MetadataForm from './metadata-form';
+import type { Template } from '../../services/template-fetcher';
 
 const truthy = (test: unknown) => !!test;
 
@@ -21,7 +21,7 @@ interface Sig {
     getTemplates: GetTemplates;
     folderId: string;
     onCancel: () => void;
-    onCreate: (container: unknown, template: PreviewableDocument) => void;
+    onCreate: (container: unknown, template: Template) => void;
   };
 }
 
@@ -30,11 +30,10 @@ export default class DocumentCreatorModal extends Component<Sig> {
   @service declare documentService: DocumentService;
   @service declare currentSession: CurrentSessionService;
 
-  @tracked selectedTemplate: PreviewableDocument | undefined;
+  @tracked selectedTemplate: Template | undefined;
 
-  selectTemplate = (previewableTemplate: PreviewableDocument) => {
-    console.log({ previewableTemplate });
-    this.selectedTemplate = previewableTemplate;
+  selectTemplate = (template: Template) => {
+    this.selectedTemplate = template;
   };
   deselectTemplate = () => {
     this.selectedTemplate = undefined;
@@ -111,6 +110,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
         <AuButton
           @disabled={{this.createDisabled}}
           @loading={{this.create.isRunning}}
+          @loadingMessage={{t 'application.loading'}}
           {{on 'click' this.create.perform}}
         >
           {{t 'utils.create'}}
