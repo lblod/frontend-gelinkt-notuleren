@@ -5,6 +5,7 @@ import { decentLocaleMatch } from '../utils/intl';
 
 const featureFlagRegex = /^feature\[(.+)\]$/;
 
+const DEFAULT_LOCALE = 'nl-BE';
 export default class ApplicationRoute extends Route {
   @service currentSession;
   @service features;
@@ -12,17 +13,26 @@ export default class ApplicationRoute extends Route {
   @service plausible;
   @service intl;
 
+  queryParams = {
+    lang: {
+      refreshModel: true,
+    },
+  };
+
   async beforeModel(transition) {
-    const userLocales = decentLocaleMatch(
-      navigator.languages,
-      this.intl.locales,
-      'nl-BE',
-    );
-    this.intl.setLocale(userLocales);
     this.updateFeatureFlags(transition.to.queryParams);
     await this.startAnalytics();
     await this.session.setup();
     return this.loadCurrentSession();
+  }
+
+  model(params) {
+    const matchedLocales = decentLocaleMatch(
+      params.lang ? [params.lang] : [],
+      this.intl.locales,
+      DEFAULT_LOCALE,
+    );
+    this.intl.setLocale(matchedLocales);
   }
 
   async startAnalytics() {
