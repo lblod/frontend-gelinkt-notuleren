@@ -2,7 +2,11 @@ import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { getOwner } from '@ember/application';
-import { sparqlEscapeString } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
+import {
+  executeCountQuery,
+  executeQuery,
+  sparqlEscapeString,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
 
 /**
  * @typedef {Object} Template
@@ -126,60 +130,88 @@ export default class TemplateFetcher extends Service {
       return null;
     }
   };
-  fetch = task(async ({ templateType, titleFilter, abortSignal }) => {
-    const config = getOwner(this).resolveRegistration('config:environment');
-    const fileEndpoint = config.regulatoryStatementFileEndpoint;
-    const sparqlEndpoint = config.regulatoryStatementEndpoint;
-    const filterQuery = !titleFilter
-      ? ''
-      : `FILTER(CONTAINS(LCASE(?title), LCASE(${sparqlEscapeString(titleFilter)})))`;
-    const sparqlQuery = `
-      PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-      PREFIX pav: <http://purl.org/pav/>
-      PREFIX dct: <http://purl.org/dc/terms/>
-      PREFIX schema: <http://schema.org/>
-      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
-      SELECT
-        ?template_version
-        ?title
-        ?fileId
-        (GROUP_CONCAT(?context;SEPARATOR="|") as ?contexts)
-        (GROUP_CONCAT(?disabledInContext;SEPARATOR="|") as ?disabledInContexts)
-      WHERE {
-        ?template a <${templateType}>;
-          mu:uuid ?uuid;
-          pav:hasCurrentVersion ?template_version.
-        ?template_version mu:uuid ?fileId;
-                          dct:title ?title.
-        OPTIONAL {
-          ?template_version schema:validThrough ?validThrough.
+  fetch = task(
+    async ({ templateType, titleFilter, pagination, abortSignal }) => {
+      const config = getOwner(this).resolveRegistration('config:environment');
+      const fileEndpoint = config.regulatoryStatementFileEndpoint;
+      const sparqlEndpoint = config.regulatoryStatementEndpoint;
+      const filterQuery = !titleFilter
+        ? ''
+        : `FILTER(CONTAINS(LCASE(?title), LCASE(${sparqlEscapeString(titleFilter)})))`;
+      const paginationQuery = !pagination
+        ? ''
+        : `LIMIT ${pagination.pageSize} OFFSET ${pagination.pageNumber * pagination.pageSize}`;
+      const sparqlQuery = `
+        PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX dct: <http://purl.org/dc/terms/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+        SELECT
+          ?template_version
+          ?title
+          ?fileId
+          (GROUP_CONCAT(?context;SEPARATOR="|") as ?contexts)
+          (GROUP_CONCAT(?disabledInContext;SEPARATOR="|") as ?disabledInContexts)
+        WHERE {
+          ?template a <${templateType}>;
+            mu:uuid ?uuid;
+            pav:hasCurrentVersion ?template_version.
+          ?template_version mu:uuid ?fileId;
+                            dct:title ?title.
+          OPTIONAL {
+            ?template_version schema:validThrough ?validThrough.
+          }
+          OPTIONAL {
+            ?template_version ext:context ?context.
+          }
+          OPTIONAL {
+            ?template_version ext:disabledInContext ?disabledInContext.
+          }
+          FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
+          ${filterQuery}
         }
-        OPTIONAL {
-          ?template_version ext:context ?context.
+        GROUP BY ?template_version ?title ?fileId
+        ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
+        ${paginationQuery}
+      `;
+      const countQuery = `
+        PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+        PREFIX pav: <http://purl.org/pav/>
+        PREFIX dct: <http://purl.org/dc/terms/>
+        PREFIX schema: <http://schema.org/>
+        PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+        SELECT (count(?template) as ?count)
+        WHERE {
+          ?template a <${templateType}>;
+            mu:uuid ?uuid;
+            pav:hasCurrentVersion ?template_version.
+          ?template_version mu:uuid ?fileId;
+                            dct:title ?title.
+          OPTIONAL {
+            ?template_version schema:validThrough ?validThrough.
+          }
+          FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
+          ${filterQuery}
         }
-        OPTIONAL {
-          ?template_version ext:disabledInContext ?disabledInContext.
-        }
-        FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
-        ${filterQuery}
-      }
-      GROUP BY ?template_version ?title ?fileId
-      ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
-    `;
-    const response = await this.sendQuery(
-      sparqlEndpoint,
-      sparqlQuery,
-      abortSignal,
-    );
-    if (response.ok) {
-      const json = await response.json();
-      const bindings = json.results.bindings;
+      `;
+      const [response, resultCount] = await Promise.all([
+        executeQuery({
+          endpoint: sparqlEndpoint,
+          query: sparqlQuery,
+          abortSignal,
+        }),
+        executeCountQuery({
+          endpoint: sparqlEndpoint,
+          query: countQuery,
+          abortSignal,
+        }),
+      ]);
+      const bindings = response.results.bindings;
       const templates = bindings.map(this.bindingToTemplate(fileEndpoint));
-      return templates;
-    } else {
-      return [];
-    }
-  });
+      return [templates, resultCount];
+    },
+  );
 
   /**
    * @param {string} sparqlQuery

@@ -38,7 +38,7 @@ class PreviewableTemplate implements PreviewableDocument {
   get content() {
     if (!this.loadStarted) {
       this.loadStarted = true;
-      (this.original.loadBody ?? Promise.resolve)()
+      (this.original.loadBody ?? (() => Promise.resolve()))()
         ?.then(() => {
           this.contentResolve?.(this.original.body);
         })

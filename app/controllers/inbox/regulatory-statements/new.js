@@ -20,17 +20,15 @@ export default class InboxRegulatoryStatementsNewController extends Controller {
   }
 
   getTemplates = async ({ filter, pagination, abortSignal }) => {
-    const templates = await this.templateFetcher.fetch.perform({
+    const [templates, totalCount] = await this.templateFetcher.fetch.perform({
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/ReglementaireBijlageTemplate',
       titleFilter: filter?.title,
+      pagination,
       abortSignal,
     });
 
-    // TODO Do 'proper' pagination
-    const firstRes = pagination.pageNumber * pagination.pageSize;
-    const paginated = templates.slice(firstRes, firstRes + pagination.pageSize);
-    return { results: paginated, totalCount: templates.length };
+    return { results: templates, totalCount };
   };
 
   @action
