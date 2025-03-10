@@ -1,28 +1,47 @@
+// There's clearly something wrong with the eslint config, but leave that for now...
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Service, { service } from '@ember/service';
 import { analyse } from '@lblod/marawa/rdfa-context-scanner';
 import { task } from 'ember-concurrency';
-/** @import { Task } from 'ember-concurrency'; */
 import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-/** @import BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid'; */
-/** @import { Template } from 'frontend-gelinkt-notuleren/services/template-fetcher'; */
+import type Store from 'frontend-gelinkt-notuleren/services/store';
+import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
+import { type Context } from 'frontend-gelinkt-notuleren/config/editor-document-default-context';
+import type Triple from '@lblod/marawa/triple';
+import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
+import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
+import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
+
+interface PersistDocumentArgs {
+  template: Template;
+  title: string;
+  folderId: string;
+  group: BestuurseenheidModel;
+}
 
 export default class DocumentService extends Service {
-  @service store;
+  @service declare store: Store;
 
-  extractTriplesFromDocument(editorDocument) {
+  extractTriplesFromDocument(editorDocument: EditorDocumentModel) {
     const node = document.createElement('body');
-    const context = JSON.parse(editorDocument.context);
+    const context: Context = JSON.parse(editorDocument.context);
     const prefixes = this.convertPrefixesToString(context.prefix);
     node.setAttribute('vocab', context.vocab);
     node.setAttribute('prefix', prefixes);
     node.innerHTML = editorDocument.content;
+    const thing = analyse(node);
+    console.log({ thing });
     const contexts = analyse(node).map((c) => c.context);
     const triples = this.cleanupTriples(contexts.flat());
     return triples;
   }
-  getDescription(editorDocument) {
+  getDescription(editorDocument: EditorDocumentModel) {
     const triples = this.extractTriplesFromDocument(editorDocument);
     const decisionUris = triples.filter(
       (t) =>
@@ -35,25 +54,25 @@ export default class DocumentService extends Service {
       (t) =>
         t.predicate === 'http://data.europa.eu/eli/ontology#description' &&
         t.subject === firstDecision.subject,
-    )[0].object;
+    )[0]?.object;
     return descriptionOfFirstDecision;
   }
-  cleanupTriples(triples) {
-    const cleantriples = {};
+  cleanupTriples(triples: Triple[]) {
+    const cleantriples: Record<string, Triple> = {};
     for (const triple of triples) {
       const hash = JSON.stringify(triple);
       cleantriples[hash] = triple;
     }
-    return Object.keys(cleantriples).map((k) => cleantriples[k]);
+    return Object.values(cleantriples);
   }
-  convertPrefixesToString(prefix) {
+  convertPrefixesToString(prefix: Context['prefix']) {
     let prefixesString = '';
-    for (let prefixKey in prefix) {
+    for (const prefixKey in prefix) {
       prefixesString += `${prefixKey}: ${prefix[prefixKey]} `;
     }
     return prefixesString;
   }
-  getDecisions(editorDocument) {
+  getDecisions(editorDocument: EditorDocumentModel) {
     const triples = this.extractTriplesFromDocument(editorDocument);
     const decisionUris = triples.filter(
       (t) =>
@@ -66,7 +85,7 @@ export default class DocumentService extends Service {
         (t) =>
           t.predicate === 'http://data.europa.eu/eli/ontology#title' &&
           t.subject === uri,
-      )[0].object;
+      )[0]?.object;
       return {
         uri,
         title,
@@ -75,7 +94,7 @@ export default class DocumentService extends Service {
     return decisions;
   }
 
-  getDocumentparts(editorDocument) {
+  getDocumentparts(editorDocument: EditorDocumentModel) {
     const triples = this.extractTriplesFromDocument(editorDocument);
     const documentpartUris = triples
       .filter(
@@ -89,8 +108,14 @@ export default class DocumentService extends Service {
   }
 
   createEditorDocument = task(
-    async (title, content, documentContainer, previousDocument) => {
+    async (
+      title: string,
+      content: string | undefined,
+      documentContainer: DocumentContainerModel,
+      previousDocument?: EditorDocumentModel,
+    ) => {
       if (!title || !documentContainer) {
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
         throw 'title and documentContainer are required';
       } else {
         const creationDate = new Date();
@@ -99,11 +124,14 @@ export default class DocumentService extends Service {
           updatedOn: creationDate,
           content: content ?? '',
           title: title.trim(),
-        });
+          // type assertion as passing EditorDocumentModel to the generic type arg of createRecord
+          // doesn't seem to work
+        }) as EditorDocumentModel;
         if (previousDocument) {
           editorDocument.previousVersion = previousDocument;
         }
         editorDocument.documentContainer = documentContainer;
+        // @ts-expect-error this was already here when adding types...
         editorDocument.parts = await this.retrieveDocumentParts(editorDocument);
         await editorDocument.save();
         documentContainer.currentVersion = editorDocument;
@@ -112,11 +140,8 @@ export default class DocumentService extends Service {
       }
     },
   );
-  /**
-   * @param {Template} template
-   * @return {Promise<string>}
-   */
-  async buildTemplate(template) {
+
+  async buildTemplate(template: Template): Promise<string> {
     if (template) {
       /**
        * Document Creator component is used by two different screens:
@@ -147,19 +172,13 @@ export default class DocumentService extends Service {
     } else return '';
   }
 
-  /**
-   * @typedef {Object} PersistDocumentArgs
-   * @property {Template} template
-   * @property {string} title
-   * @property {string} folderId
-   * @property {BestuurseenheidModel} group
-   */
-  /** @type {Task<unknown, [PersistDocumentArgs]>} */
   persistDocument = task(
-    /** @type {(args: PersistDocumentArgs) => Promise<unknown>} */
-    async ({ template, title, folderId, group }) => {
+    async ({ template, title, folderId, group }: PersistDocumentArgs) => {
       const generatedTemplate = await this.buildTemplate(template);
-      const container = this.store.createRecord('document-container');
+      const container = this.store.createRecord<DocumentContainerModel>(
+        'document-container',
+        {},
+      );
       container.status = await this.store.findRecord(
         'concept',
         DRAFT_STATUS_ID,
@@ -180,12 +199,13 @@ export default class DocumentService extends Service {
     },
   );
 
-  async retrieveDocumentParts(document) {
+  async retrieveDocumentParts(document: EditorDocumentModel) {
     return Promise.all(
       this.getDocumentparts(document).map(async (uri) => {
         const part = (
           await this.store.query('document-container', {
             'filter[:uri:]': uri,
+            // @ts-expect-error no idea how to configure this to work correctly...
             include: 'is-part-of',
           })
         )[0];
@@ -195,16 +215,25 @@ export default class DocumentService extends Service {
   }
 
   fetchRevisions = task(
-    async (documentContainerId, revisionsToSkip, pageSize, pageNumber) => {
-      const revisions = await this.store.query('editor-document', {
-        'filter[document-container][id]': documentContainerId,
-        include: 'status',
-        sort: '-updated-on',
-        'page[size]': pageSize,
-        'page[number]': pageNumber,
-      });
+    async (
+      documentContainerId: string,
+      revisionsToSkip: string[],
+      pageSize: number,
+      pageNumber: number,
+    ) => {
+      const revisions = await this.store.query<EditorDocumentModel>(
+        'editor-document',
+        {
+          'filter[document-container][id]': documentContainerId,
+          // @ts-expect-error no idea how to configure this to work correctly...
+          include: 'status',
+          sort: '-updated-on',
+          'page[size]': pageSize,
+          'page[number]': pageNumber,
+        },
+      );
       const revisionsWithoutCurrentVersion = revisions.filter(
-        (revision) => !revisionsToSkip.includes(revision.id),
+        (revision) => !revision.id || !revisionsToSkip.includes(revision.id),
       );
       return revisionsWithoutCurrentVersion;
     },
