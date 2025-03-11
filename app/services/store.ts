@@ -1,8 +1,8 @@
 import Store from 'ember-data/store';
 import ArrayProxy from '@ember/array/proxy';
-import {
-  type LegacyResourceQuery,
-  type QueryOptions,
+import type {
+  LegacyResourceQuery,
+  QueryOptions,
 } from '@ember-data/store/types';
 
 export default class extends Store {
