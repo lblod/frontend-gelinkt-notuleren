@@ -12,6 +12,7 @@ import type DocumentService from '../../services/document-service';
 import type CurrentSessionService from '../../services/current-session';
 import MetadataForm from './metadata-form';
 import type { Template } from '../../services/template-fetcher';
+import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 
 const truthy = (test: unknown) => !!test;
 
@@ -59,7 +60,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
         template: this.selectedTemplate,
         title: this.title,
         folderId: this.args.folderId,
-        group: this.currentSession.group as string,
+        group: this.currentSession.group as BestuurseenheidModel,
       });
       this.args.onCreate(container, this.selectedTemplate);
     }

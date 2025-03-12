@@ -1,22 +1,23 @@
-// There's clearly something wrong with the eslint config, but leave that for now...
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Service, { service } from '@ember/service';
-import { analyse } from '@lblod/marawa/rdfa-context-scanner';
 import { task } from 'ember-concurrency';
+import {
+  type PromiseBelongsTo,
+  type PromiseManyArray,
+} from '@ember-data/model/-private';
+import { analyse } from '@lblod/marawa/rdfa-context-scanner';
+import type Triple from '@lblod/marawa/triple';
 import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
+import { isSome } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import type Store from 'frontend-gelinkt-notuleren/services/store';
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import { type Context } from 'frontend-gelinkt-notuleren/config/editor-document-default-context';
-import type Triple from '@lblod/marawa/triple';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
+import type ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
+import type EditorDocumentFolderModel from 'frontend-gelinkt-notuleren/models/editor-document-folder';
 
 interface PersistDocumentArgs {
   template: Template;
@@ -30,13 +31,11 @@ export default class DocumentService extends Service {
 
   extractTriplesFromDocument(editorDocument: EditorDocumentModel) {
     const node = document.createElement('body');
-    const context: Context = JSON.parse(editorDocument.context);
+    const context = JSON.parse(editorDocument.context ?? '') as Context;
     const prefixes = this.convertPrefixesToString(context.prefix);
     node.setAttribute('vocab', context.vocab);
     node.setAttribute('prefix', prefixes);
-    node.innerHTML = editorDocument.content;
-    const thing = analyse(node);
-    console.log({ thing });
+    node.innerHTML = editorDocument.content ?? '';
     const contexts = analyse(node).map((c) => c.context);
     const triples = this.cleanupTriples(contexts.flat());
     return triples;
@@ -119,22 +118,27 @@ export default class DocumentService extends Service {
         throw 'title and documentContainer are required';
       } else {
         const creationDate = new Date();
-        const editorDocument = this.store.createRecord('editor-document', {
-          createdOn: creationDate,
-          updatedOn: creationDate,
-          content: content ?? '',
-          title: title.trim(),
-          // type assertion as passing EditorDocumentModel to the generic type arg of createRecord
-          // doesn't seem to work
-        }) as EditorDocumentModel;
+        const editorDocument = this.store.createRecord<EditorDocumentModel>(
+          'editor-document',
+          {
+            createdOn: creationDate,
+            updatedOn: creationDate,
+            content: content ?? '',
+            title: title.trim(),
+          },
+        );
         if (previousDocument) {
-          editorDocument.previousVersion = previousDocument;
+          editorDocument.previousVersion =
+            previousDocument as unknown as PromiseBelongsTo<EditorDocumentModel>;
         }
-        editorDocument.documentContainer = documentContainer;
-        // @ts-expect-error this was already here when adding types...
-        editorDocument.parts = await this.retrieveDocumentParts(editorDocument);
+        editorDocument.documentContainer =
+          documentContainer as unknown as PromiseBelongsTo<DocumentContainerModel>;
+        editorDocument.parts = (await this.retrieveDocumentParts(
+          editorDocument,
+        )) as unknown as PromiseManyArray<DocumentContainerModel>;
         await editorDocument.save();
-        documentContainer.currentVersion = editorDocument;
+        documentContainer.currentVersion =
+          editorDocument as unknown as PromiseBelongsTo<EditorDocumentModel>;
         await documentContainer.save();
         return editorDocument;
       }
@@ -179,39 +183,42 @@ export default class DocumentService extends Service {
         'document-container',
         {},
       );
-      container.status = await this.store.findRecord(
+      container.status = (await this.store.findRecord(
         'concept',
         DRAFT_STATUS_ID,
-      );
-      container.folder = await this.store.findRecord(
+      )) as PromiseBelongsTo<ConceptModel>;
+      container.folder = (await this.store.findRecord(
         'editor-document-folder',
         folderId,
-      );
-      container.publisher = group;
+      )) as PromiseBelongsTo<EditorDocumentFolderModel>;
+      container.publisher =
+        group as unknown as PromiseBelongsTo<BestuurseenheidModel>;
       const editorDocument = await this.createEditorDocument.perform(
         title,
         generatedTemplate,
         container,
       );
-      container.currentVersion = editorDocument;
+      container.currentVersion =
+        editorDocument as unknown as PromiseBelongsTo<EditorDocumentModel>;
       await container.save();
       return container;
     },
   );
 
   async retrieveDocumentParts(document: EditorDocumentModel) {
-    return Promise.all(
+    const parts = await Promise.all(
       this.getDocumentparts(document).map(async (uri) => {
         const part = (
-          await this.store.query('document-container', {
+          await this.store.query<DocumentContainerModel>('document-container', {
             'filter[:uri:]': uri,
-            // @ts-expect-error no idea how to configure this to work correctly...
+            // @ts-expect-error I assume this error is due to ConceptModel not being properly typed
             include: 'is-part-of',
           })
         )[0];
         return part;
       }),
     );
+    return parts.filter(isSome);
   }
 
   fetchRevisions = task(
@@ -225,7 +232,7 @@ export default class DocumentService extends Service {
         'editor-document',
         {
           'filter[document-container][id]': documentContainerId,
-          // @ts-expect-error no idea how to configure this to work correctly...
+          // @ts-expect-error I assume this error is due to ConceptModel not being properly typed
           include: 'status',
           sort: '-updated-on',
           'page[size]': pageSize,
