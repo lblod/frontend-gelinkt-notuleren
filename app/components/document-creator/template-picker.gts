@@ -144,21 +144,6 @@ export default class TemplatePicker extends Component<Sig> {
     ++this.pageNumber;
   };
 
-  @tracked favs: string[] = [];
-  isFav = (thing: PreviewableDocument) => {
-    return this.favs.includes(thing.title ?? '');
-  };
-  setFav = (thing: PreviewableDocument) => {
-    const existingI = this.favs.indexOf(thing.title ?? '');
-    if (~existingI) {
-      const clone = [...this.favs];
-      clone.splice(existingI, 1);
-      this.favs = clone;
-    } else {
-      this.favs = this.favs.concat(thing.title ?? '');
-    }
-  };
-
   <template>
     <AuMainContainer class='snippet-modal--main-container' as |mc|>
       <mc.sidebar>
@@ -201,8 +186,6 @@ export default class TemplatePicker extends Component<Sig> {
                 <PreviewList
                   @docs={{this.templateResource.value}}
                   @onInsert={{this.onSelect}}
-                  @isFavourite={{this.isFav}}
-                  @toggleFavourite={{this.setFav}}
                 />
               {{else}}
                 <AlertNoItems />

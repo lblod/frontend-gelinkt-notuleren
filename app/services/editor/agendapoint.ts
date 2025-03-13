@@ -121,12 +121,14 @@ import { EditorState, ProseParser } from '@lblod/ember-rdfa-editor';
 import { htmlToDoc } from '@lblod/ember-rdfa-editor/utils/_private/html-utils';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import { isRdfaAttrs } from '@lblod/ember-rdfa-editor/core/schema';
+import type { TransactionCombinatorResult } from '@lblod/ember-rdfa-editor/utils/transaction-utils';
+import SaySerializer from '@lblod/ember-rdfa-editor/core/say-serializer';
 import { BESLUIT } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
+import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import configurationPerAdminUnit from '../../config/configuration-per-admin-unit';
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
-import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 
 // Type hack
 const ENV = ENV_OBJ as Record<string, string>;
@@ -413,5 +415,30 @@ export default class AgendapointEditorService extends Service {
       ],
     });
     return state;
+  };
+
+  /**
+   * Use a headless prosemirror instance to load the given HTML, pass the state to the generator to
+   * produce some transactions, then apply those transactions to the instance and pass back the
+   * resulting HTML
+   */
+  processDocumentHeadlessly = (
+    html: string,
+    transactionGenerator: (
+      state: EditorState,
+    ) => TransactionCombinatorResult<boolean>,
+  ): string => {
+    let state = this.getState(html);
+    const combResult = transactionGenerator(state);
+    if (combResult.result.every((ok) => ok)) {
+      state = state.applyTransaction(combResult.transaction).state;
+    }
+
+    const serializer = SaySerializer.fromSchema(state.schema, () => state);
+    const div = document.createElement('div');
+    const doc = serializer.serializeNode(state.doc, undefined);
+    div.appendChild(doc);
+
+    return div.innerHTML;
   };
 }

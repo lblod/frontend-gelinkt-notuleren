@@ -8,8 +8,13 @@ export default class InboxAgendapointsNewController extends Controller {
   @service plausible;
   @service standardTemplate;
   @service templateFetcher;
+  @service('editor/agendapoint') agendapointEditor;
 
   folderId = EDITOR_FOLDERS.DECISION_DRAFTS;
+
+  get editorConfig() {
+    return this.agendapointEditor.config;
+  }
 
   @action
   redirectToAgendapoint(container, chosenTemplate) {

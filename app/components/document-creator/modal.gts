@@ -7,12 +7,17 @@ import t from 'ember-intl/helpers/t';
 import { not } from 'ember-truth-helpers';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
-import TemplatePicker, { type GetTemplates } from './template-picker';
-import type DocumentService from '../../services/document-service';
-import type CurrentSessionService from '../../services/current-session';
-import MetadataForm from './metadata-form';
-import type { Template } from '../../services/template-fetcher';
+import { type BesluitTypePluginOptions } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/index';
+import fetchBesluitTypes, {
+  type BesluitType,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/fetchBesluitTypes';
+import { type BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
+import type DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
+import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
+import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
+import TemplatePicker, { type GetTemplates } from './template-picker';
+import MetadataForm from './metadata-form';
 
 const truthy = (test: unknown) => !!test;
 
@@ -23,15 +28,36 @@ interface Sig {
     folderId: string;
     onCancel: () => void;
     onCreate: (container: unknown, template: Template) => void;
+    decisionTypeOptions?: BesluitTypePluginOptions;
   };
 }
 
 export default class DocumentCreatorModal extends Component<Sig> {
-  @service declare store: object;
   @service declare documentService: DocumentService;
   @service declare currentSession: CurrentSessionService;
-
   @tracked selectedTemplate: Template | undefined;
+  @tracked title = '';
+  @tracked invalidTitle = false;
+  @tracked decisionType?: BesluitTypeInstance;
+  @tracked decisionTypes?: BesluitType[];
+
+  constructor(owner: unknown, args: Sig['Args']) {
+    super(owner, args);
+    if (args.decisionTypeOptions) {
+      this.decisionTypesTask.perform().catch((err) => {
+        console.error('Error when fetching decision types', err);
+      });
+    }
+  }
+
+  get createDisabled() {
+    return (
+      !this.selectedTemplate ||
+      this.invalidTitle ||
+      !this.title ||
+      (this.decisionTypes && !this.decisionType)
+    );
+  }
 
   selectTemplate = (template: Template) => {
     this.selectedTemplate = template;
@@ -39,9 +65,9 @@ export default class DocumentCreatorModal extends Component<Sig> {
   deselectTemplate = () => {
     this.selectedTemplate = undefined;
   };
-
-  @tracked title = '';
-  @tracked invalidTitle = false;
+  setDecisionType = (selected: BesluitTypeInstance) => {
+    this.decisionType = selected;
+  };
 
   updateTitle = (title: string) => {
     this.title = title;
@@ -61,13 +87,18 @@ export default class DocumentCreatorModal extends Component<Sig> {
         title: this.title,
         folderId: this.args.folderId,
         group: this.currentSession.group as BestuurseenheidModel,
+        decisionType: this.decisionType,
       });
       this.args.onCreate(container, this.selectedTemplate);
     }
   });
-  get createDisabled() {
-    return !this.selectedTemplate || this.invalidTitle || !this.title;
-  }
+
+  decisionTypesTask = task(async () => {
+    if (this.args.decisionTypeOptions) {
+      const { endpoint, classificatieUri } = this.args.decisionTypeOptions;
+      this.decisionTypes = await fetchBesluitTypes(classificatieUri, endpoint);
+    }
+  });
 
   <template>
     <AuModal
@@ -105,6 +136,9 @@ export default class DocumentCreatorModal extends Component<Sig> {
           @title={{this.title}}
           @invalidTitle={{this.invalidTitle}}
           @updateTitle={{this.updateTitle}}
+          @selectedType={{this.decisionType}}
+          @decisionTypes={{this.decisionTypes}}
+          @setDecisionType={{this.setDecisionType}}
         />
       </Modal.Body>
       <Modal.Footer>

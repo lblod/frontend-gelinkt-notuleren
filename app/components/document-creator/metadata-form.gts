@@ -4,13 +4,19 @@ import { v4 as uuidv4 } from 'uuid';
 import t from 'ember-intl/helpers/t';
 import AuLabel from '@appuniversum/ember-appuniversum/components/au-label';
 import AuTextarea from '@appuniversum/ember-appuniversum/components/au-textarea';
+import BesluitTypeForm from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-type-plugin/besluit-type-form';
 import RequiredField from '../../components/required-field';
+import type { BesluitType } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/fetchBesluitTypes';
+import type { BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
 
 interface Sig {
   Args: {
     title: string;
     invalidTitle?: boolean;
     updateTitle: (title: string) => void;
+    selectedType?: BesluitTypeInstance;
+    decisionTypes?: BesluitType[];
+    setDecisionType?: (selected: BesluitTypeInstance) => void;
   };
 }
 
@@ -39,6 +45,17 @@ export default class MetadataForm extends Component<Sig> {
           />
         {{/let}}
       </div>
+      {{! The types for ember-truth-helpers 'and' don't seem to work with the types here }}
+      {{#if @decisionTypes}}
+        {{#if @setDecisionType}}
+          <BesluitTypeForm
+            class='au-u-margin-bottom-large'
+            @types={{@decisionTypes}}
+            @selectedType={{@selectedType}}
+            @setType={{@setDecisionType}}
+          />
+        {{/if}}
+      {{/if}}
     </form>
   </template>
 }

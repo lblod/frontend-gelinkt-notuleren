@@ -8,6 +8,8 @@ import { analyse } from '@lblod/marawa/rdfa-context-scanner';
 import type Triple from '@lblod/marawa/triple';
 import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 import { isSome } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import { setBesluitType } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/set-besluit-type';
+import { type BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
 import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import type Store from 'frontend-gelinkt-notuleren/services/store';
@@ -18,16 +20,20 @@ import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetc
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import type ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import type EditorDocumentFolderModel from 'frontend-gelinkt-notuleren/models/editor-document-folder';
+import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 
 interface PersistDocumentArgs {
   template: Template;
   title: string;
   folderId: string;
   group: BestuurseenheidModel;
+  decisionType?: BesluitTypeInstance;
 }
 
 export default class DocumentService extends Service {
   @service declare store: Store;
+  @service('editor/agendapoint')
+  declare agendapointEditor: AgendapointEditorService;
 
   extractTriplesFromDocument(editorDocument: EditorDocumentModel) {
     const node = document.createElement('body');
@@ -177,8 +183,20 @@ export default class DocumentService extends Service {
   }
 
   persistDocument = task(
-    async ({ template, title, folderId, group }: PersistDocumentArgs) => {
-      const generatedTemplate = await this.buildTemplate(template);
+    async ({
+      template,
+      title,
+      folderId,
+      group,
+      decisionType,
+    }: PersistDocumentArgs) => {
+      let generatedTemplate = await this.buildTemplate(template);
+      if (decisionType) {
+        generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
+          generatedTemplate,
+          (state) => setBesluitType(state, decisionType),
+        );
+      }
       const container = this.store.createRecord<DocumentContainerModel>(
         'document-container',
         {},
