@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.51.0
+
+### Minor Changes
+
+- [`bea76c1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bea76c1370f9727497e8da607b0a40ef1a02945d) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update ember-rdfa-editor to 11.3.0 and ember-rdfa-editor-lblod-plugins to 28.1.0
+
+### Patch Changes
+
+- [#835](https://github.com/lblod/frontend-gelinkt-notuleren/pull/835) [`f3ed685`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f3ed685aa9908895609b8dcd83b3368f0b636038) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix links on cookiestatement legal page
+
+- [#835](https://github.com/lblod/frontend-gelinkt-notuleren/pull/835) [`bcc47d0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bcc47d0dbdef37c4b7122f61304ac39c5a5823e6) Thanks [@elpoelma](https://github.com/elpoelma)! - Fix telephone number link on accessibility statement page
+
 ## 5.50.0
 
 ### Minor Changes
