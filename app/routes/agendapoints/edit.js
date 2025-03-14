@@ -19,23 +19,14 @@ export default class AgendapointsEditRoute extends Route {
   async model() {
     const { documentContainer, returnToMeeting } =
       this.modelFor('agendapoints');
-    const standardTemplatesPromise =
-      this.standardTemplate.fetchTemplates.perform();
-    const dynamicTemplatesPromise = this.templateFetcher.fetch.perform({
-      templateType:
-        'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
-    });
-
-    const templatesPromise = Promise.all([
-      standardTemplatesPromise,
-      dynamicTemplatesPromise,
-    ]).then((result) => result.flat());
+    const templates = this.standardTemplate.fetchTemplates.perform();
 
     return RSVP.hash({
       documentContainer,
       editorDocument: documentContainer.currentVersion,
       returnToMeeting,
-      templates: templatesPromise,
+      // This does not include dynamic templates as it is only used for the standard template plugin
+      templates,
     });
   }
 

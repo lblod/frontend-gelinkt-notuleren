@@ -118,6 +118,10 @@ delete-modal:
 document-creator:
   title-field: Titel document
   template: Sjabloon
+  back-to-selector: terug naar sjabloon kiezen
+  selector:
+    filters: Filters
+    search-field: Zoek op sjabloon naam
 
 document-history:
   load-more: Meer laden
@@ -694,6 +698,7 @@ utils:
   history: HISTORIEK
   full-history: Volledige historiek bekijken
   create-new-version: Nieuwe versie maken
+  create: Aanmaken
   not-found:
     title: '{type} niet gevonden'
     explanation: 'Het is mogelijk dat u met dit account geen toegang heeft tot {type}.'
