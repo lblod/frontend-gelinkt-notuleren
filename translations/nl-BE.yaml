@@ -120,7 +120,7 @@ document-creator:
   template: Sjabloon
   back-to-selector: terug naar sjabloon kiezen
   selector:
-    filters: Filteren
+    filters: Filters
     search-field: Zoek op sjabloon naam
 
 document-history:
