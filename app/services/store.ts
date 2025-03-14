@@ -1,9 +1,16 @@
-// eslint-disable-next-line ember/use-ember-data-rfc-395-imports
 import Store from 'ember-data/store';
 import ArrayProxy from '@ember/array/proxy';
+import type {
+  LegacyResourceQuery,
+  QueryOptions,
+} from '@ember-data/store/types';
 
 export default class extends Store {
-  async count(modelName, query, options) {
+  async count(
+    modelName: string,
+    query: LegacyResourceQuery,
+    options?: QueryOptions,
+  ) {
     query = {
       ...query,
       page: {
@@ -11,16 +18,21 @@ export default class extends Store {
       },
     };
     const results = await this.query(modelName, query, options);
-    return results.meta.count;
+    return results.meta?.['count'] as number | null | undefined;
   }
 
-  async countAndFetchAll(modelName, query, options, batchSize = 100) {
+  async countAndFetchAll(
+    modelName: string,
+    query: LegacyResourceQuery,
+    options?: QueryOptions,
+    batchSize = 100,
+  ) {
     if ('page' in query || 'page[size]' in query || 'page[number]' in query) {
       console.error(
         'Passed `page` to `countAndFetchAll` of query, but this will overwrite these parameters.',
       );
     }
-    const count = await this.count(modelName, query, options);
+    const count = (await this.count(modelName, query, options)) ?? 0;
     const nbOfBatches = Math.ceil(count / batchSize);
     const batches = [];
     for (let i = 0; i < nbOfBatches; i++) {

@@ -9,9 +9,27 @@ import { trackedReset } from 'tracked-toolbox';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { copyStringToClipboard } from '../utils/copy-string-to-clipboard';
 import { stripHtmlForPublish } from '@lblod/ember-rdfa-editor/utils/strip-html-for-publish';
-
-class DownloadButton extends Component {
-  @service intl;
+import type IntlService from 'ember-intl/services/intl';
+type Section = {
+  label?: string;
+  selector?: string;
+  content?: string;
+  parts?: Section[];
+  translatedLabel?: string;
+  contentSelector?: string;
+  callback?: (element: Element) => Element | null | undefined;
+  labelSelector?: string;
+  labelCallback?: (element: Element) => Element;
+};
+interface Sig {
+  Element: HTMLButtonElement;
+  Args: {
+    translatedLabel?: string;
+    section: Section;
+  };
+}
+class DownloadButton extends Component<Sig> {
+  @service declare intl: IntlService;
 
   get isSuccess() {
     return this.copyToClipboard.last?.isSuccessful;
@@ -20,11 +38,19 @@ class DownloadButton extends Component {
     return this.isSuccess ? 'circle-check' : undefined;
   }
   get label() {
-    return this.args.translatedLabel ?? this.intl.t(this.args.section.label);
+    if (this.args.translatedLabel) {
+      return this.args.translatedLabel;
+    }
+    if (this.args.section.label) {
+      return this.intl.t(this.args.section.label);
+    }
+    return '';
   }
 
   copyToClipboard = task(async () => {
-    await copyStringToClipboard({ html: this.args.section.content.trim() });
+    await copyStringToClipboard({
+      html: this.args.section.content?.trim() ?? '',
+    });
   });
 
   <template>
@@ -46,7 +72,7 @@ class DownloadButton extends Component {
   </template>
 }
 
-const SECTIONS = [
+const SECTIONS: Section[] = [
   {
     label: 'copy-options.section.title',
     selector:
@@ -100,51 +126,63 @@ const SECTIONS = [
   },
 ];
 
-function htmlSafer(text) {
-  return htmlSafe(text);
+function htmlSafer(text?: string) {
+  return htmlSafe(text ?? '');
 }
 
 // This method of looking for query selectors is error-prone as it assumes that the document follows
 // the current DOM output specs. This is not necessarily true of historic or future documents. It
 // would be better to either use an RDFa parser that can also return the elements associated with
 // relations or a headless prosemirror instance.
-function update(component) {
+function update(component: DecisionCopyParts): Section[] | undefined {
   const parser = new DOMParser();
   const parsed = parser.parseFromString(
-    stripHtmlForPublish(component.args.decision.content),
+    stripHtmlForPublish(component.args.decision.content ?? ''),
     'text/html',
   );
   const temporaryRenderingSpace = document.createElement('div');
-  document.firstElementChild.appendChild(temporaryRenderingSpace);
+  const firstChild = document.firstElementChild;
+  if (!firstChild) {
+    return;
+  }
+  firstChild.appendChild(temporaryRenderingSpace);
   const mappedSections = SECTIONS.flatMap(
-    ({ label, selector, parts, callback = (a) => a }) => {
-      const elements = Array.from(parsed.querySelectorAll(selector));
+    ({ label, selector, parts, callback = (a: Element) => a }) => {
+      const elements = selector
+        ? Array.from(parsed.querySelectorAll(selector))
+        : [];
       return elements.map((element) => {
         const contentElement = callback(element);
         // Note, it's important to generate the content here as with the use of DOM apis in the
         // callbacks, it's easy to accidentally mutate `contentElement`. For example when appending
         // parts of the content to a 'container' element.
-        const contentHtml = contentElement.outerHTML;
-        let foundParts = [];
+        const contentHtml = contentElement?.outerHTML;
+        const foundParts: Section[] = [];
         if (parts) {
-          for (let partType of parts) {
+          for (const partType of parts) {
             const partCb = partType.callback || ((a) => a);
-            const partElements =
-              contentElement.querySelectorAll(partType.selector) ?? [];
+            const partElements = partType.selector
+              ? contentElement?.querySelectorAll(partType.selector) ?? []
+              : [];
             partElements.forEach((part) => {
               const partElement = partCb(part);
-              const partLabel = partType.labelCallback
-                ? partType.labelCallback(part)
-                : partElement.querySelector(partType.labelSelector);
+
+              let partLabel;
+              if (partType.labelCallback) {
+                partLabel = partType.labelCallback(part);
+              } else if (partType.labelSelector) {
+                partLabel = partElement?.querySelector(partType.labelSelector);
+              }
               const partContent = partType.contentSelector
-                ? partElement.querySelector(partType.contentSelector)?.outerHTML
-                : partElement.outerHTML;
+                ? partElement?.querySelector(partType.contentSelector)
+                    ?.outerHTML
+                : partElement?.outerHTML;
               if (partLabel && partContent) {
                 // Put the element into the DOM so that `innerText` can know which parts of the
                 // content are human readable in `innerText`
                 temporaryRenderingSpace.replaceChildren(partLabel);
                 foundParts.push({
-                  translatedLabel: partLabel.innerText,
+                  translatedLabel: (partLabel as HTMLElement).innerText,
                   content: partContent,
                 });
               }
@@ -164,12 +202,20 @@ function update(component) {
   return mappedSections;
 }
 
-export default class DecisionCopyParts extends Component {
+interface DecisionCopyPartsSig {
+  Args: {
+    decision: Section;
+  };
+}
+export default class DecisionCopyParts extends Component<DecisionCopyPartsSig> {
+  @service declare intl: IntlService;
   @trackedReset({
     memo: 'decision.content',
     update,
   })
   sections = update(this);
+  sectionLabel = (section: Section) =>
+    section.label ? this.intl.t(section.label) : '';
 
   <template>
     <div class='au-o-flow--small au-u-3-5'>
@@ -177,7 +223,7 @@ export default class DecisionCopyParts extends Component {
         <div class='gn-meeting-copy--section-container'>
           <div class='gn-meeting-copy--structure'>
             <div class='gn-meeting-copy--structure-header'>
-              {{t section.label}}
+              {{this.sectionLabel section}}
             </div>
             {{#each section.parts as |part|}}
               <div class='gn-meeting-copy--structure-content'>

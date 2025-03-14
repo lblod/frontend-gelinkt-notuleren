@@ -1,11 +1,23 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
+  "glint": {
+    "environment": ["ember-loose", "ember-template-imports"],
+    "checkStandaloneTemplates": false
+  },
   "compilerOptions": {
-    "module": "esnext",
-    "experimentalDecorators": true,
     "allowJs": true,
-    "checkJs": false,
+    // "checkJs": true,
+    // The combination of `baseUrl` with `paths` allows Ember's classic package
+    // layout, which is not resolvable with the Node resolution algorithm, to
+    // work with TypeScript.
+    "baseUrl": ".",
+    "paths": {
+      "frontend-gelinkt-notuleren/tests/*": ["tests/*"],
+      "frontend-gelinkt-notuleren/*": ["app/*"],
+      "*": ["types/*"]
+    },
     "types": [
+      "./node_modules/ember-source/types/stable",
       "./node_modules/@ember-data-types/adapter/unstable-preview-types",
       "./node_modules/@ember-data-types/graph/unstable-preview-types",
       "./node_modules/@ember-data-types/json-api/unstable-preview-types",
@@ -17,13 +29,8 @@
       "./node_modules/@ember-data-types/store/unstable-preview-types",
       "./node_modules/@ember-data-types/tracking/unstable-preview-types",
       "./node_modules/@warp-drive-types/core-types/unstable-preview-types",
-      "./node_modules/ember-data-types/unstable-preview-types",
-      "ember-source/types"
+      "./node_modules/@warp-drive/core-types/unstable-preview-types",
+      "./node_modules/ember-data-types/unstable-preview-types"
     ]
-  },
-  "exclude": ["node_modules", "dist"],
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"],
-    "checkStandaloneTemplates": false
   }
 }
