@@ -7,6 +7,7 @@ import Model, {
   type AsyncHasMany,
 } from '@ember-data/model';
 import { type Type } from '@warp-drive/core-types/symbols';
+import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import defaultContext from 'frontend-gelinkt-notuleren/config/editor-document-default-context';
 import type DocumentContainerModel from './document-container';
 import type ConceptModel from './concept';
@@ -14,15 +15,13 @@ import type ConceptModel from './concept';
 export default class EditorDocumentModel extends Model {
   declare [Type]: 'editor-document';
 
-  @attr declare identifier?: string | null;
-  @attr declare uri?: string | null;
-  @attr declare title?: string | null;
-  @attr declare content?: string | null;
-  @attr('string', { defaultValue: defaultContext }) declare context:
-    | string
-    | null;
-  @attr('datetime') declare createdOn?: Date | null;
-  @attr('datetime') declare updatedOn?: Date | null;
+  @attr identifier: Option<string>;
+  @attr uri: Option<string>;
+  @attr title: Option<string>;
+  @attr content: Option<string>;
+  @attr('string', { defaultValue: defaultContext }) context: Option<string>;
+  @attr('datetime') createdOn: Option<Date>;
+  @attr('datetime') updatedOn: Option<Date>;
 
   @belongsTo('concept', { inverse: null, async: true })
   declare type: AsyncBelongsTo<ConceptModel>;
