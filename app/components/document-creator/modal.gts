@@ -11,11 +11,15 @@ import { type BesluitTypePluginOptions } from '@lblod/ember-rdfa-editor-lblod-pl
 import fetchBesluitTypes, {
   type BesluitType,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/fetchBesluitTypes';
-import { type BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
+import {
+  checkBesluitTypeInstance,
+  type BesluitTypeInstance,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
 import type DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
+import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import TemplatePicker, { type GetTemplates } from './template-picker';
 import MetadataForm from './metadata-form';
 
@@ -35,6 +39,8 @@ interface Sig {
 export default class DocumentCreatorModal extends Component<Sig> {
   @service declare documentService: DocumentService;
   @service declare currentSession: CurrentSessionService;
+  @service('editor/agendapoint')
+  declare agendapointEditor: AgendapointEditorService;
   @tracked selectedTemplate: Template | undefined;
   @tracked title = '';
   @tracked invalidTitle = false;
@@ -61,6 +67,11 @@ export default class DocumentCreatorModal extends Component<Sig> {
 
   selectTemplate = (template: Template) => {
     this.selectedTemplate = template;
+    if (this.decisionTypes) {
+      this.detectDecisionTypeFromTemplate.perform(template).catch((err) => {
+        console.error('Error detecting decision type from template', err);
+      });
+    }
   };
   deselectTemplate = () => {
     this.selectedTemplate = undefined;
@@ -68,6 +79,21 @@ export default class DocumentCreatorModal extends Component<Sig> {
   setDecisionType = (selected: BesluitTypeInstance) => {
     this.decisionType = selected;
   };
+
+  detectDecisionTypeFromTemplate = task(async (template: Template) => {
+    if (!this.decisionTypes) return;
+    await template.loadBody?.();
+    const templateDecisionType =
+      this.agendapointEditor.extractFromDocumentHeadlessly(
+        template.body,
+        (state) =>
+          this.decisionTypes &&
+          checkBesluitTypeInstance(state, this.decisionTypes),
+      );
+    if (templateDecisionType) {
+      this.decisionType = templateDecisionType;
+    }
+  });
 
   updateTitle = (title: string) => {
     this.title = title;
@@ -127,7 +153,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
         <AuButton
           @skin='link'
           @icon='chevron-left'
-          class='au-u-padding-left'
+          class='au-u-padding-left au-u-margin-top-small'
           {{on 'click' this.deselectTemplate}}
         >
           {{t 'document-creator.back-to-selector'}}

@@ -418,6 +418,18 @@ export default class AgendapointEditorService extends Service {
   };
 
   /**
+   * Use a headless prosemirror instance to load the given HTML and pass back the result of running
+   * the callback on that editor state
+   */
+  extractFromDocumentHeadlessly = <R = void>(
+    html: string,
+    callback: (state: EditorState) => R,
+  ): R => {
+    const state = this.getState(html);
+    return callback(state);
+  };
+
+  /**
    * Use a headless prosemirror instance to load the given HTML, pass the state to the generator to
    * produce some transactions, then apply those transactions to the instance and pass back the
    * resulting HTML
