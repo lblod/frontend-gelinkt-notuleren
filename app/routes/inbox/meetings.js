@@ -1,5 +1,7 @@
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
+import { action } from '@ember/object';
+import setupLoading from '../../utils/setupLoading';
 
 export default class InboxMeetingsRoute extends Route {
   @service store;
@@ -21,5 +23,12 @@ export default class InboxMeetingsRoute extends Route {
     };
 
     return this.store.query('zitting', options);
+  }
+  @action
+  loading(transition) {
+    // eslint-disable-next-line ember/no-controller-access-in-routes
+    const controller = this.controllerFor(this.routeName);
+    const result = setupLoading(transition, controller, this.routeName);
+    return result;
   }
 }
