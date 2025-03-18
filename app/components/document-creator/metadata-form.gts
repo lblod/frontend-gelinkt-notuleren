@@ -29,27 +29,24 @@ export default class MetadataForm extends Component<Sig> {
 
   <template>
     <form class='au-o-flow au-u-padding'>
-      <div>
-        {{#let (uuidv4) as |id|}}
-          <AuLabel @error={{@invalidTitle}} for={{id}}>
-            {{t 'document-creator.title-field'}}
-            <RequiredField />
-          </AuLabel>
-          <AuTextarea
-            @error={{@invalidTitle}}
-            @width='block'
-            type='text'
-            value={{@title}}
-            id={{id}}
-            {{on 'input' this.updateTitle}}
-          />
-        {{/let}}
-      </div>
+      {{#let (uuidv4) as |id|}}
+        <AuLabel @error={{@invalidTitle}} for={{id}}>
+          {{t 'document-creator.title-field'}}
+          <RequiredField />
+        </AuLabel>
+        <AuTextarea
+          @error={{@invalidTitle}}
+          @width='block'
+          type='text'
+          value={{@title}}
+          id={{id}}
+          {{on 'input' this.updateTitle}}
+        />
+      {{/let}}
       {{! The types for ember-truth-helpers 'and' don't seem to work with the types here }}
       {{#if @decisionTypes}}
         {{#if @setDecisionType}}
           <BesluitTypeForm
-            class='au-u-margin-bottom-large'
             @types={{@decisionTypes}}
             @selectedType={{@selectedType}}
             @setType={{@setDecisionType}}

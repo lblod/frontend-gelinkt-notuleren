@@ -147,6 +147,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
       @modalOpen={{truthy this.selectedTemplate}}
       @closeModal={{this.deselectTemplate}}
       @padding='none'
+      @overflow={{true}}
       as |Modal|
     >
       <Modal.Body>
