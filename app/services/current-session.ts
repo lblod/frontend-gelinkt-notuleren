@@ -7,16 +7,18 @@ import type AccountModel from 'frontend-gelinkt-notuleren/models/account';
 import type GebruikerModel from 'frontend-gelinkt-notuleren/models/gebruiker';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
+import type UserPreferencesModel from 'frontend-gelinkt-notuleren/models/user-preferences';
 
 export default class CurrentSessionService extends Service {
   @service declare session: SessionService;
   @service declare store: Store;
 
-  @tracked account?: AccountModel;
-  @tracked user?: Option<GebruikerModel>;
-  @tracked group?: BestuurseenheidModel;
+  @tracked account: Option<AccountModel>;
+  @tracked user: Option<GebruikerModel>;
+  @tracked group: Option<BestuurseenheidModel>;
   @tracked roles: string[] = [];
-  @tracked classificatie?: BestuurseenheidClassificatieCodeModel;
+  @tracked classificatie: Option<BestuurseenheidClassificatieCodeModel>;
+  @tracked preferences: Option<UserPreferencesModel>;
 
   get canRead() {
     return this.hasRole('GelinktNotuleren-lezer');
@@ -38,31 +40,49 @@ export default class CurrentSessionService extends Service {
     if (this.session.isAuthenticated) {
       const accountId =
         this.session.data.authenticated.relationships.account.data.id;
-      this.account = await this.store.findRecord<AccountModel>(
-        'account',
-        accountId,
-        {
-          include: ['gebruiker'],
-        },
-      );
-      this.user = await this.account.get('gebruiker');
-
       const groupId =
         this.session.data.authenticated.relationships.group.data.id;
-      this.group = await this.store.findRecord<BestuurseenheidModel>(
-        'bestuurseenheid',
-        groupId,
-        {
-          include: ['classificatie'],
-        },
-      );
-      this.classificatie = (await this.group
-        .classificatie) as BestuurseenheidClassificatieCodeModel;
       this.roles = this.session.data.authenticated.data.attributes.roles;
+      await Promise.all([
+        this.store
+          .findRecord<AccountModel>('account', accountId, {
+            include: ['gebruiker', 'gebruiker.preferences'],
+          })
+          .then(async (account) => {
+            this.account = account;
+            this.user = await account.gebruiker;
+            this.preferences = await this.user?.preferences;
+            if (!this.preferences && this.user) {
+              this.preferences = this.store.createRecord<UserPreferencesModel>(
+                'user-preferences',
+                {
+                  gebruiker: this.user,
+                  favouriteTemplates: [],
+                },
+              );
+              await this.preferences.save();
+            }
+          }),
+        this.store
+          .findRecord<BestuurseenheidModel>('bestuurseenheid', groupId, {
+            include: ['classificatie'],
+          })
+          .then(async (group) => {
+            this.group = group;
+            this.classificatie = await group.classificatie;
+          }),
+      ]);
     }
   }
 
   hasRole(role: string) {
     return this.roles.includes(role);
+  }
+
+  async updatePreferences(newPrefs: UserPreferencesModel) {
+    if (this.session.isAuthenticated) {
+      this.preferences = newPrefs;
+      await newPrefs.save();
+    }
   }
 }
