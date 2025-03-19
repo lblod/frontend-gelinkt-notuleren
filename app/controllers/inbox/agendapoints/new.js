@@ -25,12 +25,13 @@ export default class InboxAgendapointsNewController extends Controller {
     this.router.transitionTo('agendapoints.edit', container.id);
   }
 
-  getTemplates = async ({ filter, pagination, abortSignal }) => {
+  getTemplates = async ({ filter, pagination, favourites, abortSignal }) => {
     const dynamicTemplatesPromise = this.templateFetcher.fetch.perform({
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
       titleFilter: filter?.title,
       pagination,
+      favourites,
       abortSignal,
     });
     if (pagination.pageNumber === 0) {

@@ -1,6 +1,7 @@
 import pagination from '@lblod/ember-rdfa-editor-lblod-plugins/helpers/pagination';
 import Component from '@glimmer/component';
 import { assert } from '@ember/debug';
+import { service } from '@ember/service';
 import { restartableTask, timeout } from 'ember-concurrency';
 import { task as trackedTask } from 'reactiveweb/ember-concurrency';
 import { tracked } from '@glimmer/tracking';
@@ -18,7 +19,9 @@ import PreviewList from '@lblod/ember-rdfa-editor-lblod-plugins/components/commo
 import AlertNoItems from '@lblod/ember-rdfa-editor-lblod-plugins/components/common/search/alert-no-items';
 import PaginationView from '@lblod/ember-rdfa-editor-lblod-plugins/components/pagination/pagination-view';
 import { type PreviewableDocument } from '@lblod/ember-rdfa-editor-lblod-plugins/components/common/documents/types';
-import type { Template } from '../../services/template-fetcher';
+import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
+import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
+import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 
 class PreviewableTemplate implements PreviewableDocument {
   title: string;
@@ -58,6 +61,7 @@ class PreviewableTemplate implements PreviewableDocument {
 export type GetTemplates = (args: {
   filter: object;
   abortSignal: AbortSignal;
+  favourites: Option<string[]>;
   pagination: {
     pageNumber: number;
     pageSize: number;
@@ -67,12 +71,13 @@ export type GetTemplates = (args: {
 interface Sig {
   Args: {
     getTemplates: GetTemplates;
-    onCancel?: () => void;
     onSelect: (doc: Template) => void;
   };
 }
 
 export default class TemplatePicker extends Component<Sig> {
+  @service declare currentSession: CurrentSessionService;
+
   // Filtering
   @tracked inputSearchText: string | null = null;
 
@@ -97,12 +102,8 @@ export default class TemplatePicker extends Component<Sig> {
     this.inputSearchText = event.target.value;
   };
 
-  closeModal = async () => {
-    await this.templateResource.cancel();
-    this.args.onCancel?.();
-  };
-
   templateSearch = restartableTask(async () => {
+    this.error = undefined;
     await timeout(500);
 
     const abortController = new AbortController();
@@ -112,6 +113,7 @@ export default class TemplatePicker extends Component<Sig> {
         filter: this.searchText ? { title: this.searchText } : {},
         abortSignal: abortController.signal,
         pagination: { pageNumber: this.pageNumber, pageSize: this.pageSize },
+        favourites: this.currentSession.preferences?.favouriteTemplates,
       });
 
       this.totalCount = queryResult.totalCount;
@@ -139,9 +141,36 @@ export default class TemplatePicker extends Component<Sig> {
   previousPage = () => {
     --this.pageNumber;
   };
-
   nextPage = () => {
     ++this.pageNumber;
+  };
+
+  isFavouriteTemplate = (template: PreviewableTemplate) =>
+    // TODO the standard templates don't have URIs, so treat them as permanent favourites. Remove
+    // this when moving these templates to RB
+    !template.original.uri ||
+    (this.currentSession.preferences?.favouriteTemplates?.includes(
+      template.original.uri,
+    ) ??
+      false);
+  toggleFavouriteTemplate = (template: PreviewableTemplate) => {
+    const preferences = this.currentSession.preferences;
+    if (!preferences || !preferences.favouriteTemplates) {
+      console.error(
+        'No user preferences on current session. This should never happen when logged in',
+      );
+      return;
+    }
+    if (preferences.favouriteTemplates.includes(template.original.uri)) {
+      preferences.favouriteTemplates = preferences.favouriteTemplates.filter(
+        (fav) => fav !== template.original.uri,
+      );
+    } else {
+      preferences.favouriteTemplates.push(template.original.uri);
+    }
+    this.currentSession.updatePreferences(preferences).catch((err) => {
+      console.error('Error when updating favourite templates', err);
+    });
   };
 
   <template>
@@ -186,6 +215,8 @@ export default class TemplatePicker extends Component<Sig> {
                 <PreviewList
                   @docs={{this.templateResource.value}}
                   @onInsert={{this.onSelect}}
+                  @isFavourite={{this.isFavouriteTemplate}}
+                  @toggleFavourite={{this.toggleFavouriteTemplate}}
                 />
               {{else}}
                 <AlertNoItems />
