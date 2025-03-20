@@ -5,7 +5,11 @@ import { decentLocaleMatch } from '../utils/intl';
 
 const featureFlagRegex = /^feature\[(.+)\]$/;
 
-const DEFAULT_LOCALE = 'nl-BE';
+const DEFAULT_LOCALE =
+  !ENV.defaultLanguage || ENV.defaultLanguage.startsWith('{{')
+    ? 'nl-BE'
+    : ENV.defaultLanguage;
+
 export default class ApplicationRoute extends Route {
   @service currentSession;
   @service features;
