@@ -1,10 +1,12 @@
+import { getOwner } from '@ember/owner';
 import Service, { service } from '@ember/service';
 import { v4 as uuidv4 } from 'uuid';
+import type IntlService from 'ember-intl/services/intl';
 import { removePropertiesOfDeletedNodes } from '@lblod/ember-rdfa-editor/plugins/remove-properties-of-deleted-nodes';
 import { defaultAttributeValueGeneration } from '@lblod/ember-rdfa-editor/plugins/default-attribute-value-generation';
 import { rdfaInfoPlugin } from '@lblod/ember-rdfa-editor/plugins/rdfa-info';
 
-import { Schema } from '@lblod/ember-rdfa-editor';
+import { PNode, SayController, Schema } from '@lblod/ember-rdfa-editor';
 import {
   em,
   strikethrough,
@@ -78,7 +80,8 @@ import {
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 
-import ENV from 'frontend-gelinkt-notuleren/config/environment';
+// @ts-expect-error no types for this
+import ENV_OBJ from 'frontend-gelinkt-notuleren/config/environment';
 import {
   regulatoryStatementNode,
   regulatoryStatementNodeView,
@@ -114,21 +117,30 @@ import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import { IVGR_TAGS, RMW_TAGS } from '../../config/mandatee-table-config';
 import { variableAutofillerPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/plugins/autofiller';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
-import { getOwner } from '@ember/application';
 import { EditorState, ProseParser } from '@lblod/ember-rdfa-editor';
 import { htmlToDoc } from '@lblod/ember-rdfa-editor/utils/_private/html-utils';
 import { citationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/citation-plugin';
 import { isRdfaAttrs } from '@lblod/ember-rdfa-editor/core/schema';
+import type { TransactionCombinatorResult } from '@lblod/ember-rdfa-editor/utils/transaction-utils';
+import SaySerializer from '@lblod/ember-rdfa-editor/core/say-serializer';
 import { BESLUIT } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
+import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import configurationPerAdminUnit from '../../config/configuration-per-admin-unit';
+import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
+import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
+
+// Type hack
+const ENV = ENV_OBJ as Record<string, string>;
 
 export default class AgendapointEditorService extends Service {
-  @service intl;
-  @service currentSession;
+  @service declare intl: IntlService;
+  @service declare currentSession: CurrentSessionService;
 
   get config() {
-    const classificatie = this.currentSession.classificatie;
-    const municipality = this.currentSession.group;
+    const classificatie = this.currentSession
+      .classificatie as BestuurseenheidClassificatieCodeModel;
+    const municipality = this.currentSession.group as BestuurseenheidModel;
     const articleUriGenerator = () =>
       `http://data.lblod.info/artikels/${uuidv4()}`;
     return {
@@ -151,7 +163,7 @@ export default class AgendapointEditorService extends Service {
       },
       citation: {
         type: 'nodes',
-        activeInNode(node) {
+        activeInNode(node: PNode) {
           const { attrs } = node;
           if (!isRdfaAttrs(attrs)) {
             return false;
@@ -162,35 +174,35 @@ export default class AgendapointEditorService extends Service {
           return Boolean(match);
         },
         endpoint: '/codex/sparql',
-        decisionsEndpoint: ENV.publicatieEndpoint,
-        defaultDecisionsGovernmentName: municipality.naam,
+        decisionsEndpoint: ENV['publicatieEndpoint'],
+        defaultDecisionsGovernmentName: municipality.naam as string,
       },
       link: {
         interactive: true,
         rdfaAware: true,
       },
       roadsignRegulation: {
-        endpoint: ENV.mowRegistryEndpoint,
-        imageBaseUrl: ENV.roadsignImageBaseUrl,
+        endpoint: ENV['mowRegistryEndpoint'],
+        imageBaseUrl: ENV['roadsignImageBaseUrl'],
         articleUriGenerator,
       },
       besluitType: {
         endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
-        classificatieUri: classificatie?.uri,
+        classificatieUri: classificatie?.uri as string,
       },
       besluitTopic: {
         endpoint: 'https://data.vlaanderen.be/sparql',
       },
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
-        defaultAdministrativeUnit: municipality.uri && {
-          label: municipality.naam,
-          uri: municipality.uri,
+        defaultAdministrativeUnit: (municipality.uri as string | undefined) && {
+          label: municipality.naam as string,
+          uri: municipality.uri as string,
         },
       },
 
       snippet: {
-        endpoint: ENV.regulatoryStatementEndpoint,
+        endpoint: ENV['regulatoryStatementEndpoint'] ?? '',
       },
       location: {
         defaultPointUriRoot:
@@ -211,7 +223,7 @@ export default class AgendapointEditorService extends Service {
       lmb: {
         endpoint: '/sparql',
 
-        defaultAdminUnit: municipality.naam,
+        defaultAdminUnit: municipality.naam as string,
       },
       autofilledVariable: {
         autofilledValues: {
@@ -228,36 +240,41 @@ export default class AgendapointEditorService extends Service {
     };
   }
 
-  get defaultMunicipality() {
-    const classificatie = this.currentSession.classificatie;
+  get defaultMunicipality(): BestuurseenheidModel | { uri: undefined } {
+    const classificatie = this.currentSession
+      .classificatie as BestuurseenheidClassificatieCodeModel;
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
-      return this.currentSession.group;
+      return this.currentSession.group as BestuurseenheidModel;
     } else {
       // Return empty object instead of null so can be used safely in template
-      return {};
+      return { uri: undefined };
     }
   }
 
   get adminUnitConfig() {
-    return configurationPerAdminUnit[this.defaultMunicipality.uri] || {};
+    return (
+      configurationPerAdminUnit[this.defaultMunicipality.uri as string] || {
+        structure: undefined,
+      }
+    );
   }
 
   get codelistEditOptions() {
     return {
-      endpoint: ENV.fallbackCodelistEndpoint,
+      endpoint: ENV['fallbackCodelistEndpoint'],
     };
   }
 
   get locationEditOptions() {
     return {
-      endpoint: ENV.fallbackCodelistEndpoint,
-      zonalLocationCodelistUri: ENV.zonalLocationCodelistUri,
-      nonZonalLocationCodelistUri: ENV.nonZonalLocationCodelistUri,
+      endpoint: ENV['fallbackCodelistEndpoint'],
+      zonalLocationCodelistUri: ENV['zonalLocationCodelistUri'],
+      nonZonalLocationCodelistUri: ENV['nonZonalLocationCodelistUri'],
     };
   }
 
   get nodeViews() {
-    return (controller) => {
+    return (controller: SayController) => {
       return {
         regulatoryStatementNode: regulatoryStatementNodeView(controller),
         link: linkView(this.config.link)(controller),
@@ -270,7 +287,7 @@ export default class AgendapointEditorService extends Service {
         codelist: codelistView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
-        block_rdfa: (node) => new BlockRDFaView(node),
+        block_rdfa: (node: PNode) => new BlockRDFaView(node),
 
         snippet_placeholder: snippetPlaceholderView(this.config.snippet)(
           controller,
@@ -289,7 +306,7 @@ export default class AgendapointEditorService extends Service {
    * @param {boolean} isHeadless - Whether this is for a headless editor, as this requires
    * different config to work correctly
    **/
-  getSchemaAndPlugins(isHeadless) {
+  getSchemaAndPlugins(isHeadless: boolean) {
     const schema = new Schema({
       nodes: {
         doc: docWithConfig({ rdfaAware: true }),
@@ -352,7 +369,7 @@ export default class AgendapointEditorService extends Service {
       linkPasteHandler(schema.nodes.link),
       listTrackingPlugin(),
 
-      emberApplication({ application: getOwner(this) }),
+      emberApplication({ application: unwrap(getOwner(this)) }),
     ];
 
     // The autofiller plugin messes with the headless editor by appending a transaction just
@@ -365,7 +382,7 @@ export default class AgendapointEditorService extends Service {
     return { schema, plugins };
   }
 
-  getState = (html) => {
+  getState = (html: string) => {
     const { schema, plugins } = this.getSchemaAndPlugins(true);
     const parser = ProseParser.fromSchema(schema);
     const doc = htmlToDoc(html, {
@@ -398,5 +415,42 @@ export default class AgendapointEditorService extends Service {
       ],
     });
     return state;
+  };
+
+  /**
+   * Use a headless prosemirror instance to load the given HTML and pass back the result of running
+   * the callback on that editor state
+   */
+  extractFromDocumentHeadlessly = <R = void>(
+    html: string,
+    callback: (state: EditorState) => R,
+  ): R => {
+    const state = this.getState(html);
+    return callback(state);
+  };
+
+  /**
+   * Use a headless prosemirror instance to load the given HTML, pass the state to the generator to
+   * produce some transactions, then apply those transactions to the instance and pass back the
+   * resulting HTML
+   */
+  processDocumentHeadlessly = (
+    html: string,
+    transactionGenerator: (
+      state: EditorState,
+    ) => TransactionCombinatorResult<boolean>,
+  ): string => {
+    let state = this.getState(html);
+    const combResult = transactionGenerator(state);
+    if (combResult.result.every((ok) => ok)) {
+      state = state.applyTransaction(combResult.transaction).state;
+    }
+
+    const serializer = SaySerializer.fromSchema(state.schema, () => state);
+    const div = document.createElement('div');
+    const doc = serializer.serializeNode(state.doc, undefined);
+    div.appendChild(doc);
+
+    return div.innerHTML;
   };
 }

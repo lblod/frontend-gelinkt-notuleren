@@ -118,6 +118,10 @@ delete-modal:
 document-creator:
   title-field: Document title
   template: Template
+  back-to-selector: back to template selection
+  selector:
+    filters: Filters
+    search-field: Search by template name
 
 document-history:
   load-more: Load more
@@ -690,6 +694,7 @@ utils:
   history: History
   full-history: See the full history
   create-new-version: Create new version
+  create: Create
   not-found:
     title: '{type} not found'
     explanation: "It's possible that you don't have access to {type} with this account"

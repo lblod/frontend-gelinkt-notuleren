@@ -1,4 +1,9 @@
-const defaultContext = {
+export interface Context {
+  vocab: string;
+  prefix: Record<string, string>;
+}
+
+const defaultContext: Context = {
   vocab: 'http://data.vlaanderen.be/ns/besluit#',
   prefix: {
     eli: 'http://data.europa.eu/eli/ontology#',
