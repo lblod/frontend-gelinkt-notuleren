@@ -85,7 +85,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
     await template.loadBody?.();
     const templateDecisionType =
       this.agendapointEditor.extractFromDocumentHeadlessly(
-        template.body,
+        template.body ?? '',
         (state) =>
           this.decisionTypes &&
           checkBesluitTypeInstance(state, this.decisionTypes),
