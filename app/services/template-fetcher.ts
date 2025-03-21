@@ -1,35 +1,48 @@
 import Service, { service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import { getOwner } from '@ember/owner';
+import { type InternalOwner } from '@ember/-internals/owner';
 import {
   executeCountQuery,
   executeQuery,
   sparqlEscapeString,
   sparqlEscapeUri,
+  type BindingObject,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
+import { type Environment } from 'frontend-gelinkt-notuleren/config/environment';
+import type SessionService from './session';
+import type Store from './store';
 
-/**
- * @typedef {Object} Template
- * @property {string} uri
- * @property {string} title
- * @property {string} body
- * @property {[string]} contexts
- * @property {[number]} disabledInContexts
- * @property {() => Promise<void>} [loadBody]
- */
+export interface Template {
+  uri: string;
+  title: string;
+  body: string | null;
+  contexts: string[];
+  disabledInContexts: string[];
+  loadBody?: () => Promise<void>;
+}
+// @ts-expect-error This gives a useful type but doesn't match the type constraints somehow...
+type TemplateBindings = Omit<BindingObject<Template>, 'uri'> & {
+  template: { value: string };
+  fileId: { value: string };
+};
 
 export default class TemplateFetcher extends Service {
-  @service session;
-  @service store;
+  @service declare session: SessionService;
+  @service declare store: Store;
 
-  @tracked account;
-  @tracked user;
-  @tracked group;
-  @tracked roles = [];
-
-  fetchByTemplateName = async ({ name, abortSignal }) => {
-    const config = getOwner(this).resolveRegistration('config:environment');
+  fetchByTemplateName = async ({
+    name,
+    abortSignal,
+  }: {
+    name: string;
+    abortSignal?: AbortSignal;
+  }) => {
+    // TODO resolveRegistration is an internal API, we should migrate away from it as it is likely
+    // to disappear
+    const config = (
+      getOwner(this) as InternalOwner | undefined
+    )?.resolveRegistration('config:environment') as Environment;
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
     const sparqlEndpoint = config.regulatoryStatementEndpoint;
 
@@ -73,7 +86,9 @@ export default class TemplateFetcher extends Service {
       abortSignal,
     );
     if (response.ok) {
-      const json = await response.json();
+      const json = (await response.json()) as {
+        results: { bindings: TemplateBindings[] };
+      };
       const bindings = json.results.bindings;
       const templates = bindings.map(this.bindingToTemplate(fileEndpoint));
       return templates[0];
@@ -83,8 +98,18 @@ export default class TemplateFetcher extends Service {
   };
 
   // TODO This is unused. Remove it?
-  fetchByUri = async ({ uri, abortSignal }) => {
-    const config = getOwner(this).resolveRegistration('config:environment');
+  fetchByUri = async ({
+    uri,
+    abortSignal,
+  }: {
+    uri: string;
+    abortSignal?: AbortSignal;
+  }) => {
+    // TODO resolveRegistration is an internal API, we should migrate away from it as it is likely
+    // to disappear
+    const config = (
+      getOwner(this) as InternalOwner | undefined
+    )?.resolveRegistration('config:environment') as Environment;
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
     const sparqlEndpoint = config.regulatoryStatementEndpoint;
 
@@ -126,12 +151,14 @@ export default class TemplateFetcher extends Service {
       abortSignal,
     );
     if (response.ok) {
-      const json = await response.json();
+      const json = (await response.json()) as {
+        results: { bindings: TemplateBindings[] };
+      };
       const bindings = json.results.bindings;
       const templates = bindings.map((binding) =>
         this.bindingToTemplate(fileEndpoint)({
-          template: { value: uri },
           ...binding,
+          template: { value: uri },
         }),
       );
       return templates[0];
@@ -146,10 +173,21 @@ export default class TemplateFetcher extends Service {
       pagination,
       favourites = [],
       abortSignal,
+    }: {
+      templateType: string;
+      titleFilter?: string;
+      pagination?: { pageSize: number; pageNumber: number };
+      favourites?: string[];
+      abortSignal?: AbortSignal;
     }) => {
-      const config = getOwner(this).resolveRegistration('config:environment');
+      // TODO resolveRegistration is an internal API, we should migrate away from it as it is likely
+      // to disappear
+      const config = (
+        getOwner(this) as InternalOwner | undefined
+      )?.resolveRegistration('config:environment') as Environment;
       const fileEndpoint = config.regulatoryStatementFileEndpoint;
       const sparqlEndpoint = config.regulatoryStatementEndpoint;
+
       const filterQuery = !titleFilter
         ? ''
         : `FILTER(CONTAINS(LCASE(?title), LCASE(${sparqlEscapeString(titleFilter)})))`;
@@ -213,7 +251,7 @@ export default class TemplateFetcher extends Service {
         }
       `;
       const [response, resultCount] = await Promise.all([
-        executeQuery({
+        executeQuery<TemplateBindings>({
           endpoint: sparqlEndpoint,
           query: sparqlQuery,
           abortSignal,
@@ -230,28 +268,24 @@ export default class TemplateFetcher extends Service {
     },
   );
 
-  /**
-   * @param {string} sparqlQuery
-   * @returns {string}
-   */
-  queryToFormBody(sparqlQuery) {
+  queryToFormBody(sparqlQuery: string): BodyInit {
     const details = {
       query: sparqlQuery,
       format: 'application/json',
     };
-    let formBody = [];
+    const formBody = [];
     for (const property in details) {
       const encodedKey = encodeURIComponent(property);
-      const encodedValue = encodeURIComponent(details[property]);
+      const encodedValue = encodeURIComponent(
+        details[property as keyof typeof details],
+      );
       formBody.push(encodedKey + '=' + encodedValue);
     }
-    formBody = formBody.join('&');
-    return formBody;
+    return formBody.join('&');
   }
-  bindingToTemplate(fileEndpoint) {
-    /** @return {Template} */
-    return (binding) => {
-      const template = {
+  bindingToTemplate(fileEndpoint: string) {
+    return (binding: TemplateBindings): Template => {
+      const template: Template = {
         uri: binding.template.value,
         title: binding.title.value,
         loadBody: async function () {
@@ -260,6 +294,7 @@ export default class TemplateFetcher extends Service {
           );
           template.body = await response.text();
         },
+        body: null,
         contexts: binding.contexts.value
           ? binding.contexts.value.split('|')
           : [],
@@ -271,13 +306,12 @@ export default class TemplateFetcher extends Service {
       return template;
     };
   }
-  /**
-   * @param {string} endpoint
-   * @param {string} sparqlQuery
-   * @param {AbortSignal} [abortSignal]
-   * @returns {Promise<Response>}
-   */
-  async sendQuery(endpoint, sparqlQuery, abortSignal) {
+
+  async sendQuery(
+    endpoint: string,
+    sparqlQuery: string,
+    abortSignal?: AbortSignal,
+  ): Promise<Response> {
     const formBody = this.queryToFormBody(sparqlQuery);
     const response = await fetch(endpoint, {
       method: 'POST',
