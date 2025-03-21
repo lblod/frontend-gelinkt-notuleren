@@ -1,15 +1,17 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
-import { getOwner } from '@ember/application';
+import { getOwner } from '@ember/owner';
 import {
   executeCountQuery,
   executeQuery,
   sparqlEscapeString,
+  sparqlEscapeUri,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
 
 /**
  * @typedef {Object} Template
+ * @property {string} uri
  * @property {string} title
  * @property {string} body
  * @property {[string]} contexts
@@ -38,6 +40,7 @@ export default class TemplateFetcher extends Service {
       PREFIX schema: <http://schema.org/>
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       SELECT
+        ?template
         ?template_version
         ?title
         ?fileId
@@ -45,7 +48,7 @@ export default class TemplateFetcher extends Service {
         (GROUP_CONCAT(?disabledInContext;SEPARATOR="|") as ?disabledInContexts)
       WHERE {
         BIND("${name}" as ?title)
-        ?uri mu:uuid ?uuid;
+        ?template mu:uuid ?uuid;
           pav:hasCurrentVersion ?template_version.
         ?template_version mu:uuid ?fileId;
                           dct:title ?title.
@@ -60,7 +63,7 @@ export default class TemplateFetcher extends Service {
         }
         FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
       }
-      GROUP BY ?template_version ?title ?fileId
+      GROUP BY ?template ?template_version ?title ?fileId
       ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
     `;
 
@@ -79,6 +82,7 @@ export default class TemplateFetcher extends Service {
     }
   };
 
+  // TODO This is unused. Remove it?
   fetchByUri = async ({ uri, abortSignal }) => {
     const config = getOwner(this).resolveRegistration('config:environment');
     const fileEndpoint = config.regulatoryStatementFileEndpoint;
@@ -124,14 +128,25 @@ export default class TemplateFetcher extends Service {
     if (response.ok) {
       const json = await response.json();
       const bindings = json.results.bindings;
-      const templates = bindings.map(this.bindingToTemplate(fileEndpoint));
+      const templates = bindings.map((binding) =>
+        this.bindingToTemplate(fileEndpoint)({
+          template: { value: uri },
+          ...binding,
+        }),
+      );
       return templates[0];
     } else {
       return null;
     }
   };
   fetch = task(
-    async ({ templateType, titleFilter, pagination, abortSignal }) => {
+    async ({
+      templateType,
+      titleFilter,
+      pagination,
+      favourites = [],
+      abortSignal,
+    }) => {
       const config = getOwner(this).resolveRegistration('config:environment');
       const fileEndpoint = config.regulatoryStatementFileEndpoint;
       const sparqlEndpoint = config.regulatoryStatementEndpoint;
@@ -148,6 +163,7 @@ export default class TemplateFetcher extends Service {
         PREFIX schema: <http://schema.org/>
         PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
         SELECT
+          ?template
           ?template_version
           ?title
           ?fileId
@@ -168,11 +184,12 @@ export default class TemplateFetcher extends Service {
           OPTIONAL {
             ?template_version ext:disabledInContext ?disabledInContext.
           }
+          BIND(?template IN (${favourites.map(sparqlEscapeUri).join(',')}) as ?isFav)
           FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
           ${filterQuery}
         }
-        GROUP BY ?template_version ?title ?fileId
-        ORDER BY LCASE(REPLACE(STR(?title), '^ +| +$', ''))
+        GROUP BY ?isFav ?template ?template_version ?title ?fileId
+        ORDER BY DESC(?isFav) LCASE(REPLACE(STR(?title), '^ +| +$', ''))
         ${paginationQuery}
       `;
       const countQuery = `
@@ -235,6 +252,7 @@ export default class TemplateFetcher extends Service {
     /** @return {Template} */
     return (binding) => {
       const template = {
+        uri: binding.template.value,
         title: binding.title.value,
         loadBody: async function () {
           const response = await fetch(
