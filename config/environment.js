@@ -5,6 +5,7 @@ module.exports = function (environment) {
     environment,
     rootURL: '/',
     locationType: 'history',
+    defaultLanguage: '{{DEFAULT_LANGUAGE}}',
     regulatoryStatementEndpoint: '{{REGULATORY_STATEMENT_ENDPOINT}}',
     regulatoryStatementFileEndpoint: '{{REGULATORY_STATEMENT_FILE_ENDPOINT}}',
     mowRegistryEndpoint: '{{MOW_REGISTRY_ENDPOINT}}',
@@ -77,6 +78,7 @@ module.exports = function (environment) {
   if (environment === 'development') {
     require('dotenv').config();
     ENV.environmentName = 'LOCAL';
+    ENV.defaultLanguage = 'en-us';
     ENV.manual.baseUrl =
       'https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/';
     ENV.manual.notuleren = '#notuleren';
