@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.52.0
+
+### Minor Changes
+
+- [#833](https://github.com/lblod/frontend-gelinkt-notuleren/pull/833) [`aa496fb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/aa496fb01009982152bdfa68b11741e22b4ec333) Thanks [@elpoelma](https://github.com/elpoelma)! - Addition of an application-wide `lang` query parameter which controls the display language of the application. By default, the language of the application is set to `nl-BE`, regardless of the user navigator languages/system locale.
+
+- [#836](https://github.com/lblod/frontend-gelinkt-notuleren/pull/836) [`774df80`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/774df807a5ed29155345589498db2be9866554dc) Thanks [@piemonkey](https://github.com/piemonkey)! - Change agendapoint and regulatory statement creation flow to include a previewable selector for templates
+
+- [#831](https://github.com/lblod/frontend-gelinkt-notuleren/pull/831) [`dff9756`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/dff9756bea35c702a04e935822a225e6ea75b1ba) Thanks [@abeforgit](https://github.com/abeforgit)! - Add typescript support
+
+- [#836](https://github.com/lblod/frontend-gelinkt-notuleren/pull/836) [`52b945e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/52b945ece4a464180425a71a2d3c193ca600c8b3) Thanks [@piemonkey](https://github.com/piemonkey)! - Add ability to set decision type when creating an agendapoint
+
+### Patch Changes
+
+- [#837](https://github.com/lblod/frontend-gelinkt-notuleren/pull/837) [`57c2e95`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/57c2e959a350d67c612e9ced00dcba57fbed68a0) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix loading in inbox tables
+
 ## 5.51.0
 
 ### Minor Changes

@@ -1,6 +1,8 @@
 import Route from '@ember/routing/route';
 import { EDITOR_FOLDERS } from '../../config/constants';
 import { service } from '@ember/service';
+import setupLoading from '../../utils/setupLoading';
+import { action } from '@ember/object';
 
 export default class InboxRegulatoryStatementsRoute extends Route {
   @service store;
@@ -34,5 +36,12 @@ export default class InboxRegulatoryStatementsRoute extends Route {
       options['filter[current-version][title]'] = params.filter;
     }
     return this.store.query('document-container', options);
+  }
+  @action
+  loading(transition) {
+    // eslint-disable-next-line ember/no-controller-access-in-routes
+    const controller = this.controllerFor(this.routeName);
+    const result = setupLoading(transition, controller, this.routeName);
+    return result;
   }
 }
