@@ -146,13 +146,9 @@ export default class TemplatePicker extends Component<Sig> {
   };
 
   isFavouriteTemplate = (template: PreviewableTemplate) =>
-    // TODO the standard templates don't have URIs, so treat them as permanent favourites. Remove
-    // this when moving these templates to RB
-    !template.original.uri ||
-    (this.currentSession.preferences?.favouriteTemplates?.includes(
+    this.currentSession.preferences?.favouriteTemplates?.includes(
       template.original.uri,
-    ) ??
-      false);
+    ) ?? false;
   toggleFavouriteTemplate = (template: PreviewableTemplate) => {
     const preferences = this.currentSession.preferences;
     if (!preferences || !preferences.favouriteTemplates) {
