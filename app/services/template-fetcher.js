@@ -184,7 +184,7 @@ export default class TemplateFetcher extends Service {
           OPTIONAL {
             ?template_version ext:disabledInContext ?disabledInContext.
           }
-          BIND(?template IN (${favourites.map(sparqlEscapeUri).join(',')}) as ?isFav)
+          BIND(IF(?template IN (${favourites.map(sparqlEscapeUri).join(',')}), 1, 0) as ?isFav)
           FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
           ${filterQuery}
         }
