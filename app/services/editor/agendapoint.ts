@@ -80,8 +80,7 @@ import {
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 
-// @ts-expect-error no types for this
-import ENV_OBJ from 'frontend-gelinkt-notuleren/config/environment';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
   regulatoryStatementNode,
   regulatoryStatementNodeView,
@@ -129,9 +128,6 @@ import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/curr
 import configurationPerAdminUnit from '../../config/configuration-per-admin-unit';
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
-
-// Type hack
-const ENV = ENV_OBJ as Record<string, string>;
 
 export default class AgendapointEditorService extends Service {
   @service declare intl: IntlService;
