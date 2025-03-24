@@ -9,7 +9,7 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
   findHasMany(store, snapshot, url, relationship) {
     // This bit looks for a custom option key on a hasMany relationship on an ember data model
     // which looks like this for example:
-    // `@hasMany('mandataris', { inverse: null, defaultPagination: 100 }) mandataris`
+    // `@hasMany('mandataris', { inverse: null, defaultPageSize: 100 }) mandataris`
     // the pagination value is then used in the backend request for the relationship
     // data. This only affects the loading of async relationships and has no
     // effect on direct use of store.query.
