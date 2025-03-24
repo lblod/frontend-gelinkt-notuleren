@@ -171,11 +171,11 @@ export default class DocumentService extends Service {
        */
       if (template.loadBody) {
         await template.loadBody();
-        const trimmedHtml = template.body.replace(/>\s+</g, '><');
+        const trimmedHtml = template.body?.replace(/>\s+</g, '><') ?? '';
         //If the template comes from RB we instantiate it with the new library
         return templateUuidInstantiator(trimmedHtml);
       } else {
-        const trimmedHtml = template.body.replace(/>\s+</g, '><');
+        const trimmedHtml = template.body?.replace(/>\s+</g, '><') ?? '';
         // If it's a built=in template, we apply both instantiate functions
         return instantiateUuids(templateUuidInstantiator(trimmedHtml));
       }

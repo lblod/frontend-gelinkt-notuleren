@@ -6,6 +6,7 @@ import Model, {
   type AsyncHasMany,
 } from '@ember-data/model';
 import { type Type } from '@warp-drive/core-types/symbols';
+import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type EditorDocumentModel from './editor-document';
 import type ConceptModel from './concept';
 import type EditorDocumentFolderModel from './editor-document-folder';
@@ -15,7 +16,7 @@ import type AttachmentModel from './attachment';
 export default class DocumentContainerModel extends Model {
   declare [Type]: 'document-container';
 
-  @attr declare uri: string;
+  @attr uri: Option<string>;
 
   @belongsTo<EditorDocumentModel>('editor-document', {
     inverse: null,
