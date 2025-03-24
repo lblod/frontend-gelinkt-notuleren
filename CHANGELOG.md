@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.53.0
+
+### Minor Changes
+
+- [#838](https://github.com/lblod/frontend-gelinkt-notuleren/pull/838) [`b839be5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b839be57a71ae11beed7a1df14c3ba5dbf7db4b1) Thanks [@piemonkey](https://github.com/piemonkey)! - Add concept of user preferences
+
+- [#838](https://github.com/lblod/frontend-gelinkt-notuleren/pull/838) [`7b5433e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7b5433ee5a71fcb80c0709e929f15200335a746b) Thanks [@piemonkey](https://github.com/piemonkey)! - Add ability to mark favourite templates when creating documents
+
+- [#839](https://github.com/lblod/frontend-gelinkt-notuleren/pull/839) [`13c5804`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/13c5804a955b75f26f2bc64fa5c08d68491e328f) Thanks [@piemonkey](https://github.com/piemonkey)! - Remove standard-template service from new agendapoint creation as the templates are now all coming from RB
+
 ## 5.52.0
 
 ### Minor Changes
