@@ -13,15 +13,14 @@ export default class BehandelingVanAgendapunt extends Model {
   @belongsTo('behandeling-van-agendapunt', { inverse: null, async: true })
   vorigeBehandelingVanAgendapunt;
   @belongsTo('agendapunt', { inverse: 'behandeling', async: true }) onderwerp;
-  // original queries fetching these used pagesize of 100
+
   @belongsTo('functionaris', {
     inverse: null,
-    defaultPageSize: 100,
     async: true,
   })
   secretaris;
-  // original queries fetching these used pagesize of 100
-  @belongsTo('mandataris', { inverse: null, defaultPageSize: 100, async: true })
+
+  @belongsTo('mandataris', { inverse: null, async: true })
   voorzitter;
   @belongsTo('document-container', { inverse: null, async: true })
   documentContainer;

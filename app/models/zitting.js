@@ -15,9 +15,9 @@ export default class ZittingModel extends Model {
   @hasMany('agenda', { inverse: null, async: true }) publicatieAgendas;
   @hasMany('agendapunt', { inverse: 'zitting', async: true, as: 'zitting' })
   agendapunten;
-  @hasMany('mandataris', { inverse: null, defaultPagination: 100, async: true })
+  @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   aanwezigenBijStart;
-  @hasMany('mandataris', { inverse: null, defaultPagination: 100, async: true })
+  @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   afwezigenBijStart;
   @hasMany('intermission', { inverse: 'zitting', async: true, as: 'zitting' })
   intermissions;
