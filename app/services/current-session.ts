@@ -52,7 +52,9 @@ export default class CurrentSessionService extends Service {
             this.account = account;
             this.user = await account.gebruiker;
             this.preferences = await this.user?.preferences;
-            if (!this.preferences && this.user) {
+            // Thanks to piggy-backing off the `org-wf` access group to store preferences, these are
+            // only currently possible for 'schrijver' users
+            if (!this.preferences && this.user && this.canWrite) {
               this.preferences = this.store.createRecord<UserPreferencesModel>(
                 'user-preferences',
                 {
