@@ -5,7 +5,7 @@ import Model, {
   type AsyncBelongsTo,
   type AsyncHasMany,
 } from '@ember-data/model';
-import { type Type } from '@warp-drive/core-types/symbols';
+import type { Type } from '@warp-drive/core-types/symbols';
 import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type AccountModel from './account';
 import type BestuurseenheidModel from './bestuurseenheid';
