@@ -741,6 +741,7 @@ export default class MeetingForm extends Component<Signature> {
                     @absentees={{this.afwezigenBijStart}}
                     @possibleParticipants={{this.possibleParticipants}}
                     @bestuursorgaan={{this.bestuursorgaan}}
+                    {{! @glint-expect-error fix the types of this argument }}
                     @onSave={{this.saveParticipationList}}
                     @meeting={{this.zitting}}
                     @modalTitle={{t 'generic.edit'}}
