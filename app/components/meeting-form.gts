@@ -4,7 +4,7 @@
 import Component from '@glimmer/component';
 import { tracked, TrackedArray } from 'tracked-built-ins';
 import { service } from '@ember/service';
-import { action } from '@ember/object';
+import { action, get } from '@ember/object';
 
 /**
  * Services
@@ -78,11 +78,12 @@ import ReadonlyTextBox from './readonly-text-box';
 import InaugurationMeetingSynchronization from './inauguration-meeting/synchronization';
 import DeleteMeetingModal from './delete-meeting-modal';
 import WithTooltip from './with-tooltip';
-import ParticipationList from './participation-list';
+import ParticipationList, { type ParticipantInfo } from './participation-list';
 import ManageZittingsdata from './zitting/manage-zittingsdata';
 import ManageIntermissions from './manage-intermissions';
 import BehandelingVanAgendapuntComponent from './behandeling-van-agendapunt';
 import AgendaManager from './agenda-manager';
+import type MeetingService from 'frontend-gelinkt-notuleren/services/meeting';
 
 type Signature = {
   Args: {
@@ -99,6 +100,18 @@ export default class MeetingForm extends Component<Signature> {
   @service declare currentSession: CurrentSessionService;
   @service declare router: RouterService;
   @service declare intl: IntlService;
+  @service('meeting') declare meetingService: MeetingService;
+
+  validation = trackedFunction(this, async () => {
+    const zitting = this.zitting;
+    const possibleParticipants = await this.possibleParticipantsData;
+    const validationResult = await this.meetingService.validateMeeting(
+      zitting,
+      possibleParticipants,
+    );
+    console.log(validationResult);
+    return validationResult;
+  });
 
   isPublished = trackedFunction(this, async () => {
     // This is needed here, see https://github.com/NullVoxPopuli/ember-resources/issues/340
@@ -729,6 +742,7 @@ export default class MeetingForm extends Component<Signature> {
                   id='sectionTwo'
                 >
                   <ParticipationList
+                    @attendanceValidationResult={{this.validation.value.attendance}}
                     @chairman={{this.voorzitter}}
                     @secretary={{this.secretaris}}
                     @participants={{this.aanwezigenBijStart}}
@@ -803,6 +817,13 @@ export default class MeetingForm extends Component<Signature> {
                     {{#each this.behandelingen as |behandeling|}}
                       <li>
                         <BehandelingVanAgendapuntComponent
+                          @validationResult={{if
+                            this.validation.value
+                            (get
+                              this.validation.value.treatments
+                              (unwrap behandeling.id)
+                            )
+                          }}
                           @possibleParticipants={{this.possibleParticipants}}
                           @behandeling={{behandeling}}
                           @readOnly={{this.readOnly}}

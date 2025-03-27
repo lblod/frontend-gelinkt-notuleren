@@ -39,10 +39,12 @@ import { uniqueId } from '@ember/helper';
 import type BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
 import TreatmentVoting from './treatment/voting';
 import TreatmentVotingEdit from './treatment/voting/edit';
+import type { AgendapointTreatmentValidationResult } from 'frontend-gelinkt-notuleren/services/meeting';
 type Signature = {
   Args: {
     meeting: ZittingModel;
     behandeling: BehandelingVanAgendapunt;
+    validationResult?: AgendapointTreatmentValidationResult;
     readOnly?: boolean;
     focusMode?: boolean;
     possibleParticipants?: MandatarisModel[];
@@ -401,6 +403,7 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
           @bestuursorgaan={{@bestuursorgaan}}
           @onSave={{this.saveParticipants}}
           @meeting={{@meeting}}
+          @attendanceValidationResult={{@validationResult.attendance}}
           @modalTitle={{t 'generic.edit'}}
           @readOnly={{or (not this.editable) (not this.canEditParticipants)}}
           @readOnlyText={{unless

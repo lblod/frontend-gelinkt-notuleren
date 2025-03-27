@@ -59,9 +59,13 @@ export default class BehandelingVanAgendapunt extends Model {
     async: true,
   })
   declare besluiten: AsyncHasMany<BesluitModel>;
-  @hasMany('mandataris', { inverse: null, async: true })
+
+  // @ts-expect-error add types for `defaultPageSize`
+  @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare aanwezigen: AsyncHasMany<MandatarisModel>;
-  @hasMany('mandataris', { inverse: null, async: true })
+
+  // @ts-expect-error add types for `defaultPageSize`
+  @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare afwezigen: AsyncHasMany<MandatarisModel>;
 
   // original queries did "fetch all" pagination loops

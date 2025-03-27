@@ -16,6 +16,13 @@ import { and } from 'ember-truth-helpers';
 
 import ParticipationListModal from './participation-list/modal';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
+import type { AttendanceValidationResult } from 'frontend-gelinkt-notuleren/services/meeting';
+import AuAlert, {
+  type AuAlertSignature,
+} from '@appuniversum/ember-appuniversum/components/au-alert';
+import AuList from '@appuniversum/ember-appuniversum/components/au-list';
+import AuLinkExternal from '@appuniversum/ember-appuniversum/components/au-link-external';
+
 export type ParticipantInfo = {
   chairman?: MandatarisModel;
   secretary?: FunctionarisModel;
@@ -25,15 +32,16 @@ export type ParticipantInfo = {
 
 type Signature = {
   Args: {
-    chairman: Option<MandatarisModel>;
-    defaultChairman: Option<MandatarisModel>;
-    secretary: Option<FunctionarisModel>;
-    defaultSecretary: Option<FunctionarisModel>;
-    participants: Option<MandatarisModel[]>;
-    defaultParticipants: Option<MandatarisModel[]>;
-    absentees: Option<MandatarisModel[]>;
-    defaultAbsentees: Option<MandatarisModel[]>;
-    possibleParticipants: Option<MandatarisModel[]>;
+    chairman?: Option<MandatarisModel>;
+    defaultChairman?: Option<MandatarisModel>;
+    secretary?: Option<FunctionarisModel>;
+    defaultSecretary?: Option<FunctionarisModel>;
+    participants?: Option<MandatarisModel[]>;
+    defaultParticipants?: Option<MandatarisModel[]>;
+    absentees?: Option<MandatarisModel[]>;
+    defaultAbsentees?: Option<MandatarisModel[]>;
+    possibleParticipants?: Option<MandatarisModel[]>;
+    attendanceValidationResult?: AttendanceValidationResult;
     bestuursorgaan: BestuursorgaanModel;
     onSave: (info: ParticipantInfo) => unknown;
     meeting: ZittingModel;
@@ -152,11 +160,15 @@ export default class ParticipationList extends Component<Signature> {
   }
 
   <template>
+    {{#if @attendanceValidationResult}}
+      <UnassignedMandateesBanner
+        @attendanceValidationResult={{@attendanceValidationResult}}
+      />
+    {{/if}}
     <MeetingSubSection @title={{t 'participation-list.block-title'}}>
       <:body>
         <DetailsList @items={{this.detailsListItems}} />
       </:body>
-
       <:button>
         {{#unless @readOnly}}
           <AuButton
@@ -200,5 +212,51 @@ export default class ParticipationList extends Component<Signature> {
       @meeting={{@meeting}}
       @loading={{@loading}}
     />
+  </template>
+}
+
+type UnassignedMandateesBannerSignature = {
+  Args: {
+    attendanceValidationResult: AttendanceValidationResult;
+  };
+  Element: AuAlertSignature['Element'];
+};
+class UnassignedMandateesBanner extends Component<UnassignedMandateesBannerSignature> {
+  get attendanceValidation() {
+    return this.args.attendanceValidationResult;
+  }
+
+  get shouldShow() {
+    return (
+      !this.attendanceValidation.ok &&
+      this.attendanceValidation.filledIn &&
+      this.attendanceValidation.unassignedMandatees.length
+    );
+  }
+
+  <template>
+    {{#if this.shouldShow}}
+      <AuAlert
+        ...attributes
+        @title='Warning'
+        @skin='warning'
+        @size='small'
+        @icon='alert-triangle'
+      >
+        {{t 'participation-list.unassigned-mandatees-warning.first-line'}}
+        <AuList class='au-u-margin-top-tiny' @divider={{true}} as |Item|>
+          {{#each this.attendanceValidation.unassignedMandatees as |mandatee|}}
+            <Item>
+              <AuLinkExternal @skin='primary' href={{mandatee.uri}}>
+                {{! @glint-expect-error we should properly await this }}
+                {{mandatee.isBestuurlijkeAliasVan.fullName}}
+              </AuLinkExternal>
+
+            </Item>
+          {{/each}}
+        </AuList>
+        {{t 'participation-list.unassigned-mandatees-warning.second-line'}}
+      </AuAlert>
+    {{/if}}
   </template>
 }
