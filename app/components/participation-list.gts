@@ -16,6 +16,12 @@ import { and } from 'ember-truth-helpers';
 
 import ParticipationListModal from './participation-list/modal';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
+export type ParticipantInfo = {
+  chairman?: MandatarisModel;
+  secretary?: FunctionarisModel;
+  participants?: MandatarisModel[];
+  absentees?: MandatarisModel[];
+};
 
 type Signature = {
   Args: {
@@ -29,7 +35,7 @@ type Signature = {
     defaultAbsentees: Option<MandatarisModel[]>;
     possibleParticipants: Option<MandatarisModel[]>;
     bestuursorgaan: BestuursorgaanModel;
-    onSave: (info: unknown) => unknown;
+    onSave: (info: ParticipantInfo) => unknown;
     meeting: ZittingModel;
     modalTitle: string;
     readOnly: boolean;
