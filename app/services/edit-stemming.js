@@ -5,7 +5,7 @@ import { action } from '@ember/object';
 /** @typedef {import("../models/stemming").default} Stemming */
 
 export default class EditStemmingService extends Service {
-  /** @type {Stemming} */
+  /** @type {Stemming | null} */
   @tracked _stemming;
   @service store;
 

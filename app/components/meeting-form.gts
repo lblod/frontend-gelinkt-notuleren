@@ -433,12 +433,7 @@ export default class MeetingForm extends Component<Signature> {
     secretary,
     participants,
     absentees,
-  }: {
-    chairman?: MandatarisModel;
-    secretary?: FunctionarisModel;
-    participants: MandatarisModel[];
-    absentees: MandatarisModel[];
-  }) {
+  }: ParticipantInfo) {
     this.aanwezigenBijStart = participants;
     this.afwezigenBijStart = absentees;
 
@@ -741,7 +736,6 @@ export default class MeetingForm extends Component<Signature> {
                     @absentees={{this.afwezigenBijStart}}
                     @possibleParticipants={{this.possibleParticipants}}
                     @bestuursorgaan={{this.bestuursorgaan}}
-                    {{! @glint-expect-error fix the types of this argument }}
                     @onSave={{this.saveParticipationList}}
                     @meeting={{this.zitting}}
                     @modalTitle={{t 'generic.edit'}}

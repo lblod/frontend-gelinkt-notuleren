@@ -8,6 +8,7 @@ import Component from '@glimmer/component';
  * @typedef {Object} Args
  * @property {Behandeling} behandeling
  * @property {Bestuursorgaan} bestuursorgaan
+ * @property {boolean} [readOnly]
  */
 
 /** @extends {Component<Args>} */
