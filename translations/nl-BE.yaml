@@ -501,6 +501,9 @@ participation-list:
   not-present-label: 'Afwezige mandatarissen:'
   open-modal-button: Beheer aanwezigen bij start van de zitting
   period-start: 'periode'
+  unassigned-mandatees-warning:
+    first-line: 'De hieronder vermelde mandatarissen zijn nog niet toegewezen als zijnde aanwezig of afwezig: '
+    second-line: Gelieve deze mandatarissen toe te wijzen als aanwezig of afwezig.
 
 participation-list-modal:
   voorzitter-label: Voorzitter van de zitting
