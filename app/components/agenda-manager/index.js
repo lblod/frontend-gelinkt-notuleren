@@ -5,6 +5,8 @@ import { action } from '@ember/object';
 /**
  * @typedef {Object} Args
  * @property {string} zittingId
+ * @property {() => unknown} onSave
+ * @property {boolean} readOnly
  */
 
 /** @extends {Component<Args>} */

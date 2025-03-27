@@ -11,21 +11,22 @@ import { service } from '@ember/service';
 
 /**
  * @typedef {Object} Args
- * @property {Mandataris} [chairman]
- * @property {Mandataris} [defaultChairman]
- * @property {Functionaris} [secretary]
- * @property {Functionaris} [defaultSecretary]
- * @property {Array<Mandataris>} [participants]
- * @property {Array<Mandataris>} [defaultParticipants]
- * @property {Array<Mandataris>} [absentees]
- * @property {Array<Mandataris>} [defaultAbsentees]
- * @property {Array<Mandataris>} [possibleParticipants]
+ * @property {Mandataris | null} [chairman]
+ * @property {Mandataris | null} [defaultChairman]
+ * @property {Functionaris | null} [secretary]
+ * @property {Functionaris | null} [defaultSecretary]
+ * @property {Array<Mandataris> | null} [participants]
+ * @property {Array<Mandataris> | null} [defaultParticipants]
+ * @property {Array<Mandataris> | null} [absentees]
+ * @property {Array<Mandataris> | null} [defaultAbsentees]
+ * @property {Array<Mandataris> | null} [possibleParticipants]
  *
  * @property {BestuursOrgaan} bestuursorgaan
  * @property {OnSave} onSave
  * @property {Zitting} meeting
  * @property {string} modalTitle
  * @property {boolean} readOnly
+ * @property {boolean} [loading]
  */
 
 /**
