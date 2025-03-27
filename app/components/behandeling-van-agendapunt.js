@@ -16,7 +16,9 @@ import { PLANNED_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
  * @property {Array<Mandataris>} possibleParticipants
  * @property {BestuursOrgaan} bestuursorgaan
  * @property {Zitting} meeting
- * @property {boolean} readonly
+ * @property {boolean} readOnly
+ * @property {boolean} focusMode
+ * @property {boolean} loadingParticipants
  */
 /** @extends {Component<Args>} */
 export default class BehandelingVanAgendapuntComponent extends Component {
