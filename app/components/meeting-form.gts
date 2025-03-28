@@ -33,7 +33,7 @@ import { add } from 'ember-math-helpers';
  */
 import { trackedFunction } from 'reactiveweb/function';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
-import { all, restartableTask, task, timeout } from 'ember-concurrency';
+import { all, restartableTask, task } from 'ember-concurrency';
 
 /**
  * Ember-data models
