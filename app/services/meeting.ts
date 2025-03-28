@@ -46,10 +46,11 @@ export default class MeetingService extends Service {
       meeting,
       potentialParticipants,
     );
+    const agendapoints = (await meeting.agendapunten).toSorted(
+      (ap1, ap2) => (ap1.position ?? 0) - (ap2.position ?? 0),
+    );
     const treatments = await Promise.all(
-      (await meeting.agendapunten).map(async (ap) =>
-        unwrap(await ap.behandeling),
-      ),
+      agendapoints.map(async (ap) => unwrap(await ap.behandeling)),
     );
     const treatmentValidationResults = await Promise.all(
       treatments.map(async (treatment) => {
