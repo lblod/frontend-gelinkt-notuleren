@@ -2,13 +2,15 @@ import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 /**
- * @typedef {import("../../../models/stemming").default} Stemming
+ * @import Stemming from 'frontend-gelinkt-notuleren/models/stemming'
+ * @import BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan'
  */
 
 /**
  * @typedef {Object} Args
- * @property {boolean} show
- * @property {Stemming} stemming
+ * @property {boolean} [show]
+ * @property {boolean} [saving]
+ * @property {BestuursorgaanModel} bestuursorgaan
  * @property {(Stemming) => void} [onSave]
  * @property {() => void} [onCancel]
  */
