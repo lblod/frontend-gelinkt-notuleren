@@ -26,13 +26,14 @@ import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import { htmlSafe } from '@ember/template';
 import { detailedDate } from 'frontend-gelinkt-notuleren/utils/detailed-date';
 import plainDate from 'frontend-gelinkt-notuleren/helpers/plain-date';
+import { add } from 'ember-math-helpers';
 
 /**
  * Task/state management
  */
 import { trackedFunction } from 'reactiveweb/function';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
-import { all, restartableTask, task } from 'ember-concurrency';
+import { all, restartableTask, task, timeout } from 'ember-concurrency';
 
 /**
  * Ember-data models
@@ -41,7 +42,7 @@ import type VersionedNotulenModel from 'frontend-gelinkt-notuleren/models/versio
 import type MandatarisModel from 'frontend-gelinkt-notuleren/models/mandataris';
 import type FunctionarisModel from 'frontend-gelinkt-notuleren/models/functionaris';
 import type BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
-import type BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
+import BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 import type InstallatieVergaderingSynchronizationStatusModel from 'frontend-gelinkt-notuleren/models/installatievergadering-synchronization-status';
 import type BestuursfunctieCodeModel from 'frontend-gelinkt-notuleren/models/bestuursfunctie-code';
@@ -60,6 +61,7 @@ import {
 /**
  * Components
  */
+import AuCard from '@appuniversum/ember-appuniversum/components/au-card';
 import AuToolbar from '@appuniversum/ember-appuniversum/components/au-toolbar';
 import AuLink from '@appuniversum/ember-appuniversum/components/au-link';
 import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
@@ -71,6 +73,8 @@ import AuToggleSwitch from '@appuniversum/ember-appuniversum/components/au-toggl
 import AuHelpText from '@appuniversum/ember-appuniversum/components/au-help-text';
 import AuHeading from '@appuniversum/ember-appuniversum/components/au-heading';
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
+import AuList from '@appuniversum/ember-appuniversum/components/au-list';
+import AuBadge from '@appuniversum/ember-appuniversum/components/au-badge';
 
 import MeetingSection from './common/meeting-section';
 import MeetingSubSection from './common/meeting-sub-section';
@@ -84,6 +88,11 @@ import ManageIntermissions from './manage-intermissions';
 import BehandelingVanAgendapuntComponent from './behandeling-van-agendapunt';
 import AgendaManager from './agenda-manager';
 import type MeetingService from 'frontend-gelinkt-notuleren/services/meeting';
+import type { MeetingValidationResult } from 'frontend-gelinkt-notuleren/services/meeting';
+import type { TOC } from '@ember/component/template-only';
+import AuLinkExternal from '@appuniversum/ember-appuniversum/components/au-link-external';
+import { concat } from '@ember/helper';
+import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
 
 type Signature = {
   Args: {
@@ -109,7 +118,6 @@ export default class MeetingForm extends Component<Signature> {
       zitting,
       possibleParticipants,
     );
-    console.log(validationResult);
     return validationResult;
   });
 
@@ -219,7 +227,11 @@ export default class MeetingForm extends Component<Signature> {
     return this.fetchTreatments.isRunning;
   }
   get isComplete() {
-    return !this.zitting?.isNew && this.behandelingen?.length > 0;
+    return (
+      !this.zitting?.isNew &&
+      this.behandelingen?.length > 0 &&
+      this.validation.value?.ok
+    );
   }
   get bestuursorgaan() {
     return this.meetingDetailsData.value?.bestuursorgaan ?? null;
@@ -627,7 +639,7 @@ export default class MeetingForm extends Component<Signature> {
       id='content'
       class='au-c-body-container au-c-body-container--scroll au-c-meeting'
     >
-      <div class='au-c-meeting-sidebar au-u-hide-on-print'>
+      <div class='au-c-meeting__sidebar-left au-u-hide-on-print'>
         <ul class='au-c-list-divider'>
           <li class='au-c-list-divider__item'>
             <a href='#sectionOne' class='au-c-link au-c-link--secondary'>
@@ -877,6 +889,13 @@ export default class MeetingForm extends Component<Signature> {
           {{/if}}
         </div>
       </div>
+      <div class='au-c-meeting__sidebar-right au-u-hide-on-print'>
+        <MeetingValidationCard
+          @error={{this.validation.isRejected}}
+          @loading={{this.validation.isPending}}
+          @validationResult={{this.validation.value}}
+        />
+      </div>
     </div>
     <DeleteMeetingModal
       @show={{this.showDeleteModal}}
@@ -885,3 +904,172 @@ export default class MeetingForm extends Component<Signature> {
     />
   </template>
 }
+
+type MeetingValidationCardSignature = {
+  Args: {
+    loading: boolean;
+    error: boolean;
+    validationResult?: MeetingValidationResult | null;
+  };
+};
+
+class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
+  @service declare store: Store;
+
+  treatmentsWithErrors = trackedFunction(this, async () => {
+    if (!this.args.validationResult) {
+      return [];
+    }
+    const treatmentsWithErrorsIds = Object.entries(
+      this.args.validationResult.treatments,
+    )
+      .filter(([_id, validationResult]) => !validationResult.ok)
+      .map(([id, _validationResult]) => id);
+    if (!treatmentsWithErrorsIds.length) {
+      return [];
+    }
+    return Promise.all(
+      treatmentsWithErrorsIds.map((id) =>
+        this.store.findRecord<BehandelingVanAgendapunt>(
+          'behandeling-van-agendapunt',
+          id,
+          {
+            include: 'onderwerp',
+          } as unknown as LegacyResourceQuery<BehandelingVanAgendapunt>,
+        ),
+      ),
+    );
+  });
+
+  get treatmentsOk() {
+    if (!this.treatmentsWithErrors.value) {
+      return true;
+    }
+    return this.treatmentsWithErrors.value.length === 0;
+  }
+
+  <template>
+    {{#if @loading}}
+      <AuCard @size='small' as |C|>
+        <C.content>
+          <AuLoader @inline={{true}} @hideMessage={{false}} @centered={{false}}>
+            {{t 'application.loading'}}
+          </AuLoader>
+        </C.content>
+      </AuCard>
+    {{else if @error}}
+      <AuAlert @skin='error' @icon='cross' @size='small'>
+        <p>{{t 'meeting-validation-card.error'}}</p>
+        <p>{{htmlSafe
+            (t
+              'generic.error-contact-us' email='gelinktnotuleren@vlaanderen.be'
+            )
+          }}</p>
+      </AuAlert>
+    {{else}}
+      <AuCard
+        @expandable={{true}}
+        @size='small'
+        @isOpenInitially={{not @validationResult.ok}}
+        as |C|
+      >
+        <C.header>
+          <ValidationEntry @ok={{@validationResult.ok}}>
+            <AuHeading @level='3' @skin='5'>
+              {{#if @validationResult.ok}}
+                {{t 'meeting-validation-card.title.ok'}}
+              {{else}}
+                {{t 'meeting-validation-card.title.nok'}}
+              {{/if}}
+            </AuHeading>
+          </ValidationEntry>
+        </C.header>
+        <C.content>
+          <AuList @divider={{true}} as |Item|>
+            <Item>
+              <ValidationEntry @ok={{@validationResult.general.ok}}>
+                <AuLinkExternal
+                  href='#sectionOne'
+                  @skin='secondary'
+                  @newTab={{false}}
+                >
+                  {{t 'meeting-validation-card.sections.general'}}
+                </AuLinkExternal>
+              </ValidationEntry>
+
+            </Item>
+            <Item>
+              <ValidationEntry @ok={{@validationResult.attendance.ok}}>
+                <AuLinkExternal
+                  href='#sectionTwo'
+                  @skin='secondary'
+                  @newTab={{false}}
+                >
+                  {{t 'meeting-validation-card.sections.attendance'}}
+                </AuLinkExternal>
+              </ValidationEntry>
+            </Item>
+            <Item>
+              <ValidationEntry @ok={{this.treatmentsOk}}>
+                <AuLinkExternal
+                  href='#sectionFive'
+                  @skin='secondary'
+                  @newTab={{false}}
+                >
+                  {{t 'meeting-validation-card.sections.treatments'}}
+                </AuLinkExternal>
+              </ValidationEntry>
+
+              <AuList class='au-u-margin-top-small' as |Item|>
+                {{#each this.treatmentsWithErrors.value as |treatment|}}
+                  <Item>
+                    <ValidationEntry @ok={{false}}>
+                      <AuLinkExternal
+                        href={{concat '#behandeling-' treatment.id}}
+                        @skin='secondary'
+                        @newTab={{false}}
+                      >
+                        {{! @glint-expect-error properly await this }}
+                        {{add treatment.onderwerp.position 1}}.
+                        {{! @glint-expect-error properly await this }}
+                        {{treatment.onderwerp.titel}}
+                      </AuLinkExternal>
+                    </ValidationEntry>
+                  </Item>
+                {{/each}}
+              </AuList>
+            </Item>
+          </AuList>
+        </C.content>
+      </AuCard>
+    {{/if}}
+  </template>
+}
+
+type ValidationEntrySignature = {
+  Args: {
+    ok?: boolean;
+  };
+  Blocks: {
+    default: [];
+  };
+};
+
+const ValidationEntry: TOC<ValidationEntrySignature> = <template>
+  <span class='au-u-flex au-u-flex--row'>
+    {{#if @ok}}
+      <AuBadge
+        class='meeting-validation-card__icon au-u-margin-tiny'
+        @skin='success'
+        @icon='check'
+      />
+    {{else}}
+      <AuBadge
+        class='meeting-validation-card__icon au-u-margin-tiny'
+        @skin='error'
+        @icon='cross'
+      />
+    {{/if}}
+    {{yield}}
+  </span>
+</template>;

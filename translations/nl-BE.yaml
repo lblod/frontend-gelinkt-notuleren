@@ -397,7 +397,7 @@ manage-zittings-data:
 
 meeting-form:
   date-warning: U kunt geen einddatum kiezen die vóór de startdatum ligt.
-  incomplete-warning: Voor je kan doorgaan met publiceren is het nodig om een bestuursorgaan in te stellen en minstens 1 agendapunt toe te voegen.
+  incomplete-warning: Voor je kan doorgaan met publiceren is het nodig om de nodige details in te stellen en minstens 1 agendapunt toe te voegen.
   back-button: Terug naar overzicht zittingen
   scheduled-text:
     common-meeting: Zitting gepland op
@@ -427,6 +427,16 @@ meeting-form:
     download-treatments: Onderdelen downloaden of kopiëren
   focus-mode: Focus besluiten
   focus-mode-tooltip: Publiceert u de installatievergadering in een externe applicatie? Schakel deze optie in om enkel de besluiten te zien.
+
+meeting-validation-card:
+  title:
+    ok: De zitting is volledig
+    nok: De zitting is onvolledig
+  sections:
+    general: Algemene informatie
+    attendance: Aanwezigen bij de start
+    treatments: Behandelingen
+  error: Er ging iets mis bij het bepalen van de correctheid van deze zitting.
 
 meetings:
   type: Zitting
@@ -792,6 +802,7 @@ zitting-link:
 generic:
   edit: Bewerk
   add: Toevoegen
+  error-contact-us: Indien dit probleem zich blijft voordoen, kunt u contact opnemen met <a href="mailto:{email}">{email}</a>
 
 download:
   heading: Onderdelen downloaden of kopiëren

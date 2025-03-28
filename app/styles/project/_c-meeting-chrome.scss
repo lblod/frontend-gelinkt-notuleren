@@ -16,9 +16,9 @@
 
 .au-c-meeting-chrome {
   padding: $au-unit $au-unit * 0.5;
+  flex-grow: 1;
   position: relative;
   overflow: scroll;
-  width: 100%;
   z-index: 2;
 }
 
@@ -36,14 +36,6 @@
 
   &:focus {
     outline: none;
-  }
-
-  @include mq(small) {
-    width: 100%;
-  }
-
-  @include mq(large) {
-    width: 75%;
   }
 }
 
@@ -339,7 +331,9 @@
   }
 }
 
-.au-c-meeting-sidebar {
+.au-c-meeting__sidebar-left {
+  align-self: flex-start;
+  max-height: 100%;
   @include au-font-size($au-h6);
   flex-shrink: 0;
   opacity: 0.7;
@@ -352,17 +346,33 @@
   display: none;
   overflow: scroll;
 
-  @include mq(1160px) {
-    display: block;
-    width: $au-unit-huge * 3;
-  }
-
   @include mq(large) {
+    display: block;
     width: $au-unit-huge * 3.5;
   }
 
   &:hover {
     opacity: 1;
+  }
+}
+
+.au-c-meeting__sidebar-right {
+  align-self: flex-start;
+  max-height: 100%;
+  overflow: scroll;
+  flex-shrink: 0;
+  padding: $au-unit $au-unit-small;
+  z-index: 10;
+
+  @include mq($until: 1160px) {
+    position: absolute;
+    right: $au-unit-small;
+    top: $au-unit-small;
+    width: $au-unit-huge * 3;
+  }
+
+  @include mq($from: 1160px) {
+    width: $au-unit-huge * 4;
   }
 }
 
@@ -426,4 +436,14 @@
 }
 .gn-meeting-copy--structure-content {
   margin: 1rem;
+}
+
+.meeting-validation-card__icon {
+  height: 1.6rem;
+  width: 1.6rem;
+
+  .au-c-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+  }
 }
