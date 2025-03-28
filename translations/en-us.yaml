@@ -424,6 +424,16 @@ meeting-form:
   focus-mode: Focus decisions
   focus-mode-tooltip: Are you publishing the installation meeting in an external application? Enable this option to see only the decisions.
 
+meeting-validation-card:
+  title:
+    ok: The meeting is complete
+    nok: The meeting is incomplete
+  sections:
+    general: General information
+    attendance: Meeting attendance
+    treatments: Treatments
+  error: Something went wrong while determining the validity of this meeting.
+
 meetings:
   type: Meeting
   the-type: the meeting
@@ -788,6 +798,7 @@ zitting-link:
 generic:
   edit: Edit
   add: Add
+  error-contact-us: If this problem persists, please contact <a href="mailto:{email}">{email}</a>
 
 download:
   heading: Download or copy meeting documents
