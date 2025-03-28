@@ -78,7 +78,7 @@ module.exports = function (environment) {
   if (environment === 'development') {
     require('dotenv').config();
     ENV.environmentName = 'LOCAL';
-    ENV.defaultLanguage = 'en-us';
+    ENV.defaultLanguage = process.env.DEFAULT_LANGUAGE ?? 'nl-be';
     ENV.manual.baseUrl =
       'https://abb-vlaanderen.gitbook.io/gelinkt-notuleren-handleiding/';
     ENV.manual.notuleren = '#notuleren';
