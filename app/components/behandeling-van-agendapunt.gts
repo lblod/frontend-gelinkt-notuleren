@@ -50,6 +50,7 @@ type Signature = {
     possibleParticipants?: MandatarisModel[];
     bestuursorgaan: BestuursorgaanModel;
     loadingParticipants?: boolean;
+    onAttendanceSave?: () => unknown;
   };
 };
 
@@ -200,6 +201,7 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
       this.behandeling.set('afwezigen', absentees);
 
       await this.behandeling.save();
+      await this.args.onAttendanceSave?.();
     }
   }
 
