@@ -467,6 +467,13 @@ export default class MeetingForm extends Component<Signature> {
     this.zitting.set('aanwezigenBijStart', participants);
     this.zitting.set('afwezigenBijStart', absentees);
     await this.zitting.save();
+    await this.validation.retry();
+  }
+
+  @action
+  async onAgendaSave() {
+    await this.fetchTreatments.perform();
+    await this.validation.retry();
   }
 
   @action
@@ -779,7 +786,7 @@ export default class MeetingForm extends Component<Signature> {
                 <AgendaManager
                   {{! @glint-expect-error we should handle this }}
                   @zittingId={{@zitting.id}}
-                  @onSave={{this.fetchTreatments.perform}}
+                  @onSave={{this.onAgendaSave}}
                   @readOnly={{this.readOnly}}
                 />
               </MeetingSection>
@@ -843,6 +850,7 @@ export default class MeetingForm extends Component<Signature> {
                           @meeting={{this.zitting}}
                           @focusMode={{@focused}}
                           @loadingParticipants={{this.possibleParticipantsData.isRunning}}
+                          @onAttendanceSave={{this.validation.retry}}
                         />
                       </li>
                     {{/each}}
