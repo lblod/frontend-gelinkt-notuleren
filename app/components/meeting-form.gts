@@ -924,36 +924,39 @@ type MeetingValidationCardSignature = {
 class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
   @service declare store: Store;
 
-  treatmentsWithErrors = trackedFunction(this, async () => {
-    if (!this.args.validationResult) {
+  treatments = trackedFunction(this, async () => {
+    const { validationResult } = this.args;
+    if (!validationResult) {
       return [];
     }
-    const treatmentsWithErrorsIds = Object.entries(
-      this.args.validationResult.treatments,
-    )
-      .filter(([_id, validationResult]) => !validationResult.ok)
-      .map(([id, _validationResult]) => id);
-    if (!treatmentsWithErrorsIds.length) {
-      return [];
-    }
+    const treatmentValidationResults = validationResult.treatments;
     return Promise.all(
-      treatmentsWithErrorsIds.map((id) =>
-        this.store.findRecord<BehandelingVanAgendapunt>(
-          'behandeling-van-agendapunt',
-          id,
-          {
-            include: 'onderwerp',
-          } as unknown as LegacyResourceQuery<BehandelingVanAgendapunt>,
-        ),
+      Object.entries(treatmentValidationResults).map(
+        async ([id, validationResult]) => {
+          return {
+            value: await this.store.findRecord<BehandelingVanAgendapunt>(
+              'behandeling-van-agendapunt',
+              id,
+              {
+                include: 'onderwerp',
+              } as unknown as LegacyResourceQuery<BehandelingVanAgendapunt>,
+            ),
+            ok: validationResult.ok,
+          };
+        },
       ),
     );
   });
 
   get treatmentsOk() {
-    if (!this.treatmentsWithErrors.value) {
+    const { validationResult } = this.args;
+    if (!validationResult) {
       return true;
     }
-    return this.treatmentsWithErrors.value.length === 0;
+    const treatmentValidationResults = validationResult.treatments;
+    return Object.values(treatmentValidationResults).every(
+      (validationResult) => validationResult.ok,
+    );
   }
 
   <template>
@@ -1029,18 +1032,18 @@ class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
               </ValidationEntry>
 
               <AuList class='au-u-margin-top-small' as |Item|>
-                {{#each this.treatmentsWithErrors.value as |treatment|}}
+                {{#each this.treatments.value as |treatment|}}
                   <Item>
-                    <ValidationEntry @ok={{false}}>
+                    <ValidationEntry @ok={{treatment.ok}}>
                       <AuLinkExternal
-                        href={{concat '#behandeling-' treatment.id}}
+                        href={{concat '#behandeling-' treatment.value.id}}
                         @skin='secondary'
                         @newTab={{false}}
                       >
                         {{! @glint-expect-error properly await this }}
-                        {{add treatment.onderwerp.position 1}}.
+                        {{add treatment.value.onderwerp.position 1}}.
                         {{! @glint-expect-error properly await this }}
-                        {{treatment.onderwerp.titel}}
+                        {{treatment.value.onderwerp.titel}}
                       </AuLinkExternal>
                     </ValidationEntry>
                   </Item>
