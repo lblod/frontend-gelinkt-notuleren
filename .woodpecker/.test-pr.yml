@@ -33,4 +33,4 @@ steps:
     commands:
       - npm run test:ember
 when:
-  event: pull_request
+  - event: pull_request
