@@ -438,6 +438,14 @@
   margin: 1rem;
 }
 
+.meeting-validation-card {
+  border: 0;
+  box-shadow:
+    0 0.1rem 0.3rem rgba($au-gray-900, 0.1),
+    0 0.4rem 2rem rgba($au-gray-900, 0.035),
+    0 0.1rem 0.1rem rgba($au-gray-900, 0.025);
+}
+
 .meeting-validation-card__icon {
   height: 1.6rem;
   width: 1.6rem;

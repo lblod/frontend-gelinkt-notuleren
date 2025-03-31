@@ -646,7 +646,7 @@ export default class MeetingForm extends Component<Signature> {
       id='content'
       class='au-c-body-container au-c-body-container--scroll au-c-meeting'
     >
-      <div class='au-c-meeting__sidebar-left au-u-hide-on-print'>
+      {{!-- <div class='au-c-meeting__sidebar-left au-u-hide-on-print'>
         <ul class='au-c-list-divider'>
           <li class='au-c-list-divider__item'>
             <a href='#sectionOne' class='au-c-link au-c-link--secondary'>
@@ -707,7 +707,7 @@ export default class MeetingForm extends Component<Signature> {
             {{/unless}}
           {{/unless}}
         </ul>
-      </div>
+      </div> --}}
       <div class='au-c-meeting-chrome'>
         <div class='au-c-meeting-chrome__paper'>
           {{! Meeting title }}
@@ -961,7 +961,7 @@ class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
 
   <template>
     {{#if @loading}}
-      <AuCard @size='small' as |C|>
+      <AuCard class='meeting-validation-card' @size='small' as |C|>
         <C.content>
           <AuLoader @inline={{true}} @hideMessage={{false}} @centered={{false}}>
             {{t 'application.loading'}}
@@ -979,6 +979,7 @@ class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
       </AuAlert>
     {{else}}
       <AuCard
+        class='meeting-validation-card'
         @expandable={{true}}
         @size='small'
         @isOpenInitially={{not @validationResult.ok}}
