@@ -424,10 +424,8 @@ meeting-form:
   focus-mode: Focus decisions
   focus-mode-tooltip: Are you publishing the installation meeting in an external application? Enable this option to see only the decisions.
 
-meeting-validation-card:
-  title:
-    ok: The meeting is complete
-    nok: The meeting is incomplete
+meeting-toc-card:
+  title: Table of contents
   sections:
     general: General information
     attendance: Meeting attendance

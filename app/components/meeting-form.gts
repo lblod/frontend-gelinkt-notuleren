@@ -646,68 +646,13 @@ export default class MeetingForm extends Component<Signature> {
       id='content'
       class='au-c-body-container au-c-body-container--scroll au-c-meeting'
     >
-      {{!-- <div class='au-c-meeting__sidebar-left au-u-hide-on-print'>
-        <ul class='au-c-list-divider'>
-          <li class='au-c-list-divider__item'>
-            <a href='#sectionOne' class='au-c-link au-c-link--secondary'>
-              {{t 'meeting-form.first-section-title'}}
-            </a>
-          </li>
-          {{#unless this.zitting.isNew}}
-            {{#unless @focused}}
-              <li class='au-c-list-divider__item'>
-                <a href='#sectionTwo' class='au-c-link au-c-link--secondary'>
-                  {{t 'meeting-form.second-section-title'}}
-                </a>
-              </li>
-            {{/unless}}
-            <li class='au-c-list-divider__item'>
-              <a href='#sectionThree' class='au-c-link au-c-link--secondary'>
-                {{t 'meeting-form.third-section-title'}}
-              </a>
-            </li>
-            {{#unless @focused}}
-              <li class='au-c-list-divider__item'>
-                <a href='#sectionFour' class='au-c-link au-c-link--secondary'>
-                  {{t 'meeting-form.fourth-section-title'}}
-                </a>
-              </li>
-            {{/unless}}
-            <li class='au-c-list-divider__item'>
-              <a href='#sectionFive' class='au-c-link au-c-link--secondary'>
-                {{t 'meeting-form.fifth-section-title'}}
-              </a>
-              {{#if this.fetchTreatments.isRunning}}
-                <p class='loader'><span class='u-visually-hidden'>{{t
-                      'participation-list.loading-loader'
-                    }}</span></p>
-              {{/if}}
-              {{#if this.fetchTreatments.lastSuccessful}}
-                <ol class='au-c-list-numbered'>
-                  {{#each this.behandelingen as |behandeling|}}
-                    <li class='au-c-list-numbered__item'>
-                      <a
-                        href='#behandeling-{{behandeling.id}}'
-                        class='au-c-link au-c-link--secondary'
-                      >
-                        {{! @glint-expect-error we should load this correctly }}
-                        {{behandeling.onderwerp.titel}}
-                      </a>
-                    </li>
-                  {{/each}}
-                </ol>
-              {{/if}}
-            </li>
-            {{#unless @focused}}
-              <li class='au-c-list-divider__item'>
-                <a href='#sectionSix' class='au-c-link au-c-link--secondary'>
-                  {{t 'meeting-form.sixth-section-title'}}
-                </a>
-              </li>
-            {{/unless}}
-          {{/unless}}
-        </ul>
-      </div> --}}
+      <div class='au-c-meeting__sidebar-left au-u-hide-on-print'>
+        <MeetingNavigationCard
+          @error={{this.validation.isRejected}}
+          @loading={{this.validation.isPending}}
+          @validationResult={{this.validation.value}}
+        />
+      </div>
       <div class='au-c-meeting-chrome'>
         <div class='au-c-meeting-chrome__paper'>
           {{! Meeting title }}
@@ -897,13 +842,6 @@ export default class MeetingForm extends Component<Signature> {
           {{/if}}
         </div>
       </div>
-      <div class='au-c-meeting__sidebar-right au-u-hide-on-print'>
-        <MeetingValidationCard
-          @error={{this.validation.isRejected}}
-          @loading={{this.validation.isPending}}
-          @validationResult={{this.validation.value}}
-        />
-      </div>
     </div>
     <DeleteMeetingModal
       @show={{this.showDeleteModal}}
@@ -913,7 +851,7 @@ export default class MeetingForm extends Component<Signature> {
   </template>
 }
 
-type MeetingValidationCardSignature = {
+type MeetingNavigationCardSignature = {
   Args: {
     loading: boolean;
     error: boolean;
@@ -921,7 +859,7 @@ type MeetingValidationCardSignature = {
   };
 };
 
-class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
+class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
   @service declare store: Store;
 
   treatments = trackedFunction(this, async () => {
@@ -970,7 +908,7 @@ class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
       </AuCard>
     {{else if @error}}
       <AuAlert @skin='error' @icon='cross' @size='small'>
-        <p>{{t 'meeting-validation-card.error'}}</p>
+        <p>{{t 'meeting-toc-card.error'}}</p>
         <p>{{htmlSafe
             (t
               'generic.error-contact-us' email='gelinktnotuleren@vlaanderen.be'
@@ -986,56 +924,50 @@ class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
         as |C|
       >
         <C.header>
-          <ValidationEntry @ok={{@validationResult.ok}}>
-            <AuHeading @level='3' @skin='5'>
-              {{#if @validationResult.ok}}
-                {{t 'meeting-validation-card.title.ok'}}
-              {{else}}
-                {{t 'meeting-validation-card.title.nok'}}
-              {{/if}}
-            </AuHeading>
-          </ValidationEntry>
+          <AuHeading @level='3' @skin='5'>
+            {{t 'meeting-toc-card.title'}}
+          </AuHeading>
         </C.header>
         <C.content>
           <AuList @divider={{true}} as |Item|>
             <Item>
-              <ValidationEntry @ok={{@validationResult.general.ok}}>
+              <NavigationEntry @ok={{@validationResult.general.ok}}>
                 <AuLinkExternal
                   href='#sectionOne'
                   @skin='secondary'
                   @newTab={{false}}
                 >
-                  {{t 'meeting-validation-card.sections.general'}}
+                  {{t 'meeting-toc-card.sections.general'}}
                 </AuLinkExternal>
-              </ValidationEntry>
+              </NavigationEntry>
 
             </Item>
             <Item>
-              <ValidationEntry @ok={{@validationResult.attendance.ok}}>
+              <NavigationEntry @ok={{@validationResult.attendance.ok}}>
                 <AuLinkExternal
                   href='#sectionTwo'
                   @skin='secondary'
                   @newTab={{false}}
                 >
-                  {{t 'meeting-validation-card.sections.attendance'}}
+                  {{t 'meeting-toc-card.sections.attendance'}}
                 </AuLinkExternal>
-              </ValidationEntry>
+              </NavigationEntry>
             </Item>
             <Item>
-              <ValidationEntry @ok={{this.treatmentsOk}}>
+              <NavigationEntry @ok={{this.treatmentsOk}}>
                 <AuLinkExternal
                   href='#sectionFive'
                   @skin='secondary'
                   @newTab={{false}}
                 >
-                  {{t 'meeting-validation-card.sections.treatments'}}
+                  {{t 'meeting-toc-card.sections.treatments'}}
                 </AuLinkExternal>
-              </ValidationEntry>
+              </NavigationEntry>
 
               <AuList class='au-u-margin-top-small' as |Item|>
                 {{#each this.treatments.value as |treatment|}}
                   <Item>
-                    <ValidationEntry @ok={{treatment.ok}}>
+                    <NavigationEntry @ok={{treatment.ok}}>
                       <AuLinkExternal
                         href={{concat '#behandeling-' treatment.value.id}}
                         @skin='secondary'
@@ -1046,7 +978,7 @@ class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
                         {{! @glint-expect-error properly await this }}
                         {{treatment.value.onderwerp.titel}}
                       </AuLinkExternal>
-                    </ValidationEntry>
+                    </NavigationEntry>
                   </Item>
                 {{/each}}
               </AuList>
@@ -1058,7 +990,7 @@ class MeetingValidationCard extends Component<MeetingValidationCardSignature> {
   </template>
 }
 
-type ValidationEntrySignature = {
+type NavigationEntrySignature = {
   Args: {
     ok?: boolean;
   };
@@ -1067,8 +999,9 @@ type ValidationEntrySignature = {
   };
 };
 
-const ValidationEntry: TOC<ValidationEntrySignature> = <template>
-  <span class='au-u-flex au-u-flex--row'>
+const NavigationEntry: TOC<NavigationEntrySignature> = <template>
+  <span class='au-u-flex au-u-flex--row au-u-flex--between'>
+    {{yield}}
     {{#if @ok}}
       <AuBadge
         class='meeting-validation-card__icon au-u-margin-tiny'
@@ -1078,10 +1011,9 @@ const ValidationEntry: TOC<ValidationEntrySignature> = <template>
     {{else}}
       <AuBadge
         class='meeting-validation-card__icon au-u-margin-tiny'
-        @skin='error'
-        @icon='cross'
+        @skin='warning'
+        @icon='alert-triangle'
       />
     {{/if}}
-    {{yield}}
   </span>
 </template>;

@@ -15,6 +15,7 @@
 }
 
 .au-c-meeting-chrome {
+  width: 100%;
   padding: $au-unit $au-unit * 0.5;
   flex-grow: 1;
   position: relative;
@@ -22,8 +23,26 @@
   z-index: 2;
 }
 
+.au-c-meeting__sidebar-left {
+  padding: $au-unit $au-unit * 0.5;
+  align-self: flex-start;
+  max-height: 100%;
+  @include au-font-size($au-h6);
+  flex-shrink: 0;
+  overflow: scroll;
+  width: 38rem;
+  @include mq($until: 1250px) {
+    z-index: 10;
+    position: absolute;
+    right: $au-unit-small;
+    top: $au-unit-small;
+    max-height: calc(100% - $au-unit-small)
+  }
+}
+
 .au-c-meeting-chrome__paper {
   @include au-font-size($au-h6);
+  max-width: 1250px;
   position: relative;
   width: 100%;
   background-color: $au-white;
@@ -331,50 +350,7 @@
   }
 }
 
-.au-c-meeting__sidebar-left {
-  align-self: flex-start;
-  max-height: 100%;
-  @include au-font-size($au-h6);
-  flex-shrink: 0;
-  opacity: 0.7;
-  left: 0;
-  bottom: 0;
-  padding-top: $au-unit;
-  padding-left: $au-unit-small;
-  padding-right: $au-unit;
-  transition: opacity $au-transition;
-  display: none;
-  overflow: scroll;
 
-  @include mq(large) {
-    display: block;
-    width: $au-unit-huge * 3.5;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.au-c-meeting__sidebar-right {
-  align-self: flex-start;
-  max-height: 100%;
-  overflow: scroll;
-  flex-shrink: 0;
-  padding: $au-unit $au-unit-small;
-  z-index: 10;
-
-  @include mq($until: 1160px) {
-    position: absolute;
-    right: $au-unit-small;
-    top: $au-unit-small;
-    width: $au-unit-huge * 3;
-  }
-
-  @include mq($from: 1160px) {
-    width: $au-unit-huge * 4;
-  }
-}
 
 .au-c-meeting-numbered-list {
   counter-reset: list-number;
@@ -447,11 +423,11 @@
 }
 
 .meeting-validation-card__icon {
-  height: 1.6rem;
-  width: 1.6rem;
+  height: 2rem;
+  width: 2rem;
 
   .au-c-icon {
-    height: 1.2rem;
-    width: 1.2rem;
+    height: 1.4rem;
+    width: 1.4rem;
   }
 }

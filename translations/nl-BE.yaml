@@ -428,10 +428,8 @@ meeting-form:
   focus-mode: Focus besluiten
   focus-mode-tooltip: Publiceert u de installatievergadering in een externe applicatie? Schakel deze optie in om enkel de besluiten te zien.
 
-meeting-validation-card:
-  title:
-    ok: De zitting is volledig
-    nok: De zitting is onvolledig
+meeting-toc-card:
+  title: Inhoudstafel
   sections:
     general: Algemene informatie
     attendance: Aanwezigen bij de start
