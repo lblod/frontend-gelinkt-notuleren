@@ -429,7 +429,10 @@ meeting-toc-card:
   sections:
     general: General information
     attendance: Meeting attendance
+    agenda: Agenda of the meeting
+    intro: Meeting intro
     treatments: Treatments
+    outro: Meeting outro
   error: Something went wrong while determining the validity of this meeting.
 
 meetings:

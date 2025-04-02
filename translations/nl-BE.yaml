@@ -433,7 +433,10 @@ meeting-toc-card:
   sections:
     general: Algemene informatie
     attendance: Aanwezigen bij de start
+    agenda: Agenda van de zitting
+    intro: Start van de zitting
     treatments: Behandelingen
+    outro: Einde van de zitting
   error: Er ging iets mis bij het bepalen van de correctheid van deze zitting.
 
 meetings:

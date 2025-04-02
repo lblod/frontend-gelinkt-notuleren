@@ -954,6 +954,28 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
               </NavigationEntry>
             </Item>
             <Item>
+              <NavigationEntry @ok={{true}}>
+                <AuLinkExternal
+                  href='#sectionThree'
+                  @skin='secondary'
+                  @newTab={{false}}
+                >
+                  {{t 'meeting-toc-card.sections.agenda'}}
+                </AuLinkExternal>
+              </NavigationEntry>
+            </Item>
+            <Item>
+              <NavigationEntry @ok={{true}}>
+                <AuLinkExternal
+                  href='#sectionFour'
+                  @skin='secondary'
+                  @newTab={{false}}
+                >
+                  {{t 'meeting-toc-card.sections.intro'}}
+                </AuLinkExternal>
+              </NavigationEntry>
+            </Item>
+            <Item>
               <NavigationEntry @ok={{this.treatmentsOk}}>
                 <AuLinkExternal
                   href='#sectionFive'
@@ -982,6 +1004,17 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
                   </Item>
                 {{/each}}
               </AuList>
+            </Item>
+            <Item>
+              <NavigationEntry @ok={{true}}>
+                <AuLinkExternal
+                  href='#sectionSix'
+                  @skin='secondary'
+                  @newTab={{false}}
+                >
+                  {{t 'meeting-toc-card.sections.outro'}}
+                </AuLinkExternal>
+              </NavigationEntry>
             </Item>
           </AuList>
         </C.content>
