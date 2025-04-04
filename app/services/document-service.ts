@@ -1,9 +1,5 @@
 import Service, { service } from '@ember/service';
 import { task } from 'ember-concurrency';
-import {
-  type PromiseBelongsTo,
-  type PromiseManyArray,
-} from '@ember-data/model/-private';
 import { analyse } from '@lblod/marawa/rdfa-context-scanner';
 import type Triple from '@lblod/marawa/triple';
 import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
@@ -18,8 +14,8 @@ import { type Context } from 'frontend-gelinkt-notuleren/config/editor-document-
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
-import type ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
-import type EditorDocumentFolderModel from 'frontend-gelinkt-notuleren/models/editor-document-folder';
+import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
+import EditorDocumentFolderModel from 'frontend-gelinkt-notuleren/models/editor-document-folder';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 
 interface PersistDocumentArgs {
@@ -134,18 +130,17 @@ export default class DocumentService extends Service {
           },
         );
         if (previousDocument) {
-          editorDocument.previousVersion =
-            previousDocument as unknown as PromiseBelongsTo<EditorDocumentModel>;
+          editorDocument.set('previousVersion', previousDocument);
         }
-        editorDocument.documentContainer =
-          documentContainer as unknown as PromiseBelongsTo<DocumentContainerModel>;
-        editorDocument.parts = (await this.retrieveDocumentParts(
-          editorDocument,
-        )) as unknown as PromiseManyArray<DocumentContainerModel>;
+        editorDocument.set('documentContainer', documentContainer);
+
+        const parts = await this.retrieveDocumentParts(editorDocument);
+        editorDocument.set('parts', parts);
         await editorDocument.save();
-        documentContainer.currentVersion =
-          editorDocument as unknown as PromiseBelongsTo<EditorDocumentModel>;
+
+        documentContainer.set('currentVersion', editorDocument);
         await documentContainer.save();
+
         return editorDocument;
       }
     },
@@ -201,23 +196,24 @@ export default class DocumentService extends Service {
         'document-container',
         {},
       );
-      container.status = (await this.store.findRecord(
+      const draftStatus = await this.store.findRecord<ConceptModel>(
         'concept',
         DRAFT_STATUS_ID,
-      )) as PromiseBelongsTo<ConceptModel>;
-      container.folder = (await this.store.findRecord(
+      );
+      container.set('status', draftStatus);
+      const folder = await this.store.findRecord<EditorDocumentFolderModel>(
         'editor-document-folder',
         folderId,
-      )) as PromiseBelongsTo<EditorDocumentFolderModel>;
-      container.publisher =
-        group as unknown as PromiseBelongsTo<BestuurseenheidModel>;
+      );
+      container.set('folder', folder);
+      container.set('publisher', group);
       const editorDocument = await this.createEditorDocument.perform(
         title,
         generatedTemplate,
         container,
       );
-      container.currentVersion =
-        editorDocument as unknown as PromiseBelongsTo<EditorDocumentModel>;
+
+      container.set('currentVersion', editorDocument);
       await container.save();
       return container;
     },

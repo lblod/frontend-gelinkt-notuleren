@@ -6,7 +6,7 @@ import Model, {
   type AsyncBelongsTo,
   type AsyncHasMany,
 } from '@ember-data/model';
-import { type Type } from '@warp-drive/core-types/symbols';
+import type { Type } from '@warp-drive/core-types/symbols';
 import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import defaultContext from 'frontend-gelinkt-notuleren/config/editor-document-default-context';
 import type DocumentContainerModel from './document-container';
