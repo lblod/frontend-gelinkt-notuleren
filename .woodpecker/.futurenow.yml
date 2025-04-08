@@ -4,10 +4,10 @@ steps:
     settings:
       repo: ${CI_REPO}
       tags: futurenow
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
 when:
   - event: push
     branch: [futurenow]
