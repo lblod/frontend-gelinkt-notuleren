@@ -36,7 +36,7 @@
     position: absolute;
     right: $au-unit-small;
     top: $au-unit-small;
-    max-height: calc(100% - $au-unit-small)
+    max-height: calc(100% - $au-unit-small);
   }
 }
 
@@ -349,8 +349,6 @@
     }
   }
 }
-
-
 
 .au-c-meeting-numbered-list {
   counter-reset: list-number;
