@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.54.0
+
+### Minor Changes
+
+- [#841](https://github.com/lblod/frontend-gelinkt-notuleren/pull/841) [`81998ff`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/81998ffb1474b9f6a67af860c11e724e577f5975) Thanks [@piemonkey](https://github.com/piemonkey)! - Update @lblod/ember-rdfa-editor-lblod-plugins to 29.1.1
+
+### Patch Changes
+
+- [#842](https://github.com/lblod/frontend-gelinkt-notuleren/pull/842) [`ad2424f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ad2424f36808d3ad46685853b002dfdeecb4b3bf) Thanks [@abeforgit](https://github.com/abeforgit)! - Allow language based on process env in dev modew
+
 ## 5.53.2
 
 ### Patch Changes
