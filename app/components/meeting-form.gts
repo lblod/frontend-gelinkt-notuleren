@@ -916,7 +916,7 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
         class='meeting-validation-card'
         @expandable={{true}}
         @size='small'
-        @isOpenInitially={{not @validationResult.ok}}
+        @isOpenInitially={{true}}
         as |C|
       >
         <C.header>
