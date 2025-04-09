@@ -227,11 +227,7 @@ export default class MeetingForm extends Component<Signature> {
     return this.fetchTreatments.isRunning;
   }
   get isComplete() {
-    return (
-      !this.zitting?.isNew &&
-      this.behandelingen?.length > 0 &&
-      this.validation.value?.ok
-    );
+    return !this.zitting?.isNew && this.behandelingen?.length > 0;
   }
   get bestuursorgaan() {
     return this.meetingDetailsData.value?.bestuursorgaan ?? null;
