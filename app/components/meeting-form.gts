@@ -93,6 +93,8 @@ import type { TOC } from '@ember/component/template-only';
 import AuLinkExternal from '@appuniversum/ember-appuniversum/components/au-link-external';
 import { concat } from '@ember/helper';
 import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
+import type UserPreferencesService from 'frontend-gelinkt-notuleren/services/user-preferences';
+import { localCopy } from 'tracked-toolbox';
 
 type Signature = {
   Args: {
@@ -857,6 +859,18 @@ type MeetingNavigationCardSignature = {
 
 class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
   @service declare store: Store;
+  @service declare userPreferences: UserPreferencesService;
+  @localCopy('collapsedQuery.value') collapsed?: boolean = true;
+
+  collapsedQuery = trackedFunction(this, async () => {
+    const collapsedString = await this.userPreferences.load(
+      'meeting.sidebar.navigation.collapsed',
+    );
+    const collapsed = collapsedString
+      ? (JSON.parse(collapsedString) as boolean)
+      : false;
+    return collapsed;
+  });
 
   treatments = trackedFunction(this, async () => {
     const { validationResult } = this.args;
@@ -894,38 +908,47 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
     );
   }
 
+  @action
+  async onCardToggle() {
+    this.collapsed = !this.collapsed;
+    await this.userPreferences.save(
+      'meeting.sidebar.navigation.collapsed',
+      JSON.stringify(this.collapsed),
+    );
+  }
+
   <template>
-    {{#if @loading}}
-      <AuCard class='meeting-validation-card' @size='small' as |C|>
-        <C.content>
+    <AuCard
+      class='meeting-validation-card'
+      @expandable={{true}}
+      @isExpanded={{not this.collapsed}}
+      @openSection={{this.onCardToggle}}
+      @manualControl={{true}}
+      @size='small'
+      @isOpenInitially={{true}}
+      as |C|
+    >
+      <C.header>
+        <AuHeading @level='3' @skin='5'>
+          {{t 'meeting-toc-card.title'}}
+        </AuHeading>
+      </C.header>
+      <C.content>
+        {{#if @loading}}
           <AuLoader @inline={{true}} @hideMessage={{false}} @centered={{false}}>
             {{t 'application.loading'}}
           </AuLoader>
-        </C.content>
-      </AuCard>
-    {{else if @error}}
-      <AuAlert @skin='error' @icon='cross' @size='small'>
-        <p>{{t 'meeting-toc-card.error'}}</p>
-        <p>{{htmlSafe
-            (t
-              'generic.error-contact-us' email='gelinktnotuleren@vlaanderen.be'
-            )
-          }}</p>
-      </AuAlert>
-    {{else if @validationResult}}
-      <AuCard
-        class='meeting-validation-card'
-        @expandable={{true}}
-        @size='small'
-        @isOpenInitially={{true}}
-        as |C|
-      >
-        <C.header>
-          <AuHeading @level='3' @skin='5'>
-            {{t 'meeting-toc-card.title'}}
-          </AuHeading>
-        </C.header>
-        <C.content>
+        {{else if @error}}
+          <AuAlert @skin='error' @icon='cross' @size='small'>
+            <p>{{t 'meeting-toc-card.error'}}</p>
+            <p>{{htmlSafe
+                (t
+                  'generic.error-contact-us'
+                  email='gelinktnotuleren@vlaanderen.be'
+                )
+              }}</p>
+          </AuAlert>
+        {{else if @validationResult}}
           <AuList @divider={{true}} as |Item|>
             <Item>
               <NavigationEntry
@@ -1035,9 +1058,9 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
               </NavigationEntry>
             </Item>
           </AuList>
-        </C.content>
-      </AuCard>
-    {{/if}}
+        {{/if}}
+      </C.content>
+    </AuCard>
   </template>
 }
 
