@@ -863,13 +863,15 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
   @localCopy('collapsedQuery.value') collapsed?: boolean = true;
 
   collapsedQuery = trackedFunction(this, async () => {
-    const collapsedString = await this.userPreferences.load(
-      'meeting.sidebar.navigation.collapsed',
-    );
-    const collapsed = collapsedString
-      ? (JSON.parse(collapsedString) as boolean)
-      : false;
-    return collapsed;
+    try {
+      const collapsed = await this.userPreferences.load(
+        'meeting.sidebar.navigation.collapsed',
+      );
+      return collapsed;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
   });
 
   treatments = trackedFunction(this, async () => {
@@ -913,7 +915,7 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
     this.collapsed = !this.collapsed;
     await this.userPreferences.save(
       'meeting.sidebar.navigation.collapsed',
-      JSON.stringify(this.collapsed),
+      this.collapsed,
     );
   }
 

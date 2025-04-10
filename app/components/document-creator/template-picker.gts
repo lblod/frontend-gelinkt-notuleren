@@ -109,12 +109,15 @@ export default class TemplatePicker extends Component<Sig> {
   };
 
   favouriteTemplatesQuery = trackedFunction(this, async () => {
-    const favouriteTemplatesString = await this.userPreferences.load(
-      'favourite-templates',
-    );
-    return favouriteTemplatesString
-      ? (JSON.parse(favouriteTemplatesString) as string[])
-      : [];
+    try {
+      const favouriteTemplates = await this.userPreferences.load(
+        'favourite-templates',
+      );
+      return favouriteTemplates;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
   });
 
   templateSearch = restartableTask(async () => {
@@ -176,7 +179,7 @@ export default class TemplatePicker extends Component<Sig> {
     this.favouriteTemplates = newFavouriteTemplates;
 
     this.userPreferences
-      .save('favourite-templates', JSON.stringify(this.favouriteTemplates))
+      .save('favourite-templates', this.favouriteTemplates)
       .catch((err) => {
         console.error('Error when updating favourite templates', err);
       });

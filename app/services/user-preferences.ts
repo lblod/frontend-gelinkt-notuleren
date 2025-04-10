@@ -5,12 +5,25 @@ import type Store from './store';
 import { CONCEPT_SCHEMES } from 'frontend-gelinkt-notuleren/config/constants';
 import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import UserPreferenceModel from 'frontend-gelinkt-notuleren/models/user-preference';
+import z from 'zod';
 
+const userPreferenceSchema = z.discriminatedUnion('key', [
+  z.object({
+    key: z.literal('favourite-templates'),
+    value: z.array(z.string()).default([]),
+  }),
+  z.object({
+    key: z.literal('meeting.sidebar.navigation.collapsed'),
+    value: z.coerce.boolean().default(true),
+  }),
+]);
+
+type UserPreference = z.infer<typeof userPreferenceSchema>;
 export default class UserPreferencesService extends Service {
   @service declare currentSession: CurrentSessionService;
   @service declare store: Store;
 
-  async resolveConcept(key: string) {
+  async resolveConcept(key: UserPreference['key']) {
     const preferenceConcept = (
       await this.store.query<ConceptModel>('concept', {
         filter: {
@@ -27,7 +40,9 @@ export default class UserPreferencesService extends Service {
     return preferenceConcept;
   }
 
-  async load(key: string) {
+  async load<K extends UserPreference['key']>(
+    key: K,
+  ): Promise<Extract<UserPreference, { key: K }>['value']> {
     const user = this.currentSession.user;
     if (!user) {
       throw new Error('User is not authenticated');
@@ -45,10 +60,20 @@ export default class UserPreferencesService extends Service {
         },
       })
     )[0];
-    return userPreference?.value;
+
+    // @ts-expect-error unsure how to correctly narrow this type
+    return userPreferenceSchema.parse({
+      key,
+      value: userPreference?.value
+        ? (JSON.parse(userPreference.value) as unknown)
+        : null,
+    }).value;
   }
 
-  async save(key: string, value: string) {
+  async save<K extends UserPreference['key']>(
+    key: K,
+    value: Extract<UserPreference, { key: K }>['value'],
+  ) {
     const user = this.currentSession.user;
     if (!user) {
       throw new Error('User is not authenticated');
@@ -68,11 +93,10 @@ export default class UserPreferencesService extends Service {
         })
       )[0] ??
       this.store.createRecord<UserPreferenceModel>('user-preference', {
-        value,
         type: preferenceConcept,
         gebruiker: user,
       });
-    userPreference.value = value;
+    userPreference.value = JSON.stringify(value);
     await userPreference.save();
   }
 }
