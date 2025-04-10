@@ -1054,19 +1054,19 @@ type NavigationEntrySignature = {
 };
 
 const NavigationEntry: TOC<NavigationEntrySignature> = <template>
-  <WithTooltip
-    @tooltip={{if @ok @successMessage @warningMessage}}
-    @placement='bottom-start'
+  <AuLinkExternal
+    class='au-u-flex au-u-flex--row au-u-flex--between'
+    href={{@href}}
+    @skin='secondary'
+    @newTab={{false}}
   >
-    <AuLinkExternal
-      class='au-u-flex au-u-flex--row au-u-flex--between'
-      href={{@href}}
-      @skin='secondary'
-      @newTab={{false}}
+    <span>
+      {{yield}}
+    </span>
+    <WithTooltip
+      @tooltip={{if @ok @successMessage @warningMessage}}
+      @placement='bottom-start'
     >
-      <span>
-        {{yield}}
-      </span>
       {{#if @ok}}
         <AuBadge
           class='meeting-validation-card__icon au-u-margin-tiny'
@@ -1080,6 +1080,6 @@ const NavigationEntry: TOC<NavigationEntrySignature> = <template>
           @icon='alert-triangle'
         />
       {{/if}}
-    </AuLinkExternal>
-  </WithTooltip>
+    </WithTooltip>
+  </AuLinkExternal>
 </template>;
