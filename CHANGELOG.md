@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.55.0
+
+### Minor Changes
+
+- [#840](https://github.com/lblod/frontend-gelinkt-notuleren/pull/840) [`43724a9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/43724a9f4f99b643b203171fd2cacfb615b762f2) Thanks [@elpoelma](https://github.com/elpoelma)! - Add meeting validation feature:
+  This feature validates a meeting reactively and displays the validation result to the user.
+  It can be used to prompt the user for actions to correct/improve the meeting details.
+
+### Patch Changes
+
+- [#840](https://github.com/lblod/frontend-gelinkt-notuleren/pull/840) [`f785182`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f785182b9ef9c8f3f93b8b44862d841ceff65832) Thanks [@elpoelma](https://github.com/elpoelma)! - Explicitly add `ember-mu-transform-helpers` dependency
+
 ## 5.54.0
 
 ### Minor Changes
