@@ -872,6 +872,7 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
               'behandeling-van-agendapunt',
               id,
               {
+                reload: true,
                 include: 'onderwerp',
               } as unknown as LegacyResourceQuery<BehandelingVanAgendapunt>,
             ),
