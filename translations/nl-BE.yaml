@@ -431,12 +431,40 @@ meeting-form:
 meeting-toc-card:
   title: Inhoudstafel
   sections:
-    general: Algemene informatie
-    attendance: Aanwezigen bij de start
-    agenda: Agenda van de zitting
-    intro: Start van de zitting
-    treatments: Behandelingen
-    outro: Einde van de zitting
+    general:
+      label: Algemene informatie
+      validation:
+        success: Er werden geen problemen aangetroffen in de algemene informatie over deze zitting
+        warning: Er werden enkele problemen aangetroffen in de algemene informatie over deze zitting
+    attendance:
+      label: Aanwezigen bij de start
+      validation:
+        success: De aanwezigheid van de zitting is correct ingevuld
+        warning: Er werden enkele problemen aangetroffen bij de aanwezigheid van de zitting
+    agenda:
+      label: Agenda van de zitting
+      validation:
+        success: De agenda van de zitting is correct ingevuld
+        warning: Er werden enkele problemen aangetroffen bij de agenda van de zitting
+    intro:
+      label: Start van de zitting
+      validation:
+        success: De start van de zitting is correct ingevuld
+        warning: De start van de zitting werd niet correct ingevuld
+    treatments:
+      label: Behandelingen
+      validation:
+        success: De aanwezigheid van de onderstaande behandeling werd correct ingevuld
+        warning: Er werden enkele problemen aangetroffen bij de aanwezigheid van onderstaande behandelingen
+    treatment:
+      validation:
+        success: Deze aanwezigheid van deze behandeling is correct ingevuld
+        warning: Er werden enkele problemen aangetroffen bij de aanwezigheid van deze behandeling
+    outro:
+      label: Einde van de zitting
+      validation:
+        success: Het einde van de zitting is correct ingevuld
+        warning: Het einde van de zitting werd niet correct ingevuld
   error: Er ging iets mis bij het bepalen van de correctheid van deze zitting.
 
 meetings:

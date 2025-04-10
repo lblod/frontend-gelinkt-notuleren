@@ -31,8 +31,8 @@
   flex-shrink: 0;
   overflow: scroll;
   width: 38rem;
+  z-index: 10;
   @include mq($until: 1250px) {
-    z-index: 10;
     position: absolute;
     right: $au-unit-small;
     top: $au-unit-small;

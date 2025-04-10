@@ -427,12 +427,35 @@ meeting-form:
 meeting-toc-card:
   title: Table of contents
   sections:
-    general: General information
-    attendance: Meeting attendance
-    agenda: Agenda of the meeting
-    intro: Meeting intro
-    treatments: Treatments
-    outro: Meeting outro
+    general:
+      label: General information
+      validation:
+        success: No problems were found in this meeting
+        warning: A few problems were found in this meeting
+    attendance:
+      label: Meeting attendance
+      validation:
+        success: The attendance of this meeting is correct filled in
+        warning: A few problems were found in the attendance section of this meeting
+    agenda:
+      label: Agenda of the meeting
+      validation:
+        success: The meeting agenda is correctly filled in
+        warning: A few problems were found in the agenda of this meeting
+    intro:
+      label: Meeting intro
+      validation:
+        success: The intro of this meeting is correctly filled in
+    treatments:
+      label: Treatments
+    treatment:
+      validation:
+        success: The attendance of this treatment is correctly filled in
+        warning: A few problems were found in the attendance section of this treatment
+    outro:
+      label: Meeting outro
+      validation:
+        success: The outro of this meeting is correctly filled in
   error: Something went wrong while determining the validity of this meeting.
 
 meetings:

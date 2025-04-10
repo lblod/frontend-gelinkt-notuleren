@@ -911,7 +911,7 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
             )
           }}</p>
       </AuAlert>
-    {{else}}
+    {{else if @validationResult}}
       <AuCard
         class='meeting-validation-card'
         @expandable={{true}}
@@ -927,89 +927,110 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
         <C.content>
           <AuList @divider={{true}} as |Item|>
             <Item>
-              <NavigationEntry @ok={{@validationResult.general.ok}}>
-                <AuLinkExternal
-                  href='#sectionOne'
-                  @skin='secondary'
-                  @newTab={{false}}
-                >
-                  {{t 'meeting-toc-card.sections.general'}}
-                </AuLinkExternal>
+              <NavigationEntry
+                @href='#sectionOne'
+                @ok={{@validationResult.general.ok}}
+                @successMessage={{t
+                  'meeting-toc-card.sections.general.validation.success'
+                }}
+                @warningMessage={{t
+                  'meeting-toc-card.sections.general.validation.warning'
+                }}
+              >
+                {{t 'meeting-toc-card.sections.general.label'}}
               </NavigationEntry>
 
             </Item>
             <Item>
-              <NavigationEntry @ok={{@validationResult.attendance.ok}}>
-                <AuLinkExternal
-                  href='#sectionTwo'
-                  @skin='secondary'
-                  @newTab={{false}}
-                >
-                  {{t 'meeting-toc-card.sections.attendance'}}
-                </AuLinkExternal>
+              <NavigationEntry
+                @href='#sectionTwo'
+                @ok={{@validationResult.attendance.ok}}
+                @successMessage={{t
+                  'meeting-toc-card.sections.attendance.validation.success'
+                }}
+                @warningMessage={{t
+                  'meeting-toc-card.sections.attendance.validation.warning'
+                }}
+              >
+                {{t 'meeting-toc-card.sections.attendance.label'}}
               </NavigationEntry>
             </Item>
             <Item>
-              <NavigationEntry @ok={{true}}>
-                <AuLinkExternal
-                  href='#sectionThree'
-                  @skin='secondary'
-                  @newTab={{false}}
-                >
-                  {{t 'meeting-toc-card.sections.agenda'}}
-                </AuLinkExternal>
+              <NavigationEntry
+                @href='#sectionThree'
+                @ok={{true}}
+                @successMessage={{t
+                  'meeting-toc-card.sections.agenda.validation.success'
+                }}
+                @warningMessage={{t
+                  'meeting-toc-card.sections.agenda.validation.warning'
+                }}
+              >
+                {{t 'meeting-toc-card.sections.agenda.label'}}
               </NavigationEntry>
             </Item>
             <Item>
-              <NavigationEntry @ok={{true}}>
-                <AuLinkExternal
-                  href='#sectionFour'
-                  @skin='secondary'
-                  @newTab={{false}}
-                >
-                  {{t 'meeting-toc-card.sections.intro'}}
-                </AuLinkExternal>
+              <NavigationEntry
+                @href='#sectionFour'
+                @ok={{true}}
+                @successMessage={{t
+                  'meeting-toc-card.sections.intro.validation.success'
+                }}
+                @warningMessage={{t
+                  'meeting-toc-card.sections.intro.validation.warning'
+                }}
+              >
+                {{t 'meeting-toc-card.sections.intro.label'}}
               </NavigationEntry>
             </Item>
             <Item>
-              <NavigationEntry @ok={{this.treatmentsOk}}>
-                <AuLinkExternal
-                  href='#sectionFive'
-                  @skin='secondary'
-                  @newTab={{false}}
-                >
-                  {{t 'meeting-toc-card.sections.treatments'}}
-                </AuLinkExternal>
+              <NavigationEntry
+                @href='#sectionFive'
+                @ok={{this.treatmentsOk}}
+                @successMessage={{t
+                  'meeting-toc-card.sections.treatments.validation.success'
+                }}
+                @warningMessage={{t
+                  'meeting-toc-card.sections.treatments.validation.warning'
+                }}
+              >
+                {{t 'meeting-toc-card.sections.treatments.label'}}
               </NavigationEntry>
 
               <AuList class='au-u-margin-top-small' as |Item|>
                 {{#each this.treatments.value as |treatment|}}
                   <Item>
-                    <NavigationEntry @ok={{treatment.ok}}>
-                      <AuLinkExternal
-                        href={{concat '#behandeling-' treatment.value.id}}
-                        @skin='secondary'
-                        @newTab={{false}}
-                      >
-                        {{! @glint-expect-error properly await this }}
-                        {{add treatment.value.onderwerp.position 1}}.
-                        {{! @glint-expect-error properly await this }}
-                        {{treatment.value.onderwerp.titel}}
-                      </AuLinkExternal>
+                    <NavigationEntry
+                      @href={{concat '#behandeling-' treatment.value.id}}
+                      @ok={{treatment.ok}}
+                      @successMessage={{t
+                        'meeting-toc-card.sections.treatment.validation.success'
+                      }}
+                      @warningMessage={{t
+                        'meeting-toc-card.sections.treatment.validation.warning'
+                      }}
+                    >
+                      {{! @glint-expect-error properly await this }}
+                      {{add treatment.value.onderwerp.position 1}}.
+                      {{! @glint-expect-error properly await this }}
+                      {{treatment.value.onderwerp.titel}}
                     </NavigationEntry>
                   </Item>
                 {{/each}}
               </AuList>
             </Item>
             <Item>
-              <NavigationEntry @ok={{true}}>
-                <AuLinkExternal
-                  href='#sectionSix'
-                  @skin='secondary'
-                  @newTab={{false}}
-                >
-                  {{t 'meeting-toc-card.sections.outro'}}
-                </AuLinkExternal>
+              <NavigationEntry
+                @href='#sectionSix'
+                @ok={{true}}
+                @successMessage={{t
+                  'meeting-toc-card.sections.outro.validation.success'
+                }}
+                @warningMessage={{t
+                  'meeting-toc-card.sections.outro.validation.warning'
+                }}
+              >
+                {{t 'meeting-toc-card.sections.outro.label'}}
               </NavigationEntry>
             </Item>
           </AuList>
@@ -1021,7 +1042,10 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
 
 type NavigationEntrySignature = {
   Args: {
-    ok?: boolean;
+    href: string;
+    ok: boolean;
+    successMessage: string;
+    warningMessage: string;
   };
   Blocks: {
     default: [];
@@ -1030,19 +1054,24 @@ type NavigationEntrySignature = {
 
 const NavigationEntry: TOC<NavigationEntrySignature> = <template>
   <span class='au-u-flex au-u-flex--row au-u-flex--between'>
-    {{yield}}
-    {{#if @ok}}
-      <AuBadge
-        class='meeting-validation-card__icon au-u-margin-tiny'
-        @skin='success'
-        @icon='check'
-      />
-    {{else}}
-      <AuBadge
-        class='meeting-validation-card__icon au-u-margin-tiny'
-        @skin='warning'
-        @icon='alert-triangle'
-      />
-    {{/if}}
+    <AuLinkExternal href={{@href}} @skin='secondary' @newTab={{false}}>
+      {{yield}}
+    </AuLinkExternal>
+    <WithTooltip @tooltip={{if @ok @successMessage @warningMessage}}>
+      {{#if @ok}}
+        <AuBadge
+          class='meeting-validation-card__icon au-u-margin-tiny'
+          @skin='success'
+          @icon='check'
+        />
+      {{else}}
+        <AuBadge
+          class='meeting-validation-card__icon au-u-margin-tiny'
+          @skin='warning'
+          @icon='alert-triangle'
+        />
+      {{/if}}
+    </WithTooltip>
+
   </span>
 </template>;
