@@ -123,3 +123,8 @@ export const ADMINISTRATIVE_UNIT_URIS = {
   OCMW_GENT:
     'http://data.lblod.info/id/bestuurseenheden/c5623baf3970c5efa9746dff01afd43092c1321a47316dbe81ed79604b56e8ea',
 };
+
+export const CONCEPT_SCHEMES = {
+  USER_PREFERENCES:
+    'http://lblod.data.gift/concept-schemes/f9bd0f31-8932-4a04-8c79-f92066c991f3',
+};
