@@ -5,10 +5,12 @@ import { action } from '@ember/object';
 import { hash } from '@ember/helper';
 import { on } from '@ember/modifier';
 import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
+import type { Placement } from '@floating-ui/dom';
 
 type Signature = {
   Args: {
     tooltip: string;
+    placement?: Placement;
   };
   Blocks: {
     default: [];
@@ -17,6 +19,10 @@ type Signature = {
 export default class TooltipComponent extends Component<Signature> {
   @tracked
   tooltipOpen = false;
+
+  get placement(): Placement {
+    return this.args.placement ?? 'top';
+  }
 
   @action
   showTooltip() {
@@ -28,7 +34,11 @@ export default class TooltipComponent extends Component<Signature> {
   }
 
   <template>
-    <Velcro @placement='top' @offsetOptions={{hash mainAxis=10}} as |velcro|>
+    <Velcro
+      @placement={{this.placement}}
+      @offsetOptions={{hash mainAxis=10}}
+      as |velcro|
+    >
       <div
         {{on 'mouseenter' this.showTooltip}}
         {{on 'mouseleave' this.hideTooltip}}
