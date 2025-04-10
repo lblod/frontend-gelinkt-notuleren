@@ -1,5 +1,5 @@
 import Model, { attr, belongsTo, type AsyncBelongsTo } from '@ember-data/model';
-import { type Type } from '@warp-drive/core-types/symbols';
+import type { Type } from '@warp-drive/core-types/symbols';
 import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type StringArrayTransform from 'frontend-gelinkt-notuleren/transforms/string-array';
 import type GebruikerModel from './gebruiker';

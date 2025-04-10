@@ -15,15 +15,35 @@
 }
 
 .au-c-meeting-chrome {
+  width: 100%;
   padding: $au-unit $au-unit * 0.5;
+  flex-grow: 1;
   position: relative;
   overflow: scroll;
-  width: 100%;
   z-index: 2;
+}
+
+.au-c-meeting__sidebar-left {
+  padding: $au-unit $au-unit * 0.5;
+  padding-right: 0;
+  align-self: flex-start;
+  max-height: 100%;
+  @include au-font-size($au-h6);
+  flex-shrink: 0;
+  overflow: scroll;
+  width: 38rem;
+  z-index: 10;
+  @include mq($until: 1250px) {
+    position: absolute;
+    right: $au-unit;
+    top: $au-unit-small;
+    max-height: calc(100% - $au-unit-small);
+  }
 }
 
 .au-c-meeting-chrome__paper {
   @include au-font-size($au-h6);
+  max-width: 1250px;
   position: relative;
   width: 100%;
   background-color: $au-white;
@@ -36,14 +56,6 @@
 
   &:focus {
     outline: none;
-  }
-
-  @include mq(small) {
-    width: 100%;
-  }
-
-  @include mq(large) {
-    width: 75%;
   }
 }
 
@@ -339,33 +351,6 @@
   }
 }
 
-.au-c-meeting-sidebar {
-  @include au-font-size($au-h6);
-  flex-shrink: 0;
-  opacity: 0.7;
-  left: 0;
-  bottom: 0;
-  padding-top: $au-unit;
-  padding-left: $au-unit-small;
-  padding-right: $au-unit;
-  transition: opacity $au-transition;
-  display: none;
-  overflow: scroll;
-
-  @include mq(1160px) {
-    display: block;
-    width: $au-unit-huge * 3;
-  }
-
-  @include mq(large) {
-    width: $au-unit-huge * 3.5;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
 .au-c-meeting-numbered-list {
   counter-reset: list-number;
 
@@ -426,4 +411,22 @@
 }
 .gn-meeting-copy--structure-content {
   margin: 1rem;
+}
+
+.meeting-validation-card {
+  border: 0;
+  box-shadow:
+    0 0.1rem 0.3rem rgba($au-gray-900, 0.1),
+    0 0.4rem 2rem rgba($au-gray-900, 0.035),
+    0 0.1rem 0.1rem rgba($au-gray-900, 0.025);
+}
+
+.meeting-validation-card__icon {
+  height: 2rem;
+  width: 2rem;
+
+  .au-c-icon {
+    height: 1.4rem;
+    width: 1.4rem;
+  }
 }

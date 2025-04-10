@@ -1,42 +1,63 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import Model, {
+  attr,
+  belongsTo,
+  hasMany,
+  type AsyncBelongsTo,
+  type AsyncHasMany,
+} from '@ember-data/model';
+import type { Type } from '@warp-drive/core-types/symbols';
 import isAfter from 'date-fns/isAfter';
 import isBefore from 'date-fns/isBefore';
+import type BestuurseenheidModel from './bestuurseenheid';
+import type BestuursorgaanClassificatieCodeModel from './bestuursorgaan-classificatie-code';
+import type RechtstreekseVerkiezingModel from './rechtstreekse-verkiezing';
+import type BestuursperiodeModel from './bestuursperiode';
+import type MandaatModel from './mandaat';
+import type BestuursfunctieModel from './bestuursfunctie';
 
 export default class BestuursorgaanModel extends Model {
-  @attr uri;
-  @attr naam;
-  @attr('date') bindingEinde;
-  @attr('date') bindingStart;
+  declare [Type]: 'bestuursorgaan';
+
+  @attr uri?: string;
+  @attr naam?: string;
+  @attr('date') bindingEinde?: Date;
+  @attr('date') bindingStart?: Date;
 
   @belongsTo('bestuurseenheid', { inverse: 'bestuursorganen', async: true })
-  bestuurseenheid;
+  declare bestuurseenheid: AsyncBelongsTo<BestuurseenheidModel>;
+
   @belongsTo('bestuursorgaan-classificatie-code', {
     inverse: null,
     async: true,
   })
-  classificatie;
+  declare classificatie: AsyncBelongsTo<BestuursorgaanClassificatieCodeModel>;
+
   @belongsTo('bestuursorgaan', {
     inverse: 'heeftTijdsspecialisaties',
     async: true,
   })
-  isTijdsspecialisatieVan;
+  declare isTijdsspecialisatieVan: AsyncBelongsTo<BestuursorgaanModel>;
+
   @belongsTo('rechtstreekse-verkiezing', { inverse: 'steltSamen', async: true })
-  wordtSamengesteldDoor;
+  declare wordtSamengesteldDoor: AsyncBelongsTo<RechtstreekseVerkiezingModel>;
 
   @belongsTo('bestuursperiode', {
     async: true,
     inverse: null,
   })
-  bestuursperiode;
+  declare bestuursperiode: AsyncBelongsTo<BestuursperiodeModel>;
 
   @hasMany('bestuursorgaan', {
     inverse: 'isTijdsspecialisatieVan',
     async: true,
   })
-  heeftTijdsspecialisaties;
-  @hasMany('mandaat', { inverse: 'bevatIn', async: true }) bevat;
+  declare heeftTijdsspecialisaties: AsyncHasMany<BestuursorgaanModel>;
+
+  @hasMany('mandaat', { inverse: 'bevatIn', async: true })
+  declare bevat: AsyncHasMany<MandaatModel>;
+
   @hasMany('bestuursfunctie', { inverse: 'bevatIn', async: true })
-  bevatBestuursfunctie;
+  declare bevatBestuursfunctie: AsyncHasMany<BestuursfunctieModel>;
 
   rdfaBindings = {
     naam: 'http://www.w3.org/2004/02/skos/core#prefLabel',
@@ -53,7 +74,7 @@ export default class BestuursorgaanModel extends Model {
   /**
    * @param {Date} referenceDate
    */
-  isActive(referenceDate) {
+  isActive(referenceDate: Date) {
     const startDateIsValid =
       !this.bindingStart || isBefore(this.bindingStart, referenceDate);
     const endDateIsValid =
