@@ -25,6 +25,7 @@
 
 .au-c-meeting__sidebar-left {
   padding: $au-unit $au-unit * 0.5;
+  padding-right: 0;
   align-self: flex-start;
   max-height: 100%;
   @include au-font-size($au-h6);
@@ -34,7 +35,7 @@
   z-index: 10;
   @include mq($until: 1250px) {
     position: absolute;
-    right: $au-unit-small;
+    right: $au-unit;
     top: $au-unit-small;
     max-height: calc(100% - $au-unit-small);
   }
