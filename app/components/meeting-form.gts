@@ -860,14 +860,14 @@ type MeetingNavigationCardSignature = {
 class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
   @service declare store: Store;
   @service declare userPreferences: UserPreferencesService;
-  @localCopy('collapsedQuery.value') collapsed?: boolean = true;
+  @localCopy('expandedQuery.value') expanded?: boolean = true;
 
-  collapsedQuery = trackedFunction(this, async () => {
+  expandedQuery = trackedFunction(this, async () => {
     try {
-      const collapsed = await this.userPreferences.load(
-        'meeting.sidebar.navigation.collapsed',
+      const expanded = await this.userPreferences.load(
+        'meeting.sidebar.navigation.expanded',
       );
-      return collapsed;
+      return expanded;
     } catch (e) {
       console.error(e);
       return false;
@@ -912,10 +912,10 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
 
   @action
   async onCardToggle() {
-    this.collapsed = !this.collapsed;
+    this.expanded = !this.expanded;
     await this.userPreferences.save(
-      'meeting.sidebar.navigation.collapsed',
-      this.collapsed,
+      'meeting.sidebar.navigation.expanded',
+      this.expanded,
     );
   }
 
@@ -923,11 +923,10 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
     <AuCard
       class='meeting-validation-card'
       @expandable={{true}}
-      @isExpanded={{not this.collapsed}}
+      @isExpanded={{this.expanded}}
       @openSection={{this.onCardToggle}}
       @manualControl={{true}}
       @size='small'
-      @isOpenInitially={{true}}
       as |C|
     >
       <C.header>

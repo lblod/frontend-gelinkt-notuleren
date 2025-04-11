@@ -13,7 +13,7 @@ const userPreferenceSchema = z.discriminatedUnion('key', [
     value: z.array(z.string()).default([]),
   }),
   z.object({
-    key: z.literal('meeting.sidebar.navigation.collapsed'),
+    key: z.literal('meeting.sidebar.navigation.expanded'),
     value: z.coerce.boolean().default(true),
   }),
 ]);
