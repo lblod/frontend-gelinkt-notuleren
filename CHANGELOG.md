@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.56.0
+
+### Minor Changes
+
+- [#848](https://github.com/lblod/frontend-gelinkt-notuleren/pull/848) [`a03a5f5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a03a5f57040f9caba1cb70b765a67c4f3f974516) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [12.2.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.2.0)
+  Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [30.0.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v30.0.0)
+
+  These new versions contain support (among other features/fixes) for:
+
+  - Smart variables
+  - Adding backlinks to literal nodes
+
 ## 5.55.0
 
 ### Minor Changes
