@@ -1,10 +1,12 @@
-FROM node:20-slim as builder
+FROM node:20-slim AS builder
 
 LABEL maintainer="info@redpencil.io"
 
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm i --frozen-lockfile
 COPY . .
 RUN npm run build
 
