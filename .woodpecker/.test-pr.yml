@@ -2,35 +2,42 @@ steps:
   install:
     image: danlynn/ember-cli:5.12.0-node_20.18
     commands:
-      - npm ci
+      - corepack enable
+      - pnpm i --frozen-lockfile
   lint-types:
     image: node:20-slim
     group: lint
     commands:
-      - npm run lint:types
+      - corepack enable
+      - pnpm lint:types
   lint-js:
     image: node:20-slim
     group: lint
     commands:
-      - npm run lint:js
+      - corepack enable
+      - pnpm lint:js
   lint-hbs:
     image: node:20-slim
     group: lint
     commands:
-      - npm run lint:hbs
+      - corepack enable
+      - pnpm lint:hbs
   lint-prettier:
     image: node:20-slim
     group: lint
     commands:
-      - npm run lint:prettier
+      - corepack enable
+      - pnpm lint:prettier
   dependency-lint:
     image: danlynn/ember-cli:5.12.0-node_20.18
     group: lint
     commands:
-      - npm run lint:deps
+      - corepack enable
+      - pnpm lint:deps
   test:
     image: danlynn/ember-cli:5.12.0-node_20.18
     commands:
-      - npm run test:ember
+      - corepack enable
+      - pnpm test:ember
 when:
   - event: pull_request
