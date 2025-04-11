@@ -7,7 +7,6 @@ import type AccountModel from 'frontend-gelinkt-notuleren/models/account';
 import type GebruikerModel from 'frontend-gelinkt-notuleren/models/gebruiker';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
-import type UserPreferencesModel from 'frontend-gelinkt-notuleren/models/user-preferences';
 
 export default class CurrentSessionService extends Service {
   @service declare session: SessionService;
@@ -18,7 +17,6 @@ export default class CurrentSessionService extends Service {
   @tracked group: Option<BestuurseenheidModel>;
   @tracked roles: string[] = [];
   @tracked classificatie: Option<BestuurseenheidClassificatieCodeModel>;
-  @tracked preferences: Option<UserPreferencesModel>;
 
   get canRead() {
     return this.hasRole('GelinktNotuleren-lezer');
@@ -46,24 +44,11 @@ export default class CurrentSessionService extends Service {
       await Promise.all([
         this.store
           .findRecord<AccountModel>('account', accountId, {
-            include: ['gebruiker', 'gebruiker.preferences'],
+            include: ['gebruiker'],
           })
           .then(async (account) => {
             this.account = account;
             this.user = await account.gebruiker;
-            this.preferences = await this.user?.preferences;
-            // Thanks to piggy-backing off the `org-wf` access group to store preferences, these are
-            // only currently possible for 'schrijver' users
-            if (!this.preferences && this.user && this.canWrite) {
-              this.preferences = this.store.createRecord<UserPreferencesModel>(
-                'user-preferences',
-                {
-                  gebruiker: this.user,
-                  favouriteTemplates: [],
-                },
-              );
-              await this.preferences.save();
-            }
           }),
         this.store
           .findRecord<BestuurseenheidModel>('bestuurseenheid', groupId, {
@@ -79,12 +64,5 @@ export default class CurrentSessionService extends Service {
 
   hasRole(role: string) {
     return this.roles.includes(role);
-  }
-
-  async updatePreferences(newPrefs: UserPreferencesModel) {
-    if (this.session.isAuthenticated) {
-      this.preferences = newPrefs;
-      await newPrefs.save();
-    }
   }
 }

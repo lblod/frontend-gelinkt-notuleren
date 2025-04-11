@@ -7,6 +7,8 @@ export default class ConceptModel extends Model {
 
   @attr uri?: string;
   @attr label?: string;
+  @attr note?: string;
+  @attr notation?: string;
 
   @hasMany('concept-scheme', { inverse: null, async: true })
   declare conceptSchemes: AsyncHasMany<ConceptSchemeModel>;
