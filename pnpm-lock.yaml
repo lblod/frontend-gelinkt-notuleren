@@ -125,11 +125,11 @@ importers:
         specifier: ^0.10.0
         version: 0.10.2(@glint/template@1.5.2)(ember-simple-auth@6.1.0(@babel/core@7.26.10)(@ember/test-helpers@3.3.1(@babel/core@7.26.10)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       '@lblod/ember-rdfa-editor':
-        specifier: 11.3.0
-        version: 11.3.0(vfurghv6ze5sdwbpyta6lksura)
+        specifier: 12.1.0
+        version: 12.1.0(vfurghv6ze5sdwbpyta6lksura)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 29.1.1
-        version: 29.1.1(koq7ugjveeyoxtwpml2shldg4a)
+        specifier: lblod/ember-rdfa-editor-lblod-plugins#v30.0.0
+        version: https://codeload.github.com/lblod/ember-rdfa-editor-lblod-plugins/tar.gz/a688beb8332a4ad545bbf2a161e92aa909d593e5(hcahkurzdrtl743pd3x4pr5eeu)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1652,14 +1652,15 @@ packages:
       ember-simple-auth: ^6.0.0
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@29.1.1':
-    resolution: {integrity: sha512-9/rErMETkz6+kmG+0+lhpsuKfXeaIH1s5VrnRy55ko/e+znEJ+gbDhLmF18ehZ49/qpIkvJCSdiELbrheithiA==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@https://codeload.github.com/lblod/ember-rdfa-editor-lblod-plugins/tar.gz/a688beb8332a4ad545bbf2a161e92aa909d593e5':
+    resolution: {tarball: https://codeload.github.com/lblod/ember-rdfa-editor-lblod-plugins/tar.gz/a688beb8332a4ad545bbf2a161e92aa909d593e5}
+    version: 30.0.0
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.5.0
       '@ember/string': 3.x
       '@glint/template': ^1.4.0
-      '@lblod/ember-rdfa-editor': ^11.0.0
+      '@lblod/ember-rdfa-editor': ^12.1.0
       ember-concurrency: ^4.0.2
       ember-element-helper: ^0.8.6
       ember-intl: ^7.0.0
@@ -1676,8 +1677,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@11.3.0':
-    resolution: {integrity: sha512-16tJ+HHqdTuLTV1EzhyJS3u/oJ3JoyJ3YfQlHkyymU49JmeNkqEjAWOJ+VpVLgzKtwOaRdIq78KKbJpVGpOmeg==}
+  '@lblod/ember-rdfa-editor@12.1.0':
+    resolution: {integrity: sha512-M5p73uurSby9FPa0Qt4x8EA56cmLmvj6sgAu4Srgb+PTB+7WrYHcKC1n8uax0L/ryy1UYNgmvI9Sl6Ky5vFHWg==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.5.0
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -11029,7 +11030,7 @@ snapshots:
       - supports-color
       - webpack
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@29.1.1(koq7ugjveeyoxtwpml2shldg4a)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@https://codeload.github.com/lblod/ember-rdfa-editor-lblod-plugins/tar.gz/a688beb8332a4ad545bbf2a161e92aa909d593e5(hcahkurzdrtl743pd3x4pr5eeu)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.8.0(ozthojvnolfd3umnnunjuqt6ri)
       '@babel/core': 7.26.10
@@ -11039,7 +11040,7 @@ snapshots:
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)
       '@ember/string': 3.1.1
       '@embroider/macros': 1.16.11(@glint/template@1.5.2)
-      '@lblod/ember-rdfa-editor': 11.3.0(vfurghv6ze5sdwbpyta6lksura)
+      '@lblod/ember-rdfa-editor': 12.1.0(vfurghv6ze5sdwbpyta6lksura)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
       '@rdfjs/data-model': 2.1.0
@@ -11092,7 +11093,7 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@11.3.0(vfurghv6ze5sdwbpyta6lksura)':
+  '@lblod/ember-rdfa-editor@12.1.0(vfurghv6ze5sdwbpyta6lksura)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.8.0(ozthojvnolfd3umnnunjuqt6ri)
       '@codemirror/commands': 6.8.0
