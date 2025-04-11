@@ -14,7 +14,7 @@ const userPreferenceSchema = z.discriminatedUnion('key', [
   }),
   z.object({
     key: z.literal('meeting.sidebar.navigation.expanded'),
-    value: z.coerce.boolean().default(true),
+    value: z.boolean().default(true),
   }),
 ]);
 
@@ -90,9 +90,8 @@ export default class UserPreferencesService extends Service {
     // @ts-expect-error unsure how to correctly narrow this type
     return userPreferenceSchema.parse({
       key,
-      value: userPreference?.value
-        ? (JSON.parse(userPreference.value) as unknown)
-        : null,
+      value:
+        userPreference?.value && (JSON.parse(userPreference.value) as unknown),
     }).value;
   }
 
