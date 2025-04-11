@@ -23,7 +23,15 @@ export default class UserPreferencesService extends Service {
   @service declare currentSession: CurrentSessionService;
   @service declare store: Store;
 
-  async resolveConcept(key: UserPreference['key']) {
+  get user() {
+    const user = this.currentSession.user;
+    if (!user) {
+      throw new Error('User is not authenticated');
+    }
+    return user;
+  }
+
+  async _resolveConcept(key: UserPreference['key']) {
     const preferenceConcept = (
       await this.store.query<ConceptModel>('concept', {
         filter: {
@@ -40,6 +48,35 @@ export default class UserPreferencesService extends Service {
     return preferenceConcept;
   }
 
+  async _fetchPreference(preferenceConcept: ConceptModel) {
+    const preference = (
+      await this.store.query<UserPreferenceModel>('user-preference', {
+        filter: {
+          type: {
+            ':id:': preferenceConcept.id,
+          },
+          gebruiker: {
+            ':id:': this.user.id,
+          },
+        },
+      })
+    )[0];
+    return preference;
+  }
+
+  async _createPreference(preferenceConcept: ConceptModel, value?: string) {
+    const preference = this.store.createRecord<UserPreferenceModel>(
+      'user-preference',
+      {
+        type: preferenceConcept,
+        gebruiker: this.user,
+        value,
+      },
+    );
+    await preference.save();
+    return preference;
+  }
+
   async load<K extends UserPreference['key']>(
     key: K,
   ): Promise<Extract<UserPreference, { key: K }>['value']> {
@@ -47,19 +84,8 @@ export default class UserPreferencesService extends Service {
     if (!user) {
       throw new Error('User is not authenticated');
     }
-    const preferenceConcept = await this.resolveConcept(key);
-    const userPreference = (
-      await this.store.query<UserPreferenceModel>('user-preference', {
-        filter: {
-          type: {
-            ':id:': preferenceConcept.id,
-          },
-          gebruiker: {
-            ':id:': user.id,
-          },
-        },
-      })
-    )[0];
+    const preferenceConcept = await this._resolveConcept(key);
+    const userPreference = await this._fetchPreference(preferenceConcept);
 
     // @ts-expect-error unsure how to correctly narrow this type
     return userPreferenceSchema.parse({
@@ -74,29 +100,13 @@ export default class UserPreferencesService extends Service {
     key: K,
     value: Extract<UserPreference, { key: K }>['value'],
   ) {
-    const user = this.currentSession.user;
-    if (!user) {
-      throw new Error('User is not authenticated');
+    const preferenceConcept = await this._resolveConcept(key);
+    const userPreference = await this._fetchPreference(preferenceConcept);
+    if (userPreference) {
+      userPreference.value = JSON.stringify(value);
+      await userPreference.save();
+    } else {
+      await this._createPreference(preferenceConcept, JSON.stringify(value));
     }
-    const preferenceConcept = await this.resolveConcept(key);
-    const userPreference =
-      (
-        await this.store.query<UserPreferenceModel>('user-preference', {
-          filter: {
-            type: {
-              ':id:': preferenceConcept.id,
-            },
-            gebruiker: {
-              ':id:': user.id,
-            },
-          },
-        })
-      )[0] ??
-      this.store.createRecord<UserPreferenceModel>('user-preference', {
-        type: preferenceConcept,
-        gebruiker: user,
-      });
-    userPreference.value = JSON.stringify(value);
-    await userPreference.save();
   }
 }
