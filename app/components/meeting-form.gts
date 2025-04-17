@@ -1057,8 +1057,9 @@ const NavigationEntry: TOC<NavigationEntrySignature> = <template>
   <AuLinkExternal
     class='au-u-flex au-u-flex--row au-u-flex--between'
     href={{@href}}
+    target=''
     @skin='secondary'
-    @newTab={{false}}
+    rel=''
   >
     <span>
       {{yield}}
