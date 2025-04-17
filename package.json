@@ -154,12 +154,12 @@
     "webpack": "^5.95.0"
   },
   "overrides": {
+    "ember-concurrency": "$ember-concurrency",
     "@appuniversum/ember-appuniversum": {
       "@floating-ui/dom": "^1.6.5"
     },
     "@lblod/ember-rdfa-editor-lblod-plugins": {
-      "@lblod/ember-rdfa-editor": "$@lblod/ember-rdfa-editor",
-      "ember-concurrency": "$ember-concurrency"
+      "@lblod/ember-rdfa-editor": "$@lblod/ember-rdfa-editor"
     },
     "babel-plugin-ember-template-compilation": "^2.2.5",
     "ember-data-table": {
