@@ -210,7 +210,7 @@ export default class AgendapointEditorService extends Service {
         subjectTypesToLinkTo: [BESLUIT('Artikel'), BESLUIT('Besluit')],
       },
       lpdc: {
-        endpoint: '/lpdc-service/doc/concept',
+        endpoint: '/lpdc-service/doc/instantie',
       },
       mandateeTable: {
         tags: [...IVGR_TAGS, ...RMW_TAGS],
