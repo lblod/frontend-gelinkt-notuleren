@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.53.4
+
+### Patch Changes
+
+- [`1386c8b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1386c8bd489801a48e27e5ca69ab208dff2633f7) Thanks [@abeforgit](https://github.com/abeforgit)! - Fix intermittent bug due to typescript files not being able to override addon services
+
 ## 5.53.3
 
 ### Patch Changes
