@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.53.3
+
+### Patch Changes
+
+- [#853](https://github.com/lblod/frontend-gelinkt-notuleren/pull/853) [`12fd8bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/12fd8bd3b6eb04d1a46e39a68c644c81d547b477) Thanks [@abeforgit](https://github.com/abeforgit)! - HOTFIX: correctly instantiate uris when inserting a template using the standard-template plugin (bumps plugins to [v28.2.4](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v28.2.4))
+
 ## 5.53.2
 
 ### Patch Changes
