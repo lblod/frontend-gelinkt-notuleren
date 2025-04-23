@@ -1,8 +1,8 @@
 import Service, { service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
-import type SessionService from './session';
-import type Store from './store';
+import type SessionService from './gn-session';
+import type Store from './gn-store';
 import type AccountModel from 'frontend-gelinkt-notuleren/models/account';
 import type GebruikerModel from 'frontend-gelinkt-notuleren/models/gebruiker';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';

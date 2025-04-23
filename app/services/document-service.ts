@@ -8,7 +8,7 @@ import { setBesluitType } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/b
 import { type BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
 import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
-import type Store from 'frontend-gelinkt-notuleren/services/store';
+import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import { type Context } from 'frontend-gelinkt-notuleren/config/editor-document-default-context';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';

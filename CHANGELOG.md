@@ -34,6 +34,18 @@
 
 - [#842](https://github.com/lblod/frontend-gelinkt-notuleren/pull/842) [`ad2424f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ad2424f36808d3ad46685853b002dfdeecb4b3bf) Thanks [@abeforgit](https://github.com/abeforgit)! - Allow language based on process env in dev modew
 
+## 5.53.4
+
+### Patch Changes
+
+- [`1386c8b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1386c8bd489801a48e27e5ca69ab208dff2633f7) Thanks [@abeforgit](https://github.com/abeforgit)! - Fix intermittent bug due to typescript files not being able to override addon services
+
+## 5.53.3
+
+### Patch Changes
+
+- [#853](https://github.com/lblod/frontend-gelinkt-notuleren/pull/853) [`12fd8bd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/12fd8bd3b6eb04d1a46e39a68c644c81d547b477) Thanks [@abeforgit](https://github.com/abeforgit)! - HOTFIX: correctly instantiate uris when inserting a template using the standard-template plugin (bumps plugins to [v28.2.4](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v28.2.4))
+
 ## 5.53.2
 
 ### Patch Changes

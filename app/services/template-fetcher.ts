@@ -10,8 +10,8 @@ import {
   type BindingObject,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
 import { type Environment } from 'frontend-gelinkt-notuleren/config/environment';
-import type SessionService from './session';
-import type Store from './store';
+import type SessionService from './gn-session';
+import type Store from './gn-store';
 
 export interface Template {
   uri: string;
