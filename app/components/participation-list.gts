@@ -238,7 +238,7 @@ class UnassignedMandateesBanner extends Component<UnassignedMandateesBannerSigna
     {{#if this.shouldShow}}
       <AuAlert
         ...attributes
-        @title='Warning'
+        @title={{t 'participation-list.unassigned-mandatees-warning.title'}}
         @skin='warning'
         @size='small'
         @icon='alert-triangle'

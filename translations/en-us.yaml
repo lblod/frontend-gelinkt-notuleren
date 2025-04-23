@@ -532,6 +532,7 @@ participation-list:
   open-modal-button: Manage attendees at the start of the session
   period-start: 'period'
   unassigned-mandatees-warning:
+    title: Warning
     first-line: 'The following mandatees have not yet been assigned as either attendee or absentee:'
     second-line: Please assign these mandatees as either attendee or absentee.
 
