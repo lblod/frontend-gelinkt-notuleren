@@ -1,5 +1,22 @@
 # frontend-gelinkt-notuleren
 
+## 5.57.0
+
+### Minor Changes
+
+- [#851](https://github.com/lblod/frontend-gelinkt-notuleren/pull/851) [`7fb361f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7fb361fffffe28b81c56c289f66e68ebdeef8e19) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update `@lblod/ember-rdfa-editor` to version [12.4.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.4.0)
+  Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [31.0.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v31.0.2)
+
+  ***
+
+### Patch Changes
+
+- [#852](https://github.com/lblod/frontend-gelinkt-notuleren/pull/852) [`ffe2388`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ffe2388ea2fa9ec11e9d964d4b717cadfc6431ae) Thanks [@elpoelma](https://github.com/elpoelma)! - Meeting navigation card: do not display green checkmark icons when no issues are found
+
+- [#849](https://github.com/lblod/frontend-gelinkt-notuleren/pull/849) [`c0c4bf8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c0c4bf8779d9e53baf40d2d2906d983a37f1109b) Thanks [@elpoelma](https://github.com/elpoelma)! - Add internationalization to title of `UnassignedMandateesBanner` component
+
+- [`e03fe6b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e03fe6b3f68602532909626baf9bbd7da9532dab) Thanks [@abeforgit](https://github.com/abeforgit)! - Merge hotfix [5.53.3](https://github.com/lblod/frontend-gelinkt-notuleren/releases/tag/v5.53.3) and [5.53.4](https://github.com/lblod/frontend-gelinkt-notuleren/releases/tag/v5.53.4)
+
 ## 5.56.0
 
 ### Minor Changes
