@@ -1063,23 +1063,18 @@ const NavigationEntry: TOC<NavigationEntrySignature> = <template>
     <span>
       {{yield}}
     </span>
-    <WithTooltip
-      @tooltip={{if @ok @successMessage @warningMessage}}
-      @placement='bottom-start'
-    >
-      {{#if @ok}}
-        <AuBadge
-          class='meeting-validation-card__icon au-u-margin-tiny'
-          @skin='success'
-          @icon='check'
-        />
-      {{else}}
+    {{#unless @ok}}
+      <WithTooltip
+        @tooltip={{if @ok @successMessage @warningMessage}}
+        @placement='bottom-start'
+      >
         <AuBadge
           class='meeting-validation-card__icon au-u-margin-tiny'
           @skin='warning'
           @icon='alert-triangle'
         />
-      {{/if}}
-    </WithTooltip>
+      </WithTooltip>
+    {{/unless}}
+
   </AuLinkExternal>
 </template>;
