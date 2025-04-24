@@ -127,11 +127,12 @@ export default class TemplatePicker extends Component<Sig> {
     const abortController = new AbortController();
 
     try {
+      const favouriteTemplates = await this.favouriteTemplatesQuery.promise;
       const queryResult = await this.args.getTemplates({
         filter: this.searchText ? { title: this.searchText } : {},
         abortSignal: abortController.signal,
         pagination: { pageNumber: this.pageNumber, pageSize: this.pageSize },
-        favourites: this.favouriteTemplates ?? [],
+        favourites: favouriteTemplates,
       });
 
       this.totalCount = queryResult.totalCount;
