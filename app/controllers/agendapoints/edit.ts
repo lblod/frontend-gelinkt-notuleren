@@ -14,22 +14,40 @@ import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { fixArticleConnections } from '../../utils/fix-article-connections';
 import { modifier } from 'ember-modifier';
+import type StoreService from 'frontend-gelinkt-notuleren/services/gn-store';
+import type RouterService from '@ember/routing/router-service';
+import type DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
+import type IntlService from 'ember-intl/services/intl';
+import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
+import type {
+  ProsePlugin,
+  SayController,
+  Schema,
+} from '@lblod/ember-rdfa-editor';
+import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
+import type AgendapointsEditRoute from 'frontend-gelinkt-notuleren/routes/agendapoints/edit';
+import type { ModelFrom } from 'frontend-gelinkt-notuleren/utils/types';
+import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
+import BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
+import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 
 export default class AgendapointsEditController extends Controller {
-  @service store;
-  @service router;
-  @service documentService;
-  @service intl;
+  @service declare store: StoreService;
+  @service declare router: RouterService;
+  @service declare documentService: DocumentService;
+  @service declare intl: IntlService;
+  @service('editor/agendapoint')
+  declare agendapointEditor: AgendapointEditorService;
 
-  @service('editor/agendapoint') agendapointEditor;
+  declare model: ModelFrom<AgendapointsEditRoute>;
 
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
-  @tracked _editorDocument;
-  @tracked controller;
-  @service features;
-  @tracked schema;
-  @tracked plugins;
+  @tracked _editorDocument?: EditorDocumentModel | null;
+  @tracked controller?: SayController;
+
+  @tracked schema?: Schema;
+  @tracked plugins?: ProsePlugin[];
   @tracked editorSetup = false;
 
   StructureControlCard = StructureControlCardComponent;
@@ -101,9 +119,9 @@ export default class AgendapointsEditController extends Controller {
   });
 
   @action
-  async handleRdfaEditorInit(editor) {
+  handleRdfaEditorInit(editor: SayController) {
     this.controller = editor;
-    editor.initialize(this.editorDocument.content || '', { doNotClean: true });
+    editor.initialize(this.editorDocument?.content || '', { doNotClean: true });
   }
 
   copyAgendapunt = task(async () => {
@@ -111,8 +129,8 @@ export default class AgendapointsEditController extends Controller {
       `/agendapoint-service/${this.documentContainer.id}/copy`,
       { method: 'POST' },
     );
-    const json = await response.json();
-    const agendapuntId = json.uuid;
+    const json = (await response.json()) as Record<string, string>;
+    const agendapuntId = json['uuid'];
     await this.router.transitionTo('agendapoints.edit', agendapuntId);
   });
 
@@ -129,26 +147,29 @@ export default class AgendapointsEditController extends Controller {
   @action
   async deleteDocument() {
     const container = this.documentContainer;
-    const deletedStatus = await this.store.findRecord(
+    const deletedStatus = await this.store.findRecord<ConceptModel>(
       'concept',
       TRASH_STATUS_ID,
     );
-    container.status = deletedStatus;
+    container.set('status', deletedStatus);
     await container.save();
     this.displayDeleteModal = false;
     this.router.transitionTo('inbox.agendapoints');
   }
 
-  onTitleUpdate = task(async (title) => {
-    const html = this.editorDocument.content;
+  onTitleUpdate = task(async (title: string) => {
+    const html = this.editorDocument?.content ?? '';
 
     const behandeling = (
-      await this.store.query('behandeling-van-agendapunt', {
-        'filter[document-container][:id:]': this.model.documentContainer.id,
-      })
+      await this.store.query<BehandelingVanAgendapunt>(
+        'behandeling-van-agendapunt',
+        {
+          'filter[document-container][:id:]': this.model.documentContainer.id,
+        },
+      )
     )[0];
     if (behandeling) {
-      const agendaItem = await behandeling.onderwerp;
+      const agendaItem = unwrap(await behandeling.onderwerp);
       agendaItem.titel = title;
       await agendaItem.save();
     }
@@ -158,13 +179,16 @@ export default class AgendapointsEditController extends Controller {
         title,
         html,
         this.documentContainer,
-        this.editorDocument,
+        this.editorDocument ?? undefined,
       );
 
     this._editorDocument = editorDocument;
   });
 
   saveTask = task(async () => {
+    if (!this.controller || !this.editorDocument) {
+      return;
+    }
     const fixArticleConnectionsTr = fixArticleConnections(
       this.controller.mainEditorState,
     );
@@ -189,7 +213,7 @@ export default class AgendapointsEditController extends Controller {
     }
   });
 
-  removeEmptyDivs(html) {
+  removeEmptyDivs(html: string) {
     const parserInstance = new DOMParser();
     const parsedHtml = parserInstance.parseFromString(html, 'text/html');
     const besluitIdentifiers = {
@@ -200,7 +224,7 @@ export default class AgendapointsEditController extends Controller {
       `div[typeof~="${besluitIdentifiers.prefixed}"], div[typeof~="${besluitIdentifiers.full}"]`,
     );
     besluitDivs.forEach((besluitDiv) => {
-      if (besluitDiv.textContent.trim() === '') {
+      if ((besluitDiv.textContent ?? '').trim() === '') {
         besluitDiv.remove();
       }
     });
