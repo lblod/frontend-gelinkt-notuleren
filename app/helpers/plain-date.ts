@@ -1,6 +1,4 @@
-import { helper } from '@ember/component/helper';
-
-export default helper(function plainDate([datetime] /*, hash*/) {
+export default function plainDate(datetime?: Date) {
   //If not a date (e.g. date is undefined) return "" for printing on screen.
   if (!(datetime instanceof Date)) return '';
 
@@ -12,4 +10,4 @@ export default helper(function plainDate([datetime] /*, hash*/) {
     console.error(e);
     return '';
   }
-});
+}

@@ -1,9 +1,12 @@
 import Model, { attr } from '@ember-data/model';
+import type { Type } from '@warp-drive/core-types/symbols';
 
 export default class FunctionarisStatusCodeModel extends Model {
-  @attr uri;
-  @attr label;
-  @attr scopeNote;
+  declare [Type]: 'functionaris-status-code';
+
+  @attr uri?: string;
+  @attr label?: string;
+  @attr scopeNote?: string;
 
   rdfaBindings = {
     class:
