@@ -54,6 +54,7 @@ module.exports = function (environment) {
       'prosemirror-dev-tools': false,
       'regulatory-statements': '{{GN_FEATURE_REGULATORY_STATEMENTS}}',
       'mandatee-table-editor': '{{GN_FEATURE_MANDATEE_TABLE_EDITOR}}',
+      'citerra-poc': '{{GN_FEATURE_CITERRA_POC}}',
     },
     browserUpdate: {
       vs: { f: -3, c: -3 },
@@ -91,6 +92,7 @@ module.exports = function (environment) {
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
     ENV.featureFlags['mandatee-table-editor'] = true;
+    ENV.featureFlags['citerra-poc'] = true;
     ENV.mowRegistryEndpoint =
       process.env.MOW_REGISTRY_SPARQL_ENDPOINT ??
       'https://dev.roadsigns.lblod.info/sparql';

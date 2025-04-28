@@ -31,6 +31,11 @@ import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 
+import VisualiserCard from '@lblod/ember-rdfa-editor/components/_private/rdfa-visualiser/visualiser-card';
+import LinkRdfaNodeButton from '@lblod/ember-rdfa-editor/components/_private/link-rdfa-node-poc/button';
+import { RDFA_VISUALIZER_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/visualizer';
+import { BACKLINK_EDITOR_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/backlink-editor';
+
 export default class AgendapointsEditController extends Controller {
   @service declare store: StoreService;
   @service declare router: RouterService;
@@ -231,4 +236,12 @@ export default class AgendapointsEditController extends Controller {
 
     return parsedHtml.body.innerHTML;
   }
+
+  /**
+   * CITERRA POC
+   */
+  VisualiserCard = VisualiserCard;
+  LinkRdfaNodeButton = LinkRdfaNodeButton;
+  visualizerConfig = RDFA_VISUALIZER_CONFIG;
+  backlinkEditorConfig = BACKLINK_EDITOR_CONFIG;
 }

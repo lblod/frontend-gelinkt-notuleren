@@ -112,6 +112,11 @@ import {
   OCMW,
 } from '../../utils/bestuurseenheid-classificatie-codes';
 
+import VisualiserCard from '@lblod/ember-rdfa-editor/components/_private/rdfa-visualiser/visualiser-card';
+import LinkRdfaNodeButton from '@lblod/ember-rdfa-editor/components/_private/link-rdfa-node-poc/button';
+import { RDFA_VISUALIZER_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/visualizer';
+import { BACKLINK_EDITOR_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/backlink-editor';
+
 export default class RegulatoryStatementsRoute extends Controller {
   @service documentService;
   @service store;
@@ -394,4 +399,12 @@ export default class RegulatoryStatementsRoute extends Controller {
     controller.initialize(this.editorDocument.content, { doNotClean: true });
     this.controller = controller;
   }
+
+  /**
+   * CITERRA POC
+   */
+  VisualiserCard = VisualiserCard;
+  LinkRdfaNodeButton = LinkRdfaNodeButton;
+  visualizerConfig = RDFA_VISUALIZER_CONFIG;
+  backlinkEditorConfig = BACKLINK_EDITOR_CONFIG;
 }

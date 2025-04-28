@@ -128,6 +128,16 @@
       <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
+      {{#if (feature-flag 'citerra-poc')}}
+        <this.LinkRdfaNodeButton
+          @controller={{this.controller}}
+          @node={{this.activeNode}}
+          @predicateOptionGenerator={{this.backlinkEditorConfig.predicateOptionGenerator}}
+          @subjectOptionGenerator={{this.backlinkEditorConfig.subjectOptionGenerator
+            this.controller
+          }}
+        />
+      {{/if}}
       <ArticleStructurePlugin::ArticleStructureCard
         @controller={{this.controller}}
         @options={{this.config.structures}}
@@ -168,6 +178,13 @@
       {{/if}}
     </:sidebarCollapsible>
     <:sidebar>
+      {{#if (feature-flag 'citerra-poc')}}
+        <this.VisualiserCard
+          @controller={{this.controller}}
+          @node={{this.activeNode}}
+          @config={{this.visualizerConfig}}
+        />
+      {{/if}}
       <this.StructureControlCard
         @controller={{this.controller}}
         @options={{this.config.structures}}
