@@ -538,6 +538,7 @@ participation-list:
   present-label: 'Aanwezige mandatarissen:'
   present-error: 'Er zijn nog geen aanwezige mandatarissen aangeduid'
   not-present-label: 'Afwezige mandatarissen:'
+  unassigned-label: 'Geen mandaat:'
   open-modal-button: Beheer aanwezigen bij start van de zitting
   period-start: 'periode'
   unassigned-mandatees-warning:
@@ -552,6 +553,11 @@ participation-list-modal:
   save-button: Voeg aanwezigen in
   cancel-button: Annuleer
   chairman-absent-error: De voorzitter moet verplicht aanwezig zijn
+  advanced-mode:
+    label: Geavanceerde modus
+    help:
+      In de geavanceerde modus is het mogelijk om bepaalde mandatarissen de status 'Geen mandaat' toe te kennen.
+      Dit zorgt ervoor dat deze noch in de aanwezigen, noch in de afwezigen vermeld staan.
 
 participation-list-modal-selector:
   loading-message: Aan het laden...
@@ -564,9 +570,13 @@ participation-list-modal-table:
   functie-label: Functie
   geboortedatum-label: Geboortedatum
   bestuursperiode-label: Bestuursperiode
-  actie-label: Actie
+  status-label: Status
   checkbox-label: Aanwezig
   no-data-message: Geen mandatarissen gevonden.
+  status-options:
+    attending: Aanwezig
+    absent: Afwezig
+    no-mandate: Geen mandaat
 
 print-view:
   back-link: Terug naar ondertekenen & publiceren

@@ -18,16 +18,21 @@ import AuToolbar from '@appuniversum/ember-appuniversum/components/au-toolbar';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { on } from '@ember/modifier';
 import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
-import MandatarissenTable from './mandatarissen-table';
+import MandatarissenTable, { ParticipationStatus } from './mandatarissen-table';
 import FunctionarisSelector from './functionaris-selector';
 import { eq } from 'ember-truth-helpers';
 import MandatarisSelector from './mandataris-selector';
+import AuToggleSwitch from '@appuniversum/ember-appuniversum/components/au-toggle-switch';
+import AuBadge from '@appuniversum/ember-appuniversum/components/au-badge';
+import { InfoCircleIcon } from '@appuniversum/ember-appuniversum/components/icons/info-circle';
+import WithTooltip from '../with-tooltip';
 
-type ParticipantInfo = {
+export type ParticipationInfo = {
   chairman?: MandatarisModel;
   secretary?: FunctionarisModel;
-  participants: MandatarisModel[];
+  attendees: MandatarisModel[];
   absentees: MandatarisModel[];
+  unassignedMandatees: MandatarisModel[];
 };
 type ModalSignature = {
   Args: {
@@ -36,10 +41,11 @@ type ModalSignature = {
     show: boolean;
     loading?: boolean;
     onCloseModal: () => unknown;
-    onSave: (info: ParticipantInfo) => unknown;
+    onSave: (info: ParticipationInfo) => unknown;
     bestuursorgaan: BestuursorgaanModel;
     participants?: MandatarisModel[];
     absentees?: MandatarisModel[];
+    unassignedMandatees?: MandatarisModel[];
     possibleParticipants?: MandatarisModel[];
     meeting: ZittingModel;
   };
@@ -47,10 +53,11 @@ type ModalSignature = {
     default: [];
   };
 };
-export default class ParticipationListModalComponent extends Component<ModalSignature> {
+export default class ParticipationListModal extends Component<ModalSignature> {
   @localCopy('args.chairman') chairman?: MandatarisModel;
   @localCopy('args.secretary') secretary?: FunctionarisModel;
   @tracked error?: string;
+  @tracked advancedMode = false;
   @service declare intl: IntlService;
 
   participationMap = use(
@@ -59,6 +66,7 @@ export default class ParticipationListModalComponent extends Component<ModalSign
       active: this.args.show,
       participants: this.args.participants,
       absentees: this.args.absentees,
+      unassignedMandatees: this.args.unassignedMandatees,
       possibleParticipants: this.args.possibleParticipants,
     })),
   );
@@ -72,7 +80,9 @@ export default class ParticipationListModalComponent extends Component<ModalSign
     return (
       this.args.possibleParticipants?.map((participant) => ({
         person: participant,
-        participating: this.participationMap.current.get(participant) ?? false,
+        status:
+          this.participationMap.current.get(participant) ??
+          ParticipationStatus.Attending,
       })) ?? []
     );
   }
@@ -80,7 +90,7 @@ export default class ParticipationListModalComponent extends Component<ModalSign
   @action
   selectChairman(mandatee: MandatarisModel) {
     this.chairman = mandatee;
-    this.participationMap.current.set(mandatee, true);
+    this.participationMap.current.set(mandatee, ParticipationStatus.Attending);
   }
 
   @action
@@ -94,12 +104,14 @@ export default class ParticipationListModalComponent extends Component<ModalSign
   @action
   insert() {
     this.error = undefined;
-    const { participants, absentees } = this.collectParticipantsAndAbsentees();
+    const { attendees, absentees, unassignedMandatees } =
+      this.collectParticipantsAndAbsentees();
     const info = {
       chairman: this.chairman,
       secretary: this.secretary,
-      participants,
+      attendees,
       absentees,
+      unassignedMandatees,
     };
     if (this.chairman && absentees.includes(this.chairman)) {
       this.error = this.intl.t(
@@ -108,39 +120,48 @@ export default class ParticipationListModalComponent extends Component<ModalSign
       return;
     }
     this.args.onSave(info);
+    this.advancedMode = false;
     this.args.onCloseModal();
   }
 
-  /**
-   * Convert from the map back to two lists
-   * @return {{absentees: [], participants: []}}
-   */
   collectParticipantsAndAbsentees() {
-    const participants = [];
-    const absentees = [];
-    for (const { person, participating } of this.participants) {
-      if (participating) {
-        participants.push(person);
-      } else {
-        absentees.push(person);
+    const attendees: MandatarisModel[] = [];
+    const absentees: MandatarisModel[] = [];
+    const unassignedMandatees: MandatarisModel[] = [];
+    for (const { person, status } of this.participants) {
+      switch (status) {
+        case ParticipationStatus.Attending:
+          attendees.push(person);
+          break;
+        case ParticipationStatus.Absent:
+          absentees.push(person);
+          break;
+        case ParticipationStatus.NoMandate:
+          unassignedMandatees.push(person);
       }
     }
 
-    return { participants, absentees };
+    return { attendees, absentees, unassignedMandatees };
   }
 
-  /**
-   * Toggle the participation of a single mandataris
-   */
   @action
-  toggleParticipant(mandataris: MandatarisModel, selected: boolean) {
-    this.participationMap.current.set(mandataris, !selected);
+  updateParticipationStatus(
+    mandataris: MandatarisModel,
+    status: ParticipationStatus,
+  ) {
+    this.participationMap.current.set(mandataris, status);
+  }
+
+  @action
+  toggleAdvancedMode(advancedMode: boolean) {
+    this.advancedMode = advancedMode;
   }
 
   @action
   onCancel() {
     this.chairman = this.args.chairman;
     this.secretary = this.args.secretary;
+    this.advancedMode = false;
     this.args.onCloseModal();
   }
 
@@ -173,9 +194,33 @@ export default class ParticipationListModalComponent extends Component<ModalSign
             />
           </div>
           <div>
-            <AuLabel>{{t 'participation-list-modal.present-label'}}</AuLabel>
+            <div
+              class='au-u-flex au-u-flex--row au-u-flex--between au-u-margin-bottom-tiny'
+            >
+              <AuLabel class='au-u-margin-none'>{{t
+                  'participation-list-modal.present-label'
+                }}</AuLabel>
+              <div class='au-u-flex au-u-flex--row au-u-flex--spaced-tiny'>
+
+                <AuToggleSwitch
+                  @checked={{this.advancedMode}}
+                  @onChange={{this.toggleAdvancedMode}}
+                >{{t
+                    'participation-list-modal.advanced-mode.label'
+                  }}</AuToggleSwitch>
+                <WithTooltip
+                  @tooltip={{t 'participation-list-modal.advanced-mode.help'}}
+                  @placement='bottom'
+                >
+                  <AuBadge @icon={{InfoCircleIcon}} @size='small' />
+                </WithTooltip>
+              </div>
+
+            </div>
+
             <MandatarissenTable
-              @toggleParticipant={{this.toggleParticipant}}
+              @updateParticipationStatus={{this.updateParticipationStatus}}
+              @advancedMode={{this.advancedMode}}
               as |Table|
             >
               {{#if @loading}}
@@ -186,7 +231,7 @@ export default class ParticipationListModalComponent extends Component<ModalSign
                 {{#each this.participants as |participant|}}
                   <Table.Row
                     @mandataris={{participant.person}}
-                    @selected={{participant.participating}}
+                    @status={{participant.status}}
                     @disabled={{eq participant.person this.chairman}}
                   />
                 {{else}}

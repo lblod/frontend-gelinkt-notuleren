@@ -82,7 +82,7 @@ import ReadonlyTextBox from './readonly-text-box';
 import InaugurationMeetingSynchronization from './inauguration-meeting/synchronization';
 import DeleteMeetingModal from './delete-meeting-modal';
 import WithTooltip from './with-tooltip';
-import ParticipationList, { type ParticipantInfo } from './participation-list';
+import ParticipationList from './participation-list';
 import ManageZittingsdata from './zitting/manage-zittingsdata';
 import ManageIntermissions from './manage-intermissions';
 import BehandelingVanAgendapuntComponent from './behandeling-van-agendapunt';
@@ -93,6 +93,7 @@ import type { TOC } from '@ember/component/template-only';
 import AuLinkExternal from '@appuniversum/ember-appuniversum/components/au-link-external';
 import { concat } from '@ember/helper';
 import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
+import type { ParticipationInfo } from './participation-list/modal';
 
 type Signature = {
   Args: {
@@ -246,31 +247,45 @@ export default class MeetingForm extends Component<Signature> {
   aanwezigenBijStartQuery = trackedFunction(this, async () => {
     const participants = await this.zitting.aanwezigenBijStart;
     const participantsWithNames = await Promise.all(
-      participants.map(async (participant) => {
+      participants.map(async (mandatee) => {
         const surname =
-          unwrap(await participant.isBestuurlijkeAliasVan).achternaam ?? '';
+          unwrap(await mandatee.isBestuurlijkeAliasVan).achternaam ?? '';
 
-        return { participant, surname };
+        return { mandatee, surname };
       }),
     );
     return participantsWithNames
       .sort((a, b) => (a.surname < b.surname ? 1 : -1))
-      .map((pn) => pn.participant);
+      .map((a) => a.mandatee);
   });
 
   afwezigenBijStartQuery = trackedFunction(this, async () => {
     const absentees = await this.zitting.afwezigenBijStart;
 
     const absenteesWithNames = await Promise.all(
-      absentees.map(async (absentee) => {
+      absentees.map(async (mandatee) => {
         const surname =
-          unwrap(await absentee.isBestuurlijkeAliasVan).achternaam ?? '';
-        return { absentee, surname };
+          unwrap(await mandatee.isBestuurlijkeAliasVan).achternaam ?? '';
+        return { mandatee, surname };
       }),
     );
     return absenteesWithNames
       .sort((a, b) => (a.surname < b.surname ? 1 : -1))
-      .map((an) => an.absentee);
+      .map((a) => a.mandatee);
+  });
+
+  nietToegekendeMandatarissenQuery = trackedFunction(this, async () => {
+    const unassignedMandatees = await this.zitting.nietToegekendeMandatarissen;
+    const unassignedWithNames = await Promise.all(
+      unassignedMandatees.map(async (mandatee) => {
+        const surname =
+          unwrap(await mandatee.isBestuurlijkeAliasVan).achternaam ?? '';
+        return { mandatee, surname };
+      }),
+    );
+    return unassignedWithNames
+      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .map((a) => a.mandatee);
   });
 
   meetingDetailsTask = restartableTask(async () => {
@@ -441,22 +456,19 @@ export default class MeetingForm extends Component<Signature> {
       );
   });
 
-  /**
-   * Persist the participants of the zitting
-   * @param {Object} info
-   * @return {Promise<void>}
-   */
   @action
   async saveParticipationList({
     chairman,
     secretary,
-    participants,
+    attendees,
     absentees,
-  }: ParticipantInfo) {
+    unassignedMandatees,
+  }: ParticipationInfo) {
     this.zitting.set('voorzitter', chairman);
     this.zitting.set('secretaris', secretary);
-    this.zitting.set('aanwezigenBijStart', participants);
+    this.zitting.set('aanwezigenBijStart', attendees);
     this.zitting.set('afwezigenBijStart', absentees);
+    this.zitting.set('nietToegekendeMandatarissen', unassignedMandatees);
     await this.zitting.save();
     await this.validation.retry();
   }
@@ -684,6 +696,7 @@ export default class MeetingForm extends Component<Signature> {
               (or
                 this.aanwezigenBijStartQuery.isPending
                 this.afwezigenBijStartQuery.isPending
+                this.nietToegekendeMandatarissenQuery.isPending
               )
             }}
               <AuLoader>{{t 'participation-list.loading-title'}}</AuLoader>
@@ -704,6 +717,7 @@ export default class MeetingForm extends Component<Signature> {
                     @participants={{this.aanwezigenBijStartQuery.value}}
                     @defaultParticipants={{this.possibleParticipants}}
                     @absentees={{this.afwezigenBijStartQuery.value}}
+                    @unassignedMandatees={{this.nietToegekendeMandatarissenQuery.value}}
                     @possibleParticipants={{this.possibleParticipants}}
                     @bestuursorgaan={{this.bestuursorgaan}}
                     @onSave={{this.saveParticipationList}}
