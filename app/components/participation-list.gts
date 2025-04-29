@@ -168,14 +168,18 @@ export default class ParticipationList extends Component<Signature> {
             ?.map((m) => m.get('isBestuurlijkeAliasVan.fullName'))
             .join(', ') || '',
       },
-      {
-        label: this.intl.t('participation-list.unassigned-label'),
-        // TODO: rework this
-        value:
-          this.unassignedMandatees
-            ?.map((m) => m.get('isBestuurlijkeAliasVan.fullName'))
-            .join(', ') || '',
-      },
+      ...(this.unassignedMandatees?.length
+        ? [
+            {
+              label: this.intl.t('participation-list.unassigned-label'),
+              // TODO: rework this
+              value:
+                this.unassignedMandatees
+                  ?.map((m) => m.get('isBestuurlijkeAliasVan.fullName'))
+                  .join(', ') || '',
+            },
+          ]
+        : []),
     ];
   }
 
