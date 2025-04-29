@@ -118,7 +118,7 @@ class MandatarisRow extends Component<MandatarisRowSig> {
     const checked = (event.target as HTMLInputElement).checked;
     this.args.updateStatus(
       this.args.mandataris,
-      checked ? ParticipationStatus.Absent : ParticipationStatus.Attending,
+      checked ? ParticipationStatus.Attending : ParticipationStatus.Absent,
     );
   }
 
