@@ -101,8 +101,6 @@ type Signature = {
   };
 };
 export default class MeetingForm extends Component<Signature> {
-  @tracked aanwezigenBijStart?: MandatarisModel[];
-  @tracked afwezigenBijStart?: MandatarisModel[];
   @tracked showDeleteModal: boolean = false;
   behandelingen: TrackedArray<BehandelingVanAgendapunt> = tracked([]);
   @service declare store: Store;
@@ -245,6 +243,36 @@ export default class MeetingForm extends Component<Signature> {
     return this.meetingDetailsData.value?.voorzitter;
   }
 
+  aanwezigenBijStartQuery = trackedFunction(this, async () => {
+    const participants = await this.zitting.aanwezigenBijStart;
+    const participantsWithNames = await Promise.all(
+      participants.map(async (participant) => {
+        const surname =
+          unwrap(await participant.isBestuurlijkeAliasVan).achternaam ?? '';
+
+        return { participant, surname };
+      }),
+    );
+    return participantsWithNames
+      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .map((pn) => pn.participant);
+  });
+
+  afwezigenBijStartQuery = trackedFunction(this, async () => {
+    const absentees = await this.zitting.afwezigenBijStart;
+
+    const absenteesWithNames = await Promise.all(
+      absentees.map(async (absentee) => {
+        const surname =
+          unwrap(await absentee.isBestuurlijkeAliasVan).achternaam ?? '';
+        return { absentee, surname };
+      }),
+    );
+    return absenteesWithNames
+      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .map((an) => an.absentee);
+  });
+
   meetingDetailsTask = restartableTask(async () => {
     const bestuursorgaan = await this.zitting.bestuursorgaan;
     // Can only be null in odd cases, such as while the zitting is being deleted
@@ -283,36 +311,6 @@ export default class MeetingForm extends Component<Signature> {
     this.zitting.voorzitter,
     this.zitting.bestuursorgaan,
   ]);
-
-  fetchParticipants = task(async () => {
-    if (!this.zitting.id) {
-      return null;
-    }
-    const participantQuery = {
-      include: 'is-bestuurlijke-alias-van,status',
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[aanwezig-bij-zitting][:id:]': this.zitting.id,
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-
-    const absenteeQuery = {
-      include: 'is-bestuurlijke-alias-van,status',
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[afwezig-bij-zitting][:id:]': this.zitting.id,
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-
-    const present = await this.store.query<MandatarisModel>(
-      'mandataris',
-      participantQuery as unknown as LegacyResourceQuery<MandatarisModel>,
-    );
-    const absent = await this.store.query<MandatarisModel>(
-      'mandataris',
-      absenteeQuery as unknown as LegacyResourceQuery<MandatarisModel>,
-    );
-    this.aanwezigenBijStart = present;
-    this.afwezigenBijStart = absent;
-  });
 
   fetchPossibleParticipants = restartableTask(async () => {
     const bestuursorgaanIT = this.bestuursorgaan;
@@ -455,9 +453,6 @@ export default class MeetingForm extends Component<Signature> {
     participants,
     absentees,
   }: ParticipantInfo) {
-    this.aanwezigenBijStart = participants;
-    this.afwezigenBijStart = absentees;
-
     this.zitting.set('voorzitter', chairman);
     this.zitting.set('secretaris', secretary);
     this.zitting.set('aanwezigenBijStart', participants);
@@ -493,11 +488,7 @@ export default class MeetingForm extends Component<Signature> {
   }
 
   <template>
-    <div
-      class='au-c-app-chrome'
-      {{didInsert this.fetchParticipants.perform}}
-      {{didInsert this.fetchTreatments.perform}}
-    >
+    <div class='au-c-app-chrome' {{didInsert this.fetchTreatments.perform}}>
       <AuToolbar @size='small' class='au-u-padding-bottom-none' as |Group|>
         <Group>
           <AuLink
@@ -689,7 +680,12 @@ export default class MeetingForm extends Component<Signature> {
 
           {{#if this.bestuursorgaan}}
 
-            {{#if this.fetchParticipants.isRunning}}
+            {{#if
+              (or
+                this.aanwezigenBijStartQuery.isPending
+                this.afwezigenBijStartQuery.isPending
+              )
+            }}
               <AuLoader>{{t 'participation-list.loading-title'}}</AuLoader>
             {{else}}
               {{#unless @focused}}
@@ -705,9 +701,9 @@ export default class MeetingForm extends Component<Signature> {
                     @attendanceValidationResult={{this.validation.value.attendance}}
                     @chairman={{this.voorzitter}}
                     @secretary={{this.secretaris}}
-                    @participants={{this.aanwezigenBijStart}}
+                    @participants={{this.aanwezigenBijStartQuery.value}}
                     @defaultParticipants={{this.possibleParticipants}}
-                    @absentees={{this.afwezigenBijStart}}
+                    @absentees={{this.afwezigenBijStartQuery.value}}
                     @possibleParticipants={{this.possibleParticipants}}
                     @bestuursorgaan={{this.bestuursorgaan}}
                     @onSave={{this.saveParticipationList}}
