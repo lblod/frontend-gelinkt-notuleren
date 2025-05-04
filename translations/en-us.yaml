@@ -647,6 +647,13 @@ rdfa-editor-container:
   saving: Saving
   making-copy: Making copy
   loading: Loading
+  citerra:
+    doelgroep: Licenseholder type
+    voorwaarde: Requirement
+    bewijsstuk: Evidence
+    zone: Zone
+    duurtijd: Duration
+    nummerplaten: License plates
 
 regulatory-statements-plugin:
   type: Regulatory Statement
