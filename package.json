@@ -152,7 +152,8 @@
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.23.0",
     "uuid": "^9.0.1",
-    "webpack": "^5.95.0"
+    "webpack": "^5.95.0",
+    "zod": "^3.24.2"
   },
   "overrides": {
     "@appuniversum/ember-appuniversum": {

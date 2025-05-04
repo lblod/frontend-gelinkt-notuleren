@@ -770,3 +770,7 @@ div[typeof='besluitpublicatie:Documentonderdeel'] {
   border-color: var(--au-green-700);
   border-width: 0;
 }
+
+.gn-tooltip {
+  z-index: 2;
+}

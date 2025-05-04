@@ -82,7 +82,7 @@ import ReadonlyTextBox from './readonly-text-box';
 import InaugurationMeetingSynchronization from './inauguration-meeting/synchronization';
 import DeleteMeetingModal from './delete-meeting-modal';
 import WithTooltip from './with-tooltip';
-import ParticipationList, { type ParticipantInfo } from './participation-list';
+import ParticipationList from './participation-list';
 import ManageZittingsdata from './zitting/manage-zittingsdata';
 import ManageIntermissions from './manage-intermissions';
 import BehandelingVanAgendapuntComponent from './behandeling-van-agendapunt';
@@ -93,6 +93,9 @@ import type { TOC } from '@ember/component/template-only';
 import AuLinkExternal from '@appuniversum/ember-appuniversum/components/au-link-external';
 import { concat } from '@ember/helper';
 import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
+import type { ParticipationInfo } from './participation-list/modal';
+import type UserPreferencesService from 'frontend-gelinkt-notuleren/services/user-preferences';
+import { localCopy } from 'tracked-toolbox';
 
 type Signature = {
   Args: {
@@ -101,8 +104,6 @@ type Signature = {
   };
 };
 export default class MeetingForm extends Component<Signature> {
-  @tracked aanwezigenBijStart?: MandatarisModel[];
-  @tracked afwezigenBijStart?: MandatarisModel[];
   @tracked showDeleteModal: boolean = false;
   behandelingen: TrackedArray<BehandelingVanAgendapunt> = tracked([]);
   @service declare store: Store;
@@ -245,6 +246,50 @@ export default class MeetingForm extends Component<Signature> {
     return this.meetingDetailsData.value?.voorzitter;
   }
 
+  aanwezigenBijStartQuery = trackedFunction(this, async () => {
+    const participants = await this.zitting.aanwezigenBijStart;
+    const participantsWithNames = await Promise.all(
+      participants.map(async (mandatee) => {
+        const surname =
+          unwrap(await mandatee.isBestuurlijkeAliasVan).achternaam ?? '';
+
+        return { mandatee, surname };
+      }),
+    );
+    return participantsWithNames
+      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .map((a) => a.mandatee);
+  });
+
+  afwezigenBijStartQuery = trackedFunction(this, async () => {
+    const absentees = await this.zitting.afwezigenBijStart;
+
+    const absenteesWithNames = await Promise.all(
+      absentees.map(async (mandatee) => {
+        const surname =
+          unwrap(await mandatee.isBestuurlijkeAliasVan).achternaam ?? '';
+        return { mandatee, surname };
+      }),
+    );
+    return absenteesWithNames
+      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .map((a) => a.mandatee);
+  });
+
+  nietToegekendeMandatarissenQuery = trackedFunction(this, async () => {
+    const unassignedMandatees = await this.zitting.nietToegekendeMandatarissen;
+    const unassignedWithNames = await Promise.all(
+      unassignedMandatees.map(async (mandatee) => {
+        const surname =
+          unwrap(await mandatee.isBestuurlijkeAliasVan).achternaam ?? '';
+        return { mandatee, surname };
+      }),
+    );
+    return unassignedWithNames
+      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .map((a) => a.mandatee);
+  });
+
   meetingDetailsTask = restartableTask(async () => {
     const bestuursorgaan = await this.zitting.bestuursorgaan;
     // Can only be null in odd cases, such as while the zitting is being deleted
@@ -283,36 +328,6 @@ export default class MeetingForm extends Component<Signature> {
     this.zitting.voorzitter,
     this.zitting.bestuursorgaan,
   ]);
-
-  fetchParticipants = task(async () => {
-    if (!this.zitting.id) {
-      return null;
-    }
-    const participantQuery = {
-      include: 'is-bestuurlijke-alias-van,status',
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[aanwezig-bij-zitting][:id:]': this.zitting.id,
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-
-    const absenteeQuery = {
-      include: 'is-bestuurlijke-alias-van,status',
-      sort: 'is-bestuurlijke-alias-van.achternaam',
-      'filter[afwezig-bij-zitting][:id:]': this.zitting.id,
-      page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
-    };
-
-    const present = await this.store.query<MandatarisModel>(
-      'mandataris',
-      participantQuery as unknown as LegacyResourceQuery<MandatarisModel>,
-    );
-    const absent = await this.store.query<MandatarisModel>(
-      'mandataris',
-      absenteeQuery as unknown as LegacyResourceQuery<MandatarisModel>,
-    );
-    this.aanwezigenBijStart = present;
-    this.afwezigenBijStart = absent;
-  });
 
   fetchPossibleParticipants = restartableTask(async () => {
     const bestuursorgaanIT = this.bestuursorgaan;
@@ -443,25 +458,19 @@ export default class MeetingForm extends Component<Signature> {
       );
   });
 
-  /**
-   * Persist the participants of the zitting
-   * @param {Object} info
-   * @return {Promise<void>}
-   */
   @action
   async saveParticipationList({
     chairman,
     secretary,
-    participants,
+    attendees,
     absentees,
-  }: ParticipantInfo) {
-    this.aanwezigenBijStart = participants;
-    this.afwezigenBijStart = absentees;
-
+    unassignedMandatees,
+  }: ParticipationInfo) {
     this.zitting.set('voorzitter', chairman);
     this.zitting.set('secretaris', secretary);
-    this.zitting.set('aanwezigenBijStart', participants);
+    this.zitting.set('aanwezigenBijStart', attendees);
     this.zitting.set('afwezigenBijStart', absentees);
+    this.zitting.set('nietToegekendeMandatarissen', unassignedMandatees);
     await this.zitting.save();
     await this.validation.retry();
   }
@@ -493,11 +502,7 @@ export default class MeetingForm extends Component<Signature> {
   }
 
   <template>
-    <div
-      class='au-c-app-chrome'
-      {{didInsert this.fetchParticipants.perform}}
-      {{didInsert this.fetchTreatments.perform}}
-    >
+    <div class='au-c-app-chrome' {{didInsert this.fetchTreatments.perform}}>
       <AuToolbar @size='small' class='au-u-padding-bottom-none' as |Group|>
         <Group>
           <AuLink
@@ -689,7 +694,13 @@ export default class MeetingForm extends Component<Signature> {
 
           {{#if this.bestuursorgaan}}
 
-            {{#if this.fetchParticipants.isRunning}}
+            {{#if
+              (or
+                this.aanwezigenBijStartQuery.isPending
+                this.afwezigenBijStartQuery.isPending
+                this.nietToegekendeMandatarissenQuery.isPending
+              )
+            }}
               <AuLoader>{{t 'participation-list.loading-title'}}</AuLoader>
             {{else}}
               {{#unless @focused}}
@@ -705,9 +716,10 @@ export default class MeetingForm extends Component<Signature> {
                     @attendanceValidationResult={{this.validation.value.attendance}}
                     @chairman={{this.voorzitter}}
                     @secretary={{this.secretaris}}
-                    @participants={{this.aanwezigenBijStart}}
+                    @participants={{this.aanwezigenBijStartQuery.value}}
                     @defaultParticipants={{this.possibleParticipants}}
-                    @absentees={{this.afwezigenBijStart}}
+                    @absentees={{this.afwezigenBijStartQuery.value}}
+                    @unassignedMandatees={{this.nietToegekendeMandatarissenQuery.value}}
                     @possibleParticipants={{this.possibleParticipants}}
                     @bestuursorgaan={{this.bestuursorgaan}}
                     @onSave={{this.saveParticipationList}}
@@ -857,6 +869,20 @@ type MeetingNavigationCardSignature = {
 
 class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
   @service declare store: Store;
+  @service declare userPreferences: UserPreferencesService;
+  @localCopy('expandedQuery.value') expanded?: boolean = true;
+
+  expandedQuery = trackedFunction(this, async () => {
+    try {
+      const expanded = await this.userPreferences.load(
+        'meeting.sidebar.navigation.expanded',
+      );
+      return expanded;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  });
 
   treatments = trackedFunction(this, async () => {
     const { validationResult } = this.args;
@@ -894,38 +920,46 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
     );
   }
 
+  @action
+  async onCardToggle() {
+    this.expanded = !this.expanded;
+    await this.userPreferences.save(
+      'meeting.sidebar.navigation.expanded',
+      this.expanded,
+    );
+  }
+
   <template>
-    {{#if @loading}}
-      <AuCard class='meeting-validation-card' @size='small' as |C|>
-        <C.content>
+    <AuCard
+      class='meeting-validation-card'
+      @expandable={{true}}
+      @isExpanded={{this.expanded}}
+      @openSection={{this.onCardToggle}}
+      @manualControl={{true}}
+      @size='small'
+      as |C|
+    >
+      <C.header>
+        <AuHeading @level='3' @skin='5'>
+          {{t 'meeting-toc-card.title'}}
+        </AuHeading>
+      </C.header>
+      <C.content>
+        {{#if @loading}}
           <AuLoader @inline={{true}} @hideMessage={{false}} @centered={{false}}>
             {{t 'application.loading'}}
           </AuLoader>
-        </C.content>
-      </AuCard>
-    {{else if @error}}
-      <AuAlert @skin='error' @icon='cross' @size='small'>
-        <p>{{t 'meeting-toc-card.error'}}</p>
-        <p>{{htmlSafe
-            (t
-              'generic.error-contact-us' email='gelinktnotuleren@vlaanderen.be'
-            )
-          }}</p>
-      </AuAlert>
-    {{else if @validationResult}}
-      <AuCard
-        class='meeting-validation-card'
-        @expandable={{true}}
-        @size='small'
-        @isOpenInitially={{true}}
-        as |C|
-      >
-        <C.header>
-          <AuHeading @level='3' @skin='5'>
-            {{t 'meeting-toc-card.title'}}
-          </AuHeading>
-        </C.header>
-        <C.content>
+        {{else if @error}}
+          <AuAlert @skin='error' @icon='cross' @size='small'>
+            <p>{{t 'meeting-toc-card.error'}}</p>
+            <p>{{htmlSafe
+                (t
+                  'generic.error-contact-us'
+                  email='gelinktnotuleren@vlaanderen.be'
+                )
+              }}</p>
+          </AuAlert>
+        {{else if @validationResult}}
           <AuList @divider={{true}} as |Item|>
             <Item>
               <NavigationEntry
@@ -1035,9 +1069,9 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
               </NavigationEntry>
             </Item>
           </AuList>
-        </C.content>
-      </AuCard>
-    {{/if}}
+        {{/if}}
+      </C.content>
+    </AuCard>
   </template>
 }
 

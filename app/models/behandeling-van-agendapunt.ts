@@ -68,6 +68,10 @@ export default class BehandelingVanAgendapunt extends Model {
   @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare afwezigen: AsyncHasMany<MandatarisModel>;
 
+  // @ts-expect-error add types for `defaultPageSize`
+  @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
+  declare nietToegekendeMandatarissen: AsyncHasMany<MandatarisModel>;
+
   // original queries did "fetch all" pagination loops
   // @ts-expect-error add types for `defaultPageSize`
   @hasMany('stemming', {
@@ -111,6 +115,20 @@ export default class BehandelingVanAgendapunt extends Model {
       .sort((a, b) => a.surname.localeCompare(b.surname))
       .map((an) => an.absentee);
   });
+  sortedUnassignedMandateesData = trackedFunction(this, async () => {
+    const unassignedMandatees = await this.nietToegekendeMandatarissen;
+    const unassignedWithNames = await Promise.all(
+      unassignedMandatees.map(async (mandatee) => {
+        const surname =
+          unwrap(await mandatee.isBestuurlijkeAliasVan).achternaam ?? '';
+        return { mandatee, surname };
+      }),
+    );
+    return unassignedWithNames
+      .sort((a, b) => (a.surname < b.surname ? 1 : -1))
+      .map((a) => a.mandatee);
+  });
+
   async getSortedVotings() {
     const normalVotings = this.stemmingen;
     const customVotings = this.customVotings;
@@ -127,6 +145,9 @@ export default class BehandelingVanAgendapunt extends Model {
   }
   get sortedAbsentees() {
     return this.sortedAbsenteeData.value;
+  }
+  get sortedUnassignedMandatees() {
+    return this.sortedUnassignedMandateesData.value;
   }
   get sortedVotings() {
     return this.sortedVotingData.value;

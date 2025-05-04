@@ -529,12 +529,13 @@ participation-list:
   present-label: 'Present mandatees:'
   present-error: 'No mandatees have been appointed'
   not-present-label: 'Absent mandatees:'
+  unassigned-label: 'No mandate:'
   open-modal-button: Manage attendees at the start of the session
   period-start: 'period'
   unassigned-mandatees-warning:
     title: Warning
     first-line: 'The following mandatees have not yet been assigned as either attendee or absentee:'
-    second-line: Please assign these mandatees as either attendee or absentee.
+    second-line: This can be necessary in exceptional cases, such as in the case of a mandate change. If you have explicitly chosen to exlude the above mandatees, you can safely ignore this warning.
 
 participation-list-modal:
   voorzitter-label: Chairman of the meeting
@@ -543,6 +544,11 @@ participation-list-modal:
   save-button: Insert attendees
   cancel-button: Cancel
   chairman-absent-error: The chairman must be present
+  advanced-mode:
+    label: Advanced mode
+    help:
+      In the advanced mode, it is possible to assign a mandatee with the 'No mandate' status.
+      This ensures that this mandatee is not mentioned in the attendee list, nor in the absentee list.
 
 participation-list-modal-selector:
   loading-message: Loading...
@@ -555,9 +561,13 @@ participation-list-modal-table:
   functie-label: Position
   geboortedatum-label: Birthdate
   bestuursperiode-label: Administration period
-  actie-label: Action
+  status-label: Status
   checkbox-label: Present
   no-data-message: No mandatees were found.
+  status-options:
+    attending: Attending
+    absent: Absent
+    no-mandate: No mandate
 
 print-view:
   back-link: Back to signing & publishing

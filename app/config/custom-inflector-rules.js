@@ -83,4 +83,3 @@ inflector.irregular(
   'installatievergadering-synchronization-statuses',
 );
 inflector.irregular('custom-voting', 'custom-votings');
-inflector.uncountable('user-preferences');
