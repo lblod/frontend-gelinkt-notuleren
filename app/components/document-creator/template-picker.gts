@@ -22,6 +22,9 @@ import { type PreviewableDocument } from '@lblod/ember-rdfa-editor-lblod-plugins
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
 import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import type UserPreferencesService from 'frontend-gelinkt-notuleren/services/user-preferences';
+import { trackedFunction } from 'reactiveweb/function';
+import { localCopy } from 'tracked-toolbox';
 
 class PreviewableTemplate implements PreviewableDocument {
   title: string;
@@ -77,9 +80,12 @@ interface Sig {
 
 export default class TemplatePicker extends Component<Sig> {
   @service declare currentSession: CurrentSessionService;
-
+  @service declare userPreferences: UserPreferencesService;
   // Filtering
   @tracked inputSearchText: string | null = null;
+
+  // Favourite templates
+  @localCopy('favouriteTemplatesQuery.value') favouriteTemplates?: string[];
 
   // Display
   @tracked error: Error | undefined;
@@ -102,6 +108,18 @@ export default class TemplatePicker extends Component<Sig> {
     this.inputSearchText = event.target.value;
   };
 
+  favouriteTemplatesQuery = trackedFunction(this, async () => {
+    try {
+      const favouriteTemplates = await this.userPreferences.load(
+        'favourite-templates',
+      );
+      return favouriteTemplates;
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+  });
+
   templateSearch = restartableTask(async () => {
     this.error = undefined;
     await timeout(500);
@@ -109,11 +127,12 @@ export default class TemplatePicker extends Component<Sig> {
     const abortController = new AbortController();
 
     try {
+      const favouriteTemplates = await this.favouriteTemplatesQuery.promise;
       const queryResult = await this.args.getTemplates({
         filter: this.searchText ? { title: this.searchText } : {},
         abortSignal: abortController.signal,
         pagination: { pageNumber: this.pageNumber, pageSize: this.pageSize },
-        favourites: this.currentSession.preferences?.favouriteTemplates,
+        favourites: favouriteTemplates,
       });
 
       this.totalCount = queryResult.totalCount;
@@ -146,27 +165,25 @@ export default class TemplatePicker extends Component<Sig> {
   };
 
   isFavouriteTemplate = (template: PreviewableTemplate) =>
-    this.currentSession.preferences?.favouriteTemplates?.includes(
-      template.original.uri,
-    ) ?? false;
+    this.favouriteTemplates?.includes(template.original.uri) ?? false;
+
   toggleFavouriteTemplate = (template: PreviewableTemplate) => {
-    const preferences = this.currentSession.preferences;
-    if (!preferences || !preferences.favouriteTemplates) {
-      console.error(
-        'No user preferences on current session. This should never happen when logged in',
-      );
-      return;
-    }
-    if (preferences.favouriteTemplates.includes(template.original.uri)) {
-      preferences.favouriteTemplates = preferences.favouriteTemplates.filter(
+    let newFavouriteTemplates = this.favouriteTemplates?.slice() ?? [];
+    if (newFavouriteTemplates.includes(template.original.uri)) {
+      newFavouriteTemplates = newFavouriteTemplates.filter(
         (fav) => fav !== template.original.uri,
       );
     } else {
-      preferences.favouriteTemplates.push(template.original.uri);
+      newFavouriteTemplates.push(template.original.uri);
     }
-    this.currentSession.updatePreferences(preferences).catch((err) => {
-      console.error('Error when updating favourite templates', err);
-    });
+
+    this.favouriteTemplates = newFavouriteTemplates;
+
+    this.userPreferences
+      .save('favourite-templates', this.favouriteTemplates)
+      .catch((err) => {
+        console.error('Error when updating favourite templates', err);
+      });
   };
 
   <template>
