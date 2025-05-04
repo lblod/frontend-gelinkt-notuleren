@@ -128,6 +128,16 @@
       <TableOfContentsPlugin::ToolbarButton @controller={{this.controller}} />
     </:toolbar>
     <:sidebarCollapsible>
+      {{#if (feature-flag 'citerra-poc')}}
+        <this.LinkRdfaNodeButton
+          @controller={{this.controller}}
+          @node={{this.activeNode}}
+          @predicateOptionGenerator={{this.backlinkEditorConfig.predicateOptionGenerator}}
+          @subjectOptionGenerator={{this.backlinkEditorConfig.subjectOptionGenerator
+            this.controller
+          }}
+        />
+      {{/if}}
       <ArticleStructurePlugin::ArticleStructureCard
         @controller={{this.controller}}
         @options={{this.config.structures}}
@@ -159,6 +169,39 @@
         @controller={{this.controller}}
         @config={{this.config.lmb}}
       />
+
+      {{#if (feature-flag 'citerra-poc')}}
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'doelgroep')}}
+        >{{t 'rdfa-editor-container.citerra.doelgroep'}}</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'voorwaarde')}}
+        >{{t 'rdfa-editor-container.citerra.voorwaarde'}}</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'bewijsstuk')}}
+        >{{t 'rdfa-editor-container.citerra.bewijsstuk'}}</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'zone')}}
+        >{{t 'rdfa-editor-container.citerra.zone'}}</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'duurtijd')}}
+        >{{t 'rdfa-editor-container.citerra.duurtijd'}}</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'nummerplaten')}}
+        >{{t 'rdfa-editor-container.citerra.nummerplaten'}}</AuButton>
+      {{/if}}
       {{#if this.activeNode}}
         <this.SnippetInsert
           @controller={{this.controller}}
@@ -168,6 +211,13 @@
       {{/if}}
     </:sidebarCollapsible>
     <:sidebar>
+      {{#if (feature-flag 'citerra-poc')}}
+        <this.VisualiserCard
+          @controller={{this.controller}}
+          @node={{this.activeNode}}
+          @config={{this.visualizerConfig}}
+        />
+      {{/if}}
       <this.StructureControlCard
         @controller={{this.controller}}
         @options={{this.config.structures}}

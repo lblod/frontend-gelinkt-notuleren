@@ -656,6 +656,13 @@ rdfa-editor-container:
   saving: Bezig met opslaan
   making-copy: Kopie aan het maken
   loading: Bezig met laden
+  citerra:
+    doelgroep: Doelgroep
+    voorwaarde: Voorwaarde
+    bewijsstuk: Bewijsstuk
+    zone: Zone
+    duurtijd: Duurtijd
+    nummerplaten: Nummerplaten
 
 regulatory-statements-plugin:
   type: Reglementaire bijlage
