@@ -169,6 +169,39 @@
         @controller={{this.controller}}
         @config={{this.config.lmb}}
       />
+
+      {{#if (feature-flag 'citerra-poc')}}
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'doelgroep')}}
+        >doelgroep</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'voorwaarde')}}
+        >voorwaarde</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'bewijsstuk')}}
+        >bewijsstuk</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'zone')}}
+        >zone</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'duurtijd')}}
+        >duurtijd</AuButton>
+        <AuButton
+          @skin='link'
+          @icon='add'
+          {{on 'click' (fn this.insertThing 'nummerplaten')}}
+        >nummerplaten</AuButton>
+      {{/if}}
       {{#if this.activeNode}}
         <this.SnippetInsert
           @controller={{this.controller}}
