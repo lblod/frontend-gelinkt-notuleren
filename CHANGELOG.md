@@ -1,5 +1,20 @@
 # frontend-gelinkt-notuleren
 
+## 5.58.0
+
+### Minor Changes
+
+- [#845](https://github.com/lblod/frontend-gelinkt-notuleren/pull/845) [`6632b53`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6632b537a8067dba8e5243f73817ce687097e34e) Thanks [@elpoelma](https://github.com/elpoelma)! - Introduce generic user-preference system based on `skos` concepts
+
+- [#854](https://github.com/lblod/frontend-gelinkt-notuleren/pull/854) [`e864f01`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e864f0110c7626071293e74daaaccd215481c90b) Thanks [@elpoelma](https://github.com/elpoelma)! - Add editor configuration for citerra PoC behind a feature flag
+
+- [#854](https://github.com/lblod/frontend-gelinkt-notuleren/pull/854) [`e864f01`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e864f0110c7626071293e74daaaccd215481c90b) Thanks [@elpoelma](https://github.com/elpoelma)! - bump editor and plugins to [12.5.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.5.0) and [31.0.3](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v31.0.3)
+
+- [#855](https://github.com/lblod/frontend-gelinkt-notuleren/pull/855) [`695c995`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/695c9956da7c4cbf06410d26a40b0a3f84bae41b) Thanks [@elpoelma](https://github.com/elpoelma)! - Add 'advanced mode' to participant selector:
+  this mode allows users to assign a mandatee as having 'No mandate' for a particular meeting/agendapoint.
+
+- [#845](https://github.com/lblod/frontend-gelinkt-notuleren/pull/845) [`bce8cb8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bce8cb8be1583107f6e14245a2c16931f83fecb8) Thanks [@elpoelma](https://github.com/elpoelma)! - Persist collapsed state of meeting navigation/validation sidebar card
+
 ## 5.57.0
 
 ### Minor Changes
