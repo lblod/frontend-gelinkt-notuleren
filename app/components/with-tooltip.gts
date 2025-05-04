@@ -16,7 +16,7 @@ type Signature = {
     default: [];
   };
 };
-export default class TooltipComponent extends Component<Signature> {
+export default class WithTooltip extends Component<Signature> {
   @tracked
   tooltipOpen = false;
 
@@ -49,7 +49,7 @@ export default class TooltipComponent extends Component<Signature> {
         {{yield}}
       </div>
       {{#if this.tooltipOpen}}
-        <AuPill role='tooltip' {{velcro.loop}}>
+        <AuPill class='gn-tooltip' role='tooltip' {{velcro.loop}}>
           {{@tooltip}}
         </AuPill>
       {{/if}}

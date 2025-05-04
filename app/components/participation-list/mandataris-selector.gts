@@ -9,6 +9,14 @@ import {
 import { BESTUURSFUNCTIE_CODES } from '../../config/constants';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
 import { getIdentifier } from '../../utils/rdf-utils';
+import PowerSelect from 'ember-power-select/components/power-select';
+import type MandatarisModel from 'frontend-gelinkt-notuleren/models/mandataris';
+import type BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
+import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
+import type StoreService from 'frontend-gelinkt-notuleren/services/gn-store';
+import t from 'ember-intl/helpers/t';
+import plainDate from 'frontend-gelinkt-notuleren/helpers/plain-date';
+import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 
 const GOVERNOR_CLASSIFICATION =
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/180a2fba-6ca9-4766-9b94-82006bb9c709';
@@ -16,17 +24,17 @@ const DEPUTATION_CLASSIFICATION =
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e00000d';
 
 const SEARCH_DEBOUNCE_MS = 300;
-/**
- * @typedef {Object} Args
- * @property {BestuursOrgaan} bestuursorgaan
- * @property {Zitting} meeting
- * @property {Mandataris} mandataris the selected mandataris
- * @property {(value: Mandataris) => void} onSelect called when mandataris is selected
- */
 
-/** @extends {Component<Args>} */
-export default class ParticipationListMandatarisSelectorComponent extends Component {
-  @service store;
+type MandatarisSelectorSig = {
+  Args: {
+    bestuursorgaan: BestuursorgaanModel;
+    meeting: ZittingModel;
+    mandataris?: MandatarisModel;
+    onSelect: (mandataris: MandatarisModel) => unknown;
+  };
+};
+export default class MandatarisSelector extends Component<MandatarisSelectorSig> {
+  @service declare store: StoreService;
 
   get bestuursorgaanIT() {
     return this.args.bestuursorgaan;
@@ -45,12 +53,12 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
   }
 
   @action
-  select(value) {
-    this.args.onSelect(value);
+  select(mandataris: MandatarisModel) {
+    this.args.onSelect(mandataris);
   }
 
-  async searchMandateesByName(searchData) {
-    let queryParams = {
+  async searchMandateesByName(searchData: string) {
+    const queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
       include: 'is-bestuurlijke-alias-van,bekleedt.bestuursfunctie',
       filter: {
@@ -66,26 +74,31 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
             MANDATARIS_STATUS_WAARNEMEND,
           ].join(','),
         },
-        ':lte:start': this.startOfMeeting.toISOString(),
+        ':lte:start': this.startOfMeeting?.toISOString(),
         ':or:': {
           ':has-no:einde': true,
-          ':gt:einde': this.startOfMeeting.toISOString(),
+          ':gt:einde': this.startOfMeeting?.toISOString(),
         },
         ':has:is-bestuurlijke-alias-van': true,
       },
       page: { size: 100 },
     };
-    const mandatees = [...(await this.store.query('mandataris', queryParams))];
+    const mandatees = [
+      // @ts-expect-error fix query-param types
+      ...(await this.store.query<MandatarisModel>('mandataris', queryParams)),
+    ];
     if (this.isInaugurationMeeting) {
-      const commonBestuursorgaan =
-        await this.bestuursorgaanIT.isTijdsspecialisatieVan;
+      const commonBestuursorgaan = unwrap(
+        await this.bestuursorgaanIT.isTijdsspecialisatieVan,
+      );
       // In case this is an inauguration meeting, we also want to include the chairman of the previous legislation
       const currentBestuursperiode =
         await this.bestuursorgaanIT.bestuursperiode;
-      const previousBestuursperiode = await currentBestuursperiode.previous;
+      const previousBestuursperiode = await currentBestuursperiode?.previous;
       if (previousBestuursperiode) {
         const voorzittersPreviousLegislation = [
-          ...(await this.store.query('mandataris', {
+          ...(await this.store.query<MandatarisModel>('mandataris', {
+            // @ts-expect-error fix query-param types
             include: [
               'is-bestuurlijke-alias-van',
               'is-bestuurlijke-alias-van.geboorte',
@@ -93,6 +106,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
               'bekleedt',
               'bekleedt.bestuursfunctie',
             ].join(','),
+            // @ts-expect-error fix query-param types
             filter: {
               bekleedt: {
                 'bevat-in': {
@@ -100,7 +114,7 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
                     ':uri:': commonBestuursorgaan.uri,
                   },
                   bestuursperiode: {
-                    ':uri:': previousBestuursperiode.uri,
+                    ':uri:': previousBestuursperiode?.uri,
                   },
                 },
                 bestuursfunctie: {
@@ -125,23 +139,25 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
               },
               ':or:': {
                 ':has-no:einde': true,
-                ':gt:einde': this.startOfMeeting.toISOString(),
+                ':gt:einde': this.startOfMeeting?.toISOString(),
               },
               ':has:is-bestuurlijke-alias-van': true,
             },
           })),
         ];
         if (voorzittersPreviousLegislation.length) {
-          mandatees.push(voorzittersPreviousLegislation[0]);
+          mandatees.push(unwrap(voorzittersPreviousLegislation[0]));
         }
       }
     }
     return mandatees;
   }
 
-  async searchGovernorsByName(searchData) {
-    const adminUnit = await this.bestuursorgaanIT.get(
-      'isTijdsspecialisatieVan.bestuurseenheid',
+  async searchGovernorsByName(searchData: string) {
+    const adminUnit = unwrap(
+      await this.bestuursorgaanIT.isTijdsspecialisatieVan.then(
+        (bestuursorgaan) => bestuursorgaan?.bestuurseenheid,
+      ),
     );
     const queryParams = {
       sort: 'is-bestuurlijke-alias-van.achternaam',
@@ -166,26 +182,29 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
             MANDATARIS_STATUS_WAARNEMEND,
           ].join(','),
         },
-        ':lte:start': this.startOfMeeting.toISOString(),
+        ':lte:start': this.startOfMeeting?.toISOString(),
         ':or:': {
           ':has-no:einde': true,
-          ':gt:einde': this.startOfMeeting.toISOString(),
+          ':gt:einde': this.startOfMeeting?.toISOString(),
         },
         ':has:is-bestuurlijke-alias-van': true,
       },
       page: { size: 100 },
     };
-    return [...(await this.store.query('mandataris', queryParams))];
+    return [
+      // @ts-expect-error fix query-param types
+      ...(await this.store.query<MandatarisModel>('mandataris', queryParams)),
+    ];
   }
 
-  async isDeputation(adminBody) {
-    const classification = await adminBody.get(
-      'isTijdsspecialisatieVan.classificatie',
+  async isDeputation(adminBody: BestuursorgaanModel) {
+    const classification = await adminBody.isTijdsspecialisatieVan.then(
+      (tijdsspecialisatie) => tijdsspecialisatie?.classificatie,
     );
-    return classification.uri === DEPUTATION_CLASSIFICATION;
+    return classification?.uri === DEPUTATION_CLASSIFICATION;
   }
 
-  searchByName = restartableTask(async (searchData) => {
+  searchByName = restartableTask(async (searchData: string) => {
     await timeout(SEARCH_DEBOUNCE_MS);
     const isDeputation = await this.isDeputation(this.bestuursorgaanIT);
     let mandatees;
@@ -201,4 +220,29 @@ export default class ParticipationListMandatarisSelectorComponent extends Compon
     }
     return mandatees;
   });
+
+  <template>
+    <PowerSelect
+      @loadingMessage={{t 'participation-list-modal-selector.loading-message'}}
+      @noMatchesMessage={{t
+        'participation-list-modal-selector.no-matches-message'
+      }}
+      @searchEnabled={{true}}
+      @searchMessage={{t 'participation-list-modal-selector.search-message'}}
+      @renderInPlace={{true}}
+      @placeholder={{t 'participation-list-modal-selector.placeholder'}}
+      @allowClear={{true}}
+      @search={{this.searchByName.perform}}
+      @selected={{@mandataris}}
+      @onChange={{this.select}}
+      as |mandataris|
+    >
+      {{mandataris.isBestuurlijkeAliasVan.gebruikteVoornaam}}
+      {{mandataris.isBestuurlijkeAliasVan.achternaam}},
+      {{mandataris.bekleedt.bestuursfunctie.label}}
+      ({{plainDate mandataris.start}}
+      -
+      {{plainDate mandataris.einde}})
+    </PowerSelect>
+  </template>
 }

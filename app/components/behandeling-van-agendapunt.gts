@@ -24,7 +24,7 @@ import { on } from '@ember/modifier';
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import t from 'ember-intl/helpers/t';
 import AuToolbar from '@appuniversum/ember-appuniversum/components/au-toolbar';
-import ParticipationList, { type ParticipantInfo } from './participation-list';
+import ParticipationList from './participation-list';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { and, not, or } from 'ember-truth-helpers';
 import AuLink from '@appuniversum/ember-appuniversum/components/au-link';
@@ -40,6 +40,7 @@ import type BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuurs
 import TreatmentVoting from './treatment/voting';
 import TreatmentVotingEdit from './treatment/voting/edit';
 import type { AgendapointTreatmentValidationResult } from 'frontend-gelinkt-notuleren/services/meeting';
+import type { ParticipationInfo } from './participation-list/modal';
 type Signature = {
   Args: {
     meeting: ZittingModel;
@@ -82,6 +83,10 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
 
   meetingAbsenteesRequest = trackedFunction(this, async () => {
     return this.args.meeting.afwezigenBijStart;
+  });
+
+  meetingUnassignedMandateesRequest = trackedFunction(this, async () => {
+    return this.args.meeting.nietToegekendeMandatarissen;
   });
 
   constructor(owner: unknown, args: Signature['Args']) {
@@ -137,11 +142,19 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
   get defaultAbsentees() {
     return this.meetingAbsenteesRequest.value;
   }
+
+  get defaultUnassignedMandatees() {
+    return this.meetingUnassignedMandateesRequest.value;
+  }
+
   get participants() {
     return this.behandeling?.sortedParticipants ?? [];
   }
   get absentees() {
     return this.behandeling?.sortedAbsentees ?? [];
+  }
+  get unassignedMandatees() {
+    return this.behandeling?.sortedUnassignedMandatees ?? [];
   }
 
   get hasParticipants() {
@@ -180,16 +193,14 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
     }
   });
 
-  /**
-   * @param {ParticipantInfo} info
-   */
   @action
   async saveParticipants({
     chairman,
     secretary,
-    participants,
+    attendees,
     absentees,
-  }: ParticipantInfo) {
+    unassignedMandatees,
+  }: ParticipationInfo) {
     if (this.behandeling) {
       this.behandeling.set('voorzitter', chairman);
       this.chairman = chairman;
@@ -197,8 +208,9 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
       this.behandeling.set('secretaris', secretary);
       this.secretary = secretary;
 
-      this.behandeling.set('aanwezigen', participants);
+      this.behandeling.set('aanwezigen', attendees);
       this.behandeling.set('afwezigen', absentees);
+      this.behandeling.set('nietToegekendeMandatarissen', unassignedMandatees);
 
       await this.behandeling.save();
       await this.args.onAttendanceSave?.();
@@ -401,6 +413,8 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
           @defaultParticipants={{this.defaultParticipants}}
           @absentees={{this.absentees}}
           @defaultAbsentees={{this.defaultAbsentees}}
+          @unassignedMandatees={{this.unassignedMandatees}}
+          @defaultUnassignedMandatees={{this.defaultUnassignedMandatees}}
           @possibleParticipants={{@possibleParticipants}}
           @bestuursorgaan={{@bestuursorgaan}}
           @onSave={{this.saveParticipants}}

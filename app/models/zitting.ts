@@ -44,6 +44,10 @@ export default class ZittingModel extends Model {
   @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare afwezigenBijStart: AsyncHasMany<MandatarisModel>;
 
+  // @ts-expect-error add types for `defaultPageSize`
+  @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
+  declare nietToegekendeMandatarissen: AsyncHasMany<MandatarisModel>;
+
   @hasMany('intermission', { inverse: 'zitting', async: true, as: 'zitting' })
   declare intermissions: AsyncHasMany<IntermissionModel>;
   @hasMany('publishing-log', { inverse: 'zitting', async: true, as: 'zitting' })

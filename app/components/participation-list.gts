@@ -14,7 +14,9 @@ import t from 'ember-intl/helpers/t';
 import { on } from '@ember/modifier';
 import { and } from 'ember-truth-helpers';
 
-import ParticipationListModal from './participation-list/modal';
+import ParticipationListModal, {
+  type ParticipationInfo,
+} from './participation-list/modal';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 import type { AttendanceValidationResult } from 'frontend-gelinkt-notuleren/services/meeting';
 import AuAlert, {
@@ -22,13 +24,6 @@ import AuAlert, {
 } from '@appuniversum/ember-appuniversum/components/au-alert';
 import AuList from '@appuniversum/ember-appuniversum/components/au-list';
 import AuLinkExternal from '@appuniversum/ember-appuniversum/components/au-link-external';
-
-export type ParticipantInfo = {
-  chairman?: MandatarisModel;
-  secretary?: FunctionarisModel;
-  participants?: MandatarisModel[];
-  absentees?: MandatarisModel[];
-};
 
 type Signature = {
   Args: {
@@ -40,10 +35,12 @@ type Signature = {
     defaultParticipants?: Option<MandatarisModel[]>;
     absentees?: Option<MandatarisModel[]>;
     defaultAbsentees?: Option<MandatarisModel[]>;
+    unassignedMandatees?: Option<MandatarisModel[]>;
+    defaultUnassignedMandatees?: Option<MandatarisModel[]>;
     possibleParticipants?: Option<MandatarisModel[]>;
     attendanceValidationResult?: AttendanceValidationResult;
     bestuursorgaan: BestuursorgaanModel;
-    onSave: (info: ParticipantInfo) => unknown;
+    onSave: (info: ParticipationInfo) => unknown;
     meeting: ZittingModel;
     modalTitle: string;
     readOnly: boolean;
@@ -65,23 +62,27 @@ export default class ParticipationList extends Component<Signature> {
     return this.args.chairman;
   }
 
-  get defaultedChairman() {
+  get defaultChairman() {
     return this.chairman ?? this.args.defaultChairman;
   }
 
-  get defaultedSecretary() {
+  get defaultSecretary() {
     return this.secretary ?? this.args.defaultSecretary;
   }
 
   get participantsEmpty() {
-    return !this.args.participants?.length && !this.args.absentees?.length;
+    return (
+      !this.args.participants?.length &&
+      !this.args.absentees?.length &&
+      !this.args.unassignedMandatees?.length
+    );
   }
 
   get participants() {
     return this.args.participants;
   }
 
-  get defaultedParticipants() {
+  get defaultParticipants() {
     if (!this.participants || this.participantsEmpty) {
       return this.args.defaultParticipants;
     }
@@ -92,11 +93,22 @@ export default class ParticipationList extends Component<Signature> {
     return this.args.absentees;
   }
 
-  get defaultedAbsentees() {
+  get defaultAbsentees() {
     if (!this.absentees || this.participantsEmpty) {
       return this.args.defaultAbsentees;
     }
     return this.absentees;
+  }
+
+  get unassignedMandatees() {
+    return this.args.unassignedMandatees;
+  }
+
+  get defaultUnassignedMandatees() {
+    if (!this.unassignedMandatees || this.participantsEmpty) {
+      return this.args.defaultUnassignedMandatees;
+    }
+    return this.unassignedMandatees;
   }
 
   @action
@@ -156,6 +168,18 @@ export default class ParticipationList extends Component<Signature> {
             ?.map((m) => m.get('isBestuurlijkeAliasVan.fullName'))
             .join(', ') || '',
       },
+      ...(this.unassignedMandatees?.length
+        ? [
+            {
+              label: this.intl.t('participation-list.unassigned-label'),
+              // TODO: rework this
+              value:
+                this.unassignedMandatees
+                  ?.map((m) => m.get('isBestuurlijkeAliasVan.fullName'))
+                  .join(', ') || '',
+            },
+          ]
+        : []),
     ];
   }
 
@@ -196,13 +220,15 @@ export default class ParticipationList extends Component<Signature> {
     </MeetingSubSection>
     <ParticipationListModal
       {{! @glint-expect-error fix the types for this component }}
-      @chairman={{this.defaultedChairman}}
+      @chairman={{this.defaultChairman}}
       {{! @glint-expect-error fix the types for this component }}
-      @secretary={{this.defaultedSecretary}}
+      @secretary={{this.defaultSecretary}}
       {{! @glint-expect-error fix the types for this component }}
-      @participants={{this.defaultedParticipants}}
+      @participants={{this.defaultParticipants}}
       {{! @glint-expect-error fix the types for this component }}
-      @absentees={{this.defaultedAbsentees}}
+      @absentees={{this.defaultAbsentees}}
+      {{! @glint-expect-error fix the types for this component }}
+      @unassignedMandatees={{this.defaultUnassignedMandatees}}
       {{! @glint-expect-error fix the types for this component }}
       @possibleParticipants={{@possibleParticipants}}
       @show={{this.popup}}
@@ -244,7 +270,11 @@ class UnassignedMandateesBanner extends Component<UnassignedMandateesBannerSigna
         @icon='alert-triangle'
       >
         {{t 'participation-list.unassigned-mandatees-warning.first-line'}}
-        <AuList class='au-u-margin-top-tiny' @divider={{true}} as |Item|>
+        <AuList
+          class='au-u-margin-top-tiny au-u-margin-bottom-tiny'
+          @divider={{true}}
+          as |Item|
+        >
           {{#each this.attendanceValidation.unassignedMandatees as |mandatee|}}
             <Item>
               <AuLinkExternal @skin='primary' href={{mandatee.uri}}>
