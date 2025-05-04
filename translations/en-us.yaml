@@ -535,7 +535,7 @@ participation-list:
   unassigned-mandatees-warning:
     title: Warning
     first-line: 'The following mandatees have not yet been assigned as either attendee or absentee:'
-    second-line: Please assign these mandatees as either attendee or absentee.
+    second-line: This can be necessary in exceptional cases, such as in the case of a mandate change. If you have explicitly chosen to exlude the above mandatees, you can safely ignore this warning.
 
 participation-list-modal:
   voorzitter-label: Chairman of the meeting

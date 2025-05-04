@@ -544,7 +544,7 @@ participation-list:
   unassigned-mandatees-warning:
     title: Waarschuwing
     first-line: 'De hieronder vermelde mandatarissen zijn nog niet toegewezen als zijnde aanwezig of afwezig: '
-    second-line: Gelieve deze mandatarissen toe te wijzen als aanwezig of afwezig.
+    second-line: Dit kan uitzonderlijk nodig zijn, bijvoorbeeld in het geval van een mandatenwissel. Indien dit inderdaad de bedoeling is, mag u deze waarschuwing negeren.
 
 participation-list-modal:
   voorzitter-label: Voorzitter van de zitting
