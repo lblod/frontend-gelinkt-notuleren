@@ -14,6 +14,115 @@ import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private
 import SnippetInsertRdfaComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/snippet-plugin/snippet-insert-rdfa';
 import { fixArticleConnections } from '../../utils/fix-article-connections';
 import { modifier } from 'ember-modifier';
+import factory from '@rdfjs/dataset';
+import SHACLValidator from 'rdf-validate-shacl';
+import { Parser as ParserN3 } from 'n3';
+import { RdfaParser } from 'rdfa-streaming-parser';
+
+const besluitShape = `
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix qb:      <http://purl.org/linked-data/cube#> .
+@prefix lblodBesluit:	<http://lblod.data.gift/vocabularies/besluit/> .
+<https://data.vlaanderen.be/shacl/besluit-publicatie#BesluitShape>
+	a sh:NodeShape ;
+	sh:targetClass <http://data.vlaanderen.be/ns/besluit#Besluit> ;
+	sh:property [
+		sh:name "beschrijving" ;
+		sh:description "Een beknopte beschrijving van het besluit." ;
+		sh:path <http://data.europa.eu/eli/ontology#description> ;
+		sh:datatype <http://www.w3.org/2001/XMLSchema#string> ;
+        sh:minCount 0 ;
+		sh:maxCount 1 ;
+    sh:resultMessage "De besluit moet maximaal één beschrijving hebben"
+	] ;
+    sh:property [
+		sh:name "inhoud" ;
+		sh:description "De beschrijving van de beoogde rechtsgevolgen, het zogenaamde beschikkend gedeelte." ;
+		sh:path <http://www.w3.org/ns/prov#value> ;
+		sh:datatype <http://www.w3.org/2001/XMLSchema#string> ;
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+    sh:resultMessage "De beslissing moet een artikelcontainer hebben";
+	] ;
+	sh:property [
+		sh:name "citeeropschrift" ;
+		sh:description "De beknopte titel of officiële korte naam van een decreet, wet, besluit... Deze wordt officieel vastgelegd. Deze benaming wordt in de praktijk gebruikt om naar de rechtsgrond te verwijzen." ;
+		sh:path <http://data.europa.eu/eli/ontology#title_short> ;
+		sh:datatype <http://www.w3.org/2001/XMLSchema#string> ;
+        sh:minCount 0 ;
+		sh:maxCount 1 ;
+    sh:resultMessage "De beslissing mag niet meer dan één officiële titel hebben";
+	] ;
+    sh:property [
+		sh:name "titel" ;
+		sh:description "Titel van de legale verschijningsvorm." ;
+		sh:path <http://data.europa.eu/eli/ontology#title> ;
+		sh:datatype <http://www.w3.org/2001/XMLSchema#string> ;
+		sh:minCount 1 ;
+    sh:resultMessage "De besluit moet minstens één titel hebben";
+	] ;
+	sh:property [
+		sh:name "taal" ;
+		sh:description "De taal van de verschijningsvorm." ;
+		sh:path <http://data.europa.eu/eli/ontology#language> ;
+		sh:class <http://www.w3.org/2004/02/skos/core#Concept> ;
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+		qb:codeList <http://publications.europa.eu/mdr/authority/language/index.html> ;
+    sh:resultMessage "De besluit moet een geldige taal hebben"
+	] ;
+    sh:property [
+		sh:name "heeftDeel" ;
+		sh:description "Duidt een artikel aan van dit besluit." ;
+		sh:path <http://data.europa.eu/eli/ontology#has_part> ;
+		sh:class <http://data.vlaanderen.be/ns/besluit#Artikel> ;
+		sh:minCount 0 ;
+    sh:resultMessage "De artikelen moeten het juiste type hebben"
+	] ;
+    sh:property [
+		sh:name "citeert" ;
+		sh:description "Een citatie in de wettelijke tekst. Dit omvat zowel woordelijke citaten als citaten in verwijzingen." ;
+		sh:path <http://data.europa.eu/eli/ontology#cites> ;
+		sh:class <http://data.europa.eu/eli/ontology#LegalExpression> ;
+    sh:minCount 0 ;
+    sh:resultMessage "De citatie moeten het juiste type hebben"
+	] ;
+    sh:property [
+		sh:name "motivering" ;
+		sh:description "Beschrijving van de juridische en feitelijke motivering achter de beslissing die wordt uitgedrukt in het besluit." ;
+		sh:path <http://data.vlaanderen.be/ns/besluit#motivering> ;
+		sh:datatype <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> ;
+		sh:minCount 1 ;
+		sh:maxCount 1 ;
+    sh:resultMessage "De besluit moet één motivering hebben"
+	] ;
+	sh:property [
+		sh:name "publicatiedatum" ;
+		sh:description "De officiële publicatiedatum van het besluit." ;
+		sh:path <http://data.europa.eu/eli/ontology#date_publication> ;
+		sh:datatype <http://www.w3.org/2001/XMLSchema#date> ;
+    sh:minCount 0 ;
+		sh:maxCount 1 ;
+    sh:resultMessage "De besluit mag niet meer dan één publicatiedatum hebben"
+	] ;
+    sh:property [
+		sh:name "buitenwerkingtreding" ;
+		sh:description "De laatste dag waarop de regelgeving nog van kracht is." ;
+		sh:path <http://data.europa.eu/eli/ontology#date_no_longer_in_force> ;
+		sh:datatype <http://www.w3.org/2001/XMLSchema#date> ;
+        sh:minCount 0 ;
+		sh:maxCount 1 ;
+	] ;
+	sh:property [
+		sh:name "inwerkingtreding" ;
+		sh:description "De datum waarop de regelgeving van kracht wordt." ;
+		sh:path <http://data.europa.eu/eli/ontology#first_date_entry_in_force> ;
+		sh:datatype <http://www.w3.org/2001/XMLSchema#date> ;
+		sh:minCount 0 ;
+		sh:maxCount 1 ;
+	] ;
+	sh:closed false .
+  `;
 
 export default class AgendapointsEditController extends Controller {
   @service store;
@@ -178,6 +287,14 @@ export default class AgendapointsEditController extends Controller {
       const html = this.controller.htmlContent;
       const cleanedHtml = this.removeEmptyDivs(html);
 
+      const rdf = await htmlToRdf(cleanedHtml);
+      const shacl = await parse(besluitShape);
+      const validator = new SHACLValidator(shacl, {
+        allowNamedNodeInList: true,
+      });
+      const report = await validator.validate(rdf);
+      console.log(shaclReportToMessage(report));
+
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
           this.editorDocument.title,
@@ -207,4 +324,61 @@ export default class AgendapointsEditController extends Controller {
 
     return parsedHtml.body.innerHTML;
   }
+}
+
+async function parse(triples) {
+  return new Promise((resolve, reject) => {
+    const parser = new ParserN3();
+    const dataset = factory.dataset();
+    parser.parse(triples, (error, quad) => {
+      if (error) {
+        console.warn(error);
+        reject(error);
+      } else if (quad) {
+        dataset.add(quad);
+      } else {
+        resolve(dataset);
+      }
+    });
+  });
+}
+
+function htmlToRdf(html) {
+  return new Promise((res, rej) => {
+    const myParser = new RdfaParser({ contentType: 'text/html' });
+    const dataset = factory.dataset();
+    myParser
+      .on('data', (data) => {
+        dataset.add(data);
+      })
+      .on('error', rej)
+      .on('end', () => res(dataset));
+    myParser.write(html);
+    myParser.end();
+  });
+}
+
+function shaclSeverityToString(severity) {
+  const uri = severity.value;
+  return uri.replace('http://www.w3.org/ns/shacl#', '');
+}
+
+export function shaclReportToMessage(report) {
+  let reportString = '\n';
+  for (const r of report.results) {
+    let description = '';
+    const shapeId = r.sourceShape.id;
+    for (let [_, quad] of r.dataset._quads) {
+      if (
+        quad._subject?.id === shapeId &&
+        quad._predicate?.id === 'http://www.w3.org/ns/shacl#resultMessage'
+      ) {
+        description = quad._object.id;
+        break;
+      }
+    }
+    const severity = shaclSeverityToString(r.severity);
+    reportString += `${severity} - ${description} - ${r.path.value} (${r.focusNode.value})\n`;
+  }
+  return reportString;
 }
