@@ -1,9 +1,10 @@
 import Service from '@ember/service';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
-import type BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
+import BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
 import type MandatarisModel from 'frontend-gelinkt-notuleren/models/mandataris';
 import ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 import { filterAsync } from 'frontend-gelinkt-notuleren/utils/filter';
+import htmlToRdf from 'frontend-gelinkt-notuleren/utils/htmlToRdf';
 
 export type MeetingValidationResult = {
   ok: boolean;
@@ -28,6 +29,7 @@ export type MeetingInfoValidationResult = {
 export type AgendapointTreatmentValidationResult = {
   ok: boolean;
   attendance: AttendanceValidationResult;
+  decisionPresent: boolean;
 };
 
 export type AttendanceValidationResult = {
@@ -86,9 +88,12 @@ export default class MeetingService extends Service {
       treatment,
       potentialParticipants,
     );
+    const decisionValidationResult =
+      await this.validateDecisionPresence(treatment);
     return {
-      ok: treatmentAttendanceValidationResult.ok,
+      ok: treatmentAttendanceValidationResult.ok && decisionValidationResult,
       attendance: treatmentAttendanceValidationResult,
+      decisionPresent: decisionValidationResult,
     };
   }
 
@@ -126,6 +131,21 @@ export default class MeetingService extends Service {
       filledIn,
       unassignedMandatees,
     };
+  }
+  async validateDecisionPresence(
+    treatment: BehandelingVanAgendapunt,
+  ): Promise<boolean> {
+    const documentContainer = await treatment.documentContainer;
+    if (!documentContainer) return false;
+    const document = await documentContainer.currentVersion;
+    if (!document) return false;
+    const triples = await htmlToRdf(document.content);
+    const matches = triples.match(
+      undefined,
+      'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+      'http://data.vlaanderen.be/ns/besluit#Besluit',
+    );
+    return matches.size > 0;
   }
 }
 
