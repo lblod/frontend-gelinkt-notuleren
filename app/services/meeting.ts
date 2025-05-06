@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 import BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
 import type MandatarisModel from 'frontend-gelinkt-notuleren/models/mandataris';
 import ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
@@ -139,11 +140,13 @@ export default class MeetingService extends Service {
     if (!documentContainer) return false;
     const document = await documentContainer.currentVersion;
     if (!document) return false;
-    const triples = await htmlToRdf(document.content);
+    const triples = await htmlToRdf(document.content as string);
     const matches = triples.match(
       undefined,
-      'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-      'http://data.vlaanderen.be/ns/besluit#Besluit',
+      sayDataFactory.namedNode(
+        'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+      ),
+      sayDataFactory.namedNode('http://data.vlaanderen.be/ns/besluit#Besluit'),
     );
     return matches.size > 0;
   }
