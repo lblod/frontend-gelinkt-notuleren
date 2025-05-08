@@ -85,6 +85,8 @@ behandeling-van-agendapunten:
   edit-document: 'Bewerk document'
   sync-warning: Gegevens mogelijks overschreven door synchronisatie
   add-custom-voting: Aangepaste stemming toevoegen
+  no-decision-present: Geen besluit aanwezig
+  no-decision-present-explanation: Dit agendapunt bevat geen besluit en zal niet worden opgenomen in de publicatie van de besluitenlijst. Als dit niet is wat u verwachtte, controleer dan de inhoud van het agendapunt of neem contact op met support op {email}
 
 contact:
   about: Waar gaat uw bericht over?
