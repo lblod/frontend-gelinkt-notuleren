@@ -450,10 +450,13 @@ meeting-toc-card:
         success: The intro of this meeting is correctly filled in
     treatments:
       label: Treatments
+      validation:
+        success: The treatments below were completed correctly
+        warning: A few problems were found in the following treatments
     treatment:
       validation:
-        success: The attendance of this treatment is correctly filled in
-        warning: A few problems were found in the attendance section of this treatment
+        success: This treatment is correctly filled in
+        warning: A few problems were found in this treatment
     outro:
       label: Meeting outro
       validation:
