@@ -2,8 +2,10 @@ import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
+// @ts-expect-error No types
 import applyDevTools from 'prosemirror-dev-tools';
 import { modifier } from 'ember-modifier';
+import type Features from 'ember-feature-flags';
 import { firefoxCursorFix } from '@lblod/ember-rdfa-editor/plugins/firefox-cursor-fix';
 import { lastKeyPressedPlugin } from '@lblod/ember-rdfa-editor/plugins/last-key-pressed';
 import recreateUuidsOnPaste from '@lblod/ember-rdfa-editor/plugins/recreateUuidsOnPaste';
@@ -15,10 +17,41 @@ import {
 import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attribute-editor';
 import RdfaEditor from '@lblod/ember-rdfa-editor/components/_private/rdfa-editor';
 import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
+import type {
+  NodeViewConstructor,
+  Plugin,
+  SayController,
+  Schema,
+} from '@lblod/ember-rdfa-editor';
+import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
+import type { Context } from 'frontend-gelinkt-notuleren/config/editor-document-default-context';
 
-export default class RdfaEditorContainerComponent extends Component {
-  @service features;
-  @tracked controller;
+interface Sig {
+  Args: {
+    editorDocument?: EditorDocumentModel;
+    prefix?: Context['prefix'];
+    rdfaEditorInit?: (controller: SayController) => void;
+    // TODO should this be PluginConfig[]?
+    plugins?: Plugin[];
+    schema: Schema;
+    nodeViews?: (
+      controller: SayController,
+    ) => Record<string, NodeViewConstructor>;
+    typeOfWrappingDiv?: string;
+    busy?: boolean;
+    busyText?: string;
+    shouldEditRdfa?: boolean;
+  };
+  Blocks: {
+    toolbar: [];
+    sidebarCollapsible: [];
+    sidebar: [];
+  };
+}
+
+export default class RdfaEditorContainerComponent extends Component<Sig> {
+  @service declare features: Features;
+  @tracked controller?: SayController;
   @tracked ready = false;
   AttributeEditor = AttributeEditor;
   RdfaEditor = RdfaEditor;
@@ -39,7 +72,7 @@ export default class RdfaEditorContainerComponent extends Component {
     };
   });
 
-  get plugins() {
+  get plugins(): Plugin[] {
     const plugins = this.args.plugins || [];
     return plugins
       .concat(
@@ -52,10 +85,6 @@ export default class RdfaEditorContainerComponent extends Component {
       .filter((nullCheck) => nullCheck);
   }
 
-  get widgets() {
-    return this.args.widgets || [];
-  }
-
   get schema() {
     return this.args.schema;
   }
@@ -64,10 +93,11 @@ export default class RdfaEditorContainerComponent extends Component {
     return this.args.nodeViews;
   }
 
-  get documentContext() {
+  get documentContext(): Context {
     if (this.args.editorDocument) {
       try {
-        return JSON.parse(this.args.editorDocument.context);
+        // TODO should validate this
+        return JSON.parse(this.args.editorDocument.context ?? '') as Context;
       } catch (e) {
         console.warn(
           'Error encountered during parsing of document context. ' +
@@ -77,7 +107,7 @@ export default class RdfaEditorContainerComponent extends Component {
       }
     }
     return {
-      prefix: this.args.prefix ?? '',
+      prefix: this.args.prefix ?? {},
       typeof: '',
       vocab: '',
     };
@@ -95,8 +125,9 @@ export default class RdfaEditorContainerComponent extends Component {
   }
 
   @action
-  rdfaEditorInit(editor) {
+  rdfaEditorInit(editor: SayController) {
     if (this.features.isEnabled('prosemirror-dev-tools')) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       applyDevTools(editor.mainEditorView);
     }
     if (this.args.rdfaEditorInit) {
@@ -105,10 +136,10 @@ export default class RdfaEditorContainerComponent extends Component {
     this.controller = editor;
   }
 
-  prefixToAttrString(prefix) {
+  prefixToAttrString(prefix: Context['prefix']) {
     let attrString = '';
     Object.keys(prefix).forEach((key) => {
-      let uri = prefix[key];
+      const uri = prefix[key];
       attrString += `${key}: ${uri} `;
     });
     return attrString;

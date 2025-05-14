@@ -26,14 +26,10 @@ export default class RegulatoryStatementsEditRoute extends Route {
       container.get('currentVersion'),
     );
     return RSVP.hash({
+      meetingId: params.id,
       documentContainer: containerPromise,
       editorDocument: currentVersion,
       standardTemplates: this.standardTemplate.fetchTemplates.perform(),
     });
-  }
-  setupController(controller, model) {
-    super.setupController(controller, model);
-    controller.uploading = false;
-    controller._editorDocument = null;
   }
 }
