@@ -22,6 +22,7 @@ import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuBodyContainer from '@appuniversum/ember-appuniversum/components/au-body-container';
 import AuIcon from '@appuniversum/ember-appuniversum/components/au-icon';
 
+import { insertHtml } from '@lblod/ember-rdfa-editor/commands/insert-html-command';
 import {
   em,
   strikethrough,
@@ -82,12 +83,15 @@ import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/high
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
+import VisualiserCard from '@lblod/ember-rdfa-editor/components/_private/rdfa-visualiser/visualiser-card';
+import LinkRdfaNodeButton from '@lblod/ember-rdfa-editor/components/_private/link-rdfa-node-poc/button';
 import type { Option } from '@lblod/ember-rdfa-editor/utils/_private/option';
 import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
 import {
   templateComment,
   templateCommentView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
+import instantiateUuids from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin/utils/instantiate-uuids';
 import {
   codelist,
   codelistView,
@@ -149,6 +153,7 @@ import TemplateCommentEdit from '@lblod/ember-rdfa-editor-lblod-plugins/componen
 import LocationInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/location-plugin/insert';
 import WorshipInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/worship-plugin/insert';
 import LmbInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lmb-plugin/insert';
+import { fn } from '@ember/helper';
 import type StandardTemplate from '@lblod/ember-rdfa-editor-lblod-plugins/models/template';
 import type { WorshipPluginConfig } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/worship-plugin';
 
@@ -157,6 +162,8 @@ import {
   GEMEENTE,
   OCMW,
 } from 'frontend-gelinkt-notuleren/utils/bestuurseenheid-classificatie-codes';
+import { RDFA_VISUALIZER_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/visualizer';
+import { BACKLINK_EDITOR_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/backlink-editor';
 import type Store from 'frontend-gelinkt-notuleren/services/store';
 import type DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
@@ -178,7 +185,7 @@ interface RegulatoryStatementEditSig {
   };
 }
 
-export default class RegulatoryStatementEdit extends Component<RegulatoryStatementEditSig> {
+export default class RegulatoryStatementEditCiterra extends Component<RegulatoryStatementEditSig> {
   @service declare documentService: DocumentService;
   @service declare store: Store;
   @service declare currentSession: CurrentSessionService;
@@ -462,6 +469,232 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
     this.controller = controller;
   }
 
+  /**
+   * CITERRA POC
+   */
+  visualizerConfig = RDFA_VISUALIZER_CONFIG;
+  backlinkEditorConfig = BACKLINK_EDITOR_CONFIG;
+
+  @action
+  insertThing(thing: string) {
+    const map: Record<string, string> = {
+      nummerplaten: /* HTML */ `
+        <div
+          class="say-editable say-block-rdfa"
+          about="http://data.vlaanderen.be/id/voorwaarden/--ref-uuid4-b73cdde4-482a-454a-8323-ce20e04e3ac7"
+          data-say-id="b73cdde4-482a-454a-8323-ce20e04e3ac7"
+          property="http://www.w3.org/ns/prov#value"
+          lang="nl-be"
+          data-pm-slice="0 0 []"
+          ><div
+            style="display: none"
+            class="say-hidden"
+            data-rdfa-container="true"
+            ><span
+              about="http://data.vlaanderen.be/id/voorwaarden/--ref-uuid4-b73cdde4-482a-454a-8323-ce20e04e3ac7"
+              property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+              resource="http://data.europa.eu/m8g/Requirement"
+            ></span
+            ><span
+              property="http://www.w3.org/2004/02/skos/core#prefLabel"
+              content="Aantal nummerplaten"
+              lang="nl-be"
+            ></span></div
+          ><div data-content-container="true"
+            ><p class="say-paragraph"
+              >Tenzij anders bepaald, kan de vergunning voor een onbeperkt
+              aantal nummerplaten worden aangevraagd</p
+            ></div
+          ></div
+        >
+      `,
+      duurtijd: /* HTML */ `
+        <div
+          class="say-editable say-block-rdfa"
+          about="http://data.vlaanderen.be/id/duurtijden/--ref-uuid4-7586b9c7-e0ed-4a9f-94f6-5705420ec3cf"
+          data-say-id="7586b9c7-e0ed-4a9f-94f6-5705420ec3cf"
+          property="http://www.w3.org/ns/prov#value"
+          lang="nl-be"
+          data-pm-slice="0 0 []"
+          ><div
+            style="display: none"
+            class="say-hidden"
+            data-rdfa-container="true"
+            ><span
+              about="http://data.vlaanderen.be/id/duurtijden/--ref-uuid4-7586b9c7-e0ed-4a9f-94f6-5705420ec3cf"
+              property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+              resource="http://data.europa.eu/m8g/Requirement"
+            ></span
+            ><span
+              property="http://www.w3.org/2004/02/skos/core#prefLabel"
+              content="Duurtijd"
+              lang="nl-be"
+            ></span></div
+          ><div data-content-container="true"
+            ><p class="say-paragraph"
+              >Tenzij anders bepaald, heeft de vergunning een onbeperkte
+              duurtijd.</p
+            ></div
+          ></div
+        >
+      `,
+      zone: /* HTML */ `
+        <div
+          class="say-editable say-block-rdfa"
+          about="http://data.vlaanderen.be/id/zones/--ref-uuid4-32047e20-00d3-4b66-8f1f-9dc5fa275e0f"
+          data-say-id="32047e20-00d3-4b66-8f1f-9dc5fa275e0f"
+          property="http://www.w3.org/ns/prov#value"
+          lang="nl-be"
+          data-pm-slice="0 0 []"
+          ><div
+            style="display: none"
+            class="say-hidden"
+            data-rdfa-container="true"
+            ><span
+              property="http://www.w3.org/2004/02/skos/core#prefLabel"
+              content="Zone"
+              lang="nl-be"
+            ></span
+            ><span
+              about="http://data.vlaanderen.be/id/zones/--ref-uuid4-32047e20-00d3-4b66-8f1f-9dc5fa275e0f"
+              property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+              resource="https://data.vlaanderen.be/ns/mobiliteit#Zone"
+            ></span
+            ><span
+              about="http://data.vlaanderen.be/id/zones/--ref-uuid4-32047e20-00d3-4b66-8f1f-9dc5fa275e0f"
+              property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+              resource="http://data.europa.eu/m8g/Requirement"
+            ></span></div
+          ><div data-content-container="true"><p class="say-paragraph"></p></div
+        ></div>
+      `,
+      bewijsstuk: /* HTML */ `
+        <span
+          class="say-variable"
+          data-say-variable="true"
+          data-say-variable-type="codelist"
+          data-selection-style="single"
+          data-label="bewijsstuk"
+          data-codelist="http://lblod.data.gift/concept-schemes/6810101828455F96985D7CD2"
+          data-source="/raw-sparql"
+          data-say-id="5af9422e-2479-4b3b-8ca6-0a30d66cf254"
+          data-literal-node="true"
+          datatype="http://www.w3.org/2001/XMLSchema#string"
+          ><span
+            style="display: none"
+            class="say-hidden"
+            data-rdfa-container="true"
+          ></span
+          ><span data-content-container="true"
+            ><span
+              class="mark-highlight-manual say-placeholder"
+              placeholdertext="bewijsstuk"
+              contenteditable="false"
+              >bewijsstuk</span
+            ></span
+          ></span
+        >
+      `,
+      voorwaarde: /* HTML */ `
+        <div
+          class="say-editable say-block-rdfa"
+          about="http://data.vlaanderen.be/id/voorwaarden/--ref-uuid4-197c3905-3587-4c33-9765-d34ec7e113a1"
+          data-say-id="d3ecf4b0-f9b5-4ef8-893e-94784f170a61"
+          property="http://www.w3.org/ns/prov#value"
+          lang="nl-be"
+          data-pm-slice="0 0 []"
+          ><div
+            style="display: none"
+            class="say-hidden"
+            data-rdfa-container="true"
+            ><span
+              about="http://data.vlaanderen.be/id/voorwaarden/--ref-uuid4-197c3905-3587-4c33-9765-d34ec7e113a1"
+              property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+              resource="http://data.europa.eu/m8g/Requirement"
+            ></span
+            ><span
+              property="http://www.w3.org/2004/02/skos/core#prefLabel"
+              content="Voorwaarde"
+              lang="nl-be"
+            ></span
+            ><span
+              rev="http://data.europa.eu/m8g/isRequirementOf"
+              resource="http://collection/1"
+            ></span></div
+          ><div data-content-container="true"><p class="say-paragraph"></p></div
+        ></div>
+      `,
+      doelgroep: /* HTML */ `
+        <div>
+          <div
+            class="say-editable say-block-rdfa"
+            about="http://data.vlaanderen.be/7079c444-a934-4ddf-85d1-f0968b5555dd"
+            data-say-id="7079c444-a934-4ddf-85d1-f0968b5555dd"
+            data-pm-slice="0 0 []"
+            ><div
+              style="display: none"
+              class="say-hidden"
+              data-rdfa-container="true"
+              ><span
+                about="http://data.vlaanderen.be/7079c444-a934-4ddf-85d1-f0968b5555dd"
+                property="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                resource="http://data.europa.eu/m8g/Requirement"
+              ></span
+              ><span
+                property="http://www.w3.org/2004/02/skos/core#prefLabel"
+                content="Doelgroep"
+                lang="nl-be"
+              ></span></div
+            ><div data-content-container="true"
+              ><p class="say-paragraph"
+                ><span
+                  class="say-variable"
+                  data-say-variable="true"
+                  data-say-variable-type="codelist"
+                  data-selection-style="single"
+                  data-label="type aanvrager"
+                  data-codelist="http://lblod.data.gift/concept-schemes/680FE8AD28455F96985D7CB9"
+                  data-source="/raw-sparql"
+                  data-say-id="0b1fedba-91c9-4d2d-9720-67bc618e8842"
+                  data-literal-node="true"
+                  datatype="http://www.w3.org/2001/XMLSchema#string"
+                  ><span
+                    style="display: none"
+                    class="say-hidden"
+                    data-rdfa-container="true"
+                  ></span
+                  ><span data-content-container="true"
+                    ><span
+                      class="mark-highlight-manual say-placeholder"
+                      placeholdertext="type aanvrager"
+                      contenteditable="false"
+                      >type aanvrager</span
+                    ></span
+                  ></span
+                >
+                waarbij volgende voorwaarden van toepassing zijn:</p
+              ></div
+            ></div
+          ></div
+        >
+      `,
+    };
+    if (map[thing] && this.controller) {
+      this.controller.doCommand(
+        insertHtml(
+          instantiateUuids(map[thing]),
+          this.controller.mainEditorState.selection.from,
+          this.controller.mainEditorState.selection.to,
+          undefined,
+          false,
+          true,
+        ),
+        { view: this.controller.mainEditorView },
+      );
+      this.controller.withTransaction((tr) => tr.scrollIntoView());
+    }
+  }
+
   <template>
     <AppChrome
       @editorDocument={{this.editorDocument}}
@@ -585,6 +818,16 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         </:toolbar>
         <:sidebarCollapsible>
           {{#if this.controller}}
+            {{#if this.activeNode}}
+              <LinkRdfaNodeButton
+                @controller={{this.controller}}
+                @node={{this.activeNode}}
+                @predicateOptionGenerator={{this.backlinkEditorConfig.predicateOptionGenerator}}
+                @subjectOptionGenerator={{this.backlinkEditorConfig.subjectOptionGenerator
+                  this.controller
+                }}
+              />
+            {{/if}}
             <ArticleStructureCard
               @controller={{this.controller}}
               @options={{this.config.structures}}
@@ -614,6 +857,36 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
               @config={{this.config.lmb}}
             />
 
+            <AuButton
+              @skin='link'
+              @icon='add'
+              {{on 'click' (fn this.insertThing 'doelgroep')}}
+            >{{t 'rdfa-editor-container.citerra.doelgroep'}}</AuButton>
+            <AuButton
+              @skin='link'
+              @icon='add'
+              {{on 'click' (fn this.insertThing 'voorwaarde')}}
+            >{{t 'rdfa-editor-container.citerra.voorwaarde'}}</AuButton>
+            <AuButton
+              @skin='link'
+              @icon='add'
+              {{on 'click' (fn this.insertThing 'bewijsstuk')}}
+            >{{t 'rdfa-editor-container.citerra.bewijsstuk'}}</AuButton>
+            <AuButton
+              @skin='link'
+              @icon='add'
+              {{on 'click' (fn this.insertThing 'zone')}}
+            >{{t 'rdfa-editor-container.citerra.zone'}}</AuButton>
+            <AuButton
+              @skin='link'
+              @icon='add'
+              {{on 'click' (fn this.insertThing 'duurtijd')}}
+            >{{t 'rdfa-editor-container.citerra.duurtijd'}}</AuButton>
+            <AuButton
+              @skin='link'
+              @icon='add'
+              {{on 'click' (fn this.insertThing 'nummerplaten')}}
+            >{{t 'rdfa-editor-container.citerra.nummerplaten'}}</AuButton>
             {{#if this.activeNode}}
               <SnippetInsert
                 @controller={{this.controller}}
@@ -625,6 +898,13 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         </:sidebarCollapsible>
         <:sidebar>
           {{#if this.controller}}
+            {{#if this.activeNode}}
+              <VisualiserCard
+                @controller={{this.controller}}
+                @node={{this.activeNode}}
+                @config={{this.visualizerConfig}}
+              />
+            {{/if}}
             <StructureControlCard @controller={{this.controller}} />
             <CitationCard
               @controller={{this.controller}}

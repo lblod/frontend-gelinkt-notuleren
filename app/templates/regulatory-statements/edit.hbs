@@ -1,8 +1,18 @@
+{{! @glint-nocheck: not typesafe yet }}
 {{page-title (t 'regulatory-statement.page-title')}}
-<RegulatoryStatementEdit
-  @meetingId={{this.model.meetingId}}
-  @documentContainer={{this.model.documentContainer}}
-  @editorDocument={{this.model.editorDocument}}
-  @standardTemplates={{this.model.standardTemplates}}
-/>
+{{#if this.model.isCiterraPoc}}
+  <RegulatoryStatementEditCiterra
+    @meetingId={{this.model.meetingId}}
+    @documentContainer={{this.model.documentContainer}}
+    @editorDocument={{this.model.editorDocument}}
+    @standardTemplates={{this.model.standardTemplates}}
+  />
+{{else}}
+  <RegulatoryStatementEdit
+    @meetingId={{this.model.meetingId}}
+    @documentContainer={{this.model.documentContainer}}
+    @editorDocument={{this.model.editorDocument}}
+    @standardTemplates={{this.model.standardTemplates}}
+  />
+{{/if}}
 {{outlet}}
