@@ -826,6 +826,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
                 @subjectOptionGenerator={{this.backlinkEditorConfig.subjectOptionGenerator
                   this.controller
                 }}
+                @objectOptionGenerator={{this.backlinkEditorConfig.objectOptionGenerator}}
               />
             {{/if}}
             <ArticleStructureCard

@@ -6,8 +6,9 @@ import type {
 import { RDF } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type {
+  PredicateOption,
   PredicateOptionGenerator,
-  SubjectOptionGenerator,
+  TargetOptionGenerator,
   TermOption,
 } from '@lblod/ember-rdfa-editor/components/_private/link-rdfa-node-poc/modal';
 import {
@@ -17,7 +18,6 @@ import {
 import {
   ResourceNodeTerm,
   sayDataFactory,
-  type SayNamedNode,
 } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 import { rdfaInfoPluginKey } from '@lblod/ember-rdfa-editor/plugins/rdfa-info';
 import type { Resource } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/namespace';
@@ -28,12 +28,13 @@ const M8G = namespace('http://data.europa.eu/m8g/', 'm8g');
 const predicateOptionGenerator: PredicateOptionGenerator = ({
   searchString = '',
 } = {}) => {
-  const options: TermOption<SayNamedNode>[] = [
+  const options: PredicateOption[] = [
     {
       label: 'Is voorwaarde van',
       term: sayDataFactory.namedNode(
         'http://data.europa.eu/m8g/isRequirementOf',
       ),
+      direction: 'backlink',
     },
   ];
   return options.filter(
@@ -74,7 +75,7 @@ const SUBJECT_OPTION_MATCHERS: SubjectOptionMatcher[] = [
 
 const subjectOptionGenerator = (
   controller: SayController,
-): SubjectOptionGenerator => {
+): TargetOptionGenerator => {
   return ({ searchString = '' } = {}) => {
     const subjectMapping = rdfaInfoPluginKey.getState(
       controller.mainEditorState,
@@ -108,7 +109,21 @@ const subjectOptionGenerator = (
   };
 };
 
+const objectOptionGenerator: TargetOptionGenerator = ({
+  searchString = '',
+} = {}) => {
+  // FIXME We should add object options but I don't know what we should expect
+  const options: TermOption<ResourceNodeTerm>[] = [];
+  return options.filter(
+    (option) =>
+      option.label?.toLowerCase().includes(searchString.toLowerCase()) ||
+      option.description?.toLowerCase().includes(searchString.toLowerCase()) ||
+      option.term.value.toLowerCase().includes(searchString.toLowerCase()),
+  );
+};
+
 export const BACKLINK_EDITOR_CONFIG = {
   predicateOptionGenerator,
   subjectOptionGenerator,
+  objectOptionGenerator,
 };
