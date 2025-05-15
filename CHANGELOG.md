@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.58.1
+
+### Patch Changes
+
+- [`bd3e672`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bd3e67250c599a374178b67c5e85fc36c5516ecb) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update `@lblod/ember-rdfa-editor` to version [12.6.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.6.1)
+
+- [#857](https://github.com/lblod/frontend-gelinkt-notuleren/pull/857) [`113ab75`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/113ab75c375f280de159a48ef0f199e1b85fdcb9) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Validate decision presence in treatment
+
 ## 5.58.0
 
 ### Minor Changes
