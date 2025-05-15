@@ -23,11 +23,17 @@ export default class DocumentContainerModel extends Model {
     async: true,
   })
   declare currentVersion: AsyncBelongsTo<EditorDocumentModel>;
-  @belongsTo('concept', { inverse: null, async: true })
+  @belongsTo<ConceptModel>('concept', { inverse: null, async: true })
   declare status: AsyncBelongsTo<ConceptModel>;
-  @belongsTo('editor-document-folder', { inverse: null, async: true })
+  @belongsTo<EditorDocumentFolderModel>('editor-document-folder', {
+    inverse: null,
+    async: true,
+  })
   declare folder: AsyncBelongsTo<EditorDocumentFolderModel>;
-  @belongsTo('bestuurseenheid', { inverse: null, async: true })
+  @belongsTo<BestuurseenheidModel>('bestuurseenheid', {
+    inverse: null,
+    async: true,
+  })
   declare publisher: AsyncBelongsTo<BestuurseenheidModel>;
 
   @hasMany<EditorDocumentModel>('editor-document', {

@@ -1,5 +1,6 @@
 export interface Context {
   vocab: string;
+  typeof?: string;
   prefix: Record<string, string>;
 }
 
