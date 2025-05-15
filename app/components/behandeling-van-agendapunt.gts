@@ -41,6 +41,7 @@ import TreatmentVoting from './treatment/voting';
 import TreatmentVotingEdit from './treatment/voting/edit';
 import type { AgendapointTreatmentValidationResult } from 'frontend-gelinkt-notuleren/services/meeting';
 import type { ParticipationInfo } from './participation-list/modal';
+import WithTooltip from './with-tooltip';
 type Signature = {
   Args: {
     meeting: ZittingModel;
@@ -496,6 +497,7 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
       @title={{t 'behandeling-van-agendapunten.content-title'}}
     >
       <:body>
+
         {{#if this.attachments}}
           {{#if this.editable}}
             <AuPill
@@ -521,19 +523,38 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
       </:body>
 
       <:button>
-        {{#if (and this.editable @behandeling.documentContainer)}}
-          <AuLink
-            @route='agendapoints.edit'
-            @model={{@behandeling.documentContainer.id}}
-            @query={{hash returnToMeeting=@meeting.id}}
-            @skin='button-secondary'
-            @icon='pencil'
-            @iconAlignment='left'
-            class='au-u-hide-on-print'
-          >
-            {{t 'generic.edit'}}
-          </AuLink>
-        {{/if}}
+        <div class='au-u-flex au-u-flex--vertical-center au-u-flex--spaced'>
+          {{#unless @validationResult.decisionPresent}}
+            <WithTooltip
+              @tooltip={{t
+                'behandeling-van-agendapunten.no-decision-present-explanation'
+                email='gelinktnotuleren@vlaanderen.be'
+              }}
+              @placement='bottom-start'
+            >
+              <AuPill
+                @skin='warning'
+                @icon='alert-triangle'
+                @iconAlignment='left'
+              >
+                {{t 'behandeling-van-agendapunten.no-decision-present'}}
+              </AuPill>
+            </WithTooltip>
+          {{/unless}}
+          {{#if (and this.editable @behandeling.documentContainer)}}
+            <AuLink
+              @route='agendapoints.edit'
+              @model={{@behandeling.documentContainer.id}}
+              @query={{hash returnToMeeting=@meeting.id}}
+              @skin='button-secondary'
+              @icon='pencil'
+              @iconAlignment='left'
+              class='au-u-hide-on-print'
+            >
+              {{t 'generic.edit'}}
+            </AuLink>
+          {{/if}}
+        </div>
       </:button>
     </MeetingSubSection>
   </template>

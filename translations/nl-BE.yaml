@@ -85,6 +85,8 @@ behandeling-van-agendapunten:
   edit-document: 'Bewerk document'
   sync-warning: Gegevens mogelijks overschreven door synchronisatie
   add-custom-voting: Aangepaste stemming toevoegen
+  no-decision-present: Geen besluit aanwezig
+  no-decision-present-explanation: Dit agendapunt bevat geen besluit en zal niet worden opgenomen in de publicatie van de besluitenlijst. Als dit niet is wat u verwachtte, controleer dan de inhoud van het agendapunt of neem contact op met support op {email}
 
 contact:
   about: Waar gaat uw bericht over?
@@ -454,12 +456,12 @@ meeting-toc-card:
     treatments:
       label: Behandelingen
       validation:
-        success: De aanwezigheid van de onderstaande behandeling werd correct ingevuld
-        warning: Er werden enkele problemen aangetroffen bij de aanwezigheid van onderstaande behandelingen
+        success: De onderstaande behandelingen werd correct ingevuld
+        warning: Er werden enkele problemen aangetroffen bij onderstaande behandelingen
     treatment:
       validation:
-        success: Deze aanwezigheid van deze behandeling is correct ingevuld
-        warning: Er werden enkele problemen aangetroffen bij de aanwezigheid van deze behandeling
+        success: Deze behandeling is correct ingevuld
+        warning: Er werden enkele problemen aangetroffen bij deze behandeling
     outro:
       label: Einde van de zitting
       validation:
