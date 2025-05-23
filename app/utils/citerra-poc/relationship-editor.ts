@@ -8,9 +8,11 @@ import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type {
   PredicateOption,
   PredicateOptionGenerator,
-  TargetOptionGenerator,
+  ObjectOptionGenerator,
+  SubjectOptionGenerator,
   TermOption,
-} from '@lblod/ember-rdfa-editor/components/_private/link-rdfa-node-poc/modal';
+  OptionGeneratorConfig,
+} from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/types';
 import {
   isRdfaAttrs,
   type RdfaResourceAttrs,
@@ -75,7 +77,7 @@ const SUBJECT_OPTION_MATCHERS: SubjectOptionMatcher[] = [
 
 const subjectOptionGenerator = (
   controller: SayController,
-): TargetOptionGenerator => {
+): SubjectOptionGenerator => {
   return ({ searchString = '' } = {}) => {
     const subjectMapping = rdfaInfoPluginKey.getState(
       controller.mainEditorState,
@@ -109,7 +111,7 @@ const subjectOptionGenerator = (
   };
 };
 
-const objectOptionGenerator: TargetOptionGenerator = ({
+const objectOptionGenerator: ObjectOptionGenerator = ({
   searchString = '',
 } = {}) => {
   // FIXME We should add object options but I don't know what we should expect
@@ -122,8 +124,10 @@ const objectOptionGenerator: TargetOptionGenerator = ({
   );
 };
 
-export const BACKLINK_EDITOR_CONFIG = {
-  predicateOptionGenerator,
-  subjectOptionGenerator,
-  objectOptionGenerator,
-};
+export const relationshipEditorConfig: (
+  controller: SayController,
+) => OptionGeneratorConfig = (controller) => ({
+  predicates: predicateOptionGenerator,
+  subjects: subjectOptionGenerator(controller),
+  objects: objectOptionGenerator,
+});

@@ -18,9 +18,16 @@ import EditorContainer from '@lblod/ember-rdfa-editor/components/editor-containe
 import Editor from '@lblod/ember-rdfa-editor/components/editor';
 import Sidebar from '@lblod/ember-rdfa-editor/components/sidebar';
 import ResponsiveToolbar from '@lblod/ember-rdfa-editor/components/responsive-toolbar';
+
+import NodeControlsCard from '@lblod/ember-rdfa-editor/components/_private/node-controls/card';
+import DocImportedResourceEditorCard from '@lblod/ember-rdfa-editor/components/_private/doc-imported-resource-editor/card';
+import ImportedResourceLinkerCard from '@lblod/ember-rdfa-editor/components/_private/imported-resource-linker/card';
+import ExternalTripleEditorCard from '@lblod/ember-rdfa-editor/components/_private/external-triple-editor/card';
+import RelationshipEditorCard from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/card';
+import { documentConfig } from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/configs';
 import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attribute-editor';
-import RdfaEditor from '@lblod/ember-rdfa-editor/components/_private/rdfa-editor';
 import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
+
 import type {
   NodeViewConstructor,
   Plugin,
@@ -79,8 +86,13 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
   @service declare features: Features;
   @tracked controller?: SayController;
   @tracked ready = false;
+
+  NodeControlsCard = NodeControlsCard;
+  DocImportedResourceEditorCard = DocImportedResourceEditorCard;
+  ImportedResourceLinkerCard = ImportedResourceLinkerCard;
+  ExternalTripleEditorCard = ExternalTripleEditorCard;
+  RelationshipEditorCard = RelationshipEditorCard;
   AttributeEditor = AttributeEditor;
-  RdfaEditor = RdfaEditor;
   DebugInfo = DebugInfo;
 
   /**
@@ -171,6 +183,10 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
     return attrString;
   }
 
+  get optionGeneratorConfig() {
+    return this.controller && documentConfig(this.controller);
+  }
+
   <template>
     {{#if @busy}}
       <AuBodyContainer>
@@ -217,16 +233,12 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
               {{#if this.controller}}
                 <ResponsiveToolbar>
                   <:main as |Tb|>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <ToolbarHistory @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <ToolbarStyling @controller={{this.controller}} />
-                      {{! @glint-expect-error no arg types }}
                       <TextStyleSubscript @controller={{this.controller}} />
-                      {{! @glint-expect-error no arg types }}
                       <TextStyleSuperscript @controller={{this.controller}} />
                       <TextStyleHighlight
                         @controller={{this.controller}}
@@ -237,25 +249,20 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                         @defaultColor='#000000'
                       />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <ToolbarList @controller={{this.controller}} />
                       <IndentationMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <LinkMenu @controller={{this.controller}} />
                       <ImageInsertMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <TableMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <HeadingMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <AlignmentMenu @controller={{this.controller}} />
                     </Tb.Group>
@@ -263,7 +270,6 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                     <Tb.Spacer />
                   </:main>
                   <:side as |Tb|>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       {{yield to='toolbar'}}
                     </Tb.Group>
@@ -292,17 +298,38 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                   {{/if}}
                   {{yield to='sidebar'}}
                   {{#if @shouldEditRdfa}}
-                    {{#if this.activeNode}}
-                      <this.RdfaEditor
-                        @node={{this.activeNode}}
-                        @controller={{this.controller}}
-                      />
-                      <this.AttributeEditor
-                        @node={{this.activeNode}}
-                        @controller={{this.controller}}
-                      />
-                      <this.DebugInfo @node={{this.activeNode}} />
-                    {{/if}}
+                    <div
+                      class='au-u-flex au-u-flex--column au-u-flex--spaced-tiny'
+                    >
+                      {{#if this.activeNode}}
+                        <NodeControlsCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <RelationshipEditorCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfig}}
+                        />
+                        <DocImportedResourceEditorCard
+                          @controller={{this.controller}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfig}}
+                        />
+                        <ImportedResourceLinkerCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <ExternalTripleEditorCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <DebugInfo @node={{this.activeNode}} />
+                        <AttributeEditor
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                      {{/if}}
+                    </div>
                   {{/if}}
                 </Sidebar>
               {{/if}}
