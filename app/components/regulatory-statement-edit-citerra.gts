@@ -68,6 +68,7 @@ import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import {
   PNode,
+  ProsePlugin,
   SayController,
   Schema,
   type NodeViewConstructor,
@@ -84,7 +85,7 @@ import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 import VisualiserCard from '@lblod/ember-rdfa-editor/components/_private/rdfa-visualiser/visualiser-card';
-import LinkRdfaNodeButton from '@lblod/ember-rdfa-editor/components/_private/link-rdfa-node-poc/button';
+import CreateRelationshipButton from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/create-button';
 import type { Option } from '@lblod/ember-rdfa-editor/utils/_private/option';
 import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
 import {
@@ -163,7 +164,7 @@ import {
   OCMW,
 } from 'frontend-gelinkt-notuleren/utils/bestuurseenheid-classificatie-codes';
 import { RDFA_VISUALIZER_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/visualizer';
-import { BACKLINK_EDITOR_CONFIG } from 'frontend-gelinkt-notuleren/utils/citerra-poc/backlink-editor';
+import { relationshipEditorConfig } from 'frontend-gelinkt-notuleren/utils/citerra-poc/relationship-editor';
 import type Store from 'frontend-gelinkt-notuleren/services/store';
 import type DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
@@ -276,7 +277,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
     };
   }
 
-  get plugins() {
+  get plugins(): ProsePlugin[] {
     return [
       ...tablePlugins,
       tableKeymap,
@@ -473,7 +474,10 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
    * CITERRA POC
    */
   visualizerConfig = RDFA_VISUALIZER_CONFIG;
-  backlinkEditorConfig = BACKLINK_EDITOR_CONFIG;
+
+  get backlinkEditorConfig() {
+    return this.controller && relationshipEditorConfig(this.controller);
+  }
 
   @action
   insertThing(thing: string) {
@@ -819,14 +823,10 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
         <:sidebarCollapsible>
           {{#if this.controller}}
             {{#if this.activeNode}}
-              <LinkRdfaNodeButton
+              <CreateRelationshipButton
                 @controller={{this.controller}}
                 @node={{this.activeNode}}
-                @predicateOptionGenerator={{this.backlinkEditorConfig.predicateOptionGenerator}}
-                @subjectOptionGenerator={{this.backlinkEditorConfig.subjectOptionGenerator
-                  this.controller
-                }}
-                @objectOptionGenerator={{this.backlinkEditorConfig.objectOptionGenerator}}
+                @optionGeneratorConfig={{this.backlinkEditorConfig}}
               />
             {{/if}}
             <ArticleStructureCard
@@ -902,7 +902,6 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
             {{#if this.activeNode}}
               <VisualiserCard
                 @controller={{this.controller}}
-                @node={{this.activeNode}}
                 @config={{this.visualizerConfig}}
               />
             {{/if}}
