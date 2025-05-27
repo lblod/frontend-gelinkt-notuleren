@@ -33,7 +33,14 @@ export default class ZittingModel extends Model {
 
   @hasMany('agenda', { inverse: null, async: true })
   declare publicatieAgendas: AsyncHasMany<Agenda>;
-  @hasMany('agendapunt', { inverse: 'zitting', async: true, as: 'zitting' })
+
+  // @ts-expect-error add types for `defaultPageSize`
+  @hasMany('agendapunt', {
+    inverse: 'zitting',
+    defaultPageSize: 100,
+    async: true,
+    as: 'zitting',
+  })
   declare agendapunten: AsyncHasMany<Agendapunt>;
 
   // @ts-expect-error add types for `defaultPageSize`
