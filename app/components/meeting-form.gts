@@ -33,7 +33,7 @@ import { add } from 'ember-math-helpers';
  */
 import { trackedFunction } from 'reactiveweb/function';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
-import { all, restartableTask, task } from 'ember-concurrency';
+import { all, restartableTask, task, timeout } from 'ember-concurrency';
 
 /**
  * Ember-data models
@@ -96,6 +96,9 @@ import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
 import type { ParticipationInfo } from './participation-list/modal';
 import type UserPreferencesService from 'frontend-gelinkt-notuleren/services/user-preferences';
 import { localCopy } from 'tracked-toolbox';
+import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
+import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
+import DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
 
 type Signature = {
   Args: {
@@ -111,6 +114,7 @@ export default class MeetingForm extends Component<Signature> {
   @service declare router: RouterService;
   @service declare intl: IntlService;
   @service('meeting') declare meetingService: MeetingService;
+  @service declare documentService: DocumentService;
 
   validation = trackedFunction(this, async () => {
     const zitting = this.zitting;
@@ -501,6 +505,34 @@ export default class MeetingForm extends Component<Signature> {
     this.showDeleteModal = !this.showDeleteModal;
   }
 
+  instantiateUuids = task(async () => {
+    await timeout(300);
+    const agendapoints = await this.zitting.agendapunten;
+    const documentContainers = (await Promise.all(
+      agendapoints.map((ap) =>
+        ap.behandeling.then(
+          (behandeling) => unwrap(behandeling).documentContainer,
+        ),
+      ),
+    )) as DocumentContainerModel[];
+    for (const container of documentContainers) {
+      const currentVersion = unwrap(await container.currentVersion);
+      const currentContent = currentVersion.content;
+      const instantiatedContent = currentContent
+        ? templateUuidInstantiator(currentContent)
+        : '';
+      console.log('Instantiated content:' , instantiatedContent);
+      if (currentContent !== instantiatedContent) {
+        await this.documentService.createEditorDocument.perform(
+          currentVersion.title ?? '',
+          instantiatedContent,
+          container,
+          currentVersion,
+        );
+      }
+    }
+  });
+
   <template>
     <div class='au-c-app-chrome' {{didInsert this.fetchTreatments.perform}}>
       <AuToolbar @size='small' class='au-u-padding-bottom-none' as |Group|>
@@ -557,6 +589,11 @@ export default class MeetingForm extends Component<Signature> {
           {{/if}}
         </Group>
         <Group class='au-u-flex--vertical-center'>
+          <AuButton
+            {{on 'click' this.instantiateUuids.perform}}
+            @loading={{this.instantiateUuids.isRunning}}
+            @loadingMessage='Aan het laden...'
+          >Instantiate Uuids</AuButton>
           <AuToggleSwitch
             @checked={{@focused}}
             @onChange={{this.toggleFocusMode}}
