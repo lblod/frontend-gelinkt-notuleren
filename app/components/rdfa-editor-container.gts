@@ -217,11 +217,9 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
               {{#if this.controller}}
                 <ResponsiveToolbar>
                   <:main as |Tb|>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <ToolbarHistory @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <ToolbarStyling @controller={{this.controller}} />
                       {{! @glint-expect-error no arg types }}
@@ -237,25 +235,20 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                         @defaultColor='#000000'
                       />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <ToolbarList @controller={{this.controller}} />
                       <IndentationMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <LinkMenu @controller={{this.controller}} />
                       <ImageInsertMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <TableMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <HeadingMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       <AlignmentMenu @controller={{this.controller}} />
                     </Tb.Group>
@@ -263,7 +256,6 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                     <Tb.Spacer />
                   </:main>
                   <:side as |Tb|>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
                     <Tb.Group>
                       {{yield to='toolbar'}}
                     </Tb.Group>
