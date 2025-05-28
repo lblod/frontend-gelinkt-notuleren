@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.59.0
+
+### Minor Changes
+
+- [`c6c4623`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c6c4623a569cebb7db9826c40d4968aaf27cf088) Thanks [@piemonkey](https://github.com/piemonkey)! - Update @lblod/ember-rdfa-editor to [12.7.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.7.0) and @lblod/ember-rdfa-editor-lblod-plugins to [31.1.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v31.1.1)
+
+### Patch Changes
+
+- [#858](https://github.com/lblod/frontend-gelinkt-notuleren/pull/858) [`e1ddc6d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e1ddc6d02964d4ff1f83dccfec7ad85f7a805122) Thanks [@piemonkey](https://github.com/piemonkey)! - Split Citerra PoC regulatory statement edit page changes into a separate component
+
 ## 5.58.1
 
 ### Patch Changes
