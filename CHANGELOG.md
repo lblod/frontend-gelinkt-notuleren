@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.59.1
+
+### Patch Changes
+
+- [`26bafb1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/26bafb1e0a938c70ca835c413b2fa0e618bad45a) Thanks [@piemonkey](https://github.com/piemonkey)! - Attempt to fix build of version 5.59.0
+
 ## 5.59.0
 
 ### Minor Changes
