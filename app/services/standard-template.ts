@@ -5,7 +5,7 @@ import type Owner from '@ember/owner';
 import type StandardTemplate from '@lblod/ember-rdfa-editor-lblod-plugins/models/template';
 import { isSome } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type Store from 'frontend-gelinkt-notuleren/services/store';
-import TemplateModel from 'frontend-gelinkt-notuleren/models/template';
+import type TemplateModel from 'frontend-gelinkt-notuleren/models/template';
 
 const BLACKLISTED_TEMPLATES = new Set(['Citeeropschrift']);
 

@@ -6,7 +6,12 @@ import { removePropertiesOfDeletedNodes } from '@lblod/ember-rdfa-editor/plugins
 import { defaultAttributeValueGeneration } from '@lblod/ember-rdfa-editor/plugins/default-attribute-value-generation';
 import { rdfaInfoPlugin } from '@lblod/ember-rdfa-editor/plugins/rdfa-info';
 
-import { PNode, SayController, Schema } from '@lblod/ember-rdfa-editor';
+import {
+  PNode,
+  SayController,
+  Schema,
+  type NodeViewConstructor,
+} from '@lblod/ember-rdfa-editor';
 import {
   em,
   strikethrough,
@@ -283,7 +288,8 @@ export default class AgendapointEditorService extends Service {
         codelist: codelistView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
-        block_rdfa: (node: PNode) => new BlockRDFaView(node),
+        block_rdfa: (...args: Parameters<NodeViewConstructor>) =>
+          new BlockRDFaView(args, controller),
 
         snippet_placeholder: snippetPlaceholderView(this.config.snippet)(
           controller,

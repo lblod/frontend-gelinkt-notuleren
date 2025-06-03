@@ -24,7 +24,11 @@ import DocImportedResourceEditorCard from '@lblod/ember-rdfa-editor/components/_
 import ImportedResourceLinkerCard from '@lblod/ember-rdfa-editor/components/_private/imported-resource-linker/card';
 import ExternalTripleEditorCard from '@lblod/ember-rdfa-editor/components/_private/external-triple-editor/card';
 import RelationshipEditorCard from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/card';
-import { documentConfig } from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/configs';
+import {
+  combineConfigs,
+  documentConfig,
+  lovConfig,
+} from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/configs';
 import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attribute-editor';
 import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
 
@@ -57,6 +61,12 @@ import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import t from 'ember-intl/helpers/t';
 import { htmlSafe } from '@ember/template';
 import { hash } from '@ember/helper';
+import { restartableTask, timeout } from 'ember-concurrency';
+import type {
+  OptionGeneratorConfig,
+  PredicateOptionGeneratorArgs,
+  TargetOptionGeneratorArgs,
+} from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/types';
 
 interface Sig {
   Args: {
@@ -183,9 +193,40 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
     return attrString;
   }
 
-  get optionGeneratorConfig() {
-    return this.controller && documentConfig(this.controller);
+  get optionGeneratorConfig(): OptionGeneratorConfig | undefined {
+    if (this.controller) {
+      return combineConfigs(documentConfig(this.controller), lovConfig());
+    }
   }
+
+  subjectOptionGeneratorTask = restartableTask(
+    async (args?: TargetOptionGeneratorArgs) => {
+      await timeout(200);
+      const result = (await this.optionGeneratorConfig?.subjects?.(args)) ?? [];
+      return result;
+    },
+  );
+  predicateOptionGeneratorTask = restartableTask(
+    async (args?: PredicateOptionGeneratorArgs) => {
+      await timeout(200);
+      const result =
+        (await this.optionGeneratorConfig?.predicates?.(args)) ?? [];
+      return result;
+    },
+  );
+  objectOptionGeneratorTask = restartableTask(
+    async (args?: TargetOptionGeneratorArgs) => {
+      await timeout(200);
+      const result = (await this.optionGeneratorConfig?.objects?.(args)) ?? [];
+      return result;
+    },
+  );
+
+  optionGeneratorConfigTaskified: OptionGeneratorConfig = {
+    subjects: this.subjectOptionGeneratorTask.perform.bind(this),
+    predicates: this.predicateOptionGeneratorTask.perform.bind(this),
+    objects: this.objectOptionGeneratorTask.perform.bind(this),
+  };
 
   <template>
     {{#if @busy}}
@@ -309,11 +350,11 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                         <RelationshipEditorCard
                           @node={{this.activeNode}}
                           @controller={{this.controller}}
-                          @optionGeneratorConfig={{this.optionGeneratorConfig}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
                         />
                         <DocImportedResourceEditorCard
                           @controller={{this.controller}}
-                          @optionGeneratorConfig={{this.optionGeneratorConfig}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
                         />
                         <ImportedResourceLinkerCard
                           @node={{this.activeNode}}

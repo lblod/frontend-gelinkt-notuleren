@@ -159,7 +159,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
-        block_rdfa: (node) => new BlockRDFaView(node),
+        block_rdfa: (...args) => new BlockRDFaView(args, controller),
       };
     };
   }

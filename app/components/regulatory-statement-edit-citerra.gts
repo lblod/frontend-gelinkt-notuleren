@@ -67,7 +67,6 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import {
-  PNode,
   ProsePlugin,
   SayController,
   Schema,
@@ -265,7 +264,8 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
         text_variable: textVariableView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
-        block_rdfa: (node: PNode) => new BlockRDFaView(node),
+        block_rdfa: (...args: Parameters<NodeViewConstructor>) =>
+          new BlockRDFaView(args, controller),
         snippet_placeholder: snippetPlaceholderView(this.config.snippet)(
           controller,
         ),

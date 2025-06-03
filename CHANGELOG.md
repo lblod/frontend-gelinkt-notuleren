@@ -1,5 +1,31 @@
 # frontend-gelinkt-notuleren
 
+## 5.59.2
+
+### Patch Changes
+
+- [`8fd0807`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8fd08071ec6428dacc62d92e214e4b97c746c203) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [12.8.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.8.0)
+
+- [#860](https://github.com/lblod/frontend-gelinkt-notuleren/pull/860) [`a415809`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a41580922319b881694e6fab961031a9b75c848a) Thanks [@elpoelma](https://github.com/elpoelma)! - Increase `defaultPageSize` limit to 100 for `agendapoints` relationship of `zitting` model
+
+- [`8fd0807`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8fd08071ec6428dacc62d92e214e4b97c746c203) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [32.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.1.0)
+
+## 5.59.1
+
+### Patch Changes
+
+- [`26bafb1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/26bafb1e0a938c70ca835c413b2fa0e618bad45a) Thanks [@piemonkey](https://github.com/piemonkey)! - Attempt to fix build of version 5.59.0
+
+## 5.59.0
+
+### Minor Changes
+
+- [`c6c4623`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c6c4623a569cebb7db9826c40d4968aaf27cf088) Thanks [@piemonkey](https://github.com/piemonkey)! - Update @lblod/ember-rdfa-editor to [12.7.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.7.0) and @lblod/ember-rdfa-editor-lblod-plugins to [31.1.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v31.1.1)
+
+### Patch Changes
+
+- [#858](https://github.com/lblod/frontend-gelinkt-notuleren/pull/858) [`e1ddc6d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e1ddc6d02964d4ff1f83dccfec7ad85f7a805122) Thanks [@piemonkey](https://github.com/piemonkey)! - Split Citerra PoC regulatory statement edit page changes into a separate component
+
 ## 5.58.1
 
 ### Patch Changes
