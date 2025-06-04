@@ -33,7 +33,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^3.7.0",
+    "@appuniversum/ember-appuniversum": "^3.11.0",
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.26.5",
     "@babel/plugin-proposal-decorators": "^7.25.9",
@@ -64,7 +64,7 @@
     "@lblod/ember-acmidm-login": "^2.1.0",
     "@lblod/ember-environment-banner": "^0.6.0",
     "@lblod/ember-mock-login": "^0.10.0",
-    "@lblod/ember-rdfa-editor": "12.7.0",
+    "@lblod/ember-rdfa-editor": "12.7.0-dev.1084f30db4b13f5669637e937f28916be697acce",
     "@lblod/ember-rdfa-editor-lblod-plugins": "31.1.1",
     "@lblod/template-uuid-instantiator": "^1.0.3",
     "@nullvoxpopuli/ember-composable-helpers": "^5.2.6",

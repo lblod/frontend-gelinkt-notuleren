@@ -50,7 +50,12 @@ import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import t from 'ember-intl/helpers/t';
 import { htmlSafe } from '@ember/template';
 import { hash } from '@ember/helper';
-
+import HtmlEditorMenu from '@lblod/ember-rdfa-editor/components/plugins/html-editor/menu';
+import ToolbarDropdown from '@lblod/ember-rdfa-editor/components/toolbar/dropdown';
+import FormatTextIcon from '@lblod/ember-rdfa-editor/components/icons/format-text';
+import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus';
+import { ThreeDotsIcon } from '@appuniversum/ember-appuniversum/components/icons/three-dots';
+import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
 interface Sig {
   Args: {
     editorDocument?: EditorDocumentModel;
@@ -82,6 +87,9 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
   AttributeEditor = AttributeEditor;
   RdfaEditor = RdfaEditor;
   DebugInfo = DebugInfo;
+  FormatTextIcon = FormatTextIcon;
+  PlusIcon = PlusIcon;
+  ThreeDotsIcon = ThreeDotsIcon;
 
   /**
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
@@ -217,47 +225,86 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
               {{#if this.controller}}
                 <ResponsiveToolbar>
                   <:main as |Tb|>
+                    {{! @glint-expect-error insufficient types for ResponsiveToolbar}}
                     <Tb.Group>
                       <ToolbarHistory @controller={{this.controller}} />
                     </Tb.Group>
                     <Tb.Group>
-                      <ToolbarStyling @controller={{this.controller}} />
-                      {{! @glint-expect-error no arg types }}
-                      <TextStyleSubscript @controller={{this.controller}} />
-                      {{! @glint-expect-error no arg types }}
-                      <TextStyleSuperscript @controller={{this.controller}} />
-                      <TextStyleHighlight
-                        @controller={{this.controller}}
-                        @defaultColor='#FFEA00'
-                      />
+                      <ToolbarDropdown
+                        @icon={{this.FormatTextIcon}}
+                        @direction='horizontal'
+                        as |Menu|
+                      >
+                        <ToolbarStyling
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                        <TextStyleSuperscript
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                        <TextStyleSubscript
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                        <HeadingMenu
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                      </ToolbarDropdown>
                       <TextStyleColor
                         @controller={{this.controller}}
                         @defaultColor='#000000'
                       />
-                    </Tb.Group>
-                    <Tb.Group>
-                      <ToolbarList @controller={{this.controller}} />
-                      <IndentationMenu @controller={{this.controller}} />
-                    </Tb.Group>
-                    <Tb.Group>
-                      <LinkMenu @controller={{this.controller}} />
-                      <ImageInsertMenu @controller={{this.controller}} />
+                      <TextStyleHighlight
+                        @controller={{this.controller}}
+                        @defaultColor='#FFEA00'
+                      />
                     </Tb.Group>
                     <Tb.Group>
                       <TableMenu @controller={{this.controller}} />
                     </Tb.Group>
                     <Tb.Group>
-                      <HeadingMenu @controller={{this.controller}} />
+                      <ToolbarList @controller={{this.controller}} />
                     </Tb.Group>
                     <Tb.Group>
                       <AlignmentMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
-                    <Tb.Spacer />
+                    <Tb.Group>
+                      <IndentationMenu @controller={{this.controller}} />
+                    </Tb.Group>
+                    <Tb.Group>
+                      <ToolbarDropdown
+                        @icon={{this.PlusIcon}}
+                        @direction='horizontal'
+                        as |Menu|
+                      >
+                        <LinkMenu
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                        <ImageInsertMenu
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                      </ToolbarDropdown>
+                    </Tb.Group>
                   </:main>
                   <:side as |Tb|>
+                    {{yield to='toolbar'}}
                     <Tb.Group>
-                      {{yield to='toolbar'}}
+                      <ToolbarDropdown
+                        @icon={{this.ThreeDotsIcon}}
+                        @direction='horizontal'
+                        as |Menu|
+                      >
+                        <HtmlEditorMenu
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                        <FormattingToggle @controller={{this.controller}} />
+                      </ToolbarDropdown>
+
                     </Tb.Group>
                   </:side>
                 </ResponsiveToolbar>

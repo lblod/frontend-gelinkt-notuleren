@@ -85,7 +85,7 @@ import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private
 import VisualiserCard from '@lblod/ember-rdfa-editor/components/_private/rdfa-visualiser/visualiser-card';
 import LinkRdfaNodeButton from '@lblod/ember-rdfa-editor/components/_private/link-rdfa-node-poc/button';
 import type { Option } from '@lblod/ember-rdfa-editor/utils/_private/option';
-import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
+
 import {
   templateComment,
   templateCommentView,
@@ -812,8 +812,9 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       >
         <:toolbar>
           {{#if this.controller}}
-            <FormattingToggle @controller={{this.controller}} />
-            <ToolbarButton @controller={{this.controller}} />
+            <div class='au-u-margin-right-small'>
+              <ToolbarButton @controller={{this.controller}} />
+            </div>
           {{/if}}
         </:toolbar>
         <:sidebarCollapsible>

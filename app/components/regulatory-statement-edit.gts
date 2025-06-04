@@ -579,8 +579,9 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       >
         <:toolbar>
           {{#if this.controller}}
-            <FormattingToggle @controller={{this.controller}} />
-            <ToolbarButton @controller={{this.controller}} />
+            <div class='au-u-margin-right-small'>
+              <ToolbarButton @controller={{this.controller}} />
+            </div>
           {{/if}}
         </:toolbar>
         <:sidebarCollapsible>
