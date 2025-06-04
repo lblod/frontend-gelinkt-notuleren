@@ -102,18 +102,18 @@
     @shouldEditRdfa={{false}}
   >
     <:toolbar>
-      <div class="au-u-margin-right-small">
-      <BesluitTypePlugin::ToolbarDropdown
-        @controller={{this.controller}}
-        @classificatieUri={{this.config.classificatieUri}}
-        @options={{this.config.besluitType}}
-      />
+      <div class='au-u-margin-right-small'>
+        <BesluitTypePlugin::ToolbarDropdown
+          @controller={{this.controller}}
+          @classificatieUri={{this.config.classificatieUri}}
+          @options={{this.config.besluitType}}
+        />
       </div>
-      <div class="au-u-margin-right-small">
-      <BesluitTopicPlugin::BesluitTopicToolbarDropdown
-        @controller={{this.controller}}
-        @options={{this.config.besluitTopic}}
-      />
+      <div class='au-u-margin-right-small'>
+        <BesluitTopicPlugin::BesluitTopicToolbarDropdown
+          @controller={{this.controller}}
+          @options={{this.config.besluitTopic}}
+        />
       </div>
     </:toolbar>
     <:sidebarCollapsible>
