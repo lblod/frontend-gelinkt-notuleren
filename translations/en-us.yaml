@@ -85,6 +85,8 @@ behandeling-van-agendapunten:
   edit-document: 'Edit document'
   sync-warning: Data possibly overwritten by synchronization
   add-custom-voting: Add custom voting
+  no-decision-present: No decision present
+  no-decision-present-explanation: This agenda item does not contain a decision, and will not be included in the decision list publication. If that is not what you expected, please verify the agenda-item contents or contact support at {email}
 
 contact:
   about: What is your message about?
@@ -448,10 +450,13 @@ meeting-toc-card:
         success: The intro of this meeting is correctly filled in
     treatments:
       label: Treatments
+      validation:
+        success: The treatments below were completed correctly
+        warning: A few problems were found in the following treatments
     treatment:
       validation:
-        success: The attendance of this treatment is correctly filled in
-        warning: A few problems were found in the attendance section of this treatment
+        success: This treatment is correctly filled in
+        warning: A few problems were found in this treatment
     outro:
       label: Meeting outro
       validation:

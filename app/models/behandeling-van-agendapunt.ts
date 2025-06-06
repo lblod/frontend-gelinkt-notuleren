@@ -60,20 +60,16 @@ export default class BehandelingVanAgendapunt extends Model {
   })
   declare besluiten: AsyncHasMany<BesluitModel>;
 
-  // @ts-expect-error add types for `defaultPageSize`
   @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare aanwezigen: AsyncHasMany<MandatarisModel>;
 
-  // @ts-expect-error add types for `defaultPageSize`
   @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare afwezigen: AsyncHasMany<MandatarisModel>;
 
-  // @ts-expect-error add types for `defaultPageSize`
   @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare nietToegekendeMandatarissen: AsyncHasMany<MandatarisModel>;
 
   // original queries did "fetch all" pagination loops
-  // @ts-expect-error add types for `defaultPageSize`
   @hasMany('stemming', {
     inverse: 'behandelingVanAgendapunt',
     defaultPageSize: 1000,
@@ -81,7 +77,6 @@ export default class BehandelingVanAgendapunt extends Model {
   })
   declare stemmingen: AsyncHasMany<StemmingModel>;
 
-  // @ts-expect-error add types for `defaultPageSize`
   @hasMany('custom-voting', {
     inverse: 'behandelingVanAgendapunt',
     defaultPageSize: 1000,
