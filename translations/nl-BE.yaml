@@ -665,6 +665,10 @@ rdfa-editor-container:
     zone: Zone
     duurtijd: Duurtijd
     nummerplaten: Nummerplaten
+  toolbar:
+    format-text: Tekstformaat
+    insert: Menu invoegen
+    more: Meer opties
 
 regulatory-statements-plugin:
   type: Reglementaire bijlage

@@ -82,7 +82,6 @@ import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 import type { Option } from '@lblod/ember-rdfa-editor/utils/_private/option';
-import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
 import {
   templateComment,
   templateCommentView,
@@ -579,8 +578,9 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       >
         <:toolbar>
           {{#if this.controller}}
-            <FormattingToggle @controller={{this.controller}} />
-            <ToolbarButton @controller={{this.controller}} />
+            <div class='au-u-margin-right-small'>
+              <ToolbarButton @controller={{this.controller}} />
+            </div>
           {{/if}}
         </:toolbar>
         <:sidebarCollapsible>
