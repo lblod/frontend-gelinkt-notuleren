@@ -18,9 +18,20 @@ import EditorContainer from '@lblod/ember-rdfa-editor/components/editor-containe
 import Editor from '@lblod/ember-rdfa-editor/components/editor';
 import Sidebar from '@lblod/ember-rdfa-editor/components/sidebar';
 import ResponsiveToolbar from '@lblod/ember-rdfa-editor/components/responsive-toolbar';
+
+import NodeControlsCard from '@lblod/ember-rdfa-editor/components/_private/node-controls/card';
+import DocImportedResourceEditorCard from '@lblod/ember-rdfa-editor/components/_private/doc-imported-resource-editor/card';
+import ImportedResourceLinkerCard from '@lblod/ember-rdfa-editor/components/_private/imported-resource-linker/card';
+import ExternalTripleEditorCard from '@lblod/ember-rdfa-editor/components/_private/external-triple-editor/card';
+import RelationshipEditorCard from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/card';
+import {
+  combineConfigs,
+  documentConfig,
+  lovConfig,
+} from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/configs';
 import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attribute-editor';
-import RdfaEditor from '@lblod/ember-rdfa-editor/components/_private/rdfa-editor';
 import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
+
 import type {
   NodeViewConstructor,
   Plugin,
@@ -56,6 +67,13 @@ import FormatTextIcon from '@lblod/ember-rdfa-editor/components/icons/format-tex
 import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus';
 import { ThreeDotsIcon } from '@appuniversum/ember-appuniversum/components/icons/three-dots';
 import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
+import { restartableTask, timeout } from 'ember-concurrency';
+import type {
+  OptionGeneratorConfig,
+  PredicateOptionGeneratorArgs,
+  TargetOptionGeneratorArgs,
+} from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/types';
+
 interface Sig {
   Args: {
     editorDocument?: EditorDocumentModel;
@@ -84,8 +102,13 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
   @service declare features: Features;
   @tracked controller?: SayController;
   @tracked ready = false;
+
+  NodeControlsCard = NodeControlsCard;
+  DocImportedResourceEditorCard = DocImportedResourceEditorCard;
+  ImportedResourceLinkerCard = ImportedResourceLinkerCard;
+  ExternalTripleEditorCard = ExternalTripleEditorCard;
+  RelationshipEditorCard = RelationshipEditorCard;
   AttributeEditor = AttributeEditor;
-  RdfaEditor = RdfaEditor;
   DebugInfo = DebugInfo;
   FormatTextIcon = FormatTextIcon;
   PlusIcon = PlusIcon;
@@ -179,6 +202,41 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
     return attrString;
   }
 
+  get optionGeneratorConfig(): OptionGeneratorConfig | undefined {
+    if (this.controller) {
+      return combineConfigs(documentConfig(this.controller), lovConfig());
+    }
+  }
+
+  subjectOptionGeneratorTask = restartableTask(
+    async (args?: TargetOptionGeneratorArgs) => {
+      await timeout(200);
+      const result = (await this.optionGeneratorConfig?.subjects?.(args)) ?? [];
+      return result;
+    },
+  );
+  predicateOptionGeneratorTask = restartableTask(
+    async (args?: PredicateOptionGeneratorArgs) => {
+      await timeout(200);
+      const result =
+        (await this.optionGeneratorConfig?.predicates?.(args)) ?? [];
+      return result;
+    },
+  );
+  objectOptionGeneratorTask = restartableTask(
+    async (args?: TargetOptionGeneratorArgs) => {
+      await timeout(200);
+      const result = (await this.optionGeneratorConfig?.objects?.(args)) ?? [];
+      return result;
+    },
+  );
+
+  optionGeneratorConfigTaskified: OptionGeneratorConfig = {
+    subjects: this.subjectOptionGeneratorTask.perform.bind(this),
+    predicates: this.predicateOptionGeneratorTask.perform.bind(this),
+    objects: this.objectOptionGeneratorTask.perform.bind(this),
+  };
+
   <template>
     {{#if @busy}}
       <AuBodyContainer>
@@ -225,7 +283,6 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
               {{#if this.controller}}
                 <ResponsiveToolbar>
                   <:main as |Tb|>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar}}
                     <Tb.Group>
                       <ToolbarHistory @controller={{this.controller}} />
                     </Tb.Group>
@@ -331,17 +388,38 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                   {{/if}}
                   {{yield to='sidebar'}}
                   {{#if @shouldEditRdfa}}
-                    {{#if this.activeNode}}
-                      <this.RdfaEditor
-                        @node={{this.activeNode}}
-                        @controller={{this.controller}}
-                      />
-                      <this.AttributeEditor
-                        @node={{this.activeNode}}
-                        @controller={{this.controller}}
-                      />
-                      <this.DebugInfo @node={{this.activeNode}} />
-                    {{/if}}
+                    <div
+                      class='au-u-flex au-u-flex--column au-u-flex--spaced-tiny'
+                    >
+                      {{#if this.activeNode}}
+                        <NodeControlsCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <RelationshipEditorCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
+                        />
+                        <DocImportedResourceEditorCard
+                          @controller={{this.controller}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
+                        />
+                        <ImportedResourceLinkerCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <ExternalTripleEditorCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <DebugInfo @node={{this.activeNode}} />
+                        <AttributeEditor
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                      {{/if}}
+                    </div>
                   {{/if}}
                 </Sidebar>
               {{/if}}
