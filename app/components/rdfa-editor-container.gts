@@ -290,6 +290,7 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                       <ToolbarDropdown
                         @icon={{this.FormatTextIcon}}
                         @direction='horizontal'
+                        @title={{t 'rdfa-editor-container.toolbar.format-text'}}
                         as |Menu|
                       >
                         <ToolbarStyling
@@ -334,6 +335,7 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                       <ToolbarDropdown
                         @icon={{this.PlusIcon}}
                         @direction='horizontal'
+                        @title={{t 'rdfa-editor-container.toolbar.insert'}}
                         as |Menu|
                       >
                         <LinkMenu
@@ -353,6 +355,7 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                       <ToolbarDropdown
                         @icon={{this.ThreeDotsIcon}}
                         @direction='horizontal'
+                        @title={{t 'rdfa-editor-container.toolbar.more'}}
                         as |Menu|
                       >
                         <HtmlEditorMenu

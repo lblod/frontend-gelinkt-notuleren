@@ -659,6 +659,10 @@ rdfa-editor-container:
     zone: Zone
     duurtijd: Duration
     nummerplaten: License plates
+  toolbar:
+    format-text: Text format
+    insert: Insert Menu
+    more: More options
 
 regulatory-statements-plugin:
   type: Regulatory Statement
