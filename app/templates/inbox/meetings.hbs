@@ -20,25 +20,29 @@
           {{#unless
             (or this.readOnly this.mayCreateInaugurationMeeting.isLoading)
           }}
-            <AuDropdown
-              @skin='primary'
-              @title={{t 'inbox.meetings.new.title'}}
-              @alignment='left'
-              @icon='chevron-down'
-              role='menu'
-            >
-              <AuLink @route='inbox.meetings.new' role='menuitem'>
-                {{t 'inbox.meetings.new.common-meeting.title'}}
-              </AuLink>
-              {{#if this.mayCreateInaugurationMeeting.value}}
+            {{#if this.mayCreateInaugurationMeeting.value}}
+              <AuDropdown
+                @skin='primary'
+                @title={{t 'inbox.meetings.new.title'}}
+                @alignment='left'
+                @icon='chevron-down'
+                role='menu'
+              >
+                <AuLink @route='inbox.meetings.new' role='menuitem'>
+                  {{t 'inbox.meetings.new.common-meeting.title'}}
+                </AuLink>
                 <AuLink
                   @route='inbox.meetings.new-inauguration'
                   role='menuitem'
                 >
                   {{t 'inbox.meetings.new.inauguration-meeting.title'}}
                 </AuLink>
-              {{/if}}
-            </AuDropdown>
+              </AuDropdown>
+            {{else}}
+              <AuLink @route='inbox.meetings.new' @skin='button' @icon='add'>
+                {{t 'inbox.meetings.new.common-meeting.title'}}
+              </AuLink>
+            {{/if}}
           {{/unless}}
         </Group>
       </AuToolbar>
