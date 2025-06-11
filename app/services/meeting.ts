@@ -139,8 +139,8 @@ export default class MeetingService extends Service {
     const documentContainer = await treatment.documentContainer;
     if (!documentContainer) return false;
     const document = await documentContainer.currentVersion;
-    if (!document) return false;
-    const triples = await htmlToRdf(document.content as string);
+    if (!document || !document.content) return false;
+    const triples = await htmlToRdf(document.content);
     const matches = triples.match(
       undefined,
       sayDataFactory.namedNode(
