@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.60.0
+
+### Minor Changes
+
+- Update `@lblod/ember-rdfa-editor` to version [12.9.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.9.0)
+
+  - Integrate new version of rdfa-tools
+
+- [`2d03f1d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2d03f1d3ea38b7c0dbff89d95ca7fa24f117c747) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor-lblod-plugins version 32.2.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.2.0)
+
 ## 5.59.2
 
 ### Patch Changes
