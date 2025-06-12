@@ -13,6 +13,7 @@ export default class InboxMeetingsController extends Controller {
   @service store;
   @service currentSession;
   @service router;
+  @service features;
 
   sort = '-geplande-start';
   @tracked debounceTime = 2000;
@@ -28,7 +29,7 @@ export default class InboxMeetingsController extends Controller {
   };
 
   mayCreateInaugurationMeeting = trackedFunction(this, async () => {
-    if (this.readOnly) {
+    if (this.readOnly || !this.features.isEnabled('inauguration-meeting')) {
       return false;
     }
     const unitClass = await this.currentSession.group.classificatie;
