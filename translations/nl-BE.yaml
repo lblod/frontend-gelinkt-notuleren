@@ -666,8 +666,8 @@ rdfa-editor-container:
     duurtijd: Duurtijd
     nummerplaten: Nummerplaten
   toolbar:
-    format-text: Tekstformaat
-    insert: Menu invoegen
+    format-text: Tekststijlen
+    insert: Invoegen
     more: Meer opties
 
 regulatory-statements-plugin:

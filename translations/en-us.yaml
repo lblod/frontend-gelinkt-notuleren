@@ -660,8 +660,8 @@ rdfa-editor-container:
     duurtijd: Duration
     nummerplaten: License plates
   toolbar:
-    format-text: Text format
-    insert: Insert Menu
+    format-text: Text formatting
+    insert: Insert
     more: More options
 
 regulatory-statements-plugin:
