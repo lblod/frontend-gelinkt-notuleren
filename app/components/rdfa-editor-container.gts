@@ -286,39 +286,59 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                     <Tb.Group>
                       <ToolbarHistory @controller={{this.controller}} />
                     </Tb.Group>
-                    <Tb.Group>
-                      <ToolbarDropdown
-                        @icon={{this.FormatTextIcon}}
-                        @direction='horizontal'
-                        @title={{t 'rdfa-editor-container.toolbar.format-text'}}
-                        as |Menu|
-                      >
-                        <ToolbarStyling
+                    <div class='rdfa-editor-container__small-screen'>
+                      <Tb.Group>
+                        <ToolbarDropdown
+                          @icon={{this.FormatTextIcon}}
+                          @direction='horizontal'
+                          @title={{t
+                            'rdfa-editor-container.toolbar.format-text'
+                          }}
+                          as |Menu|
+                        >
+                          <ToolbarStyling
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <TextStyleSuperscript
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <TextStyleSubscript
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <HeadingMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                        </ToolbarDropdown>
+                        <TextStyleColor
                           @controller={{this.controller}}
-                          @onActivate={{Menu.closeDropdown}}
+                          @defaultColor='#000000'
                         />
-                        <TextStyleSuperscript
+                        <TextStyleHighlight
                           @controller={{this.controller}}
-                          @onActivate={{Menu.closeDropdown}}
+                          @defaultColor='#FFEA00'
                         />
-                        <TextStyleSubscript
+                      </Tb.Group>
+                    </div>
+                    <div class='rdfa-editor-container__big-screen'>
+                      <Tb.Group>
+                        <ToolbarStyling @controller={{this.controller}} />
+                        <TextStyleSuperscript @controller={{this.controller}} />
+                        <TextStyleSubscript @controller={{this.controller}} />
+                        <HeadingMenu @controller={{this.controller}} />
+                        <TextStyleColor
                           @controller={{this.controller}}
-                          @onActivate={{Menu.closeDropdown}}
+                          @defaultColor='#000000'
                         />
-                        <HeadingMenu
+                        <TextStyleHighlight
                           @controller={{this.controller}}
-                          @onActivate={{Menu.closeDropdown}}
+                          @defaultColor='#FFEA00'
                         />
-                      </ToolbarDropdown>
-                      <TextStyleColor
-                        @controller={{this.controller}}
-                        @defaultColor='#000000'
-                      />
-                      <TextStyleHighlight
-                        @controller={{this.controller}}
-                        @defaultColor='#FFEA00'
-                      />
-                    </Tb.Group>
+                      </Tb.Group>
+                    </div>
                     <Tb.Group>
                       <TableMenu @controller={{this.controller}} />
                     </Tb.Group>
@@ -331,23 +351,32 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                     <Tb.Group>
                       <IndentationMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    <Tb.Group>
-                      <ToolbarDropdown
-                        @icon={{this.PlusIcon}}
-                        @direction='horizontal'
-                        @title={{t 'rdfa-editor-container.toolbar.insert'}}
-                        as |Menu|
-                      >
-                        <LinkMenu
-                          @controller={{this.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                        <ImageInsertMenu
-                          @controller={{this.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                      </ToolbarDropdown>
-                    </Tb.Group>
+                    <div class='rdfa-editor-container__small-screen'>
+                      <Tb.Group>
+
+                        <ToolbarDropdown
+                          @icon={{this.PlusIcon}}
+                          @direction='horizontal'
+                          @title={{t 'rdfa-editor-container.toolbar.insert'}}
+                          as |Menu|
+                        >
+                          <LinkMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <ImageInsertMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                        </ToolbarDropdown>
+                      </Tb.Group>
+                    </div>
+                    <div class='rdfa-editor-container__big-screen'>
+                      <Tb.Group>
+                        <LinkMenu @controller={{this.controller}} />
+                        <ImageInsertMenu @controller={{this.controller}} />
+                      </Tb.Group>
+                    </div>
                   </:main>
                   <:side as |Tb|>
                     {{yield to='toolbar'}}
