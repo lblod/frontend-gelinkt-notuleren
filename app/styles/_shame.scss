@@ -775,3 +775,21 @@ div[typeof='besluitpublicatie:Documentonderdeel'] {
   z-index: 2;
   max-width: 800px;
 }
+
+@media screen and (max-width: 1200px) {
+  .rdfa-editor-container__small-screen {
+    display: block;
+  }
+  .rdfa-editor-container__big-screen {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .rdfa-editor-container__small-screen {
+    display: none;
+  }
+  .rdfa-editor-container__big-screen {
+    display: block;
+  }
+}
