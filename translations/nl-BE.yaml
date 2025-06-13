@@ -19,7 +19,7 @@ agendapoint:
   copy-parts-link: Kopieer besluit en onderdelen
 
 administrative-body-select:
-  period: 'period'
+  period: 'periode'
   not-applicable: nvt.
 
 application:
