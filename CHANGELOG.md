@@ -1,5 +1,25 @@
 # frontend-gelinkt-notuleren
 
+## 5.61.0
+
+### Minor Changes
+
+- [#862](https://github.com/lblod/frontend-gelinkt-notuleren/pull/862) [`cc1d527`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/cc1d5274549d4910f3f69324d2d1200030e87da0) Thanks [@piemonkey](https://github.com/piemonkey)! - Hide creation of IV meetings behind a feature flag
+
+### Patch Changes
+
+- [#863](https://github.com/lblod/frontend-gelinkt-notuleren/pull/863) [`80ad1e1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/80ad1e100e97379a13870aecbc41363d1f49b075) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix bug in meeting validation for agendapoints with no current content
+
+## 5.60.0
+
+### Minor Changes
+
+- Update `@lblod/ember-rdfa-editor` to version [12.9.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.9.0)
+
+  - Integrate new version of rdfa-tools
+
+- [`2d03f1d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2d03f1d3ea38b7c0dbff89d95ca7fa24f117c747) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor-lblod-plugins version 32.2.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.2.0)
+
 ## 5.59.2
 
 ### Patch Changes

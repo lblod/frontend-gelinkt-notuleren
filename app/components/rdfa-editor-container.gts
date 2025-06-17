@@ -18,9 +18,20 @@ import EditorContainer from '@lblod/ember-rdfa-editor/components/editor-containe
 import Editor from '@lblod/ember-rdfa-editor/components/editor';
 import Sidebar from '@lblod/ember-rdfa-editor/components/sidebar';
 import ResponsiveToolbar from '@lblod/ember-rdfa-editor/components/responsive-toolbar';
+
+import NodeControlsCard from '@lblod/ember-rdfa-editor/components/_private/node-controls/card';
+import DocImportedResourceEditorCard from '@lblod/ember-rdfa-editor/components/_private/doc-imported-resource-editor/card';
+import ImportedResourceLinkerCard from '@lblod/ember-rdfa-editor/components/_private/imported-resource-linker/card';
+import ExternalTripleEditorCard from '@lblod/ember-rdfa-editor/components/_private/external-triple-editor/card';
+import RelationshipEditorCard from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/card';
+import {
+  combineConfigs,
+  documentConfig,
+  lovConfig,
+} from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/configs';
 import AttributeEditor from '@lblod/ember-rdfa-editor/components/_private/attribute-editor';
-import RdfaEditor from '@lblod/ember-rdfa-editor/components/_private/rdfa-editor';
 import DebugInfo from '@lblod/ember-rdfa-editor/components/_private/debug-info';
+
 import type {
   NodeViewConstructor,
   Plugin,
@@ -50,6 +61,18 @@ import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import t from 'ember-intl/helpers/t';
 import { htmlSafe } from '@ember/template';
 import { hash } from '@ember/helper';
+import HtmlEditorMenu from '@lblod/ember-rdfa-editor/components/plugins/html-editor/menu';
+import ToolbarDropdown from '@lblod/ember-rdfa-editor/components/toolbar/dropdown';
+import FormatTextIcon from '@lblod/ember-rdfa-editor/components/icons/format-text';
+import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus';
+import { ThreeDotsIcon } from '@appuniversum/ember-appuniversum/components/icons/three-dots';
+import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
+import { restartableTask, timeout } from 'ember-concurrency';
+import type {
+  OptionGeneratorConfig,
+  PredicateOptionGeneratorArgs,
+  TargetOptionGeneratorArgs,
+} from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/types';
 
 interface Sig {
   Args: {
@@ -79,9 +102,17 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
   @service declare features: Features;
   @tracked controller?: SayController;
   @tracked ready = false;
+
+  NodeControlsCard = NodeControlsCard;
+  DocImportedResourceEditorCard = DocImportedResourceEditorCard;
+  ImportedResourceLinkerCard = ImportedResourceLinkerCard;
+  ExternalTripleEditorCard = ExternalTripleEditorCard;
+  RelationshipEditorCard = RelationshipEditorCard;
   AttributeEditor = AttributeEditor;
-  RdfaEditor = RdfaEditor;
   DebugInfo = DebugInfo;
+  FormatTextIcon = FormatTextIcon;
+  PlusIcon = PlusIcon;
+  ThreeDotsIcon = ThreeDotsIcon;
 
   /**
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
@@ -171,6 +202,41 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
     return attrString;
   }
 
+  get optionGeneratorConfig(): OptionGeneratorConfig | undefined {
+    if (this.controller) {
+      return combineConfigs(documentConfig(this.controller), lovConfig());
+    }
+  }
+
+  subjectOptionGeneratorTask = restartableTask(
+    async (args?: TargetOptionGeneratorArgs) => {
+      await timeout(200);
+      const result = (await this.optionGeneratorConfig?.subjects?.(args)) ?? [];
+      return result;
+    },
+  );
+  predicateOptionGeneratorTask = restartableTask(
+    async (args?: PredicateOptionGeneratorArgs) => {
+      await timeout(200);
+      const result =
+        (await this.optionGeneratorConfig?.predicates?.(args)) ?? [];
+      return result;
+    },
+  );
+  objectOptionGeneratorTask = restartableTask(
+    async (args?: TargetOptionGeneratorArgs) => {
+      await timeout(200);
+      const result = (await this.optionGeneratorConfig?.objects?.(args)) ?? [];
+      return result;
+    },
+  );
+
+  optionGeneratorConfigTaskified: OptionGeneratorConfig = {
+    subjects: this.subjectOptionGeneratorTask.perform.bind(this),
+    predicates: this.predicateOptionGeneratorTask.perform.bind(this),
+    objects: this.objectOptionGeneratorTask.perform.bind(this),
+  };
+
   <template>
     {{#if @busy}}
       <AuBodyContainer>
@@ -220,44 +286,114 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                     <Tb.Group>
                       <ToolbarHistory @controller={{this.controller}} />
                     </Tb.Group>
-                    <Tb.Group>
-                      <ToolbarStyling @controller={{this.controller}} />
-                      {{! @glint-expect-error no arg types }}
-                      <TextStyleSubscript @controller={{this.controller}} />
-                      {{! @glint-expect-error no arg types }}
-                      <TextStyleSuperscript @controller={{this.controller}} />
-                      <TextStyleHighlight
-                        @controller={{this.controller}}
-                        @defaultColor='#FFEA00'
-                      />
-                      <TextStyleColor
-                        @controller={{this.controller}}
-                        @defaultColor='#000000'
-                      />
-                    </Tb.Group>
-                    <Tb.Group>
-                      <ToolbarList @controller={{this.controller}} />
-                      <IndentationMenu @controller={{this.controller}} />
-                    </Tb.Group>
-                    <Tb.Group>
-                      <LinkMenu @controller={{this.controller}} />
-                      <ImageInsertMenu @controller={{this.controller}} />
-                    </Tb.Group>
+                    <div class='rdfa-editor-container__small-screen'>
+                      <Tb.Group>
+                        <ToolbarDropdown
+                          @icon={{this.FormatTextIcon}}
+                          @direction='horizontal'
+                          @title={{t
+                            'rdfa-editor-container.toolbar.format-text'
+                          }}
+                          as |Menu|
+                        >
+                          <ToolbarStyling
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <TextStyleSuperscript
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <TextStyleSubscript
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <HeadingMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                        </ToolbarDropdown>
+                        <TextStyleColor
+                          @controller={{this.controller}}
+                          @defaultColor='#000000'
+                        />
+                        <TextStyleHighlight
+                          @controller={{this.controller}}
+                          @defaultColor='#FFEA00'
+                        />
+                      </Tb.Group>
+                    </div>
+                    <div class='rdfa-editor-container__big-screen'>
+                      <Tb.Group>
+                        <ToolbarStyling @controller={{this.controller}} />
+                        <TextStyleSuperscript @controller={{this.controller}} />
+                        <TextStyleSubscript @controller={{this.controller}} />
+                        <HeadingMenu @controller={{this.controller}} />
+                        <TextStyleColor
+                          @controller={{this.controller}}
+                          @defaultColor='#000000'
+                        />
+                        <TextStyleHighlight
+                          @controller={{this.controller}}
+                          @defaultColor='#FFEA00'
+                        />
+                      </Tb.Group>
+                    </div>
                     <Tb.Group>
                       <TableMenu @controller={{this.controller}} />
                     </Tb.Group>
                     <Tb.Group>
-                      <HeadingMenu @controller={{this.controller}} />
+                      <ToolbarList @controller={{this.controller}} />
                     </Tb.Group>
                     <Tb.Group>
                       <AlignmentMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
-                    <Tb.Spacer />
+                    <Tb.Group>
+                      <IndentationMenu @controller={{this.controller}} />
+                    </Tb.Group>
+                    <div class='rdfa-editor-container__small-screen'>
+                      <Tb.Group>
+
+                        <ToolbarDropdown
+                          @icon={{this.PlusIcon}}
+                          @direction='horizontal'
+                          @title={{t 'rdfa-editor-container.toolbar.insert'}}
+                          as |Menu|
+                        >
+                          <LinkMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <ImageInsertMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                        </ToolbarDropdown>
+                      </Tb.Group>
+                    </div>
+                    <div class='rdfa-editor-container__big-screen'>
+                      <Tb.Group>
+                        <LinkMenu @controller={{this.controller}} />
+                        <ImageInsertMenu @controller={{this.controller}} />
+                      </Tb.Group>
+                    </div>
                   </:main>
                   <:side as |Tb|>
+                    {{yield to='toolbar'}}
                     <Tb.Group>
-                      {{yield to='toolbar'}}
+                      <ToolbarDropdown
+                        @icon={{this.ThreeDotsIcon}}
+                        @direction='horizontal'
+                        @title={{t 'rdfa-editor-container.toolbar.more'}}
+                        as |Menu|
+                      >
+                        <HtmlEditorMenu
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                        <FormattingToggle @controller={{this.controller}} />
+                      </ToolbarDropdown>
+
                     </Tb.Group>
                   </:side>
                 </ResponsiveToolbar>
@@ -284,17 +420,38 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                   {{/if}}
                   {{yield to='sidebar'}}
                   {{#if @shouldEditRdfa}}
-                    {{#if this.activeNode}}
-                      <this.RdfaEditor
-                        @node={{this.activeNode}}
-                        @controller={{this.controller}}
-                      />
-                      <this.AttributeEditor
-                        @node={{this.activeNode}}
-                        @controller={{this.controller}}
-                      />
-                      <this.DebugInfo @node={{this.activeNode}} />
-                    {{/if}}
+                    <div
+                      class='au-u-flex au-u-flex--column au-u-flex--spaced-tiny'
+                    >
+                      {{#if this.activeNode}}
+                        <NodeControlsCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <RelationshipEditorCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
+                        />
+                        <DocImportedResourceEditorCard
+                          @controller={{this.controller}}
+                          @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
+                        />
+                        <ImportedResourceLinkerCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <ExternalTripleEditorCard
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                        <DebugInfo @node={{this.activeNode}} />
+                        <AttributeEditor
+                          @node={{this.activeNode}}
+                          @controller={{this.controller}}
+                        />
+                      {{/if}}
+                    </div>
                   {{/if}}
                 </Sidebar>
               {{/if}}
