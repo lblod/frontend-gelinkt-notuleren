@@ -1,10 +1,15 @@
-FROM node:20-slim as builder
+FROM node:20-slim AS builder
 
 LABEL maintainer="info@redpencil.io"
 
+# installing the latest corepack manually because of https://github.com/nodejs/corepack/issues/612
+RUN npm i -g corepack@0.31
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+RUN corepack enable
+
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm i --frozen-lockfile
 COPY . .
 RUN npm run build
 

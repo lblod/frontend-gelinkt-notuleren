@@ -20,7 +20,7 @@ Next we clone this repository, install the dependencies, and boot the developmen
     cd frontend-gelinkt-notuleren
     
     # install the dependencies
-    npm install
+    pnpm install
     
     # run the development server
     ember s --proxy http://localhost
