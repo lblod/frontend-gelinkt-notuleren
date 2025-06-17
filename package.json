@@ -33,7 +33,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^3.7.0",
+    "@appuniversum/ember-appuniversum": "^3.11.0",
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.26.5",
     "@babel/plugin-proposal-decorators": "^7.25.9",
@@ -53,6 +53,7 @@
     "@ember/render-modifiers": "^2.1.0",
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^3.3.1",
+    "@embroider/macros": "1.16.10",
     "@eslint/js": "^9.19.0",
     "@floating-ui/dom": "^1.6.13",
     "@glimmer/component": "^1.1.2",
@@ -64,7 +65,7 @@
     "@lblod/ember-acmidm-login": "^2.1.0",
     "@lblod/ember-environment-banner": "^0.6.0",
     "@lblod/ember-mock-login": "^0.10.0",
-    "@lblod/ember-rdfa-editor": "12.9.0",
+    "@lblod/ember-rdfa-editor": "12.10.1-dev.c3cb4e6769dc0c95454be525eee49388749fd518",
     "@lblod/ember-rdfa-editor-lblod-plugins": "32.2.0",
     "@lblod/template-uuid-instantiator": "^1.0.3",
     "@nullvoxpopuli/ember-composable-helpers": "^5.2.6",
@@ -85,7 +86,7 @@
     "dotenv": "^16.4.5",
     "ember-a11y-refocus": "^3.0.0",
     "ember-auto-import": "^2.8.1",
-    "ember-basic-dropdown": "^8.5.0",
+    "ember-basic-dropdown": "8.6.0",
     "ember-browser-update": "^0.1.0",
     "ember-changeset": "^4.1.2",
     "ember-cli": "~5.12.0",
@@ -116,6 +117,7 @@
     "ember-page-title": "^8.2.3",
     "ember-plausible": "^0.2.0",
     "ember-power-select": "^8.0.0",
+    "ember-power-select-with-create": "3.0.0",
     "ember-promise-helpers": "^2.0.0",
     "ember-qunit": "^8.1.0",
     "ember-resolver": "^12.0.1",
@@ -161,8 +163,7 @@
       "@floating-ui/dom": "^1.6.5"
     },
     "@lblod/ember-rdfa-editor-lblod-plugins": {
-      "@lblod/ember-rdfa-editor": "$@lblod/ember-rdfa-editor",
-      "ember-concurrency": "$ember-concurrency"
+      "@lblod/ember-rdfa-editor": "$@lblod/ember-rdfa-editor"
     },
     "babel-plugin-ember-template-compilation": "^2.2.5",
     "ember-data-table": {

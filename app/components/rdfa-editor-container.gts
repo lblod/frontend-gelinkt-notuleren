@@ -61,6 +61,12 @@ import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import t from 'ember-intl/helpers/t';
 import { htmlSafe } from '@ember/template';
 import { hash } from '@ember/helper';
+import HtmlEditorMenu from '@lblod/ember-rdfa-editor/components/plugins/html-editor/menu';
+import ToolbarDropdown from '@lblod/ember-rdfa-editor/components/toolbar/dropdown';
+import FormatTextIcon from '@lblod/ember-rdfa-editor/components/icons/format-text';
+import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus';
+import { ThreeDotsIcon } from '@appuniversum/ember-appuniversum/components/icons/three-dots';
+import FormattingToggle from '@lblod/ember-rdfa-editor/components/plugins/formatting/formatting-toggle';
 import { restartableTask, timeout } from 'ember-concurrency';
 import type {
   OptionGeneratorConfig,
@@ -104,6 +110,9 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
   RelationshipEditorCard = RelationshipEditorCard;
   AttributeEditor = AttributeEditor;
   DebugInfo = DebugInfo;
+  FormatTextIcon = FormatTextIcon;
+  PlusIcon = PlusIcon;
+  ThreeDotsIcon = ThreeDotsIcon;
 
   /**
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
@@ -277,42 +286,114 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                     <Tb.Group>
                       <ToolbarHistory @controller={{this.controller}} />
                     </Tb.Group>
-                    <Tb.Group>
-                      <ToolbarStyling @controller={{this.controller}} />
-                      <TextStyleSubscript @controller={{this.controller}} />
-                      <TextStyleSuperscript @controller={{this.controller}} />
-                      <TextStyleHighlight
-                        @controller={{this.controller}}
-                        @defaultColor='#FFEA00'
-                      />
-                      <TextStyleColor
-                        @controller={{this.controller}}
-                        @defaultColor='#000000'
-                      />
-                    </Tb.Group>
-                    <Tb.Group>
-                      <ToolbarList @controller={{this.controller}} />
-                      <IndentationMenu @controller={{this.controller}} />
-                    </Tb.Group>
-                    <Tb.Group>
-                      <LinkMenu @controller={{this.controller}} />
-                      <ImageInsertMenu @controller={{this.controller}} />
-                    </Tb.Group>
+                    <div class='rdfa-editor-container__small-screen'>
+                      <Tb.Group>
+                        <ToolbarDropdown
+                          @icon={{this.FormatTextIcon}}
+                          @direction='horizontal'
+                          @title={{t
+                            'rdfa-editor-container.toolbar.format-text'
+                          }}
+                          as |Menu|
+                        >
+                          <ToolbarStyling
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <TextStyleSuperscript
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <TextStyleSubscript
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <HeadingMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                        </ToolbarDropdown>
+                        <TextStyleColor
+                          @controller={{this.controller}}
+                          @defaultColor='#000000'
+                        />
+                        <TextStyleHighlight
+                          @controller={{this.controller}}
+                          @defaultColor='#FFEA00'
+                        />
+                      </Tb.Group>
+                    </div>
+                    <div class='rdfa-editor-container__big-screen'>
+                      <Tb.Group>
+                        <ToolbarStyling @controller={{this.controller}} />
+                        <TextStyleSuperscript @controller={{this.controller}} />
+                        <TextStyleSubscript @controller={{this.controller}} />
+                        <HeadingMenu @controller={{this.controller}} />
+                        <TextStyleColor
+                          @controller={{this.controller}}
+                          @defaultColor='#000000'
+                        />
+                        <TextStyleHighlight
+                          @controller={{this.controller}}
+                          @defaultColor='#FFEA00'
+                        />
+                      </Tb.Group>
+                    </div>
                     <Tb.Group>
                       <TableMenu @controller={{this.controller}} />
                     </Tb.Group>
                     <Tb.Group>
-                      <HeadingMenu @controller={{this.controller}} />
+                      <ToolbarList @controller={{this.controller}} />
                     </Tb.Group>
                     <Tb.Group>
                       <AlignmentMenu @controller={{this.controller}} />
                     </Tb.Group>
-                    {{! @glint-expect-error insufficient types for ResponsiveToolbar }}
-                    <Tb.Spacer />
+                    <Tb.Group>
+                      <IndentationMenu @controller={{this.controller}} />
+                    </Tb.Group>
+                    <div class='rdfa-editor-container__small-screen'>
+                      <Tb.Group>
+
+                        <ToolbarDropdown
+                          @icon={{this.PlusIcon}}
+                          @direction='horizontal'
+                          @title={{t 'rdfa-editor-container.toolbar.insert'}}
+                          as |Menu|
+                        >
+                          <LinkMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                          <ImageInsertMenu
+                            @controller={{this.controller}}
+                            @onActivate={{Menu.closeDropdown}}
+                          />
+                        </ToolbarDropdown>
+                      </Tb.Group>
+                    </div>
+                    <div class='rdfa-editor-container__big-screen'>
+                      <Tb.Group>
+                        <LinkMenu @controller={{this.controller}} />
+                        <ImageInsertMenu @controller={{this.controller}} />
+                      </Tb.Group>
+                    </div>
                   </:main>
                   <:side as |Tb|>
+                    {{yield to='toolbar'}}
                     <Tb.Group>
-                      {{yield to='toolbar'}}
+                      <ToolbarDropdown
+                        @icon={{this.ThreeDotsIcon}}
+                        @direction='horizontal'
+                        @title={{t 'rdfa-editor-container.toolbar.more'}}
+                        as |Menu|
+                      >
+                        <HtmlEditorMenu
+                          @controller={{this.controller}}
+                          @onActivate={{Menu.closeDropdown}}
+                        />
+                        <FormattingToggle @controller={{this.controller}} />
+                      </ToolbarDropdown>
+
                     </Tb.Group>
                   </:side>
                 </ResponsiveToolbar>

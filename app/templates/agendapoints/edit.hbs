@@ -102,16 +102,19 @@
     @shouldEditRdfa={{false}}
   >
     <:toolbar>
-      <BesluitTypePlugin::ToolbarDropdown
-        @controller={{this.controller}}
-        @classificatieUri={{this.config.classificatieUri}}
-        @options={{this.config.besluitType}}
-      />
-      <BesluitTopicPlugin::BesluitTopicToolbarDropdown
-        @controller={{this.controller}}
-        @options={{this.config.besluitTopic}}
-      />
-      <Plugins::Formatting::FormattingToggle @controller={{this.controller}} />
+      <div class='au-u-margin-right-small'>
+        <BesluitTypePlugin::ToolbarDropdown
+          @controller={{this.controller}}
+          @classificatieUri={{this.config.classificatieUri}}
+          @options={{this.config.besluitType}}
+        />
+      </div>
+      <div class='au-u-margin-right-small'>
+        <BesluitTopicPlugin::BesluitTopicToolbarDropdown
+          @controller={{this.controller}}
+          @options={{this.config.besluitTopic}}
+        />
+      </div>
     </:toolbar>
     <:sidebarCollapsible>
       <this.InsertArticle
