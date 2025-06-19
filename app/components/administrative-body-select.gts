@@ -9,6 +9,7 @@ import { filterAsync } from 'frontend-gelinkt-notuleren/utils/filter';
 import type { LegacyResourceQuery } from '@ember-data/store/types';
 import PowerSelect from 'ember-power-select/components/power-select';
 import t from 'ember-intl/helpers/t';
+import type { TOC } from '@ember/component/template-only';
 
 const VALID_ADMINISTRATIVE_BODY_CLASSIFICATIONS = [
   'http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/5ab0e9b8a3b2ca7c5e000005', //	"Gemeenteraad"
@@ -81,8 +82,6 @@ export default class AdministrativeBodySelectComponent extends Component<Signatu
     );
   });
 
-  year = (date: Date) => date.getFullYear();
-
   <template>
     <div class={{if @error 'ember-power-select--error'}}>
       {{#if this.administrativeBodyOptions.value}}
@@ -96,19 +95,26 @@ export default class AdministrativeBodySelectComponent extends Component<Signatu
         >
           {{administrativeBody.isTijdsspecialisatieVan.naam}}
           ({{t 'administrative-body-select.period'}}:
-          {{#if administrativeBody.bindingStart}}
-            {{this.year administrativeBody.bindingStart}}
-          {{else}}
-            {{t 'administrative-body-select.not-applicable'}}
-          {{/if}}
+          <Year @date={{administrativeBody.bindingStart}} />
           -
-          {{#if administrativeBody.bindingEinde}}
-            {{this.year administrativeBody.bindingEinde}}
-          {{else}}
-            {{t 'administrative-body-select.not-applicable'}}
-          {{/if}})
+          <Year @date={{administrativeBody.bindingEinde}} />)
         </PowerSelect>
       {{/if}}
     </div>
   </template>
 }
+
+const year = (date: Date) => date.getFullYear();
+
+type YearSignature = {
+  Args: {
+    date?: Date;
+  };
+};
+const Year: TOC<YearSignature> = <template>
+  {{#if @date}}
+    {{year @date~}}
+  {{else}}
+    {{t 'administrative-body-select.not-applicable'~}}
+  {{/if}}
+</template>;
