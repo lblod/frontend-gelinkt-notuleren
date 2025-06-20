@@ -175,6 +175,7 @@ import DownloadDocument from 'frontend-gelinkt-notuleren/components/download-doc
 import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-editor-container';
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
 import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly-date';
+import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -368,6 +369,11 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
           SAY('Subsection'),
           SAY('Section'),
           SAY('Chapter'),
+        ],
+        additionalRDFTypes: [
+          sayDataFactory.namedNode(
+            'https://data.vlaanderen.be/ns/mobiliteit#Zone',
+          ),
         ],
       },
       lmb: {
