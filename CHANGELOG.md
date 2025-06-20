@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.62.0
+
+### Minor Changes
+
+- [#861](https://github.com/lblod/frontend-gelinkt-notuleren/pull/861) [`ac1c072`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ac1c0728c0498d0054dacb1ee40c414e245fc160) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Implement toolbar redesign
+
+### Patch Changes
+
+- [#866](https://github.com/lblod/frontend-gelinkt-notuleren/pull/866) [`abd81d3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/abd81d341d05a0f19b1bc3c964ac253f6f98103e) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [12.11.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.11.0)
+
+- [#846](https://github.com/lblod/frontend-gelinkt-notuleren/pull/846) [`6ac3256`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6ac3256b2f399f92b4e8fadb180fe5a0634c4c9b) Thanks [@elpoelma](https://github.com/elpoelma)! - Move to pnpm
+
 ## 5.61.0
 
 ### Minor Changes
