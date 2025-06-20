@@ -101,110 +101,110 @@
     @plugins={{this.plugins}}
     @shouldEditRdfa={{false}}
   >
-    <:toolbar>
+    <:toolbar as |container|>
       <div class='au-u-margin-right-small'>
         <BesluitTypePlugin::ToolbarDropdown
-          @controller={{this.controller}}
+          @controller={{container.controller}}
           @classificatieUri={{this.config.classificatieUri}}
           @options={{this.config.besluitType}}
         />
       </div>
       <div class='au-u-margin-right-small'>
         <BesluitTopicPlugin::BesluitTopicToolbarDropdown
-          @controller={{this.controller}}
+          @controller={{container.controller}}
           @options={{this.config.besluitTopic}}
         />
       </div>
     </:toolbar>
-    <:sidebarCollapsible>
+    <:sidebarCollapsible as |container|>
       <this.InsertArticle
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @options={{this.config.insertArticle}}
       />
       <CitationPlugin::CitationInsert
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @config={{this.config.citation}}
       />
       <VariablePlugin::Date::Insert
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @options={{this.config.date}}
       />
       <RoadsignRegulationPlugin::RoadsignRegulationCard
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @options={{this.config.roadsignRegulation}}
       />
       <StandardTemplatePlugin::Card
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @templates={{this.model.templates}}
       />
       {{#if (feature-flag 'regulatoryStatements')}}
         <EditorPlugins::RegulatoryStatements::SidebarInsert
-          @controller={{this.controller}}
+          @controller={{container.controller}}
         />
       {{/if}}
       <TemplateCommentsPlugin::Insert @controller={{this.controller}} />
       <LocationPlugin::Insert
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @defaultMunicipality={{this.agendapointEditor.defaultMunicipality.naam}}
         @config={{this.config.location}}
       />
       <WorshipPlugin::Insert
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @config={{this.config.worship}}
       />
       <LpdcPlugin::LpdcInsert
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @config={{this.config.lpdc}}
       />
       {{#if (feature-flag 'mandateeTableEditor')}}
         <MandateeTablePlugin::Insert
-          @controller={{this.controller}}
+          @controller={{container.controller}}
           @defaultTag={{this.config.mandateeTable.defaultTag}}
         />
       {{/if}}
       <LmbPlugin::Insert
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @config={{this.config.lmb}}
       />
       {{#if this.activeNode}}
         <this.SnippetInsert
-          @controller={{this.controller}}
+          @controller={{container.controller}}
           @config={{this.config.snippet}}
           @node={{this.activeNode}}
         />
       {{/if}}
     </:sidebarCollapsible>
-    <:sidebar>
-      <this.StructureControlCard @controller={{this.controller}} />
+    <:sidebar as |container|>
+      <this.StructureControlCard @controller={{container.controller}} />
       <DecisionPlugin::DecisionPluginCard
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @options={{this.config.decisionPlugin}}
       />
       <CitationPlugin::CitationCard
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @config={{this.config.citation}}
       />
-      <ImportSnippetPlugin::Card @controller={{this.controller}} />
+      <ImportSnippetPlugin::Card @controller={{container.controller}} />
       <VariablePlugin::Date::Edit
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @options={{this.config.date}}
       />
       <VariablePlugin::Codelist::Edit
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @options={{this.agendapointEditor.codelistEditOptions}}
       />
       <VariablePlugin::Location::Edit
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @options={{this.agendapointEditor.locationEditOptions}}
       />
       <VariablePlugin::Person::Edit
-        @controller={{this.controller}}
+        @controller={{container.controller}}
         @config={{this.config.lmb}}
       />
-      <TemplateCommentsPlugin::EditCard @controller={{this.controller}} />
+      <TemplateCommentsPlugin::EditCard @controller={{container.controller}} />
       {{#if (feature-flag 'mandateeTableEditor')}}
         <MandateeTablePlugin::Configure
-          @controller={{this.controller}}
+          @controller={{container.controller}}
           @supportedTags={{this.config.mandateeTable.tags}}
         />
       {{/if}}

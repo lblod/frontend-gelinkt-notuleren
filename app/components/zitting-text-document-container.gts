@@ -1,8 +1,11 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { getOwner } from '@ember/application';
 
-import { Schema } from '@lblod/ember-rdfa-editor';
+import {
+  SayController,
+  Schema,
+  type NodeViewConstructor,
+} from '@lblod/ember-rdfa-editor';
 import {
   em,
   strikethrough,
@@ -54,11 +57,28 @@ import {
   inlineRdfaWithConfigView,
 } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
+import type IntlService from 'ember-intl/services/intl';
+import { getOwner } from '@ember/owner';
+import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import { hash } from '@ember/helper';
 
-export default class ZittingTextDocumentContainerComponent extends Component {
-  @service intl;
+import RdfaEditorContainer from './rdfa-editor-container';
+import DateInsertComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/variable-plugin/date/insert';
+import DateEditComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/variable-plugin/date/edit';
+import t from 'ember-intl/helpers/t';
+
+type Signature = {
+  Args: {
+    type: string;
+    text: string;
+    onEditorInit: (controller: SayController) => unknown;
+    saving?: boolean;
+  };
+};
+export default class ZittingTextDocumentContainerComponent extends Component<Signature> {
+  @service declare intl: IntlService;
   profile = 'none';
-  @tracked editor;
+  @tracked editor?: SayController;
   type = this.args.type;
 
   editorOptions = {
@@ -107,7 +127,7 @@ export default class ZittingTextDocumentContainerComponent extends Component {
   }
 
   @action
-  rdfaEditorInit(editor) {
+  rdfaEditorInit(editor: SayController) {
     editor.initialize(this.text, { doNotClean: true });
     this.editor = editor;
     this.args.onEditorInit(editor);
@@ -149,18 +169,45 @@ export default class ZittingTextDocumentContainerComponent extends Component {
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
       listTrackingPlugin(),
-      emberApplication({ application: getOwner(this) }),
+      emberApplication({ application: unwrap(getOwner(this)) }),
     ];
   }
 
   get nodeViews() {
-    return (controller) => {
+    return (controller: SayController) => {
       return {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
-        block_rdfa: (...args) => new BlockRDFaView(args, controller),
+        block_rdfa: (...args: Parameters<NodeViewConstructor>) =>
+          new BlockRDFaView(args, controller),
       };
     };
   }
+
+  <template>
+    <RdfaEditorContainer
+      @profile={{this.profile}}
+      @rdfaEditorInit={{this.rdfaEditorInit}}
+      @editorOptions={{this.editorOptions}}
+      @busy={{@saving}}
+      @busyText={{t 'rdfa-editor-container.saving'}}
+      @prefix={{hash ext='http://mu.semte.ch/vocabularies/ext/'}}
+      @property={{@type}}
+      @schema={{this.schema}}
+      @plugins={{this.plugins}}
+      {{! @glint-expect-error }}
+      @nodeViews={{this.nodeViews}}
+    >
+      <:sidebarCollapsible as |container|>
+        <DateInsertComponent @controller={{container.controller}} />
+      </:sidebarCollapsible>
+      <:sidebar as |container|>
+        <DateEditComponent
+          @controller={{container.controller}}
+          @options={{this.config.date}}
+        />
+      </:sidebar>
+    </RdfaEditorContainer>
+  </template>
 }

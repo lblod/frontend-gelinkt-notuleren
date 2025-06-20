@@ -66,6 +66,7 @@ import { blockquote } from '@lblod/ember-rdfa-editor/plugins/blockquote';
 import { code_block } from '@lblod/ember-rdfa-editor/plugins/code';
 import { image, imageView } from '@lblod/ember-rdfa-editor/plugins/image';
 import {
+  ProsePlugin,
   SayController,
   Schema,
   type NodeViewConstructor,
@@ -268,7 +269,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
     };
   }
 
-  get plugins() {
+  get plugins(): ProsePlugin[] {
     return [
       ...tablePlugins,
       tableKeymap,
@@ -576,78 +577,72 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         @plugins={{this.plugins}}
         @shouldEditRdfa={{false}}
       >
-        <:toolbar>
-          {{#if this.controller}}
-            <div class='au-u-margin-right-small'>
-              <ToolbarButton @controller={{this.controller}} />
-            </div>
-          {{/if}}
+        <:toolbar as |container|>
+          <div class='au-u-margin-right-small'>
+            <ToolbarButton @controller={{container.controller}} />
+          </div>
         </:toolbar>
-        <:sidebarCollapsible>
-          {{#if this.controller}}
-            <ArticleStructureCard
-              @controller={{this.controller}}
-              @options={{this.config.structures}}
-            />
-            <CitationInsert
-              @controller={{this.controller}}
-              @config={{this.config.citation}}
-            />
-            <DateInsert @controller={{this.controller}} />
-            <StandardTemplateCard
-              @controller={{this.controller}}
-              @templates={{@standardTemplates}}
-            />
-            <TemplateCommentInsert @controller={{this.controller}} />
-            <LocationInsert
-              @controller={{this.controller}}
-              {{! @glint-expect-error Option vs undefined }}
-              @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
-              @config={{this.config.location}}
-            />
-            <WorshipInsert
-              @controller={{this.controller}}
-              @config={{this.config.worship}}
-            />
-            <LmbInsert
-              @controller={{this.controller}}
-              @config={{this.config.lmb}}
-            />
+        <:sidebarCollapsible as |container|>
+          <ArticleStructureCard
+            @controller={{container.controller}}
+            @options={{this.config.structures}}
+          />
+          <CitationInsert
+            @controller={{container.controller}}
+            @config={{this.config.citation}}
+          />
+          <DateInsert @controller={{container.controller}} />
+          <StandardTemplateCard
+            @controller={{container.controller}}
+            @templates={{@standardTemplates}}
+          />
+          <TemplateCommentInsert @controller={{container.controller}} />
+          <LocationInsert
+            @controller={{container.controller}}
+            {{! @glint-expect-error Option vs undefined }}
+            @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
+            @config={{this.config.location}}
+          />
+          <WorshipInsert
+            @controller={{container.controller}}
+            @config={{this.config.worship}}
+          />
+          <LmbInsert
+            @controller={{container.controller}}
+            @config={{this.config.lmb}}
+          />
 
-            {{#if this.activeNode}}
-              <SnippetInsert
-                @controller={{this.controller}}
-                @config={{this.config.snippet}}
-                @node={{this.activeNode}}
-              />
-            {{/if}}
+          {{#if this.activeNode}}
+            <SnippetInsert
+              @controller={{container.controller}}
+              @config={{this.config.snippet}}
+              @node={{this.activeNode}}
+            />
           {{/if}}
         </:sidebarCollapsible>
-        <:sidebar>
-          {{#if this.controller}}
-            <StructureControlCard @controller={{this.controller}} />
-            <CitationCard
-              @controller={{this.controller}}
-              @config={{this.config.citation}}
-            />
-            <DateEdit
-              @controller={{this.controller}}
-              @options={{this.config.date}}
-            />
-            <CodelistEdit
-              @controller={{this.controller}}
-              @options={{this.codelistEditOptions}}
-            />
-            <LocationEdit
-              @controller={{this.controller}}
-              @options={{this.locationEditOptions}}
-            />
-            <PersonEdit
-              @controller={{this.controller}}
-              @config={{this.config.lmb}}
-            />
-            <TemplateCommentEdit @controller={{this.controller}} />
-          {{/if}}
+        <:sidebar as |container|>
+          <StructureControlCard @controller={{container.controller}} />
+          <CitationCard
+            @controller={{container.controller}}
+            @config={{this.config.citation}}
+          />
+          <DateEdit
+            @controller={{container.controller}}
+            @options={{this.config.date}}
+          />
+          <CodelistEdit
+            @controller={{container.controller}}
+            @options={{this.codelistEditOptions}}
+          />
+          <LocationEdit
+            @controller={{container.controller}}
+            @options={{this.locationEditOptions}}
+          />
+          <PersonEdit
+            @controller={{container.controller}}
+            @config={{this.config.lmb}}
+          />
+          <TemplateCommentEdit @controller={{container.controller}} />
         </:sidebar>
       </RdfaEditorContainer>
     </AuBodyContainer>
