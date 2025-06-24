@@ -85,18 +85,21 @@ const humanReadablePredicate: DisplayGenerator<OutgoingTriple> = (triple) => {
   }
 };
 
-// const HIDDEN_RESOURCE_TYPES = [EXT('Snippet'), EXT('SnippetPlaceholder')];
+const HIDDEN_RESOURCE_TYPES = [EXT('Snippet'), EXT('SnippetPlaceholder')];
 
 const humanReadableSubject: DisplayGenerator<PNode> = (node) => {
   const attrs = node.attrs as RdfaResourceAttrs;
   const rdfType = getRDFType(attrs);
-  if (!rdfType) {
-    return [{ strong: attrs.subject }];
-  }
-  // if (HIDDEN_RESOURCE_TYPES.some((hiddenType) => hiddenType.matches(rdfType))) {
-  //   return [{ hidden: true }];
-  // }
   const label = getLabel(attrs);
+  if (!rdfType) {
+    return {
+      meta: { title: attrs.subject },
+      elements: [{ strong: label ?? attrs.subject }],
+    };
+  }
+  if (HIDDEN_RESOURCE_TYPES.some((hiddenType) => hiddenType.matches(rdfType))) {
+    return [{ hidden: true }];
+  }
   switch (true) {
     case CPSV('PublicService').matches(rdfType):
       return {
