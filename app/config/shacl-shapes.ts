@@ -58,8 +58,8 @@ export const CITERRA_SHACL_SHAPE = `
       <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#Toegang>;
     shacl:description "Vergunning dat verkregen wordt als resultaat van de uitvoering van de Publieke Dienstverlening."@nl,
       "Recht op toegang dat verkregen wordt als resultaat van de uitvoering van de Publieke Dienstverlening."@nl;
-    shacl:resultMessage "Please change this message don't know enough about the model";
-    ext:successMessage "Please change this message don't know enough about the model";
+    shacl:resultMessage "Er werden enkele problemen aangetroffen";
+    ext:successMessage "Er werden geen problemen aangetroffen";
     shacl:name "produceert"@nl;
     shacl:path <http://purl.org/vocab/cpsv#produces> .
 
@@ -75,8 +75,8 @@ export const CITERRA_SHACL_SHAPE = `
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#PubliekeDienstverleningShape/f3050cd43354e672b971fdf4a69154a9bfa03a4a> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Publiekedienstverlening.heeftoutputtype";
     shacl:description "De types die de Output van de Publieke Dienstverlening heeft. "@nl;
     shacl:name "heeft outputtype"@nl;
-    shacl:resultMessage "Please change this message don't know enough about the model";
-    ext:successMessage "Please change this message don't know enough about the model";
+    shacl:resultMessage "Er werden enkele problemen aangetroffen";
+    ext:successMessage "Er werden geen problemen aangetroffen";
     shacl:path <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#heeftOutputtype> .
 
 
@@ -155,8 +155,8 @@ export const CITERRA_SHACL_SHAPE = `
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#VoorwaardeCollectieShape/481218c045793f428f6d7d5507279a4fefc8910a> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Voorwaardecollectie.operatie";
     shacl:description "Logische operatie die toegepast wordt op de Voorwaarden."@nl;
     shacl:name "operatie"@nl;
-    shacl:resultMessage "Please change this message don't know enough about the model";
-    ext:successMessage "Please change this message don't know enough about the model";
+    shacl:resultMessage "Er werden enkele problemen aangetroffen";
+    ext:successMessage "Er werden geen problemen aangetroffen";
     shacl:minCount 1;
     shacl:maxCount 1;
     shacl:path <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#operatie> .
