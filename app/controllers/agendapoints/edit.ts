@@ -7,6 +7,9 @@ import SHACLValidator from 'rdf-validate-shacl';
 import { Parser as ParserN3 } from 'n3';
 import { RdfaParser } from 'rdfa-streaming-parser';
 import type Features from 'ember-feature-flags';
+import { type Quad, type Term } from '@rdfjs/types';
+import type DatasetCore from '@rdfjs/dataset/DatasetCore';
+import type ValidationReport from 'rdf-validate-shacl/src/validation-report';
 import { service } from '@ember/service';
 import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
@@ -351,8 +354,8 @@ export default class AgendapointsEditController extends Controller {
   }
 }
 
-async function parse(triples) {
-  return new Promise((resolve, reject) => {
+async function parse(triples: string) {
+  return new Promise<DatasetCore<Quad>>((resolve, reject) => {
     const parser = new ParserN3();
     const dataset = factory.dataset();
     parser.parse(triples, (error, quad) => {
@@ -368,12 +371,12 @@ async function parse(triples) {
   });
 }
 
-function htmlToRdf(html) {
-  return new Promise((res, rej) => {
+function htmlToRdf(html: string) {
+  return new Promise<DatasetCore<Quad>>((res, rej) => {
     const myParser = new RdfaParser({ contentType: 'text/html' });
     const dataset = factory.dataset();
     myParser
-      .on('data', (data) => {
+      .on('data', (data: Quad) => {
         dataset.add(data);
       })
       .on('error', rej)
@@ -383,17 +386,27 @@ function htmlToRdf(html) {
   });
 }
 
-function shaclSeverityToString(severity) {
+function shaclSeverityToString(severity: Term) {
   const uri = severity.value;
   return uri.replace('http://www.w3.org/ns/shacl#', '');
 }
 
-export function shaclReportToMessage(report) {
+// TODO It would be nice if we could ditch using these internal details...
+type InternalTerm = Term & {
+  id: string;
+};
+type InternalQuad = Quad & {
+  _subject: InternalTerm;
+  _predicate: InternalTerm;
+  _object: InternalTerm;
+};
+
+export function shaclReportToMessage(report: ValidationReport) {
   let reportString = '\n';
   for (const r of report.results) {
     let description = '';
-    const shapeId = r.sourceShape.id;
-    for (let [_, quad] of r.dataset._quads) {
+    const shapeId = (r.sourceShape as InternalTerm).id;
+    for (const quad of [...r.dataset] as InternalQuad[]) {
       if (
         quad._subject?.id === shapeId &&
         quad._predicate?.id === 'http://www.w3.org/ns/shacl#resultMessage'
