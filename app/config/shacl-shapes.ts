@@ -46,17 +46,17 @@ export const CITERRA_SHACL_SHAPE = `
     shacl:targetClass <http://purl.org/vocab/cpsv#PublicService> .
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#PubliekeDienstverleningShape/23779a18a5c2f44c8b0dab3a46507d75ba9170f7> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Publiekedienstverlening.heeftvoorwaarde";
-    shacl:description "Voorwaarden aan voldaan moet worden om gebruik te maken van de Publieke Dienstverlening."@nl;
+    shacl:description "Voorwaarden waaraan voldaan moet worden om gebruik te maken van de Publieke Dienstverlening."@nl;
     shacl:name "heeft voorwaarde"@nl;
-    shacl:resultMessage "De Publieke Dienstverlening heeft geen woorwaarde gekoppeld";
-    ext:successMessage "De Publieke Dienstverlening is correct gekoppeld aan een woorwaarde";
+    shacl:resultMessage "De Publieke Dienstverlening heeft geen voorwaarde gekoppeld";
+    ext:successMessage "De Publieke Dienstverlening is correct gekoppeld aan een voorwaarde";
     shacl:path <http://vocab.belgif.be/ns/publicservice#hasRequirement> .
 
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#PubliekeDienstverleningShape/5bfc49675eef06366e6309009f937f9d904ac377> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Publiekedienstverlening.produceert";
     shacl:class <http://data.vlaanderen.be/ns/besluit#Vergunning>,
       <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#Toegang>;
-    shacl:description "Vergunning dat verkregen wordt als resultaat van de uitvoering van de Publieke Dienstverlening."@nl,
+    shacl:description "Vergunning die verkregen wordt als resultaat van de uitvoering van de Publieke Dienstverlening."@nl,
       "Recht op toegang dat verkregen wordt als resultaat van de uitvoering van de Publieke Dienstverlening."@nl;
     shacl:resultMessage "Er werden enkele problemen aangetroffen";
     ext:successMessage "Er werden geen problemen aangetroffen";
@@ -96,40 +96,40 @@ export const CITERRA_SHACL_SHAPE = `
     shacl:datatype rdf:langString;
     shacl:maxCount 1;
     shacl:minCount 1;
-    shacl:description "Korte uitleg over de aard, kenmerken, toepassingen of andere aanvullende informatie die helpt bij het verduidelijken van de Voorwaarde."@nl;
-    shacl:resultMessage "De woorwaarde heeft geen beschrijving";
-    ext:successMessage "De woorwaarde hebben een juist beschrijving";
+    shacl:description "Korte uitleg over de aard, kenmerken, toepassingen of andere aanvullende informatie die helpt bij het verduidelijken van de voorwaarde."@nl;
+    shacl:resultMessage "De voorwaarde heeft geen beschrijving";
+    ext:successMessage "De voorwaarde heeft een juiste beschrijving";
     shacl:name "beschrijving"@nl;
     shacl:path dc:description .
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#VoorwaardeShape/236f0210baaf149903750c43bbe7012c21debb2a> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Voorwaarde.type";
-    shacl:description "Classificering van de Voorwaarde aan de hand van een gecontroleerde codelijst."@nl;
+    shacl:description "Classificering van de voorwaarde aan de hand van een gecontroleerde codelijst."@nl;
     shacl:maxCount 1;
     shacl:minCount 1;
     shacl:name "type"@nl;
-    shacl:resultMessage "De woorwaarde heeft geen type";
-    ext:successMessage "De woorwaarde hebben een juist type";
+    shacl:resultMessage "De voorwaarde heeft geen type";
+    ext:successMessage "De voorwaarde heeft een juist type";
     shacl:path dc:type .
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#VoorwaardeShape/89c5f32c3193aad42bb0968537063a1363bc30ee> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Voorwaarde.heeftondersteunendbewijs";
     shacl:class <http://data.europa.eu/m8g/Evidence>;
-    shacl:description "Bewijs dat informatie/ondersteuning biedt voor de Voorwaarde."@nl;
+    shacl:description "Bewijs dat informatie/ondersteuning biedt voor de voorwaarde."@nl;
     shacl:name "heeft ondersteunend bewijs"@nl;
-    shacl:resultMessage "Woorwaarde is niet correct gekoppeld aan het bewijs";
-    ext:successMessage "Geen problemen met het verband tussen de woorwaarden en het bewijs";
+    shacl:resultMessage "Een voorwaarde is niet correct gekoppeld aan het bewijs";
+    ext:successMessage "Geen problemen met het verband tussen de voorwaarden en het bewijs";
     shacl:path <http://data.europa.eu/m8g/hasSupportingEvidence> .
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#VoorwaardeShape/f7451c5bb3419860d9a0527686f0bd5efdad4491> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Voorwaarde.isvoorwaardevan";
     shacl:class <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#Voorwaardecollectie>;
-    shacl:description "Supervoorwaarde van de Voorwaarde."@nl;
+    shacl:description "Collectie van voorwaardes"@nl;
     shacl:name "is voorwaarde van"@nl;
-    shacl:resultMessage "Requirement is niet correct gekoppeld aan de collectie";
-    ext:successMessage "Geen problemen met de koppeling van woorwaarden aan de collectie";
+    shacl:resultMessage "Voorwaarde is niet correct gekoppeld aan de collectie";
+    ext:successMessage "Geen problemen met de koppeling van voorwaarden aan de collectie";
     shacl:path <http://data.europa.eu/m8g/isRequirementOf> .
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#VoorwaardeShape/f8b3af2bcda47f912651c708834ece4ee96f4527> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Voorwaarde.heeftbewijstypelijst";
     shacl:class <http://data.europa.eu/m8g/EvidenceTypeList>;
-    shacl:description "Bewijstypelijst dat specificieert welke Bewijstypes nodig zijn om aan de Voorwaarde te voldoen."@nl;
+    shacl:description "Bewijstypelijst die specificieert welke bewijstypes nodig zijn om aan de voorwaarde te voldoen."@nl;
     shacl:name "heeft bewijstypelijst"@nl;
     shacl:resultMessage "De voorwaarde moet een bewijstypelijst hebben";
     ext:successMessage "De voorwaarde heeft een bewijstypelijst";
@@ -146,14 +146,14 @@ export const CITERRA_SHACL_SHAPE = `
     shacl:targetClass <https://data.vlaanderen.be/ns/mobiliteit-intelligente-toegang#Voorwaardecollectie> .
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#VoorwaardeCollectieShape/23779a18a5c2f44c8b0dab3a46507d75ba9170f7> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Voorwaardecollectie.heeftvoorwaarde";
-    shacl:description "Subvoorwaarde van de Voorwaarde."@nl;
+    shacl:description "Subvoorwaarde van de voorwaardecollectie."@nl;
     shacl:name "heeft voorwaarde"@nl;
-    shacl:resultMessage "De voorwaarde collectie moet een subvoorwaarde hebben";
-    ext:successMessage "De voorwaarde collectie heeft een subvoorwaarde ";
+    shacl:resultMessage "De voorwaardecollectie moet een subvoorwaarde hebben";
+    ext:successMessage "De voorwaardecollectie heeft een subvoorwaarde ";
     shacl:path <http://data.europa.eu/m8g/hasRequirement> .
 
   <https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#VoorwaardeCollectieShape/481218c045793f428f6d7d5507279a4fefc8910a> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/mobiliteit-intelligente-toegang/ontwerpstandaard/2024-12-19#Voorwaardecollectie.operatie";
-    shacl:description "Logische operatie die toegepast wordt op de Voorwaarden."@nl;
+    shacl:description "Logische operatie die toegepast wordt op de voorwaarden in de collectie."@nl;
     shacl:name "operatie"@nl;
     shacl:resultMessage "Er werden enkele problemen aangetroffen";
     ext:successMessage "Er werden geen problemen aangetroffen";
