@@ -138,7 +138,7 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/structure-plugin/node';
 import StructureControlCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/structure-plugin/control-card';
 import type { StructurePluginOptions } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/structure-plugin/structure-types';
-import ToolbarButton from '@lblod/ember-rdfa-editor-lblod-plugins/components/table-of-contents-plugin/toolbar-button';
+import TableOfContentsButton from '@lblod/ember-rdfa-editor-lblod-plugins/components/table-of-contents-plugin/toolbar-button';
 import ArticleStructureCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/article-structure-plugin/article-structure-card';
 import CitationInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/citation-plugin/citation-insert';
 import CitationCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/citation-plugin/citation-card';
@@ -156,6 +156,11 @@ import LmbInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lmb-plu
 import { fn } from '@ember/helper';
 import type StandardTemplate from '@lblod/ember-rdfa-editor-lblod-plugins/models/template';
 import type { WorshipPluginConfig } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/worship-plugin';
+import DocumentValidationPluginCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/document-validation-plugin/card';
+import {
+  documentValidationPlugin,
+  documentValidationPluginKey,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
 
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import {
@@ -175,6 +180,7 @@ import DownloadDocument from 'frontend-gelinkt-notuleren/components/download-doc
 import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-editor-container';
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
 import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly-date';
+import { CITERRA_SHACL_SHAPE } from 'frontend-gelinkt-notuleren/config/shacl-shapes';
 import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 
 interface RegulatoryStatementEditSig {
@@ -294,6 +300,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       emberApplication({ application: getOwner(this) }),
       listTrackingPlugin(),
       variableAutofillerPlugin(this.config.autofilledVariable),
+      documentValidationPlugin(this.config.documentValidation),
     ];
   }
 
@@ -384,6 +391,9 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
           administrativeUnit: `${this.currentSession.classificatie?.label} ${this.currentSession.group?.naam}`,
         },
       },
+      documentValidation: {
+        documentShape: CITERRA_SHACL_SHAPE,
+      },
     };
   }
 
@@ -437,9 +447,21 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
     }
   }
 
+  validationTask = task(async () => {
+    if (this.controller) {
+      const html = this.controller.htmlContent;
+      const pluginState = documentValidationPluginKey.getState(
+        this.controller.mainEditorState,
+      );
+      await pluginState?.validationCallback(
+        this.controller.mainEditorView,
+        html,
+      );
+    }
+  });
   saveTask = task(async () => {
-    if (this.editorDocument.title) {
-      const html = this.controller?.htmlContent;
+    if (this.editorDocument.title && this.controller) {
+      const html = this.controller.htmlContent;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
           this.editorDocument.title,
@@ -474,6 +496,10 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       doNotClean: true,
     });
     this.controller = controller;
+    // If we validate on save, the doc is re-initialised and we lose it, so validate on load instead
+    this.validationTask.perform().catch((err) => {
+      console.error('Error validating document', err);
+    });
   }
 
   /**
@@ -822,7 +848,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       >
         <:toolbar as |container|>
           <div class='au-u-margin-right-small'>
-            <ToolbarButton @controller={{container.controller}} />
+            <TableOfContentsButton @controller={{container.controller}} />
           </div>
         </:toolbar>
         <:sidebarCollapsible as |container|>
@@ -901,6 +927,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
           {{/if}}
         </:sidebarCollapsible>
         <:sidebar as |container|>
+          <DocumentValidationPluginCard @controller={{container.controller}} />
           {{#if this.activeNode}}
             <VisualiserCard
               @controller={{container.controller}}
