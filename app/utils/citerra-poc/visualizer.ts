@@ -119,8 +119,8 @@ const humanReadableSubject: DisplayGenerator<PNode> = (
       const operationTypeLabel =
         operationType && OPERATION_TYPES[operationType];
       const label = operationTypeLabel
-        ? `Voorwaarcollectie (${operationTypeLabel})`
-        : 'Voorwaarcollectie';
+        ? `Voorwaardecollectie (${operationTypeLabel})`
+        : 'Voorwaardecollectie';
       return {
         meta: { title: attrs.subject },
         elements: [{ strong: label }],
