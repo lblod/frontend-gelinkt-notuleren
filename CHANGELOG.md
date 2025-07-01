@@ -1,5 +1,19 @@
 # frontend-gelinkt-notuleren
 
+## 5.64.0
+
+### Minor Changes
+
+- [`42a4a1e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/42a4a1ea7355711c25faeb309b1d84144945805e) Thanks [@elpoelma](https://github.com/elpoelma)! - Add rdfa-visualizer config for citerra
+
+- [#868](https://github.com/lblod/frontend-gelinkt-notuleren/pull/868) [`2b78fe6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2b78fe66b2ee36f43d71d982346da1f295c08974) Thanks [@piemonkey](https://github.com/piemonkey)! - Add SHACL validation to the Citerra proof of concept
+
+### Patch Changes
+
+- Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [32.4.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.4.0)
+
+- [#867](https://github.com/lblod/frontend-gelinkt-notuleren/pull/867) [`deb9868`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/deb98687340a1cc10250ffb472a7a09adecee9be) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [12.12.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.12.0)
+
 ## 5.63.0
 
 ### Minor Changes
