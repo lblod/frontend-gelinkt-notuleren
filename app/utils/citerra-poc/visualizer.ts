@@ -87,7 +87,10 @@ const humanReadablePredicate: DisplayGenerator<OutgoingTriple> = (triple) => {
 
 const HIDDEN_RESOURCE_TYPES = [EXT('Snippet'), EXT('SnippetPlaceholder')];
 
-const humanReadableSubject: DisplayGenerator<PNode> = (node) => {
+const humanReadableSubject: DisplayGenerator<PNode> = (
+  node,
+  { isTopLevel },
+) => {
   const attrs = node.attrs as RdfaResourceAttrs;
   const rdfType = getRDFType(attrs);
   const label = getLabel(attrs);
@@ -97,7 +100,10 @@ const humanReadableSubject: DisplayGenerator<PNode> = (node) => {
       elements: [{ strong: label ?? attrs.subject }],
     };
   }
-  if (HIDDEN_RESOURCE_TYPES.some((hiddenType) => hiddenType.matches(rdfType))) {
+  if (
+    isTopLevel &&
+    HIDDEN_RESOURCE_TYPES.some((hiddenType) => hiddenType.matches(rdfType))
+  ) {
     return [{ hidden: true }];
   }
   switch (true) {

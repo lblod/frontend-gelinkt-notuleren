@@ -134,11 +134,11 @@ importers:
         specifier: ^0.10.0
         version: 0.10.2(@glint/template@1.5.2)(ember-simple-auth@6.1.0(@babel/core@7.26.10)(@ember/test-helpers@3.3.1(@babel/core@7.26.10)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       '@lblod/ember-rdfa-editor':
-        specifier: 12.11.0-dev.f1c13caacdde59c18c753e9d7d8b10310bf1b681
-        version: 12.11.0-dev.f1c13caacdde59c18c753e9d7d8b10310bf1b681(yoadtbtun6ib6qcdgxl7h75szu)
+        specifier: 12.12.0
+        version: 12.12.0(yoadtbtun6ib6qcdgxl7h75szu)
       '@lblod/ember-rdfa-editor-lblod-plugins':
         specifier: 32.4.0
-        version: 32.4.0(rrnrhza3ctterphs4bgqwixqci)
+        version: 32.4.0(pcnf5hbkqukuh5rdyjhu4wazyy)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1966,8 +1966,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@12.11.0-dev.f1c13caacdde59c18c753e9d7d8b10310bf1b681':
-    resolution: {integrity: sha512-1xp2zJn/nLGyuv9UI9PVmWU+15qfR7n9tFeFFAUSWew2qarbjHU5rLusFrPGrFTQD0pcmbuzghr/4skZCkzhtQ==}
+  '@lblod/ember-rdfa-editor@12.12.0':
+    resolution: {integrity: sha512-KfoKUq4tHmPsRH7hJHxZHbJBy/4PIWYHHCyt4+a5atPDb7Z+ls0M/xKT6FwsD9DUv6usQIPyUcWkEmJdOuryHw==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.11.0
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -1979,7 +1979,7 @@ packages:
       ember-intl: ^6.4.0 || ^7.0.0
       ember-power-select: ^7.0.0 || ^8.0.0
       ember-power-select-with-create: ^2.0.0 || ^3.0.0
-      ember-source: ^4.12.0 || >=5.0.0
+      ember-source: ^4.12.0 || ^5.0.0 || ^6.0.0
       tracked-built-ins: ^3.3.0
     peerDependenciesMeta:
       '@glint/template':
@@ -13021,7 +13021,7 @@ snapshots:
       - supports-color
       - webpack
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@32.4.0(rrnrhza3ctterphs4bgqwixqci)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@32.4.0(pcnf5hbkqukuh5rdyjhu4wazyy)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(ozthojvnolfd3umnnunjuqt6ri)
       '@babel/core': 7.27.4
@@ -13031,7 +13031,7 @@ snapshots:
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)
       '@ember/string': 3.1.1
       '@embroider/macros': 1.16.10(@glint/template@1.5.2)
-      '@lblod/ember-rdfa-editor': 12.11.0-dev.f1c13caacdde59c18c753e9d7d8b10310bf1b681(yoadtbtun6ib6qcdgxl7h75szu)
+      '@lblod/ember-rdfa-editor': 12.12.0(yoadtbtun6ib6qcdgxl7h75szu)
       '@lblod/lib-decision-shapes': 0.0.22(@babel/core@7.27.4)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.26.10))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
@@ -13092,7 +13092,7 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@12.11.0-dev.f1c13caacdde59c18c753e9d7d8b10310bf1b681(yoadtbtun6ib6qcdgxl7h75szu)':
+  '@lblod/ember-rdfa-editor@12.12.0(yoadtbtun6ib6qcdgxl7h75szu)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(ozthojvnolfd3umnnunjuqt6ri)
       '@codemirror/commands': 6.8.0
@@ -14575,10 +14575,10 @@ snapshots:
 
   babel-eslint@10.1.0(eslint@9.24.0):
     dependencies:
-      '@babel/code-frame': 7.26.2
-      '@babel/parser': 7.26.10
-      '@babel/traverse': 7.26.10
-      '@babel/types': 7.26.10
+      '@babel/code-frame': 7.27.1
+      '@babel/parser': 7.27.7
+      '@babel/traverse': 7.27.7
+      '@babel/types': 7.27.7
       eslint: 9.24.0
       eslint-visitor-keys: 1.3.0
       resolve: 1.22.10
@@ -16414,7 +16414,7 @@ snapshots:
       '@one-ini/wasm': 0.1.1
       commander: 10.0.1
       minimatch: 9.0.1
-      semver: 7.7.1
+      semver: 7.7.2
 
   ee-first@1.1.1: {}
 
