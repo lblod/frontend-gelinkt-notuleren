@@ -159,7 +159,6 @@ import type { WorshipPluginConfig } from '@lblod/ember-rdfa-editor-lblod-plugins
 import DocumentValidationPluginCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/document-validation-plugin/card';
 import {
   documentValidationPlugin,
-  type DocumentValidationPluginArgs,
   documentValidationPluginKey,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
 
@@ -182,6 +181,7 @@ import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-edit
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
 import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly-date';
 import { CITERRA_SHACL_SHAPE } from 'frontend-gelinkt-notuleren/config/shacl-shapes';
+import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -377,6 +377,11 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
           SAY('Section'),
           SAY('Chapter'),
         ],
+        additionalRDFTypes: [
+          sayDataFactory.namedNode(
+            'https://data.vlaanderen.be/ns/mobiliteit#Zone',
+          ),
+        ],
       },
       lmb: {
         endpoint: '/raw-sparql',
@@ -388,7 +393,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       },
       documentValidation: {
         documentShape: CITERRA_SHACL_SHAPE,
-      } satisfies DocumentValidationPluginArgs,
+      },
     };
   }
 
