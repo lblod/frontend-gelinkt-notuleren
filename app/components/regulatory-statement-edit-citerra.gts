@@ -820,121 +820,115 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
         @plugins={{this.plugins}}
         @shouldEditRdfa={{false}}
       >
-        <:toolbar>
-          {{#if this.controller}}
-            <div class='au-u-margin-right-small'>
-              <ToolbarButton @controller={{this.controller}} />
-            </div>
-          {{/if}}
+        <:toolbar as |container|>
+          <div class='au-u-margin-right-small'>
+            <ToolbarButton @controller={{container.controller}} />
+          </div>
         </:toolbar>
-        <:sidebarCollapsible>
-          {{#if this.controller}}
-            {{#if this.activeNode}}
-              <CreateRelationshipButton
-                @controller={{this.controller}}
-                @node={{this.activeNode}}
-                @optionGeneratorConfig={{this.backlinkEditorConfig}}
-              />
-            {{/if}}
-            <ArticleStructureCard
-              @controller={{this.controller}}
-              @options={{this.config.structures}}
+        <:sidebarCollapsible as |container|>
+          {{#if this.activeNode}}
+            <CreateRelationshipButton
+              @controller={{container.controller}}
+              @node={{this.activeNode}}
+              @optionGeneratorConfig={{this.backlinkEditorConfig}}
             />
-            <CitationInsert
-              @controller={{this.controller}}
-              @config={{this.config.citation}}
-            />
-            <DateInsert @controller={{this.controller}} />
-            <StandardTemplateCard
-              @controller={{this.controller}}
-              @templates={{@standardTemplates}}
-            />
-            <TemplateCommentInsert @controller={{this.controller}} />
-            <LocationInsert
-              @controller={{this.controller}}
-              {{! @glint-expect-error Option vs undefined }}
-              @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
-              @config={{this.config.location}}
-            />
-            <WorshipInsert
-              @controller={{this.controller}}
-              @config={{this.config.worship}}
-            />
-            <LmbInsert
-              @controller={{this.controller}}
-              @config={{this.config.lmb}}
-            />
+          {{/if}}
+          <ArticleStructureCard
+            @controller={{container.controller}}
+            @options={{this.config.structures}}
+          />
+          <CitationInsert
+            @controller={{container.controller}}
+            @config={{this.config.citation}}
+          />
+          <DateInsert @controller={{container.controller}} />
+          <StandardTemplateCard
+            @controller={{container.controller}}
+            @templates={{@standardTemplates}}
+          />
+          <TemplateCommentInsert @controller={{container.controller}} />
+          <LocationInsert
+            @controller={{container.controller}}
+            {{! @glint-expect-error Option vs undefined }}
+            @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
+            @config={{this.config.location}}
+          />
+          <WorshipInsert
+            @controller={{container.controller}}
+            @config={{this.config.worship}}
+          />
+          <LmbInsert
+            @controller={{container.controller}}
+            @config={{this.config.lmb}}
+          />
 
-            <AuButton
-              @skin='link'
-              @icon='add'
-              {{on 'click' (fn this.insertThing 'doelgroep')}}
-            >{{t 'rdfa-editor-container.citerra.doelgroep'}}</AuButton>
-            <AuButton
-              @skin='link'
-              @icon='add'
-              {{on 'click' (fn this.insertThing 'voorwaarde')}}
-            >{{t 'rdfa-editor-container.citerra.voorwaarde'}}</AuButton>
-            <AuButton
-              @skin='link'
-              @icon='add'
-              {{on 'click' (fn this.insertThing 'bewijsstuk')}}
-            >{{t 'rdfa-editor-container.citerra.bewijsstuk'}}</AuButton>
-            <AuButton
-              @skin='link'
-              @icon='add'
-              {{on 'click' (fn this.insertThing 'zone')}}
-            >{{t 'rdfa-editor-container.citerra.zone'}}</AuButton>
-            <AuButton
-              @skin='link'
-              @icon='add'
-              {{on 'click' (fn this.insertThing 'duurtijd')}}
-            >{{t 'rdfa-editor-container.citerra.duurtijd'}}</AuButton>
-            <AuButton
-              @skin='link'
-              @icon='add'
-              {{on 'click' (fn this.insertThing 'nummerplaten')}}
-            >{{t 'rdfa-editor-container.citerra.nummerplaten'}}</AuButton>
-            {{#if this.activeNode}}
-              <SnippetInsert
-                @controller={{this.controller}}
-                @config={{this.config.snippet}}
-                @node={{this.activeNode}}
-              />
-            {{/if}}
+          <AuButton
+            @skin='link'
+            @icon='add'
+            {{on 'click' (fn this.insertThing 'doelgroep')}}
+          >{{t 'rdfa-editor-container.citerra.doelgroep'}}</AuButton>
+          <AuButton
+            @skin='link'
+            @icon='add'
+            {{on 'click' (fn this.insertThing 'voorwaarde')}}
+          >{{t 'rdfa-editor-container.citerra.voorwaarde'}}</AuButton>
+          <AuButton
+            @skin='link'
+            @icon='add'
+            {{on 'click' (fn this.insertThing 'bewijsstuk')}}
+          >{{t 'rdfa-editor-container.citerra.bewijsstuk'}}</AuButton>
+          <AuButton
+            @skin='link'
+            @icon='add'
+            {{on 'click' (fn this.insertThing 'zone')}}
+          >{{t 'rdfa-editor-container.citerra.zone'}}</AuButton>
+          <AuButton
+            @skin='link'
+            @icon='add'
+            {{on 'click' (fn this.insertThing 'duurtijd')}}
+          >{{t 'rdfa-editor-container.citerra.duurtijd'}}</AuButton>
+          <AuButton
+            @skin='link'
+            @icon='add'
+            {{on 'click' (fn this.insertThing 'nummerplaten')}}
+          >{{t 'rdfa-editor-container.citerra.nummerplaten'}}</AuButton>
+          {{#if this.activeNode}}
+            <SnippetInsert
+              @controller={{container.controller}}
+              @config={{this.config.snippet}}
+              @node={{this.activeNode}}
+            />
           {{/if}}
         </:sidebarCollapsible>
-        <:sidebar>
-          {{#if this.controller}}
-            {{#if this.activeNode}}
-              <VisualiserCard
-                @controller={{this.controller}}
-                @config={{this.visualizerConfig}}
-              />
-            {{/if}}
-            <StructureControlCard @controller={{this.controller}} />
-            <CitationCard
-              @controller={{this.controller}}
-              @config={{this.config.citation}}
+        <:sidebar as |container|>
+          {{#if this.activeNode}}
+            <VisualiserCard
+              @controller={{container.controller}}
+              @config={{this.visualizerConfig}}
             />
-            <DateEdit
-              @controller={{this.controller}}
-              @options={{this.config.date}}
-            />
-            <CodelistEdit
-              @controller={{this.controller}}
-              @options={{this.codelistEditOptions}}
-            />
-            <LocationEdit
-              @controller={{this.controller}}
-              @options={{this.locationEditOptions}}
-            />
-            <PersonEdit
-              @controller={{this.controller}}
-              @config={{this.config.lmb}}
-            />
-            <TemplateCommentEdit @controller={{this.controller}} />
           {{/if}}
+          <StructureControlCard @controller={{container.controller}} />
+          <CitationCard
+            @controller={{container.controller}}
+            @config={{this.config.citation}}
+          />
+          <DateEdit
+            @controller={{container.controller}}
+            @options={{this.config.date}}
+          />
+          <CodelistEdit
+            @controller={{container.controller}}
+            @options={{this.codelistEditOptions}}
+          />
+          <LocationEdit
+            @controller={{container.controller}}
+            @options={{this.locationEditOptions}}
+          />
+          <PersonEdit
+            @controller={{container.controller}}
+            @config={{this.config.lmb}}
+          />
+          <TemplateCommentEdit @controller={{container.controller}} />
         </:sidebar>
       </RdfaEditorContainer>
     </AuBodyContainer>
