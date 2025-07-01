@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.64.1
+
+### Patch Changes
+
+- [`33bc660`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/33bc6607b8eb7b903f59be7dc7992c4ce57a2a85) Thanks [@elpoelma](https://github.com/elpoelma)! - citerra rdfa-visualizer config: fix typo
+
 ## 5.64.0
 
 ### Minor Changes
