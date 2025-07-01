@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.63.0
+
+### Minor Changes
+
+- [#864](https://github.com/lblod/frontend-gelinkt-notuleren/pull/864) [`7ba5ab1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7ba5ab1cfdbf6d50f63482f8548be0cb8022980c) Thanks [@elpoelma](https://github.com/elpoelma)! - Show year instead of full date when listing administrative bodies for selection
+
+### Patch Changes
+
+- [`9cf90fd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9cf90fd3d288c607070fa6418f2c29839b2f3ab7) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update to [@lblod/ember-rdfa-editor-lblod-plugins version 32.3.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.3.0)
+
 ## 5.62.0
 
 ### Minor Changes
