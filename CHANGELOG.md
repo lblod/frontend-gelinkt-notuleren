@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.65.0
+
+### Minor Changes
+
+- [#869](https://github.com/lblod/frontend-gelinkt-notuleren/pull/869) [`c103b60`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c103b60faae52a531443500374d11e2c113b513a) Thanks [@elpoelma](https://github.com/elpoelma)! - Replace hard-coded citerra SHACL shape by shape sourced from `@lblod/lib-decision-shapes` package
+
+### Patch Changes
+
+- [`617ba13`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/617ba130f6566cb61f074f123506064534ca1038) Thanks [@piemonkey](https://github.com/piemonkey)! - Update plugins to v32.4.1
+
 ## 5.64.1
 
 ### Patch Changes
