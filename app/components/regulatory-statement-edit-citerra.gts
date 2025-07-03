@@ -180,8 +180,8 @@ import DownloadDocument from 'frontend-gelinkt-notuleren/components/download-doc
 import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-editor-container';
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
 import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly-date';
-import { CITERRA_SHACL_SHAPE } from 'frontend-gelinkt-notuleren/config/shacl-shapes';
 import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
+import { getShapeOfDocumentType } from '@lblod/lib-decision-shapes';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -392,7 +392,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
         },
       },
       documentValidation: {
-        documentShape: CITERRA_SHACL_SHAPE,
+        documentShape: getShapeOfDocumentType('citerra'),
       },
     };
   }

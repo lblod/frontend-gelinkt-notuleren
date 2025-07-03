@@ -18,6 +18,9 @@ importers:
       '@curvenote/prosemirror-utils':
         specifier: ^1.0.5
         version: 1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)
+      '@lblod/lib-decision-shapes':
+        specifier: ^0.0.23
+        version: 0.0.23(@babel/core@7.26.10)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.26.10))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
       '@rdfjs/dataset':
         specifier: ^2.0.2
         version: 2.0.2
@@ -1987,6 +1990,9 @@ packages:
 
   '@lblod/lib-decision-shapes@0.0.22':
     resolution: {integrity: sha512-8jNbj26lp75j1fEdx1PvFDZsEpw2a17unrmzYY4rRTfDqGbVnQwYyJLxfhBEudnMzYmjMXN+lDL00p/lavIW/Q==}
+
+  '@lblod/lib-decision-shapes@0.0.23':
+    resolution: {integrity: sha512-+KKFkaAj1B7YxCyRtoOrH+uQ1Yo5/cGyj0oGiFc/28/Bqgk0Dm+L/Kr+OiY4VquI4uOclvRxRWjU9ViF5h/J5A==}
 
   '@lblod/marawa@0.8.0-beta.6':
     resolution: {integrity: sha512-BW3yCpeQlk9EPnQAEQnM9uViA8RC5DkuoiaPJzbuhMcLvKHfI4cjc6dTg9i8qAijbL/xObmQ/Aexko2Xcj9ktw==}
@@ -13183,6 +13189,21 @@ snapshots:
       - jest-util
       - typescript
 
+  '@lblod/lib-decision-shapes@0.0.23(@babel/core@7.26.10)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.26.10))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)':
+    dependencies:
+      ts-jest: 29.4.0(@babel/core@7.26.10)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.26.10))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
+    optionalDependencies:
+      '@rollup/rollup-linux-x64-gnu': 4.44.1
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@jest/transform'
+      - '@jest/types'
+      - babel-jest
+      - esbuild
+      - jest
+      - jest-util
+      - typescript
+
   '@lblod/marawa@0.8.0-beta.6':
     dependencies:
       '@rdfjs/data-model': 1.3.4
@@ -23191,6 +23212,26 @@ snapshots:
   ts-api-utils@2.1.0(typescript@5.8.2):
     dependencies:
       typescript: 5.8.2
+
+  ts-jest@29.4.0(@babel/core@7.26.10)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.26.10))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2):
+    dependencies:
+      bs-logger: 0.2.6
+      ejs: 3.1.10
+      fast-json-stable-stringify: 2.1.0
+      jest: 30.0.3(@types/node@22.13.10)(node-notifier@10.0.1)
+      json5: 2.2.3
+      lodash.memoize: 4.1.2
+      make-error: 1.3.6
+      semver: 7.7.2
+      type-fest: 4.41.0
+      typescript: 5.8.2
+      yargs-parser: 21.1.1
+    optionalDependencies:
+      '@babel/core': 7.26.10
+      '@jest/transform': 30.0.2
+      '@jest/types': 30.0.1
+      babel-jest: 30.0.2(@babel/core@7.26.10)
+      jest-util: 30.0.2
 
   ts-jest@29.4.0(@babel/core@7.27.4)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.26.10))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2):
     dependencies:
