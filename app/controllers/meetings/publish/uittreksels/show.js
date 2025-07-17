@@ -204,7 +204,9 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
       );
       if (!result.ok) {
         const json = await result.json();
-        const errors = json?.errors.map((error) => error.title).join('\n');
+        const errors = json?.errors
+          .map((error) => error.title || error)
+          .join('\n');
         throw errors;
       }
       // TODO if the prepublisher would be fully jsonAPI compliant, this would not be needed
