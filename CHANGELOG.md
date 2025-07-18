@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.66.0
+
+### Minor Changes
+
+- [`e88bf58`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e88bf58b94512b4a4153b4912062934639109865) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Update to [@lblod/ember-rdfa-editor-lblod-plugins version 32.5.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.5.1)
+
+### Patch Changes
+
+- [#870](https://github.com/lblod/frontend-gelinkt-notuleren/pull/870) [`3b43d4c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3b43d4c6802edfe09a1972f2247617e8744b3519) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Correctly show prepublisher errors on the extract page
+
 ## 5.65.0
 
 ### Minor Changes
