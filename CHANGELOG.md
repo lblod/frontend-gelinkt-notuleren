@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.66.1
+
+### Patch Changes
+
+- [`24b5293`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/24b5293974b43caf4fc237a68e3562beec6acdb5) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor-lblod-plugins version 32.5.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.5.2)
+
+- [#871](https://github.com/lblod/frontend-gelinkt-notuleren/pull/871) [`f566f1b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/f566f1b77aea2e34735b3d59bafa88cc64d3ba87) Thanks [@piemonkey](https://github.com/piemonkey)! - Correctly style traffic measure insert modal
+
 ## 5.66.0
 
 ### Minor Changes
