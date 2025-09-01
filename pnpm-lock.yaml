@@ -137,11 +137,11 @@ importers:
         specifier: ^0.10.0
         version: 0.10.2(@glint/template@1.5.2)(ember-simple-auth@6.1.0(@babel/core@7.26.10)(@ember/test-helpers@3.3.1(@babel/core@7.26.10)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.26.10))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       '@lblod/ember-rdfa-editor':
-        specifier: 12.12.0
-        version: 12.12.0(yoadtbtun6ib6qcdgxl7h75szu)
+        specifier: 12.12.0-dev.f7533b0555925143815be5134cf5a069d9fac202
+        version: 12.12.0-dev.f7533b0555925143815be5134cf5a069d9fac202(yoadtbtun6ib6qcdgxl7h75szu)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 32.5.2
-        version: 32.5.2(pcnf5hbkqukuh5rdyjhu4wazyy)
+        specifier: 32.5.2-dev.b732735c373e2cec7bb4ccce6974cc0934ae1f99
+        version: 32.5.2-dev.b732735c373e2cec7bb4ccce6974cc0934ae1f99(tbkg52dhfcxdrsfvi5r37ebwpm)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1928,14 +1928,14 @@ packages:
       ember-simple-auth: ^6.0.0
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.2':
-    resolution: {integrity: sha512-9mtjSqBaVe3gxvbZozEpAmt+2zw7SIGFboSd0jA/oAxZUr0jZbRjqKomysQcGLLLiylOBZ4eetbSw4TTJWpVuw==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.2-dev.b732735c373e2cec7bb4ccce6974cc0934ae1f99':
+    resolution: {integrity: sha512-Pv3f+/Ao9JKYvox8JvU6IUr4en7MzILOc79W2XcG3JQZCHSpw/UglJVJ1dpDCmaMobgARrYTE8lBK5xa+ti6PA==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
       '@ember/string': 3.x
       '@glint/template': ^1.4.0
-      '@lblod/ember-rdfa-editor': ^12.1.0
+      '@lblod/ember-rdfa-editor': 12.12.0-dev.f7533b0555925143815be5134cf5a069d9fac202
       ember-concurrency: ^4.0.2
       ember-element-helper: ^0.8.6
       ember-intl: ^7.0.0
@@ -1952,8 +1952,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@12.12.0':
-    resolution: {integrity: sha512-KfoKUq4tHmPsRH7hJHxZHbJBy/4PIWYHHCyt4+a5atPDb7Z+ls0M/xKT6FwsD9DUv6usQIPyUcWkEmJdOuryHw==}
+  '@lblod/ember-rdfa-editor@12.12.0-dev.f7533b0555925143815be5134cf5a069d9fac202':
+    resolution: {integrity: sha512-YtlbQIixnDEnqLBRRaWji9R20Xfd0o2DGagZKc4tdz5vCS1AsMJ+2x4zTN7Zog6cvJgQlrTj5lUSgTdJKzG6wg==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.11.0
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -12950,7 +12950,7 @@ snapshots:
       - supports-color
       - webpack
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.2(pcnf5hbkqukuh5rdyjhu4wazyy)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.2-dev.b732735c373e2cec7bb4ccce6974cc0934ae1f99(tbkg52dhfcxdrsfvi5r37ebwpm)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(ozthojvnolfd3umnnunjuqt6ri)
       '@babel/core': 7.27.7
@@ -12960,7 +12960,7 @@ snapshots:
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)
       '@ember/string': 3.1.1
       '@embroider/macros': 1.16.10(@glint/template@1.5.2)
-      '@lblod/ember-rdfa-editor': 12.12.0(yoadtbtun6ib6qcdgxl7h75szu)
+      '@lblod/ember-rdfa-editor': 12.12.0-dev.f7533b0555925143815be5134cf5a069d9fac202(yoadtbtun6ib6qcdgxl7h75szu)
       '@lblod/lib-decision-shapes': 0.0.22(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.26.10))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
@@ -13021,7 +13021,7 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@12.12.0(yoadtbtun6ib6qcdgxl7h75szu)':
+  '@lblod/ember-rdfa-editor@12.12.0-dev.f7533b0555925143815be5134cf5a069d9fac202(yoadtbtun6ib6qcdgxl7h75szu)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(ozthojvnolfd3umnnunjuqt6ri)
       '@codemirror/commands': 6.8.0
