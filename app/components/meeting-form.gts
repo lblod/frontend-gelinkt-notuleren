@@ -145,26 +145,24 @@ export default class MeetingForm extends Component<Signature> {
       },
     };
     try {
-      const versionedNotulen = await this.store.query(
-        'versioned-notulen',
-        publicationFilter,
-      );
-      const versionedBesluitenLijsten = await this.store.query(
-        'versioned-besluiten-lijst',
-        publicationFilter,
-      );
-      const versionedBehandelingen = await this.store.query(
-        'versioned-behandeling',
-        publicationFilter,
-      );
-      const agendas = await this.store.query('agenda', {
-        filter: {
-          'agenda-status': 'gepubliceerd',
-          zitting: {
-            id: this.zitting.id,
+      const [
+        versionedNotulen,
+        versionedBesluitenLijsten,
+        versionedBehandelingen,
+        agendas,
+      ] = await Promise.all([
+        this.store.query('versioned-notulen', publicationFilter),
+        this.store.query('versioned-besluiten-lijst', publicationFilter),
+        this.store.query('versioned-behandeling', publicationFilter),
+        this.store.query('agenda', {
+          filter: {
+            'agenda-status': 'gepubliceerd',
+            zitting: {
+              id: this.zitting.id,
+            },
           },
-        },
-      });
+        }),
+      ]);
       const publishedResourcesCount =
         agendas.length +
         versionedBehandelingen.length +
