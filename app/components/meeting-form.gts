@@ -144,32 +144,35 @@ export default class MeetingForm extends Component<Signature> {
         },
       },
     };
-    const versionedNotulen = await this.store.query(
-      'versioned-notulen',
-      publicationFilter,
-    );
-    const versionedBesluitenLijsten = await this.store.query(
-      'versioned-besluiten-lijst',
-      publicationFilter,
-    );
-    const versionedBehandelingen = await this.store.query(
-      'versioned-behandeling',
-      publicationFilter,
-    );
-    const agendas = await this.store.query('agenda', {
-      filter: {
-        'agenda-status': 'gepubliceerd',
-        zitting: {
-          id: this.zitting.id,
-        },
-      },
-    });
-    const publishedResourcesCount =
-      agendas.length +
-      versionedBehandelingen.length +
-      versionedBesluitenLijsten.length +
-      versionedNotulen.length;
-    return publishedResourcesCount === 0;
+    try {
+      const [
+        versionedNotulen,
+        versionedBesluitenLijsten,
+        versionedBehandelingen,
+        agendas,
+      ] = await Promise.all([
+        this.store.query('versioned-notulen', publicationFilter),
+        this.store.query('versioned-besluiten-lijst', publicationFilter),
+        this.store.query('versioned-behandeling', publicationFilter),
+        this.store.query('agenda', {
+          filter: {
+            'agenda-status': 'gepubliceerd',
+            zitting: {
+              id: this.zitting.id,
+            },
+          },
+        }),
+      ]);
+      const publishedResourcesCount =
+        agendas.length +
+        versionedBehandelingen.length +
+        versionedBesluitenLijsten.length +
+        versionedNotulen.length;
+      return publishedResourcesCount === 0;
+    } catch (err) {
+      console.error('Error while checking if meeting can be deleted', err);
+      return true;
+    }
   });
 
   isSigned = trackedFunction(this, async () => {
@@ -602,7 +605,7 @@ export default class MeetingForm extends Component<Signature> {
                 {{t 'meeting-form.actions.download-treatments'}}
               </AuLink>
             {{/if}}
-            {{#if (and this.canBeDeleted (not this.readOnly))}}
+            {{#if (and this.canBeDeleted.value (not this.readOnly))}}
               <AuButton
                 {{on 'click' this.toggleShowDeleteModal}}
                 @skin='link'
