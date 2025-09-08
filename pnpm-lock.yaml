@@ -17,7 +17,7 @@ importers:
     dependencies:
       '@curvenote/prosemirror-utils':
         specifier: ^1.0.5
-        version: 1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)
+        version: 1.0.5(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)
       '@lblod/lib-decision-shapes':
         specifier: ^0.0.23
         version: 0.0.23(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
@@ -137,11 +137,11 @@ importers:
         specifier: ^0.10.0
         version: 0.10.2(@glint/template@1.5.2)(ember-simple-auth@6.1.0(@babel/core@7.27.7)(@ember/test-helpers@3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       '@lblod/ember-rdfa-editor':
-        specifier: 12.12.0
-        version: 12.12.0(3olhw4d2ca2f7fibd2vfu7lifq)
+        specifier: 12.12.1
+        version: 12.12.1(3olhw4d2ca2f7fibd2vfu7lifq)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 32.5.2
-        version: 32.5.2(aeztzgug2j5q4qktndczi654nu)
+        specifier: 32.5.3
+        version: 32.5.3(zurdymopr4p6jlp7amjkpokcdu)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1846,14 +1846,14 @@ packages:
       ember-simple-auth: ^6.0.0
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.2':
-    resolution: {integrity: sha512-9mtjSqBaVe3gxvbZozEpAmt+2zw7SIGFboSd0jA/oAxZUr0jZbRjqKomysQcGLLLiylOBZ4eetbSw4TTJWpVuw==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.3':
+    resolution: {integrity: sha512-62+kNSxoJdWlrX1hrZCd/BS7AZKVdi/O+w3sc5vhgoSOVyh+rYI1Fx8Fqc0yfFPHJKweZmaU0hwzn8ppUdAVKA==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
       '@ember/string': 3.x
       '@glint/template': ^1.4.0
-      '@lblod/ember-rdfa-editor': ^12.1.0
+      '@lblod/ember-rdfa-editor': ^12.12.1
       ember-concurrency: ^4.0.2
       ember-element-helper: ^0.8.6
       ember-intl: ^7.0.0
@@ -1870,8 +1870,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@12.12.0':
-    resolution: {integrity: sha512-KfoKUq4tHmPsRH7hJHxZHbJBy/4PIWYHHCyt4+a5atPDb7Z+ls0M/xKT6FwsD9DUv6usQIPyUcWkEmJdOuryHw==}
+  '@lblod/ember-rdfa-editor@12.12.1':
+    resolution: {integrity: sha512-LWJWdbr8lEf/qTavZDC7QNKX0OqAcXxjD4U0of5KsPZA9E9GNUSwP6/i8bWxas9flpVjhbtsoX6RbROFqTOVIA==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.11.0
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -8108,8 +8108,8 @@ packages:
   property-expr@2.0.6:
     resolution: {integrity: sha512-SVtmxhRE/CGkn3eZY1T6pC8Nln6Fr/lu1mKSgRud0eC73whjGfoAogbn78LkD8aFL0zz3bAFerKSnOl7NlErBA==}
 
-  prosemirror-commands@1.7.0:
-    resolution: {integrity: sha512-6toodS4R/Aah5pdsrIwnTYPEjW70SlO5a66oo5Kk+CIrgJz3ukOoS+FYDGqvQlAX5PxoGWDX1oD++tn5X3pyRA==}
+  prosemirror-commands@1.7.1:
+    resolution: {integrity: sha512-rT7qZnQtx5c0/y/KlYaGvtG411S97UaL6gdp6RIZ23DLHanMYLyfGBV5DtSnZdthQql7W+lEVbpSfwtO8T+L2w==}
 
   prosemirror-dev-tools@4.2.0:
     resolution: {integrity: sha512-Hm1HRgK0Fxhb+Dy507R1uHgP3Ixuwbh7ZHD6NUZGEAl26BKW95L70nwdA1P4odPfxPsx0lBZm1KMpulsOJMwpQ==}
@@ -8130,8 +8130,8 @@ packages:
   prosemirror-keymap@1.2.2:
     resolution: {integrity: sha512-EAlXoksqC6Vbocqc0GtzCruZEzYgrn+iiGnNjsJsH4mrnIGex4qbLdWWNza3AW5W36ZRrlBID0eM6bdKH4OStQ==}
 
-  prosemirror-model@1.25.0:
-    resolution: {integrity: sha512-/8XUmxWf0pkj2BmtqZHYJipTBMHIdVjuvFzMvEoxrtyGNmfvdhBiRwYt/eFwy2wA9DtBW3RLqvZnjurEkHaFCw==}
+  prosemirror-model@1.25.3:
+    resolution: {integrity: sha512-dY2HdaNXlARknJbrManZ1WyUtos+AP97AmvqdOQtWtrrC5g4mohVX5DTi9rXNFSk09eczLq9GuNTtq3EfMeMGA==}
 
   prosemirror-schema-basic@1.2.4:
     resolution: {integrity: sha512-ELxP4TlX3yr2v5rM7Sb70SqStq5NvI15c0j9j/gjsrO5vaw+fnnpovCLEGIcpeGfifkuqJwl4fon6b+KdrODYQ==}
@@ -8142,11 +8142,11 @@ packages:
   prosemirror-state@1.4.3:
     resolution: {integrity: sha512-goFKORVbvPuAQaXhpbemJFRKJ2aixr+AZMGiquiqKxaucC6hlpHNZHWgz5R7dS4roHiwq9vDctE//CZ++o0W1Q==}
 
-  prosemirror-transform@1.10.3:
-    resolution: {integrity: sha512-Nhh/+1kZGRINbEHmVu39oynhcap4hWTs/BlU7NnxWj3+l0qi8I1mu67v6mMdEe/ltD8hHvU4FV6PHiCw2VSpMw==}
+  prosemirror-transform@1.10.4:
+    resolution: {integrity: sha512-pwDy22nAnGqNR1feOQKHxoFkkUtepoFAd3r2hbEDsnf4wp57kKA36hXsB3njA9FtONBEwSDnDeCiJe+ItD+ykw==}
 
-  prosemirror-view@1.38.1:
-    resolution: {integrity: sha512-4FH/uM1A4PNyrxXbD+RAbAsf0d/mM0D/wAKSVVWK7o0A9Q/oOXJBrw786mBf2Vnrs/Edly6dH6Z2gsb7zWwaUw==}
+  prosemirror-view@1.41.0:
+    resolution: {integrity: sha512-FatMIIl0vRHMcNc3sPy3cMw5MMyWuO1nWQxqvYpJvXAruucGvmQ2tyyjT2/Lbok77T9a/qZqBVCq4sj43V2ihw==}
 
   proto-fetch@2.0.0:
     resolution: {integrity: sha512-QuhQVYN9WxCbJmfp/s3HLofEaDr/Jkq873++mo126XB2h+TFcKIGCIxeORH5ww9MOi2uP1SfWy4EgQH5PuBfdQ==}
@@ -11013,9 +11013,9 @@ snapshots:
     dependencies:
       postcss-selector-parser: 7.1.0
 
-  '@curvenote/prosemirror-utils@1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)':
+  '@curvenote/prosemirror-utils@1.0.5(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)':
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
 
   '@digitalbazaar/http-client@3.4.1(web-streams-polyfill@3.3.3)':
@@ -11996,17 +11996,17 @@ snapshots:
       - supports-color
       - webpack
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.2(aeztzgug2j5q4qktndczi654nu)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@32.5.3(zurdymopr4p6jlp7amjkpokcdu)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(mwe6lkizascxvm6eonaeiagaaa)
       '@babel/core': 7.27.7
       '@codemirror/lang-html': 6.4.9
       '@codemirror/state': 6.5.2
       '@codemirror/view': 6.36.4
-      '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)
+      '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)
       '@ember/string': 3.1.1
       '@embroider/macros': 1.16.10(@glint/template@1.5.2)
-      '@lblod/ember-rdfa-editor': 12.12.0(3olhw4d2ca2f7fibd2vfu7lifq)
+      '@lblod/ember-rdfa-editor': 12.12.1(3olhw4d2ca2f7fibd2vfu7lifq)
       '@lblod/lib-decision-shapes': 0.0.22(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
@@ -12067,7 +12067,7 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@12.12.0(3olhw4d2ca2f7fibd2vfu7lifq)':
+  '@lblod/ember-rdfa-editor@12.12.1(3olhw4d2ca2f7fibd2vfu7lifq)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(mwe6lkizascxvm6eonaeiagaaa)
       '@codemirror/commands': 6.8.0
@@ -12075,7 +12075,7 @@ snapshots:
       '@codemirror/lang-xml': 6.1.0
       '@codemirror/state': 6.5.2
       '@codemirror/view': 6.36.4
-      '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)
+      '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)
       '@ember/optional-features': 2.2.0
       '@ember/render-modifiers': 2.1.0(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))
       '@ember/test-helpers': 3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
@@ -12087,7 +12087,7 @@ snapshots:
       '@graphy/memory.dataset.fast': 4.3.3
       '@lblod/marawa': 0.8.0-beta.6
       '@rdfjs/types': 1.1.2
-      '@say-editor/prosemirror-invisibles': 0.1.1(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)(prosemirror-view@1.38.1)
+      '@say-editor/prosemirror-invisibles': 0.1.1(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)(prosemirror-view@1.41.0)
       '@say-editor/prosemirror-tables': 0.3.0
       codemirror: 6.0.1
       common-tags: 1.8.2
@@ -12115,17 +12115,17 @@ snapshots:
       linkifyjs: 4.2.0
       mdn-polyfills: 5.20.0
       process: 0.11.10
-      prosemirror-commands: 1.7.0
+      prosemirror-commands: 1.7.1
       prosemirror-dropcursor: 1.8.1
       prosemirror-history: 1.4.1
       prosemirror-inputrules: 1.5.0
       prosemirror-keymap: 1.2.2
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-schema-basic: 1.2.4
       prosemirror-schema-list: 1.5.1
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
-      prosemirror-view: 1.38.1
+      prosemirror-transform: 1.10.4
+      prosemirror-view: 1.41.0
       rdf-data-factory: 1.1.3
       reactiveweb: 1.4.0(@babel/core@7.27.7)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))
       relative-to-absolute-iri: 1.0.7
@@ -12654,19 +12654,19 @@ snapshots:
     dependencies:
       xmlchars: 2.2.0
 
-  '@say-editor/prosemirror-invisibles@0.1.1(prosemirror-model@1.25.0)(prosemirror-state@1.4.3)(prosemirror-view@1.38.1)':
+  '@say-editor/prosemirror-invisibles@0.1.1(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)(prosemirror-view@1.41.0)':
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
-      prosemirror-view: 1.38.1
+      prosemirror-view: 1.41.0
 
   '@say-editor/prosemirror-tables@0.3.0':
     dependencies:
       prosemirror-keymap: 1.2.2
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
-      prosemirror-view: 1.38.1
+      prosemirror-transform: 1.10.4
+      prosemirror-view: 1.41.0
 
   '@simple-dom/document@1.4.0':
     dependencies:
@@ -20264,11 +20264,11 @@ snapshots:
 
   property-expr@2.0.6: {}
 
-  prosemirror-commands@1.7.0:
+  prosemirror-commands@1.7.1:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
+      prosemirror-transform: 1.10.4
 
   prosemirror-dev-tools@4.2.0(@babel/core@7.27.7)(@babel/template@7.27.2)(@types/react@18.3.19)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
@@ -20278,7 +20278,7 @@ snapshots:
       jotai: 1.13.1(@babel/core@7.27.7)(@babel/template@7.27.2)(react@19.1.0)
       jsondiffpatch: 0.4.1
       nanoid: 3.3.11
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
       react: 19.1.0
       react-dock: 0.6.0(@types/react@18.3.19)(react@19.1.0)
@@ -20301,55 +20301,55 @@ snapshots:
   prosemirror-dropcursor@1.8.1:
     dependencies:
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
-      prosemirror-view: 1.38.1
+      prosemirror-transform: 1.10.4
+      prosemirror-view: 1.41.0
 
   prosemirror-history@1.4.1:
     dependencies:
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
-      prosemirror-view: 1.38.1
+      prosemirror-transform: 1.10.4
+      prosemirror-view: 1.41.0
       rope-sequence: 1.3.4
 
   prosemirror-inputrules@1.5.0:
     dependencies:
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
+      prosemirror-transform: 1.10.4
 
   prosemirror-keymap@1.2.2:
     dependencies:
       prosemirror-state: 1.4.3
       w3c-keyname: 2.2.8
 
-  prosemirror-model@1.25.0:
+  prosemirror-model@1.25.3:
     dependencies:
       orderedmap: 2.1.1
 
   prosemirror-schema-basic@1.2.4:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
 
   prosemirror-schema-list@1.5.1:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
+      prosemirror-transform: 1.10.4
 
   prosemirror-state@1.4.3:
     dependencies:
-      prosemirror-model: 1.25.0
-      prosemirror-transform: 1.10.3
-      prosemirror-view: 1.38.1
+      prosemirror-model: 1.25.3
+      prosemirror-transform: 1.10.4
+      prosemirror-view: 1.41.0
 
-  prosemirror-transform@1.10.3:
+  prosemirror-transform@1.10.4:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
 
-  prosemirror-view@1.38.1:
+  prosemirror-view@1.41.0:
     dependencies:
-      prosemirror-model: 1.25.0
+      prosemirror-model: 1.25.3
       prosemirror-state: 1.4.3
-      prosemirror-transform: 1.10.3
+      prosemirror-transform: 1.10.4
 
   proto-fetch@2.0.0: {}
 
