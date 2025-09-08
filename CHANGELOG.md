@@ -1,5 +1,24 @@
 # frontend-gelinkt-notuleren
 
+## 5.66.2
+
+### Patch Changes
+
+- [#872](https://github.com/lblod/frontend-gelinkt-notuleren/pull/872) [`1f0313b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1f0313b69a0fe35cf059a628e89948d9031e0601) Thanks [@abeforgit](https://github.com/abeforgit)! - Fix article parsing
+
+- [#872](https://github.com/lblod/frontend-gelinkt-notuleren/pull/872) [`192c1ab`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/192c1ab287c399c3241845b6e18af01ed43e76f9) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to [12.12.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/@lblod/ember-rdfa-editor@12.12.1)
+  Fix parsing of articles
+
+- [#872](https://github.com/lblod/frontend-gelinkt-notuleren/pull/872) [`192c1ab`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/192c1ab287c399c3241845b6e18af01ed43e76f9) Thanks [@abeforgit](https://github.com/abeforgit)! - Bump plugins to [v32.5.3](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.5.3)
+
+  - fix parsing of articles
+  - fix parsing of oslo locations
+  - fix parsing subjects of roadsign_regulation nodes
+
+- [#873](https://github.com/lblod/frontend-gelinkt-notuleren/pull/873) [`1e8da3a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1e8da3ae6f49e9b6f950371de0435a47d56f6ca4) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix detection of published resources to disable deletion of meetings
+
+- [#873](https://github.com/lblod/frontend-gelinkt-notuleren/pull/873) [`6b12346`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6b12346acc6cf16f1c629e932da0ce5ea485e580) Thanks [@piemonkey](https://github.com/piemonkey)! - Improve error handling when deleting meetings to display feedback to user
+
 ## 5.66.1
 
 ### Patch Changes
