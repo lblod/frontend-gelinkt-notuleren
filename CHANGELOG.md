@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.66.3
+
+### Patch Changes
+
+- [`9478ec3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9478ec392415c2f187fe66541963647dc1071267) Thanks [@abeforgit](https://github.com/abeforgit)! - Bump plugins to [v32.6.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.6.0)
+
+- [`9478ec3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9478ec392415c2f187fe66541963647dc1071267) Thanks [@abeforgit](https://github.com/abeforgit)! - Sort traffic signs according to registry ordering
+
 ## 5.66.2
 
 ### Patch Changes
