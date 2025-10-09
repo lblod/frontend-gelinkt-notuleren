@@ -141,6 +141,7 @@
     "globals": "^16.0.0",
     "leaflet": "^1.9.4",
     "loader.js": "^4.7.0",
+    "miragejs": "^0.1.48",
     "postscribe": "^2.0.8",
     "prettier": "^3.4.2",
     "prettier-plugin-ember-template-tag": "^2.0.2",
