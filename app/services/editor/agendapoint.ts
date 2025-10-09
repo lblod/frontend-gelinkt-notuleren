@@ -76,7 +76,10 @@ import {
   templateComment,
   templateCommentView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
-import { roadsign_regulation } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+import {
+  roadsign_regulation,
+  trafficSignalMigration,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
 import {
   link,
   linkView,
@@ -341,7 +344,10 @@ export default class AgendapointEditorService extends Service {
         hard_break,
         block_rdfa: blockRdfaWithConfig({ rdfaAware: true }),
         invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
-        inline_rdfa: inlineRdfaWithConfig({ rdfaAware: true }),
+        inline_rdfa: inlineRdfaWithConfig({
+          rdfaAware: true,
+          modelMigrations: [trafficSignalMigration],
+        }),
         link: link(this.config.link),
         person_variable,
         autofilled_variable,
