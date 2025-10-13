@@ -907,3 +907,30 @@ copy-options:
     subsection: Onderafdeling
     article: Artikel
     paragraph: Paragraaf
+
+ar-importer:
+  sidebar-widget:
+    label: AR-ontwerp
+  modal:
+    title: AR-ontwerp invoegen
+  overview:
+    filters:
+      title: Filters
+      name:
+        label: AR-Ontwerp naam
+      signal-code:
+        label: Verkeerstekencode
+      address:
+        label: Adres
+      reset: Herstel alle filters
+    table:
+      headers:
+        name: Naam
+        date: Laatste wijziging
+      actions:
+        preview: Preview
+        insert: Voeg in
+      no-data: Geen ontwerpen gevonden
+  preview:
+    return-to-overview: Terug naar overzicht
+    insert: Voeg in

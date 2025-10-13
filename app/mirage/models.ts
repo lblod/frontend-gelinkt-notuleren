@@ -9,6 +9,7 @@ export type ArDesign = {
   measures: HasMany<'measure'>;
 };
 export type Measure = {
+  rawTemplateString: string;
   templateString: string;
   design: BelongsTo<'ar-design'>;
   variables: Variable[];

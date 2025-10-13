@@ -901,3 +901,30 @@ copy-options:
     subsection: Subsection
     article: Article
     paragraph: Paragraph
+
+ar-importer:
+  sidebar-widget:
+    label: \'AR\'-design
+  modal:
+    title: Insert \'AR\'-design
+  overview:
+    filters:
+      title: Filters
+      name:
+        label: Name
+      signal-code:
+        label: Traffic signal code
+      address:
+        label: Address
+      reset: Reset filters
+    table:
+      headers:
+        name: Name
+        date: Last modified
+      actions:
+        preview: Preview
+        insert: Insert
+      no-data: No designs found
+  preview:
+    return-to-overview: Return to overview
+    insert: Insert
