@@ -10,7 +10,7 @@ export default class ArDesign extends Model {
 
   @attr('string') uri?: string;
   @attr('string') name?: string;
-  @attr('datetime') date?: string;
+  @attr('datetime') date?: Date;
 
   @hasMany('measure', { async: true, inverse: 'design' })
   declare measures: HasMany<Measure>;
