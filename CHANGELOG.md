@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.67.0
+
+### Minor Changes
+
+- [#874](https://github.com/lblod/frontend-gelinkt-notuleren/pull/874) [`1a71633`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1a7163399bdc679360e3a9e2259e078cbcbedc96) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor 12.13.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.13.0)
+
+- [#874](https://github.com/lblod/frontend-gelinkt-notuleren/pull/874) [`1a71633`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1a7163399bdc679360e3a9e2259e078cbcbedc96) Thanks [@piemonkey](https://github.com/piemonkey)! - Migrate documents using an old data model for roadsigns to the latest model when opening them
+
+### Patch Changes
+
+- [`2926eb6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2926eb609e3abd40de31b763d85402c6f92a996a) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [editor v12.14.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.14.0) and [plugins v32.8.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.8.0)
+
 ## 5.66.5
 
 ### Patch Changes
