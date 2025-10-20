@@ -165,6 +165,7 @@
   },
   "pnpm": {
     "overrides": {
+      "caniuse-lite": "1.0.30001751",
       "ember-auto-import": "$ember-auto-import",
       "ember-math-helpers": "$ember-math-helpers",
       "ember-truth-helpers": "$ember-truth-helpers",
