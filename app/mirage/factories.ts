@@ -124,7 +124,7 @@ export default {
         .past({
           years: 1,
         })
-        .toLocaleString();
+        .toISOString();
     },
     name(i) {
       return `AR Design ${i + 1}`;
@@ -132,10 +132,15 @@ export default {
   }),
   measure: Factory.extend<Partial<Measure>>({
     templateString(id) {
-      return `Template ${id}`;
+      return MEASURE_SAMPLE_DATA[id % MEASURE_SAMPLE_DATA.length]!
+        .templateString;
+    },
+    rawTemplateString(id) {
+      return MEASURE_SAMPLE_DATA[id % MEASURE_SAMPLE_DATA.length]!
+        .rawTemplateString;
     },
     variables() {
-      return [];
+      return undefined;
     },
   }),
 };

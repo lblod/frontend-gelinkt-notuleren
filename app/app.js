@@ -4,11 +4,11 @@ import loadInitializers from 'ember-load-initializers';
 import config from 'frontend-gelinkt-notuleren/config/environment';
 import './config/custom-inflector-rules';
 import '@glint/environment-ember-loose';
-import { setupServer } from 'frontend-gelinkt-notuleren/mirage/server';
+// import { setupServer } from 'frontend-gelinkt-notuleren/mirage/server';
 
-if (config.environment === 'development') {
-  setupServer({ environment: 'development' });
-}
+// if (config.environment === 'development') {
+//   setupServer({ environment: 'development' });
+// }
 
 /**
  * @typedef {import('ember-source/types')} EmberTypes
