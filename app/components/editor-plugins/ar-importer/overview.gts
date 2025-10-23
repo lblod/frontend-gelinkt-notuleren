@@ -136,9 +136,7 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
               {{arDesign.name}}
             </td>
             <td>
-              {{#if arDesign.date}}
-                {{detailedDate arDesign.date}}
-              {{/if}}
+              {{detailedDate arDesign.date}}
             </td>
             <td>
               <AuButtonGroup>

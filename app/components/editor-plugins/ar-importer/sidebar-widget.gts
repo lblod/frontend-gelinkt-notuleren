@@ -6,7 +6,7 @@ import { tracked } from 'tracked-built-ins';
 import t from 'ember-intl/helpers/t';
 
 export default class ArImporterSidebarWidget extends Component {
-  @tracked modalOpen = true;
+  @tracked modalOpen = false;
 
   insertDesign = () => {};
 
@@ -30,7 +30,10 @@ export default class ArImporterSidebarWidget extends Component {
       </AuButton>
     </li>
     {{#if this.modalOpen}}
-      <ArImporterModal />
+      <ArImporterModal
+        @isModalOpen={{this.modalOpen}}
+        @closeModal={{this.closeModal}}
+      />
     {{/if}}
   </template>
 }

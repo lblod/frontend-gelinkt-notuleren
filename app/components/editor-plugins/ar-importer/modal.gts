@@ -6,7 +6,14 @@ import ArPreview from './preview';
 import ArDesignOverview from './overview';
 import t from 'ember-intl/helpers/t';
 
-export default class ArImporterModal extends Component {
+interface Sig {
+  Args: {
+    isModalOpen: boolean;
+    closeModal: () => void;
+  };
+}
+
+export default class ArImporterModal extends Component<Sig> {
   @tracked selectedDesign?: ArDesign | null;
 
   selectDesign = (design: ArDesign) => {
@@ -17,13 +24,13 @@ export default class ArImporterModal extends Component {
     this.selectedDesign = null;
   };
 
-  insertAR = (design: ArDesign) => {};
+  insertAR = (_design: ArDesign) => {};
 
   <template>
     <AuModal
       @size='large'
-      @modalOpen={{true}}
-      @closable={{true}}
+      @modalOpen={{@isModalOpen}}
+      @closeModal={{@closeModal}}
       @title={{t 'ar-importer.modal.title'}}
       @padding='none'
       as |modal|
