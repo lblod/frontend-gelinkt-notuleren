@@ -133,7 +133,9 @@
         @controller={{container.controller}}
         @options={{this.config.roadsignRegulation}}
       />
-      <EditorPlugins::ArImporter::SidebarWidget />
+      <EditorPlugins::ArImporter::SidebarWidget
+        @controller={{container.controller}}
+      />
       <StandardTemplatePlugin::Card
         @controller={{container.controller}}
         @templates={{this.model.templates}}

@@ -1,14 +1,19 @@
-import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { on } from '@ember/modifier';
 import Component from '@glimmer/component';
-import ArImporterModal from './modal';
 import { tracked } from 'tracked-built-ins';
 import t from 'ember-intl/helpers/t';
+import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
+import type { SayController } from '@lblod/ember-rdfa-editor';
+import ArImporterModal from './modal';
 
-export default class ArImporterSidebarWidget extends Component {
+type Sig = {
+  Args: {
+    controller: SayController;
+  };
+};
+
+export default class ArImporterSidebarWidget extends Component<Sig> {
   @tracked modalOpen = false;
-
-  insertDesign = () => {};
 
   openModal = () => {
     this.modalOpen = true;
@@ -31,6 +36,7 @@ export default class ArImporterSidebarWidget extends Component {
     </li>
     {{#if this.modalOpen}}
       <ArImporterModal
+        @controller={{@controller}}
         @isModalOpen={{this.modalOpen}}
         @closeModal={{this.closeModal}}
       />

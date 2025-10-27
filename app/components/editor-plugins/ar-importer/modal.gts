@@ -1,19 +1,26 @@
 import Component from '@glimmer/component';
-import ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
-import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
+import { service } from '@ember/service';
 import { tracked } from 'tracked-built-ins';
+import t from 'ember-intl/helpers/t';
+import { task } from 'ember-concurrency';
+import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
+import type { SayController } from '@lblod/ember-rdfa-editor';
+import ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
+import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
 import ArPreview from './preview';
 import ArDesignOverview from './overview';
-import t from 'ember-intl/helpers/t';
 
-interface Sig {
+type Sig = {
   Args: {
+    controller: SayController;
     isModalOpen: boolean;
     closeModal: () => void;
   };
-}
+};
 
 export default class ArImporterModal extends Component<Sig> {
+  @service declare arImporter: ArImporterService;
+
   @tracked selectedDesign?: ArDesign | null;
 
   selectDesign = (design: ArDesign) => {
@@ -24,7 +31,10 @@ export default class ArImporterModal extends Component<Sig> {
     this.selectedDesign = null;
   };
 
-  insertAR = (_design: ArDesign) => {};
+  insertAr = task(async (design: ArDesign) => {
+    await this.arImporter.insertAr(this.args.controller, design);
+    this.args.closeModal();
+  });
 
   <template>
     <AuModal
@@ -40,12 +50,12 @@ export default class ArImporterModal extends Component<Sig> {
           <ArPreview
             @arDesign={{this.selectedDesign}}
             @onReturnToOverview={{this.returnToOverview}}
-            @onInsertAR={{this.insertAR}}
+            @onInsertAr={{this.insertAr}}
           />
         {{else}}
           <ArDesignOverview
             @onShowPreview={{this.selectDesign}}
-            @onInsertAr={{this.insertAR}}
+            @onInsertAR={{this.insertAr}}
           />
         {{/if}}
       </modal.Body>

@@ -10,11 +10,12 @@ import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus
 import { ArrowLeftIcon } from '@appuniversum/ember-appuniversum/components/icons/arrow-left';
 import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
+import type { Task } from 'ember-concurrency';
 
 type ArPreviewSignature = {
   Args: {
     arDesign: ArDesign;
-    onInsertAR: (arDesign: ArDesign) => unknown;
+    onInsertAr: Task<void, [ArDesign]>;
     onReturnToOverview: () => unknown;
   };
   Element: HTMLDivElement;
@@ -31,8 +32,8 @@ export default class ArPreview extends Component<ArPreviewSignature> {
     this.args.onReturnToOverview();
   };
 
-  insertAR = () => {
-    this.args.onInsertAR(this.args.arDesign);
+  insertAR = async () => {
+    await this.args.onInsertAr.perform(this.args.arDesign);
   };
 
   <template>

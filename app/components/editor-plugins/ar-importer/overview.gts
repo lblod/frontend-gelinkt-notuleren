@@ -20,13 +20,14 @@ import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
+import type { Task } from 'ember-concurrency';
 
 export type ArDesignOverviewSortField = 'name' | '-name' | 'date' | '-date';
 export type ArDesignOverviewSignature = {
   Element: AuMainContainerSignature['Element'];
   Args: {
-    onShowPreview: (arDesign: ArDesign) => unknown;
-    onInsertAr: (arDesign: ArDesign) => unknown;
+    onShowPreview: (arDesign: ArDesign) => void;
+    onInsertAr: Task<void, [ArDesign]>;
   };
 };
 
@@ -65,8 +66,8 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
   showPreview = (arDesign: ArDesign) => {
     this.args.onShowPreview(arDesign);
   };
-  insertAR = (arDesign: ArDesign) => {
-    this.args.onInsertAr(arDesign);
+  insertAR = async (arDesign: ArDesign) => {
+    await this.args.onInsertAr.perform(arDesign);
   };
 
   <template>
