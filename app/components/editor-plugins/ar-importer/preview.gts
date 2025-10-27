@@ -1,11 +1,15 @@
-import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
-import AuToolbar from '@appuniversum/ember-appuniversum/components/au-toolbar';
 import Component from '@glimmer/component';
-import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
+import { service } from '@ember/service';
 import { on } from '@ember/modifier';
+import { htmlSafe } from '@ember/template';
+import t from 'ember-intl/helpers/t';
+import { trackedFunction } from 'reactiveweb/function';
+import AuToolbar from '@appuniversum/ember-appuniversum/components/au-toolbar';
+import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus';
 import { ArrowLeftIcon } from '@appuniversum/ember-appuniversum/components/icons/arrow-left';
-import t from 'ember-intl/helpers/t';
+import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
+import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 
 type ArPreviewSignature = {
   Args: {
@@ -17,6 +21,12 @@ type ArPreviewSignature = {
 };
 
 export default class ArPreview extends Component<ArPreviewSignature> {
+  @service declare arImporter: ArImporterService;
+
+  preview = trackedFunction(this, async () => {
+    return this.arImporter.generatePreview(this.args.arDesign);
+  });
+
   returnToOverview = () => {
     this.args.onReturnToOverview();
   };
@@ -41,13 +51,11 @@ export default class ArPreview extends Component<ArPreviewSignature> {
             }}</AuButton>
         </Group>
       </AuToolbar>
-      <div class='ar-importer-preview__content au-u-padding'>
-        {{#each @arDesign.measures as |measure|}}
-          <p>
-            {{measure.templateString}}
-          </p>
-        {{/each}}
-      </div>
+      {{#if this.preview.value}}
+        <div class='ar-importer-preview__content au-u-padding'>
+          {{htmlSafe this.preview.value}}
+        </div>
+      {{/if}}
 
     </div>
   </template>

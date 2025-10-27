@@ -904,9 +904,9 @@ copy-options:
 
 ar-importer:
   sidebar-widget:
-    label: \'AR\'-design
+    label: "'AR'-design"
   modal:
-    title: Insert \'AR\'-design
+    title: "Insert 'AR'-design"
   overview:
     filters:
       title: Filters

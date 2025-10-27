@@ -1,8 +1,8 @@
-import type { HasMany } from '@ember-data/model';
+import type { AsyncHasMany } from '@ember-data/model';
 import Model from '@ember-data/model';
 import { hasMany } from '@ember-data/model';
 import { attr } from '@ember-data/model';
-import type Measure from './measure';
+import type MeasureConcept from './measure-concept';
 import type { Type } from '@warp-drive/core-types/symbols';
 
 export default class ArDesign extends Model {
@@ -12,6 +12,6 @@ export default class ArDesign extends Model {
   @attr('string') name?: string;
   @attr('datetime') date?: Date;
 
-  @hasMany('measure', { async: true, inverse: 'design' })
-  declare measures: HasMany<Measure>;
+  @hasMany('measure-concept', { async: true, inverse: 'design' })
+  declare measures: AsyncHasMany<MeasureConcept>;
 }
