@@ -81,6 +81,26 @@
   </AuModal>
 {{/if}}
 
+<AuModal
+  @title={{t 'multiple-edit-modal.title'}}
+  @modalOpen={{this.showMultipleEditWarning}}
+  @closeModal={{fn (mut this.showMultipleEditWarning) false}}
+  as |Modal|
+>
+  <Modal.Body>
+    <p>{{t 'multiple-edit-modal.message'}}</p>
+  </Modal.Body>
+  <Modal.Footer>
+    <AuButton {{on 'click' (perform this.confirmMultipleEdit)}}>{{t
+        'multiple-edit-modal.confirm'
+      }}</AuButton>
+    <AuButton
+      @skin='secondary'
+      {{on 'click' (fn (mut this.showMultipleEditWarning) false)}}
+    >{{t 'multiple-edit-modal.cancel'}}</AuButton>
+  </Modal.Footer>
+</AuModal>
+
 <div
   class='au-c-body-container au-c-body-container--scroll'
   id='panel-1'

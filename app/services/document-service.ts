@@ -207,6 +207,7 @@ export default class DocumentService extends Service {
       );
       container.set('folder', folder);
       container.set('publisher', group);
+      await container.save();
       const editorDocument = await this.createEditorDocument.perform(
         title,
         generatedTemplate,
