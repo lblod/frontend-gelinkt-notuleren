@@ -15,6 +15,11 @@ import {
   VariableSchema,
   type Variable as PluginVariable,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable';
+import {
+  TrafficSignalConceptSchema,
+  type TrafficSignalConcept,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal-concept';
+import type SignalConceptModel from 'frontend-gelinkt-notuleren/models/signal-concept';
 
 type MeasureVariable = Exclude<PluginVariable, { type: 'instruction' }>;
 type MeasureVariables = Record<string, MeasureVariable>;
@@ -38,6 +43,20 @@ function convertVariables(
   );
 }
 
+function convertSignals(
+  signals: SignalConceptModel[] | undefined,
+): TrafficSignalConcept[] {
+  if (!signals) return [];
+  return TrafficSignalConceptSchema.array().parse(
+    (signals ?? []).map((signal) => ({
+      code: signal.code,
+      uri: signal.uri,
+      type: signal.type,
+      image: '',
+    })),
+  );
+}
+
 export default class ArImporterService extends Service {
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
@@ -46,28 +65,34 @@ export default class ArImporterService extends Service {
     design: ArDesign,
     decisionUri: string,
   ): Promise<TransactionMonad<boolean>[]> {
-    const measures = await design.measures;
-    const [measureVariables] = await Promise.all([
-      Promise.all(measures.map((measure) => measure.variables)),
-    ]);
-    return measures.map((measure, i) => {
-      return insertMeasure({
-        measureConcept: {
-          uri: measure.uri ?? 'test',
-          label: measure.label ?? 'test',
-          trafficSignalConcepts: [],
-          // The remaining parts of this object aren't used
-          preview: 'UNUSED',
+    try {
+      const measures = await design.measures;
+      const [measureVariables, measureSignals] = await Promise.all([
+        Promise.all(measures.map((measure) => measure.variables)),
+        Promise.all(measures.map((measure) => measure.signalConcepts)),
+      ]);
+      return measures.map((measure, i) => {
+        return insertMeasure({
+          measureConcept: {
+            uri: measure.uri ?? 'test',
+            label: measure.label ?? 'test',
+            trafficSignalConcepts: convertSignals(measureSignals[i]),
+            // The remaining parts of this object aren't used
+            preview: 'UNUSED',
+            zonality: ZONALITY_OPTIONS.NON_ZONAL,
+            variableSignage: false,
+          },
           zonality: ZONALITY_OPTIONS.NON_ZONAL,
-          variableSignage: false,
-        },
-        zonality: ZONALITY_OPTIONS.ZONAL,
-        temporal: false,
-        variables: convertVariables(measureVariables[i]),
-        templateString: measure.templateString ?? 'broken',
-        decisionUri,
+          temporal: false,
+          variables: convertVariables(measureVariables[i]),
+          templateString: measure.templateString ?? 'broken',
+          decisionUri,
+        });
       });
-    });
+    } catch (err) {
+      console.error('Error processing AR design relations', err);
+      throw err;
+    }
   }
 
   async generatePreview(design: ArDesign): Promise<string> {

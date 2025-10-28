@@ -55,7 +55,7 @@ export default class ArImporterModal extends Component<Sig> {
         {{else}}
           <ArDesignOverview
             @onShowPreview={{this.selectDesign}}
-            @onInsertAR={{this.insertAr}}
+            @onInsertAr={{this.insertAr}}
           />
         {{/if}}
       </modal.Body>

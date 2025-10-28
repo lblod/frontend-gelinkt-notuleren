@@ -1,4 +1,4 @@
-import type { Variable } from 'frontend-gelinkt-notuleren/models/measure-concept';
+import type Variable from 'frontend-gelinkt-notuleren/models/variable';
 import { belongsTo, hasMany, Model } from 'miragejs';
 import type { BelongsTo, HasMany } from 'miragejs/-types';
 
