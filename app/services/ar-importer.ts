@@ -10,17 +10,47 @@ import { ZONALITY_OPTIONS } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins
 import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-topic-plugin/utils/helpers';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
-import type MeasureConcept from 'frontend-gelinkt-notuleren/models/measure-concept';
+import type VariableModel from 'frontend-gelinkt-notuleren/models/variable';
+import {
+  VariableSchema,
+  type Variable as PluginVariable,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable';
+
+type MeasureVariable = Exclude<PluginVariable, { type: 'instruction' }>;
+type MeasureVariables = Record<string, MeasureVariable>;
+
+function convertVariables(
+  variables: VariableModel[] | undefined,
+): MeasureVariables {
+  if (!variables) return {};
+  return Object.fromEntries<MeasureVariable>(
+    // @ts-expect-error we filter instructions but TS doesn't see it...
+    variables
+      .map((variable): [string, PluginVariable] => [
+        variable.title ?? '',
+        VariableSchema.parse({
+          uri: variable.uri ?? '',
+          label: variable.title ?? '',
+          type: variable.type ?? 'text',
+        }),
+      ])
+      .filter(([_, variable]) => variable.type !== 'instruction'),
+  );
+}
 
 export default class ArImporterService extends Service {
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
 
-  _generateInsertionMonads(
-    measures: MeasureConcept[],
+  async _generateInsertionMonads(
+    design: ArDesign,
     decisionUri: string,
-  ): TransactionMonad<boolean>[] {
-    return measures.map((measure) => {
+  ): Promise<TransactionMonad<boolean>[]> {
+    const measures = await design.measures;
+    const [measureVariables] = await Promise.all([
+      Promise.all(measures.map((measure) => measure.variables)),
+    ]);
+    return measures.map((measure, i) => {
       return insertMeasure({
         measureConcept: {
           uri: measure.uri ?? 'test',
@@ -33,7 +63,7 @@ export default class ArImporterService extends Service {
         },
         zonality: ZONALITY_OPTIONS.ZONAL,
         temporal: false,
-        variables: {},
+        variables: convertVariables(measureVariables[i]),
         templateString: measure.templateString ?? 'broken',
         decisionUri,
       });
@@ -41,20 +71,16 @@ export default class ArImporterService extends Service {
   }
 
   async generatePreview(design: ArDesign): Promise<string> {
-    const measures = await design.measures;
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
+    const monads = await this._generateInsertionMonads(design, decisionUri);
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
-      (state) =>
-        transactionCombinator<boolean>(state)(
-          this._generateInsertionMonads(measures, decisionUri),
-        ),
+      (state) => transactionCombinator<boolean>(state)(monads),
     );
     return document;
   }
 
   async insertAr(controller: SayController, design: ArDesign): Promise<void> {
-    const measures = await design.measures;
     const decisionRange = getCurrentBesluitRange(controller);
     const decisionUri = decisionRange?.node.attrs['subject'] as string;
     if (!decisionRange || typeof decisionUri !== 'string') {
@@ -62,11 +88,12 @@ export default class ArImporterService extends Service {
       console.error('THIS SHOULD SHOW A WARNING');
       return;
     }
+    const monads = await this._generateInsertionMonads(design, decisionUri);
     controller.withTransaction((tr) => {
       return transactionCombinator<boolean>(
         controller.mainEditorState,
         tr,
-      )(this._generateInsertionMonads(measures, decisionUri)).transaction;
+      )(monads).transaction;
     });
   }
 }
