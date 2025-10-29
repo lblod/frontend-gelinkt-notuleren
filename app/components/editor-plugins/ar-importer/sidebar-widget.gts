@@ -43,7 +43,10 @@ export default class ArImporterSidebarWidget extends Component<Sig> {
       as |modal|
     >
       <modal.Body>
-        <ArWidgetContents @controller={{@controller}} @onInsert={{this.closeModal}} />
+        <ArWidgetContents
+          @controller={{@controller}}
+          @onInsert={{this.closeModal}}
+        />
       </modal.Body>
     </AuModal>
   </template>

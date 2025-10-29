@@ -29,8 +29,13 @@ export default class ArWidgetContents extends Component<Sig> {
   };
 
   insertAr = task(async (design: ArDesign) => {
-    await this.arImporter.insertAr(this.args.controller, design);
-    this.args.onInsert?.();
+    const isSuccess = await this.arImporter.insertAr(
+      this.args.controller,
+      design,
+    );
+    if (isSuccess) {
+      this.args.onInsert?.();
+    }
   });
 
   <template>

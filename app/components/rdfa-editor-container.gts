@@ -406,6 +406,7 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
                 @schema={{this.schema}}
                 @nodeViews={{this.nodeViews}}
                 @rdfaEditorInit={{this.rdfaEditorInit}}
+                @notificationToaster={{false}}
               />
             </:default>
             <:sidebarRight as |container|>

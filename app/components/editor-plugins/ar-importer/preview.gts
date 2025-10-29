@@ -12,6 +12,7 @@ import { ArrowLeftIcon } from '@appuniversum/ember-appuniversum/components/icons
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
+import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
 
 type ArPreviewSignature = {
   Args: {
@@ -44,15 +45,21 @@ export default class ArPreview extends Component<ArPreviewSignature> {
           >{{t 'ar-importer.preview.return-to-overview'}}</AuButton>
         </Group>
         <Group>
-          <AuButton @icon={{PlusIcon}} {{on 'click' (fn @onInsertAr @arDesign)}}>{{t
-              'ar-importer.preview.insert'
-            }}</AuButton>
+          <AuButton
+            @icon={{PlusIcon}}
+            {{on 'click' (fn @onInsertAr @arDesign)}}
+          >{{t 'ar-importer.preview.insert'}}</AuButton>
         </Group>
       </AuToolbar>
       {{#if this.preview.isLoading}}
         <AuLoader @hideMessage={{true}}>
           {{t 'application.loading'}}
         </AuLoader>
+      {{/if}}
+      {{#if this.preview.isError}}
+        <AuAlert @icon='alert-triangle' @skin='error'>
+          {{t 'ar-importer.message.error-processing-design'}}
+        </AuAlert>
       {{/if}}
       {{#if this.preview.value}}
         <div class='ar-importer-preview__content au-o-layout'>

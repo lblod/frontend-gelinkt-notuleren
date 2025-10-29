@@ -928,3 +928,6 @@ ar-importer:
   preview:
     return-to-overview: Return to overview
     insert: Insert
+  message:
+    error-no-decision: Please put the cursor inside a decision node
+    error-processing-design: Error when processing signage plan
