@@ -20,14 +20,13 @@ import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
-import type { Task } from 'ember-concurrency';
 
 export type ArDesignOverviewSortField = 'name' | '-name' | 'date' | '-date';
 export type ArDesignOverviewSignature = {
   Element: AuMainContainerSignature['Element'];
   Args: {
     onShowPreview: (arDesign: ArDesign) => void;
-    onInsertAr: Task<void, [ArDesign]>;
+    onInsertAr: (arDesign: ArDesign) => void;
   };
 };
 
@@ -61,13 +60,6 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
 
   updatePageNumber = (pageNumber: number) => {
     this.pageNumber = pageNumber;
-  };
-
-  showPreview = (arDesign: ArDesign) => {
-    this.args.onShowPreview(arDesign);
-  };
-  insertAR = async (arDesign: ArDesign) => {
-    await this.args.onInsertAr.perform(arDesign);
   };
 
   <template>
@@ -144,12 +136,12 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
                 <AuButton
                   @skin='link'
                   @icon={{VisibleIcon}}
-                  {{on 'click' (fn this.showPreview arDesign)}}
+                  {{on 'click' (fn @onShowPreview arDesign)}}
                 >{{t 'ar-importer.overview.table.actions.preview'}}</AuButton>
                 <AuButton
                   @skin='link'
                   @icon={{PlusIcon}}
-                  {{on 'click' (fn this.insertAR arDesign)}}
+                  {{on 'click' (fn @onInsertAr arDesign)}}
                 >{{t 'ar-importer.overview.table.actions.insert'}}</AuButton>
               </AuButtonGroup>
             </td>
