@@ -5,6 +5,7 @@ import t from 'ember-intl/helpers/t';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import type { SayController } from '@lblod/ember-rdfa-editor';
+import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-topic-plugin/utils/helpers';
 import ArWidgetContents from './widget-contents';
 
 type Sig = {
@@ -22,6 +23,9 @@ export default class ArImporterSidebarWidget extends Component<Sig> {
   closeModal = () => {
     this.modalOpen = false;
   };
+  get disableInsert() {
+    return !getCurrentBesluitRange(this.args.controller);
+  }
 
   <template>
     <li class='au-c-list__item' ...attributes>
@@ -29,6 +33,7 @@ export default class ArImporterSidebarWidget extends Component<Sig> {
         @icon='add'
         @iconAlignment='left'
         @skin='link'
+        @disabled={{this.disableInsert}}
         {{on 'click' this.openModal}}
       >
         {{t 'ar-importer.sidebar-widget.label'}}
