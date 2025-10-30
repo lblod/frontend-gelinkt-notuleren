@@ -24,19 +24,16 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal-concept';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
-import type VariableModel from 'frontend-gelinkt-notuleren/models/variable';
-import type SignalConceptModel from 'frontend-gelinkt-notuleren/models/signal-concept';
+import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
 
 type MeasureVariable = Exclude<PluginVariable, { type: 'instruction' }>;
 type MeasureVariables = Record<string, MeasureVariable>;
 
-function convertVariables(
-  variables: VariableModel[] | undefined,
-): MeasureVariables {
-  if (!variables) return {};
+function convertVariables(trafficSignals: TrafficSignal[]): MeasureVariables {
   return Object.fromEntries<MeasureVariable>(
     // @ts-expect-error we filter instructions but TS doesn't see it...
-    variables
+    trafficSignals
+      .flatMap((signal) => signal.variableInstances.map((vi) => vi.variable))
       .map((variable): [string, PluginVariable] => [
         variable.title ?? '',
         VariableSchema.parse({
@@ -49,15 +46,12 @@ function convertVariables(
   );
 }
 
-function convertSignals(
-  signals: SignalConceptModel[] | undefined,
-): TrafficSignalConcept[] {
-  if (!signals) return [];
+function convertSignals(signals: TrafficSignal[]): TrafficSignalConcept[] {
   return TrafficSignalConceptSchema.array().parse(
-    (signals ?? []).map((signal) => ({
-      code: signal.code,
-      uri: signal.uri,
-      type: signal.type,
+    signals.map((signal) => ({
+      code: signal.trafficSignalConcept.code,
+      uri: signal.trafficSignalConcept.uri,
+      type: signal.trafficSignalConcept.type,
       image: '',
     })),
   );
@@ -89,17 +83,13 @@ export default class ArImporterService extends Service {
     decisionUri: string,
   ): Promise<TransactionMonad<boolean>[]> {
     try {
-      const measures = await design.measures;
-      const [measureVariables, measureSignals] = await Promise.all([
-        Promise.all(measures.map((measure) => measure.variables)),
-        Promise.all(measures.map((measure) => measure.signalConcepts)),
-      ]);
-      return measures.map((measure, i) => {
+      const measureDesigns = await design.measureDesigns;
+      return measureDesigns.map(({ measureConcept, trafficSignals }) => {
         return insertMeasure({
           measureConcept: {
-            uri: measure.uri ?? 'test',
-            label: measure.label ?? 'test',
-            trafficSignalConcepts: convertSignals(measureSignals[i]),
+            uri: measureConcept.uri ?? 'test',
+            label: measureConcept.label ?? 'test',
+            trafficSignalConcepts: convertSignals(trafficSignals),
             // The remaining parts of this object aren't used
             preview: 'UNUSED',
             zonality: ZONALITY_OPTIONS.NON_ZONAL,
@@ -107,8 +97,8 @@ export default class ArImporterService extends Service {
           },
           zonality: ZONALITY_OPTIONS.NON_ZONAL,
           temporal: false,
-          variables: convertVariables(measureVariables[i]),
-          templateString: measure.templateString ?? 'broken',
+          variables: convertVariables(trafficSignals),
+          templateString: measureConcept.templateString ?? 'broken',
           decisionUri,
         });
       });

@@ -16,7 +16,7 @@ type Sig = {
 };
 
 export default class ArImporterSidebarWidget extends Component<Sig> {
-  @tracked modalOpen = true;
+  @tracked modalOpen = false;
   openModal = () => {
     this.modalOpen = true;
   };

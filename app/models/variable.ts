@@ -1,8 +1,6 @@
-import { attr, belongsTo } from '@ember-data/model';
-import type { AsyncBelongsTo } from '@ember-data/model';
-import Model from '@ember-data/model';
+import Model, { attr, hasMany, type HasMany } from '@ember-data/model';
 import type { Type } from '@warp-drive/core-types/symbols';
-import type MeasureConcept from './measure-concept';
+import type VariableInstance from './variable-instance';
 
 export default class Variable extends Model {
   declare [Type]: 'variable';
@@ -12,6 +10,6 @@ export default class Variable extends Model {
   @attr('string') uri?: string;
   @attr('string') codelist?: string;
 
-  @belongsTo('measure-concept', { async: true, inverse: 'variables' })
-  declare measure: AsyncBelongsTo<MeasureConcept>;
+  @hasMany('variable-instance', { async: false, inverse: 'variable' })
+  declare measure: HasMany<VariableInstance>;
 }
