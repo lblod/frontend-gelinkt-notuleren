@@ -5,8 +5,8 @@ import t from 'ember-intl/helpers/t';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import type { SayController } from '@lblod/ember-rdfa-editor';
-import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-topic-plugin/utils/helpers';
 import ArWidgetContents from './widget-contents';
+import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/decision-utils';
 
 type Sig = {
   Args: {

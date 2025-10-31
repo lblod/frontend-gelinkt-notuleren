@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.68.1
+
+### Patch Changes
+
+- [#876](https://github.com/lblod/frontend-gelinkt-notuleren/pull/876) [`5460165`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/54601653f941a066dabc47d59fba71e038245172) Thanks [@piemonkey](https://github.com/piemonkey)! - Ensure only one version of ember-modifier and reactiveweb dependencies are used
+
+- [#878](https://github.com/lblod/frontend-gelinkt-notuleren/pull/878) [`3907071`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/39070716a7900507df78b5ff84b1187a98cf478f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor` to version [13.0.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4013.0.0)
+
+- [#878](https://github.com/lblod/frontend-gelinkt-notuleren/pull/878) [`3907071`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/39070716a7900507df78b5ff84b1187a98cf478f) Thanks [@elpoelma](https://github.com/elpoelma)! - Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [33.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v33.1.0)
+
 ## 5.68.0
 
 ### Minor Changes
