@@ -83,3 +83,5 @@ inflector.irregular(
   'installatievergadering-synchronization-statuses',
 );
 inflector.irregular('custom-voting', 'custom-votings');
+inflector.irregular('ar-design', 'ar-designs');
+inflector.irregular('measure', 'measures');
