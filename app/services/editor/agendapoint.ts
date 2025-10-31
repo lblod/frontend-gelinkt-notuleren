@@ -8,6 +8,7 @@ import { rdfaInfoPlugin } from '@lblod/ember-rdfa-editor/plugins/rdfa-info';
 
 import {
   PNode,
+  ProsePlugin,
   SayController,
   Schema,
   type NodeViewConstructor,
@@ -58,7 +59,6 @@ import {
 import {
   bulletListWithConfig,
   listItemWithConfig,
-  listTrackingPlugin,
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
@@ -312,7 +312,10 @@ export default class AgendapointEditorService extends Service {
    * @param {boolean} isHeadless - Whether this is for a headless editor, as this requires
    * different config to work correctly
    **/
-  getSchemaAndPlugins(isHeadless: boolean) {
+  getSchemaAndPlugins(isHeadless: boolean): {
+    schema: Schema;
+    plugins: ProsePlugin[];
+  } {
     const schema = new Schema({
       nodes: {
         doc: docWithConfig({ rdfaAware: true }),
@@ -379,7 +382,6 @@ export default class AgendapointEditorService extends Service {
         },
       ),
       linkPasteHandler(schema.nodes.link),
-      listTrackingPlugin(),
 
       emberApplication({ application: unwrap(getOwner(this)) }),
     ];

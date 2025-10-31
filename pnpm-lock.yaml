@@ -138,11 +138,11 @@ importers:
         specifier: ^0.10.0
         version: 0.10.2(@glint/template@1.5.2)(ember-simple-auth@6.1.0(@babel/core@7.27.7)(@ember/test-helpers@3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       '@lblod/ember-rdfa-editor':
-        specifier: 12.15.1
-        version: 12.15.1(ohpmeao35zqawqtxv6eviedpje)
+        specifier: 13.0.0
+        version: 13.0.0(ohpmeao35zqawqtxv6eviedpje)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 33.0.0
-        version: 33.0.0(vihu7tumotqnsbwkxellbhn3ey)
+        specifier: 33.1.0
+        version: 33.1.0(wbdveneebxch3pnhbgdcstlhke)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1178,9 +1178,6 @@ packages:
   '@codemirror/state@6.5.2':
     resolution: {integrity: sha512-FVqsPqtPWKVVL3dPSxy8wEF/ymIEuVzF1PK3VbUgrxXpJUSHQWWZz4JMToquRxnkw+36LTamCZG2iua2Ptq0fA==}
 
-  '@codemirror/view@6.36.4':
-    resolution: {integrity: sha512-ZQ0V5ovw/miKEXTvjgzRyjnrk9TwriUB1k4R5p7uNnHR9Hus+D1SXHGdJshijEzPFjU25xea/7nhIeSqYFKdbA==}
-
   '@codemirror/view@6.38.6':
     resolution: {integrity: sha512-qiS0z1bKs5WOvHIAC0Cybmv4AJSkAXgX5aD6Mqd2epSLlVJsQl8NG23jCVouIgkh4All/mrbdsf2UOLFnJw0tw==}
 
@@ -1876,8 +1873,8 @@ packages:
       ember-simple-auth: ^6.0.0
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@33.0.0':
-    resolution: {integrity: sha512-JmOq9LI1yyQNjoZdYGFLn46WGeRk+t98Af8jiZ44Frt4HBVS9uGg7Z31lNTGs+5l7HKpItD+BG5D0uMgKd43ag==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@33.1.0':
+    resolution: {integrity: sha512-E1BbTZ+KYkxZcZIxywemDolkfBygXFrU4sSFUZO3oElU2HHS41Ca5OTpkitvIbvyfYyegg+6vc052oPrVHLpDQ==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
@@ -1900,8 +1897,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@12.15.1':
-    resolution: {integrity: sha512-oFIKcZHYtMGoB+rJYqEhxFsZXLhTZK2WAgYOWPfBSeXHwnvJABnpx5xe7KIk5oQnkoYv/VcxHwFpM0m2w00UKQ==}
+  '@lblod/ember-rdfa-editor@13.0.0':
+    resolution: {integrity: sha512-tlNyKpXqnFcbDnMSUE5W4jWTGlL/bqOML2/+VksNLBHoagDZYO84TzynWhDdaIyqw7mj/D86GIG1sIYj+yk2mw==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.11.0
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -1919,11 +1916,11 @@ packages:
       '@glint/template':
         optional: true
 
-  '@lblod/lib-decision-shapes@0.0.22':
-    resolution: {integrity: sha512-8jNbj26lp75j1fEdx1PvFDZsEpw2a17unrmzYY4rRTfDqGbVnQwYyJLxfhBEudnMzYmjMXN+lDL00p/lavIW/Q==}
-
   '@lblod/lib-decision-shapes@0.0.23':
     resolution: {integrity: sha512-+KKFkaAj1B7YxCyRtoOrH+uQ1Yo5/cGyj0oGiFc/28/Bqgk0Dm+L/Kr+OiY4VquI4uOclvRxRWjU9ViF5h/J5A==}
+
+  '@lblod/lib-decision-shapes@0.0.25':
+    resolution: {integrity: sha512-4pTmFBro+RLPtaN4SiWt5EYqZ2bbtDqpo+EYsNEDe1wtiMLg6RhOD4RwQwLQrH3mjbuJCyQd3DF3TaZBDcOiSQ==}
 
   '@lblod/marawa@0.8.0-beta.6':
     resolution: {integrity: sha512-BW3yCpeQlk9EPnQAEQnM9uViA8RC5DkuoiaPJzbuhMcLvKHfI4cjc6dTg9i8qAijbL/xObmQ/Aexko2Xcj9ktw==}
@@ -11034,7 +11031,7 @@ snapshots:
     dependencies:
       '@codemirror/language': 6.11.0
       '@codemirror/state': 6.5.2
-      '@codemirror/view': 6.36.4
+      '@codemirror/view': 6.38.6
       '@lezer/common': 1.2.3
 
   '@codemirror/commands@6.9.0':
@@ -11070,7 +11067,7 @@ snapshots:
       '@codemirror/language': 6.11.0
       '@codemirror/lint': 6.8.4
       '@codemirror/state': 6.5.2
-      '@codemirror/view': 6.36.4
+      '@codemirror/view': 6.38.6
       '@lezer/common': 1.2.3
       '@lezer/javascript': 1.4.21
 
@@ -11086,7 +11083,7 @@ snapshots:
   '@codemirror/language@6.11.0':
     dependencies:
       '@codemirror/state': 6.5.2
-      '@codemirror/view': 6.36.4
+      '@codemirror/view': 6.38.6
       '@lezer/common': 1.2.3
       '@lezer/highlight': 1.2.1
       '@lezer/lr': 1.4.2
@@ -11095,24 +11092,18 @@ snapshots:
   '@codemirror/lint@6.8.4':
     dependencies:
       '@codemirror/state': 6.5.2
-      '@codemirror/view': 6.36.4
+      '@codemirror/view': 6.38.6
       crelt: 1.0.6
 
   '@codemirror/search@6.5.10':
     dependencies:
       '@codemirror/state': 6.5.2
-      '@codemirror/view': 6.36.4
+      '@codemirror/view': 6.38.6
       crelt: 1.0.6
 
   '@codemirror/state@6.5.2':
     dependencies:
       '@marijn/find-cluster-break': 1.0.2
-
-  '@codemirror/view@6.36.4':
-    dependencies:
-      '@codemirror/state': 6.5.2
-      style-mod: 4.1.2
-      w3c-keyname: 2.2.8
 
   '@codemirror/view@6.38.6':
     dependencies:
@@ -12177,7 +12168,7 @@ snapshots:
       - supports-color
       - webpack
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@33.0.0(vihu7tumotqnsbwkxellbhn3ey)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@33.1.0(wbdveneebxch3pnhbgdcstlhke)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(s66zk6ffynwgbbwsobigkfhqd4)
       '@babel/core': 7.27.7
@@ -12187,8 +12178,8 @@ snapshots:
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.3)(prosemirror-state@1.4.3)
       '@ember/string': 3.1.1
       '@embroider/macros': 1.16.10(@glint/template@1.5.2)
-      '@lblod/ember-rdfa-editor': 12.15.1(ohpmeao35zqawqtxv6eviedpje)
-      '@lblod/lib-decision-shapes': 0.0.22(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
+      '@lblod/ember-rdfa-editor': 13.0.0(ohpmeao35zqawqtxv6eviedpje)
+      '@lblod/lib-decision-shapes': 0.0.25(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
       '@rdfjs/data-model': 2.1.0
@@ -12248,7 +12239,7 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@12.15.1(ohpmeao35zqawqtxv6eviedpje)':
+  '@lblod/ember-rdfa-editor@13.0.0(ohpmeao35zqawqtxv6eviedpje)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.12.0(s66zk6ffynwgbbwsobigkfhqd4)
       '@codemirror/commands': 6.9.0
@@ -12333,7 +12324,7 @@ snapshots:
       - socks
       - supports-color
 
-  '@lblod/lib-decision-shapes@0.0.22(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)':
+  '@lblod/lib-decision-shapes@0.0.23(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)':
     dependencies:
       ts-jest: 29.4.0(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
     optionalDependencies:
@@ -12348,7 +12339,7 @@ snapshots:
       - jest-util
       - typescript
 
-  '@lblod/lib-decision-shapes@0.0.23(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)':
+  '@lblod/lib-decision-shapes@0.0.25(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)':
     dependencies:
       ts-jest: 29.4.0(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
     optionalDependencies:
@@ -15496,7 +15487,7 @@ snapshots:
   ember-async-data@1.0.3(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0)):
     dependencies:
       '@ember/test-waiters': 3.1.0
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.0
       ember-source: 5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0)
     transitivePeerDependencies:
       - supports-color

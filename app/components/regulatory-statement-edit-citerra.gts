@@ -58,7 +58,6 @@ import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import {
   bulletListWithConfig,
   listItemWithConfig,
-  listTrackingPlugin,
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
@@ -298,7 +297,6 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       linkPasteHandler(this.schema.nodes.link),
       // @ts-expect-error emberApplication should accept undefined as getOwner may return it
       emberApplication({ application: getOwner(this) }),
-      listTrackingPlugin(),
       variableAutofillerPlugin(this.config.autofilledVariable),
       documentValidationPlugin(this.config.documentValidation),
     ];
@@ -393,6 +391,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       },
       documentValidation: {
         documentShape: getShapeOfDocumentType('citerra'),
+        rules: [],
       },
     };
   }

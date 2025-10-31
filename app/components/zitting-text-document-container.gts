@@ -35,7 +35,6 @@ import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
 import {
   bulletListWithConfig,
   listItemWithConfig,
-  listTrackingPlugin,
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
@@ -168,7 +167,6 @@ export default class ZittingTextDocumentContainerComponent extends Component<Sig
       ...tablePlugins,
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
-      listTrackingPlugin(),
       emberApplication({ application: unwrap(getOwner(this)) }),
     ];
   }
