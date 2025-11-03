@@ -5,10 +5,10 @@ import type MeasureDesign from './measure-design';
 export default class ArDesign extends Model {
   declare [Type]: 'ar-design';
 
-  @attr('string') uri?: string;
-  @attr('string') name?: string;
-  @attr('datetime') date?: Date;
+  @attr('string') declare uri: string;
+  @attr('string') declare name: string;
+  @attr('datetime') declare date: Date;
 
-  @hasMany('measure-design', { async: true, inverse: 'design' })
+  @hasMany('measure-design', { async: true, inverse: null })
   declare measureDesigns: AsyncHasMany<MeasureDesign>;
 }

@@ -1,5 +1,4 @@
 import Model, {
-  type AsyncBelongsTo,
   attr,
   belongsTo,
   hasMany,
@@ -7,20 +6,20 @@ import Model, {
 } from '@ember-data/model';
 import type { Type } from '@warp-drive/core-types/symbols';
 import MeasureConcept from './measure-concept';
-import type ArDesign from './ar-design';
 import type TrafficSignal from './traffic-signal';
+import type VariableInstance from './variable-instance';
 
 export default class MeasureDesign extends Model {
   declare [Type]: 'measure-design';
 
-  @attr('string') uri?: string;
+  @attr('string') declare uri: string;
 
-  @hasMany('traffic-signal', { async: false, inverse: 'measureDesign' })
+  @hasMany('traffic-signal', { async: false, inverse: null })
   declare trafficSignals: HasMany<TrafficSignal>;
 
-  @belongsTo('ar-design', { async: true, inverse: 'measureDesigns' })
-  declare design: AsyncBelongsTo<ArDesign>;
-
-  @belongsTo('measure-concept', { async: false, inverse: 'measureDesign' })
+  @belongsTo('measure-concept', { async: false, inverse: null })
   declare measureConcept: MeasureConcept;
+
+  @hasMany('variable-instance', { async: false, inverse: null })
+  declare variableInstances: HasMany<VariableInstance>;
 }
