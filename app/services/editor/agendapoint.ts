@@ -137,6 +137,7 @@ import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/curr
 import configurationPerAdminUnit from '../../config/configuration-per-admin-unit';
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
+import { onChangedPlugin } from '@lblod/ember-rdfa-editor/plugins/on-changed/plugin';
 
 export default class AgendapointEditorService extends Service {
   @service declare intl: IntlService;
@@ -425,6 +426,7 @@ export default class AgendapointEditorService extends Service {
         ]),
         removePropertiesOfDeletedNodes(),
         rdfaInfoPlugin(),
+        onChangedPlugin,
         ...plugins,
       ],
     });
@@ -459,7 +461,7 @@ export default class AgendapointEditorService extends Service {
     if (combResult.result.every((ok) => ok)) {
       state = state.applyTransaction(combResult.transaction).state;
     }
-
+    console.log('DOC: ', state.doc);
     const serializer = SaySerializer.fromSchema(state.schema, () => state);
     const div = document.createElement('div');
     const doc = serializer.serializeNode(state.doc, undefined);
