@@ -27,7 +27,13 @@ export default class ArPreview extends Component<ArPreviewSignature> {
   @service declare arImporter: ArImporterService;
 
   preview = trackedFunction(this, async () => {
-    return this.arImporter.generatePreview(this.args.arDesign);
+    try {
+      const preview = await this.arImporter.generatePreview(this.args.arDesign);
+      return preview;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
   });
 
   returnToOverview = () => {

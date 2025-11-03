@@ -40,13 +40,19 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
   arDesigns = trackedFunction(this, async () => {
     const { pageNumber, pageSize, sort } = this;
     await Promise.resolve();
-    return this.store.query<ArDesign>('ar-design', {
-      page: {
-        size: pageSize,
-        number: pageNumber,
-      },
-      sort,
-    });
+    try {
+      const designs = await this.store.query<ArDesign>('ar-design', {
+        page: {
+          size: pageSize,
+          number: pageNumber,
+        },
+        sort,
+      });
+      return designs;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
   });
 
   updateSort = (sort?: ArDesignOverviewSortField) => {
