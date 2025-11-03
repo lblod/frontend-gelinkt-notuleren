@@ -15,45 +15,50 @@ import insertMeasure from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsi
 import { ZONALITY_OPTIONS } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/constants';
 import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/decision-utils';
 import {
-  VariableSchema,
-  type Variable as PluginVariable,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable';
-import {
-  TrafficSignalConceptSchema,
-  type TrafficSignalConcept,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal-concept';
+  VariableInstanceSchema,
+  type VariableInstance as PluginVariableInstance,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable-instance';
+import { TrafficSignalSchema } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
+import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
+import { v4 as uuidv4 } from 'uuid';
 
-type MeasureVariable = Exclude<PluginVariable, { type: 'instruction' }>;
-type MeasureVariables = Record<string, MeasureVariable>;
-
-function convertVariables(trafficSignals: TrafficSignal[]): MeasureVariables {
-  return Object.fromEntries<MeasureVariable>(
-    // @ts-expect-error we filter instructions but TS doesn't see it...
-    trafficSignals
-      .flatMap((signal) => signal.variableInstances.map((vi) => vi.variable))
-      .map((variable): [string, PluginVariable] => [
-        variable.title ?? '',
-        VariableSchema.parse({
-          uri: variable.uri ?? '',
-          label: variable.title ?? '',
-          type: variable.type ?? 'text',
-        }),
-      ])
-      .filter(([_, variable]) => variable.type !== 'instruction'),
+function convertVariableInstances(
+  variableInstances: VariableInstance[],
+): Record<string, PluginVariableInstance> {
+  return Object.fromEntries<PluginVariableInstance>(
+    variableInstances.map((varInstance) => [
+      varInstance.variable.label,
+      VariableInstanceSchema.parse({
+        uri: varInstance.uri,
+        value: varInstance.value,
+        variable: {
+          uri: varInstance.variable.uri,
+          type: varInstance.variable.type,
+          label: varInstance.variable.label,
+          codelistUri: varInstance.variable.codelist,
+        },
+      }),
+    ]),
   );
 }
 
-function convertSignals(signals: TrafficSignal[]): TrafficSignalConcept[] {
-  return TrafficSignalConceptSchema.array().parse(
-    signals.map((signal) => ({
-      code: signal.trafficSignalConcept.code,
-      uri: signal.trafficSignalConcept.uri,
-      type: signal.trafficSignalConcept.type,
-      image: '',
-    })),
+function convertSignals(signals: TrafficSignal[]) {
+  return TrafficSignalSchema.array().parse(
+    signals.map((signal) => {
+      const { trafficSignalConcept } = signal;
+      return {
+        uri: signal.uri,
+        trafficSignalConcept: {
+          code: trafficSignalConcept.code,
+          uri: trafficSignalConcept.uri,
+          type: trafficSignalConcept.type,
+          image: '',
+        },
+      };
+    }),
   );
 }
 
@@ -84,22 +89,35 @@ export default class ArImporterService extends Service {
   ): Promise<TransactionMonad<boolean>[]> {
     try {
       const measureDesigns = await design.measureDesigns;
-      return measureDesigns.map(({ measureConcept, trafficSignals }) => {
+      return measureDesigns.map((measureDesign) => {
+        const { measureConcept, trafficSignals, variableInstances } =
+          measureDesign;
+        const convertedSignals = convertSignals(trafficSignals);
+        const convertedVariableInstances =
+          convertVariableInstances(variableInstances);
         return insertMeasure({
-          measureConcept: {
-            uri: measureConcept.uri ?? 'test',
-            label: measureConcept.label ?? 'test',
-            trafficSignalConcepts: convertSignals(trafficSignals),
-            // The remaining parts of this object aren't used
-            preview: 'UNUSED',
-            zonality: ZONALITY_OPTIONS.NON_ZONAL,
-            variableSignage: false,
+          measureDesign: {
+            uri: measureDesign.uri,
+            measureConcept: {
+              uri: measureConcept.uri,
+              label: measureConcept.label,
+              preview: measureConcept.templateString,
+              // TODO: provisory, we should change this
+              zonality: ZONALITY_OPTIONS.NON_ZONAL,
+              variableSignage: false,
+              trafficSignalConcepts: convertedSignals.map(
+                (signal) => signal.trafficSignalConcept,
+              ),
+            },
+            trafficSignals: convertedSignals,
           },
           zonality: ZONALITY_OPTIONS.NON_ZONAL,
           temporal: false,
-          variables: convertVariables(trafficSignals),
-          templateString: measureConcept.templateString ?? 'broken',
+          variables: convertedVariableInstances,
+          templateString: measureConcept.templateString,
           decisionUri,
+          articleUriGenerator: () =>
+            `http://data.lblod.info/artikels/${uuidv4()}`,
         });
       });
     } catch (err) {
@@ -110,7 +128,9 @@ export default class ArImporterService extends Service {
 
   async generatePreview(design: ArDesign): Promise<string> {
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
+    console.log('Generate preview');
     const monads = await this._generateInsertionMonads(design, decisionUri);
+    console.log('Monads: ', monads);
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
       (state) => transactionCombinator<boolean>(state)(monads),
