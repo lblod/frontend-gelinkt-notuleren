@@ -84,7 +84,7 @@
 <AuModal
   @title={{t 'multiple-edit-modal.title'}}
   @modalOpen={{this.showMultipleEditWarning}}
-  @closeModal={{fn (mut this.showMultipleEditWarning) false}}
+  @closeModal={{perform this.closeMultipleEditWarning}}
   as |Modal|
 >
   <Modal.Body>
@@ -96,7 +96,7 @@
       }}</AuButton>
     <AuButton
       @skin='secondary'
-      {{on 'click' (fn (mut this.showMultipleEditWarning) false)}}
+      {{on 'click' (perform this.closeMultipleEditWarning)}}
     >{{t 'multiple-edit-modal.cancel'}}</AuButton>
   </Modal.Footer>
 </AuModal>

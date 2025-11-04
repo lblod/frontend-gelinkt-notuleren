@@ -8,6 +8,7 @@ export default class EditorDocumentTitleComponent extends Component {
   @tracked active = false;
   @tracked error = false;
   @tracked _title;
+  oldTitleArg;
 
   constructor() {
     super(...arguments);
@@ -21,6 +22,13 @@ export default class EditorDocumentTitleComponent extends Component {
       return this._title;
     }
   }
+
+  updateTitle = () => {
+    if (this.args.title !== this.oldTitleArg) {
+      this._title = undefined;
+      this.oldTitleArg = this.args.title;
+    }
+  };
 
   get isTitleModified() {
     if (!this._title) {

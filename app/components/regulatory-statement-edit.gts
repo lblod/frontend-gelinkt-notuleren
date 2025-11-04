@@ -21,6 +21,7 @@ import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuBodyContainer from '@appuniversum/ember-appuniversum/components/au-body-container';
 import AuIcon from '@appuniversum/ember-appuniversum/components/au-icon';
+import { fn } from '@ember/helper';
 
 import {
   em,
@@ -167,6 +168,7 @@ import DownloadDocument from 'frontend-gelinkt-notuleren/components/download-doc
 import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-editor-container';
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
 import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly-date';
+import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -187,6 +189,9 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   @tracked _editorDocument?: EditorDocumentModel;
   @tracked revisions?: EditorDocumentModel[];
   @tracked citationPlugin = citationPlugin(this.config.citation);
+  @tracked showMultipleEditWarning = false;
+  html?: string;
+  title?: string;
 
   schema = new Schema({
     nodes: {
@@ -426,32 +431,78 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   saveTask = task(async () => {
     if (this.editorDocument.title) {
       const html = this.controller?.htmlContent;
+      await this.documentContainer.currentVersion.reload({});
+      const currentVersion = (await this.documentContainer
+        .currentVersion) as EditorDocumentModel;
+      if (currentVersion.id !== this.editorDocument.id) {
+        this.showMultipleEditWarning = true;
+        this.html = html;
+        this.title = this.editorDocument.title;
+      } else {
+        const editorDocument =
+          await this.documentService.createEditorDocument.perform(
+            this.editorDocument.title,
+            html,
+            this.documentContainer,
+            this.editorDocument,
+          );
+        this._editorDocument = editorDocument;
+
+        const documentContainer = this.documentContainer;
+        documentContainer.set('currentVersion', editorDocument);
+        await documentContainer.save();
+        return this.fetchRevisions.perform();
+      }
+    }
+  });
+
+  confirmMultipleEdit = task(async () => {
+    if (this.title) {
+      await this.documentContainer.currentVersion.reload({});
+      const currentVersion = (await this.documentContainer
+        .currentVersion) as EditorDocumentModel;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
-          this.editorDocument.title,
-          html,
+          this.title,
+          this.html,
           this.documentContainer,
-          this.editorDocument,
+          currentVersion,
         );
       this._editorDocument = editorDocument;
 
       const documentContainer = this.documentContainer;
       documentContainer.set('currentVersion', editorDocument);
       await documentContainer.save();
+      this.showMultipleEditWarning = false;
       return this.fetchRevisions.perform();
     }
   });
 
   onTitleUpdate = task(async (title: string) => {
     const html = this.editorDocument.content;
-    const editorDocument =
-      await this.documentService.createEditorDocument.perform(
-        title,
-        html ?? undefined,
-        this.documentContainer,
-        this.editorDocument,
-      );
-    this._editorDocument = editorDocument;
+    await this.documentContainer.currentVersion.reload({});
+    const currentVersion = (await this.documentContainer
+      .currentVersion) as EditorDocumentModel;
+    if (currentVersion.id !== this.editorDocument.id) {
+      this.showMultipleEditWarning = true;
+      this.html = html as string;
+      this.title = title;
+    } else {
+      const editorDocument =
+        await this.documentService.createEditorDocument.perform(
+          title,
+          html ?? undefined,
+          this.documentContainer,
+          this.editorDocument,
+        );
+      this._editorDocument = editorDocument;
+    }
+  });
+
+  closeMultipleEditWarning = task(async () => {
+    this._editorDocument = (await this.documentContainer
+      .currentVersion) as EditorDocumentModel;
+    this.showMultipleEditWarning = false;
   });
 
   @action
@@ -460,6 +511,10 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       doNotClean: true,
     });
     this.controller = controller;
+  }
+
+  get busy() {
+    return this.saveTask.isRunning || this.showMultipleEditWarning;
   }
 
   <template>
@@ -570,7 +625,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         @rdfaEditorInit={{this.handleRdfaEditorInit}}
         @typeOfWrappingDiv='lblodgn:ReglementaireBijlage'
         @editorDocument={{this.editorDocument}}
-        @busy={{this.saveTask.isRunning}}
+        @busy={{this.busy}}
         @busyText={{t 'rdfa-editor-container.saving'}}
         @schema={{this.schema}}
         @nodeViews={{this.nodeViews}}
@@ -650,5 +705,24 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       @enabled={{this.dirty}}
       @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
     />
+    <AuModal
+      @title={{t 'multiple-edit-modal.title'}}
+      @modalOpen={{this.showMultipleEditWarning}}
+      @closeModal={{perform this.closeMultipleEditWarning}}
+      as |Modal|
+    >
+      <Modal.Body>
+        <p>{{t 'multiple-edit-modal.message'}}</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <AuButton {{on 'click' (perform this.confirmMultipleEdit)}}>{{t
+            'multiple-edit-modal.confirm'
+          }}</AuButton>
+        <AuButton
+          @skin='secondary'
+          {{on 'click' (perform this.closeMultipleEditWarning)}}
+        >{{t 'multiple-edit-modal.cancel'}}</AuButton>
+      </Modal.Footer>
+    </AuModal>
   </template>
 }
