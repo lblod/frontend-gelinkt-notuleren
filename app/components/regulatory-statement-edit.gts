@@ -21,7 +21,6 @@ import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuBodyContainer from '@appuniversum/ember-appuniversum/components/au-body-container';
 import AuIcon from '@appuniversum/ember-appuniversum/components/au-icon';
-import { fn } from '@ember/helper';
 
 import {
   em,

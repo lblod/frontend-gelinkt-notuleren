@@ -493,7 +493,6 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
 
   confirmMultipleEdit = task(async () => {
     if (this.title && this.controller) {
-      const html = this.controller.htmlContent;
       await this.documentContainer.currentVersion.reload({});
       const currentVersion = (await this.documentContainer
         .currentVersion) as EditorDocumentModel;
