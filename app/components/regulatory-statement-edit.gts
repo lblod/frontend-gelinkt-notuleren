@@ -57,7 +57,6 @@ import { BlockRDFaView } from '@lblod/ember-rdfa-editor/nodes/block-rdfa';
 import {
   bulletListWithConfig,
   listItemWithConfig,
-  listTrackingPlugin,
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
@@ -287,7 +286,6 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       linkPasteHandler(this.schema.nodes.link),
       // @ts-expect-error emberApplication should accept undefined as getOwner may return it
       emberApplication({ application: getOwner(this) }),
-      listTrackingPlugin(),
       variableAutofillerPlugin(this.config.autofilledVariable),
     ];
   }
