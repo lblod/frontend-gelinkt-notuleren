@@ -5,7 +5,10 @@ import type Triple from '@lblod/marawa/triple';
 import { instantiateUuids } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin';
 import { isSome } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import { setBesluitType } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/set-besluit-type';
-import { type BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
+import {
+  isValidTypeChoice,
+  type BesluitTypeInstance,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
 import templateUuidInstantiator from '@lblod/template-uuid-instantiator';
 import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
@@ -187,9 +190,10 @@ export default class DocumentService extends Service {
     }: PersistDocumentArgs) => {
       let generatedTemplate = await this.buildTemplate(template);
       if (decisionType) {
+        const isDraftDecisionType = !isValidTypeChoice(decisionType);
         generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
           generatedTemplate,
-          (state) => setBesluitType(state, decisionType),
+          (state) => setBesluitType(state, decisionType, isDraftDecisionType),
         );
       }
       const container = this.store.createRecord<DocumentContainerModel>(
