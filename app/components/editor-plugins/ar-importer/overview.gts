@@ -8,7 +8,8 @@ import { VisibleIcon } from '@appuniversum/ember-appuniversum/components/icons/v
 import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
 import { service } from '@ember/service';
 import { tracked } from 'tracked-built-ins';
-import { trackedFunction } from 'reactiveweb/function';
+import { restartableTask, timeout } from 'ember-concurrency';
+import { trackedTask } from 'reactiveweb/ember-concurrency';
 import AuFormRow from '@appuniversum/ember-appuniversum/components/au-form-row';
 import AuLabel from '@appuniversum/ember-appuniversum/components/au-label';
 import AuHeading from '@appuniversum/ember-appuniversum/components/au-heading';
@@ -20,6 +21,8 @@ import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
+
+const FILTER_TIMEOUT_MS = 300;
 
 export type ArDesignOverviewSortField = 'name' | '-name' | 'date' | '-date';
 export type ArDesignOverviewSignature = {
@@ -45,14 +48,14 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
   };
   resetFilters = () => {
     this.nameFilter = '';
-  }
+  };
 
-  arDesigns = trackedFunction(this, async () => {
+  arDesignsQuery = restartableTask(async () => {
+    await timeout(FILTER_TIMEOUT_MS);
     const { pageNumber, pageSize, sort, nameFilter } = this;
-    await Promise.resolve();
     try {
       const designs = await this.store.query<ArDesign>('ar-design', {
-        ...(this.nameFilter && {
+        ...(nameFilter && {
           filter: {
             name: nameFilter,
           },
@@ -69,6 +72,12 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
       throw e;
     }
   });
+  arDesigns = trackedTask<ArDesign[]>(this, this.arDesignsQuery, () => [
+    this.pageNumber,
+    this.pageSize,
+    this.sort,
+    this.nameFilter,
+  ]);
 
   updateSort = (sort?: ArDesignOverviewSortField) => {
     this.sort = sort;
@@ -115,7 +124,7 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
       <div class='ar-importer-overview__content'>
         <ReactiveTable
           @content={{this.arDesigns.value}}
-          @isLoading={{this.arDesigns.isPending}}
+          @isLoading={{this.arDesigns.isRunning}}
           @page={{this.pageNumber}}
           @pageSize={{this.pageSize}}
           @onPageChange={{this.updatePageNumber}}
