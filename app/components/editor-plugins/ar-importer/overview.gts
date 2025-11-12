@@ -36,12 +36,27 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
   @tracked pageNumber: number = 0;
   pageSize: number = 20;
   @tracked sort?: ArDesignOverviewSortField;
+  @tracked nameFilter = '';
+
+  setNameFilter = (event: Event) => {
+    if (event.target && 'value' in event.target) {
+      this.nameFilter = event.target.value as string;
+    }
+  };
+  resetFilters = () => {
+    this.nameFilter = '';
+  }
 
   arDesigns = trackedFunction(this, async () => {
-    const { pageNumber, pageSize, sort } = this;
+    const { pageNumber, pageSize, sort, nameFilter } = this;
     await Promise.resolve();
     try {
       const designs = await this.store.query<ArDesign>('ar-design', {
+        ...(this.nameFilter && {
+          filter: {
+            name: nameFilter,
+          },
+        }),
         page: {
           size: pageSize,
           number: pageNumber,
@@ -80,7 +95,12 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
               <AuLabel class='ar-importer-overview__form__label' for={{id}}>
                 {{t 'ar-importer.overview.filters.name.label'}}
               </AuLabel>
-              <AuInput id={{id}} @width='block' />
+              <AuInput
+                id={{id}}
+                @width='block'
+                value={{this.nameFilter}}
+                {{on 'input' this.setNameFilter}}
+              />
             {{/let}}
           </AuFormRow>
           <AuFormRow>
@@ -104,6 +124,7 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
             @skin='naked'
             @size='large'
             @icon={{CrossIcon}}
+            {{on 'click' this.resetFilters}}
           >{{t 'ar-importer.overview.filters.reset'}}</AuButton>
         </form>
       </div>
