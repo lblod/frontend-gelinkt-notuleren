@@ -103,22 +103,6 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
               />
             {{/let}}
           </AuFormRow>
-          <AuFormRow>
-            {{#let (uuidv4) as |id|}}
-              <AuLabel class='ar-importer-overview__form__label' for={{id}}>
-                {{t 'ar-importer.overview.filters.signal-code.label'}}
-              </AuLabel>
-              <AuInput id={{id}} @width='block' />
-            {{/let}}
-          </AuFormRow>
-          <AuFormRow>
-            {{#let (uuidv4) as |id|}}
-              <AuLabel class='ar-importer-overview__form__label' for={{id}}>
-                {{t 'ar-importer.overview.filters.address.label'}}
-              </AuLabel>
-              <AuInput id={{id}} @width='block' />
-            {{/let}}
-          </AuFormRow>
           <AuButton
             class='ar-importer-overview__reset-filters-button'
             @skin='naked'
