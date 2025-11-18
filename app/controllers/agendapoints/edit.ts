@@ -268,7 +268,18 @@ export default class AgendapointsEditController extends Controller {
   });
 
   closeMultipleEditWarning = task(async () => {
-    this._editorDocument = await this.documentContainer.currentVersion;
+    const currentVersion = (await this.documentContainer
+      .currentVersion) as EditorDocumentModel;
+    const inProgDocument =
+      await this.documentService.createEditorDocument.perform(
+        this.title as string,
+        this.cleanedHtml,
+        this.documentContainer,
+        currentVersion,
+        // Create a new document version but don't actually send it to the server
+        true,
+      );
+    this._editorDocument = inProgDocument;
     this.showMultipleEditWarning = false;
   });
 
