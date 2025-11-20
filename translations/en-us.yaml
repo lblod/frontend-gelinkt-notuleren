@@ -117,6 +117,12 @@ delete-modal:
   confirm: Yes, move to trash
   cancel: Cancel
 
+multiple-edit-modal:
+  title: We found differences between your local version and the server version
+  message: Do you want to override the document in the server with your local version?
+  confirm: Yes
+  cancel: Cancel
+
 document-creator:
   title-field: Document title
   template: Template
