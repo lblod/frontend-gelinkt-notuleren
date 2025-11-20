@@ -26,6 +26,13 @@ interface PersistDocumentArgs {
   decisionType?: BesluitTypeInstance;
 }
 
+function hasTypePredicate(triple: Triple): boolean {
+  return (
+    triple.predicate === 'a' ||
+    triple.predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
+  );
+}
+
 export default class DocumentService extends Service {
   @service declare store: Store;
   @service('editor/agendapoint')
@@ -46,7 +53,7 @@ export default class DocumentService extends Service {
     const triples = this.extractTriplesFromDocument(editorDocument);
     const decisionUris = triples.filter(
       (t) =>
-        t.predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+        hasTypePredicate(t) &&
         t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit',
     );
     const firstDecision = decisionUris[0];
@@ -77,7 +84,7 @@ export default class DocumentService extends Service {
     const triples = this.extractTriplesFromDocument(editorDocument);
     const decisionUris = triples.filter(
       (t) =>
-        t.predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+        hasTypePredicate(t) &&
         t.object === 'http://data.vlaanderen.be/ns/besluit#Besluit',
     );
     const decisions = decisionUris.map((decisionUriTriple) => {
@@ -100,7 +107,7 @@ export default class DocumentService extends Service {
     const documentpartUris = triples
       .filter(
         (t) =>
-          t.predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' &&
+          hasTypePredicate(t) &&
           t.object ===
             'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel',
       )
@@ -227,8 +234,7 @@ export default class DocumentService extends Service {
         const part = (
           await this.store.query<DocumentContainerModel>('document-container', {
             'filter[:uri:]': uri,
-            // @ts-expect-error I assume this error is due to ConceptModel not being properly typed
-            include: 'is-part-of',
+            include: ['isPartOf'],
           })
         )[0];
         return part;
