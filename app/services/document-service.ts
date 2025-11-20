@@ -121,6 +121,7 @@ export default class DocumentService extends Service {
       content: string | undefined,
       documentContainer: DocumentContainerModel,
       previousDocument?: EditorDocumentModel,
+      skipSave?: boolean,
     ) => {
       if (!title || !documentContainer) {
         // eslint-disable-next-line @typescript-eslint/only-throw-error
@@ -143,10 +144,10 @@ export default class DocumentService extends Service {
 
         const parts = await this.retrieveDocumentParts(editorDocument);
         editorDocument.set('parts', parts);
-        await editorDocument.save();
+        if (!skipSave) await editorDocument.save();
 
         documentContainer.set('currentVersion', editorDocument);
-        await documentContainer.save();
+        if (!skipSave) await documentContainer.save();
 
         return editorDocument;
       }
@@ -214,6 +215,7 @@ export default class DocumentService extends Service {
       );
       container.set('folder', folder);
       container.set('publisher', group);
+      await container.save();
       const editorDocument = await this.createEditorDocument.perform(
         title,
         generatedTemplate,
