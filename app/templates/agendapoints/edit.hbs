@@ -153,6 +153,11 @@
         @controller={{container.controller}}
         @options={{this.config.roadsignRegulation}}
       />
+      {{#if (feature-flag 'arImport')}}
+        <EditorPlugins::ArImporter::SidebarWidget
+          @controller={{container.controller}}
+        />
+      {{/if}}
       <StandardTemplatePlugin::Card
         @controller={{container.controller}}
         @templates={{this.model.templates}}

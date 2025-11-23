@@ -1,8 +1,4 @@
-/**
- * @param {Date} datetime
- * @returns string
- */
-export const detailedDate = (datetime) => {
+export const detailedDate = (datetime: Date | undefined): string => {
   //If not a date (e.g. date is undefined) return "" for printing on screen.
   if (!(datetime instanceof Date)) return '';
 
@@ -30,7 +26,10 @@ export const detailedDate = (datetime) => {
       hour12: false,
     });
     const parts = datetimeformat.formatToParts(datetime);
-    const formatMap = {};
+    const formatMap = {} as Record<
+      Exclude<Intl.DateTimeFormatPart['type'], 'literal'>,
+      string
+    >;
     for (const part of parts) {
       if (part.type !== 'literal') {
         formatMap[part.type] = part.value;
