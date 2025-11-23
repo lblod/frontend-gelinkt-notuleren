@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.69.0
+
+### Minor Changes
+
+- [#879](https://github.com/lblod/frontend-gelinkt-notuleren/pull/879) [`b520456`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b520456911e16431c4b723c2f4c1275014867e0e) Thanks [@elpoelma](https://github.com/elpoelma)! - Add AR-importer plugin to handle importing signage plans
+
+### Patch Changes
+
+- [#883](https://github.com/lblod/frontend-gelinkt-notuleren/pull/883) [`217a53e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/217a53e451dd7d54fd15dcd1c45bc1153afccc8a) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix listing of which decisions a regulatory statement is used in
+
+- [#877](https://github.com/lblod/frontend-gelinkt-notuleren/pull/877) [`571b424`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/571b4247163bc765cb3a5270612baa227381f752) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Avoid concurrent edit problems
+
 ## 5.68.1
 
 ### Patch Changes
