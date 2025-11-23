@@ -45,6 +45,9 @@ export default class AgendapointsEditController extends Controller {
   @tracked displayDeleteModal = false;
   @tracked _editorDocument?: EditorDocumentModel | null;
   @tracked controller?: SayController;
+  @tracked showMultipleEditWarning = false;
+  cleanedHtml?: string;
+  title?: string;
 
   @tracked schema?: Schema;
   @tracked plugins?: ProsePlugin[];
@@ -90,7 +93,9 @@ export default class AgendapointsEditController extends Controller {
     return (
       !this.editorSetup ||
       this.saveTask.isRunning ||
-      this.copyAgendapunt.isRunning
+      this.copyAgendapunt.isRunning ||
+      this.showMultipleEditWarning ||
+      this.confirmMultipleEdit.isRunning
     );
   }
 
@@ -160,29 +165,40 @@ export default class AgendapointsEditController extends Controller {
   onTitleUpdate = task(async (title: string) => {
     const html = this.editorDocument?.content ?? '';
 
-    const behandeling = (
-      await this.store.query<BehandelingVanAgendapunt>(
-        'behandeling-van-agendapunt',
-        {
-          'filter[document-container][:id:]': this.model.documentContainer.id,
-        },
-      )
-    )[0];
-    if (behandeling) {
-      const agendaItem = unwrap(await behandeling.onderwerp);
-      agendaItem.titel = title;
-      await agendaItem.save();
+    await this.documentContainer.currentVersion.reload({});
+    const currentVersion = (await this.documentContainer
+      .currentVersion) as EditorDocumentModel;
+    if (currentVersion.id !== this.editorDocument?.id) {
+      this.showMultipleEditWarning = true;
+      const html = this.controller?.htmlContent as string;
+      const cleanedHtml = this.removeEmptyDivs(html);
+      this.cleanedHtml = cleanedHtml;
+      this.title = title;
+    } else {
+      const behandeling = (
+        await this.store.query<BehandelingVanAgendapunt>(
+          'behandeling-van-agendapunt',
+          {
+            'filter[document-container][:id:]': this.model.documentContainer.id,
+          },
+        )
+      )[0];
+      if (behandeling) {
+        const agendaItem = unwrap(await behandeling.onderwerp);
+        agendaItem.titel = title;
+        await agendaItem.save();
+      }
+
+      const editorDocument =
+        await this.documentService.createEditorDocument.perform(
+          title,
+          html,
+          this.documentContainer,
+          this.editorDocument ?? undefined,
+        );
+
+      this._editorDocument = editorDocument;
     }
-
-    const editorDocument =
-      await this.documentService.createEditorDocument.perform(
-        title,
-        html,
-        this.documentContainer,
-        this.editorDocument ?? undefined,
-      );
-
-    this._editorDocument = editorDocument;
   });
 
   saveTask = task(async () => {
@@ -201,16 +217,70 @@ export default class AgendapointsEditController extends Controller {
       this.hasDocumentValidationErrors = false;
       const html = this.controller.htmlContent;
       const cleanedHtml = this.removeEmptyDivs(html);
+      await this.documentContainer.currentVersion.reload({});
+      const currentVersion = (await this.documentContainer
+        .currentVersion) as EditorDocumentModel;
+      if (currentVersion.id !== this.editorDocument.id) {
+        this.showMultipleEditWarning = true;
+        this.cleanedHtml = cleanedHtml;
+        this.title = this.editorDocument.title;
+      } else {
+        const editorDocument =
+          await this.documentService.createEditorDocument.perform(
+            this.editorDocument.title,
+            cleanedHtml,
+            this.documentContainer,
+            currentVersion,
+          );
+        this._editorDocument = editorDocument;
+      }
+    }
+  });
 
+  confirmMultipleEdit = task(async () => {
+    if (!this.controller || !this.editorDocument) {
+      return;
+    }
+    const fixArticleConnectionsTr = fixArticleConnections(
+      this.controller.mainEditorState,
+    );
+    if (fixArticleConnectionsTr) {
+      this.controller.mainEditorView.dispatch(fixArticleConnectionsTr);
+    }
+    if (!this.editorDocument.title) {
+      this.hasDocumentValidationErrors = true;
+    } else {
+      this.hasDocumentValidationErrors = false;
+      await this.documentContainer.currentVersion.reload({});
+      const currentVersion = (await this.documentContainer
+        .currentVersion) as EditorDocumentModel;
       const editorDocument =
         await this.documentService.createEditorDocument.perform(
-          this.editorDocument.title,
-          cleanedHtml,
+          this.title as string,
+          this.cleanedHtml,
           this.documentContainer,
-          this.editorDocument,
+          currentVersion,
         );
       this._editorDocument = editorDocument;
+      this.showMultipleEditWarning = false;
+      this.cleanedHtml = undefined;
     }
+  });
+
+  closeMultipleEditWarning = task(async () => {
+    const currentVersion = (await this.documentContainer
+      .currentVersion) as EditorDocumentModel;
+    const inProgDocument =
+      await this.documentService.createEditorDocument.perform(
+        this.title as string,
+        this.cleanedHtml,
+        this.documentContainer,
+        currentVersion,
+        // Create a new document version but don't actually send it to the server
+        true,
+      );
+    this._editorDocument = inProgDocument;
+    this.showMultipleEditWarning = false;
   });
 
   removeEmptyDivs(html: string) {

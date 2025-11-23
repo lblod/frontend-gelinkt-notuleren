@@ -117,6 +117,12 @@ delete-modal:
   confirm: Ja, verplaats naar prullenmand
   cancel: Annuleren
 
+multiple-edit-modal:
+  title: We hebben verschillen gevonden tussen uw lokale versie en de serverversie.
+  message: Wilt u het document op de server overschrijven met uw lokale versie?
+  confirm: Ja
+  cancel: Annuleren
+
 document-creator:
   title-field: Titel document
   template: Sjabloon
