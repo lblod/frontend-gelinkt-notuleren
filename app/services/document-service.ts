@@ -102,17 +102,25 @@ export default class DocumentService extends Service {
     return decisions;
   }
 
-  getDocumentparts(editorDocument: EditorDocumentModel) {
+  getExternalEntityUris(editorDocument: EditorDocumentModel) {
     const triples = this.extractTriplesFromDocument(editorDocument);
-    const documentpartUris = triples
-      .filter(
-        (t) =>
-          hasTypePredicate(t) &&
-          t.object ===
-            'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel',
-      )
-      .map((triple) => triple.subject);
-    return documentpartUris;
+    const parts: string[] = [];
+    const arDesigns = new Set<string>();
+    triples.forEach((t) => {
+      if (
+        hasTypePredicate(t) &&
+        t.object ===
+          'https://data.vlaanderen.be/doc/applicatieprofiel/besluit-publicatie#Documentonderdeel'
+      ) {
+        parts.push(t.subject);
+      } else if (
+        t.predicate ===
+        'https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#BevatMaatregelOntwerp'
+      ) {
+        arDesigns.add(t.subject);
+      }
+    });
+    return { parts, arDesigns: [...arDesigns.values()] };
   }
 
   createEditorDocument = task(
@@ -142,8 +150,10 @@ export default class DocumentService extends Service {
         }
         editorDocument.set('documentContainer', documentContainer);
 
-        const parts = await this.retrieveDocumentParts(editorDocument);
+        const { parts, arDesignUris } =
+          await this.retrieveExternalEntities(editorDocument);
         editorDocument.set('parts', parts);
+        editorDocument.includesArDesigns = arDesignUris;
         if (!skipSave) await editorDocument.save();
 
         documentContainer.set('currentVersion', editorDocument);
@@ -228,19 +238,20 @@ export default class DocumentService extends Service {
     },
   );
 
-  async retrieveDocumentParts(document: EditorDocumentModel) {
+  async retrieveExternalEntities(document: EditorDocumentModel) {
+    const { parts: partUris, arDesigns: arDesignUris } =
+      this.getExternalEntityUris(document);
     const parts = await Promise.all(
-      this.getDocumentparts(document).map(async (uri) => {
+      partUris.map(async (uri) => {
         const part = (
           await this.store.query<DocumentContainerModel>('document-container', {
             'filter[:uri:]': uri,
-            include: ['isPartOf'],
           })
         )[0];
         return part;
       }),
     );
-    return parts.filter(isSome);
+    return { parts: parts.filter(isSome), arDesignUris };
   }
 
   fetchRevisions = task(
