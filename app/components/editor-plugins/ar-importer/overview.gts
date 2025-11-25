@@ -14,6 +14,7 @@ import AuFormRow from '@appuniversum/ember-appuniversum/components/au-form-row';
 import AuLabel from '@appuniversum/ember-appuniversum/components/au-label';
 import AuHeading from '@appuniversum/ember-appuniversum/components/au-heading';
 import AuInput from '@appuniversum/ember-appuniversum/components/au-input';
+import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
 import { v4 as uuidv4 } from 'uuid';
 import { CrossIcon } from '@appuniversum/ember-appuniversum/components/icons/cross';
 import { detailedDate } from 'frontend-gelinkt-notuleren/utils/detailed-date';
@@ -21,6 +22,7 @@ import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
+import EditorDocument from 'frontend-gelinkt-notuleren/models/editor-document';
 
 const FILTER_TIMEOUT_MS = 300;
 
@@ -31,6 +33,11 @@ export type ArDesignOverviewSignature = {
     onShowPreview: (arDesign: ArDesign) => void;
     onInsertAr: (arDesign: ArDesign) => void;
   };
+};
+
+type DesignInfo = {
+  design: ArDesign;
+  inDocs: EditorDocument[];
 };
 
 export default class ArDesignOverview extends Component<ArDesignOverviewSignature> {
@@ -66,13 +73,26 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
         },
         sort,
       });
-      return designs;
+      const docs = await Promise.all(
+        designs.map(
+          async (design): Promise<DesignInfo> => ({
+            design,
+            inDocs: await this.store.query<EditorDocument>('editor-document', {
+              filter: {
+                'includes-ar-designs': design.uri,
+              },
+              fields: { 'editor-documents': 'uri' },
+            }),
+          }),
+        ),
+      );
+      return docs;
     } catch (e) {
       console.error(e);
       throw e;
     }
   });
-  arDesigns = trackedTask<ArDesign[]>(this, this.arDesignsQuery, () => [
+  arDesigns = trackedTask<DesignInfo[]>(this, this.arDesignsQuery, () => [
     this.pageNumber,
     this.pageSize,
     this.sort,
@@ -142,26 +162,38 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
               @field='date'
               @label={{t 'ar-importer.overview.table.headers.date'}}
             />
+            <th>{{t 'ar-importer.overview.table.headers.status'}}</th>
             <th />
           </:header>
           <:body as |arDesign|>
             <td>
-              {{arDesign.name}}
+              {{arDesign.design.name}}
             </td>
             <td>
-              {{detailedDate arDesign.date}}
+              {{detailedDate arDesign.design.date}}
+            </td>
+            <td>
+              {{#if arDesign.inDocs.length}}
+                <AuPill @size='small'>
+                  {{t 'ar-importer.overview.table.statuses.used'}}
+                </AuPill>
+              {{else}}
+                <AuPill @size='small'>
+                  {{t 'ar-importer.overview.table.statuses.unused'}}
+                </AuPill>
+              {{/if}}
             </td>
             <td>
               <AuButtonGroup>
                 <AuButton
                   @skin='link'
                   @icon={{VisibleIcon}}
-                  {{on 'click' (fn @onShowPreview arDesign)}}
+                  {{on 'click' (fn @onShowPreview arDesign.design)}}
                 >{{t 'ar-importer.overview.table.actions.preview'}}</AuButton>
                 <AuButton
                   @skin='link'
                   @icon={{PlusIcon}}
-                  {{on 'click' (fn @onInsertAr arDesign)}}
+                  {{on 'click' (fn @onInsertAr arDesign.design)}}
                 >{{t 'ar-importer.overview.table.actions.insert'}}</AuButton>
               </AuButtonGroup>
             </td>
