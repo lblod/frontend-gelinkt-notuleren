@@ -10,11 +10,13 @@ import { service } from '@ember/service';
 import { tracked } from 'tracked-built-ins';
 import { restartableTask, timeout } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
+import { trackedFunction } from 'reactiveweb/function';
 import AuFormRow from '@appuniversum/ember-appuniversum/components/au-form-row';
 import AuLabel from '@appuniversum/ember-appuniversum/components/au-label';
 import AuHeading from '@appuniversum/ember-appuniversum/components/au-heading';
 import AuInput from '@appuniversum/ember-appuniversum/components/au-input';
 import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
+import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import { v4 as uuidv4 } from 'uuid';
 import { CrossIcon } from '@appuniversum/ember-appuniversum/components/icons/cross';
 import { detailedDate } from 'frontend-gelinkt-notuleren/utils/detailed-date';
@@ -37,7 +39,7 @@ export type ArDesignOverviewSignature = {
 
 type DesignInfo = {
   design: ArDesign;
-  inDocs: EditorDocument[];
+  inDocs: Promise<EditorDocument[]>;
 };
 
 export default class ArDesignOverview extends Component<ArDesignOverviewSignature> {
@@ -73,20 +75,17 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
         },
         sort,
       });
-      const docs = await Promise.all(
-        designs.map(
-          async (design): Promise<DesignInfo> => ({
-            design,
-            inDocs: await this.store.query<EditorDocument>('editor-document', {
-              filter: {
-                'includes-ar-designs': design.uri,
-              },
-              fields: { 'editor-documents': 'uri' },
-            }),
+      return designs.map(
+        (design): DesignInfo => ({
+          design,
+          inDocs: this.store.query<EditorDocument>('editor-document', {
+            filter: {
+              'includes-ar-designs': design.uri,
+            },
+            fields: { 'editor-documents': 'uri' },
           }),
-        ),
+        }),
       );
-      return docs;
     } catch (e) {
       console.error(e);
       throw e;
@@ -173,15 +172,7 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
               {{detailedDate arDesign.design.date}}
             </td>
             <td>
-              {{#if arDesign.inDocs.length}}
-                <AuPill @size='small'>
-                  {{t 'ar-importer.overview.table.statuses.used'}}
-                </AuPill>
-              {{else}}
-                <AuPill @size='small'>
-                  {{t 'ar-importer.overview.table.statuses.unused'}}
-                </AuPill>
-              {{/if}}
+              <UsageStatus @inDocs={{arDesign.inDocs}} />
             </td>
             <td>
               <AuButtonGroup>
@@ -201,5 +192,32 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
         </ReactiveTable>
       </div>
     </div>
+  </template>
+}
+
+type UsageStatusSig = {
+  Args: {
+    inDocs: DesignInfo['inDocs'];
+  };
+};
+class UsageStatus extends Component<UsageStatusSig> {
+  info = trackedFunction(this, () => this.args.inDocs);
+
+  <template>
+    {{#if this.info.isPending}}
+      <AuLoader @padding='small' @inline={{true}} @hideMessage={{true}}>
+        {{t 'application.loading'}}
+      </AuLoader>
+    {{else}}
+      {{#if this.info.value.length}}
+        <AuPill @size='small'>
+          {{t 'ar-importer.overview.table.statuses.used'}}
+        </AuPill>
+      {{else}}
+        <AuPill @size='small'>
+          {{t 'ar-importer.overview.table.statuses.unused'}}
+        </AuPill>
+      {{/if}}
+    {{/if}}
   </template>
 }
