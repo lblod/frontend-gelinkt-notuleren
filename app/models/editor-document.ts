@@ -22,10 +22,11 @@ export default class EditorDocumentModel extends Model {
   @attr('string', { defaultValue: defaultContext }) context: Option<string>;
   @attr('datetime') createdOn: Option<Date>;
   @attr('datetime') updatedOn: Option<Date>;
+  @attr('string-set') includesArDesigns: Option<string[]>;
 
-  @belongsTo('concept', { inverse: null, async: true })
+  @belongsTo<ConceptModel>('concept', { inverse: null, async: true })
   declare type: AsyncBelongsTo<ConceptModel>;
-  @belongsTo('concept', { inverse: null, async: true })
+  @belongsTo<ConceptModel>('concept', { inverse: null, async: true })
   declare status: AsyncBelongsTo<ConceptModel>;
   @belongsTo<EditorDocumentModel>('editor-document', {
     inverse: 'nextVersion',
@@ -43,7 +44,10 @@ export default class EditorDocumentModel extends Model {
   })
   declare documentContainer: AsyncBelongsTo<DocumentContainerModel>;
 
-  @hasMany('document-container', { inverse: 'isPartOf', async: true })
+  @hasMany<DocumentContainerModel>('document-container', {
+    inverse: 'isPartOf',
+    async: true,
+  })
   declare parts: AsyncHasMany<DocumentContainerModel>;
 
   get htmlSafeContent() {
