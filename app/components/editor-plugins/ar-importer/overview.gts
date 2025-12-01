@@ -25,6 +25,11 @@ import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
 import EditorDocument from 'frontend-gelinkt-notuleren/models/editor-document';
+import {
+  DRAFT_STATUS_ID,
+  PUBLISHED_STATUS_ID,
+  SCHEDULED_STATUS_ID,
+} from 'frontend-gelinkt-notuleren/utils/constants';
 
 const FILTER_TIMEOUT_MS = 300;
 
@@ -81,6 +86,12 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
           inDocs: this.store.query<EditorDocument>('editor-document', {
             filter: {
               'includes-ar-designs': design.uri,
+              'document-container': {
+                'current-version': design.uri,
+                status: {
+                  id: `${DRAFT_STATUS_ID},${SCHEDULED_STATUS_ID},${PUBLISHED_STATUS_ID}`,
+                },
+              },
             },
             fields: { 'editor-documents': 'uri' },
           }),
