@@ -13,6 +13,7 @@ import fetchBesluitTypes, {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/fetchBesluitTypes';
 import {
   checkBesluitTypeInstance,
+  isValidTypeChoice,
   type BesluitTypeInstance,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
 import type DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
@@ -61,7 +62,8 @@ export default class DocumentCreatorModal extends Component<Sig> {
       !this.selectedTemplate ||
       this.invalidTitle ||
       !this.title ||
-      (this.decisionTypes && !this.decisionType)
+      (this.decisionTypes && !this.decisionType) ||
+      (this.decisionType && !isValidTypeChoice(this.decisionType))
     );
   }
 
