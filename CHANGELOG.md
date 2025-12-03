@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.69.1
+
+### Patch Changes
+
+- [#884](https://github.com/lblod/frontend-gelinkt-notuleren/pull/884) [`a4972f5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a4972f56f3cfb4545a3ce5fcf1f3f932bac8f2b7) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Force agendapoints to have a valid type choice
+
+- [#886](https://github.com/lblod/frontend-gelinkt-notuleren/pull/886) [`3f7e8ba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3f7e8ba6fcc9571189ea2d1d9debbe23ea8110f1) Thanks [@elpoelma](https://github.com/elpoelma)! - Update editor plugins to version [33.4.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v33.4.0)
+
 ## 5.69.0
 
 ### Minor Changes
