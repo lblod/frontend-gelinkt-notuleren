@@ -927,9 +927,13 @@ ar-importer:
       headers:
         name: Name
         date: Last modified
+        status: Usage status
       actions:
         preview: Preview
         insert: Insert
+      statuses:
+        used: Used
+        unused: Not yet used
       no-data: No designs found
   preview:
     return-to-overview: Return to overview
