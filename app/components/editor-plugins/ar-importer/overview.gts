@@ -38,7 +38,7 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
 
   @tracked pageNumber: number = 0;
   pageSize: number = 20;
-  @tracked sort: ArDesignOverviewSortField = 'date';
+  @tracked sort?: ArDesignOverviewSortField = 'date';
   @tracked nameFilter = '';
 
   setNameFilter = (event: Event) => {
