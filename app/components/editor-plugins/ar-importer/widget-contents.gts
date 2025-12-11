@@ -16,14 +16,15 @@ import {
   SCHEDULED_STATUS_ID,
 } from 'frontend-gelinkt-notuleren/utils/constants';
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
+import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
 
 const FILTER_TIMEOUT_MS = 300;
 
 export type ArDesignOverviewSortField = 'name' | '-name' | 'date' | '-date';
 
 export type DesignInfo = {
-  design: ArDesign;
-  inDocs: Promise<EditorDocumentModel[]>;
+  designs: Collection<ArDesign>;
+  inDocs: Record<string, Promise<EditorDocumentModel[]>>;
 };
 
 type Sig = {
@@ -70,30 +71,33 @@ export default class ArWidgetContents extends Component<Sig> {
         },
         sort,
       });
-      return designs.map(
-        (design): DesignInfo => ({
-          design,
-          inDocs: this.store.query<EditorDocumentModel>('editor-document', {
-            filter: {
-              'includes-ar-designs': design.uri,
-              'document-container': {
-                'current-version': { 'includes-ar-designs': design.uri },
-                status: {
-                  id: `${DRAFT_STATUS_ID},${SCHEDULED_STATUS_ID},${PUBLISHED_STATUS_ID}`,
+      return {
+        designs,
+        inDocs: Object.fromEntries(
+          designs.map((design) => [
+            design.id ?? '',
+            this.store.query<EditorDocumentModel>('editor-document', {
+              filter: {
+                'includes-ar-designs': design.uri,
+                'document-container': {
+                  'current-version': { 'includes-ar-designs': design.uri },
+                  status: {
+                    id: `${DRAFT_STATUS_ID},${SCHEDULED_STATUS_ID},${PUBLISHED_STATUS_ID}`,
+                  },
                 },
               },
-            },
-            fields: { 'editor-documents': 'uri' },
-          }),
-        }),
-      );
+              fields: { 'editor-documents': 'uri' },
+            }),
+          ]),
+        ),
+      };
     } catch (e) {
       console.error(e);
       throw e;
     }
   });
 
-  arDesigns = trackedTask<DesignInfo[]>(this, this.arDesignsQuery, () => [
+  arDesigns = trackedTask<DesignInfo>(this, this.arDesignsQuery, () => [
     this.pageNumber,
     this.pageSize,
     this.sort,

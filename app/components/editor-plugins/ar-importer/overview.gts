@@ -1,3 +1,5 @@
+import Component from '@glimmer/component';
+import { get } from '@ember/helper';
 import type { AuMainContainerSignature } from '@appuniversum/ember-appuniversum/components/au-main-container';
 import ReactiveTable from 'frontend-gelinkt-notuleren/components/common/reactive-table';
 import AuButtonGroup from '@appuniversum/ember-appuniversum/components/au-button-group';
@@ -20,12 +22,12 @@ import t from 'ember-intl/helpers/t';
 import type { ArDesignOverviewSortField, DesignInfo } from './widget-contents';
 import type { TOC } from '@ember/component/template-only';
 import { trackedFunction } from 'reactiveweb/function';
-import Component from '@glimmer/component';
+import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 
 export type ArDesignOverviewSignature = {
   Element: AuMainContainerSignature['Element'];
   Args: {
-    arDesigns?: DesignInfo[] | null;
+    arDesigns?: DesignInfo | null;
     loading?: boolean;
     onShowPreview: (arDesign: ArDesign) => void;
     onInsertAr: (arDesign: ArDesign) => void;
@@ -71,7 +73,7 @@ const ArDesignOverview: TOC<ArDesignOverviewSignature> = <template>
     </div>
     <div class='ar-importer-overview__content'>
       <ReactiveTable
-        @content={{@arDesigns}}
+        @content={{@arDesigns.designs}}
         @isLoading={{@loading}}
         @page={{@pageNumber}}
         @pageSize={{@pageSize}}
@@ -95,25 +97,27 @@ const ArDesignOverview: TOC<ArDesignOverviewSignature> = <template>
         </:header>
         <:body as |arDesign|>
           <td>
-            {{arDesign.design.name}}
+            {{arDesign.name}}
           </td>
           <td>
-            {{detailedDate arDesign.design.date}}
+            {{detailedDate arDesign.date}}
           </td>
           <td>
-            <UsageStatus @inDocs={{arDesign.inDocs}} />
+            {{#if arDesign.id}}
+              <UsageStatus @inDocs={{get @arDesigns.inDocs arDesign.id}} />
+            {{/if}}
           </td>
           <td>
             <AuButtonGroup>
               <AuButton
                 @skin='link'
                 @icon={{VisibleIcon}}
-                {{on 'click' (fn @onShowPreview arDesign.design)}}
+                {{on 'click' (fn @onShowPreview arDesign)}}
               >{{t 'ar-importer.overview.table.actions.preview'}}</AuButton>
               <AuButton
                 @skin='link'
                 @icon={{PlusIcon}}
-                {{on 'click' (fn @onInsertAr arDesign.design)}}
+                {{on 'click' (fn @onInsertAr arDesign)}}
               >{{t 'ar-importer.overview.table.actions.insert'}}</AuButton>
             </AuButtonGroup>
           </td>
@@ -125,11 +129,11 @@ const ArDesignOverview: TOC<ArDesignOverviewSignature> = <template>
 
 type UsageStatusSig = {
   Args: {
-    inDocs: DesignInfo['inDocs'];
+    inDocs: Promise<EditorDocumentModel[]> | undefined;
   };
 };
 class UsageStatus extends Component<UsageStatusSig> {
-  info = trackedFunction(this, () => this.args.inDocs);
+  info = trackedFunction(this, () => this.args.inDocs ?? []);
 
   <template>
     {{#if this.info.isPending}}
