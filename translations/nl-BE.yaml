@@ -933,9 +933,13 @@ ar-importer:
       headers:
         name: Naam
         date: Laatste wijziging
+        status: Gebruikstatus
       actions:
         preview: Preview
         insert: Voeg in
+      statuses:
+        used: Gebruikt
+        unused: Nog niet gebruikt
       no-data: Geen ontwerpen gevonden
   preview:
     return-to-overview: Terug naar overzicht
