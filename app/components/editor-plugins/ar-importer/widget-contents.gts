@@ -77,7 +77,7 @@ export default class ArWidgetContents extends Component<Sig> {
             filter: {
               'includes-ar-designs': design.uri,
               'document-container': {
-                'current-version': design.uri,
+                'current-version': { 'includes-ar-designs': design.uri },
                 status: {
                   id: `${DRAFT_STATUS_ID},${SCHEDULED_STATUS_ID},${PUBLISHED_STATUS_ID}`,
                 },
