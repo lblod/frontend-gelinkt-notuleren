@@ -40,6 +40,7 @@ import {
   date,
   dateView,
   codelist,
+  codelist_option,
   codelistView,
   number,
   numberView,
@@ -52,6 +53,10 @@ import {
   autofilled_variable,
   autofilledVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
+import {
+  legacy_codelist,
+  legacyCodelistView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables/legacy-codelist';
 import {
   osloLocation,
   osloLocationView,
@@ -291,6 +296,7 @@ export default class AgendapointEditorService extends Service {
         text_variable: textVariableView(controller),
         location: locationView(controller),
         codelist: codelistView(controller),
+        legacy_codelist: legacyCodelistView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
         block_rdfa: (...args: Parameters<NodeViewConstructor>) =>
@@ -336,6 +342,8 @@ export default class AgendapointEditorService extends Service {
         oslo_location: osloLocation(this.config.location),
         location,
         codelist,
+        codelist_option,
+        legacy_codelist,
         roadsign_regulation,
         mandatee_table,
         heading: headingWithConfig({ rdfaAware: false }),

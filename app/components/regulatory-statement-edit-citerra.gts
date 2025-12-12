@@ -93,6 +93,7 @@ import {
 import instantiateUuids from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/standard-template-plugin/utils/instantiate-uuids';
 import {
   codelist,
+  codelist_option,
   codelistView,
   date,
   dateView,
@@ -107,6 +108,10 @@ import {
   autofilled_variable,
   autofilledVariableView,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables';
+import {
+  legacy_codelist,
+  legacyCodelistView,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/variables/legacy-codelist';
 import {
   osloLocation,
   osloLocationView,
@@ -225,6 +230,8 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       ...tableNodes({ tableGroup: 'block', cellContent: 'block+' }),
       date: date(this.config.date),
       codelist,
+      codelist_option,
+      legacy_codelist,
       location,
       oslo_location: osloLocation(this.config.location),
       number,
@@ -271,6 +278,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
         number: numberView(controller),
         location: locationView(controller),
         codelist: codelistView(controller),
+        legacy_codelist: legacyCodelistView(controller),
         text_variable: textVariableView(controller),
         templateComment: templateCommentView(controller),
         inline_rdfa: inlineRdfaWithConfigView({ rdfaAware: true })(controller),
