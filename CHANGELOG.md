@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.69.2
+
+### Patch Changes
+
+- Ar import feature: sort by date by default
+
+- [#888](https://github.com/lblod/frontend-gelinkt-notuleren/pull/888) [`c04f7f7`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c04f7f7c228e3b43e890a357e4d02312341f0be6) Thanks [@elpoelma](https://github.com/elpoelma)! - AR-importer: moving logic of fetching AR designs to `widget-contents` component to ensure overview is not reset when returning from a preview
+
 ## 5.69.1
 
 ### Patch Changes
