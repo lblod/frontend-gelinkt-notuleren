@@ -23,25 +23,32 @@ import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
+
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { v4 as uuidv4 } from 'uuid';
 
 function convertVariableInstances(
   variableInstances: VariableInstance[],
 ): Record<string, PluginVariableInstance> {
   return Object.fromEntries<PluginVariableInstance>(
-    variableInstances.map((varInstance) => [
-      varInstance.variable.label,
-      VariableInstanceSchema.parse({
-        uri: varInstance.uri,
-        value: varInstance.value,
-        variable: {
-          uri: varInstance.variable.uri,
-          type: varInstance.variable.type,
-          label: varInstance.variable.label,
-          codelistUri: varInstance.variable.codelist,
-        },
-      }),
-    ]),
+    variableInstances.map((varInstance) => {
+      console.log('varinstance', varInstance);
+      console.log('schema', VariableInstanceSchema);
+      return [
+        varInstance.variable.label,
+        VariableInstanceSchema.parse({
+          uri: varInstance.uri,
+          value: varInstance.value,
+          variable: {
+            source: ENV['mowRegistryEndpoint'],
+            uri: varInstance.variable.uri,
+            type: varInstance.variable.type,
+            label: varInstance.variable.label,
+            codelistUri: varInstance.variable.codelist,
+          },
+        }),
+      ];
+    }),
   );
 }
 
