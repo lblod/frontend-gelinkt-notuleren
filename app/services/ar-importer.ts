@@ -39,6 +39,7 @@ function convertVariableInstances(
         VariableInstanceSchema.parse({
           uri: varInstance.uri,
           value: varInstance.value,
+          valueLabel: varInstance.valueLabel,
           variable: {
             source: ENV['mowRegistryEndpoint'],
             uri: varInstance.variable.uri,
