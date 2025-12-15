@@ -23,8 +23,6 @@ import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
-
-import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import { v4 as uuidv4 } from 'uuid';
 
 function convertVariableInstances(
