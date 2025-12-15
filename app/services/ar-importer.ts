@@ -32,8 +32,6 @@ function convertVariableInstances(
 ): Record<string, PluginVariableInstance> {
   return Object.fromEntries<PluginVariableInstance>(
     variableInstances.map((varInstance) => {
-      console.log('varinstance', varInstance);
-      console.log('schema', VariableInstanceSchema);
       return [
         varInstance.variable.label,
         VariableInstanceSchema.parse({
@@ -137,9 +135,7 @@ export default class ArImporterService extends Service {
 
   async generatePreview(design: ArDesign): Promise<string> {
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
-    console.log('Generate preview');
     const monads = await this._generateInsertionMonads(design, decisionUri);
-    console.log('Monads: ', monads);
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
       (state) => transactionCombinator<boolean>(state)(monads),
