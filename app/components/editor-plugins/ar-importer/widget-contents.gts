@@ -10,10 +10,22 @@ import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-impor
 import ArPreview from './preview';
 import ArDesignOverview from './overview';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
+import {
+  DRAFT_STATUS_ID,
+  PUBLISHED_STATUS_ID,
+  SCHEDULED_STATUS_ID,
+} from 'frontend-gelinkt-notuleren/utils/constants';
+import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
+import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
 
 const FILTER_TIMEOUT_MS = 300;
 
 export type ArDesignOverviewSortField = 'name' | '-name' | 'date' | '-date';
+
+export type DesignInfo = {
+  designs: Collection<ArDesign>;
+  inDocs: Record<string, Promise<EditorDocumentModel[]>>;
+};
 
 type Sig = {
   Args: {
@@ -60,14 +72,33 @@ export default class ArWidgetContents extends Component<Sig> {
         },
         sort,
       });
-      return designs;
+      return {
+        designs,
+        inDocs: Object.fromEntries(
+          designs.map((design) => [
+            design.id ?? '',
+            this.store.query<EditorDocumentModel>('editor-document', {
+              filter: {
+                'includes-ar-designs': design.uri,
+                'document-container': {
+                  'current-version': { 'includes-ar-designs': design.uri },
+                  status: {
+                    id: `${DRAFT_STATUS_ID},${SCHEDULED_STATUS_ID},${PUBLISHED_STATUS_ID}`,
+                  },
+                },
+              },
+              fields: { 'editor-documents': 'uri' },
+            }),
+          ]),
+        ),
+      };
     } catch (e) {
       console.error(e);
       throw e;
     }
   });
 
-  arDesigns = trackedTask<ArDesign[]>(this, this.arDesignsQuery, () => [
+  arDesigns = trackedTask<DesignInfo>(this, this.arDesignsQuery, () => [
     this.pageNumber,
     this.pageSize,
     this.sort,

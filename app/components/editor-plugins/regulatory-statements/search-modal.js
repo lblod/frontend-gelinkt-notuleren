@@ -28,7 +28,7 @@ export default class RegulatoryStatementsSearchModalComponent extends Component 
       content: this.args.controller.htmlContent ?? '',
     });
     this.includedStatements =
-      this.documentService.getDocumentparts(editorDocument);
+      this.documentService.getExternalEntityUris(editorDocument).parts;
   }
 
   fetchNextPage = restartableTask(async () => {

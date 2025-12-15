@@ -104,6 +104,7 @@ export default class ArImporterService extends Service {
         const convertedVariableInstances =
           convertVariableInstances(variableInstances);
         return insertMeasure({
+          arDesignUri: design.uri,
           measureDesign: {
             uri: measureDesign.uri,
             measureConcept: {
