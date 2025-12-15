@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.71.0
+
+### Minor Changes
+
+- [#885](https://github.com/lblod/frontend-gelinkt-notuleren/pull/885) [`84c38d6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/84c38d6756a52799311ea2d18e7096112b4e110a) Thanks [@piemonkey](https://github.com/piemonkey)! - Show usage status of AR Designs in the insert modal
+
+### Patch Changes
+
+- [#890](https://github.com/lblod/frontend-gelinkt-notuleren/pull/890) [`e083d71`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e083d7132e247e29616adc9aae354fc194a11037) Thanks [@abeforgit](https://github.com/abeforgit)! - Update editor-plugins to version [34.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v34.1.0)
+
+- [#890](https://github.com/lblod/frontend-gelinkt-notuleren/pull/890) [`13a4940`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/13a4940403053dbb6fe3d7aa9166a2e226d7b5c7) Thanks [@abeforgit](https://github.com/abeforgit)! - Make variable instantiation work
+
 ## 5.70.0
 
 ### Minor Changes
