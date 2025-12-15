@@ -39,7 +39,7 @@ function convertVariableInstances(
           value: varInstance.value,
           valueLabel: varInstance.valueLabel,
           variable: {
-            source: ENV['mowRegistryEndpoint'],
+            source: varInstance.variable.source,
             uri: varInstance.variable.uri,
             type: varInstance.variable.type,
             label: varInstance.variable.label,
