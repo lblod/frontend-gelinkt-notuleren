@@ -26,6 +26,7 @@ export default class ArWidgetContents extends Component<Sig> {
   @service declare arImporter: ArImporterService;
 
   @tracked selectedDesign?: ArDesign | null;
+  @tracked insertingDesign?: ArDesign | null;
 
   @service declare store: Store;
 
@@ -95,11 +96,13 @@ export default class ArWidgetContents extends Component<Sig> {
   };
 
   insertAr = task(async (design: ArDesign) => {
+    this.insertingDesign = design;
     const isSuccess = await this.arImporter.insertAr(
       this.args.controller,
       design,
     );
     if (isSuccess) {
+      this.insertingDesign = null;
       this.args.onInsert?.();
     }
   });
@@ -110,6 +113,7 @@ export default class ArWidgetContents extends Component<Sig> {
         @arDesign={{this.selectedDesign}}
         @onReturnToOverview={{this.returnToOverview}}
         @onInsertAr={{this.insertAr.perform}}
+        @insertLoading={{this.insertAr.isRunning}}
       />
     {{else}}
       <ArDesignOverview
@@ -117,6 +121,7 @@ export default class ArWidgetContents extends Component<Sig> {
         @loading={{this.arDesigns.isRunning}}
         @onShowPreview={{this.selectDesign}}
         @onInsertAr={{this.insertAr.perform}}
+        @insertingDesign={{this.insertingDesign}}
         @nameFilter={{this.nameFilter}}
         @setNameFilter={{this.setNameFilter}}
         @resetFilters={{this.resetFilters}}

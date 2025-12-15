@@ -18,6 +18,7 @@ type ArPreviewSignature = {
   Args: {
     arDesign: ArDesign;
     onInsertAr: (arDesign: ArDesign) => void;
+    insertLoading?: boolean;
     onReturnToOverview: () => unknown;
   };
   Element: HTMLDivElement;
@@ -53,6 +54,8 @@ export default class ArPreview extends Component<ArPreviewSignature> {
         <Group>
           <AuButton
             @icon={{PlusIcon}}
+            @loading={{@insertLoading}}
+            @loadingMessage={{t 'application.loading'}}
             {{on 'click' (fn @onInsertAr @arDesign)}}
           >{{t 'ar-importer.preview.insert'}}</AuButton>
         </Group>
