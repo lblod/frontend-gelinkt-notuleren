@@ -29,19 +29,23 @@ function convertVariableInstances(
   variableInstances: VariableInstance[],
 ): Record<string, PluginVariableInstance> {
   return Object.fromEntries<PluginVariableInstance>(
-    variableInstances.map((varInstance) => [
-      varInstance.variable.label,
-      VariableInstanceSchema.parse({
-        uri: varInstance.uri,
-        value: varInstance.value,
-        variable: {
-          uri: varInstance.variable.uri,
-          type: varInstance.variable.type,
-          label: varInstance.variable.label,
-          codelistUri: varInstance.variable.codelist,
-        },
-      }),
-    ]),
+    variableInstances.map((varInstance) => {
+      return [
+        varInstance.variable.label,
+        VariableInstanceSchema.parse({
+          uri: varInstance.uri,
+          value: varInstance.value,
+          valueLabel: varInstance.valueLabel,
+          variable: {
+            source: varInstance.variable.source,
+            uri: varInstance.variable.uri,
+            type: varInstance.variable.type,
+            label: varInstance.variable.label,
+            codelistUri: varInstance.variable.codelist,
+          },
+        }),
+      ];
+    }),
   );
 }
 
@@ -129,9 +133,7 @@ export default class ArImporterService extends Service {
 
   async generatePreview(design: ArDesign): Promise<string> {
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
-    console.log('Generate preview');
     const monads = await this._generateInsertionMonads(design, decisionUri);
-    console.log('Monads: ', monads);
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
       (state) => transactionCombinator<boolean>(state)(monads),

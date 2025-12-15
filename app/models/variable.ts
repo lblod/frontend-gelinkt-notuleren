@@ -13,5 +13,6 @@ export default class Variable extends Model {
 
   @attr('string') declare label: string;
   @attr('string') declare uri: string;
+  @attr('string') declare source: string;
   @attr('string') codelist?: string;
 }

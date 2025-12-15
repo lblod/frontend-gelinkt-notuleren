@@ -8,6 +8,7 @@ export default class VariableInstance extends Model {
 
   @attr('string') declare uri: string;
   @attr('string') declare value: string;
+  @attr('string') declare valueLabel: string;
 
   @belongsTo('variable', { async: false, inverse: null })
   declare variable: Variable;

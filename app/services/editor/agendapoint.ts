@@ -469,7 +469,6 @@ export default class AgendapointEditorService extends Service {
     if (combResult.result.every((ok) => ok)) {
       state = state.applyTransaction(combResult.transaction).state;
     }
-    console.log('DOC: ', state.doc);
     const serializer = SaySerializer.fromSchema(state.schema, () => state);
     const div = document.createElement('div');
     const doc = serializer.serializeNode(state.doc, undefined);
