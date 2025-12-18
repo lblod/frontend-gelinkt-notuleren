@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.71.1
+
+### Patch Changes
+
+- [#891](https://github.com/lblod/frontend-gelinkt-notuleren/pull/891) [`225c436`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/225c4363488b84f167eba3130eb08843a1b62df9) Thanks [@abeforgit](https://github.com/abeforgit)! - Correctly handle multiple signs and zonality
+
 ## 5.71.0
 
 ### Minor Changes
