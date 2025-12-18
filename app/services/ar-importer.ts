@@ -18,7 +18,7 @@ import {
   VariableInstanceSchema,
   type VariableInstance as PluginVariableInstance,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable-instance';
-import { TrafficSignalSchema } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal';
+import { TrafficSignalConceptSchema } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal-concept';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
@@ -50,17 +50,24 @@ function convertVariableInstances(
 }
 
 function convertSignals(signals: TrafficSignal[]) {
-  return TrafficSignalSchema.array().parse(
-    signals.map((signal) => {
-      const { trafficSignalConcept } = signal;
+  const concepts = signals.map((s) => s.trafficSignalConcept);
+  const conceptssWithoutZSign = concepts.filter(
+    (concept) => concept.code !== 'Z',
+  );
+  const dedupedConcepts: typeof concepts = [];
+  for (const concept of conceptssWithoutZSign) {
+    if (!dedupedConcepts.find((c) => c.code === concept.code)) {
+      dedupedConcepts.push(concept);
+    }
+  }
+
+  return TrafficSignalConceptSchema.array().parse(
+    dedupedConcepts.map((trafficSignalConcept) => {
       return {
-        uri: signal.uri,
-        trafficSignalConcept: {
-          code: trafficSignalConcept.code,
-          uri: trafficSignalConcept.uri,
-          type: trafficSignalConcept.type,
-          image: '',
-        },
+        code: trafficSignalConcept.code,
+        uri: trafficSignalConcept.uri,
+        type: trafficSignalConcept.type,
+        image: '',
       };
     }),
   );
@@ -96,9 +103,15 @@ export default class ArImporterService extends Service {
       return measureDesigns.map((measureDesign) => {
         const { measureConcept, trafficSignals, variableInstances } =
           measureDesign;
-        const convertedSignals = convertSignals(trafficSignals);
+        const filteredAndDeduplicatedConcepts = convertSignals(trafficSignals);
         const convertedVariableInstances =
           convertVariableInstances(variableInstances);
+        const isZonal = Boolean(
+          trafficSignals.find((s) => s.trafficSignalConcept.code === 'Z'),
+        );
+        const zonality = isZonal
+          ? ZONALITY_OPTIONS.ZONAL
+          : ZONALITY_OPTIONS.NON_ZONAL;
         return insertMeasure({
           arDesignUri: design.uri,
           measureDesign: {
@@ -107,16 +120,13 @@ export default class ArImporterService extends Service {
               uri: measureConcept.uri,
               label: measureConcept.label,
               preview: measureConcept.templateString,
-              // TODO: provisory, we should change this
-              zonality: ZONALITY_OPTIONS.NON_ZONAL,
+              zonality,
               variableSignage: false,
-              trafficSignalConcepts: convertedSignals.map(
-                (signal) => signal.trafficSignalConcept,
-              ),
+              trafficSignalConcepts: filteredAndDeduplicatedConcepts,
             },
-            trafficSignals: convertedSignals,
+            trafficSignals: filteredAndDeduplicatedConcepts,
           },
-          zonality: ZONALITY_OPTIONS.NON_ZONAL,
+          zonality,
           temporal: false,
           variables: convertedVariableInstances,
           templateString: measureConcept.templateString,
