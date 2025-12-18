@@ -106,14 +106,12 @@ export default class ArImporterService extends Service {
         const filteredAndDeduplicatedConcepts = convertSignals(trafficSignals);
         const convertedVariableInstances =
           convertVariableInstances(variableInstances);
-        console.log(trafficSignals.map((s) => s.trafficSignalConcept.code));
         const isZonal = Boolean(
           trafficSignals.find((s) => s.trafficSignalConcept.code === 'Z'),
         );
         const zonality = isZonal
           ? ZONALITY_OPTIONS.ZONAL
           : ZONALITY_OPTIONS.NON_ZONAL;
-        console.log(isZonal);
         return insertMeasure({
           arDesignUri: design.uri,
           measureDesign: {
