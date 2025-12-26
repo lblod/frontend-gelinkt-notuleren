@@ -150,9 +150,7 @@ import {
   insertTitleAtCursor,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin/common-fixes';
 import { getShapeOfDocumentType } from '@lblod/lib-decision-shapes';
-import {
-  documentValidationPlugin
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
+import { documentValidationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
 
 export default class AgendapointEditorService extends Service {
   @service declare intl: IntlService;
@@ -254,9 +252,6 @@ export default class AgendapointEditorService extends Service {
       insertArticle: {
         uriGenerator: articleUriGenerator,
       },
-      decisionPlugin: {
-        articleUriGenerator,
-      },
       documentValidation: {
         rules: [
           {
@@ -264,13 +259,16 @@ export default class AgendapointEditorService extends Service {
               'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-title-validation',
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
-                helpText:
-                this.intl.t('document-validation.helptext.insert-motivation'),
+                helpText: this.intl.t(
+                  'document-validation.helptext.insert-title',
+                ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
                 action: (controller: SayController) =>
                   insertTitleAtCursor(controller, this.intl),
-                buttonTitle: this.intl.t('document-validation.actions.insert-title'),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-title',
+                ),
               },
             },
           },
@@ -279,13 +277,16 @@ export default class AgendapointEditorService extends Service {
               'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-description-validation',
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
-                helpText:
-                this.intl.t('document-validation.helptext.insert-motivation'),
+                helpText: this.intl.t(
+                  'document-validation.helptext.insert-description',
+                ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
                 action: (controller: SayController) =>
                   insertDescriptionAtCursor(controller, this.intl),
-                buttonTitle: this.intl.t('document-validation.actions.insert-description'),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-description',
+                ),
               },
             },
           },
@@ -294,13 +295,16 @@ export default class AgendapointEditorService extends Service {
               'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-motivering-validation',
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
-                helpText:
-                this.intl.t('document-validation.helptext.insert-motivation'),
+                helpText: this.intl.t(
+                  'document-validation.helptext.insert-motivation',
+                ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
                 action: (controller: SayController) =>
                   insertMotivationAtCursor(controller, this.intl),
-                buttonTitle: this.intl.t('document-validation.actions.insert-motivation'),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-motivation',
+                ),
               },
             },
           },
@@ -309,13 +313,16 @@ export default class AgendapointEditorService extends Service {
               'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-article-container-validation',
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
-                helpText:
-                this.intl.t('document-validation.helptext.insert-article-container'),
+                helpText: this.intl.t(
+                  'document-validation.helptext.insert-article-container',
+                ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
                 action: (controller: SayController) =>
                   insertArticleContainerAtCursor(controller, this.intl),
-                buttonTitle: this.intl.t('document-validation.actions.insert-article-container'),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-article-container',
+                ),
               },
             },
           },

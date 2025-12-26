@@ -201,10 +201,6 @@
     </:sidebarCollapsible>
     <:sidebar as |container|>
       <this.StructureControlCard @controller={{container.controller}} />
-      <DecisionPlugin::DecisionPluginCard
-        @controller={{container.controller}}
-        @options={{this.config.decisionPlugin}}
-      />
       <CitationPlugin::CitationCard
         @controller={{container.controller}}
         @config={{this.config.citation}}
