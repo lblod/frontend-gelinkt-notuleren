@@ -29,6 +29,7 @@ export type ImportResult<R> = {
   result: R;
   warnings: string[];
 };
+export type GenerateImportResult = ImportResult<TransactionMonad<boolean>[]>;
 
 function convertVariableInstances(
   variableInstances: VariableInstance[],
@@ -99,10 +100,24 @@ export default class ArImporterService extends Service {
     });
   }
 
-  async _generateInsertionMonads(
+  async generateInsertionMonads(
+    decisionUriOrController: string | SayController,
     design: ArDesign,
-    decisionUri: string,
-  ): Promise<ImportResult<TransactionMonad<boolean>[]>> {
+  ): Promise<GenerateImportResult> {
+    let decisionUri: string;
+    if (typeof decisionUriOrController === 'string') {
+      decisionUri = decisionUriOrController;
+    } else {
+      const decisionRange = getCurrentBesluitRange(decisionUriOrController);
+      decisionUri = decisionRange?.node.attrs['subject'] as string;
+      if (!decisionRange || typeof decisionUri !== 'string') {
+        this._notifyError(
+          decisionUriOrController,
+          'ar-importer.message.error-no-decision',
+        );
+        return { result: [], warnings: [] };
+      }
+    }
     try {
       const warnings: string[] = [];
       const measureDesigns = await design.measureDesigns;
@@ -172,9 +187,9 @@ export default class ArImporterService extends Service {
 
   async generatePreview(design: ArDesign): Promise<ImportResult<string>> {
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
-    const { result: monads, warnings } = await this._generateInsertionMonads(
-      design,
+    const { result: monads, warnings } = await this.generateInsertionMonads(
       decisionUri,
+      design,
     );
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
@@ -183,31 +198,24 @@ export default class ArImporterService extends Service {
     return { result: document, warnings };
   }
 
-  async insertAr(
+  insertAr(
     controller: SayController,
-    design: ArDesign,
-  ): Promise<ImportResult<boolean>> {
-    const decisionRange = getCurrentBesluitRange(controller);
-    const decisionUri = decisionRange?.node.attrs['subject'] as string;
-    if (!decisionRange || typeof decisionUri !== 'string') {
-      this._notifyError(controller, 'ar-importer.message.error-no-decision');
-      return { result: false, warnings: [] };
-    }
+    monads: TransactionMonad<boolean>[],
+  ): boolean {
     try {
-      const monads = await this._generateInsertionMonads(design, decisionUri);
       controller.withTransaction((tr) => {
         return transactionCombinator<boolean>(
           controller.mainEditorState,
           tr,
-        )(monads.result).transaction;
+        )(monads).transaction;
       });
-      return { result: true, warnings: monads.warnings };
+      return true;
     } catch (_err) {
       this._notifyError(
         controller,
         'ar-importer.message.error-processing-design',
       );
-      return { result: false, warnings: [] };
+      return false;
     }
   }
 }

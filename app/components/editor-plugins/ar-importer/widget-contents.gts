@@ -17,6 +17,7 @@ import {
 } from 'frontend-gelinkt-notuleren/utils/constants';
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
+import type { GenerateImportResult } from 'frontend-gelinkt-notuleren/services/ar-importer';
 
 const FILTER_TIMEOUT_MS = 300;
 
@@ -39,6 +40,7 @@ export default class ArWidgetContents extends Component<Sig> {
 
   @tracked selectedDesign?: ArDesign | null;
   @tracked insertingDesign?: ArDesign | null;
+  @tracked insertWarnings?: GenerateImportResult | null;
 
   @service declare store: Store;
 
@@ -126,20 +128,50 @@ export default class ArWidgetContents extends Component<Sig> {
     this.selectedDesign = null;
   };
 
-  insertAr = task(async (design: ArDesign) => {
-    this.insertingDesign = design;
-    const isSuccess = await this.arImporter.insertAr(
-      this.args.controller,
-      design,
-    );
+  doInsert = (monads: GenerateImportResult['result']) => {
+    const isSuccess = this.arImporter.insertAr(this.args.controller, monads);
     if (isSuccess) {
       this.insertingDesign = null;
       this.args.onInsert?.();
     }
+  };
+
+  insertAr = task(async (design: ArDesign) => {
+    this.insertingDesign = design;
+    const monadsResult = await this.arImporter.generateInsertionMonads(
+      this.args.controller,
+      design,
+    );
+    if (monadsResult.warnings.length === 0) {
+      this.doInsert(monadsResult.result);
+    } else {
+      this.insertWarnings = monadsResult;
+      this.selectedDesign = design;
+      this.insertingDesign = null;
+    }
   });
 
+  confirmInsert = () => {
+    if (this.insertWarnings) {
+      this.doInsert(this.insertWarnings.result);
+      this.insertWarnings = null;
+    }
+  };
+  abortInsert = () => {
+    this.insertWarnings = null;
+    this.insertingDesign = null;
+  };
+
   <template>
-    {{#if this.selectedDesign}}
+    {{#if this.insertWarnings}}
+      <ArPreview
+        {{! @glint-expect-error ember-truth-helpers doesnt help so might as well just ignore }}
+        @arDesign={{this.selectedDesign}}
+        @onReturnToOverview={{this.abortInsert}}
+        @onInsertAr={{this.confirmInsert}}
+        @insertLoading={{this.insertAr.isRunning}}
+      />
+    {{else if this.selectedDesign}}
       <ArPreview
         @arDesign={{this.selectedDesign}}
         @onReturnToOverview={{this.returnToOverview}}
