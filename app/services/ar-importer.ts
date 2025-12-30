@@ -25,6 +25,11 @@ import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
 import { v4 as uuidv4 } from 'uuid';
 
+export type ImportResult<R> = {
+  result: R;
+  warnings: string[];
+};
+
 function convertVariableInstances(
   variableInstances: VariableInstance[],
 ): Record<string, PluginVariableInstance> {
@@ -97,12 +102,32 @@ export default class ArImporterService extends Service {
   async _generateInsertionMonads(
     design: ArDesign,
     decisionUri: string,
-  ): Promise<TransactionMonad<boolean>[]> {
+  ): Promise<ImportResult<TransactionMonad<boolean>[]>> {
     try {
+      const warnings: string[] = [];
       const measureDesigns = await design.measureDesigns;
-      return measureDesigns.map((measureDesign) => {
-        const { measureConcept, trafficSignals, variableInstances } =
-          measureDesign;
+      const monads = measureDesigns.map((measureDesign) => {
+        const {
+          measureConcept,
+          trafficSignals,
+          variableInstances,
+          unusedSignalConcepts,
+          unIncludedSignalConcepts,
+        } = measureDesign;
+        warnings.push(
+          ...unusedSignalConcepts.map(
+            (unused) =>
+              // FIXME intl
+              `Measure concept '${measureConcept.label}' includes the signal concept '${unused.code}' but it is not used in this design`,
+          ),
+        );
+        warnings.push(
+          ...unIncludedSignalConcepts.map(
+            (unIncluded) =>
+              // FIXME intl
+              `Signal concept '${unIncluded.code}' is not included in the measure concept '${measureConcept.label}' but it is used in this design`,
+          ),
+        );
         const filteredAndDeduplicatedConcepts = convertSignals(trafficSignals);
         const convertedVariableInstances =
           convertVariableInstances(variableInstances);
@@ -135,31 +160,38 @@ export default class ArImporterService extends Service {
             `http://data.lblod.info/artikels/${uuidv4()}`,
         });
       });
+      return {
+        result: monads,
+        warnings,
+      };
     } catch (err) {
       console.error('Error processing AR design relations', err);
       throw err;
     }
   }
 
-  async generatePreview(design: ArDesign): Promise<string> {
+  async generatePreview(design: ArDesign): Promise<ImportResult<string>> {
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
-    const monads = await this._generateInsertionMonads(design, decisionUri);
+    const { result: monads, warnings } = await this._generateInsertionMonads(
+      design,
+      decisionUri,
+    );
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
       (state) => transactionCombinator<boolean>(state)(monads),
     );
-    return document;
+    return { result: document, warnings };
   }
 
   async insertAr(
     controller: SayController,
     design: ArDesign,
-  ): Promise<boolean> {
+  ): Promise<ImportResult<boolean>> {
     const decisionRange = getCurrentBesluitRange(controller);
     const decisionUri = decisionRange?.node.attrs['subject'] as string;
     if (!decisionRange || typeof decisionUri !== 'string') {
       this._notifyError(controller, 'ar-importer.message.error-no-decision');
-      return false;
+      return { result: false, warnings: [] };
     }
     try {
       const monads = await this._generateInsertionMonads(design, decisionUri);
@@ -167,15 +199,15 @@ export default class ArImporterService extends Service {
         return transactionCombinator<boolean>(
           controller.mainEditorState,
           tr,
-        )(monads).transaction;
+        )(monads.result).transaction;
       });
-      return true;
+      return { result: true, warnings: monads.warnings };
     } catch (_err) {
       this._notifyError(
         controller,
         'ar-importer.message.error-processing-design',
       );
-      return false;
+      return { result: false, warnings: [] };
     }
   }
 }
