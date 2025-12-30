@@ -947,3 +947,5 @@ ar-importer:
   message:
     error-no-decision: Plaats de cursor in een besluit
     error-processing-design: Fout bij verwerken van het signalisatieplan
+    warning-unused-signal-concept: Het mobiliteitsmaatregelconcept ‘{measure}’ omvat het verkeerstekenconcept ‘{signal}’, maar wordt in dit ontwerp niet gebruikt
+    warning-un-included-signal-concept: Verkeerstekenconcept ‘{signal}’ is niet opgenomen in het mobiliteitsmaatregelconcept ‘{measure}’, maar wordt wel gebruikt in dit ontwerp

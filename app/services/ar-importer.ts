@@ -82,6 +82,7 @@ function convertSignals(signals: TrafficSignal[]) {
 export default class ArImporterService extends Service {
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
+  @service declare intl: IntlService;
 
   _notifyError(controller: SayController, translationKey: string) {
     // Show a notification via the notification plugin
@@ -130,17 +131,19 @@ export default class ArImporterService extends Service {
           unIncludedSignalConcepts,
         } = measureDesign;
         warnings.push(
-          ...unusedSignalConcepts.map(
-            (unused) =>
-              // FIXME intl
-              `Measure concept '${measureConcept.label}' includes the signal concept '${unused.code}' but it is not used in this design`,
+          ...unusedSignalConcepts.map((unused) =>
+            this.intl.t('warning-unused-signal-concept', {
+              measure: measureConcept.label,
+              signal: unused.code,
+            }),
           ),
         );
         warnings.push(
-          ...unIncludedSignalConcepts.map(
-            (unIncluded) =>
-              // FIXME intl
-              `Signal concept '${unIncluded.code}' is not included in the measure concept '${measureConcept.label}' but it is used in this design`,
+          ...unIncludedSignalConcepts.map((unIncluded) =>
+            this.intl.t('warning-un-included-signal-concept', {
+              measure: measureConcept.label,
+              signal: unIncluded.code,
+            }),
           ),
         );
         const filteredAndDeduplicatedConcepts = convertSignals(trafficSignals);
