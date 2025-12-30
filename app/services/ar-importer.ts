@@ -25,6 +25,12 @@ import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
 import { v4 as uuidv4 } from 'uuid';
 
+export type ImportResult<R> = {
+  result: R;
+  warnings: string[];
+};
+export type GenerateImportResult = ImportResult<TransactionMonad<boolean>[]>;
+
 function convertVariableInstances(
   variableInstances: VariableInstance[],
 ): Record<string, PluginVariableInstance> {
@@ -76,6 +82,7 @@ function convertSignals(signals: TrafficSignal[]) {
 export default class ArImporterService extends Service {
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
+  @service declare intl: IntlService;
 
   _notifyError(controller: SayController, translationKey: string) {
     // Show a notification via the notification plugin
@@ -94,15 +101,51 @@ export default class ArImporterService extends Service {
     });
   }
 
-  async _generateInsertionMonads(
+  async generateInsertionMonads(
+    decisionUriOrController: string | SayController,
     design: ArDesign,
-    decisionUri: string,
-  ): Promise<TransactionMonad<boolean>[]> {
+  ): Promise<GenerateImportResult> {
+    let decisionUri: string;
+    if (typeof decisionUriOrController === 'string') {
+      decisionUri = decisionUriOrController;
+    } else {
+      const decisionRange = getCurrentBesluitRange(decisionUriOrController);
+      decisionUri = decisionRange?.node.attrs['subject'] as string;
+      if (!decisionRange || typeof decisionUri !== 'string') {
+        this._notifyError(
+          decisionUriOrController,
+          'ar-importer.message.error-no-decision',
+        );
+        return { result: [], warnings: [] };
+      }
+    }
     try {
+      const warnings: string[] = [];
       const measureDesigns = await design.measureDesigns;
-      return measureDesigns.map((measureDesign) => {
-        const { measureConcept, trafficSignals, variableInstances } =
-          measureDesign;
+      const monads = measureDesigns.map((measureDesign) => {
+        const {
+          measureConcept,
+          trafficSignals,
+          variableInstances,
+          unusedSignalConcepts,
+          unIncludedSignalConcepts,
+        } = measureDesign;
+        warnings.push(
+          ...unusedSignalConcepts.map((unused) =>
+            this.intl.t('warning-unused-signal-concept', {
+              measure: measureConcept.label,
+              signal: unused.code,
+            }),
+          ),
+        );
+        warnings.push(
+          ...unIncludedSignalConcepts.map((unIncluded) =>
+            this.intl.t('warning-un-included-signal-concept', {
+              measure: measureConcept.label,
+              signal: unIncluded.code,
+            }),
+          ),
+        );
         const filteredAndDeduplicatedConcepts = convertSignals(trafficSignals);
         const convertedVariableInstances =
           convertVariableInstances(variableInstances);
@@ -135,34 +178,34 @@ export default class ArImporterService extends Service {
             `http://data.lblod.info/artikels/${uuidv4()}`,
         });
       });
+      return {
+        result: monads,
+        warnings,
+      };
     } catch (err) {
       console.error('Error processing AR design relations', err);
       throw err;
     }
   }
 
-  async generatePreview(design: ArDesign): Promise<string> {
+  async generatePreview(design: ArDesign): Promise<ImportResult<string>> {
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
-    const monads = await this._generateInsertionMonads(design, decisionUri);
+    const { result: monads, warnings } = await this.generateInsertionMonads(
+      decisionUri,
+      design,
+    );
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
       (state) => transactionCombinator<boolean>(state)(monads),
     );
-    return document;
+    return { result: document, warnings };
   }
 
-  async insertAr(
+  insertAr(
     controller: SayController,
-    design: ArDesign,
-  ): Promise<boolean> {
-    const decisionRange = getCurrentBesluitRange(controller);
-    const decisionUri = decisionRange?.node.attrs['subject'] as string;
-    if (!decisionRange || typeof decisionUri !== 'string') {
-      this._notifyError(controller, 'ar-importer.message.error-no-decision');
-      return false;
-    }
+    monads: TransactionMonad<boolean>[],
+  ): boolean {
     try {
-      const monads = await this._generateInsertionMonads(design, decisionUri);
       controller.withTransaction((tr) => {
         return transactionCombinator<boolean>(
           controller.mainEditorState,

@@ -941,3 +941,5 @@ ar-importer:
   message:
     error-no-decision: Please put the cursor inside a decision node
     error-processing-design: Error when processing signage plan
+    warning-unused-signal-concept: Measure concept '{measure}' includes the signal concept '{signal}' but it is not used in this design
+    warning-un-included-signal-concept: Signal concept '{signal}' is not included in the measure concept '{measure}' but it is used in this design

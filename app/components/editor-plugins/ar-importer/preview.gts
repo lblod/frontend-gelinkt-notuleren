@@ -29,10 +29,9 @@ export default class ArPreview extends Component<ArPreviewSignature> {
 
   preview = trackedFunction(this, async () => {
     try {
-      const preview = await this.arImporter.generatePreview(this.args.arDesign);
-      return preview;
+      return this.arImporter.generatePreview(this.args.arDesign);
     } catch (e) {
-      console.error(e);
+      console.error('Error generating preview', e);
       throw e;
     }
   });
@@ -71,8 +70,19 @@ export default class ArPreview extends Component<ArPreviewSignature> {
         </AuAlert>
       {{/if}}
       {{#if this.preview.value}}
+        {{#if this.preview.value.warnings}}
+          <AuAlert
+            @icon='alert-triangle'
+            @skin='warning'
+            class='au-u-margin-left au-u-margin-right'
+          >
+            {{#each this.preview.value.warnings as |warning|}}
+              <p>{{warning}}</p>
+            {{/each}}
+          </AuAlert>
+        {{/if}}
         <div class='ar-importer-preview__content au-o-layout'>
-          {{htmlSafe this.preview.value}}
+          {{htmlSafe this.preview.value.result}}
         </div>
       {{/if}}
 
