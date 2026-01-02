@@ -134,6 +134,18 @@ document-creator:
 document-history:
   load-more: Meer laden
 
+document-validation:
+  actions:
+    insert-title: Titel invoegen
+    insert-description: Beschrijving invoegen
+    insert-motivation: Motivatie invoegen
+    insert-article-container: Artikelcontainer invoegen
+  helptext:
+    insert-title: Je hebt te veel titels, verwijder ze allemaal behalve één.
+    insert-description: Je hebt te veel beschrijvingen, verwijder ze allemaal behalve één.
+    insert-motivation: Je hebt te veel motivaties, verwijder ze allemaal behalve één.
+    insert-article-container: Je hebt te veel artikelcontainers. Verwijder alle containers behalve één.
+
 editor-status-pill:
   default-status: In voorbereiding
 

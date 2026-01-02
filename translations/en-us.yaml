@@ -134,6 +134,18 @@ document-creator:
 document-history:
   load-more: Load more
 
+document-validation:
+  actions:
+    insert-title: Insert title
+    insert-description: Insert description
+    insert-motivation: Insert motivation
+    insert-article-container: Insert article container
+  helptext:
+    insert-title: You have to many titles please remove all except one
+    insert-description: You have to many descriptions please remove all except one
+    insert-motivation: You have to many motivations please remove all except one
+    insert-article-container: You have to many article containers please remove all except one
+
 editor-status-pill:
   default-status: Concept
 
