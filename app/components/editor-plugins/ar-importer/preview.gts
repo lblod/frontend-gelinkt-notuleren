@@ -17,7 +17,7 @@ import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
 type ArPreviewSignature = {
   Args: {
     arDesign: ArDesign;
-    onInsertAr: (arDesign: ArDesign) => void;
+    onInsertAr: (arDesign: ArDesign, skipWarnings?: boolean) => void;
     insertLoading?: boolean;
     onReturnToOverview: () => unknown;
   };
@@ -55,7 +55,7 @@ export default class ArPreview extends Component<ArPreviewSignature> {
             @icon={{PlusIcon}}
             @loading={{@insertLoading}}
             @loadingMessage={{t 'application.loading'}}
-            {{on 'click' (fn @onInsertAr @arDesign)}}
+            {{on 'click' (fn @onInsertAr @arDesign true)}}
           >{{t 'ar-importer.preview.insert'}}</AuButton>
         </Group>
       </AuToolbar>

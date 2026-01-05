@@ -136,13 +136,13 @@ export default class ArWidgetContents extends Component<Sig> {
     }
   };
 
-  insertAr = task(async (design: ArDesign) => {
+  insertAr = task(async (design: ArDesign, skipWarnings?: boolean) => {
     this.insertingDesign = design;
     const monadsResult = await this.arImporter.generateInsertionMonads(
       this.args.controller,
       design,
     );
-    if (monadsResult.warnings.length === 0) {
+    if (skipWarnings || monadsResult.warnings.length === 0) {
       this.doInsert(monadsResult.result);
     } else {
       this.insertWarnings = monadsResult;
