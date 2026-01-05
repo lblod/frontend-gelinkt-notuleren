@@ -132,7 +132,7 @@ export default class ArImporterService extends Service {
         } = measureDesign;
         warnings.push(
           ...unusedSignalConcepts.map((unused) =>
-            this.intl.t('warning-unused-signal-concept', {
+            this.intl.t('ar-importer.message.warning-unused-signal-concept', {
               measure: measureConcept.label,
               signal: unused.code,
             }),
@@ -140,10 +140,13 @@ export default class ArImporterService extends Service {
         );
         warnings.push(
           ...unIncludedSignalConcepts.map((unIncluded) =>
-            this.intl.t('warning-un-included-signal-concept', {
-              measure: measureConcept.label,
-              signal: unIncluded.code,
-            }),
+            this.intl.t(
+              'ar-importer.message.warning-un-included-signal-concept',
+              {
+                measure: measureConcept.label,
+                signal: unIncluded.code,
+              },
+            ),
           ),
         );
         const filteredAndDeduplicatedConcepts = convertSignals(trafficSignals);
