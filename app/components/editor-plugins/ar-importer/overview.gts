@@ -29,7 +29,7 @@ export type ArDesignOverviewSignature = {
     arDesigns?: DesignInfo | null;
     loading?: boolean;
     onShowPreview: (arDesign: ArDesign) => void;
-    onInsertAr: (arDesign: ArDesign) => void;
+    onInsertAr: (arDesign: ArDesign, skipWarnings?: boolean) => void;
     insertingDesign?: ArDesign | null;
     nameFilter?: string;
     setNameFilter: (event: Event) => unknown;
@@ -127,7 +127,7 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
                   @disabled={{this.disabled}}
                   @loading={{eq @insertingDesign.id arDesign.id}}
                   @loadingMessage={{t 'application.loading'}}
-                  {{on 'click' (fn @onInsertAr arDesign)}}
+                  {{on 'click' (fn @onInsertAr arDesign false)}}
                 >{{t 'ar-importer.overview.table.actions.insert'}}</AuButton>
               </AuButtonGroup>
             </td>
