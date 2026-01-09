@@ -130,7 +130,12 @@ export default class MeetingForm extends Component<Signature> {
       'filter[:has:published-resource]': 'yes',
       'fields[versioned-notulen]': 'id',
     })) as VersionedNotulenModel[];
-    return !!publishedNotulen[0];
+    if (!publishedNotulen[0]) return false;
+
+    for (const notulen of publishedNotulen) {
+      if (!notulen.deleted) return true;
+    }
+    return false;
   });
 
   canBeDeleted = trackedFunction(this, async () => {
