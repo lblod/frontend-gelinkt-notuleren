@@ -260,7 +260,7 @@ export default class AgendapointEditorService extends Service {
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
                 helpText: this.intl.t(
-                  'document-validation.helptext.insert-title',
+                  'document-validation.helptext.too-many-title',
                 ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
@@ -278,7 +278,7 @@ export default class AgendapointEditorService extends Service {
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
                 helpText: this.intl.t(
-                  'document-validation.helptext.insert-description',
+                  'document-validation.helptext.too-many-description',
                 ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
@@ -296,7 +296,7 @@ export default class AgendapointEditorService extends Service {
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
                 helpText: this.intl.t(
-                  'document-validation.helptext.insert-motivation',
+                  'document-validation.helptext.too-many-motivation',
                 ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
@@ -314,7 +314,7 @@ export default class AgendapointEditorService extends Service {
             violations: {
               'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
                 helpText: this.intl.t(
-                  'document-validation.helptext.insert-article-container',
+                  'document-validation.helptext.too-many-article-container',
                 ),
               },
               'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {

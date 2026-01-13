@@ -71,6 +71,7 @@ export const decisionShape = `
       ]
     );
 		sh:minCount 1 ;
+    sh:maxCount 1 ;
         sh:resultMessage "Het besluit moet minstens één titel hebben.";
         ext:successMessage "De beslissing heeft een titel.".
 
