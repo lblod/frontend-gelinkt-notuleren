@@ -128,7 +128,7 @@ export default class MeetingForm extends Component<Signature> {
     const publishedNotulen = (await this.store.query('versioned-notulen', {
       'filter[zitting][id]': this.zitting.id,
       'filter[:has:published-resource]': 'yes',
-      'fields[versioned-notulen]': 'id',
+      'fields[versioned-notulen]': 'id,deleted',
     })) as VersionedNotulenModel[];
     if (!publishedNotulen[0]) return false;
 
