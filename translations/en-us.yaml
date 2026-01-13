@@ -141,10 +141,10 @@ document-validation:
     insert-motivation: Insert motivation
     insert-article-container: Insert article container
   helptext:
-    insert-title: You have to many titles please remove all except one
-    insert-description: You have to many descriptions please remove all except one
-    insert-motivation: You have to many motivations please remove all except one
-    insert-article-container: You have to many article containers please remove all except one
+    insert-title: You have too many titles please remove all except one
+    insert-description: You have too many descriptions please remove all except one
+    insert-motivation: You have too many motivations please remove all except one
+    insert-article-container: You have too many article containers please remove all except one
 
 editor-status-pill:
   default-status: Concept

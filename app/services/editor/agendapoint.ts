@@ -151,6 +151,7 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin/common-fixes';
 import { getShapeOfDocumentType } from '@lblod/lib-decision-shapes';
 import { documentValidationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
+import { decisionShape } from 'frontend-gelinkt-notuleren/utils/decision-shape';
 
 export default class AgendapointEditorService extends Service {
   @service declare intl: IntlService;
@@ -327,7 +328,8 @@ export default class AgendapointEditorService extends Service {
             },
           },
         ],
-        documentShape: getShapeOfDocumentType('decision'),
+        //We use a custom shape because we had to hide temporaly the language validation
+        documentShape: decisionShape,
       },
       ...this.adminUnitConfig,
     };
