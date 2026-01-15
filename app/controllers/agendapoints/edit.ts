@@ -30,6 +30,7 @@ import type { ModelFrom } from 'frontend-gelinkt-notuleren/utils/types';
 import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/behandeling-van-agendapunt';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import { documentValidationPluginKey } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
 
 export default class AgendapointsEditController extends Controller {
   @service declare store: StoreService;
@@ -124,9 +125,19 @@ export default class AgendapointsEditController extends Controller {
   });
 
   @action
-  handleRdfaEditorInit(editor: SayController) {
+  async handleRdfaEditorInit(editor: SayController) {
     this.controller = editor;
     editor.initialize(this.editorDocument?.content || '', { doNotClean: true });
+    // Validate document
+    const pluginState = documentValidationPluginKey.getState(
+      this.controller.mainEditorView.state,
+    );
+    if (!pluginState) return;
+    const { validationCallback } = pluginState;
+    await validationCallback(
+      this.controller.mainEditorView,
+      this.controller.htmlContent,
+    );
   }
 
   copyAgendapunt = task(async () => {
@@ -205,6 +216,7 @@ export default class AgendapointsEditController extends Controller {
     if (!this.controller || !this.editorDocument) {
       return;
     }
+
     const fixArticleConnectionsTr = fixArticleConnections(
       this.controller.mainEditorState,
     );
