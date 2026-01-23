@@ -68,7 +68,7 @@
     "@lblod/ember-environment-banner": "^0.6.0",
     "@lblod/ember-mock-login": "^0.10.0",
     "@lblod/ember-rdfa-editor": "13.1.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "34.1.1",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "34.1.1-dev.ff0484d3d3118fb17c09531850c7dc2c6fe1e339",
     "@lblod/template-uuid-instantiator": "^1.0.3",
     "@nullvoxpopuli/ember-composable-helpers": "^5.2.6",
     "@rdfjs/types": "^2.0.1",
