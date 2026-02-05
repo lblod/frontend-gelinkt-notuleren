@@ -43,23 +43,25 @@
       </AuContent>
       <div class='au-o-grid au-o-grid--small'>
         <div class='au-o-grid__item au-u-1-2@small'>
-          <AuCard @textCenter='true' as |c|>
+          <AuCard @textCenter='true' @disableAuContent={{true}} as |c|>
             <c.header @badgeSkin='brand' @badgeIcon='pencil'>
               <AuHeading @level='3' @skin='4'>
                 {{t 'login.meeting-heading'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t 'login.record-your-session'}}</p>
-              <ul>
-                <li>{{t 'login.meeting-1-1'}}
-                  <strong>{{t 'login.meeting-1-2'}}</strong>
-                  {{t 'login.meeting-1-3'}}</li>
-                <li>{{t 'login.meeting-2-1'}}
-                  <strong>{{t 'login.meeting-2-2'}}</strong></li>
-                <li>{{t 'login.meeting-3-1'}}
-                  <strong>{{t 'login.meeting-3-2'}}</strong></li>
-              </ul>
+              <AuContent>
+                <p>{{t 'login.record-your-session'}}</p>
+                <ul>
+                  <li>{{t 'login.meeting-1-1'}}
+                    <strong>{{t 'login.meeting-1-2'}}</strong>
+                    {{t 'login.meeting-1-3'}}</li>
+                  <li>{{t 'login.meeting-2-1'}}
+                    <strong>{{t 'login.meeting-2-2'}}</strong></li>
+                  <li>{{t 'login.meeting-3-1'}}
+                    <strong>{{t 'login.meeting-3-2'}}</strong></li>
+                </ul>
+              </AuContent>
             </c.content>
             <c.footer>
               <p>
@@ -77,23 +79,25 @@
         </div>
 
         <div class='au-o-grid__item au-u-1-2@small'>
-          <AuCard @textCenter='true' as |c|>
+          <AuCard @textCenter='true' @disableAuContent={{true}} as |c|>
             <c.header @badgeSkin='brand' @badgeIcon='user-popup'>
               <AuHeading @level='3' @skin='4'>
                 {{t 'login.sign-and-validate'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t 'login.sign-description'}}</p>
-              <ul>
-                <li>{{t 'login.sign-1-1'}}
-                  <strong>{{t 'login.sign-1-2'}}</strong>
-                  {{t 'login.sign-1-3'}}</li>
-                <li>{{t 'login.sign-2-1'}}
-                  <strong>{{t 'login.sign-2-2'}}</strong></li>
-                <li>{{t 'login.sign-3-1'}}
-                  <strong>{{t 'login.sign-3-2'}}</strong></li>
-              </ul>
+              <AuContent>
+                <p>{{t 'login.sign-description'}}</p>
+                <ul>
+                  <li>{{t 'login.sign-1-1'}}
+                    <strong>{{t 'login.sign-1-2'}}</strong>
+                    {{t 'login.sign-1-3'}}</li>
+                  <li>{{t 'login.sign-2-1'}}
+                    <strong>{{t 'login.sign-2-2'}}</strong></li>
+                  <li>{{t 'login.sign-3-1'}}
+                    <strong>{{t 'login.sign-3-2'}}</strong></li>
+                </ul>
+              </AuContent>
             </c.content>
             <c.footer>
               <p>
@@ -109,23 +113,25 @@
         </div>
 
         <div class='au-o-grid__item au-u-1-2@small'>
-          <AuCard @textCenter='true' as |c|>
+          <AuCard @textCenter='true' @disableAuContent={{true}} as |c|>
             <c.header @badgeSkin='brand' @badgeIcon='user-fill'>
               <AuHeading @level='3' @skin='4'>
                 {{t 'login.mandate-management'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t 'login.mandate-description'}}</p>
-              <ul>
-                <li>{{t 'login.mandate-1-1'}}
-                  <strong>{{t 'login.mandate-1-2'}}</strong>
-                  {{t 'login.mandate-1-3'}}</li>
-                <li>{{t 'login.mandate-2-1'}}
-                  <strong>{{t 'login.mandate-2-2'}}</strong></li>
-                <li>{{t 'login.mandate-3-1'}}
-                  <strong>{{t 'login.mandate-3-2'}}</strong></li>
-              </ul>
+              <AuContent>
+                <p>{{t 'login.mandate-description'}}</p>
+                <ul>
+                  <li>{{t 'login.mandate-1-1'}}
+                    <strong>{{t 'login.mandate-1-2'}}</strong>
+                    {{t 'login.mandate-1-3'}}</li>
+                  <li>{{t 'login.mandate-2-1'}}
+                    <strong>{{t 'login.mandate-2-2'}}</strong></li>
+                  <li>{{t 'login.mandate-3-1'}}
+                    <strong>{{t 'login.mandate-3-2'}}</strong></li>
+                </ul>
+              </AuContent>
             </c.content>
             <c.footer>
               <p>
@@ -143,25 +149,27 @@
         </div>
 
         <div class='au-o-grid__item au-u-1-2@small'>
-          <AuCard @textCenter='true' as |c|>
+          <AuCard @textCenter='true' @disableAuContent={{true}} as |c|>
             <c.header @badgeSkin='brand' @badgeIcon='documents'>
               <AuHeading @level='3' @skin='4'>
                 {{t 'login.publication'}}
               </AuHeading>
             </c.header>
             <c.content>
-              <p>{{t 'login.publication-description'}}</p>
-              <ul>
-                <li>{{t 'login.publication-1-1'}}
-                  <strong>{{t 'login.publication-1-2'}}</strong></li>
-                <li>{{t 'login.publication-2-1'}}
-                  <strong>{{t 'login.publication-2-2'}}</strong>
-                  {{t 'login.publication-2-3'}}
-                  <strong>{{t 'login.publication-2-4'}}</strong>
-                  {{t 'login.publication-2-5'}}</li>
-                <li>{{t 'login.publication-3-1'}}
-                  <strong>{{t 'login.publication-3-2'}}</strong></li>
-              </ul>
+              <AuContent>
+                <p>{{t 'login.publication-description'}}</p>
+                <ul>
+                  <li>{{t 'login.publication-1-1'}}
+                    <strong>{{t 'login.publication-1-2'}}</strong></li>
+                  <li>{{t 'login.publication-2-1'}}
+                    <strong>{{t 'login.publication-2-2'}}</strong>
+                    {{t 'login.publication-2-3'}}
+                    <strong>{{t 'login.publication-2-4'}}</strong>
+                    {{t 'login.publication-2-5'}}</li>
+                  <li>{{t 'login.publication-3-1'}}
+                    <strong>{{t 'login.publication-3-2'}}</strong></li>
+                </ul>
+              </AuContent>
             </c.content>
             <c.footer>
               <p>

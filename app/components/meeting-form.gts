@@ -945,6 +945,7 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
       @openSection={{this.onCardToggle}}
       @manualControl={{true}}
       @size='small'
+      @disableAuContent={{true}}
       as |C|
     >
       <C.header>
@@ -1111,7 +1112,7 @@ const NavigationEntry: TOC<NavigationEntrySignature> = <template>
         @placement='bottom-start'
       >
         <AuBadge
-          class='meeting-validation-card__icon au-u-margin-tiny'
+          class='meeting-validation-card__icon au-u-margin-right-tiny'
           @skin='warning'
           @icon='alert-triangle'
         />
