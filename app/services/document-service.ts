@@ -114,8 +114,12 @@ export default class DocumentService extends Service {
       ) {
         parts.push(t.subject);
       } else if (
+        // Old triple that no longer exists, but kept for backwards compatibility
         t.predicate ===
-        'https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#BevatMaatregelOntwerp'
+          'https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#BevatMaatregelOntwerp' ||
+        (hasTypePredicate(t) &&
+          t.object ===
+            'https://data.vlaanderen.be/ns/mobiliteit#AanvullendReglementOntwerp')
       ) {
         arDesigns.add(t.subject);
       }
