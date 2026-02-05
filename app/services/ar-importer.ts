@@ -14,10 +14,7 @@ import {
 import insertMeasure from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/actions/insert-measure';
 import { ZONALITY_OPTIONS } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/constants';
 import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/decision-utils';
-import {
-  VariableInstanceSchema,
-  type VariableInstance as PluginVariableInstance,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable-instance';
+import { VariableInstanceSchema } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable-instance';
 import { TrafficSignalConceptSchema } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal-concept';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
@@ -31,26 +28,26 @@ export type ImportResult<R> = {
 };
 export type GenerateImportResult = ImportResult<TransactionMonad<boolean>[]>;
 
-function convertVariableInstances(
-  variableInstances: VariableInstance[],
-): Record<string, PluginVariableInstance> {
-  return Object.fromEntries<PluginVariableInstance>(
+function convertVariableInstances(variableInstances: VariableInstance[]) {
+  return Object.fromEntries(
     variableInstances.map((varInstance) => {
-      return [
-        varInstance.variable.label,
-        VariableInstanceSchema.parse({
-          uri: varInstance.uri,
-          value: varInstance.value,
-          valueLabel: varInstance.valueLabel,
-          variable: {
-            source: varInstance.variable.source,
-            uri: varInstance.variable.uri,
-            type: varInstance.variable.type,
-            label: varInstance.variable.label,
-            codelistUri: varInstance.variable.codelist,
-          },
-        }),
-      ];
+      const variableInstance = VariableInstanceSchema.parse({
+        uri: varInstance.uri,
+        value: varInstance.value,
+        valueLabel: varInstance.valueLabel,
+        variable: {
+          source: varInstance.variable.source,
+          uri: varInstance.variable.uri,
+          type: varInstance.variable.type,
+          label: varInstance.variable.label,
+          codelistUri: varInstance.variable.codelist,
+        },
+      });
+      const variableInstanceWithRdfaId = {
+        ...variableInstance,
+        __rdfaId: uuidv4(),
+      };
+      return [varInstance.variable.label, variableInstanceWithRdfaId];
     }),
   );
 }
