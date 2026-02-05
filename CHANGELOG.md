@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.72.0
+
+### Minor Changes
+
+- [#893](https://github.com/lblod/frontend-gelinkt-notuleren/pull/893) [`d8b8ca3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d8b8ca3eb733aaf4456a48f9b53b96900acd7f83) Thanks [@piemonkey](https://github.com/piemonkey)! - Add warning when inserting an AR design which has unused signs or signs that are not included
+
+- [#892](https://github.com/lblod/frontend-gelinkt-notuleren/pull/892) [`e955abd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e955abd326793ba1f7fec41bbb59f96e72d37910) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Implement new document validation plugin
+
+- [#896](https://github.com/lblod/frontend-gelinkt-notuleren/pull/896) [`75edfb6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/75edfb62a208b0042ec5f9e2905ab589b7ff604e) Thanks [@piemonkey](https://github.com/piemonkey)! - Find which AR designs are used in documents based on the latest data model
+
+### Patch Changes
+
+- [#894](https://github.com/lblod/frontend-gelinkt-notuleren/pull/894) [`0605c7d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0605c7dc82dc9f76e6855b32655d1fd1c76521eb) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Unblock editing when the versioned notulen is set to deleted
+
+- [#895](https://github.com/lblod/frontend-gelinkt-notuleren/pull/895) [`2909a00`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2909a009bcc963e72891b2f00f278e49e3bfd7b2) Thanks [@kobemertens](https://github.com/kobemertens)! - Bump editor to v35.0.0
+
 ## 5.71.1
 
 ### Patch Changes
