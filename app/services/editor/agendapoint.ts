@@ -143,6 +143,14 @@ import configurationPerAdminUnit from '../../config/configuration-per-admin-unit
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import { onChangedPlugin } from '@lblod/ember-rdfa-editor/plugins/on-changed/plugin';
+import {
+  insertArticleContainerAtCursor,
+  insertDescriptionAtCursor,
+  insertMotivationAtCursor,
+  insertTitleAtCursor,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin/common-fixes';
+import { documentValidationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
+import { decisionShape } from 'frontend-gelinkt-notuleren/utils/decision-shape';
 
 export default class AgendapointEditorService extends Service {
   @service declare intl: IntlService;
@@ -244,8 +252,83 @@ export default class AgendapointEditorService extends Service {
       insertArticle: {
         uriGenerator: articleUriGenerator,
       },
-      decisionPlugin: {
-        articleUriGenerator,
+      documentValidation: {
+        rules: [
+          {
+            shaclRule:
+              'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-title-validation',
+            violations: {
+              'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
+                helpText: this.intl.t(
+                  'document-validation.helptext.too-many-title',
+                ),
+              },
+              'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
+                action: (controller: SayController) =>
+                  insertTitleAtCursor(controller, this.intl),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-title',
+                ),
+              },
+            },
+          },
+          {
+            shaclRule:
+              'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-description-validation',
+            violations: {
+              'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
+                helpText: this.intl.t(
+                  'document-validation.helptext.too-many-description',
+                ),
+              },
+              'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
+                action: (controller: SayController) =>
+                  insertDescriptionAtCursor(controller, this.intl),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-description',
+                ),
+              },
+            },
+          },
+          {
+            shaclRule:
+              'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-motivering-validation',
+            violations: {
+              'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
+                helpText: this.intl.t(
+                  'document-validation.helptext.too-many-motivation',
+                ),
+              },
+              'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
+                action: (controller: SayController) =>
+                  insertMotivationAtCursor(controller, this.intl),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-motivation',
+                ),
+              },
+            },
+          },
+          {
+            shaclRule:
+              'https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-article-container-validation',
+            violations: {
+              'http://www.w3.org/ns/shacl#MaxCountConstraintComponent': {
+                helpText: this.intl.t(
+                  'document-validation.helptext.too-many-article-container',
+                ),
+              },
+              'http://www.w3.org/ns/shacl#MinCountConstraintComponent': {
+                action: (controller: SayController) =>
+                  insertArticleContainerAtCursor(controller, this.intl),
+                buttonTitle: this.intl.t(
+                  'document-validation.actions.insert-article-container',
+                ),
+              },
+            },
+          },
+        ],
+        //We use a custom shape because we had to hide temporaly the language validation
+        documentShape: decisionShape,
       },
       ...this.adminUnitConfig,
     };
@@ -391,6 +474,7 @@ export default class AgendapointEditorService extends Service {
         },
       ),
       linkPasteHandler(schema.nodes.link),
+      documentValidationPlugin(this.config.documentValidation),
 
       emberApplication({ application: unwrap(getOwner(this)) }),
     ];

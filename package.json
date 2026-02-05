@@ -191,7 +191,7 @@
   },
   "dependencies": {
     "@curvenote/prosemirror-utils": "^1.0.5",
-    "@lblod/lib-decision-shapes": "^0.0.23",
+    "@lblod/lib-decision-shapes": "^0.0.25",
     "@rdfjs/dataset": "^2.0.2",
     "ember-sortable": "^5.2.3",
     "rdfa-streaming-parser": "^3.0.2",
