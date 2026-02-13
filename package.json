@@ -33,7 +33,7 @@
     "release": "release-it"
   },
   "devDependencies": {
-    "@appuniversum/ember-appuniversum": "^3.11.0",
+    "@appuniversum/ember-appuniversum": "^3.17.0",
     "@babel/core": "^7.26.0",
     "@babel/eslint-parser": "^7.26.5",
     "@babel/plugin-proposal-decorators": "^7.25.9",
@@ -49,12 +49,12 @@
     "@ember-data-types/serializer": "5.4.0-alpha.150",
     "@ember-data-types/store": "5.4.0-alpha.150",
     "@ember-data-types/tracking": "5.4.0-alpha.150",
-    "@ember/optional-features": "^2.1.0",
-    "@ember/render-modifiers": "^2.1.0",
+    "@ember/optional-features": "^2.3.0",
+    "@ember/render-modifiers": "^3.0.0",
     "@ember/string": "^3.1.1",
     "@ember/test-helpers": "^3.3.1",
     "@ember/test-waiters": "^3.1.0",
-    "@embroider/macros": "1.16.10",
+    "@embroider/macros": "^1.19.7",
     "@eslint/js": "^9.19.0",
     "@faker-js/faker": "^10.0.0",
     "@floating-ui/dom": "^1.6.13",
@@ -64,11 +64,11 @@
     "@glint/environment-ember-loose": "^1.5.0",
     "@glint/environment-ember-template-imports": "^1.5.0",
     "@glint/template": "^1.5.0",
-    "@lblod/ember-acmidm-login": "^2.1.0",
+    "@lblod/ember-acmidm-login": "^2.3.0",
     "@lblod/ember-environment-banner": "^0.6.0",
-    "@lblod/ember-mock-login": "^0.10.0",
-    "@lblod/ember-rdfa-editor": "13.1.0",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "35.0.0",
+    "@lblod/ember-mock-login": "^0.14.0",
+    "@lblod/ember-rdfa-editor": "^13.1.1",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "35.0.0-dev.5e5e91fcfd6ba85c3275562cff5fd5dd5aeab3d8",
     "@lblod/template-uuid-instantiator": "^1.0.3",
     "@nullvoxpopuli/ember-composable-helpers": "^5.2.6",
     "@rdfjs/types": "^2.0.1",
@@ -125,9 +125,9 @@
     "ember-qunit": "^8.1.0",
     "ember-resolver": "^12.0.1",
     "ember-resources": "^7.0.3",
-    "ember-simple-auth": "^6.0.0",
+    "ember-simple-auth": "^8.3.0",
     "ember-source": "~5.12.0",
-    "ember-template-imports": "^4.1.2",
+    "ember-template-imports": "^4.4.0",
     "ember-template-lint": "^6.0.0",
     "ember-truth-helpers": "^4.0.3",
     "ember-velcro": "^2.2.0",
@@ -157,7 +157,7 @@
     "stylelint": "^16.14.1",
     "stylelint-config-standard": "^37.0.0",
     "stylelint-prettier": "^5.0.3",
-    "tracked-built-ins": "^3.3.0",
+    "tracked-built-ins": "^4.1.0",
     "tracked-toolbox": "^2.0.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.23.0",
@@ -167,12 +167,14 @@
   },
   "pnpm": {
     "overrides": {
+      "@ember/test-waiters": "$@ember/test-waiters",
       "caniuse-lite": "1.0.30001751",
       "ember-auto-import": "$ember-auto-import",
+      "ember-composability-tools>@ember/render-modifiers": "^3.0.0",
+      "ember-headless-form>tracked-built-ins": "$tracked-built-ins",
       "ember-math-helpers": "$ember-math-helpers",
       "ember-truth-helpers": "$ember-truth-helpers",
-      "tracked-toolbox": "$tracked-toolbox",
-      "@ember/test-waiters": "$@ember/test-waiters"
+      "tracked-toolbox": "$tracked-toolbox"
     }
   },
   "engines": {
@@ -195,8 +197,8 @@
     "@rdfjs/dataset": "^2.0.2",
     "ember-sortable": "^5.2.3",
     "rdfa-streaming-parser": "^3.0.2",
-    "reactiveweb": "^1.9.0",
+    "reactiveweb": "^1.9.1",
     "tracked-toolbox": "^2.0.0"
   },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+  "packageManager": "pnpm@10.28.2"
 }

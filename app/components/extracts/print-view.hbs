@@ -12,7 +12,7 @@
   </Print.Header>
   <Print.Body>
     {{#if this.data.isError}}
-      <AuCard @flex={{true}} as |card|>
+      <AuCard @flex={{true}} @disableAuContent={{true}} as |card|>
         <card.header @badgeIcon='alert-triangle' @badgeSkin='error'>
           <AuHeading @level='2' @skin='4'>
             {{t 'print-view.error-heading'}}
