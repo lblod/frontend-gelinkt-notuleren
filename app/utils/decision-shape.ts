@@ -31,7 +31,7 @@ export const decisionShape = `
     );
     sh:minCount 1 ;
 		sh:maxCount 1 ;
-        sh:resultMessage "Het besluit mag maximaal één beschrijving hebben.";
+        sh:resultMessage "Het besluit moet exact één beschrijving hebben.";
     	ext:successMessage "Het besluit heeft een beschrijving.".
 
 <https://data.vlaanderen.be/shacl/besluit-publicatie#besluit-article-container-validation> sh:name "inhoud" ;

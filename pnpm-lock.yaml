@@ -147,8 +147,8 @@ importers:
         specifier: 13.1.1-dev.cb8a9222c12efc7c16c2d0f0c52b3f5826970eaf
         version: 13.1.1-dev.cb8a9222c12efc7c16c2d0f0c52b3f5826970eaf(6b9781c27a207cd4789034d5d70e1d49)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 35.0.0-dev.5e5e91fcfd6ba85c3275562cff5fd5dd5aeab3d8
-        version: 35.0.0-dev.5e5e91fcfd6ba85c3275562cff5fd5dd5aeab3d8(1b224bb5e078d84107e00047e4bda601)
+        specifier: 35.0.1
+        version: 35.0.1(1b224bb5e078d84107e00047e4bda601)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1908,8 +1908,8 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.0.0-dev.5e5e91fcfd6ba85c3275562cff5fd5dd5aeab3d8':
-    resolution: {integrity: sha512-5I9UzScnrsV6TlO0zGCrMh3OfpQX1lP4DfIMhGcPdXcJzIoQvzk5RqDgyrwrp5evRyRSHWbsU9v8djK89cQJDw==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.0.1':
+    resolution: {integrity: sha512-f6LNYfOe7mAw+D4nZEegDHDBTv6g9ZCGQWzfDut57Iik13ddzCQIumfBNHmqdJwqgAOfogH8pEBE7h2QXKzdSA==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
@@ -12397,7 +12397,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.0.0-dev.5e5e91fcfd6ba85c3275562cff5fd5dd5aeab3d8(1b224bb5e078d84107e00047e4bda601)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.0.1(1b224bb5e078d84107e00047e4bda601)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.17.0(b6c443822dc165adcdbca550860beb25)
       '@babel/core': 7.27.7
