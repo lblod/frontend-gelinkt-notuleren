@@ -3,8 +3,8 @@ import { task } from 'ember-concurrency';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
-import { Schema } from '@lblod/ember-rdfa-editor';
+import { getOwner } from '@ember/owner';
+import { SayController, Schema } from '@lblod/ember-rdfa-editor';
 
 import {
   em,
@@ -35,7 +35,6 @@ import { link, linkView } from '@lblod/ember-rdfa-editor/nodes/link';
 import {
   bulletListWithConfig,
   listItemWithConfig,
-  listTrackingPlugin,
   orderedListWithConfig,
 } from '@lblod/ember-rdfa-editor/plugins/list';
 import { placeholder } from '@lblod/ember-rdfa-editor/plugins/placeholder';
@@ -54,34 +53,38 @@ import {
   inlineRdfaWithConfig,
   inlineRdfaWithConfigView,
 } from '@lblod/ember-rdfa-editor/nodes/inline-rdfa';
-import { getOwner } from '@ember/application';
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
+import type RouterService from '@ember/routing/router-service';
+import type IntlService from 'ember-intl/services/intl';
+import type DocumentService from 'frontend-gelinkt-notuleren/services/document-service';
+import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
+import type { ModelFrom } from 'frontend-gelinkt-notuleren/utils/types';
+import type MeetingsEditCustomVotingRoute from 'frontend-gelinkt-notuleren/routes/meetings/edit/custom-voting';
+import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
+import type { PromiseBelongsTo } from '@ember-data/model/-private';
 
 export default class MeetingsEditManualVotingController extends Controller {
-  @service router;
-  @tracked editor;
-  @service intl;
-  @service documentService;
+  declare model: ModelFrom<MeetingsEditCustomVotingRoute>;
+  @service declare router: RouterService;
+  @service declare intl: IntlService;
+  @service declare documentService: DocumentService;
   profile = 'none';
-  @tracked _editorDocument;
+  @tracked editor?: SayController | null;
+  @tracked _editorDocument?: EditorDocumentModel;
 
-  get editorDocument() {
+  get editorDocument(): EditorDocumentModel | null {
     return (
       this._editorDocument ||
       this.documentContainer.get('currentVersion').content
     );
   }
 
-  get documentContainer() {
+  get documentContainer(): PromiseBelongsTo<DocumentContainerModel> {
     return this.model.voting.votingDocument;
   }
 
   get dirty() {
-    // Since we clear the undo history when saving, this works. If we want to maintain undo history
-    // on save, we would need to add functionality to the editor to track what is the 'saved' state
-    return this.editor?.checkCommand(undo, {
-      view: this.editor?.mainEditorView,
-    });
+    return this.editor?.isDirty;
   }
 
   clearEditor() {
@@ -91,7 +94,6 @@ export default class MeetingsEditManualVotingController extends Controller {
 
   @action
   closeModal() {
-    this.clearEditor();
     this.router.transitionTo('meetings.edit');
   }
 
@@ -102,18 +104,23 @@ export default class MeetingsEditManualVotingController extends Controller {
   }
 
   saveTask = task(async () => {
-    const html = this.editor.htmlContent;
-    if (this.onTitleUpdate.isRunning) {
-      await this.onTitleUpdate.lastRunning;
+    const documentContainer = await this.documentContainer;
+    if (this.editor && this.editorDocument && documentContainer) {
+      const html = this.editor?.htmlContent;
+      if (this.onTitleUpdate.isRunning) {
+        await this.onTitleUpdate.lastRunning;
+      }
+      const editorDocument =
+        await this.documentService.createEditorDocument.perform(
+          this.editorDocument.title ?? '',
+          html,
+          documentContainer,
+          this.editorDocument,
+        );
+      this._editorDocument = editorDocument;
+      this.editor?.setHtmlContent(html);
+      this.editor?.markClean();
     }
-    const editorDocument =
-      await this.documentService.createEditorDocument.perform(
-        this.title || this.editorDocument.title,
-        html,
-        await this.documentContainer,
-        this.editorDocument,
-      );
-    this._editorDocument = editorDocument;
   });
 
   editorOptions = {
@@ -159,26 +166,29 @@ export default class MeetingsEditManualVotingController extends Controller {
   });
 
   get text() {
-    return this.editorDocument.content;
+    return this.editorDocument?.content;
   }
 
-  onTitleUpdate = task(async (title) => {
-    const html = this.editorDocument.content;
+  onTitleUpdate = task(async (title: string) => {
+    const html = this.editorDocument?.content;
+    const documentContainer = await this.documentContainer;
 
-    const editorDocument =
-      await this.documentService.createEditorDocument.perform(
-        title,
-        html,
-        await this.documentContainer,
-        this.editorDocument,
-      );
+    if (documentContainer && this.editorDocument) {
+      const editorDocument =
+        await this.documentService.createEditorDocument.perform(
+          title,
+          html ?? '',
+          documentContainer,
+          this.editorDocument,
+        );
 
-    this._editorDocument = editorDocument;
+      this._editorDocument = editorDocument;
+    }
   });
 
   @action
-  rdfaEditorInit(editor) {
-    editor.initialize(this.text, { doNotClean: true });
+  rdfaEditorInit(editor: SayController) {
+    editor.initialize(this.text ?? '', { doNotClean: true });
     this.editor = editor;
   }
 
@@ -222,13 +232,13 @@ export default class MeetingsEditManualVotingController extends Controller {
       ...tablePlugins,
       tableKeymap,
       linkPasteHandler(this.schema.nodes.link),
-      listTrackingPlugin(),
+      // @ts-expect-error emberApplication should accept undefined as getOwner may return it
       emberApplication({ application: getOwner(this) }),
     ];
   }
 
   get nodeViews() {
-    return (controller) => {
+    return (controller: SayController) => {
       return {
         link: linkView(this.config.link)(controller),
         date: dateView(this.config.date)(controller),
