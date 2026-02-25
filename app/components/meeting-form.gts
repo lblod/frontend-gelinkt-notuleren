@@ -103,14 +103,19 @@ type Signature = {
     focused: boolean;
   };
 };
+
 export default class MeetingForm extends Component<Signature> {
-  @tracked showDeleteModal: boolean = false;
-  behandelingen: TrackedArray<BehandelingVanAgendapunt> = tracked([]);
   @service declare store: Store;
   @service declare currentSession: CurrentSessionService;
   @service declare router: RouterService;
   @service declare intl: IntlService;
   @service('meeting') declare meetingService: MeetingService;
+
+  @tracked showDeleteModal: boolean = false;
+  behandelingen: TrackedArray<BehandelingVanAgendapunt> = tracked([]);
+  @tracked aanwezigenBijStart: MandatarisModel[] = [];
+  @tracked afwezigenBijStart: MandatarisModel[] = [];
+  @tracked nietToegekendeMandatarissen: MandatarisModel[] = [];
 
   validation = trackedFunction(this, async () => {
     const zitting = this.zitting;
@@ -254,7 +259,7 @@ export default class MeetingForm extends Component<Signature> {
     return this.meetingDetailsData.value?.voorzitter;
   }
 
-  aanwezigenBijStartQuery = trackedFunction(this, async () => {
+  aanwezigenBijStartQuery = async () => {
     const participants = await this.zitting.aanwezigenBijStart;
     const participantsWithNames = await Promise.all(
       participants.map(async (mandatee) => {
@@ -264,12 +269,12 @@ export default class MeetingForm extends Component<Signature> {
         return { mandatee, surname };
       }),
     );
-    return participantsWithNames
+    this.aanwezigenBijStart = participantsWithNames
       .sort((a, b) => (a.surname < b.surname ? 1 : -1))
       .map((a) => a.mandatee);
-  });
+  };
 
-  afwezigenBijStartQuery = trackedFunction(this, async () => {
+  afwezigenBijStartQuery = async () => {
     const absentees = await this.zitting.afwezigenBijStart;
 
     const absenteesWithNames = await Promise.all(
@@ -279,12 +284,12 @@ export default class MeetingForm extends Component<Signature> {
         return { mandatee, surname };
       }),
     );
-    return absenteesWithNames
+    this.afwezigenBijStart = absenteesWithNames
       .sort((a, b) => (a.surname < b.surname ? 1 : -1))
       .map((a) => a.mandatee);
-  });
+  };
 
-  nietToegekendeMandatarissenQuery = trackedFunction(this, async () => {
+  nietToegekendeMandatarissenQuery = async () => {
     const unassignedMandatees = await this.zitting.nietToegekendeMandatarissen;
     const unassignedWithNames = await Promise.all(
       unassignedMandatees.map(async (mandatee) => {
@@ -293,9 +298,17 @@ export default class MeetingForm extends Component<Signature> {
         return { mandatee, surname };
       }),
     );
-    return unassignedWithNames
+    this.nietToegekendeMandatarissen = unassignedWithNames
       .sort((a, b) => (a.surname < b.surname ? 1 : -1))
       .map((a) => a.mandatee);
+  };
+
+  fetchMandatarissenData = task(async () => {
+    await Promise.all([
+      this.aanwezigenBijStartQuery(),
+      this.afwezigenBijStartQuery(),
+      this.nietToegekendeMandatarissenQuery(),
+    ]);
   });
 
   meetingDetailsTask = restartableTask(async () => {
@@ -406,6 +419,15 @@ export default class MeetingForm extends Component<Signature> {
     return this.possibleParticipantsData.value ?? [];
   }
 
+  fetchInitialData = task(async () => {
+    await Promise.all([
+      this.fetchTreatments.perform(),
+      this.fetchMandatarissenData.perform(),
+    ]).catch((err) => {
+      console.error('Error fetching meeting data', err);
+    });
+  });
+
   fetchTreatments = task(async () => {
     this.behandelingen.splice(0, this.behandelingen.length);
     if (!this.zitting.id) {
@@ -480,6 +502,7 @@ export default class MeetingForm extends Component<Signature> {
     this.zitting.set('afwezigenBijStart', absentees);
     this.zitting.set('nietToegekendeMandatarissen', unassignedMandatees);
     await this.zitting.save();
+    await this.fetchMandatarissenData.perform();
     await this.validation.retry();
   }
 
@@ -510,7 +533,7 @@ export default class MeetingForm extends Component<Signature> {
   }
 
   <template>
-    <div class='au-c-app-chrome' {{didInsert this.fetchTreatments.perform}}>
+    <div class='au-c-app-chrome' {{didInsert this.fetchInitialData.perform}}>
       <AuToolbar @size='small' class='au-u-padding-bottom-none' as |Group|>
         <Group>
           <AuLink
@@ -702,13 +725,7 @@ export default class MeetingForm extends Component<Signature> {
 
           {{#if this.bestuursorgaan}}
 
-            {{#if
-              (or
-                this.aanwezigenBijStartQuery.isPending
-                this.afwezigenBijStartQuery.isPending
-                this.nietToegekendeMandatarissenQuery.isPending
-              )
-            }}
+            {{#if this.fetchMandatarissenData.isRunning}}
               <AuLoader>{{t 'participation-list.loading-title'}}</AuLoader>
             {{else}}
               {{#unless @focused}}
@@ -724,10 +741,10 @@ export default class MeetingForm extends Component<Signature> {
                     @attendanceValidationResult={{this.validation.value.attendance}}
                     @chairman={{this.voorzitter}}
                     @secretary={{this.secretaris}}
-                    @participants={{this.aanwezigenBijStartQuery.value}}
+                    @participants={{this.aanwezigenBijStart}}
                     @defaultParticipants={{this.possibleParticipants}}
-                    @absentees={{this.afwezigenBijStartQuery.value}}
-                    @unassignedMandatees={{this.nietToegekendeMandatarissenQuery.value}}
+                    @absentees={{this.afwezigenBijStart}}
+                    @unassignedMandatees={{this.nietToegekendeMandatarissen}}
                     @possibleParticipants={{this.possibleParticipants}}
                     @bestuursorgaan={{this.bestuursorgaan}}
                     @onSave={{this.saveParticipationList}}
