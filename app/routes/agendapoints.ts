@@ -20,7 +20,7 @@ export default class AgendapointsRoute extends Route {
     this.session.requireAuthentication(transition, 'login');
   }
 
-  async model(params: { id: string; returnToMeeting?: boolean }) {
+  async model(params: { id: string; returnToMeeting?: string }) {
     const container = await this.store.findRecord<DocumentContainerModel>(
       'document-container',
       params.id,
