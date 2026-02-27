@@ -1,3 +1,7 @@
 {{! @glint-nocheck: not typesafe yet }}
-<MeetingForm @zitting={{@model}} @focused={{this.focused}} />
+<MeetingForm
+  @zitting={{@model}}
+  @focused={{this.focused}}
+  @hide={{this.hideMeetingForm}}
+/>
 {{outlet}}

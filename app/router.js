@@ -60,7 +60,7 @@ Router.map(function () {
     this.route('edit', { path: '/:id/edit' }, function () {
       this.route('intro');
       this.route('outro');
-      this.route('treatment', { path: ':treatment_id' });
+      this.route('agendapoint', { path: ':agendapoint_id' });
       this.route('custom-voting', { path: '/custom-voting/:voting_id' });
     });
     this.route('publish', { path: '/:id/publish' }, function () {

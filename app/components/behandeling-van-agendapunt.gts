@@ -42,6 +42,7 @@ import TreatmentVotingEdit from './treatment/voting/edit';
 import type { AgendapointTreatmentValidationResult } from 'frontend-gelinkt-notuleren/services/meeting';
 import type { ParticipationInfo } from './participation-list/modal';
 import WithTooltip from './with-tooltip';
+
 type Signature = {
   Args: {
     meeting: ZittingModel;
@@ -543,9 +544,8 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
           {{/unless}}
           {{#if (and this.editable @behandeling.documentContainer)}}
             <AuLink
-              @route='agendapoints.edit'
+              @route='meetings.edit.agendapoint'
               @model={{@behandeling.documentContainer.id}}
-              @query={{hash returnToMeeting=@meeting.id}}
               @skin='button-secondary'
               @icon='pencil'
               @iconAlignment='left'

@@ -101,6 +101,12 @@ type Signature = {
   Args: {
     zitting: ZittingModel;
     focused: boolean;
+    /**
+     * This is needed to hide the form while editing an agendapoint (which is a fullscreen page).
+     * We do this so we can hide the form without removing the DOM as this way we can navigate back
+     * to the form without losing our scroll position.
+     */
+    hide?: boolean;
   };
 };
 
@@ -535,7 +541,10 @@ export default class MeetingForm extends Component<Signature> {
   }
 
   <template>
-    <div class='au-c-app-chrome' {{didInsert this.fetchInitialData.perform}}>
+    <div
+      class='au-c-app-chrome {{if @hide "au-u-hidden"}}'
+      {{didInsert this.fetchInitialData.perform}}
+    >
       <AuToolbar @size='small' class='au-u-padding-bottom-none' as |Group|>
         <Group>
           <AuLink
@@ -678,7 +687,8 @@ export default class MeetingForm extends Component<Signature> {
 
     <div
       id='content'
-      class='au-c-body-container au-c-body-container--scroll au-c-meeting'
+      class='au-c-body-container au-c-body-container--scroll au-c-meeting
+        {{if @hide "au-u-hidden"}}'
     >
       <div class='au-c-meeting__sidebar-left au-u-hide-on-print'>
         <MeetingNavigationCard

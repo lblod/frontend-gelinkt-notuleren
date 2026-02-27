@@ -68,12 +68,13 @@ import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-edit
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
 import ArImporterSidebarWidget from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/sidebar-widget';
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
+import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 
 interface AgendapointEditSig {
   Args: {
     editorDocument: EditorDocumentModel | null;
     documentContainer: DocumentContainerModel;
-    returnToMeeting?: string;
+    returnToMeeting?: ZittingModel;
     templates: StandardTemplate[];
   };
 }
@@ -149,7 +150,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
 
   isNotAllowedToTrash = trackedFunction(this, async () => {
     const documentStatus = await this.documentContainer.status;
-    return !documentStatus || documentStatus.id != DRAFT_STATUS_ID;
+    return !documentStatus || documentStatus.id !== DRAFT_STATUS_ID;
   });
 
   setSchemaAndPlugins = modifier(() => {
@@ -370,7 +371,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         @dirty={{this.dirty}}
       >
         <:returnLink>
-          <AgendapointBackLink @meetingId={{@returnToMeeting}} />
+          <AgendapointBackLink @meeting={{@returnToMeeting}} />
         </:returnLink>
         <:actions>
           <AgendapointMenu
@@ -400,20 +401,18 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               <AuIcon @icon='copy' @alignment='left' />
               {{t 'agendapoint.copy-parts-link'}}
             </AuLink>
-            <AuButton
-              {{on 'click' this.toggleDeleteModal}}
-              @skin='link'
-              @alert={{true}}
-              role='menuitem'
-              @disabled={{or
-                this.isNotAllowedToTrash.isLoading
-                this.isNotAllowedToTrash.value
-                false
-              }}
-            >
-              <AuIcon @icon='bin' @alignment='left' />
-              {{t 'utils.delete'}}
-            </AuButton>
+            {{#if this.isNotAllowedToTrash.isResolved}}
+              <AuButton
+                {{on 'click' this.toggleDeleteModal}}
+                @skin='link'
+                @alert={{true}}
+                role='menuitem'
+                @disabled={{or this.isNotAllowedToTrash.value false}}
+              >
+                <AuIcon @icon='bin' @alignment='left' />
+                {{t 'utils.delete'}}
+              </AuButton>
+            {{/if}}
           </AuDropdown>
           <AuButton
             {{on 'click' (perform this.saveTask)}}
