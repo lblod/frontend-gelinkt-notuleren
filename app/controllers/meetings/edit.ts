@@ -11,6 +11,8 @@ export default class MeetingsEditController extends Controller {
   focused = false;
 
   get hideMeetingForm() {
-    return this.router.currentRouteName === 'meetings.edit.agendapoint';
+    return this.router.currentRouteName?.startsWith(
+      'meetings.edit.agendapoint',
+    );
   }
 }

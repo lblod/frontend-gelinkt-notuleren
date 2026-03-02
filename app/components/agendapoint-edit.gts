@@ -397,10 +397,17 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               @document={{this.editorDocument}}
               @forPublish={{true}}
             />
-            <AuLink @route='agendapoints.copy' role='menuitem'>
-              <AuIcon @icon='copy' @alignment='left' />
-              {{t 'agendapoint.copy-parts-link'}}
-            </AuLink>
+            {{#if @returnToMeeting}}
+              <AuLink @route='meetings.edit.agendapoint.copy' role='menuitem'>
+                <AuIcon @icon='copy' @alignment='left' />
+                {{t 'agendapoint.copy-parts-link'}}
+              </AuLink>
+            {{else}}
+              <AuLink @route='agendapoints.copy' role='menuitem'>
+                <AuIcon @icon='copy' @alignment='left' />
+                {{t 'agendapoint.copy-parts-link'}}
+              </AuLink>
+            {{/if}}
             {{#if this.isNotAllowedToTrash.isResolved}}
               <AuButton
                 {{on 'click' this.toggleDeleteModal}}
