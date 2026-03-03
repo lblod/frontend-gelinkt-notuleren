@@ -13,10 +13,10 @@ export default class MeetingsEditAgendapointRevisionsRoute extends Route {
   @service declare router: RouterService;
 
   async model() {
-    const { documentContainer, returnToMeeting } = this.modelFor(
-      'meetings.edit.agendapoint',
-    ) as ModelFrom<MeetingsEditAgendapointRoute>;
-    const editorDocument = await documentContainer.currentVersion;
+    const { documentContainer, editorDocument, returnToMeeting } =
+      this.modelFor(
+        'meetings.edit.agendapoint',
+      ) as ModelFrom<MeetingsEditAgendapointRoute>;
     return RSVP.hash({
       revisions: this.fetchRevisions.perform(editorDocument),
       documentContainer,

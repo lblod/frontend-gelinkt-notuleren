@@ -12,7 +12,7 @@ interface Sig {
   };
 }
 
-export default class ZittingLinkComponent extends Component<Sig> {
+export default class AgendapointBackLinkComponent extends Component<Sig> {
   administrativeBodyName = trackedFunction(this, async () => {
     const bestuursorgaan = await this.args.meeting?.bestuursorgaan;
     const parentOrgaan = await bestuursorgaan?.isTijdsspecialisatieVan;

@@ -70,7 +70,6 @@ export default class DocumentRevisions extends Component<Sig> {
       this.documentContainer.set('currentVersion', revision);
       await this.documentContainer.save();
       await Promise.all(revisionsToRemove.map((r) => r.destroyRecord()));
-      // this.flushThingsToRemove();
       this.router.transitionTo('agendapoints.edit', this.documentContainer.id);
     },
   );
