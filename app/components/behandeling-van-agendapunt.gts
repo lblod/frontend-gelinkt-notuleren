@@ -544,7 +544,7 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
           {{/unless}}
           {{#if (and this.editable @behandeling.documentContainer)}}
             <AuLink
-              @route='meetings.edit.agendapoint'
+              @route='meetings.edit.agendapoint.edit'
               @model={{@behandeling.documentContainer.id}}
               @skin='button-secondary'
               @icon='pencil'

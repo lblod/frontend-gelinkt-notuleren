@@ -5,15 +5,13 @@ export default class AgendapointsAttachmentsRoute extends Route {
   @service documentService;
 
   async model() {
-    const { documentContainer, returnToMeeting } =
-      this.modelFor('agendapoints');
+    const { documentContainer } = this.modelFor('agendapoints');
     const editorDocument = await documentContainer.currentVersion;
     const decisions = this.documentService.getDecisions(editorDocument);
     return {
       documentContainer,
       editorDocument,
       decisions,
-      returnToMeeting,
     };
   }
 }

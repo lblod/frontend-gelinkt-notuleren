@@ -61,7 +61,9 @@ Router.map(function () {
       this.route('intro');
       this.route('outro');
       this.route('agendapoint', { path: ':agendapoint_id' }, function () {
+        this.route('edit');
         this.route('copy');
+        this.route('revisions');
       });
       this.route('custom-voting', { path: '/custom-voting/:voting_id' });
     });

@@ -377,6 +377,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
           <AgendapointMenu
             @documentContainer={{this.documentContainer}}
             @editorDocument={{this.editorDocument}}
+            @meeting={{@returnToMeeting}}
           />
           <AuDropdown @title={{t 'utils.file-options'}} @alignment='right'>
             {{! template-lint-disable require-context-role }}
