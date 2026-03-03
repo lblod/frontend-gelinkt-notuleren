@@ -64,6 +64,7 @@ Router.map(function () {
         this.route('edit');
         this.route('copy');
         this.route('revisions');
+        this.route('attachments');
       });
       this.route('custom-voting', { path: '/custom-voting/:voting_id' });
     });

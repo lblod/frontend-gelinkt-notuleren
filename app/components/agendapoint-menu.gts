@@ -89,7 +89,7 @@ export default class AgendapointMenuComponent extends Component<Sig> {
           {{t 'attachments.return'}}
         </AuLink>
         <AuLink
-          @route='agendapoints.attachments'
+          @route='{{this.backRouteName}}.attachments'
           class='au-u-margin-bottom-none'
           @skin='button-secondary'
           @icon='attachment'
