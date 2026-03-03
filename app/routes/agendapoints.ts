@@ -25,6 +25,7 @@ export default class AgendapointsRoute extends Route {
 
     return {
       documentContainer: container,
+      editorDocument: await container.currentVersion,
     };
   }
 }

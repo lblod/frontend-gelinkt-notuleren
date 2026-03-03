@@ -15,20 +15,20 @@ export default class AgendapointsEditRoute extends Route {
 
   beforeModel(transition: Transition) {
     if (!this.currentSession.canWrite) {
-      const id = transition.to?.params?.['id'];
+      const id = transition.to?.parent?.params?.['id'];
       this.router.transitionTo('agendapoints.show', id);
       return;
     }
   }
 
   model() {
-    const { documentContainer } = this.modelFor(
+    const { documentContainer, editorDocument } = this.modelFor(
       'agendapoints',
     ) as ModelFrom<AgendapointsRoute>;
     const templates = this.standardTemplate.fetchTemplates.perform();
     return RSVP.hash({
       documentContainer,
-      editorDocument: documentContainer.currentVersion,
+      editorDocument,
       // This does not include dynamic templates as it is only used for the standard template plugin
       templates,
     });
