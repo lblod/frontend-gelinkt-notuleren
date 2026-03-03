@@ -59,7 +59,6 @@ import ToolbarHistory from 'frontend-gelinkt-notuleren/components/toolbar/histor
 import AuBodyContainer from '@appuniversum/ember-appuniversum/components/au-body-container';
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import t from 'ember-intl/helpers/t';
-import { htmlSafe } from '@ember/template';
 import { hash } from '@ember/helper';
 import HtmlEditorMenu from '@lblod/ember-rdfa-editor/components/plugins/html-editor/menu';
 import ToolbarDropdown from '@lblod/ember-rdfa-editor/components/toolbar/dropdown';
@@ -102,17 +101,6 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
   @service declare features: Features;
   @tracked controller?: SayController;
   @tracked ready = false;
-
-  NodeControlsCard = NodeControlsCard;
-  DocImportedResourceEditorCard = DocImportedResourceEditorCard;
-  ImportedResourceLinkerCard = ImportedResourceLinkerCard;
-  ExternalTripleEditorCard = ExternalTripleEditorCard;
-  RelationshipEditorCard = RelationshipEditorCard;
-  AttributeEditor = AttributeEditor;
-  DebugInfo = DebugInfo;
-  FormatTextIcon = FormatTextIcon;
-  PlusIcon = PlusIcon;
-  ThreeDotsIcon = ThreeDotsIcon;
 
   /**
    * this is a workaround because emberjs does not allow us to assign the prefix attribute in the template
@@ -238,230 +226,208 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
   };
 
   <template>
-    {{#if @busy}}
-      <AuBodyContainer>
-        <div class='au-c-rdfa-editor'>
-          <div class='say-container say-container--sidebar-left'>
-            <div class='say-container__main'>
-              <div class='say-editor'>
-                <div class='say-editor__paper'>
-                  <div class='au-c-scanner'>
-                    <div class='au-c-scanner__text'>
-                      <AuLoader>{{if
-                          @busyText
-                          @busyText
-                          (t 'rdfa-editor-container.default-busy-text')
-                        }}
-                      </AuLoader>
-                    </div>
-                    <span class='au-c-scanner__bar'></span>
-                  </div>
-                  <div class='say-editor__inner say-content'>
-                    {{#if this.controller}}
-                      {{htmlSafe this.controller.htmlContent}}
-                    {{/if}}
-                  </div>
-                </div>
-              </div>
-            </div>
+    <AuBodyContainer
+      vocab={{this.vocab}}
+      {{this.setUpPrefixAttr}}
+      typeof='{{@typeOfWrappingDiv}}'
+      property='{{@property}}'
+      resource='#'
+    >
+      {{#if @busy}}
+        <div class='au-c-scanner'>
+          <div class='au-c-scanner__text'>
+            <AuLoader>{{if
+                @busyText
+                @busyText
+                (t 'rdfa-editor-container.default-busy-text')
+              }}
+            </AuLoader>
           </div>
+          <span class='au-c-scanner__bar'></span>
         </div>
-      </AuBodyContainer>
-    {{else}}
-      <AuBodyContainer
-        vocab='{{this.vocab}}'
-        {{this.setUpPrefixAttr}}
-        typeof='{{@typeOfWrappingDiv}}'
-        property='{{@property}}'
-        resource='#'
-      >
-        {{#if this.ready}}
-          <EditorContainer
-            @controller={{this.controller}}
-            @editorOptions={{hash showPaper=true showToolbarBottom=false}}
-          >
-            <:toolbar as |container|>
-              <ResponsiveToolbar>
-                <:main as |Tb|>
-                  <Tb.Group>
-                    <ToolbarHistory @controller={{container.controller}} />
-                  </Tb.Group>
-                  <div class='rdfa-editor-container__small-screen'>
-                    <Tb.Group>
-                      <ToolbarDropdown
-                        @icon={{this.FormatTextIcon}}
-                        @direction='horizontal'
-                        @title={{t 'rdfa-editor-container.toolbar.format-text'}}
-                        as |Menu|
-                      >
-                        <ToolbarStyling
-                          @controller={{container.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                        <TextStyleSuperscript
-                          @controller={{container.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                        <TextStyleSubscript
-                          @controller={{container.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                        <HeadingMenu
-                          @controller={{container.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                      </ToolbarDropdown>
-                      <TextStyleColor
-                        @controller={{container.controller}}
-                        @defaultColor='#000000'
-                      />
-                      <TextStyleHighlight
-                        @controller={{container.controller}}
-                        @defaultColor='#FFEA00'
-                      />
-                    </Tb.Group>
-                  </div>
-                  <div class='rdfa-editor-container__big-screen'>
-                    <Tb.Group>
-                      <ToolbarStyling @controller={{container.controller}} />
-                      <TextStyleSuperscript
-                        @controller={{container.controller}}
-                      />
-                      <TextStyleSubscript
-                        @controller={{container.controller}}
-                      />
-                      <HeadingMenu @controller={{container.controller}} />
-                      <TextStyleColor
-                        @controller={{container.controller}}
-                        @defaultColor='#000000'
-                      />
-                      <TextStyleHighlight
-                        @controller={{container.controller}}
-                        @defaultColor='#FFEA00'
-                      />
-                    </Tb.Group>
-                  </div>
-                  <Tb.Group>
-                    <TableMenu @controller={{container.controller}} />
-                  </Tb.Group>
-                  <Tb.Group>
-                    <ToolbarList @controller={{container.controller}} />
-                  </Tb.Group>
-                  <Tb.Group>
-                    <AlignmentMenu @controller={{container.controller}} />
-                  </Tb.Group>
-                  <Tb.Group>
-                    <IndentationMenu @controller={{container.controller}} />
-                  </Tb.Group>
-                  <div class='rdfa-editor-container__small-screen'>
-                    <Tb.Group>
-
-                      <ToolbarDropdown
-                        @icon={{this.PlusIcon}}
-                        @direction='horizontal'
-                        @title={{t 'rdfa-editor-container.toolbar.insert'}}
-                        as |Menu|
-                      >
-                        <LinkMenu
-                          @controller={{container.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                        <ImageInsertMenu
-                          @controller={{container.controller}}
-                          @onActivate={{Menu.closeDropdown}}
-                        />
-                      </ToolbarDropdown>
-                    </Tb.Group>
-                  </div>
-                  <div class='rdfa-editor-container__big-screen'>
-                    <Tb.Group>
-                      <LinkMenu @controller={{container.controller}} />
-                      <ImageInsertMenu @controller={{container.controller}} />
-                    </Tb.Group>
-                  </div>
-                </:main>
-                <:side as |Tb|>
-                  {{yield (hash controller=container.controller) to='toolbar'}}
+      {{/if}}
+      {{#if this.ready}}
+        <EditorContainer
+          @controller={{this.controller}}
+          @editorOptions={{hash showPaper=true showToolbarBottom=false}}
+        >
+          <:toolbar as |container|>
+            <ResponsiveToolbar>
+              <:main as |Tb|>
+                <Tb.Group>
+                  <ToolbarHistory @controller={{container.controller}} />
+                </Tb.Group>
+                <div class='rdfa-editor-container__small-screen'>
                   <Tb.Group>
                     <ToolbarDropdown
-                      @icon={{this.ThreeDotsIcon}}
+                      @icon={{FormatTextIcon}}
                       @direction='horizontal'
-                      @title={{t 'rdfa-editor-container.toolbar.more'}}
+                      @title={{t 'rdfa-editor-container.toolbar.format-text'}}
                       as |Menu|
                     >
-                      <HtmlEditorMenu
+                      <ToolbarStyling
                         @controller={{container.controller}}
                         @onActivate={{Menu.closeDropdown}}
                       />
-                      <FormattingToggle @controller={{container.controller}} />
+                      <TextStyleSuperscript
+                        @controller={{container.controller}}
+                        @onActivate={{Menu.closeDropdown}}
+                      />
+                      <TextStyleSubscript
+                        @controller={{container.controller}}
+                        @onActivate={{Menu.closeDropdown}}
+                      />
+                      <HeadingMenu
+                        @controller={{container.controller}}
+                        @onActivate={{Menu.closeDropdown}}
+                      />
                     </ToolbarDropdown>
-
+                    <TextStyleColor
+                      @controller={{container.controller}}
+                      @defaultColor='#000000'
+                    />
+                    <TextStyleHighlight
+                      @controller={{container.controller}}
+                      @defaultColor='#FFEA00'
+                    />
                   </Tb.Group>
-                </:side>
-              </ResponsiveToolbar>
-            </:toolbar>
-            <:default>
-              <Editor
-                @plugins={{this.plugins}}
-                @schema={{this.schema}}
-                @nodeViews={{this.nodeViews}}
-                @rdfaEditorInit={{this.rdfaEditorInit}}
-                @notificationToaster={{false}}
-              />
-            </:default>
-            <:sidebarRight as |container|>
-              <Sidebar as |Sidebar|>
-                {{#if (has-block 'sidebarCollapsible')}}
-                  <Sidebar.Collapsible
-                    @title={{t 'utils.insert'}}
-                    @expanded={{true}}
+                </div>
+                <div class='rdfa-editor-container__big-screen'>
+                  <Tb.Group>
+                    <ToolbarStyling @controller={{container.controller}} />
+                    <TextStyleSuperscript
+                      @controller={{container.controller}}
+                    />
+                    <TextStyleSubscript @controller={{container.controller}} />
+                    <HeadingMenu @controller={{container.controller}} />
+                    <TextStyleColor
+                      @controller={{container.controller}}
+                      @defaultColor='#000000'
+                    />
+                    <TextStyleHighlight
+                      @controller={{container.controller}}
+                      @defaultColor='#FFEA00'
+                    />
+                  </Tb.Group>
+                </div>
+                <Tb.Group>
+                  <TableMenu @controller={{container.controller}} />
+                </Tb.Group>
+                <Tb.Group>
+                  <ToolbarList @controller={{container.controller}} />
+                </Tb.Group>
+                <Tb.Group>
+                  <AlignmentMenu @controller={{container.controller}} />
+                </Tb.Group>
+                <Tb.Group>
+                  <IndentationMenu @controller={{container.controller}} />
+                </Tb.Group>
+                <div class='rdfa-editor-container__small-screen'>
+                  <Tb.Group>
+
+                    <ToolbarDropdown
+                      @icon={{PlusIcon}}
+                      @direction='horizontal'
+                      @title={{t 'rdfa-editor-container.toolbar.insert'}}
+                      as |Menu|
+                    >
+                      <LinkMenu
+                        @controller={{container.controller}}
+                        @onActivate={{Menu.closeDropdown}}
+                      />
+                      <ImageInsertMenu
+                        @controller={{container.controller}}
+                        @onActivate={{Menu.closeDropdown}}
+                      />
+                    </ToolbarDropdown>
+                  </Tb.Group>
+                </div>
+                <div class='rdfa-editor-container__big-screen'>
+                  <Tb.Group>
+                    <LinkMenu @controller={{container.controller}} />
+                    <ImageInsertMenu @controller={{container.controller}} />
+                  </Tb.Group>
+                </div>
+              </:main>
+              <:side as |Tb|>
+                {{yield (hash controller=container.controller) to='toolbar'}}
+                <Tb.Group>
+                  <ToolbarDropdown
+                    @icon={{ThreeDotsIcon}}
+                    @direction='horizontal'
+                    @title={{t 'rdfa-editor-container.toolbar.more'}}
+                    as |Menu|
                   >
-                    {{yield
-                      (hash controller=container.controller)
-                      to='sidebarCollapsible'
-                    }}
-                  </Sidebar.Collapsible>
-                {{/if}}
-                {{yield (hash controller=container.controller) to='sidebar'}}
-                {{#if @shouldEditRdfa}}
-                  <div
-                    class='au-u-flex au-u-flex--column au-u-flex--spaced-tiny'
-                  >
-                    {{#if this.activeNode}}
-                      <NodeControlsCard
-                        @node={{this.activeNode}}
-                        @controller={{container.controller}}
-                      />
-                      <RelationshipEditorCard
-                        @node={{this.activeNode}}
-                        @controller={{container.controller}}
-                        @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
-                      />
-                      <DocImportedResourceEditorCard
-                        @controller={{container.controller}}
-                        @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
-                      />
-                      <ImportedResourceLinkerCard
-                        @node={{this.activeNode}}
-                        @controller={{container.controller}}
-                      />
-                      <ExternalTripleEditorCard
-                        @node={{this.activeNode}}
-                        @controller={{container.controller}}
-                      />
-                      <DebugInfo @node={{this.activeNode}} />
-                      <AttributeEditor
-                        @node={{this.activeNode}}
-                        @controller={{container.controller}}
-                      />
-                    {{/if}}
-                  </div>
-                {{/if}}
-              </Sidebar>
-            </:sidebarRight>
-          </EditorContainer>
-        {{/if}}
-      </AuBodyContainer>
-    {{/if}}
+                    <HtmlEditorMenu
+                      @controller={{container.controller}}
+                      @onActivate={{Menu.closeDropdown}}
+                    />
+                    <FormattingToggle @controller={{container.controller}} />
+                  </ToolbarDropdown>
+
+                </Tb.Group>
+              </:side>
+            </ResponsiveToolbar>
+          </:toolbar>
+          <:default>
+            <Editor
+              @plugins={{this.plugins}}
+              @schema={{this.schema}}
+              @nodeViews={{this.nodeViews}}
+              @rdfaEditorInit={{this.rdfaEditorInit}}
+              @notificationToaster={{false}}
+            />
+          </:default>
+          <:sidebarRight as |container|>
+            <Sidebar as |Sidebar|>
+              {{#if (has-block 'sidebarCollapsible')}}
+                <Sidebar.Collapsible
+                  @title={{t 'utils.insert'}}
+                  @expanded={{true}}
+                >
+                  {{yield
+                    (hash controller=container.controller)
+                    to='sidebarCollapsible'
+                  }}
+                </Sidebar.Collapsible>
+              {{/if}}
+              {{yield (hash controller=container.controller) to='sidebar'}}
+              {{#if @shouldEditRdfa}}
+                <div class='au-u-flex au-u-flex--column au-u-flex--spaced-tiny'>
+                  {{#if this.activeNode}}
+                    <NodeControlsCard
+                      @node={{this.activeNode}}
+                      @controller={{container.controller}}
+                    />
+                    <RelationshipEditorCard
+                      @node={{this.activeNode}}
+                      @controller={{container.controller}}
+                      @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
+                    />
+                    <DocImportedResourceEditorCard
+                      @controller={{container.controller}}
+                      @optionGeneratorConfig={{this.optionGeneratorConfigTaskified}}
+                    />
+                    <ImportedResourceLinkerCard
+                      @node={{this.activeNode}}
+                      @controller={{container.controller}}
+                    />
+                    <ExternalTripleEditorCard
+                      @node={{this.activeNode}}
+                      @controller={{container.controller}}
+                    />
+                    <DebugInfo @node={{this.activeNode}} />
+                    <AttributeEditor
+                      @node={{this.activeNode}}
+                      @controller={{container.controller}}
+                    />
+                  {{/if}}
+                </div>
+              {{/if}}
+            </Sidebar>
+          </:sidebarRight>
+        </EditorContainer>
+      {{/if}}
+    </AuBodyContainer>
   </template>
 }

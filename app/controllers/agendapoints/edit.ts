@@ -3,7 +3,6 @@ import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 
 import { TRASH_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import StructureControlCardComponent from '@lblod/ember-rdfa-editor-lblod-plugins/components/structure-plugin/control-card';
@@ -56,7 +55,6 @@ export default class AgendapointsEditController extends Controller {
 
   StructureControlCard = StructureControlCardComponent;
   InsertArticle = InsertArticleComponent;
-
   SnippetInsert = SnippetInsertRdfaComponent;
 
   get config() {
@@ -68,11 +66,7 @@ export default class AgendapointsEditController extends Controller {
   }
 
   get dirty() {
-    // Since we clear the undo history when saving, this works. If we want to maintain undo history
-    // on save, we would need to add functionality to the editor to track what is the 'saved' state
-    return this.controller?.checkCommand(undo, {
-      view: this.controller?.mainEditorView,
-    });
+    return this.controller?.isDirty;
   }
 
   get editorDocument() {
@@ -95,7 +89,6 @@ export default class AgendapointsEditController extends Controller {
       !this.editorSetup ||
       this.saveTask.isRunning ||
       this.copyAgendapunt.isRunning ||
-      this.showMultipleEditWarning ||
       this.confirmMultipleEdit.isRunning
     );
   }
@@ -127,7 +120,10 @@ export default class AgendapointsEditController extends Controller {
   @action
   async handleRdfaEditorInit(editor: SayController) {
     this.controller = editor;
-    editor.initialize(this.editorDocument?.content || '', { doNotClean: true });
+    editor.initialize(this.editorDocument?.content || '', {
+      doNotClean: true,
+      startsDirty: false,
+    });
     // Validate document
     const pluginState = documentValidationPluginKey.getState(
       this.controller.mainEditorView.state,
@@ -245,6 +241,8 @@ export default class AgendapointsEditController extends Controller {
             currentVersion,
           );
         this._editorDocument = editorDocument;
+        this.controller.setHtmlContent(cleanedHtml);
+        this.controller.markClean();
       }
     }
   });
@@ -259,7 +257,7 @@ export default class AgendapointsEditController extends Controller {
     if (fixArticleConnectionsTr) {
       this.controller.mainEditorView.dispatch(fixArticleConnectionsTr);
     }
-    if (!this.editorDocument.title) {
+    if (!this.editorDocument.title || !this.cleanedHtml) {
       this.hasDocumentValidationErrors = true;
     } else {
       this.hasDocumentValidationErrors = false;
@@ -274,6 +272,8 @@ export default class AgendapointsEditController extends Controller {
           currentVersion,
         );
       this._editorDocument = editorDocument;
+      this.controller.setHtmlContent(this.cleanedHtml);
+      this.controller.markClean();
       this.showMultipleEditWarning = false;
       this.cleanedHtml = undefined;
     }

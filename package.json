@@ -67,7 +67,7 @@
     "@lblod/ember-acmidm-login": "^2.3.0",
     "@lblod/ember-environment-banner": "^0.6.0",
     "@lblod/ember-mock-login": "^0.14.0",
-    "@lblod/ember-rdfa-editor": "^13.1.1",
+    "@lblod/ember-rdfa-editor": "13.2.1",
     "@lblod/ember-rdfa-editor-lblod-plugins": "35.0.1",
     "@lblod/template-uuid-instantiator": "^1.0.3",
     "@nullvoxpopuli/ember-composable-helpers": "^5.2.6",
@@ -168,6 +168,7 @@
   "pnpm": {
     "overrides": {
       "@ember/test-waiters": "$@ember/test-waiters",
+      "@lblod/ember-rdfa-editor": "$@lblod/ember-rdfa-editor",
       "caniuse-lite": "1.0.30001751",
       "ember-auto-import": "$ember-auto-import",
       "ember-composability-tools>@ember/render-modifiers": "^3.0.0",

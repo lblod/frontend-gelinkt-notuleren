@@ -7,11 +7,14 @@ export default class CustomVotingModel extends Model {
   declare [Type]: 'custom-voting';
 
   @attr('number') position?: number;
-  @belongsTo('behandeling-van-agendapunt', {
+  @belongsTo<BehandelingVanAgendapunt>('behandeling-van-agendapunt', {
     inverse: 'customVotings',
     async: true,
   })
   declare behandelingVanAgendapunt: AsyncBelongsTo<BehandelingVanAgendapunt>;
-  @belongsTo('document-container', { inverse: null, async: true })
+  @belongsTo<DocumentContainerModel>('document-container', {
+    inverse: null,
+    async: true,
+  })
   declare votingDocument: AsyncBelongsTo<DocumentContainerModel>;
 }
