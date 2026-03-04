@@ -358,7 +358,7 @@ export default class MeetingForm extends Component<Signature> {
 
   fetchPossibleParticipants = restartableTask(async () => {
     const bestuursorgaanIT = this.bestuursorgaan;
-    if (!bestuursorgaanIT) {
+    if (!bestuursorgaanIT || !bestuursorgaanIT.uri) {
       return [];
     }
     const aanwezigenRoles = await this.store.query<BestuursfunctieCodeModel>(
@@ -374,14 +374,14 @@ export default class MeetingForm extends Component<Signature> {
     const startOfMeeting = unwrap(
       this.zitting.gestartOpTijdstip ?? this.zitting.geplandeStart,
     );
-    const queryParams = {
+    const queryParams: LegacyResourceQuery<MandatarisModel> = {
       include: [
-        'is-bestuurlijke-alias-van',
-        'is-bestuurlijke-alias-van.geboorte',
+        'isBestuurlijkeAliasVan',
+        'isBestuurlijkeAliasVan.geboorte',
         'status',
         'bekleedt',
         'bekleedt.bestuursfunctie',
-      ].join(','),
+      ],
       sort: 'is-bestuurlijke-alias-van.achternaam',
       filter: {
         bekleedt: {
@@ -446,19 +446,19 @@ export default class MeetingForm extends Component<Signature> {
       'behandeling-van-agendapunt',
       {
         include: [
-          'document-container.status',
-          'document-container.current-version',
+          'documentContainer.status',
+          'documentContainer.currentVersion',
           'voorzitter',
           'secretaris',
           'onderwerp',
           'stemmingen',
-          'aanwezigen.is-bestuurlijke-alias-van',
-          'afwezigen.is-bestuurlijke-alias-van',
-        ].join(','),
+          'aanwezigen.isBestuurlijkeAliasVan',
+          'afwezigen.isBestuurlijkeAliasVan',
+        ],
         'filter[onderwerp][zitting][:id:]': this.args.zitting.id,
         'page[size]': pageSize,
         sort: 'onderwerp.position',
-      } as unknown as LegacyResourceQuery<BehandelingVanAgendapunt>,
+      },
     );
     const count = unwrap(firstPage.meta)['count'] as number;
     firstPage.forEach((result) => this.behandelingen.push(result));
@@ -472,17 +472,17 @@ export default class MeetingForm extends Component<Signature> {
             'page[size]': pageSize,
             'page[number]': pageNumber,
             include: [
-              'document-container.status',
-              'document-container.current-version',
+              'documentContainer.status',
+              'documentContainer.currentVersion',
               'voorzitter',
               'secretaris',
               'onderwerp',
               'stemmingen',
-              'aanwezigen.is-bestuurlijke-alias-van',
-              'afwezigen.is-bestuurlijke-alias-van',
-            ].join(','),
+              'aanwezigen.isBestuurlijkeAliasVan',
+              'afwezigen.isBestuurlijkeAliasVan',
+            ],
             sort: 'onderwerp.position',
-          } as unknown as LegacyResourceQuery<BehandelingVanAgendapunt>)
+          })
           .then((results) => ({ pageNumber, results })),
       );
 
@@ -936,8 +936,8 @@ class MeetingNavigationCard extends Component<MeetingNavigationCardSignature> {
               id,
               {
                 reload: true,
-                include: 'onderwerp',
-              } as unknown as LegacyResourceQuery<BehandelingVanAgendapunt>,
+                include: ['onderwerp'],
+              },
             ),
             ok: validationResult.ok,
           };
