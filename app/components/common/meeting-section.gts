@@ -22,7 +22,12 @@ const MeetingSection: TOC<Signature> = <template>
     >
       {{@title}}
     </AuHeading>
-    <AuAlert @skin='info' @size='tiny' class='au-u-hide-on-print'>
+    <AuAlert
+      @skin='info'
+      @size='small'
+      @icon='info-circle'
+      class='au-u-hide-on-print'
+    >
       {{@helpText}}
     </AuAlert>
     {{yield}}
