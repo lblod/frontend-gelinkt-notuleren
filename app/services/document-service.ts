@@ -24,6 +24,7 @@ interface PersistDocumentArgs {
   folderId: string;
   group: BestuurseenheidModel;
   decisionType?: BesluitTypeInstance;
+  linkedDecision?: DocumentContainerModel;
 }
 
 function hasTypePredicate(triple: Triple): boolean {
@@ -206,6 +207,7 @@ export default class DocumentService extends Service {
       folderId,
       group,
       decisionType,
+      linkedDecision,
     }: PersistDocumentArgs) => {
       let generatedTemplate = await this.buildTemplate(template);
       if (decisionType) {
@@ -229,6 +231,9 @@ export default class DocumentService extends Service {
       );
       container.set('folder', folder);
       container.set('publisher', group);
+      if (linkedDecision) {
+        container.set('linkedDecision', linkedDecision);
+      }
       await container.save();
       const editorDocument = await this.createEditorDocument.perform(
         title,

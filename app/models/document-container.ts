@@ -35,6 +35,11 @@ export default class DocumentContainerModel extends Model {
     async: true,
   })
   declare publisher: AsyncBelongsTo<BestuurseenheidModel>;
+  @belongsTo<DocumentContainerModel>('document-container', {
+    inverse: null,
+    async: true,
+  })
+  declare linkedDecision: AsyncBelongsTo<DocumentContainerModel>;
 
   @hasMany<EditorDocumentModel>('editor-document', {
     inverse: 'documentContainer',
