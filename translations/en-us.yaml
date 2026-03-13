@@ -128,6 +128,7 @@ document-creator:
   title-field: Document title
   template: Template
   back-to-selector: back to template selection
+  linked-decision: Linked decision
   selector:
     filters: Filters
     search-field: Search by template name

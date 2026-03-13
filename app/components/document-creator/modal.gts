@@ -22,7 +22,8 @@ import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetc
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import TemplatePicker, { type GetTemplates } from './template-picker';
-import MetadataForm from './metadata-form';
+import MetadataForm, { type updateLinkedDecisionArgs } from './metadata-form';
+import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 
 const truthy = (test: unknown) => !!test;
 
@@ -47,6 +48,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
   @tracked invalidTitle = false;
   @tracked decisionType?: BesluitTypeInstance;
   @tracked decisionTypes?: BesluitType[];
+  @tracked linkedDecision?: DocumentContainerModel;
 
   constructor(owner: unknown, args: Sig['Args']) {
     super(owner, args);
@@ -116,6 +118,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
         folderId: this.args.folderId,
         group: this.currentSession.group as BestuurseenheidModel,
         decisionType: this.decisionType,
+        linkedDecision: this.linkedDecision,
       });
       this.args.onCreate(container, this.selectedTemplate);
     }
@@ -127,6 +130,10 @@ export default class DocumentCreatorModal extends Component<Sig> {
       this.decisionTypes = await fetchBesluitTypes(classificatieUri, endpoint);
     }
   });
+
+  updateLinkedDecision = (linkedDecisionOption: updateLinkedDecisionArgs) => {
+    this.linkedDecision = linkedDecisionOption.documentContainer;
+  };
 
   <template>
     <AuModal
@@ -168,6 +175,8 @@ export default class DocumentCreatorModal extends Component<Sig> {
           @selectedType={{this.decisionType}}
           @decisionTypes={{this.decisionTypes}}
           @setDecisionType={{this.setDecisionType}}
+          @updateLinkedDecision={{this.updateLinkedDecision}}
+          @linkedDecision={{this.linkedDecision}}
         />
       </Modal.Body>
       <Modal.Footer>

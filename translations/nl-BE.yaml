@@ -128,6 +128,7 @@ document-creator:
   title-field: Titel document
   template: Sjabloon
   back-to-selector: terug naar sjabloon kiezen
+  linked-decision: Gekoppelde beslissing
   selector:
     filters: Filters
     search-field: Zoek op sjabloon naam

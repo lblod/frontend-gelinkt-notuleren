@@ -33,7 +33,7 @@ export default class InboxAgendapointsRoute extends Route {
     if (params.filter) {
       options['filter[current-version][title]'] = params.filter;
     }
-    return this.store.query('document-container', options);
+    return await this.store.query('document-container', options);
   }
   @action
   loading(transition) {
