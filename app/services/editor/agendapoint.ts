@@ -151,6 +151,30 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin/common-fixes';
 import { documentValidationPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/document-validation-plugin';
 import { decisionShape } from 'frontend-gelinkt-notuleren/utils/decision-shape';
+import {
+  isResourceAttrs,
+  type ModelMigration,
+  type ModelMigrationGenerator,
+} from '@lblod/ember-rdfa-editor/core/rdfa-types';
+
+const removeBlankNodes: ModelMigrationGenerator = (attrs) => {
+  if (
+    !isResourceAttrs(attrs) ||
+    !attrs.subject.startsWith('http://example.org/')
+  ) {
+    return false;
+  }
+  return {
+    getAttrs: (element) => {
+      const about = element.getAttribute('about');
+      if (about && /^[a-zA-Z]+_[0-9]+_[0-9]+$/.test(about)) {
+        // Don't match
+        return false;
+      }
+      return attrs;
+    },
+  } satisfies ModelMigration;
+};
 
 export default class AgendapointEditorService extends Service {
   @service declare intl: IntlService;
@@ -442,10 +466,13 @@ export default class AgendapointEditorService extends Service {
           rdfaAware: true,
           modelMigrations: [trafficMeasureZonalityMigration],
         }),
-        invisible_rdfa: invisibleRdfaWithConfig({ rdfaAware: true }),
+        invisible_rdfa: invisibleRdfaWithConfig({
+          rdfaAware: true,
+          modelMigrations: [removeBlankNodes],
+        }),
         inline_rdfa: inlineRdfaWithConfig({
           rdfaAware: true,
-          modelMigrations: [trafficSignalMigration],
+          modelMigrations: [trafficSignalMigration, removeBlankNodes],
         }),
         link: link(this.config.link),
         person_variable,
