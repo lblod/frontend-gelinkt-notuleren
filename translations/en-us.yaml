@@ -17,6 +17,7 @@ agendapoint:
   saving: Saving...
   making-copy: Making copy...
   copy-parts-link: Copy decision parts
+  no-title: no title
 
 administrative-body-select:
   period: 'period'
