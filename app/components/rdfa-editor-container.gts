@@ -48,6 +48,7 @@ import ImageInsertMenu from '@lblod/ember-rdfa-editor/components/plugins/image/i
 import TableMenu from '@lblod/ember-rdfa-editor/components/plugins/table/table-menu';
 import HeadingMenu from '@lblod/ember-rdfa-editor/components/plugins/heading/heading-menu';
 import AlignmentMenu from '@lblod/ember-rdfa-editor/components/plugins/alignment/alignment-menu';
+import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import type { Context } from 'frontend-gelinkt-notuleren/config/editor-document-default-context';
 // @ts-expect-error no types yet
@@ -75,7 +76,7 @@ import type {
 
 interface Sig {
   Args: {
-    editorDocument?: EditorDocumentModel;
+    editorDocument: Option<EditorDocumentModel>;
     prefix?: Context['prefix'];
     rdfaEditorInit?: (controller: SayController) => void;
     // TODO should this be PluginConfig[]?

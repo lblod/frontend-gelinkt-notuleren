@@ -1,9 +1,10 @@
+{{! @glint-nocheck }}
 <AppChrome
   @editorDocument={{this.model.editorDocument}}
   @documentContainer={{this.model.documentContainer}}
 >
   <:returnLink>
-    <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+    <AgendapointBackLink />
   </:returnLink>
   <:actions>
     <AuDropdown

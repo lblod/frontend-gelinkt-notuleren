@@ -4,10 +4,13 @@
   @documentContainer={{this.model.documentContainer}}
 >
   <:returnLink>
-    <AgendapointBackLink />
+    <AgendapointBackLink @meeting={{this.model.returnToMeeting}} />
   </:returnLink>
   <:actions>
-    <AgendapointMenu @documentContainer={{this.model.documentContainer}} />
+    <AgendapointMenu
+      @documentContainer={{this.model.documentContainer}}
+      @meeting={{this.model.returnToMeeting}}
+    />
     <AuButton
       @disabled={{true}}
       @skin='naked'
