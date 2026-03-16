@@ -60,7 +60,12 @@ Router.map(function () {
     this.route('edit', { path: '/:id/edit' }, function () {
       this.route('intro');
       this.route('outro');
-      this.route('treatment', { path: ':treatment_id' });
+      this.route('agendapoint', { path: ':agendapoint_id' }, function () {
+        this.route('edit');
+        this.route('copy');
+        this.route('revisions');
+        this.route('attachments');
+      });
       this.route('custom-voting', { path: '/custom-voting/:voting_id' });
     });
     this.route('publish', { path: '/:id/publish' }, function () {

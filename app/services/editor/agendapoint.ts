@@ -214,10 +214,12 @@ export default class AgendapointEditorService extends Service {
       },
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
-        defaultAdministrativeUnit: (municipality.uri as string | undefined) && {
-          label: municipality.naam as string,
-          uri: municipality.uri as string,
-        },
+        defaultAdministrativeUnit: municipality.uri
+          ? {
+              label: municipality.naam as string,
+              uri: municipality.uri,
+            }
+          : undefined,
       },
 
       snippet: {
@@ -334,14 +336,16 @@ export default class AgendapointEditorService extends Service {
     };
   }
 
-  get defaultMunicipality(): BestuurseenheidModel | { uri: undefined } {
+  get defaultMunicipality():
+    | BestuurseenheidModel
+    | { uri: undefined; naam: undefined } {
     const classificatie = this.currentSession
       .classificatie as BestuurseenheidClassificatieCodeModel;
     if (classificatie?.uri === GEMEENTE || classificatie?.uri === OCMW) {
       return this.currentSession.group as BestuurseenheidModel;
     } else {
       // Return empty object instead of null so can be used safely in template
-      return { uri: undefined };
+      return { uri: undefined, naam: undefined };
     }
   }
 
