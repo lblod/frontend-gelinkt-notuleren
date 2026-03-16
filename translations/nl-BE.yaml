@@ -17,6 +17,7 @@ agendapoint:
   saving: Bezig met opslaan
   making-copy: Kopie aan het maken
   copy-parts-link: Kopieer besluit en onderdelen
+  no-title: geen titel
 
 administrative-body-select:
   period: 'periode'
