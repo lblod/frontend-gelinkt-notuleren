@@ -1,12 +1,13 @@
+{{! @glint-nocheck }}
 <AppChrome
-  @editorDocument={{this.editorDocument}}
-  @documentContainer={{this.documentContainer}}
+  @editorDocument={{this.model.editorDocument}}
+  @documentContainer={{this.model.documentContainer}}
 >
   <:returnLink>
-    <AgendapointBackLink @meetingId={{this.model.returnToMeeting}} />
+    <AgendapointBackLink />
   </:returnLink>
   <:actions>
-    <AgendapointMenu @documentContainer={{this.documentContainer}} />
+    <AgendapointMenu @documentContainer={{this.model.documentContainer}} />
     <AuButton
       @disabled={{true}}
       @skin='naked'
@@ -20,6 +21,6 @@
   </:actions>
 </AppChrome>
 <DocumentAttachments
-  @documentContainer={{this.documentContainer}}
-  @decisions={{this.decisions}}
+  @documentContainer={{this.model.documentContainer}}
+  @decisions={{this.model.decisions}}
 />

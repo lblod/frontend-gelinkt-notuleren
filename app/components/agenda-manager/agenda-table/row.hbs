@@ -35,7 +35,11 @@
         {{on 'click' @edit}}
         title={{t 'manage-agenda-zitting-modal.edit-item-message'}}
       >
-        {{limit-content @item.titel 40}}
+        {{#if @item.titel}}
+          {{limit-content @item.titel 40}}
+        {{else}}
+          &lt;{{t 'agendapoint.no-title'}}&gt;
+        {{/if}}
       </AuButton>
     </td>
     <td>

@@ -80,7 +80,6 @@ import {
 import { emberApplication } from '@lblod/ember-rdfa-editor/plugins/ember-application';
 import { highlight } from '@lblod/ember-rdfa-editor/plugins/highlight/marks/highlight';
 import { color } from '@lblod/ember-rdfa-editor/plugins/color/marks/color';
-import { undo } from '@lblod/ember-rdfa-editor/plugins/history';
 import { getActiveEditableNode } from '@lblod/ember-rdfa-editor/plugins/_private/editable-node';
 import VisualiserCard from '@lblod/ember-rdfa-editor/components/_private/rdfa-visualiser/visualiser-card';
 import CreateRelationshipButton from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/create-button';
@@ -421,11 +420,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
   });
 
   get dirty() {
-    // Since we clear the undo history when saving, this works. If we want to maintain undo history
-    // on save, we would need to add functionality to the editor to track what is the 'saved' state
-    return this.controller?.checkCommand(undo, {
-      view: this.controller?.mainEditorView,
-    });
+    return this.controller?.isDirty;
   }
 
   get editorDocument() {
@@ -489,6 +484,8 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
             this.editorDocument,
           );
         this._editorDocument = editorDocument;
+        this.controller.setHtmlContent(html);
+        this.controller.markClean();
 
         const documentContainer = this.documentContainer;
         documentContainer.set('currentVersion', editorDocument);
@@ -499,7 +496,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
   });
 
   confirmMultipleEdit = task(async () => {
-    if (this.title && this.controller) {
+    if (this.title && this.controller && this.html) {
       await this.documentContainer.currentVersion.reload({});
       const currentVersion = (await this.documentContainer
         .currentVersion) as EditorDocumentModel;
@@ -512,6 +509,8 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
           currentVersion,
         );
       this._editorDocument = editorDocument;
+      this.controller.setHtmlContent(this.html);
+      this.controller.markClean();
 
       const documentContainer = this.documentContainer;
       documentContainer.set('currentVersion', editorDocument);
@@ -552,6 +551,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
   handleRdfaEditorInit(controller: SayController) {
     controller.initialize(this.editorDocument.content ?? '', {
       doNotClean: true,
+      startsDirty: false,
     });
     this.controller = controller;
     // If we validate on save, the doc is re-initialised and we lose it, so validate on load instead
@@ -570,7 +570,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
   }
 
   get busy() {
-    return this.saveTask.isRunning || this.showMultipleEditWarning;
+    return this.saveTask.isRunning;
   }
 
   @action

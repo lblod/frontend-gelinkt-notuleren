@@ -34,7 +34,7 @@ export default class ZittingModel extends Model {
   @hasMany('agenda', { inverse: null, async: true })
   declare publicatieAgendas: AsyncHasMany<Agenda>;
 
-  @hasMany('agendapunt', {
+  @hasMany<Agendapunt>('agendapunt', {
     inverse: 'zitting',
     defaultPageSize: 100,
     async: true,
@@ -51,7 +51,11 @@ export default class ZittingModel extends Model {
   @hasMany('mandataris', { inverse: null, defaultPageSize: 100, async: true })
   declare nietToegekendeMandatarissen: AsyncHasMany<MandatarisModel>;
 
-  @hasMany('intermission', { inverse: 'zitting', async: true, as: 'zitting' })
+  @hasMany<IntermissionModel>('intermission', {
+    inverse: 'zitting',
+    async: true,
+    as: 'zitting',
+  })
   declare intermissions: AsyncHasMany<IntermissionModel>;
   @hasMany('publishing-log', { inverse: 'zitting', async: true, as: 'zitting' })
   declare publishingLogs: AsyncHasMany<PublishingLogs>;

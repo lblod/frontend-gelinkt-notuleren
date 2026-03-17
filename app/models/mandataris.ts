@@ -39,8 +39,8 @@ export default class MandatarisModel extends Model {
   declare tijdelijkeVervangingen: AsyncHasMany<MandatarisModel>;
   @hasMany('beleidsdomein-code', { inverse: 'mandatarissen', async: true })
   declare beleidsdomein: AsyncHasMany<BeleidsdomeinCodeModel>;
-  @hasMany('behandeling-van-agendapunt', { inverse: null, async: true })
 
+  @hasMany('behandeling-van-agendapunt', { inverse: null, async: true })
   // TODO: we should be able to remove these
   declare aanwezigBijBehandeling: AsyncHasMany<BehandelingVanAgendapunt>;
   @hasMany('behandeling-van-agendapunt', { inverse: null, async: true })

@@ -1,5 +1,19 @@
 # frontend-gelinkt-notuleren
 
+## 5.73.0
+
+### Minor Changes
+
+- [#897](https://github.com/lblod/frontend-gelinkt-notuleren/pull/897) [`947bf00`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/947bf0045e3b237831e41b36f98cd9fd643b41c1) Thanks [@piemonkey](https://github.com/piemonkey)! - Update authentication packages to use latest versions
+
+### Patch Changes
+
+- [`0061205`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/00612050761159ae7914ff2ba0809965bc9e730f) Thanks [@kobemertens](https://github.com/kobemertens)! - Fix description requirement for decision document validation
+
+- [#897](https://github.com/lblod/frontend-gelinkt-notuleren/pull/897) [`1251ba0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1251ba00253152aa34e40b4e5211c43067cc334a) Thanks [@piemonkey](https://github.com/piemonkey)! - Update editor, plugins and tracked-built-ins
+
+- [`a7caf32`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a7caf32839ea7086acfcbcac617a58fd4812bcf5) Thanks [@kobemertens](https://github.com/kobemertens)! - Bump ember-rdfa-editor-lblod-plugins to v35.0.1
+
 ## 5.72.0
 
 ### Minor Changes

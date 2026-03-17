@@ -1,0 +1,29 @@
+{{! @glint-nocheck }}
+<AppChrome
+  @editorDocument={{this.model.editorDocument}}
+  @documentContainer={{this.model.documentContainer}}
+>
+  <:returnLink>
+    <AgendapointBackLink @meeting={{this.model.returnToMeeting}} />
+  </:returnLink>
+  <:actions>
+    <AgendapointMenu
+      @documentContainer={{this.model.documentContainer}}
+      @meeting={{this.model.returnToMeeting}}
+    />
+    <AuButton
+      @disabled={{true}}
+      @skin='naked'
+      @icon='nav-up-down'
+      @iconAlignment='right'
+      class='au-u-padding-tiny'
+    ><span class='au-u-h-functional au-u-regular'>{{t
+          'utils.file-options'
+        }}</span></AuButton>
+    <AuButton @disabled={{true}}>{{t 'utils.save'}}</AuButton>
+  </:actions>
+</AppChrome>
+<DocumentAttachments
+  @documentContainer={{this.model.documentContainer}}
+  @decisions={{this.model.decisions}}
+/>

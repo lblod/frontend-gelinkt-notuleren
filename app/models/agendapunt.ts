@@ -10,7 +10,7 @@ import type ZittingModel from './zitting';
 import type BehandelingVanAgendapunt from './behandeling-van-agendapunt';
 
 export default class Agendapunt extends Model {
-  declare [Type]: 'zitting';
+  declare [Type]: 'agendapunt';
 
   @attr beschrijving?: string;
   @attr geplandOpenbaar?: boolean;

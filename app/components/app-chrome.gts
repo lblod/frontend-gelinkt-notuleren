@@ -8,7 +8,6 @@ import type { PromiseBelongsTo } from '@ember-data/model/-private';
 import AuToolbar from '@appuniversum/ember-appuniversum/components/au-toolbar';
 import AuIcon from '@appuniversum/ember-appuniversum/components/au-icon';
 import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
-import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import type ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
@@ -47,12 +46,6 @@ export default class AppChromeComponent extends Component<Sig> {
     const status =
       this.args.documentStatus ?? this.args.documentContainer?.get('status');
     return status;
-  }
-
-  get isNotAllowedToTrash() {
-    return (
-      !this.documentStatus || this.documentStatus.get('id') != DRAFT_STATUS_ID
-    );
   }
 
   <template>
