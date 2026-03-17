@@ -82,8 +82,6 @@ export default class MetadataForm extends Component<Sig> {
       'document-container',
       options,
     )) as DocumentContainerModel[];
-
-    console.log(documentContainers);
     const simplifiedContainers = await Promise.all(
       documentContainers.map(async (documentContainer) => ({
         documentContainer: documentContainer,
