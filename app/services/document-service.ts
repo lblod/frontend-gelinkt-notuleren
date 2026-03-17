@@ -17,6 +17,7 @@ import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/docum
 import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import EditorDocumentFolderModel from 'frontend-gelinkt-notuleren/models/editor-document-folder';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
+import setLinkedDecision from 'frontend-gelinkt-notuleren/utils/setLinkedDecision';
 
 interface PersistDocumentArgs {
   template: Template;
@@ -216,6 +217,22 @@ export default class DocumentService extends Service {
           (state) => setBesluitType(state, decisionType),
         );
       }
+      if (linkedDecision) {
+        const linkedDecisionCurrentVersion =
+          await linkedDecision.currentVersion;
+        if (linkedDecisionCurrentVersion) {
+          const linkedDecisionUri = this.getDecisions(
+            linkedDecisionCurrentVersion,
+          )[0]?.uri;
+          if (linkedDecisionUri) {
+            generatedTemplate =
+              this.agendapointEditor.processDocumentHeadlessly(
+                generatedTemplate,
+                (state) => setLinkedDecision(state, linkedDecisionUri),
+              );
+          }
+        }
+      }
       const container = this.store.createRecord<DocumentContainerModel>(
         'document-container',
         {},
@@ -231,9 +248,6 @@ export default class DocumentService extends Service {
       );
       container.set('folder', folder);
       container.set('publisher', group);
-      if (linkedDecision) {
-        container.set('linkedDecision', linkedDecision);
-      }
       await container.save();
       const editorDocument = await this.createEditorDocument.perform(
         title,
