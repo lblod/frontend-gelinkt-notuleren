@@ -76,7 +76,7 @@ import type {
 
 interface Sig {
   Args: {
-    editorDocument: Option<EditorDocumentModel>;
+    editorDocument?: Option<EditorDocumentModel>;
     prefix?: Context['prefix'];
     rdfaEditorInit?: (controller: SayController) => void;
     // TODO should this be PluginConfig[]?

@@ -487,7 +487,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
           @busy={{this.isBusy}}
           @busyText={{this.busyText}}
           @schema={{this.schema}}
-          {{! @glint-expect-error doesnt like the difference between SayView and EditorView }}
           @nodeViews={{this.nodeViews}}
           @plugins={{this.plugins}}
           @shouldEditRdfa={{false}}
