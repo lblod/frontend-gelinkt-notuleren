@@ -9,15 +9,22 @@ import RequiredField from '../../components/required-field';
 import type { BesluitType } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/fetchBesluitTypes';
 import { type BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
 import PowerSelect from 'ember-power-select/components/power-select';
-import { EDITOR_FOLDERS } from '../../config/constants';
 import { service } from '@ember/service';
-import { PUBLISHED_STATUS_ID } from '../../utils/constants';
-import type Store from '@ember-data/store';
+import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import { tracked } from '@glimmer/tracking';
 import type { LegacyResourceQuery } from '@ember-data/store/types';
 import { restartableTask } from 'ember-concurrency';
 import BESLUIT_TYPES from 'frontend-gelinkt-notuleren/utils/besluit-types';
+import {
+  bindingToObject,
+  executeQuery,
+  sparqlEscapeString,
+} from 'frontend-gelinkt-notuleren/utils/sparql';
+import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
+import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
 
 export type updateLinkedDecisionArgs = {
   documentContainer: DocumentContainerModel;
@@ -52,10 +59,12 @@ const DECISION_TYPES_TO_LINK = [
 
 export default class MetadataForm extends Component<Sig> {
   @service declare store: Store;
+  @service declare currentSession: CurrentSessionService;
   @tracked searchLinkedDecisionField?: string;
+  @tracked firstPublishedBesluitValue;
   constructor(owner: unknown, args: Sig['Args']) {
     super(owner, args);
-    void this.publishedBesluitsRequest.perform();
+    this.firstPublishedBesluitValue = this.publishedBesluitsRequest.perform();
   }
   updateTitle = (event: Event) => {
     if (event.target && 'value' in event.target) {
@@ -70,36 +79,57 @@ export default class MetadataForm extends Component<Sig> {
   }
 
   publishedBesluitsRequest = restartableTask(async (searchString?: string) => {
-    const options: LegacyResourceQuery<DocumentContainerModel> = {
-      include: ['currentVersion'],
-      'filter[status][:id:]': `${PUBLISHED_STATUS_ID}`,
-      'filter[folder][:id:]': EDITOR_FOLDERS.DECISION_DRAFTS,
-    };
+    const currentAdministrativeUnitId = unwrap(this.currentSession.group?.id);
+    const adminUnits = (
+      await this.store.countAndFetchAll<BestuursorgaanModel>('bestuursorgaan', {
+        'filter[is-tijdsspecialisatie-van][bestuurseenheid][id]':
+          currentAdministrativeUnitId,
+        include: [
+          'is-tijdsspecialisatie-van.bestuurseenheid',
+          'is-tijdsspecialisatie-van.classificatie',
+        ].join(),
+        sort: '-binding-start',
+      } as unknown as LegacyResourceQuery<BestuursorgaanModel>)
+    ).content;
+    const adminUnitUris = adminUnits.map((adminUnit) => `<${adminUnit.uri}>`);
+    let searchFilter = '';
     if (searchString) {
-      options['filter[current-version][title]'] = searchString;
+      searchFilter = `FILTER(CONTAINS(LCASE(?title), ${sparqlEscapeString(
+        searchString.toLowerCase(),
+      )}))`;
     }
-    const documentContainers = (await this.store.query(
-      'document-container',
-      options,
-    )) as DocumentContainerModel[];
-    const simplifiedContainers = await Promise.all(
-      documentContainers.map(async (documentContainer) => ({
-        documentContainer: documentContainer,
-        title: (await documentContainer.currentVersion)?.title,
-      })),
-    );
-    return simplifiedContainers;
+    const query = `
+    PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+    PREFIX eli: <http://data.europa.eu/eli/ontology#>
+    PREFIX prov: <http://www.w3.org/ns/prov#>
+    PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      SELECT DISTINCT ?uri ?title WHERE {
+        ?uri a besluit:Besluit;
+          eli:title ?title.
+        ?bvap prov:generated ?uri.
+        ?uittreksel ext:uittrekselBvap ?bvap.
+        ?zitting ext:uittreksel ?uittreksel;
+          besluit:isGehoudenDoor ?adminUnit.
+        VALUES ?adminUnit { ${adminUnitUris.join(' ')}}
+        ${searchFilter}
+      } LIMIT 20
+    `;
+    const queryResult = await executeQuery({
+      query,
+      endpoint: ENV.publicatieEndpoint,
+    });
+    const besluits = queryResult.results.bindings.map(bindingToObject);
+    return besluits;
   });
 
   get publishedBesluits() {
-    return this.publishedBesluitsRequest.lastSuccessful?.value || [];
+    return this.firstPublishedBesluitValue?.value || [];
   }
   get selectedPublishedBesluit() {
     if (!this.args.linkedDecision) return;
     return this.publishedBesluits.find(
       (publishedBesluit) =>
-        publishedBesluit.documentContainer.uri ===
-        this.args.linkedDecision?.uri,
+        publishedBesluit['uri'] === this.args.linkedDecision?.uri,
     );
   }
 
