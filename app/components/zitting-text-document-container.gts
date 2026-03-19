@@ -76,15 +76,8 @@ type Signature = {
 };
 export default class ZittingTextDocumentContainerComponent extends Component<Signature> {
   @service declare intl: IntlService;
-  profile = 'none';
-  @tracked editor?: SayController;
-  type = this.args.type;
 
-  editorOptions = {
-    showInsertButton: false,
-    showPaper: true,
-    showSidebar: true,
-  };
+  @tracked editor?: SayController;
 
   schema = new Schema({
     nodes: {
@@ -185,16 +178,13 @@ export default class ZittingTextDocumentContainerComponent extends Component<Sig
 
   <template>
     <RdfaEditorContainer
-      @profile={{this.profile}}
       @rdfaEditorInit={{this.rdfaEditorInit}}
-      @editorOptions={{this.editorOptions}}
       @busy={{@saving}}
       @busyText={{t 'rdfa-editor-container.saving'}}
       @prefix={{hash ext='http://mu.semte.ch/vocabularies/ext/'}}
       @property={{@type}}
       @schema={{this.schema}}
       @plugins={{this.plugins}}
-      {{! @glint-expect-error }}
       @nodeViews={{this.nodeViews}}
     >
       <:sidebarCollapsible as |container|>
