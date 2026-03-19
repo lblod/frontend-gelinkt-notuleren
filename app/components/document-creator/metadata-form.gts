@@ -20,6 +20,7 @@ import {
   bindingToObject,
   executeQuery,
   sparqlEscapeString,
+  sparqlEscapeUri,
 } from 'frontend-gelinkt-notuleren/utils/sparql';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
@@ -90,8 +91,10 @@ export default class MetadataForm extends Component<Sig> {
         ].join(),
         sort: '-binding-start',
       } as unknown as LegacyResourceQuery<BestuursorgaanModel>)
-    ).content;
-    const adminUnitUris = adminUnits.map((adminUnit) => `<${adminUnit.uri}>`);
+    ).content as BestuursorgaanModel[];
+    const adminUnitUris = adminUnits.map((adminUnit) =>
+      adminUnit.uri ? sparqlEscapeUri(adminUnit.uri) : '',
+    );
     let searchFilter = '';
     if (searchString) {
       searchFilter = `FILTER(CONTAINS(LCASE(?title), ${sparqlEscapeString(
@@ -105,12 +108,16 @@ export default class MetadataForm extends Component<Sig> {
     PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       SELECT DISTINCT ?uri ?title WHERE {
         ?uri a besluit:Besluit;
+          a ?besluitType;
           eli:title ?title.
         ?bvap prov:generated ?uri.
         ?uittreksel ext:uittrekselBvap ?bvap.
         ?zitting ext:uittreksel ?uittreksel;
           besluit:isGehoudenDoor ?adminUnit.
         VALUES ?adminUnit { ${adminUnitUris.join(' ')}}
+        VALUES ?besluitType { ${DECISION_TYPES_TO_LINK.map(
+          sparqlEscapeUri,
+        ).join(' ')}}
         ${searchFilter}
       } LIMIT 20
     `;
