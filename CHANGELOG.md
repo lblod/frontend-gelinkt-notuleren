@@ -1,5 +1,29 @@
 # frontend-gelinkt-notuleren
 
+## 5.74.0
+
+### Minor Changes
+
+- [#901](https://github.com/lblod/frontend-gelinkt-notuleren/pull/901) [`140a192`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/140a19259c8aa6c6b1a24fb7ee8cb014ce964681) Thanks [@piemonkey](https://github.com/piemonkey)! - Add a model migration to remove blanknodes that can be found in some old documents
+
+- [#900](https://github.com/lblod/frontend-gelinkt-notuleren/pull/900) [`98cbefb`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/98cbefb179b014b5b4193e13dca0d6fcad048cb1) Thanks [@piemonkey](https://github.com/piemonkey)! - Maintain meeting page scroll position when editing parts of the meeting
+
+- [#901](https://github.com/lblod/frontend-gelinkt-notuleren/pull/901) [`9f3352a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9f3352a3fa2d514b5789c5f7beec7b7bd4f7a53d) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor v13.4.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4013.4.0)
+
+- [#902](https://github.com/lblod/frontend-gelinkt-notuleren/pull/902) [`be62bba`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/be62bbad956081030fe7550f11c5b72f21e24787) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Link certain besluit types to an already published decision
+
+- [#898](https://github.com/lblod/frontend-gelinkt-notuleren/pull/898) [`5d315f1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5d315f11ea7b58fbbc2a87eec38e42025f90cfb8) Thanks [@piemonkey](https://github.com/piemonkey)! - Maintain undo history when saving agendapoints or regulatory statements
+
+### Patch Changes
+
+- [#903](https://github.com/lblod/frontend-gelinkt-notuleren/pull/903) [`7967268`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/79672687a0ee4ac243cbc2adb2c33ad75941624d) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix bug when copying parts of an agendapoint within a meeting where the back link wouldn't work
+
+- [`0a4936c`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a4936cfeb8f20f462e79a49114f494cbb71d08c) Thanks [@abeforgit](https://github.com/abeforgit)! - Bump plugins to [v35.1.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v35.1.2)
+
+- [#898](https://github.com/lblod/frontend-gelinkt-notuleren/pull/898) [`4004c80`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4004c8001d91bdbcd5f4a317fe076b107cb33774) Thanks [@piemonkey](https://github.com/piemonkey)! - Update editor to [v13.2.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4013.2.1)
+
+- [`d0a7769`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/d0a7769415bfa47f0816fd86b1c0b5904862b8e7) Thanks [@kobemertens](https://github.com/kobemertens)! - Add info icon to meeting edit view. Also add placeholder <no-title> for agenda items without a title
+
 ## 5.73.0
 
 ### Minor Changes
