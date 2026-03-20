@@ -17,6 +17,7 @@ import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/docum
 import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import EditorDocumentFolderModel from 'frontend-gelinkt-notuleren/models/editor-document-folder';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
+import setLinkedDecision from 'frontend-gelinkt-notuleren/utils/setLinkedDecision';
 
 interface PersistDocumentArgs {
   template: Template;
@@ -24,6 +25,7 @@ interface PersistDocumentArgs {
   folderId: string;
   group: BestuurseenheidModel;
   decisionType?: BesluitTypeInstance;
+  linkedDecisionUri?: string;
 }
 
 function hasTypePredicate(triple: Triple): boolean {
@@ -206,6 +208,7 @@ export default class DocumentService extends Service {
       folderId,
       group,
       decisionType,
+      linkedDecisionUri,
     }: PersistDocumentArgs) => {
       let generatedTemplate = await this.buildTemplate(template);
       if (decisionType) {
@@ -214,6 +217,13 @@ export default class DocumentService extends Service {
           (state) => setBesluitType(state, decisionType),
         );
       }
+      if (linkedDecisionUri) {
+        generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
+          generatedTemplate,
+          (state) => setLinkedDecision(state, linkedDecisionUri),
+        );
+      }
+
       const container = this.store.createRecord<DocumentContainerModel>(
         'document-container',
         {},

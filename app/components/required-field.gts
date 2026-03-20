@@ -9,7 +9,7 @@ interface Sig {
 }
 
 const RequiredField: TemplateOnlyComponent<Sig> = <template>
-  <AuPill ...attributes>{{t 'required-field.required'}}</AuPill>
+  <AuPill @skin='warning' ...attributes>{{t 'required-field.required'}}</AuPill>
 </template>;
 
 export default RequiredField;

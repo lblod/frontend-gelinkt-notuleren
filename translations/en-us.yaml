@@ -128,6 +128,8 @@ document-creator:
   title-field: Document title
   template: Template
   back-to-selector: back to template selection
+  linked-decision: Linked decision
+  linked-decision-helptext: Hier kan u aanduiden dat het een nieuwe versie van een bestaand reglement of andere publicatie betreft. Dit wordt dan als onzichtbare data in het document opgeslaan, zodat de publicatieomgeving en andere systemen hiermee rekening kunnen houden
   selector:
     filters: Filters
     search-field: Search by template name
@@ -778,6 +780,7 @@ utils:
   full-history: See the full history
   create-new-version: Create new version
   create: Create
+  optional: Optional
   not-found:
     title: '{type} not found'
     explanation: "It's possible that you don't have access to {type} with this account"
