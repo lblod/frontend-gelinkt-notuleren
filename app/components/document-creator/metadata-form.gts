@@ -173,7 +173,7 @@ export default class MetadataForm extends Component<Sig> {
       {{#if this.isLinkedDecisionType}}
         <AuLabel for='linked-decision'>
           {{t 'document-creator.linked-decision'}}
-          <AuPill>{{t 'utils.optional'}}</AuPill>
+          <AuPill @size='small' @skin='border'>{{t 'utils.optional'}}</AuPill>
         </AuLabel>
         <PowerSelect
           id='linked-decision'
