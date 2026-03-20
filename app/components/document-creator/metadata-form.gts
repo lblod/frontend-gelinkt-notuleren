@@ -25,6 +25,7 @@ import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
+import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
 
 export type updateLinkedDecisionArgs = {
   uri: string;
@@ -172,6 +173,7 @@ export default class MetadataForm extends Component<Sig> {
       {{#if this.isLinkedDecisionType}}
         <AuLabel for='linked-decision'>
           {{t 'document-creator.linked-decision'}}
+          <AuPill>{{t 'utils.optional'}}</AuPill>
         </AuLabel>
         <PowerSelect
           id='linked-decision'

@@ -786,6 +786,7 @@ utils:
   full-history: Volledige historiek bekijken
   create-new-version: Nieuwe versie maken
   create: Aanmaken
+  optional: Optioneel
   not-found:
     title: '{type} niet gevonden'
     explanation: 'Het is mogelijk dat u met dit account geen toegang heeft tot {type}.'

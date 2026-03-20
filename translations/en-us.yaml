@@ -780,6 +780,7 @@ utils:
   full-history: See the full history
   create-new-version: Create new version
   create: Create
+  optional: Optional
   not-found:
     title: '{type} not found'
     explanation: "It's possible that you don't have access to {type} with this account"
