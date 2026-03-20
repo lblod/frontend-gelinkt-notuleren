@@ -187,6 +187,9 @@ export default class MetadataForm extends Component<Sig> {
         >
           {{publishedBesluit.title}}
         </PowerSelect>
+        <p class='au-u-muted au-u-margin-tiny au-u-margin-bottom-small'>
+          {{t 'document-creator.linked-decision-helptext'}}
+        </p>
       {{/if}}
     </form>
   </template>
