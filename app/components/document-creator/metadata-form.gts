@@ -11,7 +11,6 @@ import { type BesluitTypeInstance } from '@lblod/ember-rdfa-editor-lblod-plugins
 import PowerSelect from 'ember-power-select/components/power-select';
 import { service } from '@ember/service';
 import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
-import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import { tracked } from '@glimmer/tracking';
 import type { LegacyResourceQuery } from '@ember-data/store/types';
 import { restartableTask } from 'ember-concurrency';
@@ -28,7 +27,7 @@ import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
 
 export type updateLinkedDecisionArgs = {
-  documentContainer: DocumentContainerModel;
+  uri: string;
   title: string;
 };
 
@@ -40,7 +39,7 @@ interface Sig {
     selectedType?: BesluitTypeInstance;
     decisionTypes?: BesluitType[];
     setDecisionType?: (selected: BesluitTypeInstance) => void;
-    linkedDecision?: DocumentContainerModel;
+    linkedDecisionUri?: string;
     updateLinkedDecision: (
       linkedDecisionOption: updateLinkedDecisionArgs,
     ) => void;
@@ -133,10 +132,10 @@ export default class MetadataForm extends Component<Sig> {
     return this.firstPublishedBesluitValue?.value || [];
   }
   get selectedPublishedBesluit() {
-    if (!this.args.linkedDecision) return;
+    if (!this.args.linkedDecisionUri) return;
     return this.publishedBesluits.find(
       (publishedBesluit) =>
-        publishedBesluit['uri'] === this.args.linkedDecision?.uri,
+        publishedBesluit['uri'] === this.args.linkedDecisionUri,
     );
   }
 

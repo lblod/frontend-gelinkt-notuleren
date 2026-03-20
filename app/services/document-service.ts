@@ -25,7 +25,7 @@ interface PersistDocumentArgs {
   folderId: string;
   group: BestuurseenheidModel;
   decisionType?: BesluitTypeInstance;
-  linkedDecision?: DocumentContainerModel;
+  linkedDecisionUri?: string;
 }
 
 function hasTypePredicate(triple: Triple): boolean {
@@ -208,7 +208,7 @@ export default class DocumentService extends Service {
       folderId,
       group,
       decisionType,
-      linkedDecision,
+      linkedDecisionUri,
     }: PersistDocumentArgs) => {
       let generatedTemplate = await this.buildTemplate(template);
       if (decisionType) {
@@ -217,22 +217,13 @@ export default class DocumentService extends Service {
           (state) => setBesluitType(state, decisionType),
         );
       }
-      if (linkedDecision) {
-        const linkedDecisionCurrentVersion =
-          await linkedDecision.currentVersion;
-        if (linkedDecisionCurrentVersion) {
-          const linkedDecisionUri = this.getDecisions(
-            linkedDecisionCurrentVersion,
-          )[0]?.uri;
-          if (linkedDecisionUri) {
-            generatedTemplate =
-              this.agendapointEditor.processDocumentHeadlessly(
-                generatedTemplate,
-                (state) => setLinkedDecision(state, linkedDecisionUri),
-              );
-          }
-        }
+      if (linkedDecisionUri) {
+        generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
+          generatedTemplate,
+          (state) => setLinkedDecision(state, linkedDecisionUri),
+        );
       }
+
       const container = this.store.createRecord<DocumentContainerModel>(
         'document-container',
         {},
