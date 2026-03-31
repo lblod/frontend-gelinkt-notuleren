@@ -506,7 +506,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
             </div>
           </:toolbar>
           <:sidebarCollapsible as |container|>
-            {{! @glint-expect-error for some reason @label is required although it has a sensible default }}
             <InsertArticleComponent
               @controller={{container.controller}}
               @options={{this.config.insertArticle}}
