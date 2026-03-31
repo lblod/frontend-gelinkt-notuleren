@@ -659,7 +659,6 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
           <TemplateCommentInsert @controller={{container.controller}} />
           <LocationInsert
             @controller={{container.controller}}
-            {{! @glint-expect-error Option vs undefined }}
             @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
             @config={{this.config.location}}
           />
