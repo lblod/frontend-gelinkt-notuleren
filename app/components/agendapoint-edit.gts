@@ -69,6 +69,7 @@ import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-rou
 import ArImporterSidebarWidget from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/sidebar-widget';
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
+import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/document-information-modal';
 
 interface AgendapointEditSig {
   Args: {
@@ -92,6 +93,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
   @tracked _editorDocument?: EditorDocumentModel | null;
   @tracked controller?: SayController;
   @tracked showMultipleEditWarning = false;
+  @tracked displayDocumentInformationModal = false;
   cleanedHtml?: string;
   title?: string;
 
@@ -361,6 +363,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     return parsedHtml.body.innerHTML;
   }
 
+  openDocumentInformationModal = () => {
+    this.displayDocumentInformationModal = true;
+  };
+
+  closeDocumentInformationModal = () => {
+    this.displayDocumentInformationModal = false;
+  };
+
   <template>
     {{#if this.editorDocument}}
       <AppChrome
@@ -398,6 +408,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               @document={{this.editorDocument}}
               @forPublish={{true}}
             />
+            <AuButton
+              {{on 'click' this.openDocumentInformationModal}}
+              @skin='link'
+              role='menuitem'
+            >
+              <AuIcon @icon='export' @alignment='left' />
+              {{t 'document-information-modal.button-title'}}
+            </AuButton>
             {{#if @returnToMeeting}}
               <AuLink @route='meetings.edit.agendapoint.copy' role='menuitem'>
                 <AuIcon @icon='copy' @alignment='left' />
@@ -430,6 +448,20 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
       </AppChrome>
     {{/if}}
 
+    {{#if this.displayDocumentInformationModal}}
+      {{#if this.controller}}
+        {{#if this.editorDocument}}
+          <DocumentInformationModal
+            @controller={{this.controller}}
+            @closeModal={{this.closeDocumentInformationModal}}
+            @editorDocument={{this.editorDocument}}
+            @classificatieUri={{this.config.besluitType.classificatieUri}}
+            @besluitTypeEndpoint={{this.config.besluitType.endpoint}}
+            @besluitTopicEndpoint={{this.config.besluitTopic.endpoint}}
+          />
+        {{/if}}
+      {{/if}}
+    {{/if}}
     {{#if this.displayDeleteModal}}
       <AuModal
         @title={{t 'delete-modal.title'}}
@@ -506,7 +538,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
             </div>
           </:toolbar>
           <:sidebarCollapsible as |container|>
-            {{! @glint-expect-error for some reason @label is required although it has a sensible default }}
             <InsertArticleComponent
               @controller={{container.controller}}
               @options={{this.config.insertArticle}}

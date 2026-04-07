@@ -17,4 +17,15 @@ const BESLUIT_TYPES = {
     'https://data.vlaanderen.be/id/concept/BesluitType/380674ee-0894-4c41-bcc1-9deaeb9d464c',
 };
 
+export const DECISION_TYPES_TO_LINK = [
+  BESLUIT_TYPES['Reglementen en verordeningen'],
+  BESLUIT_TYPES['Rechtspositieregeling (RPR)'],
+  BESLUIT_TYPES['Meerjarenplan(aanpassing)'],
+  BESLUIT_TYPES['Jaarrekening PEVA'],
+  BESLUIT_TYPES['Oprichting autonoom bedrijf'],
+  BESLUIT_TYPES['Oprichting of deelname EVA'],
+  BESLUIT_TYPES['Oprichting IGS'],
+  BESLUIT_TYPES['Oprichting districtsbestuur'],
+];
+
 export default BESLUIT_TYPES;
