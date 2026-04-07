@@ -124,22 +124,6 @@ export default class DocumentInformationModal extends Component<Sig> {
       this.selectedTypeInstance = typeInstance;
     }
   };
-  insertIfValid = () => {
-    this.controller.doCommand((state, dispatch) => {
-      if (!this.selectedTypeInstance || !dispatch) {
-        return false;
-      }
-      const { result, transaction } = setBesluitType(
-        state,
-        this.selectedTypeInstance,
-      );
-      if (result.every((ok) => ok)) {
-        dispatch(transaction);
-        return true;
-      }
-      return false;
-    });
-  };
   setType = (type: BesluitTypeInstance) => {
     this.selectedTypeInstance = type;
     this.typeChanged = true;
