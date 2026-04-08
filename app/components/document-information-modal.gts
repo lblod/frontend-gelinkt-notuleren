@@ -1,5 +1,5 @@
 import Component from '@glimmer/component';
-import type { SayController } from '@lblod/ember-rdfa-editor';
+import type { EditorState, SayController } from '@lblod/ember-rdfa-editor';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import { on } from '@ember/modifier';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
@@ -13,7 +13,9 @@ import {
   checkBesluitTypeInstance,
   mostSpecificBesluitType,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/besluit-type-instances';
-import fetchBesluitTypes from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/fetchBesluitTypes';
+import fetchBesluitTypes, {
+  type BesluitType,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/fetchBesluitTypes';
 import {
   getCurrentBesluitRange,
   getCurrentBesluitURI,
@@ -38,6 +40,7 @@ import type { updateLinkedDecisionArgs } from './document-creator/metadata-form'
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import LinkedDecisionSelect from './linked-decision-select';
 import setLinkedDecision from 'frontend-gelinkt-notuleren/utils/setLinkedDecision';
+import { modifier } from 'ember-modifier';
 
 type Sig = {
   Args: {
@@ -58,6 +61,9 @@ export default class DocumentInformationModal extends Component<Sig> {
   @tracked previousBesluitTopics?: string[];
   @tracked linkedDecisionUri?: string;
   @tracked linkedDecisionChanged = false;
+  lastEditorState?: EditorState;
+  lastTypesValue?: BesluitType[] | null;
+  lastTopicsValue?: BesluitTopic[] | null;
 
   updateEditorDocumentTitle = (event: Event) => {
     this.args.editorDocument.title = (event.target as HTMLInputElement).value;
@@ -278,13 +284,28 @@ export default class DocumentInformationModal extends Component<Sig> {
     }
   }
 
+  updateDataModifier = modifier(() => {
+    if (
+      this.args.controller.mainEditorState !== this.lastEditorState ||
+      this.lastTypesValue !== this.types.value
+    ) {
+      this.updateBesluitTypes();
+      this.lastEditorState = this.args.controller.mainEditorState;
+      this.lastTypesValue = this.types.value;
+    }
+
+    if (
+      this.args.controller.mainEditorState !== this.lastEditorState ||
+      this.lastTopicsValue !== this.topics.value
+    ) {
+      this.updateBesluitTopic();
+      this.lastEditorState = this.args.controller.mainEditorState;
+      this.lastTopicsValue = this.topics.value;
+    }
+  });
+
   <template>
-    <div
-      {{didUpdate this.updateBesluitTypes @controller.mainEditorState}}
-      {{didUpdate this.updateBesluitTypes this.types.value}}
-      {{didUpdate this.updateBesluitTopic @controller.mainEditorState}}
-      {{didUpdate this.updateBesluitTopic this.topics.value}}
-    >
+    <div {{this.updateDataModifier}}>
       <AuModal
         @title='Edit document information'
         @modalOpen={{true}}
