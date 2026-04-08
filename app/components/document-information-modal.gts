@@ -39,8 +39,12 @@ import BesluitTopicSelect from '@lblod/ember-rdfa-editor-lblod-plugins/component
 import type { updateLinkedDecisionArgs } from './document-creator/metadata-form';
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import LinkedDecisionSelect from './linked-decision-select';
-import setLinkedDecision from 'frontend-gelinkt-notuleren/utils/setLinkedDecision';
+import setLinkedDecision, {
+  extractLinkedDecisionUris,
+} from 'frontend-gelinkt-notuleren/utils/setLinkedDecision';
 import { modifier } from 'ember-modifier';
+import { task } from 'ember-concurrency';
+import perform from 'ember-concurrency/helpers/perform';
 
 type Sig = {
   Args: {
@@ -64,25 +68,30 @@ export default class DocumentInformationModal extends Component<Sig> {
   lastEditorState?: EditorState;
   lastTypesValue?: BesluitType[] | null;
   lastTopicsValue?: BesluitTopic[] | null;
+  @tracked documentTitleModified?: string;
 
-  updateEditorDocumentTitle = (event: Event) => {
-    this.args.editorDocument.title = (event.target as HTMLInputElement).value;
-  };
-  saveChanges = () => {
+  saveChanges = task(async () => {
     if (this.typeChanged) {
       this.updateDocumentBesluitType();
+      this.typeChanged = false;
     }
     if (this.topicChanged) {
       this.updateDocumentTopic();
+      this.topicChanged = false;
     }
     if (this.linkedDecisionChanged) {
       this.updateDocumentLinkedDecision();
+      this.linkedDecisionChanged = false;
     }
-    this.typeChanged = false;
-    this.topicChanged = false;
-    this.linkedDecisionChanged = false;
+    if (this.documentTitleModified) {
+      this.args.editorDocument.title = this.documentTitleModified;
+      await this.args.editorDocument.save();
+      this.documentTitleModified = undefined;
+    }
+
     this.args.closeModal();
-  };
+  });
+
   cancelEdit = () => {
     this.selectedTypeInstance = undefined;
     this.typeChanged = false;
@@ -90,8 +99,18 @@ export default class DocumentInformationModal extends Component<Sig> {
     this.topicChanged = false;
     this.linkedDecisionUri = undefined;
     this.linkedDecisionChanged = false;
+    this.args.editorDocument.rollbackAttributes();
     this.args.closeModal();
   };
+
+  updateEditorDocumentTitle = (event: Event) => {
+    this.documentTitleModified = (event.target as HTMLInputElement).value;
+  };
+
+  get currentDocumentTitle() {
+    return this.documentTitleModified || this.args.editorDocument.title;
+  }
+
   get controller() {
     return this.args.controller;
   }
@@ -284,14 +303,25 @@ export default class DocumentInformationModal extends Component<Sig> {
     }
   }
 
+  getLinkedDecisionFromDocument = () => {
+    if (!this.currentBesluitRange) {
+      return;
+    }
+    const linkedDecisionUri = extractLinkedDecisionUris(
+      this.controller.mainEditorState,
+    )[0];
+    console.log(linkedDecisionUri);
+    if (linkedDecisionUri) {
+      this.linkedDecisionUri = linkedDecisionUri;
+    }
+  };
+
   updateDataModifier = modifier(() => {
     if (
       this.args.controller.mainEditorState !== this.lastEditorState ||
       this.lastTypesValue !== this.types.value
     ) {
       this.updateBesluitTypes();
-      this.lastEditorState = this.args.controller.mainEditorState;
-      this.lastTypesValue = this.types.value;
     }
 
     if (
@@ -299,15 +329,20 @@ export default class DocumentInformationModal extends Component<Sig> {
       this.lastTopicsValue !== this.topics.value
     ) {
       this.updateBesluitTopic();
-      this.lastEditorState = this.args.controller.mainEditorState;
-      this.lastTopicsValue = this.topics.value;
     }
+    if (this.args.controller.mainEditorState !== this.lastEditorState) {
+      this.getLinkedDecisionFromDocument();
+    }
+    this.lastEditorState = this.args.controller.mainEditorState;
+    this.lastTypesValue = this.types.value;
+    this.lastTopicsValue = this.topics.value;
   });
 
   <template>
     <div {{this.updateDataModifier}}>
       <AuModal
         @title='Edit document information'
+        @overflow={{true}}
         @modalOpen={{true}}
         @closeModal={{@closeModal}}
         as |Modal|
@@ -318,6 +353,8 @@ export default class DocumentInformationModal extends Component<Sig> {
           </AuLabel>
           <AuInput
             value={{@editorDocument.title}}
+            class='au-u-margin-bottom-small'
+            @width='block'
             {{on 'input' this.updateEditorDocumentTitle}}
           />
           <BesluitTypeForm
@@ -338,12 +375,15 @@ export default class DocumentInformationModal extends Component<Sig> {
           {{/if}}
         </Modal.Body>
         <Modal.Footer>
-          <AuButton {{on 'click' this.saveChanges}}>{{t
-              'document-information-modal.save'
-            }}</AuButton>
-          <AuButton @skin='secondary' {{on 'click' this.cancelEdit}}>{{t
-              'document-information-modal.cancel'
-            }}</AuButton>
+          <AuButton
+            @loading={{this.saveChanges.isRunning}}
+            {{on 'click' (perform this.saveChanges)}}
+          >{{t 'document-information-modal.save'}}</AuButton>
+          <AuButton
+            @skin='secondary'
+            @disabled={{this.saveChanges.isRunning}}
+            {{on 'click' this.cancelEdit}}
+          >{{t 'document-information-modal.cancel'}}</AuButton>
         </Modal.Footer>
       </AuModal>
     </div>
