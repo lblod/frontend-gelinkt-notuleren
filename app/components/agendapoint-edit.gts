@@ -292,6 +292,16 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         this.controller.markClean();
       }
     }
+    // Validate document
+    const pluginState = documentValidationPluginKey.getState(
+      this.controller.mainEditorView.state,
+    );
+    if (!pluginState) return;
+    const { validationCallback } = pluginState;
+    await validationCallback(
+      this.controller.mainEditorView,
+      this.controller.htmlContent,
+    );
   });
 
   confirmMultipleEdit = task(async () => {
