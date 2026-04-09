@@ -23,7 +23,6 @@ import {
 import { trackedFunction } from 'reactiveweb/function';
 import { setBesluitType } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-type-plugin/utils/set-besluit-type';
 import BesluitTypeForm from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-type-plugin/besluit-type-form';
-import didUpdate from '@ember/render-modifiers/modifiers/did-update';
 import {
   type BesluitTopic,
   fetchBesluitTopics,
@@ -222,13 +221,6 @@ export default class DocumentInformationModal extends Component<Sig> {
     }
     return getOutgoingTripleList(attrs, TOPIC_PREDICATE_DEPRECATED);
   }
-  matchTopicPredicate = (predicate: string): boolean => {
-    const newMatch = TOPIC_PREDICATE.matches(predicate);
-    if (newMatch) {
-      return newMatch;
-    }
-    return TOPIC_PREDICATE_DEPRECATED.matches(predicate);
-  };
 
   upsertBesluitTopic = (selected: BesluitTopic[]) => {
     this.besluitTopicsSelected = selected;
