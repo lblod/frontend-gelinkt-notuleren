@@ -302,7 +302,6 @@ export default class DocumentInformationModal extends Component<Sig> {
     const linkedDecisionUri = extractLinkedDecisionUris(
       this.controller.mainEditorState,
     )[0];
-    console.log(linkedDecisionUri);
     if (linkedDecisionUri) {
       this.linkedDecisionUri = linkedDecisionUri;
     }
