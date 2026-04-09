@@ -128,7 +128,7 @@ document-creator:
   title-field: Titel document
   template: Sjabloon
   back-to-selector: terug naar sjabloon kiezen
-  linked-decision: Gekoppelde beslissing
+  linked-decision: Geocoordineerde versie
   linked-decision-helptext: Hier kan u aanduiden dat het een nieuwe versie van een bestaand reglement of andere publicatie betreft. Dit wordt dan als onzichtbare data in het document opgeslaan, zodat de publicatieomgeving en andere systemen hiermee rekening kunnen houden
   selector:
     filters: Filters
@@ -967,7 +967,7 @@ ar-importer:
     warning-un-included-signal-concept: Verkeersteken {signal} is niet opgenomen in de mobiliteitsmaatregel {measure}, maar wordt wel gebruikt in dit ontwerp
 
 document-information-modal:
-  button-title: Document Informatie
+  button-title: DocumentInformatie bewerken
   document-title: Titel document
   save: Opslaan
   cancel: Annuleren
