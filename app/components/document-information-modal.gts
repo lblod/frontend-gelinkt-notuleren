@@ -87,7 +87,6 @@ export default class DocumentInformationModal extends Component<Sig> {
       await this.args.editorDocument.save();
       this.documentTitleModified = undefined;
     }
-
     this.args.closeModal();
   });
 
@@ -113,15 +112,18 @@ export default class DocumentInformationModal extends Component<Sig> {
   get controller() {
     return this.args.controller;
   }
+
   get currentBesluitRange() {
     return getCurrentBesluitRange(this.controller);
   }
+
   get selectedType() {
     return (
       this.selectedTypeInstance &&
       mostSpecificBesluitType(this.selectedTypeInstance)
     );
   }
+
   types = trackedFunction(this, async () => {
     const types = await fetchBesluitTypes(
       this.args.classificatieUri,
@@ -129,9 +131,11 @@ export default class DocumentInformationModal extends Component<Sig> {
     );
     return types;
   });
+
   get typesSynced() {
     return this.types.value || [];
   }
+
   updateBesluitTypes = () => {
     if (!this.types.isFinished || !this.currentBesluitRange) {
       return;
@@ -161,12 +165,9 @@ export default class DocumentInformationModal extends Component<Sig> {
       console.warn('Request for besluit topics failed');
       return;
     }
-
     const besluitTopics = this.findBesluitTopicsByUris(this.currentTopicUris);
-
     if (this.currentTopicUris && besluitTopics) {
       this.previousBesluitTopics = this.currentTopicUris;
-
       this.besluitTopicsSelected = besluitTopics;
     } else {
       this.besluitTopicsSelected = undefined;
@@ -177,7 +178,6 @@ export default class DocumentInformationModal extends Component<Sig> {
     const result = await fetchBesluitTopics({
       config: { endpoint: this.args.besluitTopicEndpoint },
     });
-
     return result.topics;
   });
 
@@ -315,7 +315,6 @@ export default class DocumentInformationModal extends Component<Sig> {
     ) {
       this.updateBesluitTypes();
     }
-
     if (
       this.args.controller.mainEditorState !== this.lastEditorState ||
       this.lastTopicsValue !== this.topics.value

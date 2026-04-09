@@ -41,8 +41,6 @@ import TemplateCommentEdit from '@lblod/ember-rdfa-editor-lblod-plugins/componen
 import LocationInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/location-plugin/insert';
 import WorshipInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/worship-plugin/insert';
 import LmbInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lmb-plugin/insert';
-import BesluitTypeToolbarDropdown from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-type-plugin/toolbar-dropdown';
-import BesluitTopicToolbarDropdown from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-topic-plugin/besluit-topic-toolbar-dropdown';
 import RoadsignRegulationCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/roadsign-regulation-plugin/roadsign-regulation-card';
 import LpdcInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lpdc-plugin/lpdc-insert';
 import MandateeTableInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/mandatee-table-plugin/insert';
@@ -392,6 +390,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
           <AuDropdown @title={{t 'utils.file-options'}} @alignment='right'>
             {{! template-lint-disable require-context-role }}
             <AuButton
+              {{on 'click' this.openDocumentInformationModal}}
+              @skin='link'
+              role='menuitem'
+            >
+              <AuIcon @icon='tag' @alignment='left' />
+              {{t 'document-information-modal.button-title'}}
+            </AuButton>
+            <AuButton
               {{on 'click' (perform this.copyAgendapunt)}}
               @skin='link'
               role='menuitem'
@@ -408,14 +414,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               @document={{this.editorDocument}}
               @forPublish={{true}}
             />
-            <AuButton
-              {{on 'click' this.openDocumentInformationModal}}
-              @skin='link'
-              role='menuitem'
-            >
-              <AuIcon @icon='export' @alignment='left' />
-              {{t 'document-information-modal.button-title'}}
-            </AuButton>
             {{#if @returnToMeeting}}
               <AuLink @route='meetings.edit.agendapoint.copy' role='menuitem'>
                 <AuIcon @icon='copy' @alignment='left' />
@@ -523,20 +521,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
           @plugins={{this.plugins}}
           @shouldEditRdfa={{false}}
         >
-          <:toolbar as |container|>
-            <div class='au-u-margin-right-small'>
-              <BesluitTypeToolbarDropdown
-                @controller={{container.controller}}
-                @options={{this.config.besluitType}}
-              />
-            </div>
-            <div class='au-u-margin-right-small'>
-              <BesluitTopicToolbarDropdown
-                @controller={{container.controller}}
-                @options={{this.config.besluitTopic}}
-              />
-            </div>
-          </:toolbar>
           <:sidebarCollapsible as |container|>
             <InsertArticleComponent
               @controller={{container.controller}}
