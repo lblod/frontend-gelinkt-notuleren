@@ -128,7 +128,7 @@ document-creator:
   title-field: Titel document
   template: Sjabloon
   back-to-selector: terug naar sjabloon kiezen
-  linked-decision: Geocoordineerde versie
+  linked-decision: Gecoördineerde versie
   linked-decision-helptext: Hier kan u aanduiden dat het een nieuwe versie van een bestaand reglement of andere publicatie betreft. Dit wordt dan als onzichtbare data in het document opgeslaan, zodat de publicatieomgeving en andere systemen hiermee rekening kunnen houden
   selector:
     filters: Filters
