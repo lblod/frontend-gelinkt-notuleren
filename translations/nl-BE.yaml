@@ -969,5 +969,6 @@ ar-importer:
 document-information-modal:
   button-title: DocumentInformatie bewerken
   document-title: Titel document
+  decision-topic: Besluitondwerp
   save: Opslaan
   cancel: Annuleren

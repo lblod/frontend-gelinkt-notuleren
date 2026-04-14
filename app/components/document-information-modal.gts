@@ -44,6 +44,7 @@ import setLinkedDecision, {
 import { modifier } from 'ember-modifier';
 import { task } from 'ember-concurrency';
 import perform from 'ember-concurrency/helpers/perform';
+import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 
 type Sig = {
   Args: {
@@ -352,11 +353,18 @@ export default class DocumentInformationModal extends Component<Sig> {
             @selectedType={{this.selectedTypeInstance}}
             @setType={{this.setType}}
           />
-          <BesluitTopicSelect
-            @besluitTopics={{this.topicsSynced}}
-            @onchange={{this.upsertBesluitTopic}}
-            @selected={{this.besluitTopicsSelected}}
-          />
+          <AuLabel>
+            {{t 'document-information-modal.decision-topic'}}
+          </AuLabel>
+          {{#if this.topics.value}}
+            <BesluitTopicSelect
+              @besluitTopics={{this.topicsSynced}}
+              @onchange={{this.upsertBesluitTopic}}
+              @selected={{this.besluitTopicsSelected}}
+            />
+          {{else}}
+            <AuLoader />
+          {{/if}}
           {{#if this.isLinkedDecisionType}}
             <LinkedDecisionSelect
               @linkedDecisionUri={{this.linkedDecisionUri}}

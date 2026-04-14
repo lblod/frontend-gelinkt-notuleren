@@ -21,6 +21,7 @@ import {
 } from 'frontend-gelinkt-notuleren/utils/sparql';
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 
 interface Sig {
   Args: {
@@ -110,20 +111,24 @@ export default class LinkedDecisionSelect extends Component<Sig> {
       {{t 'document-creator.linked-decision'}}
       <AuPill @size='small' @skin='border'>{{t 'utils.optional'}}</AuPill>
     </AuLabel>
-    <PowerSelect
-      id='linked-decision'
-      @renderInPlace={{true}}
-      @searchEnabled={{true}}
-      @searchMessage={{t 'besluit-type-plugin.search-message'}}
-      @noMatchesMessage={{t 'besluit-type-plugin.no-matches-message'}}
-      @search={{this.searchLinkedDecision}}
-      @options={{this.publishedBesluits}}
-      @selected={{this.selectedPublishedBesluit}}
-      @onChange={{@updateLinkedDecision}}
-      as |publishedBesluit|
-    >
-      {{publishedBesluit.title}}
-    </PowerSelect>
+    {{#if this.firstPublishedBesluitValue.isRunning}}
+      <AuLoader />
+    {{else}}
+      <PowerSelect
+        id='linked-decision'
+        @renderInPlace={{true}}
+        @searchEnabled={{true}}
+        @searchMessage={{t 'besluit-type-plugin.search-message'}}
+        @noMatchesMessage={{t 'besluit-type-plugin.no-matches-message'}}
+        @search={{this.searchLinkedDecision}}
+        @options={{this.publishedBesluits}}
+        @selected={{this.selectedPublishedBesluit}}
+        @onChange={{@updateLinkedDecision}}
+        as |publishedBesluit|
+      >
+        {{publishedBesluit.title}}
+      </PowerSelect>
+    {{/if}}
     <p class='au-u-muted au-u-margin-tiny au-u-margin-bottom-small'>
       {{t 'document-creator.linked-decision-helptext'}}
     </p>

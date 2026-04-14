@@ -962,5 +962,6 @@ ar-importer:
 document-information-modal:
   button-title: Document information
   document-title: Document title
+  decision-topic: Decision topic
   save: Save
   cancel: Cancel
