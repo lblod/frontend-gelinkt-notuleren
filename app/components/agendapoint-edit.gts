@@ -171,17 +171,22 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
       doNotClean: true,
       startsDirty: false,
     });
-    // Validate document
-    const pluginState = documentValidationPluginKey.getState(
-      this.controller.mainEditorView.state,
-    );
-    if (!pluginState) return;
-    const { validationCallback } = pluginState;
-    await validationCallback(
-      this.controller.mainEditorView,
-      this.controller.htmlContent,
-    );
+    await this.validateDocument();
   }
+
+  validateDocument = async () => {
+    if (this.controller) {
+      const pluginState = documentValidationPluginKey.getState(
+        this.controller.mainEditorView.state,
+      );
+      if (!pluginState) return;
+      const { validationCallback } = pluginState;
+      await validationCallback(
+        this.controller.mainEditorView,
+        this.controller.htmlContent,
+      );
+    }
+  };
 
   copyAgendapunt = task(async () => {
     const response = await fetch(
@@ -292,6 +297,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         this.controller.markClean();
       }
     }
+    await this.validateDocument();
   });
 
   confirmMultipleEdit = task(async () => {
