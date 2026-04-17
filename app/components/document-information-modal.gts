@@ -280,7 +280,7 @@ export default class DocumentInformationModal extends Component<Sig> {
   updateDocumentLinkedDecision() {
     if (this.linkedDecisionUri) {
       this.controller.doCommand((state, dispatch) => {
-        if (!this.selectedTypeInstance || !dispatch) {
+        if (!dispatch) {
           return false;
         }
         const { result, transaction } = setLinkedDecision(
@@ -329,6 +329,10 @@ export default class DocumentInformationModal extends Component<Sig> {
     this.lastTopicsValue = this.topics.value;
   });
 
+  get isMissingRequiredFields() {
+    return !this.currentDocumentTitle || !this.selectedTypeInstance;
+  }
+
   <template>
     <div {{this.updateDataModifier}}>
       <AuModal
@@ -348,11 +352,18 @@ export default class DocumentInformationModal extends Component<Sig> {
             @width='block'
             {{on 'input' this.updateEditorDocumentTitle}}
           />
-          <BesluitTypeForm
-            @types={{this.typesSynced}}
-            @selectedType={{this.selectedTypeInstance}}
-            @setType={{this.setType}}
-          />
+          {{#if this.types.value}}
+            <BesluitTypeForm
+              @types={{this.typesSynced}}
+              @selectedType={{this.selectedTypeInstance}}
+              @setType={{this.setType}}
+              @required={{true}}
+            />
+          {{else}}
+            <AuLoader @hideMessage={{true}}>{{t
+                'application.loading'
+              }}</AuLoader>
+          {{/if}}
           <AuLabel>
             {{t 'document-information-modal.decision-topic'}}
           </AuLabel>
@@ -363,7 +374,9 @@ export default class DocumentInformationModal extends Component<Sig> {
               @selected={{this.besluitTopicsSelected}}
             />
           {{else}}
-            <AuLoader />
+            <AuLoader @hideMessage={{true}}>{{t
+                'application.loading'
+              }}</AuLoader>
           {{/if}}
           {{#if this.isLinkedDecisionType}}
             <LinkedDecisionSelect
@@ -375,7 +388,9 @@ export default class DocumentInformationModal extends Component<Sig> {
         <Modal.Footer>
           <AuButton
             @loading={{this.saveChanges.isRunning}}
+            @loadingMessage={{t 'application.loading'}}
             {{on 'click' (perform this.saveChanges)}}
+            @disabled={{this.isMissingRequiredFields}}
           >{{t 'document-information-modal.save'}}</AuButton>
           <AuButton
             @skin='secondary'
