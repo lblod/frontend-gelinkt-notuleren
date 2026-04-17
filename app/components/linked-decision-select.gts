@@ -1,5 +1,4 @@
 import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
 import t from 'ember-intl/helpers/t';
 import AuLabel from '@appuniversum/ember-appuniversum/components/au-label';
 
@@ -22,6 +21,7 @@ import {
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
+import { cached } from '@glimmer/tracking';
 
 interface Sig {
   Args: {
@@ -35,10 +35,14 @@ interface Sig {
 export default class LinkedDecisionSelect extends Component<Sig> {
   @service declare currentSession: CurrentSessionService;
   @service declare store: Store;
-  @tracked firstPublishedBesluitValue;
   constructor(owner: unknown, args: Sig['Args']) {
     super(owner, args);
-    this.firstPublishedBesluitValue = this.publishedBesluitsRequest.perform();
+  }
+
+  //We need to keep a cached copy of the task run without any searches so the powerselect can always return to this value
+  @cached
+  get firstPublishedBesluitValue() {
+    return this.publishedBesluitsRequest.perform();
   }
 
   publishedBesluitsRequest = restartableTask(async (searchString?: string) => {
@@ -94,6 +98,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
   get publishedBesluits() {
     return this.firstPublishedBesluitValue?.value || [];
   }
+
   get selectedPublishedBesluit() {
     if (!this.args.linkedDecisionUri) return;
     return this.publishedBesluits.find(
@@ -112,7 +117,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
       <AuPill @size='small' @skin='border'>{{t 'utils.optional'}}</AuPill>
     </AuLabel>
     {{#if this.firstPublishedBesluitValue.isRunning}}
-      <AuLoader />
+      <AuLoader @hideMessage={{true}}>{{t 'application.loading'}}</AuLoader>
     {{else}}
       <PowerSelect
         id='linked-decision'

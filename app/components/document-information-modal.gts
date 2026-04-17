@@ -42,7 +42,7 @@ import setLinkedDecision, {
   extractLinkedDecisionUris,
 } from 'frontend-gelinkt-notuleren/utils/setLinkedDecision';
 import { modifier } from 'ember-modifier';
-import { task } from 'ember-concurrency';
+import { task, type TaskForAsyncTaskFunction } from 'ember-concurrency';
 import perform from 'ember-concurrency/helpers/perform';
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 
@@ -54,6 +54,7 @@ type Sig = {
     classificatieUri: string;
     besluitTypeEndpoint: string;
     besluitTopicEndpoint: string;
+    saveTask: TaskForAsyncTaskFunction<unknown, () => Promise<void>>;
   };
 };
 
@@ -88,6 +89,7 @@ export default class DocumentInformationModal extends Component<Sig> {
       await this.args.editorDocument.save();
       this.documentTitleModified = undefined;
     }
+    await this.args.saveTask.perform();
     this.args.closeModal();
   });
 

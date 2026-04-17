@@ -462,6 +462,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
             @classificatieUri={{this.config.besluitType.classificatieUri}}
             @besluitTypeEndpoint={{this.config.besluitType.endpoint}}
             @besluitTopicEndpoint={{this.config.besluitTopic.endpoint}}
+            @saveTask={{this.saveTask}}
           />
         {{/if}}
       {{/if}}
