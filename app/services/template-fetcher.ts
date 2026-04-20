@@ -8,7 +8,7 @@ import {
   sparqlEscapeString,
   sparqlEscapeUri,
   type BindingObject,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
+} from 'frontend-gelinkt-notuleren/utils/sparql';
 import { type Environment } from 'frontend-gelinkt-notuleren/config/environment';
 import type SessionService from './gn-session';
 import type Store from './gn-store';
@@ -255,11 +255,13 @@ export default class TemplateFetcher extends Service {
           endpoint: sparqlEndpoint,
           query: sparqlQuery,
           abortSignal,
+          useGet: true,
         }),
         executeCountQuery({
           endpoint: sparqlEndpoint,
           query: countQuery,
           abortSignal,
+          useGet: true,
         }),
       ]);
       const bindings = response.results.bindings;

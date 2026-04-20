@@ -5,7 +5,7 @@ import {
   RDF,
 } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 import { hasOutgoingNamedNodeTriple } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/namespace';
-import { executeQuery } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/sparql-helpers';
+import { executeQuery } from 'frontend-gelinkt-notuleren/utils/sparql';
 import { SayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 import { addPropertyToNode } from '@lblod/ember-rdfa-editor/utils/rdfa-utils';
 import { transactionCombinator } from '@lblod/ember-rdfa-editor/utils/transaction-utils';
@@ -106,6 +106,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -198,6 +199,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -307,6 +309,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -402,6 +405,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         const kandidatenlijstQueryResult = await executeQuery({
           query: splitKandidatenlijstQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
         const bindings = kandidatenlijstQueryResult.results.bindings;
 
@@ -521,6 +525,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -616,6 +621,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -697,6 +703,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -796,6 +803,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -928,6 +936,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -1022,6 +1031,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -1118,6 +1128,7 @@ export const mandateeTableConfigIVGR = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -1178,6 +1189,7 @@ async function fetchFractieLeden(fractieUri) {
   const result = await executeQuery({
     query: sparqlQuery,
     endpoint: '/raw-sparql',
+    useGet: true,
   });
   return result.results.bindings.map(bindingToObject) ?? [];
 }
@@ -1256,6 +1268,7 @@ export const mandateeTableConfigRMW = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -1357,6 +1370,7 @@ export const mandateeTableConfigRMW = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -1461,6 +1475,7 @@ export const mandateeTableConfigRMW = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -1554,6 +1569,7 @@ export const mandateeTableConfigRMW = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
@@ -1642,6 +1658,7 @@ export const mandateeTableConfigRMW = (meeting) => {
         return executeQuery({
           query: sparqlQuery,
           endpoint: '/raw-sparql',
+          useGet: true,
         });
       },
       updateContent: (pos, queryResult) => {
