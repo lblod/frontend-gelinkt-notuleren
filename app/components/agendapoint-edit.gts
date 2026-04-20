@@ -41,8 +41,6 @@ import TemplateCommentEdit from '@lblod/ember-rdfa-editor-lblod-plugins/componen
 import LocationInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/location-plugin/insert';
 import WorshipInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/worship-plugin/insert';
 import LmbInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lmb-plugin/insert';
-import BesluitTypeToolbarDropdown from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-type-plugin/toolbar-dropdown';
-import BesluitTopicToolbarDropdown from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-topic-plugin/besluit-topic-toolbar-dropdown';
 import RoadsignRegulationCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/roadsign-regulation-plugin/roadsign-regulation-card';
 import LpdcInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lpdc-plugin/lpdc-insert';
 import MandateeTableInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/mandatee-table-plugin/insert';
@@ -69,6 +67,7 @@ import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-rou
 import ArImporterSidebarWidget from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/sidebar-widget';
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
+import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/document-information-modal';
 
 interface AgendapointEditSig {
   Args: {
@@ -92,6 +91,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
   @tracked _editorDocument?: EditorDocumentModel | null;
   @tracked controller?: SayController;
   @tracked showMultipleEditWarning = false;
+  @tracked displayDocumentInformationModal = false;
   cleanedHtml?: string;
   title?: string;
 
@@ -367,6 +367,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     return parsedHtml.body.innerHTML;
   }
 
+  openDocumentInformationModal = () => {
+    this.displayDocumentInformationModal = true;
+  };
+
+  closeDocumentInformationModal = () => {
+    this.displayDocumentInformationModal = false;
+  };
+
   <template>
     {{#if this.editorDocument}}
       <AppChrome
@@ -387,6 +395,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
           />
           <AuDropdown @title={{t 'utils.file-options'}} @alignment='right'>
             {{! template-lint-disable require-context-role }}
+            <AuButton
+              {{on 'click' this.openDocumentInformationModal}}
+              @skin='link'
+              role='menuitem'
+            >
+              <AuIcon @icon='tag' @alignment='left' />
+              {{t 'document-information-modal.button-title'}}
+            </AuButton>
             <AuButton
               {{on 'click' (perform this.copyAgendapunt)}}
               @skin='link'
@@ -436,6 +452,21 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
       </AppChrome>
     {{/if}}
 
+    {{#if this.displayDocumentInformationModal}}
+      {{#if this.controller}}
+        {{#if this.editorDocument}}
+          <DocumentInformationModal
+            @controller={{this.controller}}
+            @closeModal={{this.closeDocumentInformationModal}}
+            @editorDocument={{this.editorDocument}}
+            @classificatieUri={{this.config.besluitType.classificatieUri}}
+            @besluitTypeEndpoint={{this.config.besluitType.endpoint}}
+            @besluitTopicEndpoint={{this.config.besluitTopic.endpoint}}
+            @saveTask={{this.saveTask}}
+          />
+        {{/if}}
+      {{/if}}
+    {{/if}}
     {{#if this.displayDeleteModal}}
       <AuModal
         @title={{t 'delete-modal.title'}}
@@ -497,20 +528,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
           @plugins={{this.plugins}}
           @shouldEditRdfa={{false}}
         >
-          <:toolbar as |container|>
-            <div class='au-u-margin-right-small'>
-              <BesluitTypeToolbarDropdown
-                @controller={{container.controller}}
-                @options={{this.config.besluitType}}
-              />
-            </div>
-            <div class='au-u-margin-right-small'>
-              <BesluitTopicToolbarDropdown
-                @controller={{container.controller}}
-                @options={{this.config.besluitTopic}}
-              />
-            </div>
-          </:toolbar>
           <:sidebarCollapsible as |container|>
             <InsertArticleComponent
               @controller={{container.controller}}
