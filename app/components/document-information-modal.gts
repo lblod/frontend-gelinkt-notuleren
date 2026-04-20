@@ -338,7 +338,7 @@ export default class DocumentInformationModal extends Component<Sig> {
   <template>
     <div {{this.updateDataModifier}}>
       <AuModal
-        @title='Edit document information'
+        @title={{t 'document-information-modal.modal-title'}}
         @overflow={{true}}
         @modalOpen={{true}}
         @closeModal={{@closeModal}}
