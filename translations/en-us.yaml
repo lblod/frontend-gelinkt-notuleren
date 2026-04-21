@@ -961,6 +961,7 @@ ar-importer:
     warning-un-included-signal-concept: Signal {signal} is not included in the measure {measure} but it is used in this design
 document-information-modal:
   button-title: Document information
+  modal-title: Edit document information
   document-title: Document title
   decision-topic: Decision topic
   save: Save
