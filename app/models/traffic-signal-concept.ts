@@ -6,5 +6,6 @@ export default class TrafficSignalConcept extends Model {
 
   @attr('string') declare uri: string;
   @attr('string') declare code: string;
+  @attr('string') declare regulatoryNotation?: string;
   @attr('string') declare type: string;
 }
