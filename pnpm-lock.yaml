@@ -147,8 +147,8 @@ importers:
         specifier: 13.4.0
         version: 13.4.0(e65ae4112082f459cd75a47e331effdd)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 35.2.0-dev.49633bbdf17d826eec1baba00b44dd0e5fe19797
-        version: 35.2.0-dev.49633bbdf17d826eec1baba00b44dd0e5fe19797(fab5f5a238bcd038cf03bb787ce03d68)
+        specifier: 35.3.0
+        version: 35.3.0(fab5f5a238bcd038cf03bb787ce03d68)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1911,8 +1911,8 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.2.0-dev.49633bbdf17d826eec1baba00b44dd0e5fe19797':
-    resolution: {integrity: sha512-TQ/aFdZ9d3i0n9z5TUTa1rg3X0u72M5IJ7owjvE00uu0lpJRPhXdlcf9fURV0PuyjgNsqFx4j2UoxxLT1BWhtQ==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.3.0':
+    resolution: {integrity: sha512-cP1TfQGaLtu4gZ4cEV90k35Vi+EEom5sIKTNPVg1ER0KZmZQEI/vBzQDXn4xXn5h+XdOa+4UI5yMik1BkHRsqg==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
@@ -12463,7 +12463,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.2.0-dev.49633bbdf17d826eec1baba00b44dd0e5fe19797(fab5f5a238bcd038cf03bb787ce03d68)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.3.0(fab5f5a238bcd038cf03bb787ce03d68)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.0(@babel/core@7.27.7))(webpack@5.98.0)
       '@babel/core': 7.27.7
