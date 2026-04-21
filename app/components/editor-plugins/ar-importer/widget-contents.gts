@@ -18,6 +18,7 @@ import {
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
 import type { GenerateImportResult } from 'frontend-gelinkt-notuleren/services/ar-importer';
+import { TRAFFIC_SIGNAL_EXISTING_STATUSES } from 'frontend-gelinkt-notuleren/config/constants';
 
 const FILTER_TIMEOUT_MS = 300;
 
@@ -162,6 +163,16 @@ export default class ArWidgetContents extends Component<Sig> {
     this.insertingDesign = null;
   };
 
+  hasOnlyExistingSigns = async (arDesign: ArDesign) => {
+    return (await arDesign.measureDesigns).every((measureDesign) =>
+      measureDesign.trafficSignals.every(
+        (signal) =>
+          signal.designStatus &&
+          TRAFFIC_SIGNAL_EXISTING_STATUSES.includes(signal.designStatus),
+      ),
+    );
+  };
+
   <template>
     {{#if this.insertWarnings}}
       <ArPreview
@@ -177,6 +188,7 @@ export default class ArWidgetContents extends Component<Sig> {
         @onReturnToOverview={{this.returnToOverview}}
         @onInsertAr={{this.insertAr.perform}}
         @insertLoading={{this.insertAr.isRunning}}
+        @hasOnlyExistingSigns={{this.hasOnlyExistingSigns}}
       />
     {{else}}
       <ArDesignOverview
