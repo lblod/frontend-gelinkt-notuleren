@@ -13,8 +13,6 @@ import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
-import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
-import { and } from 'ember-truth-helpers';
 
 type ArPreviewSignature = {
   Args: {
@@ -22,7 +20,6 @@ type ArPreviewSignature = {
     onInsertAr: (arDesign: ArDesign, skipWarnings?: boolean) => void;
     insertLoading?: boolean;
     onReturnToOverview: () => unknown;
-    hasOnlyExistingSigns: (arDesign: ArDesign) => Promise<boolean>;
   };
   Element: HTMLDivElement;
 };
@@ -43,10 +40,6 @@ export default class ArPreview extends Component<ArPreviewSignature> {
     this.args.onReturnToOverview();
   };
 
-  onlyExisting = trackedFunction(this, () =>
-    this.args.hasOnlyExistingSigns(this.args.arDesign),
-  );
-
   <template>
     <div class='ar-importer-preview' ...attributes>
       <AuToolbar @size='medium' as |Group|>
@@ -58,11 +51,6 @@ export default class ArPreview extends Component<ArPreviewSignature> {
           >{{t 'ar-importer.preview.return-to-overview'}}</AuButton>
         </Group>
         <Group>
-          {{#if (and this.onlyExisting.isResolved this.onlyExisting.value)}}
-            <AuPill @size='small'>
-              {{t 'ar-importer.preview.only-existing'}}
-            </AuPill>
-          {{/if}}
           <AuButton
             @icon={{PlusIcon}}
             @loading={{@insertLoading}}
