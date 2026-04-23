@@ -35,7 +35,12 @@ export default class InboxRegulatoryStatementsRoute extends Route {
     if (params.filter) {
       options['filter[current-version][title]'] = params.filter;
     }
-    return this.store.query('document-container', options);
+    const containers = await this.store.query('document-container', options);
+    // If the saving process is interupted, it's possible to have no `currentVersion`. We don't have
+    // a good way to handle this, so just hide them from the list to avoid crashes.
+    return containers.filter((container) =>
+      container.currentVersion.get('status'),
+    );
   }
   @action
   loading(transition) {
