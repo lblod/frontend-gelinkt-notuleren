@@ -431,7 +431,8 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
                 {{t 'agendapoint.copy-parts-link'}}
               </AuLink>
             {{/if}}
-            {{#if this.isNotAllowedToTrash.isResolved}}
+            {{! This has to be reversed as the result is a bool and reactiveweb incorrectly returns 'false' for 'isResolved' if the result is 'false' }}
+            {{#unless this.isNotAllowedToTrash.isPending}}
               <AuButton
                 {{on 'click' this.toggleDeleteModal}}
                 @skin='link'
@@ -442,7 +443,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
                 <AuIcon @icon='bin' @alignment='left' />
                 {{t 'utils.delete'}}
               </AuButton>
-            {{/if}}
+            {{/unless}}
           </AuDropdown>
           <AuButton
             {{on 'click' (perform this.saveTask)}}
