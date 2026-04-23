@@ -248,13 +248,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         await agendaItem.save();
       }
 
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          title,
-          html,
-          this.documentContainer,
-          this.editorDocument ?? undefined,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        title,
+        html,
+        this.documentContainer,
+        this.editorDocument ?? undefined,
+      );
 
       this._editorDocument = editorDocument;
     }
@@ -285,13 +284,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         this.cleanedHtml = cleanedHtml;
         this.title = this.editorDocument.title;
       } else {
-        const editorDocument =
-          await this.documentService.createEditorDocument.perform(
-            this.editorDocument.title,
-            cleanedHtml,
-            this.documentContainer,
-            currentVersion,
-          );
+        const editorDocument = await this.documentService.createEditorDocument(
+          this.editorDocument.title,
+          cleanedHtml,
+          this.documentContainer,
+          currentVersion,
+        );
         this._editorDocument = editorDocument;
         this.controller.setHtmlContent(cleanedHtml);
         this.controller.markClean();
@@ -317,13 +315,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
       await this.documentContainer.currentVersion.reload({});
       const currentVersion = (await this.documentContainer
         .currentVersion) as EditorDocumentModel;
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          this.title as string,
-          this.cleanedHtml,
-          this.documentContainer,
-          currentVersion,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        this.title as string,
+        this.cleanedHtml,
+        this.documentContainer,
+        currentVersion,
+      );
       this._editorDocument = editorDocument;
       this.controller.setHtmlContent(this.cleanedHtml);
       this.controller.markClean();
@@ -335,15 +332,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
   closeMultipleEditWarning = task(async () => {
     const currentVersion = (await this.documentContainer
       .currentVersion) as EditorDocumentModel;
-    const inProgDocument =
-      await this.documentService.createEditorDocument.perform(
-        this.title as string,
-        this.cleanedHtml,
-        this.documentContainer,
-        currentVersion,
-        // Create a new document version but don't actually send it to the server
-        true,
-      );
+    const inProgDocument = await this.documentService.createEditorDocument(
+      this.title as string,
+      this.cleanedHtml,
+      this.documentContainer,
+      currentVersion,
+      // Create a new document version but don't actually send it to the server
+      true,
+    );
     this._editorDocument = inProgDocument;
     this.showMultipleEditWarning = false;
   });

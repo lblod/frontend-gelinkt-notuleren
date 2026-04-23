@@ -297,12 +297,11 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
 
     container.set('publisher', this.currentSession.group);
 
-    const editorDocument =
-      await this.documentService.createEditorDocument.perform(
-        this.intl.t('custom-voting.document-title'),
-        '',
-        container,
-      );
+    const editorDocument = await this.documentService.createEditorDocument(
+      this.intl.t('custom-voting.document-title'),
+      '',
+      container,
+    );
     container.set('currentVersion', editorDocument);
 
     await container.save();

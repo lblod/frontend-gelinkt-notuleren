@@ -476,20 +476,16 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
         this.html = html;
         this.title = this.editorDocument.title;
       } else {
-        const editorDocument =
-          await this.documentService.createEditorDocument.perform(
-            this.editorDocument.title,
-            html,
-            this.documentContainer,
-            this.editorDocument,
-          );
+        const editorDocument = await this.documentService.createEditorDocument(
+          this.editorDocument.title,
+          html,
+          this.documentContainer,
+          this.editorDocument,
+        );
         this._editorDocument = editorDocument;
         this.controller.setHtmlContent(html);
         this.controller.markClean();
 
-        const documentContainer = this.documentContainer;
-        documentContainer.set('currentVersion', editorDocument);
-        await documentContainer.save();
         return this.fetchRevisions.perform();
       }
     }
@@ -501,20 +497,16 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       const currentVersion = (await this.documentContainer
         .currentVersion) as EditorDocumentModel;
 
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          this.title,
-          this.html,
-          this.documentContainer,
-          currentVersion,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        this.title,
+        this.html,
+        this.documentContainer,
+        currentVersion,
+      );
       this._editorDocument = editorDocument;
       this.controller.setHtmlContent(this.html);
       this.controller.markClean();
 
-      const documentContainer = this.documentContainer;
-      documentContainer.set('currentVersion', editorDocument);
-      await documentContainer.save();
       this.showMultipleEditWarning = false;
       return this.fetchRevisions.perform();
     }
@@ -530,13 +522,12 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       this.html = html as string;
       this.title = title;
     } else {
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          title,
-          html ?? undefined,
-          this.documentContainer,
-          this.editorDocument,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        title,
+        html ?? undefined,
+        this.documentContainer,
+        this.editorDocument,
+      );
       this._editorDocument = editorDocument;
     }
   });

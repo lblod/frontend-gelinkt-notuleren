@@ -123,12 +123,11 @@ export default class DocumentCreatorComponent extends Component {
         this.args.folderId,
       );
       container.publisher = this.currentSession.group;
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          this.title,
-          generatedTemplate,
-          container,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        this.title,
+        generatedTemplate,
+        container,
+      );
       container.currentVersion = editorDocument;
       await container.save();
       return container;

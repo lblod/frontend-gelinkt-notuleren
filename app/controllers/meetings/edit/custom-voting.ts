@@ -110,13 +110,12 @@ export default class MeetingsEditManualVotingController extends Controller {
       if (this.onTitleUpdate.isRunning) {
         await this.onTitleUpdate.lastRunning;
       }
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          this.editorDocument.title ?? '',
-          html,
-          documentContainer,
-          this.editorDocument,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        this.editorDocument.title ?? '',
+        html,
+        documentContainer,
+        this.editorDocument,
+      );
       this._editorDocument = editorDocument;
       this.editor?.setHtmlContent(html);
       this.editor?.markClean();
@@ -174,13 +173,12 @@ export default class MeetingsEditManualVotingController extends Controller {
     const documentContainer = await this.documentContainer;
 
     if (documentContainer && this.editorDocument) {
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          title,
-          html ?? '',
-          documentContainer,
-          this.editorDocument,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        title,
+        html ?? '',
+        documentContainer,
+        this.editorDocument,
+      );
 
       this._editorDocument = editorDocument;
     }

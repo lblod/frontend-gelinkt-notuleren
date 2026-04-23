@@ -215,7 +215,7 @@ export default class InaugurationMeetingSynchronizationComponent extends Compone
     const doc = serializer.serializeNode(syncedState.doc, undefined);
     div.appendChild(doc);
     const syncedHTML = div.innerHTML;
-    await this.documentService.createEditorDocument.perform(
+    await this.documentService.createEditorDocument(
       currentVersion.title,
       syncedHTML,
       container,
