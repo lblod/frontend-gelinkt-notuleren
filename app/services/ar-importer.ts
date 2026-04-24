@@ -54,7 +54,7 @@ function convertVariableInstances(variableInstances: VariableInstance[]) {
   );
 }
 
-async function convertSignals(signals: TrafficSignal[]) {
+function convertSignals(signals: TrafficSignal[]) {
   const concepts = signals.map((s) => s.trafficSignalConcept);
   const conceptssWithoutZSign = concepts.filter(
     (concept) => concept.code !== 'Z',
@@ -66,23 +66,15 @@ async function convertSignals(signals: TrafficSignal[]) {
     }
   }
 
-  const conceptsWithCategories = await Promise.all(
-    dedupedConcepts.map(async (trafficSignalConcept) => {
-      const categories = await queryRoadSignCategories(
-        ENV['mowRegistryEndpoint'],
-        {
-          roadSignConceptUri: trafficSignalConcept.uri,
-        },
-      );
-      return {
-        code: trafficSignalConcept.code,
-        uri: trafficSignalConcept.uri,
-        type: trafficSignalConcept.type,
-        image: '',
-        categories,
-      };
-    }),
-  );
+  const conceptsWithCategories = dedupedConcepts.map((trafficSignalConcept) => {
+    return {
+      code: trafficSignalConcept.code,
+      uri: trafficSignalConcept.uri,
+      type: trafficSignalConcept.type,
+      image: '',
+      categories: trafficSignalConcept.categories,
+    };
+  });
 
   return TrafficSignalConceptSchema.array().parse(conceptsWithCategories);
 }
@@ -130,68 +122,66 @@ export default class ArImporterService extends Service {
     try {
       const warnings: string[] = [];
       const measureDesigns = await design.measureDesigns;
-      const monads = await Promise.all(
-        measureDesigns.map(async (measureDesign) => {
-          const {
-            measureConcept,
-            trafficSignals,
-            variableInstances,
-            unusedSignalConcepts,
-            unIncludedSignalConcepts,
-          } = measureDesign;
-          warnings.push(
-            ...unusedSignalConcepts.map((unused) =>
-              this.intl.t('ar-importer.message.warning-unused-signal-concept', {
+      const monads = measureDesigns.map((measureDesign) => {
+        const {
+          measureConcept,
+          trafficSignals,
+          variableInstances,
+          unusedSignalConcepts,
+          unIncludedSignalConcepts,
+        } = measureDesign;
+        warnings.push(
+          ...unusedSignalConcepts.map((unused) =>
+            this.intl.t('ar-importer.message.warning-unused-signal-concept', {
+              measure: measureConcept.label,
+              signal: unused.code,
+            }),
+          ),
+        );
+        warnings.push(
+          ...unIncludedSignalConcepts.map((unIncluded) =>
+            this.intl.t(
+              'ar-importer.message.warning-un-included-signal-concept',
+              {
                 measure: measureConcept.label,
-                signal: unused.code,
-              }),
-            ),
-          );
-          warnings.push(
-            ...unIncludedSignalConcepts.map((unIncluded) =>
-              this.intl.t(
-                'ar-importer.message.warning-un-included-signal-concept',
-                {
-                  measure: measureConcept.label,
-                  signal: unIncluded.code,
-                },
-              ),
-            ),
-          );
-          const filteredAndDeduplicatedConcepts =
-            await convertSignals(trafficSignals);
-          const convertedVariableInstances =
-            convertVariableInstances(variableInstances);
-          const isZonal = Boolean(
-            trafficSignals.find((s) => s.trafficSignalConcept.code === 'Z'),
-          );
-          const zonality = isZonal
-            ? ZONALITY_OPTIONS.ZONAL
-            : ZONALITY_OPTIONS.NON_ZONAL;
-          return insertMeasure({
-            arDesignUri: design.uri,
-            measureDesign: {
-              uri: measureDesign.uri,
-              measureConcept: {
-                uri: measureConcept.uri,
-                label: measureConcept.label,
-                preview: measureConcept.templateString,
-                zonality,
-                variableSignage: false,
-                trafficSignalConcepts: filteredAndDeduplicatedConcepts,
+                signal: unIncluded.code,
               },
-              trafficSignals: filteredAndDeduplicatedConcepts,
+            ),
+          ),
+        );
+        const filteredAndDeduplicatedConcepts = convertSignals(trafficSignals);
+        const convertedVariableInstances =
+          convertVariableInstances(variableInstances);
+        const isZonal = Boolean(
+          trafficSignals.find((s) => s.trafficSignalConcept.code === 'Z'),
+        );
+        const zonality = isZonal
+          ? ZONALITY_OPTIONS.ZONAL
+          : ZONALITY_OPTIONS.NON_ZONAL;
+        return insertMeasure({
+          arDesignUri: design.uri,
+          measureDesign: {
+            uri: measureDesign.uri,
+            measureConcept: {
+              uri: measureConcept.uri,
+              label: measureConcept.label,
+              preview: measureConcept.templateString,
+              zonality,
+              variableSignage: false,
+              trafficSignalConcepts: filteredAndDeduplicatedConcepts,
             },
-            zonality,
-            temporal: false,
-            variables: convertedVariableInstances,
-            templateString: measureConcept.templateString,
-            decisionUri,
-            articleUriGenerator: () =>
-              `http://data.lblod.info/artikels/${uuidv4()}`,
-          });
-        }),
-      );
+            trafficSignals: filteredAndDeduplicatedConcepts,
+          },
+          zonality,
+          temporal: false,
+          variables: convertedVariableInstances,
+          templateString: measureConcept.templateString,
+          decisionUri,
+          articleUriGenerator: () =>
+            `http://data.lblod.info/artikels/${uuidv4()}`,
+        });
+      });
+
       return {
         result: monads,
         warnings,
