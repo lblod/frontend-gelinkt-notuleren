@@ -121,6 +121,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
     {{else}}
       <PowerSelect
         id='linked-decision'
+        @verticalPosition='above'
         @renderInPlace={{true}}
         @searchEnabled={{true}}
         @searchMessage={{t 'besluit-type-plugin.search-message'}}
