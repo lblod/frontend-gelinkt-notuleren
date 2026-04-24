@@ -16,13 +16,11 @@ import { ZONALITY_OPTIONS } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins
 import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/decision-utils';
 import { VariableInstanceSchema } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/variable-instance';
 import { TrafficSignalConceptSchema } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/schemas/traffic-signal-concept';
-import queryRoadSignCategories from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/queries/road-sign-category';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
 import { v4 as uuidv4 } from 'uuid';
-import ENV from 'frontend-gelinkt-notuleren/config/environment';
 
 export type ImportResult<R> = {
   result: R;
