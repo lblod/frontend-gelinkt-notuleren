@@ -70,6 +70,7 @@ function convertSignals(signals: TrafficSignal[]) {
         code: trafficSignalConcept.code,
         uri: trafficSignalConcept.uri,
         type: trafficSignalConcept.type,
+        regulatoryNotation: trafficSignalConcept.regulatoryNotation,
         image: '',
       };
     }),
