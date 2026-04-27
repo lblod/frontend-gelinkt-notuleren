@@ -126,24 +126,28 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     return null;
   }
 
-  get isBusy() {
+  get isSaving() {
     return (
-      !this.editorSetup ||
       this.saveTask.isRunning ||
-      this.copyAgendapunt.isRunning ||
-      this.confirmMultipleEdit.isRunning
+      this.confirmMultipleEdit.isRunning ||
+      this.onTitleUpdate.isRunning
     );
+  }
+  get isBusy() {
+    // copying AP counts as busy, but should not count as 'is saving', both to display the correct
+    // busy text and to allow copying to navigate to the new copy
+    return !this.editorSetup || this.copyAgendapunt.isRunning || this.isSaving;
   }
 
   get busyText() {
     if (!this.editorSetup) {
       return this.intl.t('rdfa-editor-container.loading');
     }
-    if (this.saveTask.isRunning) {
-      return this.intl.t('rdfa-editor-container.making-copy');
+    if (this.isSaving) {
+      return this.intl.t('rdfa-editor-container.saving');
     }
     if (this.copyAgendapunt.isRunning) {
-      return this.intl.t('rdfa-editor-container.saving');
+      return this.intl.t('rdfa-editor-container.making-copy');
     }
     return '';
   }
@@ -495,9 +499,11 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         <p>{{t 'multiple-edit-modal.message'}}</p>
       </Modal.Body>
       <Modal.Footer>
-        <AuButton {{on 'click' (perform this.confirmMultipleEdit)}}>{{t
-            'multiple-edit-modal.confirm'
-          }}</AuButton>
+        <AuButton
+          @loading={{this.confirmMultipleEdit.isRunning}}
+          @loadingMessage={{t 'rdfa-editor-container.saving'}}
+          {{on 'click' (perform this.confirmMultipleEdit)}}
+        >{{t 'multiple-edit-modal.confirm'}}</AuButton>
         <AuButton
           @skin='secondary'
           {{on 'click' (perform this.closeMultipleEditWarning)}}
@@ -622,7 +628,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
       {{/if}}
     </div>
     <ConfirmRouteLeave
-      @enabled={{this.dirty}}
+      @enabled={{or this.isSaving this.dirty}}
       @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
     />
   </template>
