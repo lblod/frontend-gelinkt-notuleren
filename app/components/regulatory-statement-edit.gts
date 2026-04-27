@@ -14,6 +14,7 @@ import didInsert from '@ember/render-modifiers/modifiers/did-insert';
 import { array } from '@ember/helper';
 import { get } from '@ember/helper';
 import { on } from '@ember/modifier';
+import { or } from 'ember-truth-helpers';
 import AuLink from '@appuniversum/ember-appuniversum/components/au-link';
 import AuDropdown from '@appuniversum/ember-appuniversum/components/au-dropdown';
 import AuHr from '@appuniversum/ember-appuniversum/components/au-hr';
@@ -510,7 +511,11 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   }
 
   get busy() {
-    return this.saveTask.isRunning;
+    return (
+      this.saveTask.isRunning ||
+      this.confirmMultipleEdit.isRunning ||
+      this.onTitleUpdate.isRunning
+    );
   }
 
   <template>
@@ -697,7 +702,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       </RdfaEditorContainer>
     </AuBodyContainer>
     <ConfirmRouteLeave
-      @enabled={{this.dirty}}
+      @enabled={{or this.dirty this.busy}}
       @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
     />
     <AuModal
@@ -710,9 +715,11 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         <p>{{t 'multiple-edit-modal.message'}}</p>
       </Modal.Body>
       <Modal.Footer>
-        <AuButton {{on 'click' (perform this.confirmMultipleEdit)}}>{{t
-            'multiple-edit-modal.confirm'
-          }}</AuButton>
+        <AuButton
+          @loading={{this.confirmMultipleEdit.isRunning}}
+          @loadingMessage={{t 'rdfa-editor-container.saving'}}
+          {{on 'click' (perform this.confirmMultipleEdit)}}
+        >{{t 'multiple-edit-modal.confirm'}}</AuButton>
         <AuButton
           @skin='secondary'
           {{on 'click' (perform this.closeMultipleEditWarning)}}
