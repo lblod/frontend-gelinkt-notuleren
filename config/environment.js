@@ -94,7 +94,6 @@ module.exports = function (environment) {
     ENV.featureFlags['regulatory-statements'] = true;
     ENV.featureFlags['prosemirror-dev-tools'] = true;
     ENV.featureFlags['mandatee-table-editor'] = true;
-    ENV.featureFlags['citerra-poc'] = true;
     ENV.featureFlags['inauguration-meeting'] = true;
     ENV.featureFlags['ar-import'] = true;
     ENV.mowRegistryEndpoint =

@@ -126,24 +126,28 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     return null;
   }
 
-  get isBusy() {
+  get isSaving() {
     return (
-      !this.editorSetup ||
       this.saveTask.isRunning ||
-      this.copyAgendapunt.isRunning ||
-      this.confirmMultipleEdit.isRunning
+      this.confirmMultipleEdit.isRunning ||
+      this.onTitleUpdate.isRunning
     );
+  }
+  get isBusy() {
+    // copying AP counts as busy, but should not count as 'is saving', both to display the correct
+    // busy text and to allow copying to navigate to the new copy
+    return !this.editorSetup || this.copyAgendapunt.isRunning || this.isSaving;
   }
 
   get busyText() {
     if (!this.editorSetup) {
       return this.intl.t('rdfa-editor-container.loading');
     }
-    if (this.saveTask.isRunning) {
-      return this.intl.t('rdfa-editor-container.making-copy');
+    if (this.isSaving) {
+      return this.intl.t('rdfa-editor-container.saving');
     }
     if (this.copyAgendapunt.isRunning) {
-      return this.intl.t('rdfa-editor-container.saving');
+      return this.intl.t('rdfa-editor-container.making-copy');
     }
     return '';
   }
@@ -248,13 +252,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         await agendaItem.save();
       }
 
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          title,
-          html,
-          this.documentContainer,
-          this.editorDocument ?? undefined,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        title,
+        html,
+        this.documentContainer,
+        this.editorDocument ?? undefined,
+      );
 
       this._editorDocument = editorDocument;
     }
@@ -285,13 +288,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         this.cleanedHtml = cleanedHtml;
         this.title = this.editorDocument.title;
       } else {
-        const editorDocument =
-          await this.documentService.createEditorDocument.perform(
-            this.editorDocument.title,
-            cleanedHtml,
-            this.documentContainer,
-            currentVersion,
-          );
+        const editorDocument = await this.documentService.createEditorDocument(
+          this.editorDocument.title,
+          cleanedHtml,
+          this.documentContainer,
+          currentVersion,
+        );
         this._editorDocument = editorDocument;
         this.controller.setHtmlContent(cleanedHtml);
         this.controller.markClean();
@@ -317,13 +319,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
       await this.documentContainer.currentVersion.reload({});
       const currentVersion = (await this.documentContainer
         .currentVersion) as EditorDocumentModel;
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          this.title as string,
-          this.cleanedHtml,
-          this.documentContainer,
-          currentVersion,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        this.title as string,
+        this.cleanedHtml,
+        this.documentContainer,
+        currentVersion,
+      );
       this._editorDocument = editorDocument;
       this.controller.setHtmlContent(this.cleanedHtml);
       this.controller.markClean();
@@ -335,15 +336,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
   closeMultipleEditWarning = task(async () => {
     const currentVersion = (await this.documentContainer
       .currentVersion) as EditorDocumentModel;
-    const inProgDocument =
-      await this.documentService.createEditorDocument.perform(
-        this.title as string,
-        this.cleanedHtml,
-        this.documentContainer,
-        currentVersion,
-        // Create a new document version but don't actually send it to the server
-        true,
-      );
+    const inProgDocument = await this.documentService.createEditorDocument(
+      this.title as string,
+      this.cleanedHtml,
+      this.documentContainer,
+      currentVersion,
+      // Create a new document version but don't actually send it to the server
+      true,
+    );
     this._editorDocument = inProgDocument;
     this.showMultipleEditWarning = false;
   });
@@ -499,9 +499,11 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
         <p>{{t 'multiple-edit-modal.message'}}</p>
       </Modal.Body>
       <Modal.Footer>
-        <AuButton {{on 'click' (perform this.confirmMultipleEdit)}}>{{t
-            'multiple-edit-modal.confirm'
-          }}</AuButton>
+        <AuButton
+          @loading={{this.confirmMultipleEdit.isRunning}}
+          @loadingMessage={{t 'rdfa-editor-container.saving'}}
+          {{on 'click' (perform this.confirmMultipleEdit)}}
+        >{{t 'multiple-edit-modal.confirm'}}</AuButton>
         <AuButton
           @skin='secondary'
           {{on 'click' (perform this.closeMultipleEditWarning)}}
@@ -626,7 +628,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
       {{/if}}
     </div>
     <ConfirmRouteLeave
-      @enabled={{this.dirty}}
+      @enabled={{or this.isSaving this.dirty}}
       @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
     />
   </template>
