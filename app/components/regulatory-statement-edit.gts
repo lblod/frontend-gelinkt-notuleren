@@ -14,6 +14,7 @@ import didInsert from '@ember/render-modifiers/modifiers/did-insert';
 import { array } from '@ember/helper';
 import { get } from '@ember/helper';
 import { on } from '@ember/modifier';
+import { or } from 'ember-truth-helpers';
 import AuLink from '@appuniversum/ember-appuniversum/components/au-link';
 import AuDropdown from '@appuniversum/ember-appuniversum/components/au-dropdown';
 import AuHr from '@appuniversum/ember-appuniversum/components/au-hr';
@@ -439,20 +440,16 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         this.html = html;
         this.title = this.editorDocument.title;
       } else {
-        const editorDocument =
-          await this.documentService.createEditorDocument.perform(
-            this.editorDocument.title,
-            html,
-            this.documentContainer,
-            this.editorDocument,
-          );
+        const editorDocument = await this.documentService.createEditorDocument(
+          this.editorDocument.title,
+          html,
+          this.documentContainer,
+          this.editorDocument,
+        );
         this._editorDocument = editorDocument;
         this.controller.setHtmlContent(html);
         this.controller.markClean();
 
-        const documentContainer = this.documentContainer;
-        documentContainer.set('currentVersion', editorDocument);
-        await documentContainer.save();
         return this.fetchRevisions.perform();
       }
     }
@@ -463,20 +460,16 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       await this.documentContainer.currentVersion.reload({});
       const currentVersion = (await this.documentContainer
         .currentVersion) as EditorDocumentModel;
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          this.title,
-          this.html,
-          this.documentContainer,
-          currentVersion,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        this.title,
+        this.html,
+        this.documentContainer,
+        currentVersion,
+      );
       this._editorDocument = editorDocument;
       this.controller.setHtmlContent(this.html);
       this.controller.markClean();
 
-      const documentContainer = this.documentContainer;
-      documentContainer.set('currentVersion', editorDocument);
-      await documentContainer.save();
       this.showMultipleEditWarning = false;
       return this.fetchRevisions.perform();
     }
@@ -492,13 +485,12 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       this.html = html as string;
       this.title = title;
     } else {
-      const editorDocument =
-        await this.documentService.createEditorDocument.perform(
-          title,
-          html ?? undefined,
-          this.documentContainer,
-          this.editorDocument,
-        );
+      const editorDocument = await this.documentService.createEditorDocument(
+        title,
+        html ?? undefined,
+        this.documentContainer,
+        this.editorDocument,
+      );
       this._editorDocument = editorDocument;
     }
   });
@@ -519,7 +511,11 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   }
 
   get busy() {
-    return this.saveTask.isRunning;
+    return (
+      this.saveTask.isRunning ||
+      this.confirmMultipleEdit.isRunning ||
+      this.onTitleUpdate.isRunning
+    );
   }
 
   <template>
@@ -706,7 +702,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       </RdfaEditorContainer>
     </AuBodyContainer>
     <ConfirmRouteLeave
-      @enabled={{this.dirty}}
+      @enabled={{or this.dirty this.busy}}
       @message={{t 'behandeling-van-agendapunten.confirm-leave-without-saving'}}
     />
     <AuModal
@@ -719,9 +715,11 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         <p>{{t 'multiple-edit-modal.message'}}</p>
       </Modal.Body>
       <Modal.Footer>
-        <AuButton {{on 'click' (perform this.confirmMultipleEdit)}}>{{t
-            'multiple-edit-modal.confirm'
-          }}</AuButton>
+        <AuButton
+          @loading={{this.confirmMultipleEdit.isRunning}}
+          @loadingMessage={{t 'rdfa-editor-container.saving'}}
+          {{on 'click' (perform this.confirmMultipleEdit)}}
+        >{{t 'multiple-edit-modal.confirm'}}</AuButton>
         <AuButton
           @skin='secondary'
           {{on 'click' (perform this.closeMultipleEditWarning)}}
