@@ -960,7 +960,8 @@ ar-importer:
   preview:
     return-to-overview: Terug naar overzicht
     insert: Voeg in
-    only-existing: Dit ontwerp omvat alleen bestaande Verkeersteken
+    only-existing-label: bestaand
+    only-existing: Dit maatregelontwerp bevat enkel reeds bestaande verkeerstekens.
   message:
     error-no-decision: Plaats de cursor in een besluit
     error-processing-design: Fout bij verwerken van het signalisatieplan

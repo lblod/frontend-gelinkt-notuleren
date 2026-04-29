@@ -954,7 +954,8 @@ ar-importer:
   preview:
     return-to-overview: Return to overview
     insert: Insert
-    only-existing: This design only includes existing Traffic Signals
+    only-existing-label: existing
+    only-existing: This design only includes existing Traffic Signals.
   message:
     error-no-decision: Please put the cursor inside a decision node
     error-processing-design: Error when processing signage plan

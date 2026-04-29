@@ -189,7 +189,7 @@ export default class ArImporterService extends Service {
               uri: measureDesign.uri,
               measureConcept: {
                 uri: measureConcept.uri,
-                label: `${measureConcept.label}${onlyExistingSignals ? this.intl.t('ar-importer.preview.only-existing') : ''}`,
+                label: `${measureConcept.label}${onlyExistingSignals ? ` (${this.intl.t('ar-importer.preview.only-existing-label')})` : ''}`,
                 preview: measureConcept.templateString,
                 zonality,
                 variableSignage: false,
