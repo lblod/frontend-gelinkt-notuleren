@@ -65,17 +65,18 @@ function convertSignals(signals: TrafficSignal[]) {
     }
   }
 
-  return TrafficSignalConceptSchema.array().parse(
-    dedupedConcepts.map((trafficSignalConcept) => {
-      return {
-        code: trafficSignalConcept.code,
-        uri: trafficSignalConcept.uri,
-        type: trafficSignalConcept.type,
-        regulatoryNotation: trafficSignalConcept.regulatoryNotation,
-        image: '',
-      };
-    }),
-  );
+  const conceptsWithCategories = dedupedConcepts.map((trafficSignalConcept) => {
+    return {
+      code: trafficSignalConcept.code,
+      uri: trafficSignalConcept.uri,
+      type: trafficSignalConcept.type,
+      image: '',
+      categories: trafficSignalConcept.categories,
+      regulatoryNotation: trafficSignalConcept.regulatoryNotation,
+    };
+  });
+
+  return TrafficSignalConceptSchema.array().parse(conceptsWithCategories);
 }
 
 export default class ArImporterService extends Service {
@@ -207,6 +208,7 @@ export default class ArImporterService extends Service {
           }),
         ];
       });
+
       return {
         result: monads,
         warnings,
