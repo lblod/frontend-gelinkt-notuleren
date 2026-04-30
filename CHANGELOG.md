@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.75.0
+
+### Minor Changes
+
+- [#905](https://github.com/lblod/frontend-gelinkt-notuleren/pull/905) [`8db21ef`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8db21efb9f5ea68a9ca74e897cfd926453539a9d) Thanks [@abeforgit](https://github.com/abeforgit)! - Use regulatoryNotation text when inserting measures imported from AR designs
+
+- [#907](https://github.com/lblod/frontend-gelinkt-notuleren/pull/907) [`206e4ee`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/206e4eee0399c54b59ba502fa48148bf74d57b7c) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add document information modal
+
+### Patch Changes
+
+- [#909](https://github.com/lblod/frontend-gelinkt-notuleren/pull/909) [`04640e8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/04640e84604c023d3e40c712d5bfd376bfc8198c) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Missing translation in document information modal
+
+- [#904](https://github.com/lblod/frontend-gelinkt-notuleren/pull/904) [`0971a58`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0971a582c9a2a3bf31fc2e63fb9b218a83c5bb2f) Thanks [@abeforgit](https://github.com/abeforgit)! - add our own deps to watchdeps
+
+- [#906](https://github.com/lblod/frontend-gelinkt-notuleren/pull/906) [`8f22581`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8f22581ab3c96936dd133b36cd1f690c590f1ad7) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix document validation was not running on save
+
 ## 5.74.0
 
 ### Minor Changes

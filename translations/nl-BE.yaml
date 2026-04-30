@@ -960,6 +960,8 @@ ar-importer:
   preview:
     return-to-overview: Terug naar overzicht
     insert: Voeg in
+    only-existing-label: bestaand
+    only-existing: Dit maatregelontwerp bevat enkel reeds bestaande verkeerstekens.
   message:
     error-no-decision: Plaats de cursor in een besluit
     error-processing-design: Fout bij verwerken van het signalisatieplan
@@ -968,6 +970,7 @@ ar-importer:
 
 document-information-modal:
   button-title: Documentinformatie bewerken
+  modal-title: Documentinformatie bewerken
   document-title: Titel document
   decision-topic: Besluitondwerp
   save: Opslaan

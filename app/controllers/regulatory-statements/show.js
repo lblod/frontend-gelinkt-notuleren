@@ -26,7 +26,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
     const documentContainer = this.model.documentContainer;
     //If it's published
     let content = replaceUris(currentVersion.content);
-    await this.documentService.createEditorDocument.perform(
+    await this.documentService.createEditorDocument(
       currentVersion.title,
       content,
       documentContainer,

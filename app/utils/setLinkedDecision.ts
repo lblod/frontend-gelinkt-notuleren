@@ -6,7 +6,7 @@ import {
 } from '@lblod/ember-rdfa-editor/utils/rdfa-utils';
 import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/decision-utils';
 import { getOutgoingTripleList } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/namespace';
-import { EXT } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
+import { ELI } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/constants';
 import { type OutgoingTriple } from '@lblod/ember-rdfa-editor/core/rdfa-processor';
 import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 import {
@@ -33,7 +33,7 @@ export default function setLinkedDecision(
     return removePropertyFromNode({
       resource,
       property: {
-        predicate: EXT('linkedDecision').full,
+        predicate: ELI('consolidates').full,
         object: sayDataFactory.namedNode(existingUri),
       },
     });
@@ -42,7 +42,7 @@ export default function setLinkedDecision(
     addPropertyToNode({
       resource,
       property: {
-        predicate: EXT('linkedDecision').full,
+        predicate: ELI('consolidates').full,
         object: sayDataFactory.namedNode(linkedDecisionUri),
       },
     }),
@@ -55,7 +55,7 @@ export function extractLinkedDecisionUris(editorState: EditorState): string[] {
   if (!besluitRange) {
     return [];
   }
-  return getOutgoingTripleList(besluitRange.node.attrs, EXT('linkedDecision'))
+  return getOutgoingTripleList(besluitRange.node.attrs, ELI('consolidates'))
     .filter((type) => type.object.termType === 'NamedNode')
     .map((type: OutgoingTriple) => type?.object.value);
 }

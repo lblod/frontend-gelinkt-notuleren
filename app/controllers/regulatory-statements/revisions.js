@@ -26,7 +26,7 @@ export default class RegulatoryAttachmentsShowController extends Controller {
     const toRestore = this.model.editorDocument;
     const documentContainer = this.model.documentContainer;
     let content = replaceUris(toRestore.content);
-    await this.documentService.createEditorDocument.perform(
+    await this.documentService.createEditorDocument(
       toRestore.title,
       content,
       documentContainer,

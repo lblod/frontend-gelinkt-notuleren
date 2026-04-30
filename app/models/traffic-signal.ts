@@ -6,6 +6,7 @@ export default class TrafficSignal extends Model {
   declare [Type]: 'traffic-signal';
 
   @attr('string') declare uri: string;
+  @attr('string') declare designStatus?: string;
 
   @belongsTo('traffic-signal-concept', {
     async: false,

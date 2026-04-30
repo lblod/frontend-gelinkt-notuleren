@@ -2,7 +2,7 @@ import Service from '@ember/service';
 import { service } from '@ember/service';
 import type IntlService from 'ember-intl/services/intl';
 import { AlertTriangleIcon } from '@appuniversum/ember-appuniversum/components/icons/alert-triangle';
-import type { SayController } from '@lblod/ember-rdfa-editor';
+import type { EditorState, SayController } from '@lblod/ember-rdfa-editor';
 import {
   transactionCombinator,
   type TransactionMonad,
@@ -21,6 +21,7 @@ import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/e
 import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
 import { v4 as uuidv4 } from 'uuid';
+import { TRAFFIC_SIGNAL_EXISTING_STATUSES } from 'frontend-gelinkt-notuleren/config/constants';
 
 export type ImportResult<R> = {
   result: R;
@@ -71,6 +72,7 @@ function convertSignals(signals: TrafficSignal[]) {
       type: trafficSignalConcept.type,
       image: '',
       categories: trafficSignalConcept.categories,
+      regulatoryNotation: trafficSignalConcept.regulatoryNotation,
     };
   });
 
@@ -102,6 +104,7 @@ export default class ArImporterService extends Service {
   async generateInsertionMonads(
     decisionUriOrController: string | SayController,
     design: ArDesign,
+    isPreview?: boolean,
   ): Promise<GenerateImportResult> {
     let decisionUri: string;
     if (typeof decisionUriOrController === 'string') {
@@ -120,7 +123,7 @@ export default class ArImporterService extends Service {
     try {
       const warnings: string[] = [];
       const measureDesigns = await design.measureDesigns;
-      const monads = measureDesigns.map((measureDesign) => {
+      const monads = measureDesigns.flatMap((measureDesign) => {
         const {
           measureConcept,
           trafficSignals,
@@ -156,28 +159,54 @@ export default class ArImporterService extends Service {
         const zonality = isZonal
           ? ZONALITY_OPTIONS.ZONAL
           : ZONALITY_OPTIONS.NON_ZONAL;
-        return insertMeasure({
-          arDesignUri: design.uri,
-          measureDesign: {
-            uri: measureDesign.uri,
-            measureConcept: {
-              uri: measureConcept.uri,
-              label: measureConcept.label,
-              preview: measureConcept.templateString,
-              zonality,
-              variableSignage: false,
-              trafficSignalConcepts: filteredAndDeduplicatedConcepts,
+        const onlyExistingSignals = measureDesign.trafficSignals.every(
+          (signal) =>
+            signal.designStatus &&
+            TRAFFIC_SIGNAL_EXISTING_STATUSES.includes(signal.designStatus),
+        );
+        return [
+          ...(isPreview && onlyExistingSignals
+            ? [
+                (state: EditorState) => {
+                  const commentText = state.schema.text(
+                    this.intl.t('ar-importer.preview.only-existing'),
+                  );
+                  const cn =
+                    state.schema.nodes['templateComment']?.create(
+                      {},
+                      commentText,
+                    ) ?? commentText;
+                  return {
+                    initialState: state,
+                    transaction: state.tr.insert(state.selection.to + 1, cn),
+                    result: true,
+                  };
+                },
+              ]
+            : []),
+          insertMeasure({
+            arDesignUri: design.uri,
+            measureDesign: {
+              uri: measureDesign.uri,
+              measureConcept: {
+                uri: measureConcept.uri,
+                label: `${measureConcept.label}${onlyExistingSignals ? ` (${this.intl.t('ar-importer.preview.only-existing-label')})` : ''}`,
+                preview: measureConcept.templateString,
+                zonality,
+                variableSignage: false,
+                trafficSignalConcepts: filteredAndDeduplicatedConcepts,
+              },
+              trafficSignals: filteredAndDeduplicatedConcepts,
             },
-            trafficSignals: filteredAndDeduplicatedConcepts,
-          },
-          zonality,
-          temporal: false,
-          variables: convertedVariableInstances,
-          templateString: measureConcept.templateString,
-          decisionUri,
-          articleUriGenerator: () =>
-            `http://data.lblod.info/artikels/${uuidv4()}`,
-        });
+            zonality,
+            temporal: false,
+            variables: convertedVariableInstances,
+            templateString: measureConcept.templateString,
+            decisionUri,
+            articleUriGenerator: () =>
+              `http://data.lblod.info/artikels/${uuidv4()}`,
+          }),
+        ];
       });
 
       return {
@@ -195,6 +224,7 @@ export default class ArImporterService extends Service {
     const { result: monads, warnings } = await this.generateInsertionMonads(
       decisionUri,
       design,
+      true,
     );
     const document = this.agendapointEditor.processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
