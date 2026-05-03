@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@ember/test-waiters': ^3.1.0
-  '@lblod/ember-rdfa-editor': 13.4.0
+  '@lblod/ember-rdfa-editor': 13.7.0
   caniuse-lite: 1.0.30001751
   ember-auto-import: ^2.8.1
   ember-composability-tools>@ember/render-modifiers: ^3.0.0
@@ -144,11 +144,11 @@ importers:
         specifier: ^0.14.0
         version: 0.14.0(@babel/core@7.27.7)(ember-simple-auth@8.3.0(@babel/core@7.27.7)(@ember/test-helpers@3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0)))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))
       '@lblod/ember-rdfa-editor':
-        specifier: 13.4.0
-        version: 13.4.0(e65ae4112082f459cd75a47e331effdd)
+        specifier: 13.7.0
+        version: 13.7.0(e65ae4112082f459cd75a47e331effdd)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 35.3.0
-        version: 35.3.0(fab5f5a238bcd038cf03bb787ce03d68)
+        specifier: 35.4.0
+        version: 35.4.0(bda9ce4ad7bf521415e127d2f7c1dd61)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1729,18 +1729,6 @@ packages:
   '@glint/tsserver-plugin@2.1.0':
     resolution: {integrity: sha512-paMTIS/GOt/AVktX91Mp2yd6CdfY4Z/X24oAF4NP2DWKgLYhj+ukJedMuQhpGFwdtQIFfUyUDS8aZS9kyIOYoQ==}
 
-  '@graphy/core.data.factory@4.3.7':
-    resolution: {integrity: sha512-6uiNrClDnlfN52B8f0ZBjnyETXiCyYOyIUET2aGFTG+TXZTsiO1WcinsIo36YPt29i+boCDf0ldYDKhPKAibdw==}
-    engines: {node: '>=8.4.0'}
-
-  '@graphy/core.iso.stream@4.3.7':
-    resolution: {integrity: sha512-Rr7C+pPYmFVUGqP8OnYPh7D6VnwucT4LUQBDvlni4OSB9Px0QEenlUBTyqcfIByDTcDNb8fFek9qyjjrO6zlNQ==}
-    engines: {node: '>=8.4.0'}
-
-  '@graphy/memory.dataset.fast@4.3.3':
-    resolution: {integrity: sha512-7ooKeO/+tttXfNiO1mhtodHxiiXtKOOZXWNp1/WW1GgmnLVMsgFvcI1NaND4+wwFHWY/FCQBkCSxb7ADVbF0AQ==}
-    engines: {node: '>=8.4.0'}
-
   '@handlebars/parser@2.0.0':
     resolution: {integrity: sha512-EP9uEDZv/L5Qh9IWuMUGJRfwhXJ4h1dqKTT4/3+tY0eu7sPis7xh23j61SYUnNF4vqCQvvUXpDo9Bh/+q1zASA==}
 
@@ -1911,14 +1899,14 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.3.0':
-    resolution: {integrity: sha512-cP1TfQGaLtu4gZ4cEV90k35Vi+EEom5sIKTNPVg1ER0KZmZQEI/vBzQDXn4xXn5h+XdOa+4UI5yMik1BkHRsqg==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.4.0':
+    resolution: {integrity: sha512-Lk9NB2RID2cKcojBTuBopeZicQQuNTFg+Bsn8wd5UY5W1+1/lTozw2iXvcRR4yp3wraIFnIgUzVsGbPrpBp7lw==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
       '@ember/string': 3.x
       '@glint/template': ^1.4.0
-      '@lblod/ember-rdfa-editor': 13.4.0
+      '@lblod/ember-rdfa-editor': 13.7.0
       ember-concurrency: ^4.0.2
       ember-element-helper: ^0.8.6
       ember-intl: ^7.0.0
@@ -1935,8 +1923,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@13.4.0':
-    resolution: {integrity: sha512-IDUjNCeyQ9iQU7rKwChHkeGCguQiVDo3RywQY3SZMtHift4DTm3FZ0bxg9pS23v4+upljNs7B39YGy409o6lpg==}
+  '@lblod/ember-rdfa-editor@13.7.0':
+    resolution: {integrity: sha512-uI6NCowtBhkK7FpwBI5go+UEyVE+6IcjpWVCw9q8LFVNK65P1Mfrv7qReEcGhXmMFoI5XAKvcl0B+1RCkOPsLA==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.11.0
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -7689,6 +7677,10 @@ packages:
     resolution: {integrity: sha512-SQknS0ua90rN+3RHuk8BeIqeYyqIH/+ecViZxX08jR4j6MugqWRjtONl3uANG/crWXnOM2WIqBJtjIhVYFha+w==}
     engines: {node: '>=12.0'}
 
+  n3@2.0.3:
+    resolution: {integrity: sha512-um/toGVENTarHBYIK2TdH6ByBhW75WpdKpv8iTYt9wF2QfBk8s8a16iaWZFUAAC1BKfGdb99kfgx6pltdDwfKA==}
+    engines: {node: '>=12.0'}
+
   nanoid@3.3.11:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -12171,19 +12163,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@graphy/core.data.factory@4.3.7':
-    dependencies:
-      uri-js: 4.4.1
-
-  '@graphy/core.iso.stream@4.3.7':
-    dependencies:
-      readable-stream: 3.6.2
-
-  '@graphy/memory.dataset.fast@4.3.3':
-    dependencies:
-      '@graphy/core.data.factory': 4.3.7
-      '@graphy/core.iso.stream': 4.3.7
-
   '@handlebars/parser@2.0.0': {}
 
   '@handlebars/parser@2.2.2': {}
@@ -12463,7 +12442,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.3.0(fab5f5a238bcd038cf03bb787ce03d68)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.4.0(bda9ce4ad7bf521415e127d2f7c1dd61)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.0(@babel/core@7.27.7))(webpack@5.98.0)
       '@babel/core': 7.27.7
@@ -12473,7 +12452,7 @@ snapshots:
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)
       '@ember/string': 3.1.1
       '@embroider/macros': 1.19.7(@babel/core@7.27.7)(@glint/template@1.5.2)
-      '@lblod/ember-rdfa-editor': 13.4.0(e65ae4112082f459cd75a47e331effdd)
+      '@lblod/ember-rdfa-editor': 13.7.0(e65ae4112082f459cd75a47e331effdd)
       '@lblod/lib-decision-shapes': 0.0.25(@babel/core@7.27.7)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.27.7))(jest-util@30.0.2)(jest@30.0.3(@types/node@22.13.10)(node-notifier@10.0.1))(typescript@5.8.2)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
@@ -12534,7 +12513,7 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@13.4.0(e65ae4112082f459cd75a47e331effdd)':
+  '@lblod/ember-rdfa-editor@13.7.0(e65ae4112082f459cd75a47e331effdd)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.0(@babel/core@7.27.7))(webpack@5.98.0)
       '@codemirror/commands': 6.10.2
@@ -12547,12 +12526,10 @@ snapshots:
       '@ember/render-modifiers': 3.0.0(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))
       '@ember/test-helpers': 3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.19.7(@babel/core@7.27.7)(@glint/template@1.5.2)
       '@floating-ui/dom': 1.7.4
       '@glimmer/component': 1.1.2(@babel/core@7.27.7)
       '@glimmer/tracking': 1.1.2
       '@glint/tsserver-plugin': 2.1.0
-      '@graphy/memory.dataset.fast': 4.3.3
       '@lblod/marawa': 0.8.0-beta.6
       '@rdfjs/types': 1.1.2
       '@say-editor/prosemirror-invisibles': 0.1.1(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.6)
@@ -12560,7 +12537,6 @@ snapshots:
       '@types/react': 19.1.13
       codemirror: 6.0.2
       common-tags: 1.8.2
-      crypto-browserify: 3.12.1
       debug: 4.4.3
       decorator-transforms: 2.3.1(@babel/core@7.27.7)
       dompurify: 3.2.4
@@ -12585,7 +12561,7 @@ snapshots:
       linkifyjs: 4.3.2
       mdn-polyfills: 5.20.0
       mongoose: 8.23.0(socks@2.8.4)
-      process: 0.11.10
+      n3: 2.0.3
       prosemirror-commands: 1.7.1
       prosemirror-dropcursor: 1.8.2
       prosemirror-inputrules: 1.5.1
@@ -12599,7 +12575,6 @@ snapshots:
       rdf-data-factory: 1.1.3
       reactiveweb: 1.9.1(@babel/core@7.27.7)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))
       relative-to-absolute-iri: 1.0.7
-      stream-browserify: 3.0.0
       tracked-built-ins: 4.1.0(@babel/core@7.27.7)
       tracked-toolbox: 2.0.0(@babel/core@7.27.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))
       typedoc: 0.28.17(typescript@5.8.2)
@@ -20304,6 +20279,11 @@ snapshots:
   n2words@1.21.0: {}
 
   n3@1.26.0:
+    dependencies:
+      buffer: 6.0.3
+      readable-stream: 4.7.0
+
+  n3@2.0.3:
     dependencies:
       buffer: 6.0.3
       readable-stream: 4.7.0
