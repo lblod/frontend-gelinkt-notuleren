@@ -1,5 +1,29 @@
 # frontend-gelinkt-notuleren
 
+## 5.76.0
+
+### Minor Changes
+
+- [#912](https://github.com/lblod/frontend-gelinkt-notuleren/pull/912) [`4f6499d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4f6499d272d507ed65d9dafb949f448bb75bd632) Thanks [@piemonkey](https://github.com/piemonkey)! - Add indication when all the traffic signals within each measure of an AR design are already existing signs
+
+- [`8a8c277`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8a8c277a87f841350664197a314b24baf165b8d9) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor to [@lblod](https://github.com/lblod/ember-rdfa-editor/releases/tag/@lblod/ember-rdfa-editor@13.7.0)
+
+- [#915](https://github.com/lblod/frontend-gelinkt-notuleren/pull/915) [`7d7516b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/7d7516be051588deac273da4b52e7b3b7f1f3204) Thanks [@piemonkey](https://github.com/piemonkey)! - Prevent leaving an agendapoint or regulatory statement while saving is in progress
+
+- [`8a8c277`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8a8c277a87f841350664197a314b24baf165b8d9) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [v35.4.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v35.4.0)
+
+- [#915](https://github.com/lblod/frontend-gelinkt-notuleren/pull/915) [`2a1510e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2a1510e7c50fbf306e832d3ce28fca260f8e3618) Thanks [@piemonkey](https://github.com/piemonkey)! - Change confirmation on leaving an in-progress document also detect page reloads
+
+### Patch Changes
+
+- [#913](https://github.com/lblod/frontend-gelinkt-notuleren/pull/913) [`a951937`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/a951937a8334b834d1304e4f6c08ceeef03fb27c) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix bug where 'move to trash' button was not displayed for agendapoints
+
+- [#914](https://github.com/lblod/frontend-gelinkt-notuleren/pull/914) [`98c33e0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/98c33e0bf5c3eda610dc2a2be5140e0b3a32a270) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix crash when a regulatory statement does not have a current version
+
+- [#911](https://github.com/lblod/frontend-gelinkt-notuleren/pull/911) [`4a8fa72`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4a8fa723896b64d5bf5294f2472086180ef09b12) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Change linked decision predicate to eli:consolidates
+
+- [#910](https://github.com/lblod/frontend-gelinkt-notuleren/pull/910) [`68fbcab`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/68fbcab22015445a262f2370d81d69e8e9a33de8) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix, AR-ontwerp was not marking onderborden signs
+
 ## 5.75.0
 
 ### Minor Changes
