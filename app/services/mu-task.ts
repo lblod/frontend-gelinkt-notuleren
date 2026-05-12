@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
+import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 
 const TASK_ENDPOINT = '/publication-tasks';
 export const TASK_STATUS_FAILURE =
@@ -11,28 +12,31 @@ export const TASK_STATUS_SUCCESS =
 export const TASK_STATUS_RUNNING =
   'http://lblod.data.gift/besluit-publicatie-melding-statuses/ongoing';
 
+type TaskBody = { data: { id: string; status: string } };
+
 export default class MuTaskService extends Service {
-  fetchMuTask(taskId) {
+  fetchMuTask(taskId: string) {
     // TODO do this with ember-data and mu-cl-resource
     return fetch(`${TASK_ENDPOINT}/${taskId}`);
   }
 
-  /**
-   * @param {string} taskId
-   * @param {number} [pollDelayMs] time to wait between each status poll
-   * @param {number} [timeoutMs] maximum time to wait before throwing
-   * */
   waitForMuTaskTask = task(
-    async (taskId, pollDelayMs = 1000, timeoutMs = 300000) => {
-      let resp;
-      let jsonBody;
-      let currentStatus;
+    async (
+      taskId: string,
+      /** time to wait between each status poll */
+      pollDelayMs: number = 1000,
+      /** maximum time to wait before throwing */
+      timeoutMs: number = 300000,
+    ) => {
+      let resp: Response;
+      let jsonBody: TaskBody | undefined;
+      let currentStatus: Option<string>;
       const startTime = Date.now();
       do {
         await timeout(pollDelayMs);
         resp = await this.fetchMuTask(taskId);
         if (resp.ok) {
-          jsonBody = await resp.json();
+          jsonBody = (await resp.json()) as TaskBody;
           currentStatus = jsonBody.data.status;
         } else {
           currentStatus = null;
@@ -61,10 +65,13 @@ export default class MuTaskService extends Service {
     },
   );
 
-  async fetchTaskifiedEndpoint(url, fetchOptions) {
+  async fetchTaskifiedEndpoint(
+    url: Parameters<typeof fetch>[0],
+    fetchOptions: Parameters<typeof fetch>[1],
+  ) {
     const res = await fetch(url, fetchOptions);
     if (res.ok) {
-      const json = await res.json();
+      const json = (await res.json()) as TaskBody;
       return json.data.id;
     } else {
       throw new Error(await res.text());
