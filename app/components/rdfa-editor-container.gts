@@ -228,6 +228,7 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
 
   <template>
     <AuBodyContainer
+      {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
       vocab={{this.vocab}}
       {{this.setUpPrefixAttr}}
       typeof='{{@typeOfWrappingDiv}}'
