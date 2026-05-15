@@ -219,8 +219,8 @@ export default class MeetingForm extends Component<Signature> {
   get readOnly() {
     return Boolean(
       (!this.currentSession.canWrite && this.currentSession.canRead) ||
-        this.isSigned.value ||
-        this.isPublished.value,
+      this.isSigned.value ||
+      this.isPublished.value,
     );
   }
 
