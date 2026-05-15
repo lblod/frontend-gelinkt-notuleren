@@ -43,7 +43,7 @@ export async function executeQuery<Binding = Record<string, RDF.Term>>({
   const response = await fetch(endpoint, {
     method: 'POST',
     mode: 'cors',
-    credentials: "same-origin",
+    credentials: 'same-origin',
     headers: {
       Accept: 'application/sparql-results+json',
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
