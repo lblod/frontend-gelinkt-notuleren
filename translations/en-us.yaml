@@ -954,11 +954,14 @@ ar-importer:
   preview:
     return-to-overview: Return to overview
     insert: Insert
+    only-existing-label: existing
+    only-existing: This design only includes existing Traffic Signals.
   message:
     error-no-decision: Please put the cursor inside a decision node
     error-processing-design: Error when processing signage plan
     warning-unused-signal-concept: Measure {measure} includes the signal {signal} but it is not used in this design
     warning-un-included-signal-concept: Signal {signal} is not included in the measure {measure} but it is used in this design
+
 document-information-modal:
   button-title: Document information
   modal-title: Edit document information

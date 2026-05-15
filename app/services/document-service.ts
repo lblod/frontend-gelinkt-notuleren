@@ -129,46 +129,44 @@ export default class DocumentService extends Service {
     return { parts, arDesigns: [...arDesigns.values()] };
   }
 
-  createEditorDocument = task(
-    async (
-      title: string,
-      content: string | undefined,
-      documentContainer: DocumentContainerModel,
-      previousDocument?: EditorDocumentModel,
-      skipSave?: boolean,
-    ) => {
-      if (!title || !documentContainer) {
-        // eslint-disable-next-line @typescript-eslint/only-throw-error
-        throw 'title and documentContainer are required';
-      } else {
-        const creationDate = new Date();
-        const editorDocument = this.store.createRecord<EditorDocumentModel>(
-          'editor-document',
-          {
-            createdOn: creationDate,
-            updatedOn: creationDate,
-            content: content ?? '',
-            title: title.trim(),
-          },
-        );
-        if (previousDocument) {
-          editorDocument.set('previousVersion', previousDocument);
-        }
-        editorDocument.set('documentContainer', documentContainer);
-
-        const { parts, arDesignUris } =
-          await this.retrieveExternalEntities(editorDocument);
-        editorDocument.set('parts', parts);
-        editorDocument.includesArDesigns = arDesignUris;
-        if (!skipSave) await editorDocument.save();
-
-        documentContainer.set('currentVersion', editorDocument);
-        if (!skipSave) await documentContainer.save();
-
-        return editorDocument;
+  createEditorDocument = async (
+    title: string,
+    content: string | undefined,
+    documentContainer: DocumentContainerModel,
+    previousDocument?: EditorDocumentModel,
+    skipSave?: boolean,
+  ) => {
+    if (!title || !documentContainer) {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      throw 'title and documentContainer are required';
+    } else {
+      const creationDate = new Date();
+      const editorDocument = this.store.createRecord<EditorDocumentModel>(
+        'editor-document',
+        {
+          createdOn: creationDate,
+          updatedOn: creationDate,
+          content: content ?? '',
+          title: title.trim(),
+        },
+      );
+      if (previousDocument) {
+        editorDocument.set('previousVersion', previousDocument);
       }
-    },
-  );
+      editorDocument.set('documentContainer', documentContainer);
+
+      const { parts, arDesignUris } =
+        await this.retrieveExternalEntities(editorDocument);
+      editorDocument.set('parts', parts);
+      editorDocument.includesArDesigns = arDesignUris;
+      if (!skipSave) await editorDocument.save();
+
+      documentContainer.set('currentVersion', editorDocument);
+      if (!skipSave) await documentContainer.save();
+
+      return editorDocument;
+    }
+  };
 
   async buildTemplate(template: Template): Promise<string> {
     if (template) {
@@ -201,56 +199,48 @@ export default class DocumentService extends Service {
     } else return '';
   }
 
-  persistDocument = task(
-    async ({
-      template,
-      title,
-      folderId,
-      group,
-      decisionType,
-      linkedDecisionUri,
-    }: PersistDocumentArgs) => {
-      let generatedTemplate = await this.buildTemplate(template);
-      if (decisionType) {
-        generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
-          generatedTemplate,
-          (state) => setBesluitType(state, decisionType),
-        );
-      }
-      if (linkedDecisionUri) {
-        generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
-          generatedTemplate,
-          (state) => setLinkedDecision(state, linkedDecisionUri),
-        );
-      }
-
-      const container = this.store.createRecord<DocumentContainerModel>(
-        'document-container',
-        {},
-      );
-      const draftStatus = await this.store.findRecord<ConceptModel>(
-        'concept',
-        DRAFT_STATUS_ID,
-      );
-      container.set('status', draftStatus);
-      const folder = await this.store.findRecord<EditorDocumentFolderModel>(
-        'editor-document-folder',
-        folderId,
-      );
-      container.set('folder', folder);
-      container.set('publisher', group);
-      await container.save();
-      const editorDocument = await this.createEditorDocument.perform(
-        title,
+  persistDocument = async ({
+    template,
+    title,
+    folderId,
+    group,
+    decisionType,
+    linkedDecisionUri,
+  }: PersistDocumentArgs) => {
+    let generatedTemplate = await this.buildTemplate(template);
+    if (decisionType) {
+      generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
         generatedTemplate,
-        container,
+        (state) => setBesluitType(state, decisionType),
       );
+    }
+    if (linkedDecisionUri) {
+      generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
+        generatedTemplate,
+        (state) => setLinkedDecision(state, linkedDecisionUri),
+      );
+    }
 
-      container.set('currentVersion', editorDocument);
-      await container.save();
-      return container;
-    },
-  );
+    const container = this.store.createRecord<DocumentContainerModel>(
+      'document-container',
+      {},
+    );
+    const draftStatus = await this.store.findRecord<ConceptModel>(
+      'concept',
+      DRAFT_STATUS_ID,
+    );
+    container.set('status', draftStatus);
+    const folder = await this.store.findRecord<EditorDocumentFolderModel>(
+      'editor-document-folder',
+      folderId,
+    );
+    container.set('folder', folder);
+    container.set('publisher', group);
+    await container.save();
+    await this.createEditorDocument(title, generatedTemplate, container);
+
+    return container;
+  };
 
   async retrieveExternalEntities(document: EditorDocumentModel) {
     const { parts: partUris, arDesigns: arDesignUris } =

@@ -1,21 +1,33 @@
 import Controller from '@ember/controller';
 import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
-import { fetch } from 'fetch';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
+import type PublishService from 'frontend-gelinkt-notuleren/services/publish';
+import type RouterService from '@ember/routing/router-service';
+import type IntlService from 'ember-intl/services/intl';
+import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
+import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
+import type { ModelFrom } from 'frontend-gelinkt-notuleren/utils/types';
+import type MeetingsPublishUittrekselsShowRoute from 'frontend-gelinkt-notuleren/routes/meetings/publish/uittreksels/show';
+import type SignedResource from 'frontend-gelinkt-notuleren/models/signed-resource';
+import type PublishingLog from 'frontend-gelinkt-notuleren/models/publishing-log';
+import type MuTaskService from 'frontend-gelinkt-notuleren/services/mu-task';
 
 export default class MeetingsPublishUittrekselsShowController extends Controller {
   publicationBaseUrl = ENV.publication.baseUrl;
-  @tracked error;
+  @tracked error: Option<unknown>;
   @tracked signingModalOpen = false;
   @tracked publishingModalOpen = false;
-  @service publish;
-  @service router;
-  @service intl;
-  @service currentSession;
-  @service store;
+  @service declare publish: PublishService;
+  @service declare router: RouterService;
+  @service declare intl: IntlService;
+  @service declare currentSession: CurrentSessionService;
+  @service declare store: Store;
+  @service declare muTask: MuTaskService;
+  declare model: ModelFrom<MeetingsPublishUittrekselsShowRoute>;
 
   get bestuurseenheid() {
     return this.currentSession.group;
@@ -34,7 +46,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   get title() {
-    return this.agendapoint.titel;
+    return this.agendapoint?.titel;
   }
 
   get treatment() {
@@ -53,10 +65,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     return this.model.validationErrors;
   }
 
-  /**
-   * @returns {boolean}
-   */
-  get loading() {
+  get loading(): boolean {
     return (
       this.signDocumentTask.isRunning ||
       this.publishDocumentTask.isRunning ||
@@ -64,10 +73,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     );
   }
 
-  /**
-   * @returns {boolean}
-   */
-  get canPublish() {
+  get canPublish(): boolean {
     return !this.loading && this.currentSession.canPublish;
   }
 
@@ -151,11 +157,14 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     try {
       this.error = null;
       await this.versionedTreatment.save();
-      const signature = await this.store.createRecord('signed-resource', {
-        versionedBehandeling: this.versionedTreatment,
-      });
-      await signature.save();
-      const log = this.store.createRecord('publishing-log', {
+      const signature = this.store.createRecord<SignedResource>(
+        'signed-resource',
+        {
+          versionedBehandeling: this.versionedTreatment,
+        },
+      );
+      await signature?.save();
+      const log = this.store.createRecord<PublishingLog>('publishing-log', {
         action: 'sign',
         user: this.currentSession.user,
         date: new Date(),
@@ -169,10 +178,10 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     }
   });
 
-  deleteSignatureTask = task(async (signature) => {
+  deleteSignatureTask = task(async (signature: SignedResource) => {
     signature.deleted = true;
     await signature.save();
-    const log = this.store.createRecord('publishing-log', {
+    const log = this.store.createRecord<PublishingLog>('publishing-log', {
       action: 'delete-signature',
       user: this.currentSession.user,
       date: new Date(),
@@ -203,10 +212,14 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         },
       );
       if (!result.ok) {
-        const json = await result.json();
+        const json = (await result.json()) as
+          | { errors?: { title?: string }[] }
+          | undefined;
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         const errors = json?.errors
-          .map((error) => error.title || error)
+          ?.map((error) => error.title || error)
           .join('\n');
+        // eslint-disable-next-line @typescript-eslint/only-throw-error
         throw errors;
       }
       // TODO if the prepublisher would be fully jsonAPI compliant, this would not be needed
@@ -215,7 +228,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
       //
       await this.refreshRoute();
 
-      const log = this.store.createRecord('publishing-log', {
+      const log = this.store.createRecord<PublishingLog>('publishing-log', {
         action: 'publish',
         user: this.currentSession.user,
         date: new Date(),
