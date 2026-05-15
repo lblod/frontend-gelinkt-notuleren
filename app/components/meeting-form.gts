@@ -408,10 +408,7 @@ export default class MeetingForm extends Component<Signature> {
       page: { size: 100 }, //arbitrary number, later we will make sure there is previous last. (also like this in the plugin)
     };
     const mandatees = [
-      ...(await this.store.query<MandatarisModel>(
-        'mandataris',
-        queryParams as unknown as LegacyResourceQuery<MandatarisModel>,
-      )),
+      ...(await this.store.query<MandatarisModel>('mandataris', queryParams)),
     ];
     return mandatees;
   });
