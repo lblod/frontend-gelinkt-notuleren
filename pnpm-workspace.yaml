@@ -52,8 +52,8 @@ catalog:
   webpack: ^5.106.2
   zod: ^3.25.76
 overrides:
-  "@ember/test-waiters": $@ember/test-waiters
-  "@lblod/ember-rdfa-editor": $@lblod/ember-rdfa-editor
+  '@ember/test-waiters': $@ember/test-waiters
+  '@lblod/ember-rdfa-editor': $@lblod/ember-rdfa-editor
   ember-auto-import: $ember-auto-import
   ember-composability-tools>@ember/render-modifiers: ^3.0.0
   ember-headless-form>tracked-built-ins: $tracked-built-ins
