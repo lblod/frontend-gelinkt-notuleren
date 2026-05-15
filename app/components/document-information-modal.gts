@@ -339,7 +339,6 @@ export default class DocumentInformationModal extends Component<Sig> {
     <div {{this.updateDataModifier}}>
       <AuModal
         @title={{t 'document-information-modal.modal-title'}}
-        @overflow={{true}}
         @modalOpen={{true}}
         @closeModal={{@closeModal}}
         as |Modal|
@@ -360,6 +359,7 @@ export default class DocumentInformationModal extends Component<Sig> {
               @selectedType={{this.selectedTypeInstance}}
               @setType={{this.setType}}
               @required={{true}}
+              @renderInPlace={{false}}
             />
           {{else}}
             <AuLoader @hideMessage={{true}}>{{t
@@ -374,6 +374,7 @@ export default class DocumentInformationModal extends Component<Sig> {
               @besluitTopics={{this.topicsSynced}}
               @onchange={{this.upsertBesluitTopic}}
               @selected={{this.besluitTopicsSelected}}
+              @renderInPlace={{false}}
             />
           {{else}}
             <AuLoader @hideMessage={{true}}>{{t
