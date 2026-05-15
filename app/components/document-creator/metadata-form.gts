@@ -14,7 +14,6 @@ import { tracked } from '@glimmer/tracking';
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import LinkedDecisionSelect from '../linked-decision-select';
-
 export type updateLinkedDecisionArgs = {
   uri: string;
   title: string;
@@ -64,6 +63,7 @@ export default class MetadataForm extends Component<Sig> {
         <AuTextarea
           @error={{@invalidTitle}}
           @width='block'
+          {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
           type='text'
           value={{@title}}
           id={{id}}

@@ -162,7 +162,7 @@ function update(component: DecisionCopyParts): Section[] | undefined {
           for (const partType of parts) {
             const partCb = partType.callback || ((a) => a);
             const partElements = partType.selector
-              ? contentElement?.querySelectorAll(partType.selector) ?? []
+              ? (contentElement?.querySelectorAll(partType.selector) ?? [])
               : [];
             partElements.forEach((part) => {
               const partElement = partCb(part);

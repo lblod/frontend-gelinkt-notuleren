@@ -619,6 +619,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
     </AppChrome>
 
     <AuBodyContainer
+      {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
       vocab='http://data.vlaanderen.be/ns/besluit#'
       prefix='eli: http://data.europa.eu/eli/ontology# prov: http://www.w3.org/ns/prov# mandaat: http://data.vlaanderen.be/ns/mandaat# besluit: http://data.vlaanderen.be/ns/besluit# say:https://say.data.gift/ns/ dct: http://purl.org/dc/terms/ ext:http://mu.semte.ch/vocabularies/ext/'
     >

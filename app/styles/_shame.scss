@@ -608,23 +608,19 @@ div.table-of-contents {
   }
 }
 
-[typeof="https://say.data.gift/ns/Title"] > [property="say:heading"]
-{
+[typeof='https://say.data.gift/ns/Title'] > [property='say:heading'] {
   @extend .au-c-heading--3;
 }
 
-[typeof="https://say.data.gift/ns/Chapter"] > [property="say:heading"]
-{
+[typeof='https://say.data.gift/ns/Chapter'] > [property='say:heading'] {
   @extend .au-c-heading--4;
 }
 
-[typeof="https://say.data.gift/ns/Section"] > [property="say:heading"]
-{
+[typeof='https://say.data.gift/ns/Section'] > [property='say:heading'] {
   @extend .au-c-heading--5;
 }
 
-[typeof="https://say.data.gift/ns/Subsection"] > [property="say:heading"]
-{
+[typeof='https://say.data.gift/ns/Subsection'] > [property='say:heading'] {
   @extend .au-c-heading--6;
 }
 
