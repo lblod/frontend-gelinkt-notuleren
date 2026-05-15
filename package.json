@@ -165,19 +165,6 @@
     "webpack": "catalog:",
     "zod": "catalog:"
   },
-  "pnpm": {
-    "overrides": {
-      "@ember/test-waiters": "$@ember/test-waiters",
-      "@lblod/ember-rdfa-editor": "$@lblod/ember-rdfa-editor",
-      "caniuse-lite": "1.0.30001751",
-      "ember-auto-import": "$ember-auto-import",
-      "ember-composability-tools>@ember/render-modifiers": "^3.0.0",
-      "ember-headless-form>tracked-built-ins": "$tracked-built-ins",
-      "ember-math-helpers": "$ember-math-helpers",
-      "ember-truth-helpers": "$ember-truth-helpers",
-      "tracked-toolbox": "$tracked-toolbox"
-    }
-  },
   "engines": {
     "node": "16.* || >= 18"
   },
