@@ -74,8 +74,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
     PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       SELECT DISTINCT ?uri ?title WHERE {
         ?uri a besluit:Besluit;
-          a ?besluitType;
-          eli:title ?title.
+          a ?besluitType.
         ?bvap prov:generated ?uri.
         ?uittreksel ext:uittrekselBvap ?bvap.
         ?zitting ext:uittreksel ?uittreksel;
@@ -85,6 +84,9 @@ export default class LinkedDecisionSelect extends Component<Sig> {
           sparqlEscapeUri,
         ).join(' ')}}
         ${searchFilter}
+        OPTIONAL {
+          ?uri eli:title ?title.
+        }
       } LIMIT 20
     `;
     const queryResult = await executeQuery({
@@ -111,6 +113,13 @@ export default class LinkedDecisionSelect extends Component<Sig> {
     return this.publishedBesluitsRequest.perform(searchString);
   };
 
+  reglementTitle = (title: string) => {
+    if (!title || title === '') {
+      return 'Ontbrekende titel';
+    }
+    return title;
+  };
+
   <template>
     <AuLabel for='linked-decision'>
       {{t 'document-creator.linked-decision'}}
@@ -131,7 +140,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
         @onChange={{@updateLinkedDecision}}
         as |publishedBesluit|
       >
-        {{publishedBesluit.title}}
+        {{this.reglementTitle publishedBesluit.title}}
       </PowerSelect>
     {{/if}}
     <p class='au-u-muted au-u-margin-tiny au-u-margin-bottom-small'>
