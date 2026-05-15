@@ -147,8 +147,8 @@ importers:
         specifier: 13.7.0
         version: 13.7.0(e65ae4112082f459cd75a47e331effdd)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 35.4.0
-        version: 35.4.0(bda9ce4ad7bf521415e127d2f7c1dd61)
+        specifier: 35.5.0
+        version: 35.5.0(bda9ce4ad7bf521415e127d2f7c1dd61)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1899,8 +1899,8 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.4.0':
-    resolution: {integrity: sha512-Lk9NB2RID2cKcojBTuBopeZicQQuNTFg+Bsn8wd5UY5W1+1/lTozw2iXvcRR4yp3wraIFnIgUzVsGbPrpBp7lw==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.5.0':
+    resolution: {integrity: sha512-diU59hXbQE/RAlrES5TR3gB7hofPE7d7UhaVKqL3Pv2t8PD/kyy7f8S9GIaWHAUIR5YHLwxJXZ1mD+LRCHRn3Q==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
@@ -12443,7 +12443,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.4.0(bda9ce4ad7bf521415e127d2f7c1dd61)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@35.5.0(bda9ce4ad7bf521415e127d2f7c1dd61)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.27.7)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(webpack@5.98.0))(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.27.7))(@glint/template@1.5.2)(rsvp@4.8.5)(webpack@5.98.0))(eslint@9.24.0(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.0(@babel/core@7.27.7))(webpack@5.98.0)
       '@babel/core': 7.27.7
