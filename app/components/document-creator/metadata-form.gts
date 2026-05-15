@@ -77,6 +77,7 @@ export default class MetadataForm extends Component<Sig> {
             @types={{@decisionTypes}}
             @selectedType={{@selectedType}}
             @setType={{@setDecisionType}}
+            @renderInPlace={{false}}
           />
         {{/if}}
       {{/if}}
