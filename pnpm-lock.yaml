@@ -21,6 +21,9 @@ catalogs:
     '@changesets/cli':
       specifier: ^2.31.0
       version: 2.31.0
+    '@ember/app-tsconfig':
+      specifier: ^2.0.0
+      version: 2.0.0
     '@eslint/js':
       specifier: ^9.39.4
       version: 9.39.4
@@ -36,9 +39,6 @@ catalogs:
     '@nullvoxpopuli/ember-composable-helpers':
       specifier: ^5.3.2
       version: 5.3.2
-    '@tsconfig/ember':
-      specifier: ^3.0.12
-      version: 3.0.12
     changesets-release-it-plugin:
       specifier: ^0.2.0
       version: 0.2.0
@@ -236,6 +236,9 @@ importers:
       '@ember-data-types/tracking':
         specifier: 5.4.0-alpha.150
         version: 5.4.0-alpha.150
+      '@ember/app-tsconfig':
+        specifier: 'catalog:'
+        version: 2.0.0
       '@ember/optional-features':
         specifier: ^2.3.0
         version: 2.3.0
@@ -308,9 +311,6 @@ importers:
       '@release-it-plugins/lerna-changelog':
         specifier: ^6.0.0
         version: 6.1.0(release-it@16.3.0(encoding@0.1.13)(typescript@5.9.3))
-      '@tsconfig/ember':
-        specifier: 'catalog:'
-        version: 3.0.12
       '@types/eslint__js':
         specifier: ^8.42.3
         version: 8.42.3
@@ -1546,6 +1546,9 @@ packages:
     resolution: {integrity: sha512-CczHOsEbInbVg4WF2UQhV89gCnSfH+8ZR1WinPFQ8PaY6e1KSlPULuTXhC03NhAo8GaJzHlvc3KfATt5qgBplg==}
     engines: {node: 16.* || >= 18}
 
+  '@ember/app-tsconfig@2.0.0':
+    resolution: {integrity: sha512-NmD1OZFtCF49k4WDaPdhGP4OKoRbPaXpTBO3AsJe0okIJeCVUiEiC8YUpfTJmld9EJOEa9mW/p0tJQS70GktOA==}
+
   '@ember/edition-utils@1.2.0':
     resolution: {integrity: sha512-VmVq/8saCaPdesQmftPqbFtxJWrzxNGSQ+e8x8LLe3Hjm36pJ04Q8LeORGZkAeOhldoUX9seLGmSaHeXkIqoog==}
 
@@ -2568,10 +2571,6 @@ packages:
 
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
-
-  '@tsconfig/ember@3.0.12':
-    resolution: {integrity: sha512-ypFTXqIzQAB5HpYPi4TwDElDcUheWrKsEaYXgjiCAvsH6zxcQ4zUeuJqmfT+FoUlHTPZ3Xyel81OxrcjI+rilw==}
-    deprecated: Please use @ember/app-tsconfig or @ember/library-tsconfig instead. These live at https://github.com/ember-cli/tsconfigs
 
   '@tybys/wasm-util@0.10.2':
     resolution: {integrity: sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg==}
@@ -11764,6 +11763,8 @@ snapshots:
       - '@glint/template'
       - supports-color
 
+  '@ember/app-tsconfig@2.0.0': {}
+
   '@ember/edition-utils@1.2.0': {}
 
   '@ember/optional-features@2.3.0':
@@ -13324,8 +13325,6 @@ snapshots:
   '@tootallnate/once@1.1.2': {}
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
-
-  '@tsconfig/ember@3.0.12': {}
 
   '@tybys/wasm-util@0.10.2':
     dependencies:
