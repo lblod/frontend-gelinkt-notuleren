@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.77.0
+
+### Minor Changes
+
+- [#920](https://github.com/lblod/frontend-gelinkt-notuleren/pull/920) [`74a157d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/74a157d7d780baa568b94a89389ca090524b5850) Thanks [@abeforgit](https://github.com/abeforgit)! - Bump minor dep versions
+
+### Patch Changes
+
+- [#917](https://github.com/lblod/frontend-gelinkt-notuleren/pull/917) [`459f20b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/459f20bff80676e139b255e13e44a92653f7e313) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Handle possible missing titles in linked decision
+
+- [#916](https://github.com/lblod/frontend-gelinkt-notuleren/pull/916) [`0b62944`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0b6294496de05ffc848d7ee86e1e850d095e82d2) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fix overflow problems in create agendapoint modal
+
+- [#919](https://github.com/lblod/frontend-gelinkt-notuleren/pull/919) [`2db001f`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2db001ff9caf3ad40c86bbde73cd7e31c88708de) Thanks [@nvdk](https://github.com/nvdk)! - Send cookies to endpoint for sparql queries
+
+- [#918](https://github.com/lblod/frontend-gelinkt-notuleren/pull/918) [`51db83d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/51db83d0fc82be8bd0128739f96bf804a0f757fc) Thanks [@piemonkey](https://github.com/piemonkey)! - Move some code around signing to Typescript
+
 ## 5.76.0
 
 ### Minor Changes
@@ -210,7 +226,6 @@
   Fix parsing of articles
 
 - [#872](https://github.com/lblod/frontend-gelinkt-notuleren/pull/872) [`192c1ab`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/192c1ab287c399c3241845b6e18af01ed43e76f9) Thanks [@abeforgit](https://github.com/abeforgit)! - Bump plugins to [v32.5.3](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.5.3)
-
   - fix parsing of articles
   - fix parsing of oslo locations
   - fix parsing subjects of roadsign_regulation nodes
@@ -304,7 +319,6 @@
 ### Minor Changes
 
 - Update `@lblod/ember-rdfa-editor` to version [12.9.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4012.9.0)
-
   - Integrate new version of rdfa-tools
 
 - [`2d03f1d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2d03f1d3ea38b7c0dbff89d95ca7fa24f117c747) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor-lblod-plugins version 32.2.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v32.2.0)
@@ -383,7 +397,6 @@
   Update `@lblod/ember-rdfa-editor-lblod-plugins` to version [30.0.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v30.0.0)
 
   These new versions contain support (among other features/fixes) for:
-
   - Smart variables
   - Adding backlinks to literal nodes
 
@@ -745,10 +758,8 @@
 ### Minor Changes
 
 - [#765](https://github.com/lblod/frontend-gelinkt-notuleren/pull/765) [`001c7c3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/001c7c3bca5706af075ac428b93ab7195e7238d2) Thanks [@elpoelma](https://github.com/elpoelma)! - - Adjust logic of meeting creation modal:
-
   - Only allow the selection of 'bestuursorganen' which are active on the selected 'planned start' date
   - When modifying the 'planned start' date, clear the 'bestuursorgaan' if necessary.
-
   * Modernize `administrative-body-select` component
 
 - [#732](https://github.com/lblod/frontend-gelinkt-notuleren/pull/732) [`677da80`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/677da8049ac6cb0dc531be9355ca7ecac3859633) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Add a way of adding a custom voting
@@ -762,7 +773,6 @@
 ### Minor Changes
 
 - [#763](https://github.com/lblod/frontend-gelinkt-notuleren/pull/763) [`1def2b1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/1def2b1a6a0d2494ecb3d014d6be1767146d0a1e) Thanks [@elpoelma](https://github.com/elpoelma)! - bump plugins to [v25.2.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v25.2.0)
-
   - set up config for new snippet placeholder UI
 
 ### Patch Changes
@@ -813,7 +823,6 @@
 
 - [#757](https://github.com/lblod/frontend-gelinkt-notuleren/pull/757) [`0bc0d88`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0bc0d8897ec6ee03df02d3a64838563ef6029140) Thanks [@elpoelma](https://github.com/elpoelma)! - Disable creation of inauguration meeting if not applicable.
   To be able to create an inauguration meeting, you should be logged in as a:
-
   - Gemeente
   - District
   - OCMW
@@ -844,13 +853,11 @@
 
 - [#746](https://github.com/lblod/frontend-gelinkt-notuleren/pull/746) [`6bb3107`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6bb310750f2670a9d127e99023ad5a02ee68baf6) Thanks [@elpoelma](https://github.com/elpoelma)! - **IVGR LMB table queries**
   Introduce deterministic ordering. Mandatees/fractions will be ordered by:
-
   - Fraction size
   - Mandatee name in alphabetical order
 
 - [#746](https://github.com/lblod/frontend-gelinkt-notuleren/pull/746) [`3fc060b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3fc060bbb904b54ac9cd41c86d437201290334b7) Thanks [@elpoelma](https://github.com/elpoelma)! - **IVGR LMB table queries**
   Introduce deterministic ordering. Depending on the query/table, mandatees/fractions will be ordered by:
-
   - Fraction size
   - Amount of votes
   - Mandatee rank
@@ -897,7 +904,6 @@
 - [#739](https://github.com/lblod/frontend-gelinkt-notuleren/pull/739) [`cda985e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/cda985e878cf3f8374e86741bddc301a0a9d1a73) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Fixed bug where deleting the meeting was not possible
 
 - [#740](https://github.com/lblod/frontend-gelinkt-notuleren/pull/740) [`930f963`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/930f963fed02d0693bf3fd5d605f8a831fe73830) Thanks [@elpoelma](https://github.com/elpoelma)! - **IVGR LMB tables: adjust fractie-splitsing query**
-
   - Adjustment in how verkiezing and kieslijsten are determined
   - Fix variable name
 
@@ -1173,7 +1179,6 @@
 ### Minor Changes
 
 - [#683](https://github.com/lblod/frontend-gelinkt-notuleren/pull/683) [`0a37110`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a37110fb41e58c2780cb5a2f1fd2fa32f0ca3a7) Thanks [@elpoelma](https://github.com/elpoelma)! - - Add basic support for consuming and using decision templates from the regulatory statement endpoint
-
   - Refactor `RegulatoryAttachmentsFetcher` to `TemplateFetcher`
 
 - [#635](https://github.com/lblod/frontend-gelinkt-notuleren/pull/635) [`0a43cb3`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0a43cb3ef75fad4bb01ce56b09d3f70b05ea613f) Thanks [@elpoelma](https://github.com/elpoelma)! - Set-up basic creation-flow for inauguration meetings (installatievergadering) of a municipal council (gemeenteraad)
@@ -1321,9 +1326,7 @@
 ### Minor Changes
 
 - [#645](https://github.com/lblod/frontend-gelinkt-notuleren/pull/645) [`c522af9a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c522af9a8fa38ce5210b1fc99464334f4b82ffa4) Thanks [@dkozickis](https://github.com/dkozickis)! - GN-4800: Bump `@appuniversum/ember-appuniversum` to `3.4.1`
-
   - Bump `@appuniversum/ember-appuniversum` to `3.4.1`
-
     - Update breaking changes, mainly removing two-way binding from `AuTextarea` and `AuInput` components.
     - Change how `appuniversum` SCSS is imported in the app.
     - Add a key to `AuDatePicker` localisation.
@@ -1338,7 +1341,6 @@
   In the snippet insert modal: only show the titles of the snippets
 
   #### GN-4816: Add sorting for snippet lists
-
   - Use AuDataTable
   - Add sorting for snippet lists
 
@@ -1451,7 +1453,6 @@
 - [#610](https://github.com/lblod/frontend-gelinkt-notuleren/pull/610) [`e4742aae`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e4742aae2c24e8977c0f00c105dfb816a8203878) Thanks [@elpoelma](https://github.com/elpoelma)! - Disable space-invisible in order to prevent slowdowns
 
 - [#611](https://github.com/lblod/frontend-gelinkt-notuleren/pull/611) [`4ba94b92`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4ba94b9239dc06eeb2c35384648567879d05f944) Thanks [@dkozickis](https://github.com/dkozickis)! - Bump editor dependencies
-
   - Bump `@lblod/ember-rdfa-editor` to `^8.0.2`
   - Bump `@lblod/ember-rdfa-editor-lblod-plugins` to `^15.2.1`
   - Enable `Alignment` plugin
@@ -1462,7 +1463,6 @@
 ### Patch Changes
 
 - [`af202b99`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/af202b996bc3d79f0c1c2c43fb122ca04e8e7558) Thanks [@abeforgit](https://github.com/abeforgit)! - correctly deal with the 2 types of versionedNotulen
-
   - correctly show signatures even after document is published
   - correctly show the full document when signing even if notulen is already published with some parts marked private (you always sign the whole document)
     -> the page was showing the wrong document in the signing modal in
