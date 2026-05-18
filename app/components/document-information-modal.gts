@@ -234,8 +234,10 @@ export default class DocumentInformationModal extends Component<Sig> {
     return this.topics.value || [];
   }
 
-  updateLinkedDecision = (linkedDecisionOption: updateLinkedDecisionArgs) => {
-    this.linkedDecisionUri = linkedDecisionOption.uri;
+  updateLinkedDecision = (
+    linkedDecisionOption: updateLinkedDecisionArgs | null,
+  ) => {
+    this.linkedDecisionUri = linkedDecisionOption?.uri;
     this.linkedDecisionChanged = true;
   };
 
@@ -280,22 +282,20 @@ export default class DocumentInformationModal extends Component<Sig> {
   }
 
   updateDocumentLinkedDecision() {
-    if (this.linkedDecisionUri) {
-      this.controller.doCommand((state, dispatch) => {
-        if (!dispatch) {
-          return false;
-        }
-        const { result, transaction } = setLinkedDecision(
-          state,
-          this.linkedDecisionUri as string,
-        );
-        if (result.every((ok) => ok)) {
-          dispatch(transaction);
-          return true;
-        }
+    this.controller.doCommand((state, dispatch) => {
+      if (!dispatch) {
         return false;
-      });
-    }
+      }
+      const { result, transaction } = setLinkedDecision(
+        state,
+        this.linkedDecisionUri,
+      );
+      if (result.every((ok) => ok)) {
+        dispatch(transaction);
+        return true;
+      }
+      return false;
+    });
   }
 
   getLinkedDecisionFromDocument = () => {

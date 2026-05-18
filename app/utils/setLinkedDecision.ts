@@ -16,7 +16,7 @@ import {
 
 export default function setLinkedDecision(
   initialState: EditorState,
-  linkedDecisionUri: string,
+  linkedDecisionUri?: string,
 ): TransactionCombinatorResult<boolean> {
   const transaction = initialState.tr;
   const resource = getCurrentBesluitURI(initialState);
@@ -38,15 +38,17 @@ export default function setLinkedDecision(
       },
     });
   });
-  monads.push(
-    addPropertyToNode({
-      resource,
-      property: {
-        predicate: ELI('consolidates').full,
-        object: sayDataFactory.namedNode(linkedDecisionUri),
-      },
-    }),
-  );
+  if (linkedDecisionUri) {
+    monads.push(
+      addPropertyToNode({
+        resource,
+        property: {
+          predicate: ELI('consolidates').full,
+          object: sayDataFactory.namedNode(linkedDecisionUri),
+        },
+      }),
+    );
+  }
   return transactionCombinator<boolean>(initialState)(monads);
 }
 
