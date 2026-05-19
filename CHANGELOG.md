@@ -1,5 +1,11 @@
 # frontend-gelinkt-notuleren
 
+## 5.77.1
+
+### Patch Changes
+
+- [#921](https://github.com/lblod/frontend-gelinkt-notuleren/pull/921) [`e6675a1`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e6675a18f643fd36ce203896163e81294a6bc5c2) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Allow the user to clear the linked decision select
+
 ## 5.77.0
 
 ### Minor Changes
