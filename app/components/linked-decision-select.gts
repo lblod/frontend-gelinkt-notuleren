@@ -137,6 +137,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
         @options={{this.publishedBesluits}}
         @selected={{this.selectedPublishedBesluit}}
         @onChange={{@updateLinkedDecision}}
+        @allowClear={{true}}
         as |publishedBesluit|
       >
         {{this.reglementTitle publishedBesluit.title}}

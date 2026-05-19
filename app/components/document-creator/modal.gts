@@ -130,8 +130,10 @@ export default class DocumentCreatorModal extends Component<Sig> {
     }
   });
 
-  updateLinkedDecision = (linkedDecisionOption: updateLinkedDecisionArgs) => {
-    this.linkedDecisionUri = linkedDecisionOption.uri;
+  updateLinkedDecision = (
+    linkedDecisionOption: updateLinkedDecisionArgs | null,
+  ) => {
+    this.linkedDecisionUri = linkedDecisionOption?.uri;
   };
 
   <template>
