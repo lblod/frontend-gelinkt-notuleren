@@ -156,6 +156,15 @@ import {
   type ModelMigration,
   type ModelMigrationGenerator,
 } from '@lblod/ember-rdfa-editor/core/rdfa-types';
+import { slashCommandsPlugin } from '@lblod/ember-rdfa-editor/plugins/slash-commands/index';
+import {
+  getContextualActionGroups as placeDescriptionActionGroups,
+  getContextualActions as placeDescriptionActions,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions';
+import type {
+  GetContextualActionGroups,
+  GetContextualActions,
+} from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 
 const removeBlankNodes: ModelMigrationGenerator = (attrs) => {
   if (
@@ -179,6 +188,17 @@ const removeBlankNodes: ModelMigrationGenerator = (attrs) => {
 export default class AgendapointEditorService extends Service {
   @service declare intl: IntlService;
   @service declare currentSession: CurrentSessionService;
+
+  get locationOptions() {
+    return {
+      endpoint: ENV.fallbackCodelistEndpoint,
+      zonalLocationCodelistUri: ENV.zonalLocationCodelistUri,
+      nonZonalLocationCodelistUri: ENV.nonZonalLocationCodelistUri,
+    };
+  }
+
+  contextualActionGetters = [placeDescriptionActions(this.locationOptions)];
+  contextualActionGroupGetters = [placeDescriptionActionGroups()];
 
   get config() {
     const classificatie = this.currentSession
@@ -433,6 +453,8 @@ export default class AgendapointEditorService extends Service {
   getSchemaAndPlugins(isHeadless: boolean): {
     schema: Schema;
     plugins: ProsePlugin[];
+    contextualActionGroupGetters: GetContextualActionGroups;
+    contextualActionGetters: GetContextualActions;
   } {
     const schema = new Schema({
       nodes: {
@@ -508,6 +530,10 @@ export default class AgendapointEditorService extends Service {
       documentValidationPlugin(this.config.documentValidation),
 
       emberApplication({ application: unwrap(getOwner(this)) }),
+      slashCommandsPlugin({
+        intl: this.intl,
+        getGroups: this.contextualActionGroupGetters,
+      }),
     ];
 
     // The autofiller plugin messes with the headless editor by appending a transaction just
@@ -517,7 +543,12 @@ export default class AgendapointEditorService extends Service {
       plugins.push(variableAutofillerPlugin(this.config.autofilledVariable));
     }
 
-    return { schema, plugins };
+    return {
+      schema,
+      plugins,
+      contextualActionGetters: this.contextualActionGetters,
+      contextualActionGroupGetters: this.contextualActionGroupGetters,
+    };
   }
 
   getState = (html: string) => {
