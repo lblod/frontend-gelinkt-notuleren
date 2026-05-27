@@ -34,6 +34,8 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
     const versionedTreatment = versionedTreatments[0];
 
     if (!versionedTreatment) {
+      // We don't set the `html` attribute here, but the save goes to the prepublisher, not
+      // resources, and this populates this for us
       const extractPreview = this.store.createRecord<ExtractPreview>(
         'extract-preview',
         {
@@ -41,24 +43,14 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         },
       );
       await extractPreview.save();
-      const newVersionedTreatment =
-        this.store.createRecord<VersionedBehandelingModel>(
-          'versioned-behandeling',
-          {
-            zitting: meeting,
-            content: extractPreview.html,
-            behandeling: treatment,
-          },
-        );
-      const signedResources: SignedResource[] = [];
-      const publishedResource = await newVersionedTreatment.publishedResource;
       return {
         treatment,
         agendapoint,
-        versionedTreatment: newVersionedTreatment,
+        versionedTreatment: null,
+        extractPreview: extractPreview.html,
         meeting,
-        signedResources,
-        publishedResource,
+        signedResources: [] as SignedResource[],
+        publishedResource: null,
         validationErrors: extractPreview.validationErrors,
       };
     } else {
@@ -90,6 +82,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         treatment,
         agendapoint,
         versionedTreatment,
+        extractPreview: versionedTreatment.content,
         meeting,
         signedResources: signedResources.slice(),
         publishedResource: publishedResource[0],

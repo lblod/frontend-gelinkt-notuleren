@@ -15,12 +15,14 @@ import type MeetingsPublishUittrekselsShowRoute from 'frontend-gelinkt-notuleren
 import type SignedResource from 'frontend-gelinkt-notuleren/models/signed-resource';
 import type PublishingLog from 'frontend-gelinkt-notuleren/models/publishing-log';
 import type MuTaskService from 'frontend-gelinkt-notuleren/services/mu-task';
+import type VersionedBehandeling from 'frontend-gelinkt-notuleren/models/versioned-behandeling';
 
 export default class MeetingsPublishUittrekselsShowController extends Controller {
   publicationBaseUrl = ENV.publication.baseUrl;
   @tracked error: Option<unknown>;
   @tracked signingModalOpen = false;
   @tracked publishingModalOpen = false;
+  @tracked _versionedTreatment: VersionedBehandeling | null = null;
   @service declare publish: PublishService;
   @service declare router: RouterService;
   @service declare intl: IntlService;
@@ -38,7 +40,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   get versionedTreatment() {
-    return this.model.versionedTreatment;
+    return this.model.versionedTreatment ?? this._versionedTreatment;
   }
 
   get meeting() {
@@ -122,7 +124,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
 
   get previewDocument() {
     return {
-      body: this.model.versionedTreatment?.content,
+      body: this.model.extractPreview,
       signedId: this.meeting.get('id'),
     };
   }
@@ -156,7 +158,18 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     this.closeSigningModal();
     try {
       this.error = null;
-      await this.versionedTreatment.save();
+      if (!this.versionedTreatment) {
+        this._versionedTreatment =
+          this.store.createRecord<VersionedBehandeling>(
+            'versioned-behandeling',
+            {
+              zitting: this.meeting,
+              content: this.model.extractPreview,
+              behandeling: this.treatment,
+            },
+          );
+      }
+      await this.versionedTreatment?.save();
       const signature = this.store.createRecord<SignedResource>(
         'signed-resource',
         {
@@ -194,7 +207,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     // at this point, the signature is marked as deleted but the model has not yet reloaded,
     // so it is still in the signedResources array.
     // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
-    if (this.signatureCount === 1) {
+    if (this.signatureCount === 1 && this.versionedTreatment) {
       this.versionedTreatment.deleted = true;
       await this.versionedTreatment.save();
     }
