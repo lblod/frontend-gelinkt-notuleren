@@ -184,8 +184,20 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         console.error(
           'Task did not contain created Signed Resource, searching for one instead',
         );
+        const signatures = await this.store.query<SignedResource>(
+          'signed-resource',
+          {
+            'filter[versioned-behandeling][zitting][:id:]': this.meeting.id,
+            'filter[gebruiker][:id:]': this.currentSession.user?.id,
+            'filter[:or:][deleted]': false,
+            'filter[:or:][:has-no:deleted]': 'yes',
+          },
+        );
+        signature = signatures[0];
+      }
+      if (!signature) {
         throw new Error(
-          'Unable to recover from lack of Signed Resource from Task.',
+          'Unable to find signature that should have been created',
         );
       }
       const log = this.store.createRecord<PublishingLog>('publishing-log', {
@@ -196,6 +208,9 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         zitting: this.meeting,
       });
       await log.save();
+      // This is needed to get the versioned behandeling. We could add this to the response from the
+      // Task status endpoint, but this requires correctly assembling a jsonAPI compatible response
+      // including it. It was not done yet as the refresh likely sidesteps other concurrency problems.
       await this.refreshRoute();
     } catch (e) {
       this.error = e;
