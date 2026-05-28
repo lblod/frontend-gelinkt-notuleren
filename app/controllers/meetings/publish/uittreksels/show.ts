@@ -158,25 +158,36 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     this.closeSigningModal();
     try {
       this.error = null;
-      if (!this.versionedTreatment) {
-        this._versionedTreatment =
-          this.store.createRecord<VersionedBehandeling>(
-            'versioned-behandeling',
-            {
-              zitting: this.meeting,
-              content: this.model.extractPreview,
-              behandeling: this.treatment,
-            },
-          );
-      }
-      await this.versionedTreatment?.save();
-      const signature = this.store.createRecord<SignedResource>(
-        'signed-resource',
-        {
-          versionedBehandeling: this.versionedTreatment,
-        },
+      const taskId = await this.muTask.fetchTaskifiedEndpoint(
+        `/signing/uittreksel/sign/${this.meeting.id}/${this.treatment.id}`,
+        { method: 'POST' },
       );
-      await signature?.save();
+      const taskResult = await this.muTask.waitForMuTaskTask.perform(taskId);
+      let signature: SignedResource | undefined;
+      if (taskResult?.data.payload) {
+        // @ts-expect-error Strangely the types don't have the (valid) override that doesn't include
+        // a data type
+        this.store.pushPayload(taskResult.data.payload);
+        const createdData = taskResult?.data.payload?.['data'];
+        const createdId =
+          createdData &&
+          typeof createdData === 'object' &&
+          'id' in createdData &&
+          (createdData?.['id'] as string);
+        signature = !createdId
+          ? undefined
+          : await this.store.findRecord<SignedResource>(
+              'signed-resource',
+              createdId,
+            );
+      } else {
+        console.error(
+          'Task did not contain created Signed Resource, searching for one instead',
+        );
+        throw new Error(
+          'Unable to recover from lack of Signed Resource from Task.',
+        );
+      }
       const log = this.store.createRecord<PublishingLog>('publishing-log', {
         action: 'sign',
         user: this.currentSession.user,
@@ -208,6 +219,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     // so it is still in the signedResources array.
     // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
     if (this.signatureCount === 1 && this.versionedTreatment) {
+      // versionedTreatment should always be set as we always reload after signing
       this.versionedTreatment.deleted = true;
       await this.versionedTreatment.save();
     }
