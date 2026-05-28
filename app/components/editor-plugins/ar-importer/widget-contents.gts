@@ -18,6 +18,7 @@ import {
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
 import type { GenerateImportResult } from 'frontend-gelinkt-notuleren/services/ar-importer';
+import type { ArticlePosition } from './common-types';
 
 const FILTER_TIMEOUT_MS = 300;
 
@@ -32,6 +33,7 @@ type Sig = {
   Args: {
     controller: SayController;
     onInsert?: () => void;
+    articles: ArticlePosition[];
   };
 };
 
@@ -136,20 +138,27 @@ export default class ArWidgetContents extends Component<Sig> {
     }
   };
 
-  insertAr = task(async (design: ArDesign, skipWarnings?: boolean) => {
-    this.insertingDesign = design;
-    const monadsResult = await this.arImporter.generateInsertionMonads(
-      this.args.controller,
-      design,
-    );
-    if (skipWarnings || monadsResult.warnings.length === 0) {
-      this.doInsert(monadsResult.result);
-    } else {
-      this.insertWarnings = monadsResult;
-      this.selectedDesign = design;
-      this.insertingDesign = null;
-    }
-  });
+  insertAr = task(
+    async (
+      design: ArDesign,
+      insertPos: ArticlePosition | null,
+      skipWarnings?: boolean,
+    ) => {
+      this.insertingDesign = design;
+      const monadsResult = await this.arImporter.generateInsertionMonads(
+        this.args.controller,
+        design,
+        insertPos,
+      );
+      if (skipWarnings || monadsResult.warnings.length === 0) {
+        this.doInsert(monadsResult.result);
+      } else {
+        this.insertWarnings = monadsResult;
+        this.selectedDesign = design;
+        this.insertingDesign = null;
+      }
+    },
+  );
 
   confirmInsert = () => {
     if (this.insertWarnings) {
@@ -170,6 +179,7 @@ export default class ArWidgetContents extends Component<Sig> {
         @onReturnToOverview={{this.abortInsert}}
         @onInsertAr={{this.confirmInsert}}
         @insertLoading={{this.insertAr.isRunning}}
+        @articles={{@articles}}
       />
     {{else if this.selectedDesign}}
       <ArPreview
@@ -177,6 +187,7 @@ export default class ArWidgetContents extends Component<Sig> {
         @onReturnToOverview={{this.returnToOverview}}
         @onInsertAr={{this.insertAr.perform}}
         @insertLoading={{this.insertAr.isRunning}}
+        @articles={{@articles}}
       />
     {{else}}
       <ArDesignOverview

@@ -22,6 +22,7 @@ import type { ArDesignOverviewSortField, DesignInfo } from './widget-contents';
 import { eq } from 'ember-truth-helpers';
 import { trackedFunction } from 'reactiveweb/function';
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
+import type { ArInsertFunc } from './common-types';
 
 export type ArDesignOverviewSignature = {
   Element: AuMainContainerSignature['Element'];
@@ -29,7 +30,7 @@ export type ArDesignOverviewSignature = {
     arDesigns?: DesignInfo | null;
     loading?: boolean;
     onShowPreview: (arDesign: ArDesign) => void;
-    onInsertAr: (arDesign: ArDesign, skipWarnings?: boolean) => void;
+    onInsertAr: ArInsertFunc;
     insertingDesign?: ArDesign | null;
     nameFilter?: string;
     setNameFilter: (event: Event) => unknown;
@@ -127,7 +128,7 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
                   @disabled={{this.disabled}}
                   @loading={{eq @insertingDesign.id arDesign.id}}
                   @loadingMessage={{t 'application.loading'}}
-                  {{on 'click' (fn @onInsertAr arDesign false)}}
+                  {{on 'click' (fn @onInsertAr arDesign null false)}}
                 >{{t 'ar-importer.overview.table.actions.insert'}}</AuButton>
               </AuButtonGroup>
             </td>

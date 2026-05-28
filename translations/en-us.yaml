@@ -951,9 +951,13 @@ ar-importer:
         used: Used
         unused: Not yet used
       no-data: No designs found
+  controls:
+    insert: Insert
+    first: Before the first article
+    last: After the last article
+    after-article-x: After article {articleNumber}
   preview:
     return-to-overview: Return to overview
-    insert: Insert
     only-existing-label: existing
     only-existing: This design only includes existing Traffic Signals.
   message:

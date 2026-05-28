@@ -957,9 +957,13 @@ ar-importer:
         used: Gebruikt
         unused: Nog niet gebruikt
       no-data: Geen ontwerpen gevonden
+  controls:
+    insert: Voeg in
+    first: Voor het eerste artikel
+    last: Na het laatste artikel
+    after-article-x: Na artikel {articleNumber}
   preview:
     return-to-overview: Terug naar overzicht
-    insert: Voeg in
     only-existing-label: bestaand
     only-existing: Dit maatregelontwerp bevat enkel reeds bestaande verkeerstekens.
   message:

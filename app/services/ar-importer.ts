@@ -22,6 +22,7 @@ import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
 import { v4 as uuidv4 } from 'uuid';
 import { TRAFFIC_SIGNAL_EXISTING_STATUSES } from 'frontend-gelinkt-notuleren/config/constants';
+import type { ArticlePosition } from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/common-types';
 
 export type ImportResult<R> = {
   result: R;
@@ -104,6 +105,7 @@ export default class ArImporterService extends Service {
   async generateInsertionMonads(
     decisionUriOrController: string | SayController,
     design: ArDesign,
+    insertPosition: ArticlePosition | null,
     isPreview?: boolean,
   ): Promise<GenerateImportResult> {
     let decisionUri: string;
@@ -224,6 +226,7 @@ export default class ArImporterService extends Service {
     const { result: monads, warnings } = await this.generateInsertionMonads(
       decisionUri,
       design,
+      null,
       true,
     );
     const document = this.agendapointEditor.processDocumentHeadlessly(
