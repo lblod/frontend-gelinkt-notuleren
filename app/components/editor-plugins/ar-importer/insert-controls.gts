@@ -2,6 +2,7 @@ import { fn } from '@ember/helper';
 import { tracked } from '@glimmer/tracking';
 import { on } from '@ember/modifier';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
+import AuLabel from '@appuniversum/ember-appuniversum/components/au-label';
 import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus';
 import type { TOC } from '@ember/component/template-only';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
@@ -50,14 +51,20 @@ const InsertPositionSelector: TOC<{
     ) => void;
   };
 }> = <template>
-  <PowerSelect
-    class='au-u-1-5'
-    @allowClear={{false}}
-    @onChange={{@onChange}}
-    @selected={{@selected}}
-    @options={{@options}}
-    as |option|
-  >{{option.label}}</PowerSelect>
+  <AuLabel
+    class='ar-importer-insert-controls__label'
+    for='ar-importer-position-selector'
+  >{{t 'ar-importer.controls.select-position'}}:</AuLabel>
+  <div class='ar-importer-insert-controls__selector'>
+    <PowerSelect
+      id='ar-importer-position-selector'
+      @allowClear={{false}}
+      @onChange={{@onChange}}
+      @selected={{@selected}}
+      @options={{@options}}
+      as |option|
+    >{{option.label}}</PowerSelect>
+  </div>
 </template>;
 
 export interface ArInsertControlArgs {
@@ -109,16 +116,18 @@ export class InsertControls extends Component<Sig> {
   };
 
   <template>
-    <InsertPositionSelector
-      @options={{this.options}}
-      @selected={{this.selected}}
-      @onChange={{this.setSelected}}
-    />
-    <InsertButton
-      @arDesign={{@arDesign}}
-      @onInsertAr={{@onInsertAr}}
-      @insertLoading={{@insertLoading}}
-      @insertPosition={{this.selected.value}}
-    />
+    <div class='ar-importer-insert-controls'>
+      <InsertPositionSelector
+        @options={{this.options}}
+        @selected={{this.selected}}
+        @onChange={{this.setSelected}}
+      />
+      <InsertButton
+        @arDesign={{@arDesign}}
+        @onInsertAr={{@onInsertAr}}
+        @insertLoading={{@insertLoading}}
+        @insertPosition={{this.selected.value}}
+      />
+    </div>
   </template>
 }

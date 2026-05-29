@@ -955,6 +955,7 @@ ar-importer:
     first: Before the first article
     last: After the last article
     after-article-x: After article {articleNumber}
+    select-position: Choose insertion point
   preview:
     return-to-overview: Return to overview
     only-existing-label: existing

@@ -961,6 +961,7 @@ ar-importer:
     first: Voor het eerste artikel
     last: Na het laatste artikel
     after-article-x: Na artikel {articleNumber}
+    select-position: Kies invoegpositie
   preview:
     return-to-overview: Terug naar overzicht
     only-existing-label: bestaand
