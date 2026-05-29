@@ -951,8 +951,7 @@ ar-importer:
         date: Laatste wijziging
         status: Gebruikstatus
       actions:
-        preview: Preview
-        insert: Voeg in
+        select: Selecteer
       statuses:
         used: Gebruikt
         unused: Nog niet gebruikt

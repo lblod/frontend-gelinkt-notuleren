@@ -945,8 +945,7 @@ ar-importer:
         date: Last modified
         status: Usage status
       actions:
-        preview: Preview
-        insert: Insert
+        select: Select
       statuses:
         used: Used
         unused: Not yet used
