@@ -52,9 +52,12 @@
   max-width: 140rem;
 }
 .ar-importer-insert-controls {
+  width: 100%;
+  flex-shrink: 1;
   display: flex;
   column-gap: 1rem;
-  justify-content: center;
+  justify-content: end;
+  align-items: baseline;
 }
 .ar-importer-insert-controls__selector {
   flex-basis: 25rem;
@@ -62,7 +65,4 @@
   flex-grow: 0;
   justify-self: right;
   align-self: right;
-}
-.ar-importer-insert-controls__label {
-  margin: auto;
 }

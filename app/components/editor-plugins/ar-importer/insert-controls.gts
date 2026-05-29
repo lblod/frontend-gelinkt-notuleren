@@ -51,10 +51,9 @@ const InsertPositionSelector: TOC<{
     ) => void;
   };
 }> = <template>
-  <AuLabel
-    class='ar-importer-insert-controls__label'
-    for='ar-importer-position-selector'
-  >{{t 'ar-importer.controls.select-position'}}:</AuLabel>
+  <AuLabel for='ar-importer-position-selector'>{{t
+      'ar-importer.controls.select-position'
+    }}:</AuLabel>
   <div class='ar-importer-insert-controls__selector'>
     <PowerSelect
       id='ar-importer-position-selector'

@@ -45,6 +45,36 @@ export default class ArPreview extends Component<ArPreviewSignature> {
             {{on 'click' this.returnToOverview}}
           >{{t 'ar-importer.preview.return-to-overview'}}</AuButton>
         </Group>
+      </AuToolbar>
+      <div class='ar-importer-preview__content au-o-layout'>
+        {{#if this.preview.isLoading}}
+          <AuLoader @centered={{true}} @hideMessage={{false}}>
+            {{t 'application.loading'}}
+          </AuLoader>
+        {{/if}}
+        {{#if this.preview.isError}}
+          <AuAlert @icon='alert-triangle' @skin='error'>
+            {{t 'ar-importer.message.error-processing-design'}}
+          </AuAlert>
+        {{/if}}
+        {{#if this.preview.value}}
+          {{#if this.preview.value.warnings}}
+            <AuAlert
+              @icon='alert-triangle'
+              @skin='warning'
+              class='au-u-margin-left au-u-margin-right'
+            >
+              {{#each this.preview.value.warnings as |warning|}}
+                <p>{{warning}}</p>
+              {{/each}}
+            </AuAlert>
+          {{/if}}
+          {{htmlSafe this.preview.value.result}}
+        {{/if}}
+      </div>
+
+      <AuToolbar @size='medium' as |Group|>
+        <Group />
         <InsertControls
           @arDesign={{@arDesign}}
           @onInsertAr={{@onInsertAr}}
@@ -52,33 +82,6 @@ export default class ArPreview extends Component<ArPreviewSignature> {
           @articles={{@articles}}
         />
       </AuToolbar>
-      {{#if this.preview.isLoading}}
-        <AuLoader @hideMessage={{true}}>
-          {{t 'application.loading'}}
-        </AuLoader>
-      {{/if}}
-      {{#if this.preview.isError}}
-        <AuAlert @icon='alert-triangle' @skin='error'>
-          {{t 'ar-importer.message.error-processing-design'}}
-        </AuAlert>
-      {{/if}}
-      {{#if this.preview.value}}
-        {{#if this.preview.value.warnings}}
-          <AuAlert
-            @icon='alert-triangle'
-            @skin='warning'
-            class='au-u-margin-left au-u-margin-right'
-          >
-            {{#each this.preview.value.warnings as |warning|}}
-              <p>{{warning}}</p>
-            {{/each}}
-          </AuAlert>
-        {{/if}}
-        <div class='ar-importer-preview__content au-o-layout'>
-          {{htmlSafe this.preview.value.result}}
-        </div>
-      {{/if}}
-
     </div>
   </template>
 }
