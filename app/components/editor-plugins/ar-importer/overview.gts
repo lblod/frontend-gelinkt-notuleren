@@ -23,6 +23,7 @@ import { eq } from 'ember-truth-helpers';
 import { trackedFunction } from 'reactiveweb/function';
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import type { ArInsertFunc } from './common-types';
+import { afterLastArticle } from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
 export type ArDesignOverviewSignature = {
   Element: AuMainContainerSignature['Element'];
@@ -128,7 +129,10 @@ export default class ArDesignOverview extends Component<ArDesignOverviewSignatur
                   @disabled={{this.disabled}}
                   @loading={{eq @insertingDesign.id arDesign.id}}
                   @loadingMessage={{t 'application.loading'}}
-                  {{on 'click' (fn @onInsertAr arDesign null false)}}
+                  {{on
+                    'click'
+                    (fn @onInsertAr arDesign afterLastArticle false)
+                  }}
                 >{{t 'ar-importer.overview.table.actions.insert'}}</AuButton>
               </AuButtonGroup>
             </td>

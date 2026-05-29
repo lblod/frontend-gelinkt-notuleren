@@ -17,20 +17,25 @@ import type {
   ArticlePosition,
   InsertPositionOption,
 } from './common-types';
+import {
+  afterLastArticle,
+  ArticleInsertPosition,
+  beforeFirstArticle,
+} from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
 const InsertButton: TOC<{
   Args: {
     arDesign: ArDesign;
     insertLoading?: boolean;
     onInsertAr: ArInsertFunc;
-    insertPos: ArticlePosition | null;
+    insertPosition: ArticleInsertPosition;
   };
 }> = <template>
   <AuButton
     @icon={{PlusIcon}}
     @loading={{@insertLoading}}
     @loadingMessage={{t 'application.loading'}}
-    {{on 'click' (fn @onInsertAr @arDesign @insertPos true)}}
+    {{on 'click' (fn @onInsertAr @arDesign @insertPosition true)}}
   >{{t 'ar-importer.controls.insert'}}</AuButton>
 </template>;
 
@@ -71,17 +76,20 @@ export class InsertControls extends Component<Sig> {
 
   get beforeFirst(): InsertPositionOption {
     return {
-      value: 'first',
+      value: beforeFirstArticle,
       label: this.intl.t('ar-importer.controls.first'),
     };
   }
   get afterLast(): InsertPositionOption {
-    return { value: 'last', label: this.intl.t('ar-importer.controls.last') };
+    return {
+      value: afterLastArticle,
+      label: this.intl.t('ar-importer.controls.last'),
+    };
   }
 
   get articleOptions(): InsertPositionOption[] {
-    return this.args.articles.map((articlePos, i) => ({
-      value: articlePos,
+    return this.args.articles.map((_, i) => ({
+      value: new ArticleInsertPosition(i),
       label: this.intl.t('ar-importer.controls.after-article-x', {
         articleNumber: i + 1,
       }),
@@ -100,16 +108,6 @@ export class InsertControls extends Component<Sig> {
     this._selected = val;
   };
 
-  get insertPos(): ArticlePosition | null {
-    if (this.selected.value === 'last' || this.args.articles.length == 0) {
-      return null;
-    } else if (this.selected.value === 'first') {
-      return this.args.articles[0] ?? null;
-    } else {
-      return this.selected.value;
-    }
-  }
-
   <template>
     <InsertPositionSelector
       @options={{this.options}}
@@ -120,7 +118,7 @@ export class InsertControls extends Component<Sig> {
       @arDesign={{@arDesign}}
       @onInsertAr={{@onInsertAr}}
       @insertLoading={{@insertLoading}}
-      @insertPos={{this.insertPos}}
+      @insertPosition={{this.selected.value}}
     />
   </template>
 }

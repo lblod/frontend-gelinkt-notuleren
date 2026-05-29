@@ -19,6 +19,7 @@ import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-d
 import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
 import type { GenerateImportResult } from 'frontend-gelinkt-notuleren/services/ar-importer';
 import type { ArticlePosition } from './common-types';
+import type { ArticleInsertPosition } from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
 const FILTER_TIMEOUT_MS = 300;
 
@@ -141,7 +142,7 @@ export default class ArWidgetContents extends Component<Sig> {
   insertAr = task(
     async (
       design: ArDesign,
-      insertPos: ArticlePosition | null,
+      insertPos: ArticleInsertPosition,
       skipWarnings?: boolean,
     ) => {
       this.insertingDesign = design;

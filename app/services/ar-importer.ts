@@ -22,7 +22,10 @@ import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
 import { v4 as uuidv4 } from 'uuid';
 import { TRAFFIC_SIGNAL_EXISTING_STATUSES } from 'frontend-gelinkt-notuleren/config/constants';
-import type { ArticlePosition } from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/common-types';
+import {
+  ArticleInsertPosition,
+  afterLastArticle,
+} from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
 export type ImportResult<R> = {
   result: R;
@@ -105,7 +108,7 @@ export default class ArImporterService extends Service {
   async generateInsertionMonads(
     decisionUriOrController: string | SayController,
     design: ArDesign,
-    insertPosition: ArticlePosition | null,
+    insertPos: ArticleInsertPosition,
     isPreview?: boolean,
   ): Promise<GenerateImportResult> {
     let decisionUri: string;
@@ -205,6 +208,7 @@ export default class ArImporterService extends Service {
             variables: convertedVariableInstances,
             templateString: measureConcept.templateString,
             decisionUri,
+            position: insertPos.insertMeasureIndex,
             articleUriGenerator: () =>
               `http://data.lblod.info/artikels/${uuidv4()}`,
           }),
@@ -226,7 +230,7 @@ export default class ArImporterService extends Service {
     const { result: monads, warnings } = await this.generateInsertionMonads(
       decisionUri,
       design,
-      null,
+      afterLastArticle,
       true,
     );
     const document = this.agendapointEditor.processDocumentHeadlessly(
