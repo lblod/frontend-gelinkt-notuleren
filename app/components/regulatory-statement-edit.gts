@@ -641,7 +641,6 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         @nodeViews={{this.nodeViews}}
         @plugins={{this.plugins}}
         @shouldEditRdfa={{false}}
-        {{!@glint-ignore  TODO FIX THIS1}}
         @contextualActionGetters={{this.contextualActionGetters}}
         @contextualActionGroupGetters={{this.contextualActionGroupGetters}}
       >
