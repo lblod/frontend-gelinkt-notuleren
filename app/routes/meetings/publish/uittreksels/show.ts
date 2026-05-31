@@ -5,7 +5,6 @@ import type BehandelingVanAgendapunt from 'frontend-gelinkt-notuleren/models/beh
 import type ExtractPreview from 'frontend-gelinkt-notuleren/models/extract-preview';
 import type SignedResource from 'frontend-gelinkt-notuleren/models/signed-resource';
 import type VersionedBehandelingModel from 'frontend-gelinkt-notuleren/models/versioned-behandeling';
-import PublishedResourceModel from 'frontend-gelinkt-notuleren/models/published-resource';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 
 export default class MeetingsPublishUittrekselsShowRoute extends Route {
@@ -29,11 +28,14 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
           'filter[behandeling][:id:]': treatment.id,
           'filter[:or:][deleted]': false,
           'filter[:or:][:has-no:deleted]': 'yes',
+          include: ['publishedResource'],
         },
       );
     const versionedTreatment = versionedTreatments[0];
 
     if (!versionedTreatment) {
+      // We don't set the `html` attribute here, but the save goes to the prepublisher, not
+      // resources, and this populates this for us
       const extractPreview = this.store.createRecord<ExtractPreview>(
         'extract-preview',
         {
@@ -41,29 +43,18 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         },
       );
       await extractPreview.save();
-      const newVersionedTreatment =
-        this.store.createRecord<VersionedBehandelingModel>(
-          'versioned-behandeling',
-          {
-            zitting: meeting,
-            content: extractPreview.html,
-            behandeling: treatment,
-          },
-        );
-      const signedResources: SignedResource[] = [];
-      const publishedResource = await newVersionedTreatment.publishedResource;
       return {
         treatment,
         agendapoint,
-        versionedTreatment: newVersionedTreatment,
+        versionedTreatment: null,
+        extractPreview: extractPreview.html,
         meeting,
-        signedResources,
-        publishedResource,
+        signedResources: [] as SignedResource[],
+        publishedResource: null,
         validationErrors: extractPreview.validationErrors,
       };
     } else {
-      // because the signedResources endpoint IS jsonAPI compliant,
-      // we could have used the relationship here, but the extra filtering
+      // We could have used the relationship here, but the extra filtering
       // needed prevents that
       const signedResources = await this.store.query<SignedResource>(
         'signed-resource',
@@ -72,27 +63,21 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
           'filter[:or:][deleted]': false,
           'filter[:or:][:has-no:deleted]': 'yes',
           sort: 'created-on',
+          include: ['gebruiker'],
         },
       );
       if (signedResources.length > 2) {
         throw new Error('More than 2 undeleted signatures found');
       }
-      // we can't use the relationship here because the published-resource is not
-      // created with a jsonAPI compliant endpoint. This means ED is not aware when we create it,
-      // causing ED to cache too aggressively. With query, we bypass the cache.
-      const publishedResource = await this.store.query<PublishedResourceModel>(
-        'published-resource',
-        {
-          'filter[versioned-behandeling][:id:]': versionedTreatment.id,
-        },
-      );
+      const publishedResource = await versionedTreatment.publishedResource;
       return {
         treatment,
         agendapoint,
         versionedTreatment,
+        extractPreview: versionedTreatment.content,
         meeting,
         signedResources: signedResources.slice(),
-        publishedResource: publishedResource[0],
+        publishedResource,
         // if a versionedTreatment exists, that means some signature or publication
         // has happened, which means that there are no errors, so we can safely do this
         validationErrors: [],

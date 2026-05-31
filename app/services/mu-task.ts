@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { task, timeout } from 'ember-concurrency';
 import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
+import type { ObjectValue } from '@warp-drive/core-types/json/raw';
 
 const TASK_ENDPOINT = '/publication-tasks';
 export const TASK_STATUS_FAILURE =
@@ -12,7 +13,7 @@ export const TASK_STATUS_SUCCESS =
 export const TASK_STATUS_RUNNING =
   'http://lblod.data.gift/besluit-publicatie-melding-statuses/ongoing';
 
-type TaskBody = { data: { id: string; status: string } };
+type TaskBody = { data: { id: string; status: string; payload?: ObjectValue } };
 
 export default class MuTaskService extends Service {
   fetchMuTask(taskId: string) {

@@ -15,12 +15,14 @@ import type MeetingsPublishUittrekselsShowRoute from 'frontend-gelinkt-notuleren
 import type SignedResource from 'frontend-gelinkt-notuleren/models/signed-resource';
 import type PublishingLog from 'frontend-gelinkt-notuleren/models/publishing-log';
 import type MuTaskService from 'frontend-gelinkt-notuleren/services/mu-task';
+import type VersionedBehandeling from 'frontend-gelinkt-notuleren/models/versioned-behandeling';
 
 export default class MeetingsPublishUittrekselsShowController extends Controller {
   publicationBaseUrl = ENV.publication.baseUrl;
   @tracked error: Option<unknown>;
   @tracked signingModalOpen = false;
   @tracked publishingModalOpen = false;
+  @tracked _versionedTreatment: VersionedBehandeling | null = null;
   @service declare publish: PublishService;
   @service declare router: RouterService;
   @service declare intl: IntlService;
@@ -38,7 +40,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   }
 
   get versionedTreatment() {
-    return this.model.versionedTreatment;
+    return this.model.versionedTreatment ?? this._versionedTreatment;
   }
 
   get meeting() {
@@ -122,7 +124,7 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
 
   get previewDocument() {
     return {
-      body: this.model.versionedTreatment?.content,
+      body: this.model.extractPreview,
       signedId: this.meeting.get('id'),
     };
   }
@@ -156,14 +158,48 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     this.closeSigningModal();
     try {
       this.error = null;
-      await this.versionedTreatment.save();
-      const signature = this.store.createRecord<SignedResource>(
-        'signed-resource',
-        {
-          versionedBehandeling: this.versionedTreatment,
-        },
+      const taskId = await this.muTask.fetchTaskifiedEndpoint(
+        `/signing/uittreksel/sign/${this.meeting.id}/${this.treatment.id}`,
+        { method: 'POST' },
       );
-      await signature?.save();
+      const taskResult = await this.muTask.waitForMuTaskTask.perform(taskId);
+      let signature: SignedResource | undefined;
+      if (taskResult?.data.payload) {
+        // @ts-expect-error Strangely the types don't have the (valid) override that doesn't include
+        // a data type
+        this.store.pushPayload(taskResult.data.payload);
+        const createdData = taskResult?.data.payload?.['data'];
+        const createdId =
+          createdData &&
+          typeof createdData === 'object' &&
+          'id' in createdData &&
+          (createdData?.['id'] as string);
+        signature = !createdId
+          ? undefined
+          : await this.store.findRecord<SignedResource>(
+              'signed-resource',
+              createdId,
+            );
+      } else {
+        console.error(
+          'Task did not contain created Signed Resource, searching for one instead',
+        );
+        const signatures = await this.store.query<SignedResource>(
+          'signed-resource',
+          {
+            'filter[versioned-behandeling][zitting][:id:]': this.meeting.id,
+            'filter[gebruiker][:id:]': this.currentSession.user?.id,
+            'filter[:or:][deleted]': false,
+            'filter[:or:][:has-no:deleted]': 'yes',
+          },
+        );
+        signature = signatures[0];
+      }
+      if (!signature) {
+        throw new Error(
+          'Unable to find signature that should have been created',
+        );
+      }
       const log = this.store.createRecord<PublishingLog>('publishing-log', {
         action: 'sign',
         user: this.currentSession.user,
@@ -172,6 +208,9 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
         zitting: this.meeting,
       });
       await log.save();
+      // This is needed to get the versioned behandeling. We could add this to the response from the
+      // Task status endpoint, but this requires correctly assembling a jsonAPI compatible response
+      // including it. It was not done yet as the refresh likely sidesteps other concurrency problems.
       await this.refreshRoute();
     } catch (e) {
       this.error = e;
@@ -194,7 +233,8 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     // at this point, the signature is marked as deleted but the model has not yet reloaded,
     // so it is still in the signedResources array.
     // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
-    if (this.signatureCount === 1) {
+    if (this.signatureCount === 1 && this.versionedTreatment) {
+      // versionedTreatment should always be set as we always reload after signing
       this.versionedTreatment.deleted = true;
       await this.versionedTreatment.save();
     }
