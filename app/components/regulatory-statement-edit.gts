@@ -172,6 +172,11 @@ import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-edit
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
 import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly-date';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
+import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
+import {
+  getContextualActionGroups as locationActionsGroups,
+  getContextualActions as locationActions,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -196,6 +201,8 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   html?: string;
   title?: string;
 
+  contextualActionGetters = [locationActions()];
+  contextualActionGroupGetters = [locationActionsGroups()];
   schema = new Schema({
     nodes: {
       doc: docWithConfig({
@@ -295,6 +302,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       // @ts-expect-error emberApplication should accept undefined as getOwner may return it
       emberApplication({ application: getOwner(this) }),
       variableAutofillerPlugin(this.config.autofilledVariable),
+      locationModalsPlugin(),
     ];
   }
 
@@ -633,6 +641,8 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         @nodeViews={{this.nodeViews}}
         @plugins={{this.plugins}}
         @shouldEditRdfa={{false}}
+        @contextualActionGetters={{this.contextualActionGetters}}
+        @contextualActionGroupGetters={{this.contextualActionGroupGetters}}
       >
         <:toolbar as |container|>
           <div class='au-u-margin-right-small'>

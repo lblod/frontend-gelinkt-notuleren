@@ -73,6 +73,11 @@ import type {
   PredicateOptionGeneratorArgs,
   TargetOptionGeneratorArgs,
 } from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/types';
+import ContextualActionsContainer from '@lblod/ember-rdfa-editor/components/plugins/contextual-actions/container';
+import type {
+  GetContextualActionGroups,
+  GetContextualActions,
+} from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 
 interface Sig {
   Args: {
@@ -90,6 +95,8 @@ interface Sig {
     busyText?: string;
     shouldEditRdfa?: boolean;
     property?: string;
+    contextualActionGetters?: GetContextualActions;
+    contextualActionGroupGetters?: GetContextualActionGroups;
   };
   Blocks: {
     toolbar: [{ controller: SayController }];
@@ -225,6 +232,14 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
     predicates: this.predicateOptionGeneratorTask.perform.bind(this),
     objects: this.objectOptionGeneratorTask.perform.bind(this),
   };
+
+  get contextualActionGetters() {
+    return this.args.contextualActionGetters ?? [];
+  }
+
+  get contextualActionGroupGetters() {
+    return this.args.contextualActionGroupGetters ?? [];
+  }
 
   <template>
     <AuBodyContainer
@@ -379,6 +394,13 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
               @rdfaEditorInit={{this.rdfaEditorInit}}
               @notificationToaster={{false}}
             />
+            {{#if this.controller}}
+              <ContextualActionsContainer
+                @controller={{this.controller}}
+                @getActions={{this.contextualActionGetters}}
+                @getGroups={{this.contextualActionGroupGetters}}
+              />
+            {{/if}}
           </:default>
           <:sidebarRight as |container|>
             <Sidebar as |Sidebar|>
