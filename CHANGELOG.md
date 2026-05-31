@@ -1,5 +1,17 @@
 # frontend-gelinkt-notuleren
 
+## 5.78.0
+
+### Minor Changes
+
+- [#924](https://github.com/lblod/frontend-gelinkt-notuleren/pull/924) [`6d5a17d`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6d5a17dbb5b4d968d50ca8943aad8cdee15eb84e) Thanks [@piemonkey](https://github.com/piemonkey)! - Prevent issues with concurrent signing of extracts
+
+- [#925](https://github.com/lblod/frontend-gelinkt-notuleren/pull/925) [`78dcffd`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/78dcffd9d8d012229b63bdcac1eccc110589733d) Thanks [@abeforgit](https://github.com/abeforgit)! - Add insertion options to the AR importer
+
+### Patch Changes
+
+- [#922](https://github.com/lblod/frontend-gelinkt-notuleren/pull/922) [`2177827`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/21778273e279ae594c753053d1bdc31212727b90) Thanks [@kobemertens](https://github.com/kobemertens)! - Add contextual actions for place descriptions
+
 ## 5.77.1
 
 ### Patch Changes
