@@ -18,6 +18,8 @@ import {
 import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
 import type { GenerateImportResult } from 'frontend-gelinkt-notuleren/services/ar-importer';
+import type { ArticlePosition } from './common-types';
+import type { ArticleInsertPosition } from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
 const FILTER_TIMEOUT_MS = 300;
 
@@ -32,6 +34,7 @@ type Sig = {
   Args: {
     controller: SayController;
     onInsert?: () => void;
+    articles: ArticlePosition[];
   };
 };
 
@@ -39,8 +42,6 @@ export default class ArWidgetContents extends Component<Sig> {
   @service declare arImporter: ArImporterService;
 
   @tracked selectedDesign?: ArDesign | null;
-  @tracked insertingDesign?: ArDesign | null;
-  @tracked insertWarnings?: GenerateImportResult | null;
 
   @service declare store: Store;
 
@@ -131,60 +132,41 @@ export default class ArWidgetContents extends Component<Sig> {
   doInsert = (monads: GenerateImportResult['result']) => {
     const isSuccess = this.arImporter.insertAr(this.args.controller, monads);
     if (isSuccess) {
-      this.insertingDesign = null;
       this.args.onInsert?.();
     }
   };
 
-  insertAr = task(async (design: ArDesign, skipWarnings?: boolean) => {
-    this.insertingDesign = design;
-    const monadsResult = await this.arImporter.generateInsertionMonads(
-      this.args.controller,
-      design,
-    );
-    if (skipWarnings || monadsResult.warnings.length === 0) {
-      this.doInsert(monadsResult.result);
-    } else {
-      this.insertWarnings = monadsResult;
-      this.selectedDesign = design;
-      this.insertingDesign = null;
-    }
-  });
-
-  confirmInsert = () => {
-    if (this.insertWarnings) {
-      this.doInsert(this.insertWarnings.result);
-      this.insertWarnings = null;
-    }
-  };
-  abortInsert = () => {
-    this.insertWarnings = null;
-    this.insertingDesign = null;
-  };
+  insertAr = task(
+    async (
+      design: ArDesign,
+      insertPos: ArticleInsertPosition,
+      skipWarnings?: boolean,
+    ) => {
+      const monadsResult = await this.arImporter.generateInsertionMonads(
+        this.args.controller,
+        design,
+        insertPos,
+      );
+      if (skipWarnings || monadsResult.warnings.length === 0) {
+        this.doInsert(monadsResult.result);
+      }
+    },
+  );
 
   <template>
-    {{#if this.insertWarnings}}
-      <ArPreview
-        {{! @glint-expect-error ember-truth-helpers doesnt help so might as well just ignore }}
-        @arDesign={{this.selectedDesign}}
-        @onReturnToOverview={{this.abortInsert}}
-        @onInsertAr={{this.confirmInsert}}
-        @insertLoading={{this.insertAr.isRunning}}
-      />
-    {{else if this.selectedDesign}}
+    {{#if this.selectedDesign}}
       <ArPreview
         @arDesign={{this.selectedDesign}}
         @onReturnToOverview={{this.returnToOverview}}
         @onInsertAr={{this.insertAr.perform}}
         @insertLoading={{this.insertAr.isRunning}}
+        @articles={{@articles}}
       />
     {{else}}
       <ArDesignOverview
         @arDesigns={{this.arDesigns.value}}
         @loading={{this.arDesigns.isRunning}}
         @onShowPreview={{this.selectDesign}}
-        @onInsertAr={{this.insertAr.perform}}
-        @insertingDesign={{this.insertingDesign}}
         @nameFilter={{this.nameFilter}}
         @setNameFilter={{this.setNameFilter}}
         @resetFilters={{this.resetFilters}}

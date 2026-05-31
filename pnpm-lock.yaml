@@ -296,8 +296,8 @@ importers:
         specifier: 13.7.1
         version: 13.7.1(a2cb0244dd9131bc305eb5466e43e69d)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 35.6.0
-        version: 35.6.0(cc9eba76ea7044317ac64d65100624bd)
+        specifier: 36.0.0
+        version: 36.0.0(cc9eba76ea7044317ac64d65100624bd)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -2069,8 +2069,8 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.6.0':
-    resolution: {integrity: sha512-ht46KN9jLAD7jmBDPX9ktiITrPnCtHwcLQt9BSpLc8qT5dU4gST/xwAMf9CZPP8kShddpYohNXSTf7XbNLNuIA==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@36.0.0':
+    resolution: {integrity: sha512-JPE+ZuSYzOxrN3zSfiw3UQUt4InwzaZLGErhFXJtNb4MurCq2ByJhUCAyNxrRQLmrVHP0opgBQbSz9lN07NURw==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
@@ -12606,7 +12606,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@35.6.0(cc9eba76ea7044317ac64d65100624bd)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@36.0.0(cc9eba76ea7044317ac64d65100624bd)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14)))(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(eslint@9.39.4(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.2(@babel/core@7.29.0))(webpack@5.106.2(postcss@8.5.14))
       '@babel/core': 7.29.0

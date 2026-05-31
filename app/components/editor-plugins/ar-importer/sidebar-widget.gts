@@ -7,6 +7,8 @@ import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import type { SayController } from '@lblod/ember-rdfa-editor';
 import ArWidgetContents from './widget-contents';
 import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/decision-utils';
+import { getArticleNodes } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/document-structure-utils';
+import type { ArticlePosition } from './common-types';
 
 type Sig = {
   Args: {
@@ -17,7 +19,9 @@ type Sig = {
 
 export default class ArImporterSidebarWidget extends Component<Sig> {
   @tracked modalOpen = false;
+  @tracked articles: ArticlePosition[] = [];
   openModal = () => {
+    this.articles = getArticleNodes(this.args.controller.mainEditorState);
     this.modalOpen = true;
   };
   closeModal = () => {
@@ -51,6 +55,7 @@ export default class ArImporterSidebarWidget extends Component<Sig> {
         <ArWidgetContents
           @controller={{@controller}}
           @onInsert={{this.closeModal}}
+          @articles={{this.articles}}
         />
       </modal.Body>
     </AuModal>

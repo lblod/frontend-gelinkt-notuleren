@@ -2,23 +2,18 @@ import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { on } from '@ember/modifier';
 import { htmlSafe } from '@ember/template';
-import { fn } from '@ember/helper';
 import t from 'ember-intl/helpers/t';
 import { trackedFunction } from 'reactiveweb/function';
 import AuToolbar from '@appuniversum/ember-appuniversum/components/au-toolbar';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
-import { PlusIcon } from '@appuniversum/ember-appuniversum/components/icons/plus';
 import { ArrowLeftIcon } from '@appuniversum/ember-appuniversum/components/icons/arrow-left';
 import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
-import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
+import { InsertControls, type ArInsertControlArgs } from './insert-controls';
 
 type ArPreviewSignature = {
-  Args: {
-    arDesign: ArDesign;
-    onInsertAr: (arDesign: ArDesign, skipWarnings?: boolean) => void;
-    insertLoading?: boolean;
+  Args: ArInsertControlArgs & {
     onReturnToOverview: () => unknown;
   };
   Element: HTMLDivElement;
@@ -50,42 +45,43 @@ export default class ArPreview extends Component<ArPreviewSignature> {
             {{on 'click' this.returnToOverview}}
           >{{t 'ar-importer.preview.return-to-overview'}}</AuButton>
         </Group>
-        <Group>
-          <AuButton
-            @icon={{PlusIcon}}
-            @loading={{@insertLoading}}
-            @loadingMessage={{t 'application.loading'}}
-            {{on 'click' (fn @onInsertAr @arDesign true)}}
-          >{{t 'ar-importer.preview.insert'}}</AuButton>
-        </Group>
       </AuToolbar>
-      {{#if this.preview.isLoading}}
-        <AuLoader @hideMessage={{true}}>
-          {{t 'application.loading'}}
-        </AuLoader>
-      {{/if}}
-      {{#if this.preview.isError}}
-        <AuAlert @icon='alert-triangle' @skin='error'>
-          {{t 'ar-importer.message.error-processing-design'}}
-        </AuAlert>
-      {{/if}}
-      {{#if this.preview.value}}
-        {{#if this.preview.value.warnings}}
-          <AuAlert
-            @icon='alert-triangle'
-            @skin='warning'
-            class='au-u-margin-left au-u-margin-right'
-          >
-            {{#each this.preview.value.warnings as |warning|}}
-              <p>{{warning}}</p>
-            {{/each}}
+      <div class='ar-importer-preview__content au-o-layout'>
+        {{#if this.preview.isLoading}}
+          <AuLoader @centered={{true}} @hideMessage={{false}}>
+            {{t 'application.loading'}}
+          </AuLoader>
+        {{/if}}
+        {{#if this.preview.isError}}
+          <AuAlert @icon='alert-triangle' @skin='error'>
+            {{t 'ar-importer.message.error-processing-design'}}
           </AuAlert>
         {{/if}}
-        <div class='ar-importer-preview__content au-o-layout'>
+        {{#if this.preview.value}}
+          {{#if this.preview.value.warnings}}
+            <AuAlert
+              @icon='alert-triangle'
+              @skin='warning'
+              class='au-u-margin-left au-u-margin-right'
+            >
+              {{#each this.preview.value.warnings as |warning|}}
+                <p>{{warning}}</p>
+              {{/each}}
+            </AuAlert>
+          {{/if}}
           {{htmlSafe this.preview.value.result}}
-        </div>
-      {{/if}}
+        {{/if}}
+      </div>
 
+      <AuToolbar @size='medium' as |Group|>
+        <Group />
+        <InsertControls
+          @arDesign={{@arDesign}}
+          @onInsertAr={{@onInsertAr}}
+          @insertLoading={{@insertLoading}}
+          @articles={{@articles}}
+        />
+      </AuToolbar>
     </div>
   </template>
 }
