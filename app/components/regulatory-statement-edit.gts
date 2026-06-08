@@ -668,6 +668,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
             @controller={{container.controller}}
             @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
             @config={{this.config.location}}
+            @insertPlaceholder={{true}}
           />
           <WorshipInsert
             @controller={{container.controller}}

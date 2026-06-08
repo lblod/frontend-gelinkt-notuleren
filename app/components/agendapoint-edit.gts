@@ -579,6 +579,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
                 undefined
               }}
               @config={{this.config.location}}
+              @insertPlaceholder={{true}}
             />
             <WorshipInsert
               @controller={{container.controller}}
