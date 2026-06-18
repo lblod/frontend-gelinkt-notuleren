@@ -83,9 +83,9 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import {
   roadsign_regulation,
-  trafficMeasureZonalityMigration,
+  trafficMeasureModelMigration,
   trafficSignalMigration,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+} from '@lblod/say-roadsign-regulation-plugin/plugin/nodes';
 import {
   link,
   linkView,
@@ -501,7 +501,7 @@ export default class AgendapointEditorService extends Service {
         hard_break,
         block_rdfa: blockRdfaWithConfig({
           rdfaAware: true,
-          modelMigrations: [trafficMeasureZonalityMigration],
+          modelMigrations: [trafficMeasureModelMigration],
         }),
         invisible_rdfa: invisibleRdfaWithConfig({
           rdfaAware: true,
