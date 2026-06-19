@@ -69,7 +69,7 @@
     "@lblod/ember-environment-banner": "^0.6.0",
     "@lblod/ember-mock-login": "^0.14.0",
     "@lblod/ember-rdfa-editor": "catalog:",
-    "@lblod/ember-rdfa-editor-lblod-plugins": "37.2.0",
+    "@lblod/ember-rdfa-editor-lblod-plugins": "37.2.1-dev.60bf09ed2e67f94ff54f71ac46e0e29d5d0b6404",
     "@lblod/template-uuid-instantiator": "^1.0.3",
     "@nullvoxpopuli/ember-composable-helpers": "catalog:",
     "@rdfjs/types": "^2.0.1",
@@ -177,7 +177,7 @@
     "last 2 Edge version"
   ],
   "volta": {
-    "node": "20.19.0"
+    "node": "22.22.0"
   },
   "dependencies": {
     "@curvenote/prosemirror-utils": "^1.0.5",
