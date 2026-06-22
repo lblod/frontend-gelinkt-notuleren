@@ -8,11 +8,12 @@ import type { SayController } from '@lblod/ember-rdfa-editor';
 import ArWidgetContents from './widget-contents';
 import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/decision-utils';
 import { getArticleNodes } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/document-structure-utils';
-import type { ArticlePosition } from './common-types';
+import type { ArDesignQuery, ArticlePosition } from './common-types';
 
 type Sig = {
   Args: {
     controller: SayController;
+    designQuery: ArDesignQuery;
   };
   Element: HTMLLIElement;
 };
@@ -56,6 +57,7 @@ export default class ArImporterSidebarWidget extends Component<Sig> {
           @controller={{@controller}}
           @onInsert={{this.closeModal}}
           @articles={{this.articles}}
+          @designQuery={{@designQuery}}
         />
       </modal.Body>
     </AuModal>

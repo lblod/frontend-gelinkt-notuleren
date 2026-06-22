@@ -17,9 +17,8 @@ import { detailedDate } from 'frontend-gelinkt-notuleren/utils/detailed-date';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import { on } from '@ember/modifier';
 import t from 'ember-intl/helpers/t';
-import type { ArDesignOverviewSortField, DesignInfo } from './widget-contents';
+import type { ArDesignOverviewSortField, DesignInfo } from './common-types';
 import { trackedFunction } from 'reactiveweb/function';
-import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
 import type { TOC } from '@ember/component/template-only';
 
 export type ArDesignOverviewSignature = {
@@ -123,19 +122,19 @@ export default ArDesignOverview;
 
 type UsageStatusSig = {
   Args: {
-    inDocs: Promise<EditorDocumentModel[]> | undefined;
+    inDocs: Promise<number> | undefined;
   };
 };
 class UsageStatus extends Component<UsageStatusSig> {
-  info = trackedFunction(this, () => this.args.inDocs ?? []);
+  count = trackedFunction(this, () => this.args.inDocs ?? 0);
 
   <template>
-    {{#if this.info.isPending}}
+    {{#if this.count.isPending}}
       <AuLoader @padding='small' @inline={{true}} @hideMessage={{true}}>
         {{t 'application.loading'}}
       </AuLoader>
     {{else}}
-      {{#if this.info.value.length}}
+      {{#if this.count.value}}
         <AuPill @size='small'>
           {{t 'ar-importer.overview.table.statuses.used'}}
         </AuPill>
