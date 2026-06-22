@@ -1,5 +1,6 @@
 import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
-import type { PNode } from '@lblod/ember-rdfa-editor';
+import type { EditorState, PNode } from '@lblod/ember-rdfa-editor';
+import type { TransactionCombinatorResult } from '@lblod/ember-rdfa-editor/utils/transaction-utils';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type { ArticleInsertPosition } from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
@@ -30,3 +31,10 @@ export type DesignInfo = {
 };
 
 export type ArDesignQuery = (pagination: Pagination) => Promise<DesignInfo>;
+
+export type ProcessDocumentHeadlessly = (
+  html: string,
+  transactionGenerator: (
+    state: EditorState,
+  ) => TransactionCombinatorResult<boolean>,
+) => string;

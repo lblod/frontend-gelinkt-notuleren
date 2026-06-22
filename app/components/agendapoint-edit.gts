@@ -570,6 +570,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               <ArImporterSidebarWidget
                 @controller={{container.controller}}
                 @designQuery={{this.arDesignQuery}}
+                @processDocumentHeadlessly={{this.agendapointEditor.processDocumentHeadlessly}}
               />
             {{/if}}
             <StandardTemplateCard

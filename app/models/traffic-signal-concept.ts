@@ -13,5 +13,5 @@ export default class TrafficSignalConcept extends Model {
     async: false,
     inverse: null,
   })
-  declare categories: RoadSignCategory;
+  declare categories: RoadSignCategory[];
 }

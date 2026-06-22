@@ -3,7 +3,6 @@ import { service } from '@ember/service';
 import { tracked } from 'tracked-built-ins';
 import { restartableTask, task, timeout } from 'ember-concurrency';
 import type { SayController } from '@lblod/ember-rdfa-editor';
-import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
 
 import ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
@@ -16,6 +15,7 @@ import type {
   ArDesignQuery,
   ArticlePosition,
   DesignInfo,
+  ProcessDocumentHeadlessly,
 } from './common-types';
 import type { ArticleInsertPosition } from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
@@ -27,6 +27,7 @@ type Sig = {
     onInsert?: () => void;
     articles: ArticlePosition[];
     designQuery: ArDesignQuery;
+    processDocumentHeadlessly: ProcessDocumentHeadlessly;
   };
 };
 
@@ -34,8 +35,6 @@ export default class ArWidgetContents extends Component<Sig> {
   @service declare arImporter: ArImporterService;
 
   @tracked selectedDesign?: ArDesign | null;
-
-  @service declare store: Store;
 
   @tracked pageNumber: number = 0;
   pageSize: number = 20;
@@ -122,6 +121,7 @@ export default class ArWidgetContents extends Component<Sig> {
         @onInsertAr={{this.insertAr.perform}}
         @insertLoading={{this.insertAr.isRunning}}
         @articles={{@articles}}
+        @processDocumentHeadlessly={{@processDocumentHeadlessly}}
       />
     {{else}}
       <ArDesignOverview

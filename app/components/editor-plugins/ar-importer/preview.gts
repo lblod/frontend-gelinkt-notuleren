@@ -11,10 +11,12 @@ import AuLoader from '@appuniversum/ember-appuniversum/components/au-loader';
 import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
 import AuAlert from '@appuniversum/ember-appuniversum/components/au-alert';
 import { InsertControls, type ArInsertControlArgs } from './insert-controls';
+import type { ProcessDocumentHeadlessly } from './common-types';
 
 type ArPreviewSignature = {
   Args: ArInsertControlArgs & {
     onReturnToOverview: () => unknown;
+    processDocumentHeadlessly: ProcessDocumentHeadlessly;
   };
   Element: HTMLDivElement;
 };
@@ -24,7 +26,10 @@ export default class ArPreview extends Component<ArPreviewSignature> {
 
   preview = trackedFunction(this, async () => {
     try {
-      return this.arImporter.generatePreview(this.args.arDesign);
+      return this.arImporter.generatePreview(
+        this.args.arDesign,
+        this.args.processDocumentHeadlessly,
+      );
     } catch (e) {
       console.error('Error generating preview', e);
       throw e;
