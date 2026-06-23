@@ -9,7 +9,10 @@ catalog:
   '@faker-js/faker': ^10.4.0
   '@floating-ui/dom': ^1.7.6
   '@glint/template': ^1.7.7
-  '@lblod/ember-rdfa-editor': 13.11.0
+  '@lblod/ember-rdfa-editor': 13.11.0-dev.54b3f140f9d04263cc19e3cf7030a0371c97f9d9
+  '@lblod/ember-rdfa-editor-lblod-plugins': 37.3.0
+  '@lblod/say-ar-design-plugin': 0.1.0-dev.3ff1afd4808f0dfccf0172f6d53fd076e1637c09
+  '@lblod/say-roadsign-regulation-plugin': 1.0.1
   '@nullvoxpopuli/ember-composable-helpers': ^5.3.2
   '@tsconfig/ember': ^3.0.12
   changeset: ^0.2.6

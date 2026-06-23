@@ -64,7 +64,7 @@ import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-editor-container';
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
-import ArImporterSidebarWidget from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/sidebar-widget';
+import ArImporterSidebarWidget from '@lblod/say-ar-design-plugin/components/sidebar-widget';
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/document-information-modal';
@@ -72,7 +72,7 @@ import type {
   GetContextualActionGroups,
   GetContextualActions,
 } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
-import type { ArDesignQuery } from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/common-types';
+import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
 import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
 
 interface AgendapointEditSig {
