@@ -83,9 +83,9 @@ import {
 } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/template-comments-plugin';
 import {
   roadsign_regulation,
-  trafficMeasureZonalityMigration,
+  trafficMeasureModelMigration,
   trafficSignalMigration,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/nodes';
+} from '@lblod/say-roadsign-regulation-plugin/plugin/nodes';
 import {
   link,
   linkView,
@@ -501,7 +501,7 @@ export default class AgendapointEditorService extends Service {
         hard_break,
         block_rdfa: blockRdfaWithConfig({
           rdfaAware: true,
-          modelMigrations: [trafficMeasureZonalityMigration],
+          modelMigrations: [trafficMeasureModelMigration],
         }),
         invisible_rdfa: invisibleRdfaWithConfig({
           rdfaAware: true,
@@ -543,6 +543,7 @@ export default class AgendapointEditorService extends Service {
       emberApplication({ application: unwrap(getOwner(this)) }),
       slashCommandsPlugin({
         intl: this.intl,
+        // @ts-expect-error waiting for the PR with this fix
         getGroups: this.contextualActionGroupGetters,
       }),
       locationModalsPlugin(),
@@ -558,7 +559,9 @@ export default class AgendapointEditorService extends Service {
     return {
       schema,
       plugins,
+      // @ts-expect-error waiting for the PR with this fix
       contextualActionGetters: this.contextualActionGetters,
+      // @ts-expect-error waiting for the PR with this fix
       contextualActionGroupGetters: this.contextualActionGroupGetters,
     };
   }

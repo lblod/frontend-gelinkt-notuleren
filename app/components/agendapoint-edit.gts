@@ -41,7 +41,7 @@ import TemplateCommentEdit from '@lblod/ember-rdfa-editor-lblod-plugins/componen
 import LocationInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/location-plugin/insert';
 import WorshipInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/worship-plugin/insert';
 import LmbInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lmb-plugin/insert';
-import RoadsignRegulationCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/roadsign-regulation-plugin/roadsign-regulation-card';
+import RoadsignRegulationCard from '@lblod/say-roadsign-regulation-plugin/components/roadsign-regulation-card';
 import LpdcInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lpdc-plugin/lpdc-insert';
 import MandateeTableInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/mandatee-table-plugin/insert';
 import MandateeTableConfigure from '@lblod/ember-rdfa-editor-lblod-plugins/components/mandatee-table-plugin/configure';

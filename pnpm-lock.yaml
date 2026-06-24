@@ -153,7 +153,7 @@ catalogs:
 
 overrides:
   '@ember/test-waiters': ^3.1.0
-  '@lblod/ember-rdfa-editor': 13.10.2
+  '@lblod/ember-rdfa-editor': 13.11.0
   ember-auto-import: ^2.13.1
   ember-composability-tools>@ember/render-modifiers: ^3.0.0
   ember-headless-form>tracked-built-ins: ^4.1.2
@@ -293,11 +293,14 @@ importers:
         specifier: ^0.14.0
         version: 0.14.0(@babel/core@7.29.0)(ember-simple-auth@8.3.0(@babel/core@7.29.0)(@ember/test-helpers@3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14)))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14))))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))
       '@lblod/ember-rdfa-editor':
-        specifier: 13.10.2
-        version: 13.10.2(a2cb0244dd9131bc305eb5466e43e69d)
+        specifier: 13.11.0
+        version: 13.11.0(a2cb0244dd9131bc305eb5466e43e69d)
       '@lblod/ember-rdfa-editor-lblod-plugins':
-        specifier: 37.2.0
-        version: 37.2.0(c286b351243be7fe7b75d8ce2dec52ea)
+        specifier: 37.3.0
+        version: 37.3.0(143e26d5c96b4331f5fc8346f5c3e4be)
+      '@lblod/say-roadsign-regulation-plugin':
+        specifier: 1.0.1
+        version: 1.0.1(6b1a20d9f2be8c3d58a81f4bc371044e)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -2069,14 +2072,14 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@37.2.0':
-    resolution: {integrity: sha512-G2E91KMCDfdax3qNcO9D6badzNw4c+cUmpo8F1oABchC8lkeL6oOjl1LtCl3UVqiv8alRMMPOhx4dqQdRVQdkQ==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@37.3.0':
+    resolution: {integrity: sha512-HEsFuUIDorIMhnY2aFUpEo+VQDHL+5hmZGQT65EVZv0Y02FwGcGEd6yc2B8LNfxKdaHuIqegUf1PJuCib8MFzA==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
       '@ember/string': 3.x
       '@glint/template': ^1.4.0
-      '@lblod/ember-rdfa-editor': 13.10.2
+      '@lblod/ember-rdfa-editor': 13.11.0
       ember-concurrency: ^4.0.2
       ember-element-helper: ^0.8.6
       ember-intl: ^7.0.0
@@ -2093,8 +2096,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@13.10.2':
-    resolution: {integrity: sha512-y9r1ju15nDIvFIBc/ArzsnplNjq+aerIazubsjwm8HXC2LINulfCnUnpQ1eLI4H/1vFwqE8PVz+LTjsDhm8jyg==}
+  '@lblod/ember-rdfa-editor@13.11.0':
+    resolution: {integrity: sha512-/i0f1VQpGlJdrMsdV1RyUDjs9XkucPWInsNINq56/BAI6Wqx4IW/Xhz9ap6Fyz4AH81S6kbK7wK7HQ4WtPMEgA==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.11.0 || ^4.2.1
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -2117,6 +2120,26 @@ packages:
 
   '@lblod/marawa@0.8.0-beta.6':
     resolution: {integrity: sha512-BW3yCpeQlk9EPnQAEQnM9uViA8RC5DkuoiaPJzbuhMcLvKHfI4cjc6dTg9i8qAijbL/xObmQ/Aexko2Xcj9ktw==}
+
+  '@lblod/say-roadsign-regulation-plugin@1.0.1':
+    resolution: {integrity: sha512-S6s1Sbksx5NI3k199NvdKXyJAvFwH21zeU5anuwmAur1ysSIFMwFc8+vNBYELCmPTvqbM0bwtVbjjZfT+BmHEA==}
+    peerDependencies:
+      '@appuniversum/ember-appuniversum': ^3.11.0 || ^4.2.1
+      '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
+      '@glimmer/component': ^1.1.2 || ^2.0.0
+      '@glimmer/tracking': ^1.1.2
+      '@glint/template': '>= 1.0.0'
+      '@lblod/ember-rdfa-editor': 13.11.0
+      ember-basic-dropdown: ^8.0.0
+      ember-concurrency: ^4.0.2 || ^5.0.0
+      ember-intl: ^6.4.0 || ^7.0.0
+      ember-power-select: ^7.0.0 || ^8.0.0
+      ember-power-select-with-create: ^2.0.0 || ^3.0.0
+      ember-source: ^4.12.0 || ^5.0.0 || ^6.0.0
+      tracked-built-ins: ^3.3.0 || ^4.0.0
+    peerDependenciesMeta:
+      '@glint/template':
+        optional: true
 
   '@lblod/template-uuid-instantiator@1.0.3':
     resolution: {integrity: sha512-l+q8MxBHPM2vp3eDEWxOy8b9BtHBbIRVlIuyLHqaxRMlx/rb/lx5WuWQYvvI0vVwvSVimDYro2VHzpTILaX8bA==}
@@ -2418,10 +2441,6 @@ packages:
   '@rdfjs/io@1.2.0':
     resolution: {integrity: sha512-wGScmcUW7YAcoQk0bTRDBZqdPL/Y58Fuz7F0nXKThBnWPTIUct8CWKzbkT1ym8X/nW46yBw5+nmasVauSN7yIw==}
 
-  '@rdfjs/namespace@1.1.0':
-    resolution: {integrity: sha512-utO5rtaOKxk8B90qzaQ0N+J5WrCI28DtfAY/zExCmXE7cOfC5uRI/oMKbLaVEPj2P7uArekt/T4IPATtj7Tjug==}
-    engines: {node: '>=6'}
-
   '@rdfjs/namespace@2.0.1':
     resolution: {integrity: sha512-U85NWVGnL3gWvOZ4eXwUcv3/bom7PAcutSBQqmVWvOaslPy+kDzAJCH1WYBLpdQd4yMmJ+bpJcDl9rcHtXeixg==}
 
@@ -2461,14 +2480,8 @@ packages:
   '@rdfjs/term-map@2.0.2':
     resolution: {integrity: sha512-EJ2FmmdEUsSR/tU1nrizRLWzH24YzhuvesrbUWxC3Fs0ilYNdtTbg0RaFJDUnJF3HkbNBQe8Zrt/uvU/hcKnHg==}
 
-  '@rdfjs/term-set@1.1.0':
-    resolution: {integrity: sha512-QQ4yzVe1Rvae/GN9SnOhweHNpaxQtnAjeOVciP/yJ0Gfxtbphy2tM56ZsRLV04Qq5qMcSclZIe6irYyEzx/UwQ==}
-
   '@rdfjs/term-set@2.0.3':
     resolution: {integrity: sha512-DyXrKWEx+mtAFUZVU7bc3Va6/KZ8PsIp0RVdyWT9jfDgI/HCvNisZaBtAcm+SYTC45o+7WLkbudkk1bfaKVB0A==}
-
-  '@rdfjs/to-ntriples@2.0.0':
-    resolution: {integrity: sha512-nDhpfhx6W6HKsy4HjyLp3H1nbrX1CiUCWhWQwKcYZX1s9GOjcoQTwY7GUUbVec0hzdJDQBR6gnjxtENBDt482Q==}
 
   '@rdfjs/to-ntriples@3.0.1':
     resolution: {integrity: sha512-gjoPAvh4j7AbGMjcDn/8R4cW+d/FPtbfbMM0uQXkyfBFtNUW2iVgrqsgJ65roLc54Y9A2TTFaeeTGSvY9a0HCQ==}
@@ -2478,9 +2491,6 @@ packages:
 
   '@rdfjs/tree@0.2.1':
     resolution: {integrity: sha512-J70CQ7R8Ivfs1FFUxtFN7ADb5wTMgbhn0O558NXSXQHItmSavT6cXmQlIokbmboU+grhu56iR/8Bl9do8LCq+w==}
-
-  '@rdfjs/types@1.1.2':
-    resolution: {integrity: sha512-wqpOJK1QCbmsGNtyzYnojPU8gRDPid2JO0Q0kMtb4j65xhCK880cnKAfEOwC+dX85VJcCByQx5zOwyyfCjDJsg==}
 
   '@rdfjs/types@2.0.1':
     resolution: {integrity: sha512-uyAzpugX7KekAXAHq26m3JlUIZJOC0uSBhpnefGV5i15bevDyyejoB7I+9MKeUrzXD8OOUI3+4FeV1wwQr5ihA==}
@@ -2571,6 +2581,9 @@ packages:
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
 
+  '@tpluscode/rdf-ns-builders@5.0.0':
+    resolution: {integrity: sha512-rtMFbArdief+s0z2A3TOb/gNe5O5xn9LDiEpilCf6lGYCUIfyqoOvZY80fS/eILwcF2Mj6cUQN1WBQ+1neJmaw==}
+
   '@tybys/wasm-util@0.10.2':
     resolution: {integrity: sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg==}
 
@@ -2601,9 +2614,6 @@ packages:
 
   '@types/chai@4.3.20':
     resolution: {integrity: sha512-/pC9HAB5I/xMlc5FP77qjCnI16ChlJfW0tGa0IUcFn38VJrTV6DeZ60NU5KZBtaOZqjdpwTWohz5HU1RrhiYxQ==}
-
-  '@types/clownface@2.0.10':
-    resolution: {integrity: sha512-Vz48oQux0YArQ66wfRp54NlxvEmpyTqbFIH435AsgN7C+p4MXao/rjXUisULL6436bxjFk4VluZr7J2HQkBHmQ==}
 
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
@@ -2716,14 +2726,11 @@ packages:
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
 
-  '@types/rdf-validate-shacl@0.4.9':
-    resolution: {integrity: sha512-mjWwr+/7p2NPmJThB0nS1N7HWTrPAP5MFOVjEChiy2/e9mNH7WxtkMAEro00Ew/prcf6pw5ke1dzq/vkhBh7+A==}
-
   '@types/rdfjs__dataset@2.0.7':
     resolution: {integrity: sha512-+GaYIL9C7N1N0HyH+obU4IXuL7DX+fXuf827aUQ2Vx2UghO47+OTxo2v3seEQj/1YHoHBfQFk5Y4P6Q7Ht4Hqw==}
 
-  '@types/rdfjs__environment@1.0.0':
-    resolution: {integrity: sha512-MDcnv3qfJvbHoEpUQXj5muT8g3e+xz1D8sGevrq3+Q4TzeEvQf5ijGX5l8485XFYrN/OBApgzXkHMZC04/kd5w==}
+  '@types/rdfjs__namespace@2.0.10':
+    resolution: {integrity: sha512-xoVzEIOxcpyteEmzaj94MSBbrBFs+vqv05joMhzLEiPRwsBBDnhkdBCaaDxR1Tf7wOW0kB2R1IYe4C3vEBFPgA==}
 
   '@types/rdfjs__parser-n3@2.0.6':
     resolution: {integrity: sha512-VHfdq7BDV6iMCtHkzTFSOuUWnqGlMUmEF0UZyK4+g9SzLWvc6TMcU5TYwQPQIz/e0s7dZ+xomxx6mVtIzsRQ/A==}
@@ -2945,6 +2952,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@vocabulary/sh@1.1.6':
+    resolution: {integrity: sha512-8IfAQoKh57THz8LA2+n1jaY/VC2XaqMNSsJgzBKSSrj20y5PSMAawb6dMsxoLxqDIPBDs1TFRl/9CijUnwbBUA==}
+    peerDependencies:
+      '@rdfjs/types': ^2.0.0
+
   '@volar/kit@2.4.28':
     resolution: {integrity: sha512-cKX4vK9dtZvDRaAzeoUdaAJEew6IdxHNCRrdp5Kvcl6zZOqb6jTOfk3kXkIkG3T7oTFXguEMt5+9ptyqYR84Pg==}
     peerDependencies:
@@ -3029,6 +3041,9 @@ packages:
 
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
+
+  '@zazuko/prefixes@2.6.1':
+    resolution: {integrity: sha512-fbOadP7twxt0ZYT9mgIC+xQMk6f3pYYLI5a/2UJ/mc/ygqb/NoVv2ryK3lTtoi74xwkdpUeDwIuFQSosowzUgg==}
 
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -4057,8 +4072,8 @@ packages:
     resolution: {integrity: sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==}
     engines: {node: '>=0.8'}
 
-  clownface@1.5.1:
-    resolution: {integrity: sha512-Ko8N/UFsnhEGmPlyE1bUFhbRhVgDbxqlIjcqxtLysc4dWaY0A7iCdg3savhAxs7Lheb7FCygIyRh7ADYZWVIng==}
+  clownface@2.0.3:
+    resolution: {integrity: sha512-E76TBJ7CgU9+/5paSAvuNdMO+fzFThnvRVtidosktYppYkXM8V7tid8Ezzo8S1OmoWxKUam3yfkZlfCid4OiJQ==}
 
   co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
@@ -8648,24 +8663,24 @@ packages:
     resolution: {integrity: sha512-B5ynHt4sasbUafzrvYI2GFARgeFcD8Sx9yXPbg7gEyT2EH76rlCv84kyO6tnxzVbxUN/uJDbK1S/MXh+DsnuTA==}
     engines: {node: '>=18'}
 
-  rdf-data-factory@1.1.3:
-    resolution: {integrity: sha512-ny6CI7m2bq4lfQQmDYvcb2l1F9KtGwz9chipX4oWu2aAtVoXjb7k3d8J1EsgAsEbMXnBipB/iuRen5H2fwRWWQ==}
-
   rdf-data-factory@2.0.2:
     resolution: {integrity: sha512-WzPoYHwQYWvIP9k+7IBLY1b4nIDitzAK4mA37WumAF/Cjvu/KOtYJH9IPZnUTWNSd5K2+pq4vrcE9WZC4sRHhg==}
+
+  rdf-dataset-ext@1.1.0:
+    resolution: {integrity: sha512-CH85RfRKN9aSlbju8T7aM8hgCSWMBsh2eh/tGxUUtWMN+waxi6iFDt8/r4PAEmKaEA82guimZJ4ISbmJ2rvWQg==}
+    deprecated: rdf-dataset-ext is deprecated. Switching to rdf-ext is recommended.
 
   rdf-ext@2.5.2:
     resolution: {integrity: sha512-xndLCbnxcPUZ2CxdQX/BdHjAUsZuFuA4Uw2ddDZnX3vhLKoTIaXunWyp1r9yfX66Nxv0mEkzm71YIi19ex/pEg==}
 
-  rdf-literal@1.3.2:
-    resolution: {integrity: sha512-79Stlu3sXy0kq9/decHFLf3xNPuY6sfhFPhd/diWErgaFr0Ekyg38Vh9bnVcqDYu48CFRi0t+hrFii49n92Hbw==}
+  rdf-literal@2.0.0:
+    resolution: {integrity: sha512-jlQ+h7EvnXmncmk8OzOYR8T3gNfd4g0LQXbflHkEkancic8dh0Tdt5RiRq8vUFndjIeNHt1RWeA5TAj6rgrtng==}
 
-  rdf-validate-datatype@0.1.5:
-    resolution: {integrity: sha512-gU+cD+AT1LpFwbemuEmTDjwLyFwJDiw21XHyIofKhFnEpXODjShBuxhgDGnZqW3qIEwu/vECjOecuD60e5ngiQ==}
-    engines: {node: '>=10.4'}
+  rdf-validate-datatype@0.2.2:
+    resolution: {integrity: sha512-mH9qL8i0WBbZ6HJCA26BB6V+WV2MraKvitez3SV0QegBWVQ4wYO49CgfFBzoAYg6tlnhFXl9MkrOAQ07X2N1FA==}
 
-  rdf-validate-shacl@0.4.5:
-    resolution: {integrity: sha512-tGYnssuPzmsPua1dju4hEtGkT1zouvwzVTNrFhNiqj2aZFO5pQ7lvLd9Cv9H9vKAlpIdC/x0zL6btxG3PCss0w==}
+  rdf-validate-shacl@0.6.5:
+    resolution: {integrity: sha512-rwIibopSixDE8ecA9x0c7oTVxdMWxGiJh7h3uJ+WS2h4lq2nx3DZVO7rJvwa5kZpDq9QEFPoyZINAUyfaaoN4Q==}
 
   rdfa-streaming-parser@3.0.2:
     resolution: {integrity: sha512-1MEkALT5PYjucVo6lNHXd9DbkgW0hSfPOJOs/TpUFe9zoZvkoreKcGIFnMFkbMmYTNLCiGFo/74LviIUnWLkIw==}
@@ -12615,7 +12630,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@37.2.0(c286b351243be7fe7b75d8ce2dec52ea)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@37.3.0(143e26d5c96b4331f5fc8346f5c3e4be)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14)))(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(eslint@9.39.4(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.2(@babel/core@7.29.0))(webpack@5.106.2(postcss@8.5.14))
       '@babel/core': 7.29.0
@@ -12625,14 +12640,13 @@ snapshots:
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.6)(prosemirror-state@1.4.4)
       '@ember/string': 3.1.1
       '@embroider/macros': 1.19.7(@babel/core@7.29.0)(@glint/template@1.7.7)
-      '@lblod/ember-rdfa-editor': 13.10.2(a2cb0244dd9131bc305eb5466e43e69d)
+      '@lblod/ember-rdfa-editor': 13.11.0(a2cb0244dd9131bc305eb5466e43e69d)
       '@lblod/lib-decision-shapes': 0.0.25(@babel/core@7.29.0)(@jest/transform@30.0.2)(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.29.0))(jest-util@30.0.2)(jest@30.0.3(@types/node@25.8.0)(node-notifier@10.0.1))(typescript@5.9.3)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
       '@rdfjs/data-model': 2.1.0
       '@rdfjs/dataset': 2.0.2
       '@rdfjs/parser-n3': 2.1.0
-      '@types/rdf-validate-shacl': 0.4.9
       '@types/rdfjs__parser-n3': 2.0.6
       buffer: 6.0.3
       codemirror: 6.0.2
@@ -12658,7 +12672,7 @@ snapshots:
       process: 0.11.10
       proj4: 2.15.0
       rdf-ext: 2.5.2(web-streams-polyfill@3.3.3)
-      rdf-validate-shacl: 0.4.5
+      rdf-validate-shacl: 0.6.5
       rdfa-streaming-parser: 3.0.2
       reactiveweb: 1.9.1(@babel/core@7.29.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)
       stream-browserify: 3.0.0
@@ -12685,7 +12699,7 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@13.10.2(a2cb0244dd9131bc305eb5466e43e69d)':
+  '@lblod/ember-rdfa-editor@13.11.0(a2cb0244dd9131bc305eb5466e43e69d)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14)))(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(eslint@9.39.4(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.2(@babel/core@7.29.0))(webpack@5.106.2(postcss@8.5.14))
       '@codemirror/commands': 6.10.3
@@ -12702,13 +12716,13 @@ snapshots:
       '@glimmer/component': 1.1.2(@babel/core@7.29.0)
       '@glimmer/tracking': 1.1.2
       '@glint/tsserver-plugin': 2.1.0
-      '@lblod/marawa': 0.8.0-beta.6
-      '@rdfjs/types': 1.1.2
+      '@rdfjs/types': 2.0.1
       '@say-editor/prosemirror-invisibles': 0.1.1(prosemirror-model@1.25.6)(prosemirror-state@1.4.4)(prosemirror-view@1.41.8)
       '@say-editor/prosemirror-tables': 0.3.0
       '@types/react': 19.1.13
       codemirror: 6.0.2
       common-tags: 1.8.2
+      date-fns: 2.30.0
       debug: 4.4.3
       decorator-transforms: 2.3.2(@babel/core@7.29.0)
       dompurify: 3.2.4
@@ -12746,7 +12760,7 @@ snapshots:
       prosemirror-state: 1.4.4
       prosemirror-transform: 1.12.0
       prosemirror-view: 1.41.8
-      rdf-data-factory: 1.1.3
+      rdf-data-factory: 2.0.2
       reactiveweb: 1.9.1(@babel/core@7.29.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)
       relative-to-absolute-iri: 1.0.8
       tracked-built-ins: 4.1.2(@babel/core@7.29.0)
@@ -12791,6 +12805,41 @@ snapshots:
     dependencies:
       '@rdfjs/data-model': 1.3.4
       '@rdfjs/dataset': 1.1.1
+
+  '@lblod/say-roadsign-regulation-plugin@1.0.1(6b1a20d9f2be8c3d58a81f4bc371044e)':
+    dependencies:
+      '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14)))(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(eslint@9.39.4(jiti@2.6.1))(miragejs@0.1.48)(tracked-built-ins@4.1.2(@babel/core@7.29.0))(webpack@5.106.2(postcss@8.5.14))
+      '@ember/optional-features': 2.3.0
+      '@ember/test-helpers': 3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14))
+      '@embroider/addon-shim': 1.10.2
+      '@glimmer/component': 1.1.2(@babel/core@7.29.0)
+      '@glimmer/tracking': 1.1.2
+      '@glint/tsserver-plugin': 2.1.0
+      '@lblod/ember-rdfa-editor': 13.11.0(a2cb0244dd9131bc305eb5466e43e69d)
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
+      ember-basic-dropdown: 8.11.1(@babel/core@7.29.0)(@ember/test-helpers@3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14)))(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(ember-cli-htmlbars@6.3.0)(ember-modifier@4.3.0(@babel/core@7.29.0)))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))
+      ember-cli-babel: 8.3.1(@babel/core@7.29.0)
+      ember-cli-htmlbars: 6.3.0
+      ember-concurrency: 4.0.6(@babel/core@7.29.0)(@glint/template@1.7.7)
+      ember-intl: 7.5.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))(webpack@5.106.2(postcss@8.5.14)))(@glint/template@1.7.7)(typescript@5.9.3)(webpack@5.106.2(postcss@8.5.14))
+      ember-modifier: 4.3.0(@babel/core@7.29.0)
+      ember-power-select: 8.12.2(ea9bbe796db1f2f78b4d68ca78bd7576)
+      ember-power-select-with-create: 3.1.0(c8b4d00671b7d283954bea441d47d96e)
+      ember-source: 5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14))
+      ember-template-imports: 4.4.0
+      ember-truth-helpers: 4.0.3(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))
+      reactiveweb: 1.9.1(@babel/core@7.29.0)(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)
+      tracked-built-ins: 4.1.2(@babel/core@7.29.0)
+      typedoc: 0.28.19(typescript@5.9.3)
+      uuid: 9.0.1
+      zod: 3.25.76
+    optionalDependencies:
+      '@glint/template': 1.7.7
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@ember/test-waiters'
+      - supports-color
+      - typescript
 
   '@lblod/template-uuid-instantiator@1.0.3':
     dependencies:
@@ -13137,10 +13186,6 @@ snapshots:
       readable-stream: 4.7.0
       stream-chunks: 1.0.0
 
-  '@rdfjs/namespace@1.1.0':
-    dependencies:
-      '@rdfjs/data-model': 1.3.4
-
   '@rdfjs/namespace@2.0.1':
     dependencies:
       '@rdfjs/data-model': 2.1.0
@@ -13217,15 +13262,9 @@ snapshots:
     dependencies:
       '@rdfjs/to-ntriples': 3.0.1
 
-  '@rdfjs/term-set@1.1.0':
-    dependencies:
-      '@rdfjs/to-ntriples': 2.0.0
-
   '@rdfjs/term-set@2.0.3':
     dependencies:
       '@rdfjs/to-ntriples': 3.0.1
-
-  '@rdfjs/to-ntriples@2.0.0': {}
 
   '@rdfjs/to-ntriples@3.0.1': {}
 
@@ -13238,10 +13277,6 @@ snapshots:
       '@rdfjs/namespace': 2.0.1
       '@rdfjs/term-map': 2.0.2
       '@rdfjs/term-set': 2.0.3
-
-  '@rdfjs/types@1.1.2':
-    dependencies:
-      '@types/node': 25.8.0
 
   '@rdfjs/types@2.0.1':
     dependencies:
@@ -13336,6 +13371,14 @@ snapshots:
 
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
+  '@tpluscode/rdf-ns-builders@5.0.0':
+    dependencies:
+      '@rdfjs/data-model': 2.1.0
+      '@rdfjs/namespace': 2.0.1
+      '@rdfjs/types': 2.0.1
+      '@types/rdfjs__namespace': 2.0.10
+      '@zazuko/prefixes': 2.6.1
+
   '@tybys/wasm-util@0.10.2':
     dependencies:
       tslib: 2.8.1
@@ -13382,11 +13425,6 @@ snapshots:
       '@types/chai': 4.3.20
 
   '@types/chai@4.3.20': {}
-
-  '@types/clownface@2.0.10':
-    dependencies:
-      '@rdfjs/types': 2.0.1
-      '@types/rdfjs__environment': 1.0.0
 
   '@types/connect@3.4.38':
     dependencies:
@@ -13517,20 +13555,13 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
-  '@types/rdf-validate-shacl@0.4.9':
-    dependencies:
-      '@rdfjs/types': 2.0.1
-      '@types/clownface': 2.0.10
-      '@types/node': 25.8.0
-
   '@types/rdfjs__dataset@2.0.7':
     dependencies:
       '@rdfjs/types': 2.0.1
 
-  '@types/rdfjs__environment@1.0.0':
+  '@types/rdfjs__namespace@2.0.10':
     dependencies:
       '@rdfjs/types': 2.0.1
-      '@types/node': 25.8.0
 
   '@types/rdfjs__parser-n3@2.0.6':
     dependencies:
@@ -13742,6 +13773,10 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
+  '@vocabulary/sh@1.1.6(@rdfjs/types@2.0.1)':
+    dependencies:
+      '@rdfjs/types': 2.0.1
+
   '@volar/kit@2.4.28(typescript@5.9.3)':
     dependencies:
       '@volar/language-service': 2.4.28
@@ -13874,6 +13909,8 @@ snapshots:
   '@xtuc/ieee754@1.2.0': {}
 
   '@xtuc/long@4.2.2': {}
+
+  '@zazuko/prefixes@2.6.1': {}
 
   abbrev@1.1.1: {}
 
@@ -15427,10 +15464,11 @@ snapshots:
 
   clone@2.1.2: {}
 
-  clownface@1.5.1:
+  clownface@2.0.3:
     dependencies:
-      '@rdfjs/data-model': 1.3.4
-      '@rdfjs/namespace': 1.1.0
+      '@rdfjs/data-model': 2.1.0
+      '@rdfjs/environment': 1.0.0
+      '@rdfjs/namespace': 2.0.1
 
   co@4.6.0: {}
 
@@ -21292,13 +21330,14 @@ snapshots:
     dependencies:
       setimmediate: 1.0.5
 
-  rdf-data-factory@1.1.3:
-    dependencies:
-      '@rdfjs/types': 1.1.2
-
   rdf-data-factory@2.0.2:
     dependencies:
       '@rdfjs/types': 2.0.1
+
+  rdf-dataset-ext@1.1.0:
+    dependencies:
+      rdf-canonize: 3.4.0
+      readable-stream: 4.7.0
 
   rdf-ext@2.5.2(web-streams-polyfill@3.3.3):
     dependencies:
@@ -21324,25 +21363,29 @@ snapshots:
     transitivePeerDependencies:
       - web-streams-polyfill
 
-  rdf-literal@1.3.2:
+  rdf-literal@2.0.0:
     dependencies:
+      rdf-data-factory: 2.0.2
+
+  rdf-validate-datatype@0.2.2:
+    dependencies:
+      '@rdfjs/term-map': 2.0.2
+      '@tpluscode/rdf-ns-builders': 5.0.0
+
+  rdf-validate-shacl@0.6.5:
+    dependencies:
+      '@rdfjs/data-model': 2.1.0
+      '@rdfjs/dataset': 2.0.2
+      '@rdfjs/environment': 1.0.0
+      '@rdfjs/namespace': 2.0.1
+      '@rdfjs/term-set': 2.0.3
       '@rdfjs/types': 2.0.1
-      rdf-data-factory: 1.1.3
-
-  rdf-validate-datatype@0.1.5:
-    dependencies:
-      '@rdfjs/namespace': 1.1.0
-      '@rdfjs/to-ntriples': 2.0.0
-
-  rdf-validate-shacl@0.4.5:
-    dependencies:
-      '@rdfjs/dataset': 1.1.1
-      '@rdfjs/namespace': 1.1.0
-      '@rdfjs/term-set': 1.1.0
-      clownface: 1.5.1
+      '@vocabulary/sh': 1.1.6(@rdfjs/types@2.0.1)
+      clownface: 2.0.3
       debug: 4.4.3
-      rdf-literal: 1.3.2
-      rdf-validate-datatype: 0.1.5
+      rdf-dataset-ext: 1.1.0
+      rdf-literal: 2.0.0
+      rdf-validate-datatype: 0.2.2
     transitivePeerDependencies:
       - supports-color
 
