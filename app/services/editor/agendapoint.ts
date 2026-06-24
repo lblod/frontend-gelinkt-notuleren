@@ -543,6 +543,7 @@ export default class AgendapointEditorService extends Service {
       emberApplication({ application: unwrap(getOwner(this)) }),
       slashCommandsPlugin({
         intl: this.intl,
+        // @ts-expect-error waiting for the PR with this fix
         getGroups: this.contextualActionGroupGetters,
       }),
       locationModalsPlugin(),
@@ -558,7 +559,9 @@ export default class AgendapointEditorService extends Service {
     return {
       schema,
       plugins,
+      // @ts-expect-error waiting for the PR with this fix
       contextualActionGetters: this.contextualActionGetters,
+      // @ts-expect-error waiting for the PR with this fix
       contextualActionGroupGetters: this.contextualActionGroupGetters,
     };
   }

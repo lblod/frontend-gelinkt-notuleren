@@ -397,7 +397,6 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
             {{#if this.controller}}
               <ContextualActionsContainer
                 @controller={{this.controller}}
-                @getActions={{this.contextualActionGetters}}
                 @getGroups={{this.contextualActionGroupGetters}}
               />
             {{/if}}
