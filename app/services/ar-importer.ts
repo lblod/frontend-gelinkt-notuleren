@@ -5,6 +5,7 @@ import { AlertTriangleIcon } from '@appuniversum/ember-appuniversum/components/i
 import type { EditorState, SayController } from '@lblod/ember-rdfa-editor';
 import {
   transactionCombinator,
+  type TransactionCombinatorResult,
   type TransactionMonad,
 } from '@lblod/ember-rdfa-editor/utils/transaction-utils';
 import {
@@ -17,7 +18,6 @@ import { getCurrentBesluitRange } from '@lblod/ember-rdfa-editor-lblod-plugins/u
 import { VariableInstanceSchema } from '@lblod/say-roadsign-regulation-plugin/plugin/schemas/variable-instance';
 import { TrafficSignalConceptSchema } from '@lblod/say-roadsign-regulation-plugin/plugin/schemas/traffic-signal-concept';
 import type ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
-import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import type TrafficSignal from 'frontend-gelinkt-notuleren/models/traffic-signal';
 import type VariableInstance from 'frontend-gelinkt-notuleren/models/variable-instance';
 import { v4 as uuidv4 } from 'uuid';
@@ -84,8 +84,6 @@ function convertSignals(signals: TrafficSignal[]) {
 }
 
 export default class ArImporterService extends Service {
-  @service('editor/agendapoint')
-  declare agendapointEditor: AgendapointEditorService;
   @service declare intl: IntlService;
 
   _notifyError(controller: SayController, translationKey: string) {
@@ -225,7 +223,15 @@ export default class ArImporterService extends Service {
     }
   }
 
-  async generatePreview(design: ArDesign): Promise<ImportResult<string>> {
+  async generatePreview(
+    design: ArDesign,
+    processDocumentHeadlessly: (
+      html: string,
+      transactionGenerator: (
+        state: EditorState,
+      ) => TransactionCombinatorResult<boolean>,
+    ) => string,
+  ): Promise<ImportResult<string>> {
     const decisionUri = 'http://data.lblod.info/id/besluiten/12345';
     const { result: monads, warnings } = await this.generateInsertionMonads(
       decisionUri,
@@ -233,7 +239,7 @@ export default class ArImporterService extends Service {
       afterLastArticle,
       true,
     );
-    const document = this.agendapointEditor.processDocumentHeadlessly(
+    const document = processDocumentHeadlessly(
       `<div property="prov:generated" resource="${decisionUri}" typeof="besluit:Besluit ext:BesluitNieuweStijl"><div property="prov:value" datatype="xsd:string"></div></div>`,
       (state) => transactionCombinator<boolean>(state)(monads),
     );

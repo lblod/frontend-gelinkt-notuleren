@@ -3,38 +3,31 @@ import { service } from '@ember/service';
 import { tracked } from 'tracked-built-ins';
 import { restartableTask, task, timeout } from 'ember-concurrency';
 import type { SayController } from '@lblod/ember-rdfa-editor';
-import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
 
 import ArDesign from 'frontend-gelinkt-notuleren/models/ar-design';
 import type ArImporterService from 'frontend-gelinkt-notuleren/services/ar-importer';
 import ArPreview from './preview';
 import ArDesignOverview from './overview';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
-import {
-  DRAFT_STATUS_ID,
-  PUBLISHED_STATUS_ID,
-  SCHEDULED_STATUS_ID,
-} from 'frontend-gelinkt-notuleren/utils/constants';
-import type EditorDocumentModel from 'frontend-gelinkt-notuleren/models/editor-document';
-import type { Collection } from '@ember-data/store/-private/record-arrays/identifier-array';
 import type { GenerateImportResult } from 'frontend-gelinkt-notuleren/services/ar-importer';
-import type { ArticlePosition } from './common-types';
+import type {
+  ArDesignOverviewSortField,
+  ArDesignQuery,
+  ArticlePosition,
+  DesignInfo,
+  ProcessDocumentHeadlessly,
+} from './common-types';
 import type { ArticleInsertPosition } from 'frontend-gelinkt-notuleren/utils/article-insert-position';
 
 const FILTER_TIMEOUT_MS = 300;
-
-export type ArDesignOverviewSortField = 'name' | '-name' | 'date' | '-date';
-
-export type DesignInfo = {
-  designs: Collection<ArDesign>;
-  inDocs: Record<string, Promise<EditorDocumentModel[]>>;
-};
 
 type Sig = {
   Args: {
     controller: SayController;
     onInsert?: () => void;
     articles: ArticlePosition[];
+    designQuery: ArDesignQuery;
+    processDocumentHeadlessly: ProcessDocumentHeadlessly;
   };
 };
 
@@ -42,8 +35,6 @@ export default class ArWidgetContents extends Component<Sig> {
   @service declare arImporter: ArImporterService;
 
   @tracked selectedDesign?: ArDesign | null;
-
-  @service declare store: Store;
 
   @tracked pageNumber: number = 0;
   pageSize: number = 20;
@@ -63,38 +54,7 @@ export default class ArWidgetContents extends Component<Sig> {
     await timeout(FILTER_TIMEOUT_MS);
     const { pageNumber, pageSize, sort, nameFilter } = this;
     try {
-      const designs = await this.store.query<ArDesign>('ar-design', {
-        ...(nameFilter && {
-          filter: {
-            name: nameFilter,
-          },
-        }),
-        page: {
-          size: pageSize,
-          number: pageNumber,
-        },
-        sort,
-      });
-      return {
-        designs,
-        inDocs: Object.fromEntries(
-          designs.map((design) => [
-            design.id ?? '',
-            this.store.query<EditorDocumentModel>('editor-document', {
-              filter: {
-                'includes-ar-designs': design.uri,
-                'document-container': {
-                  'current-version': { 'includes-ar-designs': design.uri },
-                  status: {
-                    id: `${DRAFT_STATUS_ID},${SCHEDULED_STATUS_ID},${PUBLISHED_STATUS_ID}`,
-                  },
-                },
-              },
-              fields: { 'editor-documents': 'uri' },
-            }),
-          ]),
-        ),
-      };
+      return this.args.designQuery({ pageNumber, pageSize, sort, nameFilter });
     } catch (e) {
       console.error(e);
       throw e;
@@ -161,6 +121,7 @@ export default class ArWidgetContents extends Component<Sig> {
         @onInsertAr={{this.insertAr.perform}}
         @insertLoading={{this.insertAr.isRunning}}
         @articles={{@articles}}
+        @processDocumentHeadlessly={{@processDocumentHeadlessly}}
       />
     {{else}}
       <ArDesignOverview

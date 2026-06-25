@@ -72,6 +72,8 @@ import type {
   GetContextualActionGroups,
   GetContextualActions,
 } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
+import type { ArDesignQuery } from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/common-types';
+import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
 
 interface AgendapointEditSig {
   Args: {
@@ -89,6 +91,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
   @service declare intl: IntlService;
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
+  @service declare arDesignLoader: ArDesignLoaderService;
 
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
@@ -387,6 +390,10 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     this.displayDocumentInformationModal = false;
   };
 
+  arDesignQuery: ArDesignQuery = (pagination) => {
+    return this.arDesignLoader.findDesigns(pagination);
+  };
+
   <template>
     {{#if this.editorDocument}}
       <AppChrome
@@ -560,7 +567,11 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               @options={{this.config.roadsignRegulation}}
             />
             {{#if (featureFlag 'arImport')}}
-              <ArImporterSidebarWidget @controller={{container.controller}} />
+              <ArImporterSidebarWidget
+                @controller={{container.controller}}
+                @designQuery={{this.arDesignQuery}}
+                @processDocumentHeadlessly={{this.agendapointEditor.processDocumentHeadlessly}}
+              />
             {{/if}}
             <StandardTemplateCard
               @controller={{container.controller}}

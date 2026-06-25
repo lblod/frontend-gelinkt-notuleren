@@ -614,6 +614,9 @@ export default class AgendapointEditorService extends Service {
     return callback(state);
   };
 
+  // TODO ideally this function would be pulled into the editor. This way it could be unified with
+  // the copy that exists in embeddable. This would require ideally passing in the schema and
+  // plugins, but it could also be getState() that is passed in.
   /**
    * Use a headless prosemirror instance to load the given HTML, pass the state to the generator to
    * produce some transactions, then apply those transactions to the instance and pass back the
