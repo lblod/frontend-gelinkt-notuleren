@@ -11,7 +11,7 @@ import {
 import type {
   DesignInfo,
   Pagination,
-} from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/common-types';
+} from '@lblod/say-ar-design-plugin/plugin/types';
 
 export default class ArDesignLoaderService extends Service {
   @service declare store: StoreService;

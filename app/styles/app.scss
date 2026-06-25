@@ -23,6 +23,8 @@
 @import '@lblod/ember-rdfa-editor';
 
 // PLUGINS
+@import '@lblod/say-roadsign-regulation-plugin';
+@import '@lblod/say-ar-design-plugin';
 @import 'citaten-plugin';
 @import 'date-plugin';
 @import 'variable-plugin';
@@ -36,7 +38,6 @@
 @import 'structure-plugin';
 @import 'mandatee-table-plugin';
 @import 'document-validation';
-@import 'roadsign-regulation-table';
 
 // PROJECT COMPONENTS > @TODO: refactor in ember-appuniversum where possible
 @import 'project/c-app-chrome';
@@ -48,7 +49,6 @@
 @import 'project/c-environment-banner';
 @import 'project/c-inauguration-meeting-synchronization';
 @import 'project/c-sortable';
-@import 'project/c-ar-importer';
 
 // give treatment (behandeling) content and the copy-parts content the same style as other say-documents
 .c-template-content--treatment {
