@@ -35,7 +35,7 @@ steps:
       - corepack enable
       - pnpm lint:deps
   test:
-    image: node:22-slim
+    image: node:22
     commands:
       - corepack enable
       - pnpm test:ember
