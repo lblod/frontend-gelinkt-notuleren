@@ -1,5 +1,23 @@
 # frontend-gelinkt-notuleren
 
+## 5.80.0
+
+### Minor Changes
+
+- [#930](https://github.com/lblod/frontend-gelinkt-notuleren/pull/930) [`0ee4e3e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0ee4e3ec819d54873e69444a5968226d80ba5309) Thanks [@piemonkey](https://github.com/piemonkey)! - Move to split-out AR-design plugin
+
+- [#928](https://github.com/lblod/frontend-gelinkt-notuleren/pull/928) [`9a2454b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9a2454b07ff83c482fde2753cd524fb82a73de1c) Thanks [@kobemertens](https://github.com/kobemertens)! - Update the editor plugins to support offline search in the contextual actions
+
+- [#927](https://github.com/lblod/frontend-gelinkt-notuleren/pull/927) [`6262861`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/6262861b0e45ed55d463064268a4a48078278036) Thanks [@piemonkey](https://github.com/piemonkey)! - Move to [plugins v37.3.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v37.3.0), [editor v13.11.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod/ember-rdfa-editor%4013.11.0) and [roadsign-regulation-plugin v1.0.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod/say-roadsign-regulation-plugin%401.0.0)
+
+### Patch Changes
+
+- [#927](https://github.com/lblod/frontend-gelinkt-notuleren/pull/927) [`9dad6de`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/9dad6de72d1080f50ae4f82feb0df9eefbfbee96) Thanks [@piemonkey](https://github.com/piemonkey)! - Move to separated out module for roadsign-regulation plugin
+
+- [#930](https://github.com/lblod/frontend-gelinkt-notuleren/pull/930) [`c6f0d05`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c6f0d053f5086f4a87f392324af370b8e59347f4) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [editor v13.11.1](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod/ember-rdfa-editor%4013.11.1) and [ar-design plugin v1.0.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod/say-ar-design-plugin%401.0.0)
+
+- [#929](https://github.com/lblod/frontend-gelinkt-notuleren/pull/929) [`5e8d61a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/5e8d61a36adc18c954cfe553f44d2493352384a9) Thanks [@piemonkey](https://github.com/piemonkey)! - Remove dependency on EditorDocument model in AR design code in preparation for it being migrated to a separate module
+
 ## 5.79.0
 
 ### Minor Changes
