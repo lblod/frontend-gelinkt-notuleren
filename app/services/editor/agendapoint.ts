@@ -161,6 +161,7 @@ import { getContextualActionGroups as placeDescriptionActionGroups } from '@lblo
 import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
+import { emptyBlockPlaceholder } from '@lblod/ember-rdfa-editor/plugins/empty-block-placeholder';
 
 const removeBlankNodes: ModelMigrationGenerator = (attrs) => {
   if (
@@ -529,10 +530,10 @@ export default class AgendapointEditorService extends Service {
       emberApplication({ application: unwrap(getOwner(this)) }),
       slashCommandsPlugin({
         intl: this.intl,
-        // @ts-expect-error waiting for the PR with this fix
         getGroups: this.contextualActionGroupGetters,
       }),
       locationModalsPlugin(),
+      emptyBlockPlaceholder(),
     ];
 
     // The autofiller plugin messes with the headless editor by appending a transaction just
@@ -545,9 +546,6 @@ export default class AgendapointEditorService extends Service {
     return {
       schema,
       plugins,
-      // @ts-expect-error waiting for the PR witjh this fix
-      contextualActionGetters: this.contextualActionGetters,
-      // @ts-expect-error waiting for the PR with this fix
       contextualActionGroupGetters: this.contextualActionGroupGetters,
     };
   }

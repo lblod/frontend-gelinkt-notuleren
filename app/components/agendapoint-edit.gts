@@ -68,10 +68,7 @@ import ArImporterSidebarWidget from '@lblod/say-ar-design-plugin/components/side
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/document-information-modal';
-import type {
-  GetContextualActionGroups,
-  GetContextualActions,
-} from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
+import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
 import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
 
