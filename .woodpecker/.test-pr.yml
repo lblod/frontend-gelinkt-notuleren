@@ -35,7 +35,7 @@ steps:
       - corepack enable
       - pnpm lint:deps
   test:
-    image: danlynn/ember-cli:5.12.0-node_22.0
+    image: danlynn/ember-cli:5.12.0-node_22.9
     commands:
       - corepack enable
       - pnpm test:ember
