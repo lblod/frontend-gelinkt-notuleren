@@ -68,10 +68,7 @@ import ArImporterSidebarWidget from '@lblod/say-ar-design-plugin/components/side
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/document-information-modal';
-import type {
-  GetContextualActionGroups,
-  GetContextualActions,
-} from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
+import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
 import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
 
@@ -104,7 +101,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
 
   @tracked schema?: Schema;
   @tracked plugins?: ProsePlugin[];
-  @tracked contextualActionGetters?: GetContextualActions;
   @tracked contextualActionGroupGetters?: GetContextualActionGroups;
   @tracked editorSetup = false;
 
@@ -167,16 +163,11 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
   });
 
   setSchemaAndPlugins = modifier(() => {
-    const {
-      schema,
-      plugins,
-      contextualActionGetters,
-      contextualActionGroupGetters,
-    } = this.agendapointEditor.getSchemaAndPlugins(false);
+    const { schema, plugins, contextualActionGroupGetters } =
+      this.agendapointEditor.getSchemaAndPlugins(false);
     this.schema = schema;
     this.plugins = plugins;
     this.editorSetup = true;
-    this.contextualActionGetters = contextualActionGetters;
     this.contextualActionGroupGetters = contextualActionGroupGetters;
     return () => {
       this.editorSetup = false;
@@ -549,7 +540,6 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
           @nodeViews={{this.nodeViews}}
           @plugins={{this.plugins}}
           @shouldEditRdfa={{false}}
-          @contextualActionGetters={{this.contextualActionGetters}}
           @contextualActionGroupGetters={{this.contextualActionGroupGetters}}
         >
           <:sidebarCollapsible as |container|>

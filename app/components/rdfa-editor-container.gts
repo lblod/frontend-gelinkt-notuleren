@@ -74,10 +74,7 @@ import type {
   TargetOptionGeneratorArgs,
 } from '@lblod/ember-rdfa-editor/components/_private/relationship-editor/types';
 import ContextualActionsContainer from '@lblod/ember-rdfa-editor/components/plugins/contextual-actions/container';
-import type {
-  GetContextualActionGroups,
-  GetContextualActions,
-} from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
+import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 
 interface Sig {
   Args: {
@@ -95,7 +92,6 @@ interface Sig {
     busyText?: string;
     shouldEditRdfa?: boolean;
     property?: string;
-    contextualActionGetters?: GetContextualActions;
     contextualActionGroupGetters?: GetContextualActionGroups;
   };
   Blocks: {
@@ -232,10 +228,6 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
     predicates: this.predicateOptionGeneratorTask.perform.bind(this),
     objects: this.objectOptionGeneratorTask.perform.bind(this),
   };
-
-  get contextualActionGetters() {
-    return this.args.contextualActionGetters ?? [];
-  }
 
   get contextualActionGroupGetters() {
     return this.args.contextualActionGroupGetters ?? [];

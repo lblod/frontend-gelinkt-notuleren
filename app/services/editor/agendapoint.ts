@@ -157,19 +157,11 @@ import {
   type ModelMigrationGenerator,
 } from '@lblod/ember-rdfa-editor/core/rdfa-types';
 import { slashCommandsPlugin } from '@lblod/ember-rdfa-editor/plugins/slash-commands/index';
-import {
-  getContextualActionGroups as placeDescriptionActionGroups,
-  getContextualActions as placeDescriptionActions,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions';
-import type {
-  GetContextualActionGroups,
-  GetContextualActions,
-} from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
+import { getContextualActionGroups as placeDescriptionActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions';
+import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
-import {
-  getContextualActionGroups as locationActionsGroups,
-  getContextualActions as locationActions,
-} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
+import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
+import { emptyBlockPlaceholder } from '@lblod/ember-rdfa-editor/plugins/empty-block-placeholder';
 
 const removeBlankNodes: ModelMigrationGenerator = (attrs) => {
   if (
@@ -202,12 +194,8 @@ export default class AgendapointEditorService extends Service {
     };
   }
 
-  contextualActionGetters = [
-    placeDescriptionActions(this.locationOptions),
-    locationActions(),
-  ];
   contextualActionGroupGetters = [
-    placeDescriptionActionGroups(),
+    placeDescriptionActionGroups(this.locationOptions),
     locationActionsGroups(),
   ];
 
@@ -465,7 +453,6 @@ export default class AgendapointEditorService extends Service {
     schema: Schema;
     plugins: ProsePlugin[];
     contextualActionGroupGetters: GetContextualActionGroups;
-    contextualActionGetters: GetContextualActions;
   } {
     const schema = new Schema({
       nodes: {
@@ -543,10 +530,10 @@ export default class AgendapointEditorService extends Service {
       emberApplication({ application: unwrap(getOwner(this)) }),
       slashCommandsPlugin({
         intl: this.intl,
-        // @ts-expect-error waiting for the PR with this fix
         getGroups: this.contextualActionGroupGetters,
       }),
       locationModalsPlugin(),
+      emptyBlockPlaceholder(),
     ];
 
     // The autofiller plugin messes with the headless editor by appending a transaction just
@@ -559,9 +546,6 @@ export default class AgendapointEditorService extends Service {
     return {
       schema,
       plugins,
-      // @ts-expect-error waiting for the PR with this fix
-      contextualActionGetters: this.contextualActionGetters,
-      // @ts-expect-error waiting for the PR with this fix
       contextualActionGroupGetters: this.contextualActionGroupGetters,
     };
   }
