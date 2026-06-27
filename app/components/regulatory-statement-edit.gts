@@ -637,6 +637,9 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
         @nodeViews={{this.nodeViews}}
         @plugins={{this.plugins}}
         @shouldEditRdfa={{false}}
+        {{!@glint-expect-error waiting for the PR with this fix}}
+        @contextualActionGetters={{this.contextualActionGetters}}
+        {{!@glint-expect-error waiting for the PR with this fix}}
         @contextualActionGroupGetters={{this.contextualActionGroupGetters}}
       >
         <:toolbar as |container|>

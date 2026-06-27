@@ -4,7 +4,7 @@ type InsertMeasureIndex = number | undefined;
 
 // import for jsdoc link, @import seems to not work here
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type insertMeasure from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/roadsign-regulation-plugin/actions/insert-measure';
+import type insertMeasure from '@lblod/say-roadsign-regulation-plugin/plugin/actions/insert-measure';
 
 /**
  * Util class to encapsulate where to insert something in the editor, based

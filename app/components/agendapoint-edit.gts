@@ -41,7 +41,7 @@ import TemplateCommentEdit from '@lblod/ember-rdfa-editor-lblod-plugins/componen
 import LocationInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/location-plugin/insert';
 import WorshipInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/worship-plugin/insert';
 import LmbInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lmb-plugin/insert';
-import RoadsignRegulationCard from '@lblod/ember-rdfa-editor-lblod-plugins/components/roadsign-regulation-plugin/roadsign-regulation-card';
+import RoadsignRegulationCard from '@lblod/say-roadsign-regulation-plugin/components/roadsign-regulation-card';
 import LpdcInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/lpdc-plugin/lpdc-insert';
 import MandateeTableInsert from '@lblod/ember-rdfa-editor-lblod-plugins/components/mandatee-table-plugin/insert';
 import MandateeTableConfigure from '@lblod/ember-rdfa-editor-lblod-plugins/components/mandatee-table-plugin/configure';
@@ -64,11 +64,16 @@ import { DRAFT_STATUS_ID } from 'frontend-gelinkt-notuleren/utils/constants';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import RdfaEditorContainer from 'frontend-gelinkt-notuleren/components/rdfa-editor-container';
 import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-route-leave';
-import ArImporterSidebarWidget from 'frontend-gelinkt-notuleren/components/editor-plugins/ar-importer/sidebar-widget';
+import ArImporterSidebarWidget from '@lblod/say-ar-design-plugin/components/sidebar-widget';
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
 import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/document-information-modal';
-import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
+import type {
+  GetContextualActionGroups,
+  GetContextualActions,
+} from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
+import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
+import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
 
 interface AgendapointEditSig {
   Args: {
@@ -86,6 +91,7 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
   @service declare intl: IntlService;
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
+  @service declare arDesignLoader: ArDesignLoaderService;
 
   @tracked hasDocumentValidationErrors = false;
   @tracked displayDeleteModal = false;
@@ -378,6 +384,10 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     this.displayDocumentInformationModal = false;
   };
 
+  arDesignQuery: ArDesignQuery = (pagination) => {
+    return this.arDesignLoader.findDesigns(pagination);
+  };
+
   <template>
     {{#if this.editorDocument}}
       <AppChrome
@@ -550,7 +560,11 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               @options={{this.config.roadsignRegulation}}
             />
             {{#if (featureFlag 'arImport')}}
-              <ArImporterSidebarWidget @controller={{container.controller}} />
+              <ArImporterSidebarWidget
+                @controller={{container.controller}}
+                @designQuery={{this.arDesignQuery}}
+                @processDocumentHeadlessly={{this.agendapointEditor.processDocumentHeadlessly}}
+              />
             {{/if}}
             <StandardTemplateCard
               @controller={{container.controller}}
