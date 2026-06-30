@@ -23,6 +23,8 @@ import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuur
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import TemplatePicker, { type GetTemplates } from './template-picker';
 import MetadataForm, { type updateLinkedDecisionArgs } from './metadata-form';
+import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
+import { localCopy } from 'tracked-toolbox';
 
 const truthy = (test: unknown) => !!test;
 
@@ -34,6 +36,8 @@ interface Sig {
     onCancel: () => void;
     onCreate: (container: unknown, template: Template) => void;
     decisionTypeOptions?: BesluitTypePluginOptions;
+    container?: DocumentContainerModel;
+    documentTitle?: string;
   };
 }
 
@@ -43,7 +47,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
   @tracked selectedTemplate: Template | undefined;
-  @tracked title = '';
+  @localCopy('args.documentTitle') title = '';
   @tracked invalidTitle = false;
   @tracked decisionType?: BesluitTypeInstance;
   @tracked decisionTypes?: BesluitType[];
@@ -77,6 +81,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
     }
   };
   deselectTemplate = () => {
+    this.title = this.args.documentTitle ?? '';
     this.selectedTemplate = undefined;
   };
   setDecisionType = (selected: BesluitTypeInstance) => {
@@ -111,14 +116,16 @@ export default class DocumentCreatorModal extends Component<Sig> {
 
   create = task(async () => {
     if (this.selectedTemplate) {
-      const container = await this.documentService.persistDocument({
-        template: this.selectedTemplate,
-        title: this.title,
-        folderId: this.args.folderId,
-        group: this.currentSession.group as BestuurseenheidModel,
-        decisionType: this.decisionType,
-        linkedDecisionUri: this.linkedDecisionUri,
-      });
+      const container =
+        this.args.container ??
+        (await this.documentService.persistDocument({
+          template: this.selectedTemplate,
+          title: this.title,
+          folderId: this.args.folderId,
+          group: this.currentSession.group as BestuurseenheidModel,
+          decisionType: this.decisionType,
+          linkedDecisionUri: this.linkedDecisionUri,
+        }));
       this.args.onCreate(container, this.selectedTemplate);
     }
   });
