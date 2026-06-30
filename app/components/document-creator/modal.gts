@@ -116,16 +116,15 @@ export default class DocumentCreatorModal extends Component<Sig> {
 
   create = task(async () => {
     if (this.selectedTemplate) {
-      const container =
-        this.args.container ??
-        (await this.documentService.persistDocument({
-          template: this.selectedTemplate,
-          title: this.title,
-          folderId: this.args.folderId,
-          group: this.currentSession.group as BestuurseenheidModel,
-          decisionType: this.decisionType,
-          linkedDecisionUri: this.linkedDecisionUri,
-        }));
+      const container = await this.documentService.persistDocument({
+        template: this.selectedTemplate,
+        title: this.title,
+        folderId: this.args.folderId,
+        group: this.currentSession.group as BestuurseenheidModel,
+        decisionType: this.decisionType,
+        linkedDecisionUri: this.linkedDecisionUri,
+        container: this.args.container,
+      });
       this.args.onCreate(container, this.selectedTemplate);
     }
   });

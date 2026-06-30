@@ -73,4 +73,8 @@ export default class MeetingsEditNewController extends Controller {
   get documentTitle() {
     return this.model.editorDocument?.title;
   }
+
+  get container() {
+    return this.model.documentContainer;
+  }
 }
