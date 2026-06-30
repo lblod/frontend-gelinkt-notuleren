@@ -3,9 +3,8 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 import { service } from '@ember/service';
 import type RouterService from '@ember/routing/router-service';
-import type IntlService from 'ember-intl/services/intl';
 import type { SayController } from '@lblod/ember-rdfa-editor';
-import type MeetingsEditRoute from 'frontend-gelinkt-notuleren/routes/meetings/edit';
+import type MeetingsEditAgendapointRoute from 'frontend-gelinkt-notuleren/routes/meetings/edit/agendapoint';
 import type { ModelFrom } from 'frontend-gelinkt-notuleren/utils/types';
 import type TemplateFetcher from 'frontend-gelinkt-notuleren/services/template-fetcher';
 import { EDITOR_FOLDERS } from 'frontend-gelinkt-notuleren/config/constants';
@@ -14,10 +13,9 @@ import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/docum
 import type { Template } from 'frontend-gelinkt-notuleren/services/template-fetcher';
 import type Plausible from 'ember-plausible/services/plausible';
 
-export default class MeetingsEditIntroController extends Controller {
-  declare model: ModelFrom<MeetingsEditRoute>;
+export default class MeetingsEditNewController extends Controller {
+  declare model: ModelFrom<MeetingsEditAgendapointRoute>;
   @service declare router: RouterService;
-  @service declare intl: IntlService;
   @service declare templateFetcher: TemplateFetcher;
   @service declare plausible: Plausible;
   @service('editor/agendapoint')
@@ -32,7 +30,7 @@ export default class MeetingsEditIntroController extends Controller {
     chosenTemplate: Template,
   ) {
     // Plausible Analytics: post custom event about the template used to create the agendapoint
-    this.plausible.trackEvent('Create agendapoint', {
+    void this.plausible.trackEvent('Create agendapoint', {
       templateTitle: chosenTemplate.title,
     });
     this.router.transitionTo('agendapoints.edit', container.id);
@@ -73,6 +71,6 @@ export default class MeetingsEditIntroController extends Controller {
   }
 
   get documentTitle() {
-    return this.model.editorDocument.title;
+    return this.model.editorDocument?.title;
   }
 }

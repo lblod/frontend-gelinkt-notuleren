@@ -94,7 +94,6 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
   agendapointHasContent = trackedFunction(this, async () => {
     const container = await this.behandeling?.documentContainer;
     const current = await container?.currentVersion;
-    console.log(current?.content);
     return !!current?.content;
   });
 
