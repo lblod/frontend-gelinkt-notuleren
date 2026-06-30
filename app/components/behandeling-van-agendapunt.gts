@@ -91,6 +91,19 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
     return this.args.meeting.nietToegekendeMandatarissen;
   });
 
+  agendapointHasContent = trackedFunction(this, async () => {
+    const container = await this.behandeling?.documentContainer;
+    const current = await container?.currentVersion;
+    console.log(current?.content);
+    return !!current?.content;
+  });
+
+  get editAgendapointRoute() {
+    return this.agendapointHasContent.value
+      ? 'meetings.edit.agendapoint.edit'
+      : 'meetings.edit.agendapoint.new';
+  }
+
   constructor(owner: unknown, args: Signature['Args']) {
     super(owner, args);
     void this.fetchParticipants.perform();
@@ -542,16 +555,22 @@ export default class BehandelingVanAgendapuntComponent extends Component<Signatu
             </WithTooltip>
           {{/unless}}
           {{#if (and this.editable @behandeling.documentContainer)}}
-            <AuLink
-              @route='meetings.edit.agendapoint.edit'
-              @model={{@behandeling.documentContainer.id}}
-              @skin='button-secondary'
-              @icon='pencil'
-              @iconAlignment='left'
-              class='au-u-hide-on-print'
-            >
-              {{t 'generic.edit'}}
-            </AuLink>
+            {{#unless this.agendapointHasContent.isLoading}}
+              <AuLink
+                @route={{this.editAgendapointRoute}}
+                @model={{@behandeling.documentContainer.id}}
+                @skin='button-secondary'
+                @icon='pencil'
+                @iconAlignment='left'
+                class='au-u-hide-on-print'
+              >
+                {{if
+                  this.agendapointHasContent.value
+                  (t 'generic.edit')
+                  (t 'utils.create')
+                }}
+              </AuLink>
+            {{/unless}}
           {{/if}}
         </div>
       </:button>
