@@ -61,6 +61,7 @@ Router.map(function () {
       this.route('intro');
       this.route('outro');
       this.route('agendapoint', { path: ':agendapoint_id' }, function () {
+        this.route('new');
         this.route('edit');
         this.route('copy');
         this.route('revisions');
