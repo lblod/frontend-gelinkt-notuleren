@@ -458,8 +458,8 @@ importers:
         specifier: ^8.2.3
         version: 8.2.4(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))
       ember-plausible:
-        specifier: ^0.2.0
-        version: 0.2.0(@glint/template@1.7.7)(webpack@5.106.2(postcss@8.5.14))
+        specifier: ^0.5.0
+        version: 0.5.0(@babel/core@7.29.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14)))
       ember-power-select:
         specifier: 'catalog:'
         version: 8.12.2(ea9bbe796db1f2f78b4d68ca78bd7576)
@@ -5190,9 +5190,10 @@ packages:
     peerDependencies:
       ember-source: '>= 3.28.0'
 
-  ember-plausible@0.2.0:
-    resolution: {integrity: sha512-XaqCzsO1qUqa0VlK1JKqBKMr2FixgXl1WplxUleJBHZU3ivNo8CfvI9Id4JDhuv4YaO3gaMUXW4uyMM6hA2yiA==}
-    engines: {node: 14.* || 16.* || >= 18}
+  ember-plausible@0.5.0:
+    resolution: {integrity: sha512-b+O40X+lMygw1QAvB5uDe8XgnLK8Vj2SM9XrN92rnO6kWx+uRGyektxM72BEglEpaCr0wqSPmi+jAMnZTHt0FA==}
+    peerDependencies:
+      ember-source: '>= 4.12.0'
 
   ember-power-select-with-create@3.1.0:
     resolution: {integrity: sha512-Ul34nNYBfitnXgv8IjnQ4WmoHN2h/nuuB5jLJnnuFa6aLEQM/dP2QWXQaCCybCzj9vytBDZIFO+/Egdk8uSY4w==}
@@ -17080,16 +17081,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-plausible@0.2.0(@glint/template@1.7.7)(webpack@5.106.2(postcss@8.5.14)):
+  ember-plausible@0.5.0(@babel/core@7.29.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14))):
     dependencies:
-      ember-auto-import: 2.13.1(@glint/template@1.7.7)(webpack@5.106.2(postcss@8.5.14))
-      ember-cli-babel: 7.26.11
-      ember-cli-htmlbars: 5.7.2
+      '@embroider/addon-shim': 1.10.2
+      decorator-transforms: 2.3.2(@babel/core@7.29.0)
+      ember-source: 5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0))(@glint/template@1.7.7)(rsvp@4.8.5)(webpack@5.106.2(postcss@8.5.14))
       plausible-tracker: 0.3.9
     transitivePeerDependencies:
-      - '@glint/template'
+      - '@babel/core'
       - supports-color
-      - webpack
 
   ember-power-select-with-create@3.1.0(c8b4d00671b7d283954bea441d47d96e):
     dependencies:

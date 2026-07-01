@@ -4,6 +4,7 @@ import type { Quad, DatasetCore } from '@rdfjs/types';
 
 export default function htmlToRdf(html: string): Promise<DatasetCore<Quad>> {
   return new Promise((res, rej) => {
+    const wrapped = `<div prefix="besluit: http://data.vlaanderen.be/ns/besluit#">${html}</div>`;
     const myParser = new RdfaParser({ contentType: 'text/html' });
     const dataset = factory.dataset();
     myParser
@@ -12,7 +13,7 @@ export default function htmlToRdf(html: string): Promise<DatasetCore<Quad>> {
       })
       .on('error', rej)
       .on('end', () => res(dataset));
-    myParser.write(html);
+    myParser.write(wrapped);
     myParser.end();
   });
 }
