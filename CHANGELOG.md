@@ -1,5 +1,15 @@
 # frontend-gelinkt-notuleren
 
+## 5.81.0
+
+### Minor Changes
+
+- [#931](https://github.com/lblod/frontend-gelinkt-notuleren/pull/931) [`38936a9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/38936a9a85d1bd0a016aea71585b26a497953978) Thanks [@kobemertens](https://github.com/kobemertens)! - Allow template selection from meeting edit
+
+### Patch Changes
+
+- [`e3a2dcc`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e3a2dccf00a45f09777d36ff301a59653d7e92eb) Thanks [@abeforgit](https://github.com/abeforgit)! - bump editor & plugin packages
+
 ## 5.80.0
 
 ### Minor Changes
