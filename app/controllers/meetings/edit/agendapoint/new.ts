@@ -33,7 +33,7 @@ export default class MeetingsEditNewController extends Controller {
     void this.plausible.trackEvent('Create agendapoint', {
       templateTitle: chosenTemplate.title,
     });
-    this.router.transitionTo('agendapoints.edit', container.id);
+    this.router.transitionTo('meetings.edit.agendapoint.edit', container.id);
   }
 
   get editorConfig() {
