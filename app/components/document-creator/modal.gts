@@ -25,6 +25,7 @@ import TemplatePicker, { type GetTemplates } from './template-picker';
 import MetadataForm, { type updateLinkedDecisionArgs } from './metadata-form';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import { localCopy } from 'tracked-toolbox';
+import type ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 
 const truthy = (test: unknown) => !!test;
 
@@ -34,9 +35,10 @@ interface Sig {
     getTemplates: GetTemplates;
     folderId: string;
     onCancel: () => void;
-    onCreate: (container: unknown, template: Template) => void;
+    onCreate: (container: unknown, template: Template) => Promise<void>;
     decisionTypeOptions?: BesluitTypePluginOptions;
     container?: DocumentContainerModel;
+    statusOfNewDocument?: ConceptModel;
     documentTitle?: string;
   };
 }
@@ -124,8 +126,9 @@ export default class DocumentCreatorModal extends Component<Sig> {
         decisionType: this.decisionType,
         linkedDecisionUri: this.linkedDecisionUri,
         container: this.args.container,
+        status: this.args.statusOfNewDocument,
       });
-      this.args.onCreate(container, this.selectedTemplate);
+      await this.args.onCreate(container, this.selectedTemplate);
     }
   });
 

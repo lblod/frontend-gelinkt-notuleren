@@ -27,6 +27,7 @@ interface PersistDocumentArgs {
   decisionType?: BesluitTypeInstance;
   linkedDecisionUri?: string;
   container?: DocumentContainerModel;
+  status?: ConceptModel;
 }
 
 function hasTypePredicate(triple: Triple): boolean {
@@ -207,6 +208,7 @@ export default class DocumentService extends Service {
     group,
     decisionType,
     linkedDecisionUri,
+    status,
     container = this.store.createRecord<DocumentContainerModel>(
       'document-container',
       {},
@@ -226,11 +228,10 @@ export default class DocumentService extends Service {
       );
     }
 
-    const draftStatus = await this.store.findRecord<ConceptModel>(
-      'concept',
-      DRAFT_STATUS_ID,
-    );
-    container.set('status', draftStatus);
+    const containerStatus =
+      status ??
+      (await this.store.findRecord<ConceptModel>('concept', DRAFT_STATUS_ID));
+    container.set('status', containerStatus);
     const folder = await this.store.findRecord<EditorDocumentFolderModel>(
       'editor-document-folder',
       folderId,
