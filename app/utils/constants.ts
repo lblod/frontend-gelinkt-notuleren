@@ -18,3 +18,11 @@ export const MANDATARIS_STATUS_WAARNEMEND =
   'e1ca6edd-55e1-4288-92a5-53f4cf71946a';
 export const MANDATARIS_STATUS_EFFECTIEF =
   '21063a5b-912c-4241-841c-cc7fb3c73e75';
+
+export const AUTHORIZATION_ROLES = {
+  READER: 'GelinktNotuleren-lezer',
+  WRITER: 'GelinktNotuleren-schrijver',
+  PUBLISHER: 'GelinktNotuleren-publiceerder',
+  SIGNER: 'GelinktNotuleren-ondertekenaar',
+  DOCUMENT_MANAGER: 'GelinktNotuleren-agency',
+} as const;
