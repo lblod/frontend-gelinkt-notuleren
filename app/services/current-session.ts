@@ -7,6 +7,10 @@ import type AccountModel from 'frontend-gelinkt-notuleren/models/account';
 import type GebruikerModel from 'frontend-gelinkt-notuleren/models/gebruiker';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
+import {
+  findGroupByRole,
+  type Permission,
+} from 'frontend-gelinkt-notuleren/config/permissions';
 
 export default class CurrentSessionService extends Service {
   @service declare session: SessionService;
@@ -19,19 +23,27 @@ export default class CurrentSessionService extends Service {
   @tracked classificatie: Option<BestuurseenheidClassificatieCodeModel>;
 
   get canRead() {
-    return this.hasRole('GelinktNotuleren-lezer');
+    return this.may('read');
   }
 
   get canWrite() {
-    return this.hasRole('GelinktNotuleren-schrijver');
+    return this.may('write');
   }
 
   get canPublish() {
-    return this.hasRole('GelinktNotuleren-publiceerder');
+    return this.may('publish');
   }
 
   get canSign() {
-    return this.hasRole('GelinktNotuleren-ondertekenaar');
+    return this.may('sign');
+  }
+
+  may(permission: Permission) {
+    const permissions = new Set(
+      this.roles.flatMap((role) => findGroupByRole(role)?.permissions ?? []),
+    );
+
+    return permissions.has(permission);
   }
 
   async load() {
