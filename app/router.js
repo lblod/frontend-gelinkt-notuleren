@@ -31,6 +31,7 @@ Router.map(function () {
     this.route('irg-archive');
   });
   this.route('mock-login');
+  this.route('vendor-login');
   this.route('login');
 
   this.route('legaal', function () {

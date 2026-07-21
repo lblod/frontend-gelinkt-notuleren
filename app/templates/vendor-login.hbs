@@ -1,0 +1,31 @@
+<AuBodyContainer @scroll={{true}} itemprop='mainContentOfPage'>
+  <main id='content'>
+    <AuContentHeader @titlePartOne='Vlaanderen' @titlePartTwo='is gelinkt notuleren'>
+      <img sizes='50vw' src='/assets/images/loket-header-1600.jpg'
+        srcset='/assets/images/loket-header-320.jpg 320w, /assets/images/loket-header-1024.jpg 1024w, /assets/images/loket-header-1600.jpg 1600w'
+        alt='' />
+    </AuContentHeader>
+
+    <div class='au-o-region-large'>
+      <div class='au-o-layout'>
+        <AuLabel @required={{true}}>
+          Organization
+        </AuLabel>
+        <AuInput value={{this.organization}} class='au-u-margin-bottom-small' @width='block' {{on 'input'
+          this.updateOrganization}} />
+        <AuLabel @required={{true}}>
+          Username
+        </AuLabel>
+        <AuInput value={{this.username}} class='au-u-margin-bottom-small' @width='block' {{on 'input'
+          this.updateUsername}} />
+        <AuLabel @required={{true}}>
+          Key
+        </AuLabel>
+        <AuInput value={{this.key}} class='au-u-margin-bottom-small' @width='block' {{on 'input' this.updateKey}} />
+        <AuButton {{on 'click' (perform this.login)}}>
+          Login
+        </AuButton>
+      </div>
+    </div>
+  </main>
+</AuBodyContainer>
