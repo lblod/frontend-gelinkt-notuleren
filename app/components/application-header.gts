@@ -35,7 +35,6 @@ export default class AppChromeComponent extends Component<Sig> {
       {{#if this.session.isAuthenticated}}
         <AuDropdown
           @title='{{this.userDisplayName}} - {{this.currentSession.group.classificatie.label}} {{this.currentSession.group.naam}}'
-          @buttonLabel='Account settings'
           @alignment='right'
         >
           {{! template-lint-disable require-context-role }}

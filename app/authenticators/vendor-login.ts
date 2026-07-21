@@ -5,6 +5,17 @@ const basePath = '/vendor-login';
 const contentType = 'application/json';
 const supportedCredentials = 'same-origin';
 
+type VendorLoginJson = {
+    "@id": string,
+    "@type": string,
+    "account": string,
+    "uuid": string,
+    "created": {
+        "@type": string,
+        "@value": string
+    }
+}
+
 export default class VendorLoginAuthenticator extends BaseAuthenticator {
   @waitFor
   async restore() {
@@ -60,7 +71,7 @@ export default class VendorLoginAuthenticator extends BaseAuthenticator {
     // eslint-disable-next-line @typescript-eslint/only-throw-error
     else throw result;
   }
-  convertToDesideredFormat(returnedJson, organization) {
+  convertToDesideredFormat(returnedJson: VendorLoginJson, organization: string) {
     const accountUuid = returnedJson.account.split('/').pop();
     const organizationUuid = organization.split('/').pop();
     return {
