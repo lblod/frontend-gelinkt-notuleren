@@ -21,7 +21,6 @@ export const roles = [
     permissions: [
       'read',
       'view-meetings',
-      'create-agendapoints',
       'view-agendapoint-status',
       'view-agendapoint-linked-meeting',
     ],
@@ -43,7 +42,6 @@ export const roles = [
     permissions: [
       'publish',
       'view-meetings',
-      'create-agendapoints',
       'view-agendapoint-status',
       'view-agendapoint-linked-meeting',
     ],
@@ -54,7 +52,6 @@ export const roles = [
     permissions: [
       'sign',
       'view-meetings',
-      'create-agendapoints',
       'view-agendapoint-status',
       'view-agendapoint-linked-meeting',
     ],

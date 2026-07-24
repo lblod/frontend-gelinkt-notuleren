@@ -543,7 +543,7 @@ meetings:
     cancel: Annuleren
 
 mock-login:
-  administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
+  administrative-unit-selection: Kies een account om mee in te loggen.
   administrative-unit-search: Bestuurseenheid zoeken
   search-placeholder: 'Aalst, Berchem, ...'
 
