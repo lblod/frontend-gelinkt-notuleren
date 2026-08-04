@@ -9,6 +9,7 @@ import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuur
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
 import {
   findGroupByRole,
+  type AuthorizationRole,
   type Permission,
 } from 'frontend-gelinkt-notuleren/config/permissions';
 
@@ -74,7 +75,7 @@ export default class CurrentSessionService extends Service {
     }
   }
 
-  hasRole(role: string) {
+  hasRole(role: AuthorizationRole) {
     return this.roles.includes(role);
   }
 }
