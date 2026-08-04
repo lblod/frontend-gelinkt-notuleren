@@ -174,6 +174,11 @@ import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
+import ArImporterSidebarWidget from '@lblod/say-ar-design-plugin/components/sidebar-widget';
+import featureFlag from 'ember-feature-flags/helpers/feature-flag';
+import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
+import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
+import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -189,6 +194,9 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   @service declare store: Store;
   @service declare currentSession: CurrentSessionService;
   @service declare intl: IntlService;
+  @service declare arDesignLoader: ArDesignLoaderService;
+  @service('editor/agendapoint')
+  declare agendapointEditor: AgendapointEditorService;
 
   @tracked controller?: SayController;
   @tracked _editorDocument?: EditorDocumentModel;
@@ -384,6 +392,13 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
           administrativeUnit: `${this.currentSession.classificatie?.label} ${this.currentSession.group?.naam}`,
         },
       },
+      arDesign: {
+        decision: {
+          decisionUri: 'decisionUri',
+          decisionType:
+            'https://data.vlaanderen.be/id/concept/Verkeerstekenontwerpstatus/fc1036e7-703b-4290-b732-49abb39d0588',
+        },
+      },
     };
   }
 
@@ -521,6 +536,12 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       this.onTitleUpdate.isRunning
     );
   }
+
+  arDesignQuery: ArDesignQuery = (pagination) => {
+    console.log(this.arDesignLoader.findDesigns(pagination));
+    console.log(this.agendapointEditor);
+    return this.arDesignLoader.findDesigns(pagination);
+  };
 
   <template>
     <AppChrome
@@ -679,6 +700,14 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
               @controller={{container.controller}}
               @config={{this.config.snippet}}
               @node={{this.activeNode}}
+            />
+          {{/if}}
+          {{#if (featureFlag 'arImport')}}
+            <ArImporterSidebarWidget
+              @controller={{container.controller}}
+              @designQuery={{this.arDesignQuery}}
+              @processDocumentHeadlessly={{this.agendapointEditor.processDocumentHeadlessly}}
+              @regulatoryStatementMode={{true}}
             />
           {{/if}}
         </:sidebarCollapsible>
