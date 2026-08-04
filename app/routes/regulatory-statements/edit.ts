@@ -18,7 +18,7 @@ export default class RegulatoryStatementsEditRoute extends Route {
   @service declare features: Features;
 
   beforeModel(transition: Transition) {
-    if (!this.currentSession.canWrite) {
+    if (!this.currentSession.may('edit-regulatory-statement-content')) {
       const id = transition.to?.params?.['id'];
       this.router.transitionTo('regulatory-statements.show', id);
       return;

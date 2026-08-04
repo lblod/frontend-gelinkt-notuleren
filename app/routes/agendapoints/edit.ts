@@ -14,7 +14,7 @@ export default class AgendapointsEditRoute extends Route {
   @service declare standardTemplate: StandardTemplateService;
 
   beforeModel(transition: Transition) {
-    if (!this.currentSession.canWrite) {
+    if (!this.currentSession.may('edit-agendapoint-content')) {
       const id = transition.to?.parent?.params?.['id'];
       this.router.transitionTo('agendapoints.show', id);
       return;

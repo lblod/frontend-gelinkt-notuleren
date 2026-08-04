@@ -13,7 +13,7 @@ export default class AgendapointsAttachmentsRoute extends Route {
   @service declare router: RouterService;
 
   beforeModel(transition: Transition) {
-    if (!this.currentSession.canWrite) {
+    if (!this.currentSession.may('edit-agendapoint-attachments')) {
       const id = transition.to?.parent?.params?.['id'];
       this.router.transitionTo('agendapoints.show', id);
       return;
