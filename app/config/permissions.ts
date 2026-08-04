@@ -15,6 +15,7 @@ const { READER, WRITER, PUBLISHER, SIGNER, DOCUMENT_MANAGER } =
 // - create-agendapoints
 
 export const roles = [
+  // Bestuurseenheid reader
   {
     name: READER,
     defaultRoute: 'inbox.meetings',
@@ -23,8 +24,10 @@ export const roles = [
       'view-meetings',
       'view-agendapoint-status',
       'view-agendapoint-linked-meeting',
+      'view-regulatory-statement-content',
     ],
   },
+  // Bestuurseenheid writer
   {
     name: WRITER,
     defaultRoute: 'inbox.meetings',
@@ -34,6 +37,11 @@ export const roles = [
       'create-agendapoints',
       'view-agendapoint-status',
       'view-agendapoint-linked-meeting',
+      'edit-agendapoint-content',
+      'edit-agendapoint-attachments',
+      'edit-agendapoint-revisions',
+      'create-regulatory-statements',
+      'edit-regulatory-statement-content',
     ],
   },
   {
@@ -59,7 +67,15 @@ export const roles = [
   {
     name: DOCUMENT_MANAGER,
     defaultRoute: 'inbox.agendapoints',
-    permissions: ['create-agendapoints'],
+    permissions: [
+      'create-agendapoints',
+      'edit-agendapoint-content',
+      'edit-agendapoint-attachments',
+      'edit-agendapoint-revisions',
+      'create-regulatory-statements',
+      'view-regulatory-statement-content',
+      'edit-regulatory-statement-content',
+    ],
   },
 ] as const;
 
