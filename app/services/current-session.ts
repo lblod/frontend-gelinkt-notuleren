@@ -23,20 +23,24 @@ export default class CurrentSessionService extends Service {
   @tracked roles: string[] = [];
   @tracked classificatie: Option<BestuurseenheidClassificatieCodeModel>;
 
+  /** @deprecated Use the `may` method instead */
   get canRead() {
-    return this.may('read');
+    return this.hasRole('GelinktNotuleren-lezer');
   }
 
+  /** @deprecated Use the `may` method instead */
   get canWrite() {
-    return this.may('write');
+    return this.hasRole('GelinktNotuleren-schrijver');
   }
 
+  /** @deprecated Use the `may` method instead */
   get canPublish() {
-    return this.may('publish');
+    return this.hasRole('GelinktNotuleren-publiceerder');
   }
 
+  /** @deprecated Use the `may` method instead */
   get canSign() {
-    return this.may('sign');
+    return this.hasRole('GelinktNotuleren-ondertekenaar');
   }
 
   may(permission: Permission) {
