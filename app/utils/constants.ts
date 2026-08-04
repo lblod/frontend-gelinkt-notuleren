@@ -24,5 +24,5 @@ export const AUTHORIZATION_ROLES = {
   WRITER: 'GelinktNotuleren-schrijver',
   PUBLISHER: 'GelinktNotuleren-publiceerder',
   SIGNER: 'GelinktNotuleren-ondertekenaar',
-  DOCUMENT_MANAGER: 'GelinktNotuleren-agency',
+  DOCUMENT_MANAGER: 'GelinktNotuleren-documentbeheerder',
 } as const;
