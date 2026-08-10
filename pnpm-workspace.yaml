@@ -63,3 +63,7 @@ overrides:
   ember-math-helpers: $ember-math-helpers
   ember-truth-helpers: $ember-truth-helpers
   tracked-toolbox: $tracked-toolbox
+allowBuilds:
+  '@parcel/watcher': true
+  core-js: true
+  unrs-resolver: true
