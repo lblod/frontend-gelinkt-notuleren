@@ -165,6 +165,7 @@ overrides:
   '@lblod/ember-rdfa-editor': 13.16.0
   ember-auto-import: ^2.13.1
   ember-composability-tools>@ember/render-modifiers: ^3.0.0
+  ember-focus-trap: ^2.0.0
   ember-headless-form>tracked-built-ins: ^4.1.2
   ember-math-helpers: ^4.0.0
   ember-truth-helpers: ^4.0.3
@@ -5110,9 +5111,6 @@ packages:
       miragejs:
         optional: true
 
-  ember-focus-trap@1.2.0:
-    resolution: {integrity: sha512-+/AkXjWF9Qtv6a3tSZQvzFTF+vSoSNuWVemN8kbp4d3MmHWnbXzv5brd9wmAFFlp4yYRr2be7bVhNVxzJMLEhw==}
-
   ember-focus-trap@2.0.0:
     resolution: {integrity: sha512-zGPvt934h08gxdemIZz29XRn4cdwn51UxlodKtDkiahGrEpiSQ6qH8nvXGwDhQvZsf8zGumnXqcmDYYA5oFomQ==}
     engines: {node: '>= 22.*', pnpm: '>= 10'}
@@ -5935,9 +5933,6 @@ packages:
 
   flatted@3.4.2:
     resolution: {integrity: sha512-PjDse7RzhcPkIJwy5t7KPWQSZ9cAbzQXcafsetQoD7sOJRQlGikNbx7yZp2OotDnJyrDcbyRq3Ttb18iYOqkxA==}
-
-  focus-trap@7.8.0:
-    resolution: {integrity: sha512-/yNdlIkpWbM0ptxno3ONTuf+2g318kh2ez3KSeZN5dZ8YC6AAmgeWz+GasYYiBJPFaYcSAPeu4GfhUaChzIJXA==}
 
   focus-trap@8.2.2:
     resolution: {integrity: sha512-qV0g8hRYBqgACcFOH3f9wXc4zPKhr/0z9RI2a6ZijZ72EeBi4g8oBy8zAWuUR1TsMpOzwpUMFvjdasrC41Joug==}
@@ -9627,9 +9622,6 @@ packages:
     resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tabbable@6.4.0:
-    resolution: {integrity: sha512-05PUHKSNE8ou2dwIxTngl4EzcnsCDZGJ/iCLtDflR/SHB/ny14rXc+qU5P4mG9JkusiV7EivzY9Mhm55AzAvCg==}
-
   tabbable@6.5.0:
     resolution: {integrity: sha512-wieBHXygIm7OyQOu5hQlkk62/WyCFYGlWg7L6/ZCUZwx0o398Zkn4pVmMyfYhfMG8kGrj/Krt8eIk6UKC6VzwA==}
 
@@ -10484,7 +10476,7 @@ snapshots:
       ember-cli-version-checker: 5.1.2(supports-color@8.1.1)
       ember-concurrency: 4.0.6(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(supports-color@8.1.1)
       ember-file-upload: 9.3.0(@babel/core@7.29.0(supports-color@8.1.1))(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-modifier@4.3.0(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
-      ember-focus-trap: 1.2.0(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1)
+      ember-focus-trap: 2.0.0(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1)
       ember-modifier: 4.3.0(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1)
       ember-source: 5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
       ember-template-imports: 4.4.0(supports-color@8.1.1)
@@ -16948,15 +16940,6 @@ snapshots:
       - supports-color
       - webpack
 
-  ember-focus-trap@1.2.0(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1):
-    dependencies:
-      '@embroider/addon-shim': 1.10.2(supports-color@8.1.1)
-      decorator-transforms: 2.3.2(@babel/core@7.29.0(supports-color@8.1.1))
-      focus-trap: 7.8.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - supports-color
-
   ember-focus-trap@2.0.0(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
       '@embroider/addon-shim': 1.10.2(supports-color@8.1.1)
@@ -18238,10 +18221,6 @@ snapshots:
       hookified: 1.15.1
 
   flatted@3.4.2: {}
-
-  focus-trap@7.8.0:
-    dependencies:
-      tabbable: 6.4.0
 
   focus-trap@8.2.2:
     dependencies:
@@ -22646,8 +22625,6 @@ snapshots:
   synckit@0.11.12:
     dependencies:
       '@pkgr/core': 0.2.9
-
-  tabbable@6.4.0: {}
 
   tabbable@6.5.0: {}
 

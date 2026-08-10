@@ -59,6 +59,7 @@ overrides:
   '@lblod/ember-rdfa-editor': $@lblod/ember-rdfa-editor
   ember-auto-import: $ember-auto-import
   ember-composability-tools>@ember/render-modifiers: ^3.0.0
+  ember-focus-trap: ^2.0.0
   ember-headless-form>tracked-built-ins: $tracked-built-ins
   ember-math-helpers: $ember-math-helpers
   ember-truth-helpers: $ember-truth-helpers
