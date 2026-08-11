@@ -174,6 +174,7 @@ import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
+import { getCodelistActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/codelist';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -198,7 +199,10 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   html?: string;
   title?: string;
 
-  contextualActionGroupGetters = [locationActionsGroups()];
+  contextualActionGroupGetters = [
+    locationActionsGroups(),
+    getCodelistActionGroups(this.codelistEditOptions),
+  ];
   schema = new Schema({
     nodes: {
       doc: docWithConfig({

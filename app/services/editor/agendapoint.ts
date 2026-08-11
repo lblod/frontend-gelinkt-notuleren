@@ -157,7 +157,8 @@ import {
   type ModelMigrationGenerator,
 } from '@lblod/ember-rdfa-editor/core/rdfa-types';
 import { slashCommandsPlugin } from '@lblod/ember-rdfa-editor/plugins/slash-commands/index';
-import { getContextualActionGroups as placeDescriptionActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions';
+import { getPlaceDescriptionActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/place-description';
+import { getCodelistActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/codelist';
 import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
@@ -195,8 +196,9 @@ export default class AgendapointEditorService extends Service {
   }
 
   contextualActionGroupGetters = [
-    placeDescriptionActionGroups(this.locationOptions),
+    getPlaceDescriptionActionGroups(this.locationOptions),
     locationActionsGroups(),
+    getCodelistActionGroups(this.codelistEditOptions),
   ];
 
   get config() {
