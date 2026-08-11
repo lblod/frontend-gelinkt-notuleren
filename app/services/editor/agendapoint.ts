@@ -163,6 +163,7 @@ import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins
 import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
 import { emptyBlockPlaceholder } from '@lblod/ember-rdfa-editor/plugins/empty-block-placeholder';
+import { getPersonActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/person';
 
 const removeBlankNodes: ModelMigrationGenerator = (attrs) => {
   if (
@@ -199,6 +200,7 @@ export default class AgendapointEditorService extends Service {
     getPlaceDescriptionActionGroups(this.locationOptions),
     locationActionsGroups(),
     getCodelistActionGroups(this.codelistEditOptions),
+    getPersonActionGroups(),
   ];
 
   get config() {

@@ -175,6 +175,7 @@ import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin';
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
 import { getCodelistActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/codelist';
+import { getPersonActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/person';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -202,6 +203,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   contextualActionGroupGetters = [
     locationActionsGroups(),
     getCodelistActionGroups(this.codelistEditOptions),
+    getPersonActionGroups(),
   ];
   schema = new Schema({
     nodes: {
