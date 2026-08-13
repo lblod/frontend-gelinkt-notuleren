@@ -666,7 +666,10 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
           <TemplateCommentInsert @controller={{container.controller}} />
           <LocationInsert
             @controller={{container.controller}}
-            @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
+            @defaultMunicipality={{if
+              (userMay 'set-default-municipality-in-location-insert')
+              (get this.defaultMunicipality 'naam')
+            }}
             @config={{this.config.location}}
             @insertPlaceholder={{true}}
           />

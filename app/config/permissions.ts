@@ -34,6 +34,7 @@ export const roles = [
       'edit-regulatory-statement-content',
       'insert-editor-worship',
       'insert-editor-lmb',
+      'set-default-municipality-in-location-insert',
     ],
   },
   {

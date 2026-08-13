@@ -576,8 +576,9 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
             <TemplateCommentInsert @controller={{container.controller}} />
             <LocationInsert
               @controller={{container.controller}}
-              @defaultMunicipality={{or
-                this.agendapointEditor.defaultMunicipality.naam
+              @defaultMunicipality={{if
+                (userMay 'set-default-municipality-in-location-insert')
+                (or this.agendapointEditor.defaultMunicipality.naam undefined)
                 undefined
               }}
               @config={{this.config.location}}

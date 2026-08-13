@@ -935,7 +935,11 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
           <TemplateCommentInsert @controller={{container.controller}} />
           <LocationInsert
             @controller={{container.controller}}
-            @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
+            @defaultMunicipality={{if
+              (userMay 'set-default-municipality-in-location-insert')
+              (get this.defaultMunicipality 'naam')
+              undefined
+            }}
             @config={{this.config.location}}
             @insertPlaceholder={{true}}
           />
