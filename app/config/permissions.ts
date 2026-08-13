@@ -32,6 +32,8 @@ export const roles = [
       'edit-agendapoint-revisions',
       'create-regulatory-statements',
       'edit-regulatory-statement-content',
+      'insert-editor-worship',
+      'insert-editor-lmb',
     ],
   },
   {

@@ -71,6 +71,7 @@ import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/docu
 import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
 import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
+import userMay from 'frontend-gelinkt-notuleren/helpers/user-may';
 
 interface AgendapointEditSig {
   Args: {
@@ -582,10 +583,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               @config={{this.config.location}}
               @insertPlaceholder={{true}}
             />
-            <WorshipInsert
-              @controller={{container.controller}}
-              @config={{this.config.worship}}
-            />
+            {{#if (userMay 'insert-editor-worship')}}
+              <WorshipInsert
+                @controller={{container.controller}}
+                @config={{this.config.worship}}
+              />
+            {{/if}}
             <LpdcInsert
               @controller={{container.controller}}
               @config={{this.config.lpdc}}
@@ -596,10 +599,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
                 @defaultTag={{this.config.mandateeTable.defaultTag}}
               />
             {{/if}}
-            <LmbInsert
-              @controller={{container.controller}}
-              @config={{this.config.lmb}}
-            />
+            {{#if (userMay 'insert-editor-lmb')}}
+              <LmbInsert
+                @controller={{container.controller}}
+                @config={{this.config.lmb}}
+              />
+            {{/if}}
             {{#if this.activeNode}}
               <SnippetInsert
                 @controller={{container.controller}}
