@@ -3,7 +3,14 @@ import { service } from '@ember/service';
 import type { Permission } from 'frontend-gelinkt-notuleren/config/permissions';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 
-export default class extends Helper {
+interface Signature {
+  Args: {
+    Positional: [permission: Permission];
+  };
+  Return: boolean;
+}
+
+export default class extends Helper<Signature> {
   @service declare currentSession: CurrentSessionService;
 
   compute([permission]: [Permission]) {
