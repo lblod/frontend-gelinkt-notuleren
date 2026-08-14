@@ -113,7 +113,6 @@ export default class MeetingsPublishNotulenController extends Controller {
     return !!this.publishedResource;
   }
   get linkedDecisionWarningsHtml() {
-    console.log('calling');
     const linkedDecisionWarnings = this.validationWarnings.filter(
       (warning) => warning.type === 'linkedDecision',
     );

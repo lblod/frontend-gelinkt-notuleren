@@ -72,12 +72,11 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
     const linkedDecisionWarning = this.model.validationWarnings?.find(
       (warning) => warning.type === 'linkedDecision',
     );
-    console.log(linkedDecisionWarning);
     if (linkedDecisionWarning) {
-      console.log(BESLUIT_TYPES)
-      const decisionType = Object.entries(BESLUIT_TYPES).find(
+      const decisionTypeEntry = Object.entries(BESLUIT_TYPES).find(
         (entry) => entry[1] === linkedDecisionWarning.decisionType,
-      )[0];
+      );
+      const decisionType = decisionTypeEntry ? decisionTypeEntry[0] : '';
       const documentContainerUuid = linkedDecisionWarning.documentContainerUri
         .split('/')
         .pop();
