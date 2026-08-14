@@ -13,4 +13,5 @@ export default class ExtractPreview extends Model {
   declare treatment: AsyncBelongsTo<BehandelingVanAgendapunt>;
   @attr html?: string;
   @attr('string-set') validationErrors?: string[];
+  @attr('string-set') validationWarnings?: string[];
 }

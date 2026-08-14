@@ -664,6 +664,10 @@ publish:
   delete-signature-warning: Bent u zeker dat u uw ondertekening wil verwijderen?
   deleted: Verwijderd
   no-publication-actions-message: Er zijn geen publicatieacties beschikbaar
+  validation-warning-of-type-text: van het type
+  validation-warning-after-links: missen mogelijks een verwijzing naar een eerder besluit. Indien een eerdere gecoördineerde versie beschikbaar is, kan die toegevoegd worden. Zoniet wordt dit gepubliceerd als nieuw, zelfstandig besluit.
+  validation-warning-before-plural: besluiten
+  validation-warning-before-singular: besluit
 
 published-resource:
   published-by-label: Gepubliceerd door
@@ -766,6 +770,10 @@ timeline-step:
   local-loket: 'Loket voor Lokale Besturen'
   publish-warning: 'Vul de ontbrekende informatie aan om te publiceren'
   delete-both-signatures-warning: 'Om het document te kunnen aanpassen moeten beide handtekeningen verwijderd zijn'
+  linked-decision-warning-title: Verwijzing naar eerder besluit ontbreekt
+  linked-decision-warning-before-link: 'Een besluit met type {type} kan verwijzen naar een eerder besluit.'
+  linked-decision-warning-link: Indien een eerdere gecoördineerde versie beschikbaar is, kan die toegevoegd worden.
+  linked-decision-warning-after-link: Zoniet wordt dit gepubliceerd als nieuw, zelfstandig besluit.
 
 uittreksel-error:
   header: We kunnen de pagina die u zoekt niet vinden

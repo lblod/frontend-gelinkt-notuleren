@@ -43,6 +43,11 @@
             {{/in-element}}
           {{/if}}
         </PublicationPreview>
+        {{#if this.linkedDecisionWarningsHtml}}
+          <AuAlert @icon='alert-triangle' @title={{t 'timeline-step.publish-warning' }} @skin='warning'>
+            {{html-safe this.linkedDecisionWarningsHtml}}
+          </AuAlert>
+        {{/if}}
         {{#if (and this.validationErrors this.validationErrors.length)}}
           <AuAlert
             @icon='alert-triangle'

@@ -16,6 +16,7 @@ import type SignedResource from 'frontend-gelinkt-notuleren/models/signed-resour
 import type PublishingLog from 'frontend-gelinkt-notuleren/models/publishing-log';
 import type MuTaskService from 'frontend-gelinkt-notuleren/services/mu-task';
 import type VersionedBehandeling from 'frontend-gelinkt-notuleren/models/versioned-behandeling';
+import { BESLUIT_TYPES } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 
 export default class MeetingsPublishUittrekselsShowController extends Controller {
   publicationBaseUrl = ENV.publication.baseUrl;
@@ -65,6 +66,28 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
 
   get errors() {
     return this.model.validationErrors;
+  }
+
+  get linkedDecisionWarning() {
+    const linkedDecisionWarning = this.model.validationWarnings?.find(
+      (warning) => warning.type === 'linkedDecision',
+    );
+    console.log(linkedDecisionWarning);
+    if (linkedDecisionWarning) {
+      console.log(BESLUIT_TYPES)
+      const decisionType = Object.entries(BESLUIT_TYPES).find(
+        (entry) => entry[1] === linkedDecisionWarning.decisionType,
+      )[0];
+      const documentContainerUuid = linkedDecisionWarning.documentContainerUri
+        .split('/')
+        .pop();
+      return {
+        decisionType,
+        documentContainerUuid,
+      };
+    } else {
+      return;
+    }
   }
 
   get loading(): boolean {

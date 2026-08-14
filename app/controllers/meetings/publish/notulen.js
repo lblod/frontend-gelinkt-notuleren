@@ -5,6 +5,7 @@ import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 import { getResourceContent } from 'frontend-gelinkt-notuleren/utils/get-resource-content';
+import { BESLUIT_TYPES } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 
 export default class MeetingsPublishNotulenController extends Controller {
   @service store;
@@ -22,6 +23,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @tracked notulenContent;
   @tracked errors;
   @tracked validationErrors;
+  @tracked validationWarnings;
   @tracked signedResources = [];
   @tracked hasDeletedSignedResources = false;
   @tracked publishedResource;
@@ -43,6 +45,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     this.fullNotulenContent = null;
     this.errors = null;
     this.validationErrors = null;
+    this.validationWarnings = null;
     this.signedResources = [];
     this.publishedResource = null;
     this.publicBehandelingUris = [];
@@ -109,6 +112,75 @@ export default class MeetingsPublishNotulenController extends Controller {
   get isPublished() {
     return !!this.publishedResource;
   }
+  get linkedDecisionWarningsHtml() {
+    console.log('calling');
+    const linkedDecisionWarnings = this.validationWarnings.filter(
+      (warning) => warning.type === 'linkedDecision',
+    );
+
+    if (!linkedDecisionWarnings.length) return undefined;
+    const linkedDecisionWarningsProcessed = linkedDecisionWarnings.map(
+      (linkedDecisionWarning) => {
+        const decisionType = Object.entries(BESLUIT_TYPES).find(
+          (entry) => entry[1] === linkedDecisionWarning.decisionType,
+        )[0];
+        const documentContainerUuid = linkedDecisionWarning.documentContainerUri
+          .split('/')
+          .pop();
+        return {
+          decisionTitle: linkedDecisionWarning.decisionTitle,
+          decisionType,
+          documentContainerUuid,
+          linkToTreatment: `#${linkedDecisionWarning.treatmentUri}`,
+        };
+      },
+    );
+    const linkedDecisionWarningsGrouped = Object.groupBy(
+      linkedDecisionWarningsProcessed,
+      (warning) => warning.decisionType,
+    );
+    const linkedDecisionWarningsGroupedInArray = [];
+    for (let key in linkedDecisionWarningsGrouped) {
+      linkedDecisionWarningsGroupedInArray.push({
+        decisionType: key,
+        warnings: linkedDecisionWarningsGrouped[key].map(
+          (warning, index, array) => {
+            let connector = ',';
+            if (index === array.length - 1) {
+              connector = '';
+            } else if (index === array.length - 2) {
+              connector = ' en';
+            }
+            return { ...warning, connector };
+          },
+        ),
+        isPlural: linkedDecisionWarningsGrouped[key].length > 1,
+      });
+    }
+    let html = '';
+    for (let i = 0; i < linkedDecisionWarningsGroupedInArray.length; i++) {
+      const warningGroup = linkedDecisionWarningsGroupedInArray[i];
+      let warningGroupHtml = '';
+      warningGroupHtml += warningGroup.isPlural
+        ? this.intl.t('publish.validation-warning-before-plural')
+        : this.intl.t('publish.validation-warning-before-singular');
+      for (let warning of warningGroup.warnings) {
+        warningGroupHtml += ` <a href="${warning.linkToTreatment}">${warning.decisionTitle}</a>${warning.connector} `;
+      }
+      warningGroupHtml += `${this.intl.t('publish.validation-warning-of-type-text')} ${warningGroup.decisionType}`;
+      if (i !== linkedDecisionWarningsGroupedInArray.length - 1) {
+        warningGroupHtml += ', ';
+      }
+      if (i === 0) {
+        warningGroupHtml =
+          warningGroupHtml.charAt(0).toUpperCase() +
+          String(warningGroupHtml).slice(1);
+      }
+      html += warningGroupHtml;
+    }
+    html += this.intl.t('publish.validation-warning-after-links')
+    return html;
+  }
 
   async loadSignedResources(versionedNotulenId) {
     const signedNonDeletedResources = await this.store.query(
@@ -168,7 +240,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     } else {
       try {
         // generate a rendered document
-        const { content, errors } =
+        const { content, errors, warnings } =
           await this.createPrePublishedResource.perform();
         // save it in a "placeholder" versioned-notulen instance
         // note: this instance will never actually be saved using ember
@@ -184,6 +256,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         this.notulen = rslt;
         this.notulenContent = content;
         this.validationErrors = errors;
+        this.validationWarnings = warnings;
       } catch (e) {
         console.error(e);
         this.errors = [e];
@@ -224,10 +297,11 @@ export default class MeetingsPublishNotulenController extends Controller {
         // content they will be signing, regardless of the publication state.
         // e.g.: a document is published with agenda item contents kept private
         // -> this will still show all the contents as they always sign everything
-        const { content, errors } =
+        const { content, errors, warnings } =
           await this.createPrePublishedResource.perform();
         this.fullNotulenContent = content;
         this.validationErrors = errors;
+        this.validationWarnings = warnings;
       } catch (e) {
         console.error(e);
         this.errors = [e];

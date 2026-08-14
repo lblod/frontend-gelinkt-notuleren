@@ -1,4 +1,4 @@
-const BESLUIT_TYPES = {
+export const BESLUIT_TYPES = {
   'Reglementen en verordeningen':
     'https://data.vlaanderen.be/id/concept/BesluitType/67378dd0-5413-474b-8996-d992ef81637a',
   'Rechtspositieregeling (RPR)':
