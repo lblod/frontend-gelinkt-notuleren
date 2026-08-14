@@ -149,7 +149,7 @@ export default class MeetingsPublishNotulenController extends Controller {
             if (index === array.length - 1) {
               connector = '';
             } else if (index === array.length - 2) {
-              connector = ' en';
+              connector = ` ${this.intl.t('publish.linked-decision-warning-and-connector')}`;
             }
             return { ...warning, connector };
           },
@@ -162,14 +162,16 @@ export default class MeetingsPublishNotulenController extends Controller {
       const warningGroup = linkedDecisionWarningsGroupedInArray[i];
       let warningGroupHtml = '';
       warningGroupHtml += warningGroup.isPlural
-        ? this.intl.t('publish.validation-warning-before-plural')
-        : this.intl.t('publish.validation-warning-before-singular');
+        ? this.intl.t('publish.linked-decision-warning-before-plural')
+        : this.intl.t('publish.linked-decision-warning-before-singular');
       for (let warning of warningGroup.warnings) {
         warningGroupHtml += ` <a href="${warning.linkToTreatment}">${warning.decisionTitle}</a>${warning.connector} `;
       }
-      warningGroupHtml += `${this.intl.t('publish.validation-warning-of-type-text')} ${warningGroup.decisionType}`;
+      warningGroupHtml += `${this.intl.t('publish.linked-decision-warning-of-type-text')} ${warningGroup.decisionType}`;
       if (i !== linkedDecisionWarningsGroupedInArray.length - 1) {
         warningGroupHtml += ', ';
+      } else {
+        warningGroupHtml += ' ';
       }
       if (i === 0) {
         warningGroupHtml =
@@ -178,7 +180,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       }
       html += warningGroupHtml;
     }
-    html += this.intl.t('publish.validation-warning-after-links')
+    html += this.intl.t('publish.linked-decision-warning-after-links');
     return html;
   }
 

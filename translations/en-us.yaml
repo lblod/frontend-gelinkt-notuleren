@@ -658,6 +658,12 @@ publish:
   delete-signature-warning: Are you sure you want to delete your signature?
   deleted: Deleted
   no-publication-actions-message: There are no publication actions available
+  linked-decision-warning-of-type-text: of type
+  linked-decision-warning-after-links: don't have a linked decision. If a previous coordinated version is available, it can be added. If not, this will be published as a new, standalone decision.
+  linked-decision-warning-before-plural: decisions
+  linked-decision-warning-before-singular: decision
+  linked-decision-warning-and-connector: and
+  linked-decision-warning-title: Verwijzing naar eerder besluit ontbreekt
 
 published-resource:
   published-by-label: Published by
