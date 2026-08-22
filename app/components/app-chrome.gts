@@ -16,6 +16,7 @@ import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly
 import LinkedAgendapointsButton from './linked-agendapoints-button';
 import EditorStatusPill from './editor-status-pill';
 import EditorDocumentTitle from './editor-document-title';
+import { AUTHORIZATION_ROLES } from 'frontend-gelinkt-notuleren/utils/constants';
 
 interface Sig {
   Args: {
@@ -48,16 +49,24 @@ export default class AppChromeComponent extends Component<Sig> {
     return status;
   }
 
+  get showGroupClassificationLabel() {
+    // Hacky way to hide the classification label for agencies (e.g. Agentschap Wegen en Verkeer)
+    const { DOCUMENT_MANAGER } = AUTHORIZATION_ROLES;
+    return !this.currentSession.hasRole(DOCUMENT_MANAGER);
+  }
+
   <template>
     <nav>
       <div class='au-c-app-chrome'>
         <AuToolbar @size='small' class='au-u-padding-bottom-none' as |Group|>
           <Group>
             {{yield to='returnLink'}}
-            <span class='au-c-app-chrome__entity'>{{get
-                this.currentSession.group.classificatie
-                'label'
-              }}
+            <span class='au-c-app-chrome__entity'>
+              {{#if this.showGroupClassificationLabel}}{{get
+                  this.currentSession.group.classificatie
+                  'label'
+                }}
+              {{/if}}
               {{this.currentSession.group.naam}}</span>
           </Group>
           <Group>

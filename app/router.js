@@ -104,6 +104,7 @@ Router.map(function () {
     );
     this.route('copy', { path: ':id/copy' });
   });
+  this.route('forbidden');
   this.route('not-found', { path: '/*path' });
 });
 

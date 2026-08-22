@@ -543,7 +543,7 @@ meetings:
     cancel: Annuleren
 
 mock-login:
-  administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
+  administrative-unit-selection: Kies een account om mee in te loggen.
   administrative-unit-search: Bestuurseenheid zoeken
   search-placeholder: 'Aalst, Berchem, ...'
 
@@ -798,6 +798,9 @@ utils:
     route:
       title: Pagina niet gevonden
       explanation: Onze excuses, maar we slaagden er niet in om deze pagina terug te vinden.
+  forbidden:
+    title: 'Geen toegang'
+    explanation: 'Het is mogelijk dat u met dit account geen toegang heeft tot deze pagina.'
 
 validation-modal:
   title: Geef uw document een naam

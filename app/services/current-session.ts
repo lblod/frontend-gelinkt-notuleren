@@ -7,6 +7,11 @@ import type AccountModel from 'frontend-gelinkt-notuleren/models/account';
 import type GebruikerModel from 'frontend-gelinkt-notuleren/models/gebruiker';
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import type BestuurseenheidClassificatieCodeModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid-classificatie-code';
+import {
+  findGroupByRole,
+  type AuthorizationRole,
+  type Permission,
+} from 'frontend-gelinkt-notuleren/config/permissions';
 
 export default class CurrentSessionService extends Service {
   @service declare session: SessionService;
@@ -18,20 +23,32 @@ export default class CurrentSessionService extends Service {
   @tracked roles: string[] = [];
   @tracked classificatie: Option<BestuurseenheidClassificatieCodeModel>;
 
+  /** @deprecated Use the `may` method instead */
   get canRead() {
     return this.hasRole('GelinktNotuleren-lezer');
   }
 
+  /** @deprecated Use the `may` method instead */
   get canWrite() {
     return this.hasRole('GelinktNotuleren-schrijver');
   }
 
+  /** @deprecated Use the `may` method instead */
   get canPublish() {
     return this.hasRole('GelinktNotuleren-publiceerder');
   }
 
+  /** @deprecated Use the `may` method instead */
   get canSign() {
     return this.hasRole('GelinktNotuleren-ondertekenaar');
+  }
+
+  may(permission: Permission) {
+    const permissions = new Set(
+      this.roles.flatMap((role) => findGroupByRole(role)?.permissions ?? []),
+    );
+
+    return permissions.has(permission);
   }
 
   async load() {
@@ -62,7 +79,7 @@ export default class CurrentSessionService extends Service {
     }
   }
 
-  hasRole(role: string) {
+  hasRole(role: AuthorizationRole) {
     return this.roles.includes(role);
   }
 }
