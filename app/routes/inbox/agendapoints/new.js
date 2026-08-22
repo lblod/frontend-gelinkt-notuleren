@@ -6,7 +6,7 @@ export default class InboxAgendapointsNewRoute extends Route {
   @service router;
 
   beforeModel() {
-    if (!this.currentSession.canWrite) {
+    if (!this.currentSession.may('create-agendapoints')) {
       this.router.replaceWith('inbox.agendapoints');
     }
   }

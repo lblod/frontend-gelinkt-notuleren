@@ -16,7 +16,7 @@ export default class AgendapointsRevisionsRoute extends Route {
   @service declare currentSession: CurrentSessionService;
 
   beforeModel(transition: Transition) {
-    if (!this.currentSession.canWrite) {
+    if (!this.currentSession.may('edit-agendapoint-revisions')) {
       const id = transition.to?.parent?.params?.['id'];
       this.router.transitionTo('agendapoints.show', id);
       return;

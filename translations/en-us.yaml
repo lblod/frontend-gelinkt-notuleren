@@ -801,6 +801,9 @@ utils:
     route:
       title: Page not found
       explanation: Our apologies, but we could not find this page.
+  forbidden:
+    title: No access
+    explanation: "It's possible that you don't have access to this page"
 
 validation-modal:
   title: Name your document

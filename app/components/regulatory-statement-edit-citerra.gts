@@ -187,6 +187,7 @@ import humanFriendlyDate from 'frontend-gelinkt-notuleren/helpers/human-friendly
 import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 import { getShapeOfDocumentType } from '@lblod/lib-decision-shapes';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
+import userMay from 'frontend-gelinkt-notuleren/helpers/user-may';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -934,18 +935,26 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
           <TemplateCommentInsert @controller={{container.controller}} />
           <LocationInsert
             @controller={{container.controller}}
-            @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
+            @defaultMunicipality={{if
+              (userMay 'set-default-municipality-in-location-insert')
+              (get this.defaultMunicipality 'naam')
+              undefined
+            }}
             @config={{this.config.location}}
             @insertPlaceholder={{true}}
           />
-          <WorshipInsert
-            @controller={{container.controller}}
-            @config={{this.config.worship}}
-          />
-          <LmbInsert
-            @controller={{container.controller}}
-            @config={{this.config.lmb}}
-          />
+          {{#if (userMay 'insert-editor-worship')}}
+            <WorshipInsert
+              @controller={{container.controller}}
+              @config={{this.config.worship}}
+            />
+          {{/if}}
+          {{#if (userMay 'insert-editor-lmb')}}
+            <LmbInsert
+              @controller={{container.controller}}
+              @config={{this.config.lmb}}
+            />
+          {{/if}}
 
           <AuButton
             @skin='link'

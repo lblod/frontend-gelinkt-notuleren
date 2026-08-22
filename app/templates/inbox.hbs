@@ -6,12 +6,14 @@
       <div class='au-c-sidebar__content'>
         <nav>
           <ul class='au-c-list-navigation'>
-            <li class='au-c-list-navigation__item'>
-              <AuNavigationLink @route='inbox.meetings'>
-                <AuIcon @icon='folder' @alignment='left' />
-                {{t 'inbox.menu.meetings'}}
-              </AuNavigationLink>
-            </li>
+            {{#if (user-may 'view-meetings')}}
+              <li class='au-c-list-navigation__item'>
+                <AuNavigationLink @route='inbox.meetings'>
+                  <AuIcon @icon='folder' @alignment='left' />
+                  {{t 'inbox.menu.meetings'}}
+                </AuNavigationLink>
+              </li>
+            {{/if}}
             <li class='au-c-list-navigation__item'>
               <AuNavigationLink @route='inbox.agendapoints'>
                 <AuIcon @icon='file' @alignment='left' />

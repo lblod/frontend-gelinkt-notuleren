@@ -50,14 +50,18 @@
         @currentSorting={{this.sort}}
         @label={{t 'inbox.agendapoints.updated-on-label'}}
       />
-      <AuDataTableThSortable
-        @field=':no-case:status.label'
-        @currentSorting={{this.sort}}
-        @label={{t 'inbox.agendapoints.status-label'}}
-      />
-      <th><span
-          class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
-        >{{t 'inbox.meetings.type'}}</span></th>
+      {{#if (user-may 'view-agendapoint-status')}}
+        <AuDataTableThSortable
+          @field=':no-case:status.label'
+          @currentSorting={{this.sort}}
+          @label={{t 'inbox.agendapoints.status-label'}}
+        />
+      {{/if}}
+      {{#if (user-may 'view-agendapoint-linked-meeting')}}
+        <th><span
+            class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
+          >{{t 'inbox.meetings.type'}}</span></th>
+      {{/if}}
       <th><span
           class='au-c-data-table__header-title au-c-data-table__header-title--sortable'
         >{{t 'inbox.agendapoints.attachments-label'}}</span></th>
@@ -74,12 +78,16 @@
           {{human-friendly-date row.updatedOn locale=this.intl.primaryLocale}}
           <br />
         </td>
-        <td>
-          <EditorStatusPill @status={{container.status}} />
-        </td>
-        <td>
-          <ZittingLink @documentContainer={{container}} />
-        </td>
+        {{#if (user-may 'view-agendapoint-status')}}
+          <td>
+            <EditorStatusPill @status={{container.status}} />
+          </td>
+        {{/if}}
+        {{#if (user-may 'view-agendapoint-linked-meeting')}}
+          <td>
+            <ZittingLink @documentContainer={{container}} />
+          </td>
+        {{/if}}
         <td>
           <AttachmentsNumber @documentContainer={{container}} />
         </td>

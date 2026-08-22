@@ -26,6 +26,9 @@ export default class InboxRegulatoryStatementsController extends Controller {
   });
 
   get readOnly() {
-    return !this.currentSession.canWrite && this.currentSession.canRead;
+    return (
+      !this.currentSession.may('create-regulatory-statements') &&
+      this.currentSession.may('view-regulatory-statement-content')
+    );
   }
 }

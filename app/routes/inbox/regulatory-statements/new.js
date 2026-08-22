@@ -6,7 +6,7 @@ export default class InboxRegulatoryStatementsNewRoute extends Route {
   @service router;
 
   beforeModel() {
-    if (!this.currentSession.canWrite) {
+    if (!this.currentSession.may('create-regulatory-statements')) {
       this.router.replaceWith('inbox.regulatory-statements');
     }
   }
