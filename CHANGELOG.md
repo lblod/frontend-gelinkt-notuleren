@@ -1,5 +1,13 @@
 # frontend-gelinkt-notuleren
 
+## 5.83.0
+
+### Minor Changes
+
+- [#932](https://github.com/lblod/frontend-gelinkt-notuleren/pull/932) [`9842678`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/98426785e6ac7a7334f22c56f1d1dae6e16c56cc) Thanks [@kobemertens](https://github.com/kobemertens)! - Add more granular permissions to allow AWV to log in
+
+- [#936](https://github.com/lblod/frontend-gelinkt-notuleren/pull/936) [`e3b5700`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e3b5700c37ed9b3b7f80e354f695e25f8872a1cc) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Show warning on publication for missing linked decisions
+
 ## 5.82.0
 
 ### Minor Changes
