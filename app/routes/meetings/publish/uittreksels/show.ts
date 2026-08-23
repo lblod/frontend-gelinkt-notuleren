@@ -52,6 +52,7 @@ export default class MeetingsPublishUittrekselsShowRoute extends Route {
         signedResources: [] as SignedResource[],
         publishedResource: null,
         validationErrors: extractPreview.validationErrors,
+        validationWarnings: extractPreview.validationWarnings,
       };
     } else {
       // We could have used the relationship here, but the extra filtering
