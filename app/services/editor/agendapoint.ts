@@ -164,6 +164,7 @@ import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plu
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
 import { emptyBlockPlaceholder } from '@lblod/ember-rdfa-editor/plugins/empty-block-placeholder';
 import { getPersonActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/person';
+import { lmbModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/lmb-plugin';
 
 const removeBlankNodes: ModelMigrationGenerator = (attrs) => {
   if (
@@ -200,7 +201,7 @@ export default class AgendapointEditorService extends Service {
     getPlaceDescriptionActionGroups(this.locationOptions),
     locationActionsGroups(),
     getCodelistActionGroups(this.codelistEditOptions),
-    getPersonActionGroups(),
+    getPersonActionGroups(this.config.lmb),
   ];
 
   get config() {
@@ -538,6 +539,7 @@ export default class AgendapointEditorService extends Service {
       }),
       locationModalsPlugin(),
       emptyBlockPlaceholder(),
+      lmbModalsPlugin(),
     ];
 
     // The autofiller plugin messes with the headless editor by appending a transaction just

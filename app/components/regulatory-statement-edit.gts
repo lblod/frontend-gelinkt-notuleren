@@ -176,6 +176,7 @@ import { locationModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plu
 import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/location-plugin/contextual-actions';
 import { getCodelistActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/codelist';
 import { getPersonActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/person';
+import { lmbModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/lmb-plugin';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -203,7 +204,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
   contextualActionGroupGetters = [
     locationActionsGroups(),
     getCodelistActionGroups(this.codelistEditOptions),
-    getPersonActionGroups(),
+    getPersonActionGroups(this.config.lmb),
   ];
   schema = new Schema({
     nodes: {
@@ -305,6 +306,7 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       emberApplication({ application: getOwner(this) }),
       variableAutofillerPlugin(this.config.autofilledVariable),
       locationModalsPlugin(),
+      lmbModalsPlugin(),
     ];
   }
 

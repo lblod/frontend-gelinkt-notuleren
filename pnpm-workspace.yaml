@@ -9,8 +9,8 @@ catalog:
   '@faker-js/faker': ^10.4.0
   '@floating-ui/dom': ^1.7.6
   '@glint/template': ^1.7.7
-  '@lblod/ember-rdfa-editor': 13.16.0
-  '@lblod/ember-rdfa-editor-lblod-plugins': 38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9
+  '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039
+  '@lblod/ember-rdfa-editor-lblod-plugins': 38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89
   '@lblod/say-ar-design-plugin': 3.0.0
   '@lblod/say-roadsign-regulation-plugin': 3.0.0
   '@nullvoxpopuli/ember-composable-helpers': ^5.3.2
@@ -69,4 +69,5 @@ allowBuilds:
   core-js: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@lblod/ember-rdfa-editor-lblod-plugins@38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9'
+  - '@lblod/ember-rdfa-editor-lblod-plugins@38.1.0-dev.4f93f04a59048accaf3c8d82c10b5698bdddca26 || 38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89 || 38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9'
+  - '@lblod/ember-rdfa-editor@13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039'

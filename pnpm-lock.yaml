@@ -37,8 +37,8 @@ catalogs:
       specifier: ^1.7.7
       version: 1.7.7
     '@lblod/ember-rdfa-editor-lblod-plugins':
-      specifier: 38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9
-      version: 38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9
+      specifier: 38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89
+      version: 38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89
     '@lblod/say-ar-design-plugin':
       specifier: 3.0.0
       version: 3.0.0
@@ -162,7 +162,7 @@ catalogs:
 
 overrides:
   '@ember/test-waiters': ^3.1.0
-  '@lblod/ember-rdfa-editor': 13.16.0
+  '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039
   ember-auto-import: ^2.13.1
   ember-composability-tools>@ember/render-modifiers: ^3.0.0
   ember-focus-trap: ^2.0.0
@@ -303,17 +303,17 @@ importers:
         specifier: ^0.14.0
         version: 0.14.0(@babel/core@7.29.0(supports-color@8.1.1))(ember-simple-auth@8.3.0(@babel/core@7.29.0(supports-color@8.1.1))(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1))(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)
       '@lblod/ember-rdfa-editor':
-        specifier: 13.16.0
-        version: 13.16.0(8b050a03c2072a9ea84759736326b707)
+        specifier: 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039
+        version: 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039(8b050a03c2072a9ea84759736326b707)
       '@lblod/ember-rdfa-editor-lblod-plugins':
         specifier: 'catalog:'
-        version: 38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9(f16fd2cfb0719670a886078d78b6630d)
+        version: 38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89(71f07f7bfa6eadf209adf8ce3c174278)
       '@lblod/say-ar-design-plugin':
         specifier: 'catalog:'
-        version: 3.0.0(5adba4eff8b525b3145995ac51653c88)
+        version: 3.0.0(11d1ba9192a473768c41bc299eab5b4c)
       '@lblod/say-roadsign-regulation-plugin':
         specifier: 'catalog:'
-        version: 3.0.0(5027bddbfd377daf75f98580a4e27e45)
+        version: 3.0.0(fce64e42f1e4d71b8c134f75194a0c2b)
       '@lblod/template-uuid-instantiator':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1364,9 +1364,6 @@ packages:
   '@codemirror/search@6.5.10':
     resolution: {integrity: sha512-RMdPdmsrUf53pb2VwflKGHEe1XVM07hI7vV2ntgw1dmqhimpatSJKva4VA9h4TLUDOD4EIF02201oZurpnEFsg==}
 
-  '@codemirror/state@6.6.0':
-    resolution: {integrity: sha512-4nbvra5R5EtiCzr9BTHiTLc+MLXK2QGiAVYMyi8PkQd3SR+6ixar/Q/01Fa21TBIDOZXgeWV4WppsQolSreAPQ==}
-
   '@codemirror/state@6.7.1':
     resolution: {integrity: sha512-9QzNDgE4EYDnAHfrTlR2lwiPciiOymLtwKK+8yHQzCc7GXhAP9xdEbEJFy2IWB1j9UGUl9BsgMmTo/ImA02T7A==}
 
@@ -2088,14 +2085,14 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9':
-    resolution: {integrity: sha512-TV4Qr5wv8OS4c8NG8CYx4LcDW5OGurwwmy5Y2Eud2ARYMnzEIVQrJE6veA1nLceel+sV4lclBNt9Nzjo9ZfmoA==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89':
+    resolution: {integrity: sha512-T90FgiNNYl9qyK0nPDYkDpwKvhG1c4SBY+UPAla9hFrJ2kOFmns0pojPWVPeydMPnQ+3tNkQFIRJ3jsSOiq0Fw==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0
       '@ember/string': 3.x
       '@glint/template': ^1.4.0
-      '@lblod/ember-rdfa-editor': 13.16.0
+      '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039
       ember-concurrency: ^4.0.2
       ember-element-helper: ^0.8.6
       ember-intl: ^7.0.0
@@ -2112,8 +2109,8 @@ packages:
       ember-template-imports:
         optional: true
 
-  '@lblod/ember-rdfa-editor@13.16.0':
-    resolution: {integrity: sha512-HT9oF3qv/tyqF9nyGkbjd9UU6eO/Y9QeTNq6TTseK29YZu2D46VYCf1H+SBRr2ektJzBAQlYnaQfEfh3c6DemQ==}
+  '@lblod/ember-rdfa-editor@13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039':
+    resolution: {integrity: sha512-dbCwZ6VTt82LURLP60eW4PZ4RMP5DBAlVha6cQgckFf9vDPFtg0ssu239SbHJXbLvFGWMx7TmokXOL6kv2d3Zw==}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.11.0 || ^4.2.1
       '@ember/test-helpers': ^2.9.4 || ^3.2.1 || ^4.0.2 || ^5.0.0
@@ -2145,7 +2142,7 @@ packages:
       '@glimmer/component': ^1.1.2 || ^2.0.0
       '@glimmer/tracking': ^1.1.2
       '@glint/template': '>= 1.0.0'
-      '@lblod/ember-rdfa-editor': 13.16.0
+      '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039
       '@lblod/say-roadsign-regulation-plugin': 3.0.0
       ember-basic-dropdown: ^8.0.0
       ember-concurrency: ^4.0.2 || ^5.0.0
@@ -2166,7 +2163,7 @@ packages:
       '@glimmer/component': ^1.1.2 || ^2.0.0
       '@glimmer/tracking': ^1.1.2
       '@glint/template': '>= 1.0.0'
-      '@lblod/ember-rdfa-editor': 13.16.0
+      '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039
       ember-basic-dropdown: ^8.0.0
       ember-concurrency: ^4.0.2 || ^5.0.0
       ember-intl: ^6.4.0 || ^7.0.0
@@ -5619,6 +5616,7 @@ packages:
   eslint@9.39.4:
     resolution: {integrity: sha512-XoMjdBOwe/esVgEvLmNsD3IRHkm7fbKIUGvrleloJXUZgDHig2IPWNniv+GwjyJXzuNqVjlr5+4yVUZjycJwfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -11525,7 +11523,7 @@ snapshots:
   '@codemirror/commands@6.10.3':
     dependencies:
       '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
+      '@codemirror/state': 6.7.1
       '@codemirror/view': 6.43.0
       '@lezer/common': 1.5.2
 
@@ -11563,7 +11561,7 @@ snapshots:
     dependencies:
       '@codemirror/autocomplete': 6.20.2
       '@codemirror/language': 6.12.3
-      '@codemirror/state': 6.6.0
+      '@codemirror/state': 6.7.1
       '@codemirror/view': 6.43.0
       '@lezer/common': 1.5.2
       '@lezer/xml': 1.0.6
@@ -11588,10 +11586,6 @@ snapshots:
       '@codemirror/state': 6.7.1
       '@codemirror/view': 6.43.0
       crelt: 1.0.6
-
-  '@codemirror/state@6.6.0':
-    dependencies:
-      '@marijn/find-cluster-break': 1.0.2
 
   '@codemirror/state@6.7.1':
     dependencies:
@@ -12694,7 +12688,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@38.1.0-dev.c7c44ec8b883dbcc3330f33c0638d764684eb1e9(f16fd2cfb0719670a886078d78b6630d)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89(71f07f7bfa6eadf209adf8ce3c174278)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
       '@babel/core': 7.29.0(supports-color@8.1.1)
@@ -12704,7 +12698,7 @@ snapshots:
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)
       '@ember/string': 3.1.1(supports-color@8.1.1)
       '@embroider/macros': 1.19.7(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(supports-color@8.1.1)
-      '@lblod/ember-rdfa-editor': 13.16.0(8b050a03c2072a9ea84759736326b707)
+      '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039(8b050a03c2072a9ea84759736326b707)
       '@lblod/lib-decision-shapes': 0.0.25(@babel/core@7.29.0(supports-color@8.1.1))(@jest/transform@30.0.2(supports-color@8.1.1))(@jest/types@30.0.1)(babel-jest@30.0.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(jest-util@30.0.2)(jest@30.0.3(@types/node@25.8.0)(node-notifier@10.0.1)(supports-color@8.1.1))(typescript@5.9.3)
       '@lblod/marawa': 0.8.0-beta.6
       '@lblod/template-uuid-instantiator': 1.0.3
@@ -12763,13 +12757,13 @@ snapshots:
       - web-streams-polyfill
       - webpack
 
-  '@lblod/ember-rdfa-editor@13.16.0(8b050a03c2072a9ea84759736326b707)':
+  '@lblod/ember-rdfa-editor@13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039(8b050a03c2072a9ea84759736326b707)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
       '@codemirror/commands': 6.10.3
       '@codemirror/lang-html': 6.4.11
       '@codemirror/lang-xml': 6.1.0
-      '@codemirror/state': 6.6.0
+      '@codemirror/state': 6.7.1
       '@codemirror/view': 6.43.0
       '@curvenote/prosemirror-utils': 1.0.5(prosemirror-model@1.25.9)(prosemirror-state@1.4.4)
       '@ember/optional-features': 2.3.0(supports-color@8.1.1)
@@ -12870,7 +12864,7 @@ snapshots:
       '@rdfjs/data-model': 1.3.4
       '@rdfjs/dataset': 1.1.1
 
-  '@lblod/say-ar-design-plugin@3.0.0(5adba4eff8b525b3145995ac51653c88)':
+  '@lblod/say-ar-design-plugin@3.0.0(11d1ba9192a473768c41bc299eab5b4c)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
       '@ember/optional-features': 2.3.0(supports-color@8.1.1)
@@ -12880,8 +12874,8 @@ snapshots:
       '@glimmer/component': 1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1)
       '@glimmer/tracking': 1.1.2
       '@glint/tsserver-plugin': 2.1.0(supports-color@8.1.1)
-      '@lblod/ember-rdfa-editor': 13.16.0(8b050a03c2072a9ea84759736326b707)
-      '@lblod/say-roadsign-regulation-plugin': 3.0.0(5027bddbfd377daf75f98580a4e27e45)
+      '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039(8b050a03c2072a9ea84759736326b707)
+      '@lblod/say-roadsign-regulation-plugin': 3.0.0(fce64e42f1e4d71b8c134f75194a0c2b)
       decorator-transforms: 2.3.2(@babel/core@7.29.0(supports-color@8.1.1))
       ember-basic-dropdown: 8.11.1(410f19827e7e5f00999408fbfe6c1788)
       ember-cli-babel: 8.3.1(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1)
@@ -12907,7 +12901,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lblod/say-roadsign-regulation-plugin@3.0.0(5027bddbfd377daf75f98580a4e27e45)':
+  '@lblod/say-roadsign-regulation-plugin@3.0.0(fce64e42f1e4d71b8c134f75194a0c2b)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
       '@ember/optional-features': 2.3.0(supports-color@8.1.1)
@@ -12916,7 +12910,7 @@ snapshots:
       '@glimmer/component': 1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1)
       '@glimmer/tracking': 1.1.2
       '@glint/tsserver-plugin': 2.1.0(supports-color@8.1.1)
-      '@lblod/ember-rdfa-editor': 13.16.0(8b050a03c2072a9ea84759736326b707)
+      '@lblod/ember-rdfa-editor': 13.17.0-dev.4e9182ff14403164ed2a4f497b5dc8d87879a039(8b050a03c2072a9ea84759736326b707)
       decorator-transforms: 2.3.2(@babel/core@7.29.0(supports-color@8.1.1))
       ember-basic-dropdown: 8.11.1(410f19827e7e5f00999408fbfe6c1788)
       ember-cli-babel: 8.3.1(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1)
