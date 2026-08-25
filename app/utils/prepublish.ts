@@ -91,21 +91,34 @@ export async function fetchWithJob<R extends PrepublishResponse>(
     await timeout(pollingDelayMs);
     resp = await fetch(`/prepublish/job-result/${jobId}`);
     maxIterations--;
-  } while (resp.status === 404 && maxIterations > 0);
+    if (resp.status === 500) {
+      pollingDelayMs *= 2;
+    }
+  } while ([404, 500].includes(resp.status) && maxIterations > 0);
 
   if (!resp.ok) {
     let errors: string | undefined;
     try {
-      const json = (await resp.json()) as { errors: [] };
-      if (json?.errors) {
-        errors =
-          // @ts-expect-error This seems to never happen but left in case there's some way
-          (json.errors?.[0]?.title as string) || JSON.stringify(json.errors);
+      if (resp.status !== 500) {
+        const json = (await resp.json()) as { errors: [] };
+        if (json?.errors) {
+          errors =
+            // @ts-expect-error This seems to never happen but left in case there's some way
+            (json.errors?.[0]?.title as string) || JSON.stringify(json.errors);
+        }
       }
-    } catch (_e) {
-      // throwing body text
-      errors = await resp.text();
-      throw new Error(errors);
+    } catch (err) {
+      if (!resp.bodyUsed) {
+        console.warn(
+          'Error when handling prepublish job, attempting to read contained error',
+          err,
+        );
+        // throwing body text
+        errors = await resp.text();
+        throw new Error(errors);
+      } else {
+        throw err;
+      }
     }
     // throwing stringified json body
     throw new Error(errors);
