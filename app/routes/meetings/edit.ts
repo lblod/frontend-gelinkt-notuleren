@@ -10,11 +10,13 @@ export default class MeetingsEditRoute extends Route {
     const zitting = await this.store.findRecord<Zitting>('zitting', params.id, {
       include: [
         'bestuursorgaan',
+        'bestuursorgaan.isTijdsspecialisatieVan',
         'secretaris',
         'voorzitter',
         'intermissions',
         'aanwezigenBijStart',
         'afwezigenBijStart',
+        'nietToegekendeMandatarissen',
       ],
     });
     return zitting;
