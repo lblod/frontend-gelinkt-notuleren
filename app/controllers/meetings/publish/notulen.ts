@@ -9,7 +9,6 @@ import type { Option } from '@lblod/ember-rdfa-editor/utils/option';
 import { getResourceContent } from 'frontend-gelinkt-notuleren/utils/get-resource-content';
 import { BESLUIT_TYPES } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
-import type PublishService from 'frontend-gelinkt-notuleren/services/publish';
 import type MuTaskService from 'frontend-gelinkt-notuleren/services/mu-task';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import type VersionedNotulen from 'frontend-gelinkt-notuleren/models/versioned-notulen';
@@ -23,11 +22,14 @@ import type {
   NotulenFinalPreview,
   TreatmentPreview,
   TreatmentWarning,
-} from 'frontend-gelinkt-notuleren/services/publish';
+} from 'frontend-gelinkt-notuleren/utils/prepublish';
+import {
+  fetchTreatmentPreviews,
+  fetchWithJob,
+} from 'frontend-gelinkt-notuleren/utils/prepublish';
 
 export default class MeetingsPublishNotulenController extends Controller {
   @service declare store: Store;
-  @service declare publish: PublishService;
   @service declare muTask: MuTaskService;
   @service declare currentSession: CurrentSessionService;
   @service declare intl: IntlService;
@@ -225,7 +227,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     return { signedDeletedResources, signedNonDeletedResources };
   }
 
-  loadNotulen = task(async () => {
+  loadNotulen = task({ drop: true }, async () => {
     // this file is incredibly stateful, so we need to do silly things
     // like this
     this.publishedResource = undefined;
@@ -344,45 +346,48 @@ export default class MeetingsPublishNotulenController extends Controller {
     }
   });
 
-  createPrePublishedResource = task(async () => {
+  createPrePublishedResource = task({ drop: true }, async () => {
     const id = this.model.id;
-    const json = (await this.publish.createJobTask.perform(
+    const json = await fetchWithJob<ImportedNotulenContent>(
       `/prepublish/notulen/${id}`,
-    )) as ImportedNotulenContent;
+    );
     return json.data.attributes;
   });
 
-  fetchTreatments = task(async () => {
+  fetchTreatments = task({ drop: true }, async () => {
     const id = this.model.id;
     if (!id) return [];
-    const response = await this.publish.fetchTreatmentPreviews(id);
+    const response = await fetchTreatmentPreviews(id);
 
     return response.map((res) => res.data.attributes);
   });
-  deleteSignatureTask = task(async (signature: SignedResource) => {
-    signature.deleted = true;
-    await signature.save();
-    const log = this.store.createRecord<PublishingLog>('publishing-log', {
-      action: 'delete-signature',
-      user: this.currentSession.user,
-      date: new Date(),
-      signedResource: signature,
-      zitting: await this.notulen?.zitting,
-    });
-    await log.save();
+  deleteSignatureTask = task(
+    { drop: true },
+    async (signature: SignedResource) => {
+      signature.deleted = true;
+      await signature.save();
+      const log = this.store.createRecord<PublishingLog>('publishing-log', {
+        action: 'delete-signature',
+        user: this.currentSession.user,
+        date: new Date(),
+        signedResource: signature,
+        zitting: await this.notulen?.zitting,
+      });
+      await log.save();
 
-    // not a mistake
-    // at this point, the signature is marked as deleted but the model has not yet reloaded,
-    // so it is still in the signedResources array.
-    // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
-    if (this.signedResources.length === 1 && this.fullNotulen) {
-      this.fullNotulen.deleted = true;
-      await this.fullNotulen.save();
-    }
-    await this.loadNotulen.perform();
-  });
+      // not a mistake
+      // at this point, the signature is marked as deleted but the model has not yet reloaded,
+      // so it is still in the signedResources array.
+      // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
+      if (this.signedResources.length === 1 && this.fullNotulen) {
+        this.fullNotulen.deleted = true;
+        await this.fullNotulen.save();
+      }
+      await this.loadNotulen.perform();
+    },
+  );
 
-  createSignedResource = task(async () => {
+  createSignedResource = task({ drop: true }, async () => {
     this.showSigningModal = false;
     const id = this.model.id;
     const taskId = await this.muTask.fetchTaskifiedEndpoint(
@@ -405,7 +410,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     await log.save();
   });
 
-  createPublishedResource = task(async () => {
+  createPublishedResource = task({ drop: true }, async () => {
     this.showPublishingModal = false;
     const id = this.model.id;
     const taskId = await this.muTask.fetchTaskifiedEndpoint(
@@ -433,10 +438,10 @@ export default class MeetingsPublishNotulenController extends Controller {
     await log.save();
   });
 
-  generateNotulenPreview = task(async () => {
+  generateNotulenPreview = async () => {
     const meetingId = this.model.id;
     try {
-      const json = (await this.publish.createJobTask.perform(
+      const json = await fetchWithJob<NotulenFinalPreview>(
         `/meeting-notes-previews`,
         {
           headers: { 'Content-Type': 'application/vnd.api+json' },
@@ -461,7 +466,7 @@ export default class MeetingsPublishNotulenController extends Controller {
           }),
           method: 'POST',
         },
-      )) as NotulenFinalPreview;
+      );
       const previewHtml = json.data.attributes.html;
       this.preview = previewHtml;
     } catch (e) {
@@ -469,7 +474,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       // @ts-expect-error Handling unknown is painful...
       this.errors = [e.message];
     }
-  });
+  };
 
   get zittingWrapper() {
     if (this.notulenContent) {
@@ -495,9 +500,9 @@ export default class MeetingsPublishNotulenController extends Controller {
     this.showSigningModal = true;
   }
 
-  createPublishPreview = task(async () => {
+  createPublishPreview = task({ drop: true }, async () => {
     this.showPublishingModal = true;
-    await this.generateNotulenPreview.perform();
+    await this.generateNotulenPreview();
   });
 
   updateNotulenPreview() {

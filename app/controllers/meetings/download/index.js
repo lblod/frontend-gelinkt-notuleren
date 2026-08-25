@@ -3,11 +3,10 @@ import { articlesBasedOnClassifcationMap } from 'frontend-gelinkt-notuleren/util
 import { restartableTask, task } from 'ember-concurrency';
 import { trackedTask } from 'reactiveweb/ember-concurrency';
 import InstallatieVergaderingModel from 'frontend-gelinkt-notuleren/models/installatievergadering';
-import { service } from '@ember/service';
 import { wrapDownloadedDocument } from '../../../utils/wrap-downloaded-document';
+import { fetchWithJob } from 'frontend-gelinkt-notuleren/utils/prepublish';
 
 export default class MeetingsDownloadController extends Controller {
-  @service publish;
   get zitting() {
     return this.model;
   }
@@ -31,15 +30,13 @@ export default class MeetingsDownloadController extends Controller {
     );
   }
 
-  downloadMeeting = task(async () => {
-    const json = await this.publish.createJobTask.perform(
-      `/prepublish/notulen/${this.zitting.id}`,
-    );
+  downloadMeeting = task({ drop: true }, async () => {
+    const json = await fetchWithJob(`/prepublish/notulen/${this.zitting.id}`);
     const html = json.data.attributes.content;
     this.downloadHtml(html, 'notulen');
   });
 
-  downloadAgenda = task(async () => {
+  downloadAgenda = task({ drop: true }, async () => {
     const response = await fetch(
       `/prepublish/agenda/bdf68a65-ce15-42c8-ae1b-19eeb39e20d0/${this.zitting.id}`,
     );
@@ -48,8 +45,8 @@ export default class MeetingsDownloadController extends Controller {
     this.downloadHtml(html, 'agenda');
   });
 
-  downloadDecisionlist = task(async () => {
-    const json = await this.publish.createJobTask.perform(
+  downloadDecisionlist = task({ drop: true }, async () => {
+    const json = await fetchWithJob(
       `/prepublish/besluitenlijst/${this.zitting.id}`,
     );
     const html = json.data.attributes.content;
