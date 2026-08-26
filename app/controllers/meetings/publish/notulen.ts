@@ -4,39 +4,54 @@ import { task } from 'ember-concurrency';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { isEmpty } from '@ember/utils';
+import type IntlService from 'ember-intl/services/intl';
+import type { Option } from '@lblod/ember-rdfa-editor/utils/option';
 import { getResourceContent } from 'frontend-gelinkt-notuleren/utils/get-resource-content';
 import { BESLUIT_TYPES } from 'frontend-gelinkt-notuleren/utils/besluit-types';
+import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
+import type PublishService from 'frontend-gelinkt-notuleren/services/publish';
+import type MuTaskService from 'frontend-gelinkt-notuleren/services/mu-task';
+import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
+import type VersionedNotulen from 'frontend-gelinkt-notuleren/models/versioned-notulen';
+import type { ModelFrom } from 'frontend-gelinkt-notuleren/utils/types';
+import type MeetingsPublishNotulenRoute from 'frontend-gelinkt-notuleren/routes/meetings/publish/notulen';
+import type SignedResource from 'frontend-gelinkt-notuleren/models/signed-resource';
+import type PublishingLog from 'frontend-gelinkt-notuleren/models/publishing-log';
+import type PublishedResource from 'frontend-gelinkt-notuleren/models/published-resource';
+import type {
+  ImportedNotulenContent,
+  NotulenFinalPreview,
+  TreatmentPreview,
+  TreatmentWarning,
+} from 'frontend-gelinkt-notuleren/services/publish';
 
 export default class MeetingsPublishNotulenController extends Controller {
-  @service store;
-  @service publish;
-  @service muTask;
-  @service currentSession;
-  @service intl;
+  @service declare store: Store;
+  @service declare publish: PublishService;
+  @service declare muTask: MuTaskService;
+  @service declare currentSession: CurrentSessionService;
+  @service declare intl: IntlService;
 
+  declare model: ModelFrom<MeetingsPublishNotulenRoute>;
   behandelingContainerId = 'behandeling-van-agendapunten-container';
-  @tracked notulen;
-  @tracked fullNotulen;
-  @tracked fullNotulenContent;
+  @tracked notulen: Option<VersionedNotulen>;
+  @tracked fullNotulen: Option<VersionedNotulen>;
+  @tracked fullNotulenContent: Option<string>;
   // Since content can be in a file or in the triplestore, handle content independently from the
   // notulen itself
-  @tracked notulenContent;
-  @tracked errors;
-  @tracked validationErrors;
-  @tracked validationWarnings;
-  @tracked signedResources = [];
+  @tracked notulenContent: Option<string>;
+  @tracked errors: Option<string[]>;
+  @tracked validationErrors: Option<string[]>;
+  @tracked validationWarnings: Option<TreatmentWarning[]>;
+  @tracked signedResources: SignedResource[] = [];
   @tracked hasDeletedSignedResources = false;
-  @tracked publishedResource;
-  @tracked publicBehandelingUris = [];
-  @tracked treatments;
+  @tracked publishedResource: Option<PublishedResource>;
+  @tracked publicBehandelingUris: string[] = [];
+  @tracked treatments: Option<TreatmentPreview[]>;
   @tracked allBehandelingPublic = false;
-  @tracked preview;
+  @tracked preview: Option<string>;
   @tracked showSigningModal = false;
   @tracked showPublishingModal = false;
-
-  constructor() {
-    super(...arguments);
-  }
 
   resetController() {
     this.notulen = null;
@@ -57,7 +72,9 @@ export default class MeetingsPublishNotulenController extends Controller {
   }
 
   initialize() {
-    this.loadNotulen.perform();
+    this.loadNotulen
+      .perform()
+      .catch((err) => console.error('Error loading notulen', err));
   }
 
   get containerElement() {
@@ -113,16 +130,18 @@ export default class MeetingsPublishNotulenController extends Controller {
     return !!this.publishedResource;
   }
   get linkedDecisionWarningsHtml() {
-    const linkedDecisionWarnings = this.validationWarnings.filter(
+    const linkedDecisionWarnings = this.validationWarnings?.filter(
       (warning) => warning.type === 'linkedDecision',
     );
 
-    if (!linkedDecisionWarnings.length) return undefined;
+    if (!linkedDecisionWarnings || !linkedDecisionWarnings.length) {
+      return undefined;
+    }
     const linkedDecisionWarningsProcessed = linkedDecisionWarnings.map(
       (linkedDecisionWarning) => {
         const decisionType = Object.entries(BESLUIT_TYPES).find(
           (entry) => entry[1] === linkedDecisionWarning.decisionType,
-        )[0];
+        )?.[0];
         const documentContainerUuid = linkedDecisionWarning.documentContainerUri
           .split('/')
           .pop();
@@ -136,13 +155,13 @@ export default class MeetingsPublishNotulenController extends Controller {
     );
     const linkedDecisionWarningsGrouped = Object.groupBy(
       linkedDecisionWarningsProcessed,
-      (warning) => warning.decisionType,
+      (warning) => warning.decisionType ?? '',
     );
     const linkedDecisionWarningsGroupedInArray = [];
-    for (let key in linkedDecisionWarningsGrouped) {
+    for (const key in linkedDecisionWarningsGrouped) {
       linkedDecisionWarningsGroupedInArray.push({
         decisionType: key,
-        warnings: linkedDecisionWarningsGrouped[key].map(
+        warnings: linkedDecisionWarningsGrouped[key]?.map(
           (warning, index, array) => {
             let connector = ',';
             if (index === array.length - 1) {
@@ -153,20 +172,20 @@ export default class MeetingsPublishNotulenController extends Controller {
             return { ...warning, connector };
           },
         ),
-        isPlural: linkedDecisionWarningsGrouped[key].length > 1,
+        isPlural: linkedDecisionWarningsGrouped[key]?.length ?? 0 > 1,
       });
     }
     let html = '';
     for (let i = 0; i < linkedDecisionWarningsGroupedInArray.length; i++) {
       const warningGroup = linkedDecisionWarningsGroupedInArray[i];
       let warningGroupHtml = '';
-      warningGroupHtml += warningGroup.isPlural
+      warningGroupHtml += warningGroup?.isPlural
         ? this.intl.t('publish.linked-decision-warning-before-plural')
         : this.intl.t('publish.linked-decision-warning-before-singular');
-      for (let warning of warningGroup.warnings) {
+      for (const warning of warningGroup?.warnings ?? []) {
         warningGroupHtml += ` <a href="${warning.linkToTreatment}">${warning.decisionTitle}</a>${warning.connector} `;
       }
-      warningGroupHtml += `${this.intl.t('publish.linked-decision-warning-of-type-text')} ${warningGroup.decisionType}`;
+      warningGroupHtml += `${this.intl.t('publish.linked-decision-warning-of-type-text')} ${warningGroup?.decisionType}`;
       if (i !== linkedDecisionWarningsGroupedInArray.length - 1) {
         warningGroupHtml += ', ';
       } else {
@@ -183,8 +202,8 @@ export default class MeetingsPublishNotulenController extends Controller {
     return html;
   }
 
-  async loadSignedResources(versionedNotulenId) {
-    const signedNonDeletedResources = await this.store.query(
+  async loadSignedResources(versionedNotulenId: string) {
+    const signedNonDeletedResources = await this.store.query<SignedResource>(
       'signed-resource',
       {
         'filter[versioned-notulen][:id:]': versionedNotulenId,
@@ -194,11 +213,14 @@ export default class MeetingsPublishNotulenController extends Controller {
       },
     );
 
-    const signedDeletedResources = await this.store.query('signed-resource', {
-      'filter[versioned-notulen][:id:]': versionedNotulenId,
-      'filter[deleted]': true,
-      sort: 'created-on',
-    });
+    const signedDeletedResources = await this.store.query<SignedResource>(
+      'signed-resource',
+      {
+        'filter[versioned-notulen][:id:]': versionedNotulenId,
+        'filter[deleted]': true,
+        sort: 'created-on',
+      },
+    );
 
     return { signedDeletedResources, signedNonDeletedResources };
   }
@@ -212,12 +234,12 @@ export default class MeetingsPublishNotulenController extends Controller {
     // published notulen have kind "public", meaning they only
     // contain the public content
     const publicNotulen = (
-      await this.store.query('versioned-notulen', {
+      await this.store.query<VersionedNotulen>('versioned-notulen', {
         'filter[zitting][:id:]': this.model.id,
         'filter[:or:][deleted]': false,
         'filter[:or:][:has-no:deleted]': 'yes',
         'filter[kind]': 'public',
-        include: 'published-resource.gebruiker',
+        include: ['publishedResource.gebruiker'],
       })
     )[0];
 
@@ -248,11 +270,14 @@ export default class MeetingsPublishNotulenController extends Controller {
         // data, as we call the service that creates the final entry
         // in the database. This is just done here for ????? reasons
         // that predate me visiting this file.
-        const rslt = await this.store.createRecord('versioned-notulen', {
-          zitting: this.model,
-          content: content,
-          kind: 'public',
-        });
+        const rslt = this.store.createRecord<VersionedNotulen>(
+          'versioned-notulen',
+          {
+            zitting: this.model,
+            content: content,
+            kind: 'public',
+          },
+        );
 
         this.notulen = rslt;
         this.notulenContent = content;
@@ -260,13 +285,14 @@ export default class MeetingsPublishNotulenController extends Controller {
         this.validationWarnings = warnings;
       } catch (e) {
         console.error(e);
+        // @ts-expect-error Not sure what this should be
         this.errors = [e];
       }
     }
     // signed notulen have kind "full", meaning they always
     // contain the full content.
     const fullNotulen = (
-      await this.store.query('versioned-notulen', {
+      await this.store.query<VersionedNotulen>('versioned-notulen', {
         'filter[zitting][:id:]': this.model.id,
         'filter[:or:][deleted]': false,
         'filter[:or:][:has-no:deleted]': 'yes',
@@ -274,7 +300,7 @@ export default class MeetingsPublishNotulenController extends Controller {
       })
     )[0];
 
-    if (fullNotulen) {
+    if (fullNotulen && fullNotulen.id) {
       // load the signed resources. NOTE: we can't use relationships here,
       // because we need to filter on the deleted property
       const { signedNonDeletedResources, signedDeletedResources } =
@@ -305,6 +331,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         this.validationWarnings = warnings;
       } catch (e) {
         console.error(e);
+        // @ts-expect-error Not sure what this should be
         this.errors = [e];
       }
     }
@@ -319,27 +346,28 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   createPrePublishedResource = task(async () => {
     const id = this.model.id;
-    const json = await this.publish.fetchJobTask.perform(
+    const json = (await this.publish.fetchJobTask.perform(
       `/prepublish/notulen/${id}`,
-    );
+    )) as ImportedNotulenContent;
     return json.data.attributes;
   });
 
   fetchTreatments = task(async () => {
     const id = this.model.id;
+    if (!id) return [];
     const response = await this.publish.fetchTreatmentPreviews(id);
 
     return response.map((res) => res.data.attributes);
   });
-  deleteSignatureTask = task(async (signature) => {
+  deleteSignatureTask = task(async (signature: SignedResource) => {
     signature.deleted = true;
     await signature.save();
-    const log = this.store.createRecord('publishing-log', {
+    const log = this.store.createRecord<PublishingLog>('publishing-log', {
       action: 'delete-signature',
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signature,
-      zitting: await this.notulen.zitting,
+      zitting: await this.notulen?.zitting,
     });
     await log.save();
 
@@ -347,7 +375,7 @@ export default class MeetingsPublishNotulenController extends Controller {
     // at this point, the signature is marked as deleted but the model has not yet reloaded,
     // so it is still in the signedResources array.
     // we could reload the model here, but then we're reloading twice in one call, which seems unnecessary
-    if (this.signedResources.length === 1) {
+    if (this.signedResources.length === 1 && this.fullNotulen) {
       this.fullNotulen.deleted = true;
       await this.fullNotulen.save();
     }
@@ -365,14 +393,14 @@ export default class MeetingsPublishNotulenController extends Controller {
     await this.loadNotulen.perform();
     const signedResources = this.signedResources;
     const signedResource = signedResources[signedResources.length - 1];
-    const versionedResource = await signedResource.versionedNotulen;
+    const versionedResource = await signedResource?.versionedNotulen;
 
-    const log = this.store.createRecord('publishing-log', {
+    const log = this.store.createRecord<PublishingLog>('publishing-log', {
       action: 'sign',
       user: this.currentSession.user,
       date: new Date(),
       signedResource: signedResource,
-      zitting: await versionedResource.zitting,
+      zitting: await versionedResource?.zitting,
     });
     await log.save();
   });
@@ -395,12 +423,12 @@ export default class MeetingsPublishNotulenController extends Controller {
     const publishedResource = this.publishedResource;
     const versionedResource = this.notulen;
 
-    const log = this.store.createRecord('publishing-log', {
+    const log = this.store.createRecord<PublishingLog>('publishing-log', {
       action: 'publish',
       user: this.currentSession.user,
       date: new Date(),
       publishedResource: publishedResource,
-      zitting: await versionedResource.zitting,
+      zitting: await versionedResource?.zitting,
     });
     await log.save();
   });
@@ -408,7 +436,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   generateNotulenPreview = task(async () => {
     const meetingId = this.model.id;
     try {
-      const json = await this.publish.createJobTask.perform(
+      const json = (await this.publish.createJobTask.perform(
         `/meeting-notes-previews`,
         {
           headers: { 'Content-Type': 'application/vnd.api+json' },
@@ -433,11 +461,12 @@ export default class MeetingsPublishNotulenController extends Controller {
           }),
           method: 'POST',
         },
-      );
+      )) as NotulenFinalPreview;
       const previewHtml = json.data.attributes.html;
       this.preview = previewHtml;
     } catch (e) {
       console.error('Error generating notulen preview', e);
+      // @ts-expect-error Handling unknown is painful...
       this.errors = [e.message];
     }
   });
@@ -450,8 +479,10 @@ export default class MeetingsPublishNotulenController extends Controller {
       const bvapContainer = div.querySelector(
         "[property='http://mu.semte.ch/vocabularies/ext/behandelingVanAgendapuntenContainer']",
       );
-      bvapContainer.innerHTML = '';
-      bvapContainer.id = this.behandelingContainerId;
+      if (bvapContainer) {
+        bvapContainer.innerHTML = '';
+        bvapContainer.id = this.behandelingContainerId;
+      }
 
       return div.innerHTML;
     } else {
@@ -471,15 +502,16 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   updateNotulenPreview() {
     const div = document.createElement('div');
-    div.innerHTML = this.notulenContent;
+    if (this.notulenContent) {
+      div.innerHTML = this.notulenContent;
+    }
 
     const behandelingNodes = div.querySelectorAll(
       "[typeof='besluit:BehandelingVanAgendapunt']",
     );
     behandelingNodes.forEach((node) => {
-      const uri =
-        node.attributes['resource'] && node.attributes['resource'].value;
-      if (this.publicBehandelingUris.includes(uri)) {
+      const uri = node.getAttribute('resource');
+      if (this.publicBehandelingUris.includes(uri ?? '')) {
         node.classList.remove('behandeling-preview--niet-publiek');
       } else {
         node.classList.add('behandeling-preview--niet-publiek');
@@ -487,11 +519,11 @@ export default class MeetingsPublishNotulenController extends Controller {
     });
 
     this.allBehandelingPublic =
-      this.treatments.length === this.publicBehandelingUris.length;
+      this.treatments?.length === this.publicBehandelingUris.length;
   }
 
   @action
-  togglePublicationStatus(behandeling) {
+  togglePublicationStatus(behandeling: TreatmentPreview) {
     const uri = behandeling.behandeling;
     const publicIndex = this.publicBehandelingUris.indexOf(uri);
     if (publicIndex !== -1) {
@@ -505,7 +537,7 @@ export default class MeetingsPublishNotulenController extends Controller {
   @action
   toggleAllPublicationStatus() {
     if (!this.allBehandelingPublic) {
-      this.publicBehandelingUris = this.treatments.map(
+      this.publicBehandelingUris = (this.treatments ?? []).map(
         (behandeling) => behandeling.behandeling,
       );
       this.updateNotulenPreview();
