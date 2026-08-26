@@ -50,7 +50,7 @@ export default class DownloadMeetingPartComponent extends Component {
         break;
       }
       default: {
-        const json = await this.publish.fetchJobTask.perform(
+        const json = await this.publish.createJobTask.perform(
           `${route}/${this.args.meeting.id}`,
         );
         html = json.data.attributes.content;

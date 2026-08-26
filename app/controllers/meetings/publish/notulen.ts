@@ -346,7 +346,7 @@ export default class MeetingsPublishNotulenController extends Controller {
 
   createPrePublishedResource = task(async () => {
     const id = this.model.id;
-    const json = (await this.publish.fetchJobTask.perform(
+    const json = (await this.publish.createJobTask.perform(
       `/prepublish/notulen/${id}`,
     )) as ImportedNotulenContent;
     return json.data.attributes;

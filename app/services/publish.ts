@@ -83,21 +83,6 @@ type PrepublishResponse =
  * TODO: build out the rest of the api
  */
 export default class PublishService extends Service {
-  fetchJobTask = task(
-    async (
-      jobUrl: string,
-      pollingDelayMs: number = 1000,
-      maxIterations: number = 600,
-    ) => {
-      return await this.createJobTask.perform(
-        jobUrl,
-        {},
-        pollingDelayMs,
-        maxIterations,
-      );
-    },
-  );
-
   createJobTask = task(
     async (
       url: string,
@@ -140,7 +125,7 @@ export default class PublishService extends Service {
   );
 
   async fetchTreatmentPreviews(meetingId: string) {
-    return this.fetchJobTask.perform(
+    return this.createJobTask.perform(
       `/prepublish/behandelingen/${meetingId}`,
     ) as Promise<TreatmentPreviewData[]>;
   }

@@ -32,7 +32,7 @@ export default class MeetingsDownloadController extends Controller {
   }
 
   downloadMeeting = task(async () => {
-    const json = await this.publish.fetchJobTask.perform(
+    const json = await this.publish.createJobTask.perform(
       `/prepublish/notulen/${this.zitting.id}`,
     );
     const html = json.data.attributes.content;
@@ -49,7 +49,7 @@ export default class MeetingsDownloadController extends Controller {
   });
 
   downloadDecisionlist = task(async () => {
-    const json = await this.publish.fetchJobTask.perform(
+    const json = await this.publish.createJobTask.perform(
       `/prepublish/besluitenlijst/${this.zitting.id}`,
     );
     const html = json.data.attributes.content;
