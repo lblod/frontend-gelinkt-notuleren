@@ -85,15 +85,18 @@ export async function fetchWithJob<R extends PrepublishResponse>(
   const job = await fetch(url, options);
   const jobData = (await job.json()) as PrepublishJob;
   const jobId = jobData.data.attributes.jobId;
+  let serverErrorCount = 0;
 
   let resp: Response;
   do {
     await timeout(pollingDelayMs);
     resp = await fetch(`/prepublish/job-result/${jobId}`);
     maxIterations--;
-    if (resp.status === 500) {
-      pollingDelayMs *= 2;
-    }
+    // The prepublisher now keeps track of error responses, so a problem in the node server should
+    // always give a 500. If it comes from somewhere else in the stack (which can occur when
+    // handling very large meetings), then we should keep retrying as we will most likely get a 404
+    // next time.
+    if (resp.status === 500 && ++serverErrorCount >= 5) break;
   } while ([404, 500].includes(resp.status) && maxIterations > 0);
 
   if (!resp.ok) {

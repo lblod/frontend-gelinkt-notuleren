@@ -293,6 +293,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         console.error(e);
         // @ts-expect-error Not sure what this should be
         this.errors = [e];
+        throw e;
       }
     }
     // signed notulen have kind "full", meaning they always
@@ -346,6 +347,7 @@ export default class MeetingsPublishNotulenController extends Controller {
         console.error(e);
         // @ts-expect-error Not sure what this should be
         this.errors = [e];
+        throw e;
       }
     }
 
