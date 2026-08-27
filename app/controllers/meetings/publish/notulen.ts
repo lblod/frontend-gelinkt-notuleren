@@ -245,6 +245,10 @@ export default class MeetingsPublishNotulenController extends Controller {
       })
     )[0];
 
+    let createdPrepubResource:
+      | ImportedNotulenContent['data']['attributes']
+      | undefined;
+
     if (publicNotulen) {
       // the notulen have been published
       const publishedResource = await publicNotulen.publishedResource;
@@ -265,8 +269,8 @@ export default class MeetingsPublishNotulenController extends Controller {
     } else {
       try {
         // generate a rendered document
-        const { content, errors, warnings } =
-          await this.createPrePublishedResource.perform();
+        createdPrepubResource = await this.createPrePublishedResource.perform();
+        const { content, errors, warnings } = createdPrepubResource;
         // save it in a "placeholder" versioned-notulen instance
         // note: this instance will never actually be saved using ember
         // data, as we call the service that creates the final entry
@@ -320,14 +324,21 @@ export default class MeetingsPublishNotulenController extends Controller {
       this.fullNotulen = fullNotulen;
     } else {
       // this means there are no signatures
+      // we generate another preview, independent from the one for
+      // publishing, so we are sure we're showing the user the actual
+      // content they will be signing, regardless of the publication state.
+      // e.g.: a document is published with agenda item contents kept private
+      // -> this will still show all the contents as they always sign everything
       try {
-        // we generate another preview, independent from the one for
-        // publishing, so we are sure we're showing the user the actual
-        // content they will be signing, regardless of the publication state.
-        // e.g.: a document is published with agenda item contents kept private
-        // -> this will still show all the contents as they always sign everything
-        const { content, errors, warnings } =
-          await this.createPrePublishedResource.perform();
+        if (!createdPrepubResource) {
+          // In the case where there is no existing publicNotulen or fullNotulen, i.e. there is no
+          // already signed or published version, then the content of the two matches for now, so we
+          // can avoid another expensive call to the prepublisher and re-use the existing one. If a
+          // publicNotulen already exists, we still need to generate a fullNotulen.
+          createdPrepubResource =
+            await this.createPrePublishedResource.perform();
+        }
+        const { content, errors, warnings } = createdPrepubResource;
         this.fullNotulenContent = content;
         this.validationErrors = errors;
         this.validationWarnings = warnings;
