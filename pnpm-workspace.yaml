@@ -9,7 +9,7 @@ catalog:
   '@faker-js/faker': ^10.4.0
   '@floating-ui/dom': ^1.7.6
   '@glint/template': ^1.7.7
-  '@lblod/ember-rdfa-editor-lblod-plugins': 38.1.0-dev.bcbdea22018470dd949caf900efc2c4c46b1bf89
+  '@lblod/ember-rdfa-editor-lblod-plugins': 38.1.0-dev.771ecad1848d69fdf7f0cb1cd260296f00d8b860
   '@lblod/ember-rdfa-editor': 13.18.0
   '@lblod/say-ar-design-plugin': 3.0.0
   '@lblod/say-roadsign-regulation-plugin': 3.0.0
