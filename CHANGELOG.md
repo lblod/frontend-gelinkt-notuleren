@@ -1,5 +1,27 @@
 # frontend-gelinkt-notuleren
 
+## 5.83.1
+
+### Patch Changes
+
+- [`ab3a5d0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/ab3a5d04b14268f8e30176cd1e05443eea9700d3) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor-lblod-plugins v38.2.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v38.2.0)
+
+## 5.83.0
+
+### Minor Changes
+
+- [#932](https://github.com/lblod/frontend-gelinkt-notuleren/pull/932) [`9842678`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/98426785e6ac7a7334f22c56f1d1dae6e16c56cc) Thanks [@kobemertens](https://github.com/kobemertens)! - Add more granular permissions to allow AWV to log in
+
+- [#936](https://github.com/lblod/frontend-gelinkt-notuleren/pull/936) [`e3b5700`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/e3b5700c37ed9b3b7f80e354f695e25f8872a1cc) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Show warning on publication for missing linked decisions
+
+## 5.82.0
+
+### Minor Changes
+
+- [#934](https://github.com/lblod/frontend-gelinkt-notuleren/pull/934) [`2f61779`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2f617791cb6b7d7a616065c6096630c13f70132c) Thanks [@piemonkey](https://github.com/piemonkey)! - Update to [@lblod/ember-rdfa-editor v13.16.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4013.16.0) and [@lblod/ember-rdfa-editor-lblod-plugins v38.1.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v38.1.0)
+
+- [#934](https://github.com/lblod/frontend-gelinkt-notuleren/pull/934) [`2f61779`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2f617791cb6b7d7a616065c6096630c13f70132c) Thanks [@piemonkey](https://github.com/piemonkey)! - Add context menu actions for codelists
+
 ## 5.81.0
 
 ### Minor Changes

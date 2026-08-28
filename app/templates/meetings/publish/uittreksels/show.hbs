@@ -70,7 +70,26 @@
         >
           {{html-safe this.previewDocument.body}}
         </div>
-
+        {{#if this.linkedDecisionWarning}}
+          <AuAlert
+            @icon='alert-triangle'
+            @title={{t 'publish.linked-decision-warning-title'}}
+            @skin='warning'
+          >
+            {{t
+              'timeline-step.extracts-linked-decision-warning-before-link'
+              type=this.linkedDecisionWarning.decisionType
+            }}
+            <LinkTo
+              @route='agendapoints.edit'
+              @model={{this.linkedDecisionWarning.documentContainerUuid}}
+              class='au-c-link'
+            >
+              {{t 'timeline-step.extracts-linked-decision-warning-link'}}
+            </LinkTo>
+            {{t 'timeline-step.extracts-linked-decision-warning-after-link'}}
+          </AuAlert>
+        {{/if}}
         {{#if (and this.errors this.errors.length)}}
           <AuAlert
             @icon='alert-triangle'

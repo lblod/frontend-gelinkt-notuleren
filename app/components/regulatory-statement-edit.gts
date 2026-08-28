@@ -177,6 +177,7 @@ import { getContextualActionGroups as locationActionsGroups } from '@lblod/ember
 import { getCodelistActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/codelist';
 import { getPersonActionGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/variable-plugin/contextual-actions/person';
 import { lmbModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/lmb-plugin';
+import userMay from 'frontend-gelinkt-notuleren/helpers/user-may';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -669,18 +670,25 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
           <TemplateCommentInsert @controller={{container.controller}} />
           <LocationInsert
             @controller={{container.controller}}
-            @defaultMunicipality={{get this.defaultMunicipality 'naam'}}
+            @defaultMunicipality={{if
+              (userMay 'set-default-municipality-in-location-insert')
+              (get this.defaultMunicipality 'naam')
+            }}
             @config={{this.config.location}}
             @insertPlaceholder={{true}}
           />
-          <WorshipInsert
-            @controller={{container.controller}}
-            @config={{this.config.worship}}
-          />
-          <LmbInsert
-            @controller={{container.controller}}
-            @config={{this.config.lmb}}
-          />
+          {{#if (userMay 'insert-editor-worship')}}
+            <WorshipInsert
+              @controller={{container.controller}}
+              @config={{this.config.worship}}
+            />
+          {{/if}}
+          {{#if (userMay 'insert-editor-lmb')}}
+            <LmbInsert
+              @controller={{container.controller}}
+              @config={{this.config.lmb}}
+            />
+          {{/if}}
 
           {{#if this.activeNode}}
             <SnippetInsert

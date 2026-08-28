@@ -543,7 +543,7 @@ meetings:
     cancel: Annuleren
 
 mock-login:
-  administrative-unit-selection: Kies een bestuurseenheid om mee in te loggen.
+  administrative-unit-selection: Kies een account om mee in te loggen.
   administrative-unit-search: Bestuurseenheid zoeken
   search-placeholder: 'Aalst, Berchem, ...'
 
@@ -664,6 +664,12 @@ publish:
   delete-signature-warning: Bent u zeker dat u uw ondertekening wil verwijderen?
   deleted: Verwijderd
   no-publication-actions-message: Er zijn geen publicatieacties beschikbaar
+  linked-decision-warning-of-type-text: van het type
+  linked-decision-warning-after-links: missen mogelijks een verwijzing naar een eerder besluit. Indien een eerdere gecoördineerde versie beschikbaar is, kan die toegevoegd worden. Zoniet wordt dit gepubliceerd als nieuw, zelfstandig besluit.
+  linked-decision-warning-before-plural: besluiten
+  linked-decision-warning-before-singular: besluit
+  linked-decision-warning-and-connector: en
+  linked-decision-warning-title: Verwijzing naar eerder besluit ontbreekt
 
 published-resource:
   published-by-label: Gepubliceerd door
@@ -766,6 +772,9 @@ timeline-step:
   local-loket: 'Loket voor Lokale Besturen'
   publish-warning: 'Vul de ontbrekende informatie aan om te publiceren'
   delete-both-signatures-warning: 'Om het document te kunnen aanpassen moeten beide handtekeningen verwijderd zijn'
+  extracts-linked-decision-warning-before-link: 'Een besluit met type {type} kan verwijzen naar een eerder besluit.'
+  extracts-linked-decision-warning-link: Indien een eerdere gecoördineerde versie beschikbaar is, kan die toegevoegd worden.
+  extracts-linked-decision-warning-after-link: Zoniet wordt dit gepubliceerd als nieuw, zelfstandig besluit.
 
 uittreksel-error:
   header: We kunnen de pagina die u zoekt niet vinden
@@ -798,6 +807,9 @@ utils:
     route:
       title: Pagina niet gevonden
       explanation: Onze excuses, maar we slaagden er niet in om deze pagina terug te vinden.
+  forbidden:
+    title: 'Geen toegang'
+    explanation: 'Het is mogelijk dat u met dit account geen toegang heeft tot deze pagina.'
 
 validation-modal:
   title: Geef uw document een naam

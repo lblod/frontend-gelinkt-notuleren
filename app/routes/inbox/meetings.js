@@ -5,6 +5,8 @@ import setupLoading from '../../utils/setupLoading';
 
 export default class InboxMeetingsRoute extends Route {
   @service store;
+  @service router;
+  @service currentSession;
 
   queryParams = {
     pageSize: { refreshModel: true },
@@ -12,6 +14,12 @@ export default class InboxMeetingsRoute extends Route {
     sort: { refreshModel: true },
     title: { refreshModel: true },
   };
+
+  beforeModel() {
+    if (!this.currentSession.may('view-meetings')) {
+      this.router.transitionTo('forbidden');
+    }
+  }
 
   model(params) {
     const options = {
