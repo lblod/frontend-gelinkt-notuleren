@@ -28,7 +28,7 @@ export default class MeetingsEditAgendapointRoute extends Route {
       await this.store.findRecord<DocumentContainerModel>(
         'document-container',
         params.agendapoint_id,
-        { include: ['status'] },
+        { include: ['status', 'currentVersion', 'attachments'] },
       );
 
     return RSVP.hash({

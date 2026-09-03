@@ -5,7 +5,6 @@ import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import ENV from 'frontend-gelinkt-notuleren/config/environment';
-import type PublishService from 'frontend-gelinkt-notuleren/services/publish';
 import type RouterService from '@ember/routing/router-service';
 import type IntlService from 'ember-intl/services/intl';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
@@ -24,7 +23,6 @@ export default class MeetingsPublishUittrekselsShowController extends Controller
   @tracked signingModalOpen = false;
   @tracked publishingModalOpen = false;
   @tracked _versionedTreatment: VersionedBehandeling | null = null;
-  @service declare publish: PublishService;
   @service declare router: RouterService;
   @service declare intl: IntlService;
   @service declare currentSession: CurrentSessionService;

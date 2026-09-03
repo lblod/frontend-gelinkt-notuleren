@@ -1,6 +1,9 @@
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import type { AdapterPayload } from '@ember-data/legacy-compat';
-import type { Snapshot } from '@ember-data/legacy-compat/legacy-network-handler/snapshot';
+import type {
+  Snapshot,
+  SnapshotRecordArray,
+} from '@ember-data/legacy-compat/-private';
 import type Store from '@ember-data/store';
 import type { ModelSchema } from '@ember-data/store/types';
 import { dasherize } from '@ember/-internals/string';
@@ -39,6 +42,20 @@ export default class ApplicationAdapter extends JSONAPIAdapter {
       );
     }
     return super.findHasMany(store, snapshot, url, relationship);
+  }
+
+  // This is fixed in v5.3.9, but we need to include it for now
+  // This is not called by `query()`, so we need to fix both
+  // https://github.com/warp-drive-data/warp-drive/releases/tag/v5.3.9
+  override buildQuery(snapshot: Snapshot | SnapshotRecordArray) {
+    const include = snapshot.include;
+    if (include && Array.isArray(include)) {
+      // It feels weird to mutate here, but we can't instantiate a new SnapshotRecordArray, so we
+      // have to
+      snapshot.include = include.map(dasherize).join(',');
+    }
+
+    return super.buildQuery(snapshot);
   }
 
   // Copy fix for includes in queries from here: https://github.com/emberjs/data/issues/9588

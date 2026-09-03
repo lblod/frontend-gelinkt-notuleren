@@ -69,7 +69,7 @@ export default class CurrentSessionService extends Service {
           }),
         this.store
           .findRecord<BestuurseenheidModel>('bestuurseenheid', groupId, {
-            include: ['classificatie'],
+            include: ['classificatie', 'bestuursorganen.classificatie'],
           })
           .then(async (group) => {
             this.group = group;
