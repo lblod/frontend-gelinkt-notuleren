@@ -6,9 +6,9 @@ import { task } from 'ember-concurrency';
 import perform from 'ember-concurrency/helpers/perform';
 import { generateExportTextFromEditorDocument } from 'frontend-gelinkt-notuleren/utils/generate-export-from-editor-document';
 import { wrapDownloadedDocument } from 'frontend-gelinkt-notuleren/utils/wrap-downloaded-document';
+import { fetchWithJob } from 'frontend-gelinkt-notuleren/utils/prepublish';
 
 export default class DownloadMeetingPartComponent extends Component {
-  @service publish;
   @service intl;
 
   get buttonSkin() {
@@ -30,7 +30,7 @@ export default class DownloadMeetingPartComponent extends Component {
     );
   }
 
-  downloadMeetingPart = task(async () => {
+  downloadMeetingPart = task({ drop: true }, async () => {
     let route = `/prepublish/${this.args.documentType}`;
     let html;
     switch (this.args.documentType) {
@@ -50,9 +50,7 @@ export default class DownloadMeetingPartComponent extends Component {
         break;
       }
       default: {
-        const json = await this.publish.fetchJobTask.perform(
-          `${route}/${this.args.meeting.id}`,
-        );
+        const json = await fetchWithJob(`${route}/${this.args.meeting.id}`);
         html = json.data.attributes.content;
         break;
       }
