@@ -22,6 +22,7 @@ import AuPill from '@appuniversum/ember-appuniversum/components/au-pill';
 import AuButton from '@appuniversum/ember-appuniversum/components/au-button';
 import AuBodyContainer from '@appuniversum/ember-appuniversum/components/au-body-container';
 import AuIcon from '@appuniversum/ember-appuniversum/components/au-icon';
+import DatePopoverContainer from '@lblod/ember-rdfa-editor-lblod-plugins/components/variable-plugin/date/floating-date-container';
 
 import {
   em,
@@ -704,6 +705,12 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
             @controller={{container.controller}}
             @options={{this.config.date}}
           />
+          {{#if this.controller}}
+            <DatePopoverContainer
+              @controller={{this.controller}}
+              @options={{this.config.date}}
+            />
+          {{/if}}
           <CodelistEdit
             @controller={{container.controller}}
             @options={{this.codelistEditOptions}}
