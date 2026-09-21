@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.84.0
+
+### Minor Changes
+
+- [#938](https://github.com/lblod/frontend-gelinkt-notuleren/pull/938) [`b08c0f0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b08c0f073f8438cf61726804e2ae9745555835cc) Thanks [@kobemertens](https://github.com/kobemertens)! - Add popover for date variables
+
+- [#935](https://github.com/lblod/frontend-gelinkt-notuleren/pull/935) [`2a0cfab`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/2a0cfab7a90b04b72aec4e055b4f2752e1b63ee6) Thanks [@kobemertens](https://github.com/kobemertens)! - Add person suggestion context actions
+
+### Patch Changes
+
+- [#937](https://github.com/lblod/frontend-gelinkt-notuleren/pull/937) [`c3920b0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/c3920b09fe697733fec42c253a2f6acf157e1360) Thanks [@piemonkey](https://github.com/piemonkey)! - Greatly improve performance of notulen pre-publish step by removing duplicate work
+
+- [#937](https://github.com/lblod/frontend-gelinkt-notuleren/pull/937) [`724575b`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/724575b4a2be86e2209fbfaa830dda0439784ba0) Thanks [@piemonkey](https://github.com/piemonkey)! - Fix handling of 500 responses when polling for task completion
+
+- [`987b1a8`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/987b1a84d79d7af8b7a3f4ada93676d4fd8799e9) Thanks [@piemonkey](https://github.com/piemonkey)! - Update [@lblod/ember-rdfa-editor to v13.18.0](https://github.com/lblod/ember-rdfa-editor/releases/tag/%40lblod%2Fember-rdfa-editor%4013.18.0)
+
 ## 5.83.1
 
 ### Patch Changes
