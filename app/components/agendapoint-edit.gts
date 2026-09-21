@@ -72,6 +72,7 @@ import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins
 import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
 import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
 import userMay from 'frontend-gelinkt-notuleren/helpers/user-may';
+import DatePopoverContainer from '@lblod/ember-rdfa-editor-lblod-plugins/components/variable-plugin/date/floating-date-container';
 
 interface AgendapointEditSig {
   Args: {
@@ -625,6 +626,12 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
               @controller={{container.controller}}
               @options={{this.config.date}}
             />
+            {{#if this.controller}}
+              <DatePopoverContainer
+                @controller={{this.controller}}
+                @options={{this.config.date}}
+              />
+            {{/if}}
             <CodelistEdit
               @controller={{container.controller}}
               @options={{this.agendapointEditor.codelistEditOptions}}
