@@ -8589,9 +8589,6 @@ packages:
   prosemirror-keymap@1.2.3:
     resolution: {integrity: sha512-4HucRlpiLd1IPQQXNqeo81BGtkY8Ai5smHhKW9jjPKRc2wQIxksg7Hl1tTI2IfT2B/LgX6bfYvXxEpJl7aKYKw==}
 
-  prosemirror-model@1.25.6:
-    resolution: {integrity: sha512-RIm+e9BiqAaJ1mRECv3vR3C+VG8ELoTTI+47tVudGi82yLnFOx3G/p/iSPK1HmHQdKhkkrJ68NJqxh7S+FBVmQ==}
-
   prosemirror-model@1.25.9:
     resolution: {integrity: sha512-pRTklkDDMMRopyoAcrr9wV/8g/RYgrLHBuJAb5hlEuYZRdm5yqmPjWId83fpBwPpSFqEdja0H7Dfd7z1X/npcA==}
 
@@ -21263,7 +21260,7 @@ snapshots:
       jotai: 2.20.0(@babel/core@7.29.0(supports-color@8.1.1))(@babel/template@7.28.6)(@types/react@19.1.13)(react@19.2.6)
       jsondiffpatch: 0.7.6
       nanoid: 5.1.11
-      prosemirror-model: 1.25.6
+      prosemirror-model: 1.25.9
       prosemirror-state: 1.4.4
       react: 19.2.6
       react-dock: 0.8.0(@types/react@19.1.13)(react@19.2.6)
@@ -21289,10 +21286,6 @@ snapshots:
     dependencies:
       prosemirror-state: 1.4.4
       w3c-keyname: 2.2.8
-
-  prosemirror-model@1.25.6:
-    dependencies:
-      orderedmap: 2.1.1
 
   prosemirror-model@1.25.9:
     dependencies:
