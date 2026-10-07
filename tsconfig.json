@@ -1,9 +1,5 @@
 {
   "extends": "@ember/app-tsconfig",
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"],
-    "checkStandaloneTemplates": false
-  },
   "compilerOptions": {
     "allowJs": true,
     // "checkJs": true,
@@ -29,7 +25,6 @@
       "./node_modules/@ember-data-types/store/unstable-preview-types",
       "./node_modules/@ember-data-types/tracking/unstable-preview-types",
       "./node_modules/@warp-drive-types/core-types/unstable-preview-types",
-      "./node_modules/@warp-drive/core-types/unstable-preview-types",
       "./node_modules/ember-data-types/unstable-preview-types"
     ]
   }
