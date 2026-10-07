@@ -207,7 +207,11 @@ export default class AgendapointEditorService extends Service {
   get config() {
     const classificatie = this.currentSession
       .classificatie as BestuurseenheidClassificatieCodeModel;
-    const municipality = this.currentSession.group as BestuurseenheidModel;
+    const administrativeUnit = this.currentSession
+      .group as BestuurseenheidModel;
+    const administrativeUnitLabelWithClassificationPrefix = this.currentSession
+      .administrativeUnitLabelWithClassificationPrefix as string;
+
     const articleUriGenerator = () =>
       `http://data.lblod.info/artikels/${uuidv4()}`;
     return {
@@ -242,7 +246,7 @@ export default class AgendapointEditorService extends Service {
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV['publicatieEndpoint'],
-        defaultDecisionsGovernmentName: municipality.naam as string,
+        defaultDecisionsGovernmentName: administrativeUnit.naam as string,
       },
       link: {
         interactive: true,
@@ -262,10 +266,10 @@ export default class AgendapointEditorService extends Service {
       },
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
-        defaultAdministrativeUnit: municipality.uri
+        defaultAdministrativeUnit: administrativeUnit.uri
           ? {
-              label: municipality.naam as string,
-              uri: municipality.uri,
+              label: administrativeUnit.naam as string,
+              uri: administrativeUnit.uri,
             }
           : undefined,
       },
@@ -291,12 +295,16 @@ export default class AgendapointEditorService extends Service {
       },
       lmb: {
         endpoint: '/sparql',
-
-        defaultAdminUnit: municipality.naam as string,
+        defaultAdminUnit: administrativeUnit.uri
+          ? {
+              label: administrativeUnitLabelWithClassificationPrefix,
+              uri: administrativeUnit.uri,
+            }
+          : undefined,
       },
       autofilledVariable: {
         autofilledValues: {
-          administrativeUnit: `${municipality.naam}`,
+          administrativeUnit: `${administrativeUnit.naam}`,
         },
       },
       insertArticle: {

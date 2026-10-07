@@ -82,4 +82,16 @@ export default class CurrentSessionService extends Service {
   hasRole(role: AuthorizationRole) {
     return this.roles.includes(role);
   }
+
+  get administrativeUnitLabelWithClassificationPrefix() {
+    if (!this.group || !this.group.naam) {
+      return;
+    }
+    const administrativeUnitLabel = this.group.naam;
+    const prefix =
+      this.classificatie && this.classificatie.label
+        ? `${this.classificatie.label} `
+        : '';
+    return `${prefix}${administrativeUnitLabel}`;
+  }
 }
