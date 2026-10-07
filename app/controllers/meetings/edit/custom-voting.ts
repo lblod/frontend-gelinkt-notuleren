@@ -62,12 +62,17 @@ import type { ModelFrom } from 'frontend-gelinkt-notuleren/utils/types';
 import type MeetingsEditCustomVotingRoute from 'frontend-gelinkt-notuleren/routes/meetings/edit/custom-voting';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import type { PromiseBelongsTo } from '@ember-data/model/-private';
+import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
+import { lmbModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/lmb-plugin';
 
 export default class MeetingsEditManualVotingController extends Controller {
   declare model: ModelFrom<MeetingsEditCustomVotingRoute>;
+
   @service declare router: RouterService;
   @service declare intl: IntlService;
   @service declare documentService: DocumentService;
+  @service declare currentSession: CurrentSessionService;
+
   profile = 'none';
   @tracked editor?: SayController | null;
   @tracked _editorDocument?: EditorDocumentModel;
@@ -191,6 +196,9 @@ export default class MeetingsEditManualVotingController extends Controller {
   }
 
   get config() {
+    const administrativeUnit = this.currentSession.group;
+    const administrativeUnitLabelWithClassificationPrefix =
+      this.currentSession.administrativeUnitLabelWithClassificationPrefix;
     return {
       link: {
         interactive: true,
@@ -221,6 +229,12 @@ export default class MeetingsEditManualVotingController extends Controller {
         // not raw-sparql as this is quite a slow query
         // and the Person instances in LMB aren't likely to change very much
         endpoint: '/sparql',
+        defaultAdminUnit: administrativeUnit?.uri
+          ? {
+              uri: administrativeUnit.uri,
+              label: administrativeUnitLabelWithClassificationPrefix as string,
+            }
+          : undefined,
       },
     };
   }
@@ -232,6 +246,7 @@ export default class MeetingsEditManualVotingController extends Controller {
       linkPasteHandler(this.schema.nodes.link),
       // @ts-expect-error emberApplication should accept undefined as getOwner may return it
       emberApplication({ application: getOwner(this) }),
+      lmbModalsPlugin(),
     ];
   }
 

@@ -188,6 +188,7 @@ import { sayDataFactory } from '@lblod/ember-rdfa-editor/core/say-data-factory';
 import { getShapeOfDocumentType } from '@lblod/lib-decision-shapes';
 import AuModal from '@appuniversum/ember-appuniversum/components/au-modal';
 import userMay from 'frontend-gelinkt-notuleren/helpers/user-may';
+import { lmbModalsPlugin } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/lmb-plugin';
 
 interface RegulatoryStatementEditSig {
   Args: {
@@ -312,6 +313,7 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       emberApplication({ application: getOwner(this) }),
       variableAutofillerPlugin(this.config.autofilledVariable),
       documentValidationPlugin(this.config.documentValidation),
+      lmbModalsPlugin(),
     ];
   }
 
@@ -324,6 +326,8 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
 
   get config() {
     const municipality = this.defaultMunicipality;
+    const administrativeUnitLabelWithClassificationPrefix =
+      this.currentSession.administrativeUnitLabelWithClassificationPrefix;
     return {
       tableOfContents: {
         scrollContainer: () =>
@@ -396,6 +400,12 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       },
       lmb: {
         endpoint: '/raw-sparql',
+        defaultAdminUnit: municipality?.uri
+          ? {
+              label: administrativeUnitLabelWithClassificationPrefix as string,
+              uri: municipality.uri,
+            }
+          : undefined,
       },
       autofilledVariable: {
         autofilledValues: {
