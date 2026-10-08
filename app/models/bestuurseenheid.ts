@@ -18,12 +18,14 @@ export default class BestuurseenheidModel extends Model {
   @attr alternatieveNaam: Option<string>;
   @attr wilMailOntvangen: Option<string>;
   @attr mailAdres: Option<string>;
-  @attr uri: Option<string>;
+  @attr declare uri: string;
 
   @belongsTo('werkingsgebied', { inverse: 'bestuurseenheid', async: true })
   declare werkingsgebied: AsyncBelongsTo<WerkingsgebiedModel>;
+
   @belongsTo('werkingsgebied', { inverse: null, async: true })
   declare provincie: AsyncBelongsTo<WerkingsgebiedModel>;
+
   @belongsTo<BestuurseenheidClassificatieCodeModel>(
     'bestuurseenheid-classificatie-code',
     {
@@ -43,4 +45,14 @@ export default class BestuurseenheidModel extends Model {
     bestuursorgaan: 'http://data.vlaanderen.be/ns/besluit#bestuurt',
     classificatie: 'http://data.vlaanderen.be/ns/besluit#classificatie',
   };
+
+  get fullName() {
+    if (!this.naam) {
+      return '<Naam bestuurseenheid niet gevonden>';
+    }
+    const classificatie = this.classificatie.content;
+    const prefix =
+      classificatie && classificatie.label ? `${classificatie.label} ` : '';
+    return `${prefix}${this.naam}`;
+  }
 }

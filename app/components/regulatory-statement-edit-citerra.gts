@@ -326,8 +326,6 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
 
   get config() {
     const municipality = this.defaultMunicipality;
-    const administrativeUnitLabelWithClassificationPrefix =
-      this.currentSession.administrativeUnitLabelWithClassificationPrefix;
     return {
       tableOfContents: {
         scrollContainer: () =>
@@ -400,9 +398,9 @@ export default class RegulatoryStatementEditCiterra extends Component<Regulatory
       },
       lmb: {
         endpoint: '/raw-sparql',
-        defaultAdminUnit: municipality?.uri
+        defaultAdminUnit: municipality
           ? {
-              label: administrativeUnitLabelWithClassificationPrefix as string,
+              label: municipality.fullName,
               uri: municipality.uri,
             }
           : undefined,

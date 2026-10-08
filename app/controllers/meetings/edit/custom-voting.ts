@@ -197,8 +197,6 @@ export default class MeetingsEditManualVotingController extends Controller {
 
   get config() {
     const administrativeUnit = this.currentSession.group;
-    const administrativeUnitLabelWithClassificationPrefix =
-      this.currentSession.administrativeUnitLabelWithClassificationPrefix;
     return {
       link: {
         interactive: true,
@@ -229,10 +227,10 @@ export default class MeetingsEditManualVotingController extends Controller {
         // not raw-sparql as this is quite a slow query
         // and the Person instances in LMB aren't likely to change very much
         endpoint: '/sparql',
-        defaultAdminUnit: administrativeUnit?.uri
+        defaultAdminUnit: administrativeUnit
           ? {
               uri: administrativeUnit.uri,
-              label: administrativeUnitLabelWithClassificationPrefix as string,
+              label: administrativeUnit.fullName,
             }
           : undefined,
       },

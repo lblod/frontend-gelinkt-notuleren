@@ -321,8 +321,6 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
 
   get config() {
     const municipality = this.defaultMunicipality;
-    const administrativeUnitLabelWithClassificationPrefix =
-      this.currentSession.administrativeUnitLabelWithClassificationPrefix;
     return {
       tableOfContents: {
         scrollContainer: () =>
@@ -390,9 +388,9 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       },
       lmb: {
         endpoint: '/raw-sparql',
-        defaultAdminUnit: municipality?.uri
+        defaultAdminUnit: municipality
           ? {
-              label: administrativeUnitLabelWithClassificationPrefix as string,
+              label: municipality.fullName,
               uri: municipality.uri,
             }
           : undefined,
