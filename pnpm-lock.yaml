@@ -37,8 +37,8 @@ catalogs:
       specifier: ^1.7.7
       version: 1.7.7
     '@lblod/ember-rdfa-editor-lblod-plugins':
-      specifier: 38.3.0-dev.2bef571d625ecc10d67b7239568c835ad2457278
-      version: 38.3.0-dev.2bef571d625ecc10d67b7239568c835ad2457278
+      specifier: 39.0.0
+      version: 39.0.0
     '@lblod/say-ar-design-plugin':
       specifier: 3.0.0
       version: 3.0.0
@@ -307,7 +307,7 @@ importers:
         version: 13.19.0(8b050a03c2072a9ea84759736326b707)
       '@lblod/ember-rdfa-editor-lblod-plugins':
         specifier: 'catalog:'
-        version: 38.3.0-dev.2bef571d625ecc10d67b7239568c835ad2457278(c5dead85c834b7d0014f546f85d461a6)
+        version: 39.0.0(c5dead85c834b7d0014f546f85d461a6)
       '@lblod/say-ar-design-plugin':
         specifier: 'catalog:'
         version: 3.0.0(7edbc3fca06cd6514ce5d6ee76964e4e)
@@ -2085,8 +2085,8 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@38.3.0-dev.2bef571d625ecc10d67b7239568c835ad2457278':
-    resolution: {integrity: sha512-PSkr5TF0cmhYEAg0e/RkcPdj3NA0s1EL/CNOpfM1G4sq3KUX+H5dDl9HdHN6cyLCEnSyYpobs1ThH+ejS60r2Q==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@39.0.0':
+    resolution: {integrity: sha512-pBTs29oRHfTY32QIGNhCUkRIVSHv94ndbgFMnGvSXfs1C1FqzUOUkWd38Y1yZCmrjQPIyWg0X4f0os6dQ2QM5A==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0 || ^4.0.0
@@ -12686,7 +12686,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@38.3.0-dev.2bef571d625ecc10d67b7239568c835ad2457278(c5dead85c834b7d0014f546f85d461a6)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@39.0.0(c5dead85c834b7d0014f546f85d461a6)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.7.7)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.7.7)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
       '@babel/core': 7.29.0(supports-color@8.1.1)
