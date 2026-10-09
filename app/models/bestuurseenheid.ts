@@ -10,8 +10,12 @@ import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option
 import type WerkingsgebiedModel from './werkingsgebied';
 import type BestuurseenheidClassificatieCodeModel from './bestuurseenheid-classificatie-code';
 import type BestuursorgaanModel from './bestuursorgaan';
+import { service } from '@ember/service';
+import type IntlService from 'ember-intl/services/intl';
 
 export default class BestuurseenheidModel extends Model {
+  @service declare intl: IntlService;
+
   declare [Type]: 'bestuurseenheid';
 
   @attr naam: Option<string>;
@@ -48,7 +52,7 @@ export default class BestuurseenheidModel extends Model {
 
   get fullName() {
     if (!this.naam) {
-      return '<Naam bestuurseenheid niet gevonden>';
+      return this.intl.t('administrative-unit.name-not-found');
     }
     const classificatie = this.classificatie.content;
     const prefix =

@@ -23,6 +23,9 @@ administrative-body-select:
   period: 'period'
   not-applicable: n/a
 
+administrative-unit:
+  name-not-found: <Administrative unit name not found>
+
 application:
   flanders-logo: Logo of the Flemish government
   loading: Loading

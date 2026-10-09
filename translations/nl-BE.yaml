@@ -23,6 +23,9 @@ administrative-body-select:
   period: 'periode'
   not-applicable: nvt.
 
+administrative-unit:
+  name-not-found: <Naam bestuurseenheid niet gevonden>
+
 application:
   flanders-logo: Logo van de vlaamse overheid
   loading: Aan het laden
