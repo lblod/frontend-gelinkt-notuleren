@@ -37,8 +37,8 @@ catalogs:
       specifier: ^1.9.0
       version: 1.9.0
     '@lblod/ember-rdfa-editor-lblod-plugins':
-      specifier: 38.3.0
-      version: 38.3.0
+      specifier: 39.0.0
+      version: 39.0.0
     '@lblod/say-ar-design-plugin':
       specifier: 3.0.0
       version: 3.0.0
@@ -301,7 +301,7 @@ importers:
         version: 13.19.0(e9cd3297392c9274ae211b90978eeba0)
       '@lblod/ember-rdfa-editor-lblod-plugins':
         specifier: 'catalog:'
-        version: 38.3.0(e5436a9bc641355df1aea2290b00de63)
+        version: 39.0.0(e5436a9bc641355df1aea2290b00de63)
       '@lblod/say-ar-design-plugin':
         specifier: 'catalog:'
         version: 3.0.0(ae0247bb3b8d439674e98607428c1a9a)
@@ -2064,8 +2064,8 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@38.3.0':
-    resolution: {integrity: sha512-StLhp0Lzy3PV9RuJm4sJn+Apx+Fr6NObfb1d+rIL2e3k6Tnle4rjjPP2W+Z5ezS/akk33jimAS8PonEzY/DC+w==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@39.0.0':
+    resolution: {integrity: sha512-pBTs29oRHfTY32QIGNhCUkRIVSHv94ndbgFMnGvSXfs1C1FqzUOUkWd38Y1yZCmrjQPIyWg0X4f0os6dQ2QM5A==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0 || ^4.0.0
@@ -2733,9 +2733,6 @@ packages:
 
   '@tpluscode/rdf-ns-builders@5.0.0':
     resolution: {integrity: sha512-rtMFbArdief+s0z2A3TOb/gNe5O5xn9LDiEpilCf6lGYCUIfyqoOvZY80fS/eILwcF2Mj6cUQN1WBQ+1neJmaw==}
-
-  '@tybys/wasm-util@0.10.2':
-    resolution: {integrity: sha512-RoBvJ2X0wuKlWFIjrwffGw1IqZHKQqzIchKaadZZfnNpsAYp2mM0h36JtPCjNDAHGgYez/15uMBpfGwchhiMgg==}
 
   '@tybys/wasm-util@0.10.4':
     resolution: {integrity: sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A==}
@@ -12803,7 +12800,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@38.3.0(e5436a9bc641355df1aea2290b00de63)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@39.0.0(e5436a9bc641355df1aea2290b00de63)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.0(supports-color@8.1.1))(@glint/template@1.9.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.9.0)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.9.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.9.0)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3)))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.0(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.106.2(postcss@8.5.14)(uglify-js@3.19.3))
       '@babel/core': 7.29.0(supports-color@8.1.1)
@@ -13146,7 +13143,7 @@ snapshots:
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
-      '@tybys/wasm-util': 0.10.2
+      '@tybys/wasm-util': 0.10.4
     optional: true
 
   '@napi-rs/wasm-runtime@1.2.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
@@ -13661,11 +13658,6 @@ snapshots:
       '@rdfjs/types': 2.0.1
       '@types/rdfjs__namespace': 2.0.10
       '@zazuko/prefixes': 2.6.1
-
-  '@tybys/wasm-util@0.10.2':
-    dependencies:
-      tslib: 2.8.1
-    optional: true
 
   '@tybys/wasm-util@0.10.4':
     dependencies:

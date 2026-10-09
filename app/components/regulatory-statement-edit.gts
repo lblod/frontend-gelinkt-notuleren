@@ -388,6 +388,12 @@ export default class RegulatoryStatementEdit extends Component<RegulatoryStateme
       },
       lmb: {
         endpoint: '/raw-sparql',
+        defaultAdminUnit: municipality
+          ? {
+              label: municipality.fullName,
+              uri: municipality.uri,
+            }
+          : undefined,
       },
       autofilledVariable: {
         autofilledValues: {
