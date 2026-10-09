@@ -12,6 +12,7 @@
       "*": ["./types/*"]
     },
     "types": [
+      "@glint/ember-tsc/types",
       "./node_modules/ember-source/types/stable",
       "./node_modules/@ember-data-types/adapter/unstable-preview-types",
       "./node_modules/@ember-data-types/graph/unstable-preview-types",
