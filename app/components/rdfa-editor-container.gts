@@ -238,8 +238,11 @@ export default class RdfaEditorContainerComponent extends Component<Sig> {
       {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
       vocab={{this.vocab}}
       {{this.setUpPrefixAttr}}
+      {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
       typeof='{{@typeOfWrappingDiv}}'
+      {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
       property='{{@property}}'
+      {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
       resource='#'
     >
       {{#if @busy}}

@@ -553,9 +553,7 @@ export default class MeetingForm extends Component<Signature> {
             {{t 'meeting-form.back-button'}}
           </AuLink>
           <span class='au-c-app-chrome__entity'>
-            {{! @glint-expect-error we should load this correctly }}
-            {{this.currentSession.group.classificatie.label}}
-            {{this.currentSession.group.naam}}
+            {{this.currentSession.group.fullName}}
           </span>
         </Group>
         <Group>

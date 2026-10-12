@@ -205,9 +205,9 @@ export default class AgendapointEditorService extends Service {
   ];
 
   get config() {
-    const classificatie = this.currentSession
-      .classificatie as BestuurseenheidClassificatieCodeModel;
-    const municipality = this.currentSession.group as BestuurseenheidModel;
+    const classificatie = this.currentSession.classificatie;
+    const administrativeUnit = this.currentSession.group;
+
     const articleUriGenerator = () =>
       `http://data.lblod.info/artikels/${uuidv4()}`;
     return {
@@ -242,7 +242,7 @@ export default class AgendapointEditorService extends Service {
         },
         endpoint: '/codex/sparql',
         decisionsEndpoint: ENV['publicatieEndpoint'],
-        defaultDecisionsGovernmentName: municipality.naam as string,
+        defaultDecisionsGovernmentName: administrativeUnit?.naam as string,
       },
       link: {
         interactive: true,
@@ -262,10 +262,10 @@ export default class AgendapointEditorService extends Service {
       },
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
-        defaultAdministrativeUnit: municipality.uri
+        defaultAdministrativeUnit: administrativeUnit
           ? {
-              label: municipality.naam as string,
-              uri: municipality.uri,
+              label: administrativeUnit.fullName,
+              uri: administrativeUnit.uri,
             }
           : undefined,
       },
@@ -291,13 +291,19 @@ export default class AgendapointEditorService extends Service {
       },
       lmb: {
         endpoint: '/sparql',
-
-        defaultAdminUnit: municipality.naam as string,
+        defaultAdminUnit: administrativeUnit
+          ? {
+              label: administrativeUnit.fullName,
+              uri: administrativeUnit.uri,
+            }
+          : undefined,
       },
       autofilledVariable: {
-        autofilledValues: {
-          administrativeUnit: `${municipality.naam}`,
-        },
+        autofilledValues: administrativeUnit?.naam
+          ? {
+              administrativeUnit: administrativeUnit.naam,
+            }
+          : ({} as Record<string, string>),
       },
       insertArticle: {
         uriGenerator: articleUriGenerator,
