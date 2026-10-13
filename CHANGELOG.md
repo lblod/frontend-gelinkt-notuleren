@@ -1,5 +1,21 @@
 # frontend-gelinkt-notuleren
 
+## 5.85.0
+
+### Minor Changes
+
+- [#940](https://github.com/lblod/frontend-gelinkt-notuleren/pull/940) [`4680143`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/46801438037f31bf458b06cc64d50e8977c5c339) Thanks [@elpoelma](https://github.com/elpoelma)! - Update @lblod/ember-rdfa-editor-lblod-plugins to version [39.0.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v39.0.0) including more performant version of LMB plugin
+
+### Patch Changes
+
+- [#939](https://github.com/lblod/frontend-gelinkt-notuleren/pull/939) [`8a4cac5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8a4cac5298abc8a408b4acad8727c92355541fa8) Thanks [@lagartoverde](https://github.com/lagartoverde)! - bump plugins to [v39.1.1](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v39.1.1)
+
+- [`bffdf8a`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/bffdf8afae59d929fc7569a2f83264209bb578b4) Thanks [@abeforgit](https://github.com/abeforgit)! - Add CI check for dev packages
+
+- [#941](https://github.com/lblod/frontend-gelinkt-notuleren/pull/941) [`3d67985`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/3d679856b0474200f0caf971d56a689b130fd387) Thanks [@elpoelma](https://github.com/elpoelma)! - tooling: move to glint v2
+
+- [#939](https://github.com/lblod/frontend-gelinkt-notuleren/pull/939) [`8a4cac5`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/8a4cac5298abc8a408b4acad8727c92355541fa8) Thanks [@lagartoverde](https://github.com/lagartoverde)! - Bump editor to [@lblod](https://github.com/lblod/ember-rdfa-editor/releases/tag/@lblod/ember-rdfa-editor@13.20.1)
+
 ## 5.84.0
 
 ### Minor Changes
