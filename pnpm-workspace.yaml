@@ -1,18 +1,18 @@
 catalog:
-  '@babel/core': ^7.29.0
-  '@babel/eslint-parser': ^7.28.6
-  '@babel/plugin-proposal-decorators': ^7.29.0
+  '@babel/core': ^7.29.7
+  '@babel/eslint-parser': ^7.29.9
+  '@babel/plugin-proposal-decorators': ^7.29.7
   '@changesets/changelog-github': ^0.7.0
   '@changesets/cli': ^2.31.0
   '@ember/app-tsconfig': ^2.0.0
   '@eslint/js': ^9.39.4
   '@faker-js/faker': ^10.4.0
   '@floating-ui/dom': ^1.7.6
-  '@lblod/ember-rdfa-editor-lblod-plugins': 38.3.0-dev.d90fd82598dbe0c2a18f7ced268012b9d80a4352
+  '@lblod/ember-rdfa-editor-lblod-plugins': 39.1.1
   '@glint/template': ^1.9.0
-  '@lblod/ember-rdfa-editor': 13.19.0
-  '@lblod/say-ar-design-plugin': 3.0.0
-  '@lblod/say-roadsign-regulation-plugin': 3.0.0
+  '@lblod/ember-rdfa-editor': 13.20.1
+  '@lblod/say-ar-design-plugin': 3.1.0
+  '@lblod/say-roadsign-regulation-plugin': 3.1.0
   '@nullvoxpopuli/ember-composable-helpers': ^5.3.2
   '@tsconfig/ember': ^3.0.12
   changeset: ^0.2.6
@@ -20,7 +20,7 @@ catalog:
   dotenv: ^16.6.1
   ember-basic-dropdown: 8.11.1
   ember-changeset: ^4.2.0
-  ember-cli-babel: ^8.3.1
+  ember-cli-babel: ^8.3.2
   ember-concurrency: ^4.0.6
   ember-data-resources: ^5.3.2
   ember-intl: ^7.5.0
@@ -52,7 +52,7 @@ catalog:
   typescript: ^5.9.3
   typescript-eslint: ^8.59.3
   uuid: ^9.0.1
-  webpack: ^5.106.2
+  webpack: ^5.111.1
   zod: ^3.25.76
 overrides:
   '@ember/test-waiters': $@ember/test-waiters
