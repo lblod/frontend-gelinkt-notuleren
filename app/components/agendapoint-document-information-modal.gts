@@ -138,6 +138,7 @@ export default class AgendapointDocumentInformationModal extends Component<Sig> 
       @besluitTypeOptions={{@besluitTypeOptions}}
       @besluitTopicOptions={{@besluitTopicOptions}}
       @besluitTargetGroupOptions={{@besluitTargetGroupOptions}}
+      @saveDisabled={{this.disableSave}}
       @onSave={{this.save.perform}}
       @onCancel={{this.cancel}}
       as |DIM|
