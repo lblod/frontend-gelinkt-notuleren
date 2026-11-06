@@ -14,6 +14,9 @@ import { tracked } from '@glimmer/tracking';
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import LinkedDecisionSelect from '../linked-decision-select';
+
+import BesluitTargetGroupField from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-target-group-plugin/besluit-target-group-field';
+import type { BesluitTargetGroup } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-target-group-plugin/types';
 export type LinkedDecisionOption = {
   uri: string;
   title: string;
@@ -27,6 +30,9 @@ interface Sig {
     selectedType?: BesluitTypeInstance;
     decisionTypes?: BesluitType[];
     setDecisionType?: (selected: BesluitTypeInstance) => void;
+    selectedDecisionTargetGroups?: BesluitTargetGroup[];
+    decisionTargetGroups?: BesluitTargetGroup[];
+    setDecisionTargetGroups?: (selected: BesluitTargetGroup[]) => void;
     linkedDecisionUri?: string;
     updateLinkedDecision: (linkedDecisionOption: LinkedDecisionOption) => void;
   };
@@ -75,6 +81,16 @@ export default class MetadataForm extends Component<Sig> {
             @types={{@decisionTypes}}
             @selectedType={{@selectedType}}
             @setType={{@setDecisionType}}
+            @renderInPlace={{false}}
+          />
+        {{/if}}
+      {{/if}}
+      {{#if @decisionTargetGroups}}
+        {{#if @setDecisionTargetGroups}}
+          <BesluitTargetGroupField
+            @targetGroups={{@decisionTargetGroups}}
+            @selected={{@selectedDecisionTargetGroups}}
+            @onChange={{@setDecisionTargetGroups}}
             @renderInPlace={{false}}
           />
         {{/if}}

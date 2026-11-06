@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { service } from '@ember/service';
 import { on } from '@ember/modifier';
-import { tracked } from '@glimmer/tracking';
+import { cached, tracked } from '@glimmer/tracking';
 import { task } from 'ember-concurrency';
 import t from 'ember-intl/helpers/t';
 import { not } from 'ember-truth-helpers';
@@ -26,6 +26,13 @@ import MetadataForm, { type LinkedDecisionOption } from './metadata-form';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import { localCopy } from 'tracked-toolbox';
 import type ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
+import type {
+  BesluitTargetGroup,
+  BesluitTargetGroupPluginOptions,
+} from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-target-group-plugin/types';
+import { fetchBesluitTargetGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-target-group-plugin/queries';
+import { extractBesluitTargetGroupUris } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-target-group-plugin/extract-besluit-target-group-uris';
+import { getPromiseState } from 'reactiveweb/get-promise-state';
 
 const truthy = (test: unknown) => !!test;
 
@@ -37,6 +44,7 @@ interface Sig {
     onCancel: () => void;
     onCreate: (container: unknown, template: Template) => Promise<void>;
     decisionTypeOptions?: BesluitTypePluginOptions;
+    decisionTargetGroupOptions?: BesluitTargetGroupPluginOptions;
     container?: DocumentContainerModel;
     statusOfNewDocument?: ConceptModel;
     documentTitle?: string;
@@ -48,12 +56,15 @@ export default class DocumentCreatorModal extends Component<Sig> {
   @service declare currentSession: CurrentSessionService;
   @service('editor/agendapoint')
   declare agendapointEditor: AgendapointEditorService;
+
   @tracked selectedTemplate: Template | undefined;
   @localCopy('args.documentTitle') title = '';
   @tracked invalidTitle = false;
   @tracked decisionType?: BesluitTypeInstance;
   @tracked decisionTypes?: BesluitType[];
   @tracked linkedDecisionUri?: string;
+
+  @tracked stagedTargetGroups?: BesluitTargetGroup[];
 
   constructor(owner: unknown, args: Sig['Args']) {
     super(owner, args);
@@ -74,7 +85,8 @@ export default class DocumentCreatorModal extends Component<Sig> {
     );
   }
 
-  selectTemplate = (template: Template) => {
+  selectTemplate = async (template: Template) => {
+    await template.loadBody?.();
     this.selectedTemplate = template;
     if (this.decisionTypes) {
       this.detectDecisionTypeFromTemplate.perform(template).catch((err) => {
@@ -90,9 +102,9 @@ export default class DocumentCreatorModal extends Component<Sig> {
     this.decisionType = selected;
   };
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   detectDecisionTypeFromTemplate = task(async (template: Template) => {
     if (!this.decisionTypes) return;
-    await template.loadBody?.();
     const templateDecisionType =
       this.agendapointEditor.extractFromDocumentHeadlessly(
         template.body ?? '',
@@ -114,6 +126,32 @@ export default class DocumentCreatorModal extends Component<Sig> {
     }
   };
 
+  get selectedTargetGroups() {
+    return this.stagedTargetGroups ?? this.templateTargetGroups;
+  }
+
+  get templateTargetGroups() {
+    if (!this.selectedTemplate || !this.selectedTemplate.body) {
+      return [];
+    }
+    const targetGroups = this.targetGroups.resolved;
+    if (!targetGroups) {
+      return [];
+    }
+    const uris = this.agendapointEditor.extractFromDocumentHeadlessly(
+      this.selectedTemplate.body,
+      (state) => extractBesluitTargetGroupUris(state),
+    );
+    if (!uris.length) {
+      return [];
+    }
+    return targetGroups.filter((topic) => uris.includes(topic.uri));
+  }
+
+  setTargetGroups = (selected: BesluitTargetGroup[]) => {
+    this.stagedTargetGroups = selected;
+  };
+
   onCancel = () => this.args.onCancel?.();
 
   create = task(async () => {
@@ -124,6 +162,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
         folderId: this.args.folderId,
         group: this.currentSession.group as BestuurseenheidModel,
         decisionType: this.decisionType,
+        decisionTargetGroups: this.selectedTargetGroups,
         linkedDecisionUri: this.linkedDecisionUri,
         container: this.args.container,
         status: this.args.statusOfNewDocument,
@@ -138,6 +177,20 @@ export default class DocumentCreatorModal extends Component<Sig> {
       this.decisionTypes = await fetchBesluitTypes(classificatieUri, endpoint);
     }
   });
+
+  @cached
+  get targetGroupsPromise() {
+    if (!this.args.decisionTargetGroupOptions) {
+      return;
+    }
+    return fetchBesluitTargetGroups({
+      config: this.args.decisionTargetGroupOptions,
+    });
+  }
+
+  get targetGroups() {
+    return getPromiseState(this.targetGroupsPromise);
+  }
 
   updateLinkedDecision = (
     linkedDecisionOption: LinkedDecisionOption | null,
@@ -184,6 +237,9 @@ export default class DocumentCreatorModal extends Component<Sig> {
           @selectedType={{this.decisionType}}
           @decisionTypes={{this.decisionTypes}}
           @setDecisionType={{this.setDecisionType}}
+          @decisionTargetGroups={{this.targetGroups.resolved}}
+          @selectedDecisionTargetGroups={{this.selectedTargetGroups}}
+          @setDecisionTargetGroups={{this.setTargetGroups}}
           @updateLinkedDecision={{this.updateLinkedDecision}}
           @linkedDecisionUri={{this.linkedDecisionUri}}
         />
