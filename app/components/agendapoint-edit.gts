@@ -67,7 +67,7 @@ import ConfirmRouteLeave from 'frontend-gelinkt-notuleren/components/confirm-rou
 import ArImporterSidebarWidget from '@lblod/say-ar-design-plugin/components/sidebar-widget';
 import RegulatoryStatementsSidebarInsert from 'frontend-gelinkt-notuleren/components/editor-plugins/regulatory-statements/sidebar-insert';
 import type ZittingModel from 'frontend-gelinkt-notuleren/models/zitting';
-import DocumentInformationModal from 'frontend-gelinkt-notuleren/components/document-information-modal';
+import AgendapointDocumentInformationModal from 'frontend-gelinkt-notuleren/components/agendapoint-document-information-modal';
 import type { GetContextualActionGroups } from '@lblod/ember-rdfa-editor/plugins/contextual-actions';
 import type { ArDesignQuery } from '@lblod/say-ar-design-plugin/plugin/types';
 import type ArDesignLoaderService from 'frontend-gelinkt-notuleren/services/ar-design-loader';
@@ -383,6 +383,11 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     this.displayDocumentInformationModal = false;
   };
 
+  onDocumentInformationModalSave = async () => {
+    this.closeDocumentInformationModal();
+    await this.saveTask.perform();
+  };
+
   arDesignQuery: ArDesignQuery = (pagination) => {
     return this.arDesignLoader.findDesigns(pagination);
   };
@@ -468,14 +473,14 @@ export default class AgendapointsEditController extends Component<AgendapointEdi
     {{#if this.displayDocumentInformationModal}}
       {{#if this.controller}}
         {{#if this.editorDocument}}
-          <DocumentInformationModal
+          <AgendapointDocumentInformationModal
             @controller={{this.controller}}
-            @closeModal={{this.closeDocumentInformationModal}}
             @editorDocument={{this.editorDocument}}
-            @classificatieUri={{this.config.besluitType.classificatieUri}}
-            @besluitTypeEndpoint={{this.config.besluitType.endpoint}}
-            @besluitTopicEndpoint={{this.config.besluitTopic.endpoint}}
-            @saveTask={{this.saveTask}}
+            @besluitTypeOptions={{this.config.besluitType}}
+            @besluitTopicOptions={{this.config.besluitTopic}}
+            @besluitTargetGroupOptions={{this.config.besluitTargetGroup}}
+            @onSave={{this.onDocumentInformationModalSave}}
+            @onCancel={{this.closeDocumentInformationModal}}
           />
         {{/if}}
       {{/if}}

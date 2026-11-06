@@ -22,7 +22,7 @@ import { type Template } from 'frontend-gelinkt-notuleren/services/template-fetc
 import type BestuurseenheidModel from 'frontend-gelinkt-notuleren/models/bestuurseenheid';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import TemplatePicker, { type GetTemplates } from './template-picker';
-import MetadataForm, { type updateLinkedDecisionArgs } from './metadata-form';
+import MetadataForm, { type LinkedDecisionOption } from './metadata-form';
 import type DocumentContainerModel from 'frontend-gelinkt-notuleren/models/document-container';
 import { localCopy } from 'tracked-toolbox';
 import type ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
@@ -140,7 +140,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
   });
 
   updateLinkedDecision = (
-    linkedDecisionOption: updateLinkedDecisionArgs | null,
+    linkedDecisionOption: LinkedDecisionOption | null,
   ) => {
     this.linkedDecisionUri = linkedDecisionOption?.uri;
   };

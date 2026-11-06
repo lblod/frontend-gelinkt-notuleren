@@ -8,7 +8,7 @@ import PowerSelect from 'ember-power-select/components/power-select';
 import { service } from '@ember/service';
 import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
-import type { updateLinkedDecisionArgs } from './document-creator/metadata-form';
+import type { LinkedDecisionOption } from './document-creator/metadata-form';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
 import type { LegacyResourceQuery } from '@ember-data/store/types';
@@ -26,9 +26,7 @@ import { cached } from '@glimmer/tracking';
 interface Sig {
   Args: {
     linkedDecisionUri?: string;
-    updateLinkedDecision: (
-      linkedDecisionOption: updateLinkedDecisionArgs,
-    ) => void;
+    updateLinkedDecision: (linkedDecisionOption: LinkedDecisionOption) => void;
   };
 }
 
@@ -68,10 +66,11 @@ export default class LinkedDecisionSelect extends Component<Sig> {
       )}))`;
     }
     const query = `
-    PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
-    PREFIX eli: <http://data.europa.eu/eli/ontology#>
-    PREFIX prov: <http://www.w3.org/ns/prov#>
-    PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+      PREFIX eli: <http://data.europa.eu/eli/ontology#>
+      PREFIX prov: <http://www.w3.org/ns/prov#>
+      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+
       SELECT DISTINCT ?uri ?title WHERE {
         ?uri a besluit:Besluit;
           a ?besluitType.
@@ -89,6 +88,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
         }
       } LIMIT 20
     `;
+    console.log('Query: ', query);
     const queryResult = await executeQuery({
       query,
       endpoint: ENV.publicatieEndpoint,

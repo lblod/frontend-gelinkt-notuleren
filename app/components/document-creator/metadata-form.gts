@@ -14,7 +14,7 @@ import { tracked } from '@glimmer/tracking';
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import LinkedDecisionSelect from '../linked-decision-select';
-export type updateLinkedDecisionArgs = {
+export type LinkedDecisionOption = {
   uri: string;
   title: string;
 };
@@ -28,9 +28,7 @@ interface Sig {
     decisionTypes?: BesluitType[];
     setDecisionType?: (selected: BesluitTypeInstance) => void;
     linkedDecisionUri?: string;
-    updateLinkedDecision: (
-      linkedDecisionOption: updateLinkedDecisionArgs,
-    ) => void;
+    updateLinkedDecision: (linkedDecisionOption: LinkedDecisionOption) => void;
   };
 }
 
