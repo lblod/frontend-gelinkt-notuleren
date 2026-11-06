@@ -59,21 +59,23 @@ export default class MetadataForm extends Component<Sig> {
 
   <template>
     <form class='au-o-flow au-u-padding'>
-      {{#let (uuidv4) as |id|}}
-        <AuLabel @error={{@invalidTitle}} for={{id}}>
-          {{t 'document-creator.title-field'}}
-          <RequiredField />
-        </AuLabel>
-        <AuTextarea
-          @error={{@invalidTitle}}
-          @width='block'
-          {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
-          type='text'
-          value={{@title}}
-          id={{id}}
-          {{on 'input' this.updateTitle}}
-        />
-      {{/let}}
+      <div>
+        {{#let (uuidv4) as |id|}}
+          <AuLabel @error={{@invalidTitle}} for={{id}}>
+            {{t 'document-creator.title-field'}}
+            <RequiredField />
+          </AuLabel>
+          <AuTextarea
+            @error={{@invalidTitle}}
+            @width='block'
+            {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
+            type='text'
+            value={{@title}}
+            id={{id}}
+            {{on 'input' this.updateTitle}}
+          />
+        {{/let}}
+      </div>
       {{! The types for ember-truth-helpers 'and' don't seem to work with the types here }}
       {{#if @decisionTypes}}
         {{#if @setDecisionType}}

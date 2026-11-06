@@ -8,7 +8,7 @@ catalog:
   '@eslint/js': ^9.39.4
   '@faker-js/faker': ^10.4.0
   '@floating-ui/dom': ^1.7.6
-  '@lblod/ember-rdfa-editor-lblod-plugins': 39.2.0-dev.45e18df49c04df43ee4b5ff1d7324ff9b1c242a7
+  '@lblod/ember-rdfa-editor-lblod-plugins': 39.2.0-dev.684c5ab845cd795c442f2df6c42af47b8d26f292
   '@glint/template': ^1.9.0
   '@lblod/ember-rdfa-editor': 13.20.1
   '@lblod/say-ar-design-plugin': 3.1.0

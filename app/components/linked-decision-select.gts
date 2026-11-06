@@ -28,6 +28,7 @@ interface Sig {
     linkedDecisionUri?: string;
     updateLinkedDecision: (linkedDecisionOption: LinkedDecisionOption) => void;
   };
+  Element: HTMLDivElement;
 }
 
 export default class LinkedDecisionSelect extends Component<Sig> {
@@ -121,30 +122,32 @@ export default class LinkedDecisionSelect extends Component<Sig> {
   };
 
   <template>
-    <AuLabel for='linked-decision'>
-      {{t 'document-creator.linked-decision'}}
-      <AuPill @size='small' @skin='border'>{{t 'utils.optional'}}</AuPill>
-    </AuLabel>
-    {{#if this.firstPublishedBesluitValue.isRunning}}
-      <AuLoader @hideMessage={{true}}>{{t 'application.loading'}}</AuLoader>
-    {{else}}
-      <PowerSelect
-        id='linked-decision'
-        @searchEnabled={{true}}
-        @searchMessage={{t 'besluit-type-plugin.search-message'}}
-        @noMatchesMessage={{t 'besluit-type-plugin.no-matches-message'}}
-        @search={{this.searchLinkedDecision}}
-        @options={{this.publishedBesluits}}
-        @selected={{this.selectedPublishedBesluit}}
-        @onChange={{@updateLinkedDecision}}
-        @allowClear={{true}}
-        as |publishedBesluit|
-      >
-        {{this.reglementTitle publishedBesluit.title}}
-      </PowerSelect>
-    {{/if}}
-    <p class='au-u-muted au-u-margin-tiny au-u-margin-bottom-small'>
-      {{t 'document-creator.linked-decision-helptext'}}
-    </p>
+    <div ...attributes>
+      <AuLabel for='linked-decision'>
+        {{t 'document-creator.linked-decision'}}
+        <AuPill @size='small' @skin='border'>{{t 'utils.optional'}}</AuPill>
+      </AuLabel>
+      {{#if this.firstPublishedBesluitValue.isRunning}}
+        <AuLoader @hideMessage={{true}}>{{t 'application.loading'}}</AuLoader>
+      {{else}}
+        <PowerSelect
+          id='linked-decision'
+          @searchEnabled={{true}}
+          @searchMessage={{t 'besluit-type-plugin.search-message'}}
+          @noMatchesMessage={{t 'besluit-type-plugin.no-matches-message'}}
+          @search={{this.searchLinkedDecision}}
+          @options={{this.publishedBesluits}}
+          @selected={{this.selectedPublishedBesluit}}
+          @onChange={{@updateLinkedDecision}}
+          @allowClear={{true}}
+          as |publishedBesluit|
+        >
+          {{this.reglementTitle publishedBesluit.title}}
+        </PowerSelect>
+      {{/if}}
+      <p class='au-u-muted au-u-margin-tiny au-u-margin-bottom-small'>
+        {{t 'document-creator.linked-decision-helptext'}}
+      </p>
+    </div>
   </template>
 }

@@ -143,15 +143,17 @@ export default class AgendapointDocumentInformationModal extends Component<Sig> 
       @onCancel={{this.cancel}}
       as |DIM|
     >
-      <AuLabel @required={{true}}>
-        {{t 'document-information-modal.document-title'}}
-      </AuLabel>
-      <AuInput
-        value={{this.selectedDocumentTitle}}
-        class='au-u-margin-bottom-small'
-        @width='block'
-        {{on 'input' this.stageDocumentTitle}}
-      />
+      <div>
+        <AuLabel @required={{true}}>
+          {{t 'document-information-modal.document-title'}}
+        </AuLabel>
+        <AuInput
+          value={{this.selectedDocumentTitle}}
+          class='au-u-margin-bottom-small'
+          @width='block'
+          {{on 'input' this.stageDocumentTitle}}
+        />
+      </div>
       <DIM.BesluitType />
       <DIM.BesluitTopic />
       <DIM.BesluitTargetGroup />
