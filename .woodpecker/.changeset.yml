@@ -1,6 +1,7 @@
 steps:
   changeset:
-    image: node:24-slim
+    image: alpine/git:latest
+    pull: true
     commands:
       - git fetch origin master
       - git diff -wb --name-only origin/master..HEAD | grep "\.changeset/.*\.md"
