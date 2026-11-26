@@ -12,7 +12,7 @@ catalog:
   '@glint/template': ^1.9.0
   '@lblod/ember-rdfa-editor': 13.20.1
   '@lblod/say-ar-design-plugin': 3.1.0
-  '@lblod/say-roadsign-regulation-plugin': 3.1.0
+  '@lblod/say-roadsign-regulation-plugin': 3.1.0-dev.048db243d4fb02260bb3080f6810bde0f83126d5
   '@nullvoxpopuli/ember-composable-helpers': ^5.3.2
   '@tsconfig/ember': ^3.0.12
   changeset: ^0.2.6
