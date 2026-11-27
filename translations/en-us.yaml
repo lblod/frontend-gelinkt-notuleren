@@ -136,6 +136,7 @@ document-creator:
   selector:
     filters: Filters
     search-field: Search by template name
+    tags: Tags
 
 document-history:
   load-more: Load more

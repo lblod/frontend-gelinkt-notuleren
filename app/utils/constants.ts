@@ -26,3 +26,8 @@ export const AUTHORIZATION_ROLES = {
   SIGNER: 'GelinktNotuleren-ondertekenaar',
   DOCUMENT_MANAGER: 'IRGN-schrijver',
 } as const;
+
+export const RESOURCE_TYPES = {
+  TEMPLATE_INFO:
+    'http://data.lblod.info/vocabularies/gelinktnotuleren/TemplateInfo',
+};

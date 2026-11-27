@@ -37,8 +37,8 @@ catalogs:
       specifier: ^1.9.0
       version: 1.9.0
     '@lblod/ember-rdfa-editor-lblod-plugins':
-      specifier: 39.1.1
-      version: 39.1.1
+      specifier: 39.4.0
+      version: 39.4.0
     '@lblod/say-ar-design-plugin':
       specifier: 3.1.0
       version: 3.1.0
@@ -301,7 +301,7 @@ importers:
         version: 13.20.1(347b6d14265065eefcf781b7e8ed9b70)
       '@lblod/ember-rdfa-editor-lblod-plugins':
         specifier: 'catalog:'
-        version: 39.1.1(d2ae28cb29e3e3acccdea9c35ebe089a)
+        version: 39.4.0(d2ae28cb29e3e3acccdea9c35ebe089a)
       '@lblod/say-ar-design-plugin':
         specifier: 'catalog:'
         version: 3.1.0(5407320565db2a44143b4be4422b3539)
@@ -2066,8 +2066,8 @@ packages:
       ember-simple-auth: '>= 6.0.0'
       ember-source: '>= 4.0.0'
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@39.1.1':
-    resolution: {integrity: sha512-S70H7o23YplBczgA0a0LEHMmtywuxvUO58BpaUAdTyT0ZFMG0CfZ/Bn1yH42zd3jMGbARwkoaYaIa8Gn+y1bFA==}
+  '@lblod/ember-rdfa-editor-lblod-plugins@39.4.0':
+    resolution: {integrity: sha512-IAysyZqlqEsCeNtRlnoZ0wQcSLNKAY3cS4Kz1PZNScPdQ89ajrvPiI/uS1l0WivOxsN1hKGEXTD9pSFt3qERaA==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@appuniversum/ember-appuniversum': ^3.12.0 || ^4.0.0
@@ -2860,8 +2860,8 @@ packages:
   '@types/node@12.20.55':
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
 
-  '@types/node@24.19.1':
-    resolution: {integrity: sha512-aS3/DG0oM05K0RIXXP+hKjinGG5IgSSVGzswZxW3O0sS3pH4/fycXundUC9XsszgKCk4gHXylTEK6hyFxVxnoQ==}
+  '@types/node@24.19.2':
+    resolution: {integrity: sha512-93d49wCWJkCyN87MxLpNN6KXPCwFw7bVUg79mGUV1OS40JGWwVCr8n61DXCSqz7CV6/VfPkb7xec7uP2M+QHWQ==}
 
   '@types/node@26.6.4':
     resolution: {integrity: sha512-ldVPDCzj7fsaGZrLB0NuHuTvJcsNasysBAqMolr/cgxrLd1xbqxIr3XJiPnHHJUCxj5sNF1vnRj9aWnrVh5Jcg==}
@@ -3206,8 +3206,8 @@ packages:
   '@xtuc/long@4.2.2':
     resolution: {integrity: sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==}
 
-  '@zazuko/prefixes@2.6.1':
-    resolution: {integrity: sha512-fbOadP7twxt0ZYT9mgIC+xQMk6f3pYYLI5a/2UJ/mc/ygqb/NoVv2ryK3lTtoi74xwkdpUeDwIuFQSosowzUgg==}
+  '@zazuko/prefixes@2.6.4':
+    resolution: {integrity: sha512-5T5b8EWg/rgKpp8JoRqnoSZl/jRzEgJU1fTemb4kzsk26AoIn7LEMYr8S3QQUlGX8odZcvWgIfAhsksarW368A==}
 
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -4608,8 +4608,9 @@ packages:
       typescript:
         optional: true
 
-  create-ecdh@4.0.4:
-    resolution: {integrity: sha512-mf+TCx8wWc9VpuxfP2ht0iSISLZnt0JgWlrOKZiNqyUZWnjIaCIVNQArMHnCZKfEYRg6IM7A+NeJoN8gf/Ws0A==}
+  create-ecdh@4.0.5:
+    resolution: {integrity: sha512-pZhCMTQKw9Stf8FZAFPYJIyUVmM+YIwxNmdrynOaD3h19YbH8GsFMkedPTfpHv6McKXFScfs0pdsfcgPVzO50A==}
+    engines: {node: '>= 0.4'}
 
   create-hash@1.2.0:
     resolution: {integrity: sha512-z00bCGNHDG8mHAkP7CtT1qVu+bFQUPjYq/4Iv3C3kWjTFV10zIjfSoeqXo9Asws8gwSHDGj/hl2u4OGIjapeCg==}
@@ -8441,8 +8442,8 @@ packages:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
 
-  parse-asn1@5.1.9:
-    resolution: {integrity: sha512-fIYNuZ/HastSb80baGOuPRo1O9cf4baWw5WsAp7dBuUzeTD/BoaG8sVTdlPFksBE2lF21dN+A1AnrpIjSWqHHg==}
+  parse-asn1@5.1.10:
+    resolution: {integrity: sha512-gBlTKLbYnAJN9WjmawVOMfaGvVoy4lX0LH18t7ccwtEG9RgAa4ETf2eu3d2J4e/5SoCjCms0A0UF4tTw/Eyn6Q==}
     engines: {node: '>= 0.10'}
 
   parse-json@5.2.0:
@@ -8707,8 +8708,8 @@ packages:
     resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
     engines: {node: '>=0.4.0'}
 
-  proj4@2.22.0:
-    resolution: {integrity: sha512-MVvH09QrYm3A235rcX39WDiCKanrBiblu28l0KYIn/B2DofmYhvP/LLS43kE66jNDfx/P1l/nah3JmsAq8UgbQ==}
+  proj4@2.23.0:
+    resolution: {integrity: sha512-vb1Z/dOztEyXg5JC2LgKc2ye+md4qUdwH/RLS0EUUMKzoIsAC2PT1IGKPIDv9qg51p7uONn93qTh9gtfh+GmOQ==}
     peerDependencies:
       geotiff: '*'
     peerDependenciesMeta:
@@ -8903,8 +8904,8 @@ packages:
   rdf-ext@2.6.0:
     resolution: {integrity: sha512-wd6yMPoRRwvHvovLaPqZLyVDpBh81DAi4o68o7tP2ijGMwPHGmwrhocV4LdULdo/A30PMD+B/uJgfbhvLRBoKg==}
 
-  rdf-literal@2.0.0:
-    resolution: {integrity: sha512-jlQ+h7EvnXmncmk8OzOYR8T3gNfd4g0LQXbflHkEkancic8dh0Tdt5RiRq8vUFndjIeNHt1RWeA5TAj6rgrtng==}
+  rdf-literal@2.1.0:
+    resolution: {integrity: sha512-44EIZ0BCxl/1pHIdtUHu9I+Zj7O3G9p7fRAu+WMBlO5zmG1UmaNdy/4h7kHFceJ5E4T5JYYZG7IRKwQScKPwrw==}
 
   rdf-validate-datatype@0.2.2:
     resolution: {integrity: sha512-mH9qL8i0WBbZ6HJCA26BB6V+WV2MraKvitez3SV0QegBWVQ4wYO49CgfFBzoAYg6tlnhFXl9MkrOAQ07X2N1FA==}
@@ -10114,8 +10115,8 @@ packages:
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
-  undici@6.29.0:
-    resolution: {integrity: sha512-R+RODBqp6i2pPflGdq+xIOUkl+RNfGgHwoinecKu/JCuf2uO06cOKoDbI2P7Dn6KcswdKwrczbU6IYJ6K8X+wg==}
+  undici@6.29.1:
+    resolution: {integrity: sha512-EvRlUt/QqAEvXdQeRMYUfwOQsfzpDztykrG2owGEE/rBOBoYv9uF39ZzsNDh4lTFHhTr2XOZjKkYgueD12ZmGA==}
     engines: {node: '>=18.17'}
 
   unicode-canonical-property-names-ecmascript@2.0.1:
@@ -10476,8 +10477,8 @@ packages:
     resolution: {integrity: sha512-NMD00arvqcq2nwqc5Q6KtrSRHK+fVD31erE5FEMahAw5PmVCgD7MUXodq3pdZSUkqA9Cda2iWx6s1XYwiJWRmw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  wkt-parser@1.5.6:
-    resolution: {integrity: sha512-cqHU3lzGt/gt2OqIORP0uVy5yeOX43WABmgFkmJsmcqH3HhQo9PiJG6ftytwGKmpQUbegeX7+pQc2BuNCRfcrw==}
+  wkt-parser@1.9.0:
+    resolution: {integrity: sha512-0muBykCBpbUgMPqmH+2rlvFlFwwH1kdgIMa0YbaQ/JZAlyWCv8Fa4HFSbEvZs2gYRaqJP/0D8xSI1G7Z4tn0vw==}
 
   word-wrap@1.2.5:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
@@ -11767,7 +11768,7 @@ snapshots:
   '@digitalbazaar/http-client@4.4.0':
     dependencies:
       ky: 1.14.3
-      undici: 6.29.0
+      undici: 6.29.1
 
   '@dmsnell/diff-match-patch@1.1.0': {}
 
@@ -12830,7 +12831,7 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  '@lblod/ember-rdfa-editor-lblod-plugins@39.1.1(d2ae28cb29e3e3acccdea9c35ebe089a)':
+  '@lblod/ember-rdfa-editor-lblod-plugins@39.4.0(d2ae28cb29e3e3acccdea9c35ebe089a)':
     dependencies:
       '@appuniversum/ember-appuniversum': 3.19.0(@ember/test-helpers@3.3.1(@babel/core@7.29.7(supports-color@8.1.1))(@glint/template@1.9.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.9.0)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.111.1(postcss@8.5.14)(uglify-js@3.19.3)))(supports-color@8.1.1)(webpack@5.111.1(postcss@8.5.14)(uglify-js@3.19.3)))(@glimmer/component@1.1.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@glimmer/tracking@1.1.2)(@glint/template@1.9.0)(ember-source@5.12.0(@glimmer/component@1.1.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@glint/template@1.9.0)(rsvp@4.8.5)(supports-color@8.1.1)(webpack@5.111.1(postcss@8.5.14)(uglify-js@3.19.3)))(eslint@9.39.4(jiti@2.6.1)(supports-color@8.1.1))(miragejs@0.1.48)(supports-color@8.1.1)(tracked-built-ins@4.1.2(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(webpack@5.111.1(postcss@8.5.14)(uglify-js@3.19.3))
       '@babel/core': 7.29.7(supports-color@8.1.1)
@@ -12870,7 +12871,7 @@ snapshots:
       n2words: 1.24.0
       n3: 1.26.0
       process: 0.11.10
-      proj4: 2.22.0
+      proj4: 2.23.0
       rdf-ext: 2.6.0
       rdf-validate-shacl: 0.6.5(supports-color@8.1.1)
       rdfa-streaming-parser: 3.0.2
@@ -13683,7 +13684,7 @@ snapshots:
       '@rdfjs/namespace': 2.0.1
       '@rdfjs/types': 2.0.1
       '@types/rdfjs__namespace': 2.0.10
-      '@zazuko/prefixes': 2.6.1
+      '@zazuko/prefixes': 2.6.4
 
   '@tybys/wasm-util@0.10.4':
     dependencies:
@@ -13842,7 +13843,7 @@ snapshots:
 
   '@types/node@12.20.55': {}
 
-  '@types/node@24.19.1':
+  '@types/node@24.19.2':
     dependencies:
       undici-types: 7.24.6
 
@@ -14218,7 +14219,7 @@ snapshots:
 
   '@xtuc/long@4.2.2': {}
 
-  '@zazuko/prefixes@2.6.1': {}
+  '@zazuko/prefixes@2.6.4': {}
 
   abbrev@1.1.1: {}
 
@@ -15489,7 +15490,7 @@ snapshots:
       create-hmac: 1.1.7
       elliptic: 6.6.1
       inherits: 2.0.4
-      parse-asn1: 5.1.9
+      parse-asn1: 5.1.10
       readable-stream: 2.3.8
       safe-buffer: 5.2.1
 
@@ -16002,7 +16003,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  create-ecdh@4.0.4:
+  create-ecdh@4.0.5:
     dependencies:
       bn.js: 4.12.5
       elliptic: 6.6.1
@@ -16044,7 +16045,7 @@ snapshots:
     dependencies:
       browserify-cipher: 1.0.1
       browserify-sign: 4.2.6
-      create-ecdh: 4.0.4
+      create-ecdh: 4.0.5
       create-hash: 1.2.0
       create-hmac: 1.1.7
       diffie-hellman: 5.0.3
@@ -19979,7 +19980,7 @@ snapshots:
   jsonld-context-parser@3.1.1:
     dependencies:
       '@types/http-link-header': 1.0.7
-      '@types/node': 24.19.1
+      '@types/node': 24.19.2
       http-link-header: 1.1.4
       relative-to-absolute-iri: 1.0.8
 
@@ -20324,7 +20325,7 @@ snapshots:
 
   md5.js@1.3.5:
     dependencies:
-      hash-base: 3.1.2
+      hash-base: 3.0.5
       inherits: 2.0.4
       safe-buffer: 5.2.1
 
@@ -21238,7 +21239,7 @@ snapshots:
     dependencies:
       callsites: 3.1.0
 
-  parse-asn1@5.1.9:
+  parse-asn1@5.1.10:
     dependencies:
       asn1.js: 4.10.1
       browserify-aes: 1.2.0
@@ -21453,10 +21454,10 @@ snapshots:
 
   progress@2.0.3: {}
 
-  proj4@2.22.0:
+  proj4@2.23.0:
     dependencies:
       mgrs: 1.0.0
-      wkt-parser: 1.5.6
+      wkt-parser: 1.9.0
 
   promise-inflight@1.0.1(bluebird@3.7.2):
     optionalDependencies:
@@ -21594,7 +21595,7 @@ snapshots:
       bn.js: 4.12.5
       browserify-rsa: 4.1.1
       create-hash: 1.2.0
-      parse-asn1: 5.1.9
+      parse-asn1: 5.1.10
       randombytes: 2.1.0
       safe-buffer: 5.2.1
 
@@ -21718,7 +21719,7 @@ snapshots:
       proto-fetch: 2.0.0
       readable-stream: 4.8.0
 
-  rdf-literal@2.0.0:
+  rdf-literal@2.1.0:
     dependencies:
       rdf-data-factory: 2.1.0
 
@@ -21739,7 +21740,7 @@ snapshots:
       clownface: 2.0.3
       debug: 4.4.3(supports-color@8.1.1)
       rdf-dataset-ext: 1.1.0
-      rdf-literal: 2.0.0
+      rdf-literal: 2.1.0
       rdf-validate-datatype: 0.2.2
     transitivePeerDependencies:
       - supports-color
@@ -23286,7 +23287,7 @@ snapshots:
 
   undici-types@8.9.0: {}
 
-  undici@6.29.0: {}
+  undici@6.29.1: {}
 
   unicode-canonical-property-names-ecmascript@2.0.1: {}
 
@@ -23747,7 +23748,7 @@ snapshots:
     dependencies:
       execa: 5.1.1
 
-  wkt-parser@1.5.6: {}
+  wkt-parser@1.9.0: {}
 
   word-wrap@1.2.5: {}
 

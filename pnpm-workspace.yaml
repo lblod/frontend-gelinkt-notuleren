@@ -8,7 +8,7 @@ catalog:
   '@eslint/js': ^9.39.4
   '@faker-js/faker': ^10.4.0
   '@floating-ui/dom': ^1.7.6
-  '@lblod/ember-rdfa-editor-lblod-plugins': 39.1.1
+  '@lblod/ember-rdfa-editor-lblod-plugins': 39.4.0
   '@glint/template': ^1.9.0
   '@lblod/ember-rdfa-editor': 13.20.1
   '@lblod/say-ar-design-plugin': 3.1.0
@@ -55,15 +55,15 @@ catalog:
   webpack: ^5.111.1
   zod: ^3.25.76
 overrides:
-  '@ember/test-waiters': $@ember/test-waiters
-  '@lblod/ember-rdfa-editor': $@lblod/ember-rdfa-editor
-  ember-auto-import: $ember-auto-import
+  '@ember/test-waiters': ^3.1.0
+  '@lblod/ember-rdfa-editor': 'catalog:'
+  ember-auto-import: ^2.13.1
   ember-composability-tools>@ember/render-modifiers: ^3.0.0
   ember-focus-trap: ^2.0.0
-  ember-headless-form>tracked-built-ins: $tracked-built-ins
-  ember-math-helpers: $ember-math-helpers
-  ember-truth-helpers: $ember-truth-helpers
-  tracked-toolbox: $tracked-toolbox
+  ember-headless-form>tracked-built-ins: 'catalog:'
+  ember-math-helpers: ^4.0.0
+  ember-truth-helpers: ^4.0.3
+  tracked-toolbox: 'catalog:'
 allowBuilds:
   '@parcel/watcher': true
   core-js: true
