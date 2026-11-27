@@ -12,6 +12,7 @@ import {
 import { type Environment } from 'frontend-gelinkt-notuleren/config/environment';
 import type SessionService from './gn-session';
 import type Store from './gn-store';
+import type { TagWithUri } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/common/tags/types';
 
 export interface Template {
   uri: string;
@@ -170,12 +171,14 @@ export default class TemplateFetcher extends Service {
     async ({
       templateType,
       titleFilter,
+      tagsFilter,
       pagination,
       favourites = [],
       abortSignal,
     }: {
       templateType: string;
       titleFilter?: string;
+      tagsFilter?: TagWithUri[];
       pagination?: { pageSize: number; pageNumber: number };
       favourites?: string[];
       abortSignal?: AbortSignal;
@@ -188,9 +191,18 @@ export default class TemplateFetcher extends Service {
       const fileEndpoint = config.regulatoryStatementFileEndpoint;
       const sparqlEndpoint = config.regulatoryStatementEndpoint;
 
-      const filterQuery = !titleFilter
+      const titleFilterQuery = !titleFilter
         ? ''
         : `FILTER(CONTAINS(LCASE(?title), LCASE(${sparqlEscapeString(titleFilter)})))`;
+      const tagsFilterQuery = !tagsFilter
+        ? ''
+        : `
+          ?template ext:templateInfo ?templateInfo .
+          ?templateInfo ext:hasTag ?tag .
+          VALUES ?tag {
+            ${tagsFilter.map((tag) => `<${tag.uri}>`).join('\n')}
+          }
+        `;
       const paginationQuery = !pagination
         ? ''
         : `LIMIT ${pagination.pageSize} OFFSET ${pagination.pageNumber * pagination.pageSize}`;
@@ -224,7 +236,8 @@ export default class TemplateFetcher extends Service {
           }
           BIND(IF(?template IN (${favourites.map(sparqlEscapeUri).join(',')}), 1, 0) as ?isFav)
           FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
-          ${filterQuery}
+          ${titleFilterQuery}
+          ${tagsFilterQuery}
         }
         GROUP BY ?isFav ?template ?template_version ?title ?fileId
         ORDER BY DESC(?isFav) LCASE(REPLACE(STR(?title), '^ +| +$', ''))
@@ -247,7 +260,7 @@ export default class TemplateFetcher extends Service {
             ?template_version schema:validThrough ?validThrough.
           }
           FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
-          ${filterQuery}
+          ${titleFilterQuery}
         }
       `;
       const [response, resultCount] = await Promise.all([
