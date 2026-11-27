@@ -2,12 +2,15 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { EDITOR_FOLDERS } from 'frontend-gelinkt-notuleren/config/constants';
+import { RESOURCE_TYPES } from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class InboxAgendapointsNewController extends Controller {
   @service router;
   @service plausible;
   @service templateFetcher;
   @service('editor/agendapoint') agendapointEditor;
+
+  templateType = RESOURCE_TYPES.DECISION_TEMPLATE;
 
   folderId = EDITOR_FOLDERS.DECISION_DRAFTS;
 
@@ -26,8 +29,7 @@ export default class InboxAgendapointsNewController extends Controller {
 
   getTemplates = async ({ filter, pagination, favourites, abortSignal }) => {
     const dynamicTemplatesPromise = this.templateFetcher.fetch.perform({
-      templateType:
-        'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
+      templateType: this.templateType,
       titleFilter: filter?.title,
       tagsFilter: filter?.tags,
       pagination,

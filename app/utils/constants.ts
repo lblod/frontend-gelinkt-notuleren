@@ -30,4 +30,9 @@ export const AUTHORIZATION_ROLES = {
 export const RESOURCE_TYPES = {
   TEMPLATE_INFO:
     'http://data.lblod.info/vocabularies/gelinktnotuleren/TemplateInfo',
+  TEMPLATE: 'http://data.lblod.info/vocabularies/gelinktnotuleren/Template',
+  DECISION_TEMPLATE:
+    'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
+  RB_TEMPLATE:
+    'http://data.lblod.info/vocabularies/gelinktnotuleren/ReglementaireBijlageTemplate',
 };

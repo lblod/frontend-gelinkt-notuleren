@@ -2,11 +2,14 @@ import Controller from '@ember/controller';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import { EDITOR_FOLDERS } from 'frontend-gelinkt-notuleren/config/constants';
+import { RESOURCE_TYPES } from 'frontend-gelinkt-notuleren/utils/constants';
 
 export default class InboxRegulatoryStatementsNewController extends Controller {
   @service router;
   @service plausible;
   @service templateFetcher;
+
+  templateType = RESOURCE_TYPES.RB_TEMPLATE;
 
   folderId = EDITOR_FOLDERS.REGULATORY_STATEMENTS;
 
@@ -21,8 +24,7 @@ export default class InboxRegulatoryStatementsNewController extends Controller {
 
   getTemplates = async ({ filter, pagination, favourites, abortSignal }) => {
     const [templates, totalCount] = await this.templateFetcher.fetch.perform({
-      templateType:
-        'http://data.lblod.info/vocabularies/gelinktnotuleren/ReglementaireBijlageTemplate',
+      templateType: this.templateType,
       titleFilter: filter?.title,
       pagination,
       favourites,

@@ -40,6 +40,7 @@ interface Sig {
     container?: DocumentContainerModel;
     statusOfNewDocument?: ConceptModel;
     documentTitle?: string;
+    templateType?: string;
   };
 }
 
@@ -158,6 +159,7 @@ export default class DocumentCreatorModal extends Component<Sig> {
         <TemplatePicker
           @getTemplates={{@getTemplates}}
           @onSelect={{this.selectTemplate}}
+          @templateType={{@templateType}}
         />
       </Modal.Body>
     </AuModal>

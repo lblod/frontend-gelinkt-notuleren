@@ -86,6 +86,7 @@ interface Sig {
   Args: {
     getTemplates: GetTemplates;
     onSelect: (doc: Template) => void;
+    templateType?: string;
   };
 }
 
@@ -215,6 +216,7 @@ export default class TemplatePicker extends Component<Sig> {
   };
 
   tags = trackedFunction(this, async () => {
+    const templateType = this.args.templateType ?? RESOURCE_TYPES.TEMPLATE;
     const config = (
       getOwner(this) as InternalOwner | undefined
     )?.resolveRegistration('config:environment') as Environment;
@@ -231,7 +233,7 @@ export default class TemplatePicker extends Component<Sig> {
         skos:prefLabel ?value.
       ?templateInfo a <${RESOURCE_TYPES.TEMPLATE_INFO}> ;
         ext:hasTag ?tag.
-      ?publishedTemplate a gn:Template ;
+      ?publishedTemplate a <${templateType}>;
         pav:hasCurrentVersion ?templateVersion ;
         ext:templateInfo ?templateInfo .
       
