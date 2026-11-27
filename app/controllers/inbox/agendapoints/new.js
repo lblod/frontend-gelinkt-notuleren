@@ -29,6 +29,7 @@ export default class InboxAgendapointsNewController extends Controller {
       templateType:
         'http://data.lblod.info/vocabularies/gelinktnotuleren/BesluitTemplate',
       titleFilter: filter?.title,
+      tagsFilter: filter?.tags,
       pagination,
       favourites,
       abortSignal,
