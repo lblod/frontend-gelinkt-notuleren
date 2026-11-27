@@ -11,6 +11,7 @@ import { not } from 'ember-truth-helpers';
 import AuMainContainer from '@appuniversum/ember-appuniversum/components/au-main-container';
 import AuHeading from '@appuniversum/ember-appuniversum/components/au-heading';
 import AuLabel from '@appuniversum/ember-appuniversum/components/au-label';
+import AuFormRow from '@appuniversum/ember-appuniversum/components/au-form-row';
 
 import AuNativeInput from '@lblod/ember-rdfa-editor-lblod-plugins/components/au-native-input';
 import Loading from '@lblod/ember-rdfa-editor-lblod-plugins/components/common/search/loading';
@@ -25,6 +26,16 @@ import { type Option } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option
 import type UserPreferencesService from 'frontend-gelinkt-notuleren/services/user-preferences';
 import { trackedFunction } from 'reactiveweb/function';
 import { localCopy } from 'tracked-toolbox';
+import TagSelector from '@lblod/ember-rdfa-editor-lblod-plugins/components/common/tags/tag-selector';
+import { RESOURCE_TYPES } from 'frontend-gelinkt-notuleren/utils/constants';
+import { getOwner } from '@ember/owner';
+import { type InternalOwner } from '@ember/-internals/owner';
+import { type Environment } from 'frontend-gelinkt-notuleren/config/environment';
+import type { Tag } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/common/tags/types';
+import {
+  executeQuery,
+  type BindingObject,
+} from 'frontend-gelinkt-notuleren/utils/sparql';
 
 class PreviewableTemplate implements PreviewableDocument {
   title: string;
@@ -75,6 +86,7 @@ interface Sig {
   Args: {
     getTemplates: GetTemplates;
     onSelect: (doc: Template) => void;
+    templateType?: string;
   };
 }
 
@@ -83,6 +95,7 @@ export default class TemplatePicker extends Component<Sig> {
   @service declare userPreferences: UserPreferencesService;
   // Filtering
   @tracked inputSearchText: string | null = null;
+  @tracked selectedTags: Tag[] = [];
 
   // Favourite templates
   @localCopy('favouriteTemplatesQuery.value') favouriteTemplates?: string[];
@@ -128,8 +141,13 @@ export default class TemplatePicker extends Component<Sig> {
 
     try {
       const favouriteTemplates = await this.favouriteTemplatesQuery.promise;
+      const filter = {
+        ...(this.searchText ? { title: this.searchText } : {}),
+        ...(this.selectedTags.length > 0 ? { tags: this.selectedTags } : {}),
+      };
+
       const queryResult = await this.args.getTemplates({
-        filter: this.searchText ? { title: this.searchText } : {},
+        filter,
         abortSignal: abortController.signal,
         pagination: { pageNumber: this.pageNumber, pageSize: this.pageSize },
         favourites: favouriteTemplates,
@@ -147,6 +165,7 @@ export default class TemplatePicker extends Component<Sig> {
       abortController.abort();
     }
   });
+
   onSelect = (template: PreviewableTemplate) => {
     return this.args.onSelect(template.original);
   };
@@ -154,12 +173,18 @@ export default class TemplatePicker extends Component<Sig> {
   templateResource = trackedTask<PreviewableTemplate[]>(
     this,
     this.templateSearch,
-    () => [this.inputSearchText, this.pageNumber, this.pageSize],
+    () => [
+      this.inputSearchText,
+      this.pageNumber,
+      this.pageSize,
+      this.selectedTags,
+    ],
   );
 
   previousPage = () => {
     --this.pageNumber;
   };
+
   nextPage = () => {
     ++this.pageNumber;
   };
@@ -186,6 +211,54 @@ export default class TemplatePicker extends Component<Sig> {
       });
   };
 
+  changeTagsFilter = (tags: Tag[]) => {
+    this.selectedTags = tags;
+  };
+
+  tags = trackedFunction(this, async () => {
+    const templateType = this.args.templateType ?? RESOURCE_TYPES.TEMPLATE;
+    const config = (
+      getOwner(this) as InternalOwner | undefined
+    )?.resolveRegistration('config:environment') as Environment;
+    const sparqlEndpoint = config.regulatoryStatementEndpoint;
+    const query = /* sparql */ `
+    PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+    PREFIX gn: <http://data.lblod.info/vocabularies/gelinktnotuleren/>
+    PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+    PREFIX pav: <http://purl.org/pav/>
+    PREFIX schema: <http://schema.org/>
+
+    SELECT DISTINCT ?tag ?value WHERE {
+      ?tag a gn:Tag;
+        skos:prefLabel ?value.
+      ?templateInfo a <${RESOURCE_TYPES.TEMPLATE_INFO}> ;
+        ext:hasTag ?tag.
+      ?publishedTemplate a <${templateType}>;
+        pav:hasCurrentVersion ?templateVersion ;
+        ext:templateInfo ?templateInfo .
+      
+      OPTIONAL {
+        ?templateVersion schema:validThrough ?validThrough .
+      }
+
+      FILTER( ! BOUND(?validThrough) || ?validThrough > NOW())
+    }
+    ORDER BY ?value
+    `;
+
+    const results = await executeQuery<
+      BindingObject<{ tag: string; value: string }>
+    >({
+      endpoint: sparqlEndpoint,
+      query,
+    });
+
+    return results.results.bindings.map((binding) => ({
+      uri: binding.tag.value,
+      value: binding.value.value,
+    }));
+  });
+
   <template>
     <AuMainContainer class='snippet-modal--main-container' as |mc|>
       <mc.sidebar>
@@ -194,23 +267,34 @@ export default class TemplatePicker extends Component<Sig> {
             <AuHeading @level='3' @skin='4' class='au-u-padding-bottom-small'>
               {{t 'document-creator.selector.filters'}}
             </AuHeading>
-            <AuLabel
-              class='au-margin-bottom-small'
-              for='searchTerm'
-              @inline={{false}}
-              @required={{false}}
-              @error={{false}}
-              @warning={{false}}
-            >
-              {{t 'document-creator.selector.search-field'}}
-            </AuLabel>
-            <AuNativeInput
-              @type='text'
-              @width='block'
-              id='searchTerm'
-              value={{this.searchText}}
-              {{on 'input' this.setInputSearchText}}
-            />
+            <div class='au-c-form'>
+              <AuFormRow>
+                <AuLabel class='au-margin-bottom-small' for='searchTerm'>
+                  {{t 'document-creator.selector.search-field'}}
+                </AuLabel>
+                <AuNativeInput
+                  @type='text'
+                  @width='block'
+                  id='searchTerm'
+                  value={{this.searchText}}
+                  {{on 'input' this.setInputSearchText}}
+                />
+              </AuFormRow>
+              <AuFormRow>
+                <AuLabel class='au-margin-bottom-small' for='searchTerm'>
+                  {{t 'document-creator.selector.tags'}}
+                </AuLabel>
+                {{#unless this.tags.isLoading}}
+                  {{#if this.tags.value}}
+                    <TagSelector
+                      @onChange={{this.changeTagsFilter}}
+                      @tags={{this.tags.value}}
+                      @selectedTags={{this.selectedTags}}
+                    />
+                  {{/if}}
+                {{/unless}}
+              </AuFormRow>
+            </div>
           </div>
         </div>
       </mc.sidebar>
