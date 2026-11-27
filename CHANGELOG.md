@@ -1,5 +1,23 @@
 # frontend-gelinkt-notuleren
 
+## 5.86.0
+
+### Minor Changes
+
+- [#944](https://github.com/lblod/frontend-gelinkt-notuleren/pull/944) [`4f1b8c6`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/4f1b8c6ededaa8ef33ef8eaf6f00a13d092914a9) Thanks [@elpoelma](https://github.com/elpoelma)! - Add decision target-group form field to agendapoint creator modal
+
+- [#944](https://github.com/lblod/frontend-gelinkt-notuleren/pull/944) [`53593a9`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/53593a9c4ec987eb57a168f0329519689e4dfcaf) Thanks [@elpoelma](https://github.com/elpoelma)! - Add decision target group field to document information modal
+
+### Patch Changes
+
+- [#944](https://github.com/lblod/frontend-gelinkt-notuleren/pull/944) [`0b514c0`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/0b514c0aa0fde859a164f5f6c602e7a642bd6b59) Thanks [@elpoelma](https://github.com/elpoelma)! - bump to plugins [v39.3.0](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v39.3.0)
+
+## 5.85.1
+
+### Patch Changes
+
+- [#942](https://github.com/lblod/frontend-gelinkt-notuleren/pull/942) [`b50816e`](https://github.com/lblod/frontend-gelinkt-notuleren/commit/b50816eeeb13e14a2d3c107822e0db981b139ba2) Thanks [@abeforgit](https://github.com/abeforgit)! - bump plugins to [v39.1.2](https://github.com/lblod/ember-rdfa-editor-lblod-plugins/releases/tag/v39.1.2)
+
 ## 5.85.0
 
 ### Minor Changes

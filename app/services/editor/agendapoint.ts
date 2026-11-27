@@ -260,6 +260,9 @@ export default class AgendapointEditorService extends Service {
       besluitTopic: {
         endpoint: 'https://data.vlaanderen.be/sparql',
       },
+      besluitTargetGroup: {
+        endpoint: 'https://centrale-vindplaats.lblod.info/sparql',
+      },
       worship: {
         endpoint: 'https://data.lblod.info/sparql',
         defaultAdministrativeUnit: administrativeUnit

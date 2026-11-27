@@ -18,13 +18,15 @@ import ConceptModel from 'frontend-gelinkt-notuleren/models/concept';
 import EditorDocumentFolderModel from 'frontend-gelinkt-notuleren/models/editor-document-folder';
 import type AgendapointEditorService from 'frontend-gelinkt-notuleren/services/editor/agendapoint';
 import setLinkedDecision from 'frontend-gelinkt-notuleren/utils/setLinkedDecision';
-
+import type { BesluitTargetGroup } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-target-group-plugin/types';
+import { setBesluitTargetGroups } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-target-group-plugin/set-besluit-target-groups';
 interface PersistDocumentArgs {
   template: Template;
   title: string;
   folderId: string;
   group: BestuurseenheidModel;
   decisionType?: BesluitTypeInstance;
+  decisionTargetGroups?: BesluitTargetGroup[];
   linkedDecisionUri?: string;
   container?: DocumentContainerModel;
   status?: ConceptModel;
@@ -207,6 +209,7 @@ export default class DocumentService extends Service {
     folderId,
     group,
     decisionType,
+    decisionTargetGroups,
     linkedDecisionUri,
     status,
     container = this.store.createRecord<DocumentContainerModel>(
@@ -219,6 +222,12 @@ export default class DocumentService extends Service {
       generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
         generatedTemplate,
         (state) => setBesluitType(state, decisionType),
+      );
+    }
+    if (decisionTargetGroups) {
+      generatedTemplate = this.agendapointEditor.processDocumentHeadlessly(
+        generatedTemplate,
+        (state) => setBesluitTargetGroups(state, decisionTargetGroups),
       );
     }
     if (linkedDecisionUri) {

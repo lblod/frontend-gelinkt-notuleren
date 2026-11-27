@@ -8,7 +8,7 @@ import PowerSelect from 'ember-power-select/components/power-select';
 import { service } from '@ember/service';
 import type Store from 'frontend-gelinkt-notuleren/services/gn-store';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
-import type { updateLinkedDecisionArgs } from './document-creator/metadata-form';
+import type { LinkedDecisionOption } from './document-creator/metadata-form';
 import { unwrap } from '@lblod/ember-rdfa-editor-lblod-plugins/utils/option';
 import type BestuursorgaanModel from 'frontend-gelinkt-notuleren/models/bestuursorgaan';
 import type { LegacyResourceQuery } from '@ember-data/store/types';
@@ -26,10 +26,9 @@ import { cached } from '@glimmer/tracking';
 interface Sig {
   Args: {
     linkedDecisionUri?: string;
-    updateLinkedDecision: (
-      linkedDecisionOption: updateLinkedDecisionArgs,
-    ) => void;
+    updateLinkedDecision: (linkedDecisionOption: LinkedDecisionOption) => void;
   };
+  Element: HTMLDivElement;
 }
 
 export default class LinkedDecisionSelect extends Component<Sig> {
@@ -68,10 +67,11 @@ export default class LinkedDecisionSelect extends Component<Sig> {
       )}))`;
     }
     const query = `
-    PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
-    PREFIX eli: <http://data.europa.eu/eli/ontology#>
-    PREFIX prov: <http://www.w3.org/ns/prov#>
-    PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+      PREFIX eli: <http://data.europa.eu/eli/ontology#>
+      PREFIX prov: <http://www.w3.org/ns/prov#>
+      PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+
       SELECT DISTINCT ?uri ?title WHERE {
         ?uri a besluit:Besluit;
           a ?besluitType.
@@ -89,6 +89,7 @@ export default class LinkedDecisionSelect extends Component<Sig> {
         }
       } LIMIT 20
     `;
+    console.log('Query: ', query);
     const queryResult = await executeQuery({
       query,
       endpoint: ENV.publicatieEndpoint,
@@ -121,30 +122,32 @@ export default class LinkedDecisionSelect extends Component<Sig> {
   };
 
   <template>
-    <AuLabel for='linked-decision'>
-      {{t 'document-creator.linked-decision'}}
-      <AuPill @size='small' @skin='border'>{{t 'utils.optional'}}</AuPill>
-    </AuLabel>
-    {{#if this.firstPublishedBesluitValue.isRunning}}
-      <AuLoader @hideMessage={{true}}>{{t 'application.loading'}}</AuLoader>
-    {{else}}
-      <PowerSelect
-        id='linked-decision'
-        @searchEnabled={{true}}
-        @searchMessage={{t 'besluit-type-plugin.search-message'}}
-        @noMatchesMessage={{t 'besluit-type-plugin.no-matches-message'}}
-        @search={{this.searchLinkedDecision}}
-        @options={{this.publishedBesluits}}
-        @selected={{this.selectedPublishedBesluit}}
-        @onChange={{@updateLinkedDecision}}
-        @allowClear={{true}}
-        as |publishedBesluit|
-      >
-        {{this.reglementTitle publishedBesluit.title}}
-      </PowerSelect>
-    {{/if}}
-    <p class='au-u-muted au-u-margin-tiny au-u-margin-bottom-small'>
-      {{t 'document-creator.linked-decision-helptext'}}
-    </p>
+    <div ...attributes>
+      <AuLabel for='linked-decision'>
+        {{t 'document-creator.linked-decision'}}
+        <AuPill @size='small' @skin='border'>{{t 'utils.optional'}}</AuPill>
+      </AuLabel>
+      {{#if this.firstPublishedBesluitValue.isRunning}}
+        <AuLoader @hideMessage={{true}}>{{t 'application.loading'}}</AuLoader>
+      {{else}}
+        <PowerSelect
+          id='linked-decision'
+          @searchEnabled={{true}}
+          @searchMessage={{t 'besluit-type-plugin.search-message'}}
+          @noMatchesMessage={{t 'besluit-type-plugin.no-matches-message'}}
+          @search={{this.searchLinkedDecision}}
+          @options={{this.publishedBesluits}}
+          @selected={{this.selectedPublishedBesluit}}
+          @onChange={{@updateLinkedDecision}}
+          @allowClear={{true}}
+          as |publishedBesluit|
+        >
+          {{this.reglementTitle publishedBesluit.title}}
+        </PowerSelect>
+      {{/if}}
+      <p class='au-u-muted au-u-margin-tiny au-u-margin-bottom-small'>
+        {{t 'document-creator.linked-decision-helptext'}}
+      </p>
+    </div>
   </template>
 }

@@ -1,48 +1,48 @@
 steps:
   install:
-    image: node:22-slim
+    image: node:24-slim
     commands:
       - corepack enable
       - pnpm i --frozen-lockfile
   check-dev-packages:
-    image: node:22-slim
+    image: node:24-slim
     commands:
       - corepack enable
       - apt-get update
       - apt-get install -y --no-install-recommends jq
       - "pnpm list --json | jq -e '[ .. | .version? ] | map(select(. != null)) | map(test(\"dev\")) | any | not'"
   lint-types:
-    image: node:22-slim
+    image: node:24-slim
     group: lint
     commands:
       - corepack enable
       - pnpm lint:types
   lint-js:
-    image: node:22-slim
+    image: node:24-slim
     group: lint
     commands:
       - corepack enable
       - pnpm lint:js
   lint-hbs:
-    image: node:22-slim
+    image: node:24-slim
     group: lint
     commands:
       - corepack enable
       - pnpm lint:hbs
   lint-prettier:
-    image: node:22-slim
+    image: node:24-slim
     group: lint
     commands:
       - corepack enable
       - pnpm lint:prettier
   dependency-lint:
-    image: node:22-slim
+    image: node:24-slim
     group: lint
     commands:
       - corepack enable
       - pnpm lint:deps
   test:
-    image: danlynn/ember-cli:6.7.2-node_22.19
+    image: danlynn/ember-cli:7.1.0-node_24.18
     commands:
       - corepack enable
       - pnpm test:ember

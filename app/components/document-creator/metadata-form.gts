@@ -14,7 +14,10 @@ import { tracked } from '@glimmer/tracking';
 import { DECISION_TYPES_TO_LINK } from 'frontend-gelinkt-notuleren/utils/besluit-types';
 import type CurrentSessionService from 'frontend-gelinkt-notuleren/services/current-session';
 import LinkedDecisionSelect from '../linked-decision-select';
-export type updateLinkedDecisionArgs = {
+
+import BesluitTargetGroupField from '@lblod/ember-rdfa-editor-lblod-plugins/components/besluit-target-group-plugin/besluit-target-group-field';
+import type { BesluitTargetGroup } from '@lblod/ember-rdfa-editor-lblod-plugins/plugins/besluit-target-group-plugin/types';
+export type LinkedDecisionOption = {
   uri: string;
   title: string;
 };
@@ -27,10 +30,11 @@ interface Sig {
     selectedType?: BesluitTypeInstance;
     decisionTypes?: BesluitType[];
     setDecisionType?: (selected: BesluitTypeInstance) => void;
+    selectedDecisionTargetGroups?: BesluitTargetGroup[];
+    decisionTargetGroups?: BesluitTargetGroup[];
+    setDecisionTargetGroups?: (selected: BesluitTargetGroup[]) => void;
     linkedDecisionUri?: string;
-    updateLinkedDecision: (
-      linkedDecisionOption: updateLinkedDecisionArgs,
-    ) => void;
+    updateLinkedDecision: (linkedDecisionOption: LinkedDecisionOption) => void;
   };
 }
 
@@ -55,21 +59,23 @@ export default class MetadataForm extends Component<Sig> {
 
   <template>
     <form class='au-o-flow au-u-padding'>
-      {{#let (uuidv4) as |id|}}
-        <AuLabel @error={{@invalidTitle}} for={{id}}>
-          {{t 'document-creator.title-field'}}
-          <RequiredField />
-        </AuLabel>
-        <AuTextarea
-          @error={{@invalidTitle}}
-          @width='block'
-          {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
-          type='text'
-          value={{@title}}
-          id={{id}}
-          {{on 'input' this.updateTitle}}
-        />
-      {{/let}}
+      <div>
+        {{#let (uuidv4) as |id|}}
+          <AuLabel @error={{@invalidTitle}} for={{id}}>
+            {{t 'document-creator.title-field'}}
+            <RequiredField />
+          </AuLabel>
+          <AuTextarea
+            @error={{@invalidTitle}}
+            @width='block'
+            {{!@glint-expect-error glint doesn't know about rdfa (yet)}}
+            type='text'
+            value={{@title}}
+            id={{id}}
+            {{on 'input' this.updateTitle}}
+          />
+        {{/let}}
+      </div>
       {{! The types for ember-truth-helpers 'and' don't seem to work with the types here }}
       {{#if @decisionTypes}}
         {{#if @setDecisionType}}
@@ -77,6 +83,16 @@ export default class MetadataForm extends Component<Sig> {
             @types={{@decisionTypes}}
             @selectedType={{@selectedType}}
             @setType={{@setDecisionType}}
+            @renderInPlace={{false}}
+          />
+        {{/if}}
+      {{/if}}
+      {{#if @decisionTargetGroups}}
+        {{#if @setDecisionTargetGroups}}
+          <BesluitTargetGroupField
+            @targetGroups={{@decisionTargetGroups}}
+            @selected={{@selectedDecisionTargetGroups}}
+            @onChange={{@setDecisionTargetGroups}}
             @renderInPlace={{false}}
           />
         {{/if}}
